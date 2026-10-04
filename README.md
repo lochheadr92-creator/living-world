@@ -205,7 +205,8 @@ the same thing in the same tick the winner is the same every run.
 ## Verification
 
 `npm test` covers: determinism (same seed ⇒ same state; inspecting never perturbs it; saved and reloaded worlds carry on
-identically, including a cart on the road), resource conservation (gathering, transfers, eating, renewal, crop growth,
+identically, including a cart on the road, and a world saved half way and carried on is the same world, byte for byte, as one
+that was never saved), resource conservation (gathering, transfers, eating, renewal, crop growth,
 construction, batches, waste, spoilage, carts, meal tables, long natural runs), contested last items and exclusive claims,
 reservation release on interruption/death/long runs, locality of knowledge (including a whole-run audit that every
 targeted place was known, and that news keeps its source and age), social requests causing real transfers, refusals,
@@ -221,6 +222,9 @@ Headless tools: `npm run census -- <seed> <days> [harsh] [-v]` prints a periodic
 chains develop; `vite-node scripts/invariants.ts <seed> <days> [harsh]` audits a long run (books, tool records, claims,
 promises, carts, meal tables); `vite-node scripts/audit_far.ts` checks that nobody works at a distance;
 `vite-node scripts/find_moments.ts <seed> <days>` lists the first examples of each kind of event in a run;
+`vite-node scripts/sweep.ts [seed,seed,…] [days] [harsh]` runs sixteen ordinary seeds (or the ones named) for 30 days and lists
+every death with its cause and day, and anyone sealed in (twice a day, six or fewer tiles they could walk to within 8);
+`vite-node scripts/compare_baseline.ts [label label [keys]]` prints two recorded baselines side by side;
 `npm run playback -- <url> [result.json]` (after `npm run build && npm run preview`) drives a headless Chrome over the DevTools
 protocol and measures, with a real animation loop, the speed achieved at each setting, what a stalled page costs and how the
 speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`); and
