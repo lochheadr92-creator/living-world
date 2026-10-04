@@ -1,0 +1,26 @@
+{
+  "name": "living-world",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A deterministic, browser-based living-world simulation: a small civilisation in an isometric diorama.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "census": "vite-node scripts/census.ts",
+    "docs": "vite-node scripts/docs.ts",
+    "baseline": "vite-node scripts/baseline.ts",
+    "chains": "vite-node scripts/chains.ts",
+    "playback": "node scripts/browser/playback.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "~5.9.3",
+    "vite": "^8.3.2",
+    "vite-node": "^5.0.3",
+    "vitest": "^5.0.3"
+  }
+}

@@ -1,0 +1,13 @@
+import { defaultSettings, createWorld } from '../src/sim/factory';
+import { stepWorld } from '../src/sim/world';
+import type { SceneId } from '../src/sim/types';
+const scene = (process.argv[2] ?? 'help') as SceneId;
+const name = process.argv[3] ?? 'Ana';
+const tick = Number(process.argv[4] ?? 1);
+const w = createWorld({ ...defaultSettings('scene-' + scene), scene });
+for (let i = 0; i < tick; i++) stepWorld(w);
+const p = w.persons.find((q) => q.name === name)!;
+const d = p.lastDecision!;
+console.log(`${p.name} t${w.tick} hunger ${p.needs.hunger.toFixed(0)} seen ${p.seen.map((s) => s.id).join(',')} chosen: ${d.chosen?.label} (${d.chosen?.utility}) because ${d.because}`);
+for (const a of d.alternatives) console.log('   alt:', a.label, a.utility, JSON.stringify(a.parts));
+for (const b of d.blocked) console.log('   blocked:', b.label, '-', b.blocked);
