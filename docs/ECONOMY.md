@@ -76,7 +76,9 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
 ## Workplaces
 
 * **Location.** Workplaces are laid out on free dry land the planner's person has seen, not against water, near the camp
-  (kiln and smithy a little further out). A **quarry** is always laid out beside a known stone outcrop; its batches cut
+  (kiln and smithy a little further out). No building of any kind is laid out where, once its footprint is filled in, its
+  doorway could not be walked to from the camp (or the household's home) and from where the planner stands: such a spot is
+  passed over for the next best. A **quarry** is always laid out beside a known stone outcrop; its batches cut
   stone out of that outcrop and nowhere else. A **house** is not a new building: it is the owner's hut rebuilt *in place*
   (the same building object, the same footprint and household, still lived in while the work goes on, store and contents
   intact).
@@ -319,6 +321,12 @@ depends only on the tick and the population, so a run is reproducible.
 * **A promised pickup makes room first**, and a promise that cannot be kept for want of room ends *failed*, not *broken*. Both
   promises broken in 30 days of `birch` were promises to bring water made by people with full packs (an adult carrying five
   stones, a child carrying two pieces of wood), each of whom walked to the water and back about ten times with nothing to show.
+* **A new building never shuts its doorway in.** In `cedar` (default settings) Una marked out a quarry at t29,197 standing on
+  its doorway, in a gap between trees near the outcrop. Once the footprint was laid, the doorway and the tile beside it were
+  closed in by trees on every other side (two tiles, where a moment before some five thousand could be walked to), and she
+  died of thirst there on day 14. The spot is now checked before it is chosen: from a save made just before, under the new
+  rule she lays the quarry out at (25,44), about seven tiles away, always has at least 185 tiles she could walk to within 8
+  of where she stands (as `scripts/sweep.ts` counts), and lives.
 * Failure texts say what stopped the attempt (see "Eating and carrying"). Changing the words changed nothing else: at twelve
   checkpoints across seven runs `hashWorld` was identical, and the saved world differed only in those texts.
 

@@ -39,9 +39,12 @@ npx vite-node scripts/compare_baseline.ts after fixes meadow,river,fern,harsh-me
 npx vite-node scripts/sweep.ts                                                                    # sixteen seeds
 ```
 
-What changed in the simulation (the rules are in [`ECONOMY.md`](ECONOMY.md), "Eating and carrying"):
+What changed in the simulation (the rules are in [`ECONOMY.md`](ECONOMY.md): "Eating and carrying", and "Location" under
+"Workplaces"):
 
 1. Eating at a store needs no room in the pack; a promised pickup makes room first; failure texts say what stopped someone.
+2. A new building is never laid out where it would shut its doorway in. This changed nothing in the five runs in the table:
+   with it, all five end on the same hash as without it, because no spot chosen in them would have closed a doorway off.
 
 | 30 days | meadow | river | fern | harsh meadow | harsh river |
 |---|---|---|---|---|---|
@@ -84,10 +87,17 @@ days before each death under the old code (2.2 days before Viktor's; 4.8 and 3.2
 the new: both were alive past the tick they had died at (Viktor ate 24 times straight from a store; Quinn 4 and 7 times from
 the two saves), and the ledger balanced. The old code, carried on from the same save, reproduces Viktor's death to the tick.
 
-**Sixteen seeds** (`scripts/sweep.ts`, 30 days each): before, two deaths: in `cedar` Una died of thirst on day 14.1, sealed in by
-the quarry she had just marked out (a later change in this round is about that), and in `linden` one person died of old age. After, none,
-and nobody sealed in; the population on day 30 averaged 49.1 before and 49.3 after. That `cedar` no longer loses Una is
-chance: the world goes differently from the first days, and she never marks out that quarry.
+**Sixteen seeds** (`scripts/sweep.ts`, 30 days each): before, two deaths: in `cedar` Una died of thirst on day 14.1, sealed in
+by the quarry she had just marked out, and in `linden` one person died of old age. After the first change, none, and nobody
+sealed in; after the second, the same: no deaths and nobody sealed in (here too the door rule changed nothing). The day-30
+population averaged 49.1 before and 49.3 after the first change. That `cedar` no longer loses Una by chance — the world goes
+differently from the first days and she never marks out that quarry — is why the door rule was also tried on the old world
+itself:
+
+**Una, replayed.** A save of `cedar` made under the old code at t29,000, just before Una marked out the quarry, carried on
+under the old rules reproduces her death (t33,805, sealed in: 2 tiles). Carried on with only the door rule added, she lays the
+quarry out at (25,44) instead of (21,50), always has at least 185 tiles she could walk to within 8 of where she stands, and is
+alive at t36,000; with all the changes, at least 231, and alive. A staged pocket in `tests/siting.test.ts` keeps the rule.
 
 ### Reading the numbers
 

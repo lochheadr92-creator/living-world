@@ -249,8 +249,41 @@ function footprintFree(world: World, x: number, y: number, w: number, h: number)
 }
 
 /**
+ * Would the doorway of a building laid out at (x, y) still be reachable on foot once its footprint is filled in: from the
+ * settlement (the camp, or the household's home) and from where the planner stands? A new building must never shut anyone
+ * in. Breadth-first over walkable tiles; four neighbours are enough, since the pathfinder never cuts a corner.
+ */
+export function doorStaysConnected(world: World, p: Person, type: BuildingType, x: number, y: number): boolean {
+  const d = BUILD_DEF[type];
+  const W = world.W;
+  const open = (tx: number, ty: number) => isWalkable(world, tx, ty) && !(tx >= x && tx < x + d.w && ty >= y && ty < y + d.h);
+  const door = doorFor(type, x, y);
+  if (!open(door.x, door.y)) return false;
+  const home = homeOf(world, householdOf(world, p));
+  const px = Math.floor(p.x);
+  const py = Math.floor(p.y);
+  let settled = false;
+  let planner = false;
+  const seen = new Uint8Array(W * world.H);
+  const queue = [door.y * W + door.x];
+  seen[queue[0]] = 1;
+  for (let q = 0; q < queue.length && !(settled && planner); q++) {
+    const tx = queue[q] % W;
+    const ty = (queue[q] / W) | 0;
+    if (Math.hypot(tx + 0.5 - world.camp.x, ty + 0.5 - world.camp.y) <= 3 || (home && Math.abs(tx - home.doorX) <= 1 && Math.abs(ty - home.doorY) <= 1)) settled = true;
+    if (Math.abs(tx - px) <= 1 && Math.abs(ty - py) <= 1) planner = true;
+    for (const [nx, ny] of [[tx + 1, ty], [tx - 1, ty], [tx, ty + 1], [tx, ty - 1]]) {
+      if (!open(nx, ny) || seen[ny * W + nx]) continue;
+      seen[ny * W + nx] = 1;
+      queue.push(ny * W + nx);
+    }
+  }
+  return settled && planner;
+}
+
+/**
  * Find a spot the person could plausibly lay out a building: land they have seen, free of objects,
- * not hard against water, with a clear doorway tile.
+ * not hard against water, with a clear doorway tile that stays connected to the settlement.
  */
 export function findBuildSpot(
   world: World,
@@ -263,8 +296,7 @@ export function findBuildSpot(
   prefer: number,
 ): { x: number; y: number } | null {
   const d = BUILD_DEF[type];
-  let best: { x: number; y: number } | null = null;
-  let bestScore = -1e9;
+  const cands: { x: number; y: number; score: number }[] = [];
   const x0 = Math.max(2, Math.floor(ax - rMax));
   const x1 = Math.min(world.W - 4, Math.ceil(ax + rMax));
   const y0 = Math.max(2, Math.floor(ay - rMax));
@@ -310,11 +342,11 @@ export function findBuildSpot(
       if (t0 === T.FOREST) score -= 1.5;
       if (t0 === T.STONY) score -= 2.5;
       if (wd <= 6) score += 0.8;
-      if (score > bestScore) {
-        bestScore = score;
-        best = { x, y };
-      }
+      cands.push({ x, y, score });
     }
   }
-  return best;
+  // the best-scoring spot whose doorway would not be shut in (equal scores keep the order they were found in)
+  cands.sort((a, b) => b.score - a.score);
+  for (const c of cands.slice(0, 24)) if (doorStaysConnected(world, p, type, c.x, c.y)) return { x: c.x, y: c.y };
+  return null;
 }
