@@ -130,7 +130,10 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
 The inspector answers the five questions for any person: *what are they doing, why did they choose it, what are they
 trying to achieve, what is stopping them, and what happened after their last attempt* — and lists nearby opportunities
 with the reason each was not taken: **unaware** (never seen or heard of), **blocked** (missing a prerequisite),
-**passed over** (preferred something else, with the scores), **failed before**, or simply **not needed**.
+**passed over** (preferred something else, with the scores), **failed before**, or simply **not needed**. When a choice rests
+on someone else's word, the reason says whose, and how old the sighting was ("on Ana's word, seen 1.2 min ago"); and when a
+place someone was heading for comes into view with nothing there, they remember it ("The berry bush Ana had described (about
+6, 1.2 min old) was bare when I got close.").
 
 A person's card also shows the tools they carry and how worn they are, their promises and how the earlier ones ended, the
 conversation they are in and — kept apart — the last one, a shared meal they are hosting or have said yes to and the last

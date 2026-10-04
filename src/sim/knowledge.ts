@@ -1,6 +1,8 @@
 import { SOURCE_REGROW } from './constants';
 import { cloneItems } from './economy';
+import { addLog } from './events';
 import { facilitySnapshot } from './facilities';
+import { BELIEF_NOUN } from './labels';
 import { toolsHeldBy } from './toolreg';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
 
@@ -138,7 +140,44 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if (!b) return false;
   b.origin = p.id;
   b.hops = 0;
+  noteLetDown(world, p, b);
   return learn(p, b);
+}
+
+/** A person's name, alive or not (for memories of who said what). */
+export function personName(world: World, id: number): string {
+  const e = world.byId.get(id);
+  return e && e.ent === 'person' ? e.name : (world.deceased.find((d) => d.id === id)?.name ?? 'someone');
+}
+
+/** How long ago a tick was, counted as the inspector counts it (at 1×, 10 ticks a second and 600 a minute; then days). */
+export function ageText(world: World, tick: number): string {
+  const d = Math.max(0, world.tick - tick);
+  if (d < 600) return `${Math.round(d / 10)}s`;
+  if (d < 36000) return `${(Math.round(d / 60) / 10).toFixed(1)} min`;
+  return `${Math.round(d / 2400)} days`;
+}
+
+/**
+ * Expectation against outcome: the place a person is on the way to comes into view with nothing there, where what they had
+ * seen or been told led them to expect some. Kept in their own memory only; it changes nothing they decide (failures are
+ * left alone). Arrival is not a sighting: whoever first sees it on arriving is told so by the work itself.
+ */
+function noteLetDown(world: World, p: Person, now: Belief): void {
+  const old = p.beliefs[now.id];
+  const a = p.activity;
+  // (sources only: a bush, a tree, a fishing spot… — the kinds of belief whose amount is a count of what can be taken)
+  if (!old || !a || a.targetId !== now.id || a.phase !== 'travel' || !(now.kind in SOURCE_REGROW) || now.amount >= 1) return;
+  const expected = estimatedAmount(world, old);
+  if (expected < 1) return;
+  // a place in view is looked at every few ticks, so one that empties then was seen going, not remembered wrongly ("just now",
+  // under 4 s, as the inspector puts it)
+  const told = old.src === 'told';
+  const fresh = world.tick - old.seen < 40;
+  const who = told ? `${personName(world, old.from)} had described` : fresh ? 'I had just seen' : 'I remembered';
+  const age = !told && fresh ? '' : `, ${ageText(world, old.seen)} old`;
+  const bare = now.kind === 'berry_bush' || now.kind === 'fruit_tree' || now.kind === 'wild_grain' ? 'was bare' : 'had nothing left to take';
+  addLog(world, p, 'work', `The ${BELIEF_NOUN[now.kind]} ${who} (about ${Math.round(expected)}${age}) ${bare} when I got close.`);
 }
 
 /** People understand roughly how fast things regrow, so a stale "empty" memory slowly turns hopeful. */

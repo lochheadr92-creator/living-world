@@ -46,6 +46,12 @@ What changed in the simulation (the rules are in [`ECONOMY.md`](ECONOMY.md): "Ea
 2. A new building is never laid out where it would shut its doorway in. This changed nothing in the five runs in the table:
    with it, all five end on the same hash as without it, because no spot chosen in them would have closed a doorway off.
 
+The rest of the round changes what is shown, not what happens: every logged effect is drawn and the person card keeps up at
+speed; stalled sites and idle workplaces carry the observer's note; and reasons and memories say when someone went on
+another's word or found a place empty. With all of it in, the five runs end on the same hashes as in the table.
+`scripts/invariants.ts` (books, tool records, claims, promises, carts and meal tables, every 300 ticks) found nothing in any
+of the five after either change to the simulation.
+
 | 30 days | meadow | river | fern | harsh meadow | harsh river |
 |---|---|---|---|---|---|
 | population, day 30 | 48 → 54 | 49 → 53 | 50 → 49 | 48 → 50 | 51 → 40 |
@@ -79,6 +85,12 @@ had been made by people whose packs were full (an adult carrying five stones, a 
 to the water and back about ten times each and were then judged to have done nothing. Afterwards the one that failed was kept
 as far as it could be: the promiser put two pieces of wood down at home, fetched the water, and could not hand it over because
 the asker's own pack was full, which is what the record says.
+
+**Hearsay and let-downs** (texts only). Over the same 30 days, choices made on someone else's word: 30 of 58,651 in `meadow`,
+13 of 64,478 in `river`, 23 of 48,147 in `fern`, 44 of 45,664 in harsh `meadow` and 60 of 43,827 in harsh `river`. Notes that
+a source was found empty on the way: 20, 27 and 52 in the ordinary worlds, two thirds of them (64 of 99) a source emptied by
+someone else while the walker could see it ("I had just seen"); 263 and 277 in the harsh ones, where most (323 of 540) are
+memories proved wrong ("I remembered") and 11 were on someone's word.
 
 **Replays.** In harsh `ash` a child, Viktor, died of hunger on day 29.7 carrying a brick and a piece of wood (5 of 5), after 64
 attempts to eat at stores that ended "there is no food there"; the nearest held 9 food, 2.1 tiles away. An elder, Quinn, died
@@ -304,7 +316,8 @@ think harsh mode should stay harsh.
 
 ## Longer runs (not part of the baseline)
 
-These were run on the final code to see whether anything changes beyond the first month. They are single runs.
+These were run at the end of the first round (the `after` code) to see whether anything changes beyond the first month, and
+have not been repeated since the survival and legibility fixes. They are single runs.
 
 | seed | length | deaths | population at the end | notes |
 |---|---|---|---|---|

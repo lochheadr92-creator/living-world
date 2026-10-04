@@ -198,7 +198,11 @@ may be full); work and deliveries toward the site, including the sawing of the p
 with it.
 
 News is carried in conversation and keeps its **provenance**: the person who first saw it, how many mouths it has passed
-through, and the time of the original sighting (a told belief is never made fresher by being told).
+through, and the time of the original sighting (a told belief is never made fresher by being told). Someone who sets out on
+hearsay gives it as part of their reason. Anyone heading for a natural source (a bush, a tree, a fishing spot, a clay pit…)
+where what they saw or were told led them to expect something, who sees it empty as they come near, puts the disappointment
+into their own memory (their log) — not into the record of failed attempts the planners consult, which only an attempt of
+their own writes.
 
 ## Shared meals
 
