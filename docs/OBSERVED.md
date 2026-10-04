@@ -9,7 +9,13 @@ before each one and played in real time at 4×, held (paused) at the instants li
 
 The page and a headless run agree exactly on the world at a given tick (`stateHash` at ticks 3000 and 16000, and at the end of
 two soak runs of 120 s and 100 s of random clicking, following, overlay toggling, pausing, stepping and speed changes), so the tick
-numbers below are valid for this version of the code. **Any change to the simulation moves them.**
+numbers below are valid for the code they were watched on. **Any change to the simulation moves them.**
+
+**They no longer match the current code.** They were watched on the code before the survival and legibility fixes (commit
+`7a7e0e4`). Those fixes change what people do (eating at a store with a full pack, making room for a promised pickup, and
+others listed in [`ECONOMY.md`](ECONOMY.md)), so the same seed now plays out differently from the first days on and these
+ticks do not reproduce;
+`git checkout 7a7e0e4` gives the version they describe. The chains themselves have not been re-watched on the new code.
 
 To watch one yourself, open the page, open the browser console, and for example:
 

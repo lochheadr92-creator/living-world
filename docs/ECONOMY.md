@@ -184,7 +184,7 @@ Time asleep or spent seeing to survival does not count against the deadline. A p
 | **expired** | time ran out with some of it done | +2.5·fraction − 0.5 warmth, +4·fraction − 1 trust | none |
 | **moot** | the building was finished or given up, the roof was mended by someone else, the other person is gone | none | none |
 | **interrupted** | put aside for their own survival until it was too late | −1 trust, −0.4 warmth | none |
-| **failed** | proved impossible (no stock, nothing known, the site was waiting on something they could not supply) | −2 trust, −0.6 warmth | none |
+| **failed** | proved impossible (no stock, nothing known, the site was waiting on something they could not supply, a full pack with nowhere to put things down) | −2 trust, −0.6 warmth | none |
 | **broken** | the maker was free and capable and did nothing | −12 trust, −5 warmth | opens "broken promise" |
 
 A **refusal** is not a broken promise: it costs a little warmth in proportion to how much was at stake (−1.5…−6 warmth, up
@@ -237,6 +237,21 @@ leave them too far from water for too long…"). With wolves about, a long trip 
 A drink or a meal already under way is finished while it is still doing good unless danger or a deadlier need says otherwise;
 danger and critical needs interrupt anything at once, and a promise put aside for survival is marked as such rather than as
 neglect.
+
+## Eating and carrying
+
+* **Eating at a store needs no room in the pack.** Someone eating from their home store, the storehouse or a heap takes what
+  fits into their pack and eats it; if nothing fits, they eat it where it is kept, a portion at a time, each portion booked
+  as eaten exactly as from a pack. A store is said to have no food, and passed over for a while, only when it has none.
+* **A promised pickup makes room first** (the rule Hearthvale calls R9). Someone who has promised to bring something they do
+  not yet hold, and whose pack cannot take it, first puts the heaviest load they carry that is not food, water, a tool or owed
+  to someone else down at their home or the storehouse, wherever they believe there is space, and then goes to fetch it. With
+  nowhere they know of to put it, no trip is made that could only end empty-handed, and the promise ends as one that could
+  not be kept because the pack was full (*failed*), not as one ignored (*broken*).
+* **A failure says what stopped it**: "my pack is full" (fetching water, harvesting, taking from storage), "what is there is
+  not ours to take" (a granary share or a workshop's stock that belongs to others), "there was nothing left to harvest", "they
+  had no room to carry it" or "I no longer had it to give" (handing something over). Before, a full pack was reported as an
+  empty store, an empty field, or nothing to take.
 
 ## The contested-claim rule
 
@@ -294,6 +309,18 @@ depends only on the tick and the population, so a run is reproducible.
   world with a cart on the road used to lose the cart on loading and now resumes exactly.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
+
+### Survival and legibility fixes (the latest changes)
+
+* **Eating at a store needs no room in the pack.** Before, someone whose pack had no room for food (a child with a brick and some
+  wood is full) was told the stocked store had "no food there" and passed it over for 400 ticks. In 30 ordinary days that was
+  how 54–68% of all attempts to eat from a store ended (meadow, river, fern and birch, at a median hunger of 46–50); in harsh
+  `ash` a child and an elder starved within a few tiles of stocked stores. Now none end that way.
+* **A promised pickup makes room first**, and a promise that cannot be kept for want of room ends *failed*, not *broken*. Both
+  promises broken in 30 days of `birch` were promises to bring water made by people with full packs (an adult carrying five
+  stones, a child carrying two pieces of wood), each of whom walked to the water and back about ten times with nothing to show.
+* Failure texts say what stopped the attempt (see "Eating and carrying"). Changing the words changed nothing else: at twelve
+  checkpoints across seven runs `hashWorld` was identical, and the saved world differed only in those texts.
 
 ## Staged scenes
 

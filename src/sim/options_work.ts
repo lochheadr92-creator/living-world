@@ -1,17 +1,17 @@
 import { newActivity } from './activities';
-import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
+import { BUILD_DEF, DAY, FIRE_MAX_FUEL, NUTRITION, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { repairMaterial } from './act_build';
 import { depositLead } from './production';
 import { isFacilityType } from './recipes';
-import { toolsHeldBy } from './toolreg';
+import { isToolItem, toolsHeldBy } from './toolreg';
 import { findBuildSpot } from './buildings';
-import { invRoom, roomFor } from './economy';
+import { invRoom, roomFor, weightOf } from './economy';
 import { dayFraction } from './environment';
 import { findPlotSpot } from './farming';
 import { delBelief, estimatedAmount, noteFailure, recentFailure } from './knowledge';
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { drive } from './needs';
-import { stageOf } from './people';
+import { carryCap, stageOf } from './people';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, rankWaterSpots, sourceUsable, spotNear, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
 import { foragePlans } from './options_survival';
@@ -1282,7 +1282,15 @@ function optCommitments(ctx: Ctx): void {
             }),
         });
       } else {
-        // need to get it first
+        // need to get it first, and to have room to carry it
+        if (invRoom(world, p, c.item) < remaining - have) {
+          if (optMakeRoom(ctx, c.item, remaining - have, 52, `to make room for what I promised ${to.name}`)) continue;
+          if (invRoom(world, p, c.item) < 1) {
+            // a trip to fetch it could only end at the source with nothing carried away
+            markBlocked(world, c, 'their pack was full and they knew of nowhere to put things down');
+            continue;
+          }
+        }
         const before = ctx.options.length;
         if (c.item === 'wood' || c.item === 'stone' || c.item === 'clay' || c.item === 'ore') {
           gatherMaterial(ctx, c.item, remaining - have, 52, `to keep my promise to ${to.name}`, 'promise');
@@ -1359,6 +1367,54 @@ function optCommitments(ctx: Ctx): void {
       });
     }
   }
+}
+
+/**
+ * A promised pickup needs room in the pack. Whoever has none puts the heaviest load that is not food, water, a tool or owed
+ * to someone down at their home or the storehouse first, where they believe there is space (Hearthvale rule R9).
+ * Returns false when there is nothing to put down or nowhere they know of to put it.
+ */
+function optMakeRoom(ctx: Ctx, item: ItemKind, n: number, util0: number, why: string): boolean {
+  const { world, p } = ctx;
+  const short = n * WEIGHT[item] - (carryCap(world, p) - weightOf(p.inv));
+  let drop: ItemKind | null = null;
+  for (const k of Object.keys(p.inv) as ItemKind[]) {
+    if (unitsOf(p.inv[k]) <= 0 || k === item || k === 'water' || k in NUTRITION || isToolItem(k) || p.commitments.some((c) => c.status === 'active' && c.item === k)) continue;
+    if (!drop || unitsOf(p.inv[k]) * WEIGHT[k] > unitsOf(p.inv[drop]) * WEIGHT[drop]) drop = k;
+  }
+  if (short <= 0 || !drop) return false;
+  const k = drop;
+  const units = Math.min(unitsOf(p.inv[k]), Math.ceil(short / WEIGHT[k] - 1e-9));
+  let best: Belief | null = null;
+  let bestE = Infinity;
+  for (const b of beliefsByKind(p, ['building'])) {
+    if (!(b.hh === p.hhId && isHomeType(b.btype)) && b.btype !== 'storehouse') continue;
+    const used = Object.entries(b.items ?? {}).reduce((sum, [kk, m]) => sum + (m ?? 0) * WEIGHT[kk as ItemKind], 0);
+    const e = eta(ctx, b.x, b.y);
+    if (BUILD_DEF[b.btype as BuildingType].cap - used >= units * WEIGHT[k] && e < bestE) [best, bestE] = [b, e];
+  }
+  if (!best) return false;
+  const b = best;
+  const place = b.btype === 'storehouse' ? 'the storehouse' : 'home';
+  const sc = new Scorer().add(why, util0).add('walking', -pen(bestE));
+  addOption(ctx, {
+    kind: 'deposit',
+    label: `Put ${units} ${k} down at ${place} to make room`,
+    goal: why,
+    need: null,
+    util: sc.total,
+    parts: sc.parts,
+    eta: bestE + 20,
+    key: `deposit:${b.id}:room`,
+    targetId: b.id,
+    tag: 'promise',
+    make: () => {
+      const spot = spotNear(world, p, b);
+      if (!spot) return null;
+      return newActivity(world, p, { kind: 'deposit', label: `Putting ${units} ${k} down at ${place} to make room`, goal: why, targetId: b.id, targetType: 'building', tx: b.x, ty: b.y, spotX: spot.x, spotY: spot.y, utility: sc.total, minCommit: 30, maxTicks: 600, data: { items: { [k]: units } } });
+    },
+  });
+  return true;
 }
 
 function optPromisedWater(ctx: Ctx, n: number, who: string): void {
