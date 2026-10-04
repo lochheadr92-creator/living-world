@@ -42,22 +42,26 @@ export class Effects {
     this.nextSmoke.clear();
   }
 
-  /** Pull in cosmetic events the simulation has logged since last frame. */
+  /**
+   * Pull in the cosmetic events the simulation has logged since the last frame. An event is stamped with the tick being
+   * stepped when it happened, and that tick is over once world.tick has moved past it; so a frame takes exactly the events
+   * stamped from the world tick of the previous frame up to (not including) the current one. Each event is spawned once,
+   * whether one tick, several or none (paused) ran in between.
+   */
   consume(world: World): void {
     if (this.world !== world) {
       this.world = world;
-      this.lastTick = world.tick - 1;
+      this.lastTick = world.tick;
       this.parts.length = 0;
     }
     const fx = world.fx;
-    for (let i = fx.length - 1; i >= 0; i--) {
-      if (fx[i].tick <= this.lastTick) break;
-    }
-    let start = fx.length;
-    while (start > 0 && fx[start - 1].tick > this.lastTick) start--;
-    // when paused at high speed we may have skipped many events: spawn only the most recent ones
-    const from = Math.max(start, fx.length - 40);
-    for (let i = from; i < fx.length; i++) this.spawn(fx[i]);
+    let end = fx.length;
+    while (end > 0 && fx[end - 1].tick >= world.tick) end--; // a tick still to be stepped: its events come next frame
+    let start = end;
+    while (start > 0 && fx[start - 1].tick >= this.lastTick) start--;
+    // after a long jump (a stall, fast play) there can be hundreds: spawn only the most recent ones
+    const from = Math.max(start, end - 40);
+    for (let i = from; i < end; i++) this.spawn(fx[i]);
     this.lastTick = world.tick;
   }
 

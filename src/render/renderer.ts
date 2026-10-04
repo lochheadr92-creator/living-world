@@ -1,6 +1,6 @@
 import type { Game } from '../app/game';
 import { senseRadius } from '../sim/perception';
-import type { Animal, Building, Cart, Entity, Grave, Person, Pile, Plot, Site, Source, World } from '../sim/types';
+import type { Animal, Building, Cart, Entity, Grave, Person, Pile, Plot, Site, Source, Speech, World } from '../sim/types';
 import { clampCamera, updateCamera } from './camera';
 import { CartRenderer } from './carts';
 import { CharacterRenderer } from './characters';
@@ -36,6 +36,8 @@ export class Renderer {
   private lastSim = 0;
   private drawables: Drawable[] = [];
   private heads = new Map<number, { x: number; y: number }>();
+  /** the followed person's last words, kept up for a moment of real time at high speed (drawing only) */
+  private dwell: { id: number; text: string; kind: Speech['kind']; until: number } | null = null;
   /** exposed for the debug readout */
   lastFrameMs = 0;
   drawnCount = 0;
@@ -370,32 +372,40 @@ export class Renderer {
     if (game.selectedId && this.heads.has(game.selectedId)) labelFor(game.selectedId, true);
     else if (hoverId && this.heads.has(hoverId)) labelFor(hoverId, false);
 
-    // speech bubbles: a handful at a time, selected person first
-    const speakers: { p: Person; pri: number }[] = [];
+    // speech bubbles: a handful at a time, selected person first. At 8× and faster a bubble lasts a fraction of a second, so
+    // the followed person's last words stay up for a moment of real time after the world has moved on (nothing waits for it)
+    const now = performance.now();
+    const followed = game.following && game.speed >= 8 ? world.byId.get(game.selectedId) : undefined;
+    if (followed && followed.ent === 'person' && followed.speech && followed.speech.until > tick) {
+      if (this.dwell?.id !== followed.id || this.dwell.text !== followed.speech.text) this.dwell = { id: followed.id, text: followed.speech.text, kind: followed.speech.kind, until: now + 2500 };
+    } else if (!followed || this.dwell?.id !== followed.id) this.dwell = null;
+    const speakers: { p: Person; pri: number; text: string; kind: Speech['kind']; alpha: number }[] = [];
     for (const p of world.persons) {
-      if (!p.speech || p.speech.until <= tick) continue;
+      const live = p.speech && p.speech.until > tick ? p.speech : null;
+      const held = this.dwell && this.dwell.id === p.id && now < this.dwell.until ? this.dwell : null;
+      if (!live && !held) continue;
       const hd = this.heads.get(p.id);
       if (!hd) continue;
+      const say = held ?? live!;
       let pri = 5;
       if (p.id === game.selectedId) pri = 0;
-      else if (p.speech.kind === 'warn' || p.speech.kind === 'angry') pri = 1;
-      else if (p.speech.kind === 'ask') pri = 2;
-      else if (p.speech.kind === 'happy') pri = 3;
-      speakers.push({ p, pri });
+      else if (say.kind === 'warn' || say.kind === 'angry') pri = 1;
+      else if (say.kind === 'ask') pri = 2;
+      else if (say.kind === 'happy') pri = 3;
+      const alpha = Math.max(live ? Math.min(1, (live.until - tick) / 12) : 0, held ? Math.min(1, (held.until - now) / 400) : 0);
+      speakers.push({ p, pri, text: say.text, kind: say.kind, alpha });
     }
     speakers.sort((a, b) => a.pri - b.pri || a.p.id - b.p.id);
     const limit = z < 0.5 ? 2 : z < 0.8 ? 4 : 7;
     const placed: { x: number; y: number; w: number; h: number }[] = [];
-    for (const { p, pri } of speakers.slice(0, limit)) {
+    for (const { p, pri, text, kind, alpha } of speakers.slice(0, limit)) {
       if (z < 0.5 && pri > 1) continue;
       const hd = this.heads.get(p.id)!;
       const s = toScreen(hd.x, hd.y);
-      const rem = p.speech!.until - tick;
-      const a = Math.min(1, rem / 12);
       let by = s.y - 8 - (ov.intentions && p.activity ? 16 : 0) - (game.selectedId === p.id ? 18 : 0);
       // nudge up if it would sit on top of another bubble
       for (let tries = 0; tries < 4; tries++) {
-        const bw = Math.min(190, p.speech!.text.length * 6.6 + 16);
+        const bw = Math.min(190, text.length * 6.6 + 16);
         const bh = 30;
         const hit = placed.find((q) => Math.abs(q.x - s.x) < (q.w + bw) / 2 && Math.abs(q.y - by) < (q.h + bh) / 2 + 2);
         if (!hit) {
@@ -404,7 +414,7 @@ export class Renderer {
         }
         by -= 34;
       }
-      drawBubble(ctx, p.speech!.text, s.x, by, p.speech!.kind, a);
+      drawBubble(ctx, text, s.x, by, kind, alpha);
     }
   }
 }

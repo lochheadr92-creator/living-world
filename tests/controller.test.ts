@@ -177,6 +177,8 @@ describe('rendering never changes the simulation', () => {
     const b = new Game({ seed: 'render-speeds' });
     const r = new Renderer(fakeCanvas(), a);
     a.setSpeed(8);
+    a.select(a.world.persons[3].id); // followed at 8×: their last words are held on screen for a moment
+    a.setFollow(true);
     driveTo(a, 900, [1 / 60]);
     for (let i = 0; i < 40; i++) r.frame(1 / 60);
     driveTo(b, 900, [1 / 144]);

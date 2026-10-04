@@ -9,7 +9,8 @@ import { newActivity, startActivity } from '../src/sim/activities';
 import { startJob } from '../src/sim/facilities';
 import { RECIPE_BY_ID } from '../src/sim/recipes';
 import { hashWorld, runTicks } from '../src/sim/world';
-import type { ConvPurpose, ItemKind, World } from '../src/sim/types';
+import type { ConvPurpose, FxEvent, ItemKind, World } from '../src/sim/types';
+import { Effects } from '../src/render/effects';
 import type { ConvData } from '../src/sim/social';
 import { relOf } from '../src/sim/relations';
 import { addPerson, building, done, give, site, stage } from './helpers/kit';
@@ -230,5 +231,46 @@ describe('what is drawn and listed is what is there', () => {
       for (const p of b.persons) describePerson(b, p.id);
     }
     expect(hashWorld(b)).toBe(hashWorld(a));
+  });
+});
+
+describe('every effect the simulation logs is drawn, once', () => {
+  /** Paint after `pattern[i % n]` ticks each frame; return the events the world logged and the events turned into particles. */
+  function frames(seed: string, pattern: number[], total: number): { logged: FxEvent[]; drawn: FxEvent[]; perFrame: number[] } {
+    const w = createWorld({ ...defaultSettings(seed) });
+    runTicks(w, 600); // a little way in, so people are busy
+    const logged: FxEvent[] = [];
+    const push = w.fx.push.bind(w.fx);
+    w.fx.push = (...e: FxEvent[]) => (logged.push(...e), push(...e));
+    const fx = new Effects();
+    const drawn: FxEvent[] = [];
+    (fx as unknown as { spawn: (e: FxEvent) => void }).spawn = (e) => drawn.push(e);
+    fx.consume(w); // the first frame of this world: nothing from before it
+    const perFrame: number[] = [];
+    for (let i = 0, ran = 0; ran < total; i++) {
+      const n = pattern[i % pattern.length];
+      runTicks(w, n);
+      ran += n;
+      const before = drawn.length;
+      fx.consume(w);
+      perFrame.push(drawn.length - before);
+    }
+    return { logged, drawn, perFrame };
+  }
+
+  it('at one tick a frame (1×–4×), several (16×), and with frames in between that run no tick at all (slow or paused)', () => {
+    for (const pattern of [[1], [0, 1], [0, 0, 0, 1], [3], [2, 3, 0], [5, 0, 0]]) {
+      const { logged, drawn, perFrame } = frames('fx-once', pattern, 900);
+      expect(logged.length, `pattern ${pattern}`).toBeGreaterThan(20);
+      expect(Math.max(...perFrame), 'no frame hits the burst cap').toBeLessThan(40);
+      // every logged event drawn exactly once, in order: none dropped, none twice
+      expect(drawn.length, `pattern ${pattern}`).toBe(logged.length);
+      expect(drawn.every((e, i) => e === logged[i]), `pattern ${pattern}`).toBe(true);
+    }
+  });
+
+  it('a frame that runs no tick draws nothing new', () => {
+    const { perFrame } = frames('fx-paused', [1, 0, 0, 0], 400);
+    for (let i = 0; i < perFrame.length; i++) if (i % 4 !== 0) expect(perFrame[i]).toBe(0);
   });
 });

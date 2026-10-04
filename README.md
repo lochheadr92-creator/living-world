@@ -227,7 +227,10 @@ every death with its cause and day, and anyone sealed in (twice a day, six or fe
 `vite-node scripts/compare_baseline.ts [label label [keys]]` prints two recorded baselines side by side;
 `npm run playback -- <url> [result.json]` (after `npm run build && npm run preview`) drives a headless Chrome over the DevTools
 protocol and measures, with a real animation loop, the speed achieved at each setting, what a stalled page costs and how the
-speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`); and
+speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`);
+`node scripts/browser/presentation.mjs <url> [result.json]` measures in the same page how many of the effects the world logs
+become particles and how many ticks the person card lags the picture at 1×, 4× and 16×, and checks that the page's state hash
+equals that of a world stepped to the same tick without ever being drawn; and
 `scripts/*.ts` has the traces used while tuning (`multi.ts a,b,c 12` runs several seeds and reports deaths and ledger
 balance; `death.ts` and `trace.ts` follow whoever dies and why). [`docs/BASELINE.md`](docs/BASELINE.md) records what a
 fixed ordinary world did before and after this work.
