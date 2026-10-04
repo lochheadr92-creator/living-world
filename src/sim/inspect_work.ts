@@ -1,13 +1,15 @@
 // Read-only descriptions of workplaces, building sites, carts, tools, promises and meals for the inspectors.
 // Nothing here changes the world or draws random numbers.
-import { BUILD_DEF, GRANARY_TEND_EVERY, TOOL_DEFS } from './constants';
+import { BUILD_DEF, GRANARY_TEND_EVERY, SOURCE_ITEM, TOOL_DEFS } from './constants';
 import { weightOf } from './economy';
+import { estimatedAmount } from './knowledge';
+import { SOURCE_NOUN } from './labels';
 import { opsOf, recipeOf, usableUnits } from './facilities';
 import { RECIPES, recipesAt } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { mealOf, previousMealOf } from './meals';
-import type { Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, World } from './types';
+import type { Building, BuildingType, Cart, Commitment, Items, ItemKind, Meal, Person, Site, SourceType, World } from './types';
 
 export interface Bar {
   label: string;
@@ -91,6 +93,68 @@ export function recipeBlockers(world: World, b: Building, r: Recipe): string[] {
   return out;
 }
 
+// ───────────────────────── where a missing thing is (for the observer) ─────────────────────────
+const nounPlural = (noun: string): string => (/[^aeiou]y$/.test(noun) ? noun.slice(0, -1) + 'ies' : noun + 's');
+const counted = (n: number, noun: string): string => (n === 1 ? `the ${noun}` : `${n} ${nounPlural(noun)}`);
+
+/**
+ * The world's truth about an item a stalled site or an idle workplace is waiting for — which nobody in the world can see.
+ * Who carries it, which buildings and heaps hold it, where it is made and whether that place is at work, where it grows or
+ * lies, and how many people know of a place to get it. Shown labelled as the observer's; reads the world, changes nothing.
+ */
+export function whereItemIs(world: World, item: ItemKind): string {
+  const living = world.persons.filter((p) => p.alive);
+  const parts: string[] = [];
+  const carriers = living.filter((p) => (p.inv[item] ?? 0) > 0);
+  const carried = carriers.reduce((n, p) => n + (p.inv[item] ?? 0), 0);
+  parts.push(carried ? `${carried} carried by ${carriers.length} ${carriers.length === 1 ? 'person' : 'people'}` : 'none carried');
+  // grouped by kind of building, so that twenty lean-tos read as one line
+  const held = new Map<BuildingType, { n: number; places: number }>();
+  for (const b of world.buildings) {
+    const n = b.store.items[item] ?? 0;
+    if (n <= 0) continue;
+    const g = held.get(b.type) ?? { n: 0, places: 0 };
+    g.n += n;
+    g.places++;
+    held.set(b.type, g);
+  }
+  const stored = [...held].map(([t, g]) => `${g.n} in ${counted(g.places, BUILD_DEF[t].label)}`);
+  const heaps = world.piles.filter((pl) => (pl.items[item] ?? 0) > 0);
+  if (heaps.length) stored.push(`${heaps.reduce((n, pl) => n + (pl.items[item] ?? 0), 0)} in ${heaps.length === 1 ? 'a heap' : `${heaps.length} heaps`}`);
+  parts.push(stored.length ? stored.join(', ') : 'none in any building');
+  const r = RECIPES.find((x) => (x.outputs[item] ?? 0) > 0);
+  if (r) {
+    const where = BUILD_DEF[r.at].label;
+    const places = world.buildings.filter((b) => b.type === r.at);
+    if (places.some((b) => b.ops?.job)) parts.push(`made at the ${where}, which is busy`);
+    else if (places.length) parts.push(`made at the ${where}, which is idle: ${recipeBlockers(world, places[0], r)[0] ?? 'nothing stops a batch, but nobody has come to make one'}`);
+    else parts.push(`made at a ${where}, which ${world.sites.some((x) => x.type === r.at) ? 'is still being built' : 'would have to be built'}`);
+  }
+  const found = new Map<SourceType, number>();
+  for (const src of world.sources) if (src.item === item && src.amount >= 1) found.set(src.type, (found.get(src.type) ?? 0) + 1);
+  if (found.size) parts.push(`to be had at ${[...found].map(([t, n]) => `${n} ${n === 1 ? SOURCE_NOUN[t] : nounPlural(SOURCE_NOUN[t])}`).join(' and ')}`);
+  // (a card may be redrawn every frame at speed: no arrays made per person, and each stops at the first place found)
+  let knows = 0;
+  for (const p of living) {
+    for (const id in p.beliefs) {
+      const b = p.beliefs[id];
+      if ((b.items?.[item] ?? 0) > 0 || (b.kind in SOURCE_ITEM && SOURCE_ITEM[b.kind as SourceType] === item && estimatedAmount(world, b) >= 1)) {
+        knows++;
+        break;
+      }
+    }
+  }
+  parts.push(`${knows} of ${living.length} people know of a place to get it`);
+  return `For the observer, ${item}: ${parts.join('; ')}.`;
+}
+
+/** Is anyone waiting for this item: a building site short of it, a promise to bring it, or a request for it not yet settled? */
+function wanted(world: World, item: ItemKind): boolean {
+  if (world.sites.some((x) => (x.required[item] ?? 0) - (x.delivered[item] ?? 0) - (x.used[item] ?? 0) > 0)) return true;
+  if (world.persons.some((p) => p.alive && p.commitments.some((c) => c.status === 'active' && c.item === item))) return true;
+  return world.requests.some((q) => (q.status === 'pending' || q.status === 'promised') && q.item === item);
+}
+
 function accessText(world: World, b: Building): string {
   const ops = b.ops;
   if (b.hhId === 0) return b.type === 'granary' ? 'Open to everyone; each household keeps its own share in the bins.' : 'Open to everyone.';
@@ -133,6 +197,13 @@ export function describeFacility(world: World, b: Building): Section[] {
     if (!blockers.length) notes.push('Nothing is stopping a batch from starting: it is simply waiting for someone who wants what it makes.');
     for (const x of blockers) notes.push(`${x.r.doing}: ${x.why.join('; ')}.`);
     if (ops.lastBlocker) notes.push(`Last time someone tried: ${ops.lastBlocker}.`);
+    // what it is short of, where its product is wanted: where that is to be had, as only the observer can see
+    const short = new Set<ItemKind>();
+    for (const x of blockers) {
+      if (!Object.keys(x.r.outputs).some((k) => wanted(world, k as ItemKind))) continue;
+      for (const k of [...Object.keys(x.r.inputs), ...Object.keys(x.r.fuel)] as ItemKind[]) if ((b.store.items[k] ?? 0) < (x.r.inputs[k] ?? 0) + (x.r.fuel[k] ?? 0)) short.add(k);
+    }
+    for (const k of short) notes.push(whereItemIs(world, k));
     sections.push({ title: 'Idle — what is stopping it', notes });
   }
 
@@ -197,6 +268,10 @@ export function describeSiteSections(world: World, s: Site): Section[] {
   const notes: string[] = [];
   if (missing.length) notes.push(`Still needed: ${missing.join(', ')}. Work stops short of the part that needs them.`);
   else notes.push('All the materials are on site.');
+  // stalled for want of something: where it is to be had, as only the observer can see
+  if (missing.length && world.tick - s.lastWorkTick >= 300) {
+    for (const k of Object.keys(s.required) as ItemKind[]) if ((s.delivered[k] ?? 0) + (s.used[k] ?? 0) < (s.required[k] ?? 0)) notes.push(whereItemIs(world, k));
+  }
   if (world.tick - s.lastWorkTick > 800) notes.push(`Nobody has worked here for ${Math.round((world.tick - s.lastWorkTick) / 2400 * 10) / 10} days; it is given up after a while.`);
   sections.push({
     title: 'Materials',

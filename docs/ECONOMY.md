@@ -28,7 +28,7 @@ decided to supply it; a plank exists because somebody turned wood into it; a mea
 | Looking after one another | `sim/welfare.ts` | |
 | Not letting work strand anyone from water or food | `sim/relief.ts` | wired into `rankOptions` |
 | Fixed-step clock, stalls, requested/achieved speed | `app/game.ts` | |
-| Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | |
+| Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | `whereItemIs`: the observer's note on where a missing thing is (world truth, labelled as such, never read by the simulation) |
 
 ## The chains
 

@@ -139,6 +139,12 @@ is under way and by whom, what is on its shelves, and — for anything that is n
 site shows the materials that have arrived, the ones it is waiting for, and the work done. Parts with nothing to show stay
 hidden.
 
+When a site has stood waiting for materials for half a minute or more, or an idle workplace is short of an input for
+something people are waiting on, its card adds a line marked **For the observer**: where the missing thing really is — how
+much is carried and by how many, which buildings and heaps hold it, where it is made and whether that place is busy or what
+is stopping it, where it can be gathered, and how many people know of a place to get it. Nobody in the world knows what that
+line says, and it never feeds back into anything they do.
+
 The speed buttons say two things: the speed you asked for and the speed actually achieved over the last couple of seconds.
 If the page cannot keep up, or stalled and the clock gave up on some world time, the bar says so (amber, with the number of
 ticks skipped) instead of pretending. While paused nothing animates, including the people.
