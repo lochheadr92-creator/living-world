@@ -98,21 +98,29 @@ export function ellipse(ctx: CanvasRenderingContext2D, x: number, y: number, rx:
   ctx.fill();
 }
 
-/** Soft ground shadow. */
+/**
+ * Soft ground shadow. The light is from the upper left, as the shading baked into the sprites already is, so the shadow is pushed
+ * to the lower right and lengthened a little. Right and down are never further from the viewer, so the shadow always falls under
+ * things drawn after it, not over things drawn before it.
+ */
 export function groundShadow(ctx: CanvasRenderingContext2D, rx: number, ry: number, a = 0.28, cy = 0): void {
-  const g = ctx.createRadialGradient(0, cy, 1, 0, cy, rx);
+  const R = rx * 1.08;
+  const g = ctx.createRadialGradient(0, 0, 1, 0, 0, R);
   g.addColorStop(0, `rgba(20,30,20,${a})`);
   g.addColorStop(1, 'rgba(20,30,20,0)');
   ctx.save();
-  ctx.translate(0, cy);
+  ctx.translate(rx * SHADOW_PUSH_X, cy + ry * SHADOW_PUSH_Y);
   ctx.scale(1, ry / rx);
-  ctx.translate(0, -cy);
   ctx.beginPath();
-  ctx.arc(0, cy, rx, 0, Math.PI * 2);
+  ctx.arc(0, 0, R, 0, Math.PI * 2);
   ctx.fillStyle = g;
   ctx.fill();
   ctx.restore();
 }
+
+/** how far the shadow is pushed from the foot of the thing, as a fraction of its radius */
+export const SHADOW_PUSH_X = 0.2;
+export const SHADOW_PUSH_Y = 0.22;
 
 /** A lit, rounded blob of foliage / bush with a highlight toward the upper left. */
 export function blob(ctx: CanvasRenderingContext2D, cx: number, cy: number, r: number, light: string, mid: string, dark: string, squash = 0.86): void {

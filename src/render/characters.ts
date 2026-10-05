@@ -9,7 +9,7 @@ import type { Animal, ItemKind, Person, PoseKind, World } from '../sim/types';
 import { HAND_U, HAND_V, HAND_Z } from './carts';
 import { orientedBox } from './iso3d';
 import { HAIR, HOUSEHOLD_COLORS, PANTS, SHIRT, SKIN } from './palette';
-import { shade } from './sprites';
+import { SHADOW_PUSH_X, SHADOW_PUSH_Y, shade } from './sprites';
 
 type V3 = readonly [number, number, number];
 
@@ -684,7 +684,8 @@ export class CharacterRenderer {
       const rx = 8.5 * sc * (lie > 0.5 ? 1.9 : 1);
       ctx.fillStyle = 'rgba(15,25,15,0.30)';
       ctx.beginPath();
-      ctx.ellipse(lie > 0.5 ? S(-0.1, 0, 0)[0] : base[0], base[1] + 1, rx, rx * 0.42, lie > 0.5 ? -0.4 : 0, 0, Math.PI * 2);
+      // pushed a little to the lower right, like the shadows under trees and buildings
+      ctx.ellipse((lie > 0.5 ? S(-0.1, 0, 0)[0] : base[0]) + rx * SHADOW_PUSH_X, base[1] + 1 + rx * 0.42 * SHADOW_PUSH_Y, rx, rx * 0.42, lie > 0.5 ? -0.4 : 0, 0, Math.PI * 2);
       ctx.fill();
     }
     // selection / hover ring
