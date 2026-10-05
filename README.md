@@ -16,6 +16,8 @@ npm run build    # type-check + production bundle in dist/
 npm test         # the verification suite (vitest)
 ```
 
+Double-click `Play.command` (macOS), run `./play.sh` (Linux/macOS) or double-click `play.bat` (Windows) to install on first use and open it in your browser.
+
 No runtime dependencies, no network, no LLM calls, no `Math.random` in the simulation.
 
 ## What you are looking at
