@@ -17,6 +17,7 @@ import { addToHousehold, householdById, membersOf } from './households';
 import { estimatedAmount, learn, noteFailure } from './knowledge';
 import { adjustRel, relOf, spark, trustOf } from './relations';
 import { hearAccount, pickAccount, recordAccount } from './reputation';
+import { shareDeath } from './grief';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
 import { drive } from './needs';
@@ -1262,6 +1263,7 @@ function shareAccount(world: World, S: Person, L: Person): void {
 
 function phaseNews(world: World, S: Person, L: Person): void {
   shareConcerns(world, S, L);
+  shareDeath(world, S, L);
   shareAccount(world, S, L);
   const news = pickNews(world, S, L, 2);
   let shown = false;

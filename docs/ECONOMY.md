@@ -27,6 +27,7 @@ decided to supply it; a plank exists because somebody turned wood into it; a mea
 | Shared meals and the hall | `sim/meals.ts` | |
 | Looking after one another | `sim/welfare.ts` | |
 | Word about people: accounts, passing them on, the hearsay cap | `sim/reputation.ts` | |
+| Grief, the grave visit, the remembrance meal | `sim/grief.ts` | |
 | Not letting work strand anyone from water or food | `sim/relief.ts` | wired into `rankOptions` |
 | Fixed-step clock, stalls, requested/achieved speed | `app/game.ts` | |
 | Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | |
@@ -275,6 +276,27 @@ fully made up a quarrel in 0 to 2 of them. It stays modest on purpose and by the
 12 a month) and most end on their own or by apology before anyone steps in. The counters `stats.mediated`, `medTried`,
 `medHealed`, `medRefused`, `madeUp` and `sided` are kept so this can be watched.
 
+## Grief and remembrance
+
+Someone mourns only because they **learned** a person had died, one of three ways: they were awake within 14 tiles when it
+happened (and close to the person), they came upon the fresh grave within nine tiles (a death nobody saw is found out this way),
+or someone who knew told them, in an ordinary conversation, once. Nobody who was not close to them grieves. How close is read from
+kinship (partner 90, parent or child 80, sibling 65), shared household (50) and strong warmth (25–40).
+
+That number is how heavily it weighs at first. It eases by about 12 a day, and the person is somewhat less hungry for company and
+wanders and works less willingly while it weighs (their appetite for work is cut by up to 35% and for exploring by up to 40%;
+kindness is untouched). It eases faster in three ways. **At the grave:** with nothing pressing (not night, not hungry, thirsty or
+tired) someone whose grief weighs 25 or more may walk to the grave they were told of or saw, stand there 150–210 ticks and come
+away eased by 15–20; nothing is created. **Among others who mourn the same person:** when two of them talk it eases each by
+4, once a day. **Over a meal in memory:** a meal called by someone still mourning (within three days) is marked as held in memory,
+the host is keener to call it and to ask others who mourn the same person, and everyone who sits down to it and mourns that person
+is eased by 15. People remember having been told for six days, so word can still pass on.
+
+What this does and does not show: **nobody dies of natural causes in the first months of an ordinary world** (the old-age hazard
+only starts at 76, which is 168 days in), so in ordinary 30-day worlds none of this appears at all; harsh worlds rarely lose
+anyone in the first weeks either. The tests bring a death about in a running village and check what the village does after it:
+in one such run three people mourned, one went to the grave and no meal was called in memory.
+
 ## Surviving while working
 
 Before taking on anything that is not about survival, a person works out whether they could still reach water and food: the
@@ -343,8 +365,8 @@ depends only on the tick and the population, so a run is reproducible.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
 
-* Saved worlds are version 4: people hold accounts of how others have behaved and relationships carry a hearsay total, so
-  saves from before that are refused rather than half-loaded.
+* Saved worlds are version 5: people hold accounts of how others have behaved, carry a hearsay total and grief for those who died,
+  and the dead are recorded with their household and grave, so saves from before that are refused rather than half-loaded.
 
 ## Staged scenes
 

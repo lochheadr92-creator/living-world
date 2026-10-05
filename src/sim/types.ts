@@ -223,6 +223,7 @@ export type ActivityKind =
   | 'attend_meal'
   | 'host_meal'
   | 'visit'
+  | 'mourn'
   | 'return_tool';
 
 export type PoseKind =
@@ -429,6 +430,8 @@ export interface Person {
   cartId: number;
   /** worries about people they have seen in need or been told about (bounded, each with its own provenance) */
   concerns: Concern[];
+  /** people they know have died and are mourning (or remember), each with how and from whom they heard */
+  grief: Grief[];
   /** what they know of other people's conduct, from their own experience, from watching, or from being told (bounded) */
   accounts: Account[];
   /** the last conversation or quarrel that ended, kept apart from whatever is going on now */
@@ -444,6 +447,25 @@ export interface InteractionRecord {
   /** how it came out, taken from the same exchange (a request's status, an apology's result…) */
   outcome: string;
   detail: string;
+}
+
+export interface Grief {
+  about: number;
+  name: string;
+  /** 0..100: how heavily it weighs now; it eases with time, at the grave, over a shared meal and among others who mourn */
+  weight: number;
+  /** how close they were, 0..100, fixed when they learned of it */
+  bond: number;
+  /** when they learned of it */
+  since: number;
+  died: number;
+  src: 'saw' | 'told' | 'found';
+  from: number;
+  /** where the grave is, as they know it */
+  gx: number;
+  gy: number;
+  /** last time they stood at the grave */
+  visited: number;
 }
 
 export type AccountKind = 'broke' | 'kept' | 'gave' | 'quarreled';
@@ -830,6 +852,9 @@ export interface Meal {
   reserved: number;
   status: 'inviting' | 'gathering' | 'eating' | 'done' | 'cancelled';
   end: string;
+  /** a meal called by someone who is mourning, in memory of this person (name) */
+  remembers?: string;
+  remembersId?: number;
 }
 
 // ───────────────────────────── world ─────────────────────────────
@@ -926,7 +951,7 @@ export interface World {
   stumps: { x: number; y: number; tick: number }[];
   nextId: number;
   persons: Person[];
-  deceased: { id: number; name: string; tick: number; cause: string; age: number }[];
+  deceased: { id: number; name: string; tick: number; cause: string; age: number; hh?: number; gx?: number; gy?: number }[];
   sources: Source[];
   buildings: Building[];
   sites: Site[];

@@ -350,6 +350,25 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
     },
   );
 
+  // grief
+  const griefSec = deps.section('grief', 'Grief', 'Who they are mourning. It eases with time, at the grave, over a meal in memory, and among others who mourn the same person.');
+  const griefBox = h('div', { class: 'list' });
+  griefSec.body.append(griefBox);
+  const griefList = new KeyedList<PersonView['grief'][number], WorryRow>(
+    griefBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, g) => {
+      r.who.set(g.about);
+      setText(r.what, ` weighs ${g.weight}/100`);
+      setText(r.meta, `Learned ${g.since} · ${g.source} · ${g.visited}`);
+    },
+  );
+
   // quarrels
   const soreSec = deps.section('sore', 'Quarrels', 'Who they are still sore at, and why. A quarrel drops off this list once it is settled.');
   const soreBox = h('div', { class: 'list' });
@@ -357,7 +376,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   const soreList = new KeyedList<GrievanceView, QuarrelRow>(soreBox, () => makeQuarrelRow(deps), (r, g) => updateQuarrelRow(r, g));
 
   return {
-    els: [talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el],
+    els: [talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
     update(v) {
       const talk = v.interaction ?? { current: null, previous: null };
       const hasTalk = !!(talk.current || talk.previous);
@@ -391,6 +410,11 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);
+
+      const griefs = (v.grief ?? []).filter((g) => g.weight > 0);
+      griefSec.setVisible(griefs.length > 0);
+      griefSec.setCount(griefs.length ? String(griefs.length) : '');
+      if (griefs.length && griefSec.isOpen()) griefList.sync(griefs, (g) => g.about);
 
       const words = v.accounts ?? [];
       wordSec.setVisible(words.length > 0);

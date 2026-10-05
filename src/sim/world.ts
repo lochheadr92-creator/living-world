@@ -26,6 +26,7 @@ import { updateNeeds } from './needs';
 import { perceive, refreshBeliefs } from './perception';
 import { rebuildMobileGrid } from './registry';
 import { decayGrievances } from './grievance';
+import { decayGrief } from './grief';
 import { driftRelations } from './relations';
 import { bondWorkers, checkCommitments, flushDelayedBubbles, passingGreetings, updateConversations, updateRequests } from './social';
 import { resumeSuspended } from './activities';
@@ -106,6 +107,7 @@ function stepPerson(world: World, p: Person): void {
   if ((tick + p.id) % 240 === 0) {
     driftRelations(p);
     decayGrievances(world, p);
+    decayGrief(world, p);
   }
 
   // someone is handing something over: stand still for a moment

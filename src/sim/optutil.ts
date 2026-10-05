@@ -298,11 +298,12 @@ export function countBeliefsOfKind(p: Person, kind: BeliefKind): number {
 
 export function traitMods(p: Person) {
   const t = p.traits;
+  const sorrow = p.grief.reduce((w, g) => Math.max(w, g.weight), 0) / 100; // someone mourning is slower to take up work and to wander
   return {
-    work: 0.8 + 0.4 * t.diligence,
+    work: (0.8 + 0.4 * t.diligence) * (1 - 0.35 * sorrow),
     social: 0.55 + 0.9 * t.sociability,
     give: 0.5 + 1.0 * t.generosity,
-    explore: 0.35 + 1.3 * t.curiosity,
+    explore: (0.35 + 1.3 * t.curiosity) * (1 - 0.4 * sorrow),
     caution: 0.6 + 0.8 * t.caution,
   };
 }

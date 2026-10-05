@@ -8,6 +8,7 @@ import { isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { wantsAmends } from './grievance';
 import { ACCOUNT_LIFE } from './reputation';
+import { mournOptions } from './grief';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
@@ -479,6 +480,7 @@ export function socialOptions(ctx: Ctx): void {
   optOffer(ctx);
   optReconcile(ctx);
   optMediate(ctx);
+  mournOptions(ctx);
   optRecruit(ctx);
   optPropose(ctx);
   optTrade(ctx);

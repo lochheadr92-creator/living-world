@@ -4,6 +4,7 @@ import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
 import { socialOnDeath } from './social';
+import { onDeath } from './grief';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
@@ -185,6 +186,8 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const gx = Math.floor(p.x);
   const gy = Math.floor(p.y);
   let placed = false;
+  let graveX = gx;
+  let graveY = gy;
   for (let r = 0; r < 5 && !placed; r++) {
     for (let dy = -r; dy <= r && !placed; dy++) {
       for (let dx = -r; dx <= r && !placed; dx++) {
@@ -192,6 +195,8 @@ export function killPerson(world: World, p: Person, cause: string): void {
         if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND) {
           const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age };
           registerGeneric(world, g);
+          graveX = g.x;
+          graveY = g.y;
           placed = true;
         }
       }
@@ -200,25 +205,15 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const idx = world.persons.indexOf(p);
   if (idx >= 0) world.persons.splice(idx, 1);
   world.byId.delete(p.id);
-  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age });
+  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age, hh: p.hhId, gx: graveX, gy: graveY });
   removeFromHousehold(world, p);
   if (p.partnerId) {
     const partner = personOf(world, p.partnerId);
     if (partner) partner.partnerId = 0;
   }
   addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause})`}, aged ${age}.`, [p.id], p.x, p.y);
-  // those who loved them feel it
-  for (const q of world.persons) {
-    if (!q.alive) continue;
-    const r = q.relations[p.id];
-    if (!r) continue;
-    if (r.kin || r.affinity >= 45) {
-      q.needs.social = Math.max(0, q.needs.social - 24);
-      q.needs.safety = Math.max(0, q.needs.safety - 8);
-      addLog(world, q, 'life', `${p.name} died (${cause}).`);
-      if (Math.hypot(q.x - p.x, q.y - p.y) < 14) q.speech = { text: '…', until: world.tick + 120, kind: 'think' };
-    }
-  }
+  // those who were near, and close to them, learn of it now; everyone else learns when somebody who knows tells them
+  onDeath(world, { id: p.id, name: p.name, tick: world.tick, hh: p.hhId, gx: graveX, gy: graveY });
 }
 
 // ───────────────────────── orphans ─────────────────────────

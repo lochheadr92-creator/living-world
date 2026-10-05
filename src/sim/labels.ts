@@ -84,6 +84,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   attend_meal: 'going to a shared meal',
   host_meal: 'hosting a meal',
   visit: 'checking on someone',
+  mourn: 'remembering someone at their grave',
   return_tool: 'returning a tool',
 };
 

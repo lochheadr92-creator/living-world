@@ -10,7 +10,8 @@ const META = 'living-world:save-meta:v1';
 // 2: a year of age is now twelve days long (saves from before measured it in single days)
 // 3: workshops, tools, carts, shared meals, worries and grievances are part of the world (older saves lack them and are refused)
 // 4: people hold accounts of how others have behaved (hearsay) and relationships carry a hearsay total (older saves lack them and are refused)
-const VERSION = 4;
+// 5: people carry grief for those who have died, and the dead are recorded with their household and grave (older saves lack them and are refused)
+const VERSION = 5;
 
 function bytesToB64(bytes: Uint8Array): string {
   let s = '';

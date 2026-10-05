@@ -414,6 +414,16 @@ export function concernViews(world: World, p: Person): { about: string; kind: st
   return p.concerns.map((c) => ({ about: nameOf(world, c.about), kind: c.kind === 'missing' ? 'has not been seen for a while' : `looked ${c.kind}`, seen: ago(world, c.seen), source: c.src === 'seen' ? 'saw it themself' : `told by ${nameOf(world, c.from)}` }));
 }
 
+export function griefViews(world: World, p: Person): { about: string; weight: number; since: string; source: string; visited: string }[] {
+  return p.grief.map((g) => ({
+    about: g.name,
+    weight: Math.round(g.weight),
+    since: ago(world, g.since),
+    source: g.src === 'saw' ? 'was there when it happened' : g.src === 'found' ? 'came upon the grave' : `told by ${nameOf(world, g.from)}`,
+    visited: g.visited < 0 ? 'has not been to the grave' : `last at the grave ${ago(world, g.visited)}`,
+  }));
+}
+
 export function accountViews(world: World, p: Person): { about: string; what: string; seen: string; source: string }[] {
   return p.accounts.map((a) => ({
     about: nameOf(world, a.about),
