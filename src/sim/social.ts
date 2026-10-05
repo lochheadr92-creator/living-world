@@ -331,6 +331,12 @@ function toolInUse(act: string, kind: ToolKind): boolean {
   }
 }
 
+/** Has B a live promise to bring A the sort of thing this request is for? (Water, or something to eat; materials are counted by site.) */
+function owesAlready(B: Person, A: Person, req: Request): boolean {
+  if (req.kind !== 'water' && req.kind !== 'food' && req.kind !== 'care') return false;
+  return B.commitments.some((c) => c.status === 'active' && c.kind === 'deliver' && c.to === A.id && !!c.item && (req.kind === 'water' ? c.item === 'water' : isFood(c.item)));
+}
+
 export function evaluateRequest(world: World, B: Person, A: Person, req: Request): Response {
   const rel = B.relations[A.id];
   const dislike = (rel?.affinity ?? 0) < -12 || (rel && rel.avoidUntil > world.tick);
@@ -364,6 +370,8 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
     const owes = B.commitments.filter((c) => c.status === 'active' && c.item === req.item && (c.destId ?? c.siteId) === (req.destId ?? req.siteId)).reduce((n, c) => n + c.amount - (c.delivered ?? 0), 0);
     if (owes >= req.amount) return { kind: 'decline', reason: 'committed' };
   }
+  // B already owes A this very thing: asked again (the first promise being slow to arrive), they say so rather than promise it twice
+  if (owesAlready(B, A, req)) return { kind: 'decline', reason: 'committed' };
   if (req.kind === 'food' || req.kind === 'care') {
     sev = clamp((62 - A.needs.hunger) / 62, 0.05, 1);
     item = pickFood(B.inv, A.needs.hunger) ?? null;

@@ -404,6 +404,11 @@ from a moving starting point, `(i + tick) mod n`, which gave the first of two ne
   worlds and six days, against the call order alone, this changed nothing that stands out: gifts 111 to 103, requests for wood
   95 to 98, requests for help building 24 to 26, requests for stone 80 to 53, while the trade proposals it does not touch
   went 307 to 175 between the two trajectories, which shows how far such counts move on their own.
+* **Asked again for water or food that has already been promised, a person says so** ("I've already promised that to them")
+  instead of promising it a second time. Wood, stone and goods were already covered; water and food were not. The invariant
+  audit (`scripts/invariants.ts`) found two live promises of two water from the same person to the same asker, made 1,600
+  ticks apart, in `meadow` once the call order changed (tick 16,979); the asker had asked again because the first was slow
+  to arrive.
 ## Staged scenes
 
 The ordinary seeded world is the demonstration of natural behaviour. Six small scenes are staged for watching one rule in
