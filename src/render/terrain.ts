@@ -5,7 +5,9 @@ import type { World } from '../sim/types';
 import { fbm } from '../sim/worldgen';
 import { mix } from './sprites';
 
-const STEPS = 8;
+// Fine steps keep neighbouring tiles from landing on visibly different shades (a coarse ramp shows the tile grid).
+const STEPS = 24;
+const WATER_WAVE = 0.9 * (STEPS / 8);
 function ramp(a: string, b: string): string[] {
   const out: string[] = [];
   for (let i = 0; i < STEPS; i++) out.push(mix(a, b, i / (STEPS - 1)));
@@ -42,8 +44,8 @@ export class TerrainPainter {
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const big = fbm(x / 9, y / 9, this.seedNum + 41, 3);
-        const small = hashUnit(x, y, this.seedNum) * 0.22;
-        this.tint[y * W + x] = Math.min(0.999, Math.max(0, big * 0.85 + small * 0.4));
+        const small = hashUnit(x, y, this.seedNum) * 0.22; // per-tile grain: well under one step, so it adds texture without outlining tiles
+        this.tint[y * W + x] = Math.min(0.999, Math.max(0, big * 0.85 + small * 0.1));
       }
     }
   }
@@ -171,7 +173,7 @@ export class TerrainPainter {
         let k = Math.floor(this.tint[i] * STEPS);
         if (type === T.DEEP || type === T.SHALLOW) {
           const wave = Math.sin(t * 0.85 + x * 0.52 + y * 0.37) + 0.6 * Math.sin(t * 1.4 - x * 0.31 + y * 0.6);
-          k = Math.max(0, Math.min(STEPS - 1, k + Math.round(wave * 0.9)));
+          k = Math.max(0, Math.min(STEPS - 1, k + Math.round(wave * WATER_WAVE)));
         }
         ctx.fillStyle = PAL[type][k];
         ctx.beginPath();
