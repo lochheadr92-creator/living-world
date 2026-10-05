@@ -326,10 +326,12 @@ simplified model (couples form, every settled couple is fed and housed, arrivals
 simulated years in seconds. Over 20 starting villages for 300 years, with arrivals on (the default): none die out and the village
 settles at about 55 to 62 people (range 54 to 66). With arrivals off, a closed village of about thirty shrinks slowly (median
 30 at year 50 to 100, 20 at year 200) and 6 of 20 die out within 300 years, which is what a closed population of thirty should do.
-The model is optimistic about food and housing, so it bounds the full simulation rather than replacing it. The full simulation, run
-for 30 days on four seeds (one run each): populations of 44 to 49 (from 28), two or three deaths each at ages 3, 10, 28, 32, 33,
-34, 37, 41 and 78 (one was exposure, the rest illness or old age), and the ledger balanced throughout. Longer full runs were not
-done: a 30-day full run takes about three minutes of real time, which is why the fast model exists.
+The model is optimistic about food and housing, so it bounds the full simulation rather than replacing it. The full simulation, run for 90 days
+(7.5 years) on four seeds, one run each: populations of 58 to 64 (from 28, with births and arrivals), five to seven deaths each
+(about one every two weeks; ages 0, 0, 0, 1, 3, 9, 10, 11, 27, 28, 32, 32, 33, 33, 34, 35, 36, 37, 38, 41, 47, 78, 85, 86; causes
+illness, old age, childhood illness, one childbirth and one exposure), up to four people grieving at once, and the ledger balanced
+at every checkpoint. Longer full runs were not done: a 90-day full run takes about half an hour of real time on four cores, which is
+why the fast model exists.
 
 ## Surviving while working
 
