@@ -34,6 +34,7 @@ export interface View {
 export class TerrainPainter {
   private tint: Float32Array;
   private world: World;
+  private wearBlob: HTMLCanvasElement | null = null;
   private seedNum: number;
 
   constructor(world: World) {
@@ -48,6 +49,29 @@ export class TerrainPainter {
         this.tint[y * W + x] = Math.min(0.999, Math.max(0, big * 0.85 + small * 0.1));
       }
     }
+  }
+
+  /**
+   * One worn tile of trampled ground: a soft-edged brown ellipse a little wider than the tile, so neighbours overlap and blend.
+   * (A hard-edged diamond inset in each tile leaves a bright rim around every one of them, which reads as a grid.)
+   */
+  private wearSprite(): HTMLCanvasElement {
+    if (this.wearBlob) return this.wearBlob;
+    const c = document.createElement('canvas');
+    c.width = 72;
+    c.height = 36;
+    const g = c.getContext('2d');
+    if (g) {
+      g.scale(1, 0.5);
+      const grad = g.createRadialGradient(36, 36, 0, 36, 36, 36);
+      grad.addColorStop(0, 'rgba(150,112,70,1)');
+      grad.addColorStop(0.5, 'rgba(150,112,70,0.8)');
+      grad.addColorStop(1, 'rgba(150,112,70,0)');
+      g.fillStyle = grad;
+      g.fillRect(0, 0, 72, 72);
+    }
+    this.wearBlob = c;
+    return c;
   }
 
   /** visible tile rectangle for the current camera */
@@ -206,15 +230,10 @@ export class TerrainPainter {
         // wear
         const wr = world.wear[i];
         if (wr > 0.06) {
-          ctx.fillStyle = `rgba(150,112,70,${Math.min(0.62, wr * 0.7)})`;
-          ctx.beginPath();
           const j = (hashUnit(x, y, 3) - 0.5) * 4;
-          ctx.moveTo(sx + j, sy + 3.5);
-          ctx.lineTo(sx + 25, sy + 16 + j * 0.3);
-          ctx.lineTo(sx - j, sy + 29);
-          ctx.lineTo(sx - 25, sy + 16 - j * 0.3);
-          ctx.closePath();
-          ctx.fill();
+          ctx.globalAlpha = Math.min(0.62, wr * 0.7);
+          ctx.drawImage(this.wearSprite(), sx - 36 + j, sy - 2);
+          ctx.globalAlpha = 1;
         }
         if (type === T.SHALLOW || type === T.DEEP) {
           // foam where water meets land
