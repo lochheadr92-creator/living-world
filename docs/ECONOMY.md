@@ -259,13 +259,21 @@ An onlooker **takes a side** only if they are clearly closer to one of the two (
 housemates; a difference under 12 points means no side). They regard the one they sided with slightly better and the other
 slightly worse, and it is in their log. Nobody takes a side over something they did not see or hear of.
 
-A friend may **step in**. Someone who holds an account of a quarrel or broken promise between two people, between about 200 ticks
-and three days after it happened (not while it is raw, not once it is old), who likes one of them and does not dislike the other, is not
-sore at either, and is sociable enough, may go and talk one of them round. It is two separate conversations, one with each side.
-The one spoken to listens in proportion to how far they trust the friend and less the deeper the hurt (a 10–90% chance); if they
-do, their soreness towards the other falls by 12–22 (a quarrel's weight starts at about 40–46) and they feel a little less alone.
-If the quarrel has already healed they say so, and the friend does not try again soon; if they will not listen, the friend waits
+A friend may **step in**. Someone who holds an account of a quarrel or broken promise between two people, no sooner than about 40
+ticks after it happened and no later than three days, who likes one of them and does not dislike the other, is not sore at either,
+and is sociable enough, may go and talk one of them round. The urge is strongest soon after and fades over about a day, because most
+quarrels fade by themselves by then (a friend who arrives late usually finds it already healed, and says so). The one spoken to
+listens in proportion to how far they trust the friend and less the deeper the hurt (a 10–90% chance); if they do, their soreness
+towards the other falls by 14–26 (a quarrel's weight starts at about 40–46) and they feel a little less alone. If the other person
+is standing within nine tiles and awake, the friend gets to them in the same visit, with the same odds from their own trust, and if
+that leaves neither sore the feed says the friend helped them make up; otherwise the other side is a separate conversation later.
+If the quarrel has already healed they say so and the friend does not try again soon; if they will not listen, the friend waits
 longer. The friend never learns whether a quarrel is still live except by asking: the option is chosen from the account alone.
+
+What this achieved in ordinary play (four seeds, 30 days each, one run each): a friend's talk was heard 1 to 8 times a world and
+fully made up a quarrel in 0 to 2 of them. It stays modest on purpose and by the nature of the world: arguments are rare (3 to
+12 a month) and most end on their own or by apology before anyone steps in. The counters `stats.mediated`, `medTried`,
+`medHealed`, `medRefused`, `madeUp` and `sided` are kept so this can be watched.
 
 ## Surviving while working
 

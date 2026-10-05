@@ -351,7 +351,7 @@ function optMediate(ctx: Ctx): void {
     for (const a of p.accounts) {
       if (a.kind !== 'quarreled' && a.kind !== 'broke') continue;
       const age = world.tick - a.at;
-      if (age < 200 || age > ACCOUNT_LIFE) continue;
+      if (age < 40 || age > ACCOUNT_LIFE) continue;
       const otherId = a.about === c.q.id ? a.toward : a.toward === c.q.id ? a.about : 0;
       if (!otherId || otherId === p.id) continue;
       const other = world.byId.get(otherId);
@@ -362,8 +362,11 @@ function optMediate(ctx: Ctx): void {
       const sc = new Scorer()
         .add(`cares about ${c.q.name} and ${other.name}, who have fallen out`, 7 + 5 * p.traits.generosity + 3 * p.traits.sociability)
         .add('friendship', (c.aff + (rel?.affinity ?? 0)) * 0.04)
+        // most quarrels fade by themselves within a day or so, so the time to step in is soon after it has cooled
+        .add('before it sets', 12 * clamp(1 - (age - 40) / 1900, 0, 1))
         .add('walking', -pen(c.d * 6));
       if (sc.total < 9) continue;
+      world.stats.medOffered = (world.stats.medOffered ?? 0) + 1;
       mkSocial(ctx, c, 'mediate', { otherId }, `Talk ${c.q.name} round about ${other.name}`, `to help ${c.q.name} and ${other.name} make up`, null, sc, 'peace', ':' + otherId);
       break;
     }

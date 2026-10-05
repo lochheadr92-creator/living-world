@@ -915,7 +915,9 @@ export function mediate(world: World, c: Pick<Conversation, "data">, A: Person, 
   const key = 'mediate' + B.id + ':' + (d.otherId ?? 0);
   const g = C ? B.relations[C.id]?.grievance : null;
   A.cooldowns[key] = world.tick + 900;
+  world.stats.medTried = (world.stats.medTried ?? 0) + 1;
   if (!C || !g) {
+    world.stats.medHealed = (world.stats.medHealed ?? 0) + 1;
     bubble(world, B, 'Thanks, but that’s behind us now.', 'say', 50);
     return;
   }
@@ -923,19 +925,38 @@ export function mediate(world: World, c: Pick<Conversation, "data">, A: Person, 
   const sev = clamp(g.weight / 70, 0, 1);
   const p = clamp(0.3 + 0.5 * trust + 0.25 * B.traits.generosity - 0.3 * sev, 0.1, 0.9);
   if (hashUnit(B.id, A.id, (world.tick >> 4) + C.id) >= p) {
+    world.stats.medRefused = (world.stats.medRefused ?? 0) + 1;
     bubble(world, B, D.saying(D.MEDIATE_NO, B.id, A.id, world.tick >> 5), 'angry', 50);
     A.cooldowns[key] = world.tick + 1500;
     c.data.sour = true;
     return;
   }
   bubble(world, B, D.saying(D.MEDIATE_YES, B.id, A.id, world.tick >> 5, { c: C.name }), 'happy', 56);
-  easeGrievance(world, B, C, 12 + 10 * trust, `${A.name} stepped in`);
+  easeGrievance(world, B, C, 14 + 12 * trust, `${A.name} stepped in`);
   B.needs.social = Math.min(100, B.needs.social + 8);
   adjustRel(B, A.id, world.tick, { aff: 3, trust: 2, note: `${A.name} helped me think it over` });
   adjustRel(A, B.id, world.tick, { aff: 1, fam: 0.5 });
   addLog(world, A, 'social', `Talked ${B.name} round a little over the trouble with ${C.name}.`);
   addLog(world, B, 'social', `${A.name} talked me round about ${C.name}.`);
   world.stats.mediated = (world.stats.mediated ?? 0) + 1;
+  // if the other person is standing close by, the friend gets to them too, and they can be brought back together on the spot
+  const gC = C.relations[B.id]?.grievance;
+  if (gC && !C.convId && C.pose !== 'sleep' && Math.hypot(C.x - B.x, C.y - B.y) <= 9) {
+    const trustC = clamp(trustOf(C, A.id), 0, 100) / 100;
+    const pC = clamp(0.3 + 0.5 * trustC + 0.25 * C.traits.generosity - 0.3 * clamp(gC.weight / 70, 0, 1), 0.1, 0.9);
+    if (hashUnit(C.id, A.id, (world.tick >> 4) + B.id) < pC) {
+      bubbleLater(world, C, D.saying(D.MEDIATE_YES, C.id, A.id, world.tick >> 5, { c: B.name }), 20);
+      easeGrievance(world, C, B, 14 + 12 * trustC, `${A.name} stepped in`);
+      adjustRel(C, A.id, world.tick, { aff: 3, trust: 2, note: `${A.name} helped me think it over` });
+      addLog(world, C, 'social', `${A.name} talked me round about ${B.name}.`);
+      A.cooldowns['mediate' + C.id + ':' + B.id] = world.tick + 900;
+      world.stats.mediated = (world.stats.mediated ?? 0) + 1;
+      if (!B.relations[C.id]?.grievance && !C.relations[B.id]?.grievance) {
+        addEvent(world, 'social', `${A.name} helped ${B.name} and ${C.name} make up.`, [A.id, B.id, C.id], B.x, B.y);
+        world.stats.madeUp = (world.stats.madeUp ?? 0) + 1;
+      }
+    }
+  }
 }
 
 function reqOf(world: World, c: Conversation): Request | undefined {

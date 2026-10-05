@@ -89,6 +89,40 @@ describe('a friend stepping in', () => {
     expect(r2.eased).toBe(true);
   });
 
+  it('talks both sides round in one go when the other person is standing close by, and the quarrel is made up on the record', () => {
+    const { w, a, b, fa } = stage();
+    for (const p of [a, b]) relOf(p, fa.id).trust = 90;
+    openGrievance(w, a, b, 'competition', 'we argued', 20);
+    openGrievance(w, b, a, 'competition', 'we argued', 20);
+    const start = w.tick;
+    for (let i = 0; i < 80 && !w.stats.madeUp; i++) {
+      w.tick = start + i * 16;
+      openGrievance(w, a, b, 'competition', 'we argued', 20); // keep it open until the roll comes up
+      openGrievance(w, b, a, 'competition', 'we argued', 20);
+      mediate(w, { data: {} }, fa, a, { otherId: b.id });
+    }
+    expect(w.stats.madeUp).toBeGreaterThanOrEqual(1);
+    expect(relOf(a, b.id).grievance).toBeNull();
+    expect(relOf(b, a.id).grievance).toBeNull();
+    expect(w.events.some((e) => new RegExp(`${fa.name} helped .* make up`).test(e.text))).toBe(true);
+  });
+
+  it('does not reach the other person when they are far away: that is a separate conversation', () => {
+    const { w, a, b, fa } = stage();
+    b.x = a.x + 40;
+    for (const p of [a, b]) relOf(p, fa.id).trust = 90;
+    const start = w.tick;
+    for (let i = 0; i < 60 && !w.stats.mediated; i++) {
+      w.tick = start + i * 16;
+      openGrievance(w, a, b, 'competition', 'we argued', 30);
+      openGrievance(w, b, a, 'competition', 'we argued', 30);
+      mediate(w, { data: {} }, fa, a, { otherId: b.id });
+    }
+    expect(w.stats.mediated).toBe(1);
+    expect(w.stats.madeUp ?? 0).toBe(0);
+    expect(relOf(b, a.id).grievance).not.toBeNull();
+  });
+
   it('is told "that is behind us" when the quarrel has already healed, and does not try again soon', () => {
     const { w, b, fa, a } = stage();
     relOf(b, fa.id).trust = 80;
