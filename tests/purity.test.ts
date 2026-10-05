@@ -5,7 +5,7 @@ import { describeEntity, describeEntityName, describePerson, summarizeWorld } fr
 import { whereItemIs } from '../src/sim/inspect_work';
 import type { World } from '../src/sim/types';
 import { hashWorld } from '../src/sim/world';
-import { expectSameWorld } from './helpers/resume';
+import { expectSameWorld, firstDifference } from './helpers/resume';
 import { natural, run } from './helpers/util';
 
 /** Everything the interface can ask the world to describe, asked of every person and every thing in it. */
@@ -46,6 +46,31 @@ describe('describing the world changes nothing in it', () => {
     run(unwatched, 900);
     expectSameWorld(unwatched, watched);
   }, 240_000);
+
+  it('asking what a person could do, over and over through the first days, leaves their promises, cooldowns and worries as they were', () => {
+    // The first version of this check only looked once, at one moment: a promise that was being held up got its "held up at" time
+    // rewritten by the planner the card asks, and no moment it happened to pick showed it. So: look at everybody, often, and compare
+    // a world that is looked at with a twin that never is.
+    const looked = natural('meadow');
+    const twin = natural('meadow');
+    let looks = 0;
+    for (let t = 0; t < 5000; t += 250) {
+      run(looked, 250);
+      run(twin, 250);
+      for (const p of looked.persons) {
+        if (!p.alive) continue;
+        const before = JSON.stringify(p);
+        describePerson(looked, p.id, { opportunities: true });
+        const after = JSON.stringify(p);
+        if (after !== before) expect(firstDifference(JSON.parse(before), JSON.parse(after)), `asking about ${p.name} at tick ${looked.tick} changed them`).toBeNull();
+        looks++;
+      }
+      const a = serializeWorld(looked);
+      const b = serializeWorld(twin);
+      if (a !== b) expect(firstDifference(JSON.parse(a), JSON.parse(b)), `the looked-at world has drifted from its twin by tick ${looked.tick}`).toBeNull();
+    }
+    expect(looks).toBeGreaterThan(400);
+  }, 400_000);
 
   it('a harsh world with a death in it: the grave and its record, the wolves, the dead person’s memorial are described without a change', () => {
     const w = natural('heath', { harsh: true });

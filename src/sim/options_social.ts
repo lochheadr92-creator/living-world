@@ -164,7 +164,7 @@ function optRequest(ctx: Ctx): void {
       if (!rel?.kin && c.aff < 5) continue;
       const sc = new Scorer().add('the roof is failing and there is no one here who can mend it', 22).add('walking', -pen(c.d * 6));
       mkSocial(ctx, c, 'request', { reqKind: 'repair', item: 'wood', amount: 1, destKind: 'building', destId: homeB.id, purpose: 'the roof is failing', milestone: 'sound again' } as ConvData, `Ask ${q.name} to mend the roof`, 'to keep a roof over our heads', null, sc, 'request', ':repair');
-      p.cooldowns.askRepair = world.tick + 600;
+      if (!ctx.observer) p.cooldowns.askRepair = world.tick + 600; // (the wait starts when they consider it; the inspector asking must not start it)
       break;
     }
   }
@@ -179,7 +179,7 @@ function optRequest(ctx: Ctx): void {
       if (trust < 12 && c.aff < 10) continue;
       const sc = new Scorer().add(`need a ${tw.kind} to ${tw.for}`, 20 * traitMods(p).work).add('they are carrying one', 4).add('walking', -pen(c.d * 6));
       mkSocial(ctx, c, 'request', { reqKind: 'tool', toolKind: tw.kind, item: tw.kind, amount: 1, purpose: tw.for }, `Ask ${c.q.name} to lend a ${tw.kind}`, `to ${tw.for}`, null, sc, 'request', ':tool:' + tw.kind);
-      p.cooldowns['askTool' + tw.kind] = world.tick + 300;
+      if (!ctx.observer) p.cooldowns['askTool' + tw.kind] = world.tick + 300;
     }
   }
 

@@ -362,6 +362,19 @@ depends only on the tick and the population, so a run is reproducible.
 * Failure texts say what stopped the attempt (see "Eating and carrying"). Changing the words changed nothing else: at twelve
   checkpoints across seven runs `hashWorld` was identical, and the saved world differed only in those texts.
 
+### Stage 8 and what came with it
+
+* **Asking what someone could do changes nothing about them.** The card's "why didn't they take that?" list plans as the person
+  would, and three things the planner notes as it goes were being written for the onlooker too: the time a promise was last
+  held up, the wait before a request for a tool or a roof repair is thought of again, and a worry about a dependant nobody has
+  seen for a while. Merely opening a card could change what the world did next. A check that opens every card every 250 ticks
+  and compares the world with a twin that nobody looked at (`tests/purity.test.ts`) fails on the version before this, at tick
+  2,500 of `meadow` (a promise's "held up at" went from 2,483 to 2,500); the inspector's audit now runs with `ctx.observer` set
+  and the three notes are not made. People deciding for themselves are unchanged: at twelve checkpoints (five ordinary worlds
+  at ticks 6,000 and 24,000; harsh `heath` at 15,000 and 30,000, with one death in it) the saved world was byte for byte the
+  one the version before produced. (`ctx.collect`, which also records what was ruled out, is not the flag for this: a person
+  deciding for themselves sets it too.)
+
 ## Staged scenes
 
 The ordinary seeded world is the demonstration of natural behaviour. Six small scenes are staged for watching one rule in

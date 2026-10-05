@@ -106,15 +106,17 @@ export function welfareOptions(ctx: Ctx): void {
   if (ctx.stage === 'child' || !workRules(world.settings.scene)) return;
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45 || ctx.criticals.length) return;
   const tm = traitMods(p);
-  // dependents that nobody has laid eyes on for a good while are worth a look
+  // dependents that nobody has laid eyes on for a good while are worth a look (the inspector asking works on a copy of what they
+  // are worried about, so that looking at them does not add a worry they would not otherwise have had yet)
+  const concerns = ctx.observer ? [...p.concerns] : p.concerns;
   for (const d of ctx.dependents) {
     const wh = p.whereabouts[d.id];
     const unseen = !wh || world.tick - wh.tick > 1100;
-    const known = p.concerns.some((c) => c.about === d.id);
-    if (unseen && !known && (p.cooldowns['check' + d.id] ?? 0) <= world.tick) p.concerns.push({ about: d.id, kind: 'missing', seen: world.tick - 600, src: 'seen', from: p.id, checked: -99999 });
+    const known = concerns.some((c) => c.about === d.id);
+    if (unseen && !known && (p.cooldowns['check' + d.id] ?? 0) <= world.tick) concerns.push({ about: d.id, kind: 'missing', seen: world.tick - 600, src: 'seen', from: p.id, checked: -99999 });
   }
-  if (p.concerns.length > MAX_CONCERNS) p.concerns.length = MAX_CONCERNS;
-  for (const c of p.concerns) {
+  if (concerns.length > MAX_CONCERNS) concerns.length = MAX_CONCERNS;
+  for (const c of concerns) {
     const subject = personById(world, c.about);
     if (!subject || !subject.alive) continue;
     if ((p.cooldowns['check' + c.about] ?? 0) > world.tick) {
