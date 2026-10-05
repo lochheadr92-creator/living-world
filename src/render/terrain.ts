@@ -39,7 +39,35 @@ export interface View {
 const WEAR_BANDS = 8;
 const WEAR_MAX = 0.56;
 
+/**
+ * Which ground spills over which at a border: grass over forest floor over stone over sand. Water is 0: it is never overlapped
+ * (its shore has its own foam) and never overlaps. The ranking only decides which side's colour reaches across; the border itself
+ * stays exactly where the terrain types change, because that line decides where carts and people can go.
+ */
+const RANK = [0, 0, 1, 4, 3, 2] as const; // indexed by terrain type: DEEP SHALLOW SAND GRASS FOREST STONY
+const LOBE_BUCKETS = 6;
+/** measured: drawn at zoom 0.5, where there are the most borders in view and the lobes are only 2-4px, they nearly doubled the frame */
+const EDGE_MIN_ZOOM = 0.8;
+const LOBES_PER_EDGE = 3;
+
+/** the four borders of a tile: the neighbour across, the edge's two ends (from the tile's top vertex) and its direction and outward normal */
+const EDGES = [
+  { dx: 1, dy: 0, x0: 32, y0: 16, x1: 0, y1: 32 },
+  { dx: 0, dy: 1, x0: -32, y0: 16, x1: 0, y1: 32 },
+  { dx: -1, dy: 0, x0: 0, y0: 0, x1: -32, y1: 16 },
+  { dx: 0, dy: -1, x0: 0, y0: 0, x1: 32, y1: 16 },
+].map((e) => {
+  const ex = e.x1 - e.x0;
+  const ey = e.y1 - e.y0;
+  const len = Math.hypot(ex, ey);
+  const mx = (e.x0 + e.x1) / 2;
+  const my = (e.y0 + e.y1) / 2 - 16; // from the tile's centre to the middle of this edge
+  const ml = Math.hypot(mx, my);
+  return { ...e, ex, ey, tx: ex / len, ty: ey / len, nx: mx / ml, ny: my / ml };
+});
+
 export class TerrainPainter {
+  private lobePaths: (Path2D | undefined)[] = [];
   private wearPaths: (Path2D | undefined)[] = [];
   private tint: Float32Array;
   private world: World;
@@ -171,6 +199,8 @@ export class TerrainPainter {
 
     // pass 1: ground tiles (and the worn earth over them)
     const wearPaths = this.wearPaths;
+    const lobePaths = this.lobePaths;
+    const edges = z >= EDGE_MIN_ZOOM; // below this the lobes would be sub-pixel, and a wide view is the costliest to draw
     for (let y = b.y0; y <= b.y1; y++) {
       for (let x = b.x0; x <= b.x1; x++) {
         const sx = (x - y) * 32;
@@ -193,6 +223,37 @@ export class TerrainPainter {
         ctx.lineTo(sx - 32.9, sy + 16);
         ctx.closePath();
         ctx.fill();
+        // ragged edges: where this ground meets a lower-ranked ground, a few small lobes of it spill across the border
+        if (edges) {
+          const rank = RANK[type];
+          for (let e = 0; e < 4; e++) {
+            const ed = EDGES[e];
+            const nx = x + ed.dx;
+            const ny = y + ed.dy;
+            if (nx < 0 || ny < 0 || nx >= W || ny >= world.H) continue;
+            const under = RANK[world.terrain[ny * W + nx]];
+            if (under === 0 || rank <= under) continue; // water is never overlapped; equal or higher ground is not either
+            const bucket = type * LOBE_BUCKETS + Math.min(LOBE_BUCKETS - 1, Math.floor((k * LOBE_BUCKETS) / LAND_STEPS));
+            const path = (lobePaths[bucket] ??= new Path2D());
+            for (let j = 0; j < LOBES_PER_EDGE; j++) {
+              const h0 = hashUnit(x * 4 + e, y, 200 + j);
+              if (h0 < 0.22) continue; // gaps keep the edge irregular
+              const u = (j + 0.5) / LOBES_PER_EDGE + (hashUnit(x * 4 + e, y, 210 + j) - 0.5) * 0.2;
+              const a = 4.2 + hashUnit(x * 4 + e, y, 220 + j) * 3.6; // half-length along the border
+              const d = 1.6 + hashUnit(x * 4 + e, y, 230 + j) * 3; // how far it reaches over
+              const bx = sx + ed.x0 + ed.ex * u;
+              const by = sy + ed.y0 + ed.ey * u;
+              for (let s = 0; s <= 6; s++) {
+                const th = (Math.PI * s) / 6;
+                const lx = bx + ed.tx * Math.cos(th) * a + ed.nx * Math.sin(th) * d;
+                const ly = by + ed.ty * Math.cos(th) * a + ed.ny * Math.sin(th) * d;
+                if (s === 0) path.moveTo(lx, ly);
+                else path.lineTo(lx, ly);
+              }
+              path.closePath();
+            }
+          }
+        }
         // wear (desire paths): collected by strength, so tiles that abut merge into one trodden patch instead of a lattice
         const wr = world.wear[i];
         if (wr > 0.06) {
@@ -205,6 +266,15 @@ export class TerrainPainter {
           path.closePath();
         }
       }
+    }
+    for (let bucket = 0; bucket < lobePaths.length; bucket++) {
+      const path = lobePaths[bucket];
+      if (!path) continue;
+      const type = Math.floor(bucket / LOBE_BUCKETS) as 2 | 3 | 4 | 5;
+      const band = bucket % LOBE_BUCKETS;
+      ctx.fillStyle = PAL[type][Math.min(LAND_STEPS - 1, Math.floor(((band + 0.5) * LAND_STEPS) / LOBE_BUCKETS))];
+      ctx.fill(path);
+      lobePaths[bucket] = undefined;
     }
     for (let band = 0; band < WEAR_BANDS; band++) {
       const path = wearPaths[band];
