@@ -130,7 +130,10 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
 The inspector answers the five questions for any person: *what are they doing, why did they choose it, what are they
 trying to achieve, what is stopping them, and what happened after their last attempt* — and lists nearby opportunities
 with the reason each was not taken: **unaware** (never seen or heard of), **blocked** (missing a prerequisite),
-**passed over** (preferred something else, with the scores), **failed before**, or simply **not needed**.
+**passed over** (preferred something else, with the scores), **failed before**, or simply **not needed**. When a choice rests
+on someone else's word, the reason says whose, and how old the sighting was ("on Ana's word, seen 1.2 min ago"); and when a
+place someone was heading for comes into view with nothing there, they remember it ("The berry bush Ana had described (about
+6, 1.2 min old) was bare when I got close.").
 
 A person's card also shows the tools they carry and how worn they are, their promises and how the earlier ones ended, the
 conversation they are in and — kept apart — the last one, a shared meal they are hosting or have said yes to and the last
@@ -138,6 +141,20 @@ one, who they are worried about and why, and who they are still sore at. A workp
 is under way and by whom, what is on its shelves, and — for anything that is not being made — what is missing. A building
 site shows the materials that have arrived, the ones it is waiting for, and the work done. Parts with nothing to show stay
 hidden.
+
+When a site has stood waiting for materials for half a minute or more, or an idle workplace is short of an input for
+something people are waiting on, its card adds a line marked **For the observer**: where the missing thing really is — how
+much is carried and by how many, which buildings and heaps hold it, where it is made and whether that place is busy or what
+is stopping it, where it can be gathered, and how many people know of a place to get it. Nobody in the world knows what that
+line says, and it never feeds back into anything they do.
+
+A grave says what they died of and, for the newest forty deaths, what they were about at the end: their needs, what they were
+carrying, what they were doing and why, how their last attempt ended, what they had wanted to do but could not, how often wolves
+had bitten them (as far as they still remembered), the nearest water they knew of, and their last memories. It is copied at the
+moment of death from what the person themselves knew, kept in the saved world, and never read by anyone in it. The feed says it in a
+clause: "Sven died (thirst, after 3 wolf bites)". News of a death travels like any news: those who see it know at once; anyone else
+learns by coming upon the grave or by being told, and only then do those who loved the person grieve, and go to stand at the
+grave, once.
 
 The speed buttons say two things: the speed you asked for and the speed actually achieved over the last couple of seconds.
 If the page cannot keep up, or stalled and the clock gave up on some world time, the bar says so (amber, with the number of
@@ -157,6 +174,11 @@ of spontaneous behaviour. Nobody in them is told what to do.
 | A shared meal | a host with food, two friends, the hall at the end of the afternoon |
 | A handcart load | bricks and planks in a store far from the house that wants them; a cart by the house |
 | Looking after a frail neighbour | an old man hungry in his lean-to, out of sight; a neighbour who earlier saw how he looked |
+| A death in the settlement | an old woman has just died; her daughter was beside her, a stranger passing, her friend and her son out of sight (see below) |
+
+In *A death in the settlement* the death is the staged part. Her daughter knows at once and goes to stand at the grave; the
+stranger who saw it does nothing, because he did not know her; her friend and her son, out of sight, know nothing until they come
+upon the grave or are told, and then each goes once. Open a person's card to read their own memory of it.
 
 The ordinary seeded world is the demonstration of natural behaviour.
 
@@ -205,7 +227,8 @@ the same thing in the same tick the winner is the same every run.
 ## Verification
 
 `npm test` covers: determinism (same seed ⇒ same state; inspecting never perturbs it; saved and reloaded worlds carry on
-identically, including a cart on the road), resource conservation (gathering, transfers, eating, renewal, crop growth,
+identically, including a cart on the road, and a world saved half way and carried on is the same world, byte for byte, as one
+that was never saved), resource conservation (gathering, transfers, eating, renewal, crop growth,
 construction, batches, waste, spoilage, carts, meal tables, long natural runs), contested last items and exclusive claims,
 reservation release on interruption/death/long runs, locality of knowledge (including a whole-run audit that every
 targeted place was known, and that news keeps its source and age), social requests causing real transfers, refusals,
@@ -221,9 +244,15 @@ Headless tools: `npm run census -- <seed> <days> [harsh] [-v]` prints a periodic
 chains develop; `vite-node scripts/invariants.ts <seed> <days> [harsh]` audits a long run (books, tool records, claims,
 promises, carts, meal tables); `vite-node scripts/audit_far.ts` checks that nobody works at a distance;
 `vite-node scripts/find_moments.ts <seed> <days>` lists the first examples of each kind of event in a run;
+`vite-node scripts/sweep.ts [seed,seed,…] [days] [harsh]` runs sixteen ordinary seeds (or the ones named) for 30 days and lists
+every death with its cause and day, and anyone sealed in (twice a day, six or fewer tiles they could walk to within 8);
+`vite-node scripts/compare_baseline.ts [label label [keys]]` prints two recorded baselines side by side;
 `npm run playback -- <url> [result.json]` (after `npm run build && npm run preview`) drives a headless Chrome over the DevTools
 protocol and measures, with a real animation loop, the speed achieved at each setting, what a stalled page costs and how the
-speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`); and
+speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`);
+`node scripts/browser/presentation.mjs <url> [result.json]` measures in the same page how many of the effects the world logs
+become particles and how many ticks the person card lags the picture at 1×, 4× and 16×, and checks that the page's state hash
+equals that of a world stepped to the same tick without ever being drawn; and
 `scripts/*.ts` has the traces used while tuning (`multi.ts a,b,c 12` runs several seeds and reports deaths and ledger
 balance; `death.ts` and `trace.ts` follow whoever dies and why). [`docs/BASELINE.md`](docs/BASELINE.md) records what a
 fixed ordinary world did before and after this work.

@@ -1,5 +1,6 @@
 // The inspector panel (right side). A thin shell that decides what to show for the current selection,
-// slides in when something is selected, remembers when it was hidden, and refreshes the content at ~4 Hz.
+// slides in when something is selected, remembers when it was hidden, and refreshes the content at ~4 Hz (every frame at 4×
+// and faster, so the card keeps up with the picture).
 // Content comes only from the read-only view-models in sim/inspect.ts.
 import { describeEntity, describeEntityName, describePerson } from '../sim/inspect';
 import { Every, h, setAttr, setBool, setHidden, setText } from './dom';
@@ -158,6 +159,7 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
     if (!force && world.tick === lastTick) return; // paused and nothing changed
     force = false;
     lastTick = world.tick;
+    wrap.dataset.tick = String(lastTick); // which moment the panel shows (read by the automated browser check)
 
     if (mode === 'person') {
       const v = describePerson(world, id, { opportunities: person.wantsOpportunities() });
@@ -206,8 +208,10 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
 
   return {
     update(dt) {
-      // nothing to keep fresh while the panel is tucked away
-      if (slow.step(dt) && open) refresh();
+      // nothing to keep fresh while the panel is tucked away. At 4× and faster a quarter-second timer leaves the card many
+      // ticks behind the picture, so then it is refreshed every frame (refresh returns at once unless the world has moved on)
+      const due = slow.step(dt);
+      if (open && (due || (game.playing && game.speed >= 4))) refresh();
     },
     onGame(e) {
       switch (e) {

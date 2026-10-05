@@ -28,7 +28,7 @@ decided to supply it; a plank exists because somebody turned wood into it; a mea
 | Looking after one another | `sim/welfare.ts` | |
 | Not letting work strand anyone from water or food | `sim/relief.ts` | wired into `rankOptions` |
 | Fixed-step clock, stalls, requested/achieved speed | `app/game.ts` | |
-| Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | |
+| Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | `whereItemIs`: the observer's note on where a missing thing is (world truth, labelled as such, never read by the simulation) |
 
 ## The chains
 
@@ -76,7 +76,9 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
 ## Workplaces
 
 * **Location.** Workplaces are laid out on free dry land the planner's person has seen, not against water, near the camp
-  (kiln and smithy a little further out). A **quarry** is always laid out beside a known stone outcrop; its batches cut
+  (kiln and smithy a little further out). No building of any kind is laid out where, once its footprint is filled in, its
+  doorway could not be walked to from the camp (or the household's home) and from where the planner stands: such a spot is
+  passed over for the next best. A **quarry** is always laid out beside a known stone outcrop; its batches cut
   stone out of that outcrop and nowhere else. A **house** is not a new building: it is the owner's hut rebuilt *in place*
   (the same building object, the same footprint and household, still lived in while the work goes on, store and contents
   intact).
@@ -184,7 +186,7 @@ Time asleep or spent seeing to survival does not count against the deadline. A p
 | **expired** | time ran out with some of it done | +2.5·fraction − 0.5 warmth, +4·fraction − 1 trust | none |
 | **moot** | the building was finished or given up, the roof was mended by someone else, the other person is gone | none | none |
 | **interrupted** | put aside for their own survival until it was too late | −1 trust, −0.4 warmth | none |
-| **failed** | proved impossible (no stock, nothing known, the site was waiting on something they could not supply) | −2 trust, −0.6 warmth | none |
+| **failed** | proved impossible (no stock, nothing known, the site was waiting on something they could not supply, a full pack with nowhere to put things down) | −2 trust, −0.6 warmth | none |
 | **broken** | the maker was free and capable and did nothing | −12 trust, −5 warmth | opens "broken promise" |
 
 A **refusal** is not a broken promise: it costs a little warmth in proportion to how much was at stake (−1.5…−6 warmth, up
@@ -196,7 +198,11 @@ may be full); work and deliveries toward the site, including the sawing of the p
 with it.
 
 News is carried in conversation and keeps its **provenance**: the person who first saw it, how many mouths it has passed
-through, and the time of the original sighting (a told belief is never made fresher by being told).
+through, and the time of the original sighting (a told belief is never made fresher by being told). Someone who sets out on
+hearsay gives it as part of their reason. Anyone heading for a natural source (a bush, a tree, a fishing spot, a clay pit…)
+where what they saw or were told led them to expect something, who sees it empty as they come near, puts the disappointment
+into their own memory (their log) — not into the record of failed attempts the planners consult, which only an attempt of
+their own writes.
 
 ## Shared meals
 
@@ -218,6 +224,34 @@ themselves, and knows roughly where to go. On arrival they look: if help is need
 is dropped and that person is not checked on again for a long while; if they are not there, the old place is forgotten and the
 worry softened. Nobody knows of an injury, a hunger or a death that no one has seen or told them of.
 
+## Death and grief
+
+When someone dies, the world keeps a **death record** (about half a kilobyte, for the newest forty deaths; older graves keep
+the name, age and cause): what they were about at the end, copied from state that is otherwise thrown away — needs, pack, task
+and the reason they gave for it, how their last attempt ended, up to three things they could not do and why, how many wolf
+bites they still remembered, the nearest water they believed in (and how far from where they fell), and their last three
+memories. It is shown on the grave card and, in a clause, in the feed ("died (thirst, after 3 wolf bites)"). It is **saved with
+the world** (so a loaded save explains a death exactly as it did) and **never read by anyone in it**: it is for the observer.
+
+**Who learns of a death, and how.** Only the ways anything is learned. Those within sight of the person when they die know at
+once, and know what they died of. Anyone who later comes upon the grave learns that the person has died, but not of what: a grave
+does not say. And a death is **news** (told for a day and a half after the teller learned of it, to whoever has not heard,
+alongside the other news in a conversation, with its own words: "Have you heard? Ana has died."); the cause goes with it if the
+teller knew it. Whoever learns of it and was **kin, or had an affinity of 45 or more**, feels it: company −24, safety −8, and a
+line in their own memory in the words they learned it by ("Ana died (old age).", "Bea told me that Ana had died.", "I came upon
+Ana's grave: they had died."). To anyone else a grave is a name on a marker, and they learn nothing more from it. A death that
+nobody sees and nobody speaks of is not known to the people who loved the one who died, however fond they were and however long
+it has been: it used to reach every one of them at the moment it happened, wherever they were.
+
+**Standing at a grave.** Someone who has learned of a death and was kin, or close (an affinity of 45 or more), goes to the grave
+and stands there for about a second of real time (10 ticks), **once**: a company of 10 comes back, a line goes into their own
+memory ("Stood at Ana's grave for a while.") and one into the feed ("Bea stood at Ana's grave."). It is what they do with the
+news, not a chore, so it **waits while anything presses** (hunger, thirst or tiredness, the dark, wolves about the grave), is
+**held back like any other discretionary trip** by the survival guard if it would leave them too far from water or food, is not
+made to a grave more than 700 ticks' walk away, and **lapses for good five days after they learned of it**. Whether they have been is written on the
+person (`visitedGraves`, by the id of the person buried there), so a loaded save knows, and an interrupted walk that is picked
+up again is the same visit. A stranger, who saw the death or found the grave, has no such option.
+
 ## Quarrels
 
 A quarrel is a **grievance** with a cause (competition for something, scarcity while going hungry, a refusal when it mattered, a
@@ -238,6 +272,21 @@ A drink or a meal already under way is finished while it is still doing good unl
 danger and critical needs interrupt anything at once, and a promise put aside for survival is marked as such rather than as
 neglect.
 
+## Eating and carrying
+
+* **Eating at a store needs no room in the pack.** Someone eating from their home store, the storehouse or a heap takes what
+  fits into their pack and eats it; if nothing fits, they eat it where it is kept, a portion at a time, each portion booked
+  as eaten exactly as from a pack. A store is said to have no food, and passed over for a while, only when it has none.
+* **A promised pickup makes room first** (the rule Hearthvale calls R9). Someone who has promised to bring something they do
+  not yet hold, and whose pack cannot take it, first puts the heaviest load they carry that is not food, water, a tool or owed
+  to someone else down at their home or the storehouse, wherever they believe there is space, and then goes to fetch it. With
+  nowhere they know of to put it, no trip is made that could only end empty-handed, and the promise ends as one that could
+  not be kept because the pack was full (*failed*), not as one ignored (*broken*).
+* **A failure says what stopped it**: "my pack is full" (fetching water, harvesting, taking from storage), "what is there is
+  not ours to take" (a granary share or a workshop's stock that belongs to others), "there was nothing left to harvest", "they
+  had no room to carry it" or "I no longer had it to give" (handing something over). Before, a full pack was reported as an
+  empty store, an empty field, or nothing to take.
+
 ## The contested-claim rule
 
 People are stepped each tick in a rotating order `(i + tick) mod n`. Anything exclusive — one unit of a berry bush, a worker
@@ -257,7 +306,7 @@ depends only on the tick and the population, so a run is reproducible.
 | Spoilage | food in stores and heaps goes off at a recorded rate (granary: a fifth when tended); the loss is in the ledger |
 | A tool wears out | breaks; recorded; no record left behind |
 | A building collapses or is destroyed | store, running batch and racked tools become a heap of rubble |
-| A person dies | belongings, tools included, are dropped where they fell; promises are released; requests withdrawn; a meal they hosted is called off |
+| A person dies | belongings, tools included, are dropped where they fell; promises are released; requests withdrawn; a meal they hosted is called off; a grave is set with their name, cause and a record of their last hours; only those who see it, come upon the grave or are told learn of it (see "Death and grief") |
 | A cart's puller dies | the cart stays, load and all |
 
 ## Rule changes made on purpose (relative to the version before this work)
@@ -294,6 +343,24 @@ depends only on the tick and the population, so a run is reproducible.
   world with a cart on the road used to lose the cart on loading and now resumes exactly.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
+
+### Survival and legibility fixes (the latest changes)
+
+* **Eating at a store needs no room in the pack.** Before, someone whose pack had no room for food (a child with a brick and some
+  wood is full) was told the stocked store had "no food there" and passed it over for 400 ticks. In 30 ordinary days that was
+  how 54–68% of all attempts to eat from a store ended (meadow, river, fern and birch, at a median hunger of 46–50); in harsh
+  `ash` a child and an elder starved within a few tiles of stocked stores. Now none end that way.
+* **A promised pickup makes room first**, and a promise that cannot be kept for want of room ends *failed*, not *broken*. Both
+  promises broken in 30 days of `birch` were promises to bring water made by people with full packs (an adult carrying five
+  stones, a child carrying two pieces of wood), each of whom walked to the water and back about ten times with nothing to show.
+* **A new building never shuts its doorway in.** In `cedar` (default settings) Una marked out a quarry at t29,197 standing on
+  its doorway, in a gap between trees near the outcrop. Once the footprint was laid, the doorway and the tile beside it were
+  closed in by trees on every other side (two tiles, where a moment before some five thousand could be walked to), and she
+  died of thirst there on day 14. The spot is now checked before it is chosen: from a save made just before, under the new
+  rule she lays the quarry out at (25,44), about seven tiles away, always has at least 185 tiles she could walk to within 8
+  of where she stands (as `scripts/sweep.ts` counts), and lives.
+* Failure texts say what stopped the attempt (see "Eating and carrying"). Changing the words changed nothing else: at twelve
+  checkpoints across seven runs `hashWorld` was identical, and the saved world differed only in those texts.
 
 ## Staged scenes
 

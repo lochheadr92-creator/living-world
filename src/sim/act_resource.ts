@@ -221,6 +221,29 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
   return 'continue';
 }
 
+/** Eating straight out of a store or heap, a portion at a time (for someone with no room to take any out first). */
+function eatAtStoreTick(world: World, p: Person, a: Activity): WorkResult {
+  a.progress++;
+  if (a.progress < a.duration) return 'continue';
+  const e = world.byId.get(a.targetId);
+  const items = e && e.ent === 'building' ? e.store.items : e && e.ent === 'pile' ? e.items : null;
+  if (!e || !items) return a.cycle > 0 ? 'partial:the food store is gone' : 'fail:the food store is gone';
+  const k = a.data.food as FoodKind;
+  if (consume(world, items, k, 1, 'eaten') > 0) {
+    p.needs.hunger = clamp(p.needs.hunger + NUTRITION[k], 0, 100);
+    p.lastAteTick = world.tick;
+    a.cycle++;
+    addFx(world, 'eat', p.x, p.y, 0);
+  }
+  observe(world, p, e);
+  const next = pickFood(items, p.needs.hunger);
+  if (!next || p.needs.hunger >= 88) return a.cycle > 0 ? 'done' : 'fail:the last of the food was taken before I could eat';
+  a.data.food = next;
+  a.progress = 0;
+  a.duration = WORK.eat;
+  return 'continue';
+}
+
 registerHandler('eat', {
   availability: 0.55,
   pose: () => 'eat',
@@ -256,8 +279,16 @@ registerHandler('eat_store', {
       a.cycle++;
     }
     if (!tookAny) {
-      noteFailure(world, p, a.targetId, 'no food there');
-      return 'there is no food there';
+      // a full pack must not mean going hungry beside food: whoever cannot take any out eats it where it is kept
+      const k = pickFood(items, p.needs.hunger);
+      if (!k) {
+        noteFailure(world, p, a.targetId, 'no food there');
+        return 'there is no food there';
+      }
+      a.data.atStore = true;
+      a.data.food = k;
+      a.duration = WORK.eat;
+      return;
     }
     observe(world, p, e);
     a.cycle = 0;
@@ -267,7 +298,7 @@ registerHandler('eat_store', {
     a.duration = WORK.eat;
     a.data.keep = 0;
   },
-  work: (world, p, a) => eatTick(world, p, a),
+  work: (world, p, a) => (a.data.atStore ? eatAtStoreTick(world, p, a) : eatTick(world, p, a)),
   onEnd(world, p, a, outcome, detail) {
     if (outcome === 'success') addLog(world, p, 'need', 'Ate a meal from the stores.');
   },
@@ -362,7 +393,7 @@ registerHandler('fetch_water', {
     a.progress++;
     if (a.progress < a.duration) return 'continue';
     const got = produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
-    if (got <= 0) return a.cycle > 0 ? 'partial:cannot carry more' : 'fail:cannot carry more';
+    if (got <= 0) return a.cycle > 0 ? 'partial:my pack is full' : 'fail:my pack is full';
     addFx(world, 'splash', a.data.wx, a.data.wy, 0);
     a.cycle++;
     a.progress = 0;
@@ -540,12 +571,19 @@ registerHandler('withdraw', {
     if (!c) return 'fail:the place is gone';
     const want = (a.data.items ?? {}) as Record<string, number>;
     let moved = 0;
+    // why nothing came out, when nothing did: it was there but not theirs to take, or there was no room to carry it
+    let notOurs = false;
+    let noRoom = false;
     const e = world.byId.get(a.targetId);
     for (const k of Object.keys(want)) {
       let n = want[k];
       if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n);
-      if (n <= 0) continue;
+      if (n <= 0) {
+        if ((c.items[k as ItemKind] ?? 0) > 0) notOurs = true;
+        continue;
+      }
       const m = transfer(world, c.items, p.inv, carryCap(world, p), k as ItemKind, n, c.kind + ':' + a.targetId, 'person:' + p.id, 'withdraw');
+      if (m <= 0 && (c.items[k as ItemKind] ?? 0) > 0) noRoom = true;
       moved += m;
       if (m > 0 && e && e.ent === 'building') {
         noteWithdraw(world, e, p, k as ItemKind, m);
@@ -554,8 +592,9 @@ registerHandler('withdraw', {
     }
     if (e) observe(world, p, e);
     if (moved === 0) {
-      noteFailure(world, p, a.targetId, 'nothing there to take');
-      return 'fail:there was nothing to take';
+      const why = noRoom ? 'my pack is full' : notOurs ? 'what is there is not ours to take' : 'there was nothing to take';
+      noteFailure(world, p, a.targetId, why);
+      return `fail:${why}`;
     }
     a.cycle = moved;
     return 'done';

@@ -1168,6 +1168,7 @@ function phaseNews(world: World, S: Person, L: Person): void {
       if (!shown && !S.speech) {
         shown = true;
         if (b.kind === 'danger') bubble(world, S, D.saying(D.WARN_LINES, S.id, L.id, world.tick >> 5, { dir: D.dangerWords(world, b) }), 'warn', 62);
+        else if (b.kind === 'grave') bubble(world, S, D.deathLine(b, S.id, L.id, world.tick), 'say', 70);
         else bubble(world, S, D.infoLine(world, b, S.id, L.id), 'say', 66);
       }
     }
@@ -1440,14 +1441,16 @@ registerHandler('give', {
     t.cooldowns.pause = 0;
     t.cooldowns.fedUntil = world.tick + 120; // let them eat before anyone else fusses over them
     if (moved <= 0) {
+      // either the giver no longer had any of it, or the other person had no room for it
+      const had = Object.keys(want).some((k) => (p.inv[k as ItemKind] ?? 0) > 0);
       if (a.data.commitmentId) {
         const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));
         if (cm) {
-          cm.blocked = `${t.name} had no room in their pack for it`;
+          cm.blocked = had ? `${t.name} had no room in their pack for it` : 'they no longer had it to give';
           cm.blockedAt = world.tick;
         }
       }
-      return 'fail:they had no room to carry it';
+      return had ? 'fail:they had no room to carry it' : 'fail:I no longer had it to give';
     }
     a.cycle = moved;
     // being handed food or water wakes a sleeper

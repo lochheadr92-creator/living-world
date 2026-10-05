@@ -8,6 +8,7 @@ import { isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { wantsAmends } from './grievance';
 import { mealOptions } from './meals';
+import { griefOptions } from './grief';
 import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
@@ -433,6 +434,7 @@ function optTrade(ctx: Ctx): void {
 export function socialOptions(ctx: Ctx): void {
   mealOptions(ctx);
   welfareOptions(ctx);
+  griefOptions(ctx);
   optRequest(ctx);
   optAskInfo(ctx);
   optWarn(ctx);

@@ -29,7 +29,7 @@ const SCENE_WORDS: Partial<Record<SceneId, { title: string; blurb: string }>> = 
 };
 
 /** the order scenes are listed in; one the simulation has no label for yet is left out */
-const SCENE_ORDER: SceneId[] = ['natural', 'contest', 'help', 'cooperate', 'workshop', 'meal', 'haul', 'care'];
+const SCENE_ORDER: SceneId[] = ['natural', 'contest', 'help', 'cooperate', 'workshop', 'meal', 'haul', 'care', 'grief'];
 
 /** A scene the menu has no wording for is listed from its own label: "TEST SCENE · Name — what happens (staged)". */
 function sceneWords(id: SceneId): { title: string; blurb: string } | null {

@@ -171,6 +171,7 @@ registerHandler('harvest', {
     a.progress++;
     if (a.progress % 14 === 7) addFx(world, 'pick', a.tx, a.ty, 0);
     if (a.progress < a.duration) return 'continue';
+    const had = plot.stock + plot.seedStock;
     const got = harvestPlot(world, plot, p);
     a.cycle = got.grain + got.seeds;
     p.stats.farmed++;
@@ -183,7 +184,7 @@ registerHandler('harvest', {
     a.data.grain = got.grain;
     a.data.seeds = got.seeds;
     observe(world, p, plot);
-    return got.grain + got.seeds > 0 ? 'done' : 'fail:cannot carry any more';
+    return got.grain + got.seeds > 0 ? 'done' : had > 0 ? 'fail:my pack is full' : 'fail:there was nothing left to harvest';
   },
   onEnd(world, p, a, outcome) {
     if (outcome === 'success') {

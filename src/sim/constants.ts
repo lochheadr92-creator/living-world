@@ -286,7 +286,7 @@ export const homeNoun = (t: string | undefined): string => (t === 'house' ? 'hou
 export const isSolidHome = (t: string | undefined): boolean => t === 'hut' || t === 'house';
 
 /** scenes in which the workshop, meal and care planners are on (the original staged scenes keep them off so they stay focused) */
-export const workRules = (scene: string): boolean => scene === 'natural' || scene === 'workshop' || scene === 'meal' || scene === 'haul' || scene === 'care';
+export const workRules = (scene: string): boolean => scene === 'natural' || scene === 'workshop' || scene === 'meal' || scene === 'haul' || scene === 'care' || scene === 'grief';
 
 export const FIRE_FUEL_PER_WOOD = 380;
 export const FIRE_MAX_FUEL = 2400;
@@ -438,6 +438,8 @@ export const PREGNANCY_TICKS = Math.round(0.75 * TICKS_PER_YEAR);
 export const BIRTH_SPACING_TICKS = Math.round(1.5 * TICKS_PER_YEAR);
 /** chance per year that a settled, well-fed couple conceives (once the spacing has passed) */
 export const CONCEPTION_PER_YEAR = 0.5;
+/** the newest deaths whose last hours are kept (about half a kilobyte each); older ones keep only name, age and cause */
+export const DEATH_RECORDS_KEPT = 40;
 
 // ── decisions ──
 export const REVIEW_EVERY = 45;

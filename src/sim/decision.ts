@@ -1,6 +1,6 @@
 import { endActivity, startActivity } from './activities';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
-import { noteFailure, countBeliefs } from './knowledge';
+import { ageText, noteFailure, countBeliefs, personName } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
 import type { Ctx, Option } from './optutil';
@@ -61,10 +61,16 @@ export function rankOptions(ctx: Ctx): Option[] {
   return scored.map((x) => x.o);
 }
 
-function because(o: Option): string {
-  if (!o.parts.length) return o.goal;
-  const top = [...o.parts].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
-  return top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');
+function because(world: World, p: Person, o: Option): string {
+  let why = o.goal;
+  if (o.parts.length) {
+    const top = [...o.parts].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
+    why = top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');
+  }
+  // going on somebody's word: say whose, and how old the sighting was
+  const b = o.targetId ? p.beliefs[o.targetId] : undefined;
+  if (b && b.src === 'told') why += ` · on ${personName(world, b.from)}’s word, seen ${ageText(world, b.seen)} ago`;
+  return why;
 }
 
 function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string): void {
@@ -79,7 +85,7 @@ function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Opt
     considered: ctx.options.length,
     knownPlaces: countBeliefs(p),
     seenNow: p.seen.length,
-    because: chosen ? because(chosen) : 'nothing to do',
+    because: chosen ? because(world, p, chosen) : 'nothing to do',
   };
 }
 
@@ -94,7 +100,7 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
       continue;
     }
     act.data.optKey = o.key;
-    act.data.why = because(o);
+    act.data.why = because(world, p, o);
     record(world, p, ctx, ranked, o, trigger);
     startActivity(world, p, act);
     return true;
@@ -158,7 +164,7 @@ export function reviewActivity(world: World, p: Person): void {
     if (!act) return;
     const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : 'something better came up';
     act.data.optKey = best.key;
-    act.data.why = because(best);
+    act.data.why = because(world, p, best);
     record(world, p, ctx, ranked, best, danger ? 'danger' : criticalMismatch ? 'urgent need' : 'review');
     if (danger || criticalMismatch) markSetAside(world, p);
     // being driven off from a place is remembered, so the same trip is not repeated at once

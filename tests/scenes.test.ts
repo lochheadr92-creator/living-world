@@ -84,7 +84,7 @@ describe('the staged test scenes', () => {
 
   it('are deterministic: the same scene twice gives the same world', async () => {
     const { hashWorld } = await import('../src/sim/world');
-    for (const id of ['workshop', 'meal', 'haul', 'care'] as SceneId[]) {
+    for (const id of ['workshop', 'meal', 'haul', 'care', 'grief'] as SceneId[]) {
       const a = scene(id);
       const b = scene(id);
       run(a, 800);

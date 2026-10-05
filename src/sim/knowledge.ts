@@ -1,6 +1,8 @@
 import { SOURCE_REGROW } from './constants';
 import { cloneItems } from './economy';
+import { addLog } from './events';
 import { facilitySnapshot } from './facilities';
+import { BELIEF_NOUN } from './labels';
 import { toolsHeldBy } from './toolreg';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
 
@@ -70,7 +72,15 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       return b;
     }
     case 'grave': {
-      return blank(e.id, 'grave', e.x + 0.5, e.y + 0.5, tick);
+      const b = blank(e.id, 'grave', e.x + 0.5, e.y + 0.5, tick);
+      if (e.personId) {
+        b.who = e.personId;
+        b.name = e.name;
+        b.died = e.died;
+        // a grave does not say what someone died of: only those who were there when it happened know
+        if (e.cause && world.tick - e.died < 40) b.cause = e.cause;
+      }
+      return b;
     }
     case 'animal': {
       const b = blank(e.id, 'danger', e.x, e.y, tick);
@@ -138,7 +148,63 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if (!b) return false;
   b.origin = p.id;
   b.hops = 0;
-  return learn(p, b);
+  noteLetDown(world, p, b);
+  const isNew = learn(p, b);
+  if (isNew && b.kind === 'grave') learnOfDeath(world, p, b, null);
+  return isNew;
+}
+
+/**
+ * Learning that someone has died: by being there, by coming upon their grave, or by being told. Only those who knew them and
+ * were close (kin, or an affinity of 45 or more) feel it; to anyone else a grave is a name on a marker. This is the only way
+ * grief reaches anybody: a death nobody saw and nobody has spoken of is not known to the people who loved the one who died.
+ */
+export function learnOfDeath(world: World, q: Person, grave: Belief, teller: Person | null): void {
+  if (grave.kind !== 'grave' || !grave.who) return;
+  const r = q.relations[grave.who];
+  if (!r || !(r.kin || r.affinity >= 45)) return;
+  q.needs.social = Math.max(0, q.needs.social - 24);
+  q.needs.safety = Math.max(0, q.needs.safety - 8);
+  const name = grave.name ?? 'someone';
+  const of = grave.cause ? ` (${grave.cause})` : '';
+  addLog(world, q, 'life', teller ? `${teller.name} told me that ${name} had died${of}.` : grave.cause ? `${name} died${of}.` : `I came upon ${name}’s grave: they had died.`);
+  if (!teller && Math.hypot(q.x - grave.x, q.y - grave.y) < 14) q.speech = { text: '…', until: world.tick + 120, kind: 'think' };
+}
+
+/** A person's name, alive or not (for memories of who said what). */
+export function personName(world: World, id: number): string {
+  const e = world.byId.get(id);
+  return e && e.ent === 'person' ? e.name : (world.deceased.find((d) => d.id === id)?.name ?? 'someone');
+}
+
+/** How long ago a tick was, counted as the inspector counts it (at 1×, 10 ticks a second and 600 a minute; then days). */
+export function ageText(world: World, tick: number): string {
+  const d = Math.max(0, world.tick - tick);
+  if (d < 600) return `${Math.round(d / 10)}s`;
+  if (d < 36000) return `${(Math.round(d / 60) / 10).toFixed(1)} min`;
+  return `${Math.round(d / 2400)} days`;
+}
+
+/**
+ * Expectation against outcome: the place a person is on the way to comes into view with nothing there, where what they had
+ * seen or been told led them to expect some. Kept in their own memory only; it changes nothing they decide (failures are
+ * left alone). Arrival is not a sighting: whoever first sees it on arriving is told so by the work itself.
+ */
+function noteLetDown(world: World, p: Person, now: Belief): void {
+  const old = p.beliefs[now.id];
+  const a = p.activity;
+  // (sources only: a bush, a tree, a fishing spot… — the kinds of belief whose amount is a count of what can be taken)
+  if (!old || !a || a.targetId !== now.id || a.phase !== 'travel' || !(now.kind in SOURCE_REGROW) || now.amount >= 1) return;
+  const expected = estimatedAmount(world, old);
+  if (expected < 1) return;
+  // a place in view is looked at every few ticks, so one that empties then was seen going, not remembered wrongly ("just now",
+  // under 4 s, as the inspector puts it)
+  const told = old.src === 'told';
+  const fresh = world.tick - old.seen < 40;
+  const who = told ? `${personName(world, old.from)} had described` : fresh ? 'I had just seen' : 'I remembered';
+  const age = !told && fresh ? '' : `, ${ageText(world, old.seen)} old`;
+  const bare = now.kind === 'berry_bush' || now.kind === 'fruit_tree' || now.kind === 'wild_grain' ? 'was bare' : 'had nothing left to take';
+  addLog(world, p, 'work', `The ${BELIEF_NOUN[now.kind]} ${who} (about ${Math.round(expected)}${age}) ${bare} when I got close.`);
 }
 
 /** People understand roughly how fast things regrow, so a stale "empty" memory slowly turns hopeful. */
