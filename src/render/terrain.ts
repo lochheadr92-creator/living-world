@@ -49,6 +49,8 @@ const LOBE_BUCKETS = 6;
 /** measured: drawn at zoom 0.5, where there are the most borders in view and the lobes are only 2-4px, they nearly doubled the frame */
 const EDGE_MIN_ZOOM = 0.8;
 const LOBES_PER_EDGE = 3;
+/** shore foam surges in and out in this many phase groups */
+const FOAM_PHASES = 4;
 
 /** the four borders of a tile: the neighbour across, the edge's two ends (from the tile's top vertex) and its direction and outward normal */
 const EDGES = [
@@ -71,6 +73,8 @@ export class TerrainPainter {
   private wearPaths: (Path2D | undefined)[] = [];
   private tint: Float32Array;
   private tuft: Float32Array;
+  /** water tiles that touch land */
+  private shore: Uint8Array;
   private world: World;
   private seedNum: number;
 
@@ -80,6 +84,20 @@ export class TerrainPainter {
     const { W, H } = world;
     this.tint = new Float32Array(W * H);
     this.tuft = new Float32Array(W * H);
+    this.shore = new Uint8Array(W * H);
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const t = world.terrain[y * W + x];
+        if (t !== T.SHALLOW && t !== T.DEEP) continue;
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const nx = x + dx;
+          const ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          const nt = world.terrain[ny * W + nx];
+          if (nt !== T.SHALLOW && nt !== T.DEEP) this.shore[y * W + x] = 1;
+        }
+      }
+    }
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const big = fbm(x / 9, y / 9, this.seedNum + 41, 3);
@@ -205,7 +223,7 @@ export class TerrainPainter {
     // pass 1: ground tiles (and the worn earth over them)
     const wearPaths = this.wearPaths;
     const lobePaths = this.lobePaths;
-    const edges = z >= EDGE_MIN_ZOOM; // below this the lobes would be sub-pixel, and a wide view is the costliest to draw
+    const rough = z >= EDGE_MIN_ZOOM; // below this the lobes would be sub-pixel, and a wide view is the costliest to draw
     for (let y = b.y0; y <= b.y1; y++) {
       for (let x = b.x0; x <= b.x1; x++) {
         const sx = (x - y) * 32;
@@ -218,7 +236,9 @@ export class TerrainPainter {
         let k: number;
         if (type === T.DEEP || type === T.SHALLOW) {
           const wave = Math.sin(t * 0.85 + x * 0.52 + y * 0.37) + 0.6 * Math.sin(t * 1.4 - x * 0.31 + y * 0.6);
-          k = Math.max(0, Math.min(WATER_STEPS - 1, Math.floor(this.tint[i] * WATER_STEPS) + Math.round(wave * 0.9)));
+          // shallows that touch land read lighter, so the water visibly gets shallower toward the shore
+          const lift = type === T.SHALLOW && this.shore[i] ? 2 : 0;
+          k = Math.max(0, Math.min(WATER_STEPS - 1, Math.floor(this.tint[i] * WATER_STEPS) + Math.round(wave * 0.9) + lift));
         } else k = Math.floor(this.tint[i] * LAND_STEPS);
         ctx.fillStyle = PAL[type][k];
         ctx.beginPath();
@@ -229,7 +249,7 @@ export class TerrainPainter {
         ctx.closePath();
         ctx.fill();
         // ragged edges: where this ground meets a lower-ranked ground, a few small lobes of it spill across the border
-        if (edges) {
+        if (rough) {
           const rank = RANK[type];
           for (let e = 0; e < 4; e++) {
             const ed = EDGES[e];
@@ -291,6 +311,8 @@ export class TerrainPainter {
 
     // pass 2: shore foam, water glints, decor
     const detail = z >= 0.5;
+    const foamNear: (Path2D | undefined)[] = [];
+    const foamFar: (Path2D | undefined)[] = [];
     ctx.lineCap = 'round';
     // batched strokes
     let tuftL = new Path2D();
@@ -308,49 +330,46 @@ export class TerrainPainter {
         const type = world.terrain[i];
         if (type === T.SHALLOW || type === T.DEEP) {
           // foam where water meets land
-          const nb: [number, number, number, number, number][] = [
-            [1, 0, 32, 16, 0], // right-front edge
-            [0, 1, 0, 32, 0],
-            [-1, 0, 0, 0, 0],
-            [0, -1, 0, 0, 0],
-          ];
-          void nb;
-          const edges: [number, number, number, number, number, number][] = [
-            // neighbour dx, dy, edge from (x1,y1) to (x2,y2) in sprite px relative to tile top vertex
-            [1, 0, 32, 16, 0, 32],
-            [0, 1, -32, 16, 0, 32],
-            [-1, 0, -32, 16, 0, 0],
-            [0, -1, 32, 16, 0, 0],
-          ];
-          for (const [dx, dy, ex, ey, fx, fy] of edges) {
-            const nx = x + dx;
-            const ny = y + dy;
+          const g = Math.floor(hashUnit(x, y, 16) * FOAM_PHASES);
+          for (let e = 0; e < 4; e++) {
+            const ed = EDGES[e];
+            const nx = x + ed.dx;
+            const ny = y + ed.dy;
             if (nx < 0 || ny < 0 || nx >= W || ny >= world.H) continue;
             const nt = world.terrain[ny * W + nx];
             if (nt === T.SHALLOW || nt === T.DEEP) continue;
-            // draw a bright wavering line along the shared edge
-            const a = 0.34 + 0.22 * Math.sin(t * 1.3 + x * 0.9 + y * 0.7);
-            ctx.strokeStyle = `rgba(255,255,255,${a})`;
-            ctx.lineWidth = 2.2;
-            ctx.beginPath();
-            if (dx === 1) {
-              ctx.moveTo(sx + 32, sy + 16);
-              ctx.lineTo(sx, sy + 32);
-            } else if (dy === 1) {
-              ctx.moveTo(sx - 32, sy + 16);
-              ctx.lineTo(sx, sy + 32);
-            } else if (dx === -1) {
-              ctx.moveTo(sx, sy);
-              ctx.lineTo(sx - 32, sy + 16);
-            } else {
-              ctx.moveTo(sx, sy);
-              ctx.lineTo(sx + 32, sy + 16);
+            if (!rough) {
+              // wide view: a bright wavering line along the shared edge
+              const a = 0.34 + 0.22 * Math.sin(t * 1.3 + x * 0.9 + y * 0.7);
+              ctx.strokeStyle = `rgba(255,255,255,${a})`;
+              ctx.lineWidth = 2.2;
+              ctx.beginPath();
+              ctx.moveTo(sx + ed.x0, sy + ed.y0);
+              ctx.lineTo(sx + ed.x1, sy + ed.y1);
+              ctx.stroke();
+              continue;
             }
-            ctx.stroke();
-            void ex;
-            void ey;
-            void fx;
-            void fy;
+            // closer in: ragged lobes of foam on the water side, one set at the edge and one a little further out, surging in
+            // and out in step with each other (four phase groups, so the whole shore does not pulse as one)
+            for (let layer = 0; layer < 2; layer++) {
+              const path = ((layer ? foamFar : foamNear)[g] ??= new Path2D());
+              for (let j = 0; j < 3; j++) {
+                if (hashUnit(x * 4 + e, y, 240 + layer * 3 + j) < 0.2) continue;
+                const u = (j + 0.5) / 3 + (hashUnit(x * 4 + e, y, 250 + layer * 3 + j) - 0.5) * 0.2;
+                const a = 3.6 + hashUnit(x * 4 + e, y, 260 + layer * 3 + j) * 3.4;
+                const d = (layer ? 4.5 : 1.4) + hashUnit(x * 4 + e, y, 270 + layer * 3 + j) * (layer ? 3 : 2.2);
+                const bx = sx + ed.x0 + ed.ex * u;
+                const by = sy + ed.y0 + ed.ey * u;
+                for (let s = 0; s <= 6; s++) {
+                  const th = (Math.PI * s) / 6;
+                  const lx = bx + ed.tx * Math.cos(th) * a - ed.nx * Math.sin(th) * d;
+                  const ly = by + ed.ty * Math.cos(th) * a - ed.ny * Math.sin(th) * d;
+                  if (s === 0) path.moveTo(lx, ly);
+                  else path.lineTo(lx, ly);
+                }
+                path.closePath();
+              }
+            }
           }
           if (detail && hashUnit(x, y, 11) < 0.55) {
             // light glints drifting across the surface
@@ -421,6 +440,19 @@ export class TerrainPainter {
           ctx.ellipse(gx, gy, 2.6, 1.6, 0, 0, Math.PI * 2);
           ctx.fill();
         }
+      }
+    }
+    for (let g = 0; g < FOAM_PHASES; g++) {
+      const ph = t * 1.3 + g * 1.6;
+      const near = foamNear[g];
+      if (near) {
+        ctx.fillStyle = `rgba(255,255,255,${0.42 + 0.24 * Math.sin(ph)})`;
+        ctx.fill(near);
+      }
+      const far = foamFar[g];
+      if (far) {
+        ctx.fillStyle = `rgba(255,255,255,${0.3 * (0.5 + 0.5 * Math.sin(ph + Math.PI))})`; // out when the near foam is in
+        ctx.fill(far);
       }
     }
     if (detail) {
