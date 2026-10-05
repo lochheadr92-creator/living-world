@@ -4,7 +4,8 @@ import { hashUnit } from '../sim/rng';
 import type { Building, FxEvent, World } from '../sim/types';
 import { T } from '../sim/types';
 import type { CameraState } from '../app/game';
-import { lerp } from '../sim/util';
+import { dayFraction } from '../sim/environment';
+import { lerp, smoothstep } from '../sim/util';
 import { STRUCT } from './structures';
 import type { BuildKind } from './structures';
 import { hallOccupied, homeOccupied, workState } from './workstate';
@@ -448,11 +449,21 @@ export class Critters {
 }
 
 // ───────────────────────── lighting & weather ─────────────────────────
+/**
+ * Full daylight is not one flat colour: the low morning and afternoon sun is a little warm, and it eases to neutral at noon.
+ * Only the clock decides it (the same day fraction the simulation uses), so it freezes while paused. Multiply-only, so it
+ * can warm and dim but never brighten: noon stays exactly as it was.
+ */
+function daylight(world: World): [number, number, number] {
+  const k = smoothstep(0.05, 0.2, Math.abs(dayFraction(world.tick) - 0.5));
+  return [255, lerp(255, 244, k), lerp(255, 226, k)];
+}
+
 export function ambientColor(world: World): [number, number, number] {
   const l = world.light;
   const night: [number, number, number] = [98, 116, 172];
   const dusk: [number, number, number] = [255, 196, 156];
-  const day: [number, number, number] = [255, 255, 255];
+  const day = daylight(world);
   let c: [number, number, number];
   if (l >= 0.85) c = day;
   else if (l >= 0.4) {
@@ -555,16 +566,17 @@ export function drawGlows(ctx: CanvasRenderingContext2D, world: World, simT: num
 export function drawWeather(ctx: CanvasRenderingContext2D, world: World, simT: number, w: number, h: number): void {
   const wt = world.weather;
   if (wt.rain > 0.05) {
-    const n = Math.floor(260 * wt.rain);
-    ctx.strokeStyle = `rgba(190,215,240,${0.18 + 0.32 * wt.rain})`;
-    ctx.lineWidth = 1;
+    // enough streaks, and bright enough, to read as rain over a bright day and not just a dimmer one
+    const n = Math.floor(520 * wt.rain);
+    ctx.strokeStyle = `rgba(205,225,245,${0.26 + 0.36 * wt.rain})`;
+    ctx.lineWidth = 1.2;
     ctx.beginPath();
     const slant = 0.18 + wt.wind * 0.3;
     for (let i = 0; i < n; i++) {
       const sp = 620 + hashUnit(i, 3, 77) * 380;
       const x0 = hashUnit(i, 1, 75) * (w + 200) - 100;
       const y = ((hashUnit(i, 2, 76) * h + simT * sp) % (h + 40)) - 20;
-      const len = 10 + hashUnit(i, 4, 78) * 12;
+      const len = 12 + hashUnit(i, 4, 78) * 14;
       const x = x0 - (y / h) * 0;
       ctx.moveTo(x + y * slant * 0.2, y);
       ctx.lineTo(x + y * slant * 0.2 - len * slant, y + len);
