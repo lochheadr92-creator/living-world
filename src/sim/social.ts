@@ -15,7 +15,7 @@ import { carryCap, isDependent, itemsToText, stageOf } from './people';
 import { addEvent, addFx, addLog, say as speak } from './events';
 import { addToHousehold, householdById, membersOf } from './households';
 import { estimatedAmount, learn, noteFailure } from './knowledge';
-import { adjustRel, relOf, spark } from './relations';
+import { adjustRel, relOf, spark, trustOf } from './relations';
 import { hearAccount, pickAccount, recordAccount } from './reputation';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
@@ -170,6 +170,21 @@ function describeItems(items: Items): string {
   return itemsToText(items);
 }
 
+/**
+ * An onlooker leans towards whoever they are closer to (kin and housemates count heavily); only a clear difference moves them.
+ * It shows in how they regard the pair afterwards, and it is on their record.
+ */
+function takeSide(world: World, w: Person, a: Person, b: Person): void {
+  const lean = (q: Person): number => (w.relations[q.id]?.affinity ?? 0) + (w.relations[q.id]?.kin ? 25 : 0) + (q.hhId === w.hhId ? 15 : 0);
+  const diff = lean(a) - lean(b);
+  if (Math.abs(diff) < 12) return;
+  const [with_, against] = diff > 0 ? [a, b] : [b, a];
+  adjustRel(w, with_.id, world.tick, { aff: 1.2, trust: 0.5, note: `took ${with_.name}'s side against ${against.name}` });
+  adjustRel(w, against.id, world.tick, { aff: -1.4, note: `${against.name} was in the wrong, I thought` });
+  addLog(world, w, 'social', `Saw ${a.name} and ${b.name} argue, and took ${with_.name}'s side.`);
+  world.stats.sided = (world.stats.sided ?? 0) + 1;
+}
+
 /** `account` = onlookers also keep an account of it (only for what is worth repeating, not routine care). */
 export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: Person, other: Person, x: number, y: number, account = false): void {
   for (const w of world.persons) {
@@ -181,6 +196,10 @@ export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: 
     } else {
       adjustRel(w, actor.id, world.tick, { aff: -1.1, trust: -1.1, note: `saw ${actor.name} quarrel` });
       adjustRel(w, other.id, world.tick, { aff: -0.6, note: `saw ${other.name} quarrel` });
+      if (account) {
+        recordAccount(world, w, actor.id, 'quarreled', other.id);
+        takeSide(world, w, actor, other);
+      }
     }
   }
 }
@@ -629,6 +648,8 @@ export interface ConvData {
   milestone?: string;
   mealId?: number;
   mealPlan?: import('./meals').MealPlan;
+  /** mediate: the other person in the quarrel */
+  otherId?: number;
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -669,6 +690,8 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
       return `to help ${name}`;
     case 'apologize':
       return `to make peace with ${name}`;
+    case 'mediate':
+      return `to talk ${name} round`;
     case 'recruit':
       return `to get ${name}'s help with a building`;
     case 'propose':
@@ -859,6 +882,11 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       bubble(world, A, D.saying(D.APOLOGY, A.id, B.id, world.tick >> 5, vars), 'say', 58);
       break;
     }
+    case 'mediate': {
+      const C = personOf(world, d.otherId ?? 0);
+      if (C) bubble(world, A, D.saying(D.MEDIATE_ASK, A.id, B.id, world.tick >> 5, { ...vars, c: C.name }), 'say', 60);
+      break;
+    }
     case 'invite': {
       inviteAsk(world, A, B, d);
       break;
@@ -875,6 +903,39 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       break;
     }
   }
+}
+
+/**
+ * A friend of both sides of a quarrel talks one of them round. Each side is a separate conversation: the friend eases B's soreness
+ * towards C now, and goes to C when they next meet. B listens in proportion to how far they trust the friend, and less the deeper the
+ * hurt. A quarrel that has already healed is simply said to be past.
+ */
+export function mediate(world: World, c: Pick<Conversation, "data">, A: Person, B: Person, d: ConvData): void {
+  const C = personOf(world, d.otherId ?? 0);
+  const key = 'mediate' + B.id + ':' + (d.otherId ?? 0);
+  const g = C ? B.relations[C.id]?.grievance : null;
+  A.cooldowns[key] = world.tick + 900;
+  if (!C || !g) {
+    bubble(world, B, 'Thanks, but that’s behind us now.', 'say', 50);
+    return;
+  }
+  const trust = clamp(trustOf(B, A.id), 0, 100) / 100;
+  const sev = clamp(g.weight / 70, 0, 1);
+  const p = clamp(0.3 + 0.5 * trust + 0.25 * B.traits.generosity - 0.3 * sev, 0.1, 0.9);
+  if (hashUnit(B.id, A.id, (world.tick >> 4) + C.id) >= p) {
+    bubble(world, B, D.saying(D.MEDIATE_NO, B.id, A.id, world.tick >> 5), 'angry', 50);
+    A.cooldowns[key] = world.tick + 1500;
+    c.data.sour = true;
+    return;
+  }
+  bubble(world, B, D.saying(D.MEDIATE_YES, B.id, A.id, world.tick >> 5, { c: C.name }), 'happy', 56);
+  easeGrievance(world, B, C, 12 + 10 * trust, `${A.name} stepped in`);
+  B.needs.social = Math.min(100, B.needs.social + 8);
+  adjustRel(B, A.id, world.tick, { aff: 3, trust: 2, note: `${A.name} helped me think it over` });
+  adjustRel(A, B.id, world.tick, { aff: 1, fam: 0.5 });
+  addLog(world, A, 'social', `Talked ${B.name} round a little over the trouble with ${C.name}.`);
+  addLog(world, B, 'social', `${A.name} talked me round about ${C.name}.`);
+  world.stats.mediated = (world.stats.mediated ?? 0) + 1;
 }
 
 function reqOf(world: World, c: Conversation): Request | undefined {
@@ -1080,6 +1141,10 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       }
       break;
     }
+    case 'mediate': {
+      mediate(world, c, A, B, d);
+      break;
+    }
     case 'invite': {
       if (d.mealId) inviteRespond(world, A, B, d.mealId);
       break;
@@ -1170,7 +1235,7 @@ function shareAccount(world: World, S: Person, L: Person): void {
   if (!held || S.speech) return;
   const subject = personOf(world, a.about);
   if (!subject) return;
-  const lines = a.kind === 'broke' ? D.GOSSIP_BROKE : a.kind === 'kept' ? D.GOSSIP_KEPT : D.GOSSIP_GAVE;
+  const lines = a.kind === 'broke' ? D.GOSSIP_BROKE : a.kind === 'kept' ? D.GOSSIP_KEPT : a.kind === 'quarreled' ? D.GOSSIP_QUARREL : D.GOSSIP_GAVE;
   bubble(world, S, D.saying(lines, S.id, L.id, world.tick >> 5, { n: subject.name }), 'say', 66);
 }
 
@@ -1292,7 +1357,9 @@ export function startArgument(world: World, a: Person, b: Person, why: string, c
   addLog(world, a, 'social', `Argued with ${b.name} over ${why}.`);
   addLog(world, b, 'social', `Argued with ${a.name} over ${why}.`);
   addFx(world, 'anger', (a.x + b.x) / 2, (a.y + b.y) / 2, 0);
-  witness(world, 'quarrel', a, b, a.x, a.y);
+  recordAccount(world, a, b.id, 'quarreled', a.id);
+  recordAccount(world, b, a.id, 'quarreled', b.id);
+  witness(world, 'quarrel', a, b, a.x, a.y, true);
 }
 
 // ───────────────────────── working side by side ─────────────────────────

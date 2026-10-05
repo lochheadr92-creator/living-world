@@ -310,6 +310,7 @@ const PURPOSE_TEXT: Record<string, string> = {
   warn: 'a warning',
   offer: 'an offer of help',
   apologize: 'making peace',
+  mediate: 'talking someone round after a quarrel',
   recruit: 'asking for help with a building',
   propose: 'a proposal',
   trade: 'a swap',
@@ -328,6 +329,7 @@ const PURPOSE_THEIRS: Record<string, string> = {
   warn: 'with a warning',
   offer: 'with an offer of help',
   apologize: 'to make peace',
+  mediate: 'to talk them round after a quarrel',
   recruit: 'to ask for help with a building',
   propose: 'with a proposal',
   trade: 'to propose a swap',
@@ -415,7 +417,7 @@ export function concernViews(world: World, p: Person): { about: string; kind: st
 export function accountViews(world: World, p: Person): { about: string; what: string; seen: string; source: string }[] {
   return p.accounts.map((a) => ({
     about: nameOf(world, a.about),
-    what: `${accountWords(a.kind)} (to ${a.toward === p.id ? 'them' : nameOf(world, a.toward)})`,
+    what: `${accountWords(a.kind)} (${a.kind === 'quarreled' ? 'with' : 'to'} ${a.toward === p.id ? 'them' : nameOf(world, a.toward)})`,
     seen: ago(world, a.at),
     source: a.src === 'seen' ? (a.toward === p.id ? 'it happened to them' : 'saw it themself') : `told by ${nameOf(world, a.from)}${a.hops > 1 ? ` (passed on ${a.hops} times)` : ''}`,
   }));

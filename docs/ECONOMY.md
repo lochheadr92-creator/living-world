@@ -249,6 +249,24 @@ unaccepted apologies), only after it has cooled, and an accepted one closes it o
 settled pair is much less likely to fall out again over the same sort of thing for most of a day. A different incident is a
 different grievance. Greetings, company, friendship and news sharing are unchanged.
 
+### Onlookers, and friends who step in
+
+A quarrel is also a thing other people know about. Both people in it, and everyone awake within about seven tiles, hold an
+account of it (`quarreled`: who started it, who it was with). Each side holds their own version, so each may tell it, and a
+listener weighs it by how far they trust the teller (see "Word about people"); it counts for less than a broken promise.
+
+An onlooker **takes a side** only if they are clearly closer to one of the two (affinity, plus a lot for kin and a fair amount for
+housemates; a difference under 12 points means no side). They regard the one they sided with slightly better and the other
+slightly worse, and it is in their log. Nobody takes a side over something they did not see or hear of.
+
+A friend may **step in**. Someone who holds an account of a quarrel or broken promise between two people, between about 200 ticks
+and three days after it happened (not while it is raw, not once it is old), who likes one of them and does not dislike the other, is not
+sore at either, and is sociable enough, may go and talk one of them round. It is two separate conversations, one with each side.
+The one spoken to listens in proportion to how far they trust the friend and less the deeper the hurt (a 10–90% chance); if they
+do, their soreness towards the other falls by 12–22 (a quarrel's weight starts at about 40–46) and they feel a little less alone.
+If the quarrel has already healed they say so, and the friend does not try again soon; if they will not listen, the friend waits
+longer. The friend never learns whether a quarrel is still live except by asking: the option is chosen from the account alone.
+
 ## Surviving while working
 
 Before taking on anything that is not about survival, a person works out whether they could still reach water and food: the

@@ -34,9 +34,11 @@ const EFFECT: Record<AccountKind, Effect> = {
   broke: { trust: -4.5, aff: -1.8 },
   kept: { trust: 1.2, aff: 0.4 },
   gave: { trust: 1.8, aff: 0.8 },
+  // a quarrel is less clear-cut than a broken promise: each side tells it their way, so it counts for less
+  quarreled: { trust: -2.5, aff: -1.2 },
 };
 
-const VERB: Record<AccountKind, string> = { broke: 'did not keep their word', kept: 'kept their word', gave: 'was generous' };
+const VERB: Record<AccountKind, string> = { broke: 'did not keep their word', kept: 'kept their word', gave: 'was generous', quarreled: 'quarrelled' };
 
 function personOf(world: World, id: number): Person | null {
   const e = world.byId.get(id);
@@ -78,7 +80,7 @@ export function pickAccount(world: World, S: Person, L: Person): Account | null 
     // a grievance is brought up by someone who cares about who was wronged, or who already thinks ill of the subject;
     // praise is brought up by someone who likes the subject
     let motive = 0;
-    if (a.kind === 'broke') motive = (victimKin || toVictim >= 12 ? 2 : 0) + (toSubject <= -10 ? 1.5 : 0);
+    if (a.kind === 'broke' || a.kind === 'quarreled') motive = (victimKin || toVictim >= 12 ? 2 : 0) + (toSubject <= -10 ? 1.5 : 0);
     else motive = toSubject >= 15 ? 2 : 0;
     if (motive <= 0) continue;
     const fresh = 1 - (world.tick - a.at) / ACCOUNT_LIFE;
@@ -121,7 +123,8 @@ export function hearAccount(world: World, S: Person, L: Person, a: Account): Acc
   const held: Account = { about: a.about, kind: a.kind, toward: a.toward, at: a.at, src: 'told', from: S.id, origin: a.origin, hops: a.hops + 1 };
   keep(L, held);
   const victim = a.toward === S.id ? 'them' : (personOf(world, a.toward)?.name ?? 'someone');
-  const what = a.kind === 'broke' ? `did not keep their word to ${victim}` : a.kind === 'kept' ? `kept their word to ${victim}` : `was generous to ${victim}`;
+  const what =
+    a.kind === 'broke' ? `did not keep their word to ${victim}` : a.kind === 'kept' ? `kept their word to ${victim}` : a.kind === 'quarreled' ? `had words with ${victim}` : `was generous to ${victim}`;
   addLog(world, L, 'social', `${S.name} told me ${subject.name} ${what}.`);
   return held;
 }

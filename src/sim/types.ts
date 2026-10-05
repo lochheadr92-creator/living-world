@@ -446,7 +446,7 @@ export interface InteractionRecord {
   detail: string;
 }
 
-export type AccountKind = 'broke' | 'kept' | 'gave';
+export type AccountKind = 'broke' | 'kept' | 'gave' | 'quarreled';
 /** Something one person did to another, as the holder knows it. Hearsay keeps the original event's time and who first had it. */
 export interface Account {
   about: number;
@@ -789,7 +789,8 @@ export type ConvPurpose =
   | 'invite'
   | 'check_in'
   | 'lend'
-  | 'report';
+  | 'report'
+  | 'mediate';
 
 export interface Conversation {
   id: number;

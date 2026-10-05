@@ -7,6 +7,7 @@ import { fractionAvailable, hhState } from './options_work';
 import { isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { wantsAmends } from './grievance';
+import { ACCOUNT_LIFE } from './reputation';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
@@ -333,6 +334,42 @@ function optReconcile(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── stepping in ─────────────────────────
+/**
+ * Someone who knows two people have fallen out (they saw it, or were told, and it is recent but no longer raw), likes them both and
+ * is not sore at either may go and talk one of them round. Only what the mediator holds as an account is used to find the quarrel;
+ * whether it is still live is for the other person to say.
+ */
+function optMediate(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (ctx.stage === 'child') return;
+  if (p.traits.sociability < 0.35) return;
+  if (!p.accounts.length) return;
+  for (const c of candidates(ctx)) {
+    if (c.aff < 8) continue;
+    if (p.relations[c.q.id]?.grievance) continue;
+    for (const a of p.accounts) {
+      if (a.kind !== 'quarreled' && a.kind !== 'broke') continue;
+      const age = world.tick - a.at;
+      if (age < 200 || age > ACCOUNT_LIFE) continue;
+      const otherId = a.about === c.q.id ? a.toward : a.toward === c.q.id ? a.about : 0;
+      if (!otherId || otherId === p.id) continue;
+      const other = world.byId.get(otherId);
+      if (!other || other.ent !== 'person' || !other.alive) continue;
+      const rel = p.relations[otherId];
+      if ((rel?.affinity ?? 0) < 0 || rel?.grievance) continue;
+      if ((p.cooldowns['mediate' + c.q.id + ':' + otherId] ?? 0) > world.tick) continue;
+      const sc = new Scorer()
+        .add(`cares about ${c.q.name} and ${other.name}, who have fallen out`, 7 + 5 * p.traits.generosity + 3 * p.traits.sociability)
+        .add('friendship', (c.aff + (rel?.affinity ?? 0)) * 0.04)
+        .add('walking', -pen(c.d * 6));
+      if (sc.total < 9) continue;
+      mkSocial(ctx, c, 'mediate', { otherId }, `Talk ${c.q.name} round about ${other.name}`, `to help ${c.q.name} and ${other.name} make up`, null, sc, 'peace', ':' + otherId);
+      break;
+    }
+  }
+}
+
 // ───────────────────────── recruiting help ─────────────────────────
 function optRecruit(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -438,6 +475,7 @@ export function socialOptions(ctx: Ctx): void {
   optWarn(ctx);
   optOffer(ctx);
   optReconcile(ctx);
+  optMediate(ctx);
   optRecruit(ctx);
   optPropose(ctx);
   optTrade(ctx);
