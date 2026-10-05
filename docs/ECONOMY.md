@@ -398,6 +398,12 @@ from a moving starting point, `(i + tick) mod n`, which gave the first of two ne
   know a reason nobody gave, so now the maker tells the one they promised, the next time the two talk ("my own needs came
   first"; both write it in their log, and the promise records that it was told). Late and told is *interrupted*; late and never
   told is *broken*, like any promise not kept.
+* **Whom to ask for a tool or a building material: the nearest candidate, and of those within a tile and a half of the nearest,
+  the friendliest.** Before, every person who could be asked got an option of their own and the ranking chose among them by
+  distance and noise; now one person is asked, and a friend is never worth more than a tile and a half of walking. Over six
+  worlds and six days, against the call order alone, this changed nothing that stands out: gifts 111 to 103, requests for wood
+  95 to 98, requests for help building 24 to 26, requests for stone 80 to 53, while the trade proposals it does not touch
+  went 307 to 175 between the two trajectories, which shows how far such counts move on their own.
 ## Staged scenes
 
 The ordinary seeded world is the demonstration of natural behaviour. Six small scenes are staged for watching one rule in
@@ -418,6 +424,8 @@ projects stay off, so a staged scene never grows more than was staged.
 
 * There is still one settlement, one map, one animal species; no currency, no markets, no caravans, no combat.
 * A workplace's output is not routed anywhere automatically: somebody has to want it and go and fetch it.
+* **Most proposals to swap are turned down.** In six worlds over six days 294 of 307 trade proposals were declined (162 of 175
+  in the same worlds under another call order): people propose far more often than anyone accepts. Not changed here.
 * **A promise to bring something twice is fragile.** After a hand-over the receiver counts as "just looked after" for 120 ticks
   (so nobody fusses over them while they eat), and a second trip that arrives inside that window is turned away; if the receiver
   has wandered off by the time the carrier is free again, the carrier no longer knows where they are, and the promise expires

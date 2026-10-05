@@ -41,6 +41,22 @@ function candidates(ctx: Ctx, includeAvoided = false): Cand[] {
   return out;
 }
 
+/** Within this many tiles of the nearest, two people are as near as each other. */
+export const TIE_DISTANCE = 1.5;
+
+/**
+ * Of several people who could be asked for the same thing, the one to ask: the nearest, unless another is about as near (within a
+ * tile and a half of the nearest), and then, of those, the friendliest. It is only a tie-break. A friend never makes anyone walk
+ * further to ask them, and is never worth more than the distance: a flat bonus for friends was tried and refuted.
+ */
+export function askFirst<T extends { d: number; aff: number; q: { id: number } }>(askable: T[]): T | null {
+  if (!askable.length) return null;
+  const near = Math.min(...askable.map((c) => c.d));
+  const tied = askable.filter((c) => c.d <= near + TIE_DISTANCE);
+  tied.sort((a, b) => b.aff - a.aff || a.d - b.d || a.q.id - b.q.id);
+  return tied[0];
+}
+
 function mkSocial(ctx: Ctx, c: Cand, purpose: ConvPurpose, conv: ConvData, label: string, goal: string, need: Option['need'], sc: Scorer, tag: string, keySuffix = ''): void {
   const { world, p } = ctx;
   const q = c.q;
@@ -172,11 +188,14 @@ function optRequest(ctx: Ctx): void {
   // a tool that stands between me and the work I have in mind: ask to borrow one from someone seen carrying it
   const tw = ctx.toolWanted;
   if (tw && (p.cooldowns['askTool' + tw.kind] ?? 0) <= world.tick && activeCommitments(p).length < MAX_ACTIVE_COMMITMENTS) {
-    for (const c of cands) {
-      if (c.d > 12 || !c.s.carrying.includes(tw.kind)) continue;
-      if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
+    const askable = cands.filter((c) => {
+      if (c.d > 12 || !c.s.carrying.includes(tw.kind)) return false;
+      if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) return false;
       const trust = p.relations[c.q.id]?.trust ?? 10;
-      if (trust < 12 && c.aff < 10) continue;
+      return !(trust < 12 && c.aff < 10);
+    });
+    const c = askFirst(askable);
+    if (c) {
       const sc = new Scorer().add(`need a ${tw.kind} to ${tw.for}`, 20 * traitMods(p).work).add('they are carrying one', 4).add('walking', -pen(c.d * 6));
       mkSocial(ctx, c, 'request', { reqKind: 'tool', toolKind: tw.kind, item: tw.kind, amount: 1, purpose: tw.for }, `Ask ${c.q.name} to lend a ${tw.kind}`, `to ${tw.for}`, null, sc, 'request', ':tool:' + tw.kind);
       if (!ctx.observer) p.cooldowns['askTool' + tw.kind] = world.tick + 300;
@@ -196,9 +215,8 @@ function optRequest(ctx: Ctx): void {
       if (already >= miss - (p.inv[item] ?? 0)) continue;
       const selfFetch = ctx.options.some((o) => (o.kind === 'gather' || o.kind === 'operate' || o.kind === 'withdraw') && o.tag === 'site' && o.eta < 260);
       if (selfFetch) continue;
-      for (const c of cands) {
-        if (c.d > 12 || !c.s.carrying.includes(item)) continue;
-        if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
+      const c = askFirst(cands.filter((x) => x.d <= 12 && x.s.carrying.includes(item) && (p.asked[x.q.id] ?? -9999) <= world.tick - 650));
+      if (c) {
         const raw = item === 'wood' || item === 'stone';
         const sc = new Scorer().add(`the building needs ${item}`, 24 * traitMods(p).work).add('they are carrying some', 4).add('walking', -pen(c.d * 6));
         mkSocial(

@@ -1,9 +1,14 @@
 import { describe, expect, it } from 'vitest';
+import { newActivity, startActivity } from '../src/sim/activities';
 import { LOAN_TERM } from '../src/sim/constants';
+import { observe } from '../src/sim/knowledge';
+import { relOf } from '../src/sim/relations';
+import { makeSource } from '../src/sim/sources';
+import type { ConvData } from '../src/sim/social';
 import { lendTool, toolById } from '../src/sim/tools';
-import type { Commitment, World } from '../src/sim/types';
+import type { Commitment, Person, World } from '../src/sim/types';
 import { stepWorld } from '../src/sim/world';
-import { addPerson, done, give, stage } from './helpers/kit';
+import { addPerson, done, give, site, stage } from './helpers/kit';
 import { expectSameWorld, reloaded } from './helpers/resume';
 import { natural, person, run, scene } from './helpers/util';
 
@@ -27,6 +32,30 @@ function resumesCleanly(w: World, still: (w: World) => boolean, more: number): v
   expectSameWorld(w, copy);
 }
 
+/** `a` asks `b` for something, face to face, and the real conversation engine runs it to its end. */
+function asks(w: World, a: Person, b: Person, conv: ConvData): void {
+  const act = newActivity(w, a, {
+    kind: 'socialize',
+    label: `Talking to ${b.name}`,
+    goal: 'a staged request',
+    targetId: b.id,
+    targetType: 'person',
+    tx: b.x,
+    ty: b.y,
+    spotX: b.x - 1.3,
+    spotY: b.y,
+    utility: 100,
+    minCommit: 4000,
+    maxTicks: 600,
+    data: { purpose: 'request', conv },
+  });
+  startActivity(w, a, act);
+  for (let i = 0; i < 600; i++) {
+    run(w, 1);
+    if (a.lastInteraction && a.lastInteraction.partner === b.id && !a.convId && a.lastInteraction.tick > act.start) return;
+  }
+}
+
 const midWalk = (w: World): boolean => w.persons.some((p) => p.activity?.phase === 'travel' && p.activity.path.length >= 6 && p.activity.pi >= 2 && p.activity.pi < p.activity.path.length - 2);
 const midTalk = (w: World): boolean => w.conversations.some((c) => c.end === 0 && c.phase >= 2 && w.tick > c.start + 20);
 const activePromise = (w: World): Commitment | undefined => w.persons.flatMap((p) => p.commitments).find((c) => c.status === 'active');
@@ -48,8 +77,29 @@ describe('saving in the middle of things and carrying on gives exactly the world
   }, 120_000);
 
   it('mid-promise: a promise has been made and is being kept', () => {
-    const w = natural('meadow');
-    until(w, (x) => !!activePromise(x), 6000, 'a promise that is active');
+    // STAGED, through the real conversation engine: Ana, building a hut, asks Ben, a generous friend, for wood and he promises to
+    // bring it. (This used to wait for an ordinary world to produce a promise; whether and when it does moves with every change
+    // to how people are called, and a save test should not depend on that.)
+    const s = stage('mid-promise');
+    const ana = addPerson(s, 'Ana', 44, 26, { inv: { fruit: 6 } });
+    const ben = addPerson(s, 'Ben', 46, 26, { sex: 'm', inv: { fruit: 6 }, traits: { generosity: 0.95, diligence: 0.9 } });
+    const hut = site(s, 'hut', 40, 28, ana.hhId, ana.id);
+    for (let i = 0; i < 5; i++) makeSource(s.w, 'tree', 52 + (i % 3), 22 + i, 5);
+    for (let i = 0; i < 3; i++) makeSource(s.w, 'berry_bush', 36 + i, 32, 6);
+    s.w.camp = { x: 44.5, y: 26.5 };
+    const w = done(s);
+    for (const [x, y] of [[ana, ben], [ben, ana]] as [Person, Person][]) {
+      const r = relOf(x, y.id);
+      r.affinity = 50;
+      r.trust = 50;
+      r.familiarity = 20;
+    }
+    for (const e of [hut, ...w.sources]) {
+      observe(w, ana, e);
+      observe(w, ben, e);
+    }
+    asks(w, ana, ben, { reqKind: 'wood', item: 'wood', amount: 3, siteId: hut.id, destKind: 'site', destId: hut.id, purpose: 'for the hut' });
+    expect(activePromise(w), 'Ben promised').toBeTruthy();
     resumesCleanly(w, (x) => !!activePromise(x), 1500);
   }, 120_000);
 

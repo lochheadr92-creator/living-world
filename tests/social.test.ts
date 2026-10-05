@@ -118,8 +118,10 @@ describe('requests have answers and consequences', () => {
 describe('ordinary social life in the natural world', () => {
   it('over several days people greet, talk, ask, share and sometimes disagree, and relationships form from those encounters', async () => {
     const { natural } = await import('./helpers/util');
+    // six days, not three: gifts are rare enough in the first three that whether there has been one by then moves with every change
+    // to who asks whom (none by day three in one trajectory, four by day six; 11 to 31 in the others over six)
     const w = natural('social-life');
-    run(w, 2400 * 3);
+    run(w, 2400 * 6);
     const talked = w.persons.reduce((s, p) => s + p.stats.talked, 0);
     const given = w.persons.reduce((s, p) => s + p.stats.given, 0);
     expect(talked).toBeGreaterThan(40);
