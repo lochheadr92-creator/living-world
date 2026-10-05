@@ -63,6 +63,9 @@ interface RigState {
 
 const ease = (t: number) => t * t * (3 - 2 * t);
 
+/** ticks in one mouthful of eating */
+const EAT_CYCLE = 14;
+
 /** the tool kind drawn in the right hand for a pose: 1 axe / pick / hoe, 2 rod, 3 hammer, 4 saw, 5 spade, 6 sledge, 7 bread peel */
 const TOOL_OF: Partial<Record<PoseKind, number>> = { chop: 1, mine: 1, till: 1, fish: 2, build: 3, craft: 3, hammer: 3, saw: 4, dig: 5, forge: 6, bake: 7 };
 
@@ -211,13 +214,16 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       break;
     }
     case 'eat': {
-      const k = pr(10);
-      const lift = Math.sin(k * Math.PI);
-      r[R.HRU] = 0.1 + lift * 0.04;
+      // a mouthful: the food comes up to the mouth, is chewed with the hand held there, then goes down for the next one
+      const k = pr(EAT_CYCLE);
+      const chewing = k >= 0.3 && k < 0.8;
+      const reach = k < 0.3 ? ease(k / 0.3) : chewing ? 1 : 1 - ease((k - 0.8) / 0.2);
+      const jaw = Math.abs(Math.sin(k * Math.PI * 2 * 4));
+      r[R.HRU] = 0.1 + reach * 0.05;
       r[R.HRV] = -0.06;
-      r[R.HRZ] = 12 + lift * 13;
-      r[R.MOUTH] = lift > 0.7 ? 1 : 0;
-      r[R.HEAD_Z] = -lift * 0.4;
+      r[R.HRZ] = 11 + reach * 15;
+      r[R.MOUTH] = chewing ? (jaw > 0.5 ? 1 : 0) : reach > 0.85 ? 1 : 0;
+      r[R.HEAD_Z] = chewing ? -0.5 - jaw * 0.7 : -reach * 0.3;
       break;
     }
     case 'sleep': {
@@ -811,10 +817,30 @@ export class CharacterRenderer {
       parts.push({
         d: handR[2] + 0.01,
         draw: () => {
-          ctx.fillStyle = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
+          const food = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
+          // the food in the hand, big enough to read at normal zoom
+          ctx.fillStyle = 'rgba(25,15,8,0.4)';
           ctx.beginPath();
-          ctx.arc(handR[0], handR[1] - 1.6, 1.9 * sc, 0, Math.PI * 2);
+          ctx.arc(handR[0], handR[1] - 1.8, 3 * sc, 0, Math.PI * 2);
           ctx.fill();
+          ctx.fillStyle = food;
+          ctx.beginPath();
+          ctx.arc(handR[0], handR[1] - 1.8, 2.5 * sc, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(255,255,255,0.45)';
+          ctx.fillRect(handR[0] - 1.2 * sc, handR[1] - 3.4 * sc, 1.1 * sc, 1.1 * sc);
+          // crumbs fall from the mouth while it chews
+          const k = cycleOf(p, alphaT, EAT_CYCLE);
+          if (k >= 0.3 && k < 0.8) {
+            const mouthY = headC[1] + 5.1 * sc * bs.head * 0.6;
+            for (let i = 0; i < 3; i++) {
+              const u = (((k - 0.3) / 0.5) * 1.5 + i / 3) % 1;
+              ctx.globalAlpha = ghostA * (1 - u);
+              ctx.fillStyle = food;
+              ctx.fillRect(headC[0] + (i - 1) * 2.4 * sc + ((fx - fy) / Math.SQRT2) * 1.5, mouthY + u * 7 * sc, 1.1 * sc, 1.1 * sc);
+            }
+            ctx.globalAlpha = ghostA;
+          }
         },
       });
     }
