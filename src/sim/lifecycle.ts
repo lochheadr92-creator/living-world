@@ -1,5 +1,5 @@
 import { abortActivity, newActivity, startActivity } from './activities';
-import { AGE_OLD_DEATH_START, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
+import { BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
@@ -7,6 +7,8 @@ import { socialOnDeath } from './social';
 import { onDeath } from './grief';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
+import { childbirthRisk, fertilityAt, frailtyOf, mortalityPerYear } from './ageing';
+import { hashUnit } from './rng';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { BUILD_DEF } from './constants';
 import { observe, putBelief } from './knowledge';
@@ -19,6 +21,7 @@ import type { Grave, Person, Stage, World } from './types';
 import { T } from './types';
 import { newId } from './registry';
 
+const AGE_OLD = 62; // from here a natural death is put down to old age rather than illness
 const STAGE_CODE: Record<Stage, number> = { child: 0, youth: 1, adult: 2, elder: 3 };
 
 /** Register a freshly created person in the world and their household. */
@@ -45,13 +48,11 @@ export function lifeTick(world: World, p: Person): void {
     addLog(world, p, 'life', code === 2 ? 'Became an adult.' : code === 3 ? 'Grew old.' : 'Growing up.');
   }
 
-  // death of old age: the yearly hazard rises with every year past the threshold (this runs once a minute of sim time)
-  if (age > AGE_OLD_DEATH_START) {
-    const perYear = 0.035 + 0.011 * (age - AGE_OLD_DEATH_START);
-    if (world.rng.next() < (perYear * LIFE_CHECK_EVERY) / TICKS_PER_YEAR) {
-      killPerson(world, p, 'old age');
-      return;
-    }
+  // ordinary mortality (see ageing.ts): a chance each minute of sim time, from a hash so no random stream is used
+  const perYear = mortalityPerYear(age, frailtyOf(world, p), p.health);
+  if (hashUnit(p.id, Math.floor(world.tick / LIFE_CHECK_EVERY), 91) < 1 - Math.exp((-perYear * LIFE_CHECK_EVERY) / TICKS_PER_YEAR)) {
+    killPerson(world, p, age < 12 ? 'a childhood illness' : age < AGE_OLD ? 'illness' : 'old age');
+    return;
   }
   // birth
   if (p.pregnantUntil > 0 && world.tick >= p.pregnantUntil) giveBirth(world, p);
@@ -80,7 +81,8 @@ export function conceptionTick(world: World): void {
   for (const p of world.persons) {
     if (!p.alive || p.sex !== 'f' || p.partnerId === 0 || p.pregnantUntil > 0) continue;
     const age = ageYears(world, p);
-    if (age < 17 || age > 44) continue;
+    const fert = fertilityAt(age);
+    if (fert <= 0) continue;
     const partner = personOf(world, p.partnerId);
     if (!partner || partner.hhId !== p.hhId || partner.sex !== 'm') continue;
     const hh = householdById(world, p.hhId);
@@ -91,7 +93,7 @@ export function conceptionTick(world: World): void {
     if (householdFoodPerHead(world, p) < 3) continue;
     if (p.health < 60 || p.needs.hunger < 35) continue;
     const roll = world.rng.next();
-    if (roll < (CONCEPTION_PER_YEAR * (world.settings.harsh ? 0.45 : 1) * CONCEPTION_CHECK_EVERY) / TICKS_PER_YEAR) {
+    if (roll < (CONCEPTION_PER_YEAR * fert * (world.settings.harsh ? 0.45 : 1) * CONCEPTION_CHECK_EVERY) / TICKS_PER_YEAR) {
       p.pregnantUntil = world.tick + PREGNANCY_TICKS;
       p.pregnantBy = partner.id;
       addEvent(world, 'life', `${p.name} and ${partner.name} are expecting a child.`, [p.id, partner.id], p.x, p.y);
@@ -164,6 +166,8 @@ export function giveBirth(world: World, mother: Person): void {
     if (!q.alive || q === mother || q === baby) continue;
     if (Math.hypot(q.x - mother.x, q.y - mother.y) < 10) adjustRel(q, mother.id, world.tick, { aff: 0.8, note: `${baby.name} was born` });
   }
+  // a birth is not without risk to the mother
+  if (hashUnit(mother.id, baby.id, 93) < childbirthRisk(ageYears(world, mother), frailtyOf(world, mother))) killPerson(world, mother, 'childbirth');
 }
 
 // ───────────────────────── death ─────────────────────────
@@ -328,7 +332,7 @@ export function immigrationTick(world: World): void {
         else if (q.sex === 'm' && years >= 17 && years <= 55) menToWed++;
       }
       const sex = world.rng.chance(womenToWed <= menToWed ? 0.7 : 0.3) ? 'f' : 'm';
-      arrive(world.rng.range(18, 36), sex, undefined, 0, 0);
+      arrive(world.rng.range(18, 48), sex, undefined, 0, 0);
     } else {
       const mother = arrive(world.rng.range(20, 34), 'f', undefined, 0, 0);
       const father = arrive(world.rng.range(21, 38), 'm', undefined, 0.8, 0.5);

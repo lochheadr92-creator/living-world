@@ -292,10 +292,44 @@ away eased by 15–20; nothing is created. **Among others who mourn the same per
 the host is keener to call it and to ask others who mourn the same person, and everyone who sits down to it and mourns that person
 is eased by 15. People remember having been told for six days, so word can still pass on.
 
-What this does and does not show: **nobody dies of natural causes in the first months of an ordinary world** (the old-age hazard
-only starts at 76, which is 168 days in), so in ordinary 30-day worlds none of this appears at all; harsh worlds rarely lose
-anyone in the first weeks either. The tests bring a death about in a running village and check what the village does after it:
-in one such run three people mourned, one went to the grave and no meal was called in memory.
+How often this happens depends on how often people die; see "Ages, ageing and death" below. The tests bring a death about in a
+running village and check what the village does after it: in one such run three people mourned, one went to the grave and no meal
+was called in memory.
+
+## Ages, ageing and death
+
+A year of age is still twelve days (so a day is about four minutes at 1×, and a lifetime is about 56 hours at 1× or 3.5 at 16×).
+What changed is what a life is like. Everything below comes from a person's age and an inborn **frailty** (0.6 hardy to 1.9
+frail, fixed by the seed and the person), with no stored state and no random stream, so it cannot disturb anything else
+(`sim/ageing.ts`).
+
+**Death.** Each minute of simulated time everyone has a small chance of dying of ordinary causes, from this yearly hazard: 12% in
+the first year, 3% falling to 1.2% by five, 0.6% to fifteen, then `0.2% + 0.055% × e^(0.07 × age)` (doubling about every ten
+years from fifty on), all times frailty, and times up to 3 for someone who is hurt or worn out. It is fitted so that of people who
+reach fifteen about 85% see forty, half see sixty, a third seventy, a tenth eighty and one in fifty ninety, and about three in four
+newborns reach fifteen; the mean age at death comes out near 46 (children included). The cause is put down as a childhood illness
+(under twelve), illness (to sixty-two) or old age. A birth carries about a one in a hundred risk to the mother in her twenties,
+more after thirty-five and for the frail. Hunger, thirst, cold and wolves are separate and unchanged. A village of about thirty loses
+someone about every three weeks of simulated time, mostly infants, the old and, now and then, someone in their prime.
+
+**Vigour.** From about forty-five (earlier for the frail) strength fades: walking speed falls to about 80% by the late eighties, a
+pack holds less (12 in the prime, about 8 at the end), and gathering, mending and crafting take up to about 1.5 times as long. It
+never falls below 45% of the prime. Children keep their own stage factors as before. (Sight, recovery and skill are not changed.)
+
+**Fertility.** Full to thirty, falling to nothing at forty-five (it was a flat window from 17 to 44).
+
+**The starting age mix.** Adults are spread from 17 to 62, there are usually two to four elders aged 63 to 84, and children from
+one to eleven, so deaths and handovers show up in the first weeks. Travellers who arrive are 18 to 48.
+
+**Whether the population holds.** `scripts/demography.ts` runs the real mortality, fertility and childbirth functions inside a
+simplified model (couples form, every settled couple is fed and housed, arrivals come when the village is small), hundreds of
+simulated years in seconds. Over 20 starting villages for 300 years, with arrivals on (the default): none die out and the village
+settles at about 55 to 62 people (range 54 to 66). With arrivals off, a closed village of about thirty shrinks slowly (median
+30 at year 50 to 100, 20 at year 200) and 6 of 20 die out within 300 years, which is what a closed population of thirty should do.
+The model is optimistic about food and housing, so it bounds the full simulation rather than replacing it. The full simulation, run
+for 30 days on four seeds (one run each): populations of 44 to 49 (from 28), two or three deaths each at ages 3, 10, 28, 32, 33,
+34, 37, 41 and 78 (one was exposure, the rest illness or old age), and the ledger balanced throughout. Longer full runs were not
+done: a 30-day full run takes about three minutes of real time, which is why the fast model exists.
 
 ## Surviving while working
 
@@ -367,6 +401,11 @@ depends only on the tick and the population, so a run is reproducible.
 
 * Saved worlds are version 5: people hold accounts of how others have behaved, carry a hearsay total and grief for those who died,
   and the dead are recorded with their household and grave, so saves from before that are refused rather than half-loaded.
+
+* People now die of ordinary causes at realistic rates (illness, old age, childbirth), strength and fertility fade with age, and
+  the starting population has more old people. See "Ages, ageing and death". Two tests changed because of it: the two-week
+  ordinary world no longer asserts that nobody dies at all (only that nobody starves, freezes or is eaten) and no longer asserts
+  that a shared meal is completed within fourteen days.
 
 ## Staged scenes
 

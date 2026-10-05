@@ -182,10 +182,13 @@ describe('going to the grave', () => {
     w.tick = Math.floor(w.tick / DAY) * DAY + Math.floor(DAY * 0.4);
     for (const n of ['hunger', 'thirst', 'energy', 'warmth', 'safety', 'social'] as const) partner.needs[n] = 95;
     let went = false;
-    run(w, 1500, () => {
-      for (const n of ['hunger', 'thirst', 'energy', 'warmth', 'safety'] as const) partner.needs[n] = Math.max(partner.needs[n], 90);
-      if (partner.activity?.kind === 'mourn') went = true;
-    });
+    // (given as long as it takes: how long the walk is depends on how old the mourner is)
+    for (let chunk = 0; chunk < 30 && g.visited < 0; chunk++) {
+      run(w, 100, () => {
+        for (const n of ['hunger', 'thirst', 'energy', 'warmth', 'safety'] as const) partner.needs[n] = Math.max(partner.needs[n], 90);
+        if (partner.activity?.kind === 'mourn') went = true;
+      });
+    }
     expect(went).toBe(true);
     expect(g.visited).toBeGreaterThan(0);
     expect(g.weight).toBeLessThan(90 - 10);

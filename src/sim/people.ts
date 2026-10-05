@@ -1,4 +1,5 @@
 import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP, TICKS_PER_YEAR } from './constants';
+import { vigourOf } from './ageing';
 import type { RNG } from './rng';
 import type { Items, Look, Person, Skills, Stage, ToolKind, Traits, World } from './types';
 import { clamp } from './util';
@@ -54,7 +55,11 @@ export function stageOf(world: World, p: Person): Stage {
 }
 
 export function carryCap(world: World, p: Person): number {
-  return CARRY_CAP[stageOf(world, p)] + ((p.inv.basket ?? 0) > 0 ? BASKET_BONUS : 0);
+  const age = ageYears(world, p);
+  const st = stageOfAge(age);
+  // grown people carry less as their strength goes (the prime carries the full load)
+  const base = st === 'adult' || st === 'elder' ? Math.round(CARRY_CAP.adult * (0.4 + 0.6 * vigourOf(world, p, age))) : CARRY_CAP[st];
+  return base + ((p.inv.basket ?? 0) > 0 ? BASKET_BONUS : 0);
 }
 
 export const dependentsOf = (world: World, p: Person): Person[] => world.persons.filter((q) => q.alive && q.id !== p.id && q.hhId === p.hhId && isDependent(world, q));
