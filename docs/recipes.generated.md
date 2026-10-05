@@ -37,6 +37,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | smithy | an iron hoe | 1 iron, 1 handles | 1 charcoal | 8 s | — | an iron hoe | — | hammer (required) | smith | 1 | An iron tool works about a quarter faster than a wooden-and-stone one and wears half as quickly. |
 | smithy | an iron saw | 1 iron, 1 handles | 1 charcoal | 8 s | — | an iron saw | — | hammer (required) | smith | 1 | An iron tool works about a quarter faster than a wooden-and-stone one and wears half as quickly. |
 | smithy | an iron hammer | 1 iron, 1 handles | 1 charcoal | 8 s | — | an iron hammer | — | hammer (required) | smith | 1 | An iron tool works about a quarter faster than a wooden-and-stone one and wears half as quickly. |
+| smithy | an iron spear | 1 iron, 1 handles | 1 charcoal | 8 s | — | an iron spear | — | hammer (required) | smith | 1 | An iron-headed spear hits about a third harder than one pointed with stone and wears half as quickly. |
 | bakery | milled flour | 4 grain | — | 7 s | — | 3 flour | 1 grain (husks and chaff) | — | bake | 2 | Flour keeps better than loose grain and is what bread is made of. |
 | bakery | baked bread | 3 flour, 2 water | 1 wood | 5 s | 18 s | 4 bread | — | — | bake | 2 | Four loaves (30 hunger each) from what raw grain gives 3 (22 each): the dough takes up water. Bread keeps well and is what is served at shared meals. |
 | granary | tended bins | — | — | 6 s | — | — | — | — | — | 2 | Turning and airing the bins and clearing out vermin keeps the grain from going off. |
@@ -69,6 +70,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | hammer | 1 | — | — | — |
 | saw | 1 | — | — | — |
 | water jar | 1.5 | — | — | — |
+| spear | 1.5 | — | — | — |
 
 ## Tools
 
@@ -81,6 +83,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | hammer | 1 wood, 2 stone | 8 s | 0.032 (iron: 0.016) | building and repair work, and every kind of smithing |
 | saw | 2 wood, 2 stone | 11 s | 0.044 (iron: 0.022) | cutting planks with little waste |
 | water jar | cannot be made by hand (kiln) | — | 0.02 (iron: 0.01) | carrying more water (it wears a little with each trip to the water) |
+| spear | 2 wood, 1 stone | 7 s | 0.05 (iron: 0.025) | keeping wolves off, and killing one that will not go (it wears only while it is being used against a wolf) |
 
 Duration multipliers while using the right tool (lower is faster): axe 0.55, pick 0.55, hoe 0.5, hoeTend 0.7, basket 0.85, hammer 0.8, saw 0.55, ironAxe 0.42, ironPick 0.42, ironHoe 0.4, ironHoeTend 0.6, ironHammer 0.65, ironSaw 0.42, ironBasket 0.85. Past 70 wear the benefit fades linearly to nothing at 100, where the tool breaks.
 

@@ -395,7 +395,7 @@ export class Scenery {
         for (let i = 0; i < Math.min(3, n); i++) ellipse(ctx, px + (i - 1) * 4, py - (i === 1 ? 4 : 1), 4, 3, shade('#a8a79f', 0.88 + i * 0.07));
       } else if (k === 'water') {
         ellipse(ctx, px, py - 3, 3, 4, '#6b8fb3');
-      } else if (k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar') {
+      } else if (k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'spear') {
         this.dropTool(ctx, k, px, py);
       } else if (k === 'planks') {
         blit(ctx, plankStack(this.cache, Math.ceil(n / 2)), px, py, 0.7);
@@ -436,6 +436,13 @@ export class Scenery {
       ctx.fillRect(px + 2, py - 8, 5, 4);
     } else if (k === 'basket') {
       ellipse(ctx, px, py - 3, 5, 3.4, '#b98a4f');
+    } else if (k === 'spear') {
+      // a long shaft with its point away from the viewer
+      ctx.beginPath();
+      ctx.moveTo(px - 8, py + 1);
+      ctx.lineTo(px + 9, py - 7);
+      ctx.stroke();
+      poly(ctx, [[px + 8, py - 9], [px + 12.5, py - 8.6], [px + 9, py - 5]], '#bdbdb5', 'rgba(20,20,26,0.6)', 0.6);
     } else {
       ctx.fillRect(px + 3, py - 8, 4.5, 3);
     }

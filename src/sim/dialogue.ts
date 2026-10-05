@@ -80,6 +80,7 @@ export const ITEM_PHRASE: Record<ItemKind, string> = {
   hammer: 'a hammer',
   saw: 'a saw',
   jar: 'a water jar',
+  spear: 'a spear',
 };
 
 export function requestLine(kind: string, a: number, b: number, vars: Record<string, string | number> = {}): string {

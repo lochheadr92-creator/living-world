@@ -16,7 +16,7 @@ export const MAP_H = 80;
 
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
+export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
@@ -47,6 +47,7 @@ export const WEIGHT: Record<ItemKind, number> = {
   hammer: 1,
   saw: 1,
   jar: 1.5,
+  spear: 1.5,
 };
 /**
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
@@ -83,6 +84,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   hammer: 'hammer',
   saw: 'saw',
   jar: 'water jar',
+  spear: 'spear',
 };
 export const isToolKind = (k: string): k is ToolKind => (TOOLS as string[]).includes(k);
 export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k);
@@ -331,6 +333,7 @@ export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
   hammer: { label: 'hammer', hand: { cost: { wood: 1, stone: 2 }, work: 80 }, wear: 0.032, blurb: 'building and repair work, and every kind of smithing' },
   saw: { label: 'saw', hand: { cost: { wood: 2, stone: 2 }, work: 110 }, wear: 0.044, blurb: 'cutting planks with little waste' },
   jar: { label: 'water jar', hand: null, wear: 0.02, blurb: 'carrying more water (it wears a little with each trip to the water)' },
+  spear: { label: 'spear', hand: { cost: { wood: 2, stone: 1 }, work: 70 }, wear: 0.05, blurb: 'keeping wolves off, and killing one that will not go (it wears only while it is being used against a wolf)' },
 };
 /** older name for the hand-made recipes, kept so existing option code reads naturally */
 export const TOOL_RECIPE: Record<ToolKind, { wood: number; stone: number; work: number; label: string }> = Object.fromEntries(

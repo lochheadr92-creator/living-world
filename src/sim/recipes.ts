@@ -209,7 +209,7 @@ export const RECIPES: Recipe[] = [
     serves: ['iron'],
     benefit: 'Iron to forge tools that cut faster and last twice as long.',
   },
-  ...(['axe', 'pick', 'hoe', 'saw', 'hammer'] as ToolKind[]).map(
+  ...(['axe', 'pick', 'hoe', 'saw', 'hammer', 'spear'] as ToolKind[]).map(
     (kind): Recipe => ({
       id: `forge_${kind}`,
       label: `an iron ${kind === 'pick' ? 'pickaxe' : kind}`,
@@ -227,7 +227,7 @@ export const RECIPES: Recipe[] = [
       tool: { kind: 'hammer', required: true, speed: 0.8 },
       workers: 1,
       serves: ['tool_' + kind],
-      benefit: 'An iron tool works about a quarter faster than a wooden-and-stone one and wears half as quickly.',
+      benefit: kind === 'spear' ? 'An iron-headed spear hits about a third harder than one pointed with stone and wears half as quickly.' : 'An iron tool works about a quarter faster than a wooden-and-stone one and wears half as quickly.',
     }),
   ),
   {

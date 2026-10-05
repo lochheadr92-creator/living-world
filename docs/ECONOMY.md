@@ -114,11 +114,11 @@ consumed.
 
 * **Effects** are task-specific: axe (felling, and hewing planks), pickaxe (rock, clay, ore, outcrops, quarry), hoe (till/tend), basket
   (picking, carrying), hammer (construction and repair speed; required for forging and for building a cart), saw (planks with
-  little waste; required for sawing), water jar (carries four units of water without adding to the load). With no tool the
-  task is simply slower.
-* **Wear.** Use wears a tool a little per tick (iron half as much); past 70% wear the benefit fades, and at 100% it breaks
+  little waste; required for sawing), water jar (carries four units of water without adding to the load), spear (used only
+  against wolves: see "Wolves, and what is done about them"). With no tool the task is simply slower.
+* **Wear.** Use wears a tool a little per tick (iron half as much; a spear wears only while it is being used against a wolf); past 70% wear the benefit fades, and at 100% it breaks
   (recorded: `-tool worn out`). A fitted handle restores more wear than a stick of wood when a tool is mended.
-* **Iron** tools are quicker and wear half as fast; they are forged only at a smithy.
+* **Iron** tools are quicker (an iron spear hits a third harder) and wear half as fast; they are forged only at a smithy.
 * **Lending and shared use — the rules.**
   1. A tool has one holder at a time; nobody can use a tool someone else is holding.
   2. A **loan** is a favour asked in conversation: the owner (or anyone holding a spare) decides by willingness, trust and

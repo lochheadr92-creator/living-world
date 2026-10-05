@@ -42,6 +42,7 @@ export const ITEM_COLORS: Record<string, string> = {
   hammer: '#c8c8c0',
   saw: '#c8c8c0',
   jar: '#c98a5a',
+  spear: '#b8b8b0',
 };
 
 export const EVENT_COLORS: Record<string, string> = {
