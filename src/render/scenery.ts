@@ -13,6 +13,8 @@ export class Scenery {
   readonly cache = new SpriteCache();
   private buildings = new BuildingPainter(this.cache);
   private sites = new SiteDrawer(this.cache);
+  /** how much larger berries and fruit are drawn than true scale (1 at normal zoom; set each frame from the camera) */
+  fruitScale = 1;
 
   // ───────── natural sources ─────────
   drawSource(ctx: CanvasRenderingContext2D, s: Source, simT: number, wind: number): void {
@@ -42,11 +44,11 @@ export class Scenery {
           const [fx, fy] = FRUIT_SPOTS[i];
           ctx.fillStyle = 'rgba(40,20,10,0.35)';
           ctx.beginPath();
-          ctx.arc(fx + 0.4, fy + 0.6, 2.7, 0, Math.PI * 2);
+          ctx.arc(fx + 0.4, fy + 0.6, 2.7 * this.fruitScale, 0, Math.PI * 2);
           ctx.fill();
           ctx.fillStyle = col;
           ctx.beginPath();
-          ctx.arc(fx, fy, 2.5, 0, Math.PI * 2);
+          ctx.arc(fx, fy, 2.5 * this.fruitScale, 0, Math.PI * 2);
           ctx.fill();
           ctx.fillStyle = 'rgba(255,255,255,0.5)';
           ctx.fillRect(fx - 1.1, fy - 1.3, 1, 1);
@@ -65,7 +67,7 @@ export class Scenery {
           const [bx, by] = BERRY_SPOTS[i];
           ctx.fillStyle = '#b3274f';
           ctx.beginPath();
-          ctx.arc(bx, by, 2.2, 0, Math.PI * 2);
+          ctx.arc(bx, by, 2.2 * this.fruitScale, 0, Math.PI * 2);
           ctx.fill();
           ctx.fillStyle = 'rgba(255,200,215,0.85)';
           ctx.fillRect(bx - 0.9, by - 1.1, 0.9, 0.9);

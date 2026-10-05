@@ -1,7 +1,7 @@
 import type { Game } from '../app/game';
 import { gridQuery } from '../sim/registry';
 import type { Entity } from '../sim/types';
-import { worldToScreen } from './camera';
+import { personBoost, worldToScreen } from './camera';
 import { HALF_H, HALF_W } from './iso';
 import { STRUCT } from './structures';
 import type { BuildKind } from './structures';
@@ -94,7 +94,8 @@ export function pickEntity(game: Game, vw: number, vh: number, px: number, py: n
     const a = game.renderAlpha;
     const x = p.px + (p.x - p.px) * a;
     const y = p.py + (p.y - p.py) * a;
-    test(p.id, x, y, 30, 13);
+    const boost = personBoost(z); // drawn larger when zoomed out, so the click target is too
+    test(p.id, x, y, 30 * boost, 13 * boost);
   }
   for (const an of w.animals) {
     const a = game.renderAlpha;

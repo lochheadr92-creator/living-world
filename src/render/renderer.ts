@@ -1,7 +1,7 @@
 import type { Game } from '../app/game';
 import { senseRadius } from '../sim/perception';
 import type { Animal, Building, Cart, Entity, Grave, Person, Pile, Plot, Site, Source, World } from '../sim/types';
-import { clampCamera, updateCamera } from './camera';
+import { clampCamera, fruitBoost, personBoost, updateCamera } from './camera';
 import { CartRenderer } from './carts';
 import { CharacterRenderer } from './characters';
 import { Critters, Effects, ambientColor, drawGlows, drawWeather } from './effects';
@@ -187,6 +187,9 @@ export class Renderer {
 
     this.heads.clear();
     const night = 1 - Math.min(1, world.light * 1.2);
+    // zoomed out, people and the berries and fruit they come for are drawn a little larger so they stay visible
+    const boost = personBoost(z);
+    this.scenery.fruitScale = fruitBoost(z);
     const hoverId = game.hover?.id ?? 0;
     const sleepersOnRoof = new Map<number, number>();
     for (const it of list) {
@@ -216,7 +219,7 @@ export class Renderer {
         }
         case 7: {
           const p = it.o as Person;
-          const r = this.chars.draw(ctx, world, p, alphaT, simT, { selected: p.id === game.selectedId, hovered: p.id === hoverId, night });
+          const r = this.chars.draw(ctx, world, p, alphaT, simT, { selected: p.id === game.selectedId, hovered: p.id === hoverId, night, boost });
           this.heads.set(p.id, { x: r.headX, y: r.headY });
           if (p.pose === 'sleep') this.drawZzz(ctx, r.headX, r.headY, simT, p.id);
           break;
@@ -239,7 +242,7 @@ export class Renderer {
       if (!e || e.ent !== 'person' || hidden.has(id) || !this.heads.has(id)) return;
       const at = list.findIndex((it) => it.k === 7 && it.id === id);
       if (at < 0 || !this.coveredByLater(at, e.px + (e.x - e.px) * alphaT, e.py + (e.y - e.py) * alphaT)) return;
-      this.chars.draw(ctx, world, e, alphaT, simT, { selected: id === game.selectedId, hovered: id === hoverId, night, ghost: SEE_THROUGH_ALPHA });
+      this.chars.draw(ctx, world, e, alphaT, simT, { selected: id === game.selectedId, hovered: id === hoverId, night, ghost: SEE_THROUGH_ALPHA, boost });
     };
     seeThrough(game.selectedId);
     if (hoverId !== game.selectedId) seeThrough(hoverId);

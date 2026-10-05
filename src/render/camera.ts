@@ -6,6 +6,19 @@ import { project, unproject } from './iso';
 export const MIN_ZOOM = 0.3;
 export const MAX_ZOOM = 3.2;
 
+/**
+ * Zoomed out, a person is a speck and a berry is invisible. Below normal viewing zoom the things that carry the story are drawn a
+ * little larger than true scale (1 at zoom 0.8 and above), and click targets grow with them so what you see is what you can pick.
+ */
+export function personBoost(zoom: number): number {
+  return clamp(Math.pow(0.8 / zoom, 0.7), 1, 1.9);
+}
+
+/** the same idea for berries and fruit on their bushes and trees, a little gentler */
+export function fruitBoost(zoom: number): number {
+  return clamp(Math.pow(0.65 / zoom, 0.8), 1, 1.7);
+}
+
 export function clampCamera(c: CameraState, viewW: number, viewH: number): void {
   c.zoom = clamp(c.zoom, MIN_ZOOM, MAX_ZOOM);
   // keep the middle of the view somewhere over the map

@@ -615,7 +615,7 @@ export class CharacterRenderer {
    * `ghost` (0..1) redraws the same figure translucent over whatever stands in front of it, without the ground shadow and ring.
    * Drawing twice in a frame is harmless to animation state: the rig is a pure function of simulation time and person state.
    */
-  draw(ctx: CanvasRenderingContext2D, world: World, p: Person, alphaT: number, simT: number, opts: { selected: boolean; hovered: boolean; night: number; ghost?: number }): { headX: number; headY: number } {
+  draw(ctx: CanvasRenderingContext2D, world: World, p: Person, alphaT: number, simT: number, opts: { selected: boolean; hovered: boolean; night: number; ghost?: number; boost?: number }): { headX: number; headY: number } {
     ghostA = opts.ghost ?? 1;
     ctx.globalAlpha = ghostA;
     const x = p.px + (p.x - p.px) * alphaT;
@@ -624,7 +624,8 @@ export class CharacterRenderer {
     const running = p.pose === 'run';
     const { rig, s, pose, bt, burden } = this.rigFor(world, p, simT, alphaT, p.pose === 'walk', running);
     const bs = bodyScale(world, p);
-    const sc = bs.s;
+    const boost = opts.boost ?? 1;
+    const sc = bs.s * boost;
     const look = p.look;
     const stage = stageOf(world, p);
     const hh = world.households.find((h) => h.id === p.hhId);
@@ -693,7 +694,7 @@ export class CharacterRenderer {
       ctx.strokeStyle = opts.selected ? `rgba(255,214,120,${0.75 + 0.2 * Math.sin(simT * 4)})` : 'rgba(255,255,255,0.55)';
       ctx.lineWidth = opts.selected ? 2.2 : 1.4;
       ctx.beginPath();
-      ctx.ellipse(base[0], base[1] + 1, 13, 6.4, 0, 0, Math.PI * 2);
+      ctx.ellipse(base[0], base[1] + 1, 13 * boost, 6.4 * boost, 0, 0, Math.PI * 2);
       ctx.stroke();
     }
 
