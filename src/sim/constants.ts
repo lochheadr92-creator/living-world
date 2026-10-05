@@ -286,7 +286,7 @@ export const homeNoun = (t: string | undefined): string => (t === 'house' ? 'hou
 export const isSolidHome = (t: string | undefined): boolean => t === 'hut' || t === 'house';
 
 /** scenes in which the workshop, meal and care planners are on (the original staged scenes keep them off so they stay focused) */
-export const workRules = (scene: string): boolean => scene === 'natural' || scene === 'workshop' || scene === 'meal' || scene === 'haul' || scene === 'care';
+export const workRules = (scene: string): boolean => scene === 'natural' || scene === 'workshop' || scene === 'meal' || scene === 'haul' || scene === 'care' || scene === 'grief';
 
 export const FIRE_FUEL_PER_WOOD = 380;
 export const FIRE_MAX_FUEL = 2400;

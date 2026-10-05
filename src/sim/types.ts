@@ -105,6 +105,11 @@ export interface Belief {
   /** who first saw it (hearsay passes this along unchanged), and how many mouths it has passed through */
   origin?: number;
   hops?: number;
+  /** a grave: who lies there, their name, when they died, and what of — the cause only for those who were there to see it */
+  who?: number;
+  name?: string;
+  died?: number;
+  cause?: string;
 }
 
 /** A person's snapshot of a workplace (always a snapshot with the belief's own timestamp). */
@@ -221,6 +226,7 @@ export type ActivityKind =
   | 'attend_meal'
   | 'host_meal'
   | 'visit'
+  | 'mourn'
   | 'return_tool';
 
 export type PoseKind =
@@ -429,6 +435,8 @@ export interface Person {
   concerns: Concern[];
   /** the last conversation or quarrel that ended, kept apart from whatever is going on now */
   lastInteraction: InteractionRecord | null;
+  /** graves this person has stood at, by the id of the person buried there (once each: the visit is made, or it is not) */
+  visitedGraves?: Record<number, number>;
 }
 
 export interface InteractionRecord {
@@ -907,7 +915,7 @@ export interface Settings {
   immigration: boolean;
   scene: SceneId;
 }
-export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care';
+export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care' | 'grief';
 
 export interface SpatialGrid {
   cell: number;

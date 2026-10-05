@@ -233,6 +233,25 @@ bites they still remembered, the nearest water they believed in (and how far fro
 memories. It is shown on the grave card and, in a clause, in the feed ("died (thirst, after 3 wolf bites)"). It is **saved with
 the world** (so a loaded save explains a death exactly as it did) and **never read by anyone in it**: it is for the observer.
 
+**Who learns of a death, and how.** Only the ways anything is learned. Those within sight of the person when they die know at
+once, and know what they died of. Anyone who later comes upon the grave learns that the person has died, but not of what: a grave
+does not say. And a death is **news** (told for a day and a half after the teller learned of it, to whoever has not heard,
+alongside the other news in a conversation, with its own words: "Have you heard? Ana has died."); the cause goes with it if the
+teller knew it. Whoever learns of it and was **kin, or had an affinity of 45 or more**, feels it: company −24, safety −8, and a
+line in their own memory in the words they learned it by ("Ana died (old age).", "Bea told me that Ana had died.", "I came upon
+Ana's grave: they had died."). To anyone else a grave is a name on a marker, and they learn nothing more from it. A death that
+nobody sees and nobody speaks of is not known to the people who loved the one who died, however fond they were and however long
+it has been: it used to reach every one of them at the moment it happened, wherever they were.
+
+**Standing at a grave.** Someone who has learned of a death and was kin, or close (an affinity of 45 or more), goes to the grave
+and stands there for about a second of real time (10 ticks), **once**: a company of 10 comes back, a line goes into their own
+memory ("Stood at Ana's grave for a while.") and one into the feed ("Bea stood at Ana's grave."). It is what they do with the
+news, not a chore, so it **waits while anything presses** (hunger, thirst or tiredness, the dark, wolves about the grave), is
+**held back like any other discretionary trip** by the survival guard if it would leave them too far from water or food, is not
+made to a grave more than 700 ticks' walk away, and **lapses for good five days after they learned of it**. Whether they have been is written on the
+person (`visitedGraves`, by the id of the person buried there), so a loaded save knows, and an interrupted walk that is picked
+up again is the same visit. A stranger, who saw the death or found the grave, has no such option.
+
 ## Quarrels
 
 A quarrel is a **grievance** with a cause (competition for something, scarcity while going hungry, a refusal when it mattered, a
@@ -287,7 +306,7 @@ depends only on the tick and the population, so a run is reproducible.
 | Spoilage | food in stores and heaps goes off at a recorded rate (granary: a fifth when tended); the loss is in the ledger |
 | A tool wears out | breaks; recorded; no record left behind |
 | A building collapses or is destroyed | store, running batch and racked tools become a heap of rubble |
-| A person dies | belongings, tools included, are dropped where they fell; promises are released; requests withdrawn; a meal they hosted is called off; a grave is set with their name, cause and a record of their last hours (see "Death and grief") |
+| A person dies | belongings, tools included, are dropped where they fell; promises are released; requests withdrawn; a meal they hosted is called off; a grave is set with their name, cause and a record of their last hours; only those who see it, come upon the grave or are told learn of it (see "Death and grief") |
 | A cart's puller dies | the cart stays, load and all |
 
 ## Rule changes made on purpose (relative to the version before this work)

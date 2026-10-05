@@ -72,7 +72,15 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       return b;
     }
     case 'grave': {
-      return blank(e.id, 'grave', e.x + 0.5, e.y + 0.5, tick);
+      const b = blank(e.id, 'grave', e.x + 0.5, e.y + 0.5, tick);
+      if (e.personId) {
+        b.who = e.personId;
+        b.name = e.name;
+        b.died = e.died;
+        // a grave does not say what someone died of: only those who were there when it happened know
+        if (e.cause && world.tick - e.died < 40) b.cause = e.cause;
+      }
+      return b;
     }
     case 'animal': {
       const b = blank(e.id, 'danger', e.x, e.y, tick);
@@ -141,7 +149,26 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   b.origin = p.id;
   b.hops = 0;
   noteLetDown(world, p, b);
-  return learn(p, b);
+  const isNew = learn(p, b);
+  if (isNew && b.kind === 'grave') learnOfDeath(world, p, b, null);
+  return isNew;
+}
+
+/**
+ * Learning that someone has died: by being there, by coming upon their grave, or by being told. Only those who knew them and
+ * were close (kin, or an affinity of 45 or more) feel it; to anyone else a grave is a name on a marker. This is the only way
+ * grief reaches anybody: a death nobody saw and nobody has spoken of is not known to the people who loved the one who died.
+ */
+export function learnOfDeath(world: World, q: Person, grave: Belief, teller: Person | null): void {
+  if (grave.kind !== 'grave' || !grave.who) return;
+  const r = q.relations[grave.who];
+  if (!r || !(r.kin || r.affinity >= 45)) return;
+  q.needs.social = Math.max(0, q.needs.social - 24);
+  q.needs.safety = Math.max(0, q.needs.safety - 8);
+  const name = grave.name ?? 'someone';
+  const of = grave.cause ? ` (${grave.cause})` : '';
+  addLog(world, q, 'life', teller ? `${teller.name} told me that ${name} had died${of}.` : grave.cause ? `${name} died${of}.` : `I came upon ${name}’s grave: they had died.`);
+  if (!teller && Math.hypot(q.x - grave.x, q.y - grave.y) < 14) q.speech = { text: '…', until: world.tick + 120, kind: 'think' };
 }
 
 /** A person's name, alive or not (for memories of who said what). */

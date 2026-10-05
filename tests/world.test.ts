@@ -64,7 +64,7 @@ describe('saving and loading', () => {
   });
 
   it('so does a world in the middle of making things: workshops, batches, tools on racks, a meal under way, a cart on the road', () => {
-    for (const [id, until] of [['workshop', 1500], ['meal', 1000], ['haul', 260], ['care', 300]] as const) {
+    for (const [id, until] of [['workshop', 1500], ['meal', 1000], ['haul', 260], ['care', 300], ['grief', 400]] as const) {
       const a = scene(id);
       run(a, until);
       const b = deserializeWorld(serializeWorld(a));

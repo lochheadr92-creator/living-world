@@ -148,6 +148,11 @@ export function placeWords(world: World, b: Belief): string {
   return `${dist} ${dir} of camp`;
 }
 
+/** What someone says when they tell another that a person has died. */
+export function deathLine(b: Belief, a: number, c: number, tick: number): string {
+  return saying(['Have you heard? {name} has died.', 'I have sad news: {name} is dead.', '{name} has died. I thought you should know.'], a, c, tick >> 5, { name: b.name ?? 'Someone' });
+}
+
 export function infoLine(world: World, b: Belief, a: number, c: number): string {
   if (b.amount <= 0 && (b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot')) {
     const what = b.kind === 'berry_bush' ? 'berry bushes' : b.kind === 'fruit_tree' ? 'fruit trees' : b.kind === 'wild_grain' ? 'wild grain' : 'fishing spot';

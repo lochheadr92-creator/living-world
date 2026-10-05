@@ -1168,6 +1168,7 @@ function phaseNews(world: World, S: Person, L: Person): void {
       if (!shown && !S.speech) {
         shown = true;
         if (b.kind === 'danger') bubble(world, S, D.saying(D.WARN_LINES, S.id, L.id, world.tick >> 5, { dir: D.dangerWords(world, b) }), 'warn', 62);
+        else if (b.kind === 'grave') bubble(world, S, D.deathLine(b, S.id, L.id, world.tick), 'say', 70);
         else bubble(world, S, D.infoLine(world, b, S.id, L.id), 'say', 66);
       }
     }

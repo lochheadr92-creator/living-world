@@ -1,5 +1,5 @@
 import * as D from './dialogue';
-import { estimatedAmount, learn } from './knowledge';
+import { estimatedAmount, learn, learnOfDeath } from './knowledge';
 import { BELIEF_NOUN } from './labels';
 import { isFacilityType } from './recipes';
 import { addLog } from './events';
@@ -24,7 +24,11 @@ const NEWS_WEIGHT: Partial<Record<Belief['kind'], number>> = {
   ore_vein: 3.2,
   outcrop: 3,
   cart: 0.6,
+  grave: 7,
 };
+
+/** a death is told for a day and a half after the teller learned of it: after that it is old news */
+const DEATH_NEWS_WINDOW = 3600;
 
 /** What would this speaker tell this listener? Only things the speaker has seen or heard. */
 export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] {
@@ -41,6 +45,7 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (b.kind === 'cart' && b.hh !== S.hhId) continue;
     if (b.kind === 'danger' && (b.amount <= 0 || world.tick - b.seen > 900)) continue;
     if (b.kind === 'water') continue;
+    if (b.kind === 'grave' && (!b.who || world.tick - b.learned > DEATH_NEWS_WINDOW)) continue;
     const isFood = b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot';
     const depletedNews = isFood && b.amount <= 0 && S.failures[b.id] !== undefined && world.tick - S.failures[b.id].tick < 1100 && b.seen >= S.failures[b.id].tick - 60;
     if (isFood && b.amount <= 0 && !depletedNews) continue; // an old, stale 'empty' is not news
@@ -48,8 +53,8 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (S.told[toldKey(L.id, b.id)] !== undefined && world.tick - S.told[toldKey(L.id, b.id)] < 3500) continue;
     const dCamp = Math.hypot(b.x - world.camp.x, b.y - world.camp.y);
     const fresh = Math.max(0, 1 - (world.tick - b.learned) / 4000);
-    // the speaker cannot see the listener's mind; far places are likelier to be news
-    let score = wgt * (0.6 + fresh) + (dCamp > 12 ? 1.6 : -1) + hashUnit(S.id, b.id, world.tick >> 6) * 1.2;
+    // the speaker cannot see the listener's mind; far places are likelier to be news (a death is news wherever it was)
+    let score = wgt * (0.6 + fresh) + (b.kind === 'grave' ? 0 : dCamp > 12 ? 1.6 : -1) + hashUnit(S.id, b.id, world.tick >> 6) * 1.2;
     if (isFood && !depletedNews && estimatedAmount(world, b) < 2) score -= 2.5;
     if (depletedNews) score += 2.2;
     if (Math.hypot(b.x - L.x, b.y - L.y) < 6) score -= 3; // they can see it for themselves
@@ -68,7 +73,13 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   const copy: Belief = { ...b, items: b.items ? { ...b.items } : undefined, need: b.need ? { ...b.need } : undefined, src: 'told', from: S.id, learned: world.tick, origin: b.origin ?? S.id, hops: (b.hops ?? 0) + 1 };
   learn(L, copy);
   const noun = BELIEF_NOUN[b.kind];
-  if (b.kind === 'danger') {
+  if (b.kind === 'grave') {
+    // news of a death: those who knew and cared feel it (learnOfDeath says so in their own words); to anyone else it is a name
+    if (!old) {
+      learnOfDeath(world, L, copy, S);
+      if (!(L.relations[b.who ?? 0]?.kin || (L.relations[b.who ?? 0]?.affinity ?? 0) >= 45)) addLog(world, L, 'info', `${S.name} told me that ${b.name ?? 'someone'} had died.`);
+    }
+  } else if (b.kind === 'danger') {
     L.needs.safety = Math.max(0, L.needs.safety - 8);
     addLog(world, L, 'danger', `${S.name} warned me about a wolf ${D.dangerWords(world, b)} of camp.`);
   } else addLog(world, L, 'info', `${S.name} told me about a ${noun} ${D.placeWords(world, b)}.`);

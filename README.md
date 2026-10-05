@@ -152,7 +152,9 @@ A grave says what they died of and, for the newest forty deaths, what they were 
 carrying, what they were doing and why, how their last attempt ended, what they had wanted to do but could not, how often wolves
 had bitten them (as far as they still remembered), the nearest water they knew of, and their last memories. It is copied at the
 moment of death from what the person themselves knew, kept in the saved world, and never read by anyone in it. The feed says it in a
-clause: "Sven died (thirst, after 3 wolf bites)".
+clause: "Sven died (thirst, after 3 wolf bites)". News of a death travels like any news: those who see it know at once; anyone else
+learns by coming upon the grave or by being told, and only then do those who loved the person grieve, and go to stand at the
+grave, once.
 
 The speed buttons say two things: the speed you asked for and the speed actually achieved over the last couple of seconds.
 If the page cannot keep up, or stalled and the clock gave up on some world time, the bar says so (amber, with the number of
@@ -172,6 +174,11 @@ of spontaneous behaviour. Nobody in them is told what to do.
 | A shared meal | a host with food, two friends, the hall at the end of the afternoon |
 | A handcart load | bricks and planks in a store far from the house that wants them; a cart by the house |
 | Looking after a frail neighbour | an old man hungry in his lean-to, out of sight; a neighbour who earlier saw how he looked |
+| A death in the settlement | an old woman has just died; her daughter was beside her, a stranger passing, her friend and her son out of sight (see below) |
+
+In *A death in the settlement* the death is the staged part. Her daughter knows at once and goes to stand at the grave; the
+stranger who saw it does nothing, because he did not know her; her friend and her son, out of sight, know nothing until they come
+upon the grave or are told, and then each goes once. Open a person's card to read their own memory of it.
 
 The ordinary seeded world is the demonstration of natural behaviour.
 

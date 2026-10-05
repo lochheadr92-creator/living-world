@@ -9,6 +9,7 @@ import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { BUILD_DEF } from './constants';
 import { observe, putBelief } from './knowledge';
+import { senseRadius } from './perception';
 import { createPerson, ageYears, blendLook, mixTraits, stageOf, stageOfAge } from './people';
 import { findPath } from './pathfinding';
 import { gridQuery, isFreeLand, isWalkable, registerGeneric } from './registry';
@@ -222,15 +223,14 @@ export function killPerson(world: World, p: Person, cause: string): void {
   // grave marker on a nearby free tile
   const gx = Math.floor(p.x);
   const gy = Math.floor(p.y);
-  let placed = false;
-  for (let r = 0; r < 5 && !placed; r++) {
-    for (let dy = -r; dy <= r && !placed; dy++) {
-      for (let dx = -r; dx <= r && !placed; dx++) {
+  let grave: Grave | null = null;
+  for (let r = 0; r < 5 && !grave; r++) {
+    for (let dy = -r; dy <= r && !grave; dy++) {
+      for (let dx = -r; dx <= r && !grave; dx++) {
         if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
         if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND) {
-          const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age, cause, personId: p.id };
-          registerGeneric(world, g);
-          placed = true;
+          grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age, cause, personId: p.id };
+          registerGeneric(world, grave);
         }
       }
     }
@@ -249,18 +249,9 @@ export function killPerson(world: World, p: Person, cause: string): void {
   }
   const bitten = cause !== 'old age' && last.wolfBites ? `, after ${last.wolfBites} wolf bite${last.wolfBites === 1 ? '' : 's'}` : '';
   addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause}${bitten})`}, aged ${age}.`, [p.id], p.x, p.y);
-  // those who loved them feel it
-  for (const q of world.persons) {
-    if (!q.alive) continue;
-    const r = q.relations[p.id];
-    if (!r) continue;
-    if (r.kin || r.affinity >= 45) {
-      q.needs.social = Math.max(0, q.needs.social - 24);
-      q.needs.safety = Math.max(0, q.needs.safety - 8);
-      addLog(world, q, 'life', `${p.name} died (${cause}).`);
-      if (Math.hypot(q.x - p.x, q.y - p.y) < 14) q.speech = { text: '…', until: world.tick + 120, kind: 'think' };
-    }
-  }
+  // Who knows: those who could see it happen, now, and everyone else only as the news reaches them (a grave they come upon, or
+  // someone's word: see learnOfDeath). Nobody hears of a death by being far away and fond of the person who died.
+  if (grave) for (const q of world.persons) if (q.alive && Math.hypot(q.x - p.x, q.y - p.y) <= senseRadius(world, q)) observe(world, q, grave);
 }
 
 // ───────────────────────── orphans ─────────────────────────

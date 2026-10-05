@@ -25,6 +25,7 @@ export const SCENE_LABELS: Record<SceneId, string> = {
   meal: 'TEST SCENE · A shared meal at the hall — a host with food, two friends, one table (staged)',
   haul: 'TEST SCENE · A handcart load — bricks and planks far from a house waiting for them (staged)',
   care: 'TEST SCENE · Looking after a frail neighbour — an old man hungry in his lean-to, out of sight (staged)',
+  grief: 'TEST SCENE · A death in the settlement — who sees it, who is told, who goes to the grave (staged)',
 };
 
 export const SCENE_INFO: Record<Exclude<SceneId, 'natural'>, string> = {
@@ -34,6 +35,7 @@ export const SCENE_INFO: Record<Exclude<SceneId, 'natural'>, string> = {
   workshop: "Hana's hut is being rebuilt as a house and is waiting for planks. There is a timber yard, a saw, and trees; nobody has been told to make anything. Watch who cuts, who saws, what is carried, and where the planks end up.",
   meal: "Hosta has bread and fish, the hall is by the water, and two friends are about as the afternoon winds down. Nobody has been told to hold a meal: whoever has food to spare and company at hand may invite the others. Open the host's card to see the invitation, the table and the servings.",
   care: "Old Kit is frail, hungry and asleep in his lean-to on the far side of the settlement, and knows of no food. Gus passed his door earlier and saw how he looked (that sighting is the staged part). Hilda has food to spare and is Kit's friend. Watch whether the word gets round, who decides to go, and what happens when they find him.",
+  grief: "Old Ana has just died of old age beside her lean-to. Her daughter Bea was with her and saw it; Eli, a stranger, was passing. Her friend Cai is a long way south, and her son Dan far to the east, both out of sight: neither knows, however fond of her they were. That she dies is the staged part. Watch Bea grieve and stand at the grave, Eli do nothing (he did not know her), and how and when Cai and Dan find out: someone tells them, or they come upon the grave. Each goes to stand there once, and does not go again. Open a person's card to read their own memory of it.",
   haul: 'Bricks and planks are stacked at a distant store; a house is waiting for them; a handcart stands by the house. Watch the cart go out empty, come back loaded, and stop at the site (the load never exceeds the bed).',
 };
 
@@ -312,6 +314,43 @@ function careScene(settings: Settings): World {
   return finish(w, 'care');
 }
 
+// ───────────────────────── scene 8: a death in the settlement ─────────────────────────
+function griefScene(settings: Settings): World {
+  const w = flatWorld(settings);
+  const rng = new RNG(hashString(settings.seed + '|scene'));
+  w.camp = { x: 44.5, y: 27.5 };
+  const fire = createBuilding(w, 'fire', 42, 24, 0, { fuel: 2400 });
+  const ana = addPerson(w, rng, { name: 'Ana', x: 40.5, y: 29.5, age: 74, traits: { sociability: 0.5 } });
+  const bea = addPerson(w, rng, { name: 'Bea', x: 44.5, y: 29.5, age: 45, hh: ana.hhId, traits: { sociability: 0.6, generosity: 0.7 }, inv: { fruit: 3 } });
+  const eli = addPerson(w, rng, { name: 'Eli', x: 36.5, y: 32.5, sex: 'm', traits: { sociability: 0.5 }, inv: { fruit: 3 } });
+  const cai = addPerson(w, rng, { name: 'Cai', x: 41.5, y: 52.5, sex: 'm', age: 70, traits: { sociability: 0.8 }, inv: { fruit: 3 } });
+  const dan = addPerson(w, rng, { name: 'Dan', x: 70.5, y: 30.5, sex: 'm', age: 44, traits: { sociability: 0.5 }, inv: { fruit: 3 } });
+  const lean = createBuilding(w, 'lean_to', 38, 27, ana.hhId);
+  const hh = w.households.find((h) => h.id === ana.hhId);
+  if (hh) hh.homeId = lean.id;
+  const berries = [makeSource(w, 'berry_bush', 34, 30, 6), makeSource(w, 'berry_bush', 35, 31, 6), makeSource(w, 'berry_bush', 36, 36, 6), makeSource(w, 'berry_bush', 60, 34, 6), makeSource(w, 'berry_bush', 44, 56, 6)];
+  knowAll(w, [ana, bea, eli, cai, dan], [fire, ...berries]);
+  knowAll(w, [ana, bea], [lean]);
+  // who was who to Ana (their own feelings; none of it is known to anyone else)
+  const kin = (a: Person, b: Person, ab: 'parent' | 'child', ba: 'parent' | 'child', affinity: number): void => {
+    for (const [x, y, k] of [[a, b, ab], [b, a, ba]] as [Person, Person, 'parent' | 'child'][]) {
+      const r = relOf(x, y.id);
+      r.kin = k;
+      r.affinity = affinity;
+      r.trust = affinity;
+      r.familiarity = 30;
+    }
+  };
+  kin(bea, ana, 'parent', 'child', 70);
+  kin(dan, ana, 'parent', 'child', 60);
+  befriend(cai, ana, 62, 60);
+  // the staged part: she dies at the first tick, of old age, with Bea beside her and Eli a few steps off
+  ana.health = 0;
+  ana.needs.energy = 0; // (nothing mends her: health does not come back on the first tick)
+  ana.deathCause = 'old age';
+  return finish(w, 'grief');
+}
+
 export function createSceneWorld(settings: Settings): World {
   switch (settings.scene) {
     case 'contest':
@@ -328,6 +367,8 @@ export function createSceneWorld(settings: Settings): World {
       return haulScene(settings);
     case 'care':
       return careScene(settings);
+    case 'grief':
+      return griefScene(settings);
     default:
       throw new Error('not a staged scene: ' + settings.scene);
   }
