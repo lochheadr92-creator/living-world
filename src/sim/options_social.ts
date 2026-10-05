@@ -9,6 +9,7 @@ import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, s
 import { wantsAmends } from './grievance';
 import { ACCOUNT_LIFE } from './reputation';
 import { mournOptions } from './grief';
+import { SKILL_WORD, lessonFor } from './teaching';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
@@ -336,6 +337,35 @@ function optReconcile(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── showing someone how ─────────────────────────
+/**
+ * Someone who is good at something offers to show someone who is clearly less skilled at it: most of all elders (whose strength is
+ * fading but whose skill is not), parents with their children, and anyone with a young person. Only with people they are close to
+ * or live with, only when nothing pressing is going on, and each skill at most once a day for each learner.
+ */
+function optTeach(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (ctx.stage === 'child' || ctx.stage === 'youth') return;
+  if (ctx.night || ctx.criticals.length > 0 || ctx.drives.hunger > 24 || ctx.drives.thirst > 24 || ctx.drives.energy > 40) return;
+  const tm = traitMods(p);
+  for (const c of candidates(ctx)) {
+    const kin = !!p.relations[c.q.id]?.kin || c.q.hhId === p.hhId;
+    if (!kin && c.aff < 10) continue;
+    const lesson = lessonFor(world, p, c.q);
+    if (!lesson) continue;
+    const learnerStage = stageOf(world, c.q);
+    const sc = new Scorer()
+      .add(`could show ${c.q.name} how to ${SKILL_WORD[lesson.skill]}`, 5 + 14 * Math.min(lesson.gap, 0.7) + 5 * p.traits.generosity + 3 * p.traits.sociability)
+      .add('walking', -pen(c.d * 6));
+    if (ctx.stage === 'elder') sc.add('an elder passing on what they know', 5);
+    if (learnerStage === 'child' || learnerStage === 'youth') sc.add('young and eager to learn', 4);
+    if (kin) sc.add('family', 3);
+    if (tm.give < 0.4) continue;
+    if (sc.total < 13) continue;
+    mkSocial(ctx, c, 'teach', { skill: lesson.skill }, `Show ${c.q.name} how to ${SKILL_WORD[lesson.skill]}`, `to teach ${c.q.name}`, null, sc, 'teach', ':' + lesson.skill);
+  }
+}
+
 // ───────────────────────── stepping in ─────────────────────────
 /**
  * Someone who knows two people have fallen out (they saw it, or were told, and it is recent but no longer raw), likes them both and
@@ -481,6 +511,7 @@ export function socialOptions(ctx: Ctx): void {
   optOffer(ctx);
   optReconcile(ctx);
   optMediate(ctx);
+  optTeach(ctx);
   mournOptions(ctx);
   optRecruit(ctx);
   optPropose(ctx);

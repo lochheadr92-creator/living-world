@@ -11,7 +11,7 @@ import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
-import { accountViews, illnessView, griefViews, commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
+import { accountViews, learnedViews, illnessView, griefViews, commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
 import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
@@ -109,6 +109,8 @@ export interface PersonView {
   accounts: { about: string; what: string; seen: string; source: string }[];
   /** who they are mourning, how heavily it weighs, and how they came to know */
   grief: { about: string; weight: number; since: string; source: string; visited: string }[];
+  /** skills they picked up from other people */
+  learned: { skill: string; from: string; when: string; gain: number; how: string }[];
   /** a spell of illness they are going through */
   illness: { how: string; since: string; careful: string } | null;
   grievances: GrievanceView[];
@@ -400,6 +402,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     accounts: accountViews(world, p),
     grief: griefViews(world, p),
     illness: illnessView(world, p),
+    learned: learnedViews(world, p),
     grievances: grievanceViews(world, p),
     decision: d
       ? {

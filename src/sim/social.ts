@@ -19,6 +19,7 @@ import { adjustRel, relOf, spark, trustOf } from './relations';
 import { yearTicks } from './ageing';
 import { hearAccount, pickAccount, recordAccount } from './reputation';
 import { shareDeath } from './grief';
+import { SKILL_WORD, giveLesson, watchAndLearn } from './teaching';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
 import { drive } from './needs';
@@ -653,6 +654,8 @@ export interface ConvData {
   mealPlan?: import('./meals').MealPlan;
   /** mediate: the other person in the quarrel */
   otherId?: number;
+  /** teach: the skill being shown */
+  skill?: import('./types').SkillKey;
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -695,6 +698,8 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
       return `to make peace with ${name}`;
     case 'mediate':
       return `to talk ${name} round`;
+    case 'teach':
+      return `to show ${name} something`;
     case 'recruit':
       return `to get ${name}'s help with a building`;
     case 'propose':
@@ -883,6 +888,10 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'apologize': {
       bubble(world, A, D.saying(D.APOLOGY, A.id, B.id, world.tick >> 5, vars), 'say', 58);
+      break;
+    }
+    case 'teach': {
+      if (d.skill) bubble(world, A, D.saying(D.TEACH_ASK, A.id, B.id, world.tick >> 5, { ...vars, what: SKILL_WORD[d.skill] }), 'say', 62);
       break;
     }
     case 'mediate': {
@@ -1169,6 +1178,20 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       mediate(world, c, A, B, d);
       break;
     }
+    case 'teach': {
+      if (!d.skill) break;
+      A.cooldowns['teach' + B.id + ':' + d.skill] = world.tick + DAY / 2; // asked: not again at once, whatever the answer
+      const st = stageOf(world, B);
+      const willing = clamp(0.4 + 0.25 * B.traits.curiosity + 0.2 * B.traits.diligence + clamp(trustOf(B, A.id), 0, 100) / 250 + (st === 'child' ? 0.2 : 0), 0.2, 0.97);
+      if (hashUnit(B.id, A.id, (world.tick >> 4) + 7) < willing) {
+        const gain = giveLesson(world, A, B, d.skill);
+        if (gain > 0) bubble(world, B, D.saying(D.TEACH_YES, B.id, A.id, world.tick >> 5), 'happy', 52);
+      } else {
+        bubble(world, B, D.saying(D.TEACH_NO, B.id, A.id, world.tick >> 5), 'say', 48);
+        c.data.sour = true;
+      }
+      break;
+    }
     case 'invite': {
       if (d.mealId) inviteRespond(world, A, B, d.mealId);
       break;
@@ -1404,6 +1427,7 @@ export function bondWorkers(world: World, p: Person): void {
     if (fit < 0.45) continue;
     const sparked = !p.partnerId && !q.partnerId && stageOf(world, p) !== 'child' && stageOf(world, q) !== 'child' && !(rel && rel.kin) && spark(p, q, yearTicks(world));
     adjustRel(p, q.id, world.tick, { aff: 0.5 + 0.5 * fit + (sparked ? 0.7 : 0), fam: 0.5, trust: 0.4, note: `worked alongside ${q.name}` });
+    watchAndLearn(world, p, q); // and some of how they do it rubs off, if they are better at it
   }
 }
 

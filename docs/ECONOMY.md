@@ -28,6 +28,7 @@ decided to supply it; a plank exists because somebody turned wood into it; a mea
 | Looking after one another | `sim/welfare.ts` | |
 | Word about people: accounts, passing them on, the hearsay cap | `sim/reputation.ts` | |
 | Grief, the grave visit, the remembrance meal | `sim/grief.ts` | |
+| Teaching: lessons and learning by watching | `sim/teaching.ts` | |
 | Not letting work strand anyone from water or food | `sim/relief.ts` | wired into `rankOptions` |
 | Fixed-step clock, stalls, requested/achieved speed | `app/game.ts` | |
 | Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | |
@@ -354,6 +355,33 @@ simulation rather than replacing it. The full simulation, run for 30 days on fou
 82, thirst at 3 and two mothers in childbirth at 28), and the ledger balanced. Longer full runs were not redone for this curve: a
 90-day full run takes about half an hour of real time on four cores, which is why the fast model exists.
 
+## Teaching
+
+Skills (eleven of them, from foraging to smithing; about 0.7 to 1.5 to start with, 1.8 at most) still grow with practice, and now
+they also pass from person to person, two ways. Everything is on the learner's record ("learned from others" in the person
+inspector: who showed them, what, how much it helped), and nothing is created or consumed (`sim/teaching.ts`).
+
+**Instruction.** Someone who is good at something (skill 1.0 or more) may offer to show someone who is clearly less skilled at it (a
+gap of at least 0.2; for a grown person at least 0.3, since grown people are only shown what they clearly lack). It is an ordinary
+conversation: the teacher says what they would show ("Let me show you how to saw planks"), the learner accepts or not (likelier for
+children, the curious and the diligent, and someone who trusts the teacher). Teachers are chosen by the same things as everything
+else: how big the gap is, generosity and sociability, a bonus for an elder passing on what they know, for family and for a young
+learner, and a walk penalty. They only offer to people they are close to or live with, by day, when nothing pressing is going on.
+A lesson raises the learner by 6% of the gap for a grown person, 10% for a youth and 12% for a child, scaled a little by how far
+they trust the teacher (never less than 0.006 or more than 0.04, and never to within 0.05 of the teacher's own level, so nobody
+ends up better than who taught them). The teacher gains 0.002. A person gives at most one lesson, and takes at most one, in half
+a day, and the same skill to the same learner at most once a day.
+
+**Watching.** Someone working at the same job next to a clearly better worker (building, repairing, crafting, farming, gathering the
+same kind of thing) picks up a trickle of it (at most 0.003 each time the neighbours are noticed, roughly a tenth of the gap per
+hundred notices for a child), never past the other person; every 0.04 gathered is noted on their record.
+
+What this did in ordinary play (four seeds, 30 days, one run each): 126 to 272 lessons a world (four to nine a day), mostly
+children and youths learning from adults and elders, with elders giving 10 to 50; lessons moved about a fifth of all skill growth and
+watching about 3%, so practice still does most of it and people stay different from one another. It is a modest effect, by design.
+It does not make skills spread from people who have died (their skills die with them), but while they live their knowledge can be
+passed on, which is why an elder is worth something to a village after their strength has gone.
+
 ## Surviving while working
 
 Before taking on anything that is not about survival, a person works out whether they could still reach water and food: the
@@ -422,8 +450,8 @@ depends only on the tick and the population, so a run is reproducible.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
 
-* Saved worlds are version 6: people hold accounts of how others have behaved, carry a hearsay total, grief for those who died and
-  any spell of illness, and the dead are recorded with their household and grave, so saves from before that are refused rather than
+* Saved worlds are version 7: people hold accounts of how others have behaved, carry a hearsay total, grief for those who died,
+  any spell of illness and a record of the skills they learned from others, and the dead are recorded with their household and grave, so saves from before that are refused rather than
   half-loaded.
 
 * People now die of ordinary causes at realistic rates (illness, old age, childbirth), strength and fertility fade with age, and

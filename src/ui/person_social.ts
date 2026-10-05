@@ -350,6 +350,25 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
     },
   );
 
+  // learning from others
+  const learnSec = deps.section('learned', 'Learned from others', 'Skills they picked up from other people, and who showed them. Nobody learns to be better than their teacher.');
+  const learnBox = h('div', { class: 'list' });
+  learnSec.body.append(learnBox);
+  const learnList = new KeyedList<PersonView['learned'][number], WorryRow>(
+    learnBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, l) => {
+      r.who.set(l.from);
+      setText(r.what, ` ${l.how}: ${l.skill} (+${l.gain.toFixed(3)})`);
+      setText(r.meta, l.when);
+    },
+  );
+
   // illness
   const illSec = deps.section('illness', 'Illness', 'A spell of illness they are going through. Others can help by bringing food and water; it ends in recovery or, sometimes, death.');
   const illText = h('div', { class: 'sx-detail' });
@@ -381,7 +400,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   const soreList = new KeyedList<GrievanceView, QuarrelRow>(soreBox, () => makeQuarrelRow(deps), (r, g) => updateQuarrelRow(r, g));
 
   return {
-    els: [illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
+    els: [learnSec.el, illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
     update(v) {
       const talk = v.interaction ?? { current: null, previous: null };
       const hasTalk = !!(talk.current || talk.previous);
@@ -415,6 +434,11 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);
+
+      const learned = v.learned ?? [];
+      learnSec.setVisible(learned.length > 0);
+      learnSec.setCount(learned.length ? String(learned.length) : '');
+      if (learned.length && learnSec.isOpen()) learnList.sync(learned, (l) => `${l.from}|${l.skill}|${l.when}`);
 
       const ill = v.illness ?? null;
       illSec.setVisible(!!ill);

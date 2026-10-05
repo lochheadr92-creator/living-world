@@ -8,6 +8,7 @@ import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { mealOf, previousMealOf } from './meals';
 import { accountWords } from './reputation';
+import { SKILL_WORD } from './teaching';
 import type { Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, World } from './types';
 
 export interface Bar {
@@ -311,6 +312,7 @@ const PURPOSE_TEXT: Record<string, string> = {
   offer: 'an offer of help',
   apologize: 'making peace',
   mediate: 'talking someone round after a quarrel',
+  teach: 'showing someone how to do something',
   recruit: 'asking for help with a building',
   propose: 'a proposal',
   trade: 'a swap',
@@ -330,6 +332,7 @@ const PURPOSE_THEIRS: Record<string, string> = {
   offer: 'with an offer of help',
   apologize: 'to make peace',
   mediate: 'to talk them round after a quarrel',
+  teach: 'to show them how to do something',
   recruit: 'to ask for help with a building',
   propose: 'with a proposal',
   trade: 'to propose a swap',
@@ -412,6 +415,13 @@ export function grievanceViews(world: World, p: Person): GrievanceView[] {
 
 export function concernViews(world: World, p: Person): { about: string; kind: string; seen: string; source: string }[] {
   return p.concerns.map((c) => ({ about: nameOf(world, c.about), kind: c.kind === 'missing' ? 'has not been seen for a while' : `looked ${c.kind}`, seen: ago(world, c.seen), source: c.src === 'seen' ? 'saw it themself' : `told by ${nameOf(world, c.from)}` }));
+}
+
+export function learnedViews(world: World, p: Person): { skill: string; from: string; when: string; gain: number; how: string }[] {
+  return p.learned
+    .slice()
+    .reverse()
+    .map((l) => ({ skill: SKILL_WORD[l.skill], from: nameOf(world, l.from), when: ago(world, l.tick), gain: Math.round(l.gain * 1000) / 1000, how: l.how === 'shown' ? 'showed them' : 'worked beside them' }));
 }
 
 export function illnessView(world: World, p: Person): { how: string; since: string; careful: string } | null {
