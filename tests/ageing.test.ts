@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { carryCap, ageYears } from '../src/sim/people';
 import { moveSpeed } from '../src/sim/activities';
-import { INFANT_HAZARD, lifeDraw, childbirthRisk, fertilityAt, frailtyOf, mortalityPerYear, survival, vigourAt, workDrag } from '../src/sim/ageing';
+import { INFANT_HAZARD, yearTicks, lifeDraw, childbirthRisk, fertilityAt, frailtyOf, mortalityPerYear, survival, vigourAt, workDrag } from '../src/sim/ageing';
 import { LIFE_CHECK_EVERY, lifeTick } from '../src/sim/lifecycle';
 import { TICKS_PER_YEAR } from '../src/sim/constants';
 import { createWorld, defaultSettings } from '../src/sim/factory';
@@ -17,9 +17,9 @@ describe('mortality', () => {
     expect(h(8)).toBeGreaterThan(h(20));
     for (let a = 25; a < 90; a += 5) expect(h(a + 5)).toBeGreaterThan(h(a));
     expect(h(80)).toBeGreaterThan(5 * h(40));
-    // doubling about every seven years in old age
-    expect(h(80) / h(70)).toBeGreaterThan(2.2);
-    expect(h(80) / h(70)).toBeLessThan(3.1);
+    // the baseline (apart from illness) climbs steeply in old age: roughly quintuple from seventy to eighty
+    expect(h(80) / h(70)).toBeGreaterThan(3.5);
+    expect(h(80) / h(70)).toBeLessThan(6.5);
   });
 
   it('is worse for the frail and for the unwell, and neither can make it negative or silly', () => {
@@ -30,25 +30,26 @@ describe('mortality', () => {
     for (const a of [0, 5, 30, 60, 90]) for (const f of [0.6, 1, 1.9]) expect(mortalityPerYear(a, f, 0)).toBeGreaterThan(0);
   });
 
-  it('is calibrated: of people who reach fifteen, about 94% see forty, three in four sixty, half seventy, a quarter eighty, one in thirty ninety', () => {
+  it('is calibrated, illness included: of people who reach fifteen, about 98% see forty, 92% sixty, 79% seventy, 54% eighty, 18% ninety', () => {
     // averaged over the spread of frailty a world actually has
     const w = natural('age-calibration');
     const fr: number[] = [];
     for (let id = 1; id <= 600; id++) fr.push(frailtyOf(w, { id } as never));
     const avg = (to: number) => fr.reduce((s, f) => s + survival(15, to, f), 0) / fr.length;
-    expect(avg(40)).toBeGreaterThan(0.9);
-    expect(avg(40)).toBeLessThan(0.97);
-    expect(avg(60)).toBeGreaterThan(0.7);
-    expect(avg(60)).toBeLessThan(0.82);
-    expect(avg(70)).toBeGreaterThan(0.47);
-    expect(avg(70)).toBeLessThan(0.62);
-    expect(avg(80)).toBeGreaterThan(0.17);
-    expect(avg(80)).toBeLessThan(0.3);
-    expect(avg(90)).toBeLessThan(0.07);
-    // and a newborn has about a six in seven chance of reaching fifteen
+    expect(avg(40)).toBeGreaterThan(0.95);
+    expect(avg(40)).toBeLessThan(0.99);
+    expect(avg(60)).toBeGreaterThan(0.88);
+    expect(avg(60)).toBeLessThan(0.95);
+    expect(avg(70)).toBeGreaterThan(0.74);
+    expect(avg(70)).toBeLessThan(0.85);
+    expect(avg(80)).toBeGreaterThan(0.48);
+    expect(avg(80)).toBeLessThan(0.61);
+    expect(avg(90)).toBeGreaterThan(0.11);
+    expect(avg(90)).toBeLessThan(0.26);
+    // and a newborn has better than a nine in ten chance of reaching fifteen
     const born = fr.reduce((s, f) => s + survival(0, 15, f), 0) / fr.length;
-    expect(born).toBeGreaterThan(0.8);
-    expect(born).toBeLessThan(0.92);
+    expect(born).toBeGreaterThan(0.9);
+    expect(born).toBeLessThan(0.98);
   });
 });
 
@@ -119,6 +120,25 @@ describe('vigour, fertility and what they change', () => {
   });
 });
 
+describe('life pace', () => {
+  it('is the number of days a year of life takes: ages, births and the chance of dying all keep to it', () => {
+    const slow = natural('pace-seed', { daysPerYear: 24 });
+    const normal = natural('pace-seed');
+    expect(yearTicks(normal)).toBe(12 * 2400);
+    expect(yearTicks(slow)).toBe(24 * 2400);
+    // the same people are the same age in years, but their birthdays are twice as far back
+    const a = normal.persons.map((p) => ageYears(normal, p));
+    const b = slow.persons.map((p) => ageYears(slow, p));
+    for (let i = 0; i < a.length; i++) expect(b[i]).toBeCloseTo(a[i], 3);
+    expect(Math.abs(slow.persons[0].birthTick)).toBeCloseTo(2 * Math.abs(normal.persons[0].birthTick), -1);
+    // a world that does not say (an older save) keeps the default
+    expect(yearTicks({ settings: {} })).toBe(12 * 2400);
+    // the same person has half the chance of dying on a given check when a year takes twice as long
+    const perCheck = (w: typeof slow) => 1 - Math.exp((-mortalityPerYear(80, 1) * LIFE_CHECK_EVERY) / yearTicks(w));
+    expect(perCheck(slow)).toBeCloseTo(perCheck(normal) / 2, 6);
+  });
+});
+
 describe('chance is specific to the world', () => {
   it('the same person has different luck in different worlds (people have the same ids everywhere), and the same luck in the same world', () => {
     const a = natural('luck-a');
@@ -155,8 +175,8 @@ describe('dying of ordinary causes', () => {
     }
     causeOfDeath = w.deceased.find((d) => d.id === p.id)?.cause ?? '';
     expect(p.alive).toBe(false);
-    expect(years).toBeLessThan(15); // at ninety-two, about a one-in-three chance a year
-    expect(causeOfDeath).toBe('old age');
+    expect(years).toBeLessThan(15); // at ninety-two, a one-in-four or worse chance a year
+    expect(['old age', 'illness']).toContain(causeOfDeath);
     expect(JSON.stringify(w.rng)).toBe(rngBefore);
 
     // a baby is far likelier to die than a young adult, and the cause is a childhood illness

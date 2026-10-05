@@ -2,24 +2,28 @@
 // everything else (couples form, every settled couple is fed and housed, arrivals come when the village is small). It runs hundreds of
 // simulated years in seconds, so it answers "does the population hold steady?" without a 45-minute full simulation. It is OPTIMISTIC
 // about food and housing, so it bounds what the full simulation can do; it does not replace it.
-//   npx vite-node scripts/demography.ts [seeds=20] [years=300] [arrivals=on|off]
-import { childbirthRisk, fertilityAt, frailtyOf, lifeDraw, mortalityPerYear } from '../src/sim/ageing';
-import { BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR } from '../src/sim/constants';
+//   npx vite-node scripts/demography.ts [seeds=20] [years=300] [arrivals=on|off] [daysPerYear=12]
+import { caseFatality, childbirthRisk, fertilityAt, frailtyOf, illnessRatePerYear, lifeDraw, mortalityPerYear } from '../src/sim/ageing';
+import { BIRTH_SPACING_YEARS, CONCEPTION_PER_YEAR, DAY, PREGNANCY_YEARS } from '../src/sim/constants';
 import { createWorld, defaultSettings } from '../src/sim/factory';
 import { ageYears } from '../src/sim/people';
 
 const seeds = Number(process.argv[2] ?? 20);
 const years = Number(process.argv[3] ?? 300);
 const arrivals = (process.argv[4] ?? 'on') !== 'off';
+const DPY = Number(process.argv[5] ?? 12);
+const TICKS_PER_YEAR = DAY * DPY;
+const BIRTH_SPACING_TICKS = BIRTH_SPACING_YEARS * TICKS_PER_YEAR;
+const PREGNANCY_TICKS = Math.round(PREGNANCY_YEARS * TICKS_PER_YEAR);
 const LIFE = 60;
 const CONC = 200;
 
-interface P { id: number; born: number; sex: 'f' | 'm'; partner: number; preg: number; lastBirth: number; alive: boolean; frail: number; hh: number }
+interface P { ill?: { until: number; sev: number; care: number }; illFree?: number; id: number; born: number; sex: 'f' | 'm'; partner: number; preg: number; lastBirth: number; alive: boolean; frail: number; hh: number }
 
 function run(seedName: string) {
   const w = createWorld(defaultSettings(seedName));
   let nextId = 100000;
-  const fakeWorld = { seed: seedName } as never;
+  const fakeWorld = { seed: seedName, settings: { daysPerYear: DPY } } as never;
   const people: P[] = w.persons.map((p) => ({ id: p.id, born: -Math.round(ageYears(w, p) * TICKS_PER_YEAR), sex: p.sex, partner: 0, preg: 0, lastBirth: -1e9, alive: true, frail: frailtyOf(w, p), hh: p.hhId }));
   for (const p of w.persons) if (p.partnerId) people.find((x) => x.id === p.id)!.partner = p.partnerId;
   const age = (p: P, t: number) => (t - p.born) / TICKS_PER_YEAR;
@@ -49,7 +53,21 @@ function run(seedName: string) {
       if (!p.alive) continue;
       const a = age(p, t);
       const h = mortalityPerYear(a, p.frail);
-      if (lifeDraw(fakeWorld, p as never, Math.floor(t / LIFE), 91) < 1 - Math.exp((-h * LIFE) / TICKS_PER_YEAR)) kill(p, t, a < 12 ? 'childhood' : a < 62 ? 'illness' : 'old age');
+      const step = Math.floor(t / LIFE);
+      if (lifeDraw(fakeWorld, p as never, step, 91) < 1 - Math.exp((-h * LIFE) / TICKS_PER_YEAR)) { kill(p, t, a < 12 ? 'childhood' : a < 62 ? 'sudden' : 'old age'); continue; }
+      // illness: a spell of one and a half to four days; care (assumed: someone helps about 60% of the time) improves the odds
+      if (!p.ill) {
+        if (t >= (p.illFree ?? 0) && lifeDraw(fakeWorld, p as never, step, 95) < 1 - Math.exp((-illnessRatePerYear(a, p.frail) * LIFE) / TICKS_PER_YEAR)) {
+          const sev = 0.3 + 0.7 * Math.pow(lifeDraw(fakeWorld, p as never, step, 96), 2.2);
+          const days = (1.5 + 2.5 * lifeDraw(fakeWorld, p as never, step, 98)) * (a >= 62 ? 1.3 : 1);
+          p.ill = { until: t + Math.round(days * DAY), sev, care: lifeDraw(fakeWorld, p as never, step, 99) < 0.6 ? 2 : 0 };
+        }
+      } else if (t >= p.ill.until) {
+        const dies = lifeDraw(fakeWorld, p as never, step, 97) < caseFatality(a, p.frail, p.ill.sev, p.ill.care, false);
+        p.ill = undefined;
+        p.illFree = t + 3 * DAY;
+        if (dies) kill(p, t, a < 12 ? 'childhood' : 'illness');
+      }
     }
     for (const m of people) {
       if (!m.alive || m.preg <= 0 || t < m.preg) continue;
@@ -117,4 +135,4 @@ const tot = Object.values(all).reduce((a, b) => a + b, 0);
 const band: Record<string, number> = {};
 for (const r of rows) for (const [k, v] of Object.entries(r.bands)) band[k] = (band[k] ?? 0) + v;
 console.log('deaths by age band:', Object.entries(band).map(([k, v]) => `${k} ${(100 * v / tot).toFixed(0)}%`).join(', '));
-console.log(`deaths per world per year: ${(tot / (rows.length * years)).toFixed(2)} (one every ${(12 / (tot / (rows.length * years))).toFixed(1)} days of simulated time)`);
+console.log(`deaths per world per year: ${(tot / (rows.length * years)).toFixed(2)} (one every ${(DPY / (tot / (rows.length * years))).toFixed(1)} days of simulated time)`);

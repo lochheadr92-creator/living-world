@@ -1,13 +1,14 @@
 import { abortActivity, newActivity, startActivity } from './activities';
-import { BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
+import { BIRTH_SPACING_YEARS, CONCEPTION_PER_YEAR, PREGNANCY_YEARS, isHomeType } from './constants';
 import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
 import { socialOnDeath } from './social';
 import { onDeath } from './grief';
+import { illnessTick } from './illness';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
-import { childbirthRisk, fertilityAt, frailtyOf, lifeDraw, mortalityPerYear } from './ageing';
+import { childbirthRisk, fertilityAt, frailtyOf, lifeDraw, mortalityPerYear, yearTicks } from './ageing';
 import { hashUnit } from './rng';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { BUILD_DEF } from './constants';
@@ -50,10 +51,12 @@ export function lifeTick(world: World, p: Person): void {
 
   // ordinary mortality (see ageing.ts): a chance each minute of sim time, from a hash so no random stream is used
   const perYear = mortalityPerYear(age, frailtyOf(world, p), p.health);
-  if (lifeDraw(world, p, Math.floor(world.tick / LIFE_CHECK_EVERY), 91) < 1 - Math.exp((-perYear * LIFE_CHECK_EVERY) / TICKS_PER_YEAR)) {
+  if (lifeDraw(world, p, Math.floor(world.tick / LIFE_CHECK_EVERY), 91) < 1 - Math.exp((-perYear * LIFE_CHECK_EVERY) / yearTicks(world))) {
     killPerson(world, p, age < 12 ? 'a childhood illness' : age < AGE_OLD ? 'illness' : 'old age');
     return;
   }
+  // illness: a spell with a course, which others can help with, and which ends in recovery or death
+  if (illnessTick(world, p, age, Math.floor(world.tick / LIFE_CHECK_EVERY))) return;
   // birth
   if (p.pregnantUntil > 0 && world.tick >= p.pregnantUntil) giveBirth(world, p);
 }
@@ -89,12 +92,12 @@ export function conceptionTick(world: World): void {
     if (!hh || !hh.homeId) continue; // a roof first
     const kids = membersOf(world, hh).filter((m) => stageOf(world, m) === 'child').length;
     if (kids >= 3) continue;
-    if (world.tick - (p.cooldowns.lastBirth ?? -99999) < BIRTH_SPACING_TICKS) continue; // recover between children
+    if (world.tick - (p.cooldowns.lastBirth ?? -99999) < BIRTH_SPACING_YEARS * yearTicks(world)) continue; // recover between children
     if (householdFoodPerHead(world, p) < 3) continue;
     if (p.health < 60 || p.needs.hunger < 35) continue;
     const roll = world.rng.next();
-    if (roll < (CONCEPTION_PER_YEAR * fert * (world.settings.harsh ? 0.45 : 1) * CONCEPTION_CHECK_EVERY) / TICKS_PER_YEAR) {
-      p.pregnantUntil = world.tick + PREGNANCY_TICKS;
+    if (roll < (CONCEPTION_PER_YEAR * fert * (world.settings.harsh ? 0.45 : 1) * CONCEPTION_CHECK_EVERY) / yearTicks(world)) {
+      p.pregnantUntil = world.tick + Math.round(PREGNANCY_YEARS * yearTicks(world));
       p.pregnantBy = partner.id;
       addEvent(world, 'life', `${p.name} and ${partner.name} are expecting a child.`, [p.id, partner.id], p.x, p.y);
       addLog(world, p, 'life', 'We are expecting a child.');

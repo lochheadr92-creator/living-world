@@ -36,11 +36,11 @@ export function familiarityOf(p: Person, otherId: number): number {
  * Is there a spark between these two? A fixed, symmetric property of the pair: most pairs of adults are only ever
  * friends; some click. (Pairs of the same sex click less often than mixed pairs.)
  */
-export function spark(a: Person, b: Person): boolean {
+export function spark(a: Person, b: Person, yearTicks = TICKS_PER_YEAR): boolean {
   const lo = Math.min(a.id, b.id);
   const hi = Math.max(a.id, b.id);
   if (hashUnit(lo, hi, 11) >= 0.5) return false;
-  if (Math.abs(a.birthTick - b.birthTick) > 18 * TICKS_PER_YEAR) return false;
+  if (Math.abs(a.birthTick - b.birthTick) > 18 * yearTicks) return false;
   return a.sex !== b.sex || hashUnit(lo, hi, 13) < 0.14;
 }
 

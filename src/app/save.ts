@@ -11,7 +11,8 @@ const META = 'living-world:save-meta:v1';
 // 3: workshops, tools, carts, shared meals, worries and grievances are part of the world (older saves lack them and are refused)
 // 4: people hold accounts of how others have behaved (hearsay) and relationships carry a hearsay total (older saves lack them and are refused)
 // 5: people carry grief for those who have died, and the dead are recorded with their household and grave (older saves lack them and are refused)
-const VERSION = 5;
+// 6: people can be ill (a spell of illness with a course and an outcome); older saves lack it and are refused
+const VERSION = 6;
 
 function bytesToB64(bytes: Uint8Array): string {
   let s = '';

@@ -15,6 +15,7 @@ import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
 import { hashUnit } from './rng';
 import { spark } from './relations';
+import { yearTicks } from './ageing';
 import type { Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
 import { clamp } from './util';
 
@@ -99,7 +100,7 @@ function optChat(ctx: Ctx): void {
     if (sd <= 0 && ctx.night) sc.add('evening company', 3.4 * (p.traits.sociability - 0.15));
     sc.add(c.aff >= 20 ? 'a friend' : c.fam < 4 ? 'someone new' : 'a neighbour', sd > 0 ? c.aff * 0.12 + (c.fam < 4 ? 3 * p.traits.curiosity : 0) : 0);
     // two unattached adults who are drawn to each other seek out one another's company
-    if (!p.partnerId && !c.q.partnerId && ctx.stage !== 'child' && ctx.stage !== 'youth' && stageOf(ctx.world, c.q) !== 'child' && stageOf(ctx.world, c.q) !== 'youth' && !p.relations[c.q.id]?.kin && spark(p, c.q) && c.aff > -5) {
+    if (!p.partnerId && !c.q.partnerId && ctx.stage !== 'child' && ctx.stage !== 'youth' && stageOf(ctx.world, c.q) !== 'child' && stageOf(ctx.world, c.q) !== 'youth' && !p.relations[c.q.id]?.kin && spark(p, c.q, yearTicks(ctx.world)) && c.aff > -5) {
       sc.add('drawn to each other', (ctx.night ? 9 : 4.5) + Math.max(0, c.aff) * 0.05);
     }
     sc.add('close by', sd > 0 ? Math.max(0, 6 - c.d) * 0.6 : 0);
@@ -418,7 +419,7 @@ function optPropose(ctx: Ctx): void {
     const back = q.relations[p.id];
     if (!back) continue;
     let kind: 'partner' | 'roommate' | null = null;
-    if (p.partnerId === 0 && q.partnerId === 0 && rel.affinity >= 30 && rel.trust >= 20 && back.affinity >= 26 && spark(p, q) && !rel.kin) kind = 'partner';
+    if (p.partnerId === 0 && q.partnerId === 0 && rel.affinity >= 30 && rel.trust >= 20 && back.affinity >= 26 && spark(p, q, yearTicks(world)) && !rel.kin) kind = 'partner';
     else if (sameHome) continue;
     else if (rel.affinity >= 38 && rel.trust >= 26 && back.affinity >= 32) {
       // roommates: one of us has no real home and the other has room

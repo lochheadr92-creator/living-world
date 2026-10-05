@@ -430,6 +430,8 @@ export interface Person {
   cartId: number;
   /** worries about people they have seen in need or been told about (bounded, each with its own provenance) */
   concerns: Concern[];
+  /** a serious spell of illness they are going through, if any: it runs its course, others can help, and it ends in recovery or death */
+  illness: Illness | null;
   /** people they know have died and are mourning (or remember), each with how and from whom they heard */
   grief: Grief[];
   /** what they know of other people's conduct, from their own experience, from watching, or from being told (bounded) */
@@ -447,6 +449,16 @@ export interface InteractionRecord {
   /** how it came out, taken from the same exchange (a request's status, an apology's result…) */
   outcome: string;
   detail: string;
+}
+
+export interface Illness {
+  since: number;
+  /** when it comes to a head: they recover, or they do not */
+  until: number;
+  /** 0.3 (a bad cold) to 1 (grave) */
+  severity: number;
+  /** how many times someone brought them food or water while they were ill */
+  care: number;
 }
 
 export interface Grief {
@@ -916,6 +928,8 @@ export interface Settings {
   population: number;
   harsh: boolean;
   immigration: boolean;
+  /** how many days a year of life takes (the pace of ageing, births and deaths); older saves lack it and use 12 */
+  daysPerYear: number;
   scene: SceneId;
 }
 export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care';

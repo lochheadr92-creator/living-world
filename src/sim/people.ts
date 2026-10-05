@@ -1,5 +1,5 @@
-import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP, TICKS_PER_YEAR } from './constants';
-import { vigourOf } from './ageing';
+import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP } from './constants';
+import { vigourOf, yearTicks } from './ageing';
 import type { RNG } from './rng';
 import type { Items, Look, Person, Skills, Stage, ToolKind, Traits, World } from './types';
 import { clamp } from './util';
@@ -43,7 +43,7 @@ function toRoman(n: number): string {
 }
 
 export function ageYears(world: World, p: Person): number {
-  return (world.tick - p.birthTick) / TICKS_PER_YEAR;
+  return (world.tick - p.birthTick) / yearTicks(world);
 }
 
 export function stageOfAge(age: number): Stage {
@@ -166,7 +166,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     py: o.y,
     heading: rng.next() * Math.PI * 2 - Math.PI,
     pheading: 0,
-    birthTick: world.tick - Math.round(o.age * TICKS_PER_YEAR),
+    birthTick: world.tick - Math.round(o.age * yearTicks(world)),
     alive: true,
     health: 100,
     needs: {
@@ -212,6 +212,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     told: {},
     accounts: [],
     grief: [],
+    illness: null,
     lastExploreTick: -9999,
     stats: { gathered: 0, given: 0, received: 0, built: 0, talked: 0, farmed: 0, crafted: 0 },
     lastAteTick: world.tick,

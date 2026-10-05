@@ -292,52 +292,67 @@ away eased by 15–20; nothing is created. **Among others who mourn the same per
 the host is keener to call it and to ask others who mourn the same person, and everyone who sits down to it and mourns that person
 is eased by 15. People remember having been told for six days, so word can still pass on.
 
-How often this happens depends on how often people die; see "Ages, ageing and death" below. The tests bring a death about in a
+How often this happens depends on how often people die; see "Ages, ageing and death" below (a death every couple of weeks of simulated time once the village is large, so grief is a regular part of life). The tests bring a death about in a
 running village and check what the village does after it: in one such run three people mourned, one went to the grave and no meal
 was called in memory.
 
 ## Ages, ageing and death
 
-A year of age is still twelve days (so a day is about four minutes at 1×, and a lifetime is about 56 hours at 1× or 3.5 at 16×).
-What changed is what a life is like. Everything below comes from a person's age and an inborn **frailty** (0.6 hardy to 1.9
-frail, fixed by the seed and the person), with no stored state and no random stream, so it cannot disturb anything else
-(`sim/ageing.ts`).
+**Life pace.** The year of life is a setting (world menu, "Life pace", applied to the next new world): 6, 12, 24 or 48 days of
+simulated time, 12 by default. At 12 a day is about four minutes at 1×, so a lifetime is about 56 hours at 1× or 3.5 at 16×. The
+pace changes how fast people age, how long a pregnancy and the gap between births are, and how often someone dies per day. It does
+not change what a year of life holds (the numbers below are per year), so slower means fewer deaths and births per day and children
+who take longer to grow up, and faster the reverse. Illnesses last a few days whatever the pace. Older saves lack the setting and
+keep 12.
 
-**Death.** Each minute of simulated time everyone has a small chance of dying of ordinary causes, from this yearly hazard: 7% in
-the first year, 2% falling to 0.6% by five, 0.2% to fifteen, then `0.15% + 0.00454% × e^(0.1 × age)` (doubling about every seven
-years in old age), all times frailty, and times up to 3 for someone who is hurt or worn out. It is fitted so that of people who
-reach fifteen about 94% see forty, three in four see sixty, half see seventy, a quarter eighty and one in thirty ninety, and about
-six in seven newborns reach fifteen; the mean age at death comes out near 59, and about 60% of deaths fall on people over sixty-two
-(an earlier, steeper curve put a fifth of all deaths on people aged 12 to 44, which looked wrong and was softened). The cause is put
-down as a childhood illness (under twelve), illness (to sixty-two) or old age. A birth carries about a one in a hundred risk to the
-mother in her twenties, more after thirty-five and for the frail. Hunger, thirst, cold and wolves are separate and unchanged. The chance is specific to the world: people have the same ids in every
-world, so the draw mixes in the world's seed (without it the same person met the same fate at the same moment in every world, which
-made deaths look oddly alike from world to world). In four 30-day full runs the model expected 3.7 natural deaths and 7 happened,
-which is within chance (about one time in eight). How often someone dies is mostly arithmetic: in a village of steady size, deaths a year are about the population divided by the
-average lifespan, so at 28 people (the start) about one natural death every 33 simulated days, rising to about one every 12 days once the
-village has grown to about 60. Realistic per simulated year, but a year is twelve days here, so at 1× that is a death every hour or
-so once it is large.
+Everything below comes from a person's age and an inborn **frailty** (0.6 hardy to 1.9 frail, fixed by the seed and the person),
+with no stored state and no random stream, so it cannot disturb anything else (`sim/ageing.ts`, `sim/illness.ts`). The chance
+mixes in the world's seed: people have the same ids in every world, and without it the same person met the same fate at the same
+moment in every world.
+
+**Death has two parts.** A *baseline*: sudden death and failing health, 2% in the first year, 0.5% falling to 0.2% by five, 0.07% to
+fifteen, then `0.01% + 0.0000113% × e^(0.16 × age)` (very low in the prime, doubling about every four years in old age), times
+frailty, times up to 3 for someone who is hurt or worn out. And *illness*, a visible spell (below). Together they are fitted to a
+modern-style span: of people who reach fifteen, about 98% see forty, 92% sixty, 79% seventy, 54% eighty and 18% ninety, and more
+than nine in ten newborns reach fifteen. A birth carries about a one in a hundred risk to the mother in her twenties, more after
+thirty-five and for the frail. Hunger, thirst, cold and wolves are separate and unchanged. Causes are put down as a childhood
+illness (under twelve), illness, or old age (baseline deaths from sixty-two).
+
+**Illness.** A serious spell of illness starts with a yearly chance that depends on age (0.3 in the first year, 0.18 in childhood,
+0.1 in the prime, 0.14 from forty-five, 0.22 from sixty-two) and frailty, and is likelier in rain and storms and when someone is
+starving or cold. It lasts one and a half to four days (30% longer for the old) and has a severity from 0.3 (a cold) to 1 (grave;
+about a quarter of spells are serious, 0.67 or more). Health dips towards the middle of it and recovers, so a serious spell shows:
+the person looks hurt, and neighbours bring food and water through the ordinary caring behaviour (every such kindness is counted).
+Meanwhile they are slow to work or wander (65% less appetite for either) and choose to lie down at home. When it comes to a head
+they recover or die. The chance of dying is 5% for a newborn, 0.8% in childhood and the prime, 2% from forty-five, 6% from
+sixty-two and 12% from seventy-five, times frailty, times a factor that rises with severity, halved by three kindnesses and
+raised by 40% if they are starving. Someone who recovers is not ill again for three days. Serious spells and recoveries that
+involved care are in the feed.
 
 **Vigour.** From about forty-five (earlier for the frail) strength fades: walking speed falls to about 80% by the late eighties, a
 pack holds less (12 in the prime, about 8 at the end), and gathering, mending and crafting take up to about 1.5 times as long. It
 never falls below 45% of the prime. Children keep their own stage factors as before. (Sight, recovery and skill are not changed.)
 
-**Fertility.** Full to thirty, falling to nothing at forty-five (it was a flat window from 17 to 44).
+**Fertility.** Full to thirty, falling to nothing at forty-five.
 
 **The starting age mix.** Adults are spread from 17 to 62, there are usually two to four elders aged 63 to 84, and children from
-one to eleven, so deaths and handovers show up in the first weeks. Travellers who arrive are 18 to 48.
+one to eleven. Travellers who arrive are 18 to 48.
 
-**Whether the population holds.** `scripts/demography.ts` runs the real mortality, fertility and childbirth functions inside a
-simplified model (couples form, every settled couple is fed and housed, arrivals come when the village is small), hundreds of
-simulated years in seconds. Over 20 starting villages for 300 years, with arrivals on (the default): none die out and the village
-settles at about 58 to 62 people (range 54 to 67). With arrivals off, a closed village of about thirty first grows to about 45 to 60
-by year 50 to 100, then declines (median 34 at year 300; 1 of 20 died out, at year 155), which is what a small closed population does. The
-model is optimistic about food and housing, so it bounds the full simulation rather than replacing it.
+**How often someone dies** is mostly arithmetic: in a village of steady size, deaths a year are about the population divided by the
+average lifespan. With this curve the mean age at death is about 74 and 85% of deaths fall on people over sixty-two, so a village of
+about sixty loses someone about every 15 simulated days at 12 days a year (about every 31 at 24 and every 8 at 6), and a village of
+28 about every 30 to 40.
 
-The full simulation was last run for 90 days on four seeds with the earlier, steeper curve (about 1.3 deaths per simulated year):
-populations of 58 to 64, five to seven deaths each, up to four people grieving at once, and the ledger balanced at every
-checkpoint. It has not been re-run for the current curve, which has fewer deaths; a 90-day full run takes about half an hour of
-real time on four cores, which is why the fast model exists.
+**Whether the population holds.** `scripts/demography.ts` runs the real mortality, illness, fertility and childbirth functions
+inside a simplified model (couples form, every settled couple is fed and housed, a spell of illness is cared for 60% of the time,
+arrivals come when the village is small), hundreds of simulated years in seconds, at any life pace. Over 20 starting villages for
+300 years with arrivals on (the default) none die out and the village settles at about 58 to 65 people (range 54 to 68), with about
+a quarter of them elders. With arrivals off, a closed village of about thirty grows to about 55 to 65 by year 50, then declines
+slowly (median 39 at year 300, worst 11); none of 20 died out. The model is optimistic about food and housing, so it bounds the full
+simulation rather than replacing it. The full simulation, run for 30 days on four seeds (one run each): populations of 42 to 53,
+10 to 21 spells of illness per world (59 in all, 9 of them serious, none of the serious ones fatal), four deaths in all (old age at
+82, thirst at 3 and two mothers in childbirth at 28), and the ledger balanced. Longer full runs were not redone for this curve: a
+90-day full run takes about half an hour of real time on four cores, which is why the fast model exists.
 
 ## Surviving while working
 
@@ -407,8 +422,9 @@ depends only on the tick and the population, so a run is reproducible.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
 
-* Saved worlds are version 5: people hold accounts of how others have behaved, carry a hearsay total and grief for those who died,
-  and the dead are recorded with their household and grave, so saves from before that are refused rather than half-loaded.
+* Saved worlds are version 6: people hold accounts of how others have behaved, carry a hearsay total, grief for those who died and
+  any spell of illness, and the dead are recorded with their household and grave, so saves from before that are refused rather than
+  half-loaded.
 
 * People now die of ordinary causes at realistic rates (illness, old age, childbirth), strength and fertility fade with age, and
   the starting population has more old people. See "Ages, ageing and death". Two tests changed because of it: the two-week

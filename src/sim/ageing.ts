@@ -1,3 +1,4 @@
+import { DAY, DAYS_PER_YEAR } from './constants';
 import { hashString, hashUnit } from './rng';
 import type { Person, World } from './types';
 import { clamp } from './util';
@@ -5,18 +6,19 @@ import { clamp } from './util';
 /**
  * How a life goes. Three separate things, all derived from a person's age and an inborn frailty (no stored state, no random stream):
  *
- *  - **mortality**: the chance of dying of ordinary causes in a year, for each age. High in the first year, low through childhood and
- *    the prime of life, then rising steeply (a Gompertz curve, doubling about every seven years), scaled by frailty and by poor health.
- *    Fitted so that, of people who reach fifteen, about 94% see forty, three in four sixty, half seventy, a quarter eighty and one in
- *    thirty ninety, with most deaths falling on the very young and the old. (Hunger, thirst, cold and wolves are separate and unchanged.)
+ *  - **mortality**: the chance of dying in a year, for each age. Two parts: a baseline (sudden death, failing health: high in the first
+ *    year, very low through childhood and the prime, then rising steeply with age), and illness, which is a visible spell people can
+ *    recover from (illness.ts), with a case fatality that depends on age, frailty, severity and whether they were cared for. Both are
+ *    scaled by frailty. Fitted together so that, of people who reach fifteen, about 98% see forty, 92% sixty, 79% seventy, 54% eighty and
+ *    18% ninety. (Hunger, thirst, cold and wolves are separate and unchanged.)
  *  - **vigour**: strength and stamina. Full through the prime, declining from about forty-five (earlier for the frail).
  *  - **fertility**: highest in the twenties, gone by the mid-forties.
  */
 
-export const INFANT_HAZARD = 0.07; // per year, first year
-const BASE_ADULT = 0.0015;
-const OLD_SCALE = 0.0000454; // e^-10
-const OLD_GROWTH = 0.1; // the hazard doubles about every seven years
+/** Ticks in a year of life in this world (the life pace setting; 12 days by default). */
+export function yearTicks(world: { settings: { daysPerYear?: number } }): number {
+  return DAY * (world.settings.daysPerYear ?? DAYS_PER_YEAR);
+}
 
 /** Inborn robustness, 0.6 (hardy) to 1.9 (frail), fixed by the seed and the person, centred just above 1. */
 const frailtyCache = new WeakMap<Person, number>();
@@ -45,21 +47,52 @@ export function lifeDraw(world: World, p: Person, step: number, salt: number): n
   return hashUnit(p.id, step, k ^ (salt * 0x9e3779b1));
 }
 
-/** Chance per year of dying of ordinary causes, at this age. `health` is 0..100. */
+export const INFANT_HAZARD = 0.02; // per year, first year, apart from illness
+const BASE_ADULT = 0.0001;
+const OLD_SCALE = 1.1254e-7; // e^-16
+const OLD_GROWTH = 0.16; // the senescent hazard doubles about every four years
+
+/**
+ * Chance per year of dying suddenly or of failing health, at this age, apart from illness (illness is a visible episode: see
+ * illness.ts, and `illnessDeathsPerYear` below for what it adds). `health` is 0..100.
+ */
 export function mortalityPerYear(age: number, frailty: number, health = 100): number {
   let h: number;
   if (age < 1) h = INFANT_HAZARD;
-  else if (age < 5) h = 0.02 - 0.014 * ((age - 1) / 4); // 2% a year at one, 0.6% by five
-  else if (age < 15) h = 0.002;
+  else if (age < 5) h = 0.005 - 0.003 * ((age - 1) / 4); // 0.5% a year at one, 0.2% by five
+  else if (age < 15) h = 0.0007;
   else h = BASE_ADULT + OLD_SCALE * Math.exp(OLD_GROWTH * age);
   const unwell = 1 + Math.max(0, 60 - health) / 30; // someone hurt or worn out is likelier to die
   return h * frailty * unwell;
 }
 
-/** Chance of surviving from age `a0` to `a1` at the given frailty and good health, for checking the curve. */
+/** How often a serious spell of illness starts, per year, at this age. */
+export function illnessRatePerYear(age: number, frailty: number): number {
+  const base = age < 1 ? 0.3 : age < 12 ? 0.18 : age < 45 ? 0.1 : age < 62 ? 0.14 : 0.22;
+  return base * frailty;
+}
+
+/**
+ * The chance that a spell of illness kills, when it comes to a head. Worse for the very young and the old, the frail, the severe
+ * and the starving; better for someone who was brought food and water while they were ill (care halves it at three kindnesses).
+ */
+export function caseFatality(age: number, frailty: number, severity: number, care: number, starving: boolean): number {
+  const base = age < 1 ? 0.05 : age < 12 ? 0.008 : age < 45 ? 0.008 : age < 62 ? 0.02 : age < 75 ? 0.06 : 0.12;
+  let c = base * frailty * (0.4 + 1.2 * severity);
+  c *= 1 - 0.5 * Math.min(1, care / 3);
+  if (starving) c *= 1.4;
+  return clamp(c, 0, 0.6);
+}
+
+/** About how many deaths a year illness adds at this age, for a typical case (average severity, a little care), for checking the curve. */
+export function illnessDeathsPerYear(age: number, frailty: number): number {
+  return illnessRatePerYear(age, frailty) * caseFatality(age, frailty, 0.52, 0.8, false);
+}
+
+/** Chance of surviving from age `a0` to `a1` at the given frailty and good health, illness included, for checking the curve. */
 export function survival(a0: number, a1: number, frailty = 1): number {
   let H = 0;
-  for (let a = a0; a < a1; a += 0.1) H += mortalityPerYear(a, frailty) * 0.1;
+  for (let a = a0; a < a1; a += 0.1) H += (mortalityPerYear(a, frailty) + illnessDeathsPerYear(a, frailty)) * 0.1;
   return Math.exp(-H);
 }
 

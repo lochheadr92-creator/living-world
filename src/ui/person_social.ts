@@ -350,6 +350,11 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
     },
   );
 
+  // illness
+  const illSec = deps.section('illness', 'Illness', 'A spell of illness they are going through. Others can help by bringing food and water; it ends in recovery or, sometimes, death.');
+  const illText = h('div', { class: 'sx-detail' });
+  illSec.body.append(illText);
+
   // grief
   const griefSec = deps.section('grief', 'Grief', 'Who they are mourning. It eases with time, at the grave, over a meal in memory, and among others who mourn the same person.');
   const griefBox = h('div', { class: 'list' });
@@ -376,7 +381,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   const soreList = new KeyedList<GrievanceView, QuarrelRow>(soreBox, () => makeQuarrelRow(deps), (r, g) => updateQuarrelRow(r, g));
 
   return {
-    els: [talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
+    els: [illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
     update(v) {
       const talk = v.interaction ?? { current: null, previous: null };
       const hasTalk = !!(talk.current || talk.previous);
@@ -410,6 +415,10 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);
+
+      const ill = v.illness ?? null;
+      illSec.setVisible(!!ill);
+      if (ill) setText(illText, `${cap(ill.how)} since ${ill.since} · ${ill.careful}`);
 
       const griefs = (v.grief ?? []).filter((g) => g.weight > 0);
       griefSec.setVisible(griefs.length > 0);

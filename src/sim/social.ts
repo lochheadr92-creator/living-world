@@ -16,6 +16,7 @@ import { addEvent, addFx, addLog, say as speak } from './events';
 import { addToHousehold, householdById, membersOf } from './households';
 import { estimatedAmount, learn, noteFailure } from './knowledge';
 import { adjustRel, relOf, spark, trustOf } from './relations';
+import { yearTicks } from './ageing';
 import { hearAccount, pickAccount, recordAccount } from './reputation';
 import { shareDeath } from './grief';
 import { hashUnit } from './rng';
@@ -217,6 +218,7 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   endGrievanceOnGift(world, giver, receiver, sev);
   giver.stats.given += 1;
   receiver.stats.received += 1;
+  if (receiver.illness) receiver.illness.care++; // looked after while ill: it improves their chances
   addLog(world, giver, 'social', `Gave ${txt} to ${receiver.name}${mode === 'care' ? ' (looking after them)' : ''}.`);
   addLog(world, receiver, 'social', `${giver.name} gave me ${txt}.`);
   const notable = sev > 0.35 || giver.hhId !== receiver.hhId;
@@ -736,7 +738,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
       let gain = (fit - 0.6) * 4.6 * early + chem * 3.0 + (rel.familiarity > 3 && rel.affinity > 8 ? 0.8 : 0);
       if (y.needs.hunger < 28 || y.needs.energy < 20 || y.needs.warmth < 28) gain -= 0.7; // nobody is good company when miserable
       // two unattached adults with a spark between them warm to each other much faster
-      if (gain > 0 && !x.partnerId && !y.partnerId && stageOf(world, x) !== 'child' && stageOf(world, y) !== 'child' && !rel.kin && spark(x, y)) gain += 2.6;
+      if (gain > 0 && !x.partnerId && !y.partnerId && stageOf(world, x) !== 'child' && stageOf(world, y) !== 'child' && !rel.kin && spark(x, y, yearTicks(world))) gain += 2.6;
       if (rel.avoidUntil > world.tick || c.data.sour) gain = Math.min(gain, 0.2) * 0.4;
       adjustRel(x, y.id, world.tick, { aff: gain, fam: 1.3, trust: gain > 0 ? 0.6 : -0.2 });
       x.needs.social = Math.min(100, x.needs.social + (9 + 11 * x.traits.sociability) * (rel.affinity >= 20 ? 1.2 : 1));
@@ -1176,7 +1178,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       const aff = rel?.affinity ?? 0;
       const trust = rel?.trust ?? 0;
       const kind = d.joinKind ?? 'roommate';
-      const ok = kind === 'partner' ? aff >= 28 && trust >= 20 && B.partnerId === 0 && A.partnerId === 0 && spark(A, B) : aff >= 32 && trust >= 22;
+      const ok = kind === 'partner' ? aff >= 28 && trust >= 20 && B.partnerId === 0 && A.partnerId === 0 && spark(A, B, yearTicks(world)) : aff >= 32 && trust >= 22;
       if (ok && hashUnit(B.id, A.id, world.tick >> 6) < 0.8 + 0.2 * B.traits.sociability) {
         if (joinHouseholds(world, A, B, kind)) {
           bubble(world, B, D.saying(D.ACCEPT_PROPOSE, B.id, A.id, world.tick >> 5), 'happy', 56);
@@ -1400,7 +1402,7 @@ export function bondWorkers(world: World, p: Person): void {
     if (rel && rel.avoidUntil > world.tick) continue;
     const fit = 1 - (Math.abs(p.traits.diligence - q.traits.diligence) + Math.abs(p.traits.sociability - q.traits.sociability)) / 2;
     if (fit < 0.45) continue;
-    const sparked = !p.partnerId && !q.partnerId && stageOf(world, p) !== 'child' && stageOf(world, q) !== 'child' && !(rel && rel.kin) && spark(p, q);
+    const sparked = !p.partnerId && !q.partnerId && stageOf(world, p) !== 'child' && stageOf(world, q) !== 'child' && !(rel && rel.kin) && spark(p, q, yearTicks(world));
     adjustRel(p, q.id, world.tick, { aff: 0.5 + 0.5 * fit + (sparked ? 0.7 : 0), fam: 0.5, trust: 0.4, note: `worked alongside ${q.name}` });
   }
 }

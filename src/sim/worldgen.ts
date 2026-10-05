@@ -1,4 +1,4 @@
-import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
+import { DAYS_PER_YEAR, DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
 import { createBuilding } from './buildings';
 import { addItem, emptyLedger, snapshotInitial } from './economy';
 import { addToHousehold, createHousehold } from './households';
@@ -46,7 +46,7 @@ export function fbm(x: number, y: number, seed: number, oct = 4): number {
 
 // ───────────────────────── blank world ─────────────────────────
 export function defaultSettings(seed = 'meadow'): Settings {
-  return { seed, population: 28, harsh: false, immigration: true, scene: 'natural' };
+  return { seed, population: 28, harsh: false, immigration: true, daysPerYear: DAYS_PER_YEAR, scene: 'natural' };
 }
 
 export function blankWorld(settings: Settings, W = MAP_W, H = MAP_H): World {
