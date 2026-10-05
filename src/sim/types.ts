@@ -140,6 +140,8 @@ export interface Relation {
   grievance: Grievance | null;
   /** last time a grievance between these two was closed (stops a settled quarrel from starting the same apology loop again) */
   settledAt: number;
+  /** how far hearsay has moved this person's trust in the other (summed; capped, and it relaxes with time) */
+  hearsay: number;
 }
 
 export type GrievanceCause = 'competition' | 'scarcity' | 'refusal' | 'broken_promise' | 'harm';
@@ -427,6 +429,8 @@ export interface Person {
   cartId: number;
   /** worries about people they have seen in need or been told about (bounded, each with its own provenance) */
   concerns: Concern[];
+  /** what they know of other people's conduct, from their own experience, from watching, or from being told (bounded) */
+  accounts: Account[];
   /** the last conversation or quarrel that ended, kept apart from whatever is going on now */
   lastInteraction: InteractionRecord | null;
 }
@@ -440,6 +444,21 @@ export interface InteractionRecord {
   /** how it came out, taken from the same exchange (a request's status, an apology's result…) */
   outcome: string;
   detail: string;
+}
+
+export type AccountKind = 'broke' | 'kept' | 'gave';
+/** Something one person did to another, as the holder knows it. Hearsay keeps the original event's time and who first had it. */
+export interface Account {
+  about: number;
+  kind: AccountKind;
+  /** who it was done to */
+  toward: number;
+  /** when it happened */
+  at: number;
+  src: 'seen' | 'told';
+  from: number;
+  origin: number;
+  hops: number;
 }
 
 export interface Concern {

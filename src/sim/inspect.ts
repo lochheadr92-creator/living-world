@@ -11,7 +11,7 @@ import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
-import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
+import { accountViews, commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
 import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
@@ -103,6 +103,8 @@ export interface PersonView {
   /** a shared meal they are hosting or have agreed to, and the last one they took part in */
   meal: { current: MealView | null; previous: MealView | null };
   concerns: { about: string; kind: string; seen: string; source: string }[];
+  /** what they know of how others have behaved, and how they came to know it */
+  accounts: { about: string; what: string; seen: string; source: string }[];
   grievances: GrievanceView[];
   decision: {
     when: string;
@@ -388,6 +390,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     interaction: interactionViews(world, p),
     meal: mealViews(world, p),
     concerns: concernViews(world, p),
+    accounts: accountViews(world, p),
     grievances: grievanceViews(world, p),
     decision: d
       ? {

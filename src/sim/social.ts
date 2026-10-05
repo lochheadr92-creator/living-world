@@ -16,6 +16,7 @@ import { addEvent, addFx, addLog, say as speak } from './events';
 import { addToHousehold, householdById, membersOf } from './households';
 import { estimatedAmount, learn, noteFailure } from './knowledge';
 import { adjustRel, relOf, spark } from './relations';
+import { hearAccount, pickAccount, recordAccount } from './reputation';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
 import { drive } from './needs';
@@ -169,12 +170,14 @@ function describeItems(items: Items): string {
   return itemsToText(items);
 }
 
-export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: Person, other: Person, x: number, y: number): void {
+/** `account` = onlookers also keep an account of it (only for what is worth repeating, not routine care). */
+export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: Person, other: Person, x: number, y: number, account = false): void {
   for (const w of world.persons) {
     if (!w.alive || w === actor || w === other || w.pose === 'sleep') continue;
     if (Math.hypot(w.x - x, w.y - y) > 7.5) continue;
     if (kind === 'gift' || kind === 'help') {
       adjustRel(w, actor.id, world.tick, { aff: 1.3, trust: 0.9, fam: 0.3, note: `saw ${actor.name} help ${other.name}` });
+      if (account) recordAccount(world, w, actor.id, 'gave', other.id);
     } else {
       adjustRel(w, actor.id, world.tick, { aff: -1.1, trust: -1.1, note: `saw ${actor.name} quarrel` });
       adjustRel(w, other.id, world.tick, { aff: -0.6, note: `saw ${other.name} quarrel` });
@@ -196,8 +199,9 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   receiver.stats.received += 1;
   addLog(world, giver, 'social', `Gave ${txt} to ${receiver.name}${mode === 'care' ? ' (looking after them)' : ''}.`);
   addLog(world, receiver, 'social', `${giver.name} gave me ${txt}.`);
-  witness(world, 'gift', giver, receiver, receiver.x, receiver.y);
   const notable = sev > 0.35 || giver.hhId !== receiver.hhId;
+  witness(world, 'gift', giver, receiver, receiver.x, receiver.y, notable && mode !== 'care');
+  if (notable && mode !== 'care') recordAccount(world, receiver, giver.id, 'gave', receiver.id);
   if (notable && mode !== 'care') addEvent(world, 'social', `${giver.name} gave ${txt} to ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
   else if (mode === 'care' && stageOf(world, receiver) === 'child' && hashUnit(giver.id, receiver.id, world.tick >> 6) < 0.25) addEvent(world, 'social', `${giver.name} fed ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
   addFx(world, 'gift', receiver.x, receiver.y, 0);
@@ -472,6 +476,7 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
     adjustRel(B, A.id, world.tick, { aff: 1, trust: 1 });
+    recordAccount(world, A, B.id, 'kept', A.id);
     bubble(world, A, D.saying(D.THANKS, A.id, B.id, world.tick >> 4, { n: B.name }), 'happy');
     addEvent(world, 'social', `${B.name} kept a promise to ${A.name}.`, [A.id, B.id], A.x, A.y);
   }
@@ -544,6 +549,7 @@ export function checkCommitments(world: World, p: Person): void {
       c.status = 'done';
       if (req && req.status === 'promised') settle(world, req, 'fulfilled', 'did what they promised');
       adjustRel(A, p.id, world.tick, { aff: 2.5, trust: 3, note: `${p.name} helped with the building` });
+      recordAccount(world, A, p.id, 'kept', A.id);
     } else if (frac > 0) {
       c.status = 'expired';
       c.reason = `only ${Math.round(frac * 100)}% was done in time`;
@@ -569,6 +575,7 @@ export function checkCommitments(world: World, p: Person): void {
       adjustRel(A, p.id, world.tick, { aff: -5, trust: -12, note: `${p.name} did not keep a promise` });
       adjustRel(p, A.id, world.tick, { trust: -2, aff: -1 });
       openGrievance(world, A, p, 'broken_promise', `${p.name} did not do what they promised`, 38);
+      recordAccount(world, A, p.id, 'broke', A.id);
       addLog(world, p, 'social', `Failed to keep my promise to ${A.name}.`);
       addLog(world, A, 'social', `${p.name} never came through with what they promised.`);
       addEvent(world, 'conflict', `${p.name} did not keep a promise to ${A.name}.`, [p.id, A.id], A.x, A.y);
@@ -1156,8 +1163,20 @@ export function flushDelayedBubbles(world: World): void {
 }
 
 // ── phase 3: news travels by word of mouth ──
+function shareAccount(world: World, S: Person, L: Person): void {
+  const a = pickAccount(world, S, L);
+  if (!a) return;
+  const held = hearAccount(world, S, L, a);
+  if (!held || S.speech) return;
+  const subject = personOf(world, a.about);
+  if (!subject) return;
+  const lines = a.kind === 'broke' ? D.GOSSIP_BROKE : a.kind === 'kept' ? D.GOSSIP_KEPT : D.GOSSIP_GAVE;
+  bubble(world, S, D.saying(lines, S.id, L.id, world.tick >> 5, { n: subject.name }), 'say', 66);
+}
+
 function phaseNews(world: World, S: Person, L: Person): void {
   shareConcerns(world, S, L);
+  shareAccount(world, S, L);
   const news = pickNews(world, S, L, 2);
   let shown = false;
   let learned = 0;

@@ -26,6 +26,7 @@ decided to supply it; a plank exists because somebody turned wood into it; a mea
 | Grievances and the way back from them | `sim/grievance.ts` | |
 | Shared meals and the hall | `sim/meals.ts` | |
 | Looking after one another | `sim/welfare.ts` | |
+| Word about people: accounts, passing them on, the hearsay cap | `sim/reputation.ts` | |
 | Not letting work strand anyone from water or food | `sim/relief.ts` | wired into `rankOptions` |
 | Fixed-step clock, stalls, requested/achieved speed | `app/game.ts` | |
 | Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | |
@@ -218,6 +219,27 @@ themselves, and knows roughly where to go. On arrival they look: if help is need
 is dropped and that person is not checked on again for a long while; if they are not there, the old place is forgotten and the
 worry softened. Nobody knows of an injury, a hunger or a death that no one has seen or told them of.
 
+## Word about people
+
+People tell each other about *people*, not only about places. An **account** is something one person did to another, as the
+holder knows it: `kept` (a promise was kept), `broke` (a promise was broken, when the maker was free to keep it) or `gave` (a
+real gift between households, or to someone in real need; routine care of children does not count). Someone holds an account
+only because it happened to them, they watched it, or someone who held it told them. It keeps the event's own time, who it was
+about, who it was done to, who first held it (the origin) and how many tellings it has been through. Up to ten are kept per
+person, newest first, and an account older than three days is no longer told.
+
+When two people talk, the speaker may bring one up: a grievance is raised by someone who cares about who was wronged (family,
+housemate, a friend) or who already thinks ill of the subject; praise is raised by someone who likes the subject. Nobody is
+told about themself or about something done to them, nobody is told the same event twice, and an account is passed on at most
+twice (a listener who heard it at the second hop keeps it to themself).
+
+What the listener does with it is deliberately small. Their trust in the subject moves by at most about 40% of what the same
+thing does first-hand (a broken promise is −12 first-hand and at most −4.5 by hearsay), scaled by how far they trust the teller
+(a teller they trust little or not at all is not believed and the account is not kept), by how little they already know the
+subject (someone they know well is judged on what they have seen), and by how fresh it is. The total that hearsay can have moved
+one person's trust in another is capped (−15 to +9) and that cap relaxes with time. Every change is in the listener's record of
+the pair with the teller's name on it, and the person inspector lists each account with how it came to be known.
+
 ## Quarrels
 
 A quarrel is a **grievance** with a cause (competition for something, scarcity while going hungry, a refusal when it mattered, a
@@ -290,10 +312,13 @@ depends only on the tick and the population, so a run is reproducible.
 * The clock is told the real length of every frame (it used to be clamped before the clock saw it, which hid stalls from the
   speed readout), counts what it gives up, and the readout reports recent skips only. The first frame after resuming carries
   on from the picture that was on screen instead of stepping back a little.
-* Saved worlds are version 3. Saves from before workshops, tools and carts existed are refused rather than half-loaded; a saved
+* Saved worlds were made version 3 at this point (version 4 is below). Saves from before workshops, tools and carts existed are refused rather than half-loaded; a saved
   world with a cart on the road used to lose the cart on loading and now resumes exactly.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
+
+* Saved worlds are version 4: people hold accounts of how others have behaved and relationships carry a hearsay total, so
+  saves from before that are refused rather than half-loaded.
 
 ## Staged scenes
 

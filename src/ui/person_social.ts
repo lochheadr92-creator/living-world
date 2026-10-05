@@ -331,6 +331,25 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
     },
   );
 
+  // word about others
+  const wordSec = deps.section('word', 'Word about others', 'What they know of how other people have behaved, and how they came to know it. Hearsay moves their opinion only a little.');
+  const wordBox = h('div', { class: 'list' });
+  wordSec.body.append(wordBox);
+  const wordList = new KeyedList<PersonView['accounts'][number], WorryRow>(
+    wordBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, a) => {
+      r.who.set(a.about);
+      setText(r.what, ` ${a.what}`);
+      setText(r.meta, `${a.seen} · ${a.source}`);
+    },
+  );
+
   // quarrels
   const soreSec = deps.section('sore', 'Quarrels', 'Who they are still sore at, and why. A quarrel drops off this list once it is settled.');
   const soreBox = h('div', { class: 'list' });
@@ -338,7 +357,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   const soreList = new KeyedList<GrievanceView, QuarrelRow>(soreBox, () => makeQuarrelRow(deps), (r, g) => updateQuarrelRow(r, g));
 
   return {
-    els: [talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el],
+    els: [talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el],
     update(v) {
       const talk = v.interaction ?? { current: null, previous: null };
       const hasTalk = !!(talk.current || talk.previous);
@@ -372,6 +391,11 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);
+
+      const words = v.accounts ?? [];
+      wordSec.setVisible(words.length > 0);
+      wordSec.setCount(words.length ? String(words.length) : '');
+      if (words.length && wordSec.isOpen()) wordList.sync(words, (a) => `${a.about}|${a.what}|${a.source}`);
     },
   };
 }

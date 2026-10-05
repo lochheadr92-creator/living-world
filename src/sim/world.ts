@@ -239,7 +239,7 @@ export function hashWorld(world: World): string {
       aff += p.relations[k as unknown as number].affinity;
       fam += p.relations[k as unknown as number].familiarity;
     }
-    push(`R${r4(aff)},${r4(fam)}|B${Object.keys(p.beliefs).length}`);
+    push(`R${r4(aff)},${r4(fam)}|B${Object.keys(p.beliefs).length}|A${p.accounts.length}`);
   }
   for (const s of world.sources) push(`S${s.id}:${s.amount},${r4(s.growth)},${s.reserved}`);
   for (const b of world.buildings) push(`B${b.id}:${b.type},${r4(b.condition)},${r4(b.fuel)},${JSON.stringify(b.store.items)}`);

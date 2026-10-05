@@ -4,7 +4,7 @@ import type { Person, Relation } from './types';
 import { clamp } from './util';
 
 export function newRelation(): Relation {
-  return { affinity: 0, trust: 10, familiarity: 0, lastMet: -99999, kin: '', avoidUntil: 0, debt: 0, history: [], grievance: null, settledAt: -99999 };
+  return { affinity: 0, trust: 10, familiarity: 0, lastMet: -99999, kin: '', avoidUntil: 0, debt: 0, history: [], grievance: null, settledAt: -99999, hearsay: 0 };
 }
 
 export function relOf(p: Person, otherId: number): Relation {
@@ -91,5 +91,6 @@ export function driftRelations(p: Person): void {
     if (r.affinity < 0 && r.affinity > -50) r.affinity *= 0.9965; // grudges fade a little faster
     if (Math.abs(r.affinity) < 0.4) r.affinity = 0;
     r.trust += (10 - r.trust) * 0.004;
+    if (r.hearsay) r.hearsay = Math.abs(r.hearsay) < 0.05 ? 0 : r.hearsay * 0.998; // the cap hearsay puts on a pair relaxes with time
   }
 }

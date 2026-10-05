@@ -7,6 +7,7 @@ import { RECIPES, recipesAt } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { mealOf, previousMealOf } from './meals';
+import { accountWords } from './reputation';
 import type { Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, World } from './types';
 
 export interface Bar {
@@ -409,6 +410,15 @@ export function grievanceViews(world: World, p: Person): GrievanceView[] {
 
 export function concernViews(world: World, p: Person): { about: string; kind: string; seen: string; source: string }[] {
   return p.concerns.map((c) => ({ about: nameOf(world, c.about), kind: c.kind === 'missing' ? 'has not been seen for a while' : `looked ${c.kind}`, seen: ago(world, c.seen), source: c.src === 'seen' ? 'saw it themself' : `told by ${nameOf(world, c.from)}` }));
+}
+
+export function accountViews(world: World, p: Person): { about: string; what: string; seen: string; source: string }[] {
+  return p.accounts.map((a) => ({
+    about: nameOf(world, a.about),
+    what: `${accountWords(a.kind)} (to ${a.toward === p.id ? 'them' : nameOf(world, a.toward)})`,
+    seen: ago(world, a.at),
+    source: a.src === 'seen' ? (a.toward === p.id ? 'it happened to them' : 'saw it themself') : `told by ${nameOf(world, a.from)}${a.hops > 1 ? ` (passed on ${a.hops} times)` : ''}`,
+  }));
 }
 
 void RECIPES;
