@@ -118,10 +118,17 @@ describe('how a promise ends', () => {
     expect(aff(asker, maker).grievance).toBeNull();
   });
 
-  it('put aside for their own survival: interrupted, a very small mark, no grievance', () => {
+  it('put aside for their own survival, and said so when they next talked: interrupted, a very small mark, no grievance', () => {
     const { w, asker, maker } = pair('ends-interrupted');
     const { req, cm } = promised(w, asker, maker, {});
+    w.tick += 100;
     markSetAside(w, maker);
+    expect(cm.told, 'nobody has been told yet').toBeUndefined();
+    // they meet and talk before the deadline: the maker says why it has not been done
+    converse(w, maker, asker, 'chat');
+    expect(cm.told).toBe(true);
+    expect(maker.log.some((l) => /^Told Ana why I had not got to what I promised/.test(l.text))).toBe(true);
+    expect(asker.log.some((l) => /^Ben told me they had had to see to their own needs/.test(l.text))).toBe(true);
     w.tick += 2000;
     markSetAside(w, maker); // still struggling near the deadline
     const trust0 = aff(asker, maker).trust;
@@ -130,6 +137,36 @@ describe('how a promise ends', () => {
     expect(req.status).toBe('interrupted');
     expect(trust0 - aff(asker, maker).trust).toBeLessThan(2);
     expect(aff(asker, maker).grievance).toBeNull();
+  });
+
+  it('put aside for their own survival and never said so: to the one they promised, a promise not kept', () => {
+    const { w, asker, maker } = pair('ends-unexplained');
+    const { req, cm } = promised(w, asker, maker, {});
+    markSetAside(w, maker);
+    w.tick += 2000;
+    markSetAside(w, maker); // the same reason, the same lateness; they just never got to say it
+    const trust0 = aff(asker, maker).trust;
+    checkCommitments(w, maker);
+    expect(cm.told).toBeUndefined();
+    expect(cm.status).toBe('broken');
+    expect(req.status).toBe('broken');
+    expect(trust0 - aff(asker, maker).trust).toBeGreaterThan(8);
+    expect(aff(asker, maker).grievance).not.toBeNull();
+  });
+
+  it('only a promise to that person is explained to them: telling someone else says nothing about it', () => {
+    const s = stage('told-wrong-person');
+    const asker = addPerson(s, 'Ana', 44, 44);
+    const maker = addPerson(s, 'Ben', 46, 44, { sex: 'm' });
+    const other = addPerson(s, 'Cai', 48, 44, { sex: 'm' });
+    const w = done(s);
+    const req = createRequest(w, asker, maker, { kind: 'wood', item: 'wood', amount: 3 });
+    req.status = 'promised';
+    const cm = commit(w, maker, { requestId: req.id, to: asker.id, item: 'wood', amount: 3 });
+    w.tick += 100;
+    markSetAside(w, maker);
+    converse(w, maker, other, 'chat');
+    expect(cm.told, 'Cai was told nothing about what Ben promised Ana, and Ana has heard nothing').toBeUndefined();
   });
 
   it('turned out to be impossible: failed, a small mark, the reason on record', () => {

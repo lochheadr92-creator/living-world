@@ -482,7 +482,8 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
  *   done         – kept (the request is fulfilled)
  *   expired      – the time ran out after some of it was done: partly kept, credit in proportion
  *   moot         – the need went away (the site was finished or abandoned, the other person died)
- *   interrupted  – the maker put it aside for their own survival until it was too late: a small mark, no blame
+ *   interrupted  – the maker put it aside for their own survival until it was too late, and told the other person so: a small
+ *                  mark, no blame. Unexplained, it is simply a promise not kept (broken), whatever the reason was
  *   failed       – it turned out to be impossible (nothing to give, nowhere to get it): a small mark
  *   broken       – the maker was free to do it and did not: the real penalty
  * Time asleep and time spent on survival does not count against the deadline.
@@ -550,7 +551,8 @@ export function checkCommitments(world: World, p: Person): void {
       if (req && req.status === 'promised') settle(world, req, 'expired', c.reason);
       adjustRel(A, p.id, world.tick, { aff: 2.5 * frac - 0.5, trust: 4 * frac - 1, note: `${p.name} did part of what they promised` });
       addLog(world, p, 'social', `Only managed part of what I promised ${A.name}.`);
-    } else if (c.setAside && world.tick - c.setAside < 900) {
+    } else if (c.setAside && c.told && world.tick - c.setAside < 900) {
+      // the reason was only the promiser's to know: it counts, to the one they promised, only if they said so (explainDelays)
       c.status = 'interrupted';
       c.reason = 'put aside while seeing to their own needs';
       if (req && req.status === 'promised') settle(world, req, 'interrupted', c.reason);
@@ -1155,8 +1157,22 @@ export function flushDelayedBubbles(world: World): void {
   }
 }
 
+/**
+ * A promise that had to wait while its maker saw to their own survival is explained to the person it was made to the next time
+ * they talk. Only then is a late one forgiven as an interruption: nobody can know why a promise was not kept unless they are told.
+ */
+function explainDelays(world: World, S: Person, L: Person): void {
+  for (const c of S.commitments) {
+    if (c.status !== 'active' || c.to !== L.id || c.setAside === undefined || c.told) continue;
+    c.told = true;
+    addLog(world, S, 'social', `Told ${L.name} why I had not got to what I promised: my own needs came first.`);
+    addLog(world, L, 'social', `${S.name} told me they had had to see to their own needs before they could get to what they promised.`);
+  }
+}
+
 // ── phase 3: news travels by word of mouth ──
 function phaseNews(world: World, S: Person, L: Person): void {
+  explainDelays(world, S, L);
   shareConcerns(world, S, L);
   const news = pickNews(world, S, L, 2);
   let shown = false;

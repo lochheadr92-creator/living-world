@@ -86,7 +86,7 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
   takes them *to the site*; an asker is not given more than they need, does not ask again for what has been promised, and
   a site takes only as many helpers as it can use.
 * **Promises end exactly one way:** done, expired (partly done), moot (no longer needed), interrupted (put aside for their
-  own survival), failed (turned out impossible) or broken (free and able, and did nothing). Each has its own effect on the
+  own survival, and the other person told so), failed (turned out impossible) or broken (free and able, and did nothing). Each has its own effect on the
   relationship; only a broken one opens a grievance. A *refusal* is not a broken promise.
 * **Shared meals** are one interaction from start to finish: an invitation, acceptance (a serving reserved against the host's
   own spare food), a physical place (the hall or a fire), a table laid with real food, one serving eaten at a time, and a

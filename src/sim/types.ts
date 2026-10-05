@@ -318,6 +318,8 @@ export interface Commitment {
   toolId?: number;
   /** when the helper last had to put it aside for their own survival */
   setAside?: number;
+  /** the helper has told the one they promised why it was put aside (only then is a late promise forgiven as an interruption) */
+  told?: boolean;
   /** ticks of sleep and survival chores that count as extra time before the deadline */
   grace?: number;
   /** the last thing that stopped them (no stock, no known source, site waiting for something else) and when */

@@ -185,9 +185,9 @@ Time asleep or spent seeing to survival does not count against the deadline. A p
 | **done** | delivered in full / enough work / returned / mended | +3 warmth, +6 trust | closes none |
 | **expired** | time ran out with some of it done | +2.5·fraction − 0.5 warmth, +4·fraction − 1 trust | none |
 | **moot** | the building was finished or given up, the roof was mended by someone else, the other person is gone | none | none |
-| **interrupted** | put aside for their own survival until it was too late | −1 trust, −0.4 warmth | none |
+| **interrupted** | put aside for their own survival until it was too late, **and the maker had told them so** the next time they talked | −1 trust, −0.4 warmth | none |
 | **failed** | proved impossible (no stock, nothing known, the site was waiting on something they could not supply, a full pack with nowhere to put things down) | −2 trust, −0.6 warmth | none |
-| **broken** | the maker was free and capable and did nothing | −12 trust, −5 warmth | opens "broken promise" |
+| **broken** | the maker was free and capable and did nothing; or put it aside for their own survival and **never said so** (nobody can know a reason that was not told: to the one they promised it is a promise not kept) | −12 trust, −5 warmth | opens "broken promise" |
 
 A **refusal** is not a broken promise: it costs a little warmth in proportion to how much was at stake (−1.5…−6 warmth, up
 to −3.5 trust), opens a grievance only if the need was real, and costs nothing at all if the reason was that it had been seen
@@ -393,6 +393,11 @@ from a moving starting point, `(i + tick) mod n`, which gave the first of two ne
   back was not borne out by a variant with the sexes scrambled, which went from +2.8 to +1.3); and the harsh-world check of the
   inspector brings a death about instead of waiting for one (none of six harsh worlds had a death in their first fifteen days
   under the new order).
+* **A delayed promise is forgiven as an interruption only if its maker said why.** A promise put aside while its maker saw to
+  their own survival used to end *interrupted* (no blame) whenever it ran late within 900 ticks of being put aside. Nobody can
+  know a reason nobody gave, so now the maker tells the one they promised, the next time the two talk ("my own needs came
+  first"; both write it in their log, and the promise records that it was told). Late and told is *interrupted*; late and never
+  told is *broken*, like any promise not kept.
 ## Staged scenes
 
 The ordinary seeded world is the demonstration of natural behaviour. Six small scenes are staged for watching one rule in
