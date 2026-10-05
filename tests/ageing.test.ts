@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { carryCap, ageYears } from '../src/sim/people';
 import { moveSpeed } from '../src/sim/activities';
-import { INFANT_HAZARD, childbirthRisk, fertilityAt, frailtyOf, mortalityPerYear, survival, vigourAt, workDrag } from '../src/sim/ageing';
+import { INFANT_HAZARD, lifeDraw, childbirthRisk, fertilityAt, frailtyOf, mortalityPerYear, survival, vigourAt, workDrag } from '../src/sim/ageing';
 import { LIFE_CHECK_EVERY, lifeTick } from '../src/sim/lifecycle';
 import { TICKS_PER_YEAR } from '../src/sim/constants';
 import { createWorld, defaultSettings } from '../src/sim/factory';
@@ -17,9 +17,9 @@ describe('mortality', () => {
     expect(h(8)).toBeGreaterThan(h(20));
     for (let a = 25; a < 90; a += 5) expect(h(a + 5)).toBeGreaterThan(h(a));
     expect(h(80)).toBeGreaterThan(5 * h(40));
-    // doubling about every ten years in old age
-    expect(h(80) / h(70)).toBeGreaterThan(1.7);
-    expect(h(80) / h(70)).toBeLessThan(2.3);
+    // doubling about every seven years in old age
+    expect(h(80) / h(70)).toBeGreaterThan(2.2);
+    expect(h(80) / h(70)).toBeLessThan(3.1);
   });
 
   it('is worse for the frail and for the unwell, and neither can make it negative or silly', () => {
@@ -30,25 +30,25 @@ describe('mortality', () => {
     for (const a of [0, 5, 30, 60, 90]) for (const f of [0.6, 1, 1.9]) expect(mortalityPerYear(a, f, 0)).toBeGreaterThan(0);
   });
 
-  it('is calibrated: of people who reach fifteen, about 85% see forty, half sixty, a third seventy, a tenth eighty, almost none ninety', () => {
+  it('is calibrated: of people who reach fifteen, about 94% see forty, three in four sixty, half seventy, a quarter eighty, one in thirty ninety', () => {
     // averaged over the spread of frailty a world actually has
     const w = natural('age-calibration');
     const fr: number[] = [];
     for (let id = 1; id <= 600; id++) fr.push(frailtyOf(w, { id } as never));
     const avg = (to: number) => fr.reduce((s, f) => s + survival(15, to, f), 0) / fr.length;
-    expect(avg(40)).toBeGreaterThan(0.8);
-    expect(avg(40)).toBeLessThan(0.9);
-    expect(avg(60)).toBeGreaterThan(0.45);
-    expect(avg(60)).toBeLessThan(0.62);
-    expect(avg(70)).toBeGreaterThan(0.25);
-    expect(avg(70)).toBeLessThan(0.4);
-    expect(avg(80)).toBeGreaterThan(0.06);
-    expect(avg(80)).toBeLessThan(0.17);
-    expect(avg(90)).toBeLessThan(0.05);
-    // and a newborn has about a three in four chance of reaching fifteen
+    expect(avg(40)).toBeGreaterThan(0.9);
+    expect(avg(40)).toBeLessThan(0.97);
+    expect(avg(60)).toBeGreaterThan(0.7);
+    expect(avg(60)).toBeLessThan(0.82);
+    expect(avg(70)).toBeGreaterThan(0.47);
+    expect(avg(70)).toBeLessThan(0.62);
+    expect(avg(80)).toBeGreaterThan(0.17);
+    expect(avg(80)).toBeLessThan(0.3);
+    expect(avg(90)).toBeLessThan(0.07);
+    // and a newborn has about a six in seven chance of reaching fifteen
     const born = fr.reduce((s, f) => s + survival(0, 15, f), 0) / fr.length;
-    expect(born).toBeGreaterThan(0.7);
-    expect(born).toBeLessThan(0.9);
+    expect(born).toBeGreaterThan(0.8);
+    expect(born).toBeLessThan(0.92);
   });
 });
 
@@ -116,6 +116,27 @@ describe('vigour, fertility and what they change', () => {
     expect(childbirthRisk(40, 1)).toBeGreaterThan(childbirthRisk(25, 1));
     expect(childbirthRisk(25, 1.6)).toBeGreaterThan(childbirthRisk(25, 0.8));
     expect(childbirthRisk(25, 1.9)).toBeLessThan(0.05);
+  });
+});
+
+describe('chance is specific to the world', () => {
+  it('the same person has different luck in different worlds (people have the same ids everywhere), and the same luck in the same world', () => {
+    const a = natural('luck-a');
+    const b = natural('luck-b');
+    const a2 = natural('luck-a');
+    const pa = a.persons[3];
+    const pb = { id: pa.id } as typeof pa; // the same id, in another world
+    let same = 0;
+    let identical = 0;
+    for (let step = 0; step < 2000; step++) {
+      if (lifeDraw(a, pa, step, 91) === lifeDraw(b, pb, step, 91)) same++;
+      if (lifeDraw(a, pa, step, 91) === lifeDraw(a2, pa, step, 91)) identical++;
+    }
+    expect(same).toBe(0);
+    expect(identical).toBe(2000);
+    // and the moments at which a hazard would strike differ between worlds
+    const strikes = (w: typeof a, p: typeof pa) => Array.from({ length: 200000 }, (_, i) => i).filter((i) => lifeDraw(w, p, i, 91) < 0.0005);
+    expect(strikes(a, pa)).not.toEqual(strikes(b, pb));
   });
 });
 

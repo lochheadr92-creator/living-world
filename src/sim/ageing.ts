@@ -6,17 +6,17 @@ import { clamp } from './util';
  * How a life goes. Three separate things, all derived from a person's age and an inborn frailty (no stored state, no random stream):
  *
  *  - **mortality**: the chance of dying of ordinary causes in a year, for each age. High in the first year, low through childhood and
- *    the prime of life, then rising steeply (a Gompertz curve, doubling about every ten years), scaled by frailty and by poor health.
- *    Fitted so that, of people who reach fifteen, about 85% see forty, half see sixty, a third seventy, a tenth eighty and one in fifty
- *    ninety. (Hunger, thirst, cold and wolves are separate and unchanged.)
+ *    the prime of life, then rising steeply (a Gompertz curve, doubling about every seven years), scaled by frailty and by poor health.
+ *    Fitted so that, of people who reach fifteen, about 94% see forty, three in four sixty, half seventy, a quarter eighty and one in
+ *    thirty ninety, with most deaths falling on the very young and the old. (Hunger, thirst, cold and wolves are separate and unchanged.)
  *  - **vigour**: strength and stamina. Full through the prime, declining from about forty-five (earlier for the frail).
  *  - **fertility**: highest in the twenties, gone by the mid-forties.
  */
 
-export const INFANT_HAZARD = 0.12; // per year, first year
-const BASE_ADULT = 0.002;
-const OLD_SCALE = 0.00055;
-const OLD_GROWTH = 0.07;
+export const INFANT_HAZARD = 0.07; // per year, first year
+const BASE_ADULT = 0.0015;
+const OLD_SCALE = 0.0000454; // e^-10
+const OLD_GROWTH = 0.1; // the hazard doubles about every seven years
 
 /** Inborn robustness, 0.6 (hardy) to 1.9 (frail), fixed by the seed and the person, centred just above 1. */
 const frailtyCache = new WeakMap<Person, number>();
@@ -30,12 +30,27 @@ export function frailtyOf(world: World, p: Person): number {
   return f;
 }
 
+const seedKeys = new Map<string, number>();
+/**
+ * A deterministic draw in [0, 1) for this person at this moment, specific to this world. The world's seed has to be part of it:
+ * people have the same ids in every world, so a draw that ignored the seed would give the same person the same fate at the same
+ * moment in every world.
+ */
+export function lifeDraw(world: World, p: Person, step: number, salt: number): number {
+  let k = seedKeys.get(world.seed);
+  if (k === undefined) {
+    k = hashString(world.seed) | 0;
+    seedKeys.set(world.seed, k);
+  }
+  return hashUnit(p.id, step, k ^ (salt * 0x9e3779b1));
+}
+
 /** Chance per year of dying of ordinary causes, at this age. `health` is 0..100. */
 export function mortalityPerYear(age: number, frailty: number, health = 100): number {
   let h: number;
   if (age < 1) h = INFANT_HAZARD;
-  else if (age < 5) h = 0.03 - 0.018 * ((age - 1) / 4); // 3% a year at one, 1.2% by five
-  else if (age < 15) h = 0.006;
+  else if (age < 5) h = 0.02 - 0.014 * ((age - 1) / 4); // 2% a year at one, 0.6% by five
+  else if (age < 15) h = 0.002;
   else h = BASE_ADULT + OLD_SCALE * Math.exp(OLD_GROWTH * age);
   const unwell = 1 + Math.max(0, 60 - health) / 30; // someone hurt or worn out is likelier to die
   return h * frailty * unwell;

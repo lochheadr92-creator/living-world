@@ -3,11 +3,10 @@
 // simulated years in seconds, so it answers "does the population hold steady?" without a 45-minute full simulation. It is OPTIMISTIC
 // about food and housing, so it bounds what the full simulation can do; it does not replace it.
 //   npx vite-node scripts/demography.ts [seeds=20] [years=300] [arrivals=on|off]
-import { childbirthRisk, fertilityAt, frailtyOf, mortalityPerYear } from '../src/sim/ageing';
+import { childbirthRisk, fertilityAt, frailtyOf, lifeDraw, mortalityPerYear } from '../src/sim/ageing';
 import { BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR } from '../src/sim/constants';
 import { createWorld, defaultSettings } from '../src/sim/factory';
 import { ageYears } from '../src/sim/people';
-import { hashUnit } from '../src/sim/rng';
 
 const seeds = Number(process.argv[2] ?? 20);
 const years = Number(process.argv[3] ?? 300);
@@ -25,6 +24,7 @@ function run(seedName: string) {
   for (const p of w.persons) if (p.partnerId) people.find((x) => x.id === p.id)!.partner = p.partnerId;
   const age = (p: P, t: number) => (t - p.born) / TICKS_PER_YEAR;
   const causes: Record<string, number> = {};
+  const bands: Record<string, number> = { 'under 12': 0, '12-44': 0, '45-61': 0, '62+': 0 };
   let ageAtDeathSum = 0;
   let deaths = 0;
   const popAt: Record<number, number> = {};
@@ -37,6 +37,8 @@ function run(seedName: string) {
   const kill = (p: P, t: number, cause: string) => {
     p.alive = false;
     causes[cause] = (causes[cause] ?? 0) + 1;
+    const ag = age(p, t);
+    bands[ag < 12 ? 'under 12' : ag < 45 ? '12-44' : ag < 62 ? '45-61' : '62+']++;
     ageAtDeathSum += age(p, t);
     deaths++;
     const mate = people.find((x) => x.id === p.partner);
@@ -47,7 +49,7 @@ function run(seedName: string) {
       if (!p.alive) continue;
       const a = age(p, t);
       const h = mortalityPerYear(a, p.frail);
-      if (hashUnit(p.id, Math.floor(t / LIFE), 91) < 1 - Math.exp((-h * LIFE) / TICKS_PER_YEAR)) kill(p, t, a < 12 ? 'childhood' : a < 62 ? 'illness' : 'old age');
+      if (lifeDraw(fakeWorld, p as never, Math.floor(t / LIFE), 91) < 1 - Math.exp((-h * LIFE) / TICKS_PER_YEAR)) kill(p, t, a < 12 ? 'childhood' : a < 62 ? 'illness' : 'old age');
     }
     for (const m of people) {
       if (!m.alive || m.preg <= 0 || t < m.preg) continue;
@@ -56,7 +58,7 @@ function run(seedName: string) {
       const baby: P = { id: nextId++, born: t, sex: rand() < 0.5 ? 'f' : 'm', partner: 0, preg: 0, lastBirth: -1e9, alive: true, frail: 1, hh: m.hh };
       baby.frail = frailtyOf(fakeWorld, { id: baby.id } as never);
       people.push(baby);
-      if (hashUnit(m.id, baby.id, 93) < childbirthRisk(age(m, t), m.frail)) kill(m, t, 'childbirth');
+      if (lifeDraw(fakeWorld, m as never, baby.id, 93) < childbirthRisk(age(m, t), m.frail)) kill(m, t, 'childbirth');
     }
     if (t % CONC < LIFE) {
       const living = people.filter((p) => p.alive);
@@ -94,7 +96,7 @@ function run(seedName: string) {
     if (t % TICKS_PER_YEAR < LIFE && [5, 10, 25, 50, 100, 200, 300].includes(yr)) popAt[yr] = pop;
   }
   const final = people.filter((p) => p.alive);
-  return { popAt, extinct, lowShare: lowTime / T, deaths, meanAge: deaths ? ageAtDeathSum / deaths : 0, causes, final: final.length, kids: final.filter((p) => age(p, T) < 12).length, elders: final.filter((p) => age(p, T) >= 62).length };
+  return { bands, avgPop: 0, popAt, extinct, lowShare: lowTime / T, deaths, meanAge: deaths ? ageAtDeathSum / deaths : 0, causes, final: final.length, kids: final.filter((p) => age(p, T) < 12).length, elders: final.filter((p) => age(p, T) >= 62).length };
 }
 
 const rows = [];
@@ -111,3 +113,8 @@ console.log(`mean age at death ${(rows.reduce((s, r) => s + r.meanAge, 0) / rows
 const all: Record<string, number> = {};
 for (const r of rows) for (const [k, v] of Object.entries(r.causes)) all[k] = (all[k] ?? 0) + v;
 console.log('deaths by cause:', JSON.stringify(all));
+const tot = Object.values(all).reduce((a, b) => a + b, 0);
+const band: Record<string, number> = {};
+for (const r of rows) for (const [k, v] of Object.entries(r.bands)) band[k] = (band[k] ?? 0) + v;
+console.log('deaths by age band:', Object.entries(band).map(([k, v]) => `${k} ${(100 * v / tot).toFixed(0)}%`).join(', '));
+console.log(`deaths per world per year: ${(tot / (rows.length * years)).toFixed(2)} (one every ${(12 / (tot / (rows.length * years))).toFixed(1)} days of simulated time)`);

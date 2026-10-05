@@ -303,14 +303,20 @@ What changed is what a life is like. Everything below comes from a person's age 
 frail, fixed by the seed and the person), with no stored state and no random stream, so it cannot disturb anything else
 (`sim/ageing.ts`).
 
-**Death.** Each minute of simulated time everyone has a small chance of dying of ordinary causes, from this yearly hazard: 12% in
-the first year, 3% falling to 1.2% by five, 0.6% to fifteen, then `0.2% + 0.055% × e^(0.07 × age)` (doubling about every ten
-years from fifty on), all times frailty, and times up to 3 for someone who is hurt or worn out. It is fitted so that of people who
-reach fifteen about 85% see forty, half see sixty, a third seventy, a tenth eighty and one in fifty ninety, and about three in four
-newborns reach fifteen; the mean age at death comes out near 46 (children included). The cause is put down as a childhood illness
-(under twelve), illness (to sixty-two) or old age. A birth carries about a one in a hundred risk to the mother in her twenties,
-more after thirty-five and for the frail. Hunger, thirst, cold and wolves are separate and unchanged. A village of about thirty loses
-someone about every three weeks of simulated time, mostly infants, the old and, now and then, someone in their prime.
+**Death.** Each minute of simulated time everyone has a small chance of dying of ordinary causes, from this yearly hazard: 7% in
+the first year, 2% falling to 0.6% by five, 0.2% to fifteen, then `0.15% + 0.00454% × e^(0.1 × age)` (doubling about every seven
+years in old age), all times frailty, and times up to 3 for someone who is hurt or worn out. It is fitted so that of people who
+reach fifteen about 94% see forty, three in four see sixty, half see seventy, a quarter eighty and one in thirty ninety, and about
+six in seven newborns reach fifteen; the mean age at death comes out near 59, and about 60% of deaths fall on people over sixty-two
+(an earlier, steeper curve put a fifth of all deaths on people aged 12 to 44, which looked wrong and was softened). The cause is put
+down as a childhood illness (under twelve), illness (to sixty-two) or old age. A birth carries about a one in a hundred risk to the
+mother in her twenties, more after thirty-five and for the frail. Hunger, thirst, cold and wolves are separate and unchanged. The chance is specific to the world: people have the same ids in every
+world, so the draw mixes in the world's seed (without it the same person met the same fate at the same moment in every world, which
+made deaths look oddly alike from world to world). In four 30-day full runs the model expected 3.7 natural deaths and 7 happened,
+which is within chance (about one time in eight). How often someone dies is mostly arithmetic: in a village of steady size, deaths a year are about the population divided by the
+average lifespan, so at 28 people (the start) about one natural death every 33 simulated days, rising to about one every 12 days once the
+village has grown to about 60. Realistic per simulated year, but a year is twelve days here, so at 1× that is a death every hour or
+so once it is large.
 
 **Vigour.** From about forty-five (earlier for the frail) strength fades: walking speed falls to about 80% by the late eighties, a
 pack holds less (12 in the prime, about 8 at the end), and gathering, mending and crafting take up to about 1.5 times as long. It
@@ -324,14 +330,14 @@ one to eleven, so deaths and handovers show up in the first weeks. Travellers wh
 **Whether the population holds.** `scripts/demography.ts` runs the real mortality, fertility and childbirth functions inside a
 simplified model (couples form, every settled couple is fed and housed, arrivals come when the village is small), hundreds of
 simulated years in seconds. Over 20 starting villages for 300 years, with arrivals on (the default): none die out and the village
-settles at about 55 to 62 people (range 54 to 66). With arrivals off, a closed village of about thirty shrinks slowly (median
-30 at year 50 to 100, 20 at year 200) and 6 of 20 die out within 300 years, which is what a closed population of thirty should do.
-The model is optimistic about food and housing, so it bounds the full simulation rather than replacing it. The full simulation, run for 90 days
-(7.5 years) on four seeds, one run each: populations of 58 to 64 (from 28, with births and arrivals), five to seven deaths each
-(about one every two weeks; ages 0, 0, 0, 1, 3, 9, 10, 11, 27, 28, 32, 32, 33, 33, 34, 35, 36, 37, 38, 41, 47, 78, 85, 86; causes
-illness, old age, childhood illness, one childbirth and one exposure), up to four people grieving at once, and the ledger balanced
-at every checkpoint. Longer full runs were not done: a 90-day full run takes about half an hour of real time on four cores, which is
-why the fast model exists.
+settles at about 58 to 62 people (range 54 to 67). With arrivals off, a closed village of about thirty first grows to about 45 to 60
+by year 50 to 100, then declines (median 34 at year 300; 1 of 20 died out, at year 155), which is what a small closed population does. The
+model is optimistic about food and housing, so it bounds the full simulation rather than replacing it.
+
+The full simulation was last run for 90 days on four seeds with the earlier, steeper curve (about 1.3 deaths per simulated year):
+populations of 58 to 64, five to seven deaths each, up to four people grieving at once, and the ledger balanced at every
+checkpoint. It has not been re-run for the current curve, which has fewer deaths; a 90-day full run takes about half an hour of
+real time on four cores, which is why the fast model exists.
 
 ## Surviving while working
 
