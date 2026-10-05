@@ -5,20 +5,26 @@ import type { World } from '../sim/types';
 import { fbm } from '../sim/worldgen';
 import { mix } from './sprites';
 
-const STEPS = 8;
-function ramp(a: string, b: string): string[] {
+/** water keeps a coarse ramp: the waves shift a tile's colour by whole steps */
+const WATER_STEPS = 8;
+/**
+ * Land uses a fine ramp. With only a few steps the slow tint noise showed as large flat diamonds with hard staircase edges;
+ * with many, neighbouring tiles differ only slightly and the per-tile grain (see the constructor) breaks the contour lines up.
+ */
+const LAND_STEPS = 24;
+function ramp(a: string, b: string, steps: number): string[] {
   const out: string[] = [];
-  for (let i = 0; i < STEPS; i++) out.push(mix(a, b, i / (STEPS - 1)));
+  for (let i = 0; i < steps; i++) out.push(mix(a, b, i / (steps - 1)));
   return out;
 }
 
 const PAL = {
-  [T.DEEP]: ramp('#245c93', '#3b86bd'),
-  [T.SHALLOW]: ramp('#49aec6', '#7ad3de'),
-  [T.SAND]: ramp('#dac88c', '#f0e2b2'),
-  [T.GRASS]: ramp('#69ad4c', '#8fd069'),
-  [T.FOREST]: ramp('#4c8745', '#639f56'),
-  [T.STONY]: ramp('#979689', '#b5b4a8'),
+  [T.DEEP]: ramp('#245c93', '#3b86bd', WATER_STEPS),
+  [T.SHALLOW]: ramp('#49aec6', '#7ad3de', WATER_STEPS),
+  [T.SAND]: ramp('#dac88c', '#f0e2b2', LAND_STEPS),
+  [T.GRASS]: ramp('#69ad4c', '#88c866', LAND_STEPS),
+  [T.FOREST]: ramp('#4c8745', '#639f56', LAND_STEPS),
+  [T.STONY]: ramp('#979689', '#b5b4a8', LAND_STEPS),
 } as const;
 
 const TUFT_LIGHT = 'rgba(190,235,140,0.75)';
@@ -174,11 +180,11 @@ export class TerrainPainter {
         if (px < -margin * z || px > view.w + margin * z || py < -margin * z || py > view.h + margin * z) continue;
         const i = y * W + x;
         const type = world.terrain[i] as 0 | 1 | 2 | 3 | 4 | 5;
-        let k = Math.floor(this.tint[i] * STEPS);
+        let k: number;
         if (type === T.DEEP || type === T.SHALLOW) {
           const wave = Math.sin(t * 0.85 + x * 0.52 + y * 0.37) + 0.6 * Math.sin(t * 1.4 - x * 0.31 + y * 0.6);
-          k = Math.max(0, Math.min(STEPS - 1, k + Math.round(wave * 0.9)));
-        }
+          k = Math.max(0, Math.min(WATER_STEPS - 1, Math.floor(this.tint[i] * WATER_STEPS) + Math.round(wave * 0.9)));
+        } else k = Math.floor(this.tint[i] * LAND_STEPS);
         ctx.fillStyle = PAL[type][k];
         ctx.beginPath();
         ctx.moveTo(sx, sy - 0.6);
