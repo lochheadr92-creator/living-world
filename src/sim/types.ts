@@ -138,8 +138,6 @@ export interface Relation {
   kin: '' | 'parent' | 'child' | 'partner' | 'sibling';
   /** tick until which they steer clear of each other after a quarrel */
   avoidUntil: number;
-  /** favours: >0 they owe me, <0 I owe them */
-  debt: number;
   history: { tick: number; text: string }[];
   /** the live grievance this person holds against the other, if any (set by an actual incident, closed by amends or time) */
   grievance: Grievance | null;

@@ -261,8 +261,3 @@ export function toolsToHeap(world: World, fromId: number, pileId: number, items:
 export function releaseToolsOf(world: World, buildingId: number): void {
   for (const t of world.tools) if (t.holder === buildingId) t.loan = null;
 }
-
-/** Equipment that has been out on loan far past its due date (the lender is told by the commitment system; this is the physical fact). */
-export function overdueLoans(world: World): Tool[] {
-  return world.tools.filter((t) => t.loan && t.loan.lender !== 0 && t.loan.due < world.tick - 200);
-}

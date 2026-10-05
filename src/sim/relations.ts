@@ -4,7 +4,7 @@ import type { Person, Relation } from './types';
 import { clamp } from './util';
 
 export function newRelation(): Relation {
-  return { affinity: 0, trust: 10, familiarity: 0, lastMet: -99999, kin: '', avoidUntil: 0, debt: 0, history: [], grievance: null, settledAt: -99999 };
+  return { affinity: 0, trust: 10, familiarity: 0, lastMet: -99999, kin: '', avoidUntil: 0, history: [], grievance: null, settledAt: -99999 };
 }
 
 export function relOf(p: Person, otherId: number): Relation {
@@ -48,7 +48,6 @@ export interface RelChange {
   aff?: number;
   trust?: number;
   fam?: number;
-  debt?: number;
   note?: string;
 }
 
@@ -58,7 +57,6 @@ export function adjustRel(p: Person, otherId: number, tick: number, ch: RelChang
   if (ch.aff) r.affinity = clamp(r.affinity + ch.aff, -100, 100);
   if (ch.trust) r.trust = clamp(r.trust + ch.trust, -100, 100);
   if (ch.fam) r.familiarity = clamp(r.familiarity + ch.fam, 0, 60);
-  if (ch.debt) r.debt = clamp(r.debt + ch.debt, -10, 10);
   r.lastMet = tick;
   if (ch.note) {
     r.history.push({ tick, text: ch.note });

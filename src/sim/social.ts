@@ -188,8 +188,8 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   const thirstSev = (items.water ?? 0) > 0 ? clamp((60 - receiver.needs.thirst) / 60, 0, 1) : 0;
   const sev = Math.max(hungerSev, thirstSev, 0.2);
   const txt = describeItems(items);
-  adjustRel(receiver, giver.id, world.tick, { aff: 2.5 + 7 * sev, trust: 2 + 4 * sev, fam: 1, debt: -0.5, note: `${giver.name} gave me ${txt}` });
-  adjustRel(giver, receiver.id, world.tick, { aff: 1 + 1.5 * sev, fam: 0.5, debt: 0.5, note: `I gave ${receiver.name} ${txt}` });
+  adjustRel(receiver, giver.id, world.tick, { aff: 2.5 + 7 * sev, trust: 2 + 4 * sev, fam: 1, note: `${giver.name} gave me ${txt}` });
+  adjustRel(giver, receiver.id, world.tick, { aff: 1 + 1.5 * sev, fam: 0.5, note: `I gave ${receiver.name} ${txt}` });
   // a gift eases a quarrel in proportion to what it meant, and may end it
   endGrievanceOnGift(world, giver, receiver, sev);
   giver.stats.given += 1;
