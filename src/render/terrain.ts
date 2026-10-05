@@ -29,7 +29,12 @@ export interface View {
   h: number;
 }
 
+/** worn earth is drawn in this many strength bands, strongest wear at WEAR_MAX opacity */
+const WEAR_BANDS = 8;
+const WEAR_MAX = 0.56;
+
 export class TerrainPainter {
+  private wearPaths: (Path2D | undefined)[] = [];
   private tint: Float32Array;
   private world: World;
   private seedNum: number;
@@ -158,7 +163,8 @@ export class TerrainPainter {
     const offX = view.w / 2 - cam.x * z;
     const offY = view.h / 2 - cam.y * z;
 
-    // pass 1: ground tiles
+    // pass 1: ground tiles (and the worn earth over them)
+    const wearPaths = this.wearPaths;
     for (let y = b.y0; y <= b.y1; y++) {
       for (let x = b.x0; x <= b.x1; x++) {
         const sx = (x - y) * 32;
@@ -181,10 +187,28 @@ export class TerrainPainter {
         ctx.lineTo(sx - 32.9, sy + 16);
         ctx.closePath();
         ctx.fill();
+        // wear (desire paths): collected by strength, so tiles that abut merge into one trodden patch instead of a lattice
+        const wr = world.wear[i];
+        if (wr > 0.06) {
+          const band = Math.min(WEAR_BANDS - 1, Math.floor((Math.min(WEAR_MAX, wr * 0.7) / WEAR_MAX) * WEAR_BANDS));
+          const path = (wearPaths[band] ??= new Path2D());
+          path.moveTo(sx, sy - 0.6);
+          path.lineTo(sx + 32.9, sy + 16);
+          path.lineTo(sx, sy + 32.6);
+          path.lineTo(sx - 32.9, sy + 16);
+          path.closePath();
+        }
       }
     }
+    for (let band = 0; band < WEAR_BANDS; band++) {
+      const path = wearPaths[band];
+      if (!path) continue;
+      ctx.fillStyle = `rgba(150,112,70,${(WEAR_MAX * (band + 0.5)) / WEAR_BANDS})`;
+      ctx.fill(path);
+      wearPaths[band] = undefined;
+    }
 
-    // pass 2: wear (desire paths), shore foam, water glints, decor
+    // pass 2: shore foam, water glints, decor
     const detail = z >= 0.5;
     ctx.lineCap = 'round';
     // batched strokes
@@ -201,19 +225,6 @@ export class TerrainPainter {
         if (px < -margin * z || px > view.w + margin * z || py < -margin * z || py > view.h + margin * z) continue;
         const i = y * W + x;
         const type = world.terrain[i];
-        // wear
-        const wr = world.wear[i];
-        if (wr > 0.06) {
-          ctx.fillStyle = `rgba(150,112,70,${Math.min(0.62, wr * 0.7)})`;
-          ctx.beginPath();
-          const j = (hashUnit(x, y, 3) - 0.5) * 4;
-          ctx.moveTo(sx + j, sy + 3.5);
-          ctx.lineTo(sx + 25, sy + 16 + j * 0.3);
-          ctx.lineTo(sx - j, sy + 29);
-          ctx.lineTo(sx - 25, sy + 16 - j * 0.3);
-          ctx.closePath();
-          ctx.fill();
-        }
         if (type === T.SHALLOW || type === T.DEEP) {
           // foam where water meets land
           const nb: [number, number, number, number, number][] = [
