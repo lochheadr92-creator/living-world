@@ -675,6 +675,40 @@ export interface Grave {
   name: string;
   died: number;
   age: number;
+  /** what they died of (graves from older saves lack it) */
+  cause?: string;
+  /** the person buried here, for their death record in `World.deceased` */
+  personId?: number;
+}
+
+/**
+ * What a person was about when they died, copied at the moment of death from state that is otherwise thrown away (their
+ * activity, pack, last attempt, memories). Read by the grave card and the feed only; nothing in the simulation reads it.
+ */
+export interface DeathRecord {
+  needs?: Needs;
+  pack?: Items;
+  doing?: string;
+  why?: string;
+  lastResult?: ResultRecord;
+  /** up to three things they had wanted to do but could not, with the reason ("label: reason") */
+  blocked?: string[];
+  /** wolf attacks among the memories they still had */
+  wolfBites?: number;
+  /** the nearest water they believed in: where, how far from where they died, and when they had last seen it */
+  water?: { x: number; y: number; d: number; seen: number };
+  /** their last three memories */
+  lines?: string[];
+}
+
+export interface DeceasedEntry {
+  id: number;
+  name: string;
+  tick: number;
+  cause: string;
+  age: number;
+  /** kept for the newest DEATH_RECORDS_KEPT deaths only */
+  last?: DeathRecord;
 }
 
 export interface Animal {
@@ -906,7 +940,7 @@ export interface World {
   stumps: { x: number; y: number; tick: number }[];
   nextId: number;
   persons: Person[];
-  deceased: { id: number; name: string; tick: number; cause: string; age: number }[];
+  deceased: DeceasedEntry[];
   sources: Source[];
   buildings: Building[];
   sites: Site[];

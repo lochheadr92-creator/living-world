@@ -1,10 +1,10 @@
 import { abortActivity, newActivity, startActivity } from './activities';
-import { AGE_OLD_DEATH_START, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
+import { AGE_OLD_DEATH_START, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, DEATH_RECORDS_KEPT, NEED_KEYS, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
 import { socialOnDeath } from './social';
-import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
+import { cloneItems, foodUnits, isEmptyItems, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { BUILD_DEF } from './constants';
@@ -14,7 +14,7 @@ import { findPath } from './pathfinding';
 import { gridQuery, isFreeLand, isWalkable, registerGeneric } from './registry';
 import { adjustRel, relOf } from './relations';
 import { abortConversationFor, personOf } from './social';
-import type { Grave, Person, Stage, World } from './types';
+import type { Belief, DeathRecord, Grave, Needs, Person, Stage, World } from './types';
 import { T } from './types';
 import { newId } from './registry';
 
@@ -166,8 +166,46 @@ export function giveBirth(world: World, mother: Person): void {
 }
 
 // ───────────────────────── death ─────────────────────────
+/** a wolf's bite as the bitten person remembers it (wildlife.ts) */
+const WOLF_BITE_MEMORY = 'A wolf attacked me';
+
+/**
+ * What a person was about when they died, read before anything is torn down: their needs, what they carried, what they were
+ * doing and why, how their last attempt ended, what they could not do, how often wolves had bitten them (as far as they still
+ * remembered), the nearest water they believed in, and their last three memories. Reads only; changes nothing.
+ */
+function deathRecord(p: Person): DeathRecord {
+  const r: DeathRecord = { needs: Object.fromEntries(NEED_KEYS.map((k) => [k, Math.round(p.needs[k])])) as unknown as Needs };
+  if (!isEmptyItems(p.inv)) r.pack = cloneItems(p.inv);
+  if (p.activity) {
+    r.doing = p.activity.label;
+    if (p.activity.data.why) r.why = String(p.activity.data.why);
+  }
+  if (p.lastResult) r.lastResult = { ...p.lastResult };
+  const blocked = (p.lastDecision?.blocked ?? []).filter((o) => o.blocked).slice(0, 3).map((o) => `${o.label}: ${o.blocked}`);
+  if (blocked.length) r.blocked = blocked;
+  const bites = p.log.filter((l) => l.text.startsWith(WOLF_BITE_MEMORY)).length;
+  if (bites) r.wolfBites = bites;
+  let water: Belief | null = null;
+  let wd = Infinity;
+  for (const k in p.beliefs) {
+    const b = p.beliefs[k as unknown as number];
+    if (b.kind !== 'water') continue;
+    const d = Math.hypot(b.x - p.x, b.y - p.y);
+    if (d < wd) {
+      wd = d;
+      water = b;
+    }
+  }
+  if (water) r.water = { x: Math.round(water.x), y: Math.round(water.y), d: Math.round(wd * 10) / 10, seen: water.seen };
+  const lines = p.log.slice(-3).map((l) => l.text);
+  if (lines.length) r.lines = lines;
+  return r;
+}
+
 export function killPerson(world: World, p: Person, cause: string): void {
   if (!p.alive) return;
+  const last = deathRecord(p);
   abortConversationFor(world, p);
   abortActivity(world, p, 'died');
   releaseAllFor(world, p.id);
@@ -190,7 +228,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
       for (let dx = -r; dx <= r && !placed; dx++) {
         if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
         if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND) {
-          const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age };
+          const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age, cause, personId: p.id };
           registerGeneric(world, g);
           placed = true;
         }
@@ -200,13 +238,17 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const idx = world.persons.indexOf(p);
   if (idx >= 0) world.persons.splice(idx, 1);
   world.byId.delete(p.id);
-  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age });
+  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age, last });
+  // only the newest deaths keep their last hours
+  let kept = 0;
+  for (let i = world.deceased.length - 1; i >= 0; i--) if (world.deceased[i].last && ++kept > DEATH_RECORDS_KEPT) delete world.deceased[i].last;
   removeFromHousehold(world, p);
   if (p.partnerId) {
     const partner = personOf(world, p.partnerId);
     if (partner) partner.partnerId = 0;
   }
-  addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause})`}, aged ${age}.`, [p.id], p.x, p.y);
+  const bitten = cause !== 'old age' && last.wolfBites ? `, after ${last.wolfBites} wolf bite${last.wolfBites === 1 ? '' : 's'}` : '';
+  addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause}${bitten})`}, aged ${age}.`, [p.id], p.x, p.y);
   // those who loved them feel it
   for (const q of world.persons) {
     if (!q.alive) continue;

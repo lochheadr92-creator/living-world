@@ -148,6 +148,12 @@ much is carried and by how many, which buildings and heaps hold it, where it is 
 is stopping it, where it can be gathered, and how many people know of a place to get it. Nobody in the world knows what that
 line says, and it never feeds back into anything they do.
 
+A grave says what they died of and, for the newest forty deaths, what they were about at the end: their needs, what they were
+carrying, what they were doing and why, how their last attempt ended, what they had wanted to do but could not, how often wolves
+had bitten them (as far as they still remembered), the nearest water they knew of, and their last memories. It is copied at the
+moment of death from what the person themselves knew, kept in the saved world, and never read by anyone in it. The feed says it in a
+clause: "Sven died (thirst, after 3 wolf bites)".
+
 The speed buttons say two things: the speed you asked for and the speed actually achieved over the last couple of seconds.
 If the page cannot keep up, or stalled and the clock gave up on some world time, the bar says so (amber, with the number of
 ticks skipped) instead of pretending. While paused nothing animates, including the people.

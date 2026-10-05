@@ -13,7 +13,7 @@ import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
 import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
-import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
+import type { Activity, Entity, Grave, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
 
 export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
@@ -509,7 +509,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'pile':
       return { kind: 'pile', ...base, title: 'Pile of goods', subtitle: e.note || 'Left lying about', rows: [['Lying here since', agoText(world, e.since)]], bars: [], items: itemList(e.items), notes: ['Perishable food slowly spoils out in the open.'], position: { x: e.x + 0.5, y: e.y + 0.5 } };
     case 'grave':
-      return { kind: 'grave', ...base, title: `Grave of ${e.name}`, subtitle: `Died ${agoText(world, e.died)}, aged ${e.age}`, rows: [], bars: [], notes: [], position: { x: e.x + 0.5, y: e.y + 0.5 } };
+      return describeGrave(world, e);
     case 'animal':
       return {
         kind: 'animal',
@@ -524,6 +524,46 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'cart':
       return { kind: 'cart', ...base, title: 'Handcart', subtitle: e.puller ? `Being pulled by ${nameOf(world, e.puller)}` : 'Parked', rows: [['Wear', `${Math.round(e.wear)}%`]], bars: [], items: itemList(e.load), notes: [], position: { x: e.x, y: e.y }, sections: describeCartSections(world, e) };
   }
+}
+
+/**
+ * A grave: who lies here, what they died of, and — for the newest deaths — what they were about at the end, as they themselves
+ * knew it (their needs, pack, task and reason, last attempt, what they could not do, the water they believed nearest, their
+ * last memories). All of it was saved at the moment of death.
+ */
+function describeGrave(world: World, g: Grave): EntityView {
+  const d = g.personId ? world.deceased.find((x) => x.id === g.personId) : undefined;
+  const cause = g.cause ?? d?.cause;
+  const last = d?.last;
+  const rows: [string, string][] = [];
+  if (cause) rows.push(['Cause', cause]);
+  if (last?.wolfBites) rows.push(['Bitten by wolves', `${last.wolfBites} time${last.wolfBites === 1 ? '' : 's'} (that they still remembered)`]);
+  const bars: EntityView['bars'] = [];
+  const sections: Section[] = [];
+  if (last) {
+    if (last.needs) for (const k of NEED_KEYS) if (k !== 'social') bars.push({ label: `${NEED_LABEL[k]} at the end`, value: last.needs[k], max: 100, tone: last.needs[k] <= NEED_CRIT[k] ? 'bad' : last.needs[k] <= NEED_LOW[k] ? 'warn' : 'ok' });
+    const end: [string, string][] = [];
+    if (last.doing) end.push(['Doing', last.doing]);
+    if (last.why) end.push(['Why', last.why]);
+    if (last.lastResult) end.push(['Last attempt', `${last.lastResult.label}: ${last.lastResult.outcome}${last.lastResult.detail ? ` (${last.lastResult.detail})` : ''}, ${agoText(world, last.lastResult.tick)}`]);
+    if (last.water) end.push(['Nearest water they knew of', `${last.water.d} tiles from where they fell, last seen ${agoText(world, last.water.seen)}`]);
+    const notes = (last.blocked ?? []).map((b) => `Could not: ${b}`);
+    const items = last.pack ? itemList(last.pack) : [];
+    if (end.length || notes.length || items.length) sections.push({ title: 'At the end', rows: end, notes, items: items.length ? items : undefined });
+    if (last.lines?.length) sections.push({ title: 'Their last memories', notes: last.lines });
+  }
+  return {
+    kind: 'grave',
+    id: g.id,
+    title: `Grave of ${g.name}`,
+    subtitle: `Died ${agoText(world, g.died)}, aged ${g.age}`,
+    rows,
+    bars,
+    items: [],
+    notes: last ? [] : ['Nothing more is known of how they died.'],
+    position: { x: g.x + 0.5, y: g.y + 0.5 },
+    sections: sections.length ? sections : undefined,
+  };
 }
 
 // ───────────────────────── whole-world summary ─────────────────────────

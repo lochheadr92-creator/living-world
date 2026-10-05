@@ -224,6 +224,15 @@ themselves, and knows roughly where to go. On arrival they look: if help is need
 is dropped and that person is not checked on again for a long while; if they are not there, the old place is forgotten and the
 worry softened. Nobody knows of an injury, a hunger or a death that no one has seen or told them of.
 
+## Death and grief
+
+When someone dies, the world keeps a **death record** (about half a kilobyte, for the newest forty deaths; older graves keep
+the name, age and cause): what they were about at the end, copied from state that is otherwise thrown away — needs, pack, task
+and the reason they gave for it, how their last attempt ended, up to three things they could not do and why, how many wolf
+bites they still remembered, the nearest water they believed in (and how far from where they fell), and their last three
+memories. It is shown on the grave card and, in a clause, in the feed ("died (thirst, after 3 wolf bites)"). It is **saved with
+the world** (so a loaded save explains a death exactly as it did) and **never read by anyone in it**: it is for the observer.
+
 ## Quarrels
 
 A quarrel is a **grievance** with a cause (competition for something, scarcity while going hungry, a refusal when it mattered, a
@@ -278,7 +287,7 @@ depends only on the tick and the population, so a run is reproducible.
 | Spoilage | food in stores and heaps goes off at a recorded rate (granary: a fifth when tended); the loss is in the ledger |
 | A tool wears out | breaks; recorded; no record left behind |
 | A building collapses or is destroyed | store, running batch and racked tools become a heap of rubble |
-| A person dies | belongings, tools included, are dropped where they fell; promises are released; requests withdrawn; a meal they hosted is called off |
+| A person dies | belongings, tools included, are dropped where they fell; promises are released; requests withdrawn; a meal they hosted is called off; a grave is set with their name, cause and a record of their last hours (see "Death and grief") |
 | A cart's puller dies | the cart stays, load and all |
 
 ## Rule changes made on purpose (relative to the version before this work)

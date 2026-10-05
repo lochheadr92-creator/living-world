@@ -438,6 +438,8 @@ export const PREGNANCY_TICKS = Math.round(0.75 * TICKS_PER_YEAR);
 export const BIRTH_SPACING_TICKS = Math.round(1.5 * TICKS_PER_YEAR);
 /** chance per year that a settled, well-fed couple conceives (once the spacing has passed) */
 export const CONCEPTION_PER_YEAR = 0.5;
+/** the newest deaths whose last hours are kept (about half a kilobyte each); older ones keep only name, age and cause */
+export const DEATH_RECORDS_KEPT = 40;
 
 // ── decisions ──
 export const REVIEW_EVERY = 45;
