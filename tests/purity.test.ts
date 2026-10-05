@@ -3,6 +3,8 @@ import { serializeWorld } from '../src/app/save';
 import { ALL_ITEMS } from '../src/sim/constants';
 import { describeEntity, describeEntityName, describePerson, summarizeWorld } from '../src/sim/inspect';
 import { whereItemIs } from '../src/sim/inspect_work';
+import { killPerson } from '../src/sim/lifecycle';
+import { stageOf } from '../src/sim/people';
 import type { World } from '../src/sim/types';
 import { hashWorld } from '../src/sim/world';
 import { expectSameWorld, firstDifference } from './helpers/resume';
@@ -73,9 +75,15 @@ describe('describing the world changes nothing in it', () => {
   }, 400_000);
 
   it('a harsh world with a death in it: the grave and its record, the wolves, the dead person’s memorial are described without a change', () => {
+    // (a death is brought about rather than waited for: whether anyone dies in a given harsh world by a given day moves with every
+    // change to how people are called; this test is about describing the dead, not about how people die)
     const w = natural('heath', { harsh: true });
-    run(w, 16000);
-    expect(w.graves.length, 'somebody has died by now').toBeGreaterThan(0);
+    run(w, 9000);
+    const victim = w.persons.filter((p) => p.alive && stageOf(w, p) === 'adult').sort((a, b) => a.id - b.id)[3];
+    killPerson(w, victim, 'wolf attack');
+    run(w, 1500);
+    expect(w.graves.length, 'there is a grave').toBeGreaterThan(0);
+    expect(w.deceased.length, 'and a record of who lies in it').toBeGreaterThan(0);
     const before = { hash: hashWorld(w), json: serializeWorld(w) };
     const n = describeEverything(w);
     expect(n.things).toBeGreaterThan(100);

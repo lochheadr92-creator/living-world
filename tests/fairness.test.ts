@@ -10,10 +10,10 @@ import { addPerson, done, learn, pin, stage } from './helpers/kit';
 // such ties the person listed first should win about half of them, and swapping the two people's places in the list should not
 // change who wins (the winner follows the person, not the slot).
 //
-// Today the world walks the list from a different starting point each tick, in list order, so of two people listed next to each
-// other the first is called first on 14 ticks out of 15 (93%), and swapping their places swaps the winner. Both checks that
-// ought to hold are expected to fail until the claim order is hashed per tick (Stage 8): `it.fails` keeps the failure on record
-// and turns red the day it is fixed, as a reminder to make them ordinary tests.
+// The world used to walk the list from a different starting point each tick, in list order, so of two people listed next to each
+// other the first was called first on 14 ticks out of 15 (92.5% of ties measured here), and swapping their places swapped the
+// winner. It now calls people in an order hashed afresh every tick from each one's id and the tick (Stage 8), so neither the
+// slot nor the person is favoured.
 //
 // A tie has to be exact to count. Two people never walk quite the same distance (each stands in a slightly different place at
 // the bush), so each tie is built by measurement: each contestant's walk is timed alone, and whoever would arrive first
@@ -125,13 +125,13 @@ describe('a tie for the last berry is not settled by where people stand in the l
     expect(new Set(ties.map((t) => t.who)).size).toBe(2);
   }, 300_000);
 
-  it.fails('the person listed first wins at most 60% of the ties', () => {
+  it('the person listed first wins at most 60% of the ties', () => {
     const ties = tally(false).filter((t): t is Tie => t !== null);
     const first = ties.filter((t) => t.slot === 'first').length / ties.length;
     expect(first).toBeLessThanOrEqual(0.6);
   }, 300_000);
 
-  it.fails('swapping the two people’s places in the list does not change who wins', () => {
+  it('swapping the two people’s places in the list does not change who wins', () => {
     const before = tally(false);
     const after = tally(true);
     const both = before.map((t, i) => (t && after[i] ? [t, after[i] as Tie] : null)).filter((x): x is [Tie, Tie] => x !== null);

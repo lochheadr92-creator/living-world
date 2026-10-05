@@ -27,12 +27,16 @@ import { perceive, refreshBeliefs } from './perception';
 import { rebuildMobileGrid } from './registry';
 import { decayGrievances } from './grievance';
 import { driftRelations } from './relations';
+import { hashUnit } from './rng';
 import { bondWorkers, checkCommitments, flushDelayedBubbles, passingGreetings, updateConversations, updateRequests } from './social';
 import { resumeSuspended } from './activities';
 import { updateSources } from './sources';
 import { releaseStaleBench } from './tools';
 import { updateWildlife } from './wildlife';
 import type { ItemKind, Person, World } from './types';
+
+/** salt for the per-tick order in which people are called */
+const CALL_ORDER = 0x5eed;
 
 /** One simulation tick. The only thing that ever mutates the world. */
 export function stepWorld(world: World): void {
@@ -64,10 +68,12 @@ export function stepWorld(world: World): void {
   updateWildlife(world);
   rebuildMobileGrid(world);
 
-  const list = world.persons.slice();
-  const n = list.length;
-  for (let i = 0; i < n; i++) {
-    const p = list[(i + tick) % n];
+  // Two people who go for the same thing on the same tick are settled by who is called first (the first to claim a berry has it).
+  // The order is dealt afresh every tick from nothing but each person's id and the tick, never from where they happen to stand in
+  // the list: walking the list from a moving starting point favoured whoever was listed first on 14 ticks in 15, tick after tick.
+  const order = world.persons.map((p) => ({ p, k: hashUnit(p.id, tick, CALL_ORDER) }));
+  order.sort((a, b) => a.k - b.k || a.p.id - b.p.id);
+  for (const { p } of order) {
     if (!p.alive) continue;
     stepPerson(world, p);
   }

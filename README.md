@@ -221,8 +221,9 @@ The simulation advances in whole ticks (10 per second at 1×; a day is 2400 tick
 previous and current tick, so frame rate, camera and animation can never change a decision or a resource outcome. A long
 gap between frames (a hidden tab, a stalled page) is a stall rather than a debt: the world plays a bounded burst, the rest
 is given up and counted, and play carries on at the speed asked for. All randomness is seeded; decisions that need “noise”
-use a pure hash so inspecting someone cannot disturb the world; people are stepped in a rotating order, so when two want
-the same thing in the same tick the winner is the same every run.
+use a pure hash so inspecting someone cannot disturb the world; people are called in an order dealt afresh every tick from
+nothing but their ids and the tick, so when two want the same thing in the same tick the winner is the same every run and
+neither is favoured by where they stand in the list.
 
 ## Verification
 

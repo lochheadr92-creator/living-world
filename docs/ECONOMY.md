@@ -289,11 +289,14 @@ neglect.
 
 ## The contested-claim rule
 
-People are stepped each tick in a rotating order `(i + tick) mod n`. Anything exclusive — one unit of a berry bush, a worker
-slot on a site, a field plot, the start of a batch, the bench tool, a tool on a rack — goes to whoever acts first in that order.
-The other's activity fails at once with the reason recorded ("someone else is already taking it", "a batch is already under
-way"), the option is not retried for a while, and the loss is a small grievance if the thing contested was food. The order
-depends only on the tick and the population, so a run is reproducible.
+People are called in an order dealt afresh every tick: each person's place is a pure hash of their id and the tick
+(`hashUnit(id, tick, salt)`, ties by id). Anything exclusive — one unit of a berry bush, a worker slot on a site, a field plot,
+the start of a batch, the bench tool, a tool on a rack — goes to whoever is called first. The other's activity fails at once
+with the reason recorded ("someone else is already taking it", "a batch is already under way"), the option is not retried for
+a while, and the loss is a small grievance if the thing contested was food. The order depends only on the ids and the tick, so
+a run is reproducible, and it does not depend on where anyone stands in the list: of two equally placed people either may be
+first (the first-listed wins 49% of exact ties, and swapping their places changes no winner). Until Stage 8 the list was walked
+from a moving starting point, `(i + tick) mod n`, which gave the first of two neighbours the claim on 14 ticks in 15.
 
 ## What happens to goods when something goes wrong
 
@@ -375,6 +378,21 @@ depends only on the tick and the population, so a run is reproducible.
   one the version before produced. (`ctx.collect`, which also records what was ruled out, is not the flag for this: a person
   deciding for themselves sets it too.)
 
+* **People are called in a freshly shuffled order each tick** (see "The contested-claim rule"). Before, two people reaching the
+  same thing on the same tick were settled by where they stood in the list: of two listed next to each other the first won
+  92.5% of 240 exact ties measured in `tests/fairness.test.ts`, and swapping their places swapped the winner. Now the one listed
+  first wins 117 of 240 (49%), and swapping their places changes nothing (the same winner in 240 of 240). The shuffle changes
+  every trajectory, not only contested ones. In five 30-day runs (meadow, river, fern, harsh meadow, harsh river) deaths were 0
+  before and after and the ledger balanced on every recorded day; day-30 population went 54/53/49/50/40 to 52/48/54/48/47, with
+  no direction. Three checks that had assumed one particular trajectory were re-based, none by loosening what it is about: a
+  staged water promise now promises one water, not two (the second trip's hand-over landed inside the two minutes after the
+  first, when the receiver counts as "just looked after", and the receiver had wandered off, so the promise ended half kept: a
+  weakness that was always there, listed under "Limits worth knowing"); "pairs with a spark warm faster" is taken over twelve
+  worlds instead of one (the gap between sparked and other pairs averages +0.8 where it averaged +2.7, the same sign in 11 of
+  12 worlds; why it shrank is not understood, and the explanation that people placed next to each other used to act back to
+  back was not borne out by a variant with the sexes scrambled, which went from +2.8 to +1.3); and the harsh-world check of the
+  inspector brings a death about instead of waiting for one (none of six harsh worlds had a death in their first fifteen days
+  under the new order).
 ## Staged scenes
 
 The ordinary seeded world is the demonstration of natural behaviour. Six small scenes are staged for watching one rule in
@@ -395,6 +413,10 @@ projects stay off, so a staged scene never grows more than was staged.
 
 * There is still one settlement, one map, one animal species; no currency, no markets, no caravans, no combat.
 * A workplace's output is not routed anywhere automatically: somebody has to want it and go and fetch it.
+* **A promise to bring something twice is fragile.** After a hand-over the receiver counts as "just looked after" for 120 ticks
+  (so nobody fusses over them while they eat), and a second trip that arrives inside that window is turned away; if the receiver
+  has wandered off by the time the carrier is free again, the carrier no longer knows where they are, and the promise expires
+  half kept. Seen in a staged scene once the call order changed; not changed here.
 * **Iron is the slowest chain and does not appear in every world.** The ore lies 23–26 tiles from the camp in all four standard
   seeds, a wooden tool is cheap to replace, and a forger needs a hammer of their own, charcoal from the kiln, and ore carried
   a long way. In the 120-day ordinary runs tried (`river`, `meadow`), `river` forged its first iron axes by about day 50 and

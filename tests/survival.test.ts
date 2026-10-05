@@ -262,33 +262,42 @@ describe('a living population: couples, children and newcomers', () => {
   });
 
   it('pairs with a spark between them warm to each other faster than pairs without one', () => {
-    const { w, rng } = lakeWorld('sparks-and-friends', 'natural');
-    const people = Array.from({ length: 12 }, (_, i) =>
-      testKit.addPerson(w, rng, { name: 'P' + i, x: 38.5 + (i % 4) * 1.6, y: 43.5 + Math.floor(i / 4) * 1.6, sex: i % 2 === 0 ? 'f' : 'm', age: 22 + (i % 5), hunger: 90, thirst: 90, inv: { berries: 6 }, traits: { sociability: 0.8 } }),
-    );
-    testKit.finish(w, 'natural');
-    run(w, 2400);
-    let sparked = 0;
-    let sparkedN = 0;
-    let other = 0;
-    let otherN = 0;
-    for (const a of people) {
-      for (const b of people) {
-        if (a === b || a.relations[b.id]?.kin === 'partner') continue;
-        const r = a.relations[b.id];
-        if (!r) continue;
-        if (spark(a, b)) {
-          sparked += r.affinity;
-          sparkedN++;
-        } else {
-          other += r.affinity;
-          otherN++;
+    // A dozen people make a few dozen pairs: how much closer the sparked ones end up swings a lot from one world to the next (from
+    // about zero to about +4 over a few dozen seeds), so the claim is made over several worlds, not one. Before the people were
+    // called in a freshly shuffled order each tick (fixed order meant the same neighbours always acted back to back) the average
+    // gap over these twelve was about +2.7; with it, about +0.8. Same sign, a weaker effect: noted in docs/ECONOMY.md.
+    const gaps: number[] = [];
+    for (const name of ['sparks-and-friends', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k']) {
+      const { w, rng } = lakeWorld(name, 'natural');
+      const people = Array.from({ length: 12 }, (_, i) =>
+        testKit.addPerson(w, rng, { name: 'P' + i, x: 38.5 + (i % 4) * 1.6, y: 43.5 + Math.floor(i / 4) * 1.6, sex: i % 2 === 0 ? 'f' : 'm', age: 22 + (i % 5), hunger: 90, thirst: 90, inv: { berries: 6 }, traits: { sociability: 0.8 } }),
+      );
+      testKit.finish(w, 'natural');
+      run(w, 2400);
+      let sparked = 0;
+      let sparkedN = 0;
+      let other = 0;
+      let otherN = 0;
+      for (const a of people) {
+        for (const b of people) {
+          if (a === b || a.relations[b.id]?.kin === 'partner') continue;
+          const r = a.relations[b.id];
+          if (!r) continue;
+          if (spark(a, b)) {
+            sparked += r.affinity;
+            sparkedN++;
+          } else {
+            other += r.affinity;
+            otherN++;
+          }
         }
       }
+      expect(sparkedN, name).toBeGreaterThan(0);
+      expect(otherN, name).toBeGreaterThan(0);
+      gaps.push(sparked / sparkedN - other / otherN);
     }
-    expect(sparkedN).toBeGreaterThan(0);
-    expect(otherN).toBeGreaterThan(0);
-    expect(sparked / sparkedN, 'sparked pairs end up closer').toBeGreaterThan(other / otherN + 1.5);
+    expect(gaps.filter((g) => g > 0).length, `sparked pairs end up closer in most worlds (${gaps.map((g) => g.toFixed(1)).join(' ')})`).toBeGreaterThanOrEqual(9);
+    expect(gaps.reduce((a, b) => a + b, 0) / gaps.length, 'and on average clearly closer').toBeGreaterThan(0.3);
   });
 
   it('two unattached adults with a spark between them and a growing bond become a couple, and then share a household', () => {
