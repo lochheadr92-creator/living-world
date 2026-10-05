@@ -70,6 +70,7 @@ export class TerrainPainter {
   private lobePaths: (Path2D | undefined)[] = [];
   private wearPaths: (Path2D | undefined)[] = [];
   private tint: Float32Array;
+  private tuft: Float32Array;
   private world: World;
   private seedNum: number;
 
@@ -78,11 +79,15 @@ export class TerrainPainter {
     this.seedNum = hashString(world.seed) & 0xffff;
     const { W, H } = world;
     this.tint = new Float32Array(W * H);
+    this.tuft = new Float32Array(W * H);
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const big = fbm(x / 9, y / 9, this.seedNum + 41, 3);
         const small = hashUnit(x, y, this.seedNum) * 0.22;
         this.tint[y * W + x] = Math.min(0.999, Math.max(0, big * 0.85 + small * 0.4));
+        // grass tufts come in clumps with open ground between: a slow noise scales how likely a tile is to have any
+        const clump = fbm(x / 3.5, y / 3.5, this.seedNum + 97, 2);
+        this.tuft[y * W + x] = Math.min(1.7, Math.max(0, 0.1 + 2 * (clump - 0.2)));
       }
     }
   }
@@ -371,7 +376,7 @@ export class TerrainPainter {
           for (let k = 0; k < n; k++) {
             const fx = 0.15 + hashUnit(x, y, 30 + k) * 0.7;
             const fy = 0.15 + hashUnit(x, y, 40 + k) * 0.7;
-            if (hashUnit(x, y, 50 + k) > (type === T.GRASS ? 0.62 : 0.3)) continue;
+            if (hashUnit(x, y, 50 + k) > (type === T.GRASS ? 0.62 : 0.3) * this.tuft[i]) continue;
             const gx = (x + fx - (y + fy)) * 32;
             const gy = (x + fx + (y + fy)) * 16;
             const sway = Math.sin(t * 1.7 + x * 1.3 + y) * wind * 1.4;

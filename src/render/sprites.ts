@@ -139,6 +139,15 @@ const LEAF = { light: '#a6dc7a', mid: '#6fb552', dark: '#3f8140' };
 const LEAF_B = { light: '#c3e48b', mid: '#8cc460', dark: '#4f9244' };
 const PINE = { light: '#5aa468', mid: '#3a8052', dark: '#245c3e' };
 
+export const FOLIAGE_TONES = 3;
+type Foliage = { light: string; mid: string; dark: string };
+/** tone 0 is the palette as drawn; 1 leans yellower (sun-bleached), 2 leans bluer (shaded): so a stand of one kind of tree is not one green */
+function toned(c: Foliage, tone: number): Foliage {
+  if (tone === 1) return { light: mix(c.light, '#e6e88a', 0.2), mid: mix(c.mid, '#c8cf6a', 0.16), dark: mix(c.dark, '#6f7a30', 0.14) };
+  if (tone === 2) return { light: mix(c.light, '#8fd3b0', 0.16), mid: mix(c.mid, '#4f9a7a', 0.14), dark: mix(c.dark, '#1f5a50', 0.14) };
+  return c;
+}
+
 function trunk(ctx: CanvasRenderingContext2D, h: number, wBase: number, wTop: number, c1: string, c2: string, lean = 0): void {
   const g = ctx.createLinearGradient(-wBase, 0, wBase, 0);
   g.addColorStop(0, c1);
@@ -158,9 +167,10 @@ function trunk(ctx: CanvasRenderingContext2D, h: number, wBase: number, wTop: nu
   ctx.fill();
 }
 
-export function treeSprite(cache: SpriteCache, variant: number): Sprite {
+export function treeSprite(cache: SpriteCache, variant: number, tone = 0): Sprite {
   const v = variant % 4;
-  return cache.get(`tree${v}`, 96, 122, 48, 104, (ctx) => {
+  const pine = toned(PINE, tone);
+  return cache.get(`tree${v}t${tone}`, 96, 122, 48, 104, (ctx) => {
     groundShadow(ctx, 24, 9, 0.3, 2);
     if (v === 1) {
       // pine
@@ -173,9 +183,9 @@ export function treeSprite(cache: SpriteCache, variant: number): Sprite {
       ];
       for (const t of tiers) {
         const g = ctx.createLinearGradient(-t.w, 0, t.w, 0);
-        g.addColorStop(0, PINE.light);
-        g.addColorStop(0.55, PINE.mid);
-        g.addColorStop(1, PINE.dark);
+        g.addColorStop(0, pine.light);
+        g.addColorStop(0.55, pine.mid);
+        g.addColorStop(1, pine.dark);
         ctx.beginPath();
         ctx.moveTo(0, t.y - t.h);
         ctx.quadraticCurveTo(t.w * 0.45, t.y - t.h * 0.3, t.w, t.y);
@@ -196,7 +206,7 @@ export function treeSprite(cache: SpriteCache, variant: number): Sprite {
       trunk(ctx, 44, 3.6, 2.4, '#e9e4d4', '#bdb7a2', 1);
       ctx.fillStyle = '#4a4338';
       for (let i = 0; i < 6; i++) ctx.fillRect(-2.5 + (i % 2) * 1.2, -6 - i * 6.5, 2.2, 1.4);
-      const c = LEAF_B;
+      const c = toned(LEAF_B, tone);
       blob(ctx, -9, -58, 14, c.light, c.mid, c.dark);
       blob(ctx, 9, -61, 14, c.light, c.mid, c.dark);
       blob(ctx, 0, -72, 15, c.light, c.mid, c.dark);
@@ -215,7 +225,7 @@ export function treeSprite(cache: SpriteCache, variant: number): Sprite {
     ctx.moveTo(1, -28);
     ctx.lineTo(10, -40);
     ctx.stroke();
-    const c = LEAF;
+    const c = toned(LEAF, tone);
     const cy = big ? -62 : -54;
     const R = big ? 1.12 : 1;
     // back to front, so the lit blobs overlap the shaded ones
@@ -240,12 +250,12 @@ export function treeSprite(cache: SpriteCache, variant: number): Sprite {
 }
 
 /** fruit tree: a rounder, lower, brighter orchard tree */
-export function fruitTreeSprite(cache: SpriteCache, variant: number): Sprite {
+export function fruitTreeSprite(cache: SpriteCache, variant: number, tone = 0): Sprite {
   const v = variant % 2;
-  return cache.get(`fruittree${v}`, 84, 96, 42, 80, (ctx) => {
+  return cache.get(`fruittree${v}t${tone}`, 84, 96, 42, 80, (ctx) => {
     groundShadow(ctx, 22, 8, 0.3, 2);
     trunk(ctx, 22, 4.4, 3, '#8a603a', '#573a22', v ? -1 : 1);
-    const c = { light: '#b8e47e', mid: '#7ec25a', dark: '#468c40' };
+    const c = toned({ light: '#b8e47e', mid: '#7ec25a', dark: '#468c40' }, tone);
     blob(ctx, -13, -40, 14, c.light, c.mid, c.dark);
     blob(ctx, 13, -40, 14, c.light, c.mid, c.dark);
     blob(ctx, 0, -52, 16, c.light, c.mid, c.dark);
@@ -267,11 +277,11 @@ export const FRUIT_SPOTS: Pt[] = [
   [-16, -44], [-8, -56], [3, -62], [14, -52], [18, -40], [8, -34], [-4, -40], [-14, -32], [2, -48], [-20, -50],
 ];
 
-export function bushSprite(cache: SpriteCache, variant: number): Sprite {
+export function bushSprite(cache: SpriteCache, variant: number, tone = 0): Sprite {
   const v = variant % 3;
-  return cache.get(`bush${v}`, 56, 42, 28, 32, (ctx) => {
+  return cache.get(`bush${v}t${tone}`, 56, 42, 28, 32, (ctx) => {
     groundShadow(ctx, 17, 6, 0.26, 2);
-    const c = v === 1 ? { light: '#9dd36e', mid: '#5fa646', dark: '#33773a' } : { light: '#8dcc68', mid: '#4f9a45', dark: '#2f6f37' };
+    const c = toned(v === 1 ? { light: '#9dd36e', mid: '#5fa646', dark: '#33773a' } : { light: '#8dcc68', mid: '#4f9a45', dark: '#2f6f37' }, tone);
     blob(ctx, -9, -9, 10, c.light, c.mid, c.dark);
     blob(ctx, 9, -9, 10, c.light, c.mid, c.dark);
     blob(ctx, 0, -15, 11, c.light, c.mid, c.dark);

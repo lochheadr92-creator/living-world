@@ -5,7 +5,7 @@ import { SiteDrawer } from './construction';
 import { clayPitSprite, oreVeinSprite, outcropSprite, stageOf } from './deposits';
 import { brickStack, breadBasket, handleBundle, ironBars, lumpHeap, plankStack, sackPile } from './goods';
 import { HOUSEHOLD_COLORS } from './palette';
-import { BERRY_SPOTS, FRUIT_SPOTS, SpriteCache, blit, bushSprite, ellipse, fruitTreeSprite, graveSprite, groundShadow, poly, rockSprite, shade, stumpSprite, treeSprite } from './sprites';
+import { BERRY_SPOTS, FOLIAGE_TONES, FRUIT_SPOTS, SpriteCache, blit, bushSprite, ellipse, fruitTreeSprite, graveSprite, groundShadow, poly, rockSprite, shade, stumpSprite, treeSprite } from './sprites';
 
 const iso = (wx: number, wy: number): [number, number] => [(wx - wy) * 32, (wx + wy) * 16];
 
@@ -17,12 +17,28 @@ export class Scenery {
   fruitScale = 1;
 
   // ───────── natural sources ─────────
+  /**
+   * Purely cosmetic and a function of the tile alone, never of the simulation: a little different size, a nudge off the exact
+   * tile centre (within the tile, so depth order and click targets still hold) and one of a few tones, so a stand of trees or a
+   * row of bushes is not a stamp.
+   */
+  private look(s: Source): { size: number; ox: number; oy: number; tone: number } {
+    return {
+      size: 0.92 + hashUnit(s.x, s.y, 301) * 0.16,
+      ox: (hashUnit(s.x, s.y, 302) - 0.5) * 0.36,
+      oy: (hashUnit(s.x, s.y, 303) - 0.5) * 0.36,
+      tone: Math.min(FOLIAGE_TONES - 1, Math.floor(hashUnit(s.x, s.y, 304) * FOLIAGE_TONES)),
+    };
+  }
+
   drawSource(ctx: CanvasRenderingContext2D, s: Source, simT: number, wind: number): void {
-    const [x, y] = iso(s.x + 0.5, s.y + 0.5);
+    const plant = s.type === 'tree' || s.type === 'fruit_tree' || s.type === 'berry_bush';
+    const lk = plant ? this.look(s) : null;
+    const [x, y] = iso(s.x + 0.5 + (lk ? lk.ox : 0), s.y + 0.5 + (lk ? lk.oy : 0));
     switch (s.type) {
       case 'tree': {
-        const spr = treeSprite(this.cache, s.variant);
-        const scale = s.growth >= 1 ? 1 : 0.26 + 0.74 * Math.pow(s.growth, 0.8);
+        const spr = treeSprite(this.cache, s.variant, lk!.tone);
+        const scale = (s.growth >= 1 ? 1 : 0.26 + 0.74 * Math.pow(s.growth, 0.8)) * lk!.size;
         const skew = Math.sin(simT * 1.05 + s.x * 0.7 + s.y * 0.45) * (0.012 + wind * 0.06) * (s.growth >= 1 ? 1 : 1.6);
         ctx.save();
         ctx.translate(x, y + 1);
@@ -32,11 +48,12 @@ export class Scenery {
         break;
       }
       case 'fruit_tree': {
-        const spr = fruitTreeSprite(this.cache, s.variant);
+        const spr = fruitTreeSprite(this.cache, s.variant, lk!.tone);
         const skew = Math.sin(simT * 1.1 + s.x * 0.6 + s.y * 0.5) * (0.01 + wind * 0.05);
         ctx.save();
         ctx.translate(x, y + 1);
         ctx.transform(1, 0, skew, 1, 0, 0);
+        ctx.scale(lk!.size, lk!.size); // the fruit hang in the same scaled space
         ctx.drawImage(spr.canvas, -spr.ax, -spr.ay, spr.w, spr.h);
         const col = ['#e5503a', '#f2a238', '#d9d04a'][s.variant % 3];
         const n = s.amount;
@@ -57,11 +74,12 @@ export class Scenery {
         break;
       }
       case 'berry_bush': {
-        const spr = bushSprite(this.cache, s.variant);
+        const spr = bushSprite(this.cache, s.variant, lk!.tone);
         const skew = Math.sin(simT * 1.3 + s.x * 0.9 + s.y) * (0.012 + wind * 0.05);
         ctx.save();
         ctx.translate(x, y + 1);
         ctx.transform(1, 0, skew, 1, 0, 0);
+        ctx.scale(lk!.size, lk!.size); // the berries sit in the same scaled space
         ctx.drawImage(spr.canvas, -spr.ax, -spr.ay, spr.w, spr.h);
         for (let i = 0; i < Math.min(s.amount, BERRY_SPOTS.length); i++) {
           const [bx, by] = BERRY_SPOTS[i];
