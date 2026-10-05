@@ -5,20 +5,26 @@ import type { World } from '../sim/types';
 import { fbm } from '../sim/worldgen';
 import { mix } from './sprites';
 
-const STEPS = 8;
-function ramp(a: string, b: string): string[] {
+/** water keeps a coarse ramp: the waves shift a tile's colour by whole steps */
+const WATER_STEPS = 8;
+/**
+ * Land uses a fine ramp. With only a few steps the slow tint noise showed as large flat diamonds with hard staircase edges;
+ * with many, neighbouring tiles differ only slightly and the per-tile grain (see the constructor) breaks the contour lines up.
+ */
+const LAND_STEPS = 24;
+function ramp(a: string, b: string, steps: number): string[] {
   const out: string[] = [];
-  for (let i = 0; i < STEPS; i++) out.push(mix(a, b, i / (STEPS - 1)));
+  for (let i = 0; i < steps; i++) out.push(mix(a, b, i / (steps - 1)));
   return out;
 }
 
 const PAL = {
-  [T.DEEP]: ramp('#245c93', '#3b86bd'),
-  [T.SHALLOW]: ramp('#49aec6', '#7ad3de'),
-  [T.SAND]: ramp('#dac88c', '#f0e2b2'),
-  [T.GRASS]: ramp('#69ad4c', '#8fd069'),
-  [T.FOREST]: ramp('#4c8745', '#639f56'),
-  [T.STONY]: ramp('#979689', '#b5b4a8'),
+  [T.DEEP]: ramp('#245c93', '#3b86bd', WATER_STEPS),
+  [T.SHALLOW]: ramp('#49aec6', '#7ad3de', WATER_STEPS),
+  [T.SAND]: ramp('#dac88c', '#f0e2b2', LAND_STEPS),
+  [T.GRASS]: ramp('#69ad4c', '#88c866', LAND_STEPS),
+  [T.FOREST]: ramp('#4c8745', '#639f56', LAND_STEPS),
+  [T.STONY]: ramp('#979689', '#b5b4a8', LAND_STEPS),
 } as const;
 
 const TUFT_LIGHT = 'rgba(190,235,140,0.75)';
@@ -29,8 +35,46 @@ export interface View {
   h: number;
 }
 
+/** worn earth is drawn in this many strength bands, strongest wear at WEAR_MAX opacity */
+const WEAR_BANDS = 8;
+const WEAR_MAX = 0.56;
+
+/**
+ * Which ground spills over which at a border: grass over forest floor over stone over sand. Water is 0: it is never overlapped
+ * (its shore has its own foam) and never overlaps. The ranking only decides which side's colour reaches across; the border itself
+ * stays exactly where the terrain types change, because that line decides where carts and people can go.
+ */
+const RANK = [0, 0, 1, 4, 3, 2] as const; // indexed by terrain type: DEEP SHALLOW SAND GRASS FOREST STONY
+const LOBE_BUCKETS = 6;
+/** measured: drawn at zoom 0.5, where there are the most borders in view and the lobes are only 2-4px, they nearly doubled the frame */
+const EDGE_MIN_ZOOM = 0.8;
+const LOBES_PER_EDGE = 3;
+/** shore foam surges in and out in this many phase groups */
+const FOAM_PHASES = 4;
+
+/** the four borders of a tile: the neighbour across, the edge's two ends (from the tile's top vertex) and its direction and outward normal */
+const EDGES = [
+  { dx: 1, dy: 0, x0: 32, y0: 16, x1: 0, y1: 32 },
+  { dx: 0, dy: 1, x0: -32, y0: 16, x1: 0, y1: 32 },
+  { dx: -1, dy: 0, x0: 0, y0: 0, x1: -32, y1: 16 },
+  { dx: 0, dy: -1, x0: 0, y0: 0, x1: 32, y1: 16 },
+].map((e) => {
+  const ex = e.x1 - e.x0;
+  const ey = e.y1 - e.y0;
+  const len = Math.hypot(ex, ey);
+  const mx = (e.x0 + e.x1) / 2;
+  const my = (e.y0 + e.y1) / 2 - 16; // from the tile's centre to the middle of this edge
+  const ml = Math.hypot(mx, my);
+  return { ...e, ex, ey, tx: ex / len, ty: ey / len, nx: mx / ml, ny: my / ml };
+});
+
 export class TerrainPainter {
+  private lobePaths: (Path2D | undefined)[] = [];
+  private wearPaths: (Path2D | undefined)[] = [];
   private tint: Float32Array;
+  private tuft: Float32Array;
+  /** water tiles that touch land */
+  private shore: Uint8Array;
   private world: World;
   private seedNum: number;
 
@@ -39,11 +83,29 @@ export class TerrainPainter {
     this.seedNum = hashString(world.seed) & 0xffff;
     const { W, H } = world;
     this.tint = new Float32Array(W * H);
+    this.tuft = new Float32Array(W * H);
+    this.shore = new Uint8Array(W * H);
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const t = world.terrain[y * W + x];
+        if (t !== T.SHALLOW && t !== T.DEEP) continue;
+        for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+          const nx = x + dx;
+          const ny = y + dy;
+          if (nx < 0 || ny < 0 || nx >= W || ny >= H) continue;
+          const nt = world.terrain[ny * W + nx];
+          if (nt !== T.SHALLOW && nt !== T.DEEP) this.shore[y * W + x] = 1;
+        }
+      }
+    }
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const big = fbm(x / 9, y / 9, this.seedNum + 41, 3);
         const small = hashUnit(x, y, this.seedNum) * 0.22;
         this.tint[y * W + x] = Math.min(0.999, Math.max(0, big * 0.85 + small * 0.4));
+        // grass tufts come in clumps with open ground between: a slow noise scales how likely a tile is to have any
+        const clump = fbm(x / 3.5, y / 3.5, this.seedNum + 97, 2);
+        this.tuft[y * W + x] = Math.min(1.7, Math.max(0, 0.1 + 2 * (clump - 0.2)));
       }
     }
   }
@@ -158,7 +220,10 @@ export class TerrainPainter {
     const offX = view.w / 2 - cam.x * z;
     const offY = view.h / 2 - cam.y * z;
 
-    // pass 1: ground tiles
+    // pass 1: ground tiles (and the worn earth over them)
+    const wearPaths = this.wearPaths;
+    const lobePaths = this.lobePaths;
+    const rough = z >= EDGE_MIN_ZOOM; // below this the lobes would be sub-pixel, and a wide view is the costliest to draw
     for (let y = b.y0; y <= b.y1; y++) {
       for (let x = b.x0; x <= b.x1; x++) {
         const sx = (x - y) * 32;
@@ -168,11 +233,13 @@ export class TerrainPainter {
         if (px < -margin * z || px > view.w + margin * z || py < -margin * z || py > view.h + margin * z) continue;
         const i = y * W + x;
         const type = world.terrain[i] as 0 | 1 | 2 | 3 | 4 | 5;
-        let k = Math.floor(this.tint[i] * STEPS);
+        let k: number;
         if (type === T.DEEP || type === T.SHALLOW) {
           const wave = Math.sin(t * 0.85 + x * 0.52 + y * 0.37) + 0.6 * Math.sin(t * 1.4 - x * 0.31 + y * 0.6);
-          k = Math.max(0, Math.min(STEPS - 1, k + Math.round(wave * 0.9)));
-        }
+          // shallows that touch land read lighter, so the water visibly gets shallower toward the shore
+          const lift = type === T.SHALLOW && this.shore[i] ? 2 : 0;
+          k = Math.max(0, Math.min(WATER_STEPS - 1, Math.floor(this.tint[i] * WATER_STEPS) + Math.round(wave * 0.9) + lift));
+        } else k = Math.floor(this.tint[i] * LAND_STEPS);
         ctx.fillStyle = PAL[type][k];
         ctx.beginPath();
         ctx.moveTo(sx, sy - 0.6);
@@ -181,11 +248,71 @@ export class TerrainPainter {
         ctx.lineTo(sx - 32.9, sy + 16);
         ctx.closePath();
         ctx.fill();
+        // ragged edges: where this ground meets a lower-ranked ground, a few small lobes of it spill across the border
+        if (rough) {
+          const rank = RANK[type];
+          for (let e = 0; e < 4; e++) {
+            const ed = EDGES[e];
+            const nx = x + ed.dx;
+            const ny = y + ed.dy;
+            if (nx < 0 || ny < 0 || nx >= W || ny >= world.H) continue;
+            const under = RANK[world.terrain[ny * W + nx]];
+            if (under === 0 || rank <= under) continue; // water is never overlapped; equal or higher ground is not either
+            const bucket = type * LOBE_BUCKETS + Math.min(LOBE_BUCKETS - 1, Math.floor((k * LOBE_BUCKETS) / LAND_STEPS));
+            const path = (lobePaths[bucket] ??= new Path2D());
+            for (let j = 0; j < LOBES_PER_EDGE; j++) {
+              const h0 = hashUnit(x * 4 + e, y, 200 + j);
+              if (h0 < 0.22) continue; // gaps keep the edge irregular
+              const u = (j + 0.5) / LOBES_PER_EDGE + (hashUnit(x * 4 + e, y, 210 + j) - 0.5) * 0.2;
+              const a = 4.2 + hashUnit(x * 4 + e, y, 220 + j) * 3.6; // half-length along the border
+              const d = 1.6 + hashUnit(x * 4 + e, y, 230 + j) * 3; // how far it reaches over
+              const bx = sx + ed.x0 + ed.ex * u;
+              const by = sy + ed.y0 + ed.ey * u;
+              for (let s = 0; s <= 6; s++) {
+                const th = (Math.PI * s) / 6;
+                const lx = bx + ed.tx * Math.cos(th) * a + ed.nx * Math.sin(th) * d;
+                const ly = by + ed.ty * Math.cos(th) * a + ed.ny * Math.sin(th) * d;
+                if (s === 0) path.moveTo(lx, ly);
+                else path.lineTo(lx, ly);
+              }
+              path.closePath();
+            }
+          }
+        }
+        // wear (desire paths): collected by strength, so tiles that abut merge into one trodden patch instead of a lattice
+        const wr = world.wear[i];
+        if (wr > 0.06) {
+          const band = Math.min(WEAR_BANDS - 1, Math.floor((Math.min(WEAR_MAX, wr * 0.7) / WEAR_MAX) * WEAR_BANDS));
+          const path = (wearPaths[band] ??= new Path2D());
+          path.moveTo(sx, sy - 0.6);
+          path.lineTo(sx + 32.9, sy + 16);
+          path.lineTo(sx, sy + 32.6);
+          path.lineTo(sx - 32.9, sy + 16);
+          path.closePath();
+        }
       }
     }
+    for (let bucket = 0; bucket < lobePaths.length; bucket++) {
+      const path = lobePaths[bucket];
+      if (!path) continue;
+      const type = Math.floor(bucket / LOBE_BUCKETS) as 2 | 3 | 4 | 5;
+      const band = bucket % LOBE_BUCKETS;
+      ctx.fillStyle = PAL[type][Math.min(LAND_STEPS - 1, Math.floor(((band + 0.5) * LAND_STEPS) / LOBE_BUCKETS))];
+      ctx.fill(path);
+      lobePaths[bucket] = undefined;
+    }
+    for (let band = 0; band < WEAR_BANDS; band++) {
+      const path = wearPaths[band];
+      if (!path) continue;
+      ctx.fillStyle = `rgba(150,112,70,${(WEAR_MAX * (band + 0.5)) / WEAR_BANDS})`;
+      ctx.fill(path);
+      wearPaths[band] = undefined;
+    }
 
-    // pass 2: wear (desire paths), shore foam, water glints, decor
+    // pass 2: shore foam, water glints, decor
     const detail = z >= 0.5;
+    const foamNear: (Path2D | undefined)[] = [];
+    const foamFar: (Path2D | undefined)[] = [];
     ctx.lineCap = 'round';
     // batched strokes
     let tuftL = new Path2D();
@@ -201,64 +328,48 @@ export class TerrainPainter {
         if (px < -margin * z || px > view.w + margin * z || py < -margin * z || py > view.h + margin * z) continue;
         const i = y * W + x;
         const type = world.terrain[i];
-        // wear
-        const wr = world.wear[i];
-        if (wr > 0.06) {
-          ctx.fillStyle = `rgba(150,112,70,${Math.min(0.62, wr * 0.7)})`;
-          ctx.beginPath();
-          const j = (hashUnit(x, y, 3) - 0.5) * 4;
-          ctx.moveTo(sx + j, sy + 3.5);
-          ctx.lineTo(sx + 25, sy + 16 + j * 0.3);
-          ctx.lineTo(sx - j, sy + 29);
-          ctx.lineTo(sx - 25, sy + 16 - j * 0.3);
-          ctx.closePath();
-          ctx.fill();
-        }
         if (type === T.SHALLOW || type === T.DEEP) {
           // foam where water meets land
-          const nb: [number, number, number, number, number][] = [
-            [1, 0, 32, 16, 0], // right-front edge
-            [0, 1, 0, 32, 0],
-            [-1, 0, 0, 0, 0],
-            [0, -1, 0, 0, 0],
-          ];
-          void nb;
-          const edges: [number, number, number, number, number, number][] = [
-            // neighbour dx, dy, edge from (x1,y1) to (x2,y2) in sprite px relative to tile top vertex
-            [1, 0, 32, 16, 0, 32],
-            [0, 1, -32, 16, 0, 32],
-            [-1, 0, -32, 16, 0, 0],
-            [0, -1, 32, 16, 0, 0],
-          ];
-          for (const [dx, dy, ex, ey, fx, fy] of edges) {
-            const nx = x + dx;
-            const ny = y + dy;
+          const g = Math.floor(hashUnit(x, y, 16) * FOAM_PHASES);
+          for (let e = 0; e < 4; e++) {
+            const ed = EDGES[e];
+            const nx = x + ed.dx;
+            const ny = y + ed.dy;
             if (nx < 0 || ny < 0 || nx >= W || ny >= world.H) continue;
             const nt = world.terrain[ny * W + nx];
             if (nt === T.SHALLOW || nt === T.DEEP) continue;
-            // draw a bright wavering line along the shared edge
-            const a = 0.34 + 0.22 * Math.sin(t * 1.3 + x * 0.9 + y * 0.7);
-            ctx.strokeStyle = `rgba(255,255,255,${a})`;
-            ctx.lineWidth = 2.2;
-            ctx.beginPath();
-            if (dx === 1) {
-              ctx.moveTo(sx + 32, sy + 16);
-              ctx.lineTo(sx, sy + 32);
-            } else if (dy === 1) {
-              ctx.moveTo(sx - 32, sy + 16);
-              ctx.lineTo(sx, sy + 32);
-            } else if (dx === -1) {
-              ctx.moveTo(sx, sy);
-              ctx.lineTo(sx - 32, sy + 16);
-            } else {
-              ctx.moveTo(sx, sy);
-              ctx.lineTo(sx + 32, sy + 16);
+            if (!rough) {
+              // wide view: a bright wavering line along the shared edge
+              const a = 0.34 + 0.22 * Math.sin(t * 1.3 + x * 0.9 + y * 0.7);
+              ctx.strokeStyle = `rgba(255,255,255,${a})`;
+              ctx.lineWidth = 2.2;
+              ctx.beginPath();
+              ctx.moveTo(sx + ed.x0, sy + ed.y0);
+              ctx.lineTo(sx + ed.x1, sy + ed.y1);
+              ctx.stroke();
+              continue;
             }
-            ctx.stroke();
-            void ex;
-            void ey;
-            void fx;
-            void fy;
+            // closer in: ragged lobes of foam on the water side, one set at the edge and one a little further out, surging in
+            // and out in step with each other (four phase groups, so the whole shore does not pulse as one)
+            for (let layer = 0; layer < 2; layer++) {
+              const path = ((layer ? foamFar : foamNear)[g] ??= new Path2D());
+              for (let j = 0; j < 3; j++) {
+                if (hashUnit(x * 4 + e, y, 240 + layer * 3 + j) < 0.2) continue;
+                const u = (j + 0.5) / 3 + (hashUnit(x * 4 + e, y, 250 + layer * 3 + j) - 0.5) * 0.2;
+                const a = 3.6 + hashUnit(x * 4 + e, y, 260 + layer * 3 + j) * 3.4;
+                const d = (layer ? 4.5 : 1.4) + hashUnit(x * 4 + e, y, 270 + layer * 3 + j) * (layer ? 3 : 2.2);
+                const bx = sx + ed.x0 + ed.ex * u;
+                const by = sy + ed.y0 + ed.ey * u;
+                for (let s = 0; s <= 6; s++) {
+                  const th = (Math.PI * s) / 6;
+                  const lx = bx + ed.tx * Math.cos(th) * a - ed.nx * Math.sin(th) * d;
+                  const ly = by + ed.ty * Math.cos(th) * a - ed.ny * Math.sin(th) * d;
+                  if (s === 0) path.moveTo(lx, ly);
+                  else path.lineTo(lx, ly);
+                }
+                path.closePath();
+              }
+            }
           }
           if (detail && hashUnit(x, y, 11) < 0.55) {
             // light glints drifting across the surface
@@ -284,7 +395,7 @@ export class TerrainPainter {
           for (let k = 0; k < n; k++) {
             const fx = 0.15 + hashUnit(x, y, 30 + k) * 0.7;
             const fy = 0.15 + hashUnit(x, y, 40 + k) * 0.7;
-            if (hashUnit(x, y, 50 + k) > (type === T.GRASS ? 0.62 : 0.3)) continue;
+            if (hashUnit(x, y, 50 + k) > (type === T.GRASS ? 0.62 : 0.3) * this.tuft[i]) continue;
             const gx = (x + fx - (y + fy)) * 32;
             const gy = (x + fx + (y + fy)) * 16;
             const sway = Math.sin(t * 1.7 + x * 1.3 + y) * wind * 1.4;
@@ -329,6 +440,19 @@ export class TerrainPainter {
           ctx.ellipse(gx, gy, 2.6, 1.6, 0, 0, Math.PI * 2);
           ctx.fill();
         }
+      }
+    }
+    for (let g = 0; g < FOAM_PHASES; g++) {
+      const ph = t * 1.3 + g * 1.6;
+      const near = foamNear[g];
+      if (near) {
+        ctx.fillStyle = `rgba(255,255,255,${0.42 + 0.24 * Math.sin(ph)})`;
+        ctx.fill(near);
+      }
+      const far = foamFar[g];
+      if (far) {
+        ctx.fillStyle = `rgba(255,255,255,${0.3 * (0.5 + 0.5 * Math.sin(ph + Math.PI))})`; // out when the near foam is in
+        ctx.fill(far);
       }
     }
     if (detail) {

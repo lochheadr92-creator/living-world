@@ -1,7 +1,7 @@
 import type { Game } from '../app/game';
 import { senseRadius } from '../sim/perception';
 import type { Animal, Building, Cart, Entity, Grave, Person, Pile, Plot, Site, Source, World } from '../sim/types';
-import { clampCamera, updateCamera } from './camera';
+import { clampCamera, fruitBoost, personBoost, updateCamera } from './camera';
 import { CartRenderer } from './carts';
 import { CharacterRenderer } from './characters';
 import { Critters, Effects, ambientColor, drawGlows, drawWeather } from './effects';
@@ -17,6 +17,9 @@ interface Drawable {
   o: unknown;
   id: number;
 }
+
+/** how opaque the see-through redraw of the selected or hovered person is */
+const SEE_THROUGH_ALPHA = 0.45;
 
 /** Draws the world onto a canvas. Reads simulation state, never writes it. */
 export class Renderer {
@@ -184,6 +187,9 @@ export class Renderer {
 
     this.heads.clear();
     const night = 1 - Math.min(1, world.light * 1.2);
+    // zoomed out, people and the berries and fruit they come for are drawn a little larger so they stay visible
+    const boost = personBoost(z);
+    this.scenery.fruitScale = fruitBoost(z);
     const hoverId = game.hover?.id ?? 0;
     const sleepersOnRoof = new Map<number, number>();
     for (const it of list) {
@@ -213,7 +219,7 @@ export class Renderer {
         }
         case 7: {
           const p = it.o as Person;
-          const r = this.chars.draw(ctx, world, p, alphaT, simT, { selected: p.id === game.selectedId, hovered: p.id === hoverId, night });
+          const r = this.chars.draw(ctx, world, p, alphaT, simT, { selected: p.id === game.selectedId, hovered: p.id === hoverId, night, boost });
           this.heads.set(p.id, { x: r.headX, y: r.headY });
           if (p.pose === 'sleep') this.drawZzz(ctx, r.headX, r.headY, simT, p.id);
           break;
@@ -229,6 +235,18 @@ export class Renderer {
         }
       }
     }
+    // the person being looked at shows through whatever stands in front of them (a canopy, a roof, a chimney, tall crops).
+    // Redrawn translucent over the finished scene: where nothing hides them it lands on the same pixels; scenery itself is never faded.
+    const seeThrough = (id: number): void => {
+      const e = id ? world.byId.get(id) : undefined;
+      if (!e || e.ent !== 'person' || hidden.has(id) || !this.heads.has(id)) return;
+      const at = list.findIndex((it) => it.k === 7 && it.id === id);
+      if (at < 0 || !this.coveredByLater(at, e.px + (e.x - e.px) * alphaT, e.py + (e.y - e.py) * alphaT)) return;
+      this.chars.draw(ctx, world, e, alphaT, simT, { selected: id === game.selectedId, hovered: id === hoverId, night, ghost: SEE_THROUGH_ALPHA, boost });
+    };
+    seeThrough(game.selectedId);
+    if (hoverId !== game.selectedId) seeThrough(hoverId);
+
     // sleepers who are indoors: "z" over the roof
     for (const p of world.persons) {
       if (!hidden.has(p.id)) continue;
@@ -262,6 +280,50 @@ export class Renderer {
     // ── overlays in screen space ──
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     this.drawScreenOverlays(world, simT, hoverId);
+  }
+
+  /**
+   * Could anything drawn after the drawable at `from` (so in front of it) cover part of a person standing at world (x, y)?
+   * The boxes are deliberately generous: a false yes only means a faint see-through redraw over a figure that is in the clear,
+   * a false no leaves the person as hidden as before.
+   */
+  private coveredByLater(from: number, x: number, y: number): boolean {
+    const fx = (x - y) * 32;
+    const fy = (x + y) * 16;
+    const list = this.drawables;
+    for (let i = from + 1; i < list.length; i++) {
+      const it = list[i];
+      let cx: number;
+      let cy: number;
+      let hw: number;
+      let up: number;
+      let down: number;
+      if (it.k === 0) {
+        const s = it.o as Source;
+        up = s.type === 'tree' ? 100 : s.type === 'fruit_tree' ? 80 : s.type === 'berry_bush' ? 30 : 0;
+        if (up === 0) continue;
+        cx = (s.x - s.y) * 32;
+        cy = (s.x + s.y + 1) * 16;
+        hw = up > 30 ? 26 : 18;
+        down = 2;
+      } else if (it.k === 1 || it.k === 2) {
+        const b = it.o as Building | Site;
+        cx = (b.x + b.w / 2 - (b.y + b.h / 2)) * 32;
+        cy = (b.x + b.w / 2 + (b.y + b.h / 2)) * 16;
+        hw = (b.w + b.h) * 16;
+        up = 120;
+        down = (b.w + b.h) * 8;
+      } else if (it.k === 3) {
+        const pl = it.o as Plot;
+        cx = (pl.x - pl.y) * 32;
+        cy = (pl.x + pl.y + 1) * 16;
+        hw = 32;
+        up = 20;
+        down = 16;
+      } else continue;
+      if (Math.abs(fx - cx) < hw + 8 && fy > cy - up && fy - 34 < cy + down) return true;
+    }
+    return false;
   }
 
   private drawZzz(ctx: CanvasRenderingContext2D, x: number, y: number, simT: number, id: number): void {

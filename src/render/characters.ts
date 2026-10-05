@@ -9,9 +9,15 @@ import type { Animal, ItemKind, Person, PoseKind, World } from '../sim/types';
 import { HAND_U, HAND_V, HAND_Z } from './carts';
 import { orientedBox } from './iso3d';
 import { HAIR, HOUSEHOLD_COLORS, PANTS, SHIRT, SKIN } from './palette';
-import { shade } from './sprites';
+import { SHADOW_PUSH_X, SHADOW_PUSH_Y, shade } from './sprites';
 
 type V3 = readonly [number, number, number];
+
+/**
+ * Opacity of the figure being drawn (1 normally; less for the see-through redraw of a selected person standing behind scenery).
+ * Parts that fade props in or out set the alpha themselves, so they scale by this instead of resetting to 1.
+ */
+let ghostA = 1;
 
 // rig layout ------------------------------------------------------------------
 const R = {
@@ -56,6 +62,9 @@ interface RigState {
 }
 
 const ease = (t: number) => t * t * (3 - 2 * t);
+
+/** ticks in one mouthful of eating */
+const EAT_CYCLE = 14;
 
 /** the tool kind drawn in the right hand for a pose: 1 axe / pick / hoe, 2 rod, 3 hammer, 4 saw, 5 spade, 6 sledge, 7 bread peel */
 const TOOL_OF: Partial<Record<PoseKind, number>> = { chop: 1, mine: 1, till: 1, fish: 2, build: 3, craft: 3, hammer: 3, saw: 4, dig: 5, forge: 6, bake: 7 };
@@ -205,13 +214,16 @@ function poseRig(pose: PoseKind, c: PoseCtx, r: Rig): void {
       break;
     }
     case 'eat': {
-      const k = pr(10);
-      const lift = Math.sin(k * Math.PI);
-      r[R.HRU] = 0.1 + lift * 0.04;
+      // a mouthful: the food comes up to the mouth, is chewed with the hand held there, then goes down for the next one
+      const k = pr(EAT_CYCLE);
+      const chewing = k >= 0.3 && k < 0.8;
+      const reach = k < 0.3 ? ease(k / 0.3) : chewing ? 1 : 1 - ease((k - 0.8) / 0.2);
+      const jaw = Math.abs(Math.sin(k * Math.PI * 2 * 4));
+      r[R.HRU] = 0.1 + reach * 0.05;
       r[R.HRV] = -0.06;
-      r[R.HRZ] = 12 + lift * 13;
-      r[R.MOUTH] = lift > 0.7 ? 1 : 0;
-      r[R.HEAD_Z] = -lift * 0.4;
+      r[R.HRZ] = 11 + reach * 15;
+      r[R.MOUTH] = chewing ? (jaw > 0.5 ? 1 : 0) : reach > 0.85 ? 1 : 0;
+      r[R.HEAD_Z] = chewing ? -0.5 - jaw * 0.7 : -reach * 0.3;
       break;
     }
     case 'sleep': {
@@ -605,14 +617,21 @@ export class CharacterRenderer {
     return { rig: out, s, pose, bt, burden };
   }
 
-  draw(ctx: CanvasRenderingContext2D, world: World, p: Person, alphaT: number, simT: number, opts: { selected: boolean; hovered: boolean; night: number }): { headX: number; headY: number } {
+  /**
+   * `ghost` (0..1) redraws the same figure translucent over whatever stands in front of it, without the ground shadow and ring.
+   * Drawing twice in a frame is harmless to animation state: the rig is a pure function of simulation time and person state.
+   */
+  draw(ctx: CanvasRenderingContext2D, world: World, p: Person, alphaT: number, simT: number, opts: { selected: boolean; hovered: boolean; night: number; ghost?: number; boost?: number }): { headX: number; headY: number } {
+    ghostA = opts.ghost ?? 1;
+    ctx.globalAlpha = ghostA;
     const x = p.px + (p.x - p.px) * alphaT;
     const y = p.py + (p.y - p.py) * alphaT;
     const heading = p.pheading + angleDiff(p.pheading, p.heading) * alphaT;
     const running = p.pose === 'run';
     const { rig, s, pose, bt, burden } = this.rigFor(world, p, simT, alphaT, p.pose === 'walk', running);
     const bs = bodyScale(world, p);
-    const sc = bs.s;
+    const boost = opts.boost ?? 1;
+    const sc = bs.s * boost;
     const look = p.look;
     const stage = stageOf(world, p);
     const hh = world.households.find((h) => h.id === p.hhId);
@@ -668,19 +687,20 @@ export class CharacterRenderer {
 
     // ground shadow
     const base = S(0, 0, 0);
-    {
+    if (ghostA === 1) {
       const rx = 8.5 * sc * (lie > 0.5 ? 1.9 : 1);
       ctx.fillStyle = 'rgba(15,25,15,0.30)';
       ctx.beginPath();
-      ctx.ellipse(lie > 0.5 ? S(-0.1, 0, 0)[0] : base[0], base[1] + 1, rx, rx * 0.42, lie > 0.5 ? -0.4 : 0, 0, Math.PI * 2);
+      // pushed a little to the lower right, like the shadows under trees and buildings
+      ctx.ellipse((lie > 0.5 ? S(-0.1, 0, 0)[0] : base[0]) + rx * SHADOW_PUSH_X, base[1] + 1 + rx * 0.42 * SHADOW_PUSH_Y, rx, rx * 0.42, lie > 0.5 ? -0.4 : 0, 0, Math.PI * 2);
       ctx.fill();
     }
     // selection / hover ring
-    if (opts.selected || opts.hovered) {
+    if (ghostA === 1 && (opts.selected || opts.hovered)) {
       ctx.strokeStyle = opts.selected ? `rgba(255,214,120,${0.75 + 0.2 * Math.sin(simT * 4)})` : 'rgba(255,255,255,0.55)';
       ctx.lineWidth = opts.selected ? 2.2 : 1.4;
       ctx.beginPath();
-      ctx.ellipse(base[0], base[1] + 1, 13, 6.4, 0, 0, Math.PI * 2);
+      ctx.ellipse(base[0], base[1] + 1, 13 * boost, 6.4 * boost, 0, 0, Math.PI * 2);
       ctx.stroke();
     }
 
@@ -797,10 +817,30 @@ export class CharacterRenderer {
       parts.push({
         d: handR[2] + 0.01,
         draw: () => {
-          ctx.fillStyle = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
+          const food = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
+          // the food in the hand, big enough to read at normal zoom
+          ctx.fillStyle = 'rgba(25,15,8,0.4)';
           ctx.beginPath();
-          ctx.arc(handR[0], handR[1] - 1.6, 1.9 * sc, 0, Math.PI * 2);
+          ctx.arc(handR[0], handR[1] - 1.8, 3 * sc, 0, Math.PI * 2);
           ctx.fill();
+          ctx.fillStyle = food;
+          ctx.beginPath();
+          ctx.arc(handR[0], handR[1] - 1.8, 2.5 * sc, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = 'rgba(255,255,255,0.45)';
+          ctx.fillRect(handR[0] - 1.2 * sc, handR[1] - 3.4 * sc, 1.1 * sc, 1.1 * sc);
+          // crumbs fall from the mouth while it chews
+          const k = cycleOf(p, alphaT, EAT_CYCLE);
+          if (k >= 0.3 && k < 0.8) {
+            const mouthY = headC[1] + 5.1 * sc * bs.head * 0.6;
+            for (let i = 0; i < 3; i++) {
+              const u = (((k - 0.3) / 0.5) * 1.5 + i / 3) % 1;
+              ctx.globalAlpha = ghostA * (1 - u);
+              ctx.fillStyle = food;
+              ctx.fillRect(headC[0] + (i - 1) * 2.4 * sc + ((fx - fy) / Math.SQRT2) * 1.5, mouthY + u * 7 * sc, 1.1 * sc, 1.1 * sc);
+            }
+            ctx.globalAlpha = ghostA;
+          }
         },
       });
     }
@@ -820,6 +860,8 @@ export class CharacterRenderer {
     parts.sort((a, b) => a.d - b.d);
     for (const pt of parts) pt.draw();
 
+    ctx.globalAlpha = 1;
+    ghostA = 1;
     // zzz over sleepers is drawn by the effects layer; return the head position for labels / bubbles
     return { headX: headC[0], headY: headC[1] - (lie > 0.5 ? 6 : 6.5 * sc) };
   }
@@ -1028,11 +1070,11 @@ function drawHead(
   if (o.style === 4 && !back) {
     // short crop: thin cap only
     ctx.fillStyle = o.skin;
-    ctx.globalAlpha = 0.5;
+    ctx.globalAlpha = ghostA * 0.5;
     ctx.beginPath();
     ctx.arc(x, y - r * 0.2, r * 0.8, Math.PI * 1.1, Math.PI * 1.9);
     ctx.fill();
-    ctx.globalAlpha = 1;
+    ctx.globalAlpha = ghostA;
   }
   // face
   if (!back) {
@@ -1369,7 +1411,7 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
       parts.push({
         d: c[2] + 0.01,
         draw: () => {
-          ctx.globalAlpha = bt;
+          ctx.globalAlpha = ghostA * bt;
           ctx.lineCap = 'round';
           for (const v of [-0.2, 0.2]) {
             const a0 = S(0.64, v, 0);
@@ -1425,7 +1467,7 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
             ctx.fillStyle = `rgba(240,222,180,${0.8 * (1 - t)})`;
             ctx.fillRect(kx, c[1] + 6 + t * 7, 1.4, 1.2);
           }
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ghostA;
         },
       });
       break;
@@ -1435,13 +1477,13 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
       parts.push({
         d: c[2] + 0.01,
         draw: () => {
-          ctx.globalAlpha = bt;
+          ctx.globalAlpha = ghostA * bt;
           orientedBox(ctx, S, fx, fy, 0.24, 0.56, -0.1, 0.1, 0, 2.4, { top: '#dcb987', lit: '#c29a64', dark: '#9a7544', stroke: 'rgba(60,38,14,0.55)' });
           const n1 = S(0.34, -0.03, 2.5);
           const n2 = S(0.46, 0.04, 2.5);
           ctx.fillStyle = '#2f3238';
           for (const n of [n1, n2]) ctx.fillRect(n[0] - 0.6, n[1] - 0.8, 1.3, 1.3);
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ghostA;
         },
       });
       break;
@@ -1453,7 +1495,7 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
       parts.push({
         d: c[2] + 0.01,
         draw: () => {
-          ctx.globalAlpha = bt;
+          ctx.globalAlpha = ghostA * bt;
           // stump, anvil, glowing bar held in tongs
           const g = S(0.46, 0, 0);
           ctx.fillStyle = '#7a5430';
@@ -1507,7 +1549,7 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
               ctx.stroke();
             }
           }
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ghostA;
         },
       });
       break;
@@ -1518,7 +1560,7 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
       parts.push({
         d: c[2] - 0.02,
         draw: () => {
-          ctx.globalAlpha = bt;
+          ctx.globalAlpha = ghostA * bt;
           ctx.fillStyle = clay ? '#7d4a2a' : '#3f2a18';
           ctx.beginPath();
           ctx.ellipse(c[0], c[1], 7 * sc, 3 * sc, 0, 0, Math.PI * 2);
@@ -1532,7 +1574,7 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
           ctx.beginPath();
           ctx.ellipse(m[0] - 1, m[1] - 2, 2.4 * sc, 1.2 * sc, 0, 0, Math.PI * 2);
           ctx.fill();
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ghostA;
         },
       });
       break;
@@ -1739,9 +1781,9 @@ function drawCarried(
       parts.push({
         d: c[2] + 0.04,
         draw: () => {
-          ctx.globalAlpha = Math.min(1, carry * 1.4);
+          ctx.globalAlpha = ghostA * Math.min(1, carry * 1.4);
           orientedBox(ctx, S, fx, fy, 0.1, 0.3, -0.075, 0.075, 8.4, 8.4 + layers * 3.2, { top: '#cf6a4a', lit: '#b4573f', dark: '#8c4130', stroke: 'rgba(50,20,12,0.55)' });
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ghostA;
         },
       });
     } else if (clay > 0) {
@@ -1749,7 +1791,7 @@ function drawCarried(
       parts.push({
         d: c[2] + 0.04,
         draw: () => {
-          ctx.globalAlpha = Math.min(1, carry * 1.4);
+          ctx.globalAlpha = ghostA * Math.min(1, carry * 1.4);
           for (let i = 0; i < lumps; i++) {
             const q = S(0.17 + i * 0.05, (i - (lumps - 1) / 2) * 0.07, 10.4 + (i % 2) * 2.2);
             ctx.fillStyle = 'rgba(60,34,20,0.4)';
@@ -1765,7 +1807,7 @@ function drawCarried(
             ctx.ellipse(q[0] - 1, q[1] - 1, 1.5 * sc, 0.9 * sc, 0, 0, Math.PI * 2);
             ctx.fill();
           }
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ghostA;
         },
       });
     } else if (bread > 0) {
@@ -1773,7 +1815,7 @@ function drawCarried(
       parts.push({
         d: c[2] + 0.04,
         draw: () => {
-          ctx.globalAlpha = Math.min(1, carry * 1.4);
+          ctx.globalAlpha = ghostA * Math.min(1, carry * 1.4);
           // a cloth with loaves in it
           const q = S(0.18, 0, 9.4);
           ctx.fillStyle = '#e9e1cf';
@@ -1794,7 +1836,7 @@ function drawCarried(
             ctx.ellipse(lx - 0.7, q[1] - 3 - (i % 2) * 1.2, 1.4 * sc, 0.8 * sc, 0, 0, Math.PI * 2);
             ctx.fill();
           }
-          ctx.globalAlpha = 1;
+          ctx.globalAlpha = ghostA;
         },
       });
     }
@@ -1862,7 +1904,7 @@ function drawCarried(
     parts.push({
       d: headC[2] + 0.04,
       draw: () => {
-        ctx.globalAlpha = Math.min(1, jar * 1.5);
+        ctx.globalAlpha = ghostA * Math.min(1, jar * 1.5);
         const wobble = Math.sin(simT * 7 + p.id) * 0.4 * burden;
         const top = hy - 6.2 * sc;
         // pad of cloth
@@ -1890,7 +1932,7 @@ function drawCarried(
         ctx.beginPath();
         ctx.ellipse(hx + wobble, top - 9, 2.4, 0.9, 0, 0, Math.PI * 2);
         ctx.fill();
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha = ghostA;
       },
     });
   } else if (hasJar) {
