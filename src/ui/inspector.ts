@@ -11,10 +11,26 @@ import type { Slots } from './layout';
 
 type Mode = 'empty' | 'person' | 'entity';
 
+/** a window small enough that the empty "look inside the world" card costs more of the view than it is worth */
+const COMPACT = '(max-width: 1099px), (max-height: 699px)';
+
+function compactWindow(): boolean {
+  try {
+    return typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia(COMPACT).matches;
+  } catch {
+    return false;
+  }
+}
+
 export function createInspector(ctx: UICtx, slots: Slots): Part {
   const { game } = ctx;
 
-  let open = ctx.prefs.inspectorOpen;
+  /** the user has used the handle this session: what they chose beats the window-size default */
+  let chosen = false;
+  /** whether the panel stands open when nothing is selected: the saved choice, except that a small window starts it tucked away */
+  const restingOpen = (): boolean => (chosen || !compactWindow() ? ctx.prefs.inspectorOpen : false);
+
+  let open = restingOpen();
   let mode: Mode = 'empty';
   let shownId = 0;
   let lastTick = -1;
@@ -97,6 +113,7 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
       'data-tip': 'Hide the inspector',
       onClick: () => {
         open = !open;
+        chosen = true;
         ctx.prefs.inspectorOpen = open;
         ctx.savePrefs();
         applyOpen();
@@ -186,7 +203,7 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
       const e = world.byId.get(id);
       prev = e && e.ent === 'person' ? { id, person: true, name: e.name } : { id, person: false, name: '' };
     } else {
-      open = ctx.prefs.inspectorOpen;
+      open = restingOpen();
       if (prev && prev.person) {
         const d = world.deceased.find((x) => x.id === prev!.id);
         if (d) memorial = `${d.name} has died${d.cause ? ` (${d.cause})` : ''}, aged ${d.age}.`;
@@ -206,8 +223,15 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
 
   return {
     update(dt) {
+      if (!slow.step(dt)) return;
+      // with nothing selected the resting state follows the window, so resizing tucks the empty card away or brings it back
+      if (!game.selectedId && open !== restingOpen()) {
+        open = restingOpen();
+        applyOpen();
+        force = true;
+      }
       // nothing to keep fresh while the panel is tucked away
-      if (slow.step(dt) && open) refresh();
+      if (open) refresh();
     },
     onGame(e) {
       switch (e) {
