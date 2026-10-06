@@ -141,8 +141,9 @@ consumed.
   with one companion beside them instead of running. People want one after being bitten, or after running from wolves twice in a
   day or so (a chase counts once however often the running is begun again; the memory of a fright halves each day), and the more
   often it has happened the more they will put making one before ordinary work, up to a limit; it is made by hand from three
-  wood (a long pole, sharpened and hardened in the fire). Nothing here draws a random number, and nothing changes in a world
-  where nobody carries a spear.
+  wood (a long pole, sharpened and hardened in the fire). Nothing here draws a random number. The wolf rules change only for
+  someone who carries a spear: with nobody ever wanting one, eight 30-day worlds played out exactly as they did before the spear
+  was added. Wanting one does change a world, since people who have been frightened gather wood for it.
 * **Wear.** Use wears a tool a little per tick (iron half as much); past 70% wear the benefit fades, and at 100% it breaks
   (recorded: `-tool worn out`). A fitted handle restores more wear than a stick of wood when a tool is mended.
 * **Iron** tools are quicker and wear half as fast; they are forged only at a smithy.
@@ -298,13 +299,14 @@ depends only on the tick and the population, so a run is reproducible.
   7 of 176 and 15 of 324, one of them at goods held for another person. These are single runs of two seeds, measured by
   watching withdraw trips in a headless run; the worlds differ after the change, so they are not the same trajectories.
 * Grain, flour and bread spoil in ordinary stores and heaps (grain did not before); the granary exists to slow it.
-* A fishing rod, a smokehouse and smoked fish exist (fish was the one food with no way to keep it). Measured, not assumed: in
-  four 30-day runs (`meadow`, `river`, `fern`, `aspen`) the first rods were in stock by day 2–6, the first smoked fish on day
-  14, 19, 21 and 13, and from then on smoked fish was in stock at every daily sample to day 30; no one died and the books
-  balanced in all four. Fish was not much of a waste problem to begin with — in 25-day runs of the same four worlds before the
-  change about a tenth of the fish caught spoiled (73 of 748, 43 of 396, 92 of 767, 73 of 753) — so what the smokehouse adds is
-  food that keeps and weighs less, not a large cut in spoilage. A new building kind must be added **last** in `BUILD_DEF`: the
-  order of its keys salts the per-building hashes (`tests/smoking.test.ts` keeps it honest).
+* A fishing rod, a smokehouse and smoked fish exist (fish was the one food with no way to keep it). Measured, not assumed: in four
+  30-day runs (`meadow`, `river`, `fern`, `aspen`) the first rods were in stock by day 2–6, the first smoked fish on day 14, 19,
+  21 and 13, and from then on smoked fish was in stock at every daily sample to day 30; no one died and the books balanced in all
+  four. Fish was not much of a waste problem to begin with — in 25-day runs of the same four worlds before the change about a
+  tenth of the fish caught spoiled (79 of 714, 32 of 428, 93 of 676, 66 of 650: 11% in all; `scripts/fishwaste.ts` on the code
+  just before the smokehouse) — so what the smokehouse adds is food that keeps and weighs less, not a large cut in spoilage. A new
+  building kind must be added **last** in `BUILD_DEF`: the order of its keys salts the per-building hashes
+  (`tests/smoking.test.ts` keeps it honest).
 * A well exists (`scripts/waterwalk.ts` measures the walk, `scripts/wellgeo.ts` the placement). Before it, in 30-day runs of
   `meadow` and `fern` (ordinary and harsh), the one-way walk to a drinking place took 5.2–5.7% of everybody's time, the median
   walk was 8–10 tiles and the longest 29–48, and in the two harsh worlds most of the people whose thirst was critical were still
