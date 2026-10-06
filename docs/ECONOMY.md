@@ -193,7 +193,10 @@ to already, or was owed elsewhere, or the tool was in use.
 
 Promises to bring materials to a **building site** are delivered *to the site*, not handed to the person asking (whose pack
 may be full); work and deliveries toward the site, including the sawing of the planks it needs, count toward promises to help
-with it.
+with it. The same applies when someone with the goods in hand would simply give them but the asker has no room: if the giver
+knows the site and can take on one more promise, they carry the goods to the site as a `haul` promise rather than the handover
+failing with "could not carry it" (`carriesToSite` in `sim/social.ts`). In 30-day runs of two seeds this took such failures from
+8 and 13 to 1 and 0; it did not measurably change how many buildings were finished by day 30.
 
 News is carried in conversation and keeps its **provenance**: the person who first saw it, how many mouths it has passed
 through, and the time of the original sighting (a told belief is never made fresher by being told).

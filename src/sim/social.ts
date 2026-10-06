@@ -400,6 +400,17 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   return { kind: 'decline', reason: have > 0 ? 'own_need' : dislike ? 'disliked' : 'no_item' };
 }
 
+/**
+ * Goods wanted at a building site that the asker has no room to be handed: B, who has them, carries them to the site as a
+ * promise (a `haul` commitment) instead of the handover failing. Only when B knows the site and can take on one more promise.
+ */
+function carriesToSite(world: World, B: Person, A: Person, req: Request, item: ItemKind): boolean {
+  if (!req.siteId || isFood(item) || item === 'water' || isToolItem(item)) return false;
+  if (roomFor(A.inv, carryCap(world, A), item) >= 1) return false;
+  if (!B.beliefs[req.siteId] || !world.byId.has(req.siteId)) return false;
+  return activeCommitments(B).length < MAX_ACTIVE_COMMITMENTS && personalDriveMax(B) < 38;
+}
+
 function addCommitment(world: World, B: Person, req: Request, c: Partial<Commitment>): Commitment {
   const commit: Commitment = {
     id: world.nextId++,
@@ -884,7 +895,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     }
     case 'request': {
       if (!req) break;
-      const resp = evaluateRequest(world, B, A, req);
+      let resp = evaluateRequest(world, B, A, req);
+      if (resp.kind === 'give' && carriesToSite(world, B, A, req, resp.item)) resp = { kind: 'promise', item: resp.item, n: resp.n };
       if (resp.kind === 'give') {
         const moved = transfer(world, B.inv, A.inv, carryCap(world, A), resp.item, resp.n, 'person:' + B.id, 'person:' + A.id, 'gift on request');
         if (moved > 0) {
