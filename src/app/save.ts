@@ -14,7 +14,8 @@ const META = 'living-world:save-meta:v1';
 // 6: people can be ill (a spell of illness with a course and an outcome); older saves lack it and are refused
 // 7: people record the skills they learned from others (older saves lack it and are refused)
 // 8: the village's proposals for communal buildings are part of the world (older saves lack them and are refused)
-const VERSION = 8;
+// 9: people hold keepsakes they were given and occasions worth celebrating (older saves lack them and are refused)
+const VERSION = 9;
 
 function bytesToB64(bytes: Uint8Array): string {
   let s = '';

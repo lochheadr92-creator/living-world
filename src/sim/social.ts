@@ -20,6 +20,7 @@ import { yearTicks } from './ageing';
 import { hearAccount, pickAccount, recordAccount } from './reputation';
 import { shareDeath } from './grief';
 import { hear, knownProposal, propose, shareMotion } from './council';
+import { GAME_WORDS, giveKeepsake, hospitality, maybeJoke, noteOccasion, circleOf, playContest } from './leisure';
 import { SKILL_WORD, giveLesson, watchAndLearn } from './teaching';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
@@ -659,6 +660,8 @@ export interface ConvData {
   skill?: import('./types').SkillKey;
   /** motion: the kind of communal building being proposed */
   motion?: import('./types').BuildingType;
+  /** challenge: the game */
+  game?: 'race' | 'wrestle' | 'throw';
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -705,6 +708,12 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
       return `to show ${name} something`;
     case 'motion':
       return `to put an idea to ${name}`;
+    case 'challenge':
+      return `to have a game with ${name}`;
+    case 'present':
+      return `to give ${name} something`;
+    case 'call':
+      return `to call on ${name}`;
     case 'recruit':
       return `to get ${name}'s help with a building`;
     case 'propose':
@@ -895,6 +904,18 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       bubble(world, A, D.saying(D.APOLOGY, A.id, B.id, world.tick >> 5, vars), 'say', 58);
       break;
     }
+    case 'challenge': {
+      if (d.game) bubble(world, A, D.saying(D.CHALLENGE_ASK, A.id, B.id, world.tick >> 5, { ...vars, game: GAME_WORDS[d.game] }), 'say', 56);
+      break;
+    }
+    case 'present': {
+      bubble(world, A, D.saying(D.PRESENT_ASK, A.id, B.id, world.tick >> 5, vars), 'happy', 56);
+      break;
+    }
+    case 'call': {
+      bubble(world, A, D.saying(D.CALL_ASK, A.id, B.id, world.tick >> 5, vars), 'say', 52);
+      break;
+    }
     case 'motion': {
       if (!d.motion) break;
       const pr = propose(world, A, d.motion, d.purpose ?? 'we need it');
@@ -992,6 +1013,11 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
   switch (c.purpose) {
     case 'chat': {
       if (hashUnit(B.id, A.id, world.tick >> 5) < 0.3) bubble(world, B, D.smallTalk(world, B.id, A.id, false, B.needs.warmth < 45, false), 'say', 46);
+      const joke = maybeJoke(world, A, B);
+      if (joke) {
+        bubble(world, A, D.saying(D.JOKES, A.id, B.id, world.tick >> 5), 'say', 56);
+        bubbleLater(world, B, D.saying(joke === 'laughed' || joke === 'smiled' ? D.LAUGH : joke === 'flat' ? D.FLAT : D.STUNG, B.id, A.id, world.tick >> 5), 26);
+      }
       break;
     }
     case 'request': {
@@ -1189,6 +1215,30 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       mediate(world, c, A, B, d);
       break;
     }
+    case 'challenge': {
+      if (!d.game) break;
+      A.cooldowns['challenge' + B.id] = world.tick + DAY; // asked: not again today, whatever the answer
+      const aff = B.relations[A.id]?.affinity ?? 0;
+      const willing = clamp(0.4 + 0.4 * (1 - B.traits.caution) + aff / 250, 0.15, 0.9);
+      if (hashUnit(B.id, A.id, (world.tick >> 4) + 13) < willing) {
+        bubble(world, B, D.saying(D.CHALLENGE_YES, B.id, A.id, world.tick >> 5), 'happy', 50);
+        playContest(world, A, B, d.game);
+      } else {
+        bubble(world, B, D.saying(D.CHALLENGE_NO, B.id, A.id, world.tick >> 5), 'say', 48);
+        c.data.sour = true;
+      }
+      break;
+    }
+    case 'present': {
+      const what = giveKeepsake(world, A, B);
+      if (what) bubble(world, B, D.saying(D.PRESENT_THANKS, B.id, A.id, world.tick >> 5), 'happy', 56);
+      break;
+    }
+    case 'call': {
+      const gave = hospitality(world, B, A, (p, k) => surplusOf(world, p, k));
+      bubble(world, B, D.saying(gave ? D.CALL_HOST : D.CALL_HOST_BARE, B.id, A.id, world.tick >> 5), 'happy', 52);
+      break;
+    }
     case 'motion': {
       if (!d.motion) break;
       const pr = knownProposal(world, A, d.motion);
@@ -1364,6 +1414,7 @@ function joinHouseholds(world: World, A: Person, B: Person, kind: 'partner' | 'r
 function bindPartners(world: World, A: Person, B: Person): void {
   A.partnerId = B.id;
   B.partnerId = A.id;
+  noteOccasion(world, 'partnership', `${A.name} and ${B.name}`, A.id, circleOf(world, [A, B]));
   const ra = relOf(A, B.id);
   const rb = relOf(B, A.id);
   ra.kin = 'partner';
@@ -1483,6 +1534,8 @@ registerHandler('socialize', {
   pose: () => 'talk',
   begin(world, p, a) {
     const t = personOf(world, a.targetId);
+    // a call that finds nobody in should not be tried again at once (set here, not when the option is weighed up)
+    if (a.data.purpose === 'call') p.cooldowns['call' + a.targetId] = Math.max(p.cooldowns['call' + a.targetId] ?? 0, world.tick + Math.round(DAY / 2));
     if (!t) return 'they are no longer around';
     if (Math.hypot(t.x - p.x, t.y - p.y) > CONV_REACH + 2.5) return 'could not find them';
   },

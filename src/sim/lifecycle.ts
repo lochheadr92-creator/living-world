@@ -6,6 +6,7 @@ import { toolsOnDeath } from './tools';
 import { socialOnDeath } from './social';
 import { onDeath } from './grief';
 import { illnessTick } from './illness';
+import { circleOf, noteOccasion } from './leisure';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
 import { childbirthRisk, fertilityAt, frailtyOf, lifeDraw, mortalityPerYear, yearTicks } from './ageing';
@@ -44,7 +45,10 @@ export function lifeTick(world: World, p: Person): void {
   else if (prev !== code) {
     p.cooldowns.stageCode = code;
     if (code === 1) addEvent(world, 'life', `${p.name} is growing up.`, [p.id], p.x, p.y);
-    else if (code === 2) addEvent(world, 'life', `${p.name} has come of age and joins the work.`, [p.id], p.x, p.y);
+    else if (code === 2) {
+      addEvent(world, 'life', `${p.name} has come of age and joins the work.`, [p.id], p.x, p.y);
+      noteOccasion(world, 'coming_of_age', p.name, p.id, circleOf(world, [p]));
+    }
     else if (code === 3) addEvent(world, 'life', `${p.name} is now an elder.`, [p.id], p.x, p.y);
     addLog(world, p, 'life', code === 2 ? 'Became an adult.' : code === 3 ? 'Grew old.' : 'Growing up.');
   }
@@ -165,6 +169,7 @@ export function giveBirth(world: World, mother: Person): void {
   addLog(world, mother, 'life', `${baby.name} was born.`);
   if (father) addLog(world, father, 'life', `${baby.name} was born.`);
   mother.speech = { text: 'Welcome, little one.', until: world.tick + 90, kind: 'happy' };
+  noteOccasion(world, 'birth', baby.name, baby.id, circleOf(world, father ? [mother, father] : [mother]));
   for (const q of world.persons) {
     if (!q.alive || q === mother || q === baby) continue;
     if (Math.hypot(q.x - mother.x, q.y - mother.y) < 10) adjustRel(q, mother.id, world.tick, { aff: 0.8, note: `${baby.name} was born` });

@@ -109,6 +109,8 @@ export interface PersonView {
   accounts: { about: string; what: string; seen: string; source: string }[];
   /** who they are mourning, how heavily it weighs, and how they came to know */
   grief: { about: string; weight: number; since: string; source: string; visited: string }[];
+  /** little things people made for them and gave them */
+  keepsakes: { what: string; from: string; when: string }[];
   /** communal projects they have heard of, and what they make of them */
   motions: { what: string; stance: string; status: string; counts: string; proposer: string }[];
   /** skills they picked up from other people */
@@ -406,6 +408,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     illness: illnessView(world, p),
     learned: learnedViews(world, p),
     motions: motionViews(world, p),
+    keepsakes: p.keepsakes.slice().reverse().map((k) => ({ what: k.what, from: nameOf(world, k.from), when: agoText(world, k.tick) })),
     grievances: grievanceViews(world, p),
     decision: d
       ? {

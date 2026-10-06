@@ -213,6 +213,8 @@ export function glyphFor(kind: ActivityKind, target?: string): { id: string; col
       return { id: 'door', color: '#e07bb0' };
     case 'mourn':
       return { id: 'door', color: '#9aa4c0' };
+    case 'play':
+      return { id: 'door', color: '#f0c98a' };
     case 'return_tool':
       return { id: 'undo', color: '#bcc7d4' };
     case 'eat':

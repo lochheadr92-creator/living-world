@@ -2,6 +2,7 @@ import { addEvent, addLog } from './events';
 import { DAY } from './constants';
 import { caseFatality, frailtyOf, illnessRatePerYear, lifeDraw, yearTicks } from './ageing';
 import { killPerson } from './lifecycle';
+import { circleOf, noteOccasion } from './leisure';
 import type { Person, World } from './types';
 import { clamp } from './util';
 
@@ -50,7 +51,10 @@ export function illnessTick(world: World, p: Person, age: number, step: number):
   p.cooldowns.illFree = world.tick + 3 * DAY; // not ill again straight away
   p.health = Math.max(p.health, 50);
   addLog(world, p, 'need', ill.care > 0 ? 'Recovered, having been looked after.' : 'Recovered.');
-  if (ill.severity >= SERIOUS) addEvent(world, 'life', `${p.name} has recovered from a serious illness${ill.care > 0 ? ', looked after by others' : ''}.`, [p.id], p.x, p.y);
+  if (ill.severity >= SERIOUS) {
+    addEvent(world, 'life', `${p.name} has recovered from a serious illness${ill.care > 0 ? ', looked after by others' : ''}.`, [p.id], p.x, p.y);
+    noteOccasion(world, 'recovery', p.name, p.id, circleOf(world, [p]));
+  }
   p.nextThink = world.tick;
   return false;
 }

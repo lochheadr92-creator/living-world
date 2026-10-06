@@ -30,6 +30,7 @@ decided to supply it; a plank exists because somebody turned wood into it; a mea
 | Grief, the grave visit, the remembrance meal | `sim/grief.ts` | |
 | Teaching: lessons and learning by watching | `sim/teaching.ts` | |
 | Deciding together: proposals, stances, quorum | `sim/council.ts` | |
+| Leisure: evenings at the fire, play, contests, keepsakes, calls, jokes, celebrations | `sim/leisure.ts` | |
 | Not letting work strand anyone from water or food | `sim/relief.ts` | wired into `rankOptions` |
 | Fixed-step clock, stalls, requested/achieved speed | `app/game.ts` | |
 | Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | |
@@ -419,6 +420,59 @@ remain. Turning councils off (`settings.councils = false`, not in the menu) rest
 comparison was made. One existing test changed because of the delay: the save-and-resume test with a workshop at work now runs
 24,000 ticks, not 15,500, before it expects one.
 
+## Life that is not needed
+
+Nothing here is needed to live. Each thing is an ordinary option that is only offered when nothing presses (nobody hungry,
+thirsty or worn out, nothing wrong, not ill), so it loses to anything that matters, and each rests on something real: the fire
+is lit, the story is something the teller knows, the keepsake costs wood, the bite is food that really changes hands, the
+occasion really happened (`sim/leisure.ts`; `settings.leisure = false` turns all of it off).
+
+**Evenings at the fire.** In the evening, someone with nothing pressing may go and sit at a fire they know to be lit, among
+whoever is there (more attractive with company, and a little more so for a child or an elder). Every couple of minutes, at a lit
+fire where two or more are sitting for the evening, someone who has not performed lately tells a story or sings (the sociable,
+and elders, are likelier). Listeners feel better (+3 company for a story, +4 for a song, +5 for the performer), feel a little
+closer to them, and it is in their log. A story is not only entertainment: whatever the teller knows of places and dangers, and
+of how people have behaved, passes to the listeners exactly as in any other conversation (with the same limits), which is how
+news now travels through a village in the evening.
+
+**Celebrations.** A birth, a coming of age, a new partnership and a recovery from a serious illness are noted by everyone in the
+circle round it (the person, their household, their kin) and stay on their minds for three days. Someone who carries one is keener
+to call a shared meal (a bonus of seven) and to ask the others it concerns; the meal is marked as held for it, everyone who sits
+down is cheered by ten, and the feed says "Hana held a meal to celebrate the birth of Mira". (A meal called in memory of someone who has
+died takes precedence over a celebration.)
+
+**Play.** A child with nothing pressing, by day, goes and plays, with other children if any are about (more attractive for the
+sociable): they run about in a small circle on open ground for a few hundred ticks, feel better, grow fond of whoever they play
+with, and a very little of what a grown person is doing nearby rubs off as make-believe (0.002 at a time). It takes a little energy.
+They do not play again for a while.
+
+**Friendly contests.** Two adults or youths who know each other, are not at odds and are strong enough may try each other at a
+race, a wrestle or a throw: the one asked agrees more readily if not cautious and fond of the asker. It is decided by strength and
+stamina on the day with a little luck from a hash of the moment, so the stronger wins more often but not always. Both enjoy it
+(+4 company), the loser feels a touch of respect for the winner rather than a grudge, anyone close by who is free watches (+3) and
+the feed hears of it now and then. Each can enter a contest only once in about half a day.
+
+**Keepsakes.** Someone with a piece of wood to spare, a steady hand and a person they care about (family, a housemate, a close
+friend; children and a person to celebrate count extra) carves something for them. It costs one piece of wood from the giver's
+pack, written off in the ledger as "carved into a keepsake"; no item is made. The receiver keeps a record (a small bounded list,
+shown in the person inspector) and feels warmer to the giver. Once every three days at most for a given person.
+
+**Calling on someone.** A friend (or kin) who has not been seen for half a day and is known to be somewhere not too far off
+(within about thirty tiles) may be called on, by day. It is a normal conversation, and the person called on offers a seat and, if
+they are generous (or it is family) and can spare it, a bite: one unit of food that really leaves their pack. Either way it is a
+pleasant visit for both (+6 and +3 company) and they grow closer.
+
+**A joke in passing.** Now and then, in a chat, one says something funny. Between friends it lands (they laugh, +3 company,
+a little warmer); between people who are neither friends nor foes it is mildly amusing or falls flat; only someone who already
+dislikes them is stung (a little less trust). It is not repeated to the same person for a while.
+
+What this did in ordinary play (four seeds, 30 days, one run each, with and without leisure): 27 to 57 evenings with a story or a song
+a world (one to two per cent of everyone's time, 34 to 134 pieces of news passed on in stories), play about 2 to 4 per cent of
+everyone's time, 40 to 80 contests, 6 to 13 keepsakes, 18 to 22 calls (one or two of which came with a bite), 10 to 26 jokes and
+0 to 3 celebrations (happy occasions are few). The time spent working was unchanged (20 to 24 per cent either way), and the amount
+done (things gathered, built, crafted and farmed) within a few per cent either way, which is within the difference between two runs
+of a world; what leisure took was spare evenings and some of the plain chatting. Saves are version 9.
+
 ## Surviving while working
 
 Before taking on anything that is not about survival, a person works out whether they could still reach water and food: the
@@ -487,8 +541,8 @@ depends only on the tick and the population, so a run is reproducible.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
 
-* Saved worlds are version 8: people hold accounts of how others have behaved, carry a hearsay total, grief for those who died,
-  any spell of illness and a record of the skills they learned from others, and the world holds the village's proposals, and the dead are recorded with their household and grave, so saves from before that are refused rather than
+* Saved worlds are version 9: people hold accounts of how others have behaved, carry a hearsay total, grief for those who died,
+  any spell of illness and a record of the skills they learned from others, the world holds the village's proposals, and people hold keepsakes they were given and occasions worth celebrating, and the dead are recorded with their household and grave, so saves from before that are refused rather than
   half-loaded.
 
 * People now die of ordinary causes at realistic rates (illness, old age, childbirth), strength and fertility fade with age, and

@@ -350,6 +350,25 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
     },
   );
 
+  // keepsakes
+  const keepSec = deps.section('keepsakes', 'Keepsakes', 'Little things people made for them and gave them.');
+  const keepBox = h('div', { class: 'list' });
+  keepSec.body.append(keepBox);
+  const keepList = new KeyedList<PersonView['keepsakes'][number], WorryRow>(
+    keepBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, k) => {
+      r.who.set(k.from);
+      setText(r.what, ` gave them ${k.what}`);
+      setText(r.meta, k.when);
+    },
+  );
+
   // village matters
   const motionSec = deps.section('motions', 'Village matters', 'Proposals for communal buildings they have heard of, and what they make of them. A building is only marked out once enough people have agreed.');
   const motionBox = h('div', { class: 'list' });
@@ -419,7 +438,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   const soreList = new KeyedList<GrievanceView, QuarrelRow>(soreBox, () => makeQuarrelRow(deps), (r, g) => updateQuarrelRow(r, g));
 
   return {
-    els: [motionSec.el, learnSec.el, illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
+    els: [keepSec.el, motionSec.el, learnSec.el, illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
     update(v) {
       const talk = v.interaction ?? { current: null, previous: null };
       const hasTalk = !!(talk.current || talk.previous);
@@ -453,6 +472,11 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);
+
+      const keeps = v.keepsakes ?? [];
+      keepSec.setVisible(keeps.length > 0);
+      keepSec.setCount(keeps.length ? String(keeps.length) : '');
+      if (keeps.length && keepSec.isOpen()) keepList.sync(keeps, (k) => `${k.from}|${k.what}|${k.when}`);
 
       const motions = v.motions ?? [];
       motionSec.setVisible(motions.length > 0);

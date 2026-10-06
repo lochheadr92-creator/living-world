@@ -28,6 +28,7 @@ import { rebuildMobileGrid } from './registry';
 import { decayGrievances } from './grievance';
 import { decayGrief } from './grief';
 import { lapseProposals } from './council';
+import { fireTick } from './leisure';
 import { driftRelations } from './relations';
 import { bondWorkers, checkCommitments, flushDelayedBubbles, passingGreetings, updateConversations, updateRequests } from './social';
 import { resumeSuspended } from './activities';
@@ -80,6 +81,7 @@ export function stepWorld(world: World): void {
 
   // slow world processes
   if (tick % 120 === 31) lapseProposals(world);
+  if (tick % 120 === 53) fireTick(world);
   if (tick % LIFE_CHECK_EVERY === 17) for (const p of world.persons.slice()) if (p.alive) lifeTick(world, p);
   if (tick % CONCEPTION_CHECK_EVERY === 91) conceptionTick(world);
   if (tick % 300 === 151) clearStaleSites(world);

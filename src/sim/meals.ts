@@ -11,6 +11,7 @@ import { Scorer, addBlocked, addOption, beliefsByKind, eta, pen, spotNear, trait
 import { personById } from './registry';
 import { adjustRel } from './relations';
 import { onRemembranceMeal, remembering } from './grief';
+import { celebrating, leisureOn, occasionWords, onCelebrationMeal } from './leisure';
 import { hashUnit } from './rng';
 import type { Activity, Belief, FoodKind, Items, ItemKind, Meal, Person, World } from './types';
 import { stageOf } from './people';
@@ -141,7 +142,7 @@ export function mealOptions(ctx: Ctx): void {
     if (rel && rel.avoidUntil > world.tick) continue;
     const d = Math.hypot(s.x - p.x, s.y - p.y);
     if (d > 14) continue;
-    const score = aff * 0.1 + (s.hungry ? 3 : 0) - d * 0.15 + (sad && q.grief.some((x) => x.about === sad.about) ? 4 : 0);
+    const score = aff * 0.1 + (s.hungry ? 3 : 0) - d * 0.15 + (sad && q.grief.some((x) => x.about === sad.about) ? 4 : 0) + (!sad && celebrating(p, world.tick) && q.occasions.some((o) => o.about === celebrating(p, world.tick)!.about) ? 3 : 0);
     if (!best || score > best.s) best = { q, s: score };
   }
   if (!best) return;
@@ -151,6 +152,8 @@ export function mealOptions(ctx: Ctx): void {
     .add('walking', -pen(Math.hypot(q.x - p.x, q.y - p.y) * 6));
   if (place.hall) sc.add('a hall to eat in', 3);
   if (sad) sc.add(`wants company to remember ${sad.name}`, 8);
+  const party = !sad && leisureOn(world) ? celebrating(p, world.tick) : null;
+  if (party) sc.add(`wants to celebrate ${occasionWords(party)}`, 7);
   if (sc.total < 7) return;
   const s = ctx.seenPersons.find((x) => x.id === q.id)!;
   const e = (Math.hypot(s.x - p.x, s.y - p.y) * 1.18) / Math.max(0.03, ctx.speed);
@@ -371,6 +374,9 @@ export function inviteAsk(world: World, A: Person, B: Person, d: { mealId?: numb
     if (sad) {
       m.remembers = sad.name;
       m.remembersId = sad.about;
+    } else {
+      const occ = celebrating(A, world.tick);
+      if (occ) m.occasion = { kind: occ.kind, about: occ.about, name: occ.name };
     }
     world.meals.push(m);
     if (world.meals.length > 60) world.meals.splice(0, world.meals.length - 60);
@@ -481,7 +487,8 @@ function finishMeal(world: World, m: Meal): void {
     addLog(world, a, 'social', `Shared a meal at ${m.placeName} with ${ate.filter((x) => x !== a).map((x) => x.name).slice(0, 3).join(', ') || 'no one else'}.`);
   }
   if (host && m.remembers) onRemembranceMeal(world, m.remembers, m.remembersId ?? 0, ate, host);
-  if (host && ate.length >= 2 && !m.remembers) addEvent(world, 'social', `${host.name} hosted a shared meal at ${m.placeName}: ${ate.length} sat down together.`, ate.map((x) => x.id).slice(0, 4), m.x, m.y);
+  if (host && m.occasion) onCelebrationMeal(world, m.occasion, ate, host);
+  if (host && ate.length >= 2 && !m.remembers && !m.occasion) addEvent(world, 'social', `${host.name} hosted a shared meal at ${m.placeName}: ${ate.length} sat down together.`, ate.map((x) => x.id).slice(0, 4), m.x, m.y);
 }
 
 // ───────────────────────── upkeep ─────────────────────────

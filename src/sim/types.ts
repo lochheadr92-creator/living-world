@@ -224,6 +224,7 @@ export type ActivityKind =
   | 'host_meal'
   | 'visit'
   | 'mourn'
+  | 'play'
   | 'return_tool';
 
 export type PoseKind =
@@ -430,6 +431,10 @@ export interface Person {
   cartId: number;
   /** worries about people they have seen in need or been told about (bounded, each with its own provenance) */
   concerns: Concern[];
+  /** little things people made for them and gave them (not items: a record of the gift and who it was from; bounded) */
+  keepsakes: Keepsake[];
+  /** recent happy events in their circle that could be marked with a meal (bounded) */
+  occasions: Occasion[];
   /** skills they picked up from other people: who showed them, and how much it helped (bounded, newest last) */
   learned: LearnedSkill[];
   /** a serious spell of illness they are going through, if any: it runs its course, others can help, and it ends in recovery or death */
@@ -451,6 +456,22 @@ export interface InteractionRecord {
   /** how it came out, taken from the same exchange (a request's status, an apology's result…) */
   outcome: string;
   detail: string;
+}
+
+export interface Keepsake {
+  from: number;
+  tick: number;
+  what: string;
+}
+
+export type OccasionKind = 'birth' | 'coming_of_age' | 'partnership' | 'recovery';
+export interface Occasion {
+  kind: OccasionKind;
+  /** the person it is about (or the first of a pair) */
+  about: number;
+  /** how it reads: "Mira", "Ana and Ben" */
+  name: string;
+  tick: number;
 }
 
 export interface LearnedSkill {
@@ -855,7 +876,10 @@ export type ConvPurpose =
   | 'report'
   | 'mediate'
   | 'teach'
-  | 'motion';
+  | 'motion'
+  | 'challenge'
+  | 'present'
+  | 'call';
 
 export interface Conversation {
   id: number;
@@ -898,6 +922,8 @@ export interface Meal {
   /** a meal called by someone who is mourning, in memory of this person (name) */
   remembers?: string;
   remembersId?: number;
+  /** a meal held to mark something happy (see leisure.ts) */
+  occasion?: { kind: OccasionKind; about: number; name: string };
 }
 
 // ───────────────────────────── world ─────────────────────────────
@@ -963,6 +989,8 @@ export interface Settings {
   daysPerYear: number;
   /** communal buildings need the village's agreement first (true unless turned off, for comparison) */
   councils?: boolean;
+  /** the leisure life (fireside evenings, play, contests, keepsakes, calls, celebrations, jokes) is on unless turned off, for comparison */
+  leisure?: boolean;
   scene: SceneId;
 }
 export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care';

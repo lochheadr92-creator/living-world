@@ -214,6 +214,8 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     grief: [],
     illness: null,
     learned: [],
+    keepsakes: [],
+    occasions: [],
     lastExploreTick: -9999,
     stats: { gathered: 0, given: 0, received: 0, built: 0, talked: 0, farmed: 0, crafted: 0 },
     lastAteTick: world.tick,

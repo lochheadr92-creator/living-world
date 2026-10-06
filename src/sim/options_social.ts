@@ -1,10 +1,11 @@
 import { newActivity } from './activities';
-import { BUILD_DEF } from './constants';
+import { BUILD_DEF, DAY } from './constants';
+import { dayFraction } from './environment';
 import { pickFood } from './economy';
-import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
+import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods, whereIs } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
-import { isDependent, stageOf } from './people';
+import { ageYears, isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { wantsAmends } from './grievance';
 import { ACCOUNT_LIFE } from './reputation';
@@ -12,13 +13,14 @@ import { mournOptions } from './grief';
 import { SKILL_WORD, lessonFor } from './teaching';
 import { carriedForMe, knownProposal, turnedDownLately } from './council';
 import { facilityInitiative } from './production';
+import { GAME_WORDS, calm, celebrating, leisureOn, optFireside, optPlay } from './leisure';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
 import { hashUnit } from './rng';
 import { spark } from './relations';
-import { yearTicks } from './ageing';
+import { vigourOf, yearTicks } from './ageing';
 import type { Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
 import { clamp } from './util';
 
@@ -339,6 +341,86 @@ function optReconcile(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── leisure: contests, keepsakes, calling on friends ─────────────────────────
+const dayF = (tick: number): number => dayFraction(tick);
+
+/** Two friends with nothing to do may try each other at a race, a wrestle or a throw. */
+function optChallenge(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!leisureOn(world) || ctx.stage === 'child' || !calm(ctx) || p.illness || (p.cooldowns.contestAny ?? 0) > world.tick) return;
+  const f = dayF(world.tick);
+  if (f < 0.2 || f >= 0.84) return;
+  const tm = traitMods(p);
+  const age = ageYears(world, p);
+  if (vigourOf(world, p, age) < 0.6) return;
+  let best: { c: Cand; sc: Scorer } | null = null;
+  for (const c of candidates(ctx)) {
+    const qa = ageYears(world, c.q);
+    if (stageOf(world, c.q) === 'child' || c.q.illness || vigourOf(world, c.q, qa) < 0.55) continue;
+    if (c.aff < -5 || c.fam < 6 || p.relations[c.q.id]?.grievance || c.q.relations[p.id]?.grievance) continue;
+    if ((p.cooldowns['challenge' + c.q.id] ?? 0) > world.tick || (c.q.cooldowns.contestAny ?? 0) > world.tick || c.d > 12) continue;
+    const sc = new Scorer().add('a friendly contest', 4 + 6 * (1 - p.traits.caution) + 3 * p.traits.sociability).add('a friend', Math.max(0, c.aff) * 0.05).add('walking', -pen(c.d * 6));
+    if (sc.total < 9 || tm.social < 0.4) continue;
+    if (!best || sc.total > best.sc.total) best = { c, sc };
+  }
+  if (!best) return;
+  const game: 'race' | 'wrestle' | 'throw' = (['race', 'wrestle', 'throw'] as const)[Math.floor(hashUnit(p.id, best.c.q.id, world.tick >> 9) * 3)];
+  mkSocial(ctx, best.c, 'challenge', { game }, `Challenge ${best.c.q.name} to ${GAME_WORDS[game]}`, `to have ${GAME_WORDS[game]} with ${best.c.q.name}`, 'social', best.sc, 'play', ':' + game);
+}
+
+/** Someone with a spare piece of wood and a steady hand carves something for a person they care about. */
+function optPresent(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!leisureOn(world) || ctx.stage === 'child' || !calm(ctx) || (p.inv.wood ?? 0) < 1 || p.skills.craft < 0.95) return;
+  if (surplusOf(world, p, 'wood') < 1) return;
+  const f = dayF(world.tick);
+  if (f < 0.2 || f >= 0.84) return;
+  for (const c of candidates(ctx)) {
+    const kin = !!p.relations[c.q.id]?.kin || c.q.hhId === p.hhId;
+    if (!kin && c.aff < 25) continue;
+    if ((p.cooldowns['present' + c.q.id] ?? 0) > world.tick || c.d > 12) continue;
+    const sc = new Scorer().add('would like to make something for someone they care about', 4 + 7 * p.traits.generosity).add('walking', -pen(c.d * 6));
+    if (stageOf(world, c.q) === 'child') sc.add('a child', 4);
+    const occ = celebrating(p, world.tick);
+    if (occ && occ.about === c.q.id) sc.add('a happy occasion', 6);
+    if (sc.total < 9) continue;
+    mkSocial(ctx, c, 'present', { item: 'wood' }, `Give ${c.q.name} something you carved`, `to give ${c.q.name} a keepsake`, 'social', sc, 'gift');
+    break;
+  }
+}
+
+/** A friend who has not been seen for a while, and is known to be somewhere not far off, may be called on. */
+function optCallOn(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!leisureOn(world) || !calm(ctx) || p.illness) return;
+  const f = dayF(world.tick);
+  if (f < 0.25 || f >= 0.78) return;
+  const seen = new Set(ctx.seenPersons.map((s) => s.id));
+  let best: { c: Cand; sc: Scorer } | null = null;
+  for (const k in p.relations) {
+    const id = Number(k);
+    const r = p.relations[id];
+    if (seen.has(id) || (!r.kin && r.affinity < 25) || world.tick - r.lastMet < DAY * 0.5) continue;
+    if ((p.cooldowns['call' + id] ?? 0) > world.tick) continue;
+    const q = world.byId.get(id);
+    if (!q || q.ent !== 'person' || !q.alive || q.pose === 'sleep') continue;
+    const loc = whereIs(ctx, id, 0);
+    if (!loc) continue;
+    const d = Math.hypot(loc.x - p.x, loc.y - p.y);
+    if (d > 32) continue;
+    const e = eta(ctx, loc.x, loc.y);
+    // visiting is worth a walk: the walking cost counts for a third of what it does for chores
+    const sc = new Scorer().add('has not seen a friend for a while', 8 + 8 * p.traits.sociability + 0.08 * r.affinity).add('walking', -pen(e) * 0.35);
+    if (r.kin) sc.add('family', 2);
+    if (sc.total < 9) continue;
+    const c = { s: { id, ent: 'person', x: loc.x, y: loc.y } as unknown as SeenEntity, q, aff: r.affinity, fam: r.familiarity, d };
+    if (!best || sc.total > best.sc.total) best = { c, sc };
+  }
+  if (!best) return;
+  const target = best.c.q;
+  mkSocial(ctx, best.c, 'call', {}, `Call on ${target.name}`, `to call on ${target.name}`, 'social', best.sc, 'social');
+}
+
 // ───────────────────────── putting an idea to people ─────────────────────────
 /**
  * Someone who wants a communal building puts the idea to the people they meet, and takes their answers as they come. It is the
@@ -540,6 +622,11 @@ export function socialOptions(ctx: Ctx): void {
   optMediate(ctx);
   optTeach(ctx);
   optMotion(ctx);
+  optChallenge(ctx);
+  optPresent(ctx);
+  optCallOn(ctx);
+  optFireside(ctx);
+  optPlay(ctx);
   mournOptions(ctx);
   optRecruit(ctx);
   optPropose(ctx);
