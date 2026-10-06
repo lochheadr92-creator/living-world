@@ -256,12 +256,15 @@ registerHandler('cart_haul', {
       if (!c) return 'fail:the place is gone';
       const want = a.data.items as Record<string, number>;
       let moved = 0;
+      // what is being carried to a building site may include goods that were being held for that very site
+      const bound = world.byId.get(a.data.toId as number);
+      const forSite = bound && bound.ent === 'site' ? bound.id : 0;
       for (const k of Object.keys(want)) {
         let n = want[k];
-        if (c.ent && c.ent.ent === 'building') n = withdrawAllowance(world, c.ent, p, k as ItemKind, n);
+        if (c.ent && c.ent.ent === 'building') n = withdrawAllowance(world, c.ent, p, k as ItemKind, n, forSite);
         if (n <= 0) continue;
         const m = transfer(world, c.items, cart.load, cart.cap, k as ItemKind, n, (c.ent ? c.ent.ent : 'pile') + ':' + a.data.fromId, 'cart:' + cart.id, 'loaded onto cart');
-        if (m > 0 && c.ent && c.ent.ent === 'building') noteWithdraw(world, c.ent, p, k as ItemKind, m);
+        if (m > 0 && c.ent && c.ent.ent === 'building') noteWithdraw(world, c.ent, p, k as ItemKind, m, forSite);
         moved += m;
       }
       const e = world.byId.get(a.data.fromId as number);

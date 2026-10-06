@@ -8,6 +8,7 @@ import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeli
 import type { Ctx } from './optutil';
 import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, weatherMult } from './options_work';
 import { projectLimit, projectsUnderWay } from './act_build';
+import { takeableUnits } from './facilities';
 import { RECIPES, RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -66,6 +67,22 @@ function knowsOfAny(ctx: Ctx, type: BuildingType): boolean {
 
 const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
 
+/**
+ * How much of a workplace's shelf this person believes they could take away: what was there when they last looked, less whatever was
+ * being held for somebody else, plus goods held for the very site they are delivering to. A friend of the owners may work there but
+ * only takes what is theirs. (This is the same arithmetic as the real rule, applied to a memory; see `takeableUnits`.)
+ */
+function believedTakeable(ctx: Ctx, b: Belief, item: ItemKind, forSite: number): number {
+  const stock = stockAt(b, item);
+  const snap = b.ops;
+  if (!snap || stock <= 0) return stock;
+  const { world, p } = ctx;
+  const real = world.byId.get(b.id);
+  const builtIt = real && real.ent === 'building' ? (real.ops?.builders[p.hhId] ?? 0) >= 0.2 : false;
+  const open = b.hh === 0 || b.hh === p.hhId || builtIt;
+  return takeableUnits(stock, item, snap.claims ?? [], (c) => c.site, world.tick, p.id, open, forSite);
+}
+
 function belief(ctx: Ctx, id: number): Belief | undefined {
   return ctx.p.beliefs[id];
 }
@@ -82,7 +99,7 @@ function nameOf(b: Belief): string {
 }
 
 /** Go and take stock out of a store, a workplace's shelves or a heap. */
-function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = []): void {
+function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], forSite = 0): void {
   const { world, p } = ctx;
   if (recentFailure(world, p, b.id, 320)) {
     addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items)}`, b.id, `tried recently and found none to take`, tag);
@@ -122,7 +139,7 @@ function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
         utility: util,
         minCommit: 30,
         maxTicks: 700,
-        data: { items },
+        data: forSite ? { items, forSite } : { items },
       });
     },
   });
@@ -358,7 +375,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
 }
 
 // ───────────────────────── supply: how to get hold of something ─────────────────────────
-function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: number, why: string, tag: string, dest: Belief | null): number {
+function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: number, why: string, tag: string, dest: Belief | null, forSite = 0): number {
   if (item === 'cart') return 0;
   const { world, p } = ctx;
   const found: { b: Belief; n: number; e: number }[] = [];
@@ -373,8 +390,11 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
         n = Math.min(n, share);
       } else if (b.btype && isFacilityType(b.btype as BuildingType)) {
         if (!mayUseBelief(ctx, b)) continue;
-        // a batch of mine that will be ready by the time I arrive counts
+        // goods that were being held for somebody when this was last seen are not there for the taking — unless they are held for the
+        // very site this is for, which is what the claim was made for
+        n = believedTakeable(ctx, b, item, forSite);
         const snap = b.ops;
+        // a batch of mine that will be ready by the time I arrive counts
         if (snap && snap.job && snap.client === p.id && snap.readyAt <= world.tick + eta(ctx, b.x, b.y) + 60) n += unitsOf(snap.yields[item]);
       } else if (b.btype === 'storehouse') {
         // everyone's
@@ -396,7 +416,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
   for (const f of found.slice(0, 2)) {
     const take = Math.min(f.n, Math.max(1, Math.ceil(unmet)), invRoom(ctx.world, p, item as ItemKind));
     if (take < 1) continue;
-    collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag);
+    collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag, [], forSite);
   }
   return total;
 }
@@ -408,7 +428,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   const unmet = qty - have;
   if (unmet <= 0) return;
   let remaining = unmet;
-  if (item !== 'tend') remaining = unmet - collectOptions(ctx, item, unmet, base, why, tag, dest);
+  if (item !== 'tend') remaining = unmet - collectOptions(ctx, item, unmet, base, why, tag, dest, siteId);
   // what is already standing on somebody's shelves counts: no one makes more of what is already there
   if (remaining <= 0) return;
   if (item !== 'cart' && item !== 'tend') {
@@ -689,7 +709,7 @@ function optCartHaul(ctx: Ctx): void {
       const load: Items = {};
       let w = 0;
       for (const k of kinds) {
-        const n = Math.min(unitsOf(need[k]), stockAt(src, k));
+        const n = Math.min(unitsOf(need[k]), src.kind === 'building' && src.btype && isFacilityType(src.btype as BuildingType) ? believedTakeable(ctx, src, k, site.id) : stockAt(src, k));
         if (n <= 0) continue;
         const room = Math.floor((cartEnt.cap - w) / WEIGHT[k]);
         const take = Math.min(n, room);

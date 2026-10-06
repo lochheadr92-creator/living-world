@@ -139,7 +139,13 @@ export function describeFacility(world: World, b: Building): Section[] {
   const stock: ItemRow[] = [];
   for (const k of Object.keys(b.store.items) as ItemKind[]) if ((b.store.items[k] ?? 0) > 0) stock.push({ kind: k, n: b.store.items[k] ?? 0 });
   const stockNotes: string[] = [`${Math.round(weightOf(b.store.items))}/${b.store.cap} of the store used.`];
-  for (const e of ops.earmarks) if (e.until > world.tick && e.n > 0) stockNotes.push(`${e.n} ${label(e.item)} ${e.kind === 'out' ? 'set aside for' : 'brought by'} ${nameOf(world, e.owner)} (${e.reason || '—'}), held ${inFuture(world, e.until)}.`);
+  for (const e of ops.earmarks) {
+    if (e.until <= world.tick || e.n <= 0) continue;
+    // goods ordered for a building site may be taken there by anyone who is bringing materials to that same site
+    const site = e.destSite ? world.byId.get(e.destSite) : undefined;
+    const goesTo = e.kind === 'out' && site && site.ent === 'site' ? `; anyone bringing materials to the ${BUILD_DEF[site.type].label} site may take them there` : '';
+    stockNotes.push(`${e.n} ${label(e.item)} ${e.kind === 'out' ? 'set aside for' : 'brought by'} ${nameOf(world, e.owner)} (${e.reason || '—'}), held ${inFuture(world, e.until)}${goesTo}.`);
+  }
   if (b.type === 'granary') {
     for (const hid of Object.keys(ops.shares)) {
       const sh = ops.shares[Number(hid)];

@@ -93,6 +93,13 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
   what they make is held for them for a day and a half, after which it becomes the workplace's own stock.
 * **Contested inputs.** Inputs on the shelves are a shared pool among those allowed to use them; whoever starts the batch
   first (see "the contested-claim rule") takes them. A second person is told what is missing.
+* **Held goods.** What a batch makes is held for the person who ordered it for a day and a half. When it was ordered for a
+  building site the claim remembers the site, and anyone who is taking materials to *that very site* may take the goods on the
+  owner's behalf (the claim was made for the site, not for anyone's own use); what they take comes out of the claim. For any
+  other purpose the claim holds, owners included. What a person believes of a workplace includes who was holding what when
+  they last looked, so nobody is sent to collect goods they could not take — and a friend of the owners, who may work at a
+  private workshop but not carry its stock away, is not sent either. The arithmetic for all of this is one function
+  (`takeableUnits` in `sim/facilities.ts`), used by the real rule and by the planner alike.
 * **Repairs.** Every building decays and is mended with its own material where it has one (planks for a house, granary or
   hall; bricks for a kiln, smithy or bakery), or with plain wood at a smaller gain. Common workplaces are kept up by those
   who use them.
@@ -262,6 +269,12 @@ depends only on the tick and the population, so a run is reproducible.
 
 ## Rule changes made on purpose (relative to the version before this work)
 
+* Goods made at a workplace for a building site are held for that site as well as for whoever ordered them, and the planner
+  knows what is held. Before, every plank held for somebody's granary looked free to the whole settlement: in 20-day runs of
+  `meadow` and `fern` about half of all trips to collect from a workshop failed (187 of 357 and 163 of 322), and 93–94% of those
+  failures were at goods held for somebody else (fourteen different people walked to the yard for the same single plank). After:
+  7 of 176 and 15 of 324, one of them at goods held for another person. These are single runs of two seeds, measured by
+  watching withdraw trips in a headless run; the worlds differ after the change, so they are not the same trajectories.
 * Grain, flour and bread spoil in ordinary stores and heaps (grain did not before); the granary exists to slow it.
 * A site limit of four homes/fires/storehouse at a time, with separate allowances for improvement projects.
 * Promise deadlines are 1800 ticks (were 1200 or 1400), exclude sleep and survival time, and end in six distinct ways.

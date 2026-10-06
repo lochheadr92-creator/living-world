@@ -123,6 +123,8 @@ export interface FacilitySnapshot {
   client: number;
   /** granary: when the bins were last tended */
   tended: number;
+  /** goods on the shelves that were being held for somebody when this was seen (absent in older saves: nothing was known to be held) */
+  claims?: ClaimSnapshot[];
 }
 
 export interface Relation {
@@ -544,6 +546,18 @@ export interface Earmark {
   owner: number;
   until: number;
   reason: string;
+  /** the building site the batch was ordered for, if any: whoever is bringing goods to that very site may take them on the owner's behalf */
+  destSite?: number;
+}
+
+/** What an observer remembers of one claim on a workplace's stock (a snapshot, like everything else a person believes). */
+export interface ClaimSnapshot {
+  item: ItemKind;
+  n: number;
+  owner: number;
+  until: number;
+  /** the site it is held for (0 = none in particular) */
+  site: number;
 }
 
 export interface FacilityState {

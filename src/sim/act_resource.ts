@@ -543,12 +543,12 @@ registerHandler('withdraw', {
     const e = world.byId.get(a.targetId);
     for (const k of Object.keys(want)) {
       let n = want[k];
-      if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n);
+      if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n, (a.data.forSite as number | undefined) ?? 0);
       if (n <= 0) continue;
       const m = transfer(world, c.items, p.inv, carryCap(world, p), k as ItemKind, n, c.kind + ':' + a.targetId, 'person:' + p.id, 'withdraw');
       moved += m;
       if (m > 0 && e && e.ent === 'building') {
-        noteWithdraw(world, e, p, k as ItemKind, m);
+        noteWithdraw(world, e, p, k as ItemKind, m, (a.data.forSite as number | undefined) ?? 0);
         if (isToolItem(k as ItemKind)) borrowFromRack(world, p, k as ToolKind, m);
       }
     }
