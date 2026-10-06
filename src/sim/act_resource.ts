@@ -25,7 +25,7 @@ import type { ToolTask } from './tools';
 import { adjustRel } from './relations';
 import { contestLost, creditContribution, fulfillCommitment } from './social';
 import { fellTree } from './sources';
-import { distToFootprint, isWater } from './registry';
+import { distToFootprint, isWater, isWell } from './registry';
 import { isToolItem } from './toolreg';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp } from './util';
@@ -48,6 +48,8 @@ function toolTask(s: Source): ToolTask | null {
     case 'fruit_tree':
     case 'wild_grain':
       return 'forage';
+    case 'fish_spot':
+      return 'fish';
     default:
       return null;
   }
@@ -351,6 +353,7 @@ registerHandler('fetch_water', {
     }
     a.data.wx = w.x;
     a.data.wy = w.y;
+    a.data.well = isWell(world, Math.floor(w.x), Math.floor(w.y)) ? 1 : 0;
     a.duration = WORK.water;
     a.progress = 0;
   },
@@ -361,7 +364,7 @@ registerHandler('fetch_water', {
     faceToward(p, a.data.wx, a.data.wy, 3);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
-    const got = produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
+    const got = produce(world, p.inv, carryCap(world, p), 'water', 1, a.data.well ? 'water drawn from the well' : 'water drawn from the lake');
     if (got <= 0) return a.cycle > 0 ? 'partial:cannot carry more' : 'fail:cannot carry more';
     addFx(world, 'splash', a.data.wx, a.data.wy, 0);
     a.cycle++;
@@ -543,12 +546,12 @@ registerHandler('withdraw', {
     const e = world.byId.get(a.targetId);
     for (const k of Object.keys(want)) {
       let n = want[k];
-      if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n);
+      if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n, (a.data.forSite as number | undefined) ?? 0);
       if (n <= 0) continue;
       const m = transfer(world, c.items, p.inv, carryCap(world, p), k as ItemKind, n, c.kind + ':' + a.targetId, 'person:' + p.id, 'withdraw');
       moved += m;
       if (m > 0 && e && e.ent === 'building') {
-        noteWithdraw(world, e, p, k as ItemKind, m);
+        noteWithdraw(world, e, p, k as ItemKind, m, (a.data.forSite as number | undefined) ?? 0);
         if (isToolItem(k as ItemKind)) borrowFromRack(world, p, k as ToolKind, m);
       }
     }

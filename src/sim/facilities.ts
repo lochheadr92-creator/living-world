@@ -50,31 +50,44 @@ function houseStockOpen(level: AccessLevel): boolean {
 }
 
 // ───────────────────────── stock accounting inside a workplace ─────────────────────────
-function liveEarmarks(world: World, ops: FacilityState): Earmark[] {
-  return ops.earmarks.filter((e) => e.until > world.tick && e.n > 0);
+/**
+ * How many of `have` units of `item` a person can count on, given who has a claim on the shelf: their own claims, whatever nobody has
+ * claimed (when the stock is open to them), and goods being held for the very building site they are delivering to — a claim made
+ * "for the granary" is met by anyone who is taking the goods to the granary, because that is what it was made for.
+ *
+ * This is the one place the arithmetic lives. The real stock (`usableUnits`) and what a person believes of a workplace they have
+ * seen (the planner in production.ts) both use it, so the plan and the rule cannot drift apart.
+ */
+export function takeableUnits<T extends { item: ItemKind; n: number; owner: number; until: number }>(
+  have: number,
+  item: ItemKind,
+  claims: readonly T[],
+  siteOf: (c: T) => number,
+  now: number,
+  personId: number,
+  open: boolean,
+  forSite: number,
+): number {
+  let mine = 0;
+  let total = 0;
+  let forThat = 0;
+  for (const c of claims) {
+    if (c.item !== item || c.until <= now || c.n <= 0) continue;
+    total += c.n;
+    if (c.owner === personId) mine += c.n;
+    else if (forSite && siteOf(c) === forSite) forThat += c.n;
+  }
+  const free = Math.max(0, have - total);
+  return Math.min(have, Math.min(have, mine) + (open ? free : 0) + forThat);
 }
 
-function earmarkedTotal(world: World, ops: FacilityState, item: ItemKind): number {
-  let n = 0;
-  for (const e of liveEarmarks(world, ops)) if (e.item === item) n += e.n;
-  return n;
-}
-
-function earmarkedTo(world: World, ops: FacilityState, item: ItemKind, owner: number): number {
-  let n = 0;
-  for (const e of liveEarmarks(world, ops)) if (e.item === item && e.owner === owner) n += e.n;
-  return n;
-}
-
-/** How many units of `item` in this store this person may take or use right now. */
-export function usableUnits(world: World, b: Building, p: Person, item: ItemKind): number {
+/** How many units of `item` in this store this person may take or use right now (`forSite`: they are taking it to that building site). */
+export function usableUnits(world: World, b: Building, p: Person, item: ItemKind, forSite = 0): number {
   const have = b.store.items[item] ?? 0;
   const ops = b.ops;
   if (!ops) return have;
   const level = accessLevel(world, p, b);
-  const mine = Math.min(have, earmarkedTo(world, ops, item, p.id));
-  const free = Math.max(0, have - earmarkedTotal(world, ops, item));
-  return Math.min(have, mine + (houseStockOpen(level) ? free : 0));
+  return takeableUnits(have, item, ops.earmarks, (c) => c.destSite ?? 0, world.tick, p.id, houseStockOpen(level), forSite);
 }
 
 /** Take `n` units of `item` for a person's use from the store, earmarked units first. */
@@ -99,11 +112,15 @@ export function addEarmark(world: World, b: Building, e: Omit<Earmark, 'until'> 
   const ops = opsOf(b);
   if (!ops) return;
   const until = world.tick + (e.term ?? EARMARK_TERM);
-  const found = ops.earmarks.find((x) => x.kind === e.kind && x.item === e.item && x.owner === e.owner && x.until > world.tick);
+  const found = ops.earmarks.find((x) => x.kind === e.kind && x.item === e.item && x.owner === e.owner && x.until > world.tick && (x.destSite ?? 0) === (e.destSite ?? 0));
   if (found) {
     found.n += e.n;
     found.until = until;
-  } else ops.earmarks.push({ kind: e.kind, item: e.item, n: e.n, owner: e.owner, until, reason: e.reason });
+  } else {
+    const mark: Earmark = { kind: e.kind, item: e.item, n: e.n, owner: e.owner, until, reason: e.reason };
+    if (e.destSite) mark.destSite = e.destSite;
+    ops.earmarks.push(mark);
+  }
 }
 
 function expireEarmarks(world: World, ops: FacilityState): void {
@@ -156,7 +173,7 @@ export function noteDeposit(world: World, b: Building, p: Person, item: ItemKind
 }
 
 /** How many units this person may take out of the building's store. */
-export function withdrawAllowance(world: World, b: Building, p: Person, item: ItemKind, want: number): number {
+export function withdrawAllowance(world: World, b: Building, p: Person, item: ItemKind, want: number, forSite = 0): number {
   const ops = b.ops;
   const have = b.store.items[item] ?? 0;
   if (!ops) return Math.min(want, have);
@@ -170,7 +187,7 @@ export function withdrawAllowance(world: World, b: Building, p: Person, item: It
   if (b.type === 'hall') return Math.min(want, have, accessLevel(world, p, b) === 'none' ? 0 : have);
   const lvl = accessLevel(world, p, b);
   if (lvl === 'none') return 0;
-  return Math.min(want, usableUnits(world, b, p, item));
+  return Math.min(want, usableUnits(world, b, p, item, forSite));
 }
 
 function hasHungryDependent(world: World, p: Person): boolean {
@@ -178,7 +195,7 @@ function hasHungryDependent(world: World, p: Person): boolean {
 }
 
 /** Called after a person has taken goods out. Keeps earmarks and granary shares in step. */
-export function noteWithdraw(world: World, b: Building, p: Person, item: ItemKind, n: number): void {
+export function noteWithdraw(world: World, b: Building, p: Person, item: ItemKind, n: number, forSite = 0): void {
   const ops = b.ops;
   if (!ops || n <= 0) return;
   if (b.type === 'granary') {
@@ -219,6 +236,17 @@ export function noteWithdraw(world: World, b: Building, p: Person, item: ItemKin
       const t = Math.min(e.n, left);
       e.n -= t;
       left -= t;
+    }
+  }
+  // goods taken to the site they were being held for come out of that claim: the person who ordered them is spared the trip
+  if (forSite) {
+    for (const e of ops.earmarks) {
+      if (left <= 0) break;
+      if (e.item === item && e.owner !== p.id && e.destSite === forSite && e.until > world.tick) {
+        const t = Math.min(e.n, left);
+        e.n -= t;
+        left -= t;
+      }
     }
   }
   ops.earmarks = ops.earmarks.filter((e) => e.n > 0);
@@ -553,7 +581,7 @@ export function finishJob(world: World, b: Building): boolean {
     if (n > 0) {
       addItem(b.store.items, r.fromDeposit.item, n);
       bump(ops.produced, r.fromDeposit.item, n);
-      if (client) addEarmark(world, b, { kind: 'out', item: r.fromDeposit.item, n, owner: client, reason: job.purpose });
+      if (client) addEarmark(world, b, { kind: 'out', item: r.fromDeposit.item, n, owner: client, reason: job.purpose, destSite: job.destSite });
     }
     delete job.held[r.fromDeposit.item];
   }
@@ -565,14 +593,14 @@ export function finishJob(world: World, b: Building): boolean {
     addItem(b.store.items, k, n);
     ledgerCreate(world, k, n, `made ${r.label}`);
     bump(ops.produced, k, n);
-    if (client) addEarmark(world, b, { kind: 'out', item: k, n, owner: client, reason: job.purpose });
+    if (client) addEarmark(world, b, { kind: 'out', item: k, n, owner: client, reason: job.purpose, destSite: job.destSite });
   }
   if (r.toolOut) {
     const ownerHh = clientP ? clientP.hhId : b.hhId;
     const maker = Object.keys(job.workers).map(Number).sort((x, y) => (job.workers[y] ?? 0) - (job.workers[x] ?? 0))[0] ?? 0;
     mintTool(world, r.toolOut.kind, r.toolOut.tier, ownerHh, b.id, b.store.items, maker, `made ${r.label}`);
     bump(ops.produced, r.toolOut.kind, 1);
-    if (client) addEarmark(world, b, { kind: 'out', item: r.toolOut.kind, n: 1, owner: client, reason: job.purpose });
+    if (client) addEarmark(world, b, { kind: 'out', item: r.toolOut.kind, n: 1, owner: client, reason: job.purpose, destSite: job.destSite });
   }
   if (r.cartOut) {
     const ownerHh = clientP ? clientP.hhId : b.hhId;
@@ -654,6 +682,10 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
     readyAt: job ? (job.phase === 'burn' ? world.tick + job.burnLeft : job.phase === 'ready' ? world.tick : world.tick + Math.max(0, job.total - job.progress) + job.burnTotal) : 0,
     client: job ? job.client : 0,
     tended: ops.tended,
+    claims: ops.earmarks
+      .filter((e) => e.until > world.tick && e.n > 0)
+      .slice(0, 12)
+      .map((e) => ({ item: e.item, n: e.n, owner: e.owner, until: e.until, site: e.destSite ?? 0 })),
   };
 }
 

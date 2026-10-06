@@ -87,7 +87,7 @@ export function shareConcerns(world: World, S: Person, L: Person): number {
 function suppliesFor(world: World, p: Person, kind: Concern['kind']): Items | null {
   const items: Items = {};
   if (kind === 'hungry' || kind === 'hurt') {
-    for (const k of ['bread', 'fish', 'fruit', 'grain', 'berries'] as ItemKind[]) {
+    for (const k of ['bread', 'smoked_fish', 'fish', 'fruit', 'grain', 'berries'] as ItemKind[]) {
       const sur = surplusOf(world, p, k);
       if (sur >= 1) {
         items[k] = Math.min(sur, 2);

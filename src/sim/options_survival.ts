@@ -23,6 +23,7 @@ import {
 } from './optutil';
 import type { Ctx } from './optutil';
 import type { Belief, SourceType } from './types';
+import { spearOf } from './wildlife';
 import { WORK } from './constants';
 
 const FOOD_KINDS = ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'] as const;
@@ -64,7 +65,8 @@ function optFlee(ctx: Ctx): void {
     if (b.type === 'fire' && b.fuel > 0 && Math.hypot(b.x + 0.5 - p.x, b.y + 0.5 - p.y) < 5.5) atFire = true;
     if (isSolidHome(b.type) && Math.hypot(b.x + b.w / 2 - p.x, b.y + b.h / 2 - p.y) < 2.8) atHut = true;
   }
-  if ((near >= 2 || atFire || atHut) && td > 3.5) return;
+  // someone with a spear is as good as two: one companion is company enough to stand their ground
+  if ((near >= (spearOf(world, p) ? 1 : 2) || atFire || atHut) && td > 3.5) return;
 
   // choose a refuge among places they know about
   let best: { x: number; y: number; score: number; what: string } | null = null;

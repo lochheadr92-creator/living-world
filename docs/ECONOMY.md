@@ -42,6 +42,7 @@ outcrop ── stone (quarry, 3 at a time; or by hand from small rocks) ── b
 clay pit ── clay ── bricks (kiln 4→3) ── house, bakery, smithy ;  clay ── water jar (kiln 3→1)
 ore vein ── ore ── iron (smithy: 3 ore + 2 charcoal → 1 iron) ── iron axe / pickaxe / hoe / saw / hammer
 field ── grain ── flour (bakery 4→3) ── bread (3 flour + 2 water + 1 wood → 4 loaves) ── meals, caring, hunger
+fish spot ── fish (by hand; a fishing rod makes it faster) ── smoked fish (smokehouse: 4 fish + 1 wood → 3) ── meals, caring, hunger
 ```
 
 Every arrow is a recipe in `recipes.ts`. There are no circular dependencies (a test walks the graph) and every chain can
@@ -93,6 +94,13 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
   what they make is held for them for a day and a half, after which it becomes the workplace's own stock.
 * **Contested inputs.** Inputs on the shelves are a shared pool among those allowed to use them; whoever starts the batch
   first (see "the contested-claim rule") takes them. A second person is told what is missing.
+* **Held goods.** What a batch makes is held for the person who ordered it for a day and a half. When it was ordered for a
+  building site the claim remembers the site, and anyone who is taking materials to *that very site* may take the goods on the
+  owner's behalf (the claim was made for the site, not for anyone's own use); what they take comes out of the claim. For any
+  other purpose the claim holds, owners included. What a person believes of a workplace includes who was holding what when
+  they last looked, so nobody is sent to collect goods they could not take — and a friend of the owners, who may work at a
+  private workshop but not carry its stock away, is not sent either. The arithmetic for all of this is one function
+  (`takeableUnits` in `sim/facilities.ts`), used by the real rule and by the planner alike.
 * **Repairs.** Every building decays and is mended with its own material where it has one (planks for a house, granary or
   hall; bricks for a kiln, smithy or bakery), or with plain wood at a smaller gain. Common workplaces are kept up by those
   who use them.
@@ -103,6 +111,18 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
   longer they spoil more than twice as fast as an ordinary store.
 * **Hall.** The hall is where shared meals are held and where news travels among whoever is sitting there (one telling at a
   time, only between people actually present). It gives shelter. It does not broadcast anything.
+* **Well.** A 1 × 1 building (4 wood, 8 stone) that makes nothing and stores nothing: it is water. A finished well is water
+  to everything that looks for water — the same drinking and jar-filling activities, the same choice of where to go, ranked
+  by the walk, by danger and by being driven off — and the ground round it is shore. It belongs to everyone, is raised as a
+  shared project, there is only ever one, and it is mended with stone. It is wanted by someone whose home is a long way (9 tiles
+  or more) from the nearest water they know of, or who has lately been driven off the shore, and is laid out in the middle of
+  the village at least six tiles from the lake (a well beside the lake would save nobody a walk). Water drawn from it is
+  entered in the books as `water drawn from the well`.
+* **Smokehouse.** Four fresh fish and a stick of wood become three smoked fish and one fish's worth of waste (water driven
+  off, bones); a practised fisher gets through a batch faster. Fresh fish goes off at 1.6 times the berry rate; smoked fish
+  at 0.2 (about the rate of grain), weighs a third less and restores a little more. It is wanted when more fresh fish is
+  held than will be eaten soon, and is laid out only after the first week or so, by somebody who knows a timber yard and a
+  fish spot and holds spare fish. Like the other workplaces it is neither guaranteed nor immediate.
 
 ## Tools
 
@@ -111,9 +131,19 @@ in step by every transfer. It is never conjured: hand-making and forging record 
 consumed.
 
 * **Effects** are task-specific: axe (felling, and hewing planks), pickaxe (rock, clay, ore, outcrops, quarry), hoe (till/tend), basket
-  (picking, carrying), hammer (construction and repair speed; required for forging and for building a cart), saw (planks with
+  (picking, carrying), fishing rod (catching fish: 0.6 of the time), hammer (construction and repair speed; required for forging and for building a cart), saw (planks with
   little waste; required for sawing), water jar (carries four units of water without adding to the load). With no tool the
   task is simply slower.
+* **The spear** does no task. To a wolf, a grown person (not a child or an elder) who is awake and carries a sound spear counts as
+  two people: wolves keep away from groups, so one companion is enough to be safe where two would be needed, and a stalking wolf
+  that would have come on turns back when it comes within a few strides. Each wolf turned away wears the spear (about as much as
+  a hundred ticks of work, so it lasts a couple of dozen). A sleeper's spear is no help. Someone armed also stands their ground
+  with one companion beside them instead of running. People want one after being bitten, or after running from wolves twice in a
+  day or so (a chase counts once however often the running is begun again; the memory of a fright halves each day), and the more
+  often it has happened the more they will put making one before ordinary work, up to a limit; it is made by hand from three
+  wood (a long pole, sharpened and hardened in the fire). Nothing here draws a random number. The wolf rules change only for
+  someone who carries a spear: with nobody ever wanting one, eight 30-day worlds played out exactly as they did before the spear
+  was added. Wanting one does change a world, since people who have been frightened gather wood for it.
 * **Wear.** Use wears a tool a little per tick (iron half as much); past 70% wear the benefit fades, and at 100% it breaks
   (recorded: `-tool worn out`). A fitted handle restores more wear than a stick of wood when a tool is mended.
 * **Iron** tools are quicker and wear half as fast; they are forged only at a smithy.
@@ -262,7 +292,44 @@ depends only on the tick and the population, so a run is reproducible.
 
 ## Rule changes made on purpose (relative to the version before this work)
 
+* Goods made at a workplace for a building site are held for that site as well as for whoever ordered them, and the planner
+  knows what is held. Before, every plank held for somebody's granary looked free to the whole settlement: in 20-day runs of
+  `meadow` and `fern` about half of all trips to collect from a workshop failed (187 of 357 and 163 of 322), and 93–94% of those
+  failures were at goods held for somebody else (fourteen different people walked to the yard for the same single plank). After:
+  7 of 176 and 15 of 324, one of them at goods held for another person. These are single runs of two seeds, measured by
+  watching withdraw trips in a headless run; the worlds differ after the change, so they are not the same trajectories.
 * Grain, flour and bread spoil in ordinary stores and heaps (grain did not before); the granary exists to slow it.
+* A fishing rod, a smokehouse and smoked fish exist (fish was the one food with no way to keep it). Measured, not assumed: in four
+  30-day runs (`meadow`, `river`, `fern`, `aspen`) the first rods were in stock by day 2–6, the first smoked fish on day 14, 19,
+  21 and 13, and from then on smoked fish was in stock at every daily sample to day 30; no one died and the books balanced in all
+  four. Fish was not much of a waste problem to begin with — in 25-day runs of the same four worlds before the change about a
+  tenth of the fish caught spoiled (79 of 714, 32 of 428, 93 of 676, 66 of 650: 11% in all; `scripts/fishwaste.ts` on the code
+  just before the smokehouse) — so what the smokehouse adds is food that keeps and weighs less, not a large cut in spoilage. A new
+  building kind must be added **last** in `BUILD_DEF`: the order of its keys salts the per-building hashes
+  (`tests/smoking.test.ts` keeps it honest).
+* A well exists (`scripts/waterwalk.ts` measures the walk, `scripts/wellgeo.ts` the placement). Before it, in 30-day runs of
+  `meadow` and `fern` (ordinary and harsh), the one-way walk to a drinking place took 5.2–5.7% of everybody's time, the median
+  walk was 8–10 tiles and the longest 29–48, and in the two harsh worlds most of the people whose thirst was critical were still
+  walking to the water (133 of 173 samples in `fern`, 74 of 88 in `meadow`). With the well, in the same four runs (built on day
+  9–12): 3.8–4.8% of time, a median of 5.1–8.0 tiles (the longest walk 28–38, little changed), and 130 and 71 critical-thirst
+  samples instead of 173 and 88. These are single runs of each world, and the worlds differ once the well stands, so this is what
+  happened and not a controlled difference. It saves a walk only to the people it is nearer to than the lake: it stands near the
+  camp and at least six tiles from the water, and in four ordinary worlds (`meadow`, `river`, `fern`, `aspen`) it was nearer than
+  the shore to 17 of 21, 9 of 23, 11 of 23 and 12 of 31 homes. Centring it on the homes that are far from the water was tried and
+  put it where fewer homes were nearer to it than to the lake, so it stays at the camp.
+* Making a tool no longer fails for want of room that its own materials would free. The pack was checked for room for the finished
+  tool before the wood and stone it is made from were taken out of it, so someone carrying a full load of that wood was refused
+  ("no room to carry it") and the gathering, the walk and the work were wasted. In four 30-day harsh worlds (`scripts/toolmaking.ts`)
+  101 attempts ended in a tool or in that refusal and 60 of them were the refusal (40 of 59 baskets); after the change 68 tools were
+  made in the same four worlds and none was refused for room.
+* A spear exists (`scripts/wolfwatch.ts` counts what the wolves cost). Before it, sixteen ordinary worlds of 30 days had 7.3 wolf
+  bites each on average (0–20) and ten harsh worlds of 40 days 17.5 (7–32; the original code); people began to run from a wolf
+  about 260 times in an ordinary world. With the spear, and everything else in this record, the ordinary worlds made 23 spears (in
+  ten of the sixteen worlds, the first on day 2 to day 29) and spears turned a wolf away 11 times, and the harsh worlds made five
+  (in four of the ten) and turned a wolf away three times. Did the spears cut the bites? The same code in which nobody ever wants a
+  spear had 81 bites in all in the sixteen ordinary worlds against 77 with them (a difference of 0.25 a world, standard error
+  0.35): no measurable difference. What the spear changes is a rule (a grown person who is awake and carries one counts as two to a
+  wolf, `tests/spear.test.ts`) and what someone who has been in trouble does about it.
 * A site limit of four homes/fires/storehouse at a time, with separate allowances for improvement projects.
 * Promise deadlines are 1800 ticks (were 1200 or 1400), exclude sleep and survival time, and end in six distinct ways.
 * A trade is declined, not attempted, when either pack cannot take what it would be given.
@@ -313,7 +380,7 @@ projects stay off, so a staged scene never grows more than was staged.
 
 ## Limits worth knowing
 
-* There is still one settlement, one map, one animal species; no currency, no markets, no caravans, no combat.
+* There is still one settlement, one map, one animal species; no currency, no markets, no caravans, no fighting (a spear only makes a wolf turn away).
 * A workplace's output is not routed anywhere automatically: somebody has to want it and go and fetch it.
 * **Iron is the slowest chain and does not appear in every world.** The ore lies 23–26 tiles from the camp in all four standard
   seeds, a wooden tool is cheap to replace, and a forger needs a hammer of their own, charcoal from the kiln, and ore carried

@@ -1,8 +1,9 @@
-// Workshops: timber yard, quarry, kiln, smithy. Each is a distinct silhouette:
+// Workshops: timber yard, quarry, kiln, smithy (and the well, which belongs to everyone). Each is a distinct silhouette:
 //   timber yard  wide, low, open-sided shed with a plank roof, a saw trestle and a chopping block
 //   quarry       a stepped face of cut stone with a wooden tripod derrick
 //   kiln         a clay dome with a stoking mouth and a squat chimney
 //   smithy       a dark low shed with a tall stone forge chimney, an anvil and a quench trough
+//   well         a ring of fitted stones round a dark shaft, under a little shingled gable with a windlass and a bucket on its rope
 import { hashUnit } from '../sim/rng';
 import { box, boxTones, coursesL, cylinder, dome, domeCourses, faceL, faceR, faceT, jointsL, jointsR } from './iso3d';
 import { chimneyStack, doorL, gableR, groundPatch, post, roofEdge, roofFront, scatter } from './bld_common';
@@ -387,5 +388,85 @@ export function smithySprite(cache: SpriteCache, variant: number): Sprite {
     // tongs and a hammer lying by the anvil
     line(ctx, p(0.22, 1.82, 0.6), p(0.46, 1.9, 0.6), '#63676f', 1.3);
     line(ctx, p(0.28, 1.76, 0.6), p(0.5, 1.7, 0.6), '#7a5434', 1.8);
+  });
+}
+
+// ───────────────────────────── well (1 x 1) ─────────────────────────────
+export function wellSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`well${v}`, 104, 110, 52, 82, (ctx) => {
+    const p = mk(1, 1);
+    groundShadow(ctx, 40, 15, 0.3, 4);
+    // trodden earth and a few flagstones round the curb
+    groundPatch(ctx, p, 0.0, 1.0, 0.0, 1.0, 'rgba(112,98,78,0.4)');
+    scatter(ctx, p, 0.06, 0.94, 0.5, 0.97, 10, v + 3, ['rgba(178,172,158,0.85)', 'rgba(132,126,114,0.8)', 'rgba(92,82,68,0.6)'], 2.2);
+    const wood = ['#7c5a3a', '#73543a', '#82603f', '#6e5035'][v];
+    const [lit, dark] = [['#c9c3b4', '#8c877d'], ['#c0bbae', '#86827a'], ['#cfc8b8', '#928b7e'], ['#bdb8ab', '#837f77']][v];
+    const PX = [0.14, 0.86];
+    // the two back posts stand behind the curb
+    for (const x of PX) post(ctx, p, x, 0.14, 0, 40, 0.07, wood);
+    // the curb: a ring of fitted stones round a dark shaft
+    const c = p(0.5, 0.5, 0);
+    const H = 14;
+    const RX = 17;
+    cylinder(ctx, c[0], c[1], RX, H, lit, dark, '#bdb7a9');
+    ctx.strokeStyle = 'rgba(60,56,48,0.4)';
+    ctx.lineWidth = 0.7;
+    for (let i = 0; i < 3; i++) {
+      const z = (H * (i + 1)) / 3;
+      if (i < 2) {
+        ctx.beginPath();
+        ctx.ellipse(c[0], c[1] - z, RX, RX * 0.5, 0, 0.02 * Math.PI, 0.98 * Math.PI, false);
+        ctx.stroke();
+      }
+      const n = 7;
+      for (let k = 0; k <= n; k++) {
+        const th = ((k + (i % 2 ? 0.5 : 0)) / n) * Math.PI;
+        if (th <= 0.06 || th >= Math.PI - 0.06) continue;
+        const x = c[0] + Math.cos(th) * RX;
+        const y = c[1] + Math.sin(th) * RX * 0.5;
+        ctx.beginPath();
+        ctx.moveTo(x, y - (H * i) / 3);
+        ctx.lineTo(x, y - (H * (i + 1)) / 3);
+        ctx.stroke();
+      }
+    }
+    // down the shaft: dark stone walls, and the water a long way down
+    const ty = c[1] - H;
+    ellipse(ctx, c[0], ty, RX - 3.4, (RX - 3.4) * 0.5, '#26323a');
+    const wg = ctx.createRadialGradient(c[0] + 2, ty + 1.5, 1, c[0] + 2, ty + 1.5, RX - 5);
+    wg.addColorStop(0, '#79a6bd');
+    wg.addColorStop(1, '#3c5f72');
+    ellipse(ctx, c[0] + 1, ty + 2, RX - 7, (RX - 7) * 0.5, wg);
+    ctx.strokeStyle = 'rgba(235,245,250,0.55)';
+    ctx.lineWidth = 0.9;
+    ctx.beginPath();
+    ctx.ellipse(c[0] - 1, ty + 1, 4.5, 2, 0, Math.PI * 1.1, Math.PI * 1.7, false);
+    ctx.stroke();
+    // the windlass: a roller between the posts, a crank, and a bucket on its rope
+    const rl = p(PX[0], 0.5, 33);
+    const rr = p(PX[1], 0.5, 33);
+    line(ctx, rl, rr, 'rgba(25,14,6,0.6)', 5);
+    line(ctx, rl, rr, shade(wood, 1.05), 3.4);
+    line(ctx, [rl[0], rl[1] - 1.1], [rr[0], rr[1] - 1.1], shade(wood, 1.28), 1);
+    const crank = p(PX[1] + 0.07, 0.5, 33);
+    line(ctx, rr, crank, '#4a3420', 2);
+    line(ctx, crank, [crank[0] + 1, crank[1] + 7], '#4a3420', 2);
+    ellipse(ctx, crank[0] + 1, crank[1] + 8, 1.7, 1.2, '#2e2012');
+    const m = p(0.5, 0.5, 33);
+    const bucketTop = p(0.5, 0.5, 18);
+    line(ctx, m, bucketTop, 'rgba(60,44,20,0.75)', 1.7);
+    line(ctx, m, [bucketTop[0] - 0.4, bucketTop[1]], '#d9c692', 1);
+    poly(ctx, [[bucketTop[0] - 4.6, bucketTop[1]], [bucketTop[0] + 4.6, bucketTop[1]], [bucketTop[0] + 3.6, bucketTop[1] + 7.5], [bucketTop[0] - 3.6, bucketTop[1] + 7.5]], '#8a6a44', 'rgba(25,14,6,0.6)', 0.8);
+    line(ctx, [bucketTop[0] - 4.2, bucketTop[1] + 2.6], [bucketTop[0] + 4.2, bucketTop[1] + 2.6], '#4a4640', 0.9);
+    line(ctx, [bucketTop[0] - 3.9, bucketTop[1] + 5.2], [bucketTop[0] + 3.9, bucketTop[1] + 5.2], '#4a4640', 0.9);
+    // the two front posts and the little shingled gable over it all
+    for (const x of PX) post(ctx, p, x, 0.86, 0, 40, 0.07, wood);
+    gableR(ctx, p, PX[1], 0.1, 0.9, 0.5, 40, 56, shade(wood, 0.86), 5, 'rgba(25,14,6,0.4)');
+    const roof: Roof = { x0: PX[0], x1: PX[1], ym: 0.5, yE: 0.9, zE: 40, zR: 56, ox: 0.1, oy: 0.12, base: ['#7d5a3c', '#74533a', '#86613f', '#6f5037'][v], tex: 'shingle', v };
+    roofFront(ctx, p, roof);
+    roofEdge(ctx, p, roof, '#2e2216');
+    // a wet stain where the bucket is set down
+    ellipse(ctx, c[0] + RX + 6, c[1] + 6, 4.5, 2, 'rgba(70,92,108,0.35)');
   });
 }

@@ -5,9 +5,9 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'smoked_fish' | 'grain' | 'bread';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
-export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar';
+export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'rod' | 'spear';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water';
@@ -123,6 +123,8 @@ export interface FacilitySnapshot {
   client: number;
   /** granary: when the bins were last tended */
   tended: number;
+  /** goods on the shelves that were being held for somebody when this was seen (absent in older saves: nothing was known to be held) */
+  claims?: ClaimSnapshot[];
 }
 
 export interface Relation {
@@ -488,7 +490,9 @@ export type BuildingType =
   | 'smithy'
   | 'granary'
   | 'bakery'
-  | 'hall';
+  | 'smokehouse'
+  | 'hall'
+  | 'well';
 
 export interface Building {
   ent: 'building';
@@ -544,6 +548,18 @@ export interface Earmark {
   owner: number;
   until: number;
   reason: string;
+  /** the building site the batch was ordered for, if any: whoever is bringing goods to that very site may take them on the owner's behalf */
+  destSite?: number;
+}
+
+/** What an observer remembers of one claim on a workplace's stock (a snapshot, like everything else a person believes). */
+export interface ClaimSnapshot {
+  item: ItemKind;
+  n: number;
+  owner: number;
+  until: number;
+  /** the site it is held for (0 = none in particular) */
+  site: number;
 }
 
 export interface FacilityState {

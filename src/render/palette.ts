@@ -21,6 +21,7 @@ export const ITEM_COLORS: Record<string, string> = {
   berries: '#a8294f',
   fruit: '#e0723a',
   fish: '#7fb4c9',
+  smoked_fish: '#b98a4a',
   grain: '#d9b44a',
   seeds: '#9c7a45',
   water: '#4fa8e0',
@@ -42,6 +43,8 @@ export const ITEM_COLORS: Record<string, string> = {
   hammer: '#c8c8c0',
   saw: '#c8c8c0',
   jar: '#c98a5a',
+  rod: '#8a6a44',
+  spear: '#8a6a44',
 };
 
 export const EVENT_COLORS: Record<string, string> = {

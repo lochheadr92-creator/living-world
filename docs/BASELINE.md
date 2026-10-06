@@ -215,6 +215,87 @@ These were run on the final code to see whether anything changes beyond the firs
 `scripts/invariants.ts` also audited 25–40-day runs of `meadow`, `river`, `fern` and `aspen` — and 25 days of harsh `meadow` and
 `river` — checking the books, tool records, claims, promises, carts and meal tables every 300 ticks. Nothing was violated.
 
+## Runs after this record
+
+Everything above was recorded from the first version of this work. The additions made since — workshop goods held for the site
+they were ordered for, a fishing rod and a smokehouse, a well, a fix to making tools, and a spear — change every world after its
+first few days (the state hashes differ), and the files above were **not** re-recorded. What each addition did, measured on the
+same seeds with the same tools, is in "Rule changes made on purpose" in [`ECONOMY.md`](ECONOMY.md); to compare a world now with
+these records, record it again with `scripts/baseline.ts`. What follows compares the original code with the code as it now
+stands. Every run is a single run of its seed.
+
+### Sixteen ordinary worlds, 30 days
+
+`scripts/baseline.ts <seed>` and `scripts/wolfwatch.ts <seed> 30` on sixteen seeds (the four named ones and twelve others),
+original against everything above:
+
+| per world, mean | original | now |
+|---|---:|---:|
+| people at day 30 | 49.6 | 48.1 |
+| houses | 2.0 | 2.9 |
+| buildings of every kind | 42.5 | 45.6 |
+| building projects finished | 35.3 | 38.1 |
+| tools made | 20.9 | 34.2 |
+| promises kept | 6.8 | 12.7 |
+| wolf bites | 7.3 | 4.8 |
+| runs away from a wolf (flee activities begun) | 258 | 294 |
+| children born | 4.7 | 3.6 |
+| deaths | 0 in 16 worlds | 1 in 16 worlds (a wolf attack, day 12, `k6`) |
+
+The books balanced at every daily sample of all thirty-two runs. A well was standing in every one of the sixteen worlds by day
+7–23 and a smokehouse by day 9–18. The paired differences that are larger than their noise (ten or more of sixteen seeds moving
+the same way): more buildings (13 of 16; the well and the smokehouse are two of them), more projects finished (11 of 13 that
+changed), more runs from wolves (13 of 16, t ≈ 2.0). Wolf bites were lower in 8 of 16 worlds and higher in 5 (116 in all, then
+77; t ≈ −1.5): not a measured effect. The fall in births (9 of 16 worlds lower, 4.7 to 3.6 a world, t ≈ −2.3) has no cause I
+could find: couples formed at the same rate (12 and 11 in all) and arrivals are not affected. Nine differences were looked at,
+so one of that size is not surprising by chance.
+
+### Ten harsh worlds, 40 days
+
+`scripts/wolfwatch.ts <seed> 40 harsh` for ten seeds on the original code, after the first addition (workshop claims), after the
+second (rod and smokehouse), and on the code as it now stands. Each cell is the number of wolf bites in the run, with the cause
+of any death that was not old age in brackets.
+
+| seed | original | + claims | + rod, smokehouse | now |
+|---|---:|---:|---:|---:|
+| meadow | 17 (thirst) | 15 | 19 (thirst) | 8 |
+| river | 7 | 16 | 29 (thirst, thirst) | 24 (exposure) |
+| fern | 12 | 11 | 23 | 17 |
+| aspen | 21 | 19 | 19 (wolf) | 15 |
+| x1 | 27 | 45 (wolf) | 50 (wolf, exposure) | 16 |
+| x2 | 20 | 18 | 44 | 9 |
+| x3 | 17 | 26 (wolf) | 31 (wolf) | 12 |
+| s4 | 7 | 12 | 21 (wolf) | 6 |
+| h1 | 15 | 19 | 20 | 11 |
+| h2 | 32 | 29 (exposure) | 19 (injuries) | 15 |
+| **mean** | **17.5** | **21.0** | **27.5** | **13.3** |
+| runs with a death that was not old age | 1 | 3 | 7 | 1 |
+
+These are single runs, and small changes move every trajectory in a harsh world (the original alone ranges from 7 to 32 bites
+between seeds), so the means are not precise. The table shows a pattern, not a cause. The two intermediate trees did worse than
+the original on both counts: the second had more bites in 8 of the 10 seeds (mean +10.0, standard error 3.8) and a death that
+was not old age in seven of the ten runs (thirst three times, wolves four, exposure, injuries). The code as it now stands had
+fewer bites than the second in all ten seeds (mean −14.2) and than the original in eight (mean −4.2, standard error 3.0), and
+one such death.
+
+The well accounts for much of that. The same code in a copy where nobody ever wants a well had 19.1 bites a run, more than with
+the well in 9 of 10 seeds (mean +5.8, standard error 2.4), and a death that was not old age in six of the ten runs (hunger
+twice, wolves twice, exposure, thirst). So in harsh worlds this branch is as safe as the original because of the well, and I did
+not find what made the intermediate trees less safe. It was not the time people spent far from the camp (similar in the two
+seeds measured). With the rod left out of the second tree, the two seeds tried had 16 and 17 bites, and with the smokehouse left
+out 31 and 20, against 29 and 44 with both and 7 and 20 in the original; two seeds say little. In the code as it now stands,
+with rods never wanted at all, the ten seeds had 17.4 bites a run (more than with rods in 6 of 10 seeds; mean +4.1, standard
+error 4.2) and two runs with a death that was not old age, so the rod is not what makes the difference there. Every bite in
+these runs happens while somebody is running from a wolf, more than nine tiles from the camp, mostly in the evening and at
+night. Anyone bisecting this branch in harsh mode will land on commits that are worse than the original. A harsh world is not
+the default one.
+
+### Saves
+
+Three saves made by the original code (ordinary `meadow` on day 7, ordinary `river` on day 12, harsh `fern` on day 15) were
+loaded by the code as it now stands and played on for eight more days each. They load, people carry on (30 to 38, 35 to 41, 32
+to 36), the books and the tool records balance, a well was built in each, and a smokehouse in two.
+
 ## What changed on purpose
 
 See "Rule changes made on purpose" in [`ECONOMY.md`](ECONOMY.md). The ones that show up above: grain, flour and bread spoil;

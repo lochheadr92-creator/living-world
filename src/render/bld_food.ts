@@ -3,7 +3,7 @@
 //   bakery   a brick workroom with a round brick oven dome in front, a thin flue and a hanging loaf sign
 //   hall     a long half-timbered hall with a big arched door, a steep roof with a smoke louvre and a pennant
 import { box, boxTones, coursesL, cylinder, dome, domeCourses, faceL, faceR, jointsL } from './iso3d';
-import { brickFaceL, brickFaceR, chimneyStack, doorL, gableR, groundPatch, roofEdge, roofFront, scatter, windowL } from './bld_common';
+import { brickFaceL, brickFaceR, chimneyStack, doorL, gableR, groundPatch, post, roofEdge, roofFront, scatter, windowL } from './bld_common';
 import type { Roof } from './bld_common';
 import { SpriteCache, ellipse, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
 import type { Sprite } from './sprites';
@@ -209,6 +209,79 @@ export function bakerySprite(cache: SpriteCache, variant: number): Sprite {
     cylinder(ctx, q[0], q[1], 10, 4.4, '#c5c1b4', '#97938a', '#d4d0c4');
     ellipse(ctx, q[0], q[1] - 4.4, 3.2, 1.6, '#8a867c');
     line(ctx, [q[0] + 1, q[1] - 5], [q[0] + 7, q[1] - 12], '#7a5434', 1.8);
+  });
+}
+
+// ───────────────────────────── smokehouse (2 x 2) ─────────────────────────────
+//   a low shed of smoke-darkened boards on a stone footing, a shingle roof with a tall slatted smoke stack, and a drying rack
+//   in front where fish hang on a line
+export const SMOKEHOUSE = { chimney: { x: 1.4, y: 0.62, z: 84 } } as const;
+
+export function smokehouseSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`smokehouse${v}`, 188, 190, 94, 134, (ctx) => {
+    const p = mk(2, 2);
+    groundShadow(ctx, 66, 25, 0.32, 4);
+    // trodden, ashy ground with chips of bark and dropped fish bones
+    groundPatch(ctx, p, 0.05, 1.95, 0.05, 1.95, 'rgba(98,84,64,0.42)');
+    scatter(ctx, p, 0.15, 1.9, 1.15, 1.95, 22, v + 9, ['rgba(52,46,40,0.55)', 'rgba(205,198,178,0.55)'], 1.2);
+    const board = ['#8a6844', '#7f5f3e', '#936f49', '#785a3a'][v];
+    const x0 = 0.1;
+    const x1 = 1.9;
+    const y0 = 0.1;
+    const y1 = 1.18;
+    const ym = 0.64;
+    const WT = 26;
+    // stone footing and upright boards
+    faceL(ctx, p, x0 - 0.03, x1 + 0.03, y1 + 0.03, 0, 5, '#a7a194', 'rgba(30,30,28,0.45)', 0.8);
+    faceR(ctx, p, x1 + 0.03, y0 - 0.03, y1 + 0.03, 0, 5, '#85806f', 'rgba(30,30,28,0.45)', 0.8);
+    faceL(ctx, p, x0, x1, y1, 5, WT, board, 'rgba(30,18,8,0.5)', 0.8);
+    faceR(ctx, p, x1, y0, y1, 5, WT, shade(board, 0.78), 'rgba(30,18,8,0.5)', 0.8);
+    plankLines(ctx, p, 'L', x0, x1, y1, y1, 5, WT, 17, 'rgba(25,14,6,0.55)');
+    plankLines(ctx, p, 'R', x1, x1, y0, y1, 5, WT, 8, 'rgba(25,14,6,0.5)');
+    // soot streaks running up the boards above the door and under the eaves
+    for (const sx of [0.42, 0.62, 1.12, 1.52]) line(ctx, p(sx, y1 + 0.01, WT), p(sx + 0.03, y1 + 0.01, WT - 8 - 6 * ((sx * 10) % 3)), 'rgba(20,14,10,0.34)', 1.6);
+    gableR(ctx, p, x1, y0, y1, ym, WT, 48, shade(board, 0.7), 9, 'rgba(25,14,6,0.4)');
+    // a low door and a ventilation slot
+    doorL(ctx, p, 0.3, 0.7, y1, 5, 24, { fill: '#3b2b1d', frame: '#26190f', planks: 3, knob: '#c9a24a', strap: '#241e18' });
+    faceL(ctx, p, 1.1, 1.5, y1 + 0.005, 17, 20, '#140d08', 'rgba(20,10,4,0.6)', 0.6);
+    // shingle roof
+    const roof: Roof = { x0, x1, ym, yE: y1, zE: WT, zR: 50, ox: 0.16, oy: 0.2, base: ['#6d6a62', '#66635b', '#74716a', '#5f5c55'][v], tex: 'shingle', v };
+    roofFront(ctx, p, roof);
+    roofEdge(ctx, p, roof, '#2e2a26');
+    // the smoke stack: a square wooden shaft through the ridge with a slatted cap
+    const cx = SMOKEHOUSE.chimney.x;
+    const cy = SMOKEHOUSE.chimney.y;
+    box(ctx, p, cx - 0.1, cx + 0.1, cy - 0.1, cy + 0.1, 48, 80, { top: '#6a5239', left: '#5a432e', right: '#46341f', stroke: 'rgba(25,14,6,0.55)', lw: 0.8 });
+    for (const z of [58, 66, 74]) line(ctx, p(cx - 0.1, cy + 0.1, z), p(cx + 0.1, cy + 0.1, z), 'rgba(15,8,2,0.55)', 1);
+    box(ctx, p, cx - 0.15, cx + 0.15, cy - 0.15, cy + 0.15, 80, 84, { top: '#7a5f43', left: '#68503a', right: '#52402c', stroke: 'rgba(25,14,6,0.55)', lw: 0.8 });
+    line(ctx, p(cx - 0.1, cy + 0.15, 81), p(cx + 0.1, cy + 0.15, 81), 'rgba(15,8,2,0.7)', 1.2);
+    // the drying rack out in front: two posts, a crossbar and fish on a line
+    const rx0 = 0.95;
+    const rx1 = 1.8;
+    const ry = 1.62;
+    post(ctx, p, rx0, ry, 0, 30, 0.07, '#7a5a38');
+    post(ctx, p, rx1, ry, 0, 30, 0.07, '#7a5a38');
+    line(ctx, p(rx0, ry, 29), p(rx1, ry, 29), 'rgba(25,14,6,0.6)', 3);
+    line(ctx, p(rx0, ry, 29), p(rx1, ry, 29), '#8a6a44', 2);
+    for (let i = 0; i < 5; i++) {
+      const fx = rx0 + 0.1 + (i * (rx1 - rx0 - 0.2)) / 4;
+      const top = p(fx, ry, 28);
+      const bot = p(fx, ry, 17 - (i % 2) * 2);
+      line(ctx, top, bot, 'rgba(25,14,6,0.55)', 0.8);
+      ctx.fillStyle = i % 2 ? '#b98a4a' : '#c89a58';
+      ctx.beginPath();
+      ctx.ellipse(bot[0], bot[1] + 3.2, 1.9, 4.6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      line(ctx, [bot[0], bot[1] + 7.4], [bot[0] - 1.6, bot[1] + 10], '#9a7038', 1.1);
+      line(ctx, [bot[0], bot[1] + 7.4], [bot[0] + 1.6, bot[1] + 10], '#9a7038', 1.1);
+    }
+    // a woodpile of fuel beside the door
+    for (let i = 0; i < 3; i++) {
+      const lg = p(0.16 + i * 0.1, y1 + 0.32, 2.5 + (i % 2) * 5);
+      ellipse(ctx, lg[0], lg[1], 4.2, 2.1, '#8a6a44');
+      ellipse(ctx, lg[0], lg[1], 1.6, 0.8, '#cfae7a');
+    }
   });
 }
 

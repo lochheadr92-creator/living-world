@@ -3,6 +3,7 @@ import type { WorkResult } from './activities';
 import { addLog } from './events';
 import { countBeliefs } from './knowledge';
 import { nearLitFire } from './perception';
+import { noteScare } from './wildlife';
 
 // ───────────────────────── sleep ─────────────────────────
 registerHandler('sleep', {
@@ -109,6 +110,7 @@ registerHandler('flee', {
   pose: () => 'fear',
   begin(world, p, a) {
     a.duration = 90;
+    noteScare(world, p);
   },
   work(world, p, a): WorkResult {
     a.progress++;

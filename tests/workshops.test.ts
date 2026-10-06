@@ -475,7 +475,7 @@ describe('tools', () => {
 
 describe('recipes at each workplace', () => {
   it('each workplace has at least one recipe or a stated purpose', () => {
-    for (const t of ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary'] as const) expect(recipesAt(t).length, t).toBeGreaterThan(0);
+    for (const t of ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'smokehouse'] as const) expect(recipesAt(t).length, t).toBeGreaterThan(0);
     expect(BUILD_DEF.hall.blurb).toMatch(/meals/);
   });
   it('forging an iron tool takes iron, a handle and charcoal, and gives a tier-1 tool', () => {

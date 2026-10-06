@@ -91,6 +91,7 @@ export const ITEM_ICON: Record<ItemKind, string> = {
   berries: 'berries',
   fruit: 'fruit',
   fish: 'fish',
+  smoked_fish: 'smoked_fish',
   grain: 'grain',
   bread: 'bread',
   seeds: 'seeds',
@@ -112,6 +113,8 @@ export const ITEM_ICON: Record<ItemKind, string> = {
   hammer: 'hammer',
   saw: 'saw',
   jar: 'jar',
+  rod: 'rod',
+  spear: 'spear',
 };
 
 /** compass word from a world-space delta, as seen on screen (north = up-screen) */

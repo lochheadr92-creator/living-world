@@ -56,7 +56,7 @@ export function retagTools(world: World, kind: ToolKind, n: number, fromId: numb
 }
 
 export function isToolItem(k: ItemKind): k is ToolKind {
-  return k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar';
+  return k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'rod' || k === 'spear';
 }
 
 /** The Items container physically holding things for an entity id, if it has one. */
@@ -93,7 +93,7 @@ export function toolReport(world: World): { ok: boolean; problems: string[] } {
     if (items && (items[kind as ItemKind] ?? 0) !== n) problems.push(`holder ${hid} has ${items[kind as ItemKind] ?? 0} ${kind} in its items but ${n} tool records`);
   }
   const check = (id: number, items: Items) => {
-    for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'] as ToolKind[]) {
+    for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'rod', 'spear'] as ToolKind[]) {
       const have = items[k] ?? 0;
       if (have > 0 && (counted[id + ':' + k] ?? 0) !== have) problems.push(`holder ${id} counts ${have} ${k} but has ${counted[id + ':' + k] ?? 0} tool records`);
     }

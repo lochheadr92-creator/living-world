@@ -1,8 +1,8 @@
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
-import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WORK, isHomeType, isSolidHome } from './constants';
+import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WEIGHT, WORK, isHomeType, isSolidHome } from './constants';
 import { buildingLabel, completeSite, createSite } from './buildings';
-import { addItem, claimSlot, consume, invRoom, ledgerCreate } from './economy';
+import { addItem, claimSlot, consume, ledgerCreate, weightOf } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { householdOf } from './buildings';
 import { missingMaterials, observe, delBelief } from './knowledge';
@@ -184,7 +184,8 @@ registerHandler('craft', {
     const tool = a.data.tool as ToolKind;
     const r = TOOL_RECIPE[tool];
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'fail:the materials went missing';
-    if (invRoom(world, p, tool) < 1) return 'fail:no room to carry it';
+    // the wood and stone leave the pack as the tool is made, so it is only the difference that has to fit
+    if (carryCap(world, p) - weightOf(p.inv) + r.wood * WEIGHT.wood + r.stone * WEIGHT.stone + 1e-9 < WEIGHT[tool]) return 'fail:no room to carry it';
     consume(world, p.inv, 'wood', r.wood, 'crafting: ' + tool);
     consume(world, p.inv, 'stone', r.stone, 'crafting: ' + tool);
     mintTool(world, tool, 0, p.hhId, p.id, p.inv, p.id, 'crafted: ' + tool);

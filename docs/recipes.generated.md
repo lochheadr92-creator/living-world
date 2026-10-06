@@ -18,6 +18,8 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | granary | 2×2 | 6 wood, 8 planks, 4 stone | 56 s | 120 | 2 | 2.9% | Raised, ventilated bins for grain, flour and bread. Each household keeps its own share; grain keeps far longer here when the bins are tended. |
 | bakery | 2×2 | 4 wood, 6 stone, 6 bricks | 60 s | 40 | 2 | 3.4% | A quern and a brick oven: grain is milled to flour and baked into bread. |
 | communal hall | 3×3 | 10 wood, 10 planks, 8 stone | 90 s | 60 | 4 | 2.9% | A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there. |
+| smokehouse | 2×2 | 10 wood, 4 stone | 48 s | 40 | 2 | 3.1% | A low timber shed over a smouldering fire: fish are smoked here until they keep for weeks instead of going off in a day or two. |
+| well | 1×1 | 4 wood, 8 stone | 38 s | — | 2 | 1.2% | A stone-lined shaft with a windlass and a bucket: water in the middle of the settlement, so a drink does not mean a long walk to the lake, or past whatever is lurking there. |
 
 ## Recipes (what a workplace makes)
 
@@ -39,6 +41,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | smithy | an iron hammer | 1 iron, 1 handles | 1 charcoal | 8 s | — | an iron hammer | — | hammer (required) | smith | 1 | An iron tool works about a quarter faster than a wooden-and-stone one and wears half as quickly. |
 | bakery | milled flour | 4 grain | — | 7 s | — | 3 flour | 1 grain (husks and chaff) | — | bake | 2 | Flour keeps better than loose grain and is what bread is made of. |
 | bakery | baked bread | 3 flour, 2 water | 1 wood | 5 s | 18 s | 4 bread | — | — | bake | 2 | Four loaves (30 hunger each) from what raw grain gives 3 (22 each): the dough takes up water. Bread keeps well and is what is served at shared meals. |
+| smokehouse | smoked fish | 4 fish | 1 wood | 6 s | 24 s | 3 smoked fish | 1 fish (water driven off by the smoke, and bones) | — | fish | 2 | Three smoked fish (30 hunger each, a third lighter to carry) from four fresh ones, which would go off in a day or two: smoked fish keeps for weeks. Whoever fishes well smokes best. |
 | granary | tended bins | — | — | 6 s | — | — | — | — | — | 2 | Turning and airing the bins and clearing out vermin keeps the grain from going off. |
 
 ## Items
@@ -48,12 +51,13 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | berries | 1 | 12 | 1 | — |
 | fruit | 1 | 16 | 0.8 | — |
 | fish | 1.5 | 28 | 1.6 | — |
+| smoked fish | 1 | 30 | 0.2 | — |
 | grain | 1 | 22 | 0.22 | — |
 | bread | 1 | 30 | 0.5 | — |
 | seeds | 0.25 | — | — | — |
 | water | 1.5 | — | — | — |
 | wood | 2 | — | — | everything else |
-| stone | 3 | — | — | — |
+| stone | 3 | — | — | well |
 | clay | 3 | — | — | — |
 | ore | 3 | — | — | — |
 | planks | 2 | — | — | house, granary, communal hall |
@@ -69,6 +73,8 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | hammer | 1 | — | — | — |
 | saw | 1 | — | — | — |
 | water jar | 1.5 | — | — | — |
+| fishing rod | 1 | — | — | — |
+| spear | 1.5 | — | — | — |
 
 ## Tools
 
@@ -81,8 +87,10 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | hammer | 1 wood, 2 stone | 8 s | 0.032 (iron: 0.016) | building and repair work, and every kind of smithing |
 | saw | 2 wood, 2 stone | 11 s | 0.044 (iron: 0.022) | cutting planks with little waste |
 | water jar | cannot be made by hand (kiln) | — | 0.02 (iron: 0.01) | carrying more water (it wears a little with each trip to the water) |
+| fishing rod | 3 wood | 8 s | 0.014 (iron: 0.007) | catching fish faster: a pole, a plaited line and a bone hook |
+| spear | 3 wood | 9 s | 0.04 (iron: 0.02) | turning a wolf away: a long pole, sharpened and hardened in the fire. A grown person who carries one counts as two to a wolf |
 
-Duration multipliers while using the right tool (lower is faster): axe 0.55, pick 0.55, hoe 0.5, hoeTend 0.7, basket 0.85, hammer 0.8, saw 0.55, ironAxe 0.42, ironPick 0.42, ironHoe 0.4, ironHoeTend 0.6, ironHammer 0.65, ironSaw 0.42, ironBasket 0.85. Past 70 wear the benefit fades linearly to nothing at 100, where the tool breaks.
+Duration multipliers while using the right tool (lower is faster): axe 0.55, pick 0.55, hoe 0.5, hoeTend 0.7, basket 0.85, rod 0.6, hammer 0.8, saw 0.55, ironAxe 0.42, ironPick 0.42, ironHoe 0.4, ironHoeTend 0.6, ironHammer 0.65, ironSaw 0.42, ironBasket 0.85. Past 70 wear the benefit fades linearly to nothing at 100, where the tool breaks.
 
 ## Deposits and carrying
 

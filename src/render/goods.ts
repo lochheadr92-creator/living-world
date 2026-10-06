@@ -347,6 +347,49 @@ export function breadBasket(cache: SpriteCache, n: number): Sprite {
   });
 }
 
+/** A wooden tray of smoked fish, golden brown. */
+export function smokedFishTray(cache: SpriteCache, n: number): Sprite {
+  const k = Math.max(1, Math.min(9, Math.round(n)));
+  return cache.get(`g:smoked:${k}`, 52, 44, 26, 32, (ctx) => {
+    ellipse(ctx, 0, 1, 15, 5.5, 'rgba(20,28,18,0.22)');
+    // the tray
+    ctx.fillStyle = '#7a5a38';
+    ctx.strokeStyle = 'rgba(40,25,10,0.7)';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.moveTo(-12, -6);
+    ctx.lineTo(12, -6);
+    ctx.lineTo(10.4, 0.6);
+    ctx.lineTo(-10.4, 0.6);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    // the fish lie in rows, head to tail, each a little different
+    for (let i = 0; i < k; i++) {
+      const row = Math.floor(i / 3);
+      const col = i % 3;
+      const x = (col - 1) * 7.4 + (row % 2) * 1.6;
+      const y = -8.6 - row * 3.4;
+      const g = ctx.createLinearGradient(x - 4.4, y - 2, x + 4.4, y + 2);
+      g.addColorStop(0, i % 2 ? '#d8a45a' : '#e0b068');
+      g.addColorStop(1, i % 2 ? '#a8742e' : '#b4803a');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.ellipse(x, y, 4.5, 2.1, i % 2 ? 0.08 : -0.08, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#9a6a2c';
+      ctx.beginPath();
+      ctx.moveTo(x + 4, y);
+      ctx.lineTo(x + 6.6, y - 1.8);
+      ctx.lineTo(x + 6.6, y + 1.8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = 'rgba(40,24,8,0.7)';
+      ctx.fillRect(x - 3.2, y - 0.5, 0.9, 0.9);
+    }
+  });
+}
+
 /** A bundle of tool handles. */
 export function handleBundle(cache: SpriteCache, n: number): Sprite {
   const k = Math.max(1, Math.min(14, Math.round(n)));
@@ -388,7 +431,7 @@ export function handleBundle(cache: SpriteCache, n: number): Sprite {
 }
 
 /** Short names the stock code in scenery.ts and construction.ts uses. */
-export type StackKind = 'wood' | 'planks' | 'bricks' | 'stone' | 'cutstone' | 'clay' | 'ore' | 'charcoal' | 'iron' | 'flour' | 'grain' | 'bread' | 'handles';
+export type StackKind = 'wood' | 'planks' | 'bricks' | 'stone' | 'cutstone' | 'clay' | 'ore' | 'charcoal' | 'iron' | 'flour' | 'grain' | 'bread' | 'handles' | 'smoked';
 
 export function stackSprite(cache: SpriteCache, kind: StackKind, n: number): Sprite {
   switch (kind) {
@@ -416,5 +459,7 @@ export function stackSprite(cache: SpriteCache, kind: StackKind, n: number): Spr
       return breadBasket(cache, n);
     case 'handles':
       return handleBundle(cache, n);
+    case 'smoked':
+      return smokedFishTray(cache, n);
   }
 }

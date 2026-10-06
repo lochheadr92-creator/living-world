@@ -797,7 +797,7 @@ export class CharacterRenderer {
       parts.push({
         d: handR[2] + 0.01,
         draw: () => {
-          ctx.fillStyle = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
+          ctx.fillStyle = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.smoked_fish ?? 0) > 0 ? '#b98a4a' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
           ctx.beginPath();
           ctx.arc(handR[0], handR[1] - 1.6, 1.9 * sc, 0, Math.PI * 2);
           ctx.fill();
@@ -1573,7 +1573,7 @@ function drawCarried(
   const wood = inv.wood ?? 0;
   const planks = inv.planks ?? 0;
   const handles = inv.handles ?? 0;
-  const food = (inv.berries ?? 0) + (inv.fruit ?? 0) + (inv.fish ?? 0) + (inv.grain ?? 0);
+  const food = (inv.berries ?? 0) + (inv.fruit ?? 0) + (inv.fish ?? 0) + (inv.smoked_fish ?? 0) + (inv.grain ?? 0);
   const bread = inv.bread ?? 0;
   const water = inv.water ?? 0;
   const hasBasket = (inv.basket ?? 0) > 0;
@@ -1801,7 +1801,7 @@ function drawCarried(
   }
 
   // ── basket on the hip, with whatever food is in it ──
-  const foodCols = [(inv.berries ?? 0) > 0 ? '#a8294f' : '', (inv.fruit ?? 0) > 0 ? '#e0723a' : '', (inv.grain ?? 0) > 0 ? '#d9b44a' : '', (inv.fish ?? 0) > 0 ? '#9ac1d4' : '', bread > 0 ? '#c4863c' : ''].filter(Boolean);
+  const foodCols = [(inv.berries ?? 0) > 0 ? '#a8294f' : '', (inv.fruit ?? 0) > 0 ? '#e0723a' : '', (inv.grain ?? 0) > 0 ? '#d9b44a' : '', (inv.fish ?? 0) > 0 ? '#9ac1d4' : '', (inv.smoked_fish ?? 0) > 0 ? '#b98a4a' : '', bread > 0 ? '#c4863c' : ''].filter(Boolean);
   const foodN = food + bread;
   if (hasBasket) {
     const c = S(-0.2, 0, 15 + lean * 7);
@@ -1977,6 +1977,39 @@ function drawCarried(
           ctx.beginPath();
           ctx.moveTo(b[0], b[1]);
           ctx.lineTo(b[0] + 0.4, b[1] - 3.4);
+          ctx.stroke();
+        },
+      });
+    }
+    if ((inv.spear ?? 0) > 0) {
+      // a spear carried upright at the side, its stone point above the head
+      const a = S(0.14, 0.16, 4);
+      const b = S(0.1, 0.14, 44);
+      parts.push({
+        d: (a[2] + b[2]) / 2 + 0.05,
+        draw: () => {
+          ctx.lineCap = 'round';
+          ctx.strokeStyle = 'rgba(25,15,8,0.5)';
+          ctx.lineWidth = 2.2 * sc;
+          ctx.beginPath();
+          ctx.moveTo(a[0], a[1]);
+          ctx.lineTo(b[0], b[1]);
+          ctx.stroke();
+          ctx.strokeStyle = '#8a6a44';
+          ctx.lineWidth = 1.4 * sc;
+          ctx.beginPath();
+          ctx.moveTo(a[0], a[1]);
+          ctx.lineTo(b[0], b[1]);
+          ctx.stroke();
+          ctx.fillStyle = '#b9b7ae';
+          ctx.strokeStyle = 'rgba(30,30,28,0.6)';
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(b[0], b[1] - 5 * sc);
+          ctx.lineTo(b[0] - 1.7 * sc, b[1] + 0.4);
+          ctx.lineTo(b[0] + 1.7 * sc, b[1] + 0.4);
+          ctx.closePath();
+          ctx.fill();
           ctx.stroke();
         },
       });

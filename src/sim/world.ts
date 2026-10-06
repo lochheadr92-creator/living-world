@@ -159,7 +159,7 @@ function decayWear(world: World): void {
 }
 
 /** Perishable goods slowly go off: an explicit, recorded process (never silent). */
-function spoilGoods(world: World): void {
+export function spoilGoods(world: World): void {
   const rate = 0.011;
   for (const b of world.buildings) {
     if (b.store.cap <= 0) continue;

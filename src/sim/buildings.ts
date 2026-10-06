@@ -2,6 +2,8 @@ import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
 import { addItem, isEmptyItems, cloneItems } from './economy';
 import { addEvent, addFx } from './events';
 import { isFacilityType, newOps } from './recipes';
+import { ACCESS_CELL } from './knowledge';
+import { refreshAccessCell } from './perception';
 import { hashUnit } from './rng';
 import { retagTools } from './toolreg';
 import { newId, registerBuilding, registerSite, unregisterBuilding, unregisterSite, isFreeLand, isWalkable, registerGeneric } from './registry';
@@ -41,7 +43,22 @@ export function createBuilding(world: World, type: BuildingType, x: number, y: n
     ops: isFacilityType(type) ? newOps() : undefined,
   };
   registerBuilding(world, b);
+  if (type === 'well') refreshShoreAround(world, b);
   return b;
+}
+
+/**
+ * A well is water to everything that looks for water, so the coarse shore cells the well touches (or whose shore tile it now
+ * stands beside) are looked at again: the first time a cell has a drinking place in it, or when the place it had has gone.
+ */
+function refreshShoreAround(world: World, b: Building): void {
+  const cw = Math.ceil(world.W / ACCESS_CELL);
+  const ch = Math.ceil(world.H / ACCESS_CELL);
+  const c0x = Math.max(0, Math.floor((b.x - 1) / ACCESS_CELL));
+  const c1x = Math.min(cw - 1, Math.floor((b.x + b.w) / ACCESS_CELL));
+  const c0y = Math.max(0, Math.floor((b.y - 1) / ACCESS_CELL));
+  const c1y = Math.min(ch - 1, Math.floor((b.y + b.h) / ACCESS_CELL));
+  for (let cy = c0y; cy <= c1y; cy++) for (let cx = c0x; cx <= c1x; cx++) refreshAccessCell(world, cy * cw + cx);
 }
 
 export function createSite(
@@ -113,7 +130,7 @@ export function makeHousePile(world: World, x: number, y: number, items: Items, 
     registerGeneric(world, target);
   }
   // equipment keeps its identity: its records move to the heap along with the counts
-  if (fromHolder) for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
+  if (fromHolder) for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'rod', 'spear'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
   return target;
 }
 
@@ -157,7 +174,7 @@ function builderShares(site: Site): Record<number, number> {
  * more evenly than that the workplace belongs to everyone. Halls and granaries are always common property.
  */
 function titleHolder(site: Site, shares: Record<number, number>): number {
-  if (site.type === 'hall' || site.type === 'granary') return 0;
+  if (site.type === 'hall' || site.type === 'granary' || site.type === 'well') return 0;
   if (!isFacilityType(site.type)) return site.hhId;
   let top = 0;
   let best = 0;
@@ -217,6 +234,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
 
 export function destroyBuilding(world: World, b: Building, why: string): void {
   unregisterBuilding(world, b);
+  if (b.type === 'well') refreshShoreAround(world, b);
   const scatter: Items = cloneItems(b.store.items);
   const held = b.ops?.job?.held;
   if (held) for (const k in held) addItem(scatter, k as keyof Items, held[k as keyof Items] ?? 0);
@@ -261,6 +279,8 @@ export function findBuildSpot(
   rMin: number,
   rMax: number,
   prefer: number,
+  /** how many tiles from the water the spot has to be (2: not hard against it) */
+  minWater = 2,
 ): { x: number; y: number } | null {
   const d = BUILD_DEF[type];
   let best: { x: number; y: number } | null = null;
@@ -303,7 +323,7 @@ export function findBuildSpot(
         }
       }
       if (!ok) continue;
-      if (wd < 2) continue;
+      if (wd < minWater) continue;
       let score = -Math.abs(dd - prefer) * 1.2 + hashUnit(p.id, x, y) * 2.2;
       const t0 = world.terrain[y * world.W + x];
       if (t0 === T.GRASS) score += 1.2;

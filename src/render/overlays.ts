@@ -199,6 +199,8 @@ export function glyphFor(kind: ActivityKind, target?: string): { id: string; col
           return { id: 'loaf', color: '#e6b25a' };
         case 'tend_granary':
           return { id: 'sprout', color: '#9bd36a' };
+        case 'smoke_fish':
+          return { id: 'fish', color: '#d9a35a' };
         default:
           return target && target.startsWith('forge_') ? { id: 'anvil', color: '#e8a36a' } : { id: 'hammer', color: '#d8a960' };
       }
