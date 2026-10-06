@@ -306,6 +306,11 @@ depends only on the tick and the population, so a run is reproducible.
   camp and at least six tiles from the water, and in four ordinary worlds (`meadow`, `river`, `fern`, `aspen`) it was nearer than
   the shore to 17 of 21, 9 of 23, 11 of 23 and 12 of 31 homes. Centring it on the homes that are far from the water was tried and
   put it where fewer homes were nearer to it than to the lake, so it stays at the camp.
+* Making a tool no longer fails for want of room that its own materials would free. The pack was checked for room for the finished
+  tool before the wood and stone it is made from were taken out of it, so someone carrying a full load of that wood was refused
+  ("no room to carry it") and the gathering, the walk and the work were wasted. In four 30-day harsh worlds (`scripts/toolmaking.ts`)
+  101 attempts ended in a tool or in that refusal and 60 of them were the refusal (40 of 59 baskets); after the change 68 tools were
+  made in the same four worlds and none was refused for room.
 * A site limit of four homes/fires/storehouse at a time, with separate allowances for improvement projects.
 * Promise deadlines are 1800 ticks (were 1200 or 1400), exclude sleep and survival time, and end in six distinct ways.
 * A trade is declined, not attempted, when either pack cannot take what it would be given.
