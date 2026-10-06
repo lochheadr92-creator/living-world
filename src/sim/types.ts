@@ -461,6 +461,25 @@ export interface LearnedSkill {
   how: 'shown' | 'watched';
 }
 
+/** A proposal to raise a communal building, as the village talks it over. People take a stance when they hear of it; enough support carries it. */
+export interface Proposal {
+  id: number;
+  type: BuildingType;
+  proposer: number;
+  why: string;
+  created: number;
+  /** open: still being talked over; carried: enough agreed, someone willing may mark it out; done: the site was marked out */
+  status: 'open' | 'carried' | 'rejected' | 'lapsed' | 'merged' | 'done';
+  /** until when it can still be talked over (open) or taken up (carried) */
+  until: number;
+  support: number[];
+  oppose: number[];
+  /** everyone who has heard of it (who has taken a stance or none) */
+  heard: number[];
+  /** when it was settled (carried, rejected, ...) */
+  settled: number;
+}
+
 export interface Illness {
   since: number;
   /** when it comes to a head: they recover, or they do not */
@@ -835,7 +854,8 @@ export type ConvPurpose =
   | 'lend'
   | 'report'
   | 'mediate'
-  | 'teach';
+  | 'teach'
+  | 'motion';
 
 export interface Conversation {
   id: number;
@@ -941,6 +961,8 @@ export interface Settings {
   immigration: boolean;
   /** how many days a year of life takes (the pace of ageing, births and deaths); older saves lack it and use 12 */
   daysPerYear: number;
+  /** communal buildings need the village's agreement first (true unless turned off, for comparison) */
+  councils?: boolean;
   scene: SceneId;
 }
 export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care';
@@ -983,6 +1005,8 @@ export interface World {
   plots: Plot[];
   piles: Pile[];
   graves: Grave[];
+  /** proposals for communal buildings, recent first (bounded) */
+  proposals: Proposal[];
   animals: Animal[];
   tools: Tool[];
   carts: Cart[];

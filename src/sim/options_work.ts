@@ -2,6 +2,7 @@ import { newActivity } from './activities';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { repairMaterial } from './act_build';
 import { depositLead } from './production';
+import { pledgedTo } from './council';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { findBuildSpot } from './buildings';
@@ -483,6 +484,7 @@ function optSites(ctx: Ctx): void {
     }
     const sc = new Scorer().add('building work to do', 33 * tm.work * rel.mult + 4).add('walking', -pen(e)).add('good builder', (p.skills.build - 1) * 6);
     if (committed) sc.add('I promised', 26);
+    if (pledgedTo(world, p, b.btype)) sc.add('we agreed to build this', 9);
     const util = sc.total * nightMult(ctx) * weatherMult(ctx);
     addOption(ctx, {
       kind: 'build',

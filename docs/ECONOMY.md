@@ -29,6 +29,7 @@ decided to supply it; a plank exists because somebody turned wood into it; a mea
 | Word about people: accounts, passing them on, the hearsay cap | `sim/reputation.ts` | |
 | Grief, the grave visit, the remembrance meal | `sim/grief.ts` | |
 | Teaching: lessons and learning by watching | `sim/teaching.ts` | |
+| Deciding together: proposals, stances, quorum | `sim/council.ts` | |
 | Not letting work strand anyone from water or food | `sim/relief.ts` | wired into `rankOptions` |
 | Fixed-step clock, stalls, requested/achieved speed | `app/game.ts` | |
 | Read-only view-models for the inspectors | `sim/inspect.ts`, `sim/inspect_work.ts` | |
@@ -382,6 +383,42 @@ watching about 3%, so practice still does most of it and people stay different f
 It does not make skills spread from people who have died (their skills die with them), but while they live their knowledge can be
 passed on, which is why an elder is worth something to a village after their strength has gone.
 
+## Deciding together
+
+A communal building (a timber yard, a quarry, a kiln, a smithy, a granary, a bakery, a hall) used to be marked out by whoever
+had the initiative that afternoon. Now the village has to agree first, and nobody is in charge of that (`sim/council.ts`).
+
+**A proposal.** The person who wants one (the same signals as before: planks wanted and no yard known, grain going off, and so on,
+and the same "only a few take a thing up on a given afternoon") puts the idea to the people they meet, in an ordinary conversation
+("We ought to build a granary, Ana: the grain keeps going off"). It starts open, with the proposer in favour.
+
+**A stance.** Everyone who hears of it takes one, from their own circumstances: how much they like and trust the proposer; whether
+they are hungry or thirsty themselves (food first); what the thing is for (a hall suits the sociable, a granary or bakery a household
+with fields, a smithy or kiln the curious, a yard and a quarry everyone a little); how much work it means (the diligent lean
+towards); whether they already know of one (strongly against a second); and a steady personal lean. The result is for, against or
+not sure; people who are not sure count neither way.
+
+**Word spreads by talking.** Only someone who has heard of a proposal can pass it on, one at a time in a conversation, and only
+people who have heard of it count. When two people who have heard of different proposals for the same building meet, the younger is
+folded into the older (supporters and all), so support is not split.
+
+**Carried or turned down.** It is carried when the supporters reach about one in ten of the village (never fewer than three) and
+outnumber the opposed: the feed says "The village agreed to raise a granary (5 for, 0 against)". Someone who supported it may then
+mark the site out (a person who did not hear of it, or was against it, may not, and says in the inspector that "the others have not
+agreed to it yet"), and everyone who was for it is inclined to help build it (a bonus of nine on building that kind of site for twelve
+days). It is turned down when at least three are against and the opposed outnumber the supporters by two or more; nobody who heard of
+it raises it again for two days. A proposal nobody settles lapses after two and a half days, a carried one nobody takes up after six.
+The person inspector lists the proposals they have heard of, what they made of them and how each stands.
+
+What this did in ordinary play (four seeds, 30 days, one run each, compared with the same worlds with councils turned off): most
+buildings still go up, one to three days later (the first timber yard on day 6 to 8 against 5; the first granary on day 7 to 9
+against 5), six or seven of the seven in every world, and ten to thirteen motions carried a world, one to three turned down and one to
+six lapsed. The quarry is the building most likely to be late: it was sited in three of four worlds, as it was without councils. Several
+people can raise the same thing before they have met; folding those together removed most of the churn, but a few duplicate proposals
+remain. Turning councils off (`settings.councils = false`, not in the menu) restores the old behaviour exactly, and is how the
+comparison was made. One existing test changed because of the delay: the save-and-resume test with a workshop at work now runs
+24,000 ticks, not 15,500, before it expects one.
+
 ## Surviving while working
 
 Before taking on anything that is not about survival, a person works out whether they could still reach water and food: the
@@ -450,8 +487,8 @@ depends only on the tick and the population, so a run is reproducible.
 * A handcart is valued by the trips on foot it saves: a load that would take three trips carrying a pack is worth fetching
   the cart for, a load that fits in one pack is not.
 
-* Saved worlds are version 7: people hold accounts of how others have behaved, carry a hearsay total, grief for those who died,
-  any spell of illness and a record of the skills they learned from others, and the dead are recorded with their household and grave, so saves from before that are refused rather than
+* Saved worlds are version 8: people hold accounts of how others have behaved, carry a hearsay total, grief for those who died,
+  any spell of illness and a record of the skills they learned from others, and the world holds the village's proposals, and the dead are recorded with their household and grave, so saves from before that are refused rather than
   half-loaded.
 
 * People now die of ordinary causes at realistic rates (illness, old age, childbirth), strength and fertility fade with age, and

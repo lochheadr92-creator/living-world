@@ -11,7 +11,7 @@ import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
-import { accountViews, learnedViews, illnessView, griefViews, commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
+import { accountViews, motionViews, learnedViews, illnessView, griefViews, commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
 import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
@@ -109,6 +109,8 @@ export interface PersonView {
   accounts: { about: string; what: string; seen: string; source: string }[];
   /** who they are mourning, how heavily it weighs, and how they came to know */
   grief: { about: string; weight: number; since: string; source: string; visited: string }[];
+  /** communal projects they have heard of, and what they make of them */
+  motions: { what: string; stance: string; status: string; counts: string; proposer: string }[];
   /** skills they picked up from other people */
   learned: { skill: string; from: string; when: string; gain: number; how: string }[];
   /** a spell of illness they are going through */
@@ -403,6 +405,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     grief: griefViews(world, p),
     illness: illnessView(world, p),
     learned: learnedViews(world, p),
+    motions: motionViews(world, p),
     grievances: grievanceViews(world, p),
     decision: d
       ? {

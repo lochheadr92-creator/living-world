@@ -350,6 +350,25 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
     },
   );
 
+  // village matters
+  const motionSec = deps.section('motions', 'Village matters', 'Proposals for communal buildings they have heard of, and what they make of them. A building is only marked out once enough people have agreed.');
+  const motionBox = h('div', { class: 'list' });
+  motionSec.body.append(motionBox);
+  const motionList = new KeyedList<PersonView['motions'][number], WorryRow>(
+    motionBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, m) => {
+      r.who.set(m.proposer);
+      setText(r.what, ` proposed ${m.what}: they are ${m.stance}`);
+      setText(r.meta, `${cap(m.status)} · ${m.counts}`);
+    },
+  );
+
   // learning from others
   const learnSec = deps.section('learned', 'Learned from others', 'Skills they picked up from other people, and who showed them. Nobody learns to be better than their teacher.');
   const learnBox = h('div', { class: 'list' });
@@ -400,7 +419,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   const soreList = new KeyedList<GrievanceView, QuarrelRow>(soreBox, () => makeQuarrelRow(deps), (r, g) => updateQuarrelRow(r, g));
 
   return {
-    els: [learnSec.el, illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
+    els: [motionSec.el, learnSec.el, illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
     update(v) {
       const talk = v.interaction ?? { current: null, previous: null };
       const hasTalk = !!(talk.current || talk.previous);
@@ -434,6 +453,11 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);
+
+      const motions = v.motions ?? [];
+      motionSec.setVisible(motions.length > 0);
+      motionSec.setCount(motions.length ? String(motions.length) : '');
+      if (motions.length && motionSec.isOpen()) motionList.sync(motions, (m) => `${m.proposer}|${m.what}|${m.status}`);
 
       const learned = v.learned ?? [];
       learnSec.setVisible(learned.length > 0);

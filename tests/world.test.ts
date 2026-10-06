@@ -104,7 +104,7 @@ describe('saving and loading', () => {
 
   it('an ordinary world a few days in, with a yard and a kiln at work, saves and resumes exactly', () => {
     const a = natural('save-load-workshops');
-    run(a, 15500);
+    run(a, 24000); // (the village agrees to a yard before marking it out, so one is at work a couple of days later than it once was)
     expect(a.buildings.some((x) => x.ops)).toBe(true);
     const b = deserializeWorld(serializeWorld(a));
     expect(hashWorld(b)).toBe(hashWorld(a));

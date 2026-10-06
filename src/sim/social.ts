@@ -19,6 +19,7 @@ import { adjustRel, relOf, spark, trustOf } from './relations';
 import { yearTicks } from './ageing';
 import { hearAccount, pickAccount, recordAccount } from './reputation';
 import { shareDeath } from './grief';
+import { hear, knownProposal, propose, shareMotion } from './council';
 import { SKILL_WORD, giveLesson, watchAndLearn } from './teaching';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
@@ -656,6 +657,8 @@ export interface ConvData {
   otherId?: number;
   /** teach: the skill being shown */
   skill?: import('./types').SkillKey;
+  /** motion: the kind of communal building being proposed */
+  motion?: import('./types').BuildingType;
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -700,6 +703,8 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
       return `to talk ${name} round`;
     case 'teach':
       return `to show ${name} something`;
+    case 'motion':
+      return `to put an idea to ${name}`;
     case 'recruit':
       return `to get ${name}'s help with a building`;
     case 'propose':
@@ -888,6 +893,12 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'apologize': {
       bubble(world, A, D.saying(D.APOLOGY, A.id, B.id, world.tick >> 5, vars), 'say', 58);
+      break;
+    }
+    case 'motion': {
+      if (!d.motion) break;
+      const pr = propose(world, A, d.motion, d.purpose ?? 'we need it');
+      bubble(world, A, D.saying(D.MOTION_ASK, A.id, B.id, world.tick >> 5, { ...vars, what: d.motion.replace('_', ' '), why: pr.why }), 'say', 64);
       break;
     }
     case 'teach': {
@@ -1178,6 +1189,14 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       mediate(world, c, A, B, d);
       break;
     }
+    case 'motion': {
+      if (!d.motion) break;
+      const pr = knownProposal(world, A, d.motion);
+      if (!pr) break;
+      const stance = hear(world, B, pr, A);
+      if (stance) bubble(world, B, D.saying(stance === 'for' ? D.MOTION_YES : stance === 'against' ? D.MOTION_NO : D.MOTION_UNSURE, B.id, A.id, world.tick >> 5), stance === 'for' ? 'happy' : 'say', 54);
+      break;
+    }
     case 'teach': {
       if (!d.skill) break;
       A.cooldowns['teach' + B.id + ':' + d.skill] = world.tick + DAY / 2; // asked: not again at once, whatever the answer
@@ -1289,6 +1308,7 @@ function shareAccount(world: World, S: Person, L: Person): void {
 function phaseNews(world: World, S: Person, L: Person): void {
   shareConcerns(world, S, L);
   shareDeath(world, S, L);
+  shareMotion(world, S, L);
   shareAccount(world, S, L);
   const news = pickNews(world, S, L, 2);
   let shown = false;

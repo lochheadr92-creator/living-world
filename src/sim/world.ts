@@ -27,6 +27,7 @@ import { perceive, refreshBeliefs } from './perception';
 import { rebuildMobileGrid } from './registry';
 import { decayGrievances } from './grievance';
 import { decayGrief } from './grief';
+import { lapseProposals } from './council';
 import { driftRelations } from './relations';
 import { bondWorkers, checkCommitments, flushDelayedBubbles, passingGreetings, updateConversations, updateRequests } from './social';
 import { resumeSuspended } from './activities';
@@ -78,6 +79,7 @@ export function stepWorld(world: World): void {
   if (tick % 10 === 3) mealTick(world);
 
   // slow world processes
+  if (tick % 120 === 31) lapseProposals(world);
   if (tick % LIFE_CHECK_EVERY === 17) for (const p of world.persons.slice()) if (p.alive) lifeTick(world, p);
   if (tick % CONCEPTION_CHECK_EVERY === 91) conceptionTick(world);
   if (tick % 300 === 151) clearStaleSites(world);
@@ -243,6 +245,7 @@ export function hashWorld(world: World): string {
     }
     push(`R${r4(aff)},${r4(fam)}|B${Object.keys(p.beliefs).length}|A${p.accounts.length}|L${p.learned.length}`);
   }
+  for (const pr of world.proposals) push(`Q${pr.id}:${pr.status},${pr.support.length},${pr.oppose.length},${pr.heard.length}`);
   for (const s of world.sources) push(`S${s.id}:${s.amount},${r4(s.growth)},${s.reserved}`);
   for (const b of world.buildings) push(`B${b.id}:${b.type},${r4(b.condition)},${r4(b.fuel)},${JSON.stringify(b.store.items)}`);
   for (const s of world.sites) push(`C${s.id}:${r4(s.work)},${JSON.stringify(s.delivered)},${JSON.stringify(s.used)}`);

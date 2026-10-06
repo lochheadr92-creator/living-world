@@ -10,6 +10,7 @@ import { isFacilityType } from './recipes';
 import { isFreeLand } from './registry';
 import { mintTool, taskMultiplier, wearFor } from './tools';
 import { ageYears, carryCap } from './people';
+import { completeProposal } from './council';
 import { workDrag } from './ageing';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
 import { clamp } from './util';
@@ -267,6 +268,7 @@ registerHandler('plan_site', {
     if (why) return `fail:${why}`;
     const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
     observe(world, p, site);
+    if (!up) completeProposal(world, type, p); // if the village had agreed to it, that is now acted on
     const hh = householdOf(world, p);
     const verb = up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';
     addEvent(world, 'build', `${p.name} ${verb} ${buildingLabel(type)}${hh ? ` for the ${hh.name} household` : ''}.`.replace('a a ', 'a '), [p.id], sx, sy);

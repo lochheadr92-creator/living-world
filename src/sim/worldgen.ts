@@ -76,6 +76,7 @@ export function blankWorld(settings: Settings, W = MAP_W, H = MAP_H): World {
     plots: [],
     piles: [],
     graves: [],
+    proposals: [],
     animals: [],
     tools: [],
     carts: [],

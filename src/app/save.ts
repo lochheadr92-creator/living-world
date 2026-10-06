@@ -13,7 +13,8 @@ const META = 'living-world:save-meta:v1';
 // 5: people carry grief for those who have died, and the dead are recorded with their household and grave (older saves lack them and are refused)
 // 6: people can be ill (a spell of illness with a course and an outcome); older saves lack it and are refused
 // 7: people record the skills they learned from others (older saves lack it and are refused)
-const VERSION = 7;
+// 8: the village's proposals for communal buildings are part of the world (older saves lack them and are refused)
+const VERSION = 8;
 
 function bytesToB64(bytes: Uint8Array): string {
   let s = '';

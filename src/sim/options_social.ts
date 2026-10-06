@@ -10,6 +10,8 @@ import { wantsAmends } from './grievance';
 import { ACCOUNT_LIFE } from './reputation';
 import { mournOptions } from './grief';
 import { SKILL_WORD, lessonFor } from './teaching';
+import { carriedForMe, knownProposal, turnedDownLately } from './council';
+import { facilityInitiative } from './production';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
@@ -337,6 +339,31 @@ function optReconcile(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── putting an idea to people ─────────────────────────
+/**
+ * Someone who wants a communal building puts the idea to the people they meet, and takes their answers as they come. It is the
+ * first step to getting it agreed (see council.ts); marking it out comes only after the village has agreed.
+ */
+function optMotion(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (world.settings.councils === false) return;
+  const wants = facilityInitiative(ctx);
+  if (!wants.length) return;
+  const tm = traitMods(p);
+  for (const w of wants) {
+    if (carriedForMe(world, p, w.type) || turnedDownLately(world, p, w.type)) continue;
+    const mine = knownProposal(world, p, w.type);
+    if (mine && mine.status !== 'open') continue;
+    for (const c of candidates(ctx)) {
+      if (mine && mine.heard.includes(c.q.id)) continue;
+      if (c.aff < 0 && !(p.relations[c.q.id]?.kin)) continue;
+      const sc = new Scorer().add(`wants a ${w.type.replace('_', ' ')}: ${w.why}`, (6 + 14 * w.signal) * tm.social).add('walking', -pen(c.d * 6));
+      if (sc.total < 11) continue;
+      mkSocial(ctx, c, 'motion', { motion: w.type, purpose: w.why }, `Put the idea of a ${w.type.replace('_', ' ')} to ${c.q.name}`, `to get a ${w.type.replace('_', ' ')} agreed`, null, sc, 'plan', ':' + w.type);
+    }
+  }
+}
+
 // ───────────────────────── showing someone how ─────────────────────────
 /**
  * Someone who is good at something offers to show someone who is clearly less skilled at it: most of all elders (whose strength is
@@ -512,6 +539,7 @@ export function socialOptions(ctx: Ctx): void {
   optReconcile(ctx);
   optMediate(ctx);
   optTeach(ctx);
+  optMotion(ctx);
   mournOptions(ctx);
   optRecruit(ctx);
   optPropose(ctx);

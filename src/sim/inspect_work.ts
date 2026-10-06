@@ -417,6 +417,19 @@ export function concernViews(world: World, p: Person): { about: string; kind: st
   return p.concerns.map((c) => ({ about: nameOf(world, c.about), kind: c.kind === 'missing' ? 'has not been seen for a while' : `looked ${c.kind}`, seen: ago(world, c.seen), source: c.src === 'seen' ? 'saw it themself' : `told by ${nameOf(world, c.from)}` }));
 }
 
+export function motionViews(world: World, p: Person): { what: string; stance: string; status: string; counts: string; proposer: string }[] {
+  return world.proposals
+    .filter((pr) => pr.heard.includes(p.id))
+    .slice(0, 6)
+    .map((pr) => ({
+      what: `a ${pr.type.replace('_', ' ')}`,
+      stance: pr.support.includes(p.id) ? 'for' : pr.oppose.includes(p.id) ? 'against' : 'not sure',
+      status: pr.status === 'carried' ? 'agreed' : pr.status === 'done' ? 'agreed and marked out' : pr.status === 'open' ? 'still being talked over' : pr.status === 'merged' ? 'folded into another proposal' : pr.status,
+      counts: `${pr.support.length} for, ${pr.oppose.length} against`,
+      proposer: nameOf(world, pr.proposer),
+    }));
+}
+
 export function learnedViews(world: World, p: Person): { skill: string; from: string; when: string; gain: number; how: string }[] {
   return p.learned
     .slice()
