@@ -499,7 +499,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
   if (facilitiesOf(ctx, 'smithy').length) {
     let worst: { kind: ToolKind; wear: number } | null = null;
     for (const t of toolsHeldBy(world, p.id)) {
-      if (t.kind === 'basket' || t.kind === 'jar' || t.kind === 'rod' || t.tier === 1) continue;
+      if (t.kind === 'basket' || t.kind === 'jar' || t.kind === 'rod' || t.kind === 'spear' || t.tier === 1) continue;
       if (toolsHeldBy(world, p.id, t.kind).some((x) => x.tier === 1)) continue;
       if (t.wear >= 18 && (!worst || t.wear > worst.wear)) worst = { kind: t.kind, wear: t.wear };
     }
@@ -867,7 +867,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   }
   if (!knowsOfAny(ctx, 'smithy') && oreKnown && haveKiln) {
     let s = 0;
-    const worn = toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar' && t.kind !== 'rod');
+    const worn = toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar' && t.kind !== 'rod' && t.kind !== 'spear');
     if (worn) s += 0.5;
     if (!(unitsOf(p.inv.axe) > 0 && unitsOf(p.inv.pick) > 0)) s += 0.2;
     if (init > 0.5) s += 0.25;
@@ -1111,6 +1111,6 @@ export function depositLead(ctx: Ctx): { what: 'clay_pit' | 'ore_vein' | 'outcro
   if (!knowTrees) return null;
   if (countBeliefsOfKind(p, 'clay_pit') === 0 && (bricksWanted(ctx) > 0 || (upgradeWish(ctx) > 0.5 && knowsOfAny(ctx, 'timber_yard')))) return { what: 'clay_pit', why: 'to find clay for bricks' };
   if (countBeliefsOfKind(p, 'outcrop') === 0 && countBeliefsOfKind(p, 'rock') < 4 && beliefsByKind(p, ['site']).some((s) => unitsOf(s.need?.stone) >= 4)) return { what: 'outcrop', why: 'to find a big stone outcrop' };
-  if (countBeliefsOfKind(p, 'ore_vein') === 0 && knowsOfAny(ctx, 'kiln') && toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar' && t.kind !== 'rod')) return { what: 'ore_vein', why: 'to find ore for iron tools' };
+  if (countBeliefsOfKind(p, 'ore_vein') === 0 && knowsOfAny(ctx, 'kiln') && toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar' && t.kind !== 'rod' && t.kind !== 'spear')) return { what: 'ore_vein', why: 'to find ore for iron tools' };
   return null;
 }

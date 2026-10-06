@@ -1,10 +1,11 @@
 import { addEvent, addFx, addLog } from './events';
-import { isSolidHome } from './constants';
+import { DAY, SPEAR_USE_TICKS, isSolidHome } from './constants';
 import { nearLitFire } from './perception';
 import { isWalkable, newId, personById, registerGeneric } from './registry';
 import { findPath } from './pathfinding';
 import { stageOf } from './people';
-import type { Animal, Person, World } from './types';
+import { toolOf, wearTool } from './tools';
+import type { Animal, Person, Tool, World } from './types';
 import { T } from './types';
 import { turnToward } from './util';
 
@@ -105,10 +106,38 @@ function steer(world: World, a: Animal, tx: number, ty: number, speed: number): 
   }
 }
 
-export function safeFromWolf(world: World, t: Person): boolean {
+/**
+ * The spear a grown person is carrying and could use now: they are awake, not a child or an elder, and it is sound.
+ * To a wolf such a person counts as two (wolves keep away from groups, and a spear is worth a second pair of hands).
+ * Nothing about this draws a random number, so a world in which nobody has a spear plays out exactly as it did.
+ */
+export function spearOf(world: World, p: Person): Tool | null {
+  if (!p.alive || p.pose === 'sleep' || (p.inv.spear ?? 0) < 1 || stageOf(world, p) !== 'adult') return null;
+  return toolOf(world, p, 'spear');
+}
+
+/** How much a person has had to run from wolves lately (halving each day; a bite counts double): two frights in a day or so is enough to want a spear. */
+export function wolfScare(world: World, p: Person): number {
+  const at = p.cooldowns.scareAt;
+  if (at === undefined) return 0;
+  return (p.cooldowns.scare ?? 0) * Math.pow(0.5, (world.tick - at) / DAY);
+}
+
+/** a run from a wolf that goes on, or is begun again a moment later, is one fright and not several */
+const FRIGHT_GAP = 300;
+
+export function noteScare(world: World, p: Person, amount = 1): void {
+  if (amount < 2 && world.tick - (p.cooldowns.scareAt ?? -1e9) < FRIGHT_GAP) return;
+  p.cooldowns.scare = wolfScare(world, p) + amount;
+  p.cooldowns.scareAt = world.tick;
+}
+
+export function safeFromWolf(world: World, t: Person, spears = false): boolean {
   let others = 0;
   for (const q of world.persons) {
-    if (q !== t && q.alive && Math.hypot(q.x - t.x, q.y - t.y) < 5) others++;
+    if (!q.alive || Math.hypot(q.x - t.x, q.y - t.y) >= 5) continue;
+    if (q !== t) others++;
+    if (spears && spearOf(world, q)) others++;
   }
   if (others >= 2) return true;
   if (nearLitFire(world, t.x, t.y, 6)) return true;
@@ -128,17 +157,37 @@ function pickPrey(world: World, a: Animal, night: boolean): Person | null {
     if (!p.alive) continue;
     const d = Math.hypot(p.x - a.x, p.y - a.y);
     if (d >= bd) continue;
-    if (safeFromWolf(world, p)) continue;
+    if (safeFromWolf(world, p, true)) continue;
     bd = d;
     best = p;
   }
   return best;
 }
 
-function scared(world: World, a: Animal): boolean {
+function scared(world: World, a: Animal, spears = false): boolean {
   let n = 0;
-  for (const p of world.persons) if (p.alive && Math.hypot(p.x - a.x, p.y - a.y) < 4.5) n++;
+  for (const p of world.persons) if (p.alive && Math.hypot(p.x - a.x, p.y - a.y) < 4.5) n += spears && spearOf(world, p) ? 2 : 1;
   return n >= 2;
+}
+
+/** The wolf backed off because of a spear (it would have come on otherwise): the spear is worn a little, and the feed says so. */
+function creditSpear(world: World, a: Animal): void {
+  let best: Person | null = null;
+  let bd = 6;
+  for (const q of world.persons) {
+    if (!spearOf(world, q)) continue;
+    const d = Math.hypot(q.x - a.x, q.y - a.y);
+    if (d < bd) {
+      bd = d;
+      best = q;
+    }
+  }
+  if (!best) return;
+  const spear = spearOf(world, best);
+  addEvent(world, 'danger', `${best.name} turned a wolf away with a spear.`, [best.id], best.x, best.y);
+  addLog(world, best, 'danger', `A wolf came for us and backed off from my spear near (${Math.round(best.x)}, ${Math.round(best.y)}).`);
+  addFx(world, 'sparkle', best.x, best.y, 0);
+  wearTool(world, spear, SPEAR_USE_TICKS);
 }
 
 function newWander(world: World, a: Animal): void {
@@ -178,6 +227,7 @@ function bite(world: World, a: Animal, t: Person): void {
   t.health = Math.max(0, t.health - dmg);
   t.needs.safety = Math.max(0, t.needs.safety - 50);
   t.cooldowns.hurt = world.tick;
+  noteScare(world, t, 2);
   t.nextThink = world.tick;
   a.cooldown = 32;
   addFx(world, 'bite', t.x, t.y, 0);
@@ -233,10 +283,16 @@ export function updateWildlife(world: World): void {
           break;
         }
         const d = Math.hypot(t.x - a.x, t.y - a.y);
-        if ((world.tick + a.id) % 8 === 0 && (scared(world, a) || safeFromWolf(world, t))) {
-          a.state = 'retreat';
-          a.until = world.tick + 240;
-          break;
+        if ((world.tick + a.id) % 8 === 0) {
+          const spooked = scared(world, a) || safeFromWolf(world, t);
+          // a spear in the company may be what tips it: then it gets the credit (and the wear)
+          const speared = !spooked && (scared(world, a, true) || safeFromWolf(world, t, true));
+          if (spooked || speared) {
+            if (speared) creditSpear(world, a);
+            a.state = 'retreat';
+            a.until = world.tick + 240;
+            break;
+          }
         }
         if (d > 19 || world.tick > a.until) {
           a.state = 'retreat';

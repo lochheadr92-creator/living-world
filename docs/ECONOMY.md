@@ -134,6 +134,15 @@ consumed.
   (picking, carrying), fishing rod (catching fish: 0.6 of the time), hammer (construction and repair speed; required for forging and for building a cart), saw (planks with
   little waste; required for sawing), water jar (carries four units of water without adding to the load). With no tool the
   task is simply slower.
+* **The spear** does no task. To a wolf, a grown person (not a child or an elder) who is awake and carries a sound spear counts as
+  two people: wolves keep away from groups, so one companion is enough to be safe where two would be needed, and a stalking wolf
+  that would have come on turns back when it comes within a few strides. Each wolf turned away wears the spear (about as much as
+  a hundred ticks of work, so it lasts a couple of dozen). A sleeper's spear is no help. Someone armed also stands their ground
+  with one companion beside them instead of running. People want one after being bitten, or after running from wolves twice in a
+  day or so (a chase counts once however often the running is begun again; the memory of a fright halves each day), and the more
+  often it has happened the more they will put making one before ordinary work, up to a limit; it is made by hand from three
+  wood (a long pole, sharpened and hardened in the fire). Nothing here draws a random number, and nothing changes in a world
+  where nobody carries a spear.
 * **Wear.** Use wears a tool a little per tick (iron half as much); past 70% wear the benefit fades, and at 100% it breaks
   (recorded: `-tool worn out`). A fitted handle restores more wear than a stick of wood when a tool is mended.
 * **Iron** tools are quicker and wear half as fast; they are forged only at a smithy.
@@ -311,6 +320,14 @@ depends only on the tick and the population, so a run is reproducible.
   ("no room to carry it") and the gathering, the walk and the work were wasted. In four 30-day harsh worlds (`scripts/toolmaking.ts`)
   101 attempts ended in a tool or in that refusal and 60 of them were the refusal (40 of 59 baskets); after the change 68 tools were
   made in the same four worlds and none was refused for room.
+* A spear exists (`scripts/wolfwatch.ts` counts what the wolves cost). Before it, sixteen ordinary worlds of 30 days had 7.3 wolf
+  bites each on average (0–20) and ten harsh worlds of 40 days 17.5 (7–32; the original code); people began to run from a wolf
+  about 260 times in an ordinary world. With the spear, and everything else in this record, the ordinary worlds made 23 spears (in
+  ten of the sixteen worlds, the first on day 2 to day 29) and spears turned a wolf away 11 times, and the harsh worlds made five
+  (in four of the ten) and turned a wolf away three times. Did the spears cut the bites? The same code in which nobody ever wants a
+  spear had 81 bites in all in the sixteen ordinary worlds against 77 with them (a difference of 0.25 a world, standard error
+  0.35): no measurable difference. What the spear changes is a rule (a grown person who is awake and carries one counts as two to a
+  wolf, `tests/spear.test.ts`) and what someone who has been in trouble does about it.
 * A site limit of four homes/fires/storehouse at a time, with separate allowances for improvement projects.
 * Promise deadlines are 1800 ticks (were 1200 or 1400), exclude sleep and survival time, and end in six distinct ways.
 * A trade is declined, not attempted, when either pack cannot take what it would be given.
@@ -361,7 +378,7 @@ projects stay off, so a staged scene never grows more than was staged.
 
 ## Limits worth knowing
 
-* There is still one settlement, one map, one animal species; no currency, no markets, no caravans, no combat.
+* There is still one settlement, one map, one animal species; no currency, no markets, no caravans, no fighting (a spear only makes a wolf turn away).
 * A workplace's output is not routed anywhere automatically: somebody has to want it and go and fetch it.
 * **Iron is the slowest chain and does not appear in every world.** The ore lies 23–26 tiles from the camp in all four standard
   seeds, a wooden tool is cheap to replace, and a forger needs a hammer of their own, charcoal from the kiln, and ore carried

@@ -114,6 +114,7 @@ export const ITEM_ICON: Record<ItemKind, string> = {
   saw: 'saw',
   jar: 'jar',
   rod: 'rod',
+  spear: 'spear',
 };
 
 /** compass word from a world-space delta, as seen on screen (north = up-screen) */

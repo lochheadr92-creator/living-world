@@ -395,7 +395,7 @@ export class Scenery {
         for (let i = 0; i < Math.min(3, n); i++) ellipse(ctx, px + (i - 1) * 4, py - (i === 1 ? 4 : 1), 4, 3, shade('#a8a79f', 0.88 + i * 0.07));
       } else if (k === 'water') {
         ellipse(ctx, px, py - 3, 3, 4, '#6b8fb3');
-      } else if (k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'rod') {
+      } else if (k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'rod' || k === 'spear') {
         this.dropTool(ctx, k, px, py);
       } else if (k === 'planks') {
         blit(ctx, plankStack(this.cache, Math.ceil(n / 2)), px, py, 0.7);
@@ -436,6 +436,9 @@ export class Scenery {
       ctx.fillRect(px + 2, py - 8, 5, 4);
     } else if (k === 'basket') {
       ellipse(ctx, px, py - 3, 5, 3.4, '#b98a4f');
+    } else if (k === 'spear') {
+      // a long shaft with a leaf of stone at the end
+      poly(ctx, [[px + 4, py - 5.6], [px + 9.5, py - 8.6], [px + 7, py - 3.6]], '#a9a79f', 'rgba(30,30,28,0.6)', 0.6);
     } else if (k === 'rod') {
       // a long thin pole with a fine line trailing from the tip
       ctx.strokeStyle = 'rgba(235,235,225,0.75)';

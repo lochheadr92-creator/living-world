@@ -82,6 +82,7 @@ export function reserveOf(world: World, p: Person, item: ItemKind): number {
     case 'saw':
     case 'jar':
     case 'rod':
+    case 'spear':
       return 1;
     default:
       return 0;
@@ -142,7 +143,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
     berries: 1, fruit: 1.3, fish: 2, smoked_fish: 2.6, grain: 1.6, bread: 2.4, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
-    flour: 2, axe: 6, pick: 6, hoe: 6, basket: 5, hammer: 6, saw: 7, jar: 5, rod: 5,
+    flour: 2, axe: 6, pick: 6, hoe: 6, basket: 5, hammer: 6, saw: 7, jar: 5, rod: 5, spear: 5,
   };
   let v = base[item];
   const have = p.inv[item] ?? 0;

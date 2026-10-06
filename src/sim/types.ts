@@ -7,7 +7,7 @@ export type TerrainType = (typeof T)[keyof typeof T];
 // ───────────────────────────── items ─────────────────────────────
 export type FoodKind = 'berries' | 'fruit' | 'fish' | 'smoked_fish' | 'grain' | 'bread';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
-export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'rod';
+export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'rod' | 'spear';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water';

@@ -18,6 +18,7 @@ import { foragePlans } from './options_survival';
 import { isFreeLand } from './registry';
 import { affinityOf } from './relations';
 import { hashUnit } from './rng';
+import { wolfScare } from './wildlife';
 import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind } from './types';
 import { T } from './types';
 
@@ -263,8 +264,9 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   const tool = wantedTool(ctx);
   if (tool) {
     const r = TOOL_RECIPE[tool];
-    if (r.wood) needs.push({ item: 'wood', n: r.wood, base: 15 * p.traits.diligence + 6, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
-    if (r.stone) needs.push({ item: 'stone', n: r.stone, base: 15 * p.traits.diligence + 6, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
+    const base = 15 * p.traits.diligence + 6 + toolUrgency(ctx, tool);
+    if (r.wood) needs.push({ item: 'wood', n: r.wood, base, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
+    if (r.stone) needs.push({ item: 'stone', n: r.stone, base, why: `to make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, tag: 'craft' });
   }
   // a worn tool is mended with a handle, or at a pinch a piece of wood
   for (const t of toolsHeldBy(world, p.id)) {
@@ -276,7 +278,12 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   return needs;
 }
 
-export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'rod' | null {
+/** How much more a tool matters to this person than a tool usually does: someone who keeps being chased by wolves has not got time to wait for a spear. */
+export function toolUrgency(ctx: Ctx, tool: ToolKind): number {
+  return tool === 'spear' ? Math.min(22, 6 * Math.log2(1 + wolfScare(ctx.world, ctx.p))) : 0;
+}
+
+export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'rod' | 'spear' | null {
   const { p, world } = ctx;
   if (ctx.stage === 'child') return null;
   const has = (t: ToolKind) => (p.inv[t] ?? 0) > 0;
@@ -284,12 +291,17 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
   const farming = world.plots.some((pl) => pl.hhId === p.hhId) || ctx.seeds > 0;
   const builds = p.stats.built > 0 || beliefsByKind(p, ['site']).some((s) => s.hh === p.hhId);
-  const options: { t: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'rod'; w: number }[] = [];
+  const options: { t: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'rod' | 'spear'; w: number }[] = [];
   if (!has('basket') && p.stats.gathered > 6) options.push({ t: 'basket', w: 1 + p.skills.forage });
   if (!has('axe') && knowTrees && p.stats.gathered > 3) options.push({ t: 'axe', w: p.skills.wood * 1.4 });
   if (!has('hoe') && farming) options.push({ t: 'hoe', w: p.skills.farm * 1.3 });
   // someone who has taken to fishing, and knows where the fish are, wants a rod
   if (!has('rod') && countBeliefsOfKind(p, 'fish_spot') >= 1 && p.skills.fish >= 1.02 && p.stats.gathered > 8) options.push({ t: 'rod', w: p.skills.fish * 1.6 });
+  // someone grown who has had to run from wolves more than once lately, or has been bitten, wants a spear
+  if (!has('spear') && ctx.stage === 'adult' && knowTrees) {
+    const scare = wolfScare(world, p);
+    if (scare >= 1.6) options.push({ t: 'spear', w: 1.6 + Math.min(1.6, 0.4 * scare) });
+  }
   if (!has('pick') && knowRocks && knowTrees) options.push({ t: 'pick', w: p.skills.stone });
   if (!has('hammer') && builds && p.stats.gathered > 6) options.push({ t: 'hammer', w: p.skills.build * 1.25 });
   if (!has('saw') && p.skills.carpentry > 1.04 && knowTrees && p.stats.crafted >= 1) options.push({ t: 'saw', w: p.skills.carpentry * 1.2 });
@@ -297,7 +309,7 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   const planksWanted = beliefsByKind(p, ['site']).some((s) => unitsOf(s.need?.planks) > 0) && beliefsByKind(p, ['building']).some((b) => b.btype === 'timber_yard');
   if (planksWanted && !has('saw') && knowTrees && p.skills.carpentry >= 0.95) options.push({ t: 'saw', w: 3 });
   // iron tools are forged with a hammer: someone who would swap a wearing tool for an iron one, and knows a smithy, needs their own
-  if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.kind !== 'rod' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
+  if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.kind !== 'rod' && t.kind !== 'spear' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
   if (!options.length) return null;
   options.sort((x, y) => y.w - x.w);
   return options[0].t;
@@ -728,7 +740,7 @@ function optCraft(ctx: Ctx): void {
   if (!best) return;
   const target = best;
   const e = eta(ctx, target.x, target.y);
-  const sc = new Scorer().add(`wants ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, 17 + 8 * p.traits.diligence).add('walking', -pen(e));
+  const sc = new Scorer().add(`wants ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, 17 + 8 * p.traits.diligence + toolUrgency(ctx, tool)).add('walking', -pen(e));
   const util = sc.total * nightMult(ctx);
   addOption(ctx, {
     kind: 'craft',

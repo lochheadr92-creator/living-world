@@ -1981,6 +1981,39 @@ function drawCarried(
         },
       });
     }
+    if ((inv.spear ?? 0) > 0) {
+      // a spear carried upright at the side, its stone point above the head
+      const a = S(0.14, 0.16, 4);
+      const b = S(0.1, 0.14, 44);
+      parts.push({
+        d: (a[2] + b[2]) / 2 + 0.05,
+        draw: () => {
+          ctx.lineCap = 'round';
+          ctx.strokeStyle = 'rgba(25,15,8,0.5)';
+          ctx.lineWidth = 2.2 * sc;
+          ctx.beginPath();
+          ctx.moveTo(a[0], a[1]);
+          ctx.lineTo(b[0], b[1]);
+          ctx.stroke();
+          ctx.strokeStyle = '#8a6a44';
+          ctx.lineWidth = 1.4 * sc;
+          ctx.beginPath();
+          ctx.moveTo(a[0], a[1]);
+          ctx.lineTo(b[0], b[1]);
+          ctx.stroke();
+          ctx.fillStyle = '#b9b7ae';
+          ctx.strokeStyle = 'rgba(30,30,28,0.6)';
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(b[0], b[1] - 5 * sc);
+          ctx.lineTo(b[0] - 1.7 * sc, b[1] + 0.4);
+          ctx.lineTo(b[0] + 1.7 * sc, b[1] + 0.4);
+          ctx.closePath();
+          ctx.fill();
+          ctx.stroke();
+        },
+      });
+    }
     if ((inv.hammer ?? 0) > 0) {
       const c = S(-0.02, -0.15, 10);
       parts.push({

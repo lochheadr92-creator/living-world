@@ -74,6 +74,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | saw | 1 | — | — | — |
 | water jar | 1.5 | — | — | — |
 | fishing rod | 1 | — | — | — |
+| spear | 1.5 | — | — | — |
 
 ## Tools
 
@@ -87,6 +88,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | saw | 2 wood, 2 stone | 11 s | 0.044 (iron: 0.022) | cutting planks with little waste |
 | water jar | cannot be made by hand (kiln) | — | 0.02 (iron: 0.01) | carrying more water (it wears a little with each trip to the water) |
 | fishing rod | 3 wood | 8 s | 0.014 (iron: 0.007) | catching fish faster: a pole, a plaited line and a bone hook |
+| spear | 3 wood | 9 s | 0.04 (iron: 0.02) | turning a wolf away: a long pole, sharpened and hardened in the fire. A grown person who carries one counts as two to a wolf |
 
 Duration multipliers while using the right tool (lower is faster): axe 0.55, pick 0.55, hoe 0.5, hoeTend 0.7, basket 0.85, rod 0.6, hammer 0.8, saw 0.55, ironAxe 0.42, ironPick 0.42, ironHoe 0.4, ironHoeTend 0.6, ironHammer 0.65, ironSaw 0.42, ironBasket 0.85. Past 70 wear the benefit fades linearly to nothing at 100, where the tool breaks.
 

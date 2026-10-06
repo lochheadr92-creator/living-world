@@ -67,7 +67,8 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
   wants — a site's missing materials, a repair, a better tool, bread for the household — through what is on the shelves and
   what a workshop they may use can make, down to something they can gather by hand. The inspector shows what is blocking
   anything that is not being made.
-* **Tools.** Axe, pickaxe, hoe, basket, hammer, saw, water jar and fishing rod (iron versions of most). A tool is a record with a wear
+* **Tools.** Axe, pickaxe, hoe, basket, hammer, saw, water jar, fishing rod and spear (iron versions of most). A spear is for wolves, not
+  for work: whoever carries one counts as two to a wolf, and people who have had to run from wolves lately make themselves one. A tool is a record with a wear
   and a holder, kept in step with the count in whoever holds it. It wears with use, dulls past 70%, breaks at 100%, is
   mended with a handle or a stick of wood, can be lent in conversation (the borrower promises to bring it back), left on a
   workshop's rack for anyone to use at the bench, and is left in a heap if its holder dies or the workshop falls.

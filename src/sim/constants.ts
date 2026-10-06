@@ -16,7 +16,7 @@ export const MAP_H = 80;
 
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'smoked_fish', 'grain', 'bread'];
-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'rod'];
+export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'rod', 'spear'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
@@ -49,6 +49,7 @@ export const WEIGHT: Record<ItemKind, number> = {
   saw: 1,
   jar: 1.5,
   rod: 1,
+  spear: 1.5,
 };
 /**
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
@@ -87,6 +88,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   saw: 'saw',
   jar: 'water jar',
   rod: 'fishing rod',
+  spear: 'spear',
 };
 export const isToolKind = (k: string): k is ToolKind => (TOOLS as string[]).includes(k);
 export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k);
@@ -368,7 +370,10 @@ export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
   saw: { label: 'saw', hand: { cost: { wood: 2, stone: 2 }, work: 110 }, wear: 0.044, blurb: 'cutting planks with little waste' },
   jar: { label: 'water jar', hand: null, wear: 0.02, blurb: 'carrying more water (it wears a little with each trip to the water)' },
   rod: { label: 'fishing rod', hand: { cost: { wood: 3 }, work: 80 }, wear: 0.014, blurb: 'catching fish faster: a pole, a plaited line and a bone hook' },
+  spear: { label: 'spear', hand: { cost: { wood: 3 }, work: 90 }, wear: 0.04, blurb: 'turning a wolf away: a long pole, sharpened and hardened in the fire. A grown person who carries one counts as two to a wolf' },
 };
+/** one wolf turned away by a spear wears it as much as this many ticks of ordinary work */
+export const SPEAR_USE_TICKS = 100;
 /** older name for the hand-made recipes, kept so existing option code reads naturally */
 export const TOOL_RECIPE: Record<ToolKind, { wood: number; stone: number; work: number; label: string }> = Object.fromEntries(
   (Object.keys(TOOL_DEFS) as ToolKind[]).map((k) => {
