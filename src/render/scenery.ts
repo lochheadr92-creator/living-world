@@ -395,7 +395,7 @@ export class Scenery {
         for (let i = 0; i < Math.min(3, n); i++) ellipse(ctx, px + (i - 1) * 4, py - (i === 1 ? 4 : 1), 4, 3, shade('#a8a79f', 0.88 + i * 0.07));
       } else if (k === 'water') {
         ellipse(ctx, px, py - 3, 3, 4, '#6b8fb3');
-      } else if (k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar') {
+      } else if (k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'rod') {
         this.dropTool(ctx, k, px, py);
       } else if (k === 'planks') {
         blit(ctx, plankStack(this.cache, Math.ceil(n / 2)), px, py, 0.7);
@@ -412,7 +412,7 @@ export class Scenery {
       } else if (k === 'handles') {
         blit(ctx, handleBundle(this.cache, n), px, py, 0.8);
       } else {
-        sack(ctx, px, py, k === 'fish' ? '#9ac1d4' : k === 'berries' ? '#b2486a' : k === 'fruit' ? '#e0823a' : k === 'seeds' ? '#8a6a3a' : '#d9b44a');
+        sack(ctx, px, py, k === 'fish' ? '#9ac1d4' : k === 'smoked_fish' ? '#b98a4a' : k === 'berries' ? '#b2486a' : k === 'fruit' ? '#e0823a' : k === 'seeds' ? '#8a6a3a' : '#d9b44a');
       }
     }
   }
@@ -436,6 +436,14 @@ export class Scenery {
       ctx.fillRect(px + 2, py - 8, 5, 4);
     } else if (k === 'basket') {
       ellipse(ctx, px, py - 3, 5, 3.4, '#b98a4f');
+    } else if (k === 'rod') {
+      // a long thin pole with a fine line trailing from the tip
+      ctx.strokeStyle = 'rgba(235,235,225,0.75)';
+      ctx.lineWidth = 0.6;
+      ctx.beginPath();
+      ctx.moveTo(px + 5, py - 5);
+      ctx.quadraticCurveTo(px + 9, py - 3, px + 8, py + 1);
+      ctx.stroke();
     } else {
       ctx.fillRect(px + 3, py - 8, 4.5, 3);
     }

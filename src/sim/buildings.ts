@@ -113,7 +113,7 @@ export function makeHousePile(world: World, x: number, y: number, items: Items, 
     registerGeneric(world, target);
   }
   // equipment keeps its identity: its records move to the heap along with the counts
-  if (fromHolder) for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
+  if (fromHolder) for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'rod'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
   return target;
 }
 

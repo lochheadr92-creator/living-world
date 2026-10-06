@@ -797,7 +797,7 @@ export class CharacterRenderer {
       parts.push({
         d: handR[2] + 0.01,
         draw: () => {
-          ctx.fillStyle = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
+          ctx.fillStyle = (p.inv.fish ?? 0) > 0 ? '#9ac1d4' : (p.inv.smoked_fish ?? 0) > 0 ? '#b98a4a' : (p.inv.fruit ?? 0) > 0 ? '#e0723a' : (p.inv.grain ?? 0) > 0 ? '#d9b44a' : '#a8294f';
           ctx.beginPath();
           ctx.arc(handR[0], handR[1] - 1.6, 1.9 * sc, 0, Math.PI * 2);
           ctx.fill();
@@ -1573,7 +1573,7 @@ function drawCarried(
   const wood = inv.wood ?? 0;
   const planks = inv.planks ?? 0;
   const handles = inv.handles ?? 0;
-  const food = (inv.berries ?? 0) + (inv.fruit ?? 0) + (inv.fish ?? 0) + (inv.grain ?? 0);
+  const food = (inv.berries ?? 0) + (inv.fruit ?? 0) + (inv.fish ?? 0) + (inv.smoked_fish ?? 0) + (inv.grain ?? 0);
   const bread = inv.bread ?? 0;
   const water = inv.water ?? 0;
   const hasBasket = (inv.basket ?? 0) > 0;
@@ -1801,7 +1801,7 @@ function drawCarried(
   }
 
   // ── basket on the hip, with whatever food is in it ──
-  const foodCols = [(inv.berries ?? 0) > 0 ? '#a8294f' : '', (inv.fruit ?? 0) > 0 ? '#e0723a' : '', (inv.grain ?? 0) > 0 ? '#d9b44a' : '', (inv.fish ?? 0) > 0 ? '#9ac1d4' : '', bread > 0 ? '#c4863c' : ''].filter(Boolean);
+  const foodCols = [(inv.berries ?? 0) > 0 ? '#a8294f' : '', (inv.fruit ?? 0) > 0 ? '#e0723a' : '', (inv.grain ?? 0) > 0 ? '#d9b44a' : '', (inv.fish ?? 0) > 0 ? '#9ac1d4' : '', (inv.smoked_fish ?? 0) > 0 ? '#b98a4a' : '', bread > 0 ? '#c4863c' : ''].filter(Boolean);
   const foodN = food + bread;
   if (hasBasket) {
     const c = S(-0.2, 0, 15 + lean * 7);

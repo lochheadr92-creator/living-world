@@ -42,6 +42,7 @@ outcrop ── stone (quarry, 3 at a time; or by hand from small rocks) ── b
 clay pit ── clay ── bricks (kiln 4→3) ── house, bakery, smithy ;  clay ── water jar (kiln 3→1)
 ore vein ── ore ── iron (smithy: 3 ore + 2 charcoal → 1 iron) ── iron axe / pickaxe / hoe / saw / hammer
 field ── grain ── flour (bakery 4→3) ── bread (3 flour + 2 water + 1 wood → 4 loaves) ── meals, caring, hunger
+fish spot ── fish (by hand; a fishing rod makes it faster) ── smoked fish (smokehouse: 4 fish + 1 wood → 3) ── meals, caring, hunger
 ```
 
 Every arrow is a recipe in `recipes.ts`. There are no circular dependencies (a test walks the graph) and every chain can
@@ -110,6 +111,11 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
   longer they spoil more than twice as fast as an ordinary store.
 * **Hall.** The hall is where shared meals are held and where news travels among whoever is sitting there (one telling at a
   time, only between people actually present). It gives shelter. It does not broadcast anything.
+* **Smokehouse.** Four fresh fish and a stick of wood become three smoked fish and one fish's worth of waste (water driven
+  off, bones); a practised fisher gets through a batch faster. Fresh fish goes off at 1.6 times the berry rate; smoked fish
+  at 0.2 (about the rate of grain), weighs a third less and restores a little more. It is wanted when more fresh fish is
+  held than will be eaten soon, and is laid out only after the first week or so, by somebody who knows a timber yard and a
+  fish spot and holds spare fish. Like the other workplaces it is neither guaranteed nor immediate.
 
 ## Tools
 
@@ -118,7 +124,7 @@ in step by every transfer. It is never conjured: hand-making and forging record 
 consumed.
 
 * **Effects** are task-specific: axe (felling, and hewing planks), pickaxe (rock, clay, ore, outcrops, quarry), hoe (till/tend), basket
-  (picking, carrying), hammer (construction and repair speed; required for forging and for building a cart), saw (planks with
+  (picking, carrying), fishing rod (catching fish: 0.6 of the time), hammer (construction and repair speed; required for forging and for building a cart), saw (planks with
   little waste; required for sawing), water jar (carries four units of water without adding to the load). With no tool the
   task is simply slower.
 * **Wear.** Use wears a tool a little per tick (iron half as much); past 70% wear the benefit fades, and at 100% it breaks
@@ -276,6 +282,13 @@ depends only on the tick and the population, so a run is reproducible.
   7 of 176 and 15 of 324, one of them at goods held for another person. These are single runs of two seeds, measured by
   watching withdraw trips in a headless run; the worlds differ after the change, so they are not the same trajectories.
 * Grain, flour and bread spoil in ordinary stores and heaps (grain did not before); the granary exists to slow it.
+* A fishing rod, a smokehouse and smoked fish exist (fish was the one food with no way to keep it). Measured, not assumed: in
+  four 30-day runs (`meadow`, `river`, `fern`, `aspen`) the first rods were in stock by day 2–6, the first smoked fish on day
+  14, 19, 21 and 13, and from then on smoked fish was in stock at every daily sample to day 30; no one died and the books
+  balanced in all four. Fish was not much of a waste problem to begin with — in 25-day runs of the same four worlds before the
+  change about a tenth of the fish caught spoiled (73 of 748, 43 of 396, 92 of 767, 73 of 753) — so what the smokehouse adds is
+  food that keeps and weighs less, not a large cut in spoilage. A new building kind must be added **last** in `BUILD_DEF`: the
+  order of its keys salts the per-building hashes (`tests/smoking.test.ts` keeps it honest).
 * A site limit of four homes/fires/storehouse at a time, with separate allowances for improvement projects.
 * Promise deadlines are 1800 ticks (were 1200 or 1400), exclude sleep and survival time, and end in six distinct ways.
 * A trade is declined, not attempted, when either pack cannot take what it would be given.

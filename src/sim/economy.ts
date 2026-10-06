@@ -3,7 +3,7 @@ import { carryCap } from './people';
 import { idFromTag, isToolItem, retagTools } from './toolreg';
 import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, Store, World } from './types';
 
-const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'bread'];
+const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'smoked_fish', 'bread'];
 
 /** Choose the food that fits the current hunger deficit best (largest portion that does not overshoot much). */
 export function pickFood(items: Items, hunger: number): FoodKind | null {

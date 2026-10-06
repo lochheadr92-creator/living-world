@@ -43,7 +43,7 @@ export function personOf(world: World, id: number): Person | null {
   return e && e.ent === 'person' && e.alive ? e : null;
 }
 
-const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
+const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'smoked_fish', 'grain', 'bread'];
 
 export function isFood(k: ItemKind): boolean {
   return FOODS.includes(k);
@@ -81,6 +81,7 @@ export function reserveOf(world: World, p: Person, item: ItemKind): number {
     case 'hammer':
     case 'saw':
     case 'jar':
+    case 'rod':
       return 1;
     default:
       return 0;
@@ -140,8 +141,8 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
-    berries: 1, fruit: 1.3, fish: 2, grain: 1.6, bread: 2.4, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
-    flour: 2, axe: 6, pick: 6, hoe: 6, basket: 5, hammer: 6, saw: 7, jar: 5,
+    berries: 1, fruit: 1.3, fish: 2, smoked_fish: 2.6, grain: 1.6, bread: 2.4, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
+    flour: 2, axe: 6, pick: 6, hoe: 6, basket: 5, hammer: 6, saw: 7, jar: 5, rod: 5,
   };
   let v = base[item];
   const have = p.inv[item] ?? 0;
@@ -326,6 +327,8 @@ function toolInUse(act: string, kind: ToolKind): boolean {
     case 'hammer':
     case 'saw':
       return act === 'build' || act === 'repair' || act === 'operate' || act === 'craft';
+    case 'rod':
+      return act === 'gather';
     default:
       return false;
   }
@@ -1236,7 +1239,7 @@ export function contestLost(world: World, loser: Person, winnerId: number, src: 
   adjustRel(loser, w.id, world.tick, { aff: -(0.8 + (desperate ? 2.2 : 0.4)), note: `${w.name} got the last ${src.item} before me` });
   addLog(world, loser, 'social', `${w.name} got to the last ${src.item} before me.`);
   // worth a line in the feed now and then (not for every missed berry)
-  const isFood = src.item === 'berries' || src.item === 'fruit' || src.item === 'fish' || src.item === 'grain';
+  const isFood = src.item === 'berries' || src.item === 'fruit' || src.item === 'fish' || src.item === 'smoked_fish' || src.item === 'grain';
   if (isFood && loser.needs.hunger < 55 && world.tick - (loser.cooldowns.contestEvt ?? -9999) > 1200 && world.tick - (world.stats.lastContestEvt ?? -9999) > 450) {
     loser.cooldowns.contestEvt = world.tick;
     world.stats.lastContestEvt = world.tick;

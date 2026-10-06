@@ -49,6 +49,7 @@ const SPEC: Record<BuildingType, Spec> = {
   smithy: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.32 },
   granary: { frame: 'none', gable: false, footing: 'none', reveal: 0.1 },
   bakery: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
+  smokehouse: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.32 },
   hall: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
 };
 

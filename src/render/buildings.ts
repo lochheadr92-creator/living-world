@@ -52,6 +52,7 @@ const STOCK: Partial<Record<BuildKind, Slot[]>> = {
     { item: 'flour', kind: 'flour', fx: 0.05, fy: 1.45, per: 2, max: 4, layer: 1 },
     { item: 'bread', kind: 'bread', fx: 1.0, fy: 1.8, per: 1, max: 9, layer: 1 },
   ],
+  smokehouse: [{ item: 'smoked_fish', kind: 'smoked', fx: 0.62, fy: 1.82, per: 1, max: 9, layer: 1 }],
 };
 
 export class BuildingPainter {

@@ -56,6 +56,7 @@ const BUILDING_ICON: Record<BuildingType, IconName> = {
   smithy: 'anvil',
   granary: 'granary',
   bakery: 'bread',
+  smokehouse: 'smoked_fish',
   hall: 'hall',
 };
 

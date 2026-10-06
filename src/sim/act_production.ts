@@ -93,7 +93,7 @@ registerHandler('operate', {
     a.cycle++;
     a.progress++;
     const r = RECIPE_BY_ID[a.data.running as string];
-    if (a.progress % 16 === 8 && r) addFx(world, r.id === 'quarry_stone' ? 'mine' : r.at === 'smithy' ? 'sparkle' : r.at === 'bakery' ? 'smoke' : r.id === 'saw_planks' ? 'dust' : 'hammer', a.tx, a.ty, b.id);
+    if (a.progress % 16 === 8 && r) addFx(world, r.id === 'quarry_stone' ? 'mine' : r.at === 'smithy' ? 'sparkle' : r.at === 'bakery' || r.at === 'smokehouse' ? 'smoke' : r.id === 'saw_planks' ? 'dust' : 'hammer', a.tx, a.ty, b.id);
     if (res === 'worked') return 'done';
     return 'continue';
   },

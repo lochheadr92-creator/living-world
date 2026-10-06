@@ -2,7 +2,7 @@
 
 A small civilisation developing inside an isometric diorama. About thirty people forage, drink, sleep, build, farm,
 talk, ask each other for help, quarrel, make peace, fall in love, raise children and grow old — and over weeks of watching
-they lay out a timber yard, a quarry, a kiln, a granary, a bakery, a hall and a smithy, make tools and carts, rebuild their
+they lay out a timber yard, a quarry, a kiln, a granary, a bakery, a smokehouse, a hall and a smithy, make tools and carts, rebuild their
 huts as houses, eat together and look after each other. You mostly watch.
 
 Everything on screen is the visible face of real simulation state: a berry bush holds a number of berries,
@@ -56,7 +56,8 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
 * **Workplaces.** A *timber yard* (logs → planks and handles; carts are built here), a *quarry* (cuts stone out of an
   outcrop, which is finite), a *kiln* (bricks and water jars from clay; charcoal from wood), a *smithy* (ore and charcoal →
   iron → iron tools), a *granary* (grain, flour and bread kept per household, spoiling slowly if tended), a *bakery* (grain →
-  flour → bread) and a *hall* (where shared meals are held). A hut becomes a *house* by being rebuilt in place — same
+  flour → bread), a *smokehouse* (spare fish → smoked fish, which keeps for weeks instead of a day or two) and a *hall*
+  (where shared meals are held). A hut becomes a *house* by being rebuilt in place — same
   building, same household, still lived in while the work goes on — once planks and bricks have been carried to it.
   Nothing is guaranteed: each exists because somebody who knew the ingredients laid it out and others supplied it, and
   which ones appear, and when, differs from world to world.
@@ -65,7 +66,7 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
   wants — a site's missing materials, a repair, a better tool, bread for the household — through what is on the shelves and
   what a workshop they may use can make, down to something they can gather by hand. The inspector shows what is blocking
   anything that is not being made.
-* **Tools.** Axe, pickaxe, hoe, basket, hammer, saw, water jar (iron versions of most). A tool is a record with a wear
+* **Tools.** Axe, pickaxe, hoe, basket, hammer, saw, water jar and fishing rod (iron versions of most). A tool is a record with a wear
   and a holder, kept in step with the count in whoever holds it. It wears with use, dulls past 70%, breaks at 100%, is
   mended with a handle or a stick of wood, can be lent in conversation (the borrower promises to bring it back), left on a
   workshop's rack for anyone to use at the bench, and is left in a heap if its holder dies or the workshop falls.

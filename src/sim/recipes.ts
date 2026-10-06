@@ -265,6 +265,23 @@ export const RECIPES: Recipe[] = [
     benefit: 'Four loaves (30 hunger each) from what raw grain gives 3 (22 each): the dough takes up water. Bread keeps well and is what is served at shared meals.',
   },
   {
+    id: 'smoke_fish',
+    label: 'smoked fish',
+    doing: 'Smoking fish',
+    at: 'smokehouse',
+    inputs: { fish: 4 },
+    fuel: { wood: 1 },
+    work: 60,
+    burn: 240,
+    outputs: { smoked_fish: 3 },
+    waste: { fish: 1 },
+    wasteWhy: 'water driven off by the smoke, and bones',
+    skill: 'fish',
+    workers: 2,
+    serves: ['smoked_fish'],
+    benefit: 'Three smoked fish (30 hunger each, a third lighter to carry) from four fresh ones, which would go off in a day or two: smoked fish keeps for weeks. Whoever fishes well smokes best.',
+  },
+  {
     id: 'tend_granary',
     label: 'tended bins',
     doing: 'Tending the grain bins',
@@ -289,7 +306,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'smokehouse'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 
@@ -334,6 +351,11 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     set.add('wood');
     set.add('water');
   }
+  if (type === 'smokehouse') {
+    set.add('fish');
+    set.add('wood');
+    set.add('smoked_fish');
+  }
   if (type === 'granary') {
     set.add('grain');
     set.add('flour');
@@ -343,6 +365,7 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
   if (type === 'hall') {
     set.add('bread');
     set.add('fish');
+    set.add('smoked_fish');
     set.add('fruit');
     set.add('berries');
     set.add('grain');

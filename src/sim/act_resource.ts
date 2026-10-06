@@ -48,6 +48,8 @@ function toolTask(s: Source): ToolTask | null {
     case 'fruit_tree':
     case 'wild_grain':
       return 'forage';
+    case 'fish_spot':
+      return 'fish';
     default:
       return null;
   }

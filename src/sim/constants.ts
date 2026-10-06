@@ -15,17 +15,18 @@ export const MAP_W = 80;
 export const MAP_H = 80;
 
 // ── items ──
-export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
+export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'smoked_fish', 'grain', 'bread'];
+export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'rod'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
-export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30 };
+export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, smoked_fish: 30, grain: 22, bread: 30 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
   berries: 1,
   fruit: 1,
   fish: 1.5,
+  smoked_fish: 1,
   grain: 1,
   bread: 1,
   seeds: 0.25,
@@ -47,12 +48,13 @@ export const WEIGHT: Record<ItemKind, number> = {
   hammer: 1,
   saw: 1,
   jar: 1.5,
+  rod: 1,
 };
 /**
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
  * Grain, flour and bread keep far better than fruit but are not immune: damp and vermin get at them unless they are kept in a granary.
  */
-export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5 };
+export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, smoked_fish: 0.2, grain: 0.22, flour: 0.28, bread: 0.5 };
 /** a granary's ventilated, vermin-proofed bins cut spoilage of what is kept there to this fraction (when tended) */
 export const GRANARY_SPOIL = 0.2;
 /** untended for this long, the granary's bins start to go off like any store (and then spoil faster) */
@@ -62,6 +64,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   berries: 'berries',
   fruit: 'fruit',
   fish: 'fish',
+  smoked_fish: 'smoked fish',
   grain: 'grain',
   bread: 'bread',
   seeds: 'seeds',
@@ -83,6 +86,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   hammer: 'hammer',
   saw: 'saw',
   jar: 'water jar',
+  rod: 'fishing rod',
 };
 export const isToolKind = (k: string): k is ToolKind => (TOOLS as string[]).includes(k);
 export const isFoodKind = (k: string): k is FoodKind => (FOODS as string[]).includes(k);
@@ -168,6 +172,10 @@ export interface BuildDef {
 
 const bd = (d: Omit<BuildDef, 'wood' | 'stone'>): BuildDef => ({ ...d, wood: d.cost.wood ?? 0, stone: d.cost.stone ?? 0 });
 
+/**
+ * Every kind of building. The ORDER of these keys is behaviour: `Object.keys(BUILD_DEF).indexOf(type)` salts the hash that decides who takes up a
+ * project and keys the memory of failed attempts (production.ts, options_work.ts), so new kinds go at the END or every existing world changes.
+ */
 export const BUILD_DEF: Record<BuildingType, BuildDef> = {
   lean_to: bd({ w: 1, h: 1, cost: { wood: 4 }, work: 200, cap: 12, workers: 2, label: 'lean-to', sleepers: 3, protect: 5, role: 'home', blurb: 'A rough shelter of branches.' }),
   hut: bd({ w: 2, h: 2, cost: { wood: 8, stone: 4 }, work: 520, cap: 40, workers: 3, label: 'hut', sleepers: 6, protect: 10, role: 'home', blurb: 'A proper home with a small store.' }),
@@ -277,6 +285,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'meet',
     blurb: 'A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there.',
   }),
+  smokehouse: bd({
+    w: 2,
+    h: 2,
+    cost: { wood: 10, stone: 4 },
+    work: 480,
+    cap: 40,
+    workers: 2,
+    label: 'smokehouse',
+    sleepers: 0,
+    protect: 0,
+    role: 'work',
+    blurb: 'A low timber shed over a smouldering fire: fish are smoked here until they keep for weeks instead of going off in a day or two.',
+  }),
 };
 
 /** every kind of building a household can live in */
@@ -303,6 +324,7 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   smithy: 0.0012,
   granary: 0.0012,
   bakery: 0.0014,
+  smokehouse: 0.0013,
   hall: 0.0012,
 };
 export const REPAIR_GAIN = 28;
@@ -331,6 +353,7 @@ export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
   hammer: { label: 'hammer', hand: { cost: { wood: 1, stone: 2 }, work: 80 }, wear: 0.032, blurb: 'building and repair work, and every kind of smithing' },
   saw: { label: 'saw', hand: { cost: { wood: 2, stone: 2 }, work: 110 }, wear: 0.044, blurb: 'cutting planks with little waste' },
   jar: { label: 'water jar', hand: null, wear: 0.02, blurb: 'carrying more water (it wears a little with each trip to the water)' },
+  rod: { label: 'fishing rod', hand: { cost: { wood: 3 }, work: 80 }, wear: 0.014, blurb: 'catching fish faster: a pole, a plaited line and a bone hook' },
 };
 /** older name for the hand-made recipes, kept so existing option code reads naturally */
 export const TOOL_RECIPE: Record<ToolKind, { wood: number; stone: number; work: number; label: string }> = Object.fromEntries(
@@ -346,6 +369,7 @@ export const TOOL_EFFECT = {
   hoe: 0.5,
   hoeTend: 0.7,
   basket: 0.85,
+  rod: 0.6,
   hammer: 0.8,
   saw: 0.55,
   ironAxe: 0.42,

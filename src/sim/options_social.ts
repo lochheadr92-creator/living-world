@@ -277,7 +277,7 @@ function optOffer(ctx: Ctx): void {
     const needFood = c.s.hungry;
     const needWater = c.s.thirsty;
     if (!needFood && !needWater) continue;
-    if (c.s.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain') && !c.s.child && !c.s.hurt) {
+    if (c.s.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'smoked_fish' || k === 'grain') && !c.s.child && !c.s.hurt) {
       // they have food of their own; they just have not eaten yet
       if (needFood && !needWater) continue;
     }

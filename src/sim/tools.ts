@@ -7,7 +7,7 @@ import type { Items, Person, Tool, ToolKind, World } from './types';
 
 export { toolById, toolsHeldBy, bestOf } from './toolreg';
 
-export type ToolTask = 'chop' | 'mine' | 'till' | 'tend' | 'forage' | 'build' | 'repair' | 'saw' | 'smith';
+export type ToolTask = 'chop' | 'mine' | 'till' | 'tend' | 'forage' | 'fish' | 'build' | 'repair' | 'saw' | 'smith';
 
 const TASK_TOOL: Record<ToolTask, ToolKind | null> = {
   chop: 'axe',
@@ -15,6 +15,7 @@ const TASK_TOOL: Record<ToolTask, ToolKind | null> = {
   till: 'hoe',
   tend: 'hoe',
   forage: 'basket',
+  fish: 'rod',
   build: 'hammer',
   repair: 'hammer',
   saw: 'saw',
@@ -37,6 +38,8 @@ function baseMultiplier(kind: ToolKind, tier: 0 | 1, task: ToolTask): number {
       return task === 'tend' ? (iron ? TOOL_EFFECT.ironHoeTend : TOOL_EFFECT.hoeTend) : iron ? TOOL_EFFECT.ironHoe : TOOL_EFFECT.hoe;
     case 'basket':
       return TOOL_EFFECT.basket;
+    case 'rod':
+      return TOOL_EFFECT.rod;
     case 'hammer':
       return iron ? TOOL_EFFECT.ironHammer : TOOL_EFFECT.hammer;
     case 'saw':

@@ -170,7 +170,7 @@ function optDepositFood(ctx: Ctx): void {
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
     let toStore = surplus;
-    for (const k of ['grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
+    for (const k of ['smoked_fish', 'grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
       const have = p.inv[k] ?? 0;
       const give = Math.min(have, toStore);
       if (give > 0) {
@@ -276,7 +276,7 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   return needs;
 }
 
-export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | null {
+export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'rod' | null {
   const { p, world } = ctx;
   if (ctx.stage === 'child') return null;
   const has = (t: ToolKind) => (p.inv[t] ?? 0) > 0;
@@ -284,10 +284,12 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
   const farming = world.plots.some((pl) => pl.hhId === p.hhId) || ctx.seeds > 0;
   const builds = p.stats.built > 0 || beliefsByKind(p, ['site']).some((s) => s.hh === p.hhId);
-  const options: { t: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw'; w: number }[] = [];
+  const options: { t: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'rod'; w: number }[] = [];
   if (!has('basket') && p.stats.gathered > 6) options.push({ t: 'basket', w: 1 + p.skills.forage });
   if (!has('axe') && knowTrees && p.stats.gathered > 3) options.push({ t: 'axe', w: p.skills.wood * 1.4 });
   if (!has('hoe') && farming) options.push({ t: 'hoe', w: p.skills.farm * 1.3 });
+  // someone who has taken to fishing, and knows where the fish are, wants a rod
+  if (!has('rod') && countBeliefsOfKind(p, 'fish_spot') >= 1 && p.skills.fish >= 1.02 && p.stats.gathered > 8) options.push({ t: 'rod', w: p.skills.fish * 1.6 });
   if (!has('pick') && knowRocks && knowTrees) options.push({ t: 'pick', w: p.skills.stone });
   if (!has('hammer') && builds && p.stats.gathered > 6) options.push({ t: 'hammer', w: p.skills.build * 1.25 });
   if (!has('saw') && p.skills.carpentry > 1.04 && knowTrees && p.stats.crafted >= 1) options.push({ t: 'saw', w: p.skills.carpentry * 1.2 });
@@ -295,7 +297,7 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   const planksWanted = beliefsByKind(p, ['site']).some((s) => unitsOf(s.need?.planks) > 0) && beliefsByKind(p, ['building']).some((b) => b.btype === 'timber_yard');
   if (planksWanted && !has('saw') && knowTrees && p.skills.carpentry >= 0.95) options.push({ t: 'saw', w: 3 });
   // iron tools are forged with a hammer: someone who would swap a wearing tool for an iron one, and knows a smithy, needs their own
-  if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
+  if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.kind !== 'rod' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
   if (!options.length) return null;
   options.sort((x, y) => y.w - x.w);
   return options[0].t;
@@ -939,7 +941,7 @@ function optSalvage(ctx: Ctx): void {
         value += 10;
       }
     }
-    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain'] as const) {
+    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'smoked_fish', 'grain'] as const) {
       const n = unitsOf(items[k]);
       if (n <= 0) continue;
       const heavy = k === 'wood' || k === 'stone' || k === 'planks' || k === 'bricks' || k === 'clay' || k === 'ore';
@@ -1167,7 +1169,7 @@ function optCare(ctx: Ctx): void {
     }
     // someone who is asleep or already holding food does not need it pressed on them
     if (seenNow && seenNow.asleep && d.needs.hunger > 18 && d.needs.thirst > 18) continue;
-    if (seenNow && !thirsty && seenNow.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain')) continue;
+    if (seenNow && !thirsty && seenNow.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'smoked_fish' || k === 'grain')) continue;
     if ((d.cooldowns.fedUntil ?? 0) > world.tick) continue;
     const px = seenNow ? seenNow.x : wh!.x;
     const py = seenNow ? seenNow.y : wh!.y;
@@ -1176,7 +1178,7 @@ function optCare(ctx: Ctx): void {
     let what = '';
     if (hungry && ctx.food > 0) {
       // give what fits best
-      const k = (['berries', 'fruit', 'grain', 'fish'] as ItemKind[]).find((x) => (p.inv[x] ?? 0) > 0);
+      const k = (['berries', 'fruit', 'grain', 'fish', 'smoked_fish'] as ItemKind[]).find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
         give[k] = Math.min(p.inv[k] ?? 0, d.needs.hunger < 25 ? 3 : 2);
         what = k;

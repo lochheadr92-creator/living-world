@@ -399,7 +399,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
       } else if (b.btype === 'storehouse') {
         // everyone's
       } else if (b.hh !== p.hhId) continue;
-      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries') {
+      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'smoked_fish' || item === 'fruit' || item === 'berries') {
         // the household's own food is not to be spent making things unless there is plenty
         const hs = hhState(ctx);
         n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
@@ -499,7 +499,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
   if (facilitiesOf(ctx, 'smithy').length) {
     let worst: { kind: ToolKind; wear: number } | null = null;
     for (const t of toolsHeldBy(world, p.id)) {
-      if (t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
+      if (t.kind === 'basket' || t.kind === 'jar' || t.kind === 'rod' || t.tier === 1) continue;
       if (toolsHeldBy(world, p.id, t.kind).some((x) => x.tier === 1)) continue;
       if (t.wear >= 18 && (!worst || t.wear > worst.wear)) worst = { kind: t.kind, wear: t.wear };
     }
@@ -516,6 +516,22 @@ export function demandsOf(ctx: Ctx): Demand[] {
   // a handcart for the one who keeps hauling heavy loads over a long way
   if (facilitiesOf(ctx, 'timber_yard').length && wantsCart(ctx)) {
     out.push({ item: 'cart', qty: 1, have: 0, base: 14 * tm.work, why: 'to haul heavy loads', tag: 'craft' });
+  }
+
+  // fish that would go off before it is eaten: smoke the spare so that it keeps
+  const smokehouse = facilitiesOf(ctx, 'smokehouse')[0];
+  if (smokehouse) {
+    const members = Math.max(1, ctx.members.length);
+    const homeItems = ctx.home ? p.beliefs[ctx.home.id]?.items : undefined;
+    // fish already carried to the smokehouse (and free for this person to use) is still fish waiting to be smoked
+    const freshFish = unitsOf(p.inv.fish) + unitsOf(homeItems?.fish) + believedTakeable(ctx, smokehouse.b, 'fish', 0);
+    const haveSmoked = unitsOf(p.inv.smoked_fish) + unitsOf(homeItems?.smoked_fish);
+    const target = Math.min(9, 2 * members);
+    if (freshFish >= 4 && haveSmoked < target) {
+      // the more fish there is to lose, the more it is worth doing something about it
+      const atStake = Math.min(8, freshFish);
+      out.push({ item: 'smoked_fish', qty: Math.min(3, target - haveSmoked), have: haveSmoked, base: (10 + 2.5 * atStake + 4 * (ctx.dependents.length > 0 ? 1 : 0)) * tm.work, why: 'to smoke our spare fish so that it keeps', tag: 'food' });
+    }
   }
 
   // bread for a household that has grain to spare
@@ -848,7 +864,7 @@ function facilityWants(ctx: Ctx): FacilityWant[] {
   }
   if (!knowsOfAny(ctx, 'smithy') && oreKnown && haveKiln) {
     let s = 0;
-    const worn = toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar');
+    const worn = toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar' && t.kind !== 'rod');
     if (worn) s += 0.5;
     if (!(unitsOf(p.inv.axe) > 0 && unitsOf(p.inv.pick) > 0)) s += 0.2;
     if (init > 0.5) s += 0.25;
@@ -868,6 +884,16 @@ function facilityWants(ctx: Ctx): FacilityWant[] {
     if (knowsOfAny(ctx, 'granary')) s += 0.2;
     if (p.traits.generosity > 0.5) s += 0.1;
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
+  }
+  // a smokehouse is for a settlement that already has its basic workshops and more fish than it can eat: not an early project
+  if (!knowsOfAny(ctx, 'smokehouse') && haveYard && countBeliefsOfKind(p, 'fish_spot') > 0 && hs.shortage < 0.5 && world.tick >= DAY * 8) {
+    let s = 0;
+    const fishHeld = unitsOf(p.inv.fish) + beliefsByKind(p, ['building']).filter((b) => b.hh === p.hhId).reduce((n, b) => n + unitsOf(b.items?.fish), 0);
+    if (fishHeld >= 5) s += 0.45;
+    else if (fishHeld >= 3) s += 0.2;
+    if (p.skills.fish >= 1.15) s += 0.25;
+    if (init > 0.45) s += 0.15;
+    if (s >= 0.59) out.push({ type: 'smokehouse', signal: Math.min(1, s), why: 'fish goes off in a day or two: a smokehouse would make it keep' });
   }
   if (!knowsOfAny(ctx, 'hall') && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
@@ -930,6 +956,11 @@ function optPlanFacilities(ctx: Ctx): void {
             depositId = dep.id;
             spot = findBuildSpot(world, p, type, dep.x, dep.y, 1.5, 6, 3);
           }
+        } else if (type === 'smokehouse') {
+          // near where the fish are caught, so the catch is not carried far before it is smoked
+          const spots = beliefsByKind(p, ['fish_spot']).sort((a, c) => Math.hypot(a.x - camp.x, a.y - camp.y) - Math.hypot(c.x - camp.x, c.y - camp.y));
+          if (spots.length) spot = findBuildSpot(world, p, type, spots[0].x, spots[0].y, 3, 11, 6);
+          if (!spot) spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 12, 7);
         } else if (type === 'granary' || type === 'hall') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 11, 6);
         else if (type === 'kiln' || type === 'smithy') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 15, 10);
         else spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
@@ -1053,6 +1084,6 @@ export function depositLead(ctx: Ctx): { what: 'clay_pit' | 'ore_vein' | 'outcro
   if (!knowTrees) return null;
   if (countBeliefsOfKind(p, 'clay_pit') === 0 && (bricksWanted(ctx) > 0 || (upgradeWish(ctx) > 0.5 && knowsOfAny(ctx, 'timber_yard')))) return { what: 'clay_pit', why: 'to find clay for bricks' };
   if (countBeliefsOfKind(p, 'outcrop') === 0 && countBeliefsOfKind(p, 'rock') < 4 && beliefsByKind(p, ['site']).some((s) => unitsOf(s.need?.stone) >= 4)) return { what: 'outcrop', why: 'to find a big stone outcrop' };
-  if (countBeliefsOfKind(p, 'ore_vein') === 0 && knowsOfAny(ctx, 'kiln') && toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar')) return { what: 'ore_vein', why: 'to find ore for iron tools' };
+  if (countBeliefsOfKind(p, 'ore_vein') === 0 && knowsOfAny(ctx, 'kiln') && toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar' && t.kind !== 'rod')) return { what: 'ore_vein', why: 'to find ore for iron tools' };
   return null;
 }
