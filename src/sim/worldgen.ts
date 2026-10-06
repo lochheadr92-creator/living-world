@@ -1,4 +1,4 @@
-import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
+import { DAYS_PER_YEAR, DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
 import { createBuilding } from './buildings';
 import { addItem, emptyLedger, snapshotInitial } from './economy';
 import { addToHousehold, createHousehold } from './households';
@@ -46,7 +46,7 @@ export function fbm(x: number, y: number, seed: number, oct = 4): number {
 
 // ───────────────────────── blank world ─────────────────────────
 export function defaultSettings(seed = 'meadow'): Settings {
-  return { seed, population: 28, harsh: false, immigration: true, scene: 'natural' };
+  return { seed, population: 28, harsh: false, immigration: true, daysPerYear: DAYS_PER_YEAR, scene: 'natural' };
 }
 
 export function blankWorld(settings: Settings, W = MAP_W, H = MAP_H): World {
@@ -76,6 +76,7 @@ export function blankWorld(settings: Settings, W = MAP_W, H = MAP_H): World {
     plots: [],
     piles: [],
     graves: [],
+    proposals: [],
     animals: [],
     tools: [],
     carts: [],
@@ -582,8 +583,8 @@ function buildHouseholdSpecs(gen: RNG, population: number): Member[][] {
     } else if (roll < 0.62 && remaining >= 2) {
       m = [{ age: gen.range(26, 44), sex: sx(), role: 'adult' }, { age: gen.range(2, 10), sex: sx(), role: 'kid' }];
       kids++;
-    } else if (roll < 0.7 && remaining >= 2 && elders < 3) {
-      m = [{ age: gen.range(66, 76), sex: sx(), role: 'elder' }, { age: gen.range(30, 44), sex: sx(), role: 'adult' }];
+    } else if (roll < 0.7 && remaining >= 2 && elders < 4) {
+      m = [{ age: gen.range(63, 84), sex: sx(), role: 'elder' }, { age: gen.range(30, 44), sex: sx(), role: 'adult' }];
       elders++;
     } else if (roll < 0.78 && remaining >= 3) {
       const s1 = sx();
@@ -593,7 +594,7 @@ function buildHouseholdSpecs(gen: RNG, population: number): Member[][] {
         { age: gen.range(13, 16), sex: sx(), role: 'youth' },
       ];
     } else {
-      m = [{ age: gen.range(17, 55), sex: sx(), role: 'adult' }];
+      m = [{ age: gen.range(17, 62), sex: sx(), role: 'adult' }];
     }
     if (m.length > remaining) m = m.slice(0, remaining);
     specs.push(m);
@@ -608,10 +609,10 @@ function buildHouseholdSpecs(gen: RNG, population: number): Member[][] {
       }
     }
   }
-  if (elders < 2) {
+  if (elders < 3) {
     for (const s of specs) {
-      if (s.length === 1 && elders < 2) {
-        s[0] = { age: gen.range(66, 75), sex: s[0].sex, role: 'elder' };
+      if (s.length === 1 && elders < 3) {
+        s[0] = { age: gen.range(63, 82), sex: s[0].sex, role: 'elder' };
         elders++;
       }
     }

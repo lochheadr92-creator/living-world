@@ -11,7 +11,7 @@ import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
-import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
+import { accountViews, motionViews, learnedViews, illnessView, griefViews, commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
 import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
@@ -77,6 +77,8 @@ export interface PersonView {
   name: string;
   sex: 'f' | 'm';
   age: number;
+  /** days a year of life takes in this world */
+  daysPerYear: number;
   stage: string;
   household: string;
   householdColor: number;
@@ -103,6 +105,18 @@ export interface PersonView {
   /** a shared meal they are hosting or have agreed to, and the last one they took part in */
   meal: { current: MealView | null; previous: MealView | null };
   concerns: { about: string; kind: string; seen: string; source: string }[];
+  /** what they know of how others have behaved, and how they came to know it */
+  accounts: { about: string; what: string; seen: string; source: string }[];
+  /** who they are mourning, how heavily it weighs, and how they came to know */
+  grief: { about: string; weight: number; since: string; source: string; visited: string }[];
+  /** little things people made for them and gave them */
+  keepsakes: { what: string; from: string; when: string }[];
+  /** communal projects they have heard of, and what they make of them */
+  motions: { what: string; stance: string; status: string; counts: string; proposer: string }[];
+  /** skills they picked up from other people */
+  learned: { skill: string; from: string; when: string; gain: number; how: string }[];
+  /** a spell of illness they are going through */
+  illness: { how: string; since: string; careful: string } | null;
   grievances: GrievanceView[];
   decision: {
     when: string;
@@ -355,6 +369,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     name: p.name,
     sex: p.sex,
     age: Math.floor(age),
+    daysPerYear: world.settings.daysPerYear ?? 12,
     stage,
     household: hh ? hh.name : 'none',
     householdColor: hh ? hh.color : 0,
@@ -388,6 +403,12 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     interaction: interactionViews(world, p),
     meal: mealViews(world, p),
     concerns: concernViews(world, p),
+    accounts: accountViews(world, p),
+    grief: griefViews(world, p),
+    illness: illnessView(world, p),
+    learned: learnedViews(world, p),
+    motions: motionViews(world, p),
+    keepsakes: p.keepsakes.slice().reverse().map((k) => ({ what: k.what, from: nameOf(world, k.from), when: agoText(world, k.tick) })),
     grievances: grievanceViews(world, p),
     decision: d
       ? {

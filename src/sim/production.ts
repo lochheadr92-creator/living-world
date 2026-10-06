@@ -8,6 +8,7 @@ import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeli
 import type { Ctx } from './optutil';
 import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, weatherMult } from './options_work';
 import { projectLimit, projectsUnderWay } from './act_build';
+import { carriedForMe } from './council';
 import { RECIPES, RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -784,7 +785,7 @@ export function upgradeWish(ctx: Ctx): number {
   return Math.min(1, w);
 }
 
-function facilityWants(ctx: Ctx): FacilityWant[] {
+export function facilityWants(ctx: Ctx): FacilityWant[] {
   const { p, world } = ctx;
   const out: FacilityWant[] = [];
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
@@ -862,22 +863,38 @@ function bricks_or_charcoal(ctx: Ctx): string {
   return 'clay could be fired into bricks and jars, and wood burned to charcoal';
 }
 
+/**
+ * The communal buildings this person would take the initiative over right now: they have the means and the know-how, nothing
+ * pressing is going on, a proper roof comes first, and (as ever) only a few take a thing up on a given afternoon. Used both to
+ * propose one to the others and, once the village has agreed, to mark it out.
+ */
+export function facilityInitiative(ctx: Ctx): FacilityWant[] {
+  const { world, p, hh } = ctx;
+  if (!hh || ctx.stage === 'child') return [];
+  if (world.settings.scene !== 'natural') return []; // new projects are an ordinary-world decision; staged scenes stay as staged
+  if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28 || ctx.drives.energy > 40) return [];
+  if (world.tick < DAY * 5 || !ownsHut(ctx)) return []; // first things first: a proper roof, for this household and (as far as they know) for others
+  if (beliefsByKind(p, ['building']).filter((b) => isSolidHome(b.btype)).length < 2) return [];
+  if (projectsUnderWay(world, false) >= projectLimit(world)) return [];
+  if (beliefsByKind(p, ['site']).some((s) => s.hh === hh.id && s.btype && isFacilityType(s.btype as BuildingType))) return [];
+  const init = 0.5 * p.traits.diligence + 0.3 * p.traits.curiosity + 0.2 * p.traits.generosity;
+  if (init < 0.42) return [];
+  // improvements are taken up by a few, not by everyone on the same afternoon
+  return facilityWants(ctx).filter((w) => hashUnit(p.id, Math.floor(world.tick / 500), Object.keys(BUILD_DEF).indexOf(w.type)) <= 0.25 + 0.4 * init);
+}
+
 function optPlanFacilities(ctx: Ctx): void {
   const { world, p, hh } = ctx;
-  if (!hh || ctx.stage === 'child') return;
-  if (world.settings.scene !== 'natural') return; // new projects are an ordinary-world decision; staged scenes stay as staged
-  if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28 || ctx.drives.energy > 40) return;
-  if (world.tick < DAY * 5 || !ownsHut(ctx)) return; // first things first: a proper roof, for this household and (as far as they know) for others
-  if (beliefsByKind(p, ['building']).filter((b) => isSolidHome(b.btype)).length < 2) return;
-  if (projectsUnderWay(world, false) >= projectLimit(world)) return;
-  if (beliefsByKind(p, ['site']).some((s) => s.hh === hh.id && s.btype && isFacilityType(s.btype as BuildingType))) return;
+  if (!hh) return;
   const tm = traitMods(p);
   const init = 0.5 * p.traits.diligence + 0.3 * p.traits.curiosity + 0.2 * p.traits.generosity;
-  if (init < 0.42) return;
-  for (const w of facilityWants(ctx)) {
+  for (const w of facilityInitiative(ctx)) {
     const type = w.type;
-    // improvements are taken up by a few, not by everyone on the same afternoon
-    if (hashUnit(p.id, Math.floor(world.tick / 500), Object.keys(BUILD_DEF).indexOf(type)) > 0.25 + 0.4 * init) continue;
+    // the village has to have agreed to it, and this person has to be one of those who did (unless councils are off)
+    if (world.settings.councils !== false && !carriedForMe(world, p, type)) {
+      addBlocked(ctx, 'plan_site', `Lay out a ${BUILD_DEF[type].label}`, 0, 'the others have not agreed to it yet', 'build');
+      continue;
+    }
     const key = -3000 - Object.keys(BUILD_DEF).indexOf(type);
     if (recentFailure(world, p, key, 900)) {
       addBlocked(ctx, 'plan_site', `Lay out a ${BUILD_DEF[type].label}`, 0, 'could not find a good spot or was beaten to it recently', 'build');

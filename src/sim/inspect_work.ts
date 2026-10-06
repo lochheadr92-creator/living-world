@@ -7,6 +7,8 @@ import { RECIPES, recipesAt } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { mealOf, previousMealOf } from './meals';
+import { accountWords } from './reputation';
+import { SKILL_WORD } from './teaching';
 import type { Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, World } from './types';
 
 export interface Bar {
@@ -309,6 +311,11 @@ const PURPOSE_TEXT: Record<string, string> = {
   warn: 'a warning',
   offer: 'an offer of help',
   apologize: 'making peace',
+  mediate: 'talking someone round after a quarrel',
+  teach: 'showing someone how to do something',
+  challenge: 'a friendly contest',
+  present: 'giving someone a keepsake',
+  call: 'calling on someone',
   recruit: 'asking for help with a building',
   propose: 'a proposal',
   trade: 'a swap',
@@ -327,6 +334,11 @@ const PURPOSE_THEIRS: Record<string, string> = {
   warn: 'with a warning',
   offer: 'with an offer of help',
   apologize: 'to make peace',
+  mediate: 'to talk them round after a quarrel',
+  teach: 'to show them how to do something',
+  challenge: 'for a friendly contest',
+  present: 'with a keepsake',
+  call: 'to call on them',
   recruit: 'to ask for help with a building',
   propose: 'with a proposal',
   trade: 'to propose a swap',
@@ -409,6 +421,55 @@ export function grievanceViews(world: World, p: Person): GrievanceView[] {
 
 export function concernViews(world: World, p: Person): { about: string; kind: string; seen: string; source: string }[] {
   return p.concerns.map((c) => ({ about: nameOf(world, c.about), kind: c.kind === 'missing' ? 'has not been seen for a while' : `looked ${c.kind}`, seen: ago(world, c.seen), source: c.src === 'seen' ? 'saw it themself' : `told by ${nameOf(world, c.from)}` }));
+}
+
+export function motionViews(world: World, p: Person): { what: string; stance: string; status: string; counts: string; proposer: string }[] {
+  return world.proposals
+    .filter((pr) => pr.heard.includes(p.id))
+    .slice(0, 6)
+    .map((pr) => ({
+      what: `a ${pr.type.replace('_', ' ')}`,
+      stance: pr.support.includes(p.id) ? 'for' : pr.oppose.includes(p.id) ? 'against' : 'not sure',
+      status: pr.status === 'carried' ? 'agreed' : pr.status === 'done' ? 'agreed and marked out' : pr.status === 'open' ? 'still being talked over' : pr.status === 'merged' ? 'folded into another proposal' : pr.status,
+      counts: `${pr.support.length} for, ${pr.oppose.length} against`,
+      proposer: nameOf(world, pr.proposer),
+    }));
+}
+
+export function learnedViews(world: World, p: Person): { skill: string; from: string; when: string; gain: number; how: string }[] {
+  return p.learned
+    .slice()
+    .reverse()
+    .map((l) => ({ skill: SKILL_WORD[l.skill], from: nameOf(world, l.from), when: ago(world, l.tick), gain: Math.round(l.gain * 1000) / 1000, how: l.how === 'shown' ? 'showed them' : 'worked beside them' }));
+}
+
+export function illnessView(world: World, p: Person): { how: string; since: string; careful: string } | null {
+  const i = p.illness;
+  if (!i) return null;
+  return {
+    how: i.severity >= 0.67 ? 'seriously ill' : i.severity >= 0.45 ? 'ill' : 'under the weather',
+    since: ago(world, i.since),
+    careful: i.care > 0 ? `looked after ${i.care} time${i.care === 1 ? '' : 's'}` : 'nobody has brought them anything yet',
+  };
+}
+
+export function griefViews(world: World, p: Person): { about: string; weight: number; since: string; source: string; visited: string }[] {
+  return p.grief.map((g) => ({
+    about: g.name,
+    weight: Math.round(g.weight),
+    since: ago(world, g.since),
+    source: g.src === 'saw' ? 'was there when it happened' : g.src === 'found' ? 'came upon the grave' : `told by ${nameOf(world, g.from)}`,
+    visited: g.visited < 0 ? 'has not been to the grave' : `last at the grave ${ago(world, g.visited)}`,
+  }));
+}
+
+export function accountViews(world: World, p: Person): { about: string; what: string; seen: string; source: string }[] {
+  return p.accounts.map((a) => ({
+    about: nameOf(world, a.about),
+    what: `${accountWords(a.kind)} (${a.kind === 'quarreled' ? 'with' : 'to'} ${a.toward === p.id ? 'them' : nameOf(world, a.toward)})`,
+    seen: ago(world, a.at),
+    source: a.src === 'seen' ? (a.toward === p.id ? 'it happened to them' : 'saw it themself') : `told by ${nameOf(world, a.from)}${a.hops > 1 ? ` (passed on ${a.hops} times)` : ''}`,
+  }));
 }
 
 void RECIPES;

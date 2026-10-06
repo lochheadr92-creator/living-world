@@ -256,7 +256,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     setText(nameEl, v.name);
     setHidden(expecting, !v.pregnant);
     setText(stageEl, `${cap(v.stage)}, ${v.age}`);
-    stageEl.title = `Age in years. A year of life takes ${DAYS_PER_YEAR} days here.`;
+    stageEl.title = `Age in years. A year of life takes ${v.daysPerYear ?? DAYS_PER_YEAR} days here.`;
     setText(hhName, v.household === 'none' ? 'no household' : `${v.household} household`);
     setText(homeEl, v.home === 'no home yet' ? 'No home yet' : `Home: ${v.home}`);
     syncFollow();

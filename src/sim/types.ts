@@ -140,6 +140,8 @@ export interface Relation {
   grievance: Grievance | null;
   /** last time a grievance between these two was closed (stops a settled quarrel from starting the same apology loop again) */
   settledAt: number;
+  /** how far hearsay has moved this person's trust in the other (summed; capped, and it relaxes with time) */
+  hearsay: number;
 }
 
 export type GrievanceCause = 'competition' | 'scarcity' | 'refusal' | 'broken_promise' | 'harm';
@@ -221,6 +223,8 @@ export type ActivityKind =
   | 'attend_meal'
   | 'host_meal'
   | 'visit'
+  | 'mourn'
+  | 'play'
   | 'return_tool';
 
 export type PoseKind =
@@ -427,6 +431,18 @@ export interface Person {
   cartId: number;
   /** worries about people they have seen in need or been told about (bounded, each with its own provenance) */
   concerns: Concern[];
+  /** little things people made for them and gave them (not items: a record of the gift and who it was from; bounded) */
+  keepsakes: Keepsake[];
+  /** recent happy events in their circle that could be marked with a meal (bounded) */
+  occasions: Occasion[];
+  /** skills they picked up from other people: who showed them, and how much it helped (bounded, newest last) */
+  learned: LearnedSkill[];
+  /** a serious spell of illness they are going through, if any: it runs its course, others can help, and it ends in recovery or death */
+  illness: Illness | null;
+  /** people they know have died and are mourning (or remember), each with how and from whom they heard */
+  grief: Grief[];
+  /** what they know of other people's conduct, from their own experience, from watching, or from being told (bounded) */
+  accounts: Account[];
   /** the last conversation or quarrel that ended, kept apart from whatever is going on now */
   lastInteraction: InteractionRecord | null;
 }
@@ -440,6 +456,93 @@ export interface InteractionRecord {
   /** how it came out, taken from the same exchange (a request's status, an apology's result…) */
   outcome: string;
   detail: string;
+}
+
+export interface Keepsake {
+  from: number;
+  tick: number;
+  what: string;
+}
+
+export type OccasionKind = 'birth' | 'coming_of_age' | 'partnership' | 'recovery';
+export interface Occasion {
+  kind: OccasionKind;
+  /** the person it is about (or the first of a pair) */
+  about: number;
+  /** how it reads: "Mira", "Ana and Ben" */
+  name: string;
+  tick: number;
+}
+
+export interface LearnedSkill {
+  skill: SkillKey;
+  from: number;
+  tick: number;
+  gain: number;
+  how: 'shown' | 'watched';
+}
+
+/** A proposal to raise a communal building, as the village talks it over. People take a stance when they hear of it; enough support carries it. */
+export interface Proposal {
+  id: number;
+  type: BuildingType;
+  proposer: number;
+  why: string;
+  created: number;
+  /** open: still being talked over; carried: enough agreed, someone willing may mark it out; done: the site was marked out */
+  status: 'open' | 'carried' | 'rejected' | 'lapsed' | 'merged' | 'done';
+  /** until when it can still be talked over (open) or taken up (carried) */
+  until: number;
+  support: number[];
+  oppose: number[];
+  /** everyone who has heard of it (who has taken a stance or none) */
+  heard: number[];
+  /** when it was settled (carried, rejected, ...) */
+  settled: number;
+}
+
+export interface Illness {
+  since: number;
+  /** when it comes to a head: they recover, or they do not */
+  until: number;
+  /** 0.3 (a bad cold) to 1 (grave) */
+  severity: number;
+  /** how many times someone brought them food or water while they were ill */
+  care: number;
+}
+
+export interface Grief {
+  about: number;
+  name: string;
+  /** 0..100: how heavily it weighs now; it eases with time, at the grave, over a shared meal and among others who mourn */
+  weight: number;
+  /** how close they were, 0..100, fixed when they learned of it */
+  bond: number;
+  /** when they learned of it */
+  since: number;
+  died: number;
+  src: 'saw' | 'told' | 'found';
+  from: number;
+  /** where the grave is, as they know it */
+  gx: number;
+  gy: number;
+  /** last time they stood at the grave */
+  visited: number;
+}
+
+export type AccountKind = 'broke' | 'kept' | 'gave' | 'quarreled';
+/** Something one person did to another, as the holder knows it. Hearsay keeps the original event's time and who first had it. */
+export interface Account {
+  about: number;
+  kind: AccountKind;
+  /** who it was done to */
+  toward: number;
+  /** when it happened */
+  at: number;
+  src: 'seen' | 'told';
+  from: number;
+  origin: number;
+  hops: number;
 }
 
 export interface Concern {
@@ -770,7 +873,13 @@ export type ConvPurpose =
   | 'invite'
   | 'check_in'
   | 'lend'
-  | 'report';
+  | 'report'
+  | 'mediate'
+  | 'teach'
+  | 'motion'
+  | 'challenge'
+  | 'present'
+  | 'call';
 
 export interface Conversation {
   id: number;
@@ -810,6 +919,11 @@ export interface Meal {
   reserved: number;
   status: 'inviting' | 'gathering' | 'eating' | 'done' | 'cancelled';
   end: string;
+  /** a meal called by someone who is mourning, in memory of this person (name) */
+  remembers?: string;
+  remembersId?: number;
+  /** a meal held to mark something happy (see leisure.ts) */
+  occasion?: { kind: OccasionKind; about: number; name: string };
 }
 
 // ───────────────────────────── world ─────────────────────────────
@@ -871,6 +985,12 @@ export interface Settings {
   population: number;
   harsh: boolean;
   immigration: boolean;
+  /** how many days a year of life takes (the pace of ageing, births and deaths); older saves lack it and use 12 */
+  daysPerYear: number;
+  /** communal buildings need the village's agreement first (true unless turned off, for comparison) */
+  councils?: boolean;
+  /** the leisure life (fireside evenings, play, contests, keepsakes, calls, celebrations, jokes) is on unless turned off, for comparison */
+  leisure?: boolean;
   scene: SceneId;
 }
 export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care';
@@ -906,13 +1026,15 @@ export interface World {
   stumps: { x: number; y: number; tick: number }[];
   nextId: number;
   persons: Person[];
-  deceased: { id: number; name: string; tick: number; cause: string; age: number }[];
+  deceased: { id: number; name: string; tick: number; cause: string; age: number; hh?: number; gx?: number; gy?: number }[];
   sources: Source[];
   buildings: Building[];
   sites: Site[];
   plots: Plot[];
   piles: Pile[];
   graves: Grave[];
+  /** proposals for communal buildings, recent first (bounded) */
+  proposals: Proposal[];
   animals: Animal[];
   tools: Tool[];
   carts: Cart[];

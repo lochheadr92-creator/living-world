@@ -19,7 +19,8 @@ import {
 import { addFx, addLog } from './events';
 import { clearFailure, noteFailure, observe, delBelief, isWaterBeliefId } from './knowledge';
 import { mayDeposit, noteDeposit, noteWithdraw, withdrawAllowance } from './facilities';
-import { carryCap } from './people';
+import { ageYears, carryCap } from './people';
+import { workDrag } from './ageing';
 import { taskMultiplier, wearFor } from './tools';
 import type { ToolTask } from './tools';
 import { adjustRel } from './relations';
@@ -60,7 +61,7 @@ function toolMult(world: World, p: Person, s: Source): number {
 
 function cycleDuration(world: World, p: Person, s: Source): number {
   const base = WORK[s.type] ?? 30;
-  let d = (base * toolMult(world, p, s)) / skillOf(p, s);
+  let d = (base * toolMult(world, p, s) * workDrag(world, p, ageYears(world, p))) / skillOf(p, s);
   d *= 1 + 0.12 * world.weather.rain + 0.1 * world.weather.storm;
   if (p.needs.energy < 25) d *= 1.2;
   return Math.max(6, Math.round(d));

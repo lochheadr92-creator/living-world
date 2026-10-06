@@ -72,6 +72,37 @@ function makeSwitch(label: string, hint: string, checked: boolean, onChange: (v:
   return { el, input };
 }
 
+const PACES: { days: number; label: string; hint: string }[] = [
+  { days: 6, label: 'Brisk', hint: '6 days a year: lives are short, generations turn over quickly' },
+  { days: 12, label: 'Normal', hint: '12 days a year (the default)' },
+  { days: 24, label: 'Slow', hint: '24 days a year: children take a long time to grow up' },
+  { days: 48, label: 'Epic', hint: '48 days a year: a settlement ages over many sessions' },
+];
+
+/** A row of mutually exclusive buttons (a radio group), for a choice that applies to the next new world. */
+function makePace(current: number, onChange: (days: number) => void): { el: HTMLElement; value: () => number; set: (d: number) => void } {
+  let value = PACES.some((p) => p.days === current) ? current : 12;
+  const btns = PACES.map((p) =>
+    h('button', { type: 'button', class: 'btn pace-btn', role: 'radio', 'data-tip': p.hint, onClick: () => set(p.days) }, p.label),
+  );
+  function paint(): void {
+    PACES.forEach((p, i) => btns[i].setAttribute('aria-checked', String(p.days === value)));
+  }
+  function set(d: number, notify = true): void {
+    value = d;
+    paint();
+    if (notify) onChange(d);
+  }
+  const el = h(
+    'div',
+    { class: 'pace' },
+    h('div', { class: 'sw-txt' }, h('b', null, 'Life pace'), h('small', null, 'Days of play per year of life · next new world')),
+    h('div', { class: 'pace-row', role: 'radiogroup', 'aria-label': 'Life pace' }, btns),
+  );
+  paint();
+  return { el, value: () => value, set: (d) => set(d, false) };
+}
+
 export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
   const { game } = ctx;
   let opener: HTMLElement | null = null;
@@ -132,6 +163,11 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     ctx.savePrefs();
   });
 
+  const pace = makePace(game.settings.daysPerYear ?? 12, (d) => {
+    ctx.prefs.daysPerYear = d;
+    ctx.savePrefs();
+  });
+
   const debugBtn = h(
     'button',
     {
@@ -181,7 +217,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       h('div', { class: 'wm-seedrow' }, input, dice),
       newBtn,
     ),
-    h('section', { class: 'wm-sec' }, harsh.el, arrivals.el),
+    h('section', { class: 'wm-sec' }, harsh.el, arrivals.el, pace.el),
     h('section', { class: 'wm-sec' }, h('div', { class: 'cap wm-lab' }, 'Scenes'), h('div', { class: 'wm-scenes' }, sceneBtns)),
     h('section', { class: 'wm-sec wm-io' }, saveWrap, loadWrap, debugBtn),
   );
@@ -192,7 +228,8 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     const seed = input.value.trim() || randomSeed();
     ctx.prefs.harsh = harsh.input.checked;
     ctx.prefs.immigration = arrivals.input.checked;
-    game.restart({ seed, scene: 'natural', harsh: harsh.input.checked, immigration: arrivals.input.checked });
+    ctx.prefs.daysPerYear = pace.value();
+    game.restart({ seed, scene: 'natural', harsh: harsh.input.checked, immigration: arrivals.input.checked, daysPerYear: pace.value() });
     input.value = '';
     ctx.toast(`New world · seed ${seed}`, 'good');
     close();
@@ -293,6 +330,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         curSeed.textContent = game.settings.seed;
         harsh.input.checked = game.settings.harsh;
         arrivals.input.checked = game.settings.immigration;
+        pace.set(game.settings.daysPerYear ?? 12);
       }
     },
     dispose() {

@@ -331,6 +331,106 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
     },
   );
 
+  // word about others
+  const wordSec = deps.section('word', 'Word about others', 'What they know of how other people have behaved, and how they came to know it. Hearsay moves their opinion only a little.');
+  const wordBox = h('div', { class: 'list' });
+  wordSec.body.append(wordBox);
+  const wordList = new KeyedList<PersonView['accounts'][number], WorryRow>(
+    wordBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, a) => {
+      r.who.set(a.about);
+      setText(r.what, ` ${a.what}`);
+      setText(r.meta, `${a.seen} · ${a.source}`);
+    },
+  );
+
+  // keepsakes
+  const keepSec = deps.section('keepsakes', 'Keepsakes', 'Little things people made for them and gave them.');
+  const keepBox = h('div', { class: 'list' });
+  keepSec.body.append(keepBox);
+  const keepList = new KeyedList<PersonView['keepsakes'][number], WorryRow>(
+    keepBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, k) => {
+      r.who.set(k.from);
+      setText(r.what, ` gave them ${k.what}`);
+      setText(r.meta, k.when);
+    },
+  );
+
+  // village matters
+  const motionSec = deps.section('motions', 'Village matters', 'Proposals for communal buildings they have heard of, and what they make of them. A building is only marked out once enough people have agreed.');
+  const motionBox = h('div', { class: 'list' });
+  motionSec.body.append(motionBox);
+  const motionList = new KeyedList<PersonView['motions'][number], WorryRow>(
+    motionBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, m) => {
+      r.who.set(m.proposer);
+      setText(r.what, ` proposed ${m.what}: they are ${m.stance}`);
+      setText(r.meta, `${cap(m.status)} · ${m.counts}`);
+    },
+  );
+
+  // learning from others
+  const learnSec = deps.section('learned', 'Learned from others', 'Skills they picked up from other people, and who showed them. Nobody learns to be better than their teacher.');
+  const learnBox = h('div', { class: 'list' });
+  learnSec.body.append(learnBox);
+  const learnList = new KeyedList<PersonView['learned'][number], WorryRow>(
+    learnBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, l) => {
+      r.who.set(l.from);
+      setText(r.what, ` ${l.how}: ${l.skill} (+${l.gain.toFixed(3)})`);
+      setText(r.meta, l.when);
+    },
+  );
+
+  // illness
+  const illSec = deps.section('illness', 'Illness', 'A spell of illness they are going through. Others can help by bringing food and water; it ends in recovery or, sometimes, death.');
+  const illText = h('div', { class: 'sx-detail' });
+  illSec.body.append(illText);
+
+  // grief
+  const griefSec = deps.section('grief', 'Grief', 'Who they are mourning. It eases with time, at the grave, over a meal in memory, and among others who mourn the same person.');
+  const griefBox = h('div', { class: 'list' });
+  griefSec.body.append(griefBox);
+  const griefList = new KeyedList<PersonView['grief'][number], WorryRow>(
+    griefBox,
+    () => {
+      const who = makeNameLink(deps);
+      const what = h('span', { class: 'sx-what' });
+      const meta = h('div', { class: 'sx-detail' });
+      return { el: h('div', { class: 'row sx-row sx-worry' }, h('div', { class: 'sx-who' }, icon('n_social', 13, 'sx-ico'), who.el, what), meta), who, what, meta };
+    },
+    (r, g) => {
+      r.who.set(g.about);
+      setText(r.what, ` weighs ${g.weight}/100`);
+      setText(r.meta, `Learned ${g.since} · ${g.source} · ${g.visited}`);
+    },
+  );
+
   // quarrels
   const soreSec = deps.section('sore', 'Quarrels', 'Who they are still sore at, and why. A quarrel drops off this list once it is settled.');
   const soreBox = h('div', { class: 'list' });
@@ -338,7 +438,7 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
   const soreList = new KeyedList<GrievanceView, QuarrelRow>(soreBox, () => makeQuarrelRow(deps), (r, g) => updateQuarrelRow(r, g));
 
   return {
-    els: [talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el],
+    els: [keepSec.el, motionSec.el, learnSec.el, illSec.el, talkSec.el, mealSec.el, promSec.el, soreSec.el, worrySec.el, wordSec.el, griefSec.el],
     update(v) {
       const talk = v.interaction ?? { current: null, previous: null };
       const hasTalk = !!(talk.current || talk.previous);
@@ -372,6 +472,35 @@ export function createPersonSocial(deps: SocialDeps): PersonSocial {
       worrySec.setVisible(worries.length > 0);
       worrySec.setCount(worries.length ? String(worries.length) : '');
       if (worries.length && worrySec.isOpen()) worryList.sync(worries, (c) => `${c.about}|${c.kind}`);
+
+      const keeps = v.keepsakes ?? [];
+      keepSec.setVisible(keeps.length > 0);
+      keepSec.setCount(keeps.length ? String(keeps.length) : '');
+      if (keeps.length && keepSec.isOpen()) keepList.sync(keeps, (k) => `${k.from}|${k.what}|${k.when}`);
+
+      const motions = v.motions ?? [];
+      motionSec.setVisible(motions.length > 0);
+      motionSec.setCount(motions.length ? String(motions.length) : '');
+      if (motions.length && motionSec.isOpen()) motionList.sync(motions, (m) => `${m.proposer}|${m.what}|${m.status}`);
+
+      const learned = v.learned ?? [];
+      learnSec.setVisible(learned.length > 0);
+      learnSec.setCount(learned.length ? String(learned.length) : '');
+      if (learned.length && learnSec.isOpen()) learnList.sync(learned, (l) => `${l.from}|${l.skill}|${l.when}`);
+
+      const ill = v.illness ?? null;
+      illSec.setVisible(!!ill);
+      if (ill) setText(illText, `${cap(ill.how)} since ${ill.since} · ${ill.careful}`);
+
+      const griefs = (v.grief ?? []).filter((g) => g.weight > 0);
+      griefSec.setVisible(griefs.length > 0);
+      griefSec.setCount(griefs.length ? String(griefs.length) : '');
+      if (griefs.length && griefSec.isOpen()) griefList.sync(griefs, (g) => g.about);
+
+      const words = v.accounts ?? [];
+      wordSec.setVisible(words.length > 0);
+      wordSec.setCount(words.length ? String(words.length) : '');
+      if (words.length && wordSec.isOpen()) wordList.sync(words, (a) => `${a.about}|${a.what}|${a.source}`);
     },
   };
 }

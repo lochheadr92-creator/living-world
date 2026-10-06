@@ -5,6 +5,8 @@ export interface Prefs {
   seed: string;
   harsh: boolean;
   immigration: boolean;
+  /** life pace: days of play per year of life, for the next new world */
+  daysPerYear: number;
   speed: number;
   overlays: Overlays;
   debug: boolean;
@@ -18,6 +20,7 @@ export const DEFAULT_PREFS: Prefs = {
   seed: 'meadow',
   harsh: false,
   immigration: true,
+  daysPerYear: 12,
   speed: 1,
   overlays: { perception: false, paths: false, intentions: false, knowledge: false, labels: false },
   debug: false,

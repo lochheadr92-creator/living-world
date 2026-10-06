@@ -9,7 +9,13 @@ const KEY = 'living-world:save:v1';
 const META = 'living-world:save-meta:v1';
 // 2: a year of age is now twelve days long (saves from before measured it in single days)
 // 3: workshops, tools, carts, shared meals, worries and grievances are part of the world (older saves lack them and are refused)
-const VERSION = 3;
+// 4: people hold accounts of how others have behaved (hearsay) and relationships carry a hearsay total (older saves lack them and are refused)
+// 5: people carry grief for those who have died, and the dead are recorded with their household and grave (older saves lack them and are refused)
+// 6: people can be ill (a spell of illness with a course and an outcome); older saves lack it and are refused
+// 7: people record the skills they learned from others (older saves lack it and are refused)
+// 8: the village's proposals for communal buildings are part of the world (older saves lack them and are refused)
+// 9: people hold keepsakes they were given and occasions worth celebrating (older saves lack them and are refused)
+const VERSION = 9;
 
 function bytesToB64(bytes: Uint8Array): string {
   let s = '';

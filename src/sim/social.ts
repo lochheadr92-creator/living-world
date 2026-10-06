@@ -15,7 +15,13 @@ import { carryCap, isDependent, itemsToText, stageOf } from './people';
 import { addEvent, addFx, addLog, say as speak } from './events';
 import { addToHousehold, householdById, membersOf } from './households';
 import { estimatedAmount, learn, noteFailure } from './knowledge';
-import { adjustRel, relOf, spark } from './relations';
+import { adjustRel, relOf, spark, trustOf } from './relations';
+import { yearTicks } from './ageing';
+import { hearAccount, pickAccount, recordAccount } from './reputation';
+import { shareDeath } from './grief';
+import { hear, knownProposal, propose, shareMotion } from './council';
+import { GAME_WORDS, giveKeepsake, hospitality, maybeJoke, noteOccasion, circleOf, playContest } from './leisure';
+import { SKILL_WORD, giveLesson, watchAndLearn } from './teaching';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
 import { drive } from './needs';
@@ -169,15 +175,36 @@ function describeItems(items: Items): string {
   return itemsToText(items);
 }
 
-export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: Person, other: Person, x: number, y: number): void {
+/**
+ * An onlooker leans towards whoever they are closer to (kin and housemates count heavily); only a clear difference moves them.
+ * It shows in how they regard the pair afterwards, and it is on their record.
+ */
+function takeSide(world: World, w: Person, a: Person, b: Person): void {
+  const lean = (q: Person): number => (w.relations[q.id]?.affinity ?? 0) + (w.relations[q.id]?.kin ? 25 : 0) + (q.hhId === w.hhId ? 15 : 0);
+  const diff = lean(a) - lean(b);
+  if (Math.abs(diff) < 12) return;
+  const [with_, against] = diff > 0 ? [a, b] : [b, a];
+  adjustRel(w, with_.id, world.tick, { aff: 1.2, trust: 0.5, note: `took ${with_.name}'s side against ${against.name}` });
+  adjustRel(w, against.id, world.tick, { aff: -1.4, note: `${against.name} was in the wrong, I thought` });
+  addLog(world, w, 'social', `Saw ${a.name} and ${b.name} argue, and took ${with_.name}'s side.`);
+  world.stats.sided = (world.stats.sided ?? 0) + 1;
+}
+
+/** `account` = onlookers also keep an account of it (only for what is worth repeating, not routine care). */
+export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: Person, other: Person, x: number, y: number, account = false): void {
   for (const w of world.persons) {
     if (!w.alive || w === actor || w === other || w.pose === 'sleep') continue;
     if (Math.hypot(w.x - x, w.y - y) > 7.5) continue;
     if (kind === 'gift' || kind === 'help') {
       adjustRel(w, actor.id, world.tick, { aff: 1.3, trust: 0.9, fam: 0.3, note: `saw ${actor.name} help ${other.name}` });
+      if (account) recordAccount(world, w, actor.id, 'gave', other.id);
     } else {
       adjustRel(w, actor.id, world.tick, { aff: -1.1, trust: -1.1, note: `saw ${actor.name} quarrel` });
       adjustRel(w, other.id, world.tick, { aff: -0.6, note: `saw ${other.name} quarrel` });
+      if (account) {
+        recordAccount(world, w, actor.id, 'quarreled', other.id);
+        takeSide(world, w, actor, other);
+      }
     }
   }
 }
@@ -194,10 +221,12 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   endGrievanceOnGift(world, giver, receiver, sev);
   giver.stats.given += 1;
   receiver.stats.received += 1;
+  if (receiver.illness) receiver.illness.care++; // looked after while ill: it improves their chances
   addLog(world, giver, 'social', `Gave ${txt} to ${receiver.name}${mode === 'care' ? ' (looking after them)' : ''}.`);
   addLog(world, receiver, 'social', `${giver.name} gave me ${txt}.`);
-  witness(world, 'gift', giver, receiver, receiver.x, receiver.y);
   const notable = sev > 0.35 || giver.hhId !== receiver.hhId;
+  witness(world, 'gift', giver, receiver, receiver.x, receiver.y, notable && mode !== 'care');
+  if (notable && mode !== 'care') recordAccount(world, receiver, giver.id, 'gave', receiver.id);
   if (notable && mode !== 'care') addEvent(world, 'social', `${giver.name} gave ${txt} to ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
   else if (mode === 'care' && stageOf(world, receiver) === 'child' && hashUnit(giver.id, receiver.id, world.tick >> 6) < 0.25) addEvent(world, 'social', `${giver.name} fed ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
   addFx(world, 'gift', receiver.x, receiver.y, 0);
@@ -472,6 +501,7 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
     adjustRel(B, A.id, world.tick, { aff: 1, trust: 1 });
+    recordAccount(world, A, B.id, 'kept', A.id);
     bubble(world, A, D.saying(D.THANKS, A.id, B.id, world.tick >> 4, { n: B.name }), 'happy');
     addEvent(world, 'social', `${B.name} kept a promise to ${A.name}.`, [A.id, B.id], A.x, A.y);
   }
@@ -544,6 +574,7 @@ export function checkCommitments(world: World, p: Person): void {
       c.status = 'done';
       if (req && req.status === 'promised') settle(world, req, 'fulfilled', 'did what they promised');
       adjustRel(A, p.id, world.tick, { aff: 2.5, trust: 3, note: `${p.name} helped with the building` });
+      recordAccount(world, A, p.id, 'kept', A.id);
     } else if (frac > 0) {
       c.status = 'expired';
       c.reason = `only ${Math.round(frac * 100)}% was done in time`;
@@ -569,6 +600,7 @@ export function checkCommitments(world: World, p: Person): void {
       adjustRel(A, p.id, world.tick, { aff: -5, trust: -12, note: `${p.name} did not keep a promise` });
       adjustRel(p, A.id, world.tick, { trust: -2, aff: -1 });
       openGrievance(world, A, p, 'broken_promise', `${p.name} did not do what they promised`, 38);
+      recordAccount(world, A, p.id, 'broke', A.id);
       addLog(world, p, 'social', `Failed to keep my promise to ${A.name}.`);
       addLog(world, A, 'social', `${p.name} never came through with what they promised.`);
       addEvent(world, 'conflict', `${p.name} did not keep a promise to ${A.name}.`, [p.id, A.id], A.x, A.y);
@@ -622,6 +654,14 @@ export interface ConvData {
   milestone?: string;
   mealId?: number;
   mealPlan?: import('./meals').MealPlan;
+  /** mediate: the other person in the quarrel */
+  otherId?: number;
+  /** teach: the skill being shown */
+  skill?: import('./types').SkillKey;
+  /** motion: the kind of communal building being proposed */
+  motion?: import('./types').BuildingType;
+  /** challenge: the game */
+  game?: 'race' | 'wrestle' | 'throw';
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -662,6 +702,18 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
       return `to help ${name}`;
     case 'apologize':
       return `to make peace with ${name}`;
+    case 'mediate':
+      return `to talk ${name} round`;
+    case 'teach':
+      return `to show ${name} something`;
+    case 'motion':
+      return `to put an idea to ${name}`;
+    case 'challenge':
+      return `to have a game with ${name}`;
+    case 'present':
+      return `to give ${name} something`;
+    case 'call':
+      return `to call on ${name}`;
     case 'recruit':
       return `to get ${name}'s help with a building`;
     case 'propose':
@@ -705,7 +757,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
       let gain = (fit - 0.6) * 4.6 * early + chem * 3.0 + (rel.familiarity > 3 && rel.affinity > 8 ? 0.8 : 0);
       if (y.needs.hunger < 28 || y.needs.energy < 20 || y.needs.warmth < 28) gain -= 0.7; // nobody is good company when miserable
       // two unattached adults with a spark between them warm to each other much faster
-      if (gain > 0 && !x.partnerId && !y.partnerId && stageOf(world, x) !== 'child' && stageOf(world, y) !== 'child' && !rel.kin && spark(x, y)) gain += 2.6;
+      if (gain > 0 && !x.partnerId && !y.partnerId && stageOf(world, x) !== 'child' && stageOf(world, y) !== 'child' && !rel.kin && spark(x, y, yearTicks(world))) gain += 2.6;
       if (rel.avoidUntil > world.tick || c.data.sour) gain = Math.min(gain, 0.2) * 0.4;
       adjustRel(x, y.id, world.tick, { aff: gain, fam: 1.3, trust: gain > 0 ? 0.6 : -0.2 });
       x.needs.social = Math.min(100, x.needs.social + (9 + 11 * x.traits.sociability) * (rel.affinity >= 20 ? 1.2 : 1));
@@ -852,6 +904,33 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       bubble(world, A, D.saying(D.APOLOGY, A.id, B.id, world.tick >> 5, vars), 'say', 58);
       break;
     }
+    case 'challenge': {
+      if (d.game) bubble(world, A, D.saying(D.CHALLENGE_ASK, A.id, B.id, world.tick >> 5, { ...vars, game: GAME_WORDS[d.game] }), 'say', 56);
+      break;
+    }
+    case 'present': {
+      bubble(world, A, D.saying(D.PRESENT_ASK, A.id, B.id, world.tick >> 5, vars), 'happy', 56);
+      break;
+    }
+    case 'call': {
+      bubble(world, A, D.saying(D.CALL_ASK, A.id, B.id, world.tick >> 5, vars), 'say', 52);
+      break;
+    }
+    case 'motion': {
+      if (!d.motion) break;
+      const pr = propose(world, A, d.motion, d.purpose ?? 'we need it');
+      bubble(world, A, D.saying(D.MOTION_ASK, A.id, B.id, world.tick >> 5, { ...vars, what: d.motion.replace('_', ' '), why: pr.why }), 'say', 64);
+      break;
+    }
+    case 'teach': {
+      if (d.skill) bubble(world, A, D.saying(D.TEACH_ASK, A.id, B.id, world.tick >> 5, { ...vars, what: SKILL_WORD[d.skill] }), 'say', 62);
+      break;
+    }
+    case 'mediate': {
+      const C = personOf(world, d.otherId ?? 0);
+      if (C) bubble(world, A, D.saying(D.MEDIATE_ASK, A.id, B.id, world.tick >> 5, { ...vars, c: C.name }), 'say', 60);
+      break;
+    }
     case 'invite': {
       inviteAsk(world, A, B, d);
       break;
@@ -870,6 +949,60 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
   }
 }
 
+/**
+ * A friend of both sides of a quarrel talks one of them round. Each side is a separate conversation: the friend eases B's soreness
+ * towards C now, and goes to C when they next meet. B listens in proportion to how far they trust the friend, and less the deeper the
+ * hurt. A quarrel that has already healed is simply said to be past.
+ */
+export function mediate(world: World, c: Pick<Conversation, "data">, A: Person, B: Person, d: ConvData): void {
+  const C = personOf(world, d.otherId ?? 0);
+  const key = 'mediate' + B.id + ':' + (d.otherId ?? 0);
+  const g = C ? B.relations[C.id]?.grievance : null;
+  A.cooldowns[key] = world.tick + 900;
+  world.stats.medTried = (world.stats.medTried ?? 0) + 1;
+  if (!C || !g) {
+    world.stats.medHealed = (world.stats.medHealed ?? 0) + 1;
+    bubble(world, B, 'Thanks, but that’s behind us now.', 'say', 50);
+    return;
+  }
+  const trust = clamp(trustOf(B, A.id), 0, 100) / 100;
+  const sev = clamp(g.weight / 70, 0, 1);
+  const p = clamp(0.3 + 0.5 * trust + 0.25 * B.traits.generosity - 0.3 * sev, 0.1, 0.9);
+  if (hashUnit(B.id, A.id, (world.tick >> 4) + C.id) >= p) {
+    world.stats.medRefused = (world.stats.medRefused ?? 0) + 1;
+    bubble(world, B, D.saying(D.MEDIATE_NO, B.id, A.id, world.tick >> 5), 'angry', 50);
+    A.cooldowns[key] = world.tick + 1500;
+    c.data.sour = true;
+    return;
+  }
+  bubble(world, B, D.saying(D.MEDIATE_YES, B.id, A.id, world.tick >> 5, { c: C.name }), 'happy', 56);
+  easeGrievance(world, B, C, 14 + 12 * trust, `${A.name} stepped in`);
+  B.needs.social = Math.min(100, B.needs.social + 8);
+  adjustRel(B, A.id, world.tick, { aff: 3, trust: 2, note: `${A.name} helped me think it over` });
+  adjustRel(A, B.id, world.tick, { aff: 1, fam: 0.5 });
+  addLog(world, A, 'social', `Talked ${B.name} round a little over the trouble with ${C.name}.`);
+  addLog(world, B, 'social', `${A.name} talked me round about ${C.name}.`);
+  world.stats.mediated = (world.stats.mediated ?? 0) + 1;
+  // if the other person is standing close by, the friend gets to them too, and they can be brought back together on the spot
+  const gC = C.relations[B.id]?.grievance;
+  if (gC && !C.convId && C.pose !== 'sleep' && Math.hypot(C.x - B.x, C.y - B.y) <= 9) {
+    const trustC = clamp(trustOf(C, A.id), 0, 100) / 100;
+    const pC = clamp(0.3 + 0.5 * trustC + 0.25 * C.traits.generosity - 0.3 * clamp(gC.weight / 70, 0, 1), 0.1, 0.9);
+    if (hashUnit(C.id, A.id, (world.tick >> 4) + B.id) < pC) {
+      bubbleLater(world, C, D.saying(D.MEDIATE_YES, C.id, A.id, world.tick >> 5, { c: B.name }), 20);
+      easeGrievance(world, C, B, 14 + 12 * trustC, `${A.name} stepped in`);
+      adjustRel(C, A.id, world.tick, { aff: 3, trust: 2, note: `${A.name} helped me think it over` });
+      addLog(world, C, 'social', `${A.name} talked me round about ${B.name}.`);
+      A.cooldowns['mediate' + C.id + ':' + B.id] = world.tick + 900;
+      world.stats.mediated = (world.stats.mediated ?? 0) + 1;
+      if (!B.relations[C.id]?.grievance && !C.relations[B.id]?.grievance) {
+        addEvent(world, 'social', `${A.name} helped ${B.name} and ${C.name} make up.`, [A.id, B.id, C.id], B.x, B.y);
+        world.stats.madeUp = (world.stats.madeUp ?? 0) + 1;
+      }
+    }
+  }
+}
+
 function reqOf(world: World, c: Conversation): Request | undefined {
   return world.requests.find((r) => r.id === c.requestId);
 }
@@ -880,6 +1013,11 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
   switch (c.purpose) {
     case 'chat': {
       if (hashUnit(B.id, A.id, world.tick >> 5) < 0.3) bubble(world, B, D.smallTalk(world, B.id, A.id, false, B.needs.warmth < 45, false), 'say', 46);
+      const joke = maybeJoke(world, A, B);
+      if (joke) {
+        bubble(world, A, D.saying(D.JOKES, A.id, B.id, world.tick >> 5), 'say', 56);
+        bubbleLater(world, B, D.saying(joke === 'laughed' || joke === 'smiled' ? D.LAUGH : joke === 'flat' ? D.FLAT : D.STUNG, B.id, A.id, world.tick >> 5), 26);
+      }
       break;
     }
     case 'request': {
@@ -1073,6 +1211,56 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       }
       break;
     }
+    case 'mediate': {
+      mediate(world, c, A, B, d);
+      break;
+    }
+    case 'challenge': {
+      if (!d.game) break;
+      A.cooldowns['challenge' + B.id] = world.tick + DAY; // asked: not again today, whatever the answer
+      const aff = B.relations[A.id]?.affinity ?? 0;
+      const willing = clamp(0.4 + 0.4 * (1 - B.traits.caution) + aff / 250, 0.15, 0.9);
+      if (hashUnit(B.id, A.id, (world.tick >> 4) + 13) < willing) {
+        bubble(world, B, D.saying(D.CHALLENGE_YES, B.id, A.id, world.tick >> 5), 'happy', 50);
+        playContest(world, A, B, d.game);
+      } else {
+        bubble(world, B, D.saying(D.CHALLENGE_NO, B.id, A.id, world.tick >> 5), 'say', 48);
+        c.data.sour = true;
+      }
+      break;
+    }
+    case 'present': {
+      const what = giveKeepsake(world, A, B);
+      if (what) bubble(world, B, D.saying(D.PRESENT_THANKS, B.id, A.id, world.tick >> 5), 'happy', 56);
+      break;
+    }
+    case 'call': {
+      const gave = hospitality(world, B, A, (p, k) => surplusOf(world, p, k));
+      bubble(world, B, D.saying(gave ? D.CALL_HOST : D.CALL_HOST_BARE, B.id, A.id, world.tick >> 5), 'happy', 52);
+      break;
+    }
+    case 'motion': {
+      if (!d.motion) break;
+      const pr = knownProposal(world, A, d.motion);
+      if (!pr) break;
+      const stance = hear(world, B, pr, A);
+      if (stance) bubble(world, B, D.saying(stance === 'for' ? D.MOTION_YES : stance === 'against' ? D.MOTION_NO : D.MOTION_UNSURE, B.id, A.id, world.tick >> 5), stance === 'for' ? 'happy' : 'say', 54);
+      break;
+    }
+    case 'teach': {
+      if (!d.skill) break;
+      A.cooldowns['teach' + B.id + ':' + d.skill] = world.tick + DAY / 2; // asked: not again at once, whatever the answer
+      const st = stageOf(world, B);
+      const willing = clamp(0.4 + 0.25 * B.traits.curiosity + 0.2 * B.traits.diligence + clamp(trustOf(B, A.id), 0, 100) / 250 + (st === 'child' ? 0.2 : 0), 0.2, 0.97);
+      if (hashUnit(B.id, A.id, (world.tick >> 4) + 7) < willing) {
+        const gain = giveLesson(world, A, B, d.skill);
+        if (gain > 0) bubble(world, B, D.saying(D.TEACH_YES, B.id, A.id, world.tick >> 5), 'happy', 52);
+      } else {
+        bubble(world, B, D.saying(D.TEACH_NO, B.id, A.id, world.tick >> 5), 'say', 48);
+        c.data.sour = true;
+      }
+      break;
+    }
     case 'invite': {
       if (d.mealId) inviteRespond(world, A, B, d.mealId);
       break;
@@ -1082,7 +1270,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       const aff = rel?.affinity ?? 0;
       const trust = rel?.trust ?? 0;
       const kind = d.joinKind ?? 'roommate';
-      const ok = kind === 'partner' ? aff >= 28 && trust >= 20 && B.partnerId === 0 && A.partnerId === 0 && spark(A, B) : aff >= 32 && trust >= 22;
+      const ok = kind === 'partner' ? aff >= 28 && trust >= 20 && B.partnerId === 0 && A.partnerId === 0 && spark(A, B, yearTicks(world)) : aff >= 32 && trust >= 22;
       if (ok && hashUnit(B.id, A.id, world.tick >> 6) < 0.8 + 0.2 * B.traits.sociability) {
         if (joinHouseholds(world, A, B, kind)) {
           bubble(world, B, D.saying(D.ACCEPT_PROPOSE, B.id, A.id, world.tick >> 5), 'happy', 56);
@@ -1156,8 +1344,22 @@ export function flushDelayedBubbles(world: World): void {
 }
 
 // ── phase 3: news travels by word of mouth ──
+function shareAccount(world: World, S: Person, L: Person): void {
+  const a = pickAccount(world, S, L);
+  if (!a) return;
+  const held = hearAccount(world, S, L, a);
+  if (!held || S.speech) return;
+  const subject = personOf(world, a.about);
+  if (!subject) return;
+  const lines = a.kind === 'broke' ? D.GOSSIP_BROKE : a.kind === 'kept' ? D.GOSSIP_KEPT : a.kind === 'quarreled' ? D.GOSSIP_QUARREL : D.GOSSIP_GAVE;
+  bubble(world, S, D.saying(lines, S.id, L.id, world.tick >> 5, { n: subject.name }), 'say', 66);
+}
+
 function phaseNews(world: World, S: Person, L: Person): void {
   shareConcerns(world, S, L);
+  shareDeath(world, S, L);
+  shareMotion(world, S, L);
+  shareAccount(world, S, L);
   const news = pickNews(world, S, L, 2);
   let shown = false;
   let learned = 0;
@@ -1212,6 +1414,7 @@ function joinHouseholds(world: World, A: Person, B: Person, kind: 'partner' | 'r
 function bindPartners(world: World, A: Person, B: Person): void {
   A.partnerId = B.id;
   B.partnerId = A.id;
+  noteOccasion(world, 'partnership', `${A.name} and ${B.name}`, A.id, circleOf(world, [A, B]));
   const ra = relOf(A, B.id);
   const rb = relOf(B, A.id);
   ra.kin = 'partner';
@@ -1273,7 +1476,9 @@ export function startArgument(world: World, a: Person, b: Person, why: string, c
   addLog(world, a, 'social', `Argued with ${b.name} over ${why}.`);
   addLog(world, b, 'social', `Argued with ${a.name} over ${why}.`);
   addFx(world, 'anger', (a.x + b.x) / 2, (a.y + b.y) / 2, 0);
-  witness(world, 'quarrel', a, b, a.x, a.y);
+  recordAccount(world, a, b.id, 'quarreled', a.id);
+  recordAccount(world, b, a.id, 'quarreled', b.id);
+  witness(world, 'quarrel', a, b, a.x, a.y, true);
 }
 
 // ───────────────────────── working side by side ─────────────────────────
@@ -1291,8 +1496,9 @@ export function bondWorkers(world: World, p: Person): void {
     if (rel && rel.avoidUntil > world.tick) continue;
     const fit = 1 - (Math.abs(p.traits.diligence - q.traits.diligence) + Math.abs(p.traits.sociability - q.traits.sociability)) / 2;
     if (fit < 0.45) continue;
-    const sparked = !p.partnerId && !q.partnerId && stageOf(world, p) !== 'child' && stageOf(world, q) !== 'child' && !(rel && rel.kin) && spark(p, q);
+    const sparked = !p.partnerId && !q.partnerId && stageOf(world, p) !== 'child' && stageOf(world, q) !== 'child' && !(rel && rel.kin) && spark(p, q, yearTicks(world));
     adjustRel(p, q.id, world.tick, { aff: 0.5 + 0.5 * fit + (sparked ? 0.7 : 0), fam: 0.5, trust: 0.4, note: `worked alongside ${q.name}` });
+    watchAndLearn(world, p, q); // and some of how they do it rubs off, if they are better at it
   }
 }
 
@@ -1328,6 +1534,8 @@ registerHandler('socialize', {
   pose: () => 'talk',
   begin(world, p, a) {
     const t = personOf(world, a.targetId);
+    // a call that finds nobody in should not be tried again at once (set here, not when the option is weighed up)
+    if (a.data.purpose === 'call') p.cooldowns['call' + a.targetId] = Math.max(p.cooldowns['call' + a.targetId] ?? 0, world.tick + Math.round(DAY / 2));
     if (!t) return 'they are no longer around';
     if (Math.hypot(t.x - p.x, t.y - p.y) > CONV_REACH + 2.5) return 'could not find them';
   },

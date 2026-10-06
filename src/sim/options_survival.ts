@@ -591,6 +591,68 @@ function optRest(ctx: Ctx): void {
   });
 }
 
+// ───────────────────────── being ill ─────────────────────────
+/** Someone in a spell of illness wants to lie down, at home if they know of one, and leaves the work to others. */
+function optIllRest(ctx: Ctx): void {
+  const { world, p } = ctx;
+  const ill = p.illness;
+  if (!ill) return;
+  const want = 16 + 26 * ill.severity;
+  let offered = false;
+  for (const b of beliefsByKind(p, ['building'])) {
+    if (b.hh !== p.hhId || !isHomeType(b.btype)) continue;
+    const e = eta(ctx, b.x, b.y);
+    const sc = new Scorer().add('ill, and wants to lie down', want).add('walking', -pen(e));
+    addOption(ctx, {
+      kind: 'rest',
+      label: `Rest at the ${homeNoun(b.btype)}, ill`,
+      goal: 'to get over being ill',
+      need: null,
+      util: sc.total,
+      parts: sc.parts,
+      eta: e,
+      key: `rest:ill:${b.id}`,
+      targetId: b.id,
+      tag: 'rest',
+      make: () => {
+        const spot = spotNear(world, p, b);
+        if (!spot) return null;
+        return newActivity(world, p, {
+          kind: 'rest',
+          label: `Resting at the ${homeNoun(b.btype)}, ill`,
+          goal: 'to get over being ill',
+          targetId: b.id,
+          targetType: 'building',
+          spotX: spot.x,
+          spotY: spot.y,
+          amount: 600,
+          utility: sc.total,
+          minCommit: 240,
+          maxTicks: 1500,
+          data: { ill: true },
+        });
+      },
+    });
+    offered = true;
+  }
+  if (offered) return;
+  const sc = new Scorer().add('ill, and wants to lie down', want * 0.8);
+  addOption(ctx, {
+    kind: 'rest',
+    label: 'Rest, ill',
+    goal: 'to get over being ill',
+    need: null,
+    util: sc.total,
+    parts: sc.parts,
+    eta: 0,
+    key: 'rest:ill:here',
+    targetId: 0,
+    tag: 'rest',
+    make: () =>
+      newActivity(world, p, { kind: 'rest', label: 'Resting, ill', goal: 'to get over being ill', here: true, amount: 500, utility: sc.total, minCommit: 200, maxTicks: 1200, data: { ill: true } }),
+  });
+}
+
 export function survivalOptions(ctx: Ctx): void {
   optFlee(ctx);
   optEat(ctx);
@@ -598,6 +660,7 @@ export function survivalOptions(ctx: Ctx): void {
   optSleep(ctx);
   optWarmth(ctx);
   optRest(ctx);
+  optIllRest(ctx);
 }
 
 void carryCap;

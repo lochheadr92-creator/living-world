@@ -432,10 +432,14 @@ export const AGE_OLD_DEATH_START = 76;
  */
 export const DAYS_PER_YEAR = 12;
 export const TICKS_PER_YEAR = DAY * DAYS_PER_YEAR;
+/** the paces a player can pick: days of simulated time per year of life (a "life pace" setting; the default is DAYS_PER_YEAR) */
+export const LIFE_PACES = [6, 12, 24, 48] as const;
 /** nine months */
-export const PREGNANCY_TICKS = Math.round(0.75 * TICKS_PER_YEAR);
+export const PREGNANCY_YEARS = 0.75;
 /** a mother needs a year and a half between children */
-export const BIRTH_SPACING_TICKS = Math.round(1.5 * TICKS_PER_YEAR);
+export const BIRTH_SPACING_YEARS = 1.5;
+export const PREGNANCY_TICKS = Math.round(PREGNANCY_YEARS * TICKS_PER_YEAR);
+export const BIRTH_SPACING_TICKS = Math.round(BIRTH_SPACING_YEARS * TICKS_PER_YEAR);
 /** chance per year that a settled, well-fed couple conceives (once the spacing has passed) */
 export const CONCEPTION_PER_YEAR = 0.5;
 

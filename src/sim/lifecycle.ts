@@ -1,11 +1,16 @@
 import { abortActivity, newActivity, startActivity } from './activities';
-import { AGE_OLD_DEATH_START, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
+import { BIRTH_SPACING_YEARS, CONCEPTION_PER_YEAR, PREGNANCY_YEARS, isHomeType } from './constants';
 import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
 import { socialOnDeath } from './social';
+import { onDeath } from './grief';
+import { illnessTick } from './illness';
+import { circleOf, noteOccasion } from './leisure';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
+import { childbirthRisk, fertilityAt, frailtyOf, lifeDraw, mortalityPerYear, yearTicks } from './ageing';
+import { hashUnit } from './rng';
 import { addToHousehold, createHousehold, householdById, membersOf, removeFromHousehold } from './households';
 import { BUILD_DEF } from './constants';
 import { observe, putBelief } from './knowledge';
@@ -18,6 +23,7 @@ import type { Grave, Person, Stage, World } from './types';
 import { T } from './types';
 import { newId } from './registry';
 
+const AGE_OLD = 62; // from here a natural death is put down to old age rather than illness
 const STAGE_CODE: Record<Stage, number> = { child: 0, youth: 1, adult: 2, elder: 3 };
 
 /** Register a freshly created person in the world and their household. */
@@ -39,19 +45,22 @@ export function lifeTick(world: World, p: Person): void {
   else if (prev !== code) {
     p.cooldowns.stageCode = code;
     if (code === 1) addEvent(world, 'life', `${p.name} is growing up.`, [p.id], p.x, p.y);
-    else if (code === 2) addEvent(world, 'life', `${p.name} has come of age and joins the work.`, [p.id], p.x, p.y);
+    else if (code === 2) {
+      addEvent(world, 'life', `${p.name} has come of age and joins the work.`, [p.id], p.x, p.y);
+      noteOccasion(world, 'coming_of_age', p.name, p.id, circleOf(world, [p]));
+    }
     else if (code === 3) addEvent(world, 'life', `${p.name} is now an elder.`, [p.id], p.x, p.y);
     addLog(world, p, 'life', code === 2 ? 'Became an adult.' : code === 3 ? 'Grew old.' : 'Growing up.');
   }
 
-  // death of old age: the yearly hazard rises with every year past the threshold (this runs once a minute of sim time)
-  if (age > AGE_OLD_DEATH_START) {
-    const perYear = 0.035 + 0.011 * (age - AGE_OLD_DEATH_START);
-    if (world.rng.next() < (perYear * LIFE_CHECK_EVERY) / TICKS_PER_YEAR) {
-      killPerson(world, p, 'old age');
-      return;
-    }
+  // ordinary mortality (see ageing.ts): a chance each minute of sim time, from a hash so no random stream is used
+  const perYear = mortalityPerYear(age, frailtyOf(world, p), p.health);
+  if (lifeDraw(world, p, Math.floor(world.tick / LIFE_CHECK_EVERY), 91) < 1 - Math.exp((-perYear * LIFE_CHECK_EVERY) / yearTicks(world))) {
+    killPerson(world, p, age < 12 ? 'a childhood illness' : age < AGE_OLD ? 'illness' : 'old age');
+    return;
   }
+  // illness: a spell with a course, which others can help with, and which ends in recovery or death
+  if (illnessTick(world, p, age, Math.floor(world.tick / LIFE_CHECK_EVERY))) return;
   // birth
   if (p.pregnantUntil > 0 && world.tick >= p.pregnantUntil) giveBirth(world, p);
 }
@@ -79,19 +88,20 @@ export function conceptionTick(world: World): void {
   for (const p of world.persons) {
     if (!p.alive || p.sex !== 'f' || p.partnerId === 0 || p.pregnantUntil > 0) continue;
     const age = ageYears(world, p);
-    if (age < 17 || age > 44) continue;
+    const fert = fertilityAt(age);
+    if (fert <= 0) continue;
     const partner = personOf(world, p.partnerId);
     if (!partner || partner.hhId !== p.hhId || partner.sex !== 'm') continue;
     const hh = householdById(world, p.hhId);
     if (!hh || !hh.homeId) continue; // a roof first
     const kids = membersOf(world, hh).filter((m) => stageOf(world, m) === 'child').length;
     if (kids >= 3) continue;
-    if (world.tick - (p.cooldowns.lastBirth ?? -99999) < BIRTH_SPACING_TICKS) continue; // recover between children
+    if (world.tick - (p.cooldowns.lastBirth ?? -99999) < BIRTH_SPACING_YEARS * yearTicks(world)) continue; // recover between children
     if (householdFoodPerHead(world, p) < 3) continue;
     if (p.health < 60 || p.needs.hunger < 35) continue;
     const roll = world.rng.next();
-    if (roll < (CONCEPTION_PER_YEAR * (world.settings.harsh ? 0.45 : 1) * CONCEPTION_CHECK_EVERY) / TICKS_PER_YEAR) {
-      p.pregnantUntil = world.tick + PREGNANCY_TICKS;
+    if (roll < (CONCEPTION_PER_YEAR * fert * (world.settings.harsh ? 0.45 : 1) * CONCEPTION_CHECK_EVERY) / yearTicks(world)) {
+      p.pregnantUntil = world.tick + Math.round(PREGNANCY_YEARS * yearTicks(world));
       p.pregnantBy = partner.id;
       addEvent(world, 'life', `${p.name} and ${partner.name} are expecting a child.`, [p.id, partner.id], p.x, p.y);
       addLog(world, p, 'life', 'We are expecting a child.');
@@ -159,10 +169,13 @@ export function giveBirth(world: World, mother: Person): void {
   addLog(world, mother, 'life', `${baby.name} was born.`);
   if (father) addLog(world, father, 'life', `${baby.name} was born.`);
   mother.speech = { text: 'Welcome, little one.', until: world.tick + 90, kind: 'happy' };
+  noteOccasion(world, 'birth', baby.name, baby.id, circleOf(world, father ? [mother, father] : [mother]));
   for (const q of world.persons) {
     if (!q.alive || q === mother || q === baby) continue;
     if (Math.hypot(q.x - mother.x, q.y - mother.y) < 10) adjustRel(q, mother.id, world.tick, { aff: 0.8, note: `${baby.name} was born` });
   }
+  // a birth is not without risk to the mother
+  if (lifeDraw(world, mother, baby.id, 93) < childbirthRisk(ageYears(world, mother), frailtyOf(world, mother))) killPerson(world, mother, 'childbirth');
 }
 
 // ───────────────────────── death ─────────────────────────
@@ -185,6 +198,8 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const gx = Math.floor(p.x);
   const gy = Math.floor(p.y);
   let placed = false;
+  let graveX = gx;
+  let graveY = gy;
   for (let r = 0; r < 5 && !placed; r++) {
     for (let dy = -r; dy <= r && !placed; dy++) {
       for (let dx = -r; dx <= r && !placed; dx++) {
@@ -192,6 +207,8 @@ export function killPerson(world: World, p: Person, cause: string): void {
         if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND) {
           const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age };
           registerGeneric(world, g);
+          graveX = g.x;
+          graveY = g.y;
           placed = true;
         }
       }
@@ -200,25 +217,15 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const idx = world.persons.indexOf(p);
   if (idx >= 0) world.persons.splice(idx, 1);
   world.byId.delete(p.id);
-  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age });
+  world.deceased.push({ id: p.id, name: p.name, tick: world.tick, cause, age, hh: p.hhId, gx: graveX, gy: graveY });
   removeFromHousehold(world, p);
   if (p.partnerId) {
     const partner = personOf(world, p.partnerId);
     if (partner) partner.partnerId = 0;
   }
   addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause})`}, aged ${age}.`, [p.id], p.x, p.y);
-  // those who loved them feel it
-  for (const q of world.persons) {
-    if (!q.alive) continue;
-    const r = q.relations[p.id];
-    if (!r) continue;
-    if (r.kin || r.affinity >= 45) {
-      q.needs.social = Math.max(0, q.needs.social - 24);
-      q.needs.safety = Math.max(0, q.needs.safety - 8);
-      addLog(world, q, 'life', `${p.name} died (${cause}).`);
-      if (Math.hypot(q.x - p.x, q.y - p.y) < 14) q.speech = { text: '…', until: world.tick + 120, kind: 'think' };
-    }
-  }
+  // those who were near, and close to them, learn of it now; everyone else learns when somebody who knows tells them
+  onDeath(world, { id: p.id, name: p.name, tick: world.tick, hh: p.hhId, gx: graveX, gy: graveY });
 }
 
 // ───────────────────────── orphans ─────────────────────────
@@ -333,7 +340,7 @@ export function immigrationTick(world: World): void {
         else if (q.sex === 'm' && years >= 17 && years <= 55) menToWed++;
       }
       const sex = world.rng.chance(womenToWed <= menToWed ? 0.7 : 0.3) ? 'f' : 'm';
-      arrive(world.rng.range(18, 36), sex, undefined, 0, 0);
+      arrive(world.rng.range(18, 48), sex, undefined, 0, 0);
     } else {
       const mother = arrive(world.rng.range(20, 34), 'f', undefined, 0, 0);
       const father = arrive(world.rng.range(21, 38), 'm', undefined, 0.8, 0.5);

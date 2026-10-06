@@ -3232,3 +3232,24 @@ button.worker:hover {
   font-size: 10.5px;
   color: var(--faint);
 }
+
+/* life pace: a small radio row in the world menu */
+.pace {
+  display: grid;
+  gap: 8px;
+  padding-top: 4px;
+}
+.pace-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6px;
+}
+.pace-btn {
+  padding-inline: 6px;
+  justify-content: center;
+}
+.pace-btn[aria-checked='true'] {
+  background: var(--accent);
+  color: var(--accent-ink);
+  border-color: transparent;
+}

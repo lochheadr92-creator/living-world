@@ -1,7 +1,8 @@
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
 import { cartSpeedFactor } from './carts';
 import { carryCap } from './people';
-import { stageOf } from './people';
+import { stageOf, ageYears } from './people';
+import { vigourOf } from './ageing';
 import { releaseClaims, weightOf } from './economy';
 import { addLog, setResult } from './events';
 import { findPath, terrainSpeed, tileCost } from './pathfinding';
@@ -145,7 +146,7 @@ export function faceToward(p: Person, x: number, y: number, rate = TURN_RATE): v
 export function moveSpeed(world: World, p: Person, run = false): number {
   let s = BASE_SPEED;
   const st = stageOf(world, p);
-  s *= st === 'child' ? 0.88 : st === 'youth' ? 0.97 : st === 'elder' ? 0.8 : 1;
+  s *= st === 'child' ? 0.88 : st === 'youth' ? 0.97 : 0.62 + 0.38 * vigourOf(world, p, ageYears(world, p)); // strength fades from the mid-forties
   const cap = carryCap(world, p);
   s *= 1 - 0.22 * Math.min(1, weightOf(p.inv) / cap);
   if (p.health < 70) s *= 0.55 + 0.45 * (p.health / 70);

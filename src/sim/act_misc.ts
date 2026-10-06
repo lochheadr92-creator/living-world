@@ -42,7 +42,7 @@ registerHandler('rest', {
   },
   work(world, p, a): WorkResult {
     a.progress++;
-    if (a.progress >= a.duration || p.needs.energy >= 98) return 'done';
+    if (a.progress >= a.duration || (p.needs.energy >= 98 && !a.data.ill)) return 'done';
     return 'continue';
   },
 });

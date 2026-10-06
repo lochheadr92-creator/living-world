@@ -9,7 +9,9 @@ import { missingMaterials, observe, delBelief } from './knowledge';
 import { isFacilityType } from './recipes';
 import { isFreeLand } from './registry';
 import { mintTool, taskMultiplier, wearFor } from './tools';
-import { carryCap } from './people';
+import { ageYears, carryCap } from './people';
+import { completeProposal } from './council';
+import { workDrag } from './ageing';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
 import { clamp } from './util';
 import { itemsToText } from './people';
@@ -130,7 +132,7 @@ registerHandler('repair', {
     if (b.condition > 90) return 'it is in good shape already';
     a.tx = b.x + b.w / 2;
     a.ty = b.y + b.h / 2;
-    a.duration = Math.round((WORK.repair * taskMultiplier(world, p, 'repair')) / p.skills.build);
+    a.duration = Math.round((WORK.repair * taskMultiplier(world, p, 'repair') * workDrag(world, p, ageYears(world, p))) / p.skills.build);
   },
   work(world, p, a): WorkResult {
     const b = world.byId.get(a.targetId);
@@ -174,7 +176,7 @@ registerHandler('craft', {
     if (!b || b.ent !== 'building') return 'no workspace';
     a.tx = b.x + b.w / 2;
     a.ty = b.y + b.h / 2;
-    a.duration = Math.round(r.work / p.skills.craft);
+    a.duration = Math.round((r.work * workDrag(world, p, ageYears(world, p))) / p.skills.craft);
   },
   work(world, p, a): WorkResult {
     faceToward(p, a.tx, a.ty);
@@ -266,6 +268,7 @@ registerHandler('plan_site', {
     if (why) return `fail:${why}`;
     const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
     observe(world, p, site);
+    if (!up) completeProposal(world, type, p); // if the village had agreed to it, that is now acted on
     const hh = householdOf(world, p);
     const verb = up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';
     addEvent(world, 'build', `${p.name} ${verb} ${buildingLabel(type)}${hh ? ` for the ${hh.name} household` : ''}.`.replace('a a ', 'a '), [p.id], sx, sy);

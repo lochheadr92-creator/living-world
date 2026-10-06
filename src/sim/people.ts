@@ -1,4 +1,5 @@
-import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP, TICKS_PER_YEAR } from './constants';
+import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP } from './constants';
+import { vigourOf, yearTicks } from './ageing';
 import type { RNG } from './rng';
 import type { Items, Look, Person, Skills, Stage, ToolKind, Traits, World } from './types';
 import { clamp } from './util';
@@ -42,7 +43,7 @@ function toRoman(n: number): string {
 }
 
 export function ageYears(world: World, p: Person): number {
-  return (world.tick - p.birthTick) / TICKS_PER_YEAR;
+  return (world.tick - p.birthTick) / yearTicks(world);
 }
 
 export function stageOfAge(age: number): Stage {
@@ -54,7 +55,11 @@ export function stageOf(world: World, p: Person): Stage {
 }
 
 export function carryCap(world: World, p: Person): number {
-  return CARRY_CAP[stageOf(world, p)] + ((p.inv.basket ?? 0) > 0 ? BASKET_BONUS : 0);
+  const age = ageYears(world, p);
+  const st = stageOfAge(age);
+  // grown people carry less as their strength goes (the prime carries the full load)
+  const base = st === 'adult' || st === 'elder' ? Math.round(CARRY_CAP.adult * (0.4 + 0.6 * vigourOf(world, p, age))) : CARRY_CAP[st];
+  return base + ((p.inv.basket ?? 0) > 0 ? BASKET_BONUS : 0);
 }
 
 export const dependentsOf = (world: World, p: Person): Person[] => world.persons.filter((q) => q.alive && q.id !== p.id && q.hhId === p.hhId && isDependent(world, q));
@@ -161,7 +166,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     py: o.y,
     heading: rng.next() * Math.PI * 2 - Math.PI,
     pheading: 0,
-    birthTick: world.tick - Math.round(o.age * TICKS_PER_YEAR),
+    birthTick: world.tick - Math.round(o.age * yearTicks(world)),
     alive: true,
     health: 100,
     needs: {
@@ -205,6 +210,12 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     chrono: (rng.next() - 0.5) * 0.09,
     asked: {},
     told: {},
+    accounts: [],
+    grief: [],
+    illness: null,
+    learned: [],
+    keepsakes: [],
+    occasions: [],
     lastExploreTick: -9999,
     stats: { gathered: 0, given: 0, received: 0, built: 0, talked: 0, farmed: 0, crafted: 0 },
     lastAteTick: world.tick,

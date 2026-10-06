@@ -1,18 +1,26 @@
 import { newActivity } from './activities';
-import { BUILD_DEF } from './constants';
+import { BUILD_DEF, DAY } from './constants';
+import { dayFraction } from './environment';
 import { pickFood } from './economy';
-import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
+import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods, whereIs } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
-import { isDependent, stageOf } from './people';
+import { ageYears, isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { wantsAmends } from './grievance';
+import { ACCOUNT_LIFE } from './reputation';
+import { mournOptions } from './grief';
+import { SKILL_WORD, lessonFor } from './teaching';
+import { carriedForMe, knownProposal, turnedDownLately } from './council';
+import { facilityInitiative } from './production';
+import { GAME_WORDS, calm, celebrating, leisureOn, optFireside, optPlay } from './leisure';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
 import { hashUnit } from './rng';
 import { spark } from './relations';
+import { vigourOf, yearTicks } from './ageing';
 import type { Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
 import { clamp } from './util';
 
@@ -97,7 +105,7 @@ function optChat(ctx: Ctx): void {
     if (sd <= 0 && ctx.night) sc.add('evening company', 3.4 * (p.traits.sociability - 0.15));
     sc.add(c.aff >= 20 ? 'a friend' : c.fam < 4 ? 'someone new' : 'a neighbour', sd > 0 ? c.aff * 0.12 + (c.fam < 4 ? 3 * p.traits.curiosity : 0) : 0);
     // two unattached adults who are drawn to each other seek out one another's company
-    if (!p.partnerId && !c.q.partnerId && ctx.stage !== 'child' && ctx.stage !== 'youth' && stageOf(ctx.world, c.q) !== 'child' && stageOf(ctx.world, c.q) !== 'youth' && !p.relations[c.q.id]?.kin && spark(p, c.q) && c.aff > -5) {
+    if (!p.partnerId && !c.q.partnerId && ctx.stage !== 'child' && ctx.stage !== 'youth' && stageOf(ctx.world, c.q) !== 'child' && stageOf(ctx.world, c.q) !== 'youth' && !p.relations[c.q.id]?.kin && spark(p, c.q, yearTicks(ctx.world)) && c.aff > -5) {
       sc.add('drawn to each other', (ctx.night ? 9 : 4.5) + Math.max(0, c.aff) * 0.05);
     }
     sc.add('close by', sd > 0 ? Math.max(0, 6 - c.d) * 0.6 : 0);
@@ -333,6 +341,179 @@ function optReconcile(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── leisure: contests, keepsakes, calling on friends ─────────────────────────
+const dayF = (tick: number): number => dayFraction(tick);
+
+/** Two friends with nothing to do may try each other at a race, a wrestle or a throw. */
+function optChallenge(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!leisureOn(world) || ctx.stage === 'child' || !calm(ctx) || p.illness || (p.cooldowns.contestAny ?? 0) > world.tick) return;
+  const f = dayF(world.tick);
+  if (f < 0.2 || f >= 0.84) return;
+  const tm = traitMods(p);
+  const age = ageYears(world, p);
+  if (vigourOf(world, p, age) < 0.6) return;
+  let best: { c: Cand; sc: Scorer } | null = null;
+  for (const c of candidates(ctx)) {
+    const qa = ageYears(world, c.q);
+    if (stageOf(world, c.q) === 'child' || c.q.illness || vigourOf(world, c.q, qa) < 0.55) continue;
+    if (c.aff < -5 || c.fam < 6 || p.relations[c.q.id]?.grievance || c.q.relations[p.id]?.grievance) continue;
+    if ((p.cooldowns['challenge' + c.q.id] ?? 0) > world.tick || (c.q.cooldowns.contestAny ?? 0) > world.tick || c.d > 12) continue;
+    const sc = new Scorer().add('a friendly contest', 4 + 6 * (1 - p.traits.caution) + 3 * p.traits.sociability).add('a friend', Math.max(0, c.aff) * 0.05).add('walking', -pen(c.d * 6));
+    if (sc.total < 9 || tm.social < 0.4) continue;
+    if (!best || sc.total > best.sc.total) best = { c, sc };
+  }
+  if (!best) return;
+  const game: 'race' | 'wrestle' | 'throw' = (['race', 'wrestle', 'throw'] as const)[Math.floor(hashUnit(p.id, best.c.q.id, world.tick >> 9) * 3)];
+  mkSocial(ctx, best.c, 'challenge', { game }, `Challenge ${best.c.q.name} to ${GAME_WORDS[game]}`, `to have ${GAME_WORDS[game]} with ${best.c.q.name}`, 'social', best.sc, 'play', ':' + game);
+}
+
+/** Someone with a spare piece of wood and a steady hand carves something for a person they care about. */
+function optPresent(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!leisureOn(world) || ctx.stage === 'child' || !calm(ctx) || (p.inv.wood ?? 0) < 1 || p.skills.craft < 0.95) return;
+  if (surplusOf(world, p, 'wood') < 1) return;
+  const f = dayF(world.tick);
+  if (f < 0.2 || f >= 0.84) return;
+  for (const c of candidates(ctx)) {
+    const kin = !!p.relations[c.q.id]?.kin || c.q.hhId === p.hhId;
+    if (!kin && c.aff < 25) continue;
+    if ((p.cooldowns['present' + c.q.id] ?? 0) > world.tick || c.d > 12) continue;
+    const sc = new Scorer().add('would like to make something for someone they care about', 4 + 7 * p.traits.generosity).add('walking', -pen(c.d * 6));
+    if (stageOf(world, c.q) === 'child') sc.add('a child', 4);
+    const occ = celebrating(p, world.tick);
+    if (occ && occ.about === c.q.id) sc.add('a happy occasion', 6);
+    if (sc.total < 9) continue;
+    mkSocial(ctx, c, 'present', { item: 'wood' }, `Give ${c.q.name} something you carved`, `to give ${c.q.name} a keepsake`, 'social', sc, 'gift');
+    break;
+  }
+}
+
+/** A friend who has not been seen for a while, and is known to be somewhere not far off, may be called on. */
+function optCallOn(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!leisureOn(world) || !calm(ctx) || p.illness) return;
+  const f = dayF(world.tick);
+  if (f < 0.25 || f >= 0.78) return;
+  const seen = new Set(ctx.seenPersons.map((s) => s.id));
+  let best: { c: Cand; sc: Scorer } | null = null;
+  for (const k in p.relations) {
+    const id = Number(k);
+    const r = p.relations[id];
+    if (seen.has(id) || (!r.kin && r.affinity < 25) || world.tick - r.lastMet < DAY * 0.5) continue;
+    if ((p.cooldowns['call' + id] ?? 0) > world.tick) continue;
+    const q = world.byId.get(id);
+    if (!q || q.ent !== 'person' || !q.alive || q.pose === 'sleep') continue;
+    const loc = whereIs(ctx, id, 0);
+    if (!loc) continue;
+    const d = Math.hypot(loc.x - p.x, loc.y - p.y);
+    if (d > 32) continue;
+    const e = eta(ctx, loc.x, loc.y);
+    // visiting is worth a walk: the walking cost counts for a third of what it does for chores
+    const sc = new Scorer().add('has not seen a friend for a while', 8 + 8 * p.traits.sociability + 0.08 * r.affinity).add('walking', -pen(e) * 0.35);
+    if (r.kin) sc.add('family', 2);
+    if (sc.total < 9) continue;
+    const c = { s: { id, ent: 'person', x: loc.x, y: loc.y } as unknown as SeenEntity, q, aff: r.affinity, fam: r.familiarity, d };
+    if (!best || sc.total > best.sc.total) best = { c, sc };
+  }
+  if (!best) return;
+  const target = best.c.q;
+  mkSocial(ctx, best.c, 'call', {}, `Call on ${target.name}`, `to call on ${target.name}`, 'social', best.sc, 'social');
+}
+
+// ───────────────────────── putting an idea to people ─────────────────────────
+/**
+ * Someone who wants a communal building puts the idea to the people they meet, and takes their answers as they come. It is the
+ * first step to getting it agreed (see council.ts); marking it out comes only after the village has agreed.
+ */
+function optMotion(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (world.settings.councils === false) return;
+  const wants = facilityInitiative(ctx);
+  if (!wants.length) return;
+  const tm = traitMods(p);
+  for (const w of wants) {
+    if (carriedForMe(world, p, w.type) || turnedDownLately(world, p, w.type)) continue;
+    const mine = knownProposal(world, p, w.type);
+    if (mine && mine.status !== 'open') continue;
+    for (const c of candidates(ctx)) {
+      if (mine && mine.heard.includes(c.q.id)) continue;
+      if (c.aff < 0 && !(p.relations[c.q.id]?.kin)) continue;
+      const sc = new Scorer().add(`wants a ${w.type.replace('_', ' ')}: ${w.why}`, (6 + 14 * w.signal) * tm.social).add('walking', -pen(c.d * 6));
+      if (sc.total < 11) continue;
+      mkSocial(ctx, c, 'motion', { motion: w.type, purpose: w.why }, `Put the idea of a ${w.type.replace('_', ' ')} to ${c.q.name}`, `to get a ${w.type.replace('_', ' ')} agreed`, null, sc, 'plan', ':' + w.type);
+    }
+  }
+}
+
+// ───────────────────────── showing someone how ─────────────────────────
+/**
+ * Someone who is good at something offers to show someone who is clearly less skilled at it: most of all elders (whose strength is
+ * fading but whose skill is not), parents with their children, and anyone with a young person. Only with people they are close to
+ * or live with, only when nothing pressing is going on, and each skill at most once a day for each learner.
+ */
+function optTeach(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (ctx.stage === 'child' || ctx.stage === 'youth') return;
+  if (ctx.night || ctx.criticals.length > 0 || ctx.drives.hunger > 24 || ctx.drives.thirst > 24 || ctx.drives.energy > 40) return;
+  const tm = traitMods(p);
+  for (const c of candidates(ctx)) {
+    const kin = !!p.relations[c.q.id]?.kin || c.q.hhId === p.hhId;
+    if (!kin && c.aff < 10) continue;
+    const lesson = lessonFor(world, p, c.q);
+    if (!lesson) continue;
+    const learnerStage = stageOf(world, c.q);
+    const sc = new Scorer()
+      .add(`could show ${c.q.name} how to ${SKILL_WORD[lesson.skill]}`, 5 + 14 * Math.min(lesson.gap, 0.7) + 5 * p.traits.generosity + 3 * p.traits.sociability)
+      .add('walking', -pen(c.d * 6));
+    if (ctx.stage === 'elder') sc.add('an elder passing on what they know', 5);
+    if (learnerStage === 'child' || learnerStage === 'youth') sc.add('young and eager to learn', 4);
+    if (kin) sc.add('family', 3);
+    if (tm.give < 0.4) continue;
+    if (sc.total < 13) continue;
+    mkSocial(ctx, c, 'teach', { skill: lesson.skill }, `Show ${c.q.name} how to ${SKILL_WORD[lesson.skill]}`, `to teach ${c.q.name}`, null, sc, 'teach', ':' + lesson.skill);
+  }
+}
+
+// ───────────────────────── stepping in ─────────────────────────
+/**
+ * Someone who knows two people have fallen out (they saw it, or were told, and it is recent but no longer raw), likes them both and
+ * is not sore at either may go and talk one of them round. Only what the mediator holds as an account is used to find the quarrel;
+ * whether it is still live is for the other person to say.
+ */
+function optMediate(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (ctx.stage === 'child') return;
+  if (p.traits.sociability < 0.35) return;
+  if (!p.accounts.length) return;
+  for (const c of candidates(ctx)) {
+    if (c.aff < 8) continue;
+    if (p.relations[c.q.id]?.grievance) continue;
+    for (const a of p.accounts) {
+      if (a.kind !== 'quarreled' && a.kind !== 'broke') continue;
+      const age = world.tick - a.at;
+      if (age < 40 || age > ACCOUNT_LIFE) continue;
+      const otherId = a.about === c.q.id ? a.toward : a.toward === c.q.id ? a.about : 0;
+      if (!otherId || otherId === p.id) continue;
+      const other = world.byId.get(otherId);
+      if (!other || other.ent !== 'person' || !other.alive) continue;
+      const rel = p.relations[otherId];
+      if ((rel?.affinity ?? 0) < 0 || rel?.grievance) continue;
+      if ((p.cooldowns['mediate' + c.q.id + ':' + otherId] ?? 0) > world.tick) continue;
+      const sc = new Scorer()
+        .add(`cares about ${c.q.name} and ${other.name}, who have fallen out`, 7 + 5 * p.traits.generosity + 3 * p.traits.sociability)
+        .add('friendship', (c.aff + (rel?.affinity ?? 0)) * 0.04)
+        // most quarrels fade by themselves within a day or so, so the time to step in is soon after it has cooled
+        .add('before it sets', 12 * clamp(1 - (age - 40) / 1900, 0, 1))
+        .add('walking', -pen(c.d * 6));
+      if (sc.total < 9) continue;
+      world.stats.medOffered = (world.stats.medOffered ?? 0) + 1;
+      mkSocial(ctx, c, 'mediate', { otherId }, `Talk ${c.q.name} round about ${other.name}`, `to help ${c.q.name} and ${other.name} make up`, null, sc, 'peace', ':' + otherId);
+      break;
+    }
+  }
+}
+
 // ───────────────────────── recruiting help ─────────────────────────
 function optRecruit(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -377,7 +558,7 @@ function optPropose(ctx: Ctx): void {
     const back = q.relations[p.id];
     if (!back) continue;
     let kind: 'partner' | 'roommate' | null = null;
-    if (p.partnerId === 0 && q.partnerId === 0 && rel.affinity >= 30 && rel.trust >= 20 && back.affinity >= 26 && spark(p, q) && !rel.kin) kind = 'partner';
+    if (p.partnerId === 0 && q.partnerId === 0 && rel.affinity >= 30 && rel.trust >= 20 && back.affinity >= 26 && spark(p, q, yearTicks(world)) && !rel.kin) kind = 'partner';
     else if (sameHome) continue;
     else if (rel.affinity >= 38 && rel.trust >= 26 && back.affinity >= 32) {
       // roommates: one of us has no real home and the other has room
@@ -438,6 +619,15 @@ export function socialOptions(ctx: Ctx): void {
   optWarn(ctx);
   optOffer(ctx);
   optReconcile(ctx);
+  optMediate(ctx);
+  optTeach(ctx);
+  optMotion(ctx);
+  optChallenge(ctx);
+  optPresent(ctx);
+  optCallOn(ctx);
+  optFireside(ctx);
+  optPlay(ctx);
+  mournOptions(ctx);
   optRecruit(ctx);
   optPropose(ctx);
   optTrade(ctx);
