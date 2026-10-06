@@ -1,3 +1,4 @@
+import { probe } from './probe';
 import { MinHeap } from './util';
 import { T } from './types';
 import type { World } from './types';
@@ -92,6 +93,7 @@ export interface PathOpts {
  * (tile centres), string-pulled where the straight line is clear. Empty array = already there. null = unreachable.
  */
 export function findPath(world: World, sx: number, sy: number, gx: number, gy: number, opts: PathOpts = {}): number[] | null {
+  if (probe.on) probe.pathCalls++;
   cartMode = !!opts.cart;
   try {
     return findPathInner(world, sx, sy, gx, gy, opts);
@@ -158,6 +160,13 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
         const h = Math.max(ex, ey) + 0.4142 * Math.min(ex, ey);
         heap.push(ni, ng + h);
       }
+    }
+  }
+  if (probe.on) {
+    probe.pathExpanded += expanded;
+    if (goalI < 0) {
+      probe.pathNull++;
+      if (expanded > maxNodes) probe.pathBudgetHit++;
     }
   }
   if (goalI < 0) return null;

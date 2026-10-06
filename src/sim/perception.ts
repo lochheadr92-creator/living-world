@@ -1,6 +1,7 @@
 import { SENSE_RADIUS } from './constants';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
 import { stageOf } from './people';
+import { probe } from './probe';
 import { distToFootprint, gridQuery, isWaterAccess } from './registry';
 import type { Animal, Building, ItemKind, Person, SeenEntity, World } from './types';
 
@@ -103,6 +104,7 @@ export function perceive(world: World, p: Person): void {
   gridQuery(world.grid, p.x, p.y, r + 2.5, (e) => {
     if (distToFootprint(e, p.x, p.y) > r) return;
     if (e.ent === 'source' && e.type === 'tree' && e.amount < 1) return;
+    if (probe.on) probe.perceiveStatic++;
     if (observe(world, p, e)) fresh++;
   });
 
@@ -155,6 +157,11 @@ export function perceive(world: World, p: Person): void {
 
   stampExplored(world, p, r);
   p.lastPercept = { tick: world.tick, seen: p.seen.length, newBeliefs: fresh };
+  if (probe.on) {
+    probe.perceives++;
+    probe.perceiveMobile += p.seen.length;
+    probe.perceiveFresh += fresh;
+  }
 }
 
 /** Re-pick the usable shore tile of one coarse cell (the old one was built over). Returns its index, or -1 if the cell has no shore left. */

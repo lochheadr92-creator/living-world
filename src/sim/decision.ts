@@ -3,6 +3,7 @@ import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
+import { probe } from './probe';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
 import { survivalOptions } from './options_survival';
@@ -24,6 +25,10 @@ export function generateOptions(world: World, p: Person, collect = false): Ctx {
   workOptions(ctx);
   productionOptions(ctx);
   socialOptions(ctx);
+  if (probe.on) {
+    probe.generations++;
+    probe.optionsGenerated += ctx.options.length;
+  }
   return ctx;
 }
 
@@ -105,6 +110,7 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
 
 /** Choose what to do when free. */
 export function decide(world: World, p: Person, trigger: string): void {
+  if (probe.on) probe.decisions++;
   const ctx = generateOptions(world, p, true);
   if (!launch(world, p, ctx, trigger)) {
     p.nextThink = world.tick + 15;
@@ -133,6 +139,7 @@ export function reviewActivity(world: World, p: Person): void {
     p.nextThink = world.tick + REVIEW_EVERY;
     return;
   }
+  if (probe.on) probe.reviews++;
   const ctx = generateOptions(world, p, false);
   const ranked = rankOptions(ctx);
   const best = ranked[0];

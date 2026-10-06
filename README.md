@@ -192,7 +192,8 @@ src/ui       DOM interface: top bar, transport, inspector (people, workplaces, s
              minimap, overlays, help, debug
 tests        vitest suite;  scripts/  headless tools (census, traces, baseline, audits)
 docs         ECONOMY.md (rules), recipes.generated.md (tables), BASELINE.md (before/after record),
-             OBSERVED.md (five causal chains watched in the page)
+             OBSERVED.md (five causal chains watched in the page), SCALING.md (benchmark tools, golden fingerprints,
+             measurements beyond the ordinary world)
 ```
 
 The simulation advances in whole ticks (10 per second at 1×; a day is 2400 ticks). Rendering interpolates between the
