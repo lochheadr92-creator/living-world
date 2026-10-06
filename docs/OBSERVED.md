@@ -9,7 +9,9 @@ before each one and played in real time at 4×, held (paused) at the instants li
 
 The page and a headless run agree exactly on the world at a given tick (`stateHash` at ticks 3000 and 16000, and at the end of
 two soak runs of 120 s and 100 s of random clicking, following, overlay toggling, pausing, stepping and speed changes), so the tick
-numbers below are valid for this version of the code. **Any change to the simulation moves them.**
+numbers below are valid for this version of the code. **Any change to the simulation moves them.** (The additions listed in
+[`BASELINE.md`](BASELINE.md) under "Runs after this record" have done so: the state of `meadow` at day 30 was `1418981b` when this was
+written and is `40bc0215` now, so these moments no longer fall at these ticks.)
 
 To watch one yourself, open the page, open the browser console, and for example:
 

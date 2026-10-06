@@ -210,14 +210,16 @@ the same thing in the same tick the winner is the same every run.
 `npm test` covers: determinism (same seed ⇒ same state; inspecting never perturbs it; saved and reloaded worlds carry on
 identically, including a cart on the road), resource conservation (gathering, transfers, eating, renewal, crop growth,
 construction, batches, waste, spoilage, carts, meal tables, long natural runs), contested last items and exclusive claims,
-reservation release on interruption/death/long runs, locality of knowledge (including a whole-run audit that every
-targeted place was known, and that news keeps its source and age), social requests causing real transfers, refusals,
-promises ending each of six ways, cooperation changing construction progress, lifecycle (birth, growing up, death,
-adoption, caregiving, couples, newcomers), survival under pressure (a wolf at the only pond, two critical needs at once,
-planning ahead for a long walk to water, work that would strand someone), every workplace and recipe, tools (wear,
-lending, racks, death and collapse), handcarts (capacity, terrain, nothing loaded from a distance), the iron chain, shared
-meals and their endings, worries and visits, quarrels and the way back, the clock under stalls, pause, step and resume, and
-that running the real renderer never changes the simulation. `tests/scenes.test.ts` keeps each staged scene's promise.
+reservation release on interruption/death/long runs, locality of knowledge (including a whole-run audit that every targeted
+place was known, and that news keeps its source and age), social requests causing real transfers, refusals, promises ending
+each of six ways, cooperation changing construction progress, lifecycle (birth, growing up, death, adoption, caregiving,
+couples, newcomers), survival under pressure (a wolf at the only pond, two critical needs at once, planning ahead for a long
+walk to water, work that would strand someone), every workplace and recipe (including goods held for the site they were
+ordered for, a smokehouse batch end to end, and a well from wanting one to drinking at it), tools (wear, lending, racks,
+death and collapse, making one with a full pack, a spear turning a wolf), handcarts (capacity, terrain, nothing loaded from
+a distance), the iron chain, shared meals and their endings, worries and visits, quarrels and the way back, the clock under
+stalls, pause, step and resume, and that running the real renderer never changes the simulation. `tests/scenes.test.ts`
+keeps each staged scene's promise.
 
 Headless tools: `npm run census -- <seed> <days> [harsh] [-v]` prints a periodic census; `npm run baseline -- <seed>
 [--out file.json]` records an ordinary-world baseline; `npm run chains -- <seed> <days> [-v]` watches the workplaces and
@@ -228,8 +230,9 @@ promises, carts, meal tables); `vite-node scripts/audit_far.ts` checks that nobo
 protocol and measures, with a real animation loop, the speed achieved at each setting, what a stalled page costs and how the
 speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`); and
 `scripts/*.ts` has the traces used while tuning (`multi.ts a,b,c 12` runs several seeds and reports deaths and ledger
-balance; `death.ts` and `trace.ts` follow whoever dies and why). [`docs/BASELINE.md`](docs/BASELINE.md) records what a
-fixed ordinary world did before and after this work.
+balance; `death.ts` and `trace.ts` follow whoever dies and why; `withdraws.ts`, `fishwaste.ts`, `waterwalk.ts`, `wellgeo.ts`,
+`toolmaking.ts` and `wolfwatch.ts` take the measurements quoted in [`docs/ECONOMY.md`](docs/ECONOMY.md)).
+[`docs/BASELINE.md`](docs/BASELINE.md) records what a fixed ordinary world did before and after this work.
 
 ## Known limits
 
