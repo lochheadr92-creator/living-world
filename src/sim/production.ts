@@ -3,7 +3,7 @@ import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES,
 import { findBuildSpot } from './buildings';
 import { cartLoaded } from './carts';
 import { invRoom, weightOf } from './economy';
-import { delBelief, noteFailure, recentFailure } from './knowledge';
+import { delBelief, isWaterBeliefId, noteFailure, recentFailure } from './knowledge';
 import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, spotNear, traitMods } from './optutil';
 import type { Ctx } from './optutil';
 import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, weatherMult } from './options_work';
@@ -786,7 +786,10 @@ function optCartHaul(ctx: Ctx): void {
 }
 
 // ───────────────────────── starting a workplace ─────────────────────────
-interface FacilityWant {
+/** a home this far (tiles) from the nearest water its people know of is a long walk from a drink */
+const WELL_FAR = 9;
+
+export interface FacilityWant {
   type: BuildingType;
   signal: number;
   why: string;
@@ -820,7 +823,7 @@ export function upgradeWish(ctx: Ctx): number {
   return Math.min(1, w);
 }
 
-function facilityWants(ctx: Ctx): FacilityWant[] {
+export function facilityWants(ctx: Ctx): FacilityWant[] {
   const { p, world } = ctx;
   const out: FacilityWant[] = [];
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
@@ -895,6 +898,26 @@ function facilityWants(ctx: Ctx): FacilityWant[] {
     if (init > 0.45) s += 0.15;
     if (s >= 0.59) out.push({ type: 'smokehouse', signal: Math.min(1, s), why: 'fish goes off in a day or two: a smokehouse would make it keep' });
   }
+  // a well is for a settlement whose water is a long walk away, or has proved a dangerous place to drink: one in the middle of the village.
+  // What counts is what this person knows: how far their own home is from the nearest water they have seen, and whether they have been
+  // driven off the shore lately.
+  if (!knowsOfAny(ctx, 'well') && world.tick >= DAY * 6 && hs.shortage < 0.5) {
+    const home = ctx.home;
+    const hx = home ? home.x + home.w / 2 : world.camp.x;
+    const hy = home ? home.y + home.h / 2 : world.camp.y;
+    let nearest = 1e9;
+    for (const b of beliefsByKind(p, ['water'])) nearest = Math.min(nearest, Math.hypot(b.x - hx, b.y - hy));
+    if (nearest < 1e9) {
+      const driven = Object.keys(p.failures).some((k) => isWaterBeliefId(Number(k)) && world.tick - p.failures[Number(k)].tick < DAY * 4);
+      let s = 0;
+      if (nearest >= 13) s += 0.6;
+      else if (nearest >= WELL_FAR) s += 0.4;
+      if (driven) s += 0.35;
+      if (ctx.dependents.length > 0 && nearest >= WELL_FAR) s += 0.1;
+      if (init > 0.45) s += 0.1;
+      if (s >= 0.6) out.push({ type: 'well', signal: Math.min(1, s), why: driven ? 'the lake shore is not a safe place to drink: a well would bring the water into the village' : 'every drink is a long walk to the lake: a well would bring the water into the village' });
+    }
+  }
   if (!knowsOfAny(ctx, 'hall') && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
@@ -961,6 +984,10 @@ function optPlanFacilities(ctx: Ctx): void {
           const spots = beliefsByKind(p, ['fish_spot']).sort((a, c) => Math.hypot(a.x - camp.x, a.y - camp.y) - Math.hypot(c.x - camp.x, c.y - camp.y));
           if (spots.length) spot = findBuildSpot(world, p, type, spots[0].x, spots[0].y, 3, 11, 6);
           if (!spot) spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 12, 7);
+        } else if (type === 'well') {
+          // in the middle of the village, and well away from the shore (a well beside the lake would save nobody a walk).
+          // (Centring it on the homes that are far from the water was tried and put it where fewer homes were nearer to it than to the lake.)
+          spot = findBuildSpot(world, p, type, camp.x, camp.y, 2.5, 9, 5, 6);
         } else if (type === 'granary' || type === 'hall') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 11, 6);
         else if (type === 'kiln' || type === 'smithy') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 15, 10);
         else spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);

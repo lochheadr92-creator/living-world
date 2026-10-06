@@ -148,7 +148,7 @@ export const WORK: Record<string, number> = {
   withdraw: 8,
 };
 
-export type BuildRole = 'home' | 'store' | 'fire' | 'work' | 'meet';
+export type BuildRole = 'home' | 'store' | 'fire' | 'work' | 'meet' | 'water';
 export interface BuildDef {
   w: number;
   h: number;
@@ -298,6 +298,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'work',
     blurb: 'A low timber shed over a smouldering fire: fish are smoked here until they keep for weeks instead of going off in a day or two.',
   }),
+  well: bd({
+    w: 1,
+    h: 1,
+    cost: { wood: 4, stone: 8 },
+    work: 380,
+    cap: 0,
+    workers: 2,
+    label: 'well',
+    sleepers: 0,
+    protect: 0,
+    role: 'water',
+    blurb: 'A stone-lined shaft with a windlass and a bucket: water in the middle of the settlement, so a drink does not mean a long walk to the lake, or past whatever is lurking there.',
+  }),
 };
 
 /** every kind of building a household can live in */
@@ -326,10 +339,11 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   bakery: 0.0014,
   smokehouse: 0.0013,
   hall: 0.0012,
+  well: 0.0005,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
-export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks' };
+export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone' };
 export const REPAIR_FALLBACK_GAIN = 18;
 /** a building site nobody has worked on or supplied for this long is given up (its materials are left on the ground) */
 export const SITE_PATIENCE = DAY * 4;

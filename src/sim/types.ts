@@ -491,7 +491,8 @@ export type BuildingType =
   | 'granary'
   | 'bakery'
   | 'smokehouse'
-  | 'hall';
+  | 'hall'
+  | 'well';
 
 export interface Building {
   ent: 'building';

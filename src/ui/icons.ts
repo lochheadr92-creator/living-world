@@ -100,6 +100,7 @@ const ICONS = {
   kiln: `<path d="M2.2 13.6v-3.4C2.2 6.4 4.8 3.6 8 3.6s5.8 2.8 5.8 6.6v3.4Z" fill="currentColor" fill-opacity=".22"/><path d="M6 13.6v-2.2a2 2 0 0 1 4 0v2.2"/><path d="M8 3.6V1.8"/>`,
   granary: `<path d="M2.6 6.6 8 2.4l5.4 4.2"/><path d="M3.8 6.6h8.4v4H3.8Z" fill="currentColor" fill-opacity=".22"/><path d="M5.8 6.6v4M8 6.6v4M10.2 6.6v4M4.6 10.6v3.4M11.4 10.6v3.4"/>`,
   hall: `<path d="M.9 8.2 8 3l7.1 5.2"/><path d="M2.4 7.2v6.4h11.2V7.2" fill="currentColor" fill-opacity=".18"/><path d="M6.8 13.6V10a1.2 1.2 0 0 1 2.4 0v3.6"/><path d="M8 3V1.4"/>`,
+  well: `<path d="M3.2 10.6c0 1.6 2 2.8 4.8 2.8s4.8-1.2 4.8-2.8"/><ellipse cx="8" cy="10.6" rx="4.8" ry="1.9" fill="currentColor" fill-opacity=".22"/><path d="M3.8 10.4V4.8M12.2 10.4V4.8"/><path d="M2.2 5.6 8 1.8l5.8 3.8"/><path d="M8 4.2v3.4"/><path d="M6.9 7.6h2.2l-.3 1.7H7.2Z" fill="currentColor" fill-opacity=".32"/>`,
   cart: `<path d="M1.8 4.2h9.4l-.9 5.4H3Z" fill="currentColor" fill-opacity=".25"/><circle cx="5.6" cy="12" r="2.1"/><path d="M11.2 5.4 14.6 3.8"/>`,
   cog: `<circle cx="8" cy="8" r="2.4"/><path d="M8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2M3.6 3.6l1.4 1.4M11 11l1.4 1.4M3.6 12.4 5 11M11 5l1.4-1.4"/>`,
   wrench: `<path d="M9.4 2.4a3.4 3.4 0 0 0-3 4.4l-3.6 3.6a1.4 1.4 0 0 0 2 2l3.6-3.6a3.4 3.4 0 0 0 4.4-3l-2 2-1.8-.4-.4-1.8 2-2a3.4 3.4 0 0 0-1.2-1.2Z"/>`,

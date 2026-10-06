@@ -182,10 +182,20 @@ export function isWalkable(world: World, tx: number, ty: number): boolean {
   return world.terrain[i] !== T.DEEP && world.solid[i] === 0;
 }
 
+/** Is a finished well standing on this tile? */
+export function isWell(world: World, tx: number, ty: number): boolean {
+  if (!inBounds(world, tx, ty)) return false;
+  const o = world.occ[ty * world.W + tx];
+  if (o === 0) return false;
+  const e = world.byId.get(o);
+  return e !== undefined && e.ent === 'building' && e.type === 'well';
+}
+
+/** Water to drink and draw: the lake and the river, and a well. (The shore beside a well is a place to drink exactly as the shore of the lake is.) */
 export function isWater(world: World, tx: number, ty: number): boolean {
   if (!inBounds(world, tx, ty)) return false;
   const t = world.terrain[ty * world.W + tx];
-  return t === T.DEEP || t === T.SHALLOW;
+  return t === T.DEEP || t === T.SHALLOW || isWell(world, tx, ty);
 }
 
 /** A buildable tile: dry, free, not occupied. */

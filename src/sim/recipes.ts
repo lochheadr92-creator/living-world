@@ -307,8 +307,8 @@ export function recipesAt(type: BuildingType): Recipe[] {
 }
 
 export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'smokehouse'];
-/** workplaces whose buildings keep a FacilityState */
-export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
+/** workplaces whose buildings keep a FacilityState (the hall and the well make nothing, but belong to everyone and are raised as shared projects) */
+export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall' || t === 'well';
 
 /** The raw goods a workplace's store accepts for its own work (everything else belongs in a storehouse or a home). */
 export function acceptedAt(type: BuildingType): ItemKind[] {

@@ -111,6 +111,13 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
   longer they spoil more than twice as fast as an ordinary store.
 * **Hall.** The hall is where shared meals are held and where news travels among whoever is sitting there (one telling at a
   time, only between people actually present). It gives shelter. It does not broadcast anything.
+* **Well.** A 1 × 1 building (4 wood, 8 stone) that makes nothing and stores nothing: it is water. A finished well is water
+  to everything that looks for water — the same drinking and jar-filling activities, the same choice of where to go, ranked
+  by the walk, by danger and by being driven off — and the ground round it is shore. It belongs to everyone, is raised as a
+  shared project, there is only ever one, and it is mended with stone. It is wanted by someone whose home is a long way (9 tiles
+  or more) from the nearest water they know of, or who has lately been driven off the shore, and is laid out in the middle of
+  the village at least six tiles from the lake (a well beside the lake would save nobody a walk). Water drawn from it is
+  entered in the books as `water drawn from the well`.
 * **Smokehouse.** Four fresh fish and a stick of wood become three smoked fish and one fish's worth of waste (water driven
   off, bones); a practised fisher gets through a batch faster. Fresh fish goes off at 1.6 times the berry rate; smoked fish
   at 0.2 (about the rate of grain), weighs a third less and restores a little more. It is wanted when more fresh fish is
@@ -289,6 +296,16 @@ depends only on the tick and the population, so a run is reproducible.
   change about a tenth of the fish caught spoiled (73 of 748, 43 of 396, 92 of 767, 73 of 753) — so what the smokehouse adds is
   food that keeps and weighs less, not a large cut in spoilage. A new building kind must be added **last** in `BUILD_DEF`: the
   order of its keys salts the per-building hashes (`tests/smoking.test.ts` keeps it honest).
+* A well exists (`scripts/waterwalk.ts` measures the walk, `scripts/wellgeo.ts` the placement). Before it, in 30-day runs of
+  `meadow` and `fern` (ordinary and harsh), the one-way walk to a drinking place took 5.2–5.7% of everybody's time, the median
+  walk was 8–10 tiles and the longest 29–48, and in the two harsh worlds most of the people whose thirst was critical were still
+  walking to the water (133 of 173 samples in `fern`, 74 of 88 in `meadow`). With the well, in the same four runs (built on day
+  9–12): 3.8–4.8% of time, a median of 5.1–8.0 tiles (the longest walk 28–38, little changed), and 130 and 71 critical-thirst
+  samples instead of 173 and 88. These are single runs of each world, and the worlds differ once the well stands, so this is what
+  happened and not a controlled difference. It saves a walk only to the people it is nearer to than the lake: it stands near the
+  camp and at least six tiles from the water, and in four ordinary worlds (`meadow`, `river`, `fern`, `aspen`) it was nearer than
+  the shore to 17 of 21, 9 of 23, 11 of 23 and 12 of 31 homes. Centring it on the homes that are far from the water was tried and
+  put it where fewer homes were nearer to it than to the lake, so it stays at the camp.
 * A site limit of four homes/fires/storehouse at a time, with separate allowances for improvement projects.
 * Promise deadlines are 1800 ticks (were 1200 or 1400), exclude sleep and survival time, and end in six distinct ways.
 * A trade is declined, not attempted, when either pack cannot take what it would be given.

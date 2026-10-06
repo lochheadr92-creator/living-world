@@ -46,7 +46,7 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
   );
   const view = h(
     'div',
-    { class: 'mini-view', 'data-tip': 'Map\nClick or drag to move the camera. The white box is what you can see now. Coloured dots are people, grouped by household; red dots are wolves. Cream boxes are homes, copper ones workshops; small shapes mark clay, ore and stone outcrops, and tan squares are handcarts.' },
+    { class: 'mini-view', 'data-tip': 'Map\nClick or drag to move the camera. The white box is what you can see now. Coloured dots are people, grouped by household; red dots are wolves. Cream boxes are homes, copper ones workshops, a blue one the well; small shapes mark clay, ore and stone outcrops, and tan squares are handcarts.' },
     canvas,
   );
   const panel = h('div', { class: 'minimap glass', 'data-open': String(open) }, foldBtn, view);
@@ -180,9 +180,9 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
         g.arc(x, y, 1.5, 0, Math.PI * 2);
         g.fill();
       } else {
-        // homes are cream, stores tan, workshops copper, the hall lilac: the settlement's anatomy at a glance
+        // homes are cream, stores tan, workshops copper, the hall lilac, the well blue: the settlement's anatomy at a glance
         const role = BUILD_DEF[b.type].role;
-        g.fillStyle = role === 'work' ? '#e9a468' : role === 'store' ? '#d8b98c' : role === 'meet' ? '#cdb0e8' : '#f2e3c4';
+        g.fillStyle = role === 'work' ? '#e9a468' : role === 'store' ? '#d8b98c' : role === 'meet' ? '#cdb0e8' : role === 'water' ? '#7fb6d4' : '#f2e3c4';
         g.strokeStyle = 'rgba(40,24,10,0.85)';
         g.lineWidth = 1;
         const s = b.w >= 3 ? 4.2 : b.w >= 2 ? 3.2 : 2.4;

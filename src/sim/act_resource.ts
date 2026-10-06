@@ -25,7 +25,7 @@ import type { ToolTask } from './tools';
 import { adjustRel } from './relations';
 import { contestLost, creditContribution, fulfillCommitment } from './social';
 import { fellTree } from './sources';
-import { distToFootprint, isWater } from './registry';
+import { distToFootprint, isWater, isWell } from './registry';
 import { isToolItem } from './toolreg';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp } from './util';
@@ -353,6 +353,7 @@ registerHandler('fetch_water', {
     }
     a.data.wx = w.x;
     a.data.wy = w.y;
+    a.data.well = isWell(world, Math.floor(w.x), Math.floor(w.y)) ? 1 : 0;
     a.duration = WORK.water;
     a.progress = 0;
   },
@@ -363,7 +364,7 @@ registerHandler('fetch_water', {
     faceToward(p, a.data.wx, a.data.wy, 3);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
-    const got = produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
+    const got = produce(world, p.inv, carryCap(world, p), 'water', 1, a.data.well ? 'water drawn from the well' : 'water drawn from the lake');
     if (got <= 0) return a.cycle > 0 ? 'partial:cannot carry more' : 'fail:cannot carry more';
     addFx(world, 'splash', a.data.wx, a.data.wy, 0);
     a.cycle++;

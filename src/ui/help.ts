@@ -52,7 +52,7 @@ const INSPECTOR_NOTES: [string, string][] = [
 ];
 
 const WORK_NOTES: [string, string][] = [
-  ['Workshops', 'A timber yard saws planks, a kiln fires bricks and charcoal, a smithy smelts iron, a bakery mills flour and bakes bread, a smokehouse smokes fish so that it keeps, a quarry cuts stone. Click one to see the batch under way, what it will make and who is at it. Smoke and glow appear only while something is really being made.'],
+  ['Workshops', 'A timber yard saws planks, a kiln fires bricks and charcoal, a smithy smelts iron, a bakery mills flour and bakes bread, a smokehouse smokes fish so that it keeps, a quarry cuts stone, and a well puts water in the middle of the village. Click one to see the batch under way, what it will make and who is at it. Smoke and glow appear only while something is really being made.'],
   ['Tools and carts', 'Axes, picks, hammers, saws, fishing rods and water jars make work faster and wear out; the small icons under “Carrying” show what someone holds and how worn each tool is. A handcart trails whoever pulls it, its load stacked in it.'],
   ['Buildings rise in stages', 'Pegs and a cord, then heaps of whatever has been delivered, a footing, a frame, walls and roof. A site marked with an orange ! is waiting for materials, not for people; the little squares say what is missing.'],
 ];

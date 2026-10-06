@@ -11,14 +11,14 @@ const days = Number(process.argv[3] ?? 30);
 const world = generateNatural(defaultSettings(seed));
 for (let i = 0; i < days * DAY; i++) stepWorld(world);
 
-const know = { clay: 0, ore: 0, outcrop: 0, yard: 0, kiln: 0, smithy: 0, quarry: 0, bakery: 0, granary: 0, hall: 0, smokehouse: 0 };
+const know = { clay: 0, ore: 0, outcrop: 0, yard: 0, kiln: 0, smithy: 0, quarry: 0, bakery: 0, granary: 0, hall: 0, smokehouse: 0, well: 0 };
 const leads: Record<string, number> = {};
 for (const p of world.persons) {
   if (p.bykind.clay_pit?.length) know.clay++;
   if (p.bykind.ore_vein?.length) know.ore++;
   if (p.bykind.outcrop?.length) know.outcrop++;
   const ctx = makeCtx(world, p, false);
-  for (const t of ['timber_yard', 'kiln', 'smithy', 'quarry', 'bakery', 'granary', 'hall', 'smokehouse'] as const) if (facilitiesOf(ctx, t).length) know[t === 'timber_yard' ? 'yard' : t]++;
+  for (const t of ['timber_yard', 'kiln', 'smithy', 'quarry', 'bakery', 'granary', 'hall', 'smokehouse', 'well'] as const) if (facilitiesOf(ctx, t).length) know[t === 'timber_yard' ? 'yard' : t]++;
   const l = depositLead(ctx);
   if (l) leads[l.what] = (leads[l.what] ?? 0) + 1;
 }

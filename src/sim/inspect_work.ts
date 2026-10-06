@@ -104,6 +104,15 @@ export function describeFacility(world: World, b: Building): Section[] {
   if (!ops) return [];
   const sections: Section[] = [];
   const def = BUILD_DEF[b.type];
+  if (b.type === 'well') {
+    // nothing is made here and nothing is stored: it is a place to drink and to fill a jar
+    const near = world.persons.filter((q) => q.alive && Math.hypot(q.x - (b.x + 0.5), q.y - (b.y + 0.5)) < 2.6).map((q) => q.name);
+    return [
+      { title: 'What it is for', notes: [def.blurb] },
+      { title: 'Who may use it', notes: ['Open to everyone. The water does not run out; drawing it takes a little time, and only so many people can stand round the curb.'] },
+      { title: 'Now', rows: [['At the well', near.length ? near.join(', ') : 'nobody at the moment'], ['Condition', `${Math.round(b.condition)}% sound; mended with stone`]] },
+    ];
+  }
   const recs = recipesAt(b.type);
   sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} → ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} · ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s burning` : ''}`] as [string, string]) });
   sections.push({ title: 'Who may use it', notes: [accessText(world, b)] });

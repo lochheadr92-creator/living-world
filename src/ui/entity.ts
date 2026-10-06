@@ -58,6 +58,7 @@ const BUILDING_ICON: Record<BuildingType, IconName> = {
   bakery: 'bread',
   smokehouse: 'smoked_fish',
   hall: 'hall',
+  well: 'well',
 };
 
 /** a line that says what the thing is for, in plain words (buildings take theirs from the simulation's own table) */
@@ -422,7 +423,7 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
   /** the batch under way, as a card. Returns false when this building has nothing to show (a plain home, a store). */
   function updateShop(b: Building, v: EntityView, world: World): boolean {
     const ops = b.ops;
-    if (!SHOW_WORKSHOP_CARD || !ops) return false;
+    if (!SHOW_WORKSHOP_CARD || !ops || b.type === 'well') return false; // a well makes nothing: its card is the one the simulation describes
     if (v.rows.some((r) => r[0] === 'Making')) return false;
     const job = ops.job;
     const r = job ? RECIPE_BY_ID[job.recipe] : undefined;

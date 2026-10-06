@@ -19,6 +19,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | bakery | 2×2 | 4 wood, 6 stone, 6 bricks | 60 s | 40 | 2 | 3.4% | A quern and a brick oven: grain is milled to flour and baked into bread. |
 | communal hall | 3×3 | 10 wood, 10 planks, 8 stone | 90 s | 60 | 4 | 2.9% | A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there. |
 | smokehouse | 2×2 | 10 wood, 4 stone | 48 s | 40 | 2 | 3.1% | A low timber shed over a smouldering fire: fish are smoked here until they keep for weeks instead of going off in a day or two. |
+| well | 1×1 | 4 wood, 8 stone | 38 s | — | 2 | 1.2% | A stone-lined shaft with a windlass and a bucket: water in the middle of the settlement, so a drink does not mean a long walk to the lake, or past whatever is lurking there. |
 
 ## Recipes (what a workplace makes)
 
@@ -56,7 +57,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | seeds | 0.25 | — | — | — |
 | water | 1.5 | — | — | — |
 | wood | 2 | — | — | everything else |
-| stone | 3 | — | — | — |
+| stone | 3 | — | — | well |
 | clay | 3 | — | — | — |
 | ore | 3 | — | — | — |
 | planks | 2 | — | — | house, granary, communal hall |
