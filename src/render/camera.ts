@@ -1,26 +1,40 @@
 import type { CameraState } from '../app/game';
-import { MAP_H, MAP_W } from '../sim/constants';
 import { clamp } from '../sim/util';
-import { project, unproject } from './iso';
+import { TILE_H, TILE_W, project, unproject } from './iso';
 
 export const MIN_ZOOM = 0.3;
 export const MAX_ZOOM = 3.2;
 
-export function clampCamera(c: CameraState, viewW: number, viewH: number): void {
-  c.zoom = clamp(c.zoom, MIN_ZOOM, MAX_ZOOM);
-  // keep the middle of the view somewhere over the map
+/** the ordinary world's size in tiles: its widest view (all of it) is as much ground as any world is drawn at once */
+const ORDINARY_TILES = 80 * 80;
+
+/**
+ * The widest the view may be. For the ordinary world (and anything not larger) it is MIN_ZOOM, as it always was. For a larger world it is
+ * the zoom at which the window shows no more ground than the ordinary world's widest view does (about 6,400 tiles), so that a frame is
+ * never made to draw many times what the ordinary world's costs; the minimap is the way to see the rest of a large world.
+ */
+export function minZoomFor(size: { W: number; H: number }, view: { w: number; h: number }): number {
+  if (size.W * size.H <= ORDINARY_TILES) return MIN_ZOOM;
+  const tileArea = (TILE_W * TILE_H) / 2; // one tile on the isometric plane, in pixels at zoom 1
+  return Math.max(MIN_ZOOM, Math.sqrt((view.w * view.h) / (tileArea * ORDINARY_TILES)));
+}
+
+/**
+ * Keep the camera within the zoom limits and the middle of the view somewhere over the map. The map is whatever size the world is:
+ * 80x80 for the ordinary world, larger for the larger ones.
+ */
+export function clampCamera(c: CameraState, size: { W: number; H: number }, view: { w: number; h: number }): void {
+  c.zoom = clamp(c.zoom, minZoomFor(size, view), MAX_ZOOM);
   const a = project(0, 0);
-  const b = project(MAP_W, 0);
-  const d = project(0, MAP_H);
-  const e = project(MAP_W, MAP_H);
+  const b = project(size.W, 0);
+  const d = project(0, size.H);
+  const e = project(size.W, size.H);
   const minX = Math.min(a.sx, d.sx);
   const maxX = Math.max(b.sx, e.sx);
   const minY = a.sy - 40;
   const maxY = e.sy + 60;
   c.x = clamp(c.x, minX, maxX);
   c.y = clamp(c.y, minY, maxY);
-  void viewW;
-  void viewH;
 }
 
 export function worldToScreen(c: CameraState, viewW: number, viewH: number, wx: number, wy: number): { x: number; y: number } {

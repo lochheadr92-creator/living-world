@@ -1,0 +1,133 @@
+{
+ "note": "Fingerprints of the ordinary world. Regenerate only when behaviour is meant to change: npx vite-node scripts/golden.ts --write",
+ "cases": {
+  "meadow": {
+   "0": {
+    "hash": "67c7b30e",
+    "deep": "096283ef67ba4289"
+   },
+   "600": {
+    "hash": "c8f62209",
+    "deep": "2cfd09bd03a181d7"
+   },
+   "2400": {
+    "hash": "71374c23",
+    "deep": "04f85889d04da8b9"
+   },
+   "12000": {
+    "hash": "2b0499e0",
+    "deep": "6dbea16b516e43fd"
+   }
+  },
+  "river": {
+   "0": {
+    "hash": "a653ed30",
+    "deep": "1ae69941408cb39e"
+   },
+   "2400": {
+    "hash": "d7a14ed5",
+    "deep": "dd554f3b670f7bed"
+   }
+  },
+  "fern": {
+   "0": {
+    "hash": "6e0acf9a",
+    "deep": "1efd7751a68a7a05"
+   },
+   "2400": {
+    "hash": "c5e9929f",
+    "deep": "7e802af48af8e2e9"
+   }
+  },
+  "aspen-harsh": {
+   "0": {
+    "hash": "268c7f18",
+    "deep": "2e2475baf940f61f"
+   },
+   "2400": {
+    "hash": "d031de18",
+    "deep": "5a9787f3de8cf08e"
+   }
+  },
+  "meadow-pop60": {
+   "0": {
+    "hash": "7bfeb9aa",
+    "deep": "d9d2fed0b452ebe0"
+   },
+   "1200": {
+    "hash": "6a0792f6",
+    "deep": "96379e902b7a270a"
+   }
+  },
+  "scene-workshop": {
+   "0": {
+    "hash": "bdb45aea",
+    "deep": "4b051c6eb74be01c"
+   },
+   "1200": {
+    "hash": "ff4ab750",
+    "deep": "d111a3c20bb4cc21"
+   }
+  },
+  "scene-haul": {
+   "0": {
+    "hash": "ca7a6f76",
+    "deep": "dbe40e266dcc0959"
+   },
+   "1200": {
+    "hash": "9044c20a",
+    "deep": "d6bd24596c44ef0d"
+   }
+  }
+ },
+ "generation": {
+  "gen-1": {
+   "hash": "2fbac4ae",
+   "deep": "2f0b728a4876e663"
+  },
+  "gen-2": {
+   "hash": "2d744cc9",
+   "deep": "5cddbcd8518bcece"
+  },
+  "gen-3": {
+   "hash": "719dd00d",
+   "deep": "884322f3f44f5cdd"
+  },
+  "gen-4": {
+   "hash": "2bd0eba9",
+   "deep": "bd1db63873eb85c0"
+  },
+  "gen-5": {
+   "hash": "645e64b8",
+   "deep": "12c8e7c10569276e"
+  },
+  "gen-6": {
+   "hash": "11aff8d8",
+   "deep": "f3f6cdad29f84b29"
+  },
+  "meadow": {
+   "hash": "67c7b30e",
+   "deep": "096283ef67ba4289"
+  },
+  "river": {
+   "hash": "a653ed30",
+   "deep": "1ae69941408cb39e"
+  },
+  "fern": {
+   "hash": "6e0acf9a",
+   "deep": "1efd7751a68a7a05"
+  },
+  "aspen": {
+   "hash": "0f161536",
+   "deep": "2e815dbfca6c87f3"
+  },
+  "birch": {
+   "hash": "50f840ba",
+   "deep": "cb2af9a43b9014eb"
+  },
+  "cedar": {
+   "hash": "c3efa5e6",
+   "deep": "9fbc7abca2cbe4d8"
+  }
+ }
+}

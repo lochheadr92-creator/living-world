@@ -124,7 +124,7 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
 | **Time** | `Space` play/pause · `.` single step (exactly one tick) · `1`–`6` or `[` `]` speed (0.5× … 16×) |
 | **Overlays** | Perception (what they can see), Paths, Intentions (what everyone is doing), Knowledge (what the selected person remembers — fog over what they have never seen; hollow rings are hearsay), Labels (names) |
 | **Debug** | `Shift`+`D` — ledger status, state hash, frame stats, counts |
-| **Worlds** | the seed chip opens the world menu: type a seed and press *New world*; *Harsh* gives scarcer food, colder weather, more wolves and fewer births; *Arrivals* lets travellers join; *Scenes* loads a staged test scene; *Save/Load* keeps a world in your browser |
+| **Worlds** | the seed chip opens the world menu: type a seed and press *New world*; *Harsh* gives scarcer food, colder weather, more wolves and fewer births; *World size* picks Village (the ordinary world), Large (160×160, 4 camps) or Huge (256×256, 6 camps) for the next new world; *Arrivals* lets travellers join; *Scenes* loads a staged test scene; *Save/Load* keeps a world in your browser |
 | **Help** | `?` |
 
 The inspector answers the five questions for any person: *what are they doing, why did they choose it, what are they
@@ -192,7 +192,8 @@ src/ui       DOM interface: top bar, transport, inspector (people, workplaces, s
              minimap, overlays, help, debug
 tests        vitest suite;  scripts/  headless tools (census, traces, baseline, audits)
 docs         ECONOMY.md (rules), recipes.generated.md (tables), BASELINE.md (before/after record),
-             OBSERVED.md (five causal chains watched in the page)
+             OBSERVED.md (five causal chains watched in the page), SCALING.md (benchmark tools, golden fingerprints,
+             measurements beyond the ordinary world)
 ```
 
 The simulation advances in whole ticks (10 per second at 1×; a day is 2400 ticks). Rendering interpolates between the

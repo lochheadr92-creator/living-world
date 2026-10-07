@@ -76,7 +76,7 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
 ## Workplaces
 
 * **Location.** Workplaces are laid out on free dry land the planner's person has seen, not against water, near the camp
-  (kiln and smithy a little further out). A **quarry** is always laid out beside a known stone outcrop; its batches cut
+  (kiln and smithy a little further out; in a world with several settlements, the planner's nearest one). A **quarry** is always laid out beside a known stone outcrop; its batches cut
   stone out of that outcrop and nowhere else. A **house** is not a new building: it is the owner's hut rebuilt *in place*
   (the same building object, the same footprint and household, still lived in while the work goes on, store and contents
   intact).
@@ -85,6 +85,11 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
   at a different outcrop). Homes, fires and the storehouse are limited to four sites at a time and never queue behind
   workshops; communal improvement projects (and, separately, house rebuilds) are limited to two at a time (three once the
   settlement passes fifty-five).
+  These are the **ordinary rules**. A world started with the *scaled* rule set (`settings.ruleSet`, `src/sim/rules.ts`) keeps
+  the same rules but states the limits as ratios of its founding population and counts them per settlement: one of each
+  workplace within forty tiles of where the new one would stand, and open sites counted within forty tiles, with the
+  allowances above growing in proportion to the settlement's founders. The ordinary world, older saves and staged scenes
+  always use the ordinary rules. See `docs/SCALING.md`.
 * **Ownership.** The household that did at least 60% of the effort of building a workplace (materials count 1 a unit, work 1
   per 25 ticks) holds title; otherwise it belongs to everyone. Halls and granaries are always common.
 * **Access.** Owners and everyone, for common workplaces, may use a workplace. A household that did at least a fifth of

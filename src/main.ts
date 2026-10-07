@@ -2,11 +2,12 @@ import './styles.css';
 import { Game } from './app/game';
 import { loadPrefs } from './app/prefs';
 import { project } from './render/iso';
+import { settingsForProfile } from './sim/profiles';
 import { Renderer } from './render/renderer';
 import { mountUI } from './ui';
 
 const prefs = loadPrefs();
-const game = new Game({ seed: prefs.seed, harsh: prefs.harsh, immigration: prefs.immigration });
+const game = new Game(settingsForProfile(prefs.size, prefs.seed, { harsh: prefs.harsh, immigration: prefs.immigration }));
 game.speed = prefs.speed;
 Object.assign(game.overlays, prefs.overlays);
 game.debug = prefs.debug;

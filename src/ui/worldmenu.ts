@@ -1,5 +1,7 @@
 // The world menu: seed, new world, random seed, difficulty toggles, test scenes, save and load.
 import { hasSavedGame, loadGame, saveGame, savedGameInfo } from '../app/save';
+import { profileFacts, restartSettings } from '../sim/profiles';
+import type { ProfileName } from '../sim/profiles';
 import { SCENE_LABELS } from '../sim/scenes';
 import type { SceneId } from '../sim/types';
 import { copyText, h, setAttr, setBool, wallAgo } from './dom';
@@ -50,6 +52,19 @@ for (const id of SCENE_ORDER) {
   if (words) SCENE_ITEMS.push({ id, ...words });
 }
 
+/** the sizes of world the menu offers, smallest first: what each is called and what to expect of it */
+const SIZES: { id: ProfileName; title: string; note: string }[] = [
+  { id: 'normal', title: 'Village', note: 'The ordinary world: one camp.' },
+  { id: 'large', title: 'Large', note: 'Four camps close together, so they can meet in the first days.' },
+  { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run. It never stops by itself, but Save fits in browser storage only for roughly the first three days.' },
+];
+
+/** "160×160 · 100 people in 4 camps" */
+function sizeFacts(id: ProfileName): string {
+  const f = profileFacts(id);
+  return `${f.W}×${f.H} · ${f.founders} people${f.camps > 1 ? ` in ${f.camps} camps` : ' in one camp'}`;
+}
+
 export interface WorldMenu extends Part {
   toggle(): void;
   open(): void;
@@ -78,6 +93,9 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
   let isOpen = false;
 
   const curSeed = h('span', { class: 'wm-seed mono' });
+  const curSize = h('span', { class: 'wm-size' });
+  /** the size chosen for the next new world; it follows the world being watched until it is changed */
+  let size: ProfileName = game.settings.profile ?? 'normal';
   const copyBtn = h('button', { type: 'button', class: 'iconbtn sm', 'aria-label': 'Copy the current seed', 'data-tip': 'Copy the current seed', onClick: () => void doCopy() }, icon('copy', 14));
   const input = h('input', {
     id: 'lw-seed-input',
@@ -111,6 +129,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     },
     icon('dice', 18),
   );
+  const newLabel = document.createTextNode('New world');
   const newBtn = h(
     'button',
     {
@@ -120,7 +139,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       onClick: () => newWorld(),
     },
     icon('cube', 15),
-    'New world',
+    newLabel,
   );
 
   const harsh = makeSwitch('Harsh conditions', 'Colder, wetter, less food · next new world', game.settings.harsh, (v) => {
@@ -145,6 +164,27 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     icon('bug', 16),
   );
 
+  const sizeBtns = SIZES.map((s) =>
+    h(
+      'button',
+      {
+        type: 'button',
+        class: 'size-item',
+        role: 'radio',
+        'data-size': s.id,
+        'aria-checked': String(s.id === size),
+        'aria-label': `${s.title}, ${sizeFacts(s.id)}. ${s.note}`,
+        onClick: () => {
+          size = s.id;
+          refreshSizes();
+        },
+      },
+      h('span', { class: 'si-title' }, s.title, h('span', { class: 'si-facts' }, ` · ${sizeFacts(s.id)}`)),
+      h('span', { class: 'si-blurb' }, s.note),
+      h('span', { class: 'si-now badge t-accent' }, 'next'),
+    ),
+  );
+
   const sceneBtns = SCENE_ITEMS.map((s) =>
     h(
       'button',
@@ -154,7 +194,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         'data-scene': s.id,
         'aria-label': `${s.title}. ${s.blurb}`,
         onClick: () => {
-          if (s.id === 'natural') game.restart({ scene: 'natural' });
+          if (s.id === 'natural') game.restart(restartSettings(size, game.settings.seed, { harsh: game.settings.harsh, immigration: game.settings.immigration }));
           else game.loadScene(s.id);
           close();
         },
@@ -177,11 +217,19 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       'section',
       { class: 'wm-sec' },
       h('div', { class: 'wm-row' }, h('span', { class: 'cap' }, 'This world’s seed'), h('span', { class: 'wm-seedwrap' }, curSeed, copyBtn)),
+      h('div', { class: 'wm-row' }, h('span', { class: 'cap' }, 'This world’s size'), curSize),
       h('label', { class: 'cap wm-lab', for: 'lw-seed-input' }, 'Start a new world'),
       h('div', { class: 'wm-seedrow' }, input, dice),
       newBtn,
     ),
-    h('section', { class: 'wm-sec' }, harsh.el, arrivals.el),
+    h(
+      'section',
+      { class: 'wm-sec' },
+      h('div', { class: 'cap wm-lab', id: 'lw-size-label' }, 'World size · next new world'),
+      h('div', { class: 'wm-scenes', role: 'radiogroup', 'aria-labelledby': 'lw-size-label' }, sizeBtns),
+      harsh.el,
+      arrivals.el,
+    ),
     h('section', { class: 'wm-sec' }, h('div', { class: 'cap wm-lab' }, 'Scenes'), h('div', { class: 'wm-scenes' }, sceneBtns)),
     h('section', { class: 'wm-sec wm-io' }, saveWrap, loadWrap, debugBtn),
   );
@@ -190,12 +238,34 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
   // ───────── behaviour ─────────
   function newWorld(): void {
     const seed = input.value.trim() || randomSeed();
+    const chosen = size;
     ctx.prefs.harsh = harsh.input.checked;
     ctx.prefs.immigration = arrivals.input.checked;
-    game.restart({ seed, scene: 'natural', harsh: harsh.input.checked, immigration: arrivals.input.checked });
-    input.value = '';
-    ctx.toast(`New world · seed ${seed}`, 'good');
-    close();
+    const start = () => {
+      game.restart(restartSettings(chosen, seed, { harsh: harsh.input.checked, immigration: arrivals.input.checked }));
+      input.value = '';
+      newBtn.disabled = false;
+      newLabel.textContent = 'New world';
+      ctx.toast(`New ${chosen === 'normal' ? '' : SIZES.find((s) => s.id === chosen)!.title + ' '}world · seed ${seed}`, 'good');
+      close();
+    };
+    if (chosen === 'normal') start();
+    else {
+      // a larger world takes a moment to lay out: say so first, then do it
+      newBtn.disabled = true;
+      newLabel.textContent = 'Building the world…';
+      setTimeout(start, 40);
+    }
+  }
+
+  function refreshSizes(): void {
+    for (const b of sizeBtns) {
+      const chosen = b.dataset.size === size;
+      setAttr(b, 'aria-checked', String(chosen));
+      b.classList.toggle('is-now', chosen);
+    }
+    const now = game.settings.profile ?? 'normal';
+    curSize.textContent = `${SIZES.find((s) => s.id === now)!.title} · ${sizeFacts(now)}`;
   }
 
   async function doCopy(): Promise<void> {
@@ -209,6 +279,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     saveBtn.disabled = false;
     refreshIO();
     if (ok) ctx.toast(`World saved (day ${savedGameInfo()?.day ?? '?'})`, 'good');
+    else if (game.settings.profile === 'huge') ctx.toast('Could not save: this Huge world’s save is now too big for browser storage (about 5 MB, reached around day 3–4). The world itself keeps running; only saving has stopped working.', 'error');
     else ctx.toast('Could not save: browser storage is full or blocked.', 'error');
   }
 
@@ -240,6 +311,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
 
   function syncFromGame(): void {
     curSeed.textContent = game.settings.seed;
+    refreshSizes();
     setBool(debugBtn, 'aria-pressed', game.debug);
     for (const b of sceneBtns) {
       const now = b.dataset.scene === game.settings.scene;
@@ -293,6 +365,8 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         curSeed.textContent = game.settings.seed;
         harsh.input.checked = game.settings.harsh;
         arrivals.input.checked = game.settings.immigration;
+        size = game.settings.profile ?? 'normal';
+        refreshSizes();
       }
     },
     dispose() {

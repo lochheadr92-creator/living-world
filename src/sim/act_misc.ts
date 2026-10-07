@@ -42,7 +42,10 @@ registerHandler('rest', {
   },
   work(world, p, a): WorkResult {
     a.progress++;
-    if (a.progress >= a.duration || p.needs.energy >= 98) return 'done';
+    if (a.progress >= a.duration) return 'done';
+    // Resting for energy ends once the person is rested. Waiting out the weather in a home (need 'warmth') is also a `rest`, but is not
+    // about energy: ending it because the person happens to be rested made them finish after one tick and decide again, every tick.
+    if (a.need !== 'warmth' && p.needs.energy >= 98) return 'done';
     return 'continue';
   },
 });

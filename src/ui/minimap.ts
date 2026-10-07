@@ -1,9 +1,10 @@
 // The minimap (bottom-right). It is drawn in the same isometric orientation as the main view, so the visible
 // area is an ordinary axis-aligned rectangle. The terrain is rendered once per world into a cached layer;
 // buildings, people, wolves and the viewport are redrawn on top ~4 times a second (the viewport follows the camera more often).
-import { BUILD_DEF, MAP_H, MAP_W } from '../sim/constants';
+import { BUILD_DEF } from '../sim/constants';
 import type { World } from '../sim/types';
 import { HALF_H, HALF_W, project } from '../render/iso';
+import { mapBounds, markScale, supersampling } from './minimapgeom';
 import { HOUSEHOLD_COLORS } from '../render/palette';
 import { Every, h, hexToRgb, setBool } from './dom';
 import { icon } from './icons';
@@ -12,11 +13,6 @@ import type { Slots } from './layout';
 
 const TERRAIN_HEX = ['#2f78ad', '#58b4cc', '#e2d29b', '#79b85a', '#5f9a4e', '#a3a196'];
 const TERRAIN_RGB = TERRAIN_HEX.map(hexToRgb);
-
-// bounds of the whole map in isometric-plane pixels
-const SX_MIN = -MAP_H * HALF_W;
-const SX_SPAN = (MAP_W + MAP_H) * HALF_W;
-const SY_SPAN = (MAP_W + MAP_H) * HALF_H;
 
 export function createMinimap(ctx: UICtx, slots: Slots): Part {
   const { game } = ctx;
@@ -60,9 +56,11 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
   let lastCam = '';
 
   // ───────── geometry ─────────
+  // (of the world being shown: set whenever one is drawn or clicked on, since a new world may be a different size)
+  let bounds = mapBounds(game.world);
   /** isometric plane px -> minimap css px */
-  const mx = (sx: number) => ((sx - SX_MIN) / SX_SPAN) * size;
-  const my = (sy: number) => (sy / SY_SPAN) * size;
+  const mx = (sx: number) => ((sx - bounds.sxMin) / bounds.sxSpan) * size;
+  const my = (sy: number) => (sy / bounds.sySpan) * size;
   const toMap = (wx: number, wy: number): [number, number] => {
     const p = project(wx, wy);
     return [mx(p.sx), my(p.sy)];
@@ -91,7 +89,8 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
     const lg = layer.getContext('2d')!;
     const img = lg.createImageData(px, px);
     const d = img.data;
-    const SS = 2; // 2x2 supersampling gives soft island edges
+    const SS = supersampling(world); // 2x2 supersampling gives soft island edges (finer for a larger map)
+    const bd = mapBounds(world);
     for (let j = 0; j < px; j++) {
       for (let i = 0; i < px; i++) {
         let r = 0;
@@ -103,14 +102,14 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
             const fx = i + (si + 0.5) / SS;
             const fy = j + (sj + 0.5) / SS;
             // device px -> iso plane px -> world tiles
-            const sx = (fx / px) * SX_SPAN + SX_MIN;
-            const sy = (fy / px) * SY_SPAN;
+            const sx = (fx / px) * bd.sxSpan + bd.sxMin;
+            const sy = (fy / px) * bd.sySpan;
             const a = sx / HALF_W;
             const bb = sy / HALF_H;
             const x = (a + bb) / 2;
             const y = (bb - a) / 2;
-            if (x < 0 || y < 0 || x >= MAP_W || y >= MAP_H) continue;
-            const c = TERRAIN_RGB[world.terrain[Math.floor(y) * MAP_W + Math.floor(x)]] ?? TERRAIN_RGB[3];
+            if (x < 0 || y < 0 || x >= world.W || y >= world.H) continue;
+            const c = TERRAIN_RGB[world.terrain[Math.floor(y) * world.W + Math.floor(x)]] ?? TERRAIN_RGB[3];
             r += c[0];
             gg += c[1];
             b += c[2];
@@ -129,15 +128,20 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
     lg.putImageData(img, 0, 0);
     terrain = layer;
     terrainWorld = world;
-    terrainKey = `${world.seed}|${px}|${world.sceneLabel}`;
+    terrainKey = keyFor(world);
   }
 
   // ───────── dynamic layer ─────────
   const canvasEl = () => document.getElementById('world') as HTMLCanvasElement | null;
 
+  /** what the cached terrain layer is a picture of: the world, the pixels it is drawn in, and its size (a larger world can share a seed) */
+  const keyFor = (world: World) => `${world.seed}|${Math.round(size * dpr)}|${world.sceneLabel}|${world.W}x${world.H}`;
+
   function draw(): void {
     const world = game.world;
-    if (!terrain || terrainWorld !== world || terrainKey !== `${world.seed}|${Math.round(size * dpr)}|${world.sceneLabel}`) buildTerrain(world);
+    bounds = mapBounds(world);
+    const mark = markScale(world);
+    if (!terrain || terrainWorld !== world || terrainKey !== keyFor(world)) buildTerrain(world);
     g.setTransform(dpr, 0, 0, dpr, 0, 0);
     g.clearRect(0, 0, size, size);
     if (terrain) g.drawImage(terrain, 0, 0, size, size);
@@ -185,7 +189,7 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
         g.fillStyle = role === 'work' ? '#e9a468' : role === 'store' ? '#d8b98c' : role === 'meet' ? '#cdb0e8' : '#f2e3c4';
         g.strokeStyle = 'rgba(40,24,10,0.85)';
         g.lineWidth = 1;
-        const s = b.w >= 3 ? 4.2 : b.w >= 2 ? 3.2 : 2.4;
+        const s = (b.w >= 3 ? 4.2 : b.w >= 2 ? 3.2 : 2.4) * mark;
         g.beginPath();
         g.rect(x - s, y - s * 0.7, s * 2, s * 1.4);
         g.fill();
@@ -202,7 +206,7 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
       g.strokeStyle = '#f3b95f';
       g.lineWidth = 1;
       g.setLineDash([1.5, 1.5]);
-      g.strokeRect(x - 2.6, y - 1.9, 5.2, 3.8);
+      g.strokeRect(x - 2.6 * mark, y - 1.9 * mark, 5.2 * mark, 3.8 * mark);
       g.setLineDash([]);
     }
 
@@ -280,8 +284,9 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
     const r = canvas.getBoundingClientRect();
     const u = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
     const v = Math.max(0, Math.min(1, (e.clientY - r.top) / r.height));
-    game.camera.x = SX_MIN + u * SX_SPAN;
-    game.camera.y = v * SY_SPAN;
+    bounds = mapBounds(game.world);
+    game.camera.x = bounds.sxMin + u * bounds.sxSpan;
+    game.camera.y = v * bounds.sySpan;
     game.fly = null;
     if (game.following) game.setFollow(false);
     dirty = true;

@@ -6,7 +6,9 @@ import { invRoom, weightOf } from './economy';
 import { delBelief, noteFailure, recentFailure } from './knowledge';
 import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, spotNear, traitMods } from './optutil';
 import type { Ctx } from './optutil';
-import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, weatherMult } from './options_work';
+import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
+import { rulesOf, within } from './rules';
+import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
 import { RECIPES, RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
 import type { Recipe } from './recipes';
@@ -59,9 +61,15 @@ export function facilitiesOf(ctx: Ctx, type: BuildingType): Fac[] {
   return out;
 }
 
-/** a workplace of that kind that exists or is being built, as far as this person knows (anyone's) */
-function knowsOfAny(ctx: Ctx, type: BuildingType): boolean {
-  return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type);
+/**
+ * a workplace of that kind that exists or is being built, as far as this person knows (anyone's). With scaled rules only one in their
+ * own settlement counts: a workshop on the far side of the map is not a means they can plan around.
+ */
+export function knowsOfAny(ctx: Ctx, type: BuildingType): boolean {
+  const radius = rulesOf(ctx.world).facilityRadius;
+  if (radius === Infinity) return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type);
+  const at = settlementAnchor(ctx);
+  return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type && within(radius, at.x, at.y, b.x, b.y));
 }
 
 const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
@@ -869,7 +877,7 @@ function optPlanFacilities(ctx: Ctx): void {
   if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28 || ctx.drives.energy > 40) return;
   if (world.tick < DAY * 5 || !ownsHut(ctx)) return; // first things first: a proper roof, for this household and (as far as they know) for others
   if (beliefsByKind(p, ['building']).filter((b) => isSolidHome(b.btype)).length < 2) return;
-  if (projectsUnderWay(world, false) >= projectLimit(world)) return;
+  if (projectsUnderWay(world, false, settlementAnchor(ctx)) >= projectLimit(world)) return;
   if (beliefsByKind(p, ['site']).some((s) => s.hh === hh.id && s.btype && isFacilityType(s.btype as BuildingType))) return;
   const tm = traitMods(p);
   const init = 0.5 * p.traits.diligence + 0.3 * p.traits.curiosity + 0.2 * p.traits.generosity;
@@ -899,7 +907,7 @@ function optPlanFacilities(ctx: Ctx): void {
       tag: 'build',
       make: () => {
         const d = BUILD_DEF[type];
-        const camp = world.camp;
+        const camp = baseHub(world, p, ctx.home);
         let spot: { x: number; y: number } | null = null;
         let depositId = 0;
         if (type === 'quarry') {
@@ -945,7 +953,7 @@ function optPlanUpgrade(ctx: Ctx): void {
   if (wish < 0.45) return;
   const hs = hhState(ctx);
   if (hs.shortage > 0.35) return;
-  if (projectsUnderWay(world, true) >= projectLimit(world)) return;
+  if (projectsUnderWay(world, true, settlementAnchor(ctx)) >= projectLimit(world)) return;
   // the means have to exist or at least be under way, as far as this person knows
   const yard = knowsOfAny(ctx, 'timber_yard');
   const kiln = knowsOfAny(ctx, 'kiln');

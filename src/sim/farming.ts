@@ -1,3 +1,4 @@
+import { nearestHub } from './settlements';
 import { CARE_DECAY, GROW_TICKS, RIPE_ROT_TICKS } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
 import { addEvent, addFx } from './events';
@@ -76,8 +77,9 @@ export function updatePlots(world: World): void {
 /** Where could this person start a new field plot? Near home, on grass they have seen, next to other plots if possible. */
 export function findPlotSpot(world: World, p: Person): { x: number; y: number } | null {
   const home = homeBuildingOf(world, p);
-  const ax = home ? home.x + home.w / 2 : world.camp.x;
-  const ay = home ? home.y + home.h / 2 : world.camp.y;
+  const hub = nearestHub(world, p.x, p.y);
+  const ax = home ? home.x + home.w / 2 : hub.x;
+  const ay = home ? home.y + home.h / 2 : hub.y;
   const mine = world.plots.filter((pl) => pl.hhId === p.hhId);
   let best: { x: number; y: number } | null = null;
   let bs = -1e9;

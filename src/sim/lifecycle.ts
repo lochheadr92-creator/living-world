@@ -1,3 +1,4 @@
+import { fireNear, nearestHub } from './settlements';
 import { abortActivity, newActivity, startActivity } from './activities';
 import { AGE_OLD_DEATH_START, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
@@ -16,6 +17,7 @@ import { adjustRel, relOf } from './relations';
 import { abortConversationFor, personOf } from './social';
 import type { Grave, Person, Stage, World } from './types';
 import { T } from './types';
+import { rulesOf } from './rules';
 import { newId } from './registry';
 
 const STAGE_CODE: Record<Stage, number> = { child: 0, youth: 1, adult: 2, elder: 3 };
@@ -75,7 +77,7 @@ export const CONCEPTION_CHECK_EVERY = 200;
 /** Couples in a settled, fed household may conceive. */
 export function conceptionTick(world: World): void {
   const adultsAlive = world.persons.filter((q) => q.alive).length;
-  if (adultsAlive > 64) return;
+  if (adultsAlive > rulesOf(world).conceptionCap) return;
   for (const p of world.persons) {
     if (!p.alive || p.sex !== 'f' || p.partnerId === 0 || p.pregnantUntil > 0) continue;
     const age = ageYears(world, p);
@@ -264,7 +266,8 @@ export function adoptOrphans(world: World): void {
 export function immigrationTick(world: World): void {
   if (!world.settings.immigration) return;
   const pop = world.persons.filter((q) => q.alive).length;
-  if (pop >= 54 || pop < 4) return;
+  const rules = rulesOf(world);
+  if (pop >= rules.immigrationCap || pop < 4) return;
   if (world.tick < 4800) return; // the settlement has to prove itself first
   if (world.tick - (world.stats.lastArrival ?? -99999) < 6000) return;
   // a settlement that is doing well draws people in
@@ -291,8 +294,9 @@ export function immigrationTick(world: World): void {
     for (const a of world.animals) if (Math.hypot(a.x - x, a.y - y) < 14) nearWolf = true;
     if (nearWolf) continue;
     // anywhere reachable near the middle of the camp will do (the exact tile may be built over by now)
-    const gx = world.camp.x;
-    const gy = world.camp.y + 3;
+    const hub = nearestHub(world, x, y); // travellers make for the settlement nearest to where they come in
+    const gx = hub.x;
+    const gy = hub.y + 3;
     const path = findPath(world, x, y, gx, gy, {
       maxNodes: 9000,
       goalFn: (tx, ty) => Math.hypot(tx + 0.5 - gx, ty + 0.5 - gy) <= 3.2 && isFreeLand(world, tx, ty),
@@ -306,7 +310,7 @@ export function immigrationTick(world: World): void {
     const arriveY = path[path.length - 1];
     // who is arriving: mostly a lone traveller, sometimes a couple or a family drawn by what they have heard
     const rollKind = world.rng.next();
-    const kind: 'single' | 'couple' | 'family' = pop + 3 <= 56 && rollKind < 0.18 ? 'family' : pop + 2 <= 56 && rollKind < 0.46 ? 'couple' : 'single';
+    const kind: 'single' | 'couple' | 'family' = pop + 3 <= rules.arrivalGroupCap && rollKind < 0.18 ? 'family' : pop + 2 <= rules.arrivalGroupCap && rollKind < 0.46 ? 'couple' : 'single';
     const hh = createHousehold(world, world.rng);
     const group: Person[] = [];
     const arrive = (age: number, sex: 'f' | 'm' | undefined, parents: number[] | undefined, dx: number, dy: number): Person => {
@@ -364,7 +368,7 @@ export function immigrationTick(world: World): void {
       for (let k = 0; k < world.accessCell.length; k++) {
         const t = world.accessCell[k];
         if (t < 0) continue;
-        const d = Math.hypot((t % world.W) - world.camp.x, Math.floor(t / world.W) - world.camp.y);
+        const d = Math.hypot((t % world.W) - hub.x, Math.floor(t / world.W) - hub.y);
         if (d < bd) {
           bd = d;
           bestIdx = k;
@@ -374,7 +378,7 @@ export function immigrationTick(world: World): void {
         const t = world.accessCell[bestIdx];
         putBelief(traveller, { id: 1_000_000 + bestIdx, kind: 'water', x: (t % world.W) + 0.5, y: Math.floor(t / world.W) + 0.5, amount: 0, max: 0, seen: world.tick - 60, src: 'seen', from: 0, learned: world.tick });
       }
-      const fb = traveller.beliefs[world.buildings.find((b) => b.type === 'fire')?.id ?? -1];
+      const fb = traveller.beliefs[fireNear(world, hub)?.id ?? -1];
       if (fb) {
         fb.seen = world.tick - 40;
         fb.src = 'seen';

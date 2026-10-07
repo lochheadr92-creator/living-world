@@ -872,7 +872,15 @@ export interface Settings {
   harsh: boolean;
   immigration: boolean;
   scene: SceneId;
+  /** which limits on settlement size apply (rules.ts); absent means 'ordinary', as do saves from before it existed */
+  ruleSet?: RuleSet;
+  /** a larger world, founded in several places (profiles.ts); absent means the ordinary 80x80 world with one camp */
+  profile?: 'large' | 'huge';
+  /** how many of the founders live together in one settlement, for the limits that follow a settlement (rules.ts); absent means all of them */
+  settlementFounders?: number;
 }
+/** 'ordinary': the village-sized limits the world was tuned for. 'scaled': the same limits as ratios of the founding population, local to a settlement. */
+export type RuleSet = 'ordinary' | 'scaled';
 export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care';
 
 export interface SpatialGrid {
@@ -930,6 +938,8 @@ export interface World {
   light: number;
   ledger: Ledger;
   camp: { x: number; y: number };
+  /** further settlements besides the camp (settlements.ts); absent in a world with one, so that world is saved and hashed exactly as before */
+  extraSettlements?: { x: number; y: number }[];
   byId: Map<number, Entity>;
   grid: SpatialGrid;
   pgrid: SpatialGrid;

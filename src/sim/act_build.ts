@@ -8,6 +8,7 @@ import { householdOf } from './buildings';
 import { missingMaterials, observe, delBelief } from './knowledge';
 import { isFacilityType } from './recipes';
 import { isFreeLand } from './registry';
+import { ORDINARY_RULES, rulesOf, within } from './rules';
 import { mintTool, taskMultiplier, wearFor } from './tools';
 import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
@@ -201,23 +202,46 @@ registerHandler('craft', {
 });
 
 // ───────────────────────── lay out a site ─────────────────────────
-/** Homes, fires and the storehouse: as many as four at a time, so the roof over a household never waits on a workshop. */
-export const MAX_BASIC_SITES = 4;
+/**
+ * Homes, fires and the storehouse: as many as four at a time, so the roof over a household never waits on a workshop.
+ * That is the ordinary world's limit; a world with scaled rules (rules.ts) allows more, and counts them near where a new one would go.
+ */
+export const MAX_BASIC_SITES = ORDINARY_RULES.maxBasicSites;
 /** Workshops, halls, granaries and house rebuilds are a settlement's improvement projects; only so many can be carried at once. */
 export function projectLimit(world: World): number {
-  return world.persons.length >= 55 ? 3 : 2;
+  const r = rulesOf(world);
+  return world.persons.length >= r.projectsRaisedAt ? r.projectsRaised : r.projectsBase;
 }
 export const isProjectSite = (s: { type: Building['type']; upgradeOf?: number }): boolean => isFacilityType(s.type) || !!s.upgradeOf;
 /** communal projects (workshops, halls, granaries) and household house rebuilds are counted apart: neither crowds out the other */
-export function projectsUnderWay(world: World, upgrades = false): number {
-  return world.sites.filter((s) => isProjectSite(s) && !!s.upgradeOf === upgrades).length;
+export function projectsUnderWay(world: World, upgrades = false, near?: Spot): number {
+  return sitesNear(world, near, (s) => isProjectSite(s) && !!s.upgradeOf === upgrades);
+}
+
+export interface Spot {
+  x: number;
+  y: number;
+}
+
+/** sites matching `pick` that count as being in the same settlement as `near` (every site, if there is no `near` or the rules count the whole world) */
+function sitesNear(world: World, near: Spot | undefined, pick: (s: Site) => boolean): number {
+  const radius = near ? rulesOf(world).siteRadius : Infinity;
+  let n = 0;
+  for (const s of world.sites) if (pick(s) && (radius === Infinity || within(radius, near!.x, near!.y, s.x + s.w / 2, s.y + s.h / 2))) n++;
+  return n;
+}
+
+/** open sites of any kind in the same settlement as `near` */
+export function openSitesNear(world: World, near?: Spot): number {
+  return sitesNear(world, near, () => true);
 }
 
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
-export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0): string | null {
+export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
+  const rules = rulesOf(world);
   if (isFacilityType(type) || upgradeOf) {
-    if (projectsUnderWay(world, !!upgradeOf) >= projectLimit(world)) return 'enough improvement projects are under way already';
-  } else if (world.sites.filter((s) => !isProjectSite(s)).length >= MAX_BASIC_SITES) return 'too many projects under way already';
+    if (projectsUnderWay(world, !!upgradeOf, at) >= projectLimit(world)) return 'enough improvement projects are under way already';
+  } else if (sitesNear(world, at, (s) => !isProjectSite(s)) >= rules.maxBasicSites) return 'too many projects under way already';
   if (upgradeOf) {
     const old = world.byId.get(upgradeOf);
     if (!old || old.ent !== 'building') return 'the home is gone';
@@ -225,9 +249,11 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
     return null;
   }
   if (isFacilityType(type) || type === 'storehouse') {
-    // one of each kind of workplace (a second quarry only at a different outcrop)
-    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId)) return `there is already a ${BUILD_DEF[type].label}`;
-    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId)) return `a ${BUILD_DEF[type].label} is already being built`;
+    // one of each kind of workplace (a second quarry only at a different outcrop). With scaled rules, one per settlement: only a
+    // workplace within the settlement radius of where this one would stand counts.
+    const radius = at ? rules.facilityRadius : Infinity;
+    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
+    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
     return null;
   }
   // homes and fires: one project at a time per household
@@ -246,7 +272,7 @@ registerHandler('plan_site', {
     const up = (a.data.upgradeOf as number) ?? 0;
     if (!up) for (let yy = sy; yy < sy + d.h; yy++) for (let xx = sx; xx < sx + d.w; xx++) if (!isFreeLand(world, xx, yy)) return 'the spot is no longer free';
     // someone may have started a project while this person was walking over
-    const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0);
+    const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0, { x: sx + d.w / 2, y: sy + d.h / 2 });
     if (why) return why;
     a.duration = 26;
     a.tx = sx + d.w / 2;
@@ -262,7 +288,7 @@ registerHandler('plan_site', {
     const sy = a.data.sy as number;
     const up = (a.data.upgradeOf as number) ?? 0;
     if (!up) for (let yy = sy; yy < sy + d.h; yy++) for (let xx = sx; xx < sx + d.w; xx++) if (!isFreeLand(world, xx, yy)) return 'fail:someone built there first';
-    const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0);
+    const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0, { x: sx + d.w / 2, y: sy + d.h / 2 });
     if (why) return `fail:${why}`;
     const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
     observe(world, p, site);

@@ -1,3 +1,4 @@
+import { nearestHub } from './settlements';
 import * as D from './dialogue';
 import { estimatedAmount, learn } from './knowledge';
 import { BELIEF_NOUN } from './labels';
@@ -46,7 +47,8 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (isFood && b.amount <= 0 && !depletedNews) continue; // an old, stale 'empty' is not news
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
     if (S.told[toldKey(L.id, b.id)] !== undefined && world.tick - S.told[toldKey(L.id, b.id)] < 3500) continue;
-    const dCamp = Math.hypot(b.x - world.camp.x, b.y - world.camp.y);
+    const hub = nearestHub(world, b.x, b.y);
+    const dCamp = Math.hypot(b.x - hub.x, b.y - hub.y);
     const fresh = Math.max(0, 1 - (world.tick - b.learned) / 4000);
     // the speaker cannot see the listener's mind; far places are likelier to be news
     let score = wgt * (0.6 + fresh) + (dCamp > 12 ? 1.6 : -1) + hashUnit(S.id, b.id, world.tick >> 6) * 1.2;

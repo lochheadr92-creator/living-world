@@ -64,7 +64,7 @@ export class Renderer {
     this.h = Math.max(1, Math.floor(r.height));
     this.canvas.width = Math.floor(this.w * this.dpr);
     this.canvas.height = Math.floor(this.h * this.dpr);
-    clampCamera(this.game.camera, this.w, this.h);
+    clampCamera(this.game.camera, this.game.world, { w: this.w, h: this.h });
   }
 
   destroy(): void {
@@ -89,7 +89,7 @@ export class Renderer {
     }
     const done = updateCamera(g.camera, dt, follow, g.fly);
     if (done) g.fly = null;
-    clampCamera(g.camera, this.w, this.h);
+    clampCamera(g.camera, g.world, { w: this.w, h: this.h });
     this.draw();
     this.lastFrameMs = performance.now() - t0;
   }

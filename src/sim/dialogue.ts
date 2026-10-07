@@ -1,3 +1,4 @@
+import { nearestHub } from './settlements';
 import { hashUnit } from './rng';
 import { compass } from './labels';
 import { BELIEF_NOUN } from './labels';
@@ -134,10 +135,11 @@ function agoText(world: World, seen: number): string {
   return 'a while back';
 }
 
-/** Where is this place, in words a person could say? Relative to the camp and the water. */
+/** Where is this place, in words a person could say? Relative to the nearest settlement ("camp") and the water. */
 export function placeWords(world: World, b: Belief): string {
-  const dx = b.x - world.camp.x;
-  const dy = b.y - world.camp.y;
+  const hub = nearestHub(world, b.x, b.y);
+  const dx = b.x - hub.x;
+  const dy = b.y - hub.y;
   const d = Math.hypot(dx, dy);
   const ti = Math.floor(b.y) * world.W + Math.floor(b.x);
   const wd = world.waterDist[Math.max(0, Math.min(world.waterDist.length - 1, ti))];
@@ -159,7 +161,8 @@ export function infoLine(world: World, b: Belief, a: number, c: number): string 
 }
 
 export function dangerWords(world: World, b: Belief): string {
-  return compass(b.x - world.camp.x, b.y - world.camp.y);
+  const hub = nearestHub(world, b.x, b.y);
+  return compass(b.x - hub.x, b.y - hub.y);
 }
 
 export { fill };
