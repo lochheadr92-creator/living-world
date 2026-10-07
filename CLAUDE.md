@@ -10,7 +10,7 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   acceptance test for such a change.
 - New behaviour goes behind `settings.dynamics = 'rich'` (off by default; authored worlds must stay exactly as they were, and the golden,
   determinism and save tests check that). The rules sets are in `src/sim/rules.ts`.
-- One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PR; never merge, never force-push.
+- One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PRs; merge only when the user explicitly says so (they did for #6 and #7, merged to main with merge commits on 2026-10-07; PRs #1-#5 are older separate features, still open and unreviewed). Never force-push main.
 
 ## Where things are
 - `src/sim/mood.ts` thoughts, mood level, option weights, mourning. `src/sim/hardship.ts` lean seasons, winter, spoilage, wolf nerve.
