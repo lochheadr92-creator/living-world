@@ -30,7 +30,7 @@ import { WATER_ID_BASE } from '../src/sim/knowledge';
 import { stageOf } from '../src/sim/people';
 import { settingsForProfile } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
-import { COUNTER_KEYS, DIST_BUCKETS, probe, probePathCells, probeReset, probeSnapshot } from '../src/sim/probe';
+import { COUNTER_KEYS, DIST_BUCKETS, probe, probePathCells, probeReset, probeSnapshot, probeWanderCauses } from '../src/sim/probe';
 import type { PathCell } from '../src/sim/probe';
 import type { ProbeCounters } from '../src/sim/probe';
 import { toolReport } from '../src/sim/toolreg';
@@ -306,6 +306,12 @@ const pathBreakdown = {
   byCallerAndDistance: cells,
 };
 
+// why 'wander' was chosen (src/sim/probe.ts): once per start, then the reasons the set-aside options gave
+const wanderCauses = probeWanderCauses();
+const wanderTotal = Object.entries(wanderCauses).filter(([k]) => !k.startsWith('  ')).reduce((n, [, v]) => n + v, 0);
+console.log(`\nwhy people wander: ${wanderTotal} chosen`);
+for (const [k, v] of Object.entries(wanderCauses).sort((a, b) => b[1] - a[1]).slice(0, 36)) console.log(String(v).padStart(7), (k.startsWith('  ') ? '' : String(Math.round((v / Math.max(1, wanderTotal)) * 1000) / 10).padStart(5) + '%  ') + k);
+
 const all = new Float64Array(samples.map((s) => s.msMean)).sort();
 const last = samples[samples.length - 1];
 const summary = {
@@ -326,7 +332,7 @@ const summary = {
 };
 console.log('\nsummary', JSON.stringify(summary, null, 1));
 if (out) {
-  writeFileSync(out, JSON.stringify({ pathBreakdown, meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
+  writeFileSync(out, JSON.stringify({ pathBreakdown, wanderCauses, meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
   console.log('written', out);
 }
 process.exit(failures.length === 0 ? 0 : 1);

@@ -1,6 +1,6 @@
 // The work counters exist so the cost of the simulation can be explained. They must never change what it does.
 import { describe, expect, it } from 'vitest';
-import { COUNTER_KEYS, probe, probePathCells, probeReset, probeSnapshot } from '../src/sim/probe';
+import { COUNTER_KEYS, probe, probePathCells, probeReset, probeSnapshot, probeWanderCauses } from '../src/sim/probe';
 import { findPath } from '../src/sim/pathfinding';
 import { T } from '../src/sim/types';
 import { createWorld, defaultSettings } from '../src/sim/factory';
@@ -149,5 +149,22 @@ describe('path search verification (diagnostic)', () => {
     expect(checked.cells['far|0'].tilesNeeded).toBeGreaterThan(12);
     expect(checked.cells['walled|1'].budgetUnreachable).toBe(1);
     expect(checked.cells['walled|1'].budgetReachable).toBe(0);
+  });
+});
+
+describe('why people wander (diagnostic)', () => {
+  it('counts a cause for every wander that was chosen, and changes nothing', () => {
+    const off = run('probe-wander', 1200, false);
+    probe.on = true;
+    probeReset();
+    const w = createWorld(defaultSettings('probe-wander'));
+    for (let i = 0; i < 1200; i++) stepWorld(w);
+    const causes = probeWanderCauses();
+    probe.on = false;
+    probeReset();
+    expect(point(w)).toEqual(off.fingerprint);
+    const counted = Object.entries(causes).filter(([k]) => !k.startsWith('  ')).reduce((n, [, v]) => n + v, 0);
+    expect(counted).toBeGreaterThan(0);
+    expect(Object.keys(probeWanderCauses())).toEqual([]); // cleared with the counters
   });
 });

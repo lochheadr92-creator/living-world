@@ -76,6 +76,7 @@ export const probe: ProbeCounters & { on: boolean; verify: boolean } = { on: fal
 export function probeReset(): void {
   Object.assign(probe, zero());
   for (const k of Object.keys(pathCells)) delete pathCells[k];
+  for (const k of Object.keys(wanderCauses)) delete wanderCauses[k];
 }
 
 export function probeSnapshot(): ProbeCounters {
@@ -141,4 +142,23 @@ export function probePathCells(): Record<string, PathCell> {
   const out: Record<string, PathCell> = {};
   for (const k of Object.keys(pathCells)) out[k] = { ...pathCells[k] };
   return out;
+}
+
+// ── why people wander ────────────────────────────────────────────────────────────────────────────────────────────────────
+// 'wander' is the fallback option every person always has (options_work.ts optIdle). Each time one is chosen, say why nothing else was:
+//   only-idle        no other option existed at all
+//   unusable         others existed but none could be started (no utility, or no way to set it up)
+//   filtered         usable others were removed (a child's limits, the relief guard, a critical need elsewhere)
+//   outscored:<kind> usable others were ranked, and wander ranked above the best of them
+//   made-failed:<kind>  a better-ranked option could not be set up, and wander was next
+//   review           an activity under way was swapped for wander at a review
+// and, for the first, the reasons the options that were considered and set aside gave.
+const wanderCauses: Record<string, number> = {};
+
+export function probeWander(cause: string): void {
+  wanderCauses[cause] = (wanderCauses[cause] ?? 0) + 1;
+}
+
+export function probeWanderCauses(): Record<string, number> {
+  return { ...wanderCauses };
 }

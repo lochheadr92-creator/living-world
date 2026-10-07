@@ -3,7 +3,7 @@ import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
-import { probe } from './probe';
+import { probe, probeWander } from './probe';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
 import { survivalOptions } from './options_survival';
@@ -100,12 +100,28 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
     }
     act.data.optKey = o.key;
     act.data.why = because(o);
+    if (probe.on && o.kind === 'wander') whyWander(ctx, ranked, i);
     record(world, p, ctx, ranked, o, trigger);
     startActivity(world, p, act);
     return true;
   }
   record(world, p, ctx, ranked, null, trigger);
   return false;
+}
+
+/** work counters only: why was wander the choice? (see probe.ts) */
+function whyWander(ctx: Ctx, ranked: Option[], at: number): void {
+  const others = ctx.options.filter((o) => o.kind !== 'wander');
+  if (at > 0) {
+    probeWander('made-failed:' + ranked[0].kind);
+    return;
+  }
+  if (others.length === 0) probeWander('only-idle');
+  else if (!others.some((o) => o.util > 0 && o.make)) probeWander('unusable');
+  else if (ranked.length === 1) probeWander('filtered');
+  else probeWander('outscored:' + ranked[1].kind);
+  // what the options set aside said, once per decision (only collected for a free person's decision)
+  for (const b of ctx.blocked) probeWander('  blocked: ' + b.kind + ' — ' + (b.blocked ?? '').replace(/[0-9.]+/g, '#').slice(0, 60));
 }
 
 /** Choose what to do when free. */
@@ -166,6 +182,7 @@ export function reviewActivity(world: World, p: Person): void {
     const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : 'something better came up';
     act.data.optKey = best.key;
     act.data.why = because(best);
+    if (probe.on && best.kind === 'wander') probeWander('review');
     record(world, p, ctx, ranked, best, danger ? 'danger' : criticalMismatch ? 'urgent need' : 'review');
     if (danger || criticalMismatch) markSetAside(world, p);
     // being driven off from a place is remembered, so the same trip is not repeated at once
