@@ -5,6 +5,8 @@ import { addToHousehold, createHousehold } from './households';
 import { ACCESS_CELL, observe, putBelief, waterBeliefId } from './knowledge';
 import { createPerson } from './people';
 import { relOf } from './relations';
+import { layoutFor } from './profiles';
+import { addSettlement, nearestHub } from './settlements';
 import { makeGrid, gridQuery, isWalkable, isFreeLand, rebuildMobileGrid } from './registry';
 import { perceive } from './perception';
 import { hashString, hashUnit, RNG } from './rng';
@@ -173,12 +175,20 @@ function isWaterAccessTile(world: World, x: number, y: number): boolean {
 }
 
 function floodReach(world: World, sx: number, sy: number, useSolid: boolean): Uint8Array {
+  return floodReachFrom(world, [{ x: sx, y: sy }], useSolid);
+}
+
+/** every tile that can be walked to from any of the starting points */
+function floodReachFrom(world: World, starts: { x: number; y: number }[], useSolid: boolean): Uint8Array {
   const { W, H } = world;
   const seen = new Uint8Array(W * H);
   const q: number[] = [];
-  const start = Math.floor(sy) * W + Math.floor(sx);
-  seen[start] = 1;
-  q.push(start);
+  for (const st of starts) {
+    const start = Math.floor(st.y) * W + Math.floor(st.x);
+    if (seen[start]) continue;
+    seen[start] = 1;
+    q.push(start);
+  }
   let head = 0;
   while (head < q.length) {
     const i = q[head++];
@@ -242,36 +252,80 @@ function pickSpot(
   return null;
 }
 
+/**
+ * One founding group: where it settles, how many people, and how its surroundings scale against the ordinary camp of 28.
+ * The ordinary world is exactly one of these (scale 1, one fire). A larger world is several, each laid out by the same recipe.
+ */
+export interface FoundingHub {
+  x: number;
+  y: number;
+  founders: number;
+  /** food, rock, fish, deposits, wolves, tools and the mix of ages, relative to the ordinary camp */
+  scale: number;
+  fires: number;
+}
+
+export interface Layout {
+  W: number;
+  H: number;
+  hubs: FoundingHub[];
+}
+
 export function generateNatural(settings: Settings): World {
-  const world = blankWorld(settings);
+  const layout = layoutFor(settings);
+  const world = blankWorld(settings, layout?.W, layout?.H);
   const { W, H } = world;
   const gen = new RNG(hashString(settings.seed + '|gen'));
   const S = hashString(settings.seed + '|noise') & 0xfffff;
   const harsh = settings.harsh;
 
-  // camp somewhere around the middle
-  const campX = Math.floor(W / 2 + gen.range(-5, 5));
-  const campY = Math.floor(H / 2 + gen.range(-5, 5));
-  world.camp = { x: campX + 0.5, y: campY + 0.5 };
-
-  // lake beside the camp, ponds elsewhere
-  const lakeR = gen.range(10.5, 13);
-  const lakeAng = gen.next() * TAU;
-  let lcx = campX + Math.cos(lakeAng) * (lakeR + 8.5);
-  let lcy = campY + Math.sin(lakeAng) * (lakeR + 8.5);
-  lcx = clamp(lcx, lakeR + 4, W - lakeR - 4);
-  lcy = clamp(lcy, lakeR + 4, H - lakeR - 4);
-  const waters: Water[] = [{ cx: lcx, cy: lcy, R: lakeR, stretch: gen.range(0.82, 1.3), ax: gen.next() * Math.PI, seed: S + 1, amp: 0.62 }];
-  for (let i = 0; i < 2; i++) {
-    const sp = pickSpot(world, gen, campX, campY, 22, 40, (x, y) => dist(x, y, lcx, lcy) > lakeR + 12 && x > 8 && y > 8 && x < W - 8 && y < H - 8);
-    if (sp) waters.push({ cx: sp.x, cy: sp.y, R: gen.range(3.4, 5.4), stretch: gen.range(0.85, 1.25), ax: gen.next() * Math.PI, seed: S + 5 + i, amp: 0.5 });
+  // camp somewhere around the middle (a larger world says where its camps are)
+  let hubs: FoundingHub[];
+  if (layout) hubs = layout.hubs;
+  else {
+    const cx = Math.floor(W / 2 + gen.range(-5, 5));
+    const cy = Math.floor(H / 2 + gen.range(-5, 5));
+    hubs = [{ x: cx, y: cy, founders: settings.population, scale: 1, fires: 1 }];
   }
+  const campX = hubs[0].x;
+  const campY = hubs[0].y;
+  world.camp = { x: campX + 0.5, y: campY + 0.5 };
+  for (const h of hubs.slice(1)) addSettlement(world, h.x + 0.5, h.y + 0.5);
+  const nearestDist = (x: number, y: number): number => {
+    let d = Infinity;
+    for (const h of hubs) d = Math.min(d, dist(x + 0.5, y + 0.5, h.x + 0.5, h.y + 0.5));
+    return d;
+  };
+
+  // a lake beside each camp, ponds elsewhere
+  const waters: Water[] = [];
+  hubs.forEach((hub, hi) => {
+    const lakeR = gen.range(10.5, 13);
+    let lakeAng = gen.next() * TAU;
+    const lakeAt = (ang: number) => ({
+      x: clamp(hub.x + Math.cos(ang) * (lakeR + 8.5), lakeR + 4, W - lakeR - 4),
+      y: clamp(hub.y + Math.sin(ang) * (lakeR + 8.5), lakeR + 4, H - lakeR - 4),
+    });
+    let at = lakeAt(lakeAng);
+    // with several camps, turn the lake away from the others (a world with one camp never draws again here)
+    for (let t = 0; hubs.length > 1 && t < 24 && hubs.some((o, oi) => oi !== hi && dist(at.x, at.y, o.x, o.y) < lakeR + 12); t++) {
+      lakeAng = gen.next() * TAU;
+      at = lakeAt(lakeAng);
+    }
+    const lcx = at.x;
+    const lcy = at.y;
+    waters.push({ cx: lcx, cy: lcy, R: lakeR, stretch: gen.range(0.82, 1.3), ax: gen.next() * Math.PI, seed: S + 1 + 16 * hi, amp: 0.62 });
+    for (let i = 0; i < 2; i++) {
+      const sp = pickSpot(world, gen, hub.x, hub.y, 22, 40, (x, y) => dist(x, y, lcx, lcy) > lakeR + 12 && x > 8 && y > 8 && x < W - 8 && y < H - 8 && (hubs.length === 1 || hubs.every((o) => dist(x, y, o.x, o.y) > 14)));
+      if (sp) waters.push({ cx: sp.x, cy: sp.y, R: gen.range(3.4, 5.4), stretch: gen.range(0.85, 1.25), ax: gen.next() * Math.PI, seed: S + 5 + i + 16 * hi, amp: 0.5 });
+    }
+  });
 
   // water pass
   for (let y = 0; y < H; y++) {
     for (let x = 0; x < W; x++) {
       let w = 9;
-      if (dist(x + 0.5, y + 0.5, campX + 0.5, campY + 0.5) >= 8.5) for (const wt of waters) w = Math.min(w, waterValue(wt, x, y));
+      if (nearestDist(x, y) >= 8.5) for (const wt of waters) w = Math.min(w, waterValue(wt, x, y));
       const i = y * W + x;
       if (w < 0.72) world.terrain[i] = T.DEEP;
       else if (w < 0.98) world.terrain[i] = T.SHALLOW;
@@ -285,7 +339,7 @@ export function generateNatural(settings: Settings): World {
       const i = y * W + x;
       if (world.terrain[i] === T.DEEP || world.terrain[i] === T.SHALLOW) continue;
       const dw = world.waterDist[i];
-      const dC = dist(x + 0.5, y + 0.5, world.camp.x, world.camp.y);
+      const dC = nearestDist(x, y);
       const nz = fbm(x / 5.5, y / 5.5, S + 9);
       let t: number = T.GRASS;
       if (dw <= 1 || (dw === 2 && nz > 0.52) || (dw === 3 && nz > 0.78)) t = T.SAND;
@@ -299,7 +353,7 @@ export function generateNatural(settings: Settings): World {
     }
   }
 
-  const terrainReach = floodReach(world, campX, campY, false);
+  const terrainReach = floodReachFrom(world, hubs, false);
   const okLand = (x: number, y: number, allowForest = true): boolean => {
     const i = y * W + x;
     const t = world.terrain[i];
@@ -319,7 +373,7 @@ export function generateNatural(settings: Settings): World {
       const t = world.terrain[i];
       if (t !== T.GRASS && t !== T.FOREST) continue;
       if (world.waterDist[i] < 3 || terrainReach[i] !== 1) continue;
-      const dC = dist(x + 0.5, y + 0.5, world.camp.x, world.camp.y);
+      const dC = nearestDist(x, y);
       if (dC < 8.5) continue;
       const ff = fbm(x / 11, y / 11, S + 2) + clamp((dC - 10) / 45, 0, 0.22);
       const p = t === T.FOREST ? 0.06 + 0.3 * smoothstep(0.56, 0.84, ff) : 0.01;
@@ -334,8 +388,11 @@ export function generateNatural(settings: Settings): World {
   // ── resource clusters ──
   const mk = (type: SourceType, x: number, y: number, amount?: number) => makeSource(world, type, x, y, amount);
   const scale = harsh ? 0.65 : 1;
+  // everything below is laid out around one camp at a time (hubX, hubY), by the same recipe for each
+  let hubX = campX;
+  let hubY = campY;
   const cluster = (type: SourceType, rmin: number, rmax: number, count: number, spread: number, allowForest = true) => {
-    const c = pickSpot(world, gen, campX, campY, rmin, rmax, (x, y) => okLand(x, y, allowForest));
+    const c = pickSpot(world, gen, hubX, hubY, rmin, rmax, (x, y) => okLand(x, y, allowForest));
     if (!c) return;
     let placed = 0;
     for (let k = 0; k < 40 && placed < count; k++) {
@@ -348,19 +405,11 @@ export function generateNatural(settings: Settings): World {
     }
   };
   const nearB = harsh ? 2 : 3;
-  for (let i = 0; i < nearB; i++) cluster('berry_bush', 7.5, 13.5, gen.int(3) + 3, 2.2);
-  for (let i = 0; i < Math.round(3 * scale); i++) cluster('berry_bush', 16, 27, gen.int(3) + 3, 2.4);
-  for (let i = 0; i < Math.round(4 * scale); i++) cluster('berry_bush', 28, 46, gen.int(3) + 3, 2.4);
-  cluster('fruit_tree', 14, 20, 3, 2.6);
-  for (let i = 0; i < Math.round(2 * scale); i++) cluster('fruit_tree', 22, 32, gen.int(2) + 3, 2.8);
-  for (let i = 0; i < Math.round(3 * scale); i++) cluster('fruit_tree', 33, 50, gen.int(3) + 2, 2.8);
-  cluster('wild_grain', 10, 17, 5, 1.8, false);
-  for (let i = 0; i < Math.round(2 * scale); i++) cluster('wild_grain', 19, 31, gen.int(3) + 3, 2, false);
-  for (let i = 0; i < Math.round(2 * scale); i++) cluster('wild_grain', 33, 48, gen.int(3) + 3, 2, false);
+  const once = (m: number): number => Math.max(1, Math.round(m)); // the single clusters of the recipe, repeated for a larger camp
 
   // rock outcrops: ensure a small near cluster by carving stony ground if the noise left none
   const rockSpot = (rmin: number, rmax: number, count: number) => {
-    const c = pickSpot(world, gen, campX, campY, rmin, rmax, (x, y) => okLand(x, y, true));
+    const c = pickSpot(world, gen, hubX, hubY, rmin, rmax, (x, y) => okLand(x, y, true));
     if (!c) return;
     let placed = 0;
     for (let k = 0; k < 60 && placed < count; k++) {
@@ -376,8 +425,22 @@ export function generateNatural(settings: Settings): World {
         }
     }
   };
-  rockSpot(14, 21, 4);
-  for (let i = 0; i < Math.round(3 * scale); i++) rockSpot(24, 46, 5);
+  for (const hub of hubs) {
+    hubX = hub.x;
+    hubY = hub.y;
+    const m = hub.scale;
+    for (let i = 0; i < Math.round(nearB * m); i++) cluster('berry_bush', 7.5, 13.5, gen.int(3) + 3, 2.2);
+    for (let i = 0; i < Math.round(3 * scale * m); i++) cluster('berry_bush', 16, 27, gen.int(3) + 3, 2.4);
+    for (let i = 0; i < Math.round(4 * scale * m); i++) cluster('berry_bush', 28, 46, gen.int(3) + 3, 2.4);
+    for (let i = 0; i < once(m); i++) cluster('fruit_tree', 14, 20, 3, 2.6);
+    for (let i = 0; i < Math.round(2 * scale * m); i++) cluster('fruit_tree', 22, 32, gen.int(2) + 3, 2.8);
+    for (let i = 0; i < Math.round(3 * scale * m); i++) cluster('fruit_tree', 33, 50, gen.int(3) + 2, 2.8);
+    for (let i = 0; i < once(m); i++) cluster('wild_grain', 10, 17, 5, 1.8, false);
+    for (let i = 0; i < Math.round(2 * scale * m); i++) cluster('wild_grain', 19, 31, gen.int(3) + 3, 2, false);
+    for (let i = 0; i < Math.round(2 * scale * m); i++) cluster('wild_grain', 33, 48, gen.int(3) + 3, 2, false);
+    for (let i = 0; i < once(m); i++) rockSpot(14, 21, 4);
+    for (let i = 0; i < Math.round(3 * scale * m); i++) rockSpot(24, 46, 5);
+  }
   // rocks on naturally stony ground
   for (let y = 3; y < H - 3; y++) {
     for (let x = 3; x < W - 3; x++) {
@@ -407,50 +470,68 @@ export function generateNatural(settings: Settings): World {
   }
   gen.shuffle(fishCand);
   const fishSpots: { x: number; y: number }[] = [];
-  const wantFish = Math.round(11 * scale);
-  fishCand.sort((a, b) => {
-    const da = dist(a % W, (a / W) | 0, campX, campY);
-    const db = dist(b % W, (b / W) | 0, campX, campY);
-    return da - db + (hashUnit(a, 3) - hashUnit(b, 3)) * 14; // mostly near the camp but with scatter
-  });
-  for (const i of fishCand) {
-    if (fishSpots.length >= wantFish) break;
-    const x = i % W;
-    const y = (i / W) | 0;
-    if (fishSpots.some((f) => dist(f.x, f.y, x, y) < 4.2)) continue;
-    fishSpots.push({ x, y });
-    mk('fish_spot', x, y, Math.max(2, Math.round(gen.range(4, SOURCE_MAX.fish_spot))));
+  for (const hub of hubs) {
+    const wantFish = Math.round(11 * scale * hub.scale);
+    let got = 0;
+    fishCand.sort((a, b) => {
+      const da = dist(a % W, (a / W) | 0, hub.x, hub.y);
+      const db = dist(b % W, (b / W) | 0, hub.x, hub.y);
+      return da - db + (hashUnit(a, 3) - hashUnit(b, 3)) * 14; // mostly near the camp but with scatter
+    });
+    for (const i of fishCand) {
+      if (got >= wantFish) break;
+      const x = i % W;
+      const y = (i / W) | 0;
+      if (fishSpots.some((f) => dist(f.x, f.y, x, y) < 4.2)) continue;
+      fishSpots.push({ x, y });
+      got++;
+      mk('fish_spot', x, y, Math.max(2, Math.round(gen.range(4, SOURCE_MAX.fish_spot))));
+    }
   }
 
-  // ── camp: fire and first shelters ──
-  createBuilding(world, 'fire', campX, campY, 0, { fuel: 1500 });
-
-  // ── households and people ──
-  populate(world, gen, settings.population, campX, campY);
+  // ── each camp: fire(s), first shelters, households and people ──
+  for (const hub of hubs) {
+    createBuilding(world, 'fire', hub.x, hub.y, 0, { fuel: 1500 });
+    // one fire for about every 28 people, as in the ordinary camp (the ordinary world has exactly one)
+    for (let k = 1; k < hub.fires; k++) {
+      for (let a = 0; a < 12; a++) {
+        const ang = (k / hub.fires + a / 12) * TAU;
+        const fx = Math.floor(hub.x + 0.5 + Math.cos(ang) * 3.2);
+        const fy = Math.floor(hub.y + 0.5 + Math.sin(ang) * 3.2);
+        if (isFreeLand(world, fx, fy) && world.waterDist[fy * W + fx] >= 3) {
+          createBuilding(world, 'fire', fx, fy, 0, { fuel: 1500 });
+          break;
+        }
+      }
+    }
+    populate(world, gen, hub.founders, hub.x, hub.y, hub.scale);
+  }
 
   // ── wolves ──
   const dens: { x: number; y: number }[] = [];
-  const wolfCount = harsh ? 5 : 3;
-  for (let i = 0; i < wolfCount; i++) {
-    const denOk = (x: number, y: number): boolean =>
-      world.terrain[y * W + x] === T.FOREST && world.solid[y * W + x] === 0 && terrainReach[y * W + x] === 1 && dens.every((d) => dist(d.x, d.y, x, y) > 14) && openNeighbours(world, x, y) >= 6;
-    // a den beside the only pond would keep people from ever drinking: prefer ground well away from water
-    const sp = pickSpot(world, gen, campX, campY, 23, 44, (x, y) => denOk(x, y) && world.waterDist[y * W + x] >= 10) ?? pickSpot(world, gen, campX, campY, 23, 44, denOk);
-    if (sp) {
-      dens.push(sp);
-      makeWolf(world, sp.x + 0.5, sp.y + 0.5);
+  for (const hub of hubs) {
+    const wolfCount = Math.round((harsh ? 5 : 3) * hub.scale);
+    for (let i = 0; i < wolfCount; i++) {
+      const denOk = (x: number, y: number): boolean =>
+        world.terrain[y * W + x] === T.FOREST && world.solid[y * W + x] === 0 && terrainReach[y * W + x] === 1 && dens.every((d) => dist(d.x, d.y, x, y) > 14) && openNeighbours(world, x, y) >= 6 && (hubs.length === 1 || hubs.every((o) => dist(o.x, o.y, x, y) >= 23));
+      // a den beside the only pond would keep people from ever drinking: prefer ground well away from water
+      const sp = pickSpot(world, gen, hub.x, hub.y, 23, 44, (x, y) => denOk(x, y) && world.waterDist[y * W + x] >= 10) ?? pickSpot(world, gen, hub.x, hub.y, 23, 44, denOk);
+      if (sp) {
+        dens.push(sp);
+        makeWolf(world, sp.x + 0.5, sp.y + 0.5);
+      }
     }
   }
 
   // ── deposits: clay by the water, ore and big outcrops in the rocky country ──
   // (drawn from their own random stream, after everything else, so the rest of the world is laid out exactly as it always was)
-  placeDeposits(world, new RNG(hashString(settings.seed + '|deposits')), campX, campY, terrainReach);
+  placeDeposits(world, new RNG(hashString(settings.seed + '|deposits')), hubs, terrainReach);
 
   // the forest may recover from felling, but not grow without bound
   world.stats.treeCap = Math.round((world.stats.trees ?? 0) * 1.08);
 
   // drop resources that ended up unreachable
-  finalizeReachability(world, campX, campY);
+  finalizeReachability(world, hubs);
   computeAccessCells(world);
   seedKnowledge(world, gen);
   lookAround(world);
@@ -462,8 +543,11 @@ export function generateNatural(settings: Settings): World {
  * Finite deposits that make the later chains possible. They are not near the camp (nobody starts out knowing them):
  * clay lies along the shores, ore under stony ground a long walk out, and large cuttable outcrops between.
  */
-function placeDeposits(world: World, dg: RNG, campX: number, campY: number, reach: Uint8Array): void {
+function placeDeposits(world: World, dg: RNG, hubs: FoundingHub[], reach: Uint8Array): void {
   const { W, H } = world;
+  // each camp gets its own share, laid out by the same recipe around it (the ordinary world has the one)
+  let campX = hubs[0].x;
+  let campY = hubs[0].y;
   const free = (x: number, y: number): boolean => x >= 4 && y >= 4 && x < W - 4 && y < H - 4 && world.occ[y * W + x] === 0 && world.solid[y * W + x] === 0 && reach[y * W + x] === 1;
   const placed: { x: number; y: number }[] = [];
   const apart = (x: number, y: number, d: number): boolean => placed.every((q) => dist(q.x, q.y, x, y) >= d);
@@ -492,22 +576,26 @@ function placeDeposits(world: World, dg: RNG, campX: number, campY: number, reac
       }
     }
   };
-  const clay: number[] = [];
-  const ore: number[] = [];
-  const outcrop: number[] = [];
-  for (let y = 4; y < H - 4; y++) {
-    for (let x = 4; x < W - 4; x++) {
-      const i = y * W + x;
-      const t = world.terrain[i];
-      const d = dist(x + 0.5, y + 0.5, campX + 0.5, campY + 0.5);
-      if ((t === T.SAND || t === T.GRASS) && world.waterDist[i] >= 1 && world.waterDist[i] <= 3 && d >= 11 && d <= 36) clay.push(i);
-      if ((t === T.STONY || t === T.FOREST || t === T.GRASS) && world.waterDist[i] >= 3 && stonyNear(x, y, 2) && d >= 24 && d <= 46) ore.push(i);
-      if ((t === T.STONY || t === T.GRASS) && world.waterDist[i] >= 3 && stonyNear(x, y, 1) && d >= 17 && d <= 36) outcrop.push(i);
+  for (const hub of hubs) {
+    campX = hub.x;
+    campY = hub.y;
+    const clay: number[] = [];
+    const ore: number[] = [];
+    const outcrop: number[] = [];
+    for (let y = 4; y < H - 4; y++) {
+      for (let x = 4; x < W - 4; x++) {
+        const i = y * W + x;
+        const t = world.terrain[i];
+        const d = dist(x + 0.5, y + 0.5, campX + 0.5, campY + 0.5);
+        if ((t === T.SAND || t === T.GRASS) && world.waterDist[i] >= 1 && world.waterDist[i] <= 3 && d >= 11 && d <= 36) clay.push(i);
+        if ((t === T.STONY || t === T.FOREST || t === T.GRASS) && world.waterDist[i] >= 3 && stonyNear(x, y, 2) && d >= 24 && d <= 46) ore.push(i);
+        if ((t === T.STONY || t === T.GRASS) && world.waterDist[i] >= 3 && stonyNear(x, y, 1) && d >= 17 && d <= 36) outcrop.push(i);
+      }
     }
+    pickFrom(clay, Math.round(3 * hub.scale), 9, 'clay_pit', 24, SOURCE_MAX.clay_pit);
+    pickFrom(outcrop, Math.round(2 * hub.scale), 10, 'outcrop', 40, SOURCE_MAX.outcrop);
+    pickFrom(ore, Math.round(2 * hub.scale), 12, 'ore_vein', 14, SOURCE_MAX.ore_vein);
   }
-  pickFrom(clay, 3, 9, 'clay_pit', 24, SOURCE_MAX.clay_pit);
-  pickFrom(outcrop, 2, 10, 'outcrop', 40, SOURCE_MAX.outcrop);
-  pickFrom(ore, 2, 12, 'ore_vein', 14, SOURCE_MAX.ore_vein);
 }
 
 /** Everyone takes a first look at their surroundings before the first decision is made. */
@@ -522,8 +610,8 @@ function openNeighbours(world: World, x: number, y: number): number {
   return n;
 }
 
-function finalizeReachability(world: World, campX: number, campY: number): void {
-  const reach = floodReach(world, campX, campY, true);
+function finalizeReachability(world: World, hubs: FoundingHub[]): void {
+  const reach = floodReachFrom(world, hubs, true);
   const W = world.W;
   const isReachableNear = (x: number, y: number) => {
     for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
@@ -556,9 +644,13 @@ interface Member {
   role: 'adult' | 'kid' | 'elder' | 'youth';
 }
 
-function buildHouseholdSpecs(gen: RNG, population: number): Member[][] {
+function buildHouseholdSpecs(gen: RNG, population: number, scale = 1): Member[][] {
   const specs: Member[][] = [];
   let remaining = population;
+  // the ordinary camp has at most 3 elders and at least 3 children and 2 elders; a larger camp has proportionally more
+  const elderCap = Math.max(3, Math.round(3 * scale));
+  const minKids = Math.max(3, Math.round(3 * scale));
+  const minElders = Math.max(2, Math.round(2 * scale));
   const sx = (): 'f' | 'm' => (gen.chance(0.5) ? 'f' : 'm');
   let kids = 0;
   let elders = 0;
@@ -582,7 +674,7 @@ function buildHouseholdSpecs(gen: RNG, population: number): Member[][] {
     } else if (roll < 0.62 && remaining >= 2) {
       m = [{ age: gen.range(26, 44), sex: sx(), role: 'adult' }, { age: gen.range(2, 10), sex: sx(), role: 'kid' }];
       kids++;
-    } else if (roll < 0.7 && remaining >= 2 && elders < 3) {
+    } else if (roll < 0.7 && remaining >= 2 && elders < elderCap) {
       m = [{ age: gen.range(66, 76), sex: sx(), role: 'elder' }, { age: gen.range(30, 44), sex: sx(), role: 'adult' }];
       elders++;
     } else if (roll < 0.78 && remaining >= 3) {
@@ -600,17 +692,17 @@ function buildHouseholdSpecs(gen: RNG, population: number): Member[][] {
     remaining -= m.length;
   }
   // make sure the band has some children and elders to show caregiving and life stages
-  if (kids < 3) {
+  if (kids < minKids) {
     for (const s of specs) {
-      if (s.length === 1 && s[0].role === 'adult' && s[0].age > 24 && kids < 3) {
+      if (s.length === 1 && s[0].role === 'adult' && s[0].age > 24 && kids < minKids) {
         s.push({ age: gen.range(2, 9), sex: sx(), role: 'kid' });
         kids++;
       }
     }
   }
-  if (elders < 2) {
+  if (elders < minElders) {
     for (const s of specs) {
-      if (s.length === 1 && elders < 2) {
+      if (s.length === 1 && elders < minElders) {
         s[0] = { age: gen.range(66, 75), sex: s[0].sex, role: 'elder' };
         elders++;
       }
@@ -619,8 +711,9 @@ function buildHouseholdSpecs(gen: RNG, population: number): Member[][] {
   return specs;
 }
 
-function populate(world: World, gen: RNG, population: number, campX: number, campY: number): void {
-  const specs = buildHouseholdSpecs(gen, population);
+function populate(world: World, gen: RNG, population: number, campX: number, campY: number, scale = 1): void {
+  const firstPerson = world.persons.length; // a camp is one band: its people know each other, and not the people of other camps
+  const specs = buildHouseholdSpecs(gen, population, scale);
   // trim if oversized after the fix-ups
   let total = specs.reduce((s, m) => s + m.length, 0);
   while (total > population) {
@@ -727,19 +820,19 @@ function populate(world: World, gen: RNG, population: number, campX: number, cam
   // tools and seeds are unevenly distributed: some households own them, others do not
   const heads = households.map((h) => world.byId.get(h.headId) as Person);
   const pickHead = () => heads[gen.int(heads.length)];
-  addItem(pickHead().inv, 'axe', 1);
-  addItem(pickHead().inv, 'axe', 1);
-  addItem(pickHead().inv, 'hoe', 1);
-  addItem(pickHead().inv, 'basket', 1);
-  addItem(pickHead().inv, 'basket', 1);
-  addItem(pickHead().inv, 'pick', 1);
-  for (let i = 0; i < 4; i++) addItem(pickHead().inv, 'seeds', 2 + gen.int(2));
+  // (the ordinary camp has 2 axes, 1 hoe, 2 baskets, 1 pick and 4 packets of seed; a larger camp has proportionally more)
+  const kit = (base: number): number => Math.max(base, Math.round(base * scale));
+  for (let i = 0; i < kit(2); i++) addItem(pickHead().inv, 'axe', 1);
+  for (let i = 0; i < kit(1); i++) addItem(pickHead().inv, 'hoe', 1);
+  for (let i = 0; i < kit(2); i++) addItem(pickHead().inv, 'basket', 1);
+  for (let i = 0; i < kit(1); i++) addItem(pickHead().inv, 'pick', 1);
+  for (let i = 0; i < kit(4); i++) addItem(pickHead().inv, 'seeds', 2 + gen.int(2));
   // dedupe-cap tools to one per person
   for (const p of world.persons) for (const t of ['axe', 'pick', 'hoe', 'basket'] as const) if ((p.inv[t] ?? 0) > 1) p.inv[t] = 1;
   registerStartingTools(world);
 
   // acquaintance among band members
-  const ps = world.persons;
+  const ps = world.persons.slice(firstPerson);
   for (let i = 0; i < ps.length; i++) {
     for (let j = i + 1; j < ps.length; j++) {
       const a = ps[i];
@@ -777,18 +870,26 @@ function link(a: Person, b: Person, aToB: 'partner' | 'child' | 'parent' | 'sibl
 
 // ───────────────────────── starting knowledge ─────────────────────────
 function seedKnowledge(world: World, gen: RNG): void {
-  const camp = world.camp;
   const R = 13.5;
-  const near: Entity[] = [];
-  gridQuery(world.grid, camp.x, camp.y, R + 3, (e) => {
-    const cx = e.ent === 'building' || e.ent === 'site' ? e.x + e.w / 2 : (e as { x: number }).x + 0.5;
-    const cy = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : (e as { y: number }).y + 0.5;
-    if (dist(cx, cy, camp.x, camp.y) <= R) near.push(e);
+  // everyone starts out knowing the surroundings of their own camp (the ordinary world has the one)
+  const camps = [world.camp, ...(world.extraSettlements ?? [])];
+  const around = camps.map((camp) => {
+    const near: Entity[] = [];
+    gridQuery(world.grid, camp.x, camp.y, R + 3, (e) => {
+      const cx = e.ent === 'building' || e.ent === 'site' ? e.x + e.w / 2 : (e as { x: number }).x + 0.5;
+      const cy = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : (e as { y: number }).y + 0.5;
+      if (dist(cx, cy, camp.x, camp.y) <= R) near.push(e);
+    });
+    // places noticed on the way here: with several camps, only those in one's own part of the map
+    const farthest = camps.length > 1 ? 50 : Infinity;
+    const far = world.sources.filter((s) => s.type !== 'tree' && !DEPOSIT_TYPES.includes(s.type) && dist(s.x, s.y, camp.x, camp.y) > R + 1 && dist(s.x, s.y, camp.x, camp.y) <= farthest);
+    return { near, far };
   });
-  const far = world.sources.filter((s) => s.type !== 'tree' && !DEPOSIT_TYPES.includes(s.type) && dist(s.x, s.y, camp.x, camp.y) > R + 1);
   const cw = Math.ceil(world.W / ACCESS_CELL);
   const W = world.W;
   for (const p of world.persons) {
+    const camp = nearestHub(world, p.x, p.y);
+    const { near, far } = around[camps.indexOf(camp)];
     for (const e of near) {
       observe(world, p, e);
       const b = p.beliefs[e.id];

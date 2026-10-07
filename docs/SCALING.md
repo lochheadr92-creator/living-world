@@ -85,8 +85,34 @@ What follows the nearest settlement:
 * where new saplings may not seed (near any settlement).
 
 What still uses the original camp only: the position of weather events in the feed, the camera's "home" key and starting position, the
-decorative critters, the world generator (which lays out one camp and everything around it), and the staged scenes. Nothing generates more
-than one settlement yet; the next step is a generator that does. Until then a second settlement is added in code with `addSettlement`.
+decorative critters, and the staged scenes. The generator makes more than one settlement for the larger worlds below.
+
+## Larger worlds: `large` and `huge`
+
+`settings.profile` (built by `settingsForProfile` in `src/sim/profiles.ts`) makes a bigger map founded in several places at once. They
+start from scratch like the ordinary world — people, a fire, a few lean-tos, a little food, a handful of tools — and nothing is built or
+made for them. Each camp is laid out by the ordinary camp's own recipe (its lake and ponds, berries, fruit, grain, rock, fish, clay, ore and
+outcrops, wolves, fire, founders and tools), scaled to the number of people in it; founders know their own camp and its people and nothing
+of the others.
+
+| | map | founders | camps | camp spacing |
+|---|---|---|---|---|
+| `large` | 160×160 | 100 | 4 of 25 | about 44 tiles: one region whose camps can meet in the first days |
+| `huge` | 256×256 | 250 | 6 of about 42 | about 80 tiles: separate communities |
+
+* Both run under the scaled rule set with one camp's founders as the size of a settlement (`settlementFounders`): at 42, six open home
+  sites, three projects, and one of each workplace per settlement. Population limits follow all the founders (at 250: immigration to 482,
+  conception to 571).
+* `--pop N` splits N founders among the camps, so a world can be run smaller or larger on the same map.
+* A camp of about 28 people has one fire; a larger camp has one for about every 28.
+* Per-camp quantities (food, rock, fish, clay, ore, outcrops, wolves, tools, the mix of ages) scale with the camp's founders against the
+  ordinary 28. The ordinary world is exactly one camp of scale 1, which is why it generates exactly as before (`tests/golden.test.ts`).
+* Nothing forces the camps to meet, trade or merge, and nothing prevents it. The camps are connected on foot for the seeds checked.
+
+Look at one before running it: `npx vite-node scripts/regions.ts -- --profile huge --seed meadow` prints, for each camp, its people, roofs,
+fires, what lies within reach, the nearest shore and wolf den, the walking route to every other camp, and a check that nobody knows another
+camp. Run it: `npx vite-node scripts/bench.ts -- --profile huge --days 3`. They are not offered in the world menu yet: the camera and the
+minimap still assume an 80×80 map (`MAP_W` / `MAP_H`).
 
 ### What the scaled rules change (measured)
 
@@ -162,8 +188,9 @@ Read directly from the code (verified):
 * `src/sim/lifecycle.ts` — immigration stops at 54 people; conception stops above 64 (the variable named `adultsAlive` counts everyone).
 * `src/sim/act_build.ts` `siteConflict` — one of each workshop, hall, granary and storehouse in the *whole world*; `src/sim/options_work.ts`
   `optPlanBuild` — at most four open sites in the world and one per household.
-* `src/sim/worldgen.ts` — three clay pits, two outcrops and two ore veins per map, finite; three wolves (five when harsh), placed only at
-  generation; resource clusters, wolf dens and water placed at fixed distances from one camp; one fire.
+* `src/sim/worldgen.ts` — in the ordinary world, three clay pits, two outcrops and two ore veins per map, finite; three wolves (five when
+  harsh), placed only at generation; resource clusters, wolf dens and water placed at fixed distances from one camp. The larger worlds repeat
+  this per camp, scaled to its founders; deposits are still finite and wolves are still never replaced.
 * `src/sim/needs.ts` — `shelterAt` and `fireWarmth` scan all buildings for each person each tick.
 * `src/sim/wildlife.ts` `moveWolf` — a wolf whose path search returns null searches again on the next tick.
 * `src/sim/meals.ts` — the meal list is trimmed to 60 by dropping the oldest, whether or not it is still active.

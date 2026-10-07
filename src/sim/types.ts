@@ -874,6 +874,10 @@ export interface Settings {
   scene: SceneId;
   /** which limits on settlement size apply (rules.ts); absent means 'ordinary', as do saves from before it existed */
   ruleSet?: RuleSet;
+  /** a larger world, founded in several places (profiles.ts); absent means the ordinary 80x80 world with one camp */
+  profile?: 'large' | 'huge';
+  /** how many of the founders live together in one settlement, for the limits that follow a settlement (rules.ts); absent means all of them */
+  settlementFounders?: number;
 }
 /** 'ordinary': the village-sized limits the world was tuned for. 'scaled': the same limits as ratios of the founding population, local to a settlement. */
 export type RuleSet = 'ordinary' | 'scaled';

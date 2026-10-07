@@ -75,23 +75,24 @@ export function scaledRules(founders: number, settlementFounders: number = found
   };
 }
 
-export function rulesFor(ruleSet: RuleSet | undefined, founders: number): Readonly<Rules> {
-  return ruleSet === 'scaled' ? scaled(founders) : ORDINARY_RULES;
+export function rulesFor(ruleSet: RuleSet | undefined, founders: number, settlementFounders?: number): Readonly<Rules> {
+  return ruleSet === 'scaled' ? scaled(founders, settlementFounders ?? founders) : ORDINARY_RULES;
 }
 
-const cache = new Map<number, Rules>();
-function scaled(founders: number): Rules {
-  let r = cache.get(founders);
+const cache = new Map<string, Rules>();
+function scaled(founders: number, settlementFounders: number): Rules {
+  const key = founders + ':' + settlementFounders;
+  let r = cache.get(key);
   if (!r) {
-    r = scaledRules(founders);
-    cache.set(founders, r);
+    r = scaledRules(founders, settlementFounders);
+    cache.set(key, r);
   }
   return r;
 }
 
 /** the rules this world runs under */
 export function rulesOf(world: World): Readonly<Rules> {
-  return rulesFor(world.settings.ruleSet, world.settings.population);
+  return rulesFor(world.settings.ruleSet, world.settings.population, world.settings.settlementFounders);
 }
 
 /** is (x, y) within `radius` of (ax, ay)? An infinite radius is always true and costs nothing. */

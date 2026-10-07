@@ -5,7 +5,9 @@
 //
 //   --seed S         world seed (default meadow)
 //   --days D         simulated days to run (default 5); a day is 2400 ticks
-//   --pop N          founding population (default: the ordinary 28)
+//   --pop N          founding population (default: the ordinary 28, or the profile's)
+//   --profile P      large (160x160, 100 founders in 4 camps) or huge (256x256, 250 founders in 6 camps); see src/sim/profiles.ts.
+//                    A profile implies the scaled rules. The default, normal, is the ordinary world.
 //   --harsh          harsh mode
 //   --arrivals off   no immigration
 //   --rules scaled   the limits on settlement size as ratios of the founding population, local to a settlement (src/sim/rules.ts);
@@ -21,9 +23,11 @@
 import { writeFileSync } from 'node:fs';
 import { CRITICAL, DAY, NEED_KEYS } from '../src/sim/constants';
 import { conservationReport, foodUnits } from '../src/sim/economy';
-import { createWorld, defaultSettings } from '../src/sim/factory';
+import { createWorld } from '../src/sim/factory';
 import { WATER_ID_BASE } from '../src/sim/knowledge';
 import { stageOf } from '../src/sim/people';
+import { settingsForProfile } from '../src/sim/profiles';
+import type { ProfileName } from '../src/sim/profiles';
 import { COUNTER_KEYS, probe, probeReset, probeSnapshot } from '../src/sim/probe';
 import type { ProbeCounters } from '../src/sim/probe';
 import { toolReport } from '../src/sim/toolreg';
@@ -45,8 +49,8 @@ const checkEvery = Math.max(1, Number(opt('check', '2400')));
 const out = opt('out', '');
 const quiet = flag('quiet');
 
-const settings = { ...defaultSettings(seed), harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off' };
-if (popArg) settings.population = Number(popArg);
+const profile = opt('profile', 'normal') as ProfileName;
+const settings = settingsForProfile(profile, seed, { harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off', ...(popArg ? { population: Number(popArg) } : {}) });
 if (opt('rules', 'ordinary') === 'scaled') (settings as { ruleSet?: 'scaled' }).ruleSet = 'scaled';
 
 const pct = (sorted: Float64Array, q: number): number => (sorted.length ? sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))] : 0);
