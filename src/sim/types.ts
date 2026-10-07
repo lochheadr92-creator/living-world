@@ -872,7 +872,11 @@ export interface Settings {
   harsh: boolean;
   immigration: boolean;
   scene: SceneId;
+  /** which limits on settlement size apply (rules.ts); absent means 'ordinary', as do saves from before it existed */
+  ruleSet?: RuleSet;
 }
+/** 'ordinary': the village-sized limits the world was tuned for. 'scaled': the same limits as ratios of the founding population, local to a settlement. */
+export type RuleSet = 'ordinary' | 'scaled';
 export type SceneId = 'natural' | 'contest' | 'help' | 'cooperate' | 'workshop' | 'meal' | 'haul' | 'care';
 
 export interface SpatialGrid {

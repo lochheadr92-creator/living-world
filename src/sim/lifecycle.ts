@@ -16,6 +16,7 @@ import { adjustRel, relOf } from './relations';
 import { abortConversationFor, personOf } from './social';
 import type { Grave, Person, Stage, World } from './types';
 import { T } from './types';
+import { rulesOf } from './rules';
 import { newId } from './registry';
 
 const STAGE_CODE: Record<Stage, number> = { child: 0, youth: 1, adult: 2, elder: 3 };
@@ -75,7 +76,7 @@ export const CONCEPTION_CHECK_EVERY = 200;
 /** Couples in a settled, fed household may conceive. */
 export function conceptionTick(world: World): void {
   const adultsAlive = world.persons.filter((q) => q.alive).length;
-  if (adultsAlive > 64) return;
+  if (adultsAlive > rulesOf(world).conceptionCap) return;
   for (const p of world.persons) {
     if (!p.alive || p.sex !== 'f' || p.partnerId === 0 || p.pregnantUntil > 0) continue;
     const age = ageYears(world, p);
@@ -264,7 +265,8 @@ export function adoptOrphans(world: World): void {
 export function immigrationTick(world: World): void {
   if (!world.settings.immigration) return;
   const pop = world.persons.filter((q) => q.alive).length;
-  if (pop >= 54 || pop < 4) return;
+  const rules = rulesOf(world);
+  if (pop >= rules.immigrationCap || pop < 4) return;
   if (world.tick < 4800) return; // the settlement has to prove itself first
   if (world.tick - (world.stats.lastArrival ?? -99999) < 6000) return;
   // a settlement that is doing well draws people in
@@ -306,7 +308,7 @@ export function immigrationTick(world: World): void {
     const arriveY = path[path.length - 1];
     // who is arriving: mostly a lone traveller, sometimes a couple or a family drawn by what they have heard
     const rollKind = world.rng.next();
-    const kind: 'single' | 'couple' | 'family' = pop + 3 <= 56 && rollKind < 0.18 ? 'family' : pop + 2 <= 56 && rollKind < 0.46 ? 'couple' : 'single';
+    const kind: 'single' | 'couple' | 'family' = pop + 3 <= rules.arrivalGroupCap && rollKind < 0.18 ? 'family' : pop + 2 <= rules.arrivalGroupCap && rollKind < 0.46 ? 'couple' : 'single';
     const hh = createHousehold(world, world.rng);
     const group: Person[] = [];
     const arrive = (age: number, sex: 'f' | 'm' | undefined, parents: number[] | undefined, dx: number, dy: number): Person => {

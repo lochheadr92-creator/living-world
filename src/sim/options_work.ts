@@ -1,6 +1,7 @@
 import { newActivity } from './activities';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
-import { repairMaterial } from './act_build';
+import { openSitesNear, repairMaterial } from './act_build';
+import { rulesOf, within } from './rules';
 import { depositLead } from './production';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -60,6 +61,15 @@ export function nightMult(ctx: Ctx): number {
 export function weatherMult(ctx: Ctx): number {
   const w = ctx.world.weather;
   return 1 - 0.55 * w.storm * traitMods(ctx.p).caution - 0.15 * w.rain * traitMods(ctx.p).caution;
+}
+
+/**
+ * Where this person's settlement is, for the rules that count things "in the same settlement" (rules.ts): their home, or the camp if
+ * they have none. With the ordinary rules that radius is the whole world, so this makes no difference.
+ */
+export function settlementAnchor(ctx: Ctx): { x: number; y: number } {
+  const home = ctx.home;
+  return home ? { x: home.x + home.w / 2, y: home.y + home.h / 2 } : { x: ctx.world.camp.x, y: ctx.world.camp.y };
 }
 
 export function friendlyTo(ctx: Ctx, hhId: number): number {
@@ -527,7 +537,9 @@ function optPlanBuild(ctx: Ctx): void {
   const mySites = beliefsByKind(p, ['site']).filter((b) => b.hh === hh.id);
   if (mySites.length > 0) return;
   if (world.sites.filter((s) => s.hhId === hh.id).length > 0) return; // someone in my household already started one
-  if (world.sites.length >= 4) return;
+  const rules = rulesOf(world);
+  const anchor = settlementAnchor(ctx);
+  if (openSitesNear(world, anchor) >= rules.maxOpenSites) return;
   const hs = hhState(ctx);
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
@@ -602,9 +614,11 @@ function optPlanBuild(ctx: Ctx): void {
     }
   }
   // shared storehouse, once the settlement has a few solid homes
-  const huts = world.buildings.filter((b) => isSolidHome(b.type)).length;
-  const hasStore = beliefsByKind(p, ['building']).some((b) => b.btype === 'storehouse') || beliefsByKind(p, ['site']).some((b) => b.btype === 'storehouse');
-  if (!hasStore && huts >= 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse')) {
+  // (with scaled rules, "the settlement" is what lies within the settlement radius; with the ordinary rules it is the whole world)
+  const sameSettlement = (x: number, y: number): boolean => within(rules.facilityRadius, anchor.x, anchor.y, x, y);
+  const huts = world.buildings.filter((b) => isSolidHome(b.type) && sameSettlement(b.x + b.w / 2, b.y + b.h / 2)).length;
+  const hasStore = beliefsByKind(p, ['building']).some((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y)) || beliefsByKind(p, ['site']).some((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y));
+  if (!hasStore && huts >= 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
     const spirit = (p.traits.generosity + p.traits.sociability + p.traits.diligence) / 3;
     if (hs.shortage < 0.5 && spirit > 0.46) tryPlan('storehouse', 8 + 22 * spirit, 'a shared storehouse for the settlement');
   }
