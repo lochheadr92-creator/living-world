@@ -349,6 +349,9 @@ change it for. Raising the project limit would put more projects on the same few
   after: scavenges 2,236 → 1,130 (−49%), total scavenge pause 13.1–14.7 s → 9.2–11.7 s, total major-collection pause 684–897 ms →
   339–630 ms (their number, 30, did not change), mean ms/tick 19.4–22.2 → 17.1–18.1, worst tick 599–654 ms → 542–554 ms (the first tick). The worst tick after
   the first, by CPU time, fell from a median of 204 ms to 165 ms but the two ranges overlap, so that is not claimed.
+* **Quiet machine, everything in this pass together** (base commit of PR #6 against this branch, alternating, three runs each, arrivals off,
+  both ending in the same state hash): Large, 12 days, mean ms/tick 5.39–5.61 → 4.72–4.89 (−15%; worst tick 108–149 → 136–155 ms: not
+  distinguishable); Huge, 3 days, 17.15–17.32 → 14.80–15.23 (−13%), worst tick 269–367 → 249–265 ms, lower in each of the three pairs.
 * **Left**: belief snapshots (57% of what is now allocated) — replacing a belief in place instead of making a new one would change object
   identity, and beliefs are copied around by hearsay; not attempted.
 
@@ -420,21 +423,25 @@ construction sites pinned at 3–4 — see the rule limits below.
 
 Read directly from the code (verified):
 
-* `src/sim/lifecycle.ts` — immigration stops at 54 people; conception stops above 64 (the variable named `adultsAlive` counts everyone).
+* `src/sim/lifecycle.ts` — immigration stops at 54 people; conception stops above 64 (the variable named `adultsAlive` counts everyone); one
+  group of travellers per 6,000 ticks for the whole world (scaled by `rules.arrivalSpacing` in the larger worlds).
 * `src/sim/act_build.ts` `siteConflict` — one of each workshop, hall, granary and storehouse in the *whole world*; `src/sim/options_work.ts`
   `optPlanBuild` — at most four open sites in the world and one per household.
 * `src/sim/worldgen.ts` — in the ordinary world, three clay pits, two outcrops and two ore veins per map, finite; three wolves (five when
   harsh), placed only at generation; resource clusters, wolf dens and water placed at fixed distances from one camp. The larger worlds repeat
   this per camp, scaled to its founders; deposits are still finite and wolves are still never replaced.
 * `src/sim/needs.ts` — `shelterAt` and `fireWarmth` scan all buildings for each person each tick.
-* `src/sim/wildlife.ts` `moveWolf` — a wolf whose path search returns null searches again on the next tick.
+* `src/sim/wildlife.ts` `moveWolf` — a wolf picks a roaming goal that is only checked to be a walkable tile, not a reachable one. (Its repeated
+  failed searches are no longer made: see the notes on path failures.)
 * `src/sim/meals.ts` — the meal list is trimmed to 60 by dropping the oldest, whether or not it is still active.
 * `src/sim/optutil.ts` `foodCount` does not count bread.
 
-Reported by code review but not independently re-read: per-person `explored` arrays of `W×H` bytes; relations created for every pair of
-founders; beliefs that are never forgotten; `friendlyTo` / `repairStake` scanning every person per known foreign home; terrain redrawn every frame; the tick clock capped by count rather than by time. (localStorage saves that would
-exceed the browser quota at scale: measured and addressed, see the saving section.)
+Reported by code review but not independently re-read: per-person `explored` arrays of `W×H` bytes (16 MB in memory for 250 people; the save
+stores them as runs); relations created for every pair of founders; beliefs that are never forgotten (68,000 at day 3 in Huge, and the largest
+part of a save and of what the simulation allocates); `friendlyTo` / `repairStake` scanning every person per known foreign home; terrain
+redrawn every frame; the tick clock capped by count rather than by time. (localStorage saves that would exceed the browser quota at scale:
+measured and addressed, see the saving section.)
 
 The limits on settlement size (first group above) are now a rule set, the use of `world.camp` is now a list of settlements (both described
-above), and the weather-shelter bug is fixed. None of the rest has been changed: whether and how to change each is a decision about the rules of
+above), the weather-shelter bug is fixed, a Huge world can be saved at any day, and the repeated failed searches are skipped. None of the rest has been changed: whether and how to change each is a decision about the rules of
 the world, not about measurement.
