@@ -6,6 +6,7 @@ import { releaseClaims, weightOf } from './economy';
 import { addLog, setResult } from './events';
 import { findPath, terrainSpeed, tileCost } from './pathfinding';
 import { hashUnit } from './rng';
+import { rulesOf } from './rules';
 import { distToFootprint, entityPos, isWalkable } from './registry';
 import type { Activity, ActivityKind, Entity, NeedKey, Person, PoseKind, World } from './types';
 import { clamp, turnToward } from './util';
@@ -169,6 +170,10 @@ function wearTile(world: World, x: number, y: number): void {
 
 type TravelResult = 'moving' | 'arrived' | 'blocked';
 
+/** why a trip is given up when the path finder finds no way (endActivity treats these two as "unreachable") */
+const NO_WAY = 'no way to get there';
+const NO_WAY_TO_PERSON = 'cannot reach them';
+
 /**
  * Open ground within talking distance of a person, nearest to the walker first. The usual place to stand beside someone is
  * sometimes built over or boxed in (asleep between three lean-tos); any open ground close by will do for a word or a visit.
@@ -215,7 +220,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
   if (a.path.length === 0 && a.pi === 0 && a.pathTries === 0) {
     a.pathTries = 1;
     if (!planPath(world, p, a)) {
-      a.blocked = 'no way to get there';
+      a.blocked = NO_WAY;
       return 'blocked';
     }
   }
@@ -237,7 +242,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
         a.tx = sighted.x;
         a.ty = sighted.y;
         if (!planPath(world, p, a)) {
-          a.blocked = 'cannot reach them';
+          a.blocked = NO_WAY_TO_PERSON;
           return 'blocked';
         }
       }
@@ -328,7 +333,11 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   if (h?.onEnd) h.onEnd(world, p, a, outcome, detail);
   // anti-thrash: an option that just failed outright (or achieved nothing) is not re-picked straight away
   const optKey = a.data.optKey as string | undefined;
-  if (optKey && (outcome === 'failed' || (outcome === 'partial' && a.cycle === 0 && a.progress < 4))) p.cooldowns['opt:' + optKey] = world.tick + 80;
+  if (optKey && (outcome === 'failed' || (outcome === 'partial' && a.cycle === 0 && a.progress < 4))) {
+    // one that failed for want of any way there is not worth another flood of the map straight away, in a world that asks for that
+    const noWay = outcome === 'failed' && (detail === NO_WAY || detail === NO_WAY_TO_PERSON);
+    p.cooldowns['opt:' + optKey] = world.tick + (noWay ? rulesOf(world).unreachableCooldown : 80);
+  }
   if (a.kind !== 'converse' || outcome !== 'success') setResult(world, p, a.label, outcome, detail);
   if (outcome === 'failed' && !a.data.logged) addLog(world, p, 'work', `Gave up “${a.label}”: ${detail}.`);
   if (p.pose !== 'sleep' || outcome !== 'interrupted') p.pose = 'stand';

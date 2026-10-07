@@ -1,4 +1,5 @@
 import { addEvent, addFx, addLog } from './events';
+import { rulesOf } from './rules';
 import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
@@ -57,7 +58,10 @@ function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number
     return;
   }
   const goalMoved = Math.hypot(a.pathGoalX - tx, a.pathGoalY - ty) > 2.2;
-  if (a.pi >= a.path.length || goalMoved || world.tick - a.pathAt > 90) {
+  // a search that found nothing leaves an empty path: in a world that asks for it, do not repeat it for the same goal at once
+  const backoff = rulesOf(world).wolfRetryAfterFail;
+  const failedRecently = backoff > 0 && a.path.length === 0 && !goalMoved && world.tick - a.pathAt < backoff;
+  if (!failedRecently && (a.pi >= a.path.length || goalMoved || world.tick - a.pathAt > 90)) {
     a.pathAt = world.tick;
     a.pathGoalX = tx;
     a.pathGoalY = ty;

@@ -1,4 +1,4 @@
-// The numbers that decide how big a settlement is allowed to get, gathered in one place.
+// The numbers that decide how big a settlement is allowed to get (and what a failed trip may cost), gathered in one place.
 //
 // The ordinary world was tuned for about 28 founders and a settlement of at most a few dozen. Several limits are written in terms of
 // that: immigration stops at 54 people, conception above 64, only four building sites may be open at once, and there is exactly one
@@ -38,6 +38,14 @@ export interface Rules {
   facilityRadius: number;
   /** open sites are counted within this many tiles of where a new one would go; Infinity means the whole world */
   siteRadius: number;
+  /**
+   * How a failed trip is paid for. A search that finds no way floods everything it can reach before it gives up, which on a large map is
+   * thousands of tiles each time (docs/SCALING.md), so a world that is large can ask not to repeat one:
+   * ticks a wolf whose search for a goal found nothing waits before searching for that goal again (0: it searches every tick) …
+   */
+  wolfRetryAfterFail: number;
+  /** … and ticks before a person picks again an option that failed because there was no way to get there (an option that failed otherwise: always 80) */
+  unreachableCooldown: number;
 }
 
 export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
@@ -51,6 +59,8 @@ export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
   projectsRaisedAt: 55,
   facilityRadius: Infinity,
   siteRadius: Infinity,
+  wolfRetryAfterFail: 0,
+  unreachableCooldown: 80,
 });
 
 /**
@@ -72,6 +82,8 @@ export function scaledRules(founders: number, settlementFounders: number = found
     projectsRaisedAt: up(o.projectsRaisedAt, founders),
     facilityRadius: SETTLEMENT_RADIUS,
     siteRadius: SETTLEMENT_RADIUS,
+    wolfRetryAfterFail: 30,
+    unreachableCooldown: 600,
   };
 }
 
