@@ -1,12 +1,17 @@
-// Optional save / load of the whole world into localStorage (compressed JSON).
+// Optional save / load of the whole world (compressed JSON): into IndexedDB where the browser has it, which has no 5 MB cap, and
+// into localStorage where it does not (or where writing to it fails). A small description of the save, which the menu reads at once,
+// always lives in localStorage.
 // The world is plain data (typed arrays, Maps, Sets and the RNG state are the only special cases).
 import { hashString, RNG } from '../sim/rng';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
 import type { Settings, World } from '../sim/types';
 import type { Game } from './game';
 
-const KEY = 'living-world:save:v1';
+const KEY = 'living-world:save:v1'; // localStorage: {settings, data: base64 gzip}; what every save was before IndexedDB, and the fallback
 const META = 'living-world:save-meta:v1';
+const DB_NAME = 'living-world';
+const DB_STORE = 'saves';
+const DB_KEY = 'current';
 // 2: a year of age is now twelve days long (saves from before measured it in single days)
 // 3: workshops, tools, carts, shared meals, worries and grievances are part of the world (older saves lack them and are refused)
 // 4: each person's explored mask is stored as run lengths, not one base64 byte per tile, and the people are stored field by field
@@ -235,24 +240,25 @@ export function deserializeWorld(json: string): World {
   return w;
 }
 
-async function gzip(text: string): Promise<string> {
+async function gzipBytes(text: string): Promise<Uint8Array> {
   const cs = new CompressionStream('gzip');
   const writer = cs.writable.getWriter();
-  void writer.write(new TextEncoder().encode(text));
-  void writer.close();
-  const buf = await new Response(cs.readable).arrayBuffer();
-  return bytesToB64(new Uint8Array(buf));
+  // a failure reaches the caller through the read below; the writer's own promises would only report it a second time, unhandled
+  writer.write(new TextEncoder().encode(text)).catch(() => {});
+  writer.close().catch(() => {});
+  return new Uint8Array(await new Response(cs.readable).arrayBuffer());
 }
 
-async function gunzip(b64: string): Promise<string> {
+async function gunzipBytes(bytes: Uint8Array): Promise<string> {
   const ds = new DecompressionStream('gzip');
   const writer = ds.writable.getWriter();
-  const bytes = b64ToBytes(b64);
-  void writer.write(bytes as unknown as BufferSource);
-  void writer.close();
+  writer.write(bytes as unknown as BufferSource).catch(() => {});
+  writer.close().catch(() => {});
   const buf = await new Response(ds.readable).arrayBuffer();
   return new TextDecoder().decode(buf);
 }
+
+export type SaveWhere = 'indexeddb' | 'localstorage';
 
 export interface SaveInfo {
   seed: string;
@@ -261,6 +267,17 @@ export interface SaveInfo {
   population: number;
   savedAt: number;
   scene: string;
+  /** where the world itself is kept; absent in saves made before IndexedDB was used (those are in localStorage) */
+  where?: SaveWhere;
+  /** size of the compressed world in bytes */
+  bytes?: number;
+}
+
+/** what a save is, as far as the code that writes and reads it is concerned */
+export interface SaveTarget {
+  world: World;
+  settings: Settings;
+  restoreWorld(world: World, settings: Settings): void;
 }
 
 export function savedGameInfo(): SaveInfo | null {
@@ -276,12 +293,76 @@ export function hasSavedGame(): boolean {
   return savedGameInfo() !== null;
 }
 
-/** Save the current world. Resolves false if storage is unavailable or too small. */
-export async function saveGame(game: Game): Promise<boolean> {
+// ── IndexedDB: one record holding the settings and the gzip bytes ──
+interface DbRecord {
+  settings: Settings;
+  gz: Uint8Array;
+}
+
+function openDb(): Promise<IDBDatabase> {
+  return new Promise((resolve, reject) => {
+    if (typeof indexedDB === 'undefined') {
+      reject(new Error('no IndexedDB'));
+      return;
+    }
+    const req = indexedDB.open(DB_NAME, 1);
+    req.onupgradeneeded = () => {
+      if (!req.result.objectStoreNames.contains(DB_STORE)) req.result.createObjectStore(DB_STORE);
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error ?? new Error('IndexedDB open failed'));
+    req.onblocked = () => reject(new Error('IndexedDB open blocked'));
+  });
+}
+
+/** resolves when the transaction has committed (not merely when the request succeeded): only then is the record safely stored */
+async function dbPut(rec: DbRecord): Promise<void> {
+  const db = await openDb();
   try {
-    const text = serializeWorld(game.world);
-    const packed = await gzip(text);
-    localStorage.setItem(KEY, JSON.stringify({ settings: game.settings, data: packed }));
+    await new Promise<void>((resolve, reject) => {
+      const tx = db.transaction(DB_STORE, 'readwrite');
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error ?? new Error('IndexedDB write failed'));
+      tx.onabort = () => reject(tx.error ?? new Error('IndexedDB write aborted'));
+      tx.objectStore(DB_STORE).put(rec, DB_KEY);
+    });
+  } finally {
+    db.close();
+  }
+}
+
+async function dbGet(): Promise<DbRecord | null> {
+  const db = await openDb();
+  try {
+    return await new Promise<DbRecord | null>((resolve, reject) => {
+      const req = db.transaction(DB_STORE, 'readonly').objectStore(DB_STORE).get(DB_KEY);
+      req.onsuccess = () => resolve((req.result as DbRecord | undefined) ?? null);
+      req.onerror = () => reject(req.error ?? new Error('IndexedDB read failed'));
+    });
+  } finally {
+    db.close();
+  }
+}
+
+/**
+ * Save the current world. Resolves false (never throws) if neither IndexedDB nor localStorage will take it; the previous save, if any, is then still there.
+ * The world goes to IndexedDB when that works; if it does not, to localStorage, as every save used to. The description is written last,
+ * so a save that did not complete is never described; once it is, the older localStorage copy is dropped to give its space back.
+ */
+export async function saveGame(game: SaveTarget): Promise<boolean> {
+  try {
+    const bytes = await gzipBytes(serializeWorld(game.world));
+    let where: SaveWhere | null = null;
+    try {
+      await dbPut({ settings: game.settings, gz: bytes });
+      where = 'indexeddb';
+    } catch {
+      where = null;
+    }
+    if (!where) {
+      localStorage.setItem(KEY, JSON.stringify({ settings: game.settings, data: bytesToB64(bytes) }));
+      where = 'localstorage';
+    }
     const info: SaveInfo = {
       seed: game.settings.seed,
       day: Math.floor(game.world.tick / 2400) + 1,
@@ -289,22 +370,64 @@ export async function saveGame(game: Game): Promise<boolean> {
       population: game.world.persons.length,
       savedAt: Date.now(),
       scene: game.settings.scene,
+      where,
+      bytes: bytes.length,
     };
-    localStorage.setItem(META, JSON.stringify(info));
+    const describe = JSON.stringify(info);
+    try {
+      localStorage.setItem(META, describe);
+    } catch (e) {
+      // localStorage may be full precisely because an older save still sits in it. The new world is safely in IndexedDB, so that copy is
+      // what to give up; without it there is no honest way to describe the save, and the old one stays.
+      if (where !== 'indexeddb') throw e;
+      localStorage.removeItem(KEY);
+      localStorage.setItem(META, describe);
+    }
+    if (where === 'indexeddb') {
+      try {
+        localStorage.removeItem(KEY);
+      } catch {
+        // storage is blocked: the description already points at the new copy
+      }
+    }
     return true;
   } catch {
     return false;
   }
 }
 
-/** Replace the running world with the saved one. Resolves false if there is none or it cannot be read. */
-export async function loadGame(game: Game): Promise<boolean> {
-  try {
+/** the settings and world text of whichever copy the description points at, then the other one */
+async function readSaved(info: SaveInfo | null): Promise<{ settings: Settings; text: string } | null> {
+  const fromDb = async () => {
+    const rec = await dbGet();
+    return rec ? { settings: rec.settings, text: await gunzipBytes(rec.gz) } : null;
+  };
+  const fromLocal = async () => {
     const raw = localStorage.getItem(KEY);
-    if (!raw) return false;
+    if (!raw) return null;
     const { settings, data } = JSON.parse(raw) as { settings: Settings; data: string };
-    const world = deserializeWorld(await gunzip(data));
-    game.restoreWorld(world, settings);
+    return { settings, text: await gunzipBytes(b64ToBytes(data)) };
+  };
+  // a save with no `where` was written before IndexedDB was used, and is in localStorage
+  const order = info?.where === 'indexeddb' ? [fromDb, fromLocal] : [fromLocal, fromDb];
+  for (const read of order) {
+    try {
+      const got = await read();
+      if (got) return got;
+    } catch {
+      // try the other copy
+    }
+  }
+  return null;
+}
+
+/** Replace the running world with the saved one. Resolves false if there is none or it cannot be read. */
+export async function loadGame(game: SaveTarget): Promise<boolean> {
+  try {
+    const got = await readSaved(savedGameInfo());
+    if (!got) return false;
+    const world = deserializeWorld(got.text);
+    game.restoreWorld(world, got.settings);
     return true;
   } catch {
     return false;
