@@ -1,6 +1,7 @@
 import { fireNear, nearestHub } from './settlements';
+import { mourn, think } from './mood';
 import { abortActivity, newActivity, startActivity } from './activities';
-import { AGE_OLD_DEATH_START, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
+import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
@@ -159,6 +160,8 @@ export function giveBirth(world: World, mother: Person): void {
     b.trust = 60;
   }
   addEvent(world, 'life', `${baby.name} was born to ${mother.name}${father ? ' and ' + father.name : ''}.`, [baby.id, mother.id], mother.x, mother.y);
+  think(world, mother, 'birth', 25, DAY * 2, `${baby.name} was born`);
+  if (father) think(world, father, 'birth', 20, DAY * 2, `${baby.name} was born`);
   addLog(world, mother, 'life', `${baby.name} was born.`);
   if (father) addLog(world, father, 'life', `${baby.name} was born.`);
   mother.speech = { text: 'Welcome, little one.', until: world.tick + 90, kind: 'happy' };
@@ -181,6 +184,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const age = Math.floor(ageYears(world, p));
   if (p.cartId) unhitch(world, p);
   toolsOnDeath(world, p);
+  mourn(world, p);
   socialOnDeath(world, p);
   dropNear(world, p.x, p.y, p.inv, `${p.name}'s belongings`, p.id);
   p.inv = {};

@@ -1,4 +1,5 @@
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
+import { think } from './mood';
 import type { WorkResult } from './activities';
 import { DAY, NUTRITION, workRules } from './constants';
 import { dropNear } from './buildings';
@@ -471,6 +472,7 @@ function finishMeal(world: World, m: Meal): void {
     }
   for (const a of ate) {
     a.needs.social = Math.min(100, a.needs.social + 18);
+    think(world, a, 'shared_meal', 6, DAY / 2, 'sat down to a shared meal');
     addLog(world, a, 'social', `Shared a meal at ${m.placeName} with ${ate.filter((x) => x !== a).map((x) => x.name).slice(0, 3).join(', ') || 'no one else'}.`);
   }
   if (host && ate.length >= 2) addEvent(world, 'social', `${host.name} hosted a shared meal at ${m.placeName}: ${ate.length} sat down together.`, ate.map((x) => x.id).slice(0, 4), m.x, m.y);

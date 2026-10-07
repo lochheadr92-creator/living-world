@@ -1,4 +1,5 @@
 import { DAY } from './constants';
+import { quarrelFactor } from './mood';
 import { addEvent, addLog } from './events';
 import { relOf } from './relations';
 import type { GrievanceCause, Person, World } from './types';
@@ -109,7 +110,7 @@ export function quarrelDamper(world: World, a: Person, b: Person): number {
   const r = a.relations[b.id];
   if (!r) return 1;
   if (r.grievance) return 1;
-  return world.tick - r.settledAt < SETTLED_TRUCE ? 0.2 : 1;
+  return (world.tick - r.settledAt < SETTLED_TRUCE ? 0.2 : 1) * quarrelFactor(world, a);
 }
 
 /** Does this person have any reason to seek the other out to make amends? Only an open grievance that they have not given up on. */

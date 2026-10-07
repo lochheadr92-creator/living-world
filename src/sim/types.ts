@@ -429,6 +429,23 @@ export interface Person {
   concerns: Concern[];
   /** the last conversation or quarrel that ended, kept apart from whatever is going on now */
   lastInteraction: InteractionRecord | null;
+  /** how they are doing, summed from what has happened to them (rich dynamics only; absent otherwise) */
+  mood?: Mood;
+}
+
+/** One thing that is weighing on, or lifting, a person for a while. */
+export interface Thought {
+  kind: string;
+  /** signed: its effect on mood while fresh; it fades to nothing at `until` */
+  value: number;
+  since: number;
+  until: number;
+  why: string;
+}
+export interface Mood {
+  /** -100 (miserable) .. 100 (buoyant); refreshed every few seconds */
+  level: number;
+  thoughts: Thought[];
 }
 
 export interface InteractionRecord {
@@ -878,6 +895,8 @@ export interface Settings {
   profile?: 'large' | 'huge';
   /** how many of the founders live together in one settlement, for the limits that follow a settlement (rules.ts); absent means all of them */
   settlementFounders?: number;
+  /** 'rich': people have a mood that changes what they do, and lean seasons happen (mood.ts, hardship.ts); absent means 'authored', the world as it was */
+  dynamics?: 'authored' | 'rich';
 }
 /** 'ordinary': the village-sized limits the world was tuned for. 'scaled': the same limits as ratios of the founding population, local to a settlement. */
 export type RuleSet = 'ordinary' | 'scaled';
@@ -946,6 +965,8 @@ export interface World {
   /** names already used, so births / arrivals don't duplicate */
   usedNames: Set<string>;
   stats: Record<string, number>;
+  /** a lean season under way (hardship.ts); only in worlds with rich dynamics */
+  hardship?: { kind: 'lean'; since: number; until: number };
   /** optional hooks (tests / debug). Never required by the simulation. */
   hooks?: {
     onActivityStart?: (p: Person, a: Activity) => void;

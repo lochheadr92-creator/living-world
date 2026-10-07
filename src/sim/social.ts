@@ -1,3 +1,4 @@
+import { think } from './mood';
 import {
   canInterruptForTalk,
   endActivity,
@@ -196,6 +197,7 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   receiver.stats.received += 1;
   addLog(world, giver, 'social', `Gave ${txt} to ${receiver.name}${mode === 'care' ? ' (looking after them)' : ''}.`);
   addLog(world, receiver, 'social', `${giver.name} gave me ${txt}.`);
+  think(world, receiver, 'gift:' + giver.id, 8, Math.round(DAY * 0.7), `${giver.name} gave me ${txt}`);
   witness(world, 'gift', giver, receiver, receiver.x, receiver.y);
   const notable = sev > 0.35 || giver.hhId !== receiver.hhId;
   if (notable && mode !== 'care') addEvent(world, 'social', `${giver.name} gave ${txt} to ${receiver.name}.`, [giver.id, receiver.id], receiver.x, receiver.y);
@@ -1273,6 +1275,8 @@ export function startArgument(world: World, a: Person, b: Person, why: string, c
   addLog(world, a, 'social', `Argued with ${b.name} over ${why}.`);
   addLog(world, b, 'social', `Argued with ${a.name} over ${why}.`);
   addFx(world, 'anger', (a.x + b.x) / 2, (a.y + b.y) / 2, 0);
+  think(world, a, 'argued:' + b.id, -12, DAY, `argued with ${b.name}`);
+  think(world, b, 'argued:' + a.id, -12, DAY, `argued with ${a.name}`);
   witness(world, 'quarrel', a, b, a.x, a.y);
 }
 

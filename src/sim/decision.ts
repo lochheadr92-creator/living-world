@@ -1,4 +1,5 @@
 import { endActivity, startActivity } from './activities';
+import { moodWeight } from './mood';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
@@ -74,7 +75,8 @@ export function rankOptions(ctx: Ctx): Option[] {
   // do not repeat something that has just fallen through
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
-  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : o.util + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
+  const moody = p.mood !== undefined && world.settings.dynamics === 'rich';
+  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }

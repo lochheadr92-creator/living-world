@@ -1,4 +1,5 @@
 import { nearestHub } from './settlements';
+import { growthRate } from './hardship';
 import { CARE_DECAY, GROW_TICKS, RIPE_ROT_TICKS } from './constants';
 import { ledgerCreate, ledgerSpoil } from './economy';
 import { addEvent, addFx } from './events';
@@ -42,7 +43,7 @@ export function updatePlots(world: World): void {
       pl.careAcc += (pl.care - pl.careAcc) * 0.002;
       const lightF = 0.25 + 0.75 * world.light;
       const warm = w.temp < 4 ? 0.4 : 1;
-      pl.progress += (1 / GROW_TICKS) * (0.45 + 0.55 * pl.care) * lightF * warm;
+      pl.progress += (1 / GROW_TICKS) * (0.45 + 0.55 * pl.care) * lightF * warm * growthRate(world);
       if (pl.progress >= 1) {
         pl.progress = 1;
         pl.state = 'ripe';
