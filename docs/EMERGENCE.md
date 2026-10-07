@@ -116,6 +116,21 @@ nudge). The report now compares each branch with the mean of the control and the
 workplaces and buildings effects and leaves only plots. Results quoted earlier in this file used the control alone; the large ones
 (random choice, no wild food) are far outside the noise either way.
 
+**24 seeds (Large, day 0 to 15; run on the 24-core machine; report made with the control-only reference, so read the control-referenced
+differences with the correction above in mind).** Against the control: plots 91.1 → 102.9 (+11.8, higher in 22 of 24), workplaces 19.2 →
+15.2 (-4.0, lower in 21), buildings 97.3 → 92.4 (-4.9, lower in 22), first hall 9.1 → 12.0 days (+2.9, later in 19), people below -25 mood
+0 → 0.8 (+0.8, higher in 8 and lower in none); people 104.0 → 104.0, deaths 0.4 → 0.6 (interval includes 0), mean mood -1.2 (includes 0). The
+one-draw nudge in the same run is itself 1.5 below the control on workplaces and buildings, so the control is high by about that much;
+re-referenced to the mean of control and nudge (approximate, intervals not recomputed) the changes are about workplaces -3.3, buildings -4.1,
+plots +12.4, hall +2.7 days. The direction and consistency of those four hold; their size is a little smaller than quoted against the control.
+
+**Where the effort goes (VERIFIED, 4 seeds x 15 days, activity starts, authored against rich).** gather +29%, rest +39%, warm +23%, flee +78%,
+till +31%; build -27%, plan a site -45%, craft -46%, operate a workshop -45%, tend -36%, plant -39%, harvest -55% (less ripe), withdraw
+from a store -69%, deposit -39%, wander -36%; give, eat and socialise unchanged. Plots (419 against 374) and buildings (357 against 387) summed
+over the four seeds agree with the 24-seed direction. LIKELY, not separated: that the pressure of want and danger draws labour from building
+to food, warmth and safety, so development comes later while survival is intact; the mood weights and the stakes both act in this run and
+the experiment that tells them apart (stakes without the mood effects, and the reverse) has not been done.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures
