@@ -1616,6 +1616,15 @@ kbd {
   font-weight: 600;
 }
 
+/* what is on a person's mind (rich worlds) */
+.thoughts { margin-top: 12px; }
+.thought-list { display: grid; gap: 3px; }
+.thought { display: flex; gap: 8px; align-items: baseline; font-size: 12px; }
+.thought.none { color: var(--muted, #8a8f98); }
+.thought-v { min-width: 30px; text-align: right; font-weight: 600; }
+.thought-v.neg { color: var(--danger); }
+.thought-v.pos { color: var(--good); }
+
 /* needs */
 .needs {
   display: grid;

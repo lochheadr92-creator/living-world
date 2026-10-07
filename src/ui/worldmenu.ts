@@ -146,6 +146,10 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     ctx.prefs.harsh = v;
     ctx.savePrefs();
   });
+  const rich = makeSwitch('Rich dynamics', 'Mood that changes choices; lean seasons · next new world', game.settings.dynamics === 'rich', (v) => {
+    ctx.prefs.rich = v;
+    ctx.savePrefs();
+  });
   const arrivals = makeSwitch('Arrivals', 'Travellers may join · next new world', game.settings.immigration, (v) => {
     ctx.prefs.immigration = v;
     ctx.savePrefs();
@@ -194,7 +198,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         'data-scene': s.id,
         'aria-label': `${s.title}. ${s.blurb}`,
         onClick: () => {
-          if (s.id === 'natural') game.restart(restartSettings(size, game.settings.seed, { harsh: game.settings.harsh, immigration: game.settings.immigration }));
+          if (s.id === 'natural') game.restart(restartSettings(size, game.settings.seed, { harsh: game.settings.harsh, immigration: game.settings.immigration, dynamics: game.settings.dynamics }));
           else game.loadScene(s.id);
           close();
         },
@@ -228,6 +232,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       h('div', { class: 'cap wm-lab', id: 'lw-size-label' }, 'World size · next new world'),
       h('div', { class: 'wm-scenes', role: 'radiogroup', 'aria-labelledby': 'lw-size-label' }, sizeBtns),
       harsh.el,
+      rich.el,
       arrivals.el,
     ),
     h('section', { class: 'wm-sec' }, h('div', { class: 'cap wm-lab' }, 'Scenes'), h('div', { class: 'wm-scenes' }, sceneBtns)),
@@ -241,8 +246,9 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     const chosen = size;
     ctx.prefs.harsh = harsh.input.checked;
     ctx.prefs.immigration = arrivals.input.checked;
+    ctx.prefs.rich = rich.input.checked;
     const start = () => {
-      game.restart(restartSettings(chosen, seed, { harsh: harsh.input.checked, immigration: arrivals.input.checked }));
+      game.restart(restartSettings(chosen, seed, { harsh: harsh.input.checked, immigration: arrivals.input.checked, dynamics: rich.input.checked ? 'rich' : 'authored' }));
       input.value = '';
       newBtn.disabled = false;
       newLabel.textContent = 'New world';
@@ -364,6 +370,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         curSeed.textContent = game.settings.seed;
         harsh.input.checked = game.settings.harsh;
         arrivals.input.checked = game.settings.immigration;
+        rich.input.checked = game.settings.dynamics === 'rich';
         size = game.settings.profile ?? 'normal';
         refreshSizes();
       }

@@ -5,6 +5,7 @@ import { DAY } from '../src/sim/constants';
 import { updateHardship, regrowRate, growthRate } from '../src/sim/hardship';
 import { killPerson } from '../src/sim/lifecycle';
 import { moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
+import { describePerson } from '../src/sim/inspect';
 import { hashWorld } from '../src/sim/world';
 import { natural, run } from './helpers/util';
 
@@ -110,5 +111,31 @@ describe('rich dynamics', () => {
     updateHardship(w);
     expect(w.hardship).toBeUndefined();
     expect(w.events.some((e) => e.text.startsWith('A lean season begins'))).toBe(true);
+  });
+
+  it('shows a person\'s thoughts in the inspector, and only in a rich world', () => {
+    const off = natural('rich-view');
+    run(off, 300);
+    expect(describePerson(off, off.persons[0].id)!.thoughts).toBeNull();
+    const w = rich('rich-view');
+    run(w, 300);
+    const p = w.persons.find((x) => x.alive)!;
+    const calm = describePerson(w, p.id)!;
+    expect(calm.thoughts).not.toBeNull();
+    think(w, p, 'bite', -40, 3000, 'was bitten by a wolf');
+    const sore = describePerson(w, p.id)!;
+    expect(sore.thoughts!.some((t) => t.why === 'was bitten by a wolf' && t.value < -30)).toBe(true);
+    expect(sore.mood).toBeLessThan(calm.mood);
+  });
+
+  it('inspecting a rich world never perturbs it', () => {
+    const a = rich('rich-quiet');
+    const b = rich('rich-quiet');
+    for (let i = 0; i < 4; i++) {
+      run(a, 200);
+      run(b, 200);
+      for (const p of b.persons) describePerson(b, p.id);
+    }
+    expect(hashWorld(b)).toBe(hashWorld(a));
   });
 });
