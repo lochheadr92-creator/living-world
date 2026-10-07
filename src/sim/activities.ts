@@ -187,14 +187,14 @@ function groundBeside(world: World, p: Person, a: Activity): { x: number; y: num
   }
   cands.sort((m, n) => m.d - n.d);
   for (const c of cands.slice(0, 5)) {
-    const path = findPath(world, p.x, p.y, c.x, c.y, { exact: { x: c.x, y: c.y }, cart: p.cartId !== 0 });
+    const path = findPath(world, p.x, p.y, c.x, c.y, { exact: { x: c.x, y: c.y }, cart: p.cartId !== 0, caller: a.kind + '/beside' });
     if (path) return { x: c.x, y: c.y, path };
   }
   return null;
 }
 
 function planPath(world: World, p: Person, a: Activity): boolean {
-  const path = findPath(world, p.x, p.y, a.spotX, a.spotY, { exact: { x: a.spotX, y: a.spotY }, cart: p.cartId !== 0 });
+  const path = findPath(world, p.x, p.y, a.spotX, a.spotY, { exact: { x: a.spotX, y: a.spotY }, cart: p.cartId !== 0, caller: a.kind });
   if (path === null) {
     if (a.targetType !== 'person') return false;
     const alt = groundBeside(world, p, a);

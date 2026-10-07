@@ -12,8 +12,10 @@ export interface ProbeCounters {
   pathExpanded: number;
   /** searches that returned null */
   pathNull: number;
-  /** of those, the ones that ran out of node budget (so "unreachable" may really mean "too far for the budget") */
+  /** of those, the ones that stopped because they ran out of node budget with tiles still to try ("far", not "unreachable") */
   pathBudgetHit: number;
+  /** of those, the ones that stopped because every tile reachable from the start had been tried: genuinely unreachable (pathNull = pathUnreachable + pathBudgetHit) */
+  pathUnreachable: number;
   /** generateOptions calls (decisions plus periodic reviews plus inspector look-ups) */
   generations: number;
   /** options produced across all generateOptions calls */
@@ -37,6 +39,7 @@ export const COUNTER_KEYS: (keyof ProbeCounters)[] = [
   'pathExpanded',
   'pathNull',
   'pathBudgetHit',
+  'pathUnreachable',
   'generations',
   'optionsGenerated',
   'decisions',
@@ -52,6 +55,7 @@ const zero = (): ProbeCounters => ({
   pathExpanded: 0,
   pathNull: 0,
   pathBudgetHit: 0,
+  pathUnreachable: 0,
   generations: 0,
   optionsGenerated: 0,
   decisions: 0,
@@ -67,10 +71,57 @@ export const probe: ProbeCounters & { on: boolean } = { on: false, ...zero() };
 
 export function probeReset(): void {
   Object.assign(probe, zero());
+  for (const k of Object.keys(pathCells)) delete pathCells[k];
 }
 
 export function probeSnapshot(): ProbeCounters {
   const s = zero();
   for (const k of COUNTER_KEYS) s[k] = probe[k];
   return s;
+}
+
+// ── path searches by who asked and how far the target was ─────────────────────────────────────────────────────────────────
+// A search ends in one of three ways: it found the goal ('ok'), it emptied its open set ('unreachable': nothing it can walk to
+// satisfies the goal), or it hit its node budget with tiles still to try ('budget': the goal may well be reachable, only far).
+// Counted per caller (an activity kind, or the name of another call site) and per straight-line distance from start to target.
+
+export const DIST_BUCKETS = ['<20', '20-40', '40-80', '>80'] as const;
+export type PathOutcome = 'ok' | 'unreachable' | 'budget';
+
+export function distBucket(d: number): number {
+  return d < 20 ? 0 : d < 40 ? 1 : d < 80 ? 2 : 3;
+}
+
+export interface PathCell {
+  ok: number;
+  unreachable: number;
+  budget: number;
+  expandedOk: number;
+  expandedUnreachable: number;
+  expandedBudget: number;
+}
+
+const pathCells: Record<string, PathCell> = {};
+
+/** record one finished search. Called only while `probe.on`. */
+export function probePath(caller: string, dist: number, outcome: PathOutcome, expanded: number): void {
+  const key = caller + '|' + distBucket(dist);
+  const c = (pathCells[key] ??= { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0 });
+  if (outcome === 'ok') {
+    c.ok++;
+    c.expandedOk += expanded;
+  } else if (outcome === 'unreachable') {
+    c.unreachable++;
+    c.expandedUnreachable += expanded;
+  } else {
+    c.budget++;
+    c.expandedBudget += expanded;
+  }
+}
+
+/** copy of the per-caller, per-distance cells, keyed "caller|bucket index" */
+export function probePathCells(): Record<string, PathCell> {
+  const out: Record<string, PathCell> = {};
+  for (const k of Object.keys(pathCells)) out[k] = { ...pathCells[k] };
+  return out;
 }

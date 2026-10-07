@@ -28,7 +28,8 @@ import { WATER_ID_BASE } from '../src/sim/knowledge';
 import { stageOf } from '../src/sim/people';
 import { settingsForProfile } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
-import { COUNTER_KEYS, probe, probeReset, probeSnapshot } from '../src/sim/probe';
+import { COUNTER_KEYS, DIST_BUCKETS, probe, probePathCells, probeReset, probeSnapshot } from '../src/sim/probe';
+import type { PathCell } from '../src/sim/probe';
 import type { ProbeCounters } from '../src/sim/probe';
 import { toolReport } from '../src/sim/toolreg';
 import type { World } from '../src/sim/types';
@@ -262,6 +263,45 @@ check(world);
 probe.on = false;
 const wall = (Date.now() - t0) / 1000;
 
+// path searches: who asked, how far, and how they ended (ok / unreachable = open set emptied / budget = ran out with tiles to try)
+const cells = probePathCells();
+const sumCells = (pick: (caller: string, bucket: number) => boolean): PathCell => {
+  const t: PathCell = { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0 };
+  for (const [key, c] of Object.entries(cells)) {
+    const bar = key.lastIndexOf('|');
+    if (!pick(key.slice(0, bar), Number(key.slice(bar + 1)))) continue;
+    for (const f of Object.keys(t) as (keyof PathCell)[]) t[f] += c[f];
+  }
+  return t;
+};
+const cellLine = (label: string, c: PathCell): string => {
+  const n = c.ok + c.unreachable + c.budget;
+  const exp = c.expandedOk + c.expandedUnreachable + c.expandedBudget;
+  const fail = c.unreachable + c.budget;
+  const p = (v: number, d: number) => (d > 0 ? String(Math.round((v / d) * 1000) / 10) + '%' : '-');
+  return [label.padEnd(24), String(n).padStart(8), p(fail, n).padStart(7), p(c.unreachable, n).padStart(8), p(c.budget, n).padStart(8), String(n ? Math.round(exp / n) : 0).padStart(9), String(c.unreachable ? Math.round(c.expandedUnreachable / c.unreachable) : 0).padStart(9), String(c.budget ? Math.round(c.expandedBudget / c.budget) : 0).padStart(9)].join(' ');
+};
+const pathHead = ['search'.padEnd(24), 'n'.padStart(8), 'failed'.padStart(7), 'unreach.'.padStart(8), 'budget'.padStart(8), 'tiles/call'.padStart(9), 'tiles/unr'.padStart(9), 'tiles/bud'.padStart(9)].join(' ');
+const callers = [...new Set(Object.keys(cells).map((k) => k.slice(0, k.lastIndexOf('|'))))];
+const callerTot = (c: string) => {
+  const t = sumCells((who) => who === c);
+  return t.ok + t.unreachable + t.budget;
+};
+callers.sort((a, b) => callerTot(b) - callerTot(a));
+console.log('\npath searches by caller (failed = unreachable + budget; shares are of that caller\'s searches)');
+console.log(pathHead);
+console.log(cellLine('ALL', sumCells(() => true)));
+for (const c of callers) console.log(cellLine(c, sumCells((who) => who === c)));
+console.log('\npath searches by straight-line distance to the target');
+console.log(pathHead);
+DIST_BUCKETS.forEach((name, b) => console.log(cellLine(name + ' tiles', sumCells((_w, bucket) => bucket === b))));
+const pathBreakdown = {
+  total: sumCells(() => true),
+  byCaller: Object.fromEntries(callers.map((c) => [c, sumCells((who) => who === c)])),
+  byDistance: Object.fromEntries(DIST_BUCKETS.map((name, b) => [name, sumCells((_w, bucket) => bucket === b)])),
+  byCallerAndDistance: cells,
+};
+
 const all = new Float64Array(samples.map((s) => s.msMean)).sort();
 const last = samples[samples.length - 1];
 const summary = {
@@ -282,7 +322,7 @@ const summary = {
 };
 console.log('\nsummary', JSON.stringify(summary, null, 1));
 if (out) {
-  writeFileSync(out, JSON.stringify({ meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
+  writeFileSync(out, JSON.stringify({ pathBreakdown, meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
   console.log('written', out);
 }
 process.exit(failures.length === 0 ? 0 : 1);

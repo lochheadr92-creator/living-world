@@ -299,6 +299,7 @@ export function immigrationTick(world: World): void {
     const gy = hub.y + 3;
     const path = findPath(world, x, y, gx, gy, {
       maxNodes: 9000,
+      caller: 'arrival',
       goalFn: (tx, ty) => Math.hypot(tx + 0.5 - gx, ty + 0.5 - gy) <= 3.2 && isFreeLand(world, tx, ty),
     });
     if (!path || path.length < 2) continue;

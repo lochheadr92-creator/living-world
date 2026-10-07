@@ -1,4 +1,4 @@
-import { probe } from './probe';
+import { probe, probePath } from './probe';
 import { MinHeap } from './util';
 import { T } from './types';
 import type { World } from './types';
@@ -86,6 +86,8 @@ export interface PathOpts {
   exact?: { x: number; y: number };
   /** the walker is pulling a handcart */
   cart?: boolean;
+  /** who is asking; read only by the work counters (src/sim/probe.ts), never by the search */
+  caller?: string;
 }
 
 /**
@@ -127,6 +129,7 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
   heap.push(startI, 0);
   let expanded = 0;
   let goalI = -1;
+  let outOfBudget = false;
 
   while (heap.size > 0) {
     const cur = heap.pop();
@@ -138,7 +141,10 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
       goalI = cur;
       break;
     }
-    if (++expanded > maxNodes) break;
+    if (++expanded > maxNodes) {
+      outOfBudget = true; // stopped with tiles still to try (the one just taken from the open set, and its neighbours)
+      break;
+    }
     for (let k = 0; k < 8; k++) {
       const nx = cx + DX[k];
       const ny = cy + DY[k];
@@ -166,8 +172,10 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
     probe.pathExpanded += expanded;
     if (goalI < 0) {
       probe.pathNull++;
-      if (expanded > maxNodes) probe.pathBudgetHit++;
+      if (outOfBudget) probe.pathBudgetHit++;
+      else probe.pathUnreachable++;
     }
+    probePath(opts.caller ?? 'other', Math.hypot(gx - sx, gy - sy), goalI >= 0 ? 'ok' : outOfBudget ? 'budget' : 'unreachable', expanded);
   }
   if (goalI < 0) return null;
 

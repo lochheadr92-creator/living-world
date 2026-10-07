@@ -61,7 +61,7 @@ function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number
     a.pathAt = world.tick;
     a.pathGoalX = tx;
     a.pathGoalY = ty;
-    const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600 });
+    const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600, caller: 'wolf' });
     a.path = path ?? [];
     a.pi = 0;
     if (!path) {
