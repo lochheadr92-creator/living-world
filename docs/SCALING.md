@@ -116,17 +116,31 @@ camp. Run it: `npx vite-node scripts/bench.ts -- --profile huge --days 3`.
 To watch one in the app, open the world menu (the seed chip) and pick a size under *World size*: **Village** (the ordinary world),
 **Large** or **Huge**. The choice applies to the next *New world* (and to the *Natural world* scene button), is remembered in the browser's
 preferences, and the menu says which size the current world is. The other staged scenes are small hand-built tests and always use the
-ordinary rules. A Huge world takes a moment to build, so the button shows "Building the world…" first. Nothing in a Huge world stops by
-itself: it is only *saving* that stops working, because a save is held in the browser's `localStorage` (about 5 million characters).
-Measured on seed `meadow`, 250 people, no arrivals (gzip + base64, the form that is stored):
+ordinary rules. A Huge world takes a moment to build, so the button shows "Building the world…" first.
 
-| | tick 0 | day 1 | day 2 | day 3 | day 4 | day 5 |
-|---|---|---|---|---|---|---|
-| Huge save | 2.49 MB | 3.93 MB | 4.47 MB | 4.93 MB | 5.18 MB | 5.46 MB |
+**Saving a Huge world.** The first version kept a save in `localStorage` (about 5 million characters, shared with the preferences), and a Huge
+world's save outgrew that by about day 4–5. Measured on seed `meadow`, 250 people, no arrivals; "stored" is gzip then base64, counted in
+characters (`scripts/savesize.ts`, which prints the breakdown by field):
 
-So a Huge save fits through about day 3, is borderline on day 4, and fails from day 5 (the limit varies by browser and is shared with the
-preferences and the save's own settings, so the exact day will differ). The menu says "roughly the first three days" and the failure
-message says that the world keeps running. Arrivals add people and so add a little to these figures.
+| stored MB | day 0 | day 1 | day 3 | day 5 | day 10 |
+|---|---|---|---|---|---|
+| format 3 (the first version) | 2.49 | 3.93 | 4.93 | 5.46 | 6.33 |
+| format 4 (compact), as base64 | 1.03 | 1.97 | 2.55 | 3.01 | 3.65 |
+| format 4, as the bytes IndexedDB holds | | 1.48 | 1.91 | 2.26 | 2.74 |
+
+Where the bytes went (measured, not guessed): the per-person `explored` masks are 64% of the *JSON* at the start (21.9 of 34.2 MB) but only
+about 4% of the *stored* size, because they compress to almost nothing. What fills a save as the world runs is `persons.beliefs` (35% of the
+stored size at day 3: 68,000 beliefs, none ever forgotten), then `relations`, `whereabouts` and the event `log`. The second cause was gzip
+itself: it only looks 32 KB back, so a save written person by person never puts two people's similar records in one window.
+
+What format 4 changed (version 3 saves are still read): masks as run lengths; people written field by field (all beliefs together, all
+relations together), which alone took day 3 from 4.63 to 3.31 MB; beliefs as `[shape, values…]` rows with the key names kept once. A save is
+now a single IndexedDB record (the settings and the gzip bytes), with `localStorage` kept for a short description (so the menu can say what is
+saved without waiting), as a fallback where IndexedDB is missing or refuses the write, and as the home of every save made before. The target of
+"under 3 MB stored at day 5" was reached only to within a hair (3.01 MB, as base64): growth continues (beliefs are never forgotten), so the
+compact format is not what makes a long Huge world saveable; IndexedDB is. At day 10 the raw bytes are 2.74 MB against a browser quota of
+hundreds of MB. `tests/save.test.ts` holds the round trips (hash and deep hash, then 100 further ticks, for ordinary, Large and Huge, and
+from a version-3 text); `tests/save_storage.test.ts` holds the storage rules.
 
 The same worlds can be started from the browser console (the app's game is `__game`):
 
@@ -263,8 +277,8 @@ Read directly from the code (verified):
 * `src/sim/optutil.ts` `foodCount` does not count bread.
 
 Reported by code review but not independently re-read: per-person `explored` arrays of `W×H` bytes; relations created for every pair of
-founders; beliefs that are never forgotten; `friendlyTo` / `repairStake` scanning every person per known foreign home; terrain redrawn every frame; the tick clock capped by count rather than by time; localStorage saves that would
-exceed the browser quota at scale.
+founders; beliefs that are never forgotten; `friendlyTo` / `repairStake` scanning every person per known foreign home; terrain redrawn every frame; the tick clock capped by count rather than by time. (localStorage saves that would
+exceed the browser quota at scale: measured and addressed, see the saving section.)
 
 The limits on settlement size (first group above) are now a rule set, the use of `world.camp` is now a list of settlements (both described
 above), and the weather-shelter bug is fixed. None of the rest has been changed: whether and how to change each is a decision about the rules of

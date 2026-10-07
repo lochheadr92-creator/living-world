@@ -56,7 +56,7 @@ for (const id of SCENE_ORDER) {
 const SIZES: { id: ProfileName; title: string; note: string }[] = [
   { id: 'normal', title: 'Village', note: 'The ordinary world: one camp.' },
   { id: 'large', title: 'Large', note: 'Four camps close together, so they can meet in the first days.' },
-  { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run. It never stops by itself, but Save fits in browser storage only for roughly the first three days.' },
+  { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run. A saved Huge world is several MB; it is kept in the browser’s own database.' },
 ];
 
 /** "160×160 · 100 people in 4 camps" */
@@ -279,8 +279,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     saveBtn.disabled = false;
     refreshIO();
     if (ok) ctx.toast(`World saved (day ${savedGameInfo()?.day ?? '?'})`, 'good');
-    else if (game.settings.profile === 'huge') ctx.toast('Could not save: this Huge world’s save is now too big for browser storage (about 5 MB, reached around day 3–4). The world itself keeps running; only saving has stopped working.', 'error');
-    else ctx.toast('Could not save: browser storage is full or blocked.', 'error');
+    else ctx.toast('Could not save: the browser refused both its database and its small storage (private browsing, blocked storage, or no room left). The world itself keeps running.', 'error');
   }
 
   async function doLoad(): Promise<void> {
@@ -303,7 +302,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     loadBtn.disabled = !has;
     const info = savedGameInfo();
     const tip = info
-      ? `Load the saved world\nSeed ${info.seed} · day ${info.day} · ${info.population} people${info.scene && info.scene !== 'natural' ? ' · test scene' : ''}\nSaved ${wallAgo(info.savedAt)}. Replaces the world you are watching.`
+      ? `Load the saved world\nSeed ${info.seed} · day ${info.day} · ${info.population} people${info.bytes ? ` · ${(info.bytes / 1e6).toFixed(1)} MB` : ''}${info.scene && info.scene !== 'natural' ? ' · test scene' : ''}\nSaved ${wallAgo(info.savedAt)}. Replaces the world you are watching.`
       : 'No saved world yet';
     setAttr(loadWrap, 'data-tip', tip);
     setAttr(loadBtn, 'aria-label', info ? `Load the saved world: seed ${info.seed}, day ${info.day}` : 'Load (no saved world yet)');
