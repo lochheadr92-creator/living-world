@@ -30,10 +30,14 @@ if (!seeds.length) {
 const first = bySeed.get(seeds[0])!.get('control')!;
 const specs = [...new Set(seeds.flatMap((s) => [...bySeed.get(s)!.keys()]))].filter((s) => s !== 'control');
 const nudgeSpecs = specs.filter((s) => s.startsWith('nudge'));
+// The reference a branch is compared with, per seed: the mean of the control and every nudge branch other than the branch itself. One control
+// alone is one draw from a chaotic process: if it happened to be lucky or unlucky, every branch would seem to differ from it the same way.
+const refMean = (seed: string, spec: string, m: Metric): number =>
+  mean([...bySeed.get(seed)!.values()].filter((r) => (r.spec === 'control' || r.spec.startsWith('nudge')) && r.spec !== spec).map((r) => r.outcome[m]));
 const num = (v: number, d = 1) => (Math.abs(v) < 10 ** -d / 2 ? '0' : (v > 0 ? '+' : '') + v.toFixed(d));
 
 console.log(`Counterfactual lab: ${seeds.length} seeds (${seeds.join(', ')}), ${first.profile} profile, forked at day ${first.fork}, run ${first.days} days.`);
-console.log('Every branch starts from the same saved world as its control. Differences are branch − control, paired by seed.');
+console.log('Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).');
 
 // the noise floor: how far a one-draw nudge moves each metric in a single seed
 const noise = {} as Record<Metric, number>;
@@ -41,7 +45,7 @@ for (const m of METRICS) {
   const d: number[] = [];
   for (const s of seeds) for (const n of nudgeSpecs) {
     const r = bySeed.get(s)!.get(n);
-    if (r) d.push(r.outcome[m] - bySeed.get(s)!.get('control')!.outcome[m]);
+    if (r) d.push(r.outcome[m] - refMean(s, n, m));
   }
   noise[m] = sd(d);
 }
@@ -59,23 +63,23 @@ for (const spec of specs) {
   const parts = rows.map((r) => r.divergedAfterTicks).filter((x): x is number => x !== null);
   console.log(`\n── ${spec}: ${rows[0].summary}  [${rows.length} seeds${rows[0].note ? '; e.g. ' + rows[0].note : ''}]`);
   console.log(`   final state identical to control in ${same}/${rows.length} seeds; parted in ${parts.length}` + (parts.length ? `, median ${(parts.sort((a, b) => a - b)[parts.length >> 1] / 2400).toFixed(2)} days after the fork` : ''));
-  console.log('   ' + 'metric'.padEnd(15) + 'control'.padStart(8) + 'branch'.padStart(8) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
+  console.log('   ' + 'metric'.padEnd(15) + 'reference'.padStart(9) + 'branch'.padStart(8) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
   for (const m of METRICS) {
-    const c = rows.map((r) => ctl(r).outcome[m]);
+    const c = rows.map((r) => refMean(r.seed, r.spec, m));
     const b = rows.map((r) => r.outcome[m]);
     const st = paired(b.map((x, i) => x - c[i]));
     const v = verdict(st, noise[m], same === rows.length);
     console.log(
-      '   ' + m.padEnd(15) + mean(c).toFixed(1).padStart(8) + mean(b).toFixed(1).padStart(8) + num(st.meanDiff).padStart(8) +
+      '   ' + m.padEnd(15) + mean(c).toFixed(1).padStart(9) + mean(b).toFixed(1).padStart(8) + num(st.meanDiff).padStart(8) +
         `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
     );
   }
   // plain sentences for the metrics that moved beyond chance
   const lines: string[] = [];
   for (const m of METRICS) {
-    const st = paired(rows.map((r) => r.outcome[m] - ctl(r).outcome[m]));
+    const st = paired(rows.map((r) => r.outcome[m] - refMean(r.seed, r.spec, m)));
     if (verdict(st, noise[m], same === rows.length) !== 'larger than chance') continue;
-    lines.push(`${m} ${mean(rows.map((r) => ctl(r).outcome[m])).toFixed(1)} → ${mean(rows.map((r) => r.outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
+    lines.push(`${m} ${mean(rows.map((r) => refMean(r.seed, r.spec, m))).toFixed(1)} → ${mean(rows.map((r) => r.outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
   }
   console.log(same === rows.length ? '   In words: the branch ended in exactly the control\'s state in every seed.' : lines.length ? '   In words: ' + lines.join('; ') + '.' : '   In words: nothing moved by more than a one-draw nudge moves it.');
 }

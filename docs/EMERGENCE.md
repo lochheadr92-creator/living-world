@@ -93,6 +93,29 @@ happen, because almost nobody gets far enough from comfortable for mood to chang
 Next candidates, to be tested the same way: make want reach more people (a store that spoils, wolves that hunt near the houses, a harder
 first winter); lasting injuries; give grievances a longer reach (who works with whom); show mood and its thoughts in the inspector.
 
+### Stakes that reach people: winter, spoilage, bolder wolves (rich dynamics)
+
+Added to `settings.dynamics = 'rich'` (`hardship.ts`; all neutral in other worlds, VERIFIED by the golden, determinism and save tests): a winter in the
+last 4 days of every 12-day year (up to 12 degrees colder, wild food and crops slower; the first winter is hard because the village is not
+ready, not because it is harsher), stored food spoils 3 times and left-out food 2 times as fast, and wolves notice people from farther,
+go for them more often, prowl to within 11 tiles of the houses (17 before) and are kept off by a fire from 4 tiles (6 before). The inspector
+shows mood and "On their mind" in rich worlds; the world menu has a "Rich dynamics" switch.
+
+Result, 8 seeds, Large, day 0 to 15, paired by seed (VERIFIED), against the mean of the control and the nudge (not the control alone):
+* **More farmland: plots 90.1 → 102.6 (+12.6, higher in 8 of 8; the noise floor is about ±8).** The only outcome that moved beyond chance.
+  LIKELY, not checked: the existing rule that wants plots when food runs low is answering the spoilage, lean seasons and winter.
+* Workplaces -2.2, buildings -2.5, people +0.4, deaths +0.4 (0.3 to 0.8 a world), hunger -1.7, mean mood -1.3: all within chance. Nobody is
+  pushed to starvation in 15 days.
+* Four seeds with the tracer (15 days): people going critically hungry or thirsty 34 to 113 a world (3 before the stakes), mean mood -5 to
+  -8, 4 to 8% of checks below -25, and new links appear (hungry → conflict, hungry → soreness, hungry → hurt; a person looking in on a
+  hungry neighbour and bringing grain). Still no mood effect on choices visible in the activity lifts, and no deaths to speak of.
+
+A correction to the lab: a branch was compared with one control, and the control happens to be a lucky draw in some seeds (workplaces 20.4
+against 17.8 over eight seeds in the baseline). It made random-looking "effects" (workplaces -4, buildings -4.5, the same for a one-draw
+nudge). The report now compares each branch with the mean of the control and the nudge branches (excluding itself); on this run that removes the
+workplaces and buildings effects and leaves only plots. Results quoted earlier in this file used the control alone; the large ones
+(random choice, no wild food) are far outside the noise either way.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures
