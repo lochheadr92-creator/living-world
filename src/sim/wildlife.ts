@@ -1,5 +1,6 @@
 import { addEvent, addFx, addLog } from './events';
 import { think } from './mood';
+import { wolfNerve } from './hardship';
 import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
@@ -154,7 +155,7 @@ export function safeFromWolf(world: World, t: Person): boolean {
     if (q !== t && q.alive && hyp(q.x - t.x, q.y - t.y) < 5) others++;
   }
   if (others >= 2) return true;
-  if (nearLitFire(world, t.x, t.y, 6)) return true;
+  if (nearLitFire(world, t.x, t.y, wolfNerve(world).fire)) return true;
   for (const b of world.buildings) {
     if (isSolidHome(b.type) && hyp(t.x - (b.x + b.w / 2), t.y - (b.y + b.h / 2)) < 2.8) return true;
   }
@@ -162,8 +163,9 @@ export function safeFromWolf(world: World, t: Person): boolean {
 }
 
 function pickPrey(world: World, a: Animal, night: boolean): Person | null {
-  const range = night ? 17 : 9;
-  const chance = night ? 0.22 : 0.03;
+  const nerve = wolfNerve(world);
+  const range = night ? nerve.rangeNight : nerve.rangeDay;
+  const chance = night ? nerve.chanceNight : nerve.chanceDay;
   if (world.rng.next() > chance) return null;
   let best: Person | null = null;
   let bd = range;
@@ -187,7 +189,8 @@ function scared(world: World, a: Animal): boolean {
 export function newWander(world: World, a: Animal): void {
   // after dark wolves range farther, toward the edge of the settlement (never into the firelight)
   const night = world.light < 0.3;
-  const prowl = night && world.rng.next() < 0.5;
+  const nerve = wolfNerve(world);
+  const prowl = night && world.rng.next() < nerve.prowl;
   for (let i = 0; i < 8; i++) {
     let x: number;
     let y: number;
@@ -196,7 +199,7 @@ export function newWander(world: World, a: Animal): void {
       const dx = hub.x - a.denX;
       const dy = hub.y - a.denY;
       const d = hyp(dx, dy) || 1;
-      const reach = Math.max(0, d - 17 - world.rng.next() * 5);
+      const reach = Math.max(0, d - nerve.prowlCloser - world.rng.next() * 5);
       const k = reach / d;
       x = a.denX + dx * k + (world.rng.next() - 0.5) * 8;
       y = a.denY + dy * k + (world.rng.next() - 0.5) * 8;

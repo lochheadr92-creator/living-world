@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { DAY } from '../src/sim/constants';
-import { updateHardship, regrowRate, growthRate } from '../src/sim/hardship';
+import { coldSnap, growthRate, regrowRate, spoilPile, spoilStore, updateHardship, winterDepth, wolfNerve } from '../src/sim/hardship';
 import { killPerson } from '../src/sim/lifecycle';
 import { moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
 import { describePerson } from '../src/sim/inspect';
@@ -137,5 +137,44 @@ describe('rich dynamics', () => {
       for (const p of b.persons) describePerson(b, p.id);
     }
     expect(hashWorld(b)).toBe(hashWorld(a));
+  });
+
+  it('has a winter at the end of every year, and nowhere else, only in a rich world', () => {
+    const w = rich('rich-winter');
+    const at = (day: number) => {
+      w.tick = Math.round(day * DAY);
+      return winterDepth(w);
+    };
+    expect(at(0)).toBe(0);
+    expect(at(7.9)).toBe(0);
+    expect(at(10)).toBeCloseTo(1, 5);
+    expect(at(11.99)).toBeLessThan(0.05);
+    expect(at(12 + 10)).toBeCloseTo(1, 5); // the same every year
+    w.tick = 10 * DAY;
+    expect(coldSnap(w)).toBeCloseTo(12, 5);
+    expect(regrowRate(w)).toBeLessThan(0.5);
+    expect(growthRate(w)).toBeLessThan(0.4);
+    const off = natural('rich-winter-off');
+    off.tick = 10 * DAY;
+    expect(winterDepth(off)).toBe(0);
+    expect(coldSnap(off)).toBe(0);
+    expect(regrowRate(off)).toBe(1);
+    expect(growthRate(off)).toBe(1);
+  });
+
+  it('makes food go off faster and wolves bolder, only in a rich world', () => {
+    const w = rich('rich-stakes');
+    const off = natural('rich-stakes');
+    expect(spoilStore(off)).toBe(1);
+    expect(spoilPile(off)).toBe(1);
+    expect(spoilStore(w)).toBeGreaterThan(2);
+    expect(spoilPile(w)).toBeGreaterThan(1);
+    const a = wolfNerve(off);
+    const b = wolfNerve(w);
+    expect(a).toEqual({ rangeDay: 9, rangeNight: 17, chanceDay: 0.03, chanceNight: 0.22, prowl: 0.5, prowlCloser: 17, fire: 6 });
+    expect(b.rangeNight).toBeGreaterThan(a.rangeNight);
+    expect(b.chanceNight).toBeGreaterThan(a.chanceNight);
+    expect(b.prowlCloser).toBeLessThan(a.prowlCloser);
+    expect(b.fire).toBeLessThan(a.fire);
   });
 });

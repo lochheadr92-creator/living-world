@@ -1,6 +1,6 @@
 // Side-effect imports register every activity handler.
 import './act_resource';
-import { updateHardship } from './hardship';
+import { spoilPile, spoilStore, updateHardship } from './hardship';
 import { updateMood } from './mood';
 import './act_build';
 import './act_farm';
@@ -172,7 +172,7 @@ function spoilGoods(world: World): void {
       const n = b.store.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < rate * (PERISHABLE[k] ?? 1) * bad) lost++;
+      for (let i = 0; i < n; i++) if (world.rng.next() < rate * (PERISHABLE[k] ?? 1) * bad * spoilStore(world)) lost++;
       if (lost > 0) {
         b.store.items[k] = n - lost;
         if (b.store.items[k] === 0) delete b.store.items[k];
@@ -186,7 +186,7 @@ function spoilGoods(world: World): void {
       const n = pile.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * (PERISHABLE[k] ?? 1)) lost++;
+      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * (PERISHABLE[k] ?? 1) * spoilPile(world)) lost++;
       if (lost > 0) {
         pile.items[k] = n - lost;
         if (pile.items[k] === 0) delete pile.items[k];
