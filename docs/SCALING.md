@@ -387,6 +387,29 @@ Huge, arrivals off (`scripts/contact.ts`): barely. The two nearest camps are 70 
 beside another camp, 10 had a relation with someone from another camp, **nobody was talking to or in sight of anyone from another camp at the
 moment of any day-end check**, and one of the thirty ordered pairs of camps knew a building of the other. Nothing was done to make them meet.
 
+### Do the agents' choices matter? A random-choice baseline
+
+The scaling work above says nothing about whether the simulation *discovers* anything. A first, cheap test of whether choice matters at all:
+`bench --chooser random` (`setOptionChooser('random')`, `decision.ts`; off by default, not saved, not hashed) ranks the options a person is
+allowed to take by a hash instead of by utility. Survival overrides stay (critical needs, fleeing, a child's limits), so it asks only what
+the hand-tuned priorities add. Large, 10 seeds, 12 days, arrivals off, paired by seed (`scripts/chooser_report.ts`):
+
+| | utility | random | utility higher / lower |
+|---|---|---|---|
+| workplaces (storehouse, yard, quarry, kiln, granary, hall, bakery, smithy) | 16.9 | 6.0 | 10 / 0 |
+| solid homes (hut + house) | 31.0 | 14.3 | 10 / 0 |
+| all buildings | 94.1 | 63.3 | 10 / 0 |
+| homeless at day 12 | 0.3 | 6.8 | 0 / 9 |
+| people below a critical need (mean) | 0.1 | 0.9 | 0 / 10 |
+| first timber yard (day) | 5.4 | 7.8 | 0 / 10 |
+| deaths · people at day 12 · mean hunger | 0.3 · 102.3 · 69.6 | 0.1 · 102.1 · 68.5 | no difference outside seed noise |
+
+What it shows, and what it does not. **Choice matters for building**: random agents build about a third of the workplaces and under half the
+homes, in every seed. **It does not show emergence**: the priorities that do the work are hand-tuned (`production.ts`, `options_work.ts`), and
+random agents still reach 6 workplaces and 14 homes because the options themselves, and their gates, are authored. **Survival tells nothing**
+here, because the hard filters keep random agents alive. So the thesis is not killed by this test (the baseline did not match), and it is not
+confirmed either: the next test is whether anything outside the authored option list ever appears.
+
 ## Measured so far (ordinary 80×80 map)
 
 Taken in a shared 4-core container, with other work running part of the time, so treat them as shapes, not benchmarks.

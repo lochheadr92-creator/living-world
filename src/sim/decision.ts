@@ -43,6 +43,18 @@ export function summarize(o: Option): OptionSummary {
   return { kind: o.kind, label: o.label, utility: Math.round(o.util * 10) / 10, parts: o.parts, blocked: o.blocked };
 }
 
+/**
+ * How the final ranking is made. 'utility' is the simulation. 'random' is an experiment, not a feature: every option that survives the
+ * hard filters (children's limits, the relief guard, critical needs, fleeing) is ranked by a hash of the person, the time and the
+ * option instead of by its utility, so what a person does among the things they may do is a coin toss. It exists to ask whether
+ * agents' choices matter at all (docs/SCALING.md). Kept beside the world, not in it: not saved, not hashed, off unless asked for.
+ */
+export type OptionChooser = 'utility' | 'random';
+let chooser: OptionChooser = 'utility';
+export function setOptionChooser(mode: OptionChooser): void {
+  chooser = mode;
+}
+
 /** Candidate options in preference order, after the hard filters (children's limits, critical needs). */
 export function rankOptions(ctx: Ctx): Option[] {
   const { world, p } = ctx;
@@ -62,7 +74,7 @@ export function rankOptions(ctx: Ctx): Option[] {
   // do not repeat something that has just fallen through
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
-  const scored = opts.map((o) => ({ o, s: o.util + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
+  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : o.util + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }

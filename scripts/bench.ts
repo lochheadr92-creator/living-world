@@ -16,6 +16,7 @@
 //                    (adds real time; changes nothing the simulation sees). Splits the "budget" column into reachable / unreachable.
 //   --slow MS        list every tick that took more than MS ms: its number, its place in the day, the counters' change during it (work done, not time)
 //                    and the gaps between them; scripts/slowtick.ts replays one of them under the CPU profiler
+//   --chooser random  experiment: rank the options a person is allowed to take by a hash instead of by utility (src/sim/decision.ts)
 //   --sample T       ticks between samples (default 240, a tenth of a day)
 //   --check T        ticks between invariant checks (default 2400); the ledger pass is O(world), so keep it coarse at scale
 //   --out FILE       write the full record as JSON
@@ -27,6 +28,7 @@
 import { writeFileSync } from 'node:fs';
 import { CRITICAL, DAY, NEED_KEYS } from '../src/sim/constants';
 import { conservationReport, foodUnits } from '../src/sim/economy';
+import { setOptionChooser } from '../src/sim/decision';
 import { createWorld } from '../src/sim/factory';
 import { WATER_ID_BASE } from '../src/sim/knowledge';
 import { stageOf } from '../src/sim/people';
@@ -63,6 +65,7 @@ if (opt('rules', 'ordinary') === 'scaled') (settings as { ruleSet?: 'scaled' }).
 const pct = (sorted: Float64Array, q: number): number => (sorted.length ? sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))] : 0);
 const r2 = (v: number): number => Math.round(v * 100) / 100;
 
+if (opt('chooser', 'utility') === 'random') setOptionChooser('random');
 const tGen = Date.now();
 const world: World = createWorld(settings);
 const genMs = Date.now() - tGen;
