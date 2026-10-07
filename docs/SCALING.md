@@ -87,6 +87,21 @@ Housing is the first limit to move: at 250 founders the ordinary rules leave mos
 sites can be open at once. No workshops exist by day 3 under either rule set (they are not planned before day 5 and need huts first), so
 the workplace rule is not exercised by these runs. No deaths, no ledger or tool-record failures in any of them.
 
+### A finding the runs surfaced: weather makes everyone who is rested restart the same activity every tick
+
+In a 9-day, 100-founder run the benchmark showed decisions and path searches jumping from about 1 per tick to 14 per tick around day 7, with
+nothing else going wrong (no deaths, no ledger or tool-record failures). It is not a product of the scaled rules: the ordinary run shows the
+same thing, milder, because its weather at that moment was rain and not a storm.
+
+Cause (reproduced on one staged person): "Shelter at the hut" is a `rest` activity (`options_survival.ts`) with a 260-tick duration, but the
+`rest` handler ends as soon as `energy >= 98` (`act_misc.ts`), because it is also the handler for ordinary resting. A well-rested person
+sheltering from rain or a storm therefore finishes after one tick and decides again, and again. With energy 100 in a storm she started
+"Sheltering" 382 times in 400 ticks; with energy 60 she started it twice and kept it for about 277 ticks. In the 100-founder scaled run that
+was 8,837 starts in 900 ticks; each is a decision, usually a path search, and an id.
+
+It costs time in proportion to the number of rested people while it is raining or storming, and ids (see above) in the same proportion. It
+has not been fixed here because fixing it changes how the ordinary world behaves.
+
 ## Measured so far (ordinary 80×80 map)
 
 Taken in a shared 4-core container, with other work running part of the time, so treat them as shapes, not benchmarks.
