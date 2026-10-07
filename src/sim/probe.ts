@@ -148,7 +148,8 @@ export function probePathCells(): Record<string, PathCell> {
 // 'wander' is the fallback option every person always has (options_work.ts optIdle). Each time one is chosen, say why nothing else was:
 //   only-idle        no other option existed at all
 //   unusable         others existed but none could be started (no utility, or no way to set it up)
-//   filtered         usable others were removed (a child's limits, the relief guard, a critical need elsewhere)
+//   filtered:...     usable others were removed: a child's limits, a critical need elsewhere, or (otherwise) the relief guard
+// each prefixed 'child' or 'adult'
 //   outscored:<kind> usable others were ranked, and wander ranked above the best of them
 //   made-failed:<kind>  a better-ranked option could not be set up, and wander was next
 //   review           an activity under way was swapped for wander at a review

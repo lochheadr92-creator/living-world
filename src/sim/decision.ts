@@ -111,15 +111,17 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
 
 /** work counters only: why was wander the choice? (see probe.ts) */
 function whyWander(ctx: Ctx, ranked: Option[], at: number): void {
+  const who = ctx.stage === 'child' ? 'child ' : 'adult ';
   const others = ctx.options.filter((o) => o.kind !== 'wander');
-  if (at > 0) {
-    probeWander('made-failed:' + ranked[0].kind);
-    return;
-  }
-  if (others.length === 0) probeWander('only-idle');
-  else if (!others.some((o) => o.util > 0 && o.make)) probeWander('unusable');
-  else if (ranked.length === 1) probeWander('filtered');
-  else probeWander('outscored:' + ranked[1].kind);
+  const usable = others.filter((o) => o.util > 0 && o.make);
+  if (at > 0) probeWander(who + 'made-failed:' + ranked[0].kind);
+  else if (others.length === 0) probeWander(who + 'only-idle');
+  else if (usable.length === 0) probeWander(who + 'unusable');
+  else if (ranked.length === 1) {
+    // usable options were all removed by rankOptions: a child's limits, then what the relief guard and a critical need leave
+    const forChild = ctx.stage === 'child' ? usable.filter((o) => !CHILD_FORBIDDEN.includes(o.kind) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm') : usable;
+    probeWander(who + (forChild.length === 0 ? 'filtered:child-limits' : ctx.criticals.length ? 'filtered:critical-need' : 'filtered:relief-guard'));
+  } else probeWander(who + 'outscored:' + ranked[1].kind);
   // what the options set aside said, once per decision (only collected for a free person's decision)
   for (const b of ctx.blocked) probeWander('  blocked: ' + b.kind + ' — ' + (b.blocked ?? '').replace(/[0-9.]+/g, '#').slice(0, 60));
 }
@@ -182,7 +184,7 @@ export function reviewActivity(world: World, p: Person): void {
     const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : 'something better came up';
     act.data.optKey = best.key;
     act.data.why = because(best);
-    if (probe.on && best.kind === 'wander') probeWander('review');
+    if (probe.on && best.kind === 'wander') probeWander((ctx.stage === 'child' ? 'child ' : 'adult ') + 'review');
     record(world, p, ctx, ranked, best, danger ? 'danger' : criticalMismatch ? 'urgent need' : 'review');
     if (danger || criticalMismatch) markSetAside(world, p);
     // being driven off from a place is remembered, so the same trip is not repeated at once
