@@ -124,7 +124,7 @@ The settlement starts with hand tools and a little knowledge. Whether it gets an
 | **Time** | `Space` play/pause · `.` single step (exactly one tick) · `1`–`6` or `[` `]` speed (0.5× … 16×) |
 | **Overlays** | Perception (what they can see), Paths, Intentions (what everyone is doing), Knowledge (what the selected person remembers — fog over what they have never seen; hollow rings are hearsay), Labels (names) |
 | **Debug** | `Shift`+`D` — ledger status, state hash, frame stats, counts |
-| **Worlds** | the seed chip opens the world menu: type a seed and press *New world*; *Harsh* gives scarcer food, colder weather, more wolves and fewer births; *World size* picks Village (the ordinary world), Large (160×160, 4 camps) or Huge (256×256, 6 camps) for the next new world; *Arrivals* lets travellers join; *Scenes* loads a staged test scene; *Save/Load* keeps a world in your browser |
+| **Worlds** | the seed chip opens the world menu: type a seed and press *New world*; *Harsh* gives scarcer food, colder weather, more wolves and fewer births; *World size* picks Village (the ordinary world), Large (160×160, 4 camps) or Huge (256×256, 6 camps) for the next new world; *Arrivals* lets travellers join; *Scenes* loads a staged test scene; *Save/Load* keeps a world in your browser (in its IndexedDB database, so a Huge world's few MB fit; `localStorage` is the fallback, and saves made before that still load) |
 | **Help** | `?` |
 
 The inspector answers the five questions for any person: *what are they doing, why did they choose it, what are they
@@ -185,7 +185,7 @@ src/sim      pure simulation (no DOM, no rendering): world generation, needs, pe
              decisions (survival / work / production / social option generators), activities, the social engine
              (requests, promises, news, quarrels, meals, welfare), economy + ledger + reservations, workplaces and
              recipes, tools and carts, farming, building, weather, wildlife, lifecycle
-src/app      Game (fixed-timestep clock, requested/achieved speed, selection, camera state), preferences, save/load
+src/app      Game (fixed-timestep clock, requested/achieved speed, selection, camera state), preferences, save/load (format 4, IndexedDB)
 src/render   isometric canvas renderer: procedural sprites for every building and construction stage, terrain,
              characters (with poses for sawing, hammering, forging, baking, digging, pulling), carts, effects, overlays
 src/ui       DOM interface: top bar, transport, inspector (people, workplaces, sites, carts, deposits), feed,

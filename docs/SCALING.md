@@ -13,20 +13,29 @@ Nothing here changes how the simulation behaves.
 `tests/golden.test.ts` compares the ordinary world with fingerprints recorded in `tests/golden.expected.json`: generation only for twelve
 seeds, and stepped runs (up to 12,000 ticks) for default, harsh, larger-population and staged-scene worlds. Two fingerprints are taken at each
 checkpoint: `hashWorld` (the compact state hash used elsewhere) and a *deep* hash of everything the game would save — terrain, every
-belief, every relation, ids — minus the save-format version.
+belief, every relation, ids. The deep hash is taken of the text that save format 3 wrote, produced by the test helper itself
+(`tests/helpers/golden.ts`), not by `src/app/save.ts`: the fingerprints are of the world's content, so improving how a save is stored
+does not move them (format 4 did not; `tests/save.test.ts` holds the save itself).
 
 * A mismatch means the ordinary world is no longer what it was. If that was the intent, regenerate with
   `npx vite-node scripts/golden.ts --write` and say why in the commit. If it was not the intent, the mismatch is the finding.
 * `npx vite-node scripts/golden.ts` (no flag) prints the same comparison outside the test runner.
-* The fingerprints depend on the JavaScript engine's floating-point behaviour (`Math.hypot`, `Math.sin`, …). They were recorded on Node 22;
-  a different engine may legitimately differ.
+* The fingerprints depend on the JavaScript engine's floating-point behaviour (`Math.sin`, `Math.sqrt`, …). They were recorded on Node 22;
+  a different engine may legitimately differ. (The simulation's distances use `hyp()` in `util.ts`, a bit-identical copy of V8's two-argument
+  `Math.hypot` that does not allocate; `tests/hypot.test.ts` compares the two over 3.2 million inputs.)
 
 ### Work counters
 
 `src/sim/probe.ts` holds plain integer counters that the simulation increments and never reads: path searches, tiles expanded, searches that
-returned null and how many of those ran out of node budget, option generations, options generated, decisions, reviews, perceive calls and what
-they saw. They are off by default (one boolean test each), are not part of the world, a save or the state hash, use no randomness and read no
-clock. `tests/probe.test.ts` holds that: a run with them on has the same fingerprint as a run with them off.
+returned null — split into **unreachable** (the open set emptied: nothing the walker can reach satisfies the goal) and **out of budget** (it
+gave up after 7,000 tiles with tiles still to try) — option generations, options generated, decisions, reviews, perceive calls and what they
+saw. Beside them, tables keyed by **who asked** (an activity kind, or `wolf`, `cart_haul`, `arrival`) and by the straight-line **distance** to
+the target (under 20, 20–40, 40–80, over 80 tiles), and a count of **why each `wander` was chosen**. They are off by default (one boolean test
+each), are not part of the world, a save or the state hash, use no randomness and read no clock. `tests/probe.test.ts` holds that: a run with
+them on has the same fingerprint as a run with them off.
+
+`probe.verify` (bench `--verify`) repeats every search that ran out of budget with no practical budget, discards the answer, and counts it as
+*reachable after all* or *unreachable*: "out of budget" alone cannot tell a far goal from one that cannot be reached at all.
 
 Wall-clock time is never measured inside the simulation. It is measured around it, by the runner below, or by a profiler.
 
@@ -46,8 +55,26 @@ Every `--check` ticks (default 2400) it verifies the item ledger, the tool recor
 water-belief ids; any failure is printed, listed in the summary, and makes the exit code 1. The summary also lists the tick at which each type
 of building first existed (to the sample resolution) and how many activities of each kind were started.
 
+Further switches: `--verify` (above); `--slow MS` lists every tick over MS with its place in the day, the process's *CPU* time during it
+(`process.cpuUsage`: a tick that used far less CPU than wall time was waiting for a core, not computing), the change in the work counters, and
+the gaps between slow ticks. **Arrivals are on by default** (`--arrivals off` for the figures in this document, which were taken with them off).
+
 Use a quiet machine. The ledger pass is O(world); raise `--check` for very large worlds. Run each world size in its own process (the path-finder
-reallocates its buffers when the map size changes).
+reallocates its buffers when the map size changes). **A shared machine ruins wall-clock figures**: on this one the same Huge seed ran at 22 and
+37 ms a tick in two runs, and a loaded run showed 149 "slow" ticks of which 117 were the process waiting for a core. Claims here rest on
+counters (searches, tiles, bytes allocated, collections) or on alternating runs with the spread reported.
+
+### Other tools
+
+| script | what it answers |
+|---|---|
+| `scripts/savesize.ts` | where the bytes of a save go, by field, in the current format and the one before |
+| `scripts/slowtick.ts` | replays a seed to just before one tick and runs that tick under the CPU profiler |
+| `scripts/allocs.ts` | where the garbage comes from: bytes allocated by function over a stretch of ticks (V8's sampling heap profiler) |
+| `scripts/campclock.ts` | when each camp first gets each workplace; what each has; how many adults want the next one; the hut-to-house gates |
+| `scripts/growth.ts` | births, deaths and arrivals per day, and the first condition that keeps each woman from being with child |
+| `scripts/contact.ts` | whether the camps of a larger world ever meet: how far people go, what they know of other camps, cross-camp relations and talks |
+| `scripts/regions.ts` | a larger world camp by camp at tick 0 |
 
 ## Rule sets — the limits on settlement size
 
@@ -196,7 +223,7 @@ runs for its duration and is reconsidered at the usual reviews, like any other a
 world's behaviour from the first rain or storm on, so the golden fingerprints for `meadow` (after 2,400 ticks) and `aspen-harsh` were
 re-recorded; generation and everything before the first weather are unchanged.
 
-### First observations of the larger worlds (12 simulated days, seed `meadow`, arrivals off)
+### First observations of the larger worlds (12 simulated days, seed `meadow`, arrivals off) — and what a second pass found
 
 One seed, one run each, in a shared container: shapes, not benchmarks. No deaths and no ledger, tool-record or id-range failures in either.
 
@@ -212,22 +239,150 @@ One seed, one run each, in a shared container: shapes, not benchmarks. No deaths
 | cost per tick | 15 ms on day 1, about 7–9 ms by day 12 | 46 ms on day 1, about 30 ms by day 12; worst single tick 931 ms |
 | heap | 101 MB | 268 MB |
 
-* **Each camp builds its own industry** under the per-settlement rule. In `huge`, where camps are about 80 tiles apart, there is about one of
-  each workplace per camp, and they appear on roughly the ordinary world's timeline. In `large`, camps about 40 tiles apart share:
-  neighbours inside the 40-tile settlement radius count as one settlement, so there are 3 kilns and 1 quarry for 4 camps.
-* No smithy yet: the planner does not consider one before day 14.
-* **A fifth to a sixth of path searches fail, and most of those run out of budget** (`pathBudgetHit` in `src/sim/probe.ts`): 18% null in
-  `large` (68% of them out of budget), 21% in `huge` (92%), against about 3% in the ordinary world. The path finder gives up after
-  7,000 tiles (`pathfinding.ts`) and reports "no way to get there"; on a map of 25,000 or 65,000 tiles a search for a target that cannot be
-  reached floods out to the cap first. These are wasted searches (about 540 tiles expanded per call in `huge` against about 150
-  in the ordinary world) and trips that are given up. Whether they are mostly unreachable targets or reachable ones that are simply far has not been
-  separated.
-* **Cost per tick rises over the first days, then falls**, and is lower than the same 250 people crowded onto one 80×80 camp (about 22–25 ms
-  at 250 people spread over six camps against 35–65 ms for 250 on one): people mostly see and decide about their own camp. The worst single
-  tick (931 ms in `huge`) is not explained; nothing yet shows which periodic work it is.
-* Requests are at their cap of 260 from day 2 in `huge`, as in the ordinary world from about day 20.
-* Not yet seen: camps meeting, trading or competing. Exploration reaches at most about 34 tiles from home (`options_work.ts`), and camps in
-  `huge` are 80 apart.
+The questions that table left open were taken up in a second pass. Each answer below says how it was found and how sure it is
+(**verified** = run and observed; **likely** = evidence, not proof).
+
+#### 1. The failing path searches were never "far": they were unreachable goals — verified
+
+A fifth of searches failed (Large 17.9%, Huge 21.3%, against 4.2% in the ordinary 100-person village), and 68% / 92% of those ran out of
+the 7,000-tile budget, which was read as "the target is far". `bench --verify` repeats each such search without a budget:
+
+| 12 days, arrivals on | Large | Huge |
+|---|---|---|
+| searches | 34,169 | 93,498 |
+| failed | 4,807 (14.1%) | 22,389 (23.9%) |
+| … open set emptied (genuinely unreachable) | 53 | 2,411 |
+| … out of budget | 4,754 | 19,978 |
+| … of those, reachable with an unlimited search | **0** | **0** |
+| failures for a target under 20 tiles away | 96.6% | 99.7% |
+| by caller | wolf 4,219 · socialize 329 · give 135 · till 68 · visit 54 | wolf 19,607 · socialize 1,558 · give 634 · till 339 · visit 210 · gather 33 |
+
+Two causes, both of the form "flood the whole connected area, find nothing":
+* **Wolves** (88% of failures in Huge). A roaming wolf's goal is only checked to be a walkable tile, not a reachable one, and a failed
+  search left its path empty, so it searched again on the next tick (2,600 tiles each time) until stuck-detection gave it a new goal.
+* **People** whose target is a person standing on a tile nothing can enter (inside a home, on a rock): a search for that one tile can
+  never succeed. Checked on a 4-day Large run: every such failure (socialize 79, give 24, visit 15, till 8) had an impassable goal tile;
+  the caller then falls back to ground beside the person (up to five more searches), which succeeds.
+
+What was done (step 3), both **exact** — the same answer, so the same world, with the searches not made:
+
+* A search for one particular tile that nothing can step onto returns at once (`pathfinding.ts`). Tested against the full search on 800 random
+  pairs on an ordinary and a Large map.
+* A wolf remembers its last search that found nothing — from this tile, to this goal tile, with the world's solid tiles as they were — and does
+  not ask the same question again (`wildlife.ts`; a per-world count of changes to the solid tiles, `registry.solidEpoch`, ends the memory). It
+  takes the one step toward its goal that the failed search would have made it take. Kept beside the world, not in it. Tested on whole worlds
+  with the memory on and off (ordinary 3,000 ticks, Large 1,200: identical hash and deep hash, fewer searches).
+
+Neither needs a rule and both apply to the ordinary world too. **A first version used two scaled-rule heuristics instead** — a 30-tick
+back-off for wolves and a 600-tick wait for a person's failed option — and it changed what scaled worlds do. Huge workplaces at day 12
+(quarry + kiln + granary + hall + bakery), base → both heuristics, three seeds: `meadow` 26 → 16, `river` 28 → 25, `fern` 28 → 29 (mean 27.3 →
+23.3); with the back-off alone `meadow` gave 20, with the wait alone 25. Four seeds on Large had shown no difference, so whether that was
+chaos or a real effect at Huge density is not settled, and it no longer matters: the wait saved no measurable work once the impassable-goal
+shortcut existed (tiles per search 22–38 with an 80-tick wait, 18–44 with 600), and the memory does what the back-off did without altering
+anything. (The first back-off also had a bug of mine: a wolf stood still while it waited; found by this comparison, fixed, then dropped.)
+
+The decisive check is the last two rows: with the search skipped and nothing else changed, **every one of these worlds ends in exactly the state
+it ended in without the change**. (The failures that remain are one search per wolf per tile it stands on, and the budget-limited floods
+for the few person-targets that are not impassable tiles.)
+
+| 12 days, arrivals off, `meadow` | Large before → after | Huge before → after | ordinary 100, ordinary rules |
+|---|---|---|---|
+| searches failing | 17.9% → 2.8% | 21.3% → 5.5% (`river`: 12.4% → 4.6%) | 4.2% → 4.2% |
+| tiles expanded per search | 392 → 33 | 643 → 57 (`river`: 413 → 30) | 227 → 10 |
+| final state hash, before = after | `2566beef` = `2566beef` | `9936814a` = `9936814a` (`river`: `3631bb3d` = `3631bb3d`) | `696e3978` = `696e3978` |
+| wander starts, before = after | 4,474 = 4,474 | 7,754 = 7,754 | 1,739 = 1,739 |
+
+#### 2. Why people "wander" — verified for the counts, unknown for the rest
+
+`wander` is the fallback every person always has. When it is chosen the simulation records why (`probe.ts`). In Large, 12 days: **80% of the
+starts are children** (children may not build, haul, farm and so on: 41% "everything usable was off-limits to a child", 20% "nothing at all to
+do"), 21% adults (mostly "gather outscored it", "deposit outscored it"). The ordinary village has the same mix.
+
+The "about 4× ordinary" came from comparing one seed's Large with one seed's village. Per child-day the ordinary 28-person village gives
+5.8 (`meadow`), 12.4 (`river`), 5.1 (`fern`), 9.8 (`aspen`), 5.8 (`birch`), and per adult-day 0.5 to 1.5; Large on `meadow` gives 9.7 and 1.1.
+That is inside the ordinary world's own range from seed to seed. Neither the scaled rules (ordinary map, 100 founders, scaled: 5.0 / 0.55
+against 4.1 / 0.48 under ordinary rules) nor camp size explains it, and the rate is flat from day 2 to day 12. **No fix was made.** What the
+data cannot say is why `river` children idle twice as much as `fern` children: that is a property of a seed's geography.
+
+#### 3. Camps progress like camps — verified over two seeds; no rule changed
+
+`scripts/campclock.ts`, Huge, 12 days, arrivals off. First day each camp gets a ... (earliest / median / latest of the six; in brackets how many
+of the six had one by day 12):
+
+| | storehouse | timber yard | quarry | kiln | granary | bakery | hall | smithy |
+|---|---|---|---|---|---|---|---|---|
+| Huge `meadow` | 2.3 / 3.2 / 7.2 | 5.2 / 5.3 / 6.2 | 5.1 / 6.4 / 7.0 (3) | 6.0 / 6.3 / 7.9 | 8.0 / 9.0 / 10.4 (5) | 10.2 / 10.8 / 12 (4) | 7.5 / 9.2 / 9.3 (3) | none |
+| Huge `river` | 2.3 / 3.4 / 11 | 5.2 / 5.3 / 5.4 | 5.2 / 5.3 / 6.3 | 6.0 / 6.3 / 9.3 | 6.4 / 9.0 / 9.3 | 9.5 / 10 / 10 (2) | 6.4 / 9.1 / 9.2 (3) | 12 (1) |
+| one village, `meadow` | 3.5 | 5.3 | 6.3 | 8.3 | 10.2 | none | 12.5 | none |
+
+The six camps are on the village's timeline or ahead of it, not behind. What is behind the gaps, from the same runs:
+
+* **Timber yard**: the planner's hard gate, `world.tick < DAY * 5` (`production.ts`): the first yards appear at 5.2.
+* **Wanting** is not what holds the rest back. On day 6 in `meadow`, 15, 27 and 16 adults in three camps wanted a quarry; on day 8, 17 adults
+  in one camp wanted a hall. A camp that wants none builds none: on `meadow` camp 0 had one adult who wanted a quarry on days 6 and 8
+  and none on day 10; it has none by day 12.
+* **Projects against the limit** (3 per camp of 42; the village's is 2 of 28): at the limit in one camp on day 6 and three on day 8, and the
+  open projects are waiting for **materials**: planks and bricks in a camp stand at 0–7 through day 12 in both seeds (stone is more plentiful,
+  up to 21 in `river`).
+* A hall wanted by 11–17 adults for two days (`meadow` camp 3 on days 8 and 10; `river` camps 1 and 5 on days 8–12) was still not started.
+  The planner's lottery (a person acts on a want in a given 500-tick window with probability 0.25 + 0.4 × initiative) and the project limit
+  are the candidates; at most 4 of those adults had failed to find a place. **Not separated: unknown.**
+* **Smithy**: a person wants one only when a tool has worn to 25 or there is no axe and pick, or from day 14 (`production.ts`); one or two adults
+  did on days 8–12, and one camp in `river` had one on day 12. Not a gate.
+* **House**: on day 12, in every camp, 3–10 adults who live in a hut pass every gate of the upgrade planner (wish, food, yard and kiln known,
+  no site of their own); houses need planks and bricks that the camp does not yet have. The village has none by day 14 either.
+
+Nothing in `scaledRules` was changed: the tables show no binding rule that makes a Huge camp slower than the village, so there was nothing to
+change it for. Raising the project limit would put more projects on the same few planks.
+
+#### 4. The worst tick — cause stated; mostly measurement noise, then the garbage collector
+
+* **Wall-clock slow ticks are mostly not the simulation.** In a 4-day Huge run on a loaded machine, 149 of 9,600 ticks took over 100 ms;
+  117 of them used under 60% of their time as CPU (`process.cpuUsage`): the process was waiting for a core. The first tick is the largest of
+  all (540–590 ms): everyone decides at once, and the code is cold. Neither is periodic work: the slow ticks are spread evenly over
+  `tick % 30, 60, 90, 120, 240, 300, 400, 2400`.
+* **The ticks that were computing coincide with major garbage collections** (23 of 23 listed; a Mark-Compact falls in under 1% of all
+  ticks). The world allocated **9.5 MB per tick** (`scripts/allocs.ts`), 29% of it `Math.hypot` (the builtin allocates an array and a boxed
+  number per call) and 30% belief snapshots.
+* **Cut**: `hyp()` in `util.ts`, a bit-identical two-argument `Math.hypot` that does not allocate, in the 124 places the simulation used it
+  (tested bit for bit over 3.2 million inputs; golden unchanged). 5.0 MB per tick afterwards. Three alternating 2-day Huge runs, before →
+  after: scavenges 2,236 → 1,130 (−49%), total scavenge pause 13.1–14.7 s → 9.2–11.7 s, total major-collection pause 684–897 ms →
+  339–630 ms (their number, 30, did not change), mean ms/tick 19.4–22.2 → 17.1–18.1, worst tick 599–654 ms → 542–554 ms (the first tick). The worst tick after
+  the first, by CPU time, fell from a median of 204 ms to 165 ms but the two ranges overlap, so that is not claimed.
+* **Left**: belief snapshots (57% of what is now allocated) — replacing a belief in place instead of making a new one would change object
+  identity, and beliefs are copied around by hearsay; not attempted.
+
+#### 5. The requests = 260 cap is a trim of history — verified
+
+`social.ts` `createRequest`: when the list passes 260, the oldest request that is no longer pending or promised is dropped. It is not a limit on
+asking: live (pending + promised) requests peaked at 12 in Huge. It costs only the history of settled requests, which only the inspector reads.
+In Huge it is reached on day 2 (about 250 asks a day); in the village at about day 7.
+
+#### 6. Growth — verified; one limit was binding and was changed (scaled rules only)
+
+30 days, seed `meadow`, arrivals on (`scripts/growth.ts`):
+
+| | founders | born | died | arrived | people at day 30 |
+|---|---|---|---|---|---|
+| ordinary village | 28 | 5 | 0 | 15 | 48 |
+| Large | 100 | 15 | 0 | 17 | 132 |
+| Huge | 250 | 38 | 1 | 14 | 302 |
+
+Nothing in the caps was binding (Huge 302 against 482 for arrivals and 571 for conceptions; at most one woman at a time without a home).
+Births follow the number of partnered women, the spacing between children and age. **Arrivals** were limited by a rule written for one
+village: `immigrationTick` lets one group of travellers come per **6,000 ticks for the whole world** (`lastArrival`), so Large and Huge got what
+the village got (14–17 people in 30 days). `rules.arrivalSpacing` scales that by one settlement's share of the founders in the scaled rules
+(Large 1,500, Huge 1,008, never below 400); the ordinary rules keep 6,000. Large, same 30 days: 47 arrived instead of 17, 100 → 160 people,
+no deaths; Huge: 36 born, 0 died, 55 arrived, 250 → 341 people (against 38 / 1 / 14 and 302). Still far below the caps (482, 571) and
+still roofed (a few households without a home at any time). These two 30-day runs were taken before the wolves' memory replaced the
+back-off, which does not touch births or arrivals.
+
+#### 7. Do the camps meet? — verified for one seed, 30 days
+
+Huge, arrivals off (`scripts/contact.ts`): barely. The two nearest camps are 70 tiles apart; the farthest anyone went from their own camp was
+63 tiles (one person over 50; 158 people were at some time over 30 tiles out, exploring). By day 30, 8 people knew a place that lies
+beside another camp, 10 had a relation with someone from another camp, **nobody was talking to or in sight of anyone from another camp at the
+moment of any day-end check**, and one of the thirty ordered pairs of camps knew a building of the other. Nothing was done to make them meet.
 
 ## Measured so far (ordinary 80×80 map)
 
