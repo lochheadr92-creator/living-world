@@ -63,6 +63,36 @@ does for long. Candidate first moves, each to be tested in the lab against the g
 choices; grievances that change who works or shares with whom for days; injuries that last and change what a person can do; stakes
 (scarcity, danger) strong enough that hardship happens in some seeds and not others; cause links recorded by the simulation.
 
+## Stage 2, first piece: mood and lean seasons (built, switched off by default)
+
+`settings.dynamics = 'rich'` (absent means as before; the golden fingerprints and the ordinary world are unchanged with it off, VERIFIED by
+the existing suite). `src/sim/mood.ts`, `src/sim/hardship.ts`, `tests/rich.test.ts`; lab intervention `rich`, `lab.mjs --dynamics rich`.
+
+* **Mood.** Each person has thoughts: things weighing on or lifting them, each fading to nothing over its duration (bitten by a wolf, argued,
+  went hungry or thirsty, is cold, is frightened, is hurt, was given something, shared a meal, a birth, a death in the family, a lean season).
+  Mood is a base from how well their needs are met plus the fresh thoughts, -100 to 100. It changes two things: what they pick (a low mood
+  pulls people from each other and from effortful work toward rest and idling; survival options are never weighted) and whether a contested
+  resource turns into a row (0.3 to 1.7 times as likely).
+* **Lean seasons.** One chance in five per day, after day 2: for three to six days wild food returns at a tenth of its pace and crops grow at
+  a quarter. Announced, weighs on everyone's mood, ends. The constants were set after looking at four seeds, not tuned to a target.
+
+**Result (VERIFIED on the runs below; the conclusion is the plain one: the stakes are still too weak for the coupling to show).**
+* Rich vs authored, 8 seeds, Large, day 0 to 12, paired by seed (first version of the lean season: one chance in ten, 2 to 5 days, regrowth
+  at 30%, crops at half): no outcome moved beyond what a one-draw nudge moves it (workplaces -2.5, people -1.0, deaths -0.3; all intervals
+  include 0). Mean mood sits near 0 and about 0.4 people per world were below -25.
+* Four seeds with the harsher season above (14 days): hunger and thirst thoughts rise (one seed had 26 people go critically hungry or
+  thirsty, the others 5 to 7; before, 1 to 3 in all four), mean mood -2.5 to -4, under 1.5% of person-checks below -25, nobody starved. The
+  village's stores and farms absorb a lean season, so most people never feel it.
+* The tracer shows no new effect of mood on what people go on to do (the only lifts are the old ones: quarrel or soreness then gathering).
+  The only thoughts that fire often are being cold (up to 1,253 renewals in one world) and being frightened (90 to 450).
+
+What it does and does not establish: the machinery works, is deterministic, and saves and loads exactly; it does not yet make anything
+happen, because almost nobody gets far enough from comfortable for mood to change a choice. Not done: the mood is not shown in the inspector
+(`thoughtsOf` returns it), work speed does not depend on mood, and there is no break (a person at the bottom just idles more).
+
+Next candidates, to be tested the same way: make want reach more people (a store that spoils, wolves that hunt near the houses, a harder
+first winter); lasting injuries; give grievances a longer reach (who works with whom); show mood and its thoughts in the inspector.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures
