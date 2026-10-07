@@ -1,0 +1,62 @@
+{
+  "profile": "large",
+  "fork": 0,
+  "days": 12,
+  "n": 8,
+  "recordedFrom": [
+    "aspen",
+    "birch",
+    "cedar",
+    "fern",
+    "gen-1",
+    "gen-2",
+    "meadow",
+    "river"
+  ],
+  "metrics": {
+    "workplaces": {
+      "mean": 17.75,
+      "sd": 2.71
+    },
+    "solidHomes": {
+      "mean": 31.13,
+      "sd": 1.73
+    },
+    "buildings": {
+      "mean": 94.75,
+      "sd": 3.92
+    },
+    "plots": {
+      "mean": 85.88,
+      "sd": 5.25
+    },
+    "people": {
+      "mean": 102.25,
+      "sd": 1.04
+    },
+    "deaths": {
+      "mean": 0.38,
+      "sd": 0.52
+    },
+    "homeless": {
+      "mean": 0.25,
+      "sd": 0.71
+    },
+    "belowCritical": {
+      "mean": 0.38,
+      "sd": 0.52
+    },
+    "meanHunger": {
+      "mean": 71.28,
+      "sd": 2.91
+    },
+    "firstYardDay": {
+      "mean": 5.33,
+      "sd": 0.29
+    },
+    "firstHallDay": {
+      "mean": 8.93,
+      "sd": 1.69
+    }
+  }
+}

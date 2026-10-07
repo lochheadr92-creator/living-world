@@ -16,7 +16,8 @@ const profile = opt('profile', 'large') as ProfileName;
 const fork = Number(opt('fork', '4'));
 const days = Number(opt('days', '8'));
 const sample = Number(opt('sample', '120'));
-const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter(Boolean);
+// `--branches none` runs the control alone (the gates use that)
+const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((b) => b && b !== 'none');
 
 const world = createWorld(settingsForProfile(profile, seed, { immigration: false }));
 runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, ...r, hashes: undefined })));
