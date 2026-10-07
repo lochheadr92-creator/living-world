@@ -427,7 +427,7 @@ the Windows machine. Counts are per seed unless stated; "pairs" are (activity ki
 
 Buildings raised after the fork, all 24 seeds (control / no-wood / no-food / no-clay): bakery 45 / 34 / 15 / 0, smithy 18 / 4 / 0 / 0, kiln
 71 / 63 / 52 / 58, hall 61 / 47 / 23 / 63, hut 114 / 113 / 82 / 119. Deaths by cause under `no-food` (1,186 in all): hunger 993, wolf attack
-121, injuries 40, exposure 20, thirst 12; the other three scenarios together had 14 deaths.
+121, injuries 40, exposure 20, thirst 12; the other three scenarios together had 9 deaths in 72 runs.
 
 What this shows (VERIFIED = measured here):
 
