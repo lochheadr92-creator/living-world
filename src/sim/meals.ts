@@ -14,6 +14,7 @@ import { hashUnit } from './rng';
 import type { Activity, Belief, FoodKind, Items, ItemKind, Meal, Person, World } from './types';
 import { stageOf } from './people';
 
+import { hyp } from './util';
 /**
  * Shared meals, as one interaction from start to finish:
  *   invitation (a real conversation) → acceptance (a servings reservation) → travel to a physical place → the host sets out
@@ -77,11 +78,11 @@ function placeFor(ctx: Ctx): Place | null {
   let best: { pl: Place; score: number } | null = null;
   for (const b of beliefsByKind(p, ['building'])) {
     if (b.btype === 'hall' && (b.cond ?? 100) > 15) {
-      const d = Math.hypot(b.x - p.x, b.y - p.y);
+      const d = hyp(b.x - p.x, b.y - p.y);
       const score = 20 - d * 0.2;
       if (!best || score > best.score) best = { pl: { id: b.id, name: 'the communal hall', x: b.x, y: b.y + 2.4, hall: true }, score };
     } else if (b.btype === 'fire' && (b.fuel ?? 0) - (ctx.world.tick - b.seen) > 300) {
-      const d = Math.hypot(b.x - p.x, b.y - p.y);
+      const d = hyp(b.x - p.x, b.y - p.y);
       const score = 6 - d * 0.2;
       if (!best || score > best.score) best = { pl: { id: b.id, name: 'the fire', x: b.x + 0.5, y: b.y + 1.6, hall: false }, score };
     }
@@ -137,7 +138,7 @@ export function mealOptions(ctx: Ctx): void {
     const aff = rel?.affinity ?? 0;
     if (aff < 6 && q.hhId !== p.hhId) continue;
     if (rel && rel.avoidUntil > world.tick) continue;
-    const d = Math.hypot(s.x - p.x, s.y - p.y);
+    const d = hyp(s.x - p.x, s.y - p.y);
     if (d > 14) continue;
     const score = aff * 0.1 + (s.hungry ? 3 : 0) - d * 0.15;
     if (!best || score > best.s) best = { q, s: score };
@@ -146,11 +147,11 @@ export function mealOptions(ctx: Ctx): void {
   const q = best.q;
   const sc = new Scorer()
     .add('food to share and good company to share it with', (7 + 14 * (p.traits.sociability * 0.6 + p.traits.generosity * 0.4)) * tm.social)
-    .add('walking', -pen(Math.hypot(q.x - p.x, q.y - p.y) * 6));
+    .add('walking', -pen(hyp(q.x - p.x, q.y - p.y) * 6));
   if (place.hall) sc.add('a hall to eat in', 3);
   if (sc.total < 7) return;
   const s = ctx.seenPersons.find((x) => x.id === q.id)!;
-  const e = (Math.hypot(s.x - p.x, s.y - p.y) * 1.18) / Math.max(0.03, ctx.speed);
+  const e = (hyp(s.x - p.x, s.y - p.y) * 1.18) / Math.max(0.03, ctx.speed);
   addOption(ctx, {
     kind: 'socialize',
     label: `Invite ${q.name} to eat together at ${place.name}`,
@@ -165,7 +166,7 @@ export function mealOptions(ctx: Ctx): void {
     make: () => {
       const dx = p.x - s.x;
       const dy = p.y - s.y;
-      const dist = Math.hypot(dx, dy) || 1;
+      const dist = hyp(dx, dy) || 1;
       return newActivity(world, p, {
         kind: 'socialize',
         label: `Inviting ${q.name} to a meal`,
@@ -200,13 +201,13 @@ function hostOptions(ctx: Ctx, m: Meal): void {
       const rel = p.relations[q.id];
       if ((rel?.affinity ?? 0) < 6 && q.hhId !== p.hhId) continue;
       if (rel && rel.avoidUntil > world.tick) continue;
-      const d = Math.hypot(s.x - p.x, s.y - p.y);
+      const d = hyp(s.x - p.x, s.y - p.y);
       if (d > 11) continue;
       const sc = new Scorer().add('room at the table', 22).add('walking', -pen(d * 6));
       const e = (d * 1.18) / Math.max(0.03, ctx.speed);
       const dx = p.x - s.x;
       const dy = p.y - s.y;
-      const dist = Math.hypot(dx, dy) || 1;
+      const dist = hyp(dx, dy) || 1;
       addOption(ctx, {
         kind: 'socialize',
         label: `Invite ${q.name} to the meal`,
@@ -243,7 +244,7 @@ function hostOptions(ctx: Ctx, m: Meal): void {
   const place = world.byId.get(m.placeId);
   const px = m.x;
   const py = m.y;
-  const eHome = (Math.hypot(px - p.x, py - p.y) * 1.18) / Math.max(0.03, ctx.speed);
+  const eHome = (hyp(px - p.x, py - p.y) * 1.18) / Math.max(0.03, ctx.speed);
   const due = m.at - eHome - 140;
   if (world.tick >= Math.min(due, m.at - 160) && (m.status === 'inviting' || m.status === 'gathering') && (place || m.placeName === 'the fire')) {
     const sc = new Scorer().add('guests are coming: lay the table', 60).add('walking', -pen(eHome) * 0.3);
@@ -490,7 +491,7 @@ export function mealTick(world: World): void {
       continue;
     }
     // danger puts an end to a meal
-    if (world.animals.some((a) => Math.hypot(a.x - m.x, a.y - m.y) < 6)) {
+    if (world.animals.some((a) => hyp(a.x - m.x, a.y - m.y) < 6)) {
       cancelMeal(world, m, 'a wolf came near');
       continue;
     }
@@ -530,7 +531,7 @@ function hallGossip(world: World): void {
     const present: Person[] = [];
     for (const p of world.persons) {
       if (!p.alive || p.pose === 'sleep' || p.convId) continue;
-      if (Math.hypot(p.x - (b.x + b.w / 2), p.y - (b.y + b.h / 2)) <= 4) present.push(p);
+      if (hyp(p.x - (b.x + b.w / 2), p.y - (b.y + b.h / 2)) <= 4) present.push(p);
     }
     if (present.length < 2) continue;
     const i = Math.floor(hashUnit(b.id, world.tick, 5) * present.length);

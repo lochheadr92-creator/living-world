@@ -10,6 +10,7 @@ import type { Activity, Belief, Building, Household, ItemKind, NeedKey, Person, 
 import { NEED_KEYS, CRITICAL, THIRST_RATE, isHomeType } from './constants';
 import type { BeliefKind } from './types';
 
+import { hyp } from './util';
 export interface Option {
   kind: Activity['kind'];
   label: string;
@@ -79,7 +80,7 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
     let nearest = 1e9;
     for (const id of p.bykind.water ?? []) {
       const b = p.beliefs[id];
-      const d = Math.hypot(b.x - p.x, b.y - p.y);
+      const d = hyp(b.x - p.x, b.y - p.y);
       if (d < nearest) nearest = d;
     }
     if (nearest < 1e8) waterLead = Math.min(34, THIRST_RATE * 1.3 * ((nearest * 1.18) / Math.max(0.03, speed)));
@@ -134,7 +135,7 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
 
 /** Estimated ticks to walk to (x, y). */
 export function eta(ctx: Ctx, x: number, y: number): number {
-  return (Math.hypot(x - ctx.p.x, y - ctx.p.y) * 1.18) / Math.max(0.03, ctx.speed);
+  return (hyp(x - ctx.p.x, y - ctx.p.y) * 1.18) / Math.max(0.03, ctx.speed);
 }
 
 /** time cost in utility points */
@@ -146,11 +147,11 @@ export function pen(etaTicks: number): number {
 export function dangerAt(ctx: Ctx, x: number, y: number, r = 10): number {
   let s = 0;
   for (const b of ctx.dangers) {
-    const d = Math.hypot(b.x - x, b.y - y);
+    const d = hyp(b.x - x, b.y - y);
     if (d < r) s = Math.max(s, 1 - d / r);
   }
   for (const a of ctx.seenAnimals) {
-    const d = Math.hypot(a.x - x, a.y - y);
+    const d = hyp(a.x - x, a.y - y);
     if (d < r) s = Math.max(s, 1 - d / r);
   }
   return s;
@@ -197,13 +198,13 @@ export function rankWaterSpots(ctx: Ctx, limit = 2): WaterSpot[] {
     const e = eta(ctx, b.x, b.y);
     const dng = dangerAt(ctx, b.x, b.y);
     let tr = 0;
-    for (const t of trouble) if (Math.hypot(t.x - b.x, t.y - b.y) < 8) tr = Math.max(tr, t.w);
+    for (const t of trouble) if (hyp(t.x - b.x, t.y - b.y) < 8) tr = Math.max(tr, t.w);
     all.push({ b, e, dng, trouble: tr, cost: pen(e) + 30 * dng * caution + 16 * tr });
   }
   all.sort((a, b) => a.cost - b.cost);
   const picked: WaterSpot[] = [];
   for (const c of all) {
-    if (picked.every((q) => Math.hypot(q.b.x - c.b.x, q.b.y - c.b.y) > 7)) picked.push(c);
+    if (picked.every((q) => hyp(q.b.x - c.b.x, q.b.y - c.b.y) > 7)) picked.push(c);
     if (picked.length >= limit) break;
   }
   return picked;

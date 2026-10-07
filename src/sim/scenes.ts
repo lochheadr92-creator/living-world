@@ -16,6 +16,7 @@ import type { ItemKind, Items, Person, SceneId, Settings, ToolKind, Traits, Worl
 import { T } from './types';
 import { ACCESS_CELL, waterBeliefId } from './knowledge';
 
+import { hyp } from './util';
 export const SCENE_LABELS: Record<SceneId, string> = {
   natural: '',
   contest: 'TEST SCENE · Contested berry — two hungry people, one berry (staged)',
@@ -95,14 +96,14 @@ function everyoneKnowsTheLake(world: World): void {
         if (t < 0) continue;
         const tx = t % world.W;
         const ty = Math.floor(t / world.W);
-        if (Math.hypot(tx - world.camp.x, ty - world.camp.y) < 30) {
+        if (hyp(tx - world.camp.x, ty - world.camp.y) < 30) {
           const id = waterBeliefId(cy * cw + cx);
           putBelief(p, { id, kind: 'water', x: tx + 0.5, y: ty + 0.5, amount: 0, max: 0, seen: -10, src: 'seen', from: 0, learned: -10 });
         }
       }
     }
     // they know the open ground around the scene
-    for (let y = 0; y < world.H; y++) for (let x = 0; x < world.W; x++) if (Math.hypot(x - world.camp.x, y - world.camp.y) < 20) p.explored[y * world.W + x] = 1;
+    for (let y = 0; y < world.H; y++) for (let x = 0; x < world.W; x++) if (hyp(x - world.camp.x, y - world.camp.y) < 20) p.explored[y * world.W + x] = 1;
   }
 }
 

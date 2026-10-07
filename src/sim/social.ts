@@ -28,7 +28,7 @@ import { lendTool, returnLoan } from './tools';
 import { toolsHeldBy } from './toolreg';
 import { isToolItem } from './toolreg';
 import type { Belief, Commitment, Conversation, ConvPurpose, ItemKind, Items, Person, Request, RequestKind, Speech, ToolKind, World } from './types';
-import { clamp } from './util';
+import { clamp, hyp } from './util';
 
 // ───────────────────────── small helpers ─────────────────────────
 const toldKey = (listener: number, beliefId: number): number => listener * 1_000_000 + beliefId;
@@ -172,7 +172,7 @@ function describeItems(items: Items): string {
 export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: Person, other: Person, x: number, y: number): void {
   for (const w of world.persons) {
     if (!w.alive || w === actor || w === other || w.pose === 'sleep') continue;
-    if (Math.hypot(w.x - x, w.y - y) > 7.5) continue;
+    if (hyp(w.x - x, w.y - y) > 7.5) continue;
     if (kind === 'gift' || kind === 'help') {
       adjustRel(w, actor.id, world.tick, { aff: 1.3, trust: 0.9, fam: 0.3, note: `saw ${actor.name} help ${other.name}` });
     } else {
@@ -736,7 +736,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
-    if (Math.hypot(A.x - B.x, A.y - B.y) > CONV_REACH + 2.5 || world.tick - c.start > 400) {
+    if (hyp(A.x - B.x, A.y - B.y) > CONV_REACH + 2.5 || world.tick - c.start > 400) {
       finishConversation(world, c, 'interrupted');
       continue;
     }
@@ -793,7 +793,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
   switch (c.purpose) {
     case 'chat': {
       if (hashUnit(A.id, B.id, world.tick >> 5) < 0.4) {
-        const atFire = world.buildings.some((b) => b.type === 'fire' && b.fuel > 0 && Math.hypot(b.x + 0.5 - A.x, b.y + 0.5 - A.y) < 5);
+        const atFire = world.buildings.some((b) => b.type === 'fire' && b.fuel > 0 && hyp(b.x + 0.5 - A.x, b.y + 0.5 - A.y) < 5);
         const hard = A.needs.hunger < 45 || B.needs.hunger < 45;
         bubble(world, A, D.smallTalk(world, A.id, B.id, atFire, A.needs.warmth < 45, hard), 'say', 50);
       }
@@ -1228,7 +1228,7 @@ function bindPartners(world: World, A: Person, B: Person): void {
 export function contestLost(world: World, loser: Person, winnerId: number, src: { item: ItemKind; x: number; y: number }): void {
   const w = personOf(world, winnerId);
   if (!w) return;
-  const d = Math.hypot(loser.x - w.x, loser.y - w.y);
+  const d = hyp(loser.x - w.x, loser.y - w.y);
   if (d > 7) return;
   const desperate = loser.needs.hunger < 35 || loser.needs.thirst < 35;
   const rel = loser.relations[w.id];
@@ -1284,7 +1284,7 @@ export function bondWorkers(world: World, p: Person): void {
   if (!['build', 'haul', 'till', 'plant', 'tend', 'harvest', 'gather', 'repair', 'craft'].includes(a.kind)) return;
   for (const s of p.seen) {
     if (s.ent !== 'person' || s.act !== a.kind) continue;
-    if (Math.hypot(s.x - p.x, s.y - p.y) > 4.5) continue;
+    if (hyp(s.x - p.x, s.y - p.y) > 4.5) continue;
     const q = personOf(world, s.id);
     if (!q) continue;
     const rel = p.relations[q.id];
@@ -1302,7 +1302,7 @@ export function passingGreetings(world: World, p: Person): void {
   if ((world.tick + p.id) % 14 !== 0) return;
   for (const s of p.seen) {
     if (s.ent !== 'person' || s.asleep || s.busyTalking) continue;
-    if (Math.hypot(s.x - p.x, s.y - p.y) > 2.8) continue;
+    if (hyp(s.x - p.x, s.y - p.y) > 2.8) continue;
     if ((p.cooldowns['greet' + s.id] ?? 0) > world.tick) continue;
     const q = personOf(world, s.id);
     if (!q) continue;
@@ -1329,12 +1329,12 @@ registerHandler('socialize', {
   begin(world, p, a) {
     const t = personOf(world, a.targetId);
     if (!t) return 'they are no longer around';
-    if (Math.hypot(t.x - p.x, t.y - p.y) > CONV_REACH + 2.5) return 'could not find them';
+    if (hyp(t.x - p.x, t.y - p.y) > CONV_REACH + 2.5) return 'could not find them';
   },
   work(world, p, a): WorkResult {
     const t = personOf(world, a.targetId);
     if (!t) return 'fail:they are no longer around';
-    if (Math.hypot(t.x - p.x, t.y - p.y) > CONV_REACH + 1.2) return 'fail:they walked away';
+    if (hyp(t.x - p.x, t.y - p.y) > CONV_REACH + 1.2) return 'fail:they walked away';
     const purpose = (a.data.purpose ?? 'chat') as ConvPurpose;
     const ok = acceptsTalk(world, t, p, purpose);
     if (!ok.ok) {
@@ -1393,7 +1393,7 @@ registerHandler('give', {
   begin(world, p, a) {
     const t = personOf(world, a.targetId);
     if (!t) return 'they are gone';
-    if (Math.hypot(t.x - p.x, t.y - p.y) > 3.2) {
+    if (hyp(t.x - p.x, t.y - p.y) > 3.2) {
       // not where I expected: update what I know and give up for now
       delete p.whereabouts[t.id];
       return `${t.name} was not where I expected`;

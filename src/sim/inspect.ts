@@ -16,6 +16,7 @@ import type { CommitmentView, InteractionView, MealView, Section, ToolView, Grie
 import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
 
+import { hyp } from './util';
 export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
 
 export function agoText(world: World, tick: number): string {
@@ -186,7 +187,7 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   if (a) {
     const tgt = targetText(world, a);
     if (a.phase === 'travel') {
-      const dist = Math.hypot(a.spotX - p.x, a.spotY - p.y);
+      const dist = hyp(a.spotX - p.x, a.spotY - p.y);
       doing = `${a.label}${tgt ? ` — walking to ${tgt}` : ''} (${dist.toFixed(0)} tiles to go).`;
     } else {
       const pct = a.duration > 0 ? Math.round((a.progress / a.duration) * 100) : 0;
@@ -195,7 +196,7 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
     why = a.data.why ? `Weighed up: ${a.data.why}` : lastDec?.because ? `Weighed up: ${lastDec.because}` : a.goal;
     trying = a.goal ? a.goal[0].toUpperCase() + a.goal.slice(1) + (tgt ? ` (${tgt})` : '') + '.' : '—';
     if (a.blocked) stopping = a.blocked[0].toUpperCase() + a.blocked.slice(1) + '.';
-    else if (a.phase === 'travel' && Math.hypot(p.x - a.lastX, p.y - a.lastY) < 0.01 && world.tick - a.start > 30) stopping = 'Stuck for the moment, finding another way.';
+    else if (a.phase === 'travel' && hyp(p.x - a.lastX, p.y - a.lastY) < 0.01 && world.tick - a.start > 30) stopping = 'Stuck for the moment, finding another way.';
     else if (p.needs.hunger < 14 || p.needs.thirst < 14) stopping = 'Dangerously weak; everything else will have to wait.';
   } else if (lastDec && lastDec.blocked.length) {
     const b = lastDec.blocked[0];
@@ -215,7 +216,7 @@ export function auditOpportunities(world: World, p: Person): OpportunityView[] {
   const chosenLabel = p.activity ? p.activity.label : ranked[0]?.label;
   const chosenUtil = p.activity ? p.activity.utility : ranked[0]?.util ?? 0;
   const out: OpportunityView[] = [];
-  const dist = (x: number, y: number) => Math.hypot(x - p.x, y - p.y);
+  const dist = (x: number, y: number) => hyp(x - p.x, y - p.y);
 
   const classify = (e: Entity, what: string, x: number, y: number, needed: string): OpportunityView => {
     const b = p.beliefs[e.id];

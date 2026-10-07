@@ -1,7 +1,24 @@
 export const clamp = (v: number, lo: number, hi: number): number => (v < lo ? lo : v > hi ? hi : v);
 export const lerp = (a: number, b: number, t: number): number => a + (b - a) * t;
 export const sq = (v: number): number => v * v;
-export const dist = (ax: number, ay: number, bx: number, by: number): number => Math.hypot(ax - bx, ay - by);
+/**
+ * Math.hypot(a, b), bit for bit, without its cost. V8's builtin makes an array and a boxed number on every call, which in a large world
+ * is a third of everything the simulation allocates (scripts/allocs.ts) and so a good part of what the garbage collector then has to
+ * do. This is the builtin's own algorithm for two arguments (scale by the larger, sum the squares, take the root, scale back: the
+ * Kahan compensation it applies has nothing to correct with two terms), in plain arithmetic that the compiler keeps in registers.
+ * tests/hypot.test.ts holds that it gives the same answer as Math.hypot; where it is not sure (NaN, infinity) it asks Math.hypot.
+ */
+export function hyp(a: number, b: number): number {
+  if (a !== a || b !== b || a === Infinity || a === -Infinity || b === Infinity || b === -Infinity) return Math.hypot(a, b);
+  const x = a < 0 ? -a : a;
+  const y = b < 0 ? -b : b;
+  const max = x > y ? x : y;
+  if (max === 0) return 0;
+  const nx = x / max;
+  const ny = y / max;
+  return Math.sqrt(nx * nx + ny * ny) * max;
+}
+export const dist = (ax: number, ay: number, bx: number, by: number): number => hyp(ax - bx, ay - by);
 export const dist2 = (ax: number, ay: number, bx: number, by: number): number => (ax - bx) * (ax - bx) + (ay - by) * (ay - by);
 export const smoothstep = (e0: number, e1: number, x: number): number => {
   const t = clamp((x - e0) / (e1 - e0), 0, 1);

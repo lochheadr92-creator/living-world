@@ -15,7 +15,7 @@ import { registerStartingTools } from './tools';
 import { makeWolf } from './wildlife';
 import type { Building, Entity, Household, Person, Settings, Source, SourceType, World } from './types';
 import { T } from './types';
-import { clamp, dist, smoothstep, TAU } from './util';
+import { TAU, clamp, dist, hyp, smoothstep } from './util';
 
 // ───────────────────────── noise ─────────────────────────
 const fade = (t: number) => t * t * t * (t * (t * 6 - 15) + 10);
@@ -145,7 +145,7 @@ export function computeAccessCells(world: World): void {
       for (let y = cy * ACCESS_CELL; y < Math.min(H, (cy + 1) * ACCESS_CELL); y++) {
         for (let x = cx * ACCESS_CELL; x < Math.min(W, (cx + 1) * ACCESS_CELL); x++) {
           if (isWaterAccessTile(world, x, y)) {
-            const d = Math.hypot(x + 0.5 - mx, y + 0.5 - my);
+            const d = hyp(x + 0.5 - mx, y + 0.5 - my);
             if (d < bd) {
               bd = d;
               best = y * W + x;
@@ -227,7 +227,7 @@ function waterValue(wt: Water, x: number, y: number): number {
   const s = Math.sin(wt.ax);
   const u = dx * c + dy * s;
   const v = -dx * s + dy * c;
-  const d = Math.hypot(u / wt.stretch, v * wt.stretch);
+  const d = hyp(u / wt.stretch, v * wt.stretch);
   return d / wt.R + (fbm(x / 6.5, y / 6.5, wt.seed) - 0.5) * wt.amp;
 }
 

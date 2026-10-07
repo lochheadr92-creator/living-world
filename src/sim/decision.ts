@@ -13,6 +13,7 @@ import { applyReliefGuard } from './relief';
 import { markSetAside } from './social';
 import type { Activity, ActivityKind, NeedKey, OptionSummary, Person, World } from './types';
 
+import { hyp } from './util';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
@@ -200,7 +201,7 @@ export function urgentInterrupt(world: World, p: Person): boolean {
   if (!a || a.kind === 'flee') return false;
   const alarm = Math.min(9.5, fleeRadius(p));
   for (const s of p.seen) {
-    if (s.ent === 'animal' && Math.hypot(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {
+    if (s.ent === 'animal' && hyp(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {
       p.cooldowns.fleeCheck = world.tick;
       return true;
     }

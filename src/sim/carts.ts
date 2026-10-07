@@ -8,6 +8,7 @@ import { newId } from './registry';
 import type { Cart, Items, Person, Store, World } from './types';
 import { T } from './types';
 
+import { hyp } from './util';
 export function newCart(world: World, x: number, y: number, ownerHh: number): Cart {
   const c: Cart = {
     ent: 'cart',
@@ -82,7 +83,7 @@ export function updateCarts(world: World): void {
     const p = e;
     const dx = p.x - p.px;
     const dy = p.y - p.py;
-    const moved = Math.hypot(dx, dy);
+    const moved = hyp(dx, dy);
     const bx = p.x - Math.cos(p.heading) * 0.9;
     const by = p.y - Math.sin(p.heading) * 0.9;
     // easy follow: the cart trails the puller instead of snapping to them

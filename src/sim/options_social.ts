@@ -14,7 +14,7 @@ import type { ConvData } from './social';
 import { hashUnit } from './rng';
 import { spark } from './relations';
 import type { Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
-import { clamp } from './util';
+import { clamp, hyp } from './util';
 
 interface Cand {
   s: SeenEntity;
@@ -35,7 +35,7 @@ function candidates(ctx: Ctx, includeAvoided = false): Cand[] {
     const rel = p.relations[s.id];
     if (!includeAvoided && rel && rel.avoidUntil > world.tick) continue;
     if ((p.cooldowns['talk' + s.id] ?? 0) > world.tick) continue;
-    out.push({ s, q: e, aff: rel?.affinity ?? 0, fam: rel?.familiarity ?? 0, d: Math.hypot(s.x - p.x, s.y - p.y) });
+    out.push({ s, q: e, aff: rel?.affinity ?? 0, fam: rel?.familiarity ?? 0, d: hyp(s.x - p.x, s.y - p.y) });
   }
   return out;
 }
@@ -58,7 +58,7 @@ function mkSocial(ctx: Ctx, c: Cand, purpose: ConvPurpose, conv: ConvData, label
     make: () => {
       const dx = p.x - c.s.x;
       const dy = p.y - c.s.y;
-      const d = Math.hypot(dx, dy) || 1;
+      const d = hyp(dx, dy) || 1;
       const sx = c.s.x + (dx / d) * 1.35;
       const sy = c.s.y + (dy / d) * 1.35;
       return newActivity(world, p, {

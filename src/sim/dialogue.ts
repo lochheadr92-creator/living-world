@@ -5,6 +5,7 @@ import { BELIEF_NOUN } from './labels';
 import { dayFraction } from './environment';
 import type { Belief, ItemKind, World } from './types';
 
+import { hyp } from './util';
 /** deterministic pick from a list; never touches the shared random stream */
 export function pickLine(list: readonly string[], a: number, b: number, c: number): string {
   return list[Math.floor(hashUnit(a, b, c) * list.length) % list.length];
@@ -140,7 +141,7 @@ export function placeWords(world: World, b: Belief): string {
   const hub = nearestHub(world, b.x, b.y);
   const dx = b.x - hub.x;
   const dy = b.y - hub.y;
-  const d = Math.hypot(dx, dy);
+  const d = hyp(dx, dy);
   const ti = Math.floor(b.y) * world.W + Math.floor(b.x);
   const wd = world.waterDist[Math.max(0, Math.min(world.waterDist.length - 1, ti))];
   if (d < 9) return 'near camp';

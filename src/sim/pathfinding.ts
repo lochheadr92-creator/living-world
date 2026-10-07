@@ -1,6 +1,6 @@
 import { probe, probePath } from './probe';
 import type { PathOutcome } from './probe';
-import { MinHeap } from './util';
+import { MinHeap, hyp } from './util';
 import { T } from './types';
 import type { World } from './types';
 
@@ -59,7 +59,7 @@ export function terrainSpeed(world: World, x: number, y: number): number {
 function lineClear(world: World, x0: number, y0: number, x1: number, y1: number): boolean {
   const dx = x1 - x0;
   const dy = y1 - y0;
-  const len = Math.hypot(dx, dy);
+  const len = hyp(dx, dy);
   if (len < 1e-6) return true;
   const nx = -dy / len;
   const ny = dx / len;
@@ -196,7 +196,7 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
         probe.on = true;
       }
     }
-    probePath(opts.caller ?? 'other', Math.hypot(gx - sx, gy - sy), outcome, expanded, needed);
+    probePath(opts.caller ?? 'other', hyp(gx - sx, gy - sy), outcome, expanded, needed);
   }
   if (goalI < 0) return null;
 
@@ -245,5 +245,5 @@ export function reachable(world: World, sx: number, sy: number, gx: number, gy: 
 
 /** Approximate walking distance for planning (straight line scaled), without running A*. */
 export function walkEstimate(sx: number, sy: number, gx: number, gy: number): number {
-  return Math.hypot(gx - sx, gy - sy) * 1.18;
+  return hyp(gx - sx, gy - sy) * 1.18;
 }

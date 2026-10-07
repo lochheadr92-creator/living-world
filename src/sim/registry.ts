@@ -1,6 +1,7 @@
 import type { Animal, Building, Entity, Person, Plot, Site, SpatialGrid, Source, World } from './types';
 import { T } from './types';
 
+import { hyp } from './util';
 // ───────── spatial grid ─────────
 export const GRID_CELL = 8;
 
@@ -215,7 +216,7 @@ export function findWaterAccessNear(world: World, x: number, y: number, maxR = 4
   let bd = 1e9;
   for (let dy = -maxR; dy <= maxR; dy++) {
     for (let dx = -maxR; dx <= maxR; dx++) {
-      const d = Math.hypot(dx, dy);
+      const d = hyp(dx, dy);
       if (d > maxR || d >= bd) continue;
       if (isWaterAccess(world, cx + dx, cy + dy)) {
         bd = d;
@@ -245,12 +246,12 @@ export function distToFootprint(e: Entity, x: number, y: number): number {
   if (e.ent === 'building' || e.ent === 'site') {
     const dx = Math.max(e.x - x, 0, x - (e.x + e.w));
     const dy = Math.max(e.y - y, 0, y - (e.y + e.h));
-    return Math.hypot(dx, dy);
+    return hyp(dx, dy);
   }
-  if (e.ent === 'person' || e.ent === 'animal' || e.ent === 'cart') return Math.hypot(e.x - x, e.y - y);
+  if (e.ent === 'person' || e.ent === 'animal' || e.ent === 'cart') return hyp(e.x - x, e.y - y);
   const dx = Math.max(e.x - x, 0, x - (e.x + 1));
   const dy = Math.max(e.y - y, 0, y - (e.y + 1));
-  return Math.hypot(dx, dy);
+  return hyp(dx, dy);
 }
 
 export function personById(world: World, id: number): Person | undefined {

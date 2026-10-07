@@ -23,6 +23,7 @@ import { hashUnit } from './rng';
 import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { T } from './types';
 
+import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
 
 // ───────────────────────── household situation ─────────────────────────
@@ -329,7 +330,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
     const e = eta(ctx, b.x, b.y);
     const dng = dangerAt(ctx, b.x, b.y);
     let crowd = 0;
-    for (const s of ctx.seenPersons) if (s.act === 'gather' && Math.hypot(s.x - b.x, s.y - b.y) < 3) crowd++;
+    for (const s of ctx.seenPersons) if (s.act === 'gather' && hyp(s.x - b.x, s.y - b.y) < 3) crowd++;
     const score = base - pen(e) - 24 * dng * tm.caution - Math.max(0, crowd - 1) * 5;
     cands.push({ b, est: u.est, e, score });
   }
@@ -735,7 +736,7 @@ function optCraft(ctx: Ctx): void {
   let bd = 1e9;
   for (const b of beliefsByKind(p, ['building'])) {
     if (!(b.hh === p.hhId || b.btype === 'storehouse' || b.btype === 'fire')) continue;
-    const d = Math.hypot(b.x - p.x, b.y - p.y);
+    const d = hyp(b.x - p.x, b.y - p.y);
     if (d < bd) {
       bd = d;
       best = b;
@@ -1115,12 +1116,12 @@ function optExplore(ctx: Ctx): void {
     }
     if (unknown < 3) continue;
     const dng = dangerAt(ctx, x, y, 12);
-    const score = unknown * 2 - Math.hypot(x - p.x, y - p.y) * 0.12 - dng * 14 * tm.caution + hashUnit(p.id, i, 3) * 1.5;
+    const score = unknown * 2 - hyp(x - p.x, y - p.y) * 0.12 - dng * 14 * tm.caution + hashUnit(p.id, i, 3) * 1.5;
     if (!best || score > best.score) best = { x, y, score };
   }
   if (!best) return;
   const target = best;
-  const e = Math.hypot(target.x - p.x, target.y - p.y) * 1.18 / Math.max(0.03, ctx.speed);
+  const e = hyp(target.x - p.x, target.y - p.y) * 1.18 / Math.max(0.03, ctx.speed);
   const sc = new Scorer().add('curiosity', base * (hs.shortage > 0.6 ? 1 : 0.9)).add('walking', -pen(e) * 0.5).add('daylight to spare', 2);
   addOption(ctx, {
     kind: 'explore',

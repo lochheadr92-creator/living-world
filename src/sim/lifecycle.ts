@@ -20,6 +20,7 @@ import { T } from './types';
 import { rulesOf } from './rules';
 import { newId } from './registry';
 
+import { hyp } from './util';
 const STAGE_CODE: Record<Stage, number> = { child: 0, youth: 1, adult: 2, elder: 3 };
 
 /** Register a freshly created person in the world and their household. */
@@ -163,7 +164,7 @@ export function giveBirth(world: World, mother: Person): void {
   mother.speech = { text: 'Welcome, little one.', until: world.tick + 90, kind: 'happy' };
   for (const q of world.persons) {
     if (!q.alive || q === mother || q === baby) continue;
-    if (Math.hypot(q.x - mother.x, q.y - mother.y) < 10) adjustRel(q, mother.id, world.tick, { aff: 0.8, note: `${baby.name} was born` });
+    if (hyp(q.x - mother.x, q.y - mother.y) < 10) adjustRel(q, mother.id, world.tick, { aff: 0.8, note: `${baby.name} was born` });
   }
 }
 
@@ -218,7 +219,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
       q.needs.social = Math.max(0, q.needs.social - 24);
       q.needs.safety = Math.max(0, q.needs.safety - 8);
       addLog(world, q, 'life', `${p.name} died (${cause}).`);
-      if (Math.hypot(q.x - p.x, q.y - p.y) < 14) q.speech = { text: '…', until: world.tick + 120, kind: 'think' };
+      if (hyp(q.x - p.x, q.y - p.y) < 14) q.speech = { text: '…', until: world.tick + 120, kind: 'think' };
     }
   }
 }
@@ -239,7 +240,7 @@ export function adoptOrphans(world: World): void {
       if (st === 'child' || st === 'youth') continue;
       const kin = q.relations[child.id]?.kin ? 3 : 0;
       const kids = membersOf(world, householdById(world, q.hhId)).filter((m) => stageOf(world, m) === 'child').length;
-      const score = q.traits.generosity * 3 + kin - kids * 0.8 - Math.hypot(q.x - child.x, q.y - child.y) * 0.05;
+      const score = q.traits.generosity * 3 + kin - kids * 0.8 - hyp(q.x - child.x, q.y - child.y) * 0.05;
       if (score > bs) {
         bs = score;
         best = q;
@@ -291,7 +292,7 @@ export function immigrationTick(world: World): void {
     const y = edge === 0 ? 3 : edge === 1 ? t : edge === 2 ? world.H - 4 : t;
     if (!isWalkable(world, Math.floor(x), Math.floor(y)) || world.terrain[Math.floor(y) * world.W + Math.floor(x)] === T.SHALLOW) continue;
     let nearWolf = false;
-    for (const a of world.animals) if (Math.hypot(a.x - x, a.y - y) < 14) nearWolf = true;
+    for (const a of world.animals) if (hyp(a.x - x, a.y - y) < 14) nearWolf = true;
     if (nearWolf) continue;
     // anywhere reachable near the middle of the camp will do (the exact tile may be built over by now)
     const hub = nearestHub(world, x, y); // travellers make for the settlement nearest to where they come in
@@ -300,12 +301,12 @@ export function immigrationTick(world: World): void {
     const path = findPath(world, x, y, gx, gy, {
       maxNodes: 9000,
       caller: 'arrival',
-      goalFn: (tx, ty) => Math.hypot(tx + 0.5 - gx, ty + 0.5 - gy) <= 3.2 && isFreeLand(world, tx, ty),
+      goalFn: (tx, ty) => hyp(tx + 0.5 - gx, ty + 0.5 - gy) <= 3.2 && isFreeLand(world, tx, ty),
     });
     if (!path || path.length < 2) continue;
     // travellers who have heard of the camp would not walk straight past a wolf den to reach it
     let pastADen = false;
-    for (let k = 0; k < path.length && !pastADen; k += 2) for (const a of world.animals) if (Math.hypot(a.denX - path[k], a.denY - path[k + 1]) < 12) pastADen = true;
+    for (let k = 0; k < path.length && !pastADen; k += 2) for (const a of world.animals) if (hyp(a.denX - path[k], a.denY - path[k + 1]) < 12) pastADen = true;
     if (pastADen) continue;
     const arriveX = path[path.length - 2];
     const arriveY = path[path.length - 1];
@@ -369,7 +370,7 @@ export function immigrationTick(world: World): void {
       for (let k = 0; k < world.accessCell.length; k++) {
         const t = world.accessCell[k];
         if (t < 0) continue;
-        const d = Math.hypot((t % world.W) - hub.x, Math.floor(t / world.W) - hub.y);
+        const d = hyp((t % world.W) - hub.x, Math.floor(t / world.W) - hub.y);
         if (d < bd) {
           bd = d;
           bestIdx = k;

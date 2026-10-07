@@ -54,7 +54,7 @@ const checkEvery = Math.max(1, Number(opt('check', '2400')));
 const out = opt('out', '');
 const quiet = flag('quiet');
 const slowMs = Number(opt('slow', '0'));
-const slowTicks: { tick: number; ms: number; delta: Partial<Record<keyof ProbeCounters, number>> }[] = [];
+const slowTicks: { tick: number; ms: number; /** CPU time the process used during the tick (user + system, all threads): much less than `ms` when the process was kept waiting for a core */ cpuMs: number; /** performance.now() when the tick ended: the clock `node --trace-gc` stamps its lines with */ endedAtMs: number; delta: Partial<Record<keyof ProbeCounters, number>> }[] = [];
 
 const profile = opt('profile', 'normal') as ProfileName;
 const settings = settingsForProfile(profile, seed, { harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off', ...(popArg ? { population: Number(popArg) } : {}) });
@@ -249,6 +249,7 @@ for (const b of world.buildings) firstSeen[b.type] ??= 0;
 check(world);
 for (let i = 1; i <= total; i++) {
   const before = slowMs > 0 ? probeSnapshot() : null;
+  const cpu0 = slowMs > 0 ? process.cpuUsage() : null;
   const a = performance.now();
   stepWorld(world);
   const took = performance.now() - a;
@@ -257,7 +258,8 @@ for (let i = 1; i <= total; i++) {
     const now = probeSnapshot();
     const delta: Partial<Record<keyof ProbeCounters, number>> = {};
     for (const k of COUNTER_KEYS) if (now[k] - before[k] !== 0) delta[k] = now[k] - before[k];
-    slowTicks.push({ tick: world.tick - 1, ms: r2(took), delta });
+    const cpu = process.cpuUsage(cpu0!);
+    slowTicks.push({ tick: world.tick - 1, ms: r2(took), cpuMs: r2((cpu.user + cpu.system) / 1000), endedAtMs: r2(performance.now()), delta });
   }
   if (i % sampleEvery === 0 || i === total) {
     const s = takeSample(world, inInterval);
@@ -326,12 +328,14 @@ for (const [k, v] of Object.entries(wanderCauses).sort((a, b) => b[1] - a[1]).sl
 
 if (slowMs > 0) {
   console.log(`\nticks over ${slowMs} ms: ${slowTicks.length} of ${total}`);
-  console.log('tick     day-pos  ms      gap since last   work done during the tick (counter changes)');
+  console.log('tick     day-pos  ms      cpu ms  gap since last   ended at (ms)  work done during the tick (counter changes)');
   let prev = -1;
   for (const t of slowTicks.slice(0, 80)) {
-    console.log(String(t.tick).padEnd(8), String(t.tick % DAY).padEnd(8), String(t.ms).padEnd(7), String(prev < 0 ? '' : t.tick - prev).padEnd(16), JSON.stringify(t.delta));
+    console.log(String(t.tick).padEnd(8), String(t.tick % DAY).padEnd(8), String(t.ms).padEnd(7), String(t.cpuMs).padEnd(7), String(prev < 0 ? '' : t.tick - prev).padEnd(16), String(Math.round(t.endedAtMs)).padEnd(9), JSON.stringify(t.delta));
     prev = t.tick;
   }
+  const waited = slowTicks.filter((t) => t.cpuMs < 0.6 * t.ms).length;
+  console.log(`of these, ${waited} used less than 60% of their wall time as CPU time (the process was waiting for a core, not computing); ${slowTicks.length - waited} were computing`);
   const gaps = slowTicks.slice(1).map((t, i) => t.tick - slowTicks[i].tick);
   const common = new Map<number, number>();
   for (const g of gaps) common.set(g, (common.get(g) ?? 0) + 1);
