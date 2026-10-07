@@ -149,6 +149,39 @@ runs for its duration and is reconsidered at the usual reviews, like any other a
 world's behaviour from the first rain or storm on, so the golden fingerprints for `meadow` (after 2,400 ticks) and `aspen-harsh` were
 re-recorded; generation and everything before the first weather are unchanged.
 
+### First observations of the larger worlds (12 simulated days, seed `meadow`, arrivals off)
+
+One seed, one run each, in a shared container: shapes, not benchmarks. No deaths and no ledger, tool-record or id-range failures in either.
+
+| | `large` (4 camps, 100 founders) | `huge` (6 camps, 250 founders) |
+|---|---|---|
+| people at day 12 | 103 (33 children, 7 elders) | 255 (74 children, 18 elders) |
+| homeless | 0 | 0 |
+| huts / houses | 30 / 1 | 77 / 0 |
+| storehouses, timber yards | 4, 4 | 6, 6 |
+| kilns, granaries, halls | 3, 3, 2 | 6, 6, 4 |
+| quarries, bakeries | 1, 1 | 5, 5 |
+| first timber yard / kiln / granary / hall (day) | 5.4 / 6.2 / 8.2 / 7.0 | 5.2 / 5.4 / 6.4 / 7.2 |
+| cost per tick | 15 ms on day 1, about 7–9 ms by day 12 | 46 ms on day 1, about 30 ms by day 12; worst single tick 931 ms |
+| heap | 101 MB | 268 MB |
+
+* **Each camp builds its own industry** under the per-settlement rule. In `huge`, where camps are about 80 tiles apart, there is about one of
+  each workplace per camp, and they appear on roughly the ordinary world's timeline. In `large`, camps about 40 tiles apart share:
+  neighbours inside the 40-tile settlement radius count as one settlement, so there are 3 kilns and 1 quarry for 4 camps.
+* No smithy yet: the planner does not consider one before day 14.
+* **A fifth to a sixth of path searches fail, and most of those run out of budget** (`pathBudgetHit` in `src/sim/probe.ts`): 18% null in
+  `large` (68% of them out of budget), 21% in `huge` (92%), against about 3% in the ordinary world. The path finder gives up after
+  7,000 tiles (`pathfinding.ts`) and reports "no way to get there"; on a map of 25,000 or 65,000 tiles a search for a target that cannot be
+  reached floods out to the cap first. These are wasted searches (about 540 tiles expanded per call in `huge` against about 150
+  in the ordinary world) and trips that are given up. Whether they are mostly unreachable targets or reachable ones that are simply far has not been
+  separated.
+* **Cost per tick rises over the first days, then falls**, and is lower than the same 250 people crowded onto one 80×80 camp (about 22–25 ms
+  at 250 people spread over six camps against 35–65 ms for 250 on one): people mostly see and decide about their own camp. The worst single
+  tick (931 ms in `huge`) is not explained; nothing yet shows which periodic work it is.
+* Requests are at their cap of 260 from day 2 in `huge`, as in the ordinary world from about day 20.
+* Not yet seen: camps meeting, trading or competing. Exploration reaches at most about 34 tiles from home (`options_work.ts`), and camps in
+  `huge` are 80 apart.
+
 ## Measured so far (ordinary 80×80 map)
 
 Taken in a shared 4-core container, with other work running part of the time, so treat them as shapes, not benchmarks.
