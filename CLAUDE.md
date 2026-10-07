@@ -18,7 +18,7 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
-- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`.
+- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes).
 
 ## Expensive runs: give the user PowerShell lines, do not run them here
 The cloud container has 4 cores; the user has a 24-core Windows machine. Anything over about 3 minutes of wall time here, or that needs many
@@ -34,6 +34,7 @@ git pull
 npm ci
 node scripts/lab.mjs --out rich_out --seeds 24 --fork 0 --days 15 --branches nudge:1,rich
 npx vite-node scripts/lab_report.ts -- rich_out
+node scripts/lab.mjs --out split_out --seeds 24 --fork 0 --days 15 --branches nudge:1,nudge:2,rich,rich-stakes-only,rich-mood-only
 node scripts/novelneed_all.mjs --out nn_out --seeds 24 --fork 6 --days 10
 ```
 (`npm ci` only the first time or when `package.json` changed. The second `lab_report` line re-renders a report from existing data, which

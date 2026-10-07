@@ -18,6 +18,12 @@ import type { ActivityKind, Person, Thought, World } from './types';
 
 export const isRich = (world: World): boolean => world.settings.dynamics === 'rich';
 
+/** An experiment switch (kept beside the world, not in it: not saved, not hashed): with it off, moods are kept but change nothing (the lab uses it to tell mood from stakes). */
+let effects = true;
+export function setMoodEffects(on: boolean): void {
+  effects = on;
+}
+
 const MAX_THOUGHTS = 14;
 /** ticks between recomputations of a person's mood and the checks of their present condition */
 export const MOOD_EVERY = 30;
@@ -71,7 +77,7 @@ const IDLE: ReadonlySet<ActivityKind> = new Set(['rest', 'wander']);
 /** A factor on an option's utility: below 1 for the things a low mood puts off, above 1 for what it favours. 1 for everything else. */
 export function moodWeight(p: Person, kind: ActivityKind): number {
   const m = p.mood;
-  if (!m) return 1;
+  if (!m || !effects) return 1;
   const x = m.level / 100;
   if (SOCIAL.has(kind)) return 1 + 0.6 * x;
   if (EFFORT.has(kind)) return 1 + 0.3 * x;
@@ -81,7 +87,7 @@ export function moodWeight(p: Person, kind: ActivityKind): number {
 
 /** How much likelier (above 1) or less likely (below 1) this person is to let a contested resource become a row. */
 export function quarrelFactor(world: World, p: Person): number {
-  if (!isRich(world) || !p.mood) return 1;
+  if (!isRich(world) || !p.mood || !effects) return 1;
   return 1 - 0.7 * (p.mood.level / 100);
 }
 

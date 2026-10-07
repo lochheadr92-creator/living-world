@@ -12,6 +12,8 @@
 import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
+import { setStakes } from '../../src/sim/hardship';
+import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
 import type { SourceType, World } from '../../src/sim/types';
 import { setWolfSearchMemory } from '../../src/sim/wildlife';
@@ -51,7 +53,7 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * Specs: `control`; `nudge:N` (draw N random numbers and change nothing else: the noise floor); `remove:<type+type>:<radius>` (delete
  * those sources within the radius of any settlement); `random-choice` (rank options by a hash, not by utility); `no-wolf-memory`
  * (switch off an optimisation that is meant to be exact: a branch that is not identical to the control would be a bug).
- * `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -86,6 +88,34 @@ export function parseIntervention(specIn: string): Intervention {
       apply: (w) => {
         w.settings.dynamics = 'rich';
         return 'rich dynamics on';
+      },
+    };
+  }
+  if (kind === 'rich-stakes-only') {
+    return {
+      spec: label,
+      summary: 'rich dynamics with the stakes (lean seasons, winter, faster spoilage, bolder wolves) but moods change nothing',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'stakes on, mood effects off';
+      },
+      install: () => {
+        setMoodEffects(false);
+        return () => setMoodEffects(true);
+      },
+    };
+  }
+  if (kind === 'rich-mood-only') {
+    return {
+      spec: label,
+      summary: 'rich dynamics with moods that change choices and quarrels but none of the stakes',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'mood effects on, stakes off';
+      },
+      install: () => {
+        setStakes(false);
+        return () => setStakes(true);
       },
     };
   }

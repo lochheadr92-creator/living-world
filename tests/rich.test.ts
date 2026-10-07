@@ -1,10 +1,10 @@
 // Rich dynamics (mood.ts, hardship.ts): off by default and then invisible; when on, deterministic, saved, and doing what it says.
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { DAY } from '../src/sim/constants';
-import { coldSnap, growthRate, regrowRate, spoilPile, spoilStore, updateHardship, winterDepth, wolfNerve } from '../src/sim/hardship';
+import { setStakes, coldSnap, growthRate, regrowRate, spoilPile, spoilStore, updateHardship, winterDepth, wolfNerve } from '../src/sim/hardship';
 import { killPerson } from '../src/sim/lifecycle';
-import { moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
+import { setMoodEffects, moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
 import { describePerson } from '../src/sim/inspect';
 import { hashWorld } from '../src/sim/world';
 import { natural, run } from './helpers/util';
@@ -176,5 +176,38 @@ describe('rich dynamics', () => {
     expect(b.chanceNight).toBeGreaterThan(a.chanceNight);
     expect(b.prowlCloser).toBeLessThan(a.prowlCloser);
     expect(b.fire).toBeLessThan(a.fire);
+  });
+
+  describe('the two halves, switched apart for experiments', () => {
+    afterEach(() => {
+      setStakes(true);
+      setMoodEffects(true);
+    });
+
+    it('stakes off: a rich world has no winter, spoilage or bold wolves, but still has moods that count', () => {
+      setStakes(false);
+      const w = rich('rich-half-a');
+      w.tick = 10 * DAY;
+      expect(winterDepth(w)).toBe(0);
+      expect(spoilStore(w)).toBe(1);
+      expect(regrowRate(w)).toBe(1);
+      expect(wolfNerve(w).chanceNight).toBe(0.22);
+      const p = w.persons[0];
+      think(w, p, 'bad', -80, 5000, 'bad');
+      expect(moodWeight(p, 'socialize')).toBeLessThan(0.7);
+    });
+
+    it('mood effects off: stakes as before, thoughts still kept, but choices and quarrels unchanged', () => {
+      setMoodEffects(false);
+      const w = rich('rich-half-b');
+      w.tick = 10 * DAY;
+      expect(winterDepth(w)).toBeCloseTo(1, 5);
+      expect(spoilStore(w)).toBeGreaterThan(2);
+      const p = w.persons[0];
+      think(w, p, 'bad', -80, 5000, 'bad');
+      expect(p.mood!.level).toBeLessThan(-40);
+      expect(moodWeight(p, 'socialize')).toBe(1);
+      expect(quarrelFactor(w, p)).toBe(1);
+    });
   });
 });

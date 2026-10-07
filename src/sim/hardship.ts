@@ -11,6 +11,13 @@ import { addEvent } from './events';
 import { DAY, DAYS_PER_YEAR } from './constants';
 import { hashString, hashUnit } from './rng';
 import { isRich, think } from './mood';
+
+/** An experiment switch (beside the world, not in it): with it off, a rich world has no lean seasons, winter, faster spoilage or bolder wolves (the lab uses it to tell stakes from mood). */
+let stakes = true;
+export function setStakes(on: boolean): void {
+  stakes = on;
+}
+const active = (world: World): boolean => stakes && isRich(world);
 import type { World } from './types';
 
 /** chance, per day, that a lean season begins (when none is under way and the world is at least two days old) */
@@ -19,7 +26,7 @@ export const LEAN_REGROW = 0.1;
 export const LEAN_GROWTH = 0.25;
 
 export function updateHardship(world: World): void {
-  if (!isRich(world)) return;
+  if (!active(world)) return;
   if (world.tick % DAY === 5) {
     const into = Math.floor(world.tick / DAY) % DAYS_PER_YEAR;
     if (into === DAYS_PER_YEAR - WINTER_LENGTH) {
@@ -61,7 +68,7 @@ export const SPOIL_PILE = 2;
 
 /** 0 outside winter, rising to 1 at midwinter and back to 0 (always 0 in a world without rich dynamics) */
 export function winterDepth(world: World): number {
-  if (!isRich(world)) return 0;
+  if (!active(world)) return 0;
   const day = (world.tick / DAY) % DAYS_PER_YEAR;
   const into = day - (DAYS_PER_YEAR - WINTER_LENGTH);
   return into <= 0 ? 0 : Math.sin((Math.PI * into) / WINTER_LENGTH);
@@ -70,17 +77,17 @@ export function winterDepth(world: World): number {
 export const coldSnap = (world: World): number => WINTER_COLD * winterDepth(world);
 
 /** how fast wild food comes back right now (1 in an ordinary world and outside lean seasons and winter) */
-export const regrowRate = (world: World): number => (isRich(world) ? (world.hardship ? LEAN_REGROW : 1) * (1 - WINTER_FOOD * winterDepth(world)) : 1);
+export const regrowRate = (world: World): number => (active(world) ? (world.hardship ? LEAN_REGROW : 1) * (1 - WINTER_FOOD * winterDepth(world)) : 1);
 /** how fast crops grow right now */
-export const growthRate = (world: World): number => (isRich(world) ? (world.hardship ? LEAN_GROWTH : 1) * (1 - WINTER_CROPS * winterDepth(world)) : 1);
+export const growthRate = (world: World): number => (active(world) ? (world.hardship ? LEAN_GROWTH : 1) * (1 - WINTER_CROPS * winterDepth(world)) : 1);
 
 /** how many times faster than ordinary stored food and food left out go off */
-export const spoilStore = (world: World): number => (isRich(world) ? SPOIL_STORE : 1);
-export const spoilPile = (world: World): number => (isRich(world) ? SPOIL_PILE : 1);
+export const spoilStore = (world: World): number => (active(world) ? SPOIL_STORE : 1);
+export const spoilPile = (world: World): number => (active(world) ? SPOIL_PILE : 1);
 
 /** how far a wolf notices people, and how likely it is to go for them, by day and by night; and how it prowls and how far fire reaches */
 export function wolfNerve(world: World): { rangeDay: number; rangeNight: number; chanceDay: number; chanceNight: number; prowl: number; prowlCloser: number; fire: number } {
-  return isRich(world)
+  return active(world)
     ? { rangeDay: 12, rangeNight: 22, chanceDay: 0.06, chanceNight: 0.3, prowl: 0.8, prowlCloser: 11, fire: 4 }
     : { rangeDay: 9, rangeNight: 17, chanceDay: 0.03, chanceNight: 0.22, prowl: 0.5, prowlCloser: 17, fire: 6 };
 }
