@@ -1,4 +1,5 @@
 import { probe, probePath } from './probe';
+import type { PathOutcome } from './probe';
 import { MinHeap } from './util';
 import { T } from './types';
 import type { World } from './types';
@@ -11,6 +12,8 @@ let From = new Int32Array(0);
 let Seen = new Uint32Array(0);
 let Closed = new Uint32Array(0);
 let gen = 0;
+/** tiles expanded by the most recent search; read only by the work counters */
+let lastExpanded = 0;
 const heap = new MinHeap();
 
 function ensure(n: number): void {
@@ -168,6 +171,7 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
       }
     }
   }
+  lastExpanded = expanded;
   if (probe.on) {
     probe.pathExpanded += expanded;
     if (goalI < 0) {
@@ -175,7 +179,20 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
       if (outOfBudget) probe.pathBudgetHit++;
       else probe.pathUnreachable++;
     }
-    probePath(opts.caller ?? 'other', Math.hypot(gx - sx, gy - sy), goalI >= 0 ? 'ok' : outOfBudget ? 'budget' : 'unreachable', expanded);
+    let outcome: PathOutcome = goalI >= 0 ? 'ok' : outOfBudget ? 'budget' : 'unreachable';
+    let needed = 0;
+    if (outcome === 'budget' && probe.verify) {
+      // diagnostic only: would a search with no practical budget have found it? The answer is discarded; nothing here is counted or read back
+      probe.on = false;
+      try {
+        const full = findPathInner(world, sx, sy, gx, gy, { ...opts, maxNodes: W * H });
+        needed = lastExpanded;
+        outcome = full ? 'budgetReachable' : 'budgetUnreachable';
+      } finally {
+        probe.on = true;
+      }
+    }
+    probePath(opts.caller ?? 'other', Math.hypot(gx - sx, gy - sy), outcome, expanded, needed);
   }
   if (goalI < 0) return null;
 

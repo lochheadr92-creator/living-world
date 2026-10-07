@@ -107,3 +107,47 @@ describe('path search outcomes', () => {
     expect(Object.keys(probePathCells())).toEqual([]);
   });
 });
+
+describe('path search verification (diagnostic)', () => {
+  function arena() {
+    const w = createWorld(defaultSettings('probe-verify'));
+    w.W = 40;
+    w.H = 40;
+    w.terrain = new Uint8Array(40 * 40).fill(T.GRASS);
+    w.solid = new Uint8Array(40 * 40);
+    w.wear = new Float32Array(40 * 40);
+    return w;
+  }
+
+  it('says whether a search that ran out of budget could have found its goal, without changing the answer', () => {
+    const w = arena();
+    for (let y = 0; y < 40; y++) w.solid[y * 40 + 20] = 1;
+    const run = (verify: boolean) => {
+      probe.on = true;
+      probe.verify = verify;
+      probeReset();
+      const far = findPath(w, 3.5, 5.5, 18.5, 5.5, { maxNodes: 12, caller: 'far' });
+      const walled = findPath(w, 3.5, 5.5, 35.5, 5.5, { maxNodes: 12, caller: 'walled' });
+      const snap = probeSnapshot();
+      const cells = probePathCells();
+      probe.on = false;
+      probe.verify = false;
+      probeReset();
+      return { far, walled, snap, cells };
+    };
+    const plain = run(false);
+    const checked = run(true);
+    // same results, same counters for the search itself
+    expect(checked.far).toEqual(plain.far);
+    expect(checked.walled).toEqual(plain.walled);
+    expect(checked.snap).toEqual(plain.snap);
+    // unverified: both just "budget"
+    expect(plain.cells['far|0'].budget).toBe(1);
+    expect(plain.cells['far|0'].budgetReachable).toBe(0);
+    // verified: the open goal was reachable (and needed more than 12 tiles), the walled one was not
+    expect(checked.cells['far|0'].budgetReachable).toBe(1);
+    expect(checked.cells['far|0'].tilesNeeded).toBeGreaterThan(12);
+    expect(checked.cells['walled|1'].budgetUnreachable).toBe(1);
+    expect(checked.cells['walled|1'].budgetReachable).toBe(0);
+  });
+});

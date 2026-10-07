@@ -66,8 +66,12 @@ const zero = (): ProbeCounters => ({
   perceiveFresh: 0,
 });
 
-/** `on` gates every increment, so the cost when off is one boolean test */
-export const probe: ProbeCounters & { on: boolean } = { on: false, ...zero() };
+/**
+ * `on` gates every increment, so the cost when off is one boolean test.
+ * `verify` (only meaningful while `on`) makes a search that ran out of budget be repeated without one, its answer discarded, to learn
+ * whether the goal was reachable after all. That costs real time and changes nothing the simulation can see.
+ */
+export const probe: ProbeCounters & { on: boolean; verify: boolean } = { on: false, verify: false, ...zero() };
 
 export function probeReset(): void {
   Object.assign(probe, zero());
@@ -86,7 +90,7 @@ export function probeSnapshot(): ProbeCounters {
 // Counted per caller (an activity kind, or the name of another call site) and per straight-line distance from start to target.
 
 export const DIST_BUCKETS = ['<20', '20-40', '40-80', '>80'] as const;
-export type PathOutcome = 'ok' | 'unreachable' | 'budget';
+export type PathOutcome = 'ok' | 'unreachable' | 'budget' | 'budgetReachable' | 'budgetUnreachable';
 
 export function distBucket(d: number): number {
   return d < 20 ? 0 : d < 40 ? 1 : d < 80 ? 2 : 3;
@@ -95,19 +99,32 @@ export function distBucket(d: number): number {
 export interface PathCell {
   ok: number;
   unreachable: number;
+  /** ran out of budget (all of the below, when `probe.verify` was off, none of them classified) */
   budget: number;
   expandedOk: number;
   expandedUnreachable: number;
   expandedBudget: number;
+  /** of `budget`, checked with `probe.verify`: an unlimited search found the goal / also found nothing */
+  budgetReachable: number;
+  budgetUnreachable: number;
+  /** tiles the unlimited search expanded to find the goal, summed over the budgetReachable ones */
+  tilesNeeded: number;
 }
 
 const pathCells: Record<string, PathCell> = {};
 
 /** record one finished search. Called only while `probe.on`. */
-export function probePath(caller: string, dist: number, outcome: PathOutcome, expanded: number): void {
+export function probePath(caller: string, dist: number, outcome: PathOutcome, expanded: number, needed = 0): void {
   const key = caller + '|' + distBucket(dist);
-  const c = (pathCells[key] ??= { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0 });
-  if (outcome === 'ok') {
+  const c = (pathCells[key] ??= { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0, budgetReachable: 0, budgetUnreachable: 0, tilesNeeded: 0 });
+  if (outcome === 'budgetReachable' || outcome === 'budgetUnreachable') {
+    c.budget++;
+    c.expandedBudget += expanded;
+    if (outcome === 'budgetReachable') {
+      c.budgetReachable++;
+      c.tilesNeeded += needed;
+    } else c.budgetUnreachable++;
+  } else if (outcome === 'ok') {
     c.ok++;
     c.expandedOk += expanded;
   } else if (outcome === 'unreachable') {

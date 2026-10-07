@@ -12,6 +12,8 @@
 //   --arrivals off   no immigration
 //   --rules scaled   the limits on settlement size as ratios of the founding population, local to a settlement (src/sim/rules.ts);
 //                    the default, ordinary, is the village-sized limits the world was tuned with
+//   --verify         diagnostic: repeat every search that ran out of budget with no budget, to learn whether its goal was reachable after all
+//                    (adds real time; changes nothing the simulation sees). Splits the "budget" column into reachable / unreachable.
 //   --sample T       ticks between samples (default 240, a tenth of a day)
 //   --check T        ticks between invariant checks (default 2400); the ledger pass is O(world), so keep it coarse at scale
 //   --out FILE       write the full record as JSON
@@ -232,6 +234,7 @@ const header = 'tick   day   ms/t  p95    max     pop  hh  home- bld sites  beli
 console.log(header);
 
 probe.on = true;
+probe.verify = flag('verify');
 probeReset();
 lastCounters = probeSnapshot();
 const total = Math.round(days * DAY);
@@ -261,12 +264,13 @@ for (let i = 1; i <= total; i++) {
 }
 check(world);
 probe.on = false;
+probe.verify = false;
 const wall = (Date.now() - t0) / 1000;
 
 // path searches: who asked, how far, and how they ended (ok / unreachable = open set emptied / budget = ran out with tiles to try)
 const cells = probePathCells();
 const sumCells = (pick: (caller: string, bucket: number) => boolean): PathCell => {
-  const t: PathCell = { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0 };
+  const t: PathCell = { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0, budgetReachable: 0, budgetUnreachable: 0, tilesNeeded: 0 };
   for (const [key, c] of Object.entries(cells)) {
     const bar = key.lastIndexOf('|');
     if (!pick(key.slice(0, bar), Number(key.slice(bar + 1)))) continue;
@@ -279,16 +283,16 @@ const cellLine = (label: string, c: PathCell): string => {
   const exp = c.expandedOk + c.expandedUnreachable + c.expandedBudget;
   const fail = c.unreachable + c.budget;
   const p = (v: number, d: number) => (d > 0 ? String(Math.round((v / d) * 1000) / 10) + '%' : '-');
-  return [label.padEnd(24), String(n).padStart(8), p(fail, n).padStart(7), p(c.unreachable, n).padStart(8), p(c.budget, n).padStart(8), String(n ? Math.round(exp / n) : 0).padStart(9), String(c.unreachable ? Math.round(c.expandedUnreachable / c.unreachable) : 0).padStart(9), String(c.budget ? Math.round(c.expandedBudget / c.budget) : 0).padStart(9)].join(' ');
+  return [label.padEnd(24), String(n).padStart(8), p(fail, n).padStart(7), p(c.unreachable, n).padStart(8), p(c.budget, n).padStart(8), String(n ? Math.round(exp / n) : 0).padStart(9), String(c.unreachable ? Math.round(c.expandedUnreachable / c.unreachable) : 0).padStart(9), String(c.budget ? Math.round(c.expandedBudget / c.budget) : 0).padStart(9), String(c.budgetReachable).padStart(8), String(c.budgetUnreachable).padStart(8), String(c.budgetReachable ? Math.round(c.tilesNeeded / c.budgetReachable) : 0).padStart(9)].join(' ');
 };
-const pathHead = ['search'.padEnd(24), 'n'.padStart(8), 'failed'.padStart(7), 'unreach.'.padStart(8), 'budget'.padStart(8), 'tiles/call'.padStart(9), 'tiles/unr'.padStart(9), 'tiles/bud'.padStart(9)].join(' ');
+const pathHead = ['search'.padEnd(24), 'n'.padStart(8), 'failed'.padStart(7), 'unreach.'.padStart(8), 'budget'.padStart(8), 'tiles/call'.padStart(9), 'tiles/unr'.padStart(9), 'tiles/bud'.padStart(9), 'bud:reach'.padStart(8), 'bud:unr'.padStart(8), 'need/reach'.padStart(9)].join(' ');
 const callers = [...new Set(Object.keys(cells).map((k) => k.slice(0, k.lastIndexOf('|'))))];
 const callerTot = (c: string) => {
   const t = sumCells((who) => who === c);
   return t.ok + t.unreachable + t.budget;
 };
 callers.sort((a, b) => callerTot(b) - callerTot(a));
-console.log('\npath searches by caller (failed = unreachable + budget; shares are of that caller\'s searches)');
+console.log('\npath searches by caller (failed = unreachable + budget; shares are of that caller\'s searches; with --verify, budget splits into reachable / unreachable and need/reach is the mean tiles an unlimited search needed)');
 console.log(pathHead);
 console.log(cellLine('ALL', sumCells(() => true)));
 for (const c of callers) console.log(cellLine(c, sumCells((who) => who === c)));
