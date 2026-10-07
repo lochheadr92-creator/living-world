@@ -1,10 +1,13 @@
 // Small persisted preferences (localStorage). Every access is guarded: storage can be missing or blocked.
+import type { ProfileName } from '../sim/profiles';
 import type { Overlays } from './game';
 
 export interface Prefs {
   seed: string;
   harsh: boolean;
   immigration: boolean;
+  /** the size of world last started: 'normal' (the village), 'large' or 'huge' */
+  size: ProfileName;
   speed: number;
   overlays: Overlays;
   debug: boolean;
@@ -18,6 +21,7 @@ export const DEFAULT_PREFS: Prefs = {
   seed: 'meadow',
   harsh: false,
   immigration: true,
+  size: 'normal',
   speed: 1,
   overlays: { perception: false, paths: false, intentions: false, knowledge: false, labels: false },
   debug: false,
@@ -33,6 +37,8 @@ export function loadPrefs(): Prefs {
     return {
       ...DEFAULT_PREFS,
       ...p,
+      // a stored size that is not one we know (an old or edited value) is the village
+      size: p.size === 'large' || p.size === 'huge' ? p.size : 'normal',
       overlays: { ...DEFAULT_PREFS.overlays, ...(p.overlays ?? {}) },
     };
   } catch {

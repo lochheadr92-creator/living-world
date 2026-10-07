@@ -246,7 +246,8 @@ export class Game {
   }
 
   loadScene(scene: SceneId): void {
-    this.restart({ scene });
+    // staged scenes are small flat worlds run by the ordinary rules, whatever larger world they were started from
+    this.restart({ scene, profile: undefined, ruleSet: undefined, settlementFounders: undefined });
   }
 
   get stateHash(): string {

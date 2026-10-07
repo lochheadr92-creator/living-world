@@ -48,6 +48,22 @@ export function settingsForProfile(profile: ProfileName, seed: string, base: Par
   return s;
 }
 
+/**
+ * The settings to hand to Game.restart for a world of this profile. restart merges into the settings of the world being left, so all three
+ * profile keys are always present here (undefined for the ordinary world): going back to it clears what a larger world set.
+ */
+export function restartSettings(profile: ProfileName, seed: string, base: Partial<Settings> = {}): Settings {
+  const s = settingsForProfile(profile, seed, base);
+  return { ...s, profile: s.profile, ruleSet: s.ruleSet, settlementFounders: s.settlementFounders };
+}
+
+/** what a world of this profile is, for a menu to say: the size of the map, how many people start, in how many camps */
+export function profileFacts(profile: ProfileName): { W: number; H: number; founders: number; camps: number } {
+  if (profile === 'normal') return { W: 80, H: 80, founders: ORDINARY_CAMP, camps: 1 };
+  const d = REGIONS[profile];
+  return { W: d.W, H: d.H, founders: d.founders, camps: d.cols * d.rows };
+}
+
 /** where the camps are and how many people each starts with, or null for the ordinary world */
 export function layoutFor(settings: Settings): Layout | null {
   if (!settings.profile) return null;

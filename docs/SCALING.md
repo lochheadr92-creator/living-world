@@ -113,7 +113,14 @@ Look at one before running it: `npx vite-node scripts/regions.ts -- --profile hu
 fires, what lies within reach, the nearest shore and wolf den, the walking route to every other camp, and a check that nobody knows another
 camp. Run it: `npx vite-node scripts/bench.ts -- --profile huge --days 3`.
 
-To watch one in the app, there is no world-menu entry yet; use the browser console (the app's game is `__game`):
+To watch one in the app, open the world menu (the seed chip) and pick a size under *World size*: **Village** (the ordinary world),
+**Large** or **Huge**. The choice applies to the next *New world* (and to the *Natural world* scene button), is remembered in the browser's
+preferences, and the menu says which size the current world is. The other staged scenes are small hand-built tests and always use the
+ordinary rules. A Huge world takes a moment to build, so the button shows "Building the world…" first. A Huge save is about 2.5 MB
+at the start and 4 MB after a day, against a browser-storage limit of about 5 MB, so a Huge world can be saved for only about a day; the
+menu says so and the save-failure message names it.
+
+The same worlds can be started from the browser console (the app's game is `__game`):
 
 ```js
 __game.restart({ population: 250, profile: 'huge', ruleSet: 'scaled', settlementFounders: 42 })    // 6 camps, 256×256
