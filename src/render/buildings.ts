@@ -162,15 +162,38 @@ export class BuildingPainter {
   }
 }
 
+/**
+ * A sack's shading is a gradient anchored at the sack's own position, and every home with food stored draws one every frame. It was built
+ * (a gradient and two colour stops) afresh for each, which at the widest zoom on a large world was a large part of the frame. Homes do not
+ * move, so the gradient for a position is kept and reused: it is the same gradient, with the same geometry, so the picture is the same.
+ * A position is kept per canvas; a map that has grown past `SACK_SHADES` positions (a pile that was left somewhere once, a home that was
+ * pulled down) is simply started again.
+ */
+const SACK_SHADES = 1024;
+const sackShade = new WeakMap<CanvasRenderingContext2D, Map<number, CanvasGradient>>();
+
+function sackGradient(ctx: CanvasRenderingContext2D, x: number, y: number): CanvasGradient {
+  let m = sackShade.get(ctx);
+  if (!m) sackShade.set(ctx, (m = new Map()));
+  // x and y are isometric screen coordinates well inside ±2^20 and are the same numbers every frame for the same place
+  const key = x * 4194304 + y;
+  let g = m.get(key);
+  if (!g) {
+    if (m.size >= SACK_SHADES) m.clear();
+    g = ctx.createRadialGradient(x - 2, y - 6, 1, x, y - 3, 7);
+    g.addColorStop(0, '#e6d6ae');
+    g.addColorStop(1, '#b49a68');
+    m.set(key, g);
+  }
+  return g;
+}
+
 export function sack(ctx: CanvasRenderingContext2D, x: number, y: number, tint: string): void {
   ctx.fillStyle = 'rgba(25,20,10,0.3)';
   ctx.beginPath();
   ctx.ellipse(x, y + 1, 6, 2.4, 0, 0, Math.PI * 2);
   ctx.fill();
-  const g = ctx.createRadialGradient(x - 2, y - 6, 1, x, y - 3, 7);
-  g.addColorStop(0, '#e6d6ae');
-  g.addColorStop(1, '#b49a68');
-  ctx.fillStyle = g;
+  ctx.fillStyle = sackGradient(ctx, x, y);
   ctx.beginPath();
   ctx.moveTo(x - 4, y);
   ctx.quadraticCurveTo(x - 7, y - 6, x - 2, y - 9);
