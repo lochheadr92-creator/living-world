@@ -1,3 +1,4 @@
+import { hubWithin } from './settlements';
 import { SAPLING_TICKS, SOURCE_ITEM, SOURCE_MAX, SOURCE_REGROW } from './constants';
 import { ledgerCreate } from './economy';
 import { addFx } from './events';
@@ -73,7 +74,7 @@ export function updateSources(world: World): void {
         const ty = s.y + dy;
         if ((dx || dy) && isFreeLand(world, tx, ty)) {
           const t = world.terrain[ty * world.W + tx];
-          const nearCamp = Math.hypot(tx - world.camp.x, ty - world.camp.y) < 7;
+          const nearCamp = hubWithin(world, tx, ty, 7);
           if ((t === T.GRASS || t === T.FOREST) && !nearCamp && treesNear(world, tx, ty, 3) < 9 && world.waterDist[ty * world.W + tx] > 1) {
             makeSource(world, 'tree', tx, ty, 0, 0.02);
           }

@@ -8,6 +8,7 @@ import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeli
 import type { Ctx } from './optutil';
 import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
 import { rulesOf, within } from './rules';
+import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
 import { RECIPES, RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
 import type { Recipe } from './recipes';
@@ -906,7 +907,7 @@ function optPlanFacilities(ctx: Ctx): void {
       tag: 'build',
       make: () => {
         const d = BUILD_DEF[type];
-        const camp = world.camp;
+        const camp = baseHub(world, p, ctx.home);
         let spot: { x: number; y: number } | null = null;
         let depositId = 0;
         if (type === 'quarry') {

@@ -1,4 +1,5 @@
 import { addEvent, addFx, addLog } from './events';
+import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
 import { isWalkable, newId, personById, registerGeneric } from './registry';
@@ -141,7 +142,7 @@ function scared(world: World, a: Animal): boolean {
   return n >= 2;
 }
 
-function newWander(world: World, a: Animal): void {
+export function newWander(world: World, a: Animal): void {
   // after dark wolves range farther, toward the edge of the settlement (never into the firelight)
   const night = world.light < 0.3;
   const prowl = night && world.rng.next() < 0.5;
@@ -149,8 +150,9 @@ function newWander(world: World, a: Animal): void {
     let x: number;
     let y: number;
     if (prowl) {
-      const dx = world.camp.x - a.denX;
-      const dy = world.camp.y - a.denY;
+      const hub = nearestHub(world, a.denX, a.denY);
+      const dx = hub.x - a.denX;
+      const dy = hub.y - a.denY;
       const d = Math.hypot(dx, dy) || 1;
       const reach = Math.max(0, d - 17 - world.rng.next() * 5);
       const k = reach / d;

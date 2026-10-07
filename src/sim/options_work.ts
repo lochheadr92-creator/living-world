@@ -2,6 +2,7 @@ import { newActivity } from './activities';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
+import { baseHub, nearestHub } from './settlements';
 import { depositLead } from './production';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
@@ -19,7 +20,7 @@ import { foragePlans } from './options_survival';
 import { isFreeLand } from './registry';
 import { affinityOf } from './relations';
 import { hashUnit } from './rng';
-import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind } from './types';
+import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { T } from './types';
 
 const unitsOf = (n: number | undefined): number => n ?? 0;
@@ -69,7 +70,9 @@ export function weatherMult(ctx: Ctx): number {
  */
 export function settlementAnchor(ctx: Ctx): { x: number; y: number } {
   const home = ctx.home;
-  return home ? { x: home.x + home.w / 2, y: home.y + home.h / 2 } : { x: ctx.world.camp.x, y: ctx.world.camp.y };
+  if (home) return { x: home.x + home.w / 2, y: home.y + home.h / 2 };
+  const hub = nearestHub(ctx.world, ctx.p.x, ctx.p.y);
+  return { x: hub.x, y: hub.y };
 }
 
 export function friendlyTo(ctx: Ctx, hhId: number): number {
@@ -569,10 +572,11 @@ function optPlanBuild(ctx: Ctx): void {
       tag: 'build',
       make: () => {
         const home = ctx.home;
-        const ax = home ? home.x + home.w / 2 : world.camp.x;
-        const ay = home ? home.y + home.h / 2 : world.camp.y;
+        const hub = baseHub(world, p, home);
+        const ax = home ? home.x + home.w / 2 : hub.x;
+        const ay = home ? home.y + home.h / 2 : hub.y;
         let spot = null as { x: number; y: number } | null;
-        if (type === 'storehouse') spot = findBuildSpot(world, p, type, world.camp.x, world.camp.y, 4, 11, 7);
+        if (type === 'storehouse') spot = findBuildSpot(world, p, type, hub.x, hub.y, 4, 11, 7);
         else if (type === 'fire') spot = findBuildSpot(world, p, type, ax, ay, 3, 9, 5);
         else spot = findBuildSpot(world, p, type, ax, ay, 4, 16, type === 'hut' ? 8 : 6);
         if (!spot) {
@@ -1090,8 +1094,9 @@ function optExplore(ctx: Ctx): void {
   const rMax = 24 + 10 * p.traits.curiosity;
   // pick a frontier: sample points and prefer those whose surroundings are unexplored
   let best: { x: number; y: number; score: number } | null = null;
-  const ax = ctx.home ? ctx.home.x : world.camp.x;
-  const ay = ctx.home ? ctx.home.y : world.camp.y;
+  const hub = nearestHub(world, p.x, p.y);
+  const ax = ctx.home ? ctx.home.x : hub.x;
+  const ay = ctx.home ? ctx.home.y : hub.y;
   for (let i = 0; i < 16; i++) {
     const ang = hashUnit(p.id, Math.floor(world.tick / 60), i * 7) * Math.PI * 2;
     const r = rMin + hashUnit(p.id, Math.floor(world.tick / 60), i * 13 + 1) * (rMax - rMin);
@@ -1151,9 +1156,10 @@ function optExplore(ctx: Ctx): void {
   });
 }
 
-function directionName(world: { camp: { x: number; y: number } }, x: number, y: number): string {
-  const dx = x - world.camp.x;
-  const dy = y - world.camp.y;
+function directionName(world: World, x: number, y: number): string {
+  const hub = nearestHub(world, x, y);
+  const dx = x - hub.x;
+  const dy = y - hub.y;
   const sx = dx - dy;
   const sy = dx + dy;
   const ang = Math.atan2(sx, -sy);
@@ -1454,8 +1460,9 @@ function optClaimHome(ctx: Ctx): void {
 // ───────────────────────── fallback ─────────────────────────
 function optIdle(ctx: Ctx): void {
   const { world, p } = ctx;
-  const ax = ctx.home ? ctx.home.doorX + 0.5 : world.camp.x;
-  const ay = ctx.home ? ctx.home.doorY + 0.5 : world.camp.y + 2;
+  const hub = nearestHub(world, p.x, p.y);
+  const ax = ctx.home ? ctx.home.doorX + 0.5 : hub.x;
+  const ay = ctx.home ? ctx.home.doorY + 0.5 : hub.y + 2;
   const sc = new Scorer().add('nothing pressing', 6);
   addOption(ctx, {
     kind: 'wander',

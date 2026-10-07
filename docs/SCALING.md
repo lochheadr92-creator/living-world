@@ -66,10 +66,27 @@ once, and there is one timber yard, kiln, smithy, bakery, granary, hall and stor
     workplace on the far side of the map does not block a new one, and is not counted as a means the planner can build on.
   Scaled rules at 28 founders are the ordinary limits made local.
 
-Two things are deliberately not changed. The rule that a household has one site open at a time stays: it limits a household, not a
-settlement. And workplaces are still *sited* around the single `world.camp` (`production.ts`, `options_work.ts`); the locality of the rules
-uses each person's home as the anchor, which is the same settlement until a world has more than one. Several settlements need the generator
-and the siting rules to know about them — the next step, not this one.
+One thing is deliberately not changed: a household still has one site open at a time, because that limits a household, not a settlement.
+
+## Settlements
+
+The ordinary world has one camp, `world.camp`, and much of the code is written in terms of "the camp". `src/sim/settlements.ts` makes each
+of those mean *the settlement nearest to where this is happening*. The camp stays settlement 0; further settlements, if a world has any, are
+in the optional `world.extraSettlements`, which an ordinary world does not have (so its saves, state hash and behaviour are exactly as before:
+every lookup returns `world.camp` itself, and `tests/golden.test.ts` holds that).
+
+What follows the nearest settlement:
+
+* where workshops, the granary, the hall and the storehouse are laid out (around the planner's own settlement; a quarry at the outcrop nearest to it);
+* where a person with no home puts their base, their first field, their exploring and their idle wandering;
+* where travellers head when they arrive (the settlement nearest the edge they come in at, and the camp fire nearest it), and the shore they are told about;
+* which way wolves prowl at night (toward the settlement nearest their den);
+* what "near camp" and "a long way north of camp" mean when people tell each other where things are, and which news counts as far away;
+* where new saplings may not seed (near any settlement).
+
+What still uses the original camp only: the position of weather events in the feed, the camera's "home" key and starting position, the
+decorative critters, the world generator (which lays out one camp and everything around it), and the staged scenes. Nothing generates more
+than one settlement yet; the next step is a generator that does. Until then a second settlement is added in code with `addSettlement`.
 
 ### What the scaled rules change (measured)
 
@@ -154,8 +171,9 @@ Read directly from the code (verified):
 * `src/render/camera.ts` and `src/ui/minimap.ts` use `MAP_W` / `MAP_H` instead of the world's own size.
 
 Reported by code review but not independently re-read: per-person `explored` arrays of `W×H` bytes; relations created for every pair of
-founders; beliefs that are never forgotten; `friendlyTo` / `repairStake` scanning every person per known foreign home; a single `world.camp`
-read in about 25 places; terrain redrawn every frame; the tick clock capped by count rather than by time; localStorage saves that would
+founders; beliefs that are never forgotten; `friendlyTo` / `repairStake` scanning every person per known foreign home; terrain redrawn every frame; the tick clock capped by count rather than by time; localStorage saves that would
 exceed the browser quota at scale.
 
-None of these has been changed. Whether and how to change each is a decision about the rules of the world, not about measurement.
+The limits on settlement size (first group above) are now a rule set, the use of `world.camp` is now a list of settlements (both described
+above), and the weather-shelter bug is fixed. None of the rest has been changed: whether and how to change each is a decision about the rules of
+the world, not about measurement.

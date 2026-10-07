@@ -934,6 +934,8 @@ export interface World {
   light: number;
   ledger: Ledger;
   camp: { x: number; y: number };
+  /** further settlements besides the camp (settlements.ts); absent in a world with one, so that world is saved and hashed exactly as before */
+  extraSettlements?: { x: number; y: number }[];
   byId: Map<number, Entity>;
   grid: SpatialGrid;
   pgrid: SpatialGrid;

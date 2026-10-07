@@ -76,7 +76,7 @@ approaches the ceiling. Time spent on a batch that is never finished teaches not
 ## Workplaces
 
 * **Location.** Workplaces are laid out on free dry land the planner's person has seen, not against water, near the camp
-  (kiln and smithy a little further out). A **quarry** is always laid out beside a known stone outcrop; its batches cut
+  (kiln and smithy a little further out; in a world with several settlements, the planner's nearest one). A **quarry** is always laid out beside a known stone outcrop; its batches cut
   stone out of that outcrop and nowhere else. A **house** is not a new building: it is the owner's hut rebuilt *in place*
   (the same building object, the same footprint and household, still lived in while the work goes on, store and contents
   intact).
