@@ -17,6 +17,7 @@ for (const f of readdirSync(dir)) {
   for (const line of readFileSync(join(dir, f), 'utf8').split('\n')) {
     if (!line.trim()) continue;
     const r = JSON.parse(line) as Row;
+    if (!r.spec) continue; // the end-of-seed marker
     if (!bySeed.has(r.seed)) bySeed.set(r.seed, new Map());
     bySeed.get(r.seed)!.set(r.spec, r);
   }
@@ -76,7 +77,7 @@ for (const spec of specs) {
     if (verdict(st, noise[m], same === rows.length) !== 'larger than chance') continue;
     lines.push(`${m} ${mean(rows.map((r) => ctl(r).outcome[m])).toFixed(1)} → ${mean(rows.map((r) => r.outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
   }
-  console.log(lines.length ? '   In words: ' + lines.join('; ') + '.' : '   In words: nothing moved by more than a one-draw nudge moves it.');
+  console.log(same === rows.length ? '   In words: the branch ended in exactly the control\'s state in every seed.' : lines.length ? '   In words: ' + lines.join('; ') + '.' : '   In words: nothing moved by more than a one-draw nudge moves it.');
 }
 
 if (storySeed) {

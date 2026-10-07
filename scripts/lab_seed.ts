@@ -20,3 +20,5 @@ const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter(B
 
 const world = createWorld(settingsForProfile(profile, seed, { immigration: false }));
 runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, ...r, hashes: undefined })));
+// a last line so that a runner can tell a finished seed from one cut short (the lab.mjs runner skips finished seeds when re-run)
+console.log(JSON.stringify({ seed, done: true }));

@@ -1,9 +1,10 @@
 // Run the counterfactual lab on every core of this machine, then print the report. Works on Windows, macOS, Linux.
 //   node scripts/lab.mjs [--out lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--story meadow]
+// Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn } from 'node:child_process';
 import { cpus } from 'node:os';
-import { createWriteStream, mkdirSync, readFileSync } from 'node:fs';
+import { createWriteStream, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const args = process.argv.slice(2);
@@ -33,7 +34,12 @@ let finished = 0;
 async function worker() {
   while (next < seeds.length) {
     const seed = seeds[next++];
-    const file = createWriteStream(join(out, `lab_${seed}.jsonl`));
+    const path = join(out, `lab_${seed}.jsonl`);
+    if (existsSync(path) && readFileSync(path, 'utf8').trimEnd().endsWith('"done":true}')) {
+      console.log(`seed ${seed} already done  [${++finished}/${seeds.length}]`);
+      continue;
+    }
+    const file = createWriteStream(path);
     const code = await node('scripts/lab_seed.ts', ['--seed', seed, ...extra], file);
     await new Promise((r) => file.end(r));
     console.log(`seed ${seed} ${code === 0 ? 'done' : 'FAILED (' + code + ')'}  [${++finished}/${seeds.length}]`);
