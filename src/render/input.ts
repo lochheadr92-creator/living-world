@@ -1,5 +1,5 @@
 import type { Game } from '../app/game';
-import { MAX_ZOOM, MIN_ZOOM, clampCamera, screenToWorld } from './camera';
+import { MAX_ZOOM, clampCamera, minZoomFor, screenToWorld } from './camera';
 import { pickEntity } from './picking';
 import { project } from './iso';
 import { clamp } from '../sim/util';
@@ -84,7 +84,7 @@ export class CanvasInput {
         const z = this.game.camera.zoom;
         this.game.camera.x -= (p.x - prev.x) / z;
         this.game.camera.y -= (p.y - prev.y) / z;
-        clampCamera(this.game.camera, v.w, v.h);
+        clampCamera(this.game.camera, this.game.world, v);
         this.canvas.style.cursor = 'grabbing';
       }
       this.pointers.set(e.pointerId, p);
@@ -127,13 +127,13 @@ export class CanvasInput {
     const v = this.view();
     const cam = this.game.camera;
     const before = screenToWorld(cam, v.w, v.h, px, py);
-    cam.zoom = clamp(cam.zoom * k, MIN_ZOOM, MAX_ZOOM);
+    cam.zoom = clamp(cam.zoom * k, minZoomFor(this.game.world, v), MAX_ZOOM);
     // keep the world point under the cursor fixed
     const after = project(before.x, before.y);
     cam.x = after.sx - (px - v.w / 2) / cam.zoom;
     cam.y = after.sy - (py - v.h / 2) / cam.zoom;
     this.game.fly = null;
-    clampCamera(cam, v.w, v.h);
+    clampCamera(cam, this.game.world, v);
   }
 
   private dbl(e: MouseEvent): void {
@@ -181,7 +181,7 @@ export class CanvasInput {
       cam.y += dy * sp * 0.6;
       this.game.fly = null;
       if (this.game.following) this.game.setFollow(false);
-      clampCamera(cam, v.w, v.h);
+      clampCamera(cam, this.game.world, v);
     }
   }
 }

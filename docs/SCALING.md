@@ -111,8 +111,26 @@ of the others.
 
 Look at one before running it: `npx vite-node scripts/regions.ts -- --profile huge --seed meadow` prints, for each camp, its people, roofs,
 fires, what lies within reach, the nearest shore and wolf den, the walking route to every other camp, and a check that nobody knows another
-camp. Run it: `npx vite-node scripts/bench.ts -- --profile huge --days 3`. They are not offered in the world menu yet: the camera and the
-minimap still assume an 80×80 map (`MAP_W` / `MAP_H`).
+camp. Run it: `npx vite-node scripts/bench.ts -- --profile huge --days 3`.
+
+To watch one in the app, there is no world-menu entry yet; use the browser console (the app's game is `__game`):
+
+```js
+__game.restart({ population: 250, profile: 'huge', ruleSet: 'scaled', settlementFounders: 42 })    // 6 camps, 256×256
+__game.restart({ population: 100, profile: 'large', ruleSet: 'scaled', settlementFounders: 25 })   // 4 camps, 160×160
+__game.restart({ population: 28, profile: undefined, ruleSet: undefined, settlementFounders: undefined })   // the ordinary world again
+```
+
+The camera and the minimap follow the size of the world being shown. The camera stays over the map whatever its size. The minimap draws
+the whole map (a 256×256 map is under one pixel per tile on a 168-pixel minimap, so buildings are drawn smaller and the terrain sampled
+more finely); clicking it moves the camera to that place, checked on every camp of a `huge` world. The widest view is limited: the
+ordinary world may zoom out to 0.3, which shows all of it; a larger world may zoom out only until the window shows no more ground than the
+ordinary world's widest view does (about 6,400 tiles: zoom 0.445 in a 1440×900 window), so that a frame never draws many times what the
+ordinary world's does. The minimap is how you see the rest. Measured in headless Chromium (software rendering, so slower than a graphics
+card): a `huge` world costs 7–8 ms a frame at normal zoom and 16 ms at its widest view, the same as the ordinary world's 16 ms at its
+widest in that run. Before the limit its view could be 0.3, and a frame cost about 100 ms (10 frames a second): 43% of it was `sack` in
+`render/buildings.ts`, the small bag drawn by every home's door with a new radial gradient each frame, which shows up when several camps'
+homes are in view. That is a rendering cost worth fixing on its own; the limit only keeps it from showing.
 
 ### What the scaled rules change (measured)
 
@@ -228,7 +246,6 @@ Read directly from the code (verified):
 * `src/sim/wildlife.ts` `moveWolf` — a wolf whose path search returns null searches again on the next tick.
 * `src/sim/meals.ts` — the meal list is trimmed to 60 by dropping the oldest, whether or not it is still active.
 * `src/sim/optutil.ts` `foodCount` does not count bread.
-* `src/render/camera.ts` and `src/ui/minimap.ts` use `MAP_W` / `MAP_H` instead of the world's own size.
 
 Reported by code review but not independently re-read: per-person `explored` arrays of `W×H` bytes; relations created for every pair of
 founders; beliefs that are never forgotten; `friendlyTo` / `repairStake` scanning every person per known foreign home; terrain redrawn every frame; the tick clock capped by count rather than by time; localStorage saves that would
