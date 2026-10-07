@@ -19,7 +19,9 @@ const sample = Number(opt('sample', '120'));
 // `--branches none` runs the control alone (the gates use that)
 const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((b) => b && b !== 'none');
 
-const world = createWorld(settingsForProfile(profile, seed, { immigration: false }));
+// `--dynamics rich` founds the world with rich dynamics (so the control is rich too)
+const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
+const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
 runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, ...r, hashes: undefined })));
 // a last line so that a runner can tell a finished seed from one cut short (the lab.mjs runner skips finished seeds when re-run)
 console.log(JSON.stringify({ seed, done: true }));

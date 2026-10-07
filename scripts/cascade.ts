@@ -1,5 +1,5 @@
 // Measure how much one thing leads to another in a world (scripts/cascade/trace.ts).
-//   npx vite-node scripts/cascade.ts -- --seed meadow [--profile large] [--days 12] [--json out.json]
+//   npx vite-node scripts/cascade.ts -- --seed meadow [--profile large] [--days 12] [--dynamics rich] [--json out.json]
 import { writeFileSync } from 'node:fs';
 import { createWorld } from '../src/sim/factory';
 import { settingsForProfile } from '../src/sim/profiles';
@@ -14,7 +14,8 @@ const opt = (name: string, dflt: string): string => {
 const seed = opt('seed', 'meadow');
 const profile = opt('profile', 'large') as ProfileName;
 const days = Number(opt('days', '12'));
-const world = createWorld(settingsForProfile(profile, seed, { immigration: false }));
+const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
+const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
 const r = trace(world, days);
 if (opt('json', '')) writeFileSync(opt('json', ''), JSON.stringify({ seed, profile, ...r }));
 console.log(`seed ${seed} (${profile}), ${r.days} days, ${r.people} people alive`);
@@ -22,6 +23,7 @@ console.log(`  happenings ${r.happenings}: ${Object.entries(r.perSystem).map(([k
 console.log(`  links ${r.links}, of which between different systems ${r.crossSystemLinks} (${r.links ? Math.round((100 * r.crossSystemLinks) / r.links) : 0}%)`);
 console.log(`  cascade sizes: ${Object.entries(r.sizes).map(([k, v]) => k + ':' + v).join('  ')}; story-like ${r.storyLike}; longest chain ${r.longestDepth}`);
 console.log('  commonest links: ' + Object.entries(r.transitions).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k, v]) => `${k} ${v}`).join(', '));
+if (r.mood) console.log(`  mood: mean ${r.mood.mean}, lowest ${r.mood.lowest}, ${r.mood.shareBelowMinus25}% of person-checks below -25; lean seasons ${r.mood.leanSeasons}; thoughts started: ${Object.entries(r.mood.thoughtsStarted).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + ' ' + v).join(', ')}`);
 console.log('  what a happening makes a person go on to do (activity lift ≥1.5, ≥8 cases):');
 const labels = Object.keys(r.lifts);
 if (!labels.length) console.log('    none: nothing changes what anyone does next');

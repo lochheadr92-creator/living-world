@@ -1,5 +1,5 @@
 // Run the counterfactual lab on every core of this machine, then print the report. Works on Windows, macOS, Linux.
-//   node scripts/lab.mjs [--out lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--story meadow]
+//   node scripts/lab.mjs [--out lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--dynamics rich] [--story meadow]
 // Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn } from 'node:child_process';
@@ -16,6 +16,7 @@ const out = opt('out', 'lab_out');
 const n = Number(opt('seeds', '8'));
 const extra = ['--fork', opt('fork', '4'), '--days', opt('days', '8'), '--profile', opt('profile', 'large')];
 if (opt('branches', '')) extra.push('--branches', opt('branches', ''));
+if (opt('dynamics', '')) extra.push('--dynamics', opt('dynamics', ''));
 const all = ['meadow', 'river', 'fern', 'aspen', 'birch', 'cedar', 'gen-1', 'gen-2', 'gen-3', 'gen-4', 'gen-5', 'gen-6', ...Array.from({ length: 20 }, (_, i) => `nov-${i + 1}`)];
 const seeds = all.slice(0, n);
 const cores = Math.max(1, cpus().length);

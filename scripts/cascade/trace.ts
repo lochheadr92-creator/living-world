@@ -43,6 +43,8 @@ export interface CascadeReport {
   /** for each kind of happening: how much likelier a given activity is in the 2 hours after it than at any time (only lifts ≥ 1.5, ≥ 8 cases) */
   lifts: Record<string, { activity: string; lift: number; n: number }[]>;
   stories: Cascade[];
+  /** rich dynamics only: how people were doing across the run */
+  mood?: { mean: number; lowest: number; shareBelowMinus25: number; thoughtsStarted: Record<string, number>; leanSeasons: number };
 }
 
 const WINDOW = DAY; // a happening links to a person's previous happening only within a day
@@ -67,6 +69,7 @@ export function trace(world: World, days: number, onTick?: (w: World) => void): 
   const end = world.tick + days * DAY;
   const start = world.tick;
 
+  const moodAcc = { sum: 0, n: 0, min: 0, low: 0, seen: new Set<string>(), kinds: {} as Record<string, number> };
   const poll = () => {
     for (const e of world.events) {
       if (e.id <= seenEvent) continue;
@@ -75,6 +78,19 @@ export function trace(world: World, days: number, onTick?: (w: World) => void): 
     }
     for (const p of world.persons) {
       if (!p.alive) continue;
+      if (p.mood) {
+        moodAcc.sum += p.mood.level;
+        moodAcc.n++;
+        moodAcc.min = Math.min(moodAcc.min, p.mood.level);
+        if (p.mood.level < -25) moodAcc.low++;
+        for (const t of p.mood.thoughts) {
+          const key = `${p.id}|${t.kind}|${t.since}`;
+          if (moodAcc.seen.has(key)) continue;
+          moodAcc.seen.add(key);
+          const base = t.kind.split(':')[0];
+          moodAcc.kinds[base] = (moodAcc.kinds[base] ?? 0) + 1;
+        }
+      }
       let s = live.get(p.id);
       if (!s) live.set(p.id, (s = { hungry: p.needs.hunger < CRITICAL.hunger, thirsty: p.needs.thirst < CRITICAL.thirst, hurt: p.health < 60, sore: new Set() }));
       const flag = (now: boolean, was: boolean, label: string, system: string, text: string) => {
@@ -203,6 +219,15 @@ export function trace(world: World, days: number, onTick?: (w: World) => void): 
     longestDepth: Math.max(0, ...depth),
     lifts,
     stories,
+    mood: moodAcc.n
+      ? {
+          mean: Math.round((moodAcc.sum / moodAcc.n) * 10) / 10,
+          lowest: moodAcc.min,
+          shareBelowMinus25: Math.round((1000 * moodAcc.low) / moodAcc.n) / 10,
+          thoughtsStarted: moodAcc.kinds,
+          leanSeasons: nodes.filter((n) => n.text.startsWith('A lean season begins')).length,
+        }
+      : undefined,
   };
 }
 

@@ -51,7 +51,7 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * Specs: `control`; `nudge:N` (draw N random numbers and change nothing else: the noise floor); `remove:<type+type>:<radius>` (delete
  * those sources within the radius of any settlement); `random-choice` (rank options by a hash, not by utility); `no-wolf-memory`
  * (switch off an optimisation that is meant to be exact: a branch that is not identical to the control would be a bug).
- * `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -77,6 +77,16 @@ export function parseIntervention(specIn: string): Intervention {
       spec: label,
       summary: `every ${types.join(', ')} ${where} is removed`,
       apply: (w) => `${removeSources(w, types, r)} sources removed`,
+    };
+  }
+  if (kind === 'rich') {
+    return {
+      spec: label,
+      summary: 'rich dynamics switched on at the fork: people have a mood that changes what they do, and lean seasons happen',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on';
+      },
     };
   }
   if (kind === 'random-choice') {
@@ -115,6 +125,8 @@ export const METRICS = [
   'meanHunger',
   'firstYardDay',
   'firstHallDay',
+  'meanMood',
+  'lowMood',
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Outcome = Record<Metric, number>;
@@ -128,7 +140,11 @@ export function outcomeOf(w: World, from: number, endTick: number): { outcome: O
   let homeless = 0;
   let hunger = 0;
   let crit = 0;
+  let mood = 0;
+  let low = 0;
   for (const p of alive) {
+    mood += p.mood?.level ?? 0;
+    if ((p.mood?.level ?? 0) < -25) low++;
     const h = hh.get(p.hhId);
     if (!h || !h.homeId || !homeIds.has(h.homeId)) homeless++;
     hunger += p.needs.hunger;
@@ -155,6 +171,8 @@ export function outcomeOf(w: World, from: number, endTick: number): { outcome: O
       meanHunger: Math.round((hunger / Math.max(1, alive.length)) * 10) / 10,
       firstYardDay: day('timber_yard'),
       firstHallDay: day('hall'),
+      meanMood: Math.round((mood / Math.max(1, alive.length)) * 10) / 10,
+      lowMood: low,
     },
     milestones,
   };
