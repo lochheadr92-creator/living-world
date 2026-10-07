@@ -410,6 +410,43 @@ random agents still reach 6 workplaces and 14 homes because the options themselv
 here, because the hard filters keep random agents alive. So the thesis is not killed by this test (the baseline did not match), and it is not
 confirmed either: the next test is whether anything outside the authored option list ever appears.
 
+## The novel-need test (24 seeds, Large, immigration off)
+
+`scripts/novelneed.ts`, run for every seed by `node scripts/novelneed_all.mjs --out nn_out --seeds 24 --fork 6 --days 10`: the world is run
+to day 6, saved, and loaded four times; one copy is the control, the others lose all trees within 22 tiles of a settlement (`no-wood`),
+all wild food within 35 tiles (`no-food`: berries, fruit, grain, fish; only farming is left), or all clay pits and ore veins (`no-clay`).
+Each is run 10 more days. The same 2 seeds give identical numbers on Linux (4 cores) and Windows (24 cores); the 24-seed run below was made on
+the Windows machine. Counts are per seed unless stated; "pairs" are (activity kind, target type) started after the fork.
+
+| | deaths | people | buildings raised | plots raised | farthest new building (tiles) | explore starts | cart hauls | new settlement | pairs unseen in any control |
+|---|---|---|---|---|---|---|---|---|---|
+| control | 0.2 | 104.8 | 18.9 | 23.3 | 16.7 | 384.8 | 0 | 0/24 | 0 |
+| no-wood | 0.1 | 104.7 | 16.5 | 21.1 | 16.9 | 382.2 | 0 | 0/24 | 0 |
+| no-food | 49.4 | 54.1 | 11.4 | 19.0 | 16.3 | 204.1 | 0 | 0/24 | 0 |
+| no-clay | 0.1 | 104.8 | 15.9 | 21.3 | 16.9 | 475.8 | 0 | 0/24 | 0 |
+
+Buildings raised after the fork, all 24 seeds (control / no-wood / no-food / no-clay): bakery 45 / 34 / 15 / 0, smithy 18 / 4 / 0 / 0, kiln
+71 / 63 / 52 / 58, hall 61 / 47 / 23 / 63, hut 114 / 113 / 82 / 119. Deaths by cause under `no-food` (1,186 in all): hunger 993, wolf attack
+121, injuries 40, exposure 20, thirst 12; the other three scenarios together had 14 deaths.
+
+What this shows (VERIFIED = measured here):
+
+* **VERIFIED: nothing unauthored appeared.** 37 distinct (kind, target) pairs occur in the controls; none of the three perturbed branches,
+  in any of 24 seeds, started a pair the controls do not. No branch founded a settlement, no cart hauled anything, and the farthest new building
+  stayed 16–17 tiles from the nearest original settlement in every scenario. The set of things the world can do is closed and authored
+  (12 building types, 12 recipes, 38 activity kinds), and under these three scarcities it is used in the same ways.
+* **VERIFIED: wood loss is absorbed** (deaths and people unchanged; 16.5 vs 18.9 buildings). **Clay loss is not**: nothing replaces the bakery
+  or smithy (0 raised in 24 seeds) and no other branch of the plan compensates; 15.9 vs 18.9 buildings.
+* **VERIFIED: the world does not adapt to famine.** With wild food gone people die (54.1 of 104.8 left on average, 993 hunger deaths) and fewer
+  farm plots are raised than in the control (19.0 vs 23.3), not more; explore starts halve (204 vs 385).
+* **LIKELY, not tested:** that the plot count falls because there are fewer people to plan for rather than because farming is mis-weighted
+  (population falls by half over the same days). **UNKNOWN:** why kilns are still raised under `no-clay` (58 vs 71), and why explore starts rise
+  by about 24% under `no-clay` (476 vs 385); neither was investigated.
+
+Limits of the test: one perturbation size per scenario, 10 days, Large profile only, immigration off; "unseen pair" is a coarse test of
+novelty (a new arrangement of known pairs would not show). A negative here means no new kind of thing; it does not mean the choices are
+not interesting.
+
 ## Measured so far (ordinary 80×80 map)
 
 Taken in a shared 4-core container, with other work running part of the time, so treat them as shapes, not benchmarks.
