@@ -7,7 +7,7 @@ import { createPerson } from './people';
 import { relOf } from './relations';
 import { layoutFor } from './profiles';
 import { addSettlement, nearestHub } from './settlements';
-import { makeGrid, gridQuery, isWalkable, isFreeLand, rebuildMobileGrid } from './registry';
+import { makeGrid, gridQuery, isWalkable, isFreeLand, rebuildMobileGrid, solidChanged } from './registry';
 import { perceive } from './perception';
 import { hashString, hashUnit, RNG } from './rng';
 import { makeSource } from './sources';
@@ -635,6 +635,7 @@ function finalizeReachability(world: World, hubs: FoundingHub[]): void {
     world.occ[s.y * W + s.x] = 0;
     world.solid[s.y * W + s.x] = 0;
   }
+  if (doomed.length) solidChanged(world);
 }
 
 // ───────────────────────── people ─────────────────────────

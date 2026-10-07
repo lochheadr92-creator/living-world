@@ -60,7 +60,22 @@ export function newId(world: World): number {
 export const tileIndex = (world: World, tx: number, ty: number): number => ty * world.W + tx;
 export const inBounds = (world: World, tx: number, ty: number): boolean => tx >= 0 && ty >= 0 && tx < world.W && ty < world.H;
 
+const solidEpochs = new WeakMap<object, number>();
+
+/**
+ * How many times the set of tiles nothing can step onto has changed in this world. A result that depends only on that set (a search that
+ * found no way from one tile to another) is still the result as long as this number is. Not part of the world or a save.
+ */
+export function solidEpoch(world: World): number {
+  return solidEpochs.get(world) ?? 0;
+}
+
+export function solidChanged(world: World): void {
+  solidEpochs.set(world, (solidEpochs.get(world) ?? 0) + 1);
+}
+
 function setFootprint(world: World, e: { x: number; y: number; w: number; h: number; id: number }, solid: boolean, occ: boolean): void {
+  solidChanged(world);
   for (let yy = e.y; yy < e.y + e.h; yy++) {
     for (let xx = e.x; xx < e.x + e.w; xx++) {
       if (!inBounds(world, xx, yy)) continue;
@@ -77,7 +92,10 @@ export function registerSource(world: World, s: Source): void {
   gridInsert(world.grid, s, s.x + 0.5, s.y + 0.5);
   const i = s.y * world.W + s.x;
   world.occ[i] = s.id;
-  if (s.solid) world.solid[i] = 1;
+  if (s.solid) {
+    world.solid[i] = 1;
+    solidChanged(world);
+  }
 }
 
 export function unregisterSource(world: World, s: Source): void {
@@ -87,7 +105,10 @@ export function unregisterSource(world: World, s: Source): void {
   gridRemove(world.grid, s, s.x + 0.5, s.y + 0.5);
   const t = s.y * world.W + s.x;
   if (world.occ[t] === s.id) world.occ[t] = 0;
-  if (s.solid) world.solid[t] = 0;
+  if (s.solid) {
+    world.solid[t] = 0;
+    solidChanged(world);
+  }
 }
 
 export function registerBuilding(world: World, b: Building): void {
@@ -148,6 +169,7 @@ export function registerGeneric(world: World, e: Entity): void {
       gridInsert(world.grid, e, e.x + 0.5, e.y + 0.5);
       world.occ[e.y * world.W + e.x] = e.id;
       world.solid[e.y * world.W + e.x] = 1;
+      solidChanged(world);
       break;
     case 'person':
       world.persons.push(e);

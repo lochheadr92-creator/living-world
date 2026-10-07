@@ -25,8 +25,6 @@ describe('rule sets', () => {
       projectsRaisedAt: 55,
       facilityRadius: Infinity,
       siteRadius: Infinity,
-      wolfRetryAfterFail: 0,
-      unreachableCooldown: 80,
       arrivalSpacing: 6000,
     });
   });
@@ -40,8 +38,7 @@ describe('rule sets', () => {
 
   it('scaled rules at the ordinary founding population are the ordinary limits, made local', () => {
     const r = scaledRules(28);
-    const local = { facilityRadius: 0, siteRadius: 0, wolfRetryAfterFail: 0, unreachableCooldown: 0 }; // the radii, and the policy on failed trips (arrivalSpacing is equal at 28 founders)
-    expect({ ...r, ...local }).toEqual({ ...ORDINARY_RULES, ...local });
+    expect({ ...r, facilityRadius: 0, siteRadius: 0 }).toEqual({ ...ORDINARY_RULES, facilityRadius: 0, siteRadius: 0 });
     expect(r.facilityRadius).toBe(SETTLEMENT_RADIUS);
     expect(r.siteRadius).toBe(SETTLEMENT_RADIUS);
   });

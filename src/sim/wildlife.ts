@@ -1,9 +1,8 @@
 import { addEvent, addFx, addLog } from './events';
-import { rulesOf } from './rules';
 import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
-import { isWalkable, newId, personById, registerGeneric } from './registry';
+import { isWalkable, newId, personById, registerGeneric, solidEpoch } from './registry';
 import { findPath } from './pathfinding';
 import { stageOf } from './people';
 import type { Animal, Person, World } from './types';
@@ -50,6 +49,47 @@ function wolfWalkable(world: World, x: number, y: number): boolean {
   return world.terrain[ty * world.W + tx] !== T.SHALLOW;
 }
 
+/**
+ * What a wolf's last search found nothing for: from which tile to which, and the state of the world's solid tiles at the time.
+ * A failed search leaves the wolf with no path, so it asks again on the next tick, and on a large map a goal it cannot reach floods
+ * thousands of tiles each time (docs/SCALING.md). Asking again from the same tile for the same tile in a world whose solid tiles have
+ * not changed can only give the same answer, so it is not asked. Kept beside the world, not in it: not saved, not hashed.
+ */
+interface FailedSearch {
+  sx: number;
+  sy: number;
+  gx: number;
+  gy: number;
+  epoch: number;
+}
+const failedSearches = new WeakMap<World, Map<number, FailedSearch>>();
+let rememberFailures = true;
+
+/** switches the memory off, to check in tests that it changes nothing */
+export function setWolfSearchMemory(on: boolean): void {
+  rememberFailures = on;
+}
+
+function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | null {
+  const tile = (v: number, max: number): number => Math.min(max - 1, Math.max(0, Math.floor(v)));
+  const sx = tile(a.x, world.W);
+  const sy = tile(a.y, world.H);
+  const gx = tile(tx, world.W);
+  const gy = tile(ty, world.H);
+  const epoch = solidEpoch(world);
+  let mine = failedSearches.get(world);
+  const last = mine?.get(a.id);
+  if (rememberFailures && last && last.sx === sx && last.sy === sy && last.gx === gx && last.gy === gy && last.epoch === epoch) return null;
+  const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600, caller: 'wolf' });
+  if (!rememberFailures) return path;
+  if (path) mine?.delete(a.id);
+  else {
+    if (!mine) failedSearches.set(world, (mine = new Map()));
+    mine.set(a.id, { sx, sy, gx, gy, epoch });
+  }
+  return path;
+}
+
 /** Walk toward a point along an A* route (wolves must get through woodland like anyone else). */
 function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number): void {
   const far = hyp(tx - a.x, ty - a.y);
@@ -58,18 +98,11 @@ function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number
     return;
   }
   const goalMoved = hyp(a.pathGoalX - tx, a.pathGoalY - ty) > 2.2;
-  // a search that found nothing leaves an empty path: in a world that asks for it, do not repeat it for the same goal at once
-  const backoff = rulesOf(world).wolfRetryAfterFail;
-  const failedRecently = backoff > 0 && a.path.length === 0 && !goalMoved && world.tick - a.pathAt < backoff;
-  if (failedRecently) {
-    steer(world, a, tx, ty, speed); // as the failed search itself would have it do: head for the goal as the crow flies
-    return;
-  }
   if (a.pi >= a.path.length || goalMoved || world.tick - a.pathAt > 90) {
     a.pathAt = world.tick;
     a.pathGoalX = tx;
     a.pathGoalY = ty;
-    const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600, caller: 'wolf' });
+    const path = wolfPath(world, a, tx, ty);
     a.path = path ?? [];
     a.pi = 0;
     if (!path) {

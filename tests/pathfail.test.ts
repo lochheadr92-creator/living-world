@@ -1,13 +1,16 @@
-// What a failed trip costs. The path finder floods everything it can reach before it gives up, so a goal that cannot be reached is
-// the expensive kind of search (docs/SCALING.md). The ordinary world pays it exactly as it always did; a world on the scaled
-// rules (rules.ts: wolfRetryAfterFail, unreachableCooldown) does not repeat it straight away.
+// What a failed search costs. The path finder floods everything it can reach before it gives up, so a goal that cannot be reached is the
+// expensive kind of search (docs/SCALING.md). A roaming wolf whose goal it cannot reach used to ask again on every tick; now it does not
+// ask again while the answer cannot have changed (same tile, same goal tile, same solid tiles). That must change nothing the world does.
 import { describe, expect, it } from 'vitest';
-import { newActivity, startActivity, stepActivity } from '../src/sim/activities';
 import { probe, probeReset, probeSnapshot } from '../src/sim/probe';
-import { ORDINARY_RULES, rulesOf, scaledRules } from '../src/sim/rules';
+import { solidChanged } from '../src/sim/registry';
+import { settingsForProfile } from '../src/sim/profiles';
+import { createWorld } from '../src/sim/factory';
 import { T } from '../src/sim/types';
 import type { World } from '../src/sim/types';
-import { makeWolf, updateWildlife } from '../src/sim/wildlife';
+import { hashWorld, stepWorld } from '../src/sim/world';
+import { makeWolf, setWolfSearchMemory, updateWildlife } from '../src/sim/wildlife';
+import { deepHash } from './helpers/golden';
 import { natural } from './helpers/util';
 
 /** a one-tile pocket of open ground at (cx, cy) walled in by solid tiles: it can be stood on, and cannot be reached */
@@ -34,89 +37,67 @@ function openGround(w: World): { x: number; y: number } {
   throw new Error('no open ground');
 }
 
-describe('a wolf whose goal cannot be reached', () => {
-  function searches(ruleSet: 'ordinary' | 'scaled', ticks: number): { calls: number; expanded: number } {
-    const w = natural('pathfail-wolf', { ruleSet });
-    w.animals.length = 0;
-    const at = openGround(w);
-    pocket(w, at.x + 12, at.y);
-    const wolf = makeWolf(w, at.x, at.y);
-    w.animals.push(wolf);
-    wolf.state = 'roam';
-    wolf.wanderX = at.x + 12.5;
-    wolf.wanderY = at.y + 0.5;
-    wolf.until = w.tick + 1_000_000; // keep the goal: the point is what happens while it is unreachable
+/** a wolf roaming toward a goal in a walled-in pocket, with nothing else going on */
+function walledGoalWorld(seed: string) {
+  const w = natural(seed);
+  w.animals.length = 0;
+  const at = openGround(w);
+  pocket(w, at.x + 12, at.y);
+  const wolf = makeWolf(w, at.x, at.y);
+  w.animals.push(wolf);
+  wolf.state = 'roam';
+  wolf.wanderX = at.x + 12.5;
+  wolf.wanderY = at.y + 0.5;
+  wolf.until = w.tick + 1_000_000; // keep the goal: the point is what happens while it is unreachable
+  return { w, wolf, at };
+}
+
+function runWolf(memory: boolean, ticks: number) {
+  setWolfSearchMemory(memory);
+  try {
+    const { w, wolf } = walledGoalWorld('pathfail-wolf');
     probe.on = true;
     probeReset();
+    const trail: number[] = [];
     for (let i = 0; i < ticks; i++) {
       w.tick++;
       updateWildlife(w);
       wolf.stuck = 0; // stuck detection would pick another goal: not what is being measured
+      trail.push(wolf.x, wolf.y);
     }
-    const snap = probeSnapshot();
+    const calls = probeSnapshot().pathCalls;
     probe.on = false;
     probeReset();
-    return { calls: snap.pathCalls, expanded: snap.pathExpanded };
+    return { calls, trail };
+  } finally {
+    setWolfSearchMemory(true);
   }
+}
 
-  it('searches again every tick in the ordinary world (unchanged)', () => {
-    expect(searches('ordinary', 60).calls).toBeGreaterThanOrEqual(55);
+describe('a wolf whose goal cannot be reached', () => {
+  it('asks again every tick when it does not remember (the old behaviour)', () => {
+    expect(runWolf(false, 60).calls).toBeGreaterThanOrEqual(55);
   });
 
-  it('searches again only after its back-off in a world on the scaled rules', () => {
-    const r = searches('scaled', 60);
-    const wait = scaledRules(28).wolfRetryAfterFail;
-    expect(wait).toBeGreaterThan(0);
-    expect(r.calls).toBeLessThanOrEqual(Math.ceil(60 / wait) + 1);
-    expect(r.calls).toBeGreaterThanOrEqual(1);
-    expect(r.expanded).toBeGreaterThan(0);
+  it('asks again only when it has moved to another tile, and walks exactly the same way', () => {
+    const off = runWolf(false, 80);
+    const on = runWolf(true, 80);
+    expect(on.trail).toEqual(off.trail);
+    // it covers about two tiles in 80 ticks (0.045 a tick): a handful of searches instead of 80
+    expect(on.calls).toBeLessThanOrEqual(8);
+    expect(on.calls).toBeGreaterThanOrEqual(1);
+    expect(Math.hypot(on.trail[158] - on.trail[0], on.trail[159] - on.trail[1])).toBeGreaterThan(1);
   });
 
-  it('moves while it waits exactly as it moves when it searches and finds nothing', () => {
-    const trail = (ruleSet: 'ordinary' | 'scaled'): number[] => {
-      const w = natural('pathfail-wolf-steer', { ruleSet });
-      w.animals.length = 0;
-      const at = openGround(w);
-      pocket(w, at.x + 12, at.y);
-      const wolf = makeWolf(w, at.x, at.y);
-      w.animals.push(wolf);
-      wolf.state = 'roam';
-      wolf.wanderX = at.x + 12.5;
-      wolf.wanderY = at.y + 0.5;
-      wolf.until = w.tick + 1_000_000;
-      const out: number[] = [];
-      for (let i = 0; i < 25; i++) {
-        w.tick++;
-        updateWildlife(w);
-        wolf.stuck = 0;
-        out.push(wolf.x, wolf.y);
-      }
-      return out;
-    };
-    const a = trail('ordinary');
-    const b = trail('scaled');
-    expect(b).toEqual(a);
-    expect(Math.hypot(a[48] - a[0], a[49] - a[1])).toBeGreaterThan(0.5); // and it did go somewhere
-  });
-
-  it('still looks again as soon as its goal changes', () => {
-    const w = natural('pathfail-wolf-goal', { ruleSet: 'scaled' });
-    w.animals.length = 0;
-    const at = openGround(w);
-    pocket(w, at.x + 12, at.y);
-    const wolf = makeWolf(w, at.x, at.y);
-    w.animals.push(wolf);
-    wolf.state = 'roam';
-    wolf.wanderX = at.x + 12.5;
-    wolf.wanderY = at.y + 0.5;
-    wolf.until = w.tick + 1_000_000;
+  it('asks again as soon as its goal moves to another tile', () => {
+    const { w, wolf, at } = walledGoalWorld('pathfail-wolf-goal');
     probe.on = true;
     probeReset();
     w.tick++;
     updateWildlife(w);
     const first = probeSnapshot().pathCalls;
     w.tick++;
-    updateWildlife(w); // same goal, inside the back-off: no new search
+    updateWildlife(w); // same goal, same tile, same world: nothing new to ask
     expect(probeSnapshot().pathCalls).toBe(first);
     wolf.wanderX = at.x - 6.5; // a new goal, open ground
     wolf.wanderY = at.y + 0.5;
@@ -127,39 +108,52 @@ describe('a wolf whose goal cannot be reached', () => {
     probeReset();
     expect(after).toBe(first + 1);
   });
+
+  it('asks again when the solid tiles of the world have changed', () => {
+    const { w } = walledGoalWorld('pathfail-wolf-epoch');
+    probe.on = true;
+    probeReset();
+    w.tick++;
+    updateWildlife(w);
+    const first = probeSnapshot().pathCalls;
+    w.tick++;
+    updateWildlife(w);
+    expect(probeSnapshot().pathCalls).toBe(first);
+    solidChanged(w); // a tree felled, a building raised: the answer may be different now
+    w.tick++;
+    updateWildlife(w);
+    const after = probeSnapshot().pathCalls;
+    probe.on = false;
+    probeReset();
+    expect(after).toBe(first + 1);
+  });
 });
 
-describe('an option that failed for want of any way there', () => {
-  function cooldownAfter(ruleSet: 'ordinary' | 'scaled', how: 'unreachable' | 'other'): number {
-    const w = natural('pathfail-cooldown', { ruleSet });
-    const p = w.persons[0];
-    const at = openGround(w);
-    pocket(w, at.x + 10, at.y);
-    p.x = at.x + 0.5;
-    p.y = at.y + 0.5;
-    const goalX = how === 'unreachable' ? at.x + 10.5 : at.x + 3.5;
-    const a = newActivity(w, p, { kind: 'wander', label: 'Test trip', goal: 'test', spotX: goalX, spotY: at.y + 0.5, tx: goalX, ty: at.y + 0.5, data: { optKey: 'wander:test' }, maxTicks: 3 });
-    startActivity(w, p, a);
-    if (how === 'unreachable') stepActivity(w, p); // plans the path, finds none, gives the trip up
-    else {
-      w.tick += 10; // it simply takes too long
-      stepActivity(w, p);
-    }
-    expect(p.activity).toBeNull();
-    return (p.cooldowns['opt:wander:test'] ?? 0) - w.tick;
-  }
+describe('remembering failed wolf searches changes nothing a world does', () => {
+  const same = (label: string, make: () => World, ticks: number) =>
+    it(label, () => {
+      const run = (memory: boolean) => {
+        setWolfSearchMemory(memory);
+        try {
+          const w = make();
+          probe.on = true;
+          probeReset();
+          for (let i = 0; i < ticks; i++) stepWorld(w);
+          const calls = probeSnapshot().pathCalls;
+          probe.on = false;
+          probeReset();
+          return { hash: hashWorld(w), deep: deepHash(w), calls };
+        } finally {
+          setWolfSearchMemory(true);
+        }
+      };
+      const without = run(false);
+      const withIt = run(true);
+      expect(withIt.hash).toBe(without.hash);
+      expect(withIt.deep).toBe(without.deep);
+      expect(withIt.calls).toBeLessThanOrEqual(without.calls);
+    });
 
-  it('is left alone for 80 ticks in the ordinary world, as before', () => {
-    expect(rulesOf(natural('x')).unreachableCooldown).toBe(ORDINARY_RULES.unreachableCooldown);
-    expect(cooldownAfter('ordinary', 'unreachable')).toBe(80);
-  });
-
-  it('is left alone for much longer on the scaled rules', () => {
-    expect(cooldownAfter('scaled', 'unreachable')).toBe(scaledRules(28).unreachableCooldown);
-    expect(scaledRules(28).unreachableCooldown).toBeGreaterThan(80);
-  });
-
-  it('is left alone for 80 ticks on the scaled rules when it failed some other way', () => {
-    expect(cooldownAfter('scaled', 'other')).toBe(80);
-  });
+  same('an ordinary world, 3,000 ticks', () => natural('pathfail-same-ordinary'), 3000);
+  same('a Large world, 1,200 ticks', () => createWorld(settingsForProfile('large', 'pathfail-same-large', { immigration: false })), 1200);
 });
