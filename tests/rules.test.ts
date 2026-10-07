@@ -27,6 +27,7 @@ describe('rule sets', () => {
       siteRadius: Infinity,
       wolfRetryAfterFail: 0,
       unreachableCooldown: 80,
+      arrivalSpacing: 6000,
     });
   });
 
@@ -39,7 +40,7 @@ describe('rule sets', () => {
 
   it('scaled rules at the ordinary founding population are the ordinary limits, made local', () => {
     const r = scaledRules(28);
-    const local = { facilityRadius: 0, siteRadius: 0, wolfRetryAfterFail: 0, unreachableCooldown: 0 }; // the radii, and the policy on failed trips
+    const local = { facilityRadius: 0, siteRadius: 0, wolfRetryAfterFail: 0, unreachableCooldown: 0 }; // the radii, and the policy on failed trips (arrivalSpacing is equal at 28 founders)
     expect({ ...r, ...local }).toEqual({ ...ORDINARY_RULES, ...local });
     expect(r.facilityRadius).toBe(SETTLEMENT_RADIUS);
     expect(r.siteRadius).toBe(SETTLEMENT_RADIUS);
@@ -52,6 +53,15 @@ describe('rule sets', () => {
     expect(scaledRules(250, 42)).toMatchObject({ immigrationCap: 482, conceptionCap: 571, maxBasicSites: 6, maxOpenSites: 6, projectsBase: 3 });
     // never below the ordinary value, however few founders
     for (const f of [1, 5, 14, 27]) for (const k of Object.keys(ORDINARY_RULES) as (keyof typeof ORDINARY_RULES)[]) if (k !== 'facilityRadius' && k !== 'siteRadius') expect(scaledRules(f)[k], `${k} at ${f}`).toBeGreaterThanOrEqual(ORDINARY_RULES[k]);
+  });
+
+  it('travellers may arrive more often the more settlements a world has, and no more often than the ordinary village at one camp', () => {
+    expect(ORDINARY_RULES.arrivalSpacing).toBe(6000);
+    expect(scaledRules(28).arrivalSpacing).toBe(6000);
+    expect(scaledRules(100, 25).arrivalSpacing).toBe(1500); // Large: four camps of 25
+    expect(scaledRules(250, 42).arrivalSpacing).toBe(1008); // Huge: six camps of about 42
+    expect(scaledRules(100).arrivalSpacing).toBe(6000); // one settlement of 100: as before
+    expect(scaledRules(1000, 5).arrivalSpacing).toBe(400); // never faster than they are considered
   });
 
   it('an infinite radius covers everything; a finite one only what is near', () => {

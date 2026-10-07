@@ -12,6 +12,7 @@
 //   A scaled world with 28 founders has the ordinary limits except for that locality.
 import type { RuleSet, World } from './types';
 
+import { hyp } from './util';
 /** the founding population the ordinary limits were tuned for; every scaled limit is a ratio of this */
 export const ORDINARY_FOUNDERS = 28;
 
@@ -46,6 +47,8 @@ export interface Rules {
   wolfRetryAfterFail: number;
   /** … and ticks before a person picks again an option that failed because there was no way to get there (an option that failed otherwise: always 80) */
   unreachableCooldown: number;
+  /** at least this many ticks between one group of travellers arriving and the next, anywhere in the world (immigrationTick checks every 400) */
+  arrivalSpacing: number;
 }
 
 export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
@@ -61,6 +64,7 @@ export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
   siteRadius: Infinity,
   wolfRetryAfterFail: 0,
   unreachableCooldown: 80,
+  arrivalSpacing: 6000,
 });
 
 /**
@@ -84,6 +88,9 @@ export function scaledRules(founders: number, settlementFounders: number = found
     siteRadius: SETTLEMENT_RADIUS,
     wolfRetryAfterFail: 30,
     unreachableCooldown: 600,
+    // one settlement's worth of travellers per spacing: the village's 6,000 ticks for one camp of its size, shorter in proportion to
+    // how many such camps the world has (never below the 400 ticks at which arrivals are considered)
+    arrivalSpacing: Math.max(400, Math.round((o.arrivalSpacing * settlementFounders) / Math.max(founders, settlementFounders))),
   };
 }
 
@@ -109,5 +116,5 @@ export function rulesOf(world: World): Readonly<Rules> {
 
 /** is (x, y) within `radius` of (ax, ay)? An infinite radius is always true and costs nothing. */
 export function within(radius: number, ax: number, ay: number, x: number, y: number): boolean {
-  return radius === Infinity || Math.hypot(x - ax, y - ay) <= radius;
+  return radius === Infinity || hyp(x - ax, y - ay) <= radius;
 }
