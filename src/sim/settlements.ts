@@ -8,6 +8,7 @@
 // With no extra settlements every function here returns `world.camp` itself.
 import type { Building, Person, World } from './types';
 
+import { hyp } from './util';
 /** the centre of a settlement */
 export interface Hub {
   x: number;
@@ -31,9 +32,9 @@ export function nearestHub(world: World, x: number, y: number): Hub {
   const more = world.extraSettlements;
   if (!more || more.length === 0) return world.camp;
   let best: Hub = world.camp;
-  let bd = Math.hypot(x - best.x, y - best.y);
+  let bd = hyp(x - best.x, y - best.y);
   for (const h of more) {
-    const d = Math.hypot(x - h.x, y - h.y);
+    const d = hyp(x - h.x, y - h.y);
     if (d < bd) {
       bd = d;
       best = h;
@@ -44,9 +45,9 @@ export function nearestHub(world: World, x: number, y: number): Hub {
 
 /** is (x, y) within `radius` of any settlement's centre? */
 export function hubWithin(world: World, x: number, y: number, radius: number): boolean {
-  if (Math.hypot(x - world.camp.x, y - world.camp.y) < radius) return true;
+  if (hyp(x - world.camp.x, y - world.camp.y) < radius) return true;
   const more = world.extraSettlements;
-  if (more) for (const h of more) if (Math.hypot(x - h.x, y - h.y) < radius) return true;
+  if (more) for (const h of more) if (hyp(x - h.x, y - h.y) < radius) return true;
   return false;
 }
 
@@ -56,7 +57,7 @@ export function fireNear(world: World, hub: Hub): Building | undefined {
   let bd = Infinity;
   for (const b of world.buildings) {
     if (b.type !== 'fire') continue;
-    const d = Math.hypot(b.x + 0.5 - hub.x, b.y + 0.5 - hub.y);
+    const d = hyp(b.x + 0.5 - hub.x, b.y + 0.5 - hub.y);
     if (d < bd) {
       bd = d;
       best = b;

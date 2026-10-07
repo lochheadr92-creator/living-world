@@ -165,6 +165,11 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     h('div', { class: 'vital' }, h('div', { class: 'vital-top' }, h('span', { class: 'cap' }, 'Health'), healthTxt), healthBar.el),
   );
 
+  // what is on their mind (rich worlds only)
+  const thoughtsList = h('div', { class: 'thought-list' });
+  const thoughtsEl = h('div', { class: 'thoughts' }, h('div', { class: 'cap blk-h' }, 'On their mind'), thoughtsList);
+  let thoughtsSig = '';
+
   // ───────── needs ─────────
   const needCells = NEED_KEYS.map((k) => ({ key: k, cell: makeNeedCell(k, NEED_LABELS[k]) }));
   const needsEl = h('div', { class: 'needs', role: 'group', 'aria-label': 'Needs' }, needCells.map((n) => n.cell.el));
@@ -241,7 +246,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const sections = createPersonSections(ctx, hooks);
 
   // the answer to "what are they up to?" comes first: it is the reason to open the panel. Needs and belongings are context for it.
-  const body = h('div', { class: 'p-body scroll' }, vitals, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
+  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
   const el = h('div', { class: 'insp-person' }, head, body);
 
   // ───────── rendering ─────────
@@ -264,6 +269,18 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     // vitals
     setText(moodTxt, moodWord(v.mood));
     moodBar.set(v.mood / 100, moodTone(v.mood));
+    setHidden(thoughtsEl, v.thoughts === null);
+    if (v.thoughts) {
+      const sig = v.thoughts.map((t) => `${t.why}|${Math.round(t.value)}`).join(';');
+      if (sig !== thoughtsSig) {
+        thoughtsSig = sig;
+        thoughtsList.replaceChildren(
+          ...(v.thoughts.length
+            ? v.thoughts.map((t) => h('div', { class: 'thought' }, h('span', { class: `thought-v num ${t.value < 0 ? 'neg' : 'pos'}` }, `${t.value > 0 ? '+' : ''}${Math.round(t.value)}`), h('span', { class: 'thought-why' }, cap(t.why))))
+            : [h('div', { class: 'thought none' }, 'Nothing in particular.')]),
+        );
+      }
+    }
     setText(healthTxt, String(Math.round(v.health)));
     healthBar.set(v.health / 100, healthTone(v.health));
 

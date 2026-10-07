@@ -28,7 +28,7 @@ import { fellTree } from './sources';
 import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
-import { clamp } from './util';
+import { clamp, hyp } from './util';
 
 // ───────────────────────── helpers ─────────────────────────
 function skillOf(p: Person, s: Source): number {
@@ -282,7 +282,7 @@ function waterFacing(world: World, p: Person): { x: number; y: number } | null {
   for (let dy = -2; dy <= 2; dy++) {
     for (let dx = -2; dx <= 2; dx++) {
       if (isWater(world, tx + dx, ty + dy)) {
-        const d = Math.hypot(dx, dy);
+        const d = hyp(dx, dy);
         if (d < bd) {
           bd = d;
           best = { x: tx + dx + 0.5, y: ty + dy + 0.5 };
@@ -503,7 +503,7 @@ registerHandler('haul', {
     // the household that owns the site notices who helped
     if (site.hhId && site.hhId !== p.hhId) {
       for (const q of world.persons) {
-        if (q.alive && q.hhId === site.hhId && Math.hypot(q.x - p.x, q.y - p.y) < 8) adjustRel(q, p.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5, note: `helped build our ${site.type.replace('_', '-')}` });
+        if (q.alive && q.hhId === site.hhId && hyp(q.x - p.x, q.y - p.y) < 8) adjustRel(q, p.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5, note: `helped build our ${site.type.replace('_', '-')}` });
       }
     }
     return 'done';

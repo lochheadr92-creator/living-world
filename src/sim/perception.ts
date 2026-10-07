@@ -5,12 +5,13 @@ import { probe } from './probe';
 import { distToFootprint, gridQuery, isWaterAccess } from './registry';
 import type { Animal, Building, ItemKind, Person, SeenEntity, World } from './types';
 
+import { hyp } from './util';
 export function nearLitFire(world: World, x: number, y: number, r: number): Building | null {
   let best: Building | null = null;
   let bd = r;
   for (const b of world.buildings) {
     if (b.type !== 'fire' || b.fuel <= 0) continue;
-    const d = Math.hypot(b.x + 0.5 - x, b.y + 0.5 - y);
+    const d = hyp(b.x + 0.5 - x, b.y + 0.5 - y);
     if (d < bd) {
       bd = d;
       best = b;
@@ -112,14 +113,14 @@ export function perceive(world: World, p: Person): void {
     if (e === p) return;
     if (e.ent === 'person') {
       if (!e.alive) return;
-      if (Math.hypot(e.x - p.x, e.y - p.y) > r) return;
+      if (hyp(e.x - p.x, e.y - p.y) > r) return;
       p.seen.push(describeSeenPerson(world, e));
       p.whereabouts[e.id] = { x: e.x, y: e.y, tick: world.tick };
     } else if (e.ent === 'cart') {
-      if (Math.hypot(e.x - p.x, e.y - p.y) > r) return;
+      if (hyp(e.x - p.x, e.y - p.y) > r) return;
       if (observe(world, p, e)) fresh++;
     } else if (e.ent === 'animal') {
-      if (Math.hypot(e.x - p.x, e.y - p.y) > r) return;
+      if (hyp(e.x - p.x, e.y - p.y) > r) return;
       p.seen.push(describeSeenAnimal(e));
       const b = snapshotEntity(world, e, world.tick);
       if (b) {
@@ -147,7 +148,7 @@ export function perceive(world: World, p: Person): void {
       }
       const tx = t % world.W;
       const ty = Math.floor(t / world.W);
-      if (Math.hypot(tx + 0.5 - p.x, ty + 0.5 - p.y) > r) continue;
+      if (hyp(tx + 0.5 - p.x, ty + 0.5 - p.y) > r) continue;
       const id = waterBeliefId(idx);
       const old = p.beliefs[id];
       if (!old) fresh++;
@@ -176,7 +177,7 @@ export function refreshAccessCell(world: World, cellIdx: number): number {
   for (let y = cy * ACCESS_CELL; y < Math.min(world.H, (cy + 1) * ACCESS_CELL); y++) {
     for (let x = cx * ACCESS_CELL; x < Math.min(world.W, (cx + 1) * ACCESS_CELL); x++) {
       if (!isWaterAccess(world, x, y)) continue;
-      const d = Math.hypot(x + 0.5 - mx, y + 0.5 - my);
+      const d = hyp(x + 0.5 - mx, y + 0.5 - my);
       if (d < bd) {
         bd = d;
         best = y * world.W + x;
@@ -198,12 +199,12 @@ export function refreshBeliefs(world: World, p: Person): void {
     const b = p.beliefs[id];
     if (b.kind === 'danger') {
       if (world.tick - b.seen > 1600) delBelief(p, id);
-      else if (b.amount > 0 && Math.hypot(b.x - p.x, b.y - p.y) < r && !p.seen.some((s) => s.id === id)) b.amount = 0; // they looked, it is gone
+      else if (b.amount > 0 && hyp(b.x - p.x, b.y - p.y) < r && !p.seen.some((s) => s.id === id)) b.amount = 0; // they looked, it is gone
       continue;
     }
     if (b.kind === 'water') continue;
     if (!world.byId.has(id)) {
-      if (Math.hypot(b.x - p.x, b.y - p.y) < r) delBelief(p, id);
+      if (hyp(b.x - p.x, b.y - p.y) < r) delBelief(p, id);
     }
   }
 }

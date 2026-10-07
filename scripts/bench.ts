@@ -12,6 +12,11 @@
 //   --arrivals off   no immigration
 //   --rules scaled   the limits on settlement size as ratios of the founding population, local to a settlement (src/sim/rules.ts);
 //                    the default, ordinary, is the village-sized limits the world was tuned with
+//   --verify         diagnostic: repeat every search that ran out of budget with no budget, to learn whether its goal was reachable after all
+//                    (adds real time; changes nothing the simulation sees). Splits the "budget" column into reachable / unreachable.
+//   --slow MS        list every tick that took more than MS ms: its number, its place in the day, the counters' change during it (work done, not time)
+//                    and the gaps between them; scripts/slowtick.ts replays one of them under the CPU profiler
+//   --chooser random  experiment: rank the options a person is allowed to take by a hash instead of by utility (src/sim/decision.ts)
 //   --sample T       ticks between samples (default 240, a tenth of a day)
 //   --check T        ticks between invariant checks (default 2400); the ledger pass is O(world), so keep it coarse at scale
 //   --out FILE       write the full record as JSON
@@ -23,12 +28,14 @@
 import { writeFileSync } from 'node:fs';
 import { CRITICAL, DAY, NEED_KEYS } from '../src/sim/constants';
 import { conservationReport, foodUnits } from '../src/sim/economy';
+import { setOptionChooser } from '../src/sim/decision';
 import { createWorld } from '../src/sim/factory';
 import { WATER_ID_BASE } from '../src/sim/knowledge';
 import { stageOf } from '../src/sim/people';
 import { settingsForProfile } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
-import { COUNTER_KEYS, probe, probeReset, probeSnapshot } from '../src/sim/probe';
+import { COUNTER_KEYS, DIST_BUCKETS, probe, probePathCells, probeReset, probeSnapshot, probeWanderCauses } from '../src/sim/probe';
+import type { PathCell } from '../src/sim/probe';
 import type { ProbeCounters } from '../src/sim/probe';
 import { toolReport } from '../src/sim/toolreg';
 import type { World } from '../src/sim/types';
@@ -48,6 +55,8 @@ const sampleEvery = Math.max(1, Number(opt('sample', '240')));
 const checkEvery = Math.max(1, Number(opt('check', '2400')));
 const out = opt('out', '');
 const quiet = flag('quiet');
+const slowMs = Number(opt('slow', '0'));
+const slowTicks: { tick: number; ms: number; /** CPU time the process used during the tick (user + system, all threads): much less than `ms` when the process was kept waiting for a core */ cpuMs: number; /** performance.now() when the tick ended: the clock `node --trace-gc` stamps its lines with */ endedAtMs: number; delta: Partial<Record<keyof ProbeCounters, number>> }[] = [];
 
 const profile = opt('profile', 'normal') as ProfileName;
 const settings = settingsForProfile(profile, seed, { harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off', ...(popArg ? { population: Number(popArg) } : {}) });
@@ -56,6 +65,7 @@ if (opt('rules', 'ordinary') === 'scaled') (settings as { ruleSet?: 'scaled' }).
 const pct = (sorted: Float64Array, q: number): number => (sorted.length ? sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))] : 0);
 const r2 = (v: number): number => Math.round(v * 100) / 100;
 
+if (opt('chooser', 'utility') === 'random') setOptionChooser('random');
 const tGen = Date.now();
 const world: World = createWorld(settings);
 const genMs = Date.now() - tGen;
@@ -231,6 +241,7 @@ const header = 'tick   day   ms/t  p95    max     pop  hh  home- bld sites  beli
 console.log(header);
 
 probe.on = true;
+probe.verify = flag('verify');
 probeReset();
 lastCounters = probeSnapshot();
 const total = Math.round(days * DAY);
@@ -240,9 +251,19 @@ let inInterval = 0;
 for (const b of world.buildings) firstSeen[b.type] ??= 0;
 check(world);
 for (let i = 1; i <= total; i++) {
+  const before = slowMs > 0 ? probeSnapshot() : null;
+  const cpu0 = slowMs > 0 ? process.cpuUsage() : null;
   const a = performance.now();
   stepWorld(world);
-  intervalMs[inInterval++] = performance.now() - a;
+  const took = performance.now() - a;
+  intervalMs[inInterval++] = took;
+  if (before && took > slowMs) {
+    const now = probeSnapshot();
+    const delta: Partial<Record<keyof ProbeCounters, number>> = {};
+    for (const k of COUNTER_KEYS) if (now[k] - before[k] !== 0) delta[k] = now[k] - before[k];
+    const cpu = process.cpuUsage(cpu0!);
+    slowTicks.push({ tick: world.tick - 1, ms: r2(took), cpuMs: r2((cpu.user + cpu.system) / 1000), endedAtMs: r2(performance.now()), delta });
+  }
   if (i % sampleEvery === 0 || i === total) {
     const s = takeSample(world, inInterval);
     inInterval = 0;
@@ -260,7 +281,75 @@ for (let i = 1; i <= total; i++) {
 }
 check(world);
 probe.on = false;
+probe.verify = false;
 const wall = (Date.now() - t0) / 1000;
+
+// path searches: who asked, how far, and how they ended (ok / unreachable = open set emptied / budget = ran out with tiles to try)
+const cells = probePathCells();
+const sumCells = (pick: (caller: string, bucket: number) => boolean): PathCell => {
+  const t: PathCell = { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0, budgetReachable: 0, budgetUnreachable: 0, tilesNeeded: 0 };
+  for (const [key, c] of Object.entries(cells)) {
+    const bar = key.lastIndexOf('|');
+    if (!pick(key.slice(0, bar), Number(key.slice(bar + 1)))) continue;
+    for (const f of Object.keys(t) as (keyof PathCell)[]) t[f] += c[f];
+  }
+  return t;
+};
+const cellLine = (label: string, c: PathCell): string => {
+  const n = c.ok + c.unreachable + c.budget;
+  const exp = c.expandedOk + c.expandedUnreachable + c.expandedBudget;
+  const fail = c.unreachable + c.budget;
+  const p = (v: number, d: number) => (d > 0 ? String(Math.round((v / d) * 1000) / 10) + '%' : '-');
+  return [label.padEnd(24), String(n).padStart(8), p(fail, n).padStart(7), p(c.unreachable, n).padStart(8), p(c.budget, n).padStart(8), String(n ? Math.round(exp / n) : 0).padStart(9), String(c.unreachable ? Math.round(c.expandedUnreachable / c.unreachable) : 0).padStart(9), String(c.budget ? Math.round(c.expandedBudget / c.budget) : 0).padStart(9), String(c.budgetReachable).padStart(8), String(c.budgetUnreachable).padStart(8), String(c.budgetReachable ? Math.round(c.tilesNeeded / c.budgetReachable) : 0).padStart(9)].join(' ');
+};
+const pathHead = ['search'.padEnd(24), 'n'.padStart(8), 'failed'.padStart(7), 'unreach.'.padStart(8), 'budget'.padStart(8), 'tiles/call'.padStart(9), 'tiles/unr'.padStart(9), 'tiles/bud'.padStart(9), 'bud:reach'.padStart(8), 'bud:unr'.padStart(8), 'need/reach'.padStart(9)].join(' ');
+const callers = [...new Set(Object.keys(cells).map((k) => k.slice(0, k.lastIndexOf('|'))))];
+const callerTot = (c: string) => {
+  const t = sumCells((who) => who === c);
+  return t.ok + t.unreachable + t.budget;
+};
+callers.sort((a, b) => callerTot(b) - callerTot(a));
+console.log('\npath searches by caller (failed = unreachable + budget; shares are of that caller\'s searches; with --verify, budget splits into reachable / unreachable and need/reach is the mean tiles an unlimited search needed)');
+console.log(pathHead);
+console.log(cellLine('ALL', sumCells(() => true)));
+for (const c of callers) console.log(cellLine(c, sumCells((who) => who === c)));
+console.log('\npath searches by straight-line distance to the target');
+console.log(pathHead);
+DIST_BUCKETS.forEach((name, b) => console.log(cellLine(name + ' tiles', sumCells((_w, bucket) => bucket === b))));
+const pathBreakdown = {
+  total: sumCells(() => true),
+  byCaller: Object.fromEntries(callers.map((c) => [c, sumCells((who) => who === c)])),
+  byDistance: Object.fromEntries(DIST_BUCKETS.map((name, b) => [name, sumCells((_w, bucket) => bucket === b)])),
+  byCallerAndDistance: cells,
+};
+
+// why 'wander' was chosen (src/sim/probe.ts): once per start, then the reasons the set-aside options gave
+const wanderCauses = probeWanderCauses();
+const wanderTotal = Object.entries(wanderCauses).filter(([k]) => !k.startsWith('  ')).reduce((n, [, v]) => n + v, 0);
+console.log(`\nwhy people wander: ${wanderTotal} chosen`);
+for (const [k, v] of Object.entries(wanderCauses).sort((a, b) => b[1] - a[1]).slice(0, 36)) console.log(String(v).padStart(7), (k.startsWith('  ') ? '' : String(Math.round((v / Math.max(1, wanderTotal)) * 1000) / 10).padStart(5) + '%  ') + k);
+
+if (slowMs > 0) {
+  console.log(`\nticks over ${slowMs} ms: ${slowTicks.length} of ${total}`);
+  console.log('tick     day-pos  ms      cpu ms  gap since last   ended at (ms)  work done during the tick (counter changes)');
+  let prev = -1;
+  for (const t of slowTicks.slice(0, 80)) {
+    console.log(String(t.tick).padEnd(8), String(t.tick % DAY).padEnd(8), String(t.ms).padEnd(7), String(t.cpuMs).padEnd(7), String(prev < 0 ? '' : t.tick - prev).padEnd(16), String(Math.round(t.endedAtMs)).padEnd(9), JSON.stringify(t.delta));
+    prev = t.tick;
+  }
+  const waited = slowTicks.filter((t) => t.cpuMs < 0.6 * t.ms).length;
+  console.log(`of these, ${waited} used less than 60% of their wall time as CPU time (the process was waiting for a core, not computing); ${slowTicks.length - waited} were computing`);
+  const gaps = slowTicks.slice(1).map((t, i) => t.tick - slowTicks[i].tick);
+  const common = new Map<number, number>();
+  for (const g of gaps) common.set(g, (common.get(g) ?? 0) + 1);
+  console.log('most common gaps (ticks: count):', JSON.stringify([...common.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)));
+  const mod = (m: number) => {
+    const c = new Map<number, number>();
+    for (const t of slowTicks) c.set(t.tick % m, (c.get(t.tick % m) ?? 0) + 1);
+    return JSON.stringify([...c.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5));
+  };
+  for (const m of [30, 60, 90, 120, 240, 300, 400, 2400]) console.log(`slow ticks by tick % ${m} (value: count):`, mod(m));
+}
 
 const all = new Float64Array(samples.map((s) => s.msMean)).sort();
 const last = samples[samples.length - 1];
@@ -282,7 +371,7 @@ const summary = {
 };
 console.log('\nsummary', JSON.stringify(summary, null, 1));
 if (out) {
-  writeFileSync(out, JSON.stringify({ meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
+  writeFileSync(out, JSON.stringify({ pathBreakdown, wanderCauses, slowTicks, meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
   console.log('written', out);
 }
 process.exit(failures.length === 0 ? 0 : 1);

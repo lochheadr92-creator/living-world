@@ -12,8 +12,10 @@ export interface ProbeCounters {
   pathExpanded: number;
   /** searches that returned null */
   pathNull: number;
-  /** of those, the ones that ran out of node budget (so "unreachable" may really mean "too far for the budget") */
+  /** of those, the ones that stopped because they ran out of node budget with tiles still to try ("far", not "unreachable") */
   pathBudgetHit: number;
+  /** of those, the ones that stopped because every tile reachable from the start had been tried: genuinely unreachable (pathNull = pathUnreachable + pathBudgetHit) */
+  pathUnreachable: number;
   /** generateOptions calls (decisions plus periodic reviews plus inspector look-ups) */
   generations: number;
   /** options produced across all generateOptions calls */
@@ -37,6 +39,7 @@ export const COUNTER_KEYS: (keyof ProbeCounters)[] = [
   'pathExpanded',
   'pathNull',
   'pathBudgetHit',
+  'pathUnreachable',
   'generations',
   'optionsGenerated',
   'decisions',
@@ -52,6 +55,7 @@ const zero = (): ProbeCounters => ({
   pathExpanded: 0,
   pathNull: 0,
   pathBudgetHit: 0,
+  pathUnreachable: 0,
   generations: 0,
   optionsGenerated: 0,
   decisions: 0,
@@ -62,15 +66,100 @@ const zero = (): ProbeCounters => ({
   perceiveFresh: 0,
 });
 
-/** `on` gates every increment, so the cost when off is one boolean test */
-export const probe: ProbeCounters & { on: boolean } = { on: false, ...zero() };
+/**
+ * `on` gates every increment, so the cost when off is one boolean test.
+ * `verify` (only meaningful while `on`) makes a search that ran out of budget be repeated without one, its answer discarded, to learn
+ * whether the goal was reachable after all. That costs real time and changes nothing the simulation can see.
+ */
+export const probe: ProbeCounters & { on: boolean; verify: boolean } = { on: false, verify: false, ...zero() };
 
 export function probeReset(): void {
   Object.assign(probe, zero());
+  for (const k of Object.keys(pathCells)) delete pathCells[k];
+  for (const k of Object.keys(wanderCauses)) delete wanderCauses[k];
 }
 
 export function probeSnapshot(): ProbeCounters {
   const s = zero();
   for (const k of COUNTER_KEYS) s[k] = probe[k];
   return s;
+}
+
+// ── path searches by who asked and how far the target was ─────────────────────────────────────────────────────────────────
+// A search ends in one of three ways: it found the goal ('ok'), it emptied its open set ('unreachable': nothing it can walk to
+// satisfies the goal), or it hit its node budget with tiles still to try ('budget': the goal may well be reachable, only far).
+// Counted per caller (an activity kind, or the name of another call site) and per straight-line distance from start to target.
+
+export const DIST_BUCKETS = ['<20', '20-40', '40-80', '>80'] as const;
+export type PathOutcome = 'ok' | 'unreachable' | 'budget' | 'budgetReachable' | 'budgetUnreachable';
+
+export function distBucket(d: number): number {
+  return d < 20 ? 0 : d < 40 ? 1 : d < 80 ? 2 : 3;
+}
+
+export interface PathCell {
+  ok: number;
+  unreachable: number;
+  /** ran out of budget (all of the below, when `probe.verify` was off, none of them classified) */
+  budget: number;
+  expandedOk: number;
+  expandedUnreachable: number;
+  expandedBudget: number;
+  /** of `budget`, checked with `probe.verify`: an unlimited search found the goal / also found nothing */
+  budgetReachable: number;
+  budgetUnreachable: number;
+  /** tiles the unlimited search expanded to find the goal, summed over the budgetReachable ones */
+  tilesNeeded: number;
+}
+
+const pathCells: Record<string, PathCell> = {};
+
+/** record one finished search. Called only while `probe.on`. */
+export function probePath(caller: string, dist: number, outcome: PathOutcome, expanded: number, needed = 0): void {
+  const key = caller + '|' + distBucket(dist);
+  const c = (pathCells[key] ??= { ok: 0, unreachable: 0, budget: 0, expandedOk: 0, expandedUnreachable: 0, expandedBudget: 0, budgetReachable: 0, budgetUnreachable: 0, tilesNeeded: 0 });
+  if (outcome === 'budgetReachable' || outcome === 'budgetUnreachable') {
+    c.budget++;
+    c.expandedBudget += expanded;
+    if (outcome === 'budgetReachable') {
+      c.budgetReachable++;
+      c.tilesNeeded += needed;
+    } else c.budgetUnreachable++;
+  } else if (outcome === 'ok') {
+    c.ok++;
+    c.expandedOk += expanded;
+  } else if (outcome === 'unreachable') {
+    c.unreachable++;
+    c.expandedUnreachable += expanded;
+  } else {
+    c.budget++;
+    c.expandedBudget += expanded;
+  }
+}
+
+/** copy of the per-caller, per-distance cells, keyed "caller|bucket index" */
+export function probePathCells(): Record<string, PathCell> {
+  const out: Record<string, PathCell> = {};
+  for (const k of Object.keys(pathCells)) out[k] = { ...pathCells[k] };
+  return out;
+}
+
+// ── why people wander ────────────────────────────────────────────────────────────────────────────────────────────────────
+// 'wander' is the fallback option every person always has (options_work.ts optIdle). Each time one is chosen, say why nothing else was:
+//   only-idle        no other option existed at all
+//   unusable         others existed but none could be started (no utility, or no way to set it up)
+//   filtered:...     usable others were removed: a child's limits, a critical need elsewhere, or (otherwise) the relief guard
+// each prefixed 'child' or 'adult'
+//   outscored:<kind> usable others were ranked, and wander ranked above the best of them
+//   made-failed:<kind>  a better-ranked option could not be set up, and wander was next
+//   review           an activity under way was swapped for wander at a review
+// and, for the first, the reasons the options that were considered and set aside gave.
+const wanderCauses: Record<string, number> = {};
+
+export function probeWander(cause: string): void {
+  wanderCauses[cause] = (wanderCauses[cause] ?? 0) + 1;
+}
+
+export function probeWanderCauses(): Record<string, number> {
+  return { ...wanderCauses };
 }

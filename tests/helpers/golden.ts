@@ -8,9 +8,9 @@
 // A golden mismatch is NOT automatically a bug: if behaviour was changed on purpose, regenerate with
 //   npx vite-node scripts/golden.ts --write
 // and say so in the commit. If behaviour was NOT meant to change, a mismatch is the signal that it did.
-import { serializeWorld } from '../../src/app/save';
 import { createWorld, defaultSettings } from '../../src/sim/factory';
 import type { Settings, World } from '../../src/sim/types';
+import { RNG } from '../../src/sim/rng';
 import { hashWorld, stepWorld } from '../../src/sim/world';
 
 export interface GoldenCase {
@@ -55,9 +55,37 @@ export function fingerprint(s: string): string {
   return (a >>> 0).toString(16).padStart(8, '0') + (b >>> 0).toString(16).padStart(8, '0');
 }
 
+/**
+ * The text the deep hash is taken of: everything the game would save, written the way save format 3 wrote it, with the indexes that are
+ * rebuilt on load left out. It is deliberately NOT src/app/save.ts's serializeWorld: the golden fingerprints are of the world's
+ * content, so changing how a save is stored (as format 4 did for the explored masks) must leave them as they were. A save's own
+ * round trip is held by tests/save.test.ts, which also uses this text as a save file of the old format.
+ */
+export function legacySaveText(world: World): string {
+  const b64 = (bytes: Uint8Array): string => {
+    let s = '';
+    for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    return btoa(s);
+  };
+  const replacer = (_key: string, value: unknown): unknown => {
+    if (value instanceof Uint8Array) return { __ta: 'u8', d: b64(value) };
+    if (value instanceof Int32Array) return { __ta: 'i32', d: b64(new Uint8Array(value.buffer, value.byteOffset, value.byteLength)) };
+    if (value instanceof Float32Array) return { __ta: 'f32', d: b64(new Uint8Array(value.buffer, value.byteOffset, value.byteLength)) };
+    if (value instanceof Map) return { __map: Array.from(value.entries()) };
+    if (value instanceof Set) return { __set: Array.from(value.values()) };
+    if (value instanceof RNG) return { __rng: value.getState() };
+    return value;
+  };
+  const { byId: _b, grid: _g, pgrid: _p, hooks: _h, ...rest } = world as World & Record<string, unknown>;
+  void _b;
+  void _g;
+  void _p;
+  void _h;
+  return JSON.stringify({ version: 3, world: rest }, replacer);
+}
+
 export function deepHash(world: World): string {
-  const json = serializeWorld(world);
-  // drop the save-format version so a pure format bump does not read as a behaviour change
+  const json = legacySaveText(world);
   return fingerprint(json.slice(json.indexOf('"world":')));
 }
 

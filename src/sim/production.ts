@@ -18,6 +18,7 @@ import { stageOf } from './people';
 import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind } from './types';
 import { hashUnit } from './rng';
 
+import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
 
 /** What somebody believes the settlement needs made or fetched, in the order they would care about it. */
@@ -324,7 +325,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
   const { world, p } = ctx;
   const b = f.b;
   const e = f.e;
-  const crowd = ctx.seenPersons.filter((s) => s.act === 'operate' && Math.hypot(s.x - b.x, s.y - b.y) < 5).length;
+  const crowd = ctx.seenPersons.filter((s) => s.act === 'operate' && hyp(s.x - b.x, s.y - b.y) < 5).length;
   const sc = new Scorer().add(why, util0).add('walking', -pen(e));
   const sb = skillBonus(p, r);
   if (sb > 0.5) sc.add('practised at it', sb);
@@ -564,7 +565,7 @@ function optToolMaintenance(ctx: Ctx): void {
   for (const b of beliefsByKind(p, ['cart'])) {
     const c = world.byId.get(b.id);
     if (!c || c.ent !== 'cart' || (c.ownerHh !== p.hhId && c.ownerHh !== 0) || c.wear < 50 || c.puller) continue;
-    if (Math.hypot(c.x - p.x, c.y - p.y) > 14) continue;
+    if (hyp(c.x - p.x, c.y - p.y) > 14) continue;
     if (!(unitsOf(p.inv.planks) > 0 || unitsOf(p.inv.handles) > 0 || unitsOf(p.inv.wood) > 0)) continue;
     const e = eta(ctx, c.x, c.y);
     const sc = new Scorer().add('the cart is wearing out', 8 + (c.wear - 50) * 0.4).add('walking', -pen(e));
@@ -710,12 +711,12 @@ function optCartHaul(ctx: Ctx): void {
     }
     if (!best) continue;
     const eCart = eta(ctx, cb.x, cb.y);
-    const eSrc = Math.hypot(best.src.x - cb.x, best.src.y - cb.y) * 1.3 / Math.max(0.03, ctx.speed * 0.85);
-    const eSite = Math.hypot(site.x - best.src.x, site.y - best.src.y) * 1.3 / Math.max(0.03, ctx.speed * 0.8);
+    const eSrc = hyp(best.src.x - cb.x, best.src.y - cb.y) * 1.3 / Math.max(0.03, ctx.speed * 0.85);
+    const eSite = hyp(site.x - best.src.x, site.y - best.src.y) * 1.3 / Math.max(0.03, ctx.speed * 0.8);
     const total = eCart + eSrc + eSite;
     // the same load on foot would take several trips, each a there-and-back over the same ground: that is what the wheels save
     const footTrips = Math.max(1, Math.ceil(best.weight / Math.max(4, CARRY_CAP[ctx.stage as keyof typeof CARRY_CAP] ?? 12)));
-    const legEta = (Math.hypot(site.x - best.src.x, site.y - best.src.y) * 1.18) / Math.max(0.03, ctx.speed);
+    const legEta = (hyp(site.x - best.src.x, site.y - best.src.y) * 1.18) / Math.max(0.03, ctx.speed);
     const sc = new Scorer().add('a cart can move all of it in one go', 24 + Math.min(14, best.weight * 0.3));
     if (footTrips > 1) sc.add(`it would take ${footTrips} trips on foot`, Math.min(40, (footTrips - 1) * pen(2 * legEta)));
     sc.add('walking', -pen(total) * 0.7);
@@ -758,7 +759,7 @@ function optCartHaul(ctx: Ctx): void {
 }
 
 // ───────────────────────── starting a workplace ─────────────────────────
-interface FacilityWant {
+export interface FacilityWant {
   type: BuildingType;
   signal: number;
   why: string;
@@ -792,7 +793,7 @@ export function upgradeWish(ctx: Ctx): number {
   return Math.min(1, w);
 }
 
-function facilityWants(ctx: Ctx): FacilityWant[] {
+export function facilityWants(ctx: Ctx): FacilityWant[] {
   const { p, world } = ctx;
   const out: FacilityWant[] = [];
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
@@ -913,7 +914,7 @@ function optPlanFacilities(ctx: Ctx): void {
         if (type === 'quarry') {
           const dep = beliefsByKind(p, ['outcrop'])
             .filter((b) => b.amount >= 10 && world.byId.get(b.id))
-            .sort((a, c) => Math.hypot(a.x - camp.x, a.y - camp.y) - Math.hypot(c.x - camp.x, c.y - camp.y))[0];
+            .sort((a, c) => hyp(a.x - camp.x, a.y - camp.y) - hyp(c.x - camp.x, c.y - camp.y))[0];
           if (dep) {
             depositId = dep.id;
             spot = findBuildSpot(world, p, type, dep.x, dep.y, 1.5, 6, 3);

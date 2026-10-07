@@ -7,6 +7,7 @@ import { addLog } from './events';
 import { hashUnit } from './rng';
 import type { Belief, BuildingType, Person, World } from './types';
 
+import { hyp } from './util';
 const toldKey = (listener: number, beliefId: number): number => listener * 1_000_000 + beliefId;
 
 // ───────────────────────── information ─────────────────────────
@@ -48,13 +49,13 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
     if (S.told[toldKey(L.id, b.id)] !== undefined && world.tick - S.told[toldKey(L.id, b.id)] < 3500) continue;
     const hub = nearestHub(world, b.x, b.y);
-    const dCamp = Math.hypot(b.x - hub.x, b.y - hub.y);
+    const dCamp = hyp(b.x - hub.x, b.y - hub.y);
     const fresh = Math.max(0, 1 - (world.tick - b.learned) / 4000);
     // the speaker cannot see the listener's mind; far places are likelier to be news
     let score = wgt * (0.6 + fresh) + (dCamp > 12 ? 1.6 : -1) + hashUnit(S.id, b.id, world.tick >> 6) * 1.2;
     if (isFood && !depletedNews && estimatedAmount(world, b) < 2) score -= 2.5;
     if (depletedNews) score += 2.2;
-    if (Math.hypot(b.x - L.x, b.y - L.y) < 6) score -= 3; // they can see it for themselves
+    if (hyp(b.x - L.x, b.y - L.y) < 6) score -= 3; // they can see it for themselves
     if (score > 1.2) scored.push({ b, score });
   }
   scored.sort((a, b) => b.score - a.score);
@@ -87,7 +88,7 @@ export function answerInfo(world: World, B: Person, A: Person, infoKind: string)
     if (!kinds.includes(b.kind)) continue;
     const est = estimatedAmount(world, b);
     if (b.kind !== 'water' && b.kind !== 'tree' && est < 1) continue;
-    const score = -Math.hypot(b.x - A.x, b.y - A.y) * 0.4 + Math.min(est, 5) * 1.2 - (world.tick - b.seen) / 1500 + (b.kind === 'fish_spot' || b.kind === 'fruit_tree' ? 1 : 0);
+    const score = -hyp(b.x - A.x, b.y - A.y) * 0.4 + Math.min(est, 5) * 1.2 - (world.tick - b.seen) / 1500 + (b.kind === 'fish_spot' || b.kind === 'fruit_tree' ? 1 : 0);
     if (score > bs) {
       bs = score;
       best = b;

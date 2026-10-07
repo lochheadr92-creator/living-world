@@ -8,7 +8,7 @@ import { findPath, terrainSpeed, tileCost } from './pathfinding';
 import { hashUnit } from './rng';
 import { distToFootprint, entityPos, isWalkable } from './registry';
 import type { Activity, ActivityKind, Entity, NeedKey, Person, PoseKind, World } from './types';
-import { clamp, turnToward } from './util';
+import { clamp, hyp, turnToward } from './util';
 
 // ───────────────────────── handler registry ─────────────────────────
 export type WorkResult = 'continue' | 'done' | `fail:${string}` | `partial:${string}`;
@@ -117,11 +117,11 @@ export function standSpotFor(world: World, p: Person, e: Entity): { x: number; y
       if (!isWalkable(world, tx, ty)) continue;
       const cx = tx + 0.5;
       const cy = ty + 0.5;
-      let s = Math.hypot(cx - p.x, cy - p.y);
+      let s = hyp(cx - p.x, cy - p.y);
       // crowding: other people already working this target from that tile
       for (const q of world.persons) {
         if (q === p || !q.alive || !q.activity) continue;
-        if (q.activity.targetId === e.id && Math.hypot(q.activity.spotX - cx, q.activity.spotY - cy) < 0.9) s += 3.2;
+        if (q.activity.targetId === e.id && hyp(q.activity.spotX - cx, q.activity.spotY - cy) < 0.9) s += 3.2;
       }
       if (e.ent === 'building' && tx === e.doorX && ty === e.doorY) s -= 2.5;
       s += hashUnit(p.id, tx, ty) * 0.35;
@@ -182,19 +182,19 @@ function groundBeside(world: World, p: Person, a: Activity): { x: number; y: num
       const y = a.ty + Math.sin(th) * r;
       if (x < 0.5 || y < 0.5 || x >= world.W - 0.5 || y >= world.H - 0.5) continue;
       if (tileCost(world, Math.floor(y) * world.W + Math.floor(x)) === 0) continue;
-      cands.push({ x, y, d: Math.hypot(x - p.x, y - p.y) + r * 0.6 });
+      cands.push({ x, y, d: hyp(x - p.x, y - p.y) + r * 0.6 });
     }
   }
   cands.sort((m, n) => m.d - n.d);
   for (const c of cands.slice(0, 5)) {
-    const path = findPath(world, p.x, p.y, c.x, c.y, { exact: { x: c.x, y: c.y }, cart: p.cartId !== 0 });
+    const path = findPath(world, p.x, p.y, c.x, c.y, { exact: { x: c.x, y: c.y }, cart: p.cartId !== 0, caller: a.kind + '/beside' });
     if (path) return { x: c.x, y: c.y, path };
   }
   return null;
 }
 
 function planPath(world: World, p: Person, a: Activity): boolean {
-  const path = findPath(world, p.x, p.y, a.spotX, a.spotY, { exact: { x: a.spotX, y: a.spotY }, cart: p.cartId !== 0 });
+  const path = findPath(world, p.x, p.y, a.spotX, a.spotY, { exact: { x: a.spotX, y: a.spotY }, cart: p.cartId !== 0, caller: a.kind });
   if (path === null) {
     if (a.targetType !== 'person') return false;
     const alt = groundBeside(world, p, a);
@@ -226,11 +226,11 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
     if (sighted) {
       const dx = p.x - sighted.x;
       const dy = p.y - sighted.y;
-      const d = Math.hypot(dx, dy) || 1;
+      const d = hyp(dx, dy) || 1;
       const nx = sighted.x + (dx / d) * 1.2;
       const ny = sighted.y + (dy / d) * 1.2;
-      const settled = a.data.beside === true && Math.hypot(sighted.x - a.tx, sighted.y - a.ty) < 1.5;
-      if (!settled && Math.hypot(a.spotX - nx, a.spotY - ny) > 1.2) {
+      const settled = a.data.beside === true && hyp(sighted.x - a.tx, sighted.y - a.ty) < 1.5;
+      if (!settled && hyp(a.spotX - nx, a.spotY - ny) > 1.2) {
         a.data.beside = false;
         a.spotX = nx;
         a.spotY = ny;
@@ -251,7 +251,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
     const wy = a.path[a.pi + 1];
     const dx = wx - p.x;
     const dy = wy - p.y;
-    const d = Math.hypot(dx, dy);
+    const d = hyp(dx, dy);
     if (d > 1e-6) p.heading = turnToward(p.heading, Math.atan2(dy, dx), TURN_RATE * 1.3);
     if (d <= remaining) {
       p.x = wx;
@@ -269,7 +269,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
   wearTile(world, p.x, p.y);
   // stuck detection
   if ((world.tick - a.start) % 24 === 23) {
-    if (Math.hypot(p.x - a.lastX, p.y - a.lastY) < 0.35) {
+    if (hyp(p.x - a.lastX, p.y - a.lastY) < 0.35) {
       a.stuck++;
       if (a.stuck >= 2) {
         a.stuck = 0;
@@ -297,7 +297,7 @@ export function startActivity(world: World, p: Person, a: Activity): void {
   world.hooks?.onActivityStart?.(p, a);
   if (a.phase === 'work') beginWork(world, p, a);
   else {
-    const dist = Math.hypot(a.spotX - p.x, a.spotY - p.y);
+    const dist = hyp(a.spotX - p.x, a.spotY - p.y);
     p.pose = a.data.run ? 'run' : dist < 0.2 ? 'stand' : 'walk';
   }
 }

@@ -1,4 +1,5 @@
 import { hubWithin } from './settlements';
+import { regrowRate } from './hardship';
 import { SAPLING_TICKS, SOURCE_ITEM, SOURCE_MAX, SOURCE_REGROW } from './constants';
 import { ledgerCreate } from './economy';
 import { addFx } from './events';
@@ -83,7 +84,7 @@ export function updateSources(world: World): void {
       continue;
     }
     if (s.regrowEvery > 0 && s.amount < s.max) {
-      s.regrowTimer += rainBoost;
+      s.regrowTimer += rainBoost * regrowRate(world);
       if (s.regrowTimer >= s.regrowEvery) {
         s.regrowTimer = 0;
         s.amount++;

@@ -190,7 +190,7 @@ function setLeg(world: World, p: Person, a: Activity, leg: number, targetId: num
   const spot = standSpotFor(world, p, e);
   if (!spot) return 'nowhere to stand';
   // wheels need open ground: check the way is there before setting out
-  const path = findPath(world, p.x, p.y, spot.x, spot.y, { exact: spot, cart: true });
+  const path = findPath(world, p.x, p.y, spot.x, spot.y, { exact: spot, cart: true, caller: 'cart_haul' });
   if (path === null) return 'no way through for a cart';
   a.data.leg = leg;
   a.phase = 'travel';
@@ -225,7 +225,7 @@ registerHandler('cart_haul', {
       const s1 = standSpotFor(world, p, src);
       const s2 = standSpotFor(world, p, dst);
       if (!s1 || !s2) return 'nowhere to stand';
-      if (findPath(world, cart.x, cart.y, s1.x, s1.y, { exact: s1, cart: true }) === null || findPath(world, s1.x, s1.y, s2.x, s2.y, { exact: s2, cart: true }) === null) return 'no way through for a cart';
+      if (findPath(world, cart.x, cart.y, s1.x, s1.y, { exact: s1, cart: true, caller: 'cart_haul' }) === null || findPath(world, s1.x, s1.y, s2.x, s2.y, { exact: s2, cart: true, caller: 'cart_haul' }) === null) return 'no way through for a cart';
       // reached the cart: take hold of it
       if (!hitch(world, p, cart)) return 'someone else has the cart';
       observe(world, p, cart);

@@ -25,6 +25,7 @@ import type { Ctx } from './optutil';
 import type { Belief, SourceType } from './types';
 import { WORK } from './constants';
 
+import { hyp } from './util';
 const FOOD_KINDS = ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'] as const;
 
 // ───────────────────────── flee ─────────────────────────
@@ -34,7 +35,7 @@ function optFlee(ctx: Ctx): void {
   let ty = 0;
   let td = 99;
   for (const a of ctx.seenAnimals) {
-    const d = Math.hypot(a.x - p.x, a.y - p.y);
+    const d = hyp(a.x - p.x, a.y - p.y);
     if (d < td) {
       td = d;
       tx = a.x;
@@ -45,7 +46,7 @@ function optFlee(ctx: Ctx): void {
   if (td > fr) {
     // a very fresh sighting nearby still counts
     for (const b of ctx.dangers) {
-      const d = Math.hypot(b.x - p.x, b.y - p.y);
+      const d = hyp(b.x - p.x, b.y - p.y);
       if (world.tick - b.seen < 120 && d < Math.min(7, fr) && d < td) {
         td = d;
         tx = b.x;
@@ -57,12 +58,12 @@ function optFlee(ctx: Ctx): void {
 
   // already safe where we stand?
   let near = 0;
-  for (const s of ctx.seenPersons) if (Math.hypot(s.x - p.x, s.y - p.y) < 4.5) near++;
+  for (const s of ctx.seenPersons) if (hyp(s.x - p.x, s.y - p.y) < 4.5) near++;
   let atFire = false;
   let atHut = false;
   for (const b of world.buildings) {
-    if (b.type === 'fire' && b.fuel > 0 && Math.hypot(b.x + 0.5 - p.x, b.y + 0.5 - p.y) < 5.5) atFire = true;
-    if (isSolidHome(b.type) && Math.hypot(b.x + b.w / 2 - p.x, b.y + b.h / 2 - p.y) < 2.8) atHut = true;
+    if (b.type === 'fire' && b.fuel > 0 && hyp(b.x + 0.5 - p.x, b.y + 0.5 - p.y) < 5.5) atFire = true;
+    if (isSolidHome(b.type) && hyp(b.x + b.w / 2 - p.x, b.y + b.h / 2 - p.y) < 2.8) atHut = true;
   }
   if ((near >= 2 || atFire || atHut) && td > 3.5) return;
 
@@ -72,16 +73,16 @@ function optFlee(ctx: Ctx): void {
     const isFire = b.btype === 'fire' && (b.fuel ?? 0) - (world.tick - b.seen) > 0;
     const isHome = isHomeType(b.btype) && b.hh === p.hhId;
     if (!isFire && !(isHome && isSolidHome(b.btype))) continue;
-    const dMe = Math.hypot(b.x - p.x, b.y - p.y);
-    const dTh = Math.hypot(b.x - tx, b.y - ty);
+    const dMe = hyp(b.x - p.x, b.y - p.y);
+    const dTh = hyp(b.x - tx, b.y - ty);
     if (dTh < dMe * 0.7) continue; // would run toward the danger
     const score = -dMe + 0.6 * dTh + (isFire ? 3 : 4);
     if (!best || score > best.score) best = { x: b.x, y: b.y, score, what: isFire ? 'the fire' : 'home' };
   }
   for (const s of ctx.seenPersons) {
     if (s.child) continue;
-    const dMe = Math.hypot(s.x - p.x, s.y - p.y);
-    const dTh = Math.hypot(s.x - tx, s.y - ty);
+    const dMe = hyp(s.x - p.x, s.y - p.y);
+    const dTh = hyp(s.x - tx, s.y - ty);
     if (dTh < dMe) continue;
     const score = -dMe * 1.15 + 0.5 * dTh - 2;
     if (!best || score > best.score) best = { x: s.x, y: s.y, score, what: 'other people' };
@@ -152,7 +153,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     // other people already working there (seen) make it less attractive
     let crowd = 0;
     for (const s of ctx.seenPersons) {
-      if (s.act === 'gather' && Math.hypot(s.x - b.x, s.y - b.y) < 3.5) crowd++;
+      if (s.act === 'gather' && hyp(s.x - b.x, s.y - b.y) < 3.5) crowd++;
     }
     const yieldF = Math.min(1, 0.45 + 0.18 * Math.min(u.est, 4));
     const score = o.urgency * 0.85 * yieldF + 3 * (val / 28) - pen(e) - 26 * dng * tm.caution - Math.max(0, crowd - 1) * 5 - 0.5 * Math.max(0, 3 - u.est) * 2;

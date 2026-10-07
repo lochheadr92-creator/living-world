@@ -1,5 +1,7 @@
 // Side-effect imports register every activity handler.
 import './act_resource';
+import { spoilPile, spoilStore, updateHardship } from './hardship';
+import { updateMood } from './mood';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -51,6 +53,7 @@ export function stepWorld(world: World): void {
   }
 
   updateEnvironment(world);
+  updateHardship(world);
   updateSources(world);
   updatePlots(world);
   updateBuildings(world);
@@ -90,6 +93,7 @@ export function stepWorld(world: World): void {
 function stepPerson(world: World, p: Person): void {
   const tick = world.tick;
   updateNeeds(world, p);
+  updateMood(world, p);
   if (p.health <= 0) {
     const n = p.needs;
     const cause = p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
@@ -168,7 +172,7 @@ function spoilGoods(world: World): void {
       const n = b.store.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < rate * (PERISHABLE[k] ?? 1) * bad) lost++;
+      for (let i = 0; i < n; i++) if (world.rng.next() < rate * (PERISHABLE[k] ?? 1) * bad * spoilStore(world)) lost++;
       if (lost > 0) {
         b.store.items[k] = n - lost;
         if (b.store.items[k] === 0) delete b.store.items[k];
@@ -182,7 +186,7 @@ function spoilGoods(world: World): void {
       const n = pile.items[k] ?? 0;
       if (n <= 0) continue;
       let lost = 0;
-      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * (PERISHABLE[k] ?? 1)) lost++;
+      for (let i = 0; i < n; i++) if (world.rng.next() < 0.04 * (PERISHABLE[k] ?? 1) * spoilPile(world)) lost++;
       if (lost > 0) {
         pile.items[k] = n - lost;
         if (pile.items[k] === 0) delete pile.items[k];
@@ -254,6 +258,10 @@ export function hashWorld(world: World): string {
     if (o) push(`F${b.id}:${o.job ? `${o.job.recipe},${o.job.phase},${r4(o.job.progress)},${o.job.burnLeft},${JSON.stringify(o.job.held)}` : '-'}|${o.batches}|${JSON.stringify(o.earmarks)}|${JSON.stringify(o.shares)}`);
   }
   for (const m of world.meals) push(`M${m.id}:${m.status},${m.servings},${m.reserved},${m.arrived.length},${m.ate.length}`);
+  if (world.settings.dynamics === 'rich') {
+    for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
+    push(`Z${world.hardship ? world.hardship.until : 0}`);
+  }
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));
   push(`Q${world.requests.length},${world.requests.filter((r) => r.status === 'fulfilled').length}|H${world.households.length}`);
   return h.toString(16).padStart(8, '0');

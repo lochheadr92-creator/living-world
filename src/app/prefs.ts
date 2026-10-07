@@ -6,6 +6,8 @@ export interface Prefs {
   seed: string;
   harsh: boolean;
   immigration: boolean;
+  /** people have a mood and lean seasons happen (rich dynamics); next new world */
+  rich: boolean;
   /** the size of world last started: 'normal' (the village), 'large' or 'huge' */
   size: ProfileName;
   speed: number;
@@ -21,6 +23,7 @@ export const DEFAULT_PREFS: Prefs = {
   seed: 'meadow',
   harsh: false,
   immigration: true,
+  rich: false,
   size: 'normal',
   speed: 1,
   overlays: { perception: false, paths: false, intentions: false, knowledge: false, labels: false },

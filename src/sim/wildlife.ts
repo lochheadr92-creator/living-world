@@ -1,13 +1,15 @@
 import { addEvent, addFx, addLog } from './events';
+import { think } from './mood';
+import { wolfNerve } from './hardship';
 import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
-import { isWalkable, newId, personById, registerGeneric } from './registry';
+import { isWalkable, newId, personById, registerGeneric, solidEpoch } from './registry';
 import { findPath } from './pathfinding';
 import { stageOf } from './people';
 import type { Animal, Person, World } from './types';
 import { T } from './types';
-import { turnToward } from './util';
+import { hyp, turnToward } from './util';
 
 export function makeWolf(world: World, x: number, y: number): Animal {
   const a: Animal = {
@@ -49,19 +51,60 @@ function wolfWalkable(world: World, x: number, y: number): boolean {
   return world.terrain[ty * world.W + tx] !== T.SHALLOW;
 }
 
+/**
+ * What a wolf's last search found nothing for: from which tile to which, and the state of the world's solid tiles at the time.
+ * A failed search leaves the wolf with no path, so it asks again on the next tick, and on a large map a goal it cannot reach floods
+ * thousands of tiles each time (docs/SCALING.md). Asking again from the same tile for the same tile in a world whose solid tiles have
+ * not changed can only give the same answer, so it is not asked. Kept beside the world, not in it: not saved, not hashed.
+ */
+interface FailedSearch {
+  sx: number;
+  sy: number;
+  gx: number;
+  gy: number;
+  epoch: number;
+}
+const failedSearches = new WeakMap<World, Map<number, FailedSearch>>();
+let rememberFailures = true;
+
+/** switches the memory off, to check in tests that it changes nothing */
+export function setWolfSearchMemory(on: boolean): void {
+  rememberFailures = on;
+}
+
+function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | null {
+  const tile = (v: number, max: number): number => Math.min(max - 1, Math.max(0, Math.floor(v)));
+  const sx = tile(a.x, world.W);
+  const sy = tile(a.y, world.H);
+  const gx = tile(tx, world.W);
+  const gy = tile(ty, world.H);
+  const epoch = solidEpoch(world);
+  let mine = failedSearches.get(world);
+  const last = mine?.get(a.id);
+  if (rememberFailures && last && last.sx === sx && last.sy === sy && last.gx === gx && last.gy === gy && last.epoch === epoch) return null;
+  const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600, caller: 'wolf' });
+  if (!rememberFailures) return path;
+  if (path) mine?.delete(a.id);
+  else {
+    if (!mine) failedSearches.set(world, (mine = new Map()));
+    mine.set(a.id, { sx, sy, gx, gy, epoch });
+  }
+  return path;
+}
+
 /** Walk toward a point along an A* route (wolves must get through woodland like anyone else). */
 function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number): void {
-  const far = Math.hypot(tx - a.x, ty - a.y);
+  const far = hyp(tx - a.x, ty - a.y);
   if (far < 1.2) {
     steer(world, a, tx, ty, speed);
     return;
   }
-  const goalMoved = Math.hypot(a.pathGoalX - tx, a.pathGoalY - ty) > 2.2;
+  const goalMoved = hyp(a.pathGoalX - tx, a.pathGoalY - ty) > 2.2;
   if (a.pi >= a.path.length || goalMoved || world.tick - a.pathAt > 90) {
     a.pathAt = world.tick;
     a.pathGoalX = tx;
     a.pathGoalY = ty;
-    const path = findPath(world, a.x, a.y, tx, ty, { maxNodes: 2600 });
+    const path = wolfPath(world, a, tx, ty);
     a.path = path ?? [];
     a.pi = 0;
     if (!path) {
@@ -75,7 +118,7 @@ function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number
     const wy = a.path[a.pi + 1];
     const dx = wx - a.x;
     const dy = wy - a.y;
-    const d = Math.hypot(dx, dy);
+    const d = hyp(dx, dy);
     if (d > 1e-6) a.heading = turnToward(a.heading, Math.atan2(dy, dx), 0.3);
     if (d <= remaining) {
       a.x = wx;
@@ -109,25 +152,26 @@ function steer(world: World, a: Animal, tx: number, ty: number, speed: number): 
 export function safeFromWolf(world: World, t: Person): boolean {
   let others = 0;
   for (const q of world.persons) {
-    if (q !== t && q.alive && Math.hypot(q.x - t.x, q.y - t.y) < 5) others++;
+    if (q !== t && q.alive && hyp(q.x - t.x, q.y - t.y) < 5) others++;
   }
   if (others >= 2) return true;
-  if (nearLitFire(world, t.x, t.y, 6)) return true;
+  if (nearLitFire(world, t.x, t.y, wolfNerve(world).fire)) return true;
   for (const b of world.buildings) {
-    if (isSolidHome(b.type) && Math.hypot(t.x - (b.x + b.w / 2), t.y - (b.y + b.h / 2)) < 2.8) return true;
+    if (isSolidHome(b.type) && hyp(t.x - (b.x + b.w / 2), t.y - (b.y + b.h / 2)) < 2.8) return true;
   }
   return false;
 }
 
 function pickPrey(world: World, a: Animal, night: boolean): Person | null {
-  const range = night ? 17 : 9;
-  const chance = night ? 0.22 : 0.03;
+  const nerve = wolfNerve(world);
+  const range = night ? nerve.rangeNight : nerve.rangeDay;
+  const chance = night ? nerve.chanceNight : nerve.chanceDay;
   if (world.rng.next() > chance) return null;
   let best: Person | null = null;
   let bd = range;
   for (const p of world.persons) {
     if (!p.alive) continue;
-    const d = Math.hypot(p.x - a.x, p.y - a.y);
+    const d = hyp(p.x - a.x, p.y - a.y);
     if (d >= bd) continue;
     if (safeFromWolf(world, p)) continue;
     bd = d;
@@ -138,14 +182,15 @@ function pickPrey(world: World, a: Animal, night: boolean): Person | null {
 
 function scared(world: World, a: Animal): boolean {
   let n = 0;
-  for (const p of world.persons) if (p.alive && Math.hypot(p.x - a.x, p.y - a.y) < 4.5) n++;
+  for (const p of world.persons) if (p.alive && hyp(p.x - a.x, p.y - a.y) < 4.5) n++;
   return n >= 2;
 }
 
 export function newWander(world: World, a: Animal): void {
   // after dark wolves range farther, toward the edge of the settlement (never into the firelight)
   const night = world.light < 0.3;
-  const prowl = night && world.rng.next() < 0.5;
+  const nerve = wolfNerve(world);
+  const prowl = night && world.rng.next() < nerve.prowl;
   for (let i = 0; i < 8; i++) {
     let x: number;
     let y: number;
@@ -153,8 +198,8 @@ export function newWander(world: World, a: Animal): void {
       const hub = nearestHub(world, a.denX, a.denY);
       const dx = hub.x - a.denX;
       const dy = hub.y - a.denY;
-      const d = Math.hypot(dx, dy) || 1;
-      const reach = Math.max(0, d - 17 - world.rng.next() * 5);
+      const d = hyp(dx, dy) || 1;
+      const reach = Math.max(0, d - nerve.prowlCloser - world.rng.next() * 5);
       const k = reach / d;
       x = a.denX + dx * k + (world.rng.next() - 0.5) * 8;
       y = a.denY + dy * k + (world.rng.next() - 0.5) * 8;
@@ -185,6 +230,7 @@ function bite(world: World, a: Animal, t: Person): void {
   addFx(world, 'bite', t.x, t.y, 0);
   addEvent(world, 'danger', `A wolf bit ${t.name}${t.health <= 0 ? ' fatally' : ''}.`, [t.id], t.x, t.y);
   addLog(world, t, 'danger', `A wolf attacked me near (${Math.round(t.x)}, ${Math.round(t.y)}).`);
+  think(world, t, 'bitten', -30, 3600, 'was bitten by a wolf');
   if (t.health <= 0) {
     t.deathCause = 'wolf attack';
   }
@@ -196,11 +242,11 @@ export function updateWildlife(world: World): void {
     if (a.cooldown > 0) a.cooldown--;
     // stuck detection
     if ((world.tick + a.id) % 20 === 0) {
-      if (Math.hypot(a.x - a.lastX, a.y - a.lastY) < 0.25) a.stuck++;
+      if (hyp(a.x - a.lastX, a.y - a.lastY) < 0.25) a.stuck++;
       else a.stuck = 0;
       a.lastX = a.x;
       a.lastY = a.y;
-      const homeAlready = a.state === 'retreat' && Math.hypot(a.denX - a.x, a.denY - a.y) < 3;
+      const homeAlready = a.state === 'retreat' && hyp(a.denX - a.x, a.denY - a.y) < 3;
       if (homeAlready) a.stuck = 0;
       if (a.stuck >= 3) {
         a.stuck = 0;
@@ -215,7 +261,7 @@ export function updateWildlife(world: World): void {
     }
     switch (a.state) {
       case 'roam': {
-        if (world.tick >= a.until || Math.hypot(a.wanderX - a.x, a.wanderY - a.y) < 0.6) newWander(world, a);
+        if (world.tick >= a.until || hyp(a.wanderX - a.x, a.wanderY - a.y) < 0.6) newWander(world, a);
         moveWolf(world, a, a.wanderX, a.wanderY, 0.045);
         if ((world.tick + a.id) % 8 === 0) {
           const prey = pickPrey(world, a, night);
@@ -234,7 +280,7 @@ export function updateWildlife(world: World): void {
           a.until = world.tick + 150;
           break;
         }
-        const d = Math.hypot(t.x - a.x, t.y - a.y);
+        const d = hyp(t.x - a.x, t.y - a.y);
         if ((world.tick + a.id) % 8 === 0 && (scared(world, a) || safeFromWolf(world, t))) {
           a.state = 'retreat';
           a.until = world.tick + 240;
@@ -259,7 +305,7 @@ export function updateWildlife(world: World): void {
       }
       case 'retreat': {
         moveWolf(world, a, a.denX, a.denY, 0.12);
-        if (world.tick >= a.until && Math.hypot(a.denX - a.x, a.denY - a.y) < 3) {
+        if (world.tick >= a.until && hyp(a.denX - a.x, a.denY - a.y) < 3) {
           a.state = 'roam';
           newWander(world, a);
         }

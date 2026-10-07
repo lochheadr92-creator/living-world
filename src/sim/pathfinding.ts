@@ -1,5 +1,6 @@
-import { probe } from './probe';
-import { MinHeap } from './util';
+import { probe, probePath } from './probe';
+import type { PathOutcome } from './probe';
+import { MinHeap, hyp } from './util';
 import { T } from './types';
 import type { World } from './types';
 
@@ -11,6 +12,8 @@ let From = new Int32Array(0);
 let Seen = new Uint32Array(0);
 let Closed = new Uint32Array(0);
 let gen = 0;
+/** tiles expanded by the most recent search; read only by the work counters */
+let lastExpanded = 0;
 const heap = new MinHeap();
 
 function ensure(n: number): void {
@@ -56,7 +59,7 @@ export function terrainSpeed(world: World, x: number, y: number): number {
 function lineClear(world: World, x0: number, y0: number, x1: number, y1: number): boolean {
   const dx = x1 - x0;
   const dy = y1 - y0;
-  const len = Math.hypot(dx, dy);
+  const len = hyp(dx, dy);
   if (len < 1e-6) return true;
   const nx = -dy / len;
   const ny = dx / len;
@@ -86,6 +89,8 @@ export interface PathOpts {
   exact?: { x: number; y: number };
   /** the walker is pulling a handcart */
   cart?: boolean;
+  /** who is asking; read only by the work counters (src/sim/probe.ts), never by the search */
+  caller?: string;
 }
 
 /**
@@ -124,9 +129,14 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
   G[startI] = 0;
   From[startI] = -1;
   Seen[startI] = gen;
-  heap.push(startI, 0);
+  // A goal that is one particular tile can only be reached by stepping onto it, and no search ever steps onto a tile with no way in
+  // (a home with someone inside, a rock, deep water): it would flood everything it can reach and still return null. So do not.
+  // The answer is the same; only the work is not done. (A goalFn may accept any tile, so those searches run as before.)
+  const walledGoal = !opts.goalFn && tileCost(world, gty * W + gtx) === 0;
+  if (!walledGoal) heap.push(startI, 0);
   let expanded = 0;
   let goalI = -1;
+  let outOfBudget = false;
 
   while (heap.size > 0) {
     const cur = heap.pop();
@@ -138,7 +148,10 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
       goalI = cur;
       break;
     }
-    if (++expanded > maxNodes) break;
+    if (++expanded > maxNodes) {
+      outOfBudget = true; // stopped with tiles still to try (the one just taken from the open set, and its neighbours)
+      break;
+    }
     for (let k = 0; k < 8; k++) {
       const nx = cx + DX[k];
       const ny = cy + DY[k];
@@ -162,12 +175,28 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
       }
     }
   }
+  lastExpanded = expanded;
   if (probe.on) {
     probe.pathExpanded += expanded;
     if (goalI < 0) {
       probe.pathNull++;
-      if (expanded > maxNodes) probe.pathBudgetHit++;
+      if (outOfBudget) probe.pathBudgetHit++;
+      else probe.pathUnreachable++;
     }
+    let outcome: PathOutcome = goalI >= 0 ? 'ok' : outOfBudget ? 'budget' : 'unreachable';
+    let needed = 0;
+    if (outcome === 'budget' && probe.verify) {
+      // diagnostic only: would a search with no practical budget have found it? The answer is discarded; nothing here is counted or read back
+      probe.on = false;
+      try {
+        const full = findPathInner(world, sx, sy, gx, gy, { ...opts, maxNodes: W * H });
+        needed = lastExpanded;
+        outcome = full ? 'budgetReachable' : 'budgetUnreachable';
+      } finally {
+        probe.on = true;
+      }
+    }
+    probePath(opts.caller ?? 'other', hyp(gx - sx, gy - sy), outcome, expanded, needed);
   }
   if (goalI < 0) return null;
 
@@ -216,5 +245,5 @@ export function reachable(world: World, sx: number, sy: number, gx: number, gy: 
 
 /** Approximate walking distance for planning (straight line scaled), without running A*. */
 export function walkEstimate(sx: number, sy: number, gx: number, gy: number): number {
-  return Math.hypot(gx - sx, gy - sy) * 1.18;
+  return hyp(gx - sx, gy - sy) * 1.18;
 }

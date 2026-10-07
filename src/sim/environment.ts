@@ -1,4 +1,5 @@
 import { DAY, SUNRISE, SUNSET, START_FRAC, TWILIGHT } from './constants';
+import { coldSnap } from './hardship';
 import { smoothstep, clamp } from './util';
 import type { WeatherKind, World } from './types';
 import { addEvent } from './events';
@@ -97,7 +98,7 @@ export function updateEnvironment(world: World): void {
 
   const f = dayFraction(world.tick);
   const base = 12 + 7 * Math.cos(Math.PI * 2 * (f - 0.58));
-  w.temp = base - w.cloud * 1.5 - w.rain * 4 - w.storm * 3 - (world.settings.harsh ? 4 : 0);
+  w.temp = base - w.cloud * 1.5 - w.rain * 4 - w.storm * 3 - (world.settings.harsh ? 4 : 0) - coldSnap(world);
 }
 
 export function weatherLabel(w: World['weather']): string {

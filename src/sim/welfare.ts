@@ -10,6 +10,7 @@ import { personById } from './registry';
 import { onGift, surplusOf } from './social';
 import type { Concern, ItemKind, Items, Person, World } from './types';
 
+import { hyp } from './util';
 /**
  * Looking after each other.
  *
@@ -194,7 +195,7 @@ registerHandler('visit', {
     a.duration = 12;
     // arrived at where they were expected: look around (the ordinary perception has just refreshed what is in view)
     // standing where they were expected, they can see (or not) who is there: anyone this close is in plain view
-    if (Math.hypot(t.x - p.x, t.y - p.y) > 5) {
+    if (hyp(t.x - p.x, t.y - p.y) > 5) {
       // not there: forget the old place, and worry less (not more) each time they cannot be found
       delete p.whereabouts[t.id];
       const c = p.concerns.find((x) => x.about === t.id);

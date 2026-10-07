@@ -7,7 +7,7 @@ import { Renderer } from './render/renderer';
 import { mountUI } from './ui';
 
 const prefs = loadPrefs();
-const game = new Game(settingsForProfile(prefs.size, prefs.seed, { harsh: prefs.harsh, immigration: prefs.immigration }));
+const game = new Game(settingsForProfile(prefs.size, prefs.seed, { harsh: prefs.harsh, immigration: prefs.immigration, dynamics: prefs.rich ? 'rich' : 'authored' }));
 game.speed = prefs.speed;
 Object.assign(game.overlays, prefs.overlays);
 game.debug = prefs.debug;

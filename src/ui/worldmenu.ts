@@ -56,7 +56,7 @@ for (const id of SCENE_ORDER) {
 const SIZES: { id: ProfileName; title: string; note: string }[] = [
   { id: 'normal', title: 'Village', note: 'The ordinary world: one camp.' },
   { id: 'large', title: 'Large', note: 'Four camps close together, so they can meet in the first days.' },
-  { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run. It never stops by itself, but Save fits in browser storage only for roughly the first three days.' },
+  { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run. A saved Huge world is several MB; it is kept in the browser’s own database.' },
 ];
 
 /** "160×160 · 100 people in 4 camps" */
@@ -146,6 +146,10 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     ctx.prefs.harsh = v;
     ctx.savePrefs();
   });
+  const rich = makeSwitch('Rich dynamics', 'Mood that changes choices; lean seasons · next new world', game.settings.dynamics === 'rich', (v) => {
+    ctx.prefs.rich = v;
+    ctx.savePrefs();
+  });
   const arrivals = makeSwitch('Arrivals', 'Travellers may join · next new world', game.settings.immigration, (v) => {
     ctx.prefs.immigration = v;
     ctx.savePrefs();
@@ -194,7 +198,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         'data-scene': s.id,
         'aria-label': `${s.title}. ${s.blurb}`,
         onClick: () => {
-          if (s.id === 'natural') game.restart(restartSettings(size, game.settings.seed, { harsh: game.settings.harsh, immigration: game.settings.immigration }));
+          if (s.id === 'natural') game.restart(restartSettings(size, game.settings.seed, { harsh: game.settings.harsh, immigration: game.settings.immigration, dynamics: game.settings.dynamics }));
           else game.loadScene(s.id);
           close();
         },
@@ -228,6 +232,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       h('div', { class: 'cap wm-lab', id: 'lw-size-label' }, 'World size · next new world'),
       h('div', { class: 'wm-scenes', role: 'radiogroup', 'aria-labelledby': 'lw-size-label' }, sizeBtns),
       harsh.el,
+      rich.el,
       arrivals.el,
     ),
     h('section', { class: 'wm-sec' }, h('div', { class: 'cap wm-lab' }, 'Scenes'), h('div', { class: 'wm-scenes' }, sceneBtns)),
@@ -241,8 +246,9 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     const chosen = size;
     ctx.prefs.harsh = harsh.input.checked;
     ctx.prefs.immigration = arrivals.input.checked;
+    ctx.prefs.rich = rich.input.checked;
     const start = () => {
-      game.restart(restartSettings(chosen, seed, { harsh: harsh.input.checked, immigration: arrivals.input.checked }));
+      game.restart(restartSettings(chosen, seed, { harsh: harsh.input.checked, immigration: arrivals.input.checked, dynamics: rich.input.checked ? 'rich' : 'authored' }));
       input.value = '';
       newBtn.disabled = false;
       newLabel.textContent = 'New world';
@@ -279,8 +285,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     saveBtn.disabled = false;
     refreshIO();
     if (ok) ctx.toast(`World saved (day ${savedGameInfo()?.day ?? '?'})`, 'good');
-    else if (game.settings.profile === 'huge') ctx.toast('Could not save: this Huge world’s save is now too big for browser storage (about 5 MB, reached around day 3–4). The world itself keeps running; only saving has stopped working.', 'error');
-    else ctx.toast('Could not save: browser storage is full or blocked.', 'error');
+    else ctx.toast('Could not save: the browser refused both its database and its small storage (private browsing, blocked storage, or no room left). The world itself keeps running.', 'error');
   }
 
   async function doLoad(): Promise<void> {
@@ -303,7 +308,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     loadBtn.disabled = !has;
     const info = savedGameInfo();
     const tip = info
-      ? `Load the saved world\nSeed ${info.seed} · day ${info.day} · ${info.population} people${info.scene && info.scene !== 'natural' ? ' · test scene' : ''}\nSaved ${wallAgo(info.savedAt)}. Replaces the world you are watching.`
+      ? `Load the saved world\nSeed ${info.seed} · day ${info.day} · ${info.population} people${info.bytes ? ` · ${(info.bytes / 1e6).toFixed(1)} MB` : ''}${info.scene && info.scene !== 'natural' ? ' · test scene' : ''}\nSaved ${wallAgo(info.savedAt)}. Replaces the world you are watching.`
       : 'No saved world yet';
     setAttr(loadWrap, 'data-tip', tip);
     setAttr(loadBtn, 'aria-label', info ? `Load the saved world: seed ${info.seed}, day ${info.day}` : 'Load (no saved world yet)');
@@ -365,6 +370,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         curSeed.textContent = game.settings.seed;
         harsh.input.checked = game.settings.harsh;
         arrivals.input.checked = game.settings.immigration;
+        rich.input.checked = game.settings.dynamics === 'rich';
         size = game.settings.profile ?? 'normal';
         refreshSizes();
       }

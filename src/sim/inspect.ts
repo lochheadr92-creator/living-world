@@ -7,6 +7,7 @@ import { householdOf } from './buildings';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
+import { isRich, thoughtsOf } from './mood';
 import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people';
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
@@ -16,6 +17,7 @@ import type { CommitmentView, InteractionView, MealView, Section, ToolView, Grie
 import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
 
+import { hyp } from './util';
 export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
 
 export function agoText(world: World, tick: number): string {
@@ -83,6 +85,8 @@ export interface PersonView {
   home: string;
   health: number;
   mood: number;
+  /** rich dynamics only: what is weighing on or lifting them now, strongest first; null in any other world */
+  thoughts: { why: string; value: number }[] | null;
   pregnant: boolean;
   partner: string | null;
   traits: { key: string; value: number }[];
@@ -186,7 +190,7 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   if (a) {
     const tgt = targetText(world, a);
     if (a.phase === 'travel') {
-      const dist = Math.hypot(a.spotX - p.x, a.spotY - p.y);
+      const dist = hyp(a.spotX - p.x, a.spotY - p.y);
       doing = `${a.label}${tgt ? ` — walking to ${tgt}` : ''} (${dist.toFixed(0)} tiles to go).`;
     } else {
       const pct = a.duration > 0 ? Math.round((a.progress / a.duration) * 100) : 0;
@@ -195,7 +199,7 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
     why = a.data.why ? `Weighed up: ${a.data.why}` : lastDec?.because ? `Weighed up: ${lastDec.because}` : a.goal;
     trying = a.goal ? a.goal[0].toUpperCase() + a.goal.slice(1) + (tgt ? ` (${tgt})` : '') + '.' : '—';
     if (a.blocked) stopping = a.blocked[0].toUpperCase() + a.blocked.slice(1) + '.';
-    else if (a.phase === 'travel' && Math.hypot(p.x - a.lastX, p.y - a.lastY) < 0.01 && world.tick - a.start > 30) stopping = 'Stuck for the moment, finding another way.';
+    else if (a.phase === 'travel' && hyp(p.x - a.lastX, p.y - a.lastY) < 0.01 && world.tick - a.start > 30) stopping = 'Stuck for the moment, finding another way.';
     else if (p.needs.hunger < 14 || p.needs.thirst < 14) stopping = 'Dangerously weak; everything else will have to wait.';
   } else if (lastDec && lastDec.blocked.length) {
     const b = lastDec.blocked[0];
@@ -215,7 +219,7 @@ export function auditOpportunities(world: World, p: Person): OpportunityView[] {
   const chosenLabel = p.activity ? p.activity.label : ranked[0]?.label;
   const chosenUtil = p.activity ? p.activity.utility : ranked[0]?.util ?? 0;
   const out: OpportunityView[] = [];
-  const dist = (x: number, y: number) => Math.hypot(x - p.x, y - p.y);
+  const dist = (x: number, y: number) => hyp(x - p.x, y - p.y);
 
   const classify = (e: Entity, what: string, x: number, y: number, needed: string): OpportunityView => {
     const b = p.beliefs[e.id];
@@ -360,7 +364,9 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     householdColor: hh ? hh.color : 0,
     home: homeB && homeB.ent === 'building' ? `${BUILD_DEF[homeB.type].label} (${Math.round(homeB.condition)}% sound)` : 'no home yet',
     health: p.health,
-    mood: moodOf(p),
+    // in a rich world the bar shows the mood that counts (needs plus what has happened to them): 70 is the usual, as a level of 0 is
+    mood: isRich(world) && p.mood ? Math.max(0, Math.min(100, Math.round(70 + p.mood.level * 0.7))) : moodOf(p),
+    thoughts: isRich(world) ? thoughtsOf(world, p) : null,
     pregnant: p.pregnantUntil > 0,
     partner: p.partnerId ? nameOf(world, p.partnerId) : null,
     traits: Object.entries(p.traits).map(([key, value]) => ({ key, value })),
