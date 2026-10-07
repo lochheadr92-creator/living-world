@@ -759,7 +759,7 @@ function optCartHaul(ctx: Ctx): void {
 }
 
 // ───────────────────────── starting a workplace ─────────────────────────
-interface FacilityWant {
+export interface FacilityWant {
   type: BuildingType;
   signal: number;
   why: string;
@@ -793,7 +793,7 @@ export function upgradeWish(ctx: Ctx): number {
   return Math.min(1, w);
 }
 
-function facilityWants(ctx: Ctx): FacilityWant[] {
+export function facilityWants(ctx: Ctx): FacilityWant[] {
   const { p, world } = ctx;
   const out: FacilityWant[] = [];
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
