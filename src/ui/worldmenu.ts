@@ -56,7 +56,7 @@ for (const id of SCENE_ORDER) {
 const SIZES: { id: ProfileName; title: string; note: string }[] = [
   { id: 'normal', title: 'Village', note: 'The ordinary world: one camp.' },
   { id: 'large', title: 'Large', note: 'Four camps close together, so they can meet in the first days.' },
-  { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run, and a save fits in browser storage for only about a day.' },
+  { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run. It never stops by itself, but Save fits in browser storage only for roughly the first three days.' },
 ];
 
 /** "160×160 · 100 people in 4 camps" */
@@ -279,7 +279,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     saveBtn.disabled = false;
     refreshIO();
     if (ok) ctx.toast(`World saved (day ${savedGameInfo()?.day ?? '?'})`, 'good');
-    else if (game.settings.profile === 'huge') ctx.toast('Could not save: a Huge world soon outgrows browser storage (it fits for about the first day).', 'error');
+    else if (game.settings.profile === 'huge') ctx.toast('Could not save: this Huge world’s save is now too big for browser storage (about 5 MB, reached around day 3–4). The world itself keeps running; only saving has stopped working.', 'error');
     else ctx.toast('Could not save: browser storage is full or blocked.', 'error');
   }
 

@@ -116,9 +116,17 @@ camp. Run it: `npx vite-node scripts/bench.ts -- --profile huge --days 3`.
 To watch one in the app, open the world menu (the seed chip) and pick a size under *World size*: **Village** (the ordinary world),
 **Large** or **Huge**. The choice applies to the next *New world* (and to the *Natural world* scene button), is remembered in the browser's
 preferences, and the menu says which size the current world is. The other staged scenes are small hand-built tests and always use the
-ordinary rules. A Huge world takes a moment to build, so the button shows "Building the world…" first. A Huge save is about 2.5 MB
-at the start and 4 MB after a day, against a browser-storage limit of about 5 MB, so a Huge world can be saved for only about a day; the
-menu says so and the save-failure message names it.
+ordinary rules. A Huge world takes a moment to build, so the button shows "Building the world…" first. Nothing in a Huge world stops by
+itself: it is only *saving* that stops working, because a save is held in the browser's `localStorage` (about 5 million characters).
+Measured on seed `meadow`, 250 people, no arrivals (gzip + base64, the form that is stored):
+
+| | tick 0 | day 1 | day 2 | day 3 | day 4 | day 5 |
+|---|---|---|---|---|---|---|
+| Huge save | 2.49 MB | 3.93 MB | 4.47 MB | 4.93 MB | 5.18 MB | 5.46 MB |
+
+So a Huge save fits through about day 3, is borderline on day 4, and fails from day 5 (the limit varies by browser and is shared with the
+preferences and the save's own settings, so the exact day will differ). The menu says "roughly the first three days" and the failure
+message says that the world keeps running. Arrivals add people and so add a little to these figures.
 
 The same worlds can be started from the browser console (the app's game is `__game`):
 
