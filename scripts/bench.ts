@@ -14,6 +14,8 @@
 //                    the default, ordinary, is the village-sized limits the world was tuned with
 //   --verify         diagnostic: repeat every search that ran out of budget with no budget, to learn whether its goal was reachable after all
 //                    (adds real time; changes nothing the simulation sees). Splits the "budget" column into reachable / unreachable.
+//   --slow MS        list every tick that took more than MS ms: its number, its place in the day, the counters' change during it (work done, not time)
+//                    and the gaps between them; scripts/slowtick.ts replays one of them under the CPU profiler
 //   --sample T       ticks between samples (default 240, a tenth of a day)
 //   --check T        ticks between invariant checks (default 2400); the ledger pass is O(world), so keep it coarse at scale
 //   --out FILE       write the full record as JSON
@@ -51,6 +53,8 @@ const sampleEvery = Math.max(1, Number(opt('sample', '240')));
 const checkEvery = Math.max(1, Number(opt('check', '2400')));
 const out = opt('out', '');
 const quiet = flag('quiet');
+const slowMs = Number(opt('slow', '0'));
+const slowTicks: { tick: number; ms: number; delta: Partial<Record<keyof ProbeCounters, number>> }[] = [];
 
 const profile = opt('profile', 'normal') as ProfileName;
 const settings = settingsForProfile(profile, seed, { harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off', ...(popArg ? { population: Number(popArg) } : {}) });
@@ -244,9 +248,17 @@ let inInterval = 0;
 for (const b of world.buildings) firstSeen[b.type] ??= 0;
 check(world);
 for (let i = 1; i <= total; i++) {
+  const before = slowMs > 0 ? probeSnapshot() : null;
   const a = performance.now();
   stepWorld(world);
-  intervalMs[inInterval++] = performance.now() - a;
+  const took = performance.now() - a;
+  intervalMs[inInterval++] = took;
+  if (before && took > slowMs) {
+    const now = probeSnapshot();
+    const delta: Partial<Record<keyof ProbeCounters, number>> = {};
+    for (const k of COUNTER_KEYS) if (now[k] - before[k] !== 0) delta[k] = now[k] - before[k];
+    slowTicks.push({ tick: world.tick - 1, ms: r2(took), delta });
+  }
   if (i % sampleEvery === 0 || i === total) {
     const s = takeSample(world, inInterval);
     inInterval = 0;
@@ -312,6 +324,26 @@ const wanderTotal = Object.entries(wanderCauses).filter(([k]) => !k.startsWith('
 console.log(`\nwhy people wander: ${wanderTotal} chosen`);
 for (const [k, v] of Object.entries(wanderCauses).sort((a, b) => b[1] - a[1]).slice(0, 36)) console.log(String(v).padStart(7), (k.startsWith('  ') ? '' : String(Math.round((v / Math.max(1, wanderTotal)) * 1000) / 10).padStart(5) + '%  ') + k);
 
+if (slowMs > 0) {
+  console.log(`\nticks over ${slowMs} ms: ${slowTicks.length} of ${total}`);
+  console.log('tick     day-pos  ms      gap since last   work done during the tick (counter changes)');
+  let prev = -1;
+  for (const t of slowTicks.slice(0, 80)) {
+    console.log(String(t.tick).padEnd(8), String(t.tick % DAY).padEnd(8), String(t.ms).padEnd(7), String(prev < 0 ? '' : t.tick - prev).padEnd(16), JSON.stringify(t.delta));
+    prev = t.tick;
+  }
+  const gaps = slowTicks.slice(1).map((t, i) => t.tick - slowTicks[i].tick);
+  const common = new Map<number, number>();
+  for (const g of gaps) common.set(g, (common.get(g) ?? 0) + 1);
+  console.log('most common gaps (ticks: count):', JSON.stringify([...common.entries()].sort((a, b) => b[1] - a[1]).slice(0, 8)));
+  const mod = (m: number) => {
+    const c = new Map<number, number>();
+    for (const t of slowTicks) c.set(t.tick % m, (c.get(t.tick % m) ?? 0) + 1);
+    return JSON.stringify([...c.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5));
+  };
+  for (const m of [30, 60, 90, 120, 240, 300, 400, 2400]) console.log(`slow ticks by tick % ${m} (value: count):`, mod(m));
+}
+
 const all = new Float64Array(samples.map((s) => s.msMean)).sort();
 const last = samples[samples.length - 1];
 const summary = {
@@ -332,7 +364,7 @@ const summary = {
 };
 console.log('\nsummary', JSON.stringify(summary, null, 1));
 if (out) {
-  writeFileSync(out, JSON.stringify({ pathBreakdown, wanderCauses, meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
+  writeFileSync(out, JSON.stringify({ pathBreakdown, wanderCauses, slowTicks, meta: { seed, settings, days, sampleEvery, checkEvery, node: process.version, generationMs: genMs }, summary, samples, checks: ledgerOkEvery }, null, 1));
   console.log('written', out);
 }
 process.exit(failures.length === 0 ? 0 : 1);
