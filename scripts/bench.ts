@@ -8,6 +8,8 @@
 //   --pop N          founding population (default: the ordinary 28)
 //   --harsh          harsh mode
 //   --arrivals off   no immigration
+//   --rules scaled   the limits on settlement size as ratios of the founding population, local to a settlement (src/sim/rules.ts);
+//                    the default, ordinary, is the village-sized limits the world was tuned with
 //   --sample T       ticks between samples (default 240, a tenth of a day)
 //   --check T        ticks between invariant checks (default 2400); the ledger pass is O(world), so keep it coarse at scale
 //   --out FILE       write the full record as JSON
@@ -45,6 +47,7 @@ const quiet = flag('quiet');
 
 const settings = { ...defaultSettings(seed), harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off' };
 if (popArg) settings.population = Number(popArg);
+if (opt('rules', 'ordinary') === 'scaled') (settings as { ruleSet?: 'scaled' }).ruleSet = 'scaled';
 
 const pct = (sorted: Float64Array, q: number): number => (sorted.length ? sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))] : 0);
 const r2 = (v: number): number => Math.round(v * 100) / 100;
@@ -216,7 +219,7 @@ function check(w: World): void {
   ledgerOkEvery.push({ tick: w.tick, ledger: led.ok, tools: tools.ok, hash: hashWorld(w) });
 }
 
-console.log(`bench: seed ${seed}${settings.harsh ? ' harsh' : ''}, ${settings.population} founders, ${w2(world)} map, arrivals ${settings.immigration ? 'on' : 'off'}; generated in ${genMs} ms (${world.sources.length} sources)`);
+console.log(`bench: seed ${seed}${settings.harsh ? ' harsh' : ''}, ${settings.population} founders, ${(settings as { ruleSet?: string }).ruleSet ?? 'ordinary'} rules, ${w2(world)} map, arrivals ${settings.immigration ? 'on' : 'off'}; generated in ${genMs} ms (${world.sources.length} sources)`);
 function w2(w: World): string {
   return `${w.W}x${w.H}`;
 }

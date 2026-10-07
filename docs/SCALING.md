@@ -49,6 +49,44 @@ of building first existed (to the sample resolution) and how many activities of 
 Use a quiet machine. The ledger pass is O(world); raise `--check` for very large worlds. Run each world size in its own process (the path-finder
 reallocates its buffers when the map size changes).
 
+## Rule sets — the limits on settlement size
+
+Several limits are written for a village: immigration stops at 54 people, conception above 64, only four building sites may be open at
+once, and there is one timber yard, kiln, smithy, bakery, granary, hall and storehouse in the whole world. `src/sim/rules.ts` gathers them.
+
+* **ordinary** (the default; `settings.ruleSet` absent) — the original numbers, to the digit. The ordinary world, saves made before the
+  setting existed, and every staged scene use these. `tests/golden.test.ts` holds that nothing about the ordinary world moved.
+* **scaled** (`settings.ruleSet: 'scaled'`, or `--rules scaled` in the benchmark runner) — the same limits as ratios of the founding
+  population, never below the ordinary value:
+  * *population limits* (immigration, conception, the size of arriving groups, the population at which a third project is allowed) scale with
+    all the founders: at 100 founders 193 / 229 / 200 / 196, at 250 founders 482 / 571 / 500 / 491;
+  * *building limits* (open home/fire/storehouse sites, open sites in total, improvement projects) scale with one settlement's founders:
+    at 100, 14 / 14 / 7 (11 once large); at 250, 36 / 36 / 18 (27 once large);
+  * *locality* — one of each workplace, and the count of open sites, apply **within 40 tiles** of where the new one would stand. A
+    workplace on the far side of the map does not block a new one, and is not counted as a means the planner can build on.
+  Scaled rules at 28 founders are the ordinary limits made local.
+
+Two things are deliberately not changed. The rule that a household has one site open at a time stays: it limits a household, not a
+settlement. And workplaces are still *sited* around the single `world.camp` (`production.ts`, `options_work.ts`); the locality of the rules
+uses each person's home as the anchor, which is the same settlement until a world has more than one. Several settlements need the generator
+and the siting rules to know about them — the next step, not this one.
+
+### What the scaled rules change (measured)
+
+Same ordinary 80×80 map, same seed (`meadow`), arrivals off, three simulated days, state read from `scripts/bench.ts` (`--pop N --rules …`).
+One seed and three days only: this shows which wall moves first, not how a settlement develops.
+
+| founders | rules | buildings, day 3 | homeless, day 3 | open sites (day 1 / 2 / 3) |
+|---|---|---|---|---|
+| 100 | ordinary | 36 | 13 of 100 | 3 / 4 / 4 |
+| 100 | scaled | 47 | 0 of 100 | 6 / 14 / 11 |
+| 250 | ordinary | 44 | 140 of 250 | 4 / 4 / 3 |
+| 250 | scaled | 90 | 34 of 250 | 35 / 23 / 12 |
+
+Housing is the first limit to move: at 250 founders the ordinary rules leave most people without a roof after three days because only four
+sites can be open at once. No workshops exist by day 3 under either rule set (they are not planned before day 5 and need huts first), so
+the workplace rule is not exercised by these runs. No deaths, no ledger or tool-record failures in any of them.
+
 ## Measured so far (ordinary 80×80 map)
 
 Taken in a shared 4-core container, with other work running part of the time, so treat them as shapes, not benchmarks.
