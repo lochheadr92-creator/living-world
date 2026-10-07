@@ -129,7 +129,11 @@ function findPathInner(world: World, sx: number, sy: number, gx: number, gy: num
   G[startI] = 0;
   From[startI] = -1;
   Seen[startI] = gen;
-  heap.push(startI, 0);
+  // A goal that is one particular tile can only be reached by stepping onto it, and no search ever steps onto a tile with no way in
+  // (a home with someone inside, a rock, deep water): it would flood everything it can reach and still return null. So do not.
+  // The answer is the same; only the work is not done. (A goalFn may accept any tile, so those searches run as before.)
+  const walledGoal = !opts.goalFn && tileCost(world, gty * W + gtx) === 0;
+  if (!walledGoal) heap.push(startI, 0);
   let expanded = 0;
   let goalI = -1;
   let outOfBudget = false;
