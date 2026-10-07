@@ -4,7 +4,8 @@
 // take screenshots, send real keyboard and mouse events. Headless pages are "visible" (document.visibilityState === 'visible'),
 // so requestAnimationFrame and ResizeObserver behave as in a foreground tab — unlike a browser pane that is hidden.
 //
-// Chrome is found from CHROME_PATH or the usual install locations. Needs Node 22+ (global WebSocket and fetch).
+// Chrome is found from CHROME_PATH or the usual install locations; CHROME_FLAGS adds command-line flags (e.g. --no-sandbox, needed when
+// running as root in a container). Needs Node 22+ (global WebSocket and fetch).
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -32,7 +33,7 @@ export async function launch({ port = 9333, width = 1440, height = 900, profile 
   mkdirSync(profile, { recursive: true });
   const proc = spawn(
     findChrome(),
-    ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, `--window-size=${width},${height}`, '--force-device-scale-factor=1', '--no-first-run', '--no-default-browser-check', '--disable-extensions', 'about:blank'],
+    ['--headless=new', `--remote-debugging-port=${port}`, `--user-data-dir=${profile}`, `--window-size=${width},${height}`, '--force-device-scale-factor=1', '--no-first-run', '--no-default-browser-check', '--disable-extensions', ...(process.env.CHROME_FLAGS ? process.env.CHROME_FLAGS.split(' ') : []), 'about:blank'],
     { stdio: 'ignore' },
   );
   let list;
