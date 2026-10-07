@@ -72,6 +72,33 @@ describe('a wolf whose goal cannot be reached', () => {
     expect(r.expanded).toBeGreaterThan(0);
   });
 
+  it('moves while it waits exactly as it moves when it searches and finds nothing', () => {
+    const trail = (ruleSet: 'ordinary' | 'scaled'): number[] => {
+      const w = natural('pathfail-wolf-steer', { ruleSet });
+      w.animals.length = 0;
+      const at = openGround(w);
+      pocket(w, at.x + 12, at.y);
+      const wolf = makeWolf(w, at.x, at.y);
+      w.animals.push(wolf);
+      wolf.state = 'roam';
+      wolf.wanderX = at.x + 12.5;
+      wolf.wanderY = at.y + 0.5;
+      wolf.until = w.tick + 1_000_000;
+      const out: number[] = [];
+      for (let i = 0; i < 25; i++) {
+        w.tick++;
+        updateWildlife(w);
+        wolf.stuck = 0;
+        out.push(wolf.x, wolf.y);
+      }
+      return out;
+    };
+    const a = trail('ordinary');
+    const b = trail('scaled');
+    expect(b).toEqual(a);
+    expect(Math.hypot(a[48] - a[0], a[49] - a[1])).toBeGreaterThan(0.5); // and it did go somewhere
+  });
+
   it('still looks again as soon as its goal changes', () => {
     const w = natural('pathfail-wolf-goal', { ruleSet: 'scaled' });
     w.animals.length = 0;

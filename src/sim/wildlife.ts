@@ -61,7 +61,11 @@ function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number
   // a search that found nothing leaves an empty path: in a world that asks for it, do not repeat it for the same goal at once
   const backoff = rulesOf(world).wolfRetryAfterFail;
   const failedRecently = backoff > 0 && a.path.length === 0 && !goalMoved && world.tick - a.pathAt < backoff;
-  if (!failedRecently && (a.pi >= a.path.length || goalMoved || world.tick - a.pathAt > 90)) {
+  if (failedRecently) {
+    steer(world, a, tx, ty, speed); // as the failed search itself would have it do: head for the goal as the crow flies
+    return;
+  }
+  if (a.pi >= a.path.length || goalMoved || world.tick - a.pathAt > 90) {
     a.pathAt = world.tick;
     a.pathGoalX = tx;
     a.pathGoalY = ty;
