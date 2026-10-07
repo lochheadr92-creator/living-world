@@ -87,7 +87,7 @@ Housing is the first limit to move: at 250 founders the ordinary rules leave mos
 sites can be open at once. No workshops exist by day 3 under either rule set (they are not planned before day 5 and need huts first), so
 the workplace rule is not exercised by these runs. No deaths, no ledger or tool-record failures in any of them.
 
-### A finding the runs surfaced: weather makes everyone who is rested restart the same activity every tick
+### A finding the runs surfaced, and fixed: weather made everyone who was rested restart the same activity every tick
 
 In a 9-day, 100-founder run the benchmark showed decisions and path searches jumping from about 1 per tick to 14 per tick around day 7, with
 nothing else going wrong (no deaths, no ledger or tool-record failures). It is not a product of the scaled rules: the ordinary run shows the
@@ -99,8 +99,12 @@ sheltering from rain or a storm therefore finishes after one tick and decides ag
 "Sheltering" 382 times in 400 ticks; with energy 60 she started it twice and kept it for about 277 ticks. In the 100-founder scaled run that
 was 8,837 starts in 900 ticks; each is a decision, usually a path search, and an id.
 
-It costs time in proportion to the number of rested people while it is raining or storming, and ids (see above) in the same proportion. It
-has not been fixed here because fixing it changes how the ordinary world behaves.
+It cost time in proportion to the number of rested people while it was raining or storming, and ids (see above) in the same proportion.
+
+**Fixed:** the energy early-exit in the `rest` handler now applies only to resting for energy; sheltering from the weather (need `warmth`)
+runs for its duration and is reconsidered at the usual reviews, like any other activity (`tests/shelter.test.ts`). This changes the ordinary
+world's behaviour from the first rain or storm on, so the golden fingerprints for `meadow` (after 2,400 ticks) and `aspen-harsh` were
+re-recorded; generation and everything before the first weather are unchanged.
 
 ## Measured so far (ordinary 80×80 map)
 
