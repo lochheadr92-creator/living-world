@@ -451,6 +451,8 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
     }
     // charcoal is burnt in a clamp where one is known: the kiln is for bricks
     if (r.id === 'burn_charcoal' && facilitiesOf(ctx, 'clamp').length) continue;
+    // flour is ground at a windmill where one is known: the bakery keeps its oven
+    if (r.id === 'mill_flour' && facilitiesOf(ctx, 'mill').length) continue;
     // prefer the better way of making something when its tool is to hand: sawing beats hewing
     if (r.id === 'hew_planks' && (unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw'))) continue;
     if (r.id === 'saw_planks' && !(unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw')) && unitsOf(p.inv.axe) > 0) continue;
@@ -913,6 +915,12 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
       out.push({ type: 'stockyard', signal: Math.min(1, s), why: `the wood I fetch is about ${Math.round(far)} tiles from home: a yard by the houses would save every builder the walk` });
     }
   }
+  // a windmill: this person came to the bakery with grain and found its one job taken (rich worlds; the failure is noted in act_production)
+  if (buildable(world, 'mill') && !knowsOfAny(ctx, 'mill') && grainKnown >= 6) {
+    const bakery = beliefsByKind(p, ['building']).find((b) => b.btype === 'bakery');
+    const turned = bakery ? recentFailure(world, p, bakery.id, DAY * 4) : null;
+    if (bakery && turned && /busy/.test(turned.reason)) out.push({ type: 'mill', signal: Math.min(1, 0.6 + 0.2 * init), why: "the bakery was busy when I came with grain: a windmill would grind it without taking the oven" });
+  }
   // a charcoal clamp: the smithy has no charcoal and the kiln is for bricks; a clamp by the trees burns it (rich worlds)
   if (buildable(world, 'clamp') && !knowsOfAny(ctx, 'clamp') && knowTrees && isSmith(ctx)) {
     const smithy = beliefsByKind(p, ['building']).find((b) => b.btype === 'smithy' && b.items !== undefined);
@@ -1185,7 +1193,8 @@ function optPlanFacilities(ctx: Ctx): void {
         else if (type === 'forester') {
           const h = ctx.home;
           spot = lodgeSpot(world, p, h ? h.x + h.w / 2 : camp.x, h ? h.y + h.h / 2 : camp.y) ?? findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
-        } else if (type === 'clamp') {
+        } else if (type === 'mill') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 16, 11);
+        else if (type === 'clamp') {
           // by the trees it burns, and well away from the houses it smokes over
           spot = edgeSpot(world, p, camp.x, camp.y, 'clamp', 0.75, 3, 9, 5) ?? findBuildSpot(world, p, type, camp.x, camp.y, 8, 16, 11);
         }

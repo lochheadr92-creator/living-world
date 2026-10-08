@@ -331,6 +331,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'work',
     blurb: 'A stack of logs under a skin of turf and clay, fired and left to smoulder for days. Twice the charcoal of a kiln batch, with no stone and no bricks, and the kiln is left free for them.',
   }),
+  mill: bd({
+    w: 2,
+    h: 2,
+    cost: { wood: 8, planks: 4, stone: 4 },
+    work: 600,
+    cap: 60,
+    workers: 2,
+    label: 'windmill',
+    sleepers: 0,
+    protect: 0,
+    role: 'work',
+    blurb: 'A timber tower on a stone footing with four cloth sails, standing on open ground for the wind. Its stones grind six grain to five flour in a fraction of the quern\'s time, and the bakery keeps its oven.',
+  }),
   forester: bd({
     w: 2,
     h: 1,
@@ -362,7 +375,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
 /** buildings that are everyone's by nature: no household on the title whoever laid them out, mended by those who use them, their sites a shared project */
 export const COMMON_BUILDINGS: BuildingType[] = ['well', 'stockyard', 'forester'];
 /** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
-export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard', 'clamp'];
+export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard', 'clamp', 'mill'];
 
 /** every kind of building a household can live in */
 export const isHomeType = (t: string | undefined): boolean => t === 'lean_to' || t === 'hut' || t === 'house';
@@ -395,10 +408,11 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   forester: 0.0013,
   stockyard: 0.0009,
   clamp: 0.0016,
+  mill: 0.0013,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
-export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone', cellar: 'stone', mine: 'wood', forester: 'wood' };
+export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone', cellar: 'stone', mine: 'wood', forester: 'wood', mill: 'planks' };
 export const REPAIR_FALLBACK_GAIN = 18;
 /** a building site nobody has worked on or supplied for this long is given up (its materials are left on the ground) */
 export const SITE_PATIENCE = DAY * 4;

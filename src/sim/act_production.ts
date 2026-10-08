@@ -6,7 +6,8 @@ import { buildingLabel } from './buildings';
 import { consume, transfer, weightOf } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { joinBlocker, noteBlocker, noteWithdraw, recipeOf, startJob, withdrawAllowance, workJob } from './facilities';
-import { delBelief, observe } from './knowledge';
+import { delBelief, noteFailure, observe } from './knowledge';
+import { isRich } from './mood';
 import { creditContribution } from './social';
 import { findPath } from './pathfinding';
 import { carryCap } from './people';
@@ -67,6 +68,8 @@ registerHandler('operate', {
       const why = joinBlocker(world, b, p);
       if (why) {
         noteBlocker(b, why);
+        // (rich worlds) a workplace found busy with a batch one cannot join is remembered as such: the bottleneck a windmill answers
+        if (isRich(world)) noteFailure(world, p, b.id, 'busy: ' + why);
         return why;
       }
       a.data.running = job.recipe;
@@ -78,6 +81,7 @@ registerHandler('operate', {
     const err = startJob(world, b, p, r, (a.data.client as number) ?? p.id, (a.data.purpose as string) ?? '', (a.data.destSite as number) ?? 0);
     if (err) {
       noteBlocker(b, err);
+      if (isRich(world) && /under way|burning a batch/.test(err)) noteFailure(world, p, b.id, 'busy: ' + err);
       return err;
     }
     a.data.running = r.id;

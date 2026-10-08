@@ -56,6 +56,7 @@ const SPEC: Record<BuildingType, Spec> = {
   forester: { frame: 'timber', gable: false, footing: 'blocks', reveal: 0.3 },
   stockyard: { frame: 'posts', gable: false, footing: 'none', reveal: 0.4 },
   clamp: { frame: 'none', gable: false, footing: 'none', reveal: 0.2 },
+  mill: { frame: 'timber', gable: false, footing: 'ring', reveal: 0.25 },
 };
 
 /** the order materials are stacked round a site, and which side of the plot each one goes to */

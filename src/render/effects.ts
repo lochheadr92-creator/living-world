@@ -214,6 +214,14 @@ export class Effects {
           }
           break;
         }
+        case 'mill': {
+          // flour dust drifts from the door while the stones turn
+          const st = workState(world, b);
+          if (st.working && this.due(b.id * 8, simT, 0.5, 0.3)) {
+            this.add({ x: b.x + 1 + (rnd() - 0.5) * 0.6, y: b.y + 1.9, z: 14, vx: (rnd() - 0.5) * 0.25 + wind * 0.2, vy: 0.08, vz: 5, max: 1.2, size: 2.2, grow: 5, color: 'rgba(240,232,214,0.5)', kind: 'smoke' });
+          }
+          break;
+        }
         case 'mine':
         case 'quarry': {
           const st = workState(world, b);

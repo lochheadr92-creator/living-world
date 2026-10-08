@@ -229,3 +229,52 @@ export function clampSprite(cache: SpriteCache, variant: number): Sprite {
     ellipse(ctx, p(0.3, 1.8, 0)[0], p(0.3, 1.8, 0)[1], 7, 3, 'rgba(30,26,22,0.45)');
   });
 }
+
+// ───────────────────────────── windmill (2 x 2) ─────────────────────────────
+// A tapering timber tower on a round stone footing, a little conical cap, and four lattice sails on the lit face.
+export function millSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`mill${v}`, 170, 200, 85, 160, (ctx) => {
+    const p = mk(2, 2);
+    groundShadow(ctx, 48, 20, 0.3, 4);
+    const wood = ['#8a6a43', '#80633f', '#93714a', '#7a5d3b'][v];
+    const [cx, cy] = p(1, 1, 0);
+    // the stone footing
+    cylinder(ctx, cx, cy, 24, 10, '#b3ad9b', '#8a847a', '#c8c2ad');
+    // the tapering tower: stacked cylinders narrowing toward the cap
+    for (let i = 0; i < 6; i++) {
+      const r = 20 - i * 1.6;
+      cylinder(ctx, cx, cy - 10 - i * 10, r, 11, shade(wood, 1.0 - i * 0.02), shade(wood, 0.72), shade(wood, 1.12));
+    }
+    // a door at the foot and a small window high up
+    ctx.fillStyle = '#4b361f';
+    ctx.fillRect(cx - 4, cy - 22, 8, 12);
+    ctx.fillStyle = '#2c2418';
+    ctx.fillRect(cx - 2, cy - 56, 4, 4);
+    // the cap
+    const top = cy - 72;
+    poly(ctx, [[cx - 14, top], [cx + 14, top], [cx, top - 16]], '#6b4f30', 'rgba(25,14,6,0.6)', 0.9);
+    ellipse(ctx, cx, top, 14, 5, '#7a5a38');
+    // four lattice sails on a hub, set a little off the vertical so they read as sails and not a cross
+    const hx = cx + 12;
+    const hy = top - 2;
+    for (let k = 0; k < 4; k++) {
+      const a = Math.PI / 4 + (k * Math.PI) / 2;
+      const ex = hx + Math.cos(a) * 42;
+      const ey = hy + Math.sin(a) * 42;
+      line(ctx, [hx, hy], [ex, ey], 'rgba(25,14,6,0.6)', 3.2);
+      line(ctx, [hx, hy], [ex, ey], '#c9b27a', 1.8);
+      // the lattice on one side of the stock
+      const nx = -Math.sin(a) * 7;
+      const ny = Math.cos(a) * 7;
+      for (let j = 2; j <= 8; j++) {
+        const t = j / 9;
+        const sx = hx + Math.cos(a) * 42 * t;
+        const sy = hy + Math.sin(a) * 42 * t;
+        line(ctx, [sx, sy], [sx + nx, sy + ny], 'rgba(236,228,206,0.8)', 1);
+      }
+      line(ctx, [hx + Math.cos(a) * 9 + nx, hy + Math.sin(a) * 9 + ny], [ex + nx, ey + ny], 'rgba(236,228,206,0.75)', 1);
+    }
+    ellipse(ctx, hx, hy, 3, 3, '#3a2a18');
+  });
+}

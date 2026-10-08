@@ -284,6 +284,23 @@ export const RECIPES: Recipe[] = [
     benefit: 'Flour keeps better than loose grain and is what bread is made of.',
   },
   {
+    id: 'mill_flour_wind',
+    label: 'milled flour',
+    doing: 'Milling at the windmill',
+    at: 'mill',
+    inputs: { grain: 6 },
+    fuel: none,
+    work: 40,
+    burn: 0,
+    outputs: { flour: 5 },
+    waste: { grain: 1 },
+    wasteWhy: 'bran and dust',
+    skill: 'bake',
+    workers: 1,
+    serves: ['flour'],
+    benefit: 'Five flour from six grain in a fraction of the quern\'s time, with the wind doing the grinding; the bakery keeps its oven for bread.',
+  },
+  {
     id: 'bake_bread',
     label: 'baked bread',
     doing: 'Baking bread',
@@ -325,7 +342,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'mine', 'clamp'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'mine', 'clamp', 'mill'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 

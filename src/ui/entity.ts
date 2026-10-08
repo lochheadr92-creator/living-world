@@ -63,6 +63,7 @@ const BUILDING_ICON: Record<BuildingType, IconName> = {
   forester: 'wood',
   stockyard: 'wood',
   clamp: 'charcoal',
+  mill: 'grain',
 };
 
 /** a line that says what the thing is for, in plain words (buildings take theirs from the simulation's own table) */
