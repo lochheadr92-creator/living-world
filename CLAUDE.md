@@ -46,6 +46,7 @@ takes seconds.) Cost: seeds x (fork days + branches x days) x about 15 CPU-secon
   `until`/`for` loops under 10 minutes), keep output small.
 - `pkill -f` / `pgrep -f` with a pattern that appears in your own command line kills your own shell. Use the bracket trick (`'[l]ab_seed'`).
 - Node `fetch` refuses port 4190. Chromium: `CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome CHROME_FLAGS=--no-sandbox`.
+- Never call two worlds "identical" from `hashWorld`; the lab's `stateHash` compares the whole serialised world. Lab output files record their commit; a run from other code is re-run, not reused.
 - Compare a lab branch with the mean of the control and the nudges, never one control alone (one control is one chaotic draw).
 - The two-draw nudge ends identical to the control in some seeds: the world's random state re-synchronises within about 60 ticks; cause unknown.
 
