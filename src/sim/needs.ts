@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
 import { nearLitFire } from './perception';
 import { stageOf } from './people';
@@ -18,6 +19,8 @@ export interface Shelter {
   /** 0..1 protection against rain/wind */
   cover: number;
   kind: 'none' | 'lean_to' | 'hut';
+  /** the building giving the shelter, if any */
+  id?: number;
 }
 
 /** Cover at a position: huts keep rain and cold out, lean-tos help a bit. Poorly kept buildings protect less. */
@@ -25,6 +28,7 @@ export function shelterAt(world: World, x: number, y: number): Shelter {
   let bonus = 0;
   let cover = 0;
   let kind: Shelter['kind'] = 'none';
+  let id = 0;
   for (const b of world.buildings) {
     if (b.type === 'hut' || b.type === 'house' || b.type === 'hall') {
       const d = hyp(x - (b.x + b.w / 2), y - (b.y + b.h / 2));
@@ -35,6 +39,7 @@ export function shelterAt(world: World, x: number, y: number): Shelter {
           bonus = base * q;
           cover = (b.type === 'hall' ? 0.85 : 1) * q;
           kind = 'hut';
+          id = b.id;
         }
       }
     } else if (b.type === 'lean_to') {
@@ -45,11 +50,22 @@ export function shelterAt(world: World, x: number, y: number): Shelter {
           bonus = 5 * q;
           cover = 0.55 * q;
           kind = 'lean_to';
+          id = b.id;
         }
       }
     }
   }
-  return { bonus, cover, kind };
+  return { bonus, cover, kind, id };
+}
+
+/** degrees warmer for whoever sleeps in a bed in their own home (rich worlds) */
+export const BED_WARMTH = 6;
+
+/** is this person asleep in a bed in their own home (a home of their household whose store holds one)? rich worlds only */
+export function inOwnBed(world: World, p: Person, sh: Shelter): boolean {
+  if (!sh.id || !isRich(world)) return false;
+  const b = world.byId.get(sh.id);
+  return !!b && b.ent === 'building' && b.hhId === p.hhId && (b.store.items.furniture ?? 0) > 0;
 }
 
 export function fireWarmth(world: World, x: number, y: number): number {
@@ -83,7 +99,7 @@ export function updateNeeds(world: World, p: Person): void {
   const sh = shelterAt(world, p.x, p.y);
   const fire = fireWarmth(world, p.x, p.y);
   const wet = w.rain * 3.6 * (1 - sh.cover);
-  const eff = w.temp + 2 + sh.bonus + fire - wet;
+  const eff = w.temp + 2 + sh.bonus + fire - wet + (sleeping && inOwnBed(world, p, sh) ? BED_WARMTH : 0);
   const target = clamp(50 + (eff - 10) * 5, 0, 100);
   n.warmth += (target - n.warmth) * 0.006;
 

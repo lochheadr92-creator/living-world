@@ -103,6 +103,7 @@ export const ITEM_ICON: Record<ItemKind, string> = {
   clay: 'clay',
   ore: 'ore',
   planks: 'planks',
+  furniture: 'planks',
   handles: 'handles',
   bricks: 'bricks',
   charcoal: 'charcoal',

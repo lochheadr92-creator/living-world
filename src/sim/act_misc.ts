@@ -1,3 +1,6 @@
+import { DAY } from './constants';
+import { inOwnBed, shelterAt } from './needs';
+import { isRich, think } from './mood';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { addLog } from './events';
@@ -25,12 +28,16 @@ registerHandler('sleep', {
     }
     if (n.thirst < 9) return 'partial:woke up parched';
     if (n.hunger < 7) return 'partial:woke up starving';
-    if (n.warmth < 20) return 'partial:too cold to sleep';
+    if (n.warmth < 20) {
+      if (isRich(world)) p.cooldowns.coldNight = world.tick; // (the household remembers it: a bed is what they will want)
+      return 'partial:too cold to sleep';
+    }
     return 'continue';
   },
-  onEnd(world, p, a) {
+  onEnd(world, p, a, outcome) {
     const gained = Math.round(p.needs.energy - (a.data.energy0 ?? p.needs.energy));
     if (gained > 8) addLog(world, p, 'need', `Slept and recovered ${gained} energy.`);
+    if (outcome === 'success' && gained > 20 && inOwnBed(world, p, shelterAt(world, p.x, p.y))) think(world, p, 'bed', 3, DAY / 2, 'slept the night through in a proper bed');
   },
 });
 

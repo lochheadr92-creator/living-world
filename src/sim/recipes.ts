@@ -122,6 +122,24 @@ export const RECIPES: Recipe[] = [
     benefit: 'A cart carries three or four times what a person can, over open ground.',
   },
   {
+    id: 'make_bed',
+    label: 'a bed',
+    doing: 'Making a bed',
+    at: 'timber_yard',
+    inputs: { planks: 4, handles: 1 },
+    fuel: none,
+    work: 150,
+    burn: 0,
+    outputs: { furniture: 1 },
+    waste: none,
+    wasteWhy: '',
+    skill: 'carpentry',
+    tool: { kind: 'hammer', required: true, speed: 0.8 },
+    workers: 1,
+    serves: ['furniture'],
+    benefit: 'A raised bed with a straw tick, off the cold ground: whoever sleeps in it sleeps warmer and is far less often woken by the cold. (Made in worlds with rich dynamics.)',
+  },
+  {
     id: 'quarry_stone',
     label: 'cut stone',
     doing: 'Cutting stone',
@@ -389,6 +407,7 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     for (const k of Object.keys(r.outputs) as ItemKind[]) set.add(k);
   }
   if (type === 'timber_yard') {
+    set.add('furniture');
     set.add('wood');
     set.add('planks');
     set.add('handles');

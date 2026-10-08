@@ -462,7 +462,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
 }
 
 // ───────────────────────── what is wanted ─────────────────────────
-const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'beer'];
+const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'beer', 'furniture'];
 const quarryAware = (ctx: Ctx, item: ItemKind): boolean => (item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0) || (item === 'ore' && facilitiesOf(ctx, 'mine').length > 0);
 
 /** Demands this person is aware of: from building sites they know, repairs, their own tools, their household's table. */
@@ -495,6 +495,16 @@ export function demandsOf(ctx: Ctx): Demand[] {
     if (left > 0) out.push({ item: c.item, qty: left, have: 0, base: 50, why: 'to keep my promise to bring it', tag: 'promise', siteId: c.siteId });
   }
   const tm = traitMods(p);
+
+  // (rich worlds) a bed for a solid home whose household woke cold lately or keeps a child or an elder, where a timber yard is known
+  if (isRich(world) && ctx.home && ctx.hh && isSolidHome(ctx.home.type) && facilitiesOf(ctx, 'timber_yard').length) {
+    const homeBelief = p.beliefs[ctx.home.id];
+    const have = unitsOf(homeBelief?.items?.furniture) + unitsOf(p.inv.furniture);
+    const members = ctx.hh.members.map((id) => world.byId.get(id)).filter((q): q is Person => !!q && q.ent === 'person' && q.alive);
+    const cold = members.some((q) => world.tick - (q.cooldowns.coldNight ?? -1e9) < DAY * 3);
+    const frail = members.some((q) => stageOf(world, q) === 'child' || stageOf(world, q) === 'elder');
+    if (have < 1 && (cold || frail)) out.push({ item: 'furniture', qty: 1, have, base: (15 + (cold ? 8 : 0) + 4 * p.traits.diligence) * tm.work, why: cold ? 'we woke cold in the night: a bed off the ground would keep us warm' : 'the little ones and the old need a bed off the cold ground', tag: 'craft' });
+  }
 
   // (rich worlds) fish beyond what the household will eat soon is smoked where a smokehouse is known, so it keeps
   if (isRich(world) && ctx.home && facilitiesOf(ctx, 'smokehouse').length) {
@@ -1015,6 +1025,33 @@ function optStockSmithy(ctx: Ctx): void {
   }
 }
 
+/** A bed carried home is set up in the home store (rich worlds): the one deposit that is neither food, a workshop input nor raw goods. */
+function optBringBedHome(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!isRich(world) || !ctx.home || unitsOf(p.inv.furniture) < 1) return;
+  const h = p.beliefs[ctx.home.id];
+  if (!h) return;
+  const e = eta(ctx, h.x, h.y);
+  const sc = new Scorer().add('carrying a bed for our home', 30).add('walking', -pen(e));
+  addOption(ctx, {
+    kind: 'deposit',
+    label: 'Take the bed home',
+    goal: 'to sleep warm',
+    need: null,
+    util: sc.total * nightMult(ctx),
+    parts: sc.parts,
+    eta: e + 20,
+    key: `deposit:${h.id}:furniture`,
+    targetId: h.id,
+    tag: 'craft',
+    make: () => {
+      const spot = spotNear(world, p, h);
+      if (!spot) return null;
+      return newActivity(world, p, { kind: 'deposit', label: 'Setting up the bed at home', goal: 'to sleep warm', targetId: h.id, targetType: 'building', tx: h.x, ty: h.y, spotX: spot.x, spotY: spot.y, utility: sc.total, minCommit: 40, maxTicks: 900, data: { items: { furniture: 1 }, sticky: true } });
+    },
+  });
+}
+
 /** crocks of beer a hall is kept stocked with, for the shared meals */
 const HALL_BEER = 4;
 
@@ -1349,6 +1386,7 @@ export function productionOptions(ctx: Ctx): void {
   optStockYard(ctx);
   optStockSmithy(ctx);
   optStockHall(ctx);
+  optBringBedHome(ctx);
   optPlantTrees(ctx);
   optPlanFacilities(ctx);
   optPlanUpgrade(ctx);

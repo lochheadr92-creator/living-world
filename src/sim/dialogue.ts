@@ -72,6 +72,7 @@ export const ITEM_PHRASE: Record<ItemKind, string> = {
   clay: 'clay',
   ore: 'ore',
   planks: 'planks',
+  furniture: 'a bed',
   handles: 'handles',
   bricks: 'bricks',
   charcoal: 'charcoal',
