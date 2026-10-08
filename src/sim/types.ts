@@ -446,6 +446,8 @@ export interface Mood {
   /** -100 (miserable) .. 100 (buoyant); refreshed every few seconds */
   level: number;
   thoughts: Thought[];
+  /** until this tick they are at the end of their patience: withdrawn and short-tempered (mood.ts) */
+  breakUntil?: number;
 }
 
 export interface InteractionRecord {

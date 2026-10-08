@@ -76,7 +76,7 @@ export function rankOptions(ctx: Ctx): Option[] {
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
   const moody = p.mood !== undefined && world.settings.dynamics === 'rich';
-  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
+  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(world, p, o.kind) : o.util) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }

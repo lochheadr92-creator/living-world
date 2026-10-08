@@ -4,7 +4,7 @@ import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { DAY } from '../src/sim/constants';
 import { setStakes, coldSnap, growthRate, regrowRate, spoilPile, spoilStore, updateHardship, winterDepth, wolfNerve } from '../src/sim/hardship';
 import { killPerson } from '../src/sim/lifecycle';
-import { setMoodEffects, moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
+import { BREAK_LENGTH, isBreaking, sensitivity, setMoodEffects, moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
 import { describePerson } from '../src/sim/inspect';
 import { hashWorld } from '../src/sim/world';
 import { natural, run } from './helpers/util';
@@ -66,10 +66,10 @@ describe('rich dynamics', () => {
     const w = rich('rich-weight');
     const p = w.persons[0];
     think(w, p, 'bad', -80, 5000, 'bad');
-    expect(moodWeight(p, 'socialize')).toBeLessThan(0.7);
-    expect(moodWeight(p, 'build')).toBeLessThan(0.85);
-    expect(moodWeight(p, 'rest')).toBeGreaterThan(1.3);
-    for (const k of ['eat', 'drink', 'sleep', 'flee', 'warm', 'fetch_water'] as const) expect(moodWeight(p, k)).toBe(1);
+    expect(moodWeight(w, p, 'socialize')).toBeLessThan(0.7);
+    expect(moodWeight(w, p, 'build')).toBeLessThan(0.85);
+    expect(moodWeight(w, p, 'rest')).toBeGreaterThan(1.3);
+    for (const k of ['eat', 'drink', 'sleep', 'flee', 'warm', 'fetch_water'] as const) expect(moodWeight(w, p, k)).toBe(1);
     expect(quarrelFactor(w, p)).toBeGreaterThan(1.4);
   });
 
@@ -82,7 +82,8 @@ describe('rich dynamics', () => {
     mate.relations[dead.id] = { affinity: 80, trust: 80, familiarity: 80, lastMet: 0, kin: 'partner', avoidUntil: 0, debt: 0, history: [], grievance: null, settledAt: 0 };
     killPerson(w, dead, 'test');
     const mourn = thoughtsOf(w, mate).find((t) => t.why.includes('died'));
-    expect(mourn?.value).toBeLessThan(-40);
+    expect(mourn?.value).toBeLessThan(-50 * sensitivity(mate, 'lost') * 0.99 + 0.5);
+    expect(mourn?.value).toBeLessThan(-25);
     expect(thoughtsOf(w, stranger).find((t) => t.why.includes('died'))).toBeUndefined();
   });
 
@@ -194,7 +195,7 @@ describe('rich dynamics', () => {
       expect(wolfNerve(w).chanceNight).toBe(0.22);
       const p = w.persons[0];
       think(w, p, 'bad', -80, 5000, 'bad');
-      expect(moodWeight(p, 'socialize')).toBeLessThan(0.7);
+      expect(moodWeight(w, p, 'socialize')).toBeLessThan(0.7);
     });
 
     it('mood effects off: stakes as before, thoughts still kept, but choices and quarrels unchanged', () => {
@@ -206,8 +207,54 @@ describe('rich dynamics', () => {
       const p = w.persons[0];
       think(w, p, 'bad', -80, 5000, 'bad');
       expect(p.mood!.level).toBeLessThan(-40);
-      expect(moodWeight(p, 'socialize')).toBe(1);
+      expect(moodWeight(w, p, 'socialize')).toBe(1);
       expect(quarrelFactor(w, p)).toBe(1);
     });
+  });
+
+  it('takes the same thing differently by person: the cautious feel a bite more, the sociable a row', () => {
+    const w = rich('rich-sens');
+    const [a, b] = w.persons;
+    a.traits.caution = 1;
+    b.traits.caution = 0;
+    a.traits.sociability = 0;
+    b.traits.sociability = 1;
+    think(w, a, 'bitten', -30, 3000, 'bitten');
+    think(w, b, 'bitten', -30, 3000, 'bitten');
+    expect(a.mood!.thoughts[0].value).toBeLessThan(b.mood!.thoughts[0].value - 15);
+    think(w, a, 'argued:9', -12, 3000, 'row');
+    think(w, b, 'argued:9', -12, 3000, 'row');
+    const row = (p: typeof a) => p.mood!.thoughts.find((t) => t.kind === 'argued:9')!.value;
+    expect(row(b)).toBeLessThan(row(a) - 6);
+    expect(sensitivity(a, 'hungry')).toBe(1);
+  });
+
+  it('reaches the end of its patience once, withdraws, may snap at a neighbour, and recovers', () => {
+    const w = rich('rich-break');
+    const p = w.persons.find((x) => x.alive)!;
+    const aligned = () => {
+      while ((w.tick + p.id) % 30 !== 0) w.tick++;
+    };
+    expect(isBreaking(w, p)).toBe(false);
+    think(w, p, 'terrible', -90, 5000, 'terrible');
+    aligned();
+    updateMood(w, p);
+    expect(isBreaking(w, p)).toBe(true);
+    expect(w.events.some((e) => e.ids.includes(p.id) && /patience|argued/.test(e.text))).toBe(true);
+    expect(moodWeight(w, p, 'socialize')).toBeLessThan(0.3);
+    expect(moodWeight(w, p, 'build')).toBeLessThan(0.3);
+    expect(moodWeight(w, p, 'rest')).toBeGreaterThan(1.5);
+    expect(moodWeight(w, p, 'eat')).toBe(1);
+    expect(quarrelFactor(w, p)).toBeGreaterThan(2.5);
+    // it passes, they are relieved, and it does not happen again at once
+    w.tick += BREAK_LENGTH + 40;
+    aligned();
+    updateMood(w, p);
+    expect(isBreaking(w, p)).toBe(false);
+    expect(thoughtsOf(w, p).some((t) => t.why === 'got it out of their system')).toBe(true);
+    think(w, p, 'terrible2', -90, 5000, 'terrible');
+    aligned();
+    updateMood(w, p);
+    expect(isBreaking(w, p)).toBe(false);
   });
 });

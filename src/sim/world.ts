@@ -259,7 +259,7 @@ export function hashWorld(world: World): string {
   }
   for (const m of world.meals) push(`M${m.id}:${m.status},${m.servings},${m.reserved},${m.arrived.length},${m.ate.length}`);
   if (world.settings.dynamics === 'rich') {
-    for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
+    for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length + ',' + (p.mood.breakUntil ?? 0) : '-'}`);
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));
