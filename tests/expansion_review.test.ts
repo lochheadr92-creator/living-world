@@ -9,7 +9,7 @@ import { createBuilding, createSite } from '../src/sim/buildings';
 import { BUILD_DEF, DAY, WEIGHT } from '../src/sim/constants';
 import { generateOptions } from '../src/sim/decision';
 import { mayDeposit } from '../src/sim/facilities';
-import { FOREST_REACH, seedTreeNear } from '../src/sim/forestry';
+import { FOREST_REACH, lodgeSpot, seedTreeNear } from '../src/sim/forestry';
 import { dissolveHousehold } from '../src/sim/households';
 import { delBelief, observe, putBelief } from '../src/sim/knowledge';
 import { beliefsByKind, makeCtx } from '../src/sim/optutil';
@@ -117,6 +117,24 @@ describe('planting walks to the spot and comes from a grown tree', () => {
     startActivity(w, p, act);
     run(w, 200);
     expect(w.sources.some((s) => s.type === 'tree' && s.x === lodge.x + 3 && s.y === lodge.y + 3)).toBe(false);
+  });
+
+  it('a lodge is sited at the wood\'s edge: within reach of a grown tree this person knows', () => {
+    const { w, p, h } = settled('review-lodge-site', 4.1);
+    p.explored.fill(1);
+    for (const b of beliefsByKind(p, ['tree'])) delBelief(p, b.id);
+    const trees = [];
+    for (let i = 0; i < 4; i++) {
+      const t = makeSource(w, 'tree', Math.floor(h.x) + 16, Math.floor(h.y) - 2 + i, 5, 1);
+      observe(w, p, t);
+      trees.push(t);
+    }
+    const spot = lodgeSpot(w, p, h.x + h.w / 2, h.y + h.h / 2)!;
+    expect(spot).toBeTruthy();
+    const nearest = Math.min(...trees.map((t) => hyp(t.x + 0.5 - (spot.x + 1), t.y + 0.5 - (spot.y + 0.5))));
+    expect(nearest).toBeLessThanOrEqual(FOREST_REACH); // (a grown tree to raise young ones from is within the lodge's reach)
+    for (const b of beliefsByKind(p, ['tree'])) delBelief(p, b.id);
+    expect(lodgeSpot(w, p, h.x + h.w / 2, h.y + h.h / 2)).toBeNull();
   });
 
   it('a lodge in disrepair is not planted from', () => {

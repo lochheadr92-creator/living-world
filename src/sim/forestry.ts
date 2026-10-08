@@ -8,6 +8,8 @@
 //
 // Planning knowledge: whether the wood near home is thin is judged from the trees a person knows; the spot and the cap are checked on
 // arrival against the world.
+import { findBuildSpot } from './buildings';
+import { beliefsByKind } from './optutil';
 import { hubWithin } from './settlements';
 import { treesNear } from './sources';
 import { hashUnit } from './rng';
@@ -68,6 +70,27 @@ export function standBeside(world: World, p: Person, spot: { x: number; y: numbe
     }
   }
   return best;
+}
+
+/**
+ * Where a lodge goes: at the wood's edge, between home and the nearest grown trees this person knows of, so that a tree to raise
+ * young ones from stands within the lodge's reach and the new wood grows toward the houses. Null when no grown tree is known.
+ */
+export function lodgeSpot(world: World, p: Person, hx: number, hy: number): { x: number; y: number } | null {
+  const near = beliefsByKind(p, ['tree'])
+    .filter((b) => b.amount >= 2)
+    .sort((a, c) => hyp(a.x - hx, a.y - hy) - hyp(c.x - hx, c.y - hy))
+    .slice(0, 5);
+  if (!near.length) return null;
+  let tx = 0;
+  let ty = 0;
+  for (const b of near) {
+    tx += b.x;
+    ty += b.y;
+  }
+  tx /= near.length;
+  ty /= near.length;
+  return findBuildSpot(world, p, 'forester', (hx + tx) / 2, (hy + ty) / 2, 1, 7, 3);
 }
 
 /** may another young tree be set in this world at all? (a quarter above the natural cap is the ceiling) */

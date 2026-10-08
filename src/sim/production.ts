@@ -1,7 +1,7 @@
 import { buildable } from './expansion';
 import { LOSS_THRESHOLD, foodLossOf } from './storage';
 import { WELL_FAR, WELL_REACH } from './water';
-import { FOREST_REACH, FOREST_THIN, knownTreesNear, plantingSpot, standBeside } from './forestry';
+import { FOREST_REACH, FOREST_THIN, knownTreesNear, lodgeSpot, plantingSpot, standBeside } from './forestry';
 import { YARD_FAR, YARD_RESERVE, YARD_TARGET, woodDistance, yardRoom } from './stockyard';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, RAW_MATERIALS, REPAIR_USES, TOOL_DEFS, WEIGHT, isHomeType, isSolidHome, workRules } from './constants';
@@ -1036,7 +1036,7 @@ function optPlantTrees(ctx: Ctx): void {
   }
   // (the spot itself is chosen when the option is taken: the search is the world's ground, not something to run at every review)
   const e = eta(ctx, lodge.x, lodge.y) + FOREST_REACH * 4;
-  const sc = new Scorer().add(`only ${trees} trees that I know of stand near home; the lodge can raise more`, 10 + 0.8 * (FOREST_THIN - Math.min(trees, FOREST_THIN)) + 4 * p.traits.diligence).add('walking', -pen(e));
+  const sc = new Scorer().add(`only ${trees} trees that I know of stand near home; the lodge can raise more`, 13 + 1.0 * (FOREST_THIN - Math.min(trees, FOREST_THIN)) + 4 * p.traits.diligence).add('walking', -pen(e));
   const util = sc.total * nightMult(ctx) * weatherMult(ctx);
   addOption(ctx, {
     kind: 'plant_tree',
@@ -1122,6 +1122,10 @@ function optPlanFacilities(ctx: Ctx): void {
             spot = findBuildSpot(world, p, type, dep.x, dep.y, 1.5, 6, 3);
           }
         } else if (type === 'stockyard') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 10, 5);
+        else if (type === 'forester') {
+          const h = ctx.home;
+          spot = lodgeSpot(world, p, h ? h.x + h.w / 2 : camp.x, h ? h.y + h.h / 2 : camp.y) ?? findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
+        }
         else if (type === 'well' || type === 'cellar') {
           const h = ctx.home;
           spot = h ? findBuildSpot(world, p, type, h.x + h.w / 2, h.y + h.h / 2, 2, type === 'well' ? 8 : 7, type === 'well' ? 4 : 3) : null;
