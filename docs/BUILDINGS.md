@@ -260,4 +260,16 @@ whoever carries one takes it home. "Repairs" at the timber yard need no new reci
 The bed recipe is listed at the timber yard in every world (the recipe table is one table) but only demanded in rich worlds. Lab
 metric `beds`.
 
-Natural-run evidence for B2–B5, the review pass and the browser check are recorded below as they are run.
+**Natural-run evidence for stage B** (two ordinary rich seeds, 45 days, commit d2b630a, `docs/evidence/stage-b/`): the parts are
+implemented and contract-tested, but most are **not yet observed working in an ordinary run**:
+
+| Part | aspen | meadow | Measured reason |
+|---|---|---|---|
+| clamp and smelting | clamp built day 20; smithy smelted 1 iron | clamp built day 25; no smelting | the chain's buildings come late (day 20–25); hammers are 0–1 per village |
+| windmill | not wanted | not wanted | the bakery ran no batch in either seed, so nobody ever found it busy: the bread chain itself is dormant |
+| smokehouse | not wanted | not wanted | no household held 8 fish together with a cellar or in a hard season |
+| brewery | built day 31, no brew by day 45 | not wanted | late; its demand needs a hall and grain going off |
+| bed | none made | none made | `make_bed` needs a hammer, and almost nobody has one |
+
+Two shared bottlenecks explain most of it: hammers (the forge and the bed both require one, and a village of thirty has 0–1), and a
+bakery that never runs. Those are the next things to work on, before any new building. Review pass and browser check: not yet run.
