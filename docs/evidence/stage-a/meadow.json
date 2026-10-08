@@ -1,0 +1,91 @@
+{
+ "url": "http://127.0.0.1:4173/",
+ "seed": "meadow",
+ "dynamics": "rich",
+ "days": 14,
+ "commit": "3a89016",
+ "when": "2026-10-08T13:39:26.637Z",
+ "buildings": [
+  {
+   "id": 6374,
+   "type": "well",
+   "x": 30,
+   "y": 51,
+   "hhId": 0,
+   "condition": 85,
+   "items": {
+    "water": 7
+   },
+   "inspector": {
+    "title": "Well",
+    "text": "Well\nBuilt 32.7 min ago\n\nA stone-lined shaft with a windlass. Water seeps in slowly and is drawn by whoever comes: a few units a day, shared, for drinking and carrying home.\n\nOwner\neveryone\nStorage\n11/18 used\nSeeps in\n1 unit every 5s\nCondition\n85%\nWater in the well\n7 / 12\nCONTENTS\n×7"
+   },
+   "screenshot": "docs/evidence/stage-a/well.jpg"
+  },
+  {
+   "id": 7652,
+   "type": "cellar",
+   "x": 29,
+   "y": 49,
+   "hhId": 1004,
+   "condition": 85,
+   "items": {
+    "fruit": 4,
+    "berries": 4,
+    "grain": 7
+   },
+   "inspector": {
+    "title": "Cellar",
+    "text": "Cellar\nBuilt 27.4 min ago\n\nA stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at under a third of the ordinary pace. Food and flour only; a household keeps its own.\n\nOwner\nBrook household\nStorage\n15/90 used\nKeeps food\ngoing off at 30% of the ordinary pace\nLost lately\nabout 2 units of the household's food went off (fading)\nCondition\n85%\nCONTENTS\n×4\n×4\n×7"
+   },
+   "screenshot": "docs/evidence/stage-a/cellar.jpg"
+  },
+  {
+   "id": 7732,
+   "type": "stockyard",
+   "x": 36,
+   "y": 41,
+   "hhId": 0,
+   "condition": 84,
+   "items": {},
+   "inspector": {
+    "title": "Stockyard",
+    "text": "Stockyard\nBuilt 27.1 min ago\n\nA fenced yard by the houses where logs, stone, clay and ore are stacked for whoever builds or works next. Raw goods only: finished goods belong in the storehouse.\n\nOwner\neveryone\nStorage\n0/150 used\nCondition\n84%"
+   },
+   "screenshot": "docs/evidence/stage-a/stockyard.jpg"
+  }
+ ],
+ "users": [
+  {
+   "id": 996,
+   "name": "Pavel",
+   "kind": "drink",
+   "label": "Drinking at the well",
+   "goal": "to quench thirst (51/100)",
+   "phase": "travel",
+   "building": "well",
+   "buildingId": 6374,
+   "inspector": {
+    "title": "Stockyard",
+    "text": "P\nPavel\nFollow\nElder, 72\nRowan household\nHome: lean-to (42% sound)\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nWHAT ARE THEY DOING?\nDrinking at the well — walking to Well (17 tiles to go).\non the way\nWHY DID THEY CHOOSE IT?\nWeighed up: thirsty +33 · walking −18\nWHAT ARE THEY TRYING TO ACHIEVE?\nTo quench thirst (51/100) (Well).\nWHAT IS STOPPING THEM?\nNothing in the way.\nWHAT HAPPENED AFTER THEIR LAST ATTEMPT?\nChopping wood → interrupted: something better came up (just now)\nNEEDS\nFood\n70\nWater\n50\nEnergy\n80\nWarmth\n66\nSafety\n82\nCompany\n89\nCARRYING\n×1\n×2\n5 / 8\nTOOLS\nnone\nConversation\n\nWhat they are saying to someone right now, and the last conversation they had.\n\nLAST CONVERSATION\n14s ago\nMaren\ncame to Pavel with a warning\nOutcome\nFriendly\nOpportunities they could have used\n9\n\nThings nearby that could have helped, and why they did or did not take them. Click one to see where it is.\n\nPASSED OVER\nBerry bush (6 berries)\n2 tiles\nConsidered (score 23) but preferred “Drinking at the well” (15).\nPASSED OVER\nBerry bush (6 berries)\n3 tiles\nConsidered (score 23) but preferred “Drinking at the well” (15).\nPASSED OVER\nBerry bush (6 berries)\n4 tiles\nConsidered (score 22) but preferred"
+   },
+   "screenshot": "docs/evidence/stage-a/person-well.jpg"
+  },
+  {
+   "id": 1006,
+   "name": "Sofia",
+   "kind": "eat_store",
+   "label": "Eating at home",
+   "goal": "to ease hunger (47/100)",
+   "phase": "travel",
+   "building": "cellar",
+   "buildingId": 7652
+  }
+ ],
+ "notes": [],
+ "settings": "{\"seed\":\"meadow\",\"population\":28,\"harsh\":false,\"immigration\":false,\"scene\":\"natural\",\"dynamics\":\"rich\"}",
+ "tick": 33600,
+ "day": 14,
+ "sites": [],
+ "tickAtUsers": 33640
+}

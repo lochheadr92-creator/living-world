@@ -1,7 +1,7 @@
 # Village-economy expansion: coverage, chains and build order
 
-Status: **design and plan; nothing in this file is implemented yet** except the rows marked "reuse". It is the contract the
-implementation is checked against. The existing catalogue (12 types, `BUILD_DEF` in `src/sim/constants.ts`): lean-to, hut, house
+Status: **stage A implemented** (well, cellar, stockyard, forester's lodge, mine: see "Stage A: progress and evidence" at the end);
+stages B–F not started. The coverage table is the contract the implementation is checked against. The existing catalogue (12 types, `BUILD_DEF` in `src/sim/constants.ts`): lean-to, hut, house
 (an in-place upgrade of a hut), storehouse, fire, timber yard, quarry, kiln, smithy, granary, bakery, hall. Recipes (11) are in
 `src/sim/recipes.ts`; item kinds are food (berries, fruit, fish, grain, bread), seeds, water, materials (wood, stone, clay, ore,
 planks, handles, bricks, charcoal, iron, flour) and tools (axe, pick, hoe, basket, hammer, saw, jar). There are no domestic animals
@@ -104,7 +104,7 @@ their measured reason.
 
 | Stage | Contents | Status |
 |---|---|---|
-| A | plumbing for rich-only types (definitions, wear, repair, icons, sprites, inspector, save); well, stockyard, cellar, forester (planting), mine | not started |
+| A | plumbing for rich-only types (definitions, wear, repair, icons, sprites, inspector, save); well, stockyard, cellar, forester (planting), mine | implemented; evidence below |
 | B | mill, clamp, smokehouse, brewery; furniture and repair recipes at the timber yard | not started |
 | C | animal records, coop, barn, lodge (hunt and butcher), weaver and tailor, tannery, clothing with wear | not started |
 | D | market, trading post, dock, stable and working animals | not started |
@@ -117,3 +117,58 @@ A chain counts as working only when an unstaged rich seeded run shows, in order:
 materials delivered, the work done, the output created, the output used, and the consequence; a fixture is not evidence. More
 buildings is not evidence either: the gates measure building counts, and a catalogue can grow while nobody's day changes. Each new
 building therefore also gets a causal trace for one actual instance (who needed what, who did what, what changed afterwards).
+
+## Stage A: progress and evidence
+
+Plumbing: `RICH_ONLY_BUILDINGS` and `buildable()` (`src/sim/expansion.ts`) gate every new type; `siteConflict` refuses them in an
+ordinary world, the planner never considers them, and the golden, determinism and save tests check that authored worlds are unchanged.
+Each type has a definition (`BUILD_DEF`), wear and a repair material, an icon, a sprite (`src/render/bld_service.ts`), construction
+drawing, inspector rows, and lives in the ordinary save as a building of its type (save format unchanged at 4; the only new optional
+field is `Household.lost`, written when present). The lab can switch any of them off: `rich-no:well+cellar` and so on.
+
+| Building | Implemented | Contract-tested | Observed in an ordinary seeded run (rich, normal profile, 4 seeds, 30 days) | Observed in the browser |
+|---|---|---|---|---|
+| well (`water.ts`) | yes | `tests/expansion_water.test.ts` (10) | laid out day 5–6 in 4/4 seeds; 1–2 built per world; 154–627 drinks and water-fetches by 25–30 people | yes: `docs/evidence/stage-a/well.jpg` (meadow, day 14, "Owner: everyone, Water in the well 7/12") |
+| cellar (`storage.ts`) | yes | `tests/expansion_storage.test.ts` (9) | 4–8 laid out per world from day 5; 4–8 built; 180–313 deposits and meals by 14–16 people; one or two sites per world wait days for stone | yes: `cellar.jpg` (meadow, day 14, Brook household, "Lost lately about 2 units", fruit, berries and grain inside) |
+| stockyard (`stockyard.ts`) | yes | `tests/expansion_stockyard.test.ts` (8) | laid out day 6–19 in 4/4; built 4/4; 34–344 stackings and collections by 14–20 people (it runs near empty: builders draw it down as fast as it fills) | yes: `stockyard.jpg` (meadow, day 14) |
+| forester's lodge (`forestry.ts`, `act_forestry.ts`) | yes | `tests/expansion_forestry.test.ts` (7) | laid out day 13–29 in 4/4; built 4/4; planted from in 2/4 within 30 days (1 and 3 plantings), 3/4 within 45 days (11–43 plantings by 3–8 people) | yes: `forester.jpg` (fern, day 27, "Young trees: 2 of at most 10 standing within 11 tiles") |
+| mine (`recipes.ts` `mine_ore`) | yes | `tests/expansion_mine.test.ts` (5) | laid out day 22–30 in 3/4 seeds over 45 days (1/4 within 30); built; dug 0–2 times: **built, not working** (below) | standing only: `mine.jpg` (fern, day 27, Willow household, idle) |
+
+Numbers are from `scripts/chainwatch.ts` on seeds meadow, river, fern and aspen (`docs/evidence/stage-a/chainwatch-<seed>.json`, which
+also hold the causal trace of each type's first instance: who marked it out and the problem they gave as their reason, who finished
+it, who first used it and for what). The browser evidence is `scripts/browser/stage_a.mjs` against the built app (`meadow.json`,
+`fern.json` and the screenshots beside them): the world is restarted rich from the page's own controls, run on, and each building
+selected and read from the inspector.
+
+Causal traces (from `chainwatch-<seed>.json`, commit 3a89016; each is the first instance of its kind in that world, nothing staged):
+
+* well, meadow: day 5.1 Ivo lays one out ("the nearest water I know is 18 tiles from home, and a well close to the houses would
+  save the walk"); day 5.8 Ivo finishes it and is the first to drink at it (thirst 59/100). 627 drinks and fetches by 30 people
+  follow in 30 days. In the browser at day 14 Pavel is walking to it to drink (`person-well.jpg` is fern's Otto doing the same).
+* cellar, river: day 5.7 Basil ("we keep finding food gone off (about 12 units lately): a cellar would keep it cool"); day 7.1
+  Basil finishes it; day 7.2 Ivy is the first to bring food home to it. 313 deposits and meals by 16 people.
+* stockyard, river: day 8 Abel ("the wood I fetch is about 12 tiles from home: a yard by the houses would save every builder the
+  walk"); day 8.5 Basil finishes it; day 9.2 Petra stacks 3 stone there "for whoever builds or works next". 344 stackings and
+  collections by 20 people in the remaining 22 days.
+* forester's lodge, fern: day 14.2 Otto ("only 9 trees that I know of stand near home: someone should be planting"); day 16 Dax
+  finishes it; day 24.2 Yusuf plants the first young tree "to thicken the wood near home"; 3 plantings by day 30.
+* mine, fern: day 20.5 Nora ("my tools are wearing out, the smithy has no ore and a vein is known: a mine would bring it out by
+  the load"); day 26.2 Nora finishes it; it is then dug twice in four days and the ore sits at the shaft head: nobody smelts.
+
+Chains that are not working yet, with the measured reason:
+
+* **Mine → smithy → iron tools.** The mine is laid out only where a smithy is known and tools are wearing, which in these seeds is
+  day 22 or later; once built it is dug 0–2 times in 45 days. The cause is upstream: the smithy itself ran no batch in 45 days in
+  any of the four seeds (probe on river: `batches=0` throughout), because the only demand for iron is a worn tool of someone who
+  also knows a smithy, and charcoal for smelting comes from the kiln, which is busy with bricks. Stage B (clamp, metalwork) is where
+  that chain is made to run; the mine's own contract (ore out of a finite vein, pick required, one mine per vein, save mid-batch)
+  is tested.
+* **Forester's lodge.** Works, but late: the wood near home only reads as thin after the first weeks of felling, so most lodges stand
+  from day 13–29 and planting is light within 30 days. Growth is real (`SAPLING_TICKS`, wood created in the ledger as "tree growth").
+* **Stone.** Several cellar and well sites wait days for their last few stone; stone is gathered by hand from small rocks until a
+  quarry exists. Not changed here (it is the authored world's supply rule); worth a look when the gates are run on 24 seeds.
+
+Rule changes beside the new types: a building with nobody's name on the title (hall, granary, well, lodge, yard) is now created
+with household 0 whoever laid it out (`titleHolder` was consulted for workplaces only; for the three new common types that matters
+to the inspector, which read "nobody (empty)" for an empty yard); a belief passed on by word of mouth no longer carries keys set
+to undefined (`news.ts`), which made a saved world and its live copy serialise differently (`tests/save_told.test.ts`).
