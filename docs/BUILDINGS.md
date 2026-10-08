@@ -105,7 +105,7 @@ their measured reason.
 | Stage | Contents | Status |
 |---|---|---|
 | A | plumbing for rich-only types (definitions, wear, repair, icons, sprites, inspector, save); well, stockyard, cellar, forester (planting), mine | implemented; evidence below |
-| B | mill, clamp, smokehouse, brewery; furniture and repair recipes at the timber yard | not started |
+| B | mill, clamp, smokehouse, brewery; furniture and repair recipes at the timber yard | in progress: B1 (the iron chain) implemented, see the stage B section |
 | C | animal records, coop, barn, lodge (hunt and butcher), weaver and tailor, tannery, clothing with wear | not started |
 | D | market, trading post, dock, stable and working animals | not started |
 | E | bunkhouse, healer, teaching, tavern, shrine, watchpost | not started |
@@ -214,3 +214,45 @@ kiln); protecting saplings waits for something that threatens them; the househol
 household notices its own food going off whether or not a member is at the store at that moment), which is now stated in the
 coverage row. Not yet done: a contract test for every failure mode the brief lists is still incomplete (a full cellar, a full yard, a
 silted well and a lodge in disrepair are now tested; the world tree ceiling is not).
+
+## Stage B: the chains behind the buildings
+
+Stage A ended with one chain measured dead: the mine stood and nobody smelted. A probe on an ordinary seed at day 30 showed why: thirty
+people share two axes, a pick, a hoe and a saw; only one person had both a worn tool and knowledge of the smithy; not one hammer existed;
+the kiln had fired bricks nine times and charcoal never. "Replace a worn tool" is far too weak a trigger for a four-leg chain. Stage B
+is built in sub-stages, each with its tests, a natural run and its own commit. A three-lens design panel (emergence, economy,
+simplicity) judged the plan before it was built; what it changed is recorded under each part.
+
+**B1, the iron chain** (implemented). The charcoal clamp (`clamp`, rich only): a stack of logs under turf and clay, six charcoal from
+ten logs after a long smoulder, no stone, no bricks, so the kiln is left to its bricks; wanted by a smith who has looked into the
+smithy and found no charcoal, sited at the wood's edge away from the houses. The smith (`isSmith`: whoever has practised at the
+smithy, or is diligent enough to take it up; skills start at 1.0 so "skill ≥ 1" would be half the village) keeps iron and handles
+on the smithy's shelf in slack time, at the pay of a site job because its chain is four legs long; a batch for the shelf belongs to
+nobody, so anyone may forge with it. Anyone who wants a hand tool and knows a smithy with iron on the shelf wants it in iron (the
+forge outranks the stone tool; the plan fetches the handle itself); a hammer is wanted by whoever is about to forge or works the
+smithy; a known clamp is preferred to the kiln for charcoal; the smith's demand counts toward wanting a mine. Measured: with the
+first, weaker version nothing was smelted in 4 × 30 days although clamps and mines were built; with this version a 40-day probe on
+aspen shows the whole chain in motion from the day the smithy and clamp stand (about day 20–28): wood collected and burnt in the
+clamp, charcoal collected, ore dug by hand and at the mine, "Smelting iron", "Forging an iron axe". The chain is thin because its
+buildings come late; its evidence window is 45 days. New lab metrics `ironTools` and `smithyBatches`; chainwatch now reports every
+workshop's batches.
+
+**B2, the mill** (next). The panel's correction: not "a bakery is known and the granary holds grain" but the measured bottleneck,
+a person who found the bakery busy (its one job slot taken by milling) when they came to bake; a known mill is preferred to the
+quern; bakery batches and bread created become lab metrics.
+
+**B3, the smokehouse**. The panel's correction: it must not compete with the cellar for the same spoilage signal (the cellar is
+cheaper, per household, and comes by day 5–7 in every seed); its real difference is food that keeps outside a store, through the
+lean season. Wanted by a household holding fish with a cellar already standing or the lean season near; smoked fish joins every
+hand-kept food list (social.ts, economy.ts, meals.ts, optutil.ts), and meals eat the fresher food first so the smoked is the reserve.
+
+**B4, the brewery**. The panel's strongest objection: a private "mug of beer" thought of +6 is below the noise floor this project has
+already measured (mood effects add nothing at population level). Beer therefore goes to the hall: brewed on a brewer's shelf in slack
+time, carried to the hall, served at the shared meal (a larger shared-meal thought, invitations accepted more readily when the hall
+is known to hold beer), so the consequence is who was there: conversations, news, affinity, rows. Wanted from a problem, not a
+stock level (a household with grain it saw go off or was turned away from the bakery, knowing a hall).
+
+**B5, furniture**. The panel's correction: faster energy recovery only wakes people earlier in the dark; a warmer bed is the visible
+consequence (sleep in a home whose store holds furniture is warmer, so fewer nights are broken by cold), wanted from the problem the
+household can see (a member woke cold lately, an elder or child in the house), not by every solid home. "Repairs" at the timber yard
+are already covered (planks mend houses; handles mend tools) and are not a new recipe.

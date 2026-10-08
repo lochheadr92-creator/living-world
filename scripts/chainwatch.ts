@@ -82,6 +82,9 @@ const out = {
   })(),
   people: w.persons.filter((p) => p.alive).length,
   waterLedger: Object.fromEntries(Object.entries(w.ledger.reasons).filter(([k]) => /well|water/.test(k))),
+  // every workplace's batches and what it made: the chains behind the buildings (a mine with no smelting behind it is 'built, not working')
+  workshops: w.buildings.filter((b) => b.ops).map((b) => ({ type: b.type, id: b.id, batches: b.ops!.batches, produced: b.ops!.produced, lastBlocker: b.ops!.lastBlocker })),
+  tools: { total: w.tools.length, iron: w.tools.filter((t) => t.tier === 1).length, hammers: w.tools.filter((t) => t.kind === 'hammer').length },
   report,
 };
 if (opt('json', '')) writeFileSync(opt('json', ''), JSON.stringify(out));

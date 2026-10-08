@@ -198,3 +198,34 @@ export function stockyardSprite(cache: SpriteCache, variant: number): Sprite {
     }
   });
 }
+
+// ───────────────────────────── charcoal clamp (2 x 2) ─────────────────────────────
+// A domed stack of logs under turf and clay with a dark vent at the crown; a few logs and a rake beside it, soot on the ground.
+export function clampSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`clamp${v}`, 150, 120, 75, 78, (ctx) => {
+    const p = mk(2, 2);
+    groundShadow(ctx, 56, 22, 0.3, 4);
+    const [cx, cy] = p(1, 1, 0);
+    ellipse(ctx, cx, cy + 2, 46, 23, 'rgba(60,52,44,0.5)');
+    const earth = ['#6e5a3c', '#66563c', '#735e40', '#625238'][v];
+    // the dome: layered ellipses from the base up, earth below, turf toward the crown
+    for (let i = 0; i < 9; i++) {
+      const t = i / 8;
+      const rx = 34 * Math.sqrt(1 - t * t * 0.92);
+      const ry = 17 * Math.sqrt(1 - t * t * 0.92);
+      ellipse(ctx, cx, cy - i * 4, rx, ry, shade(i < 6 ? earth : '#6f8f4e', 1.0 - t * 0.25));
+    }
+    // log ends showing through the skin on the lit side
+    for (let i = 0; i < 5; i++) {
+      const a = Math.PI * (0.95 + 0.11 * i);
+      ellipse(ctx, cx + Math.cos(a) * 26, cy - 6 + Math.sin(a) * 9, 3.2, 2.4, '#4a3421');
+      ellipse(ctx, cx + Math.cos(a) * 26, cy - 6 + Math.sin(a) * 9, 1.6, 1.2, '#a6835a');
+    }
+    // the vent at the crown
+    ellipse(ctx, cx, cy - 34, 5, 2.6, '#1c1814');
+    // a rake and spare logs at the foot, soot on the ground
+    line(ctx, p(1.75, 1.85, 0), p(1.9, 1.3, 24), '#8b6b45', 1.8);
+    ellipse(ctx, p(0.3, 1.8, 0)[0], p(0.3, 1.8, 0)[1], 7, 3, 'rgba(30,26,22,0.45)');
+  });
+}

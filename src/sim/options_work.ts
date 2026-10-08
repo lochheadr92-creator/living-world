@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { buildable } from './expansion';
 import { newActivity } from './activities';
 import { COMMON_BUILDINGS, ITEM_LABEL, BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
@@ -294,8 +295,13 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
 }
 
 export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | null {
+  return wantedTools(ctx)[0] ?? null;
+}
+
+/** every hand tool this person has reason to want, best reason first */
+export function wantedTools(ctx: Ctx): ('axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw')[] {
   const { p, world } = ctx;
-  if (ctx.stage === 'child') return null;
+  if (ctx.stage === 'child') return [];
   const has = (t: ToolKind) => (p.inv[t] ?? 0) > 0;
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
@@ -313,9 +319,10 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   if (planksWanted && !has('saw') && knowTrees && p.skills.carpentry >= 0.95) options.push({ t: 'saw', w: 3 });
   // iron tools are forged with a hammer: someone who would swap a wearing tool for an iron one, and knows a smithy, needs their own
   if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
-  if (!options.length) return null;
+  // (rich worlds) a hammer for whoever is about to forge (a smithy they know has iron on its shelf) or works the smithy: nothing is forged without one
+  if (!has('hammer') && isRich(world) && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy' && (p.traits.diligence > 0.6 || p.skills.smith > 1.05 || unitsOf(b.items?.iron) >= 1))) options.push({ t: 'hammer', w: 1.5 });
   options.sort((x, y) => y.w - x.w);
-  return options[0].t;
+  return options.map((o) => o.t);
 }
 
 export type RawMaterial = 'wood' | 'stone' | 'clay' | 'ore';

@@ -1,7 +1,8 @@
 import { buildable } from './expansion';
 import { LOSS_THRESHOLD, foodLossOf } from './storage';
 import { WELL_FAR, WELL_REACH } from './water';
-import { FOREST_REACH, FOREST_THIN, knownTreesNear, lodgeSpot, plantingSpot, standBeside } from './forestry';
+import { FOREST_REACH, FOREST_THIN, edgeSpot, knownTreesNear, lodgeSpot, plantingSpot, standBeside } from './forestry';
+import { isRich } from './mood';
 import { YARD_FAR, YARD_RESERVE, YARD_TARGET, woodDistance, yardRoom } from './stockyard';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, RAW_MATERIALS, REPAIR_USES, TOOL_DEFS, WEIGHT, isHomeType, isSolidHome, workRules } from './constants';
@@ -11,7 +12,7 @@ import { invRoom, weightOf } from './economy';
 import { delBelief, noteFailure, recentFailure } from './knowledge';
 import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, spotNear, traitMods } from './optutil';
 import type { Ctx } from './optutil';
-import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
+import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, wantedTools, weatherMult } from './options_work';
 import { rulesOf, within } from './rules';
 import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
@@ -448,6 +449,8 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
       }
       continue;
     }
+    // charcoal is burnt in a clamp where one is known: the kiln is for bricks
+    if (r.id === 'burn_charcoal' && facilitiesOf(ctx, 'clamp').length) continue;
     // prefer the better way of making something when its tool is to hand: sawing beats hewing
     if (r.id === 'hew_planks' && (unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw'))) continue;
     if (r.id === 'saw_planks' && !(unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw')) && unitsOf(p.inv.axe) > 0) continue;
@@ -489,6 +492,16 @@ export function demandsOf(ctx: Ctx): Demand[] {
     if (left > 0) out.push({ item: c.item, qty: left, have: 0, base: 50, why: 'to keep my promise to bring it', tag: 'promise', siteId: c.siteId });
   }
   const tm = traitMods(p);
+
+  // (rich worlds) a tool wanted at all is wanted in iron when a smithy they may use has iron and a handle on its shelf
+  if (isRich(world)) {
+    const kind = wantedTools(ctx).find((k) => k !== 'basket'); // (the smithy forges every hand tool but a basket)
+    if (kind) {
+      // (a handle is fetched by the forge plan itself, from the yard or the shelf; the want outranks making a stone one by hand)
+      const f = facilitiesOf(ctx, 'smithy').find((x) => stockAt(x.b, 'iron') >= 1);
+      if (f && !toolsHeldBy(world, p.id, kind).some((t) => t.tier === 1)) out.push({ item: kind, qty: 1, have: 0, base: (20 + 8 * p.traits.diligence) * tm.work, why: `to have an iron ${TOOL_DEFS[kind].label}: it cuts faster and lasts twice as long`, tag: 'craft', tier: 1 });
+    }
+  }
 
   // a tool that is wearing out is worth replacing with an iron one, where a smithy can be used
   if (facilitiesOf(ctx, 'smithy').length) {
@@ -900,6 +913,11 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
       out.push({ type: 'stockyard', signal: Math.min(1, s), why: `the wood I fetch is about ${Math.round(far)} tiles from home: a yard by the houses would save every builder the walk` });
     }
   }
+  // a charcoal clamp: the smithy has no charcoal and the kiln is for bricks; a clamp by the trees burns it (rich worlds)
+  if (buildable(world, 'clamp') && !knowsOfAny(ctx, 'clamp') && knowTrees && isSmith(ctx)) {
+    const smithy = beliefsByKind(p, ['building']).find((b) => b.btype === 'smithy' && b.items !== undefined);
+    if (smithy && stockAt(smithy, 'charcoal') < 2) out.push({ type: 'clamp', signal: Math.min(1, 0.6 + 0.3 * init), why: 'the smithy has no charcoal and the kiln is for bricks: a clamp by the trees would burn it' });
+  }
   // a mine: a smithy is known, its ore is running short or tools are wearing out, and there is a vein with plenty in it (rich worlds)
   if (buildable(world, 'mine') && !knowsOfAny(ctx, 'mine') && knowsOfAny(ctx, 'smithy')) {
     const veins = beliefsByKind(p, ['ore_vein']).filter((b) => b.amount >= 12);
@@ -907,8 +925,8 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (veins.length > 0 && smithy) {
       // (an idle smithy with bare shelves is not a demand for ore: someone has to want iron, which today means a tool of theirs wearing out)
       const worn = toolsHeldBy(world, p.id).filter((t) => t.wear >= 25 && t.kind !== 'jar').length;
-      if (worn > 0 && stockAt(smithy, 'ore') < 3) {
-        const s = 0.5 + 0.1 * Math.min(worn, 2) + 0.2 * init;
+      if ((worn > 0 || isSmith(ctx)) && stockAt(smithy, 'ore') < 3) {
+        const s = 0.5 + 0.1 * Math.min(worn, 2) + 0.2 * init + (isSmith(ctx) ? 0.1 : 0);
         if (s >= 0.6) out.push({ type: 'mine', signal: Math.min(1, s), why: 'my tools are wearing out, the smithy has no ore and a vein is known: a mine would bring it out by the load' });
       }
     }
@@ -924,6 +942,48 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
 function bricks_or_charcoal(ctx: Ctx): string {
   if (bricksWanted(ctx) > 0) return 'bricks are wanted and there is clay but no kiln';
   return 'clay could be fired into bricks and jars, and wood burned to charcoal';
+}
+
+/** iron and handles kept on a smithy's shelf for whoever needs a tool */
+const SMITHY_SHELF: Partial<Record<ItemKind, number>> = { iron: 2, handles: 2 };
+
+/** the smith (rich worlds): whoever has practised at the smithy, or is diligent enough to take it up; skills start at 1.0, and smith skill grows fastest */
+export function isSmith(ctx: Ctx): boolean {
+  return isRich(ctx.world) && (ctx.p.skills.smith > 1.05 || ctx.p.traits.diligence > 0.6);
+}
+
+/**
+ * The smith (rich worlds): someone who knows a smithy they may use, has the skill or the diligence, and in slack time keeps iron on its
+ * shelf: smelting when ore and charcoal are there, otherwise fetching them (a vein or a mine for the ore; a kiln or a clamp for the
+ * charcoal, through the ordinary supply planning). A batch for the shelf belongs to nobody, so anyone may forge with its iron.
+ */
+function optStockSmithy(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!isSmith(ctx) || world.tick < DAY * 6) return;
+  if (ctx.drives.hunger > 25 || ctx.drives.thirst > 25 || ctx.drives.energy > 40) return;
+  const f = facilitiesOf(ctx, 'smithy')[0];
+  if (!f) return;
+  if (hashUnit(p.id, Math.floor(world.tick / 400), 83) > 0.45 + 0.45 * p.traits.diligence) return;
+  const before = ctx.options.length;
+  // (a trade, not an idle afternoon: it pays about what a site does, because its chain is four legs long and each must win in turn)
+  const base = (22 + 6 * p.traits.diligence + 6 * Math.max(0, p.skills.smith - 1)) * traitMods(p).work;
+  for (const k of ['iron', 'handles'] as const) {
+    const short = (SMITHY_SHELF[k] ?? 0) - stockAt(f.b, k);
+    if (short > 0) supply(ctx, k, short, k === 'iron' ? base : base * 0.8, `to keep ${k} on the smithy's shelf for whoever needs a tool`, 'craft', 0, f.b);
+  }
+  for (let i = before; i < ctx.options.length; i++) {
+    const o = ctx.options[i];
+    if (o.kind !== 'operate' || o.targetId !== f.b.id || !o.make) continue;
+    const mk = o.make;
+    o.make = () => {
+      const a = mk();
+      if (a && a.data.recipe === 'smelt_iron') {
+        a.data.client = 0;
+        a.data.purpose = 'for the shelf';
+      }
+      return a;
+    };
+  }
 }
 
 /** The stockyard: stack the raw goods I carry beyond my own reserve; in slack time, fetch more when the yard I know is low (rich worlds). */
@@ -1125,6 +1185,9 @@ function optPlanFacilities(ctx: Ctx): void {
         else if (type === 'forester') {
           const h = ctx.home;
           spot = lodgeSpot(world, p, h ? h.x + h.w / 2 : camp.x, h ? h.y + h.h / 2 : camp.y) ?? findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
+        } else if (type === 'clamp') {
+          // by the trees it burns, and well away from the houses it smokes over
+          spot = edgeSpot(world, p, camp.x, camp.y, 'clamp', 0.75, 3, 9, 5) ?? findBuildSpot(world, p, type, camp.x, camp.y, 8, 16, 11);
         }
         else if (type === 'well' || type === 'cellar') {
           const h = ctx.home;
@@ -1228,6 +1291,7 @@ export function productionOptions(ctx: Ctx): void {
   optCartHaul(ctx);
   optRackSpare(ctx);
   optStockYard(ctx);
+  optStockSmithy(ctx);
   optPlantTrees(ctx);
   optPlanFacilities(ctx);
   optPlanUpgrade(ctx);

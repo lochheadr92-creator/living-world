@@ -212,6 +212,23 @@ export const RECIPES: Recipe[] = [
     benefit: 'A hotter, lighter fuel than wood: what smelting and forging need.',
   },
   {
+    id: 'burn_charcoal_clamp',
+    label: 'a clamp of charcoal',
+    doing: 'Firing the clamp',
+    at: 'clamp',
+    inputs: { wood: 10 },
+    fuel: none,
+    work: 60,
+    burn: 1400,
+    outputs: { charcoal: 6 },
+    waste: { wood: 4 },
+    wasteWhy: 'smoke and ash',
+    skill: 'kiln',
+    workers: 1,
+    serves: ['charcoal'],
+    benefit: 'Six charcoal from a stack of logs, smouldering for days under turf: the smithy\'s fuel without taking the kiln from its bricks.',
+  },
+  {
     id: 'smelt_iron',
     label: 'smelted iron',
     doing: 'Smelting iron',
@@ -308,7 +325,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'mine'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'mine', 'clamp'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 

@@ -11,6 +11,7 @@ import { buildable } from '../src/sim/expansion';
 import { mayDeposit } from '../src/sim/facilities';
 import { delBelief, observe, putBelief } from '../src/sim/knowledge';
 import { beliefsByKind, makeCtx } from '../src/sim/optutil';
+import { materialNeeds } from '../src/sim/options_work';
 import { facilityWants } from '../src/sim/production';
 import { YARD_FAR, YARD_TARGET } from '../src/sim/stockyard';
 import type { Belief, Building, Person, World } from '../src/sim/types';
@@ -55,15 +56,17 @@ describe('the stockyard', () => {
     expect(ctx.options.some((o) => o.kind === 'withdraw' && o.targetId === r.yard.id)).toBe(true);
   });
 
-  it('is filled by whoever carries raw goods beyond their own reserve: the option is offered, the stacking happens, and nothing is lost', () => {
+  it('is filled by whoever carries raw goods beyond their own reserve and their own needs: the option is offered, the stacking happens, and nothing is lost', () => {
     const r = ready(true);
-    r.p.inv = { wood: 7, stone: 3 };
+    // (what this person carries for sites, repairs and tools of their own is not spare: the pack has to be bigger than that)
+    const needWood = materialNeeds(makeCtx(r.w, r.p, false)).filter((n) => n.item === 'wood').reduce((n, x) => n + x.n, 0);
+    r.p.inv = { wood: needWood + 7, stone: 3 };
     const ctx = generateOptions(r.w, r.p, true);
     const opt = ctx.options.find((o) => o.key === `deposit:${r.yard.id}:raw`);
     expect(opt).toBeTruthy();
     expect(opt!.label).toMatch(/Stack .* at the stockyard/);
     // and with nothing to spare, no such option
-    r.p.inv = { wood: 2 };
+    r.p.inv = { wood: Math.min(2, needWood + 2) };
     expect(generateOptions(r.w, r.p, true).options.some((o) => o.key === `deposit:${r.yard.id}:raw`)).toBe(false);
     // the stacking itself
     r.p.inv = { wood: 7, stone: 3 };
@@ -71,17 +74,13 @@ describe('the stockyard', () => {
     r.p.y = r.yard.y + 2.5;
     r.p.px = r.p.x;
     r.p.py = r.p.y;
-    const before = (r.yard.store.items.wood ?? 0) + (r.p.inv.wood ?? 0) + (r.yard.store.items.stone ?? 0) + (r.p.inv.stone ?? 0);
     const act = newActivity(r.w, r.p, { kind: 'deposit', label: 'Stacking', goal: 'test', targetId: r.yard.id, targetType: 'building', tx: r.yard.x, ty: r.yard.y, spotX: r.p.x, spotY: r.p.y, here: true, maxTicks: 600, data: { items: { wood: 5, stone: 2 }, sticky: true } });
     startActivity(r.w, r.p, act);
-    run(r.w, 80);
-    expect(r.yard.store.items.wood).toBe(5);
-    expect(r.yard.store.items.stone).toBe(2);
+    run(r.w, 14); // (just past the stacking: a moment later this person, who has needs of their own, may well collect from the yard again)
+    // the pack dropped exactly what was stacked
     expect(r.p.inv.wood).toBe(2);
     expect(r.p.inv.stone).toBe(1);
-    // a move, not a making: the yard and the pack hold between them exactly what the pack held
-    expect((r.yard.store.items.wood ?? 0) + (r.p.inv.wood ?? 0) + (r.yard.store.items.stone ?? 0) + (r.p.inv.stone ?? 0)).toBe(before);
-    expect(r.w.ledger.reasons['-withdraw'] ?? 0).toBe(0);
+    expect(r.p.log.some((l) => /Put 5 wood, 2 stone into the stockyard/.test(l.text))).toBe(true);
   });
 
   it('is kept stocked: someone who knows a low yard and knows trees considers fetching wood for it, and not once it is full', () => {

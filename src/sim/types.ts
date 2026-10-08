@@ -514,7 +514,8 @@ export type BuildingType =
   | 'cellar'
   | 'mine'
   | 'forester'
-  | 'stockyard';
+  | 'stockyard'
+  | 'clamp';
 
 export interface Building {
   ent: 'building';

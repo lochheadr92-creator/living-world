@@ -15,7 +15,7 @@ import { treesNear } from './sources';
 import { hashUnit } from './rng';
 import { isFreeLand, isWalkable } from './registry';
 import { hyp } from './util';
-import type { Belief, Building, Person, World } from './types';
+import type { Belief, Building, BuildingType, Person, World } from './types';
 import { T } from './types';
 
 /** open ground this near the lodge (tiles) is planted */
@@ -77,6 +77,11 @@ export function standBeside(world: World, p: Person, spot: { x: number; y: numbe
  * young ones from stands within the lodge's reach and the new wood grows toward the houses. Null when no grown tree is known.
  */
 export function lodgeSpot(world: World, p: Person, hx: number, hy: number): { x: number; y: number } | null {
+  return edgeSpot(world, p, hx, hy, 'forester', 0.5, 1, 7, 3);
+}
+
+/** a spot on the way from (hx, hy) to the nearest grown trees this person knows: `toward` 0 is at home, 1 at the trees */
+export function edgeSpot(world: World, p: Person, hx: number, hy: number, type: BuildingType, toward: number, rMin: number, rMax: number, prefer: number): { x: number; y: number } | null {
   const near = beliefsByKind(p, ['tree'])
     .filter((b) => b.amount >= 2)
     .sort((a, c) => hyp(a.x - hx, a.y - hy) - hyp(c.x - hx, c.y - hy))
@@ -90,7 +95,7 @@ export function lodgeSpot(world: World, p: Person, hx: number, hy: number): { x:
   }
   tx /= near.length;
   ty /= near.length;
-  return findBuildSpot(world, p, 'forester', (hx + tx) / 2, (hy + ty) / 2, 1, 7, 3);
+  return findBuildSpot(world, p, type, hx + (tx - hx) * toward, hy + (ty - hy) * toward, rMin, rMax, prefer);
 }
 
 /** may another young tree be set in this world at all? (a quarter above the natural cap is the ceiling) */

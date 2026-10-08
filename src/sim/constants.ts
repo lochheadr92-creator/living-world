@@ -318,6 +318,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'store',
     blurb: 'A fenced yard by the houses where logs, stone, clay and ore are stacked for whoever builds or works next. Raw goods only: finished goods belong in the storehouse.',
   }),
+  clamp: bd({
+    w: 2,
+    h: 2,
+    cost: { wood: 6, clay: 2 },
+    work: 200,
+    cap: 40,
+    workers: 1,
+    label: 'charcoal clamp',
+    sleepers: 0,
+    protect: 0,
+    role: 'work',
+    blurb: 'A stack of logs under a skin of turf and clay, fired and left to smoulder for days. Twice the charcoal of a kiln batch, with no stone and no bricks, and the kiln is left free for them.',
+  }),
   forester: bd({
     w: 2,
     h: 1,
@@ -349,7 +362,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
 /** buildings that are everyone's by nature: no household on the title whoever laid them out, mended by those who use them, their sites a shared project */
 export const COMMON_BUILDINGS: BuildingType[] = ['well', 'stockyard', 'forester'];
 /** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
-export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard'];
+export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard', 'clamp'];
 
 /** every kind of building a household can live in */
 export const isHomeType = (t: string | undefined): boolean => t === 'lean_to' || t === 'hut' || t === 'house';
@@ -381,6 +394,7 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   mine: 0.0012,
   forester: 0.0013,
   stockyard: 0.0009,
+  clamp: 0.0016,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
