@@ -318,3 +318,29 @@ export function smokehouseSprite(cache: SpriteCache, variant: number): Sprite {
     }
   });
 }
+
+// ───────────────────────────── brewery (2 x 2) ─────────────────────────────
+// A timber shed under a gable with a squat stone chimney for the copper, and a row of crocks along the front.
+export function brewerySprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`brewery${v}`, 184, 150, 92, 100, (ctx) => {
+    const p = mk(2, 2);
+    groundShadow(ctx, 62, 22, 0.3, 4);
+    const wood = ['#8a6a43', '#80633f', '#93714a', '#7a5d3b'][v];
+    box(ctx, p, 0.15, 1.85, 0.1, 1.3, 0, 4, boxTones('#a9a394', 'rgba(50,46,38,0.5)'));
+    box(ctx, p, 0.2, 1.8, 0.15, 1.25, 4, 30, { top: shade(wood, 0.9), left: shade(wood, 1.02), right: shade(wood, 0.74), stroke: 'rgba(25,14,6,0.55)' });
+    const f0 = p(0.15, 1.3, 30);
+    const f1 = p(1.85, 1.3, 30);
+    const r0 = p(0.15, 0.7, 52);
+    const r1 = p(1.85, 0.7, 52);
+    poly(ctx, [[f0[0], f0[1]], [f1[0], f1[1]], [r1[0], r1[1]], [r0[0], r0[1]]], '#8a6f4a', 'rgba(25,14,6,0.6)', 0.9);
+    // the copper's chimney
+    box(ctx, p, 1.4, 1.6, 0.5, 0.7, 30, 64, boxTones('#9c968a', 'rgba(40,36,30,0.6)'));
+    faceL(ctx, p, 0.4, 0.75, 1.255, 4, 20, '#4b361f', 'rgba(25,14,6,0.6)', 0.9);
+    // crocks along the front
+    for (let i = 0; i < 4; i++) {
+      const q = p(0.95 + i * 0.22, 1.5, 0);
+      cylinder(ctx, q[0], q[1], 4.5, 9, '#b07a4a', '#7a5032', '#c8946a');
+    }
+  });
+}

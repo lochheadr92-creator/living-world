@@ -4,7 +4,7 @@ import type { BuildingType } from '../sim/types';
 import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite } from './bld_food';
 import { HOUSE, houseSprite } from './bld_home';
 import { KILN, SMITHY, kilnSprite, quarrySprite, smithySprite, timberYardBack, timberYardFront } from './bld_work';
-import { cellarSprite, clampSprite, foresterSprite, millSprite, mineSprite, smokehouseSprite, stockyardSprite, wellSprite } from './bld_service';
+import { cellarSprite, clampSprite, foresterSprite, brewerySprite, millSprite, mineSprite, smokehouseSprite, stockyardSprite, wellSprite } from './bld_service';
 import { SpriteCache, classicBuildingSprite } from './sprites';
 import type { Sprite } from './sprites';
 
@@ -52,6 +52,8 @@ export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: num
       return [millSprite(cache, variant)];
     case 'smokehouse':
       return [smokehouseSprite(cache, variant)];
+    case 'brewery':
+      return [brewerySprite(cache, variant)];
     default:
       // a kind of building this renderer has no drawing for yet stands as a plain store rather than breaking the frame
       return [classicBuildingSprite(cache, 'storehouse', variant)];
@@ -99,6 +101,7 @@ const STRUCT_TABLE: Record<BuildKind, StructMeta> = {
   stockyard: { plinth: 0, wall: 14, top: 30, click: 40 },
   clamp: { plinth: 0, wall: 22, top: 46, click: 52, chimney: { x: 1.0, y: 1.0, z: 40 } },
   mill: { plinth: 6, wall: 62, top: 118, click: 122 },
+  brewery: { plinth: 4, wall: 30, top: 66, click: 72, chimney: { x: 1.5, y: 0.6, z: 64 } },
   smokehouse: { plinth: 4, wall: 44, top: 74, click: 80, chimney: { x: 1.0, y: 0.5, z: 70 } },
 };
 

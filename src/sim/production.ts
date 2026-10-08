@@ -462,7 +462,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
 }
 
 // ───────────────────────── what is wanted ─────────────────────────
-const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread'];
+const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'beer'];
 const quarryAware = (ctx: Ctx, item: ItemKind): boolean => (item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0) || (item === 'ore' && facilitiesOf(ctx, 'mine').length > 0);
 
 /** Demands this person is aware of: from building sites they know, repairs, their own tools, their household's table. */
@@ -925,6 +925,11 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
       out.push({ type: 'stockyard', signal: Math.min(1, s), why: `the wood I fetch is about ${Math.round(far)} tiles from home: a yard by the houses would save every builder the walk` });
     }
   }
+  // a brewery: a hall is known for the shared meals, and the household has grain to spare that it has seen go off (rich worlds)
+  if (buildable(world, 'brewery') && !knowsOfAny(ctx, 'brewery') && knowsOfAny(ctx, 'hall') && ctx.hh && ctx.home) {
+    const grain = unitsOf(p.inv.grain) + unitsOf(p.beliefs[ctx.home.id]?.items?.grain);
+    if (grain >= 10 && hs.foodStock >= hs.foodTarget * 1.1 && foodLossOf(world, ctx.hh) >= 2) out.push({ type: 'brewery', signal: Math.min(1, 0.55 + 0.3 * p.traits.sociability), why: 'we have grain going off and a hall to gather in: brewed, it would make the shared meals an evening' });
+  }
   // a smokehouse: the household has more fish than it will eat before it goes off, and a cellar already stands or the hard season is here (rich worlds)
   if (buildable(world, 'smokehouse') && !knowsOfAny(ctx, 'smokehouse') && ctx.home) {
     const fish = unitsOf(p.inv.fish) + unitsOf(p.beliefs[ctx.home.id]?.items?.fish);
@@ -1008,6 +1013,31 @@ function optStockSmithy(ctx: Ctx): void {
       return a;
     };
   }
+}
+
+/** crocks of beer a hall is kept stocked with, for the shared meals */
+const HALL_BEER = 4;
+
+/**
+ * The brewer (rich worlds): someone sociable or practised at baking who knows a hall and a brewery keeps beer at the hall. Carrying beer,
+ * they take it there; otherwise, in slack time, they brew (through the ordinary supply planning: grain, water, the brewery).
+ */
+function optStockHall(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!buildable(world, 'brewery') || world.tick < DAY * 6) return;
+  if (!(p.traits.sociability > 0.55 || p.skills.bake > 1.05)) return;
+  const hall = beliefsByKind(p, ['building']).find((b) => b.btype === 'hall');
+  if (!hall || !facilitiesOf(ctx, 'brewery').length) return;
+  const short = HALL_BEER - stockAt(hall, 'beer');
+  const carried = unitsOf(p.inv.beer);
+  if (carried > 0) {
+    depositLeaf(ctx, hall, { beer: carried }, 18 + 6 * p.traits.sociability, 'to pour at the shared meals in the hall', 'social');
+    return;
+  }
+  if (short <= 0) return;
+  if (ctx.drives.hunger > 25 || ctx.drives.thirst > 25 || ctx.drives.energy > 40) return;
+  if (hashUnit(p.id, Math.floor(world.tick / 400), 89) > 0.35 + 0.5 * p.traits.sociability) return;
+  supply(ctx, 'beer', short, (16 + 6 * p.traits.sociability) * traitMods(p).work, 'to have beer for the shared meals in the hall', 'social', 0, null);
 }
 
 /** The stockyard: stack the raw goods I carry beyond my own reserve; in slack time, fetch more when the yard I know is low (rich worlds). */
@@ -1210,7 +1240,7 @@ function optPlanFacilities(ctx: Ctx): void {
           const h = ctx.home;
           spot = lodgeSpot(world, p, h ? h.x + h.w / 2 : camp.x, h ? h.y + h.h / 2 : camp.y) ?? findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
         } else if (type === 'mill') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 16, 11);
-        else if (type === 'smokehouse') spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 12, 8);
+        else if (type === 'smokehouse' || type === 'brewery') spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 12, 8);
         else if (type === 'clamp') {
           // by the trees it burns, and well away from the houses it smokes over
           spot = edgeSpot(world, p, camp.x, camp.y, 'clamp', 0.75, 3, 9, 5) ?? findBuildSpot(world, p, type, camp.x, camp.y, 8, 16, 11);
@@ -1318,6 +1348,7 @@ export function productionOptions(ctx: Ctx): void {
   optRackSpare(ctx);
   optStockYard(ctx);
   optStockSmithy(ctx);
+  optStockHall(ctx);
   optPlantTrees(ctx);
   optPlanFacilities(ctx);
   optPlanUpgrade(ctx);

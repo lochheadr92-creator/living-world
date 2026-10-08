@@ -33,6 +33,7 @@ export const WEIGHT: Record<ItemKind, number> = {
   bread: 1,
   seeds: 0.25,
   water: 1.5,
+  beer: 1.5,
   wood: 2,
   stone: 3,
   clay: 3,
@@ -70,6 +71,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   bread: 'bread',
   seeds: 'seeds',
   water: 'water',
+  beer: 'beer',
   wood: 'wood',
   stone: 'stone',
   clay: 'clay',
@@ -346,6 +348,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'work',
     blurb: 'A timber tower on a stone footing with four cloth sails, standing on open ground for the wind. Its stones grind six grain to five flour in a fraction of the quern\'s time, and the bakery keeps its oven.',
   }),
+  brewery: bd({
+    w: 2,
+    h: 2,
+    cost: { wood: 8, planks: 2, stone: 3, clay: 2 },
+    work: 420,
+    cap: 50,
+    workers: 1,
+    label: 'brewery',
+    sleepers: 0,
+    protect: 0,
+    role: 'work',
+    blurb: 'A shed with a copper of mash and a row of crocks. Grain and water left to work for a couple of days become beer, which is carried to the hall and poured at the shared meals.',
+  }),
   smokehouse: bd({
     w: 2,
     h: 1,
@@ -390,7 +405,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
 /** buildings that are everyone's by nature: no household on the title whoever laid them out, mended by those who use them, their sites a shared project */
 export const COMMON_BUILDINGS: BuildingType[] = ['well', 'stockyard', 'forester'];
 /** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
-export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard', 'clamp', 'mill', 'smokehouse'];
+export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard', 'clamp', 'mill', 'smokehouse', 'brewery'];
 
 /** every kind of building a household can live in */
 export const isHomeType = (t: string | undefined): boolean => t === 'lean_to' || t === 'hut' || t === 'house';
@@ -425,6 +440,7 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   clamp: 0.0016,
   mill: 0.0013,
   smokehouse: 0.0014,
+  brewery: 0.0013,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */

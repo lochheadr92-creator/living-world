@@ -10,7 +10,7 @@ export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'smoke
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
-export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water';
+export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'beer';
 export type Items = Partial<Record<ItemKind, number>>;
 
 export interface Store {
@@ -517,7 +517,8 @@ export type BuildingType =
   | 'stockyard'
   | 'clamp'
   | 'mill'
-  | 'smokehouse';
+  | 'smokehouse'
+  | 'brewery';
 
 export interface Building {
   ent: 'building';

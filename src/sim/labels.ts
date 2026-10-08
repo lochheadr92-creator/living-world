@@ -97,6 +97,7 @@ export const ITEM_ICON: Record<ItemKind, string> = {
   bread: 'bread',
   seeds: 'seeds',
   water: 'water',
+  beer: 'water',
   wood: 'wood',
   stone: 'stone',
   clay: 'clay',

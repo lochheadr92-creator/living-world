@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import { think } from './mood';
 import type { WorkResult } from './activities';
@@ -392,7 +393,9 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
   else if (rel && rel.avoidUntil > world.tick) why = 'was not on good terms with the host';
   else if (m.accepted.length + 1 >= Math.min(MAX_GUESTS + 1, foodUnits(A.inv))) why = 'there was no room at the table';
   else {
-    const w = 0.34 + 0.4 * B.traits.sociability + 0.3 * Math.max(0, aff) / 100 + (hungry ? 0.18 : 0) + (B.hhId === A.hhId ? 0.2 : 0) - 0.4 * (Math.max(0, 40 - B.needs.energy) / 40);
+    // (rich worlds) a meal at a hall the guest knows has beer in it is one more people say yes to
+    const ale = isRich(world) && (B.beliefs[m.placeId]?.btype === 'hall') && (B.beliefs[m.placeId]?.items?.beer ?? 0) >= 1 ? 0.2 : 0;
+    const w = 0.34 + 0.4 * B.traits.sociability + 0.3 * Math.max(0, aff) / 100 + (hungry ? 0.18 : 0) + (B.hhId === A.hhId ? 0.2 : 0) - 0.4 * (Math.max(0, 40 - B.needs.energy) / 40) + ale;
     if (hashUnit(B.id, A.id, world.tick >> 4) > w) why = 'preferred to stay on with their own plans';
   }
   if (why) {
@@ -453,7 +456,7 @@ function returnTable(world: World, m: Meal): void {
   }
 }
 
-function finishMeal(world: World, m: Meal): void {
+export function finishMeal(world: World, m: Meal): void {
   if (m.ate.length < 2) {
     cancelMeal(world, m, 'only the host sat down to it');
     return;
@@ -470,6 +473,19 @@ function finishMeal(world: World, m: Meal): void {
       adjustRel(a, b.id, world.tick, { aff: 1.2, trust: 0.6, fam: 0.8, note: 'ate together' });
       adjustRel(b, a.id, world.tick, { aff: 1.2, trust: 0.6, fam: 0.8, note: 'ate together' });
     }
+  // (rich worlds) beer at the hall: a mug each while it lasts, and an evening people remember and talk about
+  const place = world.byId.get(m.placeId);
+  const ale = isRich(world) && place && place.ent === 'building' && place.type === 'hall' ? place : null;
+  const drank: Person[] = [];
+  if (ale) for (const a of ate) if (consume(world, ale.store.items, 'beer', 1, 'drunk at a shared meal') === 1) drank.push(a);
+  for (const a of drank)
+    for (const b of drank) {
+      if (a.id >= b.id) continue;
+      adjustRel(a, b.id, world.tick, { aff: 1.0, fam: 0.6, note: 'drank together at the hall' });
+      adjustRel(b, a.id, world.tick, { aff: 1.0, fam: 0.6, note: 'drank together at the hall' });
+    }
+  for (const a of drank) think(world, a, 'ale', 6, DAY, 'a mug of beer at the hall with the others');
+  if (drank.length >= 2) addEvent(world, 'social', `Beer was poured at the hall: ${drank.length} drank together.`, drank.map((x) => x.id).slice(0, 4), m.x, m.y);
   for (const a of ate) {
     a.needs.social = Math.min(100, a.needs.social + 18);
     think(world, a, 'shared_meal', 6, DAY / 2, 'sat down to a shared meal');

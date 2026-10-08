@@ -66,6 +66,7 @@ export const ITEM_PHRASE: Record<ItemKind, string> = {
   bread: 'bread',
   seeds: 'seed',
   water: 'water',
+  beer: 'beer',
   wood: 'wood',
   stone: 'stone',
   clay: 'clay',

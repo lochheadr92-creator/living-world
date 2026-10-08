@@ -190,6 +190,7 @@ export class Effects {
         case 'kiln':
         case 'clamp':
         case 'smokehouse':
+        case 'brewery':
         case 'smithy':
         case 'bakery': {
           const st = workState(world, b);
