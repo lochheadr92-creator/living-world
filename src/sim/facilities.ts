@@ -137,6 +137,7 @@ function trimEarmarks(b: Building): void {
 // ───────────────────────── what goes in and out of a workplace's store ─────────────────────────
 /** May this person put this item into the building's store (the store is for the work done there)? */
 export function mayDeposit(b: Building, item: ItemKind): boolean {
+  if (b.type === 'well') return false; // a well holds only the water that seeps into it
   if (!b.ops) return true;
   return acceptedAt(b.type).includes(item);
 }

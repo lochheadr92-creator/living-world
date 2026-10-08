@@ -12,6 +12,7 @@
 import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
+import { setBuildingEnabled } from '../../src/sim/expansion';
 import { setStakes } from '../../src/sim/hardship';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
@@ -89,6 +90,20 @@ export function parseIntervention(specIn: string): Intervention {
       apply: (w) => {
         w.settings.dynamics = 'rich';
         return 'rich dynamics on';
+      },
+    };
+  }
+  if (kind === 'rich-no-wells') {
+    return {
+      spec: label,
+      summary: 'rich dynamics, but nobody builds wells (to see what the wells change)',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, wells off';
+      },
+      install: () => {
+        setBuildingEnabled('well', false);
+        return () => setBuildingEnabled('well', true);
       },
     };
   }

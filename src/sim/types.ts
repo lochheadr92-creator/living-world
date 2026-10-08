@@ -507,7 +507,9 @@ export type BuildingType =
   | 'smithy'
   | 'granary'
   | 'bakery'
-  | 'hall';
+  | 'hall'
+  // the village-economy expansion (rich dynamics only; docs/BUILDINGS.md)
+  | 'well';
 
 export interface Building {
   ent: 'building';

@@ -1,5 +1,6 @@
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
+import { WELL_CAP, WELL_MIN_CONDITION, WELL_REFILL } from './water';
 import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType } from './constants';
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
@@ -462,7 +463,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'building': {
       const b = e;
       const hh = world.households.find((h) => h.id === b.hhId);
-      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'fire' && !b.ops ? 'nobody (empty)' : 'everyone']];
+      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'fire' && b.type !== 'well' && !b.ops ? 'nobody (empty)' : 'everyone']];
       const bars: EntityView['bars'] = [];
       if (b.type !== 'fire') bars.push({ label: 'Condition', value: b.condition, max: 100, tone: b.condition < 40 ? 'warn' : 'ok' });
       else {
@@ -483,6 +484,12 @@ export function describeEntity(world: World, id: number): EntityView | null {
           if (job.burnTotal > 0) bars.push({ label: 'Fire', value: job.burnTotal - Math.max(0, job.burnLeft), max: job.burnTotal, tone: 'warm' });
         }
         notes.push(BUILD_DEF[b.type].blurb);
+      }
+      if (b.type === 'well') {
+        const water = b.store.items.water ?? 0;
+        bars.push({ label: 'Water in the well', value: water, max: WELL_CAP, tone: water < 2 ? 'warn' : 'ok' });
+        rows.push(['Seeps in', `1 unit every ${secondsText(WELL_REFILL)}${water >= WELL_CAP ? ' (full)' : b.condition < WELL_MIN_CONDITION ? ' (silted up: needs mending)' : ''}`]);
+        notes.push(BUILD_DEF.well.blurb);
       }
       if (b.upgrading) notes.push('Being rebuilt as a house: still lived in while the work goes on.');
       return { kind: 'building', ...base, title: describeEntityName(world, e), subtitle: `Built ${agoText(world, b.builtTick)}`, rows, bars, items: itemList(b.store.items), notes, position: { x: b.x + b.w / 2, y: b.y + b.h / 2 }, sections };

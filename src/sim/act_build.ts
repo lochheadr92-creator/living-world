@@ -1,3 +1,5 @@
+import { buildable } from './expansion';
+import { WELL_REACH } from './water';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WORK, isHomeType, isSolidHome } from './constants';
@@ -239,6 +241,11 @@ export function openSitesNear(world: World, near?: Spot): number {
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
   const rules = rulesOf(world);
+  if (!buildable(world, type)) return `a ${BUILD_DEF[type].label} is not something this world builds`;
+  if (type === 'well' && at) {
+    for (const b of world.buildings) if (b.type === 'well' && within(WELL_REACH, at.x, at.y, b.x + b.w / 2, b.y + b.h / 2)) return 'there is a well close by already';
+    for (const s of world.sites) if (s.type === 'well' && within(WELL_REACH, at.x, at.y, s.x + s.w / 2, s.y + s.h / 2)) return 'a well is already being dug close by';
+  }
   if (isFacilityType(type) || upgradeOf) {
     if (projectsUnderWay(world, !!upgradeOf, at) >= projectLimit(world)) return 'enough improvement projects are under way already';
   } else if (sitesNear(world, at, (s) => !isProjectSite(s)) >= rules.maxBasicSites) return 'too many projects under way already';

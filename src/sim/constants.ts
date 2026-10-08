@@ -144,7 +144,7 @@ export const WORK: Record<string, number> = {
   withdraw: 8,
 };
 
-export type BuildRole = 'home' | 'store' | 'fire' | 'work' | 'meet';
+export type BuildRole = 'home' | 'store' | 'fire' | 'work' | 'meet' | 'service';
 export interface BuildDef {
   w: number;
   h: number;
@@ -277,7 +277,23 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'meet',
     blurb: 'A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there.',
   }),
+  well: bd({
+    w: 1,
+    h: 1,
+    cost: { stone: 10, wood: 3 },
+    work: 380,
+    cap: 18,
+    workers: 2,
+    label: 'well',
+    sleepers: 0,
+    protect: 0,
+    role: 'service',
+    blurb: 'A stone-lined shaft with a windlass. Water seeps in slowly and is drawn by whoever comes: a few units a day, shared, for drinking and carrying home.',
+  }),
 };
+
+/** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
+export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well'];
 
 /** every kind of building a household can live in */
 export const isHomeType = (t: string | undefined): boolean => t === 'lean_to' || t === 'hut' || t === 'house';
@@ -304,10 +320,11 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   granary: 0.0012,
   bakery: 0.0014,
   hall: 0.0012,
+  well: 0.0007,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
-export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks' };
+export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone' };
 export const REPAIR_FALLBACK_GAIN = 18;
 /** a building site nobody has worked on or supplied for this long is given up (its materials are left on the ground) */
 export const SITE_PATIENCE = DAY * 4;

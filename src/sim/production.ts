@@ -1,5 +1,7 @@
+import { buildable } from './expansion';
+import { WELL_FAR, WELL_REACH } from './water';
 import { newActivity } from './activities';
-import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
+import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isHomeType, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
 import { cartLoaded } from './carts';
 import { invRoom, weightOf } from './economy';
@@ -212,7 +214,7 @@ function waterLeaf(ctx: Ctx, n: number, util0: number, why: string, tag: string)
         label: 'Fetching water',
         goal: why,
         targetId: b.id,
-        targetType: 'tile',
+        targetType: b.kind === 'building' ? 'building' : 'tile',
         tx: sp.x,
         ty: sp.y,
         spotX: sp.x,
@@ -858,6 +860,19 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (p.traits.generosity > 0.5) s += 0.1;
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
+  // a well: the household's water is a long walk away, and no well they know of is near (rich worlds)
+  if (buildable(world, 'well') && ctx.home && !(world.tick < DAY * 3)) {
+    const hx = ctx.home.x + ctx.home.w / 2;
+    const hy = ctx.home.y + ctx.home.h / 2;
+    let shore = Infinity;
+    for (const b of beliefsByKind(p, ['water'])) shore = Math.min(shore, hyp(b.x - hx, b.y - hy));
+    const wellNear = beliefsByKind(p, ['building', 'site']).some((b) => b.btype === 'well' && hyp(b.x - hx, b.y - hy) < WELL_REACH);
+    const neighbours = beliefsByKind(p, ['building']).filter((b) => isHomeType(b.btype) && b.id !== ctx.home!.id && hyp(b.x - hx, b.y - hy) < 10).length;
+    if (!wellNear && shore > WELL_FAR && shore < Infinity && (ctx.members.length >= 2 || neighbours >= 2)) {
+      const s = 0.55 + 0.03 * Math.min(15, shore - WELL_FAR) + 0.05 * Math.min(neighbours, 4);
+      out.push({ type: 'well', signal: Math.min(1, s), why: `the nearest water I know is ${Math.round(shore)} tiles from home, and a well close to the houses would save the walk` });
+    }
+  }
   if (!knowsOfAny(ctx, 'hall') && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
@@ -919,6 +934,9 @@ function optPlanFacilities(ctx: Ctx): void {
             depositId = dep.id;
             spot = findBuildSpot(world, p, type, dep.x, dep.y, 1.5, 6, 3);
           }
+        } else if (type === 'well') {
+          const h = ctx.home;
+          spot = h ? findBuildSpot(world, p, type, h.x + h.w / 2, h.y + h.h / 2, 2, 8, 4) : null;
         } else if (type === 'granary' || type === 'hall') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 11, 6);
         else if (type === 'kiln' || type === 'smithy') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 15, 10);
         else spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);

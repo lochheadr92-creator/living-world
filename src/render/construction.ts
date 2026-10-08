@@ -50,6 +50,7 @@ const SPEC: Record<BuildingType, Spec> = {
   granary: { frame: 'none', gable: false, footing: 'none', reveal: 0.1 },
   bakery: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
   hall: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
+  well: { frame: 'none', gable: false, footing: 'ring', reveal: 0.25 },
 };
 
 /** the order materials are stacked round a site, and which side of the plot each one goes to */

@@ -57,6 +57,7 @@ const BUILDING_ICON: Record<BuildingType, IconName> = {
   granary: 'granary',
   bakery: 'bread',
   hall: 'hall',
+  well: 'water',
 };
 
 /** a line that says what the thing is for, in plain words (buildings take theirs from the simulation's own table) */

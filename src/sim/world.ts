@@ -2,6 +2,7 @@
 import './act_resource';
 import { spoilPile, spoilStore, updateHardship } from './hardship';
 import { updateMood } from './mood';
+import { updateWells } from './water';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -54,6 +55,7 @@ export function stepWorld(world: World): void {
 
   updateEnvironment(world);
   updateHardship(world);
+  updateWells(world);
   updateSources(world);
   updatePlots(world);
   updateBuildings(world);

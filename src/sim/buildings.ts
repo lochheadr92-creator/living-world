@@ -157,7 +157,7 @@ function builderShares(site: Site): Record<number, number> {
  * more evenly than that the workplace belongs to everyone. Halls and granaries are always common property.
  */
 function titleHolder(site: Site, shares: Record<number, number>): number {
-  if (site.type === 'hall' || site.type === 'granary') return 0;
+  if (site.type === 'hall' || site.type === 'granary' || site.type === 'well') return 0;
   if (!isFacilityType(site.type)) return site.hhId;
   let top = 0;
   let best = 0;

@@ -336,9 +336,10 @@ function optDrink(ctx: Ctx): void {
     const sc = new Scorer().add('thirsty', dr * 0.98).add('walking', -pen(c.e));
     if (c.dng > 0) sc.add('wolf nearby', -30 * c.dng * traitMods(p).caution);
     if (c.trouble > 0) sc.add('was driven off near here', -16 * c.trouble);
+    const atWell = c.b.kind === 'building';
     addOption(ctx, {
       kind: 'drink',
-      label: 'Go and drink at the water',
+      label: atWell ? 'Go and drink at the well' : 'Go and drink at the water',
       goal: 'to quench thirst',
       need: 'thirst',
       util: sc.total,
@@ -355,11 +356,11 @@ function optDrink(ctx: Ctx): void {
         }
         return newActivity(world, p, {
           kind: 'drink',
-          label: 'Drinking at the water',
+          label: atWell ? 'Drinking at the well' : 'Drinking at the water',
           goal: `to quench thirst (${Math.round(p.needs.thirst)}/100)`,
           need: 'thirst',
           targetId: c.b.id,
-          targetType: 'tile',
+          targetType: atWell ? 'building' : 'tile',
           tx: spot.x,
           ty: spot.y,
           spotX: spot.x,
