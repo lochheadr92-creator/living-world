@@ -60,7 +60,7 @@ export interface Ctx {
   toolWanted?: { kind: ToolKind; for: string };
 }
 
-const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain'];
+const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'smoked'];
 
 export function foodCount(inv: Person['inv']): number {
   let n = 0;

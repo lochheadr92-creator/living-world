@@ -307,6 +307,7 @@ export function drawGlyphBadge(ctx: CanvasRenderingContext2D, id: string, color:
       ctx.quadraticCurveTo(2, -7.5, 6, -1);
       ctx.stroke();
       break;
+    case 'smoked':
     case 'fish':
       ctx.beginPath();
       ctx.ellipse(-1, 0, 5, 3, 0, 0, Math.PI * 2);

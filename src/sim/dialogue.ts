@@ -61,6 +61,7 @@ export const ITEM_PHRASE: Record<ItemKind, string> = {
   berries: 'berries',
   fruit: 'fruit',
   fish: 'fish',
+  smoked: 'smoked fish',
   grain: 'grain',
   bread: 'bread',
   seeds: 'seed',

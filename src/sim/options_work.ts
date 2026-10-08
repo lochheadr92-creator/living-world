@@ -188,7 +188,7 @@ function optDepositFood(ctx: Ctx): void {
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
     let toStore = surplus;
-    for (const k of ['grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
+    for (const k of ['smoked', 'grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
       const have = p.inv[k] ?? 0;
       const give = Math.min(have, toStore);
       if (give > 0) {
@@ -1258,7 +1258,7 @@ function optCare(ctx: Ctx): void {
     let what = '';
     if (hungry && ctx.food > 0) {
       // give what fits best
-      const k = (['berries', 'fruit', 'grain', 'fish'] as ItemKind[]).find((x) => (p.inv[x] ?? 0) > 0);
+      const k = (['berries', 'fruit', 'grain', 'fish', 'smoked'] as ItemKind[]).find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
         give[k] = Math.min(p.inv[k] ?? 0, d.needs.hunger < 25 ? 3 : 2);
         what = k;

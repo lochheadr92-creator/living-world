@@ -15,19 +15,20 @@ export const MAP_W = 80;
 export const MAP_H = 80;
 
 // ── items ──
-export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
+export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'smoked'];
 export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
 /** the raw goods a stockyard takes (options_work.ts isRawMaterial is the same list as a type guard) */
 export const RAW_MATERIALS: ItemKind[] = ['wood', 'stone', 'clay', 'ore'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
-export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30 };
+export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, smoked: 26 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
   berries: 1,
   fruit: 1,
   fish: 1.5,
+  smoked: 1,
   grain: 1,
   bread: 1,
   seeds: 0.25,
@@ -54,7 +55,7 @@ export const WEIGHT: Record<ItemKind, number> = {
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
  * Grain, flour and bread keep far better than fruit but are not immune: damp and vermin get at them unless they are kept in a granary.
  */
-export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5 };
+export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, smoked: 0.15 };
 /** a granary's ventilated, vermin-proofed bins cut spoilage of what is kept there to this fraction (when tended) */
 export const GRANARY_SPOIL = 0.2;
 /** untended for this long, the granary's bins start to go off like any store (and then spoil faster) */
@@ -64,6 +65,7 @@ export const ITEM_LABEL: Record<ItemKind, string> = {
   berries: 'berries',
   fruit: 'fruit',
   fish: 'fish',
+  smoked: 'smoked fish',
   grain: 'grain',
   bread: 'bread',
   seeds: 'seeds',
@@ -344,6 +346,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'work',
     blurb: 'A timber tower on a stone footing with four cloth sails, standing on open ground for the wind. Its stones grind six grain to five flour in a fraction of the quern\'s time, and the bakery keeps its oven.',
   }),
+  smokehouse: bd({
+    w: 2,
+    h: 1,
+    cost: { wood: 8, stone: 4, clay: 2 },
+    work: 360,
+    cap: 40,
+    workers: 1,
+    label: 'smokehouse',
+    sleepers: 0,
+    protect: 0,
+    role: 'work',
+    blurb: 'A tall, tight shed with a slow fire on the floor and racks above it. Fish hung here for a day comes out smoked, and keeps through the lean season where fresh fish would be gone in days.',
+  }),
   forester: bd({
     w: 2,
     h: 1,
@@ -375,7 +390,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
 /** buildings that are everyone's by nature: no household on the title whoever laid them out, mended by those who use them, their sites a shared project */
 export const COMMON_BUILDINGS: BuildingType[] = ['well', 'stockyard', 'forester'];
 /** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
-export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard', 'clamp', 'mill'];
+export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard', 'clamp', 'mill', 'smokehouse'];
 
 /** every kind of building a household can live in */
 export const isHomeType = (t: string | undefined): boolean => t === 'lean_to' || t === 'hut' || t === 'house';
@@ -409,6 +424,7 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   stockyard: 0.0009,
   clamp: 0.0016,
   mill: 0.0013,
+  smokehouse: 0.0014,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */

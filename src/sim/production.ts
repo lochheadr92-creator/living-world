@@ -3,6 +3,7 @@ import { LOSS_THRESHOLD, foodLossOf } from './storage';
 import { WELL_FAR, WELL_REACH } from './water';
 import { FOREST_REACH, FOREST_THIN, edgeSpot, knownTreesNear, lodgeSpot, plantingSpot, standBeside } from './forestry';
 import { isRich } from './mood';
+import { winterDepth } from './hardship';
 import { YARD_FAR, YARD_RESERVE, YARD_TARGET, woodDistance, yardRoom } from './stockyard';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, RAW_MATERIALS, REPAIR_USES, TOOL_DEFS, WEIGHT, isHomeType, isSolidHome, workRules } from './constants';
@@ -395,7 +396,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
       } else if (b.btype === 'storehouse' || b.btype === 'stockyard') {
         // everyone's
       } else if (b.hh !== p.hhId) continue;
-      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries') {
+      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries' || item === 'smoked') {
         // the household's own food is not to be spent making things unless there is plenty
         const hs = hhState(ctx);
         n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
@@ -494,6 +495,15 @@ export function demandsOf(ctx: Ctx): Demand[] {
     if (left > 0) out.push({ item: c.item, qty: left, have: 0, base: 50, why: 'to keep my promise to bring it', tag: 'promise', siteId: c.siteId });
   }
   const tm = traitMods(p);
+
+  // (rich worlds) fish beyond what the household will eat soon is smoked where a smokehouse is known, so it keeps
+  if (isRich(world) && ctx.home && facilitiesOf(ctx, 'smokehouse').length) {
+    const hs = hhState(ctx);
+    const fish = unitsOf(p.inv.fish) + unitsOf(p.beliefs[ctx.home.id]?.items?.fish);
+    const spare = Math.min(fish, Math.floor(hs.foodStock - hs.foodTarget * 1.1));
+    const smoked = unitsOf(p.inv.smoked);
+    if (spare >= 4 && smoked < 4) out.push({ item: 'smoked', qty: 4, have: smoked, base: (14 + 6 * p.traits.diligence) * tm.work, why: 'to smoke our spare fish before it goes off', tag: 'food' });
+  }
 
   // (rich worlds) a tool wanted at all is wanted in iron when a smithy they may use has iron and a handle on its shelf
   if (isRich(world)) {
@@ -915,6 +925,12 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
       out.push({ type: 'stockyard', signal: Math.min(1, s), why: `the wood I fetch is about ${Math.round(far)} tiles from home: a yard by the houses would save every builder the walk` });
     }
   }
+  // a smokehouse: the household has more fish than it will eat before it goes off, and a cellar already stands or the hard season is here (rich worlds)
+  if (buildable(world, 'smokehouse') && !knowsOfAny(ctx, 'smokehouse') && ctx.home) {
+    const fish = unitsOf(p.inv.fish) + unitsOf(p.beliefs[ctx.home.id]?.items?.fish);
+    const ownCellar = beliefsByKind(p, ['building']).some((b) => b.btype === 'cellar' && b.hh === p.hhId);
+    if (fish >= 8 && (ownCellar || winterDepth(world) > 0 || !!world.hardship)) out.push({ type: 'smokehouse', signal: Math.min(1, 0.6 + 0.2 * init), why: `we have ${fish} fish, more than we can eat before it goes off: smoked, it would keep for the lean days` });
+  }
   // a windmill: this person came to the bakery with grain and found its one job taken (rich worlds; the failure is noted in act_production)
   if (buildable(world, 'mill') && !knowsOfAny(ctx, 'mill') && grainKnown >= 6) {
     const bakery = beliefsByKind(p, ['building']).find((b) => b.btype === 'bakery');
@@ -1194,6 +1210,7 @@ function optPlanFacilities(ctx: Ctx): void {
           const h = ctx.home;
           spot = lodgeSpot(world, p, h ? h.x + h.w / 2 : camp.x, h ? h.y + h.h / 2 : camp.y) ?? findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
         } else if (type === 'mill') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 16, 11);
+        else if (type === 'smokehouse') spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 12, 8);
         else if (type === 'clamp') {
           // by the trees it burns, and well away from the houses it smokes over
           spot = edgeSpot(world, p, camp.x, camp.y, 'clamp', 0.75, 3, 9, 5) ?? findBuildSpot(world, p, type, camp.x, camp.y, 8, 16, 11);

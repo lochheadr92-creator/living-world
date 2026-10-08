@@ -395,6 +395,7 @@ export class CartRenderer {
       case 'berries':
       case 'fruit':
       case 'fish':
+      case 'smoked':
       case 'water': {
         const body: Record<string, [string, string]> = {
           flour: ['#f5eddc', '#bfb59b'],

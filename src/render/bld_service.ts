@@ -278,3 +278,43 @@ export function millSprite(cache: SpriteCache, variant: number): Sprite {
     ellipse(ctx, hx, hy, 3, 3, '#3a2a18');
   });
 }
+
+// ───────────────────────────── smokehouse (2 x 1) ─────────────────────────────
+// A tall, narrow timber shed under a steep roof with a louvred vent along the ridge; a low door, a rack of fish by it, a wood stack.
+export function smokehouseSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`smokehouse${v}`, 130, 130, 65, 96, (ctx) => {
+    const p = mk(2, 1);
+    groundShadow(ctx, 44, 12, 0.3, 3);
+    const wood = ['#6e5438', '#66503a', '#755a3c', '#5f4a33'][v];
+    // stone blocks under the walls
+    box(ctx, p, 0.1, 1.9, 0.08, 0.92, 0, 5, boxTones('#a9a394', 'rgba(50,46,38,0.5)'));
+    // the tall body
+    box(ctx, p, 0.14, 1.86, 0.12, 0.88, 5, 44, { top: shade(wood, 0.9), left: shade(wood, 1.02), right: shade(wood, 0.74), stroke: 'rgba(25,14,6,0.55)' });
+    for (let i = 1; i < 6; i++) {
+      const y = 5 + i * 6.5;
+      line(ctx, p(0.14, 0.88, y), p(1.86, 0.88, y), 'rgba(25,14,6,0.3)', 0.8);
+    }
+    // the steep roof with a louvred ridge vent
+    const r0 = p(0.05, 0.5, 44);
+    const r1 = p(1.95, 0.5, 44);
+    const f0 = p(0.14, 0.95, 44);
+    const f1 = p(1.86, 0.95, 44);
+    poly(ctx, [[f0[0], f0[1]], [f1[0], f1[1]], [r1[0], r1[1] - 26], [r0[0], r0[1] - 26]], '#5a4a3a', 'rgba(25,14,6,0.6)', 0.9);
+    const b0 = p(0.14, 0.05, 44);
+    const b1 = p(1.86, 0.05, 44);
+    poly(ctx, [[b0[0], b0[1]], [b1[0], b1[1]], [r1[0], r1[1] - 26], [r0[0], r0[1] - 26]], '#4a3c2f', 'rgba(25,14,6,0.6)', 0.9);
+    for (let i = 0; i < 5; i++) {
+      const t = 0.15 + i * 0.17;
+      const a = p(t * 2, 0.5, 44);
+      line(ctx, [a[0] - 3, a[1] - 24], [a[0] + 3, a[1] - 28], '#2c2418', 1.4);
+    }
+    // the door and a rack of fish beside it
+    faceL(ctx, p, 0.3, 0.6, 0.885, 5, 20, '#3f2d1b', 'rgba(25,14,6,0.6)', 0.9);
+    line(ctx, p(0.9, 0.9, 20), p(1.7, 0.9, 20), '#8b6b45', 1.6);
+    for (let i = 0; i < 4; i++) {
+      const q = p(1.0 + i * 0.2, 0.9, 20);
+      ellipse(ctx, q[0], q[1] + 5, 2.2, 4.2, i % 2 ? '#9ac1d4' : '#8fb0c0');
+    }
+  });
+}

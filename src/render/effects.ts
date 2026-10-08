@@ -189,12 +189,13 @@ export class Effects {
         }
         case 'kiln':
         case 'clamp':
+        case 'smokehouse':
         case 'smithy':
         case 'bakery': {
           const st = workState(world, b);
           if (!st.job || !(st.burning || st.working) || !meta.chimney) break;
           const c = meta.chimney;
-          const dark = b.type === 'smithy' ? 'rgba(86,82,80,0.46)' : b.type === 'kiln' ? 'rgba(128,122,116,0.42)' : b.type === 'clamp' ? 'rgba(70,66,62,0.5)' : 'rgba(228,225,218,0.42)';
+          const dark = b.type === 'smithy' ? 'rgba(86,82,80,0.46)' : b.type === 'kiln' ? 'rgba(128,122,116,0.42)' : b.type === 'clamp' ? 'rgba(70,66,62,0.5)' : b.type === 'smokehouse' ? 'rgba(150,140,120,0.5)' : 'rgba(228,225,218,0.42)';
           // the fire phase smokes steadily; while only being worked it is a thinner wisp
           if (this.due(b.id * 8, simT, st.burning ? 0.26 : 0.6, 0.14)) {
             this.add({ x: b.x + c.x, y: b.y + c.y, z: c.z, vx: 0.07 + wind * 0.35, vy: -0.04, vz: 13 + rnd() * 6, max: 2.8, size: st.burning ? 2.8 : 2.1, grow: 7, color: dark, kind: 'smoke' });

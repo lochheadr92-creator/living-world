@@ -35,6 +35,7 @@ const STOCK: Partial<Record<BuildKind, Slot[]>> = {
   ],
   quarry: [{ item: 'stone', kind: 'cutstone', fx: 0.6, fy: 1.5, per: 1, max: 9, layer: 1 }],
   mine: [{ item: 'ore', kind: 'ore', fx: 0.4, fy: 1.45, per: 1, max: 9, layer: 1 }],
+  smokehouse: [{ item: 'wood', kind: 'wood', fx: 0.15, fy: 0.9, per: 2, max: 4, layer: 1 }],
   mill: [
     { item: 'grain', kind: 'grain', fx: 0.2, fy: 1.75, per: 2, max: 6, layer: 1 },
     { item: 'flour', kind: 'flour', fx: 1.7, fy: 1.75, per: 2, max: 6, layer: 1 },

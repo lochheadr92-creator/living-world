@@ -5,7 +5,7 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'smoked';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar';
 /** Raw materials and the things made from them. */
@@ -516,7 +516,8 @@ export type BuildingType =
   | 'forester'
   | 'stockyard'
   | 'clamp'
-  | 'mill';
+  | 'mill'
+  | 'smokehouse';
 
 export interface Building {
   ent: 'building';
