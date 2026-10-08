@@ -2,7 +2,7 @@
 //   node scripts/lab.mjs [--out lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--dynamics rich] [--story meadow]
 // Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
-import { spawn } from 'node:child_process';
+import { execSync, spawn } from 'node:child_process';
 import { cpus } from 'node:os';
 import { createWriteStream, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -29,6 +29,33 @@ const node = (script, rest, stdout) =>
     p.on('exit', (code) => resolve(code));
   });
 
+// A seed is skipped only if its file is complete AND says it was made by this commit, with these settings (a file from other code or other
+// settings is run again, and so is any file when the working tree has uncommitted changes to tracked files).
+const gitOut = (cmd) => {
+  try {
+    return execSync(cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return '';
+  }
+};
+const commit = gitOut('git rev-parse HEAD');
+const dirty = gitOut('git status --porcelain --untracked-files=no') !== '';
+const want = { fork: Number(opt('fork', '4')), days: Number(opt('days', '8')), profile: opt('profile', 'large'), dynamics: opt('dynamics', 'authored') };
+const wantBranches = opt('branches', '');
+function finished(path, seed) {
+  const text = readFileSync(path, 'utf8').trimEnd();
+  if (!text.endsWith('"done":true}')) return false;
+  let meta;
+  try {
+    meta = JSON.parse(text.split('\n')[0]).meta;
+  } catch {
+    return false;
+  }
+  if (!meta || !commit || dirty || meta.dirty || meta.commit !== commit || meta.seed !== seed) return false;
+  if (meta.fork !== want.fork || meta.days !== want.days || meta.profile !== want.profile || meta.dynamics !== want.dynamics) return false;
+  return !wantBranches || meta.branches.join(',') === wantBranches.split(',').filter((b) => b && b !== 'none').join(',');
+}
+
 console.log(`running ${seeds.length} seeds on ${cores} cores into ${out}/`);
 let next = 0;
 let finished = 0;
@@ -36,7 +63,7 @@ async function worker() {
   while (next < seeds.length) {
     const seed = seeds[next++];
     const path = join(out, `lab_${seed}.jsonl`);
-    if (existsSync(path) && readFileSync(path, 'utf8').trimEnd().endsWith('"done":true}')) {
+    if (existsSync(path) && finished(path, seed)) {
       console.log(`seed ${seed} already done  [${++finished}/${seeds.length}]`);
       continue;
     }
