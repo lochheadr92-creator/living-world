@@ -1,9 +1,9 @@
 import { endActivity, startActivity } from './activities';
 import { moodWeight } from './mood';
-import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
+import { DAY, MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
-import { fleeRadius, makeCtx } from './optutil';
+import { fleeRadius, makeCtx, traitMods } from './optutil';
 import { probe, probeWander } from './probe';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
@@ -19,6 +19,36 @@ import { hyp } from './util';
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
 const CHILD_FORBIDDEN: ActivityKind[] = ['build', 'haul', 'plan_site', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'claim_home', 'fuel_fire', 'withdraw', 'operate', 'tool_work', 'cart_haul'];
+
+/** survival stays unweighted, same rule as mood: a failed shore must not stop a person drinking */
+const SURVIVAL_KIND: ReadonlySet<ActivityKind> = new Set(['eat', 'drink', 'eat_store', 'sleep', 'rest', 'flee', 'warm', 'fetch_water', 'fuel_fire']);
+
+/**
+ * A place that already failed this person. Rich worlds only. About two days at average caution,
+ * longer if they are cautious, heavier if they failed there more than once, and never a hard ban.
+ * The stored reason is copied onto the option so because() can print it.
+ */
+function placeScar(world: World, p: Person, o: Option): number {
+  if (world.settings.dynamics !== 'rich' || !o.targetId || SURVIVAL_KIND.has(o.kind)) return 0;
+  const f = p.failures[o.targetId];
+  if (!f) return 0;
+  const window = Math.round(2 * DAY * traitMods(p).caution);
+  const age = world.tick - f.tick;
+  if (age < 0 || age >= window) return 0;
+  const decay = 1 - age / window;
+  return Math.min(12, 6 * Math.min(3, f.count) * decay);
+}
+
+function applyPlaceScar(world: World, p: Person, opts: Option[]): void {
+  if (world.settings.dynamics !== 'rich') return;
+  for (const o of opts) {
+    const pen = placeScar(world, p, o);
+    if (pen < 0.5) continue;
+    o.util -= pen;
+    const reason = p.failures[o.targetId]?.reason;
+    if (reason) o.parts.push([reason, -Math.round(pen)]);
+  }
+}
 
 /** world state -> local perception (already done) -> eligible actions. Pure with respect to the world: nothing is started here. */
 export function generateOptions(world: World, p: Person, collect = false): Ctx {
@@ -75,6 +105,8 @@ export function rankOptions(ctx: Ctx): Option[] {
   // do not repeat something that has just fallen through
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
+  // a remembered failure demotes the place; it does not remove it, and it does not touch survival
+  if (chooser === 'utility') applyPlaceScar(world, p, opts);
   const moody = p.mood !== undefined && world.settings.dynamics === 'rich';
   const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
   scored.sort((a, b) => b.s - a.s);
