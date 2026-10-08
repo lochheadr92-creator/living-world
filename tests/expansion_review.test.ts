@@ -175,9 +175,10 @@ describe('the stockyard does not take back what was fetched for a purpose', () =
     p.y = yard.y + 2.5;
     const act = newActivity(w, p, { kind: 'deposit', label: 'x', goal: 't', targetId: yard.id, targetType: 'building', tx: yard.x, ty: yard.y, spotX: p.x, spotY: p.y, here: true, maxTicks: 300, data: { items: { wood: 3 }, sticky: true } });
     startActivity(w, p, act);
-    run(w, 60);
+    run(w, 12); // (just past the attempt: afterwards the person is free to spend their wood on something else)
     expect(yard.store.items.wood ?? 0).toBe(0);
     expect(p.inv.wood).toBe(5);
+    expect(p.log.some((l) => /no room/.test(l.text))).toBe(true);
     void YARD_TARGET;
   });
 });

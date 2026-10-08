@@ -105,7 +105,7 @@ their measured reason.
 | Stage | Contents | Status |
 |---|---|---|
 | A | plumbing for rich-only types (definitions, wear, repair, icons, sprites, inspector, save); well, stockyard, cellar, forester (planting), mine | implemented; evidence below |
-| B | mill, clamp, smokehouse, brewery; furniture and repair recipes at the timber yard | in progress: B1 (the iron chain) implemented, see the stage B section |
+| B | mill, clamp, smokehouse, brewery; furniture and repair recipes at the timber yard | implemented (B1–B5), contract-tested; natural-run evidence below; browser check pending |
 | C | animal records, coop, barn, lodge (hunt and butcher), weaver and tailor, tannery, clothing with wear | not started |
 | D | market, trading post, dock, stable and working animals | not started |
 | E | bunkhouse, healer, teaching, tavern, shrine, watchpost | not started |
@@ -237,22 +237,27 @@ clamp, charcoal collected, ore dug by hand and at the mine, "Smelting iron", "Fo
 buildings come late; its evidence window is 45 days. New lab metrics `ironTools` and `smithyBatches`; chainwatch now reports every
 workshop's batches.
 
-**B2, the mill** (next). The panel's correction: not "a bakery is known and the granary holds grain" but the measured bottleneck,
-a person who found the bakery busy (its one job slot taken by milling) when they came to bake; a known mill is preferred to the
-quern; bakery batches and bread created become lab metrics.
+**B2, the windmill** (implemented). Grinds six grain to five flour in a fraction of the quern's time; where a mill is known the quern
+is no longer planned, so the bakery keeps its oven for bread. The want is the measured bottleneck the panel asked for: in a rich world
+a person turned away from a workplace busy with a batch they cannot join remembers it, and whoever found the bakery busy when they
+came with grain wants a windmill. Lab metrics `breadMade`, `flourMilled`.
 
-**B3, the smokehouse**. The panel's correction: it must not compete with the cellar for the same spoilage signal (the cellar is
-cheaper, per household, and comes by day 5–7 in every seed); its real difference is food that keeps outside a store, through the
-lean season. Wanted by a household holding fish with a cellar already standing or the lean season near; smoked fish joins every
-hand-kept food list (social.ts, economy.ts, meals.ts, optutil.ts), and meals eat the fresher food first so the smoked is the reserve.
+**B3, the smokehouse** (implemented). Smoked fish is a new food (nutrition 26, spoils at 0.15 against fresh fish's 1.6), added to
+every hand-kept food list, and eaten only when nothing fresher is in the store, so it is the reserve. A household with fish beyond
+what it will eat soon that knows a smokehouse plans to smoke it; the smokehouse is wanted where that surplus meets a cellar of one's
+own or the hard season, so it does not compete with the cellar for the spoilage signal.
 
-**B4, the brewery**. The panel's strongest objection: a private "mug of beer" thought of +6 is below the noise floor this project has
-already measured (mood effects add nothing at population level). Beer therefore goes to the hall: brewed on a brewer's shelf in slack
-time, carried to the hall, served at the shared meal (a larger shared-meal thought, invitations accepted more readily when the hall
-is known to hold beer), so the consequence is who was there: conversations, news, affinity, rows. Wanted from a problem, not a
-stock level (a household with grain it saw go off or was turned away from the bakery, knowing a hall).
+**B4, the brewery** (implemented). Beer is a new item, not food. Brewed from six grain and four water over a day; the brewer
+(sociable, or practised at baking, knowing a hall and a brewery) keeps four crocks at the hall. At a shared meal in the hall each
+guest gets a mug while it lasts: those who drank together grow closer, remember the evening, and the feed notes it; an invitation to
+a hall known to hold beer is accepted more readily. Wanted by a household with grain going off that knows a hall. Lab metric
+`beerDrunk`.
 
-**B5, furniture**. The panel's correction: faster energy recovery only wakes people earlier in the dark; a warmer bed is the visible
-consequence (sleep in a home whose store holds furniture is warmer, so fewer nights are broken by cold), wanted from the problem the
-household can see (a member woke cold lately, an elder or child in the house), not by every solid home. "Repairs" at the timber yard
-are already covered (planks mend houses; handles mend tools) and are not a new recipe.
+**B5, the bed** (implemented). Made at the timber yard (four planks and a handle, hammer required). Sleeping in one's own home with a
+bed in its store is six degrees warmer, so cold nights break sleep less; a night slept through in it is a small thought. A night
+broken by cold is remembered; a household with a solid home that woke cold lately, or keeps a child or an elder, wants one, and
+whoever carries one takes it home. "Repairs" at the timber yard need no new recipe: planks already mend houses and handles mend tools.
+The bed recipe is listed at the timber yard in every world (the recipe table is one table) but only demanded in rich worlds. Lab
+metric `beds`.
+
+Natural-run evidence for B2–B5, the review pass and the browser check are recorded below as they are run.
