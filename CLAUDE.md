@@ -8,6 +8,7 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 - Seeded randomness stays (replay, inspector, the lab). The golden fingerprints (`tests/golden.test.ts`) no longer constrain a change
   meant to alter behaviour: re-record them in the commit that changes rules. Ensemble gates (`scripts/gates.ts`, `docs/gates.json`) are the
   acceptance test for such a change.
+- Measured (24 seeds, docs/EMERGENCE.md): the rich stakes carry every effect (more farmland, slower building); mood effects add nothing at population level yet, because moods barely differ between people. Next: individuality and a visible consequence of a low mood, not more stakes.
 - New behaviour goes behind `settings.dynamics = 'rich'` (off by default; authored worlds must stay exactly as they were, and the golden,
   determinism and save tests check that). The rules sets are in `src/sim/rules.ts`.
 - One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PRs; merge only when the user explicitly says so (they did for #6 and #7, merged to main with merge commits on 2026-10-07; PRs #1-#5 are older separate features, still open and unreviewed). Never force-push main.
