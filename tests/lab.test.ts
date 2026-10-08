@@ -24,6 +24,8 @@ describe('the counterfactual lab', () => {
     expect(by('nudge:1').finalHash).not.toBe(by('control').finalHash);
     expect(by('nudge:1').divergedAfterTicks).not.toBeNull();
     expect(by('no-wolf-memory').finalHash).toBe(by('control').finalHash);
+    expect(by('no-wolf-memory').stateHash).toBe(by('control').stateHash);
+    expect(by('nudge:1').stateHash).not.toBe(by('control').stateHash);
     expect(by('no-wolf-memory').divergedAfterTicks).toBeNull();
   });
 
@@ -35,6 +37,15 @@ describe('the counterfactual lab', () => {
 
   it('removing sources reports how many it removed', () => {
     expect(by('no-wood').note).toMatch(/^[1-9]\d* sources removed$/);
+  });
+
+  it('counts what was built across the run, not only what is standing, and time spent in want', () => {
+    const o = by('control').outcome;
+    expect(o.needDays).toBeGreaterThanOrEqual(0);
+    expect(o.lowMoodDays).toBe(0);
+    expect(o.breaks).toBe(0);
+    expect([0, 1]).toContain(o.hallBuilt);
+    expect(Object.keys(by('control').milestones).length).toBeGreaterThanOrEqual(0);
   });
 
   it('rejects a branch it does not know', () => {
