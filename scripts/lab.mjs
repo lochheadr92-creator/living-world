@@ -42,7 +42,7 @@ const commit = gitOut('git rev-parse HEAD');
 const dirty = gitOut('git status --porcelain --untracked-files=no') !== '';
 const want = { fork: Number(opt('fork', '4')), days: Number(opt('days', '8')), profile: opt('profile', 'large'), dynamics: opt('dynamics', 'authored') };
 const wantBranches = opt('branches', '');
-function finished(path, seed) {
+function isCurrent(path, seed) {
   const text = readFileSync(path, 'utf8').trimEnd();
   if (!text.endsWith('"done":true}')) return false;
   let meta;
@@ -63,7 +63,7 @@ async function worker() {
   while (next < seeds.length) {
     const seed = seeds[next++];
     const path = join(out, `lab_${seed}.jsonl`);
-    if (existsSync(path) && finished(path, seed)) {
+    if (existsSync(path) && isCurrent(path, seed)) {
       console.log(`seed ${seed} already done  [${++finished}/${seeds.length}]`);
       continue;
     }
