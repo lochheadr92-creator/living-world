@@ -131,6 +131,25 @@ over the four seeds agree with the 24-seed direction. LIKELY, not separated: tha
 to food, warmth and safety, so development comes later while survival is intact; the mood weights and the stakes both act in this run and
 the experiment that tells them apart (stakes without the mood effects, and the reverse) has not been done.
 
+### Stakes against mood (24 seeds, Large, day 0 to 15, each branch against the mean of control and nudges)
+
+| | workplaces | solidHomes | buildings | plots | deaths | belowCritical | firstHall (days) | meanMood | lowMood |
+|---|---|---|---|---|---|---|---|---|---|
+| rich (both) | -3.8 | -2.3 | -7.1 | +10.3 | +0.7 | +0.7 | +2.5 | -2.3 | +2.0 |
+| rich-stakes-only | -3.9 | -1.1 | -5.0 | +11.8 | +0.4 | +0.4 | +3.0 | -1.5 | +1.2 |
+| rich-mood-only | +0.3 (ns) | -0.3 (ns) | -0.1 (ns) | +0.3 (ns) | +0.1 (ns) | +0.1 (ns) | -0.1 (ns) | +0.6 (ns) | +0.3 |
+
+* **The shift in development comes from the stakes (VERIFIED).** Stakes without mood effects reproduce the full result: more plots (+11.8,
+  higher in 23 of 24), fewer workplaces and buildings, a later hall (+3.0 days, later in 21). Mood alone moves none of these.
+* **Mood without stakes does nothing (VERIFIED for this window).** Mean mood sits near 0 (+0.6) and only 0.3 more people per world fall
+  below -25. Nobody is far enough from comfortable for the mood weights to change a choice. This confirms the earlier reading.
+* **Mood on top of stakes: unresolved (UNKNOWN).** With both on, every harm measure is a little worse than with stakes alone (solidHomes
+  -2.3 against -1.1, buildings -7.1 against -5.0, homeless 0.8 against 0.2, deaths 1.0 against 0.7, lowMood 2.0 against 1.2), all in the
+  same direction, but the intervals overlap and `rich` minus `rich-stakes-only` was not computed paired by seed. LIKELY, not shown: an
+  interaction, where stakes push people low and the mood weights then pull them from building to rest. It is also compatible with chance.
+  A paired contrast (the report has no `--compare` option yet) or more seeds would settle it.
+* Limits: 15 days contains one winter (days 8 to 11 of the first year); the mood result may not hold over several years.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures
