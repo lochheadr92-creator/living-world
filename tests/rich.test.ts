@@ -5,6 +5,7 @@ import { DAY } from '../src/sim/constants';
 import { setStakes, coldSnap, growthRate, regrowRate, spoilPile, spoilStore, updateHardship, winterDepth, wolfNerve } from '../src/sim/hardship';
 import { killPerson } from '../src/sim/lifecycle';
 import { BREAK_LENGTH, isBreaking, sensitivity, setMoodEffects, moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
+import { probe, probeMoodFlips, probeReset } from '../src/sim/probe';
 import { describePerson } from '../src/sim/inspect';
 import { hashWorld } from '../src/sim/world';
 import { natural, run } from './helpers/util';
@@ -256,5 +257,27 @@ describe('rich dynamics', () => {
     aligned();
     updateMood(w, p);
     expect(isBreaking(w, p)).toBe(false);
+  });
+
+  it('counts the decisions a mood changed, and nothing when moods are all neutral', () => {
+    probeReset();
+    probe.on = true;
+    try {
+      const calm = rich('rich-flip-calm');
+      run(calm, 600);
+      const base = probeMoodFlips();
+      expect(base.decisions).toBeGreaterThan(0);
+      probeReset();
+      const sad = rich('rich-flip-calm');
+      for (const p of sad.persons) think(sad, p, 'dread', -70, 20000, 'dread');
+      run(sad, 600);
+      const low = probeMoodFlips();
+      const total = (f: Record<string, number>) => Object.values(f).reduce((a, b) => a + b, 0);
+      expect(low.decisions).toBeGreaterThan(0);
+      expect(total(low.flips)).toBeGreaterThan(total(base.flips));
+    } finally {
+      probe.on = false;
+      probeReset();
+    }
   });
 });

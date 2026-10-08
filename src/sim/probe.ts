@@ -74,6 +74,8 @@ const zero = (): ProbeCounters => ({
 export const probe: ProbeCounters & { on: boolean; verify: boolean } = { on: false, verify: false, ...zero() };
 
 export function probeReset(): void {
+  moodDecisions = 0;
+  for (const k of Object.keys(moodFlips)) delete moodFlips[k];
   Object.assign(probe, zero());
   for (const k of Object.keys(pathCells)) delete pathCells[k];
   for (const k of Object.keys(wanderCauses)) delete wanderCauses[k];
@@ -162,4 +164,20 @@ export function probeWander(cause: string): void {
 
 export function probeWanderCauses(): Record<string, number> {
   return { ...wanderCauses };
+}
+
+// How often the mood changed what a person chose (rich dynamics): the top-ranked option once the mood weights are applied is not the one
+// that ranked first without them. Keys are "from>to" activity kinds, plus "break:" ones for people at the end of their patience.
+const moodFlips: Record<string, number> = {};
+let moodDecisions = 0;
+export function probeMoodDecision(flip: { from: string; to: string; breaking: boolean } | null): void {
+  if (!probe.on) return;
+  moodDecisions++;
+  if (flip) {
+    const key = `${flip.breaking ? 'break:' : ''}${flip.from}>${flip.to}`;
+    moodFlips[key] = (moodFlips[key] ?? 0) + 1;
+  }
+}
+export function probeMoodFlips(): { decisions: number; flips: Record<string, number> } {
+  return { decisions: moodDecisions, flips: { ...moodFlips } };
 }
