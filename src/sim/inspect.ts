@@ -1,5 +1,6 @@
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
+import { CELLAR_SPOIL, foodLossOf } from './storage';
 import { WELL_CAP, WELL_MIN_CONDITION, WELL_REFILL } from './water';
 import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType } from './constants';
 import { generateOptions, rankOptions } from './decision';
@@ -490,6 +491,12 @@ export function describeEntity(world: World, id: number): EntityView | null {
         bars.push({ label: 'Water in the well', value: water, max: WELL_CAP, tone: water < 2 ? 'warn' : 'ok' });
         rows.push(['Seeps in', `1 unit every ${secondsText(WELL_REFILL)}${water >= WELL_CAP ? ' (full)' : b.condition < WELL_MIN_CONDITION ? ' (silted up: needs mending)' : ''}`]);
         notes.push(BUILD_DEF.well.blurb);
+      }
+      if (b.type === 'cellar') {
+        rows.push(['Keeps food', `going off at ${Math.round(CELLAR_SPOIL * 100)}% of the ordinary pace`]);
+        const lost = foodLossOf(world, hh);
+        if (hh && lost >= 0.5) rows.push(['Lost lately', `about ${Math.round(lost)} unit${Math.round(lost) === 1 ? '' : 's'} of the household's food went off (fading)`]);
+        notes.push(BUILD_DEF.cellar.blurb);
       }
       if (b.upgrading) notes.push('Being rebuilt as a house: still lived in while the work goes on.');
       return { kind: 'building', ...base, title: describeEntityName(world, e), subtitle: `Built ${agoText(world, b.builtTick)}`, rows, bars, items: itemList(b.store.items), notes, position: { x: b.x + b.w / 2, y: b.y + b.h / 2 }, sections };

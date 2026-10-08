@@ -1,3 +1,4 @@
+import { CELLAR_SPOIL, cellarAccepts } from './storage';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
 import { addEvent, addFx, addLog } from './events';
@@ -138,6 +139,7 @@ function trimEarmarks(b: Building): void {
 /** May this person put this item into the building's store (the store is for the work done there)? */
 export function mayDeposit(b: Building, item: ItemKind): boolean {
   if (b.type === 'well') return false; // a well holds only the water that seeps into it
+  if (b.type === 'cellar') return cellarAccepts(item);
   if (!b.ops) return true;
   return acceptedAt(b.type).includes(item);
 }
@@ -228,6 +230,7 @@ export function noteWithdraw(world: World, b: Building, p: Person, item: ItemKin
 // ───────────────────────── spoilage (called from the world's slow process) ─────────────────────────
 /** Multiplier on how fast perishable goods go off in this building. */
 export function spoilMultiplier(world: World, b: Building): number {
+  if (b.type === 'cellar') return CELLAR_SPOIL;
   if (b.type === 'granary') {
     const ops = b.ops;
     const tended = ops ? world.tick - Math.max(ops.tended, b.builtTick) < GRANARY_TEND_EVERY : true;

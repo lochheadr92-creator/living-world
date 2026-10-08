@@ -1,4 +1,5 @@
 import { buildable } from './expansion';
+import { LOSS_THRESHOLD, foodLossOf } from './storage';
 import { WELL_FAR, WELL_REACH } from './water';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isHomeType, isSolidHome, workRules } from './constants';
@@ -873,6 +874,13 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
       out.push({ type: 'well', signal: Math.min(1, s), why: `the nearest water I know is ${Math.round(shore)} tiles from home, and a well close to the houses would save the walk` });
     }
   }
+  // a cellar: this household keeps finding food gone off in its own stores (rich worlds)
+  if (buildable(world, 'cellar') && ctx.home && ctx.hh) {
+    const lost = foodLossOf(world, ctx.hh);
+    const own = beliefsByKind(p, ['building', 'site']).some((b) => b.btype === 'cellar' && b.hh === p.hhId);
+    // (and there has to be food worth protecting in the home store: the household's own count, not a guess)
+    if (!own && lost >= LOSS_THRESHOLD && hs.homeFood >= 5) out.push({ type: 'cellar', signal: Math.min(1, 0.55 + 0.06 * lost), why: `we keep finding food gone off (about ${Math.round(lost)} units lately): a cellar would keep it cool` });
+  }
   if (!knowsOfAny(ctx, 'hall') && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
@@ -934,9 +942,9 @@ function optPlanFacilities(ctx: Ctx): void {
             depositId = dep.id;
             spot = findBuildSpot(world, p, type, dep.x, dep.y, 1.5, 6, 3);
           }
-        } else if (type === 'well') {
+        } else if (type === 'well' || type === 'cellar') {
           const h = ctx.home;
-          spot = h ? findBuildSpot(world, p, type, h.x + h.w / 2, h.y + h.h / 2, 2, 8, 4) : null;
+          spot = h ? findBuildSpot(world, p, type, h.x + h.w / 2, h.y + h.h / 2, 2, type === 'well' ? 8 : 7, type === 'well' ? 4 : 3) : null;
         } else if (type === 'granary' || type === 'hall') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 11, 6);
         else if (type === 'kiln' || type === 'smithy') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 15, 10);
         else spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);

@@ -509,7 +509,8 @@ export type BuildingType =
   | 'bakery'
   | 'hall'
   // the village-economy expansion (rich dynamics only; docs/BUILDINGS.md)
-  | 'well';
+  | 'well'
+  | 'cellar';
 
 export interface Building {
   ent: 'building';
@@ -735,6 +736,8 @@ export interface Household {
   homeId: number;
   headId: number;
   formed: number;
+  /** food the household has found gone off in its own stores lately, with when it was last added to (rich dynamics; storage.ts) */
+  lost?: { units: number; tick: number };
 }
 
 export type Entity = Person | Source | Building | Site | Plot | Pile | Grave | Animal | Cart;

@@ -277,6 +277,19 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'meet',
     blurb: 'A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there.',
   }),
+  cellar: bd({
+    w: 2,
+    h: 1,
+    cost: { stone: 9, wood: 6 },
+    work: 480,
+    cap: 90,
+    workers: 2,
+    label: 'cellar',
+    sleepers: 0,
+    protect: 0,
+    role: 'store',
+    blurb: 'A stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at under a third of the ordinary pace. Food and flour only; a household keeps its own.',
+  }),
   well: bd({
     w: 1,
     h: 1,
@@ -293,7 +306,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
 };
 
 /** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
-export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well'];
+export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar'];
 
 /** every kind of building a household can live in */
 export const isHomeType = (t: string | undefined): boolean => t === 'lean_to' || t === 'hut' || t === 'house';
@@ -321,10 +334,11 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   bakery: 0.0014,
   hall: 0.0012,
   well: 0.0007,
+  cellar: 0.0008,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
-export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone' };
+export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone', cellar: 'stone' };
 export const REPAIR_FALLBACK_GAIN = 18;
 /** a building site nobody has worked on or supplied for this long is given up (its materials are left on the ground) */
 export const SITE_PATIENCE = DAY * 4;

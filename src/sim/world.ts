@@ -1,5 +1,6 @@
 // Side-effect imports register every activity handler.
 import './act_resource';
+import { noteFoodLoss } from './storage';
 import { spoilPile, spoilStore, updateHardship } from './hardship';
 import { updateMood } from './mood';
 import { updateWells } from './water';
@@ -12,7 +13,7 @@ import './act_misc';
 import './social';
 
 import { stepActivity, abortActivity } from './activities';
-import { BELIEF_REFRESH_EVERY, DECAY_PER_TICK, PERCEIVE_EVERY, PERISHABLE, PROJECT_PATIENCE, SITE_PATIENCE } from './constants';
+import { BELIEF_REFRESH_EVERY, DECAY_PER_TICK, PERCEIVE_EVERY, isHomeType, PERISHABLE, PROJECT_PATIENCE, SITE_PATIENCE } from './constants';
 import { decide, reviewActivity, urgentInterrupt } from './decision';
 import { isProjectSite } from './act_build';
 import { cancelSite, destroyBuilding } from './buildings';
@@ -179,6 +180,7 @@ function spoilGoods(world: World): void {
         b.store.items[k] = n - lost;
         if (b.store.items[k] === 0) delete b.store.items[k];
         noteSpoiled(world, b, k, lost);
+        if (b.hhId && (isHomeType(b.type) || b.type === 'cellar')) noteFoodLoss(world, b.hhId, lost);
         ledgerSpoil(world, k, lost, b.type === 'granary' ? 'grain bins: stored food spoiled' : 'stored food spoiled');
       }
     }

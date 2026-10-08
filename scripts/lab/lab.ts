@@ -16,7 +16,7 @@ import { setBuildingEnabled } from '../../src/sim/expansion';
 import { setStakes } from '../../src/sim/hardship';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
-import type { SourceType, World } from '../../src/sim/types';
+import type { BuildingType, SourceType, World } from '../../src/sim/types';
 import { setWolfSearchMemory } from '../../src/sim/wildlife';
 import { hashString } from '../../src/sim/rng';
 import { hashWorld, stepWorld } from '../../src/sim/world';
@@ -55,7 +55,7 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * Specs: `control`; `nudge:N` (draw N random numbers and change nothing else: the noise floor); `remove:<type+type>:<radius>` (delete
  * those sources within the radius of any settlement); `random-choice` (rank options by a hash, not by utility); `no-wolf-memory`
  * (switch off an optimisation that is meant to be exact: a branch that is not identical to the control would be a bug).
- * `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * `rich-no:<type+type>` is rich dynamics without those expansion buildings. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -93,17 +93,21 @@ export function parseIntervention(specIn: string): Intervention {
       },
     };
   }
-  if (kind === 'rich-no-wells') {
+  if (kind === 'rich-no') {
+    // `rich-no:well+cellar`: rich dynamics, but those building types are not built (to see what they change)
+    const off = (a ?? '').split('+').filter(Boolean) as BuildingType[];
     return {
       spec: label,
-      summary: 'rich dynamics, but nobody builds wells (to see what the wells change)',
+      summary: `rich dynamics, but nobody builds ${off.join(', ')} (to see what ${off.length > 1 ? 'they change' : 'it changes'})`,
       apply: (w) => {
         w.settings.dynamics = 'rich';
-        return 'rich dynamics on, wells off';
+        return `rich dynamics on, ${off.join(' and ')} off`;
       },
       install: () => {
-        setBuildingEnabled('well', false);
-        return () => setBuildingEnabled('well', true);
+        for (const t of off) setBuildingEnabled(t, false);
+        return () => {
+          for (const t of off) setBuildingEnabled(t, true);
+        };
       },
     };
   }

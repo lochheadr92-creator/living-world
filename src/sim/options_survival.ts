@@ -249,7 +249,7 @@ function optEat(ctx: Ctx): void {
   }
 
   for (const b of beliefsByKind(p, ['building', 'pile'])) {
-    const mine = b.kind === 'building' && b.hh === p.hhId && isHomeType(b.btype);
+    const mine = b.kind === 'building' && b.hh === p.hhId && (isHomeType(b.btype) || b.btype === 'cellar');
     const comm = b.kind === 'building' && b.btype === 'storehouse';
     const pile = b.kind === 'pile';
     if (!mine && !comm && !pile) continue;

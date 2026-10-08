@@ -1,6 +1,6 @@
 // Service and storage buildings of the village-economy expansion (docs/BUILDINGS.md). One small, recognisable silhouette each.
 //   well   a round stone kerb, a windlass on two posts under a little plank roof, a rope and a bucket
-import { cylinder } from './iso3d';
+import { box, boxTones, coursesL, cylinder, faceL, faceT } from './iso3d';
 import { SpriteCache, ellipse, groundShadow, line, mk, poly, shade } from './sprites';
 import type { Sprite } from './sprites';
 
@@ -44,5 +44,48 @@ export function wellSprite(cache: SpriteCache, variant: number): Sprite {
     const bucket = p(0.5, 0.5, 22);
     line(ctx, mid, [bucket[0], bucket[1] - 3], '#d4c08a', 1.2);
     poly(ctx, [[bucket[0] - 3.5, bucket[1] - 3], [bucket[0] + 3.5, bucket[1] - 3], [bucket[0] + 2.8, bucket[1] + 3], [bucket[0] - 2.8, bucket[1] + 3]], '#6e4d2c', 'rgba(25,14,6,0.6)', 0.7);
+  });
+}
+
+// ───────────────────────────── cellar (2 x 1) ─────────────────────────────
+/** a grassed earth bank with a stone-framed timber door set into its front, and a vent pipe */
+export function cellarSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`cellar${v}`, 120, 92, 60, 56, (ctx) => {
+    const p = mk(2, 1);
+    groundShadow(ctx, 44, 12, 0.3, 3);
+    const earth = ['#7b6a48', '#74684a', '#806e4a', '#6f6247'][v];
+    // the mound: a low box of earth, grassed on top
+    box(ctx, p, 0.05, 1.95, 0.1, 0.95, 0, 14, { top: '#7da05a', left: shade(earth, 1.0), right: shade(earth, 0.75), stroke: 'rgba(30,24,16,0.4)' });
+    for (let i = 0; i < 9; i++) {
+      const q = p(0.2 + i * 0.2, 0.25 + ((i * 37) % 5) * 0.12, 14);
+      ctx.fillStyle = 'rgba(70,110,50,0.55)';
+      ctx.fillRect(q[0] - 1, q[1] - 2, 2, 3);
+    }
+    // the stone frame and the door
+    const stone = '#b3ad9b';
+    box(ctx, p, 0.55, 1.45, 0.88, 1.0, 0, 20, boxTones(stone, 'rgba(50,46,38,0.55)'));
+    coursesL(ctx, p, 0.55, 1.45, 1.0, 0, 20, 3, 'rgba(60,56,48,0.4)');
+    faceL(ctx, p, 0.7, 1.3, 1.004, 0, 15, '#5c4129', 'rgba(25,14,6,0.6)', 0.9);
+    for (let i = 1; i < 4; i++) {
+      const x = 0.7 + 0.15 * i;
+      const a = p(x, 1.004, 0);
+      const b = p(x, 1.004, 15);
+      ctx.strokeStyle = 'rgba(25,14,6,0.45)';
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.moveTo(a[0], a[1]);
+      ctx.lineTo(b[0], b[1]);
+      ctx.stroke();
+    }
+    ctx.fillStyle = '#c9b27a';
+    const knob = p(1.2, 1.004, 7);
+    ctx.fillRect(knob[0] - 1.2, knob[1] - 1.2, 2.4, 2.4);
+    faceT(ctx, p, 0.55, 1.45, 0.88, 1.0, 20, shade(stone, 1.12), 'rgba(50,46,38,0.55)', 0.8);
+    // a vent pipe on the bank
+    const vent = p(1.7, 0.4, 14);
+    box(ctx, p, 1.64, 1.76, 0.34, 0.46, 14, 26, boxTones('#8e8a7d'));
+    ctx.fillStyle = 'rgba(20,18,14,0.7)';
+    ctx.fillRect(vent[0] - 2, vent[1] - 13, 4, 2);
   });
 }

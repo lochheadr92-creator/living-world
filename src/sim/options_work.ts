@@ -46,7 +46,7 @@ export function hhState(ctx: Ctx): HhState {
       homeFood += foodCount(b.items ?? {});
       homeSeeds += unitsOf(b.items?.seeds);
       if (!homeBelief || isSolidHome(b.btype)) homeBelief = b;
-    }
+    } else if (b.hh === p.hhId && b.btype === 'cellar') homeFood += foodCount(b.items ?? {}); // the household's cool store counts as food in hand
   }
   const mem = Math.max(1, ctx.members.length);
   const foodStock = ctx.food + homeFood;
@@ -166,7 +166,8 @@ function optDepositFood(ctx: Ctx): void {
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
-    const mine = b.hh === p.hhId && isHomeType(b.btype);
+    const cellar = b.hh === p.hhId && b.btype === 'cellar';
+    const mine = (b.hh === p.hhId && isHomeType(b.btype)) || cellar;
     const comm = b.btype === 'storehouse';
     if (!mine && !comm) continue;
     const used = Object.entries(b.items ?? {}).reduce((s, [k, n]) => s + (n ?? 0) * WEIGHT[k as ItemKind], 0);
@@ -180,6 +181,7 @@ function optDepositFood(ctx: Ctx): void {
       .add('surplus food', 10 + Math.min(surplus, 8) * 1.2)
       .add(mine ? 'for my household' : 'for everyone', mine ? 4 + ctx.dependents.length * 3 : 2 + 5 * p.traits.generosity)
       .add('walking', -pen(e));
+    if (cellar) sc.add('the cellar keeps it from going off', 7);
     if (sc.total < 8) continue;
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
@@ -194,7 +196,7 @@ function optDepositFood(ctx: Ctx): void {
     }
     addOption(ctx, {
       kind: 'deposit',
-      label: mine ? 'Bring food home' : 'Add food to the storehouse',
+      label: cellar ? 'Put food in the cellar' : mine ? 'Bring food home' : 'Add food to the storehouse',
       goal: mine ? 'to feed the household' : 'to share with the community',
       need: null,
       util: sc.total * nightMult(ctx),

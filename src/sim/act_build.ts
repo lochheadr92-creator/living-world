@@ -242,6 +242,10 @@ export function openSitesNear(world: World, near?: Spot): number {
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
   const rules = rulesOf(world);
   if (!buildable(world, type)) return `a ${BUILD_DEF[type].label} is not something this world builds`;
+  if (type === 'cellar') {
+    for (const b of world.buildings) if (b.type === 'cellar' && b.hhId === hh) return 'the household already has a cellar';
+    for (const s of world.sites) if (s.type === 'cellar' && s.hhId === hh) return 'the household is already digging a cellar';
+  }
   if (type === 'well' && at) {
     for (const b of world.buildings) if (b.type === 'well' && within(WELL_REACH, at.x, at.y, b.x + b.w / 2, b.y + b.h / 2)) return 'there is a well close by already';
     for (const s of world.sites) if (s.type === 'well' && within(WELL_REACH, at.x, at.y, s.x + s.w / 2, s.y + s.h / 2)) return 'a well is already being dug close by';
