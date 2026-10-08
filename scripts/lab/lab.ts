@@ -176,6 +176,8 @@ export interface Watch {
   lowMoodDays: number;
   /** distinct times someone reached the end of their patience (a break is long enough to be caught by a sample) */
   breaks: Set<string>;
+  /** how many had died when the branch began, so that `deaths` counts those since the fork */
+  deadAtFork: number;
 }
 
 /** Look at a world between steps; everything here is read-only. */
@@ -228,7 +230,7 @@ export function outcomeOf(w: World, from: number, endTick: number, watch?: Watch
       buildings: w.buildings.length,
       plots: w.plots.length,
       people: alive.length,
-      deaths: w.deceased.length,
+      deaths: w.deceased.length - (watch?.deadAtFork ?? 0),
       homeless,
       belowCritical: crit,
       meanHunger: Math.round((hunger / Math.max(1, alive.length)) * 10) / 10,
@@ -281,7 +283,7 @@ export function runBranch(
     const note = iv.apply?.(w) ?? '';
     const hashes: string[] = [];
     const popByDay: number[] = [];
-    const watch: Watch = { seen: {}, needDays: 0, lowMoodDays: 0, breaks: new Set() };
+    const watch: Watch = { seen: {}, needDays: 0, lowMoodDays: 0, breaks: new Set(), deadAtFork: w.deceased.length };
     let diverged: number | null = null;
     const end = from + days * DAY;
     for (let i = 1; w.tick < end; i++) {

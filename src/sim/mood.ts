@@ -90,7 +90,7 @@ export function updateMood(world: World, p: Person): void {
   m.level = level(world, p);
   if (m.breakUntil !== undefined && world.tick >= m.breakUntil) {
     delete m.breakUntil;
-    think(world, p, 'catharsis', 18, DAY, 'got it out of their system');
+    if (effects) think(world, p, 'catharsis', 18, DAY, 'got it out of their system');
   } else if (m.breakUntil === undefined && m.level < BREAK_LEVEL && (p.cooldowns.break ?? 0) <= world.tick) startBreak(world, p);
 }
 
@@ -99,6 +99,9 @@ function startBreak(world: World, p: Person): void {
   const m = p.mood!;
   m.breakUntil = world.tick + BREAK_LENGTH;
   p.cooldowns.break = world.tick + BREAK_COOLDOWN;
+  // with the mood effects switched off (an experiment) the moment is recorded so it can be counted, and nothing else happens: no thought, no
+  // re-think, no snap, no event
+  if (!effects) return;
   p.nextThink = world.tick;
   think(world, p, 'break', -10, BREAK_LENGTH, 'is at the end of their patience');
   let near: Person | null = null;

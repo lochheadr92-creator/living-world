@@ -199,6 +199,24 @@ describe('rich dynamics', () => {
       expect(moodWeight(w, p, 'socialize')).toBeLessThan(0.7);
     });
 
+    it('mood effects off: a break is counted but nothing happens (no thought, no snap, no event, no relief)', () => {
+      setMoodEffects(false);
+      const w = rich('rich-half-c');
+      const p = w.persons.find((x) => x.alive)!;
+      const events = w.events.length;
+      think(w, p, 'terrible', -90, 5000, 'terrible');
+      while ((w.tick + p.id) % 30 !== 0) w.tick++;
+      updateMood(w, p);
+      expect(p.mood!.breakUntil).toBeDefined();
+      expect(w.events.length).toBe(events);
+      expect(p.mood!.thoughts.some((t) => t.kind === 'break')).toBe(false);
+      expect(p.convId).toBe(0);
+      w.tick += BREAK_LENGTH + 40;
+      while ((w.tick + p.id) % 30 !== 0) w.tick++;
+      updateMood(w, p);
+      expect(p.mood!.thoughts.some((t) => t.kind === 'catharsis')).toBe(false);
+    });
+
     it('mood effects off: stakes as before, thoughts still kept, but choices and quarrels unchanged', () => {
       setMoodEffects(false);
       const w = rich('rich-half-b');
