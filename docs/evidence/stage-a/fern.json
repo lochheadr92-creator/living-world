@@ -3,120 +3,96 @@
  "seed": "fern",
  "dynamics": "rich",
  "days": 27,
- "commit": "3a89016",
- "when": "2026-10-08T13:40:15.416Z",
+ "commit": "f201d90",
+ "when": "2026-10-08T15:17:22.445Z",
  "buildings": [
   {
-   "id": 6512,
+   "id": 6679,
    "type": "well",
    "x": 50,
    "y": 43,
    "hhId": 0,
-   "condition": 57,
+   "condition": 58,
    "items": {
-    "water": 7
+    "water": 9
    },
    "inspector": {
     "title": "Well",
-    "text": "Well\nBuilt 21 days ago\n\nA stone-lined shaft with a windlass. Water seeps in slowly and is drawn by whoever comes: a few units a day, shared, for drinking and carrying home.\n\nOwner\neveryone\nStorage\n11/18 used\nSeeps in\n1 unit every 5s\nCondition\n57%\nWater in the well\n7 / 12\nCONTENTS\n×7"
+    "text": "Well\nBuilt 21 days ago\n\nA stone-lined shaft with a windlass. Water seeps in a unit every few seconds, some fifty a day, and is drawn by whoever comes, for drinking and carrying home.\n\nOwner\neveryone\nStorage\n14/18 used\nSeeps in\n1 unit every 5s\nCondition\n58%\nWater in the well\n9 / 12\nCONTENTS\n×9"
    },
    "screenshot": "docs/evidence/stage-a/well.jpg"
   },
   {
-   "id": 6846,
+   "id": 8148,
    "type": "cellar",
-   "x": 47,
-   "y": 43,
-   "hhId": 1014,
-   "condition": 51,
+   "x": 30,
+   "y": 41,
+   "hhId": 1010,
+   "condition": 55,
    "items": {
-    "grain": 1,
-    "fruit": 9
+    "berries": 4,
+    "fish": 3
    },
    "inspector": {
     "title": "Cellar",
-    "text": "Cellar\nBuilt 21 days ago\n\nA stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at under a third of the ordinary pace. Food and flour only; a household keeps its own.\n\nOwner\nAlder household\nStorage\n10/90 used\nKeeps food\ngoing off at 30% of the ordinary pace\nLost lately\nabout 1 unit of the household's food went off (fading)\nCondition\n51%\nCONTENTS\n×1\n×9"
+    "text": "Cellar\nBuilt 19 days ago\n\nA stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at about a sixth of the ordinary pace, slower than in a tended granary. Food and flour only; a household keeps its own.\n\nOwner\nBriar household\nStorage\n9/90 used\nKeeps food\ngoing off at 15% of the ordinary pace\nLost lately\nabout 2 units of the household's food went off (fading)\nCondition\n55%\nCONTENTS\n×4\n×3"
    },
    "screenshot": "docs/evidence/stage-a/cellar.jpg"
   },
   {
-   "id": 7694,
-   "type": "stockyard",
-   "x": 43,
-   "y": 37,
-   "hhId": 0,
-   "condition": 47,
-   "items": {},
-   "inspector": {
-    "title": "Stockyard",
-    "text": "Stockyard\nBuilt 20 days ago\n\nA fenced yard by the houses where logs, stone, clay and ore are stacked for whoever builds or works next. Raw goods only: finished goods belong in the storehouse.\n\nOwner\neveryone\nStorage\n0/150 used\nCondition\n47%"
-   },
-   "screenshot": "docs/evidence/stage-a/stockyard.jpg"
-  },
-  {
-   "id": 14421,
+   "id": 14458,
    "type": "forester",
-   "x": 35,
-   "y": 46,
+   "x": 34,
+   "y": 44,
    "hhId": 0,
-   "condition": 59,
+   "condition": 58,
    "items": {},
    "inspector": {
     "title": "Forester's lodge",
-    "text": "Forester's lodge\nBuilt 43.9 min ago\n\nA low timber lodge with a nursery bed in front. Whoever has the time sets young trees on the open ground round about; they take three days to come up, and the wood they grow is real wood.\n\nOwner\neveryone\nStorage\n0/24 used\nYoung trees\n2 of at most 10 standing within 11 tiles (they take three days to come up)\nCondition\n59%"
+    "text": "Forester's lodge\nBuilt 43 min ago\n\nA low timber lodge with a nursery bed in front. Whoever has the time sets young trees on the open ground round about; they take three days to come up, and the wood they grow is real wood.\n\nOwner\neveryone\nStorage\n0/24 used\nYoung trees\n2 of at most 10 standing within 11 tiles (they take three days to come up)\nCondition\n58%"
    },
    "screenshot": "docs/evidence/stage-a/forester.jpg"
   },
   {
-   "id": 23360,
-   "type": "mine",
-   "x": 55,
-   "y": 24,
-   "hhId": 971,
-   "condition": 97,
+   "id": 14992,
+   "type": "stockyard",
+   "x": 43,
+   "y": 37,
+   "hhId": 0,
+   "condition": 73,
    "items": {},
    "inspector": {
-    "title": "Mine",
-    "text": "Mine\nBuilt 3 min ago\nIdle\n\nNothing has been made here yet. The vein beside it still holds 17 ore.\n\nNOBODY AT WORK\nCAN MAKE HERE\ndig ore\nOwner\nWillow household\nStorage\n0/60 used\nCondition\n97%\nWhat it is for\nWho may use it\nIdle — what is stopping it\n\nDigging ore: needs a pickaxe (none on the rack: whoever works here has to bring one).\n\nStock\n\n0/60 of the store used.\n\nOutput"
+    "title": "Stockyard",
+    "text": "Stockyard\nBuilt 39.8 min ago\n\nA fenced yard by the houses where logs, stone, clay and ore are stacked for whoever builds or works next. Raw goods only: finished goods belong in the storehouse.\n\nOwner\neveryone\nStorage\n0/150 used\nCondition\n73%"
    },
-   "screenshot": "docs/evidence/stage-a/mine.jpg"
+   "screenshot": "docs/evidence/stage-a/stockyard.jpg"
   }
  ],
  "users": [
   {
-   "id": 995,
-   "name": "Otto",
+   "id": 998,
+   "name": "Juno",
    "kind": "drink",
    "label": "Drinking at the well",
-   "goal": "to quench thirst (52/100)",
+   "goal": "to quench thirst (51/100)",
    "phase": "travel",
    "building": "well",
-   "buildingId": 6512,
+   "buildingId": 6679,
    "inspector": {
-    "title": "Mine",
-    "text": "O\nOtto\nFollow\nAdult, 22\nBrook household\nHome: hut (83% sound)\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\n-5\nThe lean season\nWhat are they up to?\nWHAT ARE THEY DOING?\nDrinking at the well — walking to Well (7 tiles to go).\non the way\nWHY DID THEY CHOOSE IT?\nWeighed up: thirsty +32 · walking −6\nWHAT ARE THEY TRYING TO ACHIEVE?\nTo quench thirst (52/100) (Well).\nWHAT IS STOPPING THEM?\nNothing in the way.\nWHAT HAPPENED AFTER THEIR LAST ATTEMPT?\nPicking berries → success: done (just now)\nNEEDS\nFood\n77\nWater\n52\nEnergy\n95\nWarmth\n53\nSafety\n85\nCompany\n87\nCARRYING\n×6\n×2\n×4\n11.5 / 12\nTOOLS\nnone\nConversation\n\nWhat they are saying to someone right now, and the last conversation they had.\n\nLAST CONVERSATION\n3.4 min ago\nTheo\ncame to Otto with a warning\nOutcome\nFriendly\nWorries\n1\nOpportunities they could have used\n9\n\nThings nearby that could have helped, and why they did or did not take them. Click one to see where it is.\n\nBLOCKED\nHouse site (Tansy)\n10 tiles\nCannot use it: site is waiting for materials (5 planks, 5 bricks).\nNOT NEEDED\nBerry bush (3 berries)\n3 tiles\nNot hungry right now (77/100) and the household has enough.\nNOT NEEDED\nBerry bush (1 berries)\n4 tiles\nNot hungry right now (77/100) and the "
+    "title": "Stockyard",
+    "text": "J\nJuno\nFollow\nElder, 76\nHeron household\nHome: hut (55% sound)\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\n-5\nThe lean season\nWhat are they up to?\nWHAT ARE THEY DOING?\nDrinking at the well — walking to Well (1 tiles to go).\non the way\nWHY DID THEY CHOOSE IT?\nWeighed up: thirsty +34 · walking −3\nWHAT ARE THEY TRYING TO ACHIEVE?\nTo quench thirst (51/100) (Well).\nWHAT IS STOPPING THEM?\nNothing in the way.\nWHAT HAPPENED AFTER THEIR LAST ATTEMPT?\nHarvest the crop → success: done (5s ago)\nNEEDS\nFood\n72\nWater\n49\nEnergy\n73\nWarmth\n80\nSafety\n86\nCompany\n66\nCARRYING\n×1\n×4\n×2\n6.5 / 8\nTOOLS\nnone\nConversation\n\nWhat they are saying to someone right now, and the last conversation they had.\n\nLAST CONVERSATION\n2.4 min ago\nDelia\ncame to Juno with a request\nOutcome\nRefused (own need)\nPromises\n1\n\nWhat they have promised to do for others, and how the latest ones ended.\n\nMOOT\nmade 20 days ago\nHelp Wilma build\n0% of a fair share of work done · the building was finished or given up\nOpportunities they could have used\n9\n\nThings nearby that could have helped, and why they did or did not take them. Click one to see where it is.\n\nPASSED OVER\nWild grain (3 grain)\n4 tiles\nConsidered (score 10) but preferred “Drinking at "
    },
    "screenshot": "docs/evidence/stage-a/person-well.jpg"
   },
   {
-   "id": 1003,
-   "name": "Delia",
-   "kind": "drink",
-   "label": "Drinking at the well",
-   "goal": "to quench thirst (50/100)",
-   "phase": "travel",
-   "building": "well",
-   "buildingId": 6512
-  },
-  {
-   "id": 1015,
-   "name": "Yara",
-   "kind": "drink",
-   "label": "Drinking at the well",
-   "goal": "to quench thirst (48/100)",
+   "id": 1019,
+   "name": "Yusuf",
+   "kind": "plant_tree",
+   "label": "Planting a young tree",
+   "goal": "to thicken the wood near home",
    "phase": "work",
-   "building": "well",
-   "buildingId": 6512
+   "building": "forester",
+   "buildingId": 14458
   }
  ],
  "notes": [],
@@ -125,32 +101,11 @@
  "day": 27,
  "sites": [
   {
-   "id": 23504,
+   "id": 21974,
    "type": "cellar",
    "x": 55,
    "y": 32,
-   "work": 6
-  },
-  {
-   "id": 23542,
-   "type": "cellar",
-   "x": 23,
-   "y": 46,
-   "work": 28
-  },
-  {
-   "id": 23834,
-   "type": "cellar",
-   "x": 30,
-   "y": 41,
-   "work": 6
-  },
-  {
-   "id": 23849,
-   "type": "cellar",
-   "x": 53,
-   "y": 37,
-   "work": 6
+   "work": 39
   }
  ],
  "tickAtUsers": 64800

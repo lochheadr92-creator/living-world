@@ -37,7 +37,7 @@ Disposition: **reuse** (already there), **extend** (an existing building gains a
 | Storehouse / warehouse | reuse | |
 | Stockyard | new `stockyard` (A) | open yard for bulky raw goods (logs, stone, clay, ore); keeps the storehouse for finished goods |
 | Woodcutter's hut / logging camp | extend → `stockyard` (A) | felling already happens by hand with an axe; the yard is where logs are stacked |
-| Forester's lodge | new `forester` (A) | young trees raised from a grown tree within the lodge's reach and set on open ground; real forestry work, not a regrowth multiplier (nothing in the world yet threatens a sapling, so protecting them is deferred until something does) |
+| Forester's lodge | new `forester` (A) | stands at the wood's edge, between the houses and the nearest grown trees; young trees raised from a grown tree within its reach and set on open ground; real forestry work, not a regrowth multiplier (nothing in the world yet threatens a sapling, so protecting them is deferred until something does) |
 | Sawmill / timber yard | reuse | planks and handles; gains furniture and repair recipes (B) |
 | Quarry | reuse | |
 | Mine | new `mine` (A) | batch extraction at an ore vein with props; same shape as the quarry; finite ore |
@@ -126,45 +126,49 @@ Each type has a definition (`BUILD_DEF`), wear and a repair material, an icon, a
 drawing, inspector rows, and lives in the ordinary save as a building of its type (save format unchanged at 4; the only new optional
 field is `Household.lost`, written when present). The lab can switch any of them off: `rich-no:well+cellar` and so on.
 
-| Building | Implemented | Contract-tested | Observed in an ordinary seeded run (rich, normal profile, 4 seeds, 30 days) | Observed in the browser |
+| Building | Implemented | Contract-tested | Observed in an ordinary seeded run (rich, normal profile, 4 seeds, 30 days, commit f201d90) | Observed in the browser (commit f201d90) |
 |---|---|---|---|---|
-| well (`water.ts`) | yes | `tests/expansion_water.test.ts` (10) | laid out day 5–6 in 4/4 seeds; 1–2 built per world; 154–627 drinks and water-fetches by 25–30 people | yes: `docs/evidence/stage-a/well.jpg` (meadow, day 14, "Owner: everyone, Water in the well 7/12") |
-| cellar (`storage.ts`, spoils at 0.15× of a home store, below a tended granary's 0.2×) | yes | `tests/expansion_storage.test.ts` (9) | 4–8 laid out per world from day 5; 4–8 built; 180–313 deposits and meals by 14–16 people; one or two sites per world wait days for stone | yes: `cellar.jpg` (meadow, day 14, Brook household, "Lost lately about 2 units", fruit, berries and grain inside) |
-| stockyard (`stockyard.ts`) | yes | `tests/expansion_stockyard.test.ts` (8) | laid out day 6–19 in 4/4; built 4/4; 34–344 stackings and collections by 14–20 people (it runs near empty: builders draw it down as fast as it fills) | yes: `stockyard.jpg` (meadow, day 14) |
-| forester's lodge (`forestry.ts`, `act_forestry.ts`) | yes | `tests/expansion_forestry.test.ts` (7) | laid out day 13–29 in 4/4; built 4/4; planted from in 2/4 within 30 days (1 and 3 plantings), 3/4 within 45 days (11–43 plantings by 3–8 people) | yes: `forester.jpg` (fern, day 27, "Young trees: 2 of at most 10 standing within 11 tiles") |
-| mine (`recipes.ts` `mine_ore`) | yes | `tests/expansion_mine.test.ts` (5) | laid out day 22–30 in 3/4 seeds over 45 days (1/4 within 30); built; dug 0–2 times: **built, not working** (below) | standing only: `mine.jpg` (fern, day 27, Willow household, idle) |
+| well (`water.ts`) | yes | `tests/expansion_water.test.ts` (10), `expansion_review` | laid out day 5–6 in 4/4 seeds and built; 143–2804 drinks and water-fetches by 22–30 people | yes: `well.jpg` (meadow, day 14, "Owner: everyone, Water in the well"); Hal and Mona drinking at it; `person-well.jpg` (fern, day 27, Juno) |
+| cellar (`storage.ts`, spoils at 0.15× of a home store, below a tended granary's 0.2×) | yes | `tests/expansion_storage.test.ts` (9), `expansion_review` | 5–7 laid out per world from day 5; 5–7 built; 169–360 deposits and meals by 14–23 people | yes: `cellar.jpg` (meadow, day 14); Quinn "Taking food to the cellar" |
+| stockyard (`stockyard.ts`) | yes | `tests/expansion_stockyard.test.ts` (8), `expansion_review` | laid out day 7–18 in 4/4; built 4/4; 11–50 stackings and collections by 4–13 people (it runs near empty: builders draw it down as it fills) | yes: `stockyard.jpg` (meadow, day 14, "Owner: everyone") |
+| forester's lodge (`forestry.ts`, `act_forestry.ts`) | yes | `tests/expansion_forestry.test.ts` (7), `expansion_review` | laid out day 8–23 in 4/4 at the wood's edge; built 4/4; planted from in 3/4 within 30 days (17, 7, 6 plantings by 8, 2, 2 people; the fourth lodge stood only from day 25) | yes: `forester.jpg` (fern, day 27, "Young trees: 2 of at most 10 standing within 11 tiles"); Yusuf "Planting a young tree" |
+| mine (`recipes.ts` `mine_ore`) | yes | `tests/expansion_mine.test.ts` (5) | laid out day 28 in 1/4 seeds within 30 days (3/4 within 45 in an earlier run), built, dug 0–2 times: **built, not working** (below) | none stood in either browser run (river's mine was finished on day 29.5) |
 
 Numbers are from `scripts/chainwatch.ts` on seeds meadow, river, fern and aspen (`docs/evidence/stage-a/chainwatch-<seed>.json`, which
 also hold the causal trace of each type's first instance: who marked it out and the problem they gave as their reason, who finished
 it, who first used it and for what). The browser evidence is `scripts/browser/stage_a.mjs` against the built app (`meadow.json`,
 `fern.json` and the screenshots beside them): the world is restarted rich from the page's own controls, run on, and each building
-selected and read from the inspector.
+selected and read from the inspector. An earlier set of numbers (commit 3a89016, before the review below) showed 34–344 stockyard
+uses; most of those were a deposit-withdraw loop the review found, not use.
 
-Causal traces (from `chainwatch-<seed>.json`, commit 3a89016; each is the first instance of its kind in that world, nothing staged):
+Causal traces (from `chainwatch-<seed>.json`, commit f201d90; each is the first instance of its kind in that world, nothing staged):
 
 * well, meadow: day 5.1 Ivo lays one out ("the nearest water I know is 18 tiles from home, and a well close to the houses would
-  save the walk"); day 5.8 Ivo finishes it and is the first to drink at it (thirst 59/100). 627 drinks and fetches by 30 people
-  follow in 30 days. In the browser at day 14 Pavel is walking to it to drink (`person-well.jpg` is fern's Otto doing the same).
+  save the walk"); day 5.4 Sven finishes it; day 5.7 Sofia is the first to drink at it (thirst 47/100). 2804 drinks and fetches by
+  30 people follow in 30 days.
 * cellar, river: day 5.7 Basil ("we keep finding food gone off (about 12 units lately): a cellar would keep it cool"); day 7.1
-  Basil finishes it; day 7.2 Ivy is the first to bring food home to it. 313 deposits and meals by 16 people.
+  Basil finishes it; day 7.2 Ivy is the first to take food to it. 285 deposits and meals by 18 people.
 * stockyard, river: day 8 Abel ("the wood I fetch is about 12 tiles from home: a yard by the houses would save every builder the
-  walk"); day 8.5 Basil finishes it; day 9.2 Petra stacks 3 stone there "for whoever builds or works next". 344 stackings and
-  collections by 20 people in the remaining 22 days.
-* forester's lodge, fern: day 14.2 Otto ("only 9 trees that I know of stand near home: someone should be planting"); day 16 Dax
-  finishes it; day 24.2 Yusuf plants the first young tree "to thicken the wood near home"; 3 plantings by day 30.
-* mine, fern: day 20.5 Nora ("my tools are wearing out, the smithy has no ore and a vein is known: a mine would bring it out by
-  the load"); day 26.2 Nora finishes it; it is then dug twice in four days and the ore sits at the shaft head: nobody smelts.
+  walk"); day 8.1 Talia finishes it; day 9.2 Yan stacks a load of clay there "for whoever builds or works next"; 50 stackings and
+  collections by 13 people in the remaining 22 days.
+* forester's lodge, meadow: day 8.2 Zeke ("only 6 trees that I know of stand near home: someone should be planting"); day 9 Zeke
+  finishes it at the wood's edge; day 15.3 Yara plants the first young tree "to thicken the wood near home"; 17 plantings by 8
+  people by day 30.
+* mine, river: day 24.4 Cole ("my tools are wearing out, the smithy has no ore and a vein is known: a mine would bring it out by
+  the load"); day 29.5 Talia finishes it; nobody has dug by day 30, and in the earlier 45-day run a mine was dug twice and its ore
+  then sat at the shaft head: nobody smelts.
 
 Chains that are not working yet, with the measured reason:
 
 * **Mine → smithy → iron tools.** The mine is laid out only where a smithy is known and tools are wearing, which in these seeds is
-  day 22 or later; once built it is dug 0–2 times in 45 days. The cause is upstream: the smithy itself ran no batch in 45 days in
+  day 24 or later; once built it is dug 0–2 times in 45 days. The cause is upstream: the smithy itself ran no batch in 45 days in
   any of the four seeds (probe on river: `batches=0` throughout), because the only demand for iron is a worn tool of someone who
   also knows a smithy, and charcoal for smelting comes from the kiln, which is busy with bricks. Stage B (clamp, metalwork) is where
   that chain is made to run; the mine's own contract (ore out of a finite vein, pick required, one mine per vein, save mid-batch)
   is tested.
-* **Forester's lodge.** Works, but late: the wood near home only reads as thin after the first weeks of felling, so most lodges stand
-  from day 13–29 and planting is light within 30 days. Growth is real (`SAPLING_TICKS`, wood created in the ledger as "tree growth").
+* **Forester's lodge.** Works, but late: the wood near home only reads as thin after the first weeks of felling, so lodges stand
+  from day 9–25 and the one finished on day 25 had not been planted from by day 30. Growth is real (`SAPLING_TICKS`, wood created
+  in the ledger as "tree growth").
 * **Stone.** Several cellar and well sites wait days for their last few stone; stone is gathered by hand from small rocks until a
   quarry exists. Not changed here (it is the authored world's supply rule); worth a look when the gates are run on 24 seeds.
 
@@ -194,6 +198,10 @@ consistency, handlers), each finding checked independently where time allowed. F
 * **Planning read the world's truth** (medium, locality): the planting spot was searched at every review from the world's occupancy
   (also the heaviest new per-decision cost); known lodges, yards and veins were dropped the instant they vanished, before anyone had
   looked. The spot is now found when the option is taken; the existence filters are gone and a gone lodge is forgotten on arrival.
+* **The lodge went dormant once planting needed a seed tree** (found by re-measuring after the fixes): lodges were sited by the camp,
+  where the wood is thin, so no grown tree stood within reach. A lodge now stands at the wood's edge, between home and the nearest
+  grown trees the planner knows (`lodgeSpot`), and the new wood grows toward the houses: 17, 7, 6 and 0 plantings in 30 days on the
+  four seeds, against 0–1 before the siting change.
 * **A well drew two units for one drink** (low): the first unit was drawn before drinking and the rest whenever the credit ran low, so
   a nearly quenched person drew twice what they drank. Units are drawn only as the last is used up.
 * Smaller: the loss tally is in the fingerprint (rich worlds only); `rich-stakes-only` and `rich-mood-only` lab branches no longer carry
