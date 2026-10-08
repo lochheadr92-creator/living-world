@@ -141,6 +141,25 @@ export const RECIPES: Recipe[] = [
     benefit: 'Stone from a big outcrop, three at a time, stacked at the yard — nobody has to walk between small rocks.',
   },
   {
+    id: 'mine_ore',
+    label: 'dig ore',
+    doing: 'Digging ore',
+    at: 'mine',
+    inputs: {},
+    fuel: none,
+    work: 110,
+    burn: 0,
+    outputs: { ore: 3 },
+    waste: none,
+    wasteWhy: '',
+    fromDeposit: { item: 'ore', n: 3 },
+    skill: 'stone',
+    tool: { kind: 'pick', required: true, speed: 0.5 },
+    workers: 3,
+    serves: ['ore'],
+    benefit: 'Ore from a vein, three loads at a time, stacked at the shaft head — far quicker than chipping it out by hand.',
+  },
+  {
     id: 'fire_bricks',
     label: 'fired bricks',
     doing: 'Firing bricks',
@@ -289,7 +308,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'mine'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 
@@ -311,6 +330,10 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
   }
   if (type === 'quarry') {
     set.add('stone');
+    set.add('pick');
+  }
+  if (type === 'mine') {
+    set.add('ore');
     set.add('pick');
   }
   if (type === 'kiln') {

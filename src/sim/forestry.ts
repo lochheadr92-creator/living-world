@@ -1,0 +1,78 @@
+// Forestry: the forester's lodge (village-economy expansion, docs/BUILDINGS.md). Rich dynamics only.
+//
+// A thin wood near the houses is the problem: the trees people know near home are few, so wood is a long walk and the forest renews only
+// as fast as it seeds itself. The lodge is a place where people plant: someone with the time goes to open ground within reach of the lodge
+// and sets a young tree (a Source with growth 0.02, which updateSources then grows in SAPLING_TICKS, creating each unit of wood it gains
+// in the ledger as "tree growth"). Planting creates no wood by itself. The lodge caps the number of saplings it has standing, and a
+// planting never takes the wood past a quarter above the world's natural cap.
+//
+// Planning knowledge: whether the wood near home is thin is judged from the trees a person knows; the spot and the cap are checked on
+// arrival against the world.
+import { hubWithin } from './settlements';
+import { treesNear } from './sources';
+import { hashUnit } from './rng';
+import { isFreeLand } from './registry';
+import { hyp } from './util';
+import type { Belief, Building, Person, World } from './types';
+import { T } from './types';
+
+/** open ground this near the lodge (tiles) is planted */
+export const FOREST_REACH = 11;
+/** a lodge keeps at most this many saplings standing at once (young trees that have not yet grown up) */
+export const FOREST_MAX_SAPLINGS = 10;
+/** work ticks to set one young tree for a person of skill 1 */
+export const PLANT_WORK = 150;
+/** a wood is thin near home when the person knows fewer than this many trees within FOREST_THIN_RADIUS of it */
+export const FOREST_THIN = 12;
+export const FOREST_THIN_RADIUS = 14;
+
+export function saplingsAround(world: World, b: Building): number {
+  const cx = b.x + b.w / 2;
+  const cy = b.y + b.h / 2;
+  let n = 0;
+  for (const s of world.sources) if (s.type === 'tree' && s.growth < 1 && hyp(s.x - cx, s.y - cy) <= FOREST_REACH) n++;
+  return n;
+}
+
+/** how many trees this person knows within the thin-wood radius of a point */
+export function knownTreesNear(p: Person, beliefs: Belief[], x: number, y: number): number {
+  void p;
+  let n = 0;
+  for (const b of beliefs) if (b.kind === 'tree' && hyp(b.x - x, b.y - y) <= FOREST_THIN_RADIUS) n++;
+  return n;
+}
+
+/** may another young tree be set in this world at all? (a quarter above the natural cap is the ceiling) */
+export function roomForTrees(world: World): boolean {
+  return (world.stats.trees ?? 0) < Math.round((world.stats.treeCap ?? 0) * 1.25);
+}
+
+/** open ground within reach of the lodge that is good for a young tree: free, explored by this person, not in the camp, not at the water's edge */
+export function plantingSpot(world: World, p: Person, at: { x: number; y: number }, salt = 0): { x: number; y: number } | null {
+  const cx = at.x;
+  const cy = at.y;
+  let best: { x: number; y: number } | null = null;
+  let bestScore = -1e9;
+  const r = Math.ceil(FOREST_REACH);
+  for (let y = Math.max(1, Math.floor(cy) - r); y <= Math.min(world.H - 2, Math.floor(cy) + r); y++) {
+    for (let x = Math.max(1, Math.floor(cx) - r); x <= Math.min(world.W - 2, Math.floor(cx) + r); x++) {
+      const d = hyp(x + 0.5 - cx, y + 0.5 - cy);
+      if (d < 2.5 || d > FOREST_REACH) continue;
+      if (!isFreeLand(world, x, y)) continue;
+      const t = world.terrain[y * world.W + x];
+      if (t !== T.GRASS && t !== T.FOREST) continue;
+      if (p.explored[y * world.W + x] === 0) continue;
+      if (world.waterDist[y * world.W + x] <= 1) continue;
+      if (hubWithin(world, x, y, 4)) continue;
+      const crowd = treesNear(world, x, y, 2);
+      if (crowd > 4) continue;
+      // near the lodge and near other trees (a copse, not a lone stick), a little scatter so spots differ between tries
+      const score = -d * 0.35 + Math.min(crowd, 3) * 0.6 + hashUnit(x, y, 211 + salt) * 0.8;
+      if (score > bestScore) {
+        bestScore = score;
+        best = { x, y };
+      }
+    }
+  }
+  return best;
+}

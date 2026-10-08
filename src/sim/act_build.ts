@@ -259,12 +259,12 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
     if (old.upgrading) return 'it is already being rebuilt';
     return null;
   }
-  if (isFacilityType(type) || type === 'storehouse') {
+  if (isFacilityType(type) || type === 'storehouse' || type === 'forester' || type === 'stockyard') {
     // one of each kind of workplace (a second quarry only at a different outcrop). With scaled rules, one per settlement: only a
     // workplace within the settlement radius of where this one would stand counts.
     const radius = at ? rules.facilityRadius : Infinity;
-    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
-    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
+    for (const b of world.buildings) if (b.type === type && ((type !== 'quarry' && type !== 'mine') || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
+    for (const s of world.sites) if (s.type === type && ((type !== 'quarry' && type !== 'mine') || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
     return null;
   }
   // homes and fires: one project at a time per household

@@ -52,6 +52,9 @@ const SPEC: Record<BuildingType, Spec> = {
   hall: { frame: 'timber', gable: true, footing: 'blocks', reveal: 0.3 },
   well: { frame: 'none', gable: false, footing: 'ring', reveal: 0.25 },
   cellar: { frame: 'none', gable: false, footing: 'blocks', reveal: 0.35 },
+  mine: { frame: 'posts', gable: false, footing: 'none', reveal: 0.2 },
+  forester: { frame: 'timber', gable: false, footing: 'blocks', reveal: 0.3 },
+  stockyard: { frame: 'posts', gable: false, footing: 'none', reveal: 0.4 },
 };
 
 /** the order materials are stacked round a site, and which side of the plot each one goes to */

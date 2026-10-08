@@ -1,5 +1,8 @@
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
+/** buildings with nobody's name on the title that are everyone's by nature (a fire, and the expansion's shared service buildings) */
+const COMMON_TYPES: BuildingType[] = ['fire', 'well', 'stockyard', 'forester'];
+import { FOREST_MAX_SAPLINGS, FOREST_REACH, saplingsAround } from './forestry';
 import { CELLAR_SPOIL, foodLossOf } from './storage';
 import { WELL_CAP, WELL_MIN_CONDITION, WELL_REFILL } from './water';
 import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType } from './constants';
@@ -16,7 +19,7 @@ import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
 import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
-import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
+import type { BuildingType, Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
 
 import { hyp } from './util';
@@ -464,7 +467,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'building': {
       const b = e;
       const hh = world.households.find((h) => h.id === b.hhId);
-      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'fire' && b.type !== 'well' && !b.ops ? 'nobody (empty)' : 'everyone']];
+      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && !COMMON_TYPES.includes(b.type) && !b.ops ? 'nobody (empty)' : 'everyone']];
       const bars: EntityView['bars'] = [];
       if (b.type !== 'fire') bars.push({ label: 'Condition', value: b.condition, max: 100, tone: b.condition < 40 ? 'warn' : 'ok' });
       else {
@@ -490,13 +493,16 @@ export function describeEntity(world: World, id: number): EntityView | null {
         const water = b.store.items.water ?? 0;
         bars.push({ label: 'Water in the well', value: water, max: WELL_CAP, tone: water < 2 ? 'warn' : 'ok' });
         rows.push(['Seeps in', `1 unit every ${secondsText(WELL_REFILL)}${water >= WELL_CAP ? ' (full)' : b.condition < WELL_MIN_CONDITION ? ' (silted up: needs mending)' : ''}`]);
-        notes.push(BUILD_DEF.well.blurb);
+      }
+      if (b.type === 'forester') {
+        const young = saplingsAround(world, b);
+        rows.push(['Young trees', `${young} of at most ${FOREST_MAX_SAPLINGS} standing within ${FOREST_REACH} tiles (they take three days to come up)`]);
+        if (b.condition < 12) rows.push(['State', 'fallen into disrepair: nobody plants from it until it is mended']);
       }
       if (b.type === 'cellar') {
         rows.push(['Keeps food', `going off at ${Math.round(CELLAR_SPOIL * 100)}% of the ordinary pace`]);
         const lost = foodLossOf(world, hh);
         if (hh && lost >= 0.5) rows.push(['Lost lately', `about ${Math.round(lost)} unit${Math.round(lost) === 1 ? '' : 's'} of the household's food went off (fading)`]);
-        notes.push(BUILD_DEF.cellar.blurb);
       }
       if (b.upgrading) notes.push('Being rebuilt as a house: still lived in while the work goes on.');
       return { kind: 'building', ...base, title: describeEntityName(world, e), subtitle: `Built ${agoText(world, b.builtTick)}`, rows, bars, items: itemList(b.store.items), notes, position: { x: b.x + b.w / 2, y: b.y + b.h / 2 }, sections };

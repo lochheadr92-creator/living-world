@@ -81,8 +81,9 @@ export async function launch({ port = 9333, width = 1440, height = 900, profile 
   await send('Runtime.enable');
   await send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: false });
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  /** a screenshot; a .jpg file name gets a JPEG (a fifth of the size of the PNG, enough to read the page) */
   const shot = async (file) => {
-    const r = await send('Page.captureScreenshot', { format: 'png' });
+    const r = await send('Page.captureScreenshot', /\.jpe?g$/i.test(file) ? { format: 'jpeg', quality: 82 } : { format: 'png' });
     writeFileSync(file, Buffer.from(r.data, 'base64'));
   };
   /** a real key press (keyDown then keyUp), e.g. key(' ', 'Space', 32) or key('.', 'Period', 190) */

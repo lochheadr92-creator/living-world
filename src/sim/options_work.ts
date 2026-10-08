@@ -1,5 +1,6 @@
+import { buildable } from './expansion';
 import { newActivity } from './activities';
-import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
+import { ITEM_LABEL, BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
 import { baseHub, nearestHub } from './settlements';
@@ -386,6 +387,56 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
   }
 }
 
+/** Raw goods already cut and stacked at a stockyard this person knows are the nearer source (rich worlds: the yard is everyone's). */
+function collectRawLeaf(ctx: Ctx, item: RawMaterial, want: number, base: number, why: string, tag: string): void {
+  const { world, p } = ctx;
+  for (const b of beliefsByKind(p, ['building'])) {
+    if (b.btype !== 'stockyard') continue;
+    const n = Math.min(want, b.items?.[item] ?? 0, invRoom(world, p, item));
+    if (n < 1) continue;
+    if (recentFailure(world, p, b.id, 320)) {
+      addBlocked(ctx, 'withdraw', `Collect ${ITEM_LABEL[item]} from the stockyard`, b.id, 'tried recently and found none to take', tag);
+      continue;
+    }
+    const e = eta(ctx, b.x, b.y);
+    const dng = dangerAt(ctx, b.x, b.y);
+    const sc = new Scorer().add(why, base).add('already cut and stacked at the yard', 4).add('walking', -pen(e));
+    if (dng > 0) sc.add('wolf nearby', -22 * dng * traitMods(p).caution);
+    const util = sc.total * nightMult(ctx) * weatherMult(ctx);
+    addOption(ctx, {
+      kind: 'withdraw',
+      label: `Collect ${n} ${ITEM_LABEL[item]} from the stockyard`,
+      goal: why,
+      need: null,
+      util,
+      parts: sc.parts,
+      eta: e + 25,
+      key: `collect:${b.id}:${item}`,
+      targetId: b.id,
+      tag,
+      make: () => {
+        const spot = spotNear(world, p, b);
+        if (!spot) return null;
+        return newActivity(world, p, {
+          kind: 'withdraw',
+          label: `Collecting ${ITEM_LABEL[item]} from the stockyard`,
+          goal: why,
+          targetId: b.id,
+          targetType: 'building',
+          tx: b.x,
+          ty: b.y,
+          spotX: spot.x,
+          spotY: spot.y,
+          utility: util,
+          minCommit: 30,
+          maxTicks: 700,
+          data: { items: { [item]: n } },
+        });
+      },
+    });
+  }
+}
+
 function optMaterials(ctx: Ctx): void {
   const needs = materialNeeds(ctx);
   if (!needs.length) return;
@@ -409,6 +460,7 @@ function optMaterials(ctx: Ctx): void {
     const missing = need.n - have;
     if (missing <= 0) continue;
     if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) continue;
+    if (buildable(ctx.world, 'stockyard')) collectRawLeaf(ctx, item, missing, need.base * traitMods(ctx.p).work, need.why, need.tag);
     gatherMaterial(ctx, item, missing, need.base * traitMods(ctx.p).work, need.why, need.tag);
   }
 }

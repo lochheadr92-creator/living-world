@@ -213,6 +213,7 @@ export class Effects {
           }
           break;
         }
+        case 'mine':
         case 'quarry': {
           const st = workState(world, b);
           if (st.working && this.due(b.id * 8, simT, 0.55, 0.3)) {

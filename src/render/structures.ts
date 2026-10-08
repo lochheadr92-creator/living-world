@@ -4,7 +4,7 @@ import type { BuildingType } from '../sim/types';
 import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite } from './bld_food';
 import { HOUSE, houseSprite } from './bld_home';
 import { KILN, SMITHY, kilnSprite, quarrySprite, smithySprite, timberYardBack, timberYardFront } from './bld_work';
-import { cellarSprite, wellSprite } from './bld_service';
+import { cellarSprite, foresterSprite, mineSprite, stockyardSprite, wellSprite } from './bld_service';
 import { SpriteCache, classicBuildingSprite } from './sprites';
 import type { Sprite } from './sprites';
 
@@ -40,6 +40,12 @@ export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: num
       return [wellSprite(cache, variant)];
     case 'cellar':
       return [cellarSprite(cache, variant)];
+    case 'mine':
+      return [mineSprite(cache, variant)];
+    case 'forester':
+      return [foresterSprite(cache, variant)];
+    case 'stockyard':
+      return [stockyardSprite(cache, variant)];
     default:
       // a kind of building this renderer has no drawing for yet stands as a plain store rather than breaking the frame
       return [classicBuildingSprite(cache, 'storehouse', variant)];
@@ -82,6 +88,9 @@ const STRUCT_TABLE: Record<BuildKind, StructMeta> = {
   hall: { plinth: HALL.plinth, wall: HALL.wall, top: HALL.louvre.z + 8, click: 134, chimney: HALL.louvre },
   well: { plinth: 8, wall: 12, top: 42, click: 48 },
   cellar: { plinth: 0, wall: 18, top: 30, click: 40 },
+  mine: { plinth: 0, wall: 28, top: 62, click: 66 },
+  forester: { plinth: 0, wall: 22, top: 40, click: 48 },
+  stockyard: { plinth: 0, wall: 14, top: 30, click: 40 },
 };
 
 /** measurements by building type; a type this file does not know yet is measured like a plain store, so a new kind never breaks a frame */

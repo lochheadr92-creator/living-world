@@ -17,6 +17,8 @@ export const MAP_H = 80;
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
 export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
+/** the raw goods a stockyard takes (options_work.ts isRawMaterial is the same list as a type guard) */
+export const RAW_MATERIALS: ItemKind[] = ['wood', 'stone', 'clay', 'ore'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
@@ -290,6 +292,45 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     role: 'store',
     blurb: 'A stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at under a third of the ordinary pace. Food and flour only; a household keeps its own.',
   }),
+  mine: bd({
+    w: 2,
+    h: 2,
+    cost: { wood: 9, stone: 3 },
+    work: 440,
+    cap: 60,
+    workers: 3,
+    label: 'mine',
+    sleepers: 0,
+    protect: 0,
+    role: 'work',
+    blurb: 'A timbered adit driven into an ore vein: ore comes out two or three loads at a time and is stacked at the head of the shaft. Needs a pick; the vein is finite.',
+  }),
+  stockyard: bd({
+    w: 2,
+    h: 2,
+    cost: { wood: 9, stone: 2 },
+    work: 300,
+    cap: 150,
+    workers: 2,
+    label: 'stockyard',
+    sleepers: 0,
+    protect: 0,
+    role: 'store',
+    blurb: 'A fenced yard by the houses where logs, stone, clay and ore are stacked for whoever builds or works next. Raw goods only: finished goods belong in the storehouse.',
+  }),
+  forester: bd({
+    w: 2,
+    h: 1,
+    cost: { wood: 8, stone: 2 },
+    work: 320,
+    cap: 24,
+    workers: 2,
+    label: "forester's lodge",
+    sleepers: 0,
+    protect: 0,
+    role: 'service',
+    blurb: 'A low timber lodge with a nursery bed in front. Whoever has the time sets young trees on the open ground round about; they take three days to come up, and the wood they grow is real wood.',
+  }),
   well: bd({
     w: 1,
     h: 1,
@@ -306,7 +347,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
 };
 
 /** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
-export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar'];
+export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard'];
 
 /** every kind of building a household can live in */
 export const isHomeType = (t: string | undefined): boolean => t === 'lean_to' || t === 'hut' || t === 'house';
@@ -335,10 +376,13 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   hall: 0.0012,
   well: 0.0007,
   cellar: 0.0008,
+  mine: 0.0012,
+  forester: 0.0013,
+  stockyard: 0.0009,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
-export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone', cellar: 'stone' };
+export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks', well: 'stone', cellar: 'stone', mine: 'wood', forester: 'wood' };
 export const REPAIR_FALLBACK_GAIN = 18;
 /** a building site nobody has worked on or supplied for this long is given up (its materials are left on the ground) */
 export const SITE_PATIENCE = DAY * 4;

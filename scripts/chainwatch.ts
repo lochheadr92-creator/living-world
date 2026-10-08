@@ -4,7 +4,8 @@
 // It only watches: nothing here changes the world.
 import { writeFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
-import { RICH_ONLY_BUILDINGS, DAY } from '../src/sim/constants';
+import { BUILD_DEF, RICH_ONLY_BUILDINGS, DAY } from '../src/sim/constants';
+import type { BuildingType } from '../src/sim/types';
 import { createWorld } from '../src/sim/factory';
 import { settingsForProfile } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
@@ -22,14 +23,22 @@ const dynamics = opt('dynamics', 'rich') as 'authored' | 'rich';
 const w = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
 const types: string[] = [...RICH_ONLY_BUILDINGS];
 const planned: Record<string, { tick: number; by: string }[]> = {};
-const uses: Record<string, { activities: number; people: Set<number>; first: number }> = {};
+const uses: Record<string, { activities: number; people: Set<number>; first: number; firstUse: { day: number; by: string; label: string; goal: string } }> = {};
+/** the causal trace: who decided to lay out the first one of each kind, and the problem they gave as their reason (the option's goal) */
+const decided: Record<string, { day: number; by: string; why: string }> = {};
 const seenSite = new Set<number>();
+const dayOf = (t: number): number => Math.round((t / DAY) * 10) / 10;
 w.hooks = {
   onActivityStart: (p, a) => {
+    if (a.kind === 'plan_site') {
+      const t = a.data.type as string;
+      if (types.includes(t) && !decided[t]) decided[t] = { day: dayOf(w.tick), by: p.name, why: a.goal };
+      return;
+    }
     if (a.targetType !== 'building' || !a.targetId) return;
     const e = w.byId.get(a.targetId);
     if (!e || e.ent !== 'building' || !types.includes(e.type)) return;
-    const u = (uses[e.type] ??= { activities: 0, people: new Set(), first: w.tick });
+    const u = (uses[e.type] ??= { activities: 0, people: new Set(), first: w.tick, firstUse: { day: dayOf(w.tick), by: p.name, label: a.label, goal: a.goal } });
     u.activities++;
     u.people.add(p.id);
   },
@@ -52,6 +61,11 @@ const report = types.map((t) => ({
   completed: w.buildings.filter((b) => b.type === t).length,
   standingNow: w.buildings.filter((b) => b.type === t).map((b) => ({ id: b.id, at: [b.x, b.y], condition: Math.round(b.condition), water: b.store.items.water ?? 0 })),
   uses: uses[t] ? { activities: uses[t].activities, people: uses[t].people.size } : { activities: 0, people: 0 },
+  trace: {
+    decided: decided[t] ?? null,
+    finished: (w.events as unknown as { kind: string; text?: string; tick?: number }[]).filter((e) => e.kind === 'build' && /finished/.test(e.text ?? '') && (e.text ?? '').includes(BUILD_DEF[t as BuildingType].label)).slice(0, 2).map((e) => ({ day: dayOf(e.tick ?? 0), text: e.text })),
+    firstUse: uses[t]?.firstUse ?? null,
+  },
   openSites: w.sites.filter((s) => s.type === t).map((s) => ({ id: s.id, status: s.status, work: Math.round((s.work / s.workTotal) * 100) + '%' })),
 }));
 const out = {

@@ -89,3 +89,112 @@ export function cellarSprite(cache: SpriteCache, variant: number): Sprite {
     ctx.fillRect(vent[0] - 2, vent[1] - 13, 4, 2);
   });
 }
+
+// ───────────────────────────── mine (2 x 2) ─────────────────────────────
+// A bank of bare rock and earth with a timbered portal, a spoil heap of dark ore at its foot and a little cart on a plank track.
+export function mineSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`mine${v}`, 184, 150, 92, 94, (ctx) => {
+    const p = mk(2, 2);
+    groundShadow(ctx, 66, 22, 0.3, 4);
+    const rock = ['#8d877a', '#837f76', '#948b78', '#7f7c72'][v];
+    // the bank: two steps of rock, grassed along the top
+    box(ctx, p, 0.1, 1.9, 0.08, 0.86, 0, 26, { top: '#7a9a56', left: shade(rock, 1.04), right: shade(rock, 0.74), stroke: 'rgba(30,26,20,0.45)' });
+    box(ctx, p, 0.3, 1.7, 0.08, 0.5, 26, 44, { top: '#80a05a', left: shade(rock, 1.0), right: shade(rock, 0.72), stroke: 'rgba(30,26,20,0.45)' });
+    coursesL(ctx, p, 0.1, 1.9, 0.86, 0, 26, 3, 'rgba(50,44,36,0.4)');
+    // the portal: two posts and a lintel round a black opening, props inside
+    const wood = '#7d5a37';
+    box(ctx, p, 0.62, 1.38, 0.84, 0.92, 0, 22, boxTones('#2a2420', 'rgba(10,8,6,0.7)'));
+    box(ctx, p, 0.56, 0.68, 0.84, 0.96, 0, 26, boxTones(wood, 'rgba(25,14,6,0.6)'));
+    box(ctx, p, 1.32, 1.44, 0.84, 0.96, 0, 26, boxTones(wood, 'rgba(25,14,6,0.6)'));
+    box(ctx, p, 0.5, 1.5, 0.84, 0.96, 22, 28, boxTones(shade(wood, 1.1), 'rgba(25,14,6,0.6)'));
+    // spoil heap of dark ore and grey rubble at the foot
+    for (let i = 0; i < 12; i++) {
+      const q = p(0.2 + hashLike(v, i, 1) * 0.9, 1.12 + hashLike(v, i, 2) * 0.55, 0);
+      ellipse(ctx, q[0], q[1] - 1.5, 3 + hashLike(v, i, 3) * 3, 2.2, i % 3 === 0 ? '#5a5047' : shade('#3f3a38', 0.8 + hashLike(v, i, 4) * 0.5));
+    }
+    // a plank track and a cart
+    line(ctx, p(0.85, 0.96, 0), p(1.35, 1.7, 0), 'rgba(60,44,28,0.7)', 2);
+    line(ctx, p(1.05, 0.96, 0), p(1.55, 1.7, 0), 'rgba(60,44,28,0.7)', 2);
+    const c = p(1.22, 1.38, 4);
+    poly(ctx, [[c[0] - 8, c[1] - 7], [c[0] + 8, c[1] - 7], [c[0] + 6, c[1] + 1], [c[0] - 6, c[1] + 1]], '#6b4f30', 'rgba(25,14,6,0.7)', 0.8);
+    ellipse(ctx, c[0], c[1] - 8, 7, 2.6, '#4a423c');
+    ellipse(ctx, c[0] - 6, c[1] + 2, 2, 2, '#2b2420');
+    ellipse(ctx, c[0] + 6, c[1] + 2, 2, 2, '#2b2420');
+  });
+}
+
+function hashLike(a: number, b: number, c: number): number {
+  const x = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453;
+  return x - Math.floor(x);
+}
+
+// ───────────────────────────── forester's lodge (2 x 1) ─────────────────────────────
+// A low timber lodge with a turf-edged nursery bed in front: three staked seedlings and a bundle of stakes against the wall.
+export function foresterSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`forester${v}`, 130, 100, 65, 62, (ctx) => {
+    const p = mk(2, 1);
+    groundShadow(ctx, 48, 12, 0.3, 3);
+    const wood = ['#8a6a43', '#80633f', '#93714a', '#7a5d3b'][v];
+    // the lodge: a low box of timber under a turf-green roof
+    box(ctx, p, 0.1, 1.9, 0.05, 0.5, 0, 22, { top: '#6f8f4e', left: shade(wood, 1.05), right: shade(wood, 0.76), stroke: 'rgba(25,14,6,0.55)' });
+    box(ctx, p, 0.05, 1.95, 0.0, 0.55, 22, 28, { top: '#7da05a', left: '#7da05a', right: '#5f7f41', stroke: 'rgba(25,14,6,0.45)' });
+    faceL(ctx, p, 0.3, 0.7, 0.505, 0, 15, '#4b361f', 'rgba(25,14,6,0.6)', 0.9);
+    // the nursery bed: a low frame of boards with turned earth and seedlings
+    box(ctx, p, 0.2, 1.8, 0.62, 0.98, 0, 4, { top: '#5a4630', left: '#9a7a4e', right: '#6e5434', stroke: 'rgba(25,14,6,0.5)' });
+    for (let i = 0; i < 3; i++) {
+      const b0 = p(0.5 + i * 0.5, 0.8, 4);
+      line(ctx, b0, [b0[0], b0[1] - 7], '#8b6b45', 1.4);
+      ellipse(ctx, b0[0], b0[1] - 10, 4.2, 3.4, ['#5f9446', '#6aa24e', '#558a3e'][(i + v) % 3]);
+      ellipse(ctx, b0[0] - 1.5, b0[1] - 11.5, 2, 1.6, 'rgba(190,230,150,0.55)');
+    }
+    // stakes leaning on the wall
+    for (let i = 0; i < 4; i++) line(ctx, p(1.55 + i * 0.07, 0.56, 0), p(1.5 + i * 0.07, 0.56, 24), '#c4a373', 1.5);
+  });
+}
+
+// ───────────────────────────── stockyard (2 x 2) ─────────────────────────────
+// An open yard: trodden ground inside a post-and-rail fence with a gap at the front; the stacks are drawn from what is really in it.
+export function stockyardSprite(cache: SpriteCache, variant: number): Sprite {
+  const v = variant % 4;
+  return cache.get(`stockyard${v}`, 184, 120, 92, 74, (ctx) => {
+    const p = mk(2, 2);
+    groundShadow(ctx, 60, 20, 0.22, 4);
+    const earth = ['rgba(170,150,110,0.8)', 'rgba(160,145,115,0.8)', 'rgba(176,156,112,0.8)', 'rgba(158,142,108,0.8)'][v];
+    const [gx, gy] = p(1, 1, 0);
+    ellipse(ctx, gx, gy, 54, 26, earth);
+    const wood = '#7d5a37';
+    const rail = (a: [number, number, number], b: [number, number, number]): void => {
+      const q0 = p(a[0], a[1], a[2]);
+      const q1 = p(b[0], b[1], b[2]);
+      line(ctx, q0, q1, 'rgba(25,14,6,0.5)', 2.6);
+      line(ctx, q0, q1, wood, 1.6);
+    };
+    const post = (x: number, y: number): void => {
+      const q0 = p(x, y, 0);
+      const q1 = p(x, y, 16);
+      line(ctx, q0, q1, 'rgba(25,14,6,0.6)', 3.4);
+      line(ctx, q0, q1, shade(wood, 1.1), 2.2);
+    };
+    // back-left and back-right sides, then the two front sides with a gap in the front corner
+    const posts: [number, number][] = [
+      [0.08, 0.08], [0.7, 0.08], [1.32, 0.08], [1.92, 0.08],
+      [1.92, 0.7], [1.92, 1.32], [1.92, 1.92],
+      [0.08, 0.7], [0.08, 1.32], [0.08, 1.92],
+      [0.7, 1.92],
+    ];
+    for (const [x, y] of posts) post(x, y);
+    for (const z of [6, 13]) {
+      rail([0.08, 0.08, z], [1.92, 0.08, z]);
+      rail([1.92, 0.08, z], [1.92, 1.92, z]);
+      rail([0.08, 0.08, z], [0.08, 1.92, z]);
+      rail([0.08, 1.92, z], [0.7, 1.92, z]);
+    }
+    // a few chips and a stray stone on the ground
+    for (let i = 0; i < 6; i++) {
+      const q = p(0.3 + hashLike(v, i, 5) * 1.4, 0.3 + hashLike(v, i, 6) * 1.4, 0);
+      ellipse(ctx, q[0], q[1], 1.6 + hashLike(v, i, 7), 1, i % 2 ? '#b8a27a' : '#8f8a80');
+    }
+  });
+}

@@ -6,6 +6,7 @@ import { updateMood } from './mood';
 import { updateWells } from './water';
 import './act_build';
 import './act_farm';
+import './act_forestry';
 import './act_production';
 import './meals';
 import './welfare';

@@ -157,7 +157,8 @@ function builderShares(site: Site): Record<number, number> {
  * more evenly than that the workplace belongs to everyone. Halls and granaries are always common property.
  */
 function titleHolder(site: Site, shares: Record<number, number>): number {
-  if (site.type === 'hall' || site.type === 'granary' || site.type === 'well') return 0;
+  // common buildings have no household on the title, whoever laid them out: the hall, the granary, and the expansion's well, lodge and yard
+  if (site.type === 'hall' || site.type === 'granary' || site.type === 'well' || site.type === 'forester' || site.type === 'stockyard') return 0;
   if (!isFacilityType(site.type)) return site.hhId;
   let top = 0;
   let best = 0;
@@ -193,7 +194,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
   }
   const shares = builderShares(site);
   const owner = titleHolder(site, shares);
-  const b = createBuilding(world, site.type, site.x, site.y, isFacilityType(site.type) ? owner : site.hhId, { condition: 100, fuel: 0 });
+  const b = createBuilding(world, site.type, site.x, site.y, owner, { condition: 100, fuel: 0 });
   if (b.ops) {
     b.ops.builders = shares;
     b.ops.depositId = site.depositId ?? 0;

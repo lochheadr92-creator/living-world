@@ -1,5 +1,5 @@
 import { CELLAR_SPOIL, cellarAccepts } from './storage';
-import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
+import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT, RAW_MATERIALS } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { newCart } from './carts';
@@ -140,6 +140,7 @@ function trimEarmarks(b: Building): void {
 export function mayDeposit(b: Building, item: ItemKind): boolean {
   if (b.type === 'well') return false; // a well holds only the water that seeps into it
   if (b.type === 'cellar') return cellarAccepts(item);
+  if (b.type === 'stockyard') return RAW_MATERIALS.includes(item);
   if (!b.ops) return true;
   return acceptedAt(b.type).includes(item);
 }
@@ -342,8 +343,8 @@ export function startBlocker(world: World, b: Building, p: Person, r: Recipe): s
   }
   if (r.fromDeposit) {
     const dep = depositOf(world, b);
-    if (!dep) return 'no stone outcrop to cut';
-    if (dep.amount - dep.reserved < r.fromDeposit.n) return 'the outcrop is worked out';
+    if (!dep) return r.at === 'mine' ? 'no ore vein to dig' : 'no stone outcrop to cut';
+    if (dep.amount - dep.reserved < r.fromDeposit.n) return r.at === 'mine' ? 'the vein is worked out' : 'the outcrop is worked out';
   }
   const out = outputWeight(r);
   if (out > 0 && storeFreeWeight(b) - (r.fromDeposit ? 0 : 0) < out - weightOfList(r.inputs) * 0) {
@@ -379,7 +380,7 @@ export function startJob(world: World, b: Building, p: Person, r: Recipe, client
     if (dep) {
       dep.amount -= r.fromDeposit.n;
       bump(held, r.fromDeposit.item, r.fromDeposit.n);
-      world.hooks?.onTransfer?.({ from: 'source:' + dep.id, to: 'building:' + b.id, item: r.fromDeposit.item, n: r.fromDeposit.n, reason: 'cut from the outcrop' });
+      world.hooks?.onTransfer?.({ from: 'source:' + dep.id, to: 'building:' + b.id, item: r.fromDeposit.item, n: r.fromDeposit.n, reason: r.at === 'mine' ? 'dug from the vein' : 'cut from the outcrop' });
     }
   }
   const job: Job = {

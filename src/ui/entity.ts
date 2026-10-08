@@ -59,6 +59,9 @@ const BUILDING_ICON: Record<BuildingType, IconName> = {
   hall: 'hall',
   well: 'water',
   cellar: 'cube',
+  mine: 'pick',
+  forester: 'wood',
+  stockyard: 'wood',
 };
 
 /** a line that says what the thing is for, in plain words (buildings take theirs from the simulation's own table) */
@@ -461,6 +464,10 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
     if (b.type === 'granary') {
       const neglected = world.tick - Math.max(ops.tended, b.builtTick) >= GRANARY_TEND_EVERY;
       notes.push(neglected ? 'The bins have not been tended for days: grain here spoils faster than in a store.' : `The bins were last turned and aired ${agoText(world, Math.max(ops.tended, b.builtTick))}.`);
+    }
+    if (b.type === 'mine') {
+      const dep = ops.depositId ? world.byId.get(ops.depositId) : undefined;
+      if (dep && dep.ent === 'source') notes.push(dep.amount > 0 ? `The vein beside it still holds ${dep.amount} ore.` : 'The vein beside it is worked out.');
     }
     if (b.type === 'quarry') {
       const dep = ops.depositId ? world.byId.get(ops.depositId) : undefined;

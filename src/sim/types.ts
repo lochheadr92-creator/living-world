@@ -189,6 +189,7 @@ export type ActivityKind =
   | 'eat_store'
   | 'drink'
   | 'fetch_water'
+  | 'plant_tree'
   | 'gather'
   | 'deposit'
   | 'withdraw'
@@ -510,7 +511,10 @@ export type BuildingType =
   | 'hall'
   // the village-economy expansion (rich dynamics only; docs/BUILDINGS.md)
   | 'well'
-  | 'cellar';
+  | 'cellar'
+  | 'mine'
+  | 'forester'
+  | 'stockyard';
 
 export interface Building {
   ent: 'building';

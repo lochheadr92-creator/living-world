@@ -52,6 +52,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   eat_store: 'eating from stores',
   drink: 'drinking',
   fetch_water: 'fetching water',
+  plant_tree: 'planting a tree',
   gather: 'gathering',
   deposit: 'storing goods',
   withdraw: 'taking from storage',

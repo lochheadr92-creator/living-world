@@ -21,7 +21,7 @@ for (const t of Object.keys(BUILD_DEF) as (keyof typeof BUILD_DEF)[]) {
 
 out += '\n## Recipes (what a workplace makes)\n\n| Workplace | Batch | Inputs | Fuel | Work | Burn | Products | Waste (recorded) | Tool | Skill | Workers | Why anyone makes it |\n|---|---|---|---|---|---|---|---|---|---|---|---|\n';
 for (const r of RECIPES) {
-  const prod = r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : r.cartOut ? 'a handcart' : r.fromDeposit ? `${r.fromDeposit.n} ${ITEM_LABEL[r.fromDeposit.item]} cut from the outcrop` : items(r.outputs);
+  const prod = r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : r.cartOut ? 'a handcart' : r.fromDeposit ? `${r.fromDeposit.n} ${ITEM_LABEL[r.fromDeposit.item]} ${r.at === 'mine' ? 'dug from the vein' : 'cut from the outcrop'}` : items(r.outputs);
   out += `| ${BUILD_DEF[r.at].label} | ${r.label} | ${r.fromDeposit ? '—' : items(r.inputs)} | ${items(r.fuel)} | ${secs(r.work)} | ${secs(r.burn)} | ${prod} | ${Object.keys(r.waste).length ? `${items(r.waste)} (${r.wasteWhy})` : '—'} | ${r.tool ? `${r.tool.kind}${r.tool.required ? ' (required)' : ` (×${r.tool.speed} time)`}` : '—'} | ${r.skill ?? '—'} | ${r.workers} | ${r.benefit} |\n`;
 }
 
