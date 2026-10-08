@@ -2,8 +2,8 @@
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { addFx, addLog } from './events';
-import { FOREST_REACH, FOREST_MAX_SAPLINGS, PLANT_WORK, plantingSpot, roomForTrees, saplingsAround } from './forestry';
-import { noteFailure, observe } from './knowledge';
+import { FOREST_REACH, FOREST_MAX_SAPLINGS, PLANT_WORK, roomForTrees, saplingsAround, seedTreeNear } from './forestry';
+import { delBelief, noteFailure, observe } from './knowledge';
 import { isFreeLand } from './registry';
 import { makeSource } from './sources';
 import { hyp } from './util';
@@ -19,7 +19,10 @@ registerHandler('plant_tree', {
   pose: () => 'plant',
   begin(world, p, a) {
     const b = lodgeOf(world, a.targetId);
-    if (!b) return 'the lodge is gone';
+    if (!b) {
+      delBelief(p, a.targetId);
+      return 'the lodge is gone';
+    }
     observe(world, p, b);
     const no = (why: string): string => {
       noteFailure(world, p, b.id, why);
@@ -28,14 +31,12 @@ registerHandler('plant_tree', {
     if (b.condition < 12) return no('the lodge has fallen into disrepair');
     if (saplingsAround(world, b) >= FOREST_MAX_SAPLINGS) return no('the lodge already has all the young trees it can look after');
     if (!roomForTrees(world)) return no('the wood is as thick as it should be');
-    let x = Math.floor(a.tx);
-    let y = Math.floor(a.ty);
-    if (!isFreeLand(world, x, y) || hyp(x + 0.5 - (b.x + b.w / 2), y + 0.5 - (b.y + b.h / 2)) > FOREST_REACH + 1) {
-      const spot = plantingSpot(world, p, { x: b.x + b.w / 2, y: b.y + b.h / 2 }, 7);
-      if (!spot) return no('there is no good open ground left near the lodge');
-      x = spot.x;
-      y = spot.y;
-    }
+    if (!seedTreeNear(world, b)) return no('no grown tree near the lodge to raise a young one from');
+    const x = Math.floor(a.tx);
+    const y = Math.floor(a.ty);
+    if (!isFreeLand(world, x, y)) return no('the ground there is taken');
+    if (hyp(x + 0.5 - (b.x + b.w / 2), y + 0.5 - (b.y + b.h / 2)) > FOREST_REACH + 1) return no('that spot is too far from the lodge');
+    if (hyp(x + 0.5 - p.x, y + 0.5 - p.y) > 2.5) return no('not at the planting spot');
     a.data.px = x;
     a.data.py = y;
     a.tx = x + 0.5;

@@ -290,7 +290,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     sleepers: 0,
     protect: 0,
     role: 'store',
-    blurb: 'A stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at under a third of the ordinary pace. Food and flour only; a household keeps its own.',
+    blurb: 'A stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at about a sixth of the ordinary pace, slower than in a tended granary. Food and flour only; a household keeps its own.',
   }),
   mine: bd({
     w: 2,
@@ -342,10 +342,12 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     sleepers: 0,
     protect: 0,
     role: 'service',
-    blurb: 'A stone-lined shaft with a windlass. Water seeps in slowly and is drawn by whoever comes: a few units a day, shared, for drinking and carrying home.',
+    blurb: 'A stone-lined shaft with a windlass. Water seeps in a unit every few seconds, some fifty a day, and is drawn by whoever comes, for drinking and carrying home.',
   }),
 };
 
+/** buildings that are everyone's by nature: no household on the title whoever laid them out, mended by those who use them, their sites a shared project */
+export const COMMON_BUILDINGS: BuildingType[] = ['well', 'stockyard', 'forester'];
 /** building types that exist only in worlds with rich dynamics: nothing in any other world plans, draws or counts them */
 export const RICH_ONLY_BUILDINGS: BuildingType[] = ['well', 'cellar', 'mine', 'forester', 'stockyard'];
 

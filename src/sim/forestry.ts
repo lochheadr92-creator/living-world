@@ -11,7 +11,7 @@
 import { hubWithin } from './settlements';
 import { treesNear } from './sources';
 import { hashUnit } from './rng';
-import { isFreeLand } from './registry';
+import { isFreeLand, isWalkable } from './registry';
 import { hyp } from './util';
 import type { Belief, Building, Person, World } from './types';
 import { T } from './types';
@@ -40,6 +40,34 @@ export function knownTreesNear(p: Person, beliefs: Belief[], x: number, y: numbe
   let n = 0;
   for (const b of beliefs) if (b.kind === 'tree' && hyp(b.x - x, b.y - y) <= FOREST_THIN_RADIUS) n++;
   return n;
+}
+
+/** a grown tree with wood in it within reach of the lodge: what a young tree is raised from (the planner asks the same of their beliefs) */
+export function seedTreeNear(world: World, b: Building): boolean {
+  const cx = b.x + b.w / 2;
+  const cy = b.y + b.h / 2;
+  for (const s of world.sources) if (s.type === 'tree' && s.growth >= 1 && s.amount >= 2 && hyp(s.x + 0.5 - cx, s.y + 0.5 - cy) <= FOREST_REACH) return true;
+  return false;
+}
+
+/** where to stand to set a tree on this tile: the walkable neighbour nearest the person, or the tile itself */
+export function standBeside(world: World, p: Person, spot: { x: number; y: number }): { x: number; y: number } {
+  let best = { x: spot.x + 0.5, y: spot.y + 0.5 };
+  let bestD = Infinity;
+  for (let dy = -1; dy <= 1; dy++) {
+    for (let dx = -1; dx <= 1; dx++) {
+      if (!dx && !dy) continue;
+      const x = spot.x + dx;
+      const y = spot.y + dy;
+      if (!isWalkable(world, x, y)) continue;
+      const d = hyp(x + 0.5 - p.x, y + 0.5 - p.y);
+      if (d < bestD) {
+        bestD = d;
+        best = { x: x + 0.5, y: y + 0.5 };
+      }
+    }
+  }
+  return best;
 }
 
 /** may another young tree be set in this world at all? (a quarter above the natural cap is the ceiling) */

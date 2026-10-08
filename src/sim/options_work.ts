@@ -1,6 +1,6 @@
 import { buildable } from './expansion';
 import { newActivity } from './activities';
-import { ITEM_LABEL, BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
+import { COMMON_BUILDINGS, ITEM_LABEL, BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
 import { baseHub, nearestHub } from './settlements';
@@ -107,8 +107,8 @@ export function repairStake(ctx: Ctx, b: Belief): number {
   if (b.btype === 'storehouse' || b.hh === ctx.p.hhId) return 1;
   // having promised to mend it
   if (ctx.p.commitments.some((c) => c.status === 'active' && c.kind === 'work' && c.destKind === 'building' && c.destId === b.id)) return 1;
-  // a common hall, granary or workshop belongs to everybody: those who use it keep it up
-  if (b.hh === 0 && isFacilityType(b.btype as BuildingType) && b.btype !== undefined) return 0.5 + 0.5 * ctx.p.traits.generosity;
+  // a common hall, granary, workshop, well, yard or lodge belongs to everybody: those who use it keep it up
+  if (b.hh === 0 && b.btype !== undefined && (isFacilityType(b.btype as BuildingType) || COMMON_BUILDINGS.includes(b.btype as BuildingType))) return 0.5 + 0.5 * ctx.p.traits.generosity;
   if (!isHomeType(b.btype) || !b.hh) return 0;
   const { world, p } = ctx;
   let dwellers = 0;
@@ -136,8 +136,8 @@ export function siteNoun(why: string, btype?: string): string {
 
 export function siteRelation(ctx: Ctx, b: Belief): { ok: boolean; mult: number; why: string } {
   if (b.hh === ctx.p.hhId) return { ok: true, mult: 1, why: 'my household’s' };
-  // a workshop, granary or hall will serve everyone: people are glad to help raise one
-  if (b.btype && isFacilityType(b.btype as BuildingType)) return { ok: true, mult: 0.38 + 0.5 * ctx.p.traits.generosity + 0.22 * ctx.p.traits.sociability, why: 'a shared project' };
+  // a workshop, granary, hall, well, yard or lodge will serve everyone: people are glad to help raise one
+  if (b.btype && (isFacilityType(b.btype as BuildingType) || COMMON_BUILDINGS.includes(b.btype as BuildingType))) return { ok: true, mult: 0.38 + 0.5 * ctx.p.traits.generosity + 0.22 * ctx.p.traits.sociability, why: 'a shared project' };
   if (b.hh === 0) return { ok: true, mult: 0.45 + 0.7 * ctx.p.traits.generosity, why: 'a shared project' };
   const f = friendlyTo(ctx, b.hh ?? 0);
   if (f >= 28) return { ok: true, mult: 0.35 + (f - 28) / 100 + 0.25 * ctx.p.traits.generosity, why: 'a friend’s' };
@@ -211,7 +211,7 @@ function optDepositFood(ctx: Ctx): void {
         if (!spot) return null;
         return newActivity(world, p, {
           kind: 'deposit',
-          label: mine ? 'Bringing food home' : 'Taking food to the storehouse',
+          label: cellar ? 'Taking food to the cellar' : mine ? 'Bringing food home' : 'Taking food to the storehouse',
           goal: mine ? 'to feed the household' : 'to share with the community',
           targetId: b.id,
           targetType: 'building',
@@ -411,7 +411,7 @@ function collectRawLeaf(ctx: Ctx, item: RawMaterial, want: number, base: number,
       util,
       parts: sc.parts,
       eta: e + 25,
-      key: `collect:${b.id}:${item}`,
+      key: `collect-raw:${b.id}:${item}`,
       targetId: b.id,
       tag,
       make: () => {

@@ -14,7 +14,7 @@ import { ORDINARY_RULES, rulesOf, within } from './rules';
 import { mintTool, taskMultiplier, wearFor } from './tools';
 import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
-import { clamp } from './util';
+import { clamp, hyp } from './util';
 import { itemsToText } from './people';
 
 // ───────────────────────── build ─────────────────────────
@@ -382,6 +382,26 @@ registerHandler('claim_home', {
     const cur = hh.homeId ? world.byId.get(hh.homeId) : null;
     if (!cur || (cur.ent === 'building' && (cur.type === 'lean_to' || isSolidHome(b.type)))) hh.homeId = b.id;
     addEvent(world, 'survival', `${p.name} moved into an empty ${buildingLabel(b.type)}.`, [p.id], b.x, b.y);
+    // a cellar left behind by a household that is gone goes with the house (rich worlds: there are no cellars elsewhere)
+    if (buildable(world, 'cellar') && isHomeType(b.type) && !world.buildings.some((c) => c.type === 'cellar' && c.hhId === hh.id)) {
+      const cx = b.x + b.w / 2;
+      const cy = b.y + b.h / 2;
+      let orphan: Building | null = null;
+      let best = 8;
+      for (const c of world.buildings) {
+        if (c.type !== 'cellar' || c.hhId !== 0) continue;
+        const d = hyp(c.x + c.w / 2 - cx, c.y + c.h / 2 - cy);
+        if (d <= best) {
+          best = d;
+          orphan = c;
+        }
+      }
+      if (orphan) {
+        orphan.hhId = hh.id;
+        observe(world, p, orphan);
+        addLog(world, p, 'work', 'Took over the cellar behind the house.');
+      }
+    }
     observe(world, p, b);
     return 'done';
   },

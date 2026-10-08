@@ -321,13 +321,13 @@ registerHandler('drink', {
     if (a.targetType === 'building') {
       const well = wellFor(world, p, a);
       if (typeof well === 'string') return well;
-      // the first unit is drawn at once; the rest as the drinking goes on (see `work`), so water leaves the well as it is drunk
-      if (consume(world, well.store.items, 'water', 1, 'drunk at a well') < 1) {
+      // units are drawn as the drinking goes on (see `work`), one whenever the last is used up, so no more leaves the well than is drunk
+      if ((well.store.items.water ?? 0) < 1) {
         noteFailure(world, p, a.targetId, 'the well was dry');
         return 'the well is dry';
       }
       a.data.well = well.id;
-      a.data.credit = WATER_VALUE;
+      a.data.credit = 0;
       a.data.wx = well.x + well.w / 2;
       a.data.wy = well.y + well.h / 2;
       a.duration = Math.ceil((97 - p.needs.thirst) / 2.8) + 3;
@@ -504,7 +504,7 @@ registerHandler('deposit', {
       const moved = a.data.moved as Record<string, number> | undefined;
       const txt = moved ? Object.entries(moved).map(([k, n]) => `${n} ${k}`).join(', ') : `${a.cycle} items`;
       const e = world.byId.get(a.targetId);
-      const where = e && e.ent === 'site' ? 'the building site' : e && e.ent === 'building' ? 'the ' + (e.type === 'storehouse' ? 'storehouse' : 'home store') : 'the pile';
+      const where = e && e.ent === 'site' ? 'the building site' : e && e.ent === 'building' ? 'the ' + (e.type === 'storehouse' || e.type === 'stockyard' || e.type === 'cellar' ? e.type : 'home store') : 'the pile';
       addLog(world, p, 'work', `Put ${txt} into ${where}.`);
     }
   },

@@ -1,11 +1,11 @@
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
 /** buildings with nobody's name on the title that are everyone's by nature (a fire, and the expansion's shared service buildings) */
-const COMMON_TYPES: BuildingType[] = ['fire', 'well', 'stockyard', 'forester'];
+const COMMON_TYPES: BuildingType[] = ['fire', ...COMMON_BUILDINGS];
 import { FOREST_MAX_SAPLINGS, FOREST_REACH, saplingsAround } from './forestry';
 import { CELLAR_SPOIL, foodLossOf } from './storage';
 import { WELL_CAP, WELL_MIN_CONDITION, WELL_REFILL } from './water';
-import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType } from './constants';
+import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, COMMON_BUILDINGS } from './constants';
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';

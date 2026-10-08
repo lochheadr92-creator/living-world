@@ -28,11 +28,20 @@ export function yardRoom(b: Belief): number {
 
 /** mean distance from a point of the nearest `n` known trees that still have wood in them; Infinity when none are known */
 export function woodDistance(trees: Belief[], x: number, y: number, n = 5): number {
-  const d = trees
-    .filter((b) => b.amount >= 2)
-    .map((b) => hyp(b.x - x, b.y - y))
-    .sort((a, c) => a - c)
-    .slice(0, n);
-  if (!d.length) return Infinity;
-  return d.reduce((s, v) => s + v, 0) / d.length;
+  // (one pass keeping the n smallest: this runs at every planning review until a yard is known)
+  const best: number[] = [];
+  for (const b of trees) {
+    if (b.amount < 2) continue;
+    const d = hyp(b.x - x, b.y - y);
+    if (best.length < n) best.push(d);
+    else {
+      let worst = 0;
+      for (let i = 1; i < best.length; i++) if (best[i] > best[worst]) worst = i;
+      if (d < best[worst]) best[worst] = d;
+    }
+  }
+  if (!best.length) return Infinity;
+  let sum = 0;
+  for (const d of best) sum += d;
+  return sum / best.length;
 }

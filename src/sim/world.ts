@@ -264,6 +264,7 @@ export function hashWorld(world: World): string {
   }
   for (const m of world.meals) push(`M${m.id}:${m.status},${m.servings},${m.reserved},${m.arrived.length},${m.ate.length}`);
   if (world.settings.dynamics === 'rich') {
+    for (const h of world.households) if (h.lost) push(`L${h.id}:${r4(h.lost.units)},${h.lost.tick}`);
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length + ',' + (p.mood.breakUntil ?? 0) : '-'}`);
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }

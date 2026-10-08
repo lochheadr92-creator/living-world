@@ -8,7 +8,7 @@ import { DAY, isFoodKind } from './constants';
 import { isRich } from './mood';
 import type { Household, ItemKind, World } from './types';
 
-export const CELLAR_SPOIL = 0.3;
+export const CELLAR_SPOIL = 0.15;
 export const LOSS_HALF_LIFE = DAY * 2;
 /** a household that has found this much gone off lately (fading) thinks of a cellar */
 export const LOSS_THRESHOLD = 4;

@@ -1,7 +1,7 @@
 import { buildable } from './expansion';
 import { LOSS_THRESHOLD, foodLossOf } from './storage';
 import { WELL_FAR, WELL_REACH } from './water';
-import { FOREST_THIN, knownTreesNear, plantingSpot } from './forestry';
+import { FOREST_REACH, FOREST_THIN, knownTreesNear, plantingSpot, standBeside } from './forestry';
 import { YARD_FAR, YARD_RESERVE, YARD_TARGET, woodDistance, yardRoom } from './stockyard';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, RAW_MATERIALS, REPAIR_USES, TOOL_DEFS, WEIGHT, isHomeType, isSolidHome, workRules } from './constants';
@@ -870,7 +870,8 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     const hy = ctx.home.y + ctx.home.h / 2;
     let shore = Infinity;
     for (const b of beliefsByKind(p, ['water'])) shore = Math.min(shore, hyp(b.x - hx, b.y - hy));
-    const wellNear = beliefsByKind(p, ['building', 'site']).some((b) => b.btype === 'well' && hyp(b.x - hx, b.y - hy) < WELL_REACH);
+    // (a well is laid out up to 8 tiles from home and may not stand within WELL_REACH of another: a well that near is 'near enough')
+    const wellNear = beliefsByKind(p, ['building', 'site']).some((b) => b.btype === 'well' && hyp(b.x - hx, b.y - hy) < WELL_REACH + 8);
     const neighbours = beliefsByKind(p, ['building']).filter((b) => isHomeType(b.btype) && b.id !== ctx.home!.id && hyp(b.x - hx, b.y - hy) < 10).length;
     if (!wellNear && shore > WELL_FAR && shore < Infinity && (ctx.members.length >= 2 || neighbours >= 2)) {
       const s = 0.55 + 0.03 * Math.min(15, shore - WELL_FAR) + 0.05 * Math.min(neighbours, 4);
@@ -901,7 +902,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   }
   // a mine: a smithy is known, its ore is running short or tools are wearing out, and there is a vein with plenty in it (rich worlds)
   if (buildable(world, 'mine') && !knowsOfAny(ctx, 'mine') && knowsOfAny(ctx, 'smithy')) {
-    const veins = beliefsByKind(p, ['ore_vein']).filter((b) => b.amount >= 12 && world.byId.get(b.id));
+    const veins = beliefsByKind(p, ['ore_vein']).filter((b) => b.amount >= 12);
     const smithy = beliefsByKind(p, ['building']).find((b) => b.btype === 'smithy');
     if (veins.length > 0 && smithy) {
       // (an idle smithy with bare shelves is not a demand for ore: someone has to want iron, which today means a tool of theirs wearing out)
@@ -930,16 +931,19 @@ function optStockYard(ctx: Ctx): void {
   const { world, p } = ctx;
   if (!buildable(world, 'stockyard') || world.tick < DAY * 5) return;
   const yard = beliefsByKind(p, ['building'])
-    .filter((b) => b.btype === 'stockyard' && world.byId.get(b.id))
+    .filter((b) => b.btype === 'stockyard')
     .sort((a, c) => hyp(a.x - p.x, a.y - p.y) - hyp(c.x - p.x, c.y - p.y))[0];
   if (!yard) return;
   const room = yardRoom(yard);
   const e = eta(ctx, yard.x, yard.y);
+  // what this person is carrying for a purpose of their own (a site, a repair, a tool, the fire) is not spare
+  const needed: Partial<Record<ItemKind, number>> = {};
+  for (const nd of materialNeeds(ctx)) needed[nd.item] = (needed[nd.item] ?? 0) + nd.n;
   const items: Items = {};
   let w = 0;
   let n = 0;
   for (const k of RAW_MATERIALS) {
-    const spare = unitsOf(p.inv[k]) - (YARD_RESERVE[k] ?? 0);
+    const spare = unitsOf(p.inv[k]) - (YARD_RESERVE[k] ?? 0) - (needed[k] ?? 0);
     const take = Math.min(spare, Math.floor((room - w) / WEIGHT[k]));
     if (take >= 1) {
       items[k] = take;
@@ -948,8 +952,7 @@ function optStockYard(ctx: Ctx): void {
     }
   }
   if (n > 0) {
-    if (recentFailure(world, p, yard.id, 320)) addBlocked(ctx, 'deposit', 'Stack materials at the stockyard', yard.id, 'tried recently and found no room', 'store');
-    else {
+    {
       const target = (YARD_TARGET.wood ?? 0) * WEIGHT.wood + (YARD_TARGET.stone ?? 0) * WEIGHT.stone;
       const empty = Math.max(0, Math.min(1, (room - (BUILD_DEF.stockyard.cap - target)) / target)); // 1 when the yard holds nothing of its target, 0 when it is stocked
       const sc = new Scorer().add('raw goods to stack for whoever builds next', 10 + Math.min(n, 10) * 1.2 + 3 * p.traits.generosity).add('the yard is low', 8 * empty).add('walking', -pen(e));
@@ -992,14 +995,22 @@ function optStockYard(ctx: Ctx): void {
     // keeping it stocked is slack-time work for the diligent, never a chore for everyone on the same afternoon
     if (ctx.drives.hunger > 25 || ctx.drives.thirst > 25 || ctx.drives.energy > 40) return;
     if (hashUnit(p.id, Math.floor(world.tick / 400), 77) > 0.45 + 0.45 * p.traits.diligence) return;
+    // the one good the yard is shortest of (a gather scan is not cheap: one per review, not one per kind)
+    let pick: 'wood' | 'stone' | null = null;
+    let pickMissing = 0;
+    let pickShort = 0;
     for (const k of ['wood', 'stone'] as const) {
       const target = YARD_TARGET[k] ?? 0;
-      const have = stockAt(yard, k);
-      const missing = Math.min(target - have, Math.floor(room / WEIGHT[k]));
-      if (missing < 2) continue;
+      const missing = Math.min(target - stockAt(yard, k), Math.floor(room / WEIGHT[k]));
+      if (missing < 2 || missing / target <= pickShort) continue;
+      pick = k;
+      pickMissing = missing;
+      pickShort = missing / target;
+    }
+    if (pick) {
       // (below what a site or a workshop pays, above an idle afternoon: the yard is filled in slack time, not instead of a roof)
-      const base = (12 + 8 * (missing / target) + 4 * p.traits.diligence) * traitMods(p).work;
-      gatherMaterial(ctx, k, missing, base, `to keep the stockyard stocked with ${ITEM_LABEL[k]}`, 'store');
+      const base = (12 + 8 * pickShort + 4 * p.traits.diligence) * traitMods(p).work;
+      gatherMaterial(ctx, pick, pickMissing, base, `to keep the stockyard stocked with ${ITEM_LABEL[pick]}`, 'store');
     }
   }
 }
@@ -1008,18 +1019,23 @@ function optStockYard(ctx: Ctx): void {
 function optPlantTrees(ctx: Ctx): void {
   const { world, p } = ctx;
   if (!buildable(world, 'forester') || !ctx.home || world.tick < DAY * 4) return;
-  const lodge = beliefsByKind(p, ['building']).filter((b) => b.btype === 'forester' && world.byId.get(b.id)).sort((a, c) => hyp(a.x - p.x, a.y - p.y) - hyp(c.x - p.x, c.y - p.y))[0];
+  const lodge = beliefsByKind(p, ['building']).filter((b) => b.btype === 'forester').sort((a, c) => hyp(a.x - p.x, a.y - p.y) - hyp(c.x - p.x, c.y - p.y))[0];
   if (!lodge) return;
-  const trees = knownTreesNear(p, beliefsByKind(p, ['tree']), ctx.home.x + ctx.home.w / 2, ctx.home.y + ctx.home.h / 2);
+  const treeBeliefs = beliefsByKind(p, ['tree']);
+  const trees = knownTreesNear(p, treeBeliefs, ctx.home.x + ctx.home.w / 2, ctx.home.y + ctx.home.h / 2);
   if (trees >= FOREST_THIN + 4) return;
   if (hashUnit(p.id, Math.floor(world.tick / 500), 91) > 0.25 + 0.45 * p.traits.diligence) return;
   if (recentFailure(world, p, lodge.id, 700)) {
     addBlocked(ctx, 'plant_tree', 'Plant a tree', lodge.id, 'tried recently and could not', 'work');
     return;
   }
-  const spot = plantingSpot(world, p, { x: lodge.x, y: lodge.y });
-  if (!spot) return;
-  const e = eta(ctx, spot.x + 0.5, spot.y + 0.5);
+  // a young tree is raised from a grown one: there has to be one, as far as this person knows, within the lodge's reach
+  if (!treeBeliefs.some((b) => b.amount >= 2 && hyp(b.x - lodge.x, b.y - lodge.y) <= FOREST_REACH)) {
+    addBlocked(ctx, 'plant_tree', 'Plant a tree', lodge.id, 'knows of no grown tree near the lodge to raise one from', 'work');
+    return;
+  }
+  // (the spot itself is chosen when the option is taken: the search is the world's ground, not something to run at every review)
+  const e = eta(ctx, lodge.x, lodge.y) + FOREST_REACH * 4;
   const sc = new Scorer().add(`only ${trees} trees that I know of stand near home; the lodge can raise more`, 10 + 0.8 * (FOREST_THIN - Math.min(trees, FOREST_THIN)) + 4 * p.traits.diligence).add('walking', -pen(e));
   const util = sc.total * nightMult(ctx) * weatherMult(ctx);
   addOption(ctx, {
@@ -1033,8 +1049,14 @@ function optPlantTrees(ctx: Ctx): void {
     key: 'plant_tree',
     targetId: lodge.id,
     tag: 'work',
-    make: () =>
-      newActivity(world, p, {
+    make: () => {
+      const spot = plantingSpot(world, p, { x: lodge.x, y: lodge.y });
+      if (!spot) {
+        noteFailure(world, p, lodge.id, 'no good open ground near the lodge');
+        return null;
+      }
+      const stand = standBeside(world, p, spot);
+      return newActivity(world, p, {
         kind: 'plant_tree',
         label: 'Planting a young tree',
         goal: 'to thicken the wood near home',
@@ -1042,8 +1064,11 @@ function optPlantTrees(ctx: Ctx): void {
         targetType: 'building',
         tx: spot.x + 0.5,
         ty: spot.y + 0.5,
+        spotX: stand.x,
+        spotY: stand.y,
         data: { sticky: true }, // a planting is finished once begun, unless danger or a deadly need says otherwise
-      }),
+      });
+    },
   });
 }
 const PLANT_ETA = 150;

@@ -20,7 +20,7 @@ Disposition: **reuse** (already there), **extend** (an existing building gains a
 |---|---|---|
 | House / cottage | reuse | `house`, the in-place upgrade of a hut |
 | Communal shelter / bunkhouse | new `bunkhouse` (E) | common beds for arrivals and the homeless; occupancy and release |
-| Well | new `well` (A) | bounded water access beside a known site; needs stone, a jar or bucket-rope; relieves the long walk to the shore |
+| Well | new `well` (A) | bounded water access by the houses; stone and timber (the windlass and bucket are part of the build); drawn by hand; relieves the long walk to the shore |
 | Farm / farmhouse | extend | fields (plots) and the household's hut are the farm; plots gain animal manure and crop by-products (C) |
 | Barn / livestock shed | new `barn` (C) | shelter, feed and bedding store for larger stock |
 | Chicken coop | new `coop` (C) | small shelter for fowl; eggs, offspring |
@@ -37,7 +37,7 @@ Disposition: **reuse** (already there), **extend** (an existing building gains a
 | Storehouse / warehouse | reuse | |
 | Stockyard | new `stockyard` (A) | open yard for bulky raw goods (logs, stone, clay, ore); keeps the storehouse for finished goods |
 | Woodcutter's hut / logging camp | extend → `stockyard` (A) | felling already happens by hand with an axe; the yard is where logs are stacked |
-| Forester's lodge | new `forester` (A) | seed trees, planting, protecting saplings; real forestry work, not a regrowth multiplier |
+| Forester's lodge | new `forester` (A) | young trees raised from a grown tree within the lodge's reach and set on open ground; real forestry work, not a regrowth multiplier (nothing in the world yet threatens a sapling, so protecting them is deferred until something does) |
 | Sawmill / timber yard | reuse | planks and handles; gains furniture and repair recipes (B) |
 | Quarry | reuse | |
 | Mine | new `mine` (A) | batch extraction at an ore vein with props; same shape as the quarry; finite ore |
@@ -73,7 +73,7 @@ Every chain below is data in the recipe, building and source tables and is shown
 it, and what happens when the link fails.
 
 * **Timber**: tree, felling (axe) → logs → stockyard → timber yard → planks, handles → buildings, furniture, carts, repairs;
-  logs → clamp → charcoal → smelting. Forestry: seed tree → forester plants and protects saplings → growth over days → mature tree.
+  logs → clamp → charcoal → smelting. Forestry: a grown tree within reach of the lodge → a young tree set on open ground → growth over days → mature tree.
 * **Stone and clay**: outcrop or rock → quarry or by hand → stone → foundations, wells, walls; clay pit → clay → kiln + fuel → bricks,
   jars → buildings, water, storage. Ore vein → mine → ore → smithy + charcoal → iron → tools and fittings; slag recorded as waste.
 * **Grain and bread**: seeds + land + water + time → grain and straw (feed, bedding, thatch) → granary → quern or mill → flour →
@@ -84,7 +84,7 @@ it, and what happens when the link fails.
   eggs, wool, milk, offspring → slaughter → carcass → lodge → meat, hide. Working animals: stable, feed, harness → carry or pull.
 * **Fibre and leather**: flax or a wild fibre, or wool → weaver → cloth, rope → tailor → clothing, bandages; hides + water + bark →
   tannery → leather → boots, harness. Clothing is carried and worn, wears out, and has a bounded effect on exposure.
-* **Services** (input → activity → outcome): well (site, stone, rope → water drawn → carried water, thirst); bunkhouse (beds → stay →
+* **Services** (input → activity → outcome): well (site, stone, timber → water seeps in, drawn by hand → carried water, thirst); bunkhouse (beds → stay →
   sleep and shelter); market (surplus brought → stall → barter → goods change hands); trading post (known surplus and demand in two
   settlements → a journey with cargo → exchange); tavern (beer, food, host → serving → consumption, lodging, news); healer (injury
   reported, bed, supplies → treatment → recovery); teaching (someone who can, someone who wants, practice → bounded skill gain);
@@ -129,7 +129,7 @@ field is `Household.lost`, written when present). The lab can switch any of them
 | Building | Implemented | Contract-tested | Observed in an ordinary seeded run (rich, normal profile, 4 seeds, 30 days) | Observed in the browser |
 |---|---|---|---|---|
 | well (`water.ts`) | yes | `tests/expansion_water.test.ts` (10) | laid out day 5–6 in 4/4 seeds; 1–2 built per world; 154–627 drinks and water-fetches by 25–30 people | yes: `docs/evidence/stage-a/well.jpg` (meadow, day 14, "Owner: everyone, Water in the well 7/12") |
-| cellar (`storage.ts`) | yes | `tests/expansion_storage.test.ts` (9) | 4–8 laid out per world from day 5; 4–8 built; 180–313 deposits and meals by 14–16 people; one or two sites per world wait days for stone | yes: `cellar.jpg` (meadow, day 14, Brook household, "Lost lately about 2 units", fruit, berries and grain inside) |
+| cellar (`storage.ts`, spoils at 0.15× of a home store, below a tended granary's 0.2×) | yes | `tests/expansion_storage.test.ts` (9) | 4–8 laid out per world from day 5; 4–8 built; 180–313 deposits and meals by 14–16 people; one or two sites per world wait days for stone | yes: `cellar.jpg` (meadow, day 14, Brook household, "Lost lately about 2 units", fruit, berries and grain inside) |
 | stockyard (`stockyard.ts`) | yes | `tests/expansion_stockyard.test.ts` (8) | laid out day 6–19 in 4/4; built 4/4; 34–344 stackings and collections by 14–20 people (it runs near empty: builders draw it down as fast as it fills) | yes: `stockyard.jpg` (meadow, day 14) |
 | forester's lodge (`forestry.ts`, `act_forestry.ts`) | yes | `tests/expansion_forestry.test.ts` (7) | laid out day 13–29 in 4/4; built 4/4; planted from in 2/4 within 30 days (1 and 3 plantings), 3/4 within 45 days (11–43 plantings by 3–8 people) | yes: `forester.jpg` (fern, day 27, "Young trees: 2 of at most 10 standing within 11 tiles") |
 | mine (`recipes.ts` `mine_ore`) | yes | `tests/expansion_mine.test.ts` (5) | laid out day 22–30 in 3/4 seeds over 45 days (1/4 within 30); built; dug 0–2 times: **built, not working** (below) | standing only: `mine.jpg` (fern, day 27, Willow household, idle) |
@@ -172,3 +172,37 @@ Rule changes beside the new types: a building with nobody's name on the title (h
 with household 0 whoever laid it out (`titleHolder` was consulted for workplaces only; for the three new common types that matters
 to the inspector, which read "nobody (empty)" for an empty yard); a belief passed on by word of mouth no longer carries keys set
 to undefined (`news.ts`), which made a saved world and its live copy serialise differently (`tests/save_told.test.ts`).
+
+## Review after stage A (what was found, what was done)
+
+A seven-dimension adversarial review of the stage A diff (locality, accounting, persistence, rich-only gating, performance, contract
+consistency, handlers), each finding checked independently where time allowed. Fixed, each with a test in `tests/expansion_review.test.ts`:
+
+* **Nobody mended a well, a yard or a lodge** (high): common buildings have nobody on the title, and `repairStake` gave a stake only for
+  one's own buildings, the storehouse and household-0 workplaces, so these decayed to a dead state (a silted well stops seeping at
+  condition 10) and collapsed on a timer. Now anyone has the same stake in them as in a hall. Their sites are also a shared project
+  to strangers (`siteRelation`), as a granary's is; before, only friends of the planner would carry stone to a well site.
+* **Planting never walked** (high): the option set the planting tile but not the stand, so the person "arrived" where they stood and
+  the tree appeared up to twenty tiles away. The walk now goes to a stand beside the tile, and the planting refuses a person not there.
+* **Yard ping-pong** (high): a person collecting one log for the fire then held one "spare" and stacked it back, nine ticks a cycle.
+  What is carried for a need of one's own (`materialNeeds`) is not spare.
+* **A well wanted where none could be laid out** (medium): the want asked for no well within 14 tiles of home while the spot could be
+  8 tiles from home and the spacing rule refused anything within 14 of another well; a home 14–22 tiles from a well retried for ever.
+  The want now treats a well within 22 of home as near enough.
+* **An orphaned cellar** (medium): a household that dissolved left a cellar with household 0 that nobody could use, mend or replace.
+  Whoever moves into the vacant house takes over a cellar within 8 tiles of it.
+* **Planning read the world's truth** (medium, locality): the planting spot was searched at every review from the world's occupancy
+  (also the heaviest new per-decision cost); known lodges, yards and veins were dropped the instant they vanished, before anyone had
+  looked. The spot is now found when the option is taken; the existence filters are gone and a gone lodge is forgotten on arrival.
+* **A well drew two units for one drink** (low): the first unit was drawn before drinking and the rest whenever the credit ran low, so
+  a nearly quenched person drew twice what they drank. Units are drawn only as the last is used up.
+* Smaller: the loss tally is in the fingerprint (rich worlds only); `rich-stakes-only` and `rich-mood-only` lab branches no longer carry
+  the expansion buildings; a one-item collect from the yard no longer shares an option key with the workshop-supply collect; the
+  stockyard's stocking scan runs for one good per review; `woodDistance` is one pass; the deposit log names the yard and the cellar;
+  the well's blurb states its real rate; the cellar's multiplier is 0.15 (the table said "below a granary's"; 0.3 was not).
+
+Decided, not changed: the well needs no jar or rope (the windlass is timber in its cost; a jar requirement would hang every well on a
+kiln); protecting saplings waits for something that threatens them; the household's loss tally is sanctioned household state (the
+household notices its own food going off whether or not a member is at the store at that moment), which is now stated in the
+coverage row. Not yet done: a contract test for every failure mode the brief lists is still incomplete (a full cellar, a full yard, a
+silted well and a lodge in disrepair are now tested; the world tree ceiling is not).

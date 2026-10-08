@@ -13,6 +13,7 @@ import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setBuildingEnabled } from '../../src/sim/expansion';
+import { RICH_ONLY_BUILDINGS } from '../../src/sim/constants';
 import { setStakes } from '../../src/sim/hardship';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
@@ -114,28 +115,36 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-stakes-only') {
     return {
       spec: label,
-      summary: 'rich dynamics with the stakes (lean seasons, winter, faster spoilage, bolder wolves) but moods change nothing',
+      summary: 'rich dynamics with the stakes (lean seasons, winter, faster spoilage, bolder wolves) but moods change nothing and no expansion building is built',
       apply: (w) => {
         w.settings.dynamics = 'rich';
-        return 'stakes on, mood effects off';
+        return 'stakes on, mood effects off, expansion buildings off';
       },
       install: () => {
         setMoodEffects(false);
-        return () => setMoodEffects(true);
+        for (const t of RICH_ONLY_BUILDINGS) setBuildingEnabled(t, false);
+        return () => {
+          setMoodEffects(true);
+          for (const t of RICH_ONLY_BUILDINGS) setBuildingEnabled(t, true);
+        };
       },
     };
   }
   if (kind === 'rich-mood-only') {
     return {
       spec: label,
-      summary: 'rich dynamics with moods that change choices and quarrels but none of the stakes',
+      summary: 'rich dynamics with moods that change choices and quarrels but none of the stakes and no expansion building',
       apply: (w) => {
         w.settings.dynamics = 'rich';
-        return 'mood effects on, stakes off';
+        return 'mood effects on, stakes off, expansion buildings off';
       },
       install: () => {
         setStakes(false);
-        return () => setStakes(true);
+        for (const t of RICH_ONLY_BUILDINGS) setBuildingEnabled(t, false);
+        return () => {
+          setStakes(true);
+          for (const t of RICH_ONLY_BUILDINGS) setBuildingEnabled(t, true);
+        };
       },
     };
   }
