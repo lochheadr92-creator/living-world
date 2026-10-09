@@ -77,6 +77,8 @@ export interface SectionHandle {
   body: HTMLElement;
   countEl: HTMLElement;
   isOpen(): boolean;
+  /** open or close it from code (no onToggle call) */
+  setOpen(v: boolean): void;
   setCount(text: string): void;
   setVisible(v: boolean): void;
 }
@@ -92,9 +94,9 @@ export function makeSection(opts: {
   const countEl = h('span', { class: 'sec-count num' });
   const chev = icon('chevron', 12, 'sec-chev');
   const bodyId = `lw-sec-${opts.id}`;
-  const btn = h('button', { type: 'button', class: 'sec-head', 'aria-expanded': String(open), 'aria-controls': bodyId }, chev, h('span', { class: 'sec-title' }, opts.title), countEl);
+  // the hint is a tooltip on the header rather than a paragraph in the body: it explains the section once, without taking room every time
+  const btn = h('button', { type: 'button', class: 'sec-head', 'aria-expanded': String(open), 'aria-controls': bodyId, 'data-tip': opts.hint, 'aria-description': opts.hint }, chev, h('span', { class: 'sec-title' }, opts.title), countEl);
   const body = h('div', { class: 'sec-body', id: bodyId });
-  if (opts.hint) body.appendChild(h('p', { class: 'sec-hint' }, opts.hint));
   const el = h('section', { class: 'sec', 'data-open': String(open) }, btn, body);
   const apply = () => {
     btn.setAttribute('aria-expanded', String(open));
@@ -112,6 +114,10 @@ export function makeSection(opts: {
     body,
     countEl,
     isOpen: () => open,
+    setOpen: (v) => {
+      open = v;
+      apply();
+    },
     setCount: (t) => setText(countEl, t),
     setVisible: (v) => setHidden(el, !v),
   };

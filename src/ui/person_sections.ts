@@ -24,7 +24,7 @@ export interface PersonSections {
   reset(): void;
 }
 
-const SECTION_DEFAULT: Record<string, boolean> = { talk: true, meal: true, commit: true, sore: true, worry: false, opp: true, rel: true, req: false, mem: false, know: false, fam: false, traits: false, debug: true };
+const SECTION_DEFAULT: Record<string, boolean> = { talk: true, meal: true, commit: true, sore: true, worry: false, opp: false, rel: false, req: false, mem: false, know: false, fam: false, traits: false, debug: true };
 
 const OPP_BADGE: Record<OpportunityView['status'], [tone: string, label: string]> = {
   chosen: ['good', 'Chosen'],
@@ -93,7 +93,6 @@ interface RelRow {
   name: HTMLButtonElement;
   label: HTMLElement;
   avoid: HTMLElement;
-  trust: HTMLElement;
   neg: HTMLElement;
   pos: HTMLElement;
   aff: HTMLElement;
@@ -123,21 +122,35 @@ interface Simple {
 export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSections {
   const { game } = ctx;
 
-  const mk = (id: string, title: string, hint?: string): SectionHandle =>
-    makeSection({
+  // one section open at a time (debug aside), so the panel stays short instead of growing into a long scroll
+  const group: { id: string; sec: SectionHandle }[] = [];
+  const mk = (id: string, title: string, hint?: string): SectionHandle => {
+    const sec = makeSection({
       id,
       title,
       hint,
       open: ctx.state.sections[id] ?? SECTION_DEFAULT[id] ?? false,
       onToggle: (open) => {
         ctx.state.sections[id] = open;
+        if (open && id !== 'debug') {
+          for (const o of group) {
+            if (o.id === id || !o.sec.isOpen()) continue;
+            o.sec.setOpen(false);
+            ctx.state.sections[o.id] = false;
+          }
+        }
         ctx.saveState();
         hooks.onSectionToggle();
+        // bring what was just opened into view rather than leaving it below the fold
+        if (open) sec.el.scrollIntoView({ block: 'start', behavior: 'smooth' });
       },
     });
+    if (id !== 'debug') group.push({ id, sec });
+    return sec;
+  };
 
   // ───────── opportunities ─────────
-  const oppSec = mk('opp', 'Opportunities they could have used', 'Things nearby that could have helped, and why they did or did not take them. Click one to see where it is.');
+  const oppSec = mk('opp', 'Opportunities nearby', 'Things nearby that could have helped, and why they did or did not take them. Click one to see where it is.');
   const oppBox = h('div', { class: 'list' });
   const oppEmpty = emptyNote('Nothing nearby that they could use right now.');
   oppSec.body.append(oppBox, oppEmpty);
@@ -149,7 +162,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       const dist = h('span', { class: 'opp-dist num' });
       const detail = h('div', { class: 'opp-detail' });
       const row: OppRow = {
-        el: h('button', { type: 'button', class: 'row opp', 'data-tip': 'Show it on the map' }, h('div', { class: 'row-top' }, badge, what, dist), detail),
+        el: h('button', { type: 'button', class: 'row opp' }, h('div', { class: 'row-top' }, badge, what, dist), detail),
         badge,
         what,
         dist,
@@ -169,6 +182,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       setText(r.what, cap(o.what));
       setText(r.dist, `${Math.round(o.distance)} tiles`);
       setText(r.detail, o.detail);
+      r.el.setAttribute('data-tip', `${cap(o.what)}: ${o.detail}\nClick to show it on the map.`);
       r.el.setAttribute('aria-label', `${label}: ${o.what}. ${o.detail} Show on the map.`);
     },
   );
@@ -184,7 +198,6 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       const name = h('button', { type: 'button', class: 'rel-name', 'data-tip': 'Look at this person' });
       const label = h('span', { class: 'chip rel-label' });
       const avoid = h('span', { class: 'badge t-warn', 'data-tip': 'They had a falling out and are keeping their distance for now.', hidden: true }, 'avoiding');
-      const trust = h('span', { class: 'rel-trust num' });
       const neg = h('i', { class: 'neg' });
       const pos = h('i', { class: 'pos' });
       const aff = h('span', { class: 'aff-val num' });
@@ -193,14 +206,12 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         el: h(
           'div',
           { class: 'row rel' },
-          h('div', { class: 'row-top' }, name, label, avoid, trust),
-          h('div', { class: 'aff' }, h('span', { class: 'aff-track', role: 'presentation' }, neg, pos, h('b', { class: 'mid' })), aff),
+          h('div', { class: 'row-top' }, name, label, avoid, h('div', { class: 'aff' }, h('span', { class: 'aff-track', role: 'presentation' }, neg, pos, h('b', { class: 'mid' })), aff)),
           recent,
         ),
         name,
         label,
         avoid,
-        trust,
         neg,
         pos,
         aff,
@@ -218,7 +229,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       r.name.setAttribute('aria-label', `Look at ${v.name}`);
       setText(r.label, v.label);
       setHidden(r.avoid, !v.avoiding);
-      setText(r.trust, `trust ${Math.round(v.trust)}`);
+      r.el.setAttribute('data-tip', `${v.name}: ${v.label.toLowerCase()}, affection ${signed(Math.round(v.affinity))}, trust ${Math.round(v.trust)}`);
       const a = Math.max(-100, Math.min(100, v.affinity));
       setWidth(r.neg, a < 0 ? (-a / 100) * 50 : 0);
       setWidth(r.pos, a > 0 ? (a / 100) * 50 : 0);

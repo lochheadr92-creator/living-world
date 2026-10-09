@@ -96,7 +96,7 @@ function makeNeedCell(key: NeedKey, label: string): NeedCell {
   const el = h(
     'div',
     { class: 'need', role: 'meter', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-label': label },
-    h('div', { class: 'need-top' }, ico, h('span', { class: 'need-lab' }, label), val),
+    h('div', { class: 'need-top' }, ico, val),
     bar.el,
   );
   return {
@@ -107,6 +107,8 @@ function makeNeedCell(key: NeedKey, label: string): NeedCell {
       setState(el, 'is-', n.state);
       el.setAttribute('aria-valuenow', String(Math.round(n.value)));
       el.setAttribute('aria-valuetext', `${n.label} ${Math.round(n.value)} of 100${n.state === 'ok' ? '' : `, ${n.state}`}`);
+      // the cells are icons only, so the name lives in the tooltip
+      el.setAttribute('data-tip', `${label}: ${Math.round(n.value)} of 100${n.state === 'ok' ? '' : ` (${n.state})`}`);
     },
   };
 }
@@ -211,8 +213,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const inv = h(
     'div',
     { class: 'inv' },
-    h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Carrying'), invChips, invEmpty),
-    h('div', { class: 'carry', 'data-tip': 'How much they can carry. Heavy things like stone count for more.' }, carryBar.el, carryTxt),
+    h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Carrying'), invChips, invEmpty, h('div', { class: 'carry', 'data-tip': 'How much they can carry. Heavy things like stone count for more.' }, carryBar.el, carryTxt)),
     h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Tools'), toolChips, toolsEmpty),
   );
 
@@ -234,13 +235,39 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const taskTxt = h('span', { class: 'task-txt num' });
   const taskRow = h('div', { class: 'task' }, taskBar.el, taskTxt);
   qDoing.el.appendChild(h('dd', { class: 'qa-task' }, taskRow));
+  // brief by default: what they are doing and anything in the way; the why, the goal and the last attempt on request
+  let uptoMore = ctx.state.sections.uptoMore ?? false;
+  const moreLabel = h('span');
+  const moreBtn = h(
+    'button',
+    {
+      type: 'button',
+      class: 'upto-more',
+      'data-tip': 'Why they chose it, what they are after, how their last attempt went',
+      'aria-controls': 'lw-upto-qa',
+      onClick: () => {
+        uptoMore = !uptoMore;
+        ctx.state.sections.uptoMore = uptoMore;
+        ctx.saveState();
+        syncMore();
+      },
+    },
+    moreLabel,
+    icon('chevron', 11, 'upto-more-chev'),
+  );
   const upto = h(
     'section',
     { class: 'upto', 'aria-labelledby': 'lw-upto-h' },
-    h('h3', { class: 'upto-h', id: 'lw-upto-h' }, 'What are they up to?'),
+    h('div', { class: 'upto-top' }, h('h3', { class: 'upto-h', id: 'lw-upto-h' }, 'What are they up to?'), moreBtn),
     speech,
-    h('dl', { class: 'qa' }, qDoing.el, qWhy.el, qTrying.el, qStopping.el, qLast.el),
+    h('dl', { class: 'qa', id: 'lw-upto-qa' }, qDoing.el, qWhy.el, qTrying.el, qStopping.el, qLast.el),
   );
+  function syncMore(): void {
+    toggle(upto, 'is-brief', !uptoMore);
+    setBool(moreBtn, 'aria-expanded', uptoMore);
+    setText(moreLabel, uptoMore ? 'Less' : 'More');
+  }
+  syncMore();
 
   // ───────── collapsible sections ─────────
   const sections = createPersonSections(ctx, hooks);
