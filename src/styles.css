@@ -37,7 +37,7 @@
   --t: 150ms;
   --edge: 12px;
   --gap: 10px;
-  --insp-w: 340px;
+  --insp-w: 296px;
   --left-w: 340px;
   --top-h: 70px;
   --mini: 168px;
@@ -428,7 +428,8 @@ body {
 }
 .dock-right {
   right: var(--edge);
-  top: var(--top-h);
+  /* clear of the speed bar's 'achieved' line / paused tag, which hang below the top row */
+  top: calc(var(--top-h) + 28px);
   bottom: var(--edge);
   width: var(--insp-w);
   flex-direction: column;
@@ -470,6 +471,10 @@ body {
   }
   .col-center {
     align-items: flex-start;
+  }
+  /* the top bar is two rows tall here and the speed bar sits in the first, so its hanging line is already clear */
+  .dock-right {
+    top: var(--top-h);
   }
 }
 @media (max-width: 920px) {
@@ -1474,8 +1479,8 @@ kbd {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 12px 14px 14px;
+  gap: 10px;
+  padding: 10px 12px 12px;
 }
 .p-body > *,
 .e-body > * {
@@ -1495,11 +1500,11 @@ kbd {
 .p-head {
   flex: none;
   display: grid;
-  grid-template-columns: 40px minmax(0, 1fr) auto;
-  column-gap: 11px;
-  row-gap: 1px;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  column-gap: 9px;
+  row-gap: 0;
   align-items: center;
-  padding: 12px 10px 10px 14px;
+  padding: 8px 8px 7px 12px;
   border-bottom: 1px solid var(--line);
 }
 .avatar {
@@ -1507,13 +1512,13 @@ kbd {
   align-self: start;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   margin-top: 2px;
   border-radius: 50%;
   border: 3px solid var(--hh, #9fb0bd);
   background: rgba(255, 255, 255, 0.07);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text);
 }
@@ -1534,7 +1539,7 @@ kbd {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 650;
   line-height: 1.25;
 }
@@ -1628,14 +1633,14 @@ kbd {
 /* needs */
 .needs {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 8px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 4px;
 }
 .need {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  padding: 6px 9px 8px;
+  gap: 3px;
+  padding: 4px 5px 5px;
   border-radius: 10px;
   border: 1px solid transparent;
   background: var(--glass-hi);
@@ -1644,30 +1649,21 @@ kbd {
 .need-top {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
-}
-.need-lab {
-  flex: 1;
-  font-weight: 600;
+  justify-content: space-between;
+  gap: 2px;
+  font-size: 11.5px;
 }
 .need-val {
   font-weight: 650;
 }
 .need .bar {
-  height: 5px;
+  height: 4px;
 }
 .need.is-low {
   background: var(--warn-bg);
   border-color: rgba(240, 138, 75, 0.3);
 }
 .need.is-low .need-val {
-  color: var(--warn);
-}
-.need.is-low .need-lab::after {
-  content: ' \00b7  low';
-  font-weight: 500;
-  font-size: 11px;
   color: var(--warn);
 }
 .need.is-low .bar > i {
@@ -1681,12 +1677,6 @@ kbd {
 .need.is-critical .need-val {
   color: var(--danger);
 }
-.need.is-critical .need-lab::after {
-  content: ' \00b7  critical';
-  font-weight: 600;
-  font-size: 11px;
-  color: var(--danger);
-}
 .need.is-critical .bar > i {
   background: var(--danger) !important;
 }
@@ -1695,7 +1685,7 @@ kbd {
 .inv {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 4px;
 }
 .inv-row {
   display: flex;
@@ -1722,13 +1712,13 @@ kbd {
 .carry {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
+  margin-left: auto;
 }
 .carry .bar {
-  flex: 1;
+  width: 56px;
 }
 .carry-txt {
-  min-width: 58px;
   text-align: right;
   font-size: 11.5px;
   color: var(--muted);
@@ -1736,14 +1726,21 @@ kbd {
 
 /* what are they up to? */
 .upto {
-  padding: 12px 13px 4px;
+  padding: 9px 12px 2px;
   border-radius: 13px;
   border: 1px solid rgba(243, 185, 95, 0.26);
   background: linear-gradient(180deg, rgba(243, 185, 95, 0.12), rgba(243, 185, 95, 0.045));
 }
+.upto-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0 0 6px;
+}
 .upto-h {
-  margin: 0 0 8px;
-  font-size: 14px;
+  margin: 0;
+  font-size: 13px;
   font-weight: 650;
   color: var(--accent);
 }
@@ -1765,13 +1762,44 @@ kbd {
   margin-top: 2px;
   color: var(--accent);
 }
+.upto-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 4px 2px 8px;
+  border: 0;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.upto-more:hover {
+  background: rgba(255, 255, 255, 0.13);
+  color: var(--text);
+}
+.upto-more-chev {
+  transform: rotate(90deg);
+  transition: transform 160ms var(--ease);
+}
+.upto-more[aria-expanded='true'] .upto-more-chev {
+  transform: rotate(-90deg);
+}
+/* brief: what they are doing, and what is in the way only when something is */
+.upto.is-brief :is(.q-why, .q-trying, .q-last, .q-stopping.is-clear, .q-doing .qa-q) {
+  display: none;
+}
+.upto.is-brief .q-doing :is(.qa-a, .qa-task) {
+  margin-left: 0;
+}
 .qa {
   margin: 0;
   display: flex;
   flex-direction: column;
 }
 .qa-row {
-  padding: 9px 0 10px;
+  padding: 7px 0 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.075);
 }
 .qa-row:first-child {
@@ -1859,10 +1887,10 @@ kbd {
 .secs {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 .sec {
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--glass-hi);
 }
 .sec-head {
@@ -1870,9 +1898,9 @@ kbd {
   align-items: center;
   gap: 8px;
   width: 100%;
-  padding: 9px 12px;
+  padding: 5px 10px;
   border: 0;
-  border-radius: 12px;
+  border-radius: 10px;
   background: transparent;
   color: var(--text);
   font-size: 12.5px;
@@ -1905,17 +1933,69 @@ kbd {
 .sec-count:empty {
   display: none;
 }
+.sec-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px 4px;
+  padding-top: 5px;
+  scroll-margin-top: 6px;
+}
+.sec-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 24px;
+  padding: 0 4px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  background: var(--glass-hi);
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: background-color var(--t) var(--ease), color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+.sec-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+.sec-tab.is-on {
+  background: var(--accent-bg);
+  border-color: rgba(243, 185, 95, 0.45);
+  color: var(--accent);
+}
+.sec-tab {
+  position: relative;
+}
+/* the count is a small badge on the tab's corner, so it costs no width */
+.sec-tab .sec-count {
+  position: absolute;
+  top: -6px;
+  right: -1px;
+  min-width: 0;
+  height: 14px;
+  padding: 0 4px;
+  border-radius: 99px;
+  background: #2a3a48;
+  font-size: 9.5px;
+  line-height: 14px;
+  pointer-events: none;
+}
+/* a tabbed section has no header of its own (its tab is the header) and is gone while not shown */
+.sec-tabbed .sec-head,
+.sec-tabbed[data-open='false'] {
+  display: none;
+}
+.sec-tabbed .sec-body {
+  padding-top: 10px;
+}
 .sec-body {
   display: flex;
   flex-direction: column;
   gap: 8px;
   padding: 2px 12px 12px;
-}
-.sec-hint {
-  margin: 0;
-  font-size: 11.5px;
-  line-height: 1.4;
-  color: var(--muted);
 }
 .sub-h {
   margin-top: 4px;
@@ -1923,7 +2003,7 @@ kbd {
 .list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 .row {
   display: block;
@@ -1960,9 +2040,11 @@ button.row:hover {
   color: var(--faint);
 }
 .opp-detail {
-  margin-top: 4px;
+  margin-top: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 12px;
-  line-height: 1.4;
   color: var(--muted);
 }
 .rel-name {
@@ -1981,16 +2063,15 @@ button.row:hover {
   height: 19px;
   font-size: 11px;
 }
-.rel-trust {
-  margin-left: auto;
-  font-size: 11px;
-  color: var(--faint);
+.row.rel {
+  padding: 5px 10px;
 }
 .aff {
+  flex: 1;
+  min-width: 60px;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 7px;
 }
 .aff-track {
   position: relative;
@@ -2038,7 +2119,7 @@ button.row:hover {
   color: var(--danger);
 }
 .rel-recent {
-  margin-top: 4px;
+  margin-top: 2px;
   font-size: 11.5px;
   color: var(--muted);
 }

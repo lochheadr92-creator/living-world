@@ -87,7 +87,10 @@ export class Renderer {
         follow = { x: p.sx, y: p.sy - 14 };
       }
     }
-    const done = updateCamera(g.camera, dt, follow, g.fly);
+    // aim at the middle of the part of the screen the inspector leaves visible, not the middle of the window
+    const shift = g.viewInsetRight / 2 / g.camera.zoom;
+    if (follow) follow.x += shift;
+    const done = updateCamera(g.camera, dt, follow, g.fly && shift ? { ...g.fly, x: g.fly.x + shift } : g.fly);
     if (done) g.fly = null;
     clampCamera(g.camera, g.world, { w: this.w, h: this.h });
     this.draw();
