@@ -70,6 +70,8 @@ export class Game {
   hover: { id: number; px: number; py: number } | null = null;
   /** requested smooth camera move (consumed by the renderer) */
   fly: { x: number; y: number; zoom: number | null } | null = null;
+  /** screen pixels along the right edge hidden by an open panel (the inspector): the camera aims at the middle of what is left. Presentation only. */
+  viewInsetRight = 0;
   /** ticks executed during the most recent frame (for the debug readout) */
   lastFrameTicks = 0;
   /** wall-time driven tween used only to ease a manual single step */

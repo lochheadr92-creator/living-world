@@ -117,6 +117,13 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
     setAttr(handle, 'aria-label', open ? 'Hide the inspector' : 'Show the inspector');
     setAttr(handle, 'data-tip', open ? 'Hide the inspector' : game.selectedId ? 'Show the inspector' : 'Show the inspector (click something to look inside)');
     setHidden(handleDot, open || !game.selectedId);
+    syncInset();
+  }
+
+  /** tell the camera how much of the screen the open inspector hides (none when it would cover most of a narrow screen) */
+  function syncInset(): void {
+    const inset = open && game.selectedId ? window.innerWidth - slots.right.getBoundingClientRect().left : 0;
+    game.viewInsetRight = inset > 0 && inset < window.innerWidth * 0.5 ? inset : 0;
   }
 
   function setMode(next: Mode): void {
@@ -201,6 +208,7 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
 
   setMode('empty');
   applyOpen();
+  window.addEventListener('resize', syncInset);
   refresh();
   const slow = new Every(0.25);
 
@@ -234,6 +242,8 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
       }
     },
     dispose() {
+      window.removeEventListener('resize', syncInset);
+      game.viewInsetRight = 0;
       wrap.remove();
     },
   };
