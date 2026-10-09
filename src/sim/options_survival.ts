@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { newActivity } from './activities';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
@@ -124,7 +125,7 @@ function optFlee(ctx: Ctx): void {
         utility: sc.total,
         minCommit: 30,
         maxTicks: 260,
-        data: { run: true },
+        data: isRich(world) ? { run: true, wx: tx, wy: ty } : { run: true },
       });
     },
   });

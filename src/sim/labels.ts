@@ -78,6 +78,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   fulfill: 'keeping a promise',
   search: 'looking for someone',
   claim_home: 'moving in',
+  pay_respects: 'paying respects at a grave',
   operate: 'working at a workshop',
   tool_work: 'mending a tool',
   cart_haul: 'hauling with a cart',

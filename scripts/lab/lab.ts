@@ -14,6 +14,7 @@ import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setMoodEffects } from '../../src/sim/mood';
+import { setPlaceEffects } from '../../src/sim/places';
 import { unregisterSource } from '../../src/sim/registry';
 import type { SourceType, World } from '../../src/sim/types';
 import { setWolfSearchMemory } from '../../src/sim/wildlife';
@@ -53,7 +54,7 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * Specs: `control`; `nudge:N` (draw N random numbers and change nothing else: the noise floor); `remove:<type+type>:<radius>` (delete
  * those sources within the radius of any settlement); `random-choice` (rank options by a hash, not by utility); `no-wolf-memory`
  * (switch off an optimisation that is meant to be exact: a branch that is not identical to the control would be a bug).
- * `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what); `rich-no-places` is `rich` with remembered places switched off (compare with `rich` to see what places do). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -102,6 +103,20 @@ export function parseIntervention(specIn: string): Intervention {
       install: () => {
         setMoodEffects(false);
         return () => setMoodEffects(true);
+      },
+    };
+  }
+  if (kind === 'rich-no-places') {
+    return {
+      spec: label,
+      summary: 'rich dynamics, but remembered places (where a wolf struck, a grave) change nothing: compare with rich to see what places do',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, place effects off';
+      },
+      install: () => {
+        setPlaceEffects(false);
+        return () => setPlaceEffects(true);
       },
     };
   }

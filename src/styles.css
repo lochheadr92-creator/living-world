@@ -1629,6 +1629,21 @@ kbd {
 .thought-v { min-width: 30px; text-align: right; font-weight: 600; }
 .thought-v.neg { color: var(--danger); }
 .thought-v.pos { color: var(--good); }
+.place {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  text-align: left;
+}
+.place:hover .thought-why {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.place-hold { min-width: 30px; text-align: right; font-weight: 600; font-size: 11px; }
+.place.is-danger .place-hold { color: var(--warn); }
+.place.is-grief .place-hold { color: #b9a6d6; }
 
 /* needs */
 .needs {

@@ -8,6 +8,7 @@ import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
 import { isRich, thoughtsOf } from './mood';
+import { placesOf } from './places';
 import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people';
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
@@ -87,6 +88,8 @@ export interface PersonView {
   mood: number;
   /** rich dynamics only: what is weighing on or lifting them now, strongest first; null in any other world */
   thoughts: { why: string; value: number }[] | null;
+  /** places that mean something to them, strongest first (rich worlds only; null otherwise) */
+  places: { kind: 'danger' | 'grief'; why: string; x: number; y: number; hold: number }[] | null;
   pregnant: boolean;
   partner: string | null;
   traits: { key: string; value: number }[];
@@ -367,6 +370,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     // in a rich world the bar shows the mood that counts (needs plus what has happened to them): 70 is the usual, as a level of 0 is
     mood: isRich(world) && p.mood ? Math.max(0, Math.min(100, Math.round(70 + p.mood.level * 0.7))) : moodOf(p),
     thoughts: isRich(world) ? thoughtsOf(world, p) : null,
+    places: isRich(world) ? placesOf(world, p) : null,
     pregnant: p.pregnantUntil > 0,
     partner: p.partnerId ? nameOf(world, p.partnerId) : null,
     traits: Object.entries(p.traits).map(([key, value]) => ({ key, value })),

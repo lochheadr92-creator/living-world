@@ -257,6 +257,8 @@ export function glyphFor(kind: ActivityKind, target?: string): { id: string; col
       return { id: 'zig', color: '#e5463e' };
     case 'claim_home':
       return { id: 'crate', color: '#c9a46c' };
+    case 'pay_respects':
+      return { id: 'heart', color: '#b9a6d6' };
     default:
       return null;
   }

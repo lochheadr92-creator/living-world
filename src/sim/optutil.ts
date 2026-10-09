@@ -1,5 +1,6 @@
 import { moveSpeed, standSpotFor } from './activities';
 import { findWaterAccessNear, isWalkable, isWaterAccess } from './registry';
+import { dangerPlaces } from './places';
 import { drive } from './needs';
 import { householdOf } from './buildings';
 import { homeBuildingOf, membersOf } from './households';
@@ -49,6 +50,8 @@ export interface Ctx {
   stone: number;
   seeds: number;
   dangers: Belief[];
+  /** places this person remembers as dangerous, with how strongly they hold (rich dynamics only; empty otherwise) */
+  placeDangers: { x: number; y: number; s: number }[];
   seenPersons: SeenEntity[];
   seenAnimals: SeenEntity[];
   collect: boolean;
@@ -125,6 +128,7 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
     stone: p.inv.stone ?? 0,
     seeds: p.inv.seeds ?? 0,
     dangers,
+    placeDangers: dangerPlaces(world, p),
     seenPersons: p.seen.filter((s) => s.ent === 'person'),
     seenAnimals: p.seen.filter((s) => s.ent === 'animal'),
     collect,
@@ -153,6 +157,12 @@ export function dangerAt(ctx: Ctx, x: number, y: number, r = 10): number {
   for (const a of ctx.seenAnimals) {
     const d = hyp(a.x - x, a.y - y);
     if (d < r) s = Math.max(s, 1 - d / r);
+  }
+  // a remembered place of danger reaches a little less far than a wolf in sight, and only as strongly as it still holds them
+  const rp = Math.min(r, 8);
+  for (const m of ctx.placeDangers) {
+    const d = hyp(m.x - x, m.y - y);
+    if (d < rp) s = Math.max(s, m.s * (1 - d / rp));
   }
   return s;
 }

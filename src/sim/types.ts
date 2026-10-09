@@ -215,6 +215,7 @@ export type ActivityKind =
   | 'fulfill'
   | 'search'
   | 'claim_home'
+  | 'pay_respects'
   | 'operate'
   | 'tool_work'
   | 'cart_haul'
@@ -431,6 +432,24 @@ export interface Person {
   lastInteraction: InteractionRecord | null;
   /** how they are doing, summed from what has happened to them (rich dynamics only; absent otherwise) */
   mood?: Mood;
+  /** places that mean something to them: where a wolf struck, where someone they loved is buried (rich dynamics only; absent otherwise) */
+  places?: PlaceMemory[];
+}
+
+/** A place a person remembers for what happened there. Its hold fades linearly to nothing at `until`. */
+export interface PlaceMemory {
+  kind: 'danger' | 'grief';
+  x: number;
+  y: number;
+  /** 0..1 when fresh */
+  strength: number;
+  since: number;
+  until: number;
+  why: string;
+  /** grief: the person buried there */
+  about: number;
+  /** grief: when they last went to pay their respects (0 = never) */
+  visited: number;
 }
 
 /** One thing that is weighing on, or lifting, a person for a while. */

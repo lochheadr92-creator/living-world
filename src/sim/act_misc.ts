@@ -3,6 +3,8 @@ import type { WorkResult } from './activities';
 import { addLog } from './events';
 import { countBeliefs } from './knowledge';
 import { nearLitFire } from './perception';
+import { rememberPlace } from './places';
+import { DAY } from './constants';
 
 import { hyp } from './util';
 // ───────────────────────── sleep ─────────────────────────
@@ -127,6 +129,8 @@ registerHandler('flee', {
   },
   onEnd(world, p, a) {
     addLog(world, p, 'danger', 'Made it to safety.');
+    // rich worlds: the spot where the wolf came at them stays with them for a while (places.ts)
+    if (a.data.wx !== undefined) rememberPlace(world, p, 'danger', a.data.wx, a.data.wy, 0.35, DAY * 2, 'where a wolf came at them');
   },
 });
 

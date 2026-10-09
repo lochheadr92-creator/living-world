@@ -171,6 +171,10 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const thoughtsList = h('div', { class: 'thought-list' });
   const thoughtsEl = h('div', { class: 'thoughts' }, h('div', { class: 'cap blk-h' }, 'On their mind'), thoughtsList);
   let thoughtsSig = '';
+  // places that mean something to them (rich worlds only): a click flies the camera there
+  const placesList = h('div', { class: 'thought-list' });
+  const placesEl = h('div', { class: 'thoughts', hidden: true }, h('div', { class: 'cap blk-h' }, 'Places they remember'), placesList);
+  let placesSig = '';
 
   // ───────── needs ─────────
   const needCells = NEED_KEYS.map((k) => ({ key: k, cell: makeNeedCell(k, NEED_LABELS[k]) }));
@@ -273,7 +277,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const sections = createPersonSections(ctx, hooks);
 
   // the answer to "what are they up to?" comes first: it is the reason to open the panel. Needs and belongings are context for it.
-  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
+  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, placesEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
   const el = h('div', { class: 'insp-person' }, head, body);
 
   // ───────── rendering ─────────
@@ -307,6 +311,22 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
             : [h('div', { class: 'thought none' }, 'Nothing in particular.')]),
         );
       }
+    }
+    const places = v.places ?? [];
+    setHidden(placesEl, places.length === 0);
+    const psig = places.map((m) => `${m.why}|${Math.round(m.hold * 10)}`).join(';');
+    if (psig !== placesSig) {
+      placesSig = psig;
+      placesList.replaceChildren(
+        ...places.map((m) =>
+          h(
+            'button',
+            { type: 'button', class: `thought place is-${m.kind}`, 'data-tip': 'Show this place on the map', onClick: () => game.flyTo(m.x, m.y) },
+            h('span', { class: 'place-hold num' }, `${Math.round(m.hold * 100)}%`),
+            h('span', { class: 'thought-why' }, cap(m.why)),
+          ),
+        ),
+      );
     }
     setText(healthTxt, String(Math.round(v.health)));
     healthBar.set(v.health / 100, healthTone(v.health));
