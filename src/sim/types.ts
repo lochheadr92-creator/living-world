@@ -109,6 +109,8 @@ export interface Belief {
 
 /** A person's snapshot of a workplace (always a snapshot with the belief's own timestamp). */
 export interface FacilitySnapshot {
+  /** (rich worlds) piles on the shelves that are someone's, as seen: [item, n, owner] */
+  held?: [ItemKind, number, number][];
   job: string | null;
   progress: number;
   burn: number;

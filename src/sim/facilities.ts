@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { CELLAR_SPOIL, cellarAccepts } from './storage';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT, RAW_MATERIALS } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
@@ -156,7 +157,8 @@ export function noteDeposit(world: World, b: Building, p: Person, item: ItemKind
     return;
   }
   const level = accessLevel(world, p, b);
-  if (level === 'friend' || level === 'builder') addEarmark(world, b, { kind: 'in', item, n, owner: p.id, reason: 'brought for their own batch' });
+  // (rich worlds) at a common workplace too: what someone carried there for their own batch is not taken by the next batch to start
+  if (level === 'friend' || level === 'builder' || (level === 'communal' && isRich(world))) addEarmark(world, b, { kind: 'in', item, n, owner: p.id, reason: 'brought for their own batch' });
 }
 
 /** How many units this person may take out of the building's store. */
@@ -473,7 +475,7 @@ export function facilityTick(world: World, b: Building): void {
       if (job.burnLeft <= 0) finishJob(world, b);
     } else if (job.phase === 'ready') {
       if ((world.tick + b.id) % 30 === 0) finishJob(world, b);
-    } else if (job.phase === 'work' && world.tick - job.lastWork > STALL_LIMIT) {
+    } else if (job.phase === 'work' && world.tick - job.lastWork > (isRich(world) ? STALL_LIMIT / 2 : STALL_LIMIT)) {
       shelveJob(world, b, 'nobody came back to it');
     }
   }
@@ -659,6 +661,7 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
     readyAt: job ? (job.phase === 'burn' ? world.tick + job.burnLeft : job.phase === 'ready' ? world.tick : world.tick + Math.max(0, job.total - job.progress) + job.burnTotal) : 0,
     client: job ? job.client : 0,
     tended: ops.tended,
+    ...(isRich(world) && liveEarmarks(world, ops).some((e) => e.kind === 'in') ? { held: liveEarmarks(world, ops).filter((e) => e.kind === 'in').map((e) => [e.item, e.n, e.owner] as [ItemKind, number, number]) } : {}),
   };
 }
 

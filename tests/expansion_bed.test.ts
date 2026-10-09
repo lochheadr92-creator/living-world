@@ -31,19 +31,19 @@ function settled(seed: string, rich = true) {
   p.health = 100;
   observe(w, p, h);
   const yard = createBuilding(w, 'timber_yard', Math.floor(h.x) + 6, Math.floor(h.y) + 3, 0);
-  yard.store.items = { planks: 6, handles: 2 };
+  yard.store.items = { wood: 4, planks: 2 };
   observe(w, p, yard);
   return { w, p, hh, h, yard };
 }
 
 describe('the bed', () => {
-  it('is made at the timber yard from four planks and a handle, with a hammer, nothing unaccounted', () => {
+  it('is made at the timber yard from four logs, with a hammer, nothing unaccounted', () => {
     const s = stage('bed-make');
     const p = addPerson(s, 'Odo', 44, 44);
-    const b = building(s, 'timber_yard', 49, 50, 0, { planks: 4, handles: 1 });
+    const b = building(s, 'timber_yard', 49, 50, 0, { wood: 4 });
     give(s.w, p, 'hammer');
     const w = done(s);
-    expect(startJob(w, b, p, RECIPE_BY_ID.make_bed, p.id, 'test')).toBeNull();
+    expect(startJob(w, b, p, RECIPE_BY_ID.make_bed, p.id, 'test')).toBeNull(); // (with a hammer: without one it is slower, not refused)
     for (let i = 0; i < 900 && b.ops?.job; i++) {
       w.tick++;
       workJob(w, b, p);
@@ -77,7 +77,7 @@ describe('the bed', () => {
     if (!frail) expect(wanted()).toBe(false);
     r.p.cooldowns.coldNight = r.w.tick;
     expect(wanted()).toBe(true);
-    // and it is a plan, not only a wish: with a hammer in hand the bed is planned at the yard
+    // and it is a plan, not only a wish: with logs at the yard the bed is planned there
     give(r.w, r.p, 'hammer');
     expect(generateOptions(r.w, r.p, true).options.some((o) => o.kind === 'operate' && o.label === 'Making a bed')).toBe(true);
     r.h.store.items = { ...r.h.store.items, furniture: 1 };

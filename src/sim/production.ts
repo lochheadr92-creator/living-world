@@ -290,8 +290,10 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   for (const k of Object.keys(r.inputs) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.inputs[k]);
   for (const k of Object.keys(r.fuel) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.fuel[k]);
   const short: Items = {};
+  // (rich worlds) piles seen to be someone else's are not there for this batch
+  const heldByOthers = (k: ItemKind): number => (snap?.held ?? []).reduce((n, [item, m, owner]) => n + (item === k && owner !== p.id ? m : 0), 0);
   for (const k of Object.keys(need) as ItemKind[]) {
-    const lack = unitsOf(need[k]) - stockAt(b, k);
+    const lack = unitsOf(need[k]) - Math.max(0, stockAt(b, k) - heldByOthers(k));
     if (lack > 0) short[k] = lack;
   }
   if (!Object.keys(short).length) {
@@ -503,7 +505,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
     const members = ctx.hh.members.map((id) => world.byId.get(id)).filter((q): q is Person => !!q && q.ent === 'person' && q.alive);
     const cold = members.some((q) => world.tick - (q.cooldowns.coldNight ?? -1e9) < DAY * 3);
     const frail = members.some((q) => stageOf(world, q) === 'child' || stageOf(world, q) === 'elder');
-    if (have < 1 && (cold || frail)) out.push({ item: 'furniture', qty: 1, have, base: (15 + (cold ? 8 : 0) + 4 * p.traits.diligence) * tm.work, why: cold ? 'we woke cold in the night: a bed off the ground would keep us warm' : 'the little ones and the old need a bed off the cold ground', tag: 'craft' });
+    if (have < 1 && (cold || frail)) out.push({ item: 'furniture', qty: 1, have, base: (24 + (cold ? 10 : 0) + 4 * p.traits.diligence) * tm.work, why: cold ? 'we woke cold in the night: a bed off the ground would keep us warm' : 'the little ones and the old need a bed off the cold ground', tag: 'craft' });
   }
 
   // (rich worlds) fish beyond what the household will eat soon is smoked where a smokehouse is known, so it keeps
@@ -512,7 +514,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
     const fish = unitsOf(p.inv.fish) + unitsOf(p.beliefs[ctx.home.id]?.items?.fish);
     const spare = Math.min(fish, Math.floor(hs.foodStock - hs.foodTarget * 1.1));
     const smoked = unitsOf(p.inv.smoked);
-    if (spare >= 4 && smoked < 4) out.push({ item: 'smoked', qty: 4, have: smoked, base: (14 + 6 * p.traits.diligence) * tm.work, why: 'to smoke our spare fish before it goes off', tag: 'food' });
+    if (spare >= 4 && smoked < 4) out.push({ item: 'smoked', qty: 4, have: smoked, base: (22 + 6 * p.traits.diligence) * tm.work, why: 'to smoke our spare fish before it goes off', tag: 'food' });
   }
 
   // (rich worlds) a tool wanted at all is wanted in iron when a smithy they may use has iron and a handle on its shelf
@@ -559,7 +561,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
     const haveBread = unitsOf(p.inv.bread) + unitsOf(ctx.home ? p.beliefs[ctx.home.id]?.items?.bread : 0) + unitsOf(share.bread);
     const surplusGrain = unitsOf(p.inv.grain) + unitsOf(ctx.home ? p.beliefs[ctx.home.id]?.items?.grain : 0) + unitsOf(share.grain);
     if (hs.foodStock >= hs.foodTarget * 1.1 && surplusGrain >= 4 && haveBread < target) {
-      out.push({ item: 'bread', qty: target - haveBread, have: haveBread, base: (14 + 6 * (ctx.dependents.length > 0 ? 1 : 0)) * tm.work, why: 'to turn spare grain into bread for the household', tag: 'food' });
+      out.push({ item: 'bread', qty: target - haveBread, have: haveBread, base: (22 + 6 * (ctx.dependents.length > 0 ? 1 : 0)) * tm.work, why: 'to turn spare grain into bread for the household', tag: 'food' });
     }
   }
   return out;
@@ -1074,7 +1076,7 @@ function optStockHall(ctx: Ctx): void {
   if (short <= 0) return;
   if (ctx.drives.hunger > 25 || ctx.drives.thirst > 25 || ctx.drives.energy > 40) return;
   if (hashUnit(p.id, Math.floor(world.tick / 400), 89) > 0.35 + 0.5 * p.traits.sociability) return;
-  supply(ctx, 'beer', short, (16 + 6 * p.traits.sociability) * traitMods(p).work, 'to have beer for the shared meals in the hall', 'social', 0, null);
+  supply(ctx, 'beer', short, (22 + 6 * p.traits.sociability) * traitMods(p).work, 'to have beer for the shared meals in the hall', 'social', 0, null);
 }
 
 /** The stockyard: stack the raw goods I carry beyond my own reserve; in slack time, fetch more when the yard I know is low (rich worlds). */
@@ -1369,6 +1371,9 @@ function optPlanUpgrade(ctx: Ctx): void {
   });
 }
 
+/** how long a step taken toward something keeps the rest of its chain in mind (rich worlds) */
+const PLAN_MOMENTUM = DAY * 1.5;
+
 // ───────────────────────── entry point ─────────────────────────
 export function productionOptions(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -1377,7 +1382,25 @@ export function productionOptions(ctx: Ctx): void {
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
   if (p.health < 45) return;
   const demands = demandsOf(ctx);
-  for (const d of demands) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
+  const rich = isRich(world);
+  for (const d of demands) {
+    // (rich worlds) a job already begun is carried through: the next step of a chain this person has lately taken a step in is worth more
+    const key = 'plan:' + d.item;
+    const begun = rich && world.tick - (p.cooldowns[key] ?? -1e9) < PLAN_MOMENTUM;
+    const before = ctx.options.length;
+    supply(ctx, d.item, d.qty, begun ? d.base + 12 : d.base, begun ? `${d.why} (already under way)` : d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
+    if (!rich) continue;
+    for (let i = before; i < ctx.options.length; i++) {
+      const o = ctx.options[i];
+      if (!o.make) continue;
+      const mk = o.make;
+      o.make = () => {
+        const a = mk();
+        if (a) p.cooldowns[key] = world.tick;
+        return a;
+      };
+    }
+  }
   optGranaryStore(ctx);
   optTendGranary(ctx);
   optToolMaintenance(ctx);

@@ -314,6 +314,15 @@ export function wantedTools(ctx: Ctx): ('axe' | 'pick' | 'hoe' | 'basket' | 'ham
   if (!has('pick') && knowRocks && knowTrees) options.push({ t: 'pick', w: p.skills.stone });
   if (!has('hammer') && builds && p.stats.gathered > 6) options.push({ t: 'hammer', w: p.skills.build * 1.25 });
   if (!has('saw') && p.skills.carpentry > 1.04 && knowTrees && p.stats.crafted >= 1) options.push({ t: 'saw', w: p.skills.carpentry * 1.2 });
+  // (rich worlds) the tool a workplace this person knows cannot be worked without: a hammer for the yard's beds and the smithy's forge,
+  // a pick for digging ore. Wanted first, unless someone in the household has one or one hangs on that workplace's rack.
+  if (isRich(world) && knowTrees && knowRocks) {
+    const known = beliefsByKind(p, ['building']);
+    const kin = (t: ToolKind) => ctx.members.some((q) => (q.inv[t] ?? 0) > 0);
+    const racked = (t: ToolKind, types: string[]) => known.some((b) => types.includes(b.btype ?? '') && (b.tools ?? []).includes(t));
+    if (!has('hammer') && !kin('hammer') && known.some((b) => b.btype === 'timber_yard' || b.btype === 'smithy') && !racked('hammer', ['timber_yard', 'smithy'])) options.push({ t: 'hammer', w: 4 });
+    if (!has('pick') && !kin('pick') && countBeliefsOfKind(p, 'ore_vein') > 0 && known.some((b) => b.btype === 'smithy' || b.btype === 'mine') && !racked('pick', ['mine'])) options.push({ t: 'pick', w: 3.5 });
+  }
   // planks are wanted and there is a yard to work them at: the saw is what makes the difference
   const planksWanted = beliefsByKind(p, ['site']).some((s) => unitsOf(s.need?.planks) > 0) && beliefsByKind(p, ['building']).some((b) => b.btype === 'timber_yard');
   if (planksWanted && !has('saw') && knowTrees && p.skills.carpentry >= 0.95) options.push({ t: 'saw', w: 3 });
