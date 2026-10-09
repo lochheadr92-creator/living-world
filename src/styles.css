@@ -1933,6 +1933,64 @@ kbd {
 .sec-count:empty {
   display: none;
 }
+.sec-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px 4px;
+  padding-top: 5px;
+  scroll-margin-top: 6px;
+}
+.sec-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  height: 24px;
+  padding: 0 4px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 99px;
+  background: var(--glass-hi);
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: background-color var(--t) var(--ease), color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+.sec-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+.sec-tab.is-on {
+  background: var(--accent-bg);
+  border-color: rgba(243, 185, 95, 0.45);
+  color: var(--accent);
+}
+.sec-tab {
+  position: relative;
+}
+/* the count is a small badge on the tab's corner, so it costs no width */
+.sec-tab .sec-count {
+  position: absolute;
+  top: -6px;
+  right: -1px;
+  min-width: 0;
+  height: 14px;
+  padding: 0 4px;
+  border-radius: 99px;
+  background: #2a3a48;
+  font-size: 9.5px;
+  line-height: 14px;
+  pointer-events: none;
+}
+/* a tabbed section has no header of its own (its tab is the header) and is gone while not shown */
+.sec-tabbed .sec-head,
+.sec-tabbed[data-open='false'] {
+  display: none;
+}
+.sec-tabbed .sec-body {
+  padding-top: 10px;
+}
 .sec-body {
   display: flex;
   flex-direction: column;

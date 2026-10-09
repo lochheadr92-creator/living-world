@@ -122,9 +122,30 @@ interface Simple {
 export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSections {
   const { game } = ctx;
 
-  // one section open at a time (debug aside), so the panel stays short instead of growing into a long scroll
-  const group: { id: string; sec: SectionHandle }[] = [];
-  const mk = (id: string, title: string, hint?: string): SectionHandle => {
+  // The reference sections (opportunities, relationships, ...) sit behind a row of tabs: one shows at a time, and clicking the shown
+  // one hides it again. The live social blocks and the debug block stay ordinary collapsible sections.
+  const tabs: { id: string; sec: SectionHandle; btn: HTMLButtonElement }[] = [];
+  const tabBar = h('div', { class: 'sec-tabs', role: 'group', 'aria-label': 'More about them' });
+  const syncTabs = () => {
+    for (const t of tabs) {
+      const on = t.sec.isOpen();
+      setBool(t.btn, 'aria-expanded', on);
+      toggle(t.btn, 'is-on', on);
+    }
+  };
+  const showTab = (id: string | null): void => {
+    for (const t of tabs) {
+      const on = t.id === id;
+      if (t.sec.isOpen() !== on) t.sec.setOpen(on);
+      ctx.state.sections[t.id] = on;
+    }
+    ctx.saveState();
+    syncTabs();
+    hooks.onSectionToggle();
+    // bring what was just opened into view rather than leaving it below the fold
+    if (id) tabBar.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  };
+  const mk = (id: string, title: string, hint?: string, tab?: string): SectionHandle => {
     const sec = makeSection({
       id,
       title,
@@ -132,25 +153,26 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       open: ctx.state.sections[id] ?? SECTION_DEFAULT[id] ?? false,
       onToggle: (open) => {
         ctx.state.sections[id] = open;
-        if (open && id !== 'debug') {
-          for (const o of group) {
-            if (o.id === id || !o.sec.isOpen()) continue;
-            o.sec.setOpen(false);
-            ctx.state.sections[o.id] = false;
-          }
-        }
         ctx.saveState();
         hooks.onSectionToggle();
-        // bring what was just opened into view rather than leaving it below the fold
-        if (open) sec.el.scrollIntoView({ block: 'start', behavior: 'smooth' });
       },
     });
-    if (id !== 'debug') group.push({ id, sec });
+    if (tab) {
+      const btn = h(
+        'button',
+        { type: 'button', class: 'sec-tab', 'aria-controls': `lw-sec-${id}`, 'aria-expanded': 'false', 'data-tip': hint ? `${title}. ${hint}` : title, onClick: () => showTab(sec.isOpen() ? null : id) },
+        h('span', null, tab),
+        sec.countEl, // the count moves from the (hidden) section header onto the tab
+      );
+      sec.el.classList.add('sec-tabbed');
+      tabBar.appendChild(btn);
+      tabs.push({ id, sec, btn });
+    }
     return sec;
   };
 
   // ───────── opportunities ─────────
-  const oppSec = mk('opp', 'Opportunities nearby', 'Things nearby that could have helped, and why they did or did not take them. Click one to see where it is.');
+  const oppSec = mk('opp', 'Opportunities nearby', 'Things nearby that could have helped, and why they did or did not take them. Click one to see where it is.', 'Nearby');
   const oppBox = h('div', { class: 'list' });
   const oppEmpty = emptyNote('Nothing nearby that they could use right now.');
   oppSec.body.append(oppBox, oppEmpty);
@@ -188,7 +210,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   );
 
   // ───────── relationships ─────────
-  const relSec = mk('rel', 'Relationships', 'How they feel about people they know. The bar runs from dislike (left) to affection (right).');
+  const relSec = mk('rel', 'Relationships', 'How they feel about people they know. The bar runs from dislike (left) to affection (right).', 'People');
   const relBox = h('div', { class: 'list' });
   const relEmpty = emptyNote('They have not got to know anyone yet.');
   relSec.body.append(relBox, relEmpty);
@@ -242,7 +264,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   );
 
   // ───────── requests ─────────
-  const reqSec = mk('req', 'Requests', 'Favours asked for or promised lately. What they have promised themselves is under Promises.');
+  const reqSec = mk('req', 'Requests', 'Favours asked for or promised lately. What they have promised themselves is under Promises.', 'Requests');
   const reqBox = h('div', { class: 'list' });
   const reqEmpty = emptyNote('No requests lately.');
   reqSec.body.append(reqBox, reqEmpty);
@@ -266,7 +288,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   );
 
   // ───────── recent experiences ─────────
-  const memSec = mk('mem', 'Recent experiences', 'What has happened to them lately, newest first.');
+  const memSec = mk('mem', 'Recent experiences', 'What has happened to them lately, newest first.', 'Recent');
   const memBox = h('div', { class: 'list mem-list' });
   const memEmpty = emptyNote('Nothing much has happened yet.');
   memSec.body.append(memBox, memEmpty);
@@ -286,7 +308,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   );
 
   // ───────── what they know ─────────
-  const knowSec = mk('know', 'What they know', 'Only what they have seen first-hand or been told. It can be out of date, and it is not the same as what really exists.');
+  const knowSec = mk('know', 'What they know', 'Only what they have seen first-hand or been told. It can be out of date, and it is not the same as what really exists.', 'Knows');
   const knowSum = h('p', { class: 'know-sum' });
   const knowSeen = h('i', { class: 'seen' });
   const knowTold = h('i', { class: 'told' });
@@ -315,7 +337,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   );
 
   // ───────── family ─────────
-  const famSec = mk('fam', 'Family');
+  const famSec = mk('fam', 'Family', undefined, 'Family');
   const famBox = h('dl', { class: 'fam' });
   const famEmpty = emptyNote('No family nearby that they know of.');
   famSec.body.append(famBox, famEmpty);
@@ -329,7 +351,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   );
 
   // ───────── traits and skills ─────────
-  const traitSec = mk('traits', 'Traits & skills', 'Who they are, and what they are good at. Skills grow with practice.');
+  const traitSec = mk('traits', 'Traits & skills', 'Who they are, and what they are good at. Skills grow with practice.', 'Traits');
   const traitSummary = h('p', { class: 'trait-sum' });
   const traitBox = h('div', { class: 'traits' });
   const skillBox = h('div', { class: 'skills' });
@@ -414,7 +436,12 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   // the social contract (what is being said, eaten, promised, fought over) comes first: it is live, and each part hides when empty
   const social = createPersonSocial({ game, section: (id, title, hint) => mk(id, title, hint), onNavigate: hooks.onNavigate });
 
-  const el = h('div', { class: 'secs' }, ...social.els, oppSec.el, relSec.el, reqSec.el, memSec.el, knowSec.el, famSec.el, traitSec.el, dbgSec.el);
+  // a saved state from before the tabs may have several open: keep the first
+  const firstOpen = tabs.find((t) => t.sec.isOpen());
+  for (const t of tabs) if (t !== firstOpen && t.sec.isOpen()) t.sec.setOpen(false);
+  syncTabs();
+
+  const el = h('div', { class: 'secs' }, ...social.els, tabBar, oppSec.el, relSec.el, reqSec.el, memSec.el, knowSec.el, famSec.el, traitSec.el, dbgSec.el);
 
   return {
     el,
