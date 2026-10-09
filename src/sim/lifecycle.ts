@@ -1,5 +1,6 @@
 import { fireNear, nearestHub } from './settlements';
 import { mourn, think } from './mood';
+import { placesOnBurial } from './places';
 import { abortActivity, newActivity, startActivity } from './activities';
 import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
@@ -199,6 +200,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
         if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND) {
           const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age };
           registerGeneric(world, g);
+          placesOnBurial(world, p, g.x, g.y);
           placed = true;
         }
       }

@@ -1,7 +1,8 @@
 // Side-effect imports register every activity handler.
 import './act_resource';
 import { spoilPile, spoilStore, updateHardship } from './hardship';
-import { updateMood } from './mood';
+import { MOOD_EVERY, updateMood } from './mood';
+import { updatePlaces } from './places';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -94,6 +95,7 @@ function stepPerson(world: World, p: Person): void {
   const tick = world.tick;
   updateNeeds(world, p);
   updateMood(world, p);
+  if (p.places && (world.tick + p.id) % MOOD_EVERY === 0) updatePlaces(world, p);
   if (p.health <= 0) {
     const n = p.needs;
     const cause = p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
@@ -260,6 +262,7 @@ export function hashWorld(world: World): string {
   for (const m of world.meals) push(`M${m.id}:${m.status},${m.servings},${m.reserved},${m.arrived.length},${m.ate.length}`);
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
+    for (const p of world.persons) if (p.alive && p.places) push(`G${p.id}:${p.places.map((m) => `${m.kind[0]}${r4(m.x)},${r4(m.y)},${m.until},${m.visited}`).join(';')}`);
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));

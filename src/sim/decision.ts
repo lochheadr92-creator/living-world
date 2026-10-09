@@ -7,6 +7,7 @@ import { fleeRadius, makeCtx } from './optutil';
 import { probe, probeWander } from './probe';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
+import { placeOptions } from './options_places';
 import { survivalOptions } from './options_survival';
 import { workOptions } from './options_work';
 import { productionOptions } from './production';
@@ -27,6 +28,7 @@ export function generateOptions(world: World, p: Person, collect = false): Ctx {
   workOptions(ctx);
   productionOptions(ctx);
   socialOptions(ctx);
+  placeOptions(ctx);
   if (probe.on) {
     probe.generations++;
     probe.optionsGenerated += ctx.options.length;

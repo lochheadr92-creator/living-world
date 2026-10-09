@@ -1,5 +1,6 @@
 import { addEvent, addFx, addLog } from './events';
 import { think } from './mood';
+import { placesOnBite } from './places';
 import { wolfNerve } from './hardship';
 import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
@@ -231,6 +232,7 @@ function bite(world: World, a: Animal, t: Person): void {
   addEvent(world, 'danger', `A wolf bit ${t.name}${t.health <= 0 ? ' fatally' : ''}.`, [t.id], t.x, t.y);
   addLog(world, t, 'danger', `A wolf attacked me near (${Math.round(t.x)}, ${Math.round(t.y)}).`);
   think(world, t, 'bitten', -30, 3600, 'was bitten by a wolf');
+  placesOnBite(world, t);
   if (t.health <= 0) {
     t.deathCause = 'wolf attack';
   }

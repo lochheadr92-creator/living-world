@@ -131,6 +131,28 @@ over the four seeds agree with the 24-seed direction. LIKELY, not separated: tha
 to food, warmth and safety, so development comes later while survival is intact; the mood weights and the stakes both act in this run and
 the experiment that tells them apart (stakes without the mood effects, and the reverse) has not been done.
 
+### Places that matter (rich dynamics; built, not yet measured)
+
+Why: the agent–world map (October) found that places mean almost nothing to people. A grave is drawn but read by no choice, a wolf bite is
+remembered only as long as the wolf's last position, and nobody prefers or avoids anywhere. `src/sim/places.ts`, `src/sim/options_places.ts`,
+`tests/places.test.ts`; lab intervention `rich-no-places` (rich, but places change nothing), so `rich` against `rich-no-places` isolates them.
+
+* **A place memory** is a spot, a kind and a hold that fades linearly (like a thought), at most 8 per person, renewed rather than copied.
+  Danger: where a wolf bit them (1.0, 6 days), where they saw a wolf attack someone within 9 tiles (0.5, 3 days), where a wolf came at them
+  and they ran (0.35, 2 days), where a wolf killed someone close (0.4 to 0.8, 4 days). Grief: the grave of someone close (partner or child 1,
+  parent 0.8, sibling 0.6, household 0.4, friend 0.3; 4 to 12 days).
+* **What it changes.** A danger place counts in `dangerAt` (reach 8 tiles, scaled by its hold), so every choice that already weighs danger
+  (gathering, wood, water, a bed, exploring, building) steers away from it, more for cautious people. Standing within 6 tiles of one gives
+  a thought "feels uneasy near where ...". A grief place gives a daytime option to visit the grave (not when a need is critical; again a
+  day after a visit); a visit shortens the loss by 30% of what is left and gives a small lift.
+* **Seen.** The inspector lists "Places they remember" (click to fly there). The places are saved and counted in the fingerprint of a rich
+  world; ordinary worlds are unchanged (VERIFIED: golden, determinism and save tests pass; nothing is stored or drawn outside rich worlds).
+
+First look (VERIFIED, one seed, default size, 6 days, `scripts/places_smoke.ts`): danger places build up as wolves come close (20 held on day 6,
+35 "uneasy" samples), no deaths, so no graves and no visits. LIKELY: grief will be rare in 15-day runs (deaths are 0.3 to 0.8 a world), so
+the measurable effect, if any, is where people go around wolf country. UNKNOWN until the lab runs: whether it moves any gate or outcome
+beyond the nudge.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures
