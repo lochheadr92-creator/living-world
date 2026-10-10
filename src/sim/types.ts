@@ -981,11 +981,62 @@ export interface World {
 
 
 // ───────────────────────────── the AI inhabitant (docs/INHABITANT.md) ─────────────────────────────
-/** A person driven from outside: the mark that survives a save, and the counts. Never read by the simulation. */
+/** one of the inhabitant's own notes: its words, with an id it can refer to and the tick it was written or last changed */
+export interface NoteEntry {
+  id: string;
+  text: string;
+  since: number;
+}
+
+/** a conclusion the inhabitant drew for itself: never verified by the engine, bounded in confidence, resting on cited observations */
+export interface Inference extends NoteEntry {
+  /** 0 (doubtful) to 1 (sure), two decimals */
+  confidence: number;
+  /** references into observations it was given (place:<id>, person:<id>, seen:<id>, memory:<tick>, result:<tick>, option:<key>, obs:<tick>) */
+  basis: string[];
+  /** the tick of the last change to its text or confidence */
+  revised: number;
+}
+
+/**
+ * What a person driven from outside has written down for themselves: their own words, bounded (src/agent/memory.ts), never read by the
+ * simulation. Kept apart from what the engine itself remembers for them (beliefs, log, relations), which is the verified part.
+ */
+export interface InhabitantNotes {
+  goals: NoteEntry[];
+  intentions: NoteEntry[];
+  inferences: Inference[];
+  uncertainties: NoteEntry[];
+  journal: { tick: number; text: string }[];
+}
+
+/** how the inhabitant's inferences have moved over the run (cumulative; the per-turn detail is in the transcript) */
+export interface MemoryCounters {
+  version: number;
+  /** note updates offered by the model, and the ones rejected whole */
+  updates: number;
+  rejectedUpdates: number;
+  /** entries (of any list) the model dropped because they were over a limit or malformed */
+  rejectedEntries: number;
+  /** inferences: created, restated unchanged, confidence raised, confidence lowered, text changed, left out */
+  new: number;
+  kept: number;
+  strengthened: number;
+  weakened: number;
+  revised: number;
+  abandoned: number;
+  /** the next id to hand out */
+  nextId: number;
+}
+
+/** A person driven from outside: the mark that survives a save, the counts, and their notes. Never read by the simulation. */
 export interface InhabitantState {
   /** the tick at which outside control began */
   since: number;
   /** decisions answered from outside, and the ones the engine had to make instead */
   turns: number;
   fallbacks: number;
+  /** only when the run keeps memory (protocol inhabitant/2); absent in a run without it */
+  notes?: InhabitantNotes;
+  memory?: MemoryCounters;
 }
