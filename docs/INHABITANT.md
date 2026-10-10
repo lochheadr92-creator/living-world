@@ -39,8 +39,8 @@ action space), `docs/ECONOMY.md` (ownership, claims, promises). Nothing here ass
 ### 1.3 Missing capabilities (now built unless marked)
 
 A seam in `decide` for an outside chooser that can defer; a restricted observation builder; a transcript of outside decisions with a
-replay that consumes it without a model; a model gate with budgets; a runner; per-field provenance. Not yet built: the model's own
-persistent notes, first-person reports, per-person metrics and the comparative arms (section 7).
+replay that consumes it without a model; a model gate with budgets; a runner; per-field provenance; the model's own persistent notes
+(section 4, the second stage). Not yet built: first-person reports, per-person metrics and the comparative arms (section 7).
 
 ### 1.4 Compatibility risks and how each is held
 
@@ -117,11 +117,49 @@ and the tests for them.
 Never: `world.events`, the world's own lists of things, other people's needs, inventories, beliefs or plans, `world.stats`, the
 ledger, the dead, `auditOpportunities`, the seed. A static test holds that `observe.ts` and `protocol.ts` contain no such reads.
 
-## 4. Memory (next stage)
+## 4. Memory
 
-The engine's own per-person memory is read every turn. The model's own notes will be `world.inhabitants[id].notes`: goals,
-intentions, inferences (each with a confidence and the observations it rests on), doubts, a bounded journal; saved with the world,
-folded into its hash, never read by the simulation, and diffed by the runner between turns so revision is measurable.
+The engine's own per-person memory (beliefs, log, relations, failures, concerns, commitments) is the verified and remembered part and
+is read every turn. The model's own notes are `world.inhabitants[id].notes` (`src/agent/memory.ts`), kept only in a run with memory
+(`--memory`, protocol `inhabitant/2`); a run without it speaks `inhabitant/1` to the byte, so the first real-model transcript still
+replays.
+
+**Epistemic standing.** Five kinds are kept apart and named as such in the prompt: what the person *sees* now and what they
+*remember or were told* (the observation, from the engine); what the model *infers* (inferences, with a confidence and a basis), what
+it *intends or hopes* (goals, intentions) and what it *doubts* (uncertainties), all in the notes, written by the model, never
+verified by the engine. The system prompt says of the notes: "They are not facts about the world and they may be wrong." An
+inference never becomes knowledge: nothing in `src/sim` reads the notes (a static test holds it), and the options a person is
+offered are the same with or without them.
+
+**Schema** (`InhabitantNotes` in `types.ts`):
+
+| list | entry | limit |
+|---|---|---|
+| goals, intentions, uncertainties | `{ id, text, since }` | 6, 6, 8 entries of 200 characters |
+| inferences | `{ id, text, since, confidence, basis[], revised }` | 12 entries of 200 characters; confidence 0.00 to 1.00; up to 6 references of 60 characters |
+| journal | `{ tick, text }` | 40 entries of 240 characters (the last 12 are shown to the model) |
+| the whole record | JSON | 12,000 characters |
+
+**References.** A basis entry names something the model was shown: `place:<id>` (a remembered place), `seen:<id>` or `person:<id>`
+(a person), `memory:<tick>` (a remembered event), `result:<tick>` (the last result), `option:<key>`, `obs:<tick>` (the moment). A
+reference is accepted only if the current observation supports it or an earlier accepted inference already cited it; an inference
+left with no accepted reference is refused and counted.
+
+**Updates.** The model answers with its notes after each decision: a list it includes replaces that list (restating entries by id
+keeps them, leaving one out drops it, an entry without a known id is new); a list it leaves out is unchanged; the journal takes one
+new entry. The update is parsed (shape-checked) when the answer arrives and applied when the choice is consumed, at the ask's own
+tick, in both live and replay. Normalisation is deterministic: control characters removed, text cut to its limit, extra entries
+dropped, confidence clamped and rounded, unsupported references dropped, then the record trimmed to its total size (oldest journal
+first, then the least confident inference, then the last uncertainty, intention, goal). A notes field that is not an object, or a
+list that is not a list, refuses the whole update; the choice stands either way. A failed call (no answer) touches nothing.
+
+**Revision.** For inferences every update is classified by id: new, kept (same text and confidence), strengthened, weakened, revised
+(text changed), abandoned (left out); goals adopted and dropped are counted too. The per-update record goes on the transcript's call;
+cumulative counters live in `world.inhabitants[id].memory` with the notes, so they are saved and hashed.
+
+**Verification.** The notes are part of `hashWorld` whenever the mark exists, so every call's world hash and the end hash cover them;
+in addition each consuming call records the hash of the notes after its update, and a replay refuses a different one. The header
+records the memory version and the limits; a transcript kept under others is refused.
 
 ## 5. Control, time, transcript and replay
 
@@ -198,4 +236,46 @@ observation. Five decision points in half a day is the engine's own cadence for 
 ends, not on a timer.
 
 What this does not show: whether the model's choices were better or worse than the engine's. One run is one chaotic draw, and the
-per-person measures and the paired arms are not built yet (section 7).
+per-person measures and the paired arms are not built yet (section 7). The transcript and report of this run live on the operator's
+machine (`experiments/README.md` records the limitation and where they belong).
+
+### The memory experiment (scripted model, VERIFIED, 2026-10-10)
+
+The question for this stage is narrow: can an inhabitant preserve and revise its own intentions and inferences across decisions
+while subject to exactly the same mechanics and information as anyone else, and can pursuit from memory be told apart from the
+engine offering the same action again? A scripted model answers it without a language model's noise. The **goal keeper**
+(`src/agent/stubs.ts`) adopts the goal of finishing a building site at the first ask in which the engine offers work at one, writes
+it into its notes, and takes the first option at that moment like any other; it never acts on a goal at the moment of adopting it.
+Only a goal read back from its notes is acted on: deliver to the site, build at it, or chop wood when its notes say the site lacks
+wood. Three arms run the baseline window (seed meadow, Pavel, tick 2400 to 3600):
+
+| arm | notes written | notes read | decisions | choices that were not the first option |
+|---|---|---|---|---|
+| memory | yes | yes | 7 | 1: at tick 2721, "Build the hut" over "Chopping wood to keep the fire going" |
+| blind (memory on, never read) | yes | no | 7 | 0 |
+| no memory (protocol 1) | no | no | 7 | 0 |
+
+The sequence asked for, as it happened in the memory arm:
+1. Tick 2702: the engine offered delivering materials to a hut site; the goal "Help finish the hut site … [place:2077]" was adopted,
+   with the inference "The site still needs: 5 wood, 2 stone" (confidence 0.8, basis the site and the moment) and the uncertainty
+   whether anyone else was bringing materials. The first option (the delivery itself) was taken, as the policy requires.
+2. Tick 2721: the goal was read back and "Build the hut" chosen. Both control arms, at the same tick with the **same observation
+   hash**, were offered the same option and took the first one (chopping wood) instead. That is the distinction the stage needed:
+   same offer, same world, different choice, and the only difference between the arms is whether the notes were read.
+3. The build ended partial at tick 2965: "no materials to work with (3 wood)".
+4. The goal stayed in the notes; at tick 2965 the journal recorded the failure in its own words and a new inference was made,
+   "Working there is pointless until materials arrive" (0.7, basis the result and the site); the "still needs" inference was revised
+   as the remembered site's needs changed, and its confidence lowered to 0.3 once the site was remembered as needing nothing.
+5. Chopping wood was chosen for the site's sake (the same action the first option would have given: pursuit from memory and the
+   engine's default coincided there, which the table above does not count).
+6. Later asks offered no way to advance the site; the first option was taken each time, the goal kept.
+
+Counters at the end of the memory arm: 7 updates, 2 inferences made, 5 kept, 3 revised, 0 abandoned, 0 entries rejected. The
+blind arm, which rewrote its notes every ask without reading them, shows what re-adoption looks like: 4 made, 3 abandoned, 0 kept.
+
+Replay of the memory arm reproduced the end state and the notes hash with no model; the controls were replayable too.
+
+What this establishes: the memory mechanism carries a goal across decisions, the goal changes a choice the engine would not have
+made by default, the inhabitant records what became of it, and inferences move with the evidence; all under the same offers, claims
+and consequences as any other person. What it does not establish: that a language model will use its notes this way, or that doing so
+is any better. The scripted policy is a test instrument, not a claim about strategy.
