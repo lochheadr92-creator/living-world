@@ -1,0 +1,2 @@
+replay of inhabit_memory\transcript.json: OK
+ended at tick 3600 in state 4f05d50c (recorded 4f05d50c); 5 decisions consumed, 0 overrides matched

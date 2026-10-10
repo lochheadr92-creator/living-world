@@ -3335,3 +3335,22 @@ button.worker:hover {
   font-size: 10.5px;
   color: var(--faint);
 }
+
+/* ── the AI inhabitant panel (src/ui/inhabit.ts) ── */
+.inhabit { width: 300px; max-height: 46vh; overflow: auto; padding: 8px 10px; font-size: 12px; line-height: 1.35; pointer-events: auto; }
+.inhabit-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.inhabit-who { opacity: 0.8; }
+.inhabit-status { margin-left: auto; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: rgba(255, 255, 255, 0.08); }
+.inhabit-status[data-state='thinking'] { background: rgba(255, 196, 64, 0.25); animation: inhabit-pulse 1.2s ease-in-out infinite; }
+.inhabit-status[data-state='running'] { background: rgba(96, 200, 120, 0.22); }
+.inhabit-status[data-state='failed'], .inhabit-status[data-state='dead'] { background: rgba(220, 80, 80, 0.3); }
+@keyframes inhabit-pulse { 50% { opacity: 0.45; } }
+.inhabit-detail { opacity: 0.8; margin-top: 4px; }
+.inhabit-decision { margin-top: 6px; }
+.inhabit-chosen { font-weight: 600; }
+.inhabit-why { opacity: 0.9; font-style: italic; }
+.inhabit-list { margin-top: 6px; }
+.inhabit-list-h { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.6; }
+.inhabit-item { padding-left: 8px; text-indent: -8px; }
+.inhabit-counters { margin-top: 6px; opacity: 0.7; font-size: 11px; }
+.inhabit-actions { display: flex; gap: 6px; margin-top: 8px; }

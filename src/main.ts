@@ -1,5 +1,6 @@
 import './styles.css';
 import { Game } from './app/game';
+import { InhabitDriver, inhabitConfigFromUrl, settingsFromConfig } from './app/inhabit';
 import { loadPrefs } from './app/prefs';
 import { project } from './render/iso';
 import { settingsForProfile } from './sim/profiles';
@@ -7,8 +8,11 @@ import { Renderer } from './render/renderer';
 import { mountUI } from './ui';
 
 const prefs = loadPrefs();
-const game = new Game(settingsForProfile(prefs.size, prefs.seed, { harsh: prefs.harsh, immigration: prefs.immigration, dynamics: prefs.rich ? 'rich' : 'authored' }));
+// ?inhabit=<name>&... hands one person to an outside model (src/app/inhabit.ts); the world is then the one the query asks for
+const inhabit = inhabitConfigFromUrl(location.search, prefs);
+const game = new Game(inhabit ? settingsFromConfig(inhabit) : settingsForProfile(prefs.size, prefs.seed, { harsh: prefs.harsh, immigration: prefs.immigration, dynamics: prefs.rich ? 'rich' : 'authored' }));
 game.speed = prefs.speed;
+const driver = inhabit ? new InhabitDriver(game, inhabit) : null;
 Object.assign(game.overlays, prefs.overlays);
 game.debug = prefs.debug;
 
@@ -20,7 +24,8 @@ game.debug = prefs.debug;
 
 const canvas = document.getElementById('world') as HTMLCanvasElement;
 const renderer = new Renderer(canvas, game);
-const ui = mountUI(game, document.getElementById('ui') as HTMLElement);
+const ui = mountUI(game, document.getElementById('ui') as HTMLElement, { inhabit: driver ?? undefined });
+if (driver) void driver.start();
 
 // handles for debugging and the automated browser checks
 (window as unknown as Record<string, unknown>).__game = game;

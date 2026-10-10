@@ -1,0 +1,138 @@
+live run: Pavel (#996) in meadow (village), tick 2400 to 3600
+model gpt-5 (api) {"api":"openai"}; protocol inhabitant/2; sim 22b83b7c:3780a61a / 0a633acb
+budget {"maxCallsPerDay":400,"maxInputChars":120000,"maxOutputTokens":8000,"timeoutMs":60000,"maxConsecutiveFailures":5}
+end: tick 3600 hash 4f05d50c; calls 5, applied 5, refused 0, engine chose 0, lagged 0; gate {"calls":5,"failures":0,"refused":0,"inputChars":111594,"outputTokens":13108,"givenUp":null}; notes e068ba0e
+memory: {"version":1,"updates":5,"rejectedUpdates":0,"rejectedEntries":0,"new":6,"kept":10,"strengthened":0,"weakened":1,"revised":5,"abandoned":1,"nextId":17}
+
+decisions (tick clock | offered | picked -> result | model's reason | what came of it)
+t2532 08:31 | 2 options | Potter about near home [wander] -> applied | My pack is full and home is nearby; pottering may let me stash goods or catch a quick chat. Exploring while loaded can wait. | success: done (t2702)
+t2702 10:13 | 3 options | Deliver materials to the hut site [haul:2077] -> applied | I’m right by Thistle’s hut site and carrying wood and stone; delivering will help the build and free my full load. It’s neighborly and quick. | success: done (t2721)
+t2721 10:24 | 10 options | Build the hut [build:2077] -> applied | I’m right by Thistle’s hut and can add quick progress with the materials on site. It helps a neighbor and suits my energy right now. | partial: no materials to work with (3 wood) (t2965)
+t2965 12:51 | 9 options | Chopping wood to keep the fire going [gather:270] -> applied | The hut is stalled for lack of wood; I’ll chop some now so we can get back to building. | success: done (t3275)
+t3275 15:57 | 9 options | Sleep at my lean-to [sleep:995] -> applied | My energy is low, and I see Thistle’s hut is finished, so there’s no rush on hauling wood. I’ll nap at my lean-to to recover. | 
+  notes at t2532: new 3, goalsAdopted 3
+  notes at t2702: new 1, kept 1, revised 2, goalsAdopted 1
+  notes at t2721: new 1, kept 3, revised 1
+  notes at t2965: kept 4, revised 1
+  notes at t3275: new 1, kept 2, weakened 1, revised 1, abandoned 1
+
+the inhabitant's notes at the end (its own words; never read by the simulation):
+{
+ "goals": [
+  {
+   "id": "g1",
+   "text": "Keep my lean-to stocked with food and wood.",
+   "since": 2532
+  },
+  {
+   "id": "g2",
+   "text": "Enjoy a bit of social time with neighbors.",
+   "since": 2532
+  },
+  {
+   "id": "g3",
+   "text": "Map nearby resources for later trips.",
+   "since": 2532
+  },
+  {
+   "id": "g10",
+   "text": "Support neighbors’ building projects.",
+   "since": 2702
+  }
+ ],
+ "intentions": [
+  {
+   "id": "n15",
+   "text": "Nap at my lean-to to recover energy, then sort my load.",
+   "since": 3275
+  }
+ ],
+ "inferences": [
+  {
+   "id": "i7",
+   "text": "My pack is nearly full; more gathering will encumber me.",
+   "since": 2532,
+   "confidence": 0.85,
+   "basis": [
+    "obs:3275"
+   ],
+   "revised": 3275
+  },
+  {
+   "id": "i8",
+   "text": "Talia is nearby; a chat might work if I pass her way.",
+   "since": 2532,
+   "confidence": 0.5,
+   "basis": [
+    "person:1028",
+    "obs:3275"
+   ],
+   "revised": 2702
+  },
+  {
+   "id": "i9",
+   "text": "The campfire has plenty of fuel; no urgency to chop more wood.",
+   "since": 2532,
+   "confidence": 0.78,
+   "basis": [
+    "place:993",
+    "obs:3275"
+   ],
+   "revised": 2532
+  },
+  {
+   "id": "i12",
+   "text": "Helping at the hut will likely build goodwill with neighbors.",
+   "since": 2702,
+   "confidence": 0.5,
+   "basis": [
+    "place:2077",
+    "obs:3275"
+   ],
+   "revised": 3275
+  },
+  {
+   "id": "i16",
+   "text": "Thistle’s hut looks complete; no need to bring them more wood.",
+   "since": 3275,
+   "confidence": 0.95,
+   "basis": [
+    "place:2562",
+    "place:2077",
+    "obs:3275"
+   ],
+   "revised": 3275
+  }
+ ],
+ "uncertainties": [
+  {
+   "id": "u6",
+   "text": "Will Talia stop to chat if I get close?",
+   "since": 2532
+  }
+ ],
+ "journal": [
+  {
+   "tick": 2532,
+   "text": "Cloudy morning by the shore; just chopped wood. Kids nearby. I’ll potter toward home to offload and maybe share a word."
+  },
+  {
+   "tick": 2702,
+   "text": "Cloudy morning. I’ll drop my wood and stone at Thistle’s hut just south—lighten my pack and lend a hand."
+  },
+  {
+   "tick": 2721,
+   "text": "Materials delivered; lending my hands to raise Thistle's hut a bit."
+  },
+  {
+   "tick": 2965,
+   "text": "Decided to chop wood to supply Thistle’s hut—work is stalled for lack of 3 wood."
+  },
+  {
+   "tick": 3275,
+   "text": "Thistle’s hut looks finished. I’m worn out—heading to my lean-to for a nap to recover."
+  }
+ ]
+}
+
+observer: the village's record of this person between decisions (never shown to the model)

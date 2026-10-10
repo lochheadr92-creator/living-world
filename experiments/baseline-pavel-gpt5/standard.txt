@@ -1,0 +1,2 @@
+standard run: Pavel (#996) in meadow, tick 2400 to 3600
+end hash 053460f5; Pavel alive, health 100

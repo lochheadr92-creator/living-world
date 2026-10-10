@@ -53,6 +53,12 @@ export interface CameraState {
 
 export type GameEvent = 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'follow' | 'scene' | 'debug' | 'step';
 
+/** around each tick the clock runs (an outside driver's hooks, src/app/inhabit.ts); `afterTick` returning false ends the frame's stepping */
+export interface TickHooks {
+  beforeTick?: () => void;
+  afterTick?: () => boolean;
+}
+
 export class Game {
   world: World;
   settings: Settings;
@@ -78,6 +84,8 @@ export class Game {
   stepEase = 1;
   /** ticks the clock gave up on (see PlaybackStats.dropped) */
   droppedTicks = 0;
+  /** hooks around each tick run by the clock (play and single step); none unless a driver installs them */
+  tickHooks: TickHooks | null = null;
   private recent: { dt: number; ticks: number; asked: number }[] = [];
   /** real seconds spent playing, and when (on that clock) ticks were given up, for the "recent" part of the report */
   private playClock = 0;
@@ -115,7 +123,18 @@ export class Game {
       n = MAX_STEPS_PER_FRAME;
       this.acc = this.acc % 1; // too far behind: skip the backlog rather than spiral
     } else this.acc -= n;
-    for (let i = 0; i < n; i++) this.tickOnce();
+    let ran = 0;
+    for (let i = 0; i < n; i++) {
+      this.tickHooks?.beforeTick?.();
+      this.tickOnce();
+      ran++;
+      if (this.tickHooks?.afterTick && !this.tickHooks.afterTick()) {
+        // the driver has taken the clock (it pauses to wait for an answer): the rest of this frame is not played
+        this.acc = 0;
+        break;
+      }
+    }
+    n = ran;
     this.alpha = this.acc;
     this.lastFrameTicks = n;
     this.recent.push({ dt: real, ticks: n, asked: this.speed });
@@ -176,7 +195,9 @@ export class Game {
   stepOnce(): void {
     this.playing = false;
     this.acc = 0;
+    this.tickHooks?.beforeTick?.();
     this.tickOnce();
+    this.tickHooks?.afterTick?.();
     this.alpha = 1;
     this.stepEase = 0;
     this.emit('step');

@@ -1,0 +1,13 @@
+live run: Pavel (#996) in meadow (village), tick 2400 to 3600
+model gpt-5 (api) {"api":"openai"}; protocol inhabitant/1; sim 22b83b7c:3780a61a / 98771f44
+budget {"maxCallsPerDay":400,"maxInputChars":120000,"maxOutputTokens":8000,"timeoutMs":60000,"maxConsecutiveFailures":5}
+end: tick 3600 hash 0d0de0ed; calls 5, applied 5, refused 0, engine chose 0, lagged 0; gate {"calls":5,"failures":0,"refused":0,"inputChars":97038,"outputTokens":3697,"givenUp":null}
+
+decisions (tick clock | offered | picked -> result | model's reason | what came of it)
+t2532 08:31 | 2 options | Potter about near home [wander] -> applied | I’m carrying a full load and nothing urgent needs doing. I’ll potter near home and see if I can stash things or lend a hand. | success: done (t2702)
+t2702 10:13 | 3 options | Deliver materials to the hut site [haul:2077] -> applied | I’m carrying wood and stone and the hut nearby needs them. I’ll drop them off to help and free up some space. | success: done (t2721)
+t2721 10:24 | 10 options | Build the hut [build:2077] -> applied | I just delivered materials to Thistle’s hut, so I’ll put them to use and make progress. It’s right nearby and helping finish a friend’s home feels right. | partial: no materials to work with (3 wood) (t2965)
+t2965 12:51 | 9 options | Chopping wood to keep the fire going [gather:270] -> applied | We need 3 wood to keep work going on Thistle’s hut. This tree is close and has plenty left, and I’ve got enough energy to chop it now. | success: done (t3275)
+t3275 15:57 | 9 options | Sleep at my lean-to [sleep:995] -> applied | My energy is low and my lean-to is nearby. I’ll sleep there to recover safely. | 
+
+observer: the village's record of this person between decisions (never shown to the model)

@@ -228,7 +228,10 @@ promises, carts, meal tables); `vite-node scripts/audit_far.ts` checks that nobo
 protocol and measures, with a real animation loop, the speed achieved at each setting, what a stalled page costs and how the
 speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`);
 `npx vite-node scripts/inhabit.ts -- --mode live|replay|standard …` lets an external model (or a scripted stand-in) drive one person
-and records a transcript that replays without the model ([`docs/INHABITANT.md`](docs/INHABITANT.md)); and
+and records a transcript that replays without the model ([`docs/INHABITANT.md`](docs/INHABITANT.md)); the same run can be watched in
+the page: `npm run dev` with the model's key in that shell, then open `http://127.0.0.1:5273/?inhabit=Pavel&api=openai&model=gpt-5&memory=1&seed=meadow&harsh=1&from=1&days=5`
+(the person is selected and followed, the clock pauses while the model thinks, a panel shows the reasons and notes, and the transcript
+can be saved for replay); and
 `scripts/*.ts` has the traces used while tuning (`multi.ts a,b,c 12` runs several seeds and reports deaths and ledger
 balance; `death.ts` and `trace.ts` follow whoever dies and why). [`docs/BASELINE.md`](docs/BASELINE.md) records what a
 fixed ordinary world did before and after this work.

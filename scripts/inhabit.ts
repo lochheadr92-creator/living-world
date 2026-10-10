@@ -2,11 +2,14 @@
 // with nobody driven from outside. Writes a transcript and a plain report into --out.
 //
 //   npx vite-node scripts/inhabit.ts -- --mode live --seed meadow --person Mira --from-day 1 --days 1 --model claude-opus-5-5 --out inhabit_out
+//   npx vite-node scripts/inhabit.ts -- --mode live --api openai --model gpt-5 --seed meadow --from-day 1 --days 1 --out inhabit_out
 //   npx vite-node scripts/inhabit.ts -- --mode live --stub last --seed meadow --from-day 1 --days 0.5 --out inhabit_out     (no key: a scripted model)
 //   npx vite-node scripts/inhabit.ts -- --mode replay --transcript inhabit_out/transcript.json --out inhabit_out
 //   npx vite-node scripts/inhabit.ts -- --mode standard --seed meadow --person Mira --from-day 1 --days 1 --out inhabit_out
 //
-// Other flags: --profile normal|large|huge  --harsh  --dynamics rich  --effort low|medium|high  --show-scores
+// Other flags: --api anthropic|openai (keys: ANTHROPIC_API_KEY / OPENAI_API_KEY)  --effort low|medium|high (OpenAI: only sent when given)
+//              --memory (the inhabitant keeps notes between decisions: protocol inhabitant/2)  --stub first|last|cycle|garbage|goal|goal-blind
+//              --profile normal|large|huge  --harsh  --dynamics rich  --show-scores  --overwrite (an existing transcript in --out is otherwise kept)
 //              --max-calls-per-day N  --timeout-ms N  --max-output-tokens N  --max-failures N  --allow-source-drift
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -14,6 +17,7 @@ import { DEFAULT_BUDGET, stubModel } from '../src/agent/model';
 import type { Budget, ModelClient } from '../src/agent/model';
 import { observationFromPrompt } from '../src/agent/protocol';
 import { runLive, runReplay, runStandard } from '../src/agent/run';
+import { goalKeeperModel } from '../src/agent/stubs';
 import { ReplayDiverged } from '../src/agent/transcript';
 import type { Transcript } from '../src/agent/transcript';
 import { DAY } from '../src/sim/constants';
@@ -25,6 +29,7 @@ import { hashString } from '../src/sim/rng';
 import type { Settings, World } from '../src/sim/types';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { anthropicModel } from './inhabit/anthropic';
+import { openaiModel } from './inhabit/openai';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
 const opt = (name: string, dflt: string): string => {
@@ -65,6 +70,8 @@ function pickPerson(w: World, name: string): number {
 
 function modelFrom(): ModelClient {
   const stub = opt('stub', '');
+  if (stub === 'goal') return goalKeeperModel();
+  if (stub === 'goal-blind') return goalKeeperModel({ readNotes: false });
   if (stub) {
     const pick = (o: ReturnType<typeof observationFromPrompt>, n: number): string => {
       if (!o || !o.options.length) return 'wander';
@@ -72,10 +79,16 @@ function modelFrom(): ModelClient {
       if (stub === 'last') return o.options[o.options.length - 1].key;
       if (stub === 'cycle') return o.options[n % o.options.length].key;
       if (stub === 'garbage') return 'teleport:anywhere';
-      throw new Error(`unknown stub "${stub}" (first, last, cycle, garbage)`);
+      throw new Error(`unknown stub "${stub}" (first, last, cycle, garbage, goal, goal-blind)`);
     };
     return stubModel(`stub:${stub}`, (req, n) => JSON.stringify({ choose: pick(observationFromPrompt(req.user), n), why: `scripted: ${stub}` }));
   }
+  const api = opt('api', 'anthropic');
+  if (api === 'openai') {
+    const effort = opt('effort', '');
+    return openaiModel({ model: opt('model', 'gpt-5'), ...(effort ? { effort: effort as 'low' | 'medium' | 'high' } : {}) });
+  }
+  if (api !== 'anthropic') throw new Error(`unknown --api "${api}" (anthropic, openai)`);
   return anthropicModel({ model: opt('model', 'claude-opus-5-5'), effort: opt('effort', 'medium') as 'low' | 'medium' | 'high' });
 }
 
@@ -89,13 +102,31 @@ function budgetFrom(): Budget {
   };
 }
 
+/** the person at the end of a window, the same line for a live and a standard run so the two can be set side by side */
+function personSummary(w: World, id: number, name: string): string {
+  const p = w.persons.find((q) => q.id === id);
+  if (!p || !p.alive) {
+    const d = w.deceased.find((x) => x.id === id);
+    return `${name}: died${d ? ` at tick ${d.tick} (${d.cause})` : ''}`;
+  }
+  const needs = (Object.keys(p.needs) as (keyof typeof p.needs)[]).map((k) => `${k} ${Math.round(p.needs[k])}`).join(', ');
+  const inv = Object.entries(p.inv)
+    .filter(([, n]) => (n ?? 0) > 0)
+    .map(([k, n]) => `${n} ${k}`)
+    .join(', ');
+  return `${name}: alive, health ${Math.round(p.health)}; needs ${needs}; carrying ${inv || 'nothing'}; lifetime ${JSON.stringify(p.stats)}; knows ${Object.keys(p.beliefs).length} places; promises ${p.commitments.length}`;
+}
+
 function report(t: Transcript, w: World): string {
   const h = t.header;
   const lines: string[] = [];
   lines.push(`${h.mode} run: ${h.personName} (#${h.personId}) in ${h.seed} (${h.settings.profile ?? 'village'}${h.settings.harsh ? ', harsh' : ''}${h.settings.dynamics === 'rich' ? ', rich' : ''}), tick ${h.startTick} to ${t.end?.tick ?? w.tick}`);
   lines.push(`model ${h.model.id} (${h.model.kind}) ${JSON.stringify(h.model.config)}; protocol ${h.protocol}; sim ${h.sim.behaviour}${h.sim.sources ? ' / ' + h.sim.sources : ''}`);
   lines.push(`budget ${JSON.stringify(h.budget)}`);
-  if (t.end) lines.push(`end: tick ${t.end.tick} hash ${t.end.hash}${t.end.died ? ' (the person died)' : ''}; calls ${t.end.calls}, applied ${t.end.applied}, refused ${t.end.rejected}, engine chose ${t.end.fallbacks}, lagged ${t.end.lagged}; gate ${JSON.stringify(t.end.gate)}`);
+  if (t.end) lines.push(`end: tick ${t.end.tick} hash ${t.end.hash}${t.end.died ? ' (the person died)' : ''}; calls ${t.end.calls}, applied ${t.end.applied}, refused ${t.end.rejected}, engine chose ${t.end.fallbacks}, lagged ${t.end.lagged}; gate ${JSON.stringify(t.end.gate)}${t.end.notesHash ? `; notes ${t.end.notesHash}` : ''}`);
+  lines.push(personSummary(w, h.personId, h.personName));
+  const state = w.inhabitants?.[h.personId];
+  if (state?.memory) lines.push(`memory: ${JSON.stringify(state.memory)}`);
   lines.push('');
   lines.push('decisions (tick clock | offered | picked -> result | model\'s reason | what came of it)');
   const outcomeOf = new Map(t.outcomes.map((o) => [o.call, o]));
@@ -105,6 +136,17 @@ function report(t: Transcript, w: World): string {
     const res = c.result ? (c.result.status === 'applied' ? 'applied' : c.result.status === 'rejected' ? `refused: ${c.result.reason}` : `engine chose ${c.result.label ?? 'nothing'}`) : '-';
     const oc = outcomeOf.get(c.seq);
     lines.push(`t${c.tick} ${clockText(c.tick)} | ${a.observation.options.length} options | ${label} -> ${res} | ${a.proposal?.why ?? a.problem ?? ''} | ${oc ? `${oc.outcome}${oc.detail ? ': ' + oc.detail : ''} (t${oc.tick})` : ''}`);
+  }
+  for (const c of t.calls) {
+    if (!c.revision) continue;
+    const r = c.revision;
+    const moved = Object.entries({ new: r.new, kept: r.kept, strengthened: r.strengthened, weakened: r.weakened, revised: r.revised, abandoned: r.abandoned, goalsAdopted: r.goalsAdopted, goalsDropped: r.goalsDropped, rejectedEntries: r.rejectedEntries, truncated: r.truncated, trimmed: r.trimmed }).filter(([, n]) => n > 0);
+    if (moved.length || r.problems.length) lines.push(`  notes at t${c.tick}: ${moved.map(([k, n]) => `${k} ${n}`).join(', ')}${r.problems.length ? ' | ' + r.problems.join('; ') : ''}`);
+  }
+  if (state?.notes) {
+    lines.push('');
+    lines.push('the inhabitant\'s notes at the end (its own words; never read by the simulation):');
+    lines.push(JSON.stringify(state.notes, null, 1));
   }
   if (t.overrides.length) {
     lines.push('');
@@ -149,22 +191,24 @@ async function main(): Promise<void> {
 
   if (mode === 'standard') {
     runStandard(w, until);
-    const p = w.persons.find((q) => q.id === personId);
-    const text = `standard run: ${person.name} (#${personId}) in ${settings.seed}, tick ${from} to ${until}\nend hash ${hashWorld(w)}; ${p && p.alive ? `${person.name} alive, health ${Math.round(p.health)}` : `${person.name} died`}\n`;
+    const text = `standard run: ${person.name} (#${personId}) in ${settings.seed}${flag('harsh') ? ' (harsh)' : ''}, tick ${from} to ${until}\nend hash ${hashWorld(w)}\n${personSummary(w, personId, person.name)}\n`;
     writeFileSync(join(out, 'standard.txt'), text);
     console.log(text);
     return;
   }
   if (mode !== 'live') throw new Error(`unknown mode "${mode}" (standard, live, replay)`);
 
+  const transcriptPath = join(out, 'transcript.json');
+  if (existsSync(transcriptPath) && !flag('overwrite')) throw new Error(`${transcriptPath} exists; choose another --out or pass --overwrite (a recorded run is kept unless you say so)`);
   const model = modelFrom();
   const budget = budgetFrom();
-  console.log(`${person.name} (#${personId}) is driven by ${model.id} from tick ${from} to ${until} (${((until - from) / DAY).toFixed(2)} days)…`);
+  console.log(`${person.name} (#${personId}) is driven by ${model.id} from tick ${from} to ${until} (${((until - from) / DAY).toFixed(2)} days)${flag('memory') ? ', keeping notes' : ''}…`);
   let lastSaid = Date.now();
   const r = await runLive(w, personId, model, {
     until,
     budget,
     sources,
+    memory: flag('memory'),
     observe: { showScores: flag('show-scores') },
     onTick: (world) => {
       if (Date.now() - lastSaid > 5000) {
@@ -173,7 +217,6 @@ async function main(): Promise<void> {
       }
     },
   });
-  const transcriptPath = join(out, 'transcript.json');
   writeFileSync(transcriptPath, JSON.stringify(r.transcript));
   const text = report(r.transcript, r.world);
   writeFileSync(join(out, 'report.txt'), text);
