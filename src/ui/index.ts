@@ -25,6 +25,8 @@ import { createTopbar } from './topbar';
 import { createHoverTip, createUITips } from './tooltip';
 import { createTransport } from './transport';
 import { createWorldMenu } from './worldmenu';
+import { createInhabitPanel } from './inhabit';
+import type { InhabitDriver } from '../app/inhabit';
 
 export interface UIHandle {
   /** called every animation frame with real elapsed seconds; implementations throttle their own DOM work */
@@ -55,7 +57,7 @@ function guarded(name: string, part: Part): Part {
   return { update: wrap('update', part.update), onGame: wrap('onGame', part.onGame), dispose: wrap('dispose', part.dispose) };
 }
 
-export function mountUI(game: Game, root: HTMLElement): UIHandle {
+export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: InhabitDriver } = {}): UIHandle {
   const prefs = loadPrefs();
   const state = loadUIState();
   const persist = makePersistence({ prefs, state });
@@ -105,6 +107,7 @@ export function mountUI(game: Game, root: HTMLElement): UIHandle {
     ['overlays', overlays],
     ['shortcuts', shortcuts],
   ];
+  if (extras.inhabit) named.push(['inhabit', createInhabitPanel(ctx, slots, extras.inhabit)]);
   for (const [name, part] of named) parts.push(guarded(name, part));
 
   /** shared preferences follow the game; scenes and loads change the world, so the camera goes home too */
