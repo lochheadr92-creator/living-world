@@ -187,6 +187,20 @@ consumed and the hash must match. No model is involved; a fresh model run is alw
 Written by the runner, never read by the prompt builder: the village's event feed entries naming the person between decisions, the
 committed activity and what it came to, and the overrides. A test plants a sentinel in the feed and checks it never reaches the prompt.
 
+## 6b. In the page
+
+The same `LiveSession` the headless runner uses is driven by the app's clock (`src/app/inhabit.ts`): `Game` runs two hooks around each
+tick it plays; before a tick the session may snapshot (the person is about to be free), after a tick an open ask pauses the clock. The
+driver asks the model, rewinds the tick exactly as the runner does, swaps the restored world into the game and resumes at the speed
+that was set. The page is opened with a query string naming the person, the model and the world (`?inhabit=Pavel&api=openai&model=gpt-5&memory=1&seed=meadow&harsh=1&from=1&days=5`);
+the world is fast-forwarded to the start day in small steps, the person selected and followed, and a panel (`src/ui/inhabit.ts`)
+shows the status, the latest decision and the model's reason, the notes and the revision counts, with a button that saves the
+transcript (replayable with `scripts/inhabit.ts --mode replay`). The model is reached through a Vite dev-server endpoint
+(`scripts/inhabit/devserver.ts`), which calls the same SDK clients the script uses with the key from the shell that started
+`npm run dev`; the key never enters the browser, and a build carries no endpoint. `tests/inhabit_app.test.ts` holds that the hooks run
+around every tick and stop a frame on request, that the driver pauses while the model thinks and applies the answer at the asked
+tick, and that the transcript the app records replays headlessly to the same world and notes.
+
 ## 7. Modes
 
 * **A, standard:** nobody driven. Byte-identical to today (golden suite).

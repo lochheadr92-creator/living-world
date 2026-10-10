@@ -21,7 +21,9 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 - Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes).
 - The AI inhabitant (`docs/INHABITANT.md`): `src/sim/external.ts` (the seam in `decide`), `src/agent/` (observation, protocol, memory,
   transcript, model gate, rewind runner, scripted models; no network), `scripts/inhabit.ts` (live | replay | standard; `--memory` keeps notes;
-  `--stub goal` needs no key), `tests/inhabitant.test.ts`, `tests/inhabitant_memory.test.ts`, `experiments/` (recorded runs).
+  `--stub goal` needs no key), `src/app/inhabit.ts` + `src/ui/inhabit.ts` (the same run in the page from `?inhabit=<name>&…`; the model
+  is reached through `scripts/inhabit/devserver.ts`, a Vite dev-server endpoint, so the key stays in the shell), `tests/inhabitant*.test.ts`,
+  `tests/inhabit_app.test.ts`, `experiments/` (recorded runs).
 
 ## Expensive runs: give the user PowerShell lines, do not run them here
 The cloud container has 4 cores; the user has a 24-core Windows machine. Anything over about 3 minutes of wall time here, or that needs many
