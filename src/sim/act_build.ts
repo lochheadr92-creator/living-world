@@ -1,3 +1,5 @@
+import { buildable } from './expansion';
+import { WELL_REACH } from './water';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WORK, isHomeType, isSolidHome } from './constants';
@@ -12,7 +14,7 @@ import { ORDINARY_RULES, rulesOf, within } from './rules';
 import { mintTool, taskMultiplier, wearFor } from './tools';
 import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
-import { clamp } from './util';
+import { clamp, hyp } from './util';
 import { itemsToText } from './people';
 
 // ───────────────────────── build ─────────────────────────
@@ -239,6 +241,15 @@ export function openSitesNear(world: World, near?: Spot): number {
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
   const rules = rulesOf(world);
+  if (!buildable(world, type)) return `a ${BUILD_DEF[type].label} is not something this world builds`;
+  if (type === 'cellar') {
+    for (const b of world.buildings) if (b.type === 'cellar' && b.hhId === hh) return 'the household already has a cellar';
+    for (const s of world.sites) if (s.type === 'cellar' && s.hhId === hh) return 'the household is already digging a cellar';
+  }
+  if (type === 'well' && at) {
+    for (const b of world.buildings) if (b.type === 'well' && within(WELL_REACH, at.x, at.y, b.x + b.w / 2, b.y + b.h / 2)) return 'there is a well close by already';
+    for (const s of world.sites) if (s.type === 'well' && within(WELL_REACH, at.x, at.y, s.x + s.w / 2, s.y + s.h / 2)) return 'a well is already being dug close by';
+  }
   if (isFacilityType(type) || upgradeOf) {
     if (projectsUnderWay(world, !!upgradeOf, at) >= projectLimit(world)) return 'enough improvement projects are under way already';
   } else if (sitesNear(world, at, (s) => !isProjectSite(s)) >= rules.maxBasicSites) return 'too many projects under way already';
@@ -248,12 +259,12 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
     if (old.upgrading) return 'it is already being rebuilt';
     return null;
   }
-  if (isFacilityType(type) || type === 'storehouse') {
+  if (isFacilityType(type) || type === 'storehouse' || type === 'forester' || type === 'stockyard') {
     // one of each kind of workplace (a second quarry only at a different outcrop). With scaled rules, one per settlement: only a
     // workplace within the settlement radius of where this one would stand counts.
     const radius = at ? rules.facilityRadius : Infinity;
-    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
-    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
+    for (const b of world.buildings) if (b.type === type && ((type !== 'quarry' && type !== 'mine') || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
+    for (const s of world.sites) if (s.type === type && ((type !== 'quarry' && type !== 'mine') || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
     return null;
   }
   // homes and fires: one project at a time per household
@@ -371,6 +382,26 @@ registerHandler('claim_home', {
     const cur = hh.homeId ? world.byId.get(hh.homeId) : null;
     if (!cur || (cur.ent === 'building' && (cur.type === 'lean_to' || isSolidHome(b.type)))) hh.homeId = b.id;
     addEvent(world, 'survival', `${p.name} moved into an empty ${buildingLabel(b.type)}.`, [p.id], b.x, b.y);
+    // a cellar left behind by a household that is gone goes with the house (rich worlds: there are no cellars elsewhere)
+    if (buildable(world, 'cellar') && isHomeType(b.type) && !world.buildings.some((c) => c.type === 'cellar' && c.hhId === hh.id)) {
+      const cx = b.x + b.w / 2;
+      const cy = b.y + b.h / 2;
+      let orphan: Building | null = null;
+      let best = 8;
+      for (const c of world.buildings) {
+        if (c.type !== 'cellar' || c.hhId !== 0) continue;
+        const d = hyp(c.x + c.w / 2 - cx, c.y + c.h / 2 - cy);
+        if (d <= best) {
+          best = d;
+          orphan = c;
+        }
+      }
+      if (orphan) {
+        orphan.hhId = hh.id;
+        observe(world, p, orphan);
+        addLog(world, p, 'work', 'Took over the cellar behind the house.');
+      }
+    }
     observe(world, p, b);
     return 'done';
   },

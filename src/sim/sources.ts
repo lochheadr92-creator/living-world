@@ -39,7 +39,7 @@ export function fellTree(world: World, s: Source): void {
   addFx(world, 'fell', s.x + 0.5, s.y + 0.5, s.variant);
 }
 
-function treesNear(world: World, x: number, y: number, r: number): number {
+export function treesNear(world: World, x: number, y: number, r: number): number {
   let n = 0;
   for (let yy = y - r; yy <= y + r; yy++) {
     for (let xx = x - r; xx <= x + r; xx++) {

@@ -122,6 +122,25 @@ export const RECIPES: Recipe[] = [
     benefit: 'A cart carries three or four times what a person can, over open ground.',
   },
   {
+    id: 'make_bed',
+    label: 'a bed',
+    doing: 'Making a bed',
+    at: 'timber_yard',
+    inputs: { wood: 4 },
+    fuel: none,
+    work: 90,
+    burn: 0,
+    outputs: { furniture: 1 },
+    waste: none,
+    wasteWhy: '',
+    skill: 'carpentry',
+    // (pegged and lashed, a bed can be put together without a hammer: it is slower)
+    tool: { kind: 'hammer', required: false, speed: 0.6 },
+    workers: 2,
+    serves: ['furniture'],
+    benefit: 'A rough-hewn frame of logs with a straw tick, off the cold ground: whoever sleeps in it sleeps warmer and is far less often woken by the cold. (Made in worlds with rich dynamics.)',
+  },
+  {
     id: 'quarry_stone',
     label: 'cut stone',
     doing: 'Cutting stone',
@@ -139,6 +158,25 @@ export const RECIPES: Recipe[] = [
     workers: 3,
     serves: ['stone'],
     benefit: 'Stone from a big outcrop, three at a time, stacked at the yard — nobody has to walk between small rocks.',
+  },
+  {
+    id: 'mine_ore',
+    label: 'dig ore',
+    doing: 'Digging ore',
+    at: 'mine',
+    inputs: {},
+    fuel: none,
+    work: 110,
+    burn: 0,
+    outputs: { ore: 3 },
+    waste: none,
+    wasteWhy: '',
+    fromDeposit: { item: 'ore', n: 3 },
+    skill: 'stone',
+    tool: { kind: 'pick', required: true, speed: 0.5 },
+    workers: 3,
+    serves: ['ore'],
+    benefit: 'Ore from a vein, three loads at a time, stacked at the shaft head — far quicker than chipping it out by hand.',
   },
   {
     id: 'fire_bricks',
@@ -191,6 +229,23 @@ export const RECIPES: Recipe[] = [
     workers: 1,
     serves: ['charcoal'],
     benefit: 'A hotter, lighter fuel than wood: what smelting and forging need.',
+  },
+  {
+    id: 'burn_charcoal_clamp',
+    label: 'a clamp of charcoal',
+    doing: 'Firing the clamp',
+    at: 'clamp',
+    inputs: { wood: 10 },
+    fuel: none,
+    work: 60,
+    burn: 1400,
+    outputs: { charcoal: 6 },
+    waste: { wood: 4 },
+    wasteWhy: 'smoke and ash',
+    skill: 'kiln',
+    workers: 1,
+    serves: ['charcoal'],
+    benefit: 'Six charcoal from a stack of logs, smouldering for days under turf: the smithy\'s fuel without taking the kiln from its bricks.',
   },
   {
     id: 'smelt_iron',
@@ -248,6 +303,57 @@ export const RECIPES: Recipe[] = [
     benefit: 'Flour keeps better than loose grain and is what bread is made of.',
   },
   {
+    id: 'mill_flour_wind',
+    label: 'milled flour',
+    doing: 'Milling at the windmill',
+    at: 'mill',
+    inputs: { grain: 6 },
+    fuel: none,
+    work: 40,
+    burn: 0,
+    outputs: { flour: 5 },
+    waste: { grain: 1 },
+    wasteWhy: 'bran and dust',
+    skill: 'bake',
+    workers: 1,
+    serves: ['flour'],
+    benefit: 'Five flour from six grain in a fraction of the quern\'s time, with the wind doing the grinding; the bakery keeps its oven for bread.',
+  },
+  {
+    id: 'smoke_fish',
+    label: 'smoked fish',
+    doing: 'Smoking fish',
+    at: 'smokehouse',
+    inputs: { fish: 4 },
+    fuel: { wood: 1 },
+    work: 30,
+    burn: 500,
+    outputs: { smoked: 4 },
+    waste: none,
+    wasteWhy: '',
+    skill: 'fish',
+    workers: 1,
+    serves: ['smoked'],
+    benefit: 'Four fish hung over a slow fire keep for weeks instead of days: food for the lean season and the winter.',
+  },
+  {
+    id: 'brew_beer',
+    label: 'a brew of beer',
+    doing: 'Brewing',
+    at: 'brewery',
+    inputs: { grain: 6, water: 4 },
+    fuel: { wood: 1 },
+    work: 50,
+    burn: 2400,
+    outputs: { beer: 4 },
+    waste: { grain: 2, water: 4 },
+    wasteWhy: 'spent mash',
+    skill: 'bake',
+    workers: 1,
+    serves: ['beer'],
+    benefit: 'Four crocks of beer from six grain and a day of working: poured at the hall, it makes a shared meal an evening people come to.',
+  },
+  {
     id: 'bake_bread',
     label: 'baked bread',
     doing: 'Baking bread',
@@ -289,7 +395,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'mine', 'clamp', 'mill', 'smokehouse', 'brewery'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 
@@ -302,6 +408,7 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     for (const k of Object.keys(r.outputs) as ItemKind[]) set.add(k);
   }
   if (type === 'timber_yard') {
+    set.add('furniture');
     set.add('wood');
     set.add('planks');
     set.add('handles');
@@ -311,6 +418,10 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
   }
   if (type === 'quarry') {
     set.add('stone');
+    set.add('pick');
+  }
+  if (type === 'mine') {
+    set.add('ore');
     set.add('pick');
   }
   if (type === 'kiln') {
@@ -341,7 +452,9 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     set.add('seeds');
   }
   if (type === 'hall') {
+    set.add('beer');
     set.add('bread');
+    set.add('smoked');
     set.add('fish');
     set.add('fruit');
     set.add('berries');

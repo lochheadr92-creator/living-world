@@ -8,17 +8,24 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 - Seeded randomness stays (replay, inspector, the lab). The golden fingerprints (`tests/golden.test.ts`) no longer constrain a change
   meant to alter behaviour: re-record them in the commit that changes rules. Ensemble gates (`scripts/gates.ts`, `docs/gates.json`) are the
   acceptance test for such a change.
+- Measured (24 seeds, docs/EMERGENCE.md): the rich stakes carry every effect (more farmland, slower building); mood effects add nothing at population level yet, because moods barely differ between people. Next: individuality and a visible consequence of a low mood, not more stakes.
 - New behaviour goes behind `settings.dynamics = 'rich'` (off by default; authored worlds must stay exactly as they were, and the golden,
   determinism and save tests check that). The rules sets are in `src/sim/rules.ts`.
-- One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PR; never merge, never force-push.
+- One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PRs; merge only when the user explicitly says so (they did for #6 and #7, merged to main with merge commits on 2026-10-07; PRs #1-#5 are older separate features, still open and unreviewed). Never force-push main.
 
 ## Where things are
 - `src/sim/mood.ts` thoughts, mood level, option weights, mourning. `src/sim/hardship.ts` lean seasons, winter, spoilage, wolf nerve.
 - `src/sim/decision.ts` ranks options (mood weight applied here). `src/sim/probe.ts` work counters (never saved or hashed).
+- Building expansion (docs/BUILDINGS.md, rich only, gated by `src/sim/expansion.ts`): `water.ts` well, `storage.ts` cellar and the
+  household's food-loss tally, `stockyard.ts` yard, `forestry.ts` + `act_forestry.ts` lodge and planting, `recipes.ts` `mine_ore`.
+  Demand for each lives in `production.ts` `facilityWants`; the yard's stacking/stocking in `optStockYard`, planting in `optPlantTrees`,
+  collecting raw goods from the yard in `options_work.ts` `collectRawLeaf`. Evidence: `scripts/chainwatch.ts` (natural activation,
+  with the causal trace of each type's first instance) and `scripts/browser/stage_a.mjs` (the built app in headless Chromium);
+  results under `docs/evidence/stage-a/`.
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
-- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes).
+- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no:<type+type>` (rich without those building types, e.g. `rich-no:well+cellar`).
 
 ## Expensive runs: give the user PowerShell lines, do not run them here
 The cloud container has 4 cores; the user has a 24-core Windows machine. Anything over about 3 minutes of wall time here, or that needs many
@@ -45,6 +52,7 @@ takes seconds.) Cost: seeds x (fork days + branches x days) x about 15 CPU-secon
   `until`/`for` loops under 10 minutes), keep output small.
 - `pkill -f` / `pgrep -f` with a pattern that appears in your own command line kills your own shell. Use the bracket trick (`'[l]ab_seed'`).
 - Node `fetch` refuses port 4190. Chromium: `CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome CHROME_FLAGS=--no-sandbox`.
+- Never call two worlds "identical" from `hashWorld`; the lab's `stateHash` compares the whole serialised world. Lab output files record their commit; a run from other code is re-run, not reused.
 - Compare a lab branch with the mean of the control and the nudges, never one control alone (one control is one chaotic draw).
 - The two-draw nudge ends identical to the control in some seeds: the world's random state re-synchronises within about 60 ticks; cause unknown.
 

@@ -1,10 +1,10 @@
 import { endActivity, startActivity } from './activities';
-import { moodWeight } from './mood';
+import { isBreaking, moodWeight } from './mood';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
-import { probe, probeWander } from './probe';
+import { probe, probeMoodDecision, probeWander } from './probe';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
 import { survivalOptions } from './options_survival';
@@ -76,8 +76,22 @@ export function rankOptions(ctx: Ctx): Option[] {
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
   const moody = p.mood !== undefined && world.settings.dynamics === 'rich';
-  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
+  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(world, p, o.kind) : o.util) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
   scored.sort((a, b) => b.s - a.s);
+  if (moody && probe.on) {
+    // did the mood change which option is on top? (the same ranking without the weights, for the count only: nothing here feeds the choice)
+    const top = scored[0];
+    let plain = scored[0];
+    let plainScore = -Infinity;
+    for (const x of scored) {
+      const s = x.o.util + hashUnit(p.id, world.tick >> 5, hashKey(x.o.key)) * 1.4;
+      if (s > plainScore) {
+        plainScore = s;
+        plain = x;
+      }
+    }
+    probeMoodDecision(top && plain && top.o !== plain.o ? { from: plain.o.kind, to: top.o.kind, breaking: isBreaking(world, p) } : null);
+  }
   return scored.map((x) => x.o);
 }
 

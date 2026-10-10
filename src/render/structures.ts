@@ -4,6 +4,7 @@ import type { BuildingType } from '../sim/types';
 import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite } from './bld_food';
 import { HOUSE, houseSprite } from './bld_home';
 import { KILN, SMITHY, kilnSprite, quarrySprite, smithySprite, timberYardBack, timberYardFront } from './bld_work';
+import { cellarSprite, clampSprite, foresterSprite, brewerySprite, millSprite, mineSprite, smokehouseSprite, stockyardSprite, wellSprite } from './bld_service';
 import { SpriteCache, classicBuildingSprite } from './sprites';
 import type { Sprite } from './sprites';
 
@@ -35,6 +36,24 @@ export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: num
       return [bakerySprite(cache, variant)];
     case 'hall':
       return [hallSprite(cache, variant)];
+    case 'well':
+      return [wellSprite(cache, variant)];
+    case 'cellar':
+      return [cellarSprite(cache, variant)];
+    case 'mine':
+      return [mineSprite(cache, variant)];
+    case 'forester':
+      return [foresterSprite(cache, variant)];
+    case 'stockyard':
+      return [stockyardSprite(cache, variant)];
+    case 'clamp':
+      return [clampSprite(cache, variant)];
+    case 'mill':
+      return [millSprite(cache, variant)];
+    case 'smokehouse':
+      return [smokehouseSprite(cache, variant)];
+    case 'brewery':
+      return [brewerySprite(cache, variant)];
     default:
       // a kind of building this renderer has no drawing for yet stands as a plain store rather than breaking the frame
       return [classicBuildingSprite(cache, 'storehouse', variant)];
@@ -75,6 +94,15 @@ const STRUCT_TABLE: Record<BuildKind, StructMeta> = {
   granary: { plinth: GRANARY.legs, wall: GRANARY.bin, top: GRANARY.ridge + 4, click: 98 },
   bakery: { plinth: 5, wall: 30, top: 86, click: 92, chimney: { x: BAKERY.chimney.x, y: BAKERY.chimney.y - 0.1, z: BAKERY.chimney.z + 4 }, mouth: BAKERY.mouth },
   hall: { plinth: HALL.plinth, wall: HALL.wall, top: HALL.louvre.z + 8, click: 134, chimney: HALL.louvre },
+  well: { plinth: 8, wall: 12, top: 42, click: 48 },
+  cellar: { plinth: 0, wall: 18, top: 30, click: 40 },
+  mine: { plinth: 0, wall: 28, top: 62, click: 66 },
+  forester: { plinth: 0, wall: 22, top: 40, click: 48 },
+  stockyard: { plinth: 0, wall: 14, top: 30, click: 40 },
+  clamp: { plinth: 0, wall: 22, top: 46, click: 52, chimney: { x: 1.0, y: 1.0, z: 40 } },
+  mill: { plinth: 6, wall: 62, top: 118, click: 122 },
+  brewery: { plinth: 4, wall: 30, top: 66, click: 72, chimney: { x: 1.5, y: 0.6, z: 64 } },
+  smokehouse: { plinth: 4, wall: 44, top: 74, click: 80, chimney: { x: 1.0, y: 0.5, z: 70 } },
 };
 
 /** measurements by building type; a type this file does not know yet is measured like a plain store, so a new kind never breaks a frame */

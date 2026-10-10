@@ -34,6 +34,22 @@ const STOCK: Partial<Record<BuildKind, Slot[]>> = {
     { item: 'wood', kind: 'wood', fx: 0.34, fy: 1.6, per: 2, max: 10, layer: 1 },
   ],
   quarry: [{ item: 'stone', kind: 'cutstone', fx: 0.6, fy: 1.5, per: 1, max: 9, layer: 1 }],
+  mine: [{ item: 'ore', kind: 'ore', fx: 0.4, fy: 1.45, per: 1, max: 9, layer: 1 }],
+  smokehouse: [{ item: 'wood', kind: 'wood', fx: 0.15, fy: 0.9, per: 2, max: 4, layer: 1 }],
+  mill: [
+    { item: 'grain', kind: 'grain', fx: 0.2, fy: 1.75, per: 2, max: 6, layer: 1 },
+    { item: 'flour', kind: 'flour', fx: 1.7, fy: 1.75, per: 2, max: 6, layer: 1 },
+  ],
+  clamp: [
+    { item: 'wood', kind: 'wood', fx: 0.15, fy: 1.75, per: 2, max: 8, layer: 1 },
+    { item: 'charcoal', kind: 'charcoal', fx: 1.75, fy: 1.7, per: 1, max: 10, layer: 1 },
+  ],
+  stockyard: [
+    { item: 'wood', kind: 'wood', fx: 0.5, fy: 0.7, per: 2, max: 12, layer: 1 },
+    { item: 'stone', kind: 'stone', fx: 1.45, fy: 0.65, per: 1, max: 12, layer: 1 },
+    { item: 'clay', kind: 'clay', fx: 0.5, fy: 1.45, per: 1, max: 8, layer: 1 },
+    { item: 'ore', kind: 'ore', fx: 1.45, fy: 1.45, per: 1, max: 8, layer: 1 },
+  ],
   kiln: [
     { item: 'charcoal', kind: 'charcoal', fx: 1.86, fy: 1.1, per: 1, max: 12, layer: 1 },
     { item: 'wood', kind: 'wood', fx: 0.1, fy: 1.62, per: 2, max: 10, layer: 1 },

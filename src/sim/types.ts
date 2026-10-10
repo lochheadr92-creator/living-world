@@ -5,12 +5,12 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'smoked';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
-export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water';
+export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'beer' | 'furniture';
 export type Items = Partial<Record<ItemKind, number>>;
 
 export interface Store {
@@ -109,6 +109,8 @@ export interface Belief {
 
 /** A person's snapshot of a workplace (always a snapshot with the belief's own timestamp). */
 export interface FacilitySnapshot {
+  /** (rich worlds) piles on the shelves that are someone's, as seen: [item, n, owner] */
+  held?: [ItemKind, number, number][];
   job: string | null;
   progress: number;
   burn: number;
@@ -189,6 +191,7 @@ export type ActivityKind =
   | 'eat_store'
   | 'drink'
   | 'fetch_water'
+  | 'plant_tree'
   | 'gather'
   | 'deposit'
   | 'withdraw'
@@ -446,6 +449,8 @@ export interface Mood {
   /** -100 (miserable) .. 100 (buoyant); refreshed every few seconds */
   level: number;
   thoughts: Thought[];
+  /** until this tick they are at the end of their patience: withdrawn and short-tempered (mood.ts) */
+  breakUntil?: number;
 }
 
 export interface InteractionRecord {
@@ -505,7 +510,17 @@ export type BuildingType =
   | 'smithy'
   | 'granary'
   | 'bakery'
-  | 'hall';
+  | 'hall'
+  // the village-economy expansion (rich dynamics only; docs/BUILDINGS.md)
+  | 'well'
+  | 'cellar'
+  | 'mine'
+  | 'forester'
+  | 'stockyard'
+  | 'clamp'
+  | 'mill'
+  | 'smokehouse'
+  | 'brewery';
 
 export interface Building {
   ent: 'building';
@@ -731,6 +746,8 @@ export interface Household {
   homeId: number;
   headId: number;
   formed: number;
+  /** food the household has found gone off in its own stores lately, with when it was last added to (rich dynamics; storage.ts) */
+  lost?: { units: number; tick: number };
 }
 
 export type Entity = Person | Source | Building | Site | Plot | Pile | Grave | Animal | Cart;

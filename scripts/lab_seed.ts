@@ -1,6 +1,7 @@
 // One seed of the counterfactual lab (see scripts/lab/lab.ts). Prints one JSON line per branch.
 //   npx vite-node scripts/lab_seed.ts -- --seed meadow [--profile large] [--fork 4] [--days 8] [--branches nudge:1,nudge:2,...] [--sample 120]
 // Run many seeds in parallel, then aggregate: node scripts/lab.mjs --out lab_out --seeds 8
+import { execSync } from 'node:child_process';
 import { createWorld } from '../src/sim/factory';
 import { settingsForProfile } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
@@ -22,6 +23,15 @@ const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((
 // `--dynamics rich` founds the world with rich dynamics (so the control is rich too)
 const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
 const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
+// the first line says what produced the rest, so a re-run can tell a finished seed from one made by other code or other settings
+const git = (cmd: string): string => {
+  try {
+    return execSync(cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return '';
+  }
+};
+console.log(JSON.stringify({ meta: { commit: git('git rev-parse HEAD'), dirty: git('git status --porcelain --untracked-files=no') !== '', seed, profile, fork, days, sample, dynamics, branches } }));
 runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, ...r, hashes: undefined })));
 // a last line so that a runner can tell a finished seed from one cut short (the lab.mjs runner skips finished seeds when re-run)
 console.log(JSON.stringify({ seed, done: true }));

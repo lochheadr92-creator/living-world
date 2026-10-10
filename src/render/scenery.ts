@@ -412,7 +412,7 @@ export class Scenery {
       } else if (k === 'handles') {
         blit(ctx, handleBundle(this.cache, n), px, py, 0.8);
       } else {
-        sack(ctx, px, py, k === 'fish' ? '#9ac1d4' : k === 'berries' ? '#b2486a' : k === 'fruit' ? '#e0823a' : k === 'seeds' ? '#8a6a3a' : '#d9b44a');
+        sack(ctx, px, py, k === 'fish' ? '#9ac1d4' : k === 'smoked' ? '#9a7d58' : k === 'berries' ? '#b2486a' : k === 'fruit' ? '#e0823a' : k === 'seeds' ? '#8a6a3a' : '#d9b44a');
       }
     }
   }

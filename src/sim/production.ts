@@ -1,12 +1,19 @@
+import { buildable } from './expansion';
+import { LOSS_THRESHOLD, foodLossOf } from './storage';
+import { WELL_FAR, WELL_REACH } from './water';
+import { FOREST_REACH, FOREST_THIN, edgeSpot, knownTreesNear, lodgeSpot, plantingSpot, standBeside } from './forestry';
+import { isRich } from './mood';
+import { winterDepth } from './hardship';
+import { YARD_FAR, YARD_RESERVE, YARD_TARGET, woodDistance, yardRoom } from './stockyard';
 import { newActivity } from './activities';
-import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
+import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, RAW_MATERIALS, REPAIR_USES, TOOL_DEFS, WEIGHT, isHomeType, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
 import { cartLoaded } from './carts';
 import { invRoom, weightOf } from './economy';
 import { delBelief, noteFailure, recentFailure } from './knowledge';
 import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, spotNear, traitMods } from './optutil';
 import type { Ctx } from './optutil';
-import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
+import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, wantedTools, weatherMult } from './options_work';
 import { rulesOf, within } from './rules';
 import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
@@ -212,7 +219,7 @@ function waterLeaf(ctx: Ctx, n: number, util0: number, why: string, tag: string)
         label: 'Fetching water',
         goal: why,
         targetId: b.id,
-        targetType: 'tile',
+        targetType: b.kind === 'building' ? 'building' : 'tile',
         tx: sp.x,
         ty: sp.y,
         spotX: sp.x,
@@ -257,7 +264,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   if (busy) {
     // somebody is working: join them if the recipe is the one that is wanted and has room for another pair of hands
     const running = RECIPE_BY_ID[snap!.job as string];
-    if (running && running.id === r.id && running.workers > 1 && r.id !== 'quarry_stone') operateLeaf(ctx, f, r, base * 0.8, `${why} (lend a hand)`, tag, true, siteId);
+    if (running && running.id === r.id && running.workers > 1 && r.id !== 'quarry_stone' && r.id !== 'mine_ore') operateLeaf(ctx, f, r, base * 0.8, `${why} (lend a hand)`, tag, true, siteId);
     else addBlocked(ctx, 'operate', r.doing, b.id, `the ${nameOf(b)} is busy with ${running ? running.label : 'a batch'}`, tag);
     return;
   }
@@ -271,7 +278,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
     return;
   }
   if (r.fromDeposit && snap && snap.deposit >= 0 && snap.deposit < r.fromDeposit.n) {
-    addBlocked(ctx, 'operate', r.doing, b.id, 'the outcrop is worked out', tag);
+    addBlocked(ctx, 'operate', r.doing, b.id, r.at === 'mine' ? 'the vein is worked out' : 'the outcrop is worked out', tag);
     return;
   }
   if (b.cond !== undefined && b.cond < 12) {
@@ -283,8 +290,10 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   for (const k of Object.keys(r.inputs) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.inputs[k]);
   for (const k of Object.keys(r.fuel) as ItemKind[]) need[k] = (need[k] ?? 0) + unitsOf(r.fuel[k]);
   const short: Items = {};
+  // (rich worlds) piles seen to be someone else's are not there for this batch
+  const heldByOthers = (k: ItemKind): number => (snap?.held ?? []).reduce((n, [item, m, owner]) => n + (item === k && owner !== p.id ? m : 0), 0);
   for (const k of Object.keys(need) as ItemKind[]) {
-    const lack = unitsOf(need[k]) - stockAt(b, k);
+    const lack = unitsOf(need[k]) - Math.max(0, stockAt(b, k) - heldByOthers(k));
     if (lack > 0) short[k] = lack;
   }
   if (!Object.keys(short).length) {
@@ -331,6 +340,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
   if (sb > 0.5) sc.add('practised at it', sb);
   if (crowd >= r.workers) sc.add('already crowded', -12);
   if (r.id === 'quarry_stone') sc.add('cuts stone far faster than breaking small rocks', 5);
+  if (r.id === 'mine_ore') sc.add('digs ore by the load instead of chipping at the vein', 5);
   if (r.id === 'saw_planks') sc.add('a saw wastes far less wood', 4);
   const util = sc.total * nightMult(ctx) * weatherMult(ctx);
   addOption(ctx, {
@@ -385,10 +395,10 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
         // a batch of mine that will be ready by the time I arrive counts
         const snap = b.ops;
         if (snap && snap.job && snap.client === p.id && snap.readyAt <= world.tick + eta(ctx, b.x, b.y) + 60) n += unitsOf(snap.yields[item]);
-      } else if (b.btype === 'storehouse') {
+      } else if (b.btype === 'storehouse' || b.btype === 'stockyard') {
         // everyone's
       } else if (b.hh !== p.hhId) continue;
-      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries') {
+      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries' || item === 'smoked') {
         // the household's own food is not to be spent making things unless there is plenty
         const hs = hhState(ctx);
         n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
@@ -423,7 +433,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   if (item !== 'cart' && item !== 'tend') {
     if (isRawMaterial(item)) {
       gatherMaterial(ctx, item, remaining, base * 0.92 * traitMods(p).work, why, tag);
-      if (item !== 'stone') return; // stone can also be cut at a quarry
+      if (item !== 'stone' && !(item === 'ore' && facilitiesOf(ctx, 'mine').length > 0)) return; // stone can also be cut at a quarry, ore dug at a mine
     }
     if (item === 'water') {
       waterLeaf(ctx, Math.ceil(remaining), base * 0.92, why, tag);
@@ -442,6 +452,10 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
       }
       continue;
     }
+    // charcoal is burnt in a clamp where one is known: the kiln is for bricks
+    if (r.id === 'burn_charcoal' && facilitiesOf(ctx, 'clamp').length) continue;
+    // flour is ground at a windmill where one is known: the bakery keeps its oven
+    if (r.id === 'mill_flour' && facilitiesOf(ctx, 'mill').length) continue;
     // prefer the better way of making something when its tool is to hand: sawing beats hewing
     if (r.id === 'hew_planks' && (unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw'))) continue;
     if (r.id === 'saw_planks' && !(unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw')) && unitsOf(p.inv.axe) > 0) continue;
@@ -450,8 +464,8 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
 }
 
 // ───────────────────────── what is wanted ─────────────────────────
-const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread'];
-const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0;
+const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'beer', 'furniture'];
+const quarryAware = (ctx: Ctx, item: ItemKind): boolean => (item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0) || (item === 'ore' && facilitiesOf(ctx, 'mine').length > 0);
 
 /** Demands this person is aware of: from building sites they know, repairs, their own tools, their household's table. */
 export function demandsOf(ctx: Ctx): Demand[] {
@@ -483,6 +497,35 @@ export function demandsOf(ctx: Ctx): Demand[] {
     if (left > 0) out.push({ item: c.item, qty: left, have: 0, base: 50, why: 'to keep my promise to bring it', tag: 'promise', siteId: c.siteId });
   }
   const tm = traitMods(p);
+
+  // (rich worlds) a bed for a solid home whose household woke cold lately or keeps a child or an elder, where a timber yard is known
+  if (isRich(world) && ctx.home && ctx.hh && isSolidHome(ctx.home.type) && facilitiesOf(ctx, 'timber_yard').length) {
+    const homeBelief = p.beliefs[ctx.home.id];
+    const have = unitsOf(homeBelief?.items?.furniture) + unitsOf(p.inv.furniture);
+    const members = ctx.hh.members.map((id) => world.byId.get(id)).filter((q): q is Person => !!q && q.ent === 'person' && q.alive);
+    const cold = members.some((q) => world.tick - (q.cooldowns.coldNight ?? -1e9) < DAY * 3);
+    const frail = members.some((q) => stageOf(world, q) === 'child' || stageOf(world, q) === 'elder');
+    if (have < 1 && (cold || frail)) out.push({ item: 'furniture', qty: 1, have, base: (24 + (cold ? 10 : 0) + 4 * p.traits.diligence) * tm.work, why: cold ? 'we woke cold in the night: a bed off the ground would keep us warm' : 'the little ones and the old need a bed off the cold ground', tag: 'craft' });
+  }
+
+  // (rich worlds) fish beyond what the household will eat soon is smoked where a smokehouse is known, so it keeps
+  if (isRich(world) && ctx.home && facilitiesOf(ctx, 'smokehouse').length) {
+    const hs = hhState(ctx);
+    const fish = unitsOf(p.inv.fish) + unitsOf(p.beliefs[ctx.home.id]?.items?.fish);
+    const spare = Math.min(fish, Math.floor(hs.foodStock - hs.foodTarget * 1.1));
+    const smoked = unitsOf(p.inv.smoked);
+    if (spare >= 4 && smoked < 4) out.push({ item: 'smoked', qty: 4, have: smoked, base: (22 + 6 * p.traits.diligence) * tm.work, why: 'to smoke our spare fish before it goes off', tag: 'food' });
+  }
+
+  // (rich worlds) a tool wanted at all is wanted in iron when a smithy they may use has iron and a handle on its shelf
+  if (isRich(world)) {
+    const kind = wantedTools(ctx).find((k) => k !== 'basket'); // (the smithy forges every hand tool but a basket)
+    if (kind) {
+      // (a handle is fetched by the forge plan itself, from the yard or the shelf; the want outranks making a stone one by hand)
+      const f = facilitiesOf(ctx, 'smithy').find((x) => stockAt(x.b, 'iron') >= 1);
+      if (f && !toolsHeldBy(world, p.id, kind).some((t) => t.tier === 1)) out.push({ item: kind, qty: 1, have: 0, base: (20 + 8 * p.traits.diligence) * tm.work, why: `to have an iron ${TOOL_DEFS[kind].label}: it cuts faster and lasts twice as long`, tag: 'craft', tier: 1 });
+    }
+  }
 
   // a tool that is wearing out is worth replacing with an iron one, where a smithy can be used
   if (facilitiesOf(ctx, 'smithy').length) {
@@ -518,7 +561,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
     const haveBread = unitsOf(p.inv.bread) + unitsOf(ctx.home ? p.beliefs[ctx.home.id]?.items?.bread : 0) + unitsOf(share.bread);
     const surplusGrain = unitsOf(p.inv.grain) + unitsOf(ctx.home ? p.beliefs[ctx.home.id]?.items?.grain : 0) + unitsOf(share.grain);
     if (hs.foodStock >= hs.foodTarget * 1.1 && surplusGrain >= 4 && haveBread < target) {
-      out.push({ item: 'bread', qty: target - haveBread, have: haveBread, base: (14 + 6 * (ctx.dependents.length > 0 ? 1 : 0)) * tm.work, why: 'to turn spare grain into bread for the household', tag: 'food' });
+      out.push({ item: 'bread', qty: target - haveBread, have: haveBread, base: (22 + 6 * (ctx.dependents.length > 0 ? 1 : 0)) * tm.work, why: 'to turn spare grain into bread for the household', tag: 'food' });
     }
   }
   return out;
@@ -640,7 +683,7 @@ function optRackSpare(ctx: Ctx): void {
     const spare = same.sort((a, c) => (c.tier - a.tier) || a.wear - c.wear)[same.length - 1];
     if (spare.id !== t.id) continue;
     let target: Fac | null = null;
-    for (const type of ['timber_yard', 'smithy', 'quarry', 'kiln', 'bakery'] as BuildingType[]) {
+    for (const type of ['timber_yard', 'smithy', 'quarry', 'mine', 'kiln', 'bakery'] as BuildingType[]) {
       if (!recipesAt(type).some((r) => r.tool?.kind === t.kind)) continue;
       const f = facilitiesOf(ctx, type)[0];
       if (f && (f.b.hh === 0 || f.b.hh === p.hhId) && !(f.b.tools ?? []).includes(t.kind)) {
@@ -694,7 +737,7 @@ function optCartHaul(ctx: Ctx): void {
     for (const src of beliefsByKind(p, ['building', 'pile'])) {
       if (src.id === site.id) continue;
       if (src.kind === 'building' && src.btype && isFacilityType(src.btype as BuildingType) && !mayUseBelief(ctx, src)) continue;
-      if (src.kind === 'building' && !isFacilityType(src.btype as BuildingType) && src.btype !== 'storehouse') continue;
+      if (src.kind === 'building' && !isFacilityType(src.btype as BuildingType) && src.btype !== 'storehouse' && src.btype !== 'stockyard') continue;
       const load: Items = {};
       let w = 0;
       for (const k of kinds) {
@@ -858,6 +901,77 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (p.traits.generosity > 0.5) s += 0.1;
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
+  // a well: the household's water is a long walk away, and no well they know of is near (rich worlds)
+  if (buildable(world, 'well') && ctx.home && !(world.tick < DAY * 3)) {
+    const hx = ctx.home.x + ctx.home.w / 2;
+    const hy = ctx.home.y + ctx.home.h / 2;
+    let shore = Infinity;
+    for (const b of beliefsByKind(p, ['water'])) shore = Math.min(shore, hyp(b.x - hx, b.y - hy));
+    // (a well is laid out up to 8 tiles from home and may not stand within WELL_REACH of another: a well that near is 'near enough')
+    const wellNear = beliefsByKind(p, ['building', 'site']).some((b) => b.btype === 'well' && hyp(b.x - hx, b.y - hy) < WELL_REACH + 8);
+    const neighbours = beliefsByKind(p, ['building']).filter((b) => isHomeType(b.btype) && b.id !== ctx.home!.id && hyp(b.x - hx, b.y - hy) < 10).length;
+    if (!wellNear && shore > WELL_FAR && shore < Infinity && (ctx.members.length >= 2 || neighbours >= 2)) {
+      const s = 0.55 + 0.03 * Math.min(15, shore - WELL_FAR) + 0.05 * Math.min(neighbours, 4);
+      out.push({ type: 'well', signal: Math.min(1, s), why: `the nearest water I know is ${Math.round(shore)} tiles from home, and a well close to the houses would save the walk` });
+    }
+  }
+  // a cellar: this household keeps finding food gone off in its own stores (rich worlds)
+  if (buildable(world, 'cellar') && ctx.home && ctx.hh) {
+    const lost = foodLossOf(world, ctx.hh);
+    const own = beliefsByKind(p, ['building', 'site']).some((b) => b.btype === 'cellar' && b.hh === p.hhId);
+    // (and there has to be food worth protecting in the home store: the household's own count, not a guess)
+    if (!own && lost >= LOSS_THRESHOLD && hs.homeFood >= 5) out.push({ type: 'cellar', signal: Math.min(1, 0.55 + 0.06 * lost), why: `we keep finding food gone off (about ${Math.round(lost)} units lately): a cellar would keep it cool` });
+  }
+  // a forester's lodge: the wood near home is thin by what this person knows of it (rich worlds)
+  if (buildable(world, 'forester') && ctx.home && !knowsOfAny(ctx, 'forester') && world.tick >= DAY * 4) {
+    const trees = knownTreesNear(p, beliefsByKind(p, ['tree']), ctx.home.x + ctx.home.w / 2, ctx.home.y + ctx.home.h / 2);
+    if (trees < FOREST_THIN) out.push({ type: 'forester', signal: Math.min(1, 0.5 + 0.04 * (FOREST_THIN - trees) + (haveYard ? 0.1 : 0)), why: `only ${trees} trees that I know of stand near home: someone should be planting` });
+  }
+  // a stockyard: the settlement builds, and the wood this person gets is a long walk from the camp (rich worlds)
+  if (buildable(world, 'stockyard') && ctx.home && !knowsOfAny(ctx, 'stockyard') && world.tick >= DAY * 6 && (haveYard || solidHomes >= 3)) {
+    // (the walk this person knows is the one from their own door; the yard itself goes by the camp, where the settlement builds)
+    const far = woodDistance(beliefsByKind(p, ['tree']), ctx.home.x + ctx.home.w / 2, ctx.home.y + ctx.home.h / 2);
+    const rawWanted = stoneNeeded + beliefsByKind(p, ['site']).reduce((n, s) => n + unitsOf(s.need?.wood), 0);
+    if (far > YARD_FAR && far < Infinity && (rawWanted >= 6 || haveYard)) {
+      const s = 0.5 + 0.02 * Math.min(20, far - YARD_FAR) + (rawWanted >= 6 ? 0.15 : 0) + 0.1 * init;
+      out.push({ type: 'stockyard', signal: Math.min(1, s), why: `the wood I fetch is about ${Math.round(far)} tiles from home: a yard by the houses would save every builder the walk` });
+    }
+  }
+  // a brewery: a hall is known for the shared meals, and the household has grain to spare that it has seen go off (rich worlds)
+  if (buildable(world, 'brewery') && !knowsOfAny(ctx, 'brewery') && knowsOfAny(ctx, 'hall') && ctx.hh && ctx.home) {
+    const grain = unitsOf(p.inv.grain) + unitsOf(p.beliefs[ctx.home.id]?.items?.grain);
+    if (grain >= 10 && hs.foodStock >= hs.foodTarget * 1.1 && foodLossOf(world, ctx.hh) >= 2) out.push({ type: 'brewery', signal: Math.min(1, 0.55 + 0.3 * p.traits.sociability), why: 'we have grain going off and a hall to gather in: brewed, it would make the shared meals an evening' });
+  }
+  // a smokehouse: the household has more fish than it will eat before it goes off, and a cellar already stands or the hard season is here (rich worlds)
+  if (buildable(world, 'smokehouse') && !knowsOfAny(ctx, 'smokehouse') && ctx.home) {
+    const fish = unitsOf(p.inv.fish) + unitsOf(p.beliefs[ctx.home.id]?.items?.fish);
+    const ownCellar = beliefsByKind(p, ['building']).some((b) => b.btype === 'cellar' && b.hh === p.hhId);
+    if (fish >= 8 && (ownCellar || winterDepth(world) > 0 || !!world.hardship)) out.push({ type: 'smokehouse', signal: Math.min(1, 0.6 + 0.2 * init), why: `we have ${fish} fish, more than we can eat before it goes off: smoked, it would keep for the lean days` });
+  }
+  // a windmill: this person came to the bakery with grain and found its one job taken (rich worlds; the failure is noted in act_production)
+  if (buildable(world, 'mill') && !knowsOfAny(ctx, 'mill') && grainKnown >= 6) {
+    const bakery = beliefsByKind(p, ['building']).find((b) => b.btype === 'bakery');
+    const turned = bakery ? recentFailure(world, p, bakery.id, DAY * 4) : null;
+    if (bakery && turned && /busy/.test(turned.reason)) out.push({ type: 'mill', signal: Math.min(1, 0.6 + 0.2 * init), why: "the bakery was busy when I came with grain: a windmill would grind it without taking the oven" });
+  }
+  // a charcoal clamp: the smithy has no charcoal and the kiln is for bricks; a clamp by the trees burns it (rich worlds)
+  if (buildable(world, 'clamp') && !knowsOfAny(ctx, 'clamp') && knowTrees && isSmith(ctx)) {
+    const smithy = beliefsByKind(p, ['building']).find((b) => b.btype === 'smithy' && b.items !== undefined);
+    if (smithy && stockAt(smithy, 'charcoal') < 2) out.push({ type: 'clamp', signal: Math.min(1, 0.6 + 0.3 * init), why: 'the smithy has no charcoal and the kiln is for bricks: a clamp by the trees would burn it' });
+  }
+  // a mine: a smithy is known, its ore is running short or tools are wearing out, and there is a vein with plenty in it (rich worlds)
+  if (buildable(world, 'mine') && !knowsOfAny(ctx, 'mine') && knowsOfAny(ctx, 'smithy')) {
+    const veins = beliefsByKind(p, ['ore_vein']).filter((b) => b.amount >= 12);
+    const smithy = beliefsByKind(p, ['building']).find((b) => b.btype === 'smithy');
+    if (veins.length > 0 && smithy) {
+      // (an idle smithy with bare shelves is not a demand for ore: someone has to want iron, which today means a tool of theirs wearing out)
+      const worn = toolsHeldBy(world, p.id).filter((t) => t.wear >= 25 && t.kind !== 'jar').length;
+      if ((worn > 0 || isSmith(ctx)) && stockAt(smithy, 'ore') < 3) {
+        const s = 0.5 + 0.1 * Math.min(worn, 2) + 0.2 * init + (isSmith(ctx) ? 0.1 : 0);
+        if (s >= 0.6) out.push({ type: 'mine', signal: Math.min(1, s), why: 'my tools are wearing out, the smithy has no ore and a vein is known: a mine would bring it out by the load' });
+      }
+    }
+  }
   if (!knowsOfAny(ctx, 'hall') && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
@@ -870,6 +984,247 @@ function bricks_or_charcoal(ctx: Ctx): string {
   if (bricksWanted(ctx) > 0) return 'bricks are wanted and there is clay but no kiln';
   return 'clay could be fired into bricks and jars, and wood burned to charcoal';
 }
+
+/** iron and handles kept on a smithy's shelf for whoever needs a tool */
+const SMITHY_SHELF: Partial<Record<ItemKind, number>> = { iron: 2, handles: 2 };
+
+/** the smith (rich worlds): whoever has practised at the smithy, or is diligent enough to take it up; skills start at 1.0, and smith skill grows fastest */
+export function isSmith(ctx: Ctx): boolean {
+  return isRich(ctx.world) && (ctx.p.skills.smith > 1.05 || ctx.p.traits.diligence > 0.6);
+}
+
+/**
+ * The smith (rich worlds): someone who knows a smithy they may use, has the skill or the diligence, and in slack time keeps iron on its
+ * shelf: smelting when ore and charcoal are there, otherwise fetching them (a vein or a mine for the ore; a kiln or a clamp for the
+ * charcoal, through the ordinary supply planning). A batch for the shelf belongs to nobody, so anyone may forge with its iron.
+ */
+function optStockSmithy(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!isSmith(ctx) || world.tick < DAY * 6) return;
+  if (ctx.drives.hunger > 25 || ctx.drives.thirst > 25 || ctx.drives.energy > 40) return;
+  const f = facilitiesOf(ctx, 'smithy')[0];
+  if (!f) return;
+  if (hashUnit(p.id, Math.floor(world.tick / 400), 83) > 0.45 + 0.45 * p.traits.diligence) return;
+  const before = ctx.options.length;
+  // (a trade, not an idle afternoon: it pays about what a site does, because its chain is four legs long and each must win in turn)
+  const base = (22 + 6 * p.traits.diligence + 6 * Math.max(0, p.skills.smith - 1)) * traitMods(p).work;
+  for (const k of ['iron', 'handles'] as const) {
+    const short = (SMITHY_SHELF[k] ?? 0) - stockAt(f.b, k);
+    if (short > 0) supply(ctx, k, short, k === 'iron' ? base : base * 0.8, `to keep ${k} on the smithy's shelf for whoever needs a tool`, 'craft', 0, f.b);
+  }
+  for (let i = before; i < ctx.options.length; i++) {
+    const o = ctx.options[i];
+    if (o.kind !== 'operate' || o.targetId !== f.b.id || !o.make) continue;
+    const mk = o.make;
+    o.make = () => {
+      const a = mk();
+      if (a && a.data.recipe === 'smelt_iron') {
+        a.data.client = 0;
+        a.data.purpose = 'for the shelf';
+      }
+      return a;
+    };
+  }
+}
+
+/** A bed carried home is set up in the home store (rich worlds): the one deposit that is neither food, a workshop input nor raw goods. */
+function optBringBedHome(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!isRich(world) || !ctx.home || unitsOf(p.inv.furniture) < 1) return;
+  const h = p.beliefs[ctx.home.id];
+  if (!h) return;
+  const e = eta(ctx, h.x, h.y);
+  const sc = new Scorer().add('carrying a bed for our home', 30).add('walking', -pen(e));
+  addOption(ctx, {
+    kind: 'deposit',
+    label: 'Take the bed home',
+    goal: 'to sleep warm',
+    need: null,
+    util: sc.total * nightMult(ctx),
+    parts: sc.parts,
+    eta: e + 20,
+    key: `deposit:${h.id}:furniture`,
+    targetId: h.id,
+    tag: 'craft',
+    make: () => {
+      const spot = spotNear(world, p, h);
+      if (!spot) return null;
+      return newActivity(world, p, { kind: 'deposit', label: 'Setting up the bed at home', goal: 'to sleep warm', targetId: h.id, targetType: 'building', tx: h.x, ty: h.y, spotX: spot.x, spotY: spot.y, utility: sc.total, minCommit: 40, maxTicks: 900, data: { items: { furniture: 1 }, sticky: true } });
+    },
+  });
+}
+
+/** crocks of beer a hall is kept stocked with, for the shared meals */
+const HALL_BEER = 4;
+
+/**
+ * The brewer (rich worlds): someone sociable or practised at baking who knows a hall and a brewery keeps beer at the hall. Carrying beer,
+ * they take it there; otherwise, in slack time, they brew (through the ordinary supply planning: grain, water, the brewery).
+ */
+function optStockHall(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!buildable(world, 'brewery') || world.tick < DAY * 6) return;
+  if (!(p.traits.sociability > 0.55 || p.skills.bake > 1.05)) return;
+  const hall = beliefsByKind(p, ['building']).find((b) => b.btype === 'hall');
+  if (!hall || !facilitiesOf(ctx, 'brewery').length) return;
+  const short = HALL_BEER - stockAt(hall, 'beer');
+  const carried = unitsOf(p.inv.beer);
+  if (carried > 0) {
+    depositLeaf(ctx, hall, { beer: carried }, 18 + 6 * p.traits.sociability, 'to pour at the shared meals in the hall', 'social');
+    return;
+  }
+  if (short <= 0) return;
+  if (ctx.drives.hunger > 25 || ctx.drives.thirst > 25 || ctx.drives.energy > 40) return;
+  if (hashUnit(p.id, Math.floor(world.tick / 400), 89) > 0.35 + 0.5 * p.traits.sociability) return;
+  supply(ctx, 'beer', short, (22 + 6 * p.traits.sociability) * traitMods(p).work, 'to have beer for the shared meals in the hall', 'social', 0, null);
+}
+
+/** The stockyard: stack the raw goods I carry beyond my own reserve; in slack time, fetch more when the yard I know is low (rich worlds). */
+function optStockYard(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!buildable(world, 'stockyard') || world.tick < DAY * 5) return;
+  const yard = beliefsByKind(p, ['building'])
+    .filter((b) => b.btype === 'stockyard')
+    .sort((a, c) => hyp(a.x - p.x, a.y - p.y) - hyp(c.x - p.x, c.y - p.y))[0];
+  if (!yard) return;
+  const room = yardRoom(yard);
+  const e = eta(ctx, yard.x, yard.y);
+  // what this person is carrying for a purpose of their own (a site, a repair, a tool, the fire) is not spare
+  const needed: Partial<Record<ItemKind, number>> = {};
+  for (const nd of materialNeeds(ctx)) needed[nd.item] = (needed[nd.item] ?? 0) + nd.n;
+  const items: Items = {};
+  let w = 0;
+  let n = 0;
+  for (const k of RAW_MATERIALS) {
+    const spare = unitsOf(p.inv[k]) - (YARD_RESERVE[k] ?? 0) - (needed[k] ?? 0);
+    const take = Math.min(spare, Math.floor((room - w) / WEIGHT[k]));
+    if (take >= 1) {
+      items[k] = take;
+      w += take * WEIGHT[k];
+      n += take;
+    }
+  }
+  if (n > 0) {
+    {
+      const target = (YARD_TARGET.wood ?? 0) * WEIGHT.wood + (YARD_TARGET.stone ?? 0) * WEIGHT.stone;
+      const empty = Math.max(0, Math.min(1, (room - (BUILD_DEF.stockyard.cap - target)) / target)); // 1 when the yard holds nothing of its target, 0 when it is stocked
+      const sc = new Scorer().add('raw goods to stack for whoever builds next', 10 + Math.min(n, 10) * 1.2 + 3 * p.traits.generosity).add('the yard is low', 8 * empty).add('walking', -pen(e));
+      if (sc.total >= 6) {
+        const util = sc.total * nightMult(ctx) * weatherMult(ctx);
+        addOption(ctx, {
+          kind: 'deposit',
+          label: `Stack ${itemPhrase(items)} at the stockyard`,
+          goal: 'for whoever builds or works next',
+          need: null,
+          util,
+          parts: sc.parts,
+          eta: e + 20,
+          key: `deposit:${yard.id}:raw`,
+          targetId: yard.id,
+          tag: 'store',
+          make: () => {
+            const spot = spotNear(world, p, yard);
+            if (!spot) return null;
+            return newActivity(world, p, {
+              kind: 'deposit',
+              label: `Stacking ${itemPhrase(items)} at the stockyard`,
+              goal: 'for whoever builds or works next',
+              targetId: yard.id,
+              targetType: 'building',
+              tx: yard.x,
+              ty: yard.y,
+              spotX: spot.x,
+              spotY: spot.y,
+              utility: util,
+              minCommit: 40,
+              maxTicks: 600,
+              data: { items },
+            });
+          },
+        });
+      }
+    }
+  } else if (room >= 6) {
+    // keeping it stocked is slack-time work for the diligent, never a chore for everyone on the same afternoon
+    if (ctx.drives.hunger > 25 || ctx.drives.thirst > 25 || ctx.drives.energy > 40) return;
+    if (hashUnit(p.id, Math.floor(world.tick / 400), 77) > 0.45 + 0.45 * p.traits.diligence) return;
+    // the one good the yard is shortest of (a gather scan is not cheap: one per review, not one per kind)
+    let pick: 'wood' | 'stone' | null = null;
+    let pickMissing = 0;
+    let pickShort = 0;
+    for (const k of ['wood', 'stone'] as const) {
+      const target = YARD_TARGET[k] ?? 0;
+      const missing = Math.min(target - stockAt(yard, k), Math.floor(room / WEIGHT[k]));
+      if (missing < 2 || missing / target <= pickShort) continue;
+      pick = k;
+      pickMissing = missing;
+      pickShort = missing / target;
+    }
+    if (pick) {
+      // (below what a site or a workshop pays, above an idle afternoon: the yard is filled in slack time, not instead of a roof)
+      const base = (12 + 8 * pickShort + 4 * p.traits.diligence) * traitMods(p).work;
+      gatherMaterial(ctx, pick, pickMissing, base, `to keep the stockyard stocked with ${ITEM_LABEL[pick]}`, 'store');
+    }
+  }
+}
+
+/** Planting: a person who knows a forester's lodge and knows the wood near home is thin goes and sets a young tree (rich worlds). */
+function optPlantTrees(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!buildable(world, 'forester') || !ctx.home || world.tick < DAY * 4) return;
+  const lodge = beliefsByKind(p, ['building']).filter((b) => b.btype === 'forester').sort((a, c) => hyp(a.x - p.x, a.y - p.y) - hyp(c.x - p.x, c.y - p.y))[0];
+  if (!lodge) return;
+  const treeBeliefs = beliefsByKind(p, ['tree']);
+  const trees = knownTreesNear(p, treeBeliefs, ctx.home.x + ctx.home.w / 2, ctx.home.y + ctx.home.h / 2);
+  if (trees >= FOREST_THIN + 4) return;
+  if (hashUnit(p.id, Math.floor(world.tick / 500), 91) > 0.25 + 0.45 * p.traits.diligence) return;
+  if (recentFailure(world, p, lodge.id, 700)) {
+    addBlocked(ctx, 'plant_tree', 'Plant a tree', lodge.id, 'tried recently and could not', 'work');
+    return;
+  }
+  // a young tree is raised from a grown one: there has to be one, as far as this person knows, within the lodge's reach
+  if (!treeBeliefs.some((b) => b.amount >= 2 && hyp(b.x - lodge.x, b.y - lodge.y) <= FOREST_REACH)) {
+    addBlocked(ctx, 'plant_tree', 'Plant a tree', lodge.id, 'knows of no grown tree near the lodge to raise one from', 'work');
+    return;
+  }
+  // (the spot itself is chosen when the option is taken: the search is the world's ground, not something to run at every review)
+  const e = eta(ctx, lodge.x, lodge.y) + FOREST_REACH * 4;
+  const sc = new Scorer().add(`only ${trees} trees that I know of stand near home; the lodge can raise more`, 13 + 1.0 * (FOREST_THIN - Math.min(trees, FOREST_THIN)) + 4 * p.traits.diligence).add('walking', -pen(e));
+  const util = sc.total * nightMult(ctx) * weatherMult(ctx);
+  addOption(ctx, {
+    kind: 'plant_tree',
+    label: 'Plant a young tree',
+    goal: 'to thicken the wood near home',
+    need: null,
+    util,
+    parts: sc.parts,
+    eta: e + PLANT_ETA,
+    key: 'plant_tree',
+    targetId: lodge.id,
+    tag: 'work',
+    make: () => {
+      const spot = plantingSpot(world, p, { x: lodge.x, y: lodge.y });
+      if (!spot) {
+        noteFailure(world, p, lodge.id, 'no good open ground near the lodge');
+        return null;
+      }
+      const stand = standBeside(world, p, spot);
+      return newActivity(world, p, {
+        kind: 'plant_tree',
+        label: 'Planting a young tree',
+        goal: 'to thicken the wood near home',
+        targetId: lodge.id,
+        targetType: 'building',
+        tx: spot.x + 0.5,
+        ty: spot.y + 0.5,
+        spotX: stand.x,
+        spotY: stand.y,
+        data: { sticky: true }, // a planting is finished once begun, unless danger or a deadly need says otherwise
+      });
+    },
+  });
+}
+const PLANT_ETA = 150;
 
 function optPlanFacilities(ctx: Ctx): void {
   const { world, p, hh } = ctx;
@@ -911,14 +1266,27 @@ function optPlanFacilities(ctx: Ctx): void {
         const camp = baseHub(world, p, ctx.home);
         let spot: { x: number; y: number } | null = null;
         let depositId = 0;
-        if (type === 'quarry') {
-          const dep = beliefsByKind(p, ['outcrop'])
+        if (type === 'quarry' || type === 'mine') {
+          const dep = beliefsByKind(p, [type === 'mine' ? 'ore_vein' : 'outcrop'])
             .filter((b) => b.amount >= 10 && world.byId.get(b.id))
             .sort((a, c) => hyp(a.x - camp.x, a.y - camp.y) - hyp(c.x - camp.x, c.y - camp.y))[0];
           if (dep) {
             depositId = dep.id;
             spot = findBuildSpot(world, p, type, dep.x, dep.y, 1.5, 6, 3);
           }
+        } else if (type === 'stockyard') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 10, 5);
+        else if (type === 'forester') {
+          const h = ctx.home;
+          spot = lodgeSpot(world, p, h ? h.x + h.w / 2 : camp.x, h ? h.y + h.h / 2 : camp.y) ?? findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
+        } else if (type === 'mill') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 16, 11);
+        else if (type === 'smokehouse' || type === 'brewery') spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 12, 8);
+        else if (type === 'clamp') {
+          // by the trees it burns, and well away from the houses it smokes over
+          spot = edgeSpot(world, p, camp.x, camp.y, 'clamp', 0.75, 3, 9, 5) ?? findBuildSpot(world, p, type, camp.x, camp.y, 8, 16, 11);
+        }
+        else if (type === 'well' || type === 'cellar') {
+          const h = ctx.home;
+          spot = h ? findBuildSpot(world, p, type, h.x + h.w / 2, h.y + h.h / 2, 2, type === 'well' ? 8 : 7, type === 'well' ? 4 : 3) : null;
         } else if (type === 'granary' || type === 'hall') spot = findBuildSpot(world, p, type, camp.x, camp.y, 3, 11, 6);
         else if (type === 'kiln' || type === 'smithy') spot = findBuildSpot(world, p, type, camp.x, camp.y, 7, 15, 10);
         else spot = findBuildSpot(world, p, type, camp.x, camp.y, 5, 14, 8);
@@ -1003,6 +1371,9 @@ function optPlanUpgrade(ctx: Ctx): void {
   });
 }
 
+/** how long a step taken toward something keeps the rest of its chain in mind (rich worlds) */
+const PLAN_MOMENTUM = DAY * 1.5;
+
 // ───────────────────────── entry point ─────────────────────────
 export function productionOptions(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -1011,12 +1382,35 @@ export function productionOptions(ctx: Ctx): void {
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
   if (p.health < 45) return;
   const demands = demandsOf(ctx);
-  for (const d of demands) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
+  const rich = isRich(world);
+  for (const d of demands) {
+    // (rich worlds) a job already begun is carried through: the next step of a chain this person has lately taken a step in is worth more
+    const key = 'plan:' + d.item;
+    const begun = rich && world.tick - (p.cooldowns[key] ?? -1e9) < PLAN_MOMENTUM;
+    const before = ctx.options.length;
+    supply(ctx, d.item, d.qty, begun ? d.base + 12 : d.base, begun ? `${d.why} (already under way)` : d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
+    if (!rich) continue;
+    for (let i = before; i < ctx.options.length; i++) {
+      const o = ctx.options[i];
+      if (!o.make) continue;
+      const mk = o.make;
+      o.make = () => {
+        const a = mk();
+        if (a) p.cooldowns[key] = world.tick;
+        return a;
+      };
+    }
+  }
   optGranaryStore(ctx);
   optTendGranary(ctx);
   optToolMaintenance(ctx);
   optCartHaul(ctx);
   optRackSpare(ctx);
+  optStockYard(ctx);
+  optStockSmithy(ctx);
+  optStockHall(ctx);
+  optBringBedHome(ctx);
+  optPlantTrees(ctx);
   optPlanFacilities(ctx);
   optPlanUpgrade(ctx);
 }

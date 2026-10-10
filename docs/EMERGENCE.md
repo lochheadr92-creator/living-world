@@ -131,6 +131,67 @@ over the four seeds agree with the 24-seed direction. LIKELY, not separated: tha
 to food, warmth and safety, so development comes later while survival is intact; the mood weights and the stakes both act in this run and
 the experiment that tells them apart (stakes without the mood effects, and the reverse) has not been done.
 
+### Attribution: the stakes do the work, the mood does not (24 seeds, Large, day 0 to 15, run on the 24-core machine)
+
+Branches (all against the mean of the control and the two nudges, per seed): `rich` (both halves), `rich-stakes-only` (winter, lean seasons,
+spoilage, bolder wolves; moods are kept but change nothing), `rich-mood-only` (moods change choices and quarrels; none of the stakes).
+
+| outcome | rich | stakes only | mood only | one-draw spread |
+|---|---|---|---|---|
+| plots | +12.3 (22/24 higher) | +11.8 (23/24) | -0.9 (no effect) | ±5.7 |
+| workplaces | -3.7 (20/24 lower) | -3.9 (20/24) | -0.5 (no effect) | ±3.1 |
+| buildings | -4.7 (22/24 lower) | -5.0 (19/24) | -0.5 (no effect) | ±3.6 |
+| first hall, as reported (see the limits below) | +2.6 | +3.0 | +0.1 | ±2.2 |
+| deaths per world | +0.4 | +0.4 [+0.1, +0.9] | -0.1 | ±0.4 |
+| people | -0.1 | -0.3 | 0 | ±2.0 |
+| mean hunger | -2.8 | -2.4 | -2.8 | ±4.5 |
+| people below mood -25 at the end (zero by construction in the reference) | +0.8 | +1.1 | +0.3 | |
+
+**Limits of this table, found on review (VERIFIED against the code):**
+* The mood rows are zero in the reference by construction (a world without rich dynamics has no mood and the collector counts 0), so "+0.8" says
+  the rich worlds record unhappy people, not that those moods change behaviour. The valid comparison is rich against stakes-only.
+* Hunger, mood, "below critical" and homeless are counts of the people alive at the end. They leave out the dead and anything that passed.
+* "First hall" was the earliest build time among halls still standing at the end, with the end of the run (day 15) when none stood. Halls were
+  standing in 18 of 24 worlds with the stakes (full or stakes-only) and in 23 to 24 of 24 otherwise, so most of the "+2.6 days" is worlds with no
+  surviving hall, not a later first hall.
+* "Identical" compared the compact fingerprint, which leaves out parts of the world.
+* A re-run of an existing output directory reused finished seeds without checking which code or settings made them.
+
+All five are fixed in the tooling for runs from now on (`scripts/lab/lab.ts`, `lab_report.ts`, `lab_seed.ts`, `lab.mjs`): buildings are noted whenever
+seen, `hallBuilt` and `bakeryBuilt` are counted, person-days in want, person-days below mood -25 and the number of breaks are accumulated across
+the run, "identical" compares a hash of the whole serialised world, each output file records its commit and settings and is reused only if they
+match, and `lab_report --compare a,b` gives the direct paired difference. Results above predate these and keep their limits.
+
+What a direct paired comparison showed (full rich minus stakes-only, per seed, same bootstrap; computed from the raw files by a reviewer, not
+reproduced by me; reproduce with `--compare rich,rich-stakes-only`): workplaces +0.2 [-1.5, +2.1], buildings +0.3 [-2.0, +2.9], plots +0.5
+[-2.8, +3.3], people +0.2 [-1.0, +1.3], first hall -0.4 days [-1.9, +1.2]; 12 of 13 outcomes include zero. That is "no clear additional effect of
+mood on these totals in 24 seeds over 15 days", not "no effect": mood could change particular relationships and histories while the
+settlement totals stay alike, which these measurements would miss.
+
+VERIFIED: with the stakes on, switching the mood effects on or off changes no outcome by more than the noise (rich and stakes-only agree to
+within a few tenths on every row). With the stakes off, the mood effects on their own change nothing except a slightly lower mean hunger (-2.8,
+about three standard errors; LIKELY a real small effect: a low mood idles more) and a few more unhappy people (0.3 a world). The pattern the
+stakes produce (more farmland, development 3 to 5 buildings and about 3 days behind, a handful more people in want, 0.4 extra deaths a world)
+is a trade-off nobody wrote as a rule, and it is consistent across seeds.
+
+Why mood does nothing (LIKELY, from the numbers above, not a separate experiment): in a comfortable village almost nobody is far from content
+(0.3 people a world below -25 without the stakes, about 1 with them), so the weights (0.3 to 0.6 times the mood level) are close to 1 for nearly
+everyone; and people differ little in how they take things, because every thought has the same size for everybody. A system that gives every
+person nearly the same mood cannot make one person's day differ from another's, which is what makes stories.
+
+Since built (rich worlds only, behind the same switch, not yet measured): thought sizes differ by person (a bite counts 0.6 to 1.4 times by caution,
+a row, a death, a gift, a meal or a birth by sociability); below a mood of -35 a person reaches the end of their patience for 0.4 day (social and
+effort options x0.25, resting and idling x2, quarrels x2.5), may snap at a neighbour, then feels relieved and cannot do it again for two days;
+and `probeMoodFlips()` counts the decisions where the mood changed which option was on top. The measure to apply to these is the one the review
+asked for: follow the decisions the mood changed into lasting consequences (a missed repair, a different sharing partner, a promise broken, a
+relationship that changes later cooperation), and compare with stakes-only directly. Raising the multipliers until building counts move would
+produce a slowdown, not more interesting lives.
+
+What this suggests (not done): give mood somewhere to go. Thought sizes that depend on the person (the five traits are read by choices but
+none of them scales a thought), a threshold that does something visible (a person at the bottom for a day withdraws, snaps at a neighbour or
+refuses to share), and grievances that last long enough to change who works with whom. The test of each is the same: does it make the
+tracer find mood-led chains (hungry then snapped at then sore) that today's stakes alone do not?
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures

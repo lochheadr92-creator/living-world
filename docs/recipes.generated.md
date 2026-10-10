@@ -18,6 +18,11 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | granary | 2×2 | 6 wood, 8 planks, 4 stone | 56 s | 120 | 2 | 2.9% | Raised, ventilated bins for grain, flour and bread. Each household keeps its own share; grain keeps far longer here when the bins are tended. |
 | bakery | 2×2 | 4 wood, 6 stone, 6 bricks | 60 s | 40 | 2 | 3.4% | A quern and a brick oven: grain is milled to flour and baked into bread. |
 | communal hall | 3×3 | 10 wood, 10 planks, 8 stone | 90 s | 60 | 4 | 2.9% | A long roofed hall with a hearth and trestles: shared meals, company out of the weather, and news carried by whoever sits there. |
+| cellar | 2×1 | 9 stone, 6 wood | 48 s | 90 | 2 | 1.9% | A stone-lined chamber dug into the ground behind a timber door. It stays cool, so food kept here goes off at about a sixth of the ordinary pace, slower than in a tended granary. Food and flour only; a household keeps its own. |
+| mine | 2×2 | 9 wood, 3 stone | 44 s | 60 | 3 | 2.9% | A timbered adit driven into an ore vein: ore comes out two or three loads at a time and is stacked at the head of the shaft. Needs a pick; the vein is finite. |
+| stockyard | 2×2 | 9 wood, 2 stone | 30 s | 150 | 2 | 2.2% | A fenced yard by the houses where logs, stone, clay and ore are stacked for whoever builds or works next. Raw goods only: finished goods belong in the storehouse. |
+| forester's lodge | 2×1 | 8 wood, 2 stone | 32 s | 24 | 2 | 3.1% | A low timber lodge with a nursery bed in front. Whoever has the time sets young trees on the open ground round about; they take three days to come up, and the wood they grow is real wood. |
+| well | 1×1 | 10 stone, 3 wood | 38 s | 18 | 2 | 1.7% | A stone-lined shaft with a windlass. Water seeps in a unit every few seconds, some fifty a day, and is drawn by whoever comes, for drinking and carrying home. |
 
 ## Recipes (what a workplace makes)
 
@@ -28,6 +33,7 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | timber yard | tool handles | 1 wood | — | 4 s | — | 2 handles | — | axe (×0.75 time) | carpentry | 1 | Straight, seasoned handles for carts and iron tools; also the better way to mend a worn tool. |
 | timber yard | a handcart | 4 planks, 2 handles, 2 wood | — | 19 s | — | a handcart | — | hammer (required) | carpentry | 2 | A cart carries three or four times what a person can, over open ground. |
 | quarry | cut stone | — | — | 10 s | — | 3 stone cut from the outcrop | — | pick (×0.55 time) | stone | 3 | Stone from a big outcrop, three at a time, stacked at the yard — nobody has to walk between small rocks. |
+| mine | dig ore | — | — | 11 s | — | 3 ore dug from the vein | — | pick (required) | stone | 3 | Ore from a vein, three loads at a time, stacked at the shaft head — far quicker than chipping it out by hand. |
 | kiln | fired bricks | 4 clay | 2 wood | 5 s | 42 s | 3 bricks | 1 clay (clay that cracked and shrank in the fire) | — | kiln | 2 | Bricks for hearths, ovens and proper walls. |
 | kiln | a water jar | 3 clay | 1 wood | 7 s | 30 s | an water jar | — | — | kiln | 1 | A jar lets its owner carry far more water per trip. |
 | kiln | charcoal | 6 wood | — | 4 s | 70 s | 3 charcoal | 3 wood (smoke and ash) | — | kiln | 1 | A hotter, lighter fuel than wood: what smelting and forging need. |
@@ -52,8 +58,8 @@ Written by `npx vite-node scripts/docs.ts` from `src/sim/constants.ts` and `src/
 | bread | 1 | 30 | 0.5 | — |
 | seeds | 0.25 | — | — | — |
 | water | 1.5 | — | — | — |
-| wood | 2 | — | — | everything else |
-| stone | 3 | — | — | — |
+| wood | 2 | — | — | mine, forester's lodge |
+| stone | 3 | — | — | well, cellar |
 | clay | 3 | — | — | — |
 | ore | 3 | — | — | — |
 | planks | 2 | — | — | house, granary, communal hall |

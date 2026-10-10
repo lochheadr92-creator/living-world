@@ -4,6 +4,8 @@ import { idFromTag, isToolItem, retagTools } from './toolreg';
 import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, Store, World } from './types';
 
 const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'bread'];
+/** eaten only when nothing fresher is there: smoked fish is the reserve that keeps */
+const RESERVE_FOOD: FoodKind[] = ['smoked'];
 
 /** Choose the food that fits the current hunger deficit best (largest portion that does not overshoot much). */
 export function pickFood(items: Items, hunger: number): FoodKind | null {
@@ -20,6 +22,7 @@ export function pickFood(items: Items, hunger: number): FoodKind | null {
       best = k;
     }
   }
+  if (best === null) for (const k of RESERVE_FOOD) if ((items[k] ?? 0) > 0) return k;
   return best;
 }
 

@@ -1,5 +1,6 @@
 // Aggregate the lab's output: paired differences against the control, against the noise floor, in plain sentences.
-//   npx vite-node scripts/lab_report.ts -- lab_out [--story meadow]
+//   npx vite-node scripts/lab_report.ts -- lab_out [--story meadow] [--compare rich,rich-stakes-only]
+// `--compare a,b` prints the paired difference a - b directly (what a adds to b), instead of each against the reference.
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { METRICS } from './lab/lab';
@@ -7,17 +8,23 @@ import type { BranchResult, Metric } from './lab/lab';
 import { mean, paired, sd, verdict } from './lab/stats';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
-const dir = args.find((a) => !a.startsWith('--') && args[args.indexOf(a) - 1] !== '--story') ?? '.';
+const dir = args.find((a, i) => !a.startsWith('--') && args[i - 1] !== '--story' && args[i - 1] !== '--compare') ?? '.';
 const storySeed = args.includes('--story') ? args[args.indexOf('--story') + 1] : null;
+const compare = args.includes('--compare') ? args[args.indexOf('--compare') + 1].split(',') : null;
 
 type Row = BranchResult & { seed: string; profile: string; fork: number; days: number };
 const bySeed = new Map<string, Map<string, Row>>();
+const metas = new Set<string>();
 for (const f of readdirSync(dir)) {
   if (!/^lab_.+\.jsonl$/.test(f)) continue;
   for (const line of readFileSync(join(dir, f), 'utf8').split('\n')) {
     if (!line.trim()) continue;
     const r = JSON.parse(line) as Row;
-    if (!r.spec) continue; // the end-of-seed marker
+    if (!r.spec) {
+      const m = (r as unknown as { meta?: { commit: string; dirty: boolean } }).meta;
+      if (m) metas.add(`${m.commit.slice(0, 7) || 'unknown'}${m.dirty ? '+uncommitted changes' : ''}`);
+      continue; // the meta line or the end-of-seed marker
+    }
     if (!bySeed.has(r.seed)) bySeed.set(r.seed, new Map());
     bySeed.get(r.seed)!.set(r.spec, r);
   }
@@ -37,6 +44,7 @@ const refMean = (seed: string, spec: string, m: Metric): number =>
 const num = (v: number, d = 1) => (Math.abs(v) < 10 ** -d / 2 ? '0' : (v > 0 ? '+' : '') + v.toFixed(d));
 
 console.log(`Counterfactual lab: ${seeds.length} seeds (${seeds.join(', ')}), ${first.profile} profile, forked at day ${first.fork}, run ${first.days} days.`);
+console.log(`Made by code: ${metas.size ? [...metas].join(', ') : 'unrecorded (files from before runs recorded their commit)'}${metas.size > 1 ? '  <-- MORE THAN ONE: the seeds were not all made by the same code' : ''}`);
 console.log('Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).');
 
 // the noise floor: how far a one-draw nudge moves each metric in a single seed
@@ -59,10 +67,11 @@ for (const spec of specs) {
   const rows = seeds.map((s) => bySeed.get(s)!.get(spec)).filter((r): r is Row => !!r);
   if (!rows.length) continue;
   const ctl = (r: Row) => bySeed.get(r.seed)!.get('control')!;
-  const same = rows.filter((r) => r.finalHash === ctl(r).finalHash).length;
+  const sameState = (a: Row, b: Row) => (a.stateHash && b.stateHash ? a.stateHash === b.stateHash : a.finalHash === b.finalHash);
+  const same = rows.filter((r) => sameState(r, ctl(r))).length;
   const parts = rows.map((r) => r.divergedAfterTicks).filter((x): x is number => x !== null);
   console.log(`\n── ${spec}: ${rows[0].summary}  [${rows.length} seeds${rows[0].note ? '; e.g. ' + rows[0].note : ''}]`);
-  console.log(`   final state identical to control in ${same}/${rows.length} seeds; parted in ${parts.length}` + (parts.length ? `, median ${(parts.sort((a, b) => a - b)[parts.length >> 1] / 2400).toFixed(2)} days after the fork` : ''));
+  console.log(`   state identical to control in ${same}/${rows.length} seeds${rows.every((r) => r.stateHash) ? ' (whole serialised world compared)' : ' (compact fingerprint only: older files)'}; parted in ${parts.length}` + (parts.length ? `, median ${(parts.sort((a, b) => a - b)[parts.length >> 1] / 2400).toFixed(2)} days after the fork` : ''));
   console.log('   ' + 'metric'.padEnd(15) + 'reference'.padStart(9) + 'branch'.padStart(8) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
   for (const m of METRICS) {
     const c = rows.map((r) => refMean(r.seed, r.spec, m));
@@ -94,5 +103,18 @@ if (storySeed) {
     for (const [spec, r] of [['control', rows.get('control')!] as const, ...[...rows.entries()].filter(([k]) => k !== 'control')]) {
       console.log('   ' + spec.padEnd(16) + types.map((t) => (r.milestones[t] === undefined ? '-' : r.milestones[t].toFixed(1)).padStart(7)).join('') + '   ' + [0, 3, 7].map((i) => r.popByDay[i] ?? '-').join('/'));
     }
+  }
+}
+
+if (compare && compare.length === 2) {
+  const [a, b] = compare;
+  const pairs = seeds.map((sd) => [bySeed.get(sd)!.get(a), bySeed.get(sd)!.get(b)] as const).filter((x): x is readonly [Row, Row] => !!x[0] && !!x[1]);
+  console.log(`\nDirect comparison: ${a} minus ${b}, paired by seed (${pairs.length} seeds)`);
+  console.log('   ' + 'metric'.padEnd(15) + b.slice(0, 12).padStart(13) + a.slice(0, 12).padStart(13) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
+  for (const m of METRICS) {
+    const xs = pairs.map(([, y]) => y.outcome[m]);
+    const ys = pairs.map(([x]) => x.outcome[m]);
+    const st = paired(ys.map((v, i) => v - xs[i]));
+    console.log('   ' + m.padEnd(15) + mean(xs).toFixed(1).padStart(13) + mean(ys).toFixed(1).padStart(13) + num(st.meanDiff).padStart(8) + `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + verdict(st, noise[m], false));
   }
 }

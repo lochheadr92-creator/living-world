@@ -1,4 +1,6 @@
-import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
+import { isRich } from './mood';
+import { CELLAR_SPOIL, cellarAccepts } from './storage';
+import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT, RAW_MATERIALS } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { newCart } from './carts';
@@ -137,6 +139,9 @@ function trimEarmarks(b: Building): void {
 // ───────────────────────── what goes in and out of a workplace's store ─────────────────────────
 /** May this person put this item into the building's store (the store is for the work done there)? */
 export function mayDeposit(b: Building, item: ItemKind): boolean {
+  if (b.type === 'well') return false; // a well holds only the water that seeps into it
+  if (b.type === 'cellar') return cellarAccepts(item);
+  if (b.type === 'stockyard') return RAW_MATERIALS.includes(item);
   if (!b.ops) return true;
   return acceptedAt(b.type).includes(item);
 }
@@ -152,7 +157,8 @@ export function noteDeposit(world: World, b: Building, p: Person, item: ItemKind
     return;
   }
   const level = accessLevel(world, p, b);
-  if (level === 'friend' || level === 'builder') addEarmark(world, b, { kind: 'in', item, n, owner: p.id, reason: 'brought for their own batch' });
+  // (rich worlds) at a common workplace too: what someone carried there for their own batch is not taken by the next batch to start
+  if (level === 'friend' || level === 'builder' || (level === 'communal' && isRich(world))) addEarmark(world, b, { kind: 'in', item, n, owner: p.id, reason: 'brought for their own batch' });
 }
 
 /** How many units this person may take out of the building's store. */
@@ -227,6 +233,7 @@ export function noteWithdraw(world: World, b: Building, p: Person, item: ItemKin
 // ───────────────────────── spoilage (called from the world's slow process) ─────────────────────────
 /** Multiplier on how fast perishable goods go off in this building. */
 export function spoilMultiplier(world: World, b: Building): number {
+  if (b.type === 'cellar') return CELLAR_SPOIL;
   if (b.type === 'granary') {
     const ops = b.ops;
     const tended = ops ? world.tick - Math.max(ops.tended, b.builtTick) < GRANARY_TEND_EVERY : true;
@@ -338,8 +345,8 @@ export function startBlocker(world: World, b: Building, p: Person, r: Recipe): s
   }
   if (r.fromDeposit) {
     const dep = depositOf(world, b);
-    if (!dep) return 'no stone outcrop to cut';
-    if (dep.amount - dep.reserved < r.fromDeposit.n) return 'the outcrop is worked out';
+    if (!dep) return r.at === 'mine' ? 'no ore vein to dig' : 'no stone outcrop to cut';
+    if (dep.amount - dep.reserved < r.fromDeposit.n) return r.at === 'mine' ? 'the vein is worked out' : 'the outcrop is worked out';
   }
   const out = outputWeight(r);
   if (out > 0 && storeFreeWeight(b) - (r.fromDeposit ? 0 : 0) < out - weightOfList(r.inputs) * 0) {
@@ -375,7 +382,7 @@ export function startJob(world: World, b: Building, p: Person, r: Recipe, client
     if (dep) {
       dep.amount -= r.fromDeposit.n;
       bump(held, r.fromDeposit.item, r.fromDeposit.n);
-      world.hooks?.onTransfer?.({ from: 'source:' + dep.id, to: 'building:' + b.id, item: r.fromDeposit.item, n: r.fromDeposit.n, reason: 'cut from the outcrop' });
+      world.hooks?.onTransfer?.({ from: 'source:' + dep.id, to: 'building:' + b.id, item: r.fromDeposit.item, n: r.fromDeposit.n, reason: r.at === 'mine' ? 'dug from the vein' : 'cut from the outcrop' });
     }
   }
   const job: Job = {
@@ -468,7 +475,7 @@ export function facilityTick(world: World, b: Building): void {
       if (job.burnLeft <= 0) finishJob(world, b);
     } else if (job.phase === 'ready') {
       if ((world.tick + b.id) % 30 === 0) finishJob(world, b);
-    } else if (job.phase === 'work' && world.tick - job.lastWork > STALL_LIMIT) {
+    } else if (job.phase === 'work' && world.tick - job.lastWork > (isRich(world) ? STALL_LIMIT / 2 : STALL_LIMIT)) {
       shelveJob(world, b, 'nobody came back to it');
     }
   }
@@ -654,6 +661,7 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
     readyAt: job ? (job.phase === 'burn' ? world.tick + job.burnLeft : job.phase === 'ready' ? world.tick : world.tick + Math.max(0, job.total - job.progress) + job.burnTotal) : 0,
     client: job ? job.client : 0,
     tended: ops.tended,
+    ...(isRich(world) && liveEarmarks(world, ops).some((e) => e.kind === 'in') ? { held: liveEarmarks(world, ops).filter((e) => e.kind === 'in').map((e) => [e.item, e.n, e.owner] as [ItemKind, number, number]) } : {}),
   };
 }
 

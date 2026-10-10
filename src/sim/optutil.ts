@@ -1,3 +1,5 @@
+import { isRich } from './mood';
+import { wellEstimate } from './water';
 import { moveSpeed, standSpotFor } from './activities';
 import { findWaterAccessNear, isWalkable, isWaterAccess } from './registry';
 import { drive } from './needs';
@@ -58,7 +60,7 @@ export interface Ctx {
   toolWanted?: { kind: ToolKind; for: string };
 }
 
-const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain'];
+const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'smoked'];
 
 export function foodCount(inv: Person['inv']): number {
   let n = 0;
@@ -200,6 +202,15 @@ export function rankWaterSpots(ctx: Ctx, limit = 2): WaterSpot[] {
     let tr = 0;
     for (const t of trouble) if (hyp(t.x - b.x, t.y - b.y) < 8) tr = Math.max(tr, t.w);
     all.push({ b, e, dng, trouble: tr, cost: pen(e) + 30 * dng * caution + 16 * tr });
+  }
+  // a well they know of and reckon to hold water is another place to drink or fill a pack (rich worlds, where wells exist)
+  if (isRich(world)) {
+    for (const b of beliefsByKind(p, ['building'])) {
+      if (b.btype !== 'well' || wellEstimate(world, b) < 1 || recentFailure(world, p, b.id, 600)) continue;
+      const e = eta(ctx, b.x, b.y);
+      const dng = dangerAt(ctx, b.x, b.y);
+      all.push({ b, e, dng, trouble: 0, cost: pen(e) + 30 * dng * caution });
+    }
   }
   all.sort((a, b) => a.cost - b.cost);
   const picked: WaterSpot[] = [];

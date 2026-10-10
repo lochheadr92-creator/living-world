@@ -6,7 +6,8 @@ import { buildingLabel } from './buildings';
 import { consume, transfer, weightOf } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { joinBlocker, noteBlocker, noteWithdraw, recipeOf, startJob, withdrawAllowance, workJob } from './facilities';
-import { delBelief, observe } from './knowledge';
+import { delBelief, noteFailure, observe } from './knowledge';
+import { isRich } from './mood';
 import { creditContribution } from './social';
 import { findPath } from './pathfinding';
 import { carryCap } from './people';
@@ -30,6 +31,7 @@ function operatePose(a: Activity): PoseKind {
     case 'build_cart':
       return 'hammer';
     case 'quarry_stone':
+    case 'mine_ore':
       return 'mine';
     case 'smelt_iron':
       return 'forge';
@@ -66,6 +68,8 @@ registerHandler('operate', {
       const why = joinBlocker(world, b, p);
       if (why) {
         noteBlocker(b, why);
+        // (rich worlds) a workplace found busy with a batch one cannot join is remembered as such: the bottleneck a windmill answers
+        if (isRich(world)) noteFailure(world, p, b.id, 'busy: ' + why);
         return why;
       }
       a.data.running = job.recipe;
@@ -77,6 +81,7 @@ registerHandler('operate', {
     const err = startJob(world, b, p, r, (a.data.client as number) ?? p.id, (a.data.purpose as string) ?? '', (a.data.destSite as number) ?? 0);
     if (err) {
       noteBlocker(b, err);
+      if (isRich(world) && /under way|burning a batch/.test(err)) noteFailure(world, p, b.id, 'busy: ' + err);
       return err;
     }
     a.data.running = r.id;
@@ -93,7 +98,7 @@ registerHandler('operate', {
     a.cycle++;
     a.progress++;
     const r = RECIPE_BY_ID[a.data.running as string];
-    if (a.progress % 16 === 8 && r) addFx(world, r.id === 'quarry_stone' ? 'mine' : r.at === 'smithy' ? 'sparkle' : r.at === 'bakery' ? 'smoke' : r.id === 'saw_planks' ? 'dust' : 'hammer', a.tx, a.ty, b.id);
+    if (a.progress % 16 === 8 && r) addFx(world, r.id === 'quarry_stone' || r.id === 'mine_ore' ? 'mine' : r.at === 'smithy' ? 'sparkle' : r.at === 'bakery' || r.at === 'clamp' ? 'smoke' : r.id === 'saw_planks' ? 'dust' : 'hammer', a.tx, a.ty, b.id);
     if (res === 'worked') return 'done';
     return 'continue';
   },

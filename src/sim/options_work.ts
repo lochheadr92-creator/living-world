@@ -1,5 +1,7 @@
+import { isRich } from './mood';
+import { buildable } from './expansion';
 import { newActivity } from './activities';
-import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
+import { COMMON_BUILDINGS, ITEM_LABEL, BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
 import { baseHub, nearestHub } from './settlements';
@@ -46,7 +48,7 @@ export function hhState(ctx: Ctx): HhState {
       homeFood += foodCount(b.items ?? {});
       homeSeeds += unitsOf(b.items?.seeds);
       if (!homeBelief || isSolidHome(b.btype)) homeBelief = b;
-    }
+    } else if (b.hh === p.hhId && b.btype === 'cellar') homeFood += foodCount(b.items ?? {}); // the household's cool store counts as food in hand
   }
   const mem = Math.max(1, ctx.members.length);
   const foodStock = ctx.food + homeFood;
@@ -106,8 +108,8 @@ export function repairStake(ctx: Ctx, b: Belief): number {
   if (b.btype === 'storehouse' || b.hh === ctx.p.hhId) return 1;
   // having promised to mend it
   if (ctx.p.commitments.some((c) => c.status === 'active' && c.kind === 'work' && c.destKind === 'building' && c.destId === b.id)) return 1;
-  // a common hall, granary or workshop belongs to everybody: those who use it keep it up
-  if (b.hh === 0 && isFacilityType(b.btype as BuildingType) && b.btype !== undefined) return 0.5 + 0.5 * ctx.p.traits.generosity;
+  // a common hall, granary, workshop, well, yard or lodge belongs to everybody: those who use it keep it up
+  if (b.hh === 0 && b.btype !== undefined && (isFacilityType(b.btype as BuildingType) || COMMON_BUILDINGS.includes(b.btype as BuildingType))) return 0.5 + 0.5 * ctx.p.traits.generosity;
   if (!isHomeType(b.btype) || !b.hh) return 0;
   const { world, p } = ctx;
   let dwellers = 0;
@@ -135,8 +137,8 @@ export function siteNoun(why: string, btype?: string): string {
 
 export function siteRelation(ctx: Ctx, b: Belief): { ok: boolean; mult: number; why: string } {
   if (b.hh === ctx.p.hhId) return { ok: true, mult: 1, why: 'my household’s' };
-  // a workshop, granary or hall will serve everyone: people are glad to help raise one
-  if (b.btype && isFacilityType(b.btype as BuildingType)) return { ok: true, mult: 0.38 + 0.5 * ctx.p.traits.generosity + 0.22 * ctx.p.traits.sociability, why: 'a shared project' };
+  // a workshop, granary, hall, well, yard or lodge will serve everyone: people are glad to help raise one
+  if (b.btype && (isFacilityType(b.btype as BuildingType) || COMMON_BUILDINGS.includes(b.btype as BuildingType))) return { ok: true, mult: 0.38 + 0.5 * ctx.p.traits.generosity + 0.22 * ctx.p.traits.sociability, why: 'a shared project' };
   if (b.hh === 0) return { ok: true, mult: 0.45 + 0.7 * ctx.p.traits.generosity, why: 'a shared project' };
   const f = friendlyTo(ctx, b.hh ?? 0);
   if (f >= 28) return { ok: true, mult: 0.35 + (f - 28) / 100 + 0.25 * ctx.p.traits.generosity, why: 'a friend’s' };
@@ -166,7 +168,8 @@ function optDepositFood(ctx: Ctx): void {
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
-    const mine = b.hh === p.hhId && isHomeType(b.btype);
+    const cellar = b.hh === p.hhId && b.btype === 'cellar';
+    const mine = (b.hh === p.hhId && isHomeType(b.btype)) || cellar;
     const comm = b.btype === 'storehouse';
     if (!mine && !comm) continue;
     const used = Object.entries(b.items ?? {}).reduce((s, [k, n]) => s + (n ?? 0) * WEIGHT[k as ItemKind], 0);
@@ -180,11 +183,12 @@ function optDepositFood(ctx: Ctx): void {
       .add('surplus food', 10 + Math.min(surplus, 8) * 1.2)
       .add(mine ? 'for my household' : 'for everyone', mine ? 4 + ctx.dependents.length * 3 : 2 + 5 * p.traits.generosity)
       .add('walking', -pen(e));
+    if (cellar) sc.add('the cellar keeps it from going off', 7);
     if (sc.total < 8) continue;
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
     let toStore = surplus;
-    for (const k of ['grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
+    for (const k of ['smoked', 'grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
       const have = p.inv[k] ?? 0;
       const give = Math.min(have, toStore);
       if (give > 0) {
@@ -194,7 +198,7 @@ function optDepositFood(ctx: Ctx): void {
     }
     addOption(ctx, {
       kind: 'deposit',
-      label: mine ? 'Bring food home' : 'Add food to the storehouse',
+      label: cellar ? 'Put food in the cellar' : mine ? 'Bring food home' : 'Add food to the storehouse',
       goal: mine ? 'to feed the household' : 'to share with the community',
       need: null,
       util: sc.total * nightMult(ctx),
@@ -208,7 +212,7 @@ function optDepositFood(ctx: Ctx): void {
         if (!spot) return null;
         return newActivity(world, p, {
           kind: 'deposit',
-          label: mine ? 'Bringing food home' : 'Taking food to the storehouse',
+          label: cellar ? 'Taking food to the cellar' : mine ? 'Bringing food home' : 'Taking food to the storehouse',
           goal: mine ? 'to feed the household' : 'to share with the community',
           targetId: b.id,
           targetType: 'building',
@@ -291,8 +295,13 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
 }
 
 export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | null {
+  return wantedTools(ctx)[0] ?? null;
+}
+
+/** every hand tool this person has reason to want, best reason first */
+export function wantedTools(ctx: Ctx): ('axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw')[] {
   const { p, world } = ctx;
-  if (ctx.stage === 'child') return null;
+  if (ctx.stage === 'child') return [];
   const has = (t: ToolKind) => (p.inv[t] ?? 0) > 0;
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
@@ -305,14 +314,24 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   if (!has('pick') && knowRocks && knowTrees) options.push({ t: 'pick', w: p.skills.stone });
   if (!has('hammer') && builds && p.stats.gathered > 6) options.push({ t: 'hammer', w: p.skills.build * 1.25 });
   if (!has('saw') && p.skills.carpentry > 1.04 && knowTrees && p.stats.crafted >= 1) options.push({ t: 'saw', w: p.skills.carpentry * 1.2 });
+  // (rich worlds) the tool a workplace this person knows cannot be worked without: a hammer for the yard's beds and the smithy's forge,
+  // a pick for digging ore. Wanted first, unless someone in the household has one or one hangs on that workplace's rack.
+  if (isRich(world) && knowTrees && knowRocks) {
+    const known = beliefsByKind(p, ['building']);
+    const kin = (t: ToolKind) => ctx.members.some((q) => (q.inv[t] ?? 0) > 0);
+    const racked = (t: ToolKind, types: string[]) => known.some((b) => types.includes(b.btype ?? '') && (b.tools ?? []).includes(t));
+    if (!has('hammer') && !kin('hammer') && known.some((b) => b.btype === 'timber_yard' || b.btype === 'smithy') && !racked('hammer', ['timber_yard', 'smithy'])) options.push({ t: 'hammer', w: 4 });
+    if (!has('pick') && !kin('pick') && countBeliefsOfKind(p, 'ore_vein') > 0 && known.some((b) => b.btype === 'smithy' || b.btype === 'mine') && !racked('pick', ['mine'])) options.push({ t: 'pick', w: 3.5 });
+  }
   // planks are wanted and there is a yard to work them at: the saw is what makes the difference
   const planksWanted = beliefsByKind(p, ['site']).some((s) => unitsOf(s.need?.planks) > 0) && beliefsByKind(p, ['building']).some((b) => b.btype === 'timber_yard');
   if (planksWanted && !has('saw') && knowTrees && p.skills.carpentry >= 0.95) options.push({ t: 'saw', w: 3 });
   // iron tools are forged with a hammer: someone who would swap a wearing tool for an iron one, and knows a smithy, needs their own
   if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
-  if (!options.length) return null;
+  // (rich worlds) a hammer for whoever is about to forge (a smithy they know has iron on its shelf) or works the smithy: nothing is forged without one
+  if (!has('hammer') && isRich(world) && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy' && (p.traits.diligence > 0.6 || p.skills.smith > 1.05 || unitsOf(b.items?.iron) >= 1))) options.push({ t: 'hammer', w: 1.5 });
   options.sort((x, y) => y.w - x.w);
-  return options[0].t;
+  return options.map((o) => o.t);
 }
 
 export type RawMaterial = 'wood' | 'stone' | 'clay' | 'ore';
@@ -384,6 +403,56 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
   }
 }
 
+/** Raw goods already cut and stacked at a stockyard this person knows are the nearer source (rich worlds: the yard is everyone's). */
+function collectRawLeaf(ctx: Ctx, item: RawMaterial, want: number, base: number, why: string, tag: string): void {
+  const { world, p } = ctx;
+  for (const b of beliefsByKind(p, ['building'])) {
+    if (b.btype !== 'stockyard') continue;
+    const n = Math.min(want, b.items?.[item] ?? 0, invRoom(world, p, item));
+    if (n < 1) continue;
+    if (recentFailure(world, p, b.id, 320)) {
+      addBlocked(ctx, 'withdraw', `Collect ${ITEM_LABEL[item]} from the stockyard`, b.id, 'tried recently and found none to take', tag);
+      continue;
+    }
+    const e = eta(ctx, b.x, b.y);
+    const dng = dangerAt(ctx, b.x, b.y);
+    const sc = new Scorer().add(why, base).add('already cut and stacked at the yard', 4).add('walking', -pen(e));
+    if (dng > 0) sc.add('wolf nearby', -22 * dng * traitMods(p).caution);
+    const util = sc.total * nightMult(ctx) * weatherMult(ctx);
+    addOption(ctx, {
+      kind: 'withdraw',
+      label: `Collect ${n} ${ITEM_LABEL[item]} from the stockyard`,
+      goal: why,
+      need: null,
+      util,
+      parts: sc.parts,
+      eta: e + 25,
+      key: `collect-raw:${b.id}:${item}`,
+      targetId: b.id,
+      tag,
+      make: () => {
+        const spot = spotNear(world, p, b);
+        if (!spot) return null;
+        return newActivity(world, p, {
+          kind: 'withdraw',
+          label: `Collecting ${ITEM_LABEL[item]} from the stockyard`,
+          goal: why,
+          targetId: b.id,
+          targetType: 'building',
+          tx: b.x,
+          ty: b.y,
+          spotX: spot.x,
+          spotY: spot.y,
+          utility: util,
+          minCommit: 30,
+          maxTicks: 700,
+          data: { items: { [item]: n } },
+        });
+      },
+    });
+  }
+}
+
 function optMaterials(ctx: Ctx): void {
   const needs = materialNeeds(ctx);
   if (!needs.length) return;
@@ -407,6 +476,7 @@ function optMaterials(ctx: Ctx): void {
     const missing = need.n - have;
     if (missing <= 0) continue;
     if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) continue;
+    if (buildable(ctx.world, 'stockyard')) collectRawLeaf(ctx, item, missing, need.base * traitMods(ctx.p).work, need.why, need.tag);
     gatherMaterial(ctx, item, missing, need.base * traitMods(ctx.p).work, need.why, need.tag);
   }
 }
@@ -1045,7 +1115,7 @@ function optWaterRun(ctx: Ctx): void {
         label: 'Fetching water',
         goal: need > 0 ? 'to bring water to the household' : 'to water the crops',
         targetId: b.id,
-        targetType: 'tile',
+        targetType: b.kind === 'building' ? 'building' : 'tile',
         tx: spot.x,
         ty: spot.y,
         spotX: spot.x,
@@ -1197,7 +1267,7 @@ function optCare(ctx: Ctx): void {
     let what = '';
     if (hungry && ctx.food > 0) {
       // give what fits best
-      const k = (['berries', 'fruit', 'grain', 'fish'] as ItemKind[]).find((x) => (p.inv[x] ?? 0) > 0);
+      const k = (['berries', 'fruit', 'grain', 'fish', 'smoked'] as ItemKind[]).find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
         give[k] = Math.min(p.inv[k] ?? 0, d.needs.hunger < 25 ? 3 : 2);
         what = k;
@@ -1413,7 +1483,7 @@ function optPromisedWater(ctx: Ctx, n: number, who: string): void {
         label: 'Fetching water (promised)',
         goal: `to keep my promise to ${who}`,
         targetId: b.id,
-        targetType: 'tile',
+        targetType: b.kind === 'building' ? 'building' : 'tile',
         spotX: spot.x,
         spotY: spot.y,
         tx: spot.x,

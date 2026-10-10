@@ -27,7 +27,7 @@ import { contestLost, creditContribution, fulfillCommitment } from './social';
 import { fellTree } from './sources';
 import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
-import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
+import type { Activity, Building, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp, hyp } from './util';
 
 // ───────────────────────── helpers ─────────────────────────
@@ -293,6 +293,17 @@ function waterFacing(world: World, p: Person): { x: number; y: number } | null {
   return best;
 }
 
+/** The well an activity is aimed at, looked at on arrival: it must still stand and be a well. Returns the reason if not. */
+function wellFor(world: World, p: Person, a: Activity): Building | string {
+  const e = world.byId.get(a.targetId);
+  if (!e || e.ent !== 'building' || e.type !== 'well') {
+    delBelief(p, a.targetId);
+    return 'the well is gone';
+  }
+  observe(world, p, e);
+  return e;
+}
+
 /** A remembered drinking place nobody can walk to is not worth remembering: forget it so another (or a search) takes over. */
 function forgetUnreachableWater(p: Person, a: Activity, outcome: string, detail: string): void {
   if (outcome === 'failed' && isWaterBeliefId(a.targetId) && /no way|blocked/.test(detail)) delBelief(p, a.targetId);
@@ -305,6 +316,21 @@ registerHandler('drink', {
     if (a.data.fromInv) {
       if ((p.inv.water ?? 0) < 1) return 'no water on me';
       a.duration = 8;
+      return;
+    }
+    if (a.targetType === 'building') {
+      const well = wellFor(world, p, a);
+      if (typeof well === 'string') return well;
+      // units are drawn as the drinking goes on (see `work`), one whenever the last is used up, so no more leaves the well than is drunk
+      if ((well.store.items.water ?? 0) < 1) {
+        noteFailure(world, p, a.targetId, 'the well was dry');
+        return 'the well is dry';
+      }
+      a.data.well = well.id;
+      a.data.credit = 0;
+      a.data.wx = well.x + well.w / 2;
+      a.data.wy = well.y + well.h / 2;
+      a.duration = Math.ceil((97 - p.needs.thirst) / 2.8) + 3;
       return;
     }
     const w = waterFacing(world, p);
@@ -333,6 +359,15 @@ registerHandler('drink', {
       return 'continue';
     }
     faceToward(p, a.data.wx, a.data.wy, 3);
+    if (a.data.well) {
+      // each unit of water drawn is worth WATER_VALUE of thirst; when what was drawn is used up, another must be drawn, or the well is dry
+      if (a.data.credit < 2.8) {
+        const well = world.byId.get(a.data.well);
+        if (!well || well.ent !== 'building' || consume(world, well.store.items, 'water', 1, 'drunk at a well') < 1) return a.progress > 0 ? 'partial:the well ran dry' : 'fail:the well is dry';
+        a.data.credit += WATER_VALUE;
+      }
+      a.data.credit -= 2.8;
+    }
     a.progress++;
     p.needs.thirst = clamp(p.needs.thirst + 2.8, 0, 100);
     if (a.progress >= a.duration || p.needs.thirst >= 97) return 'done';
@@ -344,6 +379,20 @@ registerHandler('fetch_water', {
   availability: 0.5,
   pose: () => 'drink',
   begin(world, p, a) {
+    if (a.targetType === 'building') {
+      const well = wellFor(world, p, a);
+      if (typeof well === 'string') return well;
+      if ((well.store.items.water ?? 0) < 1) {
+        noteFailure(world, p, a.targetId, 'the well was dry');
+        return 'the well is dry';
+      }
+      a.data.well = well.id;
+      a.data.wx = well.x + well.w / 2;
+      a.data.wy = well.y + well.h / 2;
+      a.duration = WORK.water;
+      a.progress = 0;
+      return;
+    }
     const w = waterFacing(world, p);
     if (!w) {
       delBelief(p, a.targetId);
@@ -361,9 +410,18 @@ registerHandler('fetch_water', {
     faceToward(p, a.data.wx, a.data.wy, 3);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
-    const got = produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
+    let got: number;
+    if (a.data.well) {
+      // water moves from the well to the pack: it was already counted when it seeped in
+      const well = world.byId.get(a.data.well);
+      if (!well || well.ent !== 'building') return 'fail:the well is gone';
+      if ((well.store.items.water ?? 0) < 1) return a.cycle > 0 ? 'partial:the well ran dry' : 'fail:the well is dry';
+      got = transfer(world, well.store.items, p.inv, carryCap(world, p), 'water', 1, 'building:' + well.id, 'person:' + p.id, 'water drawn from a well');
+    } else {
+      got = produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
+      if (got > 0) addFx(world, 'splash', a.data.wx, a.data.wy, 0);
+    }
     if (got <= 0) return a.cycle > 0 ? 'partial:cannot carry more' : 'fail:cannot carry more';
-    addFx(world, 'splash', a.data.wx, a.data.wy, 0);
     a.cycle++;
     a.progress = 0;
     if (a.cycle >= a.amount) return 'done';
@@ -446,7 +504,7 @@ registerHandler('deposit', {
       const moved = a.data.moved as Record<string, number> | undefined;
       const txt = moved ? Object.entries(moved).map(([k, n]) => `${n} ${k}`).join(', ') : `${a.cycle} items`;
       const e = world.byId.get(a.targetId);
-      const where = e && e.ent === 'site' ? 'the building site' : e && e.ent === 'building' ? 'the ' + (e.type === 'storehouse' ? 'storehouse' : 'home store') : 'the pile';
+      const where = e && e.ent === 'site' ? 'the building site' : e && e.ent === 'building' ? 'the ' + (e.type === 'storehouse' || e.type === 'stockyard' || e.type === 'cellar' ? e.type : 'home store') : 'the pile';
       addLog(world, p, 'work', `Put ${txt} into ${where}.`);
     }
   },
