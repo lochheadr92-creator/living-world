@@ -1,6 +1,6 @@
 // The AI inhabitant in the app (docs/INHABITANT.md): the same LiveSession the headless runner uses, driven by the Game's clock.
 //
-// Started from the page's query string, e.g.  ?inhabit=Pavel&api=openai&model=gpt-5&memory=1&seed=meadow&harsh=1&from=1&days=5
+// Started from the page's query string, e.g.  ?inhabit=Pavel&api=openai&model=gpt-5&memory=1&seed=meadow&from=1&days=5
 // The world is made from those settings, fast-forwarded to the start day, the person selected and followed, and the clock given two
 // hooks: before a tick (a snapshot when the person is about to be free) and after it (an open ask pauses the clock; when the model has
 // answered, the tick is rewound and run again with the answer, and the clock resumes). The model is reached through the dev server

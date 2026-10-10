@@ -192,7 +192,7 @@ committed activity and what it came to, and the overrides. A test plants a senti
 The same `LiveSession` the headless runner uses is driven by the app's clock (`src/app/inhabit.ts`): `Game` runs two hooks around each
 tick it plays; before a tick the session may snapshot (the person is about to be free), after a tick an open ask pauses the clock. The
 driver asks the model, rewinds the tick exactly as the runner does, swaps the restored world into the game and resumes at the speed
-that was set. The page is opened with a query string naming the person, the model and the world (`?inhabit=Pavel&api=openai&model=gpt-5&memory=1&seed=meadow&harsh=1&from=1&days=5`);
+that was set. The page is opened with a query string naming the person, the model and the world (`?inhabit=Pavel&api=openai&model=gpt-5&memory=1&seed=meadow&from=1&days=5`);
 the world is fast-forwarded to the start day in small steps, the person selected and followed, and a panel (`src/ui/inhabit.ts`)
 shows the status, the latest decision and the model's reason, the notes and the revision counts, with a button that saves the
 transcript (replayable with `scripts/inhabit.ts --mode replay`). The model is reached through a Vite dev-server endpoint
