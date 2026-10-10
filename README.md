@@ -16,7 +16,9 @@ npm run build    # type-check + production bundle in dist/
 npm test         # the verification suite (vitest)
 ```
 
-No runtime dependencies, no network, no LLM calls, no `Math.random` in the simulation.
+No runtime dependencies, no network, no LLM calls, no `Math.random` in the simulation. (An optional headless experiment can let an
+external language model drive one person through a restricted interface; it lives outside the simulation and is off unless run.
+See [`docs/INHABITANT.md`](docs/INHABITANT.md).)
 
 ## What you are looking at
 
@@ -224,7 +226,9 @@ promises, carts, meal tables); `vite-node scripts/audit_far.ts` checks that nobo
 `vite-node scripts/find_moments.ts <seed> <days>` lists the first examples of each kind of event in a run;
 `npm run playback -- <url> [result.json]` (after `npm run build && npm run preview`) drives a headless Chrome over the DevTools
 protocol and measures, with a real animation loop, the speed achieved at each setting, what a stalled page costs and how the
-speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`); and
+speed readout reports it, and that pause freezes the canvas and a step is exactly one tick (`scripts/browser/`);
+`npx vite-node scripts/inhabit.ts -- --mode live|replay|standard …` lets an external model (or a scripted stand-in) drive one person
+and records a transcript that replays without the model ([`docs/INHABITANT.md`](docs/INHABITANT.md)); and
 `scripts/*.ts` has the traces used while tuning (`multi.ts a,b,c 12` runs several seeds and reports deaths and ledger
 balance; `death.ts` and `trace.ts` follow whoever dies and why). [`docs/BASELINE.md`](docs/BASELINE.md) records what a
 fixed ordinary world did before and after this work.
