@@ -102,6 +102,21 @@ function budgetFrom(): Budget {
   };
 }
 
+/** the person at the end of a window, the same line for a live and a standard run so the two can be set side by side */
+function personSummary(w: World, id: number, name: string): string {
+  const p = w.persons.find((q) => q.id === id);
+  if (!p || !p.alive) {
+    const d = w.deceased.find((x) => x.id === id);
+    return `${name}: died${d ? ` at tick ${d.tick} (${d.cause})` : ''}`;
+  }
+  const needs = (Object.keys(p.needs) as (keyof typeof p.needs)[]).map((k) => `${k} ${Math.round(p.needs[k])}`).join(', ');
+  const inv = Object.entries(p.inv)
+    .filter(([, n]) => (n ?? 0) > 0)
+    .map(([k, n]) => `${n} ${k}`)
+    .join(', ');
+  return `${name}: alive, health ${Math.round(p.health)}; needs ${needs}; carrying ${inv || 'nothing'}; lifetime ${JSON.stringify(p.stats)}; knows ${Object.keys(p.beliefs).length} places; promises ${p.commitments.length}`;
+}
+
 function report(t: Transcript, w: World): string {
   const h = t.header;
   const lines: string[] = [];
@@ -109,6 +124,7 @@ function report(t: Transcript, w: World): string {
   lines.push(`model ${h.model.id} (${h.model.kind}) ${JSON.stringify(h.model.config)}; protocol ${h.protocol}; sim ${h.sim.behaviour}${h.sim.sources ? ' / ' + h.sim.sources : ''}`);
   lines.push(`budget ${JSON.stringify(h.budget)}`);
   if (t.end) lines.push(`end: tick ${t.end.tick} hash ${t.end.hash}${t.end.died ? ' (the person died)' : ''}; calls ${t.end.calls}, applied ${t.end.applied}, refused ${t.end.rejected}, engine chose ${t.end.fallbacks}, lagged ${t.end.lagged}; gate ${JSON.stringify(t.end.gate)}${t.end.notesHash ? `; notes ${t.end.notesHash}` : ''}`);
+  lines.push(personSummary(w, h.personId, h.personName));
   const state = w.inhabitants?.[h.personId];
   if (state?.memory) lines.push(`memory: ${JSON.stringify(state.memory)}`);
   lines.push('');
@@ -175,8 +191,7 @@ async function main(): Promise<void> {
 
   if (mode === 'standard') {
     runStandard(w, until);
-    const p = w.persons.find((q) => q.id === personId);
-    const text = `standard run: ${person.name} (#${personId}) in ${settings.seed}, tick ${from} to ${until}\nend hash ${hashWorld(w)}; ${p && p.alive ? `${person.name} alive, health ${Math.round(p.health)}` : `${person.name} died`}\n`;
+    const text = `standard run: ${person.name} (#${personId}) in ${settings.seed}${flag('harsh') ? ' (harsh)' : ''}, tick ${from} to ${until}\nend hash ${hashWorld(w)}\n${personSummary(w, personId, person.name)}\n`;
     writeFileSync(join(out, 'standard.txt'), text);
     console.log(text);
     return;
