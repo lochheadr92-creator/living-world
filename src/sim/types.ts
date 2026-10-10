@@ -967,6 +967,11 @@ export interface World {
   stats: Record<string, number>;
   /** a lean season under way (hardship.ts); only in worlds with rich dynamics */
   hardship?: { kind: 'lean'; since: number; until: number };
+  /**
+   * people driven from outside (the AI inhabitant, docs/INHABITANT.md), by person id. Absent in every ordinary world, so such a world
+   * is saved and hashed exactly as before. The simulation never reads it.
+   */
+  inhabitants?: Record<number, InhabitantState>;
   /** optional hooks (tests / debug). Never required by the simulation. */
   hooks?: {
     onActivityStart?: (p: Person, a: Activity) => void;
@@ -974,3 +979,13 @@ export interface World {
   };
 }
 
+
+// ───────────────────────────── the AI inhabitant (docs/INHABITANT.md) ─────────────────────────────
+/** A person driven from outside: the mark that survives a save, and the counts. Never read by the simulation. */
+export interface InhabitantState {
+  /** the tick at which outside control began */
+  since: number;
+  /** decisions answered from outside, and the ones the engine had to make instead */
+  turns: number;
+  fallbacks: number;
+}

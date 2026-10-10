@@ -17,6 +17,7 @@
     "playback": "node scripts/browser/playback.mjs"
   },
   "devDependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
     "@types/node": "^24.0.0",
     "fake-indexeddb": "^6.2.5",
     "typescript": "~5.9.3",

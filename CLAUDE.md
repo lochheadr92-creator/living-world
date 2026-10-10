@@ -19,6 +19,8 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
 - Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes).
+- The AI inhabitant (`docs/INHABITANT.md`): `src/sim/external.ts` (the seam in `decide`), `src/agent/` (observation, protocol, transcript,
+  model gate, rewind runner; no network), `scripts/inhabit.ts` (live | replay | standard; `--stub last` needs no key), `tests/inhabitant.test.ts`.
 
 ## Expensive runs: give the user PowerShell lines, do not run them here
 The cloud container has 4 cores; the user has a 24-core Windows machine. Anything over about 3 minutes of wall time here, or that needs many

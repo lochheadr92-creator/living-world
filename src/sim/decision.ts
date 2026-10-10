@@ -1,4 +1,6 @@
 import { endActivity, startActivity } from './activities';
+import { EXTERNAL_RETRIES, externalController } from './external';
+import type { ExternalController } from './external';
 import { moodWeight } from './mood';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
@@ -87,7 +89,7 @@ function because(o: Option): string {
   return top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');
 }
 
-function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string): void {
+function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string, why?: string): void {
   const alts = ranked.filter((o) => o !== chosen).slice(0, 4).map(summarize);
   const blockedRaw = ctx.blocked.slice(0, 40);
   p.lastDecision = {
@@ -99,7 +101,7 @@ function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Opt
     considered: ctx.options.length,
     knownPlaces: countBeliefs(p),
     seenNow: p.seen.length,
-    because: chosen ? because(chosen) : 'nothing to do',
+    because: why ?? (chosen ? because(chosen) : 'nothing to do'),
   };
 }
 
@@ -145,9 +147,59 @@ function whyWander(ctx: Ctx, ranked: Option[], at: number): void {
 export function decide(world: World, p: Person, trigger: string): void {
   if (probe.on) probe.decisions++;
   const ctx = generateOptions(world, p, true);
+  const ext = externalController();
+  if (ext !== null && ext.controls(world, p)) {
+    externalDecide(world, p, ctx, trigger, ext);
+    return;
+  }
   if (!launch(world, p, ctx, trigger)) {
     p.nextThink = world.tick + 15;
   }
+}
+
+/**
+ * A person driven from outside (external.ts). The controller may only name one of the options the engine offers, after every hard
+ * filter; the engine sets the activity up and runs it as for anyone. No answer yet: stand for one tick and ask again. A key that is not
+ * on offer, or an option that cannot be set up, is refused and the controller is asked again (a bounded number of times); then, or on
+ * 'fallback', the engine chooses as it would for anyone and says so.
+ */
+function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext: ExternalController): void {
+  const ranked = rankOptions(ctx);
+  let reason = '';
+  for (let attempt = 0; attempt <= EXTERNAL_RETRIES; attempt++) {
+    const choice = ext.choose(world, p, ctx, ranked, trigger);
+    if (choice.kind === 'defer') {
+      p.nextThink = world.tick + 1;
+      p.pose = 'stand';
+      return;
+    }
+    if (choice.kind === 'fallback') {
+      reason = choice.reason;
+      break;
+    }
+    const o = ranked.find((x) => x.key === choice.key);
+    if (!o) {
+      reason = `“${choice.key}” is not on offer now`;
+      ext.notify?.(world, p, { kind: 'rejected', key: choice.key, reason });
+      continue;
+    }
+    const act = o.make!();
+    if (!act) {
+      if (o.targetId) noteFailure(world, p, o.targetId, 'could not get a foothold there');
+      reason = 'could not get a foothold there';
+      ext.notify?.(world, p, { kind: 'rejected', key: choice.key, reason });
+      continue;
+    }
+    act.data.optKey = o.key;
+    act.data.why = 'chosen from outside';
+    record(world, p, ctx, ranked, o, trigger + ' (external)', 'chosen from outside');
+    startActivity(world, p, act);
+    ext.notify?.(world, p, { kind: 'applied', key: o.key, activity: act });
+    return;
+  }
+  const started = launch(world, p, ctx, trigger);
+  if (!started) p.nextThink = world.tick + 15;
+  ext.notify?.(world, p, { kind: 'fallback', reason, activity: started ? p.activity : null });
 }
 
 function currentUtility(ctx: Ctx, a: Activity): number {
@@ -192,7 +244,10 @@ export function reviewActivity(world: World, p: Person): void {
   if (!danger && !criticalMismatch && (a.kind === 'drink' || a.kind === 'eat' || a.kind === 'eat_store') && a.phase === 'work' && a.need && p.needs[a.need] < 86 && a.progress > 0) return;
   const cur = currentUtility(ctx, a);
   const committed = world.tick < a.minCommit;
-  const better = best.util > cur * SWITCH_MARGIN + 3;
+  // a person driven from outside is not talked out of their choice by a better score; danger and a deadlier need still are
+  const ext = externalController();
+  const external = ext !== null && ext.controls(world, p);
+  const better = !external && best.util > cur * SWITCH_MARGIN + 3;
   if (danger || criticalMismatch || (!committed && better)) {
     const act = best.make!();
     if (!act) return;
@@ -204,6 +259,7 @@ export function reviewActivity(world: World, p: Person): void {
     if (danger || criticalMismatch) markSetAside(world, p);
     // being driven off from a place is remembered, so the same trip is not repeated at once
     if (danger && a.targetId && (a.kind === 'drink' || a.kind === 'gather' || a.kind === 'fetch_water')) noteFailure(world, p, a.targetId, 'a wolf came too close');
+    if (external) ext.notify?.(world, p, { kind: 'override', why, activity: a });
     endActivity(world, p, 'interrupted', why);
     startActivity(world, p, act);
   }

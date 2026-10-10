@@ -262,6 +262,7 @@ export function hashWorld(world: World): string {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
+  if (world.inhabitants) for (const k of Object.keys(world.inhabitants).sort((a, b) => Number(a) - Number(b))) push(`E${k}:${JSON.stringify(world.inhabitants[Number(k)])}`);
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));
   push(`Q${world.requests.length},${world.requests.filter((r) => r.status === 'fulfilled').length}|H${world.households.length}`);
   return h.toString(16).padStart(8, '0');
