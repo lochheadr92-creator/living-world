@@ -128,7 +128,9 @@ export async function runLive(world: World, personId: number, model: ModelClient
       }
       if (watching) {
         const q = personOf(w, personId);
-        if (!q || !q.activity || q.activity.id !== watching.activityId) {
+        // an activity put aside for a conversation is not over: it resumes afterwards
+        const paused = q !== null && q.suspended !== null && q.suspended.id === watching.activityId;
+        if (!paused && (!q || !q.activity || q.activity.id !== watching.activityId)) {
           const r = q ? q.lastResult : null;
           transcript.outcomes.push({ call: watching.call, activityId: watching.activityId, label: watching.label, tick: w.tick, outcome: r && r.tick >= watching.since ? r.outcome : 'unknown', detail: r && r.tick >= watching.since ? r.detail : '' });
           watching = null;
