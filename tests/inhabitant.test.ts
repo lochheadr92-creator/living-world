@@ -6,10 +6,9 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { observeInhabitant, observationHash } from '../src/agent/observe';
-import type { InhabitantObservation } from '../src/agent/observe';
 import { DEFAULT_BUDGET, ModelGate, stubModel } from '../src/agent/model';
 import type { ModelClient } from '../src/agent/model';
-import { buildPrompt, observationFromPrompt, parseProposal } from '../src/agent/protocol';
+import { buildPrompt, parseProposal } from '../src/agent/protocol';
 import { markInhabitant, runLive, runReplay, runStandard } from '../src/agent/run';
 import { ReplayDiverged } from '../src/agent/transcript';
 import type { Transcript } from '../src/agent/transcript';
@@ -17,80 +16,14 @@ import { generateOptions, rankOptions } from '../src/sim/decision';
 import { conservationReport } from '../src/sim/economy';
 import { addEvent } from '../src/sim/events';
 import { EXTERNAL_RETRIES, setExternalController } from '../src/sim/external';
-import { householdOf } from '../src/sim/buildings';
-import { membersOf } from '../src/sim/households';
 import { observe } from '../src/sim/knowledge';
-import { RNG } from '../src/sim/rng';
-import { testKit } from '../src/sim/scenes';
 import { tellBelief } from '../src/sim/news';
-import { makeSource } from '../src/sim/sources';
-import type { Person, World } from '../src/sim/types';
 import { hashWorld } from '../src/sim/world';
 import { deepHash } from './helpers/golden';
 import { natural, run, settingsFor } from './helpers/util';
 
-/** a hungry person, a second person, and one berry bush well outside anyone's sight (the knowledge tests' fixture) */
-function remoteBushWorld() {
-  const w = testKit.flatWorld(settingsFor('inhabitant-bush', { scene: 'help' }));
-  w.camp = { x: 40.5, y: 36.5 };
-  const rng = new RNG(5);
-  const ben = testKit.addPerson(w, rng, { name: 'Ben', x: 40.5, y: 44.5, sex: 'm', hunger: 25 });
-  const ana = testKit.addPerson(w, rng, { name: 'Ana', x: 42.5, y: 44.5, hunger: 80 });
-  const bush = makeSource(w, 'berry_bush', 40, 74, 6);
-  testKit.finish(w, 'help');
-  return { w, bush, ben, ana };
-}
-
-/** the observation the engine would hand a controller for this person right now (pure) */
-function observeNow(w: World, p: Person, showScores = false): InhabitantObservation {
-  const ctx = generateOptions(w, p, true);
-  return observeInhabitant(w, p, ctx, rankOptions(ctx), { showScores });
-}
-
-/** every id the person's own records refer to */
-function knownIds(w: World, p: Person): Set<number> {
-  const known = new Set<number>([p.id]);
-  for (const k in p.beliefs) known.add(Number(k));
-  for (const s of p.seen) known.add(s.id);
-  for (const k in p.whereabouts) known.add(Number(k));
-  for (const k in p.relations) known.add(Number(k));
-  for (const m of membersOf(w, householdOf(w, p))) known.add(m.id);
-  for (const id of [...p.parents, ...p.children, p.partnerId]) if (id) known.add(id);
-  for (const c of p.commitments) {
-    known.add(c.to);
-    if (c.siteId) known.add(c.siteId);
-    if (c.destId) known.add(c.destId);
-  }
-  for (const c of p.concerns) known.add(c.about);
-  for (const r of w.requests)
-    if (r.from === p.id || r.to === p.id) {
-      known.add(r.from);
-      known.add(r.to);
-      if (r.siteId) known.add(r.siteId);
-    }
-  return known;
-}
-
-/** a scripted model that reads the offered options back out of the prompt */
-function chooser(id: string, pick: (obs: InhabitantObservation, call: number) => string): ModelClient {
-  return stubModel(id, (req, n) => {
-    const obs = observationFromPrompt(req.user);
-    if (!obs) throw new Error('no observation in the prompt');
-    return JSON.stringify({ choose: pick(obs, n), why: `test model ${id}` });
-  });
-}
-const lastOption = chooser('last-option', (o) => o.options[o.options.length - 1].key);
-const firstOption = chooser('first-option', (o) => o.options[0].key);
-
-function adult(w: World): Person {
-  const p = w.persons.find((q) => q.alive && (w.tick - q.birthTick) / 2400 / 12 >= 20);
-  if (!p) throw new Error('no adult');
-  return p;
-}
-
-function offeredKeys(t: Transcript, askSeq: number): string[] {
-  return t.asks[askSeq].observation.options.map((o) => o.key);
-}
+import { adult, chooser, firstOption, knownIds, lastOption, observeNow, offeredKeys, remoteBushWorld } from './helpers/inhabit';
+void chooser;
 
 describe('with nothing installed', () => {
   it('a controller that claims nobody leaves the world exactly as it was, and so does installing and removing one', () => {
