@@ -2,7 +2,9 @@
 // have no network code. The key comes from the environment (OPENAI_API_KEY); OPENAI_BASE_URL, if set, points the SDK at a compatible
 // endpoint. The answer is asked for as a JSON object (response_format), which the strict parser still checks.
 import OpenAI from 'openai';
+import { RetryableModelError } from '../../src/agent/model';
 import type { ModelClient } from '../../src/agent/model';
+import { retryAfterMs } from './transient';
 
 export interface OpenAIOptions {
   model: string;
@@ -10,13 +12,15 @@ export interface OpenAIOptions {
   effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
 }
 
-function describe(e: unknown): string {
-  if (e instanceof OpenAI.RateLimitError) return `rate limited (${e.status})`;
-  if (e instanceof OpenAI.AuthenticationError) return 'authentication failed: check OPENAI_API_KEY';
-  if (e instanceof OpenAI.BadRequestError) return `bad request: ${e.message}`;
-  if (e instanceof OpenAI.APIConnectionError) return `connection error: ${e.message}`;
-  if (e instanceof OpenAI.APIError) return `API error ${e.status}: ${e.message}`;
-  return e instanceof Error ? e.message : String(e);
+/** the SDK's error as the gate should see it: the provider's refusals for the moment are retryable, the rest are failed calls */
+function describe(e: unknown): Error {
+  if (e instanceof OpenAI.RateLimitError) return new RetryableModelError(`rate limited (429): ${e.message}`, retryAfterMs(e));
+  if (e instanceof OpenAI.AuthenticationError) return new Error('authentication failed: check OPENAI_API_KEY');
+  if (e instanceof OpenAI.BadRequestError) return new Error(`bad request: ${e.message}`);
+  if (e instanceof OpenAI.APIConnectionError) return new RetryableModelError(`connection error: ${e.message}`);
+  if (e instanceof OpenAI.InternalServerError) return new RetryableModelError(`API error ${e.status}: ${e.message}`, retryAfterMs(e));
+  if (e instanceof OpenAI.APIError) return new Error(`API error ${e.status}: ${e.message}`);
+  return e instanceof Error ? e : new Error(String(e));
 }
 
 export function openaiModel(opts: OpenAIOptions): ModelClient {
@@ -42,7 +46,7 @@ export function openaiModel(opts: OpenAIOptions): ModelClient {
           { signal },
         );
       } catch (e) {
-        throw new Error(describe(e));
+        throw describe(e);
       }
       const choice = res.choices[0];
       if (!choice) throw new Error('the model returned no choices');

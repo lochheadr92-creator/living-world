@@ -38,7 +38,7 @@ export interface Ask {
   /** picks refused earlier in this decision, as the model was told */
   rejected: { key: string; reason: string }[];
   /** the exchange; null while the ask is open (no answer yet) */
-  model: { ok: boolean; text: string | null; reason: string | null; latencyMs: number; usage?: { input: number; output: number } } | null;
+  model: { ok: boolean; text: string | null; reason: string | null; latencyMs: number; usage?: { input: number; output: number }; retries?: number } | null;
   proposal: Proposal | null;
   /** why the answer could not be used as a proposal, when it could not */
   problem: string | null;

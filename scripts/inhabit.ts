@@ -10,7 +10,8 @@
 // Other flags: --api anthropic|openai (keys: ANTHROPIC_API_KEY / OPENAI_API_KEY)  --effort low|medium|high (OpenAI: only sent when given)
 //              --memory (the inhabitant keeps notes between decisions: protocol inhabitant/2)  --stub first|last|cycle|garbage|goal|goal-blind
 //              --profile normal|large|huge  --harsh  --dynamics rich  --show-scores  --overwrite (an existing transcript in --out is otherwise kept)
-//              --max-calls-per-day N  --timeout-ms N  --max-output-tokens N  --max-failures N  --allow-source-drift
+//              --max-calls-per-day N  --timeout-ms N  --max-output-tokens N  --max-failures N  --max-retry-ms N  --probe-every N
+//              --allow-source-drift
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { DEFAULT_BUDGET, stubModel } from '../src/agent/model';
@@ -99,6 +100,8 @@ function budgetFrom(): Budget {
     maxOutputTokens: Number(opt('max-output-tokens', String(DEFAULT_BUDGET.maxOutputTokens))),
     timeoutMs: Number(opt('timeout-ms', String(DEFAULT_BUDGET.timeoutMs))),
     maxConsecutiveFailures: Number(opt('max-failures', String(DEFAULT_BUDGET.maxConsecutiveFailures))),
+    maxRetryMs: Number(opt('max-retry-ms', String(DEFAULT_BUDGET.maxRetryMs))),
+    probeEvery: Number(opt('probe-every', String(DEFAULT_BUDGET.probeEvery))),
   };
 }
 

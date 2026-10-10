@@ -10,6 +10,7 @@ import { settingsForProfile } from '../sim/profiles';
 import type { ProfileName } from '../sim/profiles';
 import type { InhabitantNotes, Settings, World } from '../sim/types';
 import { LiveSession, livingPerson } from '../agent/run';
+import { RetryableModelError } from '../agent/model';
 import type { ModelClient } from '../agent/model';
 import type { Ask, Call, Transcript } from '../agent/transcript';
 import type { Game } from './game';
@@ -75,8 +76,12 @@ export function httpModel(cfg: Pick<InhabitConfig, 'api' | 'model' | 'effort'>, 
         body: JSON.stringify({ api: cfg.api, model: cfg.model, effort: cfg.effort || undefined, system: req.system, user: req.user, maxOutputTokens: req.maxOutputTokens }),
         signal,
       });
-      const body = (await res.json().catch(() => ({ error: `the dev server answered ${res.status} with no JSON` }))) as { text?: string; usage?: { input: number; output: number }; stop?: string; error?: string };
-      if (!res.ok || typeof body.text !== 'string') throw new Error(body.error ?? `the dev server answered ${res.status}`);
+      const body = (await res.json().catch(() => ({ error: `the dev server answered ${res.status} with no JSON` }))) as { text?: string; usage?: { input: number; output: number }; stop?: string; error?: string; retryable?: boolean; retryAfterMs?: number };
+      if (!res.ok || typeof body.text !== 'string') {
+        const msg = body.error ?? `the dev server answered ${res.status}`;
+        // a rate limit or an outage reported by the dev server is the provider's, not the model's: the gate waits it out
+        throw body.retryable ? new RetryableModelError(msg, body.retryAfterMs) : new Error(msg);
+      }
       return { text: body.text, usage: body.usage, stop: body.stop };
     },
   };

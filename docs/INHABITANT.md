@@ -90,7 +90,12 @@ The assessment above was reviewed before implementation. Each point, the decisio
    call was exact or lagged; the tests require zero lagged calls.
 4. **An explicit budget (medium).** Accepted: calls per simulated day, prompt size, answer size, wall-clock time per call, consecutive
    failures before the model is given up on (an unusable answer counts), all recorded in the transcript header; decision
-   opportunities (calls) and model calls (asks) are counted apart.
+   opportunities (calls) and model calls (asks) are counted apart. Added after the first six-day run: a provider's refusal for the
+   moment (a rate limit, an outage, a dropped connection) is told apart from the model's failures. It is waited out with backoff
+   inside one call's retry budget (`maxRetryMs`, five minutes; the wait the provider names is honoured) and counts nothing against
+   the model unless that budget runs out; and the breaker is half-open (`probeEvery`, ten): once the model is given up on, every
+   tenth ask is tried anyway and one success puts it back in play. Before this, five consecutive 429s at day 6.2 of a six-day run
+   the operator reported tripped the breaker for good, and the engine drove the remaining two thirds of a day.
 5. **Self-reinforcing memory (medium).** Accepted for the memory stage: inferences will carry a confidence and the observations they
    rest on, and the runner will record when the model strengthens, weakens or drops one. Not built in this slice, by the reviewer's
    own sequencing ("prove the core first").

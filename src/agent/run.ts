@@ -133,11 +133,11 @@ export class LiveSession {
     const prompt = buildPrompt({ observation: ask.observation, rejected: ask.rejected, notes: ask.notes ? notesForPrompt(ask.notes) : null, memory: this.memory });
     const r = await this.gate.call(prompt, Math.floor(ask.tick / DAY));
     if (!r.ok) {
-      ask.model = { ok: false, text: null, reason: r.reason, latencyMs: r.latencyMs };
+      ask.model = { ok: false, text: null, reason: r.reason, latencyMs: r.latencyMs, ...(r.retries ? { retries: r.retries } : {}) };
       ask.problem = r.reason;
       return;
     }
-    ask.model = { ok: true, text: r.reply.text, reason: null, latencyMs: r.latencyMs, usage: r.reply.usage };
+    ask.model = { ok: true, text: r.reply.text, reason: null, latencyMs: r.latencyMs, usage: r.reply.usage, ...(r.retries ? { retries: r.retries } : {}) };
     const parsed = parseProposal(r.reply.text);
     ask.proposal = parsed.proposal;
     ask.problem = parsed.problem;

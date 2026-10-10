@@ -257,7 +257,7 @@ describe('a failing model', () => {
     });
     const empty = stubModel('empty', () => '');
     const hanging: ModelClient = { id: 'hangs', kind: 'stub', config: {}, complete: () => new Promise(() => {}) };
-    const budget = { ...DEFAULT_BUDGET, timeoutMs: 40, maxConsecutiveFailures: 3 };
+    const budget = { ...DEFAULT_BUDGET, timeoutMs: 40, maxConsecutiveFailures: 3, probeEvery: 1_000_000 }; // no probe in this window: the count below is the breaker alone
     for (const model of [throwing, empty, hanging]) {
       const a = await failing('inhabitant-fail', model, budget);
       const b = await failing('inhabitant-fail', model, budget);

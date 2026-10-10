@@ -3,6 +3,7 @@
 // started `npm run dev`, and returns the answer. Only in `vite` (serve), never in a build.
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { Plugin } from 'vite';
+import { isRetryable } from '../../src/agent/model';
 
 interface ModelRequestBody {
   api?: string;
@@ -73,7 +74,10 @@ export function inhabitDevServer(): Plugin {
             const reply = await client.complete({ system: body.system, user: body.user, maxOutputTokens: Number(body.maxOutputTokens) || 8000 }, ac.signal);
             send(res, 200, reply);
           } catch (e) {
-            send(res, 502, { error: e instanceof Error ? e.message : String(e) });
+            // the page's client (src/app/inhabit.ts) turns a retryable answer back into a RetryableModelError, so the gate waits it out
+            const error = e instanceof Error ? e.message : String(e);
+            if (isRetryable(e)) send(res, 503, { error, retryable: true, ...(e.retryAfterMs !== undefined ? { retryAfterMs: e.retryAfterMs } : {}) });
+            else send(res, 502, { error });
           }
         })();
       });
