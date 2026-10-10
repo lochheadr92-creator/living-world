@@ -179,5 +179,23 @@ VERIFIED (this repository, 2026-10-10):
 * Smoke (village, seed meadow, day 1, a quarter day, scripted "last option"): 2 decisions, both exact, replay OK to the same hash,
   the standard window ends in a different hash. One observation was about 17 KB of JSON.
 
-UNKNOWN until run with a real model: what a language model does with this; whether it differs from the engine in any measurable
-way. That is the experiment, not this slice.
+**First real-model run** (VERIFIED: run by the operator on a Windows machine, 2026-10-10; village, seed meadow, Pavel, an elder, day 1
+from 07:12 for half a day; `gpt-5` through Chat Completions, no effort setting, the default budget).
+
+| | |
+|---|---|
+| decisions | 5, all applied, none refused, none by the engine, none lagged |
+| model calls | 5; about 97 KB of prompt in all, 3,697 output tokens in all (reasoning included) |
+| replay | OK: ended in state `0d0de0ed`, the recorded state, 5 decisions consumed |
+| standard window | ended in state `053460f5`: the choices changed the world |
+| behaviour fingerprint | `22b83b7c:3780a61a`, the same on Linux and Windows |
+
+The choices and the model's stated reasons: potter near home (carrying a full load, nothing urgent); deliver wood and stone to the
+hut site nearby; build at that site, which ended partial for want of 3 wood; chop wood at a close tree "to keep work going on the
+hut" (the engine's label for that option was keeping the fire going: the model picked an offered action for its own purpose, and
+the engine did exactly what the option does); sleep at the lean-to with energy low. Every reason refers only to things in the
+observation. Five decision points in half a day is the engine's own cadence for a busy person: opportunities come when an activity
+ends, not on a timer.
+
+What this does not show: whether the model's choices were better or worse than the engine's. One run is one chaotic draw, and the
+per-person measures and the paired arms are not built yet (section 7).
