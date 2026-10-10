@@ -35,6 +35,22 @@ git commit -m "Keep the baseline Pavel transcript"
 
 The runner now refuses to overwrite an existing `transcript.json` in its `--out` folder unless told `--overwrite`.
 
+## memory-pavel-gpt5: the first real-model run with memory
+
+Same window and model as the baseline, `--memory` (protocol `inhabitant/2`): 5 decisions, applied 5, refused 0, engine fallbacks 0,
+timing mismatches 0; notes 5 updates, 0 rejected; final world hash `4f05d50c`, notes hash `e068ba0e`; replay PASS on the operator's
+machine. The five actions and their ticks are those of the baseline. Files on the operator's machine in `inhabit_memory\`:
+
+```
+cd "C:\dev\Claude Experiment\living-world"
+New-Item -ItemType Directory -Force experiments\memory-pavel-gpt5
+Copy-Item inhabit_memory\transcript.json experiments\memory-pavel-gpt5\transcript.json
+Copy-Item inhabit_memory\report.txt experiments\memory-pavel-gpt5\report.txt
+Copy-Item inhabit_memory\replay.txt experiments\memory-pavel-gpt5\replay.txt
+git add experiments
+git commit -m "Keep the Pavel memory transcript"
+```
+
 **Replayability across the memory stage (VERIFIED):** a protocol `inhabitant/1` transcript recorded before the memory stage (a
 scripted model, seed meadow, Pavel, tick 2400 to 3000) replays on the build that carries memory to its recorded state (`36f5b4dd`),
 with the warning that the sources moved (`--allow-source-drift`); without the flag it is refused, as designed. The baseline above

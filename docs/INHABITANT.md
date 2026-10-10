@@ -279,3 +279,31 @@ What this establishes: the memory mechanism carries a goal across decisions, the
 made by default, the inhabitant records what became of it, and inferences move with the evidence; all under the same offers, claims
 and consequences as any other person. What it does not establish: that a language model will use its notes this way, or that doing so
 is any better. The scripted policy is a test instrument, not a claim about strategy.
+
+### The first real-model run with memory (VERIFIED from the operator's pasted output, 2026-10-10)
+
+The baseline window again (seed meadow, Pavel, tick 2400 to 3600), `gpt-5`, `--memory`, protocol `inhabitant/2`, default budget.
+
+| | |
+|---|---|
+| decisions | 5, all applied, none refused, none by the engine, none lagged |
+| notes | 5 updates, 0 rejected (updates or entries); inferences 6 made, 10 restated, 5 revised, 1 weakened, 1 abandoned |
+| model output | 13,108 tokens over 5 calls (3,697 in the run without memory); prompt about 112 KB in all (97 KB) |
+| replay | OK: world `4f05d50c` and the notes hash reproduced, no model |
+
+**The actions were the five of the no-memory baseline, at the same ticks, with the same outcomes** (potter, deliver to the hut site,
+build there until the materials ran out, chop wood, sleep). LIKELY, not checked against the file: the world's trajectory is identical
+to the baseline's and the end hash differs only because the notes are folded into it. In this window, memory changed what the
+inhabitant wrote and why it said it chose, not what it did.
+
+What the notes show (the model's words): four goals (stock the lean-to, social time, map resources, and from tick 2702 "support
+neighbours' building projects"); five inferences each resting on accepted references (a person in sight, the campfire's remembered fuel,
+the site, the moment); a journal whose every entry matches the observation of its tick (the cloudy morning, the wood just chopped,
+children nearby, the stalled build for want of 3 wood). The revision worth noting: at tick 3275 it inferred from a remembered building
+that "Thistle's hut looks complete" (0.95), abandoned the plan to haul more wood, and gave that as its reason for resting instead;
+whether the hut was in fact complete is a question for the observer stage (belief against truth), not yet built.
+
+What this establishes: a language model keeps grounded, bounded, revisable notes through the restricted interface, with no rejected
+entries, and reads them back (the goal adopted at tick 2702 and the inference at tick 3275 both appear in later reasons). What it
+does not establish: any effect on what happens in the world. Five decisions in a half day in which the engine's offers already lined
+up with the model's aims leave no room to see one; a longer window, a harder situation, or a person with more to decide is needed.
