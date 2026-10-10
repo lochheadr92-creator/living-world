@@ -61,8 +61,8 @@ persistent notes, first-person reports, per-person metrics and the comparative a
 * `CLAUDE.md`: "New behaviour goes behind `settings.dynamics = 'rich'`". That switch is for behaviour of the authored people. The
   inhabitant is not a behaviour of the world but an external input to one person, so it follows the chooser precedent (a switch
   beside the world) plus a world-level mark of who is driven. It is not a `Settings` field.
-* README: "no network, no LLM calls" stays true of `src/sim` and of `src/agent`. The only network client is `scripts/inhabit/anthropic.ts`,
-  and the SDK is a dev dependency used by scripts only.
+* README: "no network, no LLM calls" stays true of `src/sim` and of `src/agent`. The only network clients are `scripts/inhabit/anthropic.ts`
+  and `scripts/inhabit/openai.ts`; both SDKs are dev dependencies used by scripts only.
 
 ## 2. The review, and what changed
 

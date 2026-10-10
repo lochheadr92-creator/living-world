@@ -2,11 +2,13 @@
 // with nobody driven from outside. Writes a transcript and a plain report into --out.
 //
 //   npx vite-node scripts/inhabit.ts -- --mode live --seed meadow --person Mira --from-day 1 --days 1 --model claude-opus-5-5 --out inhabit_out
+//   npx vite-node scripts/inhabit.ts -- --mode live --api openai --model gpt-5 --seed meadow --from-day 1 --days 1 --out inhabit_out
 //   npx vite-node scripts/inhabit.ts -- --mode live --stub last --seed meadow --from-day 1 --days 0.5 --out inhabit_out     (no key: a scripted model)
 //   npx vite-node scripts/inhabit.ts -- --mode replay --transcript inhabit_out/transcript.json --out inhabit_out
 //   npx vite-node scripts/inhabit.ts -- --mode standard --seed meadow --person Mira --from-day 1 --days 1 --out inhabit_out
 //
-// Other flags: --profile normal|large|huge  --harsh  --dynamics rich  --effort low|medium|high  --show-scores
+// Other flags: --api anthropic|openai (keys: ANTHROPIC_API_KEY / OPENAI_API_KEY)  --effort low|medium|high (OpenAI: only sent when given)
+//              --profile normal|large|huge  --harsh  --dynamics rich  --show-scores
 //              --max-calls-per-day N  --timeout-ms N  --max-output-tokens N  --max-failures N  --allow-source-drift
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -25,6 +27,7 @@ import { hashString } from '../src/sim/rng';
 import type { Settings, World } from '../src/sim/types';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { anthropicModel } from './inhabit/anthropic';
+import { openaiModel } from './inhabit/openai';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
 const opt = (name: string, dflt: string): string => {
@@ -76,6 +79,12 @@ function modelFrom(): ModelClient {
     };
     return stubModel(`stub:${stub}`, (req, n) => JSON.stringify({ choose: pick(observationFromPrompt(req.user), n), why: `scripted: ${stub}` }));
   }
+  const api = opt('api', 'anthropic');
+  if (api === 'openai') {
+    const effort = opt('effort', '');
+    return openaiModel({ model: opt('model', 'gpt-5'), ...(effort ? { effort: effort as 'low' | 'medium' | 'high' } : {}) });
+  }
+  if (api !== 'anthropic') throw new Error(`unknown --api "${api}" (anthropic, openai)`);
   return anthropicModel({ model: opt('model', 'claude-opus-5-5'), effort: opt('effort', 'medium') as 'low' | 'medium' | 'high' });
 }
 
