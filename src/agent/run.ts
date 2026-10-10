@@ -1,4 +1,4 @@
-// Driving a world with one person answered from outside (docs/INHABITANT.md, section 4).
+// Driving a world with one person answered from outside (docs/INHABITANT.md, section 5).
 //
 // A tick never waits. When the controlled person is about to choose and the controller has no answer, the engine records the
 // observation and the person stands for that tick ('defer'). The runner then asks the model, and instead of letting the answer land a
@@ -14,10 +14,11 @@ import { DAY } from '../sim/constants';
 import { setExternalController } from '../sim/external';
 import type { Person, World } from '../sim/types';
 import { hashWorld, stepWorld } from '../sim/world';
+import { LIMITS, MEMORY_VERSION, emptyCounters, emptyNotes, notesForPrompt, notesHash } from './memory';
 import { DEFAULT_BUDGET, ModelGate } from './model';
 import type { Budget, ModelClient } from './model';
 import type { ObserveOptions } from './observe';
-import { buildPrompt, parseProposal } from './protocol';
+import { buildPrompt, parseProposal, protocolFor, protocolHasMemory } from './protocol';
 import { TranscriptController, newTranscript, simBehaviourFingerprint, verifyHeader } from './transcript';
 import type { Ask, Transcript } from './transcript';
 
@@ -26,6 +27,8 @@ export interface RunOptions {
   until: number;
   observe?: ObserveOptions;
   budget?: Budget;
+  /** keep the inhabitant's own notes between decisions (protocol inhabitant/2); off, the run speaks inhabitant/1 as before */
+  memory?: boolean;
   /** a fingerprint of src/sim, when the caller can read the files (scripts do; tests do not) */
   sources?: string;
   /** called after every tick that stands (not after ticks that are rewound) */
@@ -38,12 +41,19 @@ export interface RunResult {
   gate: ModelGate | null;
 }
 
-/** Mark a person as driven from outside: the mark is saved with the world and folded into its hash. Idempotent. */
-export function markInhabitant(world: World, personId: number): void {
+/**
+ * Mark a person as driven from outside: the mark is saved with the world and folded into its hash. With `memory`, their notes start
+ * empty (and are kept if the mark already carries some). Idempotent.
+ */
+export function markInhabitant(world: World, personId: number, memory = false): void {
   const p = world.byId.get(personId);
   if (!p || p.ent !== 'person') throw new Error(`no person #${personId}`);
   world.inhabitants ??= {};
-  world.inhabitants[personId] ??= { since: world.tick, turns: 0, fallbacks: 0 };
+  const state = (world.inhabitants[personId] ??= { since: world.tick, turns: 0, fallbacks: 0 });
+  if (memory) {
+    state.notes ??= emptyNotes();
+    state.memory ??= emptyCounters();
+  }
 }
 
 /** the person, or null once they are dead (the dead leave the world's index) */
@@ -52,9 +62,9 @@ function personOf(world: World, id: number): Person | null {
   return p && p.ent === 'person' && p.alive ? p : null;
 }
 
-async function answerAsk(ask: Ask, gate: ModelGate, personTick: number): Promise<void> {
-  const prompt = buildPrompt({ observation: ask.observation, rejected: ask.rejected });
-  const r = await gate.call(prompt, Math.floor(personTick / DAY));
+async function answerAsk(ask: Ask, gate: ModelGate, memory: boolean): Promise<void> {
+  const prompt = buildPrompt({ observation: ask.observation, rejected: ask.rejected, notes: ask.notes ? notesForPrompt(ask.notes) : null, memory });
+  const r = await gate.call(prompt, Math.floor(ask.tick / DAY));
   if (!r.ok) {
     ask.model = { ok: false, text: null, reason: r.reason, latencyMs: r.latencyMs };
     ask.problem = r.reason;
@@ -64,17 +74,20 @@ async function answerAsk(ask: Ask, gate: ModelGate, personTick: number): Promise
   const parsed = parseProposal(r.reply.text);
   ask.proposal = parsed.proposal;
   ask.problem = parsed.problem;
+  ask.notesProblem = parsed.notesProblem;
   if (parsed.problem) gate.markUnusable(parsed.problem);
 }
 
 /** Live: the model answers each ask; every answer is applied at the tick it was asked about. */
 export async function runLive(world: World, personId: number, model: ModelClient, opts: RunOptions): Promise<RunResult> {
-  markInhabitant(world, personId);
+  const memory = opts.memory === true;
+  markInhabitant(world, personId, memory);
   const budget = opts.budget ?? DEFAULT_BUDGET;
   const gate = new ModelGate(model, budget);
   const person = personOf(world, personId);
   if (!person) throw new Error(`no living person #${personId}`);
   const transcript = newTranscript({
+    protocol: protocolFor(memory),
     mode: 'live',
     seed: world.settings.seed,
     settings: { ...world.settings },
@@ -86,6 +99,7 @@ export async function runLive(world: World, personId: number, model: ModelClient
     model: { id: model.id, kind: model.kind, config: { ...model.config } },
     budget: { ...budget },
     observe: { ...(opts.observe ?? {}) },
+    ...(memory ? { memory: { version: MEMORY_VERSION, limits: { ...LIMITS } } } : {}),
   });
   const ctrl = new TranscriptController(transcript, 'live');
   const restore = setExternalController(ctrl);
@@ -110,7 +124,7 @@ export async function runLive(world: World, personId: number, model: ModelClient
       stepWorld(w);
       const open = ctrl.openAsk();
       if (open) {
-        await answerAsk(open, gate, open.tick);
+        await answerAsk(open, gate, memory);
         // rewind to the snapshot and run the same tick again with the answer in hand
         w = deserializeWorld(snapshot.text);
         ctrl.rewindCalls(snapshot.calls);
@@ -151,6 +165,7 @@ export async function runLive(world: World, personId: number, model: ModelClient
     fallbacks: calls.filter((c) => c.result?.status === 'fallback').length,
     lagged: calls.filter((c) => c.timing === 'lagged').length,
     gate: gate.summary(),
+    ...(memory ? { notesHash: notesHash(w.inhabitants?.[personId]?.notes) } : {}),
   };
   return { world: w, transcript, gate };
 }
@@ -163,9 +178,9 @@ export interface ReplayOptions {
   onTick?: (world: World) => void;
 }
 
-/** Replay: the recorded choices are supplied at their ticks; the first difference stops the run with ReplayDiverged. */
+/** Replay: the recorded choices (and with memory the recorded notes updates) are supplied at their ticks; the first difference stops the run with ReplayDiverged. */
 export function runReplay(world: World, transcript: Transcript, opts: ReplayOptions = {}): RunResult & { warnings: string[] } {
-  markInhabitant(world, transcript.header.personId);
+  markInhabitant(world, transcript.header.personId, protocolHasMemory(transcript.header.protocol));
   const warnings = verifyHeader(transcript, world, { sources: opts.sources, allowSourceDrift: opts.allowSourceDrift });
   const until = opts.until ?? transcript.end?.tick ?? world.tick;
   const ctrl = new TranscriptController(transcript, 'replay');

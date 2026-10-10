@@ -29,7 +29,8 @@ import type { Ctx, Option } from '../sim/optutil';
 import type { Belief, BuildingType, ItemKind, Items, NeedKey, Person, World } from '../sim/types';
 import { hyp } from '../sim/util';
 
-export const OBSERVATION_VERSION = 1;
+/** 2 adds the tick (`t`) to memory entries and the last result, so notes can refer to them; 1 is the shape protocol inhabitant/1 recorded */
+export const OBSERVATION_VERSION = 2;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -117,7 +118,7 @@ export interface InhabitantObservation {
     activity: { label: string; goal: string; phase: string; progress: number; target: string | null; blocked: string; since: string } | null;
     suspended: string | null;
     conversation: { partner: string; purpose: string } | null;
-    lastResult: { label: string; outcome: string; detail: string; when: string } | null;
+    lastResult: { label: string; outcome: string; detail: string; when: string; t?: number } | null;
     lastChoice: { label: string; when: string; trigger: string } | null;
   };
   /** p.seen */
@@ -133,7 +134,7 @@ export interface InhabitantObservation {
     promises: { text: string; status: string; detail: string; due: string }[];
   };
   /** p.log, p.failures */
-  recent: { memory: { when: string; text: string; kind: string }[]; failures: { place: string; when: string; reason: string }[] };
+  recent: { memory: { when: string; text: string; kind: string; t?: number }[]; failures: { place: string; when: string; reason: string }[] };
   /** the engine's offer to this person now (rankOptions(ctx)), and what it set aside with the person's own reasons (ctx.blocked) */
   options: ObservedOption[];
   setAside: { label: string; reason: string; target: string | null }[];
@@ -142,6 +143,8 @@ export interface InhabitantObservation {
 export interface ObserveOptions {
   /** include the engine's own utility scores on the options (off: the controller judges for itself) */
   showScores?: boolean;
+  /** the shape to build (OBSERVATION_VERSION unless a transcript recorded an older one) */
+  version?: number;
 }
 
 const NEED_LOW: Record<NeedKey, number> = { hunger: 45, thirst: 45, energy: 32, warmth: 42, safety: 45, social: 35 };
@@ -296,6 +299,7 @@ function describeOption(world: World, p: Person, o: Option, showScores: boolean)
  */
 export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Option[], opts: ObserveOptions = {}): InhabitantObservation {
   const showScores = opts.showScores === true;
+  const version = opts.version ?? OBSERVATION_VERSION;
   const hh = householdOf(world, p);
   const members = membersOf(world, hh).filter((m) => m.id !== p.id);
   const kinOf = (id: number): string => p.relations[id]?.kin || (p.partnerId === id ? 'partner' : p.parents.includes(id) ? 'parent' : p.children.includes(id) ? 'child' : '');
@@ -352,7 +356,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
       : null,
     suspended: p.suspended ? cleanText(p.suspended.label, 120) : null,
     conversation: null,
-    lastResult: p.lastResult ? { label: cleanText(p.lastResult.label, 120), outcome: p.lastResult.outcome, detail: cleanText(p.lastResult.detail, 160), when: agoText(world, p.lastResult.tick) } : null,
+    lastResult: p.lastResult ? { label: cleanText(p.lastResult.label, 120), outcome: p.lastResult.outcome, detail: cleanText(p.lastResult.detail, 160), when: agoText(world, p.lastResult.tick), ...(version >= 2 ? { t: p.lastResult.tick } : {}) } : null,
     lastChoice: p.lastDecision && p.lastDecision.chosen ? { label: cleanText(p.lastDecision.chosen.label, 120), when: agoText(world, p.lastDecision.tick), trigger: p.lastDecision.trigger } : null,
   };
   if (p.convId) {
@@ -478,7 +482,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   failures.sort((m, n) => m.when.localeCompare(n.when));
 
   const obs: InhabitantObservation = {
-    version: OBSERVATION_VERSION,
+    version,
     time: { tick: world.tick, day: dayNumber(world.tick), clock: clockText(world.tick), phase: phaseName(dayFraction(world.tick)), light, weather: weatherLabel(world.weather), tempC: Math.round(world.weather.temp) },
     self,
     household: {
@@ -497,7 +501,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
       memory: p.log
         .slice(-14)
         .reverse()
-        .map((l) => ({ when: agoText(world, l.tick), text: cleanText(l.text, 200), kind: l.kind })),
+        .map((l) => ({ when: agoText(world, l.tick), text: cleanText(l.text, 200), kind: l.kind, ...(version >= 2 ? { t: l.tick } : {}) })),
       failures: failures.slice(0, 6),
     },
     options: ranked.slice(0, 30).map((o) => describeOption(world, p, o, showScores)),
