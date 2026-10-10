@@ -19,37 +19,20 @@ without the model: `npx vite-node scripts/inhabit.ts -- --mode replay --transcri
 | replay | PASS on the operator's machine (`0d0de0ed` recorded and reproduced) |
 | standard window | `053460f5` |
 
-**Limitation, recorded:** the transcript and report of this run were written to `inhabit_out\` on the operator's Windows machine, which
-is not tracked, and were not available to the session that built the memory stage. The folder `experiments/baseline-pavel-gpt5/` is
-where they belong; the summary above is from the operator's pasted output, not reconstructed from the files. To preserve them:
-
-```
-cd "C:\dev\Claude Experiment\living-world"
-Copy-Item inhabit_out\transcript.json experiments\baseline-pavel-gpt5\transcript.json
-Copy-Item inhabit_out\report.txt experiments\baseline-pavel-gpt5\report.txt
-Copy-Item inhabit_out\replay.txt experiments\baseline-pavel-gpt5\replay.txt
-Copy-Item inhabit_out\standard.txt experiments\baseline-pavel-gpt5\standard.txt
-git add experiments
-git commit -m "Keep the baseline Pavel transcript"
-```
-
-The runner now refuses to overwrite an existing `transcript.json` in its `--out` folder unless told `--overwrite`.
+The four files are kept here (since 2026-10-11), so the table above is read from them and not from pasted output. They had been
+written to the runner's default `--out` folder, which `.gitignore` excludes, and were very nearly lost. The runner refuses to
+overwrite an existing `transcript.json` unless told `--overwrite`, which is what saved them.
 
 ## memory-pavel-gpt5: the first real-model run with memory
 
 Same window and model as the baseline, `--memory` (protocol `inhabitant/2`): 5 decisions, applied 5, refused 0, engine fallbacks 0,
 timing mismatches 0; notes 5 updates, 0 rejected; final world hash `4f05d50c`, notes hash `e068ba0e`; replay PASS on the operator's
-machine. The five actions and their ticks are those of the baseline. Files on the operator's machine in `inhabit_memory\`:
+machine. Kept in `memory-pavel-gpt5/` since 2026-10-11 (transcript, report, replay).
 
-```
-cd "C:\dev\Claude Experiment\living-world"
-New-Item -ItemType Directory -Force experiments\memory-pavel-gpt5
-Copy-Item inhabit_memory\transcript.json experiments\memory-pavel-gpt5\transcript.json
-Copy-Item inhabit_memory\report.txt experiments\memory-pavel-gpt5\report.txt
-Copy-Item inhabit_memory\replay.txt experiments\memory-pavel-gpt5\replay.txt
-git add experiments
-git commit -m "Keep the Pavel memory transcript"
-```
+The five actions, their ticks and their outcomes are those of the baseline, checked against both files: strip `world.inhabitants` from
+the two replayed end states and they hash alike (`a9896b72`), so `0d0de0ed` against `4f05d50c` is the notes being folded into the
+world hash and nothing else. Memory changed what Pavel wrote and the reason he gave, not what he did - in a window of five
+decisions, which is too short to ask more of it. It cost 13,108 output tokens against 3,697.
 
 **Replayability across the memory stage (VERIFIED):** a protocol `inhabitant/1` transcript recorded before the memory stage (a
 scripted model, seed meadow, Pavel, tick 2400 to 3000) replays on the build that carries memory to its recorded state (`36f5b4dd`),

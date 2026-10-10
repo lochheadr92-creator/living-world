@@ -3,3 +3,15 @@ dist
 *.log
 *.cpuprofile
 inhabit_out/
+
+# lab and experiment output (regenerated; reports are quoted into docs/)
+lab_out/
+rich_out/
+split_out/
+nn_out/
+nn_try/
+mood2_out/
+mood3_out/
+places_out/
+inhabit_memory/
+gate_run/

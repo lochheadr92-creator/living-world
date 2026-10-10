@@ -306,9 +306,13 @@ The baseline window again (seed meadow, Pavel, tick 2400 to 3600), `gpt-5`, `--m
 | replay | OK: world `4f05d50c` and the notes hash reproduced, no model |
 
 **The actions were the five of the no-memory baseline, at the same ticks, with the same outcomes** (potter, deliver to the hut site,
-build there until the materials ran out, chop wood, sleep). LIKELY, not checked against the file: the world's trajectory is identical
-to the baseline's and the end hash differs only because the notes are folded into it. In this window, memory changed what the
-inhabitant wrote and why it said it chose, not what it did.
+build there until the materials ran out, chop wood, sleep). VERIFIED against the two transcripts (2026-10-11, no model): the five
+ticks, the five chosen options and the four recorded outcomes are equal, and replaying both and re-hashing the end states with
+`world.inhabitants` removed gives one and the same world, `a9896b72`. So the end hashes differ (`0d0de0ed` against `4f05d50c`) only
+because the notes are folded into the world hash (`src/sim/world.ts`, the `E` term), which also means a memory run and a no-memory
+run cannot be compared by world hash as it stands; `end.notesHash` already fingerprints the notes on their own. The five observation
+hashes do differ, as they must: the memory prompt carries the notes. In this window, memory changed what the inhabitant wrote and why
+it said it chose, not what it did.
 
 What the notes show (the model's words): four goals (stock the lean-to, social time, map resources, and from tick 2702 "support
 neighbours' building projects"); five inferences each resting on accepted references (a person in sight, the campfire's remembered fuel,
