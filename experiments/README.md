@@ -34,3 +34,8 @@ git commit -m "Keep the baseline Pavel transcript"
 ```
 
 The runner now refuses to overwrite an existing `transcript.json` in its `--out` folder unless told `--overwrite`.
+
+**Replayability across the memory stage (VERIFIED):** a protocol `inhabitant/1` transcript recorded before the memory stage (a
+scripted model, seed meadow, Pavel, tick 2400 to 3000) replays on the build that carries memory to its recorded state (`36f5b4dd`),
+with the warning that the sources moved (`--allow-source-drift`); without the flag it is refused, as designed. The baseline above
+was recorded under the same protocol and behaviour fingerprint (`22b83b7c:3780a61a`), so it replays the same way.
