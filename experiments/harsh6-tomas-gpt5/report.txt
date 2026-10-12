@@ -1,0 +1,567 @@
+live run: Tomas (#981) in meadow (village, harsh), tick 2400 to 16800
+model gpt-5 (api) {"api":"openai"}; protocol inhabitant/2; sim 22b83b7c:3780a61a / c16a4060
+budget {"maxCallsPerDay":400,"maxInputChars":120000,"maxOutputTokens":16000,"timeoutMs":120000,"maxConsecutiveFailures":5}
+end: tick 16800 hash 23ac03a0; calls 95, applied 82, refused 0, engine chose 13, lagged 0; gate {"calls":87,"failures":5,"refused":8,"inputChars":2530317,"outputTokens":323333,"givenUp":"5 failures in a row (last: rate limited (429))"}; notes c4c357cd
+Tomas: alive, health 100; needs hunger 89, thirst 25, energy 94, warmth 64, safety 84, social 97; carrying 1 berries; lifetime {"gathered":72,"given":2,"received":0,"built":0,"talked":14,"farmed":0,"crafted":0}; knows 217 places; promises 0
+memory: {"version":1,"updates":82,"rejectedUpdates":0,"rejectedEntries":2,"new":42,"kept":573,"strengthened":15,"weakened":12,"revised":158,"abandoned":31,"nextId":78}
+
+decisions (tick clock | offered | picked -> result | model's reason | what came of it)
+t2523 08:25 | 6 options | Picking berries [gather:808] -> applied | The nearby bush still has berries, and stocking food for Dov and me is prudent. After the fishing spot dispute, foraging is the safer bet right now. | success: done (t2615)
+t2615 09:21 | 9 options | Picking berries [gather:810] -> applied | Bush 808 is empty, but 810 still has a berry and is close. I’ll grab it to keep Birch stocked. | success: done (t2657)
+t2657 09:46 | 12 options | Picking berries [gather:812] -> applied | That bush still has berries and our lean-to has no food. I’ll stock a little more while it’s close. | success: done (t2690)
+t2690 10:06 | 11 options | Picking berries [gather:811] -> applied | There’s one berry left at bush 811 and we need food for Birch; wood and water aren’t urgent. I’ll grab it before someone else does. | success: done (t2723)
+t2723 10:25 | 9 options | Bring food home [deposit:980:food] -> applied | Nearby berry bushes are picked clean. I’ll bring the berries home to stock Birch and free some carrying space. | success: done (t2781)
+t2781 11:00 | 17 options | Deliver materials to the hut site [haul:1992] -> applied | I’ve got a spare wood to offload, and helping Linden’s hut is useful while food needs are fine. | success: done (t2853)
+t2853 11:43 | 9 options | Look for timber [explore] -> applied | The hut nearby needs materials. I’ll scout for good timber or stone while I’m neither hungry nor thirsty. | success: done (t3251)
+t3251 15:42 | 8 options | Picking berries [gather:820] -> applied | Plenty of berries are just to the north-west; I’ll pick some to keep Dov and me fed and to stock Birch. | interrupted: danger nearby (t3277)
+t3596 19:09 | 11 options | Sleep at my lean-to [sleep:980] -> applied | It’s dark and my energy is low; I’ll sleep at my lean-to to recover and stay near my stores. | interrupted: a more urgent need (hunger) (t3972)
+t3991 23:06 | 9 options | Sleep at my lean-to [sleep:980] -> applied | Cold, rainy night and my lean-to is right here. Better to sleep now to recover energy; hunger is only low and we have some food stored. | partial: too cold to sleep (t4324)
+t4324 02:26 | 10 options | Warm up at the fire [warm:951] -> applied | I’m too cold and couldn’t sleep at my lean-to; the big campfire nearby is well-fueled, so I’ll warm up first. | success: done (t4633)
+t4633 05:31 | 9 options | Warm up at the fire [warm:951] -> applied | It’s freezing rain and I’m still cold; another spell by the big fire will bring my warmth up before I set out. | interrupted: a more urgent need (hunger) (t4806)
+t4872 07:55 | 9 options | Picking berries [gather:809] -> applied | I just ate from home stores and Birch likely has no berries now; the bush 2 tiles east has 4 and I’m fine on thirst and warmth. | success: done (t4979)
+t4979 08:59 | 9 options | Offer berries to Theo [socialize:964:offer] -> applied | Theo looks hungry; sharing berries helps him and frees space so I can gather more for Birch. | failed: Theo was already talking to someone (t5044)
+t5044 09:38 | 9 options | Eat what I am carrying [eat:0] -> applied | I’m at full capacity and need to free a slot quickly so I can gather from the rich berry bushes to the south. Eating a berry also keeps my strength up. | success: done (t5084)
+t5084 10:02 | 7 options | Go and drink at the water [drink:1000130] -> applied | My thirst is low and the water is right nearby. I’ll drink now, then head south to gather berries for Birch. | success: done (t5137)
+t5137 10:34 | 24 options | Offer Thea a swap: wood for berries [socialize:974:trade:berries] -> applied | Thea is close and has berries; trading my spare wood is faster than walking to bushes and helps restock Birch for Dov and me. | failed: Thea was too busy to stop (t5251)
+t5251 11:42 | 16 options | Offer Wes a swap: wood for berries [socialize:987:trade:berries] -> applied | Nearby bushes are bare, and Wes has berries and is close. Trading wood now is the quickest way to restock Birch. | unknown (t5428)
+t5428 13:28 | 17 options | Picking berries [gather:805] -> applied | Wes couldn’t trade and food is needed at Birch. The NW bush is ripe and close, so I’ll pick berries to restock. | failed: nothing left (t5497)
+t5497 14:10 | 21 options | Picking berries [gather:807] -> applied | The nearby bush still has berries; it’s the quickest food to grab and restock Birch. | success: done (t5529)
+t5529 14:29 | 25 options | Gathering wild grain [gather:847] -> applied | The berry bushes near me are empty, but there’s wild grain close by. I have carry space and stocking food for Birch is my priority. | success: done (t5594)
+t5594 15:08 | 10 options | Gathering wild grain [gather:846] -> applied | The wild grain two tiles south-east still has heads; I’ll pick it now and then take the grain home to stock Birch. | failed: nothing left (t5610)
+t5610 15:17 | 12 options | Gathering wild grain [gather:845] -> applied | Closest grain patch still has some left and I have one free slot; I want to stock Birch. Quick to grab before others take it. | success: done (t5638)
+t5638 15:34 | 8 options | Add wood to the fire [fuel:951] -> applied | My pack is full and food is the priority to bring home. Adding my wood to the fire frees space without eating our stores, and the fire is close. | success: done (t5763)
+t5763 16:49 | 15 options | Picking fruit [gather:831] -> applied | I’ve got room to carry more and fruit is plentiful to the south. I’ll pick fruit now to stock our Birch lean-to for Dov and me. | partial: nothing left (t5951)
+t5951 18:42 | 9 options | Picking fruit [gather:833] -> applied | 831 is empty; 833 still has fruit and I have two carry slots. I’ll grab fruit now before dark to stock Birch and eat later, then rest. | success: done (t6109)
+t6109 20:17 | 8 options | Sleep at the fire [sleep:951] -> applied | I’m cold and exhausted in the rain, and the fire is close and well-fueled. Sleeping there will restore my energy and warmth safely. | interrupted: a more urgent need (thirst) (t6976)
+t7113 06:19 | 10 options | Bring food home [deposit:980:food] -> applied | My pack is full and our lean-to has no food; I’ll stock Birch now to feed Dov and free carry space. | success: done (t7230)
+t7230 07:30 | 17 options | Warm up at the fire [warm:951] -> applied | It’s a freezing storm and my warmth is low; the campfire is close and well-fueled. I’ll warm up first before helping others or fishing. | success: done (t7503)
+t7503 10:13 | 17 options | Offer fruit to Nora [socialize:956:offer] -> applied | Nora is a hungry child right beside the fire, and I can spare a fruit to help her and strengthen our ties. | unknown (t7577)
+t7577 10:58 | 15 options | Offer fruit to Theo [socialize:964:offer] -> applied | Theo is hungry and thirsty; I can spare a fruit to help right now. It also builds goodwill before I go forage. | failed: Theo had more pressing needs (t7588)
+t7588 11:04 | 14 options | Offer fruit to Wes [socialize:987:offer] -> applied | Wes is a hungry child nearby and I can spare a fruit. Helping him now fits my plan to aid neighbors before foraging. | failed: Wes had more pressing needs (t7591)
+t7591 11:06 | 13 options | Offer fruit to Juno [socialize:960:offer] -> applied | Juno is nearby and looks hungry, and I have fruit to share. Wes declined help, so I’ll help the next neighbor in need. | failed: Juno had more pressing needs (t7593)
+t7593 11:07 | 12 options | Offer fruit to Kaia [socialize:959:offer] -> applied | Kaia looks hungry and not thirsty; sharing a fruit now should help and build goodwill before I go gather berries. | failed: Kaia had more pressing needs (t7598)
+t7598 11:10 | 11 options | Picking berries [gather:809] -> applied | My food offers keep getting declined and I'm only slightly hungry; I'll quickly pick the nearest berries to stock Birch and share later. | success: done (t7740)
+t7740 12:35 | 11 options | Bring food home [deposit:980:food] -> applied | I’ll stock Birch now to keep Dov fed and free up carry space, then head east to gather more berries. | success: done (t7803)
+t7803 13:13 | 11 options | Offer berries to Nora [socialize:956:offer] -> applied | Nora looks hungry and not thirsty; I have berries to share. Helping a child by the fire comes first before another quick berry run. | unknown (t7897)
+t7897 14:10 | 10 options | Picking berries [gather:811] -> applied | I’m warm and fine on water. The nearest berry bush east is quickest to pick so I can restock Birch and share with the hungry. | success: done (t8005)
+t8005 15:14 | 5 options | Eat what I am carrying [eat:0] -> applied | My hunger is critical; eating what I’m carrying is the fastest way to steady myself so I can keep gathering for Birch and Dov. | success: done (t8055)
+t8055 15:45 | 6 options | Picking berries [gather:812] -> applied | Berries are close and plentiful, and several nearby (and Dov) need food. My needs are fine, so I’ll pick from bush 812 to restock Birch and share. | success: done (t8196)
+t8196 17:09 | 13 options | Warn Viktor about the wolf [socialize:990:warn] -> applied | A wolf was just seen east; Viktor is the closest in that direction. I’ll warn him to keep him safe before anything else. | unknown (t8285)
+t8285 18:02 | 23 options | Go and drink at the water [drink:1000130] -> applied | My thirst is low and water is close; I’ll drink now to stay sharp in the rain, then continue warnings and stocking. | success: done (t8391)
+t8391 19:06 | 16 options | Warn Kaia about the wolf [socialize:959:warn] -> applied | Kaia is close and it’s dusk with a wolf about; a quick warning first, then I’ll go warm by the fire. | failed: could not find them (t8433)
+t8433 19:31 | 15 options | Bring berries to Rhea [visit:954] -> applied | Rhea looked hungry just now and I have berries to share. I’ll warm by the fire right after. | failed: Rhea was not where I expected (t8486)
+t8486 20:03 | 14 options | Sleep at the fire [sleep:951] -> applied | I’m cold and low on energy in the rain. Sleeping at the fire will warm me and help me recover safely. | success: rested (t9135)
+t9135 02:33 | 11 options | Offer berries to Zed [socialize:991:offer] -> applied | Zed is a hungry child nearby and I’m carrying berries. I’ll help him first, then bring any leftover food home. | unknown (t9268)
+t9268 03:52 | 11 options | Bring food home [deposit:980:food] -> applied | I can’t offer Zed right now, so I’ll get these berries safely into Birch for Dov and me. Then I can warm by the fire or share if I meet Zed again. | success: done (t9356)
+t9356 04:45 | 13 options | Offer berries to Corin [socialize:975:offer] -> applied | Corin is a hungry child by the fire, and I have berries to spare. Helping them now fits my goals, and I can warm up right after. | unknown (t9464)
+t9464 05:50 | 12 options | Warm up at the fire [warm:951] -> applied | I’m cold in the dawn rain; warming at the campfire first will keep me safe. Then I can share berries and warn Kaia if I cross paths with her. | success: done (t9713)
+t9713 08:19 | 13 options | Offer berries to Rhea [socialize:954:offer] -> applied | Rhea is right here and looks hungry; I have berries to share. Helping her now supports my aim to look after nearby folk. | failed: Rhea had more pressing needs (t9716)
+t9716 08:21 | 12 options | Offer berries to Juno [socialize:960:offer] -> applied | Juno is right beside me and looks hungry. I can spare my berries to help now before restocking Birch. | unknown (t9786)
+t9786 09:03 | 10 options | Picking berries [gather:812] -> applied | I’m fine on needs and there’s a ripe bush east; I’ll pick to stock Birch and have more to share with the hungry by the fire. | partial: someone else is already taking it (t9897)
+t9897 10:10 | 5 options | Eat what I am carrying [eat:0] -> applied | My hunger is critical; eating what I carry is fastest. Then I can keep gathering and stock Birch for Dov and me. | success: done (t9937)
+t9937 10:34 | 9 options | Shelter at the lean-to [rest:home:980] -> applied | I’m cold and it’s raining; my lean-to is the closest shelter to warm up quickly before doing more. | success: done (t10227)
+t10227 13:28 | 9 options | Go and drink at the water [drink:1000149] -> applied | My thirst is low and the nearest water is close. I’ve sheltered already, so I’ll drink now before foraging. | success: done (t10327)
+t10327 14:28 | 8 options | Fishing [gather:945] -> applied | The fishing spot just east has fish now; I can quickly bring in food to store or share with the hungry without dipping into our home stores. | partial: someone else is already taking it (t10482)
+t10482 16:01 | 9 options | Picking berries [gather:808] -> applied | The near fishing spot is empty and contested. I’ll pick the closest berries to stock Birch and share, keeping my fish for later or others. | success: done (t10577)
+t10577 16:58 | 8 options | Picking berries [gather:809] -> applied | Closest bush with berries; I’ll stock Birch and have food to share. | success: done (t10640)
+t10640 17:36 | 9 options | Bring food home [deposit:980:food] -> applied | I’m nearly at carrying capacity and it’s raining; stocking Birch with the fish and berries feeds Dov and frees space to gather from 811/810. | success: done (t10699)
+t10699 18:11 | 8 options | Picking berries [gather:811] -> applied | I'm warm enough and the nearby bush still has berries; I'll stock Birch and keep some to share. | success: done (t10779)
+t10779 18:59 | 8 options | Picking berries [gather:810] -> applied | Bush 810 still has berries and I’m warm enough to keep working. This will help stock Birch for Dov and sharing. | success: done (t10861)
+t10861 19:48 | 10 options | Shelter at the lean-to [rest:home:980] -> applied | I’m cold in the rain and my lean-to is closest; shelter will warm me up safely. My pack is full anyway, so I’ll warm first before deciding next steps. | success: done (t11159)
+t11159 22:47 | 21 options | Warm up at the fire [warm:951] -> applied | I’m cold in the rain; the campfire is close and will warm me faster than staying in the lean-to. | success: done (t11433)
+t11433 01:31 | 5 options | Eat what I am carrying [eat:0] -> applied | I’m starving and already carrying berries. Eating now will ease the hunger and free a slot so I can gather more to restock Birch and share. | success: done (t11503)
+t11503 02:13 | 30 options | Warn Dov about the wolf [socialize:982:warn] -> applied | Dov is my child and right here; warning him about the wolf keeps him safest first. | unknown (t11576)
+t11576 02:57 | 9 options | Chat with Kaia [socialize:959:chat] -> applied | Kaia is right here by the fire, and a wolf was just seen to the east. I’ll warn her now to help keep folks safe before doing anything else. | unknown (t11654)
+t11654 03:44 | 8 options | Chat with Alma [socialize:994:chat] -> applied | I want to warn Alma about the wolf and check on her by the fire. My thirst isn’t urgent, so talking now makes sense. | unknown (t11726)
+t11726 04:27 | 8 options | Chat with Delia [socialize:978:chat] -> applied | Delia’s right here by the fire; I’ll warn her about the wolf and share news while Alma is busy. | unknown (t11805)
+t11805 05:15 | 7 options | Warm up at the fire [warm:951] -> applied | I’ll stay by the fire near Alma so I can warn her about the wolf and keep warm in the cold rain. | interrupted: a more urgent need (thirst) (t11904)
+t12020 07:24 | 16 options | Shelter at the lean-to [rest:home:980] -> applied | Cold rainy dawn and I’m a bit chilled and low on energy; I’ll get under my lean-to to warm up before gathering or helping others. | success: done (t12351)
+t12351 10:42 | 15 options | Chopping wood to repair the lean-to [gather:4525] -> applied | It’s raining and our lean-to is only at 49%; I’ll chop nearby wood to get repairs done while I’m still warm enough. | success: done (t12459)
+t12459 11:47 | 22 options | Chopping wood to repair the lean-to [gather:4525] -> applied | Quickly chop the nearby tree for wood so I can repair our Birch lean-to in this rain. | success: done (t12516)
+t12516 12:21 | 28 options | Repair the lean-to [repair:980] -> applied | I just cut wood and our Birch lean-to is in the rain; better shore it up now before I tire further. | success: done (t12733)
+t12733 14:31 | 15 options | Sleep at my lean-to [sleep:980] -> applied | Energy is very low and it’s raining; our lean-to is just repaired and close. I’ll sleep there to recover before doing more. | success: rested (t13416)
+t13416 21:21 | 12 options | Warm up at the fire [warm:951] -> applied | Cold rain at night—I’ll warm up by the fire and check on Dov and the others nearby. | success: done (t13683)
+t13683 00:01 | 12 options | Picking berries [gather:811] -> applied | I’m warm and rested, and 811 has berries close by. I’ll pick some to restock Birch and help any hungry folk, then head back to the fire to warm. | success: done (t13807)
+t13807 01:16 | 11 options | Warm up at the fire [warm:951] -> applied | I’m cold in the night rain; the campfire will warm me quickly so I can then share berries with the hungry. | interrupted: a more urgent need (thirst) (t13853)
+t13992 03:07 | 11 options | Warm up at the fire [warm:951] -> applied | I’m cold in the storm. The fire will warm me quickly, and I can look in on Dov and others there. | interrupted: a more urgent need (hunger) (t14032)
+t14081 04:00 | 2 options | Warm up at the fire [warm:951] -> applied | My warmth is critical and the campfire will heat me fastest. Dov is there; I can check on him while I warm. | success: done (t14380)
+t14380 06:59 | 13 options | Picking berries [gather:809] -> applied | Many nearby look hungry; I’ll grab nearby berries to share and to restock Birch. I’m warm enough for a quick run and can return to the fire after. | success: done (t14540)
+t14540 08:36 | 20 options | Warm up at the fire [warm:951] -> applied | I’m cold in a storm and the fire is close with plenty of fuel. I’ll warm first, then share berries with Dov and the other hungry children. | partial: the fire went out (t14870)
+t14870 11:54 | 18 options | Offer berries to Nora [socialize:956:offer] -> applied | The fire went out and Nora is hungry right beside me. I can spare berries now to help her before gathering more. | failed: Nora was too busy to stop (t14876)
+t14876 11:57 | 17 options | engine (model call failed: rate limited (429)) -> engine chose Eating | model call failed: rate limited (429) | 
+t14916 12:21 | 11 options | engine (model call failed: rate limited (429)) -> engine chose Drinking at the water | model call failed: rate limited (429) | 
+t15018 13:22 | 10 options | engine (model call failed: rate limited (429)) -> engine chose Fishing | model call failed: rate limited (429) | 
+t15076 13:57 | 9 options | engine (model call failed: rate limited (429)) -> engine chose Picking berries | model call failed: rate limited (429) | 
+t15179 14:59 | 12 options | engine (model call failed: rate limited (429)) -> engine chose Picking berries | model call failed: rate limited (429) | 
+t15217 15:22 | 12 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Chopping wood | model given up on: 5 failures in a row (last: rate limited (429)) | 
+t15315 16:20 | 14 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Chopping wood | model given up on: 5 failures in a row (last: rate limited (429)) | 
+t15388 17:04 | 7 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Feeding the fire | model given up on: 5 failures in a row (last: rate limited (429)) | 
+t15531 18:30 | 17 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Gathering wild grain | model given up on: 5 failures in a row (last: rate limited (429)) | 
+t15640 19:35 | 13 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Sleeping by my lean-to | model given up on: 5 failures in a row (last: rate limited (429)) | 
+t16413 03:19 | 14 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Warming up by the fire | model given up on: 5 failures in a row (last: rate limited (429)) | 
+t16683 06:01 | 11 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Eating | model given up on: 5 failures in a row (last: rate limited (429)) | 
+t16723 06:25 | 5 options | engine (model given up on: 5 failures in a row (last: rate limited (429))) -> engine chose Drinking at the water | model given up on: 5 failures in a row (last: rate limited (429)) | 
+  notes at t2523: new 2, goalsAdopted 2
+  notes at t2615: new 1, kept 1, revised 1
+  notes at t2657: new 1, kept 2, revised 1
+  notes at t2690: kept 3, revised 1
+  notes at t2723: kept 3, revised 1
+  notes at t2781: kept 2, revised 2
+  notes at t2853: kept 4
+  notes at t3251: kept 3, revised 1
+  notes at t4324: new 1, kept 2, abandoned 2, goalsAdopted 1
+  notes at t4633: new 1, kept 2, strengthened 1
+  notes at t4872: new 1, kept 2, strengthened 1, revised 1
+  notes at t4979: new 1, kept 2, strengthened 2, weakened 1
+  notes at t5044: kept 3, strengthened 1, revised 2
+  notes at t5084: new 1, kept 5, abandoned 1
+  notes at t5137: new 1, kept 1, strengthened 2, revised 3
+  notes at t5251: new 1, kept 5, revised 2
+  notes at t5428: new 1, kept 4, revised 4
+  notes at t5497: new 1, kept 8, abandoned 1
+  notes at t5529: kept 8, revised 1
+  notes at t5594: new 1, kept 9
+  notes at t5610: kept 9, revised 1
+  notes at t5638: new 1, kept 8, revised 2
+  notes at t5763: kept 7, revised 4
+  notes at t5951: new 1, kept 9, revised 2
+  notes at t6109: new 1, kept 10, revised 1, abandoned 1
+  notes at t7113: kept 5, revised 4, abandoned 3
+  notes at t7230: new 2, kept 7, revised 1, abandoned 1
+  notes at t7503: kept 8, revised 2
+  notes at t7577: new 1, kept 9, revised 1
+  notes at t7588: new 1, revised 11
+  notes at t7591: kept 10, revised 1, abandoned 1
+  notes at t7593: new 1, kept 11
+  notes at t7598: kept 9, revised 2, abandoned 1
+  notes at t7740: new 1, kept 11
+  notes at t7803: new 1, kept 9, revised 2, abandoned 1
+  notes at t7897: kept 11, revised 1
+  notes at t8005: new 1, kept 11, abandoned 1
+  notes at t8055: new 1, kept 9, revised 2, abandoned 1
+  notes at t8196: new 1, kept 9, revised 2, abandoned 1, goalsAdopted 1
+  notes at t8285: kept 11, strengthened 1
+  notes at t8391: new 2, kept 8, revised 2, abandoned 2
+  notes at t8433: kept 11, revised 1
+  notes at t8486: kept 11, weakened 1
+  notes at t9135: new 1, kept 7, revised 4, abandoned 1
+  notes at t9268: kept 12
+  notes at t9356: kept 9, revised 3
+  notes at t9464: kept 11, revised 1
+  notes at t9713: kept 3, weakened 2, revised 7
+  notes at t9716: kept 12
+  notes at t9786: new 2, kept 10, abandoned 2
+  notes at t9897: kept 10, revised 2
+  notes at t9937: kept 8, weakened 1, revised 3
+  notes at t10227: kept 4, weakened 4, revised 4
+  notes at t10327: kept 11, revised 1
+  notes at t10482: kept 11, revised 1, rejectedEntries 1 | inferences: over 12 entries
+  notes at t10577: kept 7, revised 5
+  notes at t10640: new 1, kept 9, weakened 1, revised 1, abandoned 1
+  notes at t10699: kept 10, revised 2
+  notes at t10779: kept 10, revised 2
+  notes at t10861: kept 9, revised 3
+  notes at t11159: kept 7, revised 5
+  notes at t11433: kept 4, strengthened 1, weakened 2, revised 5
+  notes at t11503: new 1, kept 10, revised 1, abandoned 1
+  notes at t11576: kept 9, strengthened 1, revised 2
+  notes at t11654: new 2, kept 10, abandoned 2
+  notes at t11726: kept 9, revised 2, abandoned 1
+  notes at t11805: new 1, kept 11
+  notes at t12020: kept 6, revised 4, abandoned 2
+  notes at t12351: new 1, kept 7, revised 3, goalsAdopted 1
+  notes at t12459: kept 9, revised 2
+  notes at t12516: new 1, kept 9, revised 2
+  notes at t12733: new 1, kept 6, strengthened 1, revised 2, abandoned 3, goalsDropped 1
+  notes at t13416: kept 2, strengthened 2, revised 6
+  notes at t13683: kept 8, revised 2
+  notes at t13807: kept 8, strengthened 1, revised 1
+  notes at t13992: new 1, kept 7, revised 3
+  notes at t14081: new 1, kept 8, revised 3
+  notes at t14380: kept 7, strengthened 1, revised 3, abandoned 1, rejectedEntries 1 | inference without a usable reference: “A wolf was seen to the east recently; ke”
+  notes at t14540: kept 9, revised 2
+  notes at t14870: kept 2, revised 9
+
+the inhabitant's notes at the end (its own words; never read by the simulation):
+{
+ "goals": [
+  {
+   "id": "g1",
+   "text": "Keep Dov and me fed; stock Birch lean-to.",
+   "since": 2523
+  },
+  {
+   "id": "g2",
+   "text": "Make a basket to improve carrying.",
+   "since": 2523
+  },
+  {
+   "id": "g13",
+   "text": "Stay warm and rested through the night.",
+   "since": 4324
+  },
+  {
+   "id": "g50",
+   "text": "Keep nearby folk safe from the wolf this evening.",
+   "since": 8196
+  }
+ ],
+ "intentions": [
+  {
+   "id": "n10",
+   "text": "Explore nearby to locate timber and stone for Linden’s hut.",
+   "since": 2781
+  },
+  {
+   "id": "n51",
+   "text": "Warn nearby folk of the wolf tonight when I cross paths with them.",
+   "since": 8196
+  },
+  {
+   "id": "n54",
+   "text": "If I meet Juno again, offer berries from the new pick; keep warning others.",
+   "since": 8391
+  },
+  {
+   "id": "n70",
+   "text": "If berries remain on 808/809/810/812, pick a little to stock Birch and share.",
+   "since": 12351
+  },
+  {
+   "id": "n75",
+   "text": "Offer berries to hungry kids nearby now; then gather more and stock Birch; shelter at Birch if I get too cold.",
+   "since": 13416
+  }
+ ],
+ "inferences": [
+  {
+   "id": "i7",
+   "text": "Birch lean-to holds 2 wood, 3 berries, and 1 fish now.",
+   "since": 2615,
+   "confidence": 0.99,
+   "basis": [
+    "place:980"
+   ],
+   "revised": 14380
+  },
+  {
+   "id": "i17",
+   "text": "Berry amounts near camp: 808:6, 809:1, 810:6, 811:4, 812:6.",
+   "since": 4633,
+   "confidence": 0.95,
+   "basis": [
+    "place:808",
+    "place:809",
+    "place:810",
+    "place:811",
+    "place:812",
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i40",
+   "text": "Sharing food may help some, but many are focused on warming or finding water.",
+   "since": 7230,
+   "confidence": 0.65,
+   "basis": [
+    "seen:956",
+    "seen:960",
+    "seen:990",
+    "place:951",
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i55",
+   "text": "Silas doesn’t look hungry now—just cold; feeding him is less urgent.",
+   "since": 8391,
+   "confidence": 0.6,
+   "basis": [
+    "person:963",
+    "obs:14870"
+   ],
+   "revised": 11726
+  },
+  {
+   "id": "i56",
+   "text": "I’m cold but rested; with the fire out, I should shelter at Birch if I get colder.",
+   "since": 8391,
+   "confidence": 0.85,
+   "basis": [
+    "place:980",
+    "result:14869",
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i58",
+   "text": "My thirst is fine for now; no need to drink yet.",
+   "since": 9786,
+   "confidence": 0.86,
+   "basis": [
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i60",
+   "text": "Nearby berries are available in small amounts; better use of time than distant grain.",
+   "since": 10640,
+   "confidence": 0.8,
+   "basis": [
+    "place:808",
+    "place:809",
+    "place:810",
+    "place:812",
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i63",
+   "text": "Kaia likely heard my wolf warning when she shared fishing info with me not long ago.",
+   "since": 11654,
+   "confidence": 0.7,
+   "basis": [
+    "memory:11637",
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i74",
+   "text": "Birch lean-to is good shelter in this storm (~88% sound).",
+   "since": 12733,
+   "confidence": 0.82,
+   "basis": [
+    "place:980",
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i76",
+   "text": "Dov is up by the shore to the north now, not at the campfire.",
+   "since": 13992,
+   "confidence": 0.9,
+   "basis": [
+    "person:982",
+    "obs:14870"
+   ],
+   "revised": 14870
+  },
+  {
+   "id": "i77",
+   "text": "The campfire has gone out; I can’t warm there until it’s refueled/relit.",
+   "since": 14081,
+   "confidence": 0.95,
+   "basis": [
+    "place:951",
+    "result:14869",
+    "obs:14870"
+   ],
+   "revised": 14870
+  }
+ ],
+ "uncertainties": [
+  {
+   "id": "u4",
+   "text": "What materials and space are needed to successfully finish a basket?",
+   "since": 2523
+  },
+  {
+   "id": "u22",
+   "text": "What trade will Thea accept for her berries?",
+   "since": 5137
+  },
+  {
+   "id": "u27",
+   "text": "Will Kaia accept wood for berries at a fair rate later?",
+   "since": 5428
+  }
+ ],
+ "journal": [
+  {
+   "tick": 8005,
+   "text": "Afternoon rain: hunger is critical—eating my berries now, then back to the east bushes to stock Birch for Dov and me."
+  },
+  {
+   "tick": 8055,
+   "text": "Evening rain: heading east to pick berries at bush 812 to restock Birch and help the hungry nearby."
+  },
+  {
+   "tick": 8196,
+   "text": "Evening rain: spotted a wolf to the east; warning Viktor first to keep him safe, then I’ll resume stocking and sharing."
+  },
+  {
+   "tick": 8285,
+   "text": "Dusk rain: thirst is low—heading to the nearest shore to drink, then I’ll warn nearby folk and keep stocking Birch."
+  },
+  {
+   "tick": 8433,
+   "text": "Dusk rain: heading to Rhea with berries since she looked hungry; I’ll warm by the fire after."
+  },
+  {
+   "tick": 8486,
+   "text": "Dusk rain: missed Rhea and I’m too cold and tired—going to the campfire to sleep and warm, then I’ll bring berries home and help Rhea or Wes if I meet them."
+  },
+  {
+   "tick": 9135,
+   "text": "Night rain: heading to offer berries to hungry child Zed before returning to stock Birch and warm by the fire."
+  },
+  {
+   "tick": 9268,
+   "text": "Night rain: taking the berries to Birch to feed Dov and me; then I’ll warm by the fire and share if I meet Zed again."
+  },
+  {
+   "tick": 9356,
+   "text": "Night rain: offering my berries to hungry child Corin by the fire, then I’ll warm and warn Kaia if I can."
+  },
+  {
+   "tick": 9713,
+   "text": "Morning rain by the fire: Rhea looks hungry—I’ll offer her my berries now, then restock Birch and keep an eye out to warn Kaia if I see her."
+  },
+  {
+   "tick": 9716,
+   "text": "Morning rain: offering my berries to hungry Juno by the fire, then I’ll restock Birch and warn Kaia if I see her."
+  },
+  {
+   "tick": 9786,
+   "text": "Morning rain: heading east to bush 812 to pick berries to stock Birch and share at the fire."
+  },
+  {
+   "tick": 9937,
+   "text": "Morning rain: I’m cold and close to Birch—ducking into the lean-to to get out of the wet, then I’ll drink and pick at 812 to stock Birch and share with hungry Rhea or Nora if I meet them."
+  },
+  {
+   "tick": 10227,
+   "text": "Afternoon rain: heading to the shore north to drink, then east to bush 812 to stock Birch and share with the hungry nearby."
+  },
+  {
+   "tick": 10327,
+   "text": "Afternoon rain: just drank at the shore; heading east to fish to stock Birch and share with hungry folks like Rhea or Juno."
+  },
+  {
+   "tick": 10482,
+   "text": "Evening rain: nearby fish is tapped out—heading to the closest berry bush to stock Birch and share if I meet the hungry."
+  },
+  {
+   "tick": 10577,
+   "text": "Evening rain: heading to bush 809 to pick berries to stock Birch and share if I meet the hungry."
+  },
+  {
+   "tick": 10640,
+   "text": "Evening rain: taking fish and berries to Birch to feed Dov and free space, then I’ll pick at 811/810 and share if I meet the hungry."
+  },
+  {
+   "tick": 10699,
+   "text": "Evening rain: heading to berry bush 811 to pick more to stock Birch and share if I meet the hungry."
+  },
+  {
+   "tick": 10861,
+   "text": "Evening rain and cold: heading into the Birch lean-to to get out of the wet, then I’ll eat a little to free space and consider more picking once I’m warm."
+  },
+  {
+   "tick": 11159,
+   "text": "Night rain: heading to the campfire to warm up, then warn those nearby about the wolf and eat a berry to free space."
+  },
+  {
+   "tick": 11433,
+   "text": "Night rain: at the fire I’ll eat my berries to steady myself, then pick at 806 to restock Birch and share with the hungry nearby."
+  },
+  {
+   "tick": 11503,
+   "text": "Night rain: warning Dov about the nearby wolf first, then I’ll keep warning others by the fire."
+  },
+  {
+   "tick": 11576,
+   "text": "Night rain: going to Kaia by the fire to warn her about the wolf."
+  },
+  {
+   "tick": 11654,
+   "text": "Night rain: heading to Alma by the fire to warn her about the wolf and check on her; then I’ll consider restocking Birch when it’s safe."
+  },
+  {
+   "tick": 11726,
+   "text": "Night rain: speaking to Delia by the fire to warn her about the wolf; if Alma frees up next, warn her too."
+  },
+  {
+   "tick": 11805,
+   "text": "Night rain: staying by the fire to catch Alma and warn her, then continue warnings."
+  },
+  {
+   "tick": 12020,
+   "text": "Dawn rain at the water with Clara and Zed. I’ll shelter at Birch to warm up, then gather berries or wood to repair our lean-to and share if I meet the hungry."
+  },
+  {
+   "tick": 12351,
+   "text": "Morning rain: chopping wood east to repair Birch lean-to before more gathering."
+  },
+  {
+   "tick": 12459,
+   "text": "Morning rain: chopping the tree just east to get wood ready, then I’ll repair our Birch lean-to before doing more gathering."
+  },
+  {
+   "tick": 12516,
+   "text": "Afternoon rain: heading to Birch to repair it with the wood I just cut, then I’ll rest a bit if needed."
+  },
+  {
+   "tick": 12733,
+   "text": "Afternoon rain: Birch lean-to repaired and sound; I’ll sleep a bit to recover before foraging or sharing."
+  },
+  {
+   "tick": 13416,
+   "text": "Night rain: waking at Birch; heading to the campfire to warm up and check on Dov. If I’m warm enough after, I’ll pick from 811 to restock Birch and share."
+  },
+  {
+   "tick": 13683,
+   "text": "Night rain: heading east to pick from 811 to restock Birch and share, then back to the fire to warm."
+  },
+  {
+   "tick": 13807,
+   "text": "Night rain: picked 811 clean; heading to the fire to warm, then share berries with Delia or others."
+  },
+  {
+   "tick": 13992,
+   "text": "Storm night by the shore: I just drank; heading to the campfire to warm and look for Dov."
+  },
+  {
+   "tick": 14081,
+   "text": "Storm night: heading to the campfire to warm quickly and check on Dov."
+  },
+  {
+   "tick": 14380,
+   "text": "Storm dawn: quick run east to 809 for berries to share with the hungry, then back to the fire and stock Birch."
+  },
+  {
+   "tick": 14540,
+   "text": "Storm morning: I’m heading to the campfire to warm, then I’ll share berries with Dov and the hungry kids, and stock Birch."
+  },
+  {
+   "tick": 14870,
+   "text": "Storm late morning: the campfire went out; I’m offering berries to hungry Nora now, then I’ll gather more and stock Birch. I’ll shelter at Birch if I get too cold."
+  }
+ ]
+}
+
+the engine ended the person's activity on its own authority:
+t3276 15:57 Picking berries: danger nearby
+t3499 18:11 Running from the wolf toward the fire: a more urgent need (thirst)
+t3971 22:54 Sleeping by my lean-to: a more urgent need (hunger)
+t4805 07:14 Warming up by the fire: a more urgent need (hunger)
+t6975 04:56 Sleeping by the fire: a more urgent need (thirst)
+t11903 06:13 Warming up by the fire: a more urgent need (thirst)
+t13852 01:43 Warming up by the fire: a more urgent need (thirst)
+t14031 03:30 Warming up by the fire: a more urgent need (hunger)
+
+observer: the village's record of this person between decisions (never shown to the model)
+t2484 [conflict] Tomas and Zed argued over the last fish.
+t3104 [trade] Delia swapped 2 wood for 1 berries with Tomas.
+t6699 [social] Tomas and Zed are on good terms again (it faded with time).
+t8246 [danger] Tomas warned Viktor about a wolf.
+t9747 [social] Tomas gave 1 berries to Juno.
+t11537 [danger] Tomas warned Dov about a wolf.
+t12732 [build] Tomas repaired a lean-to.
