@@ -330,3 +330,37 @@ What this establishes: a language model keeps grounded, bounded, revisable notes
 entries, and reads them back (the goal adopted at tick 2702 and the inference at tick 3275 both appear in later reasons). What it
 does not establish: any effect on what happens in the world. Five decisions in a half day in which the engine's offers already lined
 up with the model's aims leave no room to see one; a longer window, a harder situation, or a person with more to decide is needed.
+
+### Attribution and the counterfactual re-ask (VERIFIED on the recorded runs, 2026-10-12)
+
+Whether memory changes behaviour cannot be read off an end hash: the model is not deterministic between runs, so two runs part at
+their first differing choice and everything after is a different world. Two tools read the transcripts instead.
+
+`scripts/inhabit_attribute.ts` (`src/agent/attribute.ts`) looks at each decision the model made: which content words of its stated
+reason occur in the notes it was shown and nowhere in the observation, and whether the option it chose carries out a goal or intention
+written at an earlier ask (matched by a place reference in the note, which is strong, or by shared words, which is weak). It is triage:
+a word the model coined in an earlier note counts as notes-only although the fact behind it was observable, and a reason can rest on a
+note without reusing its words. On the recorded memory run (Pavel, 5 decisions):
+
+| ask | chose | what attribution finds |
+|---|---|---|
+| 0 | potter about | the notebook was still empty |
+| 1 | deliver materials | two reason words only in the notes ("full", "neighborly"): the model's own earlier wording |
+| 2 | build the hut | carries out the intention written at ask 1 (shared words with the option: weak) |
+| 3 | chop wood | nothing from the notes. The reason ("stalled for lack of wood") answers the fresh partial-build result; the notes it was shown still said the site had materials (inference i14). The "chop and bring wood" intention was written *after* this choice. |
+| 4 | sleep | nothing from the notes |
+
+So two candidates, both weak, and the one decision that looked like memory at work (ask 3) was the observation correcting a stale
+note. That matches the hash result (same world as the no-memory run) and sharpens it: in this window the notes followed the
+decisions, they did not lead them.
+
+`scripts/inhabit_counterfactual.ts` (`src/agent/counterfactual.ts`) is the decider, at a model's price: it puts the very observation
+a recorded decision was made on to the model again, several times, with its notes and without, and reports where the most common
+choice moves. The pairing is exact (same observation, same refused picks), and the with-notes arm measures the model's own variance,
+so a shift is read against that and not against one draw. `--asks auto` takes attribution's candidates. Nothing runs in the world.
+Checked with scripted models: one that takes the last option when shown its notes and the first when not is reported as shifting on
+every ask that had notes and on none that had an empty notebook; one that ignores its notes shows no shift.
+
+What the six-day harsh run (Tomas, on the operator's machine, 82 applied decisions) needs is these two in that order: attribution to
+find the decisions worth asking about, then the counterfactual on those. A full no-memory arm would cost the same again and could not
+be paired with it.

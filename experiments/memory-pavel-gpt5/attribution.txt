@@ -1,0 +1,19 @@
+attribution: Pavel, inhabitant/2 (notes): 5 decisions, 2 candidates for the counterfactual re-ask
+  2 with words found only in the notes; 0 carrying out a noted goal or intention by its place reference (strong), 1 by shared words (weak); 18 reason words found in neither (the model's own wording)
+
+  ask 0 t2532  wander (Potter about near home)  applied -> success (done)
+    why: My pack is full and home is nearby; pottering may let me stash goods or catch a quick chat. Exploring while loaded can wait.
+    words: 5 in the observation, in neither: pack, full, stash, catch, quick, loaded, wait
+* ask 1 t2702  haul:2077 (Deliver materials to the hut site)  applied -> success (done)
+    why: I’m right by Thistle’s hut site and carrying wood and stone; delivering will help the build and free my full load. It’s neighborly and quick.
+    words: 11 in the observation, only in the notes: full, neighborly, in neither: quick
+* ask 2 t2721  build:2077 (Build the hut)  applied -> partial (no materials to work with (3 wood))
+    why: I’m right by Thistle’s hut and can add quick progress with the materials on site. It helps a neighbor and suits my energy right now.
+    words: 6 in the observation, only in the notes: neighbor, in neither: add, quick, helps, suits
+    carries out intention n11 written 1 ask earlier (t2702, by shared words, weak): "Deliver my wood and stone to Thistle’s hut site just south to help and lighten my load."
+  ask 3 t2965  gather:270 (Chopping wood to keep the fire going)  applied -> success (done)
+    why: The hut is stalled for lack of wood; I’ll chop some now so we can get back to building.
+    words: 4 in the observation, in neither: stalled, lack
+  ask 4 t3275  sleep:995 (Sleep at my lean-to)  applied
+    why: My energy is low, and I see Thistle’s hut is finished, so there’s no rush on hauling wood. I’ll nap at my lean-to to recover.
+    words: 8 in the observation, in neither: finished, rush, hauling, nap

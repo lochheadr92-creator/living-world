@@ -307,6 +307,11 @@ export function applyNoteUpdate(state: InhabitantState, update: NoteUpdate, obse
 }
 
 /** the notes as the model is shown them: everything but the oldest journal entries */
+/** a notebook with anything in it (an inhabitant with memory starts with an empty one, which is not yet notes) */
+export function hasNotes(notes: InhabitantNotes | null | undefined): notes is InhabitantNotes {
+  return !!notes && notes.goals.length + notes.intentions.length + notes.inferences.length + notes.uncertainties.length + notes.journal.length > 0;
+}
+
 export function notesForPrompt(notes: InhabitantNotes): InhabitantNotes {
   return { ...notes, journal: notes.journal.slice(-LIMITS.journalShown) };
 }

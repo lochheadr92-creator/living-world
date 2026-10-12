@@ -38,3 +38,16 @@ decisions, which is too short to ask more of it. It cost 13,108 output tokens ag
 scripted model, seed meadow, Pavel, tick 2400 to 3000) replays on the build that carries memory to its recorded state (`36f5b4dd`),
 with the warning that the sources moved (`--allow-source-drift`); without the flag it is refused, as designed. The baseline above
 was recorded under the same protocol and behaviour fingerprint (`22b83b7c:3780a61a`), so it replays the same way.
+
+## Reading a run: attribution, then the counterfactual re-ask (2026-10-12)
+
+```
+npx vite-node scripts/inhabit_attribute.ts -- experiments/memory-pavel-gpt5
+npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/memory-pavel-gpt5 --asks auto --repeats 3 --api openai --model gpt-5
+```
+
+The first writes `attribution.txt` beside the transcript (committed here for both Pavel runs): per decision, the reason words found
+only in the notes, and the noted goal or intention the chosen option carries out. The second puts the candidate decisions to the model
+again, with the notes and without, and writes `counterfactual.json` and `counterfactual.txt`; it costs asks x repeats x 2 calls
+and runs nothing in the world. On the memory run, attribution finds two weak candidates (asks 1 and 2) and none at the chop (ask 3),
+whose reason answered the fresh build result while the notes still said the site had materials: see `docs/INHABITANT.md`, section 8.
