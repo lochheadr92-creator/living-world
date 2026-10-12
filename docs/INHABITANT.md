@@ -168,6 +168,13 @@ records the memory version and the limits; a transcript kept under others is ref
 
 ## 5. Control, time, transcript and replay
 
+The observation's shape is pinned in the transcript header (`observationVersion`, since 2026-10-12): a replay builds that shape
+whatever the build's current one, because it rebuilds each ask's observation and refuses one that differs from the recording. So any
+change to what the observation says, or how it words it, is a new `OBSERVATION_VERSION` with the old shape kept under the old number
+(`observe.ts` branches on the version, as it already does for 1 against 2), and `observationVersionFor` says which version a new run
+under each protocol gets. A header without the field (the first transcripts) is read by its protocol. The recorded runs are the
+experiment's evidence; this is what keeps them replayable across changes to the prompt.
+
 ```
 tick t      stepPerson -> decide -> generateOptions -> rankOptions -> controller.choose(world, p, ctx, ranked)
               no answer    -> an ASK is recorded (exact observation, hash) and 'defer': the person stands this tick

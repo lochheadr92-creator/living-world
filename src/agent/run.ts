@@ -19,7 +19,7 @@ import { LIMITS, MEMORY_VERSION, emptyCounters, emptyNotes, notesForPrompt, note
 import { DEFAULT_BUDGET, ModelGate } from './model';
 import type { Budget, ModelClient } from './model';
 import type { ObserveOptions } from './observe';
-import { buildPrompt, parseProposal, protocolFor, protocolHasMemory } from './protocol';
+import { buildPrompt, parseProposal, protocolFor, protocolHasMemory, observationVersionFor } from './protocol';
 import { TranscriptController, newTranscript, simBehaviourFingerprint, verifyHeader } from './transcript';
 import type { Ask, Transcript } from './transcript';
 
@@ -100,6 +100,7 @@ export class LiveSession {
       model: { id: model.id, kind: model.kind, config: { ...model.config } },
       budget: { ...budget },
       observe: { ...(opts.observe ?? {}) },
+      observationVersion: observationVersionFor(protocolFor(this.memory)),
       ...(this.memory ? { memory: { version: MEMORY_VERSION, limits: { ...LIMITS } } } : {}),
     });
     this.ctrl = new TranscriptController(this.transcript, 'live');

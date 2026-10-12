@@ -30,6 +30,8 @@ import type { Belief, BuildingType, ItemKind, Items, NeedKey, Person, World } fr
 import { hyp } from '../sim/util';
 
 /** 2 adds the tick (`t`) to memory entries and the last result, so notes can refer to them; 1 is the shape protocol inhabitant/1 recorded */
+/** Bump when the observation's content or wording changes, and keep the old shape under the old version: replay rebuilds each ask's
+ * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names. */
 export const OBSERVATION_VERSION = 2;
 
 export interface ObservedOption {

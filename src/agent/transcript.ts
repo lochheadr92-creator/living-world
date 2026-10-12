@@ -18,7 +18,7 @@ import type { InhabitantNotes, Person, Settings, World } from '../sim/types';
 import { hashWorld, stepWorld } from '../sim/world';
 import { LIMITS, MEMORY_VERSION, applyNoteUpdate, notesHash } from './memory';
 import type { RevisionRecord } from './memory';
-import { observeInhabitant, observationHash } from './observe';
+import { OBSERVATION_VERSION, observeInhabitant, observationHash } from './observe';
 import type { InhabitantObservation, ObserveOptions } from './observe';
 import type { Budget } from './model';
 import { PROTOCOL_VERSIONS, observationVersionFor, protocolHasMemory } from './protocol';
@@ -107,6 +107,9 @@ export interface TranscriptHeader {
   model: { id: string; kind: string; config: Record<string, unknown> };
   budget: Budget;
   observe: ObserveOptions;
+  /** the shape of observation the model was shown (OBSERVATION_VERSION when recorded); a replay builds that shape, whatever the
+   * build's current one. Absent in transcripts recorded before this field: then the protocol says (observationVersionFor). */
+  observationVersion?: number;
   /** with memory: the schema version and limits the notes were kept under */
   memory?: { version: number; limits: Record<string, number> };
 }
@@ -209,7 +212,7 @@ export class TranscriptController implements ExternalController {
     }
     const attempt = this.attempt++;
     const header = this.transcript.header;
-    const observation = observeInhabitant(world, p, ctx, ranked, { ...header.observe, version: observationVersionFor(header.protocol) });
+    const observation = observeInhabitant(world, p, ctx, ranked, { ...header.observe, version: header.observationVersion ?? observationVersionFor(header.protocol) });
     const oh = observationHash(observation);
     const wh = hashWorld(world);
     const state = world.inhabitants?.[p.id];
@@ -346,6 +349,8 @@ export function verifyHeader(t: Transcript, world: World, opts: { sources?: stri
     if (!h.memory || h.memory.version !== MEMORY_VERSION) throw new ReplayDiverged(`the transcript kept notes under memory version ${h.memory?.version ?? 'none'}; this build keeps version ${MEMORY_VERSION}`);
     if (JSON.stringify(h.memory.limits) !== JSON.stringify(LIMITS)) throw new ReplayDiverged('the transcript kept notes under different limits from this build');
   }
+  const ov = h.observationVersion ?? observationVersionFor(h.protocol);
+  if (ov > OBSERVATION_VERSION) throw new ReplayDiverged(`the transcript's observations are of version ${ov}; this build makes up to ${OBSERVATION_VERSION}`);
   const fp = simBehaviourFingerprint();
   if (h.sim.behaviour !== fp) throw new ReplayDiverged(`the simulation behaves differently from the one that made the transcript (fingerprint ${fp}, recorded ${h.sim.behaviour})`);
   if (h.sim.sources && opts.sources && h.sim.sources !== opts.sources) {
