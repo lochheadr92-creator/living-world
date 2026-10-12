@@ -4,8 +4,8 @@
 //   npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/harsh6-tomas-gpt5/transcript.json --asks auto --repeats 3 --api openai --model gpt-5
 //   npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/memory-pavel-gpt5 --asks 3,4 --stub last    (no key: a scripted model)
 //
-// --asks auto takes the candidates attribution finds (words found only in the notes, or a noted goal carried out); --asks all, every
-// decision. --no-both skips the with-notes arm (cheaper; then a difference cannot be read against the model's own variance). Writes
+// --asks auto (or strong) takes the strong candidates attribution finds (the chosen option carries out a noted target); --asks weak adds
+// the weak ones (reason words only in the notes, pursuit by shared words); --asks all, every decision. --no-both skips the with-notes arm (cheaper; then a difference cannot be read against the model's own variance). Writes
 // counterfactual.json and counterfactual.txt beside the transcript (--out to put them elsewhere); an existing counterfactual.json is kept
 // unless --overwrite. Keys: OPENAI_API_KEY / ANTHROPIC_API_KEY, as for scripts/inhabit.ts.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -34,12 +34,14 @@ const t = JSON.parse(readFileSync(path, 'utf8')) as Transcript;
 
 const which = opt('asks', 'auto');
 const seqs =
-  which === 'auto'
-    ? candidateAsks(t)
-    : which === 'all'
-      ? t.asks.filter((a) => a.proposal).map((a) => a.seq)
-      : which.split(',').map((s) => Number(s.trim())).filter((n) => Number.isInteger(n));
-if (seqs.length === 0) throw new Error(which === 'auto' ? 'attribution found no candidate asks; name some with --asks' : 'no asks named');
+  which === 'auto' || which === 'strong'
+    ? candidateAsks(t, 'strong')
+    : which === 'weak'
+      ? candidateAsks(t, 'weak')
+      : which === 'all'
+        ? candidateAsks(t, 'all')
+        : which.split(',').map((s) => Number(s.trim())).filter((n) => Number.isInteger(n));
+if (seqs.length === 0) throw new Error(which === 'auto' || which === 'strong' ? 'attribution found no strong candidates; try --asks weak, or name some' : 'no asks named');
 
 const repeats = Number(opt('repeats', '3'));
 const both = !flag('no-both');

@@ -51,3 +51,16 @@ only in the notes, and the noted goal or intention the chosen option carries out
 again, with the notes and without, and writes `counterfactual.json` and `counterfactual.txt`; it costs asks x repeats x 2 calls
 and runs nothing in the world. On the memory run, attribution finds two weak candidates (asks 1 and 2) and none at the chop (ask 3),
 whose reason answered the fresh build result while the notes still said the site had materials: see `docs/INHABITANT.md`, section 8.
+
+## harsh6-tomas-gpt5: six harsh days, GPT-5 with memory (run 2026-10-11, kept 2026-10-12)
+
+Seed meadow, harsh, Tomas (#981), tick 2400 to 16800 (`--days 6`), `--memory`, `gpt-5`, timeout 120 s, 16,000 output tokens.
+`transcript.json` (3.3 MB), the runner's `report.txt`, the operator's `replay.txt`, and `attribution.txt`. Replayed again on the
+cloud container to the recorded state `23ac03a0` (95 decisions, 8 overrides, 22 s). Five rate limits at day 6.2 tripped the gate's
+breaker and the engine drove the last two thirds of a day; the fix is in the branch. Attribution: the notes named a target at 58
+decisions and the choice was one of them at 6; six strong candidates (asks 24, 51, 59, 60, 75, 79). The reading is in
+`docs/INHABITANT.md`, section 8. To run the counterfactual on them:
+
+```
+npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/harsh6-tomas-gpt5 --asks auto --repeats 3 --api openai --model gpt-5
+```

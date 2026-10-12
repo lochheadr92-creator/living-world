@@ -1,0 +1,301 @@
+attribution: Tomas, inhabitant/2 (notes): 82 decisions, 6 strong candidates for the counterfactual re-ask (*), 65 weak (~)
+  strong: the chosen option carries out a noted goal or intention by the target it names; weak: reason words found only in the notes (65) or a pursuit by shared words (45); 151 reason words found in neither (the model's own wording)
+  plans: the notes named a target at 58 decisions; the choice was one of the named targets at 6
+
+  ask 0 t2523  gather:808 (Picking berries)  applied -> success (done)
+    why: The nearby bush still has berries, and stocking food for Dov and me is prudent. After the fishing spot dispute, foraging is the safer bet right now.
+    words: 7 in the observation, in neither: food, prudent, dispute, safer, bet
+~ ask 1 t2615  gather:810 (Picking berries)  applied -> success (done)
+    why: Bush 808 is empty, but 810 still has a berry and is close. I’ll grab it to keep Birch stocked.
+    words: 6 in the observation, in neither: grab
+    carries out intention n3 written 1 ask earlier (t2523, by shared words, weak): "Pick berries at bush 808 nearby."
+~ ask 2 t2657  gather:812 (Picking berries)  applied -> success (done)
+    why: That bush still has berries and our lean-to has no food. I’ll stock a little more while it’s close.
+    words: 5 in the observation, only in the notes: food
+    carries out intention n3 written 1 ask earlier (t2523, by shared words, weak): "Pick berries at bush 810 nearby to stock Birch."
+~ ask 3 t2690  gather:811 (Picking berries)  applied -> success (done)
+    why: There’s one berry left at bush 811 and we need food for Birch; wood and water aren’t urgent. I’ll grab it before someone else does.
+    words: 7 in the observation, only in the notes: food, urgent, grab, in neither: aren
+    carries out intention n3 written 1 ask earlier (t2523, by shared words, weak): "Pick berries at bush 812 nearby to stock Birch."
+~ ask 4 t2723  deposit:980:food (Bring food home)  applied -> success (done)
+    why: Nearby berry bushes are picked clean. I’ll bring the berries home to stock Birch and free some carrying space.
+    words: 10 in the observation, only in the notes: bushes, space
+  ask 5 t2781  haul:1992 (Deliver materials to the hut site)  applied -> success (done)
+    why: I’ve got a spare wood to offload, and helping Linden’s hut is useful while food needs are fine.
+    words: 5 in the observation, in neither: spare, offload, helping, useful
+  ask 6 t2853  explore (Look for timber)  applied -> success (done)
+    why: The hut nearby needs materials. I’ll scout for good timber or stone while I’m neither hungry nor thirsty.
+    words: 6 in the observation, in neither: scout, neither, hungry
+~ ask 7 t3251  gather:820 (Picking berries)  applied -> interrupted (danger nearby)
+    why: Plenty of berries are just to the north-west; I’ll pick some to keep Dov and me fed and to stock Birch.
+    words: 6 in the observation, only in the notes: plenty, fed, stock
+  ask 8 t3596  sleep:980 (Sleep at my lean-to)  applied -> interrupted (a more urgent need (hunger))
+    why: It’s dark and my energy is low; I’ll sleep at my lean-to to recover and stay near my stores.
+    words: 7 in the observation, in neither: stay
+~ ask 9 t3991  sleep:980 (Sleep at my lean-to)  applied -> partial (too cold to sleep)
+    why: Cold, rainy night and my lean-to is right here. Better to sleep now to recover energy; hunger is only low and we have some food stored.
+    words: 8 in the observation, only in the notes: better, food, in neither: cold, rainy
+    carries out intention n12 written 1 ask earlier (t3596, by shared words, weak): "Sleep at Birch lean-to to recover energy for tomorrow."
+  ask 10 t4324  warm:951 (Warm up at the fire)  applied -> success (done)
+    why: I’m too cold and couldn’t sleep at my lean-to; the big campfire nearby is well-fueled, so I’ll warm up first.
+    words: 5 in the observation, in neither: couldn, fueled
+~ ask 11 t4633  warm:951 (Warm up at the fire)  applied -> interrupted (a more urgent need (hunger))
+    why: It’s freezing rain and I’m still cold; another spell by the big fire will bring my warmth up before I set out.
+    words: 5 in the observation, only in the notes: freezing, in neither: spell, bring
+    carries out intention n14 written 1 ask earlier (t4324, by shared words, weak): "Warm up at the campfire before sleeping."
+  ask 12 t4872  gather:809 (Picking berries)  applied -> success (done)
+    why: I just ate from home stores and Birch likely has no berries now; the bush 2 tiles east has 4 and I’m fine on thirst and warmth.
+    words: 10 in the observation
+~ ask 13 t4979  socialize:964:offer (Offer berries to Theo)  applied -> failed (Theo was already talking to someone)
+    why: Theo looks hungry; sharing berries helps him and frees space so I can gather more for Birch.
+    words: 6 in the observation, only in the notes: space, in neither: sharing, helps, frees
+~ ask 14 t5044  eat:0 (Eat what I am carrying)  applied -> success (done)
+    why: I’m at full capacity and need to free a slot quickly so I can gather from the rich berry bushes to the south. Eating a berry also keeps my strength up.
+    words: 6 in the observation, only in the notes: capacity, quickly, bushes, strength, in neither: full, slot, rich, keeps
+~ ask 15 t5084  drink:1000130 (Go and drink at the water)  applied -> success (done)
+    why: My thirst is low and the water is right nearby. I’ll drink now, then head south to gather berries for Birch.
+    words: 8 in the observation, only in the notes: head
+~ ask 16 t5137  socialize:974:trade:berries (Offer Thea a swap: wood for berries)  applied -> failed (Thea was too busy to stop)
+    why: Thea is close and has berries; trading my spare wood is faster than walking to bushes and helps restock Birch for Dov and me.
+    words: 6 in the observation, only in the notes: spare, bushes, restock, in neither: trading, faster, walking, helps
+~ ask 17 t5251  socialize:987:trade:berries (Offer Wes a swap: wood for berries)  applied -> unknown
+    why: Nearby bushes are bare, and Wes has berries and is close. Trading wood now is the quickest way to restock Birch.
+    words: 4 in the observation, only in the notes: bushes, quickest, restock, in neither: bare, close, trading
+    carries out intention n21 written 1 ask earlier (t5137, by shared words, weak): "Offer Thea wood for berries to restock Birch now; if that fails, pick from bush 812."
+~ ask 18 t5428  gather:805 (Picking berries)  applied -> failed (nothing left)
+    why: Wes couldn’t trade and food is needed at Birch. The NW bush is ripe and close, so I’ll pick berries to restock.
+    words: 7 in the observation, only in the notes: couldn, food, needed, restock, in neither: ripe
+    carries out intention n21 written 1 ask earlier (t5137, by shared words, weak): "Offer Wes wood for berries to restock Birch now; if that fails, try Rhea or Zed next."
+~ ask 19 t5497  gather:807 (Picking berries)  applied -> success (done)
+    why: The nearby bush still has berries; it’s the quickest food to grab and restock Birch.
+    words: 3 in the observation, only in the notes: quickest, food, restock, in neither: grab
+    carries out intention n26 written 1 ask earlier (t5428, by shared words, weak): "Pick berries at bush 805 to restock Birch, then drop them at Birch lean-to."
+~ ask 20 t5529  gather:847 (Gathering wild grain)  applied -> success (done)
+    why: The berry bushes near me are empty, but there’s wild grain close by. I have carry space and stocking food for Birch is my priority.
+    words: 7 in the observation, only in the notes: bushes, space, food, in neither: close, priority
+~ ask 21 t5594  gather:846 (Gathering wild grain)  applied -> failed (nothing left)
+    why: The wild grain two tiles south-east still has heads; I’ll pick it now and then take the grain home to stock Birch.
+    words: 9 in the observation, in neither: heads
+    carries out intention n26 written 1 ask earlier (t5428, by shared words, weak): "Gather wild grain at 847 and drop it at Birch lean-to."
+~ ask 22 t5610  gather:845 (Gathering wild grain)  applied -> success (done)
+    why: Closest grain patch still has some left and I have one free slot; I want to stock Birch. Quick to grab before others take it.
+    words: 6 in the observation, only in the notes: quick, in neither: closest, patch, slot, grab
+    carries out intention n26 written 1 ask earlier (t5428, by shared words, weak): "Gather wild grain at 846 and drop it at Birch lean-to."
+~ ask 23 t5638  fuel:951 (Add wood to the fire)  applied -> success (done)
+    why: My pack is full and food is the priority to bring home. Adding my wood to the fire frees space without eating our stores, and the fire is close.
+    words: 4 in the observation, only in the notes: pack, full, food, space, eating, in neither: priority, bring, adding, frees, without, close
+* ask 24 t5763  gather:831 (Picking fruit)  applied -> partial (nothing left)
+    why: I’ve got room to carry more and fruit is plentiful to the south. I’ll pick fruit now to stock our Birch lean-to for Dov and me.
+    words: 8 in the observation, only in the notes: stock, in neither: plentiful
+    carries out intention n26 written 1 ask earlier (t5428, by the target it names): "Free space by fueling the campfire, then pick fruit at 831 and later stock Birch lean-to."
+~ ask 25 t5951  gather:833 (Picking fruit)  applied -> success (done)
+    why: 831 is empty; 833 still has fruit and I have two carry slots. I’ll grab fruit now before dark to stock Birch and eat later, then rest.
+    words: 6 in the observation, only in the notes: grab, stock, in neither: slots, dark
+    carries out intention n26 written 1 ask earlier (t5428, by shared words, weak): "Pick fruit at 831 now, then stock Birch lean-to."
+~ ask 26 t6109  sleep:951 (Sleep at the fire)  applied -> interrupted (a more urgent need (thirst))
+    why: I’m cold and exhausted in the rain, and the fire is close and well-fueled. Sleeping there will restore my energy and warmth safely.
+    words: 5 in the observation, only in the notes: restore, in neither: cold, exhausted, close, fueled, safely
+    carries out intention n32 written 1 ask earlier (t5951, by shared words, weak): "After picking, rest at the fire to recover energy."
+~ ask 27 t7113  deposit:980:food (Bring food home)  applied -> success (done)
+    why: My pack is full and our lean-to has no food; I’ll stock Birch now to feed Dov and free carry space.
+    words: 6 in the observation, only in the notes: pack, full, stock, free, space
+    carries out intention n34 written 1 ask earlier (t6109, by shared words, weak): "After sleeping, carry food to stock Birch lean-to."
+  ask 28 t7230  warm:951 (Warm up at the fire)  applied -> success (done)
+    why: It’s a freezing storm and my warmth is low; the campfire is close and well-fueled. I’ll warm up first before helping others or fishing.
+    words: 7 in the observation, in neither: freezing, close, fueled, helping
+~ ask 29 t7503  socialize:956:offer (Offer fruit to Nora)  applied -> unknown
+    why: Nora is a hungry child right beside the fire, and I can spare a fruit to help her and strengthen our ties.
+    words: 6 in the observation, only in the notes: spare, ties, in neither: beside, strengthen
+    carries out intention n38 written 1 ask earlier (t7230, by shared words, weak): "After warming, offer one fruit to the hungriest child nearby."
+~ ask 30 t7577  socialize:964:offer (Offer fruit to Theo)  applied -> failed (Theo had more pressing needs)
+    why: Theo is hungry and thirsty; I can spare a fruit to help right now. It also builds goodwill before I go forage.
+    words: 7 in the observation, only in the notes: spare, in neither: goodwill
+    carries out intention n38 written 1 ask earlier (t7230, by shared words, weak): "Offer one fruit to Nora now, then check who else still needs food."
+~ ask 31 t7588  socialize:987:offer (Offer fruit to Wes)  applied -> failed (Wes had more pressing needs)
+    why: Wes is a hungry child nearby and I can spare a fruit. Helping him now fits my plan to aid neighbors before foraging.
+    words: 5 in the observation, only in the notes: spare, helping, neighbors, in neither: fits, plan, aid
+    carries out intention n38 written 1 ask earlier (t7230, by shared words, weak): "Offer one fruit to Theo now, then check who else still needs food."
+~ ask 32 t7591  socialize:960:offer (Offer fruit to Juno)  applied -> failed (Juno had more pressing needs)
+    why: Juno is nearby and looks hungry, and I have fruit to share. Wes declined help, so I’ll help the next neighbor in need.
+    words: 8 in the observation, only in the notes: share, neighbor
+    carries out intention n38 written 1 ask earlier (t7230, by shared words, weak): "Offer one fruit to Wes now, then check who else still needs food."
+~ ask 33 t7593  socialize:959:offer (Offer fruit to Kaia)  applied -> failed (Kaia had more pressing needs)
+    why: Kaia looks hungry and not thirsty; sharing a fruit now should help and build goodwill before I go gather berries.
+    words: 9 in the observation, only in the notes: sharing, in neither: goodwill
+    carries out intention n38 written 1 ask earlier (t7230, by shared words, weak): "Offer one fruit to Juno now, then check who else still needs food."
+~ ask 34 t7598  gather:809 (Picking berries)  applied -> success (done)
+    why: My food offers keep getting declined and I'm only slightly hungry; I'll quickly pick the nearest berries to stock Birch and share later.
+    words: 7 in the observation, only in the notes: quickly, stock, share, in neither: getting, slightly, nearest
+    carries out intention n41 written 5 asks earlier (t7503, by shared words, weak): "After helping, pick berries to restock Birch and share."
+~ ask 35 t7740  deposit:980:food (Bring food home)  applied -> success (done)
+    why: I’ll stock Birch now to keep Dov fed and free up carry space, then head east to gather more berries.
+    words: 7 in the observation, only in the notes: stock, fed, space, head
+~ ask 36 t7803  socialize:956:offer (Offer berries to Nora)  applied -> unknown
+    why: Nora looks hungry and not thirsty; I have berries to share. Helping a child by the fire comes first before another quick berry run.
+    words: 8 in the observation, only in the notes: share, quick, run, in neither: helping, comes
+~ ask 37 t7897  gather:811 (Picking berries)  applied -> success (done)
+    why: I’m warm and fine on water. The nearest berry bush east is quickest to pick so I can restock Birch and share with the hungry.
+    words: 8 in the observation, only in the notes: quickest, restock, share, in neither: nearest
+    carries out intention n41 written 3 asks earlier (t7503, by shared words, weak): "Pick nearby berries east to restock Birch and share."
+  ask 38 t8005  eat:0 (Eat what I am carrying)  applied -> success (done)
+    why: My hunger is critical; eating what I’m carrying is the fastest way to steady myself so I can keep gathering for Birch and Dov.
+    words: 7 in the observation, in neither: fastest, steady
+~ ask 39 t8055  gather:812 (Picking berries)  applied -> success (done)
+    why: Berries are close and plentiful, and several nearby (and Dov) need food. My needs are fine, so I’ll pick from bush 812 to restock Birch and share.
+    words: 7 in the observation, only in the notes: food, restock, share, in neither: close, plentiful, several
+    carries out intention n41 written 5 asks earlier (t7503, by shared words, weak): "Pick nearby berries east to restock Birch and share."
+  ask 40 t8196  socialize:990:warn (Warn Viktor about the wolf)  applied -> unknown
+    why: A wolf was just seen east; Viktor is the closest in that direction. I’ll warn him to keep him safe before anything else.
+    words: 7 in the observation, in neither: closest
+~ ask 41 t8285  drink:1000130 (Go and drink at the water)  applied -> success (done)
+    why: My thirst is low and water is close; I’ll drink now to stay sharp in the rain, then continue warnings and stocking.
+    words: 6 in the observation, only in the notes: stay, warnings, in neither: close, sharp, continue
+~ ask 42 t8391  socialize:959:warn (Warn Kaia about the wolf)  applied -> failed (could not find them)
+    why: Kaia is close and it’s dusk with a wolf about; a quick warning first, then I’ll go warm by the fire.
+    words: 6 in the observation, only in the notes: quick, warning
+    carries out goal g50 written 2 asks earlier (t8196, by shared words, weak): "Keep nearby folk safe from the wolf this evening."
+~ ask 43 t8433  visit:954 (Bring berries to Rhea)  applied -> failed (Rhea was not where I expected)
+    why: Rhea looked hungry just now and I have berries to share. I’ll warm by the fire right after.
+    words: 6 in the observation, only in the notes: share
+    carries out intention n54 written 1 ask earlier (t8391, by shared words, weak): "After warming, bring berries to Rhea."
+~ ask 44 t8486  sleep:951 (Sleep at the fire)  applied -> success (rested)
+    why: I’m cold and low on energy in the rain. Sleeping at the fire will warm me and help me recover safely.
+    words: 8 in the observation, only in the notes: cold, in neither: safely
+    carries out intention n53 written 1 ask earlier (t8285, by shared words, weak): "If I see Kaia, warn about the wolf, then warm at the fire and restock Birch."
+  ask 45 t9135  socialize:991:offer (Offer berries to Zed)  applied -> unknown
+    why: Zed is a hungry child nearby and I’m carrying berries. I’ll help him first, then bring any leftover food home.
+    words: 9 in the observation, in neither: leftover
+~ ask 46 t9268  deposit:980:food (Bring food home)  applied -> success (done)
+    why: I can’t offer Zed right now, so I’ll get these berries safely into Birch for Dov and me. Then I can warm by the fire or share if I meet Zed again.
+    words: 7 in the observation, only in the notes: share, meet, in neither: safely
+    carries out intention n54 written 1 ask earlier (t8391, by shared words, weak): "Offer berries to Zed now; then bring any leftovers home to Birch and warm if needed."
+~ ask 47 t9356  socialize:975:offer (Offer berries to Corin)  applied -> unknown
+    why: Corin is a hungry child by the fire, and I have berries to spare. Helping them now fits my goals, and I can warm up right after.
+    words: 6 in the observation, only in the notes: goals, in neither: spare, helping, fits
+    carries out intention n54 written 1 ask earlier (t8391, by shared words, weak): "Bring the berries home to Birch now, then warm by the fire; offer some to Zed if still nearby after."
+~ ask 48 t9464  warm:951 (Warm up at the fire)  applied -> success (done)
+    why: I’m cold in the dawn rain; warming at the campfire first will keep me safe. Then I can share berries and warn Kaia if I cross paths with her.
+    words: 9 in the observation, only in the notes: share, cross, paths
+    carries out intention n53 written 4 asks earlier (t8285, by shared words, weak): "If I see Kaia near the fire, warn about the wolf; then restock Birch."
+~ ask 49 t9713  socialize:954:offer (Offer berries to Rhea)  applied -> failed (Rhea had more pressing needs)
+    why: Rhea is right here and looks hungry; I have berries to share. Helping her now supports my aim to look after nearby folk.
+    words: 5 in the observation, only in the notes: share, folk, in neither: helping, supports, aim
+    carries out intention n54 written 1 ask earlier (t8391, by shared words, weak): "Warm up at the fire now; then offer berries to nearby hungry (Corin/Nora/Zeke) and warn Kaia about the wolf if I can."
+~ ask 50 t9716  socialize:960:offer (Offer berries to Juno)  applied -> unknown
+    why: Juno is right beside me and looks hungry. I can spare my berries to help now before restocking Birch.
+    words: 6 in the observation, only in the notes: restocking, in neither: beside, spare
+    carries out intention n54 written 1 ask earlier (t8391, by shared words, weak): "Offer my berries to hungry Rhea now; then restock Birch and warn Kaia if I see her."
+* ask 51 t9786  gather:812 (Picking berries)  applied -> partial (someone else is already taking it)
+    why: I’m fine on needs and there’s a ripe bush east; I’ll pick to stock Birch and have more to share with the hungry by the fire.
+    words: 8 in the observation, only in the notes: stock, share
+    carries out intention n41 written 6 asks earlier (t7503, by the target it names): "Pick nearby berries (808/811/812) to restock Birch and share."
+~ ask 52 t9897  eat:0 (Eat what I am carrying)  applied -> success (done)
+    why: My hunger is critical; eating what I carry is fastest. Then I can keep gathering and stock Birch for Dov and me.
+    words: 7 in the observation, only in the notes: stock, in neither: fastest
+~ ask 53 t9937  rest:home:980 (Shelter at the lean-to)  applied -> success (done)
+    why: I’m cold and it’s raining; my lean-to is the closest shelter to warm up quickly before doing more.
+    words: 4 in the observation, only in the notes: closest, quickly, in neither: raining
+~ ask 54 t10227  drink:1000149 (Go and drink at the water)  applied -> success (done)
+    why: My thirst is low and the nearest water is close. I’ve sheltered already, so I’ll drink now before foraging.
+    words: 6 in the observation, only in the notes: nearest, close, in neither: already
+    carries out intention n41 written 1 ask earlier (t7503, by shared words, weak): "Shelter at Birch to warm, then drink at the shore; after, pick at 812 to stock Birch and share with the hungry."
+~ ask 55 t10327  gather:945 (Fishing)  applied -> partial (someone else is already taking it)
+    why: The fishing spot just east has fish now; I can quickly bring in food to store or share with the hungry without dipping into our home stores.
+    words: 8 in the observation, only in the notes: quickly, bring, food, share, in neither: without, dipping
+    carries out intention n36 written 28 asks earlier (t7113, by shared words, weak): "After stocking Birch, fish at the nearby spot to add fresh food."
+~ ask 56 t10482  gather:808 (Picking berries)  applied -> success (done)
+    why: The near fishing spot is empty and contested. I’ll pick the closest berries to stock Birch and share, keeping my fish for later or others.
+    words: 7 in the observation, only in the notes: closest, stock, share, others, in neither: contested, keeping
+    carries out intention n54 written 5 asks earlier (t8391, by shared words, weak): "If I meet Juno again, offer berries from the new pick; warn Kaia if I see her."
+~ ask 57 t10577  gather:809 (Picking berries)  applied -> success (done)
+    why: Closest bush with berries; I’ll stock Birch and have food to share.
+    words: 4 in the observation, only in the notes: closest, stock, share
+    carries out intention n54 written 6 asks earlier (t8391, by shared words, weak): "If I meet Juno again, offer berries from the new pick; warn Kaia if I see her."
+~ ask 58 t10640  deposit:980:food (Bring food home)  applied -> success (done)
+    why: I’m nearly at carrying capacity and it’s raining; stocking Birch with the fish and berries feeds Dov and frees space to gather from 811/810.
+    words: 6 in the observation, only in the notes: stocking, space, in neither: nearly, capacity, raining, feeds, frees
+* ask 59 t10699  gather:811 (Picking berries)  applied -> success (done)
+    why: I'm warm enough and the nearby bush still has berries; I'll stock Birch and keep some to share.
+    words: 4 in the observation, only in the notes: enough, stock, share
+    carries out intention n36 written 1 ask earlier (t7113, by the target it names): "Skip empty/contested fish (945); pick nearby berries (811 then 810) to stock Birch and share."
+* ask 60 t10779  gather:810 (Picking berries)  applied -> success (done)
+    why: Bush 810 still has berries and I’m warm enough to keep working. This will help stock Birch for Dov and sharing.
+    words: 6 in the observation, only in the notes: enough, stock, sharing, in neither: working
+    carries out intention n36 written 2 asks earlier (t7113, by the target it names): "Skip empty/contested fish (945); pick nearby berries (811 then 810) to stock Birch and share."
+~ ask 61 t10861  rest:home:980 (Shelter at the lean-to)  applied -> success (done)
+    why: I’m cold in the rain and my lean-to is closest; shelter will warm me up safely. My pack is full anyway, so I’ll warm first before deciding next steps.
+    words: 6 in the observation, only in the notes: closest, in neither: safely, pack, anyway, deciding, steps
+    carries out intention n41 written 1 ask earlier (t7503, by shared words, weak): "Shelter at Birch if I get cold; then pick at 810 to stock Birch and share."
+~ ask 62 t11159  warm:951 (Warm up at the fire)  applied -> success (done)
+    why: I’m cold in the rain; the campfire is close and will warm me faster than staying in the lean-to.
+    words: 5 in the observation, only in the notes: close, in neither: faster, staying
+    carries out intention n53 written 18 asks earlier (t8285, by shared words, weak): "If I see Kaia near the fire, warn about the wolf; then restock Birch."
+~ ask 63 t11433  eat:0 (Eat what I am carrying)  applied -> success (done)
+    why: I’m starving and already carrying berries. Eating now will ease the hunger and free a slot so I can gather more to restock Birch and share.
+    words: 7 in the observation, only in the notes: restock, share, in neither: starving, already, eating, slot
+~ ask 64 t11503  socialize:982:warn (Warn Dov about the wolf)  applied -> unknown
+    why: Dov is my child and right here; warning him about the wolf keeps him safest first.
+    words: 3 in the observation, in neither: warning, keeps, safest
+    carries out goal g1 written 64 asks earlier (t2523, by shared words, weak): "Keep Dov and me fed; stock Birch lean-to."
+~ ask 65 t11576  socialize:959:chat (Chat with Kaia)  applied -> unknown
+    why: Kaia is right here by the fire, and a wolf was just seen to the east. I’ll warn her now to help keep folks safe before doing anything else.
+    words: 8 in the observation, only in the notes: folks
+    carries out intention n53 written 21 asks earlier (t8285, by shared words, weak): "If I see Kaia near the fire, warn about the wolf; then restock Birch."
+~ ask 66 t11654  socialize:994:chat (Chat with Alma)  applied -> unknown
+    why: I want to warn Alma about the wolf and check on her by the fire. My thirst isn’t urgent, so talking now makes sense.
+    words: 5 in the observation, only in the notes: warn, urgent, in neither: want, check, isn, makes, sense
+    carries out intention n62 written 1 ask earlier (t11576, by shared words, weak): "After Kaia, warn Alma by the fire."
+~ ask 67 t11726  socialize:978:chat (Chat with Delia)  applied -> unknown
+    why: Delia’s right here by the fire; I’ll warn her about the wolf and share news while Alma is busy.
+    words: 6 in the observation, only in the notes: warn, in neither: busy
+~ ask 68 t11805  warm:951 (Warm up at the fire)  applied -> interrupted (a more urgent need (thirst))
+    why: I’ll stay by the fire near Alma so I can warn her about the wolf and keep warm in the cold rain.
+    words: 6 in the observation, only in the notes: stay, warn
+~ ask 69 t12020  rest:home:980 (Shelter at the lean-to)  applied -> success (done)
+    why: Cold rainy dawn and I’m a bit chilled and low on energy; I’ll get under my lean-to to warm up before gathering or helping others.
+    words: 6 in the observation, only in the notes: low, others, in neither: rainy, chilled, helping
+  ask 70 t12351  gather:4525 (Chopping wood to repair the lean-to)  applied -> success (done)
+    why: It’s raining and our lean-to is only at 49%; I’ll chop nearby wood to get repairs done while I’m still warm enough.
+    words: 5 in the observation, in neither: raining, enough
+~ ask 71 t12459  gather:4525 (Chopping wood to repair the lean-to)  applied -> success (done)
+    why: Quickly chop the nearby tree for wood so I can repair our Birch lean-to in this rain.
+    words: 7 in the observation, in neither: quickly
+    carries out goal g68 written 1 ask earlier (t12351, by shared words, weak): "Repair the Birch lean-to soon."
+~ ask 72 t12516  repair:980 (Repair the lean-to)  applied -> success (done)
+    why: I just cut wood and our Birch lean-to is in the rain; better shore it up now before I tire further.
+    words: 5 in the observation, only in the notes: tire, in neither: cut, better, further
+    carries out goal g68 written 2 asks earlier (t12351, by shared words, weak): "Repair the Birch lean-to soon."
+~ ask 73 t12733  sleep:980 (Sleep at my lean-to)  applied -> success (rested)
+    why: Energy is very low and it’s raining; our lean-to is just repaired and close. I’ll sleep there to recover before doing more.
+    words: 6 in the observation, in neither: raining, close
+    carries out intention n72 written 1 ask earlier (t12516, by shared words, weak): "After repairing, rest briefly at the lean-to if energy still feels low."
+~ ask 74 t13416  warm:951 (Warm up at the fire)  applied -> success (done)
+    why: Cold rain at night—I’ll warm up by the fire and check on Dov and the others nearby.
+    words: 6 in the observation, only in the notes: check, others
+* ask 75 t13683  gather:811 (Picking berries)  applied -> success (done)
+    why: I’m warm and rested, and 811 has berries close by. I’ll pick some to restock Birch and help any hungry folk, then head back to the fire to warm.
+    words: 7 in the observation, only in the notes: rested, restock, folk, head, in neither: close
+    carries out intention n75 written 1 ask earlier (t13416, by the target it names): "Warm at the campfire, check on Dov, then warn anyone awake; pick at 811 if warmth allows."
+~ ask 76 t13807  warm:951 (Warm up at the fire)  applied -> interrupted (a more urgent need (thirst))
+    why: I’m cold in the night rain; the campfire will warm me quickly so I can then share berries with the hungry.
+    words: 7 in the observation, only in the notes: share, in neither: quickly
+    carries out intention n75 written 1 ask earlier (t13416, by shared words, weak): "Pick berries at 811 now to restock Birch and share; then return to the fire to warm."
+~ ask 77 t13992  warm:951 (Warm up at the fire)  applied -> interrupted (a more urgent need (hunger))
+    why: I’m cold in the storm. The fire will warm me quickly, and I can look in on Dov and others there.
+    words: 5 in the observation, only in the notes: cold, others, in neither: quickly
+    carries out intention n75 written 1 ask earlier (t13416, by shared words, weak): "Warm at the campfire now, then offer berries to Delia or others in need; later restock Birch."
+~ ask 78 t14081  warm:951 (Warm up at the fire)  applied -> success (done)
+    why: My warmth is critical and the campfire will heat me fastest. Dov is there; I can check on him while I warm.
+    words: 5 in the observation, only in the notes: check, in neither: heat, fastest
+    carries out intention n75 written 2 asks earlier (t13416, by shared words, weak): "Warm at the campfire now, then offer berries to Delia or others in need; later restock Birch."
+* ask 79 t14380  gather:809 (Picking berries)  applied -> success (done)
+    why: Many nearby look hungry; I’ll grab nearby berries to share and to restock Birch. I’m warm enough for a quick run and can return to the fire after.
+    words: 6 in the observation, only in the notes: share, restock, enough, quick, in neither: grab, run, return
+    carries out intention n70 written 3 asks earlier (t12351, by the target it names): "If berries remain on 808/809/810/812, pick a little to stock Birch and share."
+~ ask 80 t14540  warm:951 (Warm up at the fire)  applied -> partial (the fire went out)
+    why: I’m cold in a storm and the fire is close with plenty of fuel. I’ll warm first, then share berries with Dov and the other hungry children.
+    words: 9 in the observation, only in the notes: share, in neither: close, plenty
+~ ask 81 t14870  socialize:956:offer (Offer berries to Nora)  applied -> failed (Nora was too busy to stop)
+    why: The fire went out and Nora is hungry right beside me. I can spare berries now to help her before gathering more.
+    words: 6 in the observation, in neither: beside, spare
+    carries out intention n54 written 16 asks earlier (t8391, by shared words, weak): "If I meet Juno again, offer berries from the new pick; keep warning others."

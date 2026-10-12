@@ -2,7 +2,7 @@
 // transcript, which decisions rested on the notes, and then test that at the model's price with the pairing kept exact.
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { attribute, candidateAsks, contentWords, mentions, renderAttribution } from '../src/agent/attribute';
+import { attribute, candidateAsks, contentWords, mentions, notedIds, renderAttribution } from '../src/agent/attribute';
 import { counterfactual, majority, renderCounterfactual } from '../src/agent/counterfactual';
 import { stubModel } from '../src/agent/model';
 import { observationFromPrompt } from '../src/agent/protocol';
@@ -14,6 +14,7 @@ import { natural, run } from './helpers/util';
 const DAY = 2400;
 const memoryRun = (): Transcript => JSON.parse(readFileSync('experiments/memory-pavel-gpt5/transcript.json', 'utf8')) as Transcript;
 const baselineRun = (): Transcript => JSON.parse(readFileSync('experiments/baseline-pavel-gpt5/transcript.json', 'utf8')) as Transcript;
+const tomasRun = (): Transcript => JSON.parse(readFileSync('experiments/harsh6-tomas-gpt5/transcript.json', 'utf8')) as Transcript;
 
 describe('attribution', () => {
   it('reads content words and tolerates inflection', () => {
@@ -21,9 +22,10 @@ describe('attribution', () => {
     expect(mentions('"label":"chopping wood to keep the fire going"', 'chop')).toBe(true);
     expect(mentions('"label":"chopping wood"', 'chopped')).toBe(true);
     expect(mentions('the site is waiting for materials', 'stalled')).toBe(false);
+    expect(notedIds('Pick berries at bush 808, then help at the hut [place:2077]; at t2523 Dov was 88% sound')).toEqual(['2077', '808']);
   });
 
-  it('on the recorded memory run: five decisions, two candidates, and the wood-chopping one rested on the observation, not the notes', () => {
+  it('on the recorded memory run: five decisions, two weak candidates and no strong one; the wood-chopping one rested on the observation', () => {
     const a = attribute(memoryRun());
     expect(a.memory).toBe(true);
     expect(a.summary.decisions).toBe(5);
@@ -34,19 +36,38 @@ describe('attribution', () => {
     expect(build.pursues!.kind).toBe('intention');
     expect(build.pursues!.via).toBe('words');
     expect(build.pursues!.asksAgo).toBe(1);
+    expect(build.candidate).toBe(false);
+    expect(build.weak).toBe(true);
     expect(a.asks.find((x) => x.chosen === 'haul:2077')!.notesOnly.length).toBeGreaterThan(0);
-    expect(a.summary.candidates).toBe(2);
-    expect(candidateAsks(memoryRun())).toEqual([1, 2]);
+    expect(a.summary.candidates).toBe(0);
+    expect(a.summary.weak).toBe(2);
+    expect(candidateAsks(memoryRun())).toEqual([]);
+    expect(candidateAsks(memoryRun(), 'weak')).toEqual([1, 2]);
+    expect(candidateAsks(memoryRun(), 'all')).toEqual([0, 1, 2, 3, 4]);
     // the chop at ask 3: its reason ("stalled for lack of wood") answers the fresh partial-build result; the notes it was shown still
     // said the site had materials, so nothing in the reason is the notes' and the chosen option carries out no noted intention
     const chop = a.asks.find((x) => x.chosen === 'gather:270')!;
     expect(chop.notesOnly).toEqual([]);
     expect(chop.pursues).toBeNull();
     expect(chop.candidate).toBe(false);
+    expect(chop.weak).toBe(false);
     const text = renderAttribution(a);
-    expect(text).toMatch(/5 decisions, 2 candidates/);
-    expect(text).toMatch(/\* ask 2 /);
+    expect(text).toMatch(/5 decisions, 0 strong candidates .*, 2 weak/);
+    expect(text).toMatch(/~ ask 2 /);
     expect(text).toMatch(/carries out intention n11/);
+  });
+
+  it('on the six-day Tomas run: the notes named a target at 58 decisions and the choice was one of them at 6, the strong candidates', () => {
+    const a = attribute(tomasRun());
+    expect(a.summary.decisions).toBe(82);
+    expect(a.summary.plans).toEqual({ named: 58, followed: 6 });
+    expect(candidateAsks(tomasRun())).toEqual([24, 51, 59, 60, 75, 79]);
+    for (const seq of candidateAsks(tomasRun())) {
+      const x = a.asks.find((y) => y.seq === seq)!;
+      expect(x.pursues!.via).toBe('reference');
+      expect(x.plannedTarget).toBe(true);
+    }
+    expect(a.summary.weak).toBeGreaterThan(40); // the weak signals are no help on a run with one vocabulary
   });
 
   it('on the recorded no-memory run: nothing can be attributed to notes', () => {
@@ -75,8 +96,10 @@ describe('attribution', () => {
       expect(x.pursues!.via).toBe('reference');
       expect(x.pursues!.asksAgo).toBeGreaterThanOrEqual(1);
       expect(x.candidate).toBe(true);
+      expect(x.plannedTarget).toBe(true);
     }
     expect(a.summary.pursuingByReference).toBe(pursued.length);
+    expect(a.summary.plans.followed).toBeGreaterThanOrEqual(pursued.length);
     // the same world under a model that keeps no notes: nothing to attribute
     const w2 = natural('meadow');
     run(w2, DAY);

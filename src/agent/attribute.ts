@@ -48,9 +48,9 @@ export interface Pursued {
   kind: 'goal' | 'intention';
   id: string;
   text: string;
-  /** the tick the note was written */
+  /** the tick the note was first written (its wording may have been revised since) */
   since: number;
-  /** how many asks before this one the note was written (1: at the decision just before) */
+  /** how many asks before this one the note's present wording was written (1: at the decision just before) */
   asksAgo: number;
   /** how the chosen option was matched to the note: a place or person reference, or shared words */
   via: 'reference' | 'words';
@@ -73,8 +73,12 @@ export interface AskAttribution {
   inObservation: number;
   /** a goal or intention from an earlier ask that the chosen option carries out */
   pursues: Pursued | null;
-  /** worth the counterfactual re-ask: notes-only words, or a pursued note */
+  /** the notes named at least one target (a place or person id) and the chosen option was one of them; null when they named none */
+  plannedTarget: boolean | null;
+  /** worth the counterfactual re-ask: the chosen option carries out a note by its reference (strong) */
   candidate: boolean;
+  /** a weaker sign, for a wider re-ask: reason words found only in the notes, or a pursuit by shared words */
+  weak: boolean;
 }
 
 export interface Attribution {
@@ -82,10 +86,31 @@ export interface Attribution {
   protocol: string;
   memory: boolean;
   asks: AskAttribution[];
-  summary: { decisions: number; candidates: number; withNotesOnlyWords: number; pursuingByReference: number; pursuingByWords: number; unaccounted: number };
+  summary: {
+    decisions: number;
+    /** strong candidates */
+    candidates: number;
+    weak: number;
+    withNotesOnlyWords: number;
+    pursuingByReference: number;
+    pursuingByWords: number;
+    unaccounted: number;
+    /** asks where the notes named a target, and how many of those chose one of the named targets */
+    plans: { named: number; followed: number };
+  };
 }
 
 const REF = /\[?(?:place|person|seen):(\d+)\]?/g;
+/** an id written on its own ("bush 808", "at 847"), which is how a real model names a target; ticks are written t2523 and do not match */
+const BARE_ID = /\b(\d{3,7})\b/g;
+
+/** every place or person id a note names, either way, each once */
+export function notedIds(text: string): string[] {
+  return Array.from(new Set([...Array.from(text.matchAll(REF), (m) => m[1]!), ...Array.from(text.matchAll(BARE_ID), (m) => m[1]!)]));
+}
+
+/** a note as it is now: its id and its wording, since the wording is what the model acted on and it may have been revised */
+const wording = (e: { id: string; text: string }): string => `${e.id}\u0000${e.text}`;
 
 /** the goal or intention the chosen option carries out, if any: by a place or person reference first, else by shared words */
 function pursuedBy(
@@ -98,8 +123,8 @@ function pursuedBy(
   const optionWords = contentWords(`${option.label} ${option.goal ?? ''} ${option.target ?? ''}`);
   let best: Pursued | null = null;
   const consider = (kind: 'goal' | 'intention', e: { id: string; text: string; since: number }): void => {
-    const asksAgo = askIndex - (firstSeen.get(e.id) ?? askIndex) + 1;
-    const refs = Array.from(e.text.matchAll(REF), (m) => m[1]);
+    const asksAgo = askIndex - (firstSeen.get(wording(e)) ?? askIndex) + 1;
+    const refs = notedIds(e.text);
     if (targetId && refs.includes(targetId)) {
       if (!best || best.via === 'words' || asksAgo > best.asksAgo) best = { kind, id: e.id, text: e.text, since: e.since, asksAgo, via: 'reference' };
       return;
@@ -120,7 +145,7 @@ export function attribute(t: Transcript): Attribution {
   const firstSeen = new Map<string, number>();
   const asks: AskAttribution[] = [];
   t.asks.forEach((ask, i) => {
-    if (ask.notes) for (const e of [...ask.notes.goals, ...ask.notes.intentions]) if (!firstSeen.has(e.id)) firstSeen.set(e.id, i);
+    if (ask.notes) for (const e of [...ask.notes.goals, ...ask.notes.intentions]) if (!firstSeen.has(wording(e))) firstSeen.set(wording(e), i);
     if (!ask.proposal) return;
     const why = ask.proposal.why ?? '';
     const shown = hasNotes(ask.notes) ? notesForPrompt(ask.notes) : null;
@@ -138,6 +163,9 @@ export function attribute(t: Transcript): Attribution {
     const outcome = call ? t.outcomes.find((o) => o.call === call.seq) : undefined;
     const option = ask.observation.options.find((o) => o.key === ask.proposal!.choose);
     const pursues = shown && option ? pursuedBy(option, shown, firstSeen, i) : null;
+    const targetId = option ? (/^[a-z_]+:(\d+)/.exec(option.key)?.[1] ?? null) : null;
+    const planned = shown ? [...shown.goals, ...shown.intentions].flatMap((e) => notedIds(e.text)) : [];
+    const plannedTarget = planned.length ? targetId !== null && planned.includes(targetId) : null;
     asks.push({
       seq: ask.seq,
       tick: ask.tick,
@@ -151,7 +179,9 @@ export function attribute(t: Transcript): Attribution {
       unaccounted,
       inObservation,
       pursues,
-      candidate: notesOnly.length > 0 || pursues !== null,
+      plannedTarget,
+      candidate: pursues?.via === 'reference',
+      weak: notesOnly.length > 0 || pursues?.via === 'words',
     });
   });
   return {
@@ -162,32 +192,35 @@ export function attribute(t: Transcript): Attribution {
     summary: {
       decisions: asks.length,
       candidates: asks.filter((a) => a.candidate).length,
+      weak: asks.filter((a) => !a.candidate && a.weak).length,
       withNotesOnlyWords: asks.filter((a) => a.notesOnly.length > 0).length,
       pursuingByReference: asks.filter((a) => a.pursues?.via === 'reference').length,
       pursuingByWords: asks.filter((a) => a.pursues?.via === 'words').length,
       unaccounted: asks.reduce((n, a) => n + a.unaccounted.length, 0),
+      plans: { named: asks.filter((a) => a.plannedTarget !== null).length, followed: asks.filter((a) => a.plannedTarget === true).length },
     },
   };
 }
 
-/** the asks worth a counterfactual re-ask */
-export function candidateAsks(t: Transcript): number[] {
+/** the asks worth a counterfactual re-ask: the strong candidates, or with the weak ones too, or every decision */
+export function candidateAsks(t: Transcript, tier: 'strong' | 'weak' | 'all' = 'strong'): number[] {
   return attribute(t)
-    .asks.filter((a) => a.candidate)
+    .asks.filter((a) => tier === 'all' || a.candidate || (tier === 'weak' && a.weak))
     .map((a) => a.seq);
 }
 
 export function renderAttribution(a: Attribution): string {
   const lines: string[] = [];
-  lines.push(`attribution: ${a.person}, ${a.protocol}${a.memory ? ' (notes)' : ' (no notes)'}: ${a.summary.decisions} decisions, ${a.summary.candidates} candidates for the counterfactual re-ask`);
-  lines.push(`  ${a.summary.withNotesOnlyWords} with words found only in the notes; ${a.summary.pursuingByReference} carrying out a noted goal or intention by its place reference (strong), ${a.summary.pursuingByWords} by shared words (weak); ${a.summary.unaccounted} reason words found in neither (the model's own wording)`);
+  lines.push(`attribution: ${a.person}, ${a.protocol}${a.memory ? ' (notes)' : ' (no notes)'}: ${a.summary.decisions} decisions, ${a.summary.candidates} strong candidates for the counterfactual re-ask (*), ${a.summary.weak} weak (~)`);
+  lines.push(`  strong: the chosen option carries out a noted goal or intention by the target it names; weak: reason words found only in the notes (${a.summary.withNotesOnlyWords}) or a pursuit by shared words (${a.summary.pursuingByWords}); ${a.summary.unaccounted} reason words found in neither (the model's own wording)`);
+  lines.push(`  plans: the notes named a target at ${a.summary.plans.named} decisions; the choice was one of the named targets at ${a.summary.plans.followed}`);
   lines.push('');
   for (const x of a.asks) {
-    const mark = x.candidate ? '*' : ' ';
+    const mark = x.candidate ? '*' : x.weak ? '~' : ' ';
     lines.push(`${mark} ask ${x.seq} t${x.tick}  ${x.chosen ?? '-'}${x.label ? ` (${x.label})` : ''}  ${x.result ?? ''}${x.outcome ? ` -> ${x.outcome}` : ''}`);
     lines.push(`    why: ${x.why}`);
     lines.push(`    words: ${x.inObservation} in the observation${x.notesOnly.length ? `, only in the notes: ${x.notesOnly.join(', ')}` : ''}${x.unaccounted.length ? `, in neither: ${x.unaccounted.join(', ')}` : ''}`);
-    if (x.pursues) lines.push(`    carries out ${x.pursues.kind} ${x.pursues.id} written ${x.pursues.asksAgo} ask${x.pursues.asksAgo === 1 ? '' : 's'} earlier (t${x.pursues.since}, ${x.pursues.via === 'reference' ? 'by its place reference' : 'by shared words, weak'}): "${x.pursues.text}"`);
+    if (x.pursues) lines.push(`    carries out ${x.pursues.kind} ${x.pursues.id} written ${x.pursues.asksAgo} ask${x.pursues.asksAgo === 1 ? '' : 's'} earlier (t${x.pursues.since}, ${x.pursues.via === 'reference' ? 'by the target it names' : 'by shared words, weak'}): "${x.pursues.text}"`);
   }
   return lines.join('\n');
 }

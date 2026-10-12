@@ -1,5 +1,6 @@
-attribution: Pavel, inhabitant/1 (no notes): 5 decisions, 0 candidates for the counterfactual re-ask
-  0 with words found only in the notes; 0 carrying out a noted goal or intention by its place reference (strong), 0 by shared words (weak); 13 reason words found in neither (the model's own wording)
+attribution: Pavel, inhabitant/1 (no notes): 5 decisions, 0 strong candidates for the counterfactual re-ask (*), 0 weak (~)
+  strong: the chosen option carries out a noted goal or intention by the target it names; weak: reason words found only in the notes (0) or a pursuit by shared words (0); 13 reason words found in neither (the model's own wording)
+  plans: the notes named a target at 0 decisions; the choice was one of the named targets at 0
 
   ask 0 t2532  wander (Potter about near home)  applied -> success (done)
     why: I’m carrying a full load and nothing urgent needs doing. I’ll potter near home and see if I can stash things or lend a hand.

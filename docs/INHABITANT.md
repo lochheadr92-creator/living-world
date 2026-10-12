@@ -345,7 +345,7 @@ their first differing choice and everything after is a different world. Two tool
 
 `scripts/inhabit_attribute.ts` (`src/agent/attribute.ts`) looks at each decision the model made: which content words of its stated
 reason occur in the notes it was shown and nowhere in the observation, and whether the option it chose carries out a goal or intention
-written at an earlier ask (matched by a place reference in the note, which is strong, or by shared words, which is weak). It is triage:
+written at an earlier ask (matched by the target the note names, which is strong, or by shared words, which is weak). It is triage:
 a word the model coined in an earlier note counts as notes-only although the fact behind it was observable, and a reason can rest on a
 note without reusing its words. On the recorded memory run (Pavel, 5 decisions):
 
@@ -357,8 +357,8 @@ note without reusing its words. On the recorded memory run (Pavel, 5 decisions):
 | 3 | chop wood | nothing from the notes. The reason ("stalled for lack of wood") answers the fresh partial-build result; the notes it was shown still said the site had materials (inference i14). The "chop and bring wood" intention was written *after* this choice. |
 | 4 | sleep | nothing from the notes |
 
-So two candidates, both weak, and the one decision that looked like memory at work (ask 3) was the observation correcting a stale
-note. That matches the hash result (same world as the no-memory run) and sharpens it: in this window the notes followed the
+So two weak candidates and no strong one, and the one decision that looked like memory at work (ask 3) was the observation
+correcting a stale note. That matches the hash result (same world as the no-memory run) and sharpens it: in this window the notes followed the
 decisions, they did not lead them.
 
 `scripts/inhabit_counterfactual.ts` (`src/agent/counterfactual.ts`) is the decider, at a model's price: it puts the very observation
@@ -368,6 +368,35 @@ so a shift is read against that and not against one draw. `--asks auto` takes at
 Checked with scripted models: one that takes the last option when shown its notes and the first when not is reported as shifting on
 every ask that had notes and on none that had an empty notebook; one that ignores its notes shows no shift.
 
-What the six-day harsh run (Tomas, on the operator's machine, 82 applied decisions) needs is these two in that order: attribution to
-find the decisions worth asking about, then the counterfactual on those. A full no-memory arm would cost the same again and could not
-be paired with it.
+A full no-memory arm would cost a six-day run again and could not be paired with it; these two, in that order, are the test.
+
+### The six-day harsh run (Tomas, GPT-5 with memory; VERIFIED from the transcript, 2026-10-12)
+
+Seed meadow, harsh, Tomas (#981), tick 2400 to 16800, run by the operator on 2026-10-11 and kept in `experiments/harsh6-tomas-gpt5/`.
+Replayed here without a model: the recorded end state `23ac03a0` reproduced, 95 decisions consumed, 8 engine overrides matched,
+22 seconds of wall time (with `--allow-source-drift`: the sources moved on after the recording).
+
+| | |
+|---|---|
+| asks | 95: 82 answered and applied, 0 refused by the model, 13 fallen to the engine |
+| the 13 | five rate-limit failures (day 6.20 to 6.32), then eight refused by the tripped breaker (day 6.34 to 6.97); the gate has been fixed since (section 2, item 4) |
+| model time | 87 calls; latency median 34 s, p90 48 s, max 73 s |
+| tokens | input 740,309 (6.3k per call at the start, 10.1k at the end, as known places went from 45 to 64 and the notebook from nothing to 8.7k characters); output 323,333, of which about 680 per call is the visible answer, so about five sixths is reasoning |
+| what Tomas did | applied by kind: gather 26, socialize 20, warm 11, sleep 5, deposit 5, eat 4, drink 3, rest 3, and one each of fuel, haul, explore, visit, repair; outcomes 47 success, 12 failed, 11 unknown, 7 interrupted, 5 partial; alive at the end, health 100, 72 things gathered, 14 conversations, 217 places known |
+| memory | 82 updates, 0 rejected, 2 entries refused; 42 new, 573 kept, 158 revised, 31 abandoned, 15 strengthened, 12 weakened; the notebook held 4 goals, 5 intentions and 11 inferences at the end |
+
+Attribution over the 82 decisions:
+
+- The notes named a specific target (a bush, a spot, a person) at 58 of them. The chosen option was one of the named targets at 6.
+  At the other 52 the model picked a different target from the fresh observation (the bush that still had berries, the person who
+  was there) and then rewrote the intention to match. The notebook trailed the decisions.
+- 6 strong candidates for the counterfactual, asks 24, 51, 59, 60, 75 and 79: every one a berry or fruit pick at a bush the
+  intention named, the wording written 1 to 6 asks earlier. 65 weak ones, which is the whole run in effect: with one vocabulary
+  ("Birch", "stock", "berries") the word signals cannot tell the notes from the observation.
+- The two passages the operator's reading singled out as memory at work are visible without notes: the fishing quarrel with Zed is
+  in the relations shown (as a grievance) and the last 14 events; the four declined food offers are in `lastResult` and the
+  failures list. They are good behaviour; they are not evidence for memory.
+
+What this does not settle: a goal that names no target ("keep Dov and me fed; stock Birch") can shape a choice, and attribution
+cannot separate that from the household's empty larder, which is in the observation. The counterfactual on the six strong asks
+costs 36 calls (about 20 minutes and a third of a million input tokens); widening it to the weak tier costs 71 asks' worth.
