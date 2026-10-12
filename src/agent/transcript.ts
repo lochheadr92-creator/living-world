@@ -92,7 +92,7 @@ export interface ObserverRecord {
 
 export interface TranscriptHeader {
   version: number;
-  /** inhabitant/1 (no memory) or inhabitant/2 (memory) */
+  /** inhabitant/1 or /3 (no memory), inhabitant/2 or /4 (memory); 3 and 4 advertise each action's limits */
   protocol: string;
   mode: 'live' | 'replay';
   seed: string;
@@ -255,7 +255,9 @@ export class TranscriptController implements ExternalController {
         this.push({ seq: 0, tick: world.tick, attempt, ask: a.seq, observationHash: oh, worldHash: wh, choice: { kind: 'defer' }, timing: 'exact', result: null });
         return { kind: 'defer' };
       }
-      const choice: ExternalChoice = ask.proposal ? { kind: 'pick', key: ask.proposal.choose } : { kind: 'fallback', reason: ask.problem ?? ask.model?.reason ?? 'no answer' };
+      const choice: ExternalChoice = ask.proposal
+        ? { kind: 'pick', key: ask.proposal.choose, ...(ask.proposal.limit ? { limit: ask.proposal.limit } : {}) }
+        : { kind: 'fallback', reason: ask.problem ?? ask.model?.reason ?? 'no answer' };
       call = { seq: 0, tick: world.tick, attempt, ask: ask.seq, observationHash: oh, worldHash: wh, choice, timing, result: null };
       this.push(call);
     }

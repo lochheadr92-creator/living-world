@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { OBSERVATION_VERSION } from '../src/agent/observe';
-import { PROTOCOL_V1, PROTOCOL_V2, observationVersionFor } from '../src/agent/protocol';
+import { PROTOCOL_V3, PROTOCOL_V4, observationVersionFor } from '../src/agent/protocol';
 import { runLive, runReplay } from '../src/agent/run';
 import { pickerModel } from '../src/agent/stubs';
 import { ReplayDiverged } from '../src/agent/transcript';
@@ -25,10 +25,10 @@ describe('the observation version in the header', () => {
   it('a run records the version its protocol implies, and a replay reads it', async () => {
     const plain = await recorded(false);
     const noted = await recorded(true);
-    expect(plain.t.header.protocol).toBe(PROTOCOL_V1);
-    expect(plain.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V1));
-    expect(noted.t.header.protocol).toBe(PROTOCOL_V2);
-    expect(noted.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V2));
+    expect(plain.t.header.protocol).toBe(PROTOCOL_V3);
+    expect(plain.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V3));
+    expect(noted.t.header.protocol).toBe(PROTOCOL_V4);
+    expect(noted.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V4));
     expect(noted.t.header.observationVersion).toBe(OBSERVATION_VERSION);
     expect(hashWorld(runReplay(deserializeWorld(plain.start), plain.t).world)).toBe(plain.hash);
     expect(hashWorld(runReplay(deserializeWorld(noted.start), noted.t).world)).toBe(noted.hash);
@@ -45,7 +45,7 @@ describe('the observation version in the header', () => {
     expect(() => runReplay(deserializeWorld(plain.start), newer)).toThrow(/version/);
   });
 
-  it('the header governs the shape: a protocol-1 recording claimed as version 2 no longer matches its own observations', async () => {
+  it('the header governs the shape: a current recording claimed as observation version 2 no longer matches', async () => {
     const plain = await recorded(false);
     expect(plain.t.asks.length).toBeGreaterThan(0);
     const wrong = clone(plain.t);

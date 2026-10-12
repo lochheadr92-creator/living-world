@@ -55,7 +55,8 @@ export type GameEvent = 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'f
 
 /** around each tick the clock runs (an outside driver's hooks, src/app/inhabit.ts); `afterTick` returning false ends the frame's stepping */
 export interface TickHooks {
-  beforeTick?: () => void;
+  /** false: this tick must not be run at all (a driver is waiting for an answer and the world has to hold still) */
+  beforeTick?: () => boolean | void;
   afterTick?: () => boolean;
 }
 
@@ -125,7 +126,11 @@ export class Game {
     } else this.acc -= n;
     let ran = 0;
     for (let i = 0; i < n; i++) {
-      this.tickHooks?.beforeTick?.();
+      if (this.tickHooks?.beforeTick?.() === false) {
+        // a driver is holding the clock: not one tick runs, however fast the speed is set or how often play is pressed
+        this.acc = 0;
+        break;
+      }
       this.tickOnce();
       ran++;
       if (this.tickHooks?.afterTick && !this.tickHooks.afterTick()) {
@@ -195,7 +200,7 @@ export class Game {
   stepOnce(): void {
     this.playing = false;
     this.acc = 0;
-    this.tickHooks?.beforeTick?.();
+    if (this.tickHooks?.beforeTick?.() === false) return; // a single step cannot sneak past an unanswered decision either
     this.tickOnce();
     this.tickHooks?.afterTick?.();
     this.alpha = 1;

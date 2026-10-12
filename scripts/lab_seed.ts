@@ -22,6 +22,8 @@ const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((
 // `--dynamics rich` founds the world with rich dynamics (so the control is rich too)
 const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
 const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
-runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, ...r, hashes: undefined })));
+// `dynamics` goes on every row: a result from a rich world is not comparable with one from an authored world, and the gates
+// (scripts/gates.ts) refuse to compare them rather than quietly treating one as a baseline for the other.
+runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, dynamics, ...r, hashes: undefined })));
 // a last line so that a runner can tell a finished seed from one cut short (the lab.mjs runner skips finished seeds when re-run)
 console.log(JSON.stringify({ seed, done: true }));

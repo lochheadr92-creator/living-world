@@ -4,6 +4,7 @@ import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType } from 
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
+import { planHelp, planOfActivity } from './intent';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -14,7 +15,7 @@ import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
 import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
-import type { Activity, Entity, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
+import type { Activity, Entity, Intention, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
 
 import { hyp } from './util';
@@ -73,6 +74,25 @@ export interface RequestView {
   status: string;
   note: string;
   age: string;
+  /** what the asker wanted it for, in their words (a project of their own, when it was for one) */
+  purpose: string;
+  /** for something promised: how much has actually been handed over, so a promise is never read as a delivery */
+  progress: string;
+}
+/** one plan as the card shows it. No plan is marked as the leading one: the engine has no such notion. */
+export interface PlanView {
+  id: number;
+  kind: string;
+  goal: string;
+  step: string;
+  /** 'under way' | 'waiting' | 'blocked' | 'done' | 'ended' - read off the records, never guessed */
+  state: string;
+  detail: string;
+  /** what it still lacks, in plain words ('' when nothing) */
+  missing: string;
+  progress: string;
+  due: string;
+  outcome: string;
 }
 export interface PersonView {
   id: number;
@@ -97,7 +117,9 @@ export interface PersonView {
   carry: { used: number; cap: number };
   position: { x: number; y: number };
   activity: { label: string; goal: string; phase: string; progress: number; target: string; blocked: string; kind: string; moving: boolean } | null;
-  qa: { doing: string; why: string; trying: string; stopping: string; lastAttempt: string };
+  qa: { doing: string; why: string; trying: string; stopping: string; lastAttempt: string; plan: string };
+  /** every plan they are carrying, each on its own terms (rich worlds; empty otherwise) */
+  plans: PlanView[];
   /** equipment in hand, with wear and loan status */
   tools: ToolView[];
   /** promises, active first and then the few most recent endings, each with how and why it ended */
@@ -176,6 +198,26 @@ function targetText(world: World, a: Activity): string {
   return 'somewhere remembered';
 }
 
+/**
+ * What asking for help has come to, for the plan on the card. Each state here is one the records actually hold - asked and
+ * unanswered, promised and not yet delivered, part delivered, delivered, refused with the reason the answer gave, or ended - and a
+ * promise is never worded as a delivery.
+ */
+function helpText(world: World, p: Person, plan: Intention): string {
+  const hs = planHelp(world, p, plan);
+  if (!hs.length) return '';
+  const say = hs.slice(-2).map((h) => {
+    if (h.status === 'pending') return `Asked ${h.who} for ${h.asked} ${h.item}; no answer yet.`;
+    if (h.status === 'declined') return `${h.who} said no${h.note ? ` (${h.note})` : ''}.`;
+    if (h.status === 'promised' && h.delivered > 0) return `${h.who} promised ${h.asked} ${h.item}; ${h.delivered} brought so far, ${h.owed} still to come.`;
+    if (h.status === 'promised') return `${h.who} promised ${h.owed || h.asked} ${h.item}, not yet delivered.`;
+    if (h.status === 'fulfilled') return `${h.who} brought the ${h.item} (${h.delivered}).`;
+    if (h.status === 'partial') return `${h.who} brought ${h.delivered} of the ${h.asked} ${h.item} asked for, and owes nothing more.`;
+    return `${h.who}: ${h.status}${h.note ? ` (${h.note})` : ''}${h.delivered > 0 ? `, ${h.delivered} ${h.item} brought` : ''}.`;
+  });
+  return ' ' + say.join(' ');
+}
+
 function buildQA(world: World, p: Person): PersonView['qa'] {
   const a = p.activity;
   const lastDec = p.lastDecision;
@@ -208,10 +250,69 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   if (!a && lastDec && p.pose !== 'sleep') doing = lastDec.chosen ? `Between tasks (last chose “${lastDec.chosen.label}”).` : doing;
   const r = p.lastResult;
   const last = r ? `${r.label} → ${r.outcome}${r.detail ? ': ' + r.detail : ''} (${agoText(world, r.tick)})` : 'Nothing yet.';
-  return { doing, why, trying, stopping, lastAttempt: last };
+  // Every plan they are carrying, each in their own terms. Three different things are kept apart for each one, because they fail in
+  // different ways: the step they have SETTLED ON, whether that step is actually UNDER WAY (the activity they are running is that
+  // step, which the decision marked when it chose it), and what became of the plan as a whole, which is reported only once it has
+  // ended. Somebody may carry a project and a plan for the night at once; both are described, and neither is called the leading one.
+  const livePlans = p.intentions.filter((i) => i.status === 'active');
+  const toShow = livePlans.length ? livePlans : [...p.intentions].reverse().filter((i) => i.status !== 'active').slice(0, 1);
+  const planText = toShow.map((i) => planLine(world, p, i, a)).join(' ');
+  return { doing, why, trying, stopping, lastAttempt: last, plan: planText };
 }
 
 // ───────────────────────── "why didn't they take that?" ─────────────────────────
+/** one plan in a sentence: the goal, the step, how that step stands, and what became of it once it has ended */
+function planLine(world: World, p: Person, i: Intention, a: Activity | null): string {
+  const cap = (t: string) => `${t[0].toUpperCase()}${t.slice(1)}`;
+  if (i.status !== 'active') return `${cap(i.goal)} — ${i.status === 'done' ? 'done' : 'given up'}: ${i.reason} (${agoText(world, i.since)}).`;
+  const underway = a !== null && planOfActivity(p, a)?.id === i.id;
+  const state = i.blocked
+    ? `on hold: ${i.blocked}`
+    : !i.step
+      ? 'nothing to do for it just now'
+      : underway
+        ? `under way (${a!.label})`
+        : 'settled on, not started';
+  let text = `${cap(i.goal)}. Step: ${i.step || '—'} — ${state}.`;
+  if (i.setAside > 0) text += ` Set aside ${i.setAside === 1 ? 'once' : `${i.setAside} times`} so far.`;
+  return text + helpText(world, p, i);
+}
+
+/**
+ * Every plan this person is carrying, each on its own terms. The card lists them; it does not rank them, because the engine has no
+ * notion of a leading plan - which one they are actually getting on with shows as the one whose step is `under way`.
+ */
+export function planViews(world: World, p: Person): PlanView[] {
+  const liveOnes = p.intentions.filter((i) => i.status === 'active');
+  const shown = liveOnes.length ? liveOnes : [...p.intentions].reverse().filter((i) => i.status !== 'active').slice(0, 1);
+  const a = p.activity;
+  return shown.map((i) => ({
+    id: i.id,
+    kind: i.kind,
+    goal: i.goal,
+    step: i.step,
+    state:
+      i.status !== 'active'
+        ? i.status === 'done'
+          ? 'done'
+          : 'ended'
+        : i.blocked
+          ? 'blocked'
+          : a !== null && planOfActivity(p, a)?.id === i.id
+            ? 'under way'
+            : 'waiting',
+    detail: planLine(world, p, i, a),
+    missing: (Object.keys(i.wants) as ItemKind[])
+      .map((k) => ({ item: k, n: (i.wants[k] ?? 0) - (p.inv[k] ?? 0) }))
+      .filter((x) => x.n > 0)
+      .map((x) => `${x.n} ${x.item}`)
+      .join(', '),
+    progress: i.kind === 'night' ? `${i.sheltered} ticks under shelter` : i.kind === 'repair' ? `${Math.round(i.worked)} of its condition put back` : i.worked > 0 ? 'made it themselves' : '',
+    due: i.status === 'active' ? `by tick ${i.until}` : agoText(world, i.ended || i.since),
+    outcome: i.status === 'active' ? '' : i.reason,
+  }));
+}
+
 export function auditOpportunities(world: World, p: Person): OpportunityView[] {
   const ctx = generateOptions(world, p, true);
   const ranked = rankOptions(ctx);
@@ -327,6 +428,10 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     if (world.tick - (r.resolved || r.created) > 3000) continue;
     const text =
       r.kind === 'food' ? 'food' : r.kind === 'water' ? 'water' : r.kind === 'info' ? `where to find ${r.infoKind}` : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : `${r.amount} ${r.item ?? r.kind}`;
+    // how far a promise has actually got is the promiser's own commitment, not the request: a promise is not a delivery
+    const promiser = world.byId.get(r.to);
+    const c = promiser && promiser.ent === 'person' ? promiser.commitments.find((x) => x.id === r.commitmentId) : undefined;
+    const quantified = c && (c.kind === 'deliver' || c.kind === 'haul') && c.item;
     requests.push({
       id: r.id,
       direction: r.from === p.id ? 'asked' : 'asked of me',
@@ -335,6 +440,15 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
       status: r.status,
       note: r.note,
       age: agoText(world, r.created),
+      purpose: r.purpose ?? '',
+      // asked for, agreed to, actually brought: three different numbers, and the row never blurs them
+      progress: quantified
+        ? `${r.delivered ?? c!.delivered ?? 0} of ${c!.amount} ${c!.item} brought${c!.amount < r.amount ? ` (${r.amount} asked for)` : ''}`
+        : r.delivered
+          ? `${r.delivered} of ${r.amount} ${r.item} brought`
+          : r.offered !== undefined && r.offered < r.amount
+            ? `${r.offered} of ${r.amount} ${r.item} agreed to`
+            : '',
     });
   }
   requests.reverse();
@@ -389,6 +503,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
         }
       : null,
     qa: buildQA(world, p),
+    plans: planViews(world, p),
     tools: toolViews(world, p),
     commitments: commitmentViews(world, p),
     interaction: interactionViews(world, p),

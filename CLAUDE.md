@@ -14,11 +14,20 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 
 ## Where things are
 - `src/sim/mood.ts` thoughts, mood level, option weights, mourning. `src/sim/hardship.ts` lean seasons, winter, spoilage, wolf nerve.
+- `src/sim/intent.ts` private plans (rich only): getting ready for the night, making a tool, mending a roof. Adopt, step, set aside,
+  resume, finish or give up with a reason; `freeOf`/`freeInv` keep a plan's materials from being spent twice; `planOfActivity` says
+  whether the step is under way. Plan, evidence and the R1-R14 matrix: `docs/AUTONOMY.md`. The demonstrator is `scripts/projects.ts`
+  (an ordinary autonomous run, every plan's life read off the records; `--dynamics authored` must report none).
+- Stage D1, cooperation on a personal project (rich only): the ask is an option in `src/sim/options_social.ts` (own plan's shortfall,
+  minus what is already promised, to someone seen carrying it), the answer is `social.ts evaluateRequest` (precise refusals:
+  no_item/committed/making/own_need), the obligation is an ordinary `Commitment`, and `intent.ts planHelp`/`outstandingForPlan` read
+  requests plus the promiser's commitment for the explanations. `Request.planId`/`Request.delivered` tie an ask to a project and
+  record what really arrived. Tests: `tests/project_cooperation.test.ts`; page check: `scripts/browser/cooperation_check.mjs`.
 - `src/sim/decision.ts` ranks options (mood weight applied here). `src/sim/probe.ts` work counters (never saved or hashed).
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
-- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes).
+- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans` (rich with every private plan removed).
 - The AI inhabitant (`docs/INHABITANT.md`): `src/sim/external.ts` (the seam in `decide`), `src/agent/` (observation, protocol, memory,
   transcript, model gate, rewind runner, scripted models; no network), `scripts/inhabit.ts` (live | replay | standard; `--memory` keeps notes;
   `--stub goal` needs no key), `scripts/inhabit_diff.ts` (two runs: same world or not), `scripts/inhabit_attribute.ts` (which decisions

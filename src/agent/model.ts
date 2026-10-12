@@ -28,7 +28,7 @@ export interface ModelReply {
 export interface ModelClient {
   /** what the transcript records as the model's identity */
   id: string;
-  kind: 'stub' | 'api';
+  kind: 'stub' | 'api' | 'manual';
   /** configuration worth recording (temperature, effort, …); never secrets */
   config: Record<string, unknown>;
   complete(req: ModelRequest, signal: AbortSignal): Promise<ModelReply>;

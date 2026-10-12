@@ -1,5 +1,6 @@
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
+import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
 import type { ExternalController } from './external';
 import { moodWeight } from './mood';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
@@ -14,7 +15,7 @@ import { workOptions } from './options_work';
 import { productionOptions } from './production';
 import { applyReliefGuard } from './relief';
 import { markSetAside } from './social';
-import type { Activity, ActivityKind, NeedKey, OptionSummary, Person, World } from './types';
+import type { Activity, ActivityKind, Intention, NeedKey, OptionSummary, Person, World } from './types';
 
 import { hyp } from './util';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
@@ -61,7 +62,10 @@ export function setOptionChooser(mode: OptionChooser): void {
 /** Candidate options in preference order, after the hard filters (children's limits, critical needs). */
 export function rankOptions(ctx: Ctx): Option[] {
   const { world, p } = ctx;
-  let opts = ctx.options.filter((o) => o.util > 0 && o.make);
+  // A plan's own next step stays a candidate even when it scores poorly. Scoring low means "not worth much just now", which is not
+  // the same thing as being impossible, and dropping it here is what made a plan impossible to carry across several activities.
+  // Every hard filter below (children, the relief guard, critical needs, fleeing, cooldowns) still applies to it.
+  let opts = ctx.options.filter((o) => o.make && (o.util > 0 || intentFor(p, o) !== null));
   if (ctx.stage === 'child') opts = opts.filter((o) => !CHILD_FORBIDDEN.includes(o.kind) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm');
   // work that would strand someone away from water or food is not taken on (see relief.ts)
   opts = applyReliefGuard(ctx, opts);
@@ -78,15 +82,26 @@ export function rankOptions(ctx: Ctx): Option[] {
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
   const moody = p.mood !== undefined && world.settings.dynamics === 'rich';
-  const scored = opts.map((o) => ({ o, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4 }));
+  // the plan's nudge is bounded and never applies when the lab is choosing at random
+  const scored = opts.map((o) => ({
+    o,
+    s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
+  }));
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }
 
-function because(o: Option): string {
-  if (!o.parts.length) return o.goal;
+/**
+ * What was weighed in making this choice. When the choice is a step of the person's own plan the plan is named first, because that
+ * is the honest account of why this option beat a better-scoring one: it says which plan and which step, and nothing about whether
+ * the step will come to anything.
+ */
+function because(o: Option, plan: Intention | null = null): string {
+  const forPlan = planReason(plan, o);
+  if (!o.parts.length) return forPlan ? `${forPlan} · ${o.goal}` : o.goal;
   const top = [...o.parts].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
-  return top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');
+  const parts = top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');
+  return forPlan ? `${forPlan} · ${parts}` : parts;
 }
 
 function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string, why?: string): void {
@@ -116,9 +131,13 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
       continue;
     }
     act.data.optKey = o.key;
-    act.data.why = because(o);
+    const plan = intentFor(p, o);
+    const why = because(o, plan);
+    act.data.why = why;
+    // this activity IS the plan's current step, so the inspector can tell a step under way from a step merely settled on
+    if (plan) act.data.forPlan = plan.id;
     if (probe.on && o.kind === 'wander') whyWander(ctx, ranked, i);
-    record(world, p, ctx, ranked, o, trigger);
+    record(world, p, ctx, ranked, o, trigger, why);
     startActivity(world, p, act);
     return true;
   }
@@ -147,6 +166,8 @@ function whyWander(ctx: Ctx, ranked: Option[], at: number): void {
 export function decide(world: World, p: Person, trigger: string): void {
   if (probe.on) probe.decisions++;
   const ctx = generateOptions(world, p, true);
+  // a private plan is taken up, carried on, set aside, finished or given up here, before anything is ranked (rich worlds only)
+  reviewIntentions(ctx);
   const ext = externalController();
   if (ext !== null && ext.controls(world, p)) {
     externalDecide(world, p, ctx, trigger, ext);
@@ -155,6 +176,29 @@ export function decide(world: World, p: Person, trigger: string): void {
   if (!launch(world, p, ctx, trigger)) {
     p.nextThink = world.tick + 15;
   }
+}
+
+/**
+/**
+ * Check the limits a controller asked for against what the option declared. Returns the accepted limits, or the reason it cannot be
+ * used. A limit that is not declared, not a number, or outside the declared range is refused outright: an invalid parameterised
+ * request is never quietly turned into a different valid action.
+ */
+function checkLimits(o: Option, want: Record<string, number> | undefined): { ok: true; limit: Record<string, number> | null } | { ok: false; why: string } {
+  if (!want || Object.keys(want).length === 0) return { ok: true, limit: null };
+  const declared = o.bounds ?? [];
+  if (!declared.length) return { ok: false, why: `“${o.key}” takes no limits` };
+  const limit: Record<string, number> = {};
+  for (const field of Object.keys(want)) {
+    const b = declared.find((d) => d.field === field);
+    if (!b) return { ok: false, why: `“${o.key}” has no limit called “${field}” (it takes ${declared.map((d) => d.field).join(', ')})` };
+    const v = want[field];
+    if (typeof v !== 'number' || !Number.isFinite(v)) return { ok: false, why: `“${field}” must be a number` };
+    if (b.kind === 'count' && !Number.isInteger(v)) return { ok: false, why: `“${field}” must be a whole number` };
+    if (v < b.min || v > b.max) return { ok: false, why: `“${field}” must be between ${b.min} and ${b.max} (asked for ${v})` };
+    limit[field] = v;
+  }
+  return { ok: true, limit };
 }
 
 /**
@@ -183,6 +227,13 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
       ext.notify?.(world, p, { kind: 'rejected', key: choice.key, reason });
       continue;
     }
+    // the limits are checked before anything is built, so a bad parameter costs nothing and starts nothing
+    const lim = checkLimits(o, choice.limit);
+    if (!lim.ok) {
+      reason = lim.why;
+      ext.notify?.(world, p, { kind: 'rejected', key: choice.key, reason });
+      continue;
+    }
     const act = o.make!();
     if (!act) {
       if (o.targetId) noteFailure(world, p, o.targetId, 'could not get a foothold there');
@@ -191,10 +242,17 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
       continue;
     }
     act.data.optKey = o.key;
-    act.data.why = 'chosen from outside';
+    const plan = intentFor(p, o);
+    act.data.why = plan ? `chosen from outside, and a step toward “${plan.goal}”` : 'chosen from outside';
+    if (plan) act.data.forPlan = plan.id;
+    if (lim.limit) {
+      act.data.limit = lim.limit;
+      // narrowing only: an amount limit may lower the activity's own planned quantity, never raise it
+      if (lim.limit.amount !== undefined && act.amount > 0) act.amount = Math.min(act.amount, lim.limit.amount);
+    }
     record(world, p, ctx, ranked, o, trigger + ' (external)', 'chosen from outside');
     startActivity(world, p, act);
-    ext.notify?.(world, p, { kind: 'applied', key: o.key, activity: act });
+    ext.notify?.(world, p, { kind: 'applied', key: o.key, activity: act, ...(lim.limit ? { limit: lim.limit } : {}) });
     return;
   }
   const started = launch(world, p, ctx, trigger);

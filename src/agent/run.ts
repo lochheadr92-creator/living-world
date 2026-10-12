@@ -26,7 +26,7 @@ import type { Ask, Transcript } from './transcript';
 export interface SessionOptions {
   observe?: ObserveOptions;
   budget?: Budget;
-  /** keep the inhabitant's own notes between decisions (protocol inhabitant/2); off, the run speaks inhabitant/1 as before */
+  /** keep the inhabitant's own notes between decisions (protocol inhabitant/4); off, the run speaks inhabitant/3 */
   memory?: boolean;
   /** a fingerprint of src/sim, when the caller can read the files (scripts do; tests and the app do not) */
   sources?: string;
@@ -58,6 +58,19 @@ export function markInhabitant(world: World, personId: number, memory = false): 
     state.notes ??= emptyNotes();
     state.memory ??= emptyCounters();
   }
+}
+
+/** How an exchange's own result text maps onto an activity outcome. Only states the engine recorded; nothing is guessed. */
+function talkOutcome(text: string): 'success' | 'failed' | 'interrupted' | 'partial' {
+  if (text === 'cut short') return 'interrupted';
+  if (text === 'warned them') return 'success';
+  if (text === 'fulfilled') return 'success';
+  // what a kept promise is actually recorded as (social.ts settle writes `outcome = 'kept'` for a fulfilled request, and the
+  // conversation's own record carries that word): it succeeded, and the transcript must not read it as half-done
+  if (text === 'kept') return 'success';
+  if (text === 'failed' || text === 'refused' || text === 'ended sourly') return 'failed';
+  // delivered nothing but the exchange itself happened (they already knew, nothing to tell, a request still open)
+  return 'partial';
 }
 
 /** the person, or null once they are dead (the dead leave the world's index) */
@@ -176,7 +189,13 @@ export class LiveSession {
       if (!paused && (!q || !q.activity || q.activity.id !== this.watching.activityId)) {
         const r = q ? q.lastResult : null;
         const w = this.watching;
-        this.transcript.outcomes.push({ call: w.call, activityId: w.activityId, label: w.label, tick: world.tick, outcome: r && r.tick >= w.since ? r.outcome : 'unknown', detail: r && r.tick >= w.since ? r.detail : '' });
+        // A conversation leaves p.lastResult alone on purpose (the work it interrupted keeps its own result), so a social
+        // action would otherwise come back 'unknown'. The exchange's own record holds what it actually came to.
+        const talk = q && q.lastInteraction && q.lastInteraction.tick >= w.since ? q.lastInteraction : null;
+        const fresh = r && r.tick >= w.since ? r : null;
+        const outcome = fresh ? fresh.outcome : talk ? talkOutcome(talk.outcome) : 'unknown';
+        const detail = fresh ? fresh.detail : talk ? (talk.detail || talk.outcome) : '';
+        this.transcript.outcomes.push({ call: w.call, activityId: w.activityId, label: w.label, tick: world.tick, outcome, detail });
         this.watching = null;
       }
     }
@@ -207,6 +226,22 @@ export class LiveSession {
 
   /** end the run: the controller is uninstalled and the transcript closed */
   finish(world: World): Transcript {
+    // The window can close while a chosen action is still under way. Say so: an accepted choice is not a finished one, and a
+    // haul that was accepted but never arrived must not be left looking like a delivery.
+    if (this.watching) {
+      const w = this.watching;
+      const q = livingPerson(world, this.personId);
+      const underway = q !== null && q.activity !== null && q.activity.id === w.activityId;
+      this.transcript.outcomes.push({
+        call: w.call,
+        activityId: w.activityId,
+        label: w.label,
+        tick: world.tick,
+        outcome: 'unfinished',
+        detail: underway ? 'the window ended while this was still under way' : 'the window ended before this came to anything',
+      });
+      this.watching = null;
+    }
     this.restore?.();
     this.restore = null;
     this.transcript.end = this.endRecord(world);

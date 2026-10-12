@@ -47,7 +47,7 @@ describe('the in-app driver', () => {
   });
 
   it('pauses while the model thinks, applies the answer at the asked tick, and records a transcript that replays headlessly', async () => {
-    const cfg: InhabitConfig = { person: 'Pavel', api: 'openai', model: 'stub', effort: '', memory: true, showScores: false, fromDay: 1, days: 0.3, seed: 'meadow', harsh: false, rich: false, size: 'normal', arrivals: true };
+    const cfg: InhabitConfig = { person: 'Pavel', api: 'openai', model: 'stub', effort: '', memory: true, showScores: false, fromDay: 1, days: 0.3, seed: 'meadow', harsh: false, rich: false, size: 'normal', arrivals: true, manual: false };
     const game = new Game(settingsFromConfig(cfg));
     const driver = new InhabitDriver(game, cfg, goalKeeperModel());
     await driver.start();
@@ -87,7 +87,7 @@ describe('the in-app driver', () => {
   }, 300_000);
 
   it('hands the person back when told to stop, and reports a name it cannot find', async () => {
-    const cfg: InhabitConfig = { person: 'Nobody Here', api: 'openai', model: 'stub', effort: '', memory: false, showScores: false, fromDay: 0.05, days: null, seed: 'meadow', harsh: false, rich: false, size: 'normal', arrivals: true };
+    const cfg: InhabitConfig = { person: 'Nobody Here', api: 'openai', model: 'stub', effort: '', memory: false, showScores: false, fromDay: 0.05, days: null, seed: 'meadow', harsh: false, rich: false, size: 'normal', arrivals: true, manual: false };
     const game = new Game(settingsFromConfig(cfg));
     const missing = new InhabitDriver(game, cfg, pickerModel('first'));
     await missing.start();

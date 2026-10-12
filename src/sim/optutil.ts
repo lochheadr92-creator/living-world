@@ -11,6 +11,21 @@ import { NEED_KEYS, CRITICAL, THIRST_RATE, isHomeType } from './constants';
 import type { BeliefKind } from './types';
 
 import { hyp } from './util';
+/**
+ * What a controller may narrow about an action, and the range the engine will honour. A limit is a STOP CONDITION only: it can make
+ * an action finish sooner than it otherwise would, never do more, reach further or produce more than the unparameterised action.
+ * `count` is a whole number of portions/units/ticks; `until` is a need level (0-100) to stop at.
+ */
+export interface OptionLimit {
+  kind: 'count' | 'until';
+  /** the name a controller supplies, e.g. 'portions', 'amount', 'ticks', 'untilHunger' */
+  field: string;
+  min: number;
+  max: number;
+  /** plain words for a human and for the prompt */
+  note: string;
+}
+
 export interface Option {
   kind: Activity['kind'];
   label: string;
@@ -26,6 +41,10 @@ export interface Option {
   make?: () => Activity | null;
   /** for the inspector: what category of opportunity this serves */
   tag?: string;
+  /** limits a controller may set on this action (absent = the action takes no parameters) */
+  bounds?: OptionLimit[];
+  /** what taking this would put in the pack, when that is a definite thing. Lets a plan recognise a step that fetches what it needs. */
+  yields?: ItemKind;
 }
 
 export interface Ctx {

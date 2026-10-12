@@ -30,6 +30,7 @@ import { hashString } from '../src/sim/rng';
 import type { Settings, World } from '../src/sim/types';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { anthropicModel } from './inhabit/anthropic';
+import { sourcesFingerprint } from './inhabit/sources';
 import { openaiModel } from './inhabit/openai';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
@@ -42,15 +43,6 @@ const flag = (name: string): boolean => args.includes('--' + name);
 const mode = opt('mode', 'standard');
 const out = opt('out', 'inhabit_out');
 mkdirSync(out, { recursive: true });
-
-/** a fingerprint of the simulation's and the agent's sources, so a transcript says which code made it */
-function sourcesFingerprint(): string {
-  const files: string[] = [];
-  for (const dir of ['src/sim', 'src/agent', 'src/app']) for (const f of readdirSync(dir).sort()) if (f.endsWith('.ts')) files.push(join(dir, f));
-  let text = '';
-  for (const f of files) text += f + '\n' + readFileSync(f, 'utf8');
-  return hashString(text).toString(16).padStart(8, '0');
-}
 
 function worldFor(settings: Settings, tick: number): World {
   const w = createWorld(settings);

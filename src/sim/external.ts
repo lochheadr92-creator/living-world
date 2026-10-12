@@ -15,14 +15,14 @@ import type { Activity, Person, World } from './types';
 export type ExternalChoice =
   /** no answer yet: the person stands this tick and asks again next tick */
   | { kind: 'defer' }
-  /** the key of one of the offered options */
-  | { kind: 'pick'; key: string }
+  /** the key of one of the offered options, optionally narrowed by limits the option declared in `bounds` */
+  | { kind: 'pick'; key: string; limit?: Record<string, number> }
   /** let the engine choose as it would for anyone, and say why the controller did not */
   | { kind: 'fallback'; reason: string };
 
 export type ExternalNote =
-  /** a pick was accepted and the activity started */
-  | { kind: 'applied'; key: string; activity: Activity }
+  /** a pick was accepted and the activity started (with the limits the engine actually accepted) */
+  | { kind: 'applied'; key: string; activity: Activity; limit?: Record<string, number> }
   /** a pick could not be used: the key is not on offer now, or the option could not be set up */
   | { kind: 'rejected'; key: string; reason: string }
   /** the engine chose instead (after a 'fallback', or after every retry was refused) */

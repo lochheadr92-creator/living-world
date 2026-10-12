@@ -4,6 +4,7 @@ import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REP
 import { buildingLabel, completeSite, createSite } from './buildings';
 import { addItem, claimSlot, consume, invRoom, ledgerCreate } from './economy';
 import { addEvent, addFx, addLog } from './events';
+import { creditMade, creditRepair } from './intent';
 import { householdOf } from './buildings';
 import { missingMaterials, observe, delBelief } from './knowledge';
 import { isFacilityType } from './recipes';
@@ -143,7 +144,10 @@ registerHandler('repair', {
     const mat = repairMaterial(b, p.inv);
     if (!mat) return a.cycle > 0 ? 'partial:ran out of materials' : 'fail:ran out of materials';
     consume(world, p.inv, mat.item, 1, 'repairs');
+    const before = b.condition;
     b.condition = Math.min(100, b.condition + mat.gain);
+    // the plan learns what this person's own hands actually put back, where it happens
+    creditRepair(p, b.id, b.condition - before);
     wearFor(world, p, 'repair', a.duration);
     a.cycle++;
     a.progress = 0;
@@ -189,6 +193,8 @@ registerHandler('craft', {
     consume(world, p.inv, 'wood', r.wood, 'crafting: ' + tool);
     consume(world, p.inv, 'stone', r.stone, 'crafting: ' + tool);
     mintTool(world, tool, 0, p.hhId, p.id, p.inv, p.id, 'crafted: ' + tool);
+    // a plan that meant to make this learns that these hands made it, here, where it happened
+    creditMade(p, tool);
     p.stats.crafted++;
     p.skills.craft = Math.min(SKILL_MAX, p.skills.craft + 0.02);
     addLog(world, p, 'work', `Made ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}.`);

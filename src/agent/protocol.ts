@@ -7,8 +7,10 @@
 // its notes. The answer is strict JSON; anything else is a parse failure, which the controller treats as a failed call (the engine then
 // chooses, and the transcript says so). A bad "notes" field spoils the notes update only, never the choice.
 //
-// Two protocols are spoken. inhabitant/1 is the original, without memory: its prompt and answer are unchanged to the byte, so the
-// transcripts recorded under it (the first real-model run) still replay. inhabitant/2 adds the notes.
+// Four protocols are spoken. inhabitant/1 is the original, without memory: its prompt and answer are unchanged to the byte, so the
+// transcripts recorded under it (the first real-model run) still replay. inhabitant/2 adds the notes. inhabitant/3 and inhabitant/4
+// are those two with action limits advertised on the observation. The transcript header names the observation shape; a recording
+// from before that field replays by the shape its protocol was made with.
 import type { InhabitantNotes } from '../sim/types';
 import { LIMITS, parseNoteUpdate } from './memory';
 import type { NoteUpdate } from './memory';
@@ -16,17 +18,22 @@ import type { InhabitantObservation } from './observe';
 
 export const PROTOCOL_V1 = 'inhabitant/1';
 export const PROTOCOL_V2 = 'inhabitant/2';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2];
+/** 3 and 4 are 1 and 2 with one addition: an action may advertise the limits a controller can set on it (observation shape 3). */
+export const PROTOCOL_V3 = 'inhabitant/3';
+export const PROTOCOL_V4 = 'inhabitant/4';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V2 : PROTOCOL_V1;
+  return memory ? PROTOCOL_V4 : PROTOCOL_V3;
 }
-/** the observation shape a protocol was recorded with (observe.ts) */
+/** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
-  return protocol === PROTOCOL_V1 ? 1 : 2;
+  if (protocol === PROTOCOL_V1) return 1;
+  if (protocol === PROTOCOL_V2) return 2;
+  return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4;
 }
 
 export interface Proposal {
@@ -36,6 +43,8 @@ export interface Proposal {
   why: string;
   /** with memory: the notes update, shape-checked (memory.ts), applied when the choice is consumed */
   notes?: NoteUpdate;
+  /** optional limits for the chosen option, checked against the option's own `limits` by the engine (decision.ts) */
+  limit?: Record<string, number>;
 }
 
 export interface PromptInput {
@@ -173,6 +182,20 @@ export function parseProposal(text: string): ParsedProposal {
   if (o.choose.length > MAX_KEY) return { proposal: null, problem: '"choose" is too long to be an option key', notesProblem: null };
   const why = typeof o.why === 'string' ? clean(o.why, MAX_WHY) : '';
   const proposal: Proposal = { choose: clean(o.choose.trim(), MAX_KEY), why };
+  if (o.limit !== undefined) {
+    // shape only: whether each field exists and is in range is the engine's to judge, against the option it belongs to
+    if (!o.limit || typeof o.limit !== 'object' || Array.isArray(o.limit)) return { proposal: null, problem: '"limit" is not an object', notesProblem: null };
+    const raw = o.limit as Record<string, unknown>;
+    const keys = Object.keys(raw);
+    if (keys.length > 4) return { proposal: null, problem: '"limit" has too many fields', notesProblem: null };
+    const limit: Record<string, number> = {};
+    for (const k of keys) {
+      const val = raw[k];
+      if (typeof val !== 'number' || !Number.isFinite(val)) return { proposal: null, problem: `"limit.${clean(k, 40)}" is not a finite number`, notesProblem: null };
+      limit[clean(k, 40)] = val;
+    }
+    if (keys.length) proposal.limit = limit;
+  }
   let notesProblem: string | null = null;
   if (o.notes !== undefined) {
     const n = parseNoteUpdate(o.notes);

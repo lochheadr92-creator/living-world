@@ -1,4 +1,5 @@
 import { newActivity } from './activities';
+import { freeInv, freeOf, setToolWant } from './intent';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
@@ -290,6 +291,8 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   return needs;
 }
 
+setToolWant((ctx) => wantedTool(ctx));
+
 export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | null {
   const { p, world } = ctx;
   if (ctx.stage === 'child') return null;
@@ -357,6 +360,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
       key: `gather:${c.b.id}`,
       targetId: c.b.id,
       tag,
+      yields: item,
       make: () => {
         const spot = spotNear(world, p, c.b);
         if (!spot) return null;
@@ -403,7 +407,9 @@ function optMaterials(ctx: Ctx): void {
   for (const item of ['wood', 'stone', 'clay', 'ore'] as const) {
     const need = byItem[item];
     if (!need) continue;
-    const have = ctx.p.inv[item] ?? 0;
+    // what one of their own plans has spoken for does not count toward this need: otherwise they would stop fetching because the
+    // basket's wood is in the pack, and then not hand that wood over either
+    const have = freeOf(ctx.p, item);
     const missing = need.n - have;
     if (missing <= 0) continue;
     if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) continue;
@@ -436,11 +442,12 @@ function optSites(ctx: Ctx): void {
       continue;
     }
     const committed = p.commitments.some((c) => c.status === 'active' && c.siteId === b.id);
-    // deliver what I am carrying
+    // deliver what I am carrying. A promise outranks a plan of my own, so a promised delivery may still use material my own plan
+    // had spoken for (the plan then says, truthfully, that it is short again); an unpromised errand may not.
     const items: Record<string, number> = {};
     let any = false;
     for (const k in b.need ?? {}) {
-      const have = p.inv[k as ItemKind] ?? 0;
+      const have = committed ? (p.inv[k as ItemKind] ?? 0) : freeOf(p, k as ItemKind);
       const give = Math.min(have, unitsOf(b.need?.[k as ItemKind]));
       if (give > 0) {
         items[k] = give;
@@ -639,7 +646,9 @@ function optRepairAndFire(ctx: Ctx): void {
     if (b.btype === 'fire') {
       const fuel = (b.fuel ?? 0) - (world.tick - b.seen) * 0.85;
       const wanted = fireFuelWanted(world);
-      if (fuel > wanted || ctx.wood < 1) continue;
+      // wood a plan of theirs has spoken for is not firewood
+      const spare = freeOf(p, 'wood');
+      if (fuel > wanted || spare < 1) continue;
       if (!(ctx.night || world.light < 0.55 || world.weather.rain > 0.3 || fuel < 150 || wanted > 500)) continue;
       const lack = Math.max(0, Math.min(1, (wanted - fuel) / wanted));
       const cold = ctx.drives.warmth > 15;
@@ -669,7 +678,7 @@ function optRepairAndFire(ctx: Ctx): void {
             ty: b.y,
             spotX: spot.x,
             spotY: spot.y,
-            amount: Math.min(ctx.wood, 3),
+            amount: Math.min(freeOf(p, 'wood'), 3),
             utility: sc.total,
             minCommit: 30,
             maxTicks: 500,
@@ -680,7 +689,10 @@ function optRepairAndFire(ctx: Ctx): void {
     }
     const stake = repairStake(ctx, b);
     if (stake > 0 && (b.cond ?? 100) < (stake === 1 ? 60 : 45)) {
-      if (!repairMaterial({ type: (b.btype ?? 'hut') as BuildingType }, p.inv)) continue;
+      // the material a plan of theirs has spoken for counts only for the thing that plan is about: the wood meant for their own
+      // roof is not wood for a neighbour's. (For the plan's own building it is the plan's step, and the whole pack counts.)
+      const forThis = p.intentions.some((i) => i.status === 'active' && i.aboutId === b.id);
+      if (!repairMaterial({ type: (b.btype ?? 'hut') as BuildingType }, forThis ? p.inv : freeInv(p))) continue;
       const fail = recentFailure(world, p, b.id, 300);
       if (fail) continue;
       const own = stake === 1;
@@ -725,12 +737,31 @@ function optRepairAndFire(ctx: Ctx): void {
 
 // ───────────────────────── crafting ─────────────────────────
 function optCraft(ctx: Ctx): void {
-  const { world, p } = ctx;
+  const { p } = ctx;
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) return;
-  const tool = wantedTool(ctx);
-  if (!tool) return;
+  // What they would want to make now, AND anything a plan of their own is about. The two can differ: what is most worth making
+  // changes as someone learns the country and picks up skills, and without this the step a plan was carrying - the one it fetched
+  // the materials for - would simply stop being on offer, and the project would end as "had the makings but never sat down to it".
+  const tools: ToolKind[] = [];
+  const want = wantedTool(ctx);
+  if (want) tools.push(want);
+  for (const i of p.intentions) {
+    if (i.status === 'active' && i.kind === 'tool' && i.makes && !tools.includes(i.makes as ToolKind)) tools.push(i.makes as ToolKind);
+  }
+  for (const t of tools) craftOption(ctx, t as 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw');
+}
+
+function craftOption(ctx: Ctx, tool: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw'): void {
+  const { world, p } = ctx;
+  if ((p.inv[tool] ?? 0) > 0) return; // they already have one
   const r = TOOL_RECIPE[tool];
-  if (ctx.wood < r.wood || ctx.stone < r.stone) return;
+  // The tool a live plan of theirs is about may use that plan's own allocation; any other tool may use only what no plan has spoken
+  // for - the same rule the site deliveries, the camp fire and a neighbour's roof already follow (intent.ts freeOf). Without this,
+  // the wood someone had set aside for a basket could go into an axe instead.
+  const forPlan = p.intentions.some((i) => i.status === 'active' && i.kind === 'tool' && i.makes === tool);
+  const haveWood = forPlan ? ctx.wood : freeOf(p, 'wood');
+  const haveStone = forPlan ? ctx.stone : freeOf(p, 'stone');
+  if (haveWood < r.wood || haveStone < r.stone) return;
   // workspace: home, storehouse, or the fire
   let best: Belief | null = null;
   let bd = 1e9;

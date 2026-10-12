@@ -10,8 +10,8 @@ import { settingsForProfile } from '../sim/profiles';
 import type { ProfileName } from '../sim/profiles';
 import type { InhabitantNotes, Settings, World } from '../sim/types';
 import { LiveSession, livingPerson } from '../agent/run';
-import { RetryableModelError } from '../agent/model';
-import type { ModelClient } from '../agent/model';
+import { DEFAULT_BUDGET, RetryableModelError } from '../agent/model';
+import type { ModelClient, ModelRequest } from '../agent/model';
 import type { Ask, Call, Transcript } from '../agent/transcript';
 import type { Game } from './game';
 import type { Prefs } from './prefs';
@@ -33,6 +33,8 @@ export interface InhabitConfig {
   rich: boolean;
   size: ProfileName;
   arrivals: boolean;
+  /** a person answered by hand (or by a chat, through the panel): no key, no model call, no network */
+  manual: boolean;
 }
 
 /** the page's query string, or null when it does not ask for an inhabitant */
@@ -56,6 +58,7 @@ export function inhabitConfigFromUrl(search: string, prefs: Pick<Prefs, 'seed'>)
     rich: on('rich'),
     size: size === 'large' || size === 'huge' ? size : 'normal',
     arrivals: !on('noarrivals'),
+    manual: on('manual'),
   };
 }
 
@@ -87,6 +90,93 @@ export function httpModel(cfg: Pick<InhabitConfig, 'api' | 'model' | 'effort'>, 
   };
 }
 
+/**
+ * A person answered by hand. The same ModelClient seam the API models use, but `complete` hands the prompt to the panel and waits:
+ * the clock is already stopped while a decision is pending (the driver stops it before awaiting), so thinking time never moves the
+ * world. One decision is pending at a time; an answer to a decision that is no longer pending is refused, so a stale or repeated
+ * submission cannot be applied to the wrong tick. No key, no network, no model call.
+ */
+export interface ManualModel extends ModelClient {
+  /** the prompt now waiting for an answer, or null when nothing is waiting */
+  waiting(): { system: string; user: string; id: number } | null;
+  /** answer the waiting prompt with the raw JSON a controller would send. False: nothing is waiting, or `id` is stale */
+  submit(text: string, id?: number): boolean;
+  /** decline this decision: the engine chooses, and the transcript says why */
+  decline(reason: string, id?: number): boolean;
+  /** give up on whatever is waiting (control is going back to the engine): nothing is chosen and nothing stays pending */
+  abandon(reason: string): boolean;
+  onChange(fn: () => void): () => void;
+}
+
+export function manualModel(): ManualModel {
+  let pending: { req: ModelRequest; id: number; resolve: (r: { text: string }) => void; reject: (e: Error) => void } | null = null;
+  let nextId = 1;
+  const listeners = new Set<() => void>();
+  const changed = (): void => {
+    for (const l of listeners) l();
+  };
+  return {
+    id: 'manual',
+    kind: 'manual',
+    config: { by: 'hand' },
+    complete(req, signal) {
+      // A second ask while one is open means the earlier moment has been overtaken (the tick it belonged to was replayed).
+      // Supersede it rather than failing the call: a refusal here counts against the breaker and would end the session.
+      if (pending) {
+        const stale = pending;
+        pending = null;
+        stale.reject(new Error('that moment was overtaken before it was answered'));
+      }
+      return new Promise<{ text: string }>((resolve, reject) => {
+        const id = nextId++;
+        pending = { req, id, resolve, reject };
+        const onAbort = (): void => {
+          if (pending && pending.id === id) {
+            pending = null;
+            changed();
+          }
+          reject(new Error('the decision was abandoned'));
+        };
+        if (signal.aborted) onAbort();
+        else signal.addEventListener('abort', onAbort, { once: true });
+        changed();
+      });
+    },
+    waiting() {
+      return pending ? { system: pending.req.system, user: pending.req.user, id: pending.id } : null;
+    },
+    submit(text, id) {
+      if (!pending || (id !== undefined && id !== pending.id)) return false;
+      const p = pending;
+      pending = null;
+      p.resolve({ text });
+      changed();
+      return true;
+    },
+    decline(reason, id) {
+      if (!pending || (id !== undefined && id !== pending.id)) return false;
+      const p = pending;
+      pending = null;
+      // an answer with no usable choice: the gate records it and the engine chooses, exactly as a refusing model would
+      p.resolve({ text: JSON.stringify({ choose: '', why: reason }) });
+      changed();
+      return true;
+    },
+    abandon(reason) {
+      if (!pending) return false;
+      const p = pending;
+      pending = null;
+      p.reject(new Error(reason));
+      changed();
+      return true;
+    },
+    onChange(fn) {
+      listeners.add(fn);
+      return () => listeners.delete(fn);
+    },
+  };
+}
+
 export type InhabitStatus = 'preparing' | 'running' | 'thinking' | 'finished' | 'dead' | 'failed';
 
 /** Drives one LiveSession from the Game's clock. */
@@ -100,14 +190,22 @@ export class InhabitDriver {
   untilTick: number | null = null;
   private appliedBefore = -1;
   private pending: Promise<void> | null = null;
+  /** the session is over. An answer still in flight resolves normally (the gate turns a refusal into a recorded failure, not a
+   *  rejection), so without this a late completion would set the driver running again after Stop. */
+  private over = false;
   private listeners = new Set<() => void>();
   private resumeSpeed = 1;
 
   constructor(
     readonly game: Game,
     readonly cfg: InhabitConfig,
-    private readonly model: ModelClient = httpModel(cfg),
+    private readonly model: ModelClient = cfg.manual ? manualModel() : httpModel(cfg),
   ) {}
+
+  /** the hand-control handle, when this person is answered by hand */
+  manual(): ManualModel | null {
+    return this.model.kind === 'manual' ? (this.model as ManualModel) : null;
+  }
 
   subscribe(fn: () => void): () => void {
     this.listeners.add(fn);
@@ -144,7 +242,10 @@ export class InhabitDriver {
     this.personId = person.id;
     this.personName = person.name;
     try {
-      this.session = new LiveSession(w, person.id, this.model, { memory: this.cfg.memory, observe: { showScores: this.cfg.showScores } });
+      // Answering by hand takes as long as it takes: the clock is stopped meanwhile, so no wall-clock cap belongs on it.
+      // 2**31-1 ms (about 24 days) is the largest a timer takes: anything above it silently becomes 1 ms and would abort at once.
+      const budget = this.model.kind === 'manual' ? { ...DEFAULT_BUDGET, timeoutMs: 2 ** 31 - 1, maxCallsPerDay: 2 ** 20 } : undefined;
+      this.session = new LiveSession(w, person.id, this.model, { memory: this.cfg.memory, observe: { showScores: this.cfg.showScores }, ...(budget ? { budget } : {}) });
     } catch (e) {
       this.set('failed', e instanceof Error ? e.message : String(e));
       return;
@@ -153,15 +254,25 @@ export class InhabitDriver {
     game.focusEntity(person.id);
     game.setFollow(true);
     game.tickHooks = { beforeTick: () => this.onBeforeTick(), afterTick: () => this.onAfterTick() };
-    this.set('running', `${person.name} is driven by ${this.model.id}${this.cfg.memory ? ', keeping notes' : ''}`);
+    this.set('running', `${person.name} is ${this.model.kind === 'manual' ? 'answered by hand' : `driven by ${this.model.id}`}${this.cfg.memory ? ', keeping notes' : ''}`);
     game.setPlaying(true);
   }
 
-  private onBeforeTick(): void {
+  private onBeforeTick(): boolean {
     const s = this.session;
-    if (!s) return;
+    if (!s) return true;
+    // An answer is outstanding: the world holds still. Without this the clock could be restarted under a waiting decision, run a
+    // tick, and make the session ask a second time for a moment that was already open - which the model then had to refuse.
+    if (this.pending) {
+      this.game.setPlaying(false);
+      return false;
+    }
     this.appliedBefore = s.lastApplied();
-    if (!s.beforeTick(this.game.world)) this.end('dead', `${this.personName} died`);
+    if (!s.beforeTick(this.game.world)) {
+      this.end('dead', `${this.personName} died`);
+      return false;
+    }
+    return true;
   }
 
   private onAfterTick(): boolean {
@@ -184,13 +295,15 @@ export class InhabitDriver {
     this.pending = s
       .answer(ask)
       .then(() => {
-        if (!this.session) return;
+        if (!this.session || this.over) return;
         game.world = s.rewind(ask);
         this.set('running', ask.proposal ? `chose ${ask.proposal.choose}` : `the engine chooses (${ask.problem ?? 'no answer'})`);
         game.setSpeed(this.resumeSpeed);
         game.setPlaying(true);
       })
-      .catch((e: unknown) => this.end('failed', e instanceof Error ? e.message : String(e)))
+      .catch((e: unknown) => {
+        if (!this.over) this.end('failed', e instanceof Error ? e.message : String(e));
+      })
       .finally(() => {
         this.pending = null;
       });
@@ -203,7 +316,11 @@ export class InhabitDriver {
   }
 
   private end(status: InhabitStatus, detail: string): void {
+    this.over = true;
     const s = this.session;
+    // a decision may be waiting for an answer by hand at this very moment: let it go, or it would sit there for ever and the
+    // panel would go on offering a moment that no longer exists
+    this.manual()?.abandon('control was handed back to the engine');
     this.game.tickHooks = null;
     this.game.setPlaying(false);
     if (s) s.finish(this.game.world);

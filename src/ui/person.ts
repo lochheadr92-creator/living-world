@@ -231,6 +231,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const qTrying = makeQA('q_goal', 'What are they trying to achieve?', 'q-trying');
   const qStopping = makeQA('q_block', 'What is stopping them?', 'q-stopping');
   const qLast = makeQA('q_last', 'What happened after their last attempt?', 'q-last');
+  const qPlan = makeQA('q_goal', 'What are they set on?', 'q-plan');
   const taskBar = makeBar('thin task');
   const taskTxt = h('span', { class: 'task-txt num' });
   const taskRow = h('div', { class: 'task' }, taskBar.el, taskTxt);
@@ -260,7 +261,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     { class: 'upto', 'aria-labelledby': 'lw-upto-h' },
     h('div', { class: 'upto-top' }, h('h3', { class: 'upto-h', id: 'lw-upto-h' }, 'What are they up to?'), moreBtn),
     speech,
-    h('dl', { class: 'qa', id: 'lw-upto-qa' }, qDoing.el, qWhy.el, qTrying.el, qStopping.el, qLast.el),
+    h('dl', { class: 'qa', id: 'lw-upto-qa' }, qDoing.el, qWhy.el, qTrying.el, qStopping.el, qLast.el, qPlan.el),
   );
   function syncMore(): void {
     toggle(upto, 'is-brief', !uptoMore);
@@ -338,6 +339,11 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     setText(qTrying.a, v.qa.trying);
     setText(qStopping.a, v.qa.stopping);
     setText(qLast.a, v.qa.lastAttempt);
+    // a private plan: only shown when they have one, so an ordinary person's card is no longer than it was
+    // One line per plan they are carrying, each saying how its own step stands. They are listed, not ranked: the one they are
+    // actually getting on with is the one that reads "under way".
+    setText(qPlan.a, v.plans.length ? v.plans.map((pl) => `${pl.detail}${pl.missing ? ` Still needs ${pl.missing}.` : ''}`).join(' · ') : v.qa.plan);
+    setHidden(qPlan.el, !v.plans.length && !v.qa.plan);
     const clear = isClear(v.qa.stopping);
     toggle(qStopping.el, 'is-clear', clear);
     toggle(qStopping.el, 'is-snag', !clear);
