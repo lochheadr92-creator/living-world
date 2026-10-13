@@ -3,16 +3,18 @@
 //
 //   npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/harsh6-tomas-gpt5/transcript.json --asks auto --repeats 3 --api openai --model gpt-5
 //   npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/memory-pavel-gpt5 --asks 3,4 --stub last    (no key: a scripted model)
+//   npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/memory-pavel-gpt5 --asks 3 --stub garbage    (every answer unusable: the no-result path)
 //
 // --asks auto (or strong) takes the strong candidates attribution finds (the chosen option carries out a noted target); --asks weak adds
-// the weak ones (reason words only in the notes, pursuit by shared words); --asks all, every decision. --no-both skips the with-notes arm (cheaper; then a difference cannot be read against the model's own variance). Writes
+// the weak ones (reason words only in the notes, pursuit by shared words); --asks all, every decision. A run in which no call was
+// answered writes counterfactual.failed.txt instead and exits 1: it is no result, never a null result. --no-both skips the with-notes arm (cheaper; then a difference cannot be read against the model's own variance). Writes
 // counterfactual.json and counterfactual.txt beside the transcript (--out to put them elsewhere); an existing counterfactual.json is kept
 // unless --overwrite. Keys: OPENAI_API_KEY / ANTHROPIC_API_KEY, as for scripts/inhabit.ts.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { candidateAsks } from '../src/agent/attribute';
 import { counterfactual, renderCounterfactual } from '../src/agent/counterfactual';
-import { DEFAULT_BUDGET } from '../src/agent/model';
+import { DEFAULT_BUDGET, stubModel } from '../src/agent/model';
 import type { ModelClient } from '../src/agent/model';
 import { pickerModel } from '../src/agent/stubs';
 import type { Transcript } from '../src/agent/transcript';
@@ -49,7 +51,9 @@ const stub = opt('stub', '');
 const api = opt('api', 'openai');
 const effort = opt('effort', '');
 const model: ModelClient = stub
-  ? pickerModel(stub as 'first' | 'last' | 'cycle')
+  ? stub === 'garbage'
+    ? stubModel('stub:garbage', () => 'not json') // rehearses the no-result path without a key
+    : pickerModel(stub as 'first' | 'last' | 'cycle')
   : api === 'anthropic'
     ? anthropicModel({ model: opt('model', 'claude-opus-5-5'), effort: (effort || 'medium') as 'low' | 'medium' | 'high' })
     : openaiModel({ model: opt('model', 'gpt-5'), ...(effort ? { effort: effort as 'low' | 'medium' | 'high' } : {}) });
@@ -76,6 +80,14 @@ void (async () => {
   });
   process.stdout.write('\n');
   const text = renderCounterfactual(c);
+  if (c.answered === 0) {
+    // a run in which nothing was answered leaves no counterfactual.json behind: a check for the file must not pass on a failure
+    const failed = join(out, 'counterfactual.failed.txt');
+    writeFileSync(failed, text + '\n');
+    console.log(text);
+    console.log(`\n(no result; the failure is recorded in ${failed})`);
+    process.exit(1);
+  }
   writeFileSync(jsonPath, JSON.stringify(c));
   writeFileSync(join(out, 'counterfactual.txt'), text + '\n');
   console.log(text);

@@ -29,8 +29,9 @@ export interface CounterfactualAsk {
   without: Arm;
   majorityWith: string | null;
   majorityWithout: string | null;
-  /** the arms' most common choices differ */
-  shift: boolean;
+  /** the arms' most common choices differ. Null when there is nothing to decide: the ask had no notes to take away, or an arm got no
+   * usable answer at all (a failed run is no result, never a null result). */
+  shift: boolean | null;
 }
 
 export interface Counterfactual {
@@ -39,7 +40,11 @@ export interface Counterfactual {
   repeats: number;
   asks: CounterfactualAsk[];
   calls: number;
+  /** calls that came back with a usable proposal */
+  answered: number;
   shifts: number;
+  /** asks with notes where an arm got no usable answer: nothing can be said about them */
+  undecided: number;
 }
 
 export function majority(choices: (string | null)[]): string | null {
@@ -121,10 +126,20 @@ export async function counterfactual(t: Transcript, seqs: number[], model: Model
       without,
       majorityWith,
       majorityWithout,
-      shift: withNotes !== null && majorityWith !== majorityWithout,
+      shift: withNotes === null || majorityWith === null || majorityWithout === null ? null : majorityWith !== majorityWithout,
     });
   }
-  return { person: t.header.personName, model: model.id, repeats, asks: results, calls: gate.calls, shifts: results.filter((r) => r.shift).length };
+  const answered = results.reduce((n, r) => n + [...(r.with?.choices ?? []), ...r.without.choices].filter((c) => c !== null).length, 0);
+  return {
+    person: t.header.personName,
+    model: model.id,
+    repeats,
+    asks: results,
+    calls: gate.calls,
+    answered,
+    shifts: results.filter((r) => r.shift === true).length,
+    undecided: results.filter((r) => r.with !== null && r.shift === null).length,
+  };
 }
 
 function tally(arm: Arm): string {
@@ -138,10 +153,22 @@ function tally(arm: Arm): string {
 
 export function renderCounterfactual(c: Counterfactual): string {
   const lines: string[] = [];
-  lines.push(`counterfactual re-ask: ${c.person}, ${c.model}, ${c.repeats} repeats per arm, ${c.calls} calls; ${c.shifts} of ${c.asks.length} asks shift when the notes are taken away`);
+  const decided = c.asks.filter((a) => a.shift !== null).length;
+  const noNotes = c.asks.filter((a) => a.with === null).length;
+  if (c.answered === 0) {
+    // every call failed: say so in the first line, in words no summary can mistake for a finding
+    const why = Array.from(new Set(c.asks.flatMap((a) => [...(a.with?.problems ?? []), ...a.without.problems]).filter((p): p is string => p !== null))).slice(0, 2);
+    lines.push(`NO RESULT: counterfactual re-ask of ${c.person} by ${c.model}: ${c.calls} calls, none answered${why.length ? ` (${why.join('; ')})` : ''}. This says nothing about the notes.`);
+  } else {
+    lines.push(
+      `counterfactual re-ask: ${c.person}, ${c.model}, ${c.repeats} repeats per arm, ${c.calls} calls (${c.answered} answered); ${c.shifts} of ${decided} decided asks shift when the notes are taken away` +
+        `${c.undecided ? `; ${c.undecided} undecided (an arm got no usable answer)` : ''}${noNotes ? `; ${noNotes} had no notes to take away` : ''}`,
+    );
+  }
   lines.push('');
   for (const a of c.asks) {
-    lines.push(`${a.shift ? '*' : ' '} ask ${a.seq} t${a.tick}  recorded ${a.recorded ?? '-'} of ${a.options} options`);
+    const mark = a.shift === true ? '*' : a.shift === null && a.with !== null ? '?' : ' ';
+    lines.push(`${mark} ask ${a.seq} t${a.tick}  recorded ${a.recorded ?? '-'} of ${a.options} options${a.shift === null && a.with !== null ? '  (undecided)' : ''}`);
     if (a.with) lines.push(`    with notes:    ${tally(a.with)}`);
     lines.push(`    without notes: ${tally(a.without)}`);
     const why = a.without.whys.find((w) => w) ?? null;

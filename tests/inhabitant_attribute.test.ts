@@ -121,9 +121,9 @@ describe('the counterfactual re-ask', () => {
     const c = await counterfactual(t, [0, 3], swayed, { repeats: 2 });
     expect(c.repeats).toBe(2);
     expect(c.asks.length).toBe(2);
-    // ask 0 had no notes: one arm only, no shift to speak of
+    // ask 0 had no notes: one arm only, nothing to decide
     expect(c.asks[0]!.with).toBeNull();
-    expect(c.asks[0]!.shift).toBe(false);
+    expect(c.asks[0]!.shift).toBeNull();
     expect(c.asks[0]!.without.choices).toEqual([t.asks[0]!.observation.options[0]!.key, t.asks[0]!.observation.options[0]!.key]);
     // ask 3 had notes: both arms, and this model moves
     const a3 = c.asks[1]!;
@@ -134,9 +134,12 @@ describe('the counterfactual re-ask', () => {
     expect(a3.majorityWithout).toBe(opts[0]!.key);
     expect(a3.shift).toBe(true);
     expect(c.shifts).toBe(1);
+    expect(c.undecided).toBe(0);
+    expect(c.answered).toBe(6);
     expect(c.calls).toBe(2 + 4);
     const text = renderCounterfactual(c);
-    expect(text).toMatch(/1 of 2 asks shift/);
+    expect(text).toMatch(/1 of 1 decided asks shift/);
+    expect(text).toMatch(/1 had no notes to take away/);
     expect(text).toMatch(/\* ask 3 /);
     expect(text).toMatch(/a reason without notes: as I see it/);
   });
@@ -153,6 +156,23 @@ describe('the counterfactual re-ask', () => {
     const b = await counterfactual(t, [3], broken, { repeats: 1 });
     expect(b.asks[0]!.without.choices).toEqual([null]);
     expect(b.asks[0]!.without.problems[0]).toMatch(/JSON/);
+    // a run in which nothing was answered is no result, never "0 shift"
+    expect(b.answered).toBe(0);
+    expect(b.shifts).toBe(0);
+    expect(b.undecided).toBe(1);
+    expect(b.asks[0]!.shift).toBeNull();
+    const failed = renderCounterfactual(b);
+    expect(failed.startsWith('NO RESULT:')).toBe(true);
+    expect(failed).toMatch(/2 calls, none answered/);
+    expect(failed).not.toMatch(/of \d+ decided asks shift/);
+    expect(failed).toMatch(/\? ask 3 .*\(undecided\)/);
+    // one arm failing (as a rate limit would) leaves the ask undecided, and the header says so
+    const lopsided = stubModel('lopsided', (req) => (req.user.includes('<your_notes>') ? JSON.stringify({ choose: t.asks[3]!.observation.options[0]!.key }) : 'not json'));
+    const l = await counterfactual(t, [3], lopsided, { repeats: 2 });
+    expect(l.answered).toBe(2);
+    expect(l.undecided).toBe(1);
+    expect(l.asks[0]!.shift).toBeNull();
+    expect(renderCounterfactual(l)).toMatch(/0 of 0 decided asks shift when the notes are taken away; 1 undecided/);
     expect(() => majority([])).not.toThrow();
     expect(majority(['a', 'b', 'b', null])).toBe('b');
     expect(majority(['b', 'a'])).toBe('a'); // a tie goes to the first by name
