@@ -37,8 +37,9 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 
 ## Expensive runs: give the user PowerShell lines, do not run them here
 The cloud container has 4 cores; the user has a 24-core Windows machine. Anything over about 3 minutes of wall time here, or that needs many
-Large-profile seeds (a Large world costs about 15 CPU-seconds per simulated day), goes to the user's machine. Unit tests, `tsc`, one-seed
-smoke runs and short checks stay here. When a run belongs on the user's machine:
+Large-profile seeds (a Large world costs about 15 CPU-seconds per simulated day on an idle core, and about 30 when every core is busy,
+which is the case that matters here), goes to the user's machine. Unit tests, `tsc`, one-seed smoke runs and short checks stay here.
+When a run belongs on the user's machine:
 1. Push the code first (they pull it), then give the lines below, adjusted. One line per code block, no `&&` (Windows PowerShell 5.1).
 2. Say roughly how long it will take on 24 cores and what to paste back: only `<out>\report.txt`, never the progress lines.
 3. Tell them re-running the same command resumes unfinished seeds (`lab.mjs` skips finished ones).
@@ -53,11 +54,19 @@ node scripts/lab.mjs --out split_out --seeds 24 --fork 0 --days 15 --branches nu
 node scripts/novelneed_all.mjs --out nn_out --seeds 24 --fork 6 --days 10
 ```
 (`npm ci` only the first time or when `package.json` changed. The second `lab_report` line re-renders a report from existing data, which
-takes seconds.) Cost: seeds x (fork days + branches x days) x about 15 CPU-seconds, divided by cores.
+takes seconds.) Cost: seeds x (fork days + branches x days) x about 30 CPU-seconds, divided by cores - measured twice on the
+24-core machine, at 28.1 and 29.8 CPU-seconds per simulated day with all 24 busy. The older figure of 15 is an idle-core rate and
+halves every estimate: the plans ensemble was predicted at 20 minutes and took 28.
 
 ## Gotchas
 - The cloud container restarts when the session is idle: background jobs die. Stay in an active turn while waiting (poll with
   `until`/`for` loops under 10 minutes), keep output small.
+- A job backgrounded through the harness also dies when the *session* ends, which costs a whole ensemble. On the user's Windows
+  machine launch a long run detached instead, so it outlives the session and the next one just reads `<out>/report.txt`:
+  `Start-Process node -ArgumentList 'scripts/lab.mjs','--out',... -WorkingDirectory <repo> -RedirectStandardOutput <log> -WindowStyle Hidden -PassThru`.
+- Do not test a lab run's liveness by the mtime of its `lab_*.jsonl`. Each seed's file is a buffered stream that only touches disk
+  when an arm finishes, so a healthy run looks untouched for minutes, and an mtime check cries stall seconds before the seeds all
+  land together. Check the process (`tasklist //FI "PID eq <pid>"`); 24 parallel seeds finish in a burst, not a trickle.
 - `pkill -f` / `pgrep -f` with a pattern that appears in your own command line kills your own shell. Use the bracket trick (`'[l]ab_seed'`).
 - Node `fetch` refuses port 4190. Chromium: `CHROME_PATH=/opt/pw-browsers/chromium-1194/chrome-linux/chrome CHROME_FLAGS=--no-sandbox`.
 - Compare a lab branch with the mean of the control and the nudges, never one control alone (one control is one chaotic draw).
