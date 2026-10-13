@@ -854,41 +854,46 @@ describe('the same answer given twice says and does the same thing once', () => 
   });
 
   it('a repeated answer cannot rewrite an ask that was already answered with a promise', () => {
-    // Ben has his own project for the stone he carries, so what he can give is a promise to fetch, not what is in his hands
-    const { w, ada, ben, plan } = pair('d1-repeat-promised', 1, 0);
-    const rock = makeSource(w, 'rock', 20, 62, 12);
-    observe(w, ben, rock);
-    produce(w, ben.inv, carryCap(w, ben), 'wood', 2, 'test: given to Ben');
-    ben.stats.gathered = 12;
-    ben.stats.built = 1;
-    ben.skills.build = 3;
-    reviewIntentions(ctxFor(w, ben));
-    const req = askAndAnswer(w, ada, ben, plan);
-    if (req.status !== 'promised') {
-      // he had it to hand after all: the fulfilled case is covered by the test above
-      expect(['fulfilled', 'partial']).toContain(req.status);
-      return;
-    }
+    // The hammer Ben means to make takes both pieces of stone he is carrying, and he knows a rock, so he has none spare to hand
+    // over and can still fetch more. That is a promise. Giving him spare wood, as an earlier draft of this scene did, is a gift.
+    const { w, ada, ben, plan, farRock } = scene('d1-repeat-promised');
+    benHasHisOwnPlan(w, ben, farRock, true);
+    expect(ben.intentions.some((i) => i.status === 'active' && i.kind === 'tool' && (i.wants.stone ?? 0) >= (ben.inv.stone ?? 0)), 'his own project speaks for the stone in his hands').toBe(true);
+    const taker = takesTheAsk(ada, ':plan:stone');
+    const made = until(w, 3600, () => w.requests.some((r) => r.planId === plan.id && r.to === ben.id));
+    taker.restore();
+    expect(made, 'the engine offered the ask and she took it').toBeGreaterThanOrEqual(0);
+    const req = w.requests.find((r) => r.planId === plan.id && r.to === ben.id)!;
+    const answered = until(w, 600, () => req.status !== 'pending');
+    expect(answered, `an answer was given (status ${req.status} ${req.note})`).toBeGreaterThanOrEqual(0);
+    expect(req.status, `the first answer must be a promise, not ${req.status} (${req.note})`).toBe('promised');
     const live = ben.commitments.filter((c) => c.status === 'active');
     expect(live, 'one obligation, for what he agreed to').toHaveLength(1);
     expect(req.delivered ?? 0, 'and nothing delivered yet').toBe(0);
-    // and she comes by the wood herself in the meantime: the ask is answered, so there is nothing left for anyone to revise - the
+    // and she comes by the stone herself in the meantime: the ask is answered, so there is nothing left for anyone to revise - the
     // promise is his to keep and runs its own course (the late-delivery rule)
-    produce(w, ada.inv, carryCap(w, ada), 'wood', 1, 'test: she found the last piece herself');
+    produce(w, ada.inv, carryCap(w, ada), 'stone', 1, 'test: she found the last piece herself');
     const before = record(w, ada, ben, req);
+    const packs = { ada: { ...ada.inv }, ben: { ...ben.inv } };
+    const events = w.events.length;
 
-    expect(answerAgain(w, ada)).toBe(true);
+    expect(answerAgain(w, ada), 'the exchange was still open to answer again').toBe(true);
     const after = record(w, ada, ben, req);
     expect(after.status, 'the promise still stands: a settled ask is not revised by a later answer').toBe('promised');
     expect(after.note).toBe(before.note);
+    expect(after.outcome).toBe(before.outcome);
+    expect(after.resolved, 'settled once, at the moment it was settled').toBe(before.resolved);
     expect(after.amount, 'and the ask it answers was not rewritten').toBe(before.amount);
     expect(after.offered).toBe(before.offered);
-    expect(after.delivered).toBe(before.delivered);
+    expect(after.delivered, 'a second answer delivers nothing').toBe(before.delivered);
+    expect(after.delivered).toBe(0);
     expect(after.commitments, 'with no second obligation taken on').toBe(before.commitments);
     expect(ben.commitments.filter((c) => c.status === 'active'), 'and his obligation was not voided from afar').toHaveLength(1);
-    expect(after.ada).toBe(before.ada);
-    expect(after.ben).toBe(before.ben);
-    expect(after.trust).toBe(before.trust);
+    expect(ada.inv).toEqual(packs.ada);
+    expect(ben.inv).toEqual(packs.ben);
+    expect(after.trust, 'nobody was thanked twice').toBe(before.trust);
+    expect(after.aff).toBe(before.aff);
+    expect(w.events.length, 'and the promise is not announced again').toBe(events);
     expect(conservationReport(w).ok).toBe(true);
   });
 
