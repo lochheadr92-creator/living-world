@@ -1,5 +1,6 @@
 // Aggregate the lab's output: paired differences against the control, against the noise floor, in plain sentences.
-//   npx vite-node scripts/lab_report.ts -- lab_out [--story meadow]
+//   npx vite-node scripts/lab_report.ts -- lab_out [--story meadow] [--vs rich:rich-stakes-only,rich:rich-mood-only]
+//   --vs A:B adds a direct contrast of two branches, A − B, paired by seed (the effect of what A has that B lacks).
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { METRICS } from './lab/lab';
@@ -7,8 +8,10 @@ import type { BranchResult, Metric } from './lab/lab';
 import { mean, paired, sd, verdict } from './lab/stats';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
-const dir = args.find((a) => !a.startsWith('--') && args[args.indexOf(a) - 1] !== '--story') ?? '.';
+const dir = args.find((a) => !a.startsWith('--') && !args[args.indexOf(a) - 1]?.startsWith('--')) ?? '.';
 const storySeed = args.includes('--story') ? args[args.indexOf('--story') + 1] : null;
+const vsArg = args.includes('--vs') ? args[args.indexOf('--vs') + 1] ?? '' : '';
+for (const a of args) if (a.startsWith('--') && !['--story', '--vs'].includes(a)) console.error(`unknown option ${a} (ignored)`);
 
 type Row = BranchResult & { seed: string; profile: string; fork: number; days: number };
 const bySeed = new Map<string, Map<string, Row>>();
@@ -82,6 +85,43 @@ for (const spec of specs) {
     lines.push(`${m} ${mean(rows.map((r) => refMean(r.seed, r.spec, m))).toFixed(1)} → ${mean(rows.map((r) => r.outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
   }
   console.log(same === rows.length ? '   In words: the branch ended in exactly the control\'s state in every seed.' : lines.length ? '   In words: ' + lines.join('; ') + '.' : '   In words: nothing moved by more than a one-draw nudge moves it.');
+}
+
+// Direct contrasts, A − B, seed by seed. Both branches are compared with each other, not with a reference, so what they share (the
+// seed's own luck, the stakes both carry) cancels in the difference. The noise floor is rescaled: a nudge is measured against the mean of
+// k other runs (variance σ²(1 + 1/k)), while two single branches differ with variance 2σ², so the sd grows by sqrt(2 / (1 + 1/k)).
+// That assumes the runs are independent draws of equal spread, which is the same assumption the nudge floor already makes.
+const contrastScale = nudgeSpecs.length ? Math.sqrt(2 / (1 + 1 / nudgeSpecs.length)) : 1;
+for (const pair of vsArg ? vsArg.split(',') : []) {
+  const [a, b] = pair.split(':');
+  const have = ['control', ...specs];
+  if (!a || !b || !have.includes(a) || !have.includes(b)) {
+    console.log(`\n── ${pair}: not a contrast of two branches in these results (have: ${have.join(', ')}; write it as A:B)`);
+    continue;
+  }
+  const both = seeds.filter((s) => bySeed.get(s)!.has(a) && bySeed.get(s)!.has(b));
+  if (!both.length) {
+    console.log(`\n── ${a} − ${b}: no seed has both branches`);
+    continue;
+  }
+  const ra = (s: string) => bySeed.get(s)!.get(a)!;
+  const rb = (s: string) => bySeed.get(s)!.get(b)!;
+  const same = both.filter((s) => ra(s).finalHash === rb(s).finalHash).length;
+  const w = Math.max(8, a.length + 1, b.length + 1);
+  console.log(`\n── ${a} − ${b}: direct contrast, paired by seed  [${both.length} seeds]`);
+  console.log(`   final state identical in ${same}/${both.length} seeds`);
+  console.log('   ' + 'metric'.padEnd(15) + a.padStart(w) + b.padStart(w) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
+  const lines: string[] = [];
+  for (const m of METRICS) {
+    const st = paired(both.map((s) => ra(s).outcome[m] - rb(s).outcome[m]));
+    const v = verdict(st, noise[m] * contrastScale, same === both.length);
+    console.log(
+      '   ' + m.padEnd(15) + mean(both.map((s) => ra(s).outcome[m])).toFixed(1).padStart(w) + mean(both.map((s) => rb(s).outcome[m])).toFixed(1).padStart(w) +
+        num(st.meanDiff).padStart(8) + `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
+    );
+    if (v === 'larger than chance') lines.push(`${m} ${mean(both.map((s) => rb(s).outcome[m])).toFixed(1)} → ${mean(both.map((s) => ra(s).outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);
+  }
+  console.log(same === both.length ? '   In words: the two branches ended in the same state in every seed.' : lines.length ? `   In words, going from ${b} to ${a}: ` + lines.join('; ') + '.' : `   In words: ${a} and ${b} differ by no more than a one-draw nudge makes them.`);
 }
 
 if (storySeed) {

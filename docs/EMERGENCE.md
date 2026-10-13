@@ -147,7 +147,7 @@ the experiment that tells them apart (stakes without the mood effects, and the r
   -2.3 against -1.1, buildings -7.1 against -5.0, homeless 0.8 against 0.2, deaths 1.0 against 0.7, lowMood 2.0 against 1.2), all in the
   same direction, but the intervals overlap and `rich` minus `rich-stakes-only` was not computed paired by seed. LIKELY, not shown: an
   interaction, where stakes push people low and the mood weights then pull them from building to rest. It is also compatible with chance.
-  A paired contrast (the report has no `--compare` option yet) or more seeds would settle it.
+  A paired contrast (`npx vite-node scripts/lab_report.ts -- <out> --vs rich:rich-stakes-only`, added after this run) or more seeds would settle it.
 * Limits: 15 days contains one winter (days 8 to 11 of the first year); the mood result may not hold over several years.
 
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
