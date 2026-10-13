@@ -570,12 +570,15 @@ What this does not say: it compares plans against no plans, not cooperation agai
 control arm and vanish with the plans in `rich-no-plans` (an ask exists only because a plan is short of something), so the two are
 measured together here and cooperation's own contribution is still unmeasured.
 
-## Still outstanding (prepared, not run: it belongs on the 24-core machine)
+## Recorded: where a rich world sits, so a later change to one can be gated (`docs/gates-rich.json`)
 
-**A baseline for rich worlds, so future changes to them can be gated.** `docs/gates.json` records an **authored** Large world
-and must stay that way; a rich baseline is a separate file. Recording a baseline is not a check — it asserts nothing, it writes down
-where a world sat — and `scripts/gates.ts` now refuses to record without an explicit destination, refuses to overwrite an existing
-baseline without `--force`, and refuses to compare runs of different worlds.
+DONE: 24 seeds, Large, rich, 12 days, branch `control`, 6 minutes on 24 cores. `docs/gates.json` records an **authored** Large
+world and still does — it was not touched, because `scripts/gates.ts` refuses to record without an explicit destination, refuses
+to overwrite an existing baseline without `--force`, and refuses to compare runs of different worlds.
+
+**A baseline is not a check.** It asserts nothing, and nothing passed or failed when it was written; the script says as much in its
+own output. It writes down where rich worlds sat, so that a *later* rich change has something to be measured against. Nothing in
+it judges the world it came from.
 
 ```
 node scripts/lab.mjs --out gates_rich_out --seeds 24 --fork 0 --days 12 --profile large --dynamics rich --branches none
@@ -585,11 +588,21 @@ node scripts/lab.mjs --out gates_rich_out --seeds 24 --fork 0 --days 12 --profil
 npx vite-node scripts/gates.ts -- gates_rich_out --record --file docs/gates-rich.json
 ```
 
-Then, and only then, a later rich change can be gated against it:
+Now, and only now, a later rich change can be gated against it:
 
 ```
 npx vite-node scripts/gates.ts -- <a later run> --file docs/gates-rich.json
 ```
+
+What it holds, as recorded: `people` 101.33 ± 1.24, `deaths` 0.50 ± 0.78, `workplaces` 11.13 ± 2.74, `solidHomes` 26.25 ± 3.72,
+`buildings` 84.08 ± 5.91, `plots` 94.21 ± 10.31, `homeless` 0 ± 0, `belowCritical` 0.63 ± 1.38, `meanHunger` 66.30 ± 5.59,
+`firstYardDay` 5.68 ± 0.49, `firstHallDay` 11.73 ± 0.88, `meanMood` −3.86 ± 4.87, `lowMood` 3.83 ± 6.52, `tools` 161.29 ± 22.38,
+`meanCondition` 66.31 ± 4.12. Against the plans ensemble's rich control at 15 days (`tools` about 184), the 12-day figure sits
+where it should.
+
+Nine of those fifteen are gated, plus the floor of 50 people a seed — the same nine as for authored worlds. Comparing the
+recording run against its own baseline passes all ten, which proves the file is readable and the comparison path runs, and
+nothing more: it is the same 24 seeds on both sides.
 
 Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back only `<out>\report.txt`, never the progress lines.
 
@@ -600,7 +613,10 @@ Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back on
   fares differently. The 24-seed ensemble above now answers that separately.
 - About half of the tool projects end at their two-day deadline. The reasons are specific (`still short 2 stone`; `had the makings
   but never sat down to it`), and no tuning was done to raise the completion rate: the nudge stays at +14 by design.
-- `tools` and `meanCondition` were added to the lab's metrics but are **not** gated, and have never been recorded as a baseline.
+- `tools` and `meanCondition` are now recorded in `docs/gates-rich.json`, but they are still **not** gated, and nor are
+  `firstYardDay`, `firstHallDay`, `meanMood` or `lowMood`: `scripts/gates.ts` compares the same nine metrics it always did, so a
+  change that cut the village's tools by two thirds would pass every gate. The plans ensemble above had to measure them by hand
+  for that reason.
 - The two-seed lab smoke run (2 days, 2 seeds, `normal`) exists only to prove the branch and the metrics work end to end. Its
   directions (fewer tools and lower condition without plans) are inside the noise and were not evidence; the 24-seed ensemble above
   has since found both directions to be real, which vindicates nothing about the smoke run - two seeds would have read the same way
