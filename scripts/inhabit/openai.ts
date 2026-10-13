@@ -12,9 +12,16 @@ export interface OpenAIOptions {
   effort?: 'none' | 'minimal' | 'low' | 'medium' | 'high' | 'xhigh' | 'max';
 }
 
+/** a 429 that no wait will cure: the account has no credits or is over its quota */
+const OUT_OF_CREDIT = /insufficient_quota|no credits|exceeded your current quota|billing/i;
+
 /** the SDK's error as the gate should see it: the provider's refusals for the moment are retryable, the rest are failed calls */
-function describe(e: unknown): Error {
-  if (e instanceof OpenAI.RateLimitError) return new RetryableModelError(`rate limited (429): ${e.message}`, retryAfterMs(e));
+export function describeError(e: unknown): Error {
+  if (e instanceof OpenAI.RateLimitError) {
+    const code = (e as { code?: string | null }).code ?? '';
+    if (OUT_OF_CREDIT.test(`${code} ${e.message}`)) return new Error(`no credits on the account (429 ${code || 'insufficient_quota'}): ${e.message}`);
+    return new RetryableModelError(`rate limited (429): ${e.message}`, retryAfterMs(e));
+  }
   if (e instanceof OpenAI.AuthenticationError) return new Error('authentication failed: check OPENAI_API_KEY');
   if (e instanceof OpenAI.BadRequestError) return new Error(`bad request: ${e.message}`);
   if (e instanceof OpenAI.APIConnectionError) return new RetryableModelError(`connection error: ${e.message}`);
@@ -46,7 +53,7 @@ export function openaiModel(opts: OpenAIOptions): ModelClient {
           { signal },
         );
       } catch (e) {
-        throw describe(e);
+        throw describeError(e);
       }
       const choice = res.choices[0];
       if (!choice) throw new Error('the model returned no choices');

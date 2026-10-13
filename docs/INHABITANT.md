@@ -366,7 +366,12 @@ a recorded decision was made on to the model again, several times, with its note
 choice moves. The pairing is exact (same observation, same refused picks), and the with-notes arm measures the model's own variance,
 so a shift is read against that and not against one draw. `--asks auto` takes attribution's candidates. Nothing runs in the world.
 Checked with scripted models: one that takes the last option when shown its notes and the first when not is reported as shifting on
-every ask that had notes and on none that had an empty notebook; one that ignores its notes shows no shift.
+every ask that had notes and on none that had an empty notebook; one that ignores its notes shows no shift. A run in which no call
+was answered is no result, never a null result: it renders as NO RESULT in its first line, leaves `counterfactual.failed.txt` instead
+of `counterfactual.json`, and exits 1, so a check for the file cannot pass on a failure. Learned the hard way: the first real attempt
+(2026-10-13) hit an account with no credits, every call failed, and the renderer of the day printed "0 of 6 asks shift". An ask where
+one arm got no usable answer is reported as undecided, not as a non-shift. The OpenAI client now tells an exhausted account (a 429
+with `insufficient_quota`) from a rate limit and fails it at once rather than waiting out a limit that no wait will lift.
 
 A full no-memory arm would cost a six-day run again and could not be paired with it; these two, in that order, are the test.
 

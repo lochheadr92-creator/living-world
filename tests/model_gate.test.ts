@@ -4,6 +4,8 @@ import { describe, expect, it } from 'vitest';
 import { DEFAULT_BUDGET, ModelGate, RetryableModelError, isRetryable } from '../src/agent/model';
 import type { ModelClient } from '../src/agent/model';
 import { parseDuration, retryAfterMs } from '../scripts/inhabit/transient';
+import OpenAI from 'openai';
+import { describeError } from '../scripts/inhabit/openai';
 
 const req = { system: 'x', user: '<observation>\n{"options":[{"key":"wander"}]}\n</observation>' };
 
@@ -149,6 +151,21 @@ describe("the model gate and the provider's refusals", () => {
     expect(isRetryable(other)).toBe(true);
     expect(isRetryable(new Error('x'))).toBe(false);
     expect(isRetryable('x')).toBe(false);
+  });
+});
+
+describe("the OpenAI client's reading of a 429", () => {
+  it('a rate limit is retryable; an exhausted account is not, whatever the status code says', () => {
+    // the SDK builds the message from the error body, which is where OpenAI puts the "try again in" hint
+    const limited = new OpenAI.RateLimitError(429, { message: 'Rate limit reached for gpt-5. Please try again in 8.4s.', code: 'rate_limit_exceeded' }, undefined, new Headers());
+    const r = describeError(limited);
+    expect(isRetryable(r)).toBe(true);
+    expect((r as RetryableModelError).retryAfterMs).toBe(8400);
+    const broke = new OpenAI.RateLimitError(429, { message: 'You have no credits remaining', code: 'insufficient_quota' }, 'You have no credits remaining. Add credits to continue using the API.', new Headers());
+    const b = describeError(broke);
+    expect(isRetryable(b)).toBe(false);
+    expect(b.message).toMatch(/no credits on the account/);
+    expect(isRetryable(describeError(new Error('boom')))).toBe(false);
   });
 });
 

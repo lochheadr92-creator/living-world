@@ -64,3 +64,8 @@ decisions and the choice was one of them at 6; six strong candidates (asks 24, 5
 ```
 npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/harsh6-tomas-gpt5 --asks auto --repeats 3 --api openai --model gpt-5
 ```
+
+**Failed attempt, 2026-10-13:** the first counterfactual on the Tomas run met an account with no credits; all 36 calls failed. The
+files it wrote were moved out of the folder by the operator (they said "0 of 6 shift", which was the renderer's mistake, since fixed:
+such a run now writes `counterfactual.failed.txt` and no `counterfactual.json`). The run is to be repeated once credits are on the
+account, on the fixed code.
