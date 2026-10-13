@@ -318,7 +318,7 @@ being made easy.
 
 ### Evidence: focused contract tests
 
-`npx vitest run tests/project_cooperation.test.ts` — **26 passed**. The scenes place people, needs, sources and relations; from
+`npx vitest run tests/project_cooperation.test.ts` — **36 passed**. The scenes place people, needs, sources and relations; from
 there the engine does the work. Where a test needs the ask taken at a particular moment it uses the external-controller seam to pick
 an option *the engine offered*; no test scripts the helper's answer, writes a commitment's outcome, or credits anyone with work.
 
@@ -333,9 +333,9 @@ an option *the engine offered*; no test scripts the helper's answer, writes a co
 | F — save/load | A world saved with an outstanding promise, then run 4000 ticks, is **state-identical** to one that was never saved (`deepEqualState` over the whole serialized world, not a hash) |
 | G — authored preservation | No plans, so no project ask is ever offered and no request carries a project; and a refusal in an authored world still says `own_need`, as it always did |
 
-Reported separately, by system: authored golden **9 passed** (no fingerprint re-recorded), rich night planning **41 passed**, control
-by hand and in the page **20 passed**, determinism and save **35 passed** (with `tests/save_storage.test.ts`), everything **484
-passed in 49 files**. `npx tsc --noEmit` and `npm run build` both clean; `git diff --check` clean.
+Reported separately, by system: authored golden **9 passed** (no fingerprint re-recorded), rich night planning **54 passed**, control
+by hand and in the page **20 passed**, determinism and save **26 passed** (with `tests/save_storage.test.ts`), everything **542
+passed in 52 files**. `npx tsc --noEmit` and `npm run build` both clean; `git diff --check` clean.
 
 ### Evidence: the running app (headless Chrome, DOM only)
 
@@ -501,12 +501,12 @@ fingerprints say nothing about night planning or about control by hand: they are
 | What is being checked | Command | Result |
 |---|---|---|
 | **Authored worlds unchanged** (the golden fingerprints: an authored world must step to the recorded state tick for tick) | `npx vitest run tests/golden.test.ts` | 9 passed; no fingerprint re-recorded in Stage C |
-| **Rich night planning** (adopt, carry, set aside, resume, revise, finish or give up; sheltering until light; the authored no-op) | `npx vitest run tests/night_plan.test.ts tests/rich.test.ts` | 41 passed |
+| **Rich night planning** (adopt, carry, set aside, resume, revise, finish or give up; sheltering until light; the authored no-op) | `npx vitest run tests/night_plan.test.ts tests/rich.test.ts` | 54 passed |
 | **Control by hand and in the page** (clock holds, an answer belongs to its tick, stale answers refused, control handed back clean) | `npx vitest run tests/inhabit_manual.test.ts tests/inhabit_manual_reliability.test.ts tests/inhabit_app.test.ts` | 20 passed |
-| **Stage C's projects** (the groups listed below) | `npx vitest run tests/projects.test.ts` | 26 passed |
-| **Stage D1's cooperation** (the acceptance table above) | `npx vitest run tests/project_cooperation.test.ts` | 26 passed |
+| **Stage C's projects** (the groups listed below) | `npx vitest run tests/projects.test.ts` | 42 passed |
+| **Stage D1's cooperation** (the acceptance table above) | `npx vitest run tests/project_cooperation.test.ts` | 36 passed |
 | **Determinism and save** (same seed, same world; a save changes nothing) | `npx vitest run tests/determinism.test.ts tests/save.test.ts tests/save_storage.test.ts` | 26 passed |
-| Everything | `npx vitest run` | 49 files, 484 tests passed |
+| Everything | `npx vitest run` | 52 files, 542 tests passed |
 
 Stage C's own groups, by what they hold:
 - **the thing really happens** — the tool comes out of the ordinary recipe (`wood` and `stone` down by exactly the recipe, the tool
