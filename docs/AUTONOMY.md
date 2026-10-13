@@ -45,8 +45,9 @@ project apart. Those four hold.
 They are a subset of R2, R10 and R13, and of nothing else. Stage D1 adds one bounded slice inside R6, R7 and R13 (with the R2 work
 its project needed): the cooperation chain works and is observable. It does not complete R6 or R7, and it says nothing about whether
 a village that cooperates this way fares better. R8 and R12's composition half are essentially unstarted; R1, R3, R4,
-R5, R6, R7, R9, R11 and R13 are partial with the gaps named in the table. The brief is **not** complete, and no ensemble run has
-yet said whether any of this changes how a village turns out.
+R5, R6, R7, R9, R11 and R13 are partial with the gaps named in the table. The brief is **not** complete. An ensemble run has
+since said that carrying plans changes how a village turns out (24 seeds; three metrics beat chance, and the trade runs both ways),
+but it cannot separate the asks from the plans they serve, so cooperation's own effect is still unmeasured.
 
 ## Stage C: what was built
 
@@ -490,8 +491,10 @@ deadline's own wording is still asserted, by the case where the morning passes u
   since been met (it stays with the recipient, credits nothing, and loses nothing).
 - The response-time revalidation is rich-only, like the partial record: an authored world answers as it always did, including the
   older case where a request settled mid-conversation could still be answered.
-- Nothing here says whether a village with this does better than one without. No ensemble was run (the prepared commands below are
-  still unrun).
+- Nothing here says whether a village that *cooperates* does better than one that does not: Stage D1 added no ensemble of its own,
+  and the one that has since been run removes plans and asks together (see the measured section below), so the asks' own effect is
+  still unmeasured. What the ensemble does settle is the prior question, whether carrying plans at all changes how a village turns
+  out: it does, and it is a trade.
 
 ## Evidence: focused tests, reported by system
 
@@ -526,28 +529,50 @@ Stage C's own groups, by what they hold:
   800 ticks; and the fingerprint notices a plan pressing for a different step.
 - **explanations** — one test walks the three states in order: chosen (the record names plan and step), under way, and done.
 
-## Still outstanding (prepared, not run: they belong on the 24-core machine)
+## Measured: does planning change how a village turns out? (24 seeds, Large, rich, 15 days)
 
-Unchanged by Stage D1, which added no ensemble of its own: cooperation's effect on how a village turns out is not measured by
-anything here. A Large world costs about 15 CPU-seconds per simulated day.
-
-**1. Does planning change how a village turns out?** The comparison must be made inside one kind of world: the control and both
-nudges have to be rich too, or the measurement is "rich versus authored" wearing the wrong label. `--dynamics rich` founds the
-world rich, so the control is rich, and `rich-no-plans` is then the only thing that differs. Fresh output directory, because the
-earlier directories hold authored rows that are not comparable. About 24 × (15 × 3) days of CPU, roughly 20 minutes on 24 cores.
+VERIFIED, and the first ensemble Stage C or D1 has to its name. The comparison is made inside one kind of world: `--dynamics rich`
+founds the world rich, so the control and both nudges are rich too and `rich-no-plans` is the only thing that differs — not "rich
+versus authored" wearing the wrong label. Each branch is measured against the mean of the control and the nudge branches, never
+against one control alone.
 
 ```
 node scripts/lab.mjs --out plans_rich_out --seeds 24 --fork 0 --days 15 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-plans
 ```
 
-```
-npx vite-node scripts/lab_report.ts -- plans_rich_out
-```
+24 of 24 seeds finished, no failures, 28 minutes on 24 cores (the estimate here used to say 20). Both nudge branches moved nothing
+beyond their own noise, so the floor is doing its job. `npx vite-node scripts/lab_report.ts -- plans_rich_out` re-renders the
+full report from the kept rows in seconds, without re-running anything; the numbers quoted here are its own.
 
-Read it as: `rich-no-plans` against the mean of the control and the two nudges, on `tools` and `meanCondition` first (what projects
-are for), then on the ordinary outcomes. One control is one chaotic draw.
+**Planning changes outcomes, and it is a trade rather than an improvement.** Three rows beat chance:
 
-**2. A baseline for rich worlds, so future changes to them can be gated.** `docs/gates.json` records an **authored** Large world
+| metric | reference | no plans | diff | 95% interval | seeds lower/higher |
+|---|---|---|---|---|---|
+| `tools` | 184.5 | 61.8 | **−122.7** | [−128.6, −117.1] | 24 / 0 |
+| `meanCondition` | 65.9 | 63.0 | **−2.9** | [−4.4, −1.5] | 21 / 3 |
+| `solidHomes` | 28.3 | 31.0 | **+2.8** | [+1.9, +3.6] | 3 / 21 |
+
+Private plans are where tools come from. Take them away and the village keeps a third of them: the noise floor on `tools` is ±16.9,
+so the gap is seven floors wide, and it is unanimous — lower in 24 seeds out of 24, which no other result in this lab has managed.
+Plans also keep buildings in repair, which is what roof mending was for, though that effect is small (−2.9 on a 0–100 condition).
+
+What they cost is communal building. Without plans the village puts up more and sooner: `solidHomes` +2.8 beats chance, and
+`workplaces` +1.4, `buildings` +3.3, `plots` +3.2, the first timber yard 0.4 days earlier and the first hall 1.6 days earlier all
+point the same way. Those five are only "systematic, within the noise floor", and that verdict is not evidence by itself — in this
+very run pure noise earned it twice (`plots` −2.8 under nudge:1, `deaths` +0.4 under nudge:2). Read the direction, not the number.
+
+Survival is untouched. `people`, `deaths`, `homeless`, `belowCritical` and `meanHunger` are all indistinguishable from chance, so
+nothing here is the difference between a village living and dying — consistent with stage 1's finding that hardship is nearly
+absent. Mood is untouched too: `meanMood` +0.6 and `lowMood` −0.5 both sit inside the floor, so "plans make people happier" is
+not supported in either direction.
+
+What this does not say: it compares plans against no plans, not cooperation against none. Stage D1's asks ride along inside the
+control arm and vanish with the plans in `rich-no-plans` (an ask exists only because a plan is short of something), so the two are
+measured together here and cooperation's own contribution is still unmeasured.
+
+## Still outstanding (prepared, not run: it belongs on the 24-core machine)
+
+**A baseline for rich worlds, so future changes to them can be gated.** `docs/gates.json` records an **authored** Large world
 and must stay that way; a rich baseline is a separate file. Recording a baseline is not a check — it asserts nothing, it writes down
 where a world sat — and `scripts/gates.ts` now refuses to record without an explicit destination, refuses to overwrite an existing
 baseline without `--force`, and refuses to compare runs of different worlds.
@@ -566,14 +591,17 @@ Then, and only then, a later rich change can be gated against it:
 npx vite-node scripts/gates.ts -- <a later run> --file docs/gates-rich.json
 ```
 
-Re-running either `lab.mjs` line resumes: finished seeds are skipped. Paste back only `<out>\report.txt`, never the progress lines.
+Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back only `<out>\report.txt`, never the progress lines.
 
 ## Known limitations of what Stage C measured
 
 - The autonomous runs are the **normal** profile (about 28 people), 10 days, two seeds. They show that projects arise, complete and
-  fail for stated reasons; they are not an ensemble and say nothing about whether a village with plans fares differently.
+  fail for stated reasons; they are not an ensemble themselves and say nothing on their own about whether a village with plans
+  fares differently. The 24-seed ensemble above now answers that separately.
 - About half of the tool projects end at their two-day deadline. The reasons are specific (`still short 2 stone`; `had the makings
   but never sat down to it`), and no tuning was done to raise the completion rate: the nudge stays at +14 by design.
 - `tools` and `meanCondition` were added to the lab's metrics but are **not** gated, and have never been recorded as a baseline.
 - The two-seed lab smoke run (2 days, 2 seeds, `normal`) exists only to prove the branch and the metrics work end to end. Its
-  directions (fewer tools and lower condition without plans) are inside the noise and are not evidence.
+  directions (fewer tools and lower condition without plans) are inside the noise and were not evidence; the 24-seed ensemble above
+  has since found both directions to be real, which vindicates nothing about the smoke run - two seeds would have read the same way
+  had the truth been the opposite.
