@@ -1,7 +1,9 @@
-// The one real model client: the Anthropic Messages API through the official SDK. Lives in scripts/, not src/: the simulation and
-// the agent modules have no network code. The key comes from the environment (ANTHROPIC_API_KEY) or an `ant auth login` profile.
+// The Anthropic client: the Messages API through the official SDK. Lives in scripts/, not src/: the simulation and the agent modules
+// have no network code. The key comes from the environment (ANTHROPIC_API_KEY) or an `ant auth login` profile.
 import Anthropic from '@anthropic-ai/sdk';
+import { RetryableModelError } from '../../src/agent/model';
 import type { ModelClient } from '../../src/agent/model';
+import { retryAfterMs } from './transient';
 
 export interface AnthropicOptions {
   model: string;
@@ -9,13 +11,15 @@ export interface AnthropicOptions {
   effort: 'low' | 'medium' | 'high';
 }
 
-function describe(e: unknown): string {
-  if (e instanceof Anthropic.RateLimitError) return `rate limited (${e.status})`;
-  if (e instanceof Anthropic.AuthenticationError) return 'authentication failed: check ANTHROPIC_API_KEY';
-  if (e instanceof Anthropic.BadRequestError) return `bad request: ${e.message}`;
-  if (e instanceof Anthropic.APIConnectionError) return `connection error: ${e.message}`;
-  if (e instanceof Anthropic.APIError) return `API error ${e.status}: ${e.message}`;
-  return e instanceof Error ? e.message : String(e);
+/** the SDK's error as the gate should see it: the provider's refusals for the moment (429, 5xx, 529 overloaded) are retryable */
+function describe(e: unknown): Error {
+  if (e instanceof Anthropic.RateLimitError) return new RetryableModelError(`rate limited (429): ${e.message}`, retryAfterMs(e));
+  if (e instanceof Anthropic.AuthenticationError) return new Error('authentication failed: check ANTHROPIC_API_KEY');
+  if (e instanceof Anthropic.BadRequestError) return new Error(`bad request: ${e.message}`);
+  if (e instanceof Anthropic.APIConnectionError) return new RetryableModelError(`connection error: ${e.message}`);
+  if (e instanceof Anthropic.InternalServerError) return new RetryableModelError(`API error ${e.status}: ${e.message}`, retryAfterMs(e));
+  if (e instanceof Anthropic.APIError) return new Error(`API error ${e.status}: ${e.message}`);
+  return e instanceof Error ? e : new Error(String(e));
 }
 
 export function anthropicModel(opts: AnthropicOptions): ModelClient {
@@ -38,7 +42,7 @@ export function anthropicModel(opts: AnthropicOptions): ModelClient {
           { signal },
         );
       } catch (e) {
-        throw new Error(describe(e));
+        throw describe(e);
       }
       // a decline or a cut-off answer is a failed call: the engine chooses, and the transcript says why
       if (res.stop_reason === 'refusal') {

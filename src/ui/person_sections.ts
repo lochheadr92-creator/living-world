@@ -39,6 +39,7 @@ const REQ_TONE: Record<string, string> = {
   pending: 'info',
   promised: 'accent',
   fulfilled: 'good',
+  partial: 'accent',
   declined: 'warn',
   expired: 'muted',
   failed: 'danger',
@@ -280,10 +281,11 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
     (r, q) => {
       const asked = q.direction === 'asked';
       setIcon(r.dir, asked ? 'arrowUpRight' : 'arrowDownLeft', 13);
-      setText(r.text, asked ? `Asked ${q.other} for ${q.text}` : `${q.other} asked them for ${q.text}`);
+      setText(r.text, (asked ? `Asked ${q.other} for ${q.text}` : `${q.other} asked them for ${q.text}`) + (q.purpose ? ` — ${q.purpose}` : ''));
       setText(r.badge, q.status);
       setState(r.badge, 't-', REQ_TONE[q.status] ?? 'muted');
-      setText(r.note, q.note ? `${cap(q.note)} · ${q.age}` : q.age);
+      // what has actually been handed over is shown beside the promise, so the two are never read as one
+      setText(r.note, [q.progress, q.note ? cap(q.note) : '', q.age].filter(Boolean).join(' · '));
     },
   );
 

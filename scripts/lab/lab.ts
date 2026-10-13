@@ -13,6 +13,7 @@ import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
+import { setNightPlans } from '../../src/sim/intent';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
 import type { SourceType, World } from '../../src/sim/types';
@@ -42,6 +43,8 @@ function removeSources(w: World, types: SourceType[], r: number): number {
 }
 
 const ALIASES: Record<string, string> = {
+  // the switch removes every private plan, projects included, so the plainer name is the accurate one
+  'rich-no-plans': 'rich-no-night',
   'no-wood': 'remove:tree:22',
   'no-food': 'remove:berry_bush+fruit_tree+wild_grain+fish_spot:35',
   'no-clay': 'remove:clay_pit+ore_vein:1000000000',
@@ -53,7 +56,8 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * Specs: `control`; `nudge:N` (draw N random numbers and change nothing else: the noise floor); `remove:<type+type>:<radius>` (delete
  * those sources within the radius of any settlement); `random-choice` (rank options by a hash, not by utility); `no-wolf-memory`
  * (switch off an optimisation that is meant to be exact: a branch that is not identical to the control would be a bug).
- * `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * `rich-no-night` (alias `rich-no-plans`) is rich with private plans removed altogether - night preparation AND the projects
+ * built on the same mechanism (making a tool, mending a roof) - to isolate what planning as such contributes. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -88,6 +92,20 @@ export function parseIntervention(specIn: string): Intervention {
       apply: (w) => {
         w.settings.dynamics = 'rich';
         return 'rich dynamics on';
+      },
+    };
+  }
+  if (kind === 'rich-no-night') {
+    return {
+      spec: label,
+      summary: 'rich dynamics with private plans removed: nobody gets ready for the night, nobody takes on making a tool or mending a roof, and sheltering until light is not on offer',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, private plans off';
+      },
+      install: () => {
+        setNightPlans(false);
+        return () => setNightPlans(true);
       },
     };
   }
@@ -157,6 +175,10 @@ export const METRICS = [
   'firstHallDay',
   'meanMood',
   'lowMood',
+  // what projects are for: tools in people's hands and roofs that are sound. Not gated (scripts/gates.ts GATED), so an old
+  // recorded baseline without them still works; they are here so the ensemble run can see whether planning changes either.
+  'tools',
+  'meanCondition',
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Outcome = Record<Metric, number>;
@@ -180,6 +202,11 @@ export function outcomeOf(w: World, from: number, endTick: number): { outcome: O
     hunger += p.needs.hunger;
     if (NEED_KEYS.some((k) => p.needs[k] < CRITICAL[k] && CRITICAL[k] > 0)) crit++;
   }
+  // tools held by the living (a tool in a hand, not one in a store) and how sound the standing buildings are
+  let tools = 0;
+  for (const t of w.tools) if (t.holder && (w.byId.get(t.holder) as { alive?: boolean } | undefined)?.alive) tools++;
+  let cond = 0;
+  for (const b of w.buildings) cond += b.condition;
   const first: Record<string, number> = {};
   for (const b of w.buildings) first[b.type] = Math.min(first[b.type] ?? Infinity, b.builtTick);
   // days after the fork; 0 if the type already stood at the fork (then it says nothing about the branch); a type never built counts as
@@ -203,6 +230,8 @@ export function outcomeOf(w: World, from: number, endTick: number): { outcome: O
       firstHallDay: day('hall'),
       meanMood: Math.round((mood / Math.max(1, alive.length)) * 10) / 10,
       lowMood: low,
+      tools,
+      meanCondition: Math.round((cond / Math.max(1, w.buildings.length)) * 10) / 10,
     },
     milestones,
   };

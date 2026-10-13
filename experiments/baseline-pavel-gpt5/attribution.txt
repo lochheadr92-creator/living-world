@@ -1,0 +1,19 @@
+attribution: Pavel, inhabitant/1 (no notes): 5 decisions, 0 strong candidates for the counterfactual re-ask (*), 0 weak (~)
+  strong: the chosen option carries out a noted goal or intention by the target it names; weak: reason words found only in the notes (0) or a pursuit by shared words (0); 13 reason words found in neither (the model's own wording)
+  plans: the notes named a target at 0 decisions; the choice was one of the named targets at 0
+
+  ask 0 t2532  wander (Potter about near home)  applied -> success (done)
+    why: I’m carrying a full load and nothing urgent needs doing. I’ll potter near home and see if I can stash things or lend a hand.
+    words: 6 in the observation, in neither: full, urgent, stash, lend, hand
+  ask 1 t2702  haul:2077 (Deliver materials to the hut site)  applied -> success (done)
+    why: I’m carrying wood and stone and the hut nearby needs them. I’ll drop them off to help and free up some space.
+    words: 7 in the observation, in neither: drop, space
+  ask 2 t2721  build:2077 (Build the hut)  applied -> partial (no materials to work with (3 wood))
+    why: I just delivered materials to Thistle’s hut, so I’ll put them to use and make progress. It’s right nearby and helping finish a friend’s home feels right.
+    words: 10 in the observation, in neither: helping, feels
+  ask 3 t2965  gather:270 (Chopping wood to keep the fire going)  applied -> success (done)
+    why: We need 3 wood to keep work going on Thistle’s hut. This tree is close and has plenty left, and I’ve got enough energy to chop it now.
+    words: 9 in the observation, in neither: close, plenty, enough
+  ask 4 t3275  sleep:995 (Sleep at my lean-to)  applied
+    why: My energy is low and my lean-to is nearby. I’ll sleep there to recover safely.
+    words: 5 in the observation, in neither: safely

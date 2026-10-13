@@ -1,0 +1,2 @@
+replay of inhabit_out\transcript.json: OK
+ended at tick 3600 in state 0d0de0ed (recorded 0d0de0ed); 5 decisions consumed, 0 overrides matched

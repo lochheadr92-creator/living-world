@@ -289,6 +289,54 @@ export interface Activity {
 }
 
 export type CommitmentStatus = 'active' | 'done' | 'broken' | 'cancelled' | 'expired' | 'interrupted' | 'moot' | 'failed';
+/** A private plan: a goal this person adopted, the step they are on, and what became of it. */
+export interface Intention {
+  id: number;
+  /** the family of plan; each kind knows how to find its next step and when it is finished */
+  kind: 'night' | 'tool' | 'repair';
+  /** what they mean to bring about, in their own terms */
+  goal: string;
+  since: number;
+  /** after this tick the plan no longer matters and is dropped on its own */
+  until: number;
+  status: 'active' | 'done' | 'dropped';
+  /** the step being worked on now, in plain words. Display only: nothing decides anything by reading this. */
+  step: string;
+  /** what the step actually is. This, not the wording of `step`, is the contract the decision code matches on. */
+  stepKind: 'drink' | 'eat' | 'goto' | 'stay' | 'get' | 'make' | 'mend' | 'none';
+  /** for a 'get' step, the material being fetched */
+  stepItem: ItemKind | null;
+  /** the place the step is about (a shelter's id), or 0 when it is about no particular place */
+  stepTarget: number;
+  /** the option key that would serve the step, when one is on offer */
+  stepKey: string | null;
+  /** the thing this plan is about: the shelter to use, the home to mend (0: nothing in particular) */
+  aboutId: number;
+  /** materials this plan has spoken for. They are not spare while it lasts, and become spare again the moment it ends. */
+  wants: Partial<Items>;
+  /** for a tool plan, which tool */
+  makes: string;
+  /** ticks actually spent sheltering for this plan, credited by the activity itself as it ends or is set aside */
+  sheltered: number;
+  /**
+   * What this person's own hands put into the thing, credited where the work really happens: condition put back for a repair
+   * (act_build.ts), 1 for each tool they themselves crafted (the craft handler). 0 therefore means "not by them", which is how a
+   * borrowed tool or a roof a neighbour mended is told apart from one they made or mended.
+   */
+  worked: number;
+  /** why there is no feasible step right now ('' when there is one) */
+  blocked: string;
+  /** why it was suspended, revised, finished or given up */
+  reason: string;
+  /** ticks this plan was set aside for something more pressing */
+  setAside: number;
+  /** the tick it finished or was given up (0 while it stands). It is what keeps someone from taking the same thing up again at once. */
+  ended: number;
+}
+
+/** nobody juggles more than this many private plans at once */
+export const MAX_INTENTIONS = 2;
+
 export interface Commitment {
   id: number;
   requestId: number;
@@ -399,6 +447,12 @@ export interface Person {
   relations: Record<number, Relation>;
   failures: Record<number, Failure>;
   commitments: Commitment[];
+  /**
+   * What this person means to see done, for their own reasons (rich worlds only; always empty in an authored world).
+   * A private intention is NOT a promise: dropping one costs nothing socially, and nobody else is owed anything by it.
+   * Kept small and bounded (MAX_INTENTIONS); saved with the person; carries its own account of why it stands or ended.
+   */
+  intentions: Intention[];
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;
@@ -737,7 +791,12 @@ export type Entity = Person | Source | Building | Site | Plot | Pile | Grave | A
 
 // ───────────────────────────── social ─────────────────────────────
 export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work';
-export type RequestStatus = 'pending' | 'promised' | 'fulfilled' | 'declined' | 'expired' | 'failed' | 'broken' | 'interrupted' | 'cancelled';
+/**
+ * `partial`: it was answered, something real was handed over, and it was less than was asked for. It is not `fulfilled` (the ask was
+ * not met) and not `failed` (something did arrive), and it leaves nobody owing the difference: a helper who gives what they can has
+ * not promised the rest.
+ */
+export type RequestStatus = 'pending' | 'promised' | 'fulfilled' | 'partial' | 'declined' | 'expired' | 'failed' | 'broken' | 'interrupted' | 'cancelled';
 
 export interface Request {
   id: number;
@@ -757,6 +816,23 @@ export interface Request {
   resolved: number;
   /** what the requester needs it for, in their words */
   purpose?: string;
+  /**
+   * How much of what was asked for has actually arrived, written where the material really changes hands (a gift answered on the
+   * spot, or a promised delivery). It is the one number that says "delivered" rather than "promised", and it is never set when a
+   * promise is made.
+   */
+  delivered?: number;
+  /**
+   * How much the person asked actually agreed to - handed over there and then, or promised. It may be less than `amount`: someone
+   * who gives what they can spare has agreed to that much and no more, and nothing turns the difference into a debt.
+   */
+  offered?: number;
+  /**
+   * The private plan this was asked for (`Intention.id`), when it was asked for one. It is a reference, not a second record of the
+   * need: the plan still owns what it wants, and this only says which plan an outstanding promise belongs to, so neither side asks
+   * twice for the same thing and the explanations can say which project a delivery served.
+   */
+  planId?: number;
   /** where the goods or work are wanted */
   destKind?: 'site' | 'building' | 'person' | 'spot';
   destId?: number;
@@ -981,11 +1057,62 @@ export interface World {
 
 
 // ───────────────────────────── the AI inhabitant (docs/INHABITANT.md) ─────────────────────────────
-/** A person driven from outside: the mark that survives a save, and the counts. Never read by the simulation. */
+/** one of the inhabitant's own notes: its words, with an id it can refer to and the tick it was written or last changed */
+export interface NoteEntry {
+  id: string;
+  text: string;
+  since: number;
+}
+
+/** a conclusion the inhabitant drew for itself: never verified by the engine, bounded in confidence, resting on cited observations */
+export interface Inference extends NoteEntry {
+  /** 0 (doubtful) to 1 (sure), two decimals */
+  confidence: number;
+  /** references into observations it was given (place:<id>, person:<id>, seen:<id>, memory:<tick>, result:<tick>, option:<key>, obs:<tick>) */
+  basis: string[];
+  /** the tick of the last change to its text or confidence */
+  revised: number;
+}
+
+/**
+ * What a person driven from outside has written down for themselves: their own words, bounded (src/agent/memory.ts), never read by the
+ * simulation. Kept apart from what the engine itself remembers for them (beliefs, log, relations), which is the verified part.
+ */
+export interface InhabitantNotes {
+  goals: NoteEntry[];
+  intentions: NoteEntry[];
+  inferences: Inference[];
+  uncertainties: NoteEntry[];
+  journal: { tick: number; text: string }[];
+}
+
+/** how the inhabitant's inferences have moved over the run (cumulative; the per-turn detail is in the transcript) */
+export interface MemoryCounters {
+  version: number;
+  /** note updates offered by the model, and the ones rejected whole */
+  updates: number;
+  rejectedUpdates: number;
+  /** entries (of any list) the model dropped because they were over a limit or malformed */
+  rejectedEntries: number;
+  /** inferences: created, restated unchanged, confidence raised, confidence lowered, text changed, left out */
+  new: number;
+  kept: number;
+  strengthened: number;
+  weakened: number;
+  revised: number;
+  abandoned: number;
+  /** the next id to hand out */
+  nextId: number;
+}
+
+/** A person driven from outside: the mark that survives a save, the counts, and their notes. Never read by the simulation. */
 export interface InhabitantState {
   /** the tick at which outside control began */
   since: number;
   /** decisions answered from outside, and the ones the engine had to make instead */
   turns: number;
   fallbacks: number;
+  /** only when the run keeps memory (protocol inhabitant/2); absent in a run without it */
+  notes?: InhabitantNotes;
+  memory?: MemoryCounters;
 }

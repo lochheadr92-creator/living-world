@@ -211,6 +211,12 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
     a.cycle++;
     addFx(world, 'eat', p.x, p.y, 0);
   }
+  // a controller may have asked for a bounded meal: these only ever stop the meal sooner than it would have ended
+  const lim = a.data.limit as Record<string, number> | undefined;
+  if (lim) {
+    if (lim.portions !== undefined && a.cycle >= lim.portions) return 'done';
+    if (lim.untilHunger !== undefined && p.needs.hunger >= lim.untilHunger) return 'done';
+  }
   const next = pickFood(p.inv, p.needs.hunger);
   const keepFood = (a.data.keep as number) ?? 0;
   const foodLeft = Object.keys(p.inv).reduce((s, key) => s + (NUTRITION[key as FoodKind] ? (p.inv[key as ItemKind] ?? 0) : 0), 0);

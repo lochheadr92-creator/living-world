@@ -1,0 +1,3 @@
+replay of experiments/harsh6-tomas-gpt5/transcript.json: OK
+ended at tick 16800 in state 23ac03a0 (recorded 23ac03a0); 95 decisions consumed, 8 overrides matched
+warning: the simulation's sources differ from the ones that made the transcript (cea1a590 against c16a4060)

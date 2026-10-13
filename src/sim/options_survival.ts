@@ -1,4 +1,7 @@
 import { newActivity } from './activities';
+import { DAY } from './constants';
+import { isRich } from './mood';
+import { nightPlansOn, shelters, untilDaylight } from './intent';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
 import { invRoom } from './economy';
@@ -188,6 +191,8 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       key: `gather:${b.id}`,
       targetId: b.id,
       tag: 'food',
+      // `units` is what the engine already planned to take here, itself bounded by the source and the pack
+      bounds: [{ kind: 'count', field: 'amount', min: 1, max: Math.max(1, units), note: 'how many to take (the engine still stops at what the source holds and the pack can carry)' }],
       make: () => {
         const spot = spotNear(world, p, b);
         if (!spot) return null;
@@ -231,6 +236,11 @@ function optEat(ctx: Ctx): void {
       key: 'eat:0',
       targetId: 0,
       tag: 'food',
+      // unparameterised this eats until satisfied or out of food; a controller may ask for fewer portions or a lower target
+      bounds: [
+        { kind: 'count', field: 'portions', min: 1, max: Math.max(1, Math.floor(ctx.food - keep)), note: 'how many portions to eat (default: until satisfied)' },
+        { kind: 'until', field: 'untilHunger', min: Math.min(100, Math.ceil(p.needs.hunger) + 1), max: 100, note: 'stop once hunger has risen to this' },
+      ],
       make: () =>
         newActivity(world, p, {
           kind: 'eat',
@@ -561,6 +571,61 @@ function optWarmth(ctx: Ctx): void {
 }
 
 // ───────────────────────── rest ─────────────────────────
+/**
+ * Letting the night pass where it is safe (rich worlds only). Without this a rested person at night has nothing on offer but
+ * wandering or work: optSleep returns early once energy is high, and optRest refuses at night. Waiting is a real action here - it
+ * takes real time, needs go on changing, and it ends at first light or the moment something more pressing appears.
+ */
+function optShelter(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!isRich(world) || !nightPlansOn() || !ctx.night) return;
+  // waiting must never stand in for seeing to something urgent
+  if (ctx.criticals.length || p.needs.thirst < 24 || p.needs.hunger < 20) {
+    addBlocked(ctx, 'rest', 'Stay in shelter until it is light', 0, 'something more pressing comes first', 'rest');
+    return;
+  }
+  const near = shelters(ctx).filter((s) => s.d <= 3);
+  if (!near.length) {
+    addBlocked(ctx, 'rest', 'Stay in shelter until it is light', 0, 'not at a shelter', 'rest');
+    return;
+  }
+  // bounded by the light this person can see coming, never open-ended
+  const left = Math.max(60, Math.min(Math.round(untilDaylight(world) * DAY), Math.round(DAY * 0.55)));
+  for (const s of near.slice(0, 1)) {
+    const sc = new Scorer().add('the night to get through', 16).add(s.home ? 'my own place' : 'a fire burning', s.home ? 6 : 4);
+    if (p.needs.warmth < 70) sc.add('cold out there', 8);
+    addOption(ctx, {
+      kind: 'rest',
+      label: `Stay at ${s.what} until it is light`,
+      goal: 'to let the night pass under shelter',
+      need: 'warmth',
+      util: sc.total,
+      parts: sc.parts,
+      eta: left,
+      key: `shelter:${s.id}`,
+      targetId: s.id,
+      tag: 'rest',
+      bounds: [{ kind: 'count', field: 'ticks', min: 30, max: left, note: 'how long to stay, at most until it is light' }],
+      make: () =>
+        newActivity(world, p, {
+          kind: 'rest',
+          label: `Staying at ${s.what}`,
+          goal: 'waiting for the light',
+          // 'warmth' rather than 'energy': this is waiting out the night, not recovering, so being rested does not end it
+          need: 'warmth',
+          // the shelter this is spent in: without it the activity is about nowhere, and the time spent in it is credited to no
+          // plan (intent.ts creditShelter takes the target as the thing sheltered in), so a night under cover reads as a night out
+          targetId: s.id,
+          here: true,
+          amount: left,
+          utility: sc.total,
+          minCommit: 60,
+          maxTicks: left + 120,
+        }),
+    });
+  }
+}
+
 function optRest(ctx: Ctx): void {
   const { world, p } = ctx;
   const ed = ctx.drives.energy;
@@ -599,6 +664,7 @@ export function survivalOptions(ctx: Ctx): void {
   optSleep(ctx);
   optWarmth(ctx);
   optRest(ctx);
+  optShelter(ctx);
 }
 
 void carryCap;

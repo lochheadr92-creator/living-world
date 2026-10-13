@@ -1,4 +1,5 @@
-import { think } from './mood';
+import { outstandingForPlan, planShortfall, plannedFor } from './intent';
+import { isRich, think } from './mood';
 import {
   canInterruptForTalk,
   endActivity,
@@ -99,6 +100,8 @@ export function reservedFor(world: World, p: Person, item: ItemKind): number {
     if (c.status !== 'active' || c.item !== item) continue;
     if (c.kind === 'deliver' || c.kind === 'haul') n += Math.max(0, c.amount - (c.delivered ?? 0));
   }
+  // materials a plan of their own has spoken for are not spare either, and stop being spoken for when the plan ends
+  n += plannedFor(p, item);
   void world;
   return n;
 }
@@ -225,6 +228,8 @@ export interface RequestOpts {
   deadline?: number;
   milestone?: string;
   toolKind?: ToolKind | null;
+  /** the asker's own plan this is for (intent.ts), when it is for one */
+  planId?: number;
 }
 
 export function createRequest(world: World, from: Person, to: Person, o: RequestOpts): Request {
@@ -239,6 +244,7 @@ export function createRequest(world: World, from: Person, to: Person, o: Request
     offerAmount: o.offerAmount ?? 0,
     siteId: o.siteId ?? 0,
     infoKind: o.infoKind ?? '',
+    planId: o.planId,
     created: world.tick,
     expires: world.tick + REQUEST_TTL,
     status: 'pending',
@@ -272,7 +278,7 @@ type Response =
   | { kind: 'give'; item: ItemKind; n: number }
   | { kind: 'promise'; item: ItemKind | null; n: number }
   | { kind: 'lend'; tool: import('./types').Tool }
-  | { kind: 'decline'; reason: 'no_item' | 'own_need' | 'unwilling' | 'disliked' | 'committed' | 'enough' | 'in_use' };
+  | { kind: 'decline'; reason: 'no_item' | 'own_need' | 'unwilling' | 'disliked' | 'committed' | 'enough' | 'in_use' | 'making' };
 
 function willingness(world: World, B: Person, A: Person, severity: number): number {
   const rel = B.relations[A.id];
@@ -353,6 +359,8 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
     if (activeCommitments(B).length >= MAX_ACTIVE_COMMITMENTS) return { kind: 'decline', reason: 'own_need' };
     const has = (B.inv.wood ?? 0) > 0 || canObtain(world, B, 'wood');
     if (!has) return { kind: 'decline', reason: 'no_item' };
+    // having none to spare is not the same as having none: say which it is
+    if ((B.inv.wood ?? 0) > 0 && surplusOf(world, B, 'wood') <= 0 && plannedFor(B, 'wood') > 0) return { kind: 'decline', reason: 'making' };
     if (w0 >= 0.62 && personalDriveMax(B) < 40) return { kind: 'promise', item: 'wood', n: 1 };
     return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(B) > 35 ? 'own_need' : 'unwilling' };
   }
@@ -360,7 +368,15 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   if (req.item && (req.kind === 'wood' || req.kind === 'stone' || req.kind === 'goods' || req.kind === 'haul')) {
     const others = outstandingFor(world, A.id, req.item, req.destId ?? req.siteId ?? 0) - req.amount;
     const site = req.siteId ? world.byId.get(req.siteId) : undefined;
-    const lacks = site && site.ent === 'site' ? (site.required[req.item] ?? 0) - (site.delivered[req.item] ?? 0) - (site.used[req.item] ?? 0) - (A.inv[req.item] ?? 0) : req.amount;
+    // What the asker is REALLY short of, which is what other people's promises have to be measured against. For a building it is
+    // what the site still wants; for a project of their own it is what that plan still lacks (intent.ts planShortfall, which counts
+    // only the plan's own share of the pack). Measuring against this one request's size instead would refuse a perfectly good
+    // top-up: two promises of one each do not cover a shortage of three.
+    const lacks = site && site.ent === 'site'
+      ? (site.required[req.item] ?? 0) - (site.delivered[req.item] ?? 0) - (site.used[req.item] ?? 0) - (A.inv[req.item] ?? 0)
+      : req.planId
+        ? planShortfall(A, req.planId, req.item)
+        : req.amount;
     if (others >= Math.max(0, lacks)) return { kind: 'decline', reason: 'enough' };
     // B already owes the same thing to the same place
     const owes = B.commitments.filter((c) => c.status === 'active' && c.item === req.item && (c.destId ?? c.siteId) === (req.destId ?? req.siteId)).reduce((n, c) => n + c.amount - (c.delivered ?? 0), 0);
@@ -399,8 +415,22 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
     return { kind: 'promise', item: isFood(item) ? (B.inv[item] ? item : 'berries') : item, n: Math.max(1, req.amount) };
   }
   const have = B.inv[item] ?? 0;
-  return { kind: 'decline', reason: have > 0 ? 'own_need' : dislike ? 'disliked' : 'no_item' };
+  if (have > 0) {
+    // They have some but none spare. In a rich world which claim is on it is known exactly, so the answer says that rather than
+    // "my own needs come first": `reservedFor` is promises plus private plans, and `plannedFor` is the plans' share of it. An
+    // authored world keeps the answer it always gave, because the reason a refusal gives is part of what follows from it (the
+    // bubble, the log, and whether anyone takes offence).
+    if (isRich(world)) {
+      const planned = plannedFor(B, item);
+      const owed = reservedFor(world, B, item) - planned;
+      if (owed > 0) return { kind: 'decline', reason: 'committed' };
+      if (planned > 0) return { kind: 'decline', reason: 'making' };
+    }
+    return { kind: 'decline', reason: 'own_need' };
+  }
+  return { kind: 'decline', reason: dislike ? 'disliked' : 'no_item' };
 }
+
 
 function addCommitment(world: World, B: Person, req: Request, c: Partial<Commitment>): Commitment {
   const commit: Commitment = {
@@ -470,7 +500,13 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
   c.status = 'done';
   const req = world.requests.find((r) => r.id === c.requestId);
   const A = personOf(world, c.to);
-  if (req) settle(world, req, 'fulfilled', 'promise kept');
+  if (req) {
+    // The promise was kept; whether the ASK was met is a different question, and the answer is what actually arrived. (Rich only:
+    // an authored world records what it always did.)
+    const got = req.delivered ?? c.delivered ?? 0;
+    const full = !isRich(world) || got >= req.amount;
+    settle(world, req, full ? 'fulfilled' : 'partial', full ? 'promise kept' : `promise kept: ${got} of the ${req.amount} asked for`);
+  }
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
     adjustRel(B, A.id, world.tick, { aff: 1, trust: 1 });
@@ -501,8 +537,9 @@ export function checkCommitments(world: World, p: Person): void {
       continue;
     }
     if (p.pose === 'sleep' || (p.activity && p.activity.need)) c.grace = (c.grace ?? 0) + 40;
-    // a building that no longer needs help
-    if ((c.kind === 'help_build' || c.kind === 'haul' || c.kind === 'work') && c.siteId && !world.byId.has(c.siteId)) {
+    // a building that no longer needs help. In a rich world the maker has to have found that out for themselves: while they still
+    // carry a belief about the site, the promise stands (they learn it is gone by going there, which clears the belief).
+    if ((c.kind === 'help_build' || c.kind === 'haul' || c.kind === 'work') && c.siteId && !world.byId.has(c.siteId) && !(isRich(world) && p.beliefs[c.siteId] !== undefined && world.tick < c.deadline + (c.grace ?? 0))) {
       const did = (c.contrib ?? 0) > 0 || (c.delivered ?? 0) > 0;
       c.status = did ? 'done' : 'moot';
       c.reason = did ? 'the building was finished with their help' : 'the building was finished or given up';
@@ -517,7 +554,9 @@ export function checkCommitments(world: World, p: Person): void {
         if (req && req.status === 'promised') settle(world, req, 'cancelled', c.reason);
         continue;
       }
-      if (target.condition >= 62) {
+      // in a rich world it is what the maker knows of the roof that settles the promise, not the roof itself
+      const seenCond = isRich(world) ? p.beliefs[target.id]?.cond : target.condition;
+      if ((seenCond ?? -1) >= 62) {
         const did = (c.contrib ?? 0) > 0;
         c.status = did ? 'done' : 'moot';
         c.reason = did ? 'mended' : 'it was mended by someone else';
@@ -581,8 +620,44 @@ export function checkCommitments(world: World, p: Person): void {
 
 export function updateRequests(world: World): void {
   for (const r of world.requests) {
-    if (r.status === 'pending' && world.tick > r.expires) settle(world, r, 'expired', 'never got an answer');
+    if (r.status !== 'pending') continue;
+    if (world.tick > r.expires) {
+      settle(world, r, 'expired', 'never got an answer');
+      continue;
+    }
+    keepOwnAskHonest(world, r);
   }
+}
+
+/**
+ * An ask that is still waiting for an answer belongs to the person who made it, and they may have been answered another way since:
+ * somebody else promised some, or the material arrived, or they spent what the project wanted on something else. So while it is
+ * pending they keep it in step with their own plan and their own pack - narrowing it to what is still uncovered, or withdrawing it
+ * when nothing is wanted any more. It uses nothing but what the asker knows, and it never touches a promise anyone has made: an
+ * obligation once given runs its own course (the helper learns of a change by being there, not by being told from afar).
+ *
+ * It touches an ask that is still waiting and nothing else: a request that has been answered, withdrawn or expired is finished with,
+ * and its record stays as whoever settled it left it.
+ */
+function keepOwnAskHonest(world: World, r: Request): void {
+  if (r.status !== 'pending') return;
+  if (!r.planId || !r.item) return;
+  const asker = personOf(world, r.from);
+  if (!asker) return;
+  const plan = asker.intentions.find((i) => i.id === r.planId && i.status === 'active');
+  if (!plan) {
+    settle(world, r, 'cancelled', 'no longer needed: that project has ended');
+    return;
+  }
+  const short = (plan.wants[r.item] ?? 0) - (asker.inv[r.item] ?? 0);
+  // what everything OTHER than this ask already covers
+  const elsewhere = outstandingForPlan(world, asker.id, r.item, plan.id) - r.amount;
+  const uncovered = short - Math.max(0, elsewhere);
+  if (uncovered <= 0) {
+    settle(world, r, 'cancelled', 'no longer needed: it is covered now');
+    return;
+  }
+  if (uncovered < r.amount) r.amount = uncovered; // narrowed to what is still wanted, before anybody answers it
 }
 
 export { answerInfo, pickNews, tellBelief } from './news';
@@ -624,6 +699,10 @@ export interface ConvData {
   milestone?: string;
   mealId?: number;
   mealPlan?: import('./meals').MealPlan;
+  /** the asker's own plan the request is for (intent.ts) */
+  planId?: number;
+  /** why an ask got no answer: it had stopped being an ask (withdrawn, expired, already answered) by the time it was reached */
+  moot?: string;
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -677,6 +756,14 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
   }
 }
 
+/** What a warning came to, read off the evidence the exchange recorded. Every case is a state the engine set; none is guessed. */
+function warnReport(c: Conversation): { text: string; detail: string; outcome: 'success' | 'partial' } {
+  if (c.data.warnDelivered === true) return { text: 'warned them', detail: 'they had not heard; they know now', outcome: 'success' };
+  if (c.data.warnDelivered === false) return { text: 'they already knew', detail: 'they knew as much or more already', outcome: 'partial' };
+  if (c.data.warnNothing) return { text: 'nothing to tell', detail: 'no fresh danger worth passing on', outcome: 'partial' };
+  return { text: 'never got to it', detail: 'the talk ended before the warning was passed', outcome: 'partial' };
+}
+
 function endTalkActivity(world: World, p: Person, outcome: 'success' | 'interrupted'): void {
   p.convId = 0;
   if (p.activity && p.activity.kind === 'converse') {
@@ -693,8 +780,12 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   if (i >= 0) world.conversations.splice(i, 1);
   // remember how this exchange ended, for each side, as one record (the partner, purpose and result stay together)
   const req = world.requests.find((r) => r.id === c.requestId);
-  const resultText = outcome === 'interrupted' ? 'cut short' : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
-  const detailText = outcome === 'interrupted' ? 'one of them had to go' : req ? req.note : '';
+  // a warning carries its own evidence (news.ts tellBelief said whether the belief actually passed), and makes no request
+  const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
+  // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
+  const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
+  const resultText = outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
+  const detailText = outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
   if (outcome === 'success' && A && B) {
@@ -803,10 +894,12 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'request': {
       const kind = d.reqKind ?? 'food';
-      const req = createRequest(world, A, B, { kind, item: d.item ?? null, amount: d.amount ?? 1, siteId: d.siteId ?? 0, purpose: d.purpose, destKind: d.destKind, destId: d.destId, deadline: d.deadline, milestone: d.milestone, toolKind: d.toolKind ?? null });
+      const req = createRequest(world, A, B, { kind, item: d.item ?? null, amount: d.amount ?? 1, siteId: d.siteId ?? 0, purpose: d.purpose, destKind: d.destKind, destId: d.destId, deadline: d.deadline, milestone: d.milestone, toolKind: d.toolKind ?? null, planId: d.planId });
       d.reqId = req.id;
       c.requestId = req.id;
       if (kind === 'wood' || kind === 'stone' || kind === 'goods') A.cooldowns.askMaterials = world.tick + 900;
+      // asked about material for a plan of their own: whatever the answer, they do not raise that material again for a while
+      if (d.planId && d.item) A.cooldowns['askPlan:' + d.item] = world.tick + 900;
       const building = d.siteId ? String((world.byId.get(d.siteId) as { type?: string } | undefined)?.type ?? 'building').replace('_', '-') : 'building';
       if (kind === 'tool') bubble(world, A, `Could I borrow your ${d.toolKind ?? 'tool'}? I’ll bring it back.`, 'ask', 62);
       else if (kind === 'goods' || kind === 'haul') bubble(world, A, `Could you bring ${d.item ?? 'some materials'} to the ${building}?`, 'ask', 62);
@@ -832,7 +925,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       if (danger) {
         bubble(world, A, D.saying(D.WARN_LINES, A.id, B.id, world.tick >> 5, { dir: D.dangerWords(world, danger) }), 'warn', 66);
         c.data.warnId = danger.id;
-      }
+      } else c.data.warnNothing = true; // nothing fresh enough to pass on: recorded so the speaker is told the truth
       break;
     }
     case 'offer': {
@@ -886,12 +979,43 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     }
     case 'request': {
       if (!req) break;
+      // The answer is the moment material moves or an obligation is taken on, so the ask is checked HERE and not only by the
+      // periodic sweep (updateRequests): what the asker needs may have changed since they spoke, or the ask may have been
+      // withdrawn or already answered. A project ask is first brought up to date against the asker's own plan and pack, and then
+      // anything that is no longer pending gets no answer at all - no gift, no promise, no thanks, no change of standing.
+      // Rich only: an authored world answers exactly as it always did (its golden fingerprints are the contract).
+      if (isRich(world)) {
+        // The order matters. An ask that has already been answered, withdrawn or expired is turned away FIRST, and its record is
+        // left exactly as it was found: a second pass over the same exchange must not rewrite what the first one concluded. Only a
+        // still-open ask is brought up to date against the asker's own plan and pack, and the status is then looked at again.
+        const turnAway = (why: string): void => {
+          c.data.moot = why;
+          bubble(world, A, 'Never mind — I’ve seen to it since.', 'say', 50);
+        };
+        if (req.status !== 'pending') {
+          turnAway(req.status === 'cancelled' ? 'it was not needed after all' : `the asking had already ended (${req.status})`);
+          break;
+        }
+        if (req.planId) keepOwnAskHonest(world, req);
+        if (req.status !== 'pending') {
+          turnAway('it was not needed after all');
+          break;
+        }
+      }
       const resp = evaluateRequest(world, B, A, req);
       if (resp.kind === 'give') {
         const moved = transfer(world, B.inv, A.inv, carryCap(world, A), resp.item, resp.n, 'person:' + B.id, 'person:' + A.id, 'gift on request');
         if (moved > 0) {
           const items: Items = { [resp.item]: moved };
-          settle(world, req, 'fulfilled', `received ${moved} ${resp.item}`);
+          req.delivered = (req.delivered ?? 0) + moved; // handed over here and now: this is a delivery, not a promise
+          // In a rich world the three quantities are kept apart: asked for, agreed to, actually handed over - and an ask that was
+          // only partly answered is recorded as that, leaving nobody owing the difference. An authored world keeps the record it
+          // always kept (the golden fingerprints are its contract), which is the one place this slice does not sharpen.
+          if (isRich(world)) {
+            req.offered = resp.n;
+            const full = (req.delivered ?? 0) >= req.amount;
+            settle(world, req, full ? 'fulfilled' : 'partial', full ? `received ${moved} ${resp.item}` : `asked for ${req.amount}, given ${resp.n}, received ${req.delivered} ${resp.item}`);
+          } else settle(world, req, 'fulfilled', `received ${moved} ${resp.item}`);
           bubble(world, B, D.saying(D.RESP_GIVE, B.id, A.id, world.tick >> 5, { what: `${moved} ${resp.item}` }), 'say', 56);
           onGift(world, B, A, items, 'request');
           // the thank-you comes next phase
@@ -928,7 +1052,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addCommitment(world, B, req, { kind: kindC, item, amount: resp.n, siteId: req.siteId, deadline: world.tick + (kindC === 'haul' ? PROMISE_TTL + 600 : PROMISE_TTL), destKind: kindC === 'haul' ? 'site' : 'person', destId: kindC === 'haul' ? req.siteId : A.id });
         }
         req.status = 'promised';
-        req.note = `${B.name} will bring ${resp.n} ${item}`;
+        if (isRich(world)) req.offered = resp.n; // they agreed to this much; the rest of the ask stays the asker's own problem
+        req.note = isRich(world) && resp.n < req.amount ? `${B.name} will bring ${resp.n} of the ${req.amount} ${item}` : `${B.name} will bring ${resp.n} ${item}`;
         if (req.kind === 'repair') {
           bubble(world, B, 'I’ll see to the roof.', 'say', 60);
           addLog(world, B, 'social', `Promised ${A.name} to mend their roof.`);
@@ -946,6 +1071,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         if (resp.reason === 'enough') bubble(world, B, 'I think that’s been seen to already.', 'say', 54);
         else if (resp.reason === 'committed') bubble(world, B, 'I’ve already promised that to them.', 'say', 54);
         else if (resp.reason === 'in_use') bubble(world, B, 'I’m using it just now — ask me later?', 'say', 54);
+        else if (resp.reason === 'making') bubble(world, B, 'I have some, but it is for something I am making.', 'say', 56);
         else bubble(world, B, D.saying(lines, B.id, A.id, world.tick >> 5), 'say', 56);
         settle(world, req, 'declined', resp.reason.replace('_', ' '));
         const sev = req.kind === 'food' ? clamp((62 - A.needs.hunger) / 62, 0, 1) : req.kind === 'water' ? clamp((66 - A.needs.thirst) / 66, 0, 1) : 0.3;
@@ -962,7 +1088,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         } else if (resp.reason === 'own_need') {
           adjustRel(A, B.id, world.tick, { aff: -0.3 });
         } else {
-          // 'enough', 'committed', 'in_use', 'no_item': nobody did anything wrong
+          // 'enough', 'committed', 'in_use', 'no_item', 'making': nobody did anything wrong
           A.asked[B.id] = world.tick - 400;
         }
         addLog(world, A, 'social', `${B.name} said no (${resp.reason.replace('_', ' ')}).`);
@@ -994,7 +1120,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       if (id) {
         const b = A.beliefs[id];
         if (b) {
-          tellBelief(world, A, B, b);
+          // tellBelief's verdict is the evidence of delivery: true when B did not know, false when B knew as much already
+          c.data.warnDelivered = tellBelief(world, A, B, b);
           bubble(world, B, 'Thanks for the warning.', 'say', 50);
           adjustRel(B, A.id, world.tick, { aff: 1.8, trust: 2.2, note: `${A.name} warned me about a wolf` });
           if ((world.stats.lastWarnEvent ?? -9999) < world.tick - 900) {
@@ -1463,6 +1590,9 @@ registerHandler('give', {
     if (mode === 'promise' && a.data.commitmentId) {
       const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));
       if (cm && cm.item) cm.delivered = (cm.delivered ?? 0) + (got[cm.item] ?? 0);
+      // the request the promise answers records the same arrival, so "how much came" has one source whichever way it came
+      const rq = cm ? world.requests.find((x) => x.id === cm.requestId) : undefined;
+      if (rq && cm && cm.item) rq.delivered = (rq.delivered ?? 0) + (got[cm.item] ?? 0);
       if (cm && (cm.delivered ?? 0) >= cm.amount) fulfillCommitment(world, p, cm.id);
     }
     return 'done';

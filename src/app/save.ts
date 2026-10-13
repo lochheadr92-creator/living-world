@@ -209,7 +209,11 @@ export function deserializeWorld(json: string): World {
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);
-  for (const p of w.persons) w.byId.set(p.id, p);
+  for (const p of w.persons) {
+    // a save made before private plans existed has no such field: an empty list is exactly what it meant
+    if (!Array.isArray(p.intentions)) p.intentions = [];
+    w.byId.set(p.id, p);
+  }
   for (const a of w.animals) w.byId.set(a.id, a);
   for (const s of w.sources) {
     w.byId.set(s.id, s);

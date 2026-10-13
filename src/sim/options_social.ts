@@ -6,6 +6,7 @@ import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
 import { isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
+import { outstandingForPlan } from './intent';
 import { wantsAmends } from './grievance';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
@@ -179,6 +180,50 @@ function optRequest(ctx: Ctx): void {
       const sc = new Scorer().add(`need a ${tw.kind} to ${tw.for}`, 20 * traitMods(p).work).add('they are carrying one', 4).add('walking', -pen(c.d * 6));
       mkSocial(ctx, c, 'request', { reqKind: 'tool', toolKind: tw.kind, item: tw.kind, amount: 1, purpose: tw.for }, `Ask ${c.q.name} to lend a ${tw.kind}`, `to ${tw.for}`, null, sc, 'request', ':tool:' + tw.kind);
       p.cooldowns['askTool' + tw.kind] = world.tick + 300;
+    }
+  }
+
+  // Material a project of my own still lacks (Stage D1). Everything here is the asker's own: their plan says what it wants, their
+  // pack says what they have, and the only people asked are ones they can see carrying the thing. Nothing is counted as arrived:
+  // what has already been asked for or promised for this same plan is subtracted, so one shortage is not asked for twice.
+  // In an authored world `p.intentions` is empty, so this loop does nothing at all.
+  for (const plan of p.intentions) {
+    if (plan.status !== 'active' || plan.kind !== 'tool') continue;
+    if (ctx.criticals.length || ctx.dangers.length) break; // something is actually wrong: not the moment to be asking favours
+    for (const item of Object.keys(plan.wants) as ItemKind[]) {
+      const short = (plan.wants[item] ?? 0) - (p.inv[item] ?? 0);
+      if (short <= 0) continue;
+      // having actually asked about this material, they let it rest a while (set where the asking really happens, social.ts)
+      if ((p.cooldowns['askPlan:' + item] ?? 0) > world.tick) continue;
+      // What is already asked for or promised for this same plan is coverage, not material: it is subtracted from what is asked
+      // for next, so two helpers are never asked for the same unit, and never counted as if it had arrived.
+      const uncovered = short - outstandingForPlan(world, p.id, item, plan.id);
+      if (uncovered <= 0) continue;
+      if (activeCommitments(p).length >= MAX_ACTIVE_COMMITMENTS) continue;
+      // worth asking only when fetching it themselves is not quick: the ordinary way comes first
+      if (ctx.options.some((o) => o.yields === item && o.eta < 260)) continue;
+      for (const c of cands) {
+        if (c.d > 12 || !c.s.carrying.includes(item)) continue;
+        if (c.s.child || stageOf(world, c.q) === 'child') continue;
+        if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
+        const sc = new Scorer()
+          .add(`${plan.goal} and the ${item} is short`, 20 * traitMods(p).work)
+          .add('they are carrying some', 4)
+          .add('walking', -pen(c.d * 6));
+        mkSocial(
+          ctx,
+          c,
+          'request',
+          { reqKind: item === 'wood' || item === 'stone' ? item : 'goods', item, amount: Math.max(1, Math.min(uncovered, 3)), purpose: plan.goal, destKind: 'person', destId: p.id, planId: plan.id },
+          `Ask ${c.q.name} for ${item}`,
+          plan.goal,
+          null,
+          sc,
+          'request',
+          ':plan:' + item,
+        );
+        break; // one person at a time about one thing
+      }
     }
   }
 

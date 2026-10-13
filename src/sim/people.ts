@@ -189,6 +189,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     relations: {},
     failures: {},
     commitments: [],
+    intentions: [],
     errand: null,
     activity: null,
     suspended: null,

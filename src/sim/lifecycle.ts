@@ -5,6 +5,7 @@ import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PRE
 import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
+import { intentionsOnDeath } from './intent';
 import { socialOnDeath } from './social';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
@@ -184,6 +185,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const age = Math.floor(ageYears(world, p));
   if (p.cartId) unhitch(world, p);
   toolsOnDeath(world, p);
+  intentionsOnDeath(world, p); // after the activity ended, so what they really did was credited first and nothing accrues now
   mourn(world, p);
   socialOnDeath(world, p);
   dropNear(world, p.x, p.y, p.inv, `${p.name}'s belongings`, p.id);

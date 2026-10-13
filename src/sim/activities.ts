@@ -4,6 +4,7 @@ import { carryCap } from './people';
 import { stageOf } from './people';
 import { releaseClaims, weightOf } from './economy';
 import { addLog, setResult } from './events';
+import { creditShelterFrom } from './intent';
 import { findPath, terrainSpeed, tileCost } from './pathfinding';
 import { hashUnit } from './rng';
 import { distToFootprint, entityPos, isWalkable } from './registry';
@@ -322,6 +323,8 @@ function beginWork(world: World, p: Person, a: Activity): void {
 export function endActivity(world: World, p: Person, outcome: 'success' | 'failed' | 'interrupted' | 'partial', detail: string): void {
   const a = p.activity;
   if (!a) return;
+  // time under shelter is credited to the plan it served before the activity is let go of (rest and sleep alike)
+  creditShelterFrom(p, a);
   releaseClaims(world, a.claims);
   p.activity = null;
   const h = handlers[a.kind];
@@ -375,6 +378,16 @@ export function stepActivity(world: World, p: Person): void {
       return;
     }
   }
+  // A controller may have asked for a bounded spell of this action. This only ever ends it sooner than it would have ended;
+  // danger and critical needs keep overriding through their own paths, and the engine still charges every tick actually worked.
+  const lim = a.data.limit as Record<string, number> | undefined;
+  if (lim && lim.ticks !== undefined) {
+    a.data.spent = ((a.data.spent as number) ?? 0) + 1;
+    if ((a.data.spent as number) > lim.ticks) {
+      endActivity(world, p, 'success', `stopped after the ${lim.ticks} ticks asked for`);
+      return;
+    }
+  }
   a.pprogress = a.progress;
   const res = h.work(world, p, a);
   if (p.activity !== a) return; // handler ended it itself
@@ -400,6 +413,8 @@ export function stepActivity(world: World, p: Person): void {
 export function suspendActivity(world: World, p: Person): void {
   const a = p.activity;
   if (!a) return;
+  // the progress below is about to be thrown away: credit what it was worth first, or a broken night would count for nothing
+  creditShelterFrom(p, a);
   releaseClaims(world, a.claims);
   if (a.phase === 'work') {
     a.phase = 'travel';

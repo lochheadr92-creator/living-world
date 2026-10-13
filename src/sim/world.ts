@@ -11,6 +11,7 @@ import './act_misc';
 import './social';
 
 import { stepActivity, abortActivity } from './activities';
+import { settleIntentions } from './intent';
 import { BELIEF_REFRESH_EVERY, DECAY_PER_TICK, PERCEIVE_EVERY, PERISHABLE, PROJECT_PATIENCE, SITE_PATIENCE } from './constants';
 import { decide, reviewActivity, urgentInterrupt } from './decision';
 import { isProjectSite } from './act_build';
@@ -100,6 +101,9 @@ function stepPerson(world: World, p: Person): void {
     killPerson(world, p, cause);
     return;
   }
+  // what the world has already decided about this person's own plans, settled on the tick it became due rather than whenever they
+  // next happen to think (intent.ts settleIntentions). Rich worlds only, and free for anyone carrying no plans.
+  settleIntentions(world, p);
   if ((tick + p.id) % PERCEIVE_EVERY === 0) perceive(world, p);
   if ((tick + p.id) % BELIEF_REFRESH_EVERY === 0) refreshBeliefs(world, p);
   if ((tick + p.id) % 12 === 5) noteConcerns(world, p);
@@ -260,11 +264,24 @@ export function hashWorld(world: World): string {
   for (const m of world.meals) push(`M${m.id}:${m.status},${m.servings},${m.reserved},${m.arrived.length},${m.ate.length}`);
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
+    // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in
+    for (const p of world.persons) if (p.alive && p.intentions.length) push(`N${p.id}:${p.intentions.map((i) => `${i.kind},${i.status},${i.stepKey ?? '-'},${i.setAside}`).join(';')}`);
+    // What one person still owes another, and how much of it has really been handed over (Stage D1). The coarse count in the shared
+    // part of the fingerprint (`p.commitments.length`) cannot tell an undelivered promise from a kept one, and that difference is
+    // exactly what a save has to carry. Authored worlds are untouched: this is inside the rich branch.
+    for (const p of world.persons) {
+      if (!p.alive) continue;
+      const live = p.commitments.filter((c) => c.status === 'active');
+      if (live.length) push(`O${p.id}:${live.map((c) => `${c.kind},${c.to},${c.item ?? '-'},${c.amount},${c.delivered ?? 0},${r4(c.contrib ?? 0)}`).join(';')}`);
+    }
+    // a request outstanding for someone's own project: who asked whom for what, and where it has got to
+    for (const r of world.requests) if (r.planId && (r.status === 'pending' || r.status === 'promised')) push(`J${r.id}:${r.from},${r.to},${r.item ?? '-'},${r.amount},${r.status},${r.planId}`);
     push(`Z${world.hardship ? world.hardship.until : 0}`);
   }
   if (world.inhabitants) for (const k of Object.keys(world.inhabitants).sort((a, b) => Number(a) - Number(b))) push(`E${k}:${JSON.stringify(world.inhabitants[Number(k)])}`);
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));
-  push(`Q${world.requests.length},${world.requests.filter((r) => r.status === 'fulfilled').length}|H${world.households.length}`);
+  // 'partial' is an answered ask that brought something: counted with 'fulfilled' here, so this number means what it always meant
+  push(`Q${world.requests.length},${world.requests.filter((r) => r.status === 'fulfilled' || r.status === 'partial').length}|H${world.households.length}`);
   return h.toString(16).padStart(8, '0');
 }
 
