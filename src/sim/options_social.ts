@@ -5,6 +5,7 @@ import { favourOwedBy } from './misdeeds';
 import { aloneOptions } from './temperament';
 import { companyPull } from './lifechanges';
 import { crewMates } from './crews';
+import { quarrelsFor } from './mediation';
 import { BUILD_DEF } from './constants';
 import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
@@ -436,6 +437,24 @@ function optReconcile(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── stepping into a quarrel ─────────────────────────
+function optMediate(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (ctx.stage === 'child' || ctx.drives.hunger > 30 || ctx.drives.thirst > 30) return;
+  const quarrels = quarrelsFor(world, p);
+  if (!quarrels.length) return;
+  for (const c of candidates(ctx)) {
+    const q = quarrels.find((x) => x.a === c.q);
+    if (!q || c.d > 11) continue;
+    const sc = new Scorer()
+      .add(`${q.a.name} and ${q.b.name} have fallen out, and both are mine`, 12 + 0.1 * q.weight)
+      .add('a peacemaker by nature', 6 * p.traits.generosity + 3 * p.traits.sociability)
+      .add('walking', -pen(c.d * 6));
+    if (sc.total < 8) continue;
+    mkSocial(ctx, c, 'mediate', { pair: q.b.id }, `Talk ${q.a.name} round about ${q.b.name}`, `to help ${q.a.name} and ${q.b.name} make peace`, null, sc, 'peace', ':' + q.b.id);
+  }
+}
+
 // ───────────────────────── recruiting help ─────────────────────────
 function optRecruit(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -543,6 +562,7 @@ export function socialOptions(ctx: Ctx): void {
   optWarn(ctx);
   optOffer(ctx);
   optReconcile(ctx);
+  optMediate(ctx);
   optRecruit(ctx);
   optPropose(ctx);
   optTrade(ctx);

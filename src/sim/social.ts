@@ -4,6 +4,7 @@ import { noteWedding } from './occasions';
 import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
 import { expose } from './illness';
 import { leanOn, onMovedHousehold } from './lifechanges';
+import { hears, mediate } from './mediation';
 import {
   canInterruptForTalk,
   endActivity,
@@ -689,6 +690,7 @@ function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): 
   if (avail <= 0) return { ok: false, why: 'was busy' };
   const rel = b.relations[a.id];
   if (rel && rel.avoidUntil > world.tick && purpose !== 'apologize' && purpose !== 'warn') return { ok: false, why: 'did not want to talk' };
+  if (purpose === 'mediate' && !hears(a, b)) return { ok: false, why: 'would not hear of it' };
   if (personalDriveMax(b) > 62 && purpose !== 'request' && purpose !== 'warn') return { ok: false, why: 'had more pressing needs' };
   // someone visibly hungry or thirsty asking for help is hard to put off
   const visibleNeed = (a.needs.hunger < 38 || a.needs.thirst < 38) && (purpose === 'request' || purpose === 'ask_info') ? 0.3 : 0;
@@ -730,6 +732,8 @@ export interface ConvData {
   planId?: number;
   /** the ask passed the asker's own "they would probably say yes" test when it was made (options_social.ts) */
   likely?: boolean;
+  /** for a mediation: the other party of the quarrel the listener holds */
+  pair?: number;
   /** why an ask got no answer: it had stopped being an ask (withdrawn, expired, already answered) by the time it was reached */
   moot?: string;
 }
@@ -772,6 +776,8 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
       return `to help ${name}`;
     case 'apologize':
       return `to make peace with ${name}`;
+    case 'mediate':
+      return `to help ${name} make peace`;
     case 'recruit':
       return `to get ${name}'s help with a building`;
     case 'propose':
@@ -979,6 +985,11 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'apologize': {
       bubble(world, A, D.saying(D.APOLOGY, A.id, B.id, world.tick >> 5, vars), 'say', 58);
+      break;
+    }
+    case 'mediate': {
+      const other = d.pair ? personOf(world, d.pair) : null;
+      bubble(world, A, other ? `Won't you make it up with ${other.name}? It has gone on long enough.` : 'Let it go, for all our sakes.', 'ask', 60);
       break;
     }
     case 'invite': {
@@ -1241,6 +1252,18 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     }
     case 'invite': {
       if (d.mealId) inviteRespond(world, A, B, d.mealId);
+      break;
+    }
+    case 'mediate': {
+      const other = d.pair ? personOf(world, d.pair) : null;
+      if (!other) break;
+      const out = mediate(world, A, B, other);
+      if (out === 'peace') bubble(world, B, 'You’re right. I’ll let it lie.', 'happy', 56);
+      else if (out === 'eased') bubble(world, B, 'Maybe. I’ll think on it.', 'say', 54);
+      else if (out === 'worse') {
+        bubble(world, B, 'Stay out of it.', 'angry', 54);
+        c.data.sour = true;
+      } else bubble(world, B, 'Not yet.', 'say', 50);
       break;
     }
     case 'propose': {

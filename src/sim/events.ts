@@ -17,7 +17,7 @@ export function chronicleWorthy(kind: EventKind, text: string): boolean {
     case 'build':
       return text.includes(' finished ') || text.includes(' lit a ');
     case 'social':
-      return text.includes(' is over: ') || text.includes(' is called at ') || text.includes('become a crew') || text.includes('has become a tradition') || text.includes('fallen out of use');
+      return text.includes(' is over: ') || text.includes(' is called at ') || text.includes('make peace') || text.includes('become a crew') || text.includes('has become a tradition') || text.includes('fallen out of use');
     case 'work':
       return text.includes('brought down a deer') || text.includes('apprentice') || text.includes("'s trade") || text.includes('own right');
     case 'danger':

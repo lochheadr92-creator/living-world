@@ -8,7 +8,8 @@ import { CREW_NUDGE, crewNudge, crewOf, crewsOf, crewsTick } from '../src/sim/cr
 import { stageOf } from '../src/sim/people';
 import { settingsForProfile } from '../src/sim/profiles';
 import { stepWorld } from '../src/sim/world';
-import type { Option, Person, World } from '../src/sim/types';
+import type { Option } from '../src/sim/optutil';
+import type { Person, World } from '../src/sim/types';
 
 const world = (dynamics: 'authored' | 'rich'): World => createWorld(settingsForProfile('normal', 'meadow', { immigration: false, dynamics }));
 const blank = { affinity: 0, trust: 0, familiarity: 0, lastMet: 0, kin: '' as const, avoidUntil: 0, debt: 0, history: [], grievance: null, settledAt: 0 };

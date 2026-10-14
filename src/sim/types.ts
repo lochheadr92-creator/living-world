@@ -1040,7 +1040,8 @@ export type ConvPurpose =
   | 'invite'
   | 'check_in'
   | 'lend'
-  | 'report';
+  | 'report'
+  | 'mediate';
 
 export interface Conversation {
   id: number;
