@@ -6,6 +6,7 @@ import { updateMood } from './mood';
 import { illnessTick } from './illness';
 import { apprenticeTick } from './apprentice';
 import { lifeTickRich } from './life';
+import { crowdTick } from './temperament';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -104,6 +105,7 @@ function stepPerson(world: World, p: Person): void {
   illnessTick(world, p);
   apprenticeTick(world, p);
   lifeTickRich(world, p);
+  crowdTick(world, p);
   if (p.health <= 0) {
     const n = p.needs;
     const cause = p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
@@ -332,6 +334,7 @@ export function hashWorld(world: World): string {
       for (let i = 0; i < world.roads.length; i++) n += world.roads[i];
       if (n) push(`R${n}`);
     }
+    for (const p of world.persons) if (p.alive && p.crowd) push(`Q${p.id}:${p.crowd}`);
     for (const p of world.persons) if (p.alive && (p.goal || p.injury)) push(`L${p.id}:${p.goal ? p.goal.kind + ',' + p.goal.done : '-'}|${p.injury ? p.injury.kind + ',' + p.injury.until : '-'}`);
     for (const p of world.persons) if (p.alive && p.apprentice) push(`A${p.id}:${p.apprentice.master},${p.apprentice.key}`);
     for (const p of world.persons) if (p.alive && p.illness) push(`I${p.id}:${p.illness.since},${r4(p.illness.severity)},${p.illness.rested}`);

@@ -50,6 +50,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   wander: 'wandering',
   attend: 'at a gathering',
   hunt: 'hunting',
+  alone: 'taking some time alone',
   eat: 'eating',
   eat_store: 'eating from stores',
   drink: 'drinking',

@@ -1,5 +1,6 @@
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
-import { think } from './mood';
+import { isRich, think } from './mood';
+import { SOCIABLE, isReserved } from './temperament';
 import { expose } from './illness';
 import type { WorkResult } from './activities';
 import { DAY, NUTRITION, workRules } from './constants';
@@ -392,6 +393,8 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
   else if (B.needs.thirst < 22 || B.needs.hunger < 12 || B.needs.energy < 14) why = 'had more pressing needs';
   else if (rel && rel.avoidUntil > world.tick) why = 'was not on good terms with the host';
   else if (m.accepted.length + 1 >= Math.min(MAX_GUESTS + 1, foodUnits(A.inv))) why = 'there was no room at the table';
+  // a reserved person often declines a crowded table, and that is not a slight (rich only)
+  else if (isRich(world) && isReserved(B) && m.accepted.length >= 3 && hashUnit(B.id, A.id, world.tick >> 4) < 0.6) why = 'would rather eat quietly tonight';
   else {
     const w = 0.34 + 0.4 * B.traits.sociability + 0.3 * Math.max(0, aff) / 100 + (hungry ? 0.18 : 0) + (B.hhId === A.hhId ? 0.2 : 0) - 0.4 * (Math.max(0, 40 - B.needs.energy) / 40);
     if (hashUnit(B.id, A.id, world.tick >> 4) > w) why = 'preferred to stay on with their own plans';
@@ -473,7 +476,8 @@ function finishMeal(world: World, m: Meal): void {
     }
   for (const a of ate) {
     a.needs.social = Math.min(100, a.needs.social + 18);
-    think(world, a, 'shared_meal', 6, DAY / 2, 'sat down to a shared meal');
+    // a full table lifts the sociable more (rich only)
+    think(world, a, 'shared_meal', 6 + (isRich(world) && a.traits.sociability > SOCIABLE && ate.length >= 4 ? 4 : 0), DAY / 2, 'sat down to a shared meal');
     addLog(world, a, 'social', `Shared a meal at ${m.placeName} with ${ate.filter((x) => x !== a).map((x) => x.name).slice(0, 3).join(', ') || 'no one else'}.`);
   }
   if (host && ate.length >= 2) addEvent(world, 'social', `${host.name} hosted a shared meal at ${m.placeName}: ${ate.length} sat down together.`, ate.map((x) => x.id).slice(0, 4), m.x, m.y);

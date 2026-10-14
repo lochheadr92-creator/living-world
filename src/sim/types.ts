@@ -198,6 +198,7 @@ export interface SeenEntity {
 export type ActivityKind =
   | 'attend'
   | 'hunt'
+  | 'alone'
   | 'wander'
   | 'eat'
   | 'eat_store'
@@ -577,6 +578,8 @@ export interface Person {
   immuneUntil?: number;
   /** whose apprentice they are, in what (apprentice.ts; rich only, never created in an authored world) */
   apprentice?: Apprenticeship;
+  /** time lately spent with three or more people close by (temperament.ts; rich only, never created in an authored world) */
+  crowd?: number;
   /** what they hope for, and what hurts them (life.ts; rich only, never created in an authored world) */
   goal?: Goal;
   injury?: Injury;

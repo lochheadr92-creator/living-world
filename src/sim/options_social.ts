@@ -2,6 +2,7 @@ import { isRich } from './mood';
 import { newActivity } from './activities';
 import { reputationOf } from './reputation';
 import { favourOwedBy } from './misdeeds';
+import { aloneOptions } from './temperament';
 import { BUILD_DEF } from './constants';
 import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
@@ -530,6 +531,7 @@ function optTrade(ctx: Ctx): void {
 export function socialOptions(ctx: Ctx): void {
   mealOptions(ctx);
   attendOptions(ctx);
+  aloneOptions(ctx);
   welfareOptions(ctx);
   optRequest(ctx);
   optAskInfo(ctx);
