@@ -473,6 +473,7 @@ export function generateNatural(settings: Settings): World {
   for (const hub of hubs) {
     const wantFish = Math.round(11 * scale * hub.scale);
     let got = 0;
+    const placed: Source[] = [];
     fishCand.sort((a, b) => {
       const da = dist(a % W, (a / W) | 0, hub.x, hub.y);
       const db = dist(b % W, (b / W) | 0, hub.x, hub.y);
@@ -485,7 +486,15 @@ export function generateNatural(settings: Settings): World {
       if (fishSpots.some((f) => dist(f.x, f.y, x, y) < 4.2)) continue;
       fishSpots.push({ x, y });
       got++;
-      mk('fish_spot', x, y, Math.max(2, Math.round(gen.range(4, SOURCE_MAX.fish_spot))));
+      placed.push(mk('fish_spot', x, y, Math.max(2, Math.round(gen.range(4, SOURCE_MAX.fish_spot)))));
+    }
+    // A big camp on a small shore (the town: a hundred people on the ordinary map) cannot be given its share of fishing spots, so
+    // the spots it has are made to give as much as its share would: they fill again that much faster. The per-person fishing
+    // of the ordinary camp is kept; only how it is laid along the shore changes. A camp that got its full count is untouched.
+    // (only a camp bigger than the village's: the village itself, and the Large and Huge camps, are laid out exactly as always)
+    if (hub.scale > 1.5 && got > 0 && got < wantFish) {
+      const share = got / wantFish;
+      for (const s of placed) s.regrowEvery = Math.max(20, Math.round(s.regrowEvery * share));
     }
   }
 
@@ -732,11 +741,12 @@ function populate(world: World, gen: RNG, population: number, campX: number, cam
   const households: Household[] = [];
   const homes: { x: number; y: number }[] = [];
 
-  // lean-to ring around the camp
+  // lean-to ring around the camp; a big camp needs more rings than the village's six, or a third of its first shelters find no room
+  const rings = Math.round(6 * Math.max(1, Math.sqrt(scale)));
   for (let h = 0; h < shelterCount; h++) {
     const ang0 = (h / shelterCount) * TAU + gen.range(-0.2, 0.2);
     let placed = false;
-    for (let ring = 0; ring < 6 && !placed; ring++) {
+    for (let ring = 0; ring < rings && !placed; ring++) {
       for (let a = 0; a < 16 && !placed; a++) {
         const ang = ang0 + (a % 2 ? 1 : -1) * Math.floor((a + 1) / 2) * 0.22;
         const r = 5.2 + ring * 0.9;

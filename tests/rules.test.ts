@@ -26,6 +26,7 @@ describe('rule sets', () => {
       facilityRadius: Infinity,
       siteRadius: Infinity,
       arrivalSpacing: 6000,
+      facilitiesPerKind: 1,
     });
   });
 
