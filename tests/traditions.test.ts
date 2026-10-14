@@ -5,9 +5,9 @@ import { describe, expect, it } from 'vitest';
 import { DAY, DAYS_PER_YEAR } from '../src/sim/constants';
 import { addEvent } from '../src/sim/events';
 import { createWorld } from '../src/sim/factory';
-import { occasionsOf } from '../src/sim/occasions';
 import { settingsForProfile } from '../src/sim/profiles';
-import { noteOccasionOver, noteWinterOver, pickStory, traditionsOf, traditionsTick } from '../src/sim/traditions';
+import { noteOccasionOver, noteWinterOver, pickStory, traditionsOf } from '../src/sim/traditions';
+import { occasionsOf, occasionsTick } from '../src/sim/occasions';
 import { stepWorld } from '../src/sim/world';
 import type { Occasion, World } from '../src/sim/types';
 
@@ -27,8 +27,8 @@ describe('traditions', () => {
     expect(w.events.some((e) => e.text.includes('has become a tradition'))).toBe(true);
     // a year on, at the tick traditions are called, it is called again
     const day = Math.floor(w.tick / DAY);
-    w.tick = (day + DAYS_PER_YEAR) * DAY + 13;
-    traditionsTick(w);
+    w.tick = (day + DAYS_PER_YEAR) * DAY + 11;
+    occasionsTick(w);
     const called = occasionsOf(w).find((o) => o.kind === 'harvest' && o.status !== 'done');
     expect(called).toBeTruthy();
     expect(t.lastHeld).toBe(day + DAYS_PER_YEAR);

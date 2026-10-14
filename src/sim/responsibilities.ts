@@ -83,13 +83,14 @@ export function watchTick(world: World, p: Person, a: Activity, child: Person): 
   return 'done';
 }
 
-/** wood went on a fire: a promise to keep it going is kept */
-export function onFireFed(world: World, p: Person, fireId: number): void {
-  const c = fireCommitment(p, fireId);
-  if (!c) return;
+/** wood went on a fire since the promise was made (act_build.ts notes the tick): the promise is kept. Called where promises are checked. */
+export function settleFirePromise(world: World, p: Person, c: Commitment): boolean {
+  if (c.kind !== 'work' || c.milestone !== 'fire kept' || c.status !== 'active') return false;
+  if ((p.cooldowns['fedfire' + (c.destId ?? 0)] ?? -1) < c.made) return false;
   c.contrib = (c.contrib ?? 0) + 40;
   fulfillCommitment(world, p, c.id);
   addLog(world, p, 'social', 'Kept the fire going, as promised.');
+  return true;
 }
 
 /** the asker was turned down: left to decide what to do next */

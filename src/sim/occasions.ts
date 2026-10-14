@@ -10,7 +10,7 @@
 // saves and fingerprints are untouched.
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import type { WorkResult } from './activities';
-import { DAY, NUTRITION, START_FRAC } from './constants';
+import { DAY, DAYS_PER_YEAR, NUTRITION, START_FRAC } from './constants';
 import { transfer } from './economy';
 import { surplusOf, valueOf } from './social';
 import { dayNumber } from './environment';
@@ -24,7 +24,7 @@ import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import type { Building, FoodKind, ItemKind, Occasion, OccasionKind, Person, World } from './types';
 import { hyp } from './util';
-import { noteOccasionOver } from './traditions';
+import { dueTraditions, noteOccasionOver, noteWinterOver, occasionOf } from './traditions';
 
 /** how long an occasion stays open once it has opened */
 export const OCCASION_OPEN = 600;
@@ -141,6 +141,12 @@ export function occasionsTick(world: World): void {
     if (day >= 3 && day % MARKET_EVERY === 3 && st.lastMarketDay !== day && world.buildings.some((b) => b.type === 'hall' && b.condition > 15)) {
       st.lastMarketDay = day;
       callOccasion(world, 'market', [], 0.42);
+    }
+    // the first winter lived through becomes a midwinter fire; the traditions whose day it is are called (traditions.ts)
+    if (day > 0 && day % DAYS_PER_YEAR === 0) noteWinterOver(world);
+    for (const t of dueTraditions(world)) {
+      const o = callOccasion(world, occasionOf(t), t.about ? [t.about] : [], 0.55);
+      if (o) t.lastHeld = day;
     }
   }
   const list = world.occasions;

@@ -5,7 +5,7 @@ import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation'
 import { expose } from './illness';
 import { leanOn, onMovedHousehold } from './lifechanges';
 import { hears, mediate } from './mediation';
-import { laidUp, onDutyDeclined } from './responsibilities';
+import { laidUp, onDutyDeclined, settleFirePromise } from './responsibilities';
 import {
   canInterruptForTalk,
   endActivity,
@@ -583,8 +583,8 @@ export function checkCommitments(world: World, p: Person): void {
         if (req && req.status === 'promised') settle(world, req, 'cancelled', c.reason);
         continue;
       }
-      // in a rich world it is what the maker knows of the roof that settles the promise, not the roof itself (a promise to keep
-      // a fire going is not about a roof: it is kept by feeding the fire, responsibilities.ts)
+      // a promise to keep a fire going is kept by feeding it (responsibilities.ts), not by the state of a roof
+      if (settleFirePromise(world, p, c)) continue;
       const seenCond = c.milestone === 'fire kept' ? -1 : isRich(world) ? p.beliefs[target.id]?.cond : target.condition;
       if ((seenCond ?? -1) >= 62) {
         const did = (c.contrib ?? 0) > 0;

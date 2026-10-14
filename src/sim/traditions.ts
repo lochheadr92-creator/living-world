@@ -9,7 +9,6 @@ import { DAY, DAYS_PER_YEAR } from './constants';
 import { WINTER_LENGTH } from './hardship';
 import { addEvent } from './events';
 import { isRich } from './mood';
-import { callOccasion } from './occasions';
 import type { Occasion, OccasionKind, Tradition, World } from './types';
 
 /** how many must have come for an occasion to become a tradition, and how few for a holding to count as unattended */
@@ -65,19 +64,14 @@ export function noteWinterOver(world: World): void {
   add(world, 'midwinter', 'the midwinter fire', doy, 0);
 }
 
-/** Once a day: call the gatherings whose day it is. */
-export function traditionsTick(world: World): void {
-  if (!isRich(world) || world.tick % DAY !== 13) return;
-  const list = world.traditions;
-  if (!list) return;
+/** the traditions whose day it is and that have not been called today (occasions.ts calls them, once a day) */
+export function dueTraditions(world: World): Tradition[] {
+  if (!isRich(world) || !world.traditions) return [];
   const day = Math.floor(world.tick / DAY);
-  for (const t of list) {
-    if (t.status !== 'kept' || t.lastHeld === day || day % DAYS_PER_YEAR !== t.dayOfYear) continue;
-    const kind: OccasionKind = t.kind === 'remembrance' ? 'funeral' : t.kind === 'harvest' ? 'harvest' : 'feast';
-    const o = callOccasion(world, kind, t.about ? [t.about] : [], 0.55);
-    if (o) t.lastHeld = day;
-  }
+  return world.traditions.filter((t) => t.status === 'kept' && t.lastHeld !== day && day % DAYS_PER_YEAR === t.dayOfYear);
 }
+/** which gathering a tradition calls */
+export const occasionOf = (t: Tradition): OccasionKind => (t.kind === 'remembrance' ? 'funeral' : t.kind === 'harvest' ? 'harvest' : 'feast');
 
 /** a chronicle entry worth retelling as a story: older than three days, about somebody, not the listener's own doing */
 export function pickStory(world: World, speaker: number, listener: number): { about: number; text: string; tick: number } | null {

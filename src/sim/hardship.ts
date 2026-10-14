@@ -9,7 +9,6 @@
 // it ends. How hard it bites depends on the stores and the farmland the village happens to have: some worlds ride it out, some do not.
 import { addEvent } from './events';
 import { ledgerSpoil } from './economy';
-import { noteWinterOver } from './traditions';
 import { DAY, DAYS_PER_YEAR } from './constants';
 import { hashString, hashUnit } from './rng';
 import { isRich, think } from './mood';
@@ -34,10 +33,7 @@ export function updateHardship(world: World): void {
     if (into === DAYS_PER_YEAR - WINTER_LENGTH) {
       addEvent(world, 'nature', 'Winter sets in: the cold deepens and the land gives less.');
       for (const p of world.persons) if (p.alive) think(world, p, 'winter', -4, WINTER_LENGTH * DAY, 'it is winter');
-    } else if (into === 0 && world.tick >= DAY) {
-      addEvent(world, 'nature', 'Winter loosens its grip.');
-      noteWinterOver(world);
-    }
+    } else if (into === 0 && world.tick >= DAY) addEvent(world, 'nature', 'Winter loosens its grip.');
   }
   floodTick(world);
   const h = world.hardship;

@@ -1,6 +1,5 @@
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import { isRich, think } from './mood';
-import { SOCIABLE, isReserved } from './temperament';
 import { expose } from './illness';
 import type { WorkResult } from './activities';
 import { DAY, NUTRITION, workRules } from './constants';
@@ -15,7 +14,7 @@ import { personById } from './registry';
 import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import type { Activity, Belief, FoodKind, Items, ItemKind, Meal, Person, World } from './types';
-import { stageOf } from './people';
+import { SOCIABLE, isReserved, stageOf } from './people';
 
 import { hyp } from './util';
 /**

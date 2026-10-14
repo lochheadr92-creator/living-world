@@ -13,6 +13,7 @@ import { addLog } from './events';
 import { isRich, think } from './mood';
 import { Scorer, addOption, eta, pen } from './optutil';
 import type { Ctx } from './optutil';
+import { RESERVED, isReserved } from './people';
 import { isWalkable } from './registry';
 import { hashUnit } from './rng';
 import type { Person, World } from './types';
@@ -23,14 +24,10 @@ const CROWD_EVERY = 30;
 const CROWD_MAX = 2400;
 /** from here a reserved person feels crowded */
 export const CROWDED_AT = 600;
-/** sociability below this is reserved; above the other, sociable */
-export const RESERVED = 0.4;
-export const SOCIABLE = 0.65;
 /** how far from everyone counts as alone, and how long the sitting lasts */
 const ALONE_DIST = 9;
 const ALONE_TICKS = 220;
 
-export const isReserved = (p: Person): boolean => p.traits.sociability < RESERVED;
 
 /** Every CROWD_EVERY ticks: count the company, feel it (rich only). */
 export function crowdTick(world: World, p: Person): void {

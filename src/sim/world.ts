@@ -7,7 +7,6 @@ import { illnessTick } from './illness';
 import { apprenticeTick } from './apprentice';
 import { lifeTickRich } from './life';
 import { crowdTick } from './temperament';
-import { traditionsTick } from './traditions';
 import { crewsTick } from './crews';
 import './act_build';
 import './act_farm';
@@ -63,7 +62,6 @@ export function stepWorld(world: World): void {
   updateEnvironment(world);
   updateHardship(world);
   occasionsTick(world);
-  traditionsTick(world);
   crewsTick(world);
   updateSources(world);
   updatePlots(world);

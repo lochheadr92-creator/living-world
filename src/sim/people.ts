@@ -46,6 +46,11 @@ export function ageYears(world: World, p: Person): number {
   return (world.tick - p.birthTick) / TICKS_PER_YEAR;
 }
 
+/** sociability below this is reserved; above the other, sociable (temperament.ts, meals.ts) */
+export const RESERVED = 0.4;
+export const SOCIABLE = 0.65;
+export const isReserved = (p: Person): boolean => p.traits.sociability < RESERVED;
+
 export function stageOfAge(age: number): Stage {
   return age < AGE_CHILD ? 'child' : age < AGE_ADULT ? 'youth' : age < AGE_ELDER ? 'adult' : 'elder';
 }
