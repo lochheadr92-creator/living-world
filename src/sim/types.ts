@@ -679,6 +679,9 @@ export interface Building {
   inside: number[];
   /** workplaces: the running batch, stock waiting for pickup, who contributed */
   ops?: FacilityState;
+  /** who finished it and when (rich only; absent in an authored world and on anything built before this was recorded) */
+  builtBy?: number[];
+  built?: number;
   /** set while a home upgrade is under way (the site id) */
   upgrading?: number;
 }
@@ -1135,6 +1138,14 @@ export interface World {
   /** gatherings called in a rich world (occasions.ts); never created in an authored one, so its saves and fingerprints are untouched */
   occasions?: Occasion[];
   occasionState?: { harvestUnits: number; lastHarvestFeastDay: number; lastMarketDay: number };
+  /**
+   * The settlement's record, kept for good (rich only; never created in an authored world): the events worth remembering after
+   * the feed has forgotten them (events.ts chronicleWorthy). Capped at CHRONICLE_MAX, oldest dropped first.
+   */
+  chronicle?: WorldEvent[];
+  /** roads (rich only; world.ts roadsTick): 1 where a path walked hard for a day has become a road; and how long each tile has been worn */
+  roads?: Uint8Array;
+  roadAge?: Uint8Array;
   /** further settlements besides the camp (settlements.ts); absent in a world with one, so that world is saved and hashed exactly as before */
   extraSettlements?: { x: number; y: number }[];
   byId: Map<number, Entity>;

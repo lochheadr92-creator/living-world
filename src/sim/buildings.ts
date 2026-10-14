@@ -182,6 +182,11 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
       old.upgrading = undefined;
       old.condition = 100;
       old.store.cap = BUILD_DEF[site.type].cap;
+      if (world.settings.dynamics === 'rich') {
+        old.builtBy = Object.keys(builderShares(site)).map(Number).filter((id) => world.byId.get(id)?.ent === 'person');
+        if (builder && !old.builtBy.includes(builder.id)) old.builtBy.push(builder.id);
+        old.built = world.tick;
+      }
       for (const k in site.delivered) {
         const n = site.delivered[k as keyof Items] ?? 0;
         if (n > 0) addItem(old.store.items, k as keyof Items, n);
@@ -198,6 +203,12 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
     b.ops.builders = shares;
     b.ops.depositId = site.depositId ?? 0;
     b.ops.tended = world.tick;
+  }
+  // a building remembers who finished it (rich only, so an authored world's buildings are saved exactly as before)
+  if (world.settings.dynamics === 'rich') {
+    b.builtBy = Object.keys(shares).map(Number).filter((id) => world.byId.get(id)?.ent === 'person');
+    if (builder && !b.builtBy.includes(builder.id)) b.builtBy.push(builder.id);
+    b.built = world.tick;
   }
   // leftover delivered materials (should be none) go into the new building's store, never vanish
   for (const k in site.delivered) {

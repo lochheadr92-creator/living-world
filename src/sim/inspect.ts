@@ -617,6 +617,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
         rows.push(['State', b.fuel > 0 ? 'burning' : 'out']);
       }
       if (b.store.cap > 0) rows.push(['Storage', `${Math.round(weightOf(b.store.items))}/${b.store.cap} used`]);
+      if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push(['Built by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
       const notes: string[] = [];
       if (isHomeType(b.type)) {
         const dwellers = hh ? membersOf(world, hh).map((m) => m.name) : [];

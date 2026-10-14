@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { newActivity } from './activities';
 import { reputationOf } from './reputation';
 import { favourOwedBy } from './misdeeds';
@@ -147,10 +148,20 @@ function optRequest(ctx: Ctx): void {
       else if (c.aff >= 25) plaus = 0.5;
       else if (dr >= 70) plaus = 0.32;
       if (plaus < 0.3) continue;
+      const owed = favourOwedBy(world, p, c.q);
+      // an ask worth making (rich only): weighed by how likely the answer is yes, from trust, their name and what they owe;
+      // one that would likely be refused is not made, and the inspector says so
+      if (isRich(world)) {
+        const trust = p.relations[c.q.id]?.trust ?? 10;
+        const likely = plaus * (0.55 + 0.45 * Math.max(0, Math.min(1, (trust + 20) / 80))) + 0.15 * reputationOf(world, p, c.q.id) + 0.1 * Math.min(2, owed);
+        if (likely < 0.3 && dr < 70) {
+          addBlocked(ctx, 'socialize', `Ask ${c.q.name} for ${label}`, c.q.id, 'not worth asking: they would likely say no', 'request');
+          continue;
+        }
+      }
       const sc = new Scorer();
       sc.add(need === 'hunger' ? 'hungry' : 'thirsty', dr * 0.72 * plaus);
       sc.add(itemCheck(c.s) ? 'they are carrying some' : c.q.hhId === p.hhId ? 'family' : c.aff >= 25 ? 'a friend' : 'worth a try', plaus * 4);
-      const owed = favourOwedBy(world, p, c.q);
       if (owed > 0) sc.add('they owe me a favour', 3 * Math.min(2, owed));
       sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
       const kind = stageOf(world, p) === 'child' ? 'care' : reqKind;

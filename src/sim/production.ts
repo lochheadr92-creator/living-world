@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
@@ -875,9 +876,14 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (p.traits.generosity > 0.5) s += 0.1;
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
-  if (roomForAnother(ctx, 'hall', solidHomes) && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
+  // a crowd wants a hall (rich only): once two dozen live here, somewhere to gather is wanted whether or not a yard stands
+  let alive = 0;
+  if (isRich(world)) for (const q of world.persons) if (q.alive) alive++;
+  const crowd = alive >= 24;
+  if (roomForAnother(ctx, 'hall', solidHomes) && (haveYard || crowd) && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
+    if (crowd) s += 0.3;
     if (s >= 0.6) out.push({ type: 'hall', signal: Math.min(1, s), why: 'we need somewhere to eat and talk together out of the weather' });
   }
   return out;

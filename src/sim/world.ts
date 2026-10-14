@@ -69,6 +69,7 @@ export function stepWorld(world: World): void {
   flushDelayedBubbles(world);
   if (tick % 30 === 0) updateRequests(world);
   if (tick % 90 === 0) decayWear(world);
+  roadsTick(world);
 
   updateWildlife(world);
   rebuildMobileGrid(world);
@@ -166,10 +167,51 @@ function updateBuildings(world: World): void {
 
 function decayWear(world: World): void {
   const wear = world.wear;
+  const roads = world.roads;
   for (let i = 0; i < wear.length; i++) {
     if (wear[i] > 0) {
       wear[i] *= 0.9965;
       if (wear[i] < 0.01) wear[i] = 0;
+    }
+    // a road stays worn: the renderer shows it and the walk is faster (pathfinding.ts terrainSpeed reads the wear)
+    if (roads && roads[i] && wear[i] < 0.7) wear[i] = 0.7;
+  }
+}
+
+/** how worn a tile must be, for how many checks (one every 600 ticks), before it is a road; the milestones announced */
+const ROAD_WEAR = 0.3;
+const ROAD_AFTER = 4;
+const ROAD_MILESTONES = [20, 60, 120, 240];
+
+/**
+ * Roads (rich only): a path walked hard for about a day hardens into a road that stays, faster to walk and plain to see.
+ * Nothing is built: the roads are where people already go, so they say what the settlement's life is shaped like.
+ */
+function roadsTick(world: World): void {
+  if (world.settings.dynamics !== 'rich' || world.tick % 600 !== 450) return;
+  const n = world.wear.length;
+  const age = (world.roadAge ??= new Uint8Array(n));
+  const roads = (world.roads ??= new Uint8Array(n));
+  let before = 0;
+  let after = 0;
+  for (let i = 0; i < n; i++) {
+    if (roads[i]) {
+      before++;
+      after++;
+      continue;
+    }
+    if (world.wear[i] >= ROAD_WEAR) {
+      if (age[i] < 255) age[i]++;
+      if (age[i] >= ROAD_AFTER) {
+        roads[i] = 1;
+        after++;
+      }
+    } else if (age[i] > 0) age[i]--;
+  }
+  for (const m of ROAD_MILESTONES) {
+    if (before < m && after >= m) {
+      addEvent(world, 'build', `The paths most walked have hardened into roads: ${after} tiles of road now run through the settlement.`);
+      break;
     }
   }
 }
@@ -278,6 +320,11 @@ export function hashWorld(world: World): string {
       const pay = p.payoff ?? {};
       const ks = Object.keys(pay) as (keyof typeof pay)[];
       if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
+    }
+    if (world.roads) {
+      let n = 0;
+      for (let i = 0; i < world.roads.length; i++) n += world.roads[i];
+      if (n) push(`R${n}`);
     }
     for (const p of world.persons) if (p.alive && (p.goal || p.injury)) push(`L${p.id}:${p.goal ? p.goal.kind + ',' + p.goal.done : '-'}|${p.injury ? p.injury.kind + ',' + p.injury.until : '-'}`);
     for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.kind},${p.trade.master}`);
