@@ -150,6 +150,45 @@ the experiment that tells them apart (stakes without the mood effects, and the r
   A paired contrast (the report has no `--compare` option yet) or more seeds would settle it.
 * Limits: 15 days contains one winter (days 8 to 11 of the first year); the mood result may not hold over several years.
 
+## Measured: a town of a hundred dies of the stakes, not of the crowd (24 seeds, town, rich, 12 days)
+
+The `town` profile (`src/sim/profiles.ts`: the Large population in one camp on the ordinary 80x80 map, the camp's recipe at 3.6
+times) run rich for 12 days, `rich-stakes-only` and `rich-mood-only` against the mean of the control and a nudge. The authored
+town, run once by hand for 10 days, never had a hungry person and grew to 105; the rich town is another matter.
+
+| | reference (rich, all on) | stakes only | mood only (no stakes) |
+|---|---:|---:|---:|
+| people at day 12 | 90.0 | 89.5 | 101.8 (+12.2, higher in 22 of 24) |
+| deaths | 11.3 | 12.0 | 0.3 (−11.6, lower in 18 of 24) |
+| below a critical need | 9.5 | 7.8 | 0.6 (−8.0) |
+| mean hunger | 52.4 | 53.2 | 69.8 (+17.4) |
+| mean mood / in low mood | −19.4 / 20.2 | −18.5 / 19.5 | 0.2 / 0.7 (24 of 24 up) |
+| buildings / solid homes | 68.0 / 19.6 | 67.0 / 19.4 | 78.6 / 28.3 (+10.7 / +8.4) |
+| workplaces | 3.0 | 2.2 | 3.8 |
+| tools | 87.8 | 86.3 | 128.5 (+41.4, higher in 23 of 24) |
+| projects adopted / done | 338.6 / 90.8 | 337.9 / 88.6 | 386.5 / 125.8 (both 22+ of 24 up) |
+| top gathering kind's share | 0.7 | 0.7 | 0.5 (lower in 24 of 24) |
+
+* **The stakes are the whole of the harm (VERIFIED).** Stakes without mood effects reproduce the full rich town to within the noise
+  on every metric: twelve dead of a hundred in twelve days, a tenth of the village at a critical need, mood at −19. Mood effects on
+  top of the stakes add nothing measurable here.
+* **Without the stakes the town thrives (VERIFIED).** Moods on, lean seasons, winter, spoilage and bolder wolves off: 102 people,
+  a third of a death, mean hunger 70, more homes, more buildings, half again as many tools, fifty more projects taken on. Two seeds
+  of 24 go the other way on people and three on deaths; the rest are one-sided.
+* **Density is what makes the stakes lethal (LIKELY, not shown by this run).** The same stakes on four camps of 25 (the Large rich
+  baseline, `docs/gates-rich.json`) cost half a person in twelve days. The same hundred in one camp lose twelve. The per-person
+  recipe is identical, so the difference is in how a single camp uses it: a hundred people's nearest sources overlap and are
+  stripped together while far ones stand, crowding penalties push the walk out, one storehouse where four camps have four
+  (the scaled rules allow one workplace of a kind per settlement), and eleven wolf dens on one map. Which of these matters is not
+  separated here; the single-seed run saw the deaths come by hunger and thirst, among children, from day 8.
+* **Under the stakes everyone gathers the same thing.** The top gathering kind's share is 0.7 with the stakes and 0.5 without, lower
+  in 24 of 24 seeds: a food scramble, not specialisation. That is what the Stage 3 metric will read in a starving village.
+
+What this is not: a verdict on the stakes in the village or the Large world, where they were accepted as making hardship happen in
+some seeds and not others. It is a finding about scale: the stakes as written do not survive a hundred people on one map, and a
+density experiment answers with a death rate. Before any tuning, the next run should separate the stakes (the lab has no branch for
+spoilage, the lean season or the wolves on their own) and record what people die of.
+
 ## Stage 3, first piece: what has paid (built, rich only, not yet measured)
 
 Each person keeps their own running estimate of what each kind of gathering has paid *them* (`src/sim/learning.ts`), learned from
