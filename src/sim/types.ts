@@ -414,6 +414,15 @@ export interface Payoff {
   r: number;
 }
 
+/** a fever (illness.ts; rich worlds only): when it began, how bad it is now, rest credited against the course it must run, and how it came */
+export interface Illness {
+  since: number;
+  severity: number;
+  rested: number;
+  course: number;
+  how: string;
+}
+
 /** a story one person holds about another (reputation.ts; rich worlds only): what, about whom, who told it, who saw it, how old */
 export type RumourKind = 'generous' | 'reliable' | 'quarrelsome' | 'unreliable' | 'thief' | 'news';
 export interface Rumour {
@@ -507,6 +516,9 @@ export interface Person {
   payoff: Partial<Record<SkillKey, Payoff>>;
   /** what they have seen and been told of other people (reputation.ts; rich only, never created in an authored world) */
   heard?: Rumour[];
+  /** the fever they have now (illness.ts; rich only, never created in an authored world) and until when they are safe from another */
+  illness?: Illness;
+  immuneUntil?: number;
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;

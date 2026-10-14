@@ -7,6 +7,7 @@ import { householdOf } from './buildings';
 import { planHelp, planOfActivity } from './intent';
 import { describePay } from './learning';
 import { describeHeard } from './reputation';
+import { describeIllness } from './illness';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -116,6 +117,8 @@ export interface PersonView {
   householdColor: number;
   home: string;
   health: number;
+  /** the fever they have now, in words (rich only; null when well) */
+  illness: string | null;
   mood: number;
   /** rich dynamics only: what is weighing on or lifting them now, strongest first; null in any other world */
   thoughts: { why: string; value: number }[] | null;
@@ -494,6 +497,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     householdColor: hh ? hh.color : 0,
     home: homeB && homeB.ent === 'building' ? `${BUILD_DEF[homeB.type].label} (${Math.round(homeB.condition)}% sound)` : 'no home yet',
     health: p.health,
+    illness: describeIllness(world, p),
     // in a rich world the bar shows the mood that counts (needs plus what has happened to them): 70 is the usual, as a level of 0 is
     mood: isRich(world) && p.mood ? Math.max(0, Math.min(100, Math.round(70 + p.mood.level * 0.7))) : moodOf(p),
     thoughts: isRich(world) ? thoughtsOf(world, p) : null,

@@ -37,6 +37,8 @@ function candidates(ctx: Ctx, includeAvoided = false): Cand[] {
     if (!e || e.ent !== 'person' || !e.alive) continue;
     const rel = p.relations[s.id];
     if (!includeAvoided && rel && rel.avoidUntil > world.tick) continue;
+    // the cautious keep their distance from someone plainly feverish, unless they are close (rich only: nobody is ill otherwise)
+    if (e.illness && e.illness.severity >= 0.5 && p.traits.caution > 0.55 && (rel?.affinity ?? 0) < 40 && !rel?.kin) continue;
     if ((p.cooldowns['talk' + s.id] ?? 0) > world.tick) continue;
     out.push({ s, q: e, aff: rel?.affinity ?? 0, fam: rel?.familiarity ?? 0, d: hyp(s.x - p.x, s.y - p.y) });
   }

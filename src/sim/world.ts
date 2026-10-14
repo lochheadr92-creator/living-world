@@ -3,6 +3,7 @@ import './act_resource';
 import { spoilPile, spoilStore, updateHardship } from './hardship';
 import { occasionsTick } from './occasions';
 import { updateMood } from './mood';
+import { illnessTick } from './illness';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -97,6 +98,7 @@ function stepPerson(world: World, p: Person): void {
   const tick = world.tick;
   updateNeeds(world, p);
   updateMood(world, p);
+  illnessTick(world, p);
   if (p.health <= 0) {
     const n = p.needs;
     const cause = p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
@@ -273,6 +275,7 @@ export function hashWorld(world: World): string {
       const ks = Object.keys(pay) as (keyof typeof pay)[];
       if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
     }
+    for (const p of world.persons) if (p.alive && p.illness) push(`I${p.id}:${p.illness.since},${r4(p.illness.severity)},${p.illness.rested}`);
     for (const p of world.persons) if (p.alive && p.heard && p.heard.length) push(`H${p.id}:${p.heard.length},${p.heard.map((r) => r.about + r.hops).reduce((a, b) => a + b, 0)}`);
     for (const p of world.persons) if (p.alive && p.intentions.length) push(`N${p.id}:${p.intentions.map((i) => `${i.kind},${i.status},${i.stepKey ?? '-'},${i.setAside}`).join(';')}`);
     // What one person still owes another, and how much of it has really been handed over (Stage D1). The coarse count in the shared

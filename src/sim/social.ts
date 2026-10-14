@@ -2,6 +2,7 @@ import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { noteWedding } from './occasions';
 import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
+import { expose } from './illness';
 import {
   canInterruptForTalk,
   endActivity,
@@ -797,6 +798,11 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const detailText = outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
+  // a fever passes in talk (rich only; nothing in an authored world)
+  if (A && B) {
+    expose(world, A, B, 0.12);
+    expose(world, B, A, 0.12);
+  }
   if (outcome === 'success' && A && B) {
     for (const [x, y] of [[A, B], [B, A]] as [Person, Person][]) {
       const rel = relOf(x, y.id);

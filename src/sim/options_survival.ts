@@ -417,6 +417,8 @@ function optSleep(ctx: Ctx): void {
   for (const bed of beds) {
     const et = eta(ctx, bed.x, bed.y);
     const sc = new Scorer().add(lateNight && e > 40 ? 'bedtime' : 'tired', sd * bed.q).add('walking', -pen(et));
+    // a fever is slept off: bed draws the ill in daylight too (rich only; nobody is ill otherwise)
+    if (p.illness) sc.add('feverish', 14 + 16 * p.illness.severity);
     const dng = dangerAt(ctx, bed.x, bed.y, 9);
     if (dng > 0) sc.add('wolf nearby', -30 * dng);
     options.push({ bed, u: sc.total, e: et, sc });
@@ -634,8 +636,9 @@ function optShelter(ctx: Ctx): void {
 function optRest(ctx: Ctx): void {
   const { world, p } = ctx;
   const ed = ctx.drives.energy;
-  if (ed <= 0 || ctx.night) return;
-  const sc = new Scorer().add('tired', ed * 0.9);
+  if ((ed <= 0 && !p.illness) || ctx.night) return;
+  const sc = new Scorer().add('tired', Math.max(0, ed) * 0.9);
+  if (p.illness) sc.add('feverish', 10 + 12 * p.illness.severity);
   addOption(ctx, {
     kind: 'rest',
     label: 'Sit down and rest',

@@ -1,5 +1,6 @@
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import { think } from './mood';
+import { expose } from './illness';
 import type { WorkResult } from './activities';
 import { DAY, NUTRITION, workRules } from './constants';
 import { dropNear } from './buildings';
@@ -613,6 +614,11 @@ registerHandler('host_meal', {
           a.cycle++;
         } else m.ate.push(p.id);
         a.progress = 0;
+        // eating from one table: a fever at it passes more surely than in talk (rich only)
+        for (const id of m.ate) {
+          const q = id === p.id ? null : personById(world, id);
+          if (q && q.alive) expose(world, q, p, 0.15);
+        }
       }
       return m.ate.includes(p.id) && m.status === 'eating' ? 'continue' : 'continue';
     }
