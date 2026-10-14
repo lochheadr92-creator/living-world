@@ -255,11 +255,14 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
     return null;
   }
   if (isFacilityType(type) || type === 'storehouse') {
-    // one of each kind of workplace (a second quarry only at a different outcrop). With scaled rules, one per settlement: only a
-    // workplace within the settlement radius of where this one would stand counts.
+    // one of each kind of workplace per village's worth of people (a second quarry only at a different outcrop). With scaled rules,
+    // per settlement: only a workplace within the settlement radius of where this one would stand counts.
     const radius = at ? rules.facilityRadius : Infinity;
-    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
-    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
+    let standing = 0;
+    let building = 0;
+    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) standing++;
+    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) building++;
+    if (standing + building >= rules.facilitiesPerKind) return building ? `a ${BUILD_DEF[type].label} is already being built` : `there is already a ${BUILD_DEF[type].label}`;
     return null;
   }
   // homes and fires: one project at a time per household

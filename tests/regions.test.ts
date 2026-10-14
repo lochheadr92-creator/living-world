@@ -179,8 +179,16 @@ describe('town world: the Large population in one camp on the ordinary map', () 
     expect(within(w, c, 30, ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'])).toBeGreaterThanOrEqual(120);
     expect(within(w, c, 30, ['rock'])).toBeGreaterThanOrEqual(30);
     for (const d of ['clay_pit', 'outcrop', 'ore_vein'] as const) expect(within(w, c, 60, [d]), d).toBeGreaterThanOrEqual(3);
-    expect(w.animals.length).toBeGreaterThanOrEqual(9);
+    // wolves follow the ground, not only the people: the ordinary map's three, not eleven
+    expect(w.animals.length).toBeGreaterThanOrEqual(2);
+    expect(w.animals.length).toBeLessThanOrEqual(4);
     expect(Math.min(...w.animals.map((a) => Math.hypot(a.denX - c.x, a.denY - c.y)))).toBeGreaterThanOrEqual(20);
+  });
+
+  it('may hold one workplace of a kind per village\'s worth of people, where the village holds one', () => {
+    expect(rulesOf(w).facilitiesPerKind).toBe(4);
+    expect(rulesOf(createWorld(settingsForProfile('large', 'meadow'))).facilitiesPerKind).toBe(1);
+    expect(rulesOf(createWorld(settingsForProfile('normal', 'meadow'))).facilitiesPerKind).toBe(1);
   });
 
   it('runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range', () => {

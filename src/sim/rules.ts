@@ -41,6 +41,11 @@ export interface Rules {
   siteRadius: number;
   /** at least this many ticks between one group of travellers arriving and the next, anywhere in the world (immigrationTick checks every 400) */
   arrivalSpacing: number;
+  /**
+   * workplaces of one kind a settlement may hold (storehouses included): the ordinary village has one of each; a settlement founded
+   * by several villages' worth of people may hold one per village's worth, so a town of a hundred is not held to one storehouse
+   */
+  facilitiesPerKind: number;
 }
 
 export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
@@ -55,6 +60,7 @@ export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
   facilityRadius: Infinity,
   siteRadius: Infinity,
   arrivalSpacing: 6000,
+  facilitiesPerKind: 1,
 });
 
 /**
@@ -76,6 +82,7 @@ export function scaledRules(founders: number, settlementFounders: number = found
     projectsRaisedAt: up(o.projectsRaisedAt, founders),
     facilityRadius: SETTLEMENT_RADIUS,
     siteRadius: SETTLEMENT_RADIUS,
+    facilitiesPerKind: Math.max(1, Math.round(settlementFounders / ORDINARY_FOUNDERS)),
     // one settlement's worth of travellers per spacing: the village's 6,000 ticks for one camp of its size, shorter in proportion to
     // how many such camps the world has (never below the 400 ticks at which arrivals are considered)
     arrivalSpacing: Math.max(400, Math.round((o.arrivalSpacing * settlementFounders) / Math.max(founders, settlementFounders))),

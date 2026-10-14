@@ -510,7 +510,11 @@ export function generateNatural(settings: Settings): World {
   // ── wolves ──
   const dens: { x: number; y: number }[] = [];
   for (const hub of hubs) {
-    const wolfCount = Math.round((harsh ? 5 : 3) * hub.scale);
+    // wolves follow the people a camp has, but no more than the ground around it supports: the ordinary camp's three on its 80x80, so
+    // a camp of a hundred on that same ground gets the three, not eleven (the Large and Huge camps have ground to spare: unchanged)
+    const groundPerCamp = (W * H) / hubs.length;
+    const ground = Math.min(1, groundPerCamp / (80 * 80 * hub.scale));
+    const wolfCount = Math.round((harsh ? 5 : 3) * hub.scale * ground);
     for (let i = 0; i < wolfCount; i++) {
       const denOk = (x: number, y: number): boolean =>
         world.terrain[y * W + x] === T.FOREST && world.solid[y * W + x] === 0 && terrainReach[y * W + x] === 1 && dens.every((d) => dist(d.x, d.y, x, y) > 14) && openNeighbours(world, x, y) >= 6 && (hubs.length === 1 || hubs.every((o) => dist(o.x, o.y, x, y) >= 23));

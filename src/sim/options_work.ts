@@ -634,8 +634,10 @@ function optPlanBuild(ctx: Ctx): void {
   // (with scaled rules, "the settlement" is what lies within the settlement radius; with the ordinary rules it is the whole world)
   const sameSettlement = (x: number, y: number): boolean => within(rules.facilityRadius, anchor.x, anchor.y, x, y);
   const huts = world.buildings.filter((b) => isSolidHome(b.type) && sameSettlement(b.x + b.w / 2, b.y + b.h / 2)).length;
-  const hasStore = beliefsByKind(p, ['building']).some((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y)) || beliefsByKind(p, ['site']).some((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y));
-  if (!hasStore && huts >= 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
+  // one storehouse per village's worth of people (rules.ts facilitiesPerKind), grown into: another once eight solid homes stand for each
+  const stores = beliefsByKind(p, ['building', 'site']).filter((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y)).length;
+  const storesAllowed = Math.min(rules.facilitiesPerKind, 1 + Math.floor(huts / 8));
+  if (stores < storesAllowed && huts >= 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
     const spirit = (p.traits.generosity + p.traits.sociability + p.traits.diligence) / 3;
     if (hs.shortage < 0.5 && spirit > 0.46) tryPlan('storehouse', 8 + 22 * spirit, 'a shared storehouse for the settlement');
   }

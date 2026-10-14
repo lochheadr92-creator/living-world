@@ -67,10 +67,27 @@ export function facilitiesOf(ctx: Ctx, type: BuildingType): Fac[] {
  * own settlement counts: a workshop on the far side of the map is not a means they can plan around.
  */
 export function knowsOfAny(ctx: Ctx, type: BuildingType): boolean {
+  return knownOf(ctx, type) > 0;
+}
+
+/** how many workplaces of that kind this person knows of in their settlement, standing or being built */
+export function knownOf(ctx: Ctx, type: BuildingType): number {
   const radius = rulesOf(ctx.world).facilityRadius;
-  if (radius === Infinity) return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type);
+  if (radius === Infinity) return beliefsByKind(ctx.p, ['building', 'site']).filter((b) => b.btype === type).length;
   const at = settlementAnchor(ctx);
-  return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type && within(radius, at.x, at.y, b.x, b.y));
+  return beliefsByKind(ctx.p, ['building', 'site']).filter((b) => b.btype === type && within(radius, at.x, at.y, b.x, b.y)).length;
+}
+
+/**
+ * Is there room for another workplace of that kind, as far as this person knows? The ordinary village holds one of each. A settlement
+ * founded by several villages' worth of people may hold one per village's worth (rules.ts facilitiesPerKind), but it grows into them:
+ * a second of a kind is wanted only once eight solid homes stand for every one there is, so a town does not lay out four kilns on
+ * its first afternoon.
+ */
+export function roomForAnother(ctx: Ctx, type: BuildingType, solidHomes: number): boolean {
+  const have = knownOf(ctx, type);
+  const allowed = Math.min(rulesOf(ctx.world).facilitiesPerKind, 1 + Math.floor(solidHomes / 8));
+  return have < allowed;
 }
 
 const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
@@ -821,7 +838,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if ((p.skills.carpentry > 1.05 || p.traits.curiosity > 0.6) && init > 0.5) s += 0.15;
     if (s >= 0.5) out.push({ type: 'timber_yard', signal: Math.min(1, s), why: planks > 0 ? 'planks are wanted and there is no yard to saw them' : 'the old hut is too small and too poor a roof: a yard would give us planks' });
   }
-  if (!knowsOfAny(ctx, 'quarry') && outcrops.length > 0) {
+  if (roomForAnother(ctx, 'quarry', solidHomes) && outcrops.length > 0) {
     let s = 0;
     if (stoneNeeded >= 6) s += 0.7;
     if (stonePoor) s += 0.35;
@@ -835,7 +852,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (knowsOfAny(ctx, 'smithy') || (oreKnown && haveYard && init > 0.55)) s += 0.45;
     if (s >= 0.55) out.push({ type: 'kiln', signal: Math.min(1, s), why: bricks_or_charcoal(ctx) });
   }
-  if (!knowsOfAny(ctx, 'smithy') && oreKnown && haveKiln) {
+  if (roomForAnother(ctx, 'smithy', solidHomes) && oreKnown && haveKiln) {
     let s = 0;
     const worn = toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar');
     if (worn) s += 0.5;
@@ -843,14 +860,14 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (init > 0.5) s += 0.25;
     if (s >= 0.6 || (oreKnown && init > 0.5 && world.tick > DAY * 14)) out.push({ type: 'smithy', signal: Math.min(1, s), why: 'tools are wearing out and there is ore to be smelted' });
   }
-  if (!knowsOfAny(ctx, 'granary') && haveYard && hs.shortage < 0.5) {
+  if (roomForAnother(ctx, 'granary', solidHomes) && haveYard && hs.shortage < 0.5) {
     let s = 0;
     if (grainKnown >= 6) s += 0.5;
     if (plots >= 2) s += 0.4;
     if (init > 0.45) s += 0.15;
     if (s >= 0.6) out.push({ type: 'granary', signal: Math.min(1, s), why: 'the grain keeps going off in the stores' });
   }
-  if (!knowsOfAny(ctx, 'bakery') && haveKiln && hs.shortage < 0.4) {
+  if (roomForAnother(ctx, 'bakery', solidHomes) && haveKiln && hs.shortage < 0.4) {
     let s = 0;
     if (grainKnown >= 8) s += 0.45;
     if (plots >= 2) s += 0.3;
@@ -858,7 +875,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (p.traits.generosity > 0.5) s += 0.1;
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
-  if (!knowsOfAny(ctx, 'hall') && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
+  if (roomForAnother(ctx, 'hall', solidHomes) && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
     if (s >= 0.6) out.push({ type: 'hall', signal: Math.min(1, s), why: 'we need somewhere to eat and talk together out of the weather' });
