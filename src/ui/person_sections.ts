@@ -357,7 +357,9 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const traitSummary = h('p', { class: 'trait-sum' });
   const traitBox = h('div', { class: 'traits' });
   const skillBox = h('div', { class: 'skills' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox);
+  const payHead = h('div', { class: 'sub-h cap' }, 'What has paid them');
+  const payBox = h('div', { class: 'skills' });
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox, payHead, payBox);
   const traitList = new KeyedList<{ key: string; value: number }, { el: HTMLElement; dot: HTMLElement }>(
     traitBox,
     (t) => {
@@ -389,6 +391,22 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
     (c, s) => {
       c.bar.set((s.value - 0.4) / 1.4, 'var(--info)');
       setText(c.v, `×${s.value.toFixed(2)}`);
+    },
+  );
+
+  // what each kind of gathering has come to for them, in their own experience (rich worlds only; the heading goes when there is none)
+  const payList = new KeyedList<{ key: string; ratio: number; n: number }, { el: HTMLElement; bar: BarHandle; v: HTMLElement }>(
+    payBox,
+    (s) => {
+      const bar = makeBar('thin');
+      const v = h('span', { class: 'skill-v num' });
+      return { el: h('div', { class: 'skill' }, h('span', { class: 'skill-l' }, SKILL_LABEL[s.key] ?? cap(s.key)), bar.el, v), bar, v };
+    },
+    (c, s) => {
+      // 1× is as the plan expected: the bar sits at the middle there, and reaches the ends at a quarter and at four times
+      c.bar.set(0.5 + Math.log2(Math.max(0.25, Math.min(4, s.ratio))) / 4, s.ratio >= 1 ? 'var(--good)' : 'var(--warn)');
+      setText(c.v, `${s.ratio.toFixed(1)}× · ${s.n}`);
+      c.el.setAttribute('aria-label', `${SKILL_LABEL[s.key] ?? cap(s.key)}: paid ${s.ratio.toFixed(1)} times what was expected, over ${s.n} ${s.n === 1 ? 'outing' : 'outings'}`);
     },
   );
 
@@ -502,6 +520,8 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         setText(traitSummary, v.traitSummary ? cap(v.traitSummary) + '.' : '');
         traitList.sync(v.traits, (t) => t.key);
         skillList.sync(v.skills, (s) => s.key);
+        setHidden(payHead, v.payoffs.length === 0);
+        payList.sync(v.payoffs, (s) => s.key);
       }
 
       dbgSec.setVisible(game.debug);

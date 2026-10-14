@@ -407,6 +407,12 @@ export interface ResultRecord {
   detail: string;
 }
 
+/** one kind of gathering as it has paid one person: `r` 1 = as planned, below worse, above better; `n` outcomes behind it */
+export interface Payoff {
+  n: number;
+  r: number;
+}
+
 export interface Speech {
   text: string;
   until: number;
@@ -453,6 +459,12 @@ export interface Person {
    * Kept small and bounded (MAX_INTENTIONS); saved with the person; carries its own account of why it stands or ended.
    */
   intentions: Intention[];
+  /**
+   * What each kind of gathering has paid this person, in their own experience (rich worlds only; always empty in an authored
+   * world): a running ratio of what they got against what the option they chose expected, and how many outcomes it rests on.
+   * Learned from their own finished activities and nothing else (learning.ts); saved with the person.
+   */
+  payoff: Partial<Record<SkillKey, Payoff>>;
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;

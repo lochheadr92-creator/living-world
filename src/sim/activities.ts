@@ -5,6 +5,7 @@ import { stageOf } from './people';
 import { releaseClaims, weightOf } from './economy';
 import { addLog, setResult } from './events';
 import { creditShelterFrom } from './intent';
+import { recordPay } from './learning';
 import { findPath, terrainSpeed, tileCost } from './pathfinding';
 import { hashUnit } from './rng';
 import { distToFootprint, entityPos, isWalkable } from './registry';
@@ -325,6 +326,8 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   if (!a) return;
   // time under shelter is credited to the plan it served before the activity is let go of (rest and sleep alike)
   creditShelterFrom(p, a);
+  // and what a gathering trip came to is written into the person's own estimate of what that kind of work pays them
+  recordPay(world, p, a);
   releaseClaims(world, a.claims);
   p.activity = null;
   const h = handlers[a.kind];

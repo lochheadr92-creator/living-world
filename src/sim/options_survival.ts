@@ -2,6 +2,7 @@ import { newActivity } from './activities';
 import { DAY } from './constants';
 import { isRich } from './mood';
 import { nightPlansOn, shelters, untilDaylight } from './intent';
+import { payNudge } from './learning';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
 import { invRoom } from './economy';
@@ -177,9 +178,12 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     sc.add('walking', -pen(c.e));
     const skill = p.skills[type === 'fish_spot' ? 'fish' : 'forage'];
     sc.add('good at it', (skill - 1) * 5);
+    const pay = payNudge(world, p, type);
+    if (pay) sc.add(pay.label, pay.value);
     const dng = dangerAt(ctx, b.x, b.y);
     if (dng > 0) sc.add('wolf nearby', -26 * dng * tm.caution);
     const purpose = o.mode === 'eat' ? 'to ease hunger' : 'to stock the household';
+    const expected = c.e + units * (WORK[type] ?? 25);
     addOption(ctx, {
       kind: 'gather',
       label: `${SOURCE_VERB[type]}`,
@@ -187,7 +191,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       need: o.mode === 'eat' ? 'hunger' : null,
       util: sc.total,
       parts: sc.parts,
-      eta: c.e + units * (WORK[type] ?? 25),
+      eta: expected,
       key: `gather:${b.id}`,
       targetId: b.id,
       tag: 'food',
@@ -211,7 +215,8 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
           utility: sc.total,
           minCommit: 60,
           maxTicks: 1100,
-          data: { purpose: o.mode, stype: type },
+          // `eta` is the expectation the person's own estimate of what pays is later judged against (learning.ts)
+          data: { purpose: o.mode, stype: type, eta: expected },
         });
       },
     });

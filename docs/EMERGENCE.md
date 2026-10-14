@@ -150,6 +150,38 @@ the experiment that tells them apart (stakes without the mood effects, and the r
   A paired contrast (the report has no `--compare` option yet) or more seeds would settle it.
 * Limits: 15 days contains one winter (days 8 to 11 of the first year); the mood result may not hold over several years.
 
+## Stage 3, first piece: what has paid (built, rich only, not yet measured)
+
+Each person keeps their own running estimate of what each kind of gathering has paid *them* (`src/sim/learning.ts`), learned from
+nothing but their own finished activities, and lets it tilt their next choice by a bounded amount. When a gathering option is chosen
+it says how many units it is for and how long it should take (walking plus the nominal work); when the activity ends, for whatever
+reason, what was got in the time spent is compared with that. 1 means as planned; below 1 the trip paid worse (the source ran out,
+the pack filled, a wolf, hunger cut it short); above 1 better, and skill is in the ratio on purpose: someone quick at a thing finds
+that it pays, does more of it, and gets quicker still, which is the loop by which people come to differ. One exponential running mean
+per kind (berries, fish, wood, stone, clay, ore; the skill the source trains), saved with the person, shown on the card under
+*Traits & skills* as "What has paid them".
+
+The tilt is at most ±6 either way, grown in over the first three outings, comparable to the existing "good at it" term and smaller
+than any need, so hunger, thirst, cold and a wolf still win. The estimate is a preference, never an override; the engine still
+generates every option and ranks them. An authored world records nothing and is tilted by nothing (the golden fingerprints: compact
+hashes unchanged by this commit; the deep ones moved because an empty estimate table is now part of the hashed state).
+
+**Measure, decided before the run.** The lab tallies, from the activity-start hook, who set off to gather what: `specialisation` is
+the mean over everyone who set off at least four times of how concentrated their gathering was on one kind (a Herfindahl index: 1 =
+always the same kind, 1/kinds = spread evenly), and `topKindShare` the share of all gathering in the village's single most-used kind,
+to tell a village of specialists from a village that all does one thing. `rich-no-learning` removes only the estimates. The stage's
+own stop rule is "no more than random choice", so `random-choice` runs beside it as the floor. On the 24-core machine, about 30
+minutes:
+
+```
+node scripts/lab.mjs --out learn_out --seeds 24 --fork 0 --days 12 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-learning,random-choice
+```
+
+What would count: `specialisation` higher with learning than without by more than the nudge spread, with an interval that excludes
+zero, and the kinds people settle on differing between seeds (read off the per-seed rows, not the means). What would stop the stage:
+learning no further from random choice than the nudges are from the control. A null result stands; nothing about the tilt is to be
+tuned to make the ensemble come out positive.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures

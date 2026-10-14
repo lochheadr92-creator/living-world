@@ -24,6 +24,7 @@ import { hashUnit } from './rng';
 import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { T } from './types';
 
+import { payNudge } from './learning';
 import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
 
@@ -346,9 +347,12 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
     const sc = new Scorer().add(why, base).add('walking', -pen(c.e));
     const sk = p.skills[type === 'tree' ? 'wood' : 'stone'];
     sc.add('good at it', (sk - 1) * 5);
+    const pay = payNudge(world, p, type);
+    if (pay) sc.add(pay.label, pay.value);
     const dng = dangerAt(ctx, c.b.x, c.b.y);
     if (dng > 0) sc.add('wolf nearby', -24 * dng * tm.caution);
     const util = sc.total * nightMult(ctx) * weatherMult(ctx);
+    const expected = c.e + units * WORK[type];
     addOption(ctx, {
       kind: 'gather',
       label: `${SOURCE_VERB[type]} ${why}`,
@@ -356,7 +360,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
       need: null,
       util,
       parts: sc.parts,
-      eta: c.e + units * WORK[type],
+      eta: expected,
       key: `gather:${c.b.id}`,
       targetId: c.b.id,
       tag,
@@ -378,7 +382,8 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
           utility: util,
           minCommit: 80,
           maxTicks: 1300,
-          data: { purpose: tag, stype: type },
+          // `eta` is the expectation the person's own estimate of what pays is later judged against (learning.ts)
+          data: { purpose: tag, stype: type, eta: expected },
         });
       },
     });

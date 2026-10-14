@@ -265,6 +265,11 @@ export function hashWorld(world: World): string {
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in
+    for (const p of world.persons) {
+      const pay = p.payoff ?? {};
+      const ks = Object.keys(pay) as (keyof typeof pay)[];
+      if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
+    }
     for (const p of world.persons) if (p.alive && p.intentions.length) push(`N${p.id}:${p.intentions.map((i) => `${i.kind},${i.status},${i.stepKey ?? '-'},${i.setAside}`).join(';')}`);
     // What one person still owes another, and how much of it has really been handed over (Stage D1). The coarse count in the shared
     // part of the fingerprint (`p.commitments.length`) cannot tell an undelivered promise from a kept one, and that difference is

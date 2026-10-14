@@ -14,6 +14,9 @@ import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
+import { setLearning } from '../../src/sim/learning';
+import { SOURCE_SKILL } from '../../src/sim/constants';
+import type { Activity, Person } from '../../src/sim/types';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
 import type { SourceType, World } from '../../src/sim/types';
@@ -59,7 +62,8 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * `rich-no-night` (alias `rich-no-plans`) is rich with private plans removed altogether - night preparation AND the projects
  * built on the same mechanism (making a tool, mending a roof) - to isolate what planning as such contributes. `rich-no-ask` keeps
  * every plan and removes only Stage D1's ask for a project's missing material, to isolate what the cooperation contributes on top
- * of planning. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * of planning. `rich-no-learning` keeps everything else about a rich world and removes only Stage 3's estimates of what pays, to
+ * isolate what learning from one's own outcomes contributes. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -122,6 +126,20 @@ export function parseIntervention(specIn: string): Intervention {
       install: () => {
         setProjectAsks(false);
         return () => setProjectAsks(true);
+      },
+    };
+  }
+  if (kind === 'rich-no-learning') {
+    return {
+      spec: label,
+      summary: 'rich dynamics with the estimates of what pays removed: nobody learns from their own gathering what to do more of',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, learning off';
+      },
+      install: () => {
+        setLearning(false);
+        return () => setLearning(true);
       },
     };
   }
@@ -202,6 +220,12 @@ export const METRICS = [
   'projectsDone',
   'projectAsks',
   'askUnitsDelivered',
+  // what Stage 3 is for: do people come to differ in what they do? `specialisation` is the mean, over everyone who set off to gather
+  // at least four times, of how concentrated their gathering was on one kind (a Herfindahl index over forage/fish/wood/stone/…: 1 =
+  // always the same kind, 1/kinds = spread evenly); `topKindShare` is the share of all gathering in the village's single most-used
+  // kind, to tell a village of specialists from a village that all does one thing. Not gated.
+  'specialisation',
+  'topKindShare',
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Outcome = Record<Metric, number>;
@@ -249,8 +273,53 @@ export class ProjectTally {
   }
 }
 
+/**
+ * Who set off to gather what, counted from the activity-start hook: one count per person per kind of gathering (the skill the
+ * source trains). Starts, not units: what a person chooses to do is the question, and a choice is made at the start.
+ */
+export class GatherTally {
+  private byPerson = new Map<number, Map<string, number>>();
+  start(p: Person, a: Activity): void {
+    if (a.kind !== 'gather') return;
+    const type = a.data.stype as SourceType | undefined;
+    const k = type ? SOURCE_SKILL[type] : undefined;
+    if (!k) return;
+    let m = this.byPerson.get(p.id);
+    if (!m) this.byPerson.set(p.id, (m = new Map()));
+    m.set(k, (m.get(k) ?? 0) + 1);
+  }
+  /** mean Herfindahl index over people with at least `atLeast` starts; 0 when nobody qualifies */
+  specialisation(atLeast = 4): number {
+    let sum = 0;
+    let n = 0;
+    for (const m of this.byPerson.values()) {
+      let total = 0;
+      for (const v of m.values()) total += v;
+      if (total < atLeast) continue;
+      let h = 0;
+      for (const v of m.values()) h += (v / total) ** 2;
+      sum += h;
+      n++;
+    }
+    return n ? Math.round((sum / n) * 1000) / 1000 : 0;
+  }
+  /** the share of every start that went to the one kind the village used most */
+  topKindShare(): number {
+    const all = new Map<string, number>();
+    let total = 0;
+    for (const m of this.byPerson.values())
+      for (const [k, v] of m) {
+        all.set(k, (all.get(k) ?? 0) + v);
+        total += v;
+      }
+    let top = 0;
+    for (const v of all.values()) top = Math.max(top, v);
+    return total ? Math.round((top / total) * 1000) / 1000 : 0;
+  }
+}
+
 /** What a branch ends with. `from` is the tick of the fork: deaths are those since then, first-build days are counted from the fork's day 0. */
-export function outcomeOf(w: World, from: number, endTick: number, projects = new ProjectTally()): { outcome: Outcome; milestones: Record<string, number> } {
+export function outcomeOf(w: World, from: number, endTick: number, projects = new ProjectTally(), gathers = new GatherTally()): { outcome: Outcome; milestones: Record<string, number> } {
   const count = (types: string[]) => w.buildings.filter((b) => types.includes(b.type)).length;
   const alive = w.persons.filter((p) => p.alive);
   const homeIds = new Set(w.buildings.map((b) => b.id));
@@ -302,6 +371,8 @@ export function outcomeOf(w: World, from: number, endTick: number, projects = ne
       projectsDone: projects.done,
       projectAsks: projects.asks,
       askUnitsDelivered: projects.units,
+      specialisation: gathers.specialisation(),
+      topKindShare: gathers.topKindShare(),
     },
     milestones,
   };
@@ -343,6 +414,9 @@ export function runBranch(
     let diverged: number | null = null;
     const end = from + days * DAY;
     const projects = new ProjectTally();
+    const gathers = new GatherTally();
+    // a deserialized world has no hooks of its own; the tally is the only listener, and it reads, never writes
+    w.hooks = { onActivityStart: (p, a) => gathers.start(p, a) };
     for (let i = 1; w.tick < end; i++) {
       stepWorld(w);
       projects.tick(w);
@@ -353,7 +427,7 @@ export function runBranch(
       }
       if (i % DAY === 0) popByDay.push(w.persons.filter((p) => p.alive).length);
     }
-    const { outcome, milestones } = outcomeOf(w, from, end, projects);
+    const { outcome, milestones } = outcomeOf(w, from, end, projects, gathers);
     return {
       spec: iv.spec,
       summary: iv.summary,

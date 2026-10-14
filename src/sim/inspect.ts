@@ -5,6 +5,7 @@ import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
 import { planHelp, planOfActivity } from './intent';
+import { describePay } from './learning';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -112,6 +113,8 @@ export interface PersonView {
   traits: { key: string; value: number }[];
   traitSummary: string;
   skills: { key: string; value: number }[];
+  /** what each kind of gathering has paid them, in their own experience (rich only; empty otherwise), best first */
+  payoffs: { key: string; ratio: number; n: number }[];
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -486,6 +489,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     traits: Object.entries(p.traits).map(([key, value]) => ({ key, value })),
     traitSummary: traitSummary(p.traits),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
+    payoffs: describePay(p),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },

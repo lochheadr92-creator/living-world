@@ -24,10 +24,14 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   requests plus the promiser's commitment for the explanations. `Request.planId`/`Request.delivered` tie an ask to a project and
   record what really arrived. Tests: `tests/project_cooperation.test.ts`; page check: `scripts/browser/cooperation_check.mjs`.
 - `src/sim/decision.ts` ranks options (mood weight applied here). `src/sim/probe.ts` work counters (never saved or hashed).
+- Stage 3, first piece (rich only): `src/sim/learning.ts`, each person's own running estimate of what each kind of gathering has paid
+  them (`p.payoff`, got against the option's expectation, learned at `endActivity`), tilting the gather options by at most ±6; the
+  inspector shows it under Traits & skills. Lab branch `rich-no-learning`; metrics `specialisation`, `topKindShare`. Plan and
+  measure: `docs/EMERGENCE.md`, Stage 3.
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
-- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans` (rich with every private plan removed), `rich-no-ask` (rich with plans kept and only the D1 project ask removed; the D1 attribution branch).
+- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans` (rich with every private plan removed), `rich-no-ask` (rich with plans kept and only the D1 project ask removed; the D1 attribution branch), `rich-no-learning` (rich with Stage 3's estimates of what pays removed).
 - The AI inhabitant (`docs/INHABITANT.md`): `src/sim/external.ts` (the seam in `decide`), `src/agent/` (observation, protocol, memory,
   transcript, model gate, rewind runner, scripted models; no network), `scripts/inhabit.ts` (live | replay | standard; `--memory` keeps notes;
   `--stub goal` needs no key), `scripts/inhabit_diff.ts` (two runs: same world or not), `scripts/inhabit_attribute.ts` (which decisions
