@@ -178,9 +178,13 @@ function decayWear(world: World): void {
   }
 }
 
-/** how worn a tile must be, for how many checks (one every 600 ticks), before it is a road; the milestones announced */
-const ROAD_WEAR = 0.3;
-const ROAD_AFTER = 4;
+/**
+ * How worn a tile must be, for how many checks (one every 600 ticks), before it is a road; the milestones announced. Wear decays
+ * by 0.35% every 90 ticks and a step adds 0.0028, so a tile walked once in 90 ticks settles near 0.8: a road needs a footfall
+ * about every 85 ticks, kept up for two days (the first setting, 0.3 for a day, made a fifth of the map a road in twelve days).
+ */
+const ROAD_WEAR = 0.85;
+const ROAD_AFTER = 8;
 const ROAD_MILESTONES = [20, 60, 120, 240];
 
 /**

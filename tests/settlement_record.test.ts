@@ -31,10 +31,10 @@ describe('the chronicle', () => {
 });
 
 describe('roads', () => {
-  it('harden where the wear stays high for a day, stay worn, and never form in an authored world', () => {
+  it('harden where the wear stays high for two days, stay worn, and never form in an authored world', () => {
     const r = world('rich');
     const i = Math.floor(r.camp.y) * r.W + Math.floor(r.camp.x) + 2;
-    for (let t = 0; t < 5 * 600 + 10; t++) {
+    for (let t = 0; t < 9 * 600 + 10; t++) {
       r.wear[i] = 1;
       stepWorld(r);
     }
@@ -42,7 +42,7 @@ describe('roads', () => {
     for (let t = 0; t < 200; t++) stepWorld(r);
     expect(r.wear[i]).toBeGreaterThanOrEqual(0.7);
     const a = world('authored');
-    for (let t = 0; t < 5 * 600 + 10; t++) {
+    for (let t = 0; t < 9 * 600 + 10; t++) {
       a.wear[i] = 1;
       stepWorld(a);
     }
