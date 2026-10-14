@@ -1,0 +1,86 @@
+Counterfactual lab: 12 seeds (aspen, birch, cedar, fern, gen-1, gen-2, gen-3, gen-4, gen-5, gen-6, meadow, river), large profile, forked at day 0, run 40 days.
+Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).
+
+Noise floor: spread (sd) of the difference a one-draw nudge makes in one seed, and when it parts from the control
+  nudge branches parted from the control in 22/24 runs, median 0.05 days after the fork
+  workplaces ±2.3   solidHomes ±1.5   buildings ±3.9   plots ±4.6   people ±2.7   deaths ±0.8   homeless ±4.4   belowCritical ±0.4   meanHunger ±2.8   firstYardDay ±0.4   firstHallDay ±2.5   meanMood ±0.0   lowMood ±0.0   tools ±19.9   meanCondition ±4.4
+
+── nudge:1: 1 extra random draw at the fork and nothing else (the noise floor)  [12 seeds; e.g. 1 draws]
+   final state identical to control in 0/12 seeds; parted in 12, median 0.05 days after the fork
+   metric         reference  branch    diff   95% interval    up/down  verdict
+   workplaces          26.0    24.9    -1.1   [-2.4, +0.1]        3/9  not distinguishable from chance
+   solidHomes          31.0    31.6    +0.5   [-0.5, +1.6]        7/5  not distinguishable from chance
+   buildings           97.5    97.1    -0.4   [-2.8, +2.1]        5/6  not distinguishable from chance
+   plots              106.9   106.0    -0.9   [-3.4, +1.3]        4/8  not distinguishable from chance
+   people             115.1   115.5    +0.4   [-1.2, +1.8]        7/4  not distinguishable from chance
+   deaths               0.5     0.3    -0.2   [-0.5, +0.2]        2/5  not distinguishable from chance
+   homeless             4.5     3.9    -0.6   [-3.8, +2.1]        5/6  not distinguishable from chance
+   belowCritical        0.1     0.1       0   [-0.3, +0.2]        1/3  not distinguishable from chance
+   meanHunger          70.3    71.3    +1.0   [-0.6, +2.6]        7/5  not distinguishable from chance
+   firstYardDay         5.4     5.4       0   [-0.3, +0.3]        4/6  not distinguishable from chance
+   firstHallDay         9.5    10.1    +0.6   [-0.7, +2.1]        7/5  not distinguishable from chance
+   meanMood             0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   lowMood              0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   tools               98.8   108.7    +9.9   [-2.1, +20.6]       8/4  not distinguishable from chance
+   meanCondition       58.4    58.3    -0.1   [-2.8, +2.7]        6/5  not distinguishable from chance
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── nudge:2: 2 extra random draws at the fork and nothing else (the noise floor)  [12 seeds; e.g. 2 draws]
+   final state identical to control in 2/12 seeds; parted in 10, median 0.05 days after the fork
+   metric         reference  branch    diff   95% interval    up/down  verdict
+   workplaces          25.6    25.8    +0.3   [-0.9, +1.5]        6/6  not distinguishable from chance
+   solidHomes          31.1    31.5    +0.4   [-0.2, +1.0]        8/4  not distinguishable from chance
+   buildings           96.9    98.2    +1.3   [-0.3, +2.9]        6/4  not distinguishable from chance
+   plots              106.4   107.0    +0.6   [-2.2, +3.3]        7/4  not distinguishable from chance
+   people             115.4   115.0    -0.4   [-1.9, +1.2]        4/7  not distinguishable from chance
+   deaths               0.4     0.5    +0.1   [-0.4, +0.6]        4/4  not distinguishable from chance
+   homeless             4.9     3.3    -1.6   [-3.6, +0.2]        5/7  not distinguishable from chance
+   belowCritical        0.1     0.1       0   [-0.3, +0.2]        1/3  not distinguishable from chance
+   meanHunger          70.5    70.9    +0.4   [-1.1, +1.8]        7/5  not distinguishable from chance
+   firstYardDay         5.4     5.4       0   [-0.2, +0.2]        4/6  not distinguishable from chance
+   firstHallDay         9.9     9.4    -0.5   [-1.7, +0.7]        6/6  not distinguishable from chance
+   meanMood             0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   lowMood              0.0     0.0       0   [0, 0]              0/0  not distinguishable from chance
+   tools              104.6    97.1    -7.5   [-14.4, +1.4]      2/10  not distinguishable from chance
+   meanCondition       58.5    58.1    -0.4   [-2.5, +1.6]        5/6  not distinguishable from chance
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── rich: rich dynamics switched on at the fork: people have a mood that changes what they do, and lean seasons happen  [12 seeds; e.g. rich dynamics on]
+   final state identical to control in 0/12 seeds; parted in 12, median 0.05 days after the fork
+   metric         reference  branch    diff   95% interval    up/down  verdict
+   workplaces          25.7    26.1    +0.4   [-0.2, +1.0]        7/4  not distinguishable from chance
+   solidHomes          31.2    31.2    -0.1   [-0.7, +0.6]        5/7  not distinguishable from chance
+   buildings           97.3   101.4    +4.1   [+2.6, +5.7]       12/0  larger than chance
+   plots              106.6   119.9   +13.3   [+11.6, +15.1]     12/0  larger than chance
+   people             115.3   111.8    -3.5   [-5.8, -1.1]       2/10  larger than chance
+   deaths               0.4     2.3    +1.8   [+0.7, +3.1]        9/2  larger than chance
+   homeless             4.3     0.8    -3.5   [-4.8, -2.2]       1/11  systematic, within the noise floor
+   belowCritical        0.1     0.5    +0.4   [0, +0.8]           4/1  larger than chance
+   meanHunger          70.7    66.0    -4.7   [-8.1, -1.6]        3/9  larger than chance
+   firstYardDay         5.4     5.6    +0.2   [-0.1, +0.4]        6/6  not distinguishable from chance
+   firstHallDay         9.7    14.1    +4.4   [+2.8, +6.0]       11/1  larger than chance
+   meanMood             0.0    -2.3    -2.3   [-4.4, -0.2]        4/8  larger than chance
+   lowMood              0.0     1.8    +1.8   [+0.7, +3.3]        8/0  larger than chance
+   tools              102.1   245.8  +143.7   [+136.5, +150.5]    12/0  larger than chance
+   meanCondition       58.4    59.6    +1.2   [-1.1, +3.5]        8/4  not distinguishable from chance
+   In words: buildings 97.3 → 101.4 (+4.1, lower in 0 and higher in 12 of 12 seeds); plots 106.6 → 119.9 (+13.3, lower in 0 and higher in 12 of 12 seeds); people 115.3 → 111.8 (-3.5, lower in 10 and higher in 2 of 12 seeds); deaths 0.4 → 2.3 (+1.8, lower in 2 and higher in 9 of 12 seeds); belowCritical 0.1 → 0.5 (+0.4, lower in 1 and higher in 4 of 12 seeds); meanHunger 70.7 → 66.0 (-4.7, lower in 9 and higher in 3 of 12 seeds); firstHallDay 9.7 → 14.1 (+4.4, lower in 1 and higher in 11 of 12 seeds); meanMood 0.0 → -2.3 (-2.3, lower in 8 and higher in 4 of 12 seeds); lowMood 0.0 → 1.8 (+1.8, lower in 0 and higher in 8 of 12 seeds); tools 102.1 → 245.8 (+143.7, lower in 0 and higher in 12 of 12 seeds).
+
+── rich-stakes-only: rich dynamics with the stakes (lean seasons, winter, faster spoilage, bolder wolves) but moods change nothing  [12 seeds; e.g. stakes on, mood effects off]
+   final state identical to control in 0/12 seeds; parted in 12, median 0.05 days after the fork
+   metric         reference  branch    diff   95% interval    up/down  verdict
+   workplaces          25.7    24.3    -1.4   [-3.0, +0.1]        2/8  not distinguishable from chance
+   solidHomes          31.2    31.3    +0.1   [-0.3, +0.6]        5/7  not distinguishable from chance
+   buildings           97.3    99.5    +2.2   [-0.1, +4.2]        8/2  not distinguishable from chance
+   plots              106.6   119.6   +13.0   [+9.8, +15.7]      12/0  larger than chance
+   people             115.3   111.3    -3.9   [-5.3, -2.7]       0/12  larger than chance
+   deaths               0.4     1.5    +1.1   [+0.4, +1.8]        9/1  larger than chance
+   homeless             4.3     0.5    -3.8   [-4.8, -3.0]       0/12  systematic, within the noise floor
+   belowCritical        0.1     0.2    +0.1   [-0.2, +0.4]        1/4  not distinguishable from chance
+   meanHunger          70.7    67.2    -3.4   [-6.1, -0.9]       2/10  larger than chance
+   firstYardDay         5.4     5.7    +0.3   [-0.1, +0.7]        6/6  not distinguishable from chance
+   firstHallDay         9.7    15.5    +5.8   [+4.4, +7.3]       12/0  larger than chance
+   meanMood             0.0    -1.2    -1.2   [-3.3, +0.6]        6/6  not distinguishable from chance
+   lowMood              0.0     1.1    +1.1   [+0.3, +2.2]        6/0  larger than chance
+   tools              102.1   256.1  +154.0   [+144.7, +162.4]    12/0  larger than chance
+   meanCondition       58.4    61.1    +2.8   [+0.4, +5.0]       10/2  systematic, within the noise floor
+   In words: plots 106.6 → 119.6 (+13.0, lower in 0 and higher in 12 of 12 seeds); people 115.3 → 111.3 (-3.9, lower in 12 and higher in 0 of 12 seeds); deaths 0.4 → 1.5 (+1.1, lower in 1 and higher in 9 of 12 seeds); meanHunger 70.7 → 67.2 (-3.4, lower in 10 and higher in 2 of 12 seeds); firstHallDay 9.7 → 15.5 (+5.8, lower in 0 and higher in 12 of 12 seeds); lowMood 0.0 → 1.1 (+1.1, lower in 0 and higher in 6 of 12 seeds); tools 102.1 → 256.1 (+154.0, lower in 0 and higher in 12 of 12 seeds).

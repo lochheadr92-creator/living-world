@@ -60,7 +60,7 @@ export function setOptionChooser(mode: OptionChooser): void {
 }
 
 /** Candidate options in preference order, after the hard filters (children's limits, critical needs). */
-export function rankOptions(ctx: Ctx): Option[] {
+export function rankOptions(ctx: Ctx, measureMood = false): Option[] {
   const { world, p } = ctx;
   // A plan's own next step stays a candidate even when it scores poorly. Scoring low means "not worth much just now", which is not
   // the same thing as being impossible, and dropping it here is what made a plan impossible to carry across several activities.
@@ -82,11 +82,39 @@ export function rankOptions(ctx: Ctx): Option[] {
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
   const moody = p.mood !== undefined && world.settings.dynamics === 'rich';
-  // the plan's nudge is bounded and never applies when the lab is choosing at random
-  const scored = opts.map((o) => ({
-    o,
-    s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
-  }));
+  // Calculate the same plan nudge and deterministic tie-break for both rankings. A low mood may
+  // promote rest or wandering among ordinary choices, but it must not promote an idle option
+  // across a survival option that already outranked it without mood.
+  const scored = opts.map((o) => {
+    const nudge = intentFor(p, o) ? NUDGE_FOR_PLAN : 0;
+    const jitter = hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4;
+    const neutral = moody && chooser === 'utility' ? o.util + nudge + jitter : null;
+    const weight = moody && chooser === 'utility' ? moodWeight(p, o.kind) : 1;
+    const s = chooser === 'random'
+      ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995)
+      : (moody ? o.util * weight : o.util) + nudge + jitter;
+    return { o, neutral, s, weight };
+  });
+  if (chooser === 'utility' && moody) {
+    const bestSurvival = Math.max(
+      -Infinity,
+      ...scored.filter(({ o }) => o.need !== null && o.need !== 'social' && o.kind !== 'rest' && o.kind !== 'wander').map(({ neutral }) => neutral!),
+    );
+    for (const item of scored) {
+      const idle = item.o.kind === 'rest' || item.o.kind === 'wander';
+      if (idle && item.weight > 1 && item.neutral! < bestSurvival && item.s >= bestSurvival) {
+        item.s = bestSurvival - 1e-6;
+      }
+    }
+    if (measureMood && probe.on && moody) {
+      const neutralTop = [...scored].sort((a, b) => b.neutral! - a.neutral!)[0];
+      const moodTop = [...scored].sort((a, b) => b.s - a.s)[0];
+      if (neutralTop && moodTop) {
+        probe.moodRankings++;
+        if (neutralTop.o.key !== moodTop.o.key) probe.moodFlips++;
+      }
+    }
+  }
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }
@@ -121,7 +149,7 @@ function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Opt
 }
 
 function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
-  const ranked = rankOptions(ctx);
+  const ranked = rankOptions(ctx, true);
   for (let i = 0; i < Math.min(ranked.length, 5); i++) {
     const o = ranked[i];
     const act = o.make!();
@@ -208,7 +236,7 @@ function checkLimits(o: Option, want: Record<string, number> | undefined): { ok:
  * 'fallback', the engine chooses as it would for anyone and says so.
  */
 function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext: ExternalController): void {
-  const ranked = rankOptions(ctx);
+  const ranked = rankOptions(ctx, true);
   let reason = '';
   for (let attempt = 0; attempt <= EXTERNAL_RETRIES; attempt++) {
     const choice = ext.choose(world, p, ctx, ranked, trigger);
@@ -284,7 +312,7 @@ export function reviewActivity(world: World, p: Person): void {
   }
   if (probe.on) probe.reviews++;
   const ctx = generateOptions(world, p, false);
-  const ranked = rankOptions(ctx);
+  const ranked = rankOptions(ctx, true);
   const best = ranked[0];
   p.nextThink = world.tick + REVIEW_EVERY + Math.floor(hashUnit(p.id, world.tick, 5) * 20);
   if (!best) return;

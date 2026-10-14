@@ -7,10 +7,11 @@ import { createWorld, defaultSettings } from '../src/sim/factory';
 import { stepWorld } from '../src/sim/world';
 import { point } from './helpers/golden';
 
-function run(seed: string, ticks: number, counters: boolean) {
+function run(seed: string, ticks: number, counters: boolean, dynamics?: 'authored' | 'rich') {
   probe.on = counters;
   probeReset();
-  const w = createWorld(defaultSettings(seed));
+  const settings = defaultSettings(seed);
+  const w = createWorld(dynamics ? { ...settings, dynamics } : settings);
   for (let i = 0; i < ticks; i++) stepWorld(w);
   const snap = probeSnapshot();
   probe.on = false;
@@ -41,6 +42,15 @@ describe('work counters', () => {
     expect(a.snap.pathCalls).toBeGreaterThan(0);
     expect(a.snap.pathBudgetHit).toBeLessThanOrEqual(a.snap.pathNull);
     expect(a.snap.pathNull).toBeLessThanOrEqual(a.snap.pathCalls);
+  });
+
+  it('measures rich mood ranking flips without changing the world', () => {
+    const off = run('probe-rich-mood', 2400, false, 'rich');
+    const on = run('probe-rich-mood', 2400, true, 'rich');
+    expect(on.fingerprint).toEqual(off.fingerprint);
+    expect(on.snap.moodRankings).toBeGreaterThan(0);
+    expect(on.snap.moodFlips).toBeLessThanOrEqual(on.snap.moodRankings);
+    expect(run('probe-rich-mood', 2400, true, 'rich').snap).toEqual(on.snap);
   });
 });
 

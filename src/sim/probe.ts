@@ -24,6 +24,10 @@ export interface ProbeCounters {
   decisions: number;
   /** reviews of an activity already under way */
   reviews: number;
+  /** rich-world decision rankings compared with the same ranking with mood weights removed */
+  moodRankings: number;
+  /** those rankings where mood changed the top option */
+  moodFlips: number;
   /** perceive calls */
   perceives: number;
   /** static entities (trees, buildings, sites, …) inside sensing range, summed over perceive calls */
@@ -44,6 +48,8 @@ export const COUNTER_KEYS: (keyof ProbeCounters)[] = [
   'optionsGenerated',
   'decisions',
   'reviews',
+  'moodRankings',
+  'moodFlips',
   'perceives',
   'perceiveStatic',
   'perceiveMobile',
@@ -60,6 +66,8 @@ const zero = (): ProbeCounters => ({
   optionsGenerated: 0,
   decisions: 0,
   reviews: 0,
+  moodRankings: 0,
+  moodFlips: 0,
   perceives: 0,
   perceiveStatic: 0,
   perceiveMobile: 0,
