@@ -3,6 +3,7 @@ import type { WorkResult } from './activities';
 import { LOAN_TERM, NUTRITION, SOURCE_SKILL, SKILL_MAX, WATER_VALUE, WORK } from './constants';
 import { notePractice } from './trades';
 import { riskOfHarm } from './life';
+import { onTheft } from './misdeeds';
 import {
   addItem,
   claimUnits,
@@ -270,6 +271,8 @@ registerHandler('eat_store', {
       return 'there is no food there';
     }
     observe(world, p, e);
+    // taken from another household's store (rich only): who saw decides what it costs
+    if (a.data.steal && e.ent === 'building') onTheft(world, p, e, a.cycle);
     a.cycle = 0;
     const k = pickFood(p.inv, p.needs.hunger);
     if (!k) return 'could not take food';

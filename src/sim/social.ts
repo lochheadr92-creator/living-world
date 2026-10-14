@@ -297,6 +297,8 @@ function willingness(world: World, B: Person, A: Person, severity: number): numb
   if (rel && rel.avoidUntil > world.tick) w -= 0.6;
   // what they have heard of the asker (rich only; 0 otherwise): a good name opens hands, a bad one closes them
   w += 0.25 * reputationOf(world, B, A.id);
+  // a favour owed (rich only): whoever owes one is readier to grant a request
+  if (isRich(world) && rel && rel.debt < 0) w += 0.12 * Math.min(3, -rel.debt);
   w -= 0.45 * (personalDriveMax(B) / 100);
   w += (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.16;
   return w;

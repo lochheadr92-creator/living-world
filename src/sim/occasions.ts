@@ -12,6 +12,7 @@ import { faceToward, newActivity, registerHandler, standSpotFor } from './activi
 import type { WorkResult } from './activities';
 import { DAY, NUTRITION, START_FRAC } from './constants';
 import { transfer } from './economy';
+import { surplusOf, valueOf } from './social';
 import { dayNumber } from './environment';
 import { addEvent, addLog } from './events';
 import { isRich, think } from './mood';
@@ -251,7 +252,59 @@ function arrive(world: World, p: Person, o: Occasion): void {
   else if (o.kind === 'market') think(world, p, 'market', 3, DAY, 'market day');
   else think(world, p, 'feast', 6 + 4 * close, DAY, `the ${KIND_LABEL[o.kind]}`);
   addLog(world, p, 'social', `Went to the ${KIND_LABEL[o.kind]} at ${o.placeName}${there.length ? ` (${there.length} already there)` : ''}.`);
-  if (o.kind === 'market') marketExchange(world, p, o);
+  if (o.kind === 'market') {
+    marketExchange(world, p, o);
+    marketSwap(world, p, o);
+  }
+}
+
+const BARTER: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'wood', 'stone', 'clay', 'planks', 'bricks', 'charcoal'];
+
+/**
+ * Barter: the newcomer's surplus against what they are short of, with whoever there has the opposite. Each judges the swap by
+ * their own valuation (social.ts valueOf), two units for two units at most, and both packs must have room. One swap per arrival.
+ */
+export function marketSwap(world: World, p: Person, o: Occasion): boolean {
+  // what I am short of, dearest first
+  const wants = BARTER.filter((k) => (p.inv[k] ?? 0) < 2)
+    .map((k) => ({ k, v: valueOf(world, p, k) }))
+    .sort((a, b) => b.v - a.v)
+    .slice(0, 4);
+  for (const { k: want } of wants) for (const id of o.attended) {
+    if (id === p.id) continue;
+    const q = personById(world, id);
+    if (!q || !q.alive || surplusOf(world, q, want) < 1) continue;
+    // what of mine would they take for it? the thing they value most that I can spare
+    let give: ItemKind | null = null;
+    let gain = 0;
+    for (const k of BARTER) {
+      if (k === want || surplusOf(world, p, k) < 1) continue;
+      const g = valueOf(world, q, k) - valueOf(world, q, want);
+      if (g > gain) {
+        gain = g;
+        give = k;
+      }
+    }
+    if (!give || valueOf(world, p, want) <= valueOf(world, p, give)) continue;
+    // two for two at most; the transfers themselves cap what each pack can take, and a swap one side cannot carry is undone
+    const n = Math.min(2, surplusOf(world, p, give), surplusOf(world, q, want));
+    if (n < 1) continue;
+    const got = transfer(world, q.inv, p.inv, carryCap(world, p), want, n, 'person:' + q.id, 'person:' + p.id, 'market swap');
+    if (got < 1) continue;
+    const gave = transfer(world, p.inv, q.inv, carryCap(world, q), give, got, 'person:' + p.id, 'person:' + q.id, 'market swap');
+    if (gave < got) {
+      // their pack could not take it after all: what came over goes back, and nothing is recorded as a swap
+      transfer(world, p.inv, q.inv, carryCap(world, q) + 99, want, got - gave, 'person:' + p.id, 'person:' + q.id, 'market swap undone');
+      if (gave < 1) continue;
+    }
+    adjustRel(p, q.id, world.tick, { aff: 1.5, trust: 1, fam: 0.5, note: `swapped ${give} for ${want} at the market` });
+    adjustRel(q, p.id, world.tick, { aff: 1.5, trust: 1, fam: 0.5, note: `swapped ${want} for ${give} at the market` });
+    addEvent(world, 'trade', `${p.name} swapped ${gave} ${give} for ${got} ${want} with ${q.name} at the market.`, [p.id, q.id], o.x, o.y);
+    addLog(world, p, 'social', `Swapped ${gave} ${give} for ${got} ${want} with ${q.name} at the market.`);
+    addLog(world, q, 'social', `Swapped ${got} ${want} for ${gave} ${give} with ${p.name} at the market.`);
+    return true;
+  }
+  return false;
 }
 
 /**

@@ -76,7 +76,7 @@ describe('market day', () => {
     expect(market.attended.length).toBeGreaterThan(2);
     // whether food changed hands depends on who came short of it; what is held is that every such move is a recorded transfer
     const trades = w.events.filter((e) => e.kind === 'trade' && e.text.includes('at the market'));
-    for (const t of trades) expect(t.text).toMatch(/handed \d+ food to/);
+    for (const t of trades) expect(t.text).toMatch(/handed \d+ food to|swapped \d+ \w+ for \d+ \w+ with/);
   });
 });
 

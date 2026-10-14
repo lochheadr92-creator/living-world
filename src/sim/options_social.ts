@@ -1,5 +1,6 @@
 import { newActivity } from './activities';
 import { reputationOf } from './reputation';
+import { favourOwedBy } from './misdeeds';
 import { BUILD_DEF } from './constants';
 import { pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
@@ -149,6 +150,8 @@ function optRequest(ctx: Ctx): void {
       const sc = new Scorer();
       sc.add(need === 'hunger' ? 'hungry' : 'thirsty', dr * 0.72 * plaus);
       sc.add(itemCheck(c.s) ? 'they are carrying some' : c.q.hhId === p.hhId ? 'family' : c.aff >= 25 ? 'a friend' : 'worth a try', plaus * 4);
+      const owed = favourOwedBy(world, p, c.q);
+      if (owed > 0) sc.add('they owe me a favour', 3 * Math.min(2, owed));
       sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
       const kind = stageOf(world, p) === 'child' ? 'care' : reqKind;
       mkSocial(ctx, c, 'request', { reqKind: kind as ConvData['reqKind'], item: reqKind === 'water' ? 'water' : null, amount: 2 }, `Ask ${c.q.name} for ${label}`, `to get ${label}`, need, sc, 'request', ':' + reqKind);
