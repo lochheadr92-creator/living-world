@@ -42,6 +42,13 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   deer out of every danger check), `hardship.ts` dry spells and floods, `sources.ts` finite rock, `events.ts chronicleWorthy` +
   `world.chronicle`, `world.ts roadsTick`, `buildings.ts` `builtBy`/`built`, `options_social.ts` the ask worth making. Tests:
   `tests/{occasions,reputation,illness,apprentice,life,misdeeds,environment,settlement_record}.test.ts`.
+- The second pass, ways to shape one's own life (rich only, same contract): `temperament.ts` (p.crowd, time alone, the reserved
+  decline a crowded table), `lifechanges.ts` (p.lifeEvent: bereaved, new parent, moved, took in; a bereaved concern brings friends to
+  look in; `leanOn` in willingness, `companyPull` in the chat), `traditions.ts` (world.traditions from well-attended occasions, held
+  yearly, lapse unattended; `pickStory` retells the chronicle in `reputation.ts shareRumour`), `crews.ts` (world.crews; `crewNudge` in the
+  ranking), `mediation.ts` (+ conversation purpose 'mediate'; `quarrelsFor`, `mediate`), `responsibilities.ts` (request kinds 'watch'
+  and 'fire' for the laid up; the watch is a `visit` with `data.watch`, the fire a `fuel_fire` that fulfils). Tests:
+  `tests/{temperament,lifechanges,traditions,crews,mediation,responsibilities}.test.ts`.
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
