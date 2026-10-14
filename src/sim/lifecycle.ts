@@ -2,6 +2,7 @@ import { fireNear, nearestHub } from './settlements';
 import { mourn, think } from './mood';
 import { noteBirth, noteDeath } from './occasions';
 import { noteDeedNear } from './reputation';
+import { onBecameParent, onOrphanTaken, onPartnerLost } from './lifechanges';
 import { abortActivity, newActivity, startActivity } from './activities';
 import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
@@ -164,6 +165,8 @@ export function giveBirth(world: World, mother: Person): void {
   }
   addEvent(world, 'life', `${baby.name} was born to ${mother.name}${father ? ' and ' + father.name : ''}.`, [baby.id, mother.id], mother.x, mother.y);
   noteBirth(world, baby, mother);
+  onBecameParent(world, mother, baby, father ?? null);
+  if (father) onBecameParent(world, father, baby, mother);
   noteDeedNear(world, mother, 'news', `${mother.name} has had a child, ${baby.name}`, mother.x, mother.y, 10);
   think(world, mother, 'birth', 25, DAY * 2, `${baby.name} was born`);
   if (father) think(world, father, 'birth', 20, DAY * 2, `${baby.name} was born`);
@@ -217,7 +220,10 @@ export function killPerson(world: World, p: Person, cause: string): void {
   removeFromHousehold(world, p);
   if (p.partnerId) {
     const partner = personOf(world, p.partnerId);
-    if (partner) partner.partnerId = 0;
+    if (partner) {
+      partner.partnerId = 0;
+      onPartnerLost(world, partner, p);
+    }
   }
   addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause})`}, aged ${age}.`, [p.id], p.x, p.y);
   noteDeath(world, p);
@@ -268,6 +274,7 @@ export function adoptOrphans(world: World): void {
         const r2 = relOf(best, child.id);
         r2.affinity = Math.max(r2.affinity, 45);
         addEvent(world, 'life', `${best.name} took in ${child.name}, who had no one to look after them.`, [best.id, child.id], best.x, best.y);
+        onOrphanTaken(world, best, child);
         addLog(world, best, 'life', `Took ${child.name} into my household.`);
         addLog(world, child, 'life', `${best.name} took me in.`);
       }

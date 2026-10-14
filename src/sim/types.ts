@@ -445,6 +445,14 @@ export interface Injury {
   how: string;
 }
 
+/** a change in life that colours things for a while (lifechanges.ts; rich worlds only): what, about whom, since when, until when */
+export interface LifeEvent {
+  kind: 'bereaved' | 'new_parent' | 'moved' | 'took_in';
+  about: number;
+  since: number;
+  until: number;
+}
+
 /** an apprenticeship (apprentice.ts; rich worlds only): whose, in what skill, since when, and when they last practised it */
 export interface Apprenticeship {
   master: number;
@@ -578,6 +586,8 @@ export interface Person {
   immuneUntil?: number;
   /** whose apprentice they are, in what (apprentice.ts; rich only, never created in an authored world) */
   apprentice?: Apprenticeship;
+  /** the change they are living through (lifechanges.ts; rich only, never created in an authored world) */
+  lifeEvent?: LifeEvent;
   /** time lately spent with three or more people close by (temperament.ts; rich only, never created in an authored world) */
   crowd?: number;
   /** what they hope for, and what hurts them (life.ts; rich only, never created in an authored world) */
@@ -645,7 +655,7 @@ export interface InteractionRecord {
 
 export interface Concern {
   about: number;
-  kind: 'hungry' | 'thirsty' | 'cold' | 'hurt' | 'tired' | 'missing';
+  kind: 'hungry' | 'thirsty' | 'cold' | 'hurt' | 'tired' | 'missing' | 'bereaved';
   /** when the observation was made (hearsay keeps the original age) */
   seen: number;
   src: 'seen' | 'told';

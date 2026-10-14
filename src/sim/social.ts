@@ -3,6 +3,7 @@ import { isRich, think } from './mood';
 import { noteWedding } from './occasions';
 import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
 import { expose } from './illness';
+import { leanOn, onMovedHousehold } from './lifechanges';
 import {
   canInterruptForTalk,
   endActivity,
@@ -302,6 +303,8 @@ function willingness(world: World, B: Person, A: Person, severity: number): numb
   w += 0.25 * reputationOf(world, B, A.id);
   // a favour owed (rich only): whoever owes one is readier to grant a request
   if (isRich(world) && rel && rel.debt < 0) w += 0.12 * Math.min(3, -rel.debt);
+  // the bereaved and new parents are helped more readily, most by those close to them (rich only; 0 otherwise)
+  w += leanOn(world, B, A);
   w -= 0.45 * (personalDriveMax(B) / 100);
   w += (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.16;
   return w;
@@ -1364,6 +1367,7 @@ function joinHouseholds(world: World, A: Person, B: Person, kind: 'partner' | 'r
     const incoming = [mover, ...membersOf(world, src).filter((m) => m.id !== mover.id && m.parents.includes(mover.id) && stageOf(world, m) === 'child')];
     if (membersOf(world, dest).length + incoming.length > cap) continue;
     for (const m of incoming) addToHousehold(world, m, dest);
+    onMovedHousehold(world, mover, src, dest);
     if (kind === 'partner') bindPartners(world, A, B);
     const label = kind === 'partner' ? 'moved in together' : 'now share a home';
     addEvent(world, 'social', `${A.name} and ${B.name} ${label} (${dest.name} household).`, [A.id, B.id], A.x, A.y);

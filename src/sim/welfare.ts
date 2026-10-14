@@ -1,3 +1,4 @@
+import { onLookedInOnBereaved } from './lifechanges';
 import { faceToward, newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { DAY, workRules } from './constants';
@@ -26,13 +27,14 @@ export const CHECK_COOLDOWN = Math.round(DAY * 0.6);
 /** how long a sighting of a grown person who was hungry, thirsty or cold stays worth walking over for: by then they will have seen to it themselves */
 export const SELF_FIX_WINDOW = 480;
 
-const KIND_WORD: Record<Concern['kind'], string> = { hungry: 'hungry', thirsty: 'thirsty', cold: 'cold', hurt: 'hurt', tired: 'worn out', missing: 'out of sight' };
+const KIND_WORD: Record<Concern['kind'], string> = { hungry: 'hungry', thirsty: 'thirsty', cold: 'cold', hurt: 'hurt', tired: 'worn out', missing: 'out of sight', bereaved: 'bereaved' };
 
 /** a worry about someone who can look after themselves, over a need they will have met by now */
 function outOfDate(world: World, c: Concern, subject: Person | undefined): boolean {
   if (!subject) return true;
   const age = world.tick - c.seen;
   if (age >= CONCERN_LIFE) return true;
+  if (c.kind === 'bereaved') return age >= 2 * DAY || !subject.lifeEvent || subject.lifeEvent.kind !== 'bereaved';
   return c.kind !== 'hurt' && c.kind !== 'missing' && age > SELF_FIX_WINDOW && !isDependent(world, subject);
 }
 
@@ -133,8 +135,8 @@ export function welfareOptions(ctx: Ctx): void {
       addBlocked(ctx, 'visit', `Check on ${subject.name}`, subject.id, 'they are not close enough to go looking', 'care');
       continue;
     }
-    const supplies = c.kind === 'missing' ? null : suppliesFor(world, p, c.kind);
-    if (c.kind !== 'missing' && !supplies) {
+    const supplies = c.kind === 'missing' || c.kind === 'bereaved' ? null : suppliesFor(world, p, c.kind);
+    if (c.kind !== 'missing' && c.kind !== 'bereaved' && !supplies) {
       addBlocked(ctx, 'visit', `Bring something to ${subject.name}`, subject.id, `has nothing to spare for someone ${KIND_WORD[c.kind]}`, 'care');
       continue;
     }
@@ -144,11 +146,11 @@ export function welfareOptions(ctx: Ctx): void {
       continue;
     }
     const age = world.tick - c.seen;
-    const sev = c.kind === 'hurt' ? 1 : c.kind === 'thirsty' ? 0.9 : c.kind === 'hungry' ? 0.75 : c.kind === 'missing' ? 0.45 : 0.4;
+    const sev = c.kind === 'hurt' ? 1 : c.kind === 'thirsty' ? 0.9 : c.kind === 'hungry' ? 0.75 : c.kind === 'bereaved' ? 0.7 : c.kind === 'missing' ? 0.45 : 0.4;
     const fresh = Math.max(0.25, 1 - age / CONCERN_LIFE);
     const e = eta(ctx, loc.x, loc.y);
     const sc = new Scorer()
-      .add(c.kind === 'missing' ? `has not seen ${subject.name} for a while` : `${subject.name} looked ${KIND_WORD[c.kind]}${c.src === 'told' ? ` (so I was told)` : ''}`, (12 + 26 * sev * fresh) * tm.give)
+      .add(c.kind === 'missing' ? `has not seen ${subject.name} for a while` : c.kind === 'bereaved' ? `${subject.name} has lost someone` : `${subject.name} looked ${KIND_WORD[c.kind]}${c.src === 'told' ? ` (so I was told)` : ''}`, (12 + 26 * sev * fresh) * tm.give)
       .add('walking', -pen(e));
     if (kin) sc.add('family', 7);
     if (dependent) sc.add('someone who cannot manage alone', 6);
@@ -215,6 +217,15 @@ registerHandler('visit', {
     faceToward(p, t.x, t.y);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
+    // come to see the bereaved: being there is the visit (rich only: the concern is never raised elsewhere)
+    if (a.data.concern === 'bereaved') {
+      onLookedInOnBereaved(world, p, t);
+      p.concerns = p.concerns.filter((c) => c.about !== t.id);
+      p.cooldowns['check' + t.id] = world.tick + CHECK_COOLDOWN * 2;
+      a.data.outcome = 'looked in';
+      a.cycle = 1;
+      return 'done';
+    }
     // how are they, really?
     const needs = { hungry: t.needs.hunger < 48, thirsty: t.needs.thirst < 46, hurt: t.health < 62 };
     const wanted = (a.data.items ?? {}) as Record<string, number>;
