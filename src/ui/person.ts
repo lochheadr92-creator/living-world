@@ -309,7 +309,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
         );
       }
     }
-    setText(healthTxt, v.illness ? `${Math.round(v.health)} · ${v.illness}` : String(Math.round(v.health)));
+    setText(healthTxt, [String(Math.round(v.health)), v.illness, v.injury].filter(Boolean).join(' · '));
     healthBar.set(v.health / 100, healthTone(v.health));
 
     // needs

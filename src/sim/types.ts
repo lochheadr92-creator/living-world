@@ -414,6 +414,23 @@ export interface Payoff {
   r: number;
 }
 
+/** what a person hopes for (life.ts; rich worlds only): the hope, since when, how far along (read from the world), when reached (0: not yet) */
+export type GoalKind = 'home' | 'family' | 'trade' | 'stocked' | 'respected';
+export interface Goal {
+  kind: GoalKind;
+  since: number;
+  progress: number;
+  done: number;
+}
+/** an injury (life.ts; rich worlds only): what, since when, healed by when, how it happened */
+export type InjuryKind = 'sprain' | 'cut' | 'broken';
+export interface Injury {
+  kind: InjuryKind;
+  since: number;
+  until: number;
+  how: string;
+}
+
 /** a trade (trades.ts; rich worlds only): the skill they call their own, since when, whose apprentice they are (0: nobody's), last practice */
 export interface Trade {
   kind: SkillKey;
@@ -530,6 +547,9 @@ export interface Person {
   immuneUntil?: number;
   /** their trade, if they have taken one up (trades.ts; rich only, never created in an authored world) */
   trade?: Trade;
+  /** what they hope for, and what hurts them (life.ts; rich only, never created in an authored world) */
+  goal?: Goal;
+  injury?: Injury;
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;

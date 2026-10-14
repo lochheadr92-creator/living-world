@@ -1,6 +1,7 @@
 import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
 import { nearLitFire } from './perception';
 import { stageOf } from './people';
+import { elderFactor } from './life';
 import type { NeedKey, Person, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -147,6 +148,8 @@ export function updateNeeds(world: World, p: Person): void {
   if (n.warmth <= 6) dh -= 0.035;
   if (n.energy <= 0) dh -= 0.01;
   if (dh === 0 && n.hunger > 40 && n.thirst > 40 && n.warmth > 35) dh = sleeping ? 0.03 : resting ? 0.02 : 0.009;
+  // an elder mends slower (rich only; 1 otherwise)
+  if (dh > 0 && stage === 'elder') dh *= elderFactor(world, p);
   p.health = clamp(p.health + dh, 0, 100);
 }
 

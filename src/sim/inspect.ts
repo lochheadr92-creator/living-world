@@ -9,6 +9,7 @@ import { describePay } from './learning';
 import { describeHeard } from './reputation';
 import { describeIllness } from './illness';
 import { describeTrade } from './trades';
+import { describeGoal, describeInjury } from './life';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -129,6 +130,9 @@ export interface PersonView {
   traitSummary: string;
   /** their trade, in words (rich only; null without one) */
   trade: string | null;
+  /** what they hope for, and what hurts them, in words (rich only; null otherwise) */
+  goal: string | null;
+  injury: string | null;
   skills: { key: string; value: number }[];
   /** what each kind of gathering has paid them, in their own experience (rich only; empty otherwise), best first */
   payoffs: { key: string; ratio: number; n: number }[];
@@ -509,6 +513,8 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     traits: Object.entries(p.traits).map(([key, value]) => ({ key, value })),
     traitSummary: traitSummary(p.traits),
     trade: describeTrade(world, p),
+    goal: describeGoal(world, p),
+    injury: describeInjury(world, p),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
     heard: describeHeard(world, p),

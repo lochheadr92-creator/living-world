@@ -2,6 +2,7 @@ import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { LOAN_TERM, NUTRITION, SOURCE_SKILL, SKILL_MAX, WATER_VALUE, WORK } from './constants';
 import { notePractice } from './trades';
+import { riskOfHarm } from './life';
 import {
   addItem,
   claimUnits,
@@ -153,6 +154,7 @@ registerHandler('gather', {
     const task = toolTask(s);
     if (task) wearFor(world, p, task, a.duration);
     const sk = SOURCE_SKILL[s.type];
+    if (s.type === 'tree' || s.type === 'rock') riskOfHarm(world, p, s.type, 0.004);
     p.skills[sk] = Math.min(SKILL_MAX, p.skills[sk] + 0.004);
     notePractice(world, p, sk, 0.004);
     if (s.type === 'wild_grain' && world.rng.chance(0.2)) {

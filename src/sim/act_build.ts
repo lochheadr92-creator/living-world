@@ -3,6 +3,7 @@ import type { WorkResult } from './activities';
 import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WORK, isHomeType, isSolidHome } from './constants';
 import { buildingLabel, completeSite, createSite } from './buildings';
 import { notePractice, onSharedWork } from './trades';
+import { riskOfHarm } from './life';
 import { addItem, claimSlot, consume, invRoom, ledgerCreate } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { creditMade, creditRepair } from './intent';
@@ -90,6 +91,7 @@ registerHandler('build', {
     a.progress++;
     a.cycle++;
     wearFor(world, p, 'build', 1);
+    if (a.cycle % 50 === 0) riskOfHarm(world, p, 'build', 0.003);
     if (site.contrib) site.contrib[p.hhId] = (site.contrib[p.hhId] ?? 0) + 1 / 25;
     p.skills.build = Math.min(SKILL_MAX, p.skills.build + 0.0004);
     notePractice(world, p, 'build', 0.0004);

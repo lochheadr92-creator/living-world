@@ -5,6 +5,7 @@ import { occasionsTick } from './occasions';
 import { updateMood } from './mood';
 import { illnessTick } from './illness';
 import { tradesTick } from './trades';
+import { lifeTickRich } from './life';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -101,6 +102,7 @@ function stepPerson(world: World, p: Person): void {
   updateMood(world, p);
   illnessTick(world, p);
   tradesTick(world, p);
+  lifeTickRich(world, p);
   if (p.health <= 0) {
     const n = p.needs;
     const cause = p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
@@ -277,6 +279,7 @@ export function hashWorld(world: World): string {
       const ks = Object.keys(pay) as (keyof typeof pay)[];
       if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
     }
+    for (const p of world.persons) if (p.alive && (p.goal || p.injury)) push(`L${p.id}:${p.goal ? p.goal.kind + ',' + p.goal.done : '-'}|${p.injury ? p.injury.kind + ',' + p.injury.until : '-'}`);
     for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.kind},${p.trade.master}`);
     for (const p of world.persons) if (p.alive && p.illness) push(`I${p.id}:${p.illness.since},${r4(p.illness.severity)},${p.illness.rested}`);
     for (const p of world.persons) if (p.alive && p.heard && p.heard.length) push(`H${p.id}:${p.heard.length},${p.heard.map((r) => r.about + r.hops).reduce((a, b) => a + b, 0)}`);

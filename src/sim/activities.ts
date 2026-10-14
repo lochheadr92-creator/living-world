@@ -1,3 +1,4 @@
+import { injuryFactor } from './life';
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
 import { cartSpeedFactor } from './carts';
 import { carryCap } from './people';
@@ -151,6 +152,7 @@ export function moveSpeed(world: World, p: Person, run = false): number {
   const cap = carryCap(world, p);
   s *= 1 - 0.22 * Math.min(1, weightOf(p.inv) / cap);
   if (p.health < 70) s *= 0.55 + 0.45 * (p.health / 70);
+  if (p.injury) s *= injuryFactor(world, p);
   s *= terrainSpeed(world, p.x, p.y);
   if (p.cartId) s *= cartSpeedFactor(world, p);
   if (world.light < 0.3) s *= 0.93;

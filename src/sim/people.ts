@@ -1,3 +1,4 @@
+import { elderFactor } from './life';
 import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP, TICKS_PER_YEAR } from './constants';
 import type { RNG } from './rng';
 import type { Items, Look, Person, Skills, Stage, ToolKind, Traits, World } from './types';
@@ -54,7 +55,10 @@ export function stageOf(world: World, p: Person): Stage {
 }
 
 export function carryCap(world: World, p: Person): number {
-  return CARRY_CAP[stageOf(world, p)] + ((p.inv.basket ?? 0) > 0 ? BASKET_BONUS : 0);
+  const st = stageOf(world, p);
+  // an elder carries less in a rich world (elderFactor is 1 otherwise, and for everyone else)
+  const base = st === 'elder' ? Math.round(CARRY_CAP[st] * elderFactor(world, p)) : CARRY_CAP[st];
+  return base + ((p.inv.basket ?? 0) > 0 ? BASKET_BONUS : 0);
 }
 
 export const dependentsOf = (world: World, p: Person): Person[] => world.persons.filter((q) => q.alive && q.id !== p.id && q.hhId === p.hhId && isDependent(world, q));
