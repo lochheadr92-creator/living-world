@@ -198,7 +198,7 @@ export function describeEntityName(world: World, e: Entity): string {
     case 'person':
       return e.name;
     case 'animal':
-      return 'Wolf';
+      return e.type === 'deer' ? 'Deer' : 'Wolf';
     case 'source':
       return SOURCE_NOUN[e.type][0].toUpperCase() + SOURCE_NOUN[e.type].slice(1);
     case 'building':
@@ -667,11 +667,11 @@ export function describeEntity(world: World, id: number): EntityView | null {
       return {
         kind: 'animal',
         ...base,
-        title: 'Wolf',
+        title: e.type === 'deer' ? 'Deer' : 'Wolf',
         subtitle: 'Wild animal',
-        rows: [['Behaviour', e.state === 'roam' ? 'prowling its territory' : e.state === 'stalk' ? 'stalking someone' : e.state === 'retreat' ? 'slinking away' : 'attacking']],
+        rows: [['Behaviour', e.type === 'deer' ? (e.state === 'retreat' ? 'bolting' : 'grazing') : e.state === 'roam' ? 'prowling its territory' : e.state === 'stalk' ? 'stalking someone' : e.state === 'retreat' ? 'slinking away' : 'attacking']],
         bars: [],
-        notes: ['Wolves avoid fires, huts and groups of people.'],
+        notes: [e.type === 'deer' ? 'Deer bolt from anyone who comes close; a hunting party brings one down more surely than one hunter.' : 'Wolves avoid fires, huts and groups of people.'],
         position: { x: e.x, y: e.y },
       };
     case 'cart':

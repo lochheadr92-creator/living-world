@@ -31,6 +31,7 @@ import { WORK } from './constants';
 
 import { hyp } from './util';
 import { householdById } from './households';
+import { huntOptions } from './hunting';
 const FOOD_KINDS = ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'] as const;
 
 // ───────────────────────── flee ─────────────────────────
@@ -676,6 +677,7 @@ function optRest(ctx: Ctx): void {
 export function survivalOptions(ctx: Ctx): void {
   optFlee(ctx);
   optEat(ctx);
+  huntOptions(ctx);
   optDrink(ctx);
   optSleep(ctx);
   optWarmth(ctx);

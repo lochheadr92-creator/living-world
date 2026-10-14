@@ -5,6 +5,7 @@ import type { ExternalController } from './external';
 import { moodWeight } from './mood';
 import { tradeNudge } from './trades';
 import { goalNudge } from './life';
+import { isThreat } from './wildlife';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
@@ -331,7 +332,7 @@ export function urgentInterrupt(world: World, p: Person): boolean {
   if (!a || a.kind === 'flee') return false;
   const alarm = Math.min(9.5, fleeRadius(p));
   for (const s of p.seen) {
-    if (s.ent === 'animal' && hyp(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {
+    if (isThreat(world, s) && hyp(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {
       p.cooldowns.fleeCheck = world.tick;
       return true;
     }

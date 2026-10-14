@@ -1,3 +1,4 @@
+import { isThreat } from './wildlife';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { addLog } from './events';
@@ -123,7 +124,7 @@ registerHandler('flee', {
   work(world, p, a): WorkResult {
     a.progress++;
     let threat = false;
-    for (const s of p.seen) if (s.ent === 'animal' && hyp(s.x - p.x, s.y - p.y) < 11) threat = true;
+    for (const s of p.seen) if (isThreat(world, s) && hyp(s.x - p.x, s.y - p.y) < 11) threat = true;
     if (!threat && (p.needs.safety > 55 || a.progress > a.duration)) return 'done';
     if (threat) {
       a.progress = Math.max(0, a.progress - 1);

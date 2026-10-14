@@ -30,7 +30,7 @@ export function senseRadius(world: World, p: Person): number {
   return r;
 }
 
-const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
+const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
 
 function describeSeenPerson(world: World, e: Person): SeenEntity {
   const carrying: ItemKind[] = [];
@@ -122,6 +122,8 @@ export function perceive(world: World, p: Person): void {
     } else if (e.ent === 'animal') {
       if (hyp(e.x - p.x, e.y - p.y) > r) return;
       p.seen.push(describeSeenAnimal(e));
+      // a deer (rich worlds only) is seen but is no danger to remember
+      if (e.type === 'deer') return;
       const b = snapshotEntity(world, e, world.tick);
       if (b) {
         learn(p, b);

@@ -225,7 +225,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
   }
   // chasing a person: the destination is refreshed only while the target is actually in sight,
   // otherwise the walker keeps heading for where they were last seen
-  if (a.targetType === 'person' && (world.tick + p.id) % 10 === 0) {
+  if ((a.targetType === 'person' || a.targetType === 'animal') && (world.tick + p.id) % 10 === 0) {
     const sighted = p.seen.find((s) => s.id === a.targetId);
     if (sighted) {
       const dx = p.x - sighted.x;

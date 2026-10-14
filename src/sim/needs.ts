@@ -2,6 +2,7 @@ import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOC
 import { nearLitFire } from './perception';
 import { stageOf } from './people';
 import { elderFactor } from './life';
+import { isThreat } from './wildlife';
 import type { NeedKey, Person, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -102,7 +103,7 @@ export function updateNeeds(world: World, p: Person): void {
   let safetyTarget = 84;
   const hurtRecently = world.tick - (p.cooldowns.hurt ?? -9999) < 700;
   let nearThreat = 99;
-  for (const s of p.seen) if (s.ent === 'animal') nearThreat = Math.min(nearThreat, hyp(s.x - p.x, s.y - p.y));
+  for (const s of p.seen) if (isThreat(world, s)) nearThreat = Math.min(nearThreat, hyp(s.x - p.x, s.y - p.y));
   if (nearThreat < 14) safetyTarget -= 70 * (1 - nearThreat / 14);
   for (const id of p.bykind.danger ?? []) {
     const b = p.beliefs[id];

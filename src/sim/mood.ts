@@ -71,7 +71,7 @@ export function updateMood(world: World, p: Person): void {
 }
 
 const SOCIAL: ReadonlySet<ActivityKind> = new Set(['socialize', 'converse', 'visit', 'host_meal', 'attend_meal', 'attend', 'give', 'care']);
-const EFFORT: ReadonlySet<ActivityKind> = new Set(['build', 'haul', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'gather', 'operate', 'tool_work', 'cart_haul', 'plan_site', 'explore']);
+const EFFORT: ReadonlySet<ActivityKind> = new Set(['build', 'haul', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'gather', 'operate', 'tool_work', 'cart_haul', 'plan_site', 'explore', 'hunt']);
 const IDLE: ReadonlySet<ActivityKind> = new Set(['rest', 'wander']);
 
 /** A factor on an option's utility: below 1 for the things a low mood puts off, above 1 for what it favours. 1 for everything else. */

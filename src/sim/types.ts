@@ -5,7 +5,7 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar';
 /** Raw materials and the things made from them. */
@@ -185,6 +185,7 @@ export interface SeenEntity {
 
 export type ActivityKind =
   | 'attend'
+  | 'hunt'
   | 'wander'
   | 'eat'
   | 'eat_store'
@@ -848,7 +849,8 @@ export interface Grave {
 export interface Animal {
   ent: 'animal';
   id: number;
-  type: 'wolf';
+  /** deer only in rich worlds (hunting.ts) */
+  type: 'wolf' | 'deer';
   x: number;
   y: number;
   px: number;
@@ -1142,7 +1144,9 @@ export interface World {
   usedNames: Set<string>;
   stats: Record<string, number>;
   /** a lean season under way (hardship.ts); only in worlds with rich dynamics */
-  hardship?: { kind: 'lean'; since: number; until: number };
+  hardship?: { kind: 'lean' | 'dry'; since: number; until: number };
+  /** the last flood (hardship.ts; rich only, never set in an authored world) */
+  lastFlood?: number;
   /**
    * people driven from outside (the AI inhabitant, docs/INHABITANT.md), by person id. Absent in every ordinary world, so such a world
    * is saved and hashed exactly as before. The simulation never reads it.
