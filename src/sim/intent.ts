@@ -39,6 +39,17 @@ export function setNightPlans(on: boolean): void {
 }
 export const nightPlansOn = (): boolean => nightPlans;
 
+/**
+ * The same kind of switch for Stage D1's ask alone: with it off a person with a project still carries the plan, still works at it
+ * and still gives it up with a reason, but never asks a neighbour for the material it lacks. Ordinary requests (a tool to borrow,
+ * materials for a site, food) are untouched. It exists so the lab can hold planning steady and remove only the cooperation.
+ */
+let projectAsks = true;
+export function setProjectAsks(on: boolean): void {
+  projectAsks = on;
+}
+export const projectAsksOn = (): boolean => projectAsks;
+
 export const activeIntent = (p: Person): Intention | null => p.intentions.find((i) => i.status === 'active') ?? null;
 
 /**

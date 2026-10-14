@@ -6,7 +6,7 @@ import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
 import { isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
-import { outstandingForPlan } from './intent';
+import { outstandingForPlan, projectAsksOn } from './intent';
 import { wantsAmends } from './grievance';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
@@ -186,8 +186,9 @@ function optRequest(ctx: Ctx): void {
   // Material a project of my own still lacks (Stage D1). Everything here is the asker's own: their plan says what it wants, their
   // pack says what they have, and the only people asked are ones they can see carrying the thing. Nothing is counted as arrived:
   // what has already been asked for or promised for this same plan is subtracted, so one shortage is not asked for twice.
-  // In an authored world `p.intentions` is empty, so this loop does nothing at all.
-  for (const plan of p.intentions) {
+  // In an authored world `p.intentions` is empty, so this loop does nothing at all. The lab's `rich-no-ask` branch switches the
+  // ask off on its own (intent.ts setProjectAsks) and leaves the plan, and every other kind of request, as they were.
+  for (const plan of projectAsksOn() ? p.intentions : []) {
     if (plan.status !== 'active' || plan.kind !== 'tool') continue;
     if (ctx.criticals.length || ctx.dangers.length) break; // something is actually wrong: not the moment to be asking favours
     for (const item of Object.keys(plan.wants) as ItemKind[]) {

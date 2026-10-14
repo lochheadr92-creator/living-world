@@ -13,7 +13,7 @@ import { deserializeWorld, serializeWorld } from '../../src/app/save';
 import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
-import { setNightPlans } from '../../src/sim/intent';
+import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
 import type { SourceType, World } from '../../src/sim/types';
@@ -57,7 +57,9 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * those sources within the radius of any settlement); `random-choice` (rank options by a hash, not by utility); `no-wolf-memory`
  * (switch off an optimisation that is meant to be exact: a branch that is not identical to the control would be a bug).
  * `rich-no-night` (alias `rich-no-plans`) is rich with private plans removed altogether - night preparation AND the projects
- * built on the same mechanism (making a tool, mending a roof) - to isolate what planning as such contributes. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * built on the same mechanism (making a tool, mending a roof) - to isolate what planning as such contributes. `rich-no-ask` keeps
+ * every plan and removes only Stage D1's ask for a project's missing material, to isolate what the cooperation contributes on top
+ * of planning. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -106,6 +108,20 @@ export function parseIntervention(specIn: string): Intervention {
       install: () => {
         setNightPlans(false);
         return () => setNightPlans(true);
+      },
+    };
+  }
+  if (kind === 'rich-no-ask') {
+    return {
+      spec: label,
+      summary: 'rich dynamics with private plans kept and only the project ask removed: nobody asks a neighbour for material their own project lacks',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, project asks off';
+      },
+      install: () => {
+        setProjectAsks(false);
+        return () => setProjectAsks(true);
       },
     };
   }
