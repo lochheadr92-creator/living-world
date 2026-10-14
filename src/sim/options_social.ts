@@ -6,6 +6,7 @@ import { aloneOptions } from './temperament';
 import { companyPull } from './lifechanges';
 import { crewMates } from './crews';
 import { quarrelsFor } from './mediation';
+import { childrenNeedingWatch, laidUp } from './responsibilities';
 import { BUILD_DEF } from './constants';
 import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
@@ -182,6 +183,25 @@ function optRequest(ctx: Ctx): void {
   };
   tryNeed('hunger', 'food', (s) => s.carrying.some((k) => isFood(k)), 'food');
   tryNeed('thirst', 'water', (s) => s.carrying.includes('water'), 'water');
+
+  // laid up (rich only): a neighbour to keep an eye on the children, or the fire going (responsibilities.ts)
+  if (laidUp(world, p) && !world.requests.some((r) => r.from === p.id && (r.kind === 'watch' || r.kind === 'fire') && (r.status === 'pending' || r.status === 'promised'))) {
+    const kids = childrenNeedingWatch(world, p);
+    const fire = kids.length ? null : beliefsByKind(p, ['building']).find((b) => b.btype === 'fire' && hyp(b.x - p.x, b.y - p.y) < 12 && (b.fuel ?? 0) - (world.tick - b.seen) * 0.85 < 400 && (p.inv.wood ?? 0) < 1);
+    if (kids.length || fire) {
+      for (const c of cands) {
+        if (c.d > 14 || c.s.child || c.q.hhId === p.hhId || stageOf(world, c.q) === 'child' || stageOf(world, c.q) === 'youth') continue;
+        if ((p.cooldowns['askduty' + c.q.id] ?? 0) > world.tick || c.aff < -10) continue;
+        const sc = new Scorer()
+          .add(kids.length ? `laid up, and ${kids[0].name} needs seeing to` : 'laid up, and the fire is getting low', 18 + 8 * (p.illness?.severity ?? 0.5))
+          .add(c.aff >= 25 ? 'a friend' : c.fam >= 4 ? 'a neighbour' : 'worth a try', c.aff >= 25 ? 5 : 2)
+          .add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
+        p.cooldowns['askduty' + c.q.id] = world.tick + 400;
+        if (kids.length) mkSocial(ctx, c, 'request', { reqKind: 'watch', destKind: 'person', destId: kids[0].id, purpose: `keep an eye on ${kids[0].name}` }, `Ask ${c.q.name} to keep an eye on ${kids[0].name}`, `to have ${kids[0].name} seen to while I am laid up`, null, sc, 'request', ':watch');
+        else mkSocial(ctx, c, 'request', { reqKind: 'fire', destKind: 'building', destId: fire!.id, purpose: 'keep the fire going' }, `Ask ${c.q.name} to keep the fire going`, 'to have the fire kept while I am laid up', null, sc, 'request', ':fire');
+      }
+    }
+  }
 
   // a home that is failing, with nobody in the household able to mend it: ask a neighbour who can
   const homeB = ctx.home ? p.beliefs[ctx.home.id] : undefined;

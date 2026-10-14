@@ -5,6 +5,7 @@ import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation'
 import { expose } from './illness';
 import { leanOn, onMovedHousehold } from './lifechanges';
 import { hears, mediate } from './mediation';
+import { laidUp, onDutyDeclined } from './responsibilities';
 import {
   canInterruptForTalk,
   endActivity,
@@ -358,6 +359,16 @@ function toolInUse(act: string, kind: ToolKind): boolean {
 
 export function evaluateRequest(world: World, B: Person, A: Person, req: Request): Response {
   const rel = B.relations[A.id];
+  // a shared responsibility (responsibilities.ts; rich only): weighed against their own dependants, needs, promises and liking
+  if (req.kind === 'watch' || req.kind === 'fire') {
+    if (laidUp(world, B) || personalDriveMax(B) > 50) return { kind: 'decline', reason: 'own_need' };
+    if (activeCommitments(B).length >= MAX_ACTIVE_COMMITMENTS) return { kind: 'decline', reason: 'committed' };
+    const ownKids = membersOf(world, householdById(world, B.hhId)).filter((m) => m !== B && stageOf(world, m) === 'child').length;
+    if (req.kind === 'watch' && ownKids >= 2) return { kind: 'decline', reason: 'own_need' };
+    const w = willingness(world, B, A, 0.5) + (req.kind === 'watch' ? 0.1 * B.traits.generosity : 0);
+    if (w < 0.5) return { kind: 'decline', reason: (rel?.affinity ?? 0) < -10 ? 'disliked' : 'unwilling' };
+    return { kind: 'promise', item: null, n: 1 };
+  }
   const dislike = (rel?.affinity ?? 0) < -12 || (rel && rel.avoidUntil > world.tick);
   let sev = 0.3;
   let item: ItemKind | null = req.item;
@@ -572,8 +583,9 @@ export function checkCommitments(world: World, p: Person): void {
         if (req && req.status === 'promised') settle(world, req, 'cancelled', c.reason);
         continue;
       }
-      // in a rich world it is what the maker knows of the roof that settles the promise, not the roof itself
-      const seenCond = isRich(world) ? p.beliefs[target.id]?.cond : target.condition;
+      // in a rich world it is what the maker knows of the roof that settles the promise, not the roof itself (a promise to keep
+      // a fire going is not about a roof: it is kept by feeding the fire, responsibilities.ts)
+      const seenCond = c.milestone === 'fire kept' ? -1 : isRich(world) ? p.beliefs[target.id]?.cond : target.condition;
       if ((seenCond ?? -1) >= 62) {
         const did = (c.contrib ?? 0) > 0;
         c.status = did ? 'done' : 'moot';
@@ -944,7 +956,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       if (kind === 'tool') bubble(world, A, `Could I borrow your ${d.toolKind ?? 'tool'}? I’ll bring it back.`, 'ask', 62);
       else if (kind === 'goods' || kind === 'haul') bubble(world, A, `Could you bring ${d.item ?? 'some materials'} to the ${building}?`, 'ask', 62);
       else if (kind === 'repair') bubble(world, A, 'Would you be able to patch our roof? It’s not keeping the rain out.', 'ask', 64);
-      else bubble(world, A, D.requestLine(A.hhId === B.hhId && A.needs.hunger < 50 && stageOf(world, A) === 'child' ? 'care' : kind, A.id, B.id, { building }), 'ask', 60);
+      else bubble(world, A, D.requestLine(A.hhId === B.hhId && A.needs.hunger < 50 && stageOf(world, A) === 'child' ? 'care' : kind, A.id, B.id, { building, child: d.destKind === 'person' && d.destId ? (personOf(world, d.destId)?.name ?? 'the little one') : 'the little one' }), 'ask', 60);
       addLog(world, A, 'social', `Asked ${B.name} for ${kind === 'food' ? 'food' : kind === 'tool' ? `the loan of a ${d.toolKind}` : (d.item ?? kind)}.`);
       break;
     }
@@ -1092,6 +1104,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const toSite = !!req.siteId && !!item && !isFood(item) && item !== 'water';
         if (req.kind === 'repair') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + PROMISE_TTL + 900, destKind: 'building', destId: req.destId, milestone: req.milestone || 'sound again' });
+        } else if (req.kind === 'watch' || req.kind === 'fire') {
+          addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + DAY, destKind: req.destKind, destId: req.destId, milestone: req.kind === 'watch' ? 'watched' : 'fire kept' });
         } else {
           const kindC: Commitment['kind'] = req.kind === 'haul' || req.kind === 'goods' || toSite ? 'haul' : 'deliver';
           addCommitment(world, B, req, { kind: kindC, item, amount: resp.n, siteId: req.siteId, deadline: world.tick + (kindC === 'haul' ? PROMISE_TTL + 600 : PROMISE_TTL), destKind: kindC === 'haul' ? 'site' : 'person', destId: kindC === 'haul' ? req.siteId : A.id });
@@ -1104,6 +1118,13 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addLog(world, B, 'social', `Promised ${A.name} to mend their roof.`);
           addLog(world, A, 'social', `${B.name} promised to mend our roof.`);
           addEvent(world, 'social', `${B.name} promised to mend ${A.name}’s roof.`, [A.id, B.id], A.x, A.y);
+        } else if (req.kind === 'watch' || req.kind === 'fire') {
+          const what = req.kind === 'watch' ? `keep an eye on ${personOf(world, req.destId ?? 0)?.name ?? 'the children'}` : 'keep the fire going';
+          req.note = `${B.name} will ${what}`;
+          bubble(world, B, req.kind === 'watch' ? 'Of course. Rest; I’ll keep an eye on them.' : 'Leave the fire to me.', 'say', 60);
+          addLog(world, B, 'social', `Promised ${A.name} to ${what}.`);
+          addLog(world, A, 'social', `${B.name} promised to ${what} while I am laid up.`);
+          addEvent(world, 'social', `${B.name} promised to ${what} for ${A.name}, who is laid up.`, [A.id, B.id], A.x, A.y);
         } else {
           bubble(world, B, D.saying(D.RESP_PROMISE_ITEM, B.id, A.id, world.tick >> 5, { what: item ?? 'it' }), 'say', 64);
           addLog(world, B, 'social', `Promised ${A.name} ${resp.n} ${item}.`);
@@ -1119,6 +1140,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         else if (resp.reason === 'making') bubble(world, B, 'I have some, but it is for something I am making.', 'say', 56);
         else bubble(world, B, D.saying(lines, B.id, A.id, world.tick >> 5), 'say', 56);
         settle(world, req, 'declined', resp.reason.replace('_', ' '));
+        if (req.kind === 'watch' || req.kind === 'fire') onDutyDeclined(world, A, B, req.kind);
         const sev = req.kind === 'food' ? clamp((62 - A.needs.hunger) / 62, 0, 1) : req.kind === 'water' ? clamp((66 - A.needs.thirst) / 66, 0, 1) : 0.3;
         if (resp.reason === 'unwilling' || resp.reason === 'disliked') {
           // a refusal is not a broken promise: it costs a little warmth, in proportion to how much was at stake

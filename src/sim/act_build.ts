@@ -4,6 +4,7 @@ import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REP
 import { buildingLabel, completeSite, createSite } from './buildings';
 import { notePractice, onSharedWork } from './apprentice';
 import { riskOfHarm } from './life';
+import { onFireFed } from './responsibilities';
 import { addItem, claimSlot, consume, invRoom, ledgerCreate } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { creditMade, creditRepair } from './intent';
@@ -363,6 +364,7 @@ registerHandler('fuel_fire', {
     const f = world.byId.get(a.targetId);
     if (a.cycle > 0 && f && f.ent === 'building') {
       addLog(world, p, 'work', `Fed the fire with ${a.cycle} log${a.cycle > 1 ? 's' : ''}.`);
+      onFireFed(world, p, f.id);
       if (a.data.wasOut) addEvent(world, 'survival', `${p.name} relit the fire.`, [p.id], f.x, f.y);
     }
   },

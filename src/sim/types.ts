@@ -960,7 +960,7 @@ export interface Household {
 export type Entity = Person | Source | Building | Site | Plot | Pile | Grave | Animal | Cart;
 
 // ───────────────────────────── social ─────────────────────────────
-export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work';
+export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work' | 'watch' | 'fire';
 /**
  * `partial`: it was answered, something real was handed over, and it was less than was asked for. It is not `fulfilled` (the ask was
  * not met) and not `failed` (something did arrive), and it leaves nobody owing the difference: a helper who gives what they can has

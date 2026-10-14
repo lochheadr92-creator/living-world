@@ -1,4 +1,5 @@
 import { onLookedInOnBereaved } from './lifechanges';
+import { watchTick } from './responsibilities';
 import { faceToward, newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { DAY, workRules } from './constants';
@@ -215,6 +216,8 @@ registerHandler('visit', {
     const t = personById(world, a.targetId);
     if (!t) return 'fail:they are no longer around';
     faceToward(p, t.x, t.y);
+    // a promised watch over a child (responsibilities.ts; rich only): stay, see to them, keep the promise
+    if (a.data.watch) return watchTick(world, p, a, t);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
     // come to see the bereaved: being there is the visit (rich only: the concern is never raised elsewhere)

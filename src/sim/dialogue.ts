@@ -97,6 +97,8 @@ export function requestLine(kind: string, a: number, b: number, vars: Record<str
     info: ['Do you know where I can find {thing}?', 'Have you seen any {thing} around?'],
     trade: ['I’ll swap you {offer} for {want}?', 'Trade {offer} for {want}?'],
     care: ['I’m hungry!', 'Can I have something to eat?', 'Please, I’m so hungry.'],
+    watch: ['Could you keep an eye on {child} today? I’m in no state to.', 'Would you watch {child} for me? I can’t manage it.'],
+    fire: ['Could you keep the fire going? I can’t manage it today.', 'Would you see to the fire for me? I’m laid up.'],
   };
   return saying(lists[kind] ?? ['Could you help me?'], a, b, 17, vars);
 }
