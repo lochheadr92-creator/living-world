@@ -600,9 +600,11 @@ What it holds, as recorded: `people` 101.33 ± 1.24, `deaths` 0.50 ± 0.78, `wor
 `meanCondition` 66.31 ± 4.12. Against the plans ensemble's rich control at 15 days (`tools` about 184), the 12-day figure sits
 where it should.
 
-Nine of those fifteen are gated, plus the floor of 50 people a seed — the same nine as for authored worlds. Comparing the
-recording run against its own baseline passes all ten, which proves the file is readable and the comparison path runs, and
-nothing more: it is the same 24 seeds on both sides.
+Eleven of those fifteen are now gated, plus the floor of 50 people a seed: the nine the authored world is held to, and `tools`
+and `meanCondition`, which are what the plans are for. The authored baseline (`docs/gates.json`) predates both and has no band
+for them, so a check against it prints `skip` for the two and gates the nine until that file is re-recorded. Comparing the
+recording run against its own baseline passes, which proves the file is readable and the comparison path runs, and nothing more:
+it is the same 24 seeds on both sides.
 
 Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back only `<out>\report.txt`, never the progress lines.
 
@@ -613,11 +615,33 @@ Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back on
   fares differently. The 24-seed ensemble above now answers that separately.
 - About half of the tool projects end at their two-day deadline. The reasons are specific (`still short 2 stone`; `had the makings
   but never sat down to it`), and no tuning was done to raise the completion rate: the nudge stays at +14 by design.
-- `tools` and `meanCondition` are now recorded in `docs/gates-rich.json`, but they are still **not** gated, and nor are
-  `firstYardDay`, `firstHallDay`, `meanMood` or `lowMood`: `scripts/gates.ts` compares the same nine metrics it always did, so a
-  change that cut the village's tools by two thirds would pass every gate. The plans ensemble above had to measure them by hand
-  for that reason.
+- `tools` and `meanCondition` are gated against `docs/gates-rich.json` now (they were recorded but not gated when the plans
+  ensemble ran, which is why it had to measure them by hand). `firstYardDay`, `firstHallDay`, `meanMood`, `lowMood` and the four
+  project tallies below are recorded and not gated.
 - The two-seed lab smoke run (2 days, 2 seeds, `normal`) exists only to prove the branch and the metrics work end to end. Its
   directions (fewer tools and lower condition without plans) are inside the noise and were not evidence; the 24-seed ensemble above
   has since found both directions to be real, which vindicates nothing about the smoke run - two seeds would have read the same way
   had the truth been the opposite.
+
+## Stage D1 attribution: what the ask contributes on top of planning (`rich-no-ask`, not yet run)
+
+Stage C's counterfactual removes planning and the asks that ride on it together, so nothing measured so far separates the two.
+The lab now has a branch that removes only the ask: `rich-no-ask` keeps every plan, every step and every ending, and every other
+kind of request, and takes away the one place a project's shortfall becomes an ask (`intent.ts setProjectAsks`, read in
+`options_social.ts`). `tests/lab_no_ask.test.ts` holds it to exactly that: the branch is the control's own world until the tick
+on which the control's asker sets off, and has parted by the tick the request is made.
+
+The lab also tallies, tick by tick, what became of the projects in each arm (the end state cannot say: ended plans and answered
+requests are trimmed from the records): `projectsAdopted`, `projectsDone`, `projectAsks`, `askUnitsDelivered`. None is gated.
+
+The run, on the 24-core machine, about 25 minutes (24 seeds × 4 arms × 12 days at about 30 CPU-seconds a day):
+
+```
+node scripts/lab.mjs --out noask_out --seeds 24 --fork 0 --days 12 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-ask
+```
+
+Read `rich-no-ask` against the mean of the control and the two nudges, never the control alone. What would count as a finding, decided
+before the run: `projectsDone` or `tools` moving by more than the nudge spread with an interval that excludes zero, in either
+direction. A null result is a result: the chain is proven end to end by the contract tests whether or not a village with it ends
+up with more tools; nothing about the ask's frequency is to be tuned to make the ensemble come out positive. Paste back only
+`noask_out\report.txt`.

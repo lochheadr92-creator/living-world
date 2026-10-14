@@ -14,7 +14,8 @@
 //
 // A metric passes when the run's mean lies within 3 standard errors of the recorded mean, the standard error combining the spread of
 // the recorded seeds and of this run's seeds (with a floor so that near-constant counts are not held to an impossible band).
-// Every seed must also still have a living population above `minPeople`.
+// Every seed must also still have a living population above `minPeople`. A gated metric the baseline never recorded is skipped
+// and said so, never silently passed.
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { METRICS } from './lab/lab';
@@ -38,7 +39,9 @@ if (record && existsSync(FILE) && !force) {
   console.log(`${FILE} already exists. Recording would replace a baseline other runs are checked against; pass --force if that is what you mean.`);
   process.exit(1);
 }
-const GATED: Metric[] = ['people', 'deaths', 'workplaces', 'solidHomes', 'buildings', 'plots', 'homeless', 'belowCritical', 'meanHunger'];
+// `tools` and `meanCondition` are what private plans are for; a rule change that quietly halved the village's tools must not pass.
+// A baseline recorded before they existed (docs/gates.json, the authored one) has no band for them: they are then skipped, loudly.
+const GATED: Metric[] = ['people', 'deaths', 'workplaces', 'solidHomes', 'buildings', 'plots', 'homeless', 'belowCritical', 'meanHunger', 'tools', 'meanCondition'];
 const SD_FLOOR = 0.5;
 const MIN_PEOPLE = 50;
 
@@ -100,6 +103,10 @@ if (differs.length) {
 let failed = 0;
 console.log(`gates: ${rows.length} seeds (${dynamics}, ${header.profile}, from day ${header.fork}, ${header.days} days, branch “${spec}”) against ${base.n} recorded in ${FILE}`);
 for (const m of GATED) {
+  if (!base.metrics[m] || !now[m]) {
+    console.log(`  skip  ${m.padEnd(14)} ${!base.metrics[m] ? `not in ${FILE}: re-record the baseline to gate it` : 'not in this run'}`);
+    continue;
+  }
   const se = Math.sqrt(Math.max(SD_FLOOR, base.metrics[m].sd) ** 2 / base.n + Math.max(SD_FLOOR, now[m].sd) ** 2 / rows.length);
   const lo = base.metrics[m].mean - 3 * se;
   const hi = base.metrics[m].mean + 3 * se;
