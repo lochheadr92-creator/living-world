@@ -445,6 +445,16 @@ export interface Injury {
   how: string;
 }
 
+/** an informal crew (crews.ts; rich worlds only): a few people who like each other and count as a group */
+export interface Crew {
+  id: number;
+  name: string;
+  members: number[];
+  since: number;
+  /** when the group last formed or grew */
+  together: number;
+}
+
 /** a tradition (traditions.ts; rich worlds only): a gathering the community holds each year on a day, since a holding that many came to */
 export interface Tradition {
   id: number;
@@ -1205,6 +1215,8 @@ export interface World {
   occasionState?: { harvestUnits: number; lastHarvestFeastDay: number; lastMarketDay: number };
   /** the community's traditions (traditions.ts; rich only, never created in an authored world) */
   traditions?: Tradition[];
+  /** informal crews (crews.ts; rich only, never created in an authored world) */
+  crews?: Crew[];
   /**
    * The settlement's record, kept for good (rich only; never created in an authored world): the events worth remembering after
    * the feed has forgotten them (events.ts chronicleWorthy). Capped at CHRONICLE_MAX, oldest dropped first.

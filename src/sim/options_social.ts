@@ -4,6 +4,7 @@ import { reputationOf } from './reputation';
 import { favourOwedBy } from './misdeeds';
 import { aloneOptions } from './temperament';
 import { companyPull } from './lifechanges';
+import { crewMates } from './crews';
 import { BUILD_DEF } from './constants';
 import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
@@ -114,6 +115,7 @@ function optChat(ctx: Ctx): void {
     if (rep) sc.add(rep > 0 ? 'has a good name' : 'has a bad name', 3 * rep);
     const pull = companyPull(ctx.world, p, c.q);
     if (pull) sc.add('someone to lean on', pull);
+    if (crewMates(ctx.world, p, c.q)) sc.add('one of my crew', 3);
     sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)));
     if (sc.total > 6) scored.push({ c, sc });
   }

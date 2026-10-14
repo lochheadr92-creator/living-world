@@ -536,7 +536,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       }
 
       if (traitSec.isOpen()) {
-        setText(traitSummary, (v.traitSummary ? cap(v.traitSummary) + '.' : '') + (v.goal ? ` ${cap(v.goal)}.` : '') + (v.lifeEvent ? ` ${cap(v.lifeEvent)}.` : ''));
+        setText(traitSummary, (v.traitSummary ? cap(v.traitSummary) + '.' : '') + (v.goal ? ` ${cap(v.goal)}.` : '') + (v.lifeEvent ? ` ${cap(v.lifeEvent)}.` : '') + (v.crew ? ` ${cap(v.crew)}.` : ''));
         traitList.sync(v.traits, (t) => t.key);
         skillList.sync(v.skills, (s) => s.key);
         setText(tradeLine, v.trade ? `Their trade: ${v.trade}.` : '');
