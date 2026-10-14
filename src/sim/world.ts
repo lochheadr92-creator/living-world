@@ -7,6 +7,7 @@ import { illnessTick } from './illness';
 import { apprenticeTick } from './apprentice';
 import { lifeTickRich } from './life';
 import { crowdTick } from './temperament';
+import { traditionsTick } from './traditions';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -61,6 +62,7 @@ export function stepWorld(world: World): void {
   updateEnvironment(world);
   updateHardship(world);
   occasionsTick(world);
+  traditionsTick(world);
   updateSources(world);
   updatePlots(world);
   updateBuildings(world);
@@ -321,6 +323,7 @@ export function hashWorld(world: World): string {
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in
+    for (const t of world.traditions ?? []) push(`V${t.id}:${t.kind},${t.status},${t.held},${t.skipped}`);
     for (const o of world.occasions ?? []) if (o.status !== 'done') push(`G${o.id}:${o.kind},${o.status},${o.attended.length}`);
     for (const p of world.persons) {
       const pay = p.payoff ?? {};

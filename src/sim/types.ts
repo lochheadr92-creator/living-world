@@ -445,6 +445,22 @@ export interface Injury {
   how: string;
 }
 
+/** a tradition (traditions.ts; rich worlds only): a gathering the community holds each year on a day, since a holding that many came to */
+export interface Tradition {
+  id: number;
+  kind: 'harvest' | 'remembrance' | 'midwinter';
+  name: string;
+  since: number;
+  dayOfYear: number;
+  /** the day (tick / DAY) it was last called, how many times it has been held, how many times running nobody came */
+  lastHeld: number;
+  held: number;
+  skipped: number;
+  /** the dead remembered, for a remembrance (0 otherwise) */
+  about: number;
+  status: 'kept' | 'lapsed';
+}
+
 /** a change in life that colours things for a while (lifechanges.ts; rich worlds only): what, about whom, since when, until when */
 export interface LifeEvent {
   kind: 'bereaved' | 'new_parent' | 'moved' | 'took_in';
@@ -1187,6 +1203,8 @@ export interface World {
   /** gatherings called in a rich world (occasions.ts); never created in an authored one, so its saves and fingerprints are untouched */
   occasions?: Occasion[];
   occasionState?: { harvestUnits: number; lastHarvestFeastDay: number; lastMarketDay: number };
+  /** the community's traditions (traditions.ts; rich only, never created in an authored world) */
+  traditions?: Tradition[];
   /**
    * The settlement's record, kept for good (rich only; never created in an authored world): the events worth remembering after
    * the feed has forgotten them (events.ts chronicleWorthy). Capped at CHRONICLE_MAX, oldest dropped first.

@@ -11,6 +11,7 @@ import { addLog } from './events';
 import { isRich, think } from './mood';
 import { adjustRel } from './relations';
 import { hashUnit } from './rng';
+import { pickStory } from './traditions';
 import type { Person, Rumour, RumourKind, World } from './types';
 
 /** the most stories one person keeps; the oldest go first */
@@ -84,7 +85,16 @@ export function shareRumour(world: World, S: Person, L: Person): boolean {
       best = r;
     }
   }
-  if (!best) return false;
+  if (!best) {
+    // nothing fresh of their own: now and then, something the settlement remembers (traditions.ts pickStory)
+    if (hashUnit(S.id, L.id, world.tick >> 4) > 0.15) return false;
+    const story = pickStory(world, S.id, L.id);
+    if (!story || theirs.some((x) => x.kind === 'news' && x.tick === story.tick && x.about === story.about)) return false;
+    const r: Rumour = { about: story.about, kind: 'news', tick: story.tick, from: S.id, origin: S.id, hops: 1, weight: 0.5, text: story.text };
+    if (!keep(world, L, r)) return false;
+    addLog(world, L, 'info', `${S.name} told me a story: ${story.text}.`);
+    return true;
+  }
   const trust = L.relations[S.id]?.trust ?? 10;
   const weight = Math.round(best.weight * Math.max(0.35, Math.min(1, 0.55 + trust / 100)) * 100) / 100;
   const copy: Rumour = { ...best, from: S.id, hops: best.hops + 1, weight };

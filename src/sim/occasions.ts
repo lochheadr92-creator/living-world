@@ -24,6 +24,7 @@ import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import type { Building, FoodKind, ItemKind, Occasion, OccasionKind, Person, World } from './types';
 import { hyp } from './util';
+import { noteOccasionOver } from './traditions';
 
 /** how long an occasion stays open once it has opened */
 export const OCCASION_OPEN = 600;
@@ -152,6 +153,7 @@ export function occasionsTick(world: World): void {
       o.status = 'done';
       o.end = o.attended.length ? `${o.attended.length} came` : 'nobody came';
       addEvent(world, 'social', `The ${KIND_LABEL[o.kind]} at ${o.placeName} is over: ${o.end}.`, o.about, o.x, o.y);
+      noteOccasionOver(world, o);
     }
   }
   // the record keeps the last few, so the card and the chronicle can say what was held
