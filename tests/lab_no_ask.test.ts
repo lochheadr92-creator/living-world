@@ -2,7 +2,7 @@
 // nothing else: the plans are still taken on, the other kinds of request are still made, and the world is the control's own until
 // the tick on which the control's first project ask is made. An authored world, which asks for nothing of the kind, is untouched.
 import { describe, expect, it } from 'vitest';
-import { parseIntervention } from '../scripts/lab/lab';
+import { parseIntervention, runLab } from '../scripts/lab/lab';
 import { DAY } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
 import { projectAsksOn } from '../src/sim/intent';
@@ -10,6 +10,7 @@ import { settingsForProfile } from '../src/sim/profiles';
 import { hashWorld, stepWorld } from '../src/sim/world';
 
 const SEED = 'meadow';
+const DAYS = 2;
 
 interface Trace {
   /** the state hash after every tick */
@@ -64,8 +65,8 @@ function trace(dynamics: 'authored' | 'rich', asks: boolean, days: number): Trac
 }
 
 describe('the rich-no-ask branch removes the project ask and nothing else', () => {
-  const control = trace('rich', true, 2);
-  const noAsk = trace('rich', false, 2);
+  const control = trace('rich', true, DAYS);
+  const noAsk = trace('rich', false, DAYS);
 
   it('the control asks for project material, the branch never does', () => {
     expect(control.planAsks).toBeGreaterThan(0);
@@ -96,6 +97,19 @@ describe('the rich-no-ask branch removes the project ask and nothing else', () =
 
   it('the switch is back on after the branch', () => {
     expect(projectAsksOn()).toBe(true);
+  });
+
+  it('the lab\'s project tallies agree with this independent count, and the branch\'s asks and deliveries are zero', () => {
+    const w = createWorld(settingsForProfile('normal', SEED, { immigration: false, dynamics: 'rich' }));
+    const [ctl, branch] = runLab(w, 0, DAYS, ['rich-no-ask'], 120);
+    expect(ctl.outcome.projectAsks).toBe(control.planAsks);
+    expect(ctl.outcome.projectsAdopted).toBe(control.projects);
+    expect(ctl.outcome.projectsDone).toBeGreaterThan(0);
+    expect(ctl.outcome.projectsDone).toBeLessThanOrEqual(ctl.outcome.projectsAdopted);
+    expect(branch.outcome.projectAsks).toBe(0);
+    expect(branch.outcome.askUnitsDelivered).toBe(0);
+    expect(branch.outcome.projectsAdopted).toBe(noAsk.projects);
+    expect(branch.divergedAfterTicks).not.toBeNull();
   });
 
   it('an authored world, which makes no such ask, is untouched by the switch', () => {

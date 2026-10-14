@@ -195,12 +195,62 @@ export const METRICS = [
   // recorded baseline without them still works; they are here so the ensemble run can see whether planning changes either.
   'tools',
   'meanCondition',
+  // what Stage D1 is for, counted over the whole branch rather than read off the end state (an ended plan and an answered request
+  // are trimmed from the records in time): tool and repair plans taken on and finished, asks made for a project's material, and the
+  // units that really arrived in answer to them. Not gated either.
+  'projectsAdopted',
+  'projectsDone',
+  'projectAsks',
+  'askUnitsDelivered',
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Outcome = Record<Metric, number>;
 
+/**
+ * The projects of a branch, tallied tick by tick, because the end state does not keep them: an ended plan is trimmed from a person's
+ * record once enough have ended, and an answered request from the world's once enough have been made. `tick` is called after every
+ * step; a plan is counted once, when first seen, and again when first seen ended; a request that names a plan is counted once, and
+ * its `delivered` re-read every tick so the sum holds what had arrived when it was last on the record. (A request trimmed on the
+ * very tick its last unit arrived is counted at what was last seen: a bounded undercount, never an overcount.)
+ */
+export class ProjectTally {
+  private plans = new Map<string, boolean>();
+  private delivered = new Map<number, number>();
+  adopted = 0;
+  done = 0;
+  asks = 0;
+  tick(w: World): void {
+    for (const p of w.persons) {
+      if (!p.intentions.length) continue;
+      for (const i of p.intentions) {
+        if (i.kind === 'night') continue;
+        const k = p.id + ':' + i.id;
+        const ended = this.plans.get(k);
+        if (ended === undefined) {
+          this.adopted++;
+          this.plans.set(k, i.status !== 'active');
+          if (i.status === 'done') this.done++;
+        } else if (!ended && i.status !== 'active') {
+          this.plans.set(k, true);
+          if (i.status === 'done') this.done++;
+        }
+      }
+    }
+    for (const r of w.requests) {
+      if (r.planId === undefined) continue;
+      if (!this.delivered.has(r.id)) this.asks++;
+      this.delivered.set(r.id, r.delivered ?? 0);
+    }
+  }
+  get units(): number {
+    let n = 0;
+    for (const v of this.delivered.values()) n += v;
+    return n;
+  }
+}
+
 /** What a branch ends with. `from` is the tick of the fork: deaths are those since then, first-build days are counted from the fork's day 0. */
-export function outcomeOf(w: World, from: number, endTick: number): { outcome: Outcome; milestones: Record<string, number> } {
+export function outcomeOf(w: World, from: number, endTick: number, projects = new ProjectTally()): { outcome: Outcome; milestones: Record<string, number> } {
   const count = (types: string[]) => w.buildings.filter((b) => types.includes(b.type)).length;
   const alive = w.persons.filter((p) => p.alive);
   const homeIds = new Set(w.buildings.map((b) => b.id));
@@ -248,6 +298,10 @@ export function outcomeOf(w: World, from: number, endTick: number): { outcome: O
       lowMood: low,
       tools,
       meanCondition: Math.round((cond / Math.max(1, w.buildings.length)) * 10) / 10,
+      projectsAdopted: projects.adopted,
+      projectsDone: projects.done,
+      projectAsks: projects.asks,
+      askUnitsDelivered: projects.units,
     },
     milestones,
   };
@@ -288,8 +342,10 @@ export function runBranch(
     const popByDay: number[] = [];
     let diverged: number | null = null;
     const end = from + days * DAY;
+    const projects = new ProjectTally();
     for (let i = 1; w.tick < end; i++) {
       stepWorld(w);
+      projects.tick(w);
       if (i % sampleEvery === 0) {
         const h = hashWorld(w);
         hashes.push(h);
@@ -297,7 +353,7 @@ export function runBranch(
       }
       if (i % DAY === 0) popByDay.push(w.persons.filter((p) => p.alive).length);
     }
-    const { outcome, milestones } = outcomeOf(w, from, end);
+    const { outcome, milestones } = outcomeOf(w, from, end, projects);
     return {
       spec: iv.spec,
       summary: iv.summary,

@@ -57,7 +57,9 @@ if (!rows.length) {
   process.exit(1);
 }
 const now = {} as Record<Metric, { mean: number; sd: number }>;
-for (const m of METRICS) {
+// a run made before a metric existed has no value for it; it is neither recorded nor gated
+const metrics = METRICS.filter((m) => rows.every((r) => typeof r.outcome[m] === 'number'));
+for (const m of metrics) {
   const v = rows.map((r) => r.outcome[m]);
   now[m] = { mean: Math.round(mean(v) * 100) / 100, sd: Math.round(sd(v) * 100) / 100 };
 }
