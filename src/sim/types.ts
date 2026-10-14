@@ -414,6 +414,25 @@ export interface Payoff {
   r: number;
 }
 
+/** a story one person holds about another (reputation.ts; rich worlds only): what, about whom, who told it, who saw it, how old */
+export type RumourKind = 'generous' | 'reliable' | 'quarrelsome' | 'unreliable' | 'thief' | 'news';
+export interface Rumour {
+  about: number;
+  kind: RumourKind;
+  /** when it happened */
+  tick: number;
+  /** who told me (0: I saw it myself) */
+  from: number;
+  /** who saw it first */
+  origin: number;
+  /** how many mouths it has passed through */
+  hops: number;
+  /** how far it is believed, 0..1: hearsay from someone little trusted counts for less */
+  weight: number;
+  /** the story, in words that fit after "told me" */
+  text: string;
+}
+
 /** a gathering at a place and a time (occasions.ts; rich worlds only) */
 export type OccasionKind = 'funeral' | 'wedding' | 'feast' | 'harvest' | 'market';
 export interface Occasion {
@@ -486,6 +505,8 @@ export interface Person {
    * Learned from their own finished activities and nothing else (learning.ts); saved with the person.
    */
   payoff: Partial<Record<SkillKey, Payoff>>;
+  /** what they have seen and been told of other people (reputation.ts; rich only, never created in an authored world) */
+  heard?: Rumour[];
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;

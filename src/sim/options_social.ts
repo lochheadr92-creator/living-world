@@ -1,4 +1,5 @@
 import { newActivity } from './activities';
+import { reputationOf } from './reputation';
 import { BUILD_DEF } from './constants';
 import { pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
@@ -103,6 +104,8 @@ function optChat(ctx: Ctx): void {
       sc.add('drawn to each other', (ctx.night ? 9 : 4.5) + Math.max(0, c.aff) * 0.05);
     }
     sc.add('close by', sd > 0 ? Math.max(0, 6 - c.d) * 0.6 : 0);
+    const rep = reputationOf(ctx.world, p, c.q.id);
+    if (rep) sc.add(rep > 0 ? 'has a good name' : 'has a bad name', 3 * rep);
     sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)));
     if (sc.total > 6) scored.push({ c, sc });
   }

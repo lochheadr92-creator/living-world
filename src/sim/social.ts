@@ -1,6 +1,7 @@
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { noteWedding } from './occasions';
+import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
 import {
   canInterruptForTalk,
   endActivity,
@@ -180,9 +181,11 @@ export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: 
     if (hyp(w.x - x, w.y - y) > 7.5) continue;
     if (kind === 'gift' || kind === 'help') {
       adjustRel(w, actor.id, world.tick, { aff: 1.3, trust: 0.9, fam: 0.3, note: `saw ${actor.name} help ${other.name}` });
+      noteDeed(world, w, actor, 'generous', `${actor.name} helped ${other.name}`);
     } else {
       adjustRel(w, actor.id, world.tick, { aff: -1.1, trust: -1.1, note: `saw ${actor.name} quarrel` });
       adjustRel(w, other.id, world.tick, { aff: -0.6, note: `saw ${other.name} quarrel` });
+      noteDeed(world, w, actor, 'quarrelsome', `${actor.name} picked a quarrel with ${other.name}`);
     }
   }
 }
@@ -195,6 +198,7 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   const txt = describeItems(items);
   adjustRel(receiver, giver.id, world.tick, { aff: 2.5 + 7 * sev, trust: 2 + 4 * sev, fam: 1, debt: -0.5, note: `${giver.name} gave me ${txt}` });
   adjustRel(giver, receiver.id, world.tick, { aff: 1 + 1.5 * sev, fam: 0.5, debt: 0.5, note: `I gave ${receiver.name} ${txt}` });
+  if (giver.hhId !== receiver.hhId) noteDeed(world, receiver, giver, 'generous', `${giver.name} gave ${receiver.name} ${txt}`);
   // a gift eases a quarrel in proportion to what it meant, and may end it
   endGrievanceOnGift(world, giver, receiver, sev);
   giver.stats.given += 1;
@@ -290,6 +294,8 @@ function willingness(world: World, B: Person, A: Person, severity: number): numb
   if (B.hhId === A.hhId) w += 0.15;
   if (aff < -10) w += aff / 100;
   if (rel && rel.avoidUntil > world.tick) w -= 0.6;
+  // what they have heard of the asker (rich only; 0 otherwise): a good name opens hands, a bad one closes them
+  w += 0.25 * reputationOf(world, B, A.id);
   w -= 0.45 * (personalDriveMax(B) / 100);
   w += (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.16;
   return w;
@@ -511,6 +517,7 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
     adjustRel(B, A.id, world.tick, { aff: 1, trust: 1 });
+    noteDeed(world, A, B, 'reliable', `${B.name} kept a promise to ${A.name}`);
     bubble(world, A, D.saying(D.THANKS, A.id, B.id, world.tick >> 4, { n: B.name }), 'happy');
     addEvent(world, 'social', `${B.name} kept a promise to ${A.name}.`, [A.id, B.id], A.x, A.y);
   }
@@ -610,6 +617,7 @@ export function checkCommitments(world: World, p: Person): void {
       if (req) settle(world, req, 'broken', 'not delivered in time');
       adjustRel(A, p.id, world.tick, { aff: -5, trust: -12, note: `${p.name} did not keep a promise` });
       adjustRel(p, A.id, world.tick, { trust: -2, aff: -1 });
+      noteDeed(world, A, p, 'unreliable', `${p.name} broke a promise to ${A.name}`);
       openGrievance(world, A, p, 'broken_promise', `${p.name} did not do what they promised`, 38);
       addLog(world, p, 'social', `Failed to keep my promise to ${A.name}.`);
       addLog(world, A, 'social', `${p.name} never came through with what they promised.`);
@@ -1288,6 +1296,8 @@ export function flushDelayedBubbles(world: World): void {
 // ── phase 3: news travels by word of mouth ──
 function phaseNews(world: World, S: Person, L: Person): void {
   shareConcerns(world, S, L);
+  // one story about a third person, when there is one worth telling (rich only; never in an authored world)
+  shareRumour(world, S, L);
   const news = pickNews(world, S, L, 2);
   let shown = false;
   let learned = 0;
@@ -1343,6 +1353,7 @@ function bindPartners(world: World, A: Person, B: Person): void {
   A.partnerId = B.id;
   B.partnerId = A.id;
   noteWedding(world, A, B);
+  noteDeedNear(world, A, 'news', `${A.name} and ${B.name} are now partners`, A.x, A.y, 12, [B.id]);
   const ra = relOf(A, B.id);
   const rb = relOf(B, A.id);
   ra.kin = 'partner';

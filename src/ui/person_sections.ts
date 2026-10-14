@@ -1,7 +1,7 @@
 // The collapsible sections under the "What are they up to?" card in the person view: the social contract (conversation, shared
 // meal, promises, quarrels, worries: person_social.ts), opportunities, relationships, requests, recent experiences, what they
 // know, family, traits and skills, and (debug only) the last decision. A section's body is only filled in while it is open, so a closed section costs nothing.
-import type { OpportunityView, PersonView, RelationView, RequestView } from '../sim/inspect';
+import type { HeardView, OpportunityView, PersonView, RelationView, RequestView } from '../sim/inspect';
 import { cap, h, KeyedList, setBool, setHidden, setState, setText, setVar, setWidth, signed, toggle } from './dom';
 import { icon, setIcon } from './icons';
 import { makeBar, makeSection, type BarHandle, type SectionHandle } from './widgets';
@@ -359,7 +359,24 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const skillBox = h('div', { class: 'skills' });
   const payHead = h('div', { class: 'sub-h cap' }, 'What has paid them');
   const payBox = h('div', { class: 'skills' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox, payHead, payBox);
+  // what they have seen and been told of others (rich worlds only; the heading goes when there is nothing)
+  const heardHead = h('div', { class: 'sub-h cap' }, 'What they have heard of people');
+  const heardBox = h('div', { class: 'list heard' });
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox, payHead, payBox, heardHead, heardBox);
+  const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
+    heardBox,
+    () => {
+      const text = h('span', { class: 'thought-why' });
+      const via = h('span', { class: 'rel-recent' });
+      return { el: h('div', { class: 'thought' }, text, via), text, via };
+    },
+    (c, r) => {
+      setText(c.text, cap(r.text) + '.');
+      setText(c.via, `${r.via}, ${r.age === 0 ? 'today' : r.age === 1 ? 'yesterday' : `${r.age} days ago`}`);
+      c.el.classList.toggle('neg', r.good < 0);
+      c.el.classList.toggle('pos', r.good > 0);
+    },
+  );
   const traitList = new KeyedList<{ key: string; value: number }, { el: HTMLElement; dot: HTMLElement }>(
     traitBox,
     (t) => {
@@ -522,6 +539,8 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         skillList.sync(v.skills, (s) => s.key);
         setHidden(payHead, v.payoffs.length === 0);
         payList.sync(v.payoffs, (s) => s.key);
+        setHidden(heardHead, v.heard.length === 0);
+        heardList.sync(v.heard, (r) => `${r.about}:${r.text}`);
       }
 
       dbgSec.setVisible(game.debug);

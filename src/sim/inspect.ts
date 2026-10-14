@@ -6,6 +6,7 @@ import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './en
 import { householdOf } from './buildings';
 import { planHelp, planOfActivity } from './intent';
 import { describePay } from './learning';
+import { describeHeard } from './reputation';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -56,6 +57,16 @@ export interface OpportunityView {
   distance: number;
   x: number;
   y: number;
+}
+export interface HeardView {
+  about: number;
+  name: string;
+  text: string;
+  via: string;
+  /** days ago */
+  age: number;
+  /** above 0 to the person's credit, below against them, 0 for plain news */
+  good: number;
 }
 export interface RelationView {
   id: number;
@@ -115,6 +126,8 @@ export interface PersonView {
   skills: { key: string; value: number }[];
   /** what each kind of gathering has paid them, in their own experience (rich only; empty otherwise), best first */
   payoffs: { key: string; ratio: number; n: number }[];
+  /** what they have seen and been told of other people (rich only; empty otherwise), freshest first */
+  heard: HeardView[];
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -490,6 +503,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     traitSummary: traitSummary(p.traits),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
+    heard: describeHeard(world, p),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },
