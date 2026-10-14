@@ -623,7 +623,36 @@ Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back on
   has since found both directions to be real, which vindicates nothing about the smoke run - two seeds would have read the same way
   had the truth been the opposite.
 
-## Stage D1 attribution: what the ask contributes on top of planning (`rich-no-ask`, not yet run)
+## Stage D1 attribution, measured: the ask contributes nothing the village can feel (24 seeds, Large, rich, 12 days)
+
+DONE, on commit 0a6dcf9 (the gates commit, before Stage 3's learning existed, so nothing else is in the comparison). 24 seeds,
+Large, rich, forked at day 0, 12 days, `rich-no-ask` against the mean of the control and two nudges. The switch did what it says:
+`projectAsks` 143.4 → 0 and `askUnitsDelivered` 36.8 → 0, lower in 24 of 24 seeds. Everything else:
+
+| metric | reference | without the ask | diff | 95% interval | up/down | verdict |
+|---|---:|---:|---:|---|---|---|
+| tools | 162.2 | 173.6 | +11.3 | [+0.7, +22.0] | 16/8 | systematic, within the noise floor (±20.8) |
+| projectsDone | 165.0 | 174.2 | +9.2 | [0, +18.1] | 15/9 | not distinguishable from chance |
+| projectsAdopted | 398.2 | 396.8 | −1.4 | [−7.2, +4.4] | 10/14 | not distinguishable from chance |
+| solidHomes | 26.2 | 26.9 | +0.8 | [−0.7, +2.1] | 14/9 | not distinguishable from chance |
+| buildings | 84.0 | 84.8 | +0.8 | [−1.7, +3.1] | 14/10 | not distinguishable from chance |
+| people, deaths, homeless, belowCritical, meanHunger, mood, workplaces, condition, first yard/hall | | | ≈0 | | | not distinguishable from chance |
+
+**Reading.** Removing the ask changes nothing the village can feel: not survival, not building, not mood, not how many
+projects are taken on or finished. The one metric that leans is tools, and it leans the *other* way: a village that never asks ends
+with about 11 more tools in hand, 16 seeds up and 8 down, inside the nudge spread, so not a finding, but the direction is the
+opposite of "cooperation helps". The likely reason is in the asks themselves: 143 asks a village bring 37 units, a quarter of a
+unit each, because the honest answer in a village where everyone has their own plans is usually no (`committed`, `making`,
+`own_need`), and an ask costs the asker the walk and the wait while fetching the material would have cost less. The chain is
+correct; what it carries is not worth its time as the ask is currently made.
+
+**What this settles.** D1 stays accepted as a working, observable chain and is **not** accepted as a village-wide benefit; the
+condition set at acceptance has been met with a null result, and a null result stands. Nothing further should be built on the
+assumption that cooperation pays. If a cooperation stage goes on, the first change is to the ask, not to what rides on it: ask only
+when the answer is likely yes (a helper seen idle, or carrying a surplus by the asker's own belief), or ask before fetching is
+considered rather than after, then measure again with the same branch.
+
+## Stage D1 attribution: what the ask contributes on top of planning (`rich-no-ask`, as planned before the run)
 
 Stage C's counterfactual removes planning and the asks that ride on it together, so nothing measured so far separates the two.
 The lab now has a branch that removes only the ask: `rich-no-ask` keeps every plan, every step and every ending, and every other
