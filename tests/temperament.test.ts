@@ -18,7 +18,7 @@ describe('company and the reserved', () => {
     const r = world('rich');
     const p = adult(r);
     p.traits.sociability = 0.2;
-    const others = r.persons.filter((q) => q !== p).slice(0, 3);
+    const others = r.persons.filter((q) => q !== p).slice(0, 4);
     for (const q of others) {
       q.x = p.x + 1;
       q.y = p.y;

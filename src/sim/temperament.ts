@@ -25,7 +25,7 @@ const CROWD_MAX = 2400;
 /** from here a reserved person feels crowded */
 export const CROWDED_AT = 600;
 /** how far from everyone counts as alone, and how long the sitting lasts */
-const ALONE_DIST = 9;
+const ALONE_DIST = 6;
 const ALONE_TICKS = 220;
 
 
@@ -33,9 +33,10 @@ const ALONE_TICKS = 220;
 export function crowdTick(world: World, p: Person): void {
   if (!isRich(world) || (world.tick + p.id) % CROWD_EVERY !== 0 || !p.alive) return;
   let near = 0;
-  for (const s of p.seen) if (s.ent === 'person' && hyp(s.x - p.x, s.y - p.y) < 4.5) near++;
+  for (const s of p.seen) if (s.ent === 'person' && hyp(s.x - p.x, s.y - p.y) < 4) near++;
   const c = p.crowd ?? 0;
-  if (near >= 3 && p.pose !== 'sleep') p.crowd = Math.min(CROWD_MAX, c + CROWD_EVERY);
+  // a crowd is four or more close by while awake (three is a household at its own fire; a town's lanes are busier than a village's)
+  if (near >= 4 && p.pose !== 'sleep') p.crowd = Math.min(CROWD_MAX, c + CROWD_EVERY);
   else if (c > 0) p.crowd = Math.max(0, c - CROWD_EVERY * (p.activity?.kind === 'alone' ? 4 : 0.5));
   if (p.crowd === 0) delete p.crowd;
   if (isReserved(p) && (p.crowd ?? 0) >= CROWDED_AT) think(world, p, 'crowded', -(4 + 8 * ((RESERVED - p.traits.sociability) / RESERVED)), DAY / 2, 'has had too much company');
@@ -45,7 +46,7 @@ export function crowdTick(world: World, p: Person): void {
 function quietSpot(world: World, p: Person): { x: number; y: number } | null {
   for (let i = 0; i < 12; i++) {
     const ang = hashUnit(p.id, world.tick, i) * Math.PI * 2;
-    const r = ALONE_DIST + 2 + hashUnit(p.id, world.tick, i + 20) * 8;
+    const r = ALONE_DIST + 1 + hashUnit(p.id, world.tick, i + 20) * 12;
     const x = Math.floor(p.x + Math.cos(ang) * r);
     const y = Math.floor(p.y + Math.sin(ang) * r);
     if (!isWalkable(world, x, y)) continue;
