@@ -221,6 +221,44 @@ zero, and the kinds people settle on differing between seeds (read off the per-s
 learning no further from random choice than the nudges are from the control. A null result stands; nothing about the tilt is to be
 tuned to make the ensemble come out positive.
 
+## A town of a hundred: what killed it, and what did not (`scripts/famine.ts`)
+
+The `town` profile is a hundred people in ONE camp on the ordinary 80x80 map: the Large population with nowhere to spread, a density
+experiment rather than a bigger village. Under rich dynamics it died. 24 seeds, 12 days, no arrivals: **11.3 deaths of 100 on average**,
+and bimodally so - 12 seeds lost 3 or fewer, 8 lost 18 or more (gen-3 50, nov-9 45, fern 44, cedar 29). Four camps of 25 under the same
+stakes lose about half a person.
+
+`scripts/famine.ts` is the instrument: one headless run, nothing switched on or off, one line a day of food gathered, food spoiled, food
+eaten, food standing in stores and in packs, how many different people were critically hungry, the wood harvest, the trees standing, the
+baskets, the fires, and every death with what it was of. Read against the same run of `large` and of the ordinary village it says this:
+
+* **Per head, a town gathers and eats about what a village does in good weather.** Good days: 4.7 units of food gathered per person,
+  3.9 eaten, 0.65 spoiled - a surplus of about 5 units a day for a hundred people, which is nothing.
+* **The lean season is where they part.** Wild food comes back at a tenth of its pace for 3-6 days. The town's harvest falls to 2.0-2.5
+  per head, the four camps' to 2.6-2.9, and the town enters the lean season with 337 units of food (stores plus packs) where the four
+  camps have 466. The town is empty by the third lean day and then dies in a cascade: on seed `fern`, 80 of 100 people critically hungry
+  on day 11, and 23 deaths, 15 of them of hunger.
+* **The town spends MORE of its time gathering and brings back LESS**: 19-24% of all sampled activity against the four camps' 16-17%, for
+  a fifth less food. A hundred people share one camp's walking distance, so every bush is visited three and a half times as often and is
+  three and a half times as thin when they get there. That is the density itself, not a rule.
+* **Two rules, though, were simply wrong at that scale, and both have been fixed** (see `docs/SCALING.md`):
+  1. one workplace of each kind per settlement, which gave a hundred people one storehouse where four camps of 25 had four;
+  2. wolves scaled by people alone, which put eleven dens inside one village's walking distance (the Large profile's twelve dens are
+     spread over four times the land).
+  Measured with the instrument, before and after, 12 days each: gen-3 50 deaths -> 8, nov-9 45 -> 11, fern 44 -> 23, aspen 18 -> 11,
+  cedar 29 -> 2, meadow 1 -> 0; the mean over those six seeds falls from 31.2 to 9.2. On seed `meadow` the worst day goes from 16 people
+  critically hungry to 11, and nobody dies.
+* **A third candidate was tested and refuted.** A town has a quarter of the trees per head that a village or the Large profile has (8.4
+  against 28.7 and 35.2), because the forest is drawn over the map before any camp is placed and so is the one per-camp quantity that
+  never scaled. Scaling it by the crowding made everything far worse - gen-3 8 deaths -> 50, fern 23 -> 81 - because trees occupy the
+  ground the food clusters are placed on (food per head fell from 3.08 to 2.00 sources) and a denser forest blocks the way to water
+  (thirst deaths appeared, 12 on one seed). Wood is not what the town is short of; walkable ground with food on it is. The change was
+  reverted and is not in the branch.
+
+What remains is the density effect itself, which is what the profile exists to show. Closing the last of it would mean changing something
+that is not a mis-scaled rule - the spoilage multiplier (`SPOIL_STORE`, which eats the whole surplus of good days) or where a camp's food
+clusters are laid - both of which change every rich world, including the ensembles already measured.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures

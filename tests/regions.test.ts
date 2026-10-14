@@ -179,8 +179,26 @@ describe('town world: the Large population in one camp on the ordinary map', () 
     expect(within(w, c, 30, ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'])).toBeGreaterThanOrEqual(120);
     expect(within(w, c, 30, ['rock'])).toBeGreaterThanOrEqual(30);
     for (const d of ['clay_pit', 'outcrop', 'ore_vein'] as const) expect(within(w, c, 60, [d]), d).toBeGreaterThanOrEqual(3);
-    expect(w.animals.length).toBeGreaterThanOrEqual(9);
     expect(Math.min(...w.animals.map((a) => Math.hypot(a.denX - c.x, a.denY - c.y)))).toBeGreaterThanOrEqual(20);
+  });
+
+  it('gets the wolves its GROUND supports, not its people: three dens, as the ordinary map has always held', () => {
+    // Everything else a camp has scales with its people; wolves scale with its people AND with the land it has to itself, because
+    // eleven dens inside one village's walking distance is not a wilder country, it is a cage (the town lost people to it).
+    const large = createWorld(settingsForProfile('large', 'meadow'));
+    const perCamp = large.animals.length / 4;
+    const townArea = w.W * w.H;
+    const largeCampArea = (large.W * large.H) / 4;
+    expect(w.animals.length).toBeLessThanOrEqual(Math.round(perCamp * (townArea / largeCampArea)));
+    expect(w.animals.length).toBe(3);
+    // and the worlds with room to spare are exactly as they were
+    expect(large.animals.length).toBe(12);
+    expect(createWorld(defaultSettings('meadow')).animals.length).toBe(3);
+  });
+
+  it('may hold one of each workplace for every ordinary camp of its founders: four, where four camps of 25 have one each', () => {
+    expect(rulesOf(w).facilityAllowance).toBe(4);
+    expect(rulesOf(createWorld(settingsForProfile('large', 'meadow'))).facilityAllowance).toBe(1);
   });
 
   it('runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range', () => {

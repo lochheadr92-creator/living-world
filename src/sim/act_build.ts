@@ -255,11 +255,17 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
     return null;
   }
   if (isFacilityType(type) || type === 'storehouse') {
-    // one of each kind of workplace (a second quarry only at a different outcrop). With scaled rules, one per settlement: only a
-    // workplace within the settlement radius of where this one would stand counts.
+    // As many of each kind of workplace as the settlement is allowed, and no more (a second quarry only at a different outcrop).
+    // With scaled rules only what stands within the settlement radius of where this one would go counts, and the allowance is one
+    // for every ordinary camp's worth of founders: the ordinary world's allowance is 1, which is the rule it always had.
     const radius = at ? rules.facilityRadius : Infinity;
-    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
-    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
+    const allowed = at ? rules.facilityAllowance : 1;
+    const near = (x: number, y: number): boolean => radius === Infinity || within(radius, at!.x, at!.y, x, y);
+    let standing = 0;
+    let started = 0;
+    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && near(b.x + b.w / 2, b.y + b.h / 2)) standing++;
+    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && near(s.x + s.w / 2, s.y + s.h / 2)) started++;
+    if (standing + started >= allowed) return standing >= allowed ? `there is already a ${BUILD_DEF[type].label}` : `a ${BUILD_DEF[type].label} is already being built`;
     return null;
   }
   // homes and fires: one project at a time per household
