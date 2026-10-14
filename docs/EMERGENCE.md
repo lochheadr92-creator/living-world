@@ -221,6 +221,51 @@ zero, and the kinds people settle on differing between seeds (read off the per-s
 learning no further from random choice than the nudges are from the control. A null result stands; nothing about the tilt is to be
 tuned to make the ensemble come out positive.
 
+## Stage 3, second piece: a trade (built, rich only, measured on one seed)
+
+The first piece (`learning.ts`, "what has paid") asks *what has paid ME*, and the measured answer was the same for everybody: the
+whole village learns that one kind of gathering pays and goes and does it (`topKindShare` 0.66-0.7 on the town ensemble). That is
+learning without division of labour. A trade (`src/sim/trade.ts`) is the other half of the question - not *what pays* but *what
+pays me more than it pays the people around me*, which is comparative advantage.
+
+What a person uses to settle on one, and nothing else:
+
+* **their own skills, measured against their own average** across the eleven skills, so somebody able at everything does not claim
+  every trade: what counts is the thing they are comparatively best at;
+* **what they can see other people doing** - `SeenEntity.work`, filled in perception.ts for rich worlds only, which says what kind
+  of work a watcher can plainly see somebody is at (chopping at a tree is wood, standing at the kiln is the kiln, hoeing is
+  farming). A trade that every single person in sight is already at costs 45 points, which is about the whole spread of starting
+  skills, so crowding can genuinely move somebody off something they are better at;
+* **their own estimate of what that work has paid them** (`p.payoff`, the first piece), which is how a trade that turns out badly
+  is given up.
+
+It is reconsidered at most every half day and is sticky (a different trade has to look 6 points better before anybody changes). It
+tilts the matching work options by `TRADE_NUDGE` = 6 - the same bound as a private plan's step and the payoff estimate - applied
+where the ranking is made (`decision.ts`), never in an option's own utility, so hunger, thirst, cold and a wolf still win every
+time and the engine still generates and ranks everything. The person card says it in one line under *Traits & skills*, and the
+decision record names it ("woodcutting is my trade") when it was part of why.
+
+**Measured, one headless run, Large, seed meadow, rich, 12 days** (103 people alive):
+
+| | |
+|---|---|
+| people with a trade | 70 of 103 (68%) |
+| trades in use | baking 11, carpentry 9, building 8, handiwork 8, smithing 7, stonework 6, farming 6, the kiln 5, woodcutting 4, fishing 3, foraging 3 |
+| changes of trade | 18 |
+| why, in their own words | "quicker at it than at anything else" x33, "nobody else here does it" x21, "...was not paying" x16 |
+
+So a village of a hundred comes out with eleven trades rather than one, a fifth of them chosen *because nobody else there was
+doing it*, and a sixth of them given up because they stopped paying. An authored world has none of it (0 of 29 after 12 days), and
+`rich-no-trades` removes it and nothing else.
+
+Not yet measured: whether a village with trades is better off (`workplaces`, `tools`, `meanCondition`) or only more differentiated,
+and whether the trades a seed settles on differ between seeds. The ensemble is the test, and nothing about the tilt is to be tuned
+to make it come out positive:
+
+```
+node scripts/lab.mjs --out trade_out --seeds 24 --fork 0 --days 12 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-trades,rich-no-learning
+```
+
 ## A town of a hundred: what killed it, and what did not (`scripts/famine.ts`)
 
 The `town` profile is a hundred people in ONE camp on the ordinary 80x80 map: the Large population with nowhere to spread, a density

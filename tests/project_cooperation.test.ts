@@ -32,7 +32,7 @@ import type { Commitment, Intention, Person, Request, Source, World } from '../s
 import { settingsFor } from './helpers/util';
 import { runLive } from '../src/agent/run';
 import { chooser } from './helpers/inhabit';
-import { addPerson as stagePerson, done, stage } from './helpers/kit';
+import { addPerson as stagePerson, done, give, stage } from './helpers/kit';
 
 const ctxFor = (w: World, p: Person) => generateOptions(w, p, true);
 const planOf = (p: Person) => p.intentions.find((i) => i.status === 'active') ?? null;
@@ -64,6 +64,10 @@ function scene(seed: string, dynamics: 'rich' | 'authored' = 'rich') {
   ada.stats.gathered = 12;
   ada.skills.wood = 3;
   produce(w, ada.inv, carryCap(w, ada), 'wood', TOOL_RECIPE.axe.wood, 'test: given to Ada');
+  // Nobody here settles on a trade: this corner is the D1 chain (ask, answer, material, tool) and it predates trades, and a
+  // woodcutter who fills her pack with wood has no room for the stone she asked for - which is its own behaviour, held by
+  // tests/trade.test.ts, not this one. The switch is the ordinary "not now" cooldown the review reads (src/sim/trade.ts).
+  for (const q of [ada, ben]) q.cooldowns.trade = 1e12;
   produce(w, ben.inv, carryCap(w, ben), 'stone', 2, 'test: given to Ben');
   reviewIntentions(ctxFor(w, ada));
   const plan = planOf(ada)!;

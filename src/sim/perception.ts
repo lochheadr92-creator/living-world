@@ -3,6 +3,7 @@ import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, wate
 import { isRich } from './mood';
 import { stageOf } from './people';
 import { probe } from './probe';
+import { visibleWork } from './trade';
 import { distToFootprint, gridQuery, isWaterAccess } from './registry';
 import type { Animal, Building, ItemKind, Person, SeenEntity, World } from './types';
 
@@ -39,6 +40,7 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
   // Nothing else is added, and an authored world's `seen` is exactly the record it always was.
   const rich = isRich(world);
   const plenty: ItemKind[] | undefined = rich ? [] : undefined;
+  const work = rich ? visibleWork(world, e) : null;
   for (const k of CARRY_KEYS) {
     const n = e.inv[k] ?? 0;
     if (n > 0) carrying.push(k);
@@ -57,6 +59,7 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
     child: stageOf(world, e) === 'child',
     carrying,
     ...(plenty && plenty.length ? { plenty } : {}),
+    ...(work ? { work } : {}),
     asleep: e.pose === 'sleep',
     act: e.activity ? e.activity.kind : '',
     busyTalking: e.convId !== 0,

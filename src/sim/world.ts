@@ -270,6 +270,8 @@ export function hashWorld(world: World): string {
       const ks = Object.keys(pay) as (keyof typeof pay)[];
       if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
     }
+    // the trade somebody has settled on bears on what they choose, so it is in the fingerprint like a plan or an estimate
+    for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.key},${p.trade.since}`);
     for (const p of world.persons) if (p.alive && p.intentions.length) push(`N${p.id}:${p.intentions.map((i) => `${i.kind},${i.status},${i.stepKey ?? '-'},${i.setAside}`).join(';')}`);
     // What one person still owes another, and how much of it has really been handed over (Stage D1). The coarse count in the shared
     // part of the fingerprint (`p.commitments.length`) cannot tell an undelivered promise from a kept one, and that difference is

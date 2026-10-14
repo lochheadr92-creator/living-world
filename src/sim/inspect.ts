@@ -6,6 +6,7 @@ import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './en
 import { householdOf } from './buildings';
 import { planHelp, planOfActivity } from './intent';
 import { describePay } from './learning';
+import { describeTrade } from './trade';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -115,6 +116,8 @@ export interface PersonView {
   skills: { key: string; value: number }[];
   /** what each kind of gathering has paid them, in their own experience (rich only; empty otherwise), best first */
   payoffs: { key: string; ratio: number; n: number }[];
+  /** the trade they have settled on and why, in their own terms (rich only; '' for somebody with none) */
+  trade: string;
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -490,6 +493,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     traitSummary: traitSummary(p.traits),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
+    trade: describeTrade(p),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },

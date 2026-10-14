@@ -214,6 +214,8 @@ export function deserializeWorld(json: string): World {
     if (!Array.isArray(p.intentions)) p.intentions = [];
     // likewise a save made before anyone kept an estimate of what pays
     if (!p.payoff || typeof p.payoff !== 'object') p.payoff = {};
+    // and one from before anybody had a trade: nobody had one
+    if (p.trade === undefined) p.trade = null;
     w.byId.set(p.id, p);
   }
   for (const a of w.animals) w.byId.set(a.id, a);

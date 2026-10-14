@@ -183,6 +183,12 @@ export interface SeenEntity {
    * what is in it, and what tells apart "they have some" from "they have some to spare" when deciding whether to ask.
    */
   plenty?: ItemKind[];
+  /**
+   * What kind of work they are visibly at, as a watcher would name it: chopping at a tree is wood, standing at the kiln is the
+   * kiln, hoeing a field is farming (trade.ts visibleWork). Rich worlds only, and absent for anyone who is not working. It is
+   * `act` said in the terms a trade is in, and it is what lets somebody see which trades the people around them already have.
+   */
+  work?: SkillKey;
   asleep: boolean;
   /** what they are visibly doing */
   act: ActivityKind | '';
@@ -425,6 +431,19 @@ export interface Speech {
   kind: 'say' | 'ask' | 'warn' | 'angry' | 'happy' | 'think';
 }
 
+/**
+ * The one kind of work a person has settled on as theirs (trade.ts; rich worlds only, null in any other). It is one of the
+ * existing skills, chosen by comparative advantage from their own skills and what they have seen other people doing, and it
+ * tilts the matching work options by a bounded amount. It is not a job: nobody is assigned one and nobody is held to one.
+ */
+export interface Trade {
+  key: SkillKey;
+  /** the tick they took it up */
+  since: number;
+  /** why, in their own terms, at the moment they chose it */
+  why: string;
+}
+
 export interface Person {
   ent: 'person';
   id: number;
@@ -471,6 +490,11 @@ export interface Person {
    * Learned from their own finished activities and nothing else (learning.ts); saved with the person.
    */
   payoff: Partial<Record<SkillKey, Payoff>>;
+  /**
+   * The trade they have settled on, or null for somebody who has none (rich worlds only; always null in an authored world).
+   * Chosen, kept, changed and given up by the person themselves (trade.ts); saved with them, and in the fingerprint.
+   */
+  trade: Trade | null;
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;
