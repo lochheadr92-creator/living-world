@@ -197,6 +197,11 @@ export function attendOptions(ctx: Ctx): void {
     else if (o.kind === 'market') sc.add(foodCarried(p) > 8 ? 'food to spare and a market to take it to' : p.needs.hunger < 55 ? 'a market, and little in the pack' : 'market day', foodCarried(p) > 8 || p.needs.hunger < 55 ? 34 : 26);
     else sc.add(close > 0 ? `a ${KIND_LABEL[o.kind]} for someone of mine` : `a ${KIND_LABEL[o.kind]}`, 30 + 14 * close);
     sc.add('company', 10 * p.traits.sociability);
+    // the hall is out of the weather: on a cold day a gathering there is also somewhere warm to be
+    if (place.type === 'hall') {
+      const wet = (34 * world.weather.storm + 16 * world.weather.rain) * 0.5 + Math.max(0, 60 - p.needs.warmth) * 0.5;
+      if (wet > 0) sc.add('out of the weather at the hall', wet);
+    }
     sc.add('walking', -pen(e) * 0.5);
     if (sc.total < 8) continue;
     addOption(ctx, {
@@ -351,6 +356,8 @@ registerHandler('attend', {
     // early: wait at the place until it begins (the wait counts for nothing)
     if (o.status !== 'gathering') return 'continue';
     if (!o.attended.includes(p.id)) arrive(world, p, o);
+    // a gathering at the hall is out of the weather
+    if (o.placeName === 'the hall' && p.needs.warmth < 90) p.needs.warmth = Math.min(100, p.needs.warmth + 0.06);
     a.progress++;
     return a.progress < a.duration ? 'continue' : 'done';
   },

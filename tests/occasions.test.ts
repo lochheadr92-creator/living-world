@@ -71,6 +71,11 @@ describe('market day', () => {
     const market = occasionsOf(w).find((o) => o.kind === 'market')!;
     expect(market).toBeTruthy();
     expect(market.placeName).toBe('the hall');
+    // fair weather for the test: on a stormy day people rightly keep to the fire, and that is not what is being checked here
+    w.weather.kind = 'clear';
+    w.weather.storm = 0;
+    w.weather.rain = 0;
+    w.weather.nextChange = w.tick + 5 * DAY;
     run(w, market.until - w.tick + 5);
     expect(market.status).toBe('done');
     expect(market.attended.length).toBeGreaterThan(2);
