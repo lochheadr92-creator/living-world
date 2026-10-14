@@ -10,7 +10,10 @@ import { settingsForProfile } from '../src/sim/profiles';
 import { hashWorld, stepWorld } from '../src/sim/world';
 
 const SEED = 'meadow';
-const DAYS = 2;
+// Long enough to contain a project ask. An ask is now only made when the asker's own sight and memory say it would be answered
+// yes (options_social.ts), which made it much rarer: on this seed the ordinary village's first one comes late on day 5, where
+// the first version asked whenever anybody was seen carrying the thing and so asked within two days.
+const DAYS = 6;
 
 interface Trace {
   /** the state hash after every tick */

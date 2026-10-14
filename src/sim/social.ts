@@ -230,6 +230,8 @@ export interface RequestOpts {
   toolKind?: ToolKind | null;
   /** the asker's own plan this is for (intent.ts), when it is for one */
   planId?: number;
+  /** the ask was made under the rule that it should probably be answered yes (options_social.ts) */
+  likely?: boolean;
 }
 
 export function createRequest(world: World, from: Person, to: Person, o: RequestOpts): Request {
@@ -245,6 +247,7 @@ export function createRequest(world: World, from: Person, to: Person, o: Request
     siteId: o.siteId ?? 0,
     infoKind: o.infoKind ?? '',
     planId: o.planId,
+    likely: o.likely,
     created: world.tick,
     expires: world.tick + REQUEST_TTL,
     status: 'pending',
@@ -680,6 +683,15 @@ function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): 
   return { ok: false, why: 'was too busy to stop' };
 }
 
+/**
+ * Key prefix for what somebody told this person about their own pack: `p.cooldowns[MAKING_NOTE + id]` stands until the tick by
+ * which "my <item> is for something I am making" stops being worth remembering. It is the asker's own record of an answer they
+ * were actually given, and it is what keeps them from asking the same neighbour again while they are still making it.
+ */
+export const MAKING_NOTE = 'making:';
+/** how long that answer is remembered (half a day: about as long as the plans that cause it) */
+export const MAKING_MEMORY = DAY / 2;
+
 export interface ConvData {
   reqKind?: RequestKind;
   item?: ItemKind | null;
@@ -701,6 +713,8 @@ export interface ConvData {
   mealPlan?: import('./meals').MealPlan;
   /** the asker's own plan the request is for (intent.ts) */
   planId?: number;
+  /** the ask passed the asker's own "they would probably say yes" test when it was made (options_social.ts) */
+  likely?: boolean;
   /** why an ask got no answer: it had stopped being an ask (withdrawn, expired, already answered) by the time it was reached */
   moot?: string;
 }
@@ -894,7 +908,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'request': {
       const kind = d.reqKind ?? 'food';
-      const req = createRequest(world, A, B, { kind, item: d.item ?? null, amount: d.amount ?? 1, siteId: d.siteId ?? 0, purpose: d.purpose, destKind: d.destKind, destId: d.destId, deadline: d.deadline, milestone: d.milestone, toolKind: d.toolKind ?? null, planId: d.planId });
+      const req = createRequest(world, A, B, { kind, item: d.item ?? null, amount: d.amount ?? 1, siteId: d.siteId ?? 0, purpose: d.purpose, destKind: d.destKind, destId: d.destId, deadline: d.deadline, milestone: d.milestone, toolKind: d.toolKind ?? null, planId: d.planId, likely: d.likely });
       d.reqId = req.id;
       c.requestId = req.id;
       if (kind === 'wood' || kind === 'stone' || kind === 'goods') A.cooldowns.askMaterials = world.tick + 900;
@@ -1088,6 +1102,9 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         } else if (resp.reason === 'own_need') {
           adjustRel(A, B.id, world.tick, { aff: -0.3 });
         } else {
+          // Being told "I have some, but it is for something I am making" is an answer, and the asker keeps it: it is what stops
+          // them asking this neighbour for the same kind of favour again while the thing is still being made (options_social.ts).
+          if (resp.reason === 'making') A.cooldowns[MAKING_NOTE + B.id] = world.tick + MAKING_MEMORY;
           // 'enough', 'committed', 'in_use', 'no_item', 'making': nobody did anything wrong
           A.asked[B.id] = world.tick - 400;
         }

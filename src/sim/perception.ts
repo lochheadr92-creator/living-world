@@ -1,5 +1,6 @@
 import { SENSE_RADIUS } from './constants';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
+import { isRich } from './mood';
 import { stageOf } from './people';
 import { probe } from './probe';
 import { distToFootprint, gridQuery, isWaterAccess } from './registry';
@@ -34,7 +35,15 @@ const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 's
 
 function describeSeenPerson(world: World, e: Person): SeenEntity {
   const carrying: ItemKind[] = [];
-  for (const k of CARRY_KEYS) if ((e.inv[k] ?? 0) > 0) carrying.push(k);
+  // In a rich world a watcher also sees the difference between somebody carrying a thing and somebody carrying an armful of it.
+  // Nothing else is added, and an authored world's `seen` is exactly the record it always was.
+  const rich = isRich(world);
+  const plenty: ItemKind[] | undefined = rich ? [] : undefined;
+  for (const k of CARRY_KEYS) {
+    const n = e.inv[k] ?? 0;
+    if (n > 0) carrying.push(k);
+    if (plenty && n > 1) plenty.push(k);
+  }
   return {
     id: e.id,
     ent: 'person',
@@ -47,6 +56,7 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
     hurt: e.health < 60,
     child: stageOf(world, e) === 'child',
     carrying,
+    ...(plenty && plenty.length ? { plenty } : {}),
     asleep: e.pose === 'sleep',
     act: e.activity ? e.activity.kind : '',
     busyTalking: e.convId !== 0,

@@ -652,6 +652,48 @@ assumption that cooperation pays. If a cooperation stage goes on, the first chan
 when the answer is likely yes (a helper seen idle, or carrying a surplus by the asker's own belief), or ask before fetching is
 considered rather than after, then measure again with the same branch.
 
+## Stage D1, second slice: an ask worth making (measured)
+
+This is the first of the two changes the null result above asked for, and both of them: ask only when the answer is likely yes,
+and consider the ask before fetching rather than after. The first version of the project ask was correct and useless. Measured over 24 Large seeds, 12 days: 143 asks a village brought 37
+units, most answers were no, and removing the ask altogether (`rich-no-ask`) changed nothing the village could feel. The reason was
+in the rule: anybody who could be *seen carrying* the thing was asked, and in a rich world nearly everyone carrying a thing has it
+spoken for - by a promise (`committed`) or by a plan of their own (`making`).
+
+An ask is now made only when, **by the asker's own sight and their own memory**, it should be answered yes:
+
+* the person asked is visibly carrying **more than one** of it (`SeenEntity.plenty`, filled in perception.ts for rich worlds only:
+  an armful, not their last stick), **or** they are visibly idle - not in the middle of anything;
+* and they are **not visibly making or building something** (`act` of build, repair, craft, plan_site, tool_work or operate: they
+  are working with what is in their hands);
+* and they have **not told this person lately** that what they carry is for something they are making. That is the asker's own
+  record of an answer they were actually given: `social.ts` writes `p.cooldowns[MAKING_NOTE + id]` where the refusal reason
+  `making` is produced, and it stands for half a day.
+* and there is **room in the asker's pack** for it: a yes they could not carry is not a yes.
+
+Two other things changed with it. Fetching it themselves used to rule the ask out before it was considered at all (`eta < 260`);
+now both are on the table and the ask simply carries the cost of the alternative ("I could fetch stone myself soon", -8), so a
+quick trip of one's own usually wins and a long one may not. And every ask made under the rule is marked (`Request.likely`), so
+its outcome can be read off the requests: `scripts/projects.ts` prints how many asks were made that way and how many were answered
+yes. Every refusal reason is untouched (no_item / committed / making / own_need / enough / in_use / unwilling / disliked).
+
+**Measured, one headless run, Large, seed meadow, rich, 12 days, before and after** (`npx vite-node scripts/projects.ts --
+--seed meadow --profile large --days 12 --dynamics rich`):
+
+| | asks | declined | failed | yes (fulfilled or promised) | yes rate | units delivered |
+|---|---|---|---|---|---|---|
+| before | 45 | 25 | 13 | 7 | 16% | 5 |
+| after | 6 | 4 | 0 | 2 | 33% | 2 |
+
+So the rule does what it was meant to do - the yes rate doubles and the thirteen asks that used to fail outright (mostly a yes the
+asker could not carry) are gone - and it asks seven times less often, which in absolute terms delivers less: 2 units where 5 came
+before. Whether cooperation on a personal project is worth more as a rare good bet than as a frequent long shot is not settled by
+one seed; `rich-no-ask` on the ensemble is the test, and the branch's contract (tests/lab_no_ask.test.ts) now needs six days to
+contain an ask on this seed where two were enough before.
+
+Held by `tests/project_ask.test.ts`, which looks at the option layer directly: what the engine offers and what it refuses to offer,
+and why, in each of the cases above.
+
 ## Stage D1 attribution: what the ask contributes on top of planning (`rich-no-ask`, as planned before the run)
 
 Stage C's counterfactual removes planning and the asks that ride on it together, so nothing measured so far separates the two.

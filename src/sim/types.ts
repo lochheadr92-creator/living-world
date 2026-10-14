@@ -177,6 +177,12 @@ export interface SeenEntity {
   hurt: boolean;
   child: boolean;
   carrying: ItemKind[];
+  /**
+   * The kinds they are visibly carrying more than one of - an armful, not their last stick. Rich worlds only (absent otherwise, so
+   * an authored world's sight is exactly what it always was). It is the one thing a watcher can tell about somebody's pack beyond
+   * what is in it, and what tells apart "they have some" from "they have some to spare" when deciding whether to ask.
+   */
+  plenty?: ItemKind[];
   asleep: boolean;
   /** what they are visibly doing */
   act: ActivityKind | '';
@@ -845,6 +851,13 @@ export interface Request {
    * twice for the same thing and the explanations can say which project a delivery served.
    */
   planId?: number;
+  /**
+   * Set on a project ask that was made under the rule that it should probably be answered yes: the person asked was visibly
+   * carrying more than one of it or was idle, was not visibly making or building something, and had not said lately that what
+   * they carry is spoken for (options_social.ts). It records how the ask came to be made, so the yes rate of asks made that way
+   * can be read off the requests (scripts/projects.ts); it changes nothing about how the ask is answered.
+   */
+  likely?: boolean;
   /** where the goods or work are wanted */
   destKind?: 'site' | 'building' | 'person' | 'spot';
   destId?: number;
