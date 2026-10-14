@@ -184,6 +184,7 @@ export interface SeenEntity {
 }
 
 export type ActivityKind =
+  | 'attend'
   | 'wander'
   | 'eat'
   | 'eat_store'
@@ -411,6 +412,26 @@ export interface ResultRecord {
 export interface Payoff {
   n: number;
   r: number;
+}
+
+/** a gathering at a place and a time (occasions.ts; rich worlds only) */
+export type OccasionKind = 'funeral' | 'wedding' | 'feast' | 'harvest' | 'market';
+export interface Occasion {
+  id: number;
+  kind: OccasionKind;
+  placeId: number;
+  placeName: string;
+  x: number;
+  y: number;
+  called: number;
+  /** when it opens, and when it is over */
+  at: number;
+  until: number;
+  /** who it is for (the dead, the couple, the newborn and mother); nobody for a harvest or a market */
+  about: number[];
+  attended: number[];
+  status: 'called' | 'gathering' | 'done';
+  end: string;
 }
 
 export interface Speech {
@@ -1045,6 +1066,9 @@ export interface World {
   light: number;
   ledger: Ledger;
   camp: { x: number; y: number };
+  /** gatherings called in a rich world (occasions.ts); never created in an authored one, so its saves and fingerprints are untouched */
+  occasions?: Occasion[];
+  occasionState?: { harvestUnits: number; lastHarvestFeastDay: number; lastMarketDay: number };
   /** further settlements besides the camp (settlements.ts); absent in a world with one, so that world is saved and hashed exactly as before */
   extraSettlements?: { x: number; y: number }[];
   byId: Map<number, Entity>;

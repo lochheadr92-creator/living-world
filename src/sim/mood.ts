@@ -70,7 +70,7 @@ export function updateMood(world: World, p: Person): void {
   m.level = level(world, p);
 }
 
-const SOCIAL: ReadonlySet<ActivityKind> = new Set(['socialize', 'converse', 'visit', 'host_meal', 'attend_meal', 'give', 'care']);
+const SOCIAL: ReadonlySet<ActivityKind> = new Set(['socialize', 'converse', 'visit', 'host_meal', 'attend_meal', 'attend', 'give', 'care']);
 const EFFORT: ReadonlySet<ActivityKind> = new Set(['build', 'haul', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'gather', 'operate', 'tool_work', 'cart_haul', 'plan_site', 'explore']);
 const IDLE: ReadonlySet<ActivityKind> = new Set(['rest', 'wander']);
 

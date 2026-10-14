@@ -48,6 +48,7 @@ export const BELIEF_NOUN: Record<BeliefKind, string> = {
 
 export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   wander: 'wandering',
+  attend: 'at a gathering',
   eat: 'eating',
   eat_store: 'eating from stores',
   drink: 'drinking',

@@ -1,5 +1,6 @@
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
+import { noteWedding } from './occasions';
 import {
   canInterruptForTalk,
   endActivity,
@@ -1341,6 +1342,7 @@ function joinHouseholds(world: World, A: Person, B: Person, kind: 'partner' | 'r
 function bindPartners(world: World, A: Person, B: Person): void {
   A.partnerId = B.id;
   B.partnerId = A.id;
+  noteWedding(world, A, B);
   const ra = relOf(A, B.id);
   const rb = relOf(B, A.id);
   ra.kin = 'partner';

@@ -1,6 +1,7 @@
 // Side-effect imports register every activity handler.
 import './act_resource';
 import { spoilPile, spoilStore, updateHardship } from './hardship';
+import { occasionsTick } from './occasions';
 import { updateMood } from './mood';
 import './act_build';
 import './act_farm';
@@ -55,6 +56,7 @@ export function stepWorld(world: World): void {
 
   updateEnvironment(world);
   updateHardship(world);
+  occasionsTick(world);
   updateSources(world);
   updatePlots(world);
   updateBuildings(world);
@@ -265,6 +267,7 @@ export function hashWorld(world: World): string {
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in
+    for (const o of world.occasions ?? []) if (o.status !== 'done') push(`G${o.id}:${o.kind},${o.status},${o.attended.length}`);
     for (const p of world.persons) {
       const pay = p.payoff ?? {};
       const ks = Object.keys(pay) as (keyof typeof pay)[];

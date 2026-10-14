@@ -1,5 +1,6 @@
 import { fireNear, nearestHub } from './settlements';
 import { mourn, think } from './mood';
+import { noteBirth, noteDeath } from './occasions';
 import { abortActivity, newActivity, startActivity } from './activities';
 import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
@@ -161,6 +162,7 @@ export function giveBirth(world: World, mother: Person): void {
     b.trust = 60;
   }
   addEvent(world, 'life', `${baby.name} was born to ${mother.name}${father ? ' and ' + father.name : ''}.`, [baby.id, mother.id], mother.x, mother.y);
+  noteBirth(world, baby, mother);
   think(world, mother, 'birth', 25, DAY * 2, `${baby.name} was born`);
   if (father) think(world, father, 'birth', 20, DAY * 2, `${baby.name} was born`);
   addLog(world, mother, 'life', `${baby.name} was born.`);
@@ -216,6 +218,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
     if (partner) partner.partnerId = 0;
   }
   addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause})`}, aged ${age}.`, [p.id], p.x, p.y);
+  noteDeath(world, p);
   // those who loved them feel it
   for (const q of world.persons) {
     if (!q.alive) continue;

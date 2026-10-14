@@ -7,6 +7,7 @@ import { fractionAvailable, hhState } from './options_work';
 import { isDependent, stageOf } from './people';
 import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { outstandingForPlan, projectAsksOn } from './intent';
+import { attendOptions } from './occasions';
 import { wantsAmends } from './grievance';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
@@ -478,6 +479,7 @@ function optTrade(ctx: Ctx): void {
 
 export function socialOptions(ctx: Ctx): void {
   mealOptions(ctx);
+  attendOptions(ctx);
   welfareOptions(ctx);
   optRequest(ctx);
   optAskInfo(ctx);

@@ -2,6 +2,7 @@ import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { WORK } from './constants';
 import { claimPlot, consume, harvestPlot } from './economy';
+import { noteHarvest } from './occasions';
 import { addEvent, addFx, addLog } from './events';
 import { createPlot } from './farming';
 import { observe } from './knowledge';
@@ -188,6 +189,7 @@ registerHandler('harvest', {
   onEnd(world, p, a, outcome) {
     if (outcome === 'success') {
       addLog(world, p, 'work', `Harvested ${a.data.grain} grain and ${a.data.seeds} seed${a.data.seeds === 1 ? '' : 's'}.`);
+      noteHarvest(world, a.data.grain as number);
       if (!world.stats.firstHarvest) {
         world.stats.firstHarvest = 1;
         addEvent(world, 'farm', `${p.name} brought in the first harvest.`, [p.id], p.x, p.y);
