@@ -363,7 +363,8 @@ registerHandler('fuel_fire', {
     const f = world.byId.get(a.targetId);
     if (a.cycle > 0 && f && f.ent === 'building') {
       addLog(world, p, 'work', `Fed the fire with ${a.cycle} log${a.cycle > 1 ? 's' : ''}.`);
-      p.cooldowns['fedfire' + f.id] = world.tick;
+      // noted for a promise to keep the fire going (responsibilities.ts; rich only, so an authored world's record is untouched)
+      if (world.settings.dynamics === 'rich') p.cooldowns['fedfire' + f.id] = world.tick;
       if (a.data.wasOut) addEvent(world, 'survival', `${p.name} relit the fire.`, [p.id], f.x, f.y);
     }
   },
