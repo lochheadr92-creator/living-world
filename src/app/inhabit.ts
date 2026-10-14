@@ -56,7 +56,7 @@ export function inhabitConfigFromUrl(search: string, prefs: Pick<Prefs, 'seed'>)
     seed: q.get('seed') ?? prefs.seed,
     harsh: on('harsh'),
     rich: on('rich'),
-    size: size === 'large' || size === 'huge' ? size : 'normal',
+    size: size === 'large' || size === 'huge' || size === 'town' ? size : 'normal',
     arrivals: !on('noarrivals'),
     manual: on('manual'),
   };

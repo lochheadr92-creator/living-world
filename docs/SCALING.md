@@ -114,7 +114,7 @@ What follows the nearest settlement:
 What still uses the original camp only: the position of weather events in the feed, the camera's "home" key and starting position, the
 decorative critters, and the staged scenes. The generator makes more than one settlement for the larger worlds below.
 
-## Larger worlds: `large` and `huge`
+## Larger worlds: `large`, `huge` and the crowded `town`
 
 `settings.profile` (built by `settingsForProfile` in `src/sim/profiles.ts`) makes a bigger map founded in several places at once. They
 start from scratch like the ordinary world — people, a fire, a few lean-tos, a little food, a handful of tools — and nothing is built or
@@ -126,6 +126,7 @@ of the others.
 |---|---|---|---|---|
 | `large` | 160×160 | 100 | 4 of 25 | about 44 tiles: one region whose camps can meet in the first days |
 | `huge` | 256×256 | 250 | 6 of about 42 | about 80 tiles: separate communities |
+| `town` | 80×80 | 100 | 1 of 100 | none: the Large population on the ordinary map, 3.6 times as crowded (a density experiment) |
 
 * Both run under the scaled rule set with one camp's founders as the size of a settlement (`settlementFounders`): at 42, six open home
   sites, three projects, and one of each workplace per settlement. Population limits follow all the founders (at 250: immigration to 482,

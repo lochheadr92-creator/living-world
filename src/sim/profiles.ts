@@ -7,6 +7,9 @@
 //
 //   large  160x160, 100 founders in 4 camps of 25, about 44 tiles apart: one region whose camps can meet within the first days
 //   huge   256x256, 250 founders in 6 camps of about 42, about 80 tiles apart: separate communities
+//   town   80x80, 100 founders in ONE camp: the Large population on the ordinary map, with nowhere to spread. The camp's recipe is
+//          scaled by its people like any other camp's (3.6 times the ordinary fires, food, fish, deposits and wolves), so the same
+//          map is 3.6 times as crowded: a density experiment, not a bigger village.
 //
 // A world gets a profile through `settings.profile`; `settingsForProfile` builds the whole set of settings (the scaled rule set, the
 // founders, the size of one settlement). The ordinary world has no profile and none of this runs for it.
@@ -14,7 +17,7 @@ import { hashString, RNG } from './rng';
 import type { Settings } from './types';
 import type { FoundingHub, Layout } from './worldgen';
 
-export type ProfileName = 'normal' | 'large' | 'huge';
+export type ProfileName = 'normal' | 'large' | 'huge' | 'town';
 
 interface RegionDef {
   W: number;
@@ -28,9 +31,11 @@ interface RegionDef {
   founders: number;
 }
 
-const REGIONS: Record<'large' | 'huge', RegionDef> = {
+const REGIONS: Record<'large' | 'huge' | 'town', RegionDef> = {
   large: { W: 160, H: 160, cols: 2, rows: 2, spacing: 44, scatter: 4, founders: 100 },
   huge: { W: 256, H: 256, cols: 3, rows: 2, spacing: 80, scatter: 8, founders: 250 },
+  // one camp, so spacing is moot; the scatter keeps the camp off the exact centre, as the ordinary world's is
+  town: { W: 80, H: 80, cols: 1, rows: 1, spacing: 0, scatter: 5, founders: 100 },
 };
 
 /** the ordinary camp's size: what every per-camp quantity is measured against */

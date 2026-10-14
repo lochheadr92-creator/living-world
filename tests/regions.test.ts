@@ -159,6 +159,48 @@ describe.each([
   }, 120_000);
 });
 
+describe('town world: the Large population in one camp on the ordinary map', () => {
+  const w = createWorld(settingsForProfile('town', 'meadow'));
+
+  it('is 80 by 80 with a hundred people in one camp, under the scaled rules sized to all of them', () => {
+    expect(settingsForProfile('town', 'x')).toMatchObject({ profile: 'town', population: 100, ruleSet: 'scaled', settlementFounders: 100 });
+    expect(w.W).toBe(80);
+    expect(w.H).toBe(80);
+    expect(settlementCount(w)).toBe(1);
+    expect(w.persons.length).toBe(100);
+    const c = camps(w)[0];
+    expect(Math.hypot(c.x - 40, c.y - 40)).toBeLessThan(10);
+  });
+
+  it('gives the one camp the ordinary camp\'s recipe at its scale: fires, food, stone, deposits and wolves for a hundred', () => {
+    const c = camps(w)[0];
+    expect(w.buildings.filter((b) => b.type === 'fire').length).toBe(4);
+    expect(within(w, c, 30, ['berry_bush'])).toBeGreaterThanOrEqual(40);
+    expect(within(w, c, 30, ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'])).toBeGreaterThanOrEqual(120);
+    expect(within(w, c, 30, ['rock'])).toBeGreaterThanOrEqual(30);
+    for (const d of ['clay_pit', 'outcrop', 'ore_vein'] as const) expect(within(w, c, 60, [d]), d).toBeGreaterThanOrEqual(3);
+    expect(w.animals.length).toBeGreaterThanOrEqual(9);
+    expect(Math.min(...w.animals.map((a) => Math.hypot(a.denX - c.x, a.denY - c.y)))).toBeGreaterThanOrEqual(20);
+  });
+
+  it('runs the real simulation: the books balance, nobody has a broken need, ids stay clear of the water-belief range', () => {
+    const t = createWorld(settingsForProfile('town', 'smoke'));
+    for (let i = 0; i < 400; i++) stepWorld(t);
+    expect(conservationReport(t).ok).toBe(true);
+    expect(toolReport(t).ok).toBe(true);
+    for (const p of t.persons) for (const v of Object.values(p.needs)) expect(Number.isFinite(v)).toBe(true);
+    expect(t.persons.filter((p) => p.alive).length).toBe(100);
+    expect(t.nextId).toBeLessThan(WATER_ID_BASE);
+  }, 180_000);
+
+  it('is repeatable for a seed and different for another', () => {
+    const a = createWorld(settingsForProfile('town', 'repeat'));
+    const b = createWorld(settingsForProfile('town', 'repeat'));
+    expect(deepHash(a)).toBe(deepHash(b));
+    expect(deepHash(createWorld(settingsForProfile('town', 'other')))).not.toBe(deepHash(a));
+  }, 120_000);
+});
+
 describe('the rules of a larger world follow its camps', () => {
   it('limits grow with the founders of the world and of a camp', () => {
     const r = rulesOf(world('huge'));

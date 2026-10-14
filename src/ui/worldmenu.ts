@@ -55,6 +55,7 @@ for (const id of SCENE_ORDER) {
 /** the sizes of world the menu offers, smallest first: what each is called and what to expect of it */
 const SIZES: { id: ProfileName; title: string; note: string }[] = [
   { id: 'normal', title: 'Village', note: 'The ordinary world: one camp.' },
+  { id: 'town', title: 'Town', note: 'A hundred people in one camp on the ordinary map: the same ground, 3.6 times as crowded.' },
   { id: 'large', title: 'Large', note: 'Four camps close together, so they can meet in the first days.' },
   { id: 'huge', title: 'Huge', note: 'Six camps far apart. Heavy: slower to start and to run. A saved Huge world is several MB; it is kept in the browser’s own database.' },
 ];

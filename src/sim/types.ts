@@ -979,8 +979,8 @@ export interface Settings {
   scene: SceneId;
   /** which limits on settlement size apply (rules.ts); absent means 'ordinary', as do saves from before it existed */
   ruleSet?: RuleSet;
-  /** a larger world, founded in several places (profiles.ts); absent means the ordinary 80x80 world with one camp */
-  profile?: 'large' | 'huge';
+  /** a larger world, founded in several places, or a crowded one (profiles.ts); absent means the ordinary 80x80 world with one camp */
+  profile?: 'large' | 'huge' | 'town';
   /** how many of the founders live together in one settlement, for the limits that follow a settlement (rules.ts); absent means all of them */
   settlementFounders?: number;
   /** 'rich': people have a mood that changes what they do, and lean seasons happen (mood.ts, hardship.ts); absent means 'authored', the world as it was */

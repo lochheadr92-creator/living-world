@@ -8,7 +8,7 @@ export interface Prefs {
   immigration: boolean;
   /** people have a mood and lean seasons happen (rich dynamics); next new world */
   rich: boolean;
-  /** the size of world last started: 'normal' (the village), 'large' or 'huge' */
+  /** the size of world last started: 'normal' (the village), 'large', 'huge' or 'town' */
   size: ProfileName;
   speed: number;
   overlays: Overlays;
@@ -44,7 +44,7 @@ export function loadPrefs(): Prefs {
       ...DEFAULT_PREFS,
       ...p,
       // a stored size that is not one we know (an old or edited value) is the village
-      size: p.size === 'large' || p.size === 'huge' ? p.size : 'normal',
+      size: p.size === 'large' || p.size === 'huge' || p.size === 'town' ? p.size : 'normal',
       overlays: { ...DEFAULT_PREFS.overlays, ...(p.overlays ?? {}) },
     };
   } catch {
