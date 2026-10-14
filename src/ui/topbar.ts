@@ -2,7 +2,7 @@
 // and the unmissable banner shown while a staged test scene is running.
 import { SCENE_INFO } from '../sim/scenes';
 import { summarizeWorld, type WorldSummary } from '../sim/inspect';
-import { copyText, Every, h, setAttr, setHidden, setText } from './dom';
+import { copyText, Every, h, setAttr, setBool, setHidden, setText } from './dom';
 import { icon, setIcon, type IconName } from './icons';
 import { iconButton } from './widgets';
 import type { Part, UICtx } from './context';
@@ -58,6 +58,30 @@ export function createTopbar(ctx: UICtx, slots: Slots, menu: WorldMenu): Part {
     void copyText(game.settings.seed).then((ok) => ctx.toast(ok ? 'Seed copied to the clipboard' : 'Could not copy the seed', ok ? 'good' : 'warn'));
   });
   const helpBtn = iconButton('help', 'Help and controls', 'Help and controls (?)', () => ctx.toggleHelp());
+  // Folded, the three top pills become one thin strip: the seed, play/pause and step with the speed as a label, the clock and the
+  // head-count. On a small window the bar starts folded by itself (the saved preference is left alone, as the feed does); the
+  // button unfolds it, and from then on the choice is the person's and is kept.
+  const narrow = window.matchMedia('(max-width: 680px)');
+  let folded = ctx.prefs.hudFolded || (window.innerWidth > 0 && narrow.matches);
+  const foldBtn = iconButton('chevron', 'Fold the top bar', null, () => setFolded(!folded), { cls: 'hud-fold', size: 14 });
+  const applyFold = () => {
+    ctx.root.classList.toggle('hud-folded', folded);
+    setBool(foldBtn, 'aria-pressed', folded);
+    setAttr(foldBtn, 'aria-label', folded ? 'Unfold the top bar' : 'Fold the top bar');
+    setAttr(foldBtn, 'data-tip', folded ? 'Unfold the top bar: speeds, weather and households' : 'Fold the top bar into one thin strip');
+  };
+  const setFolded = (on: boolean) => {
+    folded = on;
+    ctx.prefs.hudFolded = on;
+    ctx.savePrefs();
+    applyFold();
+  };
+  // the window shrinking to a phone's width folds the bar; growing again goes back to what was chosen
+  const onNarrow = () => {
+    folded = narrow.matches ? true : ctx.prefs.hudFolded;
+    applyFold();
+  };
+  narrow.addEventListener('change', onNarrow);
   const brand = h(
     'div',
     { class: 'pill brand glass' },
@@ -66,16 +90,22 @@ export function createTopbar(ctx: UICtx, slots: Slots, menu: WorldMenu): Part {
     seedChip,
     copyBtn,
     helpBtn,
+    foldBtn,
   );
   slots.topLeft.prepend(brand);
+  applyFold();
 
   // ───────── world summary pill ─────────
   const clock = h('div', { class: 'st-clock num' }, '--:--');
   const clockSub = h('div', { class: 'st-sub num' });
   const clockStat = h('div', { class: 'stat clockstat' }, h('div', { class: 'st-txt' }, clock, clockSub));
-  const weather = stat('sun');
-  const people = stat('person');
-  const homes = stat('users');
+  const weather = stat('sun', 'weatherstat');
+  const people = stat('person', 'peoplestat');
+  // the count and the word apart, so the folded bar on a phone can keep the number by its icon and drop the word
+  const peopleN = h('span', null);
+  const peopleWord = h('span', { class: 'st-word' });
+  people.val.append(peopleN, peopleWord);
+  const homes = stat('users', 'homesstat');
   const sep = () => h('span', { class: 'stdiv', 'aria-hidden': 'true' });
   const stats = h('div', { class: 'pill stats glass', role: 'group', 'aria-label': 'World summary' }, clockStat, sep(), weather.el, sep(), people.el, sep(), homes.el);
   slots.topCenter.appendChild(stats);
@@ -110,7 +140,8 @@ export function createTopbar(ctx: UICtx, slots: Slots, menu: WorldMenu): Part {
     setText(weather.sub, `${s.temp} °C`);
     if (weather.ico) setIcon(weather.ico, weatherIcon(s), 18);
 
-    setText(people.val, `${s.population} ${s.population === 1 ? 'person' : 'people'}`);
+    setText(peopleN, String(s.population));
+    setText(peopleWord, ` ${s.population === 1 ? 'person' : 'people'}`);
     const bits: string[] = [];
     if (s.children > 0) bits.push(`${s.children} ${s.children === 1 ? 'child' : 'children'}`);
     if (s.elders > 0) bits.push(`${s.elders} ${s.elders === 1 ? 'elder' : 'elders'}`);
@@ -158,7 +189,8 @@ export function createTopbar(ctx: UICtx, slots: Slots, menu: WorldMenu): Part {
       if (e === 'restart' || e === 'scene' || e === 'debug' || e === 'step') refresh();
     },
     dispose() {
-      ctx.root.classList.remove('has-banner');
+      ctx.root.classList.remove('has-banner', 'hud-folded');
+      narrow.removeEventListener('change', onNarrow);
       brand.remove();
       stats.remove();
       banner.remove();

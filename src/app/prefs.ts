@@ -15,6 +15,8 @@ export interface Prefs {
   debug: boolean;
   inspectorOpen: boolean;
   feedOpen: boolean;
+  /** the top bar is folded into one thin strip (seed, play/pause, clock, head-count) */
+  hudFolded: boolean;
 }
 
 const KEY = 'living-world:prefs:v1';
@@ -30,6 +32,7 @@ export const DEFAULT_PREFS: Prefs = {
   debug: false,
   inspectorOpen: true,
   feedOpen: true,
+  hudFolded: false,
 };
 
 export function loadPrefs(): Prefs {
