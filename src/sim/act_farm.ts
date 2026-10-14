@@ -1,4 +1,4 @@
-import { notePractice } from './trades';
+import { notePractice } from './apprentice';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { WORK } from './constants';

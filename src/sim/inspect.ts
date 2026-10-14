@@ -8,8 +8,9 @@ import { planHelp, planOfActivity } from './intent';
 import { describePay } from './learning';
 import { describeHeard } from './reputation';
 import { describeIllness } from './illness';
-import { describeTrade } from './trades';
 import { describeGoal, describeInjury } from './life';
+import { describeApprentice } from './apprentice';
+import { describeTrade } from './trade';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -128,8 +129,6 @@ export interface PersonView {
   partner: string | null;
   traits: { key: string; value: number }[];
   traitSummary: string;
-  /** their trade, in words (rich only; null without one) */
-  trade: string | null;
   /** what they hope for, and what hurts them, in words (rich only; null otherwise) */
   goal: string | null;
   injury: string | null;
@@ -138,6 +137,8 @@ export interface PersonView {
   payoffs: { key: string; ratio: number; n: number }[];
   /** what they have seen and been told of other people (rich only; empty otherwise), freshest first */
   heard: HeardView[];
+  /** the trade they have settled on and why, in their own terms (rich only; '' for somebody with none) */
+  trade: string;
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -512,12 +513,12 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     partner: p.partnerId ? nameOf(world, p.partnerId) : null,
     traits: Object.entries(p.traits).map(([key, value]) => ({ key, value })),
     traitSummary: traitSummary(p.traits),
-    trade: describeTrade(world, p),
     goal: describeGoal(world, p),
     injury: describeInjury(world, p),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
     heard: describeHeard(world, p),
+    trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },

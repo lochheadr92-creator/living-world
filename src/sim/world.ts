@@ -4,7 +4,7 @@ import { spoilPile, spoilStore, updateHardship } from './hardship';
 import { occasionsTick } from './occasions';
 import { updateMood } from './mood';
 import { illnessTick } from './illness';
-import { tradesTick } from './trades';
+import { apprenticeTick } from './apprentice';
 import { lifeTickRich } from './life';
 import './act_build';
 import './act_farm';
@@ -102,7 +102,7 @@ function stepPerson(world: World, p: Person): void {
   updateNeeds(world, p);
   updateMood(world, p);
   illnessTick(world, p);
-  tradesTick(world, p);
+  apprenticeTick(world, p);
   lifeTickRich(world, p);
   if (p.health <= 0) {
     const n = p.needs;
@@ -321,13 +321,15 @@ export function hashWorld(world: World): string {
       const ks = Object.keys(pay) as (keyof typeof pay)[];
       if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
     }
+    // the trade somebody has settled on bears on what they choose, so it is in the fingerprint like a plan or an estimate
+    for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.key},${p.trade.since}`);
     if (world.roads) {
       let n = 0;
       for (let i = 0; i < world.roads.length; i++) n += world.roads[i];
       if (n) push(`R${n}`);
     }
     for (const p of world.persons) if (p.alive && (p.goal || p.injury)) push(`L${p.id}:${p.goal ? p.goal.kind + ',' + p.goal.done : '-'}|${p.injury ? p.injury.kind + ',' + p.injury.until : '-'}`);
-    for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.kind},${p.trade.master}`);
+    for (const p of world.persons) if (p.alive && p.apprentice) push(`A${p.id}:${p.apprentice.master},${p.apprentice.key}`);
     for (const p of world.persons) if (p.alive && p.illness) push(`I${p.id}:${p.illness.since},${r4(p.illness.severity)},${p.illness.rested}`);
     for (const p of world.persons) if (p.alive && p.heard && p.heard.length) push(`H${p.id}:${p.heard.length},${p.heard.map((r) => r.about + r.hops).reduce((a, b) => a + b, 0)}`);
     for (const p of world.persons) if (p.alive && p.intentions.length) push(`N${p.id}:${p.intentions.map((i) => `${i.kind},${i.status},${i.stepKey ?? '-'},${i.setAside}`).join(';')}`);

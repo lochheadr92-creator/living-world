@@ -128,9 +128,16 @@ of the others.
 | `huge` | 256×256 | 250 | 6 of about 42 | about 80 tiles: separate communities |
 | `town` | 80×80 | 100 | 1 of 100 | none: the Large population on the ordinary map, 3.6 times as crowded (a density experiment) |
 
+The town is where the per-camp scaling rules were tested to destruction; what it found is in `docs/EMERGENCE.md`, "A town of a hundred".
+
 * Both run under the scaled rule set with one camp's founders as the size of a settlement (`settlementFounders`): at 42, six open home
-  sites, three projects, and one of each workplace per settlement. Population limits follow all the founders (at 250: immigration to 482,
-  conception to 571).
+  sites, three projects, and **one workplace of each kind for every ordinary camp's worth of founders** (`facilityAllowance`:
+  `ceil(settlementFounders / 28)`, so one per camp in Large, two in Huge, four in a town of a hundred). Population limits follow all the
+  founders (at 250: immigration to 482, conception to 571).
+* Wolves follow a camp's people *and* the land it has to itself: `round(3 × scale × room)`, where `room` is the camp's share of the map
+  against the ordinary camp's 80×80, capped at 1. Large and Huge have room to spare (`room` = 1) and are unchanged; a town of a hundred on
+  the ordinary map has about 0.28 of the ground its people would ask for, and gets three dens instead of eleven. Measured: that one change
+  and the workplace allowance together took seed `gen-3` from 50 deaths in twelve days to 8, and `cedar` from 29 to 2.
 * `--pop N` splits N founders among the camps, so a world can be run smaller or larger on the same map.
 * A camp of about 28 people has one fire; a larger camp has one for about every 28.
 * Per-camp quantities (food, rock, fish, clay, ore, outcrops, wolves, tools, the mix of ages) scale with the camp's founders against the

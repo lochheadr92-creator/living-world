@@ -119,7 +119,7 @@ export function goalProgress(world: World, p: Person, g: Goal): number {
     case 'family':
       return (p.partnerId ? 0.5 : 0) + (p.children.length ? 0.5 : 0);
     case 'trade':
-      return p.trade ? (p.trade.master ? 0.6 : 1) : Math.max(0, Math.min(0.5, (Math.max(...Object.values(p.skills)) - 1) * 2));
+      return p.trade ? 1 : p.apprentice ? 0.6 : Math.max(0, Math.min(0.5, (Math.max(...Object.values(p.skills)) - 1) * 2));
     case 'stocked': {
       const home = homeOf(world, householdOf(world, p));
       const members = Math.max(1, householdOf(world, p)?.members.length ?? 1);

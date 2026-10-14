@@ -177,6 +177,18 @@ export interface SeenEntity {
   hurt: boolean;
   child: boolean;
   carrying: ItemKind[];
+  /**
+   * The kinds they are visibly carrying more than one of - an armful, not their last stick. Rich worlds only (absent otherwise, so
+   * an authored world's sight is exactly what it always was). It is the one thing a watcher can tell about somebody's pack beyond
+   * what is in it, and what tells apart "they have some" from "they have some to spare" when deciding whether to ask.
+   */
+  plenty?: ItemKind[];
+  /**
+   * What kind of work they are visibly at, as a watcher would name it: chopping at a tree is wood, standing at the kiln is the
+   * kiln, hoeing a field is farming (trade.ts visibleWork). Rich worlds only, and absent for anyone who is not working. It is
+   * `act` said in the terms a trade is in, and it is what lets somebody see which trades the people around them already have.
+   */
+  work?: SkillKey;
   asleep: boolean;
   /** what they are visibly doing */
   act: ActivityKind | '';
@@ -432,13 +444,12 @@ export interface Injury {
   how: string;
 }
 
-/** a trade (trades.ts; rich worlds only): the skill they call their own, since when, whose apprentice they are (0: nobody's), last practice */
-export interface Trade {
-  kind: SkillKey;
-  since: number;
+/** an apprenticeship (apprentice.ts; rich worlds only): whose, in what skill, since when, and when they last practised it */
+export interface Apprenticeship {
   master: number;
+  key: SkillKey;
+  since: number;
   practised: number;
-  how: string;
 }
 
 /** a fever (illness.ts; rich worlds only): when it began, how bad it is now, rest credited against the course it must run, and how it came */
@@ -495,6 +506,19 @@ export interface Speech {
   kind: 'say' | 'ask' | 'warn' | 'angry' | 'happy' | 'think';
 }
 
+/**
+ * The one kind of work a person has settled on as theirs (trade.ts; rich worlds only, null in any other). It is one of the
+ * existing skills, chosen by comparative advantage from their own skills and what they have seen other people doing, and it
+ * tilts the matching work options by a bounded amount. It is not a job: nobody is assigned one and nobody is held to one.
+ */
+export interface Trade {
+  key: SkillKey;
+  /** the tick they took it up */
+  since: number;
+  /** why, in their own terms, at the moment they chose it */
+  why: string;
+}
+
 export interface Person {
   ent: 'person';
   id: number;
@@ -541,13 +565,18 @@ export interface Person {
    * Learned from their own finished activities and nothing else (learning.ts); saved with the person.
    */
   payoff: Partial<Record<SkillKey, Payoff>>;
+  /**
+   * The trade they have settled on, or null for somebody who has none (rich worlds only; always null in an authored world).
+   * Chosen, kept, changed and given up by the person themselves (trade.ts); saved with them, and in the fingerprint.
+   */
+  trade: Trade | null;
   /** what they have seen and been told of other people (reputation.ts; rich only, never created in an authored world) */
   heard?: Rumour[];
   /** the fever they have now (illness.ts; rich only, never created in an authored world) and until when they are safe from another */
   illness?: Illness;
   immuneUntil?: number;
-  /** their trade, if they have taken one up (trades.ts; rich only, never created in an authored world) */
-  trade?: Trade;
+  /** whose apprentice they are, in what (apprentice.ts; rich only, never created in an authored world) */
+  apprentice?: Apprenticeship;
   /** what they hope for, and what hurts them (life.ts; rich only, never created in an authored world) */
   goal?: Goal;
   injury?: Injury;
@@ -935,6 +964,13 @@ export interface Request {
    * twice for the same thing and the explanations can say which project a delivery served.
    */
   planId?: number;
+  /**
+   * Set on a project ask that was made under the rule that it should probably be answered yes: the person asked was visibly
+   * carrying more than one of it or was idle, was not visibly making or building something, and had not said lately that what
+   * they carry is spoken for (options_social.ts). It records how the ask came to be made, so the yes rate of asks made that way
+   * can be read off the requests (scripts/projects.ts); it changes nothing about how the ask is answered.
+   */
+  likely?: boolean;
   /** where the goods or work are wanted */
   destKind?: 'site' | 'building' | 'person' | 'spot';
   destId?: number;

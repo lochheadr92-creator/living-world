@@ -11,7 +11,7 @@ the lab's "nudge" still tells chaos from cause.
 | Occasions | `occasions.ts` | A death calls a funeral, a birth or wedding a feast, a harvest a harvest feast, the calendar a market every sixth day once a hall stands. Held at the hall (else the fire), in daylight by the world clock. | `attendOptions` (30–50 against ordinary work's 20–45; closer kin and friends, the sociable, more), `arrive` (the first eight met, a thought for everyone, food to the hungriest at the market, `marketSwap` barter) | Feed: "A funeral for X is called at the hall today"; people's logs "Went to the market" |
 | Reputation and news | `reputation.ts` | What people saw of each other (a gift, a quarrel, a promise kept or broken, a death, a birth, a wedding, a theft) is held with its source, teller, hops and age, passed one story per conversation, weighed by trust, fading over twelve days. | `social.ts willingness` (±0.25), chat option (±3), the ask worth making | Person card, Traits & skills: "What they have heard of people" |
 | Illness | `illness.ts` | A fever from cold, hunger and exhaustion (more in winter); passes in talk (12%), at one table (15%), under one roof; worsens a day, eases with rest counted double; costs health (fatal on an empty stomach), twenty days' immunity after. | bed and rest options (+14–30, +10–22), chat candidates (the cautious keep away), existing care for the hurt | Health line: "62 · a fever, day 2: bad" |
-| Trades | `trades.ts` | A skill at 1.12 that stands 0.08 above the rest becomes a trade; a tradesperson may take on a workmate after a job done together; the apprentice learns half as much again within ten tiles of the master, graduates when nearly as good, lapses after five idle days. Skill still grows only by practice. | `tradeNudge` (+6 in `decision.ts rankOptions`), `onSharedWork` (facilities, building sites) | Traits summary: "Carpenter (by their own hand)", "Apprentice smith under Sven"; feed "has taken X on as an apprentice" |
+| Apprenticeship | `apprentice.ts` | On top of the trade a person settles on for themselves (`trade.ts`, by comparative advantage and what they see others at): a tradesperson may take on a workmate after a job done together; the apprentice learns half as much again within ten tiles of the master, graduates into a trade of their own when nearly as good, lapses after five idle days. Skill still grows only by practice. | `onSharedWork` (facilities, building sites), `notePractice` at every skill-gain site | Traits & skills line: "Their trade: smithing — learned from Sven; apprentice at smithing under Sven"; feed "has taken X on as an apprentice" |
 | Hopes | `life.ts` | On coming of age one hope from the nature: a solid home, a family, a trade, a full store, a good name. Progress is read from the world; a nudge of 4 to what serves it; a weight when long unmet, a lift when reached. | `goalNudge` in the ranking; thoughts | Traits summary: "Hopes for a family (50% there)" |
 | Injury and age | `life.ts` | Felling, breaking stone and building may hurt (sprain, cut, broken arm): walking up to 40% slower, work up to 50%, healing two to six days. Elders carry and mend at three quarters and are hurt twice as easily. | `moveSpeed`, `tools.ts taskMultiplier`, `carryCap`, `needs.ts` recovery | Health line: "a broken arm (at the building site), 4 days to heal" |
 | Theft | `misdeeds.ts` | Very hungry, nothing carried, nothing at home: another household's store is an option weighed against conscience (−18, −8·caution, −6·generosity). Who saw decides the cost: witnesses hold the story, the household wronged a grievance. | `options_survival.ts` eat-from-store loop, `act_resource.ts onTheft` | Feed (conflict): "Bea caught Sven taking food from the Ash household's store" |
@@ -31,14 +31,14 @@ worth of people (`rules.ts facilitiesPerKind`).
 
 ## What was checked
 
-Each mechanism has a unit test (`tests/{occasions,reputation,illness,trades,life,misdeeds,environment,settlement_record}.test.ts`)
+Each mechanism has a unit test (`tests/{occasions,reputation,illness,apprentice,life,misdeeds,environment,settlement_record}.test.ts`)
 that holds the mechanism to its rule and holds an authored world to having none of it. The golden suite matched after every
-commit. No ensemble was run for this pass: it is a build, not a measurement. The lab switch for trades (`rich-no-trades`) is in
-place for when one is wanted; the others can be given switches on the same pattern (`setTrades`).
+commit. No ensemble was run for this pass: it is a build, not a measurement. The lab switch `rich-no-trades` (trade.ts) removes the trade and the apprenticeship together; the other mechanisms can be given
+switches on the same pattern.
 
 ## What is not done
 
 Nothing here is tuned against an ensemble; the numbers are first settings chosen to be visible without dominating (a gathering
 beats a chore, never a pressing need; a trade's nudge is the plan's nudge; a hope's is smaller). The next pass (the user's list:
 boundaries and alone time, mentors and apprentices, crews, mediation, shared responsibilities, life changes, traditions) builds
-on the records this one leaves: `p.heard`, `p.trade`, `p.goal`, `world.chronicle`.
+on the records this one leaves: `p.heard`, `p.trade`, `p.apprentice`, `p.goal`, `world.chronicle`.

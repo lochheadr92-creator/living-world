@@ -3,12 +3,12 @@ import { newActivity } from './activities';
 import { reputationOf } from './reputation';
 import { favourOwedBy } from './misdeeds';
 import { BUILD_DEF } from './constants';
-import { pickFood } from './economy';
+import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
 import { isDependent, stageOf } from './people';
-import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
+import { MAKING_NOTE, MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
 import { outstandingForPlan, projectAsksOn } from './intent';
 import { attendOptions } from './occasions';
 import { wantsAmends } from './grievance';
@@ -18,7 +18,7 @@ import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
 import { hashUnit } from './rng';
 import { spark } from './relations';
-import type { Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
+import type { ActivityKind, Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
 import { clamp, hyp } from './util';
 
 interface Cand {
@@ -119,6 +119,11 @@ function optChat(ctx: Ctx): void {
   }
 }
 
+// What somebody is visibly doing, as it bears on whether they would hand over what they are carrying (Stage D1's ask).
+// `IDLE_ACTS` is "not in the middle of anything"; `OWN_WORK_ACTS` is "working with what is in their hands".
+const IDLE_ACTS: (ActivityKind | '')[] = ['', 'wander', 'rest', 'warm', 'visit', 'explore'];
+const OWN_WORK_ACTS: (ActivityKind | '')[] = ['build', 'repair', 'craft', 'plan_site', 'tool_work', 'operate'];
+
 // ───────────────────────── asking for help ─────────────────────────
 function optRequest(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -208,6 +213,11 @@ function optRequest(ctx: Ctx): void {
   // what has already been asked for or promised for this same plan is subtracted, so one shortage is not asked for twice.
   // In an authored world `p.intentions` is empty, so this loop does nothing at all. The lab's `rich-no-ask` branch switches the
   // ask off on its own (intent.ts setProjectAsks) and leaves the plan, and every other kind of request, as they were.
+  //
+  // Measured first: 143 asks a village brought 37 units, and most answers were no, because nearly everyone asked had the thing
+  // and had it spoken for. So an ask is now made only when, BY THE ASKER'S OWN LIGHTS, it should be answered yes - see `spare`,
+  // `idle`, `atOwnWork` and `saidMaking` below - and fetching it themselves is weighed against asking rather than ruling the ask
+  // out before it has been considered at all.
   for (const plan of projectAsksOn() ? p.intentions : []) {
     if (plan.status !== 'active' || plan.kind !== 'tool') continue;
     if (ctx.criticals.length || ctx.dangers.length) break; // something is actually wrong: not the moment to be asking favours
@@ -221,21 +231,42 @@ function optRequest(ctx: Ctx): void {
       const uncovered = short - outstandingForPlan(world, p.id, item, plan.id);
       if (uncovered <= 0) continue;
       if (activeCommitments(p).length >= MAX_ACTIVE_COMMITMENTS) continue;
-      // worth asking only when fetching it themselves is not quick: the ordinary way comes first
-      if (ctx.options.some((o) => o.yields === item && o.eta < 260)) continue;
+      // A yes they could not carry is not a yes: somebody with a full pack waits until there is room in it before asking
+      if (invRoom(world, p, item) < 1) {
+        addBlocked(ctx, 'socialize', `Ask someone for ${item}`, 0, 'no room in my pack for it', 'request');
+        continue;
+      }
+      // Fetching it themselves is the ordinary way, and it used to rule the ask out before it was ever considered. Now both are
+      // on the table and the ask carries the cost of the alternative: a quick trip of their own beats asking a favour, a long one
+      // may not.
+      const quick = ctx.options.some((o) => o.yields === item && o.eta < 260);
       for (const c of cands) {
         if (c.d > 12 || !c.s.carrying.includes(item)) continue;
         if (c.s.child || stageOf(world, c.q) === 'child') continue;
         if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
+        // Would this person say yes? Everything weighed here is the asker's own sight and the asker's own memory:
+        //  * an armful rather than their last one (`plenty`), or somebody not in the middle of anything, is likely to spare it;
+        //  * somebody visibly making or building something is working with what they are carrying;
+        //  * somebody who has lately told THEM that what they carry is for something they are making has already answered this.
+        const spare = (c.s.plenty ?? []).includes(item);
+        const idle = IDLE_ACTS.includes(c.s.act);
+        const atOwnWork = OWN_WORK_ACTS.includes(c.s.act);
+        const saidMaking = (p.cooldowns[MAKING_NOTE + c.q.id] ?? 0) > world.tick;
+        if (!(spare || idle) || atOwnWork || saidMaking) {
+          const why = saidMaking ? `they said their ${item} is for something they are making` : atOwnWork ? 'they are working with what they carry' : `they have only the one ${item} and are busy with it`;
+          addBlocked(ctx, 'socialize', `Ask ${c.q.name} for ${item}`, c.q.id, why, 'request');
+          continue;
+        }
         const sc = new Scorer()
           .add(`${plan.goal} and the ${item} is short`, 20 * traitMods(p).work)
-          .add('they are carrying some', 4)
-          .add('walking', -pen(c.d * 6));
+          .add(spare ? `they are carrying more than one ${item}` : 'they have some and are not busy', 4);
+        if (quick) sc.add(`I could fetch ${item} myself soon`, -8);
+        sc.add('walking', -pen(c.d * 6));
         mkSocial(
           ctx,
           c,
           'request',
-          { reqKind: item === 'wood' || item === 'stone' ? item : 'goods', item, amount: Math.max(1, Math.min(uncovered, 3)), purpose: plan.goal, destKind: 'person', destId: p.id, planId: plan.id },
+          { reqKind: item === 'wood' || item === 'stone' ? item : 'goods', item, amount: Math.max(1, Math.min(uncovered, 3)), purpose: plan.goal, destKind: 'person', destId: p.id, planId: plan.id, likely: true },
           `Ask ${c.q.name} for ${item}`,
           plan.goal,
           null,

@@ -287,6 +287,13 @@ export function generateNatural(settings: Settings): World {
     const cy = Math.floor(H / 2 + gen.range(-5, 5));
     hubs = [{ x: cx, y: cy, founders: settings.population, scale: 1, fires: 1 }];
   }
+  // How much more of everything a camp's people need than the ground they stand on would ordinarily hold. The ordinary world is one
+  // camp of 28 on the whole 80x80 map, which is the unit: `crowding` is 1 for it, 1 for the Large and Huge profiles (whose camps
+  // have more room than an ordinary camp, so there is nothing to make up), and about 3.6 for a town of 100 on the ordinary map.
+  // Two things read it, and only for a profiled world: how thick the forest is, and (as its inverse) how many wolves the land holds.
+  const ORDINARY_MAP_AREA = MAP_W * MAP_H;
+  const campArea = (W * H) / hubs.length;
+  const crowding = layout ? Math.max(1, ...hubs.map((h) => (h.scale * ORDINARY_MAP_AREA) / campArea)) : 1;
   const campX = hubs[0].x;
   const campY = hubs[0].y;
   world.camp = { x: campX + 0.5, y: campY + 0.5 };
@@ -517,13 +524,15 @@ export function generateNatural(settings: Settings): World {
   }
 
   // ── wolves ──
+  // Wolves follow the people (a camp of 56 has twice a camp of 28's) but no more than the ground will hold: a hundred people on the
+  // ordinary 80x80 map are not 3.6 ordinary camps' worth of country, and giving them 3.6 camps' worth of wolves put eleven dens
+  // inside one village's walking distance. `room` is the inverse of the crowding above: 1 wherever a camp has an ordinary camp's
+  // land or more, so the Large and Huge profiles keep exactly the wolves they had and the ordinary world is untouched, and about
+  // 0.28 for a town of 100 on the ordinary map, which gets the three dens that much ground supports.
+  const room = 1 / crowding;
   const dens: { x: number; y: number }[] = [];
   for (const hub of hubs) {
-    // wolves follow the people a camp has, but no more than the ground around it supports: the ordinary camp's three on its 80x80, so
-    // a camp of a hundred on that same ground gets the three, not eleven (the Large and Huge camps have ground to spare: unchanged)
-    const groundPerCamp = (W * H) / hubs.length;
-    const ground = Math.min(1, groundPerCamp / (80 * 80 * hub.scale));
-    const wolfCount = Math.round((harsh ? 5 : 3) * hub.scale * ground);
+    const wolfCount = Math.round((harsh ? 5 : 3) * hub.scale * room);
     for (let i = 0; i < wolfCount; i++) {
       const denOk = (x: number, y: number): boolean =>
         world.terrain[y * W + x] === T.FOREST && world.solid[y * W + x] === 0 && terrainReach[y * W + x] === 1 && dens.every((d) => dist(d.x, d.y, x, y) > 14) && openNeighbours(world, x, y) >= 6 && (hubs.length === 1 || hubs.every((o) => dist(o.x, o.y, x, y) >= 23));

@@ -1,4 +1,4 @@
-import { notePractice, onSharedWork } from './trades';
+import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
 import { addEvent, addFx, addLog } from './events';

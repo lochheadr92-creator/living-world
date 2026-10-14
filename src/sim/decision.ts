@@ -3,7 +3,6 @@ import { EXTERNAL_RETRIES, externalController } from './external';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
 import type { ExternalController } from './external';
 import { moodWeight } from './mood';
-import { tradeNudge } from './trades';
 import { goalNudge } from './life';
 import { isThreat } from './wildlife';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
@@ -18,6 +17,7 @@ import { workOptions } from './options_work';
 import { productionOptions } from './production';
 import { applyReliefGuard } from './relief';
 import { markSetAside } from './social';
+import { reviewTrade, tradeNudge, tradeReason } from './trade';
 import type { Activity, ActivityKind, Intention, NeedKey, OptionSummary, Person, World } from './types';
 
 import { hyp } from './util';
@@ -88,6 +88,7 @@ export function rankOptions(ctx: Ctx): Option[] {
   // the plan's nudge is bounded and never applies when the lab is choosing at random
   const scored = opts.map((o) => ({
     o,
+    // the plan's nudge and the trade's are both bounded and both off when the lab is choosing at random
     s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + goalNudge(world, p, o) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
   }));
   scored.sort((a, b) => b.s - a.s);
@@ -99,12 +100,13 @@ export function rankOptions(ctx: Ctx): Option[] {
  * is the honest account of why this option beat a better-scoring one: it says which plan and which step, and nothing about whether
  * the step will come to anything.
  */
-function because(o: Option, plan: Intention | null = null): string {
+function because(o: Option, plan: Intention | null = null, trade = ''): string {
   const forPlan = planReason(plan, o);
-  if (!o.parts.length) return forPlan ? `${forPlan} · ${o.goal}` : o.goal;
+  const lead = [forPlan, trade].filter(Boolean).join(' · ');
+  if (!o.parts.length) return lead ? `${lead} · ${o.goal}` : o.goal;
   const top = [...o.parts].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
   const parts = top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');
-  return forPlan ? `${forPlan} · ${parts}` : parts;
+  return lead ? `${lead} · ${parts}` : parts;
 }
 
 function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string, why?: string): void {
@@ -119,7 +121,7 @@ function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Opt
     considered: ctx.options.length,
     knownPlaces: countBeliefs(p),
     seenNow: p.seen.length,
-    because: why ?? (chosen ? because(chosen) : 'nothing to do'),
+    because: why ?? (chosen ? because(chosen, null, tradeReason(world, p, chosen)) : 'nothing to do'),
   };
 }
 
@@ -135,7 +137,7 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
     }
     act.data.optKey = o.key;
     const plan = intentFor(p, o);
-    const why = because(o, plan);
+    const why = because(o, plan, tradeReason(world, p, o));
     act.data.why = why;
     // this activity IS the plan's current step, so the inspector can tell a step under way from a step merely settled on
     if (plan) act.data.forPlan = plan.id;
@@ -171,6 +173,8 @@ export function decide(world: World, p: Person, trigger: string): void {
   const ctx = generateOptions(world, p, true);
   // a private plan is taken up, carried on, set aside, finished or given up here, before anything is ranked (rich worlds only)
   reviewIntentions(ctx);
+  // and a trade is taken up, kept, changed or given up, from their own skills and what they can see others doing (rich only)
+  reviewTrade(ctx);
   const ext = externalController();
   if (ext !== null && ext.controls(world, p)) {
     externalDecide(world, p, ctx, trigger, ext);
@@ -314,7 +318,7 @@ export function reviewActivity(world: World, p: Person): void {
     if (!act) return;
     const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : 'something better came up';
     act.data.optKey = best.key;
-    act.data.why = because(best);
+    act.data.why = because(best, null, tradeReason(world, p, best));
     if (probe.on && best.kind === 'wander') probeWander((ctx.stage === 'child' ? 'child ' : 'adult ') + 'review');
     record(world, p, ctx, ranked, best, danger ? 'danger' : criticalMismatch ? 'urgent need' : 'review');
     if (danger || criticalMismatch) markSetAside(world, p);

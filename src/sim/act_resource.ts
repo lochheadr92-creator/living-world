@@ -1,7 +1,7 @@
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { LOAN_TERM, NUTRITION, SOURCE_SKILL, SKILL_MAX, WATER_VALUE, WORK } from './constants';
-import { notePractice } from './trades';
+import { notePractice } from './apprentice';
 import { riskOfHarm } from './life';
 import { onTheft } from './misdeeds';
 import {

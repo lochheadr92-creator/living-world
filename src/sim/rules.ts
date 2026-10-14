@@ -8,7 +8,8 @@
 // * ORDINARY_RULES are the original values, to the digit. A world without `settings.ruleSet` uses them, so the ordinary world,
 //   saves made before this existed, and every staged scene behave exactly as they always did (tests/golden.test.ts holds that).
 // * scaledRules(...) express the same limits as ratios of how many people the world was founded with, and make the two "one of each"
-//   and "so many open sites" rules local: they count what is within SETTLEMENT_RADIUS tiles instead of everything in the world.
+//   and "so many open sites" rules local: they count what is within SETTLEMENT_RADIUS tiles instead of everything in the world, and
+//   allow a settlement one workplace of each kind for every ordinary camp's worth of founders (`facilityAllowance`).
 //   A scaled world with 28 founders has the ordinary limits except for that locality.
 import type { RuleSet, World } from './types';
 
@@ -37,15 +38,17 @@ export interface Rules {
   projectsRaisedAt: number;
   /** a workplace of one kind rules out another within this many tiles; Infinity means anywhere in the world */
   facilityRadius: number;
+  /**
+   * How many workplaces of one kind a settlement may hold within that radius. The ordinary world allows exactly one of each, which
+   * is right for a camp of 28 and wrong for a town: a hundred people queueing at one storehouse is a rule, not a decision anybody
+   * made. A scaled world allows one per ordinary camp's worth of founders, so a town of 100 may come to hold four storehouses,
+   * four granaries and so on - may, not must: somebody still has to want each one and build it.
+   */
+  facilityAllowance: number;
   /** open sites are counted within this many tiles of where a new one would go; Infinity means the whole world */
   siteRadius: number;
   /** at least this many ticks between one group of travellers arriving and the next, anywhere in the world (immigrationTick checks every 400) */
   arrivalSpacing: number;
-  /**
-   * workplaces of one kind a settlement may hold (storehouses included): the ordinary village has one of each; a settlement founded
-   * by several villages' worth of people may hold one per village's worth, so a town of a hundred is not held to one storehouse
-   */
-  facilitiesPerKind: number;
 }
 
 export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
@@ -58,9 +61,9 @@ export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
   projectsRaised: 3,
   projectsRaisedAt: 55,
   facilityRadius: Infinity,
+  facilityAllowance: 1,
   siteRadius: Infinity,
   arrivalSpacing: 6000,
-  facilitiesPerKind: 1,
 });
 
 /**
@@ -81,8 +84,8 @@ export function scaledRules(founders: number, settlementFounders: number = found
     projectsRaised: up(o.projectsRaised, settlementFounders),
     projectsRaisedAt: up(o.projectsRaisedAt, founders),
     facilityRadius: SETTLEMENT_RADIUS,
+    facilityAllowance: Math.max(1, Math.ceil(settlementFounders / ORDINARY_FOUNDERS)),
     siteRadius: SETTLEMENT_RADIUS,
-    facilitiesPerKind: Math.max(1, Math.round(settlementFounders / ORDINARY_FOUNDERS)),
     // one settlement's worth of travellers per spacing: the village's 6,000 ticks for one camp of its size, shorter in proportion to
     // how many such camps the world has (never below the 400 ticks at which arrivals are considered)
     arrivalSpacing: Math.max(400, Math.round((o.arrivalSpacing * settlementFounders) / Math.max(founders, settlementFounders))),

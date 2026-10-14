@@ -221,6 +221,89 @@ zero, and the kinds people settle on differing between seeds (read off the per-s
 learning no further from random choice than the nudges are from the control. A null result stands; nothing about the tilt is to be
 tuned to make the ensemble come out positive.
 
+## Stage 3, second piece: a trade (built, rich only, measured on one seed)
+
+The first piece (`learning.ts`, "what has paid") asks *what has paid ME*, and the measured answer was the same for everybody: the
+whole village learns that one kind of gathering pays and goes and does it (`topKindShare` 0.66-0.7 on the town ensemble). That is
+learning without division of labour. A trade (`src/sim/trade.ts`) is the other half of the question - not *what pays* but *what
+pays me more than it pays the people around me*, which is comparative advantage.
+
+What a person uses to settle on one, and nothing else:
+
+* **their own skills, measured against their own average** across the eleven skills, so somebody able at everything does not claim
+  every trade: what counts is the thing they are comparatively best at;
+* **what they can see other people doing** - `SeenEntity.work`, filled in perception.ts for rich worlds only, which says what kind
+  of work a watcher can plainly see somebody is at (chopping at a tree is wood, standing at the kiln is the kiln, hoeing is
+  farming). A trade that every single person in sight is already at costs 45 points, which is about the whole spread of starting
+  skills, so crowding can genuinely move somebody off something they are better at;
+* **their own estimate of what that work has paid them** (`p.payoff`, the first piece), which is how a trade that turns out badly
+  is given up.
+
+It is reconsidered at most every half day and is sticky (a different trade has to look 6 points better before anybody changes). It
+tilts the matching work options by `TRADE_NUDGE` = 6 - the same bound as a private plan's step and the payoff estimate - applied
+where the ranking is made (`decision.ts`), never in an option's own utility, so hunger, thirst, cold and a wolf still win every
+time and the engine still generates and ranks everything. The person card says it in one line under *Traits & skills*, and the
+decision record names it ("woodcutting is my trade") when it was part of why.
+
+**Measured, one headless run, Large, seed meadow, rich, 12 days** (103 people alive):
+
+| | |
+|---|---|
+| people with a trade | 70 of 103 (68%) |
+| trades in use | baking 11, carpentry 9, building 8, handiwork 8, smithing 7, stonework 6, farming 6, the kiln 5, woodcutting 4, fishing 3, foraging 3 |
+| changes of trade | 18 |
+| why, in their own words | "quicker at it than at anything else" x33, "nobody else here does it" x21, "...was not paying" x16 |
+
+So a village of a hundred comes out with eleven trades rather than one, a fifth of them chosen *because nobody else there was
+doing it*, and a sixth of them given up because they stopped paying. An authored world has none of it (0 of 29 after 12 days), and
+`rich-no-trades` removes it and nothing else.
+
+Not yet measured: whether a village with trades is better off (`workplaces`, `tools`, `meanCondition`) or only more differentiated,
+and whether the trades a seed settles on differ between seeds. The ensemble is the test, and nothing about the tilt is to be tuned
+to make it come out positive:
+
+```
+node scripts/lab.mjs --out trade_out --seeds 24 --fork 0 --days 12 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-trades,rich-no-learning
+```
+
+## A town of a hundred: what killed it, and what did not (`scripts/famine.ts`)
+
+The `town` profile is a hundred people in ONE camp on the ordinary 80x80 map: the Large population with nowhere to spread, a density
+experiment rather than a bigger village. Under rich dynamics it died. 24 seeds, 12 days, no arrivals: **11.3 deaths of 100 on average**,
+and bimodally so - 12 seeds lost 3 or fewer, 8 lost 18 or more (gen-3 50, nov-9 45, fern 44, cedar 29). Four camps of 25 under the same
+stakes lose about half a person.
+
+`scripts/famine.ts` is the instrument: one headless run, nothing switched on or off, one line a day of food gathered, food spoiled, food
+eaten, food standing in stores and in packs, how many different people were critically hungry, the wood harvest, the trees standing, the
+baskets, the fires, and every death with what it was of. Read against the same run of `large` and of the ordinary village it says this:
+
+* **Per head, a town gathers and eats about what a village does in good weather.** Good days: 4.7 units of food gathered per person,
+  3.9 eaten, 0.65 spoiled - a surplus of about 5 units a day for a hundred people, which is nothing.
+* **The lean season is where they part.** Wild food comes back at a tenth of its pace for 3-6 days. The town's harvest falls to 2.0-2.5
+  per head, the four camps' to 2.6-2.9, and the town enters the lean season with 337 units of food (stores plus packs) where the four
+  camps have 466. The town is empty by the third lean day and then dies in a cascade: on seed `fern`, 80 of 100 people critically hungry
+  on day 11, and 23 deaths, 15 of them of hunger.
+* **The town spends MORE of its time gathering and brings back LESS**: 19-24% of all sampled activity against the four camps' 16-17%, for
+  a fifth less food. A hundred people share one camp's walking distance, so every bush is visited three and a half times as often and is
+  three and a half times as thin when they get there. That is the density itself, not a rule.
+* **Two rules, though, were simply wrong at that scale, and both have been fixed** (see `docs/SCALING.md`):
+  1. one workplace of each kind per settlement, which gave a hundred people one storehouse where four camps of 25 had four;
+  2. wolves scaled by people alone, which put eleven dens inside one village's walking distance (the Large profile's twelve dens are
+     spread over four times the land).
+  Measured with the instrument, before and after, 12 days each: gen-3 50 deaths -> 8, nov-9 45 -> 11, fern 44 -> 23, aspen 18 -> 11,
+  cedar 29 -> 2, meadow 1 -> 0; the mean over those six seeds falls from 31.2 to 9.2. On seed `meadow` the worst day goes from 16 people
+  critically hungry to 11, and nobody dies.
+* **A third candidate was tested and refuted.** A town has a quarter of the trees per head that a village or the Large profile has (8.4
+  against 28.7 and 35.2), because the forest is drawn over the map before any camp is placed and so is the one per-camp quantity that
+  never scaled. Scaling it by the crowding made everything far worse - gen-3 8 deaths -> 50, fern 23 -> 81 - because trees occupy the
+  ground the food clusters are placed on (food per head fell from 3.08 to 2.00 sources) and a denser forest blocks the way to water
+  (thirst deaths appeared, 12 on one seed). Wood is not what the town is short of; walkable ground with food on it is. The change was
+  reverted and is not in the branch.
+
+What remains is the density effect itself, which is what the profile exists to show. Closing the last of it would mean changing something
+that is not a mis-scaled rule - the spoilage multiplier (`SPOIL_STORE`, which eats the whole surplus of good days) or where a camp's food
+clusters are laid - both of which change every rich world, including the ensembles already measured.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures

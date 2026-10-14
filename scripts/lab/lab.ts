@@ -15,7 +15,7 @@ import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
 import { setLearning } from '../../src/sim/learning';
-import { setTrades } from '../../src/sim/trades';
+import { setTrades } from '../../src/sim/trade';
 import { SOURCE_SKILL } from '../../src/sim/constants';
 import type { Activity, Person } from '../../src/sim/types';
 import { setMoodEffects } from '../../src/sim/mood';
@@ -64,7 +64,8 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * built on the same mechanism (making a tool, mending a roof) - to isolate what planning as such contributes. `rich-no-ask` keeps
  * every plan and removes only Stage D1's ask for a project's missing material, to isolate what the cooperation contributes on top
  * of planning. `rich-no-learning` keeps everything else about a rich world and removes only Stage 3's estimates of what pays, to
- * isolate what learning from one's own outcomes contributes. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
+ * isolate what learning from one's own outcomes contributes. `rich-no-trades` keeps everything else about a rich world and removes
+ * only the trade people settle on (trade.ts), to isolate what division of labour contributes. `rich-stakes-only` and `rich-mood-only` split `rich` into its two halves (to tell which one does what). `rich` switches rich dynamics on (mood.ts, hardship.ts). `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
   const spec = ALIASES[specIn] ?? specIn;
@@ -147,7 +148,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-trades') {
     return {
       spec: label,
-      summary: 'rich dynamics with trades removed: nobody takes up a calling or an apprentice, and no option is nudged by one',
+      summary: 'rich dynamics with the trade removed: nobody settles on one kind of work as theirs, and nothing tilts toward it',
       apply: (w) => {
         w.settings.dynamics = 'rich';
         return 'rich dynamics on, trades off';

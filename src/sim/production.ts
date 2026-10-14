@@ -68,27 +68,25 @@ export function facilitiesOf(ctx: Ctx, type: BuildingType): Fac[] {
  * own settlement counts: a workshop on the far side of the map is not a means they can plan around.
  */
 export function knowsOfAny(ctx: Ctx, type: BuildingType): boolean {
-  return knownOf(ctx, type) > 0;
-}
-
-/** how many workplaces of that kind this person knows of in their settlement, standing or being built */
-export function knownOf(ctx: Ctx, type: BuildingType): number {
   const radius = rulesOf(ctx.world).facilityRadius;
-  if (radius === Infinity) return beliefsByKind(ctx.p, ['building', 'site']).filter((b) => b.btype === type).length;
+  if (radius === Infinity) return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type);
   const at = settlementAnchor(ctx);
-  return beliefsByKind(ctx.p, ['building', 'site']).filter((b) => b.btype === type && within(radius, at.x, at.y, b.x, b.y)).length;
+  return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type && within(radius, at.x, at.y, b.x, b.y));
 }
 
 /**
- * Is there room for another workplace of that kind, as far as this person knows? The ordinary village holds one of each. A settlement
- * founded by several villages' worth of people may hold one per village's worth (rules.ts facilitiesPerKind), but it grows into them:
- * a second of a kind is wanted only once eight solid homes stand for every one there is, so a town does not lay out four kilns on
- * its first afternoon.
+ * Does this person already know of as many workplaces of that kind as their settlement is allowed (rules.ts facilityAllowance)?
+ * This is the question behind "should anyone want another one", where `knowsOfAny` is the question behind "is there one I could
+ * use". They are the same in the ordinary world, where the allowance is one. Counted from this person's own beliefs: somebody who
+ * has not yet seen the second granary may still set out to lay one out, and the site rules will tell them when they get there.
  */
-export function roomForAnother(ctx: Ctx, type: BuildingType, solidHomes: number): boolean {
-  const have = knownOf(ctx, type);
-  const allowed = Math.min(rulesOf(ctx.world).facilitiesPerKind, 1 + Math.floor(solidHomes / 8));
-  return have < allowed;
+export function knowsEnough(ctx: Ctx, type: BuildingType): boolean {
+  const rules = rulesOf(ctx.world);
+  if (rules.facilityAllowance <= 1) return knowsOfAny(ctx, type);
+  const at = settlementAnchor(ctx);
+  let n = 0;
+  for (const b of beliefsByKind(ctx.p, ['building', 'site'])) if (b.btype === type && within(rules.facilityRadius, at.x, at.y, b.x, b.y)) n++;
+  return n >= rules.facilityAllowance;
 }
 
 const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
@@ -831,7 +829,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   const grainKnown = unitsOf(p.inv.grain) + beliefsByKind(p, ['building']).filter((b) => b.hh === p.hhId).reduce((n, b) => n + unitsOf(b.items?.grain), 0);
   const plots = world.plots.filter((pl) => pl.hhId === p.hhId).length;
 
-  if (!haveYard) {
+  if (!knowsEnough(ctx, 'timber_yard')) {
     let s = 0;
     const planks = planksWanted(ctx);
     if (planks > 0) s += 0.9;
@@ -839,21 +837,21 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if ((p.skills.carpentry > 1.05 || p.traits.curiosity > 0.6) && init > 0.5) s += 0.15;
     if (s >= 0.5) out.push({ type: 'timber_yard', signal: Math.min(1, s), why: planks > 0 ? 'planks are wanted and there is no yard to saw them' : 'the old hut is too small and too poor a roof: a yard would give us planks' });
   }
-  if (roomForAnother(ctx, 'quarry', solidHomes) && outcrops.length > 0) {
+  if (!knowsOfAny(ctx, 'quarry') && outcrops.length > 0) {
     let s = 0;
     if (stoneNeeded >= 6) s += 0.7;
     if (stonePoor) s += 0.35;
     if (haveYard || knowsOfAny(ctx, 'kiln')) s += 0.15;
     if (s >= 0.55) out.push({ type: 'quarry', signal: Math.min(1, s), why: 'stone is wanted and loose rocks are few — there is a big outcrop to cut' });
   }
-  if (!haveKiln && clayKnown) {
+  if (!knowsEnough(ctx, 'kiln') && clayKnown) {
     let s = 0;
     if (bricksWanted(ctx) > 0) s += 0.9;
     if (wish > 0.5 && haveYard) s += 0.5;
     if (knowsOfAny(ctx, 'smithy') || (oreKnown && haveYard && init > 0.55)) s += 0.45;
     if (s >= 0.55) out.push({ type: 'kiln', signal: Math.min(1, s), why: bricks_or_charcoal(ctx) });
   }
-  if (roomForAnother(ctx, 'smithy', solidHomes) && oreKnown && haveKiln) {
+  if (!knowsEnough(ctx, 'smithy') && oreKnown && haveKiln) {
     let s = 0;
     const worn = toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar');
     if (worn) s += 0.5;
@@ -861,14 +859,14 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (init > 0.5) s += 0.25;
     if (s >= 0.6 || (oreKnown && init > 0.5 && world.tick > DAY * 14)) out.push({ type: 'smithy', signal: Math.min(1, s), why: 'tools are wearing out and there is ore to be smelted' });
   }
-  if (roomForAnother(ctx, 'granary', solidHomes) && haveYard && hs.shortage < 0.5) {
+  if (!knowsEnough(ctx, 'granary') && haveYard && hs.shortage < 0.5) {
     let s = 0;
     if (grainKnown >= 6) s += 0.5;
     if (plots >= 2) s += 0.4;
     if (init > 0.45) s += 0.15;
     if (s >= 0.6) out.push({ type: 'granary', signal: Math.min(1, s), why: 'the grain keeps going off in the stores' });
   }
-  if (roomForAnother(ctx, 'bakery', solidHomes) && haveKiln && hs.shortage < 0.4) {
+  if (!knowsEnough(ctx, 'bakery') && haveKiln && hs.shortage < 0.4) {
     let s = 0;
     if (grainKnown >= 8) s += 0.45;
     if (plots >= 2) s += 0.3;
@@ -880,7 +878,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   let alive = 0;
   if (isRich(world)) for (const q of world.persons) if (q.alive) alive++;
   const crowd = alive >= 24;
-  if (roomForAnother(ctx, 'hall', solidHomes) && (haveYard || crowd) && solidHomes >= 3 && hs.shortage < 0.5) {
+  if (!knowsEnough(ctx, 'hall') && (haveYard || crowd) && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
     if (crowd) s += 0.3;

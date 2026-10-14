@@ -362,7 +362,9 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   // what they have seen and been told of others (rich worlds only; the heading goes when there is nothing)
   const heardHead = h('div', { class: 'sub-h cap' }, 'What they have heard of people');
   const heardBox = h('div', { class: 'list heard' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox, payHead, payBox, heardHead, heardBox);
+  // the trade they have settled on, if any: one line, in their own terms (trade.ts; an apprenticeship is said beside it)
+  const tradeLine = h('p', { class: 'trait-sum' });
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox, tradeLine, payHead, payBox, heardHead, heardBox);
   const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
     heardBox,
     () => {
@@ -534,9 +536,11 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       }
 
       if (traitSec.isOpen()) {
-        setText(traitSummary, (v.traitSummary ? cap(v.traitSummary) + '.' : '') + (v.trade ? ` ${cap(v.trade)}.` : '') + (v.goal ? ` ${cap(v.goal)}.` : ''));
+        setText(traitSummary, (v.traitSummary ? cap(v.traitSummary) + '.' : '') + (v.goal ? ` ${cap(v.goal)}.` : ''));
         traitList.sync(v.traits, (t) => t.key);
         skillList.sync(v.skills, (s) => s.key);
+        setText(tradeLine, v.trade ? `Their trade: ${v.trade}.` : '');
+        setHidden(tradeLine, !v.trade);
         setHidden(payHead, v.payoffs.length === 0);
         payList.sync(v.payoffs, (s) => s.key);
         setHidden(heardHead, v.heard.length === 0);
