@@ -414,6 +414,15 @@ export interface Payoff {
   r: number;
 }
 
+/** a trade (trades.ts; rich worlds only): the skill they call their own, since when, whose apprentice they are (0: nobody's), last practice */
+export interface Trade {
+  kind: SkillKey;
+  since: number;
+  master: number;
+  practised: number;
+  how: string;
+}
+
 /** a fever (illness.ts; rich worlds only): when it began, how bad it is now, rest credited against the course it must run, and how it came */
 export interface Illness {
   since: number;
@@ -519,6 +528,8 @@ export interface Person {
   /** the fever they have now (illness.ts; rich only, never created in an authored world) and until when they are safe from another */
   illness?: Illness;
   immuneUntil?: number;
+  /** their trade, if they have taken one up (trades.ts; rich only, never created in an authored world) */
+  trade?: Trade;
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;

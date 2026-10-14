@@ -1,6 +1,7 @@
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { LOAN_TERM, NUTRITION, SOURCE_SKILL, SKILL_MAX, WATER_VALUE, WORK } from './constants';
+import { notePractice } from './trades';
 import {
   addItem,
   claimUnits,
@@ -153,6 +154,7 @@ registerHandler('gather', {
     if (task) wearFor(world, p, task, a.duration);
     const sk = SOURCE_SKILL[s.type];
     p.skills[sk] = Math.min(SKILL_MAX, p.skills[sk] + 0.004);
+    notePractice(world, p, sk, 0.004);
     if (s.type === 'wild_grain' && world.rng.chance(0.2)) {
       // shell some of the grain heads for seed
       consume(world, p.inv, 'grain', 1, 'saved as seed');

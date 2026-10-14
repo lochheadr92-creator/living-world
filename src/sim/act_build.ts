@@ -2,6 +2,7 @@ import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WORK, isHomeType, isSolidHome } from './constants';
 import { buildingLabel, completeSite, createSite } from './buildings';
+import { notePractice, onSharedWork } from './trades';
 import { addItem, claimSlot, consume, invRoom, ledgerCreate } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { creditMade, creditRepair } from './intent';
@@ -91,12 +92,16 @@ registerHandler('build', {
     wearFor(world, p, 'build', 1);
     if (site.contrib) site.contrib[p.hhId] = (site.contrib[p.hhId] ?? 0) + 1 / 25;
     p.skills.build = Math.min(SKILL_MAX, p.skills.build + 0.0004);
+    notePractice(world, p, 'build', 0.0004);
     consumeForProgress(world, site);
     for (const c of p.commitments) if (c.status === 'active' && c.siteId === site.id) c.contrib = (c.contrib ?? 0) + 1;
     if (a.progress % 14 === 7) addFx(world, 'hammer', site.x + site.w / 2, site.y + site.h / 2, 0);
     if (site.work >= site.workTotal - 1e-9) {
       const b = completeSite(world, site, p);
       p.stats.built++;
+      // everyone who put work into it finished it together (rich only: where a builder may take on an apprentice)
+      const crew = world.persons.filter((q) => q.alive && (q === p || q.commitments.some((c) => c.siteId === site.id && (c.contrib ?? 0) > 0)));
+      onSharedWork(world, crew, 'build');
       addLog(world, p, 'work', `Finished building the ${buildingLabel(b.type)}.`);
       observe(world, p, b);
       delBelief(p, site.id);
@@ -152,6 +157,7 @@ registerHandler('repair', {
     a.cycle++;
     a.progress = 0;
     p.skills.build = Math.min(SKILL_MAX, p.skills.build + 0.003);
+    notePractice(world, p, 'build', 0.003);
     observe(world, p, b);
     if (b.condition >= 92) return 'done';
     if (!repairMaterial(b, p.inv)) return 'partial:ran out of materials';
@@ -197,6 +203,7 @@ registerHandler('craft', {
     creditMade(p, tool);
     p.stats.crafted++;
     p.skills.craft = Math.min(SKILL_MAX, p.skills.craft + 0.02);
+    notePractice(world, p, 'craft', 0.02);
     addLog(world, p, 'work', `Made ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}.`);
     if (world.tick - (world.stats.lastCraftEvent ?? -9999) > 500) {
       world.stats.lastCraftEvent = world.tick;

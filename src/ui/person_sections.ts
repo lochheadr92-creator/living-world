@@ -534,7 +534,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       }
 
       if (traitSec.isOpen()) {
-        setText(traitSummary, v.traitSummary ? cap(v.traitSummary) + '.' : '');
+        setText(traitSummary, (v.traitSummary ? cap(v.traitSummary) + '.' : '') + (v.trade ? ` ${cap(v.trade)}.` : ''));
         traitList.sync(v.traits, (t) => t.key);
         skillList.sync(v.skills, (s) => s.key);
         setHidden(payHead, v.payoffs.length === 0);

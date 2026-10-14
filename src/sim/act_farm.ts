@@ -1,3 +1,4 @@
+import { notePractice } from './trades';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { WORK } from './constants';
@@ -58,6 +59,7 @@ registerHandler('till', {
     wearFor(world, p, 'till', a.duration);
     p.stats.farmed++;
     p.skills.farm = Math.min(1.8, p.skills.farm + 0.012);
+    notePractice(world, p, 'farm', 0.012);
     observe(world, p, plot);
     return 'done';
   },
@@ -102,6 +104,7 @@ registerHandler('plant', {
     plot.lastTended = world.tick;
     p.stats.farmed++;
     p.skills.farm = Math.min(1.8, p.skills.farm + 0.008);
+    notePractice(world, p, 'farm', 0.008);
     addFx(world, 'seed', a.tx, a.ty, 0);
     observe(world, p, plot);
     return 'done';
@@ -143,6 +146,7 @@ registerHandler('tend', {
     wearFor(world, p, 'tend', a.duration);
     p.stats.farmed++;
     p.skills.farm = Math.min(1.8, p.skills.farm + 0.005);
+    notePractice(world, p, 'farm', 0.005);
     observe(world, p, plot);
     return 'done';
   },

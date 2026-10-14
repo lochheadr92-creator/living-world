@@ -15,6 +15,7 @@ import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
 import { setLearning } from '../../src/sim/learning';
+import { setTrades } from '../../src/sim/trades';
 import { SOURCE_SKILL } from '../../src/sim/constants';
 import type { Activity, Person } from '../../src/sim/types';
 import { setMoodEffects } from '../../src/sim/mood';
@@ -140,6 +141,20 @@ export function parseIntervention(specIn: string): Intervention {
       install: () => {
         setLearning(false);
         return () => setLearning(true);
+      },
+    };
+  }
+  if (kind === 'rich-no-trades') {
+    return {
+      spec: label,
+      summary: 'rich dynamics with trades removed: nobody takes up a calling or an apprentice, and no option is nudged by one',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, trades off';
+      },
+      install: () => {
+        setTrades(false);
+        return () => setTrades(true);
       },
     };
   }

@@ -1,3 +1,4 @@
+import { notePractice, onSharedWork } from './trades';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
 import { addEvent, addFx, addLog } from './events';
@@ -589,8 +590,15 @@ export function finishJob(world: World, b: Building): boolean {
       const q = personById(world, Number(k));
       if (!q || job.workers[Number(k)] / total < 0.2) continue;
       const base = SKILL_GAIN[r.skill as keyof typeof SKILL_GAIN] ?? 0.012;
-      q.skills[r.skill] = Math.min(SKILL_MAX, q.skills[r.skill] + base * Math.max(0.15, (SKILL_MAX - q.skills[r.skill]) / (SKILL_MAX - 0.7)));
+      const gain = base * Math.max(0.15, (SKILL_MAX - q.skills[r.skill]) / (SKILL_MAX - 0.7));
+      q.skills[r.skill] = Math.min(SKILL_MAX, q.skills[r.skill] + gain);
+      notePractice(world, q, r.skill, gain);
     }
+    // a job done together is where a tradesperson may take on an apprentice (rich only)
+    const together = Object.keys(job.workers)
+      .map((k) => personById(world, Number(k)))
+      .filter((q): q is Person => !!q && q.alive);
+    onSharedWork(world, together, r.skill);
   }
   // who did it
   const names = Object.keys(job.workers)

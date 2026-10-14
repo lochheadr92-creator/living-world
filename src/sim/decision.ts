@@ -3,6 +3,7 @@ import { EXTERNAL_RETRIES, externalController } from './external';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
 import type { ExternalController } from './external';
 import { moodWeight } from './mood';
+import { tradeNudge } from './trades';
 import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
@@ -85,7 +86,7 @@ export function rankOptions(ctx: Ctx): Option[] {
   // the plan's nudge is bounded and never applies when the lab is choosing at random
   const scored = opts.map((o) => ({
     o,
-    s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
+    s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
   }));
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
