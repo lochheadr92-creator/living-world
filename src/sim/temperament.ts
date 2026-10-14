@@ -44,9 +44,10 @@ export function crowdTick(world: World, p: Person): void {
 
 /** a tile at least ALONE_DIST from everyone, within reach, or null */
 function quietSpot(world: World, p: Person): { x: number; y: number } | null {
-  for (let i = 0; i < 12; i++) {
+  // nearer first, then farther out: in a town of a hundred the quiet is at the edge of the woods, not in the lanes
+  for (let i = 0; i < 18; i++) {
     const ang = hashUnit(p.id, world.tick, i) * Math.PI * 2;
-    const r = ALONE_DIST + 1 + hashUnit(p.id, world.tick, i + 20) * 12;
+    const r = ALONE_DIST + 1 + hashUnit(p.id, world.tick, i + 20) * 10 + i;
     const x = Math.floor(p.x + Math.cos(ang) * r);
     const y = Math.floor(p.y + Math.sin(ang) * r);
     if (!isWalkable(world, x, y)) continue;
