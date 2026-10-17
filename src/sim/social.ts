@@ -693,6 +693,7 @@ function keepOwnAskHonest(world: World, r: Request): void {
 
 export { answerInfo, pickNews, tellBelief } from './news';
 import { pickNews, tellBelief, answerInfo } from './news';
+import { noteContact, observeOffer } from './transmission';
 
 // ───────────────────────── conversations ─────────────────────────
 function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): { ok: boolean; why: string } {
@@ -757,6 +758,7 @@ function convOf(world: World, id: number): Conversation | undefined {
 function openConversation(world: World, A: Person, B: Person, actA: import('./types').Activity, purpose: ConvPurpose, data: ConvData): void {
   const c: Conversation = { id: world.nextId++, a: A.id, b: B.id, purpose, start: world.tick, phase: 0, nextAt: world.tick, end: 0, requestId: 0, data: { ...data } };
   world.conversations.push(c);
+  noteContact(world, 'conversation', A.id, B.id, c.id);
   // initiator: the 'socialize' activity becomes the conversation
   actA.kind = 'converse';
   actA.label = `Talking with ${B.name}`;
@@ -1171,8 +1173,13 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       if (!req) break;
       const belief = answerInfo(world, B, A, d.infoKind ?? 'food');
       if (belief) {
-        tellBelief(world, B, A, belief);
-        learn(A, { ...belief, src: 'told', from: B.id, learned: world.tick, origin: belief.origin ?? B.id, hops: (belief.hops ?? 0) + 1 });
+        // One logical offer with two writes underneath: `tellBelief` may refuse on its own freshness rule and the direct `learn`
+        // below writes anyway on a looser one. The diagnostics see the pair as one offer and classify what was actually written.
+        observeOffer(world, 'ask_info', B, A, belief, () => {
+          const told = tellBelief(world, B, A, belief);
+          learn(A, { ...belief, src: 'told', from: B.id, learned: world.tick, origin: belief.origin ?? B.id, hops: (belief.hops ?? 0) + 1 });
+          return told;
+        });
         bubble(world, B, D.infoLine(world, belief, B.id, A.id), 'say', 70);
         settle(world, req, 'fulfilled', `told about a ${BELIEF_NOUN[belief.kind]}`);
         adjustRel(A, B.id, world.tick, { aff: 1.6, trust: 1.2, note: `${B.name} told me where to find ${d.infoKind ?? 'food'}` });
@@ -1191,7 +1198,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const b = A.beliefs[id];
         if (b) {
           // tellBelief's verdict is the evidence of delivery: true when B did not know, false when B knew as much already
-          c.data.warnDelivered = tellBelief(world, A, B, b);
+          c.data.warnDelivered = observeOffer(world, 'warn', A, B, b, () => tellBelief(world, A, B, b));
           bubble(world, B, 'Thanks for the warning.', 'say', 50);
           adjustRel(B, A.id, world.tick, { aff: 1.8, trust: 2.2, note: `${A.name} warned me about a wolf` });
           if ((world.stats.lastWarnEvent ?? -9999) < world.tick - 900) {
@@ -1231,7 +1238,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       }
       const w = 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(B) / 100) + (rel?.kin ? 0.2 : 0);
       if (w >= 0.55 && siteBelief && world.byId.has(d.siteId ?? 0)) {
-        tellBelief(world, A, B, siteBelief);
+        observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
         req.status = 'promised';
         req.note = `${B.name} will help build`;
@@ -1375,7 +1382,7 @@ function phaseNews(world: World, S: Person, L: Person): void {
   let shown = false;
   let learned = 0;
   for (const b of news) {
-    const isNew = tellBelief(world, S, L, b);
+    const isNew = observeOffer(world, 'news', S, L, b, () => tellBelief(world, S, L, b));
     if (isNew) {
       learned++;
       if (!shown && !S.speech) {
@@ -1529,6 +1536,7 @@ export function passingGreetings(world: World, p: Person): void {
     const chance = 0.2 + 0.45 * p.traits.sociability + Math.min(0.25, (rel?.familiarity ?? 0) / 80);
     if (hashUnit(p.id, q.id, world.tick >> 4) > chance) continue;
     p.wave = world.tick + 28;
+    noteContact(world, 'greeting', p.id, q.id, world.tick);
     p.cooldowns['greet' + q.id] = world.tick + GREET_COOLDOWN;
     adjustRel(p, q.id, world.tick, { aff: 0.3, fam: 0.5 });
     if (hashUnit(q.id, p.id, world.tick >> 4) < 0.75 && q.wave < world.tick) {

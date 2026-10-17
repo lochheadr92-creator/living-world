@@ -8,6 +8,7 @@ import { consume, foodUnits, pickFood, transfer } from './economy';
 import { dayFraction } from './environment';
 import { addEvent, addFx, addLog, say as speak } from './events';
 import { pickNews, tellBelief } from './news';
+import { noteContact, observeOffer } from './transmission';
 import type { Ctx } from './optutil';
 import { Scorer, addBlocked, addOption, beliefsByKind, eta, pen, spotNear, traitMods } from './optutil';
 import { personById } from './registry';
@@ -398,6 +399,7 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
     const w = 0.34 + 0.4 * B.traits.sociability + 0.3 * Math.max(0, aff) / 100 + (hungry ? 0.18 : 0) + (B.hhId === A.hhId ? 0.2 : 0) - 0.4 * (Math.max(0, 40 - B.needs.energy) / 40);
     if (hashUnit(B.id, A.id, world.tick >> 4) > w) why = 'preferred to stay on with their own plans';
   }
+  noteContact(world, 'invitation', A.id, B.id, `${m.id}:${world.tick}`);
   if (why) {
     m.missed[B.id] = `declined: ${why}`;
     A.cooldowns['invite' + B.id] = world.tick + INVITE_COOLDOWN;
@@ -409,7 +411,7 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
   m.reserved = m.accepted.length;
   // the invitation carries the place with it: the guest now knows where to go (and how old that knowledge is)
   const pb = A.beliefs[m.placeId];
-  if (pb) tellBelief(world, A, B, pb);
+  if (pb) observeOffer(world, 'invite', A, B, pb, () => tellBelief(world, A, B, pb));
   bubble(world, B, 'I’d love to.', 'happy', 50);
   addLog(world, B, 'social', `Promised to eat with ${A.name} at ${m.placeName}.`);
   A.cooldowns['invite' + B.id] = world.tick + INVITE_COOLDOWN;
@@ -470,6 +472,8 @@ function finishMeal(world: World, m: Meal): void {
   for (const a of ate)
     for (const b of ate) {
       if (a.id >= b.id) continue;
+      // who really ate together, from the full membership and once per meal: the host counts only if they ate too
+      noteContact(world, 'meal', a.id, b.id, m.id);
       adjustRel(a, b.id, world.tick, { aff: 1.2, trust: 0.6, fam: 0.8, note: 'ate together' });
       adjustRel(b, a.id, world.tick, { aff: 1.2, trust: 0.6, fam: 0.8, note: 'ate together' });
     }
@@ -545,8 +549,9 @@ function hallGossip(world: World): void {
     const S = present[i];
     const L = present[j];
     if (S === L) continue;
+    noteContact(world, 'hall', S.id, L.id, `${b.id}:${world.tick}`);
     const news = pickNews(world, S, L, 1);
-    for (const n of news) if (tellBelief(world, S, L, n)) addFx(world, 'sparkle', S.x, S.y, 0);
+    for (const n of news) if (observeOffer(world, 'hall', S, L, n, () => tellBelief(world, S, L, n))) addFx(world, 'sparkle', S.x, S.y, 0);
   }
 }
 
