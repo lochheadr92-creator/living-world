@@ -1,6 +1,8 @@
-# The world pass: what a rich world has that an authored one does not
+# The integrated world: implemented systems and evidence limits
 
-One page, one line of truth per mechanism: what it is, where it is read, and how to see it in the page. Everything here is
+Current direction (2026-10-17): these systems are the default for new product worlds. The internal `rich` name remains for save compatibility and lab controls; it is no longer an opt-in product mode. See [DEVELOPMENT_POLICY.md](DEVELOPMENT_POLICY.md). The implementation inventory below does not establish aggregate benefit for every system.
+
+Historical implementation notes follow. One page, one line of truth per mechanism: what it is, where it is read, and how to see it in the page. Everything here is
 behind `settings.dynamics = 'rich'`. In an authored world every function below returns its neutral value and no field below is
 ever created, so authored saves and fingerprints are untouched (the golden suite checks this on every commit). Every chance
 below is a hash of the seed, the person and the tick, never a draw from the world's random stream, so a replay is exact and
@@ -46,6 +48,12 @@ switches on the same pattern.
 ## What is not done
 
 Nothing here is tuned against an ensemble; the numbers are first settings chosen to be visible without dominating (a gathering
-beats a chore, never a pressing need; a trade's nudge is the plan's nudge; a hope's is smaller). The next pass (the user's list:
-boundaries and alone time, mentors and apprentices, crews, mediation, shared responsibilities, life changes, traditions) builds
-on the records this one leaves: `p.heard`, `p.trade`, `p.apprentice`, `p.goal`, `world.chronicle`.
+beats a chore, never a pressing need; a trade's nudge is the plan's nudge; a hope's is smaller).
+
+**That next pass has since been built** (status read from the source on 2026-10-17): boundaries and alone time
+(`temperament.ts`), mentors and apprentices (`apprentice.ts`, on `trade.ts`), crews (`crews.ts`), mediation (`mediation.ts`),
+shared responsibilities (`responsibilities.ts`), life changes (`lifechanges.ts`) and traditions (`traditions.ts`), each with its
+own unit test (`tests/{temperament,apprentice,crews,mediation,responsibilities,lifechanges,traditions}.test.ts`). They do build on
+the records named here: `p.heard`, `p.trade`, `p.apprentice`, `p.goal`, `world.chronicle`. What that establishes is that the
+mechanisms exist, are rich-only and are deterministic - not that any of them improves an outcome: no ensemble has been run for
+either pass, and one 12-day observation found apprenticeship starting once in four worlds.
