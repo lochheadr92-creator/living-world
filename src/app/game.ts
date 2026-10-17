@@ -94,7 +94,7 @@ export class Game {
   private listeners = new Set<(e: GameEvent) => void>();
 
   constructor(settings?: Partial<Settings>) {
-    this.settings = { ...defaultSettings(), ...settings };
+    this.settings = { ...defaultSettings(), dynamics: 'rich', ...settings };
     this.world = createWorld(this.settings);
   }
 
@@ -247,7 +247,9 @@ export class Game {
 
   // ── worlds ──
   restart(opts: Partial<Settings> = {}): void {
-    this.settings = { ...this.settings, ...opts };
+    // A restart creates a new current world. Explicit diagnostic settings can still request legacy rules;
+    // restoring an existing save uses restoreWorld instead and never passes through this default.
+    this.settings = { ...this.settings, dynamics: 'rich', ...opts };
     this.world = createWorld(this.settings);
     this.acc = 0;
     this.alpha = 0;

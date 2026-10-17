@@ -19,8 +19,9 @@ const sample = Number(opt('sample', '120'));
 // `--branches none` runs the control alone (the gates use that)
 const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((b) => b && b !== 'none');
 
-// `--dynamics rich` founds the world with rich dynamics (so the control is rich too)
-const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
+// The current simulation is the baseline; --dynamics authored explicitly reproduces older experiments.
+const dynamics = opt('dynamics', 'rich') as 'authored' | 'rich';
+if (dynamics !== 'rich' && dynamics !== 'authored') throw new Error('--dynamics must be rich or authored');
 const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
 // `dynamics` goes on every row: a result from a rich world is not comparable with one from an authored world, and the gates
 // (scripts/gates.ts) refuse to compare them rather than quietly treating one as a baseline for the other.

@@ -6,8 +6,6 @@ export interface Prefs {
   seed: string;
   harsh: boolean;
   immigration: boolean;
-  /** people have a mood and lean seasons happen (rich dynamics); next new world */
-  rich: boolean;
   /** the size of world last started: 'normal' (the village), 'large', 'huge' or 'town' */
   size: ProfileName;
   speed: number;
@@ -25,7 +23,6 @@ export const DEFAULT_PREFS: Prefs = {
   seed: 'meadow',
   harsh: false,
   immigration: true,
-  rich: false,
   size: 'normal',
   speed: 1,
   overlays: { perception: false, paths: false, intentions: false, knowledge: false, labels: false },
@@ -39,7 +36,8 @@ export function loadPrefs(): Prefs {
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return { ...DEFAULT_PREFS, overlays: { ...DEFAULT_PREFS.overlays } };
-    const p = JSON.parse(raw) as Partial<Prefs>;
+    // The retired mode preference must not keep an existing installation on the old simulation.
+    const { rich: _retiredMode, ...p } = JSON.parse(raw) as Partial<Prefs> & { rich?: boolean };
     return {
       ...DEFAULT_PREFS,
       ...p,

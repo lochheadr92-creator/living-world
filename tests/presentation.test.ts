@@ -4,6 +4,7 @@ import { TPS } from '../src/sim/constants';
 import { describeEntity, describePerson } from '../src/sim/inspect';
 import { describeFacility, interactionViews } from '../src/sim/inspect_work';
 import { createWorld, defaultSettings } from '../src/sim/factory';
+import { currentWorldSettings } from '../src/sim/profiles';
 import { weightOf } from '../src/sim/economy';
 import { newActivity, startActivity } from '../src/sim/activities';
 import { startJob } from '../src/sim/facilities';
@@ -106,7 +107,7 @@ describe('the clock under stalls and overload', () => {
   });
 
   it('stalls and speed changes in the middle of a run do not change what happens: same seed, same tick, same world', () => {
-    const reference = createWorld({ ...defaultSettings('presentation-stall') });
+    const reference = createWorld(currentWorldSettings('normal', 'presentation-stall'));
     runTicks(reference, 1500);
     const g = new Game({ seed: 'presentation-stall' });
     let i = 0;
@@ -121,7 +122,7 @@ describe('the clock under stalls and overload', () => {
       if (g.world.tick > 1500) break;
     }
     // a stall may skip real time, never world time: the world is whatever a plain run of that many ticks gives
-    const plain = createWorld({ ...defaultSettings('presentation-stall') });
+    const plain = createWorld(currentWorldSettings('normal', 'presentation-stall'));
     runTicks(plain, g.world.tick);
     expect(hashWorld(g.world)).toBe(hashWorld(plain));
     void MAX_STEPS_PER_FRAME;

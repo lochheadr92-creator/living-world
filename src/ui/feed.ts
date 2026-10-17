@@ -23,7 +23,7 @@ export const FEED_CATEGORIES: Category[] = [
   { id: 'work', label: 'Workshops', kinds: ['work'], tip: 'Planks sawn, bricks fired, bread baked, tools and handcarts made. In the full list only the latest few of these appear, repeats rolled into one line.' },
   { id: 'danger', label: 'Danger & conflict', kinds: ['danger', 'conflict'], tip: 'Wolves, warnings, arguments, refusals and broken promises' },
   { id: 'nature', label: 'Nature', kinds: ['nature'], tip: 'Weathering and decay of the things people built' },
-  { id: 'chronicle', label: 'Chronicle', kinds: null, tip: 'The settlement\'s record, kept after the feed has moved on: lives, the land, what was built, what was held, what was fought over (worlds with rich dynamics)' },
+  { id: 'chronicle', label: 'Chronicle', kinds: null, tip: 'The settlement\'s record, kept after the feed has moved on: lives, the land, what was built, what was held, what was fought over' },
 ];
 
 const MAX_ROWS = 30;
@@ -240,7 +240,7 @@ export function createFeed(ctx: UICtx, slots: Slots): Part {
     list.sync(rows, (r) => r.key);
     if (hadScroll) listEl.scrollTop += listEl.scrollHeight - before;
     setHidden(emptyEl, rows.length > 0);
-    setText(emptyEl, filter === 'chronicle' && !world.chronicle ? 'The chronicle is kept in worlds with rich dynamics.' : events.length === 0 ? 'Nothing has happened yet. Give it a moment.' : 'Nothing of this kind yet.');
+    setText(emptyEl, filter === 'chronicle' && !world.chronicle && world.settings.dynamics !== 'rich' ? 'This earlier world has no chronicle. New worlds keep a settlement record.' : events.length === 0 ? 'Nothing has happened yet. Give it a moment.' : 'Nothing of this kind yet.');
     toggle(listEl, 'is-empty', rows.length === 0);
   }
 

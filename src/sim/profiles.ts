@@ -62,6 +62,13 @@ export function restartSettings(profile: ProfileName, seed: string, base: Partia
   return { ...s, profile: s.profile, ruleSet: s.ruleSet, settlementFounders: s.settlementFounders };
 }
 
+/** Product entry point: new worlds use the current integrated rules, including after loading a legacy save.
+ * The older helpers keep their historical defaults for existing lab scripts, fixtures and replay compatibility.
+ */
+export function currentWorldSettings(profile: ProfileName, seed: string, base: Pick<Partial<Settings>, 'harsh' | 'immigration'> = {}): Settings {
+  return restartSettings(profile, seed, { ...base, dynamics: 'rich' });
+}
+
 /** what a world of this profile is, for a menu to say: the size of the map, how many people start, in how many camps */
 export function profileFacts(profile: ProfileName): { W: number; H: number; founders: number; camps: number } {
   if (profile === 'normal') return { W: 80, H: 80, founders: ORDINARY_CAMP, camps: 1 };

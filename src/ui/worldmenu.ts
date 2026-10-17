@@ -1,6 +1,6 @@
 // The world menu: seed, new world, random seed, difficulty toggles, test scenes, save and load.
 import { hasSavedGame, loadGame, saveGame, savedGameInfo } from '../app/save';
-import { profileFacts, restartSettings } from '../sim/profiles';
+import { currentWorldSettings, profileFacts } from '../sim/profiles';
 import type { ProfileName } from '../sim/profiles';
 import { SCENE_LABELS } from '../sim/scenes';
 import type { SceneId } from '../sim/types';
@@ -147,10 +147,8 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     ctx.prefs.harsh = v;
     ctx.savePrefs();
   });
-  const rich = makeSwitch('Rich dynamics', 'Mood that changes choices; lean seasons · next new world', game.settings.dynamics === 'rich', (v) => {
-    ctx.prefs.rich = v;
-    ctx.savePrefs();
-  });
+  const legacyNote = h('p', { class: 'si-blurb', hidden: game.settings.dynamics === 'rich' },
+    'This world uses earlier rules. Loading keeps those rules; new worlds use the current simulation.');
   const arrivals = makeSwitch('Arrivals', 'Travellers may join · next new world', game.settings.immigration, (v) => {
     ctx.prefs.immigration = v;
     ctx.savePrefs();
@@ -199,7 +197,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         'data-scene': s.id,
         'aria-label': `${s.title}. ${s.blurb}`,
         onClick: () => {
-          if (s.id === 'natural') game.restart(restartSettings(size, game.settings.seed, { harsh: game.settings.harsh, immigration: game.settings.immigration, dynamics: game.settings.dynamics }));
+          if (s.id === 'natural') game.restart(currentWorldSettings(size, game.settings.seed, { harsh: game.settings.harsh, immigration: game.settings.immigration }));
           else game.loadScene(s.id);
           close();
         },
@@ -226,6 +224,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       h('label', { class: 'cap wm-lab', for: 'lw-seed-input' }, 'Start a new world'),
       h('div', { class: 'wm-seedrow' }, input, dice),
       newBtn,
+      legacyNote,
     ),
     h(
       'section',
@@ -233,7 +232,6 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
       h('div', { class: 'cap wm-lab', id: 'lw-size-label' }, 'World size · next new world'),
       h('div', { class: 'wm-scenes', role: 'radiogroup', 'aria-labelledby': 'lw-size-label' }, sizeBtns),
       harsh.el,
-      rich.el,
       arrivals.el,
     ),
     h('section', { class: 'wm-sec' }, h('div', { class: 'cap wm-lab' }, 'Scenes'), h('div', { class: 'wm-scenes' }, sceneBtns)),
@@ -247,9 +245,8 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
     const chosen = size;
     ctx.prefs.harsh = harsh.input.checked;
     ctx.prefs.immigration = arrivals.input.checked;
-    ctx.prefs.rich = rich.input.checked;
     const start = () => {
-      game.restart(restartSettings(chosen, seed, { harsh: harsh.input.checked, immigration: arrivals.input.checked, dynamics: rich.input.checked ? 'rich' : 'authored' }));
+      game.restart(currentWorldSettings(chosen, seed, { harsh: harsh.input.checked, immigration: arrivals.input.checked }));
       input.value = '';
       newBtn.disabled = false;
       newLabel.textContent = 'New world';
@@ -371,7 +368,7 @@ export function createWorldMenu(ctx: UICtx, slots: Slots): WorldMenu {
         curSeed.textContent = game.settings.seed;
         harsh.input.checked = game.settings.harsh;
         arrivals.input.checked = game.settings.immigration;
-        rich.input.checked = game.settings.dynamics === 'rich';
+        legacyNote.hidden = game.settings.dynamics === 'rich';
         size = game.settings.profile ?? 'normal';
         refreshSizes();
       }

@@ -3,7 +3,8 @@ import { Game, MAX_STEPS_PER_FRAME, SPEEDS } from '../src/app/game';
 import { TPS } from '../src/sim/constants';
 import { hashWorld, runTicks } from '../src/sim/world';
 import { killPerson } from '../src/sim/lifecycle';
-import { createWorld, defaultSettings } from '../src/sim/factory';
+import { createWorld } from '../src/sim/factory';
+import { currentWorldSettings } from '../src/sim/profiles';
 import { Renderer } from '../src/render/renderer';
 import { fakeCanvas, installFakeDom } from './helpers/fakeDom';
 
@@ -22,7 +23,7 @@ function driveTo(g: Game, n: number, dts: number[]): void {
 
 describe('the clock: simulation results do not depend on frame rate', () => {
   it('30 fps, 144 fps and an irregular stutter all reach the identical world at the same tick', () => {
-    const reference = createWorld({ ...defaultSettings('framerate') });
+    const reference = createWorld(currentWorldSettings('normal', 'framerate'));
     runTicks(reference, N);
     const want = hashWorld(reference);
     const patterns: Record<string, number[]> = {
@@ -87,7 +88,7 @@ describe('play, pause, step', () => {
     g.stepOnce();
     expect(g.world.tick).toBe(t + 3);
     // stepping is the same as running: same result as an uninterrupted run
-    const ref = createWorld({ ...defaultSettings('step') });
+    const ref = createWorld(currentWorldSettings('normal', 'step'));
     runTicks(ref, t + 3);
     expect(hashWorld(g.world)).toBe(hashWorld(ref));
   });

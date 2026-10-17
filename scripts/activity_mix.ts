@@ -14,7 +14,7 @@ const opt = (name: string, dflt: string): string => {
 };
 const seed = opt('seed', 'meadow');
 const days = Number(opt('days', '15'));
-const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
+const dynamics = opt('dynamics', 'rich') as 'authored' | 'rich';
 const w = createWorld(settingsForProfile(opt('profile', 'large') as ProfileName, seed, { immigration: false, dynamics }));
 const counts: Record<string, number> = {};
 w.hooks = { onActivityStart: (_p, a) => void (counts[a.kind] = (counts[a.kind] ?? 0) + 1) };

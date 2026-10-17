@@ -1,5 +1,5 @@
 // Run the counterfactual lab on every core of this machine, then print the report. Works on Windows, macOS, Linux.
-//   node scripts/lab.mjs [--out lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--dynamics rich] [--story meadow]
+//   node scripts/lab.mjs [--out current_lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--dynamics rich] [--story meadow]
 // Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn } from 'node:child_process';
@@ -12,14 +12,28 @@ const opt = (name, dflt) => {
   const i = args.indexOf('--' + name);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : dflt;
 };
-const out = opt('out', 'lab_out');
+const out = opt('out', 'current_lab_out');
+const dynamics = opt('dynamics', 'rich');
+if (dynamics !== 'rich' && dynamics !== 'authored') throw new Error('--dynamics must be rich or authored');
 const n = Number(opt('seeds', '8'));
 const extra = ['--fork', opt('fork', '4'), '--days', opt('days', '8'), '--profile', opt('profile', 'large')];
 if (opt('branches', '')) extra.push('--branches', opt('branches', ''));
-if (opt('dynamics', '')) extra.push('--dynamics', opt('dynamics', ''));
+extra.push('--dynamics', dynamics);
 const all = ['meadow', 'river', 'fern', 'aspen', 'birch', 'cedar', 'gen-1', 'gen-2', 'gen-3', 'gen-4', 'gen-5', 'gen-6', ...Array.from({ length: 20 }, (_, i) => `nov-${i + 1}`)];
 const seeds = all.slice(0, n);
 const cores = Math.max(1, cpus().length);
+// A changed default must never resume old authored results as if they measured the current simulation.
+// This checks rules only, not source provenance: use a fresh directory after any source revision change.
+for (const seed of seeds) {
+  const path = join(out, `lab_${seed}.jsonl`);
+  if (!existsSync(path)) continue;
+  for (const line of readFileSync(path, 'utf8').split('\n').filter((s) => s.trim())) {
+    const row = JSON.parse(line);
+    if (row.spec && (row.dynamics ?? 'authored') !== dynamics) {
+      throw new Error(`${path} contains ${row.dynamics ?? 'authored'} results, requested ${dynamics}. Use a new output directory; old results were not changed.`);
+    }
+  }
+}
 mkdirSync(out, { recursive: true });
 const vite = join('node_modules', 'vite-node', 'dist', 'cli.mjs');
 const node = (script, rest, stdout) =>

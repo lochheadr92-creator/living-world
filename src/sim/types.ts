@@ -1149,7 +1149,8 @@ export interface Settings {
   profile?: 'large' | 'huge' | 'town';
   /** how many of the founders live together in one settlement, for the limits that follow a settlement (rules.ts); absent means all of them */
   settlementFounders?: number;
-  /** 'rich': people have a mood that changes what they do, and lean seasons happen (mood.ts, hardship.ts); absent means 'authored', the world as it was */
+  /** 'rich' is the current product rules. 'authored'/absent retain legacy save and diagnostic semantics;
+   * new product worlds explicitly set rich through currentWorldSettings. Never upgrade this field while loading a save. */
   dynamics?: 'authored' | 'rich';
 }
 /** 'ordinary': the village-sized limits the world was tuned for. 'scaled': the same limits as ratios of the founding population, local to a settlement. */

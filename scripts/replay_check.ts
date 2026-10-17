@@ -34,7 +34,7 @@ const roundTrip = (w: World): unknown => JSON.parse(JSON.stringify(deserializeWo
 
 async function main(): Promise<void> {
   const profile = opt('profile', 'normal') as ProfileName;
-  const settings = settingsForProfile(profile, opt('seed', 'meadow'), { harsh: flag('harsh'), immigration: !flag('no-arrivals'), dynamics: opt('dynamics', 'authored') as 'authored' | 'rich' });
+  const settings = settingsForProfile(profile, opt('seed', 'meadow'), { harsh: flag('harsh'), immigration: !flag('no-arrivals'), dynamics: opt('dynamics', 'rich') as 'authored' | 'rich' });
   const from = Math.round(Number(opt('from-day', '1')) * DAY);
   const until = from + Math.round(Number(opt('days', '0.5')) * DAY);
 

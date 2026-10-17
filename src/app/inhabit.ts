@@ -55,7 +55,8 @@ export function inhabitConfigFromUrl(search: string, prefs: Pick<Prefs, 'seed'>)
     days: q.has('days') ? Math.max(0, Number(q.get('days')) || 0) : null,
     seed: q.get('seed') ?? prefs.seed,
     harsh: on('harsh'),
-    rich: on('rich'),
+    // Explicit rich=0 remains a diagnostic/reproduction option; ordinary links use the current simulation.
+    rich: !q.has('rich') || on('rich'),
     size: size === 'large' || size === 'huge' || size === 'town' ? size : 'normal',
     arrivals: !on('noarrivals'),
     manual: on('manual'),
