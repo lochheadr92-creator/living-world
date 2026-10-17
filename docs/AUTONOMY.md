@@ -24,11 +24,11 @@ is. Stage C's work falls inside R2, R10 and R13 and does not finish any of them.
 | R2 | Persistent personal intentions and longer projects | partial | Three kinds of personal plan (`intent.ts`): get through the night, make a tool, mend a roof. Stage D1 lets a tool project reach past its owner: it can ask for what it lacks, carry an outstanding promise without counting it as material, and say what it was waiting on when it ends. Adopted for stated reasons, carried across 30+ activities, set aside and resumed, revised, finished or abandoned with a reason; saved, hashed and replayed. Evidence: `tests/projects.test.ts` (26), `tests/night_plan.test.ts` (28) and the autonomous runs below. **Not done:** horizons are one night or two days and at most two plans at once (`MAX_INTENTIONS`); nothing spans weeks (a house of one's own, a stocked store), nothing has sub-goals, and no plan is shared with anyone. |
 | R3 | Deliberate waiting, sheltering and bounded activities | partial | Waiting out the night is a real action that takes real time and is credited by time actually spent under shelter (`options_survival.ts optShelter`, `intent.ts creditShelter`). That credit was broken until the F1 repair below — the activity carried no shelter to be credited against — so the claim now rests on a test that drives the real option (`tests/night_plan.test.ts`, "a night really spent in shelter is the night the plan is judged on"). Activities accept bounds, validated so a limit can only ever make one stop sooner, with an invalid limit refused outright (`optutil.ts OptionLimit`, `decision.ts checkLimits`; `tests/action_bounds.test.ts`, 11). **Not done:** only a controller ever sets a bound — an autonomous person never chooses "two portions" or "an hour of this"; and the only thing anyone waits for is daylight. |
 | R4 | Modest practical foresight | partial | A person projects thirst and hunger forward over the hours of darkness they can see coming, from their own needs and the sky, and that projection is what a night plan rests on (`intent.ts nightLooksHard`, `untilDaylight`). A repair is taken on while the roof is merely going, not after it fails. **Not done:** one horizon only (the coming night) and one projection; winter stocking is still pressure from `hardship.ts` rather than anticipation, and nobody anticipates another person. |
-| R5 | Learning from experience | partial | Pre-existing: a failure at a place is remembered and steers choices away from it (`knowledge.ts noteFailure/recentFailure`), beliefs go stale, skills rise with use, wolves are remembered. Stage C: three failures at the same target end a project, with that failure as the reason (`tests/projects.test.ts`). **Not done:** nothing durably changes what a person prefers — no one learns which sources repay the walk, or which neighbour never returns a tool. |
+| R5 | Learning from experience | partial | Pre-existing: a failure at a place is remembered and steers choices away from it (`knowledge.ts noteFailure/recentFailure`), beliefs go stale, skills rise with use, wolves are remembered. Stage C: three failures at the same target end a project, with that failure as the reason (`tests/projects.test.ts`). **Since built (status read from the source on 2026-10-17, not re-measured here):** what a kind of gathering has paid a person durably tilts their next choice (`learning.ts`, saved as `p.payoff`), and a person settles on a trade that persists and is saved (`trade.ts`). **Still not done:** nobody learns anything about another *person* — which neighbour never returns a tool, who can be relied on for what. |
 | R6 | Practical relationships and precise social decisions | partial | Pre-existing: affection/trust, requests, declines, grievances, warnings, meals. This brief: a warning reports what it actually came to — delivered, they knew already, nothing to tell, never got to it (`social.ts warnReport`; `tests/social_warning.test.ts`, 5). Stage D1: a refusal names the claim the decision actually used — none at all, owed to someone else, spoken for by my own project, my own needs — and in ordinary runs refusal is the common answer (22 of 29 requests in the measured run). Rich-only: an authored world keeps the wording it had (`tests/project_cooperation.test.ts`). **Not done:** no one weighs a relationship against a project over time; no bargaining, no reciprocity ledger, and nobody knows what another person is *able* to get. |
 | R7 | Local cooperation and shared projects | partial | Pre-existing: promises to help build, haul and work, settled by what the promiser knows (`social.ts checkCommitments`; `tests/commitments.test.ts`, `tests/cooperation.test.ts`); building sites are shared work in effect. Stage D1 adds the first cooperation on a *personal* project: a bounded material contribution asked for locally, decided independently, kept or refused through the existing commitment and activity machinery, with a promise that outranks the promiser's own plan (`tests/project_cooperation.test.ts`, 26; 24 of 65 projects asked in the measured run, making 29 requests, 5 units delivered). **Not done:** two people still cannot adopt one project, divide it, or join one someone else is carrying; one project type, one contribution type, no shared labour. |
-| R8 | Skills, teaching and adaptive specialisation | unstarted (skills aside) | Skills exist, rise with use, change what people choose and how fast they work, and weight which tool someone wants (`options_work.ts wantedTool`). There is **no** teaching, no apprenticeship, and no specialisation that forms and persists. Stage C added nothing here. |
-| R9 | Landscape changes through use | partial | Pre-existing: sources deplete and regrow, more slowly in harsh worlds (`sources.ts`, `hardship.ts regrowRate`); buildings, sites and plots change the map; belongings drop where someone dies. **Not done:** nothing wears a path, exhausts a patch for good, or marks the ground from use. Stage C added nothing here. |
+| R8 | Skills, teaching and adaptive specialisation | partial (was unstarted) | Skills exist, rise with use, change what people choose and how fast they work, and weight which tool someone wants (`options_work.ts wantedTool`). **Since built (status read from the source on 2026-10-17; the claims below are contract tests and one-seed observations, not an ensemble):** specialisation that forms and persists - a trade chosen by comparative advantage from a person's own skills and what they see others at, saved with them and shown on their card (`trade.ts`, `tests/trade.test.ts`); and teaching - a tradesperson may take on a workmate, and practice within reach of the master teaches half as much again until the apprentice has a trade of their own (`apprentice.ts`, `tests/apprentice.test.ts`). Skill still rises only by practice. **Still not done:** no measured effect on welfare or output; apprenticeship was observed starting only once in four 12-day worlds, so it is built but barely exercised; the poor-pay release of a trade reads gathering outcomes only. |
+| R9 | Landscape changes through use | partial | Pre-existing: sources deplete and regrow, more slowly in harsh worlds (`sources.ts`, `hardship.ts regrowRate`); buildings, sites and plots change the map; belongings drop where someone dies. **Since built (status read from the source on 2026-10-17, not re-measured here):** walking wears the ground, and a tile walked hard for about two days becomes a road that stays worn, is quicker to walk and is plain to see (`world.ts roadsTick`, `pathfinding.ts terrainSpeed`); in a rich world rock does not grow back, and clay, ore and outcrops never did (`sources.ts`, `constants.ts DEPOSIT_TYPES`). **Still not done:** nothing else is marked by use - no clearing, no midden, no worn-out field. |
 | R10 | Preparation, maintenance and material consequences | partial | Maintenance is real and measured: a repair consumes material, raises condition, credits only the hands that did it, and is abandoned when a neighbour gets there first (`act_build.ts creditRepair`, `intent.ts repairStep`). Making a tool is real: the ordinary recipe, the ordinary accounting, credited where the tool is minted, so having one is told apart from having made one (`creditMade`). Preparation for the night is judged on what actually happened, not on where someone stood at dawn. Material consequence: what a plan has spoken for cannot be spent twice and is free again the moment the plan ends (`freeOf`/`freeInv`). **Not done:** only homes are maintained (tools wear out and are replaced, never mended); preparation reaches one night ahead, not a season. |
 | R11 | Household and generational continuity | partial, untouched by this brief | Pre-existing: households, conception, birth, ageing, death, orphan adoption, immigration (`lifecycle.ts`), tools reassigned and belongings dropped on death. **Not done by this brief:** a plan is strictly personal — nothing is passed on, nothing is taken up by a survivor, and no plan belongs to a household. |
 | R12 | Bounded composition of known actions | partial | Bounding is done and tested (R3 above): limits are declared by the option, validated, and may only narrow. **Composition is not implemented at all** — neither a person nor a controller can build a new action out of known ones. A plan sequences known actions one step at a time, which is the nearest thing in the tree and is not composition. |
@@ -600,9 +600,11 @@ What it holds, as recorded: `people` 101.33 ± 1.24, `deaths` 0.50 ± 0.78, `wor
 `meanCondition` 66.31 ± 4.12. Against the plans ensemble's rich control at 15 days (`tools` about 184), the 12-day figure sits
 where it should.
 
-Nine of those fifteen are gated, plus the floor of 50 people a seed — the same nine as for authored worlds. Comparing the
-recording run against its own baseline passes all ten, which proves the file is readable and the comparison path runs, and
-nothing more: it is the same 24 seeds on both sides.
+Eleven of those fifteen are now gated, plus the floor of 50 people a seed: the nine the authored world is held to, and `tools`
+and `meanCondition`, which are what the plans are for. The authored baseline (`docs/gates.json`) predates both and has no band
+for them, so a check against it prints `skip` for the two and gates the nine until that file is re-recorded. Comparing the
+recording run against its own baseline passes, which proves the file is readable and the comparison path runs, and nothing more:
+it is the same 24 seeds on both sides.
 
 Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back only `<out>\report.txt`, never the progress lines.
 
@@ -613,11 +615,104 @@ Re-running the `lab.mjs` line resumes: finished seeds are skipped. Paste back on
   fares differently. The 24-seed ensemble above now answers that separately.
 - About half of the tool projects end at their two-day deadline. The reasons are specific (`still short 2 stone`; `had the makings
   but never sat down to it`), and no tuning was done to raise the completion rate: the nudge stays at +14 by design.
-- `tools` and `meanCondition` are now recorded in `docs/gates-rich.json`, but they are still **not** gated, and nor are
-  `firstYardDay`, `firstHallDay`, `meanMood` or `lowMood`: `scripts/gates.ts` compares the same nine metrics it always did, so a
-  change that cut the village's tools by two thirds would pass every gate. The plans ensemble above had to measure them by hand
-  for that reason.
+- `tools` and `meanCondition` are gated against `docs/gates-rich.json` now (they were recorded but not gated when the plans
+  ensemble ran, which is why it had to measure them by hand). `firstYardDay`, `firstHallDay`, `meanMood`, `lowMood` and the four
+  project tallies below are recorded and not gated.
 - The two-seed lab smoke run (2 days, 2 seeds, `normal`) exists only to prove the branch and the metrics work end to end. Its
   directions (fewer tools and lower condition without plans) are inside the noise and were not evidence; the 24-seed ensemble above
   has since found both directions to be real, which vindicates nothing about the smoke run - two seeds would have read the same way
   had the truth been the opposite.
+
+## Stage D1 attribution, measured: the ask contributes nothing the village can feel (24 seeds, Large, rich, 12 days)
+
+DONE, on commit 0a6dcf9 (the gates commit, before Stage 3's learning existed, so nothing else is in the comparison). 24 seeds,
+Large, rich, forked at day 0, 12 days, `rich-no-ask` against the mean of the control and two nudges. The switch did what it says:
+`projectAsks` 143.4 → 0 and `askUnitsDelivered` 36.8 → 0, lower in 24 of 24 seeds. Everything else:
+
+| metric | reference | without the ask | diff | 95% interval | up/down | verdict |
+|---|---:|---:|---:|---|---|---|
+| tools | 162.2 | 173.6 | +11.3 | [+0.7, +22.0] | 16/8 | systematic, within the noise floor (±20.8) |
+| projectsDone | 165.0 | 174.2 | +9.2 | [0, +18.1] | 15/9 | not distinguishable from chance |
+| projectsAdopted | 398.2 | 396.8 | −1.4 | [−7.2, +4.4] | 10/14 | not distinguishable from chance |
+| solidHomes | 26.2 | 26.9 | +0.8 | [−0.7, +2.1] | 14/9 | not distinguishable from chance |
+| buildings | 84.0 | 84.8 | +0.8 | [−1.7, +3.1] | 14/10 | not distinguishable from chance |
+| people, deaths, homeless, belowCritical, meanHunger, mood, workplaces, condition, first yard/hall | | | ≈0 | | | not distinguishable from chance |
+
+**Reading.** Removing the ask changes nothing the village can feel: not survival, not building, not mood, not how many
+projects are taken on or finished. The one metric that leans is tools, and it leans the *other* way: a village that never asks ends
+with about 11 more tools in hand, 16 seeds up and 8 down, inside the nudge spread, so not a finding, but the direction is the
+opposite of "cooperation helps". The likely reason is in the asks themselves: 143 asks a village bring 37 units, a quarter of a
+unit each, because the honest answer in a village where everyone has their own plans is usually no (`committed`, `making`,
+`own_need`), and an ask costs the asker the walk and the wait while fetching the material would have cost less. The chain is
+correct; what it carries is not worth its time as the ask is currently made.
+
+**What this settles.** D1 stays accepted as a working, observable chain and is **not** accepted as a village-wide benefit; the
+condition set at acceptance has been met with a null result, and a null result stands. Nothing further should be built on the
+assumption that cooperation pays. If a cooperation stage goes on, the first change is to the ask, not to what rides on it: ask only
+when the answer is likely yes (a helper seen idle, or carrying a surplus by the asker's own belief), or ask before fetching is
+considered rather than after, then measure again with the same branch.
+
+## Stage D1, second slice: an ask worth making (measured)
+
+This is the first of the two changes the null result above asked for, and both of them: ask only when the answer is likely yes,
+and consider the ask before fetching rather than after. The first version of the project ask was correct and useless. Measured over 24 Large seeds, 12 days: 143 asks a village brought 37
+units, most answers were no, and removing the ask altogether (`rich-no-ask`) changed nothing the village could feel. The reason was
+in the rule: anybody who could be *seen carrying* the thing was asked, and in a rich world nearly everyone carrying a thing has it
+spoken for - by a promise (`committed`) or by a plan of their own (`making`).
+
+An ask is now made only when, **by the asker's own sight and their own memory**, it should be answered yes:
+
+* the person asked is visibly carrying **more than one** of it (`SeenEntity.plenty`, filled in perception.ts for rich worlds only:
+  an armful, not their last stick), **or** they are visibly idle - not in the middle of anything;
+* and they are **not visibly making or building something** (`act` of build, repair, craft, plan_site, tool_work or operate: they
+  are working with what is in their hands);
+* and they have **not told this person lately** that what they carry is for something they are making. That is the asker's own
+  record of an answer they were actually given: `social.ts` writes `p.cooldowns[MAKING_NOTE + id]` where the refusal reason
+  `making` is produced, and it stands for half a day.
+* and there is **room in the asker's pack** for it: a yes they could not carry is not a yes.
+
+Two other things changed with it. Fetching it themselves used to rule the ask out before it was considered at all (`eta < 260`);
+now both are on the table and the ask simply carries the cost of the alternative ("I could fetch stone myself soon", -8), so a
+quick trip of one's own usually wins and a long one may not. And every ask made under the rule is marked (`Request.likely`), so
+its outcome can be read off the requests: `scripts/projects.ts` prints how many asks were made that way and how many were answered
+yes. Every refusal reason is untouched (no_item / committed / making / own_need / enough / in_use / unwilling / disliked).
+
+**Measured, one headless run, Large, seed meadow, rich, 12 days, before and after** (`npx vite-node scripts/projects.ts --
+--seed meadow --profile large --days 12 --dynamics rich`):
+
+| | asks | declined | failed | yes (fulfilled or promised) | yes rate | units delivered |
+|---|---|---|---|---|---|---|
+| before | 45 | 25 | 13 | 7 | 16% | 5 |
+| after | 6 | 4 | 0 | 2 | 33% | 2 |
+
+So the rule does what it was meant to do - the yes rate doubles and the thirteen asks that used to fail outright (mostly a yes the
+asker could not carry) are gone - and it asks seven times less often, which in absolute terms delivers less: 2 units where 5 came
+before. Whether cooperation on a personal project is worth more as a rare good bet than as a frequent long shot is not settled by
+one seed; `rich-no-ask` on the ensemble is the test, and the branch's contract (tests/lab_no_ask.test.ts) now needs six days to
+contain an ask on this seed where two were enough before.
+
+Held by `tests/project_ask.test.ts`, which looks at the option layer directly: what the engine offers and what it refuses to offer,
+and why, in each of the cases above.
+
+## Stage D1 attribution: what the ask contributes on top of planning (`rich-no-ask`, as planned before the run)
+
+Stage C's counterfactual removes planning and the asks that ride on it together, so nothing measured so far separates the two.
+The lab now has a branch that removes only the ask: `rich-no-ask` keeps every plan, every step and every ending, and every other
+kind of request, and takes away the one place a project's shortfall becomes an ask (`intent.ts setProjectAsks`, read in
+`options_social.ts`). `tests/lab_no_ask.test.ts` holds it to exactly that: the branch is the control's own world until the tick
+on which the control's asker sets off, and has parted by the tick the request is made.
+
+The lab also tallies, tick by tick, what became of the projects in each arm (the end state cannot say: ended plans and answered
+requests are trimmed from the records): `projectsAdopted`, `projectsDone`, `projectAsks`, `askUnitsDelivered`. None is gated.
+
+The run, on the 24-core machine, about 25 minutes (24 seeds × 4 arms × 12 days at about 30 CPU-seconds a day):
+
+```
+node scripts/lab.mjs --out noask_out --seeds 24 --fork 0 --days 12 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-ask
+```
+
+Read `rich-no-ask` against the mean of the control and the two nudges, never the control alone. What would count as a finding, decided
+before the run: `projectsDone` or `tools` moving by more than the nudge spread with an interval that excludes zero, in either
+direction. A null result is a result: the chain is proven end to end by the contract tests whether or not a village with it ends
+up with more tools; nothing about the ask's frequency is to be tuned to make the ensemble come out positive. Paste back only
+`noask_out\report.txt`.

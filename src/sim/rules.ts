@@ -8,7 +8,9 @@
 // * ORDINARY_RULES are the original values, to the digit. A world without `settings.ruleSet` uses them, so the ordinary world,
 //   saves made before this existed, and every staged scene behave exactly as they always did (tests/golden.test.ts holds that).
 // * scaledRules(...) express the same limits as ratios of how many people the world was founded with, and make the two "one of each"
-//   and "so many open sites" rules local: they count what is within SETTLEMENT_RADIUS tiles instead of everything in the world.
+//   and "so many open sites" rules local: they count what is within SETTLEMENT_RADIUS tiles instead of everything in the world, and
+//   allow a settlement more than one workplace of a kind for every ordinary camp's worth of founders (`facilityAllowance`), but
+//   only when rich dynamics are enabled. Authored worlds keep the original one-per-kind allowance.
 //   A scaled world with 28 founders has the ordinary limits except for that locality.
 import type { RuleSet, World } from './types';
 
@@ -37,6 +39,13 @@ export interface Rules {
   projectsRaisedAt: number;
   /** a workplace of one kind rules out another within this many tiles; Infinity means anywhere in the world */
   facilityRadius: number;
+  /**
+   * How many workplaces of one kind a settlement may hold within that radius. The ordinary world allows exactly one of each, which
+   * is right for a camp of 28 and wrong for a town: a hundred people queueing at one storehouse is a rule, not a decision anybody
+   * made. Rich scaled worlds allow one per ordinary camp's worth of founders, so a town of 100 may come to hold four storehouses,
+   * four granaries and so on - may, not must: somebody still has to want each one and build it. Authored worlds retain one.
+   */
+  facilityAllowance: number;
   /** open sites are counted within this many tiles of where a new one would go; Infinity means the whole world */
   siteRadius: number;
   /** at least this many ticks between one group of travellers arriving and the next, anywhere in the world (immigrationTick checks every 400) */
@@ -53,6 +62,7 @@ export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
   projectsRaised: 3,
   projectsRaisedAt: 55,
   facilityRadius: Infinity,
+  facilityAllowance: 1,
   siteRadius: Infinity,
   arrivalSpacing: 6000,
 });
@@ -60,7 +70,8 @@ export const ORDINARY_RULES: Readonly<Rules> = Object.freeze({
 /**
  * The ordinary limits scaled to a world founded with `founders` people, of whom `settlementFounders` live together in one settlement
  * (all of them, unless the world is laid out as several). Population limits scale with the whole world; the limits on building and on
- * workplaces scale with a settlement, because that is what they were limiting. Nothing ever goes below its ordinary value.
+ * workplaces scale with a settlement, because that is what they were limiting. Nothing ever goes below its ordinary value. The
+ * effective allowance is gated by rich dynamics in rulesOf; this function keeps the un-gated scaled candidate for explicit callers.
  */
 export function scaledRules(founders: number, settlementFounders: number = founders): Rules {
   const o = ORDINARY_RULES;
@@ -75,6 +86,7 @@ export function scaledRules(founders: number, settlementFounders: number = found
     projectsRaised: up(o.projectsRaised, settlementFounders),
     projectsRaisedAt: up(o.projectsRaisedAt, founders),
     facilityRadius: SETTLEMENT_RADIUS,
+    facilityAllowance: Math.max(1, Math.ceil(settlementFounders / ORDINARY_FOUNDERS)),
     siteRadius: SETTLEMENT_RADIUS,
     // one settlement's worth of travellers per spacing: the village's 6,000 ticks for one camp of its size, shorter in proportion to
     // how many such camps the world has (never below the 400 ticks at which arrivals are considered)
@@ -87,6 +99,7 @@ export function rulesFor(ruleSet: RuleSet | undefined, founders: number, settlem
 }
 
 const cache = new Map<string, Rules>();
+const authoredRulesCache = new WeakMap<Readonly<Rules>, Readonly<Rules>>();
 function scaled(founders: number, settlementFounders: number): Rules {
   const key = founders + ':' + settlementFounders;
   let r = cache.get(key);
@@ -99,7 +112,14 @@ function scaled(founders: number, settlementFounders: number): Rules {
 
 /** the rules this world runs under */
 export function rulesOf(world: World): Readonly<Rules> {
-  return rulesFor(world.settings.ruleSet, world.settings.population, world.settings.settlementFounders);
+  const rules = rulesFor(world.settings.ruleSet, world.settings.population, world.settings.settlementFounders);
+  if (world.settings.dynamics === 'rich' || rules.facilityAllowance <= 1) return rules;
+  let authored = authoredRulesCache.get(rules);
+  if (!authored) {
+    authored = Object.freeze({ ...rules, facilityAllowance: 1 });
+    authoredRulesCache.set(rules, authored);
+  }
+  return authored;
 }
 
 /** is (x, y) within `radius` of (ax, ay)? An infinite radius is always true and costs nothing. */

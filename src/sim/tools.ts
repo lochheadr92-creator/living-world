@@ -1,3 +1,4 @@
+import { injuryFactor } from './life';
 import { LOAN_TERM, TOOL_DEFS, TOOL_DULL_FROM, TOOL_EFFECT, TOOLS } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, takeFrom } from './economy';
 import { addEvent, addLog } from './events';
@@ -58,10 +59,12 @@ export function toolOf(world: World, p: Person, kind: ToolKind): Tool | null {
 
 /** Duration multiplier for a task (1 = bare hands, lower = faster), counting how worn the tool is. */
 export function taskMultiplier(world: World, p: Person, task: ToolTask): number {
+  // an injury makes every piece of work slower (rich only: nobody is injured otherwise)
+  const hurt = p.injury ? 1 + 0.5 * (1 - injuryFactor(world, p)) / 0.4 : 1;
   const t = toolFor(world, p, task);
-  if (!t) return 1;
+  if (!t) return hurt;
   const base = baseMultiplier(t.kind, t.tier, task);
-  return base + (1 - base) * dullness(t.wear);
+  return (base + (1 - base) * dullness(t.wear)) * hurt;
 }
 
 /** Multiplier from a tool kind that a recipe names (with that recipe's own speed-up for a wooden-and-stone tool). */

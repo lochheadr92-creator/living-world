@@ -211,6 +211,11 @@ function summarise(k: Intention['kind']): string {
     }
     lines.push(`    asked a neighbour for material: ${projectsThatAsked} of ${xs.length} projects did, making ${reqs.length} requests`);
     lines.push(`      those ${reqs.length} requests: ${Object.entries(states).sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k} ${n}`).join(', ')}; units actually delivered: ${brought}`);
+    // An ask is only made when the asker's own sight and memory say it would probably be answered yes (`Request.likely`, set in
+    // options_social.ts). This is the test of that rule: of the asks made under it, how many were in fact answered yes.
+    const likely = reqs.filter((r) => r.likely);
+    const yes = (rs: typeof reqs) => rs.filter((r) => r.status === 'fulfilled' || r.status === 'partial' || r.status === 'promised').length;
+    lines.push(`      made under the "they would probably say yes" rule: ${likely.length} of ${reqs.length}; of those, answered yes: ${yes(likely)} (${pct(yes(likely), likely.length)}%), units delivered ${likely.reduce((n, r) => n + (r.delivered ?? 0), 0)}`);
   } else lines.push(`    asked a neighbour for material: none`);
   if (Object.keys(held).length) lines.push(`    held up by: ${Object.entries(held).sort((a, b) => b[1] - a[1]).slice(0, 6).map(([r, n]) => `${r} ×${n}`).join('; ')}`);
   lines.push(`    taken up again after being set aside: ${xs.reduce((n, L) => n + L.beats.filter((b) => b.tag === 'resume').length, 0)}; revised what it was about: ${revised}`);

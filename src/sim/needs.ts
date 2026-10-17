@@ -1,6 +1,8 @@
 import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
 import { nearLitFire } from './perception';
 import { stageOf } from './people';
+import { elderFactor } from './life';
+import { isThreat } from './wildlife';
 import type { NeedKey, Person, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -101,7 +103,7 @@ export function updateNeeds(world: World, p: Person): void {
   let safetyTarget = 84;
   const hurtRecently = world.tick - (p.cooldowns.hurt ?? -9999) < 700;
   let nearThreat = 99;
-  for (const s of p.seen) if (s.ent === 'animal') nearThreat = Math.min(nearThreat, hyp(s.x - p.x, s.y - p.y));
+  for (const s of p.seen) if (isThreat(world, s)) nearThreat = Math.min(nearThreat, hyp(s.x - p.x, s.y - p.y));
   if (nearThreat < 14) safetyTarget -= 70 * (1 - nearThreat / 14);
   for (const id of p.bykind.danger ?? []) {
     const b = p.beliefs[id];
@@ -147,6 +149,8 @@ export function updateNeeds(world: World, p: Person): void {
   if (n.warmth <= 6) dh -= 0.035;
   if (n.energy <= 0) dh -= 0.01;
   if (dh === 0 && n.hunger > 40 && n.thirst > 40 && n.warmth > 35) dh = sleeping ? 0.03 : resting ? 0.02 : 0.009;
+  // an elder mends slower (rich only; 1 otherwise)
+  if (dh > 0 && stage === 'elder') dh *= elderFactor(world, p);
   p.health = clamp(p.health + dh, 0, 100);
 }
 

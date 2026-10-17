@@ -33,6 +33,11 @@ describe('the counterfactual lab', () => {
     expect(again[0].finalHash).toBe(by('control').finalHash);
   });
 
+  it('an authored world takes on no projects, so the project tallies are zero', () => {
+    const o = by('control').outcome;
+    expect([o.projectsAdopted, o.projectsDone, o.projectAsks, o.askUnitsDelivered]).toEqual([0, 0, 0, 0]);
+  });
+
   it('removing sources reports how many it removed', () => {
     expect(by('no-wood').note).toMatch(/^[1-9]\d* sources removed$/);
   });

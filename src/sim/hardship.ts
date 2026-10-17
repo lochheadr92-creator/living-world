@@ -8,6 +8,7 @@
 // for three to six days wild food comes back at 10% of its pace and crops grow at a quarter of theirs. It is announced, it weighs on everyone's mood, and
 // it ends. How hard it bites depends on the stores and the farmland the village happens to have: some worlds ride it out, some do not.
 import { addEvent } from './events';
+import { ledgerSpoil } from './economy';
 import { DAY, DAYS_PER_YEAR } from './constants';
 import { hashString, hashUnit } from './rng';
 import { isRich, think } from './mood';
@@ -34,23 +35,72 @@ export function updateHardship(world: World): void {
       for (const p of world.persons) if (p.alive) think(world, p, 'winter', -4, WINTER_LENGTH * DAY, 'it is winter');
     } else if (into === 0 && world.tick >= DAY) addEvent(world, 'nature', 'Winter loosens its grip.');
   }
+  floodTick(world);
   const h = world.hardship;
   if (h) {
     if (world.tick >= h.until) {
       delete world.hardship;
-      addEvent(world, 'nature', 'The lean season is over: the land is giving again.');
-      for (const p of world.persons) if (p.alive) think(world, p, 'relief', 6, DAY, 'the lean season is over');
+      if (h.kind === 'dry') addEvent(world, 'nature', 'Rain at last: the dry spell is over.');
+      else addEvent(world, 'nature', 'The lean season is over: the land is giving again.');
+      for (const p of world.persons) if (p.alive) think(world, p, 'relief', 6, DAY, h.kind === 'dry' ? 'the dry spell is over' : 'the lean season is over');
     }
     return;
   }
   if (world.tick % DAY !== 5 || world.tick < 2 * DAY) return;
   const day = Math.floor(world.tick / DAY);
   const key = hashString(world.seed);
+  const into = day % DAYS_PER_YEAR;
+  // high summer (the middle third of the year) may bring a dry spell instead: the bushes and fields parch, the fish keep
+  if (into >= 4 && into < 8 && hashUnit(key, day, 0xd217) < DRY_CHANCE) {
+    const length = Math.round((2 + 3 * hashUnit(key, day, 0xd218)) * DAY);
+    world.hardship = { kind: 'dry', since: world.tick, until: world.tick + length };
+    addEvent(world, 'nature', 'A dry spell sets in: the bushes parch and the fields crack; the water still runs.');
+    for (const p of world.persons) if (p.alive) think(world, p, 'dry', -4, length, 'the dry spell');
+    return;
+  }
   if (hashUnit(key, day, 0x1ea7) >= LEAN_CHANCE) return;
   const length = Math.round((3 + 3 * hashUnit(key, day, 0x1ea8)) * DAY);
   world.hardship = { kind: 'lean', since: world.tick, until: world.tick + length };
   addEvent(world, 'nature', 'A lean season begins: wild food and crops come slowly.');
   for (const p of world.persons) if (p.alive) think(world, p, 'lean', -6, length, 'the lean season');
+}
+
+/** chance, per day of high summer, that a dry spell begins; how much slower the land gives and crops grow through it (fish are untouched) */
+export const DRY_CHANCE = 0.12;
+export const DRY_REGROW = 0.4;
+export const DRY_GROWTH = 0.3;
+
+/**
+ * A FLOOD. At the height of a storm (rich only, at most once in three days) the water comes up over the shore: whatever lies
+ * in a pile within two tiles of water is lost, a lean-to or hut built that close loses a quarter of its condition, and
+ * everyone hears of it. Nothing is created; what the flood takes is recorded as spoiled.
+ */
+function floodTick(world: World): void {
+  if (world.weather.storm < 0.92 || world.tick % 30 !== 7) return;
+  if (world.tick - (world.lastFlood ?? -99999) < 3 * DAY) return;
+  world.lastFlood = world.tick;
+  let lost = 0;
+  let hit = 0;
+  for (const pl of world.piles.slice()) {
+    if (world.waterDist[pl.y * world.W + pl.x] > 2) continue;
+    for (const k of Object.keys(pl.items) as (keyof typeof pl.items)[]) {
+      const n = pl.items[k] ?? 0;
+      if (n > 0) {
+        ledgerSpoil(world, k, n, 'flood');
+        lost += n;
+      }
+      delete pl.items[k];
+    }
+  }
+  for (const b of world.buildings) {
+    if (b.type !== 'lean_to' && b.type !== 'hut') continue;
+    const d = world.waterDist[Math.floor(b.y + b.h / 2) * world.W + Math.floor(b.x + b.w / 2)];
+    if (d > 2) continue;
+    b.condition = Math.max(5, b.condition - 25);
+    hit++;
+  }
+  addEvent(world, 'nature', `The storm brings the water up over the shore${hit ? `: ${hit} ${hit === 1 ? 'shelter is' : 'shelters are'} damaged` : ''}${lost ? `${hit ? ' and' : ':'} ${lost} units of goods left by the water are lost` : ''}.`);
+  for (const p of world.persons) if (p.alive) think(world, p, 'flood', -5, DAY, 'the flood');
 }
 
 // * WINTER. A year is DAYS_PER_YEAR days; its last WINTER_LENGTH days are winter, the same every year (nothing random, and the first
@@ -77,9 +127,9 @@ export function winterDepth(world: World): number {
 export const coldSnap = (world: World): number => WINTER_COLD * winterDepth(world);
 
 /** how fast wild food comes back right now (1 in an ordinary world and outside lean seasons and winter) */
-export const regrowRate = (world: World): number => (active(world) ? (world.hardship ? LEAN_REGROW : 1) * (1 - WINTER_FOOD * winterDepth(world)) : 1);
+export const regrowRate = (world: World): number => (active(world) ? (world.hardship ? (world.hardship.kind === 'dry' ? DRY_REGROW : LEAN_REGROW) : 1) * (1 - WINTER_FOOD * winterDepth(world)) : 1);
 /** how fast crops grow right now */
-export const growthRate = (world: World): number => (active(world) ? (world.hardship ? LEAN_GROWTH : 1) * (1 - WINTER_CROPS * winterDepth(world)) : 1);
+export const growthRate = (world: World): number => (active(world) ? (world.hardship ? (world.hardship.kind === 'dry' ? DRY_GROWTH : LEAN_GROWTH) : 1) * (1 - WINTER_CROPS * winterDepth(world)) : 1);
 
 /** how many times faster than ordinary stored food and food left out go off */
 export const spoilStore = (world: World): number => (active(world) ? SPOIL_STORE : 1);

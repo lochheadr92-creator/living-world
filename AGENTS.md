@@ -8,8 +8,8 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 - Seeded randomness stays (replay, inspector, the lab). The golden fingerprints (`tests/golden.test.ts`) no longer constrain a change
   meant to alter behaviour: re-record them in the commit that changes rules. Ensemble gates (`scripts/gates.ts`, `docs/gates.json`) are the
   acceptance test for such a change.
-- New behaviour goes behind `settings.dynamics = 'rich'` (off by default; authored worlds must stay exactly as they were, and the golden,
-  determinism and save tests check that). The rules sets are in `src/sim/rules.ts`.
+- One current simulation: new product worlds use the integrated rules (`settings.dynamics = 'rich'` internally), with no player-facing mode toggle. Accepted improvements become standard. The 2026-10-17 owner decision in `docs/DEVELOPMENT_POLICY.md` supersedes the old rich-only/off-by-default product policy.
+- Preserve recorded save/replay semantics; `authored` and absent dynamics remain compatibility/diagnostic values, not a second product to develop indefinitely. Use `currentWorldSettings` for new product worlds. Keep experiments in the lab; require evidence of effectiveness before claiming benefit. Historical goldens protect compatibility, not a freeze on current behavior.
 - One branch, one purpose; one commit per problem. Branch `Codex/epic-franklin-469omp`, draft PR; never merge, never force-push.
 
 ## Where things are
@@ -38,9 +38,9 @@ When a run belongs on the user's machine:
 cd "C:\dev\Codex Experiment\living-world"
 git pull
 npm ci
-node scripts/lab.mjs --out rich_out --seeds 24 --fork 0 --days 15 --branches nudge:1,rich
+node scripts/lab.mjs --out rich_out --seeds 24 --fork 0 --days 15 --dynamics authored --branches nudge:1,rich
 npx vite-node scripts/lab_report.ts -- rich_out
-node scripts/lab.mjs --out split_out --seeds 24 --fork 0 --days 15 --branches nudge:1,nudge:2,rich,rich-stakes-only,rich-mood-only
+node scripts/lab.mjs --out split_out --seeds 24 --fork 0 --days 15 --dynamics authored --branches nudge:1,nudge:2,rich,rich-stakes-only,rich-mood-only
 node scripts/novelneed_all.mjs --out nn_out --seeds 24 --fork 6 --days 10
 ```
 (`npm ci` only the first time or when `package.json` changed. The second `lab_report` line re-renders a report from existing data, which

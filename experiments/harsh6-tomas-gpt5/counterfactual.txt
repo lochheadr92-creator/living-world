@@ -1,0 +1,29 @@
+counterfactual re-ask: Tomas, gpt-5, 3 repeats per arm, 36 calls (33 answered); 5 of 6 decided asks shift when the notes are taken away
+
+* ask 24 t5763  recorded gather:831 of 15 options
+    with notes:    (none) x1, eat:0 x1, gather:831 x1
+    without notes: gather:913 x3
+    a reason without notes: A nearby hut needs stone and I can help finish it. The southwest outcrop is close and has plenty left.
+    problems: model call failed: timed out after 120000 ms
+  ask 51 t9786  recorded gather:812 of 10 options
+    with notes:    gather:812 x2, (none) x1
+    without notes: gather:812 x2, drink:1000149 x1
+    a reason without notes: There’s a berry bush ripe just east; I’ll pick to add to our food and help the hungry. My own needs are fine enough to work a bit in the rain.
+    problems: model call failed: timed out after 120000 ms
+* ask 59 t10699  recorded gather:811 of 8 options
+    with notes:    gather:811 x3
+    without notes: eat:0 x3
+    a reason without notes: I’m a bit hungry and have berries on me. I’ll eat my own food now and save the stores for later.
+* ask 60 t10779  recorded gather:810 of 8 options
+    with notes:    gather:810 x2, rest:home:980 x1
+    without notes: rest:home:980 x2, eat:0 x1
+    a reason without notes: I’m a bit hungry and already carrying berries. Eating now eases hunger and lightens my load before I seek shelter from the rain.
+* ask 75 t13683  recorded gather:811 of 12 options
+    with notes:    (none) x1, gather:811 x1, socialize:959:chat x1
+    without notes: eat:0 x1, gather:811 x1, rest:home:980 x1
+    a reason without notes: It’s freezing rain at night; I should get under shelter to stay warm and dry. I’m already rested and not too hungry or thirsty, so there’s no rush to forage or drink.
+    problems: model call failed: timed out after 120000 ms
+* ask 79 t14380  recorded gather:809 of 13 options
+    with notes:    warm:951 x2, gather:809 x1
+    without notes: gather:271 x1, gather:809 x1, gather:810 x1
+    a reason without notes: I should stock some fresh berries for the household while they’re close by. Hunger isn’t urgent for me, but others look hungry and this will help.

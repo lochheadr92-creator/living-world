@@ -405,3 +405,46 @@ Attribution over the 82 decisions:
 What this does not settle: a goal that names no target ("keep Dov and me fed; stock Birch") can shape a choice, and attribution
 cannot separate that from the household's empty larder, which is in the observation. The counterfactual on the six strong asks
 costs 36 calls (about 20 minutes and a third of a million input tokens); widening it to the weak tier costs 71 asks' worth.
+
+### The counterfactual on the Tomas run: the notes did move two of six choices (VERIFIED, 2026-10-13)
+
+Run at last, on the six strong asks: 36 calls, 33 answered, 3 lost to a 120 s timeout, 32 minutes. The record is
+`experiments/harsh6-tomas-gpt5/counterfactual.json` and `counterfactual.txt`. The calls were made by the pre-fix build (the run was
+already in flight when the renderer fix landed); the record was then rebuilt with the fixed shift rule and re-rendered by the fixed
+renderer from those same arms. No verdict moved, per-ask or total, and `undecided` is 0 because no arm went unanswered; the only
+change is the header's new `(33 answered)` and `of 6 decided asks`. Its first line, quoted:
+
+```
+counterfactual re-ask: Tomas, gpt-5, 3 repeats per arm, 36 calls (33 answered); 5 of 6 decided asks shift when the notes are taken away
+```
+
+**That 5 of 6 is the tool's count and it is too generous.** `majority()` breaks a tie by option name, so an arm whose three repeats
+chose three different things still reports a "majority" - the alphabetically first of them. Three of the five shifts rest on such a
+tie. Read ask by ask, with the size of each arm's plurality:
+
+| ask | with notes | without notes | reading |
+|---|---|---|---|
+| 59 | `gather:811` x3 | `eat:0` x3 | **shift**; both arms unanimous, no failures |
+| 60 | `gather:810` x2 of 3 | `rest:home:980` x2 of 3 | **shift**; a real majority each side |
+| 51 | `gather:812` x2 of 2 | `gather:812` x2 of 3 | no shift |
+| 79 | `warm:951` x2 of 3 | three different gathers, 1 each | with notes it sought warmth, without it foraged - but the no-notes arm has no majority |
+| 24 | `eat:0` and `gather:831` 1 each | `gather:913` x3 | the with-notes arm is a 1-1 tie; nothing to shift *from* |
+| 75 | two choices, 1 each | three choices, 1 each | both arms are scatter; the "shift" is one tiebreak against another |
+
+So: **2 shifts that hold** (asks 59 and 60), one directional difference worth naming (79), one clean non-shift (51), and two asks
+where the model's own variance with its notes was total and nothing can be concluded (24, 75). VERIFIED as the mechanical result of
+these 36 calls; one window, one person, one model, three repeats.
+
+LIKELY, as an interpretation: at both asks that hold, the with-notes choice is the one the run actually recorded (`gather:811`,
+`gather:810`) and taking the notes away moved it to the nearest immediate need - eat, then rest. The notes carried the errand
+("stock Birch", "keep Dov and me fed"); without them the model served the body in front of it. That is the thing attribution could
+not settle, since a goal naming no target cannot be told from an empty larder by word overlap, and it cuts against the attribution
+reading in the right way: at 52 of 58 decisions the notes did not pick the target, but at the few asks where the choice was a
+*plan* rather than a target, removing the notes changed it.
+
+UNKNOWN: whether this holds beyond six asks, and whether the three tiebreak asks would decide either way with more repeats. The
+weak tier is 71 asks' worth.
+
+**A limitation of the tool, found by this run.** The fixed renderer catches an arm that was never answered; it does not catch an
+arm that answered differently every time. A plurality of one in three is printed as a majority and counted as a shift or a
+non-shift accordingly. Until that is fixed, a shift count from this tool is an upper bound, and the per-ask table is the result.

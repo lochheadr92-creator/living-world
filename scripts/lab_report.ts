@@ -28,6 +28,10 @@ if (!seeds.length) {
   process.exit(0);
 }
 const first = bySeed.get(seeds[0])!.get('control')!;
+// a run made before a metric existed has no value for it: report the metrics every row carries, and say which are missing
+const allRows = [...bySeed.values()].flatMap((m) => [...m.values()]);
+const metrics = METRICS.filter((m) => allRows.every((r) => typeof r.outcome[m] === 'number'));
+const missing = METRICS.filter((m) => !metrics.includes(m));
 const specs = [...new Set(seeds.flatMap((s) => [...bySeed.get(s)!.keys()]))].filter((s) => s !== 'control');
 const nudgeSpecs = specs.filter((s) => s.startsWith('nudge'));
 // The reference a branch is compared with, per seed: the mean of the control and every nudge branch other than the branch itself. One control
@@ -38,10 +42,11 @@ const num = (v: number, d = 1) => (Math.abs(v) < 10 ** -d / 2 ? '0' : (v > 0 ? '
 
 console.log(`Counterfactual lab: ${seeds.length} seeds (${seeds.join(', ')}), ${first.profile} profile, forked at day ${first.fork}, run ${first.days} days.`);
 console.log('Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).');
+if (missing.length) console.log(`(${missing.join(', ')}: not recorded by this run, which predates the metric)`);
 
 // the noise floor: how far a one-draw nudge moves each metric in a single seed
 const noise = {} as Record<Metric, number>;
-for (const m of METRICS) {
+for (const m of metrics) {
   const d: number[] = [];
   for (const s of seeds) for (const n of nudgeSpecs) {
     const r = bySeed.get(s)!.get(n);
@@ -53,7 +58,7 @@ console.log('\nNoise floor: spread (sd) of the difference a one-draw nudge makes
 const nd = nudgeSpecs.flatMap((n) => seeds.map((s) => bySeed.get(s)!.get(n)?.divergedAfterTicks).filter((x): x is number | null => x !== undefined));
 const parted = nd.filter((x): x is number => x !== null);
 console.log(`  nudge branches parted from the control in ${parted.length}/${nd.length} runs, median ${parted.length ? (parted.sort((a, b) => a - b)[parted.length >> 1] / 2400).toFixed(2) : '-'} days after the fork`);
-console.log('  ' + METRICS.map((m) => `${m} ±${noise[m].toFixed(1)}`).join('   '));
+console.log('  ' + metrics.map((m) => `${m} ±${noise[m].toFixed(1)}`).join('   '));
 
 for (const spec of specs) {
   const rows = seeds.map((s) => bySeed.get(s)!.get(spec)).filter((r): r is Row => !!r);
@@ -64,7 +69,7 @@ for (const spec of specs) {
   console.log(`\n── ${spec}: ${rows[0].summary}  [${rows.length} seeds${rows[0].note ? '; e.g. ' + rows[0].note : ''}]`);
   console.log(`   final state identical to control in ${same}/${rows.length} seeds; parted in ${parts.length}` + (parts.length ? `, median ${(parts.sort((a, b) => a - b)[parts.length >> 1] / 2400).toFixed(2)} days after the fork` : ''));
   console.log('   ' + 'metric'.padEnd(15) + 'reference'.padStart(9) + 'branch'.padStart(8) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
-  for (const m of METRICS) {
+  for (const m of metrics) {
     const c = rows.map((r) => refMean(r.seed, r.spec, m));
     const b = rows.map((r) => r.outcome[m]);
     const st = paired(b.map((x, i) => x - c[i]));
@@ -76,7 +81,7 @@ for (const spec of specs) {
   }
   // plain sentences for the metrics that moved beyond chance
   const lines: string[] = [];
-  for (const m of METRICS) {
+  for (const m of metrics) {
     const st = paired(rows.map((r) => r.outcome[m] - refMean(r.seed, r.spec, m)));
     if (verdict(st, noise[m], same === rows.length) !== 'larger than chance') continue;
     lines.push(`${m} ${mean(rows.map((r) => refMean(r.seed, r.spec, m))).toFixed(1)} → ${mean(rows.map((r) => r.outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);

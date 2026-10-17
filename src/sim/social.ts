@@ -1,5 +1,11 @@
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
+import { noteWedding } from './occasions';
+import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
+import { expose } from './illness';
+import { leanOn, onMovedHousehold } from './lifechanges';
+import { hears, mediate } from './mediation';
+import { laidUp, onDutyDeclined, settleFirePromise } from './responsibilities';
 import {
   canInterruptForTalk,
   endActivity,
@@ -45,7 +51,7 @@ export function personOf(world: World, id: number): Person | null {
   return e && e.ent === 'person' && e.alive ? e : null;
 }
 
-const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
+const FOODS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
 
 export function isFood(k: ItemKind): boolean {
   return FOODS.includes(k);
@@ -144,7 +150,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
-    berries: 1, fruit: 1.3, fish: 2, grain: 1.6, bread: 2.4, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
+    berries: 1, fruit: 1.3, fish: 2, grain: 1.6, bread: 2.4, meat: 2.2, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
     flour: 2, axe: 6, pick: 6, hoe: 6, basket: 5, hammer: 6, saw: 7, jar: 5,
   };
   let v = base[item];
@@ -179,9 +185,11 @@ export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: 
     if (hyp(w.x - x, w.y - y) > 7.5) continue;
     if (kind === 'gift' || kind === 'help') {
       adjustRel(w, actor.id, world.tick, { aff: 1.3, trust: 0.9, fam: 0.3, note: `saw ${actor.name} help ${other.name}` });
+      noteDeed(world, w, actor, 'generous', `${actor.name} helped ${other.name}`);
     } else {
       adjustRel(w, actor.id, world.tick, { aff: -1.1, trust: -1.1, note: `saw ${actor.name} quarrel` });
       adjustRel(w, other.id, world.tick, { aff: -0.6, note: `saw ${other.name} quarrel` });
+      noteDeed(world, w, actor, 'quarrelsome', `${actor.name} picked a quarrel with ${other.name}`);
     }
   }
 }
@@ -194,6 +202,7 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   const txt = describeItems(items);
   adjustRel(receiver, giver.id, world.tick, { aff: 2.5 + 7 * sev, trust: 2 + 4 * sev, fam: 1, debt: -0.5, note: `${giver.name} gave me ${txt}` });
   adjustRel(giver, receiver.id, world.tick, { aff: 1 + 1.5 * sev, fam: 0.5, debt: 0.5, note: `I gave ${receiver.name} ${txt}` });
+  if (giver.hhId !== receiver.hhId) noteDeed(world, receiver, giver, 'generous', `${giver.name} gave ${receiver.name} ${txt}`);
   // a gift eases a quarrel in proportion to what it meant, and may end it
   endGrievanceOnGift(world, giver, receiver, sev);
   giver.stats.given += 1;
@@ -230,6 +239,8 @@ export interface RequestOpts {
   toolKind?: ToolKind | null;
   /** the asker's own plan this is for (intent.ts), when it is for one */
   planId?: number;
+  /** the ask was made under the rule that it should probably be answered yes (options_social.ts) */
+  likely?: boolean;
 }
 
 export function createRequest(world: World, from: Person, to: Person, o: RequestOpts): Request {
@@ -245,6 +256,7 @@ export function createRequest(world: World, from: Person, to: Person, o: Request
     siteId: o.siteId ?? 0,
     infoKind: o.infoKind ?? '',
     planId: o.planId,
+    likely: o.likely,
     created: world.tick,
     expires: world.tick + REQUEST_TTL,
     status: 'pending',
@@ -289,6 +301,12 @@ function willingness(world: World, B: Person, A: Person, severity: number): numb
   if (B.hhId === A.hhId) w += 0.15;
   if (aff < -10) w += aff / 100;
   if (rel && rel.avoidUntil > world.tick) w -= 0.6;
+  // what they have heard of the asker (rich only; 0 otherwise): a good name opens hands, a bad one closes them
+  w += 0.25 * reputationOf(world, B, A.id);
+  // a favour owed (rich only): whoever owes one is readier to grant a request
+  if (isRich(world) && rel && rel.debt < 0) w += 0.12 * Math.min(3, -rel.debt);
+  // the bereaved and new parents are helped more readily, most by those close to them (rich only; 0 otherwise)
+  w += leanOn(world, B, A);
   w -= 0.45 * (personalDriveMax(B) / 100);
   w += (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.16;
   return w;
@@ -341,6 +359,16 @@ function toolInUse(act: string, kind: ToolKind): boolean {
 
 export function evaluateRequest(world: World, B: Person, A: Person, req: Request): Response {
   const rel = B.relations[A.id];
+  // a shared responsibility (responsibilities.ts; rich only): weighed against their own dependants, needs, promises and liking
+  if (req.kind === 'watch' || req.kind === 'fire') {
+    if (laidUp(world, B) || personalDriveMax(B) > 50) return { kind: 'decline', reason: 'own_need' };
+    if (activeCommitments(B).length >= MAX_ACTIVE_COMMITMENTS) return { kind: 'decline', reason: 'committed' };
+    const ownKids = membersOf(world, householdById(world, B.hhId)).filter((m) => m !== B && stageOf(world, m) === 'child').length;
+    if (req.kind === 'watch' && ownKids >= 2) return { kind: 'decline', reason: 'own_need' };
+    const w = willingness(world, B, A, 0.5) + (req.kind === 'watch' ? 0.1 * B.traits.generosity : 0);
+    if (w < 0.5) return { kind: 'decline', reason: (rel?.affinity ?? 0) < -10 ? 'disliked' : 'unwilling' };
+    return { kind: 'promise', item: null, n: 1 };
+  }
   const dislike = (rel?.affinity ?? 0) < -12 || (rel && rel.avoidUntil > world.tick);
   let sev = 0.3;
   let item: ItemKind | null = req.item;
@@ -510,6 +538,7 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
     adjustRel(B, A.id, world.tick, { aff: 1, trust: 1 });
+    noteDeed(world, A, B, 'reliable', `${B.name} kept a promise to ${A.name}`);
     bubble(world, A, D.saying(D.THANKS, A.id, B.id, world.tick >> 4, { n: B.name }), 'happy');
     addEvent(world, 'social', `${B.name} kept a promise to ${A.name}.`, [A.id, B.id], A.x, A.y);
   }
@@ -554,8 +583,9 @@ export function checkCommitments(world: World, p: Person): void {
         if (req && req.status === 'promised') settle(world, req, 'cancelled', c.reason);
         continue;
       }
-      // in a rich world it is what the maker knows of the roof that settles the promise, not the roof itself
-      const seenCond = isRich(world) ? p.beliefs[target.id]?.cond : target.condition;
+      // a promise to keep a fire going is kept by feeding it (responsibilities.ts), not by the state of a roof
+      if (settleFirePromise(world, p, c)) continue;
+      const seenCond = c.milestone === 'fire kept' ? -1 : isRich(world) ? p.beliefs[target.id]?.cond : target.condition;
       if ((seenCond ?? -1) >= 62) {
         const did = (c.contrib ?? 0) > 0;
         c.status = did ? 'done' : 'moot';
@@ -609,6 +639,7 @@ export function checkCommitments(world: World, p: Person): void {
       if (req) settle(world, req, 'broken', 'not delivered in time');
       adjustRel(A, p.id, world.tick, { aff: -5, trust: -12, note: `${p.name} did not keep a promise` });
       adjustRel(p, A.id, world.tick, { trust: -2, aff: -1 });
+      noteDeed(world, A, p, 'unreliable', `${p.name} broke a promise to ${A.name}`);
       openGrievance(world, A, p, 'broken_promise', `${p.name} did not do what they promised`, 38);
       addLog(world, p, 'social', `Failed to keep my promise to ${A.name}.`);
       addLog(world, A, 'social', `${p.name} never came through with what they promised.`);
@@ -662,6 +693,7 @@ function keepOwnAskHonest(world: World, r: Request): void {
 
 export { answerInfo, pickNews, tellBelief } from './news';
 import { pickNews, tellBelief, answerInfo } from './news';
+import { noteContact, observeOffer } from './transmission';
 
 // ───────────────────────── conversations ─────────────────────────
 function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): { ok: boolean; why: string } {
@@ -671,6 +703,7 @@ function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): 
   if (avail <= 0) return { ok: false, why: 'was busy' };
   const rel = b.relations[a.id];
   if (rel && rel.avoidUntil > world.tick && purpose !== 'apologize' && purpose !== 'warn') return { ok: false, why: 'did not want to talk' };
+  if (purpose === 'mediate' && !hears(a, b)) return { ok: false, why: 'would not hear of it' };
   if (personalDriveMax(b) > 62 && purpose !== 'request' && purpose !== 'warn') return { ok: false, why: 'had more pressing needs' };
   // someone visibly hungry or thirsty asking for help is hard to put off
   const visibleNeed = (a.needs.hunger < 38 || a.needs.thirst < 38) && (purpose === 'request' || purpose === 'ask_info') ? 0.3 : 0;
@@ -679,6 +712,15 @@ function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): 
   if (hashUnit(b.id, a.id, world.tick >> 4) < prob) return { ok: true, why: '' };
   return { ok: false, why: 'was too busy to stop' };
 }
+
+/**
+ * Key prefix for what somebody told this person about their own pack: `p.cooldowns[MAKING_NOTE + id]` stands until the tick by
+ * which "my <item> is for something I am making" stops being worth remembering. It is the asker's own record of an answer they
+ * were actually given, and it is what keeps them from asking the same neighbour again while they are still making it.
+ */
+export const MAKING_NOTE = 'making:';
+/** how long that answer is remembered (half a day: about as long as the plans that cause it) */
+export const MAKING_MEMORY = DAY / 2;
 
 export interface ConvData {
   reqKind?: RequestKind;
@@ -701,6 +743,10 @@ export interface ConvData {
   mealPlan?: import('./meals').MealPlan;
   /** the asker's own plan the request is for (intent.ts) */
   planId?: number;
+  /** the ask passed the asker's own "they would probably say yes" test when it was made (options_social.ts) */
+  likely?: boolean;
+  /** for a mediation: the other party of the quarrel the listener holds */
+  pair?: number;
   /** why an ask got no answer: it had stopped being an ask (withdrawn, expired, already answered) by the time it was reached */
   moot?: string;
 }
@@ -712,6 +758,7 @@ function convOf(world: World, id: number): Conversation | undefined {
 function openConversation(world: World, A: Person, B: Person, actA: import('./types').Activity, purpose: ConvPurpose, data: ConvData): void {
   const c: Conversation = { id: world.nextId++, a: A.id, b: B.id, purpose, start: world.tick, phase: 0, nextAt: world.tick, end: 0, requestId: 0, data: { ...data } };
   world.conversations.push(c);
+  noteContact(world, 'conversation', A.id, B.id, c.id);
   // initiator: the 'socialize' activity becomes the conversation
   actA.kind = 'converse';
   actA.label = `Talking with ${B.name}`;
@@ -743,6 +790,8 @@ function purposeGoal(purpose: ConvPurpose, name: string): string {
       return `to help ${name}`;
     case 'apologize':
       return `to make peace with ${name}`;
+    case 'mediate':
+      return `to help ${name} make peace`;
     case 'recruit':
       return `to get ${name}'s help with a building`;
     case 'propose':
@@ -788,6 +837,11 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const detailText = outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
+  // a fever passes in talk (rich only; nothing in an authored world)
+  if (A && B) {
+    expose(world, A, B, 0.12);
+    expose(world, B, A, 0.12);
+  }
   if (outcome === 'success' && A && B) {
     for (const [x, y] of [[A, B], [B, A]] as [Person, Person][]) {
       const rel = relOf(x, y.id);
@@ -894,7 +948,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'request': {
       const kind = d.reqKind ?? 'food';
-      const req = createRequest(world, A, B, { kind, item: d.item ?? null, amount: d.amount ?? 1, siteId: d.siteId ?? 0, purpose: d.purpose, destKind: d.destKind, destId: d.destId, deadline: d.deadline, milestone: d.milestone, toolKind: d.toolKind ?? null, planId: d.planId });
+      const req = createRequest(world, A, B, { kind, item: d.item ?? null, amount: d.amount ?? 1, siteId: d.siteId ?? 0, purpose: d.purpose, destKind: d.destKind, destId: d.destId, deadline: d.deadline, milestone: d.milestone, toolKind: d.toolKind ?? null, planId: d.planId, likely: d.likely });
       d.reqId = req.id;
       c.requestId = req.id;
       if (kind === 'wood' || kind === 'stone' || kind === 'goods') A.cooldowns.askMaterials = world.tick + 900;
@@ -904,7 +958,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       if (kind === 'tool') bubble(world, A, `Could I borrow your ${d.toolKind ?? 'tool'}? I’ll bring it back.`, 'ask', 62);
       else if (kind === 'goods' || kind === 'haul') bubble(world, A, `Could you bring ${d.item ?? 'some materials'} to the ${building}?`, 'ask', 62);
       else if (kind === 'repair') bubble(world, A, 'Would you be able to patch our roof? It’s not keeping the rain out.', 'ask', 64);
-      else bubble(world, A, D.requestLine(A.hhId === B.hhId && A.needs.hunger < 50 && stageOf(world, A) === 'child' ? 'care' : kind, A.id, B.id, { building }), 'ask', 60);
+      else bubble(world, A, D.requestLine(A.hhId === B.hhId && A.needs.hunger < 50 && stageOf(world, A) === 'child' ? 'care' : kind, A.id, B.id, { building, child: d.destKind === 'person' && d.destId ? (personOf(world, d.destId)?.name ?? 'the little one') : 'the little one' }), 'ask', 60);
       addLog(world, A, 'social', `Asked ${B.name} for ${kind === 'food' ? 'food' : kind === 'tool' ? `the loan of a ${d.toolKind}` : (d.item ?? kind)}.`);
       break;
     }
@@ -945,6 +999,11 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     }
     case 'apologize': {
       bubble(world, A, D.saying(D.APOLOGY, A.id, B.id, world.tick >> 5, vars), 'say', 58);
+      break;
+    }
+    case 'mediate': {
+      const other = d.pair ? personOf(world, d.pair) : null;
+      bubble(world, A, other ? `Won't you make it up with ${other.name}? It has gone on long enough.` : 'Let it go, for all our sakes.', 'ask', 60);
       break;
     }
     case 'invite': {
@@ -1047,6 +1106,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const toSite = !!req.siteId && !!item && !isFood(item) && item !== 'water';
         if (req.kind === 'repair') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + PROMISE_TTL + 900, destKind: 'building', destId: req.destId, milestone: req.milestone || 'sound again' });
+        } else if (req.kind === 'watch' || req.kind === 'fire') {
+          addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + DAY, destKind: req.destKind, destId: req.destId, milestone: req.kind === 'watch' ? 'watched' : 'fire kept' });
         } else {
           const kindC: Commitment['kind'] = req.kind === 'haul' || req.kind === 'goods' || toSite ? 'haul' : 'deliver';
           addCommitment(world, B, req, { kind: kindC, item, amount: resp.n, siteId: req.siteId, deadline: world.tick + (kindC === 'haul' ? PROMISE_TTL + 600 : PROMISE_TTL), destKind: kindC === 'haul' ? 'site' : 'person', destId: kindC === 'haul' ? req.siteId : A.id });
@@ -1059,6 +1120,13 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addLog(world, B, 'social', `Promised ${A.name} to mend their roof.`);
           addLog(world, A, 'social', `${B.name} promised to mend our roof.`);
           addEvent(world, 'social', `${B.name} promised to mend ${A.name}’s roof.`, [A.id, B.id], A.x, A.y);
+        } else if (req.kind === 'watch' || req.kind === 'fire') {
+          const what = req.kind === 'watch' ? `keep an eye on ${personOf(world, req.destId ?? 0)?.name ?? 'the children'}` : 'keep the fire going';
+          req.note = `${B.name} will ${what}`;
+          bubble(world, B, req.kind === 'watch' ? 'Of course. Rest; I’ll keep an eye on them.' : 'Leave the fire to me.', 'say', 60);
+          addLog(world, B, 'social', `Promised ${A.name} to ${what}.`);
+          addLog(world, A, 'social', `${B.name} promised to ${what} while I am laid up.`);
+          addEvent(world, 'social', `${B.name} promised to ${what} for ${A.name}, who is laid up.`, [A.id, B.id], A.x, A.y);
         } else {
           bubble(world, B, D.saying(D.RESP_PROMISE_ITEM, B.id, A.id, world.tick >> 5, { what: item ?? 'it' }), 'say', 64);
           addLog(world, B, 'social', `Promised ${A.name} ${resp.n} ${item}.`);
@@ -1074,6 +1142,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         else if (resp.reason === 'making') bubble(world, B, 'I have some, but it is for something I am making.', 'say', 56);
         else bubble(world, B, D.saying(lines, B.id, A.id, world.tick >> 5), 'say', 56);
         settle(world, req, 'declined', resp.reason.replace('_', ' '));
+        if (req.kind === 'watch' || req.kind === 'fire') onDutyDeclined(world, A, B, req.kind);
         const sev = req.kind === 'food' ? clamp((62 - A.needs.hunger) / 62, 0, 1) : req.kind === 'water' ? clamp((66 - A.needs.thirst) / 66, 0, 1) : 0.3;
         if (resp.reason === 'unwilling' || resp.reason === 'disliked') {
           // a refusal is not a broken promise: it costs a little warmth, in proportion to how much was at stake
@@ -1088,6 +1157,9 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         } else if (resp.reason === 'own_need') {
           adjustRel(A, B.id, world.tick, { aff: -0.3 });
         } else {
+          // Being told "I have some, but it is for something I am making" is an answer, and the asker keeps it: it is what stops
+          // them asking this neighbour for the same kind of favour again while the thing is still being made (options_social.ts).
+          if (resp.reason === 'making') A.cooldowns[MAKING_NOTE + B.id] = world.tick + MAKING_MEMORY;
           // 'enough', 'committed', 'in_use', 'no_item', 'making': nobody did anything wrong
           A.asked[B.id] = world.tick - 400;
         }
@@ -1101,8 +1173,13 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       if (!req) break;
       const belief = answerInfo(world, B, A, d.infoKind ?? 'food');
       if (belief) {
-        tellBelief(world, B, A, belief);
-        learn(A, { ...belief, src: 'told', from: B.id, learned: world.tick, origin: belief.origin ?? B.id, hops: (belief.hops ?? 0) + 1 });
+        // One logical offer with two writes underneath: `tellBelief` may refuse on its own freshness rule and the direct `learn`
+        // below writes anyway on a looser one. The diagnostics see the pair as one offer and classify what was actually written.
+        observeOffer(world, 'ask_info', B, A, belief, () => {
+          const told = tellBelief(world, B, A, belief);
+          learn(A, { ...belief, src: 'told', from: B.id, learned: world.tick, origin: belief.origin ?? B.id, hops: (belief.hops ?? 0) + 1 });
+          return told;
+        });
         bubble(world, B, D.infoLine(world, belief, B.id, A.id), 'say', 70);
         settle(world, req, 'fulfilled', `told about a ${BELIEF_NOUN[belief.kind]}`);
         adjustRel(A, B.id, world.tick, { aff: 1.6, trust: 1.2, note: `${B.name} told me where to find ${d.infoKind ?? 'food'}` });
@@ -1121,7 +1198,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const b = A.beliefs[id];
         if (b) {
           // tellBelief's verdict is the evidence of delivery: true when B did not know, false when B knew as much already
-          c.data.warnDelivered = tellBelief(world, A, B, b);
+          c.data.warnDelivered = observeOffer(world, 'warn', A, B, b, () => tellBelief(world, A, B, b));
           bubble(world, B, 'Thanks for the warning.', 'say', 50);
           adjustRel(B, A.id, world.tick, { aff: 1.8, trust: 2.2, note: `${A.name} warned me about a wolf` });
           if ((world.stats.lastWarnEvent ?? -9999) < world.tick - 900) {
@@ -1161,7 +1238,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       }
       const w = 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(B) / 100) + (rel?.kin ? 0.2 : 0);
       if (w >= 0.55 && siteBelief && world.byId.has(d.siteId ?? 0)) {
-        tellBelief(world, A, B, siteBelief);
+        observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
         req.status = 'promised';
         req.note = `${B.name} will help build`;
@@ -1204,6 +1281,18 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     }
     case 'invite': {
       if (d.mealId) inviteRespond(world, A, B, d.mealId);
+      break;
+    }
+    case 'mediate': {
+      const other = d.pair ? personOf(world, d.pair) : null;
+      if (!other) break;
+      const out = mediate(world, A, B, other);
+      if (out === 'peace') bubble(world, B, 'You’re right. I’ll let it lie.', 'happy', 56);
+      else if (out === 'eased') bubble(world, B, 'Maybe. I’ll think on it.', 'say', 54);
+      else if (out === 'worse') {
+        bubble(world, B, 'Stay out of it.', 'angry', 54);
+        c.data.sour = true;
+      } else bubble(world, B, 'Not yet.', 'say', 50);
       break;
     }
     case 'propose': {
@@ -1287,11 +1376,13 @@ export function flushDelayedBubbles(world: World): void {
 // ── phase 3: news travels by word of mouth ──
 function phaseNews(world: World, S: Person, L: Person): void {
   shareConcerns(world, S, L);
+  // one story about a third person, when there is one worth telling (rich only; never in an authored world)
+  shareRumour(world, S, L);
   const news = pickNews(world, S, L, 2);
   let shown = false;
   let learned = 0;
   for (const b of news) {
-    const isNew = tellBelief(world, S, L, b);
+    const isNew = observeOffer(world, 'news', S, L, b, () => tellBelief(world, S, L, b));
     if (isNew) {
       learned++;
       if (!shown && !S.speech) {
@@ -1328,6 +1419,7 @@ function joinHouseholds(world: World, A: Person, B: Person, kind: 'partner' | 'r
     const incoming = [mover, ...membersOf(world, src).filter((m) => m.id !== mover.id && m.parents.includes(mover.id) && stageOf(world, m) === 'child')];
     if (membersOf(world, dest).length + incoming.length > cap) continue;
     for (const m of incoming) addToHousehold(world, m, dest);
+    onMovedHousehold(world, mover, src, dest);
     if (kind === 'partner') bindPartners(world, A, B);
     const label = kind === 'partner' ? 'moved in together' : 'now share a home';
     addEvent(world, 'social', `${A.name} and ${B.name} ${label} (${dest.name} household).`, [A.id, B.id], A.x, A.y);
@@ -1341,6 +1433,8 @@ function joinHouseholds(world: World, A: Person, B: Person, kind: 'partner' | 'r
 function bindPartners(world: World, A: Person, B: Person): void {
   A.partnerId = B.id;
   B.partnerId = A.id;
+  noteWedding(world, A, B);
+  noteDeedNear(world, A, 'news', `${A.name} and ${B.name} are now partners`, A.x, A.y, 12, [B.id]);
   const ra = relOf(A, B.id);
   const rb = relOf(B, A.id);
   ra.kin = 'partner';
@@ -1442,6 +1536,7 @@ export function passingGreetings(world: World, p: Person): void {
     const chance = 0.2 + 0.45 * p.traits.sociability + Math.min(0.25, (rel?.familiarity ?? 0) / 80);
     if (hashUnit(p.id, q.id, world.tick >> 4) > chance) continue;
     p.wave = world.tick + 28;
+    noteContact(world, 'greeting', p.id, q.id, world.tick);
     p.cooldowns['greet' + q.id] = world.tick + GREET_COOLDOWN;
     adjustRel(p, q.id, world.tick, { aff: 0.3, fam: 0.5 });
     if (hashUnit(q.id, p.id, world.tick >> 4) < 0.75 && q.wave < world.tick) {

@@ -8,8 +8,8 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 - Seeded randomness stays (replay, inspector, the lab). The golden fingerprints (`tests/golden.test.ts`) no longer constrain a change
   meant to alter behaviour: re-record them in the commit that changes rules. Ensemble gates (`scripts/gates.ts`, `docs/gates.json`) are the
   acceptance test for such a change.
-- New behaviour goes behind `settings.dynamics = 'rich'` (off by default; authored worlds must stay exactly as they were, and the golden,
-  determinism and save tests check that). The rules sets are in `src/sim/rules.ts`.
+- One current simulation: new product worlds use the integrated rules (`settings.dynamics = 'rich'` internally), with no player-facing mode toggle. Accepted improvements become standard. The 2026-10-17 owner decision in `docs/DEVELOPMENT_POLICY.md` supersedes the old rich-only/off-by-default product policy.
+- Preserve recorded save/replay semantics; `authored` and absent dynamics remain compatibility/diagnostic values, not a second product to develop indefinitely. Use `currentWorldSettings` for new product worlds. Keep experiments in the lab; require evidence of effectiveness before claiming benefit. Historical goldens protect compatibility, not a freeze on current behavior.
 - One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PR; never merge, never force-push.
 
 ## Where things are
@@ -24,10 +24,35 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   requests plus the promiser's commitment for the explanations. `Request.planId`/`Request.delivered` tie an ask to a project and
   record what really arrived. Tests: `tests/project_cooperation.test.ts`; page check: `scripts/browser/cooperation_check.mjs`.
 - `src/sim/decision.ts` ranks options (mood weight applied here). `src/sim/probe.ts` work counters (never saved or hashed).
+- Stage 3, second piece (rich only): `src/sim/trade.ts`, the one kind of work a person settles on as theirs, by comparative advantage
+  from their own skills, what they can see others doing (`SeenEntity.work`) and what it has paid them; tilts the matching work by at
+  most 6 where the ranking is made, shows on the person card, `rich-no-trades` removes it. Measured: `docs/EMERGENCE.md`, Stage 3
+  second piece.
+- Stage 3, first piece (rich only): `src/sim/learning.ts`, each person's own running estimate of what each kind of gathering has paid
+  them (`p.payoff`, got against the option's expectation, learned at `endActivity`), tilting the gather options by at most ±6; the
+  inspector shows it under Traits & skills. Lab branch `rich-no-learning`; metrics `specialisation`, `topKindShare`. Plan and
+  measure: `docs/EMERGENCE.md`, Stage 3.
+- The world pass (rich only; every module says so at its head and returns the neutral value elsewhere; `docs/RICH_WORLD.md` is the
+  one-page map of what each adds, where it is read and how to see it): `src/sim/occasions.ts` (funeral, feast, wedding, harvest
+  feast, market; `attendOptions`, `marketExchange`/`marketSwap`), `reputation.ts` (`p.heard`: stories with source and age, passed one at
+  a time in `social.ts phaseNews`, read by `willingness` and the chat option), `illness.ts` (a fever: onset, spread in talk, meals and
+  shared sleep, rest, immunity), `apprentice.ts` (apprenticeship on top of `trade.ts`: offered after a job done together, more taught within reach of the
+  master, graduates into a trade of their own; removed with the trade by `rich-no-trades`), `life.ts` (hopes `p.goal` with `goalNudge`, injuries `p.injury`, `elderFactor`),
+  `misdeeds.ts` (theft from another store, favours read from `Relation.debt`), `hunting.ts` + deer in `wildlife.ts` (`isThreat` keeps
+  deer out of every danger check), `hardship.ts` dry spells and floods, `sources.ts` finite rock, `events.ts chronicleWorthy` +
+  `world.chronicle`, `world.ts roadsTick`, `buildings.ts` `builtBy`/`built`, `options_social.ts` the ask worth making. Tests:
+  `tests/{occasions,reputation,illness,apprentice,life,misdeeds,environment,settlement_record}.test.ts`.
+- The second pass, ways to shape one's own life (rich only, same contract): `temperament.ts` (p.crowd, time alone, the reserved
+  decline a crowded table), `lifechanges.ts` (p.lifeEvent: bereaved, new parent, moved, took in; a bereaved concern brings friends to
+  look in; `leanOn` in willingness, `companyPull` in the chat), `traditions.ts` (world.traditions from well-attended occasions, held
+  yearly, lapse unattended; `pickStory` retells the chronicle in `reputation.ts shareRumour`), `crews.ts` (world.crews; `crewNudge` in the
+  ranking), `mediation.ts` (+ conversation purpose 'mediate'; `quarrelsFor`, `mediate`), `responsibilities.ts` (request kinds 'watch'
+  and 'fire' for the laid up; the watch is a `visit` with `data.watch`, the fire a `fuel_fire` that fulfils). Tests:
+  `tests/{temperament,lifechanges,traditions,crews,mediation,responsibilities}.test.ts`.
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
-- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans` (rich with every private plan removed).
+- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans` (rich with every private plan removed), `rich-no-ask` (rich with plans kept and only the D1 project ask removed; the D1 attribution branch), `rich-no-learning` (rich with Stage 3's estimates of what pays removed), `rich-no-trades` (rich with the trade people settle on removed).
 - The AI inhabitant (`docs/INHABITANT.md`): `src/sim/external.ts` (the seam in `decide`), `src/agent/` (observation, protocol, memory,
   transcript, model gate, rewind runner, scripted models; no network), `scripts/inhabit.ts` (live | replay | standard; `--memory` keeps notes;
   `--stub goal` needs no key), `scripts/inhabit_diff.ts` (two runs: same world or not), `scripts/inhabit_attribute.ts` (which decisions
@@ -48,9 +73,9 @@ When a run belongs on the user's machine:
 cd "C:\dev\Claude Experiment\living-world"
 git pull
 npm ci
-node scripts/lab.mjs --out rich_out --seeds 24 --fork 0 --days 15 --branches nudge:1,rich
+node scripts/lab.mjs --out rich_out --seeds 24 --fork 0 --days 15 --dynamics authored --branches nudge:1,rich
 npx vite-node scripts/lab_report.ts -- rich_out
-node scripts/lab.mjs --out split_out --seeds 24 --fork 0 --days 15 --branches nudge:1,nudge:2,rich,rich-stakes-only,rich-mood-only
+node scripts/lab.mjs --out split_out --seeds 24 --fork 0 --days 15 --dynamics authored --branches nudge:1,nudge:2,rich,rich-stakes-only,rich-mood-only
 node scripts/novelneed_all.mjs --out nn_out --seeds 24 --fork 6 --days 10
 ```
 (`npm ci` only the first time or when `package.json` changed. The second `lab_report` line re-renders a report from existing data, which

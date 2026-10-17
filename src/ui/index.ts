@@ -129,7 +129,6 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
         prefs.seed = game.settings.seed;
         prefs.harsh = game.settings.harsh;
         prefs.immigration = game.settings.immigration;
-        prefs.rich = game.settings.dynamics === 'rich';
         if (game.settings.scene === 'natural') prefs.size = game.settings.profile ?? 'normal';
         persist.savePrefs();
         game.flyTo(game.world.camp.x, game.world.camp.y, 1);

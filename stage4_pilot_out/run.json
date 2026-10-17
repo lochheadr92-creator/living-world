@@ -1,0 +1,348 @@
+{
+ "provenance": {
+  "command": "npx vite-node scripts/stage4.ts -- --out stage4_pilot_out --seed meadow --profile large --days 1",
+  "head": "c546d8e11a0cd9d31f854f2f9f3815e12d80f00b",
+  "dirty": {
+   "files": 45,
+   "fingerprint": "281c4919"
+  },
+  "seed": "meadow",
+  "profile": "large",
+  "days": 1,
+  "settings": {
+   "seed": "meadow",
+   "population": 100,
+   "harsh": false,
+   "immigration": false,
+   "scene": "natural",
+   "dynamics": "rich",
+   "profile": "large",
+   "ruleSet": "scaled",
+   "settlementFounders": 25
+  },
+  "checkpointsRequested": [
+   0,
+   4,
+   8,
+   12
+  ],
+  "checkpointsReached": [
+   0
+  ],
+  "checkpointsMissing": [
+   4,
+   8,
+   12
+  ],
+  "finalTick": 2400,
+  "finalHash": "7a29bddb",
+  "wallSeconds": 5.5,
+  "note": "Descriptive only. One seed, one run, no ensemble and no claim of effect. Zero cross-camp contacts or transfers is a valid observation and means the mechanism was unexercised in this window, not that transmission is impossible."
+ },
+ "cohort": {
+  "camps": 4,
+  "counts": {
+   "camp0": 18,
+   "unknown": 38,
+   "camp1": 13,
+   "camp2": 15,
+   "camp3": 16
+  },
+  "frozenAtTick": 0,
+  "unknownRule": "no home at the day-0 snapshot, or a later entrant with no cohort parent"
+ },
+ "contacts": {
+  "byChannel": {
+   "greeting": {
+    "total": 1253,
+    "cross": 0,
+    "within": 469,
+    "unknown": 784
+   },
+   "conversation": {
+    "total": 83,
+    "cross": 0,
+    "within": 30,
+    "unknown": 53
+   },
+   "invitation": {
+    "total": 1,
+    "cross": 0,
+    "within": 1,
+    "unknown": 0
+   },
+   "meal": {
+    "total": 1,
+    "cross": 0,
+    "within": 1,
+    "unknown": 0
+   }
+  },
+  "all": {
+   "total": 1338,
+   "cross": 0,
+   "within": 501,
+   "unknown": 837
+  },
+  "crossFractionOfKnown": 0,
+  "uniquePairs": 776,
+  "uniqueCrossPairs": 0,
+  "perWindow": {
+   "(0,4]": {
+    "greeting": {
+     "total": 1245,
+     "cross": 0,
+     "within": 465,
+     "unknown": 780
+    },
+    "conversation": {
+     "total": 83,
+     "cross": 0,
+     "within": 30,
+     "unknown": 53
+    },
+    "invitation": {
+     "total": 1,
+     "cross": 0,
+     "within": 1,
+     "unknown": 0
+    },
+    "meal": {
+     "total": 1,
+     "cross": 0,
+     "within": 1,
+     "unknown": 0
+    }
+   },
+   "(4,8]": {},
+   "(8,12]": {},
+   "(0,8]": {
+    "greeting": {
+     "total": 1245,
+     "cross": 0,
+     "within": 465,
+     "unknown": 780
+    },
+    "conversation": {
+     "total": 83,
+     "cross": 0,
+     "within": 30,
+     "unknown": 53
+    },
+    "invitation": {
+     "total": 1,
+     "cross": 0,
+     "within": 1,
+     "unknown": 0
+    },
+    "meal": {
+     "total": 1,
+     "cross": 0,
+     "within": 1,
+     "unknown": 0
+    }
+   },
+   "(0,12]": {
+    "greeting": {
+     "total": 1245,
+     "cross": 0,
+     "within": 465,
+     "unknown": 780
+    },
+    "conversation": {
+     "total": 83,
+     "cross": 0,
+     "within": 30,
+     "unknown": 53
+    },
+    "invitation": {
+     "total": 1,
+     "cross": 0,
+     "within": 1,
+     "unknown": 0
+    },
+    "meal": {
+     "total": 1,
+     "cross": 0,
+     "within": 1,
+     "unknown": 0
+    }
+   }
+  }
+ },
+ "offers": {
+  "attempts": 335,
+  "outcomes": {
+   "rejected": 212,
+   "inserted": 79,
+   "refreshed": 44
+  },
+  "apiAccepted": 123,
+  "genuine": 123,
+  "bypassWrites": 0,
+  "provenanceOnly": 0,
+  "acceptedRate": 0.3672,
+  "byChannel": {
+   "news": {
+    "attempts": 322,
+    "api": 113,
+    "genuine": 113,
+    "bypass": 0,
+    "outcomes": {
+     "rejected": 209,
+     "inserted": 69,
+     "refreshed": 44
+    }
+   },
+   "warn": {
+    "attempts": 11,
+    "api": 10,
+    "genuine": 10,
+    "bypass": 0,
+    "outcomes": {
+     "inserted": 10,
+     "rejected": 1
+    }
+   },
+   "invite": {
+    "attempts": 1,
+    "api": 0,
+    "genuine": 0,
+    "bypass": 0,
+    "outcomes": {
+     "rejected": 1
+    }
+   },
+   "recruit": {
+    "attempts": 1,
+    "api": 0,
+    "genuine": 0,
+    "bypass": 0,
+    "outcomes": {
+     "rejected": 1
+    }
+   }
+  },
+  "crossAttempts": {
+   "total": 335,
+   "cross": 0,
+   "within": 128,
+   "unknown": 207
+  },
+  "crossAcceptedOfCrossAttempts": null,
+  "crossAcceptedOfKnownAccepted": 0
+ },
+ "checkpoints": {
+  "day0": {
+   "camps": [
+    {
+     "camp": 0,
+     "livingKnownMembers": 18,
+     "retained": 118
+    },
+    {
+     "camp": 1,
+     "livingKnownMembers": 13,
+     "retained": 138
+    },
+    {
+     "camp": 2,
+     "livingKnownMembers": 15,
+     "retained": 115
+    },
+    {
+     "camp": 3,
+     "livingKnownMembers": 16,
+     "retained": 149
+    }
+   ],
+   "pairs": [
+    {
+     "a": 0,
+     "b": 1,
+     "inter": 10,
+     "union": 246,
+     "j": 0.0407,
+     "sizes": [
+      118,
+      138
+     ]
+    },
+    {
+     "a": 0,
+     "b": 2,
+     "inter": 8,
+     "union": 225,
+     "j": 0.0356,
+     "sizes": [
+      118,
+      115
+     ]
+    },
+    {
+     "a": 0,
+     "b": 3,
+     "inter": 0,
+     "union": 267,
+     "j": 0,
+     "sizes": [
+      118,
+      149
+     ]
+    },
+    {
+     "a": 1,
+     "b": 2,
+     "inter": 2,
+     "union": 251,
+     "j": 0.008,
+     "sizes": [
+      138,
+      115
+     ]
+    },
+    {
+     "a": 1,
+     "b": 3,
+     "inter": 8,
+     "union": 279,
+     "j": 0.0287,
+     "sizes": [
+      138,
+      149
+     ]
+    },
+    {
+     "a": 2,
+     "b": 3,
+     "inter": 3,
+     "union": 261,
+     "j": 0.0115,
+     "sizes": [
+      115,
+      149
+     ]
+    }
+   ],
+   "meanJaccardOverValidPairs": 0.0208,
+   "validPairs": 6,
+   "totalPairs": 6,
+   "retainedTold": 0,
+   "foreignOriginOfKnown": null,
+   "foreignOriginCount": 0,
+   "bothCohortsKnown": 0,
+   "unknownOriginOrCohort": 0,
+   "hops": {
+    "mean": null,
+    "max": null,
+    "entries": 0,
+    "missing": 0
+   }
+  }
+ },
+ "diagnostics": {
+  "offersRecorded": 335,
+  "contactsRecorded": 1338,
+  "unclosedOffers": 0
+ }
+}

@@ -14,7 +14,7 @@ const opt = (name: string, dflt: string): string => {
 const seed = opt('seed', 'meadow');
 const profile = opt('profile', 'large') as ProfileName;
 const days = Number(opt('days', '12'));
-const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
+const dynamics = opt('dynamics', 'rich') as 'authored' | 'rich';
 const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
 const r = trace(world, days);
 if (opt('json', '')) writeFileSync(opt('json', ''), JSON.stringify({ seed, profile, ...r }));

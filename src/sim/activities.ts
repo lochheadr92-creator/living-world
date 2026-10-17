@@ -1,3 +1,4 @@
+import { injuryFactor } from './life';
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
 import { cartSpeedFactor } from './carts';
 import { carryCap } from './people';
@@ -5,6 +6,7 @@ import { stageOf } from './people';
 import { releaseClaims, weightOf } from './economy';
 import { addLog, setResult } from './events';
 import { creditShelterFrom } from './intent';
+import { recordPay } from './learning';
 import { findPath, terrainSpeed, tileCost } from './pathfinding';
 import { hashUnit } from './rng';
 import { distToFootprint, entityPos, isWalkable } from './registry';
@@ -150,6 +152,7 @@ export function moveSpeed(world: World, p: Person, run = false): number {
   const cap = carryCap(world, p);
   s *= 1 - 0.22 * Math.min(1, weightOf(p.inv) / cap);
   if (p.health < 70) s *= 0.55 + 0.45 * (p.health / 70);
+  if (p.injury) s *= injuryFactor(world, p);
   s *= terrainSpeed(world, p.x, p.y);
   if (p.cartId) s *= cartSpeedFactor(world, p);
   if (world.light < 0.3) s *= 0.93;
@@ -222,7 +225,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
   }
   // chasing a person: the destination is refreshed only while the target is actually in sight,
   // otherwise the walker keeps heading for where they were last seen
-  if (a.targetType === 'person' && (world.tick + p.id) % 10 === 0) {
+  if ((a.targetType === 'person' || a.targetType === 'animal') && (world.tick + p.id) % 10 === 0) {
     const sighted = p.seen.find((s) => s.id === a.targetId);
     if (sighted) {
       const dx = p.x - sighted.x;
@@ -325,6 +328,8 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   if (!a) return;
   // time under shelter is credited to the plan it served before the activity is let go of (rest and sleep alike)
   creditShelterFrom(p, a);
+  // and what a gathering trip came to is written into the person's own estimate of what that kind of work pays them
+  recordPay(world, p, a);
   releaseClaims(world, a.claims);
   p.activity = null;
   const h = handlers[a.kind];

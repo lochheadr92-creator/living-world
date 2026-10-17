@@ -5,7 +5,7 @@ export const T = { DEEP: 0, SHALLOW: 1, SAND: 2, GRASS: 3, FOREST: 4, STONY: 5 }
 export type TerrainType = (typeof T)[keyof typeof T];
 
 // ───────────────────────────── items ─────────────────────────────
-export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread';
+export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar';
 /** Raw materials and the things made from them. */
@@ -177,6 +177,18 @@ export interface SeenEntity {
   hurt: boolean;
   child: boolean;
   carrying: ItemKind[];
+  /**
+   * The kinds they are visibly carrying more than one of - an armful, not their last stick. Rich worlds only (absent otherwise, so
+   * an authored world's sight is exactly what it always was). It is the one thing a watcher can tell about somebody's pack beyond
+   * what is in it, and what tells apart "they have some" from "they have some to spare" when deciding whether to ask.
+   */
+  plenty?: ItemKind[];
+  /**
+   * What kind of work they are visibly at, as a watcher would name it: chopping at a tree is wood, standing at the kiln is the
+   * kiln, hoeing a field is farming (trade.ts visibleWork). Rich worlds only, and absent for anyone who is not working. It is
+   * `act` said in the terms a trade is in, and it is what lets somebody see which trades the people around them already have.
+   */
+  work?: SkillKey;
   asleep: boolean;
   /** what they are visibly doing */
   act: ActivityKind | '';
@@ -184,6 +196,9 @@ export interface SeenEntity {
 }
 
 export type ActivityKind =
+  | 'attend'
+  | 'hunt'
+  | 'alone'
   | 'wander'
   | 'eat'
   | 'eat_store'
@@ -407,10 +422,136 @@ export interface ResultRecord {
   detail: string;
 }
 
+/** one kind of gathering as it has paid one person: `r` 1 = as planned, below worse, above better; `n` outcomes behind it */
+export interface Payoff {
+  n: number;
+  r: number;
+}
+
+/** what a person hopes for (life.ts; rich worlds only): the hope, since when, how far along (read from the world), when reached (0: not yet) */
+export type GoalKind = 'home' | 'family' | 'trade' | 'stocked' | 'respected';
+export interface Goal {
+  kind: GoalKind;
+  since: number;
+  progress: number;
+  done: number;
+}
+/** an injury (life.ts; rich worlds only): what, since when, healed by when, how it happened */
+export type InjuryKind = 'sprain' | 'cut' | 'broken';
+export interface Injury {
+  kind: InjuryKind;
+  since: number;
+  until: number;
+  how: string;
+}
+
+/** an informal crew (crews.ts; rich worlds only): a few people who like each other and count as a group */
+export interface Crew {
+  id: number;
+  name: string;
+  members: number[];
+  since: number;
+  /** when the group last formed or grew */
+  together: number;
+}
+
+/** a tradition (traditions.ts; rich worlds only): a gathering the community holds each year on a day, since a holding that many came to */
+export interface Tradition {
+  id: number;
+  kind: 'harvest' | 'remembrance' | 'midwinter';
+  name: string;
+  since: number;
+  dayOfYear: number;
+  /** the day (tick / DAY) it was last called, how many times it has been held, how many times running nobody came */
+  lastHeld: number;
+  held: number;
+  skipped: number;
+  /** the dead remembered, for a remembrance (0 otherwise) */
+  about: number;
+  status: 'kept' | 'lapsed';
+}
+
+/** a change in life that colours things for a while (lifechanges.ts; rich worlds only): what, about whom, since when, until when */
+export interface LifeEvent {
+  kind: 'bereaved' | 'new_parent' | 'moved' | 'took_in';
+  about: number;
+  since: number;
+  until: number;
+}
+
+/** an apprenticeship (apprentice.ts; rich worlds only): whose, in what skill, since when, and when they last practised it */
+export interface Apprenticeship {
+  master: number;
+  key: SkillKey;
+  since: number;
+  practised: number;
+}
+
+/** a fever (illness.ts; rich worlds only): when it began, how bad it is now, rest credited against the course it must run, and how it came */
+export interface Illness {
+  since: number;
+  severity: number;
+  rested: number;
+  course: number;
+  how: string;
+}
+
+/** a story one person holds about another (reputation.ts; rich worlds only): what, about whom, who told it, who saw it, how old */
+export type RumourKind = 'generous' | 'reliable' | 'quarrelsome' | 'unreliable' | 'thief' | 'news';
+export interface Rumour {
+  about: number;
+  kind: RumourKind;
+  /** when it happened */
+  tick: number;
+  /** who told me (0: I saw it myself) */
+  from: number;
+  /** who saw it first */
+  origin: number;
+  /** how many mouths it has passed through */
+  hops: number;
+  /** how far it is believed, 0..1: hearsay from someone little trusted counts for less */
+  weight: number;
+  /** the story, in words that fit after "told me" */
+  text: string;
+}
+
+/** a gathering at a place and a time (occasions.ts; rich worlds only) */
+export type OccasionKind = 'funeral' | 'wedding' | 'feast' | 'harvest' | 'market';
+export interface Occasion {
+  id: number;
+  kind: OccasionKind;
+  placeId: number;
+  placeName: string;
+  x: number;
+  y: number;
+  called: number;
+  /** when it opens, and when it is over */
+  at: number;
+  until: number;
+  /** who it is for (the dead, the couple, the newborn and mother); nobody for a harvest or a market */
+  about: number[];
+  attended: number[];
+  status: 'called' | 'gathering' | 'done';
+  end: string;
+}
+
 export interface Speech {
   text: string;
   until: number;
   kind: 'say' | 'ask' | 'warn' | 'angry' | 'happy' | 'think';
+}
+
+/**
+ * The one kind of work a person has settled on as theirs (trade.ts; rich worlds only, null in any other). It is one of the
+ * existing skills, chosen by comparative advantage from their own skills and what they have seen other people doing, and it
+ * tilts the matching work options by a bounded amount. It is not a job: nobody is assigned one and nobody is held to one.
+ */
+export interface Trade {
+  key: SkillKey;
+  /** the tick they took it up */
+  since: number;
+  /** why, in their own terms, at the moment they chose it */
+  why: string;
 }
 
 export interface Person {
@@ -453,6 +594,31 @@ export interface Person {
    * Kept small and bounded (MAX_INTENTIONS); saved with the person; carries its own account of why it stands or ended.
    */
   intentions: Intention[];
+  /**
+   * What each kind of gathering has paid this person, in their own experience (rich worlds only; always empty in an authored
+   * world): a running ratio of what they got against what the option they chose expected, and how many outcomes it rests on.
+   * Learned from their own finished activities and nothing else (learning.ts); saved with the person.
+   */
+  payoff: Partial<Record<SkillKey, Payoff>>;
+  /**
+   * The trade they have settled on, or null for somebody who has none (rich worlds only; always null in an authored world).
+   * Chosen, kept, changed and given up by the person themselves (trade.ts); saved with them, and in the fingerprint.
+   */
+  trade: Trade | null;
+  /** what they have seen and been told of other people (reputation.ts; rich only, never created in an authored world) */
+  heard?: Rumour[];
+  /** the fever they have now (illness.ts; rich only, never created in an authored world) and until when they are safe from another */
+  illness?: Illness;
+  immuneUntil?: number;
+  /** whose apprentice they are, in what (apprentice.ts; rich only, never created in an authored world) */
+  apprentice?: Apprenticeship;
+  /** the change they are living through (lifechanges.ts; rich only, never created in an authored world) */
+  lifeEvent?: LifeEvent;
+  /** time lately spent with three or more people close by (temperament.ts; rich only, never created in an authored world) */
+  crowd?: number;
+  /** what they hope for, and what hurts them (life.ts; rich only, never created in an authored world) */
+  goal?: Goal;
+  injury?: Injury;
   errand: Errand | null;
   activity: Activity | null;
   suspended: Activity | null;
@@ -515,7 +681,7 @@ export interface InteractionRecord {
 
 export interface Concern {
   about: number;
-  kind: 'hungry' | 'thirsty' | 'cold' | 'hurt' | 'tired' | 'missing';
+  kind: 'hungry' | 'thirsty' | 'cold' | 'hurt' | 'tired' | 'missing' | 'bereaved';
   /** when the observation was made (hearsay keeps the original age) */
   seen: number;
   src: 'seen' | 'told';
@@ -581,6 +747,9 @@ export interface Building {
   inside: number[];
   /** workplaces: the running batch, stock waiting for pickup, who contributed */
   ops?: FacilityState;
+  /** who finished it and when (rich only; absent in an authored world and on anything built before this was recorded) */
+  builtBy?: number[];
+  built?: number;
   /** set while a home upgrade is under way (the site id) */
   upgrading?: number;
 }
@@ -751,7 +920,8 @@ export interface Grave {
 export interface Animal {
   ent: 'animal';
   id: number;
-  type: 'wolf';
+  /** deer only in rich worlds (hunting.ts) */
+  type: 'wolf' | 'deer';
   x: number;
   y: number;
   px: number;
@@ -790,7 +960,7 @@ export interface Household {
 export type Entity = Person | Source | Building | Site | Plot | Pile | Grave | Animal | Cart;
 
 // ───────────────────────────── social ─────────────────────────────
-export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work';
+export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool' | 'help_build' | 'info' | 'trade' | 'care' | 'goods' | 'repair' | 'haul' | 'work' | 'watch' | 'fire';
 /**
  * `partial`: it was answered, something real was handed over, and it was less than was asked for. It is not `fulfilled` (the ask was
  * not met) and not `failed` (something did arrive), and it leaves nobody owing the difference: a helper who gives what they can has
@@ -833,6 +1003,13 @@ export interface Request {
    * twice for the same thing and the explanations can say which project a delivery served.
    */
   planId?: number;
+  /**
+   * Set on a project ask that was made under the rule that it should probably be answered yes: the person asked was visibly
+   * carrying more than one of it or was idle, was not visibly making or building something, and had not said lately that what
+   * they carry is spoken for (options_social.ts). It records how the ask came to be made, so the yes rate of asks made that way
+   * can be read off the requests (scripts/projects.ts); it changes nothing about how the ask is answered.
+   */
+  likely?: boolean;
   /** where the goods or work are wanted */
   destKind?: 'site' | 'building' | 'person' | 'spot';
   destId?: number;
@@ -863,7 +1040,8 @@ export type ConvPurpose =
   | 'invite'
   | 'check_in'
   | 'lend'
-  | 'report';
+  | 'report'
+  | 'mediate';
 
 export interface Conversation {
   id: number;
@@ -967,12 +1145,19 @@ export interface Settings {
   scene: SceneId;
   /** which limits on settlement size apply (rules.ts); absent means 'ordinary', as do saves from before it existed */
   ruleSet?: RuleSet;
-  /** a larger world, founded in several places (profiles.ts); absent means the ordinary 80x80 world with one camp */
-  profile?: 'large' | 'huge';
+  /** a larger world, founded in several places, or a crowded one (profiles.ts); absent means the ordinary 80x80 world with one camp */
+  profile?: 'large' | 'huge' | 'town';
   /** how many of the founders live together in one settlement, for the limits that follow a settlement (rules.ts); absent means all of them */
   settlementFounders?: number;
-  /** 'rich': people have a mood that changes what they do, and lean seasons happen (mood.ts, hardship.ts); absent means 'authored', the world as it was */
+  /** 'rich' is the current product rules. 'authored'/absent retain legacy save and diagnostic semantics;
+   * new product worlds explicitly set rich through currentWorldSettings. Never upgrade this field while loading a save. */
   dynamics?: 'authored' | 'rich';
+  /**
+   * Which generation of simulation BEHAVIOUR this world runs (`src/sim/rulesversion.ts`), as against the save format version
+   * and the `dynamics` family above. New product worlds carry the current number; a world made before versioning existed has
+   * none, keeps none, and is never silently upgraded. Preserved by saving, loading, restoring, forking and replay.
+   */
+  rulesVersion?: number;
 }
 /** 'ordinary': the village-sized limits the world was tuned for. 'scaled': the same limits as ratios of the founding population, local to a settlement. */
 export type RuleSet = 'ordinary' | 'scaled';
@@ -1033,6 +1218,21 @@ export interface World {
   light: number;
   ledger: Ledger;
   camp: { x: number; y: number };
+  /** gatherings called in a rich world (occasions.ts); never created in an authored one, so its saves and fingerprints are untouched */
+  occasions?: Occasion[];
+  occasionState?: { harvestUnits: number; lastHarvestFeastDay: number; lastMarketDay: number };
+  /** the community's traditions (traditions.ts; rich only, never created in an authored world) */
+  traditions?: Tradition[];
+  /** informal crews (crews.ts; rich only, never created in an authored world) */
+  crews?: Crew[];
+  /**
+   * The settlement's record, kept for good (rich only; never created in an authored world): the events worth remembering after
+   * the feed has forgotten them (events.ts chronicleWorthy). Capped at CHRONICLE_MAX, oldest dropped first.
+   */
+  chronicle?: WorldEvent[];
+  /** roads (rich only; world.ts roadsTick): 1 where a path walked hard for a day has become a road; and how long each tile has been worn */
+  roads?: Uint8Array;
+  roadAge?: Uint8Array;
   /** further settlements besides the camp (settlements.ts); absent in a world with one, so that world is saved and hashed exactly as before */
   extraSettlements?: { x: number; y: number }[];
   byId: Map<number, Entity>;
@@ -1042,7 +1242,9 @@ export interface World {
   usedNames: Set<string>;
   stats: Record<string, number>;
   /** a lean season under way (hardship.ts); only in worlds with rich dynamics */
-  hardship?: { kind: 'lean'; since: number; until: number };
+  hardship?: { kind: 'lean' | 'dry'; since: number; until: number };
+  /** the last flood (hardship.ts; rich only, never set in an authored world) */
+  lastFlood?: number;
   /**
    * people driven from outside (the AI inhabitant, docs/INHABITANT.md), by person id. Absent in every ordinary world, so such a world
    * is saved and hashed exactly as before. The simulation never reads it.

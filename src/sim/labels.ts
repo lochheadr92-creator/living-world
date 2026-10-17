@@ -48,6 +48,9 @@ export const BELIEF_NOUN: Record<BeliefKind, string> = {
 
 export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   wander: 'wandering',
+  attend: 'at a gathering',
+  hunt: 'hunting',
+  alone: 'taking some time alone',
   eat: 'eating',
   eat_store: 'eating from stores',
   drink: 'drinking',
@@ -88,6 +91,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
 };
 
 export const ITEM_ICON: Record<ItemKind, string> = {
+  meat: 'meat',
   berries: 'berries',
   fruit: 'fruit',
   fish: 'fish',

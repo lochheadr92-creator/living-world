@@ -54,11 +54,13 @@ export function createTransport(ctx: UICtx, slots: Slots): Part {
     ),
   );
   const group = h('div', { class: 'speeds', role: 'group', 'aria-label': 'Simulation speed' }, speedBtns);
+  // the speed as a label, for the folded top bar, where the buttons are out of sight (the keys still work)
+  const speedTag = h('span', { class: 'tx-speed num', 'data-tip': 'The speed. Unfold the top bar (the chevron by the seed) to change it, or use the keys 1 to 6.' });
   // what the clock is really doing: the speed asked for against the speed achieved (polled, never per tick)
   const rate = h('span', { class: 'pb-rate num' });
   const note = h('span', { class: 'pb-note', hidden: true });
   const playback = h('div', { class: 'playback', hidden: true }, rate, note);
-  const row = h('div', { class: 'tx-row' }, playBtn, stepBtn, h('span', { class: 'tdiv' }), group);
+  const row = h('div', { class: 'tx-row' }, playBtn, stepBtn, h('span', { class: 'tdiv' }), group, speedTag);
   const pill = h('div', { class: 'pill transport glass', role: 'toolbar', 'aria-label': 'Time controls' }, row, playback);
   const paused = h('div', { class: 'paused-tag', role: 'status', hidden: true }, icon('pause', 12), h('span', null, 'Paused'));
   slots.topRight.append(pill, paused);
@@ -71,6 +73,7 @@ export function createTransport(ctx: UICtx, slots: Slots): Part {
     toggle(playBtn, 'is-paused', !playing);
     setHidden(paused, playing);
     SPEEDS.forEach((s, i) => setBool(speedBtns[i], 'aria-pressed', game.speed === s));
+    setText(speedTag, fmtSpeed(game.speed));
   };
   sync();
   const slow = new Every(0.25, false);

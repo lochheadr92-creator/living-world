@@ -1,5 +1,6 @@
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
-import { think } from './mood';
+import { isRich, think } from './mood';
+import { expose } from './illness';
 import type { WorkResult } from './activities';
 import { DAY, NUTRITION, workRules } from './constants';
 import { dropNear } from './buildings';
@@ -7,13 +8,14 @@ import { consume, foodUnits, pickFood, transfer } from './economy';
 import { dayFraction } from './environment';
 import { addEvent, addFx, addLog, say as speak } from './events';
 import { pickNews, tellBelief } from './news';
+import { noteContact, observeOffer } from './transmission';
 import type { Ctx } from './optutil';
 import { Scorer, addBlocked, addOption, beliefsByKind, eta, pen, spotNear, traitMods } from './optutil';
 import { personById } from './registry';
 import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import type { Activity, Belief, FoodKind, Items, ItemKind, Meal, Person, World } from './types';
-import { stageOf } from './people';
+import { SOCIABLE, isReserved, stageOf } from './people';
 
 import { hyp } from './util';
 /**
@@ -391,10 +393,13 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
   else if (B.needs.thirst < 22 || B.needs.hunger < 12 || B.needs.energy < 14) why = 'had more pressing needs';
   else if (rel && rel.avoidUntil > world.tick) why = 'was not on good terms with the host';
   else if (m.accepted.length + 1 >= Math.min(MAX_GUESTS + 1, foodUnits(A.inv))) why = 'there was no room at the table';
+  // a reserved person often declines a crowded table, and that is not a slight (rich only)
+  else if (isRich(world) && isReserved(B) && m.accepted.length >= 3 && hashUnit(B.id, A.id, world.tick >> 4) < 0.6) why = 'would rather eat quietly tonight';
   else {
     const w = 0.34 + 0.4 * B.traits.sociability + 0.3 * Math.max(0, aff) / 100 + (hungry ? 0.18 : 0) + (B.hhId === A.hhId ? 0.2 : 0) - 0.4 * (Math.max(0, 40 - B.needs.energy) / 40);
     if (hashUnit(B.id, A.id, world.tick >> 4) > w) why = 'preferred to stay on with their own plans';
   }
+  noteContact(world, 'invitation', A.id, B.id, `${m.id}:${world.tick}`);
   if (why) {
     m.missed[B.id] = `declined: ${why}`;
     A.cooldowns['invite' + B.id] = world.tick + INVITE_COOLDOWN;
@@ -406,7 +411,7 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
   m.reserved = m.accepted.length;
   // the invitation carries the place with it: the guest now knows where to go (and how old that knowledge is)
   const pb = A.beliefs[m.placeId];
-  if (pb) tellBelief(world, A, B, pb);
+  if (pb) observeOffer(world, 'invite', A, B, pb, () => tellBelief(world, A, B, pb));
   bubble(world, B, 'I’d love to.', 'happy', 50);
   addLog(world, B, 'social', `Promised to eat with ${A.name} at ${m.placeName}.`);
   A.cooldowns['invite' + B.id] = world.tick + INVITE_COOLDOWN;
@@ -467,12 +472,15 @@ function finishMeal(world: World, m: Meal): void {
   for (const a of ate)
     for (const b of ate) {
       if (a.id >= b.id) continue;
+      // who really ate together, from the full membership and once per meal: the host counts only if they ate too
+      noteContact(world, 'meal', a.id, b.id, m.id);
       adjustRel(a, b.id, world.tick, { aff: 1.2, trust: 0.6, fam: 0.8, note: 'ate together' });
       adjustRel(b, a.id, world.tick, { aff: 1.2, trust: 0.6, fam: 0.8, note: 'ate together' });
     }
   for (const a of ate) {
     a.needs.social = Math.min(100, a.needs.social + 18);
-    think(world, a, 'shared_meal', 6, DAY / 2, 'sat down to a shared meal');
+    // a full table lifts the sociable more (rich only)
+    think(world, a, 'shared_meal', 6 + (isRich(world) && a.traits.sociability > SOCIABLE && ate.length >= 4 ? 4 : 0), DAY / 2, 'sat down to a shared meal');
     addLog(world, a, 'social', `Shared a meal at ${m.placeName} with ${ate.filter((x) => x !== a).map((x) => x.name).slice(0, 3).join(', ') || 'no one else'}.`);
   }
   if (host && ate.length >= 2) addEvent(world, 'social', `${host.name} hosted a shared meal at ${m.placeName}: ${ate.length} sat down together.`, ate.map((x) => x.id).slice(0, 4), m.x, m.y);
@@ -541,8 +549,9 @@ function hallGossip(world: World): void {
     const S = present[i];
     const L = present[j];
     if (S === L) continue;
+    noteContact(world, 'hall', S.id, L.id, `${b.id}:${world.tick}`);
     const news = pickNews(world, S, L, 1);
-    for (const n of news) if (tellBelief(world, S, L, n)) addFx(world, 'sparkle', S.x, S.y, 0);
+    for (const n of news) if (observeOffer(world, 'hall', S, L, n, () => tellBelief(world, S, L, n))) addFx(world, 'sparkle', S.x, S.y, 0);
   }
 }
 
@@ -577,7 +586,7 @@ registerHandler('host_meal', {
         return 'not enough food to lay a table';
       }
       let left = need + Math.min(1, have - need);
-      const order: FoodKind[] = ['bread', 'fish', 'fruit', 'grain', 'berries'];
+      const order: FoodKind[] = ['bread', 'meat', 'fish', 'fruit', 'grain', 'berries'];
       for (const k of order) {
         const n = Math.min(left, p.inv[k] ?? 0);
         if (n > 0) {
@@ -613,6 +622,11 @@ registerHandler('host_meal', {
           a.cycle++;
         } else m.ate.push(p.id);
         a.progress = 0;
+        // eating from one table: a fever at it passes more surely than in talk (rich only)
+        for (const id of m.ate) {
+          const q = id === p.id ? null : personById(world, id);
+          if (q && q.alive) expose(world, q, p, 0.15);
+        }
       }
       return m.ate.includes(p.id) && m.status === 'eating' ? 'continue' : 'continue';
     }

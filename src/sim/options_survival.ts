@@ -2,6 +2,7 @@ import { newActivity } from './activities';
 import { DAY } from './constants';
 import { isRich } from './mood';
 import { nightPlansOn, shelters, untilDaylight } from './intent';
+import { payNudge } from './learning';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
 import { invRoom } from './economy';
@@ -29,6 +30,8 @@ import type { Belief, SourceType } from './types';
 import { WORK } from './constants';
 
 import { hyp } from './util';
+import { householdById } from './households';
+import { huntOptions } from './hunting';
 const FOOD_KINDS = ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'] as const;
 
 // ───────────────────────── flee ─────────────────────────
@@ -177,9 +180,12 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     sc.add('walking', -pen(c.e));
     const skill = p.skills[type === 'fish_spot' ? 'fish' : 'forage'];
     sc.add('good at it', (skill - 1) * 5);
+    const pay = payNudge(world, p, type);
+    if (pay) sc.add(pay.label, pay.value);
     const dng = dangerAt(ctx, b.x, b.y);
     if (dng > 0) sc.add('wolf nearby', -26 * dng * tm.caution);
     const purpose = o.mode === 'eat' ? 'to ease hunger' : 'to stock the household';
+    const expected = c.e + units * (WORK[type] ?? 25);
     addOption(ctx, {
       kind: 'gather',
       label: `${SOURCE_VERB[type]}`,
@@ -187,7 +193,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       need: o.mode === 'eat' ? 'hunger' : null,
       util: sc.total,
       parts: sc.parts,
-      eta: c.e + units * (WORK[type] ?? 25),
+      eta: expected,
       key: `gather:${b.id}`,
       targetId: b.id,
       tag: 'food',
@@ -211,7 +217,8 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
           utility: sc.total,
           minCommit: 60,
           maxTicks: 1100,
-          data: { purpose: o.mode, stype: type },
+          // `eta` is the expectation the person's own estimate of what pays is later judged against (learning.ts)
+          data: { purpose: o.mode, stype: type, eta: expected },
         });
       },
     });
@@ -258,11 +265,14 @@ function optEat(ctx: Ctx): void {
     addBlocked(ctx, 'eat', 'Eat carried food', 0, 'saving the food for dependents', 'food');
   }
 
+  // very hungry, nothing carried, nothing at home: another household's store is a temptation (rich only; weighed against conscience)
+  const tempted = isRich(world) && dr > 50 && ctx.food < 1 && ctx.stage !== 'child';
   for (const b of beliefsByKind(p, ['building', 'pile'])) {
     const mine = b.kind === 'building' && b.hh === p.hhId && isHomeType(b.btype);
     const comm = b.kind === 'building' && b.btype === 'storehouse';
     const pile = b.kind === 'pile';
-    if (!mine && !comm && !pile) continue;
+    const theirs = tempted && b.kind === 'building' && !mine && b.hh !== undefined && b.hh !== p.hhId && isHomeType(b.btype);
+    if (!mine && !comm && !pile && !theirs) continue;
     const fc = foodCount(b.items ?? {});
     if (fc < 1) {
       if (mine || comm) addBlocked(ctx, 'eat_store', 'Eat from the stores', b.id, 'remembers it being empty', 'food');
@@ -273,10 +283,13 @@ function optEat(ctx: Ctx): void {
       continue;
     }
     const e = eta(ctx, b.x, b.y);
-    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(mine ? 'my own home' : comm ? 'communal store' : 'goods lying about', mine ? 2 : -1);
+    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(mine ? 'my own home' : comm ? 'communal store' : theirs ? 'not mine to take' : 'goods lying about', mine ? 2 : theirs ? -18 : -1);
+    if (theirs) sc.add('conscience', -(8 * p.traits.caution + 6 * p.traits.generosity));
+    if (theirs && sc.total < 8) continue;
+    const theirName = theirs ? `${householdById(world, b.hh!)?.name ?? 'another'} household` : '';
     addOption(ctx, {
       kind: 'eat_store',
-      label: mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : 'Take food from a pile',
+      label: mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : theirs ? `Take food from the ${theirName}'s store` : 'Take food from a pile',
       goal: 'to ease hunger',
       need: 'hunger',
       util: sc.total,
@@ -290,7 +303,8 @@ function optEat(ctx: Ctx): void {
         if (!spot) return null;
         return newActivity(world, p, {
           kind: 'eat_store',
-          label: mine ? 'Eating at home' : 'Eating from the stores',
+          label: mine ? 'Eating at home' : theirs ? `Taking food from the ${theirName}'s store` : 'Eating from the stores',
+          data: theirs ? { steal: b.hh } : {},
           goal: `to ease hunger (${Math.round(p.needs.hunger)}/100)`,
           need: 'hunger',
           targetId: b.id,
@@ -412,6 +426,8 @@ function optSleep(ctx: Ctx): void {
   for (const bed of beds) {
     const et = eta(ctx, bed.x, bed.y);
     const sc = new Scorer().add(lateNight && e > 40 ? 'bedtime' : 'tired', sd * bed.q).add('walking', -pen(et));
+    // a fever is slept off: bed draws the ill in daylight too (rich only; nobody is ill otherwise)
+    if (p.illness) sc.add('feverish', 14 + 16 * p.illness.severity);
     const dng = dangerAt(ctx, bed.x, bed.y, 9);
     if (dng > 0) sc.add('wolf nearby', -30 * dng);
     options.push({ bed, u: sc.total, e: et, sc });
@@ -629,8 +645,9 @@ function optShelter(ctx: Ctx): void {
 function optRest(ctx: Ctx): void {
   const { world, p } = ctx;
   const ed = ctx.drives.energy;
-  if (ed <= 0 || ctx.night) return;
-  const sc = new Scorer().add('tired', ed * 0.9);
+  if ((ed <= 0 && !p.illness) || ctx.night) return;
+  const sc = new Scorer().add('tired', Math.max(0, ed) * 0.9);
+  if (p.illness) sc.add('feverish', 10 + 12 * p.illness.severity);
   addOption(ctx, {
     kind: 'rest',
     label: 'Sit down and rest',
@@ -660,6 +677,7 @@ function optRest(ctx: Ctx): void {
 export function survivalOptions(ctx: Ctx): void {
   optFlee(ctx);
   optEat(ctx);
+  huntOptions(ctx);
   optDrink(ctx);
   optSleep(ctx);
   optWarmth(ctx);

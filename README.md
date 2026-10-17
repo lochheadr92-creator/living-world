@@ -20,6 +20,12 @@ No runtime dependencies, no network, no LLM calls, no `Math.random` in the simul
 external language model drive one person through a restricted interface; it lives outside the simulation and is off unless run.
 See [`docs/INHABITANT.md`](docs/INHABITANT.md).)
 
+## One current simulation
+
+New worlds include the integrated simulation previously called Rich dynamics: moods, plans, learning, trades and the other implemented systems run without a separate mode switch. Accepted improvements become part of this evolving simulation; being enabled is not by itself evidence that every system improves outcomes. See [the development policy](docs/DEVELOPMENT_POLICY.md) for acceptance and experiment rules.
+
+Existing saves keep their recorded rules when loaded. Starting a new world uses current rules, even after loading an older save. Lab commands default to the current simulation; use explicit `--dynamics authored` only for legacy comparisons, with a fresh output directory for each source/configuration change.
+
 ## What you are looking at
 
 **People** have six needs (food, water, energy, warmth, safety, company), five personality traits
