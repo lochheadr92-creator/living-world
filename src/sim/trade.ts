@@ -10,8 +10,8 @@
 //     matters is the thing they are comparatively best at;
 //   * what they can see other people doing right now (`p.seen`, whose `work` says what kind of work a watcher can plainly see
 //     somebody is at), so a trade half the village is already at is worth less than an empty one;
-//   * their own estimate of what that work has paid them (learning.ts `p.payoff`), which is how a trade that turns out badly is
-//     given up.
+//   * for gathering-aligned trades only, their own estimate of gathering returns (learning.ts `p.payoff`), which can make them give
+//     up a trade that has paid badly. Other trades currently have no payoff estimate and can change only through crowding or skill.
 // No list of the world's jobs, nobody else's skills, no central allocation. Two neighbours may pick the same trade; nothing
 // prevents it, and the crowding term makes it less likely.
 //
@@ -158,8 +158,8 @@ export function reviewTrade(ctx: Ctx): void {
   const sight = workInSight(p);
   const have = p.trade;
   if (have) {
-    // A trade stands until it stops being worth it. Two things end it, both of them the person's own: it has paid them badly
-    // over several outings, or so many of the people working in front of them are at it that it is nobody's trade any more.
+    // A gathering-aligned trade can end if its recorded pay is poor over several outings; any trade can end if so many people
+    // working in front of them are at it that it is nobody's trade any more.
     const pay = p.payoff?.[have.key];
     const poorly = !!pay && pay.n >= POOR_AFTER && pay.r < POOR_PAY;
     const crowded = sight.workers >= 3 && (sight.at.get(have.key) ?? 0) / sight.workers > CROWDED_SHARE;

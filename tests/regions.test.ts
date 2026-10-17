@@ -3,6 +3,7 @@
 // handful of tools, with everything else left to be found, made and built. These tests hold that, and that each camp is a viable start
 // of its own that knows nothing of the others.
 import { describe, expect, it } from 'vitest';
+import { SOURCE_REGROW } from '../src/sim/constants';
 import { conservationReport } from '../src/sim/economy';
 import { createWorld, defaultSettings } from '../src/sim/factory';
 import { WATER_ID_BASE } from '../src/sim/knowledge';
@@ -12,7 +13,7 @@ import { rulesOf } from '../src/sim/rules';
 import { nearestHub, settlementCount } from '../src/sim/settlements';
 import { toolReport } from '../src/sim/toolreg';
 import type { SourceType, World } from '../src/sim/types';
-import { stepWorld } from '../src/sim/world';
+import { hashWorld, stepWorld } from '../src/sim/world';
 import { deepHash } from './helpers/golden';
 
 const cache = new Map<string, World>();
@@ -160,7 +161,7 @@ describe.each([
 });
 
 describe('town world: the Large population in one camp on the ordinary map', () => {
-  const w = createWorld(settingsForProfile('town', 'meadow'));
+  const w = createWorld(settingsForProfile('town', 'meadow', { dynamics: 'rich' }));
 
   it('is 80 by 80 with a hundred people in one camp, under the scaled rules sized to all of them', () => {
     expect(settingsForProfile('town', 'x')).toMatchObject({ profile: 'town', population: 100, ruleSet: 'scaled', settlementFounders: 100 });
@@ -185,7 +186,7 @@ describe('town world: the Large population in one camp on the ordinary map', () 
   it('gets the wolves its GROUND supports, not its people: three dens, as the ordinary map has always held', () => {
     // Everything else a camp has scales with its people; wolves scale with its people AND with the land it has to itself, because
     // eleven dens inside one village's walking distance is not a wilder country, it is a cage (the town lost people to it).
-    const large = createWorld(settingsForProfile('large', 'meadow'));
+    const large = createWorld(settingsForProfile('large', 'meadow', { dynamics: 'rich' }));
     const perCamp = large.animals.length / 4;
     const townArea = w.W * w.H;
     const largeCampArea = (large.W * large.H) / 4;
@@ -227,5 +228,79 @@ describe('the rules of a larger world follow its camps', () => {
     expect(r.maxBasicSites).toBe(6); // a camp of 42, not a world of 250
     expect(r.facilityRadius).toBe(40);
     expect(rulesOf(world('large')).maxBasicSites).toBe(4);
+  });
+});
+describe('authored profiled worlds are still the worlds they were before the town rules', () => {
+  // The golden fingerprints (tests/helpers/golden.ts) cover the ordinary 80x80 world and the staged scenes and nothing else, so
+  // no test held the LARGER authored worlds to their past - and the town's wolf rule changed one of them without anything
+  // noticing. These expectations are read off revision 3cb4547, the commit that introduced the town profile and the last one
+  // before the town scaling work, by generating each world from the same seed and settings and stepping it the same ticks.
+  //
+  // The compact hash is the instrument because its rich branch is skipped for an authored world: a rich-only field added later
+  // (Person.trade, and the optional fields of the rich second pass) cannot move it, while terrain, sources, animals, people,
+  // inventories, beliefs, relations, buildings, the ledger and the requests all do.
+  const BEFORE = [
+    { profile: 'normal', seed: 'meadow', wolves: 3, hash0: '67c7b30e', hash400: '0a7f8939' },
+    { profile: 'normal', seed: 'fern', wolves: 3, hash0: '6e0acf9a', hash400: 'fca5047c' },
+    { profile: 'large', seed: 'meadow', wolves: 12, hash0: 'acb32fa0', hash400: 'b5137b11' },
+    { profile: 'large', seed: 'fern', wolves: 12, hash0: 'f36095dc', hash400: '39c91974' },
+    // The town is the profile all three corrections were written for, and the one they leaked into. Every one of them is now
+    // decided behind rich dynamics, so an authored town is the world it was again - not only in its den count but in its
+    // terrain, its shore, its shelters, its people and the state of its generator.
+    { profile: 'town', seed: 'meadow', wolves: 11, hash0: '620a5542', hash400: '37a11da4' },
+    { profile: 'town', seed: 'fern', wolves: 11, hash0: 'fd950dda', hash400: '72e13242' },
+  ] as const;
+
+  it.each(BEFORE)('$profile/$seed: generated and stepped exactly as it was', ({ profile, seed, wolves, hash0, hash400 }) => {
+    const w = createWorld(settingsForProfile(profile, seed, { immigration: false }));
+    expect(w.settings.dynamics, 'authored: no rich dynamics').toBeUndefined();
+    expect(w.animals.length, 'wolves').toBe(wolves);
+    expect(hashWorld(w), 'the world as generated').toBe(hash0);
+    for (let i = 0; i < 400; i++) stepWorld(w);
+    expect(hashWorld(w), 'and after 400 ticks of it running').toBe(hash400);
+  }, 60_000);
+
+  it.each([
+    { seed: 'meadow', hash0: '208f8a00' },
+    { seed: 'fern', hash0: '319a8e5a' },
+  ])('huge/$seed: generated exactly as it was (28 dens over six camps)', ({ seed, hash0 }) => {
+    const w = createWorld(settingsForProfile('huge', seed, { immigration: false }));
+    expect(w.animals.length).toBe(28);
+    expect(hashWorld(w)).toBe(hash0);
+  }, 120_000);
+});
+
+describe('the town corrections reach rich worlds only: wolves, workplaces, fishing and shelters', () => {
+  const authored = createWorld(settingsForProfile('town', 'meadow', { immigration: false }));
+  const rich = createWorld(settingsForProfile('town', 'meadow', { immigration: false, dynamics: 'rich' }));
+
+  it('wolves: the ground limits them for a rich town, and only there', () => {
+    // the same hundred people on the same map: what differs is only whether the density correction is in force
+    expect(authored.animals.length).toBe(11);
+    expect(rich.animals.length).toBe(3);
+  });
+
+  it('workplaces: a rich town may grow into four of a kind, an authored one keeps the village\'s one', () => {
+    expect(rulesOf(authored).facilityAllowance).toBe(1);
+    expect(rulesOf(rich).facilityAllowance).toBe(4);
+  });
+
+  it('fishing: a short shore refills faster for a rich town, and at the ordinary rate for an authored one', () => {
+    // A hundred people on the ordinary shore get about a dozen fishing spots where the recipe asks for forty; a rich town makes
+    // the spots it has fill again by the share it was short of. Same spots, same places either way - only the rate differs.
+    const rates = (w: World) => [...new Set(w.sources.filter((s) => s.type === 'fish_spot').map((s) => s.regrowEvery))];
+    expect(authored.sources.filter((s) => s.type === 'fish_spot').length).toBe(rich.sources.filter((s) => s.type === 'fish_spot').length);
+    expect(rates(authored), 'the ordinary rate, as every other authored world has').toEqual([SOURCE_REGROW.fish_spot]);
+    expect(rates(rich)).toHaveLength(1);
+    expect(rates(rich)[0]).toBeLessThan(SOURCE_REGROW.fish_spot);
+  });
+
+  it('shelters: a rich town sets its first lean-tos out in wider rings, an authored one keeps the village\'s six', () => {
+    const leanTos = (w: World) => w.buildings.filter((b) => b.type === 'lean_to').length;
+    expect(leanTos(rich)).toBeGreaterThan(leanTos(authored));
+  });
+
+  it('and the two worlds really are different worlds from the moment they are made', () => {
+    expect(hashWorld(authored)).not.toBe(hashWorld(rich));
   });
 });

@@ -48,6 +48,23 @@ describe('rule sets', () => {
     expect(rulesOf(natural('rules-c', { ruleSet: 'scaled', population: 100 })).immigrationCap).toBeGreaterThan(54);
   });
 
+  it('keeps the larger workplace allowance behind rich dynamics, including for Huge profiles', () => {
+    const authoredHuge = natural('rules-huge-authored', {
+      ruleSet: 'scaled',
+      population: 250,
+      settlementFounders: 42,
+      dynamics: 'authored',
+    });
+    const richHuge = natural('rules-huge-rich', {
+      ruleSet: 'scaled',
+      population: 250,
+      settlementFounders: 42,
+      dynamics: 'rich',
+    });
+    expect(rulesOf(authoredHuge).facilityAllowance).toBe(1);
+    expect(rulesOf(richHuge).facilityAllowance).toBe(2);
+  });
+
   it('scaled rules at the ordinary founding population are the ordinary limits, made local', () => {
     const r = scaledRules(28);
     expect({ ...r, facilityRadius: 0, siteRadius: 0 }).toEqual({ ...ORDINARY_RULES, facilityRadius: 0, siteRadius: 0 });
@@ -84,13 +101,14 @@ describe('workplaces and open sites, ordinary against scaled', () => {
   const FAR = { x: 10, y: 30 };
   const NEAR = { x: 45, y: 50 };
 
-  function yardWorld(ruleSet: 'ordinary' | 'scaled', population = 28) {
+  function yardWorld(ruleSet: 'ordinary' | 'scaled', population = 28, dynamics: 'authored' | 'rich' = 'authored') {
     const s = stage('rules-yard-' + ruleSet);
     const a = addPerson(s, 'Ann', 44, 44);
     building(s, 'timber_yard', 60, 60, 0);
     const w = done(s);
     w.settings.ruleSet = ruleSet;
     w.settings.population = population;
+    w.settings.dynamics = dynamics;
     return { w, a };
   }
 
@@ -103,7 +121,7 @@ describe('workplaces and open sites, ordinary against scaled', () => {
 
   it('scaled: a settlement may hold one of each kind per ordinary camp of its founders, and no more', () => {
     // a town of a hundred: four timber yards allowed in the one settlement, the fifth refused
-    const { w, a } = yardWorld('scaled', 100);
+    const { w, a } = yardWorld('scaled', 100, 'rich');
     expect(rulesOf(w).facilityAllowance).toBe(4);
     expect(siteConflict(w, 'timber_yard', a.hhId, 0, 0, NEAR)).toBeNull(); // one stands; three more may be built
     createBuilding(w, 'timber_yard', 56, 60, 0);
