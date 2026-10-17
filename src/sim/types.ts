@@ -1152,6 +1152,12 @@ export interface Settings {
   /** 'rich' is the current product rules. 'authored'/absent retain legacy save and diagnostic semantics;
    * new product worlds explicitly set rich through currentWorldSettings. Never upgrade this field while loading a save. */
   dynamics?: 'authored' | 'rich';
+  /**
+   * Which generation of simulation BEHAVIOUR this world runs (`src/sim/rulesversion.ts`), as against the save format version
+   * and the `dynamics` family above. New product worlds carry the current number; a world made before versioning existed has
+   * none, keeps none, and is never silently upgraded. Preserved by saving, loading, restoring, forking and replay.
+   */
+  rulesVersion?: number;
 }
 /** 'ordinary': the village-sized limits the world was tuned for. 'scaled': the same limits as ratios of the founding population, local to a settlement. */
 export type RuleSet = 'ordinary' | 'scaled';

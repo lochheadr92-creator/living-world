@@ -3,6 +3,7 @@
 // always lives in localStorage.
 // The world is plain data (typed arrays, Maps, Sets and the RNG state are the only special cases).
 import { hashString, RNG } from '../sim/rng';
+import { validateRulesVersion } from '../sim/rulesversion';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
 import type { Settings, World } from '../sim/types';
 import type { Game } from './game';
@@ -205,6 +206,11 @@ export function serializeWorld(world: World): string {
 export function deserializeWorld(json: string): World {
   const parsed = JSON.parse(json, reviver) as { version: number; world: Omit<World, 'byId' | 'grid' | 'pgrid'> };
   if (!READABLE.includes(parsed.version)) throw new Error('unsupported save version');
+  // The RULES version is a separate question from the save format above: these bytes may be perfectly readable and still
+  // describe a world whose behaviour this build cannot run. Refuse it here, where nothing has been replaced yet, so that a
+  // refused load leaves the running world exactly as it was. An absent version is the legacy case and is kept absent.
+  const verdict = validateRulesVersion((parsed.world as World).settings?.rulesVersion);
+  if (!verdict.ok) throw new Error(`cannot load this world: ${verdict.reason}`);
   const w = parsed.world as World;
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
@@ -359,6 +365,9 @@ async function dbGet(): Promise<DbRecord | null> {
  */
 export async function saveGame(game: SaveTarget): Promise<boolean> {
   try {
+    // never overwrite a good save with a world whose rules version this build would refuse to load back
+    const verdict = validateRulesVersion(game.settings.rulesVersion);
+    if (!verdict.ok) return false;
     const bytes = await gzipBytes(serializeWorld(game.world));
     let where: SaveWhere | null = null;
     try {

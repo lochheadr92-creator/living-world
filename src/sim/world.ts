@@ -320,6 +320,10 @@ export function hashWorld(world: World): string {
     if (o) push(`F${b.id}:${o.job ? `${o.job.recipe},${o.job.phase},${r4(o.job.progress)},${o.job.burnLeft},${JSON.stringify(o.job.held)}` : '-'}|${o.batches}|${JSON.stringify(o.earmarks)}|${JSON.stringify(o.shares)}`);
   }
   for (const m of world.meals) push(`M${m.id}:${m.status},${m.servings},${m.reserved},${m.arrived.length},${m.ate.length}`);
+  // The generation of rules a world runs is part of what world it IS: two worlds alike in every other way but running
+  // different rules are not the same world. A world with no rules version adds nothing here, so every legacy and authored
+  // world hashes exactly as it did before versioning existed (the golden fingerprints hold that).
+  if (world.settings.rulesVersion !== undefined) push(`V${world.settings.rulesVersion}`);
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in

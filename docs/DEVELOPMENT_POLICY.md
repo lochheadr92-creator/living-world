@@ -28,6 +28,51 @@ Keep legacy code only where it serves a concrete save, replay, test or experimen
 
 Experimental controls belong in the lab or development configuration. Prefer narrowly scoped interventions over an ever-growing alternative "old world". Record compound interventions honestly: `rich-no-trades` disables trades and apprenticeship together, so it cannot establish the isolated effect of trades.
 
+## Rules versions (Stage 0)
+
+`settings.rulesVersion` says which generation of simulation BEHAVIOUR a world runs. `src/sim/rulesversion.ts` owns the whole
+question - the current version, what is supported, validation, what a given world runs, and eligibility for behaviour added
+later - and nothing else compares a version number to a literal (`tests/rules_version.test.ts` holds that).
+
+Four version-like things exist here and they are not interchangeable:
+
+| | what it says | where |
+|---|---|---|
+| **rules version** | which generation of behaviour a world runs | `settings.rulesVersion`, `src/sim/rulesversion.ts` |
+| **save format** | how the bytes are written | `VERSION` in `src/app/save.ts` (currently 4) |
+| **dynamics** | which family of rules: current (`rich`) or legacy (`authored`/absent) | `settings.dynamics` |
+| **replay fingerprint / lab intervention** | that one run reproduced another; a deliberate experimental change | `scripts/statediff.ts`, `scripts/lab/lab.ts` |
+
+**Version 1** is the integrated behaviour as it stood on 2026-10-18: mood, hardship, private plans, learning, trades and
+apprenticeship, the second rich pass, the rich-only town corrections and the project ask as written then. It is the first
+baseline this project can hold itself to; it is **not** a claim to reproduce any particular earlier release.
+
+**What carries it.** New product worlds get the current version at creation (`currentWorldSettings`, the app's constructor and
+every restart, and inhabitant links that are not explicitly legacy). It is preserved by saving, loading, app restore, world
+cloning and lab forks, and replay configuration, and it is part of the state fingerprint (`hashWorld`) so that two worlds
+running different rules are not mistaken for the same world. Loading a supported version runs **that** version; nothing
+substitutes the latest.
+
+**Rejection.** A version this build does not support - a future one, a withdrawn one, or a value that is not a positive whole
+number - is refused in `deserializeWorld`, before the active world is replaced, so a refused load leaves the running world
+exactly as it was. `saveGame` refuses for the same reason rather than overwriting a good save with a world it could not read
+back.
+
+**Unversioned worlds.** Several historical implementations all carried `dynamics: 'rich'`, and which one made a given save
+cannot be recovered from the file, from a timestamp or from which fields a person happens to have. So an absent rules version
+stays absent: it is explicitly legacy, it is preserved through ordinary load and save, no original version is invented for it,
+and it is never eligible for gameplay added at a later version. Its documented compatibility baseline is the implementation at
+the introduction of versioning - which means **exact historical replay of such a world is not guaranteed**. Converting one to
+current rules deliberately is a separate job; there is no automatic migration and no destructive one. Historical diagnostic
+fixtures (the goldens, `defaultSettings`, `settingsForProfile`, `restartSettings`) stay unversioned on purpose.
+
+**Changing behaviour from here on.** A change that is meant to alter outcomes - a new decision rule, or a tuned parameter that
+moves them - raises `CURRENT_RULES_VERSION` and adds the new number to `SUPPORTED_RULES_VERSIONS`. The new behaviour is gated
+by `runsRulesVersion(world, N)` at the point where it is decided, with the previous branch kept for worlds that run an earlier
+version, so a version-1 save still behaves as version 1. Keeping the number while dropping the old branch is not versioning;
+it is a relabelled breaking change. A change that cannot alter outcomes - instrumentation, rendering, a refactor - does not
+raise the version. Bug fixes that change behaviour are behavioural changes.
+
 ## Lab defaults and provenance
 
 `lab_seed.ts`, the lab runner, inhabitant live/standard runs, replay-check fresh-world runs, activity-mix and cascade commands now default to current (`rich`) rules. Explicit `--dynamics authored` remains available for historical comparisons. Replay of an existing transcript retains its settings.

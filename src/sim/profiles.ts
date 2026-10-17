@@ -14,6 +14,7 @@
 // A world gets a profile through `settings.profile`; `settingsForProfile` builds the whole set of settings (the scaled rule set, the
 // founders, the size of one settlement). The ordinary world has no profile and none of this runs for it.
 import { hashString, RNG } from './rng';
+import { CURRENT_RULES_VERSION } from './rulesversion';
 import type { Settings } from './types';
 import type { FoundingHub, Layout } from './worldgen';
 
@@ -66,7 +67,9 @@ export function restartSettings(profile: ProfileName, seed: string, base: Partia
  * The older helpers keep their historical defaults for existing lab scripts, fixtures and replay compatibility.
  */
 export function currentWorldSettings(profile: ProfileName, seed: string, base: Pick<Partial<Settings>, 'harsh' | 'immigration'> = {}): Settings {
-  return restartSettings(profile, seed, { ...base, dynamics: 'rich' });
+  // the current rules generation is stamped here, where a new product world is defined; `restartSettings` and the older
+  // low-level helpers stay unversioned, because diagnostics and fixtures deliberately make legacy worlds with them
+  return restartSettings(profile, seed, { ...base, dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION });
 }
 
 /** what a world of this profile is, for a menu to say: the size of the map, how many people start, in how many camps */
