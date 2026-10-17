@@ -1,0 +1,37 @@
+Stage 4 diagnostic slice - large/meadow, 1 day(s), rich, immigration off
+HEAD c546d8e11a0cd9d31f854f2f9f3815e12d80f00b, source content fingerprint b89d8432 (33 tracked files modified, 4 untracked source files)
+command: npx vite-node scripts/stage4.ts -- --out stage4_pilot2_out --seed meadow --profile large --days 1
+final tick 2400, state 7a29bddb, 4.6s
+
+cohort (frozen at day 0): camp0 18, unknown 38, camp1 13, camp2 15, camp3 16 over 4 camp(s)
+
+contacts: 1338 pair-events (776 unique pairs, 0 of them cross-camp)
+  within-camp 501, cross-camp 0, pairs with an unknown cohort 837
+  cross fraction of known pair-events: 0 [known-cohort coverage 37%]
+  greeting      1253 (within 469, cross 0, unknown 784)
+  conversation  83 (within 30, cross 0, unknown 53)
+  invitation    1 (within 1, cross 0, unknown 0)
+  meal          1 (within 1, cross 0, unknown 0)
+
+belief offers: 335 (API said yes 123, genuinely new or fresher 123, writes past a refusal 0, provenance-only 0)
+  outcomes: rejected 212, inserted 79, refreshed 44
+  accepted rate: 0.3672
+  news      attempts 322, api 113, genuine 113, bypass 0, rejected 209/inserted 69/refreshed 44
+  warn      attempts 11, api 10, genuine 10, bypass 0, inserted 10/rejected 1
+  invite    attempts 1, api 0, genuine 0, bypass 0, rejected 1
+  recruit   attempts 1, api 0, genuine 0, bypass 0, rejected 1
+  cross-camp attempts 0 of 335 (unknown cohort 207) [known-cohort coverage 38%]
+  cross accepted / cross attempts: not estimable [known-cohort coverage 38%]
+  cross accepted / all accepted with both cohorts known: 0 (over 50 accepted offers with both camps known)
+
+day 0: camps 0:18p/118b 1:13p/138b 2:15p/115b 3:16p/149b [62 of 100 living people have a known camp, 62%]
+  mean Jaccard over 6/6 valid pairs: 0.0208
+  retained told beliefs 0; foreign-origin 0 of 0 with both cohorts known (not estimable), unknown 0
+  hops over 0 entries: mean not estimable, max not estimable, missing 0
+day 4: MISSING (the run stopped at day 1)
+day 8: MISSING (the run stopped at day 1)
+day 12: MISSING (the run stopped at day 1)
+
+Reading: no cross-camp contact means the mechanism was unexercised in this window, not that it cannot happen.
+Every cross-camp figure above is qualified by its known-cohort coverage: people with no household home at day 0 are
+excluded from camp-specific denominators, and a low coverage means most of the data could not be classified at all.
