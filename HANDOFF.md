@@ -8,6 +8,10 @@ This isolated checkout is `codex/home-habitation`, based on `1a13408` from the h
 branch. It implements actual hut/house entry, indoor sleep/rest/refuge, exit, saved occupancy,
 indoor protection, and occupant inspection. Full contract and verification: `docs/HABITATION.md`.
 
+Implementation commit: `701f580`; pre-feature version-2 reference: `780a593`. Both are pushed.
+Draft [PR #19](https://github.com/lochheadr92-creator/living-world/pull/19) is open against
+`claude/household-preparation-v2` to isolate the habitation diff. It is not merged or approved.
+
 The owner chose **habitation first, then wolf defence**. Here rules version 3 means habitation.
 The uncommitted wolf-defence work in the original checkout was not copied or modified. Its rules
 version must be reconciled as a later generation before integration; two unrelated version-3
