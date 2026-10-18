@@ -124,8 +124,9 @@ describe('the lab will not mix one generation of rules with another', () => {
   };
 
   it('matching dynamics but a different rules version is incompatible', () => {
-    expect(incompatible(rowRules({ dynamics: 'rich', rulesVersion: 1 }), wantedRules('rich'))).toBeNull();
-    const older = incompatible(rowRules({ dynamics: 'rich', rulesVersion: 0 }), wantedRules('rich'));
+    expect(incompatible(rowRules({ dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION }), wantedRules('rich'))).toBeNull();
+    // a genuine earlier generation, not a made-up number: version 1 really is a set of rows that must not be mixed with version 2
+    const older = incompatible(rowRules({ dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION - 1 }), wantedRules('rich'));
     expect(older, 'both rich, different generations').toMatch(/rules version/);
     const unversioned = incompatible(rowRules({ dynamics: 'rich' }), wantedRules('rich'));
     expect(unversioned, 'a rich row with no version is not this generation').toMatch(/unversioned/);
@@ -155,7 +156,7 @@ describe('the lab will not mix one generation of rules with another', () => {
 
   it.each([
     ['a legacy rich row', rows('rich')],
-    ['a row from an older generation', rows('rich', 0)],
+    ['a row from an older generation', rows('rich', CURRENT_RULES_VERSION - 1)],
     ['an authored row', rows('authored')],
     ['a row from before any of it was recorded', rows()],
   ])('refuses %s for a current run, before any worker starts or any file is touched', (_name, content) => {
