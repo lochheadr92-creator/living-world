@@ -34,13 +34,69 @@ the lab's "nudge" still tells chaos from cause.
 | Mediation | `mediation.ts` | Someone close to both sides of a quarrel who knows of it asks the holder to make it up: peace, a softening, a rebuff or "not yet", by trust, generosity and soreness; the unliked are not heard. | conversation purpose `mediate` | Feed "helped X and Y make peace" / "told X to stay out of it" |
 | Shared responsibilities | `responsibilities.ts` | Someone laid up (injury, a bad fever) with a child and no able adult at home asks a neighbour to keep an eye on them for the day; or to keep the fire going. The neighbour weighs it (own children, needs, promises, liking) and may decline; a promise is kept by staying with the child or feeding the fire; a refusal leaves the asker to ask another or manage. | request kinds `watch`, `fire`; `evaluateRequest`; `visit` with `data.watch`; `fuel_fire` | Feed "promised to keep an eye on…" / "could not watch the children for…" |
 
+## Household food preparation (rules version 2, 2026-10-18)
+
+The first behaviour added under a RULES VERSION rather than only under `dynamics`. Everything below is gated on
+`runsRulesVersion(world, 2)` as well as on rich dynamics, so a world still running version 1 - or an unversioned one - has
+none of it, which `tests/v1_continuation.test.ts` holds against a reference recorded before the code was written.
+
+| Mechanism | Module | What it changes | Read where | See it |
+|---|---|---|---|---|
+| A household food reserve | `provision.ts`, the `stock` plan in `intent.ts` | An adult may take on getting a modest food reserve into their own household's home store, and carry it out with the gathering and depositing that already existed. The reserve is ordinary food in the ordinary store: it spoils and is eaten like any other. | `preparationWanted` (the two cues and the target), `adoptProject` (taken on before a roof or a tool when a cue is live), `stockStep` (gather, then deposit), `stockOutcome` (judged on the store, not on the plan), `creditStocked` in `act_resource.ts` (credited where the food actually moves) | Person card: "Put 8 units of food by for the household. Step: take the food home (5 more to put by) - under way. 3 of 8 units put by so far. Why: there is next to nothing at home to fall back on." |
+
+**The two cues, and why they are kept apart.** HARDSHIP is what the person can actually see of their own household: the home
+store as they remember it, plus what they are carrying, coming to under half a day's eating for its members; or their own
+memory of having gone hungry within the last day (`mood.ts`'s `hungry` thought). SEASON is winter, which is the one hardship
+here that is not a roll of the dice - the last 4 days of every 12-day year, the same days each year, announced when it
+arrives and when it goes. The LEAN SEASON is a one-in-five daily roll and **nothing in `provision.ts` reads it**, nor
+`world.hardship`, nor any draw behind it; a lean season reaches people only through the hardship cue, once their store has
+actually emptied or they have actually gone hungry. Hardship is tested first, so `season` means the narrow thing: nothing
+visibly wrong, and winter close. The cue is recorded on the plan (`Intention.cue`) so a measurement can tell anticipation
+from reaction.
+
+**The size of it, with the arithmetic.** Hunger falls by `HUNGER_RATE` (0.03) a tick and a day is 2400 ticks, so a person
+loses 72 hunger a day; the foods people eat are worth 12 to 28 (`NUTRITION`) and average about 18, so 72/18 = 4 units a
+person a day - and a measured Large run gave 3.8. The target is therefore one day's eating per member (`DAY_FOOD` 4 x
+`RESERVE_DAYS` 1 x members), capped at `RESERVE_CAP` 12 (three members' worth, and exactly a lean-to's capacity, so the
+poorest household can hold one), and clipped again by the room the person believes their own home still has. It is a cushion
+of about one day. **It is not provision for winter** - winter is four days and a household of three would need something
+like 48 units to sit it out - and nothing here prevents starvation.
+
+**What it refuses to do.** It speaks for no material in the pack (unlike a tool plan: food in the pack is also what keeps
+somebody alive, and `freeOf` would have hidden it from a person about to faint). It promises nothing to anybody, allocates no
+role, and plans no further ahead than the engine's own next step. Two members of one household converge on one level rather
+than each demanding a storeful: the target is a level the store should reach, not a quota each owes, and the second plan ends
+as "the store came to hold 8 without their doing" - which is not called an achievement and is not credited to them.
+
+**What was measured** (24 seeds, `normal`, rules version 2, `rich-no-stock` as the ablation and two nudges as the noise
+floor; `prep_out8/`, `prep_out12/`, plan in `prep_out8/RUN.md`, full-precision table in `prep_out8/PAIRED.md`):
+
+* It runs on its own. 37 preparations in 8 days (6.6 seasonal, 30.4 from observed hardship), 15 finished, 166 units of food
+  really moved into home stores; 55 and 215 over 12 days. Zero on every seed with the switch off.
+* It changes what a household can reach. Home-store food per person entering winter: **1.61 against 0.83** (diff -0.78, 95%
+  CI [-1.04, -0.52], lower in 22 of 24 seeds) against a nudge floor of 0.03-0.08. After winter, 0.74 against 0.29.
+* **It did not improve anybody's welfare in this measurement.** Hunger exposure 0.00302 against 0.00261 over 8 days and
+  0.00984 against 0.00882 over 12 - both intervals straddling zero, both the size of the noise floor. `belowCritical`,
+  `meanHunger`, `deaths`, `meanMood` and `lowMood`: all indistinguishable from chance. In a 28-person Normal world food is
+  not scarce enough for one day's reserve to show.
+* **It costs.** 8.1 person-days over 8 days and 12.4 over 12 - about 3.6% of all person-time - and 15.6 fewer tool and
+  repair projects STARTED over 12 days (23 of 24 seeds). Projects finished and tools held are unchanged.
+
+Whether a village that is actually short would benefit is open; the `town` profile is where it could be answered, and that
+run has not been made. See `HANDOFF.md` for the command.
+
 Also in this pass, not rich-gated: the town survives its first lean season (fishing spots on a short shore fill as fast as the
 town's share would; the lean-to ring grows with the camp), and a settlement may hold one workplace of a kind per village's
 worth of people (`rules.ts facilitiesPerKind`).
 
 ## What was checked
 
-Each mechanism has a unit test (`tests/{occasions,reputation,illness,apprentice,life,misdeeds,environment,settlement_record}.test.ts`)
+Household food preparation has `tests/household_preparation.test.ts` (40 contract tests, one group per acceptance criterion),
+`tests/v1_continuation.test.ts` (a version-1 world saved, loaded and continued against a reference recorded before version 2
+existed) and `scripts/browser/preparation_check.mjs` (19 assertions on behaviour and displayed text in a real headless Chrome;
+nothing in it inspects the drawing). Its lab switch is `rich-no-stock`.
+
+Each earlier mechanism has a unit test (`tests/{occasions,reputation,illness,apprentice,life,misdeeds,environment,settlement_record}.test.ts`)
 that holds the mechanism to its rule and holds an authored world to having none of it. The golden suite matched after every
 commit. No ensemble was run for this pass: it is a build, not a measurement. The lab switch `rich-no-trades` (trade.ts) removes the trade and the apprenticeship together; the other mechanisms can be given
 switches on the same pattern.

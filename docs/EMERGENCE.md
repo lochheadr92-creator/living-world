@@ -518,6 +518,51 @@ milestone is separately authorized: instrumentation first, with focused inertnes
 contact-and-transfer pilot of existing behavior. No ensembles, code or runs are authorized here; a runtime estimate is deferred
 until the run configuration and workload are fixed. No travel, trade or arrival feature is planned.
 
+## Household food preparation: the mechanism works, the benefit is not shown (rules version 2, 24 seeds, normal, 2026-10-18)
+
+The first behaviour added under a rules version. What it is and why it is built the way it is: `docs/RICH_WORLD.md`. What
+follows is only the measurement.
+
+**The question, the metrics and how a result would be read were fixed before either run** and are in `prep_out8/RUN.md`.
+Two questions were kept apart: does the mechanism run on its own, and does it improve anything? Design: the same rules
+(rich, rules version 2) on every arm, the same 24 seeds, profile `normal`, forked at day 0 - `control` (preparation on),
+`rich-no-stock` (preparation off and nothing else), and `nudge:1`/`nudge:2` as the noise floor. Version 1 is deliberately
+**not** an arm: an old-against-new comparison would attribute every difference between two generations to this one change.
+Windows: 8 days, ending at the tick winter sets in (`prep_out8/`), and 12 days, through the whole of winter
+(`prep_out12/`). Full-precision paired differences: `prep_out8/PAIRED.md` - the report rounds to one decimal and the hunger
+numbers live below that.
+
+| | control | no preparation | diff | 95% CI | of 24 seeds |
+|---|---|---|---|---|---|
+| preparations taken on (8 d) | 37.3 | 0 | -37.3 | [-39.5, -35.1] | 24 lower |
+| of those, from the season / from hardship | 6.6 / 30.4 | 0 / 0 | | | |
+| finished / given up (8 d) | 15.3 / 13.9 | 0 / 0 | | | |
+| units of food really put into home stores (8 d) | 166.4 | 0 | -166.4 | [-183.1, -149.7] | 24 lower |
+| **home-store food per person entering winter** | **1.61** | **0.83** | **-0.78** | **[-1.04, -0.52]** | **22 lower** |
+| the same after winter (12 d) | 0.74 | 0.29 | -0.45 | [-0.67, -0.23] | 18 lower |
+| hunger exposure (8 d) | 0.00302 | 0.00261 | -0.00041 | [-0.00155, +0.00073] | 8 lower, 8 higher |
+| hunger exposure (12 d) | 0.00984 | 0.00882 | -0.00102 | [-0.00363, +0.00159] | 11 lower, 12 higher |
+| person-days spent preparing (8 d / 12 d) | 8.1 / 12.4 | 0 / 0 | | | 24 lower |
+| tool and repair projects STARTED (12 d) | 85.7 | 101.3 | +15.6 | [+12.8, +18.2] | 23 higher |
+| projects finished, tools held, deaths, mean hunger, mood | | | | all straddle 0 | |
+
+The nudge floor for `homeFoodPerPerson` is 0.03 to 0.08 with intervals of about +-0.3, and for `hungerExposure` 0.00025 to
+0.00148 - so the food effect is far outside it and the hunger effect is exactly the size of it.
+
+**What this establishes.** The mechanism runs without anybody being staged into it, by both cues, and it really moves food
+into home stores: roughly double the food within a household's reach when winter arrives, in 22 of 24 seeds.
+
+**What it does not establish, and this is the honest half.** No welfare benefit was measured. Hunger exposure, critical-need
+counts, mean hunger, deaths and mood are all indistinguishable from chance in both windows. In a 28-person Normal world
+food is simply not scarce enough for one day's reserve to show. **Nothing here says preparation prevents starvation**, and
+the reserve is about one day's eating against a four-day winter.
+
+**What it costs.** About 3.6% of all person-time, and 15.6 fewer tool and repair projects started over 12 days. Projects
+finished and tools held did not move, so what the time comes out of is the trying, not the finishing.
+
+**The open question.** Whether a village that is actually short would benefit. The `town` profile (100 people in one camp,
+which has a real famine in it) is where that could be answered; that run has not been made. The command is in `HANDOFF.md`.
+
 ## A town of a hundred: what killed it, and what did not (`scripts/famine.ts`)
 
 The `town` profile is a hundred people in ONE camp on the ordinary 80x80 map: the Large population with nowhere to spread, a density

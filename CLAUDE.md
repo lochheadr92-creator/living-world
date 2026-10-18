@@ -23,6 +23,13 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   no_item/committed/making/own_need), the obligation is an ordinary `Commitment`, and `intent.ts planHelp`/`outstandingForPlan` read
   requests plus the promiser's commitment for the explanations. `Request.planId`/`Request.delivered` tie an ask to a project and
   record what really arrived. Tests: `tests/project_cooperation.test.ts`; page check: `scripts/browser/cooperation_check.mjs`.
+- Rules version 2, household food preparation (rich + `runsRulesVersion(world, 2)`): `src/sim/provision.ts` (the two cues - what a
+  household can SEE of its own food, and the approach of winter, which is deterministic; never the random lean season - the reserve
+  target and its arithmetic, and the lab switch) with the `stock` plan kind in `src/sim/intent.ts`. Contract: `docs/RICH_WORLD.md`;
+  measurement: `docs/EMERGENCE.md` and `prep_out8/`, `prep_out12/`. Tests: `tests/household_preparation.test.ts`,
+  `tests/v1_continuation.test.ts`; page check: `scripts/browser/preparation_check.mjs`.
+- A version-1 continuation reference (`tests/v1_continuation.expected.json`, recorded by `scripts/v1_reference.ts` BEFORE version 2
+  existed): a version-1 world saved, loaded and continued, hashes and plain counts. Never re-record it to make a change pass.
 - `src/sim/decision.ts` ranks options (mood weight applied here). `src/sim/probe.ts` work counters (never saved or hashed).
 - Stage 3, second piece (rich only): `src/sim/trade.ts`, the one kind of work a person settles on as theirs, by comparative advantage
   from their own skills, what they can see others doing (`SeenEntity.work`) and what it has paid them; tilts the matching work by at
@@ -52,7 +59,7 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
-- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans` (rich with every private plan removed), `rich-no-ask` (rich with plans kept and only the D1 project ask removed; the D1 attribution branch), `rich-no-learning` (rich with Stage 3's estimates of what pays removed), `rich-no-trades` (rich with the trade people settle on removed).
+- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans` (rich with every private plan removed), `rich-no-ask` (rich with plans kept and only the D1 project ask removed; the D1 attribution branch), `rich-no-learning` (rich with Stage 3's estimates of what pays removed), `rich-no-trades` (rich with the trade people settle on removed), `rich-no-stock` (rules version 2 with household food preparation removed and nothing else; it changes nothing below version 2).
 - The AI inhabitant (`docs/INHABITANT.md`): `src/sim/external.ts` (the seam in `decide`), `src/agent/` (observation, protocol, memory,
   transcript, model gate, rewind runner, scripted models; no network), `scripts/inhabit.ts` (live | replay | standard; `--memory` keeps notes;
   `--stub goal` needs no key), `scripts/inhabit_diff.ts` (two runs: same world or not), `scripts/inhabit_attribute.ts` (which decisions
