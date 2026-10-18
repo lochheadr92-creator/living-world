@@ -146,6 +146,7 @@ Two commits came out of the second pass: `76dbfdf` (the singular) and `26a6d18` 
 | `76dbfdf` | Review of the inspector text: "1 units" → "1 unit" |
 | `26a6d18` | Discriminating tests for two review areas: whose store, whose knowledge |
 | `571a404` | The acceptance gate resolved: none can accept version 2, and the one that runs already failed on `main` |
+| `eaca9f4` | Claims the experiments do not support, taken back out |
 
 `2a4a704` is the only commit without the required "Existing modules touched, and why" line: it touched no existing modules (four new files), and it was not amended because rewriting history is a hard rail for this task.
 
