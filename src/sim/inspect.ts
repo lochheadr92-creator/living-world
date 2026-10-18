@@ -307,6 +307,14 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
         ? `under way (${a!.label})`
         : 'settled on, not started';
   let text = `${cap(i.goal)}. Step: ${i.step || '—'} — ${state}.`;
+  // A food reserve is the one live plan whose sentence has to carry two more things, because the whole point of it is that a
+  // viewer can follow local evidence to a real consequence: WHAT WAS ACTUALLY PUT BY (not what was meant), and WHY it was taken
+  // on, which for this kind is evidence about the household rather than a restatement of the goal. No other kind is touched,
+  // and `stock` does not exist below rules version 2.
+  if (i.kind === 'stock') {
+    text += ` ${Math.round(i.worked)} of ${i.reserve ?? 0} units put by so far.`;
+    if (i.reason) text += ` Why: ${i.reason}.`;
+  }
   if (i.setAside > 0) text += ` Set aside ${i.setAside === 1 ? 'once' : `${i.setAside} times`} so far.`;
   return text + helpText(world, p, i);
 }
