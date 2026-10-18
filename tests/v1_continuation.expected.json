@@ -1,0 +1,75 @@
+{
+ "note": "A version-1 world, saved, loaded and continued. Recorded before rules version 2 existed; a difference means later behaviour reached a version-1 world.",
+ "cases": {
+  "short": {
+   "1200": {
+    "hash": "e9e8d3b8",
+    "deep": "530f909b507d1492",
+    "alive": 28,
+    "plans": {
+     "tool": 18,
+     "night": 5
+    },
+    "homeFood": 109,
+    "storedFood": 42
+   },
+   "2400": {
+    "hash": "6cdd1441",
+    "deep": "9796c4d9ab475569",
+    "alive": 28,
+    "plans": {
+     "tool": 18
+    },
+    "homeFood": 74,
+    "storedFood": 27
+   },
+   "3600": {
+    "hash": "c5a9f473",
+    "deep": "2cd3070ae2150f8a",
+    "alive": 28,
+    "plans": {
+     "tool": 18,
+     "night": 8
+    },
+    "homeFood": 183,
+    "storedFood": 59
+   }
+  },
+  "prewinter": {
+   "14400": {
+    "hash": "00f79c16",
+    "deep": "24a74398204a3799",
+    "alive": 28,
+    "plans": {
+     "tool": 8,
+     "repair": 2
+    },
+    "homeFood": 2,
+    "storedFood": 0
+   },
+   "16800": {
+    "hash": "fcd68a9d",
+    "deep": "c0abd4b76df15104",
+    "alive": 28,
+    "plans": {
+     "tool": 8,
+     "repair": 3
+    },
+    "homeFood": 0,
+    "storedFood": 0
+   },
+   "18000": {
+    "hash": "44fb5ce6",
+    "deep": "d42a889316dc2531",
+    "alive": 28,
+    "plans": {
+     "tool": 11,
+     "night": 10,
+     "repair": 4
+    },
+    "homeFood": 56,
+    "storedFood": 16
+   }
+  }
+ }
+}
