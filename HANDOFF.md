@@ -7,26 +7,43 @@ replacement for them.
 
 ## Where things stand
 
-- Checkout: `C:\dev\Claude Experiment\living-world`, branch `claude/awesome-dirac-07f8q1`, in sync with its remote.
-- Branch HEAD: `eada793`. The working tree is clean (one ignored artifact directory, `gates_rich_out/`, listed in
-  `.gitignore`).
-- Integration branch: `main` (`8a2b6e7`), the remote default. **The branch is NOT yet merged into it.**
-- Pull request: [#17](https://github.com/lochheadr92-creator/living-world/pull/17), open, draft, base `main`, head
-  `claude/awesome-dirac-07f8q1`, 47 commits over 216 files, `mergeable_state: clean`.
-- Everything described below is committed and pushed. Nothing of value is uncommitted, stashed or outside the repository.
+**The work is merged.** `main` is the integrated branch and carries everything described below.
 
-**The remaining step is the merge of #17 into `main`.** It has now been attempted twice and refused both times by the
-development environment's auto-mode classifier with "Merge Without Review" - not by the repository, a branch protection or
-a failing check. The second attempt followed a full review of the final diff (recorded in the merge message that was
-prepared). No API credentials are available in this environment (`gh` is not installed; `GH_TOKEN`/`GITHUB_TOKEN` are
-unset), so the PR cannot be marked ready, retitled or merged through GitHub from here either.
+- Checkout: `C:\dev\Claude Experiment\living-world`, on `main`, in sync with `origin/main`. The working tree is clean
+  (one ignored artifact directory, `gates_rich_out/`, listed in `.gitignore`).
+- Integration commit: **`e81aad4ed5e08facf7e438f88aad33705d13fab8`**, the merge of `claude/awesome-dirac-07f8q1`.
+- Pull request [#17](https://github.com/lochheadr92-creator/living-world/pull/17): **closed and merged** on 2026-10-18,
+  base `main`, head `f1e93b2`, merge commit `e81aad4`.
+- `main` contains the feature head `f1e93b2` and the CLI rules-version fix `eada793` (both checked with
+  `git merge-base --is-ancestor`).
+- The feature branch still exists and has not been deleted.
 
-It needs one of: a human marking #17 ready and merging it on GitHub, or the merge permission being granted here. Until then
-`main` is at `8a2b6e7` and contains **none** of this work.
+### Verification of the merged result
 
-## What landed on the branch in the latest pass
+Run by the owner on the merge commit itself, and reported as successful: `npm run typecheck`; `npm test` - **747 tests
+across 77 files**; `npm run build`; `git diff --check`; `npx vite-node scripts/golden.ts` - all fingerprints matched;
+`git merge-base --is-ancestor` against the feature head; `git push origin main`.
 
-Eight commits, each one problem:
+Run here on merged `main` (`e81aad4`), against a temporary Vite dev server on port 5183:
+
+```
+node scripts/browser/current_world_check.mjs http://localhost:5183/      →  15/15 passed
+```
+
+That is headless Chrome integration evidence through the repository's own CDP driver (`scripts/browser/cdp.mjs`): the app
+boots, renders and runs its own clock in a real browser, and each answer is read out of the running page. It evidences
+BEHAVIOUR - a new world runs the current rules; a stale `rich: false` preference cannot hold it on the legacy ones; a
+paused world saved at tick 329 is restored to tick 329 and the same state hash after the world has moved on to 529, keeps
+its settings, carries on to 379, and survives a page reload; an authored legacy save keeps `dynamics: 'authored'` and its
+own state; and a new world started afterwards is current again. It says nothing about visual quality or usability, and
+nothing is asserted about the drawing.
+
+What that check does **not** cover: it reads `settings.dynamics`, not `settings.rulesVersion`. The rules-version
+guarantees - stamping, preservation through save, load, restore, fork and replay, rejection of unsupported and future
+versions, and the unversioned policy - rest on `tests/rules_version.test.ts` (28) and `tests/run_rules.test.ts` (25), not
+on this browser run.
+
+## What landed, each commit one problem
 
 | commit | what |
 |---|---|
@@ -79,13 +96,9 @@ added later. Full policy in `docs/DEVELOPMENT_POLICY.md`, "Rules versions (Stage
 - A future behavioural change raises `CURRENT_RULES_VERSION`, adds it to `SUPPORTED_RULES_VERSIONS`, and gates the new
   behaviour on `runsRulesVersion(world, N)` while keeping the older branch.
 
-## Verification of the integrated branch
+## Limits worth carrying forward
 
-`npm run typecheck` clean · `npm test` **747 tests / 77 files** · `npm run build` clean · `git diff --check` clean ·
-`npx vite-node scripts/golden.ts` all fingerprints unchanged · `node scripts/browser/current_world_check.mjs` **15/15**
-(headless Chrome through the repository's CDP driver: behaviour, not appearance).
-
-Limits worth carrying forward:
+These stand after the merge. None of them is fixed by it.
 
 - The Stage 4 pilots are **one seed, one day** each. Days 4, 8 and 12 are missing, not zero; `hall` and `ask_info` were never
   exercised; zero cross-camp contact means unexercised in that window, nothing more.
@@ -94,9 +107,12 @@ Limits worth carrying forward:
   ensemble.
 - No ensemble was run in this pass. `rich-no-transmission` is unwritten.
 - Apprenticeship is built but barely exercised (one start, no graduations across four 12-day worlds).
-- Rules version 1 proves same-build continuity and preservation, not compatibility with historical rich releases. What IS
-  verified across revisions: saves produced by `main` (`8a2b6e7`) load into this build, keep their dynamics, stay
-  explicitly unversioned, run on and survive a re-save with a matching hash.
+- Rules version 1 establishes the supported baseline. It does not reconstruct unidentified historical rich releases, and it
+  does not prove compatibility with any of them. What IS verified across revisions: saves produced by pre-merge `main`
+  (`8a2b6e7`) load into this build, keep their dynamics, stay explicitly unversioned, run on, and survive a re-save with a
+  matching hash.
+- Household preparation for scarcity and winter has **not** started. It is the next behavioural task, and nothing here
+  anticipates it.
 
 ## Map
 
@@ -113,4 +129,4 @@ Limits worth carrying forward:
 The next behavioural task is **household preparation for scarcity and winter**. It is not started. The fifteen proposed
 gameplay stages remain a backlog in `docs/EMERGENCE.md`; nothing here commits to them.
 
-Before starting it: merge #17, or state explicitly that work continues on an unmerged branch.
+It starts from merged `main` (`e81aad4`): there is nothing outstanding to integrate first.
