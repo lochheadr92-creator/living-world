@@ -226,6 +226,25 @@ describe('2. ineligible situations form no preparation', () => {
 // ───────────────────────── 3. the action is an ordinary one and really moves food ─────────────────────────
 
 describe('3. the chosen action goes through ordinary validation and changes the food that is there', () => {
+  it('the reserve is for their OWN household, even with a fuller store next door', () => {
+    // Food ownership: `homeStoreBelief` only ever looks at a home of this person's own household. A neighbour's full store
+    // is neither the target nor a reason to think the want is already met.
+    const { w, ann, home } = scene('prep-ownership');
+    const rng = new RNG(41);
+    const neighbour = testKit.addPerson(w, rng, { name: 'Nye', x: 44.5, y: 40.5, hunger: 92, thirst: 92, energy: 92 });
+    // a BIGGER home than hers, so that a rule picking "the largest store I know of" would wrongly choose this one
+    const theirs = createBuilding(w, 'house', 45, 40, neighbour.hhId);
+    const theirHh = w.households.find((h) => h.id === neighbour.hhId);
+    if (theirHh) theirHh.homeId = theirs.id;
+    addItem(theirs.store.items, 'grain', 30);
+    observe(w, ann, theirs); // she can see it is full; it is still not hers
+    expect(homeStoreBelief(ann)!.id, 'the plan is about her own home').toBe(home.id);
+    const plan = reviewIntentions(ctxFor(w, ann))!;
+    expect(plan.kind, 'a full store next door is not her household having food').toBe('stock');
+    expect(plan.aboutId).toBe(home.id);
+    expect(plan.stepKind).toBe('forage');
+  });
+
   it('gathering is the step while the pack is light, and the engine offers it', () => {
     const { w, ann } = scene('prep-step-gather');
     const plan = reviewIntentions(ctxFor(w, ann))!;
@@ -313,6 +332,21 @@ describe('4. a preparation is finished by food, not by a plan saying so', () => 
     expect(plan.worked).toBe(0);
     addItem(home.store.items, 'grain', 9); // somebody else of the household brought it home
     observe(w, ann, home); // and she has since seen it
+    settleIntentions(w, ann);
+    expect(plan.status).toBe('dropped');
+    expect(plan.reason).toMatch(/without their doing/);
+  });
+
+  it('a store that filled behind their back ends nothing until they have SEEN it', () => {
+    // The plan is judged on what this person believes, never on the world read behind their back. Without that, a
+    // preparation would end the instant somebody else put food in, whether or not its owner could know.
+    const { w, ann, home } = scene('prep-unseen');
+    const plan = reviewIntentions(ctxFor(w, ann))!;
+    addItem(home.store.items, 'grain', 20);
+    settleIntentions(w, ann);
+    expect(plan.status, 'she has not been home since; as far as she knows the store is still empty').toBe('active');
+    expect(foodInBelief(homeStoreBelief(ann)!)).toBe(0);
+    observe(w, ann, home); // now she has seen it
     settleIntentions(w, ann);
     expect(plan.status).toBe('dropped');
     expect(plan.reason).toMatch(/without their doing/);
