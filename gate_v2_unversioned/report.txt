@@ -1,0 +1,6 @@
+Counterfactual lab: 24 seeds (aspen, birch, cedar, fern, gen-1, gen-2, gen-3, gen-4, gen-5, gen-6, meadow, nov-1, nov-10, nov-11, nov-12, nov-2, nov-3, nov-4, nov-5, nov-6, nov-7, nov-8, nov-9, river), large profile, forked at day 0, run 12 days.
+Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).
+
+Noise floor: spread (sd) of the difference a one-draw nudge makes in one seed, and when it parts from the control
+  nudge branches parted from the control in 0/0 runs, median - days after the fork
+  workplaces ±0.0   solidHomes ±0.0   buildings ±0.0   plots ±0.0   people ±0.0   deaths ±0.0   homeless ±0.0   belowCritical ±0.0   meanHunger ±0.0   firstYardDay ±0.0   firstHallDay ±0.0   meanMood ±0.0   lowMood ±0.0   tools ±0.0   meanCondition ±0.0   projectsAdopted ±0.0   projectsDone ±0.0   projectAsks ±0.0   askUnitsDelivered ±0.0   specialisation ±0.0   topKindShare ±0.0   prepAdopted ±0.0   prepSeason ±0.0   prepHardship ±0.0   prepDone ±0.0   prepDropped ±0.0   prepUnits ±0.0   prepDays ±0.0   hungerExposure ±0.0   homeFoodPerPerson ±0.0   storeFoodPerPerson ±0.0
