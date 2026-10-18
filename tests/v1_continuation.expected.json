@@ -11,7 +11,14 @@
      "night": 5
     },
     "homeFood": 109,
-    "storedFood": 42
+    "storedFood": 42,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "retreat": 1,
+     "roam": 1,
+     "stalk": 1
+    }
    },
    "2400": {
     "hash": "6cdd1441",
@@ -21,7 +28,13 @@
      "tool": 18
     },
     "homeFood": 74,
-    "storedFood": 27
+    "storedFood": 27,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "roam": 2,
+     "retreat": 1
+    }
    },
    "3600": {
     "hash": "c5a9f473",
@@ -32,7 +45,13 @@
      "night": 8
     },
     "homeFood": 183,
-    "storedFood": 59
+    "storedFood": 59,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "stalk": 2,
+     "roam": 1
+    }
    }
   },
   "prewinter": {
@@ -45,7 +64,13 @@
      "repair": 2
     },
     "homeFood": 2,
-    "storedFood": 0
+    "storedFood": 0,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "retreat": 2,
+     "roam": 1
+    }
    },
    "16800": {
     "hash": "fcd68a9d",
@@ -56,7 +81,13 @@
      "repair": 3
     },
     "homeFood": 0,
-    "storedFood": 0
+    "storedFood": 0,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "retreat": 2,
+     "roam": 1
+    }
    },
    "18000": {
     "hash": "44fb5ce6",
@@ -68,7 +99,120 @@
      "repair": 4
     },
     "homeFood": 56,
-    "storedFood": 16
+    "storedFood": 16,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "roam": 1,
+     "stalk": 1,
+     "retreat": 1
+    }
+   }
+  },
+  "v2-short": {
+   "1200": {
+    "hash": "7d7bb129",
+    "deep": "57d5a13dec5ae8f7",
+    "alive": 28,
+    "plans": {
+     "tool": 18,
+     "stock": 1,
+     "night": 5
+    },
+    "homeFood": 109,
+    "storedFood": 42,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "retreat": 1,
+     "roam": 1,
+     "stalk": 1
+    }
+   },
+   "2400": {
+    "hash": "b8f7ec8d",
+    "deep": "2ca71cac5e145469",
+    "alive": 28,
+    "plans": {
+     "tool": 18,
+     "stock": 1
+    },
+    "homeFood": 93,
+    "storedFood": 33,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "roam": 3
+    }
+   },
+   "3600": {
+    "hash": "649a5720",
+    "deep": "b435a554dd627480",
+    "alive": 28,
+    "plans": {
+     "tool": 18,
+     "night": 7,
+     "stock": 1
+    },
+    "homeFood": 151,
+    "storedFood": 45,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "retreat": 2,
+     "roam": 1
+    }
+   }
+  },
+  "v2-wolves": {
+   "2400": {
+    "hash": "8bdb877f",
+    "deep": "7c9fa7e3fac3d3ca",
+    "alive": 28,
+    "plans": {
+     "tool": 21
+    },
+    "homeFood": 72,
+    "storedFood": 33,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "roam": 3
+    }
+   },
+   "7200": {
+    "hash": "56cf7a6b",
+    "deep": "e092ae31124172ca",
+    "alive": 28,
+    "plans": {
+     "stock": 9,
+     "tool": 1,
+     "repair": 1
+    },
+    "homeFood": 79,
+    "storedFood": 33,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "roam": 2,
+     "retreat": 1
+    }
+   },
+   "9600": {
+    "hash": "caa47ba0",
+    "deep": "88f10c87e8237a58",
+    "alive": 28,
+    "plans": {
+     "stock": 10,
+     "tool": 8
+    },
+    "homeFood": 187,
+    "storedFood": 72,
+    "spears": 0,
+    "droveOff": 0,
+    "wolfStates": {
+     "roam": 3
+    }
    }
   }
  }

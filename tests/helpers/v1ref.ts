@@ -27,6 +27,8 @@ import { deepHash } from './golden';
 
 export interface V1Case {
   name: string;
+  /** the rules version this case pins. Every SUPPORTED version below the current one should have cases here. */
+  version: number;
   seed: string;
   profile: ProfileName;
   /** tick at which the world is saved and read back; the continuation starts here */
@@ -46,8 +48,13 @@ export interface V1Case {
  * given behaviour that belongs to version 2.
  */
 export const V1_CASES: V1Case[] = [
-  { name: 'short', seed: 'meadow', profile: 'normal', saveAt: 1200, ticks: [1200, 2400, 3600] },
-  { name: 'prewinter', seed: 'river', profile: 'normal', saveAt: 14400, ticks: [14400, 16800, 18000] },
+  { name: 'short', version: 1, seed: 'meadow', profile: 'normal', saveAt: 1200, ticks: [1200, 2400, 3600] },
+  { name: 'prewinter', version: 1, seed: 'river', profile: 'normal', saveAt: 14400, ticks: [14400, 16800, 18000] },
+  // Version 2 gets the same treatment, recorded from the revision before version 3 was written. `wolves` is a world with
+  // a wolf problem (harsh, no arrivals), because what version 3 adds is answered to wolves: if any of it leaked into a
+  // version-2 world, this is where it would show.
+  { name: 'v2-short', version: 2, seed: 'meadow', profile: 'normal', saveAt: 1200, ticks: [1200, 2400, 3600] },
+  { name: 'v2-wolves', version: 2, seed: 'fern', profile: 'normal', saveAt: 2400, ticks: [2400, 7200, 9600] },
 ];
 
 export interface V1Point {
@@ -61,6 +68,11 @@ export interface V1Point {
   homeFood: number;
   /** food actually in home buildings, summed (the world's own figure, not a belief) */
   storedFood: number;
+  /** spears in existence, and wolves that have been driven off: both are version-3 things and must be 0 below it */
+  spears: number;
+  droveOff: number;
+  /** people bitten badly enough to be below full health, and wolves by state: what a defence would change */
+  wolfStates: Record<string, number>;
 }
 
 const FOODS = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'] as const;
@@ -84,7 +96,16 @@ export function v1Point(world: World): V1Point {
     if (!b.store) continue;
     for (const k of FOODS) storedFood += b.store.items[k] ?? 0;
   }
-  return { hash: hashWorld(world), deep: deepHash(world), alive, plans, homeFood, storedFood };
+  let spears = 0;
+  for (const t of world.tools) if (t.kind === 'spear') spears++;
+  let droveOff = 0;
+  const wolfStates: Record<string, number> = {};
+  for (const a of world.animals) {
+    if (a.type === 'deer') continue;
+    wolfStates[a.state] = (wolfStates[a.state] ?? 0) + 1;
+    if (a.wary !== undefined) droveOff++;
+  }
+  return { hash: hashWorld(world), deep: deepHash(world), alive, plans, homeFood, storedFood, spears, droveOff, wolfStates };
 }
 
 /**
@@ -94,7 +115,7 @@ export function v1Point(world: World): V1Point {
  * would be measuring the new rules against themselves.
  */
 export function v1World(c: V1Case): World {
-  return createWorld({ ...settingsForProfile(c.profile, c.seed, { dynamics: 'rich', immigration: false }), rulesVersion: 1 });
+  return createWorld({ ...settingsForProfile(c.profile, c.seed, { dynamics: 'rich', immigration: false }), rulesVersion: c.version });
 }
 
 export function computeV1Case(c: V1Case): Record<string, V1Point> {
@@ -102,7 +123,7 @@ export function computeV1Case(c: V1Case): Record<string, V1Point> {
   while (w.tick < c.saveAt) stepWorld(w);
   // the continuation: out through the real save path and back in, which is what an existing version-1 world is
   w = deserializeWorld(serializeWorld(w));
-  if (w.settings.rulesVersion !== 1) throw new Error(`the reference world came back as ${String(w.settings.rulesVersion)}, not version 1`);
+  if (w.settings.rulesVersion !== c.version) throw new Error(`the reference world came back as ${String(w.settings.rulesVersion)}, not version ${c.version}`);
   const out: Record<string, V1Point> = {};
   for (const t of c.ticks) {
     while (w.tick < t) stepWorld(w);
