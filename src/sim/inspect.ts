@@ -312,7 +312,8 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
   // on, which for this kind is evidence about the household rather than a restatement of the goal. No other kind is touched,
   // and `stock` does not exist below rules version 2.
   if (i.kind === 'stock') {
-    text += ` ${Math.round(i.worked)} of ${i.reserve ?? 0} units put by so far.`;
+    const put = Math.round(i.worked);
+    text += ` ${put} of ${i.reserve ?? 0} unit${i.reserve === 1 ? '' : 's'} put by so far.`;
     if (i.reason) text += ` Why: ${i.reason}.`;
   }
   if (i.setAside > 0) text += ` Set aside ${i.setAside === 1 ? 'once' : `${i.setAside} times`} so far.`;

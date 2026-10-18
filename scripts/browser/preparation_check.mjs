@@ -117,7 +117,7 @@ try {
   let c = await card();
   check('the card names the reserve and the step', /units of food by for the household/i.test(c.plan) && /Step:/.test(c.plan), c.plan.slice(0, 260) || '(no plan row on the card)');
   check('and it says WHY, in terms of what the household could see', /Why: /.test(c.plan) && /(next to nothing at home|went hungry lately|winter is close)/i.test(c.plan), c.plan.slice(0, 260));
-  check('and how much has really been put by so far, not how much was meant', /\d+ of \d+ units put by so far/.test(c.plan), (c.plan.match(/\d+ of \d+ units put by so far/) ?? ['(absent)'])[0]);
+  check('and how much has really been put by so far, not how much was meant', /\d+ of \d+ units? put by so far/.test(c.plan), (c.plan.match(/\d+ of \d+ units? put by so far/) ?? ['(absent)'])[0]);
   const before = await storeOf(subject.about);
 
   // ── 3. follow it until food actually lands in that household's store ──
@@ -142,8 +142,8 @@ try {
     await openSections();
     await b.sleep(400);
     c = await card();
-    const put = (c.plan.match(/(\d+) of (\d+) units put by so far/) ?? [])[1];
-    check('the card shows what was really put by, and it matches the world', put !== undefined ? Number(put) === Math.round(delivered.worked) : /put \d+ units of food by|never got any food put by|store is at/.test(c.plan),
+    const put = (c.plan.match(/(\d+) of (\d+) units? put by so far/) ?? [])[1];
+    check('the card shows what was really put by, and it matches the world', put !== undefined ? Number(put) === Math.round(delivered.worked) : /put \d+ units? of food by|never got any food put by|store is at/.test(c.plan),
       `card: ${c.plan.slice(0, 260)}`);
   }
 

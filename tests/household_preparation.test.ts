@@ -294,6 +294,12 @@ describe('3. the chosen action goes through ordinary validation and changes the 
     expect(view.goal).toMatch(/put \d+ units of food by for the household/);
     expect(view.step).toMatch(/take the food home/);
     expect(view.progress).toMatch(/0 of \d+ units put by \(the household was short\)/);
+    // one unit is "1 unit", not "1 units": the card is read by people
+    expect(plan.worked).toBe(0);
+    plan.worked = 1;
+    expect(planViews(w, ann).find((v) => v.id === plan.id)!.detail).toContain(`1 of ${plan.reserve} units put by so far`);
+    plan.reserve = 1;
+    expect(planViews(w, ann).find((v) => v.id === plan.id)!.detail).toContain('1 of 1 unit put by so far');
     expect(view.detail).toMatch(/Step: take the food home/);
   });
 });
@@ -320,7 +326,7 @@ describe('4. a preparation is finished by food, not by a plan saying so', () => 
     undoController = c.restore;
     for (let n = 0; n < 1200 && plan.status === 'active'; n++) stepWorld(w);
     expect(plan.status, plan.reason).toBe('done');
-    expect(plan.reason).toMatch(/put \d+ units of food by/);
+    expect(plan.reason).toMatch(/put \d+ units? of food by/);
     expect(plan.worked).toBeGreaterThan(0);
     expect(foodInBelief(homeStoreBelief(ann)!), 'and the store really holds it').toBeGreaterThanOrEqual(plan.reserve!);
   });
@@ -337,7 +343,7 @@ describe('4. a preparation is finished by food, not by a plan saying so', () => 
     w.tick = plan.until + 1;
     settleIntentions(w, ann);
     expect(plan.status).toBe('dropped');
-    expect(plan.reason).toMatch(/put \d+ units by, but the store is at \d+ of \d+/);
+    expect(plan.reason).toMatch(/put \d+ units? by, but the store is at \d+ of \d+/);
   });
 });
 

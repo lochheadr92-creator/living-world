@@ -504,6 +504,9 @@ function stockStep(ctx: Ctx, i: Intention): Step {
  * neighbour's gift, somebody else of the household bringing food home) ends the plan, because there is nothing left to want,
  * but it is not called an achievement and it is not credited to them.
  */
+/** "1 unit", "3 units": the card and the record say how much was really put by, and one is not "1 units" */
+const units = (n: number): string => `${Math.round(n)} unit${Math.round(n) === 1 ? '' : 's'}`;
+
 function stockOutcome(world: World, p: Person, i: Intention): { status: 'done' | 'dropped'; reason: string } | null {
   // The rules stopped running this behaviour under the plan's feet: the lab switched it off at a fork, in a world that already
   // had preparations under way. The plan ends rather than carrying on invisibly, so an ablation really is an ablation.
@@ -512,11 +515,11 @@ function stockOutcome(world: World, p: Person, i: Intention): { status: 'done' |
   if (!home) return { status: 'dropped', reason: 'there is no home of theirs left to put anything by in' };
   const want = i.reserve ?? 0;
   const inStore = foodInBelief(home);
-  if (inStore >= want && i.worked > 0) return { status: 'done', reason: `put ${Math.round(i.worked)} units of food by; the store holds ${inStore}` };
+  if (inStore >= want && i.worked > 0) return { status: 'done', reason: `put ${units(i.worked)} of food by; the store holds ${inStore}` };
   if (inStore >= want) return { status: 'dropped', reason: `the store came to hold ${inStore} without their doing` };
   if (world.tick > i.until) {
     return i.worked > 0
-      ? { status: 'dropped', reason: `put ${Math.round(i.worked)} units by, but the store is at ${inStore} of ${want} and the time is up` }
+      ? { status: 'dropped', reason: `put ${units(i.worked)} by, but the store is at ${inStore} of ${want} and the time is up` }
       : { status: 'dropped', reason: `never got any food put by (the store is at ${inStore} of ${want})` };
   }
   return null;
