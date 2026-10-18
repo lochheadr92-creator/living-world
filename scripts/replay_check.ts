@@ -15,7 +15,7 @@ import { goalKeeperModel } from '../src/agent/stubs';
 import { notesHash } from '../src/agent/memory';
 import { DAY } from '../src/sim/constants';
 import { createWorld } from '../src/sim/factory';
-import { settingsForProfile } from '../src/sim/profiles';
+import { freshRunSettings, parseRunRules } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import type { World } from '../src/sim/types';
 import { hashWorld, stepWorld } from '../src/sim/world';
@@ -34,7 +34,8 @@ const roundTrip = (w: World): unknown => JSON.parse(JSON.stringify(deserializeWo
 
 async function main(): Promise<void> {
   const profile = opt('profile', 'normal') as ProfileName;
-  const settings = settingsForProfile(profile, opt('seed', 'meadow'), { harsh: flag('harsh'), immigration: !flag('no-arrivals'), dynamics: opt('dynamics', 'rich') as 'authored' | 'rich' });
+  // a FRESH world for the check; replaying an existing transcript below uses the settings that transcript recorded
+  const settings = freshRunSettings(parseRunRules(opt('dynamics', 'rich')), profile, opt('seed', 'meadow'), { harsh: flag('harsh'), immigration: !flag('no-arrivals') });
   const from = Math.round(Number(opt('from-day', '1')) * DAY);
   const until = from + Math.round(Number(opt('days', '0.5')) * DAY);
 
@@ -81,7 +82,8 @@ async function main(): Promise<void> {
   check("the inhabitant's own saved state replayed identically", deepEqualState(a as never, b as never), b ? `turns ${b.turns}, engine ${b.fallbacks}` : 'none recorded');
 
   const decisions = live.transcript.calls.filter((c) => c.result?.status === 'applied').length;
-  console.log(`\n${person.name} (#${person.id}) in ${settings.seed}, tick ${from}..${until}, ${decisions} decisions applied, sources ${sources}`);
+  const ver = settings.rulesVersion === undefined ? 'unversioned' : `rules version ${settings.rulesVersion}`;
+  console.log(`\n${person.name} (#${person.id}) in ${settings.seed} (${settings.dynamics ?? 'authored'}, ${ver}), tick ${from}..${until}, ${decisions} decisions applied, sources ${sources}`);
   console.log(lines.join('\n'));
   const bad = ok.filter((x) => !x).length;
   console.log(`\n${ok.length - bad}/${ok.length} checks passed`);

@@ -45,7 +45,7 @@ const GATED: Metric[] = ['people', 'deaths', 'workplaces', 'solidHomes', 'buildi
 const SD_FLOOR = 0.5;
 const MIN_PEOPLE = 50;
 
-type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: 'authored' | 'rich' };
+type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: 'authored' | 'rich'; rulesVersion?: number | null };
 const rows: Row[] = [];
 for (const f of readdirSync(dir)) {
   if (!/^lab_.+\.jsonl$/.test(f)) continue;
@@ -69,12 +69,17 @@ for (const m of metrics) {
 // what world these rows came from. A row written before `dynamics` was recorded came from an authored world, which is what the
 // lab's default was and still is.
 const dynamics = rows[0].dynamics ?? 'authored';
-const mixed = rows.some((r) => (r.dynamics ?? 'authored') !== dynamics || r.profile !== rows[0].profile || r.fork !== rows[0].fork || r.days !== rows[0].days);
+// The generation of rules is part of what world these rows came from: "both rich" is not "the same rules", because every
+// generation of the rich rules has carried that one word. A row with no version was run before versions existed (or
+// deliberately unversioned), which is a different thing again, and is kept as null rather than read as the current one.
+const rulesVersion = rows[0].rulesVersion ?? null;
+const sameRules = (r: Row) => (r.dynamics ?? 'authored') === dynamics && (r.rulesVersion ?? null) === rulesVersion;
+const mixed = rows.some((r) => !sameRules(r) || r.profile !== rows[0].profile || r.fork !== rows[0].fork || r.days !== rows[0].days);
 if (mixed) {
-  console.log('the rows in ' + dir + ' come from different experiments (dynamics/profile/fork/days): nothing here is comparable');
+  console.log('the rows in ' + dir + ' come from different experiments (dynamics/rules version/profile/fork/days): nothing here is comparable');
   process.exit(1);
 }
-const header = { dynamics, profile: rows[0].profile, fork: rows[0].fork, days: rows[0].days, branch: spec, n: rows.length };
+const header = { dynamics, rulesVersion, profile: rows[0].profile, fork: rows[0].fork, days: rows[0].days, branch: spec, n: rows.length };
 
 if (record) {
   writeFileSync(FILE, JSON.stringify({ ...header, recordedFrom: rows.map((r) => r.seed).sort(), metrics: now }, null, 2) + '\n');
@@ -86,11 +91,13 @@ if (!existsSync(FILE)) {
   console.log(`${FILE} does not exist: record a baseline for this experiment first (--record --file ${FILE})`);
   process.exit(1);
 }
-const base = JSON.parse(readFileSync(FILE, 'utf8')) as typeof header & { dynamics?: 'authored' | 'rich'; branch?: string; metrics: typeof now };
+const base = JSON.parse(readFileSync(FILE, 'utf8')) as typeof header & { dynamics?: 'authored' | 'rich'; rulesVersion?: number | null; branch?: string; metrics: typeof now };
 const baseDyn = base.dynamics ?? 'authored';
+const baseRules = base.rulesVersion ?? null;
 // a gate compares like with like: a rich run checked against the authored baseline would pass or fail for the wrong reason
 const differs = [
   baseDyn !== dynamics ? `dynamics ${baseDyn} vs ${dynamics}` : '',
+  baseRules !== rulesVersion ? `rules version ${baseRules ?? 'unversioned'} vs ${rulesVersion ?? 'unversioned'}` : '',
   base.profile !== header.profile ? `profile ${base.profile} vs ${header.profile}` : '',
   base.fork !== header.fork ? `fork day ${base.fork} vs ${header.fork}` : '',
   base.days !== header.days ? `days ${base.days} vs ${header.days}` : '',

@@ -66,6 +66,21 @@ the introduction of versioning - which means **exact historical replay of such a
 current rules deliberately is a separate job; there is no automatic migration and no destructive one. Historical diagnostic
 fixtures (the goldens, `defaultSettings`, `settingsForProfile`, `restartSettings`) stay unversioned on purpose.
 
+**Runs from the command line.** A script that builds a FRESH world uses `freshRunSettings` (`src/sim/profiles.ts`), so a
+current run is stamped exactly as a new world in the app is. `--dynamics` takes three values: `rich` (the current
+simulation, current version), `authored` (the legacy rules, unversioned) and `rich-unversioned` (a rich world deliberately
+left on the legacy baseline, for reproducing a measurement made before versions existed). Loading, forking or replaying an
+existing world keeps the settings it was recorded with. `settingsForProfile`, `restartSettings` and `defaultSettings` stay
+unversioned whatever is asked for: fixtures and historical diagnostics are built on them.
+
+Lab rows carry `rulesVersion` beside `dynamics`, explicitly `null` when unversioned - a version is never inferred from the
+word "rich". The resume guard (`scripts/lab/guard.ts`, run by `scripts/lab.mjs` before it creates anything or starts a
+worker) refuses a directory whose rows were run under different rules, including two runs that are both rich but of
+different generations, and it reads the existing files without rewriting or relabelling them. `scripts/gates.ts` compares
+the rules version as well, so a gate cannot silently check one generation against a baseline from another. None of this is
+source provenance: two runs of the same version from different revisions are still different experiments, so use a fresh
+directory after any source change and record HEAD and the diff.
+
 **Changing behaviour from here on.** A change that is meant to alter outcomes - a new decision rule, or a tuned parameter that
 moves them - raises `CURRENT_RULES_VERSION` and adds the new number to `SUPPORTED_RULES_VERSIONS`. The new behaviour is gated
 by `runsRulesVersion(world, N)` at the point where it is decided, with the previous branch kept for worlds that run an earlier

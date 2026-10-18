@@ -72,6 +72,44 @@ export function currentWorldSettings(profile: ProfileName, seed: string, base: P
   return restartSettings(profile, seed, { ...base, dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION });
 }
 
+// ───────────────────────── what a command line asks a fresh world to run ─────────────────────────
+/**
+ * The three things a run can mean by `--dynamics`, and why the third exists.
+ *
+ *   'rich'              the current simulation: the integrated rules AND the current rules version, exactly what a new
+ *                       product world gets. This is the default everywhere.
+ *   'authored'          a legacy diagnostic world: the old rules, unversioned, as those worlds have always been.
+ *   'rich-unversioned'  a rich world deliberately left on the legacy compatibility baseline. It exists because "rich" and
+ *                       "this generation of the rules" are not the same question: a measurement made before rules versions
+ *                       existed is reproduced with this, and it must not claim to be the current version.
+ *
+ * `settingsForProfile`, `restartSettings` and `defaultSettings` stay unversioned whatever this says: they are the low-level
+ * helpers that fixtures and historical diagnostics are built on.
+ */
+export type RunRules = 'rich' | 'authored' | 'rich-unversioned';
+export const RUN_RULES: readonly RunRules[] = ['rich', 'authored', 'rich-unversioned'];
+
+/** Read a `--dynamics` value, refusing anything else by name rather than silently defaulting. */
+export function parseRunRules(value: string | undefined, flag = '--dynamics'): RunRules {
+  const v = value ?? 'rich';
+  if ((RUN_RULES as readonly string[]).includes(v)) return v as RunRules;
+  throw new Error(`${flag} must be one of ${RUN_RULES.join(', ')}`);
+}
+
+/**
+ * The settings for a FRESH world a command line asked for. A current run is stamped with the current rules version, exactly
+ * as a new world in the app is, so a script and the product cannot drift apart; the two legacy cases stay unversioned.
+ * Loading, forking or replaying an existing world does not come through here: those keep the settings they were recorded
+ * with.
+ */
+export function freshRunSettings(rules: RunRules, profile: ProfileName, seed: string, base: Pick<Partial<Settings>, 'harsh' | 'immigration'> = {}): Settings {
+  if (rules === 'rich') return currentWorldSettings(profile, seed, base);
+  return settingsForProfile(profile, seed, { ...base, dynamics: rules === 'authored' ? 'authored' : 'rich' });
+}
+
+/** The rules version such a run actually runs under, for recording beside its results. `null` means explicitly unversioned. */
+export const runRulesVersion = (rules: RunRules): number | null => (rules === 'rich' ? CURRENT_RULES_VERSION : null);
+
 /** what a world of this profile is, for a menu to say: the size of the map, how many people start, in how many camps */
 export function profileFacts(profile: ProfileName): { W: number; H: number; founders: number; camps: number } {
   if (profile === 'normal') return { W: 80, H: 80, founders: ORDINARY_CAMP, camps: 1 };
