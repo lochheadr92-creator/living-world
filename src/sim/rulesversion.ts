@@ -17,17 +17,27 @@
 import type { Settings, World } from './types';
 
 /**
- * The generation of behaviour new worlds are created with. Version 1 is the integrated simulation as it stood on 2026-10-18:
- * mood, hardship, private plans, learning, trades and apprenticeship, the second rich pass (occasions, reputation, illness,
- * theft and barter, the land, the settlement record, temperament, life changes, stories and traditions, crews, mediation,
- * shared responsibilities), the rich-only town corrections, and the project ask as it is written today.
+ * The generation of behaviour new worlds are created with.
+ *
+ * VERSION 1 is the integrated simulation as it stood on 2026-10-18: mood, hardship, private plans, learning, trades and
+ * apprenticeship, the second rich pass (occasions, reputation, illness, theft and barter, the land, the settlement record,
+ * temperament, life changes, stories and traditions, crews, mediation, shared responsibilities), the rich-only town
+ * corrections, and the project ask as it was written then.
+ *
+ * VERSION 2 (2026-10-18) adds HOUSEHOLD FOOD PREPARATION and nothing else: an adult may take on a private plan to put a
+ * modest food reserve into their own household's home store, set going either by what they can see of their own household's
+ * food or by the approach of winter, and carried out with the gathering and depositing that already existed. The whole of it
+ * is `src/sim/provision.ts` plus the `stock` plan kind in `src/sim/intent.ts`, and every part of it is gated on
+ * `runsRulesVersion(world, 2)`. Nothing else was retuned: winter, lean seasons, hunger, yields, spoilage and starting
+ * resources are exactly what version 1 had. A version-1 world continues as version 1, which
+ * `tests/v1_continuation.test.ts` holds against a reference recorded before version 2 was written.
  *
  * Raising this number is how a behavioural change is declared. See docs/DEVELOPMENT_POLICY.md, "Rules versions".
  */
-export const CURRENT_RULES_VERSION = 1;
+export const CURRENT_RULES_VERSION = 2;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2];
 
 /**
  * What a world made before versioning existed is. It is NOT version 0 and not "probably 1": several different implementations

@@ -308,7 +308,7 @@ export type CommitmentStatus = 'active' | 'done' | 'broken' | 'cancelled' | 'exp
 export interface Intention {
   id: number;
   /** the family of plan; each kind knows how to find its next step and when it is finished */
-  kind: 'night' | 'tool' | 'repair';
+  kind: 'night' | 'tool' | 'repair' | 'stock';
   /** what they mean to bring about, in their own terms */
   goal: string;
   since: number;
@@ -318,7 +318,7 @@ export interface Intention {
   /** the step being worked on now, in plain words. Display only: nothing decides anything by reading this. */
   step: string;
   /** what the step actually is. This, not the wording of `step`, is the contract the decision code matches on. */
-  stepKind: 'drink' | 'eat' | 'goto' | 'stay' | 'get' | 'make' | 'mend' | 'none';
+  stepKind: 'drink' | 'eat' | 'goto' | 'stay' | 'get' | 'make' | 'mend' | 'forage' | 'store' | 'none';
   /** for a 'get' step, the material being fetched */
   stepItem: ItemKind | null;
   /** the place the step is about (a shelter's id), or 0 when it is about no particular place */
@@ -347,6 +347,14 @@ export interface Intention {
   setAside: number;
   /** the tick it finished or was given up (0 while it stands). It is what keeps someone from taking the same thing up again at once. */
   ended: number;
+  /**
+   * For a food reserve (`stock`, rules version 2): how many units of food the home store should come to hold, and which of
+   * the two cues set the plan going. Both are absent on every other kind of plan and in every world below version 2, so a
+   * save from an earlier version reads back exactly as it was written. The cue is kept because a measurement must be able to
+   * say whether a preparation was a response to something seen or an anticipation of the season; see src/sim/provision.ts.
+   */
+  reserve?: number;
+  cue?: 'season' | 'hardship';
 }
 
 /** nobody juggles more than this many private plans at once */

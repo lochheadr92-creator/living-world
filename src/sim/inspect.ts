@@ -340,7 +340,16 @@ export function planViews(world: World, p: Person): PlanView[] {
       .filter((x) => x.n > 0)
       .map((x) => `${x.n} ${x.item}`)
       .join(', '),
-    progress: i.kind === 'night' ? `${i.sheltered} ticks under shelter` : i.kind === 'repair' ? `${Math.round(i.worked)} of its condition put back` : i.worked > 0 ? 'made it themselves' : '',
+    progress:
+      i.kind === 'night'
+        ? `${i.sheltered} ticks under shelter`
+        : i.kind === 'repair'
+          ? `${Math.round(i.worked)} of its condition put back`
+          : i.kind === 'stock'
+            ? `${Math.round(i.worked)} of ${i.reserve ?? 0} units put by${i.cue ? ` (${i.cue === 'season' ? 'winter is coming' : 'the household was short'})` : ''}`
+            : i.worked > 0
+              ? 'made it themselves'
+              : '',
     due: i.status === 'active' ? `by tick ${i.until}` : agoText(world, i.ended || i.since),
     outcome: i.status === 'active' ? '' : i.reason,
   }));

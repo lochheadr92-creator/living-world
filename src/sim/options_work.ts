@@ -1,5 +1,5 @@
 import { newActivity } from './activities';
-import { freeInv, freeOf, setToolWant } from './intent';
+import { freeInv, freeOf, preparingReserve, setToolWant } from './intent';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
@@ -156,9 +156,15 @@ function optStockpile(ctx: Ctx): void {
   for (const d of ctx.dependents) depHunger = Math.max(depHunger, Math.max(0, 55 - d.needs.hunger) / 55);
   const providerBonus = ctx.dependents.length > 0 ? 7 : 0;
   const base = (9 + 26 * hs.shortage + providerBonus + 18 * depHunger) * tm.work * nightMult(ctx) * weatherMult(ctx);
-  if (base < 6) return;
+  // Somebody who has taken on putting a reserve by still gets the option when the ambient urge is below the floor - the plan
+  // is their reason, and an option that is never generated cannot be a step. The urgency itself is unchanged, so this only
+  // decides whether the choice is OFFERED; the plan's own bounded nudge (intent.ts NUDGE) still has to beat everything else.
+  // `preparingReserve` is false for every plan kind that existed before rules version 2, so this reads the same in an older
+  // world as it always did.
+  const prepping = preparingReserve(p);
+  if (base < 6 && !prepping) return;
   if (ctx.food >= 8) return; // already carrying plenty: bring it home instead
-  foragePlans(ctx, { urgency: base, mode: 'stock', baseLabel: hs.shortage > 0.5 ? 'household is short of food' : 'building a food reserve' });
+  foragePlans(ctx, { urgency: base, mode: 'stock', baseLabel: hs.shortage > 0.5 ? 'household is short of food' : prepping ? 'putting food by for the household' : 'building a food reserve' });
 }
 
 function optDepositFood(ctx: Ctx): void {
