@@ -7,7 +7,7 @@ export type TerrainType = (typeof T)[keyof typeof T];
 // ───────────────────────────── items ─────────────────────────────
 export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
-export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar';
+export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water';
@@ -223,6 +223,7 @@ export type ActivityKind =
   | 'give'
   | 'care'
   | 'flee'
+  | 'defend'
   | 'explore'
   | 'plan_site'
   | 'fuel_fire'
@@ -953,6 +954,14 @@ export interface Animal {
   pathAt: number;
   pathGoalX: number;
   pathGoalY: number;
+  /**
+   * Driven off by somebody with a spear (defence.ts, rules version 3): the tick until which this wolf keeps clear of
+   * `waryOf`, so that a retreat it was forced into does not end with it fixing on the same person again. Both are absent
+   * on every wolf that was never driven off - which is every wolf in every world below version 3 - so an older save reads
+   * back exactly as it was written and hashes exactly as it did.
+   */
+  wary?: number;
+  waryOf?: number;
 }
 
 export interface Household {

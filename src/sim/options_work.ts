@@ -1,5 +1,7 @@
 import { newActivity } from './activities';
 import { freeInv, freeOf, preparingReserve, setToolWant } from './intent';
+import { makesSpears } from './defence';
+import { isThreat } from './wildlife';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
@@ -301,7 +303,10 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
 
 setToolWant((ctx) => wantedTool(ctx));
 
-export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | null {
+/** every tool somebody can make by hand; the water jar is fired at a kiln, not whittled, so it is not one of them */
+export type HandTool = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'spear';
+
+export function wantedTool(ctx: Ctx): HandTool | null {
   const { p, world } = ctx;
   if (ctx.stage === 'child') return null;
   const has = (t: ToolKind) => (p.inv[t] ?? 0) > 0;
@@ -309,7 +314,7 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
   const farming = world.plots.some((pl) => pl.hhId === p.hhId) || ctx.seeds > 0;
   const builds = p.stats.built > 0 || beliefsByKind(p, ['site']).some((s) => s.hh === p.hhId);
-  const options: { t: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw'; w: number }[] = [];
+  const options: { t: HandTool; w: number }[] = [];
   if (!has('basket') && p.stats.gathered > 6) options.push({ t: 'basket', w: 1 + p.skills.forage });
   if (!has('axe') && knowTrees && p.stats.gathered > 3) options.push({ t: 'axe', w: p.skills.wood * 1.4 });
   if (!has('hoe') && farming) options.push({ t: 'hoe', w: p.skills.farm * 1.3 });
@@ -321,9 +326,24 @@ export function wantedTool(ctx: Ctx): 'axe' | 'pick' | 'hoe' | 'basket' | 'hamme
   if (planksWanted && !has('saw') && knowTrees && p.skills.carpentry >= 0.95) options.push({ t: 'saw', w: 3 });
   // iron tools are forged with a hammer: someone who would swap a wearing tool for an iron one, and knows a smithy, needs their own
   if (!has('hammer') && beliefsByKind(p, ['building']).some((b) => b.btype === 'smithy') && toolsHeldBy(world, p.id).some((t) => t.tier === 0 && t.kind !== 'basket' && t.kind !== 'jar' && t.wear >= 18)) options.push({ t: 'hammer', w: 2 });
+  // A SPEAR, from rules version 3 (defence.ts). The reason has to be local and real: a wolf in sight now, or one this
+  // person saw within the last day and remembers where. Somebody who has never met one does not want a spear, so a
+  // quiet village arms nobody; and the weight is deliberately in the same band as the other wants (an axe reaches about
+  // 2.5, a basket about 2) rather than above them, so meeting a wolf is a reason to get one, not a reason to drop
+  // everything. One is enough: `has('spear')` ends it.
+  if (makesSpears(world) && !has('spear') && metAWolfLately(ctx)) options.push({ t: 'spear', w: 2.2 });
   if (!options.length) return null;
   options.sort((x, y) => y.w - x.w);
   return options[0].t;
+}
+
+/** Has this person actually met a wolf lately - one in sight now, or one they saw and remember from within the last day? */
+export function metAWolfLately(ctx: Ctx): boolean {
+  const { world, p } = ctx;
+  if (ctx.dangers.length) return true;
+  for (const s of p.seen) if (isThreat(world, s)) return true;
+  for (const b of beliefsByKind(p, ['danger'])) if (world.tick - b.seen < DAY) return true;
+  return false;
 }
 
 export type RawMaterial = 'wood' | 'stone' | 'clay' | 'ore';
@@ -765,10 +785,10 @@ function optCraft(ctx: Ctx): void {
   for (const i of p.intentions) {
     if (i.status === 'active' && i.kind === 'tool' && i.makes && !tools.includes(i.makes as ToolKind)) tools.push(i.makes as ToolKind);
   }
-  for (const t of tools) craftOption(ctx, t as 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw');
+  for (const t of tools) craftOption(ctx, t as HandTool);
 }
 
-function craftOption(ctx: Ctx, tool: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw'): void {
+function craftOption(ctx: Ctx, tool: HandTool): void {
   const { world, p } = ctx;
   if ((p.inv[tool] ?? 0) > 0) return; // they already have one
   const r = TOOL_RECIPE[tool];
@@ -793,12 +813,14 @@ function craftOption(ctx: Ctx, tool: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer
   if (!best) return;
   const target = best;
   const e = eta(ctx, target.x, target.y);
-  const sc = new Scorer().add(`wants ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, 17 + 8 * p.traits.diligence).add('walking', -pen(e));
+  // a spear is not made to work faster; it is made because there are wolves about, and the reason it is offered says so
+  const why = tool === 'spear' ? 'to have something to face a wolf with' : 'to work faster';
+  const sc = new Scorer().add(tool === 'spear' ? 'wolves about and nothing to face one with' : `wants ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, 17 + 8 * p.traits.diligence).add('walking', -pen(e));
   const util = sc.total * nightMult(ctx);
   addOption(ctx, {
     kind: 'craft',
     label: `Make ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`,
-    goal: 'to work faster',
+    goal: why,
     need: null,
     util,
     parts: sc.parts,
@@ -812,7 +834,7 @@ function craftOption(ctx: Ctx, tool: 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer
       return newActivity(world, p, {
         kind: 'craft',
         label: `Making ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`,
-        goal: 'to work faster',
+        goal: why,
         targetId: target.id,
         targetType: 'building',
         tx: target.x,

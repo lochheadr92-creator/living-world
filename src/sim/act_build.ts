@@ -7,6 +7,7 @@ import { riskOfHarm } from './life';
 import { addItem, claimSlot, consume, invRoom, ledgerCreate } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { creditMade, creditRepair } from './intent';
+import { noteSpearMade } from './defence';
 import { householdOf } from './buildings';
 import { missingMaterials, observe, delBelief } from './knowledge';
 import { isFacilityType } from './recipes';
@@ -203,6 +204,7 @@ registerHandler('craft', {
     mintTool(world, tool, 0, p.hhId, p.id, p.inv, p.id, 'crafted: ' + tool);
     // a plan that meant to make this learns that these hands made it, here, where it happened
     creditMade(p, tool);
+    if (tool === 'spear') noteSpearMade();
     p.stats.crafted++;
     p.skills.craft = Math.min(SKILL_MAX, p.skills.craft + 0.02);
     notePractice(world, p, 'craft', 0.02);

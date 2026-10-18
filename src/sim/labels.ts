@@ -74,6 +74,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   give: 'giving',
   care: 'caring for someone',
   flee: 'fleeing',
+  defend: 'driving a wolf off',
   explore: 'exploring',
   plan_site: 'marking out a building',
   fuel_fire: 'tending the fire',
@@ -116,6 +117,7 @@ export const ITEM_ICON: Record<ItemKind, string> = {
   hammer: 'hammer',
   saw: 'saw',
   jar: 'jar',
+  spear: 'spear',
 };
 
 /** compass word from a world-space delta, as seen on screen (north = up-screen) */
