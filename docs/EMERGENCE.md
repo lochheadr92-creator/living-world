@@ -546,16 +546,25 @@ numbers live below that.
 | tool and repair projects STARTED (12 d) | 86.0 | 101.3 | +15.3 | [+12.2, +18.4] | 24 higher |
 | projects finished, tools held, deaths, mean hunger, mood | | | | all straddle 0 | |
 
+Every `diff` is **the arm minus `control`**, and `control` is the run WITH preparation enabled - so a negative
+`homeFoodPerPerson` means the arm that has preparation removed ends with less food, and a positive `projectsAdopted`
+means removing preparation raises project starts.
+
 The nudge floor for `homeFoodPerPerson` is 0.04 to 0.16 with intervals of about +-0.3, and for `hungerExposure` 0.00024 to
 0.00158 - so the food effect is far outside it and the hunger effect is exactly the size of it.
 
 **What this establishes.** The mechanism runs without anybody being staged into it, by both cues, and it really moves food
 into home stores: roughly double the food within a household's reach when winter arrives, in 22 of 24 seeds.
 
-**What it does not establish, and this is the honest half.** No welfare benefit was measured. Hunger exposure, critical-need
-counts, mean hunger, deaths and mood are all indistinguishable from chance in both windows. In a 28-person Normal world
-food is simply not scarce enough for one day's reserve to show. **Nothing here says preparation prevents starvation**, and
-the reserve is about one day's eating against a four-day winter.
+**What it does not establish, and this is the honest half.** No welfare benefit was measured. Hunger exposure,
+critical-need counts, mean hunger, deaths and mood are all indistinguishable from chance in both windows. **Nothing here
+says preparation prevents starvation**, and the reserve is about one day's eating against a four-day winter.
+
+**And it does not establish WHY.** Reserve size, timing, access to the store at the moment of need, the work the
+preparation displaces, low baseline hardship in these runs, and the resolution 24 seeds buy are all live explanations;
+these runs separate none of them. Any of those could be tested by varying one thing with the rest held - the reserve
+size alone, or the window alone - and no such test has been run. "No welfare benefit was demonstrated" is therefore the
+whole of the claim; it is not "the feature does nothing", because it demonstrably moves food.
 
 **What it costs.** About 3.6% of all person-time over eight days (3.8% over twelve), and 15.3 fewer tool and repair
 projects started over 12 days, in every one of the 24 seeds. Projects finished and tools held did not move, so what the
@@ -563,6 +572,7 @@ time comes out of is the trying, not the finishing.
 
 **The open question.** Whether a village that is actually short would benefit. The `town` profile (100 people in one camp,
 which has a real famine in it) is where that could be answered; that run has not been made. The command is in `HANDOFF.md`.
+A second null there would be consistent with every explanation listed above and would single out none of them.
 
 ## A town of a hundred: what killed it, and what did not (`scripts/famine.ts`)
 

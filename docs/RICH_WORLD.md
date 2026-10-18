@@ -77,13 +77,18 @@ floor; `prep_out8/`, `prep_out12/`, plan in `prep_out8/RUN.md`, full-precision t
   CI [-1.05, -0.54], lower in 22 of 24 seeds) against a nudge floor of 0.04-0.16. After winter, 0.73 against 0.29.
 * **It did not improve anybody's welfare in this measurement.** Hunger exposure 0.00303 against 0.00261 over 8 days and
   0.00973 against 0.00882 over 12 - both intervals straddling zero, both the size of the noise floor. `belowCritical`,
-  `meanHunger`, `deaths`, `meanMood` and `lowMood`: all indistinguishable from chance. In a 28-person Normal world food is
-  not scarce enough for one day's reserve to show.
+  `meanHunger`, `deaths`, `meanMood` and `lowMood`: all indistinguishable from chance. WHY is not established: reserve
+  size, timing, access to the store when it is needed, the work the preparation displaces, low baseline hardship in
+  these runs and plain statistical power are all live explanations and nothing here separates them. "No welfare benefit
+  was demonstrated" is the whole of the claim, and is not the same as "the feature does nothing".
 * **It costs.** 8.1 person-days over 8 days and 12.4 over 12 - about 3.6% of all person-time - and 15.3 fewer tool and
   repair projects STARTED over 12 days, in all 24 seeds. Projects finished and tools held are unchanged.
 
+Every figure above is **the arm minus `control`**, and `control` is the run with preparation enabled: a negative
+`homeFoodPerPerson` means the arm without preparation ends with less, so preparation raises it.
+
 Whether a village that is actually short would benefit is open; the `town` profile is where it could be answered, and that
-run has not been made. See `HANDOFF.md` for the command.
+run has not been made. See `HANDOFF.md` for the command, and for why a second null there would settle nothing on its own.
 
 Also in this pass, not rich-gated: the town survives its first lean season (fishing spots on a short shore fill as fast as the
 town's share would; the lean-to ring grows with the camp), and a settlement may hold one workplace of a kind per village's
@@ -91,7 +96,7 @@ worth of people (`rules.ts facilitiesPerKind`).
 
 ## What was checked
 
-Household food preparation has `tests/household_preparation.test.ts` (40 contract tests, one group per acceptance criterion),
+Household food preparation has `tests/household_preparation.test.ts` (43 contract tests, one group per acceptance criterion),
 `tests/v1_continuation.test.ts` (a version-1 world saved, loaded and continued against a reference recorded before version 2
 existed) and `scripts/browser/preparation_check.mjs` (19 assertions on behaviour and displayed text in a real headless Chrome;
 nothing in it inspects the drawing). Its lab switch is `rich-no-stock`.

@@ -97,6 +97,16 @@ the rules version as well, so a gate cannot silently check one generation agains
 source provenance: two runs of the same version from different revisions are still different experiments, so use a fresh
 directory after any source change and record HEAD and the diff.
 
+**The first change at a new rules version cannot be gated, and the policy should say so.** `scripts/gates.ts` compares
+like with like and refuses otherwise, rules version included. Every recorded baseline (`docs/gates.json`,
+`docs/gates-rich.json`) is unversioned, so the first run at a new version is refused by name - correctly, since "both
+rich" has never meant "the same rules". Recording a baseline from the candidate and then checking the candidate against
+it is not acceptance; it is a comparison with itself. What stands in its place, and what was actually done for version 2
+(`gate_v2_unversioned/FINDING.md`): the older generation proved unchanged by the goldens, the version-1 continuation
+reference and an unversioned ensemble at the gated profile; the test suite; a bounded ablation of the new behaviour
+against a nudge floor; and the browser checks. A baseline for the new version is recorded AFTER the merge, so that the
+next change at that version can be gated properly.
+
 **Changing behaviour from here on.** A change that is meant to alter outcomes - a new decision rule, or a tuned parameter that
 moves them - raises `CURRENT_RULES_VERSION` and adds the new number to `SUPPORTED_RULES_VERSIONS`. The new behaviour is gated
 by `runsRulesVersion(world, N)` at the point where it is decided, with the previous branch kept for worlds that run an earlier

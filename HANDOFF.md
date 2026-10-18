@@ -92,14 +92,26 @@ read were written into `prep_out8/RUN.md` **before** either run. Full-precision 
 | person-days preparing (8 d / 12 d) | 8.1 / 12.4 | 0 / 0 | | | 24 lower |
 | tool and repair projects STARTED (12 d) | 86.0 | 101.3 | +15.3 | [+12.2, +18.4] | 24 higher |
 
+**Reading the table.** Every `diff` is **the arm minus `control`**, and `control` is the run WITH preparation enabled.
+So `homeFoodPerPerson -0.80` means the arm with preparation removed ends with 0.80 units a head LESS - that is,
+preparation raises it. `projectsAdopted +15.3` means removing preparation RAISES project starts by 15.3 - that is,
+preparation costs that many.
+
 Nudge floor: 0.04-0.16 for `homeFoodPerPerson`, 0.00024-0.00158 for `hungerExposure`.
 
 **Established.** The mechanism runs on its own, by both cues, and roughly doubles the food within a household's reach when
 winter arrives (1.62 units a head against 0.83).
 
 **Not established.** Any welfare benefit. Hunger exposure, `belowCritical`, mean hunger, deaths and mood are all
-indistinguishable from chance in both windows. In a 28-person Normal world food is not scarce enough for one day's reserve
-to show.
+indistinguishable from chance in both windows.
+
+Why it was not detected is **not** established by these runs. Several explanations are live and none has been tested
+against the others: the reserve may be too small to matter; it may arrive too late, or be eaten before it is needed; a
+household may not reach its own store at the moment it is hungry; the time it takes from other work may offset what it
+gains; the baseline hardship in these runs may be low enough that there was little to improve; or the effect may be real
+but smaller than 24 seeds can resolve. Saying which would need a test that separates them. Until then "no welfare
+benefit was demonstrated" is the whole of it - which is not the same as "the feature does nothing": it demonstrably
+moves food, and that is reported above.
 
 **The cost, measured.** About 3.6% of all person-time over eight days (3.8% over twelve), and 15.3 fewer tool and repair
 projects *started* over 12 days, in every one of the 24 seeds. Projects finished and tools held did not move.
@@ -127,9 +139,14 @@ npx vite-node scripts/lab_report.ts -- prep_town_out
 ```
 
 Paste back only `prep_town_out\report.txt`, never the progress lines. Read `hungerExposure`, `deaths`, `belowCritical` and
-`homeFoodPerPerson` for `rich-no-stock` against the nudge arm. If hunger exposure still straddles zero there, the honest
-conclusion is that this reserve is too small to matter and the size is the next thing to reconsider - not that the mechanism
-is broken.
+`homeFoodPerPerson` for `rich-no-stock` against the nudge arm, remembering that each figure is the arm minus the
+control.
+
+What it can and cannot settle. A resolved difference in a village that is genuinely short would be evidence of welfare
+benefit under hardship. A second null would **not** show that the reserve is too small: it would be consistent with
+that, and equally with timing, access, the work it displaces, or an effect below what 24 seeds resolve. Which of those
+it is would need a test that separates them - varying the reserve size alone, or the window alone, with everything else
+held - and no such test has been run. Do not read a second null as a mandate to make the reserve bigger.
 
 ## How version 1 is proved not to have changed
 
@@ -146,26 +163,113 @@ in the reference are `night`, `repair` and `tool`.
 **Re-recording that file to make a change pass would delete the only evidence of the leak.** A failure there means the gate
 is wrong.
 
+## The acceptance gate
+
+AGENTS.md names the ensemble gates as the acceptance test for a behavioural change. The full argument and every number
+is in `gate_v2_unversioned/FINDING.md`; in short:
+
+* **No recorded gate can accept a version-2 change.** `scripts/gates.ts` refuses a comparison across rules versions, and
+  both baselines are unversioned (`docs/gates.json`, authored; `docs/gates-rich.json`, rich). A version-2 run is refused
+  with "rules version unversioned vs 2" - the guard working. Recording a version-2 baseline from this candidate and
+  then checking the candidate against it would be comparing it with itself, so that was not done.
+* **The gate that does apply was run**: an unversioned rich Large world, 24 seeds, 12 days, against
+  `docs/gates-rich.json`. Ten of eleven gated metrics pass. `tools` FAILS - 140.8 against the band [143.9, 178.7],
+  recorded 161.3.
+* **That failure belongs to `main`.** The same ensemble and gate on `main` (`5b7a941`), run in a temporary worktree now
+  removed and kept under `gate_v2_unversioned/main_5b7a941/`, fails identically: 140.8, same band, every other line the
+  same to the digit. `docs/gates-rich.json` was recorded 56 commits before `main` (`e8118fe`) and is stale. It is
+  deliberately NOT re-recorded on this branch.
+* **The same run is new preservation evidence.** All 24 seeds have identical final hashes on the two revisions and every
+  metric both record is equal on all 24; the only difference is the ten metric fields this branch adds. An unversioned
+  rich Large world at 12 days is therefore bit-for-bit unchanged - a profile and duration neither the goldens nor the
+  continuation reference reaches.
+
+**What acceptance rests on instead**, since the gate cannot be applied to a version-2 run: the older generation provably
+unchanged (goldens, continuation reference, the Large ensemble above); the suite; the preparation ensembles with their
+ablation and nudge floor; the two browser checks.
+
+**Two baselines to record after merge**, and explicitly not as evidence for it - each about 4 minutes on 24 cores, and
+recording asserts nothing:
+
+```
+node scripts/lab.mjs --out gates_rich_refresh --seeds 24 --fork 0 --days 12 --profile large --dynamics rich-unversioned --branches none
+```
+
+```
+npx vite-node scripts/gates.ts -- gates_rich_refresh --record --file docs/gates-rich.json --force
+```
+
+```
+node scripts/lab.mjs --out gates_v2_out --seeds 24 --fork 0 --days 12 --profile large --branches none
+```
+
+```
+npx vite-node scripts/gates.ts -- gates_v2_out --record --file docs/gates-v2.json
+```
+
+The first replaces a baseline that is stale and already failing; the second gives version 2 a reference so the NEXT
+behavioural change can be gated.
+
+## Review of the implementation
+
+Self-review. **No independent reviewer has seen this branch**, and nothing below should be read as if one had.
+
+A first pass over the completed diff found one real defect (`9cfad02`): the step threshold counted all six foods while
+`optDepositFood` stores only four, so somebody carrying five units of meat settled on a trip home the engine never
+offers and stayed on it until the deadline. Fixed with a test; both ensembles re-run; 23 of 24 seeds byte-identical.
+
+A second pass over the areas the closeout brief names:
+
+| area | verdict | evidence |
+|---|---|---|
+| version-1 and unversioned preservation | PASS | goldens; `tests/v1_continuation.test.ts`; 24/24 Large unversioned seeds identical to `main` |
+| food ownership | PASS | `provision.ts` filters `b.hh !== p.hhId`; a test puts a neighbour's larger, fuller `house` next door and the plan still targets her own hut |
+| storage access | PASS | `facilities.ts mayDeposit` is true for a home; the deposit is the ordinary option, matched by its own key |
+| physical delivery | PASS | `creditStocked` runs in the deposit handler as each kind transfers, so only food that moved is credited |
+| contribution vs claimed completion | PASS | `done` needs `inStore >= want` AND `worked > 0`; otherwise "came to hold N without their doing" |
+| judged on belief, not the world | PASS | a test fills her store while she is away; the plan stays active until she has seen it |
+| urgent-need interruption | PASS | set aside with a reason; tested |
+| stale plans, impossible actions | PASS, with one limit | the deadline always ends it; the "gave up after 3 tries" path needs a `stepTarget`, which a `forage` step has not, so a plan with no food anywhere waits out its deadline (1-2 days) rather than ending sooner |
+| several members, no double counting | PASS | the target is a LEVEL the store should reach, not a quota each owes; tested |
+| save/load, deterministic continuation | PASS | in-process and in the page (10 preparations restored with cue, target, units) |
+| lab-switch isolation, incl. forks with live plans | PASS | `runBranch` restores in a `finally`; a live plan at a fork ends with "no longer part of these rules" |
+| inspector claims match recorded state | PASS, after a fix | the browser check compares the card's figure with the world's; `76dbfdf` fixes "1 units" to "1 unit" |
+
+Two commits came out of it: `76dbfdf` and `26a6d18`. Each new test was confirmed to FAIL when its rule is removed.
+
 ## Verification
 
-All run on this branch at `9cfad02`, the last commit that changes behaviour.
+All run on this branch at `26a6d18`, the branch head when they were run.
 
 | | result |
 |---|---|
 | `npm run typecheck` | clean |
-| `npm test` | 79 files, **791 tests**, all passing |
+| `npm test` | 79 files, **793 tests**, all passing |
 | `npm run build` | clean |
 | `git diff --check` | clean |
 | `npx vite-node scripts/golden.ts` | all golden fingerprints match (not re-recorded) |
 | `npx vite-node scripts/v1_reference.ts` | version-1 continuation unchanged |
-| `node scripts/browser/current_world_check.mjs http://127.0.0.1:5184/` | 15/15 |
-| `node scripts/browser/preparation_check.mjs http://127.0.0.1:5184/` | 19/19 |
+| `node scripts/browser/current_world_check.mjs http://127.0.0.1:5186/` | 15/15 |
+| `node scripts/browser/preparation_check.mjs http://127.0.0.1:5186/` | 19/19 |
+| `npx vite-node scripts/gates.ts -- gate_v2_unversioned --file docs/gates-rich.json` | 10 of 11 pass; `tools` fails identically on `main` |
 
 Both ensembles were re-run at `9cfad02` into emptied directories, because `9cfad02` changes behaviour. The earlier pair,
-made at `83c770e`, was not kept: one directory name must not hold two sets of numbers. The difference between them was
-small (the food effect moved from -0.78 to -0.80) and changed no conclusion.
+made at `83c770e`, is **not** in the working tree - one directory name must not hold two sets of numbers - but it is
+**retained in Git history and retrievable**, which is where it should be looked for rather than being treated as lost:
 
-The acceptance criteria are `tests/household_preparation.test.ts`, one `describe` group per criterion (40 tests):
+```
+git show 3c71703:prep_out8/report.txt
+git show 3c71703 --stat -- prep_out8 prep_out12
+git checkout 3c71703 -- prep_out8 prep_out12     # only into a scratch checkout, never over the current ones
+```
+
+All 53 files of that earlier pair are at `3c71703`. Reusing the directory NAME rather than taking a new one was a
+departure from the task's own rule and is recorded as such here; it was not repaired by re-running, because re-running
+to tidy history would have cost more evidence than it bought. Every future run after a source change takes a new
+directory. The difference between the two pairs was small (the food effect moved from -0.78 to -0.80) and changed no
+conclusion.
+
+The acceptance criteria are `tests/household_preparation.test.ts`, one `describe` group per criterion (43 tests):
 1 evidence that may start a preparation, 2 situations that may not, 3 the action is an ordinary one and really moves food,
 4 completion is about the food and not the label, 5 urgency/absence/staleness end it safely, 6 determinism and save/load,
 7 version-1 and unversioned worlds, 8 the lab switch, 9 the app and the command line agree. A tenth group holds the reserve
@@ -177,7 +281,10 @@ These stand. None is fixed by this pass.
 
 - **Household preparation shows no measured welfare benefit.** It moves food and costs time; that is all the measurement
   supports. Do not describe it as preventing starvation.
-- The measurement is on the **Normal** profile only, which is food-rich. The `town` run above is the missing evidence.
+- The measurement is on the **Normal** profile only. Whether a village under real pressure would benefit is untested;
+  the `town` run above is the missing evidence. Why no benefit showed on Normal is also untested - reserve size, timing,
+  access, displaced work, low baseline hardship and plain statistical power are all live explanations and none has been
+  separated from the others.
 - The Stage 4 pilots are **one seed, one day** each. Days 4, 8 and 12 are missing, not zero; `hall` and `ask_info` were never
   exercised; zero cross-camp contact means unexercised in that window, nothing more.
 - Stage 4 known-cohort coverage is low: the plan's day-0 cohort rule leaves 38 of 100 people unknown in a Large world, so
@@ -217,7 +324,12 @@ These stand. None is fixed by this pass.
 | `7d7197c` | A viewer can follow a preparation from the evidence to the food, in the page |
 | `4e629c9` | Document what was built, what was measured and what was not shown |
 | `9cfad02` | Review of the diff: a reserve could settle on a trip home it could not make |
-| (last) | The measurement re-run at `9cfad02`, and the documented numbers brought to it |
+| `335d91d` | The measurement re-run at `9cfad02`, and the documented numbers brought to it |
+| `72640d7` | The PR blocker and the prepared body, written down |
+| `76dbfdf` | Review of the inspector text: a person who put one unit by was told "1 units" |
+| `26a6d18` | Discriminating tests for two review areas: whose store it is, and whose knowledge |
+| `571a404` | The acceptance gate resolved: none can accept version 2, and the one that runs already failed on `main` |
+| (last) | Unsupported interpretations corrected; provenance, gate and review findings written up |
 
 `2a4a704` is the only commit without the required "Existing modules touched, and why" line: it touched no existing modules
 (four new files), and it was not amended because rewriting history is a hard rail for this task.

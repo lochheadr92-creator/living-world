@@ -47,15 +47,19 @@ Re-recording that file to make a change pass would delete the only evidence of a
 | person-days preparing (8 d / 12 d) | 8.1 / 12.4 | 0 / 0 | | | 24 lower |
 | tool/repair projects STARTED (12 d) | 86.0 | 101.3 | +15.3 | [+12.2, +18.4] | 24 higher |
 
+**Reading the table:** every `diff` is **the arm minus `control`**, and `control` is the run *with* preparation enabled. So `homeFoodPerPerson −0.80` means removing preparation leaves 0.80 units a head *less* — preparation raises it; `projectsAdopted +15.3` means removing preparation *raises* project starts — preparation costs that many.
+
 Nudge floor: 0.04–0.16 for `homeFoodPerPerson`, 0.00024–0.00158 for `hungerExposure`.
 
 **Established** — the mechanism runs on its own, by both cues, and roughly doubles the food within a household's reach when winter arrives.
 
-**Not established** — any welfare benefit. Hunger exposure, `belowCritical`, mean hunger, deaths and mood are all indistinguishable from chance in both windows. In a 28-person Normal world food is not scarce enough for one day's reserve to show.
+**Not established** — any welfare benefit. Hunger exposure, `belowCritical`, mean hunger, deaths and mood are all indistinguishable from chance in both windows.
+
+Why it was not detected is **not** established. Reserve size, timing, access to the store at the moment of need, the work the preparation displaces, low baseline hardship in these runs, and plain statistical power are all live explanations, and nothing here separates them. “No welfare benefit was demonstrated” is the whole of the claim — not “the feature does nothing”, since it demonstrably moves food.
 
 **The cost, measured** — about 3.6% of all person-time, and 15.3 fewer tool and repair projects *started* over 12 days, in all 24 seeds. Projects finished and tools held did not move.
 
-The one outstanding run (a `town`-profile ensemble, where a village is actually short) is beyond the in-session budget and is left as an exact command in `HANDOFF.md`.
+The one outstanding run (a `town`-profile ensemble, where a village is actually short) is beyond the in-session budget and is left as an exact command in `HANDOFF.md`. A second null there would *not* establish that the reserve is too small; it would be consistent with that and with every other explanation above, and separating them needs a test designed for it.
 
 ## The reproducible example, autonomous, in the running app
 
@@ -71,24 +75,58 @@ Another household's preparation finishes in the same window: *"done: put 5 units
 
 ## Acceptance criteria
 
-`tests/household_preparation.test.ts`, one `describe` group per criterion (41 tests): 1 evidence that may start a preparation · 2 situations that may not · 3 the action is an ordinary one and really moves food · 4 completion is about the food, not the label · 5 urgency, absence and staleness end it safely · 6 determinism and save/load · 7 version-1 and unversioned worlds · 8 the lab switch · 9 the app and the command line agree. A tenth group holds the reserve arithmetic to the documented numbers.
+`tests/household_preparation.test.ts`, one `describe` group per criterion (43 tests): 1 evidence that may start a preparation · 2 situations that may not · 3 the action is an ordinary one and really moves food · 4 completion is about the food, not the label · 5 urgency, absence and staleness end it safely · 6 determinism and save/load · 7 version-1 and unversioned worlds · 8 the lab switch · 9 the app and the command line agree. A tenth group holds the reserve arithmetic to the documented numbers.
 
-## Verification (at `9cfad02`, the last behavioural commit)
+## The acceptance gate
+
+AGENTS.md names the ensemble gates as the acceptance test for a behavioural change. Resolved here, with the evidence in `gate_v2_unversioned/` (`FINDING.md` has the full argument).
+
+**No recorded gate can accept a version-2 change.** `scripts/gates.ts` refuses a comparison across rules versions, and both baselines are unversioned (`docs/gates.json`, authored; `docs/gates-rich.json`, rich). A version-2 run is refused with *"rules version unversioned vs 2"* — the guard working, not a defect. Recording a version-2 baseline from this candidate and then checking the candidate against it would be comparing it with itself, so that was not done.
+
+**The gate that does apply was run** — an unversioned rich Large world, 24 seeds, 12 days, against `docs/gates-rich.json`. Ten of eleven gated metrics pass. `tools` **FAILS**: 140.8 against the band [143.9, 178.7], recorded 161.3.
+
+**That failure belongs to `main`, not to this branch.** The same ensemble and gate were run on `main` (`5b7a941`) in a temporary worktree (removed; its output kept under `gate_v2_unversioned/main_5b7a941/`). `main` fails identically — 140.8, same band, every other line the same to the digit. `docs/gates-rich.json` was recorded 56 commits before `main` (`e8118fe`) and is stale. Re-recording it on this branch would look like a candidate recording its own pass, so it is left for merged `main`, with the command written down in `FINDING.md`.
+
+**And the same run is new preservation evidence.** All 24 seeds have identical final hashes on the two revisions, and every metric both record is equal on all 24; the only difference is the ten metric *fields* this branch adds. So an unversioned rich Large world at 12 days is bit-for-bit unchanged — a profile and duration neither the goldens (80×80 and scenes) nor the version-1 continuation reference (`normal`) reaches.
+
+**What acceptance therefore rests on,** since the repository's gate cannot be applied to a version-2 run: the older generation provably unchanged (goldens, the continuation reference, and the Large ensemble above); the test suite; the preparation ensembles with their ablation and nudge floor; and the two browser checks. Two baselines should be recorded **after** merge and explicitly not as evidence for it — a refresh of the stale `docs/gates-rich.json`, and a new `docs/gates-v2.json`.
+
+## Verification (at `26a6d18`, the branch head at the time of writing)
 
 | | result |
 |---|---|
 | `npm run typecheck` | clean |
-| `npm test` | 79 files, **791 tests**, all passing |
+| `npm test` | 79 files, **793 tests**, all passing |
 | `npm run build` | clean |
 | `git diff --check` | clean |
 | `npx vite-node scripts/golden.ts` | all fingerprints match (**not** re-recorded) |
 | `npx vite-node scripts/v1_reference.ts` | version-1 continuation unchanged |
 | `node scripts/browser/current_world_check.mjs …` | 15/15 |
 | `node scripts/browser/preparation_check.mjs …` | 19/19 |
+| `scripts/gates.ts` against `docs/gates-rich.json` | 10 of 11 pass; `tools` fails **identically on `main`** (see above) |
 
-## Review of the diff
+## Review of the implementation (self-review — no independent reviewer saw this)
 
-Reading the completed diff found one real defect, fixed in `9cfad02` with a test: `optDepositFood` stores only grain, fish, fruit and berries, but the step threshold counted all six foods — so somebody carrying five units of meat settled on "take the food home", a step the engine never offers, and stayed on it until the deadline. Both ensembles were re-run at the fix into emptied directories; 23 of 24 seeds were byte-identical and no conclusion changed.
+A first pass over the completed diff found one real defect, fixed in `9cfad02` with a test: `optDepositFood` stores only grain, fish, fruit and berries, but the step threshold counted all six foods — so somebody carrying five units of meat settled on "take the food home", a step the engine never offers, and stayed on it until the deadline. Both ensembles were re-run at the fix into emptied directories; 23 of 24 seeds were byte-identical and no conclusion changed.
+
+A second, focused pass over the areas the closeout brief names:
+
+| area | verdict | evidence |
+|---|---|---|
+| version-1 and unversioned preservation | **PASS** | goldens unchanged; `tests/v1_continuation.test.ts`; and 24/24 Large unversioned seeds identical to `main` (above) |
+| food ownership | **PASS** | `provision.ts:149` filters `b.hh !== p.hhId`; new test puts a neighbour's larger, fuller `house` next door and the plan still targets her own hut — it fails if the filter is removed |
+| storage access | **PASS** | `facilities.ts mayDeposit` returns true for a home (no `ops`); the deposit is the ordinary option, matched by its own key |
+| physical delivery | **PASS** | `creditStocked` is called from the deposit handler as each kind transfers, so only food that moved is credited |
+| contribution vs claimed completion | **PASS** | `done` needs `inStore >= want` **and** `worked > 0`; a store filled otherwise ends the plan as "came to hold N without their doing" |
+| judged on belief, not the world | **PASS** | new test fills her store while she is away: the plan stays active until she has seen it — it fails if `stockOutcome` reads the building |
+| urgent-need interruption | **PASS** | `reviewIntentions` sets it aside with a reason; tested |
+| stale plans, impossible actions | **PASS, with one noted limit** | the deadline always ends it; the "gave up after 3 tries" path needs `stepTarget`, which a `forage` step does not have, so a plan with no food anywhere is ended by the deadline alone (1–2 days), not sooner |
+| several members, no double counting | **PASS** | the target is a *level* the store should reach, not a quota each owes; tested |
+| save/load, deterministic continuation | **PASS** | tested in-process and in the page (10 preparations restored with cue, target and units) |
+| lab-switch isolation, incl. forks with live plans | **PASS** | `runBranch` restores in a `finally`; a live plan at a fork ends with "no longer part of these rules"; tested |
+| inspector claims match recorded state | **PASS, after a fix** | the browser check compares the card's figure with the world's; `76dbfdf` fixes "1 units" → "1 unit" in the card and the record |
+
+Two commits came out of the second pass: `76dbfdf` (the singular) and `26a6d18` (discriminating tests for the two areas that had been settled only by reading). Each new test was confirmed to fail when its rule is removed.
 
 ## Commits
 
@@ -104,6 +142,10 @@ Reading the completed diff found one real defect, fixed in `9cfad02` with a test
 | `4e629c9` | Document what was built, what was measured and what was not shown |
 | `9cfad02` | Review of the diff: a reserve could settle on a trip home it could not make |
 | `335d91d` | The measurement re-run at `9cfad02`, and the documented numbers brought to it |
+| `72640d7` | The PR blocker and the prepared body, written down |
+| `76dbfdf` | Review of the inspector text: "1 units" → "1 unit" |
+| `26a6d18` | Discriminating tests for two review areas: whose store, whose knowledge |
+| `571a404` | The acceptance gate resolved: none can accept version 2, and the one that runs already failed on `main` |
 
 `2a4a704` is the only commit without the required "Existing modules touched, and why" line: it touched no existing modules (four new files), and it was not amended because rewriting history is a hard rail for this task.
 

@@ -63,8 +63,11 @@ A cost without a benefit is a real result and is reported as one. So is a null.
 
 This directory was DELETED and regenerated at the HEAD below. An earlier pair of runs was made at `83c770e`, before a
 review of the diff found that a reserve could settle on a trip home it could not make (`9cfad02`). That changed
-behaviour, so those results do not describe this code and were not kept: the repository must not hold two sets of
-numbers for one directory name.
+behaviour, so those results do not describe this code and are not in the working tree: the repository must not hold two
+sets of numbers for one directory name. They are **retained in Git history** and all 53 files can be retrieved with
+`git show 3c71703:prep_out8/report.txt` or `git checkout 3c71703 -- prep_out8 prep_out12` into a scratch checkout.
+Reusing this directory NAME instead of taking a new one departed from the rule that a run after a source change gets a
+fresh directory; that is recorded rather than repaired, and later runs take new directories.
 
 
 - HEAD: 9cfad02  (branch `claude/household-preparation-v2`)
