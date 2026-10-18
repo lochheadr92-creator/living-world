@@ -18,8 +18,8 @@ import { beliefsByKind } from './optutil';
 import { recentFailure } from './knowledge';
 import {
   CARRY_TO_STORE,
-  foodCarried,
   foodInBelief,
+  foodToStore,
   homeStoreBelief,
   notePrepAdopted,
   notePrepEnded,
@@ -492,7 +492,7 @@ function stockStep(ctx: Ctx, i: Intention): Step {
   const want = i.reserve ?? 0;
   const short = Math.max(0, want - foodInBelief(home));
   if (short <= 0) return { kind: 'none', target: home.id, item: null, step: 'the store has what it needs', key: null, blocked: '' };
-  if (foodCarried(p) >= CARRY_TO_STORE) {
+  if (foodToStore(p) >= CARRY_TO_STORE) {
     return { kind: 'store', target: home.id, item: null, step: `take the food home (${short} more to put by)`, key: `deposit:${home.id}:food`, blocked: '' };
   }
   return { kind: 'forage', target: 0, item: null, step: `gather food to put by (${short} more)`, key: null, blocked: '' };

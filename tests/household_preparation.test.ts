@@ -253,6 +253,21 @@ describe('3. the chosen action goes through ordinary validation and changes the 
     expect(intentFor(ann, dep!)?.id).toBe(plan.id);
   });
 
+  it('a pack full of what no store will take is not a reason to walk home', () => {
+    // `optDepositFood` offers to store grain, fish, fruit and berries and nothing else. Settling on "take the food home" on
+    // the strength of five units of meat would be settling on a step the engine never offers.
+    const { w, ann } = scene('prep-meat');
+    const plan = reviewIntentions(ctxFor(w, ann))!;
+    addItem(ann.inv, 'meat', 6);
+    reviewIntentions(ctxFor(w, ann));
+    expect(plan.stepKind, 'meat cannot be put down, so there is still food to gather').toBe('forage');
+    addItem(ann.inv, 'berries', CARRY_TO_STORE);
+    reviewIntentions(ctxFor(w, ann));
+    expect(plan.stepKind, 'and berries can').toBe('store');
+    const ctx = ctxFor(w, ann);
+    expect(ctx.options.some((o) => o.key === plan.stepKey), 'the engine really offers that step').toBe(true);
+  });
+
   it('carrying it out moves real food out of the pack and into the real store, and credits only what moved', () => {
     const { w, ann, home } = scene('prep-deliver');
     const plan = reviewIntentions(ctxFor(w, ann))!;

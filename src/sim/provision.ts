@@ -81,7 +81,10 @@ export const LOW_FOOD_DAYS = 0.5;
 /** a shortfall smaller than this is not worth a plan of its own; the ordinary stockpile option already covers it */
 export const MIN_SHORTFALL = 2;
 
-/** carrying at least this much food, the thing to do is take it home: the deposit option needs a surplus of 2 over what a person keeps back */
+/**
+ * Carrying at least this much food that can actually be put down, the thing to do is take it home: the deposit option needs a
+ * surplus of 2 over the 2 or 3 a person keeps back for themselves (options_work.ts optDepositFood).
+ */
 export const CARRY_TO_STORE = 5;
 
 /** which cue set a preparation going. See the header: these are kept apart on purpose. */
@@ -101,9 +104,18 @@ export const foodPreparationOn = (): boolean => preparation;
 /** Does this world run household food preparation at all? Rich, at least version 2, and not switched off by the lab. */
 export const preparesFood = (world: World): boolean => preparation && isRich(world) && runsRulesVersion(world, PREPARATION_FROM_VERSION);
 
+/** Everything people eat. What a store HOLDS is counted with this: meat and bread in a home store are food like any other. */
 const FOODS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
-/** Is this something people eat? One list, used by the deposit that credits a reserve and by every count of food here. */
+/** Is this something people eat? Used by the deposit that credits a reserve, and by every count of what a store holds. */
 export const isFoodKind = (k: ItemKind): boolean => (FOODS as readonly ItemKind[]).includes(k);
+
+/**
+ * The food a trip home would actually put down. It is NOT the same list: `optDepositFood` offers to store grain, fish, fruit
+ * and berries and nothing else, and `foodCount` (optutil.ts) counts the same four. Deciding to walk home on the strength of
+ * five units of meat would settle on a step the engine never offers, so the step threshold reads this list and the question
+ * "has this household anything to hand" reads the full one.
+ */
+const STORABLE: readonly FoodKind[] = ['grain', 'fish', 'fruit', 'berries'];
 
 /** units of food in a remembered container, from the person's own belief and nothing else */
 export function foodInBelief(b: Belief): number {
@@ -112,10 +124,17 @@ export function foodInBelief(b: Belief): number {
   return n;
 }
 
-/** units of food this person is carrying */
+/** units of food this person is carrying, of any kind: what the household has to hand */
 export function foodCarried(p: Person): number {
   let n = 0;
   for (const k of FOODS) n += p.inv[k] ?? 0;
+  return n;
+}
+
+/** of that, the units a trip home could actually put into the store */
+export function foodToStore(p: Person): number {
+  let n = 0;
+  for (const k of STORABLE) n += p.inv[k] ?? 0;
   return n;
 }
 
