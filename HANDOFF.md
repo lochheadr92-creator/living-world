@@ -57,13 +57,13 @@ node scripts/browser/preparation_check.mjs "http://127.0.0.1:5184/"      ->  19/
 Seed `river`, profile `normal`, arrivals off, the page's own clock STOPPED and the world advanced by an exact number of
 ticks (so nothing races requestAnimationFrame and the tick numbers mean something).
 
-* At about tick 2570, **Ben of household 1109** takes on 8 units because "there is next to nothing at home to fall back on"
+* At tick 2567, **Ben of household 1109** takes on 8 units because "there is next to nothing at home to fall back on"
   (cue `hardship`). His step is gathering.
 * By about tick 5000 he has put **3 units into his own home, building 1110**, which held 0 when the example started. The card
   reads: *"Put 8 units of food by for the household. Step: gather food to put by (5 more) - under way (Gathering wild
   grain). 3 of 8 units put by so far. Why: there is next to nothing at home to fall back on."*
 * Another household's preparation reaches a verdict in the same window: *"done: put 5 units of food by; the store holds 13"*.
-* Ten preparations then survive a save and a load with their cue, target and units intact (tick 5569, state `b3a01dad`), and
+* Ten preparations then survive a save and a load with their cue, target and units intact (tick 5567, state `92fe5e72`), and
   the world comes back as rules version 2.
 * A version-1 world made in the same page forms **0** preparations while its 77 other plans carry on; a world started after
   it is version 2 again; and loading the version-1 save puts it back on version 1, not on the latest.
@@ -80,28 +80,28 @@ read were written into `prep_out8/RUN.md` **before** either run. Full-precision 
 
 | | control | no preparation | diff | 95% CI | of 24 seeds |
 |---|---|---|---|---|---|
-| preparations taken on (8 d) | 37.3 | 0 | -37.3 | [-39.5, -35.1] | 24 lower |
-| from the season / from hardship | 6.6 / 30.4 | 0 / 0 | | | |
-| finished / given up (8 d) | 15.3 / 13.9 | 0 / 0 | | | |
-| units really put into home stores (8 d) | 166.4 | 0 | -166.4 | [-183.1, -149.7] | 24 lower |
-| **home-store food per person entering winter** | **1.61** | **0.83** | **-0.78** | **[-1.04, -0.52]** | **22 lower** |
-| the same after winter (12 d) | 0.74 | 0.29 | -0.45 | [-0.67, -0.23] | 18 lower |
-| hunger exposure (8 d) | 0.00302 | 0.00261 | -0.00041 | [-0.00155, +0.00073] | 8 lower, 8 higher |
-| hunger exposure (12 d) | 0.00984 | 0.00882 | -0.00102 | [-0.00363, +0.00159] | 11 lower, 12 higher |
+| preparations taken on (8 d) | 37.3 | 0 | -37.3 | [-39.6, -35.1] | 24 lower |
+| from the season / from hardship | 6.3 / 31.0 | 0 / 0 | | | |
+| finished / given up (8 d) | 16.0 / 13.5 | 0 / 0 | | | |
+| units really put into home stores (8 d) | 166.5 | 0 | -166.5 | [-183.2, -149.7] | 24 lower |
+| **home-store food per person entering winter** | **1.62** | **0.83** | **-0.80** | **[-1.05, -0.54]** | **22 lower** |
+| the same after winter (12 d) | 0.73 | 0.29 | -0.44 | [-0.66, -0.22] | 18 lower |
+| hunger exposure (8 d) | 0.00303 | 0.00261 | -0.00043 | [-0.00156, +0.00071] | 8 lower, 8 higher |
+| hunger exposure (12 d) | 0.00973 | 0.00882 | -0.00091 | [-0.00355, +0.00173] | 11 lower, 12 higher |
 | person-days preparing (8 d / 12 d) | 8.1 / 12.4 | 0 / 0 | | | 24 lower |
-| tool and repair projects STARTED (12 d) | 85.7 | 101.3 | +15.6 | [+12.8, +18.2] | 23 higher |
+| tool and repair projects STARTED (12 d) | 86.0 | 101.3 | +15.3 | [+12.2, +18.4] | 24 higher |
 
-Nudge floor: 0.03-0.08 for `homeFoodPerPerson`, 0.00025-0.00148 for `hungerExposure`.
+Nudge floor: 0.04-0.16 for `homeFoodPerPerson`, 0.00024-0.00158 for `hungerExposure`.
 
 **Established.** The mechanism runs on its own, by both cues, and roughly doubles the food within a household's reach when
-winter arrives.
+winter arrives (1.62 units a head against 0.83).
 
 **Not established.** Any welfare benefit. Hunger exposure, `belowCritical`, mean hunger, deaths and mood are all
 indistinguishable from chance in both windows. In a 28-person Normal world food is not scarce enough for one day's reserve
 to show.
 
-**The cost, measured.** About 3.6% of all person-time, and 15.6 fewer tool and repair projects *started* over 12 days.
-Projects finished and tools held did not move.
+**The cost, measured.** About 3.6% of all person-time over eight days (3.8% over twelve), and 15.3 fewer tool and repair
+projects *started* over 12 days, in every one of the 24 seeds. Projects finished and tools held did not move.
 
 ### The one run that is outstanding
 
@@ -147,18 +147,22 @@ is wrong.
 
 ## Verification
 
-All run on this branch at `7d7197c`, except where a later commit is named.
+All run on this branch at `9cfad02`, the last commit that changes behaviour.
 
 | | result |
 |---|---|
 | `npm run typecheck` | clean |
-| `npm test` | 79 files, 790 tests, all passing |
+| `npm test` | 79 files, **791 tests**, all passing |
 | `npm run build` | clean |
 | `git diff --check` | clean |
 | `npx vite-node scripts/golden.ts` | all golden fingerprints match (not re-recorded) |
 | `npx vite-node scripts/v1_reference.ts` | version-1 continuation unchanged |
 | `node scripts/browser/current_world_check.mjs http://127.0.0.1:5184/` | 15/15 |
 | `node scripts/browser/preparation_check.mjs http://127.0.0.1:5184/` | 19/19 |
+
+Both ensembles were re-run at `9cfad02` into emptied directories, because `9cfad02` changes behaviour. The earlier pair,
+made at `83c770e`, was not kept: one directory name must not hold two sets of numbers. The difference between them was
+small (the food effect moved from -0.78 to -0.80) and changed no conclusion.
 
 The acceptance criteria are `tests/household_preparation.test.ts`, one `describe` group per criterion (40 tests):
 1 evidence that may start a preparation, 2 situations that may not, 3 the action is an ordinary one and really moves food,
@@ -210,6 +214,9 @@ These stand. None is fixed by this pass.
 | `83c770e` | The lab can see what food preparation does, and what it costs |
 | `3c71703` | The measurement: the mechanism works, the food is real, the benefit is not shown |
 | `7d7197c` | A viewer can follow a preparation from the evidence to the food, in the page |
+| `4e629c9` | Document what was built, what was measured and what was not shown |
+| `9cfad02` | Review of the diff: a reserve could settle on a trip home it could not make |
+| (last) | The measurement re-run at `9cfad02`, and the documented numbers brought to it |
 
 `2a4a704` is the only commit without the required "Existing modules touched, and why" line: it touched no existing modules
 (four new files), and it was not amended because rewriting history is a hard rail for this task.

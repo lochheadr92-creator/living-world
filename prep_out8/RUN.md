@@ -61,7 +61,13 @@ A cost without a benefit is a real result and is reported as one. So is a null.
 
 ## Provenance
 
-- HEAD: 83c770e  (branch `claude/household-preparation-v2`)
+This directory was DELETED and regenerated at the HEAD below. An earlier pair of runs was made at `83c770e`, before a
+review of the diff found that a reserve could settle on a trip home it could not make (`9cfad02`). That changed
+behaviour, so those results do not describe this code and were not kept: the repository must not hold two sets of
+numbers for one directory name.
+
+
+- HEAD: 9cfad02  (branch `claude/household-preparation-v2`)
 - rules version: 2 (`CURRENT_RULES_VERSION`), dynamics `rich`
 - profile: `normal` (28 founders, 80x80, arrivals off) - NOT changed for this feature
 - seeds: the first 24 of the lab's standard list

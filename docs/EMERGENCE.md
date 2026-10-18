@@ -534,20 +534,20 @@ numbers live below that.
 
 | | control | no preparation | diff | 95% CI | of 24 seeds |
 |---|---|---|---|---|---|
-| preparations taken on (8 d) | 37.3 | 0 | -37.3 | [-39.5, -35.1] | 24 lower |
-| of those, from the season / from hardship | 6.6 / 30.4 | 0 / 0 | | | |
-| finished / given up (8 d) | 15.3 / 13.9 | 0 / 0 | | | |
-| units of food really put into home stores (8 d) | 166.4 | 0 | -166.4 | [-183.1, -149.7] | 24 lower |
-| **home-store food per person entering winter** | **1.61** | **0.83** | **-0.78** | **[-1.04, -0.52]** | **22 lower** |
-| the same after winter (12 d) | 0.74 | 0.29 | -0.45 | [-0.67, -0.23] | 18 lower |
-| hunger exposure (8 d) | 0.00302 | 0.00261 | -0.00041 | [-0.00155, +0.00073] | 8 lower, 8 higher |
-| hunger exposure (12 d) | 0.00984 | 0.00882 | -0.00102 | [-0.00363, +0.00159] | 11 lower, 12 higher |
+| preparations taken on (8 d) | 37.3 | 0 | -37.3 | [-39.6, -35.1] | 24 lower |
+| of those, from the season / from hardship | 6.3 / 31.0 | 0 / 0 | | | |
+| finished / given up (8 d) | 16.0 / 13.5 | 0 / 0 | | | |
+| units of food really put into home stores (8 d) | 166.5 | 0 | -166.5 | [-183.2, -149.7] | 24 lower |
+| **home-store food per person entering winter** | **1.62** | **0.83** | **-0.80** | **[-1.05, -0.54]** | **22 lower** |
+| the same after winter (12 d) | 0.73 | 0.29 | -0.44 | [-0.66, -0.22] | 18 lower |
+| hunger exposure (8 d) | 0.00303 | 0.00261 | -0.00043 | [-0.00156, +0.00071] | 8 lower, 8 higher |
+| hunger exposure (12 d) | 0.00973 | 0.00882 | -0.00091 | [-0.00355, +0.00173] | 11 lower, 12 higher |
 | person-days spent preparing (8 d / 12 d) | 8.1 / 12.4 | 0 / 0 | | | 24 lower |
-| tool and repair projects STARTED (12 d) | 85.7 | 101.3 | +15.6 | [+12.8, +18.2] | 23 higher |
+| tool and repair projects STARTED (12 d) | 86.0 | 101.3 | +15.3 | [+12.2, +18.4] | 24 higher |
 | projects finished, tools held, deaths, mean hunger, mood | | | | all straddle 0 | |
 
-The nudge floor for `homeFoodPerPerson` is 0.03 to 0.08 with intervals of about +-0.3, and for `hungerExposure` 0.00025 to
-0.00148 - so the food effect is far outside it and the hunger effect is exactly the size of it.
+The nudge floor for `homeFoodPerPerson` is 0.04 to 0.16 with intervals of about +-0.3, and for `hungerExposure` 0.00024 to
+0.00158 - so the food effect is far outside it and the hunger effect is exactly the size of it.
 
 **What this establishes.** The mechanism runs without anybody being staged into it, by both cues, and it really moves food
 into home stores: roughly double the food within a household's reach when winter arrives, in 22 of 24 seeds.
@@ -557,8 +557,9 @@ counts, mean hunger, deaths and mood are all indistinguishable from chance in bo
 food is simply not scarce enough for one day's reserve to show. **Nothing here says preparation prevents starvation**, and
 the reserve is about one day's eating against a four-day winter.
 
-**What it costs.** About 3.6% of all person-time, and 15.6 fewer tool and repair projects started over 12 days. Projects
-finished and tools held did not move, so what the time comes out of is the trying, not the finishing.
+**What it costs.** About 3.6% of all person-time over eight days (3.8% over twelve), and 15.3 fewer tool and repair
+projects started over 12 days, in every one of the 24 seeds. Projects finished and tools held did not move, so what the
+time comes out of is the trying, not the finishing.
 
 **The open question.** Whether a village that is actually short would benefit. The `town` profile (100 people in one camp,
 which has a real famine in it) is where that could be answered; that run has not been made. The command is in `HANDOFF.md`.

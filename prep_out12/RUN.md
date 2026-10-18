@@ -23,7 +23,10 @@ show. A null is reported as a null, and a cost without a benefit is reported as 
 
 ## Provenance
 
-- HEAD: 83c770e  (branch `claude/household-preparation-v2`)
+Deleted and regenerated at the HEAD below, for the reason given in `prep_out8/RUN.md`.
+
+
+- HEAD: 9cfad02  (branch `claude/household-preparation-v2`)
 - rules version: 2, dynamics `rich`, profile `normal`, arrivals off, seeds: the first 24 of the standard list
 - command:
 

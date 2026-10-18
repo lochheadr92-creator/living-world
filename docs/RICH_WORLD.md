@@ -71,16 +71,16 @@ as "the store came to hold 8 without their doing" - which is not called an achie
 **What was measured** (24 seeds, `normal`, rules version 2, `rich-no-stock` as the ablation and two nudges as the noise
 floor; `prep_out8/`, `prep_out12/`, plan in `prep_out8/RUN.md`, full-precision table in `prep_out8/PAIRED.md`):
 
-* It runs on its own. 37 preparations in 8 days (6.6 seasonal, 30.4 from observed hardship), 15 finished, 166 units of food
-  really moved into home stores; 55 and 215 over 12 days. Zero on every seed with the switch off.
-* It changes what a household can reach. Home-store food per person entering winter: **1.61 against 0.83** (diff -0.78, 95%
-  CI [-1.04, -0.52], lower in 22 of 24 seeds) against a nudge floor of 0.03-0.08. After winter, 0.74 against 0.29.
-* **It did not improve anybody's welfare in this measurement.** Hunger exposure 0.00302 against 0.00261 over 8 days and
-  0.00984 against 0.00882 over 12 - both intervals straddling zero, both the size of the noise floor. `belowCritical`,
+* It runs on its own. 37 preparations in 8 days (6.3 seasonal, 31.0 from observed hardship), 16 finished, 166 units of food
+  really moved into home stores; 56 and 215 over 12 days. Zero on every seed with the switch off.
+* It changes what a household can reach. Home-store food per person entering winter: **1.62 against 0.83** (diff -0.80, 95%
+  CI [-1.05, -0.54], lower in 22 of 24 seeds) against a nudge floor of 0.04-0.16. After winter, 0.73 against 0.29.
+* **It did not improve anybody's welfare in this measurement.** Hunger exposure 0.00303 against 0.00261 over 8 days and
+  0.00973 against 0.00882 over 12 - both intervals straddling zero, both the size of the noise floor. `belowCritical`,
   `meanHunger`, `deaths`, `meanMood` and `lowMood`: all indistinguishable from chance. In a 28-person Normal world food is
   not scarce enough for one day's reserve to show.
-* **It costs.** 8.1 person-days over 8 days and 12.4 over 12 - about 3.6% of all person-time - and 15.6 fewer tool and
-  repair projects STARTED over 12 days (23 of 24 seeds). Projects finished and tools held are unchanged.
+* **It costs.** 8.1 person-days over 8 days and 12.4 over 12 - about 3.6% of all person-time - and 15.3 fewer tool and
+  repair projects STARTED over 12 days, in all 24 seeds. Projects finished and tools held are unchanged.
 
 Whether a village that is actually short would benefit is open; the `town` profile is where it could be answered, and that
 run has not been made. See `HANDOFF.md` for the command.
