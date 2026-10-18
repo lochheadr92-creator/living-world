@@ -1,10 +1,13 @@
 # Rules version 2: household food preparation for scarcity and winter
 
 <!--
-The prepared pull request for `claude/household-preparation-v2` -> `main`. It exists as a file because the PR could not
-be opened from the session that wrote it: the GitKraken MCP tool asked for a sign-in, `gh` is not installed and no token
-is set. The title is the heading above; the body is everything below the line. Delete this file once the PR is open.
-Open it at: https://github.com/lochheadr92-creator/living-world/pull/new/claude/household-preparation-v2
+POSTED. This is the body of pull request #18:
+https://github.com/lochheadr92-creator/living-world/pull/18
+
+It was written as a file because the session that prepared it could not sign in to open a pull request; the sign-in has
+since been completed and the body below was posted verbatim. It is kept for the record rather than deleted. Editing it
+changes nothing: the GitKraken tool can create a pull request but not edit one, so a change here has to be made on
+GitHub as well. The title is the heading above; the body is everything below the line.
 -->
 
 ---

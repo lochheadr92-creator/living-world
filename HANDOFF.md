@@ -13,8 +13,9 @@ the CLI rules-version fix) is merged into `main` and is not reopened below.
 - Checkout: `C:\dev\Claude Experiment\living-world`, branch `claude/household-preparation-v2`, cut from `main` at `5b7a941`.
 - Integration branch: `main` at `5b7a941`, which carries the merge `e81aad4` (pull request #17) and everything before it.
 - The working tree is clean. One ignored artifact directory, `gates_rich_out/`, remains ignored (`.gitignore`).
-- **Pushed** to `origin/claude/household-preparation-v2`. **No pull request exists yet, and nothing is merged.** See
-  "Integration: what is blocked and the exact next action" below.
+- **Pull request [#18](https://github.com/lochheadr92-creator/living-world/pull/18)** is open against `main`. Nothing
+  is merged: `main` is still at `5b7a941`. See "Integration" at the end of this file for the two open acceptance
+  conditions.
 
 ## What inhabitants can now do
 
@@ -329,41 +330,49 @@ These stand. None is fixed by this pass.
 | `76dbfdf` | Review of the inspector text: a person who put one unit by was told "1 units" |
 | `26a6d18` | Discriminating tests for two review areas: whose store it is, and whose knowledge |
 | `571a404` | The acceptance gate resolved: none can accept version 2, and the one that runs already failed on `main` |
-| (last) | Unsupported interpretations corrected; provenance, gate and review findings written up |
+| `eaca9f4` | Claims the experiments do not support, taken back out |
+| `e870b3c` | The prepared body lists every commit it describes |
+| (last) | Pull request #18 opened; the integration state recorded |
 
 `2a4a704` is the only commit without the required "Existing modules touched, and why" line: it touched no existing modules
 (four new files), and it was not amended because rewriting history is a hard rail for this task.
 
-## Integration: what is blocked and the exact next action
+## Integration: pull request #18, open and NOT merged
 
-The branch is pushed and verified. **The pull request could not be opened from this session**, so nothing is merged and
-`main` is still at `5b7a941`.
+**<https://github.com/lochheadr92-creator/living-world/pull/18>** - open, not a draft, head
+`claude/household-preparation-v2`, base `main`, 130 files. `main` is still at `5b7a941` and contains **none** of this
+work.
 
-The exact blocker, reported verbatim: the GitKraken MCP tool refused with
+The authentication that blocked the previous session has since been completed by the owner, and the pull request was
+opened from this one. `PULL_REQUEST.md` is the body that was posted; it is kept for the record rather than deleted, and
+editing it now changes nothing, because the GitKraken tool can create a pull request but not edit one.
 
-> To sign in, run `C:/Users/RJLoc/AppData/Local/GitKrakenCLI/gk.exe auth login` in your terminal, finish signing in,
-> then retry the previous request.
+### Why it is not merged
 
-`gh` is not installed and `GH_TOKEN`/`GITHUB_TOKEN` are unset, so there is no other route from here. No attempt was made
-to work around it.
+Two acceptance conditions are open. Neither is a defect in the change.
 
-Either of these unblocks it:
+1. **No independent review.** `approved: false` on #18. Everything in the "Review of the implementation" section above
+   is SELF-review, and must not be read as anything else. The repository's own workflow, and the development
+   environment's policy, both expect a human review before a merge; the previous pass's merge was refused here for
+   exactly that reason and was done by the owner. No attempt was made to route around it.
+2. **The one applicable ensemble gate fails** - `tools`, 140.8 against the band [143.9, 178.7]. It fails **identically
+   on `main`**, which is evidenced seed by seed above, so it is not caused by this branch; but a failing gate is a
+   failing gate, and calling it satisfied would be untrue. Fixing it means refreshing a stale baseline, which belongs
+   to merged `main`, not to a candidate.
 
-1. Sign the CLI in, after which the PR can be opened from a session:
+### The smallest next actions, in order
 
-```
-C:/Users/RJLoc/AppData/Local/GitKrakenCLI/gk.exe auth login
-```
+1. Review #18 and approve or request changes.
+2. Merge it through the normal workflow.
+3. On merged `main`, refresh the stale baseline and record one for version 2 (commands in
+   `gate_v2_unversioned/FINDING.md`). Recording asserts nothing; it gives the next change something to be gated
+   against.
+4. Optionally, the `town` ensemble above - a separately scoped investigation into welfare under real hardship, not a
+   correctness condition for this merge.
 
-2. Or open it by hand. GitHub offers the link directly:
-   <https://github.com/lochheadr92-creator/living-world/pull/new/claude/household-preparation-v2>.
-   The prepared title and body are in `PULL_REQUEST.md` at the repository root, ready to paste.
-
-**Do not treat this task as accepted until the PR is reviewed and merged**, and until the integration result is verified
-on the merge commit itself rather than on this branch.
+After a merge, verify on the merge commit itself rather than on this branch, and correct this file to the real state.
 
 ## Next
 
-The bounded preparation feature is finished. The next actions, in order: open and merge the PR (above), then the `town`
-run, which answers the one question the measurement left open. Beyond that, the fifteen proposed gameplay stages remain a
-backlog in `docs/EMERGENCE.md`; nothing here commits to them.
+The bounded preparation feature is finished and closed out. The next actions are the four above, in order. Beyond them,
+the fifteen proposed gameplay stages remain a backlog in `docs/EMERGENCE.md`; nothing here commits to them.
