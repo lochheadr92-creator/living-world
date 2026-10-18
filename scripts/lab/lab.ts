@@ -10,7 +10,7 @@
 // Nothing here is read by the simulation: interventions act on a deserialised copy, or flip a switch that is off by default and is never
 // saved or hashed (the option chooser, the wolf search memory).
 import { deserializeWorld, serializeWorld } from '../../src/app/save';
-import { CRITICAL, DAY, NEED_KEYS } from '../../src/sim/constants';
+import { CRITICAL, DAY, NEED_KEYS, isHomeType } from '../../src/sim/constants';
 import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
@@ -18,6 +18,10 @@ import { setLearning } from '../../src/sim/learning';
 import { setFoodPreparation } from '../../src/sim/provision';
 import { setTrades } from '../../src/sim/trade';
 import { SOURCE_SKILL } from '../../src/sim/constants';
+import type { FoodKind } from '../../src/sim/types';
+
+/** what counts as food when a store is weighed up; the same list provision.ts uses */
+const FOOD_ITEMS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
 import type { Activity, Person } from '../../src/sim/types';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
@@ -260,6 +264,25 @@ export const METRICS = [
   // kind, to tell a village of specialists from a village that all does one thing. Not gated.
   'specialisation',
   'topKindShare',
+  // What rules version 2's household food preparation is for, counted over the whole branch (a plan is trimmed from the record
+  // once enough have ended) and, for the last three, at the end of it. Not gated, so an older recorded baseline still works.
+  //   prepAdopted/Season/Hardship  preparations taken on, and by which of the two cues
+  //   prepDone / prepDropped       reached the target by the person's own hands / ended any other way
+  //   prepUnits                    units of food that really went into a home store for a preparation
+  //   prepDays                     person-days spent on an activity chosen AS a step of a preparation: the time it diverts
+  //   hungerExposure               share of all person-time spent below critical hunger: exposure, not an end-state snapshot
+  //   homeFoodPerPerson            food in home stores at the end, per living person: what a household can actually reach
+  //   storeFoodPerPerson           the same counting the shared storehouse too
+  'prepAdopted',
+  'prepSeason',
+  'prepHardship',
+  'prepDone',
+  'prepDropped',
+  'prepUnits',
+  'prepDays',
+  'hungerExposure',
+  'homeFoodPerPerson',
+  'storeFoodPerPerson',
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Outcome = Record<Metric, number>;
@@ -281,7 +304,9 @@ export class ProjectTally {
     for (const p of w.persons) {
       if (!p.intentions.length) continue;
       for (const i of p.intentions) {
-        if (i.kind === 'night') continue;
+        // a food reserve is a plan, but it is not one of the PROJECTS this counts; it has its own tally, so that adding it did
+        // not silently change what `projectsAdopted` has always meant
+        if (i.kind === 'night' || i.kind === 'stock') continue;
         const k = p.id + ':' + i.id;
         const ended = this.plans.get(k);
         if (ended === undefined) {
@@ -304,6 +329,67 @@ export class ProjectTally {
     let n = 0;
     for (const v of this.delivered.values()) n += v;
     return n;
+  }
+}
+
+/**
+ * Household food preparation over a branch (rules version 2). Tallied tick by tick for the same reason the projects are: an
+ * ended plan is trimmed from a person's record. A plan is counted once when first seen and once when first seen ended; the
+ * food it put by is re-read every tick and kept at its highest, so a plan trimmed on the tick its last unit landed is counted
+ * at what was last seen - a bounded undercount, never an overcount.
+ *
+ * It also carries two things that are about the branch rather than about any one plan: how much person-time went into
+ * preparing (an activity the decision marked as a step of a live preparation), and how much person-time was spent below
+ * critical hunger, which is exposure over the window rather than a snapshot of who happens to be hungry at the end.
+ */
+export class PrepTally {
+  private plans = new Map<string, { ended: boolean; worked: number }>();
+  adopted = 0;
+  season = 0;
+  hardship = 0;
+  done = 0;
+  dropped = 0;
+  workTicks = 0;
+  hungryTicks = 0;
+  personTicks = 0;
+  tick(w: World): void {
+    for (const p of w.persons) {
+      if (!p.alive) continue;
+      this.personTicks++;
+      if (p.needs.hunger < CRITICAL.hunger) this.hungryTicks++;
+      if (!p.intentions.length) continue;
+      const a = p.activity;
+      for (const i of p.intentions) {
+        if (i.kind !== 'stock') continue;
+        const k = p.id + ':' + i.id;
+        const rec = this.plans.get(k);
+        if (!rec) {
+          this.adopted++;
+          if (i.cue === 'season') this.season++;
+          else this.hardship++;
+          this.plans.set(k, { ended: i.status !== 'active', worked: i.worked });
+          if (i.status === 'done') this.done++;
+          else if (i.status === 'dropped') this.dropped++;
+        } else {
+          rec.worked = Math.max(rec.worked, i.worked);
+          if (!rec.ended && i.status !== 'active') {
+            rec.ended = true;
+            if (i.status === 'done') this.done++;
+            else this.dropped++;
+          }
+        }
+        if (a && i.status === 'active' && a.data.forPlan === i.id) this.workTicks++;
+      }
+    }
+  }
+  get units(): number {
+    let n = 0;
+    for (const r of this.plans.values()) n += r.worked;
+    return n;
+  }
+  /** share of all person-time spent below critical hunger over the branch */
+  get exposure(): number {
+    return this.personTicks ? Math.round((this.hungryTicks / this.personTicks) * 10000) / 10000 : 0;
   }
 }
 
@@ -353,7 +439,14 @@ export class GatherTally {
 }
 
 /** What a branch ends with. `from` is the tick of the fork: deaths are those since then, first-build days are counted from the fork's day 0. */
-export function outcomeOf(w: World, from: number, endTick: number, projects = new ProjectTally(), gathers = new GatherTally()): { outcome: Outcome; milestones: Record<string, number> } {
+export function outcomeOf(
+  w: World,
+  from: number,
+  endTick: number,
+  projects = new ProjectTally(),
+  gathers = new GatherTally(),
+  prep = new PrepTally(),
+): { outcome: Outcome; milestones: Record<string, number> } {
   const count = (types: string[]) => w.buildings.filter((b) => types.includes(b.type)).length;
   const alive = w.persons.filter((p) => p.alive);
   const homeIds = new Set(w.buildings.map((b) => b.id));
@@ -376,6 +469,17 @@ export function outcomeOf(w: World, from: number, endTick: number, projects = ne
   for (const t of w.tools) if (t.holder && (w.byId.get(t.holder) as { alive?: boolean } | undefined)?.alive) tools++;
   let cond = 0;
   for (const b of w.buildings) cond += b.condition;
+  // food people can actually reach: what is in their own homes, and what is in the shared stores besides
+  let homeFood = 0;
+  let allStoreFood = 0;
+  for (const b of w.buildings) {
+    if (!b.store) continue;
+    let n = 0;
+    for (const k of FOOD_ITEMS) n += b.store.items[k] ?? 0;
+    allStoreFood += n;
+    if (isHomeType(b.type)) homeFood += n;
+  }
+  const heads = Math.max(1, alive.length);
   const first: Record<string, number> = {};
   for (const b of w.buildings) first[b.type] = Math.min(first[b.type] ?? Infinity, b.builtTick);
   // days after the fork; 0 if the type already stood at the fork (then it says nothing about the branch); a type never built counts as
@@ -407,6 +511,16 @@ export function outcomeOf(w: World, from: number, endTick: number, projects = ne
       askUnitsDelivered: projects.units,
       specialisation: gathers.specialisation(),
       topKindShare: gathers.topKindShare(),
+      prepAdopted: prep.adopted,
+      prepSeason: prep.season,
+      prepHardship: prep.hardship,
+      prepDone: prep.done,
+      prepDropped: prep.dropped,
+      prepUnits: prep.units,
+      prepDays: Math.round((prep.workTicks / DAY) * 100) / 100,
+      hungerExposure: prep.exposure,
+      homeFoodPerPerson: Math.round((homeFood / heads) * 100) / 100,
+      storeFoodPerPerson: Math.round((allStoreFood / heads) * 100) / 100,
     },
     milestones,
   };
@@ -449,11 +563,13 @@ export function runBranch(
     const end = from + days * DAY;
     const projects = new ProjectTally();
     const gathers = new GatherTally();
+    const prep = new PrepTally();
     // a deserialized world has no hooks of its own; the tally is the only listener, and it reads, never writes
     w.hooks = { onActivityStart: (p, a) => gathers.start(p, a) };
     for (let i = 1; w.tick < end; i++) {
       stepWorld(w);
       projects.tick(w);
+      prep.tick(w);
       if (i % sampleEvery === 0) {
         const h = hashWorld(w);
         hashes.push(h);
@@ -461,7 +577,7 @@ export function runBranch(
       }
       if (i % DAY === 0) popByDay.push(w.persons.filter((p) => p.alive).length);
     }
-    const { outcome, milestones } = outcomeOf(w, from, end, projects, gathers);
+    const { outcome, milestones } = outcomeOf(w, from, end, projects, gathers, prep);
     return {
       spec: iv.spec,
       summary: iv.summary,
