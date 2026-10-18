@@ -12,6 +12,17 @@ import { T } from './types';
 import { hyp, turnToward } from './util';
 import { hashString, hashUnit } from './rng';
 
+/**
+ * Whether a wolf is keeping clear of one particular person, because they drove it off (defence.ts, rules version 3).
+ * It registers itself here rather than being imported: this module is loaded very early, and importing the defence
+ * module would pull its activity handler in before `activities.ts` had its table. Null until something registers, so a
+ * build without that module behaves exactly as this one always did.
+ */
+let waryCheck: ((world: World, a: Animal, p: Person) => boolean) | null = null;
+export function setWaryCheck(fn: (world: World, a: Animal, p: Person) => boolean): void {
+  waryCheck = fn;
+}
+
 export function makeWolf(world: World, x: number, y: number, type: Animal['type'] = 'wolf'): Animal {
   const a: Animal = {
     ent: 'animal',
@@ -175,6 +186,9 @@ function pickPrey(world: World, a: Animal, night: boolean): Person | null {
     const d = hyp(p.x - a.x, p.y - a.y);
     if (d >= bd) continue;
     if (safeFromWolf(world, p)) continue;
+    // somebody who drove this wolf off with a spear is left alone for a while (defence.ts, rules version 3); no wolf in
+    // an older world carries that memory, so this never fires there
+    if (waryCheck && waryCheck(world, a, p)) continue;
     bd = d;
     best = p;
   }

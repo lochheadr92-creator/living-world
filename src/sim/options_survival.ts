@@ -32,6 +32,7 @@ import { WORK } from './constants';
 import { hyp } from './util';
 import { householdById } from './households';
 import { huntOptions } from './hunting';
+import { defenceOptions } from './defence';
 const FOOD_KINDS = ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'] as const;
 
 // ───────────────────────── flee ─────────────────────────
@@ -676,6 +677,10 @@ function optRest(ctx: Ctx): void {
 
 export function survivalOptions(ctx: Ctx): void {
   optFlee(ctx);
+  // Standing and facing it is the other answer to a wolf (defence.ts, rules version 3). It is offered here, beside
+  // fleeing, because it answers the same situation; which of the two a person takes is the ranking's business, and
+  // decision.ts lets both through the filter that used to pass fleeing alone.
+  defenceOptions(ctx);
   optEat(ctx);
   huntOptions(ctx);
   optDrink(ctx);

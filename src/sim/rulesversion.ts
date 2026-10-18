@@ -32,12 +32,19 @@ import type { Settings, World } from './types';
  * resources are exactly what version 1 had. A version-1 world continues as version 1, which
  * `tests/v1_continuation.test.ts` holds against a reference recorded before version 2 was written.
  *
+ * VERSION 3 (2026-10-19) adds DEFENCE AGAINST WOLVES and nothing else: a spear that is made, carried, owned and worn like
+ * any other tool, and an action by which an equipped, able adult may drive a wolf off themselves or off somebody they can
+ * actually see being threatened. The whole of it is `src/sim/defence.ts`, the `spear` tool definition, and the one narrow
+ * change in `src/sim/decision.ts` that lets a defence compete with fleeing instead of being filtered out before it is
+ * ranked. Nothing about wolves themselves was retuned: their numbers, their nerve, their damage and their reach are
+ * exactly version 2's, and a defence changes a wolf only by driving it off after a resolved attempt.
+ *
  * Raising this number is how a behavioural change is declared. See docs/DEVELOPMENT_POLICY.md, "Rules versions".
  */
-export const CURRENT_RULES_VERSION = 2;
+export const CURRENT_RULES_VERSION = 3;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3];
 
 /**
  * What a world made before versioning existed is. It is NOT version 0 and not "probably 1": several different implementations

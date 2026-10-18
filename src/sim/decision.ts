@@ -1,6 +1,7 @@
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
+import { MIN_HEALTH as DEFEND_MIN_HEALTH } from './defence';
 import type { ExternalController } from './external';
 import { moodWeight } from './mood';
 import { goalNudge } from './life';
@@ -25,7 +26,7 @@ import { hyp } from './util';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
-const CHILD_FORBIDDEN: ActivityKind[] = ['build', 'haul', 'plan_site', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'claim_home', 'fuel_fire', 'withdraw', 'operate', 'tool_work', 'cart_haul'];
+const CHILD_FORBIDDEN: ActivityKind[] = ['build', 'haul', 'plan_site', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'claim_home', 'fuel_fire', 'withdraw', 'operate', 'tool_work', 'cart_haul', 'defend'];
 
 /** world state -> local perception (already done) -> eligible actions. Pure with respect to the world: nothing is started here. */
 export function generateOptions(world: World, p: Person, collect = false): Ctx {
@@ -79,9 +80,13 @@ export function rankOptions(ctx: Ctx): Option[] {
     const crit = opts.filter((o) => o.need === lead || o.kind === 'flee' || (o.kind === 'socialize' && (o.tag === 'request' || o.tag === 'info')));
     if (crit.length) opts = crit;
   }
-  // the pressure of a wolf nearby outranks everything else
-  const flee = opts.filter((o) => o.kind === 'flee');
-  if (flee.length) opts = flee;
+  // The pressure of a wolf nearby outranks everything else. From rules version 3 there are TWO answers to it - run, or
+  // stand and drive it off (defence.ts) - and both belong in this bracket: the filter keeps the wolf at the top of the
+  // list, as it always did, and no longer decides which of the two answers is taken. That is left to the ranking below,
+  // where a defence has to beat fleeing on its merits. Every other safeguard is untouched, and `defend` options exist
+  // only in a version-3 world, so an older world filters exactly as it did.
+  const urgent = opts.filter((o) => o.kind === 'flee' || o.kind === 'defend');
+  if (urgent.length) opts = urgent;
   // do not repeat something that has just fallen through
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
@@ -298,7 +303,16 @@ export function reviewActivity(world: World, p: Person): void {
   if (!best) return;
   const key = a.data.optKey as string | undefined;
   if (best.key === key) return;
-  const danger = best.kind === 'flee' && a.kind !== 'flee';
+  // Standing and facing a wolf is the one activity fleeing must not simply out-score. The two answer the same
+  // situation and are scored to sit close together on purpose, so a defender re-ranked mid-attempt is pulled away
+  // before they ever reach the wolf - which made the defence unreachable in practice rather than merely hard.
+  //
+  // A defence is therefore held against a flee UNTIL the defender is hurt past the point of being able to defend at
+  // all (defence.ts MIN_HEALTH, the same line the option itself uses). That is "a defender can be forced to flee",
+  // not "a defender is safe": a deadlier need still interrupts, the attempt's own failure conditions still end it,
+  // and a `defend` activity exists only in a rules-version-3 world, so an older world reviews exactly as it did.
+  const standingGround = a.kind === 'defend' && p.health >= DEFEND_MIN_HEALTH;
+  const danger = best.kind === 'flee' && a.kind !== 'flee' && !standingGround;
   // an activity serving one critical need still yields to a deadlier one (water before food before warmth before sleep)
   const rank = (k: NeedKey | null): number => (k === null ? 9 : CRITICAL_ORDER.indexOf(k) < 0 ? 9 : CRITICAL_ORDER.indexOf(k));
   const criticalMismatch = ctx.criticals.length > 0 && best.need !== null && ctx.criticals.includes(best.need) && a.need !== best.need && (a.need === null || !ctx.criticals.includes(a.need) || rank(best.need) < rank(a.need));
@@ -335,6 +349,12 @@ export function reviewActivity(world: World, p: Person): void {
 export function urgentInterrupt(world: World, p: Person): boolean {
   const a = p.activity;
   if (!a || a.kind === 'flee') return false;
+  // somebody who is already walking at the wolf has decided about it; being alarmed by it every eight ticks only costs
+  // a re-think that can come to nothing (the review above holds the defence anyway)
+  if (a.kind === 'defend') {
+    const n0 = p.needs;
+    return (n0.thirst < 13 || n0.hunger < 13) && world.tick - (p.cooldowns.critCheck ?? -99) > 25 ? ((p.cooldowns.critCheck = world.tick), true) : false;
+  }
   const alarm = Math.min(9.5, fleeRadius(p));
   for (const s of p.seen) {
     if (isThreat(world, s) && hyp(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {
