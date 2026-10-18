@@ -1,4 +1,5 @@
 import { isThreat } from './wildlife';
+import { indoorHome, sameSpace } from './habitation';
 import { moveSpeed, standSpotFor } from './activities';
 import { findWaterAccessNear, isWalkable, isWaterAccess } from './registry';
 import { drive } from './needs';
@@ -123,7 +124,7 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
   const dangers: Belief[] = [];
   for (const id of p.bykind.danger ?? []) {
     const b = p.beliefs[id];
-    if (b.amount > 0 && world.tick - b.seen < 700) dangers.push(b);
+    if (!indoorHome(world, p) && b.amount > 0 && world.tick - b.seen < 700) dangers.push(b);
   }
   return {
     world,
@@ -145,8 +146,12 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
     stone: p.inv.stone ?? 0,
     seeds: p.inv.seeds ?? 0,
     dangers,
-    seenPersons: p.seen.filter((s) => s.ent === 'person'),
-    seenAnimals: p.seen.filter((s) => isThreat(world, s)),
+    seenPersons: p.seen.filter((s) => {
+      if (s.ent !== 'person') return false;
+      const other = world.byId.get(s.id);
+      return !other || other.ent !== 'person' || sameSpace(world, p, other);
+    }),
+    seenAnimals: indoorHome(world, p) ? [] : p.seen.filter((s) => isThreat(world, s)),
     collect,
     blocked: [],
     options: [],

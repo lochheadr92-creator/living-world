@@ -38,7 +38,10 @@ const look = () =>
       if (!p.alive) continue;
       for (const i of p.intentions) {
         if (i.kind !== 'stock') continue;
-        const row = { who: p.id, name: p.name, hh: p.hhId, id: i.id, cue: i.cue, reserve: i.reserve, worked: i.worked, status: i.status, step: i.step, reason: i.reason, about: i.aboutId };
+        // The card shows live plans, or the most recently ended plan when none is active.
+        // A completed stock plan may legitimately be hidden by a new night plan.
+        const shown = !p.intentions.some(x => x.status === 'active') && [...p.intentions].reverse().find(x => x.status !== 'active')?.id === i.id;
+        const row = { who: p.id, name: p.name, hh: p.hhId, id: i.id, cue: i.cue, reserve: i.reserve, worked: i.worked, status: i.status, step: i.step, reason: i.reason, about: i.aboutId, shown };
         if (i.status === 'active') live.push(row); else ended.push(row);
       }
     }
@@ -97,7 +100,8 @@ try {
   await ev(`window.__game.setPlaying(false)`);
 
   let s = await look();
-  check('a current world is running in the page', s.dynamics === 'rich' && s.rulesVersion === 2 && s.people > 10, `dynamics=${s.dynamics}, rulesVersion=${s.rulesVersion}, ${s.people} people, seed=${s.seed}`);
+  const currentVersion = await ev(`import('/src/sim/rulesversion.ts').then(m => m.CURRENT_RULES_VERSION)`);
+  check('a current world is running in the page', s.dynamics === 'rich' && s.rulesVersion === currentVersion && s.people > 10, `dynamics=${s.dynamics}, rulesVersion=${s.rulesVersion}, ${s.people} people, seed=${s.seed}`);
   check('it is the seed this example names', s.seed === SEED, `seed=${s.seed}`);
 
   // ── 1. somebody takes a preparation on, unprompted ──
@@ -150,18 +154,20 @@ try {
   // ── 4. an intention is not a delivery, and the card says which it was ──
   // The loop above stops at the first delivery, which is usually well before any plan has run its course, so give the world
   // enough time for one to reach a verdict of its own.
-  for (let i = 0; i < 40 && !s.ended.length; i++) {
+  for (let i = 0; i < 40 && !s.ended.some(x => x.shown); i++) {
     await ev(`window.__game.advanceTicks(300)`);
     s = await look();
   }
-  const anyEnded = s.ended[s.ended.length - 1];
+  const anyEnded = s.ended.find(x => x.shown);
   if (anyEnded) {
     await select(anyEnded.who);
     await b.sleep(300);
     await openSections();
     await b.sleep(400);
     c = await card();
-    check('a preparation that ended reads as what it came to, not as a plan', /(done|given up)/i.test(c.plan), `${anyEnded.status}: ${c.plan.slice(0, 260)}`);
+    check('a preparation that ended reads as what it came to, not as a plan',
+      c.plan.includes(anyEnded.status === 'done' ? 'done:' : 'given up:') && c.plan.includes(anyEnded.reason),
+      `${anyEnded.status}: ${c.plan.slice(0, 260)}`);
   } else {
     check('a preparation ended within the window, so its outcome could be read', false, 'none had ended yet');
   }
@@ -192,7 +198,7 @@ try {
     `moved to ${back.moved.tick}/${back.moved.hash}, loaded back to ${back.at.tick}/${back.at.hash}`);
   check('the preparations came back as they were, cue and units and all', JSON.stringify(back.plans) === JSON.stringify(saved.plans),
     `${back.plans.length} back of ${saved.plans.length}; first ${JSON.stringify(back.plans[0])}`);
-  check('and the world is still rules version 2', back.at.rulesVersion === 2, `rulesVersion=${back.at.rulesVersion}`);
+  check('and the world keeps its recorded rules version', back.at.rulesVersion === saved.at.rulesVersion, `rulesVersion=${back.at.rulesVersion}`);
 
   // ── 6. a world that still runs version 1 does not acquire any of this ──
   const old = await ev(`(async () => {
@@ -213,7 +219,7 @@ try {
   })()`);
   check('a version-1 world can still be made in the page', old.made === 1, `rulesVersion=${old.made}`);
   check('it forms no preparations at all, while its other plans carry on', old.stock === 0 && old.other > 0, `${old.stock} preparations, ${old.other} other plans by tick ${old.at.tick}`);
-  check('a world started after it is the current version again', old.between === 2, `rulesVersion=${old.between}`);
+  check('a world started after it is the current version again', old.between === currentVersion, `rulesVersion=${old.between}`);
   check('and loading the version-1 save puts it back on version 1, not on the latest', old.loaded === true && old.after === 1, `rulesVersion=${old.after}`);
 
   const errors = await ev(`(window.__errors || []).length`).catch(() => 0);

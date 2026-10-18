@@ -54,6 +54,13 @@ by the approach of winter, and carried out with the gathering and depositing tha
 Nothing else was retuned: winter, lean seasons, hunger, yields, spoilage and starting resources are exactly version 1's. See
 `docs/RICH_WORLD.md` for the contract and the measurement.
 
+**Version 3 on the habitation branch** (2026-10-19) adds actual hut/house occupancy: entry through the
+door, indoor sleep/rest/refuge, exit before outdoor work, and physical indoor protection and perception.
+See `docs/HABITATION.md`. This branch does not contain the parallel wolf-defence work; the owner
+chose habitation first. Wolf defence must be integrated under a later version without reinterpreting
+version-3 saves. Version-2 continuation is pinned by `tests/v2_continuation.expected.json`,
+captured from `1a13408` before habitation was implemented.
+
 **How a version is proved not to have leaked.** A test that checks the version LABEL is not enough: a gate that leaked would
 keep the label and change the world. Before version 2 was written, `scripts/v1_reference.ts --write` recorded
 `tests/v1_continuation.expected.json` - two rich worlds stamped `rulesVersion: 1`, run, written out and read back through the

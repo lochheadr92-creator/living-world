@@ -587,7 +587,8 @@ describe('8. the lab off-switch removes this and only this', () => {
 
 describe('9. a fresh world is the same generation of rules wherever it is made', () => {
   it('the app path and the command-line path stamp the same current version', () => {
-    expect(CURRENT_RULES_VERSION).toBe(2);
+    // Current rules may advance; version 2 remains the preparation compatibility baseline.
+    expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(2);
     const app = currentWorldSettings('normal', 'agree', { immigration: false });
     const cli = freshRunSettings('rich', 'normal', 'agree', { immigration: false });
     expect(app.rulesVersion).toBe(CURRENT_RULES_VERSION);

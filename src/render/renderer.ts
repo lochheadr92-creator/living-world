@@ -1,4 +1,5 @@
 import type { Game } from '../app/game';
+import { hasHabitation, indoorHome } from '../sim/habitation';
 import { senseRadius } from '../sim/perception';
 import type { Animal, Building, Cart, Entity, Grave, Person, Pile, Plot, Site, Source, World } from '../sim/types';
 import { clampCamera, updateCamera } from './camera';
@@ -162,7 +163,11 @@ export class Renderer {
     for (const p of world.persons) {
       const x = p.px + (p.x - p.px) * alphaT;
       const y = p.py + (p.y - p.py) * alphaT;
-      if (p.pose === 'sleep') {
+      if (indoorHome(world, p)) {
+        hidden.add(p.id);
+        continue;
+      }
+      if (!hasHabitation(world) && p.pose === 'sleep') {
         // asleep indoors: not drawn, the roof shows it instead
         const hut = huts.find((b) => Math.hypot(x - (b.x + b.w / 2), y - (b.y + b.h / 2)) < 2.4);
         if (hut) {
@@ -235,13 +240,25 @@ export class Renderer {
     // sleepers who are indoors: "z" over the roof
     for (const p of world.persons) {
       if (!hidden.has(p.id)) continue;
-      const hut = huts.find((b) => Math.hypot(p.x - (b.x + b.w / 2), p.y - (b.y + b.h / 2)) < 2.4);
+      const hut = indoorHome(world, p) ?? huts.find((b) => Math.hypot(p.x - (b.x + b.w / 2), p.y - (b.y + b.h / 2)) < 2.4);
       if (!hut) continue;
       const n = sleepersOnRoof.get(hut.id) ?? 0;
       sleepersOnRoof.set(hut.id, n + 1);
       const hx = (hut.x + hut.w / 2 - (hut.y + hut.h / 2)) * 32 + (n - 0.5) * 14;
       const hy = (hut.x + hut.w / 2 + (hut.y + hut.h / 2)) * 16 - (hut.type === 'house' ? 94 : 70);
-      if (this.visible(cam, hut.x + hut.w / 2, hut.y + hut.h / 2, 120, 110)) this.drawZzz(ctx, hx, hy, simT, p.id);
+      if (this.visible(cam, hut.x + hut.w / 2, hut.y + hut.h / 2, 120, 110)) {
+        if (p.pose === 'sleep') this.drawZzz(ctx, hx, hy, simT, p.id);
+        if (hasHabitation(world)) {
+          ctx.save();
+          ctx.font = 'bold 10px "Segoe UI", sans-serif';
+          ctx.textAlign = 'center';
+          ctx.lineWidth = 3;
+          ctx.strokeStyle = '#203027'; ctx.fillStyle = '#fff6ce';
+          const label = p.id === game.selectedId ? p.name + ' · inside' : '⌂';
+          ctx.strokeText(label, hx, hy); ctx.fillText(label, hx, hy);
+          ctx.restore();
+        }
+      }
       if (p.id === game.selectedId) this.heads.set(p.id, { x: hx, y: hy - 6 });
     }
 

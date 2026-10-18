@@ -1,4 +1,5 @@
 import { fireNear, nearestHub } from './settlements';
+import { hasHabitation, indoorHome } from './habitation';
 import { mourn, think } from './mood';
 import { noteBirth, noteDeath } from './occasions';
 import { noteDeedNear } from './reputation';
@@ -143,6 +144,11 @@ export function giveBirth(world: World, mother: Person): void {
   baby.needs.thirst = 80;
   baby.needs.energy = 85;
   spawnPerson(world, baby, mother.hhId);
+  if (indoorHome(world, mother)) {
+    baby.indoors = mother.indoors;
+    baby.x = mother.x; baby.y = mother.y;
+    baby.px = baby.x; baby.py = baby.y;
+  }
   mother.children.push(baby.id);
   if (father) father.children.push(baby.id);
   for (const par of [mother, father]) {
@@ -181,6 +187,7 @@ export function giveBirth(world: World, mother: Person): void {
 
 // ───────────────────────── death ─────────────────────────
 export function killPerson(world: World, p: Person, cause: string): void {
+  if (hasHabitation(world)) delete p.indoors;
   if (!p.alive) return;
   abortConversationFor(world, p);
   abortActivity(world, p, 'died');

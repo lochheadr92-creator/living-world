@@ -168,6 +168,8 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
   const close = iconButton('close', 'Close inspector', 'Deselect (Esc)', () => hooks.onClose());
   const head = h('header', { class: 'e-head' }, h('span', { class: 'e-tile' }, tile), h('div', { class: 'e-who' }, title, sub), h('div', { class: 'p-actions' }, locate, close));
   const purpose = h('p', { class: 'e-purpose' });
+  const residents = h('div', { class: 'home-occupants', 'aria-label': 'People inside', hidden: true });
+  let residentKey = '';
 
   const workerChip = (n: string) =>
     h(
@@ -402,7 +404,7 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
     (c, sec) => c.update(sec),
   );
 
-  const body = h('div', { class: 'e-body scroll' }, purpose, siteCard, shopCard, rowsBox, barsBox, itemsWrap, notesBox, sectionsBox);
+  const body = h('div', { class: 'e-body scroll' }, purpose, residents, siteCard, shopCard, rowsBox, barsBox, itemsWrap, notesBox, sectionsBox);
   const el = h('div', { class: 'insp-entity' }, head, body);
 
   // ───────── workshop ─────────
@@ -506,6 +508,13 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
   function update(v: EntityView, world: World): void {
     last = v;
     const e = world.byId.get(v.id);
+    const inside = e?.ent === 'building' ? world.persons.filter(p => p.alive && p.indoors === e.id) : [];
+    const key = inside.map(p => p.id + ':' + p.name).join(',');
+    if (key !== residentKey) {
+      residentKey = key;
+      residents.replaceChildren(...inside.map(p => workerChip(p.name)));
+    }
+    setHidden(residents, !inside.length);
     setIcon(tile, iconFor(e), 20);
     el.dataset.kind = v.kind;
     setText(title, v.title);

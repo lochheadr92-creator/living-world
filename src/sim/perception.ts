@@ -1,4 +1,5 @@
 import { SENSE_RADIUS } from './constants';
+import { indoorHome, sameSpace } from './habitation';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
 import { isRich } from './mood';
 import { stageOf } from './people';
@@ -114,6 +115,15 @@ export function perceive(world: World, p: Person): void {
   const r = senseRadius(world, p);
   p.seen.length = 0;
   let fresh = 0;
+  const home = indoorHome(world, p);
+  if (home) {
+    if (observe(world, p, home)) fresh++;
+    for (const q of world.persons) {
+      if (q !== p && q.alive && sameSpace(world, p, q)) p.seen.push(describeSeenPerson(world, q));
+    }
+    p.lastPercept = { tick: world.tick, seen: p.seen.length, newBeliefs: fresh };
+    return;
+  }
 
   gridQuery(world.grid, p.x, p.y, r + 2.5, (e) => {
     if (distToFootprint(e, p.x, p.y) > r) return;
@@ -126,6 +136,7 @@ export function perceive(world: World, p: Person): void {
     if (e === p) return;
     if (e.ent === 'person') {
       if (!e.alive) return;
+      if (!sameSpace(world, p, e)) return;
       if (hyp(e.x - p.x, e.y - p.y) > r) return;
       p.seen.push(describeSeenPerson(world, e));
       p.whereabouts[e.id] = { x: e.x, y: e.y, tick: world.tick };
@@ -208,6 +219,7 @@ export function refreshAccessCell(world: World, cellIdx: number): number {
  * A person only notices a change if they are close enough to see the spot again.
  */
 export function refreshBeliefs(world: World, p: Person): void {
+  if (indoorHome(world, p)) return; // cannot inspect the outside world through walls
   const r = senseRadius(world, p) * 0.92;
   for (const key of Object.keys(p.beliefs)) {
     const id = Number(key);

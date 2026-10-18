@@ -1,4 +1,5 @@
 import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
+import { evacuateHome } from './habitation';
 import { addItem, isEmptyItems, cloneItems } from './economy';
 import { addEvent, addFx } from './events';
 import { isFacilityType, newOps } from './recipes';
@@ -228,6 +229,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
 
 export function destroyBuilding(world: World, b: Building, why: string): void {
   unregisterBuilding(world, b);
+  evacuateHome(world, b);
   const scatter: Items = cloneItems(b.store.items);
   const held = b.ops?.job?.held;
   if (held) for (const k in held) addItem(scatter, k as keyof Items, held[k as keyof Items] ?? 0);

@@ -1,5 +1,6 @@
 // Side-effect imports register every activity handler.
 import './act_resource';
+import { hasHabitation } from './habitation';
 import { spoilPile, spoilStore, updateHardship } from './hardship';
 import { occasionsTick } from './occasions';
 import { updateMood } from './mood';
@@ -299,6 +300,7 @@ export function hashWorld(world: World): string {
     push(
       `P${p.id}:${r4(p.x)},${r4(p.y)},${r4(p.heading)}|${r4(p.health)}|${NEED_KEYS_STR.map((k) => r4(p.needs[k as keyof Person['needs']])).join(',')}|${JSON.stringify(p.inv)}|${p.hhId}|${p.activity ? p.activity.kind + ':' + p.activity.targetId + ':' + r4(p.activity.progress) + ':' + p.activity.phase : '-'}|${p.commitments.length}`,
     );
+    if (hasHabitation(world)) push('IN' + (p.indoors ?? 0));
     let aff = 0;
     let fam = 0;
     for (const k in p.relations) {

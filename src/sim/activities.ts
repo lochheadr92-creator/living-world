@@ -1,4 +1,5 @@
 import { injuryFactor } from './life';
+import { hasHabitation, indoorHome, interiorTarget, doorPoint, enterHome, prepareIndoorActivity, staysIndoors } from './habitation';
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
 import { cartSpeedFactor } from './carts';
 import { carryCap } from './people';
@@ -294,6 +295,21 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
 export function startActivity(world: World, p: Person, a: Activity): void {
   if (p.activity) endActivity(world, p, 'interrupted', 'switched to something else');
   p.activity = a;
+  const home = interiorTarget(world, a);
+  if (home) {
+    a.data.homeEntry = true;
+    const d = doorPoint(home);
+    a.spotX = d.x; a.spotY = d.y;
+    a.path = []; a.pi = 0; a.pathTries = 0;
+    a.phase = p.indoors === home.id ? 'work' : 'travel';
+  } else if (indoorHome(world, p) && staysIndoors(p, a)) {
+    a.phase = 'work';
+  } else if (indoorHome(world, p) && !staysIndoors(p, a)) {
+    // Even a "here" action must leave before its handler may mutate anything.
+    a.data.indoorHere = a.phase === 'work';
+    a.phase = 'travel';
+    a.path = []; a.pi = 0; a.pathTries = 0;
+  }
   a.start = world.tick;
   a.lastX = p.x;
   a.lastY = p.y;
@@ -307,6 +323,21 @@ export function startActivity(world: World, p: Person, a: Activity): void {
 }
 
 function beginWork(world: World, p: Person, a: Activity): void {
+  const home = interiorTarget(world, a);
+  if (hasHabitation(world) && a.data.homeEntry && !home) {
+    endActivity(world, p, 'failed', 'the home is no longer there'); return;
+  }
+  if (hasHabitation(world) && a.targetType === 'person') {
+    const q = world.byId.get(a.targetId);
+    if (q?.ent === 'person' && (p.indoors ?? 0) !== (q.indoors ?? 0)) {
+      endActivity(world, p, 'failed', 'they are inside a different space'); return;
+    }
+  }
+  if (home) {
+    const refused = enterHome(world, p, home);
+    if (refused) { endActivity(world, p, 'failed', refused); return; }
+    a.label = (a.kind === 'sleep' ? 'Sleeping' : a.kind === 'flee' ? 'Taking refuge' : 'Resting') + ' inside the ' + home.type;
+  }
   a.phase = 'work';
   a.progress = 0;
   a.pprogress = 0;
@@ -358,6 +389,32 @@ export function stepActivity(world: World, p: Person): void {
   if (world.tick > a.expire) {
     endActivity(world, p, a.cycle > 0 ? 'partial' : 'failed', 'took too long');
     return;
+  }
+  if (hasHabitation(world)) {
+    if (a.data.homeEntry && !interiorTarget(world, a)) {
+      endActivity(world, p, 'failed', 'the home is no longer there'); return;
+    }
+    const before = p.indoors;
+    const blocked = prepareIndoorActivity(world, p, a);
+    if (blocked) { a.blocked = blocked; p.pose = 'stand'; return; }
+    if (before && !p.indoors) {
+      a.path = []; a.pi = 0; a.pathTries = 0;
+      if (a.data.indoorHere) {
+        delete a.data.indoorHere;
+        beginWork(world, p, a);
+        if (p.activity !== a) return;
+      }
+    }
+    if (p.indoors && staysIndoors(p, a) && a.phase === 'travel') {
+      beginWork(world, p, a);
+      if (p.activity !== a) return;
+    }
+    if (a.targetType === 'person') {
+      const q = world.byId.get(a.targetId);
+      if (q?.ent === 'person' && (p.indoors ?? 0) !== (q.indoors ?? 0)) {
+        endActivity(world, p, 'failed', 'they are inside a different space'); return;
+      }
+    }
   }
   const h = handlers[a.kind];
   if (!h) {
@@ -451,6 +508,7 @@ export function resumeSuspended(world: World, p: Person): boolean {
 }
 
 export function canInterruptForTalk(p: Person): number {
+  if (p.indoors) return 0;
   if (p.pose === 'sleep' || p.pose === 'run' || p.pose === 'fear') return 0;
   const a = p.activity;
   if (!a) return 1;
