@@ -1,5 +1,5 @@
 import { addEvent, addFx, addLog } from './events';
-import { think } from './mood';
+import { isRich, think } from './mood';
 import { wolfNerve } from './hardship';
 import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
@@ -10,12 +10,13 @@ import { stageOf } from './people';
 import type { Animal, Person, World } from './types';
 import { T } from './types';
 import { hyp, turnToward } from './util';
+import { hashString, hashUnit } from './rng';
 
-export function makeWolf(world: World, x: number, y: number): Animal {
+export function makeWolf(world: World, x: number, y: number, type: Animal['type'] = 'wolf'): Animal {
   const a: Animal = {
     ent: 'animal',
     id: newId(world),
-    type: 'wolf',
+    type,
     x,
     y,
     px: x,
@@ -236,9 +237,117 @@ function bite(world: World, a: Animal, t: Person): void {
   }
 }
 
+/** is this seen animal a threat? Deer (rich worlds only) are not; everything else is. */
+export function isThreat(world: World, s: { id: number; ent: string }): boolean {
+  if (s.ent !== 'animal') return false;
+  const a = world.byId.get(s.id);
+  return !a || a.ent !== 'animal' || a.type !== 'deer';
+}
+
+/** an animal leaves the world (a deer brought down) */
+export function removeAnimal(world: World, a: Animal): void {
+  const i = world.animals.indexOf(a);
+  if (i >= 0) world.animals.splice(i, 1);
+  world.byId.delete(a.id);
+  a.health = 0;
+}
+
+/** how many deer the ground holds: two, and one more for every twenty-five people (rich only) */
+function deerTarget(world: World): number {
+  let n = 0;
+  for (const p of world.persons) if (p.alive) n++;
+  return 2 + Math.floor(n / 25);
+}
+
+/** a deer comes to the forest's edge now and then, while the herd is below what the ground holds (rich only; a hashed choice of ground) */
+function deerTick(world: World): void {
+  if (!isRich(world) || world.tick % 600 !== 300) return;
+  let deer = 0;
+  for (const a of world.animals) if (a.type === 'deer') deer++;
+  if (deer >= deerTarget(world)) return;
+  const W = world.W;
+  const H = world.H;
+  const start = Math.floor(hashUnit(hashString(world.seed), world.tick, 0xdee1) * W * H);
+  for (let k = 0; k < W * H; k += 7) {
+    const i = (start + k) % (W * H);
+    const x = i % W;
+    const y = (i / W) | 0;
+    if (world.terrain[i] !== T.FOREST || world.solid[i] !== 0) continue;
+    const hub = nearestHub(world, x, y);
+    if (hyp(hub.x - x, hub.y - y) < 16) continue;
+    let near = false;
+    for (const p of world.persons) if (p.alive && hyp(p.x - x, p.y - y) < 10) near = true;
+    if (near || !wolfWalkable(world, x + 0.5, y + 0.5)) continue;
+    const a = makeWolf(world, x + 0.5, y + 0.5, 'deer');
+    a.until = world.tick;
+    return;
+  }
+}
+
+/** a deer: grazes near where it came in, bolts from anyone close, and settles again */
+function updateDeer(world: World, a: Animal): void {
+  const night = world.light < 0.3;
+  if ((world.tick + a.id) % 6 === 0 && a.state !== 'retreat') {
+    // it notices people: a hunter stalking it is noticed later (within 4 tiles) than someone walking up (7)
+    for (const p of world.persons) {
+      if (!p.alive || p.pose === 'sleep') continue;
+      const d = hyp(p.x - a.x, p.y - a.y);
+      const notice = p.activity?.kind === 'hunt' && p.activity.targetId === a.id ? 4 : 7;
+      if (d < notice && hashUnit(a.id, p.id, world.tick >> 3) < 0.6) {
+        a.state = 'retreat';
+        a.targetId = p.id;
+        a.until = world.tick + 240;
+        break;
+      }
+    }
+  }
+  if (a.state === 'retreat') {
+    const p = personById(world, a.targetId);
+    const dx = p ? a.x - p.x : 1;
+    const dy = p ? a.y - p.y : 0;
+    const d = hyp(dx, dy) || 1;
+    let tx = a.x + (dx / d) * 10;
+    let ty = a.y + (dy / d) * 10;
+    if (!wolfWalkable(world, tx, ty)) {
+      tx = a.denX;
+      ty = a.denY;
+    }
+    moveWolf(world, a, tx, ty, 0.2);
+    if (world.tick >= a.until) {
+      a.state = 'roam';
+      a.denX = a.x;
+      a.denY = a.y;
+      newWanderNear(world, a, 6);
+    }
+    return;
+  }
+  if (world.tick >= a.until || hyp(a.wanderX - a.x, a.wanderY - a.y) < 0.6) newWanderNear(world, a, night ? 3 : 7);
+  moveWolf(world, a, a.wanderX, a.wanderY, 0.03);
+}
+
+function newWanderNear(world: World, a: Animal, r: number): void {
+  for (let i = 0; i < 6; i++) {
+    const ang = hashUnit(a.id, world.tick, i) * Math.PI * 2;
+    const rr = 1 + hashUnit(a.id, world.tick, i + 9) * r;
+    const x = a.denX + Math.cos(ang) * rr;
+    const y = a.denY + Math.sin(ang) * rr;
+    if (wolfWalkable(world, x, y)) {
+      a.wanderX = x;
+      a.wanderY = y;
+      break;
+    }
+  }
+  a.until = world.tick + 150 + Math.floor(hashUnit(a.id, world.tick, 77) * 250);
+}
+
 export function updateWildlife(world: World): void {
+  deerTick(world);
   const night = world.light < 0.3;
   for (const a of world.animals) {
+    if (a.type === 'deer') {
+      updateDeer(world, a);
+      continue;
+    }
     if (a.cooldown > 0) a.cooldown--;
     // stuck detection
     if ((world.tick + a.id) % 20 === 0) {

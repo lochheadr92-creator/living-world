@@ -3373,3 +3373,116 @@ button.worker:hover {
 .inhabit-chat-body { margin-top: 4px; }
 .inhabit-obs, .inhabit-answer { width: 100%; box-sizing: border-box; margin-top: 4px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 10px; line-height: 1.3; resize: vertical; background: rgba(0, 0, 0, 0.3); color: inherit; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 4px; padding: 4px 5px; }
 .inhabit-came { opacity: 0.85; }
+
+/* ───────────────────────── the folded top bar: one thin strip ─────────────────────────
+   Folded (the chevron by the seed, or by itself on a phone-width window), the brand, transport and summary pills sit in one row
+   and keep only what is read at a glance: the seed, play/pause and step with the speed as a label, the clock and the head-count.
+   The variable is set on the mount point so every dock below the bar moves up with it. */
+.tx-speed {
+  display: none;
+  align-items: center;
+  height: 28px;
+  padding: 0 7px;
+  border-radius: 9px;
+  background: rgba(0, 0, 0, 0.24);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: default;
+}
+.hud-fold {
+  transition: transform var(--t) var(--ease), background-color var(--t) var(--ease), color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+.hud-fold[aria-pressed='true'] {
+  transform: rotate(180deg);
+}
+.hud-folded {
+  --top-h: 60px;
+}
+.hud-folded .dock-top {
+  grid-template-columns: auto auto minmax(0, 1fr);
+  grid-template-areas: 'left right center';
+  row-gap: 0;
+}
+.hud-folded .col-right,
+.hud-folded .col-center {
+  align-items: flex-start;
+}
+.hud-folded .dock-top .pill {
+  min-height: 36px;
+  padding: 3px 6px;
+  border-radius: 12px;
+}
+.hud-folded .brand .logo,
+.hud-folded .brand .title,
+.hud-folded .brand .iconbtn:not(.hud-fold) {
+  display: none;
+}
+.hud-folded .seedchip {
+  height: 28px;
+  padding: 0 6px 0 8px;
+}
+.hud-folded .seed-val {
+  max-width: 88px;
+}
+.hud-folded .speeds,
+.hud-folded .playback,
+.hud-folded .tdiv {
+  display: none;
+}
+.hud-folded .tx-speed {
+  display: inline-flex;
+}
+.hud-folded .tbtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+.hud-folded .stats {
+  padding: 3px 4px;
+  gap: 2px;
+}
+.hud-folded .stats .weatherstat,
+.hud-folded .stats .homesstat,
+.hud-folded .stats .stdiv,
+.hud-folded .stats .st-sub {
+  display: none;
+}
+.hud-folded .stat {
+  padding: 0 6px;
+  gap: 6px;
+}
+.hud-folded .st-clock {
+  font-size: 15px;
+}
+.hud-folded .st-val {
+  font-size: 12px;
+}
+.hud-folded .stats {
+  min-width: 0;
+}
+@media (max-width: 480px) {
+  /* a phone: the strip has to fit in one row, so the head-count is the number by its icon and the seed is shorter */
+  .hud-folded .dock-top {
+    column-gap: 6px;
+  }
+  .hud-folded .peoplestat .st-word {
+    display: none;
+  }
+  .hud-folded .seed-val {
+    max-width: 64px;
+  }
+}
+@media (max-width: 400px) {
+  /* the narrowest phones: the single step goes (the . key still steps) and the seed is shorter still */
+  .hud-folded .tbtn:not(.play) {
+    display: none;
+  }
+  .hud-folded .seed-val {
+    max-width: 48px;
+  }
+  .hud-folded .stat {
+    padding: 0 4px;
+  }
+}

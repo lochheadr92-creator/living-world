@@ -1,7 +1,13 @@
 // Side-effect imports register every activity handler.
 import './act_resource';
 import { spoilPile, spoilStore, updateHardship } from './hardship';
+import { occasionsTick } from './occasions';
 import { updateMood } from './mood';
+import { illnessTick } from './illness';
+import { apprenticeTick } from './apprentice';
+import { lifeTickRich } from './life';
+import { crowdTick } from './temperament';
+import { crewsTick } from './crews';
 import './act_build';
 import './act_farm';
 import './act_production';
@@ -55,6 +61,8 @@ export function stepWorld(world: World): void {
 
   updateEnvironment(world);
   updateHardship(world);
+  occasionsTick(world);
+  crewsTick(world);
   updateSources(world);
   updatePlots(world);
   updateBuildings(world);
@@ -64,6 +72,7 @@ export function stepWorld(world: World): void {
   flushDelayedBubbles(world);
   if (tick % 30 === 0) updateRequests(world);
   if (tick % 90 === 0) decayWear(world);
+  roadsTick(world);
 
   updateWildlife(world);
   rebuildMobileGrid(world);
@@ -95,6 +104,10 @@ function stepPerson(world: World, p: Person): void {
   const tick = world.tick;
   updateNeeds(world, p);
   updateMood(world, p);
+  illnessTick(world, p);
+  apprenticeTick(world, p);
+  lifeTickRich(world, p);
+  crowdTick(world, p);
   if (p.health <= 0) {
     const n = p.needs;
     const cause = p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
@@ -158,10 +171,55 @@ function updateBuildings(world: World): void {
 
 function decayWear(world: World): void {
   const wear = world.wear;
+  const roads = world.roads;
   for (let i = 0; i < wear.length; i++) {
     if (wear[i] > 0) {
       wear[i] *= 0.9965;
       if (wear[i] < 0.01) wear[i] = 0;
+    }
+    // a road stays worn: the renderer shows it and the walk is faster (pathfinding.ts terrainSpeed reads the wear)
+    if (roads && roads[i] && wear[i] < 0.7) wear[i] = 0.7;
+  }
+}
+
+/**
+ * How worn a tile must be, for how many checks (one every 600 ticks), before it is a road; the milestones announced. Wear decays
+ * by 0.35% every 90 ticks and a step adds 0.0028, so a tile walked once in 90 ticks settles near 0.8: a road needs a footfall
+ * about every 85 ticks, kept up for two days (the first setting, 0.3 for a day, made a fifth of the map a road in twelve days).
+ */
+const ROAD_WEAR = 0.85;
+const ROAD_AFTER = 8;
+const ROAD_MILESTONES = [20, 60, 120, 240];
+
+/**
+ * Roads (rich only): a path walked hard for about a day hardens into a road that stays, faster to walk and plain to see.
+ * Nothing is built: the roads are where people already go, so they say what the settlement's life is shaped like.
+ */
+function roadsTick(world: World): void {
+  if (world.settings.dynamics !== 'rich' || world.tick % 600 !== 450) return;
+  const n = world.wear.length;
+  const age = (world.roadAge ??= new Uint8Array(n));
+  const roads = (world.roads ??= new Uint8Array(n));
+  let before = 0;
+  let after = 0;
+  for (let i = 0; i < n; i++) {
+    if (roads[i]) {
+      before++;
+      after++;
+      continue;
+    }
+    if (world.wear[i] >= ROAD_WEAR) {
+      if (age[i] < 255) age[i]++;
+      if (age[i] >= ROAD_AFTER) {
+        roads[i] = 1;
+        after++;
+      }
+    } else if (age[i] > 0) age[i]--;
+  }
+  for (const m of ROAD_MILESTONES) {
+    if (before < m && after >= m) {
+      addEvent(world, 'build', `The paths most walked have hardened into roads: ${after} tiles of road now run through the settlement.`);
+      break;
     }
   }
 }
@@ -262,9 +320,33 @@ export function hashWorld(world: World): string {
     if (o) push(`F${b.id}:${o.job ? `${o.job.recipe},${o.job.phase},${r4(o.job.progress)},${o.job.burnLeft},${JSON.stringify(o.job.held)}` : '-'}|${o.batches}|${JSON.stringify(o.earmarks)}|${JSON.stringify(o.shares)}`);
   }
   for (const m of world.meals) push(`M${m.id}:${m.status},${m.servings},${m.reserved},${m.arrived.length},${m.ate.length}`);
+  // The generation of rules a world runs is part of what world it IS: two worlds alike in every other way but running
+  // different rules are not the same world. A world with no rules version adds nothing here, so every legacy and authored
+  // world hashes exactly as it did before versioning existed (the golden fingerprints hold that).
+  if (world.settings.rulesVersion !== undefined) push(`V${world.settings.rulesVersion}`);
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in
+    for (const c of world.crews ?? []) push(`W${c.id}:${c.members.join('.')}`);
+    for (const t of world.traditions ?? []) push(`V${t.id}:${t.kind},${t.status},${t.held},${t.skipped}`);
+    for (const o of world.occasions ?? []) if (o.status !== 'done') push(`G${o.id}:${o.kind},${o.status},${o.attended.length}`);
+    for (const p of world.persons) {
+      const pay = p.payoff ?? {};
+      const ks = Object.keys(pay) as (keyof typeof pay)[];
+      if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
+    }
+    // the trade somebody has settled on bears on what they choose, so it is in the fingerprint like a plan or an estimate
+    for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.key},${p.trade.since}`);
+    if (world.roads) {
+      let n = 0;
+      for (let i = 0; i < world.roads.length; i++) n += world.roads[i];
+      if (n) push(`R${n}`);
+    }
+    for (const p of world.persons) if (p.alive && p.crowd) push(`Q${p.id}:${p.crowd}`);
+    for (const p of world.persons) if (p.alive && (p.goal || p.injury)) push(`L${p.id}:${p.goal ? p.goal.kind + ',' + p.goal.done : '-'}|${p.injury ? p.injury.kind + ',' + p.injury.until : '-'}`);
+    for (const p of world.persons) if (p.alive && p.apprentice) push(`A${p.id}:${p.apprentice.master},${p.apprentice.key}`);
+    for (const p of world.persons) if (p.alive && p.illness) push(`I${p.id}:${p.illness.since},${r4(p.illness.severity)},${p.illness.rested}`);
+    for (const p of world.persons) if (p.alive && p.heard && p.heard.length) push(`H${p.id}:${p.heard.length},${p.heard.map((r) => r.about + r.hops).reduce((a, b) => a + b, 0)}`);
     for (const p of world.persons) if (p.alive && p.intentions.length) push(`N${p.id}:${p.intentions.map((i) => `${i.kind},${i.status},${i.stepKey ?? '-'},${i.setAside}`).join(';')}`);
     // What one person still owes another, and how much of it has really been handed over (Stage D1). The coarse count in the shared
     // part of the fingerprint (`p.commitments.length`) cannot tell an undelivered promise from a kept one, and that difference is

@@ -5,6 +5,14 @@ import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
 import { planHelp, planOfActivity } from './intent';
+import { describePay } from './learning';
+import { describeHeard } from './reputation';
+import { describeIllness } from './illness';
+import { describeGoal, describeInjury } from './life';
+import { describeApprentice } from './apprentice';
+import { describeLifeEvent } from './lifechanges';
+import { describeCrew } from './crews';
+import { describeTrade } from './trade';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -56,6 +64,16 @@ export interface OpportunityView {
   x: number;
   y: number;
 }
+export interface HeardView {
+  about: number;
+  name: string;
+  text: string;
+  via: string;
+  /** days ago */
+  age: number;
+  /** above 0 to the person's credit, below against them, 0 for plain news */
+  good: number;
+}
 export interface RelationView {
   id: number;
   name: string;
@@ -104,6 +122,8 @@ export interface PersonView {
   householdColor: number;
   home: string;
   health: number;
+  /** the fever they have now, in words (rich only; null when well) */
+  illness: string | null;
   mood: number;
   /** rich dynamics only: what is weighing on or lifting them now, strongest first; null in any other world */
   thoughts: { why: string; value: number }[] | null;
@@ -111,7 +131,20 @@ export interface PersonView {
   partner: string | null;
   traits: { key: string; value: number }[];
   traitSummary: string;
+  /** what they hope for, and what hurts them, in words (rich only; null otherwise) */
+  goal: string | null;
+  injury: string | null;
+  /** the change in life they are living through (rich only; null otherwise) */
+  lifeEvent: string | null;
+  /** the crew they are one of (rich only; null otherwise) */
+  crew: string | null;
   skills: { key: string; value: number }[];
+  /** what each kind of gathering has paid them, in their own experience (rich only; empty otherwise), best first */
+  payoffs: { key: string; ratio: number; n: number }[];
+  /** what they have seen and been told of other people (rich only; empty otherwise), freshest first */
+  heard: HeardView[];
+  /** the trade they have settled on and why, in their own terms (rich only; '' for somebody with none) */
+  trade: string;
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -172,7 +205,7 @@ export function describeEntityName(world: World, e: Entity): string {
     case 'person':
       return e.name;
     case 'animal':
-      return 'Wolf';
+      return e.type === 'deer' ? 'Deer' : 'Wolf';
     case 'source':
       return SOURCE_NOUN[e.type][0].toUpperCase() + SOURCE_NOUN[e.type].slice(1);
     case 'building':
@@ -427,7 +460,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     if (r.from !== p.id && r.to !== p.id) continue;
     if (world.tick - (r.resolved || r.created) > 3000) continue;
     const text =
-      r.kind === 'food' ? 'food' : r.kind === 'water' ? 'water' : r.kind === 'info' ? `where to find ${r.infoKind}` : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : `${r.amount} ${r.item ?? r.kind}`;
+      r.kind === 'food' ? 'food' : r.kind === 'water' ? 'water' : r.kind === 'info' ? `where to find ${r.infoKind}` : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : r.kind === 'watch' ? 'an eye kept on a child' : r.kind === 'fire' ? 'the fire kept going' : `${r.amount} ${r.item ?? r.kind}`;
     // how far a promise has actually got is the promiser's own commitment, not the request: a promise is not a delivery
     const promiser = world.byId.get(r.to);
     const c = promiser && promiser.ent === 'person' ? promiser.commitments.find((x) => x.id === r.commitmentId) : undefined;
@@ -478,6 +511,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     householdColor: hh ? hh.color : 0,
     home: homeB && homeB.ent === 'building' ? `${BUILD_DEF[homeB.type].label} (${Math.round(homeB.condition)}% sound)` : 'no home yet',
     health: p.health,
+    illness: describeIllness(world, p),
     // in a rich world the bar shows the mood that counts (needs plus what has happened to them): 70 is the usual, as a level of 0 is
     mood: isRich(world) && p.mood ? Math.max(0, Math.min(100, Math.round(70 + p.mood.level * 0.7))) : moodOf(p),
     thoughts: isRich(world) ? thoughtsOf(world, p) : null,
@@ -485,7 +519,14 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     partner: p.partnerId ? nameOf(world, p.partnerId) : null,
     traits: Object.entries(p.traits).map(([key, value]) => ({ key, value })),
     traitSummary: traitSummary(p.traits),
+    goal: describeGoal(world, p),
+    injury: describeInjury(world, p),
+    lifeEvent: describeLifeEvent(world, p),
+    crew: describeCrew(world, p),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
+    payoffs: describePay(p),
+    heard: describeHeard(world, p),
+    trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },
@@ -585,6 +626,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
         rows.push(['State', b.fuel > 0 ? 'burning' : 'out']);
       }
       if (b.store.cap > 0) rows.push(['Storage', `${Math.round(weightOf(b.store.items))}/${b.store.cap} used`]);
+      if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push(['Built by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
       const notes: string[] = [];
       if (isHomeType(b.type)) {
         const dwellers = hh ? membersOf(world, hh).map((m) => m.name) : [];
@@ -635,11 +677,11 @@ export function describeEntity(world: World, id: number): EntityView | null {
       return {
         kind: 'animal',
         ...base,
-        title: 'Wolf',
+        title: e.type === 'deer' ? 'Deer' : 'Wolf',
         subtitle: 'Wild animal',
-        rows: [['Behaviour', e.state === 'roam' ? 'prowling its territory' : e.state === 'stalk' ? 'stalking someone' : e.state === 'retreat' ? 'slinking away' : 'attacking']],
+        rows: [['Behaviour', e.type === 'deer' ? (e.state === 'retreat' ? 'bolting' : 'grazing') : e.state === 'roam' ? 'prowling its territory' : e.state === 'stalk' ? 'stalking someone' : e.state === 'retreat' ? 'slinking away' : 'attacking']],
         bars: [],
-        notes: ['Wolves avoid fires, huts and groups of people.'],
+        notes: [e.type === 'deer' ? 'Deer bolt from anyone who comes close; a hunting party brings one down more surely than one hunter.' : 'Wolves avoid fires, huts and groups of people.'],
         position: { x: e.x, y: e.y },
       };
     case 'cart':

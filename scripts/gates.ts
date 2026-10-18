@@ -14,7 +14,8 @@
 //
 // A metric passes when the run's mean lies within 3 standard errors of the recorded mean, the standard error combining the spread of
 // the recorded seeds and of this run's seeds (with a floor so that near-constant counts are not held to an impossible band).
-// Every seed must also still have a living population above `minPeople`.
+// Every seed must also still have a living population above `minPeople`. A gated metric the baseline never recorded is skipped
+// and said so, never silently passed.
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { METRICS } from './lab/lab';
@@ -38,11 +39,13 @@ if (record && existsSync(FILE) && !force) {
   console.log(`${FILE} already exists. Recording would replace a baseline other runs are checked against; pass --force if that is what you mean.`);
   process.exit(1);
 }
-const GATED: Metric[] = ['people', 'deaths', 'workplaces', 'solidHomes', 'buildings', 'plots', 'homeless', 'belowCritical', 'meanHunger'];
+// `tools` and `meanCondition` are what private plans are for; a rule change that quietly halved the village's tools must not pass.
+// A baseline recorded before they existed (docs/gates.json, the authored one) has no band for them: they are then skipped, loudly.
+const GATED: Metric[] = ['people', 'deaths', 'workplaces', 'solidHomes', 'buildings', 'plots', 'homeless', 'belowCritical', 'meanHunger', 'tools', 'meanCondition'];
 const SD_FLOOR = 0.5;
 const MIN_PEOPLE = 50;
 
-type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: 'authored' | 'rich' };
+type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: 'authored' | 'rich'; rulesVersion?: number | null };
 const rows: Row[] = [];
 for (const f of readdirSync(dir)) {
   if (!/^lab_.+\.jsonl$/.test(f)) continue;
@@ -57,19 +60,26 @@ if (!rows.length) {
   process.exit(1);
 }
 const now = {} as Record<Metric, { mean: number; sd: number }>;
-for (const m of METRICS) {
+// a run made before a metric existed has no value for it; it is neither recorded nor gated
+const metrics = METRICS.filter((m) => rows.every((r) => typeof r.outcome[m] === 'number'));
+for (const m of metrics) {
   const v = rows.map((r) => r.outcome[m]);
   now[m] = { mean: Math.round(mean(v) * 100) / 100, sd: Math.round(sd(v) * 100) / 100 };
 }
 // what world these rows came from. A row written before `dynamics` was recorded came from an authored world, which is what the
 // lab's default was and still is.
 const dynamics = rows[0].dynamics ?? 'authored';
-const mixed = rows.some((r) => (r.dynamics ?? 'authored') !== dynamics || r.profile !== rows[0].profile || r.fork !== rows[0].fork || r.days !== rows[0].days);
+// The generation of rules is part of what world these rows came from: "both rich" is not "the same rules", because every
+// generation of the rich rules has carried that one word. A row with no version was run before versions existed (or
+// deliberately unversioned), which is a different thing again, and is kept as null rather than read as the current one.
+const rulesVersion = rows[0].rulesVersion ?? null;
+const sameRules = (r: Row) => (r.dynamics ?? 'authored') === dynamics && (r.rulesVersion ?? null) === rulesVersion;
+const mixed = rows.some((r) => !sameRules(r) || r.profile !== rows[0].profile || r.fork !== rows[0].fork || r.days !== rows[0].days);
 if (mixed) {
-  console.log('the rows in ' + dir + ' come from different experiments (dynamics/profile/fork/days): nothing here is comparable');
+  console.log('the rows in ' + dir + ' come from different experiments (dynamics/rules version/profile/fork/days): nothing here is comparable');
   process.exit(1);
 }
-const header = { dynamics, profile: rows[0].profile, fork: rows[0].fork, days: rows[0].days, branch: spec, n: rows.length };
+const header = { dynamics, rulesVersion, profile: rows[0].profile, fork: rows[0].fork, days: rows[0].days, branch: spec, n: rows.length };
 
 if (record) {
   writeFileSync(FILE, JSON.stringify({ ...header, recordedFrom: rows.map((r) => r.seed).sort(), metrics: now }, null, 2) + '\n');
@@ -81,11 +91,13 @@ if (!existsSync(FILE)) {
   console.log(`${FILE} does not exist: record a baseline for this experiment first (--record --file ${FILE})`);
   process.exit(1);
 }
-const base = JSON.parse(readFileSync(FILE, 'utf8')) as typeof header & { dynamics?: 'authored' | 'rich'; branch?: string; metrics: typeof now };
+const base = JSON.parse(readFileSync(FILE, 'utf8')) as typeof header & { dynamics?: 'authored' | 'rich'; rulesVersion?: number | null; branch?: string; metrics: typeof now };
 const baseDyn = base.dynamics ?? 'authored';
+const baseRules = base.rulesVersion ?? null;
 // a gate compares like with like: a rich run checked against the authored baseline would pass or fail for the wrong reason
 const differs = [
   baseDyn !== dynamics ? `dynamics ${baseDyn} vs ${dynamics}` : '',
+  baseRules !== rulesVersion ? `rules version ${baseRules ?? 'unversioned'} vs ${rulesVersion ?? 'unversioned'}` : '',
   base.profile !== header.profile ? `profile ${base.profile} vs ${header.profile}` : '',
   base.fork !== header.fork ? `fork day ${base.fork} vs ${header.fork}` : '',
   base.days !== header.days ? `days ${base.days} vs ${header.days}` : '',
@@ -98,6 +110,10 @@ if (differs.length) {
 let failed = 0;
 console.log(`gates: ${rows.length} seeds (${dynamics}, ${header.profile}, from day ${header.fork}, ${header.days} days, branch “${spec}”) against ${base.n} recorded in ${FILE}`);
 for (const m of GATED) {
+  if (!base.metrics[m] || !now[m]) {
+    console.log(`  skip  ${m.padEnd(14)} ${!base.metrics[m] ? `not in ${FILE}: re-record the baseline to gate it` : 'not in this run'}`);
+    continue;
+  }
   const se = Math.sqrt(Math.max(SD_FLOOR, base.metrics[m].sd) ** 2 / base.n + Math.max(SD_FLOOR, now[m].sd) ** 2 / rows.length);
   const lo = base.metrics[m].mean - 3 * se;
   const hi = base.metrics[m].mean + 3 * se;

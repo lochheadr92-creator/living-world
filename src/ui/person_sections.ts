@@ -1,7 +1,7 @@
 // The collapsible sections under the "What are they up to?" card in the person view: the social contract (conversation, shared
 // meal, promises, quarrels, worries: person_social.ts), opportunities, relationships, requests, recent experiences, what they
 // know, family, traits and skills, and (debug only) the last decision. A section's body is only filled in while it is open, so a closed section costs nothing.
-import type { OpportunityView, PersonView, RelationView, RequestView } from '../sim/inspect';
+import type { HeardView, OpportunityView, PersonView, RelationView, RequestView } from '../sim/inspect';
 import { cap, h, KeyedList, setBool, setHidden, setState, setText, setVar, setWidth, signed, toggle } from './dom';
 import { icon, setIcon } from './icons';
 import { makeBar, makeSection, type BarHandle, type SectionHandle } from './widgets';
@@ -357,7 +357,28 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const traitSummary = h('p', { class: 'trait-sum' });
   const traitBox = h('div', { class: 'traits' });
   const skillBox = h('div', { class: 'skills' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox);
+  const payHead = h('div', { class: 'sub-h cap' }, 'What has paid them');
+  const payBox = h('div', { class: 'skills' });
+  // what they have seen and been told of others (rich worlds only; the heading goes when there is nothing)
+  const heardHead = h('div', { class: 'sub-h cap' }, 'What they have heard of people');
+  const heardBox = h('div', { class: 'list heard' });
+  // the trade they have settled on, if any: one line, in their own terms (trade.ts; an apprenticeship is said beside it)
+  const tradeLine = h('p', { class: 'trait-sum' });
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox, tradeLine, payHead, payBox, heardHead, heardBox);
+  const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
+    heardBox,
+    () => {
+      const text = h('span', { class: 'thought-why' });
+      const via = h('span', { class: 'rel-recent' });
+      return { el: h('div', { class: 'thought' }, text, via), text, via };
+    },
+    (c, r) => {
+      setText(c.text, cap(r.text) + '.');
+      setText(c.via, `${r.via}, ${r.age === 0 ? 'today' : r.age === 1 ? 'yesterday' : `${r.age} days ago`}`);
+      c.el.classList.toggle('neg', r.good < 0);
+      c.el.classList.toggle('pos', r.good > 0);
+    },
+  );
   const traitList = new KeyedList<{ key: string; value: number }, { el: HTMLElement; dot: HTMLElement }>(
     traitBox,
     (t) => {
@@ -389,6 +410,22 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
     (c, s) => {
       c.bar.set((s.value - 0.4) / 1.4, 'var(--info)');
       setText(c.v, `×${s.value.toFixed(2)}`);
+    },
+  );
+
+  // what each kind of gathering has come to for them, in their own experience (rich worlds only; the heading goes when there is none)
+  const payList = new KeyedList<{ key: string; ratio: number; n: number }, { el: HTMLElement; bar: BarHandle; v: HTMLElement }>(
+    payBox,
+    (s) => {
+      const bar = makeBar('thin');
+      const v = h('span', { class: 'skill-v num' });
+      return { el: h('div', { class: 'skill' }, h('span', { class: 'skill-l' }, SKILL_LABEL[s.key] ?? cap(s.key)), bar.el, v), bar, v };
+    },
+    (c, s) => {
+      // 1× is as the plan expected: the bar sits at the middle there, and reaches the ends at a quarter and at four times
+      c.bar.set(0.5 + Math.log2(Math.max(0.25, Math.min(4, s.ratio))) / 4, s.ratio >= 1 ? 'var(--good)' : 'var(--warn)');
+      setText(c.v, `${s.ratio.toFixed(1)}× · ${s.n}`);
+      c.el.setAttribute('aria-label', `${SKILL_LABEL[s.key] ?? cap(s.key)}: paid ${s.ratio.toFixed(1)} times what was expected, over ${s.n} ${s.n === 1 ? 'outing' : 'outings'}`);
     },
   );
 
@@ -499,9 +536,15 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       }
 
       if (traitSec.isOpen()) {
-        setText(traitSummary, v.traitSummary ? cap(v.traitSummary) + '.' : '');
+        setText(traitSummary, (v.traitSummary ? cap(v.traitSummary) + '.' : '') + (v.goal ? ` ${cap(v.goal)}.` : '') + (v.lifeEvent ? ` ${cap(v.lifeEvent)}.` : '') + (v.crew ? ` ${cap(v.crew)}.` : ''));
         traitList.sync(v.traits, (t) => t.key);
         skillList.sync(v.skills, (s) => s.key);
+        setText(tradeLine, v.trade ? `Their trade: ${v.trade}.` : '');
+        setHidden(tradeLine, !v.trade);
+        setHidden(payHead, v.payoffs.length === 0);
+        payList.sync(v.payoffs, (s) => s.key);
+        setHidden(heardHead, v.heard.length === 0);
+        heardList.sync(v.heard, (r) => `${r.about}:${r.text}`);
       }
 
       dbgSec.setVisible(game.debug);

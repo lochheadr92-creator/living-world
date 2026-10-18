@@ -24,7 +24,7 @@ import type { Transcript } from '../src/agent/transcript';
 import { DAY } from '../src/sim/constants';
 import { clockText } from '../src/sim/environment';
 import { createWorld } from '../src/sim/factory';
-import { settingsForProfile } from '../src/sim/profiles';
+import { freshRunSettings, parseRunRules } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { hashString } from '../src/sim/rng';
 import type { Settings, World } from '../src/sim/types';
@@ -177,7 +177,8 @@ async function main(): Promise<void> {
   }
 
   const profile = opt('profile', 'normal') as ProfileName;
-  const settings = settingsForProfile(profile, opt('seed', 'meadow'), { harsh: flag('harsh'), immigration: !flag('no-arrivals'), dynamics: opt('dynamics', 'authored') as 'authored' | 'rich' });
+  // a fresh world for a live or standard run; a replay uses the settings recorded in its transcript
+  const settings = freshRunSettings(parseRunRules(opt('dynamics', 'rich')), profile, opt('seed', 'meadow'), { harsh: flag('harsh'), immigration: !flag('no-arrivals') });
   const from = Math.round(Number(opt('from-day', '1')) * DAY);
   const until = from + Math.round(Number(opt('days', '1')) * DAY);
   const w = worldFor(settings, from);

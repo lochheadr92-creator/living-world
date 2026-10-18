@@ -1,7 +1,7 @@
 // The limits on how big a settlement may get (src/sim/rules.ts): the ordinary values are the original numbers, scaled values are
 // ratios of the founding population, and workplaces and open sites are counted per settlement only when a world asks for that.
 import { describe, expect, it } from 'vitest';
-import { createSite } from '../src/sim/buildings';
+import { createBuilding, createSite } from '../src/sim/buildings';
 import { conservationReport } from '../src/sim/economy';
 import { openSitesNear, projectLimit, projectsUnderWay, siteConflict } from '../src/sim/act_build';
 import { makeCtx } from '../src/sim/optutil';
@@ -24,9 +24,21 @@ describe('rule sets', () => {
       projectsRaised: 3,
       projectsRaisedAt: 55,
       facilityRadius: Infinity,
+      facilityAllowance: 1,
       siteRadius: Infinity,
       arrivalSpacing: 6000,
     });
+  });
+
+  it('the workplace allowance follows a settlement: one of each kind per ordinary camp of founders, and always one for the ordinary rules', () => {
+    expect(ORDINARY_RULES.facilityAllowance).toBe(1);
+    expect(scaledRules(28).facilityAllowance).toBe(1); // a camp the size the world was tuned for: the rule it always had
+    expect(scaledRules(100).facilityAllowance).toBe(4); // a town of a hundred may come to hold four storehouses
+    expect(scaledRules(250, 42).facilityAllowance).toBe(2); // Huge: a camp of about 42 may hold two of each
+    expect(scaledRules(100, 25).facilityAllowance).toBe(1); // Large: four camps of 25, one of each per camp as before
+    // the ordinary rules never scale, whatever the world was founded with
+    expect(rulesFor(undefined, 250).facilityAllowance).toBe(1);
+    expect(rulesFor('ordinary', 250).facilityAllowance).toBe(1);
   });
 
   it('a world uses the ordinary rules unless it asks for scaled ones (older saves and staged scenes never do)', () => {
@@ -34,6 +46,23 @@ describe('rule sets', () => {
     expect(rulesOf(natural('rules-b', { ruleSet: 'ordinary', population: 100 }))).toBe(ORDINARY_RULES);
     expect(rulesFor(undefined, 250)).toBe(ORDINARY_RULES);
     expect(rulesOf(natural('rules-c', { ruleSet: 'scaled', population: 100 })).immigrationCap).toBeGreaterThan(54);
+  });
+
+  it('keeps the larger workplace allowance behind rich dynamics, including for Huge profiles', () => {
+    const authoredHuge = natural('rules-huge-authored', {
+      ruleSet: 'scaled',
+      population: 250,
+      settlementFounders: 42,
+      dynamics: 'authored',
+    });
+    const richHuge = natural('rules-huge-rich', {
+      ruleSet: 'scaled',
+      population: 250,
+      settlementFounders: 42,
+      dynamics: 'rich',
+    });
+    expect(rulesOf(authoredHuge).facilityAllowance).toBe(1);
+    expect(rulesOf(richHuge).facilityAllowance).toBe(2);
   });
 
   it('scaled rules at the ordinary founding population are the ordinary limits, made local', () => {
@@ -72,13 +101,14 @@ describe('workplaces and open sites, ordinary against scaled', () => {
   const FAR = { x: 10, y: 30 };
   const NEAR = { x: 45, y: 50 };
 
-  function yardWorld(ruleSet: 'ordinary' | 'scaled', population = 28) {
+  function yardWorld(ruleSet: 'ordinary' | 'scaled', population = 28, dynamics: 'authored' | 'rich' = 'authored') {
     const s = stage('rules-yard-' + ruleSet);
     const a = addPerson(s, 'Ann', 44, 44);
     building(s, 'timber_yard', 60, 60, 0);
     const w = done(s);
     w.settings.ruleSet = ruleSet;
     w.settings.population = population;
+    w.settings.dynamics = dynamics;
     return { w, a };
   }
 
@@ -87,6 +117,20 @@ describe('workplaces and open sites, ordinary against scaled', () => {
     expect(siteConflict(w, 'timber_yard', a.hhId)).toMatch(/already a timber yard/);
     expect(siteConflict(w, 'timber_yard', a.hhId, 0, 0, NEAR)).toMatch(/already a timber yard/);
     expect(siteConflict(w, 'timber_yard', a.hhId, 0, 0, FAR)).toMatch(/already a timber yard/);
+  });
+
+  it('scaled: a settlement may hold one of each kind per ordinary camp of its founders, and no more', () => {
+    // a town of a hundred: four timber yards allowed in the one settlement, the fifth refused
+    const { w, a } = yardWorld('scaled', 100, 'rich');
+    expect(rulesOf(w).facilityAllowance).toBe(4);
+    expect(siteConflict(w, 'timber_yard', a.hhId, 0, 0, NEAR)).toBeNull(); // one stands; three more may be built
+    createBuilding(w, 'timber_yard', 56, 60, 0);
+    createSite(w, 'timber_yard', 64, 60, a.hhId, a.id);
+    expect(siteConflict(w, 'timber_yard', a.hhId, 0, 0, NEAR)).toBeNull(); // three of the four taken (two built, one being built)
+    createSite(w, 'timber_yard', 56, 64, a.hhId, a.id);
+    expect(siteConflict(w, 'timber_yard', a.hhId, 0, 0, NEAR)).toMatch(/already being built/);
+    // and it is a settlement's allowance, not the world's: far away is a different settlement with its own
+    expect(siteConflict(w, 'timber_yard', a.hhId, 0, 0, FAR)).toBeNull();
   });
 
   it('scaled: one per settlement — blocked near an existing one, free far from it', () => {

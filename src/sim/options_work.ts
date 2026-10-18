@@ -15,6 +15,7 @@ import { delBelief, estimatedAmount, noteFailure, recentFailure } from './knowle
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { drive } from './needs';
 import { stageOf } from './people';
+import { fireCommitment } from './responsibilities';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, rankWaterSpots, sourceUsable, spotNear, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
 import { foragePlans } from './options_survival';
@@ -24,6 +25,7 @@ import { hashUnit } from './rng';
 import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { T } from './types';
 
+import { payNudge } from './learning';
 import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
 
@@ -346,9 +348,12 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
     const sc = new Scorer().add(why, base).add('walking', -pen(c.e));
     const sk = p.skills[type === 'tree' ? 'wood' : 'stone'];
     sc.add('good at it', (sk - 1) * 5);
+    const pay = payNudge(world, p, type);
+    if (pay) sc.add(pay.label, pay.value);
     const dng = dangerAt(ctx, c.b.x, c.b.y);
     if (dng > 0) sc.add('wolf nearby', -24 * dng * tm.caution);
     const util = sc.total * nightMult(ctx) * weatherMult(ctx);
+    const expected = c.e + units * WORK[type];
     addOption(ctx, {
       kind: 'gather',
       label: `${SOURCE_VERB[type]} ${why}`,
@@ -356,7 +361,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
       need: null,
       util,
       parts: sc.parts,
-      eta: c.e + units * WORK[type],
+      eta: expected,
       key: `gather:${c.b.id}`,
       targetId: c.b.id,
       tag,
@@ -378,7 +383,8 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
           utility: util,
           minCommit: 80,
           maxTicks: 1300,
-          data: { purpose: tag, stype: type },
+          // `eta` is the expectation the person's own estimate of what pays is later judged against (learning.ts)
+          data: { purpose: tag, stype: type, eta: expected },
         });
       },
     });
@@ -629,8 +635,11 @@ function optPlanBuild(ctx: Ctx): void {
   // (with scaled rules, "the settlement" is what lies within the settlement radius; with the ordinary rules it is the whole world)
   const sameSettlement = (x: number, y: number): boolean => within(rules.facilityRadius, anchor.x, anchor.y, x, y);
   const huts = world.buildings.filter((b) => isSolidHome(b.type) && sameSettlement(b.x + b.w / 2, b.y + b.h / 2)).length;
-  const hasStore = beliefsByKind(p, ['building']).some((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y)) || beliefsByKind(p, ['site']).some((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y));
-  if (!hasStore && huts >= 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
+  // How many stores they know of in their own settlement, standing or being built. The ordinary world allows one, so this is the
+  // rule it always had; a town may come to want another, and does so once the settlement has a solid home for each store it has
+  // (a hundred people carrying everything to one hut is what the single allowance did to them).
+  const stores = beliefsByKind(p, ['building', 'site']).filter((b) => b.btype === 'storehouse' && sameSettlement(b.x, b.y)).length;
+  if (stores < rules.facilityAllowance && huts >= stores + 1 && knowTrees && knowRocks && !world.sites.some((s) => s.type === 'storehouse' && sameSettlement(s.x + s.w / 2, s.y + s.h / 2))) {
     const spirit = (p.traits.generosity + p.traits.sociability + p.traits.diligence) / 3;
     if (hs.shortage < 0.5 && spirit > 0.46) tryPlan('storehouse', 8 + 22 * spirit, 'a shared storehouse for the settlement');
   }
@@ -648,11 +657,13 @@ function optRepairAndFire(ctx: Ctx): void {
       const wanted = fireFuelWanted(world);
       // wood a plan of theirs has spoken for is not firewood
       const spare = freeOf(p, 'wood');
-      if (fuel > wanted || spare < 1) continue;
-      if (!(ctx.night || world.light < 0.55 || world.weather.rain > 0.3 || fuel < 150 || wanted > 500)) continue;
+      const promised = fireCommitment(p, b.id);
+      if ((fuel > wanted && !promised) || spare < 1) continue;
+      if (!(ctx.night || world.light < 0.55 || world.weather.rain > 0.3 || fuel < 150 || wanted > 500 || promised)) continue;
       const lack = Math.max(0, Math.min(1, (wanted - fuel) / wanted));
       const cold = ctx.drives.warmth > 15;
       const sc = new Scorer().add(wanted > 500 ? 'the fire has to last the night' : 'the fire is getting low', 10 + 14 * lack + (ctx.night ? 8 : 0) + 8 * p.traits.generosity).add('walking', -pen(e));
+      if (promised) sc.add('promised to keep it going', 18);
       if (cold) sc.add('cold', ctx.drives.warmth * 0.55);
       addOption(ctx, {
         kind: 'fuel_fire',
@@ -989,7 +1000,7 @@ function optSalvage(ctx: Ctx): void {
         value += 10;
       }
     }
-    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain'] as const) {
+    for (const k of ['seeds', 'wood', 'stone', 'planks', 'bricks', 'handles', 'charcoal', 'iron', 'clay', 'ore', 'flour', 'bread', 'berries', 'fruit', 'fish', 'grain', 'meat'] as const) {
       const n = unitsOf(items[k]);
       if (n <= 0) continue;
       const heavy = k === 'wood' || k === 'stone' || k === 'planks' || k === 'bricks' || k === 'clay' || k === 'ore';
@@ -1287,6 +1298,44 @@ function optCommitments(ctx: Ctx): void {
   const { world, p } = ctx;
   for (const c of p.commitments) {
     if (c.status !== 'active') continue;
+    if (c.kind === 'work' && c.milestone === 'watched') {
+      // a promise to keep an eye on a child (responsibilities.ts): go and stay with them
+      const child = world.byId.get(c.destId ?? 0);
+      if (!child || child.ent !== 'person' || !child.alive) continue;
+      const loc = whereIs(ctx, child.id, 0) ?? { x: child.x, y: child.y };
+      const e = eta(ctx, loc.x, loc.y);
+      const to = world.byId.get(c.to);
+      const sc = new Scorer().add(`promised ${to && to.ent === 'person' ? to.name : 'someone'} to keep an eye on ${child.name}`, 48).add('walking', -pen(e));
+      addOption(ctx, {
+        kind: 'visit',
+        label: `Keep an eye on ${child.name} as promised`,
+        goal: `to keep my promise to watch ${child.name}`,
+        need: null,
+        util: sc.total,
+        parts: sc.parts,
+        eta: e + 300,
+        key: `watch:${child.id}`,
+        targetId: child.id,
+        tag: 'promise',
+        make: () =>
+          newActivity(world, p, {
+            kind: 'visit',
+            label: `Keeping an eye on ${child.name}`,
+            goal: `to keep my promise to watch ${child.name}`,
+            targetId: child.id,
+            targetType: 'person',
+            tx: loc.x,
+            ty: loc.y,
+            spotX: loc.x,
+            spotY: loc.y,
+            utility: sc.total,
+            minCommit: 100,
+            maxTicks: 900,
+            data: { watch: true, commitmentId: c.id, items: {}, sticky: true },
+          }),
+      });
+      continue;
+    }
     if (c.kind === 'deliver' && c.item) {
       const to = world.byId.get(c.to);
       if (!to || to.ent !== 'person' || !to.alive) continue;

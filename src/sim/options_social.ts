@@ -1,12 +1,21 @@
+import { isRich } from './mood';
 import { newActivity } from './activities';
+import { reputationOf } from './reputation';
+import { favourOwedBy } from './misdeeds';
+import { aloneOptions } from './temperament';
+import { companyPull } from './lifechanges';
+import { crewMates } from './crews';
+import { quarrelsFor } from './mediation';
+import { childrenNeedingWatch, laidUp } from './responsibilities';
 import { BUILD_DEF } from './constants';
-import { pickFood } from './economy';
+import { invRoom, pickFood } from './economy';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, eta, pen, sourceUsable, traitMods } from './optutil';
 import type { Ctx, Option } from './optutil';
 import { fractionAvailable, hhState } from './options_work';
 import { isDependent, stageOf } from './people';
-import { MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
-import { outstandingForPlan } from './intent';
+import { MAKING_NOTE, MAX_ACTIVE_COMMITMENTS, activeCommitments, helpersOn, outstandingFor, surplusOf, valueOf, isFood } from './social';
+import { outstandingForPlan, projectAsksOn } from './intent';
+import { attendOptions } from './occasions';
 import { wantsAmends } from './grievance';
 import { mealOptions } from './meals';
 import { welfareOptions } from './welfare';
@@ -14,7 +23,7 @@ import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
 import { hashUnit } from './rng';
 import { spark } from './relations';
-import type { Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
+import type { ActivityKind, Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
 import { clamp, hyp } from './util';
 
 interface Cand {
@@ -35,6 +44,8 @@ function candidates(ctx: Ctx, includeAvoided = false): Cand[] {
     if (!e || e.ent !== 'person' || !e.alive) continue;
     const rel = p.relations[s.id];
     if (!includeAvoided && rel && rel.avoidUntil > world.tick) continue;
+    // the cautious keep their distance from someone plainly feverish, unless they are close (rich only: nobody is ill otherwise)
+    if (e.illness && e.illness.severity >= 0.5 && p.traits.caution > 0.55 && (rel?.affinity ?? 0) < 40 && !rel?.kin) continue;
     if ((p.cooldowns['talk' + s.id] ?? 0) > world.tick) continue;
     out.push({ s, q: e, aff: rel?.affinity ?? 0, fam: rel?.familiarity ?? 0, d: hyp(s.x - p.x, s.y - p.y) });
   }
@@ -102,6 +113,11 @@ function optChat(ctx: Ctx): void {
       sc.add('drawn to each other', (ctx.night ? 9 : 4.5) + Math.max(0, c.aff) * 0.05);
     }
     sc.add('close by', sd > 0 ? Math.max(0, 6 - c.d) * 0.6 : 0);
+    const rep = reputationOf(ctx.world, p, c.q.id);
+    if (rep) sc.add(rep > 0 ? 'has a good name' : 'has a bad name', 3 * rep);
+    const pull = companyPull(ctx.world, p, c.q);
+    if (pull) sc.add('someone to lean on', pull);
+    if (crewMates(ctx.world, p, c.q)) sc.add('one of my crew', 3);
     sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)));
     if (sc.total > 6) scored.push({ c, sc });
   }
@@ -110,6 +126,11 @@ function optChat(ctx: Ctx): void {
     mkSocial(ctx, c, 'chat', {}, `Chat with ${c.q.name}`, 'to catch up and share news', 'social', sc, 'social');
   }
 }
+
+// What somebody is visibly doing, as it bears on whether they would hand over what they are carrying (Stage D1's ask).
+// `IDLE_ACTS` is "not in the middle of anything"; `OWN_WORK_ACTS` is "working with what is in their hands".
+const IDLE_ACTS: (ActivityKind | '')[] = ['', 'wander', 'rest', 'warm', 'visit', 'explore'];
+const OWN_WORK_ACTS: (ActivityKind | '')[] = ['build', 'repair', 'craft', 'plan_site', 'tool_work', 'operate'];
 
 // ───────────────────────── asking for help ─────────────────────────
 function optRequest(ctx: Ctx): void {
@@ -140,9 +161,21 @@ function optRequest(ctx: Ctx): void {
       else if (c.aff >= 25) plaus = 0.5;
       else if (dr >= 70) plaus = 0.32;
       if (plaus < 0.3) continue;
+      const owed = favourOwedBy(world, p, c.q);
+      // an ask worth making (rich only): weighed by how likely the answer is yes, from trust, their name and what they owe;
+      // one that would likely be refused is not made, and the inspector says so
+      if (isRich(world)) {
+        const trust = p.relations[c.q.id]?.trust ?? 10;
+        const likely = plaus * (0.55 + 0.45 * Math.max(0, Math.min(1, (trust + 20) / 80))) + 0.15 * reputationOf(world, p, c.q.id) + 0.1 * Math.min(2, owed);
+        if (likely < 0.3 && dr < 70) {
+          addBlocked(ctx, 'socialize', `Ask ${c.q.name} for ${label}`, c.q.id, 'not worth asking: they would likely say no', 'request');
+          continue;
+        }
+      }
       const sc = new Scorer();
       sc.add(need === 'hunger' ? 'hungry' : 'thirsty', dr * 0.72 * plaus);
       sc.add(itemCheck(c.s) ? 'they are carrying some' : c.q.hhId === p.hhId ? 'family' : c.aff >= 25 ? 'a friend' : 'worth a try', plaus * 4);
+      if (owed > 0) sc.add('they owe me a favour', 3 * Math.min(2, owed));
       sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
       const kind = stageOf(world, p) === 'child' ? 'care' : reqKind;
       mkSocial(ctx, c, 'request', { reqKind: kind as ConvData['reqKind'], item: reqKind === 'water' ? 'water' : null, amount: 2 }, `Ask ${c.q.name} for ${label}`, `to get ${label}`, need, sc, 'request', ':' + reqKind);
@@ -150,6 +183,25 @@ function optRequest(ctx: Ctx): void {
   };
   tryNeed('hunger', 'food', (s) => s.carrying.some((k) => isFood(k)), 'food');
   tryNeed('thirst', 'water', (s) => s.carrying.includes('water'), 'water');
+
+  // laid up (rich only): a neighbour to keep an eye on the children, or the fire going (responsibilities.ts)
+  if (laidUp(world, p) && !world.requests.some((r) => r.from === p.id && (r.kind === 'watch' || r.kind === 'fire') && (r.status === 'pending' || r.status === 'promised'))) {
+    const kids = childrenNeedingWatch(world, p);
+    const fire = kids.length ? null : beliefsByKind(p, ['building']).find((b) => b.btype === 'fire' && hyp(b.x - p.x, b.y - p.y) < 12 && (b.fuel ?? 0) - (world.tick - b.seen) * 0.85 < 400 && (p.inv.wood ?? 0) < 1);
+    if (kids.length || fire) {
+      for (const c of cands) {
+        if (c.d > 14 || c.s.child || c.q.hhId === p.hhId || stageOf(world, c.q) === 'child' || stageOf(world, c.q) === 'youth') continue;
+        if ((p.cooldowns['askduty' + c.q.id] ?? 0) > world.tick || c.aff < -10) continue;
+        const sc = new Scorer()
+          .add(kids.length ? `laid up, and ${kids[0].name} needs seeing to` : 'laid up, and the fire is getting low', 18 + 8 * (p.illness?.severity ?? 0.5))
+          .add(c.aff >= 25 ? 'a friend' : c.fam >= 4 ? 'a neighbour' : 'worth a try', c.aff >= 25 ? 5 : 2)
+          .add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
+        p.cooldowns['askduty' + c.q.id] = world.tick + 400;
+        if (kids.length) mkSocial(ctx, c, 'request', { reqKind: 'watch', destKind: 'person', destId: kids[0].id, purpose: `keep an eye on ${kids[0].name}` }, `Ask ${c.q.name} to keep an eye on ${kids[0].name}`, `to have ${kids[0].name} seen to while I am laid up`, null, sc, 'request', ':watch');
+        else mkSocial(ctx, c, 'request', { reqKind: 'fire', destKind: 'building', destId: fire!.id, purpose: 'keep the fire going' }, `Ask ${c.q.name} to keep the fire going`, 'to have the fire kept while I am laid up', null, sc, 'request', ':fire');
+      }
+    }
+  }
 
   // a home that is failing, with nobody in the household able to mend it: ask a neighbour who can
   const homeB = ctx.home ? p.beliefs[ctx.home.id] : undefined;
@@ -186,8 +238,14 @@ function optRequest(ctx: Ctx): void {
   // Material a project of my own still lacks (Stage D1). Everything here is the asker's own: their plan says what it wants, their
   // pack says what they have, and the only people asked are ones they can see carrying the thing. Nothing is counted as arrived:
   // what has already been asked for or promised for this same plan is subtracted, so one shortage is not asked for twice.
-  // In an authored world `p.intentions` is empty, so this loop does nothing at all.
-  for (const plan of p.intentions) {
+  // In an authored world `p.intentions` is empty, so this loop does nothing at all. The lab's `rich-no-ask` branch switches the
+  // ask off on its own (intent.ts setProjectAsks) and leaves the plan, and every other kind of request, as they were.
+  //
+  // Measured first: 143 asks a village brought 37 units, and most answers were no, because nearly everyone asked had the thing
+  // and had it spoken for. So an ask is now made only when, BY THE ASKER'S OWN LIGHTS, it should be answered yes - see `spare`,
+  // `idle`, `atOwnWork` and `saidMaking` below - and fetching it themselves is weighed against asking rather than ruling the ask
+  // out before it has been considered at all.
+  for (const plan of projectAsksOn() ? p.intentions : []) {
     if (plan.status !== 'active' || plan.kind !== 'tool') continue;
     if (ctx.criticals.length || ctx.dangers.length) break; // something is actually wrong: not the moment to be asking favours
     for (const item of Object.keys(plan.wants) as ItemKind[]) {
@@ -200,21 +258,42 @@ function optRequest(ctx: Ctx): void {
       const uncovered = short - outstandingForPlan(world, p.id, item, plan.id);
       if (uncovered <= 0) continue;
       if (activeCommitments(p).length >= MAX_ACTIVE_COMMITMENTS) continue;
-      // worth asking only when fetching it themselves is not quick: the ordinary way comes first
-      if (ctx.options.some((o) => o.yields === item && o.eta < 260)) continue;
+      // A yes they could not carry is not a yes: somebody with a full pack waits until there is room in it before asking
+      if (invRoom(world, p, item) < 1) {
+        addBlocked(ctx, 'socialize', `Ask someone for ${item}`, 0, 'no room in my pack for it', 'request');
+        continue;
+      }
+      // Fetching it themselves is the ordinary way, and it used to rule the ask out before it was ever considered. Now both are
+      // on the table and the ask carries the cost of the alternative: a quick trip of their own beats asking a favour, a long one
+      // may not.
+      const quick = ctx.options.some((o) => o.yields === item && o.eta < 260);
       for (const c of cands) {
         if (c.d > 12 || !c.s.carrying.includes(item)) continue;
         if (c.s.child || stageOf(world, c.q) === 'child') continue;
         if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
+        // Would this person say yes? Everything weighed here is the asker's own sight and the asker's own memory:
+        //  * an armful rather than their last one (`plenty`), or somebody not in the middle of anything, is likely to spare it;
+        //  * somebody visibly making or building something is working with what they are carrying;
+        //  * somebody who has lately told THEM that what they carry is for something they are making has already answered this.
+        const spare = (c.s.plenty ?? []).includes(item);
+        const idle = IDLE_ACTS.includes(c.s.act);
+        const atOwnWork = OWN_WORK_ACTS.includes(c.s.act);
+        const saidMaking = (p.cooldowns[MAKING_NOTE + c.q.id] ?? 0) > world.tick;
+        if (!(spare || idle) || atOwnWork || saidMaking) {
+          const why = saidMaking ? `they said their ${item} is for something they are making` : atOwnWork ? 'they are working with what they carry' : `they have only the one ${item} and are busy with it`;
+          addBlocked(ctx, 'socialize', `Ask ${c.q.name} for ${item}`, c.q.id, why, 'request');
+          continue;
+        }
         const sc = new Scorer()
           .add(`${plan.goal} and the ${item} is short`, 20 * traitMods(p).work)
-          .add('they are carrying some', 4)
-          .add('walking', -pen(c.d * 6));
+          .add(spare ? `they are carrying more than one ${item}` : 'they have some and are not busy', 4);
+        if (quick) sc.add(`I could fetch ${item} myself soon`, -8);
+        sc.add('walking', -pen(c.d * 6));
         mkSocial(
           ctx,
           c,
           'request',
-          { reqKind: item === 'wood' || item === 'stone' ? item : 'goods', item, amount: Math.max(1, Math.min(uncovered, 3)), purpose: plan.goal, destKind: 'person', destId: p.id, planId: plan.id },
+          { reqKind: item === 'wood' || item === 'stone' ? item : 'goods', item, amount: Math.max(1, Math.min(uncovered, 3)), purpose: plan.goal, destKind: 'person', destId: p.id, planId: plan.id, likely: true },
           `Ask ${c.q.name} for ${item}`,
           plan.goal,
           null,
@@ -378,6 +457,24 @@ function optReconcile(ctx: Ctx): void {
   }
 }
 
+// ───────────────────────── stepping into a quarrel ─────────────────────────
+function optMediate(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (ctx.stage === 'child' || ctx.drives.hunger > 30 || ctx.drives.thirst > 30) return;
+  const quarrels = quarrelsFor(world, p);
+  if (!quarrels.length) return;
+  for (const c of candidates(ctx)) {
+    const q = quarrels.find((x) => x.a === c.q);
+    if (!q || c.d > 11) continue;
+    const sc = new Scorer()
+      .add(`${q.a.name} and ${q.b.name} have fallen out, and both are mine`, 12 + 0.1 * q.weight)
+      .add('a peacemaker by nature', 6 * p.traits.generosity + 3 * p.traits.sociability)
+      .add('walking', -pen(c.d * 6));
+    if (sc.total < 8) continue;
+    mkSocial(ctx, c, 'mediate', { pair: q.b.id }, `Talk ${q.a.name} round about ${q.b.name}`, `to help ${q.a.name} and ${q.b.name} make peace`, null, sc, 'peace', ':' + q.b.id);
+  }
+}
+
 // ───────────────────────── recruiting help ─────────────────────────
 function optRecruit(ctx: Ctx): void {
   const { world, p } = ctx;
@@ -477,12 +574,15 @@ function optTrade(ctx: Ctx): void {
 
 export function socialOptions(ctx: Ctx): void {
   mealOptions(ctx);
+  attendOptions(ctx);
+  aloneOptions(ctx);
   welfareOptions(ctx);
   optRequest(ctx);
   optAskInfo(ctx);
   optWarn(ctx);
   optOffer(ctx);
   optReconcile(ctx);
+  optMediate(ctx);
   optRecruit(ctx);
   optPropose(ctx);
   optTrade(ctx);

@@ -2,6 +2,7 @@ import { SOURCE_REGROW } from './constants';
 import { cloneItems } from './economy';
 import { facilitySnapshot } from './facilities';
 import { toolsHeldBy } from './toolreg';
+import { noteBeliefWrite } from './transmission';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
 
 /** synthetic belief ids for coarse water-access cells (ids below 1e6 are real entities) */
@@ -95,6 +96,7 @@ export function missingMaterials(site: { required: Items; delivered: Items; used
 
 /** Store a belief and keep the per-kind index in step. All writes go through here. */
 export function putBelief(p: Person, b: Belief): void {
+  noteBeliefWrite(); // diagnostics only (transmission.ts); a no-op unless a run has switched them on
   const old = p.beliefs[b.id];
   p.beliefs[b.id] = b;
   if (!old) {

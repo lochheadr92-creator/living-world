@@ -1,0 +1,78 @@
+Counterfactual lab: 24 seeds (aspen, birch, cedar, fern, gen-1, gen-2, gen-3, gen-4, gen-5, gen-6, meadow, nov-1, nov-10, nov-11, nov-12, nov-2, nov-3, nov-4, nov-5, nov-6, nov-7, nov-8, nov-9, river), large profile, forked at day 0, run 12 days.
+Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).
+
+Noise floor: spread (sd) of the difference a one-draw nudge makes in one seed, and when it parts from the control
+  nudge branches parted from the control in 44/48 runs, median 0.05 days after the fork
+  workplaces ±3.0   solidHomes ±3.5   buildings ±5.5   plots ±6.6   people ±1.7   deaths ±0.7   homeless ±0.5   belowCritical ±1.7   meanHunger ±6.2   firstYardDay ±0.7   firstHallDay ±1.0   meanMood ±4.3   lowMood ±5.9   tools ±20.8   meanCondition ±4.1   projectsAdopted ±15.5   projectsDone ±15.4   projectAsks ±21.5   askUnitsDelivered ±9.9
+
+── nudge:1: 1 extra random draw at the fork and nothing else (the noise floor)  [24 seeds; e.g. 1 draws]
+   final state identical to control in 0/24 seeds; parted in 24, median 0.05 days after the fork
+   metric         reference  branch    diff   95% interval    up/down  verdict
+   workplaces          11.1    11.0    -0.2   [-1.5, +1.1]       8/14  not distinguishable from chance
+   solidHomes          26.1    26.3    +0.3   [-1.4, +1.9]      13/10  not distinguishable from chance
+   buildings           83.9    84.0    +0.1   [-2.4, +2.7]      11/11  not distinguishable from chance
+   plots               93.5    91.3    -2.2   [-4.4, -0.1]       6/16  systematic, within the noise floor
+   people             101.4   101.4    +0.1   [-0.6, +0.7]       9/11  not distinguishable from chance
+   deaths               0.6     0.5    -0.1   [-0.4, +0.2]        4/7  not distinguishable from chance
+   homeless             0.0     0.1       0   [-0.1, +0.3]        1/1  not distinguishable from chance
+   belowCritical        0.9     0.9       0   [-0.6, +0.7]        7/6  not distinguishable from chance
+   meanHunger          66.0    64.8    -1.2   [-3.8, +1.1]      12/12  not distinguishable from chance
+   firstYardDay         5.7     5.8    +0.1   [-0.2, +0.4]      11/12  not distinguishable from chance
+   firstHallDay        11.7    11.6    -0.1   [-0.5, +0.4]        5/6  not distinguishable from chance
+   meanMood            -4.2    -4.9    -0.7   [-2.5, +0.9]      11/13  not distinguishable from chance
+   lowMood              3.8     3.9    +0.1   [-2.0, +2.2]       11/7  not distinguishable from chance
+   tools              161.9   163.0    +1.1   [-8.4, +10.5]      14/9  not distinguishable from chance
+   meanCondition       66.1    65.9    -0.1   [-2.2, +1.9]      13/11  not distinguishable from chance
+   projectsAdopted    398.0   398.5    +0.5   [-5.6, +7.1]      10/14  not distinguishable from chance
+   projectsDone       164.4   166.0    +1.6   [-5.0, +8.8]      14/10  not distinguishable from chance
+   projectAsks        144.1   142.1    -2.0   [-12.8, +7.8]     13/11  not distinguishable from chance
+   askUnitsDelivered     35.8    39.0    +3.2   [-0.8, +7.4]       15/9  not distinguishable from chance
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── nudge:2: 2 extra random draws at the fork and nothing else (the noise floor)  [24 seeds; e.g. 2 draws]
+   final state identical to control in 4/24 seeds; parted in 20, median 0.05 days after the fork
+   metric         reference  branch    diff   95% interval    up/down  verdict
+   workplaces          11.0    11.2    +0.1   [-0.9, +1.2]      12/10  not distinguishable from chance
+   solidHomes          26.3    25.9    -0.4   [-1.5, +0.7]      11/12  not distinguishable from chance
+   buildings           84.1    83.8    -0.3   [-2.0, +1.5]      10/13  not distinguishable from chance
+   plots               92.8    92.9    +0.1   [-2.7, +3.0]      10/13  not distinguishable from chance
+   people             101.4   101.4       0   [-0.6, +0.7]      11/11  not distinguishable from chance
+   deaths               0.5     0.8    +0.2   [-0.1, +0.5]        7/5  not distinguishable from chance
+   homeless             0.0     0.1       0   [-0.1, +0.3]        1/1  not distinguishable from chance
+   belowCritical        0.8     1.1    +0.3   [-0.3, +1.0]        6/7  not distinguishable from chance
+   meanHunger          65.6    65.8    +0.2   [-2.2, +2.5]      13/11  not distinguishable from chance
+   firstYardDay         5.7     5.7       0   [-0.3, +0.2]       8/13  not distinguishable from chance
+   firstHallDay        11.7    11.6       0   [-0.5, +0.3]        8/3  not distinguishable from chance
+   meanMood            -4.4    -4.5    -0.1   [-1.9, +1.5]      13/11  not distinguishable from chance
+   lowMood              3.9     3.8    -0.1   [-2.5, +2.6]       8/11  not distinguishable from chance
+   tools              162.1   162.4    +0.3   [-6.6, +7.3]      10/11  not distinguishable from chance
+   meanCondition       66.1    65.8    -0.3   [-1.3, +0.7]      11/13  not distinguishable from chance
+   projectsAdopted    397.9   398.7    +0.8   [-5.0, +6.9]      13/11  not distinguishable from chance
+   projectsDone       165.0   165.0       0   [-5.0, +5.1]      10/13  not distinguishable from chance
+   projectAsks        143.6   143.1    -0.5   [-7.1, +6.2]      12/12  not distinguishable from chance
+   askUnitsDelivered     37.3    35.8    -1.5   [-4.6, +1.8]       8/16  not distinguishable from chance
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── rich-no-ask: rich dynamics with private plans kept and only the project ask removed: nobody asks a neighbour for material their own project lacks  [24 seeds; e.g. rich dynamics on, project asks off]
+   final state identical to control in 0/24 seeds; parted in 24, median 0.10 days after the fork
+   metric         reference  branch    diff   95% interval    up/down  verdict
+   workplaces          11.1    11.2    +0.1   [-1.1, +1.3]      10/13  not distinguishable from chance
+   solidHomes          26.2    26.9    +0.8   [-0.7, +2.1]       14/9  not distinguishable from chance
+   buildings           84.0    84.8    +0.8   [-1.7, +3.1]      14/10  not distinguishable from chance
+   plots               92.8    94.2    +1.4   [-1.2, +4.0]      13/11  not distinguishable from chance
+   people             101.4   101.2    -0.2   [-0.8, +0.5]      12/10  not distinguishable from chance
+   deaths               0.6     0.8    +0.2   [-0.2, +0.7]       10/7  not distinguishable from chance
+   homeless             0.1     0.1    +0.1   [-0.1, +0.4]        1/2  not distinguishable from chance
+   belowCritical        0.9     1.3    +0.4   [-0.2, +1.5]        7/7  not distinguishable from chance
+   meanHunger          65.6    64.2    -1.4   [-4.2, +1.0]      11/13  not distinguishable from chance
+   firstYardDay         5.7     5.7    -0.1   [-0.3, +0.1]      10/14  not distinguishable from chance
+   firstHallDay        11.6    11.6    -0.1   [-0.5, +0.3]        7/5  not distinguishable from chance
+   meanMood            -4.4    -5.3    -0.8   [-3.3, +1.2]      14/10  not distinguishable from chance
+   lowMood              3.8     4.6    +0.8   [-2.2, +4.6]      10/13  not distinguishable from chance
+   tools              162.2   173.6   +11.3   [+0.7, +22.0]      16/8  systematic, within the noise floor
+   meanCondition       66.0    65.4    -0.7   [-2.7, +1.3]      11/13  not distinguishable from chance
+   projectsAdopted    398.2   396.8    -1.4   [-7.2, +4.4]      10/14  not distinguishable from chance
+   projectsDone       165.0   174.2    +9.2   [0, +18.1]         15/9  not distinguishable from chance
+   projectAsks        143.4     0.0  -143.4   [-151.1, -136.3]    0/24  larger than chance
+   askUnitsDelivered     36.8     0.0   -36.8   [-39.7, -33.9]     0/24  larger than chance
+   In words: projectAsks 143.4 → 0.0 (-143.4, lower in 24 and higher in 0 of 24 seeds); askUnitsDelivered 36.8 → 0.0 (-36.8, lower in 24 and higher in 0 of 24 seeds).

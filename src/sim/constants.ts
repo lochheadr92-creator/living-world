@@ -20,9 +20,10 @@ export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
-export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30 };
+export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
+  meat: 1.5,
   berries: 1,
   fruit: 1,
   fish: 1.5,
@@ -52,13 +53,14 @@ export const WEIGHT: Record<ItemKind, number> = {
  * How quickly an item goes off, relative to berries, wherever it is kept (stores, homes, heaps on the ground). Only listed items spoil.
  * Grain, flour and bread keep far better than fruit but are not immune: damp and vermin get at them unless they are kept in a granary.
  */
-export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5 };
+export const PERISHABLE: Partial<Record<ItemKind, number>> = { berries: 1, fruit: 0.8, fish: 1.6, grain: 0.22, flour: 0.28, bread: 0.5, meat: 1.4 };
 /** a granary's ventilated, vermin-proofed bins cut spoilage of what is kept there to this fraction (when tended) */
 export const GRANARY_SPOIL = 0.2;
 /** untended for this long, the granary's bins start to go off like any store (and then spoil faster) */
 export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
+  meat: 'meat',
   berries: 'berries',
   fruit: 'fruit',
   fish: 'fish',

@@ -1,0 +1,97 @@
+// Which generation of simulation BEHAVIOUR a world runs under.
+//
+// Three different version numbers live in this repository and they are not interchangeable:
+//
+//   * the SAVE FORMAT version (`src/app/save.ts`, currently 4) says how the bytes are written. It changes when the storage
+//     changes and says nothing about how anybody behaves.
+//   * `settings.dynamics` ('rich' | 'authored' | absent) is a compatibility and configuration distinction: which family of
+//     rules a world belongs to. It is not a generation: every rich world since the first has carried the same label while the
+//     behaviour underneath it changed many times. That is exactly the problem this module exists to fix.
+//   * the RULES VERSION here is the generation of the behaviour itself. Version 1 is the integrated behaviour as it stood when
+//     versioning was introduced. A later change to a decision rule or a tuned parameter that is meant to alter outcomes gets
+//     version 2, and a world saved as version 1 keeps running version 1's rules.
+//
+// This module is the only owner of all of that: what the current version is, whether a value is valid, what version a given
+// world actually runs, and whether a world is eligible for behaviour introduced at some later version. Nothing else should
+// compare a version number to a literal.
+import type { Settings, World } from './types';
+
+/**
+ * The generation of behaviour new worlds are created with. Version 1 is the integrated simulation as it stood on 2026-10-18:
+ * mood, hardship, private plans, learning, trades and apprenticeship, the second rich pass (occasions, reputation, illness,
+ * theft and barter, the land, the settlement record, temperament, life changes, stories and traditions, crews, mediation,
+ * shared responsibilities), the rich-only town corrections, and the project ask as it is written today.
+ *
+ * Raising this number is how a behavioural change is declared. See docs/DEVELOPMENT_POLICY.md, "Rules versions".
+ */
+export const CURRENT_RULES_VERSION = 1;
+
+/** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1];
+
+/**
+ * What a world made before versioning existed is. It is NOT version 0 and not "probably 1": several different implementations
+ * were all labelled `dynamics: 'rich'`, and which one a given save was made by cannot be recovered from the file, from the
+ * fields a person happens to have, or from a timestamp. Such a world stays explicitly unversioned, for ever, unless somebody
+ * converts it deliberately (a separate job, not a load-time migration).
+ */
+export const UNVERSIONED = undefined;
+
+export interface VersionVerdict {
+  ok: boolean;
+  /** the version to run under, or undefined for a legacy world */
+  version: number | undefined;
+  /** why a value was refused, in words a loader can show */
+  reason?: string;
+}
+
+/** Is this a version this build knows how to run? (`undefined` is the legacy case and is handled separately.) */
+export const isSupportedRulesVersion = (v: unknown): v is number => typeof v === 'number' && SUPPORTED_RULES_VERSIONS.includes(v);
+
+/**
+ * Check a `rulesVersion` as it came out of a save or a configuration, without changing it. An absent value is accepted as the
+ * legacy case; anything else must be a version this build supports. A version from the future is refused by name, because
+ * running it under today's rules would be a silent downgrade of somebody else's world.
+ */
+export function validateRulesVersion(v: unknown): VersionVerdict {
+  if (v === undefined || v === null) return { ok: true, version: UNVERSIONED };
+  if (typeof v !== 'number' || !Number.isInteger(v) || v <= 0) {
+    return { ok: false, version: undefined, reason: `rulesVersion must be a positive whole number or absent, not ${JSON.stringify(v)}` };
+  }
+  if (isSupportedRulesVersion(v)) return { ok: true, version: v };
+  const latest = Math.max(...SUPPORTED_RULES_VERSIONS);
+  return {
+    ok: false,
+    version: undefined,
+    reason:
+      v > latest
+        ? `this world was made by a newer build (rules version ${v}); this build runs ${SUPPORTED_RULES_VERSIONS.join(', ')}. It is not loaded, rather than being run under older rules.`
+        : `rules version ${v} is no longer supported by this build (it runs ${SUPPORTED_RULES_VERSIONS.join(', ')}).`,
+  };
+}
+
+/** The version a world is actually running: what its settings say, with no substitution of the current version. */
+export const rulesVersionOf = (world: World): number | undefined => world.settings.rulesVersion;
+
+/** The same question of a bare settings object (before a world exists). */
+export const settingsRulesVersion = (s: Pick<Settings, 'rulesVersion'>): number | undefined => s.rulesVersion;
+
+/**
+ * Is this world eligible for behaviour introduced at version `from`? This is the one place future versioned rules should ask,
+ * instead of comparing numbers at the call site:
+ *
+ *     if (runsRulesVersion(world, 2)) { ...the new rule... } else { ...what version 1 did... }
+ *
+ * A legacy (unversioned) world is never eligible: its original rules are unknown, so it keeps the behaviour it loads with and
+ * no later gameplay addition is applied to it.
+ */
+export function runsRulesVersion(world: World, from: number): boolean {
+  const v = rulesVersionOf(world);
+  return v !== undefined && v >= from;
+}
+
+/** How to say it in a report, a menu or a save description. */
+export function describeRulesVersion(v: number | undefined): string {
+  if (v === undefined) return 'unversioned (made before rules versions; its original rules are unknown)';
+  return `rules version ${v}${v === CURRENT_RULES_VERSION ? ' (current)' : ''}`;
+}

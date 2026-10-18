@@ -2,6 +2,8 @@ import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WORK, isHomeType, isSolidHome } from './constants';
 import { buildingLabel, completeSite, createSite } from './buildings';
+import { notePractice, onSharedWork } from './apprentice';
+import { riskOfHarm } from './life';
 import { addItem, claimSlot, consume, invRoom, ledgerCreate } from './economy';
 import { addEvent, addFx, addLog } from './events';
 import { creditMade, creditRepair } from './intent';
@@ -89,14 +91,19 @@ registerHandler('build', {
     a.progress++;
     a.cycle++;
     wearFor(world, p, 'build', 1);
+    if (a.cycle % 50 === 0) riskOfHarm(world, p, 'build', 0.003);
     if (site.contrib) site.contrib[p.hhId] = (site.contrib[p.hhId] ?? 0) + 1 / 25;
     p.skills.build = Math.min(SKILL_MAX, p.skills.build + 0.0004);
+    notePractice(world, p, 'build', 0.0004);
     consumeForProgress(world, site);
     for (const c of p.commitments) if (c.status === 'active' && c.siteId === site.id) c.contrib = (c.contrib ?? 0) + 1;
     if (a.progress % 14 === 7) addFx(world, 'hammer', site.x + site.w / 2, site.y + site.h / 2, 0);
     if (site.work >= site.workTotal - 1e-9) {
       const b = completeSite(world, site, p);
       p.stats.built++;
+      // everyone who put work into it finished it together (rich only: where a builder may take on an apprentice)
+      const crew = world.persons.filter((q) => q.alive && (q === p || q.commitments.some((c) => c.siteId === site.id && (c.contrib ?? 0) > 0)));
+      onSharedWork(world, crew, 'build');
       addLog(world, p, 'work', `Finished building the ${buildingLabel(b.type)}.`);
       observe(world, p, b);
       delBelief(p, site.id);
@@ -152,6 +159,7 @@ registerHandler('repair', {
     a.cycle++;
     a.progress = 0;
     p.skills.build = Math.min(SKILL_MAX, p.skills.build + 0.003);
+    notePractice(world, p, 'build', 0.003);
     observe(world, p, b);
     if (b.condition >= 92) return 'done';
     if (!repairMaterial(b, p.inv)) return 'partial:ran out of materials';
@@ -197,6 +205,7 @@ registerHandler('craft', {
     creditMade(p, tool);
     p.stats.crafted++;
     p.skills.craft = Math.min(SKILL_MAX, p.skills.craft + 0.02);
+    notePractice(world, p, 'craft', 0.02);
     addLog(world, p, 'work', `Made ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}.`);
     if (world.tick - (world.stats.lastCraftEvent ?? -9999) > 500) {
       world.stats.lastCraftEvent = world.tick;
@@ -255,11 +264,17 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
     return null;
   }
   if (isFacilityType(type) || type === 'storehouse') {
-    // one of each kind of workplace (a second quarry only at a different outcrop). With scaled rules, one per settlement: only a
-    // workplace within the settlement radius of where this one would stand counts.
+    // As many of each kind of workplace as the settlement is allowed, and no more (a second quarry only at a different outcrop).
+    // With scaled rules only what stands within the settlement radius of where this one would go counts, and the allowance is one
+    // for every ordinary camp's worth of founders: the ordinary world's allowance is 1, which is the rule it always had.
     const radius = at ? rules.facilityRadius : Infinity;
-    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, b.x + b.w / 2, b.y + b.h / 2))) return `there is already a ${BUILD_DEF[type].label}`;
-    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && (radius === Infinity || within(radius, at!.x, at!.y, s.x + s.w / 2, s.y + s.h / 2))) return `a ${BUILD_DEF[type].label} is already being built`;
+    const allowed = at ? rules.facilityAllowance : 1;
+    const near = (x: number, y: number): boolean => radius === Infinity || within(radius, at!.x, at!.y, x, y);
+    let standing = 0;
+    let started = 0;
+    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && near(b.x + b.w / 2, b.y + b.h / 2)) standing++;
+    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && near(s.x + s.w / 2, s.y + s.h / 2)) started++;
+    if (standing + started >= allowed) return standing >= allowed ? `there is already a ${BUILD_DEF[type].label}` : `a ${BUILD_DEF[type].label} is already being built`;
     return null;
   }
   // homes and fires: one project at a time per household
@@ -348,6 +363,8 @@ registerHandler('fuel_fire', {
     const f = world.byId.get(a.targetId);
     if (a.cycle > 0 && f && f.ent === 'building') {
       addLog(world, p, 'work', `Fed the fire with ${a.cycle} log${a.cycle > 1 ? 's' : ''}.`);
+      // noted for a promise to keep the fire going (responsibilities.ts; rich only, so an authored world's record is untouched)
+      if (world.settings.dynamics === 'rich') p.cooldowns['fedfire' + f.id] = world.tick;
       if (a.data.wasOut) addEvent(world, 'survival', `${p.name} relit the fire.`, [p.id], f.x, f.y);
     }
   },

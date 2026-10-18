@@ -1,3 +1,4 @@
+import { isThreat } from './wildlife';
 import { moveSpeed, standSpotFor } from './activities';
 import { findWaterAccessNear, isWalkable, isWaterAccess } from './registry';
 import { drive } from './needs';
@@ -145,7 +146,7 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
     seeds: p.inv.seeds ?? 0,
     dangers,
     seenPersons: p.seen.filter((s) => s.ent === 'person'),
-    seenAnimals: p.seen.filter((s) => s.ent === 'animal'),
+    seenAnimals: p.seen.filter((s) => isThreat(world, s)),
     collect,
     blocked: [],
     options: [],

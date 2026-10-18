@@ -1,3 +1,4 @@
+import { isRich } from './mood';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
@@ -71,6 +72,21 @@ export function knowsOfAny(ctx: Ctx, type: BuildingType): boolean {
   if (radius === Infinity) return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type);
   const at = settlementAnchor(ctx);
   return beliefsByKind(ctx.p, ['building', 'site']).some((b) => b.btype === type && within(radius, at.x, at.y, b.x, b.y));
+}
+
+/**
+ * Does this person already know of as many workplaces of that kind as their settlement is allowed (rules.ts facilityAllowance)?
+ * This is the question behind "should anyone want another one", where `knowsOfAny` is the question behind "is there one I could
+ * use". They are the same in the ordinary world, where the allowance is one. Counted from this person's own beliefs: somebody who
+ * has not yet seen the second granary may still set out to lay one out, and the site rules will tell them when they get there.
+ */
+export function knowsEnough(ctx: Ctx, type: BuildingType): boolean {
+  const rules = rulesOf(ctx.world);
+  if (rules.facilityAllowance <= 1) return knowsOfAny(ctx, type);
+  const at = settlementAnchor(ctx);
+  let n = 0;
+  for (const b of beliefsByKind(ctx.p, ['building', 'site'])) if (b.btype === type && within(rules.facilityRadius, at.x, at.y, b.x, b.y)) n++;
+  return n >= rules.facilityAllowance;
 }
 
 const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
@@ -388,7 +404,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
       } else if (b.btype === 'storehouse') {
         // everyone's
       } else if (b.hh !== p.hhId) continue;
-      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries') {
+      else if (item === 'grain' || item === 'bread' || item === 'flour' || item === 'fish' || item === 'fruit' || item === 'berries' || item === 'meat') {
         // the household's own food is not to be spent making things unless there is plenty
         const hs = hhState(ctx);
         n = Math.max(0, Math.min(n, Math.floor(hs.foodStock - hs.foodTarget * 1.1)));
@@ -813,7 +829,7 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
   const grainKnown = unitsOf(p.inv.grain) + beliefsByKind(p, ['building']).filter((b) => b.hh === p.hhId).reduce((n, b) => n + unitsOf(b.items?.grain), 0);
   const plots = world.plots.filter((pl) => pl.hhId === p.hhId).length;
 
-  if (!haveYard) {
+  if (!knowsEnough(ctx, 'timber_yard')) {
     let s = 0;
     const planks = planksWanted(ctx);
     if (planks > 0) s += 0.9;
@@ -828,14 +844,14 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (haveYard || knowsOfAny(ctx, 'kiln')) s += 0.15;
     if (s >= 0.55) out.push({ type: 'quarry', signal: Math.min(1, s), why: 'stone is wanted and loose rocks are few — there is a big outcrop to cut' });
   }
-  if (!haveKiln && clayKnown) {
+  if (!knowsEnough(ctx, 'kiln') && clayKnown) {
     let s = 0;
     if (bricksWanted(ctx) > 0) s += 0.9;
     if (wish > 0.5 && haveYard) s += 0.5;
     if (knowsOfAny(ctx, 'smithy') || (oreKnown && haveYard && init > 0.55)) s += 0.45;
     if (s >= 0.55) out.push({ type: 'kiln', signal: Math.min(1, s), why: bricks_or_charcoal(ctx) });
   }
-  if (!knowsOfAny(ctx, 'smithy') && oreKnown && haveKiln) {
+  if (!knowsEnough(ctx, 'smithy') && oreKnown && haveKiln) {
     let s = 0;
     const worn = toolsHeldBy(world, p.id).some((t) => t.wear >= 25 && t.kind !== 'jar');
     if (worn) s += 0.5;
@@ -843,14 +859,14 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (init > 0.5) s += 0.25;
     if (s >= 0.6 || (oreKnown && init > 0.5 && world.tick > DAY * 14)) out.push({ type: 'smithy', signal: Math.min(1, s), why: 'tools are wearing out and there is ore to be smelted' });
   }
-  if (!knowsOfAny(ctx, 'granary') && haveYard && hs.shortage < 0.5) {
+  if (!knowsEnough(ctx, 'granary') && haveYard && hs.shortage < 0.5) {
     let s = 0;
     if (grainKnown >= 6) s += 0.5;
     if (plots >= 2) s += 0.4;
     if (init > 0.45) s += 0.15;
     if (s >= 0.6) out.push({ type: 'granary', signal: Math.min(1, s), why: 'the grain keeps going off in the stores' });
   }
-  if (!knowsOfAny(ctx, 'bakery') && haveKiln && hs.shortage < 0.4) {
+  if (!knowsEnough(ctx, 'bakery') && haveKiln && hs.shortage < 0.4) {
     let s = 0;
     if (grainKnown >= 8) s += 0.45;
     if (plots >= 2) s += 0.3;
@@ -858,9 +874,14 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
     if (p.traits.generosity > 0.5) s += 0.1;
     if (s >= 0.6) out.push({ type: 'bakery', signal: Math.min(1, s), why: 'grain could be milled and baked into bread' });
   }
-  if (!knowsOfAny(ctx, 'hall') && haveYard && solidHomes >= 3 && hs.shortage < 0.5) {
+  // a crowd wants a hall (rich only): once two dozen live here, somewhere to gather is wanted whether or not a yard stands
+  let alive = 0;
+  if (isRich(world)) for (const q of world.persons) if (q.alive) alive++;
+  const crowd = alive >= 24;
+  if (!knowsEnough(ctx, 'hall') && (haveYard || crowd) && solidHomes >= 3 && hs.shortage < 0.5) {
     let s = 0.55 * p.traits.sociability + 0.3 * p.traits.generosity;
     if (solidHomes >= 5) s += 0.2;
+    if (crowd) s += 0.3;
     if (s >= 0.6) out.push({ type: 'hall', signal: Math.min(1, s), why: 'we need somewhere to eat and talk together out of the weather' });
   }
   return out;

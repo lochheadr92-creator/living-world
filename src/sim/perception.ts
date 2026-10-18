@@ -1,7 +1,9 @@
 import { SENSE_RADIUS } from './constants';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
+import { isRich } from './mood';
 import { stageOf } from './people';
 import { probe } from './probe';
+import { visibleWork } from './trade';
 import { distToFootprint, gridQuery, isWaterAccess } from './registry';
 import type { Animal, Building, ItemKind, Person, SeenEntity, World } from './types';
 
@@ -30,11 +32,20 @@ export function senseRadius(world: World, p: Person): number {
   return r;
 }
 
-const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
+const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar'];
 
 function describeSeenPerson(world: World, e: Person): SeenEntity {
   const carrying: ItemKind[] = [];
-  for (const k of CARRY_KEYS) if ((e.inv[k] ?? 0) > 0) carrying.push(k);
+  // In a rich world a watcher also sees the difference between somebody carrying a thing and somebody carrying an armful of it.
+  // Nothing else is added, and an authored world's `seen` is exactly the record it always was.
+  const rich = isRich(world);
+  const plenty: ItemKind[] | undefined = rich ? [] : undefined;
+  const work = rich ? visibleWork(world, e) : null;
+  for (const k of CARRY_KEYS) {
+    const n = e.inv[k] ?? 0;
+    if (n > 0) carrying.push(k);
+    if (plenty && n > 1) plenty.push(k);
+  }
   return {
     id: e.id,
     ent: 'person',
@@ -47,6 +58,8 @@ function describeSeenPerson(world: World, e: Person): SeenEntity {
     hurt: e.health < 60,
     child: stageOf(world, e) === 'child',
     carrying,
+    ...(plenty && plenty.length ? { plenty } : {}),
+    ...(work ? { work } : {}),
     asleep: e.pose === 'sleep',
     act: e.activity ? e.activity.kind : '',
     busyTalking: e.convId !== 0,
@@ -122,6 +135,8 @@ export function perceive(world: World, p: Person): void {
     } else if (e.ent === 'animal') {
       if (hyp(e.x - p.x, e.y - p.y) > r) return;
       p.seen.push(describeSeenAnimal(e));
+      // a deer (rich worlds only) is seen but is no danger to remember
+      if (e.type === 'deer') return;
       const b = snapshotEntity(world, e, world.tick);
       if (b) {
         learn(p, b);

@@ -2,7 +2,7 @@
 //   npx vite-node scripts/cascade.ts -- --seed meadow [--profile large] [--days 12] [--dynamics rich] [--json out.json]
 import { writeFileSync } from 'node:fs';
 import { createWorld } from '../src/sim/factory';
-import { settingsForProfile } from '../src/sim/profiles';
+import { freshRunSettings, parseRunRules, runRulesVersion } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { tellStory, trace } from './cascade/trace';
 
@@ -14,11 +14,13 @@ const opt = (name: string, dflt: string): string => {
 const seed = opt('seed', 'meadow');
 const profile = opt('profile', 'large') as ProfileName;
 const days = Number(opt('days', '12'));
-const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
-const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
+const rules = parseRunRules(opt('dynamics', 'rich'));
+const world = createWorld(freshRunSettings(rules, profile, seed, { immigration: false }));
 const r = trace(world, days);
-if (opt('json', '')) writeFileSync(opt('json', ''), JSON.stringify({ seed, profile, ...r }));
-console.log(`seed ${seed} (${profile}), ${r.days} days, ${r.people} people alive`);
+// the rules this run was made under, recorded rather than left to be guessed from the word "rich"
+const rulesVersion = runRulesVersion(rules);
+if (opt('json', '')) writeFileSync(opt('json', ''), JSON.stringify({ seed, profile, dynamics: world.settings.dynamics ?? 'authored', rulesVersion, ...r }));
+console.log(`seed ${seed} (${profile}, ${world.settings.dynamics ?? 'authored'}, ${rulesVersion === null ? 'unversioned' : `rules version ${rulesVersion}`}), ${r.days} days, ${r.people} people alive`);
 console.log(`  happenings ${r.happenings}: ${Object.entries(r.perSystem).map(([k, v]) => k + ' ' + v).join(', ')}`);
 console.log(`  links ${r.links}, of which between different systems ${r.crossSystemLinks} (${r.links ? Math.round((100 * r.crossSystemLinks) / r.links) : 0}%)`);
 console.log(`  cascade sizes: ${Object.entries(r.sizes).map(([k, v]) => k + ':' + v).join('  ')}; story-like ${r.storyLike}; longest chain ${r.longestDepth}`);

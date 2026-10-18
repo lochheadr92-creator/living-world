@@ -69,3 +69,10 @@ npx vite-node scripts/inhabit_counterfactual.ts -- --transcript experiments/hars
 files it wrote were moved out of the folder by the operator (they said "0 of 6 shift", which was the renderer's mistake, since fixed:
 such a run now writes `counterfactual.failed.txt` and no `counterfactual.json`). The run is to be repeated once credits are on the
 account, on the fixed code.
+
+**Run, 2026-10-13, same day:** credits added, the line above repeated: 36 calls, 33 answered (three timed out at 120 s), 32 minutes.
+`counterfactual.json` and `counterfactual.txt` are in the folder. The calls were made by the pre-fix build, which was still running
+when the fix landed; the record was rebuilt with the fixed shift rule and re-rendered from the same arms, and no verdict changed.
+The tool's header says 5 of 6 decided asks shift, but three of those five rest on an arm with no real majority (`majority()` breaks
+a tie by option name). Two shifts hold: ask 59 (`gather:811` x3 against `eat:0` x3) and ask 60 (`gather:810` 2 of 3 against
+`rest:home:980` 2 of 3). The ask-by-ask table and the reading are in `docs/INHABITANT.md`, section 8.

@@ -287,6 +287,18 @@ export function generateNatural(settings: Settings): World {
     const cy = Math.floor(H / 2 + gen.range(-5, 5));
     hubs = [{ x: cx, y: cy, founders: settings.population, scale: 1, fires: 1 }];
   }
+  // Three of the rules below are corrections made for the crowded `town` profile, and all three are NEW BEHAVIOUR: the wolves the
+  // ground will hold, the fishing a short shore can give, and how far out the first shelters may be set. Each is gated on rich
+  // dynamics at the point where it is decided, so that an authored world of any profile generates exactly as it did before they
+  // were written - by taking the old branch, not by arriving at the same answer a different way.
+  const rich = settings.dynamics === 'rich';
+  // How much more of everything a camp's people need than the ground they stand on would ordinarily hold. The ordinary world is one
+  // camp of 28 on the whole 80x80 map, which is the unit: `crowding` is 1 for it, 1 for the Large and Huge profiles (whose camps
+  // have more room than an ordinary camp, so there is nothing to make up), and about 3.6 for a town of 100 on the ordinary map.
+  // One thing reads it: how many wolves the land holds (as its inverse, `room`, below), and only in a rich world.
+  const ORDINARY_MAP_AREA = MAP_W * MAP_H;
+  const campArea = (W * H) / hubs.length;
+  const crowding = layout ? Math.max(1, ...hubs.map((h) => (h.scale * ORDINARY_MAP_AREA) / campArea)) : 1;
   const campX = hubs[0].x;
   const campY = hubs[0].y;
   world.camp = { x: campX + 0.5, y: campY + 0.5 };
@@ -473,6 +485,7 @@ export function generateNatural(settings: Settings): World {
   for (const hub of hubs) {
     const wantFish = Math.round(11 * scale * hub.scale);
     let got = 0;
+    const placed: Source[] = [];
     fishCand.sort((a, b) => {
       const da = dist(a % W, (a / W) | 0, hub.x, hub.y);
       const db = dist(b % W, (b / W) | 0, hub.x, hub.y);
@@ -485,7 +498,18 @@ export function generateNatural(settings: Settings): World {
       if (fishSpots.some((f) => dist(f.x, f.y, x, y) < 4.2)) continue;
       fishSpots.push({ x, y });
       got++;
-      mk('fish_spot', x, y, Math.max(2, Math.round(gen.range(4, SOURCE_MAX.fish_spot))));
+      placed.push(mk('fish_spot', x, y, Math.max(2, Math.round(gen.range(4, SOURCE_MAX.fish_spot)))));
+    }
+    // A big camp on a small shore (the town: a hundred people on the ordinary map) cannot be given its share of fishing spots, so
+    // the spots it has are made to give as much as its share would: they fill again that much faster. The per-person fishing
+    // of the ordinary camp is kept; only how it is laid along the shore changes. A camp that got its full count is untouched.
+    // (only a camp bigger than the village's: the village itself, and the Large and Huge camps, are laid out exactly as always)
+    //
+    // Rich only. The spots themselves are placed above either way, from the same draws; what a rich world changes is how fast
+    // they fill again, so an authored world's shore is the shore it always had, spot for spot and rate for rate.
+    if (rich && hub.scale > 1.5 && got > 0 && got < wantFish) {
+      const share = got / wantFish;
+      for (const s of placed) s.regrowEvery = Math.max(20, Math.round(s.regrowEvery * share));
     }
   }
 
@@ -508,9 +532,20 @@ export function generateNatural(settings: Settings): World {
   }
 
   // ── wolves ──
+  // Wolves follow the people (a camp of 56 has twice a camp of 28's), and in a RICH world no further than the ground will hold: a
+  // hundred people on the ordinary 80x80 map are not 3.6 ordinary camps' worth of country, and giving them 3.6 camps' worth of
+  // wolves put eleven dens inside one village's walking distance. `room` is the inverse of the crowding above: 1 wherever a camp
+  // has an ordinary camp's land or more, so the Large and Huge profiles keep exactly the wolves they had, and about 0.28 for a
+  // town of 100 on the ordinary map, which gets the three dens that much ground supports.
+  //
+  // That correction is new behaviour, so it is rich only. An authored world of any profile keeps the wolves it always had, from
+  // its people alone - and keeps them by taking the same branch, not by arriving at the same number: the count decides how many
+  // times `pickSpot` draws below, so an authored world that computed `room` and then threw the answer away would still generate a
+  // different world from here on. Held by tests/regions.test.ts against the counts recorded before this rule existed.
+  const room = rich ? 1 / crowding : 1;
   const dens: { x: number; y: number }[] = [];
   for (const hub of hubs) {
-    const wolfCount = Math.round((harsh ? 5 : 3) * hub.scale);
+    const wolfCount = Math.round((harsh ? 5 : 3) * hub.scale * room);
     for (let i = 0; i < wolfCount; i++) {
       const denOk = (x: number, y: number): boolean =>
         world.terrain[y * W + x] === T.FOREST && world.solid[y * W + x] === 0 && terrainReach[y * W + x] === 1 && dens.every((d) => dist(d.x, d.y, x, y) > 14) && openNeighbours(world, x, y) >= 6 && (hubs.length === 1 || hubs.every((o) => dist(o.x, o.y, x, y) >= 23));
@@ -728,11 +763,14 @@ function populate(world: World, gen: RNG, population: number, campX: number, cam
   const households: Household[] = [];
   const homes: { x: number; y: number }[] = [];
 
-  // lean-to ring around the camp
+  // Lean-to ring around the camp. A big camp needs more rings than the village's six, or a third of its first shelters find no
+  // room - but that is a correction made for the town, and so it is rich only: an authored camp of any size keeps the six rings
+  // it always had, and with them the shelters it always ended up with.
+  const rings = world.settings.dynamics === 'rich' ? Math.round(6 * Math.max(1, Math.sqrt(scale))) : 6;
   for (let h = 0; h < shelterCount; h++) {
     const ang0 = (h / shelterCount) * TAU + gen.range(-0.2, 0.2);
     let placed = false;
-    for (let ring = 0; ring < 6 && !placed; ring++) {
+    for (let ring = 0; ring < rings && !placed; ring++) {
       for (let a = 0; a < 16 && !placed; a++) {
         const ang = ang0 + (a % 2 ? 1 : -1) * Math.floor((a + 1) / 2) * 0.22;
         const r = 5.2 + ring * 0.9;

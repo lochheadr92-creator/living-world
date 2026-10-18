@@ -3,14 +3,14 @@ import { Game } from './app/game';
 import { InhabitDriver, inhabitConfigFromUrl, settingsFromConfig } from './app/inhabit';
 import { loadPrefs } from './app/prefs';
 import { project } from './render/iso';
-import { settingsForProfile } from './sim/profiles';
+import { currentWorldSettings } from './sim/profiles';
 import { Renderer } from './render/renderer';
 import { mountUI } from './ui';
 
 const prefs = loadPrefs();
 // ?inhabit=<name>&... hands one person to an outside model (src/app/inhabit.ts); the world is then the one the query asks for
 const inhabit = inhabitConfigFromUrl(location.search, prefs);
-const game = new Game(inhabit ? settingsFromConfig(inhabit) : settingsForProfile(prefs.size, prefs.seed, { harsh: prefs.harsh, immigration: prefs.immigration, dynamics: prefs.rich ? 'rich' : 'authored' }));
+const game = new Game(inhabit ? settingsFromConfig(inhabit) : currentWorldSettings(prefs.size, prefs.seed, { harsh: prefs.harsh, immigration: prefs.immigration }));
 game.speed = prefs.speed;
 const driver = inhabit ? new InhabitDriver(game, inhabit) : null;
 Object.assign(game.overlays, prefs.overlays);

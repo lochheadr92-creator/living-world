@@ -2,6 +2,7 @@
 // It knows nothing about canvases or DOM, so it is unit-testable and the simulation can never depend on frame rate.
 import { TPS } from '../sim/constants';
 import { createWorld, defaultSettings } from '../sim/factory';
+import { CURRENT_RULES_VERSION } from '../sim/rulesversion';
 import { hashWorld, stepWorld } from '../sim/world';
 import { project } from '../render/iso';
 import type { SceneId, Settings, World } from '../sim/types';
@@ -94,7 +95,7 @@ export class Game {
   private listeners = new Set<(e: GameEvent) => void>();
 
   constructor(settings?: Partial<Settings>) {
-    this.settings = { ...defaultSettings(), ...settings };
+    this.settings = { ...defaultSettings(), dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION, ...settings };
     this.world = createWorld(this.settings);
   }
 
@@ -247,7 +248,10 @@ export class Game {
 
   // ── worlds ──
   restart(opts: Partial<Settings> = {}): void {
-    this.settings = { ...this.settings, ...opts };
+    // A restart creates a new current world. Explicit diagnostic settings can still request legacy rules;
+    // restoring an existing save uses restoreWorld instead and never passes through this default.
+    // a restart makes a NEW world: the current rules generation, whatever the world being left was running
+    this.settings = { ...this.settings, dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION, ...opts };
     this.world = createWorld(this.settings);
     this.acc = 0;
     this.alpha = 0;

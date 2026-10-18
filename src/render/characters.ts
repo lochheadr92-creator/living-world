@@ -826,6 +826,8 @@ export class CharacterRenderer {
 
   // ── wolves ──
   drawWolf(ctx: CanvasRenderingContext2D, a: Animal, alphaT: number, simT: number, selected: boolean): { headX: number; headY: number } {
+    // the wolf's greys, or the deer's browns (rich worlds only have deer)
+    const P = a.type === 'deer' ? DEER_PALETTE : WOLF_PALETTE;
     const x = a.px + (a.x - a.px) * alphaT;
     const y = a.py + (a.y - a.py) * alphaT;
     const heading = a.pheading + angleDiff(a.pheading, a.heading) * alphaT;
@@ -875,7 +877,7 @@ export class CharacterRenderer {
         d: (top[2] + foot[2]) / 2,
         f: () => {
           ctx.lineCap = 'round';
-          ctx.strokeStyle = '#4a4742';
+          ctx.strokeStyle = P.leg;
           ctx.lineWidth = 3;
           ctx.beginPath();
           ctx.moveTo(top[0], top[1]);
@@ -897,8 +899,8 @@ export class CharacterRenderer {
         ctx.lineTo(front[0], front[1]);
         ctx.stroke();
         const g = ctx.createLinearGradient(rear[0], rear[1] - 6, rear[0], rear[1] + 5);
-        g.addColorStop(0, '#9b978f');
-        g.addColorStop(1, '#6f6b65');
+        g.addColorStop(0, P.hi);
+        g.addColorStop(1, P.lo);
         ctx.strokeStyle = g;
         ctx.lineWidth = 10;
         ctx.beginPath();
@@ -919,7 +921,7 @@ export class CharacterRenderer {
     parts.push({
       d: tailBase[2] - 0.05,
       f: () => {
-        ctx.strokeStyle = '#6f6b65';
+        ctx.strokeStyle = P.lo;
         ctx.lineCap = 'round';
         ctx.lineWidth = 3.6;
         ctx.beginPath();
@@ -943,13 +945,13 @@ export class CharacterRenderer {
         ctx.moveTo(neck[0], neck[1]);
         ctx.lineTo(head[0], head[1]);
         ctx.stroke();
-        ctx.strokeStyle = '#8b877f';
+        ctx.strokeStyle = P.neck;
         ctx.lineWidth = 7;
         ctx.beginPath();
         ctx.moveTo(neck[0], neck[1]);
         ctx.lineTo(head[0], head[1]);
         ctx.stroke();
-        ctx.strokeStyle = '#a7a39a';
+        ctx.strokeStyle = P.snout;
         ctx.lineWidth = 4.4;
         ctx.beginPath();
         ctx.moveTo(head[0], head[1]);
@@ -960,7 +962,7 @@ export class CharacterRenderer {
         ctx.arc(snout[0], snout[1], 1.3, 0, Math.PI * 2);
         ctx.fill();
         // ears
-        ctx.fillStyle = '#6d6962';
+        ctx.fillStyle = P.ear;
         ctx.beginPath();
         ctx.moveTo(head[0] - 2.5, head[1] - 3);
         ctx.lineTo(head[0] - 1.5, head[1] - 8);
@@ -970,7 +972,7 @@ export class CharacterRenderer {
         ctx.lineTo(head[0] + 3.6, head[1] - 2.6);
         ctx.fill();
         // eye
-        ctx.fillStyle = a.state === 'stalk' ? '#ffd23a' : '#e8c24a';
+        ctx.fillStyle = a.state === 'stalk' ? P.eyeHot : P.eye;
         ctx.beginPath();
         ctx.arc(head[0] + (fx - fy) * 1.2, head[1] - 0.8, 1, 0, Math.PI * 2);
         ctx.fill();
@@ -981,6 +983,9 @@ export class CharacterRenderer {
     return { headX: head[0], headY: head[1] - 10 };
   }
 }
+
+const WOLF_PALETTE = { leg: '#4a4742', hi: '#9b978f', lo: '#6f6b65', neck: '#8b877f', snout: '#a7a39a', ear: '#6d6962', eye: '#e8c24a', eyeHot: '#ffd23a' };
+const DEER_PALETTE = { leg: '#6b5236', hi: '#c49a66', lo: '#8a6238', neck: '#a87a4e', snout: '#d2ac82', ear: '#9a6f45', eye: '#2b1d12', eyeHot: '#2b1d12' };
 
 // ───────────────────────── pieces ─────────────────────────
 function drawHead(

@@ -7,6 +7,7 @@
 // (scripts/inhabit/devserver.ts), so no key ever enters the browser. The transcript can be saved at any moment and replays headlessly.
 import { DAY } from '../sim/constants';
 import { settingsForProfile } from '../sim/profiles';
+import { CURRENT_RULES_VERSION } from '../sim/rulesversion';
 import type { ProfileName } from '../sim/profiles';
 import type { InhabitantNotes, Settings, World } from '../sim/types';
 import { LiveSession, livingPerson } from '../agent/run';
@@ -55,15 +56,22 @@ export function inhabitConfigFromUrl(search: string, prefs: Pick<Prefs, 'seed'>)
     days: q.has('days') ? Math.max(0, Number(q.get('days')) || 0) : null,
     seed: q.get('seed') ?? prefs.seed,
     harsh: on('harsh'),
-    rich: on('rich'),
-    size: size === 'large' || size === 'huge' ? size : 'normal',
+    // Explicit rich=0 remains a diagnostic/reproduction option; ordinary links use the current simulation.
+    rich: !q.has('rich') || on('rich'),
+    size: size === 'large' || size === 'huge' || size === 'town' ? size : 'normal',
     arrivals: !on('noarrivals'),
     manual: on('manual'),
   };
 }
 
 export function settingsFromConfig(cfg: InhabitConfig): Settings {
-  return settingsForProfile(cfg.size, cfg.seed, { harsh: cfg.harsh, immigration: cfg.arrivals, dynamics: cfg.rich ? 'rich' : 'authored' });
+  return settingsForProfile(cfg.size, cfg.seed, {
+    harsh: cfg.harsh,
+    immigration: cfg.arrivals,
+    dynamics: cfg.rich ? 'rich' : 'authored',
+    // an explicitly legacy run (`rich=0`) is a diagnostic of the old rules and stays unversioned, as those worlds are
+    rulesVersion: cfg.rich ? CURRENT_RULES_VERSION : undefined,
+  });
 }
 
 /** the model as the browser reaches it: through the dev server, which holds the key and the SDKs */

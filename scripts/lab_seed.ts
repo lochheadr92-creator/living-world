@@ -2,7 +2,7 @@
 //   npx vite-node scripts/lab_seed.ts -- --seed meadow [--profile large] [--fork 4] [--days 8] [--branches nudge:1,nudge:2,...] [--sample 120]
 // Run many seeds in parallel, then aggregate: node scripts/lab.mjs --out lab_out --seeds 8
 import { createWorld } from '../src/sim/factory';
-import { settingsForProfile } from '../src/sim/profiles';
+import { freshRunSettings, parseRunRules, runRulesVersion } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { DEFAULT_BRANCHES, runLab } from './lab/lab';
 
@@ -19,11 +19,17 @@ const sample = Number(opt('sample', '120'));
 // `--branches none` runs the control alone (the gates use that)
 const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((b) => b && b !== 'none');
 
-// `--dynamics rich` founds the world with rich dynamics (so the control is rich too)
-const dynamics = opt('dynamics', 'authored') as 'authored' | 'rich';
-const world = createWorld(settingsForProfile(profile, seed, { immigration: false, dynamics }));
+// The current simulation is the baseline; `--dynamics authored` reproduces older experiments, and `rich-unversioned` a rich
+// one from before rules versions existed. A current run is stamped with the current rules version, as a new world in the app
+// is: a measurement of "the current simulation" that quietly ran the unversioned baseline would be worthless.
+const rules = parseRunRules(opt('dynamics', 'rich'));
+const dynamics = rules === 'authored' ? 'authored' : 'rich';
+const rulesVersion = runRulesVersion(rules);
+const world = createWorld(freshRunSettings(rules, profile, seed, { immigration: false }));
 // `dynamics` goes on every row: a result from a rich world is not comparable with one from an authored world, and the gates
 // (scripts/gates.ts) refuse to compare them rather than quietly treating one as a baseline for the other.
-runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, dynamics, ...r, hashes: undefined })));
+// `rulesVersion` is on every row beside `dynamics`, explicitly null for an unversioned run: a reader must never have to
+// guess a generation from the word "rich".
+runLab(world, fork, days, branches, sample, (r) => console.log(JSON.stringify({ seed, profile, fork, days, dynamics, rulesVersion, ...r, hashes: undefined })));
 // a last line so that a runner can tell a finished seed from one cut short (the lab.mjs runner skips finished seeds when re-run)
 console.log(JSON.stringify({ seed, done: true }));
