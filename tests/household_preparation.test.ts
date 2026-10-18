@@ -23,6 +23,7 @@ import { currentWorldSettings, freshRunSettings, settingsForProfile } from '../s
 import {
   CARRY_TO_STORE,
   DAY_FOOD,
+  PREPARATION_FROM_VERSION,
   RESERVE_CAP,
   RESERVE_DAYS,
   foodInBelief,
@@ -587,7 +588,9 @@ describe('8. the lab off-switch removes this and only this', () => {
 
 describe('9. a fresh world is the same generation of rules wherever it is made', () => {
   it('the app path and the command-line path stamp the same current version', () => {
-    expect(CURRENT_RULES_VERSION).toBe(2);
+    // What matters here is that the two paths agree, and that a fresh world is new enough for this behaviour - not that
+    // the current version is any particular number. A later feature raises it, and this test must not fail for that.
+    expect(CURRENT_RULES_VERSION).toBeGreaterThanOrEqual(PREPARATION_FROM_VERSION);
     const app = currentWorldSettings('normal', 'agree', { immigration: false });
     const cli = freshRunSettings('rich', 'normal', 'agree', { immigration: false });
     expect(app.rulesVersion).toBe(CURRENT_RULES_VERSION);
