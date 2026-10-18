@@ -13,7 +13,8 @@ the CLI rules-version fix) is merged into `main` and is not reopened below.
 - Checkout: `C:\dev\Claude Experiment\living-world`, branch `claude/household-preparation-v2`, cut from `main` at `5b7a941`.
 - Integration branch: `main` at `5b7a941`, which carries the merge `e81aad4` (pull request #17) and everything before it.
 - The working tree is clean. One ignored artifact directory, `gates_rich_out/`, remains ignored (`.gitignore`).
-- Pull request: see the PR for `claude/household-preparation-v2`. Integration status is at the bottom of this file.
+- **Pushed** to `origin/claude/household-preparation-v2`. **No pull request exists yet, and nothing is merged.** See
+  "Integration: what is blocked and the exact next action" below.
 
 ## What inhabitants can now do
 
@@ -221,8 +222,36 @@ These stand. None is fixed by this pass.
 `2a4a704` is the only commit without the required "Existing modules touched, and why" line: it touched no existing modules
 (four new files), and it was not amended because rewriting history is a hard rail for this task.
 
+## Integration: what is blocked and the exact next action
+
+The branch is pushed and verified. **The pull request could not be opened from this session**, so nothing is merged and
+`main` is still at `5b7a941`.
+
+The exact blocker, reported verbatim: the GitKraken MCP tool refused with
+
+> To sign in, run `C:/Users/RJLoc/AppData/Local/GitKrakenCLI/gk.exe auth login` in your terminal, finish signing in,
+> then retry the previous request.
+
+`gh` is not installed and `GH_TOKEN`/`GITHUB_TOKEN` are unset, so there is no other route from here. No attempt was made
+to work around it.
+
+Either of these unblocks it:
+
+1. Sign the CLI in, after which the PR can be opened from a session:
+
+```
+C:/Users/RJLoc/AppData/Local/GitKrakenCLI/gk.exe auth login
+```
+
+2. Or open it by hand. GitHub offers the link directly:
+   <https://github.com/lochheadr92-creator/living-world/pull/new/claude/household-preparation-v2>.
+   The prepared title and body are in `PULL_REQUEST.md` at the repository root, ready to paste.
+
+**Do not treat this task as accepted until the PR is reviewed and merged**, and until the integration result is verified
+on the merge commit itself rather than on this branch.
+
 ## Next
 
-The bounded preparation feature is finished. The smallest next action is the `town` run above, which answers the one
-question this pass left open. Beyond that, the fifteen proposed gameplay stages remain a backlog in `docs/EMERGENCE.md`;
-nothing here commits to them.
+The bounded preparation feature is finished. The next actions, in order: open and merge the PR (above), then the `town`
+run, which answers the one question the measurement left open. Beyond that, the fifteen proposed gameplay stages remain a
+backlog in `docs/EMERGENCE.md`; nothing here commits to them.
