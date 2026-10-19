@@ -1,0 +1,14 @@
+gates: 24 seeds (rich, large, from day 0, 12 days, branch “control”) against 24 recorded in docs/gates-rich.json
+  pass  people           101.0   band [99.8, 102.8]   recorded 101.3
+  pass  deaths             1.1   band [-0.5, 1.5]   recorded 0.5
+  pass  workplaces        10.1   band [8.7, 13.6]   recorded 11.1
+  pass  solidHomes        25.5   band [23.1, 29.4]   recorded 26.3
+  pass  buildings         82.1   band [78.8, 89.4]   recorded 84.1
+  pass  plots             89.3   band [85.7, 102.7]   recorded 94.2
+  pass  homeless           0.4   band [-0.6, 0.6]   recorded 0.0
+  pass  belowCritical      1.0   band [-0.7, 2.0]   recorded 0.6
+  pass  meanHunger        63.8   band [60.6, 72.0]   recorded 66.3
+  FAIL  tools            140.8   band [143.9, 178.7]   recorded 161.3
+  pass  meanCondition     64.1   band [62.8, 69.8]   recorded 66.3
+  pass  every seed keeps at least 50 people
+1 gate(s) failed

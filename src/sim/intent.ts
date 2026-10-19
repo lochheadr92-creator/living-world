@@ -16,6 +16,17 @@ import { addLog } from './events';
 import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
 import { recentFailure } from './knowledge';
+import {
+  CARRY_TO_STORE,
+  foodInBelief,
+  foodToStore,
+  homeStoreBelief,
+  notePrepAdopted,
+  notePrepEnded,
+  notePrepStored,
+  preparationWanted,
+  preparesFood,
+} from './provision';
 import type { Ctx, Option } from './optutil';
 import { MAX_INTENTIONS } from './types';
 import type { Activity, BuildingType, Intention, ItemKind, Items, Person, Request, ToolKind, World } from './types';
@@ -237,6 +248,7 @@ type Step = { kind: Intention['stepKind']; target: number; item: ItemKind | null
 function stepFor(ctx: Ctx, i: Intention): Step {
   if (i.kind === 'tool') return toolStep(ctx, i);
   if (i.kind === 'repair') return repairStep(ctx, i);
+  if (i.kind === 'stock') return stockStep(ctx, i);
   return nextStep(ctx);
 }
 
@@ -277,6 +289,7 @@ function projectOutcome(world: World, p: Person, i: Intention): { status: 'done'
     }
     return null;
   }
+  if (i.kind === 'stock') return stockOutcome(world, p, i);
   if (i.kind === 'repair') {
     const b = ownHomeBelief(p);
     if (!b) return { status: 'dropped', reason: 'there is no home of theirs left to mend' };
@@ -462,6 +475,75 @@ function repairStep(ctx: Ctx, i: Intention): Step {
   return { kind: 'mend', target: b.id, item: null, step: `mend the ${what}`, key: `repair:${b.id}`, blocked: '' };
 }
 
+/**
+ * A food reserve has two steps and no third: gather food, or take what is carried home. Which one it is depends only on what
+ * the person is carrying, because the deposit option needs a surplus over what they keep back for themselves
+ * (options_work.ts optDepositFood keeps 2 or 3) and offering a trip home with two berries in the pack would be a waste of an
+ * afternoon.
+ *
+ * Unlike a tool or a repair, this plan speaks for NO material: `wants` stays empty. Food in the pack is also what keeps the
+ * person and their children alive, and `freeOf` would hide a reserve-bound apple from somebody about to faint. The reserve is
+ * claimed only once it is in the store.
+ */
+function stockStep(ctx: Ctx, i: Intention): Step {
+  const { p } = ctx;
+  const home = homeStoreBelief(p);
+  if (!home) return { kind: 'none', target: 0, item: null, step: 'find somewhere of their own to put food by', key: null, blocked: 'no home of their own that they know of' };
+  const want = i.reserve ?? 0;
+  const short = Math.max(0, want - foodInBelief(home));
+  if (short <= 0) return { kind: 'none', target: home.id, item: null, step: 'the store has what it needs', key: null, blocked: '' };
+  if (foodToStore(p) >= CARRY_TO_STORE) {
+    return { kind: 'store', target: home.id, item: null, step: `take the food home (${short} more to put by)`, key: `deposit:${home.id}:food`, blocked: '' };
+  }
+  return { kind: 'forage', target: 0, item: null, step: `gather food to put by (${short} more)`, key: null, blocked: '' };
+}
+
+/**
+ * Has a food reserve come to something? Judged on the store as the person believes it - refreshed every time they are there,
+ * which depositing guarantees - and on what their own hands put in. A store that reached the target some other way (a
+ * neighbour's gift, somebody else of the household bringing food home) ends the plan, because there is nothing left to want,
+ * but it is not called an achievement and it is not credited to them.
+ */
+/** "1 unit", "3 units": the card and the record say how much was really put by, and one is not "1 units" */
+const units = (n: number): string => `${Math.round(n)} unit${Math.round(n) === 1 ? '' : 's'}`;
+
+function stockOutcome(world: World, p: Person, i: Intention): { status: 'done' | 'dropped'; reason: string } | null {
+  // The rules stopped running this behaviour under the plan's feet: the lab switched it off at a fork, in a world that already
+  // had preparations under way. The plan ends rather than carrying on invisibly, so an ablation really is an ablation.
+  if (!preparesFood(world)) return { status: 'dropped', reason: 'putting food by is no longer part of these rules' };
+  const home = homeStoreBelief(p);
+  if (!home) return { status: 'dropped', reason: 'there is no home of theirs left to put anything by in' };
+  const want = i.reserve ?? 0;
+  const inStore = foodInBelief(home);
+  if (inStore >= want && i.worked > 0) return { status: 'done', reason: `put ${units(i.worked)} of food by; the store holds ${inStore}` };
+  if (inStore >= want) return { status: 'dropped', reason: `the store came to hold ${inStore} without their doing` };
+  if (world.tick > i.until) {
+    return i.worked > 0
+      ? { status: 'dropped', reason: `put ${units(i.worked)} by, but the store is at ${inStore} of ${want} and the time is up` }
+      : { status: 'dropped', reason: `never got any food put by (the store is at ${inStore} of ${want})` };
+  }
+  return null;
+}
+
+/**
+ * Credit food really put into a home store to the reserve it served, at the one place food actually moves into a building
+ * (act_resource.ts, the deposit handler, as each kind transfers). Without this a plan could call itself finished because the
+ * store happens to be full - which is also true when somebody else filled it.
+ */
+export function creditStocked(p: Person, buildingId: number, units: number): void {
+  if (units <= 0 || !buildingId || !p.intentions.length) return;
+  for (const i of p.intentions) {
+    if (i.status !== 'active' || i.kind !== 'stock' || i.aboutId !== buildingId) continue;
+    i.worked += units;
+    notePrepStored(units);
+  }
+}
+
+/** Is this person carrying a live food reserve? The one question options_work.ts asks, so the forage option stays on offer for it. */
+export function preparingReserve(p: Person): boolean {
+  return p.intentions.some((i) => i.status === 'active' && i.kind === 'stock');
+}
+
 /** Would a tool be worth making, and is the only thing in the way the materials? */
 function toolWanted(ctx: Ctx): { tool: ToolKind; wants: Partial<Items> } | null {
   const t = wantedTool ? wantedTool(ctx) : null;
@@ -537,6 +619,7 @@ export function settleIntentions(world: World, p: Person): void {
       i.stepKind = 'none';
       i.stepKey = null;
       i.wants = {}; // what it had spoken for is spare again the moment it ends
+      if (i.kind === 'stock') notePrepEnded(made.status === 'done');
       addLog(world, p, 'work', `${made.status === 'done' ? 'Finished' : 'Gave up on'}: ${i.goal} - ${made.reason}.`);
       continue;
     }
@@ -684,15 +767,63 @@ function adoptProject(ctx: Ctx): Intention | null {
   if (live.length >= MAX_INTENTIONS) return null;
   if (live.some((i) => i.kind !== 'night')) return null;
 
+  // How long since the last plan of a kind ended, used below: the same rule for every kind, counted from the END, because
+  // "gave up on it, still short three" followed at once by "means to do it" is the same decision made again with nothing new
+  // to go on.
+  const onCooldown = (kind: Intention['kind']): boolean => {
+    const last = [...p.intentions].reverse().find((i) => i.kind === kind);
+    return !!last && world.tick - (last.status === 'active' ? last.since : last.ended || last.since) < DAY;
+  };
+
+  // Putting food by comes before a roof or an axe when its cue is live (rules version 2; `preparationWanted` returns null in
+  // any world below it, so everything after this point is version 1's path, unchanged). The precedence is deliberate and
+  // narrow: it applies only on the days the cue is open, and when the reserve is on its cooldown the older projects are
+  // reached exactly as they always were.
+  const stock = onCooldown('stock') ? null : preparationWanted(ctx);
+  if (stock) {
+    const made: Intention = {
+      id: world.nextId++,
+      kind: 'stock',
+      goal: `put ${stock.target} units of food by for the household`,
+      since: world.tick,
+      until: stock.until,
+      status: 'active',
+      reason: stock.why,
+      setAside: 0,
+      aboutId: stock.aboutId,
+      wants: {},
+      makes: '',
+      sheltered: 0,
+      worked: 0,
+      ended: 0,
+      reserve: stock.target,
+      cue: stock.cue,
+      step: '',
+      stepKind: 'none',
+      stepTarget: 0,
+      stepItem: null,
+      stepKey: null,
+      blocked: '',
+    };
+    const st = stepFor(ctx, made);
+    made.step = st.step;
+    made.stepKind = st.kind;
+    made.stepTarget = st.target;
+    made.stepItem = st.item;
+    made.stepKey = st.key;
+    made.blocked = st.blocked;
+    p.intentions.push(made);
+    notePrepAdopted(stock.cue);
+    addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
+    return made;
+  }
+
   const roof = repairWanted(ctx);
   const tool = roof ? null : toolWanted(ctx);
   if (!roof && !tool) return null;
   const kind: Intention['kind'] = roof ? 'repair' : 'tool';
-  // One of a kind at a time, and not straight after the last one of that kind ended. The wait is counted from the END, because
-  // "gave up on the basket, still short 3 wood" followed at once by "means to make a basket" is not someone changing their mind:
-  // it is the same decision made again with nothing new to go on.
-  const last = [...p.intentions].reverse().find((i) => i.kind === kind);
-  if (last && world.tick - (last.status === 'active' ? last.since : last.ended || last.since) < DAY) return null;
+  // One of a kind at a time, and not straight after the last one of that kind ended.
+  if (onCooldown(kind)) return null;
 
   const base: Omit<Intention, 'step' | 'stepKind' | 'stepTarget' | 'stepItem' | 'stepKey' | 'blocked'> = {
     id: world.nextId++,
@@ -748,6 +879,15 @@ export function servesIntent(i: Intention | null, o: Option): boolean {
       return o.kind === 'craft' && o.key === `craft:${i.makes}`;
     case 'mend':
       return o.kind === 'repair' && o.targetId === i.stepTarget;
+    case 'forage':
+      // Anything that really brings food in: foraging, fishing (a fish spot is gathered), harvesting a plot, hunting. Matched
+      // on the ACTIVITY, not on `o.yields`, because the food options do not declare one - and making them declare one would
+      // change what version-1 worlds do, since the ask weighs `yields` when it decides whether to ask for food at all
+      // (options_social.ts). Eating is deliberately not here: filling yourself is not filling the store.
+      return (o.kind === 'gather' && o.tag === 'food') || o.kind === 'harvest' || o.kind === 'hunt';
+    case 'store':
+      // putting goods down at THIS store, not at the storehouse or at a site
+      return o.kind === 'deposit' && o.targetId !== 0 && o.targetId === i.stepTarget;
     default:
       return false;
   }

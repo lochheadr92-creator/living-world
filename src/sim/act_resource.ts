@@ -30,6 +30,8 @@ import { contestLost, creditContribution, fulfillCommitment } from './social';
 import { fellTree } from './sources';
 import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
+import { creditStocked } from './intent';
+import { isFoodKind } from './provision';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -440,6 +442,8 @@ registerHandler('deposit', {
         if (e.ent === 'building' && isToolItem(k as ItemKind)) donateToRack(world, e.id, p, k as ToolKind, m);
         if (e.ent === 'building') {
           noteDeposit(world, e, p, k as ItemKind, m);
+          // a food reserve is credited where the food actually moves, not from the store looking full afterwards
+          if (isFoodKind(k as ItemKind)) creditStocked(p, e.id, m);
           if (a.data.destSite) creditContribution(p, a.data.destSite as number, 12 * m);
         }
         if (e.ent === 'site' && e.contrib) e.contrib[p.hhId] = (e.contrib[p.hhId] ?? 0) + m;

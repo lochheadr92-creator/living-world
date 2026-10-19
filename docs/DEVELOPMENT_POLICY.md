@@ -47,6 +47,22 @@ Four version-like things exist here and they are not interchangeable:
 apprenticeship, the second rich pass, the rich-only town corrections and the project ask as written then. It is the first
 baseline this project can hold itself to; it is **not** a claim to reproduce any particular earlier release.
 
+**Version 2** (2026-10-18) adds HOUSEHOLD FOOD PREPARATION and nothing else: an adult may take on a private plan to put a
+modest food reserve into their own household's home store, set going either by what they can see of that household's food or
+by the approach of winter, and carried out with the gathering and depositing that already existed. The whole of it is
+`src/sim/provision.ts` and the `stock` plan kind in `src/sim/intent.ts`, every part gated on `runsRulesVersion(world, 2)`.
+Nothing else was retuned: winter, lean seasons, hunger, yields, spoilage and starting resources are exactly version 1's. See
+`docs/RICH_WORLD.md` for the contract and the measurement.
+
+**How a version is proved not to have leaked.** A test that checks the version LABEL is not enough: a gate that leaked would
+keep the label and change the world. Before version 2 was written, `scripts/v1_reference.ts --write` recorded
+`tests/v1_continuation.expected.json` - two rich worlds stamped `rulesVersion: 1`, run, written out and read back through the
+real save path, then continued, with the compact and deep hashes AND plain counts (people alive, live plans by kind, food in
+home stores) at each checkpoint. One case ends in the window before winter, where a seasonal behaviour would be adopted.
+`tests/v1_continuation.test.ts` compares against it on every pass. **Re-recording that file to make a change pass would
+delete the only evidence of the leak**; a failure means the gate is wrong. Every later version should extend it the same way:
+record the reference from the revision before the new behaviour exists.
+
 **What carries it.** New product worlds get the current version at creation (`currentWorldSettings`, the app's constructor and
 every restart, and inhabitant links that are not explicitly legacy). It is preserved by saving, loading, app restore, world
 cloning and lab forks, and replay configuration, and it is part of the state fingerprint (`hashWorld`) so that two worlds
@@ -80,6 +96,16 @@ different generations, and it reads the existing files without rewriting or rela
 the rules version as well, so a gate cannot silently check one generation against a baseline from another. None of this is
 source provenance: two runs of the same version from different revisions are still different experiments, so use a fresh
 directory after any source change and record HEAD and the diff.
+
+**The first change at a new rules version cannot be gated, and the policy should say so.** `scripts/gates.ts` compares
+like with like and refuses otherwise, rules version included. Every recorded baseline (`docs/gates.json`,
+`docs/gates-rich.json`) is unversioned, so the first run at a new version is refused by name - correctly, since "both
+rich" has never meant "the same rules". Recording a baseline from the candidate and then checking the candidate against
+it is not acceptance; it is a comparison with itself. What stands in its place, and what was actually done for version 2
+(`gate_v2_unversioned/FINDING.md`): the older generation proved unchanged by the goldens, the version-1 continuation
+reference and an unversioned ensemble at the gated profile; the test suite; a bounded ablation of the new behaviour
+against a nudge floor; and the browser checks. A baseline for the new version is recorded AFTER the merge, so that the
+next change at that version can be gated properly.
 
 **Changing behaviour from here on.** A change that is meant to alter outcomes - a new decision rule, or a tuned parameter that
 moves them - raises `CURRENT_RULES_VERSION` and adds the new number to `SUPPORTED_RULES_VERSIONS`. The new behaviour is gated

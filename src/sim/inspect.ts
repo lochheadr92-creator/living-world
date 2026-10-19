@@ -307,6 +307,15 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
         ? `under way (${a!.label})`
         : 'settled on, not started';
   let text = `${cap(i.goal)}. Step: ${i.step || '—'} — ${state}.`;
+  // A food reserve is the one live plan whose sentence has to carry two more things, because the whole point of it is that a
+  // viewer can follow local evidence to a real consequence: WHAT WAS ACTUALLY PUT BY (not what was meant), and WHY it was taken
+  // on, which for this kind is evidence about the household rather than a restatement of the goal. No other kind is touched,
+  // and `stock` does not exist below rules version 2.
+  if (i.kind === 'stock') {
+    const put = Math.round(i.worked);
+    text += ` ${put} of ${i.reserve ?? 0} unit${i.reserve === 1 ? '' : 's'} put by so far.`;
+    if (i.reason) text += ` Why: ${i.reason}.`;
+  }
   if (i.setAside > 0) text += ` Set aside ${i.setAside === 1 ? 'once' : `${i.setAside} times`} so far.`;
   return text + helpText(world, p, i);
 }
@@ -340,7 +349,16 @@ export function planViews(world: World, p: Person): PlanView[] {
       .filter((x) => x.n > 0)
       .map((x) => `${x.n} ${x.item}`)
       .join(', '),
-    progress: i.kind === 'night' ? `${i.sheltered} ticks under shelter` : i.kind === 'repair' ? `${Math.round(i.worked)} of its condition put back` : i.worked > 0 ? 'made it themselves' : '',
+    progress:
+      i.kind === 'night'
+        ? `${i.sheltered} ticks under shelter`
+        : i.kind === 'repair'
+          ? `${Math.round(i.worked)} of its condition put back`
+          : i.kind === 'stock'
+            ? `${Math.round(i.worked)} of ${i.reserve ?? 0} units put by${i.cue ? ` (${i.cue === 'season' ? 'winter is coming' : 'the household was short'})` : ''}`
+            : i.worked > 0
+              ? 'made it themselves'
+              : '',
     due: i.status === 'active' ? `by tick ${i.until}` : agoText(world, i.ended || i.since),
     outcome: i.status === 'active' ? '' : i.reason,
   }));
