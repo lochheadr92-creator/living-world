@@ -2,6 +2,7 @@ import { newActivity } from './activities';
 import { DAY } from './constants';
 import { isRich } from './mood';
 import { nightPlansOn, shelters, untilDaylight } from './intent';
+import { hasHabitation, indoorHome } from './habitation';
 import { payNudge } from './learning';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
@@ -37,6 +38,7 @@ const FOOD_KINDS = ['berry_bush', 'fruit_tree', 'wild_grain', 'fish_spot'] as co
 // ───────────────────────── flee ─────────────────────────
 function optFlee(ctx: Ctx): void {
   const { world, p } = ctx;
+  if (indoorHome(world, p)) return;
   let tx = 0;
   let ty = 0;
   let td = 99;
@@ -69,12 +71,12 @@ function optFlee(ctx: Ctx): void {
   let atHut = false;
   for (const b of world.buildings) {
     if (b.type === 'fire' && b.fuel > 0 && hyp(b.x + 0.5 - p.x, b.y + 0.5 - p.y) < 5.5) atFire = true;
-    if (isSolidHome(b.type) && hyp(b.x + b.w / 2 - p.x, b.y + b.h / 2 - p.y) < 2.8) atHut = true;
+    if (!hasHabitation(world) && isSolidHome(b.type) && hyp(b.x + b.w / 2 - p.x, b.y + b.h / 2 - p.y) < 2.8) atHut = true;
   }
   if ((near >= 2 || atFire || atHut) && td > 3.5) return;
 
   // choose a refuge among places they know about
-  let best: { x: number; y: number; score: number; what: string } | null = null;
+  let best: { x: number; y: number; score: number; what: string; homeId?: number } | null = null;
   for (const b of beliefsByKind(p, ['building'])) {
     const isFire = b.btype === 'fire' && (b.fuel ?? 0) - (world.tick - b.seen) > 0;
     const isHome = isHomeType(b.btype) && b.hh === p.hhId;
@@ -83,7 +85,7 @@ function optFlee(ctx: Ctx): void {
     const dTh = hyp(b.x - tx, b.y - ty);
     if (dTh < dMe * 0.7) continue; // would run toward the danger
     const score = -dMe + 0.6 * dTh + (isFire ? 3 : 4);
-    if (!best || score > best.score) best = { x: b.x, y: b.y, score, what: isFire ? 'the fire' : 'home' };
+    if (!best || score > best.score) best = { x: b.x, y: b.y, score, what: isFire ? 'the fire' : 'home', homeId: isHome ? b.id : undefined };
   }
   for (const s of ctx.seenPersons) {
     if (s.child) continue;
@@ -125,12 +127,13 @@ function optFlee(ctx: Ctx): void {
         label: `Running from the wolf toward ${what}`,
         goal: 'to reach safety',
         need: 'safety',
+        ...(hasHabitation(world) && best?.homeId ? { targetId: best.homeId, targetType: 'building' } : {}),
         spotX: sx,
         spotY: sy,
         utility: sc.total,
         minCommit: 30,
         maxTicks: 260,
-        data: { run: true },
+        data: { run: true, ...(hasHabitation(world) && best?.homeId ? { homeRefuge: true } : {}) },
       });
     },
   });

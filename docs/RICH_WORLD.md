@@ -118,3 +118,8 @@ own unit test (`tests/{temperament,apprentice,crews,mediation,responsibilities,l
 the records named here: `p.heard`, `p.trade`, `p.apprentice`, `p.goal`, `world.chronicle`. What that establishes is that the
 mechanisms exist, are rich-only and are deterministic - not that any of them improves an outcome: no ensemble has been run for
 either pass, and one 12-day observation found apprenticeship starting once in four worlds.
+# Habitation branch update (2026-10-19)
+
+Rules version 3 on this branch adds actual indoor occupancy for huts and houses. See
+`docs/HABITATION.md` for the physical contract, autonomous example, save compatibility,
+browser evidence and integration limitations. Earlier generations retain proximity shelter.

@@ -1,6 +1,7 @@
 import { addEvent, addFx, addLog } from './events';
 import { isRich, think } from './mood';
 import { wolfNerve } from './hardship';
+import { hasHabitation, indoorHome } from './habitation';
 import { nearestHub } from './settlements';
 import { isSolidHome } from './constants';
 import { nearLitFire } from './perception';
@@ -151,14 +152,15 @@ function steer(world: World, a: Animal, tx: number, ty: number, speed: number): 
 }
 
 export function safeFromWolf(world: World, t: Person): boolean {
+  if (indoorHome(world, t)) return true;
   let others = 0;
   for (const q of world.persons) {
-    if (q !== t && q.alive && hyp(q.x - t.x, q.y - t.y) < 5) others++;
+    if (q !== t && q.alive && !indoorHome(world, q) && hyp(q.x - t.x, q.y - t.y) < 5) others++;
   }
   if (others >= 2) return true;
   if (nearLitFire(world, t.x, t.y, wolfNerve(world).fire)) return true;
   for (const b of world.buildings) {
-    if (isSolidHome(b.type) && hyp(t.x - (b.x + b.w / 2), t.y - (b.y + b.h / 2)) < 2.8) return true;
+    if (!hasHabitation(world) && isSolidHome(b.type) && hyp(t.x - (b.x + b.w / 2), t.y - (b.y + b.h / 2)) < 2.8) return true;
   }
   return false;
 }
@@ -183,7 +185,7 @@ function pickPrey(world: World, a: Animal, night: boolean): Person | null {
 
 function scared(world: World, a: Animal): boolean {
   let n = 0;
-  for (const p of world.persons) if (p.alive && hyp(p.x - a.x, p.y - a.y) < 4.5) n++;
+  for (const p of world.persons) if (p.alive && !indoorHome(world, p) && hyp(p.x - a.x, p.y - a.y) < 4.5) n++;
   return n >= 2;
 }
 
@@ -384,7 +386,7 @@ export function updateWildlife(world: World): void {
       }
       case 'stalk': {
         const t = personById(world, a.targetId);
-        if (!t || !t.alive) {
+        if (!t || !t.alive || indoorHome(world, t)) {
           a.state = 'retreat';
           a.until = world.tick + 150;
           break;

@@ -1,0 +1,24 @@
+{
+  "source": "1a13408, before habitation",
+  "saved": {
+    "hash": "e8a43ec3",
+    "deep": "af86205d02d3e230",
+    "alive": 28,
+    "plans": {
+      "tool": 18
+    },
+    "homeFood": 90,
+    "storedFood": 33
+  },
+  "continued": {
+    "hash": "9e53f17f",
+    "deep": "65bb8bfd3433c7bc",
+    "alive": 28,
+    "plans": {
+      "tool": 15,
+      "stock": 3
+    },
+    "homeFood": 90,
+    "storedFood": 31
+  }
+}

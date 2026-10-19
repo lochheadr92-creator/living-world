@@ -1,6 +1,31 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-18
+Updated: 2026-10-19
+
+## Habitation branch — read this before the inherited handoff
+
+This isolated checkout is `codex/home-habitation`, based on `1a13408` from the household-preparation
+branch. It implements actual hut/house entry, indoor sleep/rest/refuge, exit, saved occupancy,
+indoor protection, and occupant inspection. Full contract and verification: `docs/HABITATION.md`.
+
+Implementation commit: `701f580`; pre-feature version-2 reference: `780a593`. Both are pushed.
+Draft [PR #19](https://github.com/lochheadr92-creator/living-world/pull/19) is open against
+`claude/household-preparation-v2` to isolate the habitation diff. It is not merged or approved.
+
+The owner chose **habitation first, then wolf defence**. Here rules version 3 means habitation.
+The uncommitted wolf-defence work in the original checkout was not copied or modified. Its rules
+version must be reconciled as a later generation before integration; two unrelated version-3
+implementations must not exchange saves.
+
+818 tests passed, historical goldens and both old-version continuation references passed.
+Browser results: habitation 10/10, current-world 15/15, household preparation 19/19.
+In the autonomous `river` example, Mira finished hut 2827 at tick 3349 and Emre entered it
+at tick 3516. This branch adds habitation, not a guarantee that everybody builds a house.
+
+No merge or baseline refresh was performed. PR #18 remains a dependency unless separately
+integrated. The earlier household-preparation record below describes that dependency, not the
+current branch's identity. Independent review and the applicable acceptance decision remain
+integration requirements. See `docs/HABITATION.md` for limits, screenshots and launch commands.
 
 A continuation guide for this checkout. The repository and the current Git state are authoritative; this is a map, not a
 replacement for them.

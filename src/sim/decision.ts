@@ -10,6 +10,7 @@ import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
+import { indoorHome } from './habitation';
 import { probe, probeWander } from './probe';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
@@ -337,7 +338,7 @@ export function urgentInterrupt(world: World, p: Person): boolean {
   if (!a || a.kind === 'flee') return false;
   const alarm = Math.min(9.5, fleeRadius(p));
   for (const s of p.seen) {
-    if (isThreat(world, s) && hyp(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {
+    if (!indoorHome(world, p) && isThreat(world, s) && hyp(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {
       p.cooldowns.fleeCheck = world.tick;
       return true;
     }

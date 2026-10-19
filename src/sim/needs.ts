@@ -3,6 +3,7 @@ import { nearLitFire } from './perception';
 import { stageOf } from './people';
 import { elderFactor } from './life';
 import { isThreat } from './wildlife';
+import { hasHabitation, indoorHome } from './habitation';
 import type { NeedKey, Person, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -23,12 +24,18 @@ export interface Shelter {
 }
 
 /** Cover at a position: huts keep rain and cold out, lean-tos help a bit. Poorly kept buildings protect less. */
-export function shelterAt(world: World, x: number, y: number): Shelter {
+export function shelterAt(world: World, x: number, y: number, person?: Person): Shelter {
+  const room = person ? indoorHome(world, person) : null;
+  if (room) {
+    const q = room.condition < 30 ? 0.5 : 1;
+    return { bonus: (room.type === 'house' ? 14 : 10) * q, cover: q, kind: 'hut' };
+  }
   let bonus = 0;
   let cover = 0;
   let kind: Shelter['kind'] = 'none';
   for (const b of world.buildings) {
     if (b.type === 'hut' || b.type === 'house' || b.type === 'hall') {
+      if (hasHabitation(world) && b.type !== 'hall' && (!person || indoorHome(world, person)?.id !== b.id)) continue;
       const d = hyp(x - (b.x + b.w / 2), y - (b.y + b.h / 2));
       if (d < (b.type === 'hall' ? 3.2 : 2.4)) {
         const q = b.condition < 30 ? 0.5 : 1;
@@ -82,8 +89,8 @@ export function updateNeeds(world: World, p: Person): void {
   n.thirst -= THIRST_RATE * kidMul * (sleeping ? 0.6 : heavy ? 1.3 : running ? 1.4 : 1) * (1 + heat);
 
   // warmth
-  const sh = shelterAt(world, p.x, p.y);
-  const fire = fireWarmth(world, p.x, p.y);
+  const sh = shelterAt(world, p.x, p.y, p);
+  const fire = indoorHome(world, p) ? 0 : fireWarmth(world, p.x, p.y);
   const wet = w.rain * 3.6 * (1 - sh.cover);
   const eff = w.temp + 2 + sh.bonus + fire - wet;
   const target = clamp(50 + (eff - 10) * 5, 0, 100);

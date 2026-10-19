@@ -1,4 +1,5 @@
 import type { Game } from '../app/game';
+import { indoorHome } from '../sim/habitation';
 import { gridQuery } from '../sim/registry';
 import type { Entity } from '../sim/types';
 import { worldToScreen } from './camera';
@@ -91,6 +92,7 @@ export function pickEntity(game: Game, vw: number, vh: number, px: number, py: n
   };
   for (const p of w.persons) {
     if (!p.alive) continue;
+    if (indoorHome(w, p)) continue; // select via the home's occupant chips, not an invisible outdoor body
     const a = game.renderAlpha;
     const x = p.px + (p.x - p.px) * a;
     const y = p.py + (p.y - p.py) * a;

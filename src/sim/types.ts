@@ -629,6 +629,8 @@ export interface Person {
   injury?: Injury;
   errand: Errand | null;
   activity: Activity | null;
+  /** Authoritative abstract indoor location (habitation rules only); absent means outdoors. */
+  indoors?: number;
   suspended: Activity | null;
   pose: PoseKind;
   convId: number;

@@ -34,10 +34,11 @@ import type { Settings, World } from './types';
  *
  * Raising this number is how a behavioural change is declared. See docs/DEVELOPMENT_POLICY.md, "Rules versions".
  */
-export const CURRENT_RULES_VERSION = 2;
+// Version 3: actual home occupancy. Wolf defence is a separate, later integration.
+export const CURRENT_RULES_VERSION = 3;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3];
 
 /**
  * What a world made before versioning existed is. It is NOT version 0 and not "probably 1": several different implementations

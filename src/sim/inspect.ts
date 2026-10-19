@@ -4,6 +4,7 @@ import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType } from 
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
+import { indoorHome, hasHabitation, occupants, homeCapacity } from './habitation';
 import { planHelp, planOfActivity } from './intent';
 import { describePay } from './learning';
 import { describeHeard } from './reputation';
@@ -290,6 +291,8 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   const livePlans = p.intentions.filter((i) => i.status === 'active');
   const toShow = livePlans.length ? livePlans : [...p.intentions].reverse().filter((i) => i.status !== 'active').slice(0, 1);
   const planText = toShow.map((i) => planLine(world, p, i, a)).join(' ');
+  const room = indoorHome(world, p);
+  if (room) doing = 'Inside ' + describeEntityName(world, room) + ' #' + room.id + '. ' + doing;
   return { doing, why, trying, stopping, lastAttempt: last, plan: planText };
 }
 
@@ -638,6 +641,11 @@ export function describeEntity(world: World, id: number): EntityView | null {
       const hh = world.households.find((h) => h.id === b.hhId);
       const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'fire' && !b.ops ? 'nobody (empty)' : 'everyone']];
       const bars: EntityView['bars'] = [];
+      if (hasHabitation(world) && (b.type === 'hut' || b.type === 'house')) {
+        const people = occupants(world, b);
+        rows.push(['Indoors', people.length ? people.map(p => p.name + ': ' + (p.activity?.label ?? 'at home')).join('; ') : 'Nobody inside']);
+        rows.push(['Room for', homeCapacity(world, b) + ' household members']);
+      }
       if (b.type !== 'fire') bars.push({ label: 'Condition', value: b.condition, max: 100, tone: b.condition < 40 ? 'warn' : 'ok' });
       else {
         bars.push({ label: 'Fuel', value: b.fuel, max: 2400, tone: b.fuel < 300 ? 'warn' : 'ok' });

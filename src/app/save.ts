@@ -4,6 +4,7 @@
 // The world is plain data (typed arrays, Maps, Sets and the RNG state are the only special cases).
 import { hashString, RNG } from '../sim/rng';
 import { validateRulesVersion } from '../sim/rulesversion';
+import { hasHabitation, indoorHome, doorPoint } from '../sim/habitation';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
 import type { Settings, World } from '../sim/types';
 import type { Game } from './game';
@@ -251,6 +252,13 @@ export function deserializeWorld(json: string): World {
   }
   for (const c of w.carts) w.byId.set(c.id, c);
   rebuildMobileGrid(w);
+  for (const p of w.persons) {
+    if (p.indoors === undefined) continue;
+    const b = indoorHome(w, p);
+    if (!hasHabitation(w) || !p.alive || !b || !Number.isInteger(p.indoors)) throw new Error('invalid saved indoor location');
+    const d = doorPoint(b);
+    if (Math.hypot(p.x - d.x, p.y - d.y) > 0.35) throw new Error('indoor location does not match home entrance');
+  }
   return w;
 }
 

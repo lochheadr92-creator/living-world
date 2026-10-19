@@ -16,6 +16,7 @@ import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
 import { setLearning } from '../../src/sim/learning';
 import { setFoodPreparation } from '../../src/sim/provision';
+import { setHabitationAdmissions } from '../../src/sim/habitation';
 import { setTrades } from '../../src/sim/trade';
 import { SOURCE_SKILL } from '../../src/sim/constants';
 import type { FoodKind } from '../../src/sim/types';
@@ -165,6 +166,14 @@ export function parseIntervention(specIn: string): Intervention {
         setFoodPreparation(false);
         return () => setFoodPreparation(true);
       },
+    };
+  }
+  if (kind === 'no-home-entry') {
+    return {
+      spec: label,
+      summary: 'no new home admissions; existing occupants keep physical shelter until they leave; outdoor proximity protection is not restored',
+      apply: () => 'new home entry disabled',
+      install: () => { setHabitationAdmissions(false); return () => setHabitationAdmissions(true); },
     };
   }
   if (kind === 'rich-no-trades') {
