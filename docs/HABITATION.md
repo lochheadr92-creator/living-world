@@ -1,5 +1,11 @@
 # Actual home occupancy
 
+Integration update, 2026-10-19: merged into `main` at `8184f92` after household preparation at
+`ac7318d`, on the owner's explicit request. Both merges were pushed normally. The resulting tree
+equals the tested habitation branch; 818 tests, build/typecheck and historical goldens passed
+again on the merge result. PR #18 is merged. PR #19's code is integrated but its GitHub entry
+remains open/draft against the old base branch. The review and ensemble limitations below remain.
+
 Implemented on `codex/home-habitation`, based on household-preparation commit `1a13408`.
 This branch is separate from the ongoing wolf-defence checkout. The owner chose habitation first,
 then wolf-defence integration. Version 3 on THIS branch means habitation, not wolf defence.

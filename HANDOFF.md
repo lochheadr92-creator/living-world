@@ -2,7 +2,27 @@
 
 Updated: 2026-10-19
 
-## Habitation branch — read this before the inherited handoff
+## Integrated main — read this before the inherited handoff
+
+On 2026-10-19 the owner explicitly requested the merge. Household preparation was merged at
+`ac7318d`, followed by habitation at `8184f92`, and `main` was pushed normally. No conflicts,
+force push, history rewrite or protection override occurred. The merge result's Git tree is
+identical to `codex/home-habitation` at `9e41653`.
+
+Verification rerun on `8184f92`: 818 tests in 81 files passed; `npm run build` (including
+TypeScript checking) passed; historical golden fingerprints matched; `git diff --check` passed.
+The prior browser checks below cover this identical source tree and were not rerun for the merge.
+
+GitHub confirms PR #18 merged. PR #19 remains open/draft against `claude/household-preparation-v2`,
+although all its commits are ancestors of pushed `main`. Its GitHub metadata still needs updating
+to reflect integration; available GitHub connector calls were unavailable and the browser was
+signed out. No independent approval is claimed. The stale legacy ensemble baseline remains a
+known limitation; no baseline was replaced or expensive ensemble launched.
+
+The integration checkout is `C:\Users\RJLoc\.codex\worktrees\home-habitation\living-world`, on
+`main`. The original checkout and its separate wolf-defence branch were left untouched.
+
+### Historical habitation implementation record
 
 This isolated checkout is `codex/home-habitation`, based on `1a13408` from the household-preparation
 branch. It implements actual hut/house entry, indoor sleep/rest/refuge, exit, saved occupancy,
@@ -22,10 +42,9 @@ Browser results: habitation 10/10, current-world 15/15, household preparation 19
 In the autonomous `river` example, Mira finished hut 2827 at tick 3349 and Emre entered it
 at tick 3516. This branch adds habitation, not a guarantee that everybody builds a house.
 
-No merge or baseline refresh was performed. PR #18 remains a dependency unless separately
-integrated. The earlier household-preparation record below describes that dependency, not the
-current branch's identity. Independent review and the applicable acceptance decision remain
-integration requirements. See `docs/HABITATION.md` for limits, screenshots and launch commands.
+At the time of the implementation record below, no merge or baseline refresh had been performed.
+The integration status above supersedes those older status claims. See `docs/HABITATION.md` for
+limits, screenshots and launch commands.
 
 A continuation guide for this checkout. The repository and the current Git state are authoritative; this is a map, not a
 replacement for them.
