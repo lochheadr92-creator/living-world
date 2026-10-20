@@ -9,6 +9,9 @@ habitation as rules version 4. Implementation: `57e3047`; preserved version-3 re
 Checkout: `C:\Users\RJLoc\.codex\worktrees\wolf-defence-integration\living-world`.
 Full contract, review repairs and evidence: [WOLF_DEFENCE.md](docs/WOLF_DEFENCE.md).
 
+Draft [PR #20](https://github.com/lochheadr92-creator/living-world/pull/20) is open against
+`main`. Implementation and evidence are pushed; no merge or independent approval is claimed.
+
 887 tests / 86 files, build/typecheck and historical goldens passed. Browser checks: defence
 5/5, habitation 10/10, autonomous saved scene 4/4. Sofia autonomously made a spear and later
 went to protect Abel; the wolf left before an attempt, correctly receiving no defence credit.
