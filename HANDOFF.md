@@ -1,6 +1,6 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-20
+Updated: 2026-10-21
 
 ## Current wolf-defence branch — not merged
 
@@ -8,6 +8,9 @@ Updated: 2026-10-20
 habitation as rules version 4. Implementation: `57e3047`; preserved version-3 reference: `6163c86`.
 Checkout: `C:\Users\RJLoc\.codex\worktrees\wolf-defence-integration\living-world`.
 Full contract, review repairs and evidence: [WOLF_DEFENCE.md](docs/WOLF_DEFENCE.md).
+Durable review record: [WOLF_DEFENCE_REVIEW.md](docs/WOLF_DEFENCE_REVIEW.md), including the
+original request-changes verdict, both blockers, their fixes and regression evidence.
+Independent re-review of the final isolated PR remains outstanding.
 
 Draft [PR #20](https://github.com/lochheadr92-creator/living-world/pull/20) is open against
 `main`. Implementation and evidence are pushed; no merge or independent approval is claimed.
