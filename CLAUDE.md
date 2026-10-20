@@ -10,7 +10,9 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   acceptance test for such a change.
 - One current simulation: new product worlds use the integrated rules (`settings.dynamics = 'rich'` internally), with no player-facing mode toggle. Accepted improvements become standard. The 2026-10-17 owner decision in `docs/DEVELOPMENT_POLICY.md` supersedes the old rich-only/off-by-default product policy.
 - Preserve recorded save/replay semantics; `authored` and absent dynamics remain compatibility/diagnostic values, not a second product to develop indefinitely. Use `currentWorldSettings` for new product worlds. Keep experiments in the lab; require evidence of effectiveness before claiming benefit. Historical goldens protect compatibility, not a freeze on current behavior.
-- One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PR; never merge, never force-push.
+- One branch, one purpose; one commit per problem, each message carrying an `Existing modules touched, and why:` line. Open a draft PR.
+  Never merge unless the owner asks for that merge (the merges of #17, #18 and #19 were each done by, or on the explicit request of, the
+  owner); never force-push or rewrite history.
 
 ## Where things are
 - `src/sim/mood.ts` thoughts, mood level, option weights, mourning. `src/sim/hardship.ts` lean seasons, winter, spoilage, wolf nerve.
