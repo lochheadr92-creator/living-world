@@ -23,11 +23,34 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   `tests/v1_continuation.test.ts`; page check: `scripts/browser/preparation_check.mjs`.
 - A version-1 continuation reference (`tests/v1_continuation.expected.json`, recorded by `scripts/v1_reference.ts` BEFORE version 2
   existed): a version-1 world saved, loaded and continued, hashes and plain counts. Never re-record it to make a change pass.
+- Rules version 3, actual home occupancy (rich + `runsRulesVersion(world, 3)`; in `main`): `src/sim/habitation.ts` owns entry through
+  a home's door, exit, who is inside, and what indoor and outdoor people can see and do to each other (`hasHabitation` is the gate).
+  `Person.indoors` is the one record (absent means outdoors; `Building.inside` is unused legacy); it is saved with the person and part of
+  the state hash. It reaches into `activities.ts`, `needs.ts`, `perception.ts`, `lifecycle.ts`, `wildlife.ts` (nothing bites a resident),
+  `options_survival.ts`, the renderer and the inspector. Contract and limits: `docs/HABITATION.md`. Tests: `tests/habitation.test.ts`,
+  `tests/v2_continuation.test.ts`; page check: `scripts/browser/habitation_check.mjs`; smoke: `scripts/habitation_smoke.ts`; evidence:
+  `habitation_evidence/`.
+- Rules version 4, wolf defence (draft PR #20, branch `codex/wolf-defence-integration`; NOT in `main` until it merges): `src/sim/defence.ts`
+  owns who may defend, the choice, the physical attempt and the observation counters. The spear is an ordinary tool (`toolreg.ts`, wanted
+  through `options_work.ts`, recipe in `constants.ts`); `decision.ts` lets an eligible defence compete with fleeing and counts a new one as
+  urgent; `wildlife.ts` loads first, so it asks `defence.ts` its two questions through registered checks (`setWaryCheck`, `setFacingCheck`).
+  Contract, limits and the autonomous example: `docs/WOLF_DEFENCE.md`. Tests: `tests/wolf_defence.test.ts`, `tests/defence_response.test.ts`,
+  `tests/defence_lab.test.ts`, `tests/wolf_habitation.test.ts`, `tests/v3_continuation.test.ts`; page checks:
+  `scripts/browser/wolf_defence_check.mjs`, `scripts/browser/defence_story_check.mjs`; staged comparison: `scripts/encounters.ts`; evidence and
+  the exact commands: `wolf_evidence/RUN.md`.
+- Later continuation references, same rule as version 1's: `tests/v2_continuation.expected.json` (`scripts/v2_reference.ts`, recorded
+  from `1a13408` before habitation existed) and `tests/v3_continuation.expected.json` (`scripts/v3_reference.ts`, recorded from main
+  `a5530cf` before defence was imported). Never re-record one to make a change pass; the next version records its own from the revision
+  before it.
+- Taking the next rules version number: `git fetch`, then look at every remote branch and every worktree (`git worktree list`) first.
+  Habitation (`codex/home-habitation`) and the first wolf-defence branch (`claude/wolf-defence-v3`) both took 3 in parallel; defence was
+  redone as 4, and saves from `claude/wolf-defence-v3` are compatible with nothing else. `main` is checked out in a Codex worktree, so no
+  other checkout can switch to it; use a detached worktree of a pinned commit.
 - `src/sim/decision.ts` ranks options (mood weight applied here). `src/sim/probe.ts` work counters (never saved or hashed).
 - `scripts/lab/` (fork a saved world, change one thing, compare against control and a one-draw "nudge"), `scripts/lab.mjs` (runs the lab on
   every core), `scripts/lab_report.ts`, `scripts/gates.ts`, `scripts/cascade.ts` (cascade tracer), `scripts/coupling.ts` (static audit),
   `scripts/activity_mix.ts`, `scripts/novelneed_all.mjs`, `scripts/bench.ts`.
-- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans`, `rich-no-ask`, `rich-no-learning`, `rich-no-trades`, `rich-no-stock` (rules version 2 with household food preparation removed and nothing else; it changes nothing below version 2).
+- Lab interventions: `nudge:N`, `remove:<types>:<radius>` (aliases no-wood, no-food, no-clay), `random-choice`, `no-wolf-memory`, `rich`, `rich-stakes-only` (stakes, moods change nothing), `rich-mood-only` (moods count, no stakes), `rich-no-plans`, `rich-no-ask`, `rich-no-learning`, `rich-no-trades`, `rich-no-stock` (rules version 2 with household food preparation removed and nothing else; it changes nothing below version 2), `no-home-entry` (rules version 3: nobody is admitted to a home from then on; those already inside stay until they leave), `rich-no-defence` (draft PR #20: the defensive action removed; spears are still wanted, made and carried).
 - The AI inhabitant (`docs/INHABITANT.md`): `src/sim/external.ts` (the seam in `decide`), `src/agent/` (observation, protocol, memory,
   transcript, model gate, rewind runner, scripted models; no network), `scripts/inhabit.ts` (live | replay | standard; `--memory` keeps notes;
   `--stub goal` needs no key), `src/app/inhabit.ts` + `src/ui/inhabit.ts` (the same run in the page from `?inhabit=<name>&…`; the model
