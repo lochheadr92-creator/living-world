@@ -2,7 +2,8 @@
 
 2026-10-20. Implemented on `codex/wolf-defence-integration` from main `a5530cf`.
 Simulation implementation: `57e3047`. Version-3 continuation reference: `6163c86`.
-This branch has not been merged into main.
+Integrated into main by the owner's direct fast-forward to `9a082d6`, verified on
+2026-10-21. PR #20 was closed without merging through GitHub.
 
 ## Inhabitant behaviour
 

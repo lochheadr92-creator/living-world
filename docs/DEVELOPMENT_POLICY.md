@@ -78,7 +78,7 @@ door, indoor sleep/rest/refuge, exit before outdoor work, and physical indoor pr
 See `docs/HABITATION.md`. The owner chose habitation first. Version-2 continuation is pinned by `tests/v2_continuation.expected.json`,
 captured from `1a13408` before habitation was implemented.
 
-**Version 4 on the wolf-defence integration branch** (2026-10-20) adds owned spears and active
+**Version 4** (implemented 2026-10-20; integration into main verified 2026-10-21 at `9a082d6`) adds owned spears and active
 responses to visible wolves while preserving indoor safety. Version-3 continuation is pinned
 by `tests/v3_continuation.expected.json`, captured from main `a5530cf` before defence was imported.
 The parallel experimental wolf-v3 branch used a conflicting number: its saves must stay with

@@ -13,8 +13,10 @@ That candidate combined habitation, wolf defence at rules version 4, and a separ
 change at version 5. The base commit alone does not identify the reviewed diff.
 The review session identifier was `01a15294-c7b9-7523-b3de-f5c75b793c10`.
 
-The current implementation is [PR #20](https://github.com/lochheadr92-creator/living-world/pull/20),
-branch `codex/wolf-defence-integration`. Commit `57e3047` integrates defence with habitation
+The implementation was published in [PR #20](https://github.com/lochheadr92-creator/living-world/pull/20),
+branch `codex/wolf-defence-integration`. The owner closed the PR and integrated the branch
+directly by fast-forwarding and pushing main to `9a082d6`, verified on 2026-10-21.
+Commit `57e3047` integrates defence with habitation
 at version 4 and includes the repairs below; it excludes the separate mood change.
 The earlier review therefore must not be represented as approval of this final candidate.
 

@@ -2,31 +2,35 @@
 
 Updated: 2026-10-21
 
-## Current wolf-defence branch — not merged
+## Current main — wolf defence integrated
 
-`codex/wolf-defence-integration`, based on main `a5530cf`, integrates active defence with
-habitation as rules version 4. Implementation: `57e3047`; preserved version-3 reference: `6163c86`.
-Checkout: `C:\Users\RJLoc\.codex\worktrees\wolf-defence-integration\living-world`.
+The owner fast-forwarded `main` to `9a082d6` and pushed it normally, integrating
+`codex/wolf-defence-integration` from base `a5530cf`. Active defence with habitation is
+rules version 4. Implementation: `57e3047`; preserved version-3 reference: `6163c86`.
+Main checkout: `C:\Users\RJLoc\.codex\worktrees\home-habitation\living-world`.
 Full contract, review repairs and evidence: [WOLF_DEFENCE.md](docs/WOLF_DEFENCE.md).
 Durable review record: [WOLF_DEFENCE_REVIEW.md](docs/WOLF_DEFENCE_REVIEW.md), including the
 original request-changes verdict, both blockers, their fixes and regression evidence.
 Both recorded blockers are resolved with regression evidence. Per the owner's 2026-10-21
 workflow decision, no further independent review or PR approval is required by project
-policy. Integration status and actual repository protections remain separate questions.
+policy.
 
-Draft [PR #20](https://github.com/lochheadr92-creator/living-world/pull/20) is open against
-`main`. Implementation and evidence are pushed; no merge or independent approval is claimed.
+[PR #20](https://github.com/lochheadr92-creator/living-world/pull/20) is closed without a
+GitHub PR merge. The code is integrated through the direct fast-forward of `main`;
+GitHub's `merged: false` describes the PR, not absence of the code from main.
+Local main and origin/main were verified at `9a082d6` on 2026-10-21.
 
-887 tests / 86 files, build/typecheck and historical goldens passed. Browser checks: defence
+Prior implementation verification: 887 tests / 86 files, build/typecheck and historical goldens passed. Browser checks: defence
 5/5, habitation 10/10, autonomous saved scene 4/4. Sofia autonomously made a spear and later
 went to protect Abel; the wolf left before an attempt, correctly receiving no defence credit.
 Staged encounters resolve both success and failure. No village-wide survival benefit is claimed.
 
 The original wolf checkout is untouched. The separate mixed wolf/mood candidate is preserved,
 with the two review fixes and regression tests added there; its mood correction is not shipped
-on this branch. Do not exchange experimental wolf-v3 saves with habitation-v3 saves.
+in main. Do not exchange experimental wolf-v3 saves with habitation-v3 saves.
 No independent approval or new acceptance baseline is claimed. The inherited main status below
-describes the already integrated preparation/habitation work, not this branch's merge status.
+describes the earlier preparation/habitation integration. This current section supersedes
+historical unmerged-status statements below.
 
 ## Integrated main — read this before the inherited handoff
 
