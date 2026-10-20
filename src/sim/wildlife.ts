@@ -13,6 +13,32 @@ import { T } from './types';
 import { hyp, turnToward } from './util';
 import { hashString, hashUnit } from './rng';
 
+/**
+ * Whether a wolf is keeping clear of one particular person, because they drove it off (defence.ts, rules version 4).
+ * It registers itself here rather than being imported: this module is loaded very early, and importing the defence
+ * module would pull its activity handler in before `activities.ts` had its table. Null until something registers, so a
+ * build without that module behaves exactly as this one always did.
+ */
+let waryCheck: ((world: World, a: Animal, p: Person) => boolean) | null = null;
+export function setWaryCheck(fn: (world: World, a: Animal, p: Person) => boolean): void {
+  waryCheck = fn;
+}
+
+/**
+ * Whether this person is, at this instant, squared up to THIS wolf with a spear in their hands (defence.ts, rules
+ * version 4). A wolf does not take its free bite on somebody who is facing it: it hesitates while the exchange is
+ * settled, which takes at most the length of one attempt (ATTEMPT_TICKS, about ten ticks), and then either it has been
+ * driven off or the defence has failed and the next tick it bites after all. That is a standoff with an outcome, not
+ * protection: without it the wolf closes faster than anybody can set themselves, bites first, and breaks off by its
+ * own rule, so no defence could ever be resolved at all - which is what forty staged encounters showed.
+ *
+ * Registered rather than imported, for the same reason as `waryCheck`. Null until something registers it.
+ */
+let facingCheck: ((world: World, a: Animal, p: Person) => boolean) | null = null;
+export function setFacingCheck(fn: (world: World, a: Animal, p: Person) => boolean): void {
+  facingCheck = fn;
+}
+
 export function makeWolf(world: World, x: number, y: number, type: Animal['type'] = 'wolf'): Animal {
   const a: Animal = {
     ent: 'animal',
@@ -177,6 +203,9 @@ function pickPrey(world: World, a: Animal, night: boolean): Person | null {
     const d = hyp(p.x - a.x, p.y - a.y);
     if (d >= bd) continue;
     if (safeFromWolf(world, p)) continue;
+    // somebody who drove this wolf off with a spear is left alone for a while (defence.ts, rules version 4); no wolf in
+    // an older world carries that memory, so this never fires there
+    if (waryCheck && waryCheck(world, a, p)) continue;
     bd = d;
     best = p;
   }
@@ -228,6 +257,7 @@ function bite(world: World, a: Animal, t: Person): void {
   t.health = Math.max(0, t.health - dmg);
   t.needs.safety = Math.max(0, t.needs.safety - 50);
   t.cooldowns.hurt = world.tick;
+  world.hooks?.onWolfBite?.(t, a);
   t.nextThink = world.tick;
   a.cooldown = 32;
   addFx(world, 'bite', t.x, t.y, 0);
@@ -403,6 +433,7 @@ export function updateWildlife(world: World): void {
           break;
         }
         moveWolf(world, a, t.x, t.y, d < 6 ? 0.15 : 0.1);
+        if (d <= 1.2 && a.cooldown === 0 && facingCheck && facingCheck(world, a, t)) break; // squared up to it: it hesitates
         if (d <= 1.2 && a.cooldown === 0) {
           bite(world, a, t);
           if (t.health > 0 && t.health < 40 && !safeFromWolf(world, t) && t.pose !== 'run') {
