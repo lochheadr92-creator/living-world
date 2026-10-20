@@ -633,3 +633,10 @@ Known weaknesses: (1) with one control per seed, small discrete metrics (people,
 nudge ends identical to the control in 5 of 24 seeds. In a direct test the shared random state of a two-draw-shifted world is equal to
 the control's again within 60 ticks, so something returns the generator to the same state; it was not found (no `setState` or
 reassignment in `src/sim`). It affects how the noise floor is read, not the other results.
+
+## Wolf defence with habitation (2026-10-20, branch evidence)
+
+Version 4 integration: see docs/WOLF_DEFENCE.md and wolf_evidence/RUN.md. One 12-day Normal meadow
+observation made two spears and began one rescue; the wolf left before an attempt. Separately, 40 staged
+encounters produced 18 drive-offs and 22 failures. These establish an autonomous response and staged
+resolution, not a village-wide survival benefit. No broad ensemble or acceptance baseline was replaced.

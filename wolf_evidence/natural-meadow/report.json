@@ -1,0 +1,74 @@
+{
+  "seed": "meadow",
+  "profile": "normal",
+  "days": 12,
+  "rulesVersion": 4,
+  "staged": false,
+  "counters": {
+    "spearsMade": 2,
+    "offered": 1,
+    "offeredForOthers": 1,
+    "setOut": 1,
+    "attempts": 0,
+    "forOthers": 0,
+    "droveOff": 0,
+    "failed": 0,
+    "leftOnItsOwn": 1,
+    "spearsRetired": 0
+  },
+  "bites": 6,
+  "crafts": [
+    {
+      "ent": "tool",
+      "id": 5204,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1004,
+      "holder": 1006,
+      "loan": null,
+      "madeTick": 11948,
+      "maker": 1006,
+      "makerName": "Sofia"
+    },
+    {
+      "ent": "tool",
+      "id": 6343,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1034,
+      "holder": 1035,
+      "loan": null,
+      "madeTick": 14751,
+      "maker": 1035,
+      "makerName": "Vik"
+    }
+  ],
+  "starts": [
+    {
+      "tick": 12017,
+      "person": 1006,
+      "name": "Sofia",
+      "wolf": 1047,
+      "forWhom": 1014,
+      "why": "a wolf on Abel +78 · would not leave them to it +19 · spear in hand (worn 0) +10 · others at hand +10",
+      "spear": {
+        "ent": "tool",
+        "id": 5204,
+        "kind": "spear",
+        "tier": 0,
+        "wear": 0,
+        "ownerHh": 1004,
+        "holder": 1006,
+        "loan": null,
+        "madeTick": 11948,
+        "maker": 1006
+      }
+    }
+  ],
+  "results": [],
+  "alive": 27,
+  "hash": "ede1f2f7",
+  "saveRoundTrip": true
+}

@@ -123,3 +123,8 @@ either pass, and one 12-day observation found apprenticeship starting once in fo
 Rules version 3 on this branch adds actual indoor occupancy for huts and houses. See
 `docs/HABITATION.md` for the physical contract, autonomous example, save compatibility,
 browser evidence and integration limitations. Earlier generations retain proximity shelter.
+
+## Wolf defence integration (2026-10-20)
+
+Rules version 4 adds locally motivated spear-making and active defence alongside flight and home refuge.
+The physical contract, old-save limits, autonomous example and verification are in docs/WOLF_DEFENCE.md.

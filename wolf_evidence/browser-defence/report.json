@@ -1,0 +1,52 @@
+[
+  {
+    "name": "ordinary decision chooses active defence",
+    "pass": true,
+    "detail": {
+      "activity": "defend",
+      "why": "a wolf on me +86 · not one to run +40 · spear in hand (worn 0) +10 · walking −1",
+      "version": 4
+    }
+  },
+  {
+    "name": "inspector names the defence",
+    "pass": true,
+    "detail": "What are they doing?Driving a wolf off — walking to Wolf (0 tiles to go).on the way"
+  },
+  {
+    "name": "attempt resolves once and consumes spear durability",
+    "pass": true,
+    "detail": {
+      "counters": {
+        "spearsMade": 0,
+        "offered": 1,
+        "offeredForOthers": 0,
+        "setOut": 1,
+        "attempts": 1,
+        "forOthers": 0,
+        "droveOff": 0,
+        "failed": 1,
+        "leftOnItsOwn": 0,
+        "spearsRetired": 0
+      },
+      "health": 100,
+      "wear": 3.5999999999999996,
+      "wolfState": "stalk",
+      "result": {
+        "tick": 1014,
+        "label": "Driving a wolf off",
+        "outcome": "failed",
+        "detail": "it would not give ground"
+      },
+      "saveEqual": true
+    }
+  },
+  {
+    "name": "defence outcome round-trips through save/load",
+    "pass": true
+  },
+  {
+    "name": "no uncaught page errors",
+    "pass": true
+  }
+]

@@ -1,0 +1,35 @@
+[
+  {
+    "name": "autonomous saved scene restores the named defender and beneficiary",
+    "pass": true,
+    "detail": {
+      "name": "Sofia",
+      "activity": "defend",
+      "forWhom": 1014,
+      "why": "a wolf on Abel +78 · would not leave them to it +19 · spear in hand (worn 0) +10 · others at hand +10"
+    }
+  },
+  {
+    "name": "person inspector names the beneficiary",
+    "pass": true,
+    "detail": "What are they doing?Driving a wolf off Abel (0% of this task).0%"
+  },
+  {
+    "name": "a wolf leaving on its own is not credited as a successful defence",
+    "pass": true,
+    "detail": {
+      "result": {
+        "tick": 12049,
+        "label": "Driving a wolf off Abel",
+        "outcome": "partial",
+        "detail": "it was already going"
+      },
+      "wearBefore": 0,
+      "wearAfter": 0
+    }
+  },
+  {
+    "name": "no uncaught page errors",
+    "pass": true
+  }
+]

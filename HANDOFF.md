@@ -1,6 +1,24 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-19
+Updated: 2026-10-20
+
+## Current wolf-defence branch — not merged
+
+`codex/wolf-defence-integration`, based on main `a5530cf`, integrates active defence with
+habitation as rules version 4. Implementation: `57e3047`; preserved version-3 reference: `6163c86`.
+Checkout: `C:\Users\RJLoc\.codex\worktrees\wolf-defence-integration\living-world`.
+Full contract, review repairs and evidence: [WOLF_DEFENCE.md](docs/WOLF_DEFENCE.md).
+
+887 tests / 86 files, build/typecheck and historical goldens passed. Browser checks: defence
+5/5, habitation 10/10, autonomous saved scene 4/4. Sofia autonomously made a spear and later
+went to protect Abel; the wolf left before an attempt, correctly receiving no defence credit.
+Staged encounters resolve both success and failure. No village-wide survival benefit is claimed.
+
+The original wolf checkout is untouched. The separate mixed wolf/mood candidate is preserved,
+with the two review fixes and regression tests added there; its mood correction is not shipped
+on this branch. Do not exchange experimental wolf-v3 saves with habitation-v3 saves.
+No independent approval or new acceptance baseline is claimed. The inherited main status below
+describes the already integrated preparation/habitation work, not this branch's merge status.
 
 ## Integrated main — read this before the inherited handoff
 
