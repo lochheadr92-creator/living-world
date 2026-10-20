@@ -2,6 +2,81 @@
 
 Updated: 2026-10-20
 
+## Where every line of work stands (2026-10-20, evening)
+
+Written after a review of the repository, its remote and the three Codex worktrees, so that the next session does not repeat it.
+It says which of the sections below is current; it does not replace them. Sources: git (refs, ancestry, trial merges), the documents
+on each branch, and one fresh run of the checks on the head of #20. GitHub itself could not be read (the GitKraken connector was not
+signed in), so "open" and "draft" are as last recorded in this file; the PR heads come from `git ls-remote origin 'refs/pull/*/head'`,
+and "in `main`" means the head is an ancestor of `origin/main`.
+
+| line of work | rules | state | lives on | detail |
+|---|---|---|---|---|
+| Rules versioning, CLI fix (#17) | - | merged, `e81aad4` | `main` | "Integrated main", below |
+| Household food preparation (#18) | 2 | merged, `ac7318d` | `main` | `docs/RICH_WORLD.md`; "Where things stand", further down, was written while #18 was open |
+| Home habitation (#19) | 3 | code merged, `8184f92`; its GitHub entry was still open against the old base when last recorded | `main` | `docs/HABITATION.md` |
+| Wolf defence with habitation (#20, draft) | 4 | pushed, not merged, self-reviewed only | `codex/wolf-defence-integration` at `2934cce` | `docs/WOLF_DEFENCE.md`, `wolf_evidence/RUN.md` |
+| Version-4 candidate plus a version-5 mood-ranking correction | 5 | **uncommitted in that worktree; the only other copy is the snapshot branch described below** | Codex worktree `C:\Users\RJLoc\.codex\worktrees\wolf-habitation-integration\living-world`, based on `a5530cf`: 24 tracked files changed (some staged, some not), plus 35 untracked files, among them `src/sim/moodranking.ts` (the version-5 correction, with `tests/mood_survival.test.ts`), `tests/v4_continuation.expected.json`, `docs/WOLF_INTEGRATION.md`, `docs/BASELINE_REFRESH.md` and `integration_evidence/` (about 5 MB) | that worktree's own `HANDOFF.md` |
+| First wolf-defence branch | 3 (habitation's 3 means something else) | the branch itself was never pushed; superseded by #20, which ported its spear, standoff, `rich-no-defence` switch and encounter script. Its four commits and the uncommitted edits reached `origin` on 2026-10-20 only inside `claude/snapshot-wolf-defence-v3-2026-10-20` | `claude/wolf-defence-v3` at `35b7236` in `C:\dev\Claude Experiment\living-world`, plus uncommitted edits to `scripts/lab/lab.ts`, `src/sim/defence.ts`, `src/sim/wildlife.ts`, `tests/wolf_defence.test.ts` and an untracked `scripts/encounters.ts` and `encounters_out/` | `docs/WOLF_DEFENCE.md`, "Rules and provenance" |
+
+**Do not merge `claude/wolf-defence-v3`.** It takes version 3 for different rules; it extends `tests/v1_continuation.expected.json`
+in place with version-2 cases (the original 43 recorded values are unchanged, but `main` keeps one reference file per generation); and a
+trial merge into `main` conflicts in `src/sim/rulesversion.ts` and `tests/household_preparation.test.ts`. Its saves are compatible with
+nothing else.
+
+**The version-5 candidate lives only as uncommitted files in that worktree, plus the snapshot copy described here.**
+`docs/BASELINE_REFRESH.md`, the current procedure for recording a baseline, exists only in those two places. Its owner should commit it
+to a branch (not merge it) before that worktree is cleaned up. The snapshot is the branch
+`claude/snapshot-wolf-habitation-integration-2026-10-20`: the files as they stood on 2026-10-20. The edits in the owner's checkout are
+copied the same way as `claude/snapshot-wolf-defence-v3-2026-10-20`, which also carries that branch's four never-pushed commits. Both
+were made without touching the working trees and were pushed to `origin` on 2026-10-20 at the owner's request, with no PR and no merge;
+either can be deleted once nothing in it is wanted.
+
+### What a new session would otherwise rediscover
+
+- **Checkouts.** `main` (`a5530cf`) is checked out in the Codex worktree `C:\Users\RJLoc\.codex\worktrees\home-habitation\living-world`,
+  so git will not let another checkout switch to it. The owner's checkout, `C:\dev\Claude Experiment\living-world`, is on
+  `claude/wolf-defence-v3`, which has no upstream: the `git pull` in the PowerShell recipes (`CLAUDE.md`, `AGENTS.md`, below) fails
+  there, and a lab run from it would run the old wolf code. Make a clean checkout of a pinned commit before running one.
+- **Test counts.** 747 tests in 77 files at #17; 793/79 on #18's branch; 818/81 on `main` after #19; 887/86 on #20. The last was
+  re-run on 2026-10-20 in a scratch clone of `2934cce` by a later session (`npm ci`, `npm run typecheck`, `npm test`, `npm run build`
+  and `scripts/golden.ts` all passed; the browser checks were not re-run). That is a re-execution, not a review.
+- **Still open, roughly in the order they matter.** (1) Commit the version-5 candidate. (2) Independent review of #18, #19 and #20:
+  every review recorded here is self-review. (3) A baseline for the merged generation: `scripts/gates.ts` refuses a comparison across
+  rules versions, `docs/gates-rich.json` is unversioned and stale (its `tools` line already failed on `main` before #18), and the
+  procedure to record a new one is in the candidate's `docs/BASELINE_REFRESH.md`. (4) The `town` ensemble for household preparation
+  ("The one run that is outstanding", below). (5) Close or retarget the GitHub entry for #19. (6) The fatal-bite ordering issue noted in
+  `docs/WOLF_DEFENCE.md`.
+
+### Older pull requests whose commits are not in `main`
+
+Heads from the remote as of 2026-10-20; none re-reviewed here, and whether GitHub still shows them open is not known.
+
+| PR | branch | ahead of `main` | last commit | what it is |
+|---|---|---|---|---|
+| #1 | `claude/living-world-survival-legibility-xipvpo` | 9 | 2026-10-05 | Stages 0-7 after the 2026-10-05 review: eating at a store with a full pack, effects dropped and the person card lagging at speed, a building shutting its own doorway, the grave and the news of a death. 171 commits behind `main`; a trial merge conflicts in `README.md`, `docs/ECONOMY.md` and `src/sim/{decision,inspect,lifecycle,options_work,types}.ts`, so it is an integration job, not a merge |
+| #2 | `claude/wonderful-mccarthy-xmbcng` | 14 | 2026-10-06 | Leisure: evenings at the fire, celebrations, play, contests, keepsakes, calls, jokes |
+| #3 | `claude/eager-carson-p8jy0f` | 11 | 2026-10-05 | Shores: ragged, surging foam and lighter shallows |
+| #4 | `claude/adoring-hawking-fj66vw` | 7 | 2026-10-06 | Two statements in `docs/ECONOMY.md` that the measurements did not support, corrected |
+| #5 | `claude/courier-promise` | 1 | 2026-10-06 | Carry goods to a site when the asker has no room to be handed them |
+| #8 | `claude/epic-franklin-469omp` | 26 | 2026-10-09 | New chains: tools, cheaper beds, reserved deliveries, momentum (rich dynamics) |
+| #11 | `claude/friendly-planck-ccpkxf` | 2 | 2026-10-09 | Inspector: list the places a person remembers |
+| #15 | `claude/affectionate-archimedes-a2nb1q` | 1 | 2026-10-13 | Lab report: `--vs A:B`, a direct paired contrast of two branches |
+| #16 | `claude/inspiring-wozniak-yclwua` | 1 | 2026-10-13 | Three winters measured: the rich village's building deficit is a delay that closes |
+| - | `claude/mood-ranking` | 1 | 2026-10-14 | Mood-based decision ranking, parked, "not yet measured" |
+| - | `place-scar` | 1 | 2026-10-08 | Demote a recently failed place in rich worlds, and say why |
+
+**Defects logged by the read-only review of 2026-10-05 (`main` then at `7a7e0e4`) that still stand**, by inspection of the source at
+`2934cce` (not reproduced at run time again): eating at a store moves the food through the pack (`act_resource.ts` `eat_store`,
+`economy.ts` `transfer`), so a full pack fails with "there is no food there"; `findBuildSpot` (`buildings.ts`) checks that the doorway
+tile is free but not that it stays reachable; `Effects.consume` (`render/effects.ts`) keeps only events stamped after the last tick it
+saw, which drops the ones logged during that tick; the person card refreshes on a 0.25 s timer (`ui/inspector.ts`); a grave card gives
+no cause, and a death is labelled with the first empty need unless the bite itself was fatal (`world.ts`; `wildlife.ts` `bite` sets
+"wolf attack" only when the bite takes health to zero); the news of a death reaches every loved one at once (`lifecycle.ts`);
+`overdueLoans` (`tools.ts`) is never called; `withdraw` says "nothing to take" when the allowance was zero. Per its commit subjects,
+PR #1 addresses the store, the doorway, the dropped effects, the card, the grave and the news of a death. Since fixed on `main`:
+`Relation.debt` is now read (`misdeeds.ts`, `209e270`).
+
 ## Current wolf-defence branch — not merged
 
 `codex/wolf-defence-integration`, based on main `a5530cf`, integrates active defence with
