@@ -1,5 +1,9 @@
 # Living World: notes for Claude (read this first)
 
+Read [WORKFLOW.md](WORKFLOW.md) before acting. It is the owner's standing workflow:
+no mandatory PR, second reviewer or repeat-approval loop. It supersedes older workflow
+instructions and must not be changed without an explicit owner instruction.
+
 A deterministic village simulation in TypeScript/Vite: ~100 people (Large profile) with needs, relations, building and farming. Goal in
 progress: a richer, RimWorld/Dwarf Fortress-style world (individuals differ, consequences last, small events cascade), inspectable in
 the app and testable in a lab. Plan, stages and every measured result: `docs/EMERGENCE.md`. Scaling and performance history: `docs/SCALING.md`.
@@ -10,7 +14,8 @@ the app and testable in a lab. Plan, stages and every measured result: `docs/EME
   acceptance test for such a change.
 - One current simulation: new product worlds use the integrated rules (`settings.dynamics = 'rich'` internally), with no player-facing mode toggle. Accepted improvements become standard. The 2026-10-17 owner decision in `docs/DEVELOPMENT_POLICY.md` supersedes the old rich-only/off-by-default product policy.
 - Preserve recorded save/replay semantics; `authored` and absent dynamics remain compatibility/diagnostic values, not a second product to develop indefinitely. Use `currentWorldSettings` for new product worlds. Keep experiments in the lab; require evidence of effectiveness before claiming benefit. Historical goldens protect compatibility, not a freeze on current behavior.
-- One branch, one purpose; one commit per problem. Branch `claude/epic-franklin-469omp`, draft PR; never merge, never force-push.
+- One branch, one purpose; one commit per problem. Open a PR only when explicitly requested by the owner. Integrate and push normally when the owner authorizes integration; do not invent an additional PR or approval step. Never force-push, rewrite history, expose secrets, or bypass actual repository protections.
+- Owner workflow decision (2026-10-21): record review findings and their fixes once. A fixed finding with appropriate regression evidence does not automatically require another independent review. Repeat review or verification only for relevant changes, new evidence or unresolved defects. See `WORKFLOW.md`.
 
 ## Where things are
 - `src/sim/mood.ts` thoughts, mood level, option weights, mourning. `src/sim/hardship.ts` lean seasons, winter, spoilage, wolf nerve.

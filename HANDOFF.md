@@ -2,6 +2,10 @@
 
 Updated: 2026-10-21
 
+Standing owner workflow: [WORKFLOW.md](WORKFLOW.md). Both Codex and Claude must follow
+it: no mandatory PR, second reviewer or repeat-approval loop. Older process instructions
+in historical sections below do not override it.
+
 ## Current main — wolf defence integrated
 
 The owner fast-forwarded `main` to `9a082d6` and pushed it normally, integrating

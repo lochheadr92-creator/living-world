@@ -4,6 +4,9 @@ Decision: 2026-10-17, at the owner's request. This supersedes the earlier requir
 
 ## Delivery workflow
 
+The authoritative standing rules are in [WORKFLOW.md](../WORKFLOW.md), loaded by both
+`AGENTS.md` and `CLAUDE.md`. Only an explicit owner instruction may change those rules.
+
 Owner decision, 2026-10-21: PRs and repeated independent reviews are not mandatory project
 steps. Implement the bounded change, inspect it, fix concrete findings, run appropriate
 checks, and record the outcome. Once a finding is repaired and covered by relevant
@@ -11,8 +14,8 @@ regression evidence, close it; do not automatically impose another independent r
 Revisit it when relevant code changes, new evidence or an unresolved defect warrant it.
 
 Use a branch when isolation helps. Commit logical changes and, when the owner authorizes
-integration, integrate into main and push normally. Open a PR only when requested or
-required by actual repository protections. A review record is evidence, not an approval
+integration, integrate into main and push normally. Open a PR only when explicitly
+requested by the owner. A review record is evidence, not an approval
 gate. Do not fabricate independent approval, weaken tests, rewrite history, force-push,
 expose secrets or bypass repository protections. If GitHub requires a PR, identify that
 actual setting so the owner can decide whether to change it.
