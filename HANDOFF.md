@@ -2,6 +2,35 @@
 
 Updated: 2026-10-19
 
+## Current integration worktree — not merged
+
+Continuation note, 2026-10-20: the two review defects (urgent defence interruption and stationary
+wolf approach) are repaired here in `decision.ts` and `defence.ts`, with `defence_response.test.ts`.
+The mixed candidate passed 897 tests / 88 files after these repairs; no expectations were replaced.
+To keep the separate mood change out of the wolf stage, a clean version-4 integration was prepared
+in `C:\Users\RJLoc\.codex\worktrees\wolf-defence-integration\living-world`, branch
+`codex/wolf-defence-integration`, draft PR https://github.com/lochheadr92-creator/living-world/pull/20.
+This original mixed candidate and its staging are preserved, uncommitted. Its version-5 natural
+probes remain here under `integration_evidence/review-fixes-natural*`; do not treat those as
+evidence for the separate version-4 branch. The older implementation record follows.
+
+The owner authorized proceeding with the next-stage recommendations. Work is isolated on
+`codex/wolf-habitation-integration` at
+`C:\Users\RJLoc\.codex\worktrees\wolf-habitation-integration\living-world`,
+based on main `a5530cf`. The original wolf checkout and its dirty work remain intact.
+
+This candidate combines habitation with active wolf defence as version 4 and a separate
+mood/survival ranking correction as version 5. It fixes indoor/defender boundaries and the
+imported lab bite counters. Current evidence: 889 tests / 87 files pass, production build
+passes, habitation browser 10/10, defence browser 6/6, and 40 staged encounters resolve
+18 drive-offs / 22 failures. No population benefit or natural-use frequency is claimed.
+
+Read [WOLF_INTEGRATION.md](docs/WOLF_INTEGRATION.md) for contracts, exact evidence,
+compatibility limits and the separately observed fatal-bite/healing issue. Read
+[BASELINE_REFRESH.md](docs/BASELINE_REFRESH.md) before any baseline run: a v1 baseline
+cannot gate a v2/v3/v5 candidate. No expensive run, baseline replacement, independent
+approval, commit, push or merge has occurred in this integration task.
+
 ## Integrated main — read this before the inherited handoff
 
 On 2026-10-19 the owner explicitly requested the merge. Household preparation was merged at

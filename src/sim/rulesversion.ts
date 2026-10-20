@@ -34,11 +34,12 @@ import type { Settings, World } from './types';
  *
  * Raising this number is how a behavioural change is declared. See docs/DEVELOPMENT_POLICY.md, "Rules versions".
  */
-// Version 3: actual home occupancy. Wolf defence is a separate, later integration.
-export const CURRENT_RULES_VERSION = 3;
+// Version 3: actual home occupancy. Version 4: spears and active wolf defence, respecting occupancy.
+// Version 5: mood alone cannot put idle rest/wandering above previously preferred physical relief.
+export const CURRENT_RULES_VERSION = 5;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 5];
 
 /**
  * What a world made before versioning existed is. It is NOT version 0 and not "probably 1": several different implementations

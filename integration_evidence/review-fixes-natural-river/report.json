@@ -1,0 +1,66 @@
+{
+  "seed": "river",
+  "profile": "normal",
+  "days": 12,
+  "rulesVersion": 5,
+  "staged": false,
+  "counters": {
+    "spearsMade": 3,
+    "offered": 0,
+    "offeredForOthers": 0,
+    "setOut": 0,
+    "attempts": 0,
+    "forOthers": 0,
+    "droveOff": 0,
+    "failed": 0,
+    "leftOnItsOwn": 0,
+    "spearsRetired": 0
+  },
+  "bites": 4,
+  "crafts": [
+    {
+      "ent": "tool",
+      "id": 7127,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1125,
+      "holder": 1127,
+      "loan": null,
+      "madeTick": 15354,
+      "maker": 1127,
+      "makerName": "Tomas"
+    },
+    {
+      "ent": "tool",
+      "id": 8048,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1140,
+      "holder": 1141,
+      "loan": null,
+      "madeTick": 17666,
+      "maker": 1141,
+      "makerName": "Talia"
+    },
+    {
+      "ent": "tool",
+      "id": 10080,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1103,
+      "holder": 1105,
+      "loan": null,
+      "madeTick": 22750,
+      "maker": 1105,
+      "makerName": "Mira"
+    }
+  ],
+  "starts": [],
+  "results": [],
+  "alive": 29,
+  "hash": "2963d32b",
+  "saveRoundTrip": true
+}

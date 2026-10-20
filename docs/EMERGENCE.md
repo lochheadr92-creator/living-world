@@ -1,5 +1,10 @@
 # Toward a richer world: plan, gates and first audit
 
+Current unmerged integration (2026-10-19): wolf defence after habitation, followed by the
+narrow mood/survival ranking correction. Contracts and fresh evidence are in
+[WOLF_INTEGRATION.md](WOLF_INTEGRATION.md). The historical measurements below are not
+measurements of that candidate.
+
 > Current direction (2026-10-17): one evolving simulation, with the integrated rules on for new worlds. [DEVELOPMENT_POLICY.md](DEVELOPMENT_POLICY.md) supersedes earlier off-by-default/two-product-mode requirements below. Older measurements and mode descriptions remain historical evidence; this policy change does not revalidate their results. Explicit legacy save/replay and diagnostic contracts remain supported.
 
 The goal is an autonomous village in the spirit of RimWorld and Dwarf Fortress: individuals who differ, consequences that last, and small

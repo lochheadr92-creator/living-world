@@ -1,0 +1,79 @@
+{
+  "seed": "meadow",
+  "profile": "normal",
+  "days": 12,
+  "rulesVersion": 5,
+  "staged": false,
+  "counters": {
+    "spearsMade": 4,
+    "offered": 0,
+    "offeredForOthers": 0,
+    "setOut": 0,
+    "attempts": 0,
+    "forOthers": 0,
+    "droveOff": 0,
+    "failed": 0,
+    "leftOnItsOwn": 0,
+    "spearsRetired": 0
+  },
+  "bites": 3,
+  "crafts": [
+    {
+      "ent": "tool",
+      "id": 4894,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1037,
+      "holder": 1039,
+      "loan": null,
+      "madeTick": 10469,
+      "maker": 1039,
+      "makerName": "Zeke"
+    },
+    {
+      "ent": "tool",
+      "id": 5355,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 997,
+      "holder": 1000,
+      "loan": null,
+      "madeTick": 12034,
+      "maker": 1000,
+      "makerName": "Bea"
+    },
+    {
+      "ent": "tool",
+      "id": 5428,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1034,
+      "holder": 1035,
+      "loan": null,
+      "madeTick": 12140,
+      "maker": 1035,
+      "makerName": "Vik"
+    },
+    {
+      "ent": "tool",
+      "id": 8222,
+      "kind": "spear",
+      "tier": 0,
+      "wear": 0,
+      "ownerHh": 1010,
+      "holder": 1013,
+      "loan": null,
+      "madeTick": 20086,
+      "maker": 1013,
+      "makerName": "Hal"
+    }
+  ],
+  "starts": [],
+  "results": [],
+  "alive": 28,
+  "hash": "9f878df4",
+  "saveRoundTrip": true
+}

@@ -1,8 +1,10 @@
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
+import { unfitPerson } from './defence';
 import type { ExternalController } from './external';
 import { moodWeight } from './mood';
+import { protectMoodSurvival } from './moodranking';
 import { goalNudge } from './life';
 import { crewNudge } from './crews';
 import { isThreat } from './wildlife';
@@ -26,7 +28,7 @@ import { hyp } from './util';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
-const CHILD_FORBIDDEN: ActivityKind[] = ['build', 'haul', 'plan_site', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'claim_home', 'fuel_fire', 'withdraw', 'operate', 'tool_work', 'cart_haul'];
+const CHILD_FORBIDDEN: ActivityKind[] = ['build', 'haul', 'plan_site', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'claim_home', 'fuel_fire', 'withdraw', 'operate', 'tool_work', 'cart_haul', 'defend'];
 
 /** world state -> local perception (already done) -> eligible actions. Pure with respect to the world: nothing is started here. */
 export function generateOptions(world: World, p: Person, collect = false): Ctx {
@@ -67,6 +69,7 @@ export function setOptionChooser(mode: OptionChooser): void {
 /** Candidate options in preference order, after the hard filters (children's limits, critical needs). */
 export function rankOptions(ctx: Ctx): Option[] {
   const { world, p } = ctx;
+  ctx.moodProtected = undefined;
   // A plan's own next step stays a candidate even when it scores poorly. Scoring low means "not worth much just now", which is not
   // the same thing as being impossible, and dropping it here is what made a plan impossible to carry across several activities.
   // Every hard filter below (children, the relief guard, critical needs, fleeing, cooldowns) still applies to it.
@@ -80,20 +83,26 @@ export function rankOptions(ctx: Ctx): Option[] {
     const crit = opts.filter((o) => o.need === lead || o.kind === 'flee' || (o.kind === 'socialize' && (o.tag === 'request' || o.tag === 'info')));
     if (crit.length) opts = crit;
   }
-  // the pressure of a wolf nearby outranks everything else
-  const flee = opts.filter((o) => o.kind === 'flee');
-  if (flee.length) opts = flee;
+  // The pressure of a wolf nearby outranks everything else. From rules version 4 there are TWO answers to it - run, or
+  // stand and drive it off (defence.ts) - and both belong in this bracket: the filter keeps the wolf at the top of the
+  // list, as it always did, and no longer decides which of the two answers is taken. That is left to the ranking below,
+  // where a defence has to beat fleeing on its merits. Every other safeguard is untouched, and `defend` options exist
+  // only in a version-4 world, so an older world filters exactly as it did.
+  const urgent = opts.filter((o) => o.kind === 'flee' || o.kind === 'defend');
+  if (urgent.length) opts = urgent;
   // do not repeat something that has just fallen through
   const fresh = opts.filter((o) => (p.cooldowns['opt:' + o.key] ?? 0) <= world.tick);
   if (fresh.length) opts = fresh;
   const moody = p.mood !== undefined && world.settings.dynamics === 'rich';
   // the plan's nudge is bounded and never applies when the lab is choosing at random
-  const scored = opts.map((o) => ({
-    o,
-    // the plan's nudge and the trade's are both bounded and both off when the lab is choosing at random
-    s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + goalNudge(world, p, o) + crewNudge(world, p, o) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
-  }));
+  const scored = opts.map((o) => {
+    const jitter = hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4;
+    // Preserve the original addition order for legacy continuations (floating point is part of the rules).
+    const neutral = o.util + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + goalNudge(world, p, o) + crewNudge(world, p, o) + jitter;
+    return { o, neutral, s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + goalNudge(world, p, o) + crewNudge(world, p, o) + jitter };
+  });
   scored.sort((a, b) => b.s - a.s);
+  if (chooser === 'utility') protectMoodSurvival(ctx, scored);
   return scored.map((x) => x.o);
 }
 
@@ -123,7 +132,7 @@ function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Opt
     considered: ctx.options.length,
     knownPlaces: countBeliefs(p),
     seenNow: p.seen.length,
-    because: why ?? (chosen ? because(chosen, null, tradeReason(world, p, chosen)) : 'nothing to do'),
+    because: (why ?? (chosen ? because(chosen, null, tradeReason(world, p, chosen)) : 'nothing to do')) + (chosen && ctx.moodProtected?.has(chosen) ? ' · seeing to a physical need before mood-driven idling' : ''),
   };
 }
 
@@ -299,7 +308,18 @@ export function reviewActivity(world: World, p: Person): void {
   if (!best) return;
   const key = a.data.optKey as string | undefined;
   if (best.key === key) return;
-  const danger = best.kind === 'flee' && a.kind !== 'flee';
+  // Standing and facing a wolf is the one activity fleeing must not simply out-score. The two answer the same
+  // situation and are scored to sit close together on purpose, so a defender re-ranked mid-attempt is pulled away
+  // before they ever reach the wolf - which made the defence unreachable in practice rather than merely hard.
+  //
+  // A defence is therefore held against a flee UNTIL the defender becomes unable to defend at
+  // all (defence.ts unfitPerson, the same conditions the option itself uses). That is "a defender can be forced to flee",
+  // not "a defender is safe": a deadlier need still interrupts, the attempt's own failure conditions still end it,
+  // and a `defend` activity exists only in a rules-version-4 world, so an older world reviews exactly as it did.
+  const standingGround = a.kind === 'defend' && unfitPerson(world, p) === null;
+  // A newly chosen defence is also an urgent response: sleep and committed work must yield.
+  // An ongoing flight/defence already answers danger and keeps its ordinary switching rules.
+  const danger = (best.kind === 'flee' || best.kind === 'defend') && a.kind !== 'flee' && !standingGround;
   // an activity serving one critical need still yields to a deadlier one (water before food before warmth before sleep)
   const rank = (k: NeedKey | null): number => (k === null ? 9 : CRITICAL_ORDER.indexOf(k) < 0 ? 9 : CRITICAL_ORDER.indexOf(k));
   const criticalMismatch = ctx.criticals.length > 0 && best.need !== null && ctx.criticals.includes(best.need) && a.need !== best.need && (a.need === null || !ctx.criticals.includes(a.need) || rank(best.need) < rank(a.need));
@@ -336,6 +356,12 @@ export function reviewActivity(world: World, p: Person): void {
 export function urgentInterrupt(world: World, p: Person): boolean {
   const a = p.activity;
   if (!a || a.kind === 'flee') return false;
+  // somebody who is already walking at the wolf has decided about it; being alarmed by it every eight ticks only costs
+  // a re-think that can come to nothing (the review above holds the defence anyway)
+  if (a.kind === 'defend' && unfitPerson(world, p) === null) {
+    const n0 = p.needs;
+    return (n0.thirst < 13 || n0.hunger < 13) && world.tick - (p.cooldowns.critCheck ?? -99) > 25 ? ((p.cooldowns.critCheck = world.tick), true) : false;
+  }
   const alarm = Math.min(9.5, fleeRadius(p));
   for (const s of p.seen) {
     if (!indoorHome(world, p) && isThreat(world, s) && hyp(s.x - p.x, s.y - p.y) < alarm && world.tick - (p.cooldowns.fleeCheck ?? -99) > 8) {

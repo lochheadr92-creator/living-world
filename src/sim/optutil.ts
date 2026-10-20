@@ -75,6 +75,8 @@ export interface Ctx {
   collect: boolean;
   blocked: Option[];
   options: Option[];
+  /** Transient ranking explanation, never world state or a probe denominator. */
+  moodProtected?: Set<Option>;
   /** set by the production planner when a plan was stopped only by lacking a tool: the social planner may ask to borrow one */
   toolWanted?: { kind: ToolKind; for: string };
 }

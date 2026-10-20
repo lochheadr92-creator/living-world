@@ -1,0 +1,29 @@
+{
+  "source": "a5530cf plus wolf integration working diff; captured before version 5 mood correction",
+  "saved": {
+    "hash": "7f50e330",
+    "deep": "921cbcff4a01f8c3",
+    "alive": 28,
+    "plans": {
+      "stock": 14,
+      "tool": 2,
+      "repair": 1
+    },
+    "homeFood": 153,
+    "storedFood": 51,
+    "indoors": 4
+  },
+  "continued": {
+    "hash": "50ef85a6",
+    "deep": "dbde251285679bdc",
+    "alive": 28,
+    "plans": {
+      "stock": 10,
+      "tool": 4,
+      "repair": 2
+    },
+    "homeFood": 57,
+    "storedFood": 17,
+    "indoors": 0
+  }
+}

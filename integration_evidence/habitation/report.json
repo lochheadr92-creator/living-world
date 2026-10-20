@@ -1,0 +1,95 @@
+[
+  {
+    "name": "starts outdoors in current rules",
+    "pass": true,
+    "detail": {
+      "who": 2,
+      "home": 3,
+      "indoors": null,
+      "version": 5
+    }
+  },
+  {
+    "name": "chooses sleep, reaches entrance and enters",
+    "pass": true,
+    "detail": {
+      "tick": 38,
+      "indoors": 3,
+      "activity": "sleep",
+      "phase": "work",
+      "x": 40.5,
+      "y": 42.5
+    }
+  },
+  {
+    "name": "person card reports the actual indoor location",
+    "pass": true,
+    "detail": "What are they doing?Inside Hut #3. Sleeping inside the hut.0%"
+  },
+  {
+    "name": "home inspector lists its occupant",
+    "pass": true,
+    "detail": "HutBuilt just nowA proper home with a small store.AdaBuilding progressMaterials suppliedWorking nowWill makeAt workMade here so farCan make hereOwnerReed householdIndoorsAda: Sleeping inside the hutRoom for4 household membersStorage0/40 usedHouseholdAdaCondition100%Contents"
+  },
+  {
+    "name": "occupant chip selects the person",
+    "pass": true
+  },
+  {
+    "name": "save/load keeps indoor state and continues",
+    "pass": true,
+    "detail": {
+      "equal": true,
+      "indoors": 3,
+      "before": "652e3bbb",
+      "after": "974fbb80",
+      "tick": 68
+    }
+  },
+  {
+    "name": "the same doorstep is protected only when actually indoors",
+    "pass": true,
+    "detail": {
+      "inside": {
+        "cover": 1,
+        "safe": true
+      },
+      "outside": {
+        "cover": 0,
+        "safe": false
+      }
+    }
+  },
+  {
+    "name": "wakes, exits and executes an outside activity",
+    "pass": true,
+    "detail": {
+      "awake": true,
+      "indoors": null,
+      "x": 37.5,
+      "y": 43.5,
+      "result": {
+        "tick": 100,
+        "label": "Looking outside",
+        "outcome": "success",
+        "detail": "done"
+      }
+    }
+  },
+  {
+    "name": "an autonomous inhabitant uses a home in an ordinary world",
+    "pass": true,
+    "detail": {
+      "tick": 3516,
+      "name": "Emre",
+      "person": 1106,
+      "home": 2827,
+      "builtTick": 3349,
+      "activity": "sleep"
+    }
+  },
+  {
+    "name": "no uncaught page errors",
+    "pass": true
+  }
+]

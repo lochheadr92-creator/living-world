@@ -1,0 +1,28 @@
+{
+  "source": "a5530cfd36ab6bdba9ab62bfa7fb212ee5c79e24; habitation before wolf integration",
+  "saved": {
+    "hash": "40faface",
+    "deep": "fa7d1415077bfda2",
+    "alive": 28,
+    "plans": {
+      "stock": 15,
+      "tool": 1
+    },
+    "homeFood": 153,
+    "storedFood": 48,
+    "indoors": 2
+  },
+  "continued": {
+    "hash": "6eaaea8a",
+    "deep": "9328d129177ae404",
+    "alive": 28,
+    "plans": {
+      "stock": 9,
+      "tool": 6,
+      "repair": 1
+    },
+    "homeFood": 106,
+    "storedFood": 34,
+    "indoors": 0
+  }
+}
