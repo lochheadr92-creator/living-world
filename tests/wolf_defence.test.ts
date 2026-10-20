@@ -46,6 +46,7 @@ import {
   spearOf,
   unfitPerson,
   waryOf,
+  facingWolf,
 } from '../src/sim/defence';
 import { metAWolfLately, wantedTool } from '../src/sim/options_work';
 import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
@@ -655,15 +656,54 @@ describe('11. the whole chain, staged', () => {
     expect(seen.offered, 'and the option was put on the table before it was taken').toBeGreaterThan(0);
   });
 
-  it('the attempt takes real time and real walking, not a wish', () => {
-    const { w, ada, wolf } = scene('def-time', { armed: true, wolfAt: [45, 40.5], wolfHeld: true });
-    const startX = ada.x;
+  it('the attempt takes real time and ends within a spear of the wolf, not at range', () => {
+    const { w, ada, wolf } = scene('def-time', { armed: true, wolfAt: [45, 40.5] });
     decide(w, ada, 'test');
     expect(ada.activity?.kind, 'she set off').toBe('defend');
     const took = until(w, 900, () => ada.activity?.kind !== 'defend');
     expect(took, 'it is not instantaneous').toBeGreaterThan(ATTEMPT_TICKS);
-    expect(Math.abs(ada.x - startX), 'she had to walk to it').toBeGreaterThan(REACH);
-    expect(hyp(ada.x - wolf.x, ada.y - wolf.y), 'and ended up beside it, not at range').toBeLessThan(GIVE_UP + 2);
+    expect(hyp(ada.x - wolf.x, ada.y - wolf.y), 'she was beside it, not throwing anything').toBeLessThan(GIVE_UP);
+  });
+
+  it('she holds her ground when it is coming to her, rather than walking out to meet it', () => {
+    // Walking at a wolf that is already on its way means meeting it in the open, mid-stride; standing and facing it is
+    // the whole action. The wolf here is stalking her, so it closes and she waits.
+    const { w, ada, wolf } = scene('def-stand', { armed: true, wolfAt: [45, 40.5] });
+    const startX = ada.x;
+    const startD = hyp(ada.x - wolf.x, ada.y - wolf.y);
+    decide(w, ada, 'test');
+    expect(ada.activity?.kind).toBe('defend');
+    until(w, 200, () => hyp(ada.x - wolf.x, ada.y - wolf.y) <= REACH);
+    expect(Math.abs(ada.x - startX), 'she barely moved').toBeLessThan(1);
+    expect(hyp(ada.x - wolf.x, ada.y - wolf.y), 'because it came to her').toBeLessThan(startD);
+  });
+
+  it('a wolf hesitates before somebody squared up to it, and the hesitation is bounded', () => {
+    // Without this a wolf closes faster than anybody can set themselves, bites, and breaks off by its own rule, so no
+    // defence could ever resolve. It is a standoff with an outcome, not protection: the attempt settles within
+    // ATTEMPT_TICKS, and a failure leaves her standing next to a wolf that is free to bite again.
+    const { w, ada, wolf } = scene('def-standoff', { armed: true, wolfAt: [42.2, 40.5] });
+    expect(facingWolf(w, wolf, ada), 'not yet: she has not started').toBe(false);
+    decide(w, ada, 'test');
+    until(w, 120, () => ada.activity?.phase === 'work' && hyp(ada.x - wolf.x, ada.y - wolf.y) <= REACH);
+    expect(facingWolf(w, wolf, ada), 'squared up').toBe(true);
+    defProbe.on = true;
+    defReset();
+    const settled = until(w, 400, () => defSnapshot().droveOff + defSnapshot().failed > 0);
+    expect(settled, 'the hesitation lasts an attempt, not for ever').toBeLessThan(ATTEMPT_TICKS * 8);
+    expect(facingWolf(w, wolf, ada), 'and it is over').toBe(false);
+  });
+
+  it('the hesitation needs a spear, this wolf, and an attempt actually under way', () => {
+    const { w, ada, wolf } = scene('def-facing', { armed: true, wolfAt: [42.2, 40.5] });
+    expect(facingWolf(w, wolf, ada), 'standing there doing nothing is not facing it').toBe(false);
+    decide(w, ada, 'test');
+    until(w, 120, () => ada.activity?.phase === 'work');
+    expect(facingWolf(w, wolf, ada)).toBe(true);
+    const other = makeWolf(w, 60, 60);
+    expect(facingWolf(w, other, ada), 'she is not squared up to every wolf in the world').toBe(false);
+    toolOf(w, ada, 'spear')!.wear = MAX_WEAR + 1;
+    expect(facingWolf(w, wolf, ada), 'and not with a spear worn past use').toBe(false);
   });
 });
 

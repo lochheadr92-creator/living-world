@@ -16,6 +16,7 @@ import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
 import { setLearning } from '../../src/sim/learning';
 import { setFoodPreparation } from '../../src/sim/provision';
+import { defProbe, defReset, defSnapshot, setWolfDefence, spearOf } from '../../src/sim/defence';
 import { setTrades } from '../../src/sim/trade';
 import { SOURCE_SKILL } from '../../src/sim/constants';
 import type { FoodKind } from '../../src/sim/types';
@@ -69,7 +70,10 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * built on the same mechanism (making a tool, mending a roof) - to isolate what planning as such contributes. `rich-no-ask` keeps
  * every plan and removes only Stage D1's ask for a project's missing material, to isolate what the cooperation contributes on top
  * of planning. `rich-no-learning` keeps everything else about a rich world and removes only Stage 3's estimates of what pays, to
- * isolate what learning from one's own outcomes contributes. `rich-no-stock` keeps everything else about a rules-version-2 world
+ * isolate what learning from one's own outcomes contributes. `rich-no-defence` keeps everything else about a
+ * rules-version-3 world and removes only the defensive ACTION (defence.ts): spears are still wanted, made and carried,
+ * and fire, shelter and fleeing are exactly what they were, so the arm isolates standing and facing a wolf from
+ * everything that surrounds it. `rich-no-stock` keeps everything else about a rules-version-2 world
  * and removes only household food preparation (provision.ts), so a run with it and a run without differ in that one behaviour and
  * nothing else; against a version-1 world it changes nothing, because such a world never had it. `rich-no-trades` keeps everything
  * else about a rich world and removes trades and their apprenticeship mechanism together (trade.ts, apprentice.ts); it does not
@@ -164,6 +168,20 @@ export function parseIntervention(specIn: string): Intervention {
       install: () => {
         setFoodPreparation(false);
         return () => setFoodPreparation(true);
+      },
+    };
+  }
+  if (kind === 'rich-no-defence') {
+    return {
+      spec: label,
+      summary: 'current dynamics with the defensive action removed: spears are still made and carried, but nobody stands and faces a wolf with one',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, wolf defence off';
+      },
+      install: () => {
+        setWolfDefence(false);
+        return () => setWolfDefence(true);
       },
     };
   }
@@ -283,6 +301,26 @@ export const METRICS = [
   'hungerExposure',
   'homeFoodPerPerson',
   'storeFoodPerPerson',
+  // What rules version 3's wolf defence is for, counted over the whole branch, with the stages kept apart because an
+  // intention is not an outcome. Not gated, so an older recorded baseline still works.
+  //   spears / armedAtEnd       spears made over the branch; adults holding a usable one at the end
+  //   defenceOffered            chances to stand: a defence on the table at a decision
+  //   defenceSetOut             somebody actually walked at a wolf
+  //   defenceTried              somebody within reach actually had a go (offered > setOut > tried, always)
+  //   defenceDroveOff / Failed  what those attempts came to
+  //   defenceLeftOnItsOwn       the wolf broke off before the attempt: the OLD group-proximity rule, not this one
+  //   wolvesWary                wolves keeping clear of somebody they were driven off by, at the end
+  //   bitesTaken                people bitten over the branch, which is what defence is supposed to bear on
+  'spears',
+  'armedAtEnd',
+  'defenceOffered',
+  'defenceSetOut',
+  'defenceTried',
+  'defenceDroveOff',
+  'defenceFailed',
+  'defenceLeftOnItsOwn',
+  'wolvesWary',
+  'bitesTaken',
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Outcome = Record<Metric, number>;
@@ -394,6 +432,26 @@ export class PrepTally {
 }
 
 /**
+ * Wolf defence over a branch (rules version 3). The stage counters come from the module's own observation hooks, which
+ * are off by default and never part of the world; this turns them on for the branch and reads them at the end. Bites
+ * are counted here instead, tick by tick, because the end state does not keep them: a person's health comes back.
+ */
+export class DefenceTally {
+  private hurtAt = new Map<number, number>();
+  bites = 0;
+  tick(w: World): void {
+    for (const p of w.persons) {
+      if (!p.alive) continue;
+      const last = p.cooldowns.hurt ?? 0;
+      if (last > (this.hurtAt.get(p.id) ?? -1)) {
+        this.hurtAt.set(p.id, last);
+        this.bites++;
+      }
+    }
+  }
+}
+
+/**
  * Who set off to gather what, counted from the activity-start hook: one count per person per kind of gathering (the skill the
  * source trains). Starts, not units: what a person chooses to do is the question, and a choice is made at the start.
  */
@@ -446,6 +504,7 @@ export function outcomeOf(
   projects = new ProjectTally(),
   gathers = new GatherTally(),
   prep = new PrepTally(),
+  defence = new DefenceTally(),
 ): { outcome: Outcome; milestones: Record<string, number> } {
   const count = (types: string[]) => w.buildings.filter((b) => types.includes(b.type)).length;
   const alive = w.persons.filter((p) => p.alive);
@@ -480,6 +539,13 @@ export function outcomeOf(
     if (isHomeType(b.type)) homeFood += n;
   }
   const heads = Math.max(1, alive.length);
+  let spears = 0;
+  for (const t of w.tools) if (t.kind === 'spear') spears++;
+  let armedAtEnd = 0;
+  for (const p of alive) if (spearOf(w, p)) armedAtEnd++;
+  let wolvesWary = 0;
+  for (const a of w.animals) if (a.wary !== undefined && a.wary > w.tick) wolvesWary++;
+  const d = defSnapshot();
   const first: Record<string, number> = {};
   for (const b of w.buildings) first[b.type] = Math.min(first[b.type] ?? Infinity, b.builtTick);
   // days after the fork; 0 if the type already stood at the fork (then it says nothing about the branch); a type never built counts as
@@ -521,6 +587,16 @@ export function outcomeOf(
       hungerExposure: prep.exposure,
       homeFoodPerPerson: Math.round((homeFood / heads) * 100) / 100,
       storeFoodPerPerson: Math.round((allStoreFood / heads) * 100) / 100,
+      spears,
+      armedAtEnd,
+      defenceOffered: d.offered,
+      defenceSetOut: d.setOut,
+      defenceTried: d.attempts,
+      defenceDroveOff: d.droveOff,
+      defenceFailed: d.failed,
+      defenceLeftOnItsOwn: d.leftOnItsOwn,
+      wolvesWary,
+      bitesTaken: defence.bites,
     },
     milestones,
   };
@@ -564,12 +640,17 @@ export function runBranch(
     const projects = new ProjectTally();
     const gathers = new GatherTally();
     const prep = new PrepTally();
+    const defence = new DefenceTally();
+    // the defence counters are the module's own, off by default; this branch owns them for its run
+    defReset();
+    defProbe.on = true;
     // a deserialized world has no hooks of its own; the tally is the only listener, and it reads, never writes
     w.hooks = { onActivityStart: (p, a) => gathers.start(p, a) };
     for (let i = 1; w.tick < end; i++) {
       stepWorld(w);
       projects.tick(w);
       prep.tick(w);
+      defence.tick(w);
       if (i % sampleEvery === 0) {
         const h = hashWorld(w);
         hashes.push(h);
@@ -577,7 +658,7 @@ export function runBranch(
       }
       if (i % DAY === 0) popByDay.push(w.persons.filter((p) => p.alive).length);
     }
-    const { outcome, milestones } = outcomeOf(w, from, end, projects, gathers, prep);
+    const { outcome, milestones } = outcomeOf(w, from, end, projects, gathers, prep, defence);
     return {
       spec: iv.spec,
       summary: iv.summary,
