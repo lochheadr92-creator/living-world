@@ -10,7 +10,9 @@ Checkout: `C:\Users\RJLoc\.codex\worktrees\wolf-defence-integration\living-world
 Full contract, review repairs and evidence: [WOLF_DEFENCE.md](docs/WOLF_DEFENCE.md).
 Durable review record: [WOLF_DEFENCE_REVIEW.md](docs/WOLF_DEFENCE_REVIEW.md), including the
 original request-changes verdict, both blockers, their fixes and regression evidence.
-Independent re-review of the final isolated PR remains outstanding.
+Both recorded blockers are resolved with regression evidence. Per the owner's 2026-10-21
+workflow decision, no further independent review or PR approval is required by project
+policy. Integration status and actual repository protections remain separate questions.
 
 Draft [PR #20](https://github.com/lochheadr92-creator/living-world/pull/20) is open against
 `main`. Implementation and evidence are pushed; no merge or independent approval is claimed.

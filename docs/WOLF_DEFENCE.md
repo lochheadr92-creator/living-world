@@ -45,8 +45,8 @@ including victims subsequently removed from the live registry, rather than infer
 ## Review repairs
 
 The [review and resolution record](WOLF_DEFENCE_REVIEW.md) preserves the original
-request-changes verdict, reviewed candidate, finding severities, repair evidence and
-outstanding independent re-review.
+request-changes verdict, reviewed candidate, finding severities and repair evidence.
+Both findings are resolved; no automatic independent re-review is required.
 
 The earlier candidate review found two blocking defects, both reproduced before repair:
 

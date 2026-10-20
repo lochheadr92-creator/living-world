@@ -18,16 +18,17 @@ branch `codex/wolf-defence-integration`. Commit `57e3047` integrates defence wit
 at version 4 and includes the repairs below; it excludes the separate mood change.
 The earlier review therefore must not be represented as approval of this final candidate.
 
-**Current review status: both reported blockers have fixes and regression evidence;
-independent re-review of the final PR remains outstanding.** Implementation self-verification
-does not change the original review verdict into an independent approval.
+**Current review status: both reported blockers are resolved with fixes and regression
+evidence. No further independent re-review is required by project policy.** The owner
+removed the automatic re-review requirement on 2026-10-21. The original request-changes
+verdict remains historical evidence; no independent approval is claimed.
 
 ## Findings and resolution
 
 | Finding | Observed failure and cause | Repair in `57e3047` | Resolution evidence |
 | --- | --- | --- | --- |
-| **P1 — armed people do not interrupt sleep or committed work to defend** | `reviewActivity()` treated a newly preferred `flee` as urgent but omitted `defend`. An armed sleeper remained asleep and took a bite, while an unarmed sleeper interrupted sleep to flee. | [`decision.ts`](../src/sim/decision.ts) treats newly selected defence as an urgent response while retaining a fit, already-running defence. | [`defence_response.test.ts`](../tests/defence_response.test.ts) checks armed sleep and committed-work interruption, unarmed flight, and retention of a valid defence until the defender becomes unfit. Fixed with regression evidence; independent re-review pending. |
-| **P2 — approach to a stationary wolf stalls** | A fresh approach cleared the path and its index but retained `pathTries: 1`. Travel initializes a path only when the attempt count is zero. A defender remained motionless for 120 ticks against a visible diagonal stationary target. | [`defence.ts`](../src/sim/defence.ts) resets `pathTries` on a fresh approach. Distance observations distinguish a closing wolf from a stationary one so the existing hold-ground behaviour remains intact. | The same regression file checks actual movement toward a stationary wolf, a resolved attempt and spear wear. The existing hold-ground test and its threshold were preserved. Fixed with regression evidence; independent re-review pending. |
+| **P1 — armed people do not interrupt sleep or committed work to defend** | `reviewActivity()` treated a newly preferred `flee` as urgent but omitted `defend`. An armed sleeper remained asleep and took a bite, while an unarmed sleeper interrupted sleep to flee. | [`decision.ts`](../src/sim/decision.ts) treats newly selected defence as an urgent response while retaining a fit, already-running defence. | [`defence_response.test.ts`](../tests/defence_response.test.ts) checks armed sleep and committed-work interruption, unarmed flight, and retention of a valid defence until the defender becomes unfit. Resolved with regression evidence. |
+| **P2 — approach to a stationary wolf stalls** | A fresh approach cleared the path and its index but retained `pathTries: 1`. Travel initializes a path only when the attempt count is zero. A defender remained motionless for 120 ticks against a visible diagonal stationary target. | [`defence.ts`](../src/sim/defence.ts) resets `pathTries` on a fresh approach. Distance observations distinguish a closing wolf from a stationary one so the existing hold-ground behaviour remains intact. | The same regression file checks actual movement toward a stationary wolf, a resolved attempt and spear wear. The existing hold-ground test and its threshold were preserved. Resolved with regression evidence. |
 
 During repair on 2026-10-20, six of eight checks in the original two-version candidate
 failed before the fixes and passed afterwards. The final isolated version-4 branch has
@@ -60,8 +61,8 @@ specific mechanisms, not a village-wide survival benefit.
 
 ## Remaining issues and review boundary
 
-- **Independent review:** the final isolated PR still needs an independent review. This
-  record is not a submitted GitHub review, approval, acceptance baseline or merge decision.
+- **Review record:** no additional independent review is required by project policy.
+  This record is not a submitted GitHub approval, acceptance baseline or merge decision.
 - **Existing death ordering:** wildlife updates precede person needs/death checks; passive
   healing can occur after a fatal bite but before death is checked. The prior review
   identified this separately from the integration defects. It remains unresolved and

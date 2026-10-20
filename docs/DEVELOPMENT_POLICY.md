@@ -2,6 +2,25 @@
 
 Decision: 2026-10-17, at the owner's request. This supersedes the earlier requirement to maintain authored and rich as separate product modes.
 
+## Delivery workflow
+
+Owner decision, 2026-10-21: PRs and repeated independent reviews are not mandatory project
+steps. Implement the bounded change, inspect it, fix concrete findings, run appropriate
+checks, and record the outcome. Once a finding is repaired and covered by relevant
+regression evidence, close it; do not automatically impose another independent review.
+Revisit it when relevant code changes, new evidence or an unresolved defect warrant it.
+
+Use a branch when isolation helps. Commit logical changes and, when the owner authorizes
+integration, integrate into main and push normally. Open a PR only when requested or
+required by actual repository protections. A review record is evidence, not an approval
+gate. Do not fabricate independent approval, weaken tests, rewrite history, force-push,
+expose secrets or bypass repository protections. If GitHub requires a PR, identify that
+actual setting so the owner can decide whether to change it.
+
+This supersedes the old branch-specific "draft PR; never merge" instruction and the
+automatic re-review requirement added to the wolf-defence handoff. It does not change
+simulation acceptance criteria, compatibility obligations or evidence limits.
+
 ## Product direction
 
 Living World has one current simulation. New worlds use the integrated behavior previously offered as "Rich dynamics"; the world menu no longer asks people to enable it. Useful improvements belong permanently in that simulation after appropriate verification. Do not build a second product branch merely to preserve old behavior indefinitely.
