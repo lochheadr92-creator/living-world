@@ -1,13 +1,21 @@
 # Living World
 
-A small civilisation developing inside an isometric diorama. About thirty people forage, drink, sleep, build, farm,
-talk, ask each other for help, quarrel, make peace, fall in love, raise children and grow old — and over weeks of watching
-they lay out a timber yard, a quarry, a kiln, a granary, a bakery, a hall and a smithy, make tools and carts, rebuild their
-huts as houses, eat together and look after each other. You mostly watch.
+An autonomous world game with few direct controls: a small civilisation developing inside an isometric diorama. About
+thirty people — more in the larger worlds — forage, drink, sleep, build, farm, talk, ask each other for help, quarrel,
+make peace, fall in love, raise children and grow old, and over weeks of watching they lay out a timber yard, a quarry, a
+kiln, a granary, a bakery, a hall and a smithy, make tools and carts, rebuild their huts as houses, eat together and look
+after each other. They do all of it for themselves: nobody is given orders or assigned a job, and none of it is scripted.
+You watch — pause, speed up, follow somebody, open their card and ask why they are doing that — and follow individuals,
+households, relationships, places and how they change over time.
 
-Everything on screen is the visible face of real simulation state: a berry bush holds a number of berries,
-a person who picks one carries it, a hut rises only as fast as wood and stone arrive, a plank exists because somebody sawed
-a log into it, and a bubble that says “I can bring wood” exists because that person has actually promised it.
+Underneath is a causal, deterministic simulation, and that is the whole point of it: everything on screen is the visible
+face of real simulation state. A berry bush holds a number of berries, a person who picks one carries it, a hut rises only
+as fast as wood and stone arrive, a plank exists because somebody sawed a log into it, and a bubble that says “I can bring
+wood” exists because that person has actually promised it. There are no scores, no quests and no win condition; what there
+is to follow is people and the consequences of what they did.
+
+The product direction everyone working on this repository builds to is [PRODUCT_VISION.md](PRODUCT_VISION.md); the delivery
+rules are in [WORKFLOW.md](WORKFLOW.md).
 
 ```bash
 npm install

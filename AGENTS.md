@@ -1,12 +1,35 @@
 # Living World: notes for Codex (read this first)
 
-Read [WORKFLOW.md](WORKFLOW.md) before acting. It is the owner's standing workflow:
-no mandatory PR, second reviewer or repeat-approval loop. It supersedes older workflow
-instructions and must not be changed without an explicit owner instruction.
+Two files govern how work happens here, and both come before the technical map below.
 
-A deterministic village simulation in TypeScript/Vite: ~100 people (Large profile) with needs, relations, building and farming. Goal in
-progress: a richer, RimWorld/Dwarf Fortress-style world (individuals differ, consequences last, small events cascade), inspectable in
-the app and testable in a lab. Plan, stages and every measured result: `docs/EMERGENCE.md`. Scaling and performance history: `docs/SCALING.md`.
+- **[WORKFLOW.md](WORKFLOW.md) — delivery rules.** The owner's standing workflow: no mandatory
+  PR, second reviewer or repeat-approval loop. It supersedes older workflow instructions and must
+  not be changed without an explicit owner instruction.
+- **[PRODUCT_VISION.md](PRODUCT_VISION.md) — product direction.** What we are building and how to
+  judge whether a change delivered it. Read it before planning any behavioural feature.
+
+**What Living World is.** An autonomous world game with few direct controls, supported by a
+causal, deterministic simulation in TypeScript/Vite: ~100 people (Large profile) with needs,
+relations, building and farming, who live their own lives while the viewer follows individuals,
+households, relationships, places and changes over time. The simulation is the foundation; the
+observable experience is the product. The goal in progress is a richer, RimWorld/Dwarf
+Fortress-style world (individuals differ, consequences last, small events cascade), inspectable
+in the app and testable in a lab. Plan, stages and every measured result: `docs/EMERGENCE.md`.
+Scaling and performance history: `docs/SCALING.md`.
+
+## Working on behaviour: what counts as delivered
+- Consider the observable experience when planning a behavioural feature: what a viewer will
+  notice, understand or care about afterwards. Ask that alongside correctness and
+  maintainability, not instead of them.
+- Internal state or passing tests alone do not establish a complete viewer-facing experience.
+  Mechanism evidence and viewer-facing evidence are different claims; which evidence answers
+  which claim is set out in `docs/DEVELOPMENT_POLICY.md`, "Matching evidence to the claim".
+- Presentation work is legitimate when it helps the viewer understand a real mechanism. It is not
+  legitimate when it dresses up state that is not there.
+- Behaviour changes still need the appropriate correctness and compatibility checks: determinism,
+  resource conservation, save/replay, rules versioning, and the goldens and continuation
+  references where they apply.
+- Product direction never justifies expanding a bounded task. Write the idea down and raise it.
 
 ## Decisions already made (do not reopen without a reason)
 - Seeded randomness stays (replay, inspector, the lab). The golden fingerprints (`tests/golden.test.ts`) no longer constrain a change

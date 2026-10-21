@@ -26,6 +26,14 @@ simulation acceptance criteria, compatibility obligations or evidence limits.
 
 ## Product direction
 
+The authoritative product brief is [PRODUCT_VISION.md](../PRODUCT_VISION.md) (owner decision,
+2026-10-22): Living World is an autonomous world game with few direct controls, supported by a
+causal, deterministic simulation. People live their own lives; the viewer follows individuals,
+households, relationships, places and changes over time. The simulation is the foundation and the
+observable experience is the product. That brief holds the product direction and the development
+priorities; this file holds the engineering policy — acceptance, evidence, compatibility and rules
+versions. The section below remains in force and is now one part of that wider brief.
+
 Living World has one current simulation. New worlds use the integrated behavior previously offered as "Rich dynamics"; the world menu no longer asks people to enable it. Useful improvements belong permanently in that simulation after appropriate verification. Do not build a second product branch merely to preserve old behavior indefinitely.
 
 The internal settings value remains `dynamics: 'rich'`. It is a compatibility identifier, not a new feature users must discover. `currentWorldSettings` in `src/sim/profiles.ts` is the product entry point for new worlds. The app controller also defaults to current rules. The older low-level `defaultSettings`, `settingsForProfile` and `restartSettings` helpers retain historical semantics for diagnostic scripts and fixtures; product callers must use the current entry point.
@@ -40,12 +48,49 @@ The old `rich` browser preference is retired and cannot silently keep a new inst
 
 Keep legacy code only where it serves a concrete save, replay, test or experiment contract. Do not remove those paths without a separately tested migration/retirement plan. Likewise, do not turn this compatibility obligation into a ban on improving the current simulation. Historical Git revisions and retained artifacts provide older source baselines; the current compatibility branch is not a guarantee of replaying every historical release.
 
+## Matching evidence to the claim
+
+Different claims need different evidence. These are distinct purposes, not tiers of a new
+approval process: identify what the change actually claims, bring the evidence that answers it,
+and say which checks you ran.
+
+| Claim | What answers it |
+|---|---|
+| **Correctness** | Reproduce the defect, then demonstrate the repaired contract with appropriate tests. |
+| **Physical coherence** | Show that decisions, actions, resources, locations, ownership and saved state agree: the ledger balances, claims are released, the world saves and continues. |
+| **Readability** | A rendered example showing what the interface actually communicates. |
+| **Variety and watchability** | Concrete, meaningful situations and differences, named and reproducible. |
+| **Aggregate effectiveness** | Comparative measurement with uncertainty, against the same baseline with the mechanism disabled, plus the project's relevant control/nudge reference and ablations. |
+
+Stated explicitly, because these are the substitutions that are easiest to make by accident:
+
+- A feature can be valuable without improving survival or another aggregate metric.
+- A null aggregate result does not automatically make a feature worthless.
+- A successful scene does not prove an aggregate benefit.
+- Visual activity alone does not prove autonomous behaviour.
+- A staged fixture must be labelled staged.
+- Mechanism tests, rendered evidence, human usability evidence and ensemble results answer
+  different questions, and none of them substitutes for another.
+
+Automated browser evidence shows that the page renders real state and that a path through it
+works. It does not by itself prove human comprehension or usability; a claim about what a person
+understands or finds usable needs evidence from people. Likewise, do not claim that a change is
+more engaging to people without evidence appropriate to that claim. Claims such as fewer deaths,
+better food security, more productivity or stronger specialisation are aggregate claims and need
+the measurement in the last row above, not a scene.
+
+This section sharpens how the existing checks are read and discards none of them. The regression
+suite, the resource-conservation contracts, the historical goldens, the version continuation
+references and every rules-version requirement in this file apply exactly as written. Where
+broader acceptance wording elsewhere reads as "one kind of evidence covers every claim", it is
+revised by this section rather than by quietly dropping a check.
+
 ## When a change becomes standard
 
 1. State the intended observable behavior and the subsystem that owns it.
 2. Demonstrate the causal chain: local evidence, eligible decision, action, actual state mutation, saved consequence and inspectable result.
 3. Run focused contract tests and relevant integration, deterministic replay, save and regression checks. Use rendered checks for user-facing changes.
-4. For claims of effectiveness, use a bounded experiment against the same current baseline with the relevant mechanism disabled, plus the project's control/nudge reference. Report magnitude, uncertainty, adverse effects and null results. Component tests alone do not demonstrate aggregate benefit.
+4. For claims of effectiveness, use a bounded experiment against the same current baseline with the relevant mechanism disabled, plus the project's control/nudge reference. Report magnitude, uncertainty, adverse effects and null results. Component tests alone do not demonstrate aggregate benefit. Match the evidence to the claim (see the section above): a change that claims no aggregate benefit does not need an ensemble, and a change that claims one cannot substitute a scene for it.
 5. Integrate the accepted behavior into the current simulation. Update deliberate behavior baselines only with the reason and evidence; never adjust expectations merely to hide a defect. Existing features with incomplete evidence stay explicitly unverified for those claims.
 
 Experimental controls belong in the lab or development configuration. Prefer narrowly scoped interventions over an ever-growing alternative "old world". Record compound interventions honestly: `rich-no-trades` disables trades and apprenticeship together, so it cannot establish the isolated effect of trades.

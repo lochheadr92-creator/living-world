@@ -6,6 +6,23 @@ Standing owner workflow: [WORKFLOW.md](WORKFLOW.md). Both Codex and Claude must 
 it: no mandatory PR, second reviewer or repeat-approval loop. Older process instructions
 in historical sections below do not override it.
 
+## Current product direction
+
+Owner decision, 2026-10-22: Living World is developed as an **autonomous world game with few
+direct controls**, supported by the causal, deterministic simulation. The brief is
+[PRODUCT_VISION.md](PRODUCT_VISION.md), and both `AGENTS.md` and `CLAUDE.md` point at it. In
+short: people live their own lives, and the viewer follows individuals, households, relationships,
+places and changes over time; the simulation is the foundation and the observable experience is
+the product. Prefer completing one coherent situation over adding several disconnected systems,
+and ask of any behavioural change what a viewer will notice, understand or care about afterwards.
+
+That decision adds no intervention controls, no scores and no quests, and it changed no
+simulation behaviour, default, parameter or baseline. How the different kinds of claim are
+evidenced — correctness, physical coherence, readability, watchability, aggregate effectiveness —
+is in [docs/DEVELOPMENT_POLICY.md](docs/DEVELOPMENT_POLICY.md), "Matching evidence to the claim".
+Sections below that frame the project as a simulation only are superseded on that point alone;
+their measurements, review verdicts and status records stand exactly as written.
+
 ## Current main — fatal injuries stay fatal
 
 Rules version 6. When a person is already at zero health, `stepPerson` settles death through
@@ -497,4 +514,6 @@ After a merge, verify on the merge commit itself rather than on this branch, and
 ## Next
 
 The bounded preparation feature is finished and closed out. The next actions are the four above, in order. Beyond them,
-the fifteen proposed gameplay stages remain a backlog in `docs/EMERGENCE.md`; nothing here commits to them.
+the proposed stages in `docs/EMERGENCE.md` remain a backlog; nothing here commits to them, and the count of "fifteen"
+written here was wrong (that file proposes stages 0-5). Current direction prefers completing one bounded, watchable
+situation over picking up disconnected mechanics from that list; see `PRODUCT_VISION.md`.

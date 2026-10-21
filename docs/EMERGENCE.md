@@ -2,6 +2,8 @@
 
 > Current direction (2026-10-17): one evolving simulation, with the integrated rules on for new worlds. [DEVELOPMENT_POLICY.md](DEVELOPMENT_POLICY.md) supersedes earlier off-by-default/two-product-mode requirements below. Older measurements and mode descriptions remain historical evidence; this policy change does not revalidate their results. Explicit legacy save/replay and diagnostic contracts remain supported.
 
+> Current product direction (2026-10-22): [PRODUCT_VISION.md](../PRODUCT_VISION.md) — an autonomous world game with few direct controls, supported by this simulation. The stage list below is a research backlog, not a commitment. Prefer completing one bounded, watchable situation end to end (a household recognises poor shelter → gathers materials → builds → occupies it, or meets an understandable reason it cannot; a recognised threat → preparation → response → lasting consequence; a relationship history → understandable choice → observable effect) over adding several disconnected mechanics from the table. Keep proposed behaviour marked as proposed: the stage headings below say which were built, which were only piloted and which are planned, and nothing here is rescheduled by this note.
+
 The goal is an autonomous village in the spirit of RimWorld and Dwarf Fortress: individuals who differ, consequences that last, and small
 events that cascade into stories, readable in the inspector and testable in the lab. It is not strict open-ended invention (see the
 novel-need result in `SCALING.md`: the action space is closed and authored, and no unauthored behaviour appeared in 24 seeds).
