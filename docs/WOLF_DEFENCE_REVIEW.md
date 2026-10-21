@@ -67,8 +67,9 @@ specific mechanisms, not a village-wide survival benefit.
   This record is not a submitted GitHub approval, acceptance baseline or merge decision.
 - **Existing death ordering:** wildlife updates precede person needs/death checks; passive
   healing can occur after a fatal bite but before death is checked. The prior review
-  identified this separately from the integration defects. It remains unresolved and
-  requires a separately scoped, versioned repair.
+  identified this separately from the integration defects. It was unresolved at this review.
+  The later rules-version-6 repair settles zero health through the existing death path before
+  passive recovery. That repair is outside this review record.
 - **Acceptance evidence:** no broad survival ensemble or new acceptance baseline was run.
   The stale historical ensemble baseline remains unchanged.
 - **Experimental save compatibility:** experimental wolf-version-3 saves and

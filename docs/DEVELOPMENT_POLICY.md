@@ -87,6 +87,21 @@ by `tests/v3_continuation.expected.json`, captured from main `a5530cf` before de
 The parallel experimental wolf-v3 branch used a conflicting number: its saves must stay with
 that revision, not be silently interpreted as habitation. See `docs/WOLF_DEFENCE.md`.
 
+**Version 5 is not a generation of this build.** The unintegrated `codex/wolf-habitation-integration`
+candidate used 5 for a mood-ranking correction. That correction is not in main. A save stamped 5 is
+refused. It is not run as version 4 and not run as version 6. There is no migration and no
+provenance field that could tell those experimental saves apart from a later product version, so
+the number stays unsupported.
+
+**Version 6** (2026-10-22) holds a fatal injury. If health is already zero when a person is stepped,
+death is settled by the existing `killPerson` path before passive recovery in `updateNeeds` can
+raise it. The cause already recorded, including `wolf attack`, is the cause that is kept. People
+still above zero keep the old recovery. Versions 1–4 keep the old order, in which a favourable
+body can undo a bite that had already reached zero. Version-4 continuation is pinned by
+`tests/v4_continuation.expected.json`, captured from main `0d39350` before this repair. The lab
+switch `rich-no-fatal-hold` removes only this hold. It does not change wolf damage, healing rates,
+defence, habitation or preparation, and it changes nothing on an earlier rules version.
+
 **How a version is proved not to have leaked.** A test that checks the version LABEL is not enough: a gate that leaked would
 keep the label and change the world. Before version 2 was written, `scripts/v1_reference.ts --write` recorded
 `tests/v1_continuation.expected.json` - two rich worlds stamped `rulesVersion: 1`, run, written out and read back through the

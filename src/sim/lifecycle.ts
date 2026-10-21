@@ -24,6 +24,7 @@ import { abortConversationFor, personOf } from './social';
 import type { Grave, Person, Stage, World } from './types';
 import { T } from './types';
 import { rulesOf } from './rules';
+import { runsRulesVersion } from './rulesversion';
 import { newId } from './registry';
 
 import { hyp } from './util';
@@ -186,6 +187,34 @@ export function giveBirth(world: World, mother: Person): void {
 }
 
 // ───────────────────────── death ─────────────────────────
+
+/**
+ * From this rules version, zero health is already death. It is settled before passive recovery runs.
+ * Version 5 is not this: that number belongs to an unintegrated experiment and is refused at load.
+ */
+export const FATAL_HOLD_FROM_VERSION = 6;
+
+/**
+ * The lab switch, beside the world like the others: module-level, never saved, never hashed, on unless the lab turns it
+ * off. With it off, a world that would hold a fatal injury still lets passive recovery run before the death check,
+ * which is the order versions 1–4 use. Wolf damage and healing rates are untouched. Below `FATAL_HOLD_FROM_VERSION`
+ * the switch changes nothing, because those worlds never hold a fatal injury.
+ */
+let fatalHold = true;
+export function setFatalHold(on: boolean): void {
+  fatalHold = on;
+}
+export const fatalHoldOn = (): boolean => fatalHold;
+
+/** Does this world refuse to let passive recovery undo a health of zero? */
+export const fatalInjuryHolds = (world: World): boolean => fatalHold && runsRulesVersion(world, FATAL_HOLD_FROM_VERSION);
+
+/** The cause already written down, or the need that has run out. The same words the death check has always used. */
+export function deathCauseOf(p: Person): string {
+  const n = p.needs;
+  return p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
+}
+
 export function killPerson(world: World, p: Person, cause: string): void {
   if (hasHabitation(world)) delete p.indoors;
   if (!p.alive) return;

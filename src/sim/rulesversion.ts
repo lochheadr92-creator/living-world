@@ -35,10 +35,20 @@ import type { Settings, World } from './types';
  * Raising this number is how a behavioural change is declared. See docs/DEVELOPMENT_POLICY.md, "Rules versions".
  */
 // Version 3: actual home occupancy. Version 4: spears and active wolf defence, respecting occupancy.
-export const CURRENT_RULES_VERSION = 4;
+// Version 5 is not a generation of this build. The unintegrated wolf-habitation-integration candidate used it for a
+// mood-ranking correction. Those saves stay with that revision; this build refuses them rather than running them as
+// version 4 or as version 6.
+// Version 6: a person already at zero health dies through the ordinary death path before passive recovery can undo it.
+export const CURRENT_RULES_VERSION = 6;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6];
+
+/**
+ * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
+ * Do not treat a save stamped with it as version 4 or as version 6.
+ */
+export const EXPERIMENTAL_MOOD_RULES_VERSION = 5;
 
 /**
  * What a world made before versioning existed is. It is NOT version 0 and not "probably 1": several different implementations
@@ -70,6 +80,14 @@ export function validateRulesVersion(v: unknown): VersionVerdict {
     return { ok: false, version: undefined, reason: `rulesVersion must be a positive whole number or absent, not ${JSON.stringify(v)}` };
   }
   if (isSupportedRulesVersion(v)) return { ok: true, version: v };
+  if (v === EXPERIMENTAL_MOOD_RULES_VERSION) {
+    return {
+      ok: false,
+      version: undefined,
+      reason:
+        `rules version ${v} is the unintegrated experimental mood-ranking generation. This build does not run it, and it is not loaded as version 4 or as version 6.`,
+    };
+  }
   const latest = Math.max(...SUPPORTED_RULES_VERSIONS);
   return {
     ok: false,

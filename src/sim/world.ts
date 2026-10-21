@@ -31,7 +31,7 @@ import { mealTick } from './meals';
 import { noteConcerns } from './welfare';
 import { addEvent, addFx } from './events';
 import { updatePlots } from './farming';
-import { CONCEPTION_CHECK_EVERY, LIFE_CHECK_EVERY, adoptOrphans, conceptionTick, immigrationTick, killPerson, lifeTick } from './lifecycle';
+import { CONCEPTION_CHECK_EVERY, LIFE_CHECK_EVERY, adoptOrphans, conceptionTick, deathCauseOf, fatalInjuryHolds, immigrationTick, killPerson, lifeTick } from './lifecycle';
 import { updateNeeds } from './needs';
 import { perceive, refreshBeliefs } from './perception';
 import { rebuildMobileGrid } from './registry';
@@ -103,6 +103,13 @@ export function stepWorld(world: World): void {
 
 function stepPerson(world: World, p: Person): void {
   const tick = world.tick;
+  // Damage from earlier in this tick (a wolf bite) can already have reached zero. From rules version 6 that is death,
+  // settled by the ordinary path before passive recovery can put health back above zero. Older worlds keep the old
+  // order: needs run first, and a well-fed, warm person can undo the injury.
+  if (p.health <= 0 && fatalInjuryHolds(world)) {
+    killPerson(world, p, deathCauseOf(p));
+    return;
+  }
   updateNeeds(world, p);
   updateMood(world, p);
   illnessTick(world, p);
@@ -110,9 +117,7 @@ function stepPerson(world: World, p: Person): void {
   lifeTickRich(world, p);
   crowdTick(world, p);
   if (p.health <= 0) {
-    const n = p.needs;
-    const cause = p.deathCause || (n.thirst <= 0 ? 'thirst' : n.hunger <= 0 ? 'hunger' : n.warmth <= 6 ? 'exposure' : 'injuries');
-    killPerson(world, p, cause);
+    killPerson(world, p, deathCauseOf(p));
     return;
   }
   // what the world has already decided about this person's own plans, settled on the tick it became due rather than whenever they

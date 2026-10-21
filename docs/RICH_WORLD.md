@@ -128,3 +128,7 @@ browser evidence and integration limitations. Earlier generations retain proximi
 
 Rules version 4 adds locally motivated spear-making and active defence alongside flight and home refuge.
 The physical contract, old-save limits, autonomous example and verification are in docs/WOLF_DEFENCE.md.
+
+## Fatal injury finality (rules version 6, 2026-10-22)
+
+If a person is already at zero health when their turn comes, `stepPerson` settles death through `killPerson` before `updateNeeds` can add passive recovery. The cause already written, including a wolf bite's `wolf attack`, is the one that is kept. A person still above zero recovers as before. Versions 1–4 keep the old order. Version 5 is the unintegrated experimental mood-ranking number and is refused at load, not reinterpreted. The lab switch is `rich-no-fatal-hold`. It does not change bite damage, healing rates, defence, habitation or preparation, and it does nothing below version 6. This is an ordering repair. It is not a claim that villages survive longer.

@@ -94,7 +94,11 @@ effect estimate; no broad ensemble or new acceptance baseline was run.
 - `git diff --check HEAD`: passed.
 
 Exact measurement/browser commands and source attribution are in `wolf_evidence/RUN.md`.
-The separately observed existing death-ordering issue remains: passive healing can occur after
-a fatal wolf bite but before the death check. No survival claim relies on that path, and changing
-death ordering is a separate versioned repair. The stale historical ensemble baseline is also
-unchanged; neither issue is represented as fixed by this stage.
+At this stage the death-ordering defect was still open, and this integration did not fix it.
+Wildlife updates before people. A bite can set health to zero and `deathCause` to `wolf attack`,
+then `stepPerson` used to run passive recovery before the death check, so favourable hunger,
+thirst and warmth could put health back above zero. The bite event could already say "fatally"
+while the person lived. No survival claim in this document relies on that path. The repair is
+rules version 6, recorded separately: zero health is settled by the existing death path before
+passive recovery. The stale historical ensemble baseline was also left unchanged; neither issue
+was represented as fixed by the wolf-defence stage.

@@ -1,0 +1,48 @@
+{
+  "staged": true,
+  "results": [
+    {
+      "name": "staged fixture is labelled and uses the current rules",
+      "pass": true,
+      "detail": {
+        "version": 6,
+        "selected": 2,
+        "who": 2
+      }
+    },
+    {
+      "name": "visible memorial matches the death record",
+      "pass": true,
+      "detail": {
+        "memorial": "Ada has died (wolf attack), aged 25.",
+        "expected": "Ada has died (wolf attack), aged 25.",
+        "lines": [
+          "Ada died (wolf attack), aged 25."
+        ],
+        "bite": [
+          "A wolf bit Ada fatally."
+        ]
+      }
+    },
+    {
+      "name": "the feed shows that one death",
+      "pass": true,
+      "detail": "Ada died (wolf attack), aged 25.\njust now"
+    },
+    {
+      "name": "save/load keeps one death and does not bring Ada back",
+      "pass": true,
+      "detail": {
+        "lines": [
+          "Ada died (wolf attack), aged 25."
+        ],
+        "feedDeaths": 1,
+        "banner": "STAGED fatal-injury fixture"
+      }
+    },
+    {
+      "name": "no uncaught page errors",
+      "pass": true
+    }
+  ]
+}

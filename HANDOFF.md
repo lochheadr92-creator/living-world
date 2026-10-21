@@ -1,12 +1,56 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-21
+Updated: 2026-10-22
 
 Standing owner workflow: [WORKFLOW.md](WORKFLOW.md). Both Codex and Claude must follow
 it: no mandatory PR, second reviewer or repeat-approval loop. Older process instructions
 in historical sections below do not override it.
 
-## Current main — wolf defence integrated
+## Current main — fatal injuries stay fatal
+
+Rules version 6. When a person is already at zero health, `stepPerson` settles death through
+the existing `killPerson` path before `updateNeeds` can add passive recovery. New product
+worlds use version 6. Versions 1–4 keep the old order. A version-4 continuation reference
+was captured from main `0d39350` before the repair and is left unchanged
+(`tests/v4_continuation.expected.json`, `scripts/v4_reference.ts`).
+
+Version 5 is not this build. The unintegrated wolf-habitation-integration candidate used that
+number for a mood-ranking correction. Those saves are refused. They are not run as version 4
+or as version 6, and the mood-ranking change was not imported.
+
+The lab switch is `rich-no-fatal-hold`. It restores only the old order. Wolf damage, healing
+rates, defence, habitation and preparation stay, and the switch does nothing below version 6.
+
+The defect, as it stood on version 4: `updateWildlife` runs before people. A bite can set
+health to zero and `deathCause` to `wolf attack`. `stepPerson` then ran `updateNeeds` before
+the death check. With hunger, thirst and warmth high enough, passive recovery put health back
+above zero, so the person lived, acted and could be saved that way. The danger event could
+already say the bite was fatal. A staged regression through `stepWorld` reproduced that before
+the repair: the fatal line was present and the person was still in the live registry.
+
+Death still happens once. The same cleanup releases the activity, reservations and indoor
+occupancy. Later ticks and a save/load continuation do not bring the person back or write the
+death again. People who stay above zero still receive ordinary recovery. Indoor protection is
+unchanged: the cleanup fixture does not make a wolf bite someone indoors.
+
+No village-survival claim is made from the regression or from the staged page. No acceptance
+baseline was replaced. Household-led home construction was not started.
+
+Verification on this repair, before integration:
+
+- Before the fix, `npx --no-install vitest run tests/fatal_injury.test.ts` failed 3 and passed 2.
+  The fatal bite wrote "A wolf bit Ada fatally." and left Ada alive. The nonfatal recovery and the
+  version-4 order passed.
+- After the fix, the same command passed 7 tests.
+- `npm test`: 898 tests in 88 files passed, including the version-1, version-2, version-3 and
+  version-4 continuations and the historical goldens inside the suite.
+- `npm run build`: TypeScript and the production build passed.
+- `npx --no-install vite-node scripts/golden.ts`: all historical fingerprints matched.
+- `node scripts/browser/fatal_injury_check.mjs http://127.0.0.1:5288/ fatal_evidence`: 5/5.
+  The staged page showed "Ada has died (wolf attack), aged 25." in the inspector and once in the
+  feed, and the same single record after save/load and 30 further ticks. Labelled STAGED.
+
+## Previous main — wolf defence integrated
 
 The owner fast-forwarded `main` to `9a082d6` and pushed it normally, integrating
 `codex/wolf-defence-integration` from base `a5530cf`. Active defence with habitation is

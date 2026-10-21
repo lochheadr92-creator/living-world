@@ -15,6 +15,7 @@ import { setOptionChooser } from '../../src/sim/decision';
 import { setStakes } from '../../src/sim/hardship';
 import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
 import { setLearning } from '../../src/sim/learning';
+import { setFatalHold } from '../../src/sim/lifecycle';
 import { setFoodPreparation } from '../../src/sim/provision';
 import { setHabitationAdmissions } from '../../src/sim/habitation';
 import { defProbe, defReset, defSnapshot, setWolfDefence, spearOf } from '../../src/sim/defence';
@@ -74,7 +75,10 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * isolate what learning from one's own outcomes contributes. `rich-no-defence` keeps everything else about a
  * rules-version-4 world and removes only the defensive ACTION (defence.ts): spears are still wanted, made and carried,
  * and fire, shelter and fleeing are exactly what they were, so the arm isolates standing and facing a wolf from
- * everything that surrounds it. `rich-no-stock` keeps everything else about a rules-version-2 world
+ * everything that surrounds it. `rich-no-fatal-hold` keeps everything else about a rules-version-6 world and removes
+ * only the rule that zero health is death before passive recovery; wolf damage, healing rates, defence, habitation
+ * and preparation stay. Against a world older than version 6 it changes nothing, because such a world never held a
+ * fatal injury. `rich-no-stock` keeps everything else about a rules-version-2 world
  * and removes only household food preparation (provision.ts), so a run with it and a run without differ in that one behaviour and
  * nothing else; against a version-1 world it changes nothing, because such a world never had it. `rich-no-trades` keeps everything
  * else about a rich world and removes trades and their apprenticeship mechanism together (trade.ts, apprentice.ts); it does not
@@ -178,6 +182,20 @@ export function parseIntervention(specIn: string): Intervention {
       summary: 'no new home admissions; existing occupants keep physical shelter until they leave; outdoor proximity protection is not restored',
       apply: () => 'new home entry disabled',
       install: () => { setHabitationAdmissions(false); return () => setHabitationAdmissions(true); },
+    };
+  }
+  if (kind === 'rich-no-fatal-hold') {
+    return {
+      spec: label,
+      summary: 'current dynamics with fatal injuries no longer held at zero: passive recovery can still run before death is processed. Wolf damage, healing rates and every other mechanic stay as they are. Below rules version 6 it changes nothing',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, fatal-injury hold off';
+      },
+      install: () => {
+        setFatalHold(false);
+        return () => setFatalHold(true);
+      },
     };
   }
   if (kind === 'rich-no-defence') {
