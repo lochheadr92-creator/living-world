@@ -1,21 +1,26 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-18
+Updated: 2026-10-22
 
 A continuation guide for this checkout. The repository and the current Git state are authoritative; this is a map, not a
 replacement for them.
 
 ## Where things stand
 
-**Household food preparation is built, measured and on a pushed branch.** The previous pass (Stage 0 rules versioning and
-the CLI rules-version fix) is merged into `main` and is not reopened below.
+**Wolf defence is built, fixed and committed on this branch.** This checkout is the independent `claude/wolf-defence-v3`
+line, cut from `main` at `1a13408`. Rules version 3 here means the spear and the active defence, and nothing else. What it
+is, the staged and autonomous evidence, and the version-number collision with main are written down in
+`docs/WOLF_DEFENCE.md` - read that first. The rest of this file is history from the household-preparation pass and other
+earlier work; it records what was true then, not what is true now.
 
-- Checkout: `C:\dev\Claude Experiment\living-world`, branch `claude/household-preparation-v2`, cut from `main` at `5b7a941`.
-- Integration branch: `main` at `5b7a941`, which carries the merge `e81aad4` (pull request #17) and everything before it.
-- The working tree is clean. One ignored artifact directory, `gates_rich_out/`, remains ignored (`.gitignore`).
-- **Pull request [#18](https://github.com/lochheadr92-creator/living-world/pull/18)** is open against `main`. Nothing
-  is merged: `main` is still at `5b7a941`. See "Integration" at the end of this file for the two open acceptance
-  conditions.
+- Checkout: `C:\dev\Claude Experiment\living-world`, branch `claude/wolf-defence-v3`.
+- Committed in this pass: `a5157f8` (a spear, wanted only by somebody who has met a wolf), `b204cb7` (rules version 3:
+  an armed adult can stand and drive a wolf off), `a99fbfd` (the standoff fix: the wolf hesitates before somebody squared
+  up to it, the defender holds her ground, ATTEMPT_TICKS measured down to 10). Before version 3 existed, `b0dd770`
+  recorded the version-2 continuation reference, including a `v2-wolves` case - old behaviour, new instruments.
+- Working tree: clean. Evidence: `encounters_out/` (staged encounters comparison, 40 seeds) and `scripts/encounters.ts`.
+- The branch has not been pushed since `a99fbfd`; main has moved past this line (habitation as its version 3, wolf
+  defence integrated as its version 4). The two lines' version-3 saves are not interchangeable - see `docs/WOLF_DEFENCE.md`.
 
 ## What inhabitants can now do
 
