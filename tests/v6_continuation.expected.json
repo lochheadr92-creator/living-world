@@ -1,0 +1,33 @@
+{
+  "source": "b050816; fatal-injury finality on main, before household shelter plans",
+  "saved": {
+    "hash": "f312a862",
+    "deep": "565662798077a31e",
+    "alive": 28,
+    "plans": {
+      "stock": 14,
+      "tool": 2,
+      "repair": 1
+    },
+    "homeFood": 153,
+    "storedFood": 51,
+    "indoors": 4,
+    "solidHomes": 4,
+    "homeSites": 3
+  },
+  "continued": {
+    "hash": "544e0f28",
+    "deep": "858217a0f62a4dad",
+    "alive": 28,
+    "plans": {
+      "stock": 10,
+      "tool": 4,
+      "repair": 2
+    },
+    "homeFood": 57,
+    "storedFood": 17,
+    "indoors": 0,
+    "solidHomes": 5,
+    "homeSites": 2
+  }
+}
