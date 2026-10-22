@@ -23,6 +23,21 @@ export function setWaryCheck(fn: (world: World, a: Animal, p: Person) => boolean
   waryCheck = fn;
 }
 
+/**
+ * Whether this person is, at this instant, squared up to THIS wolf with a spear in their hands (defence.ts, rules
+ * version 3). A wolf does not take its free bite on somebody who is facing it: it hesitates while the exchange is
+ * settled, which takes at most the length of one attempt (ATTEMPT_TICKS, about ten ticks), and then either it has been
+ * driven off or the defence has failed and the next tick it bites after all. That is a standoff with an outcome, not
+ * protection: without it the wolf closes faster than anybody can set themselves, bites first, and breaks off by its
+ * own rule, so no defence could ever be resolved at all - which is what forty staged encounters showed.
+ *
+ * Registered rather than imported, for the same reason as `waryCheck`. Null until something registers it.
+ */
+let facingCheck: ((world: World, a: Animal, p: Person) => boolean) | null = null;
+export function setFacingCheck(fn: (world: World, a: Animal, p: Person) => boolean): void {
+  facingCheck = fn;
+}
+
 export function makeWolf(world: World, x: number, y: number, type: Animal['type'] = 'wolf'): Animal {
   const a: Animal = {
     ent: 'animal',
@@ -415,6 +430,7 @@ export function updateWildlife(world: World): void {
           break;
         }
         moveWolf(world, a, t.x, t.y, d < 6 ? 0.15 : 0.1);
+        if (d <= 1.2 && a.cooldown === 0 && facingCheck && facingCheck(world, a, t)) break; // squared up to it: it hesitates
         if (d <= 1.2 && a.cooldown === 0) {
           bite(world, a, t);
           if (t.health > 0 && t.health < 40 && !safeFromWolf(world, t) && t.pose !== 'run') {

@@ -35,7 +35,7 @@ import { runsRulesVersion } from './rulesversion';
 import { dullness, toolOf, wearTool } from './tools';
 import type { Animal, Person, Tool, World } from './types';
 import { hyp } from './util';
-import { isThreat, setWaryCheck } from './wildlife';
+import { isThreat, setFacingCheck, setWaryCheck } from './wildlife';
 
 /** the rules version at which wolf defence starts; nothing here applies to a world below it */
 export const DEFENCE_FROM_VERSION = 3;
@@ -61,8 +61,13 @@ export const THREAT_NEAR = 5.5;
  * probe ended with the wolf already going; at 6 they resolve.
  */
 export const COME_FROM = 6;
-/** ticks of actual jabbing before it is settled either way */
-export const ATTEMPT_TICKS = 34;
+/**
+ * Ticks of actual jabbing before it is settled either way. Short, and measured rather than chosen: a wolf closes the
+ * last tile in about seven ticks and bites at 1.2, so a longer attempt simply means the wolf gets there first and the
+ * defence never resolves at all. At 34 every one of forty staged encounters ended with the defender bitten before she
+ * could try.
+ */
+export const ATTEMPT_TICKS = 10;
 /** ticks of wear a spear takes from one attempt, win or lose (TOOL_DEFS.spear.wear a tick) */
 export const WEAR_TICKS = 40;
 /** how long a driven-off wolf keeps away from the person it was driven off: a quarter of a day */
@@ -250,8 +255,12 @@ export function defenceOptions(ctx: Ctx): void {
           targetType: 'animal',
           tx: w.x,
           ty: w.y,
-          spotX: w.x,
-          spotY: w.y,
+          // Stand where you are and face it. The spot is the defender's OWN place, not the wolf's, so the activity
+          // enters its working phase at once and the handler below decides whether to wait or to follow. Walking to
+          // where a wolf WAS is how every one of forty staged encounters ended with the defender bitten in transit:
+          // the two close on each other, she arrives at an empty patch of grass, and it has already bitten and gone.
+          spotX: p.x,
+          spotY: p.y,
           utility: sc.total,
           // The walk is the attempt. `minCommit` 30 let the ordinary "something better came up" rule take people off
           // the moment they set out, so most attempts never reached the wolf; 120 covers the walk and the jabbing, and
@@ -284,9 +293,23 @@ export function driveOff(world: World, a: Animal, p: Person): void {
 /** Is this wolf keeping clear of that person? Read by `pickPrey`, which is the one place a wolf chooses somebody. */
 export const waryOf = (world: World, a: Animal, p: Person): boolean => a.wary !== undefined && a.wary > world.tick && a.waryOf === p.id;
 
-// wildlife.ts asks this when a wolf chooses somebody; it is registered rather than imported, because that module is
-// loaded far earlier than this one (see `setWaryCheck` there)
+/**
+ * Is this person squared up to THIS wolf right now - spear in hand, attempt under way, within reach? A wolf hesitates
+ * rather than taking its free bite while that is true (wildlife.ts `setFacingCheck`), for at most the length of one
+ * attempt. It is deliberately narrow: the activity must be a defence, it must be AGAINST this animal, it must have
+ * reached the working phase rather than still be walking, and there must still be a usable spear in hand.
+ */
+export function facingWolf(world: World, a: Animal, p: Person): boolean {
+  if (!defendsWolves(world)) return false;
+  const act = p.activity;
+  if (!act || act.kind !== 'defend' || act.targetId !== a.id || act.phase !== 'work') return false;
+  return spearOf(world, p) !== null;
+}
+
+// wildlife.ts asks these when a wolf chooses somebody and when it would bite; they are registered rather than
+// imported, because that module is loaded far earlier than this one (see `setWaryCheck` there)
 setWaryCheck(waryOf);
+setFacingCheck(facingWolf);
 
 function resolve(world: World, p: Person, a: Animal, act: { data: Record<string, any> }): WorkResult {
   const spear = spearOf(world, p);
@@ -366,7 +389,13 @@ registerHandler('defend', {
     const d = hyp(wolf.x - p.x, wolf.y - p.y);
     faceToward(p, wolf.x, wolf.y);
     if (d > REACH) {
-      // it moved: follow it as far as is reasonable, and no further
+      const prev = (a.data.lastDist as number) ?? d;
+      a.data.lastDist = d;
+      // It is coming to her. Standing still IS the action - walking out to meet a wolf that is already on its way only
+      // means meeting it half-way, in the open, mid-stride. She waits, facing it, and the attempt begins when it
+      // arrives. A wolf will not simply stand off: it is stalking somebody, so this ends one way or the other.
+      if (d < prev - 1e-6 && d <= COME_FROM) return 'continue';
+      // it is not coming: follow it as far as is reasonable, and no further
       if (d > GIVE_UP || (a.data.tries as number) >= 2) {
         p.cooldowns['defend:' + wolf.id] = world.tick + RETRY_COOLDOWN;
         return 'fail:it kept out of reach';
