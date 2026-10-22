@@ -503,9 +503,16 @@ replaced fail against the looser one.
 
 The limitation: that day-0 rule leaves **38 of 100 people unknown** in a Large world, because there are 38 households and only
 22 lean-tos at day 0, so 16 households have no home yet. Those 38 appear in 837 of 1338 pair-events, which is most of the
-contact data, and they are excluded from every camp-specific denominator. The rule was applied as written and nothing was
-re-defined to improve the coverage; whether to keep it, or to assign the homeless by the camp their household was founded at,
-is a measurement decision to take before the first real ensemble, not during one.
+contact data, and they are excluded from every camp-specific denominator.
+
+**DECIDED (2026-10-22, option A):** each household is now assigned to the camp it was founded at, captured at the moment of
+formation (`src/sim/cohortcapture.ts` — worldgen's initial households at the camp being laid out, later arrivals at the camp
+they arrive at), and the day-0 cohort rule uses that founding camp first, falling back to the old nearest-home rule only for
+a household that was never captured (a staged scene or a hand-built test world). The measurement still freezes the map at
+day 0 and never re-assigns anybody; it still flags what it cannot know. Outputs are labelled **cohort v2**. The day-0
+coverage in a Large world is now complete: all 100 founders are known, the 16 homeless households at their founding camp
+rather than unknown, verified by `tests/stage4_cohort.test.ts` (which also holds the inertness contract: a world runs
+identically with the capture on and off, to the last field).
 
 The historical "all camps identical" rule is preserved. Its operational reading for this stage: every valid pair has `J = 1` at
 terminal day 12 with complete coverage. Intermediate-day logs are not proof of the terminal state, and all-empty or unknown camps are

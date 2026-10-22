@@ -6,6 +6,7 @@
 // frozen at day 0 and never re-assigns anybody, not on moving house, not on death.
 import { DAY } from '../../src/sim/constants';
 import { nearestHub } from '../../src/sim/settlements';
+import { campOfHousehold, UNKNOWN as NEVER_CAPTURED } from '../../src/sim/cohortcapture';
 import type { ContactRecord, OfferRecord } from '../../src/sim/transmission';
 import type { Person, World } from '../../src/sim/types';
 
@@ -17,10 +18,14 @@ import type { Person, World } from '../../src/sim/types';
  */
 export const UNKNOWN = -1;
 
-/** the camp a person's household home stands nearest to, or UNKNOWN when the household has no home standing */
+/** the camp a person's household was founded at, or the camp their household home stands nearest to when no founding camp
+ *  was ever captured (a staged scene or a hand-built test world), or UNKNOWN when neither exists */
 function cohortFromHome(world: World, p: Person, index: Map<string, number>): number {
   const hh = world.households.find((h) => h.id === p.hhId);
-  const home = hh?.homeId ? world.byId.get(hh.homeId) : undefined;
+  if (!hh) return UNKNOWN;
+  const founded = campOfHousehold(hh.id);
+  if (founded !== NEVER_CAPTURED) return founded;
+  const home = hh.homeId ? world.byId.get(hh.homeId) : undefined;
   if (!home || home.ent !== 'building') return UNKNOWN;
   const hub = nearestHub(world, home.x + home.w / 2, home.y + home.h / 2);
   return index.get(`${hub.x},${hub.y}`) ?? UNKNOWN;

@@ -17,6 +17,7 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { settlementCount } from '../src/sim/settlements';
 import { resetTransmissionProbe, setTransmissionProbe, teardownTransmissionProbe, transmissionData } from '../src/sim/transmission';
+import { resetCohortCapture } from '../src/sim/cohortcapture';
 import { UNKNOWN, contactsReport, extendCohorts, freezeCohorts, knowledgeReport, offersReport } from './stage4/metrics';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import type { World } from '../src/sim/types';
@@ -84,6 +85,7 @@ const dirty = (() => {
 const settings = currentWorldSettings(profile, seed, { immigration: false });
 setTransmissionProbe(true);
 resetTransmissionProbe();
+resetCohortCapture();
 const world: World = createWorld(settings);
 const cohort = freezeCohorts(world);
 const camps = settlementCount(world);
@@ -147,6 +149,7 @@ writeFileSync(
 const cover = (c: number | null): string => (c === null ? ' [no events]' : ` [known-cohort coverage ${Math.round(c * 100)}%]`);
 const L: string[] = [];
 L.push(`Stage 4 diagnostic slice - ${profile}/${seed}, ${days} day(s), rich, immigration off`);
+L.push(`cohort v2: each household is the camp it was founded at (captured at formation); a household never captured falls back to nearest home`);
 L.push(`HEAD ${head}, source content fingerprint ${dirty.contentFingerprint} (${dirty.trackedModified ?? '?'} tracked files modified, ${dirty.untrackedSource?.length ?? '?'} untracked source files)`);
 L.push(`command: ${result.provenance.command}`);
 L.push(`final tick ${world.tick}, state ${result.provenance.finalHash}, ${result.provenance.wallSeconds}s`);

@@ -1,9 +1,11 @@
 // The Stage 4 measures (scripts/stage4/metrics.ts): the cohort rule, and what a rate says when there is nothing to divide by.
 //
-// These are the conventions written down in docs/EMERGENCE.md before any run, and they are the ones most easily lost by a later
-// convenience: a camp someone moved away from is still their camp, somebody with no home at the snapshot is unknown forever
-// rather than guessed at from where they stand, death removes them from a denominator but not from the registry, and an empty
-// denominator is "not estimable" and never zero.
+// These tests build worlds by hand (testKit), so no household ever goes through worldgen and no founding camp is ever
+// captured (src/sim/cohortcapture.ts): they exercise the FALLBACK convention, which applies to any household that was
+// never captured: a camp someone moved away from is still their camp, somebody with no home at the snapshot is unknown
+// forever rather than guessed at from where they stand, death removes them from a denominator but not from the registry,
+// and an empty denominator is "not estimable" and never zero. In a real worldgen world the cohort rule is different and
+// precedes this: each household is the camp it was founded at (tests/stage4_cohort.test.ts).
 import { describe, expect, it } from 'vitest';
 import { createBuilding } from '../src/sim/buildings';
 import { addSettlement } from '../src/sim/settlements';

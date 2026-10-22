@@ -2,6 +2,7 @@ import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
 import { createBuilding } from './buildings';
 import { addItem, emptyLedger, snapshotInitial } from './economy';
 import { addToHousehold, createHousehold } from './households';
+import { captureHouseholdCamp } from './cohortcapture';
 import { ACCESS_CELL, observe, putBelief, waterBeliefId } from './knowledge';
 import { createPerson } from './people';
 import { relOf } from './relations';
@@ -788,6 +789,7 @@ function populate(world: World, gen: RNG, population: number, campX: number, cam
 
   specs.forEach((members, hIdx) => {
     const hh = createHousehold(world, gen);
+    captureHouseholdCamp(world, hh, campX, campY);
     households.push(hh);
     const home = hIdx < shelterCount && homes[hIdx].x >= 0 ? homes[hIdx] : null;
     let lean: Building | null = null;
