@@ -1,5 +1,6 @@
 import { newActivity } from './activities';
-import { freeInv, freeOf, preparingReserve, setToolWant } from './intent';
+import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
+import { explainsHousing } from './shelter';
 import { makesSpears } from './defence';
 import { isThreat } from './wildlife';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
@@ -476,10 +477,14 @@ function optSites(ctx: Ctx): void {
     const committed = p.commitments.some((c) => c.status === 'active' && c.siteId === b.id);
     // deliver what I am carrying. A promise outranks a plan of my own, so a promised delivery may still use material my own plan
     // had spoken for (the plan then says, truthfully, that it is short again); an unpromised errand may not.
+    // The second exception is a plan's OWN delivery: a shelter plan that spoke for four wood for THIS site must be able to see
+    // those four wood when the time comes to carry them (intent.ts planDeliveringTo). Without it the reservation that keeps the
+    // wood out of the fire would also keep it out of the hut, which is a deadlock the plan made for itself.
+    const ownPlan = planDeliveringTo(p, b.id) !== null;
     const items: Record<string, number> = {};
     let any = false;
     for (const k in b.need ?? {}) {
-      const have = committed ? (p.inv[k as ItemKind] ?? 0) : freeOf(p, k as ItemKind);
+      const have = committed || ownPlan ? (p.inv[k as ItemKind] ?? 0) : freeOf(p, k as ItemKind);
       const give = Math.min(have, unitsOf(b.need?.[k as ItemKind]));
       if (give > 0) {
         items[k] = give;
@@ -570,19 +575,49 @@ function optSites(ctx: Ctx): void {
   }
 }
 
+/**
+ * Why this household is not laying a home out, in one phrase, for the list of opportunities not taken.
+ *
+ * It exists because the gates below used to drop the housing question in SILENCE: a lone adult who will never lay out a
+ * hut, or a household that has not got a day's food by, showed a card with nothing about their home on it at all. The
+ * reason a person is NOT doing something is part of following them (README, "the reason each was not taken"), and the rule
+ * that actually stopped them is the honest thing to show.
+ *
+ * It cannot change a decision - a blocked entry has no utility, never enters `ctx.options`, and so is never ranked or
+ * chosen - but it is NOT free either: the list is part of the decision record, which is serialized and included in the
+ * deep state fingerprint. Adding an entry therefore changes saved state, which is why it is gated on the rules version
+ * (`explainsHousing`) exactly like a behavioural change, so that a version-6 world comes back as it was recorded.
+ */
+function noteHousingBlock(ctx: Ctx, type: BuildingType, reason: string): void {
+  if (!explainsHousing(ctx.world)) return;
+  addBlocked(ctx, 'plan_site', `Lay out a ${BUILD_DEF[type].label}`, 0, reason, 'build');
+}
+
 /** Decide to start a new building: shelter first, then a proper hut, then shared structures. */
 function optPlanBuild(ctx: Ctx): void {
   const { world, p, hh } = ctx;
   if (!hh || ctx.stage === 'child') return;
   if (world.settings.scene !== 'natural') return; // staged scenes stay exactly as staged
-  if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28) return;
+  const wantsHome = !ctx.home || ctx.home.type === 'lean_to';
+  if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28) {
+    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', ctx.drives.hunger > 28 ? 'too hungry to start a building' : 'too thirsty to start a building');
+    return;
+  }
   const tm = traitMods(p);
   const mySites = beliefsByKind(p, ['site']).filter((b) => b.hh === hh.id);
-  if (mySites.length > 0) return;
+  if (mySites.length > 0) {
+    // Not a dead end: the household has already started something, and the site's own card, the build and haul options and
+    // (from rules version 7) the shelter plan are where a viewer follows it from here.
+    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', `the household has already laid out a ${BUILD_DEF[(mySites[0].btype ?? 'hut') as BuildingType].label}`);
+    return;
+  }
   if (world.sites.filter((s) => s.hhId === hh.id).length > 0) return; // someone in my household already started one
   const rules = rulesOf(world);
   const anchor = settlementAnchor(ctx);
-  if (openSitesNear(world, anchor) >= rules.maxOpenSites) return;
+  if (openSitesNear(world, anchor) >= rules.maxOpenSites) {
+    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', 'too much already being built here at once');
+    return;
+  }
   const hs = hhState(ctx);
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
@@ -650,11 +685,24 @@ function optPlanBuild(ctx: Ctx): void {
     if (knowTrees) {
       const urgent = 22 + (hs.shortage < 0.6 ? 6 : 0) + 4 * Math.min(members, 3);
       tryPlan('lean_to', urgent, 'no shelter of our own yet');
-    }
+    } else noteHousingBlock(ctx, 'lean_to', 'does not know of three trees to cut');
   } else if (ctx.home.type === 'lean_to') {
+    // The conditions for a household in a lean-to to lay out a proper hut. They are UNCHANGED; what is new is that each one
+    // now says so when it is the one holding things up, instead of the whole question disappearing from the card.
     const secure = hs.foodStock >= 3 * members;
     if (secure && knowTrees && knowRocks && members >= 2 && world.tick > 1500) {
       tryPlan('hut', 11 + 4 * Math.min(members, 4) + 6 * (hs.shortage < 0.3 ? 1 : 0), 'to build a proper hut');
+    } else {
+      const why = !secure
+        ? `the household has only ${Math.floor(hs.foodStock)} food to hand and wants ${3 * members} before starting a hut`
+        : members < 2
+          ? 'a hut is a job for a household of two or more'
+          : !knowTrees
+            ? 'does not know of three trees to cut'
+            : !knowRocks
+              ? 'does not know where to break stone'
+              : 'too early in the settlement for a hut';
+      noteHousingBlock(ctx, 'hut', why);
     }
   }
   // shared storehouse, once the settlement has a few solid homes

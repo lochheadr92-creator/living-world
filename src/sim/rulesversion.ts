@@ -39,10 +39,15 @@ import type { Settings, World } from './types';
 // mood-ranking correction. Those saves stay with that revision; this build refuses them rather than running them as
 // version 4 or as version 6.
 // Version 6: a person already at zero health dies through the ordinary death path before passive recovery can undo it.
-export const CURRENT_RULES_VERSION = 6;
+// Version 7: HOUSEHOLD SHELTER PLANS. An adult whose household they believe has no proper home, and which has already laid
+// a site out for one, may take on an ordinary private plan to fetch that site's missing material and carry it there. The
+// whole of it is `src/sim/shelter.ts` plus the `shelter` plan kind in `src/sim/intent.ts`, every part gated on
+// `runsRulesVersion(world, 7)`. Laying out a site, building, ownership and habitation are unchanged; what changes is that
+// the material is now fetched on purpose instead of arriving by chance. Nothing else was retuned.
+export const CURRENT_RULES_VERSION = 7;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

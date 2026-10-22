@@ -17,6 +17,7 @@ import { setNightPlans, setProjectAsks } from '../../src/sim/intent';
 import { setLearning } from '../../src/sim/learning';
 import { setFatalHold } from '../../src/sim/lifecycle';
 import { setFoodPreparation } from '../../src/sim/provision';
+import { setShelterPlans } from '../../src/sim/shelter';
 import { setHabitationAdmissions } from '../../src/sim/habitation';
 import { defProbe, defReset, defSnapshot, setWolfDefence, spearOf } from '../../src/sim/defence';
 import { setTrades } from '../../src/sim/trade';
@@ -78,7 +79,11 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * everything that surrounds it. `rich-no-fatal-hold` keeps everything else about a rules-version-6 world and removes
  * only the rule that zero health is death before passive recovery; wolf damage, healing rates, defence, habitation
  * and preparation stay. Against a world older than version 6 it changes nothing, because such a world never held a
- * fatal injury. `rich-no-stock` keeps everything else about a rules-version-2 world
+ * fatal injury. `rich-no-shelter` keeps everything else about a rules-version-7 world and removes only the private plan
+ * to FETCH a household home site's missing material (shelter.ts): sites are still laid out exactly as before, building,
+ * ownership and habitation are untouched, and material carried for any other reason still arrives, so the arm isolates
+ * going and getting it on purpose from everything that surrounds it. Against a world older than version 7 it changes
+ * nothing, because nobody in such a world ever made that plan. `rich-no-stock` keeps everything else about a rules-version-2 world
  * and removes only household food preparation (provision.ts), so a run with it and a run without differ in that one behaviour and
  * nothing else; against a version-1 world it changes nothing, because such a world never had it. `rich-no-trades` keeps everything
  * else about a rich world and removes trades and their apprenticeship mechanism together (trade.ts, apprentice.ts); it does not
@@ -195,6 +200,20 @@ export function parseIntervention(specIn: string): Intervention {
       install: () => {
         setFatalHold(false);
         return () => setFatalHold(true);
+      },
+    };
+  }
+  if (kind === 'rich-no-shelter') {
+    return {
+      spec: label,
+      summary: 'current dynamics with household shelter plans removed: nobody goes and fetches the material their own household home site is short of. Laying the site out, building it, owning it and living in it are unchanged, and material carried for any other reason still arrives. Below rules version 7 it changes nothing',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, household shelter plans off';
+      },
+      install: () => {
+        setShelterPlans(false);
+        return () => setShelterPlans(true);
       },
     };
   }

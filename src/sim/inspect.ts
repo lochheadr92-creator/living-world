@@ -1,6 +1,6 @@
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
-import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType } from './constants';
+import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
@@ -24,7 +24,7 @@ import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
 import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
-import type { Activity, Entity, Intention, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
+import type { Activity, Building, Entity, Intention, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
 
 import { hyp } from './util';
@@ -319,6 +319,15 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
     text += ` ${put} of ${i.reserve ?? 0} unit${i.reserve === 1 ? '' : 's'} put by so far.`;
     if (i.reason) text += ` Why: ${i.reason}.`;
   }
+  // A household's home is the other plan whose sentence has to carry both, and for the same reason: a viewer following a
+  // household from needing a home to living in one has to be able to read WHY they need one (which for this kind is
+  // evidence about the household and its site, not a restatement of the goal) and HOW MUCH of its materials this person's
+  // own hands have actually carried there. Neither is guessed: `reason` is what the plan was adopted on and `worked` is
+  // credited only where material really moves into the site (intent.ts creditHauled).
+  if (i.kind === 'shelter') {
+    text += ` ${Math.round(i.worked)} unit${Math.round(i.worked) === 1 ? '' : 's'} carried there so far.`;
+    if (i.reason) text += ` Why: ${i.reason}.`;
+  }
   if (i.setAside > 0) text += ` Set aside ${i.setAside === 1 ? 'once' : `${i.setAside} times`} so far.`;
   return text + helpText(world, p, i);
 }
@@ -434,6 +443,22 @@ function householdName(world: World, id: number): string {
   return world.households.find((h) => h.id === id)?.name ?? 'nobody’s';
 }
 
+/**
+ * The household's home, and - when they have not got a proper one - WHY they are not building one.
+ *
+ * The reason is not recomputed or guessed here: it is read off the person's own last decision record, where the option
+ * layer put it (options_work.ts noteHousingBlock, rules version 7). It goes on this line because this is where a viewer
+ * already looks to find out where somebody lives, and a lean-to with no explanation is exactly the silence this is for.
+ * A household already in a hut or a house gets nothing extra.
+ */
+function homeLine(world: World, p: Person, homeB: Building | null): string {
+  const where = homeB ? `${BUILD_DEF[homeB.type].label} (${Math.round(homeB.condition)}% sound)` : 'no home yet';
+  if (homeB && isSolidHome(homeB.type)) return where;
+  const blocked = p.lastDecision?.blocked.find((b) => b.kind === 'plan_site');
+  if (!blocked || !blocked.blocked) return where;
+  return `${where} — ${blocked.blocked}`;
+}
+
 export function describePerson(world: World, id: number, opts: { opportunities?: boolean } = {}): PersonView | null {
   const e = world.byId.get(id);
   if (!e || e.ent !== 'person') return null;
@@ -530,7 +555,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     stage,
     household: hh ? hh.name : 'none',
     householdColor: hh ? hh.color : 0,
-    home: homeB && homeB.ent === 'building' ? `${BUILD_DEF[homeB.type].label} (${Math.round(homeB.condition)}% sound)` : 'no home yet',
+    home: homeLine(world, p, homeB && homeB.ent === 'building' ? homeB : null),
     health: p.health,
     illness: describeIllness(world, p),
     // in a rich world the bar shows the mood that counts (needs plus what has happened to them): 70 is the usual, as a level of 0 is

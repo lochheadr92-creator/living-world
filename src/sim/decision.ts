@@ -11,6 +11,7 @@ import { MIN_COMMIT, REVIEW_EVERY, SWITCH_MARGIN } from './constants';
 import { noteFailure, countBeliefs } from './knowledge';
 import { hashUnit } from './rng';
 import { fleeRadius, makeCtx } from './optutil';
+import { explainsHousing } from './shelter';
 import { indoorHome } from './habitation';
 import { probe, probeWander } from './probe';
 import type { Ctx, Option } from './optutil';
@@ -114,7 +115,12 @@ function because(o: Option, plan: Intention | null = null, trade = ''): string {
 
 function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string, why?: string): void {
   const alts = ranked.filter((o) => o !== chosen).slice(0, 4).map(summarize);
-  const blockedRaw = ctx.blocked.slice(0, 40);
+  // The record keeps only the first six blocked options, and the housing question lands late in a long list because
+  // `optPlanBuild` runs near the end. "Why is this household not building?" is the one a viewer most often wants, so from
+  // rules version 7 it is moved to the front of the recorded list. Gated on the version (`explainsHousing`): a world below
+  // it records exactly the list, in exactly the order, that it always did.
+  const housing = (o: Option): boolean => o.kind === 'plan_site' && o.targetId === 0;
+  const blockedRaw = explainsHousing(world) ? [...ctx.blocked.filter(housing), ...ctx.blocked.filter((o) => !housing(o))].slice(0, 40) : ctx.blocked.slice(0, 40);
   p.lastDecision = {
     tick: world.tick,
     trigger,

@@ -309,7 +309,7 @@ export type CommitmentStatus = 'active' | 'done' | 'broken' | 'cancelled' | 'exp
 export interface Intention {
   id: number;
   /** the family of plan; each kind knows how to find its next step and when it is finished */
-  kind: 'night' | 'tool' | 'repair' | 'stock';
+  kind: 'night' | 'tool' | 'repair' | 'stock' | 'shelter';
   /** what they mean to bring about, in their own terms */
   goal: string;
   since: number;
@@ -319,7 +319,7 @@ export interface Intention {
   /** the step being worked on now, in plain words. Display only: nothing decides anything by reading this. */
   step: string;
   /** what the step actually is. This, not the wording of `step`, is the contract the decision code matches on. */
-  stepKind: 'drink' | 'eat' | 'goto' | 'stay' | 'get' | 'make' | 'mend' | 'forage' | 'store' | 'none';
+  stepKind: 'drink' | 'eat' | 'goto' | 'stay' | 'get' | 'make' | 'mend' | 'forage' | 'store' | 'deliver' | 'none';
   /** for a 'get' step, the material being fetched */
   stepItem: ItemKind | null;
   /** the place the step is about (a shelter's id), or 0 when it is about no particular place */

@@ -17,6 +17,16 @@ import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
 import { recentFailure } from './knowledge';
 import {
+  SHELTER_BATCH,
+  believesHoused,
+  ownHomeBeliefFor,
+  ownHomeSiteBelief,
+  plansShelter,
+  remembersNeed,
+  shelterWanted,
+  shortText,
+} from './shelter';
+import {
   CARRY_TO_STORE,
   foodInBelief,
   foodToStore,
@@ -249,6 +259,7 @@ function stepFor(ctx: Ctx, i: Intention): Step {
   if (i.kind === 'tool') return toolStep(ctx, i);
   if (i.kind === 'repair') return repairStep(ctx, i);
   if (i.kind === 'stock') return stockStep(ctx, i);
+  if (i.kind === 'shelter') return shelterStep(ctx, i);
   return nextStep(ctx);
 }
 
@@ -290,6 +301,7 @@ function projectOutcome(world: World, p: Person, i: Intention): { status: 'done'
     return null;
   }
   if (i.kind === 'stock') return stockOutcome(world, p, i);
+  if (i.kind === 'shelter') return shelterOutcome(world, p, i);
   if (i.kind === 'repair') {
     const b = ownHomeBelief(p);
     if (!b) return { status: 'dropped', reason: 'there is no home of theirs left to mend' };
@@ -562,6 +574,112 @@ function toolWanted(ctx: Ctx): { tool: ToolKind; wants: Partial<Items> } | null 
 }
 
 /** Does their own home need mending, as far as they know, with the material not yet to hand? */
+/**
+ * A household's home has three states and no fourth, and which one it is in depends only on what this person remembers of
+ * the site and what they are carrying:
+ *
+ *   the site (as remembered) still wants something they are not carrying   ->  `get` it
+ *   they are carrying what it wants                                        ->  `deliver` it, by the ORDINARY site haul
+ *   the site (as remembered) wants nothing                                 ->  nothing for the plan to fetch; the ordinary
+ *                                                                              build option is what finishes it
+ *
+ * The plan RE-AIMS every time this runs: `wants` is set from what the site was last seen to need, so a plan that has just
+ * delivered its wood goes after the stone instead of hoarding wood the site no longer wants. That is also what keeps the
+ * material reservation (`freeOf`) honest - a plan speaks for one trip's worth of one thing it is actually going to fetch.
+ *
+ * The site is looked up afresh from this person's beliefs each time, so one that has been finished or abandoned simply stops
+ * being the target and `shelterOutcome` ends the plan with the reason.
+ */
+function shelterStep(ctx: Ctx, i: Intention): Step {
+  const { p, world } = ctx;
+  const site = ownHomeSiteBelief(p);
+  if (!site) return { kind: 'none', target: 0, item: null, step: 'find the site again', key: null, blocked: 'no home site of their own that they know of' };
+  const what = BUILD_DEF[(site.btype ?? 'hut') as BuildingType].label;
+  const need = remembersNeed(site);
+  const kinds = Object.keys(need) as ItemKind[];
+  if (!kinds.length) {
+    // Nothing left to fetch, as they last saw it. The plan does not finish here - the hut is not built - and it does not
+    // pretend to be doing something: it says so, and the ordinary build option is what gets on with it.
+    i.wants = {};
+    return { kind: 'none', target: site.id, item: null, step: `the ${what} has its materials; it wants building`, key: null, blocked: '' };
+  }
+  // Re-aim at the first thing it wants, one trip's worth. The order is the site's own, which is the recipe's.
+  const k = kinds[0];
+  const take = Math.min(SHELTER_BATCH, Math.ceil(need[k] ?? 0));
+  if ((i.wants[k] ?? 0) !== take || Object.keys(i.wants).length !== 1) i.wants = { [k]: take } as Partial<Items>;
+  const short = stillNeededFor(p, i);
+  const lack = short[k] ?? 0;
+  if (lack > 0) {
+    // Somebody may have promised to bring it. That changes nothing about the step - the material is not here, and they may
+    // still fetch it themselves - but the step says so, because it is the truth about what they are waiting on.
+    const owed = outstandingForPlan(world, p.id, k, i.id);
+    const from = owed > 0 ? planHelp(world, p, i).filter((h) => h.item === k && h.owed > 0).map((h) => h.who) : [];
+    const also = owed > 0 ? ` (${from.length ? from.join(' and ') : 'someone'} promised ${owed}, not yet delivered)` : '';
+    return { kind: 'get', target: 0, item: k, step: `get ${lack} ${k} for the ${what} (it wants ${shortText(need)})${also}`, key: null, blocked: '' };
+  }
+  return { kind: 'deliver', target: site.id, item: k, step: `take ${take} ${k} to the ${what}`, key: `haul:${site.id}`, blocked: '' };
+}
+
+/**
+ * Has a household's home come to something? Judged on what this person believes, and never on the world behind their back.
+ *
+ *  * done - they believe their household now has a solid home, AND their own hands carried some of its materials. Someone
+ *    else's work finishing the hut is not their achievement, so it ends the plan without being credited to them.
+ *  * dropped - the rules stopped running this behaviour under the plan's feet (the lab switched it off at a fork, so an
+ *    ablation really is an ablation); the site is gone from their beliefs; or the time ran out, in which case the reason
+ *    says what the SITE still wanted when they last saw it, which is the fact a viewer wants, not what the pack lacks.
+ */
+function shelterOutcome(world: World, p: Person, i: Intention): { status: 'done' | 'dropped'; reason: string } | null {
+  if (!plansShelter(world)) return { status: 'dropped', reason: 'fetching for the household home is no longer part of these rules' };
+  if (believesHoused(p)) {
+    const what = BUILD_DEF[(ownHomeBeliefFor(p)?.btype ?? 'hut') as BuildingType].label;
+    return i.worked > 0
+      ? { status: 'done', reason: `the household has a ${what}, and they carried ${Math.round(i.worked)} of its materials` }
+      : { status: 'dropped', reason: `the household got a ${what} without their carrying anything to it` };
+  }
+  const site = ownHomeSiteBelief(p);
+  if (!site) return { status: 'dropped', reason: 'the site they were fetching for is no longer one they know of' };
+  if (world.tick > i.until) {
+    const need = remembersNeed(site);
+    const what = BUILD_DEF[(site.btype ?? 'hut') as BuildingType].label;
+    const left = Object.keys(need).length ? `it still wants ${shortText(need)}` : 'it still wants building';
+    return i.worked > 0
+      ? { status: 'dropped', reason: `carried ${Math.round(i.worked)} to the ${what}, but ${left} and the time is up` }
+      : { status: 'dropped', reason: `never got anything to the ${what} (${left})` };
+  }
+  return null;
+}
+
+/**
+ * Is this person's own live plan asking them to carry material to THIS site right now?
+ *
+ * It exists for one exception, and it is the same exception a promise already has (options_work.ts optSites): material a
+ * plan has spoken for is not spare - that is the whole point of `wants`, and it is what keeps a wanted plank out of the
+ * fire - but it must not be hidden from THE PLAN'S OWN delivery. Without this the plan reserves four wood and then cannot
+ * see them when the time comes to carry them, which is a deadlock of its own making.
+ */
+export function planDeliveringTo(p: Person, siteId: number): Intention | null {
+  if (!siteId) return null;
+  for (const i of p.intentions) {
+    if (i.status !== 'active' || i.stepKind !== 'deliver' || i.stepTarget !== siteId) continue;
+    return i;
+  }
+  return null;
+}
+
+/**
+ * Credit material really put into a home site to the shelter plan it served, at the one place material actually moves into
+ * a site (act_resource.ts, the haul handler). Without this a plan could call itself finished because the household happens
+ * to have a hut - which is also true when a neighbour built it.
+ */
+export function creditHauled(p: Person, siteId: number, units: number): void {
+  if (units <= 0 || !siteId || !p.intentions.length) return;
+  for (const i of p.intentions) {
+    if (i.status !== 'active' || i.kind !== 'shelter' || i.aboutId !== siteId) continue;
+    i.worked += units;
+  }
+}
+
 function repairWanted(ctx: Ctx): { wants: Partial<Items>; aboutId: number } | null {
   const b = ownHomeBelief(ctx.p);
   if (!b || (b.cond ?? 100) >= 55) return null;
@@ -818,6 +936,47 @@ function adoptProject(ctx: Ctx): Intention | null {
     return made;
   }
 
+  // A HOME COMES BEFORE A ROOF OR AN AXE (rules version 7; `shelterWanted` returns null in any world below it, so
+  // everything after this point is the older path, unchanged). The precedence is deliberate and narrow: it applies only to a
+  // household that this person believes has no proper home AND has already laid a site out for one, and when the plan is on
+  // its cooldown the older projects are reached exactly as they always were. Mending the roof of a lean-to while the hut
+  // that would replace it stands waiting for its stone is the wrong way round.
+  const shelter = onCooldown('shelter') ? null : shelterWanted(ctx);
+  if (shelter) {
+    const made: Intention = {
+      id: world.nextId++,
+      kind: 'shelter',
+      goal: `get the household's ${BUILD_DEF[shelter.what].label} built`,
+      since: world.tick,
+      until: shelter.until,
+      status: 'active',
+      reason: shelter.why,
+      setAside: 0,
+      aboutId: shelter.aboutId,
+      wants: shelter.wants,
+      makes: '',
+      sheltered: 0,
+      worked: 0,
+      ended: 0,
+      step: '',
+      stepKind: 'none',
+      stepTarget: 0,
+      stepItem: null,
+      stepKey: null,
+      blocked: '',
+    };
+    const st = stepFor(ctx, made);
+    made.step = st.step;
+    made.stepKind = st.kind;
+    made.stepTarget = st.target;
+    made.stepItem = st.item;
+    made.stepKey = st.key;
+    made.blocked = st.blocked;
+    p.intentions.push(made);
+    addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
+    return made;
+  }
+
   const roof = repairWanted(ctx);
   const tool = roof ? null : toolWanted(ctx);
   if (!roof && !tool) return null;
@@ -888,6 +1047,10 @@ export function servesIntent(i: Intention | null, o: Option): boolean {
     case 'store':
       // putting goods down at THIS store, not at the storehouse or at a site
       return o.kind === 'deposit' && o.targetId !== 0 && o.targetId === i.stepTarget;
+    case 'deliver':
+      // carrying material to THIS site, not to any site that happens to want the same thing. The step also names the
+      // option by key (`haul:<siteId>`), which is matched before this switch is reached; this is the belt to that brace.
+      return o.kind === 'haul' && o.targetId !== 0 && o.targetId === i.stepTarget;
     default:
       return false;
   }

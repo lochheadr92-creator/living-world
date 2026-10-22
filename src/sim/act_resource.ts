@@ -30,7 +30,7 @@ import { contestLost, creditContribution, fulfillCommitment } from './social';
 import { fellTree } from './sources';
 import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
-import { creditStocked } from './intent';
+import { creditHauled, creditStocked } from './intent';
 import { isFoodKind } from './provision';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp, hyp } from './util';
@@ -501,6 +501,9 @@ registerHandler('haul', {
       if (m > 0) a.data.moved = { ...(a.data.moved ?? {}), [k]: ((a.data.moved ?? {})[k] ?? 0) + m };
     }
     observe(world, p, site);
+    // credit a shelter plan at the one place material actually moves into a site, so a plan can only call itself finished
+    // on what this person's own hands carried (intent.ts creditHauled; it does nothing for any other kind of plan)
+    if (moved > 0) creditHauled(p, site.id, moved);
     if (moved > 0) site.lastWorkTick = world.tick;
     if (p.errand && p.errand.targetId === site.id) p.errand = null;
     if (moved > 0) {
