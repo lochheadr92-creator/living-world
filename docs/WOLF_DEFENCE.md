@@ -1,5 +1,10 @@
 # Wolf defence (rules version 3 on this branch)
 
+> **STATUS: SUPERSEDED (2026-10-22).** This line is closed. Main integrated the wolf defence it
+> built as rules version 4 together with habitation, and versions 6 and 7 have followed, so the
+> feature is the standard on main. This file is kept as the collision record. Do not continue
+> work on this branch; main's `docs/WOLF_DEFENCE.md` points back here.
+
 This is the independent `claude/wolf-defence-v3` line, cut from `main` at `1a13408` before main's
 habitation and wolf-integration work existed. **Rules version 3 on THIS branch means the spear and
 the active defence, and nothing else** - no habitation, no indoor refuge. Main later used the same

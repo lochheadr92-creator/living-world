@@ -7,7 +7,8 @@ replacement for them.
 
 ## Where things stand
 
-**Wolf defence is built, fixed and committed on this branch.** This checkout is the independent `claude/wolf-defence-v3`
+**Wolf defence is built, fixed and committed on this branch, and the branch is now closed as
+superseded (2026-10-22).** This checkout is the independent `claude/wolf-defence-v3`
 line, cut from `main` at `1a13408`. Rules version 3 here means the spear and the active defence, and nothing else. What it
 is, the staged and autonomous evidence, and the version-number collision with main are written down in
 `docs/WOLF_DEFENCE.md` - read that first. The rest of this file is history from the household-preparation pass and other
@@ -19,8 +20,9 @@ earlier work; it records what was true then, not what is true now.
   up to it, the defender holds her ground, ATTEMPT_TICKS measured down to 10). Before version 3 existed, `b0dd770`
   recorded the version-2 continuation reference, including a `v2-wolves` case - old behaviour, new instruments.
 - Working tree: clean. Evidence: `encounters_out/` (staged encounters comparison, 40 seeds) and `scripts/encounters.ts`.
-- The branch has not been pushed since `a99fbfd`; main has moved past this line (habitation as its version 3, wolf
-  defence integrated as its version 4). The two lines' version-3 saves are not interchangeable - see `docs/WOLF_DEFENCE.md`.
+- The branch is pushed as `origin/claude/wolf-defence-v3` and is **closed as superseded**: main moved past this line
+  (habitation as its version 3, wolf defence integrated as its version 4, then versions 6 and 7). The two lines'
+  version-3 saves are not interchangeable - see `docs/WOLF_DEFENCE.md`. No further work belongs on this branch.
 
 ## What inhabitants can now do
 
