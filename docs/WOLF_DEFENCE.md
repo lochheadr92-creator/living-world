@@ -34,6 +34,11 @@ The original checkout at `C:\dev\Claude Experiment\living-world` still contains 
 the same number for different rules. Keep those saves with that source revision; no automatic
 conversion or reliable provenance inference from an unmarked save is claimed here.
 
+That independent line is **superseded and closed** (2026-10-22). The wolf defence it built on
+its own is this integration; its own record of what its version 3 meant, and of this collision,
+is committed on that branch as `6360d2d` (`docs/WOLF_DEFENCE.md` there, still reachable as
+`origin/claude/wolf-defence-v3`).
+
 The separate `wolf-habitation-integration` candidate also contains a version-5 mood correction.
 It is preserved there and is not included in this branch. The two review fixes were first applied
 and verified in that candidate, then included in this clean integration. No existing work was reset.
