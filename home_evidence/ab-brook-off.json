@@ -1,0 +1,159 @@
+{
+  "what": "the household-to-home chain in an ordinary autonomous run; nothing staged, nobody told what to do",
+  "source": {
+    "rulesVersion": 7,
+    "currentRulesVersion": 7,
+    "dynamics": "rich",
+    "shelterPlans": false
+  },
+  "run": {
+    "seed": "brook",
+    "profile": "normal",
+    "settings": {
+      "immigration": false,
+      "harsh": false,
+      "scene": "natural"
+    },
+    "fromTick": 0,
+    "toTick": 19200,
+    "days": 8
+  },
+  "world": {
+    "alive": 28,
+    "households": 12,
+    "housedHouseholds": 9,
+    "solidHomes": 9,
+    "leanTos": 12,
+    "indoorNow": 0
+  },
+  "shelterPlansAcrossTheRun": {
+    "adopted": 0,
+    "ended": 0,
+    "done": 0,
+    "goneUpOn": 0,
+    "stillLive": 0,
+    "unitsCarriedByPlans": 0,
+    "endings": []
+  },
+  "homeSites": {
+    "laid": 16,
+    "finished": 14,
+    "lostUnfinished": 0,
+    "openAtTheEnd": [
+      {
+        "id": 4437,
+        "type": "hut",
+        "household": 952,
+        "status": "waiting for 1 stone",
+        "work": "422/520",
+        "delivered": "1 wood",
+        "stillWants": "1 stone"
+      },
+      {
+        "id": 5673,
+        "type": "hut",
+        "household": 933,
+        "status": "under construction",
+        "work": "512/520",
+        "delivered": "nothing",
+        "stillWants": "nothing"
+      }
+    ]
+  },
+  "followed": {
+    "household": "Moss (909)",
+    "members": [
+      911,
+      912,
+      913
+    ],
+    "startedIn": "a lean-to or no shelter of its own (every household begins without a solid home)",
+    "homeAtTheEnd": "hut #3095",
+    "builtBy": [
+      912
+    ],
+    "becameTheirHomeAtTick": 4959,
+    "insideItNow": [],
+    "unitsItsMembersCarried": 0,
+    "plans": {
+      "adopted": 0,
+      "done": 0,
+      "goneUpOn": 0
+    },
+    "chain": [
+      " 2513 [site] Moss household laid out hut #2101 at (45,42), wanting 8 wood, 4 stone; by person 911",
+      " 2708 [material] hut #2101 now holds 1 wood (was nothing); still wants 7 wood, 4 stone",
+      " 2827 [material] hut #2101 now holds 2 wood (was 1 wood); still wants 6 wood, 4 stone",
+      " 2863 [material] hut #2101 now holds 4 wood, 2 stone (was 2 wood); still wants 4 wood, 2 stone",
+      " 2864 [material] hut #2101 now holds 3 wood, 1 stone (was 4 wood, 2 stone); still wants 4 wood, 2 stone",
+      " 2898 [material] hut #2101 now holds 2 wood, 1 stone (was 3 wood, 1 stone); still wants 4 wood, 2 stone",
+      " 2926 [material] hut #2101 now holds 3 wood, 1 stone (was 2 wood, 1 stone); still wants 3 wood, 2 stone",
+      " 2948 [material] hut #2101 now holds 2 wood (was 3 wood, 1 stone); still wants 3 wood, 2 stone",
+      " 2974 [material] hut #2101 now holds 1 wood (was 2 wood); still wants 3 wood, 2 stone",
+      " 3007 [material] hut #2101 now holds nothing (was 1 wood); still wants 3 wood, 2 stone",
+      " 3044 [material] hut #2101 now holds 2 wood (was nothing); still wants 1 wood, 2 stone",
+      " 3212 [material] hut #2101 now holds 3 wood (was 2 wood); still wants 2 stone",
+      " 3327 [material] hut #2101 now holds 3 wood, 1 stone (was 3 wood); still wants 1 stone",
+      " 3328 [material] hut #2101 now holds 3 wood (was 3 wood, 1 stone); still wants 1 stone",
+      " 3366 [material] hut #2101 now holds 2 wood (was 3 wood); still wants 1 stone",
+      " 3413 [material] hut #2101 now holds 1 wood (was 2 wood); still wants 1 stone",
+      " 4861 [material] hut #2101 now holds 1 wood, 1 stone (was 1 wood); still wants nothing",
+      " 4862 [material] hut #2101 now holds 1 wood (was 1 wood, 1 stone); still wants nothing",
+      " 4896 [material] hut #2101 now holds nothing (was 1 wood); still wants nothing",
+      " 4959 [home] Moss household: home 910 -> 3095 (hut #3095)",
+      " 4959 [housed] Moss household now calls hut #3095 home — built by 912",
+      " 4959 [built] hut site #2101 finished as hut #3095",
+      " 6091 [enter] Delia (912) went into hut #3095 to sleep",
+      " 6193 [enter] Oren (911) went into hut #3095 to sleep",
+      " 6590 [exit] Delia (912) came out of hut #3095",
+      " 6723 [exit] Oren (911) came out of hut #3095",
+      " 6805 [enter] Delia (912) went into hut #3095 to sleep",
+      " 6983 [enter] Oren (911) went into hut #3095 to rest",
+      " 7076 [exit] Oren (911) came out of hut #3095",
+      " 7081 [exit] Delia (912) came out of hut #3095",
+      " 8492 [enter] Oren (911) went into hut #3095 to sleep",
+      " 8619 [enter] Silas (913) went into hut #3095 to sleep",
+      " 8718 [enter] Delia (912) went into hut #3095 to sleep",
+      " 9032 [exit] Oren (911) came out of hut #3095",
+      " 9151 [enter] Oren (911) went into hut #3095 to sleep",
+      " 9177 [exit] Silas (913) came out of hut #3095",
+      " 9265 [exit] Delia (912) came out of hut #3095",
+      " 9343 [enter] Silas (913) went into hut #3095 to sleep",
+      " 9458 [exit] Oren (911) came out of hut #3095",
+      " 9481 [exit] Silas (913) came out of hut #3095",
+      "10819 [enter] Delia (912) went into hut #3095 to sleep",
+      "10941 [enter] Oren (911) went into hut #3095 to sleep",
+      "11001 [enter] Silas (913) went into hut #3095 to sleep",
+      "11364 [exit] Delia (912) came out of hut #3095",
+      "11536 [exit] Silas (913) came out of hut #3095",
+      "11544 [enter] Silas (913) went into hut #3095 to rest",
+      "11839 [exit] Oren (911) came out of hut #3095",
+      "11857 [exit] Silas (913) came out of hut #3095",
+      "13261 [enter] Oren (911) went into hut #3095 to sleep",
+      "13382 [enter] Delia (912) went into hut #3095 to sleep",
+      "13506 [enter] Silas (913) went into hut #3095 to sleep",
+      "13835 [exit] Oren (911) came out of hut #3095",
+      "14105 [exit] Silas (913) came out of hut #3095",
+      "14134 [enter] Oren (911) went into hut #3095 to sleep",
+      "14212 [exit] Oren (911) came out of hut #3095",
+      "14251 [enter] Silas (913) went into hut #3095 to rest",
+      "14262 [exit] Delia (912) came out of hut #3095",
+      "14281 [exit] Silas (913) came out of hut #3095",
+      "15557 [enter] Silas (913) went into hut #3095 to sleep",
+      "15681 [enter] Delia (912) went into hut #3095 to sleep",
+      "15682 [enter] Oren (911) went into hut #3095 to sleep",
+      "16209 [exit] Oren (911) came out of hut #3095",
+      "16658 [exit] Delia (912) came out of hut #3095",
+      "16698 [exit] Silas (913) came out of hut #3095",
+      "18329 [enter] Delia (912) went into hut #3095 to sleep",
+      "18903 [exit] Delia (912) came out of hut #3095"
+    ]
+  },
+  "savedAndReloaded": {
+    "identical": true,
+    "hash": "6e62846f",
+    "hashAfter": "6e62846f",
+    "housedAfter": 9
+  },
+  "limits": "One run of one seed. It shows the chain is possible and that every link is recorded. It is NOT evidence that more households get housed, that anybody survives better, or that this happens in every world. The on/off ablation figures are in docs/HOUSEHOLD_HOME.md."
+}

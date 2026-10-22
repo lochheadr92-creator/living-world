@@ -1,0 +1,202 @@
+{
+  "url": "http://127.0.0.1:5287/",
+  "when": "2026-10-22T10:59:18.897Z",
+  "passed": 16,
+  "of": 16,
+  "results": [
+    {
+      "name": "an ordinary run produces a household shelter plan",
+      "pass": true,
+      "detail": {
+        "tick": 3247,
+        "version": 7,
+        "found": {
+          "who": 1118,
+          "name": "Cora",
+          "hh": 1116,
+          "site": 2302,
+          "goal": "get the household's hut built",
+          "step": "get 3 stone for the hut (it wants 3 stone)"
+        }
+      }
+    },
+    {
+      "name": "the card states the goal and the step",
+      "pass": true,
+      "detail": "What are they set on?Get the household's hut built. Step: get 3 stone for the hut (it wants 3 stone) — under way (Breaking stone). 0 units carried there so far. Why: the household is still in a lean-to, and their hut wants 3 stone. Still needs 3 stone."
+    },
+    {
+      "name": "the card states the grounds in the household own terms",
+      "pass": true,
+      "detail": "What are they set on?Get the household's hut built. Step: get 3 stone for the hut (it wants 3 stone) — under way (Breaking stone). 0 units carried there so far. Why: the household is still in a lean-to, and their hut wants 3 stone. Still needs 3 stone."
+    },
+    {
+      "name": "the words on the card are the state underneath",
+      "pass": true,
+      "detail": {
+        "goal": "get the household's hut built",
+        "step": "get 3 stone for the hut (it wants 3 stone)",
+        "reason": "the household is still in a lean-to, and their hut wants 3 stone",
+        "wants": {
+          "stone": 3
+        },
+        "site": 2302
+      }
+    },
+    {
+      "name": "the site card is the household own home site",
+      "pass": true,
+      "detail": {
+        "type": "hut",
+        "hh": 1116,
+        "status": "waiting for 3 stone",
+        "work": 162.19562317840828,
+        "total": 520,
+        "delivered": {
+          "wood": 5
+        },
+        "required": {
+          "wood": 8,
+          "stone": 4
+        }
+      }
+    },
+    {
+      "name": "the site card says what it is waiting for",
+      "pass": true,
+      "detail": "Hut (under construction)Marked out 1.3 min agoBuilding progress31%Work has paused for lack of 3 stone.Materials suppliedWood8 / 8Stone1 / 4Working nowLenaWill makeAt workMade here so farCan make hereForBrook householdStarted byAbelStatuswaiting for 3 stoneDelivered, not yet usedThe projectWhyA prope"
+    },
+    {
+      "name": "a household reaches a home of its own and goes inside it",
+      "pass": true,
+      "detail": {
+        "tick": 3516,
+        "got": {
+          "hh": 1103,
+          "name": "Briar",
+          "home": 2828,
+          "type": "hut",
+          "owner": 1103,
+          "builtBy": [
+            1105
+          ],
+          "inside": [
+            {
+              "id": 1106,
+              "name": "Emre",
+              "act": "sleep"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "the home card names the household it belongs to",
+      "pass": true,
+      "detail": "HutBuilt 17s agoA proper home with a small store.EmreBuilding progress31%Work has paused for lack of 3 stone.Materials suppliedWood8 / 8Stone1 / 4Working nowLenaWill makeAt workMade here so farCan make hereOwnerBriar householdIndoorsEmre: Sleeping inside the hutRoom for4 household membersStorage0/40"
+    },
+    {
+      "name": "the home card lists who is actually inside",
+      "pass": true,
+      "detail": {
+        "inside": [
+          {
+            "id": 1106,
+            "name": "Emre",
+            "act": "sleep"
+          }
+        ],
+        "card": "HutBuilt 17s agoA proper home with a small store.EmreBuilding progress31%Work has paused for lack of 3 stone.Materials suppliedWood8 / 8Stone1 / 4Working nowLenaWill makeAt workMade here so farCan make hereOwnerBriar householdIndoorsEmre: Sleeping inside the hutRoom for4 household membersStorage0/40 usedBuilt byMira (17s ago)HouseholdMira, Emre, Viktor, TheoCondition100%Contents"
+      }
+    },
+    {
+      "name": "ownership in the page is the ownership in the state",
+      "pass": true,
+      "detail": {
+        "owner": 1103,
+        "household": 1103
+      }
+    },
+    {
+      "name": "the feed recorded the home being finished for that household",
+      "pass": true,
+      "detail": "Mira finished a hut for the Briar household.17s ago | Arlo looked in on Emre, who had looked hungry, and brought 2 berries.25s ago | Cora made a hoe.27s ago | Petra marked out a hut for the Bramble household.31s ago | Arlo finished a lean-to for the Marsh household.38s ago | Milo kept a promise to A"
+    },
+    {
+      "name": "saving and loading keeps the chain",
+      "pass": true,
+      "detail": {
+        "equal": true,
+        "before": "afa8f7fc",
+        "after": "afa8f7fc",
+        "homeId": 2828,
+        "inside": [
+          "Emre"
+        ],
+        "version": 7
+      }
+    },
+    {
+      "name": "the same people are still inside after loading",
+      "pass": true,
+      "detail": [
+        "Emre"
+      ]
+    },
+    {
+      "name": "the reloaded page says the same thing",
+      "pass": true,
+      "detail": "HutBuilt 17s agoA proper home with a small store.EmreBuilding progress31%Work has paused for lack of 3 stone.Materials suppliedWood8 / 8Stone1 / 4Working nowLenaWill makeAt workMade here so farCan make hereOwnerBriar householdIndoorsEmre: Sleeping inside the hutRoom for4 household membersStorage0/40"
+    },
+    {
+      "name": "an unhoused household says why it is not building",
+      "pass": true,
+      "detail": [
+        {
+          "who": "Zia",
+          "id": 1112,
+          "label": "Lay out a hut",
+          "why": "the household has only 2 food to hand and wants 6 before starting a hut"
+        },
+        {
+          "who": "Milo",
+          "id": 1115,
+          "label": "Lay out a hut",
+          "why": "a hut is a job for a household of two or more"
+        },
+        {
+          "who": "Cora",
+          "id": 1118,
+          "label": "Lay out a hut",
+          "why": "the household has already laid out a hut"
+        },
+        {
+          "who": "Abel",
+          "id": 1119,
+          "label": "Lay out a hut",
+          "why": "the household has already laid out a hut"
+        },
+        {
+          "who": "Ines",
+          "id": 1124,
+          "label": "Lay out a hut",
+          "why": "too thirsty to start a building"
+        },
+        {
+          "who": "Tomas",
+          "id": 1127,
+          "label": "Lay out a hut",
+          "why": "too thirsty to start a building"
+        }
+      ]
+    },
+    {
+      "name": "the card says where the household lives and why it has nothing better",
+      "pass": true,
+      "detail": {
+        "shown": "Home: lean-to (77% sound) — the household has only 2 food to hand and wants 6 before starting a hut",
+        "expected": "the household has only 2 food to hand and wants 6 before starting a hut"
+      }
+    }
+  ]
+}

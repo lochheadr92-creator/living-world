@@ -23,7 +23,59 @@ is in [docs/DEVELOPMENT_POLICY.md](docs/DEVELOPMENT_POLICY.md), "Matching eviden
 Sections below that frame the project as a simulation only are superseded on that point alone;
 their measurements, review verdicts and status records stand exactly as written.
 
-## Current main — fatal injuries stay fatal
+## Current main — from needing a home to living in one
+
+Rules version 7. One complete, watchable situation: a household recognises it has no proper home, lays a site out, its
+members FETCH the materials on purpose, build, take ownership and move in — or meet an understandable reason they cannot
+finish. Contract, evidence and limits: [HOUSEHOLD_HOME.md](docs/HOUSEHOLD_HOME.md).
+
+**What already existed, and what was missing.** Most of the chain was built and correct: reading the household's shelter
+from what its members can see, laying out a lean-to or a hut, one site per household with no duplicate from a decision
+race, doing the work, `hh.homeId` on completion, and physically living in it (habitation, version 3). The gap was in the
+middle — delivery was only ever OPPORTUNISTIC. `optSites` offered to carry material to a site only when somebody already
+happened to be carrying what it needed; nothing made anybody go and get it. On seed `river` before the change, of 8 hut
+sites laid out, 6 finished, one sat untouched for five days and was abandoned, and two stood waiting at the end.
+
+**What changed.** `src/sim/shelter.ts` plus a `shelter` plan kind in `src/sim/intent.ts`: an ordinary private plan of the
+same shape as mending a roof, reading only the person's own beliefs, re-aiming at what the site was last seen to need, one
+material and one trip's worth at a time. The gathering, the carrying, the building, the ownership and the habitation are
+all the existing ones. Lab switch `rich-no-shelter` removes only the plan.
+
+**What a viewer can now follow.** The card's Home line says where the household lives and, when it has none, the rule
+stopping it (*"Home: lean-to (77% sound) — the household has only 2 food to hand and wants 6 before starting a hut"*).
+The plan line says the goal, the step, how much this person has actually carried there, and why they took it on. The site
+card says what it is waiting for; the home card names the owner and lists who is indoors; the feed records the finish.
+
+**Compatibility.** Everything is gated on `runsRulesVersion(world, 7)` and rich dynamics. The recorded "why not building"
+explanation is gated on the same version, because the decision record is serialized and deep-hashed — it changes saved
+state even though it changes nothing anybody does. Version-6 continuation is pinned by `tests/v6_continuation.expected.json`,
+recorded from `b050816` before any of this was written. The save format is unchanged; `Intention.kind` gains `'shelter'`
+and `stepKind` gains `'deliver'`, both additive. Goldens and the version-1/2/3/4/6 references were not re-recorded.
+
+**Verification.** `npx --no-install vitest run tests/household_home.test.ts` 48 tests; `npx --no-install vitest run` 944
+tests in 90 files; `npm run build`; `npx --no-install vite-node scripts/golden.ts` all fingerprints match;
+`git diff --check`. All passed. Three defects were found and fixed with tests during the work: the plan's own material
+reservation hid the material from its own delivery; a timed-out plan reported "it still wants nothing" because it read the
+pack rather than the site; and the new explanations changed the deep fingerprint of every world including authored ones.
+Page check `node scripts/browser/household_home_check.mjs http://127.0.0.1:5287/ home_evidence/page` — 16/16, on an
+ordinary autonomous world, with the screenshots looked at and not only asserted on.
+
+**The retained example.** `home_evidence/river.json` from `scripts/household_home.ts` (seed `river`, Normal, arrivals off,
+ticks 0–19,200). The Willow household laid out a hut at 5179; Ivy took a plan on the same tick; she and Basil fetched the
+wood and the stone; the hut became their home at 7709; Ivy's plan ended DONE, *"the household has a hut, and they carried 4
+of its materials"*; Basil's ended *"the household got a hut without their carrying anything to it"*; all four slept inside
+from 8425 on. Saved and reloaded byte-identical.
+
+**What is NOT claimed.** Four seeds at 8 days, with the switch on and off, housed 27 of 46 households against 28 of 45 —
+a wash, and no aggregate housing or survival benefit is claimed or was found. The claim is that the situation is
+followable and deliberate: 48 plans, 28 finished, 127 units of material carried to home sites on purpose, each with a
+recorded reason for how it ended. No ensemble was run; no acceptance baseline was recorded or replaced.
+
+**Unresolved.** A single-member household can never build a hut (`optPlanBuild` requires `members >= 2`, a rule that
+predates habitation). Four of twelve households on seed `river` stay in open lean-tos because of it. This change only
+makes that rule visible; changing it is a behavioural question for a separate task.
+
+## Previous main — fatal injuries stay fatal
 
 Rules version 6. When a person is already at zero health, `stepPerson` settles death through
 the existing `killPerson` path before `updateNeeds` can add passive recovery. New product

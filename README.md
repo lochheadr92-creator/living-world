@@ -183,6 +183,10 @@ The ordinary seeded world is the demonstration of natural behaviour.
 * Households choosing different projects: one breaks ground and sows, another lays out a hut, a third keeps the fire fed.
 * A builder waiting at a site (the small “!” badge, and the card saying exactly what is missing) until a friend turns up
   with planks — sawn at the yard a few minutes ago from logs somebody felled — then the house visibly rising.
+* A household in a lean-to laying out a hut, somebody of that household saying on their card that they mean to get it
+  built and going off for the stone it is short of, the hut rising, and the family sleeping inside it a few minutes later
+  — or the card saying which rule is stopping them, when it never gets that far
+  ([`docs/HOUSEHOLD_HOME.md`](docs/HOUSEHOLD_HOME.md)).
 * A load too big to carry in one go: someone fetches the cart, walks it out empty, loads it where the bricks are, and
   brings it back.
 * Two people reaching the last berry at once; the one who lost remembers it, and sometimes says so in the feed — and,

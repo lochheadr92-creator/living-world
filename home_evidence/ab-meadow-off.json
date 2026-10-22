@@ -1,0 +1,140 @@
+{
+  "what": "the household-to-home chain in an ordinary autonomous run; nothing staged, nobody told what to do",
+  "source": {
+    "rulesVersion": 7,
+    "currentRulesVersion": 7,
+    "dynamics": "rich",
+    "shelterPlans": false
+  },
+  "run": {
+    "seed": "meadow",
+    "profile": "normal",
+    "settings": {
+      "immigration": false,
+      "harsh": false,
+      "scene": "natural"
+    },
+    "fromTick": 0,
+    "toTick": 19200,
+    "days": 8
+  },
+  "world": {
+    "alive": 27,
+    "households": 10,
+    "housedHouseholds": 7,
+    "solidHomes": 7,
+    "leanTos": 11,
+    "indoorNow": 5
+  },
+  "shelterPlansAcrossTheRun": {
+    "adopted": 0,
+    "ended": 0,
+    "done": 0,
+    "goneUpOn": 0,
+    "stillLive": 0,
+    "unitsCarriedByPlans": 0,
+    "endings": []
+  },
+  "homeSites": {
+    "laid": 12,
+    "finished": 11,
+    "lostUnfinished": 0,
+    "openAtTheEnd": [
+      {
+        "id": 6472,
+        "type": "hut",
+        "household": 1037,
+        "status": "waiting for 2 wood, 4 stone",
+        "work": "32/520",
+        "delivered": "7 wood",
+        "stillWants": "4 stone"
+      }
+    ]
+  },
+  "followed": {
+    "household": "Juniper (997)",
+    "members": [
+      999,
+      1000
+    ],
+    "startedIn": "a lean-to or no shelter of its own (every household begins without a solid home)",
+    "homeAtTheEnd": "hut #5847",
+    "builtBy": [
+      999
+    ],
+    "becameTheirHomeAtTick": 13124,
+    "insideItNow": [],
+    "unitsItsMembersCarried": 0,
+    "plans": {
+      "adopted": 0,
+      "done": 0,
+      "goneUpOn": 0
+    },
+    "chain": [
+      " 7745 [site] Juniper household laid out hut #3776 at (50,38), wanting 8 wood, 4 stone; by person 999",
+      "11560 [material] hut #3776 now holds 2 wood, 1 stone (was nothing); still wants 6 wood, 3 stone",
+      "11920 [material] hut #3776 now holds 3 wood, 1 stone (was 2 wood, 1 stone); still wants 5 wood, 3 stone",
+      "11939 [material] hut #3776 now holds 2 wood (was 3 wood, 1 stone); still wants 5 wood, 3 stone",
+      "11965 [material] hut #3776 now holds 1 wood (was 2 wood); still wants 5 wood, 3 stone",
+      "12016 [material] hut #3776 now holds nothing (was 1 wood); still wants 5 wood, 3 stone",
+      "12042 [material] hut #3776 now holds 3 wood (was nothing); still wants 2 wood, 3 stone",
+      "12246 [material] hut #3776 now holds 5 wood (was 3 wood); still wants 3 stone",
+      "12351 [material] hut #3776 now holds 5 wood, 2 stone (was 5 wood); still wants 1 stone",
+      "12352 [material] hut #3776 now holds 5 wood, 1 stone (was 5 wood, 2 stone); still wants 1 stone",
+      "12385 [material] hut #3776 now holds 4 wood, 1 stone (was 5 wood, 1 stone); still wants 1 stone",
+      "12434 [material] hut #3776 now holds 3 wood (was 4 wood, 1 stone); still wants 1 stone",
+      "12455 [material] hut #3776 now holds 3 wood, 1 stone (was 3 wood); still wants nothing",
+      "12514 [material] hut #3776 now holds 2 wood, 1 stone (was 3 wood, 1 stone); still wants nothing",
+      "12560 [material] hut #3776 now holds 1 wood (was 2 wood, 1 stone); still wants nothing",
+      "13076 [material] hut #3776 now holds nothing (was 1 wood); still wants nothing",
+      "13124 [home] Juniper household: home 998 -> 5847 (hut #5847)",
+      "13124 [housed] Juniper household now calls hut #5847 home — built by 999",
+      "13124 [built] hut site #3776 finished as hut #5847",
+      "14699 [enter] Bea (1000) went into hut #5847",
+      "14700 [exit] Bea (1000) came out of hut #5847",
+      "14813 [enter] Bea (1000) went into hut #5847",
+      "14814 [exit] Bea (1000) came out of hut #5847",
+      "15601 [enter] Bea (1000) went into hut #5847 to sleep",
+      "15753 [enter] Sven (999) went into hut #5847 to sleep",
+      "16053 [exit] Bea (1000) came out of hut #5847",
+      "16058 [enter] Bea (1000) went into hut #5847",
+      "16059 [exit] Bea (1000) came out of hut #5847",
+      "16069 [enter] Bea (1000) went into hut #5847 to flee",
+      "16099 [exit] Bea (1000) came out of hut #5847",
+      "16102 [enter] Bea (1000) went into hut #5847 to flee",
+      "16132 [exit] Bea (1000) came out of hut #5847",
+      "16257 [exit] Sven (999) came out of hut #5847",
+      "16724 [enter] Bea (1000) went into hut #5847 to rest",
+      "16851 [exit] Bea (1000) came out of hut #5847",
+      "16943 [enter] Bea (1000) went into hut #5847",
+      "16944 [exit] Bea (1000) came out of hut #5847",
+      "17735 [enter] Bea (1000) went into hut #5847",
+      "17736 [exit] Bea (1000) came out of hut #5847",
+      "18173 [enter] Bea (1000) went into hut #5847 to flee",
+      "18817 [enter] Sven (999) went into hut #5847 to rest",
+      "19077 [exit] Sven (999) came out of hut #5847",
+      "19078 [enter] Sven (999) went into hut #5847",
+      "19079 [exit] Sven (999) came out of hut #5847",
+      "19092 [enter] Sven (999) went into hut #5847 to flee",
+      "19094 [exit] Bea (1000) came out of hut #5847",
+      "19095 [enter] Bea (1000) went into hut #5847",
+      "19096 [exit] Bea (1000) came out of hut #5847",
+      "19109 [enter] Bea (1000) went into hut #5847 to flee",
+      "19120 [exit] Sven (999) came out of hut #5847",
+      "19125 [enter] Sven (999) went into hut #5847 to flee",
+      "19132 [exit] Sven (999) came out of hut #5847",
+      "19136 [exit] Bea (1000) came out of hut #5847",
+      "19137 [enter] Sven (999) went into hut #5847 to flee",
+      "19137 [enter] Bea (1000) went into hut #5847",
+      "19138 [exit] Bea (1000) came out of hut #5847",
+      "19141 [exit] Sven (999) came out of hut #5847"
+    ]
+  },
+  "savedAndReloaded": {
+    "identical": true,
+    "hash": "ab07c24c",
+    "hashAfter": "ab07c24c",
+    "housedAfter": 7
+  },
+  "limits": "One run of one seed. It shows the chain is possible and that every link is recorded. It is NOT evidence that more households get housed, that anybody survives better, or that this happens in every world. The on/off ablation figures are in docs/HOUSEHOLD_HOME.md."
+}
