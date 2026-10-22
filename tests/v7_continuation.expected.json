@@ -1,0 +1,40 @@
+{
+  "source": "2fe7dc9; household-home on main, before the iron-chain fix",
+  "saved": {
+    "hash": "9a525dd6",
+    "deep": "a0c534720327ec66",
+    "alive": 28,
+    "plans": {
+      "stock": 10,
+      "tool": 2,
+      "shelter": 6
+    },
+    "homeFood": 133,
+    "storedFood": 44,
+    "oreKnowers": 0,
+    "smithies": 0,
+    "kilns": 0,
+    "iron": 0,
+    "charcoal": 0,
+    "ironTools": 0
+  },
+  "continued": {
+    "hash": "b62eaf46",
+    "deep": "7f0927063d6ca857",
+    "alive": 28,
+    "plans": {
+      "stock": 9,
+      "tool": 3,
+      "repair": 2,
+      "shelter": 4
+    },
+    "homeFood": 118,
+    "storedFood": 39,
+    "oreKnowers": 0,
+    "smithies": 0,
+    "kilns": 0,
+    "iron": 0,
+    "charcoal": 0,
+    "ironTools": 0
+  }
+}
