@@ -1,0 +1,34 @@
+{
+  "source": "fb6e8a579cfc68a5c0ca7f6b124be487f4d2a1fd; before courier recovery",
+  "saved": {
+    "hash": "9a525dd6",
+    "deep": "a0c534720327ec66",
+    "alive": 28,
+    "plans": {
+      "stock": 10,
+      "tool": 2,
+      "shelter": 6
+    },
+    "homeFood": 133,
+    "storedFood": 44,
+    "indoors": 0,
+    "solidHomes": 3,
+    "homeSites": 3
+  },
+  "continued": {
+    "hash": "b62eaf46",
+    "deep": "7f0927063d6ca857",
+    "alive": 28,
+    "plans": {
+      "stock": 9,
+      "tool": 3,
+      "repair": 2,
+      "shelter": 4
+    },
+    "homeFood": 118,
+    "storedFood": 39,
+    "indoors": 0,
+    "solidHomes": 4,
+    "homeSites": 3
+  }
+}
