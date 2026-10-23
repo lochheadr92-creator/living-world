@@ -1,0 +1,42 @@
+{
+  "source": "d7ba86c: the iron-chain fix on main, before the warmth-and-shelter change (version 9) exists",
+  "saved": {
+    "hash": "ce1b1551",
+    "deep": "ad80191133fae883",
+    "alive": 28,
+    "plans": {
+      "stock": 10,
+      "tool": 2,
+      "shelter": 6
+    },
+    "homeFood": 133,
+    "storedFood": 44,
+    "oreKnowers": 0,
+    "smithies": 0,
+    "kilns": 0,
+    "iron": 0,
+    "charcoal": 0,
+    "ironTools": 0,
+    "homes": 3
+  },
+  "continued": {
+    "hash": "8e9772d3",
+    "deep": "91fc68a12654ba53",
+    "alive": 28,
+    "plans": {
+      "stock": 9,
+      "tool": 3,
+      "repair": 2,
+      "shelter": 4
+    },
+    "homeFood": 118,
+    "storedFood": 39,
+    "oreKnowers": 0,
+    "smithies": 0,
+    "kilns": 0,
+    "iron": 0,
+    "charcoal": 0,
+    "ironTools": 0,
+    "homes": 4
+  }
+}
