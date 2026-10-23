@@ -1,5 +1,7 @@
 # Living World: notes for Claude (read this first)
 
+Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
+
 Two files govern how work happens here, and both come before the technical map below.
 
 - **[WORKFLOW.md](WORKFLOW.md) — delivery rules.** The owner's standing workflow: no mandatory

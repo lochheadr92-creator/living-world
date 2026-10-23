@@ -1,10 +1,14 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-22
+Updated: 2026-10-23
 
 Standing owner workflow: [WORKFLOW.md](WORKFLOW.md). Both Codex and Claude must follow
 it: no mandatory PR, second reviewer or repeat-approval loop. Older process instructions
 in historical sections below do not override it.
+
+## Branch cleanup — 2026-10-23
+
+Two useful historical candidates are integrated: paired lab reporting (with missing-metric regression coverage) and the three-winter report, explicitly labelled historical. Six other branches were already incorporated. Thirteen conflicting lines are retired from active development with their unique work preserved; this is not a claim that all their features shipped. See [BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md) for exact tips, dispositions, PR closure list and validation.
 
 ## Current product direction
 
