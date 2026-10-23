@@ -598,7 +598,7 @@ export function outcomeOf(
       buildings: w.buildings.length,
       plots: w.plots.length,
       people: alive.length,
-      deaths: w.deceased.length,
+      deaths: w.deceased.filter((d) => d.tick >= from).length,
       homeless,
       belowCritical: crit,
       meanHunger: Math.round((hunger / Math.max(1, alive.length)) * 10) / 10,

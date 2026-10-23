@@ -73,6 +73,8 @@ export interface Ctx {
   seenPersons: SeenEntity[];
   seenAnimals: SeenEntity[];
   collect: boolean;
+  /** the inspector is asking what this person could do: nothing may be written to them or to the world (see `generateOptions`) */
+  observer: boolean;
   blocked: Option[];
   options: Option[];
   /** set by the production planner when a plan was stopped only by lacking a tool: the social planner may ask to borrow one */
@@ -87,7 +89,7 @@ export function foodCount(inv: Person['inv']): number {
   return n;
 }
 
-export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
+export function makeCtx(world: World, p: Person, collect: boolean, observer = false): Ctx {
   const hh = householdOf(world, p);
   const members = membersOf(world, hh);
   const drives = {} as Record<NeedKey, number>;
@@ -153,6 +155,7 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
     }),
     seenAnimals: indoorHome(world, p) ? [] : p.seen.filter((s) => isThreat(world, s)),
     collect,
+    observer,
     blocked: [],
     options: [],
   };
