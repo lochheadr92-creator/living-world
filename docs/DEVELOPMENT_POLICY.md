@@ -160,6 +160,16 @@ deep-hashed: an entry that changes nothing anybody does still changes saved stat
 
 **Version 8** (2026-10-23) recovers the full-pack construction-material courier fallback. An accepted gift can become an ordinary haul promise if the recipient has no room, the helper remembers a site needing that material, and needs/commitment capacity allow. Only rich worlds running version 8 or later use it. `tests/v7_continuation.expected.json` was recorded from `fb6e8a5` before the behavior was added. The save format, historical references and all other rules remain unchanged. See [COURIER_RECOVERY.md](COURIER_RECOVERY.md).
 
+**Version 9** (2026-10-24) lets a person eat AT a store when the pack has no room for its food. Before it, `eat_store` moved food
+into the pack and only then ate it, so someone carrying building material failed with "there is no food there" at a stocked
+store and wrote it off (57% of finished store meals on version 8, 95% of those with food in the store). Now the meal is eaten
+out of the store bite by bite, through the same `'eaten'` ledger entry; a meal with room in the pack is untouched. The whole of
+it is `src/sim/tableeating.ts` and the `eat_store`/`eatTick` handlers in `src/sim/act_resource.ts`, gated on
+`runsRulesVersion(world, 9)`. Version-8 continuation is pinned by `tests/v8_continuation.expected.json`, recorded from
+`3d93180` before any of it was written, and it contains the failing situation (24 full-pack failures by tick 12,000) so that a
+leak would show in words as well as in the hash. The lab switch `rich-no-table-eating` removes only this. Nothing else was
+retuned. See `docs/TABLE_EATING.md`.
+
 **How a version is proved not to have leaked.** A test that checks the version LABEL is not enough: a gate that leaked would
 keep the label and change the world. Before version 2 was written, `scripts/v1_reference.ts --write` recorded
 `tests/v1_continuation.expected.json` - two rich worlds stamped `rulesVersion: 1`, run, written out and read back through the

@@ -46,10 +46,13 @@ import type { Settings, World } from './types';
 // the material is now fetched on purpose instead of arriving by chance. Nothing else was retuned.
 // Version 8: an accepted construction-material gift becomes a haul promise when the requester has no pack room,
 // the helper remembers a site needing it, and the helper has spare commitment capacity and no pressing need.
-export const CURRENT_RULES_VERSION = 8;
+// Version 9: a person who reaches a store that holds food but whose pack has no room for any of it eats at the store instead
+// of failing and writing the store off (src/sim/tableeating.ts, act_resource.ts eat_store). A meal with room in the pack is
+// untouched.
+export const CURRENT_RULES_VERSION = 9;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

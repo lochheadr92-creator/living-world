@@ -8,6 +8,7 @@ import {
   addItem,
   claimUnits,
   consume,
+  foodUnits,
   gatherFromSource,
   invRoom,
   ledgerConsume,
@@ -32,6 +33,7 @@ import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
 import { creditHauled, creditStocked } from './intent';
 import { isFoodKind } from './provision';
+import { eatsAtTheStore } from './tableeating';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp, hyp } from './util';
 
@@ -207,11 +209,22 @@ registerHandler('gather', {
 });
 
 // ───────────────────────── eat ─────────────────────────
+/** What a meal AT a store (`a.data.table`, rules version 9; tableeating.ts) is taken from: the store or pile itself, or null once it is gone. */
+function tableItems(world: World, a: Activity): Items | null {
+  const e = world.byId.get(a.targetId);
+  return e && e.ent === 'building' ? e.store.items : e && e.ent === 'pile' ? e.items : null;
+}
+
 function eatTick(world: World, p: Person, a: Activity): WorkResult {
   a.progress++;
   if (a.progress < a.duration) return 'continue';
   const k = a.data.food as FoodKind;
-  const eaten = consume(world, p.inv, k, 1, 'eaten');
+  // a meal at a store is eaten out of the store, through the same ledger entry as a bite out of a pack
+  const table = a.data.table ? tableItems(world, a) : null;
+  if (a.data.table && !table) return a.cycle > 0 ? 'done' : 'fail:the store is gone';
+  const from = table ?? p.inv;
+  const eaten = consume(world, from, k, 1, 'eaten');
+  if (a.data.table && eaten === 0 && a.cycle === 0) return 'fail:somebody else had finished the food';
   if (eaten > 0) {
     p.needs.hunger = clamp(p.needs.hunger + NUTRITION[k], 0, 100);
     p.lastAteTick = world.tick;
@@ -224,7 +237,7 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
     if (lim.portions !== undefined && a.cycle >= lim.portions) return 'done';
     if (lim.untilHunger !== undefined && p.needs.hunger >= lim.untilHunger) return 'done';
   }
-  const next = pickFood(p.inv, p.needs.hunger);
+  const next = pickFood(from, p.needs.hunger);
   const keepFood = (a.data.keep as number) ?? 0;
   const foodLeft = Object.keys(p.inv).reduce((s, key) => s + (NUTRITION[key as FoodKind] ? (p.inv[key as ItemKind] ?? 0) : 0), 0);
   if (!next || p.needs.hunger >= 88 || (keepFood > 0 && foodLeft <= keepFood && p.needs.hunger > 55)) return 'done';
@@ -269,6 +282,16 @@ registerHandler('eat_store', {
       a.cycle++;
     }
     if (!tookAny) {
+      // Version 9: nothing could be moved into the pack. If that is because the pack is full and the store DOES hold food, the
+      // meal is eaten at the store (tableeating.ts); the store is not written off, because it is not empty.
+      const k = eatsAtTheStore(world) ? pickFood(items, p.needs.hunger) : null;
+      if (k) {
+        a.data.table = true;
+        a.data.food = k;
+        a.duration = WORK.eat;
+        a.data.keep = 0;
+        return;
+      }
       noteFailure(world, p, a.targetId, 'no food there');
       return 'there is no food there';
     }
@@ -285,6 +308,16 @@ registerHandler('eat_store', {
   work: (world, p, a) => eatTick(world, p, a),
   onEnd(world, p, a, outcome, detail) {
     if (outcome === 'success') addLog(world, p, 'need', 'Ate a meal from the stores.');
+    if (a.data.table) {
+      // A meal at a store was taken a bite at a time, so what it came to is known only now: the belief about the store is
+      // refreshed as it stands after the meal, and a meal at another household's store is reported once, for what was eaten.
+      const e = world.byId.get(a.targetId);
+      if (e && (e.ent === 'building' || e.ent === 'pile')) {
+        observe(world, p, e);
+        if (a.data.steal && e.ent === 'building') onTheft(world, p, e, a.cycle);
+        if (outcome === 'failed' && foodUnits(e.ent === 'building' ? e.store.items : e.items) <= 0) noteFailure(world, p, a.targetId, 'no food there');
+      }
+    }
   },
 });
 
