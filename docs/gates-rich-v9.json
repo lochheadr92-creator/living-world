@@ -1,0 +1,185 @@
+{
+  "dynamics": "rich",
+  "rulesVersion": 9,
+  "profile": "large",
+  "fork": 0,
+  "days": 12,
+  "branch": "control",
+  "n": 8,
+  "recordedFrom": [
+    "aspen",
+    "birch",
+    "cedar",
+    "fern",
+    "gen-1",
+    "gen-2",
+    "meadow",
+    "river"
+  ],
+  "metrics": {
+    "workplaces": {
+      "mean": 9.13,
+      "sd": 2.85
+    },
+    "solidHomes": {
+      "mean": 27.13,
+      "sd": 5.99
+    },
+    "buildings": {
+      "mean": 82.5,
+      "sd": 9.7
+    },
+    "plots": {
+      "mean": 86.63,
+      "sd": 5.85
+    },
+    "people": {
+      "mean": 99,
+      "sd": 2.73
+    },
+    "deaths": {
+      "mean": 3.38,
+      "sd": 3.02
+    },
+    "homeless": {
+      "mean": 0,
+      "sd": 0
+    },
+    "belowCritical": {
+      "mean": 3.38,
+      "sd": 5.68
+    },
+    "meanHunger": {
+      "mean": 64.31,
+      "sd": 10.29
+    },
+    "firstYardDay": {
+      "mean": 5.96,
+      "sd": 0.75
+    },
+    "firstHallDay": {
+      "mean": 10.63,
+      "sd": 1.55
+    },
+    "meanMood": {
+      "mean": -8.41,
+      "sd": 7.89
+    },
+    "lowMood": {
+      "mean": 10.63,
+      "sd": 11.55
+    },
+    "tools": {
+      "mean": 128.5,
+      "sd": 21.53
+    },
+    "meanCondition": {
+      "mean": 64.3,
+      "sd": 3.21
+    },
+    "projectsAdopted": {
+      "mean": 369.88,
+      "sd": 23.37
+    },
+    "projectsDone": {
+      "mean": 149.25,
+      "sd": 22.7
+    },
+    "projectAsks": {
+      "mean": 14.13,
+      "sd": 2.7
+    },
+    "askUnitsDelivered": {
+      "mean": 8.88,
+      "sd": 4.16
+    },
+    "specialisation": {
+      "mean": 0.47,
+      "sd": 0.03
+    },
+    "topKindShare": {
+      "mean": 0.57,
+      "sd": 0.04
+    },
+    "prepAdopted": {
+      "mean": 173,
+      "sd": 24.85
+    },
+    "prepSeason": {
+      "mean": 32.13,
+      "sd": 8.41
+    },
+    "prepHardship": {
+      "mean": 140.88,
+      "sd": 23.3
+    },
+    "prepDone": {
+      "mean": 70.25,
+      "sd": 12.98
+    },
+    "prepDropped": {
+      "mean": 77.88,
+      "sd": 17.07
+    },
+    "prepUnits": {
+      "mean": 696.88,
+      "sd": 68
+    },
+    "prepDays": {
+      "mean": 34.49,
+      "sd": 8.16
+    },
+    "hungerExposure": {
+      "mean": 0.01,
+      "sd": 0.01
+    },
+    "homeFoodPerPerson": {
+      "mean": 1.29,
+      "sd": 0.78
+    },
+    "storeFoodPerPerson": {
+      "mean": 1.36,
+      "sd": 0.84
+    },
+    "spears": {
+      "mean": 15.88,
+      "sd": 6.24
+    },
+    "armedAtEnd": {
+      "mean": 15.5,
+      "sd": 5.9
+    },
+    "defenceOffered": {
+      "mean": 9.75,
+      "sd": 4.74
+    },
+    "defenceSetOut": {
+      "mean": 4,
+      "sd": 2.39
+    },
+    "defenceTried": {
+      "mean": 1.63,
+      "sd": 1.51
+    },
+    "defenceDroveOff": {
+      "mean": 0.88,
+      "sd": 1.13
+    },
+    "defenceFailed": {
+      "mean": 0.75,
+      "sd": 1.04
+    },
+    "defenceLeftOnItsOwn": {
+      "mean": 2.13,
+      "sd": 1.13
+    },
+    "wolvesWary": {
+      "mean": 0,
+      "sd": 0
+    },
+    "bitesTaken": {
+      "mean": 16.25,
+      "sd": 5.99
+    }
+  }
+}
