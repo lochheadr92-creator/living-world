@@ -158,6 +158,8 @@ deep-hashed: an entry that changes nothing anybody does still changes saved stat
 `tests/v6_continuation.expected.json`, captured from `b050816` before any of it existed. The lab switch
 `rich-no-shelter` removes only the plan. Nothing else was retuned. See `docs/HOUSEHOLD_HOME.md`.
 
+**Version 8** (2026-10-23) recovers the full-pack construction-material courier fallback. An accepted gift can become an ordinary haul promise if the recipient has no room, the helper remembers a site needing that material, and needs/commitment capacity allow. Only rich worlds running version 8 or later use it. `tests/v7_continuation.expected.json` was recorded from `fb6e8a5` before the behavior was added. The save format, historical references and all other rules remain unchanged. See [COURIER_RECOVERY.md](COURIER_RECOVERY.md).
+
 **How a version is proved not to have leaked.** A test that checks the version LABEL is not enough: a gate that leaked would
 keep the label and change the world. Before version 2 was written, `scripts/v1_reference.ts --write` recorded
 `tests/v1_continuation.expected.json` - two rich worlds stamped `rulesVersion: 1`, run, written out and read back through the

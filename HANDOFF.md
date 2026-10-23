@@ -27,7 +27,11 @@ is in [docs/DEVELOPMENT_POLICY.md](docs/DEVELOPMENT_POLICY.md), "Matching eviden
 Sections below that frame the project as a simulation only are superseded on that point alone;
 their measurements, review verdicts and status records stand exactly as written.
 
-## Current main — from needing a home to living in one
+## Current main — full-pack site courier recovery
+
+Rules version 8 recovers the missing part of `claude/courier-promise`: a willing helper who already carries construction materials can promise to haul them to a remembered site when the requester has no pack room. Existing conversation, commitment, haul, ledger and inspector paths are reused. Older worlds retain their rules. Source comparison, regression evidence and limits: [COURIER_RECOVERY.md](docs/COURIER_RECOVERY.md).
+
+## Previous main — from needing a home to living in one
 
 Rules version 7. One complete, watchable situation: a household recognises it has no proper home, lays a site out, its
 members FETCH the materials on purpose, build, take ownership and move in — or meet an understandable reason they cannot

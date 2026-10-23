@@ -198,7 +198,7 @@ to already, or was owed elsewhere, or the tool was in use.
 
 Promises to bring materials to a **building site** are delivered *to the site*, not handed to the person asking (whose pack
 may be full); work and deliveries toward the site, including the sawing of the planks it needs, count toward promises to help
-with it.
+with it. From rules version 8 in rich worlds, an accepted material gift also becomes a `haul` promise when the asker cannot carry even one unit, the helper remembers that site needing the material, and the helper has spare commitment capacity and no pressing need. Goods remain with the helper until ordinary physical delivery; food, water, tools and person-directed requests do not use this fallback. Older rules keep their handover behavior. See [COURIER_RECOVERY.md](COURIER_RECOVERY.md).
 
 News is carried in conversation and keeps its **provenance**: the person who first saw it, how many mouths it has passed
 through, and the time of the original sighting (a told belief is never made fresher by being told).

@@ -1,5 +1,6 @@
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
+import { runsRulesVersion } from './rulesversion';
 import { noteWedding } from './occasions';
 import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
 import { expose } from './illness';
@@ -434,7 +435,9 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   if (sur >= 1) {
     if (w >= 0.6) {
       const want = req.kind === 'food' || req.kind === 'care' ? Math.min(sur, Math.max(1, Math.ceil(sev * 3))) : Math.min(sur, req.amount);
-      return { kind: 'give', item, n: Math.max(1, want) };
+      const n = Math.max(1, want);
+      if (carriesToSite(world, B, A, req, item)) return { kind: 'promise', item, n };
+      return { kind: 'give', item, n };
     }
     return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(B) > 35 ? 'own_need' : 'unwilling' };
   }
@@ -459,6 +462,19 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   return { kind: 'decline', reason: dislike ? 'disliked' : 'no_item' };
 }
 
+
+/** An accepted gift can become a real haul when the asker cannot carry even one unit.
+ * Read the helper's remembered site, never its unseen current existence or stock.
+ * The ordinary haul validates physical arrival and delivery; stale knowledge can still fail.
+ */
+function carriesToSite(world: World, B: Person, A: Person, req: Request, item: ItemKind): boolean {
+  if (!isRich(world) || !runsRulesVersion(world, 8)) return false;
+  if (!req.siteId || req.destKind !== 'site' || req.destId !== req.siteId || isFood(item) || item === 'water' || isToolItem(item)) return false;
+  if (roomFor(A.inv, carryCap(world, A), item) >= 1) return false;
+  const site = B.beliefs[req.siteId];
+  if (site?.kind !== 'site' || (site.need?.[item] ?? 0) < 1) return false;
+  return activeCommitments(B).length < MAX_ACTIVE_COMMITMENTS && personalDriveMax(B) < 38;
+}
 
 function addCommitment(world: World, B: Person, req: Request, c: Partial<Commitment>): Commitment {
   const commit: Commitment = {

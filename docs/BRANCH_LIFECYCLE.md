@@ -69,3 +69,7 @@ All 13 lines above are historical under the owner instruction. Their branch tips
 ## Published cleanup outcome
 
 Verified on GitHub after publication: PRs #15 and #16 are merged; #19 and the seven superseded proposals are closed; zero open PRs remain. All historical branch tips and original PR descriptions were preserved. Remote branch names remain: the connected API exposes no branch-deletion operation and direct Git push is unauthenticated in this environment. This does not prevent integration or the lifecycle retirement above.
+
+## Recovery follow-up — courier-promise
+
+Owner-authorized extraction from `claude/courier-promise` completed as a bounded current-main adaptation at rules version 8. Its sole unique behavioral change was missing, reproduced, and recovered with compatibility and guard tests. The original branch stays historical; its old two-seed outcome claims were not imported as current evidence. See [COURIER_RECOVERY.md](COURIER_RECOVERY.md). The remaining historical lines have not gained a feature-coverage audit from this work.

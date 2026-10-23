@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest';
+import { serializeWorld, deserializeWorld } from '../src/app/save';
+import { commitmentViews } from '../src/sim/inspect_work';
 import { newActivity, startActivity } from '../src/sim/activities';
 import { REQUEST_TTL } from '../src/sim/constants';
-import { addItem, conservationReport } from '../src/sim/economy';
-import { observe } from '../src/sim/knowledge';
+import { addItem, conservationReport, invRoom } from '../src/sim/economy';
+import { observe, forget } from '../src/sim/knowledge';
 import { killPerson } from '../src/sim/lifecycle';
 import { relOf } from '../src/sim/relations';
 import { makeSource } from '../src/sim/sources';
@@ -308,6 +310,75 @@ describe('promises turn into real work and real deliveries', () => {
     expect(cm!.delivered).toBeGreaterThanOrEqual(3);
     expect(conservationReport(w).ok).toBe(true);
   });
+});
+
+describe('recovered site courier', () => {
+  function fixture() {
+    const s = stage('haul-full-pack');
+    const owner = addPerson(s, 'Ola', 44, 26, { inv: { stone: 12 } });
+    const giver = addPerson(s, 'Gil', 46, 26, { sex: 'm', inv: { fruit: 6, planks: 6 }, traits: { generosity: 0.95, diligence: 0.9 } });
+    const st = site(s, 'granary', 40, 28, owner.hhId, owner.id);
+    s.w.camp = { x: 44.5, y: 26.5 };
+    const w = done(s);
+    w.settings.dynamics = 'rich';
+    w.settings.rulesVersion = 8;
+    friends(owner, giver, 50, 50);
+    for (const e of [st]) {
+      observe(w, owner, e);
+      observe(w, giver, e);
+    }
+    return { w, owner, giver, st };
+  }
+  it('goods wanted at a site by someone whose pack is full are carried to the site by the giver, not refused for want of room', () => {
+    const { w, owner, giver, st } = fixture();
+    expect(invRoom(w, owner, 'planks'), 'precondition: the asker has no room to be handed planks').toBe(0);
+    const before = (st.delivered.planks ?? 0) + (st.used.planks ?? 0);
+    converse(w, owner, giver, 'request', { reqKind: 'goods', item: 'planks', amount: 3, siteId: st.id, destKind: 'site', destId: st.id, purpose: 'for the granary' });
+    const req = w.requests[w.requests.length - 1];
+    expect(req.status, `request note: ${req.note}`).toBe('promised');
+    const cm = giver.commitments.find((c) => c.requestId === req.id);
+    expect(cm, 'the giver made a commitment').toBeTruthy();
+    expect(cm!.kind).toBe('haul');
+    expect(cm!.destId).toBe(st.id);
+    expect(giver.inv.planks, 'the planks stay with the giver until they are delivered').toBe(6);
+    expect(commitmentViews(w, giver).some((v) => JSON.stringify(v).includes('Haul 3 planks'))).toBe(true);
+    const reloaded = deserializeWorld(serializeWorld(w));
+    for (let i = 0; i < 4000 && cm!.status === 'active'; i++) { run(w, 1); run(reloaded, 1); }
+    expect(serializeWorld(reloaded)).toBe(serializeWorld(w));
+    expect(cm!.status).toBe('done');
+    expect(req.status).toBe('fulfilled');
+    const after = (st.delivered.planks ?? 0) + (st.used.planks ?? 0);
+    expect(after - before).toBeGreaterThanOrEqual(3);
+    expect(conservationReport(w).ok).toBe(true);
+  });
+  function request(f: ReturnType<typeof fixture>) {
+    return createRequest(f.w, f.owner, f.giver, { kind: 'goods', item: 'planks', amount: 3,
+      siteId: f.st.id, destKind: 'site', destId: f.st.id });
+  }
+  it.each([undefined, 1, 2, 3, 4, 6, 7])('keeps the original gift response at rules version %s', (version) => {
+    const f = fixture(); f.w.settings.rulesVersion = version;
+    expect(evaluateRequest(f.w, f.giver, f.owner, request(f)).kind).toBe('give');
+  });
+  it.each(['authored', 'room', 'unknown', 'no remembered need', 'other destination', 'busy', 'urgent'])(
+    'does not create a courier promise when %s', (reason) => {
+      const f = fixture(); const req = request(f);
+      if (reason === 'authored') f.w.settings.dynamics = 'authored';
+      if (reason === 'room') f.owner.inv = {};
+      if (reason === 'unknown') forget(f.giver, f.st.id);
+      if (reason === 'no remembered need') f.giver.beliefs[f.st.id].need = {};
+      if (reason === 'other destination') req.destKind = 'person';
+      if (reason === 'busy') for (let i = 0; i < 3; i++) commit(f.w, f.giver, { item: 'stone', amount: 1, destId: f.owner.id });
+      if (reason === 'urgent') f.giver.needs.hunger = 0;
+      expect(evaluateRequest(f.w, f.giver, f.owner, req).kind).not.toBe('promise');
+    });
+  it('does not consult unseen site existence in the new courier decision', () => {
+    const f = fixture(); const req = request(f);
+    const before = evaluateRequest(f.w, f.giver, f.owner, req);
+    expect(before.kind).toBe('promise');
+    f.w.byId.delete(f.st.id);
+    expect(evaluateRequest(f.w, f.giver, f.owner, req)).toEqual(before);
+  });
+
 });
 
 describe('borrowing a tool', () => {
