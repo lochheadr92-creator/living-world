@@ -1,10 +1,49 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-23
+Updated: 2026-10-24
 
 Standing owner workflow: [WORKFLOW.md](WORKFLOW.md). Both Codex and Claude must follow
 it: no mandatory PR, second reviewer or repeat-approval loop. Older process instructions
 in historical sections below do not override it.
+
+## Civilisation audit and rules version 9 — 2026-10-24 (branch `claude/civilisation-phase1`, not pushed, not merged)
+
+Worktree `C:\dev\Claude Experiment\living-world-civ`, cut from `origin/main` `3d93180`. The owner's checkout
+`C:\dev\Claude Experiment\living-world` is on the superseded `claude/wolf-defence-v3` and was not touched, nor was the Codex worktree.
+
+**What was asked.** A capability audit of eight civilisation systems, a causal dependency map, a roadmap, an observer design, a
+defect register, and the single highest-value verified Phase 1 (household survival) slice. All of it is in
+[CIVILISATION_AUDIT.md](docs/CIVILISATION_AUDIT.md). Its headline: every link of the household survival loop exists, and
+everything above it (settlements, trade, leadership, knowledge, migration) is missing a primitive, the first being **a group
+relocating**. `WORLD_DIRECTIONS.md` does not exist in the repository.
+
+**What was found and fixed.** The household food link was failing more often than it worked. 57% of finished "eat from a store"
+meals failed on version 8, 95% of those with food in the store and no room for it in the pack, because the meal was moved into
+the pack first and version 7's shelter plans fill packs with timber. Rules version 9 lets the person eat at the store. Contract,
+measurements and limits: [TABLE_EATING.md](docs/TABLE_EATING.md). Store-meal failures fell from 56.9% to 2.2%; in the town
+profile (16 seeds) removing the rule made people measurably hungrier ("larger than chance" by the lab's wording); **no effect on
+deaths is distinguishable** in either profile.
+
+**What else is on the branch.**
+* `scripts/household_life.ts`: the whole household loop (hunger, food, store, roof, asks, loss) from an ordinary run, with a census
+  of where each household's loop stops. `scripts/store_meals.ts`: the store-meal census. Both read-only; both prove the live world's
+  hash is unchanged.
+* An observer-purity fix: opening a person's card deleted their expired life change from saved state (`lifechanges.ts`,
+  `inspect.ts`), a case `tests/purity.test.ts` could not reach.
+* Evidence and commands in `table_evidence/`.
+
+**Verification.** `npx --no-install vitest run` 994 tests in 98 files; `npm run build`; `npx --no-install vite-node scripts/golden.ts`
+all fingerprints match; the version-1/2/3/4/6/7/8 references unchanged; `git diff --check`. The version-8 reference was recorded
+first, in its own commit (`bfdd936`), with `src/` untouched.
+
+**Not done, and why.** Phase 2 (a deterministic social counterfactual) was not started: the audit shows the broken-promise path
+exists but moves willingness by about −0.12 against thresholds of 0.6, so the right first step is a lab arm, not more mechanism.
+Phase 3 history views were designed ([CIVILISATION_AUDIT.md](docs/CIVILISATION_AUDIT.md) section E) but not built. Experiments C to F
+and H are blocked, not substituted. No page check was run for version 9 and no presentation changed.
+
+**Decisions for the owner.** (1) Whether a household of one may build a hut (`options_work.ts:693`; 3 of 12 households on seed
+`river` are stranded by it). (2) Whether to integrate this branch. (3) Which architectural slice comes next; the audit recommends a
+per-person relocation plan and a held-knowledge object, with reasons.
 
 ## Branch cleanup — 2026-10-23
 
