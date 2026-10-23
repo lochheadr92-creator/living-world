@@ -68,7 +68,12 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   const old = L.beliefs[b.id];
   const isNew = !old || b.seen > old.seen + 200;
   if (!isNew) return false;
-  const copy: Belief = { ...b, items: b.items ? { ...b.items } : undefined, need: b.need ? { ...b.need } : undefined, src: 'told', from: S.id, learned: world.tick, origin: b.origin ?? S.id, hops: (b.hops ?? 0) + 1 };
+  const copy: Belief = { ...b, src: 'told', from: S.id, learned: world.tick, origin: b.origin ?? S.id, hops: (b.hops ?? 0) + 1 };
+  // (a field that is absent stays absent: a key set to undefined is dropped by a save, so the saved and the live record would differ)
+  if (b.items) copy.items = { ...b.items };
+  else delete copy.items;
+  if (b.need) copy.need = { ...b.need };
+  else delete copy.need;
   learn(L, copy);
   const noun = BELIEF_NOUN[b.kind];
   if (b.kind === 'danger') {
