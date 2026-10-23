@@ -12,7 +12,7 @@ No simulation behavior, rules version, save semantics, goldens, or acceptance ba
 
 ## Incorporated branches — retired branch names
 
-The first six were already ancestors of main. The two additional candidates were reviewed and integrated in this cleanup. Their commits remain reachable through main; branch-name removal is optional housekeeping, not a prerequisite for retirement.
+Six were already ancestors of main. The two additional candidates were reviewed and integrated in this cleanup. Their commits remain reachable through main; branch-name removal is optional housekeeping, not a prerequisite for retirement.
 
 | Branch | Recorded tip | Disposition |
 |---|---|---|
@@ -65,3 +65,7 @@ All 13 lines above are historical under the owner instruction. Their branch tips
 - 10 focused tests passed: lab statistics/behavior plus CLI paired-seed intersection, contrast direction, historical missing metrics, unavailable branch, and story output.
 - Production build and TypeScript check passed. Diff whitespace check passed.
 - The historical report figures were checked against the retained `long_out/report.txt`; no new ensemble or current-version benefit claim was made.
+
+## Published cleanup outcome
+
+Verified on GitHub after publication: PRs #15 and #16 are merged; #19 and the seven superseded proposals are closed; zero open PRs remain. All historical branch tips and original PR descriptions were preserved. Remote branch names remain: the connected API exposes no branch-deletion operation and direct Git push is unauthenticated in this environment. This does not prevent integration or the lifecycle retirement above.
