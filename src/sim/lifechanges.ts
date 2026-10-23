@@ -21,14 +21,37 @@ function set(world: World, p: Person, kind: LifeEvent['kind'], about: number): v
   p.lifeEvent = { kind, about, since: world.tick, until: world.tick + LASTS[kind] };
 }
 
-/** the change a person is living through now, or null */
-export function lifeEventOf(world: World, p: Person): LifeEvent | null {
+/**
+ * The change a person is living through now, or null, WITHOUT letting an expired one lapse. For readers that must not write: the
+ * inspector reads through this (`describeLifeEvent`), so that opening a card leaves saved state exactly as it was.
+ */
+export function peekLifeEvent(world: World, p: Person): LifeEvent | null {
   const e = p.lifeEvent;
-  if (!e) return null;
-  if (e.until <= world.tick) {
-    delete p.lifeEvent;
-    return null;
+  return e && e.until > world.tick ? e : null;
+}
+
+/**
+ * Greater than zero while an observer is reading (the inspector's audit of what someone could do runs the real option planner,
+ * which asks about life changes through functions that carry no observer flag). Module state like the lab switches: never
+ * saved, never hashed, and only ever raised around a read.
+ */
+let observing = 0;
+export function whileObserving<T>(read: () => T): T {
+  observing++;
+  try {
+    return read();
+  } finally {
+    observing--;
   }
+}
+
+/**
+ * The change a person is living through now, or null. Asking lets an expired one lapse, which is the simulation's own tidying
+ * and happens exactly when it always did; while an observer is reading it does not, so that looking never changes saved state.
+ */
+export function lifeEventOf(world: World, p: Person): LifeEvent | null {
+  const e = peekLifeEvent(world, p);
+  if (!e && p.lifeEvent && observing === 0) delete p.lifeEvent;
   return e;
 }
 
@@ -111,7 +134,7 @@ export function companyPull(world: World, p: Person, q: Person): number {
 
 /** for the inspector */
 export function describeLifeEvent(world: World, p: Person): string | null {
-  const e = lifeEventOf(world, p);
+  const e = peekLifeEvent(world, p);
   if (!e) return null;
   const name = (() => {
     const x = world.byId.get(e.about);
