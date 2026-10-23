@@ -464,7 +464,9 @@ describe('6. the new state is deterministic and survives a save', () => {
 
   it('a save in the middle of a preparation reads back and carries on identically', () => {
     const w = v2('det-save');
-    for (let n = 0; n < 4000; n++) stepWorld(w);
+    // the sample tick is where the CURRENT version has preparations under way (preparations finish faster in the
+    // warmer world of version 9, so 4000 is now a gap between batches); the assertions are all comparative, not absolute
+    for (let n = 0; n < 5500; n++) stepWorld(w);
     const live = w.persons.filter((p) => p.alive).flatMap((p) => p.intentions.filter((i) => i.status === 'active' && i.kind === 'stock'));
     expect(live.length, 'the fixture really has preparations under way').toBeGreaterThan(0);
     const text = serializeWorld(w);

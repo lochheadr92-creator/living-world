@@ -6,6 +6,7 @@ import { isThreat } from './wildlife';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
+import { runsRulesVersion } from './rulesversion';
 import { baseHub, nearestHub } from './settlements';
 import { depositLead } from './production';
 import { isFacilityType } from './recipes';
@@ -687,21 +688,22 @@ function optPlanBuild(ctx: Ctx): void {
       tryPlan('lean_to', urgent, 'no shelter of our own yet');
     } else noteHousingBlock(ctx, 'lean_to', 'does not know of three trees to cut');
   } else if (ctx.home.type === 'lean_to') {
-    // The conditions for a household in a lean-to to lay out a proper hut. They are UNCHANGED; what is new is that each one
-    // now says so when it is the one holding things up, instead of the whole question disappearing from the card.
+    // The conditions for a household in a lean-to to lay out a proper hut. They are UNCHANGED except that, from rules
+    // version 9, a household of one may build one too: the labour and the materials never needed a crew, only the rule
+    // did. Each one still says when it is the one holding things up, instead of the whole question disappearing.
     const secure = hs.foodStock >= 3 * members;
-    if (secure && knowTrees && knowRocks && members >= 2 && world.tick > 1500) {
+    if (secure && knowTrees && knowRocks && (members >= 2 || runsRulesVersion(world, 9)) && world.tick > 1500) {
       tryPlan('hut', 11 + 4 * Math.min(members, 4) + 6 * (hs.shortage < 0.3 ? 1 : 0), 'to build a proper hut');
+    } else if (!secure) {
+      noteHousingBlock(ctx, 'hut', `the household has only ${Math.floor(hs.foodStock)} food to hand and wants ${3 * members} before starting a hut`);
+    } else if (members < 2 && !runsRulesVersion(world, 9)) {
+      noteHousingBlock(ctx, 'hut', 'a hut is a job for a household of two or more');
     } else {
-      const why = !secure
-        ? `the household has only ${Math.floor(hs.foodStock)} food to hand and wants ${3 * members} before starting a hut`
-        : members < 2
-          ? 'a hut is a job for a household of two or more'
-          : !knowTrees
-            ? 'does not know of three trees to cut'
-            : !knowRocks
-              ? 'does not know where to break stone'
-              : 'too early in the settlement for a hut';
+      const why = !knowTrees
+        ? 'does not know of three trees to cut'
+        : !knowRocks
+          ? 'does not know where to break stone'
+          : 'too early in the settlement for a hut';
       noteHousingBlock(ctx, 'hut', why);
     }
   }

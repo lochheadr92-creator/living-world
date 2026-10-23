@@ -48,6 +48,8 @@ interface SceneOpts {
   dynamics?: 'rich' | 'authored';
   /** how many adults the household has (the hut gate wants two; the plan itself does not care) */
   members?: number;
+  /** how many trees the household sees and knows (the hut gate wants three known trees) */
+  trees?: number;
   /** what the first person is carrying */
   carry?: Items;
   /** leave the site out of what the person knows about */
@@ -98,8 +100,10 @@ function scene(seed: string, o: SceneOpts = {}) {
   }
   for (const [k, n] of Object.entries(o.carry ?? {})) addItem(ada.inv, k as keyof Items, n ?? 0);
   const tree = makeSource(w, 'tree', 37, 41, 20);
+  for (let n = 1; n < (o.trees ?? 1); n++) makeSource(w, 'tree', 37 + 3 * n, 41, 20);
   const rock = makeSource(w, 'rock', 38, 43, 20);
   observe(w, ada, tree);
+  for (let n = 1; n < (o.trees ?? 1); n++) observe(w, ada, w.sources.find((s) => s.type === 'tree' && s.x === 37 + 3 * n)!);
   observe(w, ada, rock);
   testKit.finish(w, 'natural');
   if (o.forgetSite && site) for (const p of [ada, ...extra]) delBelief(p, site.id);
@@ -660,4 +664,31 @@ describe('11. the chain end to end', () => {
     expect(w.persons.every((q) => !q.alive || q.activity === null || q.activity.expire > 0)).toBe(true);
     expect(w.buildings.filter((b) => b.type === 'hut' && b.hhId === hh.id).length).toBeLessThanOrEqual(1);
   }, 120000);
+});
+
+// ───────────────────────── 11. version 9: a household of one may lay out a hut ─────────────────────────
+
+describe('11. version 9 lets a household of one lay out a hut', () => {
+  it('a lone adult who knows three trees gets the hut plan in a version-9 world', () => {
+    const { w, ada } = scene('v9-solo-hut', { members: 1, noSite: true, tick: 2000, trees: 3 });
+    const ctx = ctxFor(w, ada);
+    const plan = ctx.options.find((o) => o.kind === 'plan_site' && /hut/i.test(o.label));
+    expect(plan, 'the lowest rung of shelter is open to one person now').toBeTruthy();
+    expect(ctx.blocked.filter((b) => b.kind === 'plan_site' && /hut/i.test(b.label))).toHaveLength(0);
+  });
+
+  it('the same household in a version-8 world is told a hut is a job for two', () => {
+    const { w, ada } = scene('v8-solo-hut', { members: 1, noSite: true, tick: 2000, trees: 3, rulesVersion: 8 });
+    const ctx = ctxFor(w, ada);
+    expect(ctx.options.some((o) => o.kind === 'plan_site' && /hut/i.test(o.label))).toBe(false);
+    expect(ctx.blocked.map((b) => b.blocked).join(' ')).toMatch(/two or more/);
+  });
+
+  it('a household of two or three never waited on this change', () => {
+    for (const members of [2, 3]) {
+      const { w, ada } = scene('v9-multi' + members, { members, noSite: true, tick: 2000, trees: 3, rulesVersion: 8 });
+      const ctx = ctxFor(w, ada);
+      expect(ctx.options.some((o) => o.kind === 'plan_site' && /hut/i.test(o.label)), `members=${members}`).toBe(true);
+    }
+  });
 });

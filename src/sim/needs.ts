@@ -4,12 +4,15 @@ import { stageOf } from './people';
 import { elderFactor } from './life';
 import { isThreat } from './wildlife';
 import { hasHabitation, indoorHome } from './habitation';
+import { runsRulesVersion } from './rulesversion';
 import type { NeedKey, Person, World } from './types';
 import { clamp, hyp } from './util';
 
 /** 0..100 pressure a need puts on decisions (0 = comfortable). */
-export function drive(level: number, key: NeedKey): number {
-  const [t1, t2] = DRIVE_BANDS[key];
+export function drive(level: number, key: NeedKey, world?: World): number {
+  let [t1, t2] = DRIVE_BANDS[key];
+  // version 9: people tolerate a little cold before the warmth drive starts (a band 46 -> 26 instead of 52 -> 30)
+  if (world && key === 'warmth' && runsRulesVersion(world, 9)) [t1, t2] = [46, 26];
   if (level >= t1) return 0;
   if (level >= t2) return (60 * (t1 - level)) / (t1 - t2);
   return 60 + (40 * (t2 - Math.max(0, level))) / t2;
@@ -65,7 +68,10 @@ export function fireWarmth(world: World, x: number, y: number): number {
   const f = nearLitFire(world, x, y, 4.6);
   if (!f) return 0;
   const d = hyp(f.x + 0.5 - x, f.y + 0.5 - y);
-  return 9 * (1 - d / 4.8);
+  // version 9: a fire at close range warms like a hut wall (13 degrees) instead of half a lean-to (9); in a light cold
+  // spell it now lifts the equilibrium target to the same comfort a lean-to's bonus did, so warming up takes fewer ticks
+  const peak = runsRulesVersion(world, 9) ? 13 : 9;
+  return peak * (1 - d / 4.8);
 }
 
 function isHeavyWork(kind: string): boolean {

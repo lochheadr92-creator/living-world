@@ -107,7 +107,7 @@ export function makeCtx(world: World, p: Person, collect: boolean): Ctx {
     if (nearest < 1e8) waterLead = Math.min(34, THIRST_RATE * 1.3 * ((nearest * 1.18) / Math.max(0.03, speed)));
   }
   for (const k of NEED_KEYS) {
-    drives[k] = drive(p.needs[k], k);
+    drives[k] = drive(p.needs[k], k, world);
     const limit = CRITICAL[k] + (k === 'thirst' ? waterLead : 0);
     if (k !== 'social' && p.needs[k] < limit) {
       criticals.push(k);

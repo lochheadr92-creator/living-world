@@ -49,10 +49,16 @@ import type { Settings, World } from './types';
 // world smelted no iron (measured: a 160-day run builds a kiln, a bakery and a yard but no smithy). In `src/sim/options_work.ts`
 // an ore hunt (depositLead's lead) now samples the band itself (radius 24 -> 44 + 6*curiosity) and leans toward stony
 // ground. Nothing else was retuned; idle wander, water hunts and timber hunts sample exactly where they always did.
-export const CURRENT_RULES_VERSION = 8;
+// Version 9: WARMTH AND SHELTER. A household of one may lay out a hut, not just a household of two or more: the labour
+// and the materials never needed a crew, only the rule did (src/sim/options_work.ts). And the cold presses less hard on
+// everyone: the warmth drive starts at 46 instead of 52 (so a person working outside in a light cold lets themselves sit
+// a little colder instead of interrupting the work to warm up), and a fire at close range warms like a hut wall (13
+// degrees at the peak instead of 9, src/sim/needs.ts). Drives and the fire both take their version-9 readings only in a
+// version-9 world; a version-8 world keeps the same pressure and the same fires.
+export const CURRENT_RULES_VERSION = 9;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

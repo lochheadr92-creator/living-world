@@ -170,8 +170,8 @@ export function valueOf(world: World, p: Person, item: ItemKind): number {
   return v;
 }
 
-export function personalDriveMax(p: Person): number {
-  return Math.max(drive(p.needs.hunger, 'hunger'), drive(p.needs.thirst, 'thirst'), drive(p.needs.warmth, 'warmth') * 0.8);
+export function personalDriveMax(world: World, p: Person): number {
+  return Math.max(drive(p.needs.hunger, 'hunger', world), drive(p.needs.thirst, 'thirst', world), drive(p.needs.warmth, 'warmth', world) * 0.8);
 }
 
 // ───────────────────────── gifts and relationships ─────────────────────────
@@ -307,7 +307,7 @@ function willingness(world: World, B: Person, A: Person, severity: number): numb
   if (isRich(world) && rel && rel.debt < 0) w += 0.12 * Math.min(3, -rel.debt);
   // the bereaved and new parents are helped more readily, most by those close to them (rich only; 0 otherwise)
   w += leanOn(world, B, A);
-  w -= 0.45 * (personalDriveMax(B) / 100);
+  w -= 0.45 * (personalDriveMax(world, B) / 100);
   w += (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.16;
   return w;
 }
@@ -361,7 +361,7 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   const rel = B.relations[A.id];
   // a shared responsibility (responsibilities.ts; rich only): weighed against their own dependants, needs, promises and liking
   if (req.kind === 'watch' || req.kind === 'fire') {
-    if (laidUp(world, B) || personalDriveMax(B) > 50) return { kind: 'decline', reason: 'own_need' };
+    if (laidUp(world, B) || personalDriveMax(world, B) > 50) return { kind: 'decline', reason: 'own_need' };
     if (activeCommitments(B).length >= MAX_ACTIVE_COMMITMENTS) return { kind: 'decline', reason: 'committed' };
     const ownKids = membersOf(world, householdById(world, B.hhId)).filter((m) => m !== B && stageOf(world, m) === 'child').length;
     if (req.kind === 'watch' && ownKids >= 2) return { kind: 'decline', reason: 'own_need' };
@@ -389,8 +389,8 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
     if (!has) return { kind: 'decline', reason: 'no_item' };
     // having none to spare is not the same as having none: say which it is
     if ((B.inv.wood ?? 0) > 0 && surplusOf(world, B, 'wood') <= 0 && plannedFor(B, 'wood') > 0) return { kind: 'decline', reason: 'making' };
-    if (w0 >= 0.62 && personalDriveMax(B) < 40) return { kind: 'promise', item: 'wood', n: 1 };
-    return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(B) > 35 ? 'own_need' : 'unwilling' };
+    if (w0 >= 0.62 && personalDriveMax(world, B) < 40) return { kind: 'promise', item: 'wood', n: 1 };
+    return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(world, B) > 35 ? 'own_need' : 'unwilling' };
   }
   // a request already covered by what others have promised is not one more to answer
   if (req.item && (req.kind === 'wood' || req.kind === 'stone' || req.kind === 'goods' || req.kind === 'haul')) {
@@ -436,10 +436,10 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
       const want = req.kind === 'food' || req.kind === 'care' ? Math.min(sur, Math.max(1, Math.ceil(sev * 3))) : Math.min(sur, req.amount);
       return { kind: 'give', item, n: Math.max(1, want) };
     }
-    return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(B) > 35 ? 'own_need' : 'unwilling' };
+    return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(world, B) > 35 ? 'own_need' : 'unwilling' };
   }
   // nothing to hand over right now: could B fetch some?
-  if (w >= 0.66 && personalDriveMax(B) < 38 && B.commitments.filter((c) => c.status === 'active').length < 2 && canObtain(world, B, item) && (item === 'wood' || item === 'stone' || item === 'water' || item === 'clay' || item === 'ore' || ((item === 'planks' || item === 'bricks' || item === 'handles') && B.commitments.length < 3) || isFood(item))) {
+  if (w >= 0.66 && personalDriveMax(world, B) < 38 && B.commitments.filter((c) => c.status === 'active').length < 2 && canObtain(world, B, item) && (item === 'wood' || item === 'stone' || item === 'water' || item === 'clay' || item === 'ore' || ((item === 'planks' || item === 'bricks' || item === 'handles') && B.commitments.length < 3) || isFood(item))) {
     return { kind: 'promise', item: isFood(item) ? (B.inv[item] ? item : 'berries') : item, n: Math.max(1, req.amount) };
   }
   const have = B.inv[item] ?? 0;
@@ -704,7 +704,7 @@ function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): 
   const rel = b.relations[a.id];
   if (rel && rel.avoidUntil > world.tick && purpose !== 'apologize' && purpose !== 'warn') return { ok: false, why: 'did not want to talk' };
   if (purpose === 'mediate' && !hears(a, b)) return { ok: false, why: 'would not hear of it' };
-  if (personalDriveMax(b) > 62 && purpose !== 'request' && purpose !== 'warn') return { ok: false, why: 'had more pressing needs' };
+  if (personalDriveMax(world, b) > 62 && purpose !== 'request' && purpose !== 'warn') return { ok: false, why: 'had more pressing needs' };
   // someone visibly hungry or thirsty asking for help is hard to put off
   const visibleNeed = (a.needs.hunger < 38 || a.needs.thirst < 38) && (purpose === 'request' || purpose === 'ask_info') ? 0.3 : 0;
   const urgent = (purpose === 'warn' ? 0.4 : purpose === 'request' || purpose === 'offer' || purpose === 'invite' ? 0.12 : 0) + visibleNeed;
@@ -1236,7 +1236,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         A.asked[B.id] = world.tick - 400;
         break;
       }
-      const w = 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(B) / 100) + (rel?.kin ? 0.2 : 0);
+      const w = 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
       if (w >= 0.55 && siteBelief && world.byId.has(d.siteId ?? 0)) {
         observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
