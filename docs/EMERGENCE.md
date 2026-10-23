@@ -690,6 +690,11 @@ what chance alone does. 24 seeds, Large, fork day 4, 8 days (run on a 24-core Wi
 | no wild food near settlements | people 102 → 57, deaths +45, workplaces −9.2, in 24/24 |
 | no clay or ore | workplaces −2.1, buildings −1.9: within the noise floor |
 
+*Reading `deaths` in lab output (corrected 2026-10-23).* The lab documents `deaths` as those since the fork, but until that date it counted every death since the
+world began. In a paired difference such as the table above the earlier deaths are the same in both branches and cancel, so those figures stand; the absolute `deaths`
+level of any `scripts/lab` run forked after day 0 (this table's fork-day-4 run is one) included the pre-fork deaths. (`scripts/novelneed.ts` keeps its own count and always took it from the fork.) Ensembles forked at day 0, which is
+nearly every one recorded here, are unaffected. Saved `lab_*.jsonl` files keep the value they were written with.
+
 Known weaknesses: (1) with one control per seed, small discrete metrics (people, deaths) are flagged "systematic" by the bootstrap too often
 (3 of 22 nudge cells), and no-wood shares the identical people/deaths flags with nudge:1, which is the control's own luck; only
 "larger than chance" verdicts are reliable. Fix: compare with the mean of the control and the nudge branches. (2) UNRESOLVED: the two-draw
