@@ -10,6 +10,8 @@ import { describe, expect, it } from 'vitest';
 import { DAY } from '../src/sim/constants';
 import { createBuilding } from '../src/sim/buildings';
 import { RNG } from '../src/sim/rng';
+import { runsRulesVersion } from '../src/sim/rulesversion';
+import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
 import { testKit } from '../src/sim/scenes';
 import { makeSource } from '../src/sim/sources';
 import { mintTool } from '../src/sim/tools';
@@ -17,6 +19,9 @@ import { T } from '../src/sim/types';
 import type { Person, World } from '../src/sim/types';
 import { stepWorld } from '../src/sim/world';
 import { settingsFor } from './helpers/util';
+import { freshRunSettings } from '../src/sim/profiles';
+import { parseRunRules } from '../src/sim/profiles';
+import { createWorld } from '../src/sim/factory';
 import { observe } from '../src/sim/knowledge';
 
 /** Veins on the four diagonals, 45 tiles out from the camp (43.5, 43.5): beyond idle reach (38), inside the ore hunt's band (24-47). */
@@ -89,5 +94,50 @@ describe('the ore hunt reaches ore (rules version 8)', () => {
       if (i > DAY * 3 && oreSeen) break;
     }
     expect(oreSeen, 'idle exploration must not reach a vein (' + IDLE_REACH + ' reach, ore further out)').toBe(false);
+  }, 120_000);
+});
+
+// The smithy's fuel (rules version 10): a standing smithy is a standing want for charcoal.
+//
+// Measured (v9): an ordinary world builds a kiln (day 8) and a smithy (day 15) but never makes charcoal, so the smithy
+// never smelts or forges anything in 160 days (iron_batch 0; 0 charcoal in any store; the kiln's store holds clay, no
+// charcoal). The reason in code: charcoal is only ever wanted as the transitive ingredient of a personal iron-tool plan
+// (a worn tool in the hand, a hammer, a forge plan, then the fuelled batch), and in an ordinary world that personal chain
+// never completes end to end. Version 10 gives charcoal a want of its own: somebody who knows a standing smithy wants it
+// stocked, because the kiln has idle time and the smithy is what burns it. That pulls the wood-gather, the firing and the
+// delivery through the ordinary planning machinery. This test pins the fixed behaviour from the want side alone: an adult
+// who knows a kiln and a smithy but holds NO worn tool (so no personal iron plan exists) still sees charcoal made.
+describe("the smithy's fuel comes to the kiln (rules version 10)", () => {
+  it('adults who know a standing smithy and a kiln see charcoal made, with no worn tool and no iron plan', () => {
+    // A natural (day-and-night) world: the flat staged map keeps the light constant, nobody sleeps, energy and health
+    // collapse, and the production options never open. The smithy and kiln are placed beside the first home and shown to
+    // two founders holding fresh (wear 0) axes, so on the want side alone - no worn tool, no personal iron plan - the
+    // smithy's fuel wants itself stocked. What the version does not change (rules version 9 or nothing) is pinned by the
+    // continuation reference, not by this test.
+    const w = createWorld(freshRunSettings(parseRunRules('rich'), 'normal', 'meadow', { immigration: false }));
+    (w.settings as { rulesVersion?: number }).rulesVersion = CURRENT_RULES_VERSION;
+    const home = w.buildings.find((b) => b.type === 'hut' || b.type === 'lean_to') ?? w.buildings[0];
+    const hx = home?.x ?? 60, hy = home?.y ?? 60;
+    const kiln = createBuilding(w, 'kiln', hx + 3, hy + 5, 0);
+    const smithy = createBuilding(w, 'smithy', hx - 5, hy + 8, 0);
+    const pair = w.persons.filter((q) => q.alive).slice(0, 2);
+    for (const q of pair) {
+      observe(w, q, kiln);
+      observe(w, q, smithy);
+      const t = mintTool(w, 'axe', 0, q.hhId, q.id, q.inv, q.id, 'test equipment');
+      t.wear = 0;
+    }
+
+    expect(runsRulesVersion(w, 10), 'the staged world must run rules version ' + CURRENT_RULES_VERSION).toBe(true);
+
+    let charcoalSeen = false;
+    for (let t = 0; t < DAY * 12 && !charcoalSeen; t++) {
+      stepWorld(w);
+      for (const b of w.buildings) {
+        if ((b.store?.items?.charcoal ?? 0) > 0) charcoalSeen = true;
+      }
+      for (const q of w.persons) if ((q.inv.charcoal ?? 0) > 0) charcoalSeen = true;
+    }
+    expect(charcoalSeen, "a known smithy must keep charcoal stocked: the kiln should burn a batch within twelve days").toBe(true);
   }, 120_000);
 });

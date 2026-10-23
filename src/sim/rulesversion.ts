@@ -55,10 +55,17 @@ import type { Settings, World } from './types';
 // a little colder instead of interrupting the work to warm up), and a fire at close range warms like a hut wall (13
 // degrees at the peak instead of 9, src/sim/needs.ts). Drives and the fire both take their version-9 readings only in a
 // version-9 world; a version-8 world keeps the same pressure and the same fires.
-export const CURRENT_RULES_VERSION = 9;
+// Version 10: THE SMITHY'S FUEL. A standing smithy is a standing want for charcoal. Before this, charcoal was only ever
+// wanted as the transitive ingredient of a personal iron-tool plan - a worn tool in the hand, a hammer, a forge plan,
+// then the fuelled batch - and in an ordinary world that personal chain never completed end to end (measured: a 160-day
+// run builds a kiln and a smithy but never makes charcoal, iron_batch 0). In `demandsOf` (src/sim/production.ts),
+// somebody who knows a standing smithy now wants charcoal kept stocked, so the kiln's idle time goes to firing it and
+// smelting and forging are not blocked on the fuel. Nothing else was retuned, and the want is only in a version-10
+// world: a version-9 world keeps the same demands as before.
+export const CURRENT_RULES_VERSION = 10;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

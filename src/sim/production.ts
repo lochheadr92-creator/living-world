@@ -9,6 +9,7 @@ import { rankWaterSpots, Scorer, addBlocked, addOption, beliefsByKind, countBeli
 import type { Ctx } from './optutil';
 import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
 import { rulesOf, within } from './rules';
+import { runsRulesVersion } from './rulesversion';
 import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
 import { RECIPES, RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
@@ -510,6 +511,23 @@ export function demandsOf(ctx: Ctx): Demand[] {
     }
     if (worst) {
       out.push({ item: worst.kind, qty: 1, have: 0, base: (13 + (worst.wear - 18) * 0.3) * tm.work, why: `to replace my worn ${TOOL_DEFS[worst.kind].label} with an iron one`, tag: 'craft', tier: 1 });
+    }
+  }
+
+  // the smithy's fuel (rules version 10): a standing smithy is a standing want for charcoal. Without a want of its own,
+  // charcoal is only ever the transitive ingredient of a personal iron-tool plan, and that chain stalls (measured: a
+  // 160-day ordinary world builds a kiln and a smithy but makes no charcoal and forges no iron). Someone who knows a
+  // smithy and a kiln keeps the charcoal stocked, so the kiln's idle time goes to firing it. Weighted like the other
+  // settlement supplies (bricks and planks ride at about 30), not like a personal convenience: only an industrial want
+  // beats rest and chatter on an ordinary day.
+  if (runsRulesVersion(world, 10) && facilitiesOf(ctx, 'smithy').length && knowsOfAny(ctx, 'kiln')) {
+    let onShelves = 0;
+    for (const s of beliefsByKind(p, ['building'])) {
+      if (s.btype !== 'smithy' && s.btype !== 'kiln') continue;
+      onShelves += unitsOf(s.items?.charcoal);
+    }
+    if (onShelves < 4) {
+      out.push({ item: 'charcoal', qty: 4 - onShelves, have: onShelves, base: 30 * tm.work, why: 'the smithy burns charcoal to smelt and forge', tag: 'craft' });
     }
   }
 
