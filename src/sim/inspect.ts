@@ -377,7 +377,7 @@ export function planViews(world: World, p: Person): PlanView[] {
 }
 
 export function auditOpportunities(world: World, p: Person): OpportunityView[] {
-  const ctx = generateOptions(world, p, true);
+  const ctx = generateOptions(world, p, true, true);
   const ranked = rankOptions(ctx);
   const chosenKey = p.activity?.data.optKey as string | undefined;
   const chosenLabel = p.activity ? p.activity.label : ranked[0]?.label;

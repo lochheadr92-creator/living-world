@@ -30,9 +30,14 @@ const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'ener
 
 const CHILD_FORBIDDEN: ActivityKind[] = ['build', 'haul', 'plan_site', 'repair', 'craft', 'till', 'plant', 'tend', 'harvest', 'claim_home', 'fuel_fire', 'withdraw', 'operate', 'tool_work', 'cart_haul', 'defend'];
 
-/** world state -> local perception (already done) -> eligible actions. Pure with respect to the world: nothing is started here. */
-export function generateOptions(world: World, p: Person, collect = false): Ctx {
-  const ctx = makeCtx(world, p, collect);
+/**
+ * world state -> local perception (already done) -> eligible actions. Nothing is started here.
+ * `collect` also records the options that were ruled out and why (a person deciding for themselves does this, so that the card can
+ * say what they passed over). `observer` is for the inspector alone, asking what someone could do: it must leave no trace, so the few
+ * things the planner notes as it goes (a promise held up, a request already considered, a worry) are not noted.
+ */
+export function generateOptions(world: World, p: Person, collect = false, observer = false): Ctx {
+  const ctx = makeCtx(world, p, collect, observer);
   survivalOptions(ctx);
   workOptions(ctx);
   productionOptions(ctx);
