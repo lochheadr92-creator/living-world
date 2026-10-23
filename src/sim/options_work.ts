@@ -1209,8 +1209,12 @@ function optExplore(ctx: Ctx): void {
   if (ctx.dangers.length) base -= 8 * tm.caution;
   if (ctx.stage === 'elder') base *= 0.5; // the old stay closer to home
   if (base < 8) return;
-  const rMin = 11;
-  const rMax = 24 + 10 * p.traits.curiosity;
+  // an ore hunt goes where ore grows: the deposit band worldgen uses (24-46 tiles out, under stony ground). Idle
+  // curiosity reaches only 24 + 10*curiosity (about 34 for a curious adult), which never meets the band - measured:
+  // a 160-day ordinary run builds a kiln, a bakery and a yard but never starts a smithy, and its iron count is zero.
+  const oreHunt = dLead?.what === 'ore_vein';
+  const rMin = oreHunt ? 24 : 11;
+  const rMax = oreHunt ? 44 + 6 * p.traits.curiosity : 24 + 10 * p.traits.curiosity;
   // pick a frontier: sample points and prefer those whose surroundings are unexplored
   let best: { x: number; y: number; score: number } | null = null;
   const hub = nearestHub(world, p.x, p.y);
@@ -1227,14 +1231,17 @@ function optExplore(ctx: Ctx): void {
     if (t === T.DEEP || t === T.SHALLOW || world.solid[idx]) continue;
     if (recentFailure(world, p, -(idx + 10), 1500)) continue;
     let unknown = 0;
+    let stony = 0;
     for (let k = 0; k < 9; k++) {
       const xx = Math.min(world.W - 1, Math.max(0, x + ((k % 3) - 1) * 4));
       const yy = Math.min(world.H - 1, Math.max(0, y + (Math.floor(k / 3) - 1) * 4));
       if (p.explored[yy * world.W + xx] === 0) unknown++;
+      if (world.terrain[yy * world.W + xx] === T.STONY) stony++;
     }
     if (unknown < 3) continue;
     const dng = dangerAt(ctx, x, y, 12);
-    const score = unknown * 2 - hyp(x - p.x, y - p.y) * 0.12 - dng * 14 * tm.caution + hashUnit(p.id, i, 3) * 1.5;
+    // the hunt leans toward stony ground, where ore veins actually grow (worldgen puts every vein under it)
+    const score = unknown * 2 - hyp(x - p.x, y - p.y) * 0.12 - dng * 14 * tm.caution + hashUnit(p.id, i, 3) * 1.5 + (oreHunt ? stony * 2.5 : 0);
     if (!best || score > best.score) best = { x, y, score };
   }
   if (!best) return;

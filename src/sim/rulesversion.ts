@@ -44,10 +44,15 @@ import type { Settings, World } from './types';
 // whole of it is `src/sim/shelter.ts` plus the `shelter` plan kind in `src/sim/intent.ts`, every part gated on
 // `runsRulesVersion(world, 7)`. Laying out a site, building, ownership and habitation are unchanged; what changes is that
 // the material is now fetched on purpose instead of arriving by chance. Nothing else was retuned.
-export const CURRENT_RULES_VERSION = 7;
+// Version 8: THE ORE HUNT REACHES ORE. Worldgen places ore veins 24-46 tiles out under stony ground; exploration sampled
+// radius 11 -> 24 + 10*curiosity for every reason, so a hunt bent on finding ore never reached the band and an ordinary
+// world smelted no iron (measured: a 160-day run builds a kiln, a bakery and a yard but no smithy). In `src/sim/options_work.ts`
+// an ore hunt (depositLead's lead) now samples the band itself (radius 24 -> 44 + 6*curiosity) and leans toward stony
+// ground. Nothing else was retuned; idle wander, water hunts and timber hunts sample exactly where they always did.
+export const CURRENT_RULES_VERSION = 8;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
