@@ -1,0 +1,84 @@
+{
+  "what": "finished eat_store activities by outcome, and why the failures failed",
+  "run": {
+    "seeds": [
+      "river",
+      "brook",
+      "meadow",
+      "stone5"
+    ],
+    "days": 8,
+    "profile": "normal",
+    "rulesVersion": 8,
+    "immigration": false
+  },
+  "total": {
+    "ok": 150,
+    "failed": 198,
+    "packFull": 189,
+    "empty": 4,
+    "gone": 0,
+    "other": 5,
+    "interrupted": 99,
+    "failedWhileStarving": 49
+  },
+  "finished": 348,
+  "failureRate": 0.569,
+  "shareOfFailuresWithFoodInTheStoreAndNoRoomInThePack": 0.955,
+  "hungerAtFailure": {
+    "lowest": 0,
+    "median": 38,
+    "highest": 59,
+    "below25": 47,
+    "note": "0 = starving"
+  },
+  "perSeed": {
+    "river": {
+      "ok": 34,
+      "failed": 43,
+      "packFull": 41,
+      "empty": 2,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 26,
+      "failedWhileStarving": 6
+    },
+    "brook": {
+      "ok": 40,
+      "failed": 34,
+      "packFull": 31,
+      "empty": 0,
+      "gone": 0,
+      "other": 3,
+      "interrupted": 22,
+      "failedWhileStarving": 7
+    },
+    "meadow": {
+      "ok": 37,
+      "failed": 66,
+      "packFull": 64,
+      "empty": 2,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 27,
+      "failedWhileStarving": 16
+    },
+    "stone5": {
+      "ok": 39,
+      "failed": 55,
+      "packFull": 53,
+      "empty": 0,
+      "gone": 0,
+      "other": 2,
+      "interrupted": 24,
+      "failedWhileStarving": 20
+    }
+  },
+  "examplesOfAFullPack": [
+    "river t2685: Petra carrying {\"wood\":3,\"stone\":2} at store #1129, hunger 51",
+    "river t4264: Basil carrying {\"berries\":2,\"wood\":2,\"stone\":2} at store #2384, hunger 43",
+    "river t4680: Ivy carrying {\"berries\":4,\"wood\":4} at store #2384, hunger 33",
+    "river t4695: Theo carrying {\"berries\":2,\"seeds\":2,\"wood\":1} at store #1104, hunger 51",
+    "river t4727: Viktor carrying {\"berries\":2,\"seeds\":1,\"wood\":1} at store #1104, hunger 45"
+  ]
+}

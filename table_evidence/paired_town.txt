@@ -1,0 +1,9 @@
+﻿arm                    seeds  deaths  seedsWithDeath  belowCritical(end)  meanHunger  hungerExposure   people(end)
+control                   16       7               5                   6       63.97      9.625E-004         99.6
+nudge:1                   16       5               4                  16       63.89      1.463E-003         99.7
+nudge:2                   16       3               2                  20       64.43      1.100E-003         99.8
+rich-no-table-eating      16       9               5                  25       60.52      3.100E-003         99.4
+--- paired, per seed: ablation minus control
+extra deaths without the rule: 2 (ablation more in 3 seeds, fewer in 3, same in 10)
+mean hungerExposure difference: 2.138E-003; higher without the rule in 12 seeds, lower in 1
+mean meanHunger difference: -3.45 (negative = hungrier without the rule); lower in 11 seeds, higher in 5

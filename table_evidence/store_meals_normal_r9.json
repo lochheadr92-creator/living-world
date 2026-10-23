@@ -1,0 +1,78 @@
+{
+  "what": "finished eat_store activities by outcome, and why the failures failed",
+  "run": {
+    "seeds": [
+      "river",
+      "brook",
+      "meadow",
+      "stone5"
+    ],
+    "days": 8,
+    "profile": "normal",
+    "rulesVersion": 9,
+    "immigration": false
+  },
+  "total": {
+    "ok": 225,
+    "failed": 5,
+    "packFull": 0,
+    "empty": 5,
+    "gone": 0,
+    "other": 0,
+    "interrupted": 84,
+    "failedWhileStarving": 0
+  },
+  "finished": 230,
+  "failureRate": 0.022,
+  "shareOfFailuresWithFoodInTheStoreAndNoRoomInThePack": 0,
+  "hungerAtFailure": {
+    "lowest": 38,
+    "median": 50,
+    "highest": 55,
+    "below25": 0,
+    "note": "0 = starving"
+  },
+  "perSeed": {
+    "river": {
+      "ok": 56,
+      "failed": 4,
+      "packFull": 0,
+      "empty": 4,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 19,
+      "failedWhileStarving": 0
+    },
+    "brook": {
+      "ok": 60,
+      "failed": 0,
+      "packFull": 0,
+      "empty": 0,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 23,
+      "failedWhileStarving": 0
+    },
+    "meadow": {
+      "ok": 60,
+      "failed": 0,
+      "packFull": 0,
+      "empty": 0,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 26,
+      "failedWhileStarving": 0
+    },
+    "stone5": {
+      "ok": 49,
+      "failed": 1,
+      "packFull": 0,
+      "empty": 1,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 16,
+      "failedWhileStarving": 0
+    }
+  },
+  "examplesOfAFullPack": []
+}

@@ -39,7 +39,22 @@ export interface StoreWatch {
   scan(world: World): void;
 }
 
-export function watchStoreMeals(): StoreWatch {
+/** One finished store meal, for a caller that wants the story and not only the counts. */
+export interface StoreMealEvent {
+  tick: number;
+  personId: number;
+  hhId: number;
+  outcome: 'success' | 'failed' | 'interrupted';
+  /** why it failed (absent unless it failed) */
+  why?: 'packFull' | 'empty' | 'gone' | 'other';
+  /** the store or pile it was about */
+  targetId: number;
+  /** hunger when the result was written, 0 = starving */
+  hunger: number;
+  detail: string;
+}
+
+export function watchStoreMeals(onMeal?: (e: StoreMealEvent) => void): StoreWatch {
   const meals = emptyStoreMeals();
   const target = new Map<number, { kind: string; id: number }>();
   const seen = new Map<number, number>();
@@ -62,17 +77,32 @@ export function watchStoreMeals(): StoreWatch {
         seen.set(p.id, r.tick);
         const t = target.get(p.id);
         if (!t || t.kind !== 'eat_store') continue;
-        if (r.outcome === 'success') meals.ok++;
-        else if (r.outcome === 'interrupted') meals.interrupted++;
-        else {
+        const told = (why?: StoreMealEvent['why']) =>
+          onMeal?.({ tick: r.tick, personId: p.id, hhId: p.hhId, outcome: r.outcome === 'success' ? 'success' : r.outcome === 'interrupted' ? 'interrupted' : 'failed', why, targetId: t.id, hunger: Math.round(p.needs.hunger), detail: r.detail });
+        if (r.outcome === 'success') {
+          meals.ok++;
+          told();
+        } else if (r.outcome === 'interrupted') {
+          meals.interrupted++;
+          told();
+        } else {
           meals.failed++;
           if (p.needs.hunger < 25) meals.failedWhileStarving++;
           const e = world.byId.get(t.id);
           const items = e && e.ent === 'building' ? e.store.items : e && e.ent === 'pile' ? e.items : null;
-          if (!items) meals.gone++;
-          else if (foodUnits(items) <= 0) meals.empty++;
-          else if (invRoom(world, p, 'berries') <= 0) meals.packFull++;
-          else meals.other++;
+          if (!items) {
+            meals.gone++;
+            told('gone');
+          } else if (foodUnits(items) <= 0) {
+            meals.empty++;
+            told('empty');
+          } else if (invRoom(world, p, 'berries') <= 0) {
+            meals.packFull++;
+            told('packFull');
+          } else {
+            meals.other++;
+            told('other');
+          }
         }
       }
     },
