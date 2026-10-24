@@ -3,6 +3,20 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
+## Owner queued priority after this programme
+
+Owner instruction, 2026-10-24: finish the current civilisation implementation programme
+and its required verification first, then address the five inhabitant audit findings
+before unrelated new features. Do not interrupt or truncate this programme for this queue.
+
+The committed [ordered queue and acceptance criteria](https://github.com/lochheadr92-creator/living-world/blob/030d62d/docs/audits/2026-10-24-odette/NEXT_PRIORITIES.md)
+are: F1 shelter timeout after conversation; F3 ambiguous duplicate choice keys;
+F2 missing crafting-block explanation; F4 stale post-conversation summary; F5 mixed
+time labels. Status: queued, not started. Reproduce against the finished current
+implementation before changing it; the original evidence is from version 13, not a
+claim about the completed programme. Preserve historical save/replay semantics and
+record current evidence if implementation work has already resolved a finding.
+
 ## Authority and reconciliation
 
 Starting checkout `359bce9` is retired wolf defence. Local main `4ad23f1` and remote main
@@ -36,7 +50,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | Roadmap 7 / A6 / D | No runtime relocation/founding; reserve/explore exist | S3; known destination, physical household travel/failure, membership, save | unresolved |
 | Roadmap 8 / A2 | Persistent township membership now saved at 12; production observations still absent | S1 verified membership; S4 action-derived statistics | implemented: membership; unresolved: statistics |
 | Roadmap 9 / A7 / G | Skills/practice/apprenticeship exist; no held technique | S5; contact/time teaching, provenance/loss, practice control | unresolved |
-| Roadmap 10 / A5 / F | No civic authority; household head has no political decisions | S1 organiser + support/outcome; S2 rival support/factions/departure | unresolved |
+| Roadmap 10 / A5 / F | V12 project organiser; v15 explicit competing coordinators and voluntary support; no inherited office | S1/S2 bounded contracts/runtime; persistent factions and wider proposals remain | implemented: coordination; unresolved: factions/F ensemble |
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
 | A4 economy / E | Physical production exists; purposeful cross-settlement trade absent | S4; known counterparty, co-presence, conserved barter/journey/failure | unresolved |
 | A6 environment / C | Global weather and symmetric camps; no settlement production observations | S4; sustained actual action/flow differences under opportunities | unresolved |
@@ -215,3 +229,54 @@ Next executable work: S2b competing proposals/organisers; D7 co-present market r
 before cross-settlement trade. General route safety, relocation, knowledge/generations,
 and current-rule performance/ensemble measurements remain open. Do not infer these
 from the staged scenes.
+
+## S2b: competing project coordinators (version 15)
+
+Architecture: `civic_decision.ts` owns bounded candidate/support rules attached to the
+existing civic project. Alternatives considered: duplicate rival physical buildings,
+or alternate coordination proposals for the same public storehouse. Selected the
+latter: preserves existing materials/site and creates meaningful disagreement without
+speculative budgets, offices, property seizure or wasteful duplicate construction.
+`organiserId` retains the original proposer; the council records the current coordinator.
+
+A proposal begins without a mandate. At least two actual supporters and a strict lead
+in support permit their coalition to work. Ties, withdrawal, death or household departure
+remove the mandate; materials already supplied remain on the public site. Candidate
+identity is never assigned from age or wealth. A respondent who knows the site may
+propose an alternative coordinator after a personal grievance, distrust, witnessed
+failure or known organiser death. The proposal is made in the ordinary co-present
+recruit conversation. A resident may retain prior support or switch based on their
+own affinity, trust, grievance and witnessed organising outcomes; the same outcome
+is not added as another reputation story. Existing willingness/survival gates remain.
+
+Four candidates, twelve participants, one response per person/candidate, twelve recent
+coordinator transitions per retained project. No second civic truth store: accepted
+conversation responses update the participation record. Switching releases the old
+work promise as interrupted, without a fabricated moral failure. A failed tied project
+is not attributed to an invented coordinator. Lab ablation: `rich-no-civic-choice`.
+Version 14 continuation was pinned in 4c597b9 before implementation.
+
+Contract evidence includes one-person blocking, physical accepted support, offered
+challenge option, actual switch from Ada to Cora, tied support, urgent withdrawal,
+coordinator death, private inventory conservation, complete observer purity, save/load,
+and v14 continuation. A current-rule construction fixture still physically finishes
+with exactly 10 wood, 4 stone, 640 work. Staged runtime shows Ben support Ada, Cora
+refuse Ada, then Ben switch to Cora in an actual conversation. Mid-response save/load
+produces identical complete final state. Eight browser checks pass; screenshots were
+visually inspected. This demonstrates project-level collective decisions, not natural
+leadership frequency or enduring factions. Experiment F remains unrun.
+
+Review: the first fixture inadvertently allowed a different autonomous conversation
+while waiting, so it did not isolate the requested interaction. The corrected labelled
+fixture holds bystanders idle and waits for the exact asker/respondent request; it does
+not force acceptance or alter probabilities. Other contracts retain autonomous stepping.
+The challenge reads the person's last heard/supported organiser, not unseen current votes.
+
+Remaining S2c: repeated alignments with persistent decision consequences and rival
+investment priorities. S3-S6 remain as registered. Do not label a one-project coalition
+an inherited faction or the whole civilisation programme complete.
+
+S2b boundary checks: full suite 1052 tests / 111 files; build and typecheck passed;
+historical golden script matched. Final review repaired the lab ablation's outcome
+credit (work access already reverted); eight focused checks including v14 continuation
+passed afterward. No product behavior or earlier reference was changed by that repair.

@@ -1,0 +1,25 @@
+import { contestFixture, civicTalk, stop } from '../tests/helpers/contest';
+import { serializeWorld, deserializeWorld } from '../src/app/save';
+import { mandate } from '../src/sim/civic_decision';
+import { conservationReport } from '../src/sim/economy';
+import { newActivity, startActivity } from '../src/sim/activities';
+import { stepWorld } from '../src/sim/world';
+import { mkdirSync,writeFileSync } from 'node:fs';
+const {w,a,b,c,site,q}=contestFixture();w.sceneLabel='STAGED: changing support changes the coordinator';
+mkdirSync('civic_evidence',{recursive:true});
+civicTalk(w,a,b,site.id);stop(w,a,b,c);
+if(mandate(w,q)!==a.id)throw new Error('first agreement missing');
+writeFileSync('civic_evidence/choice-before-save.json',serializeWorld(w));
+civicTalk(w,a,c,site.id);stop(w,a,b,c);
+c.cooldowns['talk'+b.id]=0;b.cooldowns['talk'+c.id]=0;c.cooldowns.pause=0;
+startActivity(w,c,newActivity(w,c,{kind:'socialize',label:'Propose another coordinator',goal:'staged alternative',targetId:b.id,targetType:'person',tx:b.x,ty:b.y,spotX:b.x-1.3,spotY:b.y,utility:100,minCommit:4000,maxTicks:600,data:{purpose:'recruit',conv:{siteId:site.id}}}));
+for(let i=0;i<300&&!w.conversations.some(x=>x.a===c.id&&x.phase===2);i++)stepWorld(w);
+if(!w.conversations.some(x=>x.a===c.id&&x.phase===2))throw new Error('no pending response to snapshot');
+const loaded=deserializeWorld(serializeWorld(w));
+for(let i=0;i<300&&mandate(w,q)!==c.id;i++){stepWorld(w);stepWorld(loaded);}
+if(serializeWorld(w)!==serializeWorld(loaded))throw new Error('mid-negotiation continuation differs');
+if(mandate(w,q)!==c.id)throw new Error('coordinator did not change through the response');
+writeFileSync('civic_evidence/choice-after-save.json',serializeWorld(w));
+const report={label:w.sceneLabel,project:q,ledger:conservationReport(w),midConversationContinuation:true};
+if(!report.ledger.ok)throw new Error('unbalanced ledger');
+writeFileSync('civic_evidence/choice-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));

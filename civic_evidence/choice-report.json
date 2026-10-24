@@ -1,0 +1,101 @@
+{
+  "label": "STAGED: changing support changes the coordinator",
+  "project": {
+    "id": 9,
+    "townshipId": 3,
+    "siteId": 8,
+    "organiserId": 2,
+    "proposed": 0,
+    "reason": "our known households need a shared store",
+    "status": "active",
+    "outcome": "",
+    "participants": [
+      {
+        "personId": 2,
+        "requestId": 0,
+        "since": 0,
+        "status": "supporting",
+        "reason": "proposed this shared storehouse",
+        "materials": {},
+        "work": 0,
+        "supports": 2
+      },
+      {
+        "personId": 5,
+        "requestId": 27,
+        "since": 32,
+        "status": "supporting",
+        "reason": "Ben supports Cora coordinating and will help build",
+        "materials": {},
+        "work": 0,
+        "decisions": [
+          {
+            "candidateId": 2,
+            "accepted": true,
+            "reason": "Ben supports Ada coordinating and will help build",
+            "tick": 32
+          },
+          {
+            "candidateId": 12,
+            "accepted": true,
+            "reason": "Ben supports Cora coordinating and will help build",
+            "tick": 214
+          }
+        ],
+        "supports": 12
+      },
+      {
+        "personId": 12,
+        "requestId": 22,
+        "since": 120,
+        "status": "supporting",
+        "reason": "does not trust the present organiser",
+        "materials": {},
+        "work": 0,
+        "decisions": [
+          {
+            "candidateId": 2,
+            "accepted": false,
+            "reason": "does not want to work with this organiser",
+            "tick": 120
+          }
+        ],
+        "supports": 12
+      }
+    ],
+    "council": {
+      "candidates": [
+        {
+          "personId": 2,
+          "tick": 0,
+          "reason": "proposed the physical project"
+        },
+        {
+          "personId": 12,
+          "tick": 192,
+          "reason": "does not trust the present organiser"
+        }
+      ],
+      "coordinatorId": 12,
+      "changes": [
+        {
+          "tick": 32,
+          "from": 0,
+          "to": 2,
+          "reason": "most accepted support (at least two people)"
+        },
+        {
+          "tick": 214,
+          "from": 2,
+          "to": 12,
+          "reason": "most accepted support (at least two people)"
+        }
+      ]
+    }
+  },
+  "ledger": {
+    "ok": true,
+    "diffs": []
+  },
+  "midConversationContinuation": true
+}

@@ -1,3 +1,4 @@
+import { initialiseCouncil, councilFor, councilAllowsWork, mayAskSupport, recordChoice, recount, type Council } from './civic_decision';
 // Civic identity and collective work. This module owns saved civic records, not inventories,
 // navigation or construction. Those remain with their existing physical action handlers.
 import type { World, Household, Person, Site, Request, Items, ItemKind, Building } from './types';
@@ -9,11 +10,14 @@ import { hyp } from './util';
 
 export interface Township { id: number; name: string; x: number; y: number; founded: number }
 export interface Participation {
+ supports?: number;
+ decisions?: {candidateId:number;accepted:boolean;reason:string;tick:number}[];
  personId: number; requestId: number; since: number;
  status: 'supporting' | 'refused' | 'withdrawn'; reason: string;
  materials: Items; work: number;
 }
 export interface CivicProject {
+ council?: Council;
  id: number; townshipId: number; siteId: number; organiserId: number;
  proposed: number; reason: string; status: 'active' | 'completed' | 'failed';
  outcome: string; ended?: number; buildingId?: number; participants: Participation[];
@@ -47,7 +51,7 @@ export function participation(w: World, p: Person, siteId: number): Participatio
 }
 export function mayWorkProject(w: World, p: Person, siteId: number): boolean {
  const project = projectAt(w, siteId);
- return !project || participation(w, p, siteId)?.status === 'supporting';
+ return !project || participation(w, p, siteId)?.status === 'supporting' && councilAllowsWork(w,p,project);
 }
 /** Existing plan_site has been chosen and physically marked out. No materials are created. */
 export function proposeProject(w: World, p: Person, site: Site, reason: string): void {
@@ -60,6 +64,7 @@ export function proposeProject(w: World, p: Person, site: Site, reason: string):
   proposed: w.tick, reason, status: 'active', outcome: '', participants: [
    { personId: p.id, requestId: 0, since: w.tick, status: 'supporting', reason: 'proposed this shared storehouse', materials: {}, work: 0 },
   ] });
+ initialiseCouncil(w,projects[projects.length-1]);
  // Bounded recent project detail. Completed buildings and household ownership are never removed.
  const ended = projects.filter(q => q.status !== 'active');
  for (const old of ended.slice(0, Math.max(0, ended.length - 24))) projects.splice(projects.indexOf(old), 1);
@@ -69,11 +74,19 @@ export function proposeProject(w: World, p: Person, site: Site, reason: string):
 export function recordProjectResponse(w: World, asker: Person, responder: Person, req: Request | undefined): void {
  if (!req || req.kind !== 'help_build') return;
  const project = projectAt(w, req.siteId);
- if (!project || project.organiserId !== asker.id || project.participants.some(m => m.personId === responder.id)) return;
+ if (!project) return;
+ const council=councilFor(w,project);
+ const existing=project.participants.find(m=>m.personId===responder.id);
+ if(!council && (project.organiserId!==asker.id||existing))return;
  if (hyp(asker.x - responder.x, asker.y - responder.y) > 3 || asker.indoors !== responder.indoors) return;
  if (req.status !== 'promised' && req.status !== 'declined') return;
- project.participants.push({ personId: responder.id, requestId: req.id, since: w.tick,
-  status: req.status === 'promised' ? 'supporting' : 'refused', reason: req.note || req.status, materials: {}, work: 0 });
+ if(council&&!council.candidates.some(c=>c.personId===asker.id))return;
+ const m=existing??{ personId: responder.id, requestId: req.id, since: w.tick,
+  status: req.status === 'promised' ? 'supporting' as const : 'refused' as const, reason: req.note || req.status, materials: {}, work: 0 };
+ if(!existing)project.participants.push(m);
+ if(req.status==='promised'){m.status='supporting';m.requestId=req.id;m.reason=req.note;}
+ recordChoice(w,project,m,asker,req.status==='promised',req.note);
+
 }
 export function creditProject(w: World, p: Person, siteId: number, item: ItemKind | null, amount: number): void {
  const m = participation(w, p, siteId);
@@ -91,8 +104,11 @@ export function finishProject(w: World, site: Site, building: Building | null, w
  for (const m of project.participants) {
   const p = w.byId.get(m.personId);
   if (!p || p.ent !== 'person' || !p.alive || p.indoors || hyp(p.x - site.x, p.y - site.y) > 8) continue;
+  const council=councilFor(w,project);
+  const accountable=council?council.coordinatorId:project.organiserId;
+  if(!accountable)continue; // a failed tied project is not attributed to an invented leader
   const memories = p.civicOutcomes ??= [];
-  memories.push({ projectId: project.id, organiserId: project.organiserId, success: !!building, tick: w.tick });
+  memories.push({ projectId: project.id, organiserId: accountable, success: !!building, tick: w.tick });
   if (memories.length > 24) memories.shift();
  }
 }
@@ -105,6 +121,7 @@ export function reviewParticipation(w: World, p: Person): void {
  if (!hasTownships(w)) return;
  for (const project of w.civicProjects ?? []) {
   if (project.status !== 'active') continue;
+  recount(w,project);
   const m = project.participants.find(q => q.personId === p.id && q.status === 'supporting');
   if (!m) continue;
   const left = townshipOf(w, p)?.id !== project.townshipId;
@@ -117,11 +134,13 @@ export function reviewParticipation(w: World, p: Person): void {
    const req = w.requests.find(r => r.id === c.requestId);
    if (req) { req.status = 'interrupted'; req.note = m.reason; req.resolved = w.tick; req.outcome = 'interrupted'; }
   }
+  recount(w,project);
   addEvent(w, 'social', `${p.name} withdrew from the shared storehouse: ${m.reason}.`, [p.id, project.siteId], p.x, p.y);
  }
 }
 export function canInvite(w: World, organiser: Person, q: Person, siteId: number): boolean {
  const project = projectAt(w, siteId);
+ if(project && councilFor(w,project))return project.status==='active' && (project.participants.length<12||project.participants.some(m=>m.personId===q.id)) && stageOf(w,q)!=='child' && mayAskSupport(w,organiser,q,project);
  return !!project && project.status === 'active' && project.organiserId === organiser.id &&
   participation(w, organiser, siteId)?.status === 'supporting' && project.participants.length < 12 &&
   townshipOf(w, q)?.id === project.townshipId && stageOf(w, q) !== 'child' &&
@@ -138,6 +157,7 @@ export function validateTownships(w: World): void {
  for (const q of w.civicProjects ?? []) {
   if (!towns.some(t => t.id === q.townshipId)) throw new Error('Unknown project township');
   if (new Set(q.participants.map(m => m.personId)).size !== q.participants.length || q.participants.length > 12) throw new Error('Invalid project participants');
+  if(q.council && (!runsRulesVersion(w,15)||q.council.candidates.length>4||new Set(q.council.candidates.map(c=>c.personId)).size!==q.council.candidates.length||q.participants.some(m=>m.supports&&!q.council!.candidates.some(c=>c.personId===m.supports))))throw new Error('Invalid civic choices');
   if (q.status === 'active' && !w.sites.some(s => s.id === q.siteId)) throw new Error('Active project missing its physical site');
  }
 }

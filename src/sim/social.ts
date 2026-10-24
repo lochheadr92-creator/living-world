@@ -1,3 +1,4 @@
+import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
@@ -1011,10 +1012,12 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     case 'recruit': {
       const site = world.byId.get(d.siteId ?? 0);
       const building = site && site.ent === 'site' ? site.type.replace('_', '-') : 'building';
+      const project=projectAt(world,d.siteId??0);
+      if(project)nominate(world,A,B,project);
       const req = createRequest(world, A, B, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1 });
       d.reqId = req.id;
       c.requestId = req.id;
-      bubble(world, A, D.requestLine('help_build', A.id, B.id, { building }), 'ask', 60);
+      bubble(world, A, project&&councilFor(world,project)?`Will you support me coordinating this ${building}?`:D.requestLine('help_build', A.id, B.id, { building }), 'ask', 60);
       break;
     }
     case 'apologize': {
@@ -1250,10 +1253,14 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       if (projectAt(world, d.siteId ?? 0) && !canInvite(world, A, B, d.siteId ?? 0)) {
         settle(world, req, 'declined', 'not eligible for this township project'); break;
       }
+      const project=projectAt(world,d.siteId??0);
+      const oppose=project?oppositionReason(world,B,A,project):'';
+      if(oppose){settle(world,req,'declined',oppose);bubble(world,B,'I still support the other organiser.','say',64);break;}
       const rel = B.relations[A.id];
       const site0 = world.byId.get(d.siteId ?? 0);
       const cap = (site0 && site0.ent === 'site' ? site0.maxWorkers : 3) + 1;
-      if (helpersOn(world, d.siteId ?? 0) >= cap || activeCommitments(B).length >= MAX_ACTIVE_COMMITMENTS) {
+      const council=project&&councilFor(world,project);
+      if ((!council && helpersOn(world, d.siteId ?? 0) >= cap) || activeCommitments(B).filter(c=>!council||c.siteId!==project!.siteId).length >= MAX_ACTIVE_COMMITMENTS) {
         bubble(world, B, 'There are hands enough there already.', 'say', 52);
         settle(world, req, 'declined', 'enough hands already');
         A.asked[B.id] = world.tick - 400;
@@ -1262,10 +1269,11 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       const w = (projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id) : 0) + 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
       if (w >= 0.55 && siteBelief && (projectAt(world, d.siteId ?? 0) || world.byId.has(d.siteId ?? 0))) {
         observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
+        if(project && councilFor(world,project))releaseOldSupport(world,B,project.siteId,'accepted another coordinator for this project');
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
         req.status = 'promised';
-        req.note = `${B.name} will help build`;
-        bubble(world, B, D.saying(D.RESP_PROMISE_HELP, B.id, A.id, world.tick >> 5), 'say', 64);
+        req.note = council ? `${B.name} supports ${A.name} coordinating and will help build` : `${B.name} will help build`;
+        bubble(world, B, council?`I support you coordinating it, ${A.name}.`:D.saying(D.RESP_PROMISE_HELP, B.id, A.id, world.tick >> 5), 'say', 64);
         addLog(world, B, 'social', `Agreed to help ${A.name} with the building.`);
         addEvent(world, 'social', `${B.name} agreed to help ${A.name} build.`, [A.id, B.id], A.x, A.y);
       } else {

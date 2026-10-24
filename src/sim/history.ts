@@ -1,3 +1,4 @@
+import { mandate } from './civic_decision';
 // Derived observer links only. No RNG, cached state, invented causes, or simulation mutations.
 import type { World, Person, Items } from './types';
 import type { CivicProject } from './townships';
@@ -8,10 +9,12 @@ export function projectHistory(w: World, q: CivicProject): string[] {
  const site = w.byId.get(q.siteId);
  const missing = site?.ent === 'site' ? Object.entries(site.required).map(([k,n]) => [k, Math.max(0, (n ?? 0) - ((site.delivered as Record<string,number>)[k] ?? 0) - ((site.used as Record<string,number>)[k] ?? 0))] as const).filter(([,n]) => n > 0).map(([k,n]) => `${n} ${k}`).join(', ') : '';
  const organiser = w.byId.get(q.organiserId);
+ const coordinator=q.status==='active'?mandate(w,q):q.council?.coordinatorId;
  const supported = q.participants.filter(m => m.personId !== q.organiserId && m.status === 'supporting').length;
  return [
-  `Shared storehouse #${q.siteId}: ${q.status}. Organiser: ${name(w, q.organiserId)}${!organiser || organiser.ent !== 'person' || !organiser.alive ? ' (no longer present; supporters may continue)' : ''}.`,
+  `Shared storehouse #${q.siteId}: ${q.status}. ${q.council?'Proposed by':'Organiser'}: ${name(w, q.organiserId)}${!organiser || organiser.ent !== 'person' || !organiser.alive ? ' (no longer present; supporters may continue)' : ''}.`,
   `Proposed: ${q.reason}. Voluntary support: ${supported}.`,
+  ...(q.council ? [`Coordinator: ${coordinator?name(w,coordinator):'none; insufficient or tied support'}. Construction requires two people and a clear lead in support.`,...q.council.candidates.map(c=>`${name(w,c.personId)} proposes to coordinate: ${c.reason}; ${q.participants.filter(m=>m.status==='supporting'&&m.supports===c.personId).length} supporting.`),...q.participants.flatMap(m=>(m.decisions??[]).map(d=>`${name(w,m.personId)} ${d.accepted?'supported':'refused'} ${name(w,d.candidateId)}: ${d.reason}.`))] : []),
   q.status === 'active' ? `Still needed: ${missing || 'materials supplied'}${site?.ent === 'site' ? `; ${Math.ceil(site.workTotal - site.work)} work` : '; site unavailable'}.` : `Outcome: ${q.outcome}.`,
   ...q.participants.map(m => `${name(w,m.personId)}: ${m.status} — ${m.reason}; supplied ${items(m.materials)}; ${Math.floor(m.work)} work.`),
  ];

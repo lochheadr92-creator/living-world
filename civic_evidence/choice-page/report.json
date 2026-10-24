@@ -1,0 +1,39 @@
+[
+  {
+    "name": "before: coordinator follows accepted support",
+    "pass": true,
+    "detail": "Township & shared workWillowbank: 3 households. Membership belongs to the household and does not change with walking.Shared storehouse #8: active. Proposed by: Ada.Proposed: our known households need a shared store. Voluntary support: 1.Coordinator: Ada. Construction requires two people and a clear lead in support.Ada proposes to coordinate: proposed the physical project; 2 supporting.Ben supported Ada: Ben supports Ada coordinating and will help build.Still needed: 10 wood, 4 stone; 640 work.Ada: supporting — proposed this shared storehouse; supplied no materials; 0 work.Ben: supporting — Ben supports Ada coordinating and will help build; supplied no materials; 0 work."
+  },
+  {
+    "name": "before: actual support is visible",
+    "pass": true,
+    "detail": "Township & shared workWillowbank: 3 households. Membership belongs to the household and does not change with walking.Shared storehouse #8: active. Proposed by: Ada.Proposed: our known households need a shared store. Voluntary support: 1.Coordinator: Ada. Construction requires two people and a clear lead in support.Ada proposes to coordinate: proposed the physical project; 2 supporting.Ben supported Ada: Ben supports Ada coordinating and will help build.Still needed: 10 wood, 4 stone; 640 work.Ada: supporting — proposed this shared storehouse; supplied no materials; 0 work.Ben: supporting — Ben supports Ada coordinating and will help build; supplied no materials; 0 work."
+  },
+  {
+    "name": "before: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "after: coordinator follows accepted support",
+    "pass": true,
+    "detail": "Township & shared workWillowbank: 3 households. Membership belongs to the household and does not change with walking.Shared storehouse #8: active. Proposed by: Ada.Proposed: our known households need a shared store. Voluntary support: 2.Coordinator: Cora. Construction requires two people and a clear lead in support.Ada proposes to coordinate: proposed the physical project; 1 supporting.Cora proposes to coordinate: does not trust the present organiser; 2 supporting.Ben supported Ada: Ben supports Ada coordinating and will help build.Ben supported Cora: Ben supports Cora coordinating and will help build.Cora refused Ada: does not want to work with this organiser.Still needed: 10 wood, 4 stone; 640 work.Ada: supporting — proposed this shared storehouse; supplied no materials; 0 work.Ben: supporting — Ben supports Cora coordinating and will help build; supplied no materials; 0 work.Cora: supporting — does not trust the present organiser; supplied no materials; 0 work."
+  },
+  {
+    "name": "after: actual support is visible",
+    "pass": true,
+    "detail": "Township & shared workWillowbank: 3 households. Membership belongs to the household and does not change with walking.Shared storehouse #8: active. Proposed by: Ada.Proposed: our known households need a shared store. Voluntary support: 2.Coordinator: Cora. Construction requires two people and a clear lead in support.Ada proposes to coordinate: proposed the physical project; 1 supporting.Cora proposes to coordinate: does not trust the present organiser; 2 supporting.Ben supported Ada: Ben supports Ada coordinating and will help build.Ben supported Cora: Ben supports Cora coordinating and will help build.Cora refused Ada: does not want to work with this organiser.Still needed: 10 wood, 4 stone; 640 work.Ada: supporting — proposed this shared storehouse; supplied no materials; 0 work.Ben: supporting — Ben supports Cora coordinating and will help build; supplied no materials; 0 work.Cora: supporting — does not trust the present organiser; supplied no materials; 0 work."
+  },
+  {
+    "name": "after: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "support decision spoken visibly",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true,
+    "detail": []
+  }
+]

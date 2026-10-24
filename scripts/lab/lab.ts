@@ -1,3 +1,4 @@
+import { setCivicChoice, civicChoiceOn } from '../../src/sim/civic_decision';
 import { setLocalDeath, localDeathOn } from '../../src/sim/death_knowledge';
 import { setSingleCount, singleCountOn } from '../../src/sim/reputation';
 import { setTownships, townshipsOn } from '../../src/sim/townships';
@@ -223,6 +224,7 @@ export function parseIntervention(specIn: string): Intervention {
       },
     };
   }
+  if (kind === 'rich-no-civic-choice') return {spec:label,summary:'restore single-organiser project acceptance',apply:()=> 'collective coordinator choice off',install(){const was=civicChoiceOn();setCivicChoice(false);return ()=>setCivicChoice(was);}};
   if (kind === 'rich-global-death-news') return { spec: label, summary: 'restore global death notification', apply: () => 'global death notification restored', install() { const was = localDeathOn(); setLocalDeath(false); return () => setLocalDeath(was); } };
   if (kind === 'rich-no-reputation-dedup') return { spec: label, summary: 'restore the duplicate relationship and reputation effect of stories', apply: () => 'duplicate reputation restored', install() { const was = singleCountOn(); setSingleCount(false); return () => setSingleCount(was); } };
   if (kind === 'rich-no-townships') return { spec: label, summary: 'township organisation disabled; physical work and other rules unchanged', apply: () => 'townships off', install() { const was = townshipsOn(); setTownships(false); return () => setTownships(was); } };
