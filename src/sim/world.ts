@@ -388,6 +388,8 @@ export function hashWorld(world: World): string {
   for (const p of world.persons) if (p.socialMemory) push(`SocialMemory${p.id}:${JSON.stringify(p.socialMemory)}`);
   if (world.economicObservations) push('EconomicObservations' + JSON.stringify(world.economicObservations));
   for (const h of world.households) if (h.relocations) push('Relocations' + h.id + JSON.stringify(h.relocations));
+  for(const p of world.persons)if(p.sharedSupper)push('SharedSupper'+p.id+JSON.stringify(p.sharedSupper));
+  for(const m of world.meals)if(m.supperContact)push('SupperContact'+m.id+JSON.stringify(m.supperContact));
   for(const p of world.persons)if(p.civicAlignment)push('CivicAlignment'+p.id+JSON.stringify(p.civicAlignment));
   if(world.exchangeReceipts)push('ExchangeReceipts'+JSON.stringify(world.exchangeReceipts));
   for (const p of world.persons) { if(p.tradeLeads)push('TradeLeads'+p.id+JSON.stringify(p.tradeLeads));if(p.exchangeJourneys)push('ExchangeJourneys'+p.id+JSON.stringify(p.exchangeJourneys)); }

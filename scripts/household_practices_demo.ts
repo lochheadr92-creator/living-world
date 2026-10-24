@@ -1,0 +1,12 @@
+import {writeFileSync} from 'node:fs';
+import {supperFixture} from '../tests/helpers/household_practices';
+import {serializeWorld} from '../src/app/save';
+import {conservationReport} from '../src/sim/economy';
+import {supperHistory} from '../src/sim/household_practices';
+const f=supperFixture();
+const save=(stage:string)=>writeFileSync(`civic_evidence/practice-${stage}-save.json`,serializeWorld(f.w));
+f.meal();save('forming');f.meal();save('established');f.meal();save('learning');f.meal();save('transmitted');
+f.ready(f.b,f.a);save('offered');
+const offered=f.options(f.b).filter(o=>o.key.endsWith(':invite')).map(o=>({key:o.key,label:o.label,parts:o.parts}));
+const report={staged:true,rules:24,workload:'Two adults, 54 and 32, with an existing parent-child relationship; ordinary meals and preparation actions. Clock advanced to later meal windows; not natural ageing or emergence.',history:{parent:supperHistory(f.w,f.a),child:supperHistory(f.w,f.b)},offered,foodConsumedTogether:f.w.ledger.reasons['-eaten at a shared meal'],conservation:conservationReport(f.w).ok};
+writeFileSync('civic_evidence/household-practice-contract.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

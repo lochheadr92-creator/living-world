@@ -227,3 +227,45 @@ Rules 20 add a separate household relocation agreement, described in
 construction; it does not complete a home for free or move property. Explicit
 establishment at the new completed shelter changes the household's home and township;
 former property remains household-owned.
+
+
+## Sharing supper: a transmitted household practice (rules 24)
+
+This is one practical tradition, not a calendar event or a settlement-wide culture
+assignment. Nobody starts with it. Hosting two successful meals with another actual
+diner establishes it. Once established, a parent can pass it to a child through two
+later completed meals with that same parent. Each qualifying meal requires both to
+consume a real portion and the guest to spend at least 20 actual meal-work ticks
+within four tiles and the same indoor space while the parent hosts. Negative trust
+prevents transmission. The parent's own learning meal cannot also teach a guest.
+Failed invitations, cancelled meals and interrupted contact do not qualify.
+
+The acquired practice contributes +4 to the existing invitation score. Food, needs,
+known gathering places, co-presence, invitation acceptance and cooldowns retain their
+ordinary authority. A learned practice is not a command to host. Knowledge survives
+the teacher's death in someone already taught; death does not teach an unfinished
+learner. A parent's departure removes that contact opportunity. With no holders,
+transmission ends; someone may independently establish the practice by hosting.
+
+Ownership: `household_practices.ts` owns personal experience/provenance and the narrow
+meal-contact record. `meals.ts` still owns invitation, transport, food, timing and
+completion. The alternative was a household-wide inherited flag; it was rejected
+because membership and kinship alone would transmit knowledge without contact. The
+selected personal record needs small per-person state but explains who learned from
+whom and when. No second source of meal truth is introduced: learning hooks run only
+at actual consumption, work ticks and successful completion.
+
+Saved state: at most four qualifying experiences per learner, then an immutable
+learned record with two meal IDs, source, teacher, origin, generation and tick. Meal
+records hold at most four guests' contact counts plus five actual consumers. Existing
+meal retention applies; permanent learning provenance does not depend on old meals
+remaining in the rolling list. Repeated completion is idempotent. Save validation
+rejects malformed provenance and records attached to older rules. Partial contact
+round-trips and continues deterministically. `rich-no-household-practices` is a
+lab-only ablation; no product mode was added.
+
+The Household history panel shows learning progress or acquired provenance and its
+behavioural effect. `scripts/household_practices_demo.ts` creates explicitly labelled
+parent/adult-child scenes with actual invitations and physical meals. The fixture
+advances to later invitation windows and uses ordinary adult ages; it is not a natural
+multigeneration run, accelerated maturation or evidence of aggregate benefit.

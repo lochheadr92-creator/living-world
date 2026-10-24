@@ -572,6 +572,7 @@ export interface Trade {
 }
 
 export interface Person {
+  sharedSupper?: import('./household_practices').SharedSupper;
   civicAlignment?: import('./political_alignment').CivicAlignment[];
   tradeLeads?: import('./exchange_journeys').TradeLead[];
   exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
@@ -1099,6 +1100,7 @@ export interface Conversation {
 
 // ───────────────────────────── shared meals ─────────────────────────────
 export interface Meal {
+  supperContact?: import('./household_practices').SupperContact;
   id: number;
   host: number;
   /** the place: a hall, a home or a fire, with where to stand */

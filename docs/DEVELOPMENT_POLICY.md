@@ -276,3 +276,14 @@ Repeated prior support affects the existing comparison of rival coordinators; de
 factions describe those choices without granting an office or reading private histories
 for other inhabitants' decisions. See RICH_WORLD.md. `rich-no-political-alignment` is
 the lab ablation. Rules-22 reference `f6496e5` was captured before implementation.
+
+### Rules version 24 — transmitted household practice
+
+Two completed shared meals establish the host's practice of sharing supper. A child
+(including an adult child) acquires it through two later meals with a knowledgeable
+parent, actual portions and at least 20 co-present work ticks per meal. Knowledge
+encourages a later invitation without bypassing needs, food, capacity or acceptance.
+No initial holders or automatic inheritance. Existing meal execution owns the costs;
+`household_practices.ts` owns bounded provenance. Lab: `rich-no-household-practices`.
+Rules-23 continuation was committed at `0878bf4` before this behaviour. Older worlds
+retain their rules and acquire no practice records. See HOUSEHOLD_HOME.md.

@@ -1,3 +1,4 @@
+import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import { isRich, think } from './mood';
 import { expose } from './illness';
@@ -152,6 +153,7 @@ export function mealOptions(ctx: Ctx): void {
     .add('food to share and good company to share it with', (7 + 14 * (p.traits.sociability * 0.6 + p.traits.generosity * 0.4)) * tm.social)
     .add('walking', -pen(hyp(q.x - p.x, q.y - p.y) * 6));
   if (place.hall) sc.add('a hall to eat in', 3);
+  const practice=supperWeight(world,p);if(practice)sc.add('the learned practice of sharing supper',practice);
   if (sc.total < 7) return;
   const s = ctx.seenPersons.find((x) => x.id === q.id)!;
   const e = (hyp(s.x - p.x, s.y - p.y) * 1.18) / Math.max(0.03, ctx.speed);
@@ -465,6 +467,7 @@ function finishMeal(world: World, m: Meal): void {
   }
   m.status = 'done';
   m.end = `${m.ate.length} ate together`;
+  finishSupperPractice(world,m);
   returnTable(world, m);
   const host = personById(world, m.host);
   if (host) host.cooldowns.hostMeal = world.tick + HOST_COOLDOWN_DONE;
@@ -566,6 +569,7 @@ function eatServing(world: World, m: Meal, p: Person): boolean {
   if (consume(world, m.table, k, 1, 'eaten at a shared meal') < 1) return false;
   p.needs.hunger = Math.min(100, p.needs.hunger + NUTRITION[k]);
   p.lastAteTick = world.tick;
+  noteSupperPortion(world,m,p);
   addFx(world, 'eat', p.x, p.y, 0);
   return true;
 }
@@ -665,6 +669,7 @@ registerHandler('attend_meal', {
     faceToward(p, m.x, m.y - 1);
     if (m.status === 'eating') {
       a.data.eating = true;
+      supperContact(world,m,p);
       a.progress++;
       if (a.progress >= a.duration && !m.ate.includes(p.id)) {
         if (eatServing(world, m, p)) {

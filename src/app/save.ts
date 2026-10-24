@@ -1,3 +1,4 @@
+import { validateHouseholdPractices } from '../sim/household_practices';
 import { validateAlignments } from '../sim/political_alignment';
 import { validateExchangeJourneys } from '../sim/exchange_journeys';
 import { validateEconomicObservations } from '../sim/settlement_economy';
@@ -224,6 +225,7 @@ export function deserializeWorld(json: string): World {
   validateRelocations(w);
   validateExchangeJourneys(w);
   validateAlignments(w);
+  validateHouseholdPractices(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);

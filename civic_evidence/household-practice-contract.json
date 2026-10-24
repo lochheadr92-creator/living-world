@@ -1,0 +1,35 @@
+{
+  "staged": true,
+  "rules": 24,
+  "workload": "Two adults, 54 and 32, with an existing parent-child relationship; ordinary meals and preparation actions. Clock advanced to later meal windows; not natural ageing or emergence.",
+  "history": {
+    "parent": [
+      "Practice: sharing supper. Established through hosting, meals #14 and #24, tick 10653. Transmission generation 0, origin Ada. This encourages offering a meal when food, company and time allow."
+    ],
+    "child": [
+      "Practice: sharing supper. Acquired from parent Ada, meals #40 and #54, tick 25173. Transmission generation 1, origin Ada. This encourages offering a meal when food, company and time allow."
+    ]
+  },
+  "offered": [
+    {
+      "key": "socialize:2:invite",
+      "label": "Invite Ada to eat together at the communal hall",
+      "parts": [
+        [
+          "food to share and good company to share it with",
+          30.5
+        ],
+        [
+          "a hall to eat in",
+          3
+        ],
+        [
+          "the learned practice of sharing supper",
+          4
+        ]
+      ]
+    }
+  ],
+  "foodConsumedTogether": 8,
+  "conservation": true
+}

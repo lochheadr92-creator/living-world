@@ -3,15 +3,15 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 23
+## Exact continuation snapshot — after version 24
 
-- Current product rules **23**: persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
+- Current product rules **24**: transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
   following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
   `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD
-  for the commit containing this snapshot. Immutable v22 reference: **f6496e5**; v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
+  for the commit containing this snapshot. Immutable v23 reference: **0878bf4**; v22 reference: **f6496e5**; v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
 - Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
   birth counter, competing project coordinators and persistent alignment factions; physical-market prerequisite;
-  S5 novice child proficiency and one held technique with instruction; general D3;
+  S5 novice child proficiency, one held technique with instruction and one transmitted household practice; general D3;
   **S3 first complete relocation/founding slice** (contract in RELOCATION.md); S4a actual
   production/flow observations and S4b first physical exchange journey slice (contract in ECONOMY.md).
 - Relocation checks: `npm test` **1108 tests / 121 files**; `npm run typecheck`;
@@ -23,24 +23,24 @@ This is the continuation record; the audit remains dated evidence, not current a
 - Natural smoke: meadow/Normal/28, four days, control + nudge + no-relocation: no sustained
   hardship or proposals; conserved goods and 28 survivors in each. This is not an ensemble.
 - Protected original/candidate work and main-worktree untracked `_find_moments_rich.ts`
-  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v22 references or silently
+  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v23 references or silently
   reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
 - Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: S5 transmitted household practices.** Existing technique
-instruction is implemented, but inherited practices beyond that technique still need a
-real contact/transmission/action chain. Pin the current v23 continuation before changing
-behaviour and allocate a fresh generation (24 is next candidate; recheck concurrent work).
-Keep F1-F5 queued until the remaining programme and required verification are complete.
-S4b mechanism and S2 persistent alignment are delivered; natural frequency and aggregate
-benefit are not demonstrated. Latest verification is at the end of this file.
+**Next executable task: S6/D10 retention and historical indexing.** Recheck current
+per-pair maps, deceased, graves and cosmetic stumps; preserve causal/ownership/kinship
+history. Index expensive historical lookups and define bounded retention only where
+semantics allow. Pin v24 continuation before any behavioural retention change and
+allocate a fresh rules generation (25 is next candidate; recheck concurrent work).
+Keep F1-F5 queued until remaining programme and required verification are complete.
+S5 practice, S4b exchange and S2 alignment are delivered mechanisms; natural frequency
+and aggregate benefit are not demonstrated. Latest verification is below.
 
 S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
 succession, rescue or return expedition. Separation prevents founding, urgent needs can
 interrupt, known deadlines permit failure. Old property remains owned. Natural migration
 frequency/benefit remains unmeasured. The full programme is still incomplete: enduring
-natural specialisation/exchange/faction evidence; transmitted
-practices beyond one technique; D10 retention/indexing; D12/A and natural C-H measurement;
+natural specialisation/exchange/faction/practice evidence; D10 retention/indexing; D12/A and natural C-H measurement;
 mature-world performance. Long ensembles still follow dispatcher/detached-launch policy.
 
 ## Owner queued priority after this programme
@@ -94,7 +94,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
 | A4 economy / E | V22 personally heard lead, physical exchange journey, existing barter and receipt history | S4b contracts, rendered journey/swap/return/failure; one-day control/nudge/ablation null | implemented and verified first slice; natural exchange/dependence unresolved |
 | A6 environment / C | Global weather and symmetric camps; v21 actual production observations now exist | S4; sustained actual action/flow differences under opportunities | unresolved |
-| A8 generations / H | Birth/age/households/inheritance exist, practices have no holders | S5; bounded transmission records and natural generation timing | unresolved |
+| A8 generations / H | V24 sharing-supper practice has personal holders, meal contact, provenance and later invitation effect | S5; eight contracts, mid-meal continuation and rendered history; natural generation timing unchanged | verified bounded transmission; natural H unresolved |
 | A9 replay/AI | Existing seeded stepping, replay, legal-option model boundary | Every stage continuation/save/load/purity; preserve seam | implemented |
 | D3 route blocking | V18 private site reproduced over a living occupant; v19 extends access protection to all new footprints | S3 prerequisite; corridor, door, delayed occupant, upgrade and mid-layout continuation | verified |
 | D4 death news | Confirmed global mood/need/partner notification; replaced at 14 with witness, grave or co-present typed news | S2; isolated bereaved, indoor/sleep, repeated story, mid-journey continuation | verified |
@@ -667,3 +667,36 @@ founder's proposal; exclude the current project from continuity to avoid self-re
 retain only one choice per project; keep derived grouping out of decision inputs and
 avoid quadratic household/member lookup in that observer. Broader natural faction
 frequency, durability and effects remain unmeasured.
+
+
+## Rules 24 — household practices passed through shared meals
+
+People can establish the practice of sharing supper by hosting twice, then pass it to
+a child through two later physical meals. Food and contact time are real; refusal,
+cancellation and incomplete learning remain possible. Holders are more inclined to
+offer a later meal under the existing constraints. Household history displays source,
+meal IDs, teacher and transmission generation. No automatic birth inheritance or
+accelerated lifespan was introduced. HOUSEHOLD_HOME.md records ownership, alternative,
+bounds, save validation and failure/recovery.
+
+Existing modules touched: meals records actual portions/contact and successful
+completion, and consults the personal invitation preference; household_practices owns
+the concept; history presents provenance; save/types/world validate/persist/hash it;
+lab adds `rich-no-household-practices`. Immutable v23 continuation was committed first
+at `0878bf4`.
+
+Verification: **1145 tests / 129 files** in `npm test` (89 seconds); typecheck/build;
+all historical golden fingerprints unchanged. Eight focused contracts cover physical
+food/contact, real parent-child transmission and subsequent hosting, cancellation,
+mid-meal full-state continuation, teacher death, no automatic inheritance, non-family
+contact, idempotence, malformed provenance, historical rules and ablation. Browser:
+**16 passing checks** across five labelled scenes; transmitted-provenance screenshot
+inspected. Evidence: `civic_evidence/household-practice-contract.json` and
+`civic_evidence/household-practice-page/`. Demo: `scripts/household_practices_demo.ts`.
+
+Review fixed repeated completion teaching from the very meal where a host first learned.
+The fixture retains legitimate refused invitations and waits before selecting another
+offered action. Supplies are finite, withdrawn physically from the household's private
+store; meals conserve goods. The fixture advances to later meal windows with normal
+adult ages. It proves a parent-child contract, not spontaneous behaviour, natural
+multigeneration persistence or aggregate benefit. Natural experiment H is still unrun.

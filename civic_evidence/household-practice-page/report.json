@@ -1,0 +1,66 @@
+[
+  {
+    "name": "forming: choice explained",
+    "pass": true
+  },
+  {
+    "name": "forming: staged label",
+    "pass": true
+  },
+  {
+    "name": "forming: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "established: choice explained",
+    "pass": true
+  },
+  {
+    "name": "established: staged label",
+    "pass": true
+  },
+  {
+    "name": "established: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "learning: choice explained",
+    "pass": true
+  },
+  {
+    "name": "learning: staged label",
+    "pass": true
+  },
+  {
+    "name": "learning: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "transmitted: choice explained",
+    "pass": true
+  },
+  {
+    "name": "transmitted: staged label",
+    "pass": true
+  },
+  {
+    "name": "transmitted: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "offered: choice explained",
+    "pass": true
+  },
+  {
+    "name": "offered: staged label",
+    "pass": true
+  },
+  {
+    "name": "offered: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true
+  }
+]
