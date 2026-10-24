@@ -1,0 +1,43 @@
+[
+  {
+    "name": "newborn: developmental explanation visible",
+    "pass": true
+  },
+  {
+    "name": "newborn: actual proficiency visible",
+    "pass": true
+  },
+  {
+    "name": "newborn: inspection preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "before: developmental explanation visible",
+    "pass": true
+  },
+  {
+    "name": "before: actual proficiency visible",
+    "pass": true
+  },
+  {
+    "name": "before: inspection preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "after: developmental explanation visible",
+    "pass": true
+  },
+  {
+    "name": "after: actual proficiency visible",
+    "pass": true
+  },
+  {
+    "name": "after: inspection preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true,
+    "detail": []
+  }
+]

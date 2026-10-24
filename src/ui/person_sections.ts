@@ -357,6 +357,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const traitSummary = h('p', { class: 'trait-sum' });
   const traitBox = h('div', { class: 'traits' });
   const skillBox = h('div', { class: 'skills' });
+  const skillExplanation = h('p', { class: 'trait-sum skill-explanation' });
   const payHead = h('div', { class: 'sub-h cap' }, 'What has paid them');
   const payBox = h('div', { class: 'skills' });
   // what they have seen and been told of others (rich worlds only; the heading goes when there is nothing)
@@ -364,7 +365,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const heardBox = h('div', { class: 'list heard' });
   // the trade they have settled on, if any: one line, in their own terms (trade.ts; an apprenticeship is said beside it)
   const tradeLine = h('p', { class: 'trait-sum' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillBox, tradeLine, payHead, payBox, heardHead, heardBox);
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, tradeLine, payHead, payBox, heardHead, heardBox);
   const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
     heardBox,
     () => {
@@ -408,7 +409,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
       return { el: h('div', { class: 'skill' }, h('span', { class: 'skill-l' }, SKILL_LABEL[s.key] ?? cap(s.key)), bar.el, v), bar, v };
     },
     (c, s) => {
-      c.bar.set((s.value - 0.4) / 1.4, 'var(--info)');
+      c.bar.set(s.value / 1.8, 'var(--info)');
       setText(c.v, `×${s.value.toFixed(2)}`);
     },
   );
@@ -539,6 +540,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         setText(traitSummary, (v.traitSummary ? cap(v.traitSummary) + '.' : '') + (v.goal ? ` ${cap(v.goal)}.` : '') + (v.lifeEvent ? ` ${cap(v.lifeEvent)}.` : '') + (v.crew ? ` ${cap(v.crew)}.` : ''));
         traitList.sync(v.traits, (t) => t.key);
         skillList.sync(v.skills, (s) => s.key);
+        setText(skillExplanation, v.skillExplanation);
         setText(tradeLine, v.trade ? `Their trade: ${v.trade}.` : '');
         setHidden(tradeLine, !v.trade);
         setHidden(payHead, v.payoffs.length === 0);

@@ -1,0 +1,58 @@
+{
+  "label": "STAGED: a young entrant learns by gathering",
+  "newborn": {
+    "name": "Dax",
+    "skills": {
+      "forage": 0.2,
+      "fish": 0.2,
+      "wood": 0.2,
+      "stone": 0.2,
+      "build": 0.2,
+      "farm": 0.2,
+      "craft": 0.2,
+      "carpentry": 0.2,
+      "kiln": 0.2,
+      "smith": 0.2,
+      "bake": 0.2
+    }
+  },
+  "youngEntrant": {
+    "name": "Cora",
+    "initial": {
+      "forage": 0.7073089771886445,
+      "fish": 0.9417973425200608,
+      "wood": 0.7929279655675614,
+      "stone": 0.889772499390237,
+      "build": 0.8555114032478122,
+      "farm": 0.9211650837729324,
+      "craft": 0.7347096699484053,
+      "carpentry": 0.7833622055739746,
+      "kiln": 0.7193987813147087,
+      "smith": 0.8962805854468348,
+      "bake": 0.9166740426841753
+    },
+    "after": {
+      "forage": 0.7193089771886445,
+      "fish": 0.9417973425200608,
+      "wood": 0.7929279655675614,
+      "stone": 0.889772499390237,
+      "build": 0.8555114032478122,
+      "farm": 0.9211650837729324,
+      "craft": 0.7347096699484053,
+      "carpentry": 0.7833622055739746,
+      "kiln": 0.7193987813147087,
+      "smith": 0.8962805854468348,
+      "bake": 0.9166740426841753
+    },
+    "goods": {
+      "berries": 3
+    },
+    "work": 3
+  },
+  "ticks": 91,
+  "midWorkContinuation": true,
+  "ledger": {
+    "ok": true,
+    "diffs": []
+  }
+}

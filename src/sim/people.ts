@@ -1,3 +1,4 @@
+import { initialSkills } from './development';
 import { elderFactor } from './life';
 import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP, TICKS_PER_YEAR } from './constants';
 import type { RNG } from './rng';
@@ -182,7 +183,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
       social: 45 + rng.next() * 45,
     },
     traits,
-    skills: makeSkills(rng, traits),
+    skills: initialSkills(world, o.age, makeSkills(rng, traits)),
     inv: {},
     hhId: o.hhId,
     parents: o.parents ? o.parents.slice() : [],

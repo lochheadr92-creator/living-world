@@ -1,3 +1,4 @@
+import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
@@ -144,6 +145,7 @@ export interface PersonView {
   /** the crew they are one of (rich only; null otherwise) */
   crew: string | null;
   skills: { key: string; value: number }[];
+  skillExplanation: string;
   /** what each kind of gathering has paid them, in their own experience (rich only; empty otherwise), best first */
   payoffs: { key: string; ratio: number; n: number }[];
   /** what they have seen and been told of other people (rich only; empty otherwise), freshest first */
@@ -576,6 +578,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     injury: describeInjury(world, p),
     lifeEvent: describeLifeEvent(world, p),
     crew: describeCrew(world, p),
+    skillExplanation: skillExplanation(world),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
     heard: describeHeard(world, p),

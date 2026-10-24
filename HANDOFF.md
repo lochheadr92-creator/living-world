@@ -2,9 +2,9 @@
 
 Read `docs/CIVILISATION_IMPLEMENTATION.md` first for the active programme, provenance,
 verification and exact remaining stages. Worktree: `civilisation-programme/living-world`,
-branch `codex/civilisation-programme`. Versions 11-16 reconcile divergent main lines, implement the first civic project,
+branch `codex/civilisation-programme`. Versions 11-17 reconcile divergent main lines, implement the first civic project,
 and deliver relationship history, single-count social consequences, local death news,
-durable birth accounting, competing coordinators, and physical market exchange. Old notes below are historical, not current status.
+durable birth accounting, competing coordinators, physical market exchange, and developmental starting proficiency. Old notes below are historical, not current status.
 
 # Living World Repository Handoff
 

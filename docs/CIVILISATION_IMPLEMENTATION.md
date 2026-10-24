@@ -62,7 +62,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | D7 market | V15 historical attendance enables remote trades; v16 validates physical venue/contact and local knowledge | S4 prerequisite; rejection, conserved barter, mid-walk save and rendered arrival | verified |
 | D9 passive decay | Accepted observation, no demonstrated defect | No change unless new evidence | not applicable: accepted |
 | D10 historical growth | Deceased, graves and pair records retain causality; no retention audit yet | S6; bounded retention/indexing with inheritance/replay contracts | unresolved |
-| D11 newborn skills | Audit reports adult-range initial skills; not yet rechecked | S5; explicit developmental competence and learning | unresolved |
+| D11 newborn skills | Confirmed same adult generator at birth; v17 starts newborns at 0.20 and age-scales younger entrants | S5 prerequisite; real birth, work gains, save/load, historical reference and rendered inspector | verified |
 | D12 / A aggregate reserve/shelter benefit | Historical null/mixed evidence is not failure of mechanism | S6; town paired controls/nudges/ablations, accept null | unresolved |
 | B dependency map | Migration is not required for organisation within a settlement | Owner programme supersedes audit ordering; S1 before S3 | superseded |
 | A9 performance | Current v16 one-day 28/100/250 measurements recorded below; mature-world cost still unmeasured | S6; startup profiles verified, long-run retention unresolved | verified: bounded startup only |
@@ -336,3 +336,44 @@ rates, an optimisation comparison, or evidence of long-run bounded memory. Exist
 250-person profiling suffices for this checkpoint; no synthetic 300-person workload
 was needed. D10 retention and mature-world cost remain unresolved. All three exited
 successfully with balanced invariants. Typecheck covers the runner change.
+
+## S5 prerequisite: developmental starting proficiency (version 17)
+
+Confirmed D11: `giveBirth` calls `createPerson`, which previously assigned the same
+random adult-range skills at every age. `development.ts` now owns initial proficiency.
+Alternatives: continuously raise skills with age, or adjust creation once and retain
+actual-work learning. Selected creation-only: no unearned birthday experience or
+second skill store. Newborns start every skill at 0.20; people entering below 16 have
+an age-proportional background between that baseline and their adult draw. This is
+initial background, not fabricated practice history. Adults and elders retain the
+same draws. Draws are still consumed for children, preserving RNG use and unrelated
+birth traits/look. Once created, saved skills improve only through existing practice.
+The 0.20 floor keeps existing work-time divisions finite. No time/age constants or
+practice rates changed. Historical worlds keep their original starting proficiency.
+
+Version 16 continuation pinned in 01d4439 before implementation. Lab intervention
+`rich-adult-newborn-skills` changes subsequent creation only; it deliberately does
+not rewrite existing skills in a fork. No save migration or new saved schema needed.
+Inspector text explains this; skill bars now represent 0 to 1.8, displaying novices.
+This is proficiency, not yet held-technique knowledge, infant development, or proof
+that children naturally mature into competent adults. Those S5 questions remain open.
+
+Controlled evidence: real birth creates Dax with all eleven skills at 0.20. Separately,
+a labelled 12-year-old entrant Cora gathers three real berries in 91 ticks; foraging
+rises from 0.707309 to 0.719309; all other skills stay fixed. This fixture does not age
+a newborn rapidly. Mid-work save/load gives identical complete continuation and the
+ledger balances. Aborting before completion grants no skill or goods. Adults, legacy
+births, random-stream preservation and lab switch restoration have explicit contracts.
+Ten browser checks pass; newborn and post-practice screens visually inspected with
+proficiency and explanation readable. Observer comparisons use the complete save.
+
+Review findings: initial practice fixture incorrectly pinned the worker, freezing
+her activity; removed the pin at activity start. An invalid RNG accessor in the test
+was caught by typecheck; the corrected assertion compares the RNG's actual state.
+The first browser selector targeted native summaries instead of the existing section
+button; corrected to exercise the real control. Original failures remain in local
+logs; none were product-path fixes or acceptance-threshold changes.
+
+S5 proficiency boundary: full suite 1072 tests / 115 files passed; typecheck, build,
+standalone historical golden script, seven focused development/continuation checks,
+and diff whitespace checks passed. No historical expected file was rewritten.

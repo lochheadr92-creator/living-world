@@ -1,0 +1,20 @@
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { practiceFixture } from '../tests/helpers/development';
+import { stage,addPerson,done } from '../tests/helpers/kit';
+import { giveBirth } from '../src/sim/lifecycle';
+import { serializeWorld,deserializeWorld } from '../src/app/save';
+import { conservationReport } from '../src/sim/economy';
+import { stepWorld } from '../src/sim/world';
+mkdirSync('civic_evidence',{recursive:true});
+const s=stage('newborn-scene');s.w.settings.dynamics='rich';s.w.settings.rulesVersion=17;s.w.birthCount=0;
+const mother=addPerson(s,'Ada',40.5,40.5);done(s);giveBirth(s.w,mother);const baby=s.w.persons.at(-1)!;
+s.w.sceneLabel='STAGED: newborn proficiency';writeFileSync('civic_evidence/development-newborn-save.json',serializeWorld(s.w));
+const {w,p,begin}=practiceFixture();const initial={...p.skills};
+writeFileSync('civic_evidence/development-before-save.json',serializeWorld(w));begin();
+for(let i=0;i<12;i++)stepWorld(w);const loaded=deserializeWorld(serializeWorld(w));
+for(let i=0;i<1000&&p.stats.gathered<3;i++){stepWorld(w);stepWorld(loaded);}
+const equal=serializeWorld(w)===serializeWorld(loaded),ledger=conservationReport(w);
+if(p.stats.gathered!==3||!equal||!ledger.ok)throw new Error('practice contract failed');
+writeFileSync('civic_evidence/development-after-save.json',serializeWorld(w));
+const report={label:w.sceneLabel,newborn:{name:baby.name,skills:baby.skills},youngEntrant:{name:p.name,initial,after:p.skills,goods:p.inv,work:p.stats.gathered},ticks:w.tick,midWorkContinuation:equal,ledger};
+writeFileSync('civic_evidence/development-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));
