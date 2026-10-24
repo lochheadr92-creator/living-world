@@ -1,3 +1,4 @@
+import { techniqueBlocker } from './techniques';
 import { isRich } from './mood';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
@@ -268,6 +269,8 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
 function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0): void {
   const { world, p } = ctx;
   const b = f.b;
+  const technique = techniqueBlocker(world,p,r.id);
+  if(technique){addBlocked(ctx,'operate',r.doing,b.id,technique,tag);return;}
   const snap = b.ops;
   const fresh = world.tick - b.seen < 500;
   const busy = fresh && snap?.job && snap.readyAt > world.tick;

@@ -357,6 +357,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const traitSummary = h('p', { class: 'trait-sum' });
   const traitBox = h('div', { class: 'traits' });
   const skillBox = h('div', { class: 'skills' });
+  const techniqueText = h('p', {class:'trait-sum technique-knowledge'});
   const skillExplanation = h('p', { class: 'trait-sum skill-explanation' });
   const payHead = h('div', { class: 'sub-h cap' }, 'What has paid them');
   const payBox = h('div', { class: 'skills' });
@@ -365,7 +366,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const heardBox = h('div', { class: 'list heard' });
   // the trade they have settled on, if any: one line, in their own terms (trade.ts; an apprenticeship is said beside it)
   const tradeLine = h('p', { class: 'trait-sum' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, tradeLine, payHead, payBox, heardHead, heardBox);
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, payHead, payBox, heardHead, heardBox);
   const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
     heardBox,
     () => {
@@ -541,6 +542,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         traitList.sync(v.traits, (t) => t.key);
         skillList.sync(v.skills, (s) => s.key);
         setText(skillExplanation, v.skillExplanation);
+        setText(techniqueText,v.techniques.join(' '));setHidden(techniqueText,!v.techniques.length);
         setText(tradeLine, v.trade ? `Their trade: ${v.trade}.` : '');
         setHidden(tradeLine, !v.trade);
         setHidden(payHead, v.payoffs.length === 0);

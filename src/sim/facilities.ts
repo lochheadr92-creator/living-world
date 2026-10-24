@@ -1,3 +1,4 @@
+import { techniqueBlocker } from './techniques';
 import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
@@ -322,6 +323,8 @@ export function startBlocker(world: World, b: Building, p: Person, r: Recipe): s
   const ops = opsOf(b);
   if (!ops) return 'not a workplace';
   if (r.at !== b.type) return 'wrong kind of workplace';
+  const technique = techniqueBlocker(world,p,r.id);
+  if(technique)return technique;
   if (ops.job) return ops.job.phase === 'burn' ? 'the fire is already burning a batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room' : 'a batch is already under way';
   if (!mayUse(world, p, b)) return 'not theirs to use';
   if (b.condition < 12) return 'too run down to use';
@@ -406,6 +409,8 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
   if (!job) return 'nothing is being made';
   if (job.phase !== 'work') return job.phase === 'burn' ? 'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
   const r = recipeOf(job);
+  const technique = techniqueBlocker(world,p,r.id);
+  if(technique)return technique;
   if (!mayUse(world, p, b)) return 'not theirs to use';
   if (r.tool?.required && !bestOf(world, p.id, r.tool.kind, p.id) && !bestOf(world, b.id, r.tool.kind, p.id)) return `needs a ${r.tool.kind}`;
   const busy = Object.keys(b.ops!.present).filter((k) => world.tick - b.ops!.present[Number(k)] < 20 && Number(k) !== p.id).length;
@@ -419,6 +424,7 @@ export function workJob(world: World, b: Building, p: Person): 'continue' | 'wor
   const job = ops?.job;
   if (!ops || !job || job.phase !== 'work') return 'stopped';
   const r = recipeOf(job);
+  if(techniqueBlocker(world,p,r.id))return 'stopped';
   const { tool } = recipeTool(world, p, b, r);
   const mult = r.tool ? recipeToolMultiplier(tool, r.tool.speed) : 1;
   const rate = workRate(world, p, r, mult);

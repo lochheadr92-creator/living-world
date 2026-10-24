@@ -1,0 +1,288 @@
+{
+  "contract": "Accepted-lesson contact necessity; staged, not emergence",
+  "ticks": 240,
+  "rows": [
+    {
+      "seed": "technique-contract",
+      "arm": "control",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.7813900914308418,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contract",
+      "arm": "nudge:1",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.7813900914308418,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contract",
+      "arm": "nudge:2",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.7813900914308418,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contract",
+      "arm": "isolation",
+      "learned": false,
+      "provenance": null,
+      "lesson": {
+        "tick": 33,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "interrupted",
+        "detail": "the lesson was cut short"
+      },
+      "kilnSkill": 0.7813900914308418,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-2",
+      "arm": "control",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.7231021070732451,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-2",
+      "arm": "nudge:1",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.7231021070732451,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-2",
+      "arm": "nudge:2",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.7231021070732451,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-2",
+      "arm": "isolation",
+      "learned": false,
+      "provenance": null,
+      "lesson": {
+        "tick": 33,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "interrupted",
+        "detail": "the lesson was cut short"
+      },
+      "kilnSkill": 0.7231021070732451,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-3",
+      "arm": "control",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.9846036570587238,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-3",
+      "arm": "nudge:1",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.9846036570587238,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-3",
+      "arm": "nudge:2",
+      "learned": true,
+      "provenance": {
+        "source": "taught",
+        "learned": 212,
+        "teacher": 2,
+        "lesson": 8,
+        "started": 32
+      },
+      "lesson": {
+        "tick": 228,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "learned",
+        "detail": "learned charcoal firing after 180 ticks together"
+      },
+      "kilnSkill": 0.9846036570587238,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "technique-contact-3",
+      "arm": "isolation",
+      "learned": false,
+      "provenance": null,
+      "lesson": {
+        "tick": 33,
+        "partner": 2,
+        "purpose": "teach_technique",
+        "role": "answered",
+        "outcome": "interrupted",
+        "detail": "the lesson was cut short"
+      },
+      "kilnSkill": 0.9846036570587238,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    }
+  ]
+}

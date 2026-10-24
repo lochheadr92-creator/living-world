@@ -62,10 +62,10 @@ import type { Settings, World } from './types';
 // somebody who knows a standing smithy now wants charcoal kept stocked, so the kiln's idle time goes to firing it and
 // smelting and forging are not blocked on the fuel. Nothing else was retuned, and the want is only in a version-10
 // world: a version-9 world keeps the same demands as before.
-export const CURRENT_RULES_VERSION = 17;
+export const CURRENT_RULES_VERSION = 18;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

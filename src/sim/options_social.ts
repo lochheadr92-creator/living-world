@@ -1,3 +1,4 @@
+import { heldTechniques } from './techniques';
 import { mayCoordinate, councilFor } from './civic_decision';
 import { canInvite, projectAt, participation } from './townships';
 import { isRich } from './mood';
@@ -580,6 +581,20 @@ function optTrade(ctx: Ctx): void {
   void hashUnit;
 }
 
+// The teacher knows their own technique and family/apprentice relationship, not the other's private knowledge.
+function optTeachTechnique(ctx: Ctx): void {
+ const {world,p}=ctx;
+ if(!heldTechniques(world)||!p.techniques?.charcoal||ctx.critical||ctx.night) return;
+ if(!beliefsByKind(p,['building']).some(b=>b.btype==='kiln'))return;
+ for(const c of candidates(ctx)) {
+  if(c.d>10||(p.cooldowns['teach:'+c.q.id]??0)>world.tick)continue;
+  if(p.relations[c.q.id]?.kin!=='child'&&c.q.apprentice?.master!==p.id)continue;
+  if(stageOf(world,c.q)==='child')continue;
+  const sc=new Scorer().add('pass a useful technique to family or apprentice',20+8*p.traits.generosity).add('walking',-pen(c.d*6));
+  mkSocial(ctx,c,'teach_technique',{},`Offer ${c.q.name} charcoal firing instruction`,'pass on charcoal firing',null,sc,'teach');
+ }
+}
+
 export function socialOptions(ctx: Ctx): void {
   mealOptions(ctx);
   attendOptions(ctx);
@@ -594,6 +609,7 @@ export function socialOptions(ctx: Ctx): void {
   optRecruit(ctx);
   optPropose(ctx);
   optTrade(ctx);
+  optTeachTechnique(ctx);
   optChat(ctx);
   void eta;
 }

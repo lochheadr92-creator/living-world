@@ -1,0 +1,29 @@
+{
+  "label": "STAGED: charcoal firing passes through instruction",
+  "knowledge": {
+    "charcoal": {
+      "source": "taught",
+      "learned": 212,
+      "teacher": 2,
+      "lesson": 8,
+      "started": 32
+    }
+  },
+  "lesson": {
+    "since": 32,
+    "until": 212,
+    "outcome": "learned",
+    "reason": "learned charcoal firing after 180 ticks together"
+  },
+  "teacher": "Ada",
+  "learner": "Ben",
+  "tick": 999,
+  "store": {
+    "charcoal": 3
+  },
+  "midLessonContinuation": true,
+  "ledger": {
+    "ok": true,
+    "diffs": []
+  }
+}

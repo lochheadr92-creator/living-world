@@ -303,6 +303,7 @@ export interface InteractionView {
 }
 
 const PURPOSE_TEXT: Record<string, string> = {
+  teach_technique: 'charcoal firing instruction',
   chat: 'a chat',
   request: 'asking for something',
   ask_info: 'asking where something can be found',
@@ -322,6 +323,7 @@ const PURPOSE_TEXT: Record<string, string> = {
 
 /** the same purposes as they read when the other person was the one who came over: "<name> came to <name> …" */
 const PURPOSE_THEIRS: Record<string, string> = {
+  teach_technique: 'to offer charcoal firing instruction',
   chat: 'for a chat',
   request: 'with a request',
   ask_info: 'to ask where something can be found',
@@ -352,7 +354,7 @@ export function interactionViews(world: World, p: Person): { current: Interactio
     current = {
       partner: nameOf(world, other),
       purpose: mine ? PURPOSE_TEXT[c.purpose] ?? c.purpose : `${nameOf(world, other)} came over ${PURPOSE_THEIRS[c.purpose] ?? 'to talk'}`,
-      step: STEP[Math.min(c.phase, STEP.length - 1)],
+      step: c.lesson?.outcome==='learning' ? `instruction: ${Math.min(world.tick-c.lesson.since,c.lesson.until-c.lesson.since)} / ${c.lesson.until-c.lesson.since} ticks together` : STEP[Math.min(c.phase, STEP.length - 1)],
       outcome: req ? (req.status === 'pending' ? 'not answered yet' : req.outcome || req.status) : 'under way',
       when: 'now',
     };

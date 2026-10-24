@@ -384,6 +384,8 @@ export function hashWorld(world: World): string {
   }
   for (const g of world.graves) if(g.death) push(`GraveIdentity${g.id}:${JSON.stringify(g.death)}`);
   for (const p of world.persons) if (p.socialMemory) push(`SocialMemory${p.id}:${JSON.stringify(p.socialMemory)}`);
+  for(const p of world.persons)if(p.techniques)push(`Techniques${p.id}:${JSON.stringify(p.techniques)}`);
+  for(const c of world.conversations)if(c.lesson)push(`Lesson${c.id}:${JSON.stringify(c.lesson)}`);
   if (world.inhabitants) for (const k of Object.keys(world.inhabitants).sort((a, b) => Number(a) - Number(b))) push(`E${k}:${JSON.stringify(world.inhabitants[Number(k)])}`);
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));
   // 'partial' is an answered ask that brought something: counted with 'fulfilled' here, so this number means what it always meant

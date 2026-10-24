@@ -333,3 +333,13 @@ projects stay off, so a staged scene never grows more than was staged.
   anything real.
 * One run of any seed is one run: the baseline comparison in `BASELINE.md` is evidence about those runs, not a claim about
   long-term stability.
+
+## Charcoal knowledge (current rules, version 18)
+
+Charcoal firing is held by people, separately from kiln skill. Initial adult entrants
+know it; children born in the world must learn it. A parent/master can offer a
+co-present 180-tick lesson to a youth or adult child/apprentice. Refusal and survival
+interruptions leave no invented knowledge. A completed lesson records its teacher.
+Without a holder, new charcoal batches cannot start, even in a stocked kiln. Existing
+burning batches still finish physically. Historical rules retain their recipe access.
+This is the first technique, not a claim that every recipe has a knowledge dependency.

@@ -1,3 +1,4 @@
+import { offerLesson, answerLesson, finishLesson, interruptLesson, lessonProblem, LESSON_TICKS } from './techniques';
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
@@ -800,6 +801,8 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 
 function purposeGoal(purpose: ConvPurpose, name: string): string {
   switch (purpose) {
+    case 'teach_technique':
+      return `to teach ${name} charcoal firing`;
     case 'request':
       return `to ask ${name} for something`;
     case 'ask_info':
@@ -853,8 +856,9 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
-  const resultText = outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
-  const detailText = outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
+  if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
+  const resultText = c.lesson ? c.lesson.outcome : outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
+  const detailText = c.lesson ? c.lesson.reason : outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
   // a fever passes in talk (rich only; nothing in an authored world)
@@ -907,6 +911,10 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
+    if(c.purpose==='teach_technique') {
+      const why=lessonProblem(world,A,B);
+      if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
+    }
     if (world.tick < c.nextAt) continue;
     advance(world, c, A, B);
   }
@@ -938,10 +946,14 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
       phaseRespond(world, c, A, B, d);
       recordProjectResponse(world, A, B, reqOf(world, c));
       c.phase = 3;
-      c.nextAt = world.tick + 22;
+      c.nextAt = world.tick + (c.lesson?.outcome==='learning'?LESSON_TICKS:22);
       break;
     }
     case 3: {
+      if(c.purpose==='teach_technique'){
+        if(finishLesson(world,c,A,B))bubble(world,B,'I understand how to fire charcoal now.','happy',72);
+        c.phase=4;c.nextAt=world.tick+16;break;
+      }
       if (!d.sour) {
         phaseNews(world, A, B);
         phaseNews(world, B, A);
@@ -959,6 +971,8 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
+    case 'teach_technique':
+      offerLesson(world,A,B);bubble(world,A,'Would you like to learn charcoal firing?','ask',64);break;
     case 'chat': {
       if (hashUnit(A.id, B.id, world.tick >> 5) < 0.4) {
         const atFire = world.buildings.some((b) => b.type === 'fire' && b.fuel > 0 && hyp(b.x + 0.5 - A.x, b.y + 0.5 - A.y) < 5);
@@ -1055,6 +1069,12 @@ function reqOf(world: World, c: Conversation): Request | undefined {
 function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: ConvData): void {
   const req = reqOf(world, c);
   switch (c.purpose) {
+    case 'teach_technique': {
+      const why=answerLesson(world,c,A,B);
+      bubble(world,B,why?`Not now: ${why}.`:'Yes, show me how to fire charcoal.','say',72);
+      if(!why){if(A.activity)A.activity.label='Teaching charcoal firing';if(B.activity)B.activity.label='Learning charcoal firing';}
+      break;
+    }
     case 'chat': {
       if (hashUnit(B.id, A.id, world.tick >> 5) < 0.3) bubble(world, B, D.smallTalk(world, B.id, A.id, false, B.needs.warmth < 45, false), 'say', 46);
       break;

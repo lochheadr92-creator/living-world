@@ -1,0 +1,22 @@
+import {mkdirSync,writeFileSync} from 'node:fs';
+import {techniqueFixture} from '../tests/helpers/technique';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+import {stepWorld} from '../src/sim/world';
+import {generateOptions,rankOptions} from '../src/sim/decision';
+import {startActivity} from '../src/sim/activities';
+import {conservationReport} from '../src/sim/economy';
+const f=techniqueFixture(),{w,a,b,kiln}=f;mkdirSync('civic_evidence',{recursive:true});
+writeFileSync('civic_evidence/technique-before-save.json',serializeWorld(w));
+const c=f.reachLesson();if(c?.lesson?.outcome!=='learning')throw new Error('no accepted lesson');
+for(let i=0;i<80;i++)stepWorld(w);writeFileSync('civic_evidence/technique-during-save.json',serializeWorld(w));
+const loaded=deserializeWorld(serializeWorld(w));for(let i=0;i<200&&b.convId;i++){stepWorld(w);stepWorld(loaded);}
+if(serializeWorld(w)!==serializeWorld(loaded))throw new Error('mid-lesson continuation differs');
+if(!b.techniques?.charcoal)throw new Error('no learned technique');
+writeFileSync('civic_evidence/technique-learned-save.json',serializeWorld(w));
+f.hold();b.cooldowns.pause=0;const op=rankOptions(generateOptions(w,b,true,true)).find(o=>o.kind==='operate'&&o.targetId===kiln.id&&o.label==='Burning charcoal');
+if(!op?.make)throw new Error('no legal kiln operation');startActivity(w,b,op.make()!);
+for(let i=0;i<1400&&(kiln.store.items.charcoal??0)<3;i++)stepWorld(w);
+const ledger=conservationReport(w);if(kiln.store.items.charcoal!==3||!ledger.ok)throw new Error('no conserved production');
+writeFileSync('civic_evidence/technique-after-save.json',serializeWorld(w));
+const report={label:w.sceneLabel,knowledge:b.techniques,lesson:c.lesson,teacher:a.name,learner:b.name,tick:w.tick,store:kiln.store.items,midLessonContinuation:true,ledger};
+writeFileSync('civic_evidence/technique-report.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));

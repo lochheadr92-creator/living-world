@@ -1,0 +1,51 @@
+[
+  {
+    "name": "before: held technique accurately described",
+    "pass": true
+  },
+  {
+    "name": "before: observer preserves complete save",
+    "pass": true
+  },
+  {
+    "name": "during: held technique accurately described",
+    "pass": true
+  },
+  {
+    "name": "instruction visibly costs time",
+    "pass": true
+  },
+  {
+    "name": "lesson progress reflects elapsed time",
+    "pass": true
+  },
+  {
+    "name": "during: observer preserves complete save",
+    "pass": true
+  },
+  {
+    "name": "learned: held technique accurately described",
+    "pass": true
+  },
+  {
+    "name": "learned: observer preserves complete save",
+    "pass": true
+  },
+  {
+    "name": "after: held technique accurately described",
+    "pass": true
+  },
+  {
+    "name": "finished batch visible in event feed",
+    "pass": true
+  },
+  {
+    "name": "after: observer preserves complete save",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true,
+    "detail": []
+  }
+]

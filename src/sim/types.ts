@@ -589,6 +589,8 @@ export interface Person {
   needs: Needs;
   traits: Traits;
   skills: Skills;
+  /** Version 18: held technique and its actual source; proficiency is separate. */
+  techniques?: { charcoal?: { source: 'initial' | 'taught'; learned: number; teacher: number; lesson?: number; started?: number } };
   inv: Items;
   hhId: number;
   parents: number[];
@@ -1070,9 +1072,12 @@ export type ConvPurpose =
   | 'check_in'
   | 'lend'
   | 'report'
-  | 'mediate';
+  | 'mediate'
+  | 'teach_technique';
 
 export interface Conversation {
+  /** Version 18: current lesson only; completed knowledge belongs to the learner. */
+  lesson?: {since:number;until:number;outcome:'learning'|'learned'|'declined'|'interrupted';reason:string};
   id: number;
   a: number;
   b: number;

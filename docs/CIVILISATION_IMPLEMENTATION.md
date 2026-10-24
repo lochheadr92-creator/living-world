@@ -49,7 +49,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | Roadmap 6 / A3 / D8 | Duplicate direct/reputation and hearsay/scalar effects reproduced and removed at 13 | S2; direct/told/expiry/legacy contracts and B | verified |
 | Roadmap 7 / A6 / D | No runtime relocation/founding; reserve/explore exist | S3; known destination, physical household travel/failure, membership, save | unresolved |
 | Roadmap 8 / A2 | Persistent township membership now saved at 12; production observations still absent | S1 verified membership; S4 action-derived statistics | implemented: membership; unresolved: statistics |
-| Roadmap 9 / A7 / G | Skills/practice/apprenticeship exist; no held technique | S5; contact/time teaching, provenance/loss, practice control | unresolved |
+| Roadmap 9 / A7 / G | V18 charcoal technique held by people, voluntary timed instruction, provenance and loss | S5; contact/time, real kiln use, interrupted/save/purity contracts and staged G | verified: one technique |
 | Roadmap 10 / A5 / F | V12 project organiser; v15 explicit competing coordinators and voluntary support; no inherited office | S1/S2 bounded contracts/runtime; persistent factions and wider proposals remain | implemented: coordination; unresolved: factions/F ensemble |
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
 | A4 economy / E | Physical production exists; purposeful cross-settlement trade absent | S4; known counterparty, co-presence, conserved barter/journey/failure | unresolved |
@@ -377,3 +377,69 @@ logs; none were product-path fixes or acceptance-threshold changes.
 S5 proficiency boundary: full suite 1072 tests / 115 files passed; typecheck, build,
 standalone historical golden script, seven focused development/continuation checks,
 and diff whitespace checks passed. No historical expected file was rewritten.
+
+## S5 first technique: pre-run G contract (version 18)
+
+Hypothesis: continued physical contact during an accepted instruction session, not
+kiln proficiency or a public building, transfers charcoal-firing knowledge. Workload:
+three labelled family/known-kiln fixtures, fork immediately after acceptance. Compare
+contact control, one-draw nudge, two-draw nudge, and isolation (learner moved away at
+the fork). Run 240 ticks after the fork. Metrics: learned holder/provenance, lesson
+outcome, kiln proficiency, invariant balance. Compare isolation with the mean of
+control plus nudges; this is a necessary-contact contract, not natural transmission
+frequency, an aggregate welfare effect or multigeneration evidence. No maturation,
+life expectancy or skill-gain rates change. Planned raw file: technique-contact.json.
+
+## S5 first technique: implementation and observed contract
+
+`techniques.ts` owns one bounded knowledge record per person and instruction rules.
+Alternatives: settlement-global recipe unlock, or person-held technique with explicit
+instruction. Selected person-held state so death/departure can remove local access,
+with no magical inheritance from a building. Existing `skills.kiln` remains proficiency.
+Initial adults/elder entrants know charcoal firing; younger entrants and newborns do
+not. A birthday never grants knowledge. All other production competence remains as
+before. Historical worlds retain universal recipe access. Lab off-switch:
+`rich-universal-techniques`. V17 continuation was pinned in ca6e812 first.
+
+A parent or master who knows a kiln and holds the technique may offer instruction to
+a visible youth/adult child or apprentice. They do not query that person's private
+knowledge to choose the offer. Existing conversation acceptance and availability apply;
+the learner can decline for distrust, low interest, prior knowledge or age. Learning
+requires 180 continuous ticks awake in the same space within three tiles. Both spend
+that time conversing, subject to ordinary survival interruption, plus explicit thirst,
+hunger, energy and danger checks. No passive bystander learns. Interrupted lessons
+must be restarted; there is no partial-skill or free-knowledge award. Completion saves
+teacher identity, lesson identity and start/completion ticks. The live lesson belongs
+to the existing conversation; bounded personal logs/last interaction retain refusal
+or interruption, and the completed technique retains its source. No second job store.
+
+Planning, starting, joining and continuing a charcoal batch require the technique.
+The existing kiln consumes six wood, yields three charcoal and accounts for waste;
+no changed recipes, ownership or material flow. Knowledge is not copied from dead
+people. A previously instructed survivor keeps it and its provenance. A batch already
+burning can physically finish after a worker dies; knowledge is needed for the next
+batch, not to keep an already-lit fire burning.
+
+Controlled G: all 9 control/nudge branches acquired knowledge, all 3 isolation arms
+were interrupted and acquired none; all ledgers balanced. The comparison is 1.0
+learned fraction for control/nudge versus 0 for isolation in these staged forks.
+Kiln skill does not increase merely by hearing instruction. Rendered fixture: Ben
+accepts Ada's offer at tick 32, learns at tick 212, then physically fires three charcoal,
+ready at tick 999. Mid-lesson save/load yields identical complete state. Twelve browser
+checks pass; instruction, provenance and kiln output screenshots inspected. This is
+not autonomous transmission frequency or natural multigeneration cultural persistence.
+
+Review: the initial fixture let the listener start an unrelated conversation before
+the offer, exceeding its narrow wait. It now holds the listener only until this talk
+opens, then releases them. Staged sleep/interior states were normalised before the
+conversation director saw them; those boundary checks now invoke the director at the
+state change, while separation/need/death also have ordinary stepping coverage. No
+simulation success was forced. The inspector's generic progress bar was found to show
+zero during instruction; fixed it to derive progress from the actual saved lesson interval.
+The inspected paused lesson now shows 45%, matching its 81 elapsed ticks of 180.
+
+S5 technique boundary: full suite 1085 tests / 117 files passed. Forty focused
+technique/workshop/continuation tests passed before the presentation repair; afterward,
+thirteen technique/continuation checks, twelve rendered checks, build/typecheck,
+standalone historical goldens and diff whitespace checks passed. The final repair
+changes only derived observer progress. Historical continuation references unchanged.
