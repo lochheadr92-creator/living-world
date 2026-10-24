@@ -18,6 +18,7 @@ import { setLearning } from '../../src/sim/learning';
 import { setFatalHold } from '../../src/sim/lifecycle';
 import { setFoodPreparation } from '../../src/sim/provision';
 import { setShelterPlans } from '../../src/sim/shelter';
+import { setTableEating } from '../../src/sim/tableeating';
 import { setHabitationAdmissions } from '../../src/sim/habitation';
 import { defProbe, defReset, defSnapshot, setWolfDefence, spearOf } from '../../src/sim/defence';
 import { setTrades } from '../../src/sim/trade';
@@ -83,7 +84,9 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * to FETCH a household home site's missing material (shelter.ts): sites are still laid out exactly as before, building,
  * ownership and habitation are untouched, and material carried for any other reason still arrives, so the arm isolates
  * going and getting it on purpose from everything that surrounds it. Against a world older than version 7 it changes
- * nothing, because nobody in such a world ever made that plan. `rich-no-stock` keeps everything else about a rules-version-2 world
+ * nothing, because nobody in such a world ever made that plan. `rich-no-table-eating` keeps everything else about a
+ * rules-version-9 world and removes only eating AT a store when the pack has no room (tableeating.ts): a full pack fails and
+ * writes the store off, as it did before version 9. Against a world older than version 9 it changes nothing. `rich-no-stock` keeps everything else about a rules-version-2 world
  * and removes only household food preparation (provision.ts), so a run with it and a run without differ in that one behaviour and
  * nothing else; against a version-1 world it changes nothing, because such a world never had it. `rich-no-trades` keeps everything
  * else about a rich world and removes trades and their apprenticeship mechanism together (trade.ts, apprentice.ts); it does not
@@ -214,6 +217,20 @@ export function parseIntervention(specIn: string): Intervention {
       install: () => {
         setShelterPlans(false);
         return () => setShelterPlans(true);
+      },
+    };
+  }
+  if (kind === 'rich-no-table-eating') {
+    return {
+      spec: label,
+      summary: 'current dynamics with eating at a store removed: a person whose pack has no room for the food in a stocked store fails and writes the store off, as before version 9. A meal with room in the pack, and every other rule, are unchanged. Below rules version 9 it changes nothing',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, eating at a store off';
+      },
+      install: () => {
+        setTableEating(false);
+        return () => setTableEating(true);
       },
     };
   }
@@ -598,7 +615,7 @@ export function outcomeOf(
       buildings: w.buildings.length,
       plots: w.plots.length,
       people: alive.length,
-      deaths: w.deceased.length,
+      deaths: w.deceased.filter((d) => d.tick >= from).length,
       homeless,
       belowCritical: crit,
       meanHunger: Math.round((hunger / Math.max(1, alive.length)) * 10) / 10,

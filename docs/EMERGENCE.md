@@ -133,7 +133,8 @@ till +31%; build -27%, plan a site -45%, craft -46%, operate a workshop -45%, te
 from a store -69%, deposit -39%, wander -36%; give, eat and socialise unchanged. Plots (419 against 374) and buildings (357 against 387) summed
 over the four seeds agree with the 24-seed direction. LIKELY, not separated: that the pressure of want and danger draws labour from building
 to food, warmth and safety, so development comes later while survival is intact; the mood weights and the stakes both act in this run and
-the experiment that tells them apart (stakes without the mood effects, and the reverse) has not been done.
+the experiment that tells them apart (stakes without the mood effects, and the reverse) is the next section. Over three winters
+(the section after it) the delay in development closes and the cost shows up as deaths instead.
 
 ### Stakes against mood (24 seeds, Large, day 0 to 15, each branch against the mean of control and nudges)
 
@@ -151,8 +152,68 @@ the experiment that tells them apart (stakes without the mood effects, and the r
   -2.3 against -1.1, buildings -7.1 against -5.0, homeless 0.8 against 0.2, deaths 1.0 against 0.7, lowMood 2.0 against 1.2), all in the
   same direction, but the intervals overlap and `rich` minus `rich-stakes-only` was not computed paired by seed. LIKELY, not shown: an
   interaction, where stakes push people low and the mood weights then pull them from building to rest. It is also compatible with chance.
-  A paired contrast (the report has no `--compare` option yet) or more seeds would settle it.
-* Limits: 15 days contains one winter (days 8 to 11 of the first year); the mood result may not hold over several years.
+  A paired contrast (`npx vite-node scripts/lab_report.ts -- <out> --vs rich:rich-stakes-only`, added after this run) or more seeds would settle it.
+* Limits: 15 days contains one winter (days 8 to 11 of the first year); the mood result may not hold over several years. The stakes
+  result over three winters is in the next section; the mood-only arm has not been run that long.
+
+### Three winters (12 seeds, Large, day 0 to 40, each branch against the mean of control and nudges)
+
+> Historical evidence, integrated 2026-10-23 from `d81c0277904304fa07b79a948283c2bbef1a8938`.
+> These measurements predate current rules version 7 and are not current-world acceptance results.
+> The retained report and per-seed rows are available at [the immutable evidence revision](https://github.com/lochheadr92-creator/living-world/tree/4b063dca4d354684593e143886f2bbb152582c61/long_out).
+> That revision preserves the evidence; it is not asserted to be the engine revision that generated it.
+> The original findings below are retained as historical claims; no new ensemble was run for this integration.
+
+The limit above, tested as far as the stakes go: the same lab run 40 days from the fork, which is three winters (days 8 to 11, 20 to 23
+and 32 to 35) and four days of a fourth year. The 12 seeds are the first half of the 24-seed list; branches `nudge:1`, `nudge:2`, `rich`
+and `rich-stakes-only` (`rich-mood-only` was not run). 12 of 12 finished, on the 24-core machine; every number here is from `long_out\report.txt`.
+
+```
+node scripts/lab.mjs --out long_out --seeds 12 --fork 0 --days 40 --branches nudge:1,nudge:2,rich,rich-stakes-only
+```
+
+| | workplaces | buildings | plots | people | deaths | homeless | meanHunger | firstHall (days) | meanMood | lowMood | tools |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| rich (both) | +0.4 (ns) | **+4.1** (12/12) | **+13.3** (12/12) | **−3.5** (10/12) | **+1.8** (9/12) | −3.5 (11/12, floor) | **−4.7** (9/12) | **+4.4** (11/12) | −2.3 | +1.8 | **+143.7** (12/12) |
+| rich-stakes-only | −1.4 (ns) | +2.2 (ns) | **+13.0** (12/12) | **−3.9** (12/12) | **+1.1** (9/12) | −3.8 (12/12, floor) | **−3.4** (10/12) | **+5.8** (12/12) | −1.2 (ns) | +1.1 | **+154.0** (12/12) |
+
+Bold: larger than chance. "floor": the interval excludes 0 but the difference is inside the one-draw spread. In brackets, the seeds that
+moved the way the sign says, out of 12. Reference values at day 40: workplaces 25.7, buildings 97.3, plots 106.6, people 115.3, deaths 0.4,
+homeless 4.3, meanHunger 70.7, first hall 9.7 days, tools 102.1, meanCondition 58.4 (rich +1.2, within chance; stakes only +2.8, inside the floor).
+
+* **The building deficit was a delay, not a loss (VERIFIED at 40 days).** At 15 days rich had fewer workplaces (−3.8) and buildings (−7.1).
+  At 40 days workplaces are level (+0.4, within chance) and buildings are ahead (+4.1, higher in 12 of 12, interval [+2.6, +5.7]); solid
+  homes and workplaces are unchanged, so the extra buildings are of other kinds (which, the lab does not record). The hall still comes
+  later (+4.4 days; +5.8 and later in 12 of 12 with moods off): a first-build day fixed in the first fortnight does not move afterwards.
+  Farmland stays ahead by the margin it had at 15 days (plots +13.3 against +10.3 to +12.6 before): the gap is made in the first winter and
+  then held, not widened. Caveats: the 15-day figures are from 24 seeds and these are 12 of them, so the comparison across runs is
+  between ensembles; and +4.1 on buildings sits just above the metric's one-draw spread (±3.9), so it beats chance by its interval and
+  its unanimity, not by its size.
+* **The cost moved from development to people (VERIFIED).** Deaths 0.4 → 2.3 a world over 40 days (higher in 9 of 12; 1.5 with moods off),
+  where 15 days gave +0.7 and nobody starved. People 115.3 → 111.8 (−3.5; −3.9 and lower in 12 of 12 with moods off). The people gap is
+  wider than the deaths gap, so by inference about two fewer births a world as well; births are not a lab metric and this was not checked.
+  The village is hungrier throughout (meanHunger −4.7 on the 0 to 100 need, critical at 14; hungrier in 9 of 12) and ends with 0.4 more
+  people a world below a critical need. What they die of (hunger, cold, wolves) is UNKNOWN: the lab counts deaths, it does not attribute
+  them. About 2% of the village in three winters: a toll, not a collapse.
+* **Tools: 102 → 246 (+143.7, interval [+136.5, +150.5], higher in 12 of 12; one-draw spread ±19.9).** The largest effect any lab run has
+  produced, seven floors wide, and as large with moods off (+154.0), so it is not mood. LIKELY from the private tool-making plans, which
+  exist only in rich worlds and which the plans ensemble (`docs/AUTONOMY.md`) showed supply two thirds of a rich village's tools at 15
+  days (184.5 against 61.8 without plans). Not shown: no arm of this run removes plans, so the stakes' own share (want of food driving
+  hoes and baskets) is not separated; `rich-no-plans` at 40 days would separate it. 246 tools in 112 living hands is 2.2 a person across
+  seven kinds, not a runaway on its face, but 184 at 15 days and 246 at 40 is still climbing, and whether it levels off is UNKNOWN.
+* **Homelessness: the direction reversed, the number is inside the noise.** At 15 days rich had 0.8 more homeless; at 40 days 3.5 fewer
+  (0.8 against 4.3, lower in 11 of 12, and 12 of 12 with moods off), but an authored world's homelessness varies by ±4.4 between draws at
+  40 days, so it is recorded as a direction. Solid homes are unchanged, so if it is real it is more likely fewer new households than more
+  homes (UNKNOWN).
+* **Mood on top of stakes: still unresolved (UNKNOWN).** Harms sit a little worse with moods on than with stakes alone, as at 15 days
+  (deaths 2.3 against 1.5, belowCritical 0.5 against 0.2, meanHunger −4.7 against −3.4, lowMood 1.8 against 1.1), but development goes
+  the other way (buildings +4.1 against +2.2, hall 14.1 against 15.5 days), every interval overlaps, and the contrast is still not computed
+  paired by seed. The mood rows' "larger than chance" verdicts are empty: an authored world has no mood, so the one-draw spread is ±0.0
+  and any nonzero mood beats it by construction. `rich-mood-only` was not in this run, so whether mood without stakes stays inert over
+  several years is still untested.
+* Noise floor at 40 days, for the record: workplaces ±2.3, buildings ±3.9, plots ±4.6, people ±2.7, deaths ±0.8, homeless ±4.4,
+  meanHunger ±2.8, firstHall ±2.5, tools ±19.9, meanCondition ±4.4. Both nudges moved nothing beyond it. The two-draw nudge ended identical
+  to the control in 2 of 12 seeds (5 of 24 before): the re-synchronisation noted under the lab is still there.
 
 ## Measured: a town of a hundred dies of the stakes, not of the crowd (24 seeds, town, rich, 12 days)
 
@@ -635,6 +696,11 @@ what chance alone does. 24 seeds, Large, fork day 4, 8 days (run on a 24-core Wi
 | no wood near settlements | buildings −4.1 (lower in 20/24), first hall +1.4 days; mostly absorbed |
 | no wild food near settlements | people 102 → 57, deaths +45, workplaces −9.2, in 24/24 |
 | no clay or ore | workplaces −2.1, buildings −1.9: within the noise floor |
+
+*Reading `deaths` in lab output (corrected 2026-10-23).* The lab documents `deaths` as those since the fork, but until that date it counted every death since the
+world began. In a paired difference such as the table above the earlier deaths are the same in both branches and cancel, so those figures stand; the absolute `deaths`
+level of any `scripts/lab` run forked after day 0 (this table's fork-day-4 run is one) included the pre-fork deaths. (`scripts/novelneed.ts` keeps its own count and always took it from the fork.) Ensembles forked at day 0, which is
+nearly every one recorded here, are unaffected. Saved `lab_*.jsonl` files keep the value they were written with.
 
 Known weaknesses: (1) with one control per seed, small discrete metrics (people, deaths) are flagged "systematic" by the bootstrap too often
 (3 of 22 nudge cells), and no-wood shares the identical people/deaths flags with nudge:1, which is the control's own luck; only

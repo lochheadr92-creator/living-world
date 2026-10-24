@@ -3,7 +3,7 @@
 // always lives in localStorage.
 // The world is plain data (typed arrays, Maps, Sets and the RNG state are the only special cases).
 import { hashString, RNG } from '../sim/rng';
-import { validateRulesVersion } from '../sim/rulesversion';
+import { validateRulesVersion, RULES_LINEAGE, validateSaveLineage } from '../sim/rulesversion';
 import { hasHabitation, indoorHome, doorPoint } from '../sim/habitation';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
 import type { Settings, World } from '../sim/types';
@@ -201,17 +201,18 @@ export function serializeWorld(world: World): string {
     const v = (world as unknown as Record<string, unknown>)[k];
     body[k] = k === 'persons' ? packPersons(world.persons) : v;
   }
-  return JSON.stringify({ version: VERSION, world: body }, replacer);
+  return JSON.stringify({ version: VERSION, rulesLineage: RULES_LINEAGE, world: body }, replacer);
 }
 
 export function deserializeWorld(json: string): World {
-  const parsed = JSON.parse(json, reviver) as { version: number; world: Omit<World, 'byId' | 'grid' | 'pgrid'> };
+  const parsed = JSON.parse(json, reviver) as { version: number; rulesLineage?: string; world: Omit<World, 'byId' | 'grid' | 'pgrid'> };
   if (!READABLE.includes(parsed.version)) throw new Error('unsupported save version');
   // The RULES version is a separate question from the save format above: these bytes may be perfectly readable and still
   // describe a world whose behaviour this build cannot run. Refuse it here, where nothing has been replaced yet, so that a
   // refused load leaves the running world exactly as it was. An absent version is the legacy case and is kept absent.
   const verdict = validateRulesVersion((parsed.world as World).settings?.rulesVersion);
   if (!verdict.ok) throw new Error(`cannot load this world: ${verdict.reason}`);
+  validateSaveLineage(parsed.world.settings?.rulesVersion, parsed.rulesLineage);
   const w = parsed.world as World;
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);

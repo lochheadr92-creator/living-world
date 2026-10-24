@@ -1,10 +1,14 @@
 # Living World Repository Handoff
 
-Updated: 2026-10-22
+Updated: 2026-10-23
 
 Standing owner workflow: [WORKFLOW.md](WORKFLOW.md). Both Codex and Claude must follow
 it: no mandatory PR, second reviewer or repeat-approval loop. Older process instructions
 in historical sections below do not override it.
+
+## Branch cleanup — 2026-10-23
+
+Two useful historical candidates are integrated: paired lab reporting (with missing-metric regression coverage) and the three-winter report, explicitly labelled historical. Six other branches were already incorporated. Thirteen conflicting lines are retired from active development with their unique work preserved; this is not a claim that all their features shipped. See [BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md) for exact tips, dispositions, PR closure list and validation.
 
 ## Current product direction
 
@@ -23,7 +27,11 @@ is in [docs/DEVELOPMENT_POLICY.md](docs/DEVELOPMENT_POLICY.md), "Matching eviden
 Sections below that frame the project as a simulation only are superseded on that point alone;
 their measurements, review verdicts and status records stand exactly as written.
 
-## Current main — from needing a home to living in one
+## Current main — full-pack site courier recovery
+
+Rules version 8 recovers the missing part of `claude/courier-promise`: a willing helper who already carries construction materials can promise to haul them to a remembered site when the requester has no pack room. Existing conversation, commitment, haul, ledger and inspector paths are reused. Older worlds retain their rules. Source comparison, regression evidence and limits: [COURIER_RECOVERY.md](docs/COURIER_RECOVERY.md).
+
+## Previous main — from needing a home to living in one
 
 Rules version 7. One complete, watchable situation: a household recognises it has no proper home, lays a site out, its
 members FETCH the materials on purpose, build, take ownership and move in — or meet an understandable reason they cannot

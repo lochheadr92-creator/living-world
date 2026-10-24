@@ -537,7 +537,7 @@ function optSites(ctx: Ctx): void {
         .map(([k, n]) => `${n} ${k}`)
         .join(', ');
       addBlocked(ctx, 'build', 'Work on the building site', b.id, `site is waiting for materials (${miss || 'unknown'})`, 'site');
-      for (const cm of p.commitments) if (cm.status === 'active' && cm.siteId === b.id && cm.kind === 'help_build') markBlocked(world, cm, `the site was waiting for ${miss || 'materials'}`);
+      for (const cm of p.commitments) if (cm.status === 'active' && cm.siteId === b.id && cm.kind === 'help_build') markBlocked(ctx, cm, `the site was waiting for ${miss || 'materials'}`);
       continue;
     }
     const sc = new Scorer().add('building work to do', 33 * tm.work * rel.mult + 4).add('walking', -pen(e)).add('good builder', (p.skills.build - 1) * 6);
@@ -1373,10 +1373,14 @@ function optCare(ctx: Ctx): void {
 }
 
 // ───────────────────────── promises ─────────────────────────
-/** Remember what has been standing in the way of a promise, so that if it fails the reason is on record. */
-function markBlocked(world: Ctx['world'], c: Commitment, why: string): void {
+/**
+ * Remember what has been standing in the way of a promise, so that if it fails the reason is on record. Only the person's own
+ * deciding writes it: the inspector asking what they could do leaves the promise as it was.
+ */
+function markBlocked(ctx: Ctx, c: Commitment, why: string): void {
+  if (ctx.observer) return;
   c.blocked = why;
-  c.blockedAt = world.tick;
+  c.blockedAt = ctx.world.tick;
 }
 
 function optCommitments(ctx: Ctx): void {
@@ -1431,7 +1435,7 @@ function optCommitments(ctx: Ctx): void {
         const loc = whereIs(ctx, c.to, c.siteId);
         if (!loc) {
           addBlocked(ctx, 'give', `Keep promise to ${to.name}`, c.to, 'does not know where to find them', 'promise');
-          markBlocked(world, c, 'did not know where to find them');
+          markBlocked(ctx, c, 'did not know where to find them');
           continue;
         }
         const hx = loc.x;
@@ -1478,7 +1482,7 @@ function optCommitments(ctx: Ctx): void {
         } else {
           foragePlans(ctx, { urgency: 54, mode: 'stock', baseLabel: `promised ${to.name} food` });
         }
-        if (ctx.options.length === before) markBlocked(world, c, `no ${c.item} to be had from anywhere they know of`);
+        if (ctx.options.length === before) markBlocked(ctx, c, `no ${c.item} to be had from anywhere they know of`);
       }
     } else if (c.kind === 'haul' && c.item) {
       // bring a stated quantity to a named place: the delivery itself is the ordinary site-haul option, made urgent by the promise
@@ -1486,7 +1490,7 @@ function optCommitments(ctx: Ctx): void {
       if (remaining <= 0) continue;
       const dest = c.siteId ? p.beliefs[c.siteId] : undefined;
       if (!dest) {
-        markBlocked(world, c, 'does not know where the site is');
+        markBlocked(ctx, c, 'does not know where the site is');
         addBlocked(ctx, 'haul', `Haul ${c.item} as promised`, c.siteId, 'does not know where the site is', 'promise');
         continue;
       }
@@ -1496,8 +1500,8 @@ function optCommitments(ctx: Ctx): void {
         if (isRawMaterial(c.item)) gatherMaterial(ctx, c.item, remaining - have, 50, 'to keep my promise to bring it', 'promise');
         if (ctx.options.length === before && !isRawMaterial(c.item)) {
           // finished goods come from the workshops, through the ordinary supply planning (see production.ts); if that finds nothing it is a blocker
-          if (!ctx.options.some((o) => o.tag === 'site' || o.tag === 'craft')) markBlocked(world, c, `no ${c.item} to be had`);
-        } else if (ctx.options.length === before) markBlocked(world, c, `no ${c.item} to be had from anywhere they know of`);
+          if (!ctx.options.some((o) => o.tag === 'site' || o.tag === 'craft')) markBlocked(ctx, c, `no ${c.item} to be had`);
+        } else if (ctx.options.length === before) markBlocked(ctx, c, `no ${c.item} to be had from anywhere they know of`);
       }
     } else if (c.kind === 'return_tool' && c.toolId) {
       const t = world.tools.find((x) => x.id === c.toolId);
@@ -1510,7 +1514,7 @@ function optCommitments(ctx: Ctx): void {
       const loc = whereIs(ctx, c.to, 0);
       if (!loc) {
         addBlocked(ctx, 'give', `Return the ${t.kind}`, c.to, 'does not know where to find them', 'promise');
-        markBlocked(world, c, 'did not know where to find them');
+        markBlocked(ctx, c, 'did not know where to find them');
         continue;
       }
       const e = eta(ctx, loc.x, loc.y);

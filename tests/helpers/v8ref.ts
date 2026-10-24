@@ -25,7 +25,7 @@ export function v8Continuation() {
     kilns: w.buildings.filter((b) => b.type === 'kiln').length,
     iron: w.persons.reduce((n, p) => n + (p.inv.iron ?? 0), 0),
     charcoal: w.persons.reduce((n, p) => n + (p.inv.charcoal ?? 0), 0),
-    ironTools: w.persons.reduce((n, p) => n + (p.bykind.tool ?? []).filter((id) => ((w.byId.get(id) as { tier?: number } | undefined)?.tier ?? 0) === 1).length, 0),
+    ironTools: w.persons.reduce((n, p) => n + ((p.bykind as Record<string, number[]>).tool ?? []).filter((id) => ((w.byId.get(id) as { tier?: number } | undefined)?.tier ?? 0) === 1).length, 0),
     homes: w.buildings.filter((b) => b.type === 'hut' || b.type === 'house').length,
   });
   const saved = point();

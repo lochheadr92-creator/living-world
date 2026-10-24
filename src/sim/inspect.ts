@@ -11,7 +11,7 @@ import { describeHeard } from './reputation';
 import { describeIllness } from './illness';
 import { describeGoal, describeInjury } from './life';
 import { describeApprentice } from './apprentice';
-import { describeLifeEvent } from './lifechanges';
+import { describeLifeEvent, whileObserving } from './lifechanges';
 import { describeCrew } from './crews';
 import { describeTrade } from './trade';
 import { estimatedAmount, recentFailure } from './knowledge';
@@ -377,7 +377,7 @@ export function planViews(world: World, p: Person): PlanView[] {
 }
 
 export function auditOpportunities(world: World, p: Person): OpportunityView[] {
-  const ctx = generateOptions(world, p, true);
+  const ctx = generateOptions(world, p, true, true);
   const ranked = rankOptions(ctx);
   const chosenKey = p.activity?.data.optKey as string | undefined;
   const chosenLabel = p.activity ? p.activity.label : ranked[0]?.label;
@@ -610,7 +610,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
           seenNow: d.seenNow,
         }
       : null,
-    opportunities: opts.opportunities === false ? [] : auditOpportunities(world, p),
+    opportunities: opts.opportunities === false ? [] : whileObserving(() => auditOpportunities(world, p)),
     relationships: relationships.slice(0, 14),
     family,
     requests: requests.slice(0, 8),

@@ -62,10 +62,10 @@ import type { Settings, World } from './types';
 // somebody who knows a standing smithy now wants charcoal kept stocked, so the kiln's idle time goes to firing it and
 // smelting and forging are not blocked on the fuel. Nothing else was retuned, and the want is only in a version-10
 // world: a version-9 world keeps the same demands as before.
-export const CURRENT_RULES_VERSION = 10;
+export const CURRENT_RULES_VERSION = 11;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
@@ -146,4 +146,12 @@ export function runsRulesVersion(world: World, from: number): boolean {
 export function describeRulesVersion(v: number | undefined): string {
   if (v === undefined) return 'unversioned (made before rules versions; its original rules are unknown)';
   return `rules version ${v}${v === CURRENT_RULES_VERSION ? ' (current)' : ''}`;
+}
+
+// Save-envelope provenance: the numeric generations 8 and 9 collided on two branches.
+export const RULES_LINEAGE = 'main-iron-warmth-smithy';
+export function validateSaveLineage(version: unknown, lineage: unknown): void {
+ if (lineage !== undefined && lineage !== RULES_LINEAGE) throw new Error('Unknown rules lineage; keep this save with its original build.');
+ if ((version === 8 || version === 9) && lineage !== RULES_LINEAGE)
+  throw new Error('Ambiguous rules version 8/9: two incompatible branches used this number. Original save preserved; open with its original build.');
 }

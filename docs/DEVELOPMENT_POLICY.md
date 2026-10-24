@@ -158,6 +158,8 @@ deep-hashed: an entry that changes nothing anybody does still changes saved stat
 `tests/v6_continuation.expected.json`, captured from `b050816` before any of it existed. The lab switch
 `rich-no-shelter` removes only the plan. Nothing else was retuned. See `docs/HOUSEHOLD_HOME.md`.
 
+**Version 8** (2026-10-23) recovers the full-pack construction-material courier fallback. An accepted gift can become an ordinary haul promise if the recipient has no room, the helper remembers a site needing that material, and needs/commitment capacity allow. Only rich worlds running version 8 or later use it. `tests/v7_continuation.expected.json` was recorded from `fb6e8a5` before the behavior was added. The save format, historical references and all other rules remain unchanged. See [COURIER_RECOVERY.md](COURIER_RECOVERY.md).
+
 **How a version is proved not to have leaked.** A test that checks the version LABEL is not enough: a gate that leaked would
 keep the label and change the world. Before version 2 was written, `scripts/v1_reference.ts --write` recorded
 `tests/v1_continuation.expected.json` - two rich worlds stamped `rulesVersion: 1`, run, written out and read back through the
@@ -231,3 +233,12 @@ Do not launch expensive ensembles just because a feature now runs by default. De
 `tests/current_world.test.ts` covers new-world rules, all product profiles, retirement of the browser preference, inhabitant URL defaults, preserved save settings and full saved-state equality after continuation, and starting a new current world after loading a legacy save. Controller tests compare current app runs with current headless reference worlds. `tests/lab_defaults.test.ts` checks that the changed lab default rejects old outputs without modifying them or starting workers.
 
 Historical goldens remain compatibility checks, not the definition of the current product. This transition does not re-record them or change the save format.
+
+## Civilisation reconciliation (2026-10-24)
+
+Versions 8/9 collided across divergent branches. Local-main meanings (ore search,
+warmth and single-adult shelter) and version 10 smithy fuel are preserved. Version
+11 adds courier recovery and full-pack store eating. Save envelopes identify
+`main-iron-warmth-smithy`; untagged 8/9 saves are rejected as ambiguous, preserved
+in their original form, and must be opened with their original build. No guessed
+migration is supported. See CIVILISATION_IMPLEMENTATION.md for source provenance.

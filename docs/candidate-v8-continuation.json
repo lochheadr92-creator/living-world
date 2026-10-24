@@ -1,0 +1,53 @@
+{
+  "source": "3d931804db36838974bb904f9a9077d4c07c8cf9; before eating at a store with a full pack",
+  "saved": {
+    "hash": "85414f05",
+    "deep": "7907f3716dc376cf",
+    "alive": 28,
+    "plans": {
+      "tool": 2,
+      "stock": 7,
+      "shelter": 6
+    },
+    "homeFood": 126,
+    "storedFood": 40,
+    "indoors": 10,
+    "solidHomes": 4,
+    "homeSites": 3,
+    "storeMeals": {
+      "ok": 13,
+      "failed": 11,
+      "packFull": 11,
+      "empty": 0,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 6,
+      "failedWhileStarving": 0
+    }
+  },
+  "continued": {
+    "hash": "2858a048",
+    "deep": "fd34cd70440f3d09",
+    "alive": 28,
+    "plans": {
+      "tool": 10,
+      "stock": 9,
+      "repair": 1
+    },
+    "homeFood": 18,
+    "storedFood": 9,
+    "indoors": 4,
+    "solidHomes": 7,
+    "homeSites": 0,
+    "storeMeals": {
+      "ok": 26,
+      "failed": 26,
+      "packFull": 24,
+      "empty": 2,
+      "gone": 0,
+      "other": 0,
+      "interrupted": 18,
+      "failedWhileStarving": 5
+    }
+  }
+}
