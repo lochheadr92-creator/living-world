@@ -3,6 +3,63 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
+## Exact continuation snapshot — after version 19
+
+- Project: Living World; implementation commit **9415657**, current product rules **19**.
+  All verified stage commits are pushed on `codex/civilisation-programme` and integrated
+  by fast-forward into `main`/`origin/main`. A documentation-only continuation commit
+  follows this implementation; get its exact HEAD with `git rev-parse HEAD`.
+- Working directory: `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`.
+  No unfinished implementation patch. Generated saves and local check logs are ignored;
+  committed scripts recreate staged scenes. The final report records the clean status.
+- Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
+  birth counter and competing project coordinators; physical-market prerequisite;
+  S5 novice child proficiency and one held technique with instruction; general D3
+  construction-access prerequisite. See each stage below for files and exact evidence.
+- Latest verification: 1093 tests / 119 files, typecheck/build, unchanged historical
+  golden script, 24 focused access/township/continuation tests and five rendered access
+  checks passed. Earlier technique stage: 1085 tests / 117 files, twelve rendered
+  checks and controlled contact experiment. All current startup profile checks pass.
+  Classification: integrated, contract/runtime verified; natural emergence/benefit
+  and the unfinished programme are not verified by these scenes.
+- Protected: original retired checkout at 359bce9 still has `.agents/`, `.claude/skills/`
+  and `scratch_preserved_2026-10-23/`; candidate at 3f6ec66 remains clean. Main worktree's
+  untracked `_find_moments_rich.ts` and `_warmth_probe2.ts` remain untouched. Do not
+  develop in the retired checkout or reinterpret ambiguous v8/v9 saves. Never rewrite
+  continuation references v1-v18 or older golden values to accommodate new behavior.
+- No ensemble or migration implementation is running. Local Vite was served on 5291
+  from this worktree for the committed CDP browser checks; verify/restart if needed.
+
+**Next executable task: S3 household relocation and runtime founding.** Recheck the
+branch/HEAD/status, pin a **v19** continuation before changing behavior, and allocate
+an unused generation (20 is the next candidate; verify no concurrent allocation).
+Implement one complete locally known relocation situation: sustained perceived hardship
+or credible opportunity; household consent/refusal with dependent-child handling;
+physical packing/travel and inventory subtraction; separation/organiser loss/unreachable
+or unsuitable destination; shelter/arrival and explicit founding/member changes. Reuse
+`households.ts`, `townships.ts`, household stores, activities, habitation and construction
+access. Put relocation state/rules in their own owning module. Include visible stages,
+failure, save/load mid-journey, conservation and current/historical contracts.
+
+First command (from the worktree): `git status --short --branch`.
+Then read this snapshot, `WORKFLOW.md`, relevant household/township/travel code and
+`docs/HOUSEHOLD_HOME.md`; do not restart the whole audit. The programme remains
+unblocked for implementation. Unfinished: enduring faction alignment and rival
+priorities; relocation/founding; action-derived specialisation and purposeful intertown
+trade; transmitted practices beyond one technique; D10 retention/indexing; D12/A
+measurement; natural C-H experiments and mature-world performance. Long runs still
+require the dispatcher/detached-launch policy, not an in-session ensemble.
+
+Paste-ready continuation:
+> Continue the authorised civilisation programme in the civilisation-programme worktree.
+> Main and the implementation branch include version 19 at 9415657 plus continuation
+> documentation. Read the current register and check Git status. Preserve the original,
+> candidate and main-worktree untracked work. Start S3 relocation/founding with a v19
+> continuation reference before a new rules generation. Deliver a physical, observable,
+> consent-based household journey and founding/failure slice, then continue the remaining
+> registered stages. Existing tests and scene evidence do not establish natural benefit.
+> Use the current WORKFLOW.md: focused tested commits, push and safe direct integration.
+
 ## Owner queued priority after this programme
 
 Owner instruction, 2026-10-24: finish the current civilisation implementation programme

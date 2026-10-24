@@ -6,6 +6,14 @@ branch `codex/civilisation-programme`. Versions 11-19 reconcile divergent main l
 and deliver relationship history, single-count social consequences, local death news,
 durable birth accounting, competing coordinators, physical market exchange, developmental starting proficiency, and person-held charcoal technique with timed instruction, and general construction access protection. Old notes below are historical, not current status.
 
+Implementation checkpoint: **9415657**, rules **19**, pushed and integrated into main.
+The [exact continuation snapshot](docs/CIVILISATION_IMPLEMENTATION.md#exact-continuation-snapshot--after-version-19)
+contains protected work, completed evidence, remaining scope and a paste-ready prompt.
+No implementation patch is pending. The next task is household relocation and runtime
+founding, starting by pinning a v19 continuation before allocating new behavior.
+The latest full suite passed 1093 tests across 119 files. Long-run emergence remains
+unmeasured; this is not the completion of the entire civilisation programme.
+
 # Living World Repository Handoff
 
 Updated: 2026-10-23
