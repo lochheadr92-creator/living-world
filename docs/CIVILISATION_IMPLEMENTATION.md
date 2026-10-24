@@ -3,14 +3,14 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 22
+## Exact continuation snapshot — after version 23
 
-- Current product rules **22**: personally informed exchange journeys, following v21 settlement production and resource-flow observations,
+- Current product rules **23**: persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
   following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
   `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD
-  for the commit containing this snapshot. Immutable v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
+  for the commit containing this snapshot. Immutable v22 reference: **f6496e5**; v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
 - Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
-  birth counter and competing project coordinators; physical-market prerequisite;
+  birth counter, competing project coordinators and persistent alignment factions; physical-market prerequisite;
   S5 novice child proficiency and one held technique with instruction; general D3;
   **S3 first complete relocation/founding slice** (contract in RELOCATION.md); S4a actual
   production/flow observations and S4b first physical exchange journey slice (contract in ECONOMY.md).
@@ -23,23 +23,23 @@ This is the continuation record; the audit remains dated evidence, not current a
 - Natural smoke: meadow/Normal/28, four days, control + nudge + no-relocation: no sustained
   hardship or proposals; conserved goods and 28 survivors in each. This is not an ensemble.
 - Protected original/candidate work and main-worktree untracked `_find_moments_rich.ts`
-  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v21 references or silently
+  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v22 references or silently
   reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
 - Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: complete enduring political alignment and transmitted practices.**
-S4b now implements personally heard opportunities, actual travel, existing voluntary
-barter, failure and persistent exchange receipts; it does not demonstrate autonomous
-intertown dependence. Pin the current v22 continuation before the next behavioural
-change and allocate a fresh generation (23 is the next candidate; recheck concurrent
-work). Keep F1-F5 queued until the remaining programme and its verification are complete.
-The latest S4b checks and evidence are at the end of this file.
+**Next executable task: S5 transmitted household practices.** Existing technique
+instruction is implemented, but inherited practices beyond that technique still need a
+real contact/transmission/action chain. Pin the current v23 continuation before changing
+behaviour and allocate a fresh generation (24 is next candidate; recheck concurrent work).
+Keep F1-F5 queued until the remaining programme and required verification are complete.
+S4b mechanism and S2 persistent alignment are delivered; natural frequency and aggregate
+benefit are not demonstrated. Latest verification is at the end of this file.
 
 S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
 succession, rescue or return expedition. Separation prevents founding, urgent needs can
 interrupt, known deadlines permit failure. Old property remains owned. Natural migration
 frequency/benefit remains unmeasured. The full programme is still incomplete: enduring
-factions/rival priorities; natural specialisation/exchange evidence; transmitted
+natural specialisation/exchange/faction evidence; transmitted
 practices beyond one technique; D10 retention/indexing; D12/A and natural C-H measurement;
 mature-world performance. Long ensembles still follow dispatcher/detached-launch policy.
 
@@ -90,7 +90,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | Roadmap 7 / A6 / D | V20 co-present household agreement, physical packing/travel/shelter and explicit founding | S3; 14 contracts, mid-travel save equality, 21 rendered checks; natural smoke null | verified: bounded mechanism; natural migration/benefit unresolved |
 | Roadmap 8 / A2 | Persistent township membership now saved at 12; v21 bounded actual production/flow observations | S1 membership; S4a action-derived statistics and nine rendered checks | verified: bounded observations; wider specialisation evidence unresolved |
 | Roadmap 9 / A7 / G | V18 charcoal technique held by people, voluntary timed instruction, provenance and loss | S5; contact/time, real kiln use, interrupted/save/purity contracts and staged G | verified: one technique |
-| Roadmap 10 / A5 / F | V12 project organiser; v15 explicit competing coordinators and voluntary support; no inherited office | S1/S2 bounded contracts/runtime; persistent factions and wider proposals remain | implemented: coordination; unresolved: factions/F ensemble |
+| Roadmap 10 / A5 / F | V15 rival coordinators; v23 persistent accepted choices and derived factions affect later support | S2 real conversation counterfactual, mandate, death/departure/purity/save/browser | verified: bounded political mechanism; natural F ensemble unresolved |
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
 | A4 economy / E | V22 personally heard lead, physical exchange journey, existing barter and receipt history | S4b contracts, rendered journey/swap/return/failure; one-day control/nudge/ablation null | implemented and verified first slice; natural exchange/dependence unresolved |
 | A6 environment / C | Global weather and symmetric camps; v21 actual production observations now exist | S4; sustained actual action/flow differences under opportunities | unresolved |
@@ -636,3 +636,34 @@ holders, journeys and swaps, 100 survivors and conserved goods. This short null 
 measure benefit, natural specialisation or dependence. Conditions and interpretation
 were recorded in `scripts/exchange_smoke.ts` before running; raw results are in
 `civic_evidence/exchange-natural-smoke.json`. No threshold was tuned to force occurrence.
+
+
+## Rules 23 — persistent alignment and consequential factions
+
+Actual support choices now persist across projects. A resident's uniquely repeated prior
+choice slightly strengthens continuity against a rival coordinator. The civic inspector
+shows groups formed by this history; ordinary support still determines physical work
+access. There is no global faction assignment, automatic successor or coercion.
+Architecture, alternative, retention and recovery are recorded in RICH_WORLD.md.
+
+Existing modules touched: civic_decision records actual proposals/accepted choices and
+consults personal alignment when comparing rivals; history derives groups; save/types/
+world persist, validate and hash the bounded memory; lab adds the narrow ablation.
+The new political_alignment module owns this concept. Existing social weights for
+witnessed success/failure and the B broken-promise evidence remain unchanged.
+
+Verification: full `npm test` **1136 tests / 127 files**, typecheck/build and unchanged
+historical golden fingerprints. Five new contracts cover real support across projects,
+one-prior-choice counterfactual with actual acceptance/refusal and changed mandate,
+bounds/deduplication/current-project exclusion, strong disagreement, ties, known death,
+departure, observer purity, save/load and historical/ablation gates. Focused tests passed
+after the final pure-view wording/index improvement. Browser: ten passing checks across
+before/retained/changed states; both outcome screenshots inspected and scrolled to the
+actual decision explanation. Evidence: `civic_evidence/alignment-counterfactual.json` and
+`civic_evidence/alignment-page/`. These are explicitly staged, not natural F emergence.
+
+Review findings resolved: record a challenger's own accepted nomination as well as a
+founder's proposal; exclude the current project from continuity to avoid self-reward;
+retain only one choice per project; keep derived grouping out of decision inputs and
+avoid quadratic household/member lookup in that observer. Broader natural faction
+frequency, durability and effects remain unmeasured.

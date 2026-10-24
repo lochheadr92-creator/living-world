@@ -1,0 +1,21 @@
+{
+  "staged": true,
+  "rules": 23,
+  "changedField": "person 5 civicAlignment[0].candidateId: 2 -> 12",
+  "before": {
+    "retained": "prefers the organiser already supported (#2) after repeatedly choosing them on earlier projects",
+    "changed": ""
+  },
+  "after": {
+    "retained": {
+      "coordinator": 2,
+      "support": 2,
+      "request": "prefers the organiser already supported (#2) after repeatedly choosing them on earlier projects"
+    },
+    "changed": {
+      "coordinator": 12,
+      "support": 12,
+      "request": "Ben supports Cora coordinating and will help build"
+    }
+  }
+}

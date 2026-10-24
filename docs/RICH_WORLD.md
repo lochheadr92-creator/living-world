@@ -138,3 +138,34 @@ The physical contract, old-save limits, autonomous example and verification are 
 ## Fatal injury finality (rules version 6, 2026-10-22)
 
 If a person is already at zero health when their turn comes, `stepPerson` settles death through `killPerson` before `updateNeeds` can add passive recovery. The cause already written, including a wolf bite's `wolf attack`, is the one that is kept. A person still above zero recovers as before. Versions 1–4 keep the old order. Version 5 is the unintegrated experimental mood-ranking number and is refused at load, not reinterpreted. The lab switch is `rich-no-fatal-hold`. It does not change bite damage, healing rates, defence, habitation or preparation, and it does nothing below version 6. This is an ordering repair. It is not a claim that villages survive longer.
+
+## Rules 23: persistent political alignment
+
+`political_alignment.ts` owns a person's bounded memory of their latest accepted
+coordinator choice on each of up to 24 projects. Actual proposal/nomination and accepted
+recruitment record choices; refusal does not fabricate support. Switching replaces the
+same project's entry. Of the last four other projects in the same township, at least two
+choices for a uniquely preferred organiser supply a small continuity term (0.08) when
+comparing a current coordinator with a challenger. The current project cannot bootstrap
+its own bonus. Existing relationships, grievances, witnessed outcomes, willingness,
+urgent withdrawal and physical work authority remain in their original owners.
+
+Two plausible designs were an authoritative faction roster with recruitment and shared
+beliefs, or personal choice history with derived groups. The latter is the smallest
+coherent mechanism: two or more present residents repeatedly supporting the same present
+organiser appear as a faction in the civic inspector. Their own histories influence
+individual answers; no person reads everyone else's private history. Groups dissolve
+when participants leave or their organiser dies/leaves, with no automatic successor or
+inherited office. Known death ends the personal preference; unknown death is not leaked
+through an omniscient choice rule. Materially stronger contrary evidence can overcome
+continuity. This adds persistence of alignment, not another reputation/outcome reward.
+
+The personal records are saved and hashed; groups and summaries are pure derivations.
+Rules 23 is required on load; historical versions receive no history or weight. Lab
+ablation: `rich-no-political-alignment`. Immutable v22 reference: `f6496e5`.
+Five contracts plus existing civic-choice/continuation coverage establish the boundaries.
+The labelled counterfactual holds world/tick/RNG/relationships constant and changes one
+prior accepted support record. Ben then accepts Cora instead of refusing, changing the
+actual construction mandate. This establishes a causal decision effect, not aggregate
+social benefit or naturally emerging factions. The original B broken-promise evidence
+remains separate and unchanged.

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "before: choice explained",
+    "pass": true
+  },
+  {
+    "name": "before: coordinator",
+    "pass": true
+  },
+  {
+    "name": "before: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "retained: choice explained",
+    "pass": true
+  },
+  {
+    "name": "retained: coordinator",
+    "pass": true
+  },
+  {
+    "name": "retained: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "changed: choice explained",
+    "pass": true
+  },
+  {
+    "name": "changed: coordinator",
+    "pass": true
+  },
+  {
+    "name": "changed: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true
+  }
+]

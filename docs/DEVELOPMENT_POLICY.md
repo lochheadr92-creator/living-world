@@ -268,3 +268,11 @@ urgent needs still interrupt, missing counterparties and refusals are recorded. 
 history records actual completed swaps. See ECONOMY.md for ownership, alternatives and
 retention. Immutable version-21 continuation reference: `ee822f3`. No historical save
 is migrated; the lab can disable the new mechanism with `rich-no-exchange-journeys`.
+
+### Rules version 23 — remembered political alignment
+
+Actual proposals and accepted support retain bounded personal choices across projects.
+Repeated prior support affects the existing comparison of rival coordinators; derived
+factions describe those choices without granting an office or reading private histories
+for other inhabitants' decisions. See RICH_WORLD.md. `rich-no-political-alignment` is
+the lab ablation. Rules-22 reference `f6496e5` was captured before implementation.

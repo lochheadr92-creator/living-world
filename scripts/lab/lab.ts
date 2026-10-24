@@ -1,3 +1,4 @@
+import { politicalAlignmentOn, setPoliticalAlignment } from '../../src/sim/political_alignment';
 import { exchangeJourneysOn, setExchangeJourneys } from '../../src/sim/exchange_journeys';
 import { relocationsOn, setRelocations } from '../../src/sim/relocation';
 import { setConstructionSafety, constructionSafetyOn } from '../../src/sim/construction_access';
@@ -231,6 +232,7 @@ export function parseIntervention(specIn: string): Intervention {
     };
   }
   if (kind === 'rich-unsafe-sites') return {spec:label,summary:'restore pre-19 siting (public storehouse safeguard remains)',apply:()=> 'general siting guard off',install(){const was=constructionSafetyOn();setConstructionSafety(false);return ()=>setConstructionSafety(was);}};
+  if (kind === 'rich-no-political-alignment') return {spec:label,summary:'disable persistent political alignment only',apply:()=> 'political alignment disabled',install(){const was=politicalAlignmentOn();setPoliticalAlignment(false);return ()=>setPoliticalAlignment(was);}};
   if (kind === 'rich-no-exchange-journeys') return {spec:label,summary:'disable exchange journeys and leads only',apply:()=> 'exchange journeys disabled',install(){const was=exchangeJourneysOn();setExchangeJourneys(false);return ()=>setExchangeJourneys(was);}};
   if (kind === 'rich-no-relocation') return {spec:label,summary:'disable household relocation only',apply:()=> 'household relocation disabled',install(){const was=relocationsOn();setRelocations(false);return ()=>setRelocations(was);}};
   if (kind === 'rich-universal-techniques') return {spec:label,summary:'remove held-technique requirement and instruction',apply:()=> 'universal technique access restored',install(){const was=techniquesOn();setTechniques(false);return ()=>setTechniques(was);}};

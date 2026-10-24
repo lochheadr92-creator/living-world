@@ -1,3 +1,4 @@
+import { rememberAlignment, alignmentWeight } from './political_alignment';
 // A bounded collective choice over who coordinates ONE existing public project.
 // Support is recorded only by actual recruitment conversations. This owns no goods.
 import type { Person, World } from './types';
@@ -19,6 +20,7 @@ export function initialiseCouncil(w:World,q:CivicProject):void{
  if(!hasCivicChoice(w))return;
  q.council={candidates:[{personId:q.organiserId,tick:w.tick,reason:'proposed the physical project'}],coordinatorId:0,changes:[]};
  q.participants[0].supports=q.organiserId;
+ const organiser=w.byId.get(q.organiserId);if(organiser?.ent==='person')rememberAlignment(w,organiser,q.id,q.townshipId,organiser.id);
 }
 const member=(w:World,p:Person,q:CivicProject)=>w.households.find(h=>h.id===p.hhId)?.townshipId===q.townshipId;
 export function challengeReason(w:World,p:Person,q:CivicProject):string{
@@ -48,6 +50,7 @@ export function nominate(w:World,a:Person,b:Person,q:CivicProject):void{
  const m=q.participants.find(m=>m.personId===a.id)!;
  releaseOldSupport(w,a,q.siteId,'proposed an alternative coordinator');
  m.status='supporting';m.supports=a.id;m.reason=reason;
+ rememberAlignment(w,a,q.id,q.townshipId,a.id);
  recount(w,q);
  addEvent(w,'social',`${a.name} proposed to coordinate the shared storehouse: ${reason}.`,[a.id,q.siteId],a.x,a.y);
 }
@@ -61,7 +64,8 @@ export function oppositionReason(w:World,p:Person,a:Person,q:CivicProject):strin
  if(!councilFor(w,q))return '';
  const m=q.participants.find(m=>m.personId===p.id),old=m?.status==='supporting'?m.supports:0;
  if(!old||old===a.id||knowsDeath(p,old))return '';
- return confidence(p,a.id)>confidence(p,old)+0.05?'':`prefers the organiser already supported (#${old})`;
+ const prior=alignmentWeight(w,p,q.townshipId,q.id,old),alternative=alignmentWeight(w,p,q.townshipId,q.id,a.id);
+ return confidence(p,a.id)+alternative>confidence(p,old)+prior+0.05?'':`prefers the organiser already supported (#${old})${prior?' after repeatedly choosing them on earlier projects':''}`;
 }
 export function releaseOldSupport(w:World,p:Person,siteId:number,reason:string):void{
  for(const c of p.commitments)if(c.siteId===siteId&&c.status==='active'){
@@ -74,7 +78,7 @@ export function recordChoice(w:World,q:CivicProject,m:Participation,a:Person,acc
  const decisions=m.decisions??=[];
  if(decisions.some(d=>d.candidateId===a.id))return;
  decisions.push({candidateId:a.id,accepted,reason,tick:w.tick});
- if(accepted)m.supports=a.id;
+ if(accepted){m.supports=a.id;const p=w.byId.get(m.personId);if(p?.ent==='person')rememberAlignment(w,p,q.id,q.townshipId,a.id);}
  recount(w,q);
 }
 export function mandate(w:World,q:CivicProject):number{

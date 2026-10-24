@@ -1,0 +1,14 @@
+import {writeFileSync} from 'node:fs';
+import {alignmentFixture} from '../tests/helpers/political_alignment';
+import {civicTalk} from '../tests/helpers/contest';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+import {mandate,oppositionReason} from '../src/sim/civic_decision';
+const f=alignmentFixture(),{w,a,b,c,q,site}=f;
+const control=deserializeWorld(serializeWorld(w)),cb=control.persons.find(p=>p.id===b.id)!;cb.civicAlignment![0].candidateId=c.id;
+control.sceneLabel='STAGED COUNTERFACTUAL: one earlier support choice changed';
+writeFileSync('civic_evidence/alignment-before-save.json',serializeWorld(w));
+const before={retained:oppositionReason(w,b,c,q),changed:oppositionReason(control,cb,control.persons.find(p=>p.id===c.id)!,control.civicProjects!.at(-1)!)};
+civicTalk(w,c,b,site.id);civicTalk(control,control.persons.find(p=>p.id===c.id)!,cb,site.id);
+writeFileSync('civic_evidence/alignment-retained-save.json',serializeWorld(w));writeFileSync('civic_evidence/alignment-changed-save.json',serializeWorld(control));
+const result={staged:true,rules:23,changedField:`person ${b.id} civicAlignment[0].candidateId: ${a.id} -> ${c.id}`,before,after:{retained:{coordinator:mandate(w,q),support:q.participants.find(m=>m.personId===b.id)?.supports,request:w.requests.at(-1)?.note},changed:{coordinator:mandate(control,control.civicProjects!.at(-1)!),support:control.civicProjects!.at(-1)!.participants.find(m=>m.personId===b.id)?.supports,request:control.requests.at(-1)?.note}}};
+writeFileSync('civic_evidence/alignment-counterfactual.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

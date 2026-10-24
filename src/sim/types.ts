@@ -572,6 +572,7 @@ export interface Trade {
 }
 
 export interface Person {
+  civicAlignment?: import('./political_alignment').CivicAlignment[];
   tradeLeads?: import('./exchange_journeys').TradeLead[];
   exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
   relocationHardship?: number;

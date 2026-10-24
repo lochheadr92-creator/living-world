@@ -1,3 +1,4 @@
+import { factionHistory } from './political_alignment';
 import { exchangeHistory, exchangeTownHistory } from './exchange_journeys';
 import { economicHistory } from './settlement_economy';
 import { mandate } from './civic_decision';
@@ -32,6 +33,7 @@ export function civicHistory(w: World, p: Person): { township: string; lines: st
   ...economicHistory(w,t.id),
   ...exchangeHistory(w,p),
   ...exchangeTownHistory(w,t.id),
+  ...factionHistory(w,t.id),
   ...projects.slice(-2).flatMap(q => projectHistory(w,q)),
   ...(p.civicOutcomes ?? []).slice(-3).map(m => `Personally witnessed ${name(w,m.organiserId)}'s project #${m.projectId} ${m.success ? 'complete' : 'fail'} at tick ${m.tick}; this informs willingness to support them again.`),
   ...(projects.length ? [] : ['No shared project proposed yet.']),
