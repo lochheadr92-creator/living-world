@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 24 before bounded cosmetic retention and historical indexing",
+  "saved": {
+    "hash": "bfb735d7",
+    "deep": "7635243b025cf541",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 1
+    },
+    "homeFood": 69,
+    "storedFood": 25
+  },
+  "continued": {
+    "hash": "985a959b",
+    "deep": "84e4d39ce5ca5044",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 1,
+      "shelter": 1
+    },
+    "homeFood": 74,
+    "storedFood": 21
+  }
+}
