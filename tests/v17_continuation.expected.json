@@ -1,0 +1,25 @@
+{
+  "source": "reconciled version 17 before person-held charcoal technique",
+  "saved": {
+    "hash": "abe98e18",
+    "deep": "d2a5648c760d32a5",
+    "alive": 28,
+    "plans": {
+      "tool": 18,
+      "stock": 2
+    },
+    "homeFood": 41,
+    "storedFood": 15
+  },
+  "continued": {
+    "hash": "0d417d3a",
+    "deep": "b5c54a7e23eb1195",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 2
+    },
+    "homeFood": 86,
+    "storedFood": 33
+  }
+}
