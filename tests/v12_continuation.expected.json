@@ -1,0 +1,25 @@
+{
+  "source": "reconciled version 12 before social consequence correction",
+  "saved": {
+    "hash": "40a5d7f3",
+    "deep": "365cfc4b9a64360f",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 3
+    },
+    "homeFood": 97,
+    "storedFood": 28
+  },
+  "continued": {
+    "hash": "d2f0d39b",
+    "deep": "00f862705ac22c6e",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 1
+    },
+    "homeFood": 119,
+    "storedFood": 44
+  }
+}
