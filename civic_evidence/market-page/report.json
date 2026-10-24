@@ -1,0 +1,31 @@
+[
+  {
+    "name": "before: trade happens only after arrival",
+    "pass": true
+  },
+  {
+    "name": "before: actor and carried items visible",
+    "pass": true
+  },
+  {
+    "name": "before: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "after: trade happens only after arrival",
+    "pass": true
+  },
+  {
+    "name": "after: actor and carried items visible",
+    "pass": true
+  },
+  {
+    "name": "after: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true,
+    "detail": []
+  }
+]

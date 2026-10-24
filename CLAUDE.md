@@ -44,7 +44,7 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-Current rules version 15 adds competing project coordinators and voluntary support, after version 14 local death knowledge/birth accounting, version 13 social history, and version 12 townships/shared storehouses.
+Current rules version 16 fixes physical market exchange, after version 15 competing project coordinators, version 14 local death knowledge/birth accounting, version 13 social history, and version 12 townships/shared storehouses.
 `docs/CIVILISATION_IMPLEMENTATION.md` is the execution/continuation register; it records
 version collisions, verified scope and unrun measurements. Candidate version 8 courier
 and version 9 table eating are applied at version 11 on the local-main lineage.

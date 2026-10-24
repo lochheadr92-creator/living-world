@@ -1,3 +1,4 @@
+import { setLocalMarket, localMarketOn } from '../../src/sim/market_contact';
 import { setCivicChoice, civicChoiceOn } from '../../src/sim/civic_decision';
 import { setLocalDeath, localDeathOn } from '../../src/sim/death_knowledge';
 import { setSingleCount, singleCountOn } from '../../src/sim/reputation';
@@ -224,6 +225,7 @@ export function parseIntervention(specIn: string): Intervention {
       },
     };
   }
+  if (kind === 'rich-remote-markets') return {spec:label,summary:'restore legacy remote market exchanges',apply:()=> 'remote market behavior restored',install(){const was=localMarketOn();setLocalMarket(false);return ()=>setLocalMarket(was);}};
   if (kind === 'rich-no-civic-choice') return {spec:label,summary:'restore single-organiser project acceptance',apply:()=> 'collective coordinator choice off',install(){const was=civicChoiceOn();setCivicChoice(false);return ()=>setCivicChoice(was);}};
   if (kind === 'rich-global-death-news') return { spec: label, summary: 'restore global death notification', apply: () => 'global death notification restored', install() { const was = localDeathOn(); setLocalDeath(false); return () => setLocalDeath(was); } };
   if (kind === 'rich-no-reputation-dedup') return { spec: label, summary: 'restore the duplicate relationship and reputation effect of stories', apply: () => 'duplicate reputation restored', install() { const was = singleCountOn(); setSingleCount(false); return () => setSingleCount(was); } };

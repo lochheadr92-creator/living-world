@@ -256,9 +256,8 @@ fixed ordinary world did before and after this work.
 
 ## Known limits
 
-* People never steal from or hurt each other; “harm” is quarrels, broken promises and the occasional wolf bite.
-* One settlement on one 80×80 map; the only animals are wolves; no hunting, no inheritance, no trade between camps, no
-  currency, markets or caravans.
+* The integrated rules include theft, quarrels, broken promises and wolf danger; no general human combat system is claimed.
+* Village/Large/Huge start 28/100/250 people in one/four/six communities. Wolves, deer, hunting, calendar markets and local barter exist. Version 16 checks actual market co-presence; purposeful inter-settlement trade, currency, caravans and complete generational transmission remain unfinished.
 * A workplace's output is not routed anywhere automatically: somebody has to want it and go and fetch it. Iron is the slowest
   chain — the ore lies a long walk away and a wooden tool is easy to replace — so a forge may stand for weeks before it is
   used, and in some worlds it is never used.

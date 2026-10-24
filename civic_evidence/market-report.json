@@ -1,0 +1,40 @@
+{
+  "label": "STAGED: barter waits for physical arrival",
+  "ticks": 226,
+  "trade": {
+    "id": 10,
+    "tick": 225,
+    "kind": "trade",
+    "text": "Ada swapped 2 wood for 2 fish with Ben at the market.",
+    "ids": [
+      2,
+      5
+    ],
+    "x": 40.5,
+    "y": 43.5
+  },
+  "ada": {
+    "x": 40.5,
+    "y": 40.5,
+    "items": {
+      "wood": 2,
+      "berries": 1,
+      "fish": 2
+    }
+  },
+  "ben": {
+    "x": 42,
+    "y": 40.5,
+    "items": {
+      "fish": 4,
+      "berries": 3,
+      "basket": 1,
+      "wood": 2
+    }
+  },
+  "ledger": {
+    "ok": true,
+    "diffs": []
+  },
+  "midWalkContinuation": true
+}

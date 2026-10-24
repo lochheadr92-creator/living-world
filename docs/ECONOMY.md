@@ -318,7 +318,8 @@ projects stay off, so a staged scene never grows more than was staged.
 
 ## Limits worth knowing
 
-* There is still one settlement, one map, one animal species; no currency, no markets, no caravans, no combat.
+* Current profiles start one, four or six communities (28/100/250 founders); rich worlds include wolves and deer, hunting, theft and calendar markets. Purposeful inter-settlement trade, caravans and currency remain absent.
+* Version 16 markets require actual co-presence at an active known venue, capacity and real surplus; historical attendance does not grant remote access to a pack. Barter and gifts use conserved inventory transfers; this is not yet a cross-settlement economy.
 * A workplace's output is not routed anywhere automatically: somebody has to want it and go and fetch it.
 * **Iron is the slowest chain and does not appear in every world.** The ore lies 23–26 tiles from the camp in all four standard
   seeds, a wooden tool is cheap to replace, and a forger needs a hammer of their own, charcoal from the kiln, and ore carried

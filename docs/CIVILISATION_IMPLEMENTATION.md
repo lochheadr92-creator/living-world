@@ -59,7 +59,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | D3 route blocking | Report predates current source; siting tests clearance only | S1 safety for project; S3 general reachability and occupied exits | unresolved |
 | D4 death news | Confirmed global mood/need/partner notification; replaced at 14 with witness, grave or co-present typed news | S2; isolated bereaved, indoor/sleep, repeated story, mid-journey continuation | verified |
 | D6 births | Confirmed regex count; v14 lifetime counter incremented at actual birth, legacy scope labelled | S2 prerequisite; rollover/death/save fixtures | verified |
-| D7 market | Audit reports remote exchanges; not yet rechecked | S4 prerequisite; distant/indoor rejection and conservation | unresolved |
+| D7 market | V15 historical attendance enables remote trades; v16 validates physical venue/contact and local knowledge | S4 prerequisite; rejection, conserved barter, mid-walk save and rendered arrival | implemented: verification below |
 | D9 passive decay | Accepted observation, no demonstrated defect | No change unless new evidence | not applicable: accepted |
 | D10 historical growth | Deceased, graves and pair records retain causality; no retention audit yet | S6; bounded retention/indexing with inheritance/replay contracts | unresolved |
 | D11 newborn skills | Audit reports adult-range initial skills; not yet rechecked | S5; explicit developmental competence and learning | unresolved |
@@ -67,7 +67,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | B dependency map | Migration is not required for organisation within a settlement | Owner programme supersedes audit ordering; S1 before S3 | superseded |
 | A9 performance | 28/100/250 profiles exist; historical timings are legacy | S6; current rules representative profile timings, 300 only if useful | unresolved |
 | H docs: CLAUDE rules summary | Current civilisation section names current generation and reconciliation | S0-S2 agent guidance corrected | verified |
-| H docs: README/ECONOMY population, animals, markets | Audit leads, update when corresponding subsystem checked | S4 | unresolved |
+| H docs: README/ECONOMY population, animals, markets | Corrected obsolete one-settlement/one-species/no-market claims from current source; no purposeful intertown trade claimed | S4 market prerequisite | verified |
 | H docs: RICH_WORLD traditionsTick, fish/dry spell | Audit leads, no behavioural repair inferred | S5 | unresolved |
 | H docs: AUTONOMY R5/R6 | Source already has trust/debt/heard; obsolete absence claims corrected | S2 | verified |
 | H docs: INHABITANT missing AGENTS | Old AGENTS absence statement marked superseded | S2 | verified |
@@ -280,3 +280,34 @@ S2b boundary checks: full suite 1052 tests / 111 files; build and typecheck pass
 historical golden script matched. Final review repaired the lab ablation's outcome
 credit (work access already reverted); eight focused checks including v14 continuation
 passed afterward. No product behavior or earlier reference was changed by that repair.
+
+## S4 prerequisite: physical markets (version 16)
+
+Confirmed D7: a v15 market attendee retained in the historical attendance list can
+trade from x75 with someone near x40. V16 rejects that transfer before reading the
+counterparty's pack/needs. `market_contact.ts` owns the physical boundary; `occasions.ts`
+still owns attendance and barter; inventory transfer/ledger stay in economy.ts.
+Alternatives: maintain a second live attendance roster, or validate actual presence
+at each exchange. Selected validation avoids stale duplicate state. Both must be
+awake, outside, within 3 tiles of each other and within 8 tiles of the active, existing
+venue. The attendance list remains a history. Arrival relationship effects likewise
+require local presence. A person must know the venue before generating attendance.
+
+Both parties still evaluate their own surplus and valuation; no remote counterparty
+inventory is consulted. Whole equal barter quantities are capacity-checked before
+transfers; a capacity-limited fixture exchanges exactly one wood for one fish and
+reports those quantities. Gifts preserve food already promised/reserved. A full pack
+can honestly prevent a trade; simultaneous pack unloading is not added. No currency,
+merchant role, invented goods, long-distance journey intent or new production labels.
+`rich-remote-markets` restores the legacy path; v15 continuation pinned at 00fb9dd.
+
+Staged rendered scene: Ada starts at x65; distant barter leaves complete state unchanged.
+After 226 steps of the normal attendance activity she is at x40.5, Ben at x42, and
+2 wood exchange for 2 fish. Both packs and the feed show the real quantities, ledger
+balances. Saving 50 steps into travel produces identical complete continuation.
+Eleven market contracts pass, including legacy reproduction, distant/indoor/asleep/
+closed/wrong-place rejection, limited/full capacity, reservations and venue knowledge.
+Seven rendered checks pass; final screenshots visually inspected with carrying visible.
+Boundary checks: full suite 1065 tests / 113 files, build/typecheck and standalone
+historical golden script pass; diff whitespace check clean. Broader S4
+purposeful intertown exchange and measured dependence remain unresolved.

@@ -1,3 +1,4 @@
+import { hasLocalMarket, presentAt, togetherAt } from './market_contact';
 import { hasLocalDeath, knowsDeath } from './death_knowledge';
 // Occasions (rich worlds only): a place and a time at which many people gather at once - a funeral, a wedding, a feast for a birth or
 // the first harvest, and a market day. An occasion is called by something that happened (a death, a wedding, a birth, a harvest) or
@@ -11,8 +12,8 @@ import { hasLocalDeath, knowsDeath } from './death_knowledge';
 // saves and fingerprints are untouched.
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import type { WorkResult } from './activities';
-import { DAY, DAYS_PER_YEAR, NUTRITION, START_FRAC } from './constants';
-import { transfer } from './economy';
+import { DAY, DAYS_PER_YEAR, NUTRITION, START_FRAC, WEIGHT } from './constants';
+import { transfer, invWeight } from './economy';
 import { surplusOf, valueOf } from './social';
 import { dayNumber } from './environment';
 import { addEvent, addLog } from './events';
@@ -194,6 +195,7 @@ export function attendOptions(ctx: Ctx): void {
     if (o.status === 'done' || o.attended.includes(p.id) || o.about.includes(p.id)) continue;
     if (hasLocalDeath(world) && o.kind==='funeral' && (!o.about.some(id=>knowsDeath(p,id)) || !p.beliefs[o.placeId] || o.status!=='gathering' || p.indoors || hyp(o.x-p.x,o.y-p.y)>10)) continue;
     if (o.status === 'called' && world.tick < o.at - 200) continue;
+    if(hasLocalMarket(world)&&!p.beliefs[o.placeId])continue;
     const d = hyp(o.x - p.x, o.y - p.y);
     if (d > 60) continue;
     const e = eta(ctx, o.x, o.y);
@@ -252,12 +254,13 @@ export function attendOptions(ctx: Ctx): void {
 
 /** what happens on arrival: the person is counted, meets those already there, feels it, and at a market food changes hands */
 function arrive(world: World, p: Person, o: Occasion): void {
+  if(hasLocalMarket(world)&&!presentAt(world,p,o))return;
   if (o.attended.includes(p.id)) return;
   const there = o.attended.slice(0, MEET_AT_MOST);
   o.attended.push(p.id);
   for (const id of there) {
     const q = personById(world, id);
-    if (!q || !q.alive) continue;
+    if (!q || !q.alive || hasLocalMarket(world)&&!togetherAt(world,p,q,o)) continue;
     const note = `met at the ${KIND_LABEL[o.kind]}`;
     adjustRel(p, q.id, world.tick, { aff: 1.2, fam: 1, note });
     adjustRel(q, p.id, world.tick, { aff: 1.2, fam: 1, note });
@@ -280,6 +283,7 @@ const BARTER: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'wood'
  * their own valuation (social.ts valueOf), two units for two units at most, and both packs must have room. One swap per arrival.
  */
 export function marketSwap(world: World, p: Person, o: Occasion): boolean {
+  if(hasLocalMarket(world)&&(o.kind!=='market'||!presentAt(world,p,o)))return false;
   // what I am short of, dearest first
   const wants = BARTER.filter((k) => (p.inv[k] ?? 0) < 2)
     .map((k) => ({ k, v: valueOf(world, p, k) }))
@@ -288,7 +292,7 @@ export function marketSwap(world: World, p: Person, o: Occasion): boolean {
   for (const { k: want } of wants) for (const id of o.attended) {
     if (id === p.id) continue;
     const q = personById(world, id);
-    if (!q || !q.alive || surplusOf(world, q, want) < 1) continue;
+    if (!q || !q.alive || hasLocalMarket(world)&&!togetherAt(world,p,q,o) || surplusOf(world, q, want) < 1) continue;
     // what of mine would they take for it? the thing they value most that I can spare
     let give: ItemKind | null = null;
     let gain = 0;
@@ -302,7 +306,12 @@ export function marketSwap(world: World, p: Person, o: Occasion): boolean {
     }
     if (!give || valueOf(world, p, want) <= valueOf(world, p, give)) continue;
     // two for two at most; the transfers themselves cap what each pack can take, and a swap one side cannot carry is undone
-    const n = Math.min(2, surplusOf(world, p, give), surplusOf(world, q, want));
+    let n = Math.min(2, surplusOf(world, p, give), surplusOf(world, q, want));
+    if(hasLocalMarket(world)){
+      // Agree a whole equal quantity BEFORE either transfer. No partial return or inaccurate receipt.
+      n=Math.floor(n);
+      while(n>=1&&(invWeight(p)+n*WEIGHT[want]>carryCap(world,p)+1e-9||invWeight(q)+n*(WEIGHT[give]-WEIGHT[want])>carryCap(world,q)+1e-9))n--;
+    }
     if (n < 1) continue;
     const got = transfer(world, q.inv, p.inv, carryCap(world, p), want, n, 'person:' + q.id, 'person:' + p.id, 'market swap');
     if (got < 1) continue;
@@ -326,20 +335,21 @@ export function marketSwap(world: World, p: Person, o: Occasion): boolean {
  * The market, in its first form: whoever comes with food to spare hands some to whoever came short of it, by the ordinary transfer
  * that records every unit. Up to three units, to the hungriest person there who still has room; nothing moves if nobody is short.
  */
-function marketExchange(world: World, p: Person, o: Occasion): void {
+export function marketExchange(world: World, p: Person, o: Occasion): void {
+  if(hasLocalMarket(world)&&(o.kind!=='market'||!presentAt(world,p,o)))return;
   const spare = foodCarried(p) - 6;
   if (spare < 1) return;
   let taker: Person | null = null;
   for (const id of o.attended) {
     if (id === p.id) continue;
     const q = personById(world, id);
-    if (!q || !q.alive || q.needs.hunger >= 55) continue;
+    if (!q || !q.alive || hasLocalMarket(world)&&!togetherAt(world,p,q,o) || q.needs.hunger >= 55) continue;
     if (!taker || q.needs.hunger < taker.needs.hunger) taker = q;
   }
   if (!taker) return;
   let moved = 0;
   for (const k of Object.keys(NUTRITION) as FoodKind[]) {
-    const have = p.inv[k] ?? 0;
+    const have = hasLocalMarket(world)?surplusOf(world,p,k):(p.inv[k] ?? 0);
     if (have <= 0 || moved >= Math.min(3, spare)) continue;
     moved += transfer(world, p.inv, taker.inv, carryCap(world, taker), k as ItemKind, Math.min(have, Math.min(3, spare) - moved), 'person:' + p.id, 'person:' + taker.id, 'market');
   }
