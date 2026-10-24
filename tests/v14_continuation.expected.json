@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 14 before competing organiser proposals",
+  "saved": {
+    "hash": "bb89fb0b",
+    "deep": "8fb1ee05d15272af",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 3
+    },
+    "homeFood": 97,
+    "storedFood": 28
+  },
+  "continued": {
+    "hash": "536b424c",
+    "deep": "bac8ebe42167bf71",
+    "alive": 28,
+    "plans": {
+      "tool": 15,
+      "stock": 3,
+      "shelter": 1
+    },
+    "homeFood": 151,
+    "storedFood": 49
+  }
+}
