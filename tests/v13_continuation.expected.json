@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 13 before local life knowledge corrections",
+  "saved": {
+    "hash": "237b2980",
+    "deep": "e8fa2504ce034a1f",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 3
+    },
+    "homeFood": 97,
+    "storedFood": 28
+  },
+  "continued": {
+    "hash": "9d282ddb",
+    "deep": "91b39b60ebed723e",
+    "alive": 28,
+    "plans": {
+      "tool": 15,
+      "stock": 3,
+      "shelter": 1
+    },
+    "homeFood": 151,
+    "storedFood": 49
+  }
+}
