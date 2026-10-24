@@ -8,7 +8,7 @@ import { addEvent } from './events';
 import { stageOf } from './people';
 import { hyp } from './util';
 
-export interface Township { id: number; name: string; x: number; y: number; founded: number }
+export interface Township { origin?: { householdId:number; relocationId:number; fromTownship:number; shelterId:number; organiserId:number }; id: number; name: string; x: number; y: number; founded: number }
 export interface Participation {
  supports?: number;
  decisions?: {candidateId:number;accepted:boolean;reason:string;tick:number}[];

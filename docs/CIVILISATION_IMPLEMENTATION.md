@@ -3,62 +3,44 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 19
+## Exact continuation snapshot — after version 20
 
-- Project: Living World; implementation commit **9415657**, current product rules **19**.
-  All verified stage commits are pushed on `codex/civilisation-programme` and integrated
-  by fast-forward into `main`/`origin/main`. A documentation-only continuation commit
-  follows this implementation; get its exact HEAD with `git rev-parse HEAD`.
-- Working directory: `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`.
-  No unfinished implementation patch. Generated saves and local check logs are ignored;
-  committed scripts recreate staged scenes. The final report records the clean status.
+- Current product rules **20**: household relocation and runtime founding, following
+  construction access (19). Implementation is on `codex/civilisation-programme` in
+  `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD
+  for the commit containing this snapshot. Immutable v19 reference: **801123e**.
 - Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
   birth counter and competing project coordinators; physical-market prerequisite;
-  S5 novice child proficiency and one held technique with instruction; general D3
-  construction-access prerequisite. See each stage below for files and exact evidence.
-- Latest verification: 1093 tests / 119 files, typecheck/build, unchanged historical
-  golden script, 24 focused access/township/continuation tests and five rendered access
-  checks passed. Earlier technique stage: 1085 tests / 117 files, twelve rendered
-  checks and controlled contact experiment. All current startup profile checks pass.
-  Classification: integrated, contract/runtime verified; natural emergence/benefit
-  and the unfinished programme are not verified by these scenes.
-- Protected: original retired checkout at 359bce9 still has `.agents/`, `.claude/skills/`
-  and `scratch_preserved_2026-10-23/`; candidate at 3f6ec66 remains clean. Main worktree's
-  untracked `_find_moments_rich.ts` and `_warmth_probe2.ts` remain untouched. Do not
-  develop in the retired checkout or reinterpret ambiguous v8/v9 saves. Never rewrite
-  continuation references v1-v18 or older golden values to accommodate new behavior.
-- No ensemble or migration implementation is running. Local Vite was served on 5291
-  from this worktree for the committed CDP browser checks; verify/restart if needed.
+  S5 novice child proficiency and one held technique with instruction; general D3;
+  **S3 first complete relocation/founding slice** (contract in RELOCATION.md).
+- Latest checks: `npm test` **1108 tests / 121 files**; `npm run typecheck`;
+  `npm run build`; `npx --no-install vite-node scripts/golden.ts` (all historical values
+  unchanged); 14 relocation contracts; focused township/housing/rules/v19 continuation
+  checks; `node scripts/browser/relocation_check.mjs` **21 passing rendered checks**.
+  Travel and settlement screenshots inspected. No human usability or aggregate benefit
+  claim. New evidence is in `civic_evidence/relocation-page/`, including labelled scenes.
+- Natural smoke: meadow/Normal/28, four days, control + nudge + no-relocation: no sustained
+  hardship or proposals; conserved goods and 28 survivors in each. This is not an ensemble.
+- Protected original/candidate work and main-worktree untracked `_find_moments_rich.ts`
+  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v19 references or silently
+  reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
+- Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: S3 household relocation and runtime founding.** Recheck the
-branch/HEAD/status, pin a **v19** continuation before changing behavior, and allocate
-an unused generation (20 is the next candidate; verify no concurrent allocation).
-Implement one complete locally known relocation situation: sustained perceived hardship
-or credible opportunity; household consent/refusal with dependent-child handling;
-physical packing/travel and inventory subtraction; separation/organiser loss/unreachable
-or unsuitable destination; shelter/arrival and explicit founding/member changes. Reuse
-`households.ts`, `townships.ts`, household stores, activities, habitation and construction
-access. Put relocation state/rules in their own owning module. Include visible stages,
-failure, save/load mid-journey, conservation and current/historical contracts.
+**Next executable task: S4 actual settlement production and resource-flow observations,
+then purposeful intertown barter.** Pin a v20 continuation before any saved/behavioural
+change and allocate the next unused generation (21 is the candidate; recheck concurrent
+work). Derive sustained activity from real production/transfer boundaries, with bounded
+records and observer-visible provenance, rather than assigning professions to towns.
+Then use known counterparties, physical travel/co-presence and conserved exchanges.
+The v16 market correction is a prerequisite already integrated, not intertown trade itself.
 
-First command (from the worktree): `git status --short --branch`.
-Then read this snapshot, `WORKFLOW.md`, relevant household/township/travel code and
-`docs/HOUSEHOLD_HOME.md`; do not restart the whole audit. The programme remains
-unblocked for implementation. Unfinished: enduring faction alignment and rival
-priorities; relocation/founding; action-derived specialisation and purposeful intertown
-trade; transmitted practices beyond one technique; D10 retention/indexing; D12/A
-measurement; natural C-H experiments and mature-world performance. Long runs still
-require the dispatcher/detached-launch policy, not an in-session ensemble.
-
-Paste-ready continuation:
-> Continue the authorised civilisation programme in the civilisation-programme worktree.
-> Main and the implementation branch include version 19 at 9415657 plus continuation
-> documentation. Read the current register and check Git status. Preserve the original,
-> candidate and main-worktree untracked work. Start S3 relocation/founding with a v19
-> continuation reference before a new rules generation. Deliver a physical, observable,
-> consent-based household journey and founding/failure slice, then continue the remaining
-> registered stages. Existing tests and scene evidence do not establish natural benefit.
-> Use the current WORKFLOW.md: focused tested commits, push and safe direct integration.
+S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
+succession, rescue or return expedition. Separation prevents founding, urgent needs can
+interrupt, known deadlines permit failure. Old property remains owned. Natural migration
+frequency/benefit remains unmeasured. The full programme is still incomplete: enduring
+factions/rival priorities; specialisation and purposeful intertown trade; transmitted
+practices beyond one technique; D10 retention/indexing; D12/A and natural C-H measurement;
+mature-world performance. Long ensembles still follow dispatcher/detached-launch policy.
 
 ## Owner queued priority after this programme
 
@@ -104,7 +86,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | Roadmap 4 / B | B fixture measured at v12 and v13; one prior promise changes willingness and one v13 actual transfer | S2; 9 contexts, control + 2 nudges; see evidence below | verified: controlled mechanism only |
 | Roadmap 5 / D5 | Local-main 9 already allows one adult to lay out hut | S0 preserve; existing housing contracts | implemented |
 | Roadmap 6 / A3 / D8 | Duplicate direct/reputation and hearsay/scalar effects reproduced and removed at 13 | S2; direct/told/expiry/legacy contracts and B | verified |
-| Roadmap 7 / A6 / D | No runtime relocation/founding; reserve/explore exist | S3; known destination, physical household travel/failure, membership, save | unresolved |
+| Roadmap 7 / A6 / D | V20 co-present household agreement, physical packing/travel/shelter and explicit founding | S3; 14 contracts, mid-travel save equality, 21 rendered checks; natural smoke null | verified: bounded mechanism; natural migration/benefit unresolved |
 | Roadmap 8 / A2 | Persistent township membership now saved at 12; production observations still absent | S1 verified membership; S4 action-derived statistics | implemented: membership; unresolved: statistics |
 | Roadmap 9 / A7 / G | V18 charcoal technique held by people, voluntary timed instruction, provenance and loss | S5; contact/time, real kiln use, interrupted/save/purity contracts and staged G | verified: one technique |
 | Roadmap 10 / A5 / F | V12 project organiser; v15 explicit competing coordinators and voluntary support; no inherited office | S1/S2 bounded contracts/runtime; persistent factions and wider proposals remain | implemented: coordination; unresolved: factions/F ensemble |
@@ -542,3 +524,43 @@ sample 240/check 600. Normal (28) 1.42s / 0.59ms per tick; Large (100) 5.61s /
 Raw `performance-v19-day-*.json` includes actual rules/settings and Node v24.19.0.
 Same bounded startup caveats as v16; this is not an isolated causal timing comparison
 or mature-world scaling result. No tests/builds overlapped these benchmark processes.
+
+## Rules 20 — household relocation and runtime founding
+
+Contract/architecture: [RELOCATION.md](RELOCATION.md). The first complete S3 slice adds
+co-present household agreement, refusal and renewed departure checks; capacity-limited
+private packing; ordinary physical travel with dependent-child pacing; local destination
+validation; ordinary shelter layout, hauling and construction; explicit establishment
+and persistent township identity. Original buildings/resources retain household ownership.
+Disagreement cancels the whole proposed move in this first mechanism; no partial-family
+split, rescue, successor or return expedition is invented. Lost organisers and separated
+families cannot found a township; the agreed deadline produces an observable failure.
+
+Existing modules touched: decision adds the owned relocation options; world samples
+personal hardship and hashes new records; activities adds a handler-owned travel pause;
+withdraw checks relocation ownership at the actual transfer boundary; types/save carry
+and validate optional records; history/labels expose actual state; townships retain
+founding causality; lab adds the narrow off-switch. No general suspension semantics or
+inhabitant audit fixes are changed. Immutable v19 reference: `801123e`.
+
+Review findings fixed: packing could outrun a co-present family (meeting-place action);
+children could be left beyond sensing range (asymmetric wait/follow distances); transfer
+needed a fresh ownership check; simultaneous proposal completion needed a second
+agreement check; all household responses must be heard together to avoid remote shared
+knowledge; founding causality must outlive bounded household detail. Focused contracts
+cover these boundaries. Current and historical full suites and rendered evidence are
+recorded in the continuation snapshot above.
+
+Bounded experiment D smoke: hypothesis and interpretation were written in
+`scripts/relocation_probe.ts` before the run. Meadow, Normal, 28 founders, immigration off,
+four days; current control, one-draw nudge and `rich-no-relocation`. All three ended with
+28 people and conserved goods. **No sampled day-long hardship and no proposals** occurred.
+This is a valid null for this short workload; it neither demonstrates spontaneous
+migration nor measures its benefit. No thresholds were changed to obtain success.
+`civic_evidence/relocation-natural-smoke.json` retains the results.
+
+Current-rule startup performance: `scripts/bench.ts --current --profile <profile> --days 1
+--arrivals off --quiet`, seed meadow, 2400 ticks each, run sequentially. Normal/28:
+0.51 ms/tick; Large/100: 2.18 ms/tick; Huge/250: 8.64 ms/tick. Each made three invariant
+checks with zero failures. These are first-day timings, not mature-world performance or
+migration-cost estimates. Reports: `civic_evidence/performance-v20-day-*.json`.

@@ -1,0 +1,50 @@
+{
+  "classification": "bounded natural smoke; not an ensemble",
+  "result": [
+    {
+      "arm": "control",
+      "rules": 20,
+      "seed": "meadow",
+      "profile": "normal",
+      "days": 4,
+      "observedHardship": 0,
+      "actions": {},
+      "proposals": 0,
+      "settled": 0,
+      "failed": 0,
+      "population": 28,
+      "conservation": true,
+      "hash": "9929d1a0"
+    },
+    {
+      "arm": "nudge:1",
+      "rules": 20,
+      "seed": "meadow",
+      "profile": "normal",
+      "days": 4,
+      "observedHardship": 0,
+      "actions": {},
+      "proposals": 0,
+      "settled": 0,
+      "failed": 0,
+      "population": 28,
+      "conservation": true,
+      "hash": "051bc5c7"
+    },
+    {
+      "arm": "rich-no-relocation",
+      "rules": 20,
+      "seed": "meadow",
+      "profile": "normal",
+      "days": 4,
+      "observedHardship": 0,
+      "actions": {},
+      "proposals": 0,
+      "settled": 0,
+      "failed": 0,
+      "population": 28,
+      "conservation": true,
+      "hash": "10eeca8a"
+    }
+  ]
+}

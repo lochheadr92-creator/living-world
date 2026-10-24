@@ -1,3 +1,4 @@
+import { relocationPackingBlocker } from './relocation';
 import { creditProject, mayWorkProject } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
@@ -578,6 +579,7 @@ registerHandler('withdraw', {
   availability: 0.45,
   pose: () => 'store',
   begin(world, p, a) {
+    const blocked = relocationPackingBlocker(world,p,a); if (blocked) return blocked;
     const c = containerItems(world, a.targetId);
     if (!c) {
       delBelief(p, a.targetId);
@@ -590,6 +592,7 @@ registerHandler('withdraw', {
     a.ty = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : p.y;
   },
   work(world, p, a): WorkResult {
+    const blocked = relocationPackingBlocker(world,p,a); if (blocked) return `fail:${blocked}`;
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress < a.duration) return 'continue';

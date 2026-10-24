@@ -1,3 +1,4 @@
+import { updateRelocationPressure } from './relocation';
 import { reviewParticipation } from './townships';
 // Side-effect imports register every activity handler.
 import './act_resource';
@@ -112,6 +113,7 @@ function stepPerson(world: World, p: Person): void {
     return;
   }
   updateNeeds(world, p);
+  if (tick % 60 === p.id % 60) updateRelocationPressure(world, p);
   if (tick % 60 === p.id % 60) reviewParticipation(world, p);
   updateMood(world, p);
   illnessTick(world, p);
@@ -384,6 +386,8 @@ export function hashWorld(world: World): string {
   }
   for (const g of world.graves) if(g.death) push(`GraveIdentity${g.id}:${JSON.stringify(g.death)}`);
   for (const p of world.persons) if (p.socialMemory) push(`SocialMemory${p.id}:${JSON.stringify(p.socialMemory)}`);
+  for (const h of world.households) if (h.relocations) push('Relocations' + h.id + JSON.stringify(h.relocations));
+  for (const p of world.persons) if (p.relocationHardship !== undefined) push('RelocationPressure' + p.id + ':' + p.relocationHardship);
   for(const p of world.persons)if(p.techniques)push(`Techniques${p.id}:${JSON.stringify(p.techniques)}`);
   for(const c of world.conversations)if(c.lesson)push(`Lesson${c.id}:${JSON.stringify(c.lesson)}`);
   if (world.inhabitants) for (const k of Object.keys(world.inhabitants).sort((a, b) => Number(a) - Number(b))) push(`E${k}:${JSON.stringify(world.inhabitants[Number(k)])}`);

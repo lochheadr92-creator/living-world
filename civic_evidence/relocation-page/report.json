@@ -1,0 +1,86 @@
+[
+  {
+    "name": "proposal: real relocation history shown",
+    "pass": true
+  },
+  {
+    "name": "proposal: correct stage shown",
+    "pass": true
+  },
+  {
+    "name": "proposal: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "packing: real relocation history shown",
+    "pass": true
+  },
+  {
+    "name": "packing: correct stage shown",
+    "pass": true
+  },
+  {
+    "name": "packing: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "travel: real relocation history shown",
+    "pass": true
+  },
+  {
+    "name": "travel: correct stage shown",
+    "pass": true
+  },
+  {
+    "name": "travel: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "building: real relocation history shown",
+    "pass": true
+  },
+  {
+    "name": "building: correct stage shown",
+    "pass": true
+  },
+  {
+    "name": "building: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "settled: real relocation history shown",
+    "pass": true
+  },
+  {
+    "name": "settled: correct stage shown",
+    "pass": true
+  },
+  {
+    "name": "persistent membership and property explanation visible",
+    "pass": true
+  },
+  {
+    "name": "settled: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "refused: real relocation history shown",
+    "pass": true
+  },
+  {
+    "name": "refused: correct stage shown",
+    "pass": true
+  },
+  {
+    "name": "refusal reason visible",
+    "pass": true
+  },
+  {
+    "name": "refused: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "no browser runtime exceptions",
+    "pass": true
+  }
+]

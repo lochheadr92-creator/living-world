@@ -247,3 +247,10 @@ Version 12: persistent household township membership and public storehouse coord
 with explicit conversation, voluntary support, recorded physical contributions, bounded
 witnessed organiser outcomes, and conservative public-footprint access validation.
 Version 11 continuation was pinned before this stage. See CIVILISATION_IMPLEMENTATION.md.
+
+**Version 20** adds household relocation agreements and runtime founding. Locally remembered
+opportunities and sustained hunger can lead to co-present consent, real packing/travel,
+ordinary shelter construction and explicit establishment. Old property remains owned;
+refusal, separation, urgent needs and failure remain possible. `relocation.ts` owns the
+records and options; [RELOCATION.md](RELOCATION.md) defines the bounded contract. Version-19
+continuation was pinned in `801123e` before this change. `rich-no-relocation` is lab-only.

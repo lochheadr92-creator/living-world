@@ -18,6 +18,8 @@ import { clamp, hyp, turnToward } from './util';
 export type WorkResult = 'continue' | 'done' | `fail:${string}` | `partial:${string}`;
 
 export interface Handler {
+  /** Optional physical coordination pause before a travel step. No movement is fabricated. */
+  travelBlocker?(world: World, p: Person, a: Activity): string | undefined;
   /** run once on arrival at the work spot; return a string to fail with that reason */
   begin?(world: World, p: Person, a: Activity): string | void;
   /** one tick of work */
@@ -422,6 +424,9 @@ export function stepActivity(world: World, p: Person): void {
     return;
   }
   if (a.phase === 'travel') {
+    const waiting = h.travelBlocker?.(world,p,a);
+    if (waiting) { a.blocked=waiting; p.pose='stand'; return; }
+    if (h.travelBlocker) a.blocked='';
     const r = stepTravel(world, p, a);
     if (r === 'blocked') {
       endActivity(world, p, 'failed', a.blocked || 'path blocked');

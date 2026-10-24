@@ -26,6 +26,7 @@ export function civicHistory(w: World, p: Person): { township: string; lines: st
  const projects = (w.civicProjects ?? []).filter(q => q.townshipId === t.id);
  return { township: t.name, lines: [
   `${t.name}: ${households.length} households. Membership belongs to the household and does not change with walking.`,
+  ...(t.origin?[`Founded by household #${t.origin.householdId} through relocation #${t.origin.relocationId}, from township #${t.origin.fromTownship}, after shelter #${t.origin.shelterId} was completed.`]:[]),
   ...projects.slice(-2).flatMap(q => projectHistory(w,q)),
   ...(p.civicOutcomes ?? []).slice(-3).map(m => `Personally witnessed ${name(w,m.organiserId)}'s project #${m.projectId} ${m.success ? 'complete' : 'fail'} at tick ${m.tick}; this informs willingness to support them again.`),
   ...(projects.length ? [] : ['No shared project proposed yet.']),
@@ -38,6 +39,12 @@ export function householdHistory(w: World, p: Person): string[] {
  return [ `${h.name} household formed at tick ${h.formed}; formation cause is not recorded.`,
   `Members: ${h.members.map(id => name(w,id)).join(', ')}.`,
   home?.ent === 'building' ? `Home #${home.id}: ${home.type}; recorded builders: ${(home.builtBy ?? []).map(id => name(w,id)).join(', ') || 'unknown'}.` : 'No current home.',
+  ...(h.relocations??[]).slice(-3).flatMap(r=>[
+   `Relocation #${r.id}: ${r.phase}. Organiser: ${name(w,r.organiserId)}. Destination: ${r.destination.x.toFixed(0)}, ${r.destination.y.toFixed(0)}.`,
+   `Reason: ${r.reason}. ${r.outcome||'Membership remains with the original township until shelter is finished and the household arrives together.'}`,
+   `Currently carried by household: ${h.members.reduce((n,id)=>{const q=w.byId.get(id);return n+(q?.ent==='person'?['berries','fruit','fish','grain'].reduce((n,k)=>n+((q.inv as Record<string,number>)[k]??0),0):0)},0)} food; ${h.members.reduce((n,id)=>{const q=w.byId.get(id);return n+(q?.ent==='person'?q.inv.water??0:0)},0)} water. Departure ${r.phase==='settled'||r.phase==='failed'?'required':'requires'} ${r.members.length*2} of each.`,
+   ...r.members.map(m=>`${name(w,m.id)}: ${m.response} — ${m.reason}.`),
+  ]),
   ...w.sites.filter(s => s.hhId === h.id).map(s => `Site #${s.id} (${s.type}), proposed by ${name(w,s.creatorId)}; ${s.status}.`),
   ...w.requests.filter(r => h.members.includes(r.from) || h.members.includes(r.to)).slice(-6).map(r => `Request #${r.id}: ${name(w,r.from)} asked ${name(w,r.to)}; ${r.status}: ${r.note || 'reason unknown'}${r.commitmentId ? `; promise #${r.commitmentId}` : ''}${r.siteId ? `; site #${r.siteId}` : ''}.`),
  ];

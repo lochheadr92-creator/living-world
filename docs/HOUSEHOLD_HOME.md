@@ -221,3 +221,9 @@ would understand from it.
   cooldown. That is legible in the records, but it means a hut often takes several plans rather than one.
 * The three-day patience (`SHELTER_PATIENCE`) was chosen to match the existing plan kinds, not measured.
 * No ensemble was run and no acceptance baseline was recorded or replaced.
+
+Rules 20 add a separate household relocation agreement, described in
+[RELOCATION.md](RELOCATION.md). It reuses material gathering, carrying and shelter
+construction; it does not complete a home for free or move property. Explicit
+establishment at the new completed shelter changes the household's home and township;
+former property remains household-owned.

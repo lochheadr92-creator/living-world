@@ -198,6 +198,7 @@ export interface SeenEntity {
 }
 
 export type ActivityKind =
+  | 'relocate'
   | 'attend'
   | 'hunt'
   | 'alone'
@@ -570,6 +571,7 @@ export interface Trade {
 }
 
 export interface Person {
+  relocationHardship?: number;
   socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper' }[];
   civicOutcomes?: { projectId: number; organiserId: number; success: boolean; tick: number }[];
   ent: 'person';
@@ -978,6 +980,7 @@ export interface Animal {
 }
 
 export interface Household {
+  relocations?: import('./relocation').Relocation[];
   townshipId?: number;
   id: number;
   name: string;

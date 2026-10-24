@@ -1,3 +1,4 @@
+import { relocationOptions } from './relocation';
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
@@ -42,6 +43,7 @@ export function generateOptions(world: World, p: Person, collect = false, observ
   workOptions(ctx);
   productionOptions(ctx);
   socialOptions(ctx);
+  relocationOptions(ctx);
   if (probe.on) {
     probe.generations++;
     probe.optionsGenerated += ctx.options.length;
