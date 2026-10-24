@@ -1,3 +1,4 @@
+import { deceasedById } from '../sim/historical_index';
 // The inspector panel (right side). A thin shell that decides what to show for the current selection,
 // slides in when something is selected, remembers when it was hidden, and refreshes the content at ~4 Hz.
 // Content comes only from the read-only view-models in sim/inspect.ts.
@@ -195,7 +196,7 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
     } else {
       open = ctx.prefs.inspectorOpen;
       if (prev && prev.person) {
-        const d = world.deceased.find((x) => x.id === prev!.id);
+        const d = deceasedById(world,prev!.id);
         if (d) memorial = `${d.name} has died${d.cause ? ` (${d.cause})` : ''}, aged ${d.age}.`;
       }
       prev = null;

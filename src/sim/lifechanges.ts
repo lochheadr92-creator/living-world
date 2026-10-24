@@ -1,3 +1,4 @@
+import { deceasedById } from './historical_index';
 import { hasLocalDeath, withinHearing } from './death_knowledge';
 // Life changes with social consequences (rich worlds only). Losing a partner, becoming a parent, moving households and taking
 // in an orphan each change who a person relies on and spends time with, for a while: the bereaved lean on kin and close
@@ -141,7 +142,7 @@ export function describeLifeEvent(world: World, p: Person): string | null {
   const name = (() => {
     const x = world.byId.get(e.about);
     if (x && x.ent === 'person') return x.name;
-    const d = world.deceased.find((d) => d.id === e.about);
+    const d = deceasedById(world,e.about);
     return d ? d.name : '';
   })();
   const days = Math.max(1, Math.ceil((e.until - world.tick) / DAY));
@@ -161,7 +162,7 @@ export function describeLifeEvent(world: World, p: Person): string | null {
 export function onLookedInOnBereaved(world: World, visitor: Person, bereaved: Person): void {
   think(world, bereaved, 'looked_in', 6, DAY, `${visitor.name} came to see how I was`);
   think(world, visitor, 'looked_in', 2, DAY / 2, `looked in on ${bereaved.name}`);
-  adjustRel(bereaved, visitor.id, world.tick, { aff: 3, trust: 2, fam: 1, note: `${visitor.name} came to me after ${(() => { const d = world.deceased.find((x) => x.id === bereaved.lifeEvent?.about); return d ? d.name : 'my loss'; })()}` });
+  adjustRel(bereaved, visitor.id, world.tick, { aff: 3, trust: 2, fam: 1, note: `${visitor.name} came to me after ${(() => { const d = deceasedById(world,bereaved.lifeEvent?.about); return d ? d.name : 'my loss'; })()}` });
   adjustRel(visitor, bereaved.id, world.tick, { aff: 1, fam: 1 });
   addLog(world, visitor, 'social', `Looked in on ${bereaved.name} after their loss.`);
   addLog(world, bereaved, 'social', `${visitor.name} came to see how I was.`);

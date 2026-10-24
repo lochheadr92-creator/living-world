@@ -1,3 +1,4 @@
+import { deceasedById } from './historical_index';
 // One transmitted practice: sharing supper. Meal execution owns all food, travel and time.
 import type { World, Person, Meal } from './types';
 import { runsRulesVersion } from './rulesversion';
@@ -46,7 +47,7 @@ export function finishSupperPractice(w:World,m:Meal):void{
 export function supperHistory(w:World,p:Person):string[]{
  if(!hasHouseholdPractices(w)||!p.sharedSupper)return [];
  const k=p.sharedSupper.learned;
- const name=(id:number)=>w.persons.find(q=>q.id===id)?.name??w.deceased.find(q=>q.id===id)?.name??`person #${id}`;
+ const name=(id:number)=>w.persons.find(q=>q.id===id)?.name??deceasedById(w,id)?.name??`person #${id}`;
  if(!k)return [`Learning the practice of sharing supper: ${p.sharedSupper.experiences.length} qualifying meals; two with the same role and host are needed.`];
  return [`Practice: sharing supper. ${k.source==='practice'?'Established through hosting':`Acquired from parent ${name(k.teacher)}`}, meals ${k.meals.map(id=>'#'+id).join(' and ')}, tick ${k.tick}. Transmission generation ${k.generation}, origin ${name(k.root)}. This encourages offering a meal when food, company and time allow.`];
 }

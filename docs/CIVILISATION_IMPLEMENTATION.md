@@ -3,12 +3,12 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 24
+## Exact continuation snapshot — after version 25
 
-- Current product rules **24**: transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
+- Current product rules **25**: operational retention and indexed history after transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
   following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
   `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD
-  for the commit containing this snapshot. Immutable v23 reference: **0878bf4**; v22 reference: **f6496e5**; v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
+  for the commit containing this snapshot. Immutable v24 reference: **7444c80**; v23 reference: **0878bf4**; v22 reference: **f6496e5**; v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
 - Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
   birth counter, competing project coordinators and persistent alignment factions; physical-market prerequisite;
   S5 novice child proficiency, one held technique with instruction and one transmitted household practice; general D3;
@@ -23,24 +23,24 @@ This is the continuation record; the audit remains dated evidence, not current a
 - Natural smoke: meadow/Normal/28, four days, control + nudge + no-relocation: no sustained
   hardship or proposals; conserved goods and 28 survivors in each. This is not an ensemble.
 - Protected original/candidate work and main-worktree untracked `_find_moments_rich.ts`
-  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v23 references or silently
+  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v24 references or silently
   reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
 - Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: S6/D10 retention and historical indexing.** Recheck current
-per-pair maps, deceased, graves and cosmetic stumps; preserve causal/ownership/kinship
-history. Index expensive historical lookups and define bounded retention only where
-semantics allow. Pin v24 continuation before any behavioural retention change and
-allocate a fresh rules generation (25 is next candidate; recheck concurrent work).
-Keep F1-F5 queued until remaining programme and required verification are complete.
-S5 practice, S4b exchange and S2 alignment are delivered mechanisms; natural frequency
-and aggregate benefit are not demonstrated. Latest verification is below.
+**Next executable task: S4/C environmental opportunity differences.** The current
+multi-camp generator repeats the same deposit recipe; design meaningful seeded local
+geology without fabricated trade shortages or inhabitant omniscience. Preserve ordinary
+food/water viability and actual production-derived specialisation. Pin v25 continuation
+before changing generation (26 is next candidate; recheck concurrent work), then verify
+local discovery, conservation, save/replay and rendered differences. Afterwards finish
+D12/A and natural C-H experiment dispatch plus mature-world performance.
+Keep F1-F5 queued until the remaining programme and required verification are complete.
 
 S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
 succession, rescue or return expedition. Separation prevents founding, urgent needs can
 interrupt, known deadlines permit failure. Old property remains owned. Natural migration
 frequency/benefit remains unmeasured. The full programme is still incomplete: enduring
-natural specialisation/exchange/faction/practice evidence; D10 retention/indexing; D12/A and natural C-H measurement;
+natural specialisation/exchange/faction/practice evidence; mature-world retention/performance measurement; D12/A and natural C-H measurement;
 mature-world performance. Long ensembles still follow dispatcher/detached-launch policy.
 
 ## Owner queued priority after this programme
@@ -101,7 +101,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | D6 births | Confirmed regex count; v14 lifetime counter incremented at actual birth, legacy scope labelled | S2 prerequisite; rollover/death/save fixtures | verified |
 | D7 market | V15 historical attendance enables remote trades; v16 validates physical venue/contact and local knowledge | S4 prerequisite; rejection, conserved barter, mid-walk save and rendered arrival | verified |
 | D9 passive decay | Accepted observation, no demonstrated defect | No change unless new evidence | not applicable: accepted |
-| D10 historical growth | Deceased, graves and pair records retain causality; no retention audit yet | S6; bounded retention/indexing with inheritance/replay contracts | unresolved |
+| D10 historical growth | V25 bounds cosmetic marks and expired pair deadlines; historical lookup indexed; graves spatially bounded; meaningful archives/relations retained intentionally | S6; five contracts, full continuation, synthetic lookup and browser history; SCALING retention policy | verified bounded repair; total causal history still grows, mature-world cost unresolved |
 | D11 newborn skills | Confirmed same adult generator at birth; v17 starts newborns at 0.20 and age-scales younger entrants | S5 prerequisite; real birth, work gains, save/load, historical reference and rendered inspector | verified |
 | D12 / A aggregate reserve/shelter benefit | Historical null/mixed evidence is not failure of mechanism | S6; town paired controls/nudges/ablations, accept null | unresolved |
 | B dependency map | Migration is not required for organisation within a settlement | Owner programme supersedes audit ordering; S1 before S3 | superseded |
@@ -700,3 +700,36 @@ offered action. Supplies are finite, withdrawn physically from the household's p
 store; meals conserve goods. The fixture advances to later meal windows with normal
 adult ages. It proves a parent-child contract, not spontaneous behaviour, natural
 multigeneration persistence or aggregate benefit. Natural experiment H is still unrun.
+
+
+## Rules 25 — retain causes, bound disposable state, index history
+
+Repeated tree felling leaves one cosmetic mark per tile. Expired pair-specific talk,
+invitation, apology, proposal and making deadlines are removed at ordinary maintenance;
+other timestamps/counters and all meaningful relationship records stay. Deceased-ID
+lookup is indexed without altering returned identity, saved state or inhabitant access.
+The viewer still sees the actual parent, grief source and remembered conduct.
+
+Existing modules touched: sources replaces duplicate marks; world invokes the owned
+memory_retention maintenance; nine history/social/observer consumers use the derived
+historical_index; rules/lab provide generation and ablation. No decay weight, lifespan,
+ownership, grave placement or resource process changed. SCALING.md records architecture,
+alternative, bounds and the intentional O(total deaths) archive cost. The audit's broad
+prune-dead-pairs suggestion is superseded by the owner's causal-history requirement.
+Immutable v24 continuation was committed first at `7444c80`.
+
+Verification: full `npm test` **1150 tests / 131 files** (92.91 seconds), typecheck/build,
+all historical goldens unchanged, five passing rendered history checks and inspected
+screenshot. A fifth focused retention contract added during review verifies 1,200 ticks
+of full natural continuation against the ablation, normalizing only the deliberately
+disposable timer/mark representation; six focused tests including v24 continuation pass.
+Evidence: `civic_evidence/retention-page/`, `retention-lookup.json`.
+
+Synthetic lookup workload: 10,001 archived identities, 10,000 queries; identical results,
+full state unchanged; 151.23 ms linear versus 2.01 ms indexed on this run. This measures
+lookup only. Current v25 meadow first-day benchmarks, immigration off, 2,400 ticks each:
+Normal/28 **0.53 ms/tick**, Large/100 **2.17**, Huge/250 **8.68**. Ledger/tool checks at
+800-tick intervals and end all pass, no invariant failures. Commands use existing
+`scripts/bench.ts --current --profile <profile> --days 1 --seed meadow --arrivals off
+--check 800 --quiet --out <file>`. Compact evidence: `performance-v25-summary.json`.
+No new 300-person workload was needed; mature-world costs remain unmeasured.

@@ -1,3 +1,4 @@
+import { deceasedById } from './historical_index';
 import { hasLocalDeath, learnDeath, withinHearing } from './death_knowledge';
 import { runsRulesVersion } from './rulesversion';
 // Reputation and news that travel by word of mouth (rich worlds only). What a person knows of someone they have not dealt with
@@ -116,7 +117,7 @@ export function shareRumour(world: World, S: Person, L: Person): boolean {
   if (singleCountFor(world)) delete copy.relationshipApplied; // the listener did not experience the original relation change
   if (!keep(world, L, copy)) return false;
   const about = world.byId.get(best.about);
-  const name = about && about.ent === 'person' ? about.name : world.deceased.find((d) => d.id === best.about)?.name ?? 'someone';
+  const name = about && about.ent === 'person' ? about.name : deceasedById(world,best.about)?.name ?? 'someone';
   addLog(world, L, 'info', `${S.name} told me ${best.text}.`);
   const w = WEIGHT[best.kind] * weight;
   if (w && !singleCountFor(world)) adjustRel(L, best.about, world.tick, { aff: 1.2 * w, trust: 1.6 * w, note: `${S.name} said ${best.text}` });
@@ -156,7 +157,7 @@ export function describeHeard(world: World, p: Person): { about: number; name: s
     .sort((a, b) => b.tick - a.tick)
     .map((r) => {
       const a = world.byId.get(r.about);
-      const name = a && a.ent === 'person' ? a.name : world.deceased.find((d) => d.id === r.about)?.name ?? 'someone';
+      const name = a && a.ent === 'person' ? a.name : deceasedById(world,r.about)?.name ?? 'someone';
       const teller = r.from ? world.byId.get(r.from) : null;
       const via = r.from === 0 ? 'saw it' : `${teller && teller.ent === 'person' ? teller.name : 'someone'} told me${r.hops > 1 ? ` (${r.hops} mouths on)` : ''}`;
       return { about: r.about, name, text: r.text, via, age: Math.floor((world.tick - r.tick) / DAY), good: WEIGHT[r.kind] * r.weight };

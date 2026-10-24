@@ -1,3 +1,4 @@
+import { deceasedById } from './historical_index';
 import { describeTechniques, lessonProgress } from './techniques';
 import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory } from './history';
@@ -199,7 +200,7 @@ const NEED_CRIT: Record<NeedKey, number> = { hunger: 14, thirst: 14, energy: 8, 
 function nameOf(world: World, id: number): string {
   const e = world.byId.get(id);
   if (e && e.ent === 'person') return e.name;
-  const d = world.deceased.find((x) => x.id === id);
+  const d = deceasedById(world,id);
   return d ? d.name : `#${id}`;
 }
 

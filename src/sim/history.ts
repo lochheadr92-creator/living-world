@@ -1,3 +1,4 @@
+import { deceasedById } from './historical_index';
 import { supperHistory } from './household_practices';
 import { factionHistory } from './political_alignment';
 import { exchangeHistory, exchangeTownHistory } from './exchange_journeys';
@@ -7,7 +8,7 @@ import { mandate } from './civic_decision';
 import type { World, Person, Items } from './types';
 import type { CivicProject } from './townships';
 import { townshipOf } from './townships';
-const name = (w: World, id: number) => w.persons.find(p => p.id === id)?.name ?? w.deceased.find(p => p.id === id)?.name ?? `person #${id}`;
+const name = (w: World, id: number) => w.persons.find(p => p.id === id)?.name ?? deceasedById(w,id)?.name ?? `person #${id}`;
 const items = (i: Items) => Object.entries(i).map(([k,n]) => `${n} ${k}`).join(', ') || 'no materials';
 export function projectHistory(w: World, q: CivicProject): string[] {
  const site = w.byId.get(q.siteId);

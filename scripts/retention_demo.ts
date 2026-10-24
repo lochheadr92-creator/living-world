@@ -1,0 +1,15 @@
+import {writeFileSync} from 'node:fs';
+import {performance} from 'node:perf_hooks';
+import {stage,addPerson,done} from '../tests/helpers/kit';
+import {relOf} from '../src/sim/relations';
+import {killPerson} from '../src/sim/lifecycle';
+import {deceasedById} from '../src/sim/historical_index';
+import {serializeWorld} from '../src/app/save';
+const s=stage('historical-retention-contract'),a=addPerson(s,'Ada',42,24),b=addPerson(s,'Bea',44,24,{hh:a.hhId}),w=done(s);w.settings.dynamics='rich';w.settings.rulesVersion=25;
+w.sceneLabel='STAGED: preserved parent history with 10,000 diagnostic archive entries';relOf(b,a.id).kin='parent';relOf(b,a.id).history.push({tick:0,text:'Worked together on the household home'});killPerson(w,a,'staged contract death');
+for(let i=0;i<10000;i++)w.deceased.push({id:100000+i,name:'Diagnostic archive '+i,tick:0,cause:'diagnostic only',age:80});
+const before=serializeWorld(w),ids=Array.from({length:10000},(_,i)=>100000+(i*197)%10000);
+let sum=0;let start=performance.now();for(const id of ids)sum+=w.deceased.find(d=>d.id===id)!.age;const linearMs=performance.now()-start;
+start=performance.now();for(const id of ids)sum-=deceasedById(w,id)!.age;const indexedMs=performance.now()-start;
+const report={classification:'synthetic archive lookup diagnostic, not mature-world simulation',rules:25,archiveRows:w.deceased.length,lookups:ids.length,linearMs,indexedMs,equalResults:sum===0,fullStateUnchanged:serializeWorld(w)===before};
+writeFileSync('civic_evidence/retention-contract-save.json',before);writeFileSync('civic_evidence/retention-lookup.json',JSON.stringify(report,null,2)+'\n');console.log(report);

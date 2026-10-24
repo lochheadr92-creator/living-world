@@ -1,3 +1,4 @@
+import { deceasedById } from './historical_index';
 import { hasLocalMarket, presentAt, togetherAt } from './market_contact';
 import { hasLocalDeath, knowsDeath } from './death_knowledge';
 // Occasions (rich worlds only): a place and a time at which many people gather at once - a funeral, a wedding, a feast for a birth or
@@ -108,7 +109,7 @@ export function callOccasion(world: World, kind: OccasionKind, about: number[], 
 function nameOfId(world: World, id: number): string {
   const p = world.byId.get(id);
   if (p && p.ent === 'person') return p.name;
-  const d = world.deceased.find((x) => x.id === id);
+  const d = deceasedById(world,id);
   return d ? d.name : '';
 }
 

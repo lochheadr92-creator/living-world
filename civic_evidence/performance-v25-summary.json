@@ -1,0 +1,300 @@
+{
+  "classification": "one seed, first day, current rules; not mature-world benchmark",
+  "workloads": [
+    {
+      "profile": "normal",
+      "meta": {
+        "seed": "meadow",
+        "settings": {
+          "seed": "meadow",
+          "population": 28,
+          "harsh": false,
+          "immigration": false,
+          "scene": "natural",
+          "dynamics": "rich",
+          "rulesVersion": 25
+        },
+        "days": 1,
+        "sampleEvery": 240,
+        "checkEvery": 800,
+        "node": "v24.19.0",
+        "generationMs": 29
+      },
+      "summary": {
+        "wallSeconds": 1.28,
+        "ticks": 2400,
+        "msPerTickOverall": 0.53,
+        "msPerTickMedianSample": 0.51,
+        "msPerTickP95Sample": 0.82,
+        "msPerTickWorstTick": 35.89,
+        "ticksPerSecond": 1876.47,
+        "finalPop": 28,
+        "finalHash": "f5afa5c4",
+        "firstBuildingTick": {
+          "fire": 0,
+          "lean_to": 0
+        },
+        "activityStarts": {
+          "gather": 175,
+          "till": 10,
+          "plan_site": 6,
+          "wander": 24,
+          "give": 17,
+          "drink": 51,
+          "explore": 9,
+          "socialize": 39,
+          "deposit": 8,
+          "haul": 10,
+          "converse": 26,
+          "plant": 5,
+          "build": 15,
+          "craft": 2,
+          "eat": 39,
+          "fetch_water": 2,
+          "rest": 37,
+          "flee": 9,
+          "sleep": 34,
+          "visit": 1,
+          "fuel_fire": 1,
+          "attend_meal": 1,
+          "host_meal": 1,
+          "eat_store": 1
+        },
+        "invariantChecks": 5,
+        "invariantFailures": []
+      },
+      "checks": [
+        {
+          "tick": 0,
+          "ledger": true,
+          "tools": true,
+          "hash": "bce2af23"
+        },
+        {
+          "tick": 800,
+          "ledger": true,
+          "tools": true,
+          "hash": "00afab0b"
+        },
+        {
+          "tick": 1600,
+          "ledger": true,
+          "tools": true,
+          "hash": "748aa05d"
+        },
+        {
+          "tick": 2400,
+          "ledger": true,
+          "tools": true,
+          "hash": "f5afa5c4"
+        },
+        {
+          "tick": 2400,
+          "ledger": true,
+          "tools": true,
+          "hash": "f5afa5c4"
+        }
+      ]
+    },
+    {
+      "profile": "large",
+      "meta": {
+        "seed": "meadow",
+        "settings": {
+          "seed": "meadow",
+          "population": 100,
+          "harsh": false,
+          "immigration": false,
+          "scene": "natural",
+          "profile": "large",
+          "ruleSet": "scaled",
+          "settlementFounders": 25,
+          "dynamics": "rich",
+          "rulesVersion": 25
+        },
+        "days": 1,
+        "sampleEvery": 240,
+        "checkEvery": 800,
+        "node": "v24.19.0",
+        "generationMs": 143
+      },
+      "summary": {
+        "wallSeconds": 5.22,
+        "ticks": 2400,
+        "msPerTickOverall": 2.17,
+        "msPerTickMedianSample": 2.14,
+        "msPerTickP95Sample": 2.64,
+        "msPerTickWorstTick": 68.54,
+        "ticksPerSecond": 459.77,
+        "finalPop": 100,
+        "finalHash": "c4b004ee",
+        "firstBuildingTick": {
+          "fire": 0,
+          "lean_to": 0
+        },
+        "activityStarts": {
+          "gather": 618,
+          "till": 45,
+          "plan_site": 49,
+          "wander": 113,
+          "give": 101,
+          "explore": 33,
+          "argue": 4,
+          "plant": 21,
+          "build": 59,
+          "socialize": 160,
+          "converse": 92,
+          "tend": 19,
+          "drink": 201,
+          "deposit": 31,
+          "eat": 124,
+          "haul": 41,
+          "craft": 11,
+          "visit": 6,
+          "fetch_water": 7,
+          "flee": 13,
+          "eat_store": 8,
+          "rest": 132,
+          "fuel_fire": 10,
+          "sleep": 120,
+          "host_meal": 3,
+          "attend_meal": 3
+        },
+        "invariantChecks": 5,
+        "invariantFailures": []
+      },
+      "checks": [
+        {
+          "tick": 0,
+          "ledger": true,
+          "tools": true,
+          "hash": "43dd41f3"
+        },
+        {
+          "tick": 800,
+          "ledger": true,
+          "tools": true,
+          "hash": "ee0d1328"
+        },
+        {
+          "tick": 1600,
+          "ledger": true,
+          "tools": true,
+          "hash": "510dd527"
+        },
+        {
+          "tick": 2400,
+          "ledger": true,
+          "tools": true,
+          "hash": "c4b004ee"
+        },
+        {
+          "tick": 2400,
+          "ledger": true,
+          "tools": true,
+          "hash": "c4b004ee"
+        }
+      ]
+    },
+    {
+      "profile": "huge",
+      "meta": {
+        "seed": "meadow",
+        "settings": {
+          "seed": "meadow",
+          "population": 250,
+          "harsh": false,
+          "immigration": false,
+          "scene": "natural",
+          "profile": "huge",
+          "ruleSet": "scaled",
+          "settlementFounders": 42,
+          "dynamics": "rich",
+          "rulesVersion": 25
+        },
+        "days": 1,
+        "sampleEvery": 240,
+        "checkEvery": 800,
+        "node": "v24.19.0",
+        "generationMs": 429
+      },
+      "summary": {
+        "wallSeconds": 20.82,
+        "ticks": 2400,
+        "msPerTickOverall": 8.68,
+        "msPerTickMedianSample": 8.54,
+        "msPerTickP95Sample": 10.65,
+        "msPerTickWorstTick": 160.5,
+        "ticksPerSecond": 115.27,
+        "finalPop": 250,
+        "finalHash": "92c5ff5e",
+        "firstBuildingTick": {
+          "fire": 0,
+          "lean_to": 0
+        },
+        "activityStarts": {
+          "till": 99,
+          "gather": 1566,
+          "give": 221,
+          "plan_site": 99,
+          "explore": 85,
+          "wander": 178,
+          "deposit": 63,
+          "argue": 12,
+          "socialize": 565,
+          "drink": 476,
+          "converse": 324,
+          "plant": 32,
+          "build": 139,
+          "flee": 53,
+          "eat": 319,
+          "craft": 43,
+          "haul": 93,
+          "tend": 19,
+          "fetch_water": 9,
+          "eat_store": 33,
+          "fuel_fire": 23,
+          "visit": 7,
+          "rest": 320,
+          "attend_meal": 8,
+          "host_meal": 6,
+          "sleep": 306
+        },
+        "invariantChecks": 5,
+        "invariantFailures": []
+      },
+      "checks": [
+        {
+          "tick": 0,
+          "ledger": true,
+          "tools": true,
+          "hash": "97b67e8e"
+        },
+        {
+          "tick": 800,
+          "ledger": true,
+          "tools": true,
+          "hash": "bc611585"
+        },
+        {
+          "tick": 1600,
+          "ledger": true,
+          "tools": true,
+          "hash": "2eab11ad"
+        },
+        {
+          "tick": 2400,
+          "ledger": true,
+          "tools": true,
+          "hash": "92c5ff5e"
+        },
+        {
+          "tick": 2400,
+          "ledger": true,
+          "tools": true,
+          "hash": "92c5ff5e"
+        }
+      ]
+    }
+  ]
+}

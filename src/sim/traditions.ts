@@ -1,3 +1,4 @@
+import { deceasedById } from './historical_index';
 // Stories, traditions and rituals (rich worlds only). A community forms its own habits around what mattered: a harvest feast
 // that many came to is held again the same day next year; a funeral that many came to becomes a remembrance at that day each
 // year; the first winter lived through becomes a midwinter fire. A tradition is only a call to gather (occasions.ts): people
@@ -50,7 +51,7 @@ export function noteOccasionOver(world: World, o: Occasion): void {
   const doy = day % DAYS_PER_YEAR;
   if (o.kind === 'harvest' && !list.some((t) => t.kind === 'harvest' && t.status === 'kept')) add(world, 'harvest', 'the harvest feast', doy, 0);
   else if (o.kind === 'funeral' && o.about.length && !list.some((t) => t.kind === 'remembrance' && t.about === o.about[0])) {
-    const d = world.deceased.find((x) => x.id === o.about[0]);
+    const d = deceasedById(world,o.about[0]);
     if (d) add(world, 'remembrance', `the remembrance of ${d.name}`, doy, d.id);
   }
 }

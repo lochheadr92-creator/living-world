@@ -1,0 +1,10 @@
+{
+  "classification": "synthetic archive lookup diagnostic, not mature-world simulation",
+  "rules": 25,
+  "archiveRows": 10001,
+  "lookups": 10000,
+  "linearMs": 151.2255,
+  "indexedMs": 2.0134999999997945,
+  "equalResults": true,
+  "fullStateUnchanged": true
+}

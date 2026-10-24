@@ -1,3 +1,4 @@
+import { deceasedById } from '../sim/historical_index';
 // The inhabitant's observation: everything an outside controller may know about the person it drives, and nothing else
 // (docs/INHABITANT.md, section 2).
 //
@@ -191,7 +192,7 @@ const r1 = (v: number): number => Math.round(v * 10) / 10;
 function nameOf(world: World, id: number): string {
   const e = world.byId.get(id);
   if (e && e.ent === 'person') return e.name;
-  const d = world.deceased.find((x) => x.id === id);
+  const d = deceasedById(world,id);
   return d ? d.name : `someone (#${id})`;
 }
 

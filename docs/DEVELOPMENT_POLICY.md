@@ -287,3 +287,13 @@ No initial holders or automatic inheritance. Existing meal execution owns the co
 `household_practices.ts` owns bounded provenance. Lab: `rich-no-household-practices`.
 Rules-23 continuation was committed at `0878bf4` before this behaviour. Older worlds
 retain their rules and acquire no practice records. See HOUSEHOLD_HOME.md.
+
+### Rules version 25 — operational retention
+
+Only rich version-25 worlds replace a previous cosmetic stump on the same tile and
+expire the five audited families of per-person deadlines. Earlier saves retain their
+stored semantics. Deceased identities, graves, kinship, relationships, grievances,
+whereabouts and permanent learning provenance are preserved. Historical lookup uses
+an unsaved append-only index with the same first-match result on every rules version.
+`rich-no-memory-retention` retains operational records for lab comparisons. Immutable
+v24 continuation was committed first at `7444c80`. Details and limits: SCALING.md.

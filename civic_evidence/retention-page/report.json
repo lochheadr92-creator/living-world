@@ -1,0 +1,22 @@
+[
+  {
+    "name": "parent identity retained",
+    "pass": true
+  },
+  {
+    "name": "recorded cause retained",
+    "pass": true
+  },
+  {
+    "name": "staged label",
+    "pass": true
+  },
+  {
+    "name": "full state unchanged by rendered history",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true
+  }
+]

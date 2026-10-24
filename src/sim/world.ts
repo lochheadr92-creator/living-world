@@ -1,3 +1,4 @@
+import { retainOperationalMemory } from './memory_retention';
 import { updateRelocationPressure } from './relocation';
 import { reviewParticipation } from './townships';
 // Side-effect imports register every activity handler.
@@ -135,6 +136,7 @@ function stepPerson(world: World, p: Person): void {
   bondWorkers(world, p);
   if ((tick + p.id) % 40 === 0) checkCommitments(world, p);
   if ((tick + p.id) % 240 === 0) {
+    retainOperationalMemory(world,p);
     driftRelations(p);
     decayGrievances(world, p);
   }

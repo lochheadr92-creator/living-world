@@ -541,3 +541,46 @@ measured and addressed, see the saving section.)
 The limits on settlement size (first group above) are now a rule set, the use of `world.camp` is now a list of settlements (both described
 above), the weather-shelter bug is fixed, a Huge world can be saved at any day, and the repeated failed searches are skipped. None of the rest has been changed: whether and how to change each is a decision about the rules of
 the world, not about measurement.
+
+
+## Civilisation retention audit, 2026-10-24 (rules 25)
+
+D10 is narrower than its original wording. Graves occupy distinct solid/occupied map
+tiles: placement already refuses occupied tiles, so their number is bounded by map
+area. Removing a grave would change routes and death-information access. Graves stay.
+Deceased identities are compact append-only records (ID, name, death tick, cause, age).
+They preserve historical references and are not disposable telemetry. They stay.
+Relationships retain kinship, trust, debt, grievances and bounded six-entry history;
+whereabouts is personal knowledge. Those records are not indiscriminately pruned.
+
+Confirmed costs addressed:
+- Repeated felling on the same regrown tile appended duplicate cosmetic stumps. Rules
+  25 replace that tile's previous mark; new current worlds have at most W*H marks.
+  This changes no resource ledger or growth process. The stored tick is the latest
+  felling; resource accounting remains in the existing ledger.
+- Expired `talk<ID>`, `invite<ID>`, `sorry<ID>`, `propose<ID>` and `making:<ID>` deadlines
+  were retained indefinitely. Their readers only compare `deadline > world.tick`.
+  At the existing per-person 240-tick maintenance point, rules 25 remove expired keys.
+  Thus these maps retain active deadlines plus at most one maintenance interval of
+  expired ones. Other cooldown keys can be timestamps/counters and remain untouched.
+- Nine history/presentation/social modules used repeated linear deceased-ID lookup.
+  `historical_index.ts` maintains a WeakMap-owned, unsaved incremental index of the
+  append-only archive. First matching ID wins, just as Array.find did. Appending deaths
+  extends it; load/array replacement rebuilds it. Production never reorders or replaces
+  individual archive rows. Any future archive rewrite must invalidate/rebuild this
+  derived index. It does not create inhabitant knowledge or change the restricted
+  observation boundary.
+
+Architecture choice: deleting old identities/relationships would bound total history
+but destroy causal references. The selected approach bounds disposable state and
+indexes retained history. The archive and its index still grow O(total deaths), and
+relationship/knowledge storage grows with actual contacts. This is an explicit cost,
+not a claim of constant-memory simulation. A future disk archive would require a
+separate persistence contract; it is not hidden behind this repair. Owner requirements
+for preserved causal history take priority over the audit's blanket pruning suggestion.
+
+Verification workload is labelled in `civic_evidence/retention-lookup.json`: a synthetic
+10,001-row death archive, 10,000 lookups, equal results, and full saved-state equality.
+It is a lookup diagnostic, not a mature-world performance benchmark. Contract tests
+preserve real death/grave/kinship history, save continuation and historical v24 marks;
+operational cleanup leaves the offered option descriptions/scores unchanged.

@@ -1,3 +1,4 @@
+import { hasMemoryRetention } from './memory_retention';
 import { hubWithin } from './settlements';
 import { regrowRate } from './hardship';
 import { SAPLING_TICKS, SOURCE_ITEM, SOURCE_MAX, SOURCE_REGROW } from './constants';
@@ -36,7 +37,10 @@ export function makeSource(world: World, type: SourceType, x: number, y: number,
 export function fellTree(world: World, s: Source): void {
   unregisterSource(world, s);
   world.stats.trees = (world.stats.trees ?? 1) - 1;
-  world.stumps.push({ x: s.x, y: s.y, tick: world.tick });
+  const stump={x:s.x,y:s.y,tick:world.tick};
+  // A stump is a cosmetic tile mark, not a felling ledger. Keep only the latest mark.
+  const prior=hasMemoryRetention(world)?world.stumps.findIndex(q=>q.x===s.x&&q.y===s.y):-1;
+  if(prior>=0)world.stumps[prior]=stump;else world.stumps.push(stump);
   addFx(world, 'fell', s.x + 0.5, s.y + 0.5, s.variant);
 }
 
