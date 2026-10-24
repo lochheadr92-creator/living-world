@@ -1,0 +1,24 @@
+{
+  "source": "4ad23f1 local main before reconciliation",
+  "saved": {
+    "hash": "fb0dbada",
+    "deep": "c8972f8f097383af",
+    "alive": 28,
+    "plans": {
+      "tool": 18
+    },
+    "homeFood": 93,
+    "storedFood": 34
+  },
+  "continued": {
+    "hash": "80346efa",
+    "deep": "45a30f71ead5718f",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 3
+    },
+    "homeFood": 119,
+    "storedFood": 43
+  }
+}
