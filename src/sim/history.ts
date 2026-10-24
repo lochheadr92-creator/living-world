@@ -1,3 +1,4 @@
+import { exchangeHistory, exchangeTownHistory } from './exchange_journeys';
 import { economicHistory } from './settlement_economy';
 import { mandate } from './civic_decision';
 // Derived observer links only. No RNG, cached state, invented causes, or simulation mutations.
@@ -29,6 +30,8 @@ export function civicHistory(w: World, p: Person): { township: string; lines: st
   `${t.name}: ${households.length} households. Membership belongs to the household and does not change with walking.`,
   ...(t.origin?[`Founded by household #${t.origin.householdId} through relocation #${t.origin.relocationId}, from township #${t.origin.fromTownship}, after shelter #${t.origin.shelterId} was completed.`]:[]),
   ...economicHistory(w,t.id),
+  ...exchangeHistory(w,p),
+  ...exchangeTownHistory(w,t.id),
   ...projects.slice(-2).flatMap(q => projectHistory(w,q)),
   ...(p.civicOutcomes ?? []).slice(-3).map(m => `Personally witnessed ${name(w,m.organiserId)}'s project #${m.projectId} ${m.success ? 'complete' : 'fail'} at tick ${m.tick}; this informs willingness to support them again.`),
   ...(projects.length ? [] : ['No shared project proposed yet.']),

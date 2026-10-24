@@ -1,0 +1,47 @@
+{
+  "staged": true,
+  "rules": 22,
+  "journey": {
+    "id": 13,
+    "started": 910,
+    "fromTown": 3,
+    "lead": {
+      "personId": 5,
+      "name": "Ben",
+      "townshipId": 6,
+      "x": 41.5,
+      "y": 40.5,
+      "tick": 656,
+      "goods": {
+        "wood": 2
+      }
+    },
+    "item": "wood",
+    "amount": 2,
+    "offer": "berries",
+    "offerAmount": 3,
+    "status": "fulfilled",
+    "outcome": "swapped 3 berries for 2 wood",
+    "requestId": 17,
+    "ended": 1111
+  },
+  "receipts": [
+    {
+      "journeyId": 13,
+      "requestId": 17,
+      "tick": 1111,
+      "fromTown": 3,
+      "toTown": 6,
+      "buyer": 2,
+      "seller": 5,
+      "item": "wood",
+      "amount": 2,
+      "offer": "berries",
+      "offerAmount": 3
+    }
+  ],
+  "delivered": {
+    "wood": 2
+  },
+  "conservation": true
+}

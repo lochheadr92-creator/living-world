@@ -373,3 +373,44 @@ RNG change and no meaningful behavioural ablation to add: a contract compares fu
 continuation against v20 with only the new observations/version omitted. Retention removes
 only derived observation detail; it removes no people, inventories, ownership, graves,
 relationships or founding references. The wider D10 audit remains open.
+## Rules 22: purposeful exchange journeys
+
+`src/sim/exchange_journeys.ts` owns personal trade leads and journey outcomes. The
+existing social barter subsystem remains the owner of acceptance, capacity, payment,
+physical transfers and refusal. A speaker reaching the news phase can describe their
+own spare goods and township affiliation to the person beside them. The listener
+remembers that meeting place for at most two days as a planning lead. Neither a market
+registry nor the viewer's settlement production totals supply inhabitant knowledge.
+
+An adult without dependent household members can choose a bounded journey for a known
+household material need using their own surplus offer, sufficient pack room and personal
+provisions. Ordinary movement carries those goods to the remembered position. The trip
+is committed against nonurgent alternative work, but danger and critical needs interrupt
+it. The counterparty must actually be found there; no remote pursuit is added. The
+existing timed conversation then accepts or refuses the swap. An unavailable person,
+missing offer, inaccessible route, refusal, expired activity or interruption leaves a
+recorded failure. Acquired materials can return through ordinary hauling. This first
+slice adds no delivery agreement, currency, private-store access or scheduled merchant.
+
+Architecture choice: globally matching settlement deficits and surpluses would make
+journeys easy to schedule but would give inhabitants forbidden knowledge. Personally
+heard, fallible opportunities preserve the information path and reuse current barter;
+the tradeoff is that meetings and suitable carried offers may be rare. No frequency or
+aggregate benefit has been established. The local swap policy and its thresholds remain
+unchanged.
+
+Saved authority: up to 12 leads and eight journey records per person, plus 128 world
+receipts for successful intertown journey exchanges. Each receipt identifies the request,
+people, township affiliations at the actual swap, both goods and quantities, and tick.
+These receipts survive the person's departure/death; the retention window is explicit,
+not lifetime trade accounting. Derived town summaries identify repeated exchange without
+claiming economic dependence. Goods remain in their ordinary inventories; records do not
+create or reserve stock. A completed swap remains successful if the following chat ends
+abruptly. Observers never write these records or consume RNG.
+
+Compatibility: numeric rules 22, following immutable rules-21 continuation `ee822f3`.
+Older worlds acquire no leads, journeys or receipts. New optional state is validated on
+load. `rich-no-exchange-journeys` disables the new opportunities for lab comparison.
+Mid-travel and mid-conversation complete-state save/load continuations are contract-tested.
+Staged fixture setup walks to and from the meeting via normal movement and labels the
+situation explicitly. It is mechanism evidence, not autonomous emergence.

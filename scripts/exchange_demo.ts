@@ -1,0 +1,14 @@
+import {writeFileSync} from 'node:fs';
+import {exchangeFixture} from '../tests/helpers/exchange_journeys';
+import {serializeWorld} from '../src/app/save';
+import {stepWorld} from '../src/sim/world';
+import {conservationReport} from '../src/sim/economy';
+import {setExternalController} from '../src/sim/external';
+const f=exchangeFixture(),{w,a}=f;
+const save=(name:string)=>writeFileSync(`civic_evidence/exchange-${name}-save.json`,serializeWorld(w));
+f.learnAndSeparate();save('lead');f.choose('exchange:');for(let i=0;i<65;i++)stepWorld(w);save('travel');
+for(let i=0;i<600&&!a.convId;i++)stepWorld(w);save('talking');f.finish();save('fulfilled');f.choose(`haul:${f.buildingSite.id}`);f.finish();save('returned');
+const result={staged:true,rules:w.settings.rulesVersion,journey:a.exchangeJourneys![0],receipts:w.exchangeReceipts,delivered:f.buildingSite.delivered,conservation:conservationReport(w).ok};
+setExternalController(null);
+const g=exchangeFixture();g.learnAndSeparate();g.choose('exchange:');g.b.x=75;g.b.y=55;g.finish();writeFileSync('civic_evidence/exchange-missing-save.json',serializeWorld(g.w));setExternalController(null);
+writeFileSync('civic_evidence/exchange-contract-demo.json',JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));

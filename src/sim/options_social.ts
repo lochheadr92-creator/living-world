@@ -1,3 +1,4 @@
+import { exchangeJourneyOptions } from './exchange_journeys';
 import { heldTechniques } from './techniques';
 import { mayCoordinate, councilFor } from './civic_decision';
 import { canInvite, projectAt, participation } from './townships';
@@ -569,6 +570,7 @@ function optTrade(ctx: Ctx): void {
   if (!spare.length) return;
   spare.sort((a, b) => valueOf(world, p, a.item) * 0 + b.n - a.n);
   const offer = spare[0];
+  exchangeJourneyOptions(ctx,want,offer);
   for (const c of candidates(ctx)) {
     if (c.d > 11) continue;
     const hasWant = want.item === 'fish' ? c.s.carrying.some((k) => isFood(k)) : c.s.carrying.includes(want.item);

@@ -259,3 +259,12 @@ continuation was pinned in `801123e` before this change. `rich-no-relocation` is
 at actual extraction, harvest, completed-workshop and transfer boundaries. No decision,
 inventory, RNG or timing rule changes. The new state is versioned because it is saved and
 hashed. See ECONOMY.md. Immutable v20 continuation reference: `05cf09e`.
+
+### Rules version 22 — personally informed exchange journeys
+
+A co-present conversation can transmit a bounded trade lead. A voluntary physical
+journey follows that remembered place and hands off to the existing barter conversation;
+urgent needs still interrupt, missing counterparties and refusals are recorded. Receipt
+history records actual completed swaps. See ECONOMY.md for ownership, alternatives and
+retention. Immutable version-21 continuation reference: `ee822f3`. No historical save
+is migrated; the lab can disable the new mechanism with `rich-no-exchange-journeys`.

@@ -3,17 +3,17 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 21
+## Exact continuation snapshot — after version 22
 
-- Current product rules **21**: settlement production and resource-flow observations,
+- Current product rules **22**: personally informed exchange journeys, following v21 settlement production and resource-flow observations,
   following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
   `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD
-  for the commit containing this snapshot. Immutable v20 reference: **05cf09e**; v19 reference: **801123e**.
+  for the commit containing this snapshot. Immutable v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
 - Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
   birth counter and competing project coordinators; physical-market prerequisite;
   S5 novice child proficiency and one held technique with instruction; general D3;
   **S3 first complete relocation/founding slice** (contract in RELOCATION.md); S4a actual
-  production/flow observations (contract in ECONOMY.md).
+  production/flow observations and S4b first physical exchange journey slice (contract in ECONOMY.md).
 - Relocation checks: `npm test` **1108 tests / 121 files**; `npm run typecheck`;
   `npm run build`; `npx --no-install vite-node scripts/golden.ts` (all historical values
   unchanged); 14 relocation contracts; focused township/housing/rules/v19 continuation
@@ -23,22 +23,23 @@ This is the continuation record; the audit remains dated evidence, not current a
 - Natural smoke: meadow/Normal/28, four days, control + nudge + no-relocation: no sustained
   hardship or proposals; conserved goods and 28 survivors in each. This is not an ensemble.
 - Protected original/candidate work and main-worktree untracked `_find_moments_rich.ts`
-  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v20 references or silently
+  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v21 references or silently
   reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
 - Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: S4b purposeful intertown barter.** Pin a v21 continuation before
-any saved/behavioural change and allocate the next unused generation (22 is the candidate;
-recheck concurrent work). Use known counterparties, physical travel/co-presence and
-conserved exchanges. S4a production/flow observations are implemented; they are not an
-inhabitant knowledge source. The latest S4a verification is recorded at the end of this file.
-The v16 market correction is a prerequisite already integrated, not intertown trade itself.
+**Next executable task: complete enduring political alignment and transmitted practices.**
+S4b now implements personally heard opportunities, actual travel, existing voluntary
+barter, failure and persistent exchange receipts; it does not demonstrate autonomous
+intertown dependence. Pin the current v22 continuation before the next behavioural
+change and allocate a fresh generation (23 is the next candidate; recheck concurrent
+work). Keep F1-F5 queued until the remaining programme and its verification are complete.
+The latest S4b checks and evidence are at the end of this file.
 
 S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
 succession, rescue or return expedition. Separation prevents founding, urgent needs can
 interrupt, known deadlines permit failure. Old property remains owned. Natural migration
 frequency/benefit remains unmeasured. The full programme is still incomplete: enduring
-factions/rival priorities; specialisation and purposeful intertown trade; transmitted
+factions/rival priorities; natural specialisation/exchange evidence; transmitted
 practices beyond one technique; D10 retention/indexing; D12/A and natural C-H measurement;
 mature-world performance. Long ensembles still follow dispatcher/detached-launch policy.
 
@@ -91,8 +92,8 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | Roadmap 9 / A7 / G | V18 charcoal technique held by people, voluntary timed instruction, provenance and loss | S5; contact/time, real kiln use, interrupted/save/purity contracts and staged G | verified: one technique |
 | Roadmap 10 / A5 / F | V12 project organiser; v15 explicit competing coordinators and voluntary support; no inherited office | S1/S2 bounded contracts/runtime; persistent factions and wider proposals remain | implemented: coordination; unresolved: factions/F ensemble |
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
-| A4 economy / E | Physical production exists; purposeful cross-settlement trade absent | S4; known counterparty, co-presence, conserved barter/journey/failure | unresolved |
-| A6 environment / C | Global weather and symmetric camps; no settlement production observations | S4; sustained actual action/flow differences under opportunities | unresolved |
+| A4 economy / E | V22 personally heard lead, physical exchange journey, existing barter and receipt history | S4b contracts, rendered journey/swap/return/failure; one-day control/nudge/ablation null | implemented and verified first slice; natural exchange/dependence unresolved |
+| A6 environment / C | Global weather and symmetric camps; v21 actual production observations now exist | S4; sustained actual action/flow differences under opportunities | unresolved |
 | A8 generations / H | Birth/age/households/inheritance exist, practices have no holders | S5; bounded transmission records and natural generation timing | unresolved |
 | A9 replay/AI | Existing seeded stepping, replay, legal-option model boundary | Every stage continuation/save/load/purity; preserve seam | implemented |
 | D3 route blocking | V18 private site reproduced over a living occupant; v19 extends access protection to all new footprints | S3 prerequisite; corridor, door, delayed occupant, upgrade and mid-layout continuation | verified |
@@ -595,3 +596,43 @@ Rules-21 first-day performance (same sequential meadow, immigration-off workload
 rules 20): Normal/28 0.51 ms/tick, Large/100 2.24, Huge/250 8.51; 2400 ticks and three
 invariant checks per profile, no failures. This does not establish mature-world scaling.
 Compact results: `civic_evidence/performance-v21-summary.json`.
+
+
+## Rules 22 — S4b purposeful exchange journeys
+
+The existing need/surplus planner can now offer an intertown material exchange trip from
+a personally heard, fallible trade lead. The real conversation teaches the source; carried
+goods travel by ordinary pathfinding; the existing barter conversation decides the swap;
+ordinary hauling can bring the acquired material back to the household site. Refusal,
+missing people/stock, capacity and urgent interruption retain real consequences. New
+bounded records and derived town receipts expose that chain. See ECONOMY.md for the
+owner, architectural alternative, retention, failure and compatibility contracts.
+
+Existing modules touched: options_social adds the owned trip opportunity; social teaches
+leads during co-present news and reports actual barter outcomes; activities are reused
+without changing their suspension rules; history/labels expose the records; save/types/
+world validate, persist and hash them; the lab adds a narrow off-switch. Immutable v21
+reference was committed before implementation at `ee822f3`.
+
+Verification: full `npm test` 1129 tests / 125 files; typecheck and build passed; all
+historical golden fingerprints match. Eleven exchange contracts covered real contact,
+accepted/refused action, missing counterparties/stock, urgent thirst, physical return
+hauling, observer purity, historical/ablation gates and full-state mid-travel/mid-talk
+continuation. A further blocked-path contract was added during final review. Rendered
+`scripts/browser/exchange_check.mjs`: 19 passing checks across six labelled stages;
+travel and fulfilled screenshots inspected. `civic_evidence/exchange-page/` and
+`exchange-contract-demo.json` retain the evidence. No manual inhabitant audit run is
+claimed; that queue has not begun.
+
+Review fixes: keep the bounded journey against nonurgent alternative work while leaving
+critical survival interruption live; record the actual swap immediately so subsequent
+conversation interruption cannot erase it; validate new records at deserialization;
+use feasible pack loads in labelled fixtures rather than bypass capacity. Original
+historical references and audit evidence were not changed.
+
+Experiment E bounded smoke: meadow/Large/100 founders/four camps, one day, immigration
+off; current control, one-draw nudge and no-exchange-journeys. All three had zero lead
+holders, journeys and swaps, 100 survivors and conserved goods. This short null does not
+measure benefit, natural specialisation or dependence. Conditions and interpretation
+were recorded in `scripts/exchange_smoke.ts` before running; raw results are in
+`civic_evidence/exchange-natural-smoke.json`. No threshold was tuned to force occurrence.

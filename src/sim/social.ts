@@ -1,3 +1,4 @@
+import { hasExchangeJourneys, tellTradeLead, endExchangeTalk, endExchangeApproach } from './exchange_journeys';
 import { offerLesson, answerLesson, finishLesson, interruptLesson, lessonProblem, LESSON_TICKS } from './techniques';
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
@@ -744,6 +745,7 @@ export const MAKING_NOTE = 'making:';
 export const MAKING_MEMORY = DAY / 2;
 
 export interface ConvData {
+  exchangeJourney?: number;
   reqKind?: RequestKind;
   item?: ItemKind | null;
   amount?: number;
@@ -886,6 +888,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
     A.wave = world.tick + 20;
     B.wave = world.tick + 24;
   }
+  if (A) endExchangeTalk(world,A,c.data.exchangeJourney,req,detailText||resultText);
   if (A) endTalkActivity(world, A, outcome);
   if (B) endTalkActivity(world, B, outcome);
 }
@@ -1387,6 +1390,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const m2 = m1 > 0 ? transfer(world, A.inv, B.inv, carryCap(world, B), take, req.offerAmount, 'person:' + A.id, 'person:' + B.id, 'trade') : 0;
         if (m1 > 0 && m2 > 0) {
           settle(world, req, 'fulfilled', `swapped ${m2} ${take} for ${m1} ${give}`);
+          endExchangeTalk(world,A,d.exchangeJourney,req,req.note);
           bubble(world, B, D.saying(D.TRADE_OK, B.id, A.id, world.tick >> 5), 'say', 46);
           adjustRel(A, B.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
           adjustRel(B, A.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
@@ -1426,6 +1430,11 @@ export function flushDelayedBubbles(world: World): void {
 
 // ── phase 3: news travels by word of mouth ──
 function phaseNews(world: World, S: Person, L: Person): void {
+  if(hasExchangeJourneys(world)){
+    const goods:Items={};
+    for(const k of ['wood','stone','berries','fruit','fish','grain'] as ItemKind[]){const n=surplusOf(world,S,k);if(n>0)goods[k]=n;}
+    tellTradeLead(world,S,L,goods);
+  }
   shareConcerns(world, S, L);
   // one story about a third person, when there is one worth telling (rich only; never in an authored world)
   shareRumour(world, S, L);
@@ -1601,6 +1610,7 @@ export function passingGreetings(world: World, p: Person): void {
 
 // ───────────────────────── activity handlers ─────────────────────────
 registerHandler('socialize', {
+  onEnd(w,p,a,outcome,detail){endExchangeApproach(w,p,a,detail||outcome);},
   availability: 0.6,
   pose: () => 'talk',
   begin(world, p, a) {

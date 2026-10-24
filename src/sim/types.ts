@@ -199,6 +199,7 @@ export interface SeenEntity {
 
 export type ActivityKind =
   | 'relocate'
+  | 'exchange_journey'
   | 'attend'
   | 'hunt'
   | 'alone'
@@ -571,6 +572,8 @@ export interface Trade {
 }
 
 export interface Person {
+  tradeLeads?: import('./exchange_journeys').TradeLead[];
+  exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
   relocationHardship?: number;
   socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper' }[];
   civicOutcomes?: { projectId: number; organiserId: number; success: boolean; tick: number }[];
@@ -1208,6 +1211,7 @@ export interface SpatialGrid {
 }
 
 export interface World {
+  exchangeReceipts?: import('./exchange_journeys').ExchangeReceipt[];
   economicObservations?: import('./settlement_economy').EconomicObservations;
   /** Lifetime births from rules 14; absent historical records are not reconstructed from prose. */
   birthCount?: number;

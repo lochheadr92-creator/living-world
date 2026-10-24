@@ -1,0 +1,50 @@
+{
+  "classification": "bounded natural smoke; not an ensemble",
+  "result": [
+    {
+      "arm": "control",
+      "rules": 22,
+      "seed": "meadow",
+      "profile": "large",
+      "days": 1,
+      "townships": 4,
+      "leadHolders": 0,
+      "journeys": 0,
+      "fulfilled": 0,
+      "receipts": [],
+      "population": 100,
+      "conservation": true,
+      "hash": "c5a6c748"
+    },
+    {
+      "arm": "nudge:1",
+      "rules": 22,
+      "seed": "meadow",
+      "profile": "large",
+      "days": 1,
+      "townships": 4,
+      "leadHolders": 0,
+      "journeys": 0,
+      "fulfilled": 0,
+      "receipts": [],
+      "population": 100,
+      "conservation": true,
+      "hash": "e0761f43"
+    },
+    {
+      "arm": "rich-no-exchange-journeys",
+      "rules": 22,
+      "seed": "meadow",
+      "profile": "large",
+      "days": 1,
+      "townships": 4,
+      "leadHolders": 0,
+      "journeys": 0,
+      "fulfilled": 0,
+      "receipts": [],
+      "population": 100,
+      "conservation": true,
+      "hash": "c5a6c748"
+    }
+  ]
+}

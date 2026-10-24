@@ -1,3 +1,4 @@
+import { validateExchangeJourneys } from '../sim/exchange_journeys';
 import { validateEconomicObservations } from '../sim/settlement_economy';
 import { validateRelocations } from '../sim/relocation';
 import { validateTownships } from '../sim/townships';
@@ -220,6 +221,7 @@ export function deserializeWorld(json: string): World {
   validateTownships(w);
   validateEconomicObservations(w);
   validateRelocations(w);
+  validateExchangeJourneys(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);

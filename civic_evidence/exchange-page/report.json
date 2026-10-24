@@ -1,0 +1,78 @@
+[
+  {
+    "name": "lead: actual stage explained",
+    "pass": true
+  },
+  {
+    "name": "lead: staged label",
+    "pass": true
+  },
+  {
+    "name": "lead: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "travel: actual stage explained",
+    "pass": true
+  },
+  {
+    "name": "travel: staged label",
+    "pass": true
+  },
+  {
+    "name": "travel: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "talking: actual stage explained",
+    "pass": true
+  },
+  {
+    "name": "talking: staged label",
+    "pass": true
+  },
+  {
+    "name": "talking: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "fulfilled: actual stage explained",
+    "pass": true
+  },
+  {
+    "name": "fulfilled: staged label",
+    "pass": true
+  },
+  {
+    "name": "fulfilled: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "returned: actual stage explained",
+    "pass": true
+  },
+  {
+    "name": "returned: staged label",
+    "pass": true
+  },
+  {
+    "name": "returned: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "missing: actual stage explained",
+    "pass": true
+  },
+  {
+    "name": "missing: staged label",
+    "pass": true
+  },
+  {
+    "name": "missing: observer preserves full state",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true
+  }
+]
