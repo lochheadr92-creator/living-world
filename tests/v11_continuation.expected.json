@@ -1,0 +1,24 @@
+{
+  "source": "reconciled version 11 before township organisation",
+  "saved": {
+    "hash": "808d42b3",
+    "deep": "69f3235a4188a8fb",
+    "alive": 28,
+    "plans": {
+      "tool": 18
+    },
+    "homeFood": 93,
+    "storedFood": 34
+  },
+  "continued": {
+    "hash": "3ac84ed9",
+    "deep": "e05001f3c4697e81",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 3
+    },
+    "homeFood": 132,
+    "storedFood": 43
+  }
+}
