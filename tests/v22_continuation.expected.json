@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 22 before persistent political alignment",
+  "saved": {
+    "hash": "bf4c10f5",
+    "deep": "b7834dc5fe762dc0",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 1
+    },
+    "homeFood": 69,
+    "storedFood": 25
+  },
+  "continued": {
+    "hash": "b34aa565",
+    "deep": "18625f3aa3fa558e",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 1,
+      "shelter": 1
+    },
+    "homeFood": 74,
+    "storedFood": 21
+  }
+}
