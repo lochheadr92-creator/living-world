@@ -13,7 +13,8 @@ This is the continuation record; the audit remains dated evidence, not current a
   birth counter, competing project coordinators and persistent alignment factions; physical-market prerequisite;
   S5 novice child proficiency, one held technique with instruction and one transmitted household practice; general D3;
   **S3 first complete relocation/founding slice** (contract in RELOCATION.md); S4a actual
-  production/flow observations and S4b first physical exchange journey slice (contract in ECONOMY.md).
+  production/flow observations, S4b physical exchange journeys and S4c spatial geology
+  (contract in ECONOMY.md); S6 bounded operational retention and indexed history.
 - Relocation checks: `npm test` **1108 tests / 121 files**; `npm run typecheck`;
   `npm run build`; `npx --no-install vite-node scripts/golden.ts` (all historical values
   unchanged); 14 relocation contracts; focused township/housing/rules/v19 continuation
@@ -27,22 +28,47 @@ This is the continuation record; the audit remains dated evidence, not current a
   reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
 - Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: remaining programme measurements and continuation.** Major
-mechanism slices are implemented, including spatial mineral opportunities (26). Add
-only the observation/tally support needed to measure new civic/learning outcomes in
-the existing lab; prepare pinned-source, resumable user-machine runs for D12/A and
-natural C-H, plus mature-world performance. Follow the expensive-run policy and do
-not report unrun measurements as results. Natural B/F causal contracts already exist.
-Keep F1-F5 queued until the programme's required verification is satisfied; it has not
-been silently declared complete. Any further behaviour change needs a v26 reference
-and fresh generation (27 is next candidate; recheck concurrent work).
+**Next executable task: run and interpret the pinned validation workloads.** Measurement
+support is implemented at **b402f3d44bf3919b82982b6c66d37cd8d0e74873**. Exact Windows
+preparation, detached launch, estimates, resume and the one result file are in
+[CIVILISATION_VALIDATION.md](CIVILISATION_VALIDATION.md). No long ensemble is running.
+The full programme remains open pending D12/A, natural C-H and mature-world measurements.
+B/F controlled causal demonstrations exist; they are not natural emergence claims.
+Keep F1-F5 queued until the required programme verification is satisfied. Any further
+behaviour change needs a v26 reference and fresh generation (27 is next candidate;
+recheck concurrent work). Do not spend another session rebuilding delivered mechanisms.
+
+Current verification classification: coherent mechanisms, contracts, historical
+compatibility and representative rendered scenes verified; aggregate welfare,
+long-run persistence and natural multigeneration emergence unverified. Latest executable
+source is b402f3d; this record's later commit is documentation only. The implementation
+worktree will be clean after this handoff commit. Main retains only the two unrelated
+untracked probes listed above. No source work is intentionally left uncommitted.
+
+First recommended read: `Get-Content docs/CIVILISATION_VALIDATION.md` in the civilisation
+worktree. If a validation run has been launched, read its manifest, process state and
+`civ_validation_v26/report.txt` before doing anything else. Never use file mtime as the
+liveness test. The validation checkout is a proposed separate detached directory, not
+yet created by this session.
+
+Paste-ready continuation:
+> Continue Living World from docs/CIVILISATION_IMPLEMENTATION.md and
+> docs/CIVILISATION_VALIDATION.md. Executable checkpoint b402f3d, current rules 26,
+> branch codex/civilisation-programme, protected original/candidate/audit work unchanged.
+> Implementation and browser contracts are delivered through geology and retention.
+> Check whether pinned validation runs exist; read exact results, preserve failures and
+> accept valid nulls. Do not claim an unrun ensemble or natural generation. Complete
+> required programme verification, then implement the queued inhabitant fixes in order
+> F1, F3, F2, F4, F5, including real conversation interruption, manual browser session,
+> transcript/replay and screenshots. Never rewrite historical references. After those
+> fixes are delivered, stop/report and recommend household and settlement continuation.
 
 S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
 succession, rescue or return expedition. Separation prevents founding, urgent needs can
 interrupt, known deadlines permit failure. Old property remains owned. Natural migration
 frequency/benefit remains unmeasured. The full programme is still incomplete: enduring
-natural specialisation/exchange/faction/practice evidence; mature-world retention/performance measurement; D12/A and natural C-H measurement;
-mature-world performance. Long ensembles still follow dispatcher/detached-launch policy.
+natural specialisation/exchange/faction/practice evidence; D12/A and natural C-H
+measurement; mature-world retention/performance. Long ensembles still follow dispatcher/detached-launch policy.
 
 ## Owner queued priority after this programme
 
@@ -764,3 +790,31 @@ Control and ablation production are identical over two days; nudge differs. All 
 have 100 survivors and conserved goods. No clay/ore production occurred. This valid
 short-window null does not establish sustained specialisation, trade dependence or
 benefit, and no quantity range was tuned to force an outcome.
+
+
+## Measurement delivery and remaining queue dependency
+
+Executable checkpoint **b402f3d** adds pure end-state/retained-record civilisation
+metrics to the existing lab, generation-only geology comparisons, a resume guard for
+that comparison setting, and a provenance-checked detached PowerShell workload runner.
+The broad suite passes **1159 tests / 134 files** (85.85 seconds); typecheck/build pass.
+Focused lab/report/default/death/civilisation tests: 18 passing; after the final honest
+initial-divergence annotation, eight focused report/default/civilisation tests and
+typecheck pass. Actual 0.02-day runner, report and resume were exercised. Evidence:
+`civic_evidence/lab-civ-metric-final-smoke/` (final) and `lab-civ-metric-smoke/` (initial
+runner/resume). The PowerShell launcher parses; no long-run execution is claimed.
+
+Review findings addressed: do not describe regenerated geology as the identical fork;
+mark its initial divergence; reject ordinary-versus-geology output reuse; preserve
+first-match historical lookup semantics; label retained and living-at-end measures
+instead of inventing lifetime counts; check every expected seed/arm before declaring a
+workload complete. Source/configuration manifests prevent unsafe continuation of the
+prepared workloads across revisions. Core simulation remains rules 26 unchanged.
+
+Pinned owner priority `030d62d` was reread. Each queued item is **blocked by the same
+unfinished prerequisite**, not fixed or disproved: F1 night-wait suspension; F3 option
+identity; F2 crafting explanation; F4 latest-action summary; F5 time wording. Current
+reproduction has not begun. The prerequisite is the remaining programme verification
+in CIVILISATION_VALIDATION.md, followed by honest result interpretation and any required
+failure repairs. Keep the v13 original audit/transcript intact; use current main when
+this queue opens. No manual inhabitant acceptance session for these fixes is claimed.

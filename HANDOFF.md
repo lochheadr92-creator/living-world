@@ -1,18 +1,29 @@
 # Current civilisation continuation (2026-10-24)
 
-Read `docs/CIVILISATION_IMPLEMENTATION.md` first for the active programme, provenance,
-verification and exact remaining stages. Worktree: `civilisation-programme/living-world`,
-branch `codex/civilisation-programme`. Versions 11-19 reconcile divergent main lines, implement the first civic project,
-and deliver relationship history, single-count social consequences, local death news,
-durable birth accounting, competing coordinators, physical market exchange, developmental starting proficiency, and person-held charcoal technique with timed instruction, and general construction access protection. Old notes below are historical, not current status.
+Read `docs/CIVILISATION_IMPLEMENTATION.md` for the current programme and
+`docs/CIVILISATION_VALIDATION.md` for exact remaining workloads and launch commands.
+Working branch: `codex/civilisation-programme`, worktree
+`C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`.
+Executable checkpoint: **b402f3d**, rules **26**. The following handoff commit changes
+documentation only. Verified implementation is integrated into main and pushed.
 
-Implementation checkpoint: **9415657**, rules **19**, pushed and integrated into main.
-The [exact continuation snapshot](docs/CIVILISATION_IMPLEMENTATION.md#exact-continuation-snapshot--after-version-19)
-contains protected work, completed evidence, remaining scope and a paste-ready prompt.
-No implementation patch is pending. The next task is household relocation and runtime
-founding, starting by pinning a v19 continuation before allocating new behavior.
-The latest full suite passed 1093 tests across 119 files. Long-run emergence remains
-unmeasured; this is not the completion of the entire civilisation programme.
+Versions 20-26 add physical household relocation/founding, actual settlement production,
+heard exchange opportunities and physical barter journeys, repeated political support,
+transmitted household supper practices, bounded disposable state/indexed history, and
+spatial finite mineral geology. Earlier versions 11-19 reconcile the base and establish
+township projects, history, local death news, development and technique instruction.
+
+Latest full suite: **1159 tests / 134 files**; typecheck/build, historical goldens and
+representative browser scenes pass. Natural smoke results include valid nulls. The full
+programme is **not complete**: D12/A, natural C-H and mature-world measurements remain.
+No long ensemble is running and the proposed validation checkout has not been created.
+F1/F3/F2/F4/F5 remain queued behind that prerequisite, as pinned owner priority requires.
+
+No implementation patch is intentionally pending. Preserve main's untracked
+`scripts/_find_moments_rich.ts` and `scripts/_warmth_probe2.ts`, the retired original
+checkout's files, the civilisation candidate and the historical inhabitant audit.
+The exact continuation record includes a paste-ready prompt. Old notes below are
+historical and do not supersede this status or WORKFLOW.md.
 
 # Living World Repository Handoff
 
