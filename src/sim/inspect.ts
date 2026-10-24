@@ -1,4 +1,4 @@
-import { civicHistory, householdHistory, projectHistory } from './history';
+import { civicHistory, householdHistory, projectHistory, relationshipHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
 import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
@@ -123,6 +123,7 @@ export interface PersonView {
   household: string;
   civic: { township: string; lines: string[] };
   householdHistory: string[];
+  relationshipHistory: string[];
   householdColor: number;
   home: string;
   health: number;
@@ -559,6 +560,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     household: hh ? hh.name : 'none',
     civic: civicHistory(world, p),
     householdHistory: householdHistory(world, p),
+    relationshipHistory: relationshipHistory(world, p),
     householdColor: hh ? hh.color : 0,
     home: homeLine(world, p, homeB && homeB.ent === 'building' ? homeB : null),
     health: p.health,

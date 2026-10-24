@@ -1,0 +1,35 @@
+[
+  {
+    "name": "kept: typed request outcome visible",
+    "pass": true,
+    "detail": "Relationship historyAda: trust 33, affinity 44.Request #6, asker, tick 100: fulfilled — did what they promised.Request #13, helper, tick 132: fulfilled — received 2 wood.Remembered at tick 100: Ada helped with the building. Event link not recorded.Remembered at tick 132: I gave Ada 2 wood. Event link not recorded."
+  },
+  {
+    "name": "kept: relationship and unlinked history labelled",
+    "pass": true,
+    "detail": "Relationship historyAda: trust 33, affinity 44.Request #6, asker, tick 100: fulfilled — did what they promised.Request #13, helper, tick 132: fulfilled — received 2 wood.Remembered at tick 100: Ada helped with the building. Event link not recorded.Remembered at tick 132: I gave Ada 2 wood. Event link not recorded."
+  },
+  {
+    "name": "kept: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "broken: typed request outcome visible",
+    "pass": true,
+    "detail": "Relationship historyAda: trust 18, affinity 35.Open grievance: Ada did not do what they promised (since tick 100).Request #6, asker, tick 100: broken — not delivered in time.Request #14, helper, tick 132: declined — unwilling.Remembered at tick 100: Ada did not keep a promise. Event link not recorded.Remembered at tick 100: sore: Ada did not do what they promised. Event link not recorded."
+  },
+  {
+    "name": "broken: relationship and unlinked history labelled",
+    "pass": true,
+    "detail": "Relationship historyAda: trust 18, affinity 35.Open grievance: Ada did not do what they promised (since tick 100).Request #6, asker, tick 100: broken — not delivered in time.Request #14, helper, tick 132: declined — unwilling.Remembered at tick 100: Ada did not keep a promise. Event link not recorded.Remembered at tick 100: sore: Ada did not do what they promised. Event link not recorded."
+  },
+  {
+    "name": "broken: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true,
+    "detail": []
+  }
+]

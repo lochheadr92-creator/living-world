@@ -509,6 +509,8 @@ export interface Illness {
 /** a story one person holds about another (reputation.ts; rich worlds only): what, about whom, who told it, who saw it, how old */
 export type RumourKind = 'generous' | 'reliable' | 'quarrelsome' | 'unreliable' | 'thief' | 'news';
 export interface Rumour {
+  /** This observer already changed their relation for the event; do not count it again as reputation. */
+  relationshipApplied?: boolean;
   about: number;
   kind: RumourKind;
   /** when it happened */
@@ -565,6 +567,7 @@ export interface Trade {
 }
 
 export interface Person {
+  socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper' }[];
   civicOutcomes?: { projectId: number; organiserId: number; success: boolean; tick: number }[];
   ent: 'person';
   id: number;

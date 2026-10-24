@@ -1,3 +1,4 @@
+import { runsRulesVersion } from './rulesversion';
 // Reputation and news that travel by word of mouth (rich worlds only). What a person knows of someone they have not dealt with
 // themselves comes from what they saw and what they were told: a gift witnessed, a quarrel, a promise kept or broken, a death, a
 // birth. Each story is kept by the hearer with who told it, who saw it first, how many mouths it passed through and when it
@@ -13,6 +14,12 @@ import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import { pickStory } from './traditions';
 import type { Person, Rumour, RumourKind, World } from './types';
+
+// Lab-only ablation of the single-counting repair, not a product mode.
+let singleCount = true;
+export const singleCountOn = () => singleCount;
+export function setSingleCount(on: boolean): void { singleCount = on; }
+const singleCountFor = (world: World) => singleCount && isRich(world) && runsRulesVersion(world, 13);
 
 /** the most stories one person keeps; the oldest go first */
 export const HEARD_MAX = 30;
@@ -30,9 +37,9 @@ const fade = (world: World, r: Rumour): number => Math.max(0, 1 - (world.tick - 
 export const heardBy = (p: Person): Rumour[] => p.heard ?? [];
 
 /** Something `p` saw with their own eyes, about `about`: kept as a first-hand story. Rich only. */
-export function noteDeed(world: World, p: Person, about: Person, kind: RumourKind, text: string): void {
+export function noteDeed(world: World, p: Person, about: Person, kind: RumourKind, text: string, relationshipApplied = false): void {
   if (!isRich(world) || p === about || !p.alive) return;
-  keep(world, p, { about: about.id, kind, tick: world.tick, from: 0, origin: p.id, hops: 0, weight: 1, text });
+  keep(world, p, { about: about.id, kind, tick: world.tick, from: 0, origin: p.id, hops: 0, weight: 1, text, ...(singleCountFor(world) && relationshipApplied ? { relationshipApplied: true } : {}) });
 }
 
 function keep(world: World, p: Person, r: Rumour): boolean {
@@ -41,6 +48,7 @@ function keep(world: World, p: Person, r: Rumour): boolean {
   const same = list.find((x) => x.about === r.about && x.kind === r.kind && Math.abs(x.tick - r.tick) < DAY / 2);
   if (same) {
     if (r.hops < same.hops) Object.assign(same, r);
+    if (singleCountFor(world) && r.relationshipApplied) same.relationshipApplied = true;
     return false;
   }
   list.push(r);
@@ -100,12 +108,13 @@ export function shareRumour(world: World, S: Person, L: Person): boolean {
   const trust = L.relations[S.id]?.trust ?? 10;
   const weight = Math.round(best.weight * Math.max(0.35, Math.min(1, 0.55 + trust / 100)) * 100) / 100;
   const copy: Rumour = { ...best, from: S.id, hops: best.hops + 1, weight };
+  if (singleCountFor(world)) delete copy.relationshipApplied; // the listener did not experience the original relation change
   if (!keep(world, L, copy)) return false;
   const about = world.byId.get(best.about);
   const name = about && about.ent === 'person' ? about.name : world.deceased.find((d) => d.id === best.about)?.name ?? 'someone';
   addLog(world, L, 'info', `${S.name} told me ${best.text}.`);
   const w = WEIGHT[best.kind] * weight;
-  if (w) adjustRel(L, best.about, world.tick, { aff: 1.2 * w, trust: 1.6 * w, note: `${S.name} said ${best.text}` });
+  if (w && !singleCountFor(world)) adjustRel(L, best.about, world.tick, { aff: 1.2 * w, trust: 1.6 * w, note: `${S.name} said ${best.text}` });
   else if (best.kind === 'news' && about && about.ent === 'person') adjustRel(L, best.about, world.tick, { fam: 0.3 });
   // news of a death is felt by those who liked the dead and were not there to see it; the rest file it
   if (best.kind === 'news' && best.text.includes('died') && (L.relations[best.about]?.affinity ?? 0) > 25 && !(L.mood?.thoughts ?? []).some((t) => t.kind === 'lost:' + best.about)) {
@@ -123,7 +132,7 @@ export function reputationOf(world: World, p: Person, aboutId: number): number {
   if (!list) return 0;
   let s = 0;
   for (const r of list) {
-    if (r.about !== aboutId) continue;
+    if (r.about !== aboutId || (singleCountFor(world) && r.relationshipApplied)) continue;
     s += WEIGHT[r.kind] * r.weight * fade(world, r);
   }
   return Math.max(-1, Math.min(1, s / 2));

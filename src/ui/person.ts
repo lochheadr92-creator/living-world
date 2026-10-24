@@ -130,6 +130,8 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const townEl = h('div', { class: 'p-township' });
   const civicLines = h('div', { class: 'civic-lines' });
   const civicPanel = h('details', { class: 'civic-panel', open: true }, h('summary', null, 'Township & shared work'), civicLines);
+  const relationshipLines = h('div');
+  const relationshipPanel = h('details', { class: 'civic-panel relationship-history' }, h('summary', null, 'Relationship history'), relationshipLines);
   const historyLines = h('div');
   const historyPanel = h('details', { class: 'civic-panel' }, h('summary', null, 'Household history'), historyLines);
   const followLabel = h('span', null, 'Follow');
@@ -280,7 +282,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const sections = createPersonSections(ctx, hooks);
 
   // the answer to "what are they up to?" comes first: it is the reason to open the panel. Needs and belongings are context for it.
-  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, civicPanel, historyPanel, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
+  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, civicPanel, historyPanel, relationshipPanel, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
   const el = h('div', { class: 'insp-person' }, head, body);
 
   // ───────── rendering ─────────
@@ -303,6 +305,11 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     if (civicLines.dataset.text !== civicText) {
       civicLines.replaceChildren(...v.civic.lines.map(line => h('p', null, line)));
       civicLines.dataset.text = civicText;
+    }
+    const relationshipText = v.relationshipHistory.join('\n');
+    if (relationshipLines.dataset.text !== relationshipText) {
+      relationshipLines.replaceChildren(...v.relationshipHistory.map(line => h('p', null, line)));
+      relationshipLines.dataset.text = relationshipText;
     }
     const histText = v.householdHistory.join('\n');
     if (historyLines.dataset.text !== histText) {

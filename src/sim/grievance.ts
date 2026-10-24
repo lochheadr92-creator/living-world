@@ -8,7 +8,7 @@ import type { GrievanceCause, Person, World } from './types';
  * Grievances: what two people are actually sore about, why, and how it ends.
  *
  * A grievance is opened by a real incident (a contested resource, a refusal that mattered, a broken promise), carries its
- * cause in words, and has a weight that falls with time, apologies, gifts and working side by side. It closes — and is
+ * cause in words, and has a weight that falls with time, apologies and gifts. It closes — and is
  * remembered as settled — when the weight reaches zero or three days pass. An apology is only ever attempted while one is open,
  * and only a bounded number of times; a settled grievance never prompts another apology, and a new quarrel needs a new cause
  * (or a different old wound), not the same one over again.

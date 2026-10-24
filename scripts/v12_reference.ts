@@ -8,6 +8,6 @@ if (process.argv.includes('--write')) {
  writeFileSync(path, JSON.stringify({ source: 'reconciled version 12 before social consequence correction', ...actual }, null, 2) + '\n');
 } else {
  const { source, ...expected } = JSON.parse(readFileSync(path, 'utf8'));
- if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error('Version 10 continuation changed');
- console.log('Version 10 continuation unchanged');
+ if (JSON.stringify(actual) !== JSON.stringify(expected)) throw new Error('Version 12 continuation changed');
+ console.log('Version 12 continuation unchanged');
 }

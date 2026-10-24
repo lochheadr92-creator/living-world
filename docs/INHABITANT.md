@@ -13,10 +13,10 @@ not yet exercised; UNKNOWN means not determined.
 
 ### 1.1 Canonical documents
 
-The brief names `AGENTS.md` and `WORLD_DIRECTIONS.md`. **Neither exists in this repository** (VERIFIED: searched the whole tree). The
+The brief names `AGENTS.md` and `WORLD_DIRECTIONS.md`. **Historical finding, now superseded:** `AGENTS.md` exists and is current authority alongside `WORKFLOW.md`; the original search predates it. `WORLD_DIRECTIONS.md` is not current project authority. The
 canonical documents that do exist and were read: `CLAUDE.md` (decisions already made, branch and testing rules), `README.md` (the
 architecture and the verification suite), `docs/EMERGENCE.md` (the plan and the lab), `docs/SCALING.md` (random choice, the closed
-action space), `docs/ECONOMY.md` (ownership, claims, promises). Nothing here assumes anything from the two missing files.
+action space), `docs/ECONOMY.md` (ownership, claims, promises). The original assessment did not rely on those then-missing files.
 
 ### 1.2 Existing systems and how they are reused (VERIFIED by reading `src/sim`)
 

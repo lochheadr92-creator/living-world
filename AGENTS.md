@@ -44,7 +44,7 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-Rules version 12 adds persistent townships and voluntary public storehouse projects.
+Current rules version 13 adds single-count social consequences and typed request history, after version 12 persistent townships and voluntary public storehouse projects.
 `docs/CIVILISATION_IMPLEMENTATION.md` is the execution/continuation register; it records
 version collisions, verified scope and unrun measurements. Candidate version 8 courier
 and version 9 table eating are applied at version 11 on the local-main lineage.

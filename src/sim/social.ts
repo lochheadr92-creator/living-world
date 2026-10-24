@@ -1,3 +1,4 @@
+import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
@@ -187,11 +188,11 @@ export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: 
     if (hyp(w.x - x, w.y - y) > 7.5) continue;
     if (kind === 'gift' || kind === 'help') {
       adjustRel(w, actor.id, world.tick, { aff: 1.3, trust: 0.9, fam: 0.3, note: `saw ${actor.name} help ${other.name}` });
-      noteDeed(world, w, actor, 'generous', `${actor.name} helped ${other.name}`);
+      noteDeed(world, w, actor, 'generous', `${actor.name} helped ${other.name}`, true);
     } else {
       adjustRel(w, actor.id, world.tick, { aff: -1.1, trust: -1.1, note: `saw ${actor.name} quarrel` });
       adjustRel(w, other.id, world.tick, { aff: -0.6, note: `saw ${other.name} quarrel` });
-      noteDeed(world, w, actor, 'quarrelsome', `${actor.name} picked a quarrel with ${other.name}`);
+      noteDeed(world, w, actor, 'quarrelsome', `${actor.name} picked a quarrel with ${other.name}`, true);
     }
   }
 }
@@ -204,7 +205,7 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   const txt = describeItems(items);
   adjustRel(receiver, giver.id, world.tick, { aff: 2.5 + 7 * sev, trust: 2 + 4 * sev, fam: 1, debt: -0.5, note: `${giver.name} gave me ${txt}` });
   adjustRel(giver, receiver.id, world.tick, { aff: 1 + 1.5 * sev, fam: 0.5, debt: 0.5, note: `I gave ${receiver.name} ${txt}` });
-  if (giver.hhId !== receiver.hhId) noteDeed(world, receiver, giver, 'generous', `${giver.name} gave ${receiver.name} ${txt}`);
+  if (giver.hhId !== receiver.hhId) noteDeed(world, receiver, giver, 'generous', `${giver.name} gave ${receiver.name} ${txt}`, true);
   // a gift eases a quarrel in proportion to what it meant, and may end it
   endGrievanceOnGift(world, giver, receiver, sev);
   giver.stats.given += 1;
@@ -286,6 +287,7 @@ function settle(world: World, r: Request, status: Request['status'], note: strin
   r.note = note;
   r.resolved = world.tick;
   r.outcome = status === 'fulfilled' ? 'kept' : status === 'declined' ? 'refused' : status === 'expired' ? 'expired' : status === 'broken' ? 'broken' : status === 'interrupted' ? 'interrupted' : status === 'cancelled' ? 'cancelled' : status === 'failed' ? 'failed' : status;
+  rememberRequest(world, r);
 }
 
 type Response =
@@ -294,7 +296,7 @@ type Response =
   | { kind: 'lend'; tool: import('./types').Tool }
   | { kind: 'decline'; reason: 'no_item' | 'own_need' | 'unwilling' | 'disliked' | 'committed' | 'enough' | 'in_use' | 'making' };
 
-function willingness(world: World, B: Person, A: Person, severity: number): number {
+export function willingness(world: World, B: Person, A: Person, severity: number): number {
   const rel = B.relations[A.id];
   const aff = rel?.affinity ?? 0;
   const trust = rel?.trust ?? 10;
@@ -555,7 +557,7 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
     adjustRel(B, A.id, world.tick, { aff: 1, trust: 1 });
-    noteDeed(world, A, B, 'reliable', `${B.name} kept a promise to ${A.name}`);
+    noteDeed(world, A, B, 'reliable', `${B.name} kept a promise to ${A.name}`, true);
     bubble(world, A, D.saying(D.THANKS, A.id, B.id, world.tick >> 4, { n: B.name }), 'happy');
     addEvent(world, 'social', `${B.name} kept a promise to ${A.name}.`, [A.id, B.id], A.x, A.y);
   }
@@ -656,7 +658,7 @@ export function checkCommitments(world: World, p: Person): void {
       if (req) settle(world, req, 'broken', 'not delivered in time');
       adjustRel(A, p.id, world.tick, { aff: -5, trust: -12, note: `${p.name} did not keep a promise` });
       adjustRel(p, A.id, world.tick, { trust: -2, aff: -1 });
-      noteDeed(world, A, p, 'unreliable', `${p.name} broke a promise to ${A.name}`);
+      noteDeed(world, A, p, 'unreliable', `${p.name} broke a promise to ${A.name}`, true);
       openGrievance(world, A, p, 'broken_promise', `${p.name} did not do what they promised`, 38);
       addLog(world, p, 'social', `Failed to keep my promise to ${A.name}.`);
       addLog(world, A, 'social', `${p.name} never came through with what they promised.`);

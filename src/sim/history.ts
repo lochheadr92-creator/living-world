@@ -39,3 +39,18 @@ export function householdHistory(w: World, p: Person): string[] {
   ...w.requests.filter(r => h.members.includes(r.from) || h.members.includes(r.to)).slice(-6).map(r => `Request #${r.id}: ${name(w,r.from)} asked ${name(w,r.to)}; ${r.status}: ${r.note || 'reason unknown'}${r.commitmentId ? `; promise #${r.commitmentId}` : ''}${r.siteId ? `; site #${r.siteId}` : ''}.`),
  ];
 }
+
+export function relationshipHistory(w: World, p: Person): string[] {
+ const rows: string[] = [];
+ const entries = Object.entries(p.relations).sort(([,a],[,b]) => b.lastMet-a.lastMet).slice(0,12);
+ for(const [id,r] of entries){
+  const other=Number(id);
+  rows.push(`${name(w,other)}: trust ${Math.round(r.trust)}, affinity ${Math.round(r.affinity)}${r.kin ? `; ${r.kin}` : ''}.`);
+  if(r.grievance) rows.push(`Open grievance: ${r.grievance.detail} (since tick ${r.grievance.since}).`);
+  const receipts=(p.socialMemory??[]).filter(m=>m.otherId===other).slice(-3);
+  for(const m of receipts)rows.push(`Request #${m.requestId}, ${m.role}, tick ${m.tick}: ${m.outcome} — ${m.reason}${m.siteId ? `; site #${m.siteId}` : ''}.`);
+  for(const note of r.history.slice(-2))rows.push(`Remembered at tick ${note.tick}: ${note.text}. Event link not recorded.`);
+  if(!receipts.length&&!r.history.length)rows.push('Earlier cause not recorded.');
+ }
+ return rows.length?rows:['No recorded relationships.'];
+}

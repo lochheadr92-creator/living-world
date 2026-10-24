@@ -1,0 +1,1105 @@
+{
+  "rulesVersion": 13,
+  "hypothesis": "one prior broken rather than completed work commitment reduces later cooperation",
+  "workload": "9 fixed personality/relationship contexts x 4 arms; identical present physical state; 40 prior work versus 0; two broken-history RNG nudges",
+  "metrics": "willingness, ranked options, evaluated response, actual conversation and transferred units",
+  "rows": [
+    {
+      "generosity": 0.2,
+      "affinity": 0,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.5122289762273432,
+      "after": 0.5257289762273432,
+      "response": {
+        "kind": "decline",
+        "reason": "unwilling"
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 0,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.5122289762273432,
+      "after": 0.5002289762273432,
+      "response": {
+        "kind": "decline",
+        "reason": "unwilling"
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 0,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.5122289762273432,
+      "after": 0.5002289762273432,
+      "response": {
+        "kind": "decline",
+        "reason": "unwilling"
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 0,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.5122289762273432,
+      "after": 0.5002289762273432,
+      "response": {
+        "kind": "decline",
+        "reason": "unwilling"
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 20,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.5962289762273432,
+      "after": 0.6097289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "declined",
+        "note": "unwilling",
+        "delivered": 0
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 20,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.5962289762273432,
+      "after": 0.5632289762273431,
+      "response": {
+        "kind": "decline",
+        "reason": "unwilling"
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "declined",
+        "note": "unwilling",
+        "delivered": 0
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 20,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.5962289762273432,
+      "after": 0.5632289762273431,
+      "response": {
+        "kind": "decline",
+        "reason": "unwilling"
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "declined",
+        "note": "unwilling",
+        "delivered": 0
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 20,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.5962289762273432,
+      "after": 0.5632289762273431,
+      "response": {
+        "kind": "decline",
+        "reason": "unwilling"
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "declined",
+        "note": "unwilling",
+        "delivered": 0
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 40,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.6802289762273432,
+      "after": 0.6937289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 40,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.6802289762273432,
+      "after": 0.6472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "declined",
+        "note": "unwilling",
+        "delivered": 0
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 40,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.6802289762273432,
+      "after": 0.6472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "declined",
+        "note": "unwilling",
+        "delivered": 0
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.2,
+      "affinity": 40,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.6802289762273432,
+      "after": 0.6472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "declined",
+        "note": "unwilling",
+        "delivered": 0
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 0,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.6122289762273432,
+      "after": 0.6257289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 0,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.6122289762273432,
+      "after": 0.6002289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 0,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.6122289762273432,
+      "after": 0.6002289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 0,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.6122289762273432,
+      "after": 0.6002289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 20,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.6962289762273431,
+      "after": 0.7097289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 20,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.6962289762273431,
+      "after": 0.6632289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 20,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.6962289762273431,
+      "after": 0.6632289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 20,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.6962289762273431,
+      "after": 0.6632289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 40,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.7802289762273432,
+      "after": 0.7937289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 40,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.7802289762273432,
+      "after": 0.7472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 40,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.7802289762273432,
+      "after": 0.7472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.4,
+      "affinity": 40,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.7802289762273432,
+      "after": 0.7472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 0,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.7122289762273432,
+      "after": 0.7257289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 0,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.7122289762273432,
+      "after": 0.7002289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 0,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.7122289762273432,
+      "after": 0.7002289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 0,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.7122289762273432,
+      "after": 0.7002289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 20,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.7962289762273431,
+      "after": 0.8097289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 20,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.7962289762273431,
+      "after": 0.7632289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 20,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.7962289762273431,
+      "after": 0.7632289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 20,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.7962289762273431,
+      "after": 0.7632289762273431,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 40,
+      "arm": "kept",
+      "prior": "done",
+      "before": 0.8802289762273432,
+      "after": 0.8937289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 40,
+      "arm": "broken",
+      "prior": "broken",
+      "before": 0.8802289762273432,
+      "after": 0.8472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 40,
+      "arm": "nudge:1",
+      "prior": "broken",
+      "before": 0.8802289762273432,
+      "after": 0.8472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "generosity": 0.6,
+      "affinity": 40,
+      "arm": "nudge:2",
+      "prior": "broken",
+      "before": 0.8802289762273432,
+      "after": 0.8472289762273432,
+      "response": {
+        "kind": "give",
+        "item": "wood",
+        "n": 2
+      },
+      "ranked": [
+        {
+          "key": "explore",
+          "utility": 19.818530955636703
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ],
+      "actual": {
+        "status": "fulfilled",
+        "note": "received 2 wood",
+        "delivered": 2
+      },
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      }
+    }
+  ]
+}

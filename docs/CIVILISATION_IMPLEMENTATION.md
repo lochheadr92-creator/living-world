@@ -27,14 +27,14 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 
 | Audit item | Current source finding / implementation | Stage; acceptance | Status |
 |---|---|---|---|
-| Roadmap 1 / D1 / A1 eating | Candidate full-pack meal imported at 11, ordinary consumption ledger | S0; table_eating tests, conservation, continuation | implemented |
-| Roadmap 2 / D2 / A9 observer | Candidate observer flags + life-event read guard imported | S0; purity + full state checks | implemented |
-| Roadmap 3 / A9 typed history, household/relationship views | Existing requests, commitments, sites, households carry typed links; no durable universal cause | S1 minimal project view; S2 history navigation, unknown causes explicit | unresolved |
-| Roadmap 4 / B | Broken promise affects social state; no measured counterfactual yet | S2; matched initial state, one changed promise, ranking/willingness/choice | unresolved |
+| Roadmap 1 / D1 / A1 eating | Candidate full-pack meal imported at 11, ordinary consumption ledger | S0; table_eating tests, conservation, continuation | verified |
+| Roadmap 2 / D2 / A9 observer | Candidate observer flags + life-event read guard imported | S0; purity + full state checks | verified |
+| Roadmap 3 / A9 typed history, household/relationship views | Household/project views plus relationship history and bounded known request receipts | S1/S2 panels, full state purity, typed links; missing causes labelled | verified |
+| Roadmap 4 / B | B fixture measured at v12 and v13; one prior promise changes willingness and one v13 actual transfer | S2; 9 contexts, control + 2 nudges; see evidence below | verified: controlled mechanism only |
 | Roadmap 5 / D5 | Local-main 9 already allows one adult to lay out hut | S0 preserve; existing housing contracts | implemented |
-| Roadmap 6 / A3 / D8 | Relations, trust, debt, grievances, hearsay exist; duplicate influence needs repro | S2; single-count witnessed/told memory contracts and B | unresolved |
+| Roadmap 6 / A3 / D8 | Duplicate direct/reputation and hearsay/scalar effects reproduced and removed at 13 | S2; direct/told/expiry/legacy contracts and B | verified |
 | Roadmap 7 / A6 / D | No runtime relocation/founding; reserve/explore exist | S3; known destination, physical household travel/failure, membership, save | unresolved |
-| Roadmap 8 / A2 | Hubs are coordinates; cohort capture is diagnostic only | S1 persistent membership; S4 action-derived statistics | unresolved |
+| Roadmap 8 / A2 | Persistent township membership now saved at 12; production observations still absent | S1 verified membership; S4 action-derived statistics | implemented: membership; unresolved: statistics |
 | Roadmap 9 / A7 / G | Skills/practice/apprenticeship exist; no held technique | S5; contact/time teaching, provenance/loss, practice control | unresolved |
 | Roadmap 10 / A5 / F | No civic authority; household head has no political decisions | S1 organiser + support/outcome; S2 rival support/factions/departure | unresolved |
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
@@ -52,13 +52,13 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | D12 / A aggregate reserve/shelter benefit | Historical null/mixed evidence is not failure of mechanism | S6; town paired controls/nudges/ablations, accept null | unresolved |
 | B dependency map | Migration is not required for organisation within a settlement | Owner programme supersedes audit ordering; S1 before S3 | superseded |
 | A9 performance | 28/100/250 profiles exist; historical timings are legacy | S6; current rules representative profile timings, 300 only if useful | unresolved |
-| H docs: CLAUDE rules summary | Stale candidate version descriptions | S0/S1 update current policy with lineage mapping | unresolved |
+| H docs: CLAUDE rules summary | Current civilisation section names current generation and reconciliation | S0-S2 agent guidance corrected | verified |
 | H docs: README/ECONOMY population, animals, markets | Audit leads, update when corresponding subsystem checked | S4 | unresolved |
 | H docs: RICH_WORLD traditionsTick, fish/dry spell | Audit leads, no behavioural repair inferred | S5 | unresolved |
-| H docs: AUTONOMY R5/R6 | Predates trust/debt/heard | S2 | unresolved |
-| H docs: INHABITANT missing AGENTS | Stale file-existence claim | S2 | unresolved |
+| H docs: AUTONOMY R5/R6 | Source already has trust/debt/heard; obsolete absence claims corrected | S2 | verified |
+| H docs: INHABITANT missing AGENTS | Old AGENTS absence statement marked superseded | S2 | verified |
 | H docs: midwinter calendar vs inherited tradition | Calendar is not transmission | S5 | unresolved |
-| H docs: grievance side-by-side easing | Audit says bondWorkers never calls easing | S2 recheck and correct prose | unresolved |
+| H docs: grievance side-by-side easing | No side-by-side easing call; unsupported module comment corrected, no new effect invented | S2 | verified |
 | H dead-code list | No programme dependency established | No unrelated cleanup | not applicable |
 
 ## Experiment contracts (not results)
@@ -91,7 +91,7 @@ conversation. Support, refusal, urgent withdrawal, supplied items, actual work a
 completion/failure persist. Organiser death conveys no inherited office; volunteers
 may continue. Only participants near an outcome record personal civic experience;
 that bounded memory nudges later recruitment acceptance. Public title confers no
-access to private stock. Current product entrypoints use 12; lab ablation is
+access to private stock. At S1 product entrypoints used 12; lab ablation is
 `rich-no-townships`. Existing worlds are not migrated. Civic references are validated
 on load and included in compact hashes as well as complete saves.
 
@@ -107,7 +107,7 @@ witnessed outcomes to 24; a project has at most 12 respondents including organis
 Buildings and ownership remain authoritative after old project detail expires.
 
 `history.ts` derives household/project views from typed records; missing formation
-causes say unknown. Full relationship history remains S2. Inspector shows township,
+causes say unknown. Relationship history was subsequently delivered in S2a. Inspector shows township,
 organiser, support, refusals, missing materials/work and contributions/outcome.
 `construction_access.ts` conservatively protects connectivity around **new public
 storehouse footprints**, rechecked at placement; D3 for other buildings remains open.
@@ -139,7 +139,39 @@ hid volunteered material; full work credit could overcount the final tick; missi
 civic hash fields; saved civic reference checks; public-owner wording; overlapping
 header grid rows. Each repaired with the relevant contract/build/browser checks.
 
-Next executable work: S2 pure relationship-history views and the broken-promise
-counterfactual B before changing existing social weights. Do not tune scores to force
-a positive result. Then audit D4/D8 against that evidence; D3 broader route safety,
-D6/D7/D10/D11 and S3-S6 remain unresolved as mapped above.
+## Delivered S2a: social history and single counting (2026-10-24)
+
+Version 13 preserves v12 continuation; no general social weights were raised. Social
+execution owns outcomes; `social_memory.ts` retains at most 32 typed receipts per
+person after requests expire. Absent askers do not receive remote receipts. History
+views derive current relations and receipts, exposing unknown event links honestly.
+The alternative of an unlimited event graph was rejected: it would duplicate truth
+and grow indefinitely. The bounded view is not a complete lifelong biography.
+
+D8: marked directly applied deeds retain their provenance but do not add reputation
+again; retold stories affect reputation without a second permanent scalar adjustment.
+An already known story is also marked if a direct consequence follows. Legacy rules
+remain unchanged; `rich-no-reputation-dedup` restores old weighting for lab comparison.
+Memory markers and receipts are saved/hashed. No currency, offices or factions added.
+
+B contract: 9 fixed generosity/affinity contexts, same present physical state, one
+stipulated prior work commitment (40 work versus 0), broken control plus nudge:1/2.
+Before correction v12 willingness differences were .113/.134; at v13 .0255/.0465.
+At v13 one of the six contexts with an actual conversation changed 2-wood fulfilment
+into refusal. Three contexts had no answered conversation, not observed refusals.
+All top-five work rankings remained identical; all broken nudges matched the broken
+control action. Every ledger balanced. This demonstrates a mechanism; it is not
+population benefit or spontaneous emergence. Raw reports retain both rule versions.
+
+Verification: full suite 1037 tests / 107 files; build and typecheck passed. Final
+small review repairs (counted-story hash, loaded-person test) passed 7 focused tests
+including unchanged v12 continuation. Historical golden script matched. Browser
+script passed 7 checks; kept/broken screenshots visually inspected: real conversation,
+wood transfer/refusal, typed receipts and grievance visible. Whole saved state stays
+identical during inspection. Review found and fixed repeat-story marker handling;
+no failing tests were weakened. Faction/rival organiser politics remains S2b.
+
+Next executable work: D4 local death knowledge (current lifecycle/mood notify all
+kin/friends) and D6 durable birth accounting (inspect uses rolling event regex), then
+S2b competing organisers. Pin v13 continuation before behavioral changes. General
+route safety, relocation, trade, knowledge/generations and performance remain open.

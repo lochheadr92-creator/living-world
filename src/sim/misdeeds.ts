@@ -35,7 +35,7 @@ export function onTheft(world: World, thief: Person, b: Building, units: number)
     if (!w.alive || w === thief || w.pose === 'sleep') continue;
     if (hyp(w.x - b.x - b.w / 2, w.y - b.y - b.h / 2) > SEEN_FROM) continue;
     seen++;
-    noteDeed(world, w, thief, 'thief', story);
+    noteDeed(world, w, thief, 'thief', story, true);
     const owner = owners.includes(w);
     adjustRel(w, thief.id, world.tick, { aff: owner ? -12 : -5, trust: owner ? -18 : -8, note: owner ? `caught ${thief.name} at our store` : `saw ${thief.name} steal` });
     if (owner) {
