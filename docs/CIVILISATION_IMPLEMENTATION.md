@@ -3,12 +3,12 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 25
+## Exact continuation snapshot — after version 26
 
-- Current product rules **25**: operational retention and indexed history after transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
+- Current product rules **26**: spatial finite-deposit geology after operational retention and indexed history after transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
   following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
   `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD
-  for the commit containing this snapshot. Immutable v24 reference: **7444c80**; v23 reference: **0878bf4**; v22 reference: **f6496e5**; v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
+  for the commit containing this snapshot. Immutable v25 reference: **5ba25f9**; v24 reference: **7444c80**; v23 reference: **0878bf4**; v22 reference: **f6496e5**; v21 reference: **ee822f3**; v20 reference: **05cf09e**; v19 reference: **801123e**.
 - Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
   birth counter, competing project coordinators and persistent alignment factions; physical-market prerequisite;
   S5 novice child proficiency, one held technique with instruction and one transmitted household practice; general D3;
@@ -23,18 +23,19 @@ This is the continuation record; the audit remains dated evidence, not current a
 - Natural smoke: meadow/Normal/28, four days, control + nudge + no-relocation: no sustained
   hardship or proposals; conserved goods and 28 survivors in each. This is not an ensemble.
 - Protected original/candidate work and main-worktree untracked `_find_moments_rich.ts`
-  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v24 references or silently
+  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v25 references or silently
   reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
 - Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: S4/C environmental opportunity differences.** The current
-multi-camp generator repeats the same deposit recipe; design meaningful seeded local
-geology without fabricated trade shortages or inhabitant omniscience. Preserve ordinary
-food/water viability and actual production-derived specialisation. Pin v25 continuation
-before changing generation (26 is next candidate; recheck concurrent work), then verify
-local discovery, conservation, save/replay and rendered differences. Afterwards finish
-D12/A and natural C-H experiment dispatch plus mature-world performance.
-Keep F1-F5 queued until the remaining programme and required verification are complete.
+**Next executable task: remaining programme measurements and continuation.** Major
+mechanism slices are implemented, including spatial mineral opportunities (26). Add
+only the observation/tally support needed to measure new civic/learning outcomes in
+the existing lab; prepare pinned-source, resumable user-machine runs for D12/A and
+natural C-H, plus mature-world performance. Follow the expensive-run policy and do
+not report unrun measurements as results. Natural B/F causal contracts already exist.
+Keep F1-F5 queued until the programme's required verification is satisfied; it has not
+been silently declared complete. Any further behaviour change needs a v26 reference
+and fresh generation (27 is next candidate; recheck concurrent work).
 
 S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
 succession, rescue or return expedition. Separation prevents founding, urgent needs can
@@ -93,7 +94,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | Roadmap 10 / A5 / F | V15 rival coordinators; v23 persistent accepted choices and derived factions affect later support | S2 real conversation counterfactual, mandate, death/departure/purity/save/browser | verified: bounded political mechanism; natural F ensemble unresolved |
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
 | A4 economy / E | V22 personally heard lead, physical exchange journey, existing barter and receipt history | S4b contracts, rendered journey/swap/return/failure; one-day control/nudge/ablation null | implemented and verified first slice; natural exchange/dependence unresolved |
-| A6 environment / C | Global weather and symmetric camps; v21 actual production observations now exist | S4; sustained actual action/flow differences under opportunities | unresolved |
+| A6 environment / C | V26 seeded spatial finite-mineral quantities; source positions/food/knowledge unchanged; v21 actual production views | S4; generation/save/conservation contracts, rendered quantities, two-day control/nudge/ablation null for production effect | verified local differences; sustained causal C unresolved |
 | A8 generations / H | V24 sharing-supper practice has personal holders, meal contact, provenance and later invitation effect | S5; eight contracts, mid-meal continuation and rendered history; natural generation timing unchanged | verified bounded transmission; natural H unresolved |
 | A9 replay/AI | Existing seeded stepping, replay, legal-option model boundary | Every stage continuation/save/load/purity; preserve seam | implemented |
 | D3 route blocking | V18 private site reproduced over a living occupant; v19 extends access protection to all new footprints | S3 prerequisite; corridor, door, delayed occupant, upgrade and mid-layout continuation | verified |
@@ -733,3 +734,33 @@ Normal/28 **0.53 ms/tick**, Large/100 **2.17**, Huge/250 **8.68**. Ledger/tool c
 `scripts/bench.ts --current --profile <profile> --days 1 --seed meadow --arrivals off
 --check 800 --quiet --out <file>`. Compact evidence: `performance-v25-summary.json`.
 No new 300-person workload was needed; mature-world costs remain unmeasured.
+
+
+## Rules 26 — spatial mineral opportunities
+
+Finite clay, ore and outcrop amounts now vary with independent seeded spatial geology.
+Camp locations, deposit locations, normal food/water and starting equipment are preserved.
+Residents gain no world-truth access or assigned occupation. Existing source inspection
+shows the quantities; township production still reports actual activity and withholds
+specialisation claims until repeated activity exists. ECONOMY.md records the ownership,
+alternative, bounds, generation-only ablation and compatibility contract.
+
+Existing modules touched: worldgen applies the pure geology field only when creating
+finite deposits; rulesversion selects new versus historical generation. No new saved
+schema: source amount/max and the initial resource ledger remain authoritative. Immutable
+v25 continuation was captured at `5ba25f9` before implementation.
+
+Verification: `npm test` **1155 tests / 133 files** (89.69 seconds), typecheck/build,
+historical goldens unchanged. Three geology contracts verify deterministic placement,
+unchanged non-mineral sources, RNG state and knowledge-key boundaries, positive finite
+stock, conservation, save continuation and historical generation. Browser: nine passing
+checks; ore quantity and actual township production screenshots inspected.
+Evidence: `civic_evidence/geology-page/` and `geology-natural-smoke.json`.
+
+C probe: meadow/Large/100, two days, control + nudge + generation-only no-geology. The
+four towns' nearest-deposit ore totals are 38/66/55/52 in control versus 43/50/49/48
+without geology (this diagnostic partition is not ownership or inhabitant knowledge).
+Control and ablation production are identical over two days; nudge differs. All arms
+have 100 survivors and conserved goods. No clay/ore production occurred. This valid
+short-window null does not establish sustained specialisation, trade dependence or
+benefit, and no quantity range was tuned to force an outcome.

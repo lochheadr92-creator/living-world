@@ -414,3 +414,38 @@ load. `rich-no-exchange-journeys` disables the new opportunities for lab compari
 Mid-travel and mid-conversation complete-state save/load continuations are contract-tested.
 Staged fixture setup walks to and from the meeting via normal movement and labels the
 situation explicitly. It is mechanism evidence, not autonomous emergence.
+
+
+## Local mineral opportunities (rules 26)
+
+Finite deposits now vary with seeded spatial geology. `geology.ts` owns a pure field
+for each of clay, ore and outcrop stone, smooth over 48-tile patches with independent
+seeded layers. A deposit's ordinary seeded quantity is multiplied by a factor between
+0.55 and 1.65 and rounded; every placed deposit still contains at least two units.
+This adds no camp occupation, forced missing commodity, purchase requirement or
+runtime resource gift. The starting stock ledger records the actual generated goods.
+Food, water, trees, loose stone, location/reachability, equipment and RNG draw count
+are unchanged. Different quantities are visible through the existing source inspector.
+
+Alternative: assign each township a specialty and remove other resources. Rejected:
+that would impose economic roles and manufacture a need to trade. Spatial mineral
+layers instead give neighbouring places different opportunities while leaving choices
+and discovery to residents. Camps can still have similar outcomes, and the mechanism
+can have no measurable effect in a short window. Production/flow observations remain
+derived from actual actions, never used to assign jobs or supplied to decisions as
+world knowledge. The existing nearby-camp and first-look starting knowledge is
+preserved exactly; fields are not queried by inhabitants.
+
+Saved source amount/max are authoritative. Geology is consulted only during generation,
+not on save load or replenishment; these deposits are finite. Historical rules retain
+the original quantity recipe. The lab-only generation switch must be installed before
+createWorld. It is deliberately not a post-fork intervention that rewrites goods.
+
+Experiment C short probe: meadow/Large/100, two days, no immigration, current control,
+one-draw nudge and identical generation with geology disabled. Initial opportunities
+vary; control and ablation have identical actual production in this window, while the
+nudge differs. All three retain 100 residents and conserve goods. This is a valid null
+for early production effects, not evidence of sustained specialisation or welfare.
+`civic_evidence/geology-natural-smoke.json` preserves conditions and measurements;
+`scripts/geology_smoke.ts` declares the hypothesis/comparison/interpretation before
+running. Longer multi-seed measurement remains required for natural C/E claims.

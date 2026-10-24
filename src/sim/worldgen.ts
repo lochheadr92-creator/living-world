@@ -1,3 +1,4 @@
+import { depositRichness } from './geology';
 import { runsRulesVersion } from './rulesversion';
 import { foundMembership } from './townships';
 import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
@@ -603,7 +604,9 @@ function placeDeposits(world: World, dg: RNG, hubs: FoundingHub[], reach: Uint8A
       const x = i % W;
       const y = (i / W) | 0;
       if (!free(x, y) || !apart(x, y, spacing)) continue;
-      makeSource(world, type, x, y, Math.max(2, Math.round(dg.range(lo, hi))));
+      const baseline=Math.max(2,Math.round(dg.range(lo,hi)));
+      const amount=Math.max(2,Math.round(baseline*depositRichness(world,type,x,y)));
+      const source=makeSource(world,type,x,y,amount);source.max=Math.max(source.max,amount);
       placed.push({ x, y });
       k++;
       if (type === 'outcrop' || type === 'ore_vein') {

@@ -1,0 +1,56 @@
+{
+  "deposits": [
+    {
+      "id": 4504,
+      "x": 37,
+      "y": 70,
+      "amount": 18,
+      "item": "ore"
+    },
+    {
+      "id": 4511,
+      "x": 105,
+      "y": 33,
+      "amount": 39,
+      "item": "ore"
+    }
+  ],
+  "results": [
+    {
+      "name": "distinct finite deposits",
+      "pass": true
+    },
+    {
+      "name": "deposit 0: actual quantity visible",
+      "pass": true
+    },
+    {
+      "name": "deposit 0: finite cost explained",
+      "pass": true
+    },
+    {
+      "name": "deposit 1: actual quantity visible",
+      "pass": true
+    },
+    {
+      "name": "deposit 1: finite cost explained",
+      "pass": true
+    },
+    {
+      "name": "inspection preserves complete state",
+      "pass": true
+    },
+    {
+      "name": "actual production shown",
+      "pass": true
+    },
+    {
+      "name": "short-run limits stated",
+      "pass": true
+    },
+    {
+      "name": "no runtime exceptions",
+      "pass": true
+    }
+  ]
+}

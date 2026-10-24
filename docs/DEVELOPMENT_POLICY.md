@@ -297,3 +297,13 @@ whereabouts and permanent learning provenance are preserved. Historical lookup u
 an unsaved append-only index with the same first-match result on every rules version.
 `rich-no-memory-retention` retains operational records for lab comparisons. Immutable
 v24 continuation was committed first at `7444c80`. Details and limits: SCALING.md.
+
+### Rules version 26 — spatial finite-deposit geology
+
+New current worlds vary clay, ore and outcrop quantities through independent seeded
+spatial fields. Source placement, ordinary food/water, starting equipment, generation
+RNG draws and inhabitant knowledge boundaries remain unchanged. Existing saved source
+amounts are authoritative; loading never recomputes geology. Rules-25 continuation was
+pinned at `5ba25f9`. `setDepositGeology(false)` is a generation-only lab ablation;
+ordinary post-fork interventions cannot retroactively change initial geology. The
+bounded control/nudge/ablation probe is `scripts/geology_smoke.ts`. See ECONOMY.md.
