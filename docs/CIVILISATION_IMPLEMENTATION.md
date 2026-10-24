@@ -75,3 +75,71 @@ holder with/without contact; transmission time, provenance, loss. H: naturally t
 multi-generation runs with/without transmission; holder lineage and changed actions.
 Workloads for C-H must be fixed before running once their mechanisms exist. No long
 ensemble is launched here; use dispatcher/detached-launch skills for user-machine runs.
+
+## Delivered stage S0 and S1 (2026-10-24)
+
+**S0 verified:** 1013 tests / 103 files passed before version 12. Candidate D1/D2
+and courier fixes integrated; candidate tests retained, gates moved to 11. Local-main
+continuation values and historical goldens unchanged. Save lineage tests reject
+ambiguous 8/9 bytes before replacing any world. D5 already implemented on local main.
+
+**S1 implemented and verified at the contract/runtime level:** version 12 creates
+persistent township identities at household formation. A household retains membership
+while walking. Public storehouse proposals use the existing decision, siting and
+construction activities, with a recorded organiser and an explicit voluntary recruit
+conversation. Support, refusal, urgent withdrawal, supplied items, actual work and
+completion/failure persist. Organiser death conveys no inherited office; volunteers
+may continue. Only participants near an outcome record personal civic experience;
+that bounded memory nudges later recruitment acceptance. Public title confers no
+access to private stock. Current product entrypoints use 12; lab ablation is
+`rich-no-townships`. Existing worlds are not migrated. Civic references are validated
+on load and included in compact hashes as well as complete saves.
+
+Owner: `townships.ts` owns identity/project/participation/outcome records. Existing
+social conversation, work options, resource transfer and construction own execution.
+Alternative considered: new group planner/action language; rejected because it would
+duplicate navigation, reservations and physical work. Selected: attach the civic
+contract to existing public storehouse work and existing promises. Tradeoff: only
+storehouses and first-response participation in this slice, not rival proposals,
+elected offices, rejoining, factions, taxes or coercion. A township can disagree and
+leave its project unfinished. Recent closed project detail is bounded to 24; personal
+witnessed outcomes to 24; a project has at most 12 respondents including organiser.
+Buildings and ownership remain authoritative after old project detail expires.
+
+`history.ts` derives household/project views from typed records; missing formation
+causes say unknown. Full relationship history remains S2. Inspector shows township,
+organiser, support, refusals, missing materials/work and contributions/outcome.
+`construction_access.ts` conservatively protects connectivity around **new public
+storehouse footprints**, rechecked at placement; D3 for other buildings remains open.
+
+Verification: typecheck; build; full suite 1027 tests / 105 files; standalone golden
+script all matches; diff whitespace check. After review repairs, township contracts
+expanded to 16 passing tests and focused v10/v11 continuation checks passed. Contract
+covers stable membership, local-home trigger and actual site marking, explicit
+accept/refuse, withdrawal, public ownership, conservation, exact work, observer full
+state purity, mid-promise and mid-haul save/load, invalid membership rejection,
+organiser death and corridor obstruction. Browser script passed 10 checks; active,
+site and completed screenshots were visually inspected. Initial header overlap was
+found by image inspection and repaired with a measured layout assertion.
+
+Staged physical outcome (`scripts/civilisation_scene.ts`): Ada delivered 6 wood,
+Ben 4 wood + 4 stone, total actual work 640; public storehouse completed, balanced
+ledger. Offered-option controller selects legal build/haul options; this is NOT an
+autonomous emergence claim. Script/fixture are labelled staged in the app.
+Unmodified `river`, Normal, arrivals off, 14400 ticks: final candidate had one
+persistent township and **no civic proposal** in this window, ledger balanced.
+An earlier pre-access-check candidate had a proposal/refusal; do not attribute it
+to the final candidate. No aggregate benefit, completion frequency or performance
+claim. A-H ensembles remain unrun. `civic_evidence` contains small reports/screenshots;
+large local saved snapshots are reproducible and ignored.
+
+S1 review findings closed: original courier call signature mismatch; candidate store
+meal constant leaked to v10 (caught by immutable reference); private-plan reservations
+hid volunteered material; full work credit could overcount the final tick; missing
+civic hash fields; saved civic reference checks; public-owner wording; overlapping
+header grid rows. Each repaired with the relevant contract/build/browser checks.
+
+Next executable work: S2 pure relationship-history views and the broken-promise
+counterfactual B before changing existing social weights. Do not tune scores to force
+a positive result. Then audit D4/D8 against that evidence; D3 broader route safety,
+D6/D7/D10/D11 and S3-S6 remain unresolved as mapped above.

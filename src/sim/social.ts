@@ -1,3 +1,4 @@
+import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { runsRulesVersion } from './rulesversion';
@@ -932,6 +933,7 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
     }
     case 2: {
       phaseRespond(world, c, A, B, d);
+      recordProjectResponse(world, A, B, reqOf(world, c));
       c.phase = 3;
       c.nextAt = world.tick + 22;
       break;
@@ -1243,6 +1245,9 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     case 'recruit': {
       if (!req) break;
       const siteBelief = A.beliefs[d.siteId ?? 0];
+      if (projectAt(world, d.siteId ?? 0) && !canInvite(world, A, B, d.siteId ?? 0)) {
+        settle(world, req, 'declined', 'not eligible for this township project'); break;
+      }
       const rel = B.relations[A.id];
       const site0 = world.byId.get(d.siteId ?? 0);
       const cap = (site0 && site0.ent === 'site' ? site0.maxWorkers : 3) + 1;
@@ -1252,8 +1257,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         A.asked[B.id] = world.tick - 400;
         break;
       }
-      const w = 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
-      if (w >= 0.55 && siteBelief && world.byId.has(d.siteId ?? 0)) {
+      const w = (projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id) : 0) + 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
+      if (w >= 0.55 && siteBelief && (projectAt(world, d.siteId ?? 0) || world.byId.has(d.siteId ?? 0))) {
         observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
         req.status = 'promised';
@@ -1263,7 +1268,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         addEvent(world, 'social', `${B.name} agreed to help ${A.name} build.`, [A.id, B.id], A.x, A.y);
       } else {
         bubble(world, B, D.saying(D.RESP_UNWILLING, B.id, A.id, world.tick >> 5), 'say', 52);
-        settle(world, req, 'declined', 'busy');
+        settle(world, req, 'declined', projectAt(world, d.siteId ?? 0) ? (personalDriveMax(world, B) > 35 ? 'own needs take priority' : (rel?.affinity ?? 0) < 0 ? 'does not want to work with this organiser' : 'not willing to commit to this proposal') : 'busy');
       }
       break;
     }

@@ -1,3 +1,4 @@
+import { setTownships, townshipsOn } from '../../src/sim/townships';
 // The counterfactual lab: fork a saved world, change one thing, run it forward, and compare it with the untouched control.
 //
 // A world is deterministic and a save round trip is exact (tests/save.test.ts), so a fork is a true "same world, one difference" pair.
@@ -220,6 +221,7 @@ export function parseIntervention(specIn: string): Intervention {
       },
     };
   }
+  if (kind === 'rich-no-townships') return { spec: label, summary: 'township organisation disabled; physical work and other rules unchanged', apply: () => 'townships off', install() { const was = townshipsOn(); setTownships(false); return () => setTownships(was); } };
   if (kind === 'rich-no-table-eating') {
     return {
       spec: label,

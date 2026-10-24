@@ -1,3 +1,4 @@
+import { foundMembership } from './townships';
 import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
 import { createBuilding } from './buildings';
 import { addItem, emptyLedger, snapshotInitial } from './economy';
@@ -790,6 +791,7 @@ function populate(world: World, gen: RNG, population: number, campX: number, cam
   specs.forEach((members, hIdx) => {
     const hh = createHousehold(world, gen);
     captureHouseholdCamp(world, hh, campX, campY);
+    foundMembership(world, hh, campX, campY);
     households.push(hh);
     const home = hIdx < shelterCount && homes[hIdx].x >= 0 ? homes[hIdx] : null;
     let lean: Building | null = null;

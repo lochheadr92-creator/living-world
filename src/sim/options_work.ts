@@ -1,3 +1,4 @@
+import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
 import { explainsHousing } from './shelter';
@@ -141,6 +142,9 @@ export function siteNoun(why: string, btype?: string): string {
 }
 
 export function siteRelation(ctx: Ctx, b: Belief): { ok: boolean; mult: number; why: string } {
+  const member = participation(ctx.world, ctx.p, b.id);
+  if (!mayWorkProject(ctx.world, ctx.p, b.id)) return { ok: false, mult: 0, why: 'has not agreed to this public project' };
+  if (member?.status === 'supporting') return { ok: true, mult: 1, why: 'a public project I support' };
   if (b.hh === ctx.p.hhId) return { ok: true, mult: 1, why: 'my household’s' };
   // a workshop, granary or hall will serve everyone: people are glad to help raise one
   if (b.btype && isFacilityType(b.btype as BuildingType)) return { ok: true, mult: 0.38 + 0.5 * ctx.p.traits.generosity + 0.22 * ctx.p.traits.sociability, why: 'a shared project' };
@@ -252,6 +256,7 @@ export interface MatNeed {
 export function relevantSites(ctx: Ctx): { b: Belief; rel: ReturnType<typeof siteRelation> }[] {
   const out: { b: Belief; rel: ReturnType<typeof siteRelation> }[] = [];
   for (const b of beliefsByKind(ctx.p, ['site'])) {
+    if (!mayWorkProject(ctx.world, ctx.p, b.id)) continue;
     const rel = siteRelation(ctx, b);
     const committed = ctx.p.commitments.some((c) => c.status === 'active' && c.siteId === b.id);
     if (rel.ok || committed) out.push({ b, rel: committed ? { ok: true, mult: Math.max(rel.mult, 1), why: 'a promise I made' } : rel });
@@ -475,7 +480,7 @@ function optSites(ctx: Ctx): void {
       addBlocked(ctx, 'build', 'Work on the building site', b.id, `tried recently: ${fail.reason}`, 'site');
       continue;
     }
-    const committed = p.commitments.some((c) => c.status === 'active' && c.siteId === b.id);
+    const committed = participation(world, p, b.id)?.status === 'supporting' || p.commitments.some((c) => c.status === 'active' && c.siteId === b.id);
     // deliver what I am carrying. A promise outranks a plan of my own, so a promised delivery may still use material my own plan
     // had spoken for (the plan then says, truthfully, that it is short again); an unpromised errand may not.
     // The second exception is a plan's OWN delivery: a shelter plan that spoke for four wood for THIS site must be able to see
@@ -648,7 +653,7 @@ function optPlanBuild(ctx: Ctx): void {
       tag: 'build',
       make: () => {
         const home = ctx.home;
-        const hub = baseHub(world, p, home);
+        const hub = (hasTownships(world) && type === 'storehouse' ? townshipOf(world, p) : undefined) ?? baseHub(world, p, home);
         const ax = home ? home.x + home.w / 2 : hub.x;
         const ay = home ? home.y + home.h / 2 : hub.y;
         let spot = null as { x: number; y: number } | null;
@@ -710,7 +715,9 @@ function optPlanBuild(ctx: Ctx): void {
   // shared storehouse, once the settlement has a few solid homes
   // (with scaled rules, "the settlement" is what lies within the settlement radius; with the ordinary rules it is the whole world)
   const sameSettlement = (x: number, y: number): boolean => within(rules.facilityRadius, anchor.x, anchor.y, x, y);
-  const huts = world.buildings.filter((b) => isSolidHome(b.type) && sameSettlement(b.x + b.w / 2, b.y + b.h / 2)).length;
+  const huts = hasTownships(world)
+    ? beliefsByKind(p, ['building']).filter(b => b.btype && isSolidHome(b.btype as BuildingType) && sameSettlement(b.x, b.y)).length
+    : world.buildings.filter((b) => isSolidHome(b.type) && sameSettlement(b.x + b.w / 2, b.y + b.h / 2)).length;
   // How many stores they know of in their own settlement, standing or being built. The ordinary world allows one, so this is the
   // rule it always had; a town may come to want another, and does so once the settlement has a solid home for each store it has
   // (a hundred people carrying everything to one hut is what the single allowance did to them).

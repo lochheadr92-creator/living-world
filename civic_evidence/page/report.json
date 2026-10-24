@@ -1,0 +1,57 @@
+[
+  {
+    "name": "active: header rows do not overlap",
+    "pass": true
+  },
+  {
+    "name": "active: township and organiser visible",
+    "pass": true,
+    "detail": {
+      "status": "active",
+      "site": 8,
+      "organiser": 2
+    }
+  },
+  {
+    "name": "active: participant contribution and outcome visible",
+    "pass": true,
+    "detail": "Township: WillowbankMoodContentHealth100On their mindWhat are they up to?MoreWhat are they doing?Between tasks (last chose “Ask Ben to help with the storehouse”).Why did they choose it?Weighed up: could use a hand with the building +39 · walking −2What are they trying to achieve?—What is stopping them?Nothing in the way.What happened after their last attempt?Looking for timber → interrupted: something better came up (9s ago)What are they set on?Township & shared workWillowbank: 2 households. Membership belongs to the household and does not change with walking.Shared storehouse #8: active. Organiser: Ada.Proposed: our known households need a shared store. Voluntary support: 1.Still needed: 4 wood, 4 stone; 602 work.Ada: supporting — proposed this shared storehouse; supplied 6 wood; 38 work.Ben: supporting — Ben will help build; supplied no materials; 0 work.Household historyWillow household formed at tick 0; formation cause is not recorded.Members: Ada.No current home.Request #23: Ada asked Ben; promised: Ben will help build; promise #24; site #8.Needs858072888483Carrying×4nothing4 / 12ToolsnoneConversationTalking nowStepOutcomeLast conversationjust nowBen· asking for help with a buildingStepOutcomePromised (Ben will help build)Shared mealThis mealAt· hosted byGuestsOn the tableHow it endedLast mealAt· hosted byGuestsOn the tableHow it endedPromisesQuarrelsWorriesNearbyPeople1Requests1Recent4Knows3FamilyTraitsOpportunities nearbyNothing nearby that they could use right now.RelationshipsThey have not got to know anyone yet.RequestsNo requests lately.Recent experiencesNothing much has happened yet.What they knowShow remembered places on the mapFamilyNo family nearby that they know of.Traits & skillsSkillsWhat has paid themWhat they have heard of peopleDebug · last decision"
+  },
+  {
+    "name": "active: viewing leaves saved state untouched",
+    "pass": true
+  },
+  {
+    "name": "site exposes public ownership and missing inputs",
+    "pass": true,
+    "detail": "Storehouse (under construction)Marked out 41s agoBuilding progress6%Work has paused for lack of 4 wood, 4 stone.Materials suppliedWood6 / 10Stone0 / 4Nobody working right nowWill makeAt workMade here so farCan make hereForpublic useStarted byAdaStatuswaiting for 10 wood, 4 stoneDelivered, not yet usedThe projectWhyA shared store for the settlement.MaterialsStill needed: 4 wood, 4 stone. Work stops short of the part that needs them.Who has put something inWillow household100% of the effortTownship projectShared storehouse #8: active. Organiser: Ada.Proposed: our known households need a shared store. Voluntary support: 1.Still needed: 4 wood, 4 stone; 602 work.Ada: supporting — proposed this shared storehouse; supplied 6 wood; 38 work.Ben: supporting — Ben will help build; supplied no materials; 0 work."
+  },
+  {
+    "name": "completed: header rows do not overlap",
+    "pass": true
+  },
+  {
+    "name": "completed: township and organiser visible",
+    "pass": true,
+    "detail": {
+      "status": "completed",
+      "site": 8,
+      "organiser": 2,
+      "building": 37
+    }
+  },
+  {
+    "name": "completed: participant contribution and outcome visible",
+    "pass": true,
+    "detail": "heir mindWhat are they up to?MoreWhat are they doing?Resting (21% of this task).21%Why did they choose it?Weighed up: tired +9What are they trying to achieve?To recover energy (42/100) (here).What is stopping them?Nothing in the way.What happened after their last attempt?Exploring → success: done (just now)What are they set on?Be fed, watered and under shelter before dark. Step: get to my hut — settled on, not started.Township & shared workWillowbank: 2 households. Membership belongs to the household and does not change with walking.Shared storehouse #8: completed. Organiser: Ada.Proposed: our known households need a shared store. Voluntary support: 1.Outcome: materials supplied and construction completed.Ada: supporting — proposed this shared storehouse; supplied 6 wood; 38 work.Ben: supporting — Ben will help build; supplied 4 wood, 4 stone; 601 work.Household historyWillow household formed at tick 0; formation cause is not recorded.Members: Ada.No current home.Request #23: Ada asked Ben; promised: Ben will help build; promise #24; site #8.Needs614843876867Carrying×2nothing2 / 12ToolsnoneConversationTalking nowStepOutcomeLast conversation1.3 min agoBen· asking for help with a buildingStepOutcomePromised (Ben will help build)Shared mealThis mealAt· hosted byGuestsOn the tableHow it endedLast mealAt· hosted byGuestsOn the tableHow it endedPromisesQuarrelsWorriesNearbyPeople1Requests1Recent10Knows3FamilyTraitsOpportunities nearbyNothing nearby that they could use right now.RelationshipsThey have not got to know anyone yet.RequestsNo requests lately.Recent experiencesNothing much has happened yet.What they knowShow remembered places on the mapFamilyNo family nearby that they know of.Traits & skillsSkillsWhat has paid themWhat they have heard of peopleDebug · last decision"
+  },
+  {
+    "name": "completed: viewing leaves saved state untouched",
+    "pass": true
+  },
+  {
+    "name": "no browser runtime exceptions",
+    "pass": true,
+    "detail": []
+  }
+]

@@ -1,3 +1,4 @@
+import { creditProject, mayWorkProject } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { LOAN_TERM, NUTRITION, SOURCE_SKILL, SKILL_MAX, WATER_VALUE, WORK } from './constants';
@@ -511,6 +512,7 @@ registerHandler('haul', {
       delBelief(p, a.targetId);
       return 'the site is gone (finished or abandoned)';
     }
+    if (!mayWorkProject(world, p, h.id)) return 'has not agreed to this public project';
     observe(world, p, h);
     a.duration = transferDuration(a.data.items ?? {});
     a.tx = h.x + h.w / 2;
@@ -522,6 +524,7 @@ registerHandler('haul', {
     if (a.progress < a.duration) return 'continue';
     const site = world.byId.get(a.targetId);
     if (!site || site.ent !== 'site') return 'fail:the site is gone';
+    if (!mayWorkProject(world, p, site.id)) return 'fail:participation withdrawn';
     const want = (a.data.items ?? {}) as Record<string, number>;
     let moved = 0;
     for (const k of Object.keys(want)) {
@@ -530,6 +533,7 @@ registerHandler('haul', {
       if (n <= 0) continue;
       const m = transfer(world, p.inv, site.delivered, 9999, k as ItemKind, n, 'person:' + p.id, 'site:' + site.id, 'delivery');
       moved += m;
+      if (m > 0) creditProject(world, p, site.id, k as ItemKind, m);
       if (m > 0 && site.contrib) site.contrib[p.hhId] = (site.contrib[p.hhId] ?? 0) + m;
       if (m > 0) a.data.moved = { ...(a.data.moved ?? {}), [k]: ((a.data.moved ?? {})[k] ?? 0) + m };
     }

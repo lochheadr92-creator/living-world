@@ -1,3 +1,4 @@
+import { validateTownships } from '../sim/townships';
 // Optional save / load of the whole world (compressed JSON): into IndexedDB where the browser has it, which has no 5 MB cap, and
 // into localStorage where it does not (or where writing to it fails). A small description of the save, which the menu reads at once,
 // always lives in localStorage.
@@ -214,6 +215,7 @@ export function deserializeWorld(json: string): World {
   if (!verdict.ok) throw new Error(`cannot load this world: ${verdict.reason}`);
   validateSaveLineage(parsed.world.settings?.rulesVersion, parsed.rulesLineage);
   const w = parsed.world as World;
+  validateTownships(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);

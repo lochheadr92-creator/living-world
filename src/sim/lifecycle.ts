@@ -1,3 +1,4 @@
+import { foundMembership } from './townships';
 import { fireNear, nearestHub } from './settlements';
 import { hasHabitation, indoorHome } from './habitation';
 import { mourn, think } from './mood';
@@ -371,6 +372,7 @@ export function immigrationTick(world: World): void {
     const kind: 'single' | 'couple' | 'family' = pop + 3 <= rules.arrivalGroupCap && rollKind < 0.18 ? 'family' : pop + 2 <= rules.arrivalGroupCap && rollKind < 0.46 ? 'couple' : 'single';
     const hh = createHousehold(world, world.rng);
     captureHouseholdCamp(world, hh, x, y);
+    foundMembership(world, hh, x, y);
     const group: Person[] = [];
     const arrive = (age: number, sex: 'f' | 'm' | undefined, parents: number[] | undefined, dx: number, dy: number): Person => {
       const person = createPerson(world, world.rng, { age, sex, hhId: hh.id, x: x + dx, y: y + dy, parents });

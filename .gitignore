@@ -18,3 +18,8 @@ gate_run/
 plans_rich_out/
 gates_rich_out/
 long_out/
+
+# Reproducible large civic saves; retain small reports and rendered evidence.
+civic_evidence/*active.json
+civic_evidence/*completed.json
+civic_evidence/final.json

@@ -1,3 +1,5 @@
+import { preservesAccess } from './construction_access';
+import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WORK, isHomeType, isSolidHome } from './constants';
@@ -59,6 +61,7 @@ registerHandler('build', {
       delBelief(p, a.targetId);
       return 'the site is already finished or gone';
     }
+    if (!mayWorkProject(world, p, site.id)) return 'has not agreed to this public project';
     observe(world, p, site);
     const id = claimSlot(world, p.id, site, a.expire - world.tick + 10);
     if (!id) return 'too many people are already working there';
@@ -72,6 +75,7 @@ registerHandler('build', {
     if (!site || site.ent !== 'site') {
       return a.cycle > 0 ? 'done' : 'fail:the site is gone';
     }
+    if (!mayWorkProject(world, p, site.id)) return 'fail:participation withdrawn';
     faceToward(p, a.tx, a.ty);
     const cap = site.workTotal * Math.min(1, 0.06 + allowedFraction(site));
     if (site.work >= cap - 1e-9) {
@@ -86,7 +90,9 @@ registerHandler('build', {
     a.data.waited = 0;
     a.blocked = '';
     const rate = (p.skills.build * (p.needs.energy < 25 ? 0.75 : 1) * (1 - 0.1 * world.weather.rain)) / taskMultiplier(world, p, 'build');
+    const previousWork = site.work;
     site.work = Math.min(site.workTotal, site.work + rate);
+    creditProject(world, p, site.id, null, site.work - previousWork);
     site.lastWorkTick = world.tick;
     site.status = 'under construction';
     a.progress++;
@@ -313,7 +319,9 @@ registerHandler('plan_site', {
     if (!up) for (let yy = sy; yy < sy + d.h; yy++) for (let xx = sx; xx < sx + d.w; xx++) if (!isFreeLand(world, xx, yy)) return 'fail:someone built there first';
     const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0, { x: sx + d.w / 2, y: sy + d.h / 2 });
     if (why) return `fail:${why}`;
+    if (type === 'storehouse' && hasTownships(world) && !preservesAccess(world, sx, sy, d.w, d.h)) return 'fail:the footprint would obstruct access';
     const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
+    proposeProject(world, p, site, a.goal);
     observe(world, p, site);
     const hh = householdOf(world, p);
     const verb = up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';

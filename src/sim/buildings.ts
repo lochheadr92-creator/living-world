@@ -1,3 +1,5 @@
+import { preservesAccess } from './construction_access';
+import { finishProject, hasTownships } from './townships';
 import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
 import { evacuateHome } from './habitation';
 import { addItem, isEmptyItems, cloneItems } from './economy';
@@ -224,6 +226,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
   addFx(world, 'built', b.x + b.w / 2, b.y + b.h / 2, b.id);
   const ownerText = isFacilityType(site.type) ? (owner ? ` for the ${world.households.find((h) => h.id === owner)?.name ?? ''} household` : ' for everyone') : hh ? ` for the ${hh.name} household` : '';
   addEvent(world, 'build', `${who}${site.type === 'fire' ? ' lit' : ' finished'} a ${label}${ownerText}.`, builder ? [builder.id] : [], b.x + b.w / 2, b.y + b.h / 2);
+  finishProject(world, site, b, 'materials supplied and construction completed');
   return b;
 }
 
@@ -246,6 +249,7 @@ export function destroyBuilding(world: World, b: Building, why: string): void {
 }
 
 export function cancelSite(world: World, site: Site, why: string): void {
+  finishProject(world, site, null, why);
   unregisterSite(world, site);
   if (site.upgradeOf) {
     const old = world.byId.get(site.upgradeOf);
@@ -323,7 +327,7 @@ export function findBuildSpot(
       if (t0 === T.FOREST) score -= 1.5;
       if (t0 === T.STONY) score -= 2.5;
       if (wd <= 6) score += 0.8;
-      if (score > bestScore) {
+      if (score > bestScore && !(type === 'storehouse' && hasTownships(world) && !preservesAccess(world, x, y, d.w, d.h))) {
         bestScore = score;
         best = { x, y };
       }

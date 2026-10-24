@@ -3486,3 +3486,10 @@ button.worker:hover {
     padding: 0 4px;
   }
 }
+
+/* Civic records use the inspector's existing text and colour system. */
+.civic-panel { margin: 8px 12px; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 12px; line-height: 1.55; }
+.civic-panel summary { cursor: pointer; font-weight: 650; }
+.civic-panel p { margin: 8px 0; overflow-wrap: anywhere; }
+
+.p-township { grid-column: 2 / -1; grid-row: 4; font-size: 12px; color: var(--muted); padding-top: 3px; }

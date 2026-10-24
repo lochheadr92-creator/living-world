@@ -1,3 +1,4 @@
+import { foundMembership, hasTownships } from './townships';
 import type { RNG } from './rng';
 import type { Building, Household, Person, World } from './types';
 
@@ -46,6 +47,10 @@ export function addToHousehold(world: World, p: Person, hh: Household): void {
     old.members = old.members.filter((m) => m !== p.id);
     if (old.headId === p.id) old.headId = old.members[0] ?? 0;
     if (old.members.length === 0) dissolveHousehold(world, old);
+  }
+  if (hasTownships(world) && hh.townshipId === undefined) {
+    if (old?.townshipId !== undefined) hh.townshipId = old.townshipId;
+    else foundMembership(world, hh, p.x, p.y);
   }
   p.hhId = hh.id;
   if (!hh.members.includes(p.id)) hh.members.push(p.id);

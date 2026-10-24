@@ -1,3 +1,4 @@
+import type { Township, CivicProject } from './townships';
 import type { RNG } from './rng';
 
 // ───────────────────────────── terrain ─────────────────────────────
@@ -564,6 +565,7 @@ export interface Trade {
 }
 
 export interface Person {
+  civicOutcomes?: { projectId: number; organiserId: number; success: boolean; tick: number }[];
   ent: 'person';
   id: number;
   name: string;
@@ -967,6 +969,7 @@ export interface Animal {
 }
 
 export interface Household {
+  townshipId?: number;
   id: number;
   name: string;
   members: number[];
@@ -1190,6 +1193,8 @@ export interface SpatialGrid {
 }
 
 export interface World {
+  townships?: Township[];
+  civicProjects?: CivicProject[];
   settings: Settings;
   seed: string;
   /** label shown in the UI when a staged scene is active */

@@ -242,3 +242,8 @@ warmth and single-adult shelter) and version 10 smithy fuel are preserved. Versi
 `main-iron-warmth-smithy`; untagged 8/9 saves are rejected as ambiguous, preserved
 in their original form, and must be opened with their original build. No guessed
 migration is supported. See CIVILISATION_IMPLEMENTATION.md for source provenance.
+
+Version 12: persistent household township membership and public storehouse coordination,
+with explicit conversation, voluntary support, recorded physical contributions, bounded
+witnessed organiser outcomes, and conservative public-footprint access validation.
+Version 11 continuation was pinned before this stage. See CIVILISATION_IMPLEMENTATION.md.

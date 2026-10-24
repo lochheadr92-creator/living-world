@@ -1,3 +1,4 @@
+import { civicHistory, householdHistory, projectHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
 import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
@@ -120,6 +121,8 @@ export interface PersonView {
   age: number;
   stage: string;
   household: string;
+  civic: { township: string; lines: string[] };
+  householdHistory: string[];
   householdColor: number;
   home: string;
   health: number;
@@ -554,6 +557,8 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     age: Math.floor(age),
     stage,
     household: hh ? hh.name : 'none',
+    civic: civicHistory(world, p),
+    householdHistory: householdHistory(world, p),
     householdColor: hh ? hh.color : 0,
     home: homeLine(world, p, homeB && homeB.ent === 'building' ? homeB : null),
     health: p.health,
@@ -664,7 +669,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'building': {
       const b = e;
       const hh = world.households.find((h) => h.id === b.hhId);
-      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'fire' && !b.ops ? 'nobody (empty)' : 'everyone']];
+      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'storehouse' && b.type !== 'fire' && !b.ops ? 'nobody (empty)' : 'everyone']];
       const bars: EntityView['bars'] = [];
       if (hasHabitation(world) && (b.type === 'hut' || b.type === 'house')) {
         const people = occupants(world, b);
@@ -698,7 +703,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'site': {
       const s = e;
       const rows: [string, string][] = [
-        ['For', `${householdName(world, s.hhId)} household`],
+        ['For', s.hhId === 0 ? 'public use' : `${householdName(world, s.hhId)} household`],
         ['Started by', nameOf(world, s.creatorId)],
         ['Status', s.status],
       ];
@@ -706,7 +711,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
       for (const k of Object.keys(s.required) as ItemKind[]) bars.push({ label: `${k} supplied`, value: (s.delivered[k] ?? 0) + (s.used[k] ?? 0), max: s.required[k] ?? 0, tone: 'mat' });
       const workers = [...world.reservations.values()].filter((r) => r.kind === 'slot' && r.target === s.id).map((r) => nameOf(world, r.owner));
       rows.push(['Working now', workers.length ? workers.join(', ') : 'nobody']);
-      return { kind: 'site', ...base, title: describeEntityName(world, e), subtitle: `Marked out ${agoText(world, s.createdTick)}`, rows, bars, items: itemList(s.delivered), notes: ['Materials delivered but not yet worked in are shown below.'], position: { x: s.x + s.w / 2, y: s.y + s.h / 2 }, sections: describeSiteSections(world, s) };
+      return { kind: 'site', ...base, title: describeEntityName(world, e), subtitle: `Marked out ${agoText(world, s.createdTick)}`, rows, bars, items: itemList(s.delivered), notes: ['Materials delivered but not yet worked in are shown below.'], position: { x: s.x + s.w / 2, y: s.y + s.h / 2 }, sections: [...describeSiteSections(world, s), ...(world.civicProjects?.filter(q => q.siteId === s.id).map(q => ({ title: 'Township project', notes: projectHistory(world, q) })) ?? [])] };
     }
     case 'plot': {
       const pl: Plot = e;

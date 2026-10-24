@@ -1,0 +1,45 @@
+{
+  "label": "STAGED CONTRACT: voluntary township storehouse",
+  "tick": 1200,
+  "project": {
+    "id": 9,
+    "townshipId": 3,
+    "siteId": 8,
+    "organiserId": 2,
+    "proposed": 0,
+    "reason": "our known households need a shared store",
+    "status": "completed",
+    "outcome": "materials supplied and construction completed",
+    "participants": [
+      {
+        "personId": 2,
+        "requestId": 0,
+        "since": 0,
+        "status": "supporting",
+        "reason": "proposed this shared storehouse",
+        "materials": {
+          "wood": 6
+        },
+        "work": 38.978569957072985
+      },
+      {
+        "personId": 5,
+        "requestId": 23,
+        "since": 374,
+        "status": "supporting",
+        "reason": "Ben will help build",
+        "materials": {
+          "wood": 4,
+          "stone": 4
+        },
+        "work": 601.021430042927
+      }
+    ],
+    "ended": 1199,
+    "buildingId": 37
+  },
+  "ledger": {
+    "ok": true,
+    "diffs": []
+  }
+}

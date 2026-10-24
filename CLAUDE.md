@@ -42,6 +42,14 @@ Scaling and performance history: `docs/SCALING.md`.
 - One branch, one purpose; one commit per problem. Open a PR only when explicitly requested by the owner. Integrate and push normally when the owner authorizes integration; do not invent an additional PR or approval step. Never force-push, rewrite history, expose secrets, or bypass actual repository protections.
 - Owner workflow decision (2026-10-21): record review findings and their fixes once. A fixed finding with appropriate regression evidence does not automatically require another independent review. Repeat review or verification only for relevant changes, new evidence or unresolved defects. See `WORKFLOW.md`.
 
+## Current civilisation implementation
+
+Rules version 12 adds persistent townships and voluntary public storehouse projects.
+`docs/CIVILISATION_IMPLEMENTATION.md` is the execution/continuation register; it records
+version collisions, verified scope and unrun measurements. Candidate version 8 courier
+and version 9 table eating are applied at version 11 on the local-main lineage.
+Untagged 8/9 saves are refused as ambiguous; never relabel them.
+
 ## Where things are
 - Rules version 7, the household-to-home situation (rich + `runsRulesVersion(world, 7)`): `src/sim/shelter.ts` (the cue -
   what a person can SEE of their own household's home and of the site it laid out - and the one-material, one-trip

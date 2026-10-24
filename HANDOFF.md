@@ -1,3 +1,10 @@
+# Current civilisation continuation (2026-10-24)
+
+Read `docs/CIVILISATION_IMPLEMENTATION.md` first for the active programme, provenance,
+verification and exact remaining stages. Worktree: `civilisation-programme/living-world`,
+branch `codex/civilisation-programme`. Versions 11 and 12 reconcile divergent main lines
+and implement the first civic project. Old notes below are historical, not current status.
+
 # Living World Repository Handoff
 
 Updated: 2026-10-23

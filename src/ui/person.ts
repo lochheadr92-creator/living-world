@@ -127,6 +127,11 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const hhName = h('span', { class: 'hh-name' });
   const hhChip = h('span', { class: 'hh-chip', 'data-tip': 'Their household. People of one household share a home and look after each other first.' }, hhDot, hhName);
   const homeEl = h('div', { class: 'p-home' });
+  const townEl = h('div', { class: 'p-township' });
+  const civicLines = h('div', { class: 'civic-lines' });
+  const civicPanel = h('details', { class: 'civic-panel', open: true }, h('summary', null, 'Township & shared work'), civicLines);
+  const historyLines = h('div');
+  const historyPanel = h('details', { class: 'civic-panel' }, h('summary', null, 'Household history'), historyLines);
   const followLabel = h('span', null, 'Follow');
   const followBtn = h(
     'button',
@@ -153,6 +158,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     h('div', { class: 'p-actions' }, followBtn, locateBtn, closeBtn),
     h('div', { class: 'p-meta' }, stageEl, hhChip),
     homeEl,
+    townEl,
   );
 
   // ───────── vitals ─────────
@@ -274,7 +280,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const sections = createPersonSections(ctx, hooks);
 
   // the answer to "what are they up to?" comes first: it is the reason to open the panel. Needs and belongings are context for it.
-  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
+  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, civicPanel, historyPanel, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
   const el = h('div', { class: 'insp-person' }, head, body);
 
   // ───────── rendering ─────────
@@ -291,6 +297,18 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     setText(stageEl, `${cap(v.stage)}, ${v.age}`);
     stageEl.title = `Age in years. A year of life takes ${DAYS_PER_YEAR} days here.`;
     setText(hhName, v.household === 'none' ? 'no household' : `${v.household} household`);
+    setText(townEl, v.civic.township ? `Township: ${v.civic.township}` : '');
+    civicPanel.hidden = !v.civic.township;
+    const civicText = v.civic.lines.join('\n');
+    if (civicLines.dataset.text !== civicText) {
+      civicLines.replaceChildren(...v.civic.lines.map(line => h('p', null, line)));
+      civicLines.dataset.text = civicText;
+    }
+    const histText = v.householdHistory.join('\n');
+    if (historyLines.dataset.text !== histText) {
+      historyLines.replaceChildren(...v.householdHistory.map(line => h('p', null, line)));
+      historyLines.dataset.text = histText;
+    }
     setText(homeEl, v.home === 'no home yet' ? 'No home yet' : `Home: ${v.home}`);
     syncFollow();
 

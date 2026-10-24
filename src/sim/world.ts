@@ -1,3 +1,4 @@
+import { reviewParticipation } from './townships';
 // Side-effect imports register every activity handler.
 import './act_resource';
 import { hasHabitation } from './habitation';
@@ -111,6 +112,7 @@ function stepPerson(world: World, p: Person): void {
     return;
   }
   updateNeeds(world, p);
+  if (tick % 60 === p.id % 60) reviewParticipation(world, p);
   updateMood(world, p);
   illnessTick(world, p);
   apprenticeTick(world, p);
@@ -368,6 +370,11 @@ export function hashWorld(world: World): string {
     // a request outstanding for someone's own project: who asked whom for what, and where it has got to
     for (const r of world.requests) if (r.planId && (r.status === 'pending' || r.status === 'promised')) push(`J${r.id}:${r.from},${r.to},${r.item ?? '-'},${r.amount},${r.status},${r.planId}`);
     push(`Z${world.hardship ? world.hardship.until : 0}`);
+  }
+  if (world.townships) {
+    push('Civic' + JSON.stringify(world.townships) + JSON.stringify(world.civicProjects ?? []));
+    for (const hh of world.households) push(`Member${hh.id}:${hh.townshipId}`);
+    for (const p of world.persons) if (p.civicOutcomes) push(`CivicMemory${p.id}:${JSON.stringify(p.civicOutcomes)}`);
   }
   if (world.inhabitants) for (const k of Object.keys(world.inhabitants).sort((a, b) => Number(a) - Number(b))) push(`E${k}:${JSON.stringify(world.inhabitants[Number(k)])}`);
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));

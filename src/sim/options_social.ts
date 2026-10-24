@@ -1,3 +1,4 @@
+import { canInvite, projectAt, participation } from './townships';
 import { isRich } from './mood';
 import { newActivity } from './activities';
 import { reputationOf } from './reputation';
@@ -480,12 +481,12 @@ function optRecruit(ctx: Ctx): void {
   const { world, p } = ctx;
   if (ctx.stage === 'child') return; // asking grown-ups to help with the building is for grown-ups
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) return;
-  const sites = beliefsByKind(p, ['site']).filter((b) => b.hh === p.hhId);
+  const sites = beliefsByKind(p, ['site']).filter((b) => b.hh === p.hhId || projectAt(world, b.id)?.organiserId === p.id);
   if (!sites.length) return;
   const site = sites[0] as Belief;
   const siteEnt = world.byId.get(site.id);
   // no use asking for hands where there is nothing to do with them yet: the site is waiting on materials
-  if ((site.progress ?? 0) >= Math.min(1, 0.06 + fractionAvailable(site)) - 0.02) return;
+  if (!projectAt(world, site.id) && (site.progress ?? 0) >= Math.min(1, 0.06 + fractionAvailable(site)) - 0.02) return;
   const cap = (siteEnt && siteEnt.ent === 'site' ? siteEnt.maxWorkers : 3) + 1;
   const committedNow = helpersOn(world, site.id);
   if (committedNow >= Math.min(2, cap)) return;
@@ -494,8 +495,8 @@ function optRecruit(ctx: Ctx): void {
     if (c.q.commitments.some((cm) => cm.status === 'active' && cm.siteId === site.id)) continue;
     if (activeCommitments(c.q).length >= MAX_ACTIVE_COMMITMENTS) continue;
     if ((p.asked[c.q.id] ?? -9999) > world.tick - 900) continue;
-    if (c.aff < 8 && c.q.hhId !== p.hhId) continue;
-    const sc = new Scorer().add('could use a hand with the building', 15 * traitMods(p).work + 0.1 * c.aff).add('walking', -pen(c.d * 6));
+    if (projectAt(world, site.id) ? !canInvite(world, p, c.q, site.id) : c.aff < 8 && c.q.hhId !== p.hhId) continue;
+    const sc = new Scorer().add('could use a hand with the building', (projectAt(world, site.id) ? 30 : 15) * traitMods(p).work + 0.1 * c.aff).add('walking', -pen(c.d * 6));
     mkSocial(ctx, c, 'recruit', { siteId: site.id }, `Ask ${c.q.name} to help with the ${(site.btype ?? 'building').replace('_', '-')}`, 'to share the building work', null, sc, 'recruit');
   }
 }
