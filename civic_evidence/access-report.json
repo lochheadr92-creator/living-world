@@ -1,0 +1,25 @@
+{
+  "label": "STAGED: refuse a home site over an occupant",
+  "tick": 26,
+  "result": {
+    "tick": 25,
+    "label": "Marking out a hut",
+    "outcome": "failed",
+    "detail": "the footprint would obstruct access"
+  },
+  "pack": {
+    "wood": 8,
+    "stone": 4
+  },
+  "occupant": {
+    "name": "Ben",
+    "x": 43.5,
+    "y": 43.5,
+    "walkable": true
+  },
+  "midLayoutContinuation": true,
+  "ledger": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -1,7 +1,13 @@
-// Before a new public footprint is occupied, all walkable perimeter exits must still
+import { isRich } from './mood';
+import { runsRulesVersion } from './rulesversion';
+// Before a new footprint is occupied, all walkable perimeter exits must still
 // connect. Conservative cardinal flood: false negatives refuse a site, never trap someone.
 import { isWalkable } from './registry';
 import type { World } from './types';
+let enabled = true;
+export const constructionSafetyOn = (): boolean => enabled;
+export function setConstructionSafety(on: boolean): void { enabled=on; }
+export const allSitesNeedAccess = (w: World): boolean => enabled && isRich(w) && runsRulesVersion(w,19);
 export function preservesAccess(w: World, x: number, y: number, width: number, height: number): boolean {
  const inside=(px:number,py:number)=>px>=x&&px<x+width&&py>=y&&py<y+height;
  if(w.persons.some(p=>p.alive&&!p.indoors&&inside(Math.floor(p.x),Math.floor(p.y))))return false;

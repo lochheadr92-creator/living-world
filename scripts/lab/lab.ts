@@ -1,3 +1,4 @@
+import { setConstructionSafety, constructionSafetyOn } from '../../src/sim/construction_access';
 import { setTechniques, techniquesOn } from '../../src/sim/techniques';
 import { setDevelopment, developmentOn } from '../../src/sim/development';
 import { setLocalMarket, localMarketOn } from '../../src/sim/market_contact';
@@ -227,6 +228,7 @@ export function parseIntervention(specIn: string): Intervention {
       },
     };
   }
+  if (kind === 'rich-unsafe-sites') return {spec:label,summary:'restore pre-19 siting (public storehouse safeguard remains)',apply:()=> 'general siting guard off',install(){const was=constructionSafetyOn();setConstructionSafety(false);return ()=>setConstructionSafety(was);}};
   if (kind === 'rich-universal-techniques') return {spec:label,summary:'remove held-technique requirement and instruction',apply:()=> 'universal technique access restored',install(){const was=techniquesOn();setTechniques(false);return ()=>setTechniques(was);}};
   if (kind === 'rich-adult-newborn-skills') return {spec:label,summary:'restore adult-range skills for newly created children',apply:()=> 'historical skill initialisation restored for subsequent births/arrivals',install(){const was=developmentOn();setDevelopment(false);return ()=>setDevelopment(was);}};
   if (kind === 'rich-remote-markets') return {spec:label,summary:'restore legacy remote market exchanges',apply:()=> 'remote market behavior restored',install(){const was=localMarketOn();setLocalMarket(false);return ()=>setLocalMarket(was);}};

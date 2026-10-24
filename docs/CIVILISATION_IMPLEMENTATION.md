@@ -56,7 +56,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | A6 environment / C | Global weather and symmetric camps; no settlement production observations | S4; sustained actual action/flow differences under opportunities | unresolved |
 | A8 generations / H | Birth/age/households/inheritance exist, practices have no holders | S5; bounded transmission records and natural generation timing | unresolved |
 | A9 replay/AI | Existing seeded stepping, replay, legal-option model boundary | Every stage continuation/save/load/purity; preserve seam | implemented |
-| D3 route blocking | Report predates current source; siting tests clearance only | S1 safety for project; S3 general reachability and occupied exits | unresolved |
+| D3 route blocking | V18 private site reproduced over a living occupant; v19 extends access protection to all new footprints | S3 prerequisite; corridor, door, delayed occupant, upgrade and mid-layout continuation | verified |
 | D4 death news | Confirmed global mood/need/partner notification; replaced at 14 with witness, grave or co-present typed news | S2; isolated bereaved, indoor/sleep, repeated story, mid-journey continuation | verified |
 | D6 births | Confirmed regex count; v14 lifetime counter incremented at actual birth, legacy scope labelled | S2 prerequisite; rollover/death/save fixtures | verified |
 | D7 market | V15 historical attendance enables remote trades; v16 validates physical venue/contact and local knowledge | S4 prerequisite; rejection, conserved barter, mid-walk save and rendered arrival | verified |
@@ -65,7 +65,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | D11 newborn skills | Confirmed same adult generator at birth; v17 starts newborns at 0.20 and age-scales younger entrants | S5 prerequisite; real birth, work gains, save/load, historical reference and rendered inspector | verified |
 | D12 / A aggregate reserve/shelter benefit | Historical null/mixed evidence is not failure of mechanism | S6; town paired controls/nudges/ablations, accept null | unresolved |
 | B dependency map | Migration is not required for organisation within a settlement | Owner programme supersedes audit ordering; S1 before S3 | superseded |
-| A9 performance | Current v16 one-day 28/100/250 measurements recorded below; mature-world cost still unmeasured | S6; startup profiles verified, long-run retention unresolved | verified: bounded startup only |
+| A9 performance | V16 and current v19 one-day 28/100/250 measurements recorded below; mature-world cost still unmeasured | S6; startup profiles verified, long-run retention unresolved | verified: bounded startup only |
 | H docs: CLAUDE rules summary | Current civilisation section names current generation and reconciliation | S0-S2 agent guidance corrected | verified |
 | H docs: README/ECONOMY population, animals, markets | Corrected obsolete one-settlement/one-species/no-market claims from current source; no purposeful intertown trade claimed | S4 market prerequisite | verified |
 | H docs: RICH_WORLD traditionsTick, fish/dry spell | Audit leads, no behavioural repair inferred | S5 | unresolved |
@@ -443,3 +443,45 @@ technique/workshop/continuation tests passed before the presentation repair; aft
 thirteen technique/continuation checks, twelve rendered checks, build/typecheck,
 standalone historical goldens and diff whitespace checks passed. The final repair
 changes only derived observer progress. Historical continuation references unchanged.
+
+## S3 prerequisite: general construction access (version 19)
+
+Reproduced on v18 before changing behavior: the actual `plan_site` activity lays out
+a private hut over Ben's occupied tile, making it solid beneath him. This establishes
+the current unsafe mutation, not a reproduction of the audit's historical cedar death.
+`construction_access.ts` owns safety validation; `findBuildSpot` applies it to proposed
+new footprints, and `plan_site` rechecks immediately before occupying the tiles.
+Alternatives: evacuate/displace people after building, or reject unsafe placement.
+Selected rejection preserves physical movement and gives an honest failure.
+
+The existing conservative cardinal-connectivity guard now covers all new footprints.
+It refuses an outdoor occupant in the footprint, an existing building's door within
+it, or separation of walkable perimeter cells. It may refuse a site with already
+separate perimeter areas; it does not find an omniscient better destination or make
+resources accessible. It is an engine geometry validation, not new inhabitant map
+knowledge. No growth/weather obstacle repair is implied. The existing same-size hut
+upgrade preserves its footprint and doorway, so it remains possible with someone
+inside. Raw world/fixture construction remains low-level; runtime layout owns refusal.
+Version 18 continuation pinned in a9988b6. `rich-unsafe-sites` removes only the v19
+extension; earlier public-storehouse protection remains.
+
+Seven access tests include the preserved v18 reproduction, current refusal, actual
+clear-site success, delayed occupancy at the mutation boundary, mid-layout full-state
+continuation, corridor/door checks, pure planner reads and occupied-home upgrade.
+Twenty-four focused access/township/v18-continuation tests pass. In the rendered scene
+Ada spends 26 ticks on layout, then records "the footprint would obstruct access";
+Ben remains on a walkable tile and Ada still carries all eight wood and four stone.
+Ledger balanced, no site created. Five browser checks pass; the expanded last-attempt
+panel and unobstructed scene were visually inspected. Save/load at tick 12 gives
+identical final state. No natural survival benefit or aggregate construction effect
+is claimed from this fixture.
+
+S3 access boundary: full suite 1093 tests / 119 files passed, plus build/typecheck,
+standalone historical goldens and diff whitespace check. No existing references
+were rewritten. A fresh serial current-rule benchmark was justified by extending
+flood validation to all candidate sites: v19, river, first 2,400 ticks, arrivals off,
+sample 240/check 600. Normal (28) 1.42s / 0.59ms per tick; Large (100) 5.61s /
+2.34ms; Huge (250) 20.64s / 8.60ms. Each run has six invariant checks, zero failures.
+Raw `performance-v19-day-*.json` includes actual rules/settings and Node v24.19.0.
+Same bounded startup caveats as v16; this is not an isolated causal timing comparison
+or mature-world scaling result. No tests/builds overlapped these benchmark processes.

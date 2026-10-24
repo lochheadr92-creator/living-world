@@ -1,0 +1,22 @@
+[
+  {
+    "name": "before: refusal appears only after actual attempt",
+    "pass": true
+  },
+  {
+    "name": "before: observer does not change complete save",
+    "pass": true
+  },
+  {
+    "name": "after: refusal appears only after actual attempt",
+    "pass": true
+  },
+  {
+    "name": "after: observer does not change complete save",
+    "pass": true
+  },
+  {
+    "name": "no runtime errors",
+    "pass": true
+  }
+]

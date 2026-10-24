@@ -1,4 +1,4 @@
-import { preservesAccess } from './construction_access';
+import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { finishProject, hasTownships } from './townships';
 import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
 import { evacuateHome } from './habitation';
@@ -327,7 +327,7 @@ export function findBuildSpot(
       if (t0 === T.FOREST) score -= 1.5;
       if (t0 === T.STONY) score -= 2.5;
       if (wd <= 6) score += 0.8;
-      if (score > bestScore && !(type === 'storehouse' && hasTownships(world) && !preservesAccess(world, x, y, d.w, d.h))) {
+      if (score > bestScore && !((allSitesNeedAccess(world) || (type === 'storehouse' && hasTownships(world))) && !preservesAccess(world, x, y, d.w, d.h))) {
         bestScore = score;
         best = { x, y };
       }

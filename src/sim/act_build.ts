@@ -1,4 +1,4 @@
-import { preservesAccess } from './construction_access';
+import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
@@ -319,7 +319,7 @@ registerHandler('plan_site', {
     if (!up) for (let yy = sy; yy < sy + d.h; yy++) for (let xx = sx; xx < sx + d.w; xx++) if (!isFreeLand(world, xx, yy)) return 'fail:someone built there first';
     const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0, { x: sx + d.w / 2, y: sy + d.h / 2 });
     if (why) return `fail:${why}`;
-    if (type === 'storehouse' && hasTownships(world) && !preservesAccess(world, sx, sy, d.w, d.h)) return 'fail:the footprint would obstruct access';
+    if (!up && (allSitesNeedAccess(world) || (type === 'storehouse' && hasTownships(world))) && !preservesAccess(world, sx, sy, d.w, d.h)) return 'fail:the footprint would obstruct access';
     const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
     proposeProject(world, p, site, a.goal);
     observe(world, p, site);

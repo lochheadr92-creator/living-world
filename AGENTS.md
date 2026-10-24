@@ -44,7 +44,7 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-Current rules version 18 adds person-held charcoal technique and instruction, after version 17 developmental starting proficiency, after version 16 physical market exchange, after version 15 competing project coordinators, version 14 local death knowledge/birth accounting, version 13 social history, and version 12 townships/shared storehouses.
+Current rules version 19 protects construction access, following person-held techniques, developmental proficiency, physical markets, competing coordinators, local death news, social history and township projects.
 `docs/CIVILISATION_IMPLEMENTATION.md` is the execution/continuation register; it records
 version collisions, verified scope and unrun measurements. Candidate version 8 courier
 and version 9 table eating are applied at version 11 on the local-main lineage.

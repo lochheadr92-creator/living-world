@@ -6,6 +6,16 @@ It records the tools, the measurements taken so far, and the places where the cu
 
 Nothing here changes how the simulation behaves.
 
+## Current version 19 follow-up — 2026-10-24
+
+Repeated after extending construction safety to all sites (a new potential cost):
+seed river, arrivals off, first 2,400 ticks, serial processes with no concurrent agent
+test/build workload. 28 founders: 1.42s / 0.59 ms per tick; 100: 5.61s / 2.34 ms;
+250: 20.64s / 8.60 ms. Six invariant checks per run, zero failures. Raw files are
+`civic_evidence/performance-v19-day-*.json`. These are headless startup measurements,
+not long-run retained-history costs, frame rates, or a controlled optimisation claim.
+The earlier version 16 checkpoint below is retained as dated evidence.
+
 ## Current integrated rules checkpoint — 2026-10-24
 
 Version 16, seed river, arrivals off, one first day (2,400 ticks), serial Node processes
