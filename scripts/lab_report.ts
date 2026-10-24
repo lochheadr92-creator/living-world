@@ -13,7 +13,7 @@ const storySeed = args.includes('--story') ? args[args.indexOf('--story') + 1] :
 const vsArg = args.includes('--vs') ? args[args.indexOf('--vs') + 1] ?? '' : '';
 for (const a of args) if (a.startsWith('--') && !['--story', '--vs'].includes(a)) console.error(`unknown option ${a} (ignored)`);
 
-type Row = BranchResult & { seed: string; profile: string; fork: number; days: number };
+type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; generationComparison?:boolean };
 const bySeed = new Map<string, Map<string, Row>>();
 for (const f of readdirSync(dir)) {
   if (!/^lab_.+\.jsonl$/.test(f)) continue;
@@ -35,6 +35,7 @@ const first = bySeed.get(seeds[0])!.get('control')!;
 const allRows = [...bySeed.values()].flatMap((m) => [...m.values()]);
 const metrics = METRICS.filter((m) => allRows.every((r) => typeof r.outcome[m] === 'number'));
 const missing = METRICS.filter((m) => !metrics.includes(m));
+const metricWidth=Math.max(15,...metrics.map(m=>m.length+1));
 const specs = [...new Set(seeds.flatMap((s) => [...bySeed.get(s)!.keys()]))].filter((s) => s !== 'control');
 const nudgeSpecs = specs.filter((s) => s.startsWith('nudge'));
 // The reference a branch is compared with, per seed: the mean of the control and every nudge branch other than the branch itself. One control
@@ -44,7 +45,8 @@ const refMean = (seed: string, spec: string, m: Metric): number =>
 const num = (v: number, d = 1) => (Math.abs(v) < 10 ** -d / 2 ? '0' : (v > 0 ? '+' : '') + v.toFixed(d));
 
 console.log(`Counterfactual lab: ${seeds.length} seeds (${seeds.join(', ')}), ${first.profile} profile, forked at day ${first.fork}, run ${first.days} days.`);
-console.log('Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).');
+console.log(first.generationComparison?'Generation comparison: control and nudge arms share a save; no-geology-at-generation starts from the same seed and locations with the quantity field disabled before the initial ledger. Differences are paired by seed against mean control/nudges.':'Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).');
+console.log('Civilisation metrics: retained records are lower bounds within their retention windows, not lifetime totals. AtEnd means living/present at the end. Production distance uses only towns with at least three recorded days in the last eight; zero with fewer than two eligible towns is not evidence of sameness.');
 if (missing.length) console.log(`(${missing.join(', ')}: not recorded by this run, which predates the metric)`);
 
 // the noise floor: how far a one-draw nudge moves each metric in a single seed
@@ -71,14 +73,14 @@ for (const spec of specs) {
   const parts = rows.map((r) => r.divergedAfterTicks).filter((x): x is number => x !== null);
   console.log(`\n── ${spec}: ${rows[0].summary}  [${rows.length} seeds${rows[0].note ? '; e.g. ' + rows[0].note : ''}]`);
   console.log(`   final state identical to control in ${same}/${rows.length} seeds; parted in ${parts.length}` + (parts.length ? `, median ${(parts.sort((a, b) => a - b)[parts.length >> 1] / 2400).toFixed(2)} days after the fork` : ''));
-  console.log('   ' + 'metric'.padEnd(15) + 'reference'.padStart(9) + 'branch'.padStart(8) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
+  console.log('   ' + 'metric'.padEnd(metricWidth) + 'reference'.padStart(9) + 'branch'.padStart(8) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
   for (const m of metrics) {
     const c = rows.map((r) => refMean(r.seed, r.spec, m));
     const b = rows.map((r) => r.outcome[m]);
     const st = paired(b.map((x, i) => x - c[i]));
     const v = verdict(st, noise[m], same === rows.length);
     console.log(
-      '   ' + m.padEnd(15) + mean(c).toFixed(1).padStart(9) + mean(b).toFixed(1).padStart(8) + num(st.meanDiff).padStart(8) +
+      '   ' + m.padEnd(metricWidth) + mean(c).toFixed(1).padStart(9) + mean(b).toFixed(1).padStart(8) + num(st.meanDiff).padStart(8) +
         `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
     );
   }
@@ -115,13 +117,13 @@ for (const pair of vsArg ? vsArg.split(',') : []) {
   const w = Math.max(8, a.length + 1, b.length + 1);
   console.log(`\n── ${a} − ${b}: direct contrast, paired by seed  [${both.length} seeds]`);
   console.log(`   final state identical in ${same}/${both.length} seeds`);
-  console.log('   ' + 'metric'.padEnd(15) + a.padStart(w) + b.padStart(w) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
+  console.log('   ' + 'metric'.padEnd(metricWidth) + a.padStart(w) + b.padStart(w) + 'diff'.padStart(8) + '   95% interval'.padEnd(18) + 'up/down'.padStart(8) + '  verdict');
   const lines: string[] = [];
   for (const m of metrics) {
     const st = paired(both.map((s) => ra(s).outcome[m] - rb(s).outcome[m]));
     const v = verdict(st, noise[m] * contrastScale, same === both.length);
     console.log(
-      '   ' + m.padEnd(15) + mean(both.map((s) => ra(s).outcome[m])).toFixed(1).padStart(w) + mean(both.map((s) => rb(s).outcome[m])).toFixed(1).padStart(w) +
+      '   ' + m.padEnd(metricWidth) + mean(both.map((s) => ra(s).outcome[m])).toFixed(1).padStart(w) + mean(both.map((s) => rb(s).outcome[m])).toFixed(1).padStart(w) +
         num(st.meanDiff).padStart(8) + `   [${num(st.lo)}, ${num(st.hi)}]`.padEnd(18) + `${st.higher}/${st.lower}`.padStart(8) + '  ' + v,
     );
     if (v === 'larger than chance') lines.push(`${m} ${mean(both.map((s) => rb(s).outcome[m])).toFixed(1)} → ${mean(both.map((s) => ra(s).outcome[m])).toFixed(1)} (${num(st.meanDiff)}, lower in ${st.lower} and higher in ${st.higher} of ${st.n} seeds)`);

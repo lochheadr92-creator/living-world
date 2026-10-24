@@ -1,3 +1,4 @@
+import {CURRENT_RULES_VERSION} from '../src/sim/rulesversion';
 import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -21,4 +22,12 @@ describe('current lab defaults cannot silently reuse legacy results', () => {
       rmSync(out, { recursive: true, force: true });
     }
   });
+});
+
+it('refuses to resume ordinary lab rows as a geology generation comparison',()=>{
+ const out=mkdtempSync(join(tmpdir(),'living-world-lab-geology-'));
+ try{const file=join(out,'lab_meadow.jsonl'),original=JSON.stringify({seed:'meadow',spec:'control',dynamics:'rich',rulesVersion:CURRENT_RULES_VERSION})+'\n'+JSON.stringify({seed:'meadow',done:true});writeFileSync(file,original);
+  const result=spawnSync(process.execPath,['scripts/lab.mjs','--out',out,'--seeds','1','--fork','0','--geology-comparison','yes'],{encoding:'utf8',timeout:10000});
+  expect(result.status).toBe(1);expect(result.stderr).toContain('different generation comparison');expect(readFileSync(file,'utf8')).toBe(original);expect(readdirSync(out)).toEqual(['lab_meadow.jsonl']);
+ }finally{rmSync(out,{recursive:true,force:true});}
 });

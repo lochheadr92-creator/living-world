@@ -8,7 +8,7 @@ const opt = (n: string, d: string): string => {
   const i = args.indexOf('--' + n);
   return i >= 0 && i + 1 < args.length ? args[i + 1] : d;
 };
-const complaint = checkResumable(opt('out', 'current_lab_out'), opt('seeds', '').split(',').filter(Boolean), parseRunRules(opt('dynamics', 'rich')));
+const complaint = checkResumable(opt('out', 'current_lab_out'), opt('seeds', '').split(',').filter(Boolean), parseRunRules(opt('dynamics', 'rich')),opt('geology-comparison','no')==='yes');
 if (complaint) {
   console.error(complaint);
   process.exit(1);

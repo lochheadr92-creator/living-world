@@ -1,3 +1,4 @@
+import { CIVILISATION_METRICS, civilisationOutcome } from './civilisation';
 import { memoryRetentionOn, setMemoryRetention } from '../../src/sim/memory_retention';
 import { householdPracticesOn, setHouseholdPractices } from '../../src/sim/household_practices';
 import { politicalAlignmentOn, setPoliticalAlignment } from '../../src/sim/political_alignment';
@@ -410,6 +411,7 @@ export const METRICS = [
   'defenceLeftOnItsOwn',
   'wolvesWary',
   'bitesTaken',
+  ...CIVILISATION_METRICS,
 ] as const;
 export type Metric = (typeof METRICS)[number];
 export type Outcome = Record<Metric, number>;
@@ -636,6 +638,7 @@ export function outcomeOf(
   for (const t of Object.keys(first)) if (first[t] >= from) milestones[t] = day(t);
   return {
     outcome: {
+      ...civilisationOutcome(w,from),
       workplaces: count(WORKPLACES),
       solidHomes: count(['hut', 'house']),
       buildings: w.buildings.length,
