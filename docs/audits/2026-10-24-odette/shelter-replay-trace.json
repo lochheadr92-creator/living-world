@@ -1,0 +1,502 @@
+[
+  {
+    "tick": 1673,
+    "light": 0,
+    "activity": null,
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 1674,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 1,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 1680,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 7,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 1740,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 67,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 1800,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 127,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 1860,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 187,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 1920,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 247,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 1980,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 307,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2040,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 367,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2100,
+    "light": 0,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 427,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2160,
+    "light": 0.05322603061561872,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 487,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2177,
+    "light": 0.09502213583846164,
+    "activity": {
+      "id": 4733,
+      "kind": "converse",
+      "phase": "work",
+      "progress": 0,
+      "duration": 0,
+      "amount": 0,
+      "expire": 2676,
+      "data": {
+        "convId": 4732,
+        "role": "b"
+      }
+    },
+    "suspended": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "travel",
+      "progress": 0,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2220,
+    "light": 0.23964602271960397,
+    "activity": {
+      "id": 4733,
+      "kind": "converse",
+      "phase": "work",
+      "progress": 0,
+      "duration": 0,
+      "amount": 0,
+      "expire": 2676,
+      "data": {
+        "convId": 4732,
+        "role": "b"
+      }
+    },
+    "suspended": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "travel",
+      "progress": 0,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2246,
+    "light": 0.346010561342592,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "travel",
+      "progress": 0,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2247,
+    "light": 0.35028656800021607,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 1,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2280,
+    "light": 0.4955357670101763,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 34,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2340,
+    "light": 0.7525643596972525,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 94,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2400,
+    "light": 0.9424008969907406,
+    "activity": {
+      "id": 4464,
+      "kind": "rest",
+      "phase": "work",
+      "progress": 154,
+      "duration": 607,
+      "amount": 607,
+      "expire": 2400,
+      "data": {
+        "optKey": "shelter:1310",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 1672,
+      "label": "Sleeping by my lean-to",
+      "outcome": "success",
+      "detail": "rested"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2402,
+    "light": 0.9467739693843812,
+    "activity": null,
+    "suspended": null,
+    "lastResult": {
+      "tick": 2401,
+      "label": "Staying at my lean-to",
+      "outcome": "failed",
+      "detail": "took too long"
+    },
+    "indoors": null
+  },
+  {
+    "tick": 2403,
+    "light": 0.9489032468145985,
+    "activity": {
+      "id": 5163,
+      "kind": "drink",
+      "phase": "travel",
+      "progress": 0,
+      "duration": 0,
+      "amount": 0,
+      "expire": 3202,
+      "data": {
+        "optKey": "drink:1000251",
+        "why": "chosen from outside"
+      }
+    },
+    "suspended": null,
+    "lastResult": {
+      "tick": 2401,
+      "label": "Staying at my lean-to",
+      "outcome": "failed",
+      "detail": "took too long"
+    },
+    "indoors": null
+  }
+]
