@@ -3,17 +3,18 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 20
+## Exact continuation snapshot — after version 21
 
-- Current product rules **20**: household relocation and runtime founding, following
-  construction access (19). Implementation is on `codex/civilisation-programme` in
+- Current product rules **21**: settlement production and resource-flow observations,
+  following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
   `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD
-  for the commit containing this snapshot. Immutable v19 reference: **801123e**.
+  for the commit containing this snapshot. Immutable v20 reference: **05cf09e**; v19 reference: **801123e**.
 - Completed scope: S0/S1; S2 history, deduplicated social consequences, local death news,
   birth counter and competing project coordinators; physical-market prerequisite;
   S5 novice child proficiency and one held technique with instruction; general D3;
-  **S3 first complete relocation/founding slice** (contract in RELOCATION.md).
-- Latest checks: `npm test` **1108 tests / 121 files**; `npm run typecheck`;
+  **S3 first complete relocation/founding slice** (contract in RELOCATION.md); S4a actual
+  production/flow observations (contract in ECONOMY.md).
+- Relocation checks: `npm test` **1108 tests / 121 files**; `npm run typecheck`;
   `npm run build`; `npx --no-install vite-node scripts/golden.ts` (all historical values
   unchanged); 14 relocation contracts; focused township/housing/rules/v19 continuation
   checks; `node scripts/browser/relocation_check.mjs` **21 passing rendered checks**.
@@ -22,16 +23,15 @@ This is the continuation record; the audit remains dated evidence, not current a
 - Natural smoke: meadow/Normal/28, four days, control + nudge + no-relocation: no sustained
   hardship or proposals; conserved goods and 28 survivors in each. This is not an ensemble.
 - Protected original/candidate work and main-worktree untracked `_find_moments_rich.ts`
-  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v19 references or silently
+  and `_warmth_probe2.ts` remain untouched. Never rewrite v1-v20 references or silently
   reinterpret ambiguous candidate v8/v9 saves. No ensemble is running.
 - Vite for rendered checks: port 5291, served from this worktree. Verify liveness if reused.
 
-**Next executable task: S4 actual settlement production and resource-flow observations,
-then purposeful intertown barter.** Pin a v20 continuation before any saved/behavioural
-change and allocate the next unused generation (21 is the candidate; recheck concurrent
-work). Derive sustained activity from real production/transfer boundaries, with bounded
-records and observer-visible provenance, rather than assigning professions to towns.
-Then use known counterparties, physical travel/co-presence and conserved exchanges.
+**Next executable task: S4b purposeful intertown barter.** Pin a v21 continuation before
+any saved/behavioural change and allocate the next unused generation (22 is the candidate;
+recheck concurrent work). Use known counterparties, physical travel/co-presence and
+conserved exchanges. S4a production/flow observations are implemented; they are not an
+inhabitant knowledge source. The latest S4a verification is recorded at the end of this file.
 The v16 market correction is a prerequisite already integrated, not intertown trade itself.
 
 S3 limits: unanimous whole-household agreement; no forced split, automatic organiser
@@ -87,7 +87,7 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | Roadmap 5 / D5 | Local-main 9 already allows one adult to lay out hut | S0 preserve; existing housing contracts | implemented |
 | Roadmap 6 / A3 / D8 | Duplicate direct/reputation and hearsay/scalar effects reproduced and removed at 13 | S2; direct/told/expiry/legacy contracts and B | verified |
 | Roadmap 7 / A6 / D | V20 co-present household agreement, physical packing/travel/shelter and explicit founding | S3; 14 contracts, mid-travel save equality, 21 rendered checks; natural smoke null | verified: bounded mechanism; natural migration/benefit unresolved |
-| Roadmap 8 / A2 | Persistent township membership now saved at 12; production observations still absent | S1 verified membership; S4 action-derived statistics | implemented: membership; unresolved: statistics |
+| Roadmap 8 / A2 | Persistent township membership now saved at 12; v21 bounded actual production/flow observations | S1 membership; S4a action-derived statistics and nine rendered checks | verified: bounded observations; wider specialisation evidence unresolved |
 | Roadmap 9 / A7 / G | V18 charcoal technique held by people, voluntary timed instruction, provenance and loss | S5; contact/time, real kiln use, interrupted/save/purity contracts and staged G | verified: one technique |
 | Roadmap 10 / A5 / F | V12 project organiser; v15 explicit competing coordinators and voluntary support; no inherited office | S1/S2 bounded contracts/runtime; persistent factions and wider proposals remain | implemented: coordination; unresolved: factions/F ensemble |
 | A1 other survival/cooperation capabilities | Existing needs/gathering/food/reserves/habitation/defence/requests | Preserve and regression test; aggregate survival separate | implemented |
@@ -564,3 +564,34 @@ Current-rule startup performance: `scripts/bench.ts --current --profile <profile
 0.51 ms/tick; Large/100: 2.18 ms/tick; Huge/250: 8.64 ms/tick. Each made three invariant
 checks with zero failures. These are first-day timings, not mature-world performance or
 migration-cost estimates. Reports: `civic_evidence/performance-v20-day-*.json`.
+
+## Rules 21 — S4a observable production and resource flows
+
+Settlements now show actual resident gathering/harvest, nearby completed workshop output,
+repeated activity across recorded days, and recent cross-affiliation gross transfers.
+This creates no goods, professions, demand or jobs. Gross transfers (including returns)
+are explicitly not called net trade. Module ownership, alternative, retention, attribution
+and compatibility are in ECONOMY.md. This is a visible observation prerequisite, not the
+still-unimplemented purposeful intertown barter mechanism.
+
+Evidence: full suite 1115 tests / 123 files before the final two additional contracts;
+then 17 focused tests across settlement_economy/economy/v20_continuation, including the
+new partial-harvest and complete-state choice/RNG neutrality checks. Typecheck/build and
+historical golden checks passed. `scripts/browser/settlement_economy_check.mjs`: nine
+passing rendered checks, two township views, complete-state observer purity; Ada's rendered
+panel inspected. Fixture is explicitly staged and tests physical accounting boundaries,
+not autonomous emergence. `scripts/settlement_economy_smoke.ts`: one natural meadow/Normal
+first day recorded one gathering group and no cross-township flow; no specialisation or
+trade-benefit claim. Reports/screenshots are in `civic_evidence/settlement-economy-page/`
+and `civic_evidence/settlement-economy-natural.json`.
+
+Existing modules touched: economy records actual transfers/extraction/harvest; facilities
+records only successfully completed output; world hashes and save validates observations;
+history exposes them; rules/types carry versioned optional state. The new observation
+module does not import economic mutation helpers or participate in inhabitant decisions.
+The meaningful next stage is S4b purposeful locally informed exchange journeys.
+
+Rules-21 first-day performance (same sequential meadow, immigration-off workload as
+rules 20): Normal/28 0.51 ms/tick, Large/100 2.24, Huge/250 8.51; 2400 ticks and three
+invariant checks per profile, no failures. This does not establish mature-world scaling.
+Compact results: `civic_evidence/performance-v21-summary.json`.

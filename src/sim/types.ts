@@ -1208,6 +1208,7 @@ export interface SpatialGrid {
 }
 
 export interface World {
+  economicObservations?: import('./settlement_economy').EconomicObservations;
   /** Lifetime births from rules 14; absent historical records are not reconstructed from prose. */
   birthCount?: number;
   townships?: Township[];

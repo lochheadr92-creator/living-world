@@ -1,3 +1,4 @@
+import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy';
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
 import { carryCap } from './people';
 import { idFromTag, isToolItem, retagTools } from './toolreg';
@@ -151,6 +152,7 @@ export function transfer(
   takeFrom(from, k, m);
   addItem(to, k, m);
   if (isToolItem(k)) retagTools(world, k, m, idFromTag(fromTag), idFromTag(toTag));
+  recordGoodsFlow(world,fromTag,toTag,k,m,reason);
   world.hooks?.onTransfer?.({ from: fromTag, to: toTag, item: k, n: m, reason });
   return m;
 }
@@ -169,6 +171,7 @@ export function gatherFromSource(world: World, src: Source, p: Person, n: number
   const room = invRoom(world, p, src.item);
   const m = Math.min(n, src.amount, room);
   if (m <= 0) return 0;
+  recordPersonalProduction(world,p,'gathering',src.item,m,src.id);
   src.amount -= m;
   addItem(p.inv, src.item, m);
   world.hooks?.onTransfer?.({ from: 'source:' + src.id, to: 'person:' + p.id, item: src.item, n: m, reason: 'gather' });
@@ -185,6 +188,8 @@ export function harvestPlot(world: World, plot: Plot, p: Person): { grain: numbe
   if (s > 0) addItem(p.inv, 'seeds', s);
   if (g > 0) world.hooks?.onTransfer?.({ from: 'plot:' + plot.id, to: 'person:' + p.id, item: 'grain', n: g, reason: 'harvest' });
   if (s > 0) world.hooks?.onTransfer?.({ from: 'plot:' + plot.id, to: 'person:' + p.id, item: 'seeds', n: s, reason: 'harvest' });
+  recordPersonalProduction(world,p,'harvest','grain',g,plot.id);
+  recordPersonalProduction(world,p,'harvest','seeds',s,plot.id);
   return { grain: g, seeds: s };
 }
 

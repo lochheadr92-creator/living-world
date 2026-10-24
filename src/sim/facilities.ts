@@ -1,3 +1,4 @@
+import { recordWorkshopOutput } from './settlement_economy';
 import { techniqueBlocker } from './techniques';
 import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
@@ -560,6 +561,7 @@ export function finishJob(world: World, b: Building): boolean {
     if (n > 0) {
       addItem(b.store.items, r.fromDeposit.item, n);
       bump(ops.produced, r.fromDeposit.item, n);
+      recordWorkshopOutput(world,b,r.fromDeposit.item,n);
       if (client) addEarmark(world, b, { kind: 'out', item: r.fromDeposit.item, n, owner: client, reason: job.purpose });
     }
     delete job.held[r.fromDeposit.item];
@@ -572,6 +574,7 @@ export function finishJob(world: World, b: Building): boolean {
     addItem(b.store.items, k, n);
     ledgerCreate(world, k, n, `made ${r.label}`);
     bump(ops.produced, k, n);
+    recordWorkshopOutput(world,b,k,n);
     if (client) addEarmark(world, b, { kind: 'out', item: k, n, owner: client, reason: job.purpose });
   }
   if (r.toolOut) {
@@ -579,6 +582,7 @@ export function finishJob(world: World, b: Building): boolean {
     const maker = Object.keys(job.workers).map(Number).sort((x, y) => (job.workers[y] ?? 0) - (job.workers[x] ?? 0))[0] ?? 0;
     mintTool(world, r.toolOut.kind, r.toolOut.tier, ownerHh, b.id, b.store.items, maker, `made ${r.label}`);
     bump(ops.produced, r.toolOut.kind, 1);
+    recordWorkshopOutput(world,b,r.toolOut.kind,1);
     if (client) addEarmark(world, b, { kind: 'out', item: r.toolOut.kind, n: 1, owner: client, reason: job.purpose });
   }
   if (r.cartOut) {

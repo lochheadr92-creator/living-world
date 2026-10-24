@@ -254,3 +254,8 @@ ordinary shelter construction and explicit establishment. Old property remains o
 refusal, separation, urgent needs and failure remain possible. `relocation.ts` owns the
 records and options; [RELOCATION.md](RELOCATION.md) defines the bounded contract. Version-19
 continuation was pinned in `801123e` before this change. `rich-no-relocation` is lab-only.
+
+**Version 21** records bounded settlement production and gross resource-flow observations
+at actual extraction, harvest, completed-workshop and transfer boundaries. No decision,
+inventory, RNG or timing rule changes. The new state is versioned because it is saved and
+hashed. See ECONOMY.md. Immutable v20 continuation reference: `05cf09e`.

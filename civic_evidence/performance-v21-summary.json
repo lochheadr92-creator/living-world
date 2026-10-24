@@ -1,0 +1,35 @@
+[
+  {
+    "profile": "normal",
+    "seed": "meadow",
+    "rulesVersion": 21,
+    "days": 1,
+    "ticks": 2400,
+    "population": 28,
+    "msPerTick": 0.51,
+    "invariantChecks": 3,
+    "invariantFailures": []
+  },
+  {
+    "profile": "large",
+    "seed": "meadow",
+    "rulesVersion": 21,
+    "days": 1,
+    "ticks": 2400,
+    "population": 100,
+    "msPerTick": 2.24,
+    "invariantChecks": 3,
+    "invariantFailures": []
+  },
+  {
+    "profile": "huge",
+    "seed": "meadow",
+    "rulesVersion": 21,
+    "days": 1,
+    "ticks": 2400,
+    "population": 250,
+    "msPerTick": 8.51,
+    "invariantChecks": 3,
+    "invariantFailures": []
+  }
+]

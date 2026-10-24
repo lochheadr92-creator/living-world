@@ -1,3 +1,4 @@
+import { validateEconomicObservations } from '../sim/settlement_economy';
 import { validateRelocations } from '../sim/relocation';
 import { validateTownships } from '../sim/townships';
 // Optional save / load of the whole world (compressed JSON): into IndexedDB where the browser has it, which has no 5 MB cap, and
@@ -217,6 +218,7 @@ export function deserializeWorld(json: string): World {
   validateSaveLineage(parsed.world.settings?.rulesVersion, parsed.rulesLineage);
   const w = parsed.world as World;
   validateTownships(w);
+  validateEconomicObservations(w);
   validateRelocations(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);

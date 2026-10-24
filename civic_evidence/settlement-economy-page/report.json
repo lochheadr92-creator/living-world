@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Ada: activity shown",
+    "pass": true
+  },
+  {
+    "name": "Ada: output scope accurate",
+    "pass": true
+  },
+  {
+    "name": "Ada: gross flow not called trade",
+    "pass": true
+  },
+  {
+    "name": "Ada: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "Ben: activity shown",
+    "pass": true
+  },
+  {
+    "name": "Ben: output scope accurate",
+    "pass": true
+  },
+  {
+    "name": "Ben: gross flow not called trade",
+    "pass": true
+  },
+  {
+    "name": "Ben: observer preserves complete state",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true
+  }
+]

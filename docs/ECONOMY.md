@@ -343,3 +343,33 @@ interruptions leave no invented knowledge. A completed lesson records its teache
 Without a holder, new charcoal batches cannot start, even in a stocked kiln. Existing
 burning batches still finish physically. Historical rules retain their recipe access.
 This is the first technique, not a claim that every recipe has a knowledge dependency.
+
+## Settlement economic observations (rules 21)
+
+`sim/settlement_economy.ts` owns bounded saved observations, never goods or decisions.
+The inventory ledger remains authoritative for conservation. Gathering/harvest is credited
+to the worker's persistent township; completed workshop goods are credited to the nearest
+physical township within 20 tiles. Idle stock, interrupted batches, water drawing,
+handcrafts and carts are not counted as workshop output. Labels describe observed activity,
+not assigned occupations or demonstrated aggregate advantage.
+
+Alternative considered: reconstruct from event-feed prose and surviving workshop lifetime
+counters. The feed rolls over and lifetime counters cannot distinguish time periods, so
+that would invent missing history. Instead the actual extraction, harvest, completed-batch
+and transfer boundaries record quantities that really moved or finished. Up to eight tick-days
+and 512 daily production groups are retained, plus 128 gross cross-affiliation transfers.
+The observer filters stale production without mutating state. It describes an activity as
+repeated only when recorded on at least three distinct days; this does not influence choices.
+
+Flow receipts include actual holder IDs, civic affiliations at transfer time, item,
+quantity, tick and the transfer's own reason. They include gifts, returns and rollback;
+the UI explicitly calls them **gross transfers, not net trade**. A visitor does not change
+membership, and a private abandoned building remains affiliated with its owner's household.
+These observations alone do not establish purposeful intertown trade or recurring dependence.
+
+Records are optional, saved, hashed and validated. Historical worlds at 20 or earlier do
+not acquire them; v20 continuation was pinned in `05cf09e` first. There is no choice or
+RNG change and no meaningful behavioural ablation to add: a contract compares full
+continuation against v20 with only the new observations/version omitted. Retention removes
+only derived observation detail; it removes no people, inventories, ownership, graves,
+relationships or founding references. The wider D10 audit remains open.

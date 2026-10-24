@@ -1,0 +1,27 @@
+{
+  "rules": 21,
+  "seed": "meadow",
+  "profile": "normal",
+  "ticks": 2400,
+  "observations": {
+    "since": 25,
+    "production": [
+      {
+        "day": 0,
+        "townshipId": 995,
+        "kind": "gathering",
+        "items": {
+          "berries": 79,
+          "fruit": 8,
+          "wood": 65,
+          "grain": 37,
+          "fish": 24,
+          "stone": 2
+        },
+        "lastSource": 844,
+        "lastTick": 2398
+      }
+    ],
+    "flows": []
+  }
+}
