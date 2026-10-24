@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 23 before transmitted household practices",
+  "saved": {
+    "hash": "325da580",
+    "deep": "dba41cd20e8a4f91",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 1
+    },
+    "homeFood": 69,
+    "storedFood": 25
+  },
+  "continued": {
+    "hash": "fa036eec",
+    "deep": "0036292d206cfbea",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 1,
+      "shelter": 1
+    },
+    "homeFood": 74,
+    "storedFood": 21
+  }
+}
