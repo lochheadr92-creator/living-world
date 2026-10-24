@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 25 before spatial deposit geology",
+  "saved": {
+    "hash": "1189b447",
+    "deep": "d32b572239e3d59d",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 1
+    },
+    "homeFood": 85,
+    "storedFood": 29
+  },
+  "continued": {
+    "hash": "0d8eb522",
+    "deep": "c7e18b2a70e8dd7f",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 1,
+      "shelter": 1
+    },
+    "homeFood": 74,
+    "storedFood": 21
+  }
+}
