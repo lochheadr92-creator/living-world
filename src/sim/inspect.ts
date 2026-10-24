@@ -764,6 +764,7 @@ export interface WorldSummary {
   plots: number;
   foodHeld: number;
   births: number;
+  lifetimeBirths: boolean;
   deaths: number;
   tick: number;
 }
@@ -794,7 +795,8 @@ export function summarizeWorld(world: World): WorldSummary {
     sites: world.sites.length,
     plots: world.plots.length,
     foodHeld: food,
-    births: world.events.filter((e) => e.kind === 'life' && /was born/.test(e.text)).length,
+    births: world.birthCount ?? world.events.filter((e) => e.kind === 'life' && /was born/.test(e.text)).length,
+    lifetimeBirths: world.birthCount !== undefined,
     deaths: world.deceased.length,
     tick: world.tick,
   };

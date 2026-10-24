@@ -1,3 +1,4 @@
+import { runsRulesVersion } from './rulesversion';
 import { foundMembership } from './townships';
 import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
 import { createBuilding } from './buildings';
@@ -101,6 +102,7 @@ export function blankWorld(settings: Settings, W = MAP_W, H = MAP_H): World {
     usedNames: new Set(),
     stats: {},
   };
+  if (runsRulesVersion(w,14)) w.birthCount=0;
   return w;
 }
 

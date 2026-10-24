@@ -1,0 +1,22 @@
+{
+  "label": "STAGED: death news travels with a witness",
+  "ticks": 241,
+  "midJourneyContinuation": true,
+  "ben": {
+    "x": 64.7,
+    "y": 40
+  },
+  "cora": {
+    "x": 66,
+    "y": 40,
+    "learned": {
+      "learned": 340,
+      "source": "told",
+      "via": 5
+    }
+  },
+  "ledger": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -46,6 +46,7 @@ export function relationshipHistory(w: World, p: Person): string[] {
  for(const [id,r] of entries){
   const other=Number(id);
   rows.push(`${name(w,other)}: trust ${Math.round(r.trust)}, affinity ${Math.round(r.affinity)}${r.kin ? `; ${r.kin}` : ''}.`);
+  if(r.deathKnown) rows.push(`Death learned at tick ${r.deathKnown.learned}: ${r.deathKnown.source}${r.deathKnown.via ? ` from ${name(w,r.deathKnown.via)}` : ''}.`);
   if(r.grievance) rows.push(`Open grievance: ${r.grievance.detail} (since tick ${r.grievance.since}).`);
   const receipts=(p.socialMemory??[]).filter(m=>m.otherId===other).slice(-3);
   for(const m of receipts)rows.push(`Request #${m.requestId}, ${m.role}, tick ${m.tick}: ${m.outcome} — ${m.reason}${m.siteId ? `; site #${m.siteId}` : ''}.`);

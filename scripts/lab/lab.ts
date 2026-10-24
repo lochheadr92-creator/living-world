@@ -1,3 +1,4 @@
+import { setLocalDeath, localDeathOn } from '../../src/sim/death_knowledge';
 import { setSingleCount, singleCountOn } from '../../src/sim/reputation';
 import { setTownships, townshipsOn } from '../../src/sim/townships';
 // The counterfactual lab: fork a saved world, change one thing, run it forward, and compare it with the untouched control.
@@ -222,6 +223,7 @@ export function parseIntervention(specIn: string): Intervention {
       },
     };
   }
+  if (kind === 'rich-global-death-news') return { spec: label, summary: 'restore global death notification', apply: () => 'global death notification restored', install() { const was = localDeathOn(); setLocalDeath(false); return () => setLocalDeath(was); } };
   if (kind === 'rich-no-reputation-dedup') return { spec: label, summary: 'restore the duplicate relationship and reputation effect of stories', apply: () => 'duplicate reputation restored', install() { const was = singleCountOn(); setSingleCount(false); return () => setSingleCount(was); } };
   if (kind === 'rich-no-townships') return { spec: label, summary: 'township organisation disabled; physical work and other rules unchanged', apply: () => 'townships off', install() { const was = townshipsOn(); setTownships(false); return () => setTownships(was); } };
   if (kind === 'rich-no-table-eating') {

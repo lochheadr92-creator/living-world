@@ -43,8 +43,8 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | A8 generations / H | Birth/age/households/inheritance exist, practices have no holders | S5; bounded transmission records and natural generation timing | unresolved |
 | A9 replay/AI | Existing seeded stepping, replay, legal-option model boundary | Every stage continuation/save/load/purity; preserve seam | implemented |
 | D3 route blocking | Report predates current source; siting tests clearance only | S1 safety for project; S3 general reachability and occupied exits | unresolved |
-| D4 death news | Audit says kin/friends notified globally; not yet rechecked | S2; witness/contact path, isolated bereaved control | unresolved |
-| D6 births | Audit reports event-feed regex; not yet rechecked | S5; feed rollover fixture and durable birth counts | unresolved |
+| D4 death news | Confirmed global mood/need/partner notification; replaced at 14 with witness, grave or co-present typed news | S2; isolated bereaved, indoor/sleep, repeated story, mid-journey continuation | verified |
+| D6 births | Confirmed regex count; v14 lifetime counter incremented at actual birth, legacy scope labelled | S2 prerequisite; rollover/death/save fixtures | verified |
 | D7 market | Audit reports remote exchanges; not yet rechecked | S4 prerequisite; distant/indoor rejection and conservation | unresolved |
 | D9 passive decay | Accepted observation, no demonstrated defect | No change unless new evidence | not applicable: accepted |
 | D10 historical growth | Deceased, graves and pair records retain causality; no retention audit yet | S6; bounded retention/indexing with inheritance/replay contracts | unresolved |
@@ -171,7 +171,47 @@ wood transfer/refusal, typed receipts and grievance visible. Whole saved state s
 identical during inspection. Review found and fixed repeat-story marker handling;
 no failing tests were weakened. Faction/rival organiser politics remains S2b.
 
-Next executable work: D4 local death knowledge (current lifecycle/mood notify all
-kin/friends) and D6 durable birth accounting (inspect uses rolling event regex), then
-S2b competing organisers. Pin v13 continuation before behavioral changes. General
-route safety, relocation, trade, knowledge/generations and performance remain open.
+## S2 lifecycle correction: version 14
+
+`death_knowledge.ts` owns personal learning of a death. The lifecycle owns death,
+registry removal, inventory drops and operational obligation cleanup; those remain
+immediate. Existing relations retain one typed learned-death marker, bounded stories
+carry an identity/timestamp, and graves link to that identity. Alternative: consult
+the global deceased list during decisions; rejected because that recreates omniscience.
+No new unbounded death-news journal is introduced and no old ancestry is deleted.
+
+Awake nearby witnesses in the same indoor/outdoor space learn first. A distant partner
+keeps their believed partnership until hearing or observing evidence, then grief,
+needs and bereavement change once. Grief starts at learning, not the unseen death.
+Conversations require co-presence; prose containing "died" is not a typed death fact.
+Funeral options require known death and a nearby visible gathering at a known place;
+there is no remote invitation system yet. Automatic grave/funeral creation remains
+legacy physical behavior; this slice does not implement burial labor or mourning culture.
+
+D6: fresh v14 worlds start birthCount at zero; actual births increment it once, and
+neither feed rollover nor child death erases the total. Historical worlds retain the
+old calculation, with the tooltip explicitly calling it a surviving-feed count.
+No historical lifetime total is invented. New fields are saved and hashed. The v13
+reference was pinned at 078150b before changing rules; `rich-global-death-news`
+provides the cheap knowledge ablation, not a product mode.
+
+The staged runtime scene has Ben physically walk from x42 to x64.7, then tell Cora
+(at x66) about Ada. At tick 340 she first learns the death from Ben. It takes 241
+simulation steps; the ledger balances. Save/load 100 steps into the journey gives
+identical complete final state. Viewer sees the actual "Ada has died" speech and
+Cora's learned-tick/source in relationship history. Before contact she has no such
+record or grief. This is a controlled fixture, not spontaneous discovery evidence.
+
+Verification: stable full suite 1045 tests / 109 files passed. Initial full run overlapped the
+last test/implementation edits and reported two failures in death news (speech and
+same-day story identity); preserve `life-full-suite.log`. The stable focused rerun
+passes 13 tests, including v13 continuation and legacy reputation. The passing stable full
+rerun is `life-full-final.log`. Review caught a typed death story colliding with an
+unrelated same-day news story; identity-based dedup and its regression fix that.
+Rendered before/after screens are inspected; eight browser checks include full saved
+state purity. Build/typecheck and historical standalone golden script pass.
+
+Next executable work: S2b competing proposals/organisers; D7 co-present market repair
+before cross-settlement trade. General route safety, relocation, knowledge/generations,
+and current-rule performance/ensemble measurements remain open. Do not infer these
+from the staged scenes.

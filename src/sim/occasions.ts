@@ -1,3 +1,4 @@
+import { hasLocalDeath, knowsDeath } from './death_knowledge';
 // Occasions (rich worlds only): a place and a time at which many people gather at once - a funeral, a wedding, a feast for a birth or
 // the first harvest, and a market day. An occasion is called by something that happened (a death, a wedding, a birth, a harvest) or
 // by the calendar (the market, every sixth day once a hall stands), is held at the hall or, failing that, at the camp fire, and
@@ -191,6 +192,7 @@ export function attendOptions(ctx: Ctx): void {
   for (const o of list) {
     // worth setting out for a little before it opens, so that people arrive as it begins rather than as it ends
     if (o.status === 'done' || o.attended.includes(p.id) || o.about.includes(p.id)) continue;
+    if (hasLocalDeath(world) && o.kind==='funeral' && (!o.about.some(id=>knowsDeath(p,id)) || !p.beliefs[o.placeId] || o.status!=='gathering' || p.indoors || hyp(o.x-p.x,o.y-p.y)>10)) continue;
     if (o.status === 'called' && world.tick < o.at - 200) continue;
     const d = hyp(o.x - p.x, o.y - p.y);
     if (d > 60) continue;

@@ -1,0 +1,39 @@
+[
+  {
+    "name": "before: learned death only after contact",
+    "pass": true,
+    "detail": "Relationship historyAda: trust 10, affinity 90; partner.Earlier cause not recorded.Ben: trust 50, affinity 70.Earlier cause not recorded."
+  },
+  {
+    "name": "before: identity and source visible",
+    "pass": true,
+    "detail": "Relationship historyAda: trust 10, affinity 90; partner.Earlier cause not recorded.Ben: trust 50, affinity 70.Earlier cause not recorded."
+  },
+  {
+    "name": "before: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "after: learned death only after contact",
+    "pass": true,
+    "detail": "Relationship historyBen: trust 50, affinity 70.Earlier cause not recorded.Ada: trust 10, affinity 90; partner.Death learned at tick 340: told from Ben.Earlier cause not recorded."
+  },
+  {
+    "name": "after: identity and source visible",
+    "pass": true,
+    "detail": "Relationship historyBen: trust 50, affinity 70.Earlier cause not recorded.Ada: trust 10, affinity 90; partner.Death learned at tick 340: told from Ben.Earlier cause not recorded."
+  },
+  {
+    "name": "after: full saved state unchanged by inspection",
+    "pass": true
+  },
+  {
+    "name": "death story spoken visibly",
+    "pass": true
+  },
+  {
+    "name": "no runtime exceptions",
+    "pass": true,
+    "detail": []
+  }
+]

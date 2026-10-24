@@ -149,7 +149,7 @@ export function createTopbar(ctx: UICtx, slots: Slots, menu: WorldMenu): Part {
     setAttr(
       people.el,
       'data-tip',
-      `${s.population} alive: ${s.children} children, ${s.elders} elders.\n${s.births} born and ${s.deaths} died since the start.`,
+      `${s.population} alive: ${s.children} children, ${s.elders} elders.\n${s.births} births ${s.lifetimeBirths ? 'since the start' : 'in the surviving legacy event feed'}; ${s.deaths} deaths since the start.`,
     );
 
     setText(homes.val, `${s.households} ${s.households === 1 ? 'household' : 'households'}`);

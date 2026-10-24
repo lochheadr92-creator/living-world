@@ -1,3 +1,4 @@
+import { hasLocalDeath, withinHearing } from './death_knowledge';
 // Life changes with social consequences (rich worlds only). Losing a partner, becoming a parent, moving households and taking
 // in an orphan each change who a person relies on and spends time with, for a while: the bereaved lean on kin and close
 // friends (who come to look in, and are readier to help), new parents are helped and seek their partner's company, someone
@@ -56,12 +57,13 @@ export function lifeEventOf(world: World, p: Person): LifeEvent | null {
 }
 
 /** A partner has died: the widow or widower leans on kin and close friends, who come to look in. */
-export function onPartnerLost(world: World, bereaved: Person, dead: Person): void {
+export function onPartnerLost(world: World, bereaved: Person, dead: Pick<Person, 'id' | 'name'>): void {
   if (!isRich(world) || !bereaved.alive) return;
   set(world, bereaved, 'bereaved', dead.id);
   addLog(world, bereaved, 'life', `Lost ${dead.name}. I will lean on those I have left.`);
   for (const q of world.persons) {
     if (q === bereaved || !q.alive) continue;
+    if (hasLocalDeath(world) && (q.pose === 'sleep' || !withinHearing(q, bereaved, 8))) continue;
     const r = q.relations[bereaved.id];
     const close = !!r?.kin || (r?.affinity ?? 0) >= 30;
     if (!close) continue;

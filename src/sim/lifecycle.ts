@@ -1,3 +1,4 @@
+import { hasLocalDeath, witnessDeath } from './death_knowledge';
 import { foundMembership } from './townships';
 import { fireNear, nearestHub } from './settlements';
 import { hasHabitation, indoorHome } from './habitation';
@@ -147,6 +148,7 @@ export function giveBirth(world: World, mother: Person): void {
   baby.needs.thirst = 80;
   baby.needs.energy = 85;
   spawnPerson(world, baby, mother.hhId);
+  if (runsRulesVersion(world,14)) world.birthCount = (world.birthCount ?? 0) + 1;
   if (indoorHome(world, mother)) {
     baby.indoors = mother.indoors;
     baby.x = mother.x; baby.y = mother.y;
@@ -218,6 +220,7 @@ export function deathCauseOf(p: Person): string {
 }
 
 export function killPerson(world: World, p: Person, cause: string): void {
+  if (p.alive && hasLocalDeath(world)) witnessDeath(world,p);
   if (hasHabitation(world)) delete p.indoors;
   if (!p.alive) return;
   abortConversationFor(world, p);
@@ -231,7 +234,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
   if (p.cartId) unhitch(world, p);
   toolsOnDeath(world, p);
   intentionsOnDeath(world, p); // after the activity ended, so what they really did was credited first and nothing accrues now
-  mourn(world, p);
+  if (!hasLocalDeath(world)) mourn(world, p);
   socialOnDeath(world, p);
   dropNear(world, p.x, p.y, p.inv, `${p.name}'s belongings`, p.id);
   p.inv = {};
@@ -244,7 +247,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
       for (let dx = -r; dx <= r && !placed; dx++) {
         if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
         if (isFreeLand(world, gx + dx, gy + dy) && world.terrain[(gy + dy) * world.W + gx + dx] !== T.SAND) {
-          const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age };
+          const g: Grave = { ent: 'grave', id: newId(world), x: gx + dx, y: gy + dy, name: p.name, died: world.tick, age, ...(hasLocalDeath(world) ? {death:{id:p.id,name:p.name,hhId:p.hhId,tick:world.tick}} : {}) };
           registerGeneric(world, g);
           placed = true;
         }
@@ -258,16 +261,16 @@ export function killPerson(world: World, p: Person, cause: string): void {
   removeFromHousehold(world, p);
   if (p.partnerId) {
     const partner = personOf(world, p.partnerId);
-    if (partner) {
+    if (partner && !hasLocalDeath(world)) {
       partner.partnerId = 0;
       onPartnerLost(world, partner, p);
     }
   }
   addEvent(world, 'life', `${p.name} died${cause === 'old age' ? ' peacefully of old age' : ` (${cause})`}, aged ${age}.`, [p.id], p.x, p.y);
   noteDeath(world, p);
-  noteDeedNear(world, p, 'news', `${p.name} died of ${cause}`, p.x, p.y, 10);
-  // those who loved them feel it
-  for (const q of world.persons) {
+  if (!hasLocalDeath(world)) noteDeedNear(world, p, 'news', `${p.name} died of ${cause}`, p.x, p.y, 10);
+  // Historical immediate notification; current knowledge travels through witnesses/markers/talk.
+  if (!hasLocalDeath(world)) for (const q of world.persons) {
     if (!q.alive) continue;
     const r = q.relations[p.id];
     if (!r) continue;

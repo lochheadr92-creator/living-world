@@ -4,6 +4,8 @@ Current direction (2026-10-17): these systems are the default for new product wo
 
 Version 13 correction (2026-10-24): a directly applied relationship consequence is not counted again as reputation. Told stories affect reputation without also permanently adjusting affinity/trust. Request receipts retain the last 32 known outcomes per person; the Relationship history panel exposes typed request/site links and labels unlinked older notes. See `CIVILISATION_IMPLEMENTATION.md` for the controlled evidence and limits.
 
+Version 14 correction: death knowledge travels through awake local witnesses, observed grave markers, and co-present typed news. Grief starts on learning; funeral attendance requires a known death and a nearby gathering. Lifetime births have a durable counter in new worlds; historical feed counts are labelled as incomplete.
+
 Historical implementation notes follow. One page, one line of truth per mechanism: what it is, where it is read, and how to see it in the page. Everything here is
 behind `settings.dynamics = 'rich'`. In an authored world every function below returns its neutral value and no field below is
 ever created, so authored saves and fingerprints are untouched (the golden suite checks this on every commit). Every chance

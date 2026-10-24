@@ -1,3 +1,4 @@
+import { hasLocalDeath, learnDeath, withinHearing } from './death_knowledge';
 import { runsRulesVersion } from './rulesversion';
 // Reputation and news that travel by word of mouth (rich worlds only). What a person knows of someone they have not dealt with
 // themselves comes from what they saw and what they were told: a gift witnessed, a quarrel, a promise kept or broken, a death, a
@@ -13,7 +14,7 @@ import { isRich, think } from './mood';
 import { adjustRel } from './relations';
 import { hashUnit } from './rng';
 import { pickStory } from './traditions';
-import type { Person, Rumour, RumourKind, World } from './types';
+import type { DeathNotice, Person, Rumour, RumourKind, World } from './types';
 
 // Lab-only ablation of the single-counting repair, not a product mode.
 let singleCount = true;
@@ -37,15 +38,18 @@ const fade = (world: World, r: Rumour): number => Math.max(0, 1 - (world.tick - 
 export const heardBy = (p: Person): Rumour[] => p.heard ?? [];
 
 /** Something `p` saw with their own eyes, about `about`: kept as a first-hand story. Rich only. */
-export function noteDeed(world: World, p: Person, about: Person, kind: RumourKind, text: string, relationshipApplied = false): void {
+export function noteDeed(world: World, p: Person, about: Pick<Person, 'id'>, kind: RumourKind, text: string, relationshipApplied = false, death?: DeathNotice): void {
   if (!isRich(world) || p === about || !p.alive) return;
-  keep(world, p, { about: about.id, kind, tick: world.tick, from: 0, origin: p.id, hops: 0, weight: 1, text, ...(singleCountFor(world) && relationshipApplied ? { relationshipApplied: true } : {}) });
+  keep(world, p, { about: about.id, kind, tick: world.tick, from: 0, origin: p.id, hops: 0, weight: 1, text, ...(death ? { death } : {}), ...(singleCountFor(world) && relationshipApplied ? { relationshipApplied: true } : {}) });
 }
 
+function sameStory(a:Rumour,b:Rumour):boolean {
+ return a.death || b.death ? !!a.death && a.death.id===b.death?.id : a.about===b.about && a.kind===b.kind && Math.abs(a.tick-b.tick)<DAY/2;
+}
 function keep(world: World, p: Person, r: Rumour): boolean {
   const list = (p.heard ??= []);
   // the same story told twice is one story (the fresher telling kept); the same kind of deed a day apart is another story
-  const same = list.find((x) => x.about === r.about && x.kind === r.kind && Math.abs(x.tick - r.tick) < DAY / 2);
+  const same = list.find((x) => sameStory(x,r));
   if (same) {
     if (r.hops < same.hops) Object.assign(same, r);
     if (singleCountFor(world) && r.relationshipApplied) same.relationshipApplied = true;
@@ -75,6 +79,7 @@ export function noteDeedNear(world: World, about: Person, kind: RumourKind, text
  */
 export function shareRumour(world: World, S: Person, L: Person): boolean {
   if (!isRich(world)) return false;
+  if (hasLocalDeath(world) && (!S.alive || !L.alive || L.pose==='sleep' || !withinHearing(S,L))) return false;
   const theirs = L.heard ?? [];
   // now and then a story the settlement remembers, told before any fresh news (traditions.ts pickStory)
   if (hashUnit(S.id, L.id, world.tick >> 4) < 0.1) {
@@ -95,7 +100,7 @@ export function shareRumour(world: World, S: Person, L: Person): boolean {
     if (r.about === L.id || r.origin === L.id || r.hops >= RUMOUR_HOPS) continue;
     const f = fade(world, r);
     if (f <= 0) continue;
-    if (theirs.some((x) => x.about === r.about && x.kind === r.kind && Math.abs(x.tick - r.tick) < DAY / 2)) continue;
+    if (theirs.some((x) => sameStory(x,r))) continue;
     // fresher and weightier stories first, about people the listener knows; a little chance decides between equals
     const known = L.relations[r.about] ? 1 : 0;
     const score = f * (1 + Math.abs(WEIGHT[r.kind]) + 0.4 * known) * r.weight + hashUnit(S.id, L.id, r.tick) * 0.3;
@@ -117,7 +122,12 @@ export function shareRumour(world: World, S: Person, L: Person): boolean {
   if (w && !singleCountFor(world)) adjustRel(L, best.about, world.tick, { aff: 1.2 * w, trust: 1.6 * w, note: `${S.name} said ${best.text}` });
   else if (best.kind === 'news' && about && about.ent === 'person') adjustRel(L, best.about, world.tick, { fam: 0.3 });
   // news of a death is felt by those who liked the dead and were not there to see it; the rest file it
-  if (best.kind === 'news' && best.text.includes('died') && (L.relations[best.about]?.affinity ?? 0) > 25 && !(L.mood?.thoughts ?? []).some((t) => t.kind === 'lost:' + best.about)) {
+  if (hasLocalDeath(world) && best.death) {
+    learnDeath(world,L,best.death,'told',S.id);
+    S.speech={text:`${best.death.name} has died.`,until:world.tick+90,kind:'say'};
+    L.speech=null; // clear unrelated small talk while hearing this news
+  }
+  if (!hasLocalDeath(world) && best.kind === 'news' && best.text.includes('died') && (L.relations[best.about]?.affinity ?? 0) > 25 && !(L.mood?.thoughts ?? []).some((t) => t.kind === 'lost:' + best.about)) {
     think(world, L, 'lost:' + best.about, -6, DAY * 2, `heard that ${name} has died`);
   }
   return true;

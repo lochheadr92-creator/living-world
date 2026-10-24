@@ -1,3 +1,4 @@
+import { deathStory, hasLocalDeath } from './death_knowledge';
 import { SOURCE_REGROW } from './constants';
 import { cloneItems } from './economy';
 import { facilitySnapshot } from './facilities';
@@ -136,6 +137,7 @@ export function forget(p: Person, id: number): void {
 
 /** Direct observation of one entity by one person. Returns true if this was new to them. */
 export function observe(world: World, p: Person, e: Entity): boolean {
+  if (hasLocalDeath(world) && e.ent==='grave' && e.death && !p.indoors && p.pose!=='sleep' && Math.hypot(p.x-e.x,p.y-e.y)<=10) deathStory(world,p,e.death,'grave');
   const b = snapshotEntity(world, e, world.tick);
   if (!b) return false;
   b.origin = p.id;

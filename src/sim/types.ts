@@ -127,6 +127,7 @@ export interface FacilitySnapshot {
 }
 
 export interface Relation {
+  deathKnown?: { learned: number; source: 'witness' | 'told' | 'grave'; via: number };
   affinity: number;
   trust: number;
   familiarity: number;
@@ -508,7 +509,9 @@ export interface Illness {
 
 /** a story one person holds about another (reputation.ts; rich worlds only): what, about whom, who told it, who saw it, how old */
 export type RumourKind = 'generous' | 'reliable' | 'quarrelsome' | 'unreliable' | 'thief' | 'news';
+export interface DeathNotice { id: number; name: string; hhId: number; tick: number }
 export interface Rumour {
+  death?: DeathNotice;
   /** This observer already changed their relation for the event; do not count it again as reputation. */
   relationshipApplied?: boolean;
   about: number;
@@ -924,6 +927,7 @@ export interface Pile {
 }
 
 export interface Grave {
+  death?: DeathNotice;
   ent: 'grave';
   id: number;
   x: number;
@@ -1196,6 +1200,8 @@ export interface SpatialGrid {
 }
 
 export interface World {
+  /** Lifetime births from rules 14; absent historical records are not reconstructed from prose. */
+  birthCount?: number;
   townships?: Township[];
   civicProjects?: CivicProject[];
   settings: Settings;

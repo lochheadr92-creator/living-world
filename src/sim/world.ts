@@ -377,6 +377,12 @@ export function hashWorld(world: World): string {
     for (const p of world.persons) if (p.civicOutcomes) push(`CivicMemory${p.id}:${JSON.stringify(p.civicOutcomes)}`);
   }
   for (const p of world.persons) if (p.heard?.some(r => r.relationshipApplied)) push(`CountedStories${p.id}:${JSON.stringify(p.heard)}`);
+  if (world.birthCount !== undefined) push(`Births${world.birthCount}`);
+  for (const p of world.persons) {
+    for (const [id,r] of Object.entries(p.relations)) if (r.deathKnown) push(`DeathKnowledge${p.id}:${id}:${JSON.stringify(r.deathKnown)}`);
+    if(p.heard?.some(r=>r.death)) push(`DeathStories${p.id}:${JSON.stringify(p.heard)}`);
+  }
+  for (const g of world.graves) if(g.death) push(`GraveIdentity${g.id}:${JSON.stringify(g.death)}`);
   for (const p of world.persons) if (p.socialMemory) push(`SocialMemory${p.id}:${JSON.stringify(p.socialMemory)}`);
   if (world.inhabitants) for (const k of Object.keys(world.inhabitants).sort((a, b) => Number(a) - Number(b))) push(`E${k}:${JSON.stringify(world.inhabitants[Number(k)])}`);
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));

@@ -44,7 +44,7 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-Current rules version 13 adds single-count social consequences and typed request history, after version 12 persistent townships and voluntary public storehouse projects.
+Current rules version 14 adds local death knowledge and durable birth accounting, after version 13 social history/single counting and version 12 townships/shared storehouses.
 `docs/CIVILISATION_IMPLEMENTATION.md` is the execution/continuation register; it records
 version collisions, verified scope and unrun measurements. Candidate version 8 courier
 and version 9 table eating are applied at version 11 on the local-main lineage.
