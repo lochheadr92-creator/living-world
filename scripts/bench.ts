@@ -8,6 +8,7 @@
 //   --pop N          founding population (default: the ordinary 28, or the profile's)
 //   --profile P      large (160x160, 100 founders in 4 camps) or huge (256x256, 250 founders in 6 camps); see src/sim/profiles.ts.
 //                    A profile implies the scaled rules. The default, normal, is the ordinary world.
+//   --current        explicitly benchmark the current integrated rules; omission preserves historical bench behavior
 //   --harsh          harsh mode
 //   --arrivals off   no immigration
 //   --rules scaled   the limits on settlement size as ratios of the founding population, local to a settlement (src/sim/rules.ts);
@@ -32,7 +33,7 @@ import { setOptionChooser } from '../src/sim/decision';
 import { createWorld } from '../src/sim/factory';
 import { WATER_ID_BASE } from '../src/sim/knowledge';
 import { stageOf } from '../src/sim/people';
-import { settingsForProfile } from '../src/sim/profiles';
+import { settingsForProfile, currentWorldSettings } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { COUNTER_KEYS, DIST_BUCKETS, probe, probePathCells, probeReset, probeSnapshot, probeWanderCauses } from '../src/sim/probe';
 import type { PathCell } from '../src/sim/probe';
@@ -60,6 +61,7 @@ const slowTicks: { tick: number; ms: number; /** CPU time the process used durin
 
 const profile = opt('profile', 'normal') as ProfileName;
 const settings = settingsForProfile(profile, seed, { harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off', ...(popArg ? { population: Number(popArg) } : {}) });
+if (flag('current')) Object.assign(settings, currentWorldSettings(profile, seed, { harsh: settings.harsh, immigration: settings.immigration }), popArg ? {population: Number(popArg)} : {});
 if (opt('rules', 'ordinary') === 'scaled') (settings as { ruleSet?: 'scaled' }).ruleSet = 'scaled';
 
 const pct = (sorted: Float64Array, q: number): number => (sorted.length ? sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))] : 0);

@@ -6,6 +6,16 @@ It records the tools, the measurements taken so far, and the places where the cu
 
 Nothing here changes how the simulation behaves.
 
+## Current integrated rules checkpoint — 2026-10-24
+
+Version 16, seed river, arrivals off, one first day (2,400 ticks), serial Node processes
+on the Windows host: 28 founders 0.57 ms/tick; 100 founders 2.24 ms/tick; 250 founders
+8.37 ms/tick. Six invariant checks per run, zero failures. These headless startup
+measurements do not establish mature-world scaling or browser frame rate. See
+[the civilisation register](CIVILISATION_IMPLEMENTATION.md#current-rule-performance-checkpoint-version-16)
+for exact workloads and raw evidence. Use the new `--current` benchmark switch for
+current integrated rules; omission retains the historical benchmark settings.
+
 ## Tools
 
 ### Golden fingerprints — "did the ordinary world change?"

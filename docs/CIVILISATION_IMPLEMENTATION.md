@@ -59,13 +59,13 @@ generations; S6 long-run retention/performance. Status means evidence, not aspir
 | D3 route blocking | Report predates current source; siting tests clearance only | S1 safety for project; S3 general reachability and occupied exits | unresolved |
 | D4 death news | Confirmed global mood/need/partner notification; replaced at 14 with witness, grave or co-present typed news | S2; isolated bereaved, indoor/sleep, repeated story, mid-journey continuation | verified |
 | D6 births | Confirmed regex count; v14 lifetime counter incremented at actual birth, legacy scope labelled | S2 prerequisite; rollover/death/save fixtures | verified |
-| D7 market | V15 historical attendance enables remote trades; v16 validates physical venue/contact and local knowledge | S4 prerequisite; rejection, conserved barter, mid-walk save and rendered arrival | implemented: verification below |
+| D7 market | V15 historical attendance enables remote trades; v16 validates physical venue/contact and local knowledge | S4 prerequisite; rejection, conserved barter, mid-walk save and rendered arrival | verified |
 | D9 passive decay | Accepted observation, no demonstrated defect | No change unless new evidence | not applicable: accepted |
 | D10 historical growth | Deceased, graves and pair records retain causality; no retention audit yet | S6; bounded retention/indexing with inheritance/replay contracts | unresolved |
 | D11 newborn skills | Audit reports adult-range initial skills; not yet rechecked | S5; explicit developmental competence and learning | unresolved |
 | D12 / A aggregate reserve/shelter benefit | Historical null/mixed evidence is not failure of mechanism | S6; town paired controls/nudges/ablations, accept null | unresolved |
 | B dependency map | Migration is not required for organisation within a settlement | Owner programme supersedes audit ordering; S1 before S3 | superseded |
-| A9 performance | 28/100/250 profiles exist; historical timings are legacy | S6; current rules representative profile timings, 300 only if useful | unresolved |
+| A9 performance | Current v16 one-day 28/100/250 measurements recorded below; mature-world cost still unmeasured | S6; startup profiles verified, long-run retention unresolved | verified: bounded startup only |
 | H docs: CLAUDE rules summary | Current civilisation section names current generation and reconciliation | S0-S2 agent guidance corrected | verified |
 | H docs: README/ECONOMY population, animals, markets | Corrected obsolete one-settlement/one-species/no-market claims from current source; no purposeful intertown trade claimed | S4 market prerequisite | verified |
 | H docs: RICH_WORLD traditionsTick, fish/dry spell | Audit leads, no behavioural repair inferred | S5 | unresolved |
@@ -311,3 +311,28 @@ Seven rendered checks pass; final screenshots visually inspected with carrying v
 Boundary checks: full suite 1065 tests / 113 files, build/typecheck and standalone
 historical golden script pass; diff whitespace check clean. Broader S4
 purposeful intertown exchange and measured dependence remain unresolved.
+
+## Current-rule performance checkpoint (version 16)
+
+The benchmark now accepts `--current`, selecting `currentWorldSettings`; omission
+preserves historical runner semantics. No simulation rule changed. Run serially on
+this Windows host, seed river, arrivals off, 2,400 ticks (one first day), samples every
+240 ticks, ledger/tool/id checks every 600 ticks. Node and actual settings are in
+`civic_evidence/performance-v16-day-{normal,large,huge}.json`. The earlier 600-tick
+pilot files are retained separately. No tests or other agent CPU tasks overlapped
+these measurements; unrelated host load was not controlled.
+
+| Profile | Starting people | Wall seconds | Mean ms/tick | Invariant checks / failures |
+|---|---:|---:|---:|---:|
+| normal | 28 | 1.37 | 0.57 | 6 / 0 |
+| large | 100 | 5.37 | 2.24 | 6 / 0 |
+| huge | 250 | 20.08 | 8.37 | 6 / 0 |
+
+Command (substitute profile):
+`npx --no-install vite-node scripts/bench.ts --current --profile huge --seed river --days 1 --arrivals off --sample 240 --check 600 --quiet --out civic_evidence/performance-v16-day-huge.json`
+
+These are short headless startup workloads, not mature civilisations, rendered frame
+rates, an optimisation comparison, or evidence of long-run bounded memory. Existing
+250-person profiling suffices for this checkpoint; no synthetic 300-person workload
+was needed. D10 retention and mature-world cost remain unresolved. All three exited
+successfully with balanced invariants. Typecheck covers the runner change.
