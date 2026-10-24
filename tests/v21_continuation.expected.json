@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 21 before exchange journeys",
+  "saved": {
+    "hash": "cbedecf6",
+    "deep": "a5c8c3d47b63f5b6",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 1
+    },
+    "homeFood": 69,
+    "storedFood": 25
+  },
+  "continued": {
+    "hash": "e9c241f6",
+    "deep": "4c78331b3b1dce99",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 1,
+      "shelter": 1
+    },
+    "homeFood": 74,
+    "storedFood": 21
+  }
+}
