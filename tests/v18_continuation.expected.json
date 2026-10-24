@@ -1,0 +1,25 @@
+{
+  "source": "reconciled version 18 before general construction access protection",
+  "saved": {
+    "hash": "6d81bfb4",
+    "deep": "068b52338af89df9",
+    "alive": 28,
+    "plans": {
+      "tool": 18,
+      "stock": 2
+    },
+    "homeFood": 41,
+    "storedFood": 15
+  },
+  "continued": {
+    "hash": "439507f2",
+    "deep": "8539f8553e5ce5db",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 2
+    },
+    "homeFood": 86,
+    "storedFood": 33
+  }
+}
