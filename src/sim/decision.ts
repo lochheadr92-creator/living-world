@@ -244,7 +244,11 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
       reason = choice.reason;
       break;
     }
-    const o = ranked.find((x) => x.key === choice.key);
+    // New controllers identify a particular offered alternative; legacy inputs
+    // retain their recorded first-key-match interpretation.
+    const indexed = choice.offerIndex === undefined ? undefined : ranked[choice.offerIndex];
+    const o = choice.offerIndex === undefined ? ranked.find(x=>x.key===choice.key)
+      : Number.isInteger(choice.offerIndex) && indexed?.key === choice.key ? indexed : undefined;
     if (!o) {
       reason = `“${choice.key}” is not on offer now`;
       ext.notify?.(world, p, { kind: 'rejected', key: choice.key, reason });

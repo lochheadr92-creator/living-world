@@ -1,0 +1,44 @@
+[
+  {
+    "file": "f1/manual-transcript.json",
+    "protocol": "inhabitant/3",
+    "observation": 3,
+    "tick": 2282,
+    "warnings": []
+  },
+  {
+    "file": "f1/final-build-transcript.json",
+    "protocol": "inhabitant/9",
+    "observation": 6,
+    "tick": 2282,
+    "warnings": []
+  },
+  {
+    "file": "f3/manual-transcript.json",
+    "protocol": "inhabitant/5",
+    "observation": 4,
+    "tick": 223,
+    "warnings": []
+  },
+  {
+    "file": "f2/manual-transcript.json",
+    "protocol": "inhabitant/7",
+    "observation": 5,
+    "tick": 422,
+    "warnings": []
+  },
+  {
+    "file": "f4/manual-transcript.json",
+    "protocol": "inhabitant/7",
+    "observation": 5,
+    "tick": 498,
+    "warnings": []
+  },
+  {
+    "file": "f5/manual-transcript.json",
+    "protocol": "inhabitant/9",
+    "observation": 6,
+    "tick": 223,
+    "warnings": []
+  }
+]

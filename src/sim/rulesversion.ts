@@ -155,8 +155,16 @@ export function describeRulesVersion(v: number | undefined): string {
 
 // Save-envelope provenance: the numeric generations 8 and 9 collided on two branches.
 export const RULES_LINEAGE = 'main-iron-warmth-smithy';
-export function validateSaveLineage(version: unknown, lineage: unknown): void {
+// Concurrent unmerged 007b9d5 used 27 for leisure, before rebasing that work as 28.
+// Neither the shared lineage nor the absence of leisure state proves which 27 made a save.
+export const RULES_27_GENERATION = 'main-night-wait-boundary-27';
+export function saveRulesGeneration(version: unknown): string | undefined {
+ return version === 27 ? RULES_27_GENERATION : undefined;
+}
+export function validateSaveLineage(version: unknown, lineage: unknown, generation?: unknown): void {
  if (lineage !== undefined && lineage !== RULES_LINEAGE) throw new Error('Unknown rules lineage; keep this save with its original build.');
  if ((version === 8 || version === 9) && lineage !== RULES_LINEAGE)
   throw new Error('Ambiguous rules version 8/9: two incompatible branches used this number. Original save preserved; open with its original build.');
+ if (version === 27 && generation !== RULES_27_GENERATION)
+  throw new Error('Ambiguous rules version 27: night-wait and unmerged leisure branches used this number. Original save preserved; open with its original build. No automatic migration is safe.');
 }

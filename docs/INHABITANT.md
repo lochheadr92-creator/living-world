@@ -456,3 +456,19 @@ Rules 27 fixes the offered night shelter wait across conversations with a saved 
 daylight boundary. Earlier rules/transcripts keep their original behaviour. Ordinary
 rest and work suspension semantics remain unchanged. The staged manual transcript and
 replay are in inhabitant_evidence/f1; this is mechanism evidence, not a natural run.
+
+Inhabitant audit F3 (2026-10-25): new runs use protocols 5/6 and observation 4.
+Duplicate internal option keys receive distinct decision-local public keys; goals and
+limits remain separate. Protocols 1–4 retain their historical first-match meaning.
+See docs/INHABITANT_FIXES.md and inhabitant_evidence/f3/ for manual/replay evidence.
+
+Inhabitant audit F2: protocols 7/8 (observation 5) expose the existing material-ready
+crafting needs gate in setAside and the manual panel. Thresholds and actions are unchanged.
+Older protocol observations retain their original wording/content.
+
+Inhabitant audit F4/F5: Last compares recorded work/interaction timestamps (work wins
+exact ties; absent timestamps give unknown order). New protocols 9/10 use observation 6:
+action estimates and memory ages use world-clock minutes/hours/days, independent of
+playback speed, rounded to a minute. Historical protocols retain their original wording.
+This does not redesign the general observer inspector. Audit evidence and limitations:
+docs/INHABITANT_FIXES.md, inhabitant_evidence/f1 through f5.

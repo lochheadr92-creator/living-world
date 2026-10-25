@@ -16,7 +16,7 @@ export type ExternalChoice =
   /** no answer yet: the person stands this tick and asks again next tick */
   | { kind: 'defer' }
   /** the key of one of the offered options, optionally narrowed by limits the option declared in `bounds` */
-  | { kind: 'pick'; key: string; limit?: Record<string, number> }
+  | { kind: 'pick'; key: string; limit?: Record<string, number>; offerIndex?: number }
   /** let the engine choose as it would for anyone, and say why the controller did not */
   | { kind: 'fallback'; reason: string };
 

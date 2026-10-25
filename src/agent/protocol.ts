@@ -7,10 +7,11 @@
 // its notes. The answer is strict JSON; anything else is a parse failure, which the controller treats as a failed call (the engine then
 // chooses, and the transcript says so). A bad "notes" field spoils the notes update only, never the choice.
 //
-// Four protocols are spoken. inhabitant/1 is the original, without memory: its prompt and answer are unchanged to the byte, so the
+// Historical protocols remain supported. inhabitant/1 is the original, without memory: its prompt and answer are unchanged to the byte, so the
 // transcripts recorded under it (the first real-model run) still replay. inhabitant/2 adds the notes. inhabitant/3 and inhabitant/4
 // are those two with action limits advertised on the observation. The transcript header names the observation shape; a recording
 // from before that field replays by the shape its protocol was made with.
+// 5/6 add distinct offer identity; 7/8 explain the crafting needs gate; 9/10 use world-clock durations.
 import type { InhabitantNotes } from '../sim/types';
 import { LIMITS, parseNoteUpdate } from './memory';
 import type { NoteUpdate } from './memory';
@@ -21,19 +22,28 @@ export const PROTOCOL_V2 = 'inhabitant/2';
 /** 3 and 4 are 1 and 2 with one addition: an action may advertise the limits a controller can set on it (observation shape 3). */
 export const PROTOCOL_V3 = 'inhabitant/3';
 export const PROTOCOL_V4 = 'inhabitant/4';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4];
+export const PROTOCOL_V5 = 'inhabitant/5';
+export const PROTOCOL_V6 = 'inhabitant/6';
+export const PROTOCOL_V7 = 'inhabitant/7';
+export const PROTOCOL_V8 = 'inhabitant/8';
+export const PROTOCOL_V9 = 'inhabitant/9';
+export const PROTOCOL_V10 = 'inhabitant/10';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V4 : PROTOCOL_V3;
+  return memory ? PROTOCOL_V10 : PROTOCOL_V9;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V1) return 1;
   if (protocol === PROTOCOL_V2) return 2;
+  if (protocol === PROTOCOL_V5 || protocol === PROTOCOL_V6) return 4;
+  if (protocol === PROTOCOL_V7 || protocol === PROTOCOL_V8) return 5;
+  if (protocol === PROTOCOL_V9 || protocol === PROTOCOL_V10) return 6;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10;
 }
 
 export interface Proposal {

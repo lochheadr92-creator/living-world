@@ -1,4 +1,6 @@
 import { deceasedById } from '../sim/historical_index';
+import { choiceKeys } from './choice_keys';
+import { blockedCraftNeeds } from '../sim/options_work';
 // The inhabitant's observation: everything an outside controller may know about the person it drives, and nothing else
 // (docs/INHABITANT.md, section 2).
 //
@@ -17,7 +19,7 @@ import { BUILD_DEF, CRITICAL, NEED_KEYS, TOOL_DEFS } from '../sim/constants';
 import { householdOf } from '../sim/buildings';
 import { clockText, dayFraction, dayNumber, phaseName, weatherLabel } from '../sim/environment';
 import { membersOf } from '../sim/households';
-import { agoText, secondsText } from '../sim/inspect';
+import { observedAge as ageText, observedDuration as durationText } from './time_text';
 import { estimatedAmount, isWaterBeliefId } from '../sim/knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, compass } from '../sim/labels';
 import { isRich, thoughtsOf } from '../sim/mood';
@@ -34,7 +36,7 @@ import { hyp } from '../sim/util';
  *  3 adds the limits an action accepts. */
 /** Bump when the observation's content or wording changes, and keep the old shape under the old version: replay rebuilds each ask's
  * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names. */
-export const OBSERVATION_VERSION = 3;
+export const OBSERVATION_VERSION = 6;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -218,7 +220,7 @@ function deepFreeze<T>(o: T): T {
   return o;
 }
 
-function describePlace(world: World, p: Person, b: Belief): ObservedPlace {
+function describePlace(world: World, p: Person, b: Belief, version: number): ObservedPlace {
   const dx = b.x - p.x;
   const dy = b.y - p.y;
   const out: ObservedPlace = {
@@ -228,7 +230,7 @@ function describePlace(world: World, p: Person, b: Belief): ObservedPlace {
     y: r1(b.y),
     distance: Math.round(hyp(dx, dy)),
     direction: compass(dx, dy),
-    seen: agoText(world, b.seen),
+    seen: ageText(world, version, b.seen),
     source: b.src === 'seen' ? 'seen' : `told by ${nameOf(world, b.from)}${(b.hops ?? 1) > 1 ? ` (${b.hops} mouths)` : ''}`,
     stale: world.tick - b.seen > STALE_AFTER,
   };
@@ -251,7 +253,7 @@ function describePlace(world: World, p: Person, b: Belief): ObservedPlace {
 }
 
 /** the target of an option or a failure, as the person knows it */
-function describeTarget(world: World, p: Person, id: number): string | null {
+function describeTarget(world: World, p: Person, id: number, version: number): string | null {
   if (!id) return null;
   const s = p.seen.find((x) => x.id === id);
   if (s) {
@@ -259,9 +261,9 @@ function describeTarget(world: World, p: Person, id: number): string | null {
     return s.ent === 'person' ? `${nameOf(world, id)} (in sight, ${d} tiles ${compass(s.x - p.x, s.y - p.y)})` : `wolf (in sight, ${d} tiles away)`;
   }
   const b = p.beliefs[id];
-  if (b) return `${placeNoun(b)} ${Math.round(hyp(b.x - p.x, b.y - p.y))} tiles ${compass(b.x - p.x, b.y - p.y)} (seen ${agoText(world, b.seen)})`;
+  if (b) return `${placeNoun(b)} ${Math.round(hyp(b.x - p.x, b.y - p.y))} tiles ${compass(b.x - p.x, b.y - p.y)} (seen ${ageText(world, version, b.seen)})`;
   const wh = p.whereabouts[id];
-  if (wh) return `${nameOf(world, id)} (last seen ${agoText(world, wh.tick)})`;
+  if (wh) return `${nameOf(world, id)} (last seen ${ageText(world, version, wh.tick)})`;
   if (p.relations[id] || p.hhId === (world.byId.get(id) as Person | undefined)?.hhId) return nameOf(world, id);
   return `#${id}`;
 }
@@ -293,8 +295,8 @@ function describeOption(world: World, p: Person, o: Option, showScores: boolean,
     label: cleanText(o.label, 120),
     goal: cleanText(o.goal, 160),
     need: o.need,
-    eta: o.eta > 0 ? secondsText(o.eta) : 'now',
-    target: describeTarget(world, p, o.targetId),
+    eta: o.eta > 0 ? durationText(o.eta, version) : 'now',
+    target: describeTarget(world, p, o.targetId, version),
   };
   if (showScores) out.score = Math.round(o.util * 10) / 10;
   if (version >= 3 && o.bounds && o.bounds.length) {
@@ -360,24 +362,24 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
           goal: cleanText(a.goal, 160),
           phase: a.phase,
           progress: a.duration > 0 ? Math.round(Math.min(1, a.progress / a.duration) * 100) / 100 : 0,
-          target: describeTarget(world, p, a.targetId),
+          target: describeTarget(world, p, a.targetId, version),
           blocked: cleanText(a.blocked, 120),
-          since: agoText(world, a.start),
+          since: ageText(world, version, a.start),
         }
       : null,
     suspended: p.suspended ? cleanText(p.suspended.label, 120) : null,
     conversation: null,
-    lastResult: p.lastResult ? { label: cleanText(p.lastResult.label, 120), outcome: p.lastResult.outcome, detail: cleanText(p.lastResult.detail, 160), when: agoText(world, p.lastResult.tick), ...(version >= 2 ? { t: p.lastResult.tick } : {}) } : null,
+    lastResult: p.lastResult ? { label: cleanText(p.lastResult.label, 120), outcome: p.lastResult.outcome, detail: cleanText(p.lastResult.detail, 160), when: ageText(world, version, p.lastResult.tick), ...(version >= 2 ? { t: p.lastResult.tick } : {}) } : null,
     // what this person's own last exchange came to. A conversation deliberately leaves lastResult alone, so without this a
     // social action has no outcome the controller can see. Their own side only: never the other person's beliefs or plans.
     ...(version >= 3
       ? {
           lastInteraction: p.lastInteraction
-            ? { purpose: String(p.lastInteraction.purpose), outcome: cleanText(p.lastInteraction.outcome, 60), detail: cleanText(p.lastInteraction.detail, 160), when: agoText(world, p.lastInteraction.tick), t: p.lastInteraction.tick }
+            ? { purpose: String(p.lastInteraction.purpose), outcome: cleanText(p.lastInteraction.outcome, 60), detail: cleanText(p.lastInteraction.detail, 160), when: ageText(world, version, p.lastInteraction.tick), t: p.lastInteraction.tick }
             : null,
         }
       : {}),
-    lastChoice: p.lastDecision && p.lastDecision.chosen ? { label: cleanText(p.lastDecision.chosen.label, 120), when: agoText(world, p.lastDecision.tick), trigger: p.lastDecision.trigger } : null,
+    lastChoice: p.lastDecision && p.lastDecision.chosen ? { label: cleanText(p.lastDecision.chosen.label, 120), when: ageText(world, version, p.lastDecision.tick), trigger: p.lastDecision.trigger } : null,
   };
   if (p.convId) {
     const c = world.conversations.find((x) => x.id === p.convId);
@@ -426,14 +428,14 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   }
   const nearest = (list: Belief[] | undefined, n: number): Belief[] => (list ? list.slice().sort((m, o) => hyp(m.x - p.x, m.y - p.y) - hyp(o.x - p.x, o.y - p.y)).slice(0, n) : []);
   const places: ObservedPlace[] = [];
-  for (const kind of Object.keys(PLACE_CAPS) as Belief['kind'][]) for (const b of nearest(byKind[kind], PLACE_CAPS[kind] ?? 4)) places.push(describePlace(world, p, b));
+  for (const kind of Object.keys(PLACE_CAPS) as Belief['kind'][]) for (const b of nearest(byKind[kind], PLACE_CAPS[kind] ?? 4)) places.push(describePlace(world, p, b, version));
   places.sort((m, n) => m.distance - n.distance);
-  const water = nearest(byKind.water, 4).map((b) => describePlace(world, p, b));
+  const water = nearest(byKind.water, 4).map((b) => describePlace(world, p, b, version));
   const dangers = (byKind.danger ?? [])
     .filter((b) => b.amount > 0 && world.tick - b.seen < 700)
     .sort((m, n) => hyp(m.x - p.x, m.y - p.y) - hyp(n.x - p.x, n.y - p.y))
     .slice(0, 6)
-    .map((b) => describePlace(world, p, b));
+    .map((b) => describePlace(world, p, b, version));
 
   const relations: InhabitantObservation['people']['relations'] = [];
   for (const k of Object.keys(p.relations)) {
@@ -448,7 +450,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
       trust: Math.round(r.trust),
       familiarity: Math.round(r.familiarity),
       kin: r.kin,
-      lastMet: r.lastMet > 0 ? agoText(world, r.lastMet) : 'never',
+      lastMet: r.lastMet > 0 ? ageText(world, version, r.lastMet) : 'never',
       avoiding: r.avoidUntil > world.tick,
       owesMe: Math.round(r.debt),
       lastNote: r.history.length ? cleanText(r.history[r.history.length - 1].text, 120) : '',
@@ -463,12 +465,12 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     .filter((x) => !inSight.has(x.id) && world.tick - x.w.tick < 2400)
     .sort((m, n) => n.w.tick - m.w.tick)
     .slice(0, 10)
-    .map((x) => ({ id: x.id, name: nameOf(world, x.id), x: r1(x.w.x), y: r1(x.w.y), when: agoText(world, x.w.tick) }));
+    .map((x) => ({ id: x.id, name: nameOf(world, x.id), x: r1(x.w.x), y: r1(x.w.y), when: ageText(world, version, x.w.tick) }));
 
   const worries = p.concerns.map((c) => ({
     about: nameOf(world, c.about),
     kind: c.kind === 'missing' ? 'has not been seen for a while' : `looked ${c.kind}`,
-    seen: agoText(world, c.seen),
+    seen: ageText(world, version, c.seen),
     source: c.src === 'seen' ? 'saw it myself' : `told by ${nameOf(world, c.from)}`,
   }));
 
@@ -477,7 +479,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     if (r.from !== p.id && r.to !== p.id) continue;
     if (world.tick - (r.resolved || r.created) > 3000) continue;
     const what = r.kind === 'info' ? `where to find ${r.infoKind}` : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : `${r.amount} ${r.item ?? r.kind}`;
-    requests.push({ direction: r.from === p.id ? 'I asked' : 'asked of me', other: nameOf(world, r.from === p.id ? r.to : r.from), what, status: r.status, note: cleanText(r.note, 120), when: agoText(world, r.created) });
+    requests.push({ direction: r.from === p.id ? 'I asked' : 'asked of me', other: nameOf(world, r.from === p.id ? r.to : r.from), what, status: r.status, note: cleanText(r.note, 120), when: ageText(world, version, r.created) });
   }
   requests.reverse();
 
@@ -489,7 +491,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     if (c.reason) parts.push(cleanText(c.reason, 100));
     if (c.status === 'active' && c.blocked && c.blockedAt && world.tick - c.blockedAt < 600) parts.push(`held up: ${cleanText(c.blocked, 100)}`);
     const due = c.deadline + (c.grace ?? 0);
-    return { text: commitmentText(world, p, c), status: c.status, detail: parts.join(' · '), due: c.status === 'active' ? (due > world.tick ? `in ${secondsText(due - world.tick)}` : 'overdue') : agoText(world, c.made) };
+    return { text: commitmentText(world, p, c), status: c.status, detail: parts.join(' · '), due: c.status === 'active' ? (due > world.tick ? `in ${durationText(due - world.tick, version)}` : 'overdue') : ageText(world, version, c.made) };
   });
 
   const failures: InhabitantObservation['recent']['failures'] = [];
@@ -497,10 +499,11 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     const id = Number(k);
     const f = p.failures[id];
     if (world.tick - f.tick > 900) continue;
-    failures.push({ place: describeTarget(world, p, id) ?? `#${id}`, when: agoText(world, f.tick), reason: cleanText(f.reason, 100) });
+    failures.push({ place: describeTarget(world, p, id, version) ?? `#${id}`, when: ageText(world, version, f.tick), reason: cleanText(f.reason, 100) });
   }
   failures.sort((m, n) => m.when.localeCompare(n.when));
 
+  const publicKeys = version >= 4 ? choiceKeys(ranked) : ranked.map(o=>o.key);
   const obs: InhabitantObservation = {
     version,
     time: { tick: world.tick, day: dayNumber(world.tick), clock: clockText(world.tick), phase: phaseName(dayFraction(world.tick)), light, weather: weatherLabel(world.weather), tempC: Math.round(world.weather.temp) },
@@ -521,11 +524,11 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
       memory: p.log
         .slice(-14)
         .reverse()
-        .map((l) => ({ when: agoText(world, l.tick), text: cleanText(l.text, 200), kind: l.kind, ...(version >= 2 ? { t: l.tick } : {}) })),
+        .map((l) => ({ when: ageText(world, version, l.tick), text: cleanText(l.text, 200), kind: l.kind, ...(version >= 2 ? { t: l.tick } : {}) })),
       failures: failures.slice(0, 6),
     },
-    options: ranked.slice(0, 30).map((o) => describeOption(world, p, o, showScores, version)),
-    setAside: ctx.blocked.slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId) })),
+    options: ranked.slice(0, 30).map((o,index) => ({...describeOption(world, p, o, showScores, version), key: publicKeys[index]})),
+    setAside: [...(version >= 5 ? blockedCraftNeeds(ctx) : []), ...ctx.blocked].slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId, version) })),
   };
   return deepFreeze(obs);
 }

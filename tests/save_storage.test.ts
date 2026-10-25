@@ -1,7 +1,8 @@
 // Where a save is kept: IndexedDB when there is one, localStorage when there is not or it fails; and what happens to a save made before.
 import 'fake-indexeddb/auto';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { loadGame, saveGame, savedGameInfo, hasSavedGame } from '../src/app/save';
+import { loadGame, saveGame, savedGameInfo, hasSavedGame, serializeWorld } from '../src/app/save';
+import { nightAuditWorld } from '../scripts/fixtures/night_audit_world';
 import type { SaveTarget } from '../src/app/save';
 import { createWorld, defaultSettings } from '../src/sim/factory';
 import { settingsForProfile } from '../src/sim/profiles';
@@ -93,6 +94,17 @@ const ordinary = (seed: string, ticks = 300) => {
   for (let i = 0; i < ticks; i++) stepWorld(world);
   return { world, settings };
 };
+
+it('an ambiguous version-27 load preserves the stored original and running world', async () => {
+  const w=nightAuditWorld(), raw=JSON.parse(serializeWorld(w)); delete raw.rulesGeneration;
+  const original=JSON.stringify({settings:w.settings,data:await gzipB64(JSON.stringify(raw))});
+  store.setItem('living-world:save:v1',original);
+  const running=target(w,w.settings), before=serializeWorld(w);
+  expect(await loadGame(running)).toBe(false);
+  expect(running.restored).toBeNull();
+  expect(serializeWorld(running.world)).toBe(before);
+  expect(store.getItem('living-world:save:v1')).toBe(original);
+});
 
 describe('where a save is kept', () => {
   it('puts the world in IndexedDB and only a short description in localStorage', async () => {

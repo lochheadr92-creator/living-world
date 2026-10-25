@@ -1,0 +1,22 @@
+{
+  "tick": 498,
+  "summaries": [
+    {
+      "tick": 300,
+      "last": ""
+    },
+    {
+      "tick": 320,
+      "last": "Eating — success"
+    },
+    {
+      "tick": 393,
+      "last": "chat — friendly"
+    },
+    {
+      "tick": 497,
+      "last": "Making a pick — success"
+    }
+  ],
+  "warnings": []
+}

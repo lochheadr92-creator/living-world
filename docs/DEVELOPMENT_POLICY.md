@@ -330,3 +330,13 @@ cost of the walk choose among them (`src/sim/leisure.ts`; the parts show in the 
 authored worlds. Rules-27 continuation pinned first (`tests/v27_continuation.expected.json`). Lab ablation:
 `rich-no-leisure`. Mechanism check: `scripts/leisure_check.ts`. This is mechanism evidence
 (places visited, evening gathering); no aggregate benefit is claimed. See EMERGENCE.md.
+
+## Rules-27 save provenance (2026-10-25 delivery check)
+
+Unmerged 007b9d5 used 27 for leisure, conflicting with main's 1981f26 night-wait meaning.
+That work was rebased as rules 28 at 1d2c54b, but both old 27 builds wrote the same lineage.
+New main-27 envelopes include rulesGeneration: main-night-wait-boundary-27. Untagged or
+foreign-generation 27 saves are rejected without changing the original storage or running
+world. Use the exact originating build for old unmarked files; there is no safe automatic
+migration. Rules <=26 and their immutable references are untouched. Do not reuse 28 or
+merge the abandoned leisure-27 branch. This task does not deliver the leisure-28 candidate.

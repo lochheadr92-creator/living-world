@@ -3365,6 +3365,8 @@ button.worker:hover {
 .inhabit-take { flex: 1 1 auto; min-width: 0; display: flex; align-items: baseline; gap: 6px; text-align: left; font-size: 11px; padding: 3px 7px; }
 .inhabit-take-l { flex: 0 0 auto; white-space: nowrap; }
 .inhabit-take-t { flex: 1 1 auto; min-width: 0; opacity: 0.6; font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.inhabit-distinct { height: auto; flex-direction: column; gap: 1px; align-items: stretch; }
+.inhabit-distinct .inhabit-take-t { flex: none; white-space: normal; }
 .inhabit-n { width: 38px; flex: 0 0 auto; font-size: 10px; text-align: center; background: rgba(0, 0, 0, 0.3); color: inherit; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 4px; }
 .inhabit-engine { margin-top: 6px; font-size: 11px; padding: 2px 8px; }
 .inhabit-chat { margin-top: 6px; font-size: 11px; }
