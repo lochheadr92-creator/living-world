@@ -1,0 +1,26 @@
+{
+  "source": "rules 27 before varied spare time",
+  "saved": {
+    "hash": "db873cc4",
+    "deep": "fcba78f176fb43d8",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 1
+    },
+    "homeFood": 69,
+    "storedFood": 25
+  },
+  "continued": {
+    "hash": "a0fae2f5",
+    "deep": "652385cfd1ee60b7",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 2,
+      "shelter": 1
+    },
+    "homeFood": 114,
+    "storedFood": 31
+  }
+}
