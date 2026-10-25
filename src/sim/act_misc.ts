@@ -1,4 +1,6 @@
 import { isThreat } from './wildlife';
+import { isBoundedNightWait } from './night_wait';
+import { distToFootprint } from './registry';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { addLog } from './events';
@@ -49,6 +51,15 @@ registerHandler('rest', {
     a.duration = a.amount > 0 ? a.amount : 150;
   },
   work(world, p, a): WorkResult {
+    if (isBoundedNightWait(world, a)) {
+      const shelter = world.byId.get(a.targetId);
+      if (!shelter || shelter.ent !== 'building') return 'fail:the shelter is no longer there';
+      if (distToFootprint(shelter, p.x, p.y) > 3) return 'partial:no longer at the shelter';
+      if (shelter.type === 'fire' && shelter.fuel <= 0) return 'partial:the fire went out';
+      if (world.tick >= a.data.daylightAt) { a.blocked = 'daylight arrived'; return 'done'; }
+      a.progress++;
+      return 'continue';
+    }
     a.progress++;
     if (a.progress >= a.duration) return 'done';
     // Resting for energy ends once the person is rested. Waiting out the weather in a home (need 'warmth') is also a `rest`, but is not

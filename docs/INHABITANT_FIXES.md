@@ -17,3 +17,37 @@ Current implementation starts from bc9e3c8 (rules 26), not the audited version 1
 Each disposition requires reproduction/current evidence, owned fix, focused regression,
 compatibility, rendered manual observation, and delivery. Stop/report after these five;
 recommend household and settlement continuation. No additional long ensemble is a gate.
+
+## F1 — fixed and verified on rules 27
+
+Reproduced on rules 26 through a real accepted chat: suspension zeroes work progress,
+rest.begin reloads the original full amount, and the unchanged expiry produces
+"took too long" in daylight. The immutable rules-26 reference was recorded at 34b96b1
+before the fix. Historical worlds retain that behaviour; no saves are relabelled.
+
+Ownership/design: night_wait.ts owns eligibility and the lab switch; Activity.data.daylightAt
+owns the saved deadline; optShelter creates it; rest execution validates the physical
+shelter and ends at that boundary. Alternatives were remaining-work accounting versus
+an absolute daylight boundary. Chosen boundary matches the action's promise, including
+time spent talking. It does not invent shelter credit during a conversation. Generic
+suspension continues resetting ordinary work. The dedicated wait resumes even after
+its former expiry so the rest handler can report daylight or actual shelter loss.
+Urgent needs/danger retain their existing interruption path. Lab ablation:
+rich-no-night-wait-boundary. Behaviour becomes current rules 27.
+
+Verification: seven focused night-wait contracts; historical timeout; uninterrupted wait;
+actual conversation before/across dawn; missing shelter; urgent thirst with real carried
+water; ablation; complete serialized equality after save/load mid-conversation.
+Full suite: 1167 tests / 136 files passed. Typecheck, build, historical golden script passed.
+Earlier focused combined run found a fixture with no available water could not choose a
+drinking interruption; fixed its initial carried inventory before ledger initialization,
+not the runtime need thresholds. The revised seven contracts pass.
+
+Manual rendered evidence: selected only the offered shelter action in the ordinary
+inhabitant panel of scripts/fixtures/inhabitant-audit.html. This is a labelled STAGED
+scene; Ben's initial physical approach is staged, conversations and execution are real.
+At 06:00 the action reports success: daylight arrived. Transcript downloaded through
+Save transcript, replayed with scripts/inhabitant_f1_replay.ts; replay verifies recorded
+observations, choices and final state. Screenshot inspected in Edge after the in-app
+browser's screenshot capability failed. Evidence: inhabitant_evidence/f1/.
+No autonomous-emergence or human-usability claim. F3/F2/F4/F5 remain queued.

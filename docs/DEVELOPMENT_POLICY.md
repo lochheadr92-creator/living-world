@@ -307,3 +307,12 @@ amounts are authoritative; loading never recomputes geology. Rules-25 continuati
 pinned at `5ba25f9`. `setDepositGeology(false)` is a generation-only lab ablation;
 ordinary post-fork interventions cannot retroactively change initial geology. The
 bounded control/nudge/ablation probe is `scripts/geology_smoke.ts`. See ECONOMY.md.
+
+## Rules 27: night wait across conversation
+
+The offered "stay until it is light" action carries an absolute daylightAt boundary in
+its saved Activity.data. Conversation suspension may reset work progress but cannot
+restart the night. Rest execution reports daylight or a genuine missing/lost shelter;
+ordinary work suspension, urgent overrides and past rules are unchanged. Reference:
+tests/v26_continuation.expected.json, recorded before this change at 34b96b1.
+Lab-only ablation: rich-no-night-wait-boundary. Evidence: docs/INHABITANT_FIXES.md.

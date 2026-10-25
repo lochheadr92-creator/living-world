@@ -1,4 +1,5 @@
 import { injuryFactor } from './life';
+import { isBoundedNightWait } from './night_wait';
 import { hasHabitation, indoorHome, interiorTarget, doorPoint, enterHome, prepareIndoorActivity, staysIndoors } from './habitation';
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
 import { cartSpeedFactor } from './carts';
@@ -388,7 +389,7 @@ export function abortActivity(world: World, p: Person, detail: string): void {
 export function stepActivity(world: World, p: Person): void {
   const a = p.activity;
   if (!a) return;
-  if (world.tick > a.expire) {
+  if (world.tick > a.expire && !isBoundedNightWait(world, a)) {
     endActivity(world, p, a.cycle > 0 ? 'partial' : 'failed', 'took too long');
     return;
   }
@@ -501,8 +502,8 @@ export function resumeSuspended(world: World, p: Person): boolean {
   if (!a) return false;
   p.suspended = null;
   if (p.activity) return false;
-  if (world.tick > a.expire) return false;
-  if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId)) return false;
+  if (world.tick > a.expire && !isBoundedNightWait(world, a)) return false;
+  if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId) && !isBoundedNightWait(world, a)) return false;
   p.activity = a;
   a.lastX = p.x;
   a.lastY = p.y;

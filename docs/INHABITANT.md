@@ -448,3 +448,11 @@ weak tier is 71 asks' worth.
 **A limitation of the tool, found by this run.** The fixed renderer catches an arm that was never answered; it does not catch an
 arm that answered differently every time. A plurality of one in three is printed as a majority and counted as a shift or a
 non-shift accordingly. Until that is fixed, a shift count from this tool is an upper bound, and the per-ask table is the result.
+
+## 2026-10-25 audit follow-up
+
+Current queue and evidence: [INHABITANT_FIXES.md](INHABITANT_FIXES.md).
+Rules 27 fixes the offered night shelter wait across conversations with a saved absolute
+daylight boundary. Earlier rules/transcripts keep their original behaviour. Ordinary
+rest and work suspension semantics remain unchanged. The staged manual transcript and
+replay are in inhabitant_evidence/f1; this is mechanism evidence, not a natural run.

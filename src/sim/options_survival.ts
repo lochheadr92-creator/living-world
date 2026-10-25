@@ -1,4 +1,5 @@
 import { newActivity } from './activities';
+import { hasNightWaitBoundary } from './night_wait';
 import { DAY } from './constants';
 import { isRich } from './mood';
 import { nightPlansOn, shelters, untilDaylight } from './intent';
@@ -631,6 +632,7 @@ function optShelter(ctx: Ctx): void {
           kind: 'rest',
           label: `Staying at ${s.what}`,
           goal: 'waiting for the light',
+          data: hasNightWaitBoundary(world) ? { daylightAt: world.tick + Math.round(untilDaylight(world) * DAY) } : {},
           // 'warmth' rather than 'energy': this is waiting out the night, not recovering, so being rested does not end it
           need: 'warmth',
           // the shelter this is spent in: without it the activity is about nowhere, and the time spent in it is credited to no

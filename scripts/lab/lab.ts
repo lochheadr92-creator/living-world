@@ -1,3 +1,4 @@
+import { nightWaitBoundaryOn, setNightWaitBoundary } from '../../src/sim/night_wait';
 import { CIVILISATION_METRICS, civilisationOutcome } from './civilisation';
 import { memoryRetentionOn, setMemoryRetention } from '../../src/sim/memory_retention';
 import { householdPracticesOn, setHouseholdPractices } from '../../src/sim/household_practices';
@@ -235,6 +236,7 @@ export function parseIntervention(specIn: string): Intervention {
     };
   }
   if (kind === 'rich-unsafe-sites') return {spec:label,summary:'restore pre-19 siting (public storehouse safeguard remains)',apply:()=> 'general siting guard off',install(){const was=constructionSafetyOn();setConstructionSafety(false);return ()=>setConstructionSafety(was);}};
+  if (kind === 'rich-no-night-wait-boundary') return {spec:label,summary:'restart night rest after conversation as before rules 27',apply:()=> 'night wait boundary disabled',install(){const was=nightWaitBoundaryOn();setNightWaitBoundary(false);return ()=>setNightWaitBoundary(was);}};
   if (kind === 'rich-no-memory-retention') return {spec:label,summary:'retain expired operational timers and duplicate stump marks',apply:()=> 'bounded retention disabled',install(){const was=memoryRetentionOn();setMemoryRetention(false);return ()=>setMemoryRetention(was);}};
   if (kind === 'rich-no-household-practices') return {spec:label,summary:'disable household practice learning and preference only',apply:()=> 'household practices disabled',install(){const was=householdPracticesOn();setHouseholdPractices(false);return ()=>setHouseholdPractices(was);}};
   if (kind === 'rich-no-political-alignment') return {spec:label,summary:'disable persistent political alignment only',apply:()=> 'political alignment disabled',install(){const was=politicalAlignmentOn();setPoliticalAlignment(false);return ()=>setPoliticalAlignment(was);}};

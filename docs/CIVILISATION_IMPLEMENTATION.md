@@ -841,4 +841,3 @@ reproduction has not begun. The prerequisite is the remaining programme verifica
 in CIVILISATION_VALIDATION.md, followed by honest result interpretation and any required
 failure repairs. Keep the v13 original audit/transcript intact; use current main when
 this queue opens. No manual inhabitant acceptance session for these fixes is claimed.
-

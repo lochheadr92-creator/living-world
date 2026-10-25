@@ -1,0 +1,18 @@
+{
+  "tick": 2282,
+  "result": {
+    "tick": 2280,
+    "label": "Staying at my lean-to",
+    "outcome": "success",
+    "detail": "daylight arrived"
+  },
+  "interaction": {
+    "tick": 2099,
+    "partner": 5,
+    "purpose": "ask_info",
+    "role": "answered",
+    "outcome": "failed",
+    "detail": "they did not know either"
+  },
+  "warnings": []
+}
