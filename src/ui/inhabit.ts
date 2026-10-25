@@ -6,6 +6,7 @@ import { observationFromPrompt } from '../agent/protocol';
 import { h, setHidden, setText } from './dom';
 import type { Part, UICtx } from './context';
 import type { Slots } from './layout';
+import { lastInhabitantSummary } from './inhabit_summary';
 
 function downloadJson(name: string, data: unknown): void {
   const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
@@ -124,8 +125,8 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
     setText(when, obs.time.clock);
     blocked.replaceChildren(...obs.setAside.filter(o => o.label.startsWith('Make ') && o.reason.startsWith('Needs to '))
       .map(o => h('div', null, `${o.label}: ${o.reason}`)));
-    const last = obs.doing.lastResult;
-    setText(line, obs.self.name + ' is ' + pressing(obs.self.needs as never) + '.' + (last ? ' Last: ' + last.label + ' — ' + last.outcome + '.' : ''));
+    const last = lastInhabitantSummary(obs.doing);
+    setText(line, obs.self.name + ' is ' + pressing(obs.self.needs as never) + '.' + (last ? ' Last: ' + last + '.' : ''));
     opts.replaceChildren(
       ...obs.options.map((o) => {
         // only a whole-number limit gets a box here; an action's other ranges are in the observation, for a chat to use

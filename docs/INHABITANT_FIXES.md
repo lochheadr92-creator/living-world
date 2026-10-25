@@ -11,7 +11,7 @@ Current implementation starts from bc9e3c8 (rules 26), not the audited version 1
 | 1 | F1 night shelter restart | Fixed and verified; integrated in 1981f26 (rules 27). |
 | 2 | F3 duplicate choice keys | Fixed and verified; protocols 5/6, observation 4. |
 | 3 | F2 unexplained crafting gate | Fixed and verified; protocols 7/8, observation 5. |
-| 4 | F4 stale Last summary | Queued: most recent recorded action/interaction, stable ties. |
+| 4 | F4 stale Last summary | Fixed and verified; presentation only, actual timestamp ordering. |
 | 5 | F5 unclear time basis | Queued: action estimates and memory ages, no timing change. |
 
 Each disposition requires reproduction/current evidence, owned fix, focused regression,
@@ -102,3 +102,19 @@ with scripts/inhabitant_f2_replay.ts. Evidence: inhabitant_evidence/f2/. Earlier
 manual recordings still replay exactly. Full regression follows remaining presentation fixes.
 Existing modules touched: crafting owns the predicate/candidate derivation; agent protocol
 and observation own versioned explanation; inhabitant UI displays the recorded blocker.
+
+## F4 — fixed and verified (presentation only)
+
+Current manualBlock used only lastResult despite lastInteraction already being present.
+UI-owned inhabit_summary.ts compares actual recorded ticks: later interaction wins;
+later work wins; equal ticks prefer work. If a legacy work timestamp is absent, show
+both records with 'order unknown'. Missing records add no invented outcome.
+No simulation, saved schema, protocol or observation changes are needed.
+
+Three contracts cover both orderings, ties and missing records/timestamps. Typecheck
+passed. Rendered staged session chose eating, Chat with Ben, then Make a pick through
+offered actions. Last changed to 'chat — friendly', then 'Making a pick — success'.
+Both screenshots inspected; downloaded transcript replay matches and checks both
+summaries. Evidence: inhabitant_evidence/f4/; scripts/inhabitant_f4_replay.ts.
+Existing module touched: inhabitant UI delegates recorded-outcome selection to a pure
+UI helper. No dialogue, emotions or causes are synthesized.

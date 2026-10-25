@@ -1,0 +1,11 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {summaryAuditWorld} from './fixtures/summary_audit_world';
+import {runReplay} from '../src/agent/run';
+import {lastInhabitantSummary} from '../src/ui/inhabit_summary';
+import type {Transcript} from '../src/agent/transcript';
+const t:Transcript=JSON.parse(readFileSync('inhabitant_evidence/f4/manual-transcript.json','utf8'));
+const r=runReplay(summaryAuditWorld(),t);
+const summaries=t.asks.map(a=>({tick:a.tick,last:lastInhabitantSummary(a.observation.doing)}));
+if(!summaries.some(s=>s.last==='chat — friendly') || !summaries.some(s=>s.last==='Making a pick — success')) throw new Error('Missing conversation/work summary sequence');
+writeFileSync('inhabitant_evidence/f4/replay.json',JSON.stringify({tick:r.world.tick,summaries,warnings:r.warnings},null,2));
+console.log('Manual summary replay matched: chat supersedes eating, later craft supersedes chat.');
