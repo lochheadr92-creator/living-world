@@ -307,3 +307,17 @@ amounts are authoritative; loading never recomputes geology. Rules-25 continuati
 pinned at `5ba25f9`. `setDepositGeology(false)` is a generation-only lab ablation;
 ordinary post-fork interventions cannot retroactively change initial geology. The
 bounded control/nudge/ablation probe is `scripts/geology_smoke.ts`. See ECONOMY.md.
+
+### Rules version 27 — varied spare time
+
+Rich worlds at version 27 or later spend spare time in more than one place. The single
+fallback "potter about near home" (fixed score 6) is still ONE option worth exactly 6, so it
+competes with work, plans and survival exactly as before; what changes is WHICH place it is:
+the person's door, the square, the water's edge or a stand of trees, only places they already
+believe in, never near a believed danger, door only after dark. A change of scene, a hashed
+personal taste per kind of place, an evening pull to the square for the sociable and the
+cost of the walk choose among them (`src/sim/leisure.ts`; the parts show in the decision
+"because"). New state: `p.leisure.recent`, saved and fingerprinted; absent below 27 and in
+authored worlds. Rules-26 continuation pinned first at `b078b19`. Lab ablation:
+`rich-no-leisure`. Mechanism check: `scripts/leisure_check.ts`. This is mechanism evidence
+(places visited, evening gathering); no aggregate benefit is claimed. See EMERGENCE.md.

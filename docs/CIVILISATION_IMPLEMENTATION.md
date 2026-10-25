@@ -3,6 +3,12 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
+## Version 27 note (varied spare time, branch `claude/leisure-rhythm-v27`)
+
+Rules 27 is a separate, small behavioural change (spare-time places, `src/sim/leisure.ts`) made off main `bc9e3c8`, not on the civilisation
+programme worktree. Rules-26 continuation pinned at `b078b19`. It claims one version number: if the programme also produces a 27, one must
+be renumbered before either lands. Ensemble measurement unrun; see DEVELOPMENT_POLICY.md and EMERGENCE.md.
+
 ## Exact continuation snapshot — after version 26
 
 - Current product rules **26**: spatial finite-deposit geology after operational retention and indexed history after transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,

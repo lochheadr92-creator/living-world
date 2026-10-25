@@ -62,10 +62,15 @@ import type { Settings, World } from './types';
 // somebody who knows a standing smithy now wants charcoal kept stocked, so the kiln's idle time goes to firing it and
 // smelting and forging are not blocked on the fuel. Nothing else was retuned, and the want is only in a version-10
 // world: a version-9 world keeps the same demands as before.
-export const CURRENT_RULES_VERSION = 26;
+// Version 27: SPARE TIME. A person with nothing pressing had one fallback, potter about near their own door at a fixed score, so
+// free time was the same few steps from home every time. From version 27 it is several places they know (their door, the
+// square, the water's edge, a stand of trees), tilted a little by a change of scene, a personal favourite spot, the evening
+// gathering for the sociable, and the walk. Only the idle fallback changed (src/sim/leisure.ts); survival, work, plans,
+// moods and every other option are exactly version 26's, and a version-26 world keeps its single fallback.
+export const CURRENT_RULES_VERSION = 27;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

@@ -3,6 +3,7 @@ import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { addLog } from './events';
 import { countBeliefs } from './knowledge';
+import { noteHaunt } from './leisure';
 import { nearLitFire } from './perception';
 
 import { hyp } from './util';
@@ -84,6 +85,8 @@ registerHandler('wander', {
   pose: () => 'stand',
   begin(world, p, a) {
     a.duration = 18 + Math.floor(((p.id * 31 + world.tick) % 40));
+    // version 27: they have arrived at a place they chose for spare time, so it counts as somewhere they have been lately
+    if (a.data.haunt) noteHaunt(world, p, a.data.haunt);
   },
   work(world, p, a): WorkResult {
     a.progress++;

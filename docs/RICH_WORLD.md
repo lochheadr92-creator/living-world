@@ -169,3 +169,10 @@ prior accepted support record. Ben then accepts Cora instead of refusing, changi
 actual construction mandate. This establishes a causal decision effect, not aggregate
 social benefit or naturally emerging factions. The original B broken-promise evidence
 remains separate and unchanged.
+
+## Spare time (rules version 27, `src/sim/leisure.ts`)
+One 'wander' option worth exactly 6 whose place is chosen among the door, the square, water and trees the person already knows
+(change of scene, hashed personal taste, evening pull to the square for the sociable, cost of the walk). Never survival or work.
+Saved state `p.leisure.recent`; none below 27 or in authored worlds. See it: the decision "because" parts and the person's activity
+label. Lab: `rich-no-leisure`.
+
