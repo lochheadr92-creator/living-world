@@ -728,3 +728,68 @@ Version 4 integration: see docs/WOLF_DEFENCE.md and wolf_evidence/RUN.md. One 12
 observation made two spears and began one rescue; the wolf left before an attempt. Separately, 40 staged
 encounters produced 18 drive-offs and 22 failures. These establish an autonomous response and staged
 resolution, not a village-wide survival benefit. No broad ensemble or acceptance baseline was replaced.
+
+## Game-inspired slices audit and slice 2 (2026-10-25)
+
+Authority: fetched main d84e5ea, rules 28. The original checkout remains on the retired
+wolf branch; work uses codex/game-inspired-slices in the existing household-continuity
+worktree. Validation checkout untouched. Baseline: typecheck and 1200 tests/144 files pass.
+No slice-1 leisure ensemble report was supplied; its aggregate benefit remains unverified.
+
+Audit: traits, goals, trade, payoff learning and place tastes exist; fixed enjoyment of
+work did not. Slice 2 confirmed. Slice 3 dropped: chat, requests, offers, apologies,
+mediation, invitations, check-ins, teaching, household formation and other exchanges
+already exist; this audit did not establish a particular missing exchange. Slice 4
+confirmed narrowly for the builder's reaction to completing a building.
+
+Ordinary rules-28 Large meadow, 3 days, immigration off: activity_mix recorded 134 build,
+482 socialize, 283 converse, 57 craft and 42 harvest starts. A separate read-only event
+probe recorded 302 events. Sofia (#4336) completed the Tansy lean-to at tick 554; Hana
+(#4463) completed the Reed 37 lean-to at 629. Neither had a thought at that instant.
+Pia kept a promise to Wren at 533 (Wren retained an earlier gift thought, not a promise
+thought); Ivy kept a promise to Yan at 636 without either gaining a thought. These are
+NOT erased events: logs, buildings/builder credit, commitments and relationships preserve
+consequences. No event in this bounded audit was established to have neither thought nor
+lasting trace. Add only completion pride in slice 4, not a catalogue of reactions.
+
+Slice 2 hypothesis: fixed work tastes settle close work alternatives without increasing
+work's rank against survival/social/leisure. Workload declared before measurement:
+three normal seeds (meadow, river, fern), 3 days, 28 founders, immigration off. Compare
+on/off ordinary trajectories and identical-state option sets sampled every 120 ticks.
+Count actual activity starts whose recorded reason identifies a changed work winner;
+report alive, food physically in living people's packs/building stores, ripe plots.
+These are mechanism checks, not an ensemble benefit claim.
+
+| Seed | Changed starts / distinct people (on) | Changed sampled rankings / 1680 | Alive on/off | Food on/off | Ripe plots on/off |
+|---|---:|---:|---:|---:|---:|
+| meadow | 5 / 4 | 4 | 28 / 28 | 134 / 130 | 2 / 0 |
+| river | 3 / 3 | 0 | 28 / 28 | 68 / 111 | 1 / 1 |
+| fern | 3 / 2 | 5 | 28 / 28 | 122 / 114 | 1 / 1 |
+
+11 affected starts among 4863 on-arm starts, across 9 people. The coarse samples miss
+some actual decisions (river illustrates this). Food differences, especially river,
+remain unexplained; no improvement or general no-harm claim. No deaths in these runs.
+Result: civic_evidence/work-tastes.json. Reproduce with scripts/work_tastes_check.ts.
+
+Rendered Edge inspection of ordinary meadow at tick 105: Sven (#1000) is preparing
+the field, with "I enjoy farming; another close work choice was available". Off-arm
+Sven walks to a tree for pick materials. Existing More disclosure and reason are readable
+in screenshots civic_evidence/work-tastes-on.png and work-tastes-off.png. Open
+/scripts/fixtures/work-tastes.html (on) or ?arm=off in the dev server after regenerating
+the ignored saves. This is an ordinary seeded comparison, not a staged scene or new
+product control. A 0.05-day meadow rerun regenerated only the matched snapshots; it
+was not substituted for the three-day measurement.
+
+Contracts: fixed distinct tastes, no RNG/state mutation, same-option counterfactual,
+maximum work score unchanged, critical hunger filtering, version-28/authored ablation
+identity, current save/load continuation and observer purity, ordinary Sven action and
+reason. Historical rules-28 reference pinned in 3c4f35d before behaviour. Build and golden
+checks pass, historical golden files unchanged. See the implementation register for
+final suite count and delivery state.
+
+No compatible current-version ensemble gate is claimed: docs/gates.json is authored,
+and gates-rich.json is an unversioned historical rich baseline, not rules 29 evidence.
+Any current-rule larger comparison must use control plus nudges and the new ablation,
+with an immutable source checkout and fresh output directory. Long-run evidence remains
+unrun. Rollback for experiments: rich-no-work-tastes; existing older worlds continue
+unchanged. Do not relabel a rules-29 save as rules 28 to undo a choice already made.

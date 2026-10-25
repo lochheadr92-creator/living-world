@@ -12,12 +12,52 @@ import { DAY } from './constants';
 import { addLog } from './events';
 import { isRich, think } from './mood';
 import { Scorer, addOption, eta, pen } from './optutil';
-import type { Ctx } from './optutil';
+import type { Ctx, Option } from './optutil';
 import { RESERVED, isReserved } from './people';
 import { isWalkable } from './registry';
-import { hashUnit } from './rng';
-import type { Person, World } from './types';
+import { hashString, hashUnit } from './rng';
+import { runsRulesVersion } from './rulesversion';
+import { workOfOption, tradeWord } from './trade';
+import type { Person, SkillKey, World } from './types';
 import { hyp } from './util';
+
+// Disposition, not aptitude or a second trade. Immutable seed/id already preserve
+// these tastes across saves; there is no duplicate saved preference record.
+export const WORK_TASTES_FROM_VERSION = 29;
+export const WORK_TASTE_TILT = 1.5;
+const WORK_TASTES: SkillKey[] = ['wood', 'stone', 'build', 'farm', 'craft', 'carpentry', 'kiln', 'smith'];
+let workTastes = true;
+export const workTastesOn = (): boolean => workTastes;
+export function setWorkTastes(on: boolean): void { workTastes = on; }
+export function personalWorkTaste(world: World, p: Person): { like: SkillKey; dislike: SkillKey } | null {
+  if (!workTastes || !isRich(world) || !runsRulesVersion(world, WORK_TASTES_FROM_VERSION)) return null;
+  const seed = hashString(world.seed) ^ 0x7a57e;
+  const like = Math.floor(hashUnit(seed, p.id, 1) * WORK_TASTES.length);
+  const offset = 1 + Math.floor(hashUnit(seed, p.id, 2) * (WORK_TASTES.length - 1));
+  return { like: WORK_TASTES[like], dislike: WORK_TASTES[(like + offset) % WORK_TASTES.length] };
+}
+
+/** Taste settles close work choices without lifting work above needs or leisure. */
+export function tiltWorkChoices(world: World, p: Person, scored: { o: Option; s: number }[]): void {
+  const taste = personalWorkTaste(world, p);
+  if (!taste) return;
+  const work = scored.filter(x => x.o.need === null && WORK_TASTES.includes(workOfOption(p, x.o)!));
+  if (work.length < 2) return;
+  const before = work.reduce((a,b) => b.s > a.s ? b : a);
+  const maximum = before.s;
+  const nudges = work.map(x => {
+    const kind = workOfOption(p, x.o);
+    return kind === taste.like ? WORK_TASTE_TILT : kind === taste.dislike ? -WORK_TASTE_TILT : 0;
+  });
+  const tiltedMax = Math.max(...work.map((x,i) => x.s + nudges[i]));
+  work.forEach((x,i) => { x.s = maximum + (x.s + nudges[i] - tiltedMax); });
+  const after = work.reduce((a,b) => b.s > a.s ? b : a);
+  if (before !== after) {
+    const reason = workOfOption(p, after.o) === taste.like
+      ? `I enjoy ${tradeWord(taste.like)}` : `I would rather avoid ${tradeWord(taste.dislike)}`;
+    after.o = { ...after.o, workTasteReason: `${reason}; another close work choice was available` };
+  }
+}
 
 /** how often the count is looked at, and the most it holds */
 const CROWD_EVERY = 30;

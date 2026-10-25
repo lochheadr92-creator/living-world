@@ -5,6 +5,7 @@ import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './inten
 import { unfitPerson } from './defence';
 import type { ExternalController } from './external';
 import { moodWeight } from './mood';
+import { tiltWorkChoices } from './temperament';
 import { goalNudge } from './life';
 import { crewNudge } from './crews';
 import { isThreat } from './wildlife';
@@ -102,6 +103,7 @@ export function rankOptions(ctx: Ctx): Option[] {
     // the plan's nudge and the trade's are both bounded and both off when the lab is choosing at random
     s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + goalNudge(world, p, o) + crewNudge(world, p, o) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
   }));
+  if (chooser !== 'random') tiltWorkChoices(world, p, scored);
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }
@@ -113,7 +115,7 @@ export function rankOptions(ctx: Ctx): Option[] {
  */
 function because(o: Option, plan: Intention | null = null, trade = ''): string {
   const forPlan = planReason(plan, o);
-  const lead = [forPlan, trade].filter(Boolean).join(' · ');
+  const lead = [forPlan, trade, o.workTasteReason].filter(Boolean).join(' · ');
   if (!o.parts.length) return lead ? `${lead} · ${o.goal}` : o.goal;
   const top = [...o.parts].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
   const parts = top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');

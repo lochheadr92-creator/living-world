@@ -341,3 +341,22 @@ world. Use the exact originating build for old unmarked files; there is no safe 
 migration. Rules <=26 and their immutable references are untouched. Do not merge the
 abandoned leisure-27 branch (`007b9d5`). Rules 28 is the varied spare time rebase of that work, delivered separately
 (see "Rules version 28" above); this provenance task itself did not deliver it.
+
+### Rules version 29 — individual work tastes
+
+Temperament owns one fixed liking and one dislike among eight kinds of work, derived
+from immutable world seed and person ID. No new saved fields or RNG draws. Rules 28
+continuation was recorded from main d84e5ea before this behaviour (3c4f35d).
+Only rich worlds running 29+ participate. `rich-no-work-tastes` removes this alone.
+
+Decision ranking applies +/-1.5 among eligible work alternatives with no need target,
+then preserves the previous maximum work score. Thus tastes cannot promote work above
+a competing meal, drink, sleep, warmth, flight, social or leisure option. A changed work
+winner names its actual liking/dislike in the existing decision explanation. This does
+not change skills, recipes, claims, yields, effort, goals, or trade adoption.
+
+Two approaches considered: save a separate preference list, or derive a fixed disposition
+inside temperament. Derivation avoids a second saved source of truth; changing the hash,
+list or tilt later requires another rules generation. An unavailable favourite supplies
+no option and no work. Failure/interruption and resource accounting remain with the
+existing activity handlers. Historical worlds retain their rules; no migration.

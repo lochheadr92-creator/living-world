@@ -67,10 +67,11 @@ import type { Settings, World } from './types';
 // square, the water's edge, a stand of trees), tilted a little by a change of scene, a personal favourite spot, the evening
 // gathering for the sociable, and the walk. Only the idle fallback changed (src/sim/leisure.ts); survival, work, plans,
 // moods and every other option are exactly version 27's, and a version-27 world keeps its single fallback.
-export const CURRENT_RULES_VERSION = 28;
+// Version 29: personal work tastes settle close work choices. The best work score stays unchanged against needs and leisure.
+export const CURRENT_RULES_VERSION = 29;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

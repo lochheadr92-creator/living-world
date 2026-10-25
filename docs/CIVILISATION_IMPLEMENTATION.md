@@ -885,3 +885,39 @@ reproduction has not begun. The prerequisite is the remaining programme verifica
 in CIVILISATION_VALIDATION.md, followed by honest result interpretation and any required
 failure repairs. Keep the v13 original audit/transcript intact; use current main when
 this queue opens. No manual inhabitant acceptance session for these fixes is claimed.
+
+## Game-inspired slices continuation — 2026-10-25
+
+- Worktree: `C:\Users\RJLoc\.codex\worktrees\household-continuity\living-world`;
+  branch `codex/game-inspired-slices`, based on fetched main `d84e5ea` (rules 28).
+  No additional worktree created. Retired original checkout, main's untracked probes,
+  and `living-world-validation-v26` were untouched.
+- Rules 28 continuation pinned before behaviour in `3c4f35d`. Rules 29 is personal work
+  tastes; no other fetched/local committed branch used 29 at the final provenance check.
+  Re-fetch before any further generation or push. No save migration/provenance relabelling.
+- Slice 2 implemented: temperament-derived likes/dislikes, normalized work ranking,
+  existing inspector reason, lab ablation `rich-no-work-tastes`. Tests, mechanism script,
+  ordinary-world viewer entry and screenshots are in the same behaviour commit.
+- Fresh checks: baseline typecheck + 1200/144; focused final 7/2; final full suite
+  **1207 tests / 146 files pass (103.05 s)**; typecheck/build/golden pass; diff check clean.
+  Lab ablation install/restore passed. Full-suite output: `civic_evidence/work-tastes-tests.txt`.
+  Rendered comparison: Sven, meadow normal, tick 105, preparing field with taste on,
+  collecting pick wood with it off. See EMERGENCE.md for audit, metrics and exact limits.
+- Classification: contracts and rendered mechanism verified; 3-seed/3-day mechanism only.
+  No deaths in short on/off runs. Longer-run cost and aggregate benefit unverified.
+  Historical gate baselines do not match rules 29; no gate pass is claimed.
+- Slice 3 dropped: audit established no specific missing exchange. Slice 4 confirmed but
+  NOT implemented: a builder can complete a home without an emotional reaction. Existing
+  buildings, ownership, logs and credit already preserve the event; do not invent missing history.
+- Delivery boundary: push this branch; **do not merge main without the owner's instruction**
+  from this brief. Next behavioural reference is rules 29, which the brief requires to be
+  recorded from main before slice 4. Main is still rules 28, so that step follows authorised
+  integration of slice 2. Do not silently call the full slices programme complete.
+- Next command: `git fetch origin`, then inspect `origin/main` and this branch before any
+  integration. After authorisation and safe integration, pin the rules-29 reference in its
+  own commit, then implement the bounded completion reaction through mood.ts/completeSite,
+  with local recipients, ablation, counterfactual, ordinary trace, and browser evidence.
+- Continuation prompt: "Continue game-inspired slices from this section. Slice 2 is on
+  codex/game-inspired-slices; slice 3 was dropped; slice 4 remains. Check whether the owner
+  has authorised integration before merging. Preserve immutable references and validation
+  checkout. Do not repeat the audit or claim long-run results that do not exist."
