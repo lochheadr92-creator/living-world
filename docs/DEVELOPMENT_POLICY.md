@@ -316,3 +316,13 @@ restart the night. Rest execution reports daylight or a genuine missing/lost she
 ordinary work suspension, urgent overrides and past rules are unchanged. Reference:
 tests/v26_continuation.expected.json, recorded before this change at 34b96b1.
 Lab-only ablation: rich-no-night-wait-boundary. Evidence: docs/INHABITANT_FIXES.md.
+
+## Rules-27 save provenance (2026-10-25 delivery check)
+
+Unmerged 007b9d5 used 27 for leisure, conflicting with main's 1981f26 night-wait meaning.
+That work was rebased as rules 28 at 1d2c54b, but both old 27 builds wrote the same lineage.
+New main-27 envelopes include rulesGeneration: main-night-wait-boundary-27. Untagged or
+foreign-generation 27 saves are rejected without changing the original storage or running
+world. Use the exact originating build for old unmarked files; there is no safe automatic
+migration. Rules <=26 and their immutable references are untouched. Do not reuse 28 or
+merge the abandoned leisure-27 branch. This task does not deliver the leisure-28 candidate.

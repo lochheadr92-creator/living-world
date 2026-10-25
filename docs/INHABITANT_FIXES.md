@@ -144,3 +144,23 @@ under the current code. Vite emits existing future config-loader import-extensio
 the timer-overflow warning is the intentional existing timeout regression test.
 Existing modules touched: agent observation/protocol route versioned wording; manual UI
 makes its basis and estimates visible. Presentation neither writes state nor draws RNG.
+
+## Version-27 provenance collision found at delivery
+
+Remote refresh discovered origin/claude/leisure-rhythm-v27 at 007b9d5 (based on bc9e3c8)
+used 27 for a different behaviour. Its successor origin/claude/leisure-rhythm-v28 at
+1d2c54b is correctly based on our main 1981f26. Neither candidate is merged by this task.
+Version 28 is occupied by that separate candidate and must not be reused.
+
+Both old 27 lines wrote the same rulesLineage, so their raw saves cannot be interpreted
+safely from that number/tag. New main-27 save envelopes carry rulesGeneration
+'main-night-wait-boundary-27'. Unmarked/differently marked 27 is rejected before world
+replacement; originals remain in storage. This includes unmarked main-27 saves written
+before this check: open them with their exact original build (e.g. 1981f26), do not edit
+a marker by hand. No automatic migration or experimental-branch integration is claimed.
+Historical <=26 formats and rules are unchanged. Transcript observation/world-hash replay
+still checks its recorded behaviour independently; original evidence is not rewritten.
+
+Three provenance contracts plus an actual loadGame/localStorage preservation regression;
+focused save/version/night/continuation checks: 64 tests / 7 files passed; typecheck/build
+passed. This is a persistence compatibility guard, not another behavioural generation.
