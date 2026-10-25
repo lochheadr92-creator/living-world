@@ -6,6 +6,9 @@ Historical evidence remains unchanged on audit commit fc04d7db45c034c5ea317086bb
 Priority source: 030d62d7fea592bdc620ba357012d1534edb20c5, docs/audits/2026-10-24-odette/NEXT_PRIORITIES.md.
 Current implementation starts from bc9e3c8 (rules 26), not the audited version 13.
 
+**Queue closed: all five findings fixed and verified.** Code through 18285b1 is integrated
+and pushed to main. Final verification and exact continuation are below.
+
 | Order | Finding | Current disposition |
 |---|---|---|
 | 1 | F1 night shelter restart | Fixed and verified; integrated in 1981f26 (rules 27). |
@@ -50,7 +53,7 @@ At 06:00 the action reports success: daylight arrived. Transcript downloaded thr
 Save transcript, replayed with scripts/inhabitant_f1_replay.ts; replay verifies recorded
 observations, choices and final state. Screenshot inspected in Edge after the in-app
 browser's screenshot capability failed. Evidence: inhabitant_evidence/f1/.
-No autonomous-emergence or human-usability claim. F3/F2/F4/F5 remain queued.
+No autonomous-emergence or human-usability claim. The following sections record delivery of the remaining findings.
 
 ## F3 — fixed and verified (protocols 5/6, observation 4)
 
@@ -164,3 +167,48 @@ still checks its recorded behaviour independently; original evidence is not rewr
 Three provenance contracts plus an actual loadGame/localStorage preservation regression;
 focused save/version/night/continuation checks: 64 tests / 7 files passed; typecheck/build
 passed. This is a persistence compatibility guard, not another behavioural generation.
+
+## Final verification and continuation — 2026-10-25
+
+All five requested findings are fixed and verified. Implementation commits:
+1981f26 F1; e706e87 F3; 9e5595a F2; 3136860 F4; 13a9504 F5;
+18285b1 ambiguous-rules-27 save protection. All are integrated by fast-forward and
+normally pushed to origin/main. This final record/evidence commit follows them.
+No PR, reset, force-push or unrelated worktree edits were used.
+
+Final code check after the save guard: npm test **1185 tests / 141 files passed**,
+108.61 seconds. Focused save/version/continuation/night checks: 64 passed. Typecheck
+(including final replay script) and build passed. Historical golden script matched
+all fingerprints before the envelope-only guard; all continuation tests passed again
+in the final full suite. git diff --check passed. No references were regenerated.
+
+`scripts/inhabitant_final_replay.ts` replays six downloaded manual browser recordings
+(protocols 3, 5, 7 and 9); all matched. `inhabitant_evidence/final-replays.json` records
+those results. The final rendered rules-27 / protocol-9 night scene again completed at
+dawn after actual conversations; screenshot and separate transcript are in f1 as
+final-build-*. Original recordings remain unchanged. Browser-control timeouts were
+recovered without changing simulation state or substituting headless visual evidence.
+
+Review findings resolved: duplicate-goal text clipped in narrow buttons (wrap it);
+new-run protocol assertions named old versions (update only new-run expectations);
+fixture needs did not cross the actual gate and then initial pack was overfull (correct
+labelled starting conditions, never production thresholds); concurrent 27 lineage collision
+(reject ambiguous originals). Existing tick-limit execution was inspected and remains
+owned by activities.ts before the rest handler; no unrelated suspension rewrite.
+
+Source worktree: C:/Users/RJLoc/.codex/worktrees/inhabitant-fixes/living-world,
+branch codex/inhabitant-fixes. Main checkout:
+C:/Users/RJLoc/.codex/worktrees/home-habitation/living-world. Its unrelated untracked
+scripts/_find_moments_rich.ts and scripts/_warmth_probe2.ts were preserved.
+Dev preview was launched on 127.0.0.1:5293 in the fixes worktree. To reproduce manually:
+`npm run dev -- --host 127.0.0.1 --port 5293`, then
+/scripts/fixtures/inhabitant-audit.html (night), ?case=choices, ?case=craft, ?case=summary.
+These are explicitly staged development fixtures; choose only the ordinary offered actions.
+
+Stop after reporting this queue, as requested. Recommend continuing household and
+settlement work next. Before any behavioural extension, inspect current main and the
+separate leisure-28 candidate; do not merge abandoned leisure-27 or reuse version 28.
+Full civilisation acceptance is not asserted: D12/A long-run benefit, natural C-H
+emergence and mature-world performance remain deferred under the reduced-run decision.
+No further ensemble was launched for this follow-up. General observer-inspector time
+wording remains outside this inhabitant-observation presentation change.

@@ -24,7 +24,12 @@ source was unchanged; the reduced launcher and its hash are preserved there.
 
 Active follow-up: branch codex/inhabitant-fixes in
 C:/Users/RJLoc/.codex/worktrees/inhabitant-fixes/living-world. Ordered queue is F1, F3,
-F2, F4, F5. See INHABITANT_FIXES.md. No finding is marked fixed yet.
+F2, F4, F5. All five are now fixed and verified; see INHABITANT_FIXES.md.
+Delivered behavioural/presentation code through 18285b1 is integrated and pushed to main.
+Current product rules remain 27; current inhabitant protocols are 9/10 (observation 6).
+Version 28 belongs to the separate unmerged leisure candidate; do not reuse it.
+The full civilisation measurements above remain deferred, not silently completed.
+Next authorised recommendation: continue household/settlement work after this queue report.
 
 ## Historical continuation snapshot — after version 26 (superseded sequencing above)
 
