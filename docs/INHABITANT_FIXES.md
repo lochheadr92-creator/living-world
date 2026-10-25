@@ -8,8 +8,8 @@ Current implementation starts from bc9e3c8 (rules 26), not the audited version 1
 
 | Order | Finding | Current disposition |
 |---|---|---|
-| 1 | F1 night shelter restart | In progress: trace actual conversation suspension and dawn completion. |
-| 2 | F3 duplicate choice keys | Queued: actual selection boundary and historical protocol meanings. |
+| 1 | F1 night shelter restart | Fixed and verified; integrated in 1981f26 (rules 27). |
+| 2 | F3 duplicate choice keys | Fixed and verified; protocols 5/6, observation 4. |
 | 3 | F2 unexplained crafting gate | Queued: actual needs gate, no balance change. |
 | 4 | F4 stale Last summary | Queued: most recent recorded action/interaction, stable ties. |
 | 5 | F5 unclear time basis | Queued: action estimates and memory ages, no timing change. |
@@ -51,3 +51,30 @@ Save transcript, replayed with scripts/inhabitant_f1_replay.ts; replay verifies 
 observations, choices and final state. Screenshot inspected in Edge after the in-app
 browser's screenshot capability failed. Evidence: inhabitant_evidence/f1/.
 No autonomous-emergence or human-usability claim. F3/F2/F4/F5 remain queued.
+
+## F3 — fixed and verified (protocols 5/6, observation 4)
+
+Current rules-27 meadow/town at tick 118 reproduces duplicate gather keys for household
+stocking (up to four) and hunger relief (up to two). The old external boundary picked
+the first matching key. No historical wrong transfer is claimed.
+
+Agent choice_keys.ts owns decision-local public identity; transcript.ts translates the
+selected public key to a validated ranked index plus internal key. decision.ts validates
+both before checking that alternative's limits. Internal plan/cooldown keys are unchanged.
+Legacy protocols 1–4 keep their recorded first-match meaning; no save or autonomous
+rules change. Alternatives were canonicalisation versus distinct identity: different
+goals/amounts require distinct identity. UI shows those goals on separate wrapping lines.
+
+Four new contracts cover the reproduction, legacy selection, actual new selection and
+full-state replay, mismatched index rejection, and generated-key collisions. Browser
+manual selection chose the hunger offer with amount two; physical gathering completed
+with two fruit. Downloaded transcript replay matches: scripts/inhabitant_f3_replay.ts.
+Evidence: inhabitant_evidence/f3/. Browser screenshot exposed truncated goal lines;
+fixed their layout and inspected the corrected wrapping in Edge.
+
+Full suite initially passed 1169/1171: the two failures were new-run header assertions
+still expecting protocols 3/4. Updated those assertions to 5/6, retaining historical
+1/2 checks and legacy replay contracts. Focused rerun: 19/19 passed. Typecheck/build
+passed. Complete suite will run again at the next integrated presentation boundary.
+Existing modules touched: observation/protocol/transcript for versioned public identity;
+external/decision for validated selection; inhabitant UI/styles for readable alternatives.

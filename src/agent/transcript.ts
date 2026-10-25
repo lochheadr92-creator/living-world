@@ -274,6 +274,13 @@ export class TranscriptController implements ExternalController {
         if (revision) call.revision = revision;
       }
     }
+    if (observation.version >= 4 && call.choice.kind === 'pick') {
+      const choice = call.choice;
+      const index = observation.options.findIndex(o=>o.key===choice.key);
+      // An unknown public key is rejected, never allowed to fall back to an
+      // ambiguous internal key. The engine validates both index and base key.
+      return {...call.choice, key:index < 0 ? call.choice.key : ranked[index].key, offerIndex:index};
+    }
     return call.choice;
   }
 
@@ -296,6 +303,10 @@ export class TranscriptController implements ExternalController {
   }
 
   notify(world: World, p: Person, note: ExternalNote): void {
+    if ((this.transcript.header.observationVersion ?? observationVersionFor(this.transcript.header.protocol)) >= 4
+      && (note.kind === 'applied' || note.kind === 'rejected') && this.lastCall?.choice.kind === 'pick') {
+      note = {...note,key:this.lastCall.choice.key};
+    }
     const state = world.inhabitants?.[p.id];
     if (note.kind === 'override') {
       if (this.mode === 'replay') {

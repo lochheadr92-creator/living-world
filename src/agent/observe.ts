@@ -1,4 +1,5 @@
 import { deceasedById } from '../sim/historical_index';
+import { choiceKeys } from './choice_keys';
 // The inhabitant's observation: everything an outside controller may know about the person it drives, and nothing else
 // (docs/INHABITANT.md, section 2).
 //
@@ -34,7 +35,7 @@ import { hyp } from '../sim/util';
  *  3 adds the limits an action accepts. */
 /** Bump when the observation's content or wording changes, and keep the old shape under the old version: replay rebuilds each ask's
  * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names. */
-export const OBSERVATION_VERSION = 3;
+export const OBSERVATION_VERSION = 4;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -501,6 +502,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   }
   failures.sort((m, n) => m.when.localeCompare(n.when));
 
+  const publicKeys = version >= 4 ? choiceKeys(ranked) : ranked.map(o=>o.key);
   const obs: InhabitantObservation = {
     version,
     time: { tick: world.tick, day: dayNumber(world.tick), clock: clockText(world.tick), phase: phaseName(dayFraction(world.tick)), light, weather: weatherLabel(world.weather), tempC: Math.round(world.weather.temp) },
@@ -524,7 +526,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
         .map((l) => ({ when: agoText(world, l.tick), text: cleanText(l.text, 200), kind: l.kind, ...(version >= 2 ? { t: l.tick } : {}) })),
       failures: failures.slice(0, 6),
     },
-    options: ranked.slice(0, 30).map((o) => describeOption(world, p, o, showScores, version)),
+    options: ranked.slice(0, 30).map((o,index) => ({...describeOption(world, p, o, showScores, version), key: publicKeys[index]})),
     setAside: ctx.blocked.slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId) })),
   };
   return deepFreeze(obs);

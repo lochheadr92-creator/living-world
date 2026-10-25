@@ -21,19 +21,22 @@ export const PROTOCOL_V2 = 'inhabitant/2';
 /** 3 and 4 are 1 and 2 with one addition: an action may advertise the limits a controller can set on it (observation shape 3). */
 export const PROTOCOL_V3 = 'inhabitant/3';
 export const PROTOCOL_V4 = 'inhabitant/4';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4];
+export const PROTOCOL_V5 = 'inhabitant/5';
+export const PROTOCOL_V6 = 'inhabitant/6';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V4 : PROTOCOL_V3;
+  return memory ? PROTOCOL_V6 : PROTOCOL_V5;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V1) return 1;
   if (protocol === PROTOCOL_V2) return 2;
+  if (protocol === PROTOCOL_V5 || protocol === PROTOCOL_V6) return 4;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6;
 }
 
 export interface Proposal {

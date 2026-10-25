@@ -1,0 +1,15 @@
+{
+  "tick": 223,
+  "inventory": {
+    "grain": 1,
+    "berries": 1,
+    "fruit": 2
+  },
+  "result": {
+    "tick": 221,
+    "label": "Picking fruit",
+    "outcome": "success",
+    "detail": "done"
+  },
+  "warnings": []
+}

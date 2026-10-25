@@ -142,7 +142,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
           'button',
           {
             type: 'button',
-            class: 'btn inhabit-take',
+            class: 'btn inhabit-take' + (o.key.includes('#choice:') ? ' inhabit-distinct' : ''),
             title: o.label + (o.target ? ' — ' + o.target : '') + ' · about ' + o.eta,
             onClick: () => {
               const mm = driver.manual();
@@ -157,6 +157,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
             },
           },
           h('span', { class: 'inhabit-take-l' }, o.label),
+          ...(o.key.includes('#choice:') ? [h('span', { class: 'inhabit-take-t' }, o.goal)] : []),
           h('span', { class: 'inhabit-take-t' }, o.target ?? ''),
         );
         return h('div', { class: 'inhabit-opt' }, take, ...(box ? [box] : []));
