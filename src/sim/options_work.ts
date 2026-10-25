@@ -27,6 +27,7 @@ import { foragePlans } from './options_survival';
 import { isFreeLand } from './registry';
 import { affinityOf } from './relations';
 import { hashUnit } from './rng';
+import { hauntsFor, leisureOn, pickHaunt } from './leisure';
 import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { T } from './types';
 
@@ -1637,6 +1638,11 @@ function optClaimHome(ctx: Ctx): void {
 // ───────────────────────── fallback ─────────────────────────
 function optIdle(ctx: Ctx): void {
   const { world, p } = ctx;
+  // version 27: several places to spend spare time, not one (leisure.ts); an older world keeps its single fallback below
+  if (leisureOn(world)) {
+    optLeisure(ctx);
+    return;
+  }
   const hub = nearestHub(world, p.x, p.y);
   const ax = ctx.home ? ctx.home.doorX + 0.5 : hub.x;
   const ay = ctx.home ? ctx.home.doorY + 0.5 : hub.y + 2;
@@ -1665,6 +1671,45 @@ function optIdle(ctx: Ctx): void {
         }
       }
       return newActivity(world, p, { kind: 'wander', label: 'Standing about', goal: 'nothing needs doing right now', here: true, utility: sc.total, minCommit: 10, maxTicks: 200 });
+    },
+  });
+}
+
+/** Rules version 27: the fallback, at one of several places a person knows (leisure.ts). Still the one 'wander' option, still worth 6. */
+function optLeisure(ctx: Ctx): void {
+  const { world, p } = ctx;
+  const { h, sc } = pickHaunt(ctx, hauntsFor(ctx));
+  const home = h.key === 'home';
+  addOption(ctx, {
+    kind: 'wander',
+    label: h.label,
+    goal: 'nothing needs doing right now',
+    need: null,
+    util: sc.total,
+    parts: sc.parts,
+    eta: 40,
+    key: 'wander',
+    targetId: 0,
+    tag: 'idle',
+    make: () => {
+      const reach = home ? 4.5 : 3;
+      for (let i = 0; i < 8; i++) {
+        const ang = hashUnit(p.id, world.tick, i) * Math.PI * 2;
+        const r = 1.5 + hashUnit(p.id, world.tick, i + 11) * reach;
+        const x = h.x + Math.cos(ang) * r;
+        const y = h.y + Math.sin(ang) * r;
+        const tx = Math.floor(x);
+        const ty = Math.floor(y);
+        if (tx > 1 && ty > 1 && tx < world.W - 1 && ty < world.H - 1 && !world.solid[ty * world.W + tx] && world.terrain[ty * world.W + tx] !== T.DEEP && world.terrain[ty * world.W + tx] !== T.SHALLOW) {
+          const a = newActivity(world, p, { kind: 'wander', label: h.doing, goal: 'nothing needs doing right now', spotX: x, spotY: y, tx: x, ty: y, utility: sc.total, minCommit: 20, maxTicks: 300 });
+          if (a) a.data.haunt = h.key;
+          return a;
+        }
+      }
+      // a place with no standing spot is not worth the trip; at the door, standing where they are will do
+      const a = newActivity(world, p, { kind: 'wander', label: 'Standing about', goal: 'nothing needs doing right now', here: true, utility: sc.total, minCommit: 10, maxTicks: 200 });
+      if (a) a.data.haunt = 'home';
+      return a;
     },
   });
 }

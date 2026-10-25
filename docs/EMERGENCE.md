@@ -683,6 +683,19 @@ What remains is the density effect itself, which is what the profile exists to s
 that is not a mis-scaled rule - the spoilage multiplier (`SPOIL_STORE`, which eats the whole surplus of good days) or where a camp's food
 clusters are laid - both of which change every rich world, including the ensembles already measured.
 
+## Varied spare time (rules version 28, 4 seeds, normal, 10 days, mechanism check only)
+
+`scripts/leisure_check.ts`, seeds river, meadow, fern, aspen; varied spare time on vs `rich-no-leisure`; means over the four seeds.
+VERIFIED mechanism: wandering stops being only the doorstep. Wander starts away from the door 20.3% vs 5.9%; map cells (6 tiles) per
+wandering person 4.26 vs 3.53; share of evening wanders at the square 5.7% vs 0%; wander starts 180 vs 182 and time wandering 2.8% vs 2.5%
+(so the fallback is not crowding anything out). Outcomes: alive 28.25 vs 28.5, no deaths in either arm, ripe plots waiting at the end
+0.25 vs 0.25, food in homes and stores at the end 77 vs 44.
+NOT established: any benefit. Harvest per seed is mixed (river 138/121, meadow 81/75, fern 84/103, aspen 26/47) and some activity
+kinds moved more than 20% (warm 816/599, flee 516/384, till 176/256, craft 212/277), which is not explained and is probably the
+trajectory divergence of chaotic single seeds, not an effect. A short window on four seeds cannot separate those; an ensemble against
+control plus nudges (`rich-no-leisure`) is the unrun measurement. Earlier 6 day runs showed lower harvest in all four seeds; at 10 days
+it is mixed, and that earlier drop is not explained either.
+
 ## The counterfactual lab (`scripts/lab*.ts`, `scripts/lab/`)
 
 Fork a saved world, change one thing, run it forward, compare with the control and with a "nudge" (one extra random draw) that measures

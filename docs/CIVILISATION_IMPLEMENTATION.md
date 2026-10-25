@@ -28,6 +28,13 @@ F2, F4, F5. See INHABITANT_FIXES.md. No finding is marked fixed yet.
 
 ## Historical continuation snapshot — after version 26 (superseded sequencing above)
 
+## Version 28 note (varied spare time, branch `claude/leisure-rhythm-v28`)
+
+Rules 28 is a separate, small behavioural change (spare-time places, `src/sim/leisure.ts`) on main after rules 27 (night wait). It was first
+made as 27 off `bc9e3c8`, found to collide with main's own 27, and renumbered to 28. Rules-27 continuation pinned at the commit before it
+(`tests/v27_continuation.expected.json`). Ensemble measurement unrun; see DEVELOPMENT_POLICY.md and EMERGENCE.md.
+
+
 - Current product rules **26**: spatial finite-deposit geology after operational retention and indexed history after transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
   following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
   `C:/Users/RJLoc/.codex/worktrees/civilisation-programme/living-world`. Read Git HEAD

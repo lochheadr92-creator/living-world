@@ -572,6 +572,8 @@ export interface Trade {
 }
 
 export interface Person {
+  /** Version 27: the last few places spare time was spent at (leisure.ts); absent in any world below version 27. */
+  leisure?: import('./leisure').Leisure;
   sharedSupper?: import('./household_practices').SharedSupper;
   civicAlignment?: import('./political_alignment').CivicAlignment[];
   tradeLeads?: import('./exchange_journeys').TradeLead[];

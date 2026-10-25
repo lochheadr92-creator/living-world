@@ -11,6 +11,7 @@ import { illnessTick } from './illness';
 import { apprenticeTick } from './apprentice';
 import { lifeTickRich } from './life';
 import { crowdTick } from './temperament';
+import { leisureFingerprint } from './leisure';
 import { crewsTick } from './crews';
 import './act_build';
 import './act_farm';
@@ -358,6 +359,8 @@ export function hashWorld(world: World): string {
       if (n) push(`R${n}`);
     }
     for (const p of world.persons) if (p.alive && p.crowd) push(`Q${p.id}:${p.crowd}`);
+    // where spare time was last spent (version 27; a world below it never has one, so it adds nothing there)
+    for (const p of world.persons) if (p.alive && p.leisure) push(`U${p.id}:${leisureFingerprint(p)}`);
     for (const p of world.persons) if (p.alive && (p.goal || p.injury)) push(`L${p.id}:${p.goal ? p.goal.kind + ',' + p.goal.done : '-'}|${p.injury ? p.injury.kind + ',' + p.injury.until : '-'}`);
     for (const p of world.persons) if (p.alive && p.apprentice) push(`A${p.id}:${p.apprentice.master},${p.apprentice.key}`);
     for (const p of world.persons) if (p.alive && p.illness) push(`I${p.id}:${p.illness.since},${r4(p.illness.severity)},${p.illness.rested}`);

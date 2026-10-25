@@ -33,6 +33,7 @@ import { setLearning } from '../../src/sim/learning';
 import { setFatalHold } from '../../src/sim/lifecycle';
 import { setFoodPreparation } from '../../src/sim/provision';
 import { setShelterPlans } from '../../src/sim/shelter';
+import { leisureOnSwitch, setLeisure } from '../../src/sim/leisure';
 import { setTableEating } from '../../src/sim/tableeating';
 import { setHabitationAdmissions } from '../../src/sim/habitation';
 import { defProbe, defReset, defSnapshot, setWolfDefence, spearOf } from '../../src/sim/defence';
@@ -244,6 +245,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-relocation') return {spec:label,summary:'disable household relocation only',apply:()=> 'household relocation disabled',install(){const was=relocationsOn();setRelocations(false);return ()=>setRelocations(was);}};
   if (kind === 'rich-universal-techniques') return {spec:label,summary:'remove held-technique requirement and instruction',apply:()=> 'universal technique access restored',install(){const was=techniquesOn();setTechniques(false);return ()=>setTechniques(was);}};
   if (kind === 'rich-adult-newborn-skills') return {spec:label,summary:'restore adult-range skills for newly created children',apply:()=> 'historical skill initialisation restored for subsequent births/arrivals',install(){const was=developmentOn();setDevelopment(false);return ()=>setDevelopment(was);}};
+  if (kind === 'rich-no-leisure') return {spec:label,summary:'restore the single idle fallback (potter about near home) and nothing else; below version 28 it changes nothing',apply:(w)=>{w.settings.dynamics='rich';return 'rich dynamics on, varied spare time off';},install(){const was=leisureOnSwitch();setLeisure(false);return ()=>setLeisure(was);}};
   if (kind === 'rich-remote-markets') return {spec:label,summary:'restore legacy remote market exchanges',apply:()=> 'remote market behavior restored',install(){const was=localMarketOn();setLocalMarket(false);return ()=>setLocalMarket(was);}};
   if (kind === 'rich-no-civic-choice') return {spec:label,summary:'restore single-organiser project acceptance',apply:()=> 'collective coordinator choice off',install(){const was=civicChoiceOn();setCivicChoice(false);return ()=>setCivicChoice(was);}};
   if (kind === 'rich-global-death-news') return { spec: label, summary: 'restore global death notification', apply: () => 'global death notification restored', install() { const was = localDeathOn(); setLocalDeath(false); return () => setLocalDeath(was); } };

@@ -48,7 +48,8 @@ it('preserves full natural continuation against the retention ablation apart fro
  const a=createWorld(currentWorldSettings('normal','meadow',{immigration:false})),b=deserializeWorld(serializeWorld(a));
  try{for(let i=0;i<1200;i++){setMemoryRetention(true);stepWorld(a);setMemoryRetention(false);stepWorld(b);}}
  finally{setMemoryRetention(true);}
- // Normalize only the deliberately disposable representation, not any causal state.
- for(const w of [a,b]){for(const p of w.persons)retainOperationalMemory(w,p);const marks=new Map(w.stumps.map(s=>[`${s.x},${s.y}`,s]));w.stumps=[...marks.values()];}
+ // Normalize only the deliberately disposable representation, not any causal state. A deadline deleted and set again lands last in
+ // insertion order; the same deadlines in another key order are the same state, so cooldowns are compared by key.
+ for(const w of [a,b]){for(const p of w.persons){retainOperationalMemory(w,p);p.cooldowns=Object.fromEntries(Object.entries(p.cooldowns).sort(([x],[y])=>x<y?-1:x>y?1:0));}const marks=new Map(w.stumps.map(s=>[`${s.x},${s.y}`,s]));w.stumps=[...marks.values()];}
  expect(serializeWorld(a)).toBe(serializeWorld(b));
 });
