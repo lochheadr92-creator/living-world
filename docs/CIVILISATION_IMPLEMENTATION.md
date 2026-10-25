@@ -3,6 +3,38 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
+## Household follow-up — 2026-10-25
+
+The owner authorised household/settlement continuation after the delivered F1-F5 queue.
+First bounded slice: home-plan interruption readability, based on main e3e1a93 in
+`codex/household-continuity`, worktree
+`C:/Users/RJLoc/.codex/worktrees/household-continuity/living-world`.
+
+- **Implemented and verified in focused contracts/rendered app:** real conversation
+  suspension is shown as paused; resumption retains the delivery; actual hauled units
+  and the site's remembered outstanding materials are distinct. Refusals, urgent
+  needs, unknown causes and failed plans remain honest. Existing plan continuity itself
+  needed no behavioural repair. Browser review also repaired a false stall label on
+  resumption; the label now requires the travel engine's recorded stall counter.
+- **Rules/compatibility:** presentation only, current 27 unchanged, protocols 9/10 and
+  observation 6 unchanged. No new saved state, RNG, rules number or historical reference.
+  Unmerged leisure 28 remains separate and its number remains occupied. Remote refresh
+  during this slice found it advanced from 1d2c54b to 54a45d9 (merged main's inhabitant
+  fixes and adjusted provenance tests); it was preserved, not integrated or approved here.
+- **Evidence:** HOUSEHOLD_HOME.md follow-up and `home_evidence/continuity/README.md`.
+  Final full suite: 1193 tests / 142 files, 112.21 seconds. Focused 66 / 3 files;
+  typecheck/build/diff-check passed, historical golden fingerprints unchanged. Real
+  accepted conversation, resumed delivery and contribution views inspected in Edge.
+  Full serialized save continuation/purity passed. Implementation **d3a4378** was
+  fast-forward integrated into main and pushed normally; branch was also pushed.
+  This follow-up record adds no simulation changes. The two protected main-worktree
+  probes remain untouched; the household worktree has no unfinished source changes.
+- **Next executable step:** trace existing household helper requests, fulfilled/broken
+  commitments, trust and grievance weights through actual accepted/refused choices;
+  use a paired prior-interaction contract before adding any weight. Recheck current
+  authority and leisure integration/version provenance first. Do not rebuild F1-F5 or
+  restart the stopped large ensemble. Long-run civilisation claims remain deferred.
+
 ## Owner sequencing update — 2026-10-25
 
 The owner stopped the full validation batch and explicitly authorised a smaller run,

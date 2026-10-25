@@ -1,0 +1,119 @@
+- 'button "World menu. Current seed: home-conversation"':
+  - generic: home-conversation
+- button "Copy seed":
+- button "Help and controls":
+- button "Fold the top bar":
+- group "World summary":
+  - generic: 18:37
+  - generic: Day 1 · dusk
+  - generic: Clear
+  - generic: 2 people
+  - generic: 2 households
+- toolbar "Time controls":
+  - button "Play":
+  - button "Step forward one tick":
+  - group "Simulation speed":
+    - button "Speed 0.5×": 0.5×
+    - button "Speed 1×" [pressed]: 1×
+    - button "Speed 2×": 2×
+    - button "Speed 4×": 4×
+    - button "Speed 8×": 8×
+    - button "Speed 16×": 16×
+- status:
+  - generic: Paused
+- region "Happenings feed":
+  - button "Happenings":
+    - generic: Happenings
+- button "Hide the inspector" [expanded]:
+- complementary "Inspector":
+  - generic: A
+  - heading "Ada" [level=2]
+  - button "Follow this person with the camera":
+    - generic: Follow
+  - button "Show on the map":
+  - button "Close inspector":
+  - generic "Age in years. A year of life takes 12 days here.": Adult, 28
+  - generic: Clover household
+  - generic: "Home: lean-to (100% sound) — the household has already laid out a hut"
+  - generic: "Township: Willowbank"
+  - generic: Mood
+  - generic: Content
+  - generic: Health
+  - generic: "100"
+  - generic: On their mind
+  - region "What are they up to?":
+    - heading "What are they up to?" [level=3]
+    - button "More":
+      - generic: More
+    - definition: Between tasks (last chose “Deliver materials to the hut site”).
+    - definition
+    - term:
+      - generic: What is stopping them?
+    - definition: "Lay out a hut: the household has already laid out a hut."
+    - term:
+      - generic: What are they set on?
+    - definition: "Get the household's hut built. Step: take 4 wood to the hut — waiting to take this step. 4 units carried there so far. Last known site requirements: 4 wood and 4 stone. Why: the household is still in a lean-to, and their hut wants 8 wood and 4 stone. Still needs 4 wood."
+  - generic "Township & shared work"
+  - paragraph: "Willowbank: 2 households. Membership belongs to the household and does not change with walking."
+  - paragraph: "Recent recorded production and resource flows:"
+  - paragraph: Too little repeated activity recorded to describe a specialisation.
+  - paragraph: No production recorded in the recent window. Older production is not reconstructed.
+  - paragraph: No transfers between township affiliations recorded.
+  - paragraph: No repeated-support faction currently established.
+  - paragraph: No shared project proposed yet.
+  - generic "Household history"
+  - generic "Relationship history"
+  - generic: Needs
+  - group "Needs":
+    - meter "Food":
+      - generic: "91"
+    - meter "Water":
+      - generic: "90"
+    - meter "Energy":
+      - generic: "90"
+    - meter "Warmth":
+      - generic: "90"
+    - meter "Safety":
+      - generic: "84"
+    - meter "Company":
+      - generic: "92"
+  - generic: Carrying
+  - generic: nothing
+  - generic: 0 / 12
+  - generic: Tools
+  - generic: none
+  - button "Conversation" [expanded]:
+    - generic: Conversation
+  - group "Last conversation":
+    - generic: Last conversation
+    - generic: 5s ago
+    - button "Look at Ben": Ben
+    - generic: came to Ada for a chat
+    - term: Outcome
+    - definition: Friendly
+  - group "More about them":
+    - button "Nearby":
+      - generic: Nearby
+    - button "People 1":
+      - generic: People
+      - generic: "1"
+    - button "Requests":
+      - generic: Requests
+    - button "Recent 3":
+      - generic: Recent
+      - generic: "3"
+    - button "Knows 2":
+      - generic: Knows
+      - generic: "2"
+    - button "Family":
+      - generic: Family
+    - button "Traits":
+      - generic: Traits
+- group "Map overlays":
+  - button "Perception overlay":
+  - button "Paths overlay":
+  - button "Intentions overlay":
+  - button "Knowledge overlay":
+  - button "Labels overlay":
+- status
+- generic: STAGED HOUSEHOLD CONTRACT — delivered — home materials interrupted by conversation

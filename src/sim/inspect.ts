@@ -1,4 +1,5 @@
 import { deceasedById } from './historical_index';
+import { homeDeliveryProgress, homePlanPause, homeSiteRequirements } from './inspect_home_plan';
 import { describeTechniques, lessonProgress } from './techniques';
 import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory } from './history';
@@ -108,7 +109,7 @@ export interface PlanView {
   kind: string;
   goal: string;
   step: string;
-  /** 'under way' | 'waiting' | 'blocked' | 'done' | 'ended' - read off the records, never guessed */
+  /** 'under way' | 'waiting' | 'paused' | 'blocked' | 'done' | 'ended' - read off records */
   state: string;
   detail: string;
   /** what it still lacks, in plain words ('' when nothing) */
@@ -284,7 +285,9 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
     why = a.data.why ? `Weighed up: ${a.data.why}` : lastDec?.because ? `Weighed up: ${lastDec.because}` : a.goal;
     trying = a.goal ? a.goal[0].toUpperCase() + a.goal.slice(1) + (tgt ? ` (${tgt})` : '') + '.' : '—';
     if (a.blocked) stopping = a.blocked[0].toUpperCase() + a.blocked.slice(1) + '.';
-    else if (a.phase === 'travel' && hyp(p.x - a.lastX, p.y - a.lastY) < 0.01 && world.tick - a.start > 30) stopping = 'Stuck for the moment, finding another way.';
+    // The activity's stall counter is evidence; time since the original start is
+    // not (a conversation can have just resumed it at the same position).
+    else if (a.phase === 'travel' && a.stuck > 0) stopping = 'Stuck for the moment, finding another way.';
     else if (p.needs.hunger < 14 || p.needs.thirst < 14) stopping = 'Dangerously weak; everything else will have to wait.';
   } else if (lastDec && lastDec.blocked.length) {
     const b = lastDec.blocked[0];
@@ -313,11 +316,11 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
   const underway = a !== null && planOfActivity(p, a)?.id === i.id;
   const state = i.blocked
     ? `on hold: ${i.blocked}`
-    : !i.step
-      ? 'nothing to do for it just now'
-      : underway
-        ? `under way (${a!.label})`
-        : 'settled on, not started';
+    : homePlanPause(p, i) || (
+      !i.step ? 'nothing to do for it just now'
+        : underway ? `under way (${a!.label})`
+          : i.kind === 'shelter' ? 'waiting to take this step' : 'settled on, not started'
+    );
   let text = `${cap(i.goal)}. Step: ${i.step || '—'} — ${state}.`;
   // A food reserve is the one live plan whose sentence has to carry two more things, because the whole point of it is that a
   // viewer can follow local evidence to a real consequence: WHAT WAS ACTUALLY PUT BY (not what was meant), and WHY it was taken
@@ -335,6 +338,7 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
   // credited only where material really moves into the site (intent.ts creditHauled).
   if (i.kind === 'shelter') {
     text += ` ${Math.round(i.worked)} unit${Math.round(i.worked) === 1 ? '' : 's'} carried there so far.`;
+    text += ` ${homeSiteRequirements(p, i)}`;
     if (i.reason) text += ` Why: ${i.reason}.`;
   }
   if (i.setAside > 0) text += ` Set aside ${i.setAside === 1 ? 'once' : `${i.setAside} times`} so far.`;
@@ -361,9 +365,11 @@ export function planViews(world: World, p: Person): PlanView[] {
           : 'ended'
         : i.blocked
           ? 'blocked'
-          : a !== null && planOfActivity(p, a)?.id === i.id
-            ? 'under way'
-            : 'waiting',
+          : homePlanPause(p, i)
+            ? 'paused'
+            : a !== null && planOfActivity(p, a)?.id === i.id
+              ? 'under way'
+              : 'waiting',
     detail: planLine(world, p, i, a),
     missing: (Object.keys(i.wants) as ItemKind[])
       .map((k) => ({ item: k, n: (i.wants[k] ?? 0) - (p.inv[k] ?? 0) }))
@@ -377,9 +383,11 @@ export function planViews(world: World, p: Person): PlanView[] {
           ? `${Math.round(i.worked)} of its condition put back`
           : i.kind === 'stock'
             ? `${Math.round(i.worked)} of ${i.reserve ?? 0} units put by${i.cue ? ` (${i.cue === 'season' ? 'winter is coming' : 'the household was short'})` : ''}`
-            : i.worked > 0
-              ? 'made it themselves'
-              : '',
+            : i.kind === 'shelter'
+              ? homeDeliveryProgress(i)
+              : i.worked > 0
+                ? 'made it themselves'
+                : '',
     due: i.status === 'active' ? `by tick ${i.until}` : agoText(world, i.ended || i.since),
     outcome: i.status === 'active' ? '' : i.reason,
   }));

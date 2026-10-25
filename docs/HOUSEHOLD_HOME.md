@@ -1,5 +1,51 @@
 # From needing a home to living in one
 
+## Continuity display follow-up — 2026-10-25
+
+Current product remains rules 27. This follow-up changes derived inspector text only.
+It does not change plan adoption, deadlines, conversation acceptance, suspension,
+work, inventory, save state, RNG or the inhabitant protocol.
+
+Recheck: a shelter plan survives an accepted conversation and its original delivery
+resumes. The defect was presentation: `planLine` considered only the current activity,
+so the suspended delivery read "settled on, not started". `PlanView.progress` also
+used the generic "made it themselves" wording after hauling, which overstated the
+contribution. The inspector now shows the suspended plan-linked activity, the units
+actually hauled, and the referenced site's **last-known** material requirements.
+Unknown requirements or an unrecorded pause cause are explicitly unknown. A plan
+waiting between activities no longer claims its step has never started.
+
+Rendered review exposed an additional false stall immediately after conversation:
+the inspector compared position with a freshly reset travel sample but used the
+activity's original start time. It now requires the travel engine's existing positive
+stall counter. This is solely an explanation change; genuine recorded stalls still
+show and pathfinding is untouched.
+
+Ownership: `inspect_home_plan.ts` owns these derived household explanations;
+`inspect.ts` composes them into the existing person card. Authoritative state remains
+the person's intentions, current/suspended activity, beliefs, and credited deliveries.
+Two approaches were considered: recording a new pause/history field or deriving from
+those typed references. The latter avoids a second source of truth, a schema change,
+and guessed historical causes. It can describe a current pause, not reconstruct an
+unrecorded past interruption. It reads the exact plan site belief, never remote truth.
+
+Compatibility: no new numeric rules generation, migration, ablation or continuation
+reference is needed for a pure observer change. Existing goldens remain unchanged;
+save/load during the real conversation is compared using complete serialized state
+after resumption and physical delivery. Inhabitant observations do not use this view.
+Version 28 remains reserved for the separate unmerged leisure candidate (54a45d9 at
+the last remote refresh; originally 1d2c54b). It was not integrated in this slice.
+
+Eight contracts in `tests/household_continuity_view.test.ts` cover real accepted and
+refused conversations, same-activity resumption, physical transfer, save continuation,
+whole-state observer purity, unknown/stale knowledge, unknown causes, urgent need,
+deadline outcome and genuine versus false stalls. The shared staged fixture starts
+with goods, friendship and a known hut site; it does not establish natural emergence
+or aggregate housing benefit. Browser evidence and exact checks:
+`home_evidence/continuity/README.md`.
+
+The historical version-7 design and measurements below retain their original scope.
+
 One complete, watchable situation: a household recognises that it has no proper home, decides what to do about it, gets
 the materials, builds, and moves in — or meets an understandable reason it cannot finish. Rules version 7.
 
