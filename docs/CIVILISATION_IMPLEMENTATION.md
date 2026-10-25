@@ -1,5 +1,11 @@
 # Civilisation implementation register
 
+**Current audit refresh, 2026-10-25:** published main `d84e5ea`, rules 28.
+See [CIVILISATION_AUDIT.md](CIVILISATION_AUDIT.md) for the updated capability
+matrix, fresh bounded natural evidence and recommended next slice. The full
+suite now passes 1,200 tests in 144 files. Earlier branch, version and queue
+statements below are dated history; they do not supersede this checkpoint.
+
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 

@@ -1,0 +1,393 @@
+{
+  "source": "d84e5eaa828e86ea01b9847809875acd4259cf3a",
+  "rules": 28,
+  "classification": "bounded autonomous observation; sample exposures are person-samples, not decisions; no aggregate or generational claim",
+  "settings": {
+    "seed": "river",
+    "population": 28,
+    "harsh": false,
+    "immigration": false,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 28
+  },
+  "seed": "river",
+  "profile": "normal",
+  "days": 8,
+  "endTick": 19200,
+  "continuationTicks": 120,
+  "observed": {
+    "projects": 1,
+    "projectsCompleted": 0,
+    "projectsFailed": 0,
+    "relocationProposals": 0,
+    "relocationsSettled": 0,
+    "exchangeJourneys": 0,
+    "exchangeCompleted": 0
+  },
+  "starts": {
+    "gather": 1133,
+    "till": 41,
+    "give": 193,
+    "plan_site": 53,
+    "explore": 62,
+    "argue": 6,
+    "plant": 42,
+    "tend": 23,
+    "deposit": 78,
+    "socialize": 401,
+    "converse": 230,
+    "drink": 381,
+    "build": 62,
+    "eat": 317,
+    "haul": 68,
+    "craft": 56,
+    "fetch_water": 15,
+    "flee": 95,
+    "wander": 113,
+    "eat_store": 54,
+    "rest": 300,
+    "fuel_fire": 37,
+    "sleep": 274,
+    "visit": 48,
+    "host_meal": 1,
+    "attend_meal": 1,
+    "warm": 172,
+    "harvest": 102,
+    "alone": 2,
+    "repair": 22,
+    "attend": 35
+  },
+  "relocationSteps": {},
+  "exposure": {
+    "adultSamples": 2880,
+    "sustainedHardship": 0,
+    "hardshipWithDestination": 0,
+    "hardshipWithDestinationAndHouseholdPresent": 0,
+    "tradeLeadHolderSamples": 0
+  },
+  "hunger": {
+    "personTicks": 537600,
+    "below14": 891
+  },
+  "checkpoints": [
+    {
+      "tick": 2400,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 0,
+      "storedFood": 24,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 0,
+        "townProductionDistance": 0
+      }
+    },
+    {
+      "tick": 4800,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 0,
+      "storedFood": 36,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 0,
+        "townProductionDistance": 0
+      }
+    },
+    {
+      "tick": 7200,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 1,
+      "storedFood": 42,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 1,
+        "townProductionDistance": 0
+      }
+    },
+    {
+      "tick": 9600,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 1,
+      "storedFood": 4,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 1,
+        "townProductionDistance": 0
+      }
+    },
+    {
+      "tick": 12000,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 3,
+      "storedFood": 17,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 1,
+        "townProductionDistance": 0
+      }
+    },
+    {
+      "tick": 14400,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 3,
+      "storedFood": 3,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 1,
+        "townProductionDistance": 0
+      }
+    },
+    {
+      "tick": 16800,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 4,
+      "storedFood": 30,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 1,
+        "townProductionDistance": 0
+      }
+    },
+    {
+      "tick": 19200,
+      "alive": 28,
+      "deaths": 0,
+      "solidHomes": 6,
+      "storedFood": 64,
+      "metrics": {
+        "retainedSharedCompleted": 0,
+        "retainedSharedFailed": 0,
+        "retainedRelocationsSettled": 0,
+        "retainedRelocationsFailed": 0,
+        "retainedExchangePairs": 0,
+        "retainedExchangeReceipts": 0,
+        "alignedResidentsAtEnd": 0,
+        "factionsAtEnd": 0,
+        "charcoalHoldersAtEnd": 20,
+        "taughtCharcoalAtEnd": 0,
+        "supperHoldersAtEnd": 0,
+        "familySupperAtEnd": 0,
+        "secondTransmissionAtEnd": 0,
+        "newbornSupperAtEnd": 0,
+        "townsWithRepeatedProduction": 1,
+        "townProductionDistance": 0
+      }
+    }
+  ],
+  "projectDetails": [
+    {
+      "id": 7597,
+      "townshipId": 1104,
+      "siteId": 7596,
+      "organiserId": 1116,
+      "proposed": 17559,
+      "reason": "a shared storehouse for the settlement",
+      "status": "active",
+      "outcome": "",
+      "participants": [
+        {
+          "personId": 1116,
+          "requestId": 0,
+          "since": 17559,
+          "status": "supporting",
+          "reason": "proposed this shared storehouse",
+          "materials": {},
+          "work": 0,
+          "supports": 1116
+        },
+        {
+          "personId": 1144,
+          "requestId": 8012,
+          "since": 18969,
+          "status": "supporting",
+          "reason": "Alma supports Milo coordinating and will help build",
+          "materials": {},
+          "work": 38.51478124963185,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": true,
+              "reason": "Alma supports Milo coordinating and will help build",
+              "tick": 18969
+            }
+          ],
+          "supports": 1116
+        },
+        {
+          "personId": 1125,
+          "requestId": 8054,
+          "since": 19073,
+          "status": "refused",
+          "reason": "not willing to commit to this proposal",
+          "materials": {},
+          "work": 0,
+          "decisions": [
+            {
+              "candidateId": 1116,
+              "accepted": false,
+              "reason": "not willing to commit to this proposal",
+              "tick": 19073
+            }
+          ]
+        }
+      ],
+      "council": {
+        "candidates": [
+          {
+            "personId": 1116,
+            "tick": 17559,
+            "reason": "proposed the physical project"
+          }
+        ],
+        "coordinatorId": 1116,
+        "changes": [
+          {
+            "tick": 18969,
+            "from": 0,
+            "to": 1116,
+            "reason": "most accepted support (at least two people)"
+          }
+        ]
+      },
+      "site": {
+        "ent": "site",
+        "id": 7596,
+        "type": "storehouse",
+        "x": 45,
+        "y": 41,
+        "w": 2,
+        "h": 2,
+        "hhId": 0,
+        "creatorId": 1116,
+        "required": {
+          "wood": 10,
+          "stone": 4
+        },
+        "delivered": {},
+        "used": {},
+        "work": 38.51478124963185,
+        "workTotal": 640,
+        "createdTick": 17559,
+        "lastWorkTick": 19139,
+        "maxWorkers": 3,
+        "status": "waiting for 10 wood, 4 stone",
+        "variant": 0,
+        "contrib": {
+          "1143": 1.7200000000000009
+        }
+      }
+    }
+  ],
+  "integrity": {
+    "invariantFailures": [],
+    "observerPure": true,
+    "roundtripEqual": true,
+    "continuationEqual": true,
+    "continuationHash": "c53109e9"
+  },
+  "performance": {
+    "simulationMs": 11514.5937,
+    "meanMsPerTick": 0.599718421875,
+    "saveBytes": 2958064,
+    "heapBytes": 225209696,
+    "note": "includes audit collection overhead; heap includes runtime and continuation copies"
+  }
+}

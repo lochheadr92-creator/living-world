@@ -1,4 +1,24 @@
-# Current civilisation continuation (2026-10-24)
+# Current main checkpoint (2026-10-25)
+
+Current published main is `d84e5ea`, **rules 28**. The familiar checkout at
+`C:/dev/Claude Experiment/living-world` now holds main; the former main checkout
+at `C:/Users/RJLoc/.codex/worktrees/home-habitation/living-world` is detached at
+the same revision, with its untracked work preserved.
+
+Read [the refreshed civilisation audit](docs/CIVILISATION_AUDIT.md) first.
+Fresh verification: 1,200 tests / 144 files and production build pass; bounded
+28-person/8-day and 100-person/4-day ordinary runs pass ledger, save continuation
+and observer-purity checks. Household survival is demonstrated; civic support and
+delivery occur, but no shared project finishes within these short windows.
+Next recommended slice: trace one existing voluntary storehouse project through
+completion/use or an explained failure before making a behavioural change.
+
+F1–F5 are delivered. The owner-stopped long validation remains stopped; a smaller
+rules-26 validation already exists. Rules-29 work in a different worktree is not
+part of this main checkpoint. The older instructions below are historical and
+must not reopen the old queue or restart the stopped ensemble.
+
+# Historical civilisation continuation (2026-10-24)
 
 Read `docs/CIVILISATION_IMPLEMENTATION.md` for the current programme and
 `docs/CIVILISATION_VALIDATION.md` for exact remaining workloads and launch commands.
