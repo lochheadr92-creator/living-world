@@ -338,5 +338,6 @@ That work was rebased as rules 28 at 1d2c54b, but both old 27 builds wrote the s
 New main-27 envelopes include rulesGeneration: main-night-wait-boundary-27. Untagged or
 foreign-generation 27 saves are rejected without changing the original storage or running
 world. Use the exact originating build for old unmarked files; there is no safe automatic
-migration. Rules <=26 and their immutable references are untouched. Do not reuse 28 or
-merge the abandoned leisure-27 branch. This task does not deliver the leisure-28 candidate.
+migration. Rules <=26 and their immutable references are untouched. Do not merge the
+abandoned leisure-27 branch (`007b9d5`). Rules 28 is the varied spare time rebase of that work, delivered separately
+(see "Rules version 28" above); this provenance task itself did not deliver it.
