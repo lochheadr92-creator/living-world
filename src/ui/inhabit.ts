@@ -30,6 +30,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
   const line = h('div', { class: 'inhabit-turn-line' });
   const opts = h('div', { class: 'inhabit-opts' });
   const blocked = h('div', { class: 'inhabit-blocked' });
+  const timeBasis = h('div', { class: 'inhabit-time-basis' });
   const engine = h(
     'button',
     {
@@ -85,7 +86,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
     h('summary', null, 'Answer from a chat'),
     h('div', { class: 'inhabit-chat-body' }, obsBox, h('div', { class: 'inhabit-actions' }, copy, send), answer, note),
   );
-  const el = h('div', { class: 'inhabit-manual' }, head, line, blocked, opts, engine, chat);
+  const el = h('div', { class: 'inhabit-manual' }, head, line, blocked, timeBasis, opts, engine, chat);
 
   const WORDS: Record<string, string> = { hunger: 'hungry', thirst: 'thirsty', energy: 'tired', warmth: 'cold', safety: 'uneasy', social: 'lonely' };
   /** how this person is, in their own plain terms: only what is actually pressing */
@@ -103,6 +104,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
     if (!m) return;
     setHidden(opts, !waiting);
     setHidden(blocked, !waiting);
+    setHidden(timeBasis, !waiting);
     setHidden(engine, !waiting);
     setHidden(chat, !waiting);
     if (!waiting) {
@@ -123,6 +125,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
       return;
     }
     setText(when, obs.time.clock);
+    setText(timeBasis, obs.version >= 6 ? 'Action estimates and memory ages use the world clock.' : 'Action estimates use seconds at 1× playback.');
     blocked.replaceChildren(...obs.setAside.filter(o => o.label.startsWith('Make ') && o.reason.startsWith('Needs to '))
       .map(o => h('div', null, `${o.label}: ${o.reason}`)));
     const last = lastInhabitantSummary(obs.doing);
@@ -147,7 +150,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
           'button',
           {
             type: 'button',
-            class: 'btn inhabit-take' + (o.key.includes('#choice:') ? ' inhabit-distinct' : ''),
+            class: 'btn inhabit-take' + (obs.version >= 6 || o.key.includes('#choice:') ? ' inhabit-distinct' : ''),
             title: o.label + (o.target ? ' — ' + o.target : '') + ' · about ' + o.eta,
             onClick: () => {
               const mm = driver.manual();
@@ -164,6 +167,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
           h('span', { class: 'inhabit-take-l' }, o.label),
           ...(o.key.includes('#choice:') ? [h('span', { class: 'inhabit-take-t' }, o.goal)] : []),
           h('span', { class: 'inhabit-take-t' }, o.target ?? ''),
+          ...(obs.version >= 6 ? [h('span', { class: 'inhabit-take-t' }, `About ${o.eta}`)] : []),
         );
         return h('div', { class: 'inhabit-opt' }, take, ...(box ? [box] : []));
       }),

@@ -12,7 +12,7 @@ Current implementation starts from bc9e3c8 (rules 26), not the audited version 1
 | 2 | F3 duplicate choice keys | Fixed and verified; protocols 5/6, observation 4. |
 | 3 | F2 unexplained crafting gate | Fixed and verified; protocols 7/8, observation 5. |
 | 4 | F4 stale Last summary | Fixed and verified; presentation only, actual timestamp ordering. |
-| 5 | F5 unclear time basis | Queued: action estimates and memory ages, no timing change. |
+| 5 | F5 unclear time basis | Fixed and verified; protocols 9/10, observation 6; 1x and 16x inspected. |
 
 Each disposition requires reproduction/current evidence, owned fix, focused regression,
 compatibility, rendered manual observation, and delivery. Stop/report after these five;
@@ -118,3 +118,29 @@ Both screenshots inspected; downloaded transcript replay matches and checks both
 summaries. Evidence: inhabitant_evidence/f4/; scripts/inhabitant_f4_replay.ts.
 Existing module touched: inhabitant UI delegates recorded-outcome selection to a pure
 UI helper. No dialogue, emotions or causes are synthesized.
+
+## F5 — fixed and verified (protocols 9/10, observation 6)
+
+Confirmed action estimates used secondsText (ticks/10), while the world clock advances
+1440 minutes per 2400 ticks; agoText used the same unexplained seconds/minutes basis.
+Agent-owned time_text.ts now formats action estimates and observation memory ages as
+world minutes/hours/days, rounded to minute precision. The manual panel explicitly
+names this basis and displays estimates on the buttons. Playback, ticks, needs, work,
+and the general observer inspector are unchanged. Scope is inhabitant observations and
+manual choice presentation; historical observer/inspector formatting is not redesigned.
+
+Four contracts cover short/hour/day durations, age boundaries/zero/future records,
+unchanged offered execution and complete serialized observer purity, and every historical
+protocol's observation/memory mapping. Old protocols 1–8 keep their wording; new 9/10
+use observation 6. Rules remain 27. Rendered at both 1x and 16x with the same estimates
+and memory ages; both screenshots inspected. A selected gathering action completed and
+its downloaded protocol-9 transcript replays: scripts/inhabitant_f5_replay.ts.
+Evidence: inhabitant_evidence/f5/. No elapsed-wall-time claim is made by these estimates.
+
+Integrated validation: npm test passed 1181 tests / 140 files in 106.83 seconds;
+npm run typecheck and npm run build passed; all historical fingerprints matched with
+npx --no-install vite-node scripts/golden.ts. F1/F2/F3/F4 manual transcripts also replay
+under the current code. Vite emits existing future config-loader import-extension warnings;
+the timer-overflow warning is the intentional existing timeout regression test.
+Existing modules touched: agent observation/protocol route versioned wording; manual UI
+makes its basis and estimates visible. Presentation neither writes state nor draws RNG.
