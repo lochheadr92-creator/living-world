@@ -1,0 +1,26 @@
+{
+  "source": "rules 28 before individual work tastes",
+  "saved": {
+    "hash": "317ed918",
+    "deep": "4d325a777d096af3",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 2
+    },
+    "homeFood": 66,
+    "storedFood": 22
+  },
+  "continued": {
+    "hash": "74b40a53",
+    "deep": "b65fa4d10e90b574",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 3,
+      "shelter": 1
+    },
+    "homeFood": 103,
+    "storedFood": 36
+  }
+}
