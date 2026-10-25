@@ -23,20 +23,23 @@ export const PROTOCOL_V3 = 'inhabitant/3';
 export const PROTOCOL_V4 = 'inhabitant/4';
 export const PROTOCOL_V5 = 'inhabitant/5';
 export const PROTOCOL_V6 = 'inhabitant/6';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6];
+export const PROTOCOL_V7 = 'inhabitant/7';
+export const PROTOCOL_V8 = 'inhabitant/8';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V6 : PROTOCOL_V5;
+  return memory ? PROTOCOL_V8 : PROTOCOL_V7;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V1) return 1;
   if (protocol === PROTOCOL_V2) return 2;
   if (protocol === PROTOCOL_V5 || protocol === PROTOCOL_V6) return 4;
+  if (protocol === PROTOCOL_V7 || protocol === PROTOCOL_V8) return 5;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8;
 }
 
 export interface Proposal {

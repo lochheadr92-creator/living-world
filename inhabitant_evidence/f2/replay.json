@@ -1,0 +1,13 @@
+{
+  "tick": 422,
+  "inventory": {
+    "pick": 1
+  },
+  "result": {
+    "tick": 420,
+    "label": "Making a pick",
+    "outcome": "success",
+    "detail": "done"
+  },
+  "warnings": []
+}

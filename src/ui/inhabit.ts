@@ -28,6 +28,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
   const head = h('div', { class: 'inhabit-turn-h' }, h('b', null, 'Your turn'), when);
   const line = h('div', { class: 'inhabit-turn-line' });
   const opts = h('div', { class: 'inhabit-opts' });
+  const blocked = h('div', { class: 'inhabit-blocked' });
   const engine = h(
     'button',
     {
@@ -83,7 +84,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
     h('summary', null, 'Answer from a chat'),
     h('div', { class: 'inhabit-chat-body' }, obsBox, h('div', { class: 'inhabit-actions' }, copy, send), answer, note),
   );
-  const el = h('div', { class: 'inhabit-manual' }, head, line, opts, engine, chat);
+  const el = h('div', { class: 'inhabit-manual' }, head, line, blocked, opts, engine, chat);
 
   const WORDS: Record<string, string> = { hunger: 'hungry', thirst: 'thirsty', energy: 'tired', warmth: 'cold', safety: 'uneasy', social: 'lonely' };
   /** how this person is, in their own plain terms: only what is actually pressing */
@@ -100,6 +101,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
     setHidden(el, !m);
     if (!m) return;
     setHidden(opts, !waiting);
+    setHidden(blocked, !waiting);
     setHidden(engine, !waiting);
     setHidden(chat, !waiting);
     if (!waiting) {
@@ -120,6 +122,8 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
       return;
     }
     setText(when, obs.time.clock);
+    blocked.replaceChildren(...obs.setAside.filter(o => o.label.startsWith('Make ') && o.reason.startsWith('Needs to '))
+      .map(o => h('div', null, `${o.label}: ${o.reason}`)));
     const last = obs.doing.lastResult;
     setText(line, obs.self.name + ' is ' + pressing(obs.self.needs as never) + '.' + (last ? ' Last: ' + last.label + ' — ' + last.outcome + '.' : ''));
     opts.replaceChildren(

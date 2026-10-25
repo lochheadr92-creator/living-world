@@ -461,3 +461,7 @@ Inhabitant audit F3 (2026-10-25): new runs use protocols 5/6 and observation 4.
 Duplicate internal option keys receive distinct decision-local public keys; goals and
 limits remain separate. Protocols 1–4 retain their historical first-match meaning.
 See docs/INHABITANT_FIXES.md and inhabitant_evidence/f3/ for manual/replay evidence.
+
+Inhabitant audit F2: protocols 7/8 (observation 5) expose the existing material-ready
+crafting needs gate in setAside and the manual panel. Thresholds and actions are unchanged.
+Older protocol observations retain their original wording/content.

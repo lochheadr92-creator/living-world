@@ -10,7 +10,7 @@ Current implementation starts from bc9e3c8 (rules 26), not the audited version 1
 |---|---|---|
 | 1 | F1 night shelter restart | Fixed and verified; integrated in 1981f26 (rules 27). |
 | 2 | F3 duplicate choice keys | Fixed and verified; protocols 5/6, observation 4. |
-| 3 | F2 unexplained crafting gate | Queued: actual needs gate, no balance change. |
+| 3 | F2 unexplained crafting gate | Fixed and verified; protocols 7/8, observation 5. |
 | 4 | F4 stale Last summary | Queued: most recent recorded action/interaction, stable ties. |
 | 5 | F5 unclear time basis | Queued: action estimates and memory ages, no timing change. |
 
@@ -78,3 +78,27 @@ still expecting protocols 3/4. Updated those assertions to 5/6, retaining histor
 passed. Complete suite will run again at the next integrated presentation boundary.
 Existing modules touched: observation/protocol/transcript for versioned public identity;
 external/decision for validated selection; inhabitant UI/styles for readable alternatives.
+
+## F2 — fixed and verified (protocols 7/8, observation 5)
+
+Reconfirmed optCraft's hunger/thirst-drive >30 early return. options_work.ts now shares
+that unchanged predicate with a pure observer derivation which reuses the wanted/planned
+tool, material allocation and known workspace checks without constructing an activity.
+Observation 5 adds material-ready needs blockers to setAside; the manual panel displays
+them. This is derived presentation, not saved simulation state. Rules remain 27.
+Protocols 1–6 preserve earlier observation content; new runs use 7/8.
+
+Three contracts: hunger despite broad 'ok' label; thirst/both gates and insufficient
+materials; actual eating restores crafting, successful material consumption and complete
+serialized replay equality. Observer test compares complete serialized state before/after.
+Focused crafting/projects/protocol/memory: 60 tests passed. Typecheck passed.
+Original fixture setup mistakenly used needs above the gate and then overfilled the pack;
+corrected labelled initial conditions from the actual drive bands and carrying capacity.
+No production thresholds/capacity/recipe changes were made.
+
+Rendered Edge session: inspected the blocker, selected offered eating, then offered pick
+craft; success appeared and wood/stone left inventory. Transcript downloaded and replayed
+with scripts/inhabitant_f2_replay.ts. Evidence: inhabitant_evidence/f2/. Earlier F1 and F3
+manual recordings still replay exactly. Full regression follows remaining presentation fixes.
+Existing modules touched: crafting owns the predicate/candidate derivation; agent protocol
+and observation own versioned explanation; inhabitant UI displays the recorded blocker.

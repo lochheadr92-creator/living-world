@@ -1,5 +1,6 @@
 import { deceasedById } from '../sim/historical_index';
 import { choiceKeys } from './choice_keys';
+import { blockedCraftNeeds } from '../sim/options_work';
 // The inhabitant's observation: everything an outside controller may know about the person it drives, and nothing else
 // (docs/INHABITANT.md, section 2).
 //
@@ -35,7 +36,7 @@ import { hyp } from '../sim/util';
  *  3 adds the limits an action accepts. */
 /** Bump when the observation's content or wording changes, and keep the old shape under the old version: replay rebuilds each ask's
  * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names. */
-export const OBSERVATION_VERSION = 4;
+export const OBSERVATION_VERSION = 5;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -527,7 +528,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
       failures: failures.slice(0, 6),
     },
     options: ranked.slice(0, 30).map((o,index) => ({...describeOption(world, p, o, showScores, version), key: publicKeys[index]})),
-    setAside: ctx.blocked.slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId) })),
+    setAside: [...(version >= 5 ? blockedCraftNeeds(ctx) : []), ...ctx.blocked].slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId) })),
   };
   return deepFreeze(obs);
 }

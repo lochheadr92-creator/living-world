@@ -831,8 +831,27 @@ function optRepairAndFire(ctx: Ctx): void {
 
 // ───────────────────────── crafting ─────────────────────────
 function optCraft(ctx: Ctx): void {
+  if (craftNeedsBlock(ctx)) return;
+  craftCandidates(ctx);
+}
+
+/** The existing work gate, shared with the inhabitant explanation; no thresholds change. */
+function craftNeedsBlock(ctx: Ctx): string | null {
+  const needs = [ctx.drives.hunger > 30 ? 'eat' : '', ctx.drives.thirst > 30 ? 'drink' : ''].filter(Boolean);
+  return needs.length ? `Needs to ${needs.join(' and ')} before starting tool work, even if not yet critically low.` : null;
+}
+
+/** Pure observer derivation. Reuse material/allocation/workspace checks without invoking make. */
+export function blockedCraftNeeds(ctx: Ctx): Ctx['blocked'] {
+  const reason = craftNeedsBlock(ctx);
+  if (!reason || ctx.stage === 'child') return [];
+  const scratch: Ctx = { ...ctx, options: [], blocked: [], observer: true };
+  craftCandidates(scratch);
+  return scratch.options.map(o => ({ ...o, make: undefined, blocked: reason }));
+}
+
+function craftCandidates(ctx: Ctx): void {
   const { p } = ctx;
-  if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) return;
   // What they would want to make now, AND anything a plan of their own is about. The two can differ: what is most worth making
   // changes as someone learns the country and picks up skills, and without this the step a plan was carrying - the one it fetched
   // the materials for - would simply stop being on offer, and the project would end as "had the makings but never sat down to it".
