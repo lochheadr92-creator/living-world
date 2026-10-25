@@ -3,7 +3,30 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
-## Exact continuation snapshot — after version 26
+## Owner sequencing update — 2026-10-25
+
+The owner stopped the full validation batch and explicitly authorised a smaller run,
+then proceeding to queued inhabitant fixes. This supersedes the earlier prerequisite
+below; it does not establish long-run civilisation completion.
+
+Short run source b402f3d, rules 26, four seeds (meadow/river/fern/aspen): A/C/DEF two
+days, GH four days; controls plus both nudges and the original ablations. All configured
+outputs completed. One-day meadow benchmarks at 28/100/250 people passed all recorded
+ledger/tool checks; no invariant failures. Costs: 0.54/2.59/10.42 ms per tick.
+Started 09:44:49 and combined report completed 09:51:09 Brisbane time. Four seeds and
+short windows cannot support aggregate benefit or natural multigeneration claims.
+D12/A long-term benefit, natural C-H emergence and mature-world cost remain deferred.
+Original large-run partial files are preserved, marked interrupted, never accepted.
+
+Evidence: C:/dev/Claude Experiment/living-world-validation-v26/civ_validation_small_v26/report.txt;
+manifest.json alongside it; SMALL_VALIDATION_SCOPE.md in that checkout. The simulation
+source was unchanged; the reduced launcher and its hash are preserved there.
+
+Active follow-up: branch codex/inhabitant-fixes in
+C:/Users/RJLoc/.codex/worktrees/inhabitant-fixes/living-world. Ordered queue is F1, F3,
+F2, F4, F5. See INHABITANT_FIXES.md. No finding is marked fixed yet.
+
+## Historical continuation snapshot — after version 26 (superseded sequencing above)
 
 - Current product rules **26**: spatial finite-deposit geology after operational retention and indexed history after transmitted household supper practice after persistent political alignment after personally informed exchange journeys (22), following v21 settlement production and resource-flow observations,
   following relocation/founding (20, integrated at a7473c4) and construction access (19). Implementation is on `codex/civilisation-programme` in
@@ -818,3 +841,4 @@ reproduction has not begun. The prerequisite is the remaining programme verifica
 in CIVILISATION_VALIDATION.md, followed by honest result interpretation and any required
 failure repairs. Keep the v13 original audit/transcript intact; use current main when
 this queue opens. No manual inhabitant acceptance session for these fixes is claimed.
+

@@ -1,0 +1,26 @@
+{
+  "source": "reconciled version 26 before inhabitant audit repairs",
+  "saved": {
+    "hash": "2318f0ad",
+    "deep": "a2d2ec74e2376352",
+    "alive": 28,
+    "plans": {
+      "tool": 16,
+      "stock": 1
+    },
+    "homeFood": 85,
+    "storedFood": 29
+  },
+  "continued": {
+    "hash": "f927cec2",
+    "deep": "57649600faf153b3",
+    "alive": 28,
+    "plans": {
+      "tool": 17,
+      "stock": 1,
+      "shelter": 1
+    },
+    "homeFood": 74,
+    "storedFood": 21
+  }
+}
