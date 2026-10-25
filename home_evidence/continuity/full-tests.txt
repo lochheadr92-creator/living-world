@@ -25,4 +25,3 @@ Timeout duration was set to 1.
       Tests  1192 passed (1192)
    Start at  10:53:58
    Duration  96.06s (tests 92%, import 7%, transform 2%)
-

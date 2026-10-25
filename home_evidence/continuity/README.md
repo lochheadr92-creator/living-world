@@ -2,6 +2,8 @@
 
 Base: main e3e1a93. Implementation branch: codex/household-continuity.
 Rules 27, presentation only. No simulation or protocol changes.
+Implementation d3a4378 was fast-forward integrated into main and normally pushed.
+The follow-up record normalises trailing empty log lines only; test output is intact.
 
 ## Contract evidence
 

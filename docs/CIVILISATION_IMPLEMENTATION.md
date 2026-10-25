@@ -25,8 +25,10 @@ First bounded slice: home-plan interruption readability, based on main e3e1a93 i
   Final full suite: 1193 tests / 142 files, 112.21 seconds. Focused 66 / 3 files;
   typecheck/build/diff-check passed, historical golden fingerprints unchanged. Real
   accepted conversation, resumed delivery and contribution views inspected in Edge.
-  Full serialized save continuation/purity passed. Production code is ready for normal
-  main integration; the delivery confirmation below records the resulting commit.
+  Full serialized save continuation/purity passed. Implementation **d3a4378** was
+  fast-forward integrated into main and pushed normally; branch was also pushed.
+  This follow-up record adds no simulation changes. The two protected main-worktree
+  probes remain untouched; the household worktree has no unfinished source changes.
 - **Next executable step:** trace existing household helper requests, fulfilled/broken
   commitments, trust and grievance weights through actual accepted/refused choices;
   use a paired prior-interaction contract before adding any weight. Recheck current
