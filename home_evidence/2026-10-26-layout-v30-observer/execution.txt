@@ -1,0 +1,30 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+{
+  "source": "07939572eba98a6323372a7213846cccd3f17d4e",
+  "household": {
+    "id": 1103,
+    "name": "Briar",
+    "members": [
+      1106,
+      1107,
+      1108,
+      1109
+    ],
+    "color": 0,
+    "homeId": 1105,
+    "headId": 1106,
+    "formed": 0,
+    "townshipId": 1104
+  },
+  "finalHome": {
+    "id": 3528,
+    "type": "hut",
+    "built": 5516
+  },
+  "storyLines": 696,
+  "transfers": 235,
+  "restoredAt": 2400,
+  "looks": 164,
+  "checkpoints": 41,
+  "failures": []
+}

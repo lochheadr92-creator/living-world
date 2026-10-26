@@ -222,6 +222,17 @@ raise the version. Bug fixes that change behaviour are behavioural changes.
 
 ## Lab defaults and provenance
 
+**Version 30 — pending layout claims and occupancy recovery (2026-10-26).**
+`layout_claims.ts` derives execution reservations from accepted, active, living,
+unexpired layout owners. One home layout per household and one-tile footprint
+separation are enforced at acceptance/re-acquisition and validated again on arrival
+and commit. A temporarily occupied footprint may wait 90 ticks under its original
+activity expiry; access is always rechecked. Rules 29 and earlier keep their recorded
+behaviour, proved against a pre-change full serialized reference. Candidate search,
+personal beliefs, option scores, resource supply and construction caps are unchanged.
+Activity metadata is already saved; no format migration or protocol change.
+The architecture and failure/recovery contract are in [LAYOUT_CLAIMS.md](LAYOUT_CLAIMS.md).
+
 **Version 29 — event participant snapshots (2026-10-26).** `addEvent` copies the
 participant list at creation. A later crew join cannot rewrite the formation event
 or alter story eligibility through a shared array. This is versioned because

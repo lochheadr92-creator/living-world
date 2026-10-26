@@ -1,0 +1,1783 @@
+{
+  "source": "822fba23a5652d411e32f7bc1dd8373101c51f40",
+  "settings": {
+    "seed": "river",
+    "population": 28,
+    "harsh": false,
+    "immigration": false,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 30
+  },
+  "selection": "Before stepping: first household by ID with two living adults and no solid home; fallback first household.",
+  "initial": {
+    "household": {
+      "id": 1103,
+      "name": "Briar",
+      "members": [
+        1106,
+        1107,
+        1108,
+        1109
+      ],
+      "color": 0,
+      "homeId": 1105,
+      "headId": 1106,
+      "formed": 0,
+      "townshipId": 1104
+    },
+    "homeType": "lean_to",
+    "members": [
+      {
+        "id": 1106,
+        "name": "Mira",
+        "stage": "adult",
+        "inv": {
+          "grain": 2,
+          "water": 1,
+          "seeds": 3
+        },
+        "needs": {
+          "hunger": 91.70370674272999,
+          "thirst": 80.41256721643731,
+          "energy": 76.13338302075863,
+          "warmth": 81.94697921117768,
+          "safety": 85,
+          "social": 89.25249518011697
+        }
+      },
+      {
+        "id": 1107,
+        "name": "Emre",
+        "stage": "adult",
+        "inv": {
+          "fruit": 2
+        },
+        "needs": {
+          "hunger": 65.63064441597089,
+          "thirst": 67.7655003387481,
+          "energy": 73.50783750414848,
+          "warmth": 83.40417317999527,
+          "safety": 85,
+          "social": 55.78197591123171
+        }
+      },
+      {
+        "id": 1108,
+        "name": "Viktor",
+        "stage": "child",
+        "inv": {},
+        "needs": {
+          "hunger": 85.47669598646462,
+          "thirst": 64.60917096864432,
+          "energy": 73.76643525995314,
+          "warmth": 82.57684613065794,
+          "safety": 85,
+          "social": 55.906601725146174
+        }
+      },
+      {
+        "id": 1109,
+        "name": "Theo",
+        "stage": "child",
+        "inv": {},
+        "needs": {
+          "hunger": 76.87518681911752,
+          "thirst": 81.20736214378849,
+          "energy": 80.30857587978244,
+          "warmth": 86.45503778196871,
+          "safety": 85,
+          "social": 46.105464168358594
+        }
+      }
+    ]
+  },
+  "final": {
+    "household": {
+      "id": 1103,
+      "name": "Briar",
+      "members": [
+        1106,
+        1107,
+        1108,
+        1109
+      ],
+      "color": 0,
+      "homeId": 3528,
+      "headId": 1106,
+      "formed": 0,
+      "townshipId": 1104
+    },
+    "home": {
+      "ent": "building",
+      "id": 3528,
+      "type": "hut",
+      "x": 44,
+      "y": 36,
+      "w": 2,
+      "h": 2,
+      "condition": 91.04817400000351,
+      "hhId": 1103,
+      "store": {
+        "items": {},
+        "cap": 40
+      },
+      "fuel": 0,
+      "builtTick": 5516,
+      "doorX": 44,
+      "doorY": 38,
+      "variant": 1,
+      "inside": [],
+      "builtBy": [
+        1137
+      ],
+      "built": 5516
+    },
+    "members": [
+      {
+        "alive": true,
+        "indoors": 0,
+        "id": 1106,
+        "name": "Mira",
+        "household": 1103,
+        "position": {
+          "x": 37.76869204148158,
+          "y": 47.77362399078184
+        },
+        "inv": {
+          "wood": 4
+        },
+        "needs": {
+          "hunger": 7.2070000000019006,
+          "thirst": 81.80056721641114,
+          "energy": 62.58899999998887,
+          "warmth": 53.63354409395871,
+          "safety": 82.36735054240687,
+          "social": 60.982240372733436
+        },
+        "believesHoused": true,
+        "homeBelief": {
+          "id": 3528,
+          "kind": "building",
+          "x": 45,
+          "y": 37,
+          "amount": 0,
+          "max": 0,
+          "seen": 9517,
+          "src": "seen",
+          "from": 0,
+          "learned": 9517,
+          "btype": "hut",
+          "hh": 1103,
+          "cond": 91.18757400000348,
+          "fuel": 0,
+          "items": {},
+          "origin": 1106,
+          "hops": 0
+        },
+        "siteBelief": null,
+        "decision": {
+          "tick": 9529,
+          "trigger": "free",
+          "chosen": {
+            "kind": "gather",
+            "label": "Picking berries",
+            "utility": 55.1,
+            "parts": [
+              [
+                "hungry",
+                76.2
+              ],
+              [
+                "well-liked food",
+                1.3
+              ],
+              [
+                "walking",
+                -17.2
+              ],
+              [
+                "good at it",
+                0.8
+              ],
+              [
+                "has paid me poorly before (0.3×)",
+                -6
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 54,
+              "parts": [
+                [
+                  "hungry",
+                  76.2
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -18.3
+                ],
+                [
+                  "good at it",
+                  0.8
+                ],
+                [
+                  "has paid me poorly before (0.3×)",
+                  -6
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 54.9,
+              "parts": [
+                [
+                  "hungry",
+                  76.2
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -17.4
+                ],
+                [
+                  "good at it",
+                  0.8
+                ],
+                [
+                  "has paid me poorly before (0.3×)",
+                  -6
+                ]
+              ]
+            },
+            {
+              "kind": "socialize",
+              "label": "Ask Viktor for food",
+              "utility": 70.4,
+              "parts": [
+                [
+                  "hungry",
+                  64.6
+                ],
+                [
+                  "they are carrying some",
+                  4
+                ],
+                [
+                  "they owe me a favour",
+                  6
+                ],
+                [
+                  "walking",
+                  -4.2
+                ]
+              ]
+            },
+            {
+              "kind": "socialize",
+              "label": "Ask Ivy for food",
+              "utility": 67.7,
+              "parts": [
+                [
+                  "hungry",
+                  64.6
+                ],
+                [
+                  "they are carrying some",
+                  4
+                ],
+                [
+                  "walking",
+                  -0.8
+                ]
+              ]
+            }
+          ],
+          "blocked": [
+            {
+              "kind": "eat_store",
+              "label": "Eat from the stores",
+              "utility": 0,
+              "parts": [],
+              "blocked": "remembers it being empty"
+            },
+            {
+              "kind": "eat_store",
+              "label": "Eat from the stores",
+              "utility": 0,
+              "parts": [],
+              "blocked": "remembers it being empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 0,
+              "parts": [],
+              "blocked": "believes it is empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 0,
+              "parts": [],
+              "blocked": "believes it is empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 0,
+              "parts": [],
+              "blocked": "believes it is empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 0,
+              "parts": [],
+              "blocked": "failed there 141 ticks ago (a wolf came too close)"
+            }
+          ],
+          "considered": 39,
+          "knownPlaces": 314,
+          "seenNow": 13,
+          "because": "a step toward “put 12 units of food by for the household”: gather food to put by (12 more) · hungry +76 · walking −17 · has paid me poorly before (0.3×) −6 · well-liked food +1"
+        },
+        "activity": {
+          "kind": "gather",
+          "label": "Picking berries",
+          "goal": "to ease hunger (9/100)",
+          "phase": "travel",
+          "target": 936,
+          "data": {
+            "purpose": "eat",
+            "stype": "berry_bush",
+            "eta": 365.8429001063121,
+            "optKey": "gather:936",
+            "why": "a step toward “put 12 units of food by for the household”: gather food to put by (12 more) · hungry +76 · walking −17 · has paid me poorly before (0.3×) −6 · well-liked food +1",
+            "forPlan": 4592
+          }
+        }
+      },
+      {
+        "alive": true,
+        "indoors": 0,
+        "id": 1107,
+        "name": "Emre",
+        "household": 1103,
+        "position": {
+          "x": 59.14223294591262,
+          "y": 51.6728689307126
+        },
+        "inv": {
+          "seeds": 1,
+          "wood": 3,
+          "fish": 1
+        },
+        "needs": {
+          "hunger": 45.53914441597045,
+          "thirst": 89.99350033872003,
+          "energy": 61.61899999999066,
+          "warmth": 48.24759272648118,
+          "safety": 83.41090626499053,
+          "social": 90.81806352560616
+        },
+        "believesHoused": true,
+        "homeBelief": {
+          "id": 3528,
+          "kind": "building",
+          "x": 45,
+          "y": 37,
+          "amount": 0,
+          "max": 0,
+          "seen": 9048,
+          "src": "seen",
+          "from": 0,
+          "learned": 9048,
+          "btype": "hut",
+          "hh": 1103,
+          "cond": 91.98487400000329,
+          "fuel": 0,
+          "items": {},
+          "origin": 1107,
+          "hops": 0
+        },
+        "siteBelief": null,
+        "decision": {
+          "tick": 9557,
+          "trigger": "review",
+          "chosen": {
+            "kind": "give",
+            "label": "Bring fish to Theo",
+            "utility": 48.6,
+            "parts": [
+              [
+                "Theo needs fish",
+                56.5
+              ],
+              [
+                "walking",
+                -15.9
+              ],
+              [
+                "family",
+                8
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "explore",
+              "label": "Explore somewhere new",
+              "utility": 16.7,
+              "parts": [
+                [
+                  "curiosity",
+                  27.6
+                ],
+                [
+                  "walking",
+                  -12.9
+                ],
+                [
+                  "daylight to spare",
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 12.9,
+              "parts": [
+                [
+                  "hungry",
+                  29.8
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -12.6
+                ],
+                [
+                  "has paid me poorly before (0.4×)",
+                  -6
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 13.7,
+              "parts": [
+                [
+                  "hungry",
+                  29.8
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -11.8
+                ],
+                [
+                  "has paid me poorly before (0.4×)",
+                  -6
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 13.7,
+              "parts": [
+                [
+                  "hungry",
+                  29.8
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -11.8
+                ],
+                [
+                  "has paid me poorly before (0.4×)",
+                  -6
+                ]
+              ]
+            }
+          ],
+          "blocked": [],
+          "considered": 9,
+          "knownPlaces": 279,
+          "seenNow": 0,
+          "because": "Theo needs fish +57 · walking −16 · family +8"
+        },
+        "activity": {
+          "kind": "give",
+          "label": "Bringing fish to Theo",
+          "goal": "to look after Theo",
+          "phase": "travel",
+          "target": 1109,
+          "data": {
+            "items": {
+              "fish": 1
+            },
+            "mode": "care",
+            "optKey": "give:1109",
+            "why": "Theo needs fish +57 · walking −16 · family +8"
+          }
+        }
+      },
+      {
+        "alive": true,
+        "indoors": 0,
+        "id": 1108,
+        "name": "Viktor",
+        "household": 1103,
+        "position": {
+          "x": 45.5,
+          "y": 45.5
+        },
+        "inv": {
+          "berries": 1,
+          "grain": 1
+        },
+        "needs": {
+          "hunger": 51.93017098647539,
+          "thirst": 74.89877096862413,
+          "energy": 95.68800000000032,
+          "warmth": 72.21390921446623,
+          "safety": 84.00053329020979,
+          "social": 77.32671082840366
+        },
+        "believesHoused": true,
+        "homeBelief": {
+          "id": 3528,
+          "kind": "building",
+          "x": 45,
+          "y": 37,
+          "amount": 0,
+          "max": 0,
+          "seen": 9599,
+          "src": "seen",
+          "from": 0,
+          "learned": 9599,
+          "btype": "hut",
+          "hh": 1103,
+          "cond": 91.04817400000351,
+          "fuel": 0,
+          "items": {},
+          "origin": 1108,
+          "hops": 0
+        },
+        "siteBelief": null,
+        "decision": {
+          "tick": 9541,
+          "trigger": "review",
+          "chosen": {
+            "kind": "drink",
+            "label": "Go and drink at the water",
+            "utility": 35.3,
+            "parts": [
+              [
+                "thirsty",
+                38.7
+              ],
+              [
+                "walking",
+                -3.4
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "drink",
+              "label": "Go and drink at the water",
+              "utility": 32,
+              "parts": [
+                [
+                  "thirsty",
+                  38.7
+                ],
+                [
+                  "walking",
+                  -6.8
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 27.6,
+              "parts": [
+                [
+                  "household is short of food",
+                  41.5
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -5.9
+                ],
+                [
+                  "good at it",
+                  -3.3
+                ],
+                [
+                  "has paid me poorly before (0.3×)",
+                  -6
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 26,
+              "parts": [
+                [
+                  "household is short of food",
+                  41.5
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -7.5
+                ],
+                [
+                  "good at it",
+                  -3.3
+                ],
+                [
+                  "has paid me poorly before (0.3×)",
+                  -6
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 26,
+              "parts": [
+                [
+                  "household is short of food",
+                  41.9
+                ],
+                [
+                  "well-liked food",
+                  1.3
+                ],
+                [
+                  "walking",
+                  -7.9
+                ],
+                [
+                  "good at it",
+                  -3.3
+                ],
+                [
+                  "has paid me poorly before (0.3×)",
+                  -6
+                ]
+              ]
+            }
+          ],
+          "blocked": [],
+          "considered": 9,
+          "knownPlaces": 251,
+          "seenNow": 11,
+          "because": "thirsty +39 · walking −3"
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Talking with Theo",
+          "goal": "a chat",
+          "phase": "work",
+          "target": 0,
+          "data": {
+            "convId": 4760,
+            "role": "b"
+          }
+        }
+      },
+      {
+        "alive": true,
+        "indoors": 0,
+        "id": 1109,
+        "name": "Theo",
+        "household": 1103,
+        "position": {
+          "x": 45.73812457419241,
+          "y": 46.503222585578634
+        },
+        "inv": {
+          "seeds": 1
+        },
+        "needs": {
+          "hunger": 37.08265000000834,
+          "thirst": 75.58636214376324,
+          "energy": 96.19200000000042,
+          "warmth": 70.64794906232835,
+          "safety": 84.0005329158664,
+          "social": 87.10731679376927
+        },
+        "believesHoused": true,
+        "homeBelief": {
+          "id": 3528,
+          "kind": "building",
+          "x": 45,
+          "y": 37,
+          "amount": 0,
+          "max": 0,
+          "seen": 9526,
+          "src": "seen",
+          "from": 0,
+          "learned": 9526,
+          "btype": "hut",
+          "hh": 1103,
+          "cond": 91.17227400000348,
+          "fuel": 0,
+          "items": {},
+          "origin": 1109,
+          "hops": 0
+        },
+        "siteBelief": null,
+        "decision": {
+          "tick": 9563,
+          "trigger": "free",
+          "chosen": {
+            "kind": "socialize",
+            "label": "Ask Viktor for food",
+            "utility": 41.1,
+            "parts": [
+              [
+                "hungry",
+                39.9
+              ],
+              [
+                "they are carrying some",
+                4
+              ],
+              [
+                "walking",
+                -2.8
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "socialize",
+              "label": "Ask Yan for food",
+              "utility": 42.9,
+              "parts": [
+                [
+                  "hungry",
+                  39.9
+                ],
+                [
+                  "they are carrying some",
+                  4
+                ],
+                [
+                  "walking",
+                  -1
+                ]
+              ]
+            },
+            {
+              "kind": "socialize",
+              "label": "Ask Abel for food",
+              "utility": 40.9,
+              "parts": [
+                [
+                  "hungry",
+                  39.9
+                ],
+                [
+                  "they are carrying some",
+                  4
+                ],
+                [
+                  "walking",
+                  -3
+                ]
+              ]
+            },
+            {
+              "kind": "socialize",
+              "label": "Ask Cora for food",
+              "utility": 38.9,
+              "parts": [
+                [
+                  "hungry",
+                  39.9
+                ],
+                [
+                  "they are carrying some",
+                  4
+                ],
+                [
+                  "walking",
+                  -5
+                ]
+              ]
+            },
+            {
+              "kind": "socialize",
+              "label": "Ask Basil for food",
+              "utility": 39.1,
+              "parts": [
+                [
+                  "hungry",
+                  39.9
+                ],
+                [
+                  "they are carrying some",
+                  4
+                ],
+                [
+                  "walking",
+                  -4.8
+                ]
+              ]
+            }
+          ],
+          "blocked": [
+            {
+              "kind": "eat_store",
+              "label": "Eat from the stores",
+              "utility": 0,
+              "parts": [],
+              "blocked": "remembers it being empty"
+            },
+            {
+              "kind": "eat_store",
+              "label": "Eat from the stores",
+              "utility": 0,
+              "parts": [],
+              "blocked": "remembers it being empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 0,
+              "parts": [],
+              "blocked": "believes it is empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 0,
+              "parts": [],
+              "blocked": "believes it is empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Picking berries",
+              "utility": 0,
+              "parts": [],
+              "blocked": "believes it is empty"
+            },
+            {
+              "kind": "gather",
+              "label": "Gathering wild grain",
+              "utility": 0,
+              "parts": [],
+              "blocked": "believes it is empty"
+            }
+          ],
+          "considered": 11,
+          "knownPlaces": 266,
+          "seenNow": 9,
+          "because": "hungry +40 · they are carrying some +4 · walking −3"
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Talking with Viktor",
+          "goal": "to ask Viktor for something",
+          "phase": "work",
+          "target": 1108,
+          "data": {
+            "convId": 4760,
+            "role": "a"
+          }
+        }
+      }
+    ],
+    "openSites": []
+  },
+  "until": 9600,
+  "restoredAt": 2400,
+  "looks": 164,
+  "checkpoints": [
+    {
+      "tick": 0,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 240,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 480,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 720,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 960,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 1200,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 1440,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 1680,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 1920,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 2160,
+      "exactTwin": true,
+      "exactContinuation": null,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 2400,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 2640,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 2880,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 3120,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 3360,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 3600,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 3840,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 4080,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 4320,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 4560,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 4800,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 5040,
+      "exactTwin": true,
+      "exactContinuation": true,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 5280,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 5520,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 5760,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 6000,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 6240,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 6480,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 6720,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 6960,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 7200,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 7440,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 7680,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 7920,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 8160,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 8400,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 8640,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 8880,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 9120,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 9360,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    },
+    {
+      "tick": 9600,
+      "exactTwin": false,
+      "exactContinuation": false,
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      }
+    }
+  ],
+  "failures": [
+    {
+      "tick": 5280,
+      "label": "personal inspection purity",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5258 != 5280"
+      ]
+    },
+    {
+      "tick": 5280,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5280 != 5258"
+      ]
+    },
+    {
+      "tick": 5280,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5280 != 5258"
+      ]
+    },
+    {
+      "tick": 5520,
+      "label": "personal inspection purity",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5518 != 5520"
+      ]
+    },
+    {
+      "tick": 5520,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 5520,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 5760,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 5760,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 6000,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 6000,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 6240,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 6240,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 6480,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 6480,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 6720,
+      "label": "personal inspection purity",
+      "diffs": [
+        "world.persons[1].concerns.length: 5 != 6"
+      ]
+    },
+    {
+      "tick": 6720,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518",
+        "world.persons[1].concerns.length: 6 != 5"
+      ]
+    },
+    {
+      "tick": 6720,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518",
+        "world.persons[1].concerns.length: 6 != 5"
+      ]
+    },
+    {
+      "tick": 6960,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518",
+        "world.persons[1].concerns[0].seen: 6120 != 6150"
+      ]
+    },
+    {
+      "tick": 6960,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518",
+        "world.persons[1].concerns[0].seen: 6120 != 6150"
+      ]
+    },
+    {
+      "tick": 7200,
+      "label": "personal inspection purity",
+      "diffs": [
+        "world.persons[1].concerns.length: 4 != 5"
+      ]
+    },
+    {
+      "tick": 7200,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518",
+        "world.persons[1].concerns.length: 5 != 4",
+        "world.persons[1].lastDecision.alternatives[3].parts[0][1]: 18.2 != 18.4",
+        "world.persons[1].lastDecision.alternatives[3].utility: 30.6 != 30.8"
+      ]
+    },
+    {
+      "tick": 7200,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518",
+        "world.persons[1].concerns.length: 5 != 4",
+        "world.persons[1].lastDecision.alternatives[3].parts[0][1]: 18.2 != 18.4",
+        "world.persons[1].lastDecision.alternatives[3].utility: 30.6 != 30.8"
+      ]
+    },
+    {
+      "tick": 7440,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 7440,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 7680,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 7680,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 7920,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 7920,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8160,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8160,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8400,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8400,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8640,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8640,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8880,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 8880,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 9120,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 9120,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 9360,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 9360,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 9600,
+      "label": "unobserved twin",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    },
+    {
+      "tick": 9600,
+      "label": "saved continuation",
+      "diffs": [
+        "world.persons[1].commitments[0].blockedAt: 5520 != 5518"
+      ]
+    }
+  ],
+  "layoutClaims": {
+    "checks": 9617,
+    "acceptedStarts": 16,
+    "maxConcurrent": 3
+  },
+  "limits": "One predetermined river seed, four days, Normal profile. No commands, forced choices or staged supplies. Global site/ledger records are auditor evidence; personal observations alone describe inhabitant knowledge. Transfers are actual fungible goods movements; unique per-unit provenance is not asserted. No aggregate-benefit, universal replay or rendered-usability claim."
+}

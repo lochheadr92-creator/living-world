@@ -3,6 +3,45 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
+## Pending layout claims and recovery — 2026-10-26
+
+Owner authorised the identified layout repair. Rules 30 adds execution-boundary
+claims derived from accepted active activities: one home layout per household,
+non-overlapping footprints with the normal one-tile gap, and deterministic release
+on cancellation, death, expiry, household change or suspension. Resume must reacquire.
+The final access check can wait at most 90 ticks for a footprint occupant, under the
+original activity expiry. It never places a site under someone or relaxes access.
+Architecture and compatibility: `LAYOUT_CLAIMS.md`. No material or site-cap retuning.
+
+Before changing production code, recorded complete serialized rules-29 river
+continuation (save 5280, continue 9600) in the new immutable v29 reference. It passes
+unchanged under the repair. Final relevant tests: 81 tests / eight files pass;
+an additional observer regression plus the layout set pass 18/18. Build/typecheck
+and diff checks pass. Full suite was attempted alone with four workers under an
+explicit 175-second cloud budget; it timed out without a summary and is **not passed**.
+Desktop full-suite instructions are retained with the evidence; no current full-suite
+acceptance claim is made. Earlier 1207-test results belong to rules 29.
+
+Repeated the same preselected Briar household on river, Normal/28, no arrivals,
+four days. Corrected read-only runner: 164 pure observations, 41 exact unobserved
+twin checkpoints, 31 exact save-continuation checkpoints from the day-one fallback,
+9617 claim-invariant checks, no conflicting accepted layouts, ledger/tools pass,
+zero failures and 28 survivors. Six real deliveries supply eight wood and four stone.
+Mira creates site #2886 (44,36) at tick 3623; hut #3528 completes at 5516; first
+physical entry is observed at 5929. All four household members enter by observed
+tick 6154. This is one seed, not a general housing-benefit result.
+
+The first v30 measurement exposed an instrumentation mistake: `generateOptions`
+argument three collects options; observer mode is argument four. A genuine decision
+planner can restamp promise blockers. Corrected both verification runners, added a
+sensitive blocked-promise regression, and repeated into a fresh output directory.
+The game inspector already uses observer mode; no production promise rule changed.
+The invalid run is explicitly labelled and preserved, not counted as pure evidence.
+
+Accepted evidence: `home_evidence/2026-10-26-layout-v30-observer/README.md`.
+The earlier v29 stalled journey remains separate. Source code has been published on
+`nova/layout-claims-recovery`; integration status is recorded in the final delivery.
+
 ## Event-history continuation repair — 2026-10-26
 
 On isolated branch `nova/bounded-verification-2026-10-26`, rules 29 snapshots event
