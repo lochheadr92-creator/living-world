@@ -5,19 +5,20 @@ import { execFileSync } from 'node:child_process';
 import { gzipSync } from 'node:zlib';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { observeInhabitant } from '../src/agent/observe';
-import { DAY, isHomeType, isSolidHome } from '../src/sim/constants';
+import { BUILD_DEF, DAY, isHomeType, isSolidHome } from '../src/sim/constants';
 import { openSitesNear } from '../src/sim/act_build';
 import { generateOptions, rankOptions } from '../src/sim/decision';
 import { conservationReport } from '../src/sim/economy';
 import { createWorld } from '../src/sim/factory';
 import { describePerson } from '../src/sim/inspect';
 import { stageOf } from '../src/sim/people';
+import { liveLayoutClaims } from '../src/sim/layout_claims';
 import { settlementAnchor } from '../src/sim/options_work';
 import { currentWorldSettings } from '../src/sim/profiles';
 import { rulesOf } from '../src/sim/rules';
 import { believesHoused, ownHomeBeliefFor, ownHomeSiteBelief } from '../src/sim/shelter';
 import { toolReport } from '../src/sim/toolreg';
-import type { Person, Site, World } from '../src/sim/types';
+import type { BuildingType, Person, Site, World } from '../src/sim/types';
 import { stepWorld } from '../src/sim/world';
 import { deepEqualState, firstDiffs } from './statediff';
 
@@ -48,6 +49,7 @@ const snapshots = new Map<string, string>();
 const seen = new Map<string, string>();
 const checkpoints: unknown[] = [], failures: unknown[] = [];
 let restored: World | undefined, restoredAt = -1, looks = 0;
+let layoutClaimChecks=0, acceptedLayoutStarts=0, maxLayoutClaims=0;
 function equal(a: unknown, b: unknown, label: string): boolean {
   const ok = deepEqualState(a,b);
   if (!ok) failures.push({tick:world.tick,label,diffs:firstDiffs(a,b,12)});
@@ -62,6 +64,18 @@ function personal(p: Person) {
     believesHoused:believesHoused(p),homeBelief:ownHomeBeliefFor(p),siteBelief:ownHomeSiteBelief(p),
     decision:p.lastDecision,activity:p.activity ? {kind:p.activity.kind,label:p.activity.label,goal:p.activity.goal,phase:p.activity.phase,target:p.activity.targetId,data:p.activity.data} : null};
 }
+function inspectClaims() {
+  const claims=liveLayoutClaims(world).map(({owner,activity:a})=>({owner:owner.id,household:owner.hhId,type:a.data.type as BuildingType,
+    x:a.data.sx as number,y:a.data.sy as number,expires:a.expire}));
+  layoutClaimChecks++;maxLayoutClaims=Math.max(maxLayoutClaims,claims.length);
+  for(let i=0;i<claims.length;i++)for(let j=i+1;j<claims.length;j++) {
+    const a=claims[i],b=claims[j],ad=BUILD_DEF[a.type],bd=BUILD_DEF[b.type];
+    if((a.household===b.household&&isHomeType(a.type)&&isHomeType(b.type))
+      ||(a.x<b.x+bd.w+1&&a.x+ad.w+1>b.x&&a.y<b.y+bd.h+1&&a.y+ad.h+1>b.y))
+      failures.push({tick:world.tick,label:'conflicting accepted layouts',a,b});
+  }
+  changed('layout-claims',claims,'accepted-layout-claims');
+}
 world.hooks = {
   onTransfer(info) {
     if (info.item!=='wood' && info.item!=='stone') return;
@@ -72,6 +86,7 @@ world.hooks = {
     if(to?.ent==='site' && to.hhId===hhId && isHomeType(to.type)) record('physical-delivery',flow);
   },
   onActivityStart(p,a) {
+    if(a.kind==='plan_site'){acceptedLayoutStarts++;inspectClaims();}
     const target=world.byId.get(a.targetId);
     if(p.hhId===hhId || (target?.ent==='site' && target.hhId===hhId && isHomeType(target.type))) {
       activities.push(clone({tick:world.tick,person:personal(p),target:target ? {id:target.id,kind:target.ent,x:target.x,y:target.y}:null}));
@@ -82,6 +97,7 @@ record('initial', initial);
 let previousHome = focus.homeId;
 const previousIndoors = new Map(world.persons.map(p=>[p.id,p.indoors??0]));
 for(let t=0;t<=4*DAY;t++) {
+  inspectClaims();
   const hh=world.households.find(h=>h.id===hhId);
   if(hh && hh.homeId!==previousHome) {
     const b=world.byId.get(hh.homeId);
@@ -145,6 +161,7 @@ const home=hh?world.byId.get(hh.homeId):null;
 const final={household:hh??null,home:home??null,members:world.persons.filter(p=>p.hhId===hhId).map(p=>({alive:p.alive,indoors:p.indoors??0,...personal(p)})),openSites:world.sites.filter(s=>s.hhId===hhId && isHomeType(s.type))};
 record('final',final);
 const report={source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),settings,selection:'Before stepping: first household by ID with two living adults and no solid home; fallback first household.',initial,final,until:world.tick,restoredAt,looks,checkpoints,failures,
+  layoutClaims:{checks:layoutClaimChecks,acceptedStarts:acceptedLayoutStarts,maxConcurrent:maxLayoutClaims},
   limits:'One predetermined river seed, four days, Normal profile. No commands, forced choices or staged supplies. Global site/ledger records are auditor evidence; personal observations alone describe inhabitant knowledge. Transfers are actual fungible goods movements; unique per-unit provenance is not asserted. No aggregate-benefit, universal replay or rendered-usability claim.'};
 writeFileSync(`${out}/report.json`,JSON.stringify(report,null,2));
 writeFileSync(`${out}/story.json.gz`,gzipSync(JSON.stringify(story,null,2)));
