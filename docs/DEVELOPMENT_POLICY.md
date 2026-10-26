@@ -222,6 +222,16 @@ raise the version. Bug fixes that change behaviour are behavioural changes.
 
 ## Lab defaults and provenance
 
+**Version 29 — event participant snapshots (2026-10-26).** `addEvent` copies the
+participant list at creation. A later crew join cannot rewrite the formation event
+or alter story eligibility through a shared array. This is versioned because
+`pickStory` reads those IDs. Rules 28 and earlier retain their recorded alias
+semantics; existing saves are not migrated or relabelled. The full serialized
+rules-28 continuation reference was recorded before the fix, including both
+uninterrupted and restored outcomes. `tests/event_history.test.ts` covers real crew
+formation, save/load, a later join, historical participant lists and story eligibility.
+The save format and existing historical references are unchanged.
+
 `lab_seed.ts`, the lab runner, inhabitant live/standard runs, replay-check fresh-world runs, activity-mix and cascade commands now default to current (`rich`) rules. Explicit `--dynamics authored` remains available for historical comparisons. Replay of an existing transcript retains its settings.
 
 The lab runner defaults to `current_lab_out` and refuses to mix existing legacy rows with a current run. That guard checks dynamics only; it does not establish matching source revisions. Use a fresh output directory after a source/configuration change, record HEAD and any dirty diff, and retain the exact command and measurement script. Do not overwrite older reports or reinterpret old measurements as evidence for today's code. Historical commands that omitted dynamics may need explicit `--dynamics authored` to reproduce their original configuration.

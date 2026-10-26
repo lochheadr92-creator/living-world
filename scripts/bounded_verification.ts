@@ -1,6 +1,6 @@
 // Natural autonomous observation; no model, commands, staged resources or changed choices.
 // npx --no-install vite-node scripts/bounded_verification.ts
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { gzipSync } from 'node:zlib';
 import { observeInhabitant } from '../src/agent/observe';
@@ -15,7 +15,10 @@ import { toolReport } from '../src/sim/toolreg';
 import { hashWorld, stepWorld } from '../src/sim/world';
 import { deepEqualState, firstDiffs } from './statediff';
 
-const out = 'verification_evidence/2026-10-26';
+const outArg = process.argv.indexOf('--out');
+const out = outArg >= 0 ? process.argv[outArg + 1] : 'verification_evidence/2026-10-26';
+if (!out || out.startsWith('--')) throw new Error('--out requires a directory');
+if (existsSync(`${out}/report.json`)) throw new Error(`Refusing to overwrite evidence in ${out}; choose a fresh --out directory`);
 mkdirSync(out, { recursive: true });
 const settings = currentWorldSettings('normal', 'meadow', { immigration: false });
 const watched = createWorld(settings);
@@ -67,7 +70,9 @@ for (let t = 0; t <= 2 * DAY; t++) {
   stepWorld(watched); stepWorld(control); if (restored) stepWorld(restored);
 }
 const p = watched.persons.find(q => q.id === id);
-const report = { source: execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(), settings, ticks: 2*DAY, initial,
+const report = { source: execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),
+  trackedDiff: execFileSync('git', ['diff', 'HEAD', '--', 'src', 'scripts/bounded_verification.ts'], { encoding: 'utf8' }),
+  settings, ticks: 2*DAY, initial,
   final: p ? { alive:p.alive, health:p.health, needs:p.needs, inv:p.inv, lastDecision:p.lastDecision, lastResult:p.lastResult } : null,
   activityTicks, purityChecks, checkpoints, failures, survivors: watched.persons.filter(q=>q.alive).length,
   limits: 'One ordinary seed, two days. Autonomous engine choices; no AI control. Trace exposes personal observations, not a proof of all knowledge provenance or rendered usability. Replay compares every serialized field at 240-tick checkpoints; save/reload occurs at day one. Not an ensemble or long-term civilisation claim.' };
