@@ -26,7 +26,43 @@ Evidence and full-suite result: `verification_evidence/2026-10-26-fixed-v29/`;
 original failed run and counterexample saves: `verification_evidence/2026-10-26/`.
 No long-run civilisation measurement or rendered usability claim is added. The
 bounded repair does not restart the stopped ensemble or reopen the completed F1-F5 queue.
-This branch's status is separate from main until integration is explicitly delivered.
+Owner authorised integration on 2026-10-26: main was fast-forwarded from `d84e5ea`
+to `810d32f`, with no intervening changes or conflicts. The already-verified tree
+was integrated unchanged; no repeated full-suite run was needed for that ref move.
+
+## Natural household shelter journey — 2026-10-26
+
+After merging rules 29, followed the preselected Briar household #1103 on river,
+Normal, arrivals off, four days. Selection was fixed before stepping: first household
+by ID with two adults and no solid home. Mira #1106 and Emre #1107, with children
+Viktor #1108 and Theo #1109, started and ended in lean-to #1105.
+
+Both adults genuinely selected a hut: activity starts 5307 and 5366, same footprint
+(47,37), two by two. Layout failed at 5406 and 5409: the footprint would obstruct
+access. The first captured refusal has Ivy #1137 physically in that footprint.
+An offline function-only counterfactual on a fresh saved copy confirms that excluding
+that occupant changes the access check from refusal to acceptance. No person was
+removed, commanded or moved in the natural run. The household never created a home
+site, adopted a shelter-material plan, delivered to its own site, built or moved in.
+This is an explained stalled journey, not a successful construction demonstration.
+
+At tick 9600, four other unfinished huts fill the four-open-site allowance. Their
+actual required-minus-delivered-minus-used totals are eight wood and fourteen stone
+short; raw status strings are not treated as current material accounting. The
+household's recorded decisions also expose food and thirst gates. One other household
+has a completed hut; this observation is not a general housing-success estimate.
+
+Detailed trace: 164 pure personal inspections, 41 exact unobserved-twin checkpoints,
+31 exact save-continuation checkpoints from the day-one fallback, ledger/tool checks
+all pass; zero failures, all 28 residents alive. A first pass and detailed repeat have
+identical final household state. No household site appeared, so there was no mid-site
+save or later construction/occupation claim. Typecheck and diff checks pass.
+
+Evidence: `home_evidence/2026-10-26-journey-detailed/README.md`; first pass retained in
+`home_evidence/2026-10-26-journey/`. Only observer scripts, diagnostics and records
+were added; no behaviour, thresholds, safety or rules version changed. Highest-value
+next verification: a bounded recovery contract after transient footprint occupation,
+with an alternative safe location and ordinary construction-cap/need constraints.
 
 ## Household follow-up — 2026-10-25
 

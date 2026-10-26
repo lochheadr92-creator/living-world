@@ -147,7 +147,7 @@ record('final',final);
 const report={source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),settings,selection:'Before stepping: first household by ID with two living adults and no solid home; fallback first household.',initial,final,until:world.tick,restoredAt,looks,checkpoints,failures,
   limits:'One predetermined river seed, four days, Normal profile. No commands, forced choices or staged supplies. Global site/ledger records are auditor evidence; personal observations alone describe inhabitant knowledge. Transfers are actual fungible goods movements; unique per-unit provenance is not asserted. No aggregate-benefit, universal replay or rendered-usability claim.'};
 writeFileSync(`${out}/report.json`,JSON.stringify(report,null,2));
-writeFileSync(`${out}/story.json`,JSON.stringify(story,null,2));
+writeFileSync(`${out}/story.json.gz`,gzipSync(JSON.stringify(story,null,2)));
 writeFileSync(`${out}/transfers.json.gz`,gzipSync(JSON.stringify(transfers)));
 writeFileSync(`${out}/activities.json.gz`,gzipSync(JSON.stringify(activities)));
 writeFileSync(`${out}/observations.json.gz`,gzipSync(JSON.stringify(observations)));
