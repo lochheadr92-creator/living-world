@@ -1,4 +1,5 @@
 import { retainOperationalMemory } from './memory_retention';
+import { hasLayoutClaims, layoutFingerprint } from './layout_claims';
 import { updateRelocationPressure } from './relocation';
 import { reviewParticipation } from './townships';
 // Side-effect imports register every activity handler.
@@ -340,6 +341,7 @@ export function hashWorld(world: World): string {
   // different rules are not the same world. A world with no rules version adds nothing here, so every legacy and authored
   // world hashes exactly as it did before versioning existed (the golden fingerprints hold that).
   if (world.settings.rulesVersion !== undefined) push(`V${world.settings.rulesVersion}`);
+  if (hasLayoutClaims(world)) for (const p of world.persons) if (p.activity?.kind==='plan_site' || p.suspended?.kind==='plan_site') push(`LY${p.id}:${layoutFingerprint(p)}`);
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in

@@ -69,10 +69,12 @@ import type { Settings, World } from './types';
 // moods and every other option are exactly version 27's, and a version-27 world keeps its single fallback.
 // Version 29: event participants are snapshots. Later crew membership changes no longer
 // rewrite formation events or change historical story eligibility after save/load.
-export const CURRENT_RULES_VERSION = 29;
+// Version 30: pending layout claims, one home layout per household, and bounded
+// waiting for a temporary footprint occupant without relaxing access validation.
+export const CURRENT_RULES_VERSION = 30;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

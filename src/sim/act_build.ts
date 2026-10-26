@@ -1,4 +1,5 @@
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
+import { footprintOccupied, hasLayoutClaims, layoutClaimBlock, LAYOUT_OCCUPANCY_WAIT } from './layout_claims';
 import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
@@ -294,6 +295,8 @@ registerHandler('plan_site', {
   availability: 0.4,
   pose: () => 'build',
   begin(world, p, a) {
+    const claimBlock = layoutClaimBlock(world, p, a);
+    if (claimBlock) return claimBlock;
     const type = a.data.type as Building['type'];
     const d = BUILD_DEF[type];
     const sx = a.data.sx as number;
@@ -319,7 +322,19 @@ registerHandler('plan_site', {
     if (!up) for (let yy = sy; yy < sy + d.h; yy++) for (let xx = sx; xx < sx + d.w; xx++) if (!isFreeLand(world, xx, yy)) return 'fail:someone built there first';
     const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0, { x: sx + d.w / 2, y: sy + d.h / 2 });
     if (why) return `fail:${why}`;
-    if (!up && (allSitesNeedAccess(world) || (type === 'storehouse' && hasTownships(world))) && !preservesAccess(world, sx, sy, d.w, d.h)) return 'fail:the footprint would obstruct access';
+    const claimBlock = layoutClaimBlock(world, p, a);
+    if (claimBlock) return `fail:${claimBlock}`;
+    if (!up && (allSitesNeedAccess(world) || (type === 'storehouse' && hasTownships(world))) && !preservesAccess(world, sx, sy, d.w, d.h)) {
+      if (hasLayoutClaims(world) && footprintOccupied(world, sx, sy, d.w, d.h)) {
+        a.progress = a.duration;
+        a.data.layoutWaitSince ??= world.tick;
+        a.blocked = 'waiting for someone to clear the proposed footprint';
+        if (world.tick - a.data.layoutWaitSince < LAYOUT_OCCUPANCY_WAIT) return 'continue';
+        return 'fail:the proposed footprint stayed occupied; a new layout is needed';
+      }
+      return 'fail:the footprint would obstruct access';
+    }
+    if (hasLayoutClaims(world)) { delete a.data.layoutWaitSince; a.blocked = ''; }
     const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
     proposeProject(world, p, site, a.goal);
     observe(world, p, site);
