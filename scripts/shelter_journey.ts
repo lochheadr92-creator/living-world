@@ -6,12 +6,15 @@ import { gzipSync } from 'node:zlib';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { observeInhabitant } from '../src/agent/observe';
 import { DAY, isHomeType, isSolidHome } from '../src/sim/constants';
+import { openSitesNear } from '../src/sim/act_build';
 import { generateOptions, rankOptions } from '../src/sim/decision';
 import { conservationReport } from '../src/sim/economy';
 import { createWorld } from '../src/sim/factory';
 import { describePerson } from '../src/sim/inspect';
 import { stageOf } from '../src/sim/people';
+import { settlementAnchor } from '../src/sim/options_work';
 import { currentWorldSettings } from '../src/sim/profiles';
+import { rulesOf } from '../src/sim/rules';
 import { believesHoused, ownHomeBeliefFor, ownHomeSiteBelief } from '../src/sim/shelter';
 import { toolReport } from '../src/sim/toolreg';
 import type { Person, Site, World } from '../src/sim/types';
@@ -99,6 +102,8 @@ for(let t=0;t<=4*DAY;t++) {
   }
   for(const p of world.persons.filter(p=>p.hhId===hhId)) {
     changed('decision:'+p.id,p.lastDecision,'member-decision:'+p.id);
+    changed('result:'+p.id,p.lastResult,'member-result:'+p.id);
+    if(p.lastResult?.label==='Marking out a hut' && p.lastResult.outcome==='failed' && !snapshots.has('layout-failure')) snapshots.set('layout-failure',serializeWorld(world));
     changed('plans:'+p.id,p.intentions.filter(i=>i.kind==='shelter'),'shelter-plans:'+p.id);
     const indoor=p.indoors??0, prev=previousIndoors.get(p.id)??0;
     if(indoor!==prev) {
@@ -111,7 +116,10 @@ for(let t=0;t<=4*DAY;t++) {
       const ctx=generateOptions(world,p,true);
       const obs=observeInhabitant(world,p,ctx,rankOptions(ctx));
       const view=describePerson(world,p.id,{opportunities:true});
-      observations.push(clone({tick:world.tick,id:p.id,observation:obs,plans:view?.plans}));looks++;
+      const anchor=settlementAnchor(ctx), rules=rulesOf(world);
+      observations.push(clone({tick:world.tick,id:p.id,observation:obs,plans:view?.plans,
+        auditorConstructionContext:{anchor,openSitesNear:openSitesNear(world,anchor),maxOpenSites:rules.maxOpenSites,
+          sites:world.sites.map(s=>({id:s.id,type:s.type,hh:s.hhId,x:s.x,y:s.y,status:s.status,required:s.required,delivered:s.delivered,used:s.used}))}}));looks++;
       equal(before,JSON.parse(serializeWorld(world)),'personal inspection purity');
     }
   }
@@ -143,6 +151,7 @@ writeFileSync(`${out}/story.json`,JSON.stringify(story,null,2));
 writeFileSync(`${out}/transfers.json.gz`,gzipSync(JSON.stringify(transfers)));
 writeFileSync(`${out}/activities.json.gz`,gzipSync(JSON.stringify(activities)));
 writeFileSync(`${out}/observations.json.gz`,gzipSync(JSON.stringify(observations)));
+writeFileSync(`${out}/final-world.json.gz`,gzipSync(serializeWorld(world)));
 for(const [name,save] of snapshots) writeFileSync(`${out}/${name}.json.gz`,gzipSync(save));
 console.log(JSON.stringify({source:report.source,household:initial.household,finalHome:home?.ent==='building'?{id:home.id,type:home.type,built:home.built}:null,storyLines:story.length,transfers:transfers.length,restoredAt,looks,checkpoints:checkpoints.length,failures},null,2));
 process.exitCode=failures.length?1:0;
