@@ -1,0 +1,592 @@
+{
+  "source": "d84e5eaa828e86ea01b9847809875acd4259cf3a",
+  "settings": {
+    "seed": "meadow",
+    "population": 28,
+    "harsh": false,
+    "immigration": false,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 28
+  },
+  "ticks": 4800,
+  "initial": {
+    "name": "Pavel",
+    "id": 997,
+    "health": 82,
+    "needs": {
+      "hunger": 73.4889637986198,
+      "thirst": 67.67122709006071,
+      "energy": 82.04502380266786,
+      "warmth": 84.41700817504898,
+      "safety": 85,
+      "social": 57.07602442475036
+    },
+    "inv": {
+      "fruit": 2,
+      "water": 1
+    }
+  },
+  "final": {
+    "alive": true,
+    "health": 100,
+    "needs": {
+      "hunger": 74.72946379861963,
+      "thirst": 57.859227090042864,
+      "energy": 93.68879999999952,
+      "warmth": 67.04784708627989,
+      "safety": 83.79513632427643,
+      "social": 83.91064195536474
+    },
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "lastDecision": {
+      "tick": 4782,
+      "trigger": "free",
+      "chosen": {
+        "kind": "gather",
+        "label": "Picking berries",
+        "utility": 36.3,
+        "parts": [
+          [
+            "household is short of food",
+            33.3
+          ],
+          [
+            "well-liked food",
+            1.3
+          ],
+          [
+            "walking",
+            -1
+          ],
+          [
+            "good at it",
+            0.7
+          ],
+          [
+            "has paid me well before (1.4×)",
+            2.1
+          ]
+        ]
+      },
+      "alternatives": [
+        {
+          "kind": "gather",
+          "label": "Picking berries",
+          "utility": 35.1,
+          "parts": [
+            [
+              "household is short of food",
+              33.3
+            ],
+            [
+              "well-liked food",
+              1.3
+            ],
+            [
+              "walking",
+              -2.3
+            ],
+            [
+              "good at it",
+              0.7
+            ],
+            [
+              "has paid me well before (1.4×)",
+              2.1
+            ]
+          ]
+        },
+        {
+          "kind": "gather",
+          "label": "Picking fruit",
+          "utility": 29.6,
+          "parts": [
+            [
+              "household is short of food",
+              33.3
+            ],
+            [
+              "well-liked food",
+              1.7
+            ],
+            [
+              "walking",
+              -8.2
+            ],
+            [
+              "good at it",
+              0.7
+            ],
+            [
+              "has paid me well before (1.4×)",
+              2.1
+            ]
+          ]
+        },
+        {
+          "kind": "gather",
+          "label": "Chopping wood for a friend’s hut",
+          "utility": 15.6,
+          "parts": [
+            [
+              "for a friend’s hut",
+              19.7
+            ],
+            [
+              "walking",
+              -4.1
+            ],
+            [
+              "good at it",
+              -0.6
+            ],
+            [
+              "has paid me well before (1.1×)",
+              0.6
+            ]
+          ]
+        },
+        {
+          "kind": "gather",
+          "label": "Chopping wood for a friend’s hut",
+          "utility": 14.7,
+          "parts": [
+            [
+              "for a friend’s hut",
+              19.7
+            ],
+            [
+              "walking",
+              -4.9
+            ],
+            [
+              "good at it",
+              -0.6
+            ],
+            [
+              "has paid me well before (1.1×)",
+              0.6
+            ]
+          ]
+        }
+      ],
+      "blocked": [
+        {
+          "kind": "plan_site",
+          "label": "Lay out a hut",
+          "utility": 0,
+          "parts": [],
+          "blocked": "too much already being built here at once"
+        },
+        {
+          "kind": "build",
+          "label": "Work on the building site",
+          "utility": 0,
+          "parts": [],
+          "blocked": "site is waiting for materials (8 wood, 4 stone)"
+        },
+        {
+          "kind": "visit",
+          "label": "Check on Felix",
+          "utility": 0,
+          "parts": [],
+          "blocked": "they are not close enough to go looking"
+        },
+        {
+          "kind": "socialize",
+          "label": "Ask someone for stone",
+          "utility": 0,
+          "parts": [],
+          "blocked": "no room in my pack for it"
+        }
+      ],
+      "considered": 9,
+      "knownPlaces": 128,
+      "seenNow": 7,
+      "because": "household is short of food +33 · has paid me well before (1.4×) +2 · well-liked food +1 · walking −1"
+    },
+    "lastResult": {
+      "tick": 4781,
+      "label": "Eating",
+      "outcome": "success",
+      "detail": "done"
+    }
+  },
+  "activityTicks": {
+    "idle": 26,
+    "gather": 674,
+    "drink": 147,
+    "wander": 739,
+    "eat": 76,
+    "rest": 874,
+    "converse": 345,
+    "sleep": 1462,
+    "socialize": 312,
+    "fuel_fire": 145
+  },
+  "purityChecks": 111,
+  "checkpoints": [
+    {
+      "tick": 0,
+      "hash": "cdfff28e",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 240,
+      "hash": "1f99da74",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 480,
+      "hash": "8d31f48d",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 720,
+      "hash": "d7ec428f",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 960,
+      "hash": "1c5ca6b0",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1200,
+      "hash": "e1b93bc7",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1440,
+      "hash": "f3805c20",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1680,
+      "hash": "f60cf13d",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1920,
+      "hash": "e9e1c52b",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 2160,
+      "hash": "427b8149",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 2400,
+      "hash": "7ddec303",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 2640,
+      "hash": "8fb649c7",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 2880,
+      "hash": "a15343e6",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 3120,
+      "hash": "78131544",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    },
+    {
+      "tick": 3360,
+      "hash": "4952ce16",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    },
+    {
+      "tick": 3600,
+      "hash": "778530c2",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    },
+    {
+      "tick": 3840,
+      "hash": "1ac77bb5",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    },
+    {
+      "tick": 4080,
+      "hash": "3707a8b4",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    },
+    {
+      "tick": 4320,
+      "hash": "1babd744",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    },
+    {
+      "tick": 4560,
+      "hash": "4602eb9f",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    },
+    {
+      "tick": 4800,
+      "hash": "4aec5e23",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": false
+    }
+  ],
+  "failures": [
+    {
+      "label": "save continuation at 3120",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    },
+    {
+      "label": "first continuation mismatch saved",
+      "diffs": []
+    },
+    {
+      "label": "save continuation at 3360",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    },
+    {
+      "label": "save continuation at 3600",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    },
+    {
+      "label": "save continuation at 3840",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    },
+    {
+      "label": "save continuation at 4080",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    },
+    {
+      "label": "save continuation at 4320",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    },
+    {
+      "label": "save continuation at 4560",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    },
+    {
+      "label": "save continuation at 4800",
+      "diffs": [
+        "world.chronicle[4].ids.length: 5 != 4",
+        "world.events[4].ids.length: 5 != 4"
+      ]
+    }
+  ],
+  "survivors": 28,
+  "limits": "One ordinary seed, two days. Autonomous engine choices; no AI control. Trace exposes personal observations, not a proof of all knowledge provenance or rendered usability. Replay compares every serialized field at 240-tick checkpoints; save/reload occurs at day one. Not an ensemble or long-term civilisation claim."
+}
