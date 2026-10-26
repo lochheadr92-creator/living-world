@@ -43,7 +43,7 @@ for (let t = 0; t <= 2 * DAY; t++) {
   const signature = JSON.stringify([p?.alive, p?.lastDecision, p?.lastResult, p?.lastInteraction, p?.activity?.kind, p?.activity?.phase, p?.convId]);
   if (p?.alive && (signature !== previous || t % 240 === 0)) {
     const before = serializeWorld(watched);
-    const ctx = generateOptions(watched, p, true);
+    const ctx = generateOptions(watched, p, true, true);
     const observation = observeInhabitant(watched, p, ctx, rankOptions(ctx));
     describePerson(watched, id, { opportunities: true });
     equal(JSON.parse(before), JSON.parse(serializeWorld(watched)), `observer mutation at ${t}`);

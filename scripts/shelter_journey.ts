@@ -129,7 +129,7 @@ for(let t=0;t<=4*DAY;t++) {
     }
     if(t%240===0 && p.alive) {
       const before=JSON.parse(serializeWorld(world));
-      const ctx=generateOptions(world,p,true);
+      const ctx=generateOptions(world,p,true,true);
       const obs=observeInhabitant(world,p,ctx,rankOptions(ctx));
       const view=describePerson(world,p.id,{opportunities:true});
       const anchor=settlementAnchor(ctx), rules=rulesOf(world);
