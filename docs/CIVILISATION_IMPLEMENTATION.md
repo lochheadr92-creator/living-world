@@ -3,6 +3,31 @@
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
+## Event-history continuation repair — 2026-10-26
+
+On isolated branch `nova/bounded-verification-2026-10-26`, rules 29 snapshots event
+participant IDs. A natural rules-28 two-day trace exposed crew formation history
+changing after a later join only in the uninterrupted world: `addEvent` retained
+the crew's mutable members array, while JSON loading broke that alias. `pickStory`
+reads those IDs, so the repair is versioned. Rules 28 and earlier retain their
+recorded behaviour; no migration, save relabelling or historical-reference rewrite.
+
+The new rules-28 full-state reference was recorded before the production change.
+Two new history regressions failed on original code, then all 39 focused checks
+passed. Repeated rules-29 meadow/Normal/28-founder autonomous two-day run: 111 pure
+observations, 21 exact unobserved-twin checkpoints, ten exact post-load continuation
+checkpoints, balanced ledgers/tool registries, zero failures, 28 survivors. Pavel's
+activity counts match the original run. Separate scripted-controller strict replay
+passes 4/4 with exhaustive saved-state equality. Build/typecheck pass.
+Full suite: **1,207 tests / 146 files passed**, including historical references,
+exit 0. The duplicate two-worker attempt was interrupted and adds no result.
+
+Evidence and full-suite result: `verification_evidence/2026-10-26-fixed-v29/`;
+original failed run and counterexample saves: `verification_evidence/2026-10-26/`.
+No long-run civilisation measurement or rendered usability claim is added. The
+bounded repair does not restart the stopped ensemble or reopen the completed F1-F5 queue.
+This branch's status is separate from main until integration is explicitly delivered.
+
 ## Household follow-up — 2026-10-25
 
 The owner authorised household/settlement continuation after the delivered F1-F5 queue.

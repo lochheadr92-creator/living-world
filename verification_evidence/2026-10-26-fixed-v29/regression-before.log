@@ -1,0 +1,74 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 /workspace/scratch/3f39d5c45ef9/living-world
+
+ ❯ tests/event_history.test.ts (6 tests | 2 failed) 269ms
+   ❯ historical event participants (6)
+     × snapshots the caller list in the feed and chronicle, so a later join cannot change story eligibility 63ms
+     × forms a real crew, saves, loads and admits a later member without changing its formation history 89ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/event_history.test.ts > historical event participants > snapshots the caller list in the feed and chronicle, so a later join cannot change story eligibility
+AssertionError: expected [ 997, 1000, 1001 ] to deeply equal [ 997, 1000 ]
+
+- Expected
++ Received
+
+  [
+    997,
+    1000,
++   1001,
+  ]
+
+ ❯ tests/event_history.test.ts:27:29
+     25|     addEvent(w, 'social', 'Two people have become a crew.', ids);
+     26|     ids.push(listener);
+     27|     expect(w.events[0].ids).toEqual(ids.slice(0, 2));
+       |                             ^
+     28|     expect(w.chronicle![0].ids).toEqual(ids.slice(0, 2));
+     29|     w.tick = 3 * DAY + 1;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/event_history.test.ts > historical event participants > forms a real crew, saves, loads and admits a later member without changing its formation history
+AssertionError: expected [ 1000, 1001, 1007, 1008 ] to deeply equal [ 1000, 1001, 1007 ]
+
+- Expected
++ Received
+
+  [
+    1000,
+    1001,
+    1007,
++   1008,
+  ]
+
+ ❯ tests/event_history.test.ts:51:62
+     49|       crewsTick(world);
+     50|       expect(crewOf(world, byId(a.id))!.members).toContain(d.id);
+     51|       expect(world.events.find(e => e.id === event.id)!.ids).toEqual(o…
+       |                                                              ^
+     52|       expect(world.chronicle!.find(e => e.id === event.id)!.ids).toEqu…
+     53|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  20:27:26
+   Duration  855ms (transform 53%, tests 37%, import 9%)
+

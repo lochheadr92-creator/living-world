@@ -1,0 +1,532 @@
+{
+  "source": "c39cf110a1766c828e6cbd79df97f0b90b7e657d",
+  "trackedDiff": "",
+  "settings": {
+    "seed": "meadow",
+    "population": 28,
+    "harsh": false,
+    "immigration": false,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 29
+  },
+  "ticks": 4800,
+  "initial": {
+    "name": "Pavel",
+    "id": 997,
+    "health": 82,
+    "needs": {
+      "hunger": 73.4889637986198,
+      "thirst": 67.67122709006071,
+      "energy": 82.04502380266786,
+      "warmth": 84.41700817504898,
+      "safety": 85,
+      "social": 57.07602442475036
+    },
+    "inv": {
+      "fruit": 2,
+      "water": 1
+    }
+  },
+  "final": {
+    "alive": true,
+    "health": 100,
+    "needs": {
+      "hunger": 74.72946379861963,
+      "thirst": 57.859227090042864,
+      "energy": 93.68879999999952,
+      "warmth": 67.04784708627989,
+      "safety": 83.79513632427643,
+      "social": 83.91064195536474
+    },
+    "inv": {
+      "wood": 2,
+      "berries": 1
+    },
+    "lastDecision": {
+      "tick": 4782,
+      "trigger": "free",
+      "chosen": {
+        "kind": "gather",
+        "label": "Picking berries",
+        "utility": 36.3,
+        "parts": [
+          [
+            "household is short of food",
+            33.3
+          ],
+          [
+            "well-liked food",
+            1.3
+          ],
+          [
+            "walking",
+            -1
+          ],
+          [
+            "good at it",
+            0.7
+          ],
+          [
+            "has paid me well before (1.4×)",
+            2.1
+          ]
+        ]
+      },
+      "alternatives": [
+        {
+          "kind": "gather",
+          "label": "Picking berries",
+          "utility": 35.1,
+          "parts": [
+            [
+              "household is short of food",
+              33.3
+            ],
+            [
+              "well-liked food",
+              1.3
+            ],
+            [
+              "walking",
+              -2.3
+            ],
+            [
+              "good at it",
+              0.7
+            ],
+            [
+              "has paid me well before (1.4×)",
+              2.1
+            ]
+          ]
+        },
+        {
+          "kind": "gather",
+          "label": "Picking fruit",
+          "utility": 29.6,
+          "parts": [
+            [
+              "household is short of food",
+              33.3
+            ],
+            [
+              "well-liked food",
+              1.7
+            ],
+            [
+              "walking",
+              -8.2
+            ],
+            [
+              "good at it",
+              0.7
+            ],
+            [
+              "has paid me well before (1.4×)",
+              2.1
+            ]
+          ]
+        },
+        {
+          "kind": "gather",
+          "label": "Chopping wood for a friend’s hut",
+          "utility": 15.6,
+          "parts": [
+            [
+              "for a friend’s hut",
+              19.7
+            ],
+            [
+              "walking",
+              -4.1
+            ],
+            [
+              "good at it",
+              -0.6
+            ],
+            [
+              "has paid me well before (1.1×)",
+              0.6
+            ]
+          ]
+        },
+        {
+          "kind": "gather",
+          "label": "Chopping wood for a friend’s hut",
+          "utility": 14.7,
+          "parts": [
+            [
+              "for a friend’s hut",
+              19.7
+            ],
+            [
+              "walking",
+              -4.9
+            ],
+            [
+              "good at it",
+              -0.6
+            ],
+            [
+              "has paid me well before (1.1×)",
+              0.6
+            ]
+          ]
+        }
+      ],
+      "blocked": [
+        {
+          "kind": "plan_site",
+          "label": "Lay out a hut",
+          "utility": 0,
+          "parts": [],
+          "blocked": "too much already being built here at once"
+        },
+        {
+          "kind": "build",
+          "label": "Work on the building site",
+          "utility": 0,
+          "parts": [],
+          "blocked": "site is waiting for materials (8 wood, 4 stone)"
+        },
+        {
+          "kind": "visit",
+          "label": "Check on Felix",
+          "utility": 0,
+          "parts": [],
+          "blocked": "they are not close enough to go looking"
+        },
+        {
+          "kind": "socialize",
+          "label": "Ask someone for stone",
+          "utility": 0,
+          "parts": [],
+          "blocked": "no room in my pack for it"
+        }
+      ],
+      "considered": 9,
+      "knownPlaces": 128,
+      "seenNow": 7,
+      "because": "household is short of food +33 · has paid me well before (1.4×) +2 · well-liked food +1 · walking −1"
+    },
+    "lastResult": {
+      "tick": 4781,
+      "label": "Eating",
+      "outcome": "success",
+      "detail": "done"
+    }
+  },
+  "activityTicks": {
+    "idle": 26,
+    "gather": 674,
+    "drink": 147,
+    "wander": 739,
+    "eat": 76,
+    "rest": 874,
+    "converse": 345,
+    "sleep": 1462,
+    "socialize": 312,
+    "fuel_fire": 145
+  },
+  "purityChecks": 111,
+  "checkpoints": [
+    {
+      "tick": 0,
+      "hash": "87590847",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 240,
+      "hash": "5746ec55",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 480,
+      "hash": "4bb6a0ac",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 720,
+      "hash": "f5946632",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 960,
+      "hash": "202438c5",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1200,
+      "hash": "3967a4ec",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1440,
+      "hash": "7389d699",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1680,
+      "hash": "3eb9dcf2",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 1920,
+      "hash": "b64b3324",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 2160,
+      "hash": "369945b8",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 2400,
+      "hash": "e13b1d20",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": null
+    },
+    {
+      "tick": 2640,
+      "hash": "e6cf5846",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 2880,
+      "hash": "1ed5c735",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 3120,
+      "hash": "101f0d3f",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 3360,
+      "hash": "62feba6b",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 3600,
+      "hash": "448b5281",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 3840,
+      "hash": "da668e14",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 4080,
+      "hash": "a7e24403",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 4320,
+      "hash": "fbabe2a7",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 4560,
+      "hash": "398c4ad8",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    },
+    {
+      "tick": 4800,
+      "hash": "5dee42b0",
+      "ledger": {
+        "ok": true,
+        "diffs": []
+      },
+      "tools": {
+        "ok": true,
+        "problems": []
+      },
+      "exactReplay": true,
+      "exactSaveContinuation": true
+    }
+  ],
+  "failures": [],
+  "survivors": 28,
+  "limits": "One ordinary seed, two days. Autonomous engine choices; no AI control. Trace exposes personal observations, not a proof of all knowledge provenance or rendered usability. Replay compares every serialized field at 240-tick checkpoints; save/reload occurs at day one. Not an ensemble or long-term civilisation claim."
+}
