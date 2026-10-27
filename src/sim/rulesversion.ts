@@ -71,10 +71,11 @@ import type { Settings, World } from './types';
 // rewrite formation events or change historical story eligibility after save/load.
 // Version 30: pending layout claims, one home layout per household, and bounded
 // waiting for a temporary footprint occupant without relaxing access validation.
-export const CURRENT_RULES_VERSION = 30;
+// Version 31: personal work tastes settle close work choices, integrated after layout coordination.
+export const CURRENT_RULES_VERSION = 31;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
@@ -162,8 +163,10 @@ export const RULES_LINEAGE = 'main-iron-warmth-smithy';
 // Concurrent unmerged 007b9d5 used 27 for leisure, before rebasing that work as 28.
 // Neither the shared lineage nor the absence of leisure state proves which 27 made a save.
 export const RULES_27_GENERATION = 'main-night-wait-boundary-27';
+// Unmerged e415b4b used 29 for work tastes without main's event snapshot fix.
+export const RULES_29_GENERATION = 'main-event-participant-snapshots-29';
 export function saveRulesGeneration(version: unknown): string | undefined {
- return version === 27 ? RULES_27_GENERATION : undefined;
+ return version === 27 ? RULES_27_GENERATION : version === 29 ? RULES_29_GENERATION : undefined;
 }
 export function validateSaveLineage(version: unknown, lineage: unknown, generation?: unknown): void {
  if (lineage !== undefined && lineage !== RULES_LINEAGE) throw new Error('Unknown rules lineage; keep this save with its original build.');
@@ -171,4 +174,6 @@ export function validateSaveLineage(version: unknown, lineage: unknown, generati
   throw new Error('Ambiguous rules version 8/9: two incompatible branches used this number. Original save preserved; open with its original build.');
  if (version === 27 && generation !== RULES_27_GENERATION)
   throw new Error('Ambiguous rules version 27: night-wait and unmerged leisure branches used this number. Original save preserved; open with its original build. No automatic migration is safe.');
+ if (version === 29 && generation !== RULES_29_GENERATION)
+  throw new Error('Ambiguous rules version 29: event snapshots and unmerged work tastes used this number. Original save preserved; open with its original build. No automatic migration is safe.');
 }

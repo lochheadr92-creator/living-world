@@ -1,0 +1,69 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world
+
+xxx·····································
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/v29_save_provenance.test.ts > marks main rules 29 and roundtrips without enabling work tastes
+TypeError: Cannot read properties of undefined (reading 'founders')
+ ❯ settingsForProfile src/sim/profiles.ts:51:41
+     49|   const def = REGIONS[profile];
+     50|   s.profile = profile;
+     51|   s.population = base.population ?? def.founders;
+       |                                         ^
+     52|   s.ruleSet = 'scaled';
+     53|   s.settlementFounders = Math.ceil(s.population / (def.cols * def.rows…
+ ❯ restartSettings src/sim/profiles.ts:62:13
+ ❯ currentWorldSettings src/sim/profiles.ts:72:10
+ ❯ tests/v29_save_provenance.test.ts:9:34
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/v29_save_provenance.test.ts > rejects ambiguous and foreign rules 29 without modifying the input or live world
+TypeError: Cannot read properties of undefined (reading 'founders')
+ ❯ settingsForProfile src/sim/profiles.ts:51:41
+     49|   const def = REGIONS[profile];
+     50|   s.profile = profile;
+     51|   s.population = base.population ?? def.founders;
+       |                                         ^
+     52|   s.ruleSet = 'scaled';
+     53|   s.settlementFounders = Math.ceil(s.population / (def.cols * def.rows…
+ ❯ restartSettings src/sim/profiles.ts:62:13
+ ❯ currentWorldSettings src/sim/profiles.ts:72:10
+ ❯ tests/v29_save_provenance.test.ts:19:28
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/v29_save_provenance.test.ts > keeps rules 30 unmarked and enables tastes only in the integrated version
+TypeError: Cannot read properties of undefined (reading 'founders')
+ ❯ settingsForProfile src/sim/profiles.ts:51:41
+     49|   const def = REGIONS[profile];
+     50|   s.profile = profile;
+     51|   s.population = base.population ?? def.founders;
+       |                                         ^
+     52|   s.ruleSet = 'scaled';
+     53|   s.settlementFounders = Math.ceil(s.population / (def.cols * def.rows…
+ ❯ restartSettings src/sim/profiles.ts:62:13
+ ❯ currentWorldSettings src/sim/profiles.ts:72:10
+ ❯ tests/v29_save_provenance.test.ts:33:36
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed | 8 passed (9)
+      Tests  3 failed | 37 passed (40)
+   Start at  15:06:13
+   Duration  13.30s (tests 89%, transform 9%, import 2%)

@@ -1,0 +1,137 @@
+{
+  "claim": "mechanism only; separate trajectories are not a causal aggregate comparison",
+  "days": 3,
+  "seeds": [
+    "meadow",
+    "river",
+    "fern"
+  ],
+  "rows": [
+    {
+      "seed": "meadow",
+      "on": true,
+      "days": 3,
+      "profile": "normal",
+      "population": 28,
+      "starts": 1666,
+      "changedStarts": 5,
+      "people": 4,
+      "sampledOptionSets": 1680,
+      "changedRankings": 4,
+      "rankedPeople": 3,
+      "alive": 28,
+      "foodInPacksAndBuildings": 134,
+      "ripePlots": 2,
+      "scene": {
+        "tick": 104,
+        "id": 1000,
+        "name": "Sven"
+      }
+    },
+    {
+      "seed": "meadow",
+      "on": false,
+      "days": 3,
+      "profile": "normal",
+      "population": 28,
+      "starts": 1612,
+      "changedStarts": 0,
+      "people": 0,
+      "sampledOptionSets": 0,
+      "changedRankings": 0,
+      "rankedPeople": 0,
+      "alive": 28,
+      "foodInPacksAndBuildings": 130,
+      "ripePlots": 0,
+      "scene": {
+        "tick": 104,
+        "id": 1000,
+        "name": "Sven"
+      }
+    },
+    {
+      "seed": "river",
+      "on": true,
+      "days": 3,
+      "profile": "normal",
+      "population": 28,
+      "starts": 1565,
+      "changedStarts": 3,
+      "people": 3,
+      "sampledOptionSets": 1680,
+      "changedRankings": 0,
+      "rankedPeople": 0,
+      "alive": 28,
+      "foodInPacksAndBuildings": 68,
+      "ripePlots": 1,
+      "scene": {
+        "tick": 0,
+        "id": 1112,
+        "name": "Ben"
+      }
+    },
+    {
+      "seed": "river",
+      "on": false,
+      "days": 3,
+      "profile": "normal",
+      "population": 28,
+      "starts": 1597,
+      "changedStarts": 0,
+      "people": 0,
+      "sampledOptionSets": 0,
+      "changedRankings": 0,
+      "rankedPeople": 0,
+      "alive": 28,
+      "foodInPacksAndBuildings": 111,
+      "ripePlots": 1,
+      "scene": {
+        "tick": 0,
+        "id": 1112,
+        "name": "Ben"
+      }
+    },
+    {
+      "seed": "fern",
+      "on": true,
+      "days": 3,
+      "profile": "normal",
+      "population": 28,
+      "starts": 1632,
+      "changedStarts": 3,
+      "people": 2,
+      "sampledOptionSets": 1680,
+      "changedRankings": 5,
+      "rankedPeople": 4,
+      "alive": 28,
+      "foodInPacksAndBuildings": 122,
+      "ripePlots": 1,
+      "scene": {
+        "tick": 2518,
+        "id": 983,
+        "name": "Ulric"
+      }
+    },
+    {
+      "seed": "fern",
+      "on": false,
+      "days": 3,
+      "profile": "normal",
+      "population": 28,
+      "starts": 1588,
+      "changedStarts": 0,
+      "people": 0,
+      "sampledOptionSets": 0,
+      "changedRankings": 0,
+      "rankedPeople": 0,
+      "alive": 28,
+      "foodInPacksAndBuildings": 114,
+      "ripePlots": 1,
+      "scene": {
+        "tick": 2518,
+        "id": 983,
+        "name": "Ulric"
+      }
+    }
+  ]
+}

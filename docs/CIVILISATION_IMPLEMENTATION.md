@@ -1,9 +1,48 @@
 # Civilisation implementation register
 
-**Current audit refresh, 2026-10-25:** published main `d84e5ea`, rules 28.
+## Codex branch integration — 2026-10-27
+
+Owner authorized auditing previous Codex work, committing outstanding changes, merging
+into main and pushing. Local audit `ad4a2b7` was merged with published main `62fa4d1`.
+Candidate work tastes (`3c4f35d`, `e415b4b`) are integrated as **rules 31**, after rules
+29 event snapshots and rules 30 layout coordination. The work-taste algorithm and tilt
+are unchanged; only its generation boundary moves. No unrelated feature was started.
+
+A full serialized rules-30 continuation was captured before importing behavior in
+`180ae49`. Both independently recorded rules-28 references are kept, with the candidate
+set renamed `v28_work_tastes`; their expected files were not regenerated. Rules-29
+provenance now distinguishes newly saved main-29 worlds from the incompatible unmerged
+candidate. Old unmarked 29 files from either build are refused intact; use the original
+build. The v29 reference hashes every original envelope/world byte, omitting only the
+new generation marker; actual save/load uses the marked envelope. See DEVELOPMENT_POLICY.
+
+The archived reduced rules-26 validation has 16 complete seed files / 76 expected arms
+and three one-day benchmarks with no recorded invariant failures. File copies match
+original SHA256. This is historical short-run evidence, not a new ensemble or rules-31
+benefit. The interrupted full batch remains stopped and preserved in its original checkout.
+
+Fresh verification: full suite **1239 tests / 153 files passed** (178.12 seconds),
+then final focused compatibility/provenance/layout/event/work-taste checks **56/10
+passed**, including the added lab install/restore contract. Typecheck and production
+build passed. Expected continuation JSON files are unchanged; the renamed candidate
+reference has the identical Git blob hash. Diff whitespace check passed after trimming
+one blank line in the imported test transcript. Verdict: **TURN_INTEGRATION_VERIFIED**.
+Logs are in civic_evidence/integration-2026-10-27/.
+
+Review findings resolved: the version collision and both same-name v28 references;
+the imported rules-28 audit's literal-version TypeScript error (retain its runtime
+source guard using Number, do not silently run that audit on newer rules); and an
+initial new provenance-test setup missing profile/seed arguments. The corrected tests
+pass. No original expected reference or acceptance threshold was weakened/re-recorded.
+Old screenshots and three-day work-taste numbers remain candidate evidence; the fresh
+rules-31 120-tick meadow smoke reproduces Sven's taste-explained work choice. No new
+rendered-browser or longer-run aggregate-benefit claim is made. Slice 4 is unimplemented.
+
+
+**Historical audit refresh, 2026-10-25:** published main `d84e5ea`, rules 28.
 See [CIVILISATION_AUDIT.md](CIVILISATION_AUDIT.md) for the updated capability
-matrix, fresh bounded natural evidence and recommended next slice. The full
-suite now passes 1,200 tests in 144 files. Earlier branch, version and queue
+matrix, fresh bounded natural evidence and recommended next slice. The recorded
+suite passed 1,200 tests in 144 files. Earlier branch, version and queue
 statements below are dated history; they do not supersede this checkpoint.
 
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
@@ -991,3 +1030,42 @@ reproduction has not begun. The prerequisite is the remaining programme verifica
 in CIVILISATION_VALIDATION.md, followed by honest result interpretation and any required
 failure repairs. Keep the v13 original audit/transcript intact; use current main when
 this queue opens. No manual inhabitant acceptance session for these fixes is claimed.
+
+## Historical game-inspired slices continuation — 2026-10-25
+
+Superseded for integration status by the 2026-10-27 entry at the top of this register.
+The branch's candidate 29 became integrated rules 31; its measurements stay historical.
+
+- Worktree: `C:\Users\RJLoc\.codex\worktrees\household-continuity\living-world`;
+  branch `codex/game-inspired-slices`, based on fetched main `d84e5ea` (rules 28).
+  No additional worktree created. Retired original checkout, main's untracked probes,
+  and `living-world-validation-v26` were untouched.
+- Rules 28 continuation pinned before behaviour in `3c4f35d`. Rules 29 is personal work
+  tastes; no other fetched/local committed branch used 29 at the final provenance check.
+  Re-fetch before any further generation or push. No save migration/provenance relabelling.
+- Slice 2 implemented: temperament-derived likes/dislikes, normalized work ranking,
+  existing inspector reason, lab ablation `rich-no-work-tastes`. Tests, mechanism script,
+  ordinary-world viewer entry and screenshots are in the same behaviour commit.
+- Fresh checks: baseline typecheck + 1200/144; focused final 7/2; final full suite
+  **1207 tests / 146 files pass (103.05 s)**; typecheck/build/golden pass; diff check clean.
+  Lab ablation install/restore passed. Full-suite output: `civic_evidence/work-tastes-tests.txt`.
+  Rendered comparison: Sven, meadow normal, tick 105, preparing field with taste on,
+  collecting pick wood with it off. See EMERGENCE.md for audit, metrics and exact limits.
+- Classification: contracts and rendered mechanism verified; 3-seed/3-day mechanism only.
+  No deaths in short on/off runs. Longer-run cost and aggregate benefit unverified.
+  Historical gate baselines do not match rules 29; no gate pass is claimed.
+- Slice 3 dropped: audit established no specific missing exchange. Slice 4 confirmed but
+  NOT implemented: a builder can complete a home without an emotional reaction. Existing
+  buildings, ownership, logs and credit already preserve the event; do not invent missing history.
+- Delivery boundary: push this branch; **do not merge main without the owner's instruction**
+  from this brief. Next behavioural reference is rules 29, which the brief requires to be
+  recorded from main before slice 4. Main is still rules 28, so that step follows authorised
+  integration of slice 2. Do not silently call the full slices programme complete.
+- Next command: `git fetch origin`, then inspect `origin/main` and this branch before any
+  integration. After authorisation and safe integration, pin the rules-29 reference in its
+  own commit, then implement the bounded completion reaction through mood.ts/completeSite,
+  with local recipients, ablation, counterfactual, ordinary trace, and browser evidence.
+- Continuation prompt: "Continue game-inspired slices from this section. Slice 2 is on
+  codex/game-inspired-slices; slice 3 was dropped; slice 4 remains. Check whether the owner
+  has authorised integration before merging. Preserve immutable references and validation
+  checkout. Do not repeat the audit or claim long-run results that do not exist."

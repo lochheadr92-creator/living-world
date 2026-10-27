@@ -176,3 +176,14 @@ One 'wander' option worth exactly 6 whose place is chosen among the door, the sq
 Saved state `p.leisure.recent`; none below 28 or in authored worlds. See it: the decision "because" parts and the person's activity
 label. Lab: `rich-no-leisure`.
 
+
+## Individual work tastes (rules 31, temperament.ts)
+
+A fixed liking and dislike, derived from seed/person identity, can settle close choices
+between work options. Reuses trade.ts's interpretation of work from the person's own
+beliefs; adds no job assignment or observation of private preferences. The +/-1.5 tilt
+is normalised to preserve the strongest work score against all other options. Existing
+survival filters, activities, claims and physical costs are unchanged. A changed winner
+shows the taste under "Why did they choose it?". No new saved state: seed/id and the
+rules generation are authoritative; existing decision/activity records retain reasons.
+Lab: rich-no-work-tastes. Historical rules <=30 and authored worlds have no taste effect.

@@ -1,0 +1,52 @@
+{
+  "claim": "mechanism only; separate trajectories are not a causal aggregate comparison",
+  "rulesVersion": 31,
+  "days": 0.05,
+  "seeds": [
+    "meadow"
+  ],
+  "rows": [
+    {
+      "seed": "meadow",
+      "on": true,
+      "days": 0.05,
+      "profile": "normal",
+      "population": 28,
+      "starts": 51,
+      "changedStarts": 1,
+      "people": 1,
+      "sampledOptionSets": 28,
+      "changedRankings": 1,
+      "rankedPeople": 1,
+      "alive": 28,
+      "foodInPacksAndBuildings": 109,
+      "ripePlots": 0,
+      "scene": {
+        "tick": 104,
+        "id": 1000,
+        "name": "Sven"
+      }
+    },
+    {
+      "seed": "meadow",
+      "on": false,
+      "days": 0.05,
+      "profile": "normal",
+      "population": 28,
+      "starts": 51,
+      "changedStarts": 0,
+      "people": 0,
+      "sampledOptionSets": 0,
+      "changedRankings": 0,
+      "rankedPeople": 0,
+      "alive": 28,
+      "foodInPacksAndBuildings": 109,
+      "ripePlots": 0,
+      "scene": {
+        "tick": 104,
+        "id": 1000,
+        "name": "Sven"
+      }
+    }
+  ]
+}

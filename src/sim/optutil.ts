@@ -29,6 +29,8 @@ export interface OptionLimit {
 }
 
 export interface Option {
+  /** Derived during ranking only, when taste changes the preferred work. */
+  workTasteReason?: string;
   kind: Activity['kind'];
   label: string;
   goal: string;

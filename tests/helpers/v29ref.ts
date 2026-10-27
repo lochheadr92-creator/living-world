@@ -7,7 +7,14 @@ import { stepWorld } from '../../src/sim/world';
 
 export function v29Continuation() {
   const original = createWorld({ ...settingsForProfile('normal', 'river', { dynamics: 'rich', immigration: false }), rulesVersion: 29 });
-  const digest = (w: typeof original) => createHash('sha256').update(serializeWorld(w)).digest('hex');
+  // Preserve the exact pre-provenance envelope for the immutable reference hash.
+  // Only the newly required envelope marker is omitted; every world byte remains covered.
+  // Actual save/load below still uses and validates the marked envelope.
+  const digest = (w: typeof original) => {
+    const envelope = JSON.parse(serializeWorld(w));
+    delete envelope.rulesGeneration;
+    return createHash('sha256').update(JSON.stringify(envelope)).digest('hex');
+  };
   while (original.tick < 5280) stepWorld(original);
   const saved = digest(original);
   const restored = deserializeWorld(serializeWorld(original));

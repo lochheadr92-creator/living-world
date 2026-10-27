@@ -1,4 +1,7 @@
-# Civilisation capability audit — current main, rules 28
+# Civilisation capability audit — historical main snapshot, rules 28
+
+Integration note (2026-10-27): this is the retained rules-28 assessment and evidence,
+not a fresh audit of rules 31. See CIVILISATION_IMPLEMENTATION.md for current delivery.
 
 Updated 2026-10-25 against published main `d84e5eaa828e86ea01b9847809875acd4259cf3a`.
 This supersedes this document's rules-8/9 assessment. That historical assessment remains in Git and on `claude/civilisation-phase1` at `3f6ec66`; its measurements must not be relabelled rules 28.

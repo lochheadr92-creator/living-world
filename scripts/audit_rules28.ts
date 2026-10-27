@@ -20,7 +20,7 @@ const [profile = 'normal', seed = 'river', daysArg = '8', output] = process.argv
 if (!['normal', 'large', 'town', 'huge'].includes(profile) || !output) throw new Error('profile seed days output.json required');
 const days = Number(daysArg);
 if (!Number.isFinite(days) || days <= 0 || days > 8) throw new Error('Bounded audit requires 0 < days <= 8');
-if (CURRENT_RULES_VERSION !== 28) throw new Error('This audit is pinned to rules 28; declare a new audit for later rules');
+if (Number(CURRENT_RULES_VERSION) !== 28) throw new Error('This audit is pinned to rules 28; declare a new audit for later rules');
 const w = createWorld(currentWorldSettings(profile as ProfileName, seed, { immigration: false }));
 const starts: Record<string, number> = {};
 const relocationSteps: Record<string, number> = {};

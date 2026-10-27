@@ -95,8 +95,8 @@ const ordinary = (seed: string, ticks = 300) => {
   return { world, settings };
 };
 
-it('an ambiguous version-27 load preserves the stored original and running world', async () => {
-  const w=nightAuditWorld(); w.settings.rulesVersion=27; const raw=JSON.parse(serializeWorld(w)); delete raw.rulesGeneration;
+it.each([27, 29])('an ambiguous version-%i load preserves the stored original and running world', async (version) => {
+  const w=nightAuditWorld(); w.settings.rulesVersion=version; const raw=JSON.parse(serializeWorld(w)); delete raw.rulesGeneration;
   const original=JSON.stringify({settings:w.settings,data:await gzipB64(JSON.stringify(raw))});
   store.setItem('living-world:save:v1',original);
   const running=target(w,w.settings), before=serializeWorld(w);

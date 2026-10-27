@@ -1,4 +1,26 @@
-# Current main checkpoint (2026-10-25)
+# Codex integration checkpoint (2026-10-27)
+
+Current integration is rules 31: individual work tastes from `codex/game-inspired-slices`
+are combined with main's rules-29 event snapshots and rules-30 layout coordination.
+The local rules-28 audit `ad4a2b7` is retained as historical evidence, not a rules-31 audit.
+See docs/CIVILISATION_IMPLEMENTATION.md for verification and compatibility details.
+
+All seven local Codex branch tips and their six published counterparts were inspected.
+Only work tastes had unique commits; the other six lines were already integrated.
+No previous Codex worktree had uncommitted tracked source. The completed smaller
+rules-26 validation is archived in civic_evidence/validation-small-v26 with exact provenance.
+The stopped full batch and scratch probes stay untouched in their original checkouts.
+
+Old unmarked rules-29 saves are ambiguous between the candidate and main implementations
+and must stay with their originating build. They are not silently migrated. New main-29
+saves carry explicit generation provenance. Rules 30 and older simulation references are
+preserved, including both independent rules-28 references.
+
+Slice 4 (builder completion thoughts) was never implemented and is not part of this
+integration. Longer-run work-taste benefit remains unmeasured. This delivery merges
+existing work; it does not declare the entire civilisation programme complete.
+
+# Historical main checkpoint (2026-10-25)
 
 Current published main is `d84e5ea`, **rules 28**. The familiar checkout at
 `C:/dev/Claude Experiment/living-world` now holds main; the former main checkout

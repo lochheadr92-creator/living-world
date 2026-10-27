@@ -362,3 +362,35 @@ world. Use the exact originating build for old unmarked files; there is no safe 
 migration. Rules <=26 and their immutable references are untouched. Do not merge the
 abandoned leisure-27 branch (`007b9d5`). Rules 28 is the varied spare time rebase of that work, delivered separately
 (see "Rules version 28" above); this provenance task itself did not deliver it.
+
+### Rules version 31 — individual work tastes (integrated 2026-10-27)
+
+Temperament owns one fixed liking and one dislike among eight kinds of work, derived
+from immutable world seed and person ID. No new saved fields or RNG draws. Rules 28
+continuation was recorded from main d84e5ea before this behaviour (3c4f35d).
+Integration pins the rules-30 full serialized continuation before importing the feature. Only rich worlds running 31+ participate. `rich-no-work-tastes` removes this alone.
+
+Decision ranking applies +/-1.5 among eligible work alternatives with no need target,
+then preserves the previous maximum work score. Thus tastes cannot promote work above
+a competing meal, drink, sleep, warmth, flight, social or leisure option. A changed work
+winner names its actual liking/dislike in the existing decision explanation. This does
+not change skills, recipes, claims, yields, effort, goals, or trade adoption.
+
+Two approaches considered: save a separate preference list, or derive a fixed disposition
+inside temperament. Derivation avoids a second saved source of truth; changing the hash,
+list or tilt later requires another rules generation. An unavailable favourite supplies
+no option and no work. Failure/interruption and resource accounting remain with the
+existing activity handlers. Historical worlds retain their rules; no migration.
+
+Integration provenance (2026-10-27): candidate `e415b4b` called this feature rules 29,
+but published main independently used 29 for event snapshots and 30 for layout claims.
+The feature now starts at 31. Original candidate saves remain with their original build;
+never relabel them as main-29 or 31. New main-29 saves carry
+`rulesGeneration: main-event-participant-snapshots-29`. Untagged or foreign-generation
+29 saves are refused because both old builds wrote indistinguishable provenance.
+This also affects old untagged main-29 saves; use their original main build to read them.
+Rules 30 envelopes and simulation semantics are unchanged. The immutable v29 expected
+hashes are retained; its digest helper omits only the newly added envelope marker to
+compare the original bytes, while actual save/load uses and validates the marked envelope.
+Both independent rules-28 references survive (the candidate reference has a distinct
+`v28_work_tastes` filename). Neither expected reference was regenerated.
