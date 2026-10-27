@@ -71,7 +71,7 @@ Written by `npx vite-node scripts/reference.ts`. Do not edit by hand; values are
 
 ## Option score terms (extracted text, not evaluated)
 
-195 `sc.add('label', …)` call sites in `src/sim`. The label is the literal text as written at each call site; it is extracted, not evaluated.
+197 `sc.add('label', …)` call sites in `src/sim`. The label is the literal text as written at each call site; it is extracted, not evaluated.
 
 | Site | Label |
 |---|---|
@@ -83,6 +83,8 @@ Written by `npx vite-node scripts/reference.ts`. Do not edit by hand; values are
 | src/sim/hunting.ts:51 | a good hunter |
 | src/sim/hunting.ts:53 | walking |
 | src/sim/hunting.ts:54 | no room for the meat |
+| src/sim/leave_heaviest.ts:123 | walking |
+| src/sim/leave_heaviest.ts:125 | wolf nearby |
 | src/sim/leisure.ts:123 | the evening gathering |
 | src/sim/leisure.ts:125 | the walk |
 | src/sim/leisure.ts:144 | nothing pressing |
@@ -165,55 +167,55 @@ Written by `npx vite-node scripts/reference.ts`. Do not edit by hand; values are
 | src/sim/options_survival.ts:617 | cold out there |
 | src/sim/options_survival.ts:655 | tired |
 | src/sim/options_survival.ts:656 | feverish |
-| src/sim/options_work.ts:198 | surplus food |
-| src/sim/options_work.ts:200 | walking |
-| src/sim/options_work.ts:382 | walking |
-| src/sim/options_work.ts:384 | good at it |
-| src/sim/options_work.ts:388 | wolf nearby |
-| src/sim/options_work.ts:502 | carrying what it needs |
-| src/sim/options_work.ts:502 | walking |
-| src/sim/options_work.ts:503 | I promised |
-| src/sim/options_work.ts:549 | building work to do |
-| src/sim/options_work.ts:549 | walking |
-| src/sim/options_work.ts:549 | good builder |
-| src/sim/options_work.ts:550 | I promised |
-| src/sim/options_work.ts:642 | night is coming |
-| src/sim/options_work.ts:749 | walking |
-| src/sim/options_work.ts:750 | promised to keep it going |
-| src/sim/options_work.ts:751 | cold |
-| src/sim/options_work.ts:797 | walking |
-| src/sim/options_work.ts:895 | walking |
-| src/sim/options_work.ts:985 | unfinished ground |
-| src/sim/options_work.ts:985 | walking |
-| src/sim/options_work.ts:989 | seed in hand, ground ready |
-| src/sim/options_work.ts:989 | walking |
-| src/sim/options_work.ts:997 | crop needs care |
-| src/sim/options_work.ts:997 | walking |
-| src/sim/options_work.ts:1001 | ripe crop |
-| src/sim/options_work.ts:1001 | walking |
-| src/sim/options_work.ts:1013 | seed to sow, ground to prepare |
-| src/sim/options_work.ts:1054 | seed for planting is at home |
-| src/sim/options_work.ts:1054 | walking |
-| src/sim/options_work.ts:1120 | belongings lying about |
-| src/sim/options_work.ts:1120 | walking |
-| src/sim/options_work.ts:1121 | wolf nearby |
-| src/sim/options_work.ts:1170 | walking |
-| src/sim/options_work.ts:1171 | wolf nearby |
-| src/sim/options_work.ts:1172 | was driven off near here |
-| src/sim/options_work.ts:1279 | curiosity |
-| src/sim/options_work.ts:1279 | walking |
-| src/sim/options_work.ts:1279 | daylight to spare |
-| src/sim/options_work.ts:1366 | walking |
-| src/sim/options_work.ts:1368 | family |
-| src/sim/options_work.ts:1424 | walking |
-| src/sim/options_work.ts:1471 | walking |
-| src/sim/options_work.ts:1548 | walking |
-| src/sim/options_work.ts:1587 | walking |
-| src/sim/options_work.ts:1588 | wolf nearby |
-| src/sim/options_work.ts:1589 | was driven off near here |
-| src/sim/options_work.ts:1636 | an empty home nobody uses |
-| src/sim/options_work.ts:1636 | walking |
-| src/sim/options_work.ts:1668 | nothing pressing |
+| src/sim/options_work.ts:199 | surplus food |
+| src/sim/options_work.ts:201 | walking |
+| src/sim/options_work.ts:383 | walking |
+| src/sim/options_work.ts:385 | good at it |
+| src/sim/options_work.ts:389 | wolf nearby |
+| src/sim/options_work.ts:506 | carrying what it needs |
+| src/sim/options_work.ts:506 | walking |
+| src/sim/options_work.ts:507 | I promised |
+| src/sim/options_work.ts:558 | building work to do |
+| src/sim/options_work.ts:558 | walking |
+| src/sim/options_work.ts:558 | good builder |
+| src/sim/options_work.ts:559 | I promised |
+| src/sim/options_work.ts:651 | night is coming |
+| src/sim/options_work.ts:758 | walking |
+| src/sim/options_work.ts:759 | promised to keep it going |
+| src/sim/options_work.ts:760 | cold |
+| src/sim/options_work.ts:806 | walking |
+| src/sim/options_work.ts:904 | walking |
+| src/sim/options_work.ts:994 | unfinished ground |
+| src/sim/options_work.ts:994 | walking |
+| src/sim/options_work.ts:998 | seed in hand, ground ready |
+| src/sim/options_work.ts:998 | walking |
+| src/sim/options_work.ts:1006 | crop needs care |
+| src/sim/options_work.ts:1006 | walking |
+| src/sim/options_work.ts:1010 | ripe crop |
+| src/sim/options_work.ts:1010 | walking |
+| src/sim/options_work.ts:1022 | seed to sow, ground to prepare |
+| src/sim/options_work.ts:1063 | seed for planting is at home |
+| src/sim/options_work.ts:1063 | walking |
+| src/sim/options_work.ts:1129 | belongings lying about |
+| src/sim/options_work.ts:1129 | walking |
+| src/sim/options_work.ts:1130 | wolf nearby |
+| src/sim/options_work.ts:1179 | walking |
+| src/sim/options_work.ts:1180 | wolf nearby |
+| src/sim/options_work.ts:1181 | was driven off near here |
+| src/sim/options_work.ts:1288 | curiosity |
+| src/sim/options_work.ts:1288 | walking |
+| src/sim/options_work.ts:1288 | daylight to spare |
+| src/sim/options_work.ts:1375 | walking |
+| src/sim/options_work.ts:1377 | family |
+| src/sim/options_work.ts:1433 | walking |
+| src/sim/options_work.ts:1480 | walking |
+| src/sim/options_work.ts:1557 | walking |
+| src/sim/options_work.ts:1596 | walking |
+| src/sim/options_work.ts:1597 | wolf nearby |
+| src/sim/options_work.ts:1598 | was driven off near here |
+| src/sim/options_work.ts:1645 | an empty home nobody uses |
+| src/sim/options_work.ts:1645 | walking |
+| src/sim/options_work.ts:1677 | nothing pressing |
 | src/sim/production.ts:120 | walking |
 | src/sim/production.ts:122 | wolf nearby |
 | src/sim/production.ts:166 | walking |
