@@ -4,6 +4,9 @@ import { cloneItems } from './economy';
 import { facilitySnapshot } from './facilities';
 import { toolsHeldBy } from './toolreg';
 import { noteBeliefWrite } from './transmission';
+import { addLog } from './events';
+import { SOURCE_NOUN } from './labels';
+import { runsRulesVersion } from './rulesversion';
 import type { Belief, BeliefKind, Entity, Items, Person, Source, World } from './types';
 
 /** synthetic belief ids for coarse water-access cells (ids below 1e6 are real entities) */
@@ -135,6 +138,19 @@ export function forget(p: Person, id: number): void {
   delBelief(p, id);
 }
 
+/** rules 32+: log it when a source the person believed held 2+ units turns out bare or at most half full. */
+function noteDepletedSource(world: World, p: Person, e: Source, b: Belief): void {
+  const old = p.beliefs[e.id];
+  if (!old || old.amount < 2) return;
+  if (b.amount * 2 > old.amount) return; // still more than half of what they believed
+  const age = ((world.tick - old.seen) / 600).toFixed(1);
+  const who = old.src === 'told'
+    ? `${old.from ? (world.byId.get(old.from) as Person | undefined)?.name ?? 'someone' : 'someone'} had described`
+    : 'I had remembered';
+  const state = b.amount <= 0 ? 'was bare' : `was down to ${b.amount}`;
+  addLog(world, p, 'info', `The ${SOURCE_NOUN[e.type] ?? e.type} ${who} (about ${old.amount}, ${age} min old) ${state} when I got close.`);
+}
+
 /** Direct observation of one entity by one person. Returns true if this was new to them. */
 export function observe(world: World, p: Person, e: Entity): boolean {
   if (hasLocalDeath(world) && e.ent==='grave' && e.death && !p.indoors && p.pose!=='sleep' && Math.hypot(p.x-e.x,p.y-e.y)<=10) deathStory(world,p,e.death,'grave');
@@ -142,6 +158,7 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if (!b) return false;
   b.origin = p.id;
   b.hops = 0;
+  if (runsRulesVersion(world, 32) && e.ent === 'source') noteDepletedSource(world, p, e, b);
   return learn(p, b);
 }
 

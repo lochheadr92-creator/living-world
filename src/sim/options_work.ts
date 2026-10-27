@@ -16,7 +16,7 @@ import { findBuildSpot } from './buildings';
 import { invRoom, roomFor } from './economy';
 import { dayFraction } from './environment';
 import { findPlotSpot } from './farming';
-import { delBelief, estimatedAmount, noteFailure, recentFailure } from './knowledge';
+import { delBelief, estimatedAmount, missingMaterials, noteFailure, recentFailure } from './knowledge';
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { drive } from './needs';
 import { stageOf } from './people';
@@ -539,7 +539,12 @@ function optSites(ctx: Ctx): void {
     const done = b.progress ?? 0;
     const canWork = done < Math.min(1, 0.06 + avail) - 0.02;
     if (!canWork) {
-      const miss = Object.entries(b.need ?? {})
+      // rules 32+: derive the shortfall from the site's ledger (required minus delivered minus used), not the stale
+      // belief snapshot, so the reason does not list material that has already been delivered. The text is part of the
+      // serialized decision record, so this is versioned.
+      const siteEnt = world.byId.get(b.id);
+      const shortfall = runsRulesVersion(world, 32) && siteEnt && siteEnt.ent === 'site' ? missingMaterials(siteEnt) : b.need ?? {};
+      const miss = Object.entries(shortfall)
         .map(([k, n]) => `${n} ${k}`)
         .join(', ');
       addBlocked(ctx, 'build', 'Work on the building site', b.id, `site is waiting for materials (${miss || 'unknown'})`, 'site');

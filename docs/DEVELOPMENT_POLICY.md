@@ -394,3 +394,7 @@ hashes are retained; its digest helper omits only the newly added envelope marke
 compare the original bytes, while actual save/load uses and validates the marked envelope.
 Both independent rules-28 references survive (the candidate reference has a distinct
 `v28_work_tastes` filename). Neither expected reference was regenerated.
+
+### Rules version 32 — observer-facing truth (2026-10-28)
+
+Two presentation changes that make the viewer's text match the ledger, combined because both change serialized state. First, `options_work.ts` `optSites` derives a stalled site's "waiting for materials" reason from `missingMaterials` (required minus delivered minus used) rather than the person's stale belief snapshot. Second, `knowledge.ts` `observe` writes one `info` log line when a person re-sights a source their own belief said held 2+ units and it is now bare or at most half full. `p.log` is not hashed but is serialized, so both are gated on `runsRulesVersion(world, 32)`; below 32 nothing changes, and no decision reads the new text. The rules-31 continuation reference was recorded from `4d3f35b` before either behaviour. Contract: `docs/OBSERVER_TRUTH.md`.
