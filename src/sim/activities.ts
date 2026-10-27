@@ -1,4 +1,5 @@
 import { injuryFactor } from './life';
+import { hasLayoutClaims, layoutClaimBlock } from './layout_claims';
 import { isBoundedNightWait } from './night_wait';
 import { hasHabitation, indoorHome, interiorTarget, doorPoint, enterHome, prepareIndoorActivity, staysIndoors } from './habitation';
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
@@ -298,6 +299,11 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
 export function startActivity(world: World, p: Person, a: Activity): void {
   if (p.activity) endActivity(world, p, 'interrupted', 'switched to something else');
   p.activity = a;
+  if (hasLayoutClaims(world) && a.kind === 'plan_site') {
+    const blocked = layoutClaimBlock(world, p, a);
+    if (blocked) { endActivity(world, p, 'failed', blocked); return; }
+    a.data.layoutClaimed = true;
+  }
   const home = interiorTarget(world, a);
   if (home) {
     a.data.homeEntry = true;
@@ -505,6 +511,11 @@ export function resumeSuspended(world: World, p: Person): boolean {
   if (world.tick > a.expire && !isBoundedNightWait(world, a)) return false;
   if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId) && !isBoundedNightWait(world, a)) return false;
   p.activity = a;
+  if (hasLayoutClaims(world) && a.kind === 'plan_site') {
+    const blocked = layoutClaimBlock(world, p, a);
+    if (blocked) { endActivity(world, p, 'failed', blocked); return false; }
+    a.data.layoutClaimed = true;
+  }
   a.lastX = p.x;
   a.lastY = p.y;
   a.stuck = 0;

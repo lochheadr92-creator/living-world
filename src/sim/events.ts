@@ -1,4 +1,5 @@
 import type { EventKind, LogEntry, Person, Speech, World } from './types';
+import { runsRulesVersion } from './rulesversion';
 
 const MAX_EVENTS = 500;
 const MAX_FX = 400;
@@ -31,7 +32,9 @@ export function chronicleWorthy(kind: EventKind, text: string): boolean {
 
 /** Meaningful happenings for the feed. */
 export function addEvent(world: World, kind: EventKind, text: string, ids: number[] = [], x = 0, y = 0): void {
-  const ev = { id: world.nextId++, tick: world.tick, kind, text, ids, x, y };
+  // An event records who was involved then, not a live group's future membership.
+  // Older generations retain their recorded alias semantics for replay compatibility.
+  const ev = { id: world.nextId++, tick: world.tick, kind, text, ids: runsRulesVersion(world, 29) ? [...ids] : ids, x, y };
   world.events.push(ev);
   if (world.events.length > MAX_EVENTS) world.events.splice(0, world.events.length - MAX_EVENTS);
   // the chronicle (rich only) keeps what is worth remembering after the feed has rolled on

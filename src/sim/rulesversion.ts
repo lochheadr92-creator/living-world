@@ -67,10 +67,14 @@ import type { Settings, World } from './types';
 // square, the water's edge, a stand of trees), tilted a little by a change of scene, a personal favourite spot, the evening
 // gathering for the sociable, and the walk. Only the idle fallback changed (src/sim/leisure.ts); survival, work, plans,
 // moods and every other option are exactly version 27's, and a version-27 world keeps its single fallback.
-export const CURRENT_RULES_VERSION = 28;
+// Version 29: event participants are snapshots. Later crew membership changes no longer
+// rewrite formation events or change historical story eligibility after save/load.
+// Version 30: pending layout claims, one home layout per household, and bounded
+// waiting for a temporary footprint occupant without relaxing access validation.
+export const CURRENT_RULES_VERSION = 30;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

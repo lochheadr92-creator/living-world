@@ -9,6 +9,106 @@ statements below are dated history; they do not supersede this checkpoint.
 Owner programme: 2026-10-24. Audit source: `claude/civilisation-phase1` at `3f6ec66`.
 This is the continuation record; the audit remains dated evidence, not current acceptance.
 
+## Pending layout claims and recovery — 2026-10-26
+
+Owner authorised the identified layout repair. Rules 30 adds execution-boundary
+claims derived from accepted active activities: one home layout per household,
+non-overlapping footprints with the normal one-tile gap, and deterministic release
+on cancellation, death, expiry, household change or suspension. Resume must reacquire.
+The final access check can wait at most 90 ticks for a footprint occupant, under the
+original activity expiry. It never places a site under someone or relaxes access.
+Architecture and compatibility: `LAYOUT_CLAIMS.md`. No material or site-cap retuning.
+
+Before changing production code, recorded complete serialized rules-29 river
+continuation (save 5280, continue 9600) in the new immutable v29 reference. It passes
+unchanged under the repair. Final relevant tests: 81 tests / eight files pass;
+an additional observer regression plus the layout set pass 18/18. Build/typecheck
+and diff checks pass. Full suite was attempted alone with four workers under an
+explicit 175-second cloud budget; it timed out without a summary and is **not passed**.
+Desktop full-suite instructions are retained with the evidence; no current full-suite
+acceptance claim is made. Earlier 1207-test results belong to rules 29.
+
+Repeated the same preselected Briar household on river, Normal/28, no arrivals,
+four days. Corrected read-only runner: 164 pure observations, 41 exact unobserved
+twin checkpoints, 31 exact save-continuation checkpoints from the day-one fallback,
+9617 claim-invariant checks, no conflicting accepted layouts, ledger/tools pass,
+zero failures and 28 survivors. Six real deliveries supply eight wood and four stone.
+Mira creates site #2886 (44,36) at tick 3623; hut #3528 completes at 5516; first
+physical entry is observed at 5929. All four household members enter by observed
+tick 6154. This is one seed, not a general housing-benefit result.
+
+The first v30 measurement exposed an instrumentation mistake: `generateOptions`
+argument three collects options; observer mode is argument four. A genuine decision
+planner can restamp promise blockers. Corrected both verification runners, added a
+sensitive blocked-promise regression, and repeated into a fresh output directory.
+The game inspector already uses observer mode; no production promise rule changed.
+The invalid run is explicitly labelled and preserved, not counted as pure evidence.
+
+Accepted evidence: `home_evidence/2026-10-26-layout-v30-observer/README.md`.
+The earlier v29 stalled journey remains separate. Source code has been published on
+`nova/layout-claims-recovery`; integration status is recorded in the final delivery.
+
+## Event-history continuation repair — 2026-10-26
+
+On isolated branch `nova/bounded-verification-2026-10-26`, rules 29 snapshots event
+participant IDs. A natural rules-28 two-day trace exposed crew formation history
+changing after a later join only in the uninterrupted world: `addEvent` retained
+the crew's mutable members array, while JSON loading broke that alias. `pickStory`
+reads those IDs, so the repair is versioned. Rules 28 and earlier retain their
+recorded behaviour; no migration, save relabelling or historical-reference rewrite.
+
+The new rules-28 full-state reference was recorded before the production change.
+Two new history regressions failed on original code, then all 39 focused checks
+passed. Repeated rules-29 meadow/Normal/28-founder autonomous two-day run: 111 pure
+observations, 21 exact unobserved-twin checkpoints, ten exact post-load continuation
+checkpoints, balanced ledgers/tool registries, zero failures, 28 survivors. Pavel's
+activity counts match the original run. Separate scripted-controller strict replay
+passes 4/4 with exhaustive saved-state equality. Build/typecheck pass.
+Full suite: **1,207 tests / 146 files passed**, including historical references,
+exit 0. The duplicate two-worker attempt was interrupted and adds no result.
+
+Evidence and full-suite result: `verification_evidence/2026-10-26-fixed-v29/`;
+original failed run and counterexample saves: `verification_evidence/2026-10-26/`.
+No long-run civilisation measurement or rendered usability claim is added. The
+bounded repair does not restart the stopped ensemble or reopen the completed F1-F5 queue.
+Owner authorised integration on 2026-10-26: main was fast-forwarded from `d84e5ea`
+to `810d32f`, with no intervening changes or conflicts. The already-verified tree
+was integrated unchanged; no repeated full-suite run was needed for that ref move.
+
+## Natural household shelter journey — 2026-10-26
+
+After merging rules 29, followed the preselected Briar household #1103 on river,
+Normal, arrivals off, four days. Selection was fixed before stepping: first household
+by ID with two adults and no solid home. Mira #1106 and Emre #1107, with children
+Viktor #1108 and Theo #1109, started and ended in lean-to #1105.
+
+Both adults genuinely selected a hut: activity starts 5307 and 5366, same footprint
+(47,37), two by two. Layout failed at 5406 and 5409: the footprint would obstruct
+access. The first captured refusal has Ivy #1137 physically in that footprint.
+An offline function-only counterfactual on a fresh saved copy confirms that excluding
+that occupant changes the access check from refusal to acceptance. No person was
+removed, commanded or moved in the natural run. The household never created a home
+site, adopted a shelter-material plan, delivered to its own site, built or moved in.
+This is an explained stalled journey, not a successful construction demonstration.
+
+At tick 9600, four other unfinished huts fill the four-open-site allowance. Their
+actual required-minus-delivered-minus-used totals are eight wood and fourteen stone
+short; raw status strings are not treated as current material accounting. The
+household's recorded decisions also expose food and thirst gates. One other household
+has a completed hut; this observation is not a general housing-success estimate.
+
+Detailed trace: 164 pure personal inspections, 41 exact unobserved-twin checkpoints,
+31 exact save-continuation checkpoints from the day-one fallback, ledger/tool checks
+all pass; zero failures, all 28 residents alive. A first pass and detailed repeat have
+identical final household state. No household site appeared, so there was no mid-site
+save or later construction/occupation claim. Typecheck and diff checks pass.
+
+Evidence: `home_evidence/2026-10-26-journey-detailed/README.md`; first pass retained in
+`home_evidence/2026-10-26-journey/`. Only observer scripts, diagnostics and records
+were added; no behaviour, thresholds, safety or rules version changed. Highest-value
+next verification: a bounded recovery contract after transient footprint occupation,
+with an alternative safe location and ordinary construction-cap/need constraints.
+
 ## Household follow-up — 2026-10-25
 
 The owner authorised household/settlement continuation after the delivered F1-F5 queue.

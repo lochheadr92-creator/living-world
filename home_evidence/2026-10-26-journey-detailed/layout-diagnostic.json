@@ -1,0 +1,21 @@
+{
+  "snapshotSha256": "5f4fd21c699ec734cddce65b00affca2d1dccc212c7e0a41623e8e1ac11595b6",
+  "tick": 5407,
+  "footprint": {
+    "x": 47,
+    "y": 37,
+    "width": 2,
+    "height": 2
+  },
+  "occupants": [
+    {
+      "id": 1137,
+      "name": "Ivy",
+      "x": 47.5,
+      "y": 38.5
+    }
+  ],
+  "accessAccepted": false,
+  "accessAcceptedWithoutFootprintOccupants": true,
+  "scope": "Offline function-level counterfactual only: exclude recorded footprint occupants from the check on a fresh deserialized copy, without advancing any ticks. No person was removed or commanded in the natural run. This isolates a refusal condition, not the benefit or correctness of relaxing it."
+}

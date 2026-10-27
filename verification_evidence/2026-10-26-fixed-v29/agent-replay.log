@@ -1,0 +1,9 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+Pavel (#997) in meadow (rich, rules version 29), tick 2400..3600, 10 decisions applied, sources 2243c921
+PASS  strict replay accepted the transcript  — sources 2243c921
+PASS  the summary fingerprint matches  — 8a5e4d7c vs recorded 8a5e4d7c
+PASS  the complete saved state matches, field by field  — reconstructed worlds are deeply equal (exhaustive)
+PASS  the inhabitant's own saved state replayed identically  — turns 10, engine 0
+
+4/4 checks passed
