@@ -1,5 +1,38 @@
 # Branch lifecycle record — 2026-10-23
 
+## Codex integration follow-up — 2026-10-27
+
+Owner authorized checking previous Codex work and integrating outstanding changes.
+Fetched origin, inspected all seven local Codex branches and six published Codex refs,
+all eight registered worktrees (including detached checkouts), and relevant prior chat
+delivery records. Six Codex tips were already ancestors of published main `62fa4d1`:
+`civilisation-programme`, `home-habitation`, `household-continuity`, `inhabitant-fixes`,
+`wolf-defence-integration`, and `wolf-habitation-integration` (all prefixed `codex/`).
+
+`codex/game-inspired-slices` at `e415b4b` had two outstanding commits. Merge `a85a921`
+integrates them as rules 31, resolving the candidate/main rules-29 collision without
+changing either historical reference. The prior local-main audit commit `ad4a2b7`
+is also retained. `180ae49` pins rules 30 before the integration. All seven branch tips
+are now ancestors of main; branch names/worktrees remain available for provenance.
+
+No Codex worktree had uncommitted tracked source. The completed reduced rules-26
+validation outputs and pinned workload runner are preserved under
+`civic_evidence/validation-small-v26/`; the originals were not edited. Interrupted
+full-batch outputs remain local, stopped. The two untracked `_find_moments_rich.ts`
+and `_warmth_probe2.ts` probes in the detached home-habitation checkout have no Git
+provenance or delivery record establishing them as completed product changes; they
+remain untouched. Likewise, local `.agents/` skills and `scratch_preserved_*` backups
+are preserved rather than swept into the commit. The review-packet chat produced an
+external ZIP, not repository changes. The older civilisation candidate and retired
+Claude branches retain their historical disposition; they were not wholesale merged.
+`deepseek-trial` retains Claude's separate `03bad1a` guidance commit, outside Codex work.
+
+Fresh checks: 1239 tests / 153 files, final focused 56 / 10, typecheck/build, historical
+continuation and a 120-tick work-taste smoke. See CIVILISATION_IMPLEMENTATION.md for
+limits and the rules-29 save provenance change. No new long-run benefit is claimed.
+
+## Original cleanup record — 2026-10-23
+
 Owner instruction: clean up, integrate appropriate branches, and record remaining conflicting branches as superseded and historical.
 
 ## Authority and meaning

@@ -1,0 +1,6 @@
+# Keep archived evidence byte-identical to the original Windows run, including BOMs/endings.
+*.json -text
+*.jsonl -text
+*.txt -text
+*.ps1 -text
+SMALL_VALIDATION_SCOPE.md -text

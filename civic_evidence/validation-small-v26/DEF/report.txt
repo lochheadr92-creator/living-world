@@ -1,0 +1,317 @@
+Counterfactual lab: 4 seeds (aspen, fern, meadow, river), large profile, forked at day 0, run 2 days.
+Every branch starts from the same saved world as its control. Differences are branch − reference, paired by seed; the reference is the mean of the control and the nudge branches (not counting the branch itself).
+Civilisation metrics: retained records are lower bounds within their retention windows, not lifetime totals. AtEnd means living/present at the end. Production distance uses only towns with at least three recorded days in the last eight; zero with fewer than two eligible towns is not evidence of sameness.
+
+Noise floor: spread (sd) of the difference a one-draw nudge makes in one seed, and when it parts from the control
+  nudge branches parted from the control in 7/8 runs, median 0.05 days after the fork
+  workplaces ±0.0   solidHomes ±0.9   buildings ±2.3   plots ±3.0   people ±0.0   deaths ±0.0   homeless ±2.9   belowCritical ±0.6   meanHunger ±1.4   firstYardDay ±0.0   firstHallDay ±0.0   meanMood ±3.5   lowMood ±1.8   tools ±3.6   meanCondition ±1.7   projectsAdopted ±2.0   projectsDone ±3.7   projectAsks ±2.9   askUnitsDelivered ±1.8   specialisation ±0.0   topKindShare ±0.0   prepAdopted ±2.1   prepSeason ±0.0   prepHardship ±2.1   prepDone ±1.4   prepDropped ±0.4   prepUnits ±8.1   prepDays ±0.1   hungerExposure ±0.0   homeFoodPerPerson ±0.2   storeFoodPerPerson ±0.2   spears ±0.4   armedAtEnd ±0.4   defenceOffered ±0.0   defenceSetOut ±0.0   defenceTried ±0.0   defenceDroveOff ±0.0   defenceFailed ±0.0   defenceLeftOnItsOwn ±0.0   wolvesWary ±0.0   bitesTaken ±3.3   retainedSharedCompleted ±0.0   retainedSharedFailed ±0.0   retainedRelocationsSettled ±0.0   retainedRelocationsFailed ±0.0   retainedExchangePairs ±0.0   retainedExchangeReceipts ±0.0   alignedResidentsAtEnd ±0.0   factionsAtEnd ±0.0   charcoalHoldersAtEnd ±0.0   taughtCharcoalAtEnd ±0.0   supperHoldersAtEnd ±0.0   familySupperAtEnd ±0.0   secondTransmissionAtEnd ±0.0   newbornSupperAtEnd ±0.0   townsWithRepeatedProduction ±0.0   townProductionDistance ±0.0
+
+── nudge:1: 1 extra random draw at the fork and nothing else (the noise floor)  [4 seeds; e.g. 1 draws]
+   final state identical to control in 0/4 seeds; parted in 4, median 0.05 days after the fork
+   metric                      reference  branch    diff   95% interval    up/down  verdict
+   workplaces                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   solidHomes                        0.5     0.3    -0.3   [-0.8, +0.3]        1/2  too few seeds to say
+   buildings                        44.3    43.0    -1.3   [-2.5, 0]           0/2  too few seeds to say
+   plots                            41.0    42.3    +1.3   [-0.3, +2.8]        2/1  too few seeds to say
+   people                          100.0   100.0       0   [0, 0]              0/0  too few seeds to say
+   deaths                            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeless                          2.3     4.3    +2.0   [0, +4.0]           3/1  too few seeds to say
+   belowCritical                     0.1     0.3    +0.1   [-0.4, +0.8]        1/1  too few seeds to say
+   meanHunger                       71.9    71.9       0   [-1.4, +1.0]        3/1  too few seeds to say
+   firstYardDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   firstHallDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   meanMood                         -2.1    -3.1    -1.0   [-4.8, +2.8]        2/2  too few seeds to say
+   lowMood                           0.8     0.8       0   [-1.8, +1.5]        2/1  too few seeds to say
+   tools                            30.9    31.8    +0.9   [-3.3, +4.4]        3/1  too few seeds to say
+   meanCondition                    80.0    79.3    -0.7   [-1.4, +0.8]        1/3  too few seeds to say
+   projectsAdopted                  79.4    81.0    +1.6   [+0.3, +3.0]        3/0  too few seeds to say
+   projectsDone                      7.4     8.5    +1.1   [-3.0, +4.4]        3/1  too few seeds to say
+   projectAsks                       5.6     5.0    -0.6   [-4.3, +2.6]        2/2  too few seeds to say
+   askUnitsDelivered                 1.9     1.5    -0.4   [-2.0, +1.3]        2/2  too few seeds to say
+   specialisation                    0.5     0.5       0   [0, 0]              3/1  too few seeds to say
+   topKindShare                      0.5     0.5       0   [0, 0]              2/2  too few seeds to say
+   prepAdopted                       4.4     3.8    -0.6   [-2.6, +1.3]        1/2  too few seeds to say
+   prepSeason                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   prepHardship                      4.4     3.8    -0.6   [-2.6, +1.3]        1/2  too few seeds to say
+   prepDone                          0.9     1.3    +0.4   [-0.9, +1.3]        3/1  too few seeds to say
+   prepDropped                       0.0     0.3    +0.3   [0, +0.8]           1/0  too few seeds to say
+   prepUnits                        14.4    15.8    +1.4   [-3.3, +5.5]        3/1  too few seeds to say
+   prepDays                          0.7     0.6    -0.1   [-0.2, 0]           1/3  too few seeds to say
+   hungerExposure                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeFoodPerPerson                 1.4     1.3    -0.1   [-0.4, 0]           2/2  too few seeds to say
+   storeFoodPerPerson                1.4     1.3    -0.1   [-0.4, 0]           2/2  too few seeds to say
+   spears                            0.1     0.0    -0.1   [-0.4, 0]           0/1  too few seeds to say
+   armedAtEnd                        0.1     0.0    -0.1   [-0.4, 0]           0/1  too few seeds to say
+   defenceOffered                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceSetOut                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceTried                      0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceDroveOff                   0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceFailed                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceLeftOnItsOwn               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   wolvesWary                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   bitesTaken                        1.9     2.0    +0.1   [-2.0, +2.1]        2/2  too few seeds to say
+   retainedSharedCompleted           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedSharedFailed              0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsSettled        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsFailed         0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangePairs             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangeReceipts          0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   alignedResidentsAtEnd             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   factionsAtEnd                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   charcoalHoldersAtEnd             69.8    69.8       0   [0, 0]              0/0  too few seeds to say
+   taughtCharcoalAtEnd               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   supperHoldersAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   familySupperAtEnd                 0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   secondTransmissionAtEnd           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   newbornSupperAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townsWithRepeatedProduction       0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townProductionDistance            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── nudge:2: 2 extra random draws at the fork and nothing else (the noise floor)  [4 seeds; e.g. 2 draws]
+   final state identical to control in 1/4 seeds; parted in 3, median 0.05 days after the fork
+   metric                      reference  branch    diff   95% interval    up/down  verdict
+   workplaces                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   solidHomes                        0.1     1.0    +0.9   [+0.3, +1.6]        3/0  too few seeds to say
+   buildings                        43.4    44.8    +1.4   [-0.8, +3.4]        3/1  too few seeds to say
+   plots                            41.9    40.5    -1.4   [-4.9, +1.3]        1/2  too few seeds to say
+   people                          100.0   100.0       0   [0, 0]              0/0  too few seeds to say
+   deaths                            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeless                          3.1     2.5    -0.6   [-2.8, +2.0]        1/3  too few seeds to say
+   belowCritical                     0.1     0.3    +0.1   [-0.4, +0.8]        1/1  too few seeds to say
+   meanHunger                       71.8    72.1    +0.3   [-0.8, +1.4]        2/2  too few seeds to say
+   firstYardDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   firstHallDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   meanMood                         -2.7    -1.9    +0.9   [-1.4, +2.4]        3/1  too few seeds to say
+   lowMood                           0.5     1.3    +0.8   [-0.6, +2.6]        2/1  too few seeds to say
+   tools                            31.9    29.8    -2.1   [-3.9, -0.5]        0/4  too few seeds to say
+   meanCondition                    79.4    80.4    +1.0   [-0.6, +2.5]        3/1  too few seeds to say
+   projectsAdopted                  80.1    79.5    -0.6   [-2.0, +0.8]        1/2  too few seeds to say
+   projectsDone                      8.5     6.3    -2.3   [-4.0, -0.5]        0/4  too few seeds to say
+   projectAsks                       5.3     5.8    +0.5   [-0.5, +1.5]        2/2  too few seeds to say
+   askUnitsDelivered                 1.6     2.0    +0.4   [-1.3, +1.6]        3/1  too few seeds to say
+   specialisation                    0.5     0.5       0   [0, 0]              2/2  too few seeds to say
+   topKindShare                      0.5     0.5       0   [0, 0]              2/2  too few seeds to say
+   prepAdopted                       4.3     4.0    -0.3   [-2.0, +1.5]        2/2  too few seeds to say
+   prepSeason                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   prepHardship                      4.3     4.0    -0.3   [-2.0, +1.5]        2/2  too few seeds to say
+   prepDone                          0.9     1.3    +0.4   [-1.0, +1.8]        2/2  too few seeds to say
+   prepDropped                       0.1     0.0    -0.1   [-0.4, 0]           0/1  too few seeds to say
+   prepUnits                        16.4    11.8    -4.6   [-13.0, +3.9]       1/3  too few seeds to say
+   prepDays                          0.7     0.6    -0.1   [-0.3, 0]           2/2  too few seeds to say
+   hungerExposure                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeFoodPerPerson                 1.4     1.4       0   [-0.1, +0.1]        2/2  too few seeds to say
+   storeFoodPerPerson                1.4     1.4       0   [-0.1, +0.1]        2/2  too few seeds to say
+   spears                            0.0     0.3    +0.3   [0, +0.8]           1/0  too few seeds to say
+   armedAtEnd                        0.0     0.3    +0.3   [0, +0.8]           1/0  too few seeds to say
+   defenceOffered                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceSetOut                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceTried                      0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceDroveOff                   0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceFailed                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceLeftOnItsOwn               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   wolvesWary                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   bitesTaken                        1.3     3.3    +2.0   [-1.0, +5.5]        2/2  too few seeds to say
+   retainedSharedCompleted           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedSharedFailed              0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsSettled        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsFailed         0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangePairs             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangeReceipts          0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   alignedResidentsAtEnd             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   factionsAtEnd                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   charcoalHoldersAtEnd             69.8    69.8       0   [0, 0]              0/0  too few seeds to say
+   taughtCharcoalAtEnd               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   supperHoldersAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   familySupperAtEnd                 0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   secondTransmissionAtEnd           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   newbornSupperAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townsWithRepeatedProduction       0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townProductionDistance            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── rich-no-relocation: disable household relocation only  [4 seeds; e.g. household relocation disabled]
+   final state identical to control in 1/4 seeds; parted in 4, median 0.75 days after the fork
+   metric                      reference  branch    diff   95% interval    up/down  verdict
+   workplaces                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   solidHomes                        0.4     0.0    -0.4   [-0.7, -0.2]        0/3  too few seeds to say
+   buildings                        43.8    43.8    -0.1   [-1.2, +1.0]        2/2  too few seeds to say
+   plots                            41.4    41.5    +0.1   [-2.7, +3.3]        1/2  too few seeds to say
+   people                          100.0   100.0       0   [0, 0]              0/0  too few seeds to say
+   deaths                            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeless                          2.9     2.0    -0.9   [-2.2, +0.3]        1/2  too few seeds to say
+   belowCritical                     0.2     0.0    -0.2   [-0.3, 0]           0/2  too few seeds to say
+   meanHunger                       71.9    71.7    -0.2   [-1.3, +0.6]        3/1  too few seeds to say
+   firstYardDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   firstHallDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   meanMood                         -2.4    -2.3    +0.1   [-1.4, +1.6]        2/2  too few seeds to say
+   lowMood                           0.8     0.3    -0.5   [-0.7, -0.2]        0/3  too few seeds to say
+   tools                            31.2    32.0    +0.8   [-0.3, +2.7]        2/2  too few seeds to say
+   meanCondition                    79.8    79.5    -0.2   [-0.9, +0.3]        2/2  too few seeds to say
+   projectsAdopted                  79.9    79.3    -0.7   [-1.8, +0.7]        1/3  too few seeds to say
+   projectsDone                      7.8     8.5    +0.7   [-0.3, +2.7]        1/2  too few seeds to say
+   projectAsks                       5.4     5.5    +0.1   [-1.7, +2.2]        1/2  too few seeds to say
+   askUnitsDelivered                 1.7     1.8       0   [-1.8, +1.8]        2/2  too few seeds to say
+   specialisation                    0.5     0.5       0   [0, 0]              1/3  too few seeds to say
+   topKindShare                      0.5     0.5       0   [0, 0]              1/3  too few seeds to say
+   prepAdopted                       4.2     4.8    +0.6   [+0.3, +0.8]        4/0  too few seeds to say
+   prepSeason                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   prepHardship                      4.2     4.8    +0.6   [+0.3, +0.8]        4/0  too few seeds to say
+   prepDone                          1.0     0.5    -0.5   [-1.3, 0]           0/2  too few seeds to say
+   prepDropped                       0.1     0.0    -0.1   [-0.3, 0]           0/1  too few seeds to say
+   prepUnits                        14.8    17.0    +2.2   [-1.3, +5.7]        2/2  too few seeds to say
+   prepDays                          0.7     0.8    +0.1   [0, +0.2]           4/0  too few seeds to say
+   hungerExposure                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeFoodPerPerson                 1.4     1.5    +0.1   [0, +0.2]           4/0  too few seeds to say
+   storeFoodPerPerson                1.4     1.5    +0.1   [0, +0.2]           4/0  too few seeds to say
+   spears                            0.1     0.0    -0.1   [-0.3, 0]           0/1  too few seeds to say
+   armedAtEnd                        0.1     0.0    -0.1   [-0.3, 0]           0/1  too few seeds to say
+   defenceOffered                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceSetOut                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceTried                      0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceDroveOff                   0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceFailed                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceLeftOnItsOwn               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   wolvesWary                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   bitesTaken                        1.9     0.5    -1.4   [-2.5, -0.6]        0/4  too few seeds to say
+   retainedSharedCompleted           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedSharedFailed              0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsSettled        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsFailed         0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangePairs             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangeReceipts          0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   alignedResidentsAtEnd             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   factionsAtEnd                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   charcoalHoldersAtEnd             69.8    69.8       0   [0, 0]              0/0  too few seeds to say
+   taughtCharcoalAtEnd               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   supperHoldersAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   familySupperAtEnd                 0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   secondTransmissionAtEnd           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   newbornSupperAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townsWithRepeatedProduction       0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townProductionDistance            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── rich-no-exchange-journeys: disable exchange journeys and leads only  [4 seeds; e.g. exchange journeys disabled]
+   final state identical to control in 1/4 seeds; parted in 3, median 1.30 days after the fork
+   metric                      reference  branch    diff   95% interval    up/down  verdict
+   workplaces                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   solidHomes                        0.4     0.0    -0.4   [-0.7, -0.2]        0/3  too few seeds to say
+   buildings                        43.8    43.8    -0.1   [-1.2, +1.0]        2/2  too few seeds to say
+   plots                            41.4    41.5    +0.1   [-2.7, +3.3]        1/2  too few seeds to say
+   people                          100.0   100.0       0   [0, 0]              0/0  too few seeds to say
+   deaths                            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeless                          2.9     2.0    -0.9   [-2.2, +0.3]        1/2  too few seeds to say
+   belowCritical                     0.2     0.0    -0.2   [-0.3, 0]           0/2  too few seeds to say
+   meanHunger                       71.9    71.7    -0.2   [-1.3, +0.6]        3/1  too few seeds to say
+   firstYardDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   firstHallDay                      2.0     2.0       0   [0, 0]              0/0  too few seeds to say
+   meanMood                         -2.4    -2.3    +0.1   [-1.4, +1.6]        2/2  too few seeds to say
+   lowMood                           0.8     0.3    -0.5   [-0.7, -0.2]        0/3  too few seeds to say
+   tools                            31.2    32.0    +0.8   [-0.3, +2.7]        2/2  too few seeds to say
+   meanCondition                    79.8    79.5    -0.2   [-0.9, +0.3]        2/2  too few seeds to say
+   projectsAdopted                  79.9    79.3    -0.7   [-1.8, +0.7]        1/3  too few seeds to say
+   projectsDone                      7.8     8.5    +0.7   [-0.3, +2.7]        1/2  too few seeds to say
+   projectAsks                       5.4     5.5    +0.1   [-1.7, +2.2]        1/2  too few seeds to say
+   askUnitsDelivered                 1.7     1.8       0   [-1.8, +1.8]        2/2  too few seeds to say
+   specialisation                    0.5     0.5       0   [0, 0]              1/3  too few seeds to say
+   topKindShare                      0.5     0.5       0   [0, 0]              1/3  too few seeds to say
+   prepAdopted                       4.2     4.8    +0.6   [+0.3, +0.8]        4/0  too few seeds to say
+   prepSeason                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   prepHardship                      4.2     4.8    +0.6   [+0.3, +0.8]        4/0  too few seeds to say
+   prepDone                          1.0     0.5    -0.5   [-1.3, 0]           0/2  too few seeds to say
+   prepDropped                       0.1     0.0    -0.1   [-0.3, 0]           0/1  too few seeds to say
+   prepUnits                        14.8    17.0    +2.2   [-1.3, +5.7]        2/2  too few seeds to say
+   prepDays                          0.7     0.8    +0.1   [0, +0.2]           4/0  too few seeds to say
+   hungerExposure                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   homeFoodPerPerson                 1.4     1.5    +0.1   [0, +0.2]           4/0  too few seeds to say
+   storeFoodPerPerson                1.4     1.5    +0.1   [0, +0.2]           4/0  too few seeds to say
+   spears                            0.1     0.0    -0.1   [-0.3, 0]           0/1  too few seeds to say
+   armedAtEnd                        0.1     0.0    -0.1   [-0.3, 0]           0/1  too few seeds to say
+   defenceOffered                    0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceSetOut                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceTried                      0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceDroveOff                   0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceFailed                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   defenceLeftOnItsOwn               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   wolvesWary                        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   bitesTaken                        1.9     0.5    -1.4   [-2.5, -0.6]        0/4  too few seeds to say
+   retainedSharedCompleted           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedSharedFailed              0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsSettled        0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedRelocationsFailed         0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangePairs             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   retainedExchangeReceipts          0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   alignedResidentsAtEnd             0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   factionsAtEnd                     0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   charcoalHoldersAtEnd             69.8    69.8       0   [0, 0]              0/0  too few seeds to say
+   taughtCharcoalAtEnd               0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   supperHoldersAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   familySupperAtEnd                 0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   secondTransmissionAtEnd           0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   newbornSupperAtEnd                0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townsWithRepeatedProduction       0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   townProductionDistance            0.0     0.0       0   [0, 0]              0/0  too few seeds to say
+   In words: nothing moved by more than a one-draw nudge moves it.
+
+── rich-no-political-alignment: disable persistent political alignment only  [4 seeds; e.g. political alignment disabled]
+   final state identical to control in 4/4 seeds; parted in 0
+   metric                      reference  branch    diff   95% interval    up/down  verdict
+   workplaces                        0.0     0.0       0   [0, 0]              0/0  identical
+   solidHomes                        0.4     0.0    -0.4   [-0.7, -0.2]        0/3  identical
+   buildings                        43.8    43.8    -0.1   [-1.2, +1.0]        2/2  identical
+   plots                            41.4    41.5    +0.1   [-2.7, +3.3]        1/2  identical
+   people                          100.0   100.0       0   [0, 0]              0/0  identical
+   deaths                            0.0     0.0       0   [0, 0]              0/0  identical
+   homeless                          2.9     2.0    -0.9   [-2.2, +0.3]        1/2  identical
+   belowCritical                     0.2     0.0    -0.2   [-0.3, 0]           0/2  identical
+   meanHunger                       71.9    71.7    -0.2   [-1.3, +0.6]        3/1  identical
+   firstYardDay                      2.0     2.0       0   [0, 0]              0/0  identical
+   firstHallDay                      2.0     2.0       0   [0, 0]              0/0  identical
+   meanMood                         -2.4    -2.3    +0.1   [-1.4, +1.6]        2/2  identical
+   lowMood                           0.8     0.3    -0.5   [-0.7, -0.2]        0/3  identical
+   tools                            31.2    32.0    +0.8   [-0.3, +2.7]        2/2  identical
+   meanCondition                    79.8    79.5    -0.2   [-0.9, +0.3]        2/2  identical
+   projectsAdopted                  79.9    79.3    -0.7   [-1.8, +0.7]        1/3  identical
+   projectsDone                      7.8     8.5    +0.7   [-0.3, +2.7]        1/2  identical
+   projectAsks                       5.4     5.5    +0.1   [-1.7, +2.2]        1/2  identical
+   askUnitsDelivered                 1.7     1.8       0   [-1.8, +1.8]        2/2  identical
+   specialisation                    0.5     0.5       0   [0, 0]              1/3  identical
+   topKindShare                      0.5     0.5       0   [0, 0]              1/3  identical
+   prepAdopted                       4.2     4.8    +0.6   [+0.3, +0.8]        4/0  identical
+   prepSeason                        0.0     0.0       0   [0, 0]              0/0  identical
+   prepHardship                      4.2     4.8    +0.6   [+0.3, +0.8]        4/0  identical
+   prepDone                          1.0     0.5    -0.5   [-1.3, 0]           0/2  identical
+   prepDropped                       0.1     0.0    -0.1   [-0.3, 0]           0/1  identical
+   prepUnits                        14.8    17.0    +2.2   [-1.3, +5.7]        2/2  identical
+   prepDays                          0.7     0.8    +0.1   [0, +0.2]           4/0  identical
+   hungerExposure                    0.0     0.0       0   [0, 0]              0/0  identical
+   homeFoodPerPerson                 1.4     1.5    +0.1   [0, +0.2]           4/0  identical
+   storeFoodPerPerson                1.4     1.5    +0.1   [0, +0.2]           4/0  identical
+   spears                            0.1     0.0    -0.1   [-0.3, 0]           0/1  identical
+   armedAtEnd                        0.1     0.0    -0.1   [-0.3, 0]           0/1  identical
+   defenceOffered                    0.0     0.0       0   [0, 0]              0/0  identical
+   defenceSetOut                     0.0     0.0       0   [0, 0]              0/0  identical
+   defenceTried                      0.0     0.0       0   [0, 0]              0/0  identical
+   defenceDroveOff                   0.0     0.0       0   [0, 0]              0/0  identical
+   defenceFailed                     0.0     0.0       0   [0, 0]              0/0  identical
+   defenceLeftOnItsOwn               0.0     0.0       0   [0, 0]              0/0  identical
+   wolvesWary                        0.0     0.0       0   [0, 0]              0/0  identical
+   bitesTaken                        1.9     0.5    -1.4   [-2.5, -0.6]        0/4  identical
+   retainedSharedCompleted           0.0     0.0       0   [0, 0]              0/0  identical
+   retainedSharedFailed              0.0     0.0       0   [0, 0]              0/0  identical
+   retainedRelocationsSettled        0.0     0.0       0   [0, 0]              0/0  identical
+   retainedRelocationsFailed         0.0     0.0       0   [0, 0]              0/0  identical
+   retainedExchangePairs             0.0     0.0       0   [0, 0]              0/0  identical
+   retainedExchangeReceipts          0.0     0.0       0   [0, 0]              0/0  identical
+   alignedResidentsAtEnd             0.0     0.0       0   [0, 0]              0/0  identical
+   factionsAtEnd                     0.0     0.0       0   [0, 0]              0/0  identical
+   charcoalHoldersAtEnd             69.8    69.8       0   [0, 0]              0/0  identical
+   taughtCharcoalAtEnd               0.0     0.0       0   [0, 0]              0/0  identical
+   supperHoldersAtEnd                0.0     0.0       0   [0, 0]              0/0  identical
+   familySupperAtEnd                 0.0     0.0       0   [0, 0]              0/0  identical
+   secondTransmissionAtEnd           0.0     0.0       0   [0, 0]              0/0  identical
+   newbornSupperAtEnd                0.0     0.0       0   [0, 0]              0/0  identical
+   townsWithRepeatedProduction       0.0     0.0       0   [0, 0]              0/0  identical
+   townProductionDistance            0.0     0.0       0   [0, 0]              0/0  identical
+   In words: the branch ended in exactly the control's state in every seed.

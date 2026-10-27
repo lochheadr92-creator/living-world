@@ -1,0 +1,52 @@
+﻿{
+    "SourceHead":  "b402f3d44bf3919b82982b6c66d37cd8d0e74873",
+    "RulesVersion":  26,
+    "Specs":  [
+                  {
+                      "Name":  "A",
+                      "Seeds":  4,
+                      "Profile":  "town",
+                      "Days":  2,
+                      "Branches":  "nudge:1,nudge:2,rich-no-stock,rich-no-shelter",
+                      "Geology":  "no"
+                  },
+                  {
+                      "Name":  "C",
+                      "Seeds":  4,
+                      "Profile":  "large",
+                      "Days":  2,
+                      "Branches":  "nudge:1,nudge:2",
+                      "Geology":  "yes"
+                  },
+                  {
+                      "Name":  "DEF",
+                      "Seeds":  4,
+                      "Profile":  "large",
+                      "Days":  2,
+                      "Branches":  "nudge:1,nudge:2,rich-no-relocation,rich-no-exchange-journeys,rich-no-political-alignment",
+                      "Geology":  "no"
+                  },
+                  {
+                      "Name":  "GH",
+                      "Seeds":  4,
+                      "Profile":  "normal",
+                      "Days":  4,
+                      "Branches":  "nudge:1,nudge:2,rich-no-household-practices",
+                      "Geology":  "no"
+                  }
+              ],
+    "Benchmarks":  [
+                       {
+                           "Profile":  "normal",
+                           "Days":  1
+                       },
+                       {
+                           "Profile":  "large",
+                           "Days":  1
+                       },
+                       {
+                           "Profile":  "huge",
+                           "Days":  1
+                       }
+                   ]
+}

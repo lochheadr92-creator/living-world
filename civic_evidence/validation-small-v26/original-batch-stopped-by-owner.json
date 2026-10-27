@@ -1,0 +1,6 @@
+{
+  "StoppedAt": "2026-10-25T09:44:07.2477883+10:00",
+  "Reason": "Owner requested a smaller validation run",
+  "Status": "Interrupted; partial outputs preserved, not accepted as complete",
+  "ReplacementOutput": "civ_validation_small_v26"
+}
