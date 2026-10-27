@@ -1,13 +1,14 @@
 // Read-only descriptions of workplaces, building sites, carts, tools, promises and meals for the inspectors.
 // Nothing here changes the world or draws random numbers.
-import { BUILD_DEF, GRANARY_TEND_EVERY, TOOL_DEFS } from './constants';
+import { BUILD_DEF, GRANARY_TEND_EVERY, SOURCE_ITEM, TOOL_DEFS } from './constants';
 import { weightOf } from './economy';
 import { opsOf, recipeOf, usableUnits } from './facilities';
 import { RECIPES, recipesAt } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { mealOf, previousMealOf } from './meals';
-import type { Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, World } from './types';
+import { missingMaterials } from './knowledge';
+import type { BeliefKind, Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, SourceType, World } from './types';
 
 export interface Bar {
   label: string;
@@ -33,6 +34,59 @@ const nameOf = (world: World, id: number): string => {
   return e && e.ent === 'person' ? e.name : 'someone';
 };
 const hhName = (world: World, id: number): string => (id === 0 ? 'everyone' : (world.households.find((h) => h.id === id)?.name ?? 'nobody') + ' household');
+
+// ── observer-only material whereabouts (pure read: never changes the world or draws random numbers) ──
+const SOURCE_LABEL: Record<string, string> = {
+  tree: 'tree', rock: 'rock', berry_bush: 'berry bush', fruit_tree: 'fruit tree',
+  fish_spot: 'fishing spot', wild_grain: 'wild grain', clay_pit: 'clay pit',
+  ore_vein: 'ore vein', outcrop: 'stone outcrop',
+};
+
+function nearestSource(world: World, item: ItemKind, x: number, y: number): { d: number; type: SourceType } | null {
+  let best: { d: number; type: SourceType } | null = null;
+  for (const s of world.sources) if (s.item === item) {
+    const d = Math.hypot(s.x - x, s.y - y);
+    if (!best || d < best.d) best = { d, type: s.type };
+  }
+  return best;
+}
+
+function nearestStock(world: World, item: ItemKind, x: number, y: number): number | null {
+  let best: number | null = null;
+  for (const b of world.buildings) if ((b.store.items[item] ?? 0) > 0) {
+    const d = Math.hypot(b.x - x, b.y - y);
+    if (best === null || d < best) best = d;
+  }
+  return best;
+}
+
+/** How many living people hold a belief about at least one source that yields `item`. */
+function beliefCountFor(world: World, item: ItemKind): number {
+  const kinds = new Set<string>();
+  for (const st of Object.keys(SOURCE_ITEM) as SourceType[]) if (SOURCE_ITEM[st] === item) kinds.add(st);
+  let n = 0;
+  for (const p of world.persons) {
+    let has = false;
+    for (const k of kinds) if ((p.bykind[k as BeliefKind] ?? []).length) { has = true; break; }
+    if (has) n++;
+  }
+  return n;
+}
+
+/** One line for the observer: where the missing material is now, what makes it, and who knows a source. */
+function observerMaterialNote(world: World, item: ItemKind, n: number, x: number, y: number): string {
+  const src = nearestSource(world, item, x, y);
+  const stock = nearestStock(world, item, x, y);
+  const where = src
+    ? `nearest at a ${SOURCE_LABEL[src.type] ?? src.type} ${Math.round(src.d)} tiles away`
+    : stock !== null
+      ? `in a store ${Math.round(stock)} tiles away`
+      : 'nowhere in the world';
+  const recipe = RECIPES.find((r) => (r.outputs[item] ?? 0) > 0);
+  const made = recipe ? `made at the ${BUILD_DEF[recipe.at].label}` : 'gathered, not made';
+  const know = beliefCountFor(world, item);
+  return `${n} ${label(item)}: ${where}; ${made}; ${know} ${know === 1 ? 'person knows' : 'people know'} a source of it`;
+}
 
 export function itemsText(items: Items): string {
   const parts = Object.keys(items)
@@ -132,6 +186,19 @@ export function describeFacility(world: World, b: Building): Section[] {
     const notes: string[] = [];
     if (!blockers.length) notes.push('Nothing is stopping a batch from starting: it is simply waiting for someone who wants what it makes.');
     for (const x of blockers) notes.push(`${x.r.doing}: ${x.why.join('; ')}.`);
+    if (blockers.length) {
+      const needItems: Items = {};
+      for (const r of recs) {
+        for (const k of Object.keys(r.inputs) as ItemKind[]) needItems[k] = (needItems[k] ?? 0) + (r.inputs[k] ?? 0);
+        for (const k of Object.keys(r.fuel) as ItemKind[]) needItems[k] = (needItems[k] ?? 0) + (r.fuel[k] ?? 0);
+      }
+      const short: { k: ItemKind; n: number }[] = [];
+      for (const k of Object.keys(needItems) as ItemKind[]) {
+        const have = b.store.items[k] ?? 0;
+        if (have < (needItems[k] ?? 0)) short.push({ k, n: (needItems[k] ?? 0) - have });
+      }
+      if (short.length) notes.push(`For the observer: ${short.map((x) => observerMaterialNote(world, x.k, x.n, b.x, b.y)).join('; ')}.`);
+    }
     if (ops.lastBlocker) notes.push(`Last time someone tried: ${ops.lastBlocker}.`);
     sections.push({ title: 'Idle — what is stopping it', notes });
   }
@@ -186,6 +253,7 @@ export function describeSiteSections(world: World, s: Site): Section[] {
   }
   rows.push(['Why', BUILD_DEF[s.type].blurb]);
   sections.push({ title: 'The project', rows });
+  const missItems = missingMaterials(s);
   const missing: string[] = [];
   const have: ItemRow[] = [];
   for (const k of Object.keys(s.required) as ItemKind[]) {
@@ -195,8 +263,10 @@ export function describeSiteSections(world: World, s: Site): Section[] {
     if (got < need) missing.push(`${need - got} ${label(k)}`);
   }
   const notes: string[] = [];
-  if (missing.length) notes.push(`Still needed: ${missing.join(', ')}. Work stops short of the part that needs them.`);
-  else notes.push('All the materials are on site.');
+  if (missing.length) {
+    notes.push(`Still needed: ${missing.join(', ')}. Work stops short of the part that needs them.`);
+    notes.push(`For the observer: ${Object.keys(missItems).map((k) => observerMaterialNote(world, k as ItemKind, missItems[k as ItemKind] ?? 0, s.x + s.w / 2, s.y + s.h / 2)).join('; ')}.`);
+  } else notes.push('All the materials are on site.');
   if (world.tick - s.lastWorkTick > 800) notes.push(`Nobody has worked here for ${Math.round((world.tick - s.lastWorkTick) / 2400 * 10) / 10} days; it is given up after a while.`);
   sections.push({
     title: 'Materials',
