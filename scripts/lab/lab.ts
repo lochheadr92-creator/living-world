@@ -1,4 +1,5 @@
 import { workTastesOn, setWorkTastes } from '../../src/sim/temperament';
+import { leaveHeaviestOn, setLeaveHeaviest } from '../../src/sim/leave_heaviest';
 import { nightWaitBoundaryOn, setNightWaitBoundary } from '../../src/sim/night_wait';
 import { CIVILISATION_METRICS, civilisationOutcome } from './civilisation';
 import { memoryRetentionOn, setMemoryRetention } from '../../src/sim/memory_retention';
@@ -247,6 +248,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-universal-techniques') return {spec:label,summary:'remove held-technique requirement and instruction',apply:()=> 'universal technique access restored',install(){const was=techniquesOn();setTechniques(false);return ()=>setTechniques(was);}};
   if (kind === 'rich-adult-newborn-skills') return {spec:label,summary:'restore adult-range skills for newly created children',apply:()=> 'historical skill initialisation restored for subsequent births/arrivals',install(){const was=developmentOn();setDevelopment(false);return ()=>setDevelopment(was);}};
   if (kind === 'rich-no-work-tastes') return {spec:label,summary:'remove personal work tastes only; changes nothing below version 31',apply:()=> 'work tastes off',install(){const was=workTastesOn();setWorkTastes(false);return ()=>setWorkTastes(was);}};
+  if (kind === 'rich-no-leave-heaviest') return {spec:label,summary:'remove leaving a left-over to free the hands only; changes nothing below version 33',apply:()=> 'leave-heaviest off',install(){const was=leaveHeaviestOn();setLeaveHeaviest(false);return ()=>setLeaveHeaviest(was);}};
   if (kind === 'rich-no-leisure') return {spec:label,summary:'restore the single idle fallback (potter about near home) and nothing else; below version 28 it changes nothing',apply:(w)=>{w.settings.dynamics='rich';return 'rich dynamics on, varied spare time off';},install(){const was=leisureOnSwitch();setLeisure(false);return ()=>setLeisure(was);}};
   if (kind === 'rich-remote-markets') return {spec:label,summary:'restore legacy remote market exchanges',apply:()=> 'remote market behavior restored',install(){const was=localMarketOn();setLocalMarket(false);return ()=>setLocalMarket(was);}};
   if (kind === 'rich-no-civic-choice') return {spec:label,summary:'restore single-organiser project acceptance',apply:()=> 'collective coordinator choice off',install(){const was=civicChoiceOn();setCivicChoice(false);return ()=>setCivicChoice(was);}};

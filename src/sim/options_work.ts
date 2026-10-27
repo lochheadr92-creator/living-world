@@ -28,6 +28,7 @@ import { isFreeLand } from './registry';
 import { affinityOf } from './relations';
 import { hashUnit } from './rng';
 import { hauntsFor, leisureOn, pickHaunt } from './leisure';
+import { leaveHeaviestOption } from './leave_heaviest';
 import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { T } from './types';
 
@@ -444,6 +445,7 @@ function optMaterials(ctx: Ctx): void {
       }
     }
   }
+  const wanted = new Set(Object.keys(byItem) as ItemKind[]);
   for (const item of ['wood', 'stone', 'clay', 'ore'] as const) {
     const need = byItem[item];
     if (!need) continue;
@@ -453,6 +455,8 @@ function optMaterials(ctx: Ctx): void {
     const missing = need.n - have;
     if (missing <= 0) continue;
     if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) continue;
+    // Version 33: a gather with no room to start may be preceded by leaving a left-over nothing wants (leave_heaviest.ts)
+    leaveHeaviestOption(ctx, { item, base: need.base * traitMods(ctx.p).work, why: need.why, sources: RAW_KINDS[item], mult: nightMult(ctx) * weatherMult(ctx), wanted });
     gatherMaterial(ctx, item, missing, need.base * traitMods(ctx.p).work, need.why, need.tag);
   }
 }

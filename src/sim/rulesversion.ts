@@ -75,10 +75,13 @@ import type { Settings, World } from './types';
 // Version 32: observer-facing truth. A stalled site's "waiting for materials" reason is derived from the
 // ledger (required minus delivered minus used), and a person logs it when a source they believed held
 // 2+ units is re-sighted bare or at most half full (src/sim/knowledge.ts).
-export const CURRENT_RULES_VERSION = 32;
+// Version 33: leave the heaviest left-over. A person whose hands are too full of wood or stone for a gather they want to start
+// may go and leave the heaviest such left-over (nothing of theirs asks for it) at a storehouse or shared workplace they know,
+// through the ordinary deposit (src/sim/leave_heaviest.ts). No other option, score or threshold changes.
+export const CURRENT_RULES_VERSION = 33;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
