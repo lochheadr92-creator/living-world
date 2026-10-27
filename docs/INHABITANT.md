@@ -472,3 +472,9 @@ action estimates and memory ages use world-clock minutes/hours/days, independent
 playback speed, rounded to a minute. Historical protocols retain their original wording.
 This does not redesign the general observer inspector. Audit evidence and limitations:
 docs/INHABITANT_FIXES.md, inhabitant_evidence/f1 through f5.
+
+Stage 1 (2026-10-28): new runs speak protocols 11/12 (observation 7). The observation adds the person's own active and
+recently-ended private plans (each with the materials it has spoken for and its reason), the carried/spoken-for/available
+split of the pack, and the settled trade and held techniques. Protocols 1-10 keep their historical observation shapes 1-6,
+so every older transcript replays unchanged. `reservedFor` (a pure read of the person's own commitments and plans) supplies
+the spoken-for amounts; no world truth is read and nothing is written.

@@ -25,6 +25,7 @@ import { ACTIVITY_NOUN, BELIEF_NOUN, compass } from '../sim/labels';
 import { isRich, thoughtsOf } from '../sim/mood';
 import { ageYears, carryCap, stageOf, traitSummary } from '../sim/people';
 import { relLabel } from '../sim/relations';
+import { reservedFor } from '../sim/social';
 import { hashString } from '../sim/rng';
 import { toolsHeldBy } from '../sim/toolreg';
 import { weightOf } from '../sim/economy';
@@ -35,8 +36,9 @@ import { hyp } from '../sim/util';
 /** 2 adds the tick (`t`) to memory entries and the last result, so notes can refer to them; 1 is the shape protocol inhabitant/1 recorded.
  *  3 adds the limits an action accepts. */
 /** Bump when the observation's content or wording changes, and keep the old shape under the old version: replay rebuilds each ask's
- * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names. */
-export const OBSERVATION_VERSION = 6;
+ * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names.
+ *  7 adds active/recent personal plans (with what each has spoken for) and the carried/spoken-for/available split of the pack. */
+export const OBSERVATION_VERSION = 7;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -113,11 +115,17 @@ export interface InhabitantObservation {
     needs: Record<NeedKey, { value: number; state: 'ok' | 'low' | 'critical' }>;
     carrying: Items;
     load: { used: number; cap: number };
+    /** what of the pack is already spoken for by a promise or a plan, and what is free for a new purpose (version 7+) */
+    spokenFor?: Items;
+    available?: Items;
     tools: { kind: string; label: string; wear: number; loan: string | null }[];
     pullingCart: boolean;
     position: { x: number; y: number };
     mood?: number;
     thoughts?: string[];
+    /** the trade they settled on, and the techniques they hold (version 7+) */
+    trade?: { kind: string; why: string } | null;
+    techniques?: string[];
   };
   /** (c) householdOf(p), membersOf(hh), hh.homeId; p.partnerId, p.parents, p.children */
   household: { name: string; members: { name: string; kin: string }[]; home: string | null; partner: string | null; parents: string[]; children: string[] };
@@ -148,6 +156,8 @@ export interface InhabitantObservation {
   /** the engine's offer to this person now (rankOptions(ctx)), and what it set aside with the person's own reasons (ctx.blocked) */
   options: ObservedOption[];
   setAside: { label: string; reason: string; target: string | null }[];
+  /** active and recently-ended private plans, with what each has spoken for (version 7+) */
+  plans?: { goal: string; kind: string; status: string; step: string; wants: Items; blocked: string; reason: string; since: string }[];
 }
 
 export interface ObserveOptions {
@@ -305,6 +315,44 @@ function describeOption(world: World, p: Person, o: Option, showScores: boolean,
   return out;
 }
 
+/** what of the pack a promise or a plan has already spoken for (version 7+): the union of active promises and the person's own plans. */
+function spokenForItems(world: World, p: Person): Items {
+  const out: Items = {};
+  const kinds = new Set<ItemKind>([...Object.keys(p.inv) as ItemKind[], ...p.intentions.flatMap((i) => Object.keys(i.wants) as ItemKind[])]);
+  for (const k of kinds) {
+    const r = reservedFor(world, p, k);
+    if (r > 0) out[k] = r;
+  }
+  return out;
+}
+
+/** what of the pack is free for a new purpose (version 7+): carried minus spoken-for, never negative. */
+function availableItems(world: World, p: Person): Items {
+  const out: Items = {};
+  for (const k of Object.keys(p.inv) as ItemKind[]) {
+    const v = (p.inv[k] ?? 0) - reservedFor(world, p, k);
+    if (v > 0) out[k] = v;
+  }
+  return out;
+}
+
+/** active plans first, then recently-ended ones (version 7+); each with the materials it has spoken for and its own reason. */
+function describePlans(world: World, p: Person, version: number): InhabitantObservation['plans'] {
+  const chosen = p.intentions
+    .filter((i) => i.status === 'active' || (i.ended > 0 && world.tick - i.ended < 6000))
+    .sort((a, b) => (a.status === 'active' ? 0 : 1) - (b.status === 'active' ? 0 : 1) || b.since - a.since);
+  return chosen.map((i) => ({
+    goal: cleanText(i.goal, 160),
+    kind: i.kind,
+    status: i.status,
+    step: cleanText(i.step, 160),
+    wants: { ...i.wants },
+    blocked: cleanText(i.blocked, 120),
+    reason: cleanText(i.reason, 120),
+    since: ageText(world, version, i.since),
+  }));
+}
+
 /**
  * Build the observation for a person about to choose. `ranked` is the engine's offer (rankOptions(ctx), best first) and `ctx` the
  * person's own planning context; both come from the same decision the engine is making. Pure: reads, never writes, never draws a
@@ -340,6 +388,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     needs,
     carrying: { ...p.inv },
     load: { used: Math.round(weightOf(p.inv) * 10) / 10, cap: carryCap(world, p) },
+    ...(version >= 7 ? { spokenFor: spokenForItems(world, p), available: availableItems(world, p) } : {}),
     tools: toolsHeldBy(world, p.id).map((t) => ({
       kind: t.kind,
       label: `${t.tier === 1 ? 'iron ' : ''}${TOOL_DEFS[t.kind].label}`,
@@ -352,6 +401,10 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   if (isRich(world) && p.mood) {
     self.mood = Math.round(p.mood.level);
     self.thoughts = thoughtsOf(world, p).map((t) => `${t.value > 0 ? '+' : ''}${Math.round(t.value)} ${cleanText(t.why, 80)}`);
+  }
+  if (version >= 7) {
+    self.trade = p.trade ? { kind: p.trade.key, why: cleanText(p.trade.why, 120) } : null;
+    self.techniques = Object.keys(p.techniques ?? {}).map((k) => (k === 'charcoal' ? 'charcoal firing' : k));
   }
 
   const a = p.activity;
@@ -529,6 +582,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     },
     options: ranked.slice(0, 30).map((o,index) => ({...describeOption(world, p, o, showScores, version), key: publicKeys[index]})),
     setAside: [...(version >= 5 ? blockedCraftNeeds(ctx) : []), ...ctx.blocked].slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId, version) })),
+    ...(version >= 7 ? { plans: describePlans(world, p, version) } : {}),
   };
   return deepFreeze(obs);
 }

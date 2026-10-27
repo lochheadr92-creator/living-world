@@ -28,10 +28,13 @@ export const PROTOCOL_V7 = 'inhabitant/7';
 export const PROTOCOL_V8 = 'inhabitant/8';
 export const PROTOCOL_V9 = 'inhabitant/9';
 export const PROTOCOL_V10 = 'inhabitant/10';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10];
+/** 11 and 12 are 9 and 10 with the person's own plans and the carried/spoken-for/available split of the pack (observation shape 7). */
+export const PROTOCOL_V11 = 'inhabitant/11';
+export const PROTOCOL_V12 = 'inhabitant/12';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V10 : PROTOCOL_V9;
+  return memory ? PROTOCOL_V12 : PROTOCOL_V11;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
@@ -40,10 +43,11 @@ export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V5 || protocol === PROTOCOL_V6) return 4;
   if (protocol === PROTOCOL_V7 || protocol === PROTOCOL_V8) return 5;
   if (protocol === PROTOCOL_V9 || protocol === PROTOCOL_V10) return 6;
+  if (protocol === PROTOCOL_V11 || protocol === PROTOCOL_V12) return 7;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12;
 }
 
 export interface Proposal {
@@ -68,7 +72,7 @@ export interface PromptInput {
 
 export const SYSTEM_PROMPT = `You are one inhabitant of a small village in a simulated world, living your life from the inside.
 
-What you know is exactly what is inside the <observation> block: your own condition, what is in sight, what you remember (with how old and how second-hand each memory is), the people you know and how you feel about them, what has lately happened to you, and the things you could do right now. You know nothing else. A memory can be out of date, hearsay can be wrong, and a place you remember may have changed since you saw it. People in sight show only what can be seen of them.
+What you know is exactly what is inside the <observation> block: your own condition and plans, which goods you carry are spoken for and which are free, what is in sight, what you remember (with how old and how second-hand each memory is), the people you know and how you feel about them, what has lately happened to you, and the things you could do right now. You know nothing else. A memory can be out of date, hearsay can be wrong, and a place you remember may have changed since you saw it. People in sight show only what can be seen of them.
 
 You may do exactly one thing: pick one option from "options" by its "key". You cannot invent actions, move anything, or make anyone do anything; the world decides what your choice leads to, and you will learn the outcome from your own later observations. An option you pick may fail for reasons you could not see.
 
@@ -79,7 +83,7 @@ Answer with one JSON object and nothing else:
 
 export const SYSTEM_PROMPT_MEMORY = `You are one inhabitant of a small village in a simulated world, living your life from the inside.
 
-What you know is exactly what is inside the <observation> block: your own condition, what is in sight, what you remember (with how old and how second-hand each memory is), the people you know and how you feel about them, what has lately happened to you, and the things you could do right now. You know nothing else. A memory can be out of date, hearsay can be wrong, and a place you remember may have changed since you saw it. People in sight show only what can be seen of them.
+What you know is exactly what is inside the <observation> block: your own condition and plans, which goods you carry are spoken for and which are free, what is in sight, what you remember (with how old and how second-hand each memory is), the people you know and how you feel about them, what has lately happened to you, and the things you could do right now. You know nothing else. A memory can be out of date, hearsay can be wrong, and a place you remember may have changed since you saw it. People in sight show only what can be seen of them.
 
 You also keep notes for yourself, shown in the <your_notes> block: your goals (what you want in the longer run), your intentions (what you plan to do next), your inferences (conclusions you drew, each with a confidence from 0 to 1 and the observations it rests on), your uncertainties (what you do not know), and a journal. These are your own earlier words. They are not facts about the world and they may be wrong: when what you see contradicts an inference, lower its confidence, change it, or drop it.
 
