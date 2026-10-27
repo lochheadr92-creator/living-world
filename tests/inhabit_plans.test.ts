@@ -12,7 +12,7 @@ function toolIntent(w: { tick: number }, wants: Intention['wants']): Intention {
   };
 }
 
-it('exposes the active plan and the carried/spoken-for/available split of the pack (version 7)', () => {
+it('exposes the active plan and the carried/spoken-for/available split of the pack', () => {
   const w = natural('reserve');
   run(w, 60);
   const p = adult(w);
@@ -20,7 +20,7 @@ it('exposes the active plan and the carried/spoken-for/available split of the pa
   p.commitments = [];
   p.inv = { wood: 2 };
   const obs = observeNow(w, p);
-  expect(obs.version).toBe(7);
+  expect(obs.version).toBe(8);
   expect(obs.plans).toHaveLength(1);
   expect(obs.plans![0].goal).toBe('make a pick');
   expect(obs.plans![0].wants).toEqual({ wood: 2 });

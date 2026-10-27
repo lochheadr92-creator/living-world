@@ -478,3 +478,7 @@ recently-ended private plans (each with the materials it has spoken for and its 
 split of the pack, and the settled trade and held techniques. Protocols 1-10 keep their historical observation shapes 1-6,
 so every older transcript replays unchanged. `reservedFor` (a pure read of the person's own commitments and plans) supplies
 the spoken-for amounts; no world truth is read and nothing is written.
+
+Stage 4 (2026-10-28): new runs speak protocols 13/14 (observation 8). The plan-site estimate now says the walk there is not
+counted (the engine's own eta is the marking-out only, because the spot is chosen after the option is offered). Protocols 1-12
+keep their historical observation shapes, so older transcripts replay unchanged.

@@ -31,10 +31,13 @@ export const PROTOCOL_V10 = 'inhabitant/10';
 /** 11 and 12 are 9 and 10 with the person's own plans and the carried/spoken-for/available split of the pack (observation shape 7). */
 export const PROTOCOL_V11 = 'inhabitant/11';
 export const PROTOCOL_V12 = 'inhabitant/12';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12];
+/** 13 and 14 are 11 and 12 with the plan-site estimate saying the walk there is not counted (observation shape 8). */
+export const PROTOCOL_V13 = 'inhabitant/13';
+export const PROTOCOL_V14 = 'inhabitant/14';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V12 : PROTOCOL_V11;
+  return memory ? PROTOCOL_V14 : PROTOCOL_V13;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
@@ -44,10 +47,11 @@ export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V7 || protocol === PROTOCOL_V8) return 5;
   if (protocol === PROTOCOL_V9 || protocol === PROTOCOL_V10) return 6;
   if (protocol === PROTOCOL_V11 || protocol === PROTOCOL_V12) return 7;
+  if (protocol === PROTOCOL_V13 || protocol === PROTOCOL_V14) return 8;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14;
 }
 
 export interface Proposal {

@@ -37,8 +37,9 @@ import { hyp } from '../sim/util';
  *  3 adds the limits an action accepts. */
 /** Bump when the observation's content or wording changes, and keep the old shape under the old version: replay rebuilds each ask's
  * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names.
- *  7 adds active/recent personal plans (with what each has spoken for) and the carried/spoken-for/available split of the pack. */
-export const OBSERVATION_VERSION = 7;
+ *  7 adds active/recent personal plans (with what each has spoken for) and the carried/spoken-for/available split of the pack.
+ *  8 says the walk to a site to be laid out is not counted in its estimate. */
+export const OBSERVATION_VERSION = 8;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -305,7 +306,7 @@ function describeOption(world: World, p: Person, o: Option, showScores: boolean,
     label: cleanText(o.label, 120),
     goal: cleanText(o.goal, 160),
     need: o.need,
-    eta: o.eta > 0 ? durationText(o.eta, version) : 'now',
+    eta: o.eta > 0 ? durationText(o.eta, version) + (version >= 8 && o.kind === 'plan_site' ? ' (the walk there is not counted)' : '') : 'now',
     target: describeTarget(world, p, o.targetId, version),
   };
   if (showScores) out.score = Math.round(o.util * 10) / 10;
