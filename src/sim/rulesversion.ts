@@ -80,10 +80,12 @@ import type { Settings, World } from './types';
 // through the ordinary deposit (src/sim/leave_heaviest.ts). No other option, score or threshold changes.
 // Version 34: reconsider a private plan when it cannot be fed. A material-fetch plan whose material the person knows no source
 // of, and no one has promised to bring, is relinquished with that reason instead of being retried forever (src/sim/intent.ts).
-export const CURRENT_RULES_VERSION = 34;
+// Version 35: a member who left a crew over a grievance against one of its members is not readmitted while that grievance
+// persists, so departure and re-entry no longer contradict each other in the same maintenance cycle (src/sim/crews.ts).
+export const CURRENT_RULES_VERSION = 35;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

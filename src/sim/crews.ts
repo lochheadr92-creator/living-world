@@ -9,6 +9,7 @@
 import { DAY } from './constants';
 import { addEvent, addLog } from './events';
 import { isRich } from './mood';
+import { runsRulesVersion } from './rulesversion';
 import type { Option } from './optutil';
 import { nearestHub } from './settlements';
 import type { Crew, Person, World } from './types';
@@ -78,6 +79,7 @@ export function crewsTick(world: World): void {
     for (const c of list) {
       if (c.members.length >= CREW_MAX) continue;
       const members = c.members.map((x) => byId.get(x)).filter((x): x is Person => !!x);
+      if (runsRulesVersion(world, 35) && members.some((q) => p.relations[q.id]?.grievance)) continue; // a grievance against one of them keeps them out, as departure says
       const friends = members.filter((q) => mutual(p, q)).length;
       if (friends >= Math.ceil(members.length / 2) && friends >= 2) {
         c.members.push(p.id);

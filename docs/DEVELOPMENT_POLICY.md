@@ -409,3 +409,9 @@ A private plan whose material the person knows no source of (with anything left,
 bring is relinquished with that reason, instead of being retried forever. `src/sim/intent.ts reviewIntentions` owns the rule,
 read from the person's own beliefs and requests only; `rich-no-reconsider` is the lab ablation. The rules-33 continuation
 reference was recorded from `39c3027` before this behaviour. Contract: `docs/PLAN_RECONSIDER.md`.
+
+### Rules version 35 — crew re-entry consistency (2026-10-28)
+
+A member who left a crew over a grievance against one of its members is not readmitted while that grievance persists, so departure
+and re-entry no longer contradict each other in one maintenance cycle. `src/sim/crews.ts crewsTick` owns the rule; the rules-34
+continuation reference was recorded from `31cdc6e` before it. Contract: `docs/CREW_REENTRY.md`.
