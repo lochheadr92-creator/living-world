@@ -402,3 +402,10 @@ Two presentation changes that make the viewer's text match the ledger, combined 
 ### Rules version 33 — leave the heaviest left-over (2026-10-28)
 
 A person who is short of wood or stone, knows a source worth the walk, and has no room for one more of it, because the pack is full of wood or stone that nothing they do asks for, may now also go and leave the heaviest such stack at a storehouse or shared workplace they already know that takes it. Before 33 the gather was silently not offered. The whole of it is `src/sim/leave_heaviest.ts` plus one call in `optMaterials` (`options_work.ts`) and a log line in the existing deposit handler (`act_resource.ts`); the trip is an ordinary `deposit`, so the unit moves through `transfer` with the usual ledger entry, store capacity and workplace acceptance, and nothing is claimed or reserved. Every part is gated on `runsRulesVersion(world, 33)`. The rules-32 full serialized continuation was recorded from `073ddb3` before any of it existed (`tests/v32_continuation.expected.json`). Lab ablation `rich-no-leave-heaviest` removes only this and changes nothing below 33. No score, weight or threshold of any other option changed. Contract, measurement and limits: [LEAVE_HEAVIEST.md](LEAVE_HEAVIEST.md). This is mechanism evidence only; no benefit to survival, food or output is claimed.
+
+### Rules version 34 — plan reconsideration (2026-10-28)
+
+A private plan whose material the person knows no source of (with anything left, counting regrowth) and no one has promised to
+bring is relinquished with that reason, instead of being retried forever. `src/sim/intent.ts reviewIntentions` owns the rule,
+read from the person's own beliefs and requests only; `rich-no-reconsider` is the lab ablation. The rules-33 continuation
+reference was recorded from `39c3027` before this behaviour. Contract: `docs/PLAN_RECONSIDER.md`.

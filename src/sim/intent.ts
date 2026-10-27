@@ -10,12 +10,13 @@
 // the world behind their back.
 //
 // In an authored world every function here is a no-op and `p.intentions` stays empty, so authored behaviour is untouched.
-import { BUILD_DEF, DAY, TOOL_RECIPE, homeNoun, isHomeType } from './constants';
+import { BUILD_DEF, DAY, SOURCE_ITEM, TOOL_RECIPE, homeNoun, isHomeType } from './constants';
 import { dayFraction } from './environment';
 import { addLog } from './events';
 import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
-import { recentFailure } from './knowledge';
+import { estimatedAmount, recentFailure } from './knowledge';
+import { runsRulesVersion } from './rulesversion';
 import {
   SHELTER_BATCH,
   believesHoused,
@@ -39,7 +40,7 @@ import {
 } from './provision';
 import type { Ctx, Option } from './optutil';
 import { MAX_INTENTIONS } from './types';
-import type { Activity, BuildingType, Intention, ItemKind, Items, Person, Request, ToolKind, World } from './types';
+import type { Activity, BeliefKind, BuildingType, Intention, ItemKind, Items, Person, Request, SourceType, ToolKind, World } from './types';
 import { hyp } from './util';
 
 /** how much a plan may tilt a choice. Deliberately small: a plan is a preference, never an override. */
@@ -70,6 +71,27 @@ export function setProjectAsks(on: boolean): void {
   projectAsks = on;
 }
 export const projectAsksOn = (): boolean => projectAsks;
+
+/**
+ * Rules 34: a material-fetch plan whose material the person knows no source of, and no one has promised to bring, is relinquished
+ * rather than retried forever. The switch beside the world (never saved, never hashed) lets the lab remove only this reconsideration.
+ */
+let reconsider = true;
+export function setReconsider(on: boolean): void {
+  reconsider = on;
+}
+export const reconsiderOn = (): boolean => reconsider;
+
+/** Does the person know a source of `item` they reckon has anything left, counting regrowth? */
+function hasKnownResource(world: World, p: Person, item: ItemKind): boolean {
+  for (const st of Object.keys(SOURCE_ITEM) as SourceType[]) {
+    if (SOURCE_ITEM[st] !== item) continue;
+    for (const b of beliefsByKind(p, [st as BeliefKind])) {
+      if (estimatedAmount(world, b) > 0) return true;
+    }
+  }
+  return false;
+}
 
 export const activeIntent = (p: Person): Intention | null => p.intentions.find((i) => i.status === 'active') ?? null;
 
@@ -799,6 +821,22 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
     i.stepItem = n.item;
     i.stepKey = n.key;
     i.blocked = n.blocked;
+    // rules 34+: a material-fetch plan with no known source and no promise owed is relinquished, rather than retried forever.
+    if (reconsider && runsRulesVersion(world, 34) && n.kind === 'get' && n.item) {
+      const owed = outstandingForPlan(world, p.id, n.item, i.id);
+      if (owed <= 0 && !hasKnownResource(world, p, n.item)) {
+        i.status = 'dropped';
+        i.ended = world.tick;
+        i.reason = `no known source of ${n.item} with anything left`;
+        i.step = '';
+        i.stepKind = 'none';
+        i.stepItem = null;
+        i.stepKey = null;
+        i.wants = {};
+        addLog(world, p, 'work', `Gave up on ${i.goal}: no known source of ${n.item} with anything left.`);
+        continue;
+      }
+    }
     // a step that keeps failing is worth giving up on, with the reason on the record rather than quietly retrying for ever
     if (n.target && recentFailure(world, p, n.target, 600)) {
       const f = recentFailure(world, p, n.target, 600)!;

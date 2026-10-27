@@ -78,10 +78,12 @@ import type { Settings, World } from './types';
 // Version 33: leave the heaviest left-over. A person whose hands are too full of wood or stone for a gather they want to start
 // may go and leave the heaviest such left-over (nothing of theirs asks for it) at a storehouse or shared workplace they know,
 // through the ordinary deposit (src/sim/leave_heaviest.ts). No other option, score or threshold changes.
-export const CURRENT_RULES_VERSION = 33;
+// Version 34: reconsider a private plan when it cannot be fed. A material-fetch plan whose material the person knows no source
+// of, and no one has promised to bring, is relinquished with that reason instead of being retried forever (src/sim/intent.ts).
+export const CURRENT_RULES_VERSION = 34;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
