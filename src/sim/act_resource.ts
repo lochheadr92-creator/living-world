@@ -499,7 +499,8 @@ registerHandler('deposit', {
       const txt = moved ? Object.entries(moved).map(([k, n]) => `${n} ${k}`).join(', ') : `${a.cycle} items`;
       const e = world.byId.get(a.targetId);
       const where = e && e.ent === 'site' ? 'the building site' : e && e.ent === 'building' ? 'the ' + (e.type === 'storehouse' ? 'storehouse' : 'home store') : 'the pile';
-      addLog(world, p, 'work', `Put ${txt} into ${where}.`);
+      // a left-over put down to make room says so (leave_heaviest.ts); every other deposit reads exactly as it always did
+      addLog(world, p, 'work', typeof a.data.leftAt === 'string' ? `Left ${txt} at ${a.data.leftAt} to free my hands.` : `Put ${txt} into ${where}.`);
     }
   },
 });
