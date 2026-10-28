@@ -20,7 +20,7 @@ it('exposes the active plan and the carried/spoken-for/available split of the pa
   p.commitments = [];
   p.inv = { wood: 2 };
   const obs = observeNow(w, p);
-  expect(obs.version).toBe(8);
+  expect(obs.version).toBe(9);
   expect(obs.plans).toHaveLength(1);
   expect(obs.plans![0].goal).toBe('make a pick');
   expect(obs.plans![0].wants).toEqual({ wood: 2 });

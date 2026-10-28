@@ -38,8 +38,9 @@ import { hyp } from '../sim/util';
 /** Bump when the observation's content or wording changes, and keep the old shape under the old version: replay rebuilds each ask's
  * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names.
  *  7 adds active/recent personal plans (with what each has spoken for) and the carried/spoken-for/available split of the pack.
- *  8 says the walk to a site to be laid out is not counted in its estimate. */
-export const OBSERVATION_VERSION = 8;
+ *  8 says the walk to a site to be laid out is not counted in its estimate.
+ *  9 says building work is a session, not a promise to finish the whole structure. */
+export const OBSERVATION_VERSION = 9;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -304,7 +305,7 @@ function describeOption(world: World, p: Person, o: Option, showScores: boolean,
     key: o.key,
     kind: o.kind,
     label: cleanText(o.label, 120),
-    goal: cleanText(o.goal, 160),
+    goal: cleanText(version >= 9 && o.kind === 'build' && o.goal.startsWith('to finish ') ? 'to work on ' + o.goal.slice('to finish '.length) : o.goal, 160),
     need: o.need,
     eta: o.eta > 0 ? durationText(o.eta, version) + (version >= 8 && o.kind === 'plan_site' ? ' (the walk there is not counted)' : '') : 'now',
     target: describeTarget(world, p, o.targetId, version),
