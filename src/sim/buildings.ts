@@ -1,3 +1,4 @@
+import { constructionAftermath } from './achievement';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { finishProject, hasTownships } from './townships';
 import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
@@ -196,6 +197,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
       }
       addFx(world, 'built', old.x + old.w / 2, old.y + old.h / 2, old.id);
       addEvent(world, 'build', `${who} finished rebuilding the ${hh ? hh.name + ' household’s ' : ''}${was} as a ${label}.`, builder ? [builder.id] : [], old.x + old.w / 2, old.y + old.h / 2);
+      constructionAftermath(world, old);
       return old;
     }
   }
@@ -227,6 +229,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
   const ownerText = isFacilityType(site.type) ? (owner ? ` for the ${world.households.find((h) => h.id === owner)?.name ?? ''} household` : ' for everyone') : hh ? ` for the ${hh.name} household` : '';
   addEvent(world, 'build', `${who}${site.type === 'fire' ? ' lit' : ' finished'} a ${label}${ownerText}.`, builder ? [builder.id] : [], b.x + b.w / 2, b.y + b.h / 2);
   finishProject(world, site, b, 'materials supplied and construction completed');
+  constructionAftermath(world, b);
   return b;
 }
 

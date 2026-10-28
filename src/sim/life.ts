@@ -1,3 +1,5 @@
+import { runsRulesVersion } from './rulesversion';
+import { hasAchievementAftermath } from './achievement';
 // A life of one's own (rich worlds only): what a person hopes for, what hurts them, and how age tells.
 //
 // * LIFE GOALS. On coming of age (or, for the founders, at the start) each adult takes up one hope from their nature: a home of
@@ -88,9 +90,9 @@ export const GOAL_TEXT: Record<GoalKind, string> = {
   respected: 'a good name among their neighbours',
 };
 
-function pickGoal(world: World, p: Person): GoalKind {
+function pickGoal(world: World, p: Person, eligible?: GoalKind[]): GoalKind {
   const t = p.traits;
-  const r = hashUnit(key(world), p.id, 0x60a1);
+  const r = hashUnit(key(world), p.id, eligible ? (p.goal?.done ?? 0) : 0x60a1);
   // the nature leans, the draw decides
   const weights: [GoalKind, number][] = [
     ['home', 1 + t.caution],
@@ -99,13 +101,14 @@ function pickGoal(world: World, p: Person): GoalKind {
     ['stocked', 0.6 + t.caution + t.diligence * 0.5],
     ['respected', 0.5 + t.generosity * 1.4],
   ];
-  const total = weights.reduce((s, w) => s + w[1], 0);
+  const choices = eligible ? weights.filter(([kind]) => eligible.includes(kind)) : weights;
+  const total = choices.reduce((s, w) => s + w[1], 0);
   let x = r * total;
-  for (const [k, w] of weights) {
+  for (const [k, w] of choices) {
     x -= w;
     if (x <= 0) return k;
   }
-  return 'home';
+  return eligible ? choices.at(-1)![0] : 'home';
 }
 
 /** how far along the goal is, 0..1, read from the world */
@@ -163,7 +166,15 @@ export function lifeTickRich(world: World, p: Person): void {
     g = p.goal = { kind: pickGoal(world, p), since: world.tick, progress: 0, done: 0 };
     addLog(world, p, 'life', `What I hope for: ${GOAL_TEXT[g.kind]}.`);
   }
-  if (g.done) return;
+  if (g.done) {
+    if (!hasAchievementAftermath(world) || world.tick-g.done < 3*DAY) return;
+    const previous = [...(g.previous ?? []), { kind: g.kind, done: g.done }];
+    const eligible = (Object.keys(GOAL_TEXT) as GoalKind[]).filter(kind =>
+      !previous.some(q => q.kind === kind) && goalProgress(world, p, {kind, since:world.tick, progress:0, done:0}) < 1);
+    if (!eligible.length) return; // a fulfilled life is valid; never manufacture a new unmet need
+    g = p.goal = { kind:pickGoal(world,p,eligible), since:world.tick, progress:0, done:0, previous };
+    addLog(world,p,'life',`After ${GOAL_TEXT[previous.at(-1)!.kind]}, I now hope for ${GOAL_TEXT[g.kind]}.`);
+  }
   g.progress = Math.round(goalProgress(world, p, g) * 100) / 100;
   if (g.progress >= 1) {
     g.done = world.tick;
@@ -181,7 +192,7 @@ export function describeGoal(world: World, p: Person): string | null {
   const g = p.goal;
   if (!g) return null;
   if (g.done) return `has what they hoped for, ${GOAL_TEXT[g.kind]}`;
-  return `hopes for ${GOAL_TEXT[g.kind]} (${Math.round(g.progress * 100)}% there)`;
+  return `hopes for ${GOAL_TEXT[g.kind]} (${Math.round(g.progress * 100)}% there)${g.previous?.length ? `; earlier achieved: ${g.previous.map(q=>GOAL_TEXT[q.kind]).join(", ")}` : ""}`;
 }
 export function describeInjury(world: World, p: Person): string | null {
   const i = p.injury;
@@ -191,3 +202,13 @@ export function describeInjury(world: World, p: Person): string | null {
 }
 
 export type { Goal, Injury, SkillKey };
+
+/** Reject malformed new history without changing an earlier save's meaning. */
+export function validateGoalHistory(w: World): void {
+ for (const p of w.persons) {
+  const g=p.goal;if(!g || g.previous === undefined)continue;
+  if(!runsRulesVersion(w,38)||!Array.isArray(g.previous)||g.previous.length>4||
+    g.previous.some(q=>!q||!Object.hasOwn(GOAL_TEXT,q.kind)||!Number.isSafeInteger(q.done)||q.done<=0||q.done>w.tick||q.kind===g.kind)||
+    new Set(g.previous.map(q=>q.kind)).size!==g.previous.length)throw new Error('Invalid fulfilled-goal history');
+ }
+}

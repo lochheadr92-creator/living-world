@@ -444,6 +444,8 @@ export interface Payoff {
 /** what a person hopes for (life.ts; rich worlds only): the hope, since when, how far along (read from the world), when reached (0: not yet) */
 export type GoalKind = 'home' | 'family' | 'trade' | 'stocked' | 'respected';
 export interface Goal {
+  /** Earlier fulfilled hopes; at most one per kind, added only by rules 38 onward. */
+  previous?: { kind: GoalKind; done: number }[];
   kind: GoalKind;
   since: number;
   progress: number;
