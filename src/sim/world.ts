@@ -24,7 +24,8 @@ import './social';
 
 import { stepActivity, abortActivity } from './activities';
 import { settleIntentions } from './intent';
-import { BELIEF_REFRESH_EVERY, DECAY_PER_TICK, PERCEIVE_EVERY, PERISHABLE, PROJECT_PATIENCE, SITE_PATIENCE } from './constants';
+import { BELIEF_REFRESH_EVERY, DECAY_PER_TICK, PERCEIVE_EVERY, PERISHABLE, PROJECT_PATIENCE, SITE_PATIENCE, isHomeType } from './constants';
+import { winterShelterWindow } from './winter_shelter';
 import { decide, reviewActivity, urgentInterrupt } from './decision';
 import { isProjectSite } from './act_build';
 import { cancelSite, destroyBuilding } from './buildings';
@@ -284,6 +285,10 @@ function spoilGoods(world: World): void {
 function clearStaleSites(world: World): void {
   for (const site of world.sites.slice()) {
     if (world.tick - Math.max(site.lastWorkTick, site.createdTick) < (isProjectSite(site) ? PROJECT_PATIENCE : SITE_PATIENCE)) continue;
+    // Rules 34: while the winter window is open, a household's own home site is not cancelled for idleness. Winter is
+    // exactly when a half-finished home must be allowed to wait for its materials and its builders, not be swept up and
+    // re-laid in the cold. Below version 34 (and outside the window) a home site idles and is cancelled exactly as it was.
+    if (winterShelterWindow(world) && isHomeType(site.type)) continue;
     // someone on their way to it counts as interest
     const attended = world.persons.some((q) => q.alive && q.activity && q.activity.targetId === site.id && (q.activity.kind === 'build' || q.activity.kind === 'haul'));
     if (attended) continue;

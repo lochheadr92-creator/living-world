@@ -36,6 +36,7 @@ import { setFatalHold } from '../../src/sim/lifecycle';
 import { setFoodPreparation } from '../../src/sim/provision';
 import { setShelterPlans } from '../../src/sim/shelter';
 import { leisureOnSwitch, setLeisure } from '../../src/sim/leisure';
+import { setWinterShelter } from '../../src/sim/winter_shelter';
 import { setTableEating } from '../../src/sim/tableeating';
 import { setHabitationAdmissions } from '../../src/sim/habitation';
 import { defProbe, defReset, defSnapshot, setWolfDefence, spearOf } from '../../src/sim/defence';
@@ -249,6 +250,20 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-adult-newborn-skills') return {spec:label,summary:'restore adult-range skills for newly created children',apply:()=> 'historical skill initialisation restored for subsequent births/arrivals',install(){const was=developmentOn();setDevelopment(false);return ()=>setDevelopment(was);}};
   if (kind === 'rich-no-work-tastes') return {spec:label,summary:'remove personal work tastes only; changes nothing below version 31',apply:()=> 'work tastes off',install(){const was=workTastesOn();setWorkTastes(false);return ()=>setWorkTastes(was);}};
   if (kind === 'rich-no-leave-heaviest') return {spec:label,summary:'remove leaving a left-over to free the hands only; changes nothing below version 33',apply:()=> 'leave-heaviest off',install(){const was=leaveHeaviestOn();setLeaveHeaviest(false);return ()=>setLeaveHeaviest(was);}};
+  if (kind === 'rich-no-winter-shelter') {
+    return {
+      spec: label,
+      summary: 'current dynamics with winter shelter preparation removed: no pre-winter cue nudges laying out, finishing or mending a home, and a household home site is blocked by its own workshop site and the open-site cap and is cancelled for idleness as it was before. Laying out, building, owning and living in a home are unchanged, and below rules version 34 it changes nothing',
+      apply: (w) => {
+        w.settings.dynamics = 'rich';
+        return 'rich dynamics on, winter shelter preparation off';
+      },
+      install: () => {
+        setWinterShelter(false);
+        return () => setWinterShelter(true);
+      },
+    };
+  }
   if (kind === 'rich-no-leisure') return {spec:label,summary:'restore the single idle fallback (potter about near home) and nothing else; below version 28 it changes nothing',apply:(w)=>{w.settings.dynamics='rich';return 'rich dynamics on, varied spare time off';},install(){const was=leisureOnSwitch();setLeisure(false);return ()=>setLeisure(was);}};
   if (kind === 'rich-remote-markets') return {spec:label,summary:'restore legacy remote market exchanges',apply:()=> 'remote market behavior restored',install(){const was=localMarketOn();setLocalMarket(false);return ()=>setLocalMarket(was);}};
   if (kind === 'rich-no-civic-choice') return {spec:label,summary:'restore single-organiser project acceptance',apply:()=> 'collective coordinator choice off',install(){const was=civicChoiceOn();setCivicChoice(false);return ()=>setCivicChoice(was);}};

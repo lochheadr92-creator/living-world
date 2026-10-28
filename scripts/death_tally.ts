@@ -5,6 +5,7 @@
 //   --bin D     days per row (default 24)
 //   --current   the world settings a product world gets (as bench.ts --current)
 //   --out FILE  write the rows, the death records and the totals as JSON
+//   --no-winter-shelter  remove winter shelter preparation only (rules 34's cue, nudges and home-site exemptions), the `rich-no-winter-shelter` arm
 // The run stops after the first row with nobody alive (the rest would be zeros).
 // The conception funnel mirrors conceptionTick (src/sim/lifecycle.ts) at the moment a row is taken. It is a snapshot of the
 // living women, not a count over the row, and a mirror: each woman is put under the FIRST gate she fails, in the order listed
@@ -26,6 +27,7 @@ import type { ProfileName } from '../src/sim/profiles';
 import { personOf } from '../src/sim/social';
 import type { Person, World } from '../src/sim/types';
 import { stepWorld } from '../src/sim/world';
+import { setWinterShelter } from '../src/sim/winter_shelter';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
 const opt = (name: string, dflt: string): string => {
@@ -41,6 +43,7 @@ const out = opt('out', '');
 const profile = opt('profile', 'normal') as ProfileName;
 const settings = settingsForProfile(profile, seed, { harsh: flag('harsh'), immigration: opt('arrivals', 'on') !== 'off' });
 if (flag('current')) Object.assign(settings, currentWorldSettings(profile, seed, { harsh: settings.harsh, immigration: settings.immigration }));
+if (flag('no-winter-shelter')) setWinterShelter(false);
 
 const SNAP_EVERY = 6;
 const GATES = ['outOfAge', 'noPartner', 'pregnant', 'partnerNotHere', 'noHome', 'threeKids', 'spacing', 'lowFood', 'lowHealth', 'eligible'] as const;

@@ -2,6 +2,7 @@ import { hasTownships, mayWorkProject, participation, townshipOf } from './towns
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
 import { explainsHousing } from './shelter';
+import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
 import { makesSpears } from './defence';
 import { isThreat } from './wildlife';
 import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE, WEIGHT, WORK, homeNoun, isHomeType, isSolidHome } from './constants';
@@ -480,6 +481,8 @@ function optSites(ctx: Ctx): void {
   if (ctx.drives.hunger > 35 || ctx.drives.thirst > 35 || ctx.drives.energy > 45) return;
   for (const { b, rel } of relevantSites(ctx)) {
     const e = eta(ctx, b.x, b.y);
+    // Rules 34: a home of the person's own household gets the winter nudge to be finished before winter.
+    const ownHomeSite = b.hh === p.hhId && isHomeType(b.btype);
     const fail = recentFailure(world, p, b.id, 250);
     if (fail) {
       addBlocked(ctx, 'build', 'Work on the building site', b.id, `tried recently: ${fail.reason}`, 'site');
@@ -505,6 +508,7 @@ function optSites(ctx: Ctx): void {
     if (any) {
       const sc = new Scorer().add('carrying what it needs', 36 * rel.mult + 8).add('walking', -pen(e));
       if (committed) sc.add('I promised', 20);
+      if (winterCue(world) && ownHomeSite) sc.add('winter is coming', WINTER_SHELTER_BOOST);
       const util = sc.total * weatherMult(ctx);
       addOption(ctx, {
         kind: 'haul',
@@ -557,6 +561,7 @@ function optSites(ctx: Ctx): void {
     }
     const sc = new Scorer().add('building work to do', 33 * tm.work * rel.mult + 4).add('walking', -pen(e)).add('good builder', (p.skills.build - 1) * 6);
     if (committed) sc.add('I promised', 26);
+    if (winterCue(world) && ownHomeSite) sc.add('winter is coming', WINTER_SHELTER_BOOST);
     const util = sc.total * nightMult(ctx) * weatherMult(ctx);
     addOption(ctx, {
       kind: 'build',
@@ -620,17 +625,21 @@ function optPlanBuild(ctx: Ctx): void {
     return;
   }
   const tm = traitMods(p);
-  const mySites = beliefsByKind(p, ['site']).filter((b) => b.hh === hh.id);
+  // Rules 34: while the winter window is open, a household's own home is not blocked from being laid out by its own
+  // workshop site, so only a home the household has already started counts against starting one. Below 34 (and outside the
+  // window) a workshop occupies the household's site slot exactly as it always did.
+  const ownHomeOnly = winterShelterWindow(world) && wantsHome;
+  const mySites = beliefsByKind(p, ['site']).filter((b) => b.hh === hh.id && (!ownHomeOnly || isHomeType(b.btype)));
   if (mySites.length > 0) {
     // Not a dead end: the household has already started something, and the site's own card, the build and haul options and
     // (from rules version 7) the shelter plan are where a viewer follows it from here.
     if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', `the household has already laid out a ${BUILD_DEF[(mySites[0].btype ?? 'hut') as BuildingType].label}`);
     return;
   }
-  if (world.sites.filter((s) => s.hhId === hh.id).length > 0) return; // someone in my household already started one
+  if (world.sites.filter((s) => s.hhId === hh.id && (!ownHomeOnly || isHomeType(s.type))).length > 0) return; // someone in my household already started one
   const rules = rulesOf(world);
   const anchor = settlementAnchor(ctx);
-  if (openSitesNear(world, anchor) >= rules.maxOpenSites) {
+  if (!ownHomeOnly && openSitesNear(world, anchor) >= rules.maxOpenSites) {
     if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', 'too much already being built here at once');
     return;
   }
@@ -649,6 +658,7 @@ function optPlanBuild(ctx: Ctx): void {
     }
     const sc = new Scorer().add(why, base * tm.work);
     if (duskish && type === 'lean_to') sc.add('night is coming', 8);
+    if (winterCue(world) && (type === 'lean_to' || type === 'hut')) sc.add('winter is coming', WINTER_SHELTER_BOOST);
     const util = sc.total * nightMult(ctx) * weatherMult(ctx);
     addOption(ctx, {
       kind: 'plan_site',
@@ -804,6 +814,7 @@ function optRepairAndFire(ctx: Ctx): void {
       // a roof that has all but gone is an emergency in cold or wet weather
       const chill = Math.max(0, Math.min(1, (10 - world.weather.temp) / 15)) + 0.4 * Math.min(1, world.weather.rain + world.weather.storm);
       const sc = new Scorer().add(own ? 'needs repair' : 'a neighbour’s home is falling apart', (18 + (60 - cond) * 0.6) * (1 + 0.5 * Math.min(1, chill)) * tm.work * stake).add('walking', -pen(e));
+      if (winterCue(world) && own) sc.add('winter is coming', WINTER_SHELTER_BOOST);
       const util = sc.total * (cond < 35 ? Math.max(nightMult(ctx), 0.55) : nightMult(ctx)) * weatherMult(ctx);
       addOption(ctx, {
         kind: 'repair',

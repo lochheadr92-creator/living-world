@@ -78,10 +78,14 @@ import type { Settings, World } from './types';
 // Version 33: leave the heaviest left-over. A person whose hands are too full of wood or stone for a gather they want to start
 // may go and leave the heaviest such left-over (nothing of theirs asks for it) at a storehouse or shared workplace they know,
 // through the ordinary deposit (src/sim/leave_heaviest.ts). No other option, score or threshold changes.
-export const CURRENT_RULES_VERSION = 33;
+// Version 34: WINTER SHELTER PREPARATION. A deterministic pre-winter cue (the two days before the last WINTER_LENGTH days of
+// the year, the same window provision.ts reads) nudges a fed adult to lay out, finish or mend the household's home before
+// winter, and while the window is open a household's own home is not blocked by its own workshop site or the open-site cap and
+// is not cancelled for idleness. See src/sim/winter_shelter.ts and docs/WINTER_SHELTER.md. Nothing below version 34 changes.
+export const CURRENT_RULES_VERSION = 34;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
