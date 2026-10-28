@@ -1,5 +1,23 @@
 # Civilisation implementation register
 
+## Personal trust and project help — 2026-10-28
+
+Continued local main from `4135461`; nothing pushed. Rules **39** use the asker's
+existing personal trust to choose among otherwise eligible visible helpers for a
+tool plan's material request. No new reward, resource, persistent state or utility
+bonus. Observation **12**, protocols **21/22**, and the actual manual action button
+explain the preference without guaranteeing cooperation. Earlier rules/protocols
+retain recorded semantics. The pre-successor rules-38 full-state continuation was
+captured in `13b0241` and has not been regenerated.
+
+Final suite **1,306/1,306 in 171 files**; typecheck/build pass. Staged on/off comparison
+changes Cora/Ben as intended; both physically supply a stone and Ada crafts an axe.
+Actual manual panel: two offered choices, delivered stone, completed axe, entire
+browser serialized state equals transcript replay (tick 885, hash `36b6d3c1`).
+Ordinary Normal meadow/river/forest, six days each: 0/1/1 changed recipients; zero
+delivered project material and two declines. No population-benefit claim.
+Map, ownership, review findings, scripts and evidence: [MEANINGFUL_CONNECTIONS.md](MEANINGFUL_CONNECTIONS.md).
+
 ## Six-stage inhabitant programme — 2026-10-28
 
 Continued local main from `9871662`; nothing pushed. Current rules **38** add locally

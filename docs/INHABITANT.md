@@ -9,6 +9,13 @@ been measured (section 8).
 Status labels: VERIFIED means read in the code or checked by a test in this repository; LIKELY means inferred from the code and
 not yet exercised; UNKNOWN means not determined.
 
+Current observation update (2026-10-28): observation **12**, protocols **21/22**, add
+an optional personal `selectionReason` for tool-material helpers. The reason is
+derived from the asker's own relationship and shown on the manual button as well
+as in the restricted option. Protocols 19/20 still map to observation 11, without
+the new wording/field. Rules 39 own the helper-selection change; historical rules
+remain unchanged. Full rendered/manual replay and limits: [MEANINGFUL_CONNECTIONS.md](MEANINGFUL_CONNECTIONS.md).
+
 ## 1. Architecture assessment (before coding)
 
 ### 1.1 Canonical documents

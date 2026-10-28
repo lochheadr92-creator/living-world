@@ -26,8 +26,9 @@ import { welfareOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
 import { hashUnit } from './rng';
-import { spark } from './relations';
-import type { ActivityKind, Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity } from './types';
+import { spark, trustOf } from './relations';
+import { runsRulesVersion } from './rulesversion';
+import type { ActivityKind, Belief, ConvPurpose, ItemKind, Items, Person, SeenEntity, World } from './types';
 import { clamp, hyp } from './util';
 
 interface Cand {
@@ -37,6 +38,13 @@ interface Cand {
   fam: number;
   d: number;
 }
+
+// Lab-only removal of the recipient choice. No relationship reward or utility bonus:
+// existing personal trust chooses among helpers the ordinary eligibility checks allow.
+let projectHelperChoice = true;
+export const projectHelperChoiceOn = (): boolean => projectHelperChoice;
+export function setProjectHelperChoice(on: boolean): void { projectHelperChoice = on; }
+const hasProjectHelperChoice = (w: World): boolean => projectHelperChoice && isRich(w) && runsRulesVersion(w, 39);
 
 function candidates(ctx: Ctx, includeAvoided = false): Cand[] {
   const { world, p } = ctx;
@@ -56,7 +64,7 @@ function candidates(ctx: Ctx, includeAvoided = false): Cand[] {
   return out;
 }
 
-function mkSocial(ctx: Ctx, c: Cand, purpose: ConvPurpose, conv: ConvData, label: string, goal: string, need: Option['need'], sc: Scorer, tag: string, keySuffix = ''): void {
+function mkSocial(ctx: Ctx, c: Cand, purpose: ConvPurpose, conv: ConvData, label: string, goal: string, need: Option['need'], sc: Scorer, tag: string, keySuffix = '', selectionReason = ''): void {
   const { world, p } = ctx;
   const q = c.q;
   const e = (c.d * 1.18) / Math.max(0.03, ctx.speed);
@@ -71,6 +79,7 @@ function mkSocial(ctx: Ctx, c: Cand, purpose: ConvPurpose, conv: ConvData, label
     key: `socialize:${q.id}:${purpose}${keySuffix}`,
     targetId: q.id,
     tag,
+    ...(selectionReason ? { selectionReason } : {}),
     make: () => {
       const dx = p.x - c.s.x;
       const dy = p.y - c.s.y;
@@ -271,7 +280,11 @@ function optRequest(ctx: Ctx): void {
       // on the table and the ask carries the cost of the alternative: a quick trip of their own beats asking a favour, a long one
       // may not.
       const quick = ctx.options.some((o) => o.yields === item && o.eta < 260);
-      for (const c of cands) {
+      // Stable ties preserve sight order. This reads only the asker's relationship;
+      // no remote helper inventory, plans, willingness or world event is consulted.
+      const helpers = hasProjectHelperChoice(world)
+        ? cands.slice().sort((a, b) => trustOf(p, b.q.id) - trustOf(p, a.q.id)) : cands;
+      for (const c of helpers) {
         if (c.d > 12 || !c.s.carrying.includes(item)) continue;
         if (c.s.child || stageOf(world, c.q) === 'child') continue;
         if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
@@ -304,6 +317,8 @@ function optRequest(ctx: Ctx): void {
           sc,
           'request',
           ':plan:' + item,
+          hasProjectHelperChoice(world) && trustOf(p, c.q.id) !== 10
+            ? (trustOf(p, c.q.id) > 10 ? `I trust ${c.q.name}; they may still need it themselves` : `I am wary of ${c.q.name}, but can still ask`) : '',
         );
         break; // one person at a time about one thing
       }

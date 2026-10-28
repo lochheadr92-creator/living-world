@@ -171,6 +171,7 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
           },
           h('span', { class: 'inhabit-take-l' }, o.label),
           ...(o.key.includes('#choice:') ? [h('span', { class: 'inhabit-take-t' }, o.goal)] : []),
+          ...(!o.key.includes('#choice:') && o.selectionReason ? [h('span', { class: 'inhabit-take-t' }, o.selectionReason)] : []),
           h('span', { class: 'inhabit-take-t' }, o.target ?? ''),
           ...(obs.version >= 6 ? [h('span', { class: 'inhabit-take-t' }, `About ${o.eta}`)] : []),
         );

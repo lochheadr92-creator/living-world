@@ -1,5 +1,41 @@
 # Stage verification runbook
 
+## Rules 39 project-helper connection — 28 October 2026
+
+Run from `C:\dev\Claude Experiment\living-world-integrate`; these checks need no
+model key and must use new output directories. No push is needed. Full results,
+staged prerequisites and the preserved ordinary nulls are in `MEANINGFUL_CONNECTIONS.md`.
+
+Focused mechanism and compatibility:
+`npx vitest run tests/project_helpers.test.ts tests/project_ask.test.ts tests/project_cooperation.test.ts tests/social_memory.test.ts tests/inhabitant_versions.test.ts tests/inhabitant_memory.test.ts tests/inhabit_manual.test.ts tests/inhabit_plans.test.ts --maxWorkers=2`
+
+Staged gift → trust → offered request → physical transfer → completed axe, with
+enabled/disabled forks from one checkpoint and exact serialized replays:
+`npx vite-node scripts/project_helpers_inhabitant.ts -- inhabitant_evidence/project-helpers-new`
+
+Ordinary observation (repeat once for each registered seed meadow, river, forest):
+`npx vite-node scripts/project_helpers_observe.ts -- inhabitant_evidence/project-helpers-meadow-new meadow`
+This is a six-day Normal occurrence probe with immigration off, no supply/relationship
+edits, source manifest freeze and conservation checks. It compares options at the
+same decision; it is not an independently evolved population ablation or benefit test.
+The three registered seeds finished in 8–9 seconds each locally.
+
+Rendered manual continuation:
+
+1. Start a free local Vite port, e.g. `npx vite --port 5275 --strictPort`.
+2. Open `http://127.0.0.1:5275/scripts/browser/project_helpers_manual.html?start=/inhabitant_evidence/project-helpers-new/comparison-start.json`.
+3. This **staged verification bootstrap** reuses the production renderer, UI, clock
+   and InhabitDriver. Inspect the restricted panel, select its offered stone request,
+   wait for the actual outcome, then select the offered axe crafting action and wait
+   for success. Save screenshots and the panel transcript. Do not choose from developer state.
+4. After the journey, use **Save verification bundle** to export the start, exact
+   browser final serialized state and transcript. This extra control is verification
+   instrumentation only; it does not mutate the simulation or choose actions.
+5. Replay: `npx vite-node scripts/project_helpers_manual_replay.ts -- <downloaded-bundle.json> inhabitant_evidence/project-helpers-manual-new`.
+   Requires the full browser state to equal replay, the fulfilled stone request,
+   finished axe, recorded success, matching hash and conservation. Do not regenerate
+   a natural world in place of the recorded staged checkpoint.
+
 ## Manual inhabitant verification — no API key; browser-driven
 
 `manual=1` drives the person with `manualModel()` (`src/app/inhabit.ts`), answered **by hand** in the inhabitant panel with no

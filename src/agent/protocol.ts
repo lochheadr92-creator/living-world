@@ -42,10 +42,13 @@ export const PROTOCOL_V17 = 'inhabitant/17';
 export const PROTOCOL_V18 = 'inhabitant/18';
 export const PROTOCOL_V19 = 'inhabitant/19';
 export const PROTOCOL_V20 = 'inhabitant/20';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20];
+/** 21/22 explain the trust used to select a project helper (observation 12). */
+export const PROTOCOL_V21 = 'inhabitant/21';
+export const PROTOCOL_V22 = 'inhabitant/22';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V20 : PROTOCOL_V19;
+  return memory ? PROTOCOL_V22 : PROTOCOL_V21;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
@@ -59,10 +62,11 @@ export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V15 || protocol === PROTOCOL_V16) return 9;
   if (protocol === PROTOCOL_V17 || protocol === PROTOCOL_V18) return 10;
   if (protocol === PROTOCOL_V19 || protocol === PROTOCOL_V20) return 11;
+  if (protocol === PROTOCOL_V21 || protocol === PROTOCOL_V22) return 12;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22;
 }
 
 export interface Proposal {

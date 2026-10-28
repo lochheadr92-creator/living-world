@@ -115,7 +115,7 @@ export function rankOptions(ctx: Ctx): Option[] {
  */
 function because(o: Option, plan: Intention | null = null, trade = ''): string {
   const forPlan = planReason(plan, o);
-  const lead = [forPlan, trade, o.workTasteReason].filter(Boolean).join(' · ');
+  const lead = [forPlan, trade, o.workTasteReason, o.selectionReason].filter(Boolean).join(' · ');
   if (!o.parts.length) return lead ? `${lead} · ${o.goal}` : o.goal;
   const top = [...o.parts].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
   const parts = top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');

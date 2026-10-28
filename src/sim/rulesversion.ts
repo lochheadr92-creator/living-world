@@ -85,10 +85,11 @@ import type { Settings, World } from './types';
 // Version 36: unfinished tool plans yield carried material to the known household home after a day.
 // Version 37: a full pack can deliver a partial household shelter batch through ordinary hauling.
 // Version 38: witnessed construction satisfaction and a new unfulfilled hope after three days of fulfilment.
-export const CURRENT_RULES_VERSION = 38;
+// Version 39: personal trust selects among feasible helpers for a tool plan's material ask.
+export const CURRENT_RULES_VERSION = 39;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
