@@ -14,6 +14,7 @@
 import { writeFileSync } from 'node:fs';
 import { BIRTH_SPACING_TICKS, BUILD_DEF, DAY, DAYS_PER_YEAR } from '../src/sim/constants';
 import { foodUnits } from '../src/sim/economy';
+import { generateOptions, rankOptions } from '../src/sim/decision';
 import { createWorld } from '../src/sim/factory';
 import { indoorHome } from '../src/sim/habitation';
 import { WINTER_LENGTH, winterDepth } from '../src/sim/hardship';
@@ -207,21 +208,32 @@ interface Row {
   flow: Flow;
 }
 
+/**
+ * Ask the real option planner, in the observer mode the inspector uses (it leaves no trace), what each grown-up without a solid home
+ * could do about it right now: is laying out a lean-to or hut on their list, where does it rank, or what blocked it.
+ */
 function reasonsOf(world: World, adults: Person[]): { noSolidAdults: number; reasons: Record<string, number> } {
   const reasons: Record<string, number> = {};
   let noSolidAdults = 0;
+  const isShelter = (o: { kind: string; label: string; targetId: number }): boolean => o.kind === 'plan_site' && o.targetId === 0 && /lean-to|hut/.test(o.label);
   for (const p of adults) {
     const hh = householdById(world, p.hhId);
     const home = hh && hh.homeId ? world.byId.get(hh.homeId) : undefined;
     const type = home && home.ent === 'building' ? home.type : 'none';
     if (type !== 'none' && type !== 'lean_to') continue;
     noSolidAdults++;
-    const d = p.lastDecision;
-    const where = type === 'none' ? 'no home' : 'lean-to only';
-    const blocked = d?.blocked.find((o) => o.label.startsWith('Lay out'));
-    const offered = d?.alternatives.find((o) => o.label.startsWith('Lay out'));
-    const why = d?.chosen && ['plan_site', 'build', 'haul'].includes(d.chosen.kind) ? `already building (${d.chosen.kind})` : blocked ? (blocked.blocked ?? 'blocked').replace(/[0-9]+/g, '#') : offered ? `offered, outranked by ${d?.chosen?.kind ?? 'nothing'}` : 'not on the list at all';
-    const key = `${where}: ${why}`;
+    const ctx = generateOptions(world, p, true, true);
+    const ranked = rankOptions(ctx);
+    const at = ranked.findIndex(isShelter);
+    const blocked = ctx.blocked.find(isShelter);
+    const sites = world.sites.filter((s) => s.hhId === p.hhId).map((s) => s.type);
+    const building = p.activity && ['plan_site', 'build', 'haul'].includes(p.activity.kind) ? `(building now: ${p.activity.kind}) ` : '';
+    let why: string;
+    if (at >= 0) why = `on the list, ranked ${at === 0 ? '1st' : at < 5 ? '2nd-5th' : at < 10 ? '6th-10th' : 'below 10th'} by ${ctx.night ? 'night' : 'day'}, behind ${at === 0 ? 'nothing' : ranked[0].kind}`;
+    else if (blocked) why = `blocked: ${(blocked.blocked ?? '').replace(/[0-9]+/g, '#')}`;
+    else if (sites.length) why = `silent: the household already has a site (${sites.join('+')})`;
+    else why = 'absent: no option and no reason noted';
+    const key = `${type === 'none' ? 'no home' : 'lean-to only'}: ${building}${why}`;
     reasons[key] = (reasons[key] ?? 0) + 1;
   }
   return { noSolidAdults, reasons };
@@ -329,7 +341,7 @@ for (const r of rows) {
   const f = r.flow;
   const top = Object.entries(f.reasons)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 3)
+    .slice(0, 4)
     .map(([k, v]) => `${v}x ${k}`)
     .join(' | ');
   console.log(`${String(r.day).padStart(4)}  built ${fmt(f.built).padEnd(26)} gone ${fmt(f.gone).padEnd(26)} starts ${fmt(f.starts).padEnd(40)} no solid home ${String(f.noSolidAdults).padStart(2)}: ${top || '-'}`);
