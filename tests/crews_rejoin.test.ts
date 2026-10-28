@@ -26,13 +26,28 @@ it('a member who left over a grievance is not readmitted while the grievance per
   expect(crew.members.includes(p.id)).toBe(false);
 });
 
-it('still permits re-entry once the grievance is gone', () => {
+it('rejoins only after a meaningful change: leaves, stays out across passes, then rejoins once the grievance is cleared', () => {
   const { w, p, x } = make();
-  p.relations[x.id].grievance = null;
   w.tick = 617;
   crewsTick(w);
-  const crew = w.crews![0];
-  expect(crew.members.includes(p.id)).toBe(true);
+  expect(w.crews![0].members.includes(p.id)).toBe(false); // left
+  w.tick = 1217;
+  crewsTick(w);
+  expect(w.crews![0].members.includes(p.id)).toBe(false); // still out, grievance persists
+  p.relations[x.id].grievance = null;
+  w.tick = 1817;
+  crewsTick(w);
+  expect(w.crews![0].members.includes(p.id)).toBe(true); // rejoin after the cause is gone
+});
+
+it('a member who moved to another settlement is not readmitted (rules 35)', () => {
+  const { w, p, x } = make();
+  p.relations[x.id].grievance = null; // no grievance; the cause is location alone
+  w.extraSettlements = [{ x: 70, y: 70 }];
+  p.x = 70; p.y = 70;
+  w.tick = 617;
+  crewsTick(w);
+  expect(w.crews![0].members.includes(p.id)).toBe(false); // left for the move and not readmitted from afar
 });
 
 it('changes nothing below rules 35', () => {

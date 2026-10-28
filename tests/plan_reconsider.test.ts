@@ -4,6 +4,7 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import { makeCtx } from '../src/sim/optutil';
 import { reviewIntentions, setReconsider } from '../src/sim/intent';
 import { putBelief } from '../src/sim/knowledge';
+import { createRequest } from '../src/sim/social';
 import type { Intention } from '../src/sim/types';
 
 function toolIntent(w: { tick: number }): Intention {
@@ -16,7 +17,6 @@ function make(seed = 'reconsider') {
   p.needs = { hunger: 100, thirst: 100, energy: 100, warmth: 100, safety: 100, social: 100 };
   p.intentions = [toolIntent(w)];
   p.inv = {};
-  // clear every tree belief so no source of wood is known
   for (const k of Object.keys(p.beliefs)) if (p.beliefs[Number(k)].kind === 'tree') delete p.beliefs[Number(k)];
   if (p.bykind.tree) p.bykind.tree = [];
   return { w, p };
@@ -39,6 +39,14 @@ it('retains the plan when a source of the material is known', () => {
   expect(p.intentions[0].status).toBe('active');
 });
 
+it('retains the plan when the material is owed by a live promise', () => {
+  const { w, p } = make();
+  const other = w.persons[1];
+  createRequest(w, p, other, { kind: 'wood', item: 'wood', amount: 2, planId: p.intentions[0].id });
+  reviewIntentions(makeCtx(w, p, true, true));
+  expect(p.intentions[0].status).toBe('active');
+});
+
 it('retains the plan below rules 34, and with the off-switch', () => {
   const w = createWorld({ ...currentWorldSettings('normal', 'river', { immigration: false }), rulesVersion: 33 });
   const p = w.persons[0];
@@ -47,7 +55,6 @@ it('retains the plan below rules 34, and with the off-switch', () => {
   p.inv = {};
   reviewIntentions(makeCtx(w, p, true, true));
   expect(p.intentions[0].status).toBe('active');
-  // the diagnostic off-switch removes the reconsideration in a rules-34 world too
   const { w: w2, p: p2 } = make();
   setReconsider(false);
   try { reviewIntentions(makeCtx(w2, p2, true, true)); } finally { setReconsider(true); }

@@ -80,6 +80,7 @@ export function crewsTick(world: World): void {
       if (c.members.length >= CREW_MAX) continue;
       const members = c.members.map((x) => byId.get(x)).filter((x): x is Person => !!x);
       if (runsRulesVersion(world, 35) && members.some((q) => p.relations[q.id]?.grievance)) continue; // a grievance against one of them keeps them out, as departure says
+      if (runsRulesVersion(world, 35) && members.length && members.every((q) => { const a = nearestHub(world, p.x, p.y); const b = nearestHub(world, q.x, q.y); return hyp(a.x - b.x, a.y - b.y) > 1; })) continue; // moved away, as departure says
       const friends = members.filter((q) => mutual(p, q)).length;
       if (friends >= Math.ceil(members.length / 2) && friends >= 2) {
         c.members.push(p.id);

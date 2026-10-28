@@ -86,7 +86,8 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
     h('summary', null, 'Answer from a chat'),
     h('div', { class: 'inhabit-chat-body' }, obsBox, h('div', { class: 'inhabit-actions' }, copy, send), answer, note),
   );
-  const el = h('div', { class: 'inhabit-manual' }, head, line, blocked, timeBasis, opts, engine, chat);
+  const plans = h('div', { class: 'inhabit-plans' });
+  const el = h('div', { class: 'inhabit-manual' }, head, line, plans, blocked, timeBasis, opts, engine, chat);
 
   const WORDS: Record<string, string> = { hunger: 'hungry', thirst: 'thirsty', energy: 'tired', warmth: 'cold', safety: 'uneasy', social: 'lonely' };
   /** how this person is, in their own plain terms: only what is actually pressing */
@@ -130,6 +131,15 @@ function manualBlock(ctx: UICtx, driver: InhabitDriver): { el: HTMLElement; rend
       .map(o => h('div', null, `${o.label}: ${o.reason}`)));
     const last = lastInhabitantSummary(obs.doing);
     setText(line, obs.self.name + ' is ' + pressing(obs.self.needs as never) + '.' + (last ? ' Last: ' + last + '.' : ''));
+    const planText = (obs.plans ?? []).filter((p) => p.status === 'active').map((p) => `${p.goal}${p.blocked ? ` (${p.blocked})` : ''}`).join('; ');
+    const spoken = Object.entries(obs.self.spokenFor ?? {}).filter(([, v]) => (v ?? 0) > 0).map(([k, v]) => `${v} ${k}`);
+    const free = Object.entries(obs.self.available ?? {}).filter(([, v]) => (v ?? 0) > 0).map(([k, v]) => `${v} ${k}`);
+    const planParts: string[] = [];
+    if (planText) planParts.push(`Plans: ${planText}`);
+    if (spoken.length) planParts.push(`${spoken.join(', ')} spoken for`);
+    if (free.length) planParts.push(`${free.join(', ')} free`);
+    setText(plans, planParts.join(' · '));
+    setHidden(plans, planParts.length === 0);
     opts.replaceChildren(
       ...obs.options.map((o) => {
         // only a whole-number limit gets a box here; an action's other ranges are in the observation, for a chat to use
