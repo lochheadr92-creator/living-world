@@ -69,11 +69,14 @@ it('continues deterministically through saving during ordinary work and observer
  const c=deserializeWorld(before);run(a,400);run(c,400);expect(hashWorld(c)).toBe(hashWorld(a));
  expect(c.persons.map(p=>personalWorkTaste(c,p))).toEqual(a.persons.map(p=>personalWorkTaste(a,p)));
 });
-it('changes Sven’s actual ordinary-world choice, with a recorded reason rather than an assigned job',()=>{
- const a=make('meadow');run(a,105);
+it('preserves the recorded rules-39 Sven choice and taste explanation',()=>{
+ // This is a particular historical trajectory, not a promise that successor
+ // worlds offer the same close alternatives after their resource paths change.
+ const recorded=()=>createWorld({...freshRunSettings('rich','normal','meadow',{immigration:false}),rulesVersion:39});
+ const a=recorded();run(a,105);
  const on=a.persons.find(p=>p.id===1000)!;
  expect(on.name).toBe('Sven');expect(on.activity?.kind).toBe('till');
  expect(on.lastDecision?.because).toContain('I enjoy farming');
- setWorkTastes(false);const b=make('meadow');run(b,105);
+ setWorkTastes(false);const b=recorded();run(b,105);
  expect(b.persons.find(p=>p.id===1000)?.activity?.kind).toBe('gather');
 });

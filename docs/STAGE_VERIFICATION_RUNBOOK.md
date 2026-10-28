@@ -1,5 +1,84 @@
 # Stage verification runbook
 
+## Rules 40 stored material connections — 29 October 2026
+
+Use `C:\dev\Claude Experiment\living-world-integrate` and fresh output folders.
+All commands below use the installed local runtime, require no model key and no push.
+These bounded Normal probes take seconds; any future Large ensemble must use the
+detached Windows workflow and a separate preregistration. Do not restart the stopped batch.
+
+Focused contracts and predecessor continuity (89 tests at the recorded source):
+
+```powershell
+npx vitest run tests/stored_materials.test.ts tests/plan_reconsider.test.ts tests/inhabit_choice_identity.test.ts tests/work_tastes.test.ts tests/project_helpers.test.ts tests/project_cooperation.test.ts tests/social_memory.test.ts tests/v39_continuation.test.ts --maxWorkers=4
+```
+
+Staged independent on/off comparisons, restricted policies, helper failure path and full replay:
+
+```powershell
+node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_inhabitant.ts inhabitant_evidence/stored-materials-new
+```
+
+Ordinary six-day occurrence (repeat with registered meadow, river, forest and a new
+folder for each). This is not a population-effect ensemble:
+
+```powershell
+node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_observe.ts inhabitant_evidence/stored-ordinary-meadow-new meadow
+```
+
+Reproduce prior rules-39 project-attempt endings without editing an inhabitant:
+
+```powershell
+node node_modules/vite-node/dist/cli.mjs scripts/project_attempts_trace.ts inhabitant_evidence/stored-before-river-new river
+```
+
+Bounded staged later-opportunity probe (5000 ticks, preserve an empty comparison):
+
+```powershell
+node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_feedback.ts inhabitant_evidence/stored-materials-new/promise-enabled-final.json inhabitant_evidence/stored-feedback-new
+```
+
+Manual rendered check, using the existing local dev server or `npm run dev`:
+
+1. Open `http://127.0.0.1:5273/scripts/browser/stored_materials_manual.html?start=/inhabitant_evidence/stored-materials-new/promise-start.json`.
+2. Read Ada's own plan and offered actions. Ask Ben for stone, allow the promised
+   trip by choosing offered nearby wander/rest actions, then make the offered pick.
+   Do not count the promise as delivered; wait for actual handover and crafting.
+3. Repeat from `plan-start.json`: collect stone, craft axe, use it in offered wood work.
+   Repeat from `stale-start.json`: the same remembered-stock option fails physically
+   and the plan is reconsidered. The competing transfer is explicit staging.
+4. Save screenshots and visible panel text at the promise/delivery/result boundaries.
+   Click **Stop**, then **Save verification bundle**. This includes the standard
+   panel transcript, starting save and authoritative final state for exact comparison.
+5. Replay the downloaded bundle into a fresh folder; inspect outcome/stock/plan fields
+   as well as the full-state equality result:
+
+```powershell
+node node_modules/vite-node/dist/cli.mjs scripts/stored_materials_manual_replay.ts "C:\Users\RJLoc\Downloads\stored-materials-Ada-promise-start-bundle.json" inhabitant_evidence/stored-manual-replay-new
+```
+
+Full stable-source checks, each separately in PowerShell:
+
+```powershell
+npx vitest run --maxWorkers=4
+```
+
+```powershell
+npm run typecheck
+```
+
+```powershell
+npm run build
+```
+
+```powershell
+git diff --check
+```
+
+Do not rerun `scripts/v39_reference.ts` to make a regression pass. The checked-in
+reference is the pre-successor evidence. Results, source manifests and evidence
+limits: [STORED_MATERIAL_CONNECTIONS.md](STORED_MATERIAL_CONNECTIONS.md).
+
 ## Rules 39 project-helper connection — 28 October 2026
 
 Run from `C:\dev\Claude Experiment\living-world-integrate`; these checks need no

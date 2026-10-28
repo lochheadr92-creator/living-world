@@ -1,5 +1,8 @@
 # Meaningful connections — 28 October 2026
 
+Successor increment (rules 40, 29 October): [remembered stores, plans and promises](STORED_MATERIAL_CONNECTIONS.md).
+The record below remains the dated rules-39 evidence, including its ordinary nulls.
+
 Implementation pass starting from `C:\dev\Claude Experiment\living-world-integrate`,
 `main@4135461d167422a5693f2a4c27bc6622ec5dea7b`, rules 38. Tracked tree clean;
 existing untracked evidence retained. Separate dirty `deepseek-b1` untouched. No push.

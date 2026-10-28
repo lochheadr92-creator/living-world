@@ -147,6 +147,15 @@ for a wheeled route before anything is loaded and is refused honestly if there i
 
 ## What drives work: wants, not orders
 
+From rules 40, raw wood/stone/clay/ore remembered in a person's own home or a public
+storehouse also feeds the existing material acquisition path. The same personal
+knowledge supports plan viability and voluntary promises to fetch material. These
+offers use ordinary physical withdrawal: access, stock and carrying room are checked
+on arrival and transfer, so stale knowledge or changed ownership can still fail.
+No stock is claimed or delivered by being remembered or promised. Earlier rules keep
+their natural-source behavior for these consumers. Contract and measured limits:
+[STORED_MATERIAL_CONNECTIONS.md](STORED_MATERIAL_CONNECTIONS.md).
+
 Each person decides from what they know. For each thing they might want — material for a building site they know of, a
 repair, a better tool, bread for the household, a cart for heavy hauling, a promise they made — the **supply planner**
 (`production.ts`) works backwards through the recipe table, stopping at the first thing that is at hand:

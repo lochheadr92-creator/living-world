@@ -31,7 +31,9 @@ it('new public identities select the actual hunger alternative with its own amou
  const {w,p}=fixture();const initial=serializeWorld(w);
  const result=await runLive(w,p.id,chooser('choose-hunger',o=>{
   expect(new Set(o.options.map(o=>o.key)).size).toBe(o.options.length);
-  const selected=o.options.find(o=>o.goal==='to ease hunger'&&o.key.includes('#choice:'))!;
+  // Fruit is the two-unit contract. Successor trajectories can offer berries
+  // (three units) ahead of it; order is not the identity under test.
+  const selected=o.options.find(o=>o.goal==='to ease hunger'&&o.label==='Picking fruit'&&o.key.includes('#choice:'))!;
   expect(selected.limits?.find(b=>b.field==='amount')?.max).toBe(2);
   return selected.key;
  }),{until:119});

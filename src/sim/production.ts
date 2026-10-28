@@ -109,7 +109,7 @@ function nameOf(b: Belief): string {
 }
 
 /** Go and take stock out of a store, a workplace's shelves or a heap. */
-function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = []): void {
+function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind): void {
   const { world, p } = ctx;
   if (recentFailure(world, p, b.id, 320)) {
     addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items)}`, b.id, `tried recently and found none to take`, tag);
@@ -133,6 +133,7 @@ function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
     key: `collect:${b.id}:${Object.keys(items).join('+')}`,
     targetId: b.id,
     tag,
+    ...(materialStock ? { yields: materialStock } : {}),
     make: () => {
       const spot = spotNear(world, p, b);
       if (!spot) return null;
@@ -149,10 +150,18 @@ function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
         utility: util,
         minCommit: 30,
         maxTicks: 700,
-        data: { items },
+        data: { items, ...(materialStock ? { materialStock } : {}) },
       });
     },
   });
+}
+
+/** Reuse the ordinary collection action for one remembered raw-material store.
+ * The caller has checked personal knowledge; execution still checks the real place. */
+export function collectMaterialStock(ctx: Ctx, b: Belief, item: ItemKind, want: number, base: number, why: string, tag: string): void {
+  const take = Math.min(b.items?.[item] ?? 0, Math.max(1, Math.ceil(want)), invRoom(ctx.world, ctx.p, item));
+  if (take < 1) return;
+  collectLeaf(ctx, b, { [item]: take }, base * 0.95, why, tag, [], item);
 }
 
 /** Carry goods to a workplace so that a batch can be started there. */

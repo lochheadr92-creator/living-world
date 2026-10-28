@@ -1,5 +1,31 @@
 # Civilisation implementation register
 
+## Remembered stores, plans and promises — 2026-10-29
+
+Continued authoritative local main from `0fba6ed`; separate dirty `deepseek-b1`
+checkout and pre-existing evidence preserved. Nothing pushed. The predecessor
+rules-39 continuation was recorded before successor behavior in `c35db6b`.
+
+Rules **40** adds one pure remembered-stock capability with two consumers:
+personal/building material supply and plan viability; voluntary promise feasibility
+and collection. Existing beliefs, withdrawal, commitments, transfer, crafting,
+contribution attribution, trust and receipts carry the chain. No new global knowledge,
+inventory, reward or saved schema. Observation 12 / protocols 21–22 are unchanged.
+
+Staged isolated comparisons prove both connections; actual rendered manual success
+and stale-stock failure reproduce their complete browser states through transcript
+replay. Ordinary Normal meadow/river/forest, six days each: **15 selected collections,
+14 successful, 22 wood transferred from household homes; three associated completed
+tools later used**. Zero promise-stock collections in those windows. A bounded
+subsequent staged run found no later material ask. No aggregate-benefit claim.
+
+Full final suite **1322 tests / 173 files** passes; typecheck/build/diff check pass.
+Three actual manual journeys replay with exact full-state equality. Verdict:
+**TURN_INTEGRATION_VERIFIED** for the selected slice. Full evidence is recorded in
+[STORED_MATERIAL_CONNECTIONS.md](STORED_MATERIAL_CONNECTIONS.md), with the current/
+parked map, ownership boundaries, initial failing tests, review findings, all nulls,
+screenshots and replay paths. Reproduction: [STAGE_VERIFICATION_RUNBOOK.md](STAGE_VERIFICATION_RUNBOOK.md).
+
 ## Personal trust and project help — 2026-10-28
 
 Continued local main from `4135461`; nothing pushed. Rules **39** use the asker's

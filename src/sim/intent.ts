@@ -19,6 +19,7 @@ import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { runsRulesVersion } from './rulesversion';
+import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import {
   SHELTER_BATCH,
   believesHoused,
@@ -86,6 +87,7 @@ export const reconsiderOn = (): boolean => reconsider;
 
 /** Does the person know a source of `item` they reckon has anything left, counting regrowth? */
 function hasKnownResource(world: World, p: Person, item: ItemKind): boolean {
+  if (usesMaterialStock(world, 'plan') && rememberedMaterialStores(world, p, item).length) return true;
   for (const st of Object.keys(SOURCE_ITEM) as SourceType[]) {
     if (SOURCE_ITEM[st] !== item) continue;
     for (const b of beliefsByKind(p, [st as BeliefKind])) {

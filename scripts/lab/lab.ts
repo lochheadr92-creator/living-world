@@ -1,5 +1,6 @@
 import { achievementAftermathOn, setAchievementAftermath } from '../../src/sim/achievement';
 import { projectHelperChoiceOn, setProjectHelperChoice } from '../../src/sim/options_social';
+import { storedMaterialPlansOn, setStoredMaterialPlans, storedMaterialPromisesOn, setStoredMaterialPromises } from '../../src/sim/material_stock';
 import { workTastesOn, setWorkTastes } from '../../src/sim/temperament';
 import { leaveHeaviestOn, setLeaveHeaviest } from '../../src/sim/leave_heaviest';
 import { nightWaitBoundaryOn, setNightWaitBoundary } from '../../src/sim/night_wait';
@@ -251,6 +252,8 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-adult-newborn-skills') return {spec:label,summary:'restore adult-range skills for newly created children',apply:()=> 'historical skill initialisation restored for subsequent births/arrivals',install(){const was=developmentOn();setDevelopment(false);return ()=>setDevelopment(was);}};
   if (kind === 'rich-no-work-tastes') return {spec:label,summary:'remove personal work tastes only; changes nothing below version 31',apply:()=> 'work tastes off',install(){const was=workTastesOn();setWorkTastes(false);return ()=>setWorkTastes(was);}};
   if (kind === 'rich-no-leave-heaviest') return {spec:label,summary:'remove leaving a left-over to free the hands only; changes nothing below version 33',apply:()=> 'leave-heaviest off',install(){const was=leaveHeaviestOn();setLeaveHeaviest(false);return ()=>setLeaveHeaviest(was);}};
+  if (kind === 'rich-no-stored-material-plans') return {spec:label,summary:'remove remembered raw storage from personal/building acquisition and plan viability; no effect below rules 40',install(){const was=storedMaterialPlansOn();setStoredMaterialPlans(false);return ()=>setStoredMaterialPlans(was);}};
+  if (kind === 'rich-no-stored-material-promises') return {spec:label,summary:'remove remembered raw storage from promise feasibility and acquisition; no effect below rules 40',install(){const was=storedMaterialPromisesOn();setStoredMaterialPromises(false);return ()=>setStoredMaterialPromises(was);}};
   if (kind === 'rich-no-project-helper-choice') return {spec:label,summary:'use first feasible project-material helper instead of personal trust; no effect below rules 39',install(){const was=projectHelperChoiceOn();setProjectHelperChoice(false);return ()=>setProjectHelperChoice(was);}};
   if (kind === 'rich-no-achievement-aftermath') return {spec:label,summary:'remove construction satisfaction and later hopes only; no effect below rules 38',apply:()=> 'achievement aftermath off',install(){const was=achievementAftermathOn();setAchievementAftermath(false);return ()=>setAchievementAftermath(was);}};
   if (kind === 'rich-no-reconsider') return {spec:label,summary:'remove plan reconsideration only; changes nothing below version 34',apply:()=> 'plan reconsideration off',install(){const was=reconsiderOn();setReconsider(false);return ()=>setReconsider(was);}};

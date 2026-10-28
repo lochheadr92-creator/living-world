@@ -1,4 +1,5 @@
 import { relocationPackingBlocker } from './relocation';
+import { mayCollectMaterialStock } from './material_stock';
 import { creditProject, mayWorkProject } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
@@ -588,6 +589,7 @@ registerHandler('withdraw', {
     }
     const e = world.byId.get(a.targetId)!;
     observe(world, p, e);
+    if (a.data.materialStock && (e.ent !== 'building' || !mayCollectMaterialStock(p, e))) return 'this material store is no longer shared or ours';
     a.duration = transferDuration(a.data.items ?? {});
     a.tx = e.ent === 'building' || e.ent === 'site' ? e.x + e.w / 2 : p.x;
     a.ty = e.ent === 'building' || e.ent === 'site' ? e.y + e.h / 2 : p.y;
@@ -602,6 +604,10 @@ registerHandler('withdraw', {
     const want = (a.data.items ?? {}) as Record<string, number>;
     let moved = 0;
     const e = world.byId.get(a.targetId);
+    if (a.data.materialStock && (!e || e.ent !== 'building' || !mayCollectMaterialStock(p, e))) {
+      if (e) observe(world, p, e);
+      return 'fail:this material store is no longer shared or ours';
+    }
     for (const k of Object.keys(want)) {
       let n = want[k];
       if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n);

@@ -25,8 +25,9 @@ function make(seed = 'reconsider') {
   return { w, p };
 }
 
-it('relinquishes a material-fetch plan with no known source and no promise (rules 34)', () => {
+it('through rules 39, relinquishes a material-fetch plan with no natural source or promise even if home stock is known', () => {
   const { w, p } = make();
+  w.settings.rulesVersion = 39;
   reviewIntentions(makeCtx(w, p, true, true));
   expect(p.intentions[0].status).toBe('dropped');
   expect(p.intentions[0].reason).toContain('no known source of wood');
@@ -120,12 +121,14 @@ it('rules 36 and the ablation retain the full-batch shelter step', () => {
  }
 });
 
-it('retains a plan for an accepted live promise, but releases it after that promise is interrupted', () => {
- const {w,p}=make();const helper=w.persons[1];
+it('after an interrupted promise, old rules release the plan while rules 40 can still use known home stock', () => {
+ for (const version of [39,40]) {
+ const {w,p}=make();w.settings.rulesVersion=version;const helper=w.persons[1];
  const r=createRequest(w,p,helper,{kind:'wood',item:'wood',amount:2,planId:p.intentions[0].id});
  r.status='promised';r.commitmentId=w.nextId++;
  helper.commitments.push({id:r.commitmentId,requestId:r.id,kind:'deliver',to:p.id,item:'wood',amount:2,delivered:0,siteId:0,made:w.tick,deadline:w.tick+1000,status:'active'});
  reviewIntentions(makeCtx(w,p,true,true));expect(p.intentions[0].status).toBe('active');
  helper.commitments.at(-1)!.status='interrupted';r.status='interrupted';
- reviewIntentions(makeCtx(w,p,true,true));expect(p.intentions[0].status).toBe('dropped');
+ reviewIntentions(makeCtx(w,p,true,true));expect(p.intentions[0].status).toBe(version===39?'dropped':'active');
+ }
 });

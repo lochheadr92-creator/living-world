@@ -6,6 +6,7 @@ import { recordProjectResponse, projectAt, canInvite, organiserExperience } from
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { runsRulesVersion } from './rulesversion';
+import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import { noteWedding } from './occasions';
 import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation';
 import { expose } from './illness';
@@ -321,6 +322,7 @@ export function willingness(world: World, B: Person, A: Person, severity: number
 
 /** Could B get hold of this item from somewhere they know of? (Used before promising to fetch it.) */
 export function canObtain(world: World, B: Person, item: ItemKind): boolean {
+  if (usesMaterialStock(world, 'promise') && rememberedMaterialStores(world, B, item).length) return true;
   const need = item === 'wood' ? 'tree' : item === 'stone' ? 'rock' : item === 'clay' ? 'clay_pit' : item === 'ore' ? 'ore_vein' : item === 'water' ? 'water' : null;
   const usable = (b: Belief): boolean => {
     const f = B.failures[b.id];

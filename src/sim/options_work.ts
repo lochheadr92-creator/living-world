@@ -9,7 +9,8 @@ import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
 import { baseHub, nearestHub } from './settlements';
-import { depositLead } from './production';
+import { collectMaterialStock, depositLead } from './production';
+import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { findBuildSpot } from './buildings';
@@ -361,6 +362,11 @@ export const isRawMaterial = (k: ItemKind): k is RawMaterial => k === 'wood' || 
 
 export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: number, why: string, tag: string): void {
   const { world, p } = ctx;
+  if (usesMaterialStock(world, tag === 'promise' ? 'promise' : 'plan')) {
+    const stores = rememberedMaterialStores(world, p, item).map(b => ({ b, e: eta(ctx, b.x, b.y) }));
+    stores.sort((a, b) => a.e - b.e);
+    for (const { b } of stores.slice(0, 2)) collectMaterialStock(ctx, b, item, want, base, why, tag);
+  }
   const tm = traitMods(p);
   const kinds: BeliefKind[] = RAW_KINDS[item];
   const cands: { b: Belief; est: number; e: number; score: number }[] = [];
