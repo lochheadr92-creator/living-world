@@ -1,5 +1,19 @@
 # Civilisation implementation register
 
+## Six-stage inhabitant programme — 2026-10-28
+
+Continued local main from `9871662`; nothing pushed. Current rules **38** add locally
+witnessed construction satisfaction and later unfulfilled aspirations, following
+rules 36 competing-plan release and 37 partial shelter delivery. Observation 11 /
+protocols 19–20 expose truthful reservations, historical blockers and personal hopes.
+The prior crew rules and civic proposal/completion mechanisms are preserved.
+
+Full suite: 1,294/1,294; typecheck/build pass. Ordinary Large meadow at rules 38,
+20 days: four storehouses, 201 units deposited, 29 withdrawn, conservation passes.
+Manual and scripted inhabitant transcripts replay. Full evidence, compatibility
+boundaries and limits: [SIX_STAGE_COMPLETION.md](SIX_STAGE_COMPLETION.md).
+
+
 ## Codex branch integration — 2026-10-27
 
 Owner authorized auditing previous Codex work, committing outstanding changes, merging
