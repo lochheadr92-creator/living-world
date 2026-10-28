@@ -28,7 +28,7 @@ export function remoteBushWorld(seed = 'inhabitant-bush') {
 
 /** the observation the engine would hand a controller for this person right now (pure) */
 export function observeNow(w: World, p: Person, showScores = false, version?: number): InhabitantObservation {
-  const ctx = generateOptions(w, p, true);
+  const ctx = generateOptions(w, p, true, true);
   return observeInhabitant(w, p, ctx, rankOptions(ctx), { showScores, ...(version ? { version } : {}) });
 }
 

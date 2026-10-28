@@ -1,3 +1,4 @@
+import { serializeWorld, deserializeWorld } from '../src/app/save';
 import { expect, it } from 'vitest';
 import { createWorld } from '../src/sim/factory';
 import { currentWorldSettings } from '../src/sim/profiles';
@@ -60,4 +61,14 @@ it('changes nothing below rules 35', () => {
   w.tick = 617;
   crewsTick(w);
   expect(w.crews![0].members.includes(p.id)).toBe(true); // old behaviour: re-admitted despite the grievance
+});
+
+it('stays out after a saved move and may rejoin after returning', () => {
+  const {w,p,x}=make(); p.relations[x.id].grievance=null;
+  const origin={x:p.x,y:p.y}; w.extraSettlements=[{x:70,y:70}]; p.x=70;p.y=70;
+  w.tick=617;crewsTick(w);
+  const loaded=deserializeWorld(serializeWorld(w)); const person=loaded.persons.find(q=>q.id===p.id)!;
+  loaded.tick=1217;crewsTick(loaded);expect(loaded.crews![0].members).not.toContain(p.id);
+  person.x=origin.x;person.y=origin.y;
+  loaded.tick=1817;crewsTick(loaded);expect(loaded.crews![0].members).toContain(p.id);
 });

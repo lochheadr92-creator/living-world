@@ -9,7 +9,7 @@ import { LIMITS, applyNoteUpdate, emptyCounters, emptyNotes, notesHash, observat
 import type { NoteUpdate } from '../src/agent/memory';
 import { DEFAULT_BUDGET, stubModel } from '../src/agent/model';
 import type { ModelClient } from '../src/agent/model';
-import { PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V15, PROTOCOL_V16, SYSTEM_PROMPT, buildPrompt, notesFromPrompt, observationFromPrompt, parseProposal } from '../src/agent/protocol';
+import { PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V19, PROTOCOL_V20, SYSTEM_PROMPT, buildPrompt, notesFromPrompt, observationFromPrompt, parseProposal } from '../src/agent/protocol';
 import { markInhabitant, runLive, runReplay, runStandard } from '../src/agent/run';
 import { goalKeeperModel } from '../src/agent/stubs';
 import { ReplayDiverged } from '../src/agent/transcript';
@@ -107,8 +107,8 @@ describe('the goal keeper experiment (seed meadow, Pavel, the baseline window)',
     for (const c of applied(m.transcript)) expect(m.transcript.asks[c.ask].observation.options.map((o) => o.key)).toContain(c.result!.key);
     expect(conservationReport(m.world).diffs).toEqual([]);
     expect(m.transcript.end!.lagged).toBe(0);
-    expect(m.transcript.header.protocol).toBe(PROTOCOL_V16);
-    expect(n.transcript.header.protocol).toBe(PROTOCOL_V15);
+    expect(m.transcript.header.protocol).toBe(PROTOCOL_V20);
+    expect(n.transcript.header.protocol).toBe(PROTOCOL_V19);
     // the legacy pair still names the shapes older recordings were made with
     expect(PROTOCOL_V1).toBe('inhabitant/1');
     expect(PROTOCOL_V2).toBe('inhabitant/2');

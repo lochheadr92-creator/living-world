@@ -1,3 +1,4 @@
+import { planPackSummary } from '../src/ui/inhabit_summary';
 import { expect, it } from 'vitest';
 import { observeNow } from './helpers/inhabit';
 import { adult } from './helpers/inhabit';
@@ -20,7 +21,7 @@ it('exposes the active plan and the carried/spoken-for/available split of the pa
   p.commitments = [];
   p.inv = { wood: 2 };
   const obs = observeNow(w, p);
-  expect(obs.version).toBe(9);
+  expect(obs.version).toBe(11);
   expect(obs.plans).toHaveLength(1);
   expect(obs.plans![0].goal).toBe('make a pick');
   expect(obs.plans![0].wants).toEqual({ wood: 2 });
@@ -44,4 +45,25 @@ it('shows no plan when there is none, and no spoken-for split below version 7', 
   expect(old.plans).toBeUndefined();
   expect(old.self.spokenFor).toBeUndefined();
   expect(old.self.available).toBeUndefined();
+});
+
+it('separates carried reservation from unmet demand in the readable panel', () => {
+  const w = natural('reserve'); run(w, 60); const p = adult(w);
+  p.intentions = [toolIntent(w, { wood: 2, stone: 2 })]; p.commitments = [];
+  p.inv = { wood: 2, berries: 2 };
+  const text = planPackSummary(observeNow(w, p));
+  expect(text).toContain('wood: 2 carried and reserved, 0 still missing');
+  expect(text).toContain('stone: 0 carried and reserved, 2 still missing');
+  expect(text).toContain('next: get wood');
+  expect(text).toContain('Unreserved: 2 berries');
+  expect(text).toContain('each offered action has its own limits');
+});
+it('does not present an old shortage as a current obstacle after stone is acquired', () => {
+  const w = natural('obstacle'); run(w, 60); const p = adult(w);
+  p.inv.stone = 3;
+  p.commitments = [{ id: 987, requestId: 0, kind: 'deliver', to: w.persons[1].id, item: 'stone', amount: 2, siteId: 0, made: 1, deadline: 1000, status: 'active', blocked: 'no stone to be had', blockedAt: 20 }];
+  const before = JSON.stringify(p.commitments);
+  expect(observeNow(w, p).people.promises[0].detail).toMatch(/last reported obstacle .*no stone/);
+  expect(observeNow(w, p, false, 9).people.promises[0].detail).toContain('held up: no stone');
+  expect(JSON.stringify(p.commitments)).toBe(before);
 });

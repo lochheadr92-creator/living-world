@@ -1,3 +1,4 @@
+import { describeGoal } from '../sim/life';
 import { deceasedById } from '../sim/historical_index';
 import { choiceKeys } from './choice_keys';
 import { blockedCraftNeeds } from '../sim/options_work';
@@ -39,8 +40,10 @@ import { hyp } from '../sim/util';
  * observation and refuses one that differs from the recording, so every recorded transcript replays under the version its header names.
  *  7 adds active/recent personal plans (with what each has spoken for) and the carried/spoken-for/available split of the pack.
  *  8 says the walk to a site to be laid out is not counted in its estimate.
- *  9 says building work is a session, not a promise to finish the whole structure. */
-export const OBSERVATION_VERSION = 9;
+ *  9 says building work is a session, not a promise to finish the whole structure.
+ * 10 distinguishes a remembered promise obstacle from a current obstruction.
+ * 11 exposes the person's own aspiration and fulfilled history. */
+export const OBSERVATION_VERSION = 11;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -125,6 +128,8 @@ export interface InhabitantObservation {
     position: { x: number; y: number };
     mood?: number;
     thoughts?: string[];
+    /** Their own current hope and fulfilled history (observation 11+). */
+    aspiration?: string | null;
     /** the trade they settled on, and the techniques they hold (version 7+) */
     trade?: { kind: string; why: string } | null;
     techniques?: string[];
@@ -388,6 +393,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     skills,
     health: Math.round(p.health),
     needs,
+    ...(version >= 11 ? { aspiration: describeGoal(world, p) } : {}),
     carrying: { ...p.inv },
     load: { used: Math.round(weightOf(p.inv) * 10) / 10, cap: carryCap(world, p) },
     ...(version >= 7 ? { spokenFor: spokenForItems(world, p), available: availableItems(world, p) } : {}),
@@ -544,7 +550,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     const parts: string[] = [];
     if (c.kind === 'deliver' || c.kind === 'haul') parts.push(`${c.delivered ?? 0} of ${c.amount} delivered`);
     if (c.reason) parts.push(cleanText(c.reason, 100));
-    if (c.status === 'active' && c.blocked && c.blockedAt && world.tick - c.blockedAt < 600) parts.push(`held up: ${cleanText(c.blocked, 100)}`);
+    if (c.status === 'active' && c.blocked && c.blockedAt && world.tick - c.blockedAt < 600) parts.push(version >= 10 ? `last reported obstacle (${ageText(world, version, c.blockedAt)}): ${cleanText(c.blocked, 100)}` : `held up: ${cleanText(c.blocked, 100)}`);
     const due = c.deadline + (c.grace ?? 0);
     return { text: commitmentText(world, p, c), status: c.status, detail: parts.join(' · '), due: c.status === 'active' ? (due > world.tick ? `in ${durationText(due - world.tick, version)}` : 'overdue') : ageText(world, version, c.made) };
   });
