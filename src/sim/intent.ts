@@ -11,6 +11,8 @@
 //
 // In an authored world every function here is a no-op and `p.intentions` stays empty, so authored behaviour is untouched.
 import { BUILD_DEF, DAY, SOURCE_ITEM, TOOL_RECIPE, homeNoun, isHomeType } from './constants';
+import { carryCap } from './people';
+import { roomFor } from './economy';
 import { dayFraction } from './environment';
 import { addLog } from './events';
 import { isRich } from './mood';
@@ -631,6 +633,10 @@ function shelterStep(ctx: Ctx, i: Intention): Step {
   if ((i.wants[k] ?? 0) !== take || Object.keys(i.wants).length !== 1) i.wants = { [k]: take } as Partial<Items>;
   const short = stillNeededFor(p, i);
   const lack = short[k] ?? 0;
+  const held = shareOf(p, i, k);
+  if (reconsider && runsRulesVersion(world, 37) && held > 0 && lack > 0 && roomFor(p.inv, carryCap(world, p), k) < 1) {
+    return { kind: 'deliver', target: site.id, item: k, step: `take ${held} ${k} to the ${what}; no room for a full batch`, key: `haul:${site.id}`, blocked: '' };
+  }
   if (lack > 0) {
     // Somebody may have promised to bring it. That changes nothing about the step - the material is not here, and they may
     // still fetch it themselves - but the step says so, because it is the truth about what they are waiting on.
@@ -806,6 +812,20 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
       i.blocked = ctx.dangers.length ? 'a wolf about' : `${ctx.criticals[0]} comes first`;
       i.reason = `set aside: ${i.blocked}`;
       continue;
+    }
+    // A day-old unfinished tool yields carried material to the household home they know.
+    if (reconsider && runsRulesVersion(world, 36) && i.kind === 'tool' &&
+        world.tick - i.since >= DAY && Object.keys(stillNeededFor(p, i)).length > 0) {
+      const home = shelterWanted(ctx);
+      const items = Object.keys(i.wants) as ItemKind[];
+      const awaitingHelp = items.some(k => outstandingForPlan(world, p.id, k, i.id) > 0);
+      if (home && !awaitingHelp && items.some(k => (home.short[k] ?? 0) > 0 && shareOf(p, i, k) > 0)) {
+        i.status = 'dropped'; i.ended = world.tick;
+        i.reason = 'put the household home ahead of the unfinished tool; released its materials';
+        i.step = ''; i.stepKind = 'none'; i.stepItem = null; i.stepTarget = 0; i.stepKey = null; i.wants = {};
+        addLog(world, p, 'work', `Set aside ${i.goal}: ${i.reason}.`);
+        continue;
+      }
     }
     const n = stepFor(ctx, i);
     if (i.blocked && !n.blocked) i.reason = 'taken up again';
