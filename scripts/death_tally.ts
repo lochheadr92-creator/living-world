@@ -176,6 +176,19 @@ function censusOf(world: World): Census {
   return { buildings, firesLit, sites, householdHome, fullHomes, coldBelow26, coldAtOrBelow6, indoors, singleMen, singleWomen, partnered };
 }
 
+/** what the settlement did about shelter since the previous row, and why the people without a solid home had not done more */
+interface Flow {
+  /** buildings that appeared and buildings that were gone, by type (a hut rebuilt as a house shows as one of each) */
+  built: Record<string, number>;
+  gone: Record<string, number>;
+  /** times someone started each of the activities that bear on cold */
+  starts: Record<string, number>;
+  /** grown-ups whose household has no home or only a lean-to, and the first housing reason each last gave (numbers blanked) */
+  noSolidAdults: number;
+  reasons: Record<string, number>;
+}
+const WATCHED_STARTS = ['plan_site', 'build', 'haul', 'repair', 'fuel_fire', 'warm'];
+
 interface Row {
   day: number;
   pop: number;
@@ -191,6 +204,27 @@ interface Row {
   roofed: number;
   funnel: Record<Gate, number>;
   census: Census;
+  flow: Flow;
+}
+
+function reasonsOf(world: World, adults: Person[]): { noSolidAdults: number; reasons: Record<string, number> } {
+  const reasons: Record<string, number> = {};
+  let noSolidAdults = 0;
+  for (const p of adults) {
+    const hh = householdById(world, p.hhId);
+    const home = hh && hh.homeId ? world.byId.get(hh.homeId) : undefined;
+    const type = home && home.ent === 'building' ? home.type : 'none';
+    if (type !== 'none' && type !== 'lean_to') continue;
+    noSolidAdults++;
+    const d = p.lastDecision;
+    const where = type === 'none' ? 'no home' : 'lean-to only';
+    const blocked = d?.blocked.find((o) => o.label.startsWith('Lay out'));
+    const offered = d?.alternatives.find((o) => o.label.startsWith('Lay out'));
+    const why = d?.chosen && ['plan_site', 'build', 'haul'].includes(d.chosen.kind) ? `already building (${d.chosen.kind})` : blocked ? (blocked.blocked ?? 'blocked').replace(/[0-9]+/g, '#') : offered ? `offered, outranked by ${d?.chosen?.kind ?? 'nothing'}` : 'not on the list at all';
+    const key = `${where}: ${why}`;
+    reasons[key] = (reasons[key] ?? 0) + 1;
+  }
+  return { noSolidAdults, reasons };
 }
 
 const world: World = createWorld(settings);
@@ -201,6 +235,14 @@ console.log(`death_tally: seed ${seed}, ${settings.population} founders (${found
 
 const rows: Row[] = [];
 const deathRecords: DeathRecord[] = [];
+// activity starts are only listened to (the bench does the same); the buildings seen at the last row are compared with those now
+let starts: Record<string, number> = {};
+world.hooks = {
+  onActivityStart: (_p, a) => {
+    if (WATCHED_STARTS.includes(a.kind)) starts[a.kind] = (starts[a.kind] ?? 0) + 1;
+  },
+};
+let prevBuildings = new Map(world.buildings.map((b) => [b.id, b.type] as const));
 const snaps = new Map<number, Around>();
 const totalCauseByStage: Record<string, Record<string, number>> = {};
 let seenDeaths = 0;
@@ -233,6 +275,14 @@ for (let i = 1; i <= total; i++) {
   const stages = { child: 0, youth: 0, adult: 0, elder: 0 };
   for (const p of alive) stages[stageOf(world, p)]++;
   const roofed = world.households.filter((h) => h.homeId).length;
+  const nowBuildings = new Map(world.buildings.map((b) => [b.id, b.type] as const));
+  const built: Record<string, number> = {};
+  const gone: Record<string, number> = {};
+  for (const [id, type] of nowBuildings) if (!prevBuildings.has(id)) built[type] = (built[type] ?? 0) + 1;
+  for (const [id, type] of prevBuildings) if (!nowBuildings.has(id)) gone[type] = (gone[type] ?? 0) + 1;
+  prevBuildings = nowBuildings;
+  const flow: Flow = { built, gone, starts, ...reasonsOf(world, alive.filter((p) => stageOf(world, p) !== 'child')) };
+  starts = {};
   rows.push({
     day: Math.round((world.tick / DAY) * 10) / 10,
     pop: alive.length,
@@ -247,6 +297,7 @@ for (let i = 1; i <= total; i++) {
     roofed,
     funnel,
     census: censusOf(world),
+    flow,
   });
   if (alive.length === 0) break;
 }
@@ -271,6 +322,17 @@ for (const r of rows) {
   console.log(
     `${String(r.day).padStart(4)}   ${String(c.buildings.lean_to ?? 0).padStart(7)} ${String(c.buildings.hut ?? 0).padStart(3)} ${String(c.buildings.house ?? 0).padStart(5)} ${`${c.buildings.fire ?? 0}(${c.firesLit})`.padStart(9)} ${String(other).padStart(5)}        | ${String(c.householdHome.none).padStart(4)} ${String(c.householdHome.lean_to).padStart(7)} ${String(c.householdHome.hut).padStart(3)} ${String(c.householdHome.house).padStart(5)} ${String(c.fullHomes).padStart(5)} | ${fmt(c.sites).padEnd(10)} | ${String(c.coldBelow26).padStart(3)} ${String(c.coldAtOrBelow6).padStart(3)} ${String(c.indoors).padStart(6)} | ${String(c.singleMen).padStart(8)} ${String(c.singleWomen).padStart(8)} ${String(c.partnered).padStart(7)}`,
   );
+}
+
+console.log('\nshelter flow since the previous row, and why grown-ups without a solid home had not laid one out (their last decision)');
+for (const r of rows) {
+  const f = r.flow;
+  const top = Object.entries(f.reasons)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([k, v]) => `${v}x ${k}`)
+    .join(' | ');
+  console.log(`${String(r.day).padStart(4)}  built ${fmt(f.built).padEnd(26)} gone ${fmt(f.gone).padEnd(26)} starts ${fmt(f.starts).padEnd(40)} no solid home ${String(f.noSolidAdults).padStart(2)}: ${top || '-'}`);
 }
 
 // Where the dead were: the same table for exposure, for hunger and for everything else.
