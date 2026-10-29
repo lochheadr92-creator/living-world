@@ -1,0 +1,74 @@
+{
+  "head": "5033c9e37b7ef88c6d0817bbca71722b7c7853a7",
+  "rules": 54,
+  "sourceHashes": {
+    "scripts/browser/practical_care_upkeep_check.mjs": "dc6e9541a63031355b41e82c20989d773ff46f3946d821ddaa1c55a1a02f66cb",
+    "tests/practical_care_upkeep.test.ts": "79e4a603611a19166f54d930e71963b954541654631b75a1818edb019b307432",
+    "src/sim/welfare.ts": "cc93264b97e06162116cd168dfa18646814f13bcca07c605c20eeed8a6ab4a7f",
+    "src/sim/options_work.ts": "510b6da2d41a2210d0498b2386bf320ec6a763dcd8ed3ac282dfb01358c37e04",
+    "src/sim/social.ts": "d065d5f07e00c77b2529aa140abf4ce147cc83b97a0089966147aced6af041c8",
+    "src/sim/act_build.ts": "262d7dde98f00ec0b9b432732df4e5d508957adb08f4e14e9d4c8e7e35f4c9c8"
+  },
+  "evidence": "STAGED prerequisites and action selections from actual offered options. Physical travel, work, consumption and same-runtime save continuation. No claim of ordinary activation, full medical recovery, completed house, or aggregate benefit.",
+  "checks": [
+    {
+      "name": "shared repair is offered, consumes materials and continues exactly",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "condition": 97.50800000000058,
+        "repairUnits": 5,
+        "continued": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "repaired kiln produces useful construction material",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "bricks": 3,
+        "conserved": true
+      }
+    },
+    {
+      "name": "informed household care physically delivers bread without observer or replay changes",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "pure": true,
+        "bread": 2,
+        "continued": true,
+        "conserved": true,
+        "log": [
+          {
+            "tick": 50,
+            "text": "Asked Ada for food.",
+            "kind": "social"
+          },
+          {
+            "tick": 72,
+            "text": "Ada gave me 2 bread.",
+            "kind": "social"
+          }
+        ]
+      }
+    },
+    {
+      "name": "recipient actually eats delivered bread",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "before": 17.809999999999917,
+        "after": 77.1799999999999,
+        "eaten": 2,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

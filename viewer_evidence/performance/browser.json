@@ -1,0 +1,173 @@
+{
+  "head": "5033c9e37b7ef88c6d0817bbca71722b7c7853a7",
+  "sourceHashes": {
+    "scripts/browser/mature_perf_check.mjs": "1197192eb3615097a2c69492c3e18590d5295f7b5b4e13ce535a6150fde396a8",
+    "src/render/renderer.ts": "8f765a7907a10aa8e3eb976b501931d797f7cc9c166976031116a985da3a97c7",
+    "src/render/speech_layout.ts": "b2956e313362da9ab37f6adf8d2ab7c8833e6a5a1012e9038d58c773d7ca962d",
+    "src/ui/index.ts": "305eb584a1b1c638e85d69ee44e7416d41c81fa953e17cb9be8a0212756f3b77"
+  },
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.73",
+    "revision": "@2f9a11097447f226133bc1a31c787291a5eeab98",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.25"
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "dpr": 1
+  },
+  "method": "Observe 180 paused normal app rAF iterations; discard 30 warmups. Read existing renderer CPU timers without drawing an extra frame. Afterwards separately time 60 forced UI refreshes. Frame submission is CPU cost, not GPU completion. Staged speech crowd reuses the labelled acceptance fixture; other states are unmodified saves.",
+  "results": [
+    {
+      "name": "normal-new",
+      "tick": 0,
+      "rules": 54,
+      "alive": 28,
+      "pure": true,
+      "visibleSpeech": 0,
+      "frameSubmissionMs": {
+        "count": 150,
+        "mean": 1.904666666785876,
+        "p50": 1.800000011920929,
+        "p95": 2.300000011920929,
+        "max": 4.800000011920929
+      },
+      "overlayLayoutMs": {
+        "count": 150,
+        "mean": 0.06799999992052715,
+        "p50": 0.09999999403953552,
+        "p95": 0.10000002384185791,
+        "max": 0.20000001788139343
+      },
+      "forcedUIRefreshMs": {
+        "count": 60,
+        "mean": 0.09000000009934107,
+        "p50": 0.09999999403953552,
+        "p95": 0.20000001788139343,
+        "max": 0.20000001788139343
+      },
+      "rafIntervalMs": {
+        "count": 150,
+        "mean": 16.66866666654746,
+        "p50": 16.69999998807907,
+        "p95": 17.30000001192093,
+        "max": 19.700000017881393
+      },
+      "heapUsedBytes": 11338200
+    },
+    {
+      "name": "large-new",
+      "tick": 0,
+      "rules": 54,
+      "alive": 100,
+      "pure": true,
+      "visibleSpeech": 0,
+      "frameSubmissionMs": {
+        "count": 150,
+        "mean": 2.3086666651566823,
+        "p50": 2.2999999821186066,
+        "p95": 2.5999999940395355,
+        "max": 2.800000011920929
+      },
+      "overlayLayoutMs": {
+        "count": 150,
+        "mean": 0.07933333317438761,
+        "p50": 0.09999999403953552,
+        "p95": 0.19999998807907104,
+        "max": 0.20000001788139343
+      },
+      "forcedUIRefreshMs": {
+        "count": 60,
+        "mean": 0.16166666646798453,
+        "p50": 0.19999998807907104,
+        "p95": 0.30000001192092896,
+        "max": 0.5
+      },
+      "rafIntervalMs": {
+        "count": 150,
+        "mean": 16.664666666587195,
+        "p50": 16.69999998807907,
+        "p95": 17,
+        "max": 17.599999994039536
+      },
+      "heapUsedBytes": 15874584
+    },
+    {
+      "name": "normal-day45",
+      "tick": 108000,
+      "rules": 53,
+      "alive": 31,
+      "pure": true,
+      "visibleSpeech": 0,
+      "frameSubmissionMs": {
+        "count": 150,
+        "mean": 2.993333332538605,
+        "p50": 2.9000000059604645,
+        "p95": 3.7000000178813934,
+        "max": 5.5999999940395355
+      },
+      "overlayLayoutMs": {
+        "count": 150,
+        "mean": 0.09266666710376739,
+        "p50": 0.09999999403953552,
+        "p95": 0.20000001788139343,
+        "max": 0.20000001788139343
+      },
+      "forcedUIRefreshMs": {
+        "count": 60,
+        "mean": 0.09499999980131785,
+        "p50": 0.09999999403953552,
+        "p95": 0.20000001788139343,
+        "max": 0.4000000059604645
+      },
+      "rafIntervalMs": {
+        "count": 150,
+        "mean": 19.41933333337307,
+        "p50": 19.399999976158142,
+        "p95": 20.5,
+        "max": 21.900000005960464
+      },
+      "heapUsedBytes": 24172236
+    },
+    {
+      "name": "staged-speech-crowd",
+      "tick": 0,
+      "rules": 53,
+      "alive": 28,
+      "pure": true,
+      "visibleSpeech": 7,
+      "frameSubmissionMs": {
+        "count": 150,
+        "mean": 2.2693333341677984,
+        "p50": 2.2999999821186066,
+        "p95": 2.5999999940395355,
+        "max": 3.9000000059604645
+      },
+      "overlayLayoutMs": {
+        "count": 150,
+        "mean": 0.20400000035762786,
+        "p50": 0.19999998807907104,
+        "p95": 0.30000001192092896,
+        "max": 0.5
+      },
+      "forcedUIRefreshMs": {
+        "count": 60,
+        "mean": 0.09666666686534882,
+        "p50": 0.09999999403953552,
+        "p95": 0.20000001788139343,
+        "max": 0.4000000059604645
+      },
+      "rafIntervalMs": {
+        "count": 150,
+        "mean": 16.67,
+        "p50": 16.69999998807907,
+        "p95": 17.299999982118607,
+        "max": 17.80000001192093
+      },
+      "heapUsedBytes": 12550648
+    }
+  ],
+  "errors": []
+}
