@@ -82,6 +82,7 @@ try {
       const hit=(r,q)=>r.x<q.x+q.w&&r.x+r.w>q.x&&r.y<q.y+q.h&&r.y+r.h>q.y;
       check(`${name}: overlays stay within canvas and outside panels`,geometry.rects.every(r=>r.x>=0&&r.y>=0&&r.x+r.w<=width&&r.y+r.h<=height&&!geometry.panels.some(q=>hit(r,q))),geometry);
       check(`${name}: full speech remains in inspector`,geometry.speech===fixture.text);
+      check(`${name}: staged scene disclosure clears the top controls`,await ev(`(()=>{const banner=document.querySelector('.scene-banner').getBoundingClientRect();return [...document.querySelectorAll('.dock-top .glass')].every(el=>el.getBoundingClientRect().bottom<=banner.top);})()`));
       await b.shot(`${out}/${name}.png`);
     }
     await b.sleep(400);

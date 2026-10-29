@@ -38,6 +38,11 @@ export function createViewerControls(ctx: UICtx, slots: Slots): Part {
   // Each opaque surface is measured separately; transparent dock space remains available to the world.
   const beat = new Every(0.15, true);
   const measurePanels = () => {
+    // Responsive rows and large text can exceed the old fixed --top-h estimate.
+    // Put the staged-scene disclosure below the actual top controls so its provenance stays readable.
+    const topBottom = Math.max(0, ...[...root.querySelectorAll<HTMLElement>('.dock-top .glass')]
+      .filter(el => !el.closest('[hidden]')).map(el => el.getBoundingClientRect().bottom));
+    slots.banner.style.top = `${topBottom + 8}px`;
     // A long staged-scene title or larger text must not hide the inspector's close/follow controls on a phone.
     const banner = root.querySelector<HTMLElement>('.scene-banner');
     const bannerBottom = banner && !banner.hidden && window.innerWidth <= 680 ? banner.getBoundingClientRect().bottom + 8 : 0;
@@ -56,6 +61,6 @@ export function createViewerControls(ctx: UICtx, slots: Slots): Part {
   return {
     onGame(event) { if (event === 'viewer') { sync(); measurePanels(); } },
     update(dt) { if (beat.step(dt)) measurePanels(); },
-    dispose() { controls.remove(); game.viewOcclusions = []; systemMotion.removeEventListener('change', sync); },
+    dispose() { controls.remove(); slots.banner.style.removeProperty('top'); game.viewOcclusions = []; systemMotion.removeEventListener('change', sync); },
   };
 }

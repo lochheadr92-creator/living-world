@@ -2,8 +2,9 @@
 
 2026-10-29, programme WS15. Based on `953eb90` / rules 53. Presentation only:
 no speech generation, duration, conversation outcome, world settings, save schema,
-RNG or simulation rules change. The active main checkout's uncommitted rules-54
-relocation work is deliberately outside this isolated branch.
+RNG or simulation rules change. Committed rules-54 relocation work (`aaa95ce`) and
+its predecessor reference (`f244b5d`) were subsequently integrated at `5033c9e`.
+Main's ongoing uncommitted rules-55 transport work remains untouched.
 
 ## Contract and ownership
 
@@ -78,6 +79,12 @@ Screenshots and machine-readable checks are in `viewer_evidence/before/` and
 `viewer_evidence/after/`. Main comparisons use 1440 × 900 at zoom .3, .9, 1.8 and 3.2.
 The additional layouts use 1024 × 768 at device scale 1.25, 390 × 844 at scale 2,
 and 900 × 500 at scale 1, with large text/high contrast and an open inspector.
+
+The integrated rerun in `viewer_evidence/integrated/` passes **37/37** checks.
+Visual review of scaled and short windows found the staged-scene banner overlapped
+the clock. It now sits below the actual measured top controls, with explicit browser
+checks. Injury descriptions in the person panel also wrap onto a separate line when
+necessary, keeping the Health label clear (`viewer_evidence/practical-final/`).
 
 The browser checks full panel speech, intended selected-bubble content level,
 non-overlap among names/icons/bubbles, preference persistence and warning semantics,

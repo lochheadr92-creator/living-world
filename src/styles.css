@@ -1607,16 +1607,20 @@ kbd {
 /* vitals */
 .vitals {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 14px;
 }
 .vital-top {
   display: flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
   align-items: baseline;
   justify-content: space-between;
   margin-bottom: 5px;
 }
 .vital-v {
+  max-width: 100%;
+  overflow-wrap: anywhere;
   font-size: calc(12px * var(--viewer-text-scale, 1));
   font-weight: 600;
 }
