@@ -159,8 +159,17 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   samples and no hammer was crafted in 45 days (hammers exist but are held by others); handles were never made because
   the cart recipe's inputs are not planned while its tool is missing. Rules 50's batch plan covers the cart once a hammer
   is in hand; the hammer is the hand-tool plan's job.
-- **Status.** Impl `partial` (batch plan reaches the cart recipe) · Contract `partial` · E2E `partial (staged haul scene)`
-  · Ordinary `no` · Rendered `partial` · Aggregate `unproven`.
+- **Delivered (rules 55, slice 11).** What a foot haul really delivers is counted on the hauler (`Person.hauling`: weight,
+  loads, six-day window) and is a ground for wanting a cart beside the deficit ground; a parked cart serves the reserve plan
+  (food from a granary, storehouse or pile to the home store, credited where it moves) and a batch plan (inputs to the
+  workshop, only what it accepts); a loaded cart left standing is recovered to the first site that needs its load or the home
+  store. Owner `src/sim/transport.ts`; contract `docs/TRANSPORT.md`; switch `rich-no-transport`; person-card line.
+- **Status.** Impl `yes` (demand ground, two plan destinations, recovery) · Contract `yes` (6 cases) · E2E `yes` (staged:
+  seven foot loads → demand with its own words; reserve food carted home and credited; batch inputs carted to the kiln;
+  puller dies → household member recovers the load to the site; partial unload at a full lean-to) · Ordinary `partial`
+  (the experience ground is reached by 7 people in three worlds and the demand surfaces 95 times, blocked by the hammer every
+  time; no cart exists, so no trip; table in the slice log) · Rendered `partial` (person-card line; no page check) ·
+  Aggregate `unproven` (lab rows in the slice log). Exchange goods are not carted (limit kept).
 
 ### WS8 Public projects and civic benefit
 - **Current.** Rules 42 `civic_benefit.ts recordCivicBenefit`, one call site after a successful `withdraw`
@@ -835,3 +844,34 @@ switch had nothing to act on. The rows (people +1.1 [+0.2, +2.1], deaths −1.4 
 preparations adopted +6.5, the rest within chance) are that one seed's divergence read against the nudge noise, all
 "within the noise floor"; `retainedRelocationsSettled` is 0.0 on both arms. No benefit claimed, no harm established, and
 no aggregate claim is possible until the proposal is chosen in ordinary worlds.
+
+### Slice 11 — rules 55 transport beyond the building site (WS7 remainder), 2026-10-29
+
+Predecessor reference: `tests/v54_continuation.expected.json` recorded from `aaa95ce` by `scripts/v54_reference.ts --write`
+(commit `f244b5d`). Contract: `docs/TRANSPORT.md`. Tests: `tests/transport.test.ts` (6); `tests/chains.test.ts` (carts)
+unchanged. The first ordinary run calibrated the experience ground: the threshold had been set at the staged full pack (60
+weight in 4 loads) and no ordinary carrier came near it, because a foot haul delivers about 3.5-4.3 weight (one or two
+units), so it was set where "keeps hauling" begins in those worlds (30 weight in 6 loads within six days) and the
+observation rerun. No page check: the slice adds one line to the person card.
+
+Ordinary observation, `scripts/transport_observe.ts`, Normal, immigration off, 45 days, rules 55
+(`transport_evidence/obs-45-{seed}-r55`; horizons reached, conservation held, observer purity held every 240 ticks):
+
+| seed | adult samples | with an in-window hauling record | with the experience ground | cart wanted on deficit / on experience (samples) | people ever wanting a cart | cart-making blocked (samples) | foot hauls started | carts |
+|---|---:|---:|---:|---:|---:|---|---:|---:|
+| meadow | 7650 | 3595 | 58 (4 people) | 55 / 33 | 5 | 49, all "needs a hammer" | 246 | 0 |
+| river | 7617 | 3194 | 20 (1 person: Petra, 34 weight in 7 loads) | 53 / 20 | 6 | 42 (38 hammer, 4 yard busy) | 228 | 0 |
+| forest | 5185 | 2269 | 52 (2 people) | 14 / 42 | 3 | 23, all "needs a hammer" | 168 | 0 |
+
+Read plainly: the brief's objection is answered, hauling history is now measured, and it changes who wants a cart (in
+forest the experience ground produces three times the deficit ground's demand); but every demand still stops at the hammer,
+as the WS7 diagnosis found, and no cart exists in any ordinary world, so the two new destinations and the recovery have no
+ordinary denominator and stand on the staged proof. The hammer is the hand-tool plan's job (rules 1-50) and its own
+blockers were recorded in the WS6 row; it is not changed here.
+
+Lab rows (8 seeds, 30 days, control + nudge against `rich-no-transport`; rows are ablation − reference;
+`transport_evidence/lab-transport/report.txt`). The ablation parts from the control in 8 of 8 seeds, 0.2 days after the
+fork: the first foot haul changes the demand list at once. Every row is within the noise floor: people +1.1 [+0.2, +2.1],
+deaths −1.4 [−2.4, −0.4] (floor ±3.1), projects adopted +7.4, preparations adopted +6.5 (the nudge arm moves these as
+much), tools +1.4 [−1.8, +4.2], the rest indistinguishable from chance. No cart was made on any arm (the hammer), so the
+rows measure the demand's side effects on planning, not transport. No benefit claimed, no harm established.

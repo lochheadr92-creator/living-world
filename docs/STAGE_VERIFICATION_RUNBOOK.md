@@ -295,6 +295,15 @@ Contract: [TECHNIQUE_TREE.md](TECHNIQUE_TREE.md).
 - Page check (dev server on 5182): `node scripts/browser/technique_tree_check.mjs "http://127.0.0.1:5182/" technique_evidence/rendered meadow`.
 - Lab harm check: `node scripts/lab.mjs --out technique_evidence/lab-tree --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-technique-tree`.
 
+## Rules 55 transport
+
+Contract: [TRANSPORT.md](TRANSPORT.md).
+
+- Contracts: `npx vitest run tests/transport.test.ts tests/chains.test.ts tests/batch_plan.test.ts tests/household_preparation.test.ts tests/v54_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/transport_observe.ts transport_evidence/obs-45-meadow-r55 meadow 45`
+  (240-tick samples of adults: in-window hauling records, carried-experience grounds, cart demands by ground, cart-making blockers; foot hauls and cart trips started by destination; carts; hauling records with weight per trip).
+- Lab harm check: `node scripts/lab.mjs --out transport_evidence/lab-transport --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-transport`.
+
 ## Rules 54 relocation extensions
 
 Contract: [RELOCATION_EXTENSIONS.md](RELOCATION_EXTENSIONS.md).

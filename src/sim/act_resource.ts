@@ -36,6 +36,7 @@ import { fellTree } from './sources';
 import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
 import { creditHauled, creditStocked } from './intent';
+import { noteHauled } from './transport';
 import { customerSuppliedAtSite } from './customers';
 import { noteWinterMeal } from './winter_practice';
 import { hasWinterReserve, isFoodKind } from './provision';
@@ -608,6 +609,8 @@ registerHandler('haul', {
     // credit a shelter plan at the one place material actually moves into a site, so a plan can only call itself finished
     // on what this person's own hands carried (intent.ts creditHauled; it does nothing for any other kind of plan)
     if (moved > 0) creditHauled(p, site.id, moved);
+    // rules 55 (transport.ts): what really reached the site on foot is the experience a cart is wanted on
+    if (moved > 0) noteHauled(world, p, (a.data.moved ?? {}) as Partial<Items>);
     // rules 51 (customers.ts): a haul to a customer's own household site supplies what they asked for
     if (moved > 0) customerSuppliedAtSite(world, p, site.hhId, site.id, (a.data.moved ?? {}) as Partial<Items>);
     if (moved > 0) site.lastWorkTick = world.tick;

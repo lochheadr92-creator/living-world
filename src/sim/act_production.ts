@@ -5,7 +5,10 @@ import { cartLoaded, cartOf, cartStore, hitch, unhitch } from './carts';
 import { buildingLabel } from './buildings';
 import { consume, transfer, weightOf } from './economy';
 import { addEvent, addFx, addLog } from './events';
-import { joinBlocker, noteBlocker, noteWithdraw, recipeOf, startJob, withdrawAllowance, workJob } from './facilities';
+import { joinBlocker, mayDeposit, noteBlocker, noteDeposit, noteWithdraw, recipeOf, startJob, withdrawAllowance, workJob } from './facilities';
+import { creditStocked } from './intent';
+import { hasTransport } from './transport';
+import { isFoodKind } from './provision';
 import { delBelief, observe } from './knowledge';
 import { creditContribution } from './social';
 import { findPath } from './pathfinding';
@@ -217,6 +220,21 @@ registerHandler('cart_haul', {
     const leg = (a.data.leg as number) ?? 0;
     const cart = world.byId.get(a.data.cartId as number);
     if (!cart || cart.ent !== 'cart') return 'the cart is gone';
+    if (leg === 0 && a.data.recover) {
+      // rules 55 (transport.ts): a loaded cart standing where it was left; take hold and go straight to where its load is wanted
+      if (!hasTransport(world)) return 'recovering a cart is not part of these rules';
+      const dst = world.byId.get(a.data.toId as number);
+      if (!dst) return 'the place is gone';
+      const s2 = standSpotFor(world, p, dst);
+      if (!s2) return 'nowhere to stand';
+      if (findPath(world, cart.x, cart.y, s2.x, s2.y, { exact: s2, cart: true, caller: 'cart_haul' }) === null) return 'no way through for a cart';
+      if (!hitch(world, p, cart)) return 'someone else has the cart';
+      observe(world, p, cart);
+      const err = setLeg(world, p, a, 2, a.data.toId as number);
+      if (err) return err;
+      a.duration = 14;
+      return;
+    }
     if (leg === 0) {
       // before taking hold: can wheels get from the cart to the load, and from the load to where it is going?
       const src = world.byId.get(a.data.fromId as number);
@@ -290,8 +308,16 @@ registerHandler('cart_haul', {
         observe(world, p, dest);
         addFx(world, 'deliver', dest.x + dest.w / 2, dest.y + dest.h / 2, 0);
       } else if (dest.ent === 'building') {
+        const rules55 = hasTransport(world) && !!a.data.transport;
         for (const k of Object.keys(cart.load) as ItemKind[]) {
-          moved += transfer(world, cart.load, dest.store.items, dest.store.cap, k, cart.load[k] ?? 0, 'cart:' + cart.id, 'building:' + dest.id, 'deposit');
+          // rules 55: a store takes only what it accepts, and the deposit is noted and credited as a deposit from the pack would be
+          if (rules55 && !mayDeposit(dest, k)) continue;
+          const m = transfer(world, cart.load, dest.store.items, dest.store.cap, k, cart.load[k] ?? 0, 'cart:' + cart.id, 'building:' + dest.id, 'deposit');
+          moved += m;
+          if (rules55 && m > 0) {
+            noteDeposit(world, dest, p, k, m);
+            if (isFoodKind(k)) creditStocked(p, dest.id, m, dest.type === 'granary');
+          }
         }
         observe(world, p, dest);
       }

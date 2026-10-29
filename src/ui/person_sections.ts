@@ -369,9 +369,11 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   // rules 51 (customers.ts): who asked them for a material they had none of, and what was brought and returned; the heading goes when there is nothing
   // rules 53 (winter_practice.ts): the practice of keeping winter stores, one line in their own words
   const winterLine = h('p', { class: 'trait-sum winter-practice' });
+  // rules 55 (transport.ts): what they have carried to building sites lately, the ground of wanting a cart
+  const haulingLine = h('p', { class: 'trait-sum hauling' });
   const customerHead = h('div', { class: 'sub-h cap' }, 'Their customers');
   const customerBox = h('div', { class: 'list customers' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, winterLine, customerHead, customerBox, payHead, payBox, heardHead, heardBox);
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, winterLine, haulingLine, customerHead, customerBox, payHead, payBox, heardHead, heardBox);
   const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
     heardBox,
     () => {
@@ -552,6 +554,8 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         setHidden(tradeLine, !v.trade);
         setText(winterLine, v.winterPractice.join(' '));
         setHidden(winterLine, !v.winterPractice.length);
+        setText(haulingLine, v.hauling.join(' '));
+        setHidden(haulingLine, !v.hauling.length);
         setHidden(customerHead, v.customers.length === 0);
         setHidden(customerBox, v.customers.length === 0);
         if (customerBox.dataset.key !== v.customers.join('|')) {

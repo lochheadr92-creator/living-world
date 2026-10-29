@@ -6,6 +6,7 @@ import { validateCustomers } from '../sim/customers';
 import { validateTechniques } from '../sim/techniques';
 import { validateSuccession } from '../sim/succession';
 import { validateWinterPractice } from '../sim/winter_practice';
+import { validateTransport } from '../sim/transport';
 import { validateEconomicObservations } from '../sim/settlement_economy';
 import { validateRelocations } from '../sim/relocation';
 import { validateTownships } from '../sim/townships';
@@ -233,6 +234,7 @@ export function deserializeWorld(json: string): World {
   validateTechniques(w);
   validateSuccession(w);
   validateWinterPractice(w);
+  validateTransport(w);
   validateAlignments(w);
   validateHouseholdPractices(w);
   validateGoalHistory(w);
