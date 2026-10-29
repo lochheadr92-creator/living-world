@@ -23,7 +23,7 @@ import { memoryRetentionOn, setMemoryRetention } from '../../src/sim/memory_rete
 import { householdPracticesOn, setHouseholdPractices } from '../../src/sim/household_practices';
 import { politicalAlignmentOn, setPoliticalAlignment } from '../../src/sim/political_alignment';
 import { exchangeJourneysOn, setExchangeJourneys } from '../../src/sim/exchange_journeys';
-import { relocationsOn, setRelocations } from '../../src/sim/relocation';
+import { relocationExtensionsOn, relocationsOn, setRelocationExtensions, setRelocations } from '../../src/sim/relocation';
 import { setConstructionSafety, constructionSafetyOn } from '../../src/sim/construction_access';
 import { setTechniques, techniquesOn, techniqueTreeOn, setTechniqueTree } from '../../src/sim/techniques';
 import { setDevelopment, developmentOn } from '../../src/sim/development';
@@ -279,6 +279,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-delivery-place') return {spec:label,summary:'a promise to a person names no place to leave it and the food ask ignores trust; hand-over, credit and consequences unchanged; no effect below rules 48',install(){const was=deliveryPlaceOn();setDeliveryPlace(false);return ()=>setDeliveryPlace(was);}};
   if (kind === 'rich-no-civic-food-benefit') return {spec:label,summary:'remove the public-food meal receipt only; withdrawal receipts and physical food unchanged; no effect below rules 49',install(){const was=civicFoodBenefitOn();setCivicFoodBenefit(false);return ()=>setCivicFoodBenefit(was);}};
   if (kind === 'rich-no-batch-plans') return {spec:label,summary:'no batch plan is taken on; every workshop option stays as it was; no effect below rules 50',install(){const was=batchPlansOn();setBatchPlans(false);return ()=>setBatchPlans(was);}};
+  if (kind === 'rich-no-relocation-extensions') return {spec:label,summary:'relocation keeps the rules-20 whole-household form: no subgroup consent, succession, return or search; no effect below rules 54',install(){const was=relocationExtensionsOn();setRelocationExtensions(false);return ()=>setRelocationExtensions(was);}};
   if (kind === 'rich-no-succession') return {spec:label,summary:'nothing a dead member left unfinished is recorded or taken up; plans, sites, piles and promises at death unchanged; no effect below rules 53',install(){const was=successionOn();setSuccession(false);return ()=>setSuccession(was);}};
   if (kind === 'rich-no-winter-practice') return {spec:label,summary:'no winter meal is counted, nothing is learned at winter\'s end and no season cue opens earlier; the reserve itself unchanged; no effect below rules 53',install(){const was=winterPracticeOn();setWinterPractice(false);return ()=>setWinterPractice(was);}};
   if (kind === 'rich-no-technique-tree') return {spec:label,summary:'smelting and forging are read as known by everyone and nobody tries a procedure untaught; charcoal firing, lessons and backgrounds unchanged; no effect below rules 52',install(){const was=techniqueTreeOn();setTechniqueTree(false);return ()=>setTechniqueTree(was);}};
