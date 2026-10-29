@@ -1,0 +1,23 @@
+{
+  "startingMain": "953eb90",
+  "implementation": "c41b3f6",
+  "rulesVersion": 58,
+  "authoritativeCheckout": "C:\\dev\\Claude Experiment\\living-world-integrate",
+  "branch": "main",
+  "localFastForwardConfirmed": true,
+  "trackedCleanAtIntegration": true,
+  "originalMainUntrackedInventoryPreserved": true,
+  "olderCheckout": "C:\\dev\\Claude Experiment\\living-world",
+  "olderBranch": "deepseek-b1",
+  "olderHead": "3d54edd",
+  "olderStatusPreserved": true,
+  "remoteTrackingMain": "953eb90a5a94bf69a73bba02e1c49d5e99c7cc7d",
+  "pushed": false,
+  "fullSuite": {
+    "files": 216,
+    "tests": 1488,
+    "seconds": 284.41,
+    "exit": 0
+  },
+  "remaining": "Expanded programme partial; current checkpoint and every workstream remain in docs/DEPENDENCY_CHAIN_PROGRAMME.md"
+}

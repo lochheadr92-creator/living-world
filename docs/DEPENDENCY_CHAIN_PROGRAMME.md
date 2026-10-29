@@ -11,6 +11,57 @@ childcare, rules 57 workshop tool prerequisites, and rules 58 physical seed stor
 and correct post-consumption craft capacity. The older rules-44–55 report below
 is historical scope, not closure of the expanded WS15–21 or their dependencies.
 
+## Current implementation checkpoint — expanded programme still open
+
+This continuation started from committed `953eb90` / rules 53 with concurrent main
+changes already in progress. Its verified implementation now ends at `c41b3f6` /
+rules 58. Local `main` in `C:\dev\Claude Experiment\living-world-integrate` was
+fast-forwarded to that candidate after verifying its tracked tree was clean. The
+original main untracked inventory and older dirty `deepseek-b1` checkout's status
+were preserved; neither was stashed, reset or committed. Remote `origin/main`
+remains `953eb90`; this continuation pushed nothing and opened no PR.
+
+The isolated worktree remains at
+`C:\Users\RJLoc\.codex\worktrees\living-world-viewer-programme\living-world`.
+Its ignored raw saves and verification logs were copied into the same relative
+`viewer_evidence/` paths on main without overwriting any existing file. Reports,
+screenshots and source manifests are committed. Keep both directories until any
+needed raw evidence is deliberately retained elsewhere; no cleanup is required now.
+
+The order followed the dependencies that appeared: speech and viewer preferences;
+rendered care/upkeep and mature-state measurements; childcare correctness exposed by
+those tests while the related transport candidate settled; actual workshop tool
+prerequisites; then diagnosed seed/craft capacity transitions. Earlier completed
+mechanisms were inspected and exercised, not replaced by duplicate systems.
+
+Verified commits in this continuation: `acce167` speech/viewer, `5fff1a6` scaled panel
+readability, `cc0e2dc` existing care/upkeep and mature measurements, `737c233` current
+needs and historical blocker age, `4f68699` practical childcare (56), `a465c2e` immutable
+56 references, `d5eeadd` workshop tool connection (57), `8dd1373` immutable 57 references,
+`c41b3f6` seed storage/craft accounting (58). Related committed main work was preserved
+through integration commits `5033c9e`, `4136255` and `9beba7c`.
+
+**Resume at the next actual transition, not a new programme.** Inspect this register
+and current branch/process state first. `viewer_evidence/seed58-river45/final.json`
+is the unmodified current-rules ordinary save at tick 108,000; source/settings hashes
+are in its sibling provenance file. There were 65 cart-demand samples and 33
+missing-hammer blocker samples, six crafted hammers overall, but no cart. The final
+retained hammer plans (Alma/Arlo) have material options; do not assume seed blockage
+explains those remaining failures. Trace actual offered choices, selected activities,
+interruptions, reservations and workshop component stock across the next demand
+episode. Before another simulation change, record the rules-58 predecessor and
+verify the next unused version; never regenerate the pinned 53–57 references.
+
+All remaining expanded rows stay in scope: whole winter food flows, home recovery and
+limited labour, shared maintenance acquisition/replacement, care through interiors
+and recovery handback, repeated physical cooperation, downstream industrial output,
+ordinary useful carts and trade, finite-depletion adaptation, proportionate dispute
+consequences, generational viability, ordinary relocation outcomes, complete rendered
+causal coverage, and mature current-rules Large/retention growth. Their specific owners,
+dependencies and next actions remain below. Staged successes and narrow contracts
+do not close these rows. No new aggregate benefit has been established; the earlier
+rules-47 shelter result retains only its original measured scope.
+
 Status fields (each row carries all six): **Impl** implemented · **Contract** contract-tested · **E2E** connected end to end
 in one staged physical run · **Ordinary** observed in an ordinary seeded world (with denominators) · **Rendered** inspectable
 and understandable in the page · **Aggregate** benefit measured (paired control/nudge) or explicitly unproven.
@@ -405,8 +456,8 @@ action for the expanded brief; no previous row is removed or promoted by inherit
 | WS3 / §6 seasonal reserves | Gather→deposit→preserve→withdraw/distribute→eat→replenish over an actual winter. Distinguish time expiry from stock/access/spoilage failure. | Homes, granary access, food help. Continue fixed ordinary worlds through preparation and winter; retain per-kind flows and adverse forest outcomes; render granary-share meals. | Existing rules-46 contracts/staged use and lab retained. Current rendered winter flow and recovery remain partial; survival benefit unproven. |
 | WS4 / §7 homes | Notice wear/loss→repair/replacement/upgrade→materials→finish→occupy; later response changes after genuine failure. | Labour/care, material reservations, competition with workshops. Stage collapse, abandoned site, limited-labour neighbour help and upgrade; check warmth/rest/spoilage consequences. | Existing shelter tests and housing-condition lab effect retained. Expanded recovery/failure-memory evidence partial; survival unproven. |
 | WS5 / §10 cooperation | Communicated commitment→contact/acquisition→actual fulfilment→relevant later choice, preserving refusal and expiry. | WS2, WS4, WS19. Stage repeated real delivery, changed home/access/capacity, moved recipient, cancellation and later eligible helper choice. | Rules-48 physical/ordinary deliveries retained; repeated natural cooperation, rendered failure distinctions and later eligible decision remain partial; aggregate unproven. |
-| WS6 / §11 production | Each listed recipe chain reaches useful consumption, including missing tool/procedure acquisition, without forcing industry. | WS7 tools/carts, WS10 procedures, WS18 resources. Rules 57 connects the actual required hand tool to plans/materials/crafting. Next trace capacity and physically accessible storage for blocked input acquisition. | Batch persistence/resumption retained; raw materials→hammer→cart→use proven staged. Ore→iron→forged use, bread eaten and every downstream chain not all proven; aggregate unproven. |
-| WS7 / §12 transport | Needed load→components/tool→cart→load/route/unload→use→upkeep/recovery, goods always physically located. | WS6 and equipment access. Rules 57 proves missing-hammer acquisition through cart delivery of 14 stone. Next investigate pack/storage blockage, then route block, changed demand and recovery variants. | Ordinary rules-57 river reaches 45 days: 14 demand samples, 3 crafted hammers, zero carts/trips. Provisioning/exchange transport and full recovery scenarios remain partial/unproven. |
+| WS6 / §11 production | Each listed recipe chain reaches useful consumption, including missing tool/procedure acquisition, without forcing industry. | WS7 tools/carts, WS10 procedures, WS18 resources. Rules 57 connects required hand tools; 58 connects seed storage and correct craft capacity. Next trace actual tool/workshop selection and component flow during a real demand episode. | Batch persistence/resumption retained; raw materials→hammer→cart→use proven staged, seed storage occurs ordinarily. Ore→iron→forged use, bread eaten and every downstream chain not all proven; aggregate unproven. |
+| WS7 / §12 transport | Needed load→components/tool→cart→load/route/unload→use→upkeep/recovery, goods always physically located. | WS6 and equipment access. Rules 57 proves missing-hammer acquisition through cart delivery of 14 stone; 58 repairs diagnosed pack transitions. Next follow an ordinary demand's tool acquisition, interruption and workshop stock/selection, then route and recovery variants. | Ordinary rules-58 river reaches day 45: 65 demand samples, 6 crafted hammers, zero carts/trips. Provisioning/exchange transport and full recovery scenarios remain partial/unproven. |
 | WS8 / §13 civic feedback | Personally witnessed useful service→bounded attributed receipt→later eligible civic choice. | WS3, WS16; keep transfer credit single. Render full-pack eat-at-store and then a real eligible recruitment decision; investigate zero ordinary meal receipts against actual eligible denominator. | Rules-49 tests/staged receipt retained. Receipt alone is not later civic behaviour, governance or survival proof. Other buildings require actual attributable use. |
 | WS9 / §14 demand/trade | Heard need→feasible work→surplus→customer exchange→return/delivery→changed work choice; repeated inter-settlement journeys. | WS6, WS7 and legitimate multi-settlement contact. Use Large profile with real complementary goods; trace stale/refused/interrupted journeys; retain zero opportunities. | Existing customer site deliveries retained. Produce-for-customer, ordinary swaps/returns, trade-review decisions and inter-settlement execution remain partial/unproven. |
 | WS10 / §17 practical knowledge | Wanted work→missing procedure→contact lesson or costly trial→learn→real output, across generations and loss. | WS6 physical workshops/ore/fuel. Stage loss/recovery and young learner→later smelt/forge/use; measure real opportunities after smithy completion. | Rules-52 tree/instruction/trial contracts retained. Ordinary higher techniques and generational useful-work evidence partial; aggregate unproven. |
