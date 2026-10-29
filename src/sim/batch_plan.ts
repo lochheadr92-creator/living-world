@@ -29,6 +29,7 @@ import { techniqueBlocker } from './techniques';
 import { isRawMaterial } from './options_work';
 import { rankWaterSpots } from './optutil';
 import { hasKnownResource, setBatchHooks } from './intent';
+import { orderBatchWants } from './cart_priority';
 import type { Intention } from './types';
 
 export const BATCH_FROM_VERSION = 50;
@@ -74,7 +75,8 @@ export interface BatchWant {
 export function batchWanted(ctx: Ctx): BatchWant | null {
   const { world, p } = ctx;
   if (!hasBatchPlans(world) || ctx.stage === 'child') return null;
-  const wants = demandsOf(ctx).filter((d) => BATCH_ITEMS.has(String(d.item)) && d.base >= BATCH_MIN_BASE).sort((a, b) => b.base - a.base);
+  // rules 59 (cart_priority.ts): a wanted cart comes before the site materials it would haul; the gates below still apply to it
+  const wants = orderBatchWants(world, demandsOf(ctx).filter((d) => BATCH_ITEMS.has(String(d.item)) && d.base >= BATCH_MIN_BASE).sort((a, b) => b.base - a.base));
   for (const d of wants) {
     const item = String(d.item);
     const recipes = item === 'cart' ? [RECIPE_BY_ID.build_cart] : recipesMaking(d.item as ItemKind);

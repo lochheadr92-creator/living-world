@@ -1,0 +1,1056 @@
+[
+ {
+  "tick": 31440,
+  "day": 13.1,
+  "name": "Maren",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.8,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by tool:saw",
+  "yardShelf": {
+   "planks": 1,
+   "wood": 3
+  },
+  "offers": [
+   "collect:11332:planks Collect 1 planks from the timber yard [26.6]",
+   "operate:11332:hew_planks Hewing planks [27.3]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "build:5471 [30.6]",
+   "operate:8144:quarry_stone [27.9]"
+  ],
+  "activity": "gather: Chopping wood"
+ },
+ {
+  "tick": 44400,
+  "day": 18.5,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.72,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by stock:take the food home (9 more to put by)",
+  "yardShelf": {
+   "planks": 1
+  },
+  "offers": [
+   "collect:11332:planks Collect 1 planks from the timber yard [8.0]",
+   "bring:11332:wood Bring 1 wood to the timber yard [7.7]",
+   "collect:13663:wood Collect 2 wood from the kiln [6.2]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:16470 [55.4]",
+   "haul:16725 [54.9]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 44640,
+  "day": 18.6,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.72,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by stock:take the food home (9 more to put by)",
+  "yardShelf": {
+   "planks": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "haul:16725 [54.9]",
+   "sleep:16470 [49.6]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 44880,
+  "day": 18.7,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.72,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by stock:take the food home (10 more to put by)",
+  "yardShelf": {
+   "planks": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "eat:0 [43.9]",
+   "gather:861 [40.9]"
+  ],
+  "activity": "gather: Picking berries"
+ },
+ {
+  "tick": 45120,
+  "day": 18.8,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.72,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by stock:take the food home (10 more to put by)",
+  "yardShelf": {
+   "planks": 1
+  },
+  "offers": [
+   "collect:11332:planks Collect 1 planks from the timber yard [8.0]",
+   "collect:13663:wood Collect 1 wood from the kiln [6.1]",
+   "gather:281 Chopping wood for my household’s house (hewn planks) [7.5]",
+   "gather:258 Chopping wood for my household’s house (hewn planks) [7.4]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "give:1034 [46.1]",
+   "shelter:16470 [30.0]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 45360,
+  "day": 18.9,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.72,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by stock:take the food home (13 more to put by)",
+  "yardShelf": {
+   "planks": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "drink:1000146 [41.6]",
+   "drink:1000149 [37.9]"
+  ],
+  "activity": "rest: Resting inside the hut"
+ },
+ {
+  "tick": 65040,
+  "day": 27.1,
+  "name": "Vik",
+  "hammer": true,
+  "rackHammer": false,
+  "build": 1.64,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "free",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "attend:23508 [35.9]",
+   "gather:842 [28.2]"
+  ],
+  "activity": "build: Building the smithy"
+ },
+ {
+  "tick": 70800,
+  "day": 29.5,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.95,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by tool:saw",
+  "yardShelf": {
+   "wood": 2,
+   "planks": 1
+  },
+  "offers": [],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:16470 [44.7]",
+   "sleep:2048 [43.5]"
+  ],
+  "activity": "sleep: Sleeping by my hut"
+ },
+ {
+  "tick": 71040,
+  "day": 29.6,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.95,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by tool:saw",
+  "yardShelf": {
+   "wood": 3,
+   "planks": 1
+  },
+  "offers": [
+   "operate:11332:hew_planks Hewing planks [8.6]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:16470 [59.8]",
+   "sleep:2048 [46.7]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 71280,
+  "day": 29.7,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.95,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by tool:saw",
+  "yardShelf": {
+   "wood": 3,
+   "planks": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "give:1033 [55.7]",
+   "sleep:16470 [46.0]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 71520,
+  "day": 29.8,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.95,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "slot held by tool:saw",
+  "yardShelf": {
+   "wood": 3,
+   "planks": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "drink:1000146 [51.0]",
+   "give:1034 [48.2]"
+  ],
+  "activity": "drink: Drinking at the water"
+ },
+ {
+  "tick": 71760,
+  "day": 29.9,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.95,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {
+   "wood": 3,
+   "planks": 1
+  },
+  "offers": [
+   "operate:11332:hew_planks Hewing planks [8.5]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "socialize:1034:warn [35.2]",
+   "visit:1009 [29.2]"
+  ],
+  "activity": "converse: Talking with Eli"
+ },
+ {
+  "tick": 72000,
+  "day": 30,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.95,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "build:25845 [39.6]",
+   "operate:8144:quarry_stone [34.9]"
+  ],
+  "activity": "build: Building the bakery"
+ },
+ {
+  "tick": 72240,
+  "day": 30.1,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.97,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [
+   "collect:21529:wood Collect 1 wood from the heap [22.3]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "operate:8144:quarry_stone [37.0]",
+   "socialize:1024:warn [34.8]"
+  ],
+  "activity": "gather: Chopping wood"
+ },
+ {
+  "tick": 72240,
+  "day": 30.1,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.73,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "eat:0 [39.6]",
+   "socialize:1024:request:wood [28.3]"
+  ],
+  "activity": "gather: Picking fruit"
+ },
+ {
+  "tick": 72480,
+  "day": 30.2,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.97,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [
+   "collect:21529:wood Collect 1 wood from the heap [12.8]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "give:1034 [44.3]",
+   "gather:3290 [35.0]"
+  ],
+  "activity": "gather: Chopping wood"
+ },
+ {
+  "tick": 72480,
+  "day": 30.2,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.73,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [],
+  "blocked": [
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "gather:14773 [39.7]",
+   "gather:308 [36.8]"
+  ],
+  "activity": "gather: Chopping wood"
+ },
+ {
+  "tick": 72720,
+  "day": 30.3,
+  "name": "Isla",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 0.99,
+  "ground": "to haul heavy loads",
+  "base": 15.8,
+  "batch": "planks/hew_planks",
+  "noCartBatchBecause": "batch wants planks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "drink:1000131 [32.2]",
+   "socialize:1024:offer [30.4]"
+  ],
+  "activity": "build: Building the bakery"
+ },
+ {
+  "tick": 72720,
+  "day": 30.3,
+  "name": "Jonas",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.73,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "drink:1000131 [48.9]",
+   "drink:1000149 [45.4]"
+  ],
+  "activity": "drink: Drinking at the water"
+ },
+ {
+  "tick": 89280,
+  "day": 37.2,
+  "name": "Maren",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.8,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {},
+  "offers": [
+   "collect:21529:wood Collect 1 wood from the heap [33.9]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "collect:21529:wood [33.9]",
+   "socialize:1029:warn [33.5]"
+  ],
+  "activity": "converse: Talking with Elin"
+ },
+ {
+  "tick": 89520,
+  "day": 37.3,
+  "name": "Maren",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.8,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "drink:1000148 [37.4]",
+   "drink:1000126 [35.0]"
+  ],
+  "activity": "converse: Talking with Orla"
+ },
+ {
+  "tick": 89760,
+  "day": 37.4,
+  "name": "Maren",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.8,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by stock:take the food home (5 more to put by)",
+  "yardShelf": {
+   "wood": 1,
+   "planks": 1
+  },
+  "offers": [],
+  "blocked": [
+   "Collect 1 planks: tried recently and found none to take",
+   "Hewing planks: tried recently and could not get on",
+   "Sawing planks: tried recently and could not get on",
+   "Building a handcart: tried recently and could not get on"
+  ],
+  "top": [
+   "operate:13663:fire_bricks [31.2]",
+   "gather:557 [25.1]"
+  ],
+  "activity": "converse: Talking with Pavel"
+ },
+ {
+  "tick": 106800,
+  "day": 44.5,
+  "name": "Sven",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.31,
+  "ground": "to haul heavy loads",
+  "base": 14.3,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hoe",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "gather:807 [32.9]",
+   "gather:805 [32.0]"
+  ],
+  "activity": "gather: Picking berries"
+ },
+ {
+  "tick": 106800,
+  "day": 44.5,
+  "name": "Bea",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.04,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hammer",
+  "yardShelf": {
+   "wood": 2
+  },
+  "offers": [
+   "gather:33947 Chopping wood for my household’s house (hewn planks) [6.8]",
+   "gather:557 Chopping wood for my household’s house (hewn planks) [6.5]"
+  ],
+  "blocked": [
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:4431 [53.9]",
+   "sleep:999 [42.6]"
+  ],
+  "activity": "sleep: Sleeping by my hut"
+ },
+ {
+  "tick": 106800,
+  "day": 44.5,
+  "name": "Vik",
+  "hammer": true,
+  "rackHammer": false,
+  "build": 1.69,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "critical need or danger",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [
+   "gather:33947 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [2.8]",
+   "gather:516 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [2.7]",
+   "gather:33947 Chopping wood to haul heavy loads (a handcart) (hewn planks) [-0.3]",
+   "gather:516 Chopping wood to haul heavy loads (a handcart) (hewn planks) [-0.4]",
+   "operate:11332:split_handles Shaping handles [1.1]",
+   "gather:33947 Chopping wood to haul heavy loads (a handcart) [-0.1]",
+   "gather:516 Chopping wood to haul heavy loads (a handcart) [-0.2]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Sawing planks: needs a saw and has none (and none is on the rack)"
+  ],
+  "top": [
+   "give:1037 [44.7]",
+   "socialize:1037:warn [37.2]"
+  ],
+  "activity": "give: Bringing berries to Rafe"
+ },
+ {
+  "tick": 107040,
+  "day": 44.6,
+  "name": "Sven",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.31,
+  "ground": "to haul heavy loads",
+  "base": 14.3,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hoe",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "sleep:4431 [54.8]",
+   "eat:0 [48.2]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 107040,
+  "day": 44.6,
+  "name": "Bea",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.04,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hammer",
+  "yardShelf": {
+   "wood": 2
+  },
+  "offers": [
+   "collect:11332:wood Collect 2 wood from the timber yard [6.2]",
+   "gather:33947 Chopping wood for my household’s house (hewn planks) [7.0]",
+   "gather:557 Chopping wood for my household’s house (hewn planks) [6.7]",
+   "collect:11332:wood Collect 1 wood from the timber yard [0.4]"
+  ],
+  "blocked": [
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:4431 [49.3]",
+   "sleep:999 [38.6]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 107040,
+  "day": 44.6,
+  "name": "Vik",
+  "hammer": true,
+  "rackHammer": false,
+  "build": 1.69,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by repair:get 1 wood to mend the lean-to",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [
+   "collect:11332:wood Collect 1 wood from the timber yard [6.9]",
+   "gather:32800 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [2.9]",
+   "gather:392 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [2.7]",
+   "collect:11332:wood Collect 1 wood from the timber yard [1.1]",
+   "gather:32800 Chopping wood to haul heavy loads (a handcart) (hewn planks) [-0.2]",
+   "gather:392 Chopping wood to haul heavy loads (a handcart) (hewn planks) [-0.3]",
+   "operate:11332:split_handles Shaping handles [2.2]",
+   "gather:32800 Chopping wood to haul heavy loads (a handcart) [0.0]",
+   "gather:392 Chopping wood to haul heavy loads (a handcart) [-0.1]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Sawing planks: needs a saw and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:7043 [61.3]",
+   "sleep:2293 [49.2]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 107280,
+  "day": 44.7,
+  "name": "Sven",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.31,
+  "ground": "to haul heavy loads",
+  "base": 14.3,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hoe",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "eat:0 [57.3]",
+   "drink:1000267 [52.7]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 107280,
+  "day": 44.7,
+  "name": "Bea",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.04,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hammer",
+  "yardShelf": {
+   "wood": 2
+  },
+  "offers": [
+   "collect:11332:wood Collect 2 wood from the timber yard [6.2]",
+   "gather:33947 Chopping wood for my household’s house (hewn planks) [7.0]",
+   "gather:557 Chopping wood for my household’s house (hewn planks) [6.7]",
+   "collect:11332:wood Collect 1 wood from the timber yard [0.4]"
+  ],
+  "blocked": [
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "shelter:4431 [30.0]",
+   "eat_store:4431 [19.8]"
+  ],
+  "activity": "rest: Resting inside the hut"
+ },
+ {
+  "tick": 107280,
+  "day": 44.7,
+  "name": "Vik",
+  "hammer": true,
+  "rackHammer": false,
+  "build": 1.69,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by repair:get 1 wood to mend the lean-to",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [
+   "collect:11332:wood Collect 1 wood from the timber yard [6.9]",
+   "gather:32800 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [2.9]",
+   "gather:392 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [2.7]",
+   "collect:11332:wood Collect 1 wood from the timber yard [1.1]",
+   "gather:32800 Chopping wood to haul heavy loads (a handcart) (hewn planks) [-0.2]",
+   "gather:392 Chopping wood to haul heavy loads (a handcart) (hewn planks) [-0.3]",
+   "operate:11332:split_handles Shaping handles [2.2]",
+   "gather:32800 Chopping wood to haul heavy loads (a handcart) [0.0]",
+   "gather:392 Chopping wood to haul heavy loads (a handcart) [-0.1]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Sawing planks: needs a saw and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:7043 [47.5]",
+   "sleep:2293 [37.1]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 107520,
+  "day": 44.8,
+  "name": "Sven",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.31,
+  "ground": "to haul heavy loads",
+  "base": 14.3,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hoe",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [
+   "bring:11332:wood Bring 2 wood to the timber yard [5.3]"
+  ],
+  "blocked": [
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "sleep:4431 [32.2]",
+   "rest:home:4431 [27.6]"
+  ],
+  "activity": "drink: Drinking at the water"
+ },
+ {
+  "tick": 107520,
+  "day": 44.8,
+  "name": "Bea",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.04,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hammer",
+  "yardShelf": {
+   "wood": 2
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "eat_store:4431 [35.1]",
+   "drink:1000267 [32.9]"
+  ],
+  "activity": "rest: Resting inside the hut"
+ },
+ {
+  "tick": 107520,
+  "day": 44.8,
+  "name": "Vik",
+  "hammer": true,
+  "rackHammer": false,
+  "build": 1.69,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by repair:get 1 wood to mend the lean-to",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "give:1037 [63.8]",
+   "shelter:7043 [30.0]"
+  ],
+  "activity": "rest: Resting inside the hut"
+ },
+ {
+  "tick": 107760,
+  "day": 44.9,
+  "name": "Sven",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.31,
+  "ground": "to haul heavy loads",
+  "base": 14.3,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hoe",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [
+   "bring:11332:wood Bring 2 wood to the timber yard [6.0]"
+  ],
+  "blocked": [
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "give:21965 [52.3]",
+   "sleep:4431 [38.4]"
+  ],
+  "activity": "sleep: Sleeping inside the hut"
+ },
+ {
+  "tick": 107760,
+  "day": 44.9,
+  "name": "Bea",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.04,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hammer",
+  "yardShelf": {
+   "wood": 2
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "drink:1000267 [53.2]",
+   "eat_store:4431 [50.4]"
+  ],
+  "activity": "rest: Resting inside the hut"
+ },
+ {
+  "tick": 107760,
+  "day": 44.9,
+  "name": "Vik",
+  "hammer": true,
+  "rackHammer": false,
+  "build": 1.69,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by repair:get 1 wood to mend the lean-to",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [
+   "collect:11332:wood Collect 1 wood from the timber yard [5.4]",
+   "gather:635 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [3.2]",
+   "gather:636 Chopping wood to help keep a neighbour’s granary standing (hewn planks) [3.2]",
+   "collect:11332:wood Collect 1 wood from the timber yard [-0.5]",
+   "gather:635 Chopping wood to haul heavy loads (a handcart) (hewn planks) [0.2]",
+   "gather:636 Chopping wood to haul heavy loads (a handcart) (hewn planks) [0.1]",
+   "operate:11332:split_handles Shaping handles [0.6]",
+   "gather:635 Chopping wood to haul heavy loads (a handcart) [0.4]",
+   "gather:636 Chopping wood to haul heavy loads (a handcart) [0.3]"
+  ],
+  "blocked": [
+   "Sawing planks: needs a saw and has none (and none is on the rack)",
+   "Sawing planks: needs a saw and has none (and none is on the rack)"
+  ],
+  "top": [
+   "rest:home:7043 [35.7]",
+   "harvest:13688 [23.0]"
+  ],
+  "activity": "drink: Drinking at the water"
+ },
+ {
+  "tick": 108000,
+  "day": 45,
+  "name": "Sven",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.31,
+  "ground": "to haul heavy loads",
+  "base": 14.3,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hoe",
+  "yardShelf": {
+   "wood": 1
+  },
+  "offers": [
+   "collect:13663:wood Collect 2 wood from the kiln [27.4]"
+  ],
+  "blocked": [
+   "Building a handcart: needs a hammer and has none (and none is on the rack)"
+  ],
+  "top": [
+   "gather:608 [36.1]",
+   "gather:34735 [36.0]"
+  ],
+  "activity": "gather: Chopping wood"
+ },
+ {
+  "tick": 108000,
+  "day": 45,
+  "name": "Bea",
+  "hammer": false,
+  "rackHammer": false,
+  "build": 1.04,
+  "ground": "to haul heavy loads",
+  "base": 15.1,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by tool:hammer",
+  "yardShelf": {
+   "wood": 2
+  },
+  "offers": [],
+  "blocked": [],
+  "top": [
+   "eat_store:4431 [55.1]",
+   "gather:986 [54.8]"
+  ],
+  "activity": "gather: Fishing"
+ },
+ {
+  "tick": 108000,
+  "day": 45,
+  "name": "Vik",
+  "hammer": true,
+  "rackHammer": false,
+  "build": 1.69,
+  "ground": "to haul heavy loads",
+  "base": 15,
+  "batch": "bricks/fire_bricks",
+  "noCartBatchBecause": "batch wants bricks instead",
+  "slot": "slot held by repair:get 1 wood to mend the lean-to",
+  "yardShelf": {},
+  "offers": [
+   "operate:11332:hew_planks Lend a hand at the timber yard [15.5]"
+  ],
+  "blocked": [
+   "Sawing planks: the timber yard is busy with hewn planks",
+   "Building a handcart: the timber yard is busy with hewn planks"
+  ],
+  "top": [
+   "give:1037 [50.6]",
+   "harvest:13688 [35.4]"
+  ],
+  "activity": "gather: Chopping wood"
+ }
+]

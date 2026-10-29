@@ -1,0 +1,2018 @@
+{
+  "input": "viewer_evidence/seed58-river45/final.json",
+  "inputSha256": "f0f16b4293375bb17bcf09a34893d669ded15bf3b1321cede2504489a5a48e92",
+  "rules": 58,
+  "tick": 108000,
+  "evidence": "One-tick snapshot of offered choices, demands, batch wants and remembered workshop state; retained histories only; no causal claim.",
+  "summary": {
+    "adults": 17,
+    "hammerHolders": [
+      "Ben",
+      "Zia",
+      "Tomas",
+      "Kai",
+      "Petra",
+      "Cole"
+    ],
+    "wantCart": [],
+    "wantCartWithHammer": [],
+    "batchWantsCart": [],
+    "maxKnownSiteDeficitWeight": 9,
+    "carts": 0,
+    "craftedHammers": 6,
+    "handlesMade": [],
+    "planksMade": [
+      [
+        "-used in hewn planks",
+        20
+      ],
+      [
+        "+made hewn planks",
+        20
+      ],
+      [
+        "-used in sawn planks",
+        6
+      ],
+      [
+        "+made sawn planks",
+        6
+      ]
+    ],
+    "openSites": [
+      {
+        "id": 29344,
+        "type": "bakery",
+        "required": {
+          "wood": 4,
+          "stone": 6,
+          "bricks": 6
+        },
+        "delivered": {
+          "wood": 1,
+          "stone": 2
+        },
+        "used": {
+          "wood": 3,
+          "stone": 4,
+          "bricks": 3
+        }
+      }
+    ]
+  },
+  "yards": [
+    {
+      "id": 10283,
+      "x": 27,
+      "y": 42,
+      "ops": {
+        "job": null,
+        "produced": {
+          "planks": 26
+        },
+        "consumed": {
+          "wood": 69
+        },
+        "lastRun": 92431,
+        "lastBlocker": ""
+      }
+    }
+  ],
+  "people": [
+    {
+      "id": 1106,
+      "name": "Mira",
+      "hh": 1103,
+      "build": 0.61,
+      "carpentry": 0.51,
+      "diligence": 0.85,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "seeds": 8,
+        "wood": 3,
+        "grain": 3,
+        "berries": 1
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 5,
+        "trips": 2,
+        "since": 79553
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 31.2,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 23.7,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 11.4,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "batch",
+          "makes": "bricks",
+          "step": "get 4 more clay for the fired bricks",
+          "blocked": "",
+          "since": 107878,
+          "until": 115078
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [
+        {
+          "key": "repair:10283",
+          "label": "Help repair a neighbour’s timber yard",
+          "goal": "to keep a neighbour’s roof over their head",
+          "util": 20.8,
+          "parts": [
+            [
+              "a neighbour’s home is falling apart",
+              30.2
+            ],
+            [
+              "walking",
+              -9
+            ]
+          ]
+        }
+      ],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "harvest:1547",
+          "label": "Harvest the crop",
+          "util": 49.4
+        },
+        {
+          "key": "harvest:1809",
+          "label": "Harvest the crop",
+          "util": 49.1
+        },
+        {
+          "key": "plant:2414",
+          "label": "Plant seed",
+          "util": 44.3
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107800,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1107,
+      "name": "Emre",
+      "hh": 1103,
+      "build": 0.77,
+      "carpentry": 0.55,
+      "diligence": 0.31,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "seeds": 20,
+        "berries": 3,
+        "basket": 1,
+        "grain": 9
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 4,
+        "trips": 2,
+        "since": 17558
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 3,
+          "base": 25.9,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 9.9,
+          "why": "to make a hoe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.3,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "repair",
+          "makes": "",
+          "step": "get 1 wood to mend the hut",
+          "blocked": "",
+          "since": 104459,
+          "until": 109259
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "harvest:1547",
+          "label": "Harvest the crop",
+          "util": 36.5
+        },
+        {
+          "key": "harvest:1809",
+          "label": "Harvest the crop",
+          "util": 36.3
+        },
+        {
+          "key": "warm:1102",
+          "label": "Warm up at the fire",
+          "util": 35.5
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106446,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "build": 0.93,
+      "carpentry": 0.65,
+      "diligence": 0.75,
+      "hammer": 1,
+      "saw": 0,
+      "axe": 1,
+      "pack": {
+        "hoe": 1,
+        "basket": 1,
+        "spear": 1,
+        "axe": 1,
+        "hammer": 1,
+        "pick": 1,
+        "berries": 1,
+        "grain": 7,
+        "seeds": 2
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 8,
+        "trips": 2,
+        "since": 31951
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 3,
+          "base": 28.2,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 21,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 11,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 1
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "repair",
+          "makes": "",
+          "step": "get 1 wood to mend the lean-to",
+          "blocked": "",
+          "since": 107401,
+          "until": 112201
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [
+        {
+          "key": "collect:10283:planks",
+          "label": "Collect 1 planks from the timber yard",
+          "goal": "to help keep a neighbour’s hall standing",
+          "util": 8.4,
+          "parts": [
+            [
+              "to help keep a neighbour’s hall standing",
+              20
+            ],
+            [
+              "walking",
+              -11.4
+            ]
+          ]
+        }
+      ],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "rest:home:8382",
+          "label": "Shelter at the hut",
+          "util": 51.6
+        },
+        {
+          "key": "warm:1102",
+          "label": "Warm up at the fire",
+          "util": 47.7
+        },
+        {
+          "key": "socialize:1113:chat",
+          "label": "Chat with Zia",
+          "util": 39
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107890,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "build": 1.24,
+      "carpentry": 1.09,
+      "diligence": 0.53,
+      "hammer": 1,
+      "saw": 1,
+      "axe": 1,
+      "pack": {
+        "basket": 1,
+        "spear": 1,
+        "seeds": 5,
+        "axe": 1,
+        "hammer": 1,
+        "saw": 1,
+        "grain": 2,
+        "berries": 3
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 10,
+        "trips": 2,
+        "since": 77985
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 3,
+          "base": 38.2,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 14.2,
+          "why": "to make a hoe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 10.1,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "stock",
+          "makes": "",
+          "step": "take the food home (6 more to put by)",
+          "blocked": "",
+          "since": 105487,
+          "until": 110287
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "socialize:1122:offer",
+          "label": "Offer grain to Eli",
+          "util": 40.7
+        },
+        {
+          "key": "gather:34282",
+          "label": "Chopping wood to keep the fire going",
+          "util": 31.8
+        },
+        {
+          "key": "gather:32010",
+          "label": "Chopping wood to keep the fire going",
+          "util": 31.4
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107985,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "build": 0.88,
+      "carpentry": 0.67,
+      "diligence": 0.47,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 6,
+        "hoe": 1,
+        "stone": 2,
+        "wood": 1,
+        "clay": 1,
+        "berries": 2
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 20,
+        "trips": 3,
+        "since": 79707
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 38.3,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 12.9,
+          "why": "to make an axe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.9,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 3
+        }
+      },
+      "activePlans": [],
+      "pastCartPlans": [],
+      "cartOffers": [
+        {
+          "key": "repair:10283",
+          "label": "Help repair a neighbour’s timber yard",
+          "goal": "to keep a neighbour’s roof over their head",
+          "util": 22.1,
+          "parts": [
+            [
+              "a neighbour’s home is falling apart",
+              33.9
+            ],
+            [
+              "walking",
+              -11.3
+            ]
+          ]
+        }
+      ],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "give:1122",
+          "label": "Bring berries to Eli",
+          "util": 91.7
+        },
+        {
+          "key": "rest:home:14045",
+          "label": "Shelter at the hut",
+          "util": 59.8
+        },
+        {
+          "key": "fuel:1102",
+          "label": "Add wood to the fire",
+          "util": 59.5
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107943,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1120,
+      "name": "Abel",
+      "hh": 1117,
+      "build": 0.68,
+      "carpentry": 0.69,
+      "diligence": 0.96,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "spear": 1,
+        "basket": 1,
+        "berries": 1,
+        "seeds": 5,
+        "grain": 13
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 9,
+        "trips": 1,
+        "since": 51495
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 3,
+          "base": 34.1,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 24.2,
+          "why": "to make a hoe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 11.8,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 3
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "repair",
+          "makes": "",
+          "step": "get 1 wood to mend the lean-to",
+          "blocked": "",
+          "since": 105617,
+          "until": 110417
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "give:1122",
+          "label": "Bring berries to Eli",
+          "util": 62.4
+        },
+        {
+          "key": "socialize:1122:offer",
+          "label": "Offer grain to Eli",
+          "util": 50.8
+        },
+        {
+          "key": "plant:14616",
+          "label": "Plant seed",
+          "util": 37.9
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106520,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "build": 0.96,
+      "carpentry": 0.97,
+      "diligence": 0.55,
+      "hammer": 1,
+      "saw": 1,
+      "axe": 1,
+      "pack": {
+        "pick": 1,
+        "basket": 1,
+        "axe": 1,
+        "hammer": 1,
+        "saw": 1,
+        "seeds": 6,
+        "spear": 1,
+        "hoe": 1,
+        "clay": 1,
+        "wood": 1,
+        "grain": 4
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 9,
+        "trips": 3,
+        "since": 98439
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 24.3,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 10.2,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 3
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "batch",
+          "makes": "bricks",
+          "step": "get 3 more clay for the fired bricks",
+          "blocked": "",
+          "since": 101306,
+          "until": 108506
+        },
+        {
+          "kind": "repair",
+          "makes": "",
+          "step": "mend the lean-to",
+          "blocked": "",
+          "since": 105692,
+          "until": 110492
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "socialize:1132:chat",
+          "label": "Chat with Petra",
+          "util": 44.5
+        },
+        {
+          "key": "socialize:1107:chat",
+          "label": "Chat with Emre",
+          "util": 39.2
+        },
+        {
+          "key": "harvest:15424",
+          "label": "Harvest the crop",
+          "util": 37
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106530,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1131,
+      "name": "Kai",
+      "hh": 1129,
+      "build": 1.8,
+      "carpentry": 0.63,
+      "diligence": 0.32,
+      "hammer": 1,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "pick": 1,
+        "hammer": 1,
+        "seeds": 12,
+        "basket": 1,
+        "stone": 2,
+        "spear": 1,
+        "grain": 4
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 6,
+        "trips": 1,
+        "since": 82086
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 31,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 10.1,
+          "why": "to make a hoe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.3,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "tool",
+          "makes": "hoe",
+          "step": "get 2 more wood for the hoe",
+          "blocked": "",
+          "since": 106978,
+          "until": 111778
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "rest:home:2852",
+          "label": "Shelter at the hut",
+          "util": 41
+        },
+        {
+          "key": "harvest:7477",
+          "label": "Harvest the crop",
+          "util": 38.3
+        },
+        {
+          "key": "harvest:7350",
+          "label": "Harvest the crop",
+          "util": 37.6
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106608,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "build": 1.27,
+      "carpentry": 0.97,
+      "diligence": 0.61,
+      "hammer": 1,
+      "saw": 1,
+      "axe": 1,
+      "pack": {
+        "basket": 1,
+        "seeds": 6,
+        "saw": 1,
+        "axe": 1,
+        "hammer": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 2,
+        "berries": 2,
+        "grain": 4
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 2,
+        "trips": 1,
+        "since": 96894
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 5,
+          "base": 27.2,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "stone",
+          "qty": 2,
+          "base": 15.8,
+          "why": "to make a pick"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 10.4,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "tool",
+          "makes": "pick",
+          "step": "get 2 more stone for the pick",
+          "blocked": "",
+          "since": 104364,
+          "until": 109164
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "rest:home:2852",
+          "label": "Shelter at the hut",
+          "util": 46.1
+        },
+        {
+          "key": "warm:1102",
+          "label": "Warm up at the fire",
+          "util": 44
+        },
+        {
+          "key": "harvest:7477",
+          "label": "Harvest the crop",
+          "util": 41.9
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106334,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1135,
+      "name": "Cole",
+      "hh": 1133,
+      "build": 1.71,
+      "carpentry": 1.13,
+      "diligence": 0.47,
+      "hammer": 1,
+      "saw": 1,
+      "axe": 1,
+      "pack": {
+        "axe": 1,
+        "hoe": 1,
+        "basket": 1,
+        "seeds": 4,
+        "saw": 1,
+        "hammer": 1,
+        "pick": 1,
+        "stone": 1,
+        "planks": 1,
+        "grain": 3
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 8,
+        "trips": 3,
+        "since": 84978
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 3,
+          "base": 31.1,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 23.2,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.9,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "repair",
+          "makes": "",
+          "step": "get 1 wood to mend the lean-to",
+          "blocked": "",
+          "since": 103274,
+          "until": 108074
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "eat:0",
+          "label": "Eat what I am carrying",
+          "util": 48.5
+        },
+        {
+          "key": "warm:1102",
+          "label": "Warm up at the fire",
+          "util": 37.4
+        },
+        {
+          "key": "gather:991",
+          "label": "Gathering wild grain",
+          "util": 37.4
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106604,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1137,
+      "name": "Ivy",
+      "hh": 1136,
+      "build": 1.22,
+      "carpentry": 1.18,
+      "diligence": 0.38,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "seeds": 22,
+        "basket": 1,
+        "stone": 2,
+        "berries": 2,
+        "grain": 3
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 6,
+        "trips": 1,
+        "since": 50265
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 26.6,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 19.3,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 11.1,
+          "why": "to make a hoe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.5,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "stock",
+          "makes": "",
+          "step": "take the food home (12 more to put by)",
+          "blocked": "",
+          "since": 103613,
+          "until": 108413
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "give:1140",
+          "label": "Bring berries to Nico",
+          "util": 52.8
+        },
+        {
+          "key": "drink:1000230",
+          "label": "Go and drink at the water",
+          "util": 51.1
+        },
+        {
+          "key": "drink:1000269",
+          "label": "Go and drink at the water",
+          "util": 48
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107997,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "build": 1.8,
+      "carpentry": 1.34,
+      "diligence": 0.68,
+      "hammer": 0,
+      "saw": 1,
+      "axe": 0,
+      "pack": {
+        "basket": 1,
+        "seeds": 4,
+        "saw": 1,
+        "berries": 1,
+        "wood": 2
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 31,
+        "trips": 6,
+        "since": 36324
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 23.3,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 17.7,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 17.4,
+          "why": "to make a hoe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 10.7,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "tool",
+          "makes": "hoe",
+          "step": "get 1 more stone for the hoe",
+          "blocked": "",
+          "since": 106125,
+          "until": 110925
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "gather:1091",
+          "label": "Fishing",
+          "util": 54.4
+        },
+        {
+          "key": "gather:939",
+          "label": "Picking berries",
+          "util": 53.3
+        },
+        {
+          "key": "gather:991",
+          "label": "Gathering wild grain",
+          "util": 53.3
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107999,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "build": 1.49,
+      "carpentry": 0.78,
+      "diligence": 0.26,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "seeds": 4,
+        "hoe": 1,
+        "stone": 1,
+        "grain": 1,
+        "berries": 2
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 3,
+        "trips": 1,
+        "since": 82409
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 3,
+          "base": 27.2,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "repair",
+          "makes": "",
+          "step": "get 1 wood to mend the lean-to",
+          "blocked": "",
+          "since": 106081,
+          "until": 110881
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "drink:1000231",
+          "label": "Go and drink at the water",
+          "util": 65.6
+        },
+        {
+          "key": "drink:1000233",
+          "label": "Go and drink at the water",
+          "util": 64
+        },
+        {
+          "key": "rest:home:20897",
+          "label": "Shelter at the hut",
+          "util": 35.1
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106618,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1144,
+      "name": "Alma",
+      "hh": 1143,
+      "build": 1.55,
+      "carpentry": 1.52,
+      "diligence": 0.46,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 1,
+      "pack": {
+        "axe": 1,
+        "basket": 1,
+        "spear": 1,
+        "seeds": 6,
+        "hoe": 1,
+        "clay": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 9,
+        "trips": 2,
+        "since": 48201
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 26.4,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 18.5,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "stone",
+          "qty": 2,
+          "base": 12.7,
+          "why": "to make a hammer"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.8,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 3
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "tool",
+          "makes": "hammer",
+          "step": "get 1 more wood for the hammer",
+          "blocked": "",
+          "since": 106382,
+          "until": 111182
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [
+        {
+          "key": "collect:10283:planks",
+          "label": "Collect 1 planks from the timber yard",
+          "goal": "to help keep a neighbour’s hall standing",
+          "util": 11.7,
+          "parts": [
+            [
+              "to help keep a neighbour’s hall standing",
+              17.6
+            ],
+            [
+              "walking",
+              -5.6
+            ]
+          ]
+        }
+      ],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "socialize:1147:chat",
+          "label": "Chat with Faye",
+          "util": 35.1
+        },
+        {
+          "key": "gather:991",
+          "label": "Gathering wild grain",
+          "util": 32.5
+        },
+        {
+          "key": "gather:940",
+          "label": "Picking berries",
+          "util": 32.5
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107999,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "build": 1.2,
+      "carpentry": 0.91,
+      "diligence": 0.63,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 1,
+      "pack": {
+        "basket": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "seeds": 1,
+        "berries": 5,
+        "pick": 1
+      },
+      "knownSiteDeficitWeight": 0,
+      "hauling": {
+        "weight": 15,
+        "trips": 3,
+        "since": 17282
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 3,
+          "base": 23.9,
+          "why": "for the shared bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 18.2,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 10.5,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for the shared bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "batch",
+          "makes": "bricks",
+          "step": "get 4 more clay for the fired bricks",
+          "blocked": "",
+          "since": 106486,
+          "until": 113686
+        },
+        {
+          "kind": "repair",
+          "makes": "",
+          "step": "get 1 wood to mend the lean-to",
+          "blocked": "",
+          "since": 107965,
+          "until": 112765
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [
+        {
+          "key": "collect:10283:planks",
+          "label": "Collect 1 planks from the timber yard",
+          "goal": "to help keep a neighbour’s hall standing",
+          "util": 13.7,
+          "parts": [
+            [
+              "to help keep a neighbour’s hall standing",
+              17.3
+            ],
+            [
+              "walking",
+              -3.3
+            ]
+          ]
+        }
+      ],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "warm:1102",
+          "label": "Warm up at the fire",
+          "util": 37.5
+        },
+        {
+          "key": "gather:937",
+          "label": "Picking berries",
+          "util": 36.2
+        },
+        {
+          "key": "rest:home:8742",
+          "label": "Shelter at the hut",
+          "util": 36
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107998,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1149,
+      "name": "Lena",
+      "hh": 1148,
+      "build": 1.19,
+      "carpentry": 0.67,
+      "diligence": 0.33,
+      "hammer": 0,
+      "saw": 0,
+      "axe": 0,
+      "pack": {
+        "basket": 1,
+        "wood": 4,
+        "seeds": 5,
+        "stone": 1,
+        "berries": 3,
+        "grain": 1
+      },
+      "knownSiteDeficitWeight": 9,
+      "hauling": {
+        "weight": 6,
+        "trips": 1,
+        "since": 79050
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 35.5,
+          "why": "for my household’s bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 15.1,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 10.3,
+          "why": "to make an axe"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.3,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for my household’s bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "batch",
+          "makes": "bricks",
+          "step": "get 4 more clay for the fired bricks",
+          "blocked": "",
+          "since": 104478,
+          "until": 111678
+        },
+        {
+          "kind": "stock",
+          "makes": "",
+          "step": "gather food to put by (7 more)",
+          "blocked": "",
+          "since": 106742,
+          "until": 111542
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [
+        {
+          "key": "repair:10283",
+          "label": "Help repair a neighbour’s timber yard",
+          "goal": "to keep a neighbour’s roof over their head",
+          "util": 15.4,
+          "parts": [
+            [
+              "a neighbour’s home is falling apart",
+              19.3
+            ],
+            [
+              "walking",
+              -3.6
+            ]
+          ]
+        }
+      ],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "repair:12543",
+          "label": "Repair the storehouse",
+          "util": 28.3
+        },
+        {
+          "key": "till:new",
+          "label": "Break ground for a new plot",
+          "util": 23.6
+        },
+        {
+          "key": "socialize:1140:offer",
+          "label": "Offer grain to Nico",
+          "util": 22.4
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 107997,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    },
+    {
+      "id": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "build": 1.05,
+      "carpentry": 1.68,
+      "diligence": 0.41,
+      "hammer": 0,
+      "saw": 1,
+      "axe": 0,
+      "pack": {
+        "seeds": 7,
+        "basket": 1,
+        "saw": 1,
+        "berries": 1,
+        "grain": 5
+      },
+      "knownSiteDeficitWeight": 9,
+      "hauling": {
+        "weight": 4,
+        "trips": 1,
+        "since": 60811
+      },
+      "experienceGround": "",
+      "cartDemand": null,
+      "demands": [
+        {
+          "item": "bricks",
+          "qty": 4,
+          "base": 36.6,
+          "why": "for my household’s bakery"
+        },
+        {
+          "item": "planks",
+          "qty": 1,
+          "base": 20.7,
+          "why": "to help keep a neighbour’s hall standing"
+        },
+        {
+          "item": "stone",
+          "qty": 1,
+          "base": 11.7,
+          "why": "to make a spear"
+        },
+        {
+          "item": "jar",
+          "qty": 1,
+          "base": 9.6,
+          "why": "to carry more water at a time"
+        }
+      ],
+      "batchWanted": {
+        "item": "bricks",
+        "recipe": "fire_bricks",
+        "facilityId": 22492,
+        "qty": 3,
+        "forSite": 29344,
+        "why": "for my household’s bakery",
+        "wants": {
+          "clay": 4
+        }
+      },
+      "activePlans": [
+        {
+          "kind": "tool",
+          "makes": "hammer",
+          "step": "get 1 more wood for the hammer",
+          "blocked": "",
+          "since": 106951,
+          "until": 111751
+        }
+      ],
+      "pastCartPlans": [],
+      "cartOffers": [
+        {
+          "key": "collect:10283:planks",
+          "label": "Collect 1 planks from the timber yard",
+          "goal": "to help keep a neighbour’s hall standing",
+          "util": 12.4,
+          "parts": [
+            [
+              "to help keep a neighbour’s hall standing",
+              19.6
+            ],
+            [
+              "walking",
+              -7
+            ]
+          ]
+        }
+      ],
+      "cartBlocked": [],
+      "toolWanted": null,
+      "topOptions": [
+        {
+          "key": "socialize:1140:offer",
+          "label": "Offer grain to Nico",
+          "util": 30.9
+        },
+        {
+          "key": "socialize:1140:warn",
+          "label": "Warn Nico about the wolf",
+          "util": 28.7
+        },
+        {
+          "key": "socialize:1149:warn",
+          "label": "Warn Lena about the wolf",
+          "util": 23.6
+        }
+      ],
+      "yardAsRemembered": {
+        "id": 10283,
+        "seen": 106661,
+        "items": {
+          "planks": 1,
+          "wood": 2
+        },
+        "ops": {
+          "job": null,
+          "readyAt": 0,
+          "client": 0,
+          "progress": 0
+        },
+        "hh": 0
+      }
+    }
+  ]
+}

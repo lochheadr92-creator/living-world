@@ -1,0 +1,47 @@
+{
+  "seed": "meadow",
+  "days": 45,
+  "arm": "current",
+  "rules": 59,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 119.215,
+  "alive": 32,
+  "counts": {
+    "adultSamples": 7650,
+    "cartDemand": 40,
+    "cartDemandWithHammer": 7,
+    "cartDemandNoHammer": 33,
+    "batchWantsCart": 7
+  },
+  "noCartBatchBecause": {
+    "batch wants planks instead": 15,
+    "batch wants the cart": 7,
+    "batch wants bricks instead": 18
+  },
+  "projectSlotWhenWanting": {
+    "slot held by tool:saw": 5,
+    "slot held by stock:take the food home (9 more to put by)": 2,
+    "slot held by stock:take the food home (10 more to put by)": 2,
+    "slot held by stock:take the food home (13 more to put by)": 1,
+    "free": 1,
+    "critical need or danger": 11,
+    "slot held by stock:take the food home (5 more to put by)": 1,
+    "slot held by tool:hoe": 6,
+    "slot held by tool:hammer": 6,
+    "slot held by repair:get 1 wood to mend the lean-to": 5
+  },
+  "yardStarts": {
+    "hew_planks": 72,
+    "saw_planks": 2
+  },
+  "cartPlans": [],
+  "cartsBuilt": [],
+  "carts": 0,
+  "craftedHammers": 1,
+  "hash": "f7db3649",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

@@ -42,15 +42,22 @@ needs and historical blocker age, `4f68699` practical childcare (56), `a465c2e` 
 through integration commits `5033c9e`, `4136255` and `9beba7c`.
 
 **Resume at the next actual transition, not a new programme.** Inspect this register
-and current branch/process state first. `viewer_evidence/seed58-river45/final.json`
-is the unmodified current-rules ordinary save at tick 108,000; source/settings hashes
-are in its sibling provenance file. There were 65 cart-demand samples and 33
-missing-hammer blocker samples, six crafted hammers overall, but no cart. The final
-retained hammer plans (Alma/Arlo) have material options; do not assume seed blockage
-explains those remaining failures. Trace actual offered choices, selected activities,
-interruptions, reservations and workshop component stock across the next demand
-episode. Before another simulation change, record the rules-58 predecessor and
-verify the next unused version; never regenerate the pinned 53–57 references.
+and current branch/process state first. The rules-58 demand episodes were traced
+(`scripts/cart_episode_observe.ts`, three seeds, 45 days, every sample pure): in all 44
+samples where a hammer-holder wanted a cart, the batch planner took planks or bricks
+for the very sites the cart was wanted for, because a site material's demand base
+(about 38) always exceeds the cart's (14 × work taste). Rules 59 (`docs/CART_PRIORITY.md`,
+`src/sim/cart_priority.ts`) places the wanted cart before the site-tagged wants and
+nothing else; the rules-58 reference was pinned first (`de9c635`). At 59 the planner
+answers the cart in 52 of 52 such samples and the first ordinary cart plan was adopted
+(Lena, forest, day 32), but no cart was built in 45 days: the plan's component steps
+score 0.7–4.3 against winter rest and warmth at 18–73 (the cart's base is the
+personal-convenience 14, the plan nudge 14), her wood source was unknown, and the
+demand with a hammer in meadow and river lasted one sample. The next bounded
+decisions are the weight of a settlement's cart want (charcoal's 30 was set for the
+same reason) and the brevity of the hauling-experience demand; neither is retuned here.
+Before another simulation change, record the rules-59 predecessor and verify the next
+unused version; never regenerate the pinned 53–58 references.
 
 All remaining expanded rows stay in scope: whole winter food flows, home recovery and
 limited labour, shared maintenance acquisition/replacement, care through interiors
@@ -457,7 +464,7 @@ action for the expanded brief; no previous row is removed or promoted by inherit
 | WS4 / §7 homes | Notice wear/loss→repair/replacement/upgrade→materials→finish→occupy; later response changes after genuine failure. | Labour/care, material reservations, competition with workshops. Stage collapse, abandoned site, limited-labour neighbour help and upgrade; check warmth/rest/spoilage consequences. | Existing shelter tests and housing-condition lab effect retained. Expanded recovery/failure-memory evidence partial; survival unproven. |
 | WS5 / §10 cooperation | Communicated commitment→contact/acquisition→actual fulfilment→relevant later choice, preserving refusal and expiry. | WS2, WS4, WS19. Stage repeated real delivery, changed home/access/capacity, moved recipient, cancellation and later eligible helper choice. | Rules-48 physical/ordinary deliveries retained; repeated natural cooperation, rendered failure distinctions and later eligible decision remain partial; aggregate unproven. |
 | WS6 / §11 production | Each listed recipe chain reaches useful consumption, including missing tool/procedure acquisition, without forcing industry. | WS7 tools/carts, WS10 procedures, WS18 resources. Rules 57 connects required hand tools; 58 connects seed storage and correct craft capacity. Next trace actual tool/workshop selection and component flow during a real demand episode. | Batch persistence/resumption retained; raw materials→hammer→cart→use proven staged, seed storage occurs ordinarily. Ore→iron→forged use, bread eaten and every downstream chain not all proven; aggregate unproven. |
-| WS7 / §12 transport | Needed load→components/tool→cart→load/route/unload→use→upkeep/recovery, goods always physically located. | WS6 and equipment access. Rules 57 proves missing-hammer acquisition through cart delivery of 14 stone; 58 repairs diagnosed pack transitions. Next follow an ordinary demand's tool acquisition, interruption and workshop stock/selection, then route and recovery variants. | Ordinary rules-58 river reaches day 45: 65 demand samples, 6 crafted hammers, zero carts/trips. Provisioning/exchange transport and full recovery scenarios remain partial/unproven. |
+| WS7 / §12 transport | Needed load→components/tool→cart→load/route/unload→use→upkeep/recovery, goods always physically located. | WS6 and equipment access. Rules 57 proves missing-hammer acquisition through cart delivery of 14 stone; 58 repairs diagnosed pack transitions; 59 puts the wanted cart before the site materials it would haul in the batch planner (the traced blocker in 44 of 44 hammer-holder samples). Next: the weight of the cart want against winter rest and the brevity of the hauling demand, then route and recovery variants. | Ordinary rules-59, three seeds, 45 days: the planner answers the cart in 52 of 52 hammer-holder samples, the first ordinary cart plan is adopted (forest, Lena, day 32), zero carts/trips. Provisioning/exchange transport and full recovery scenarios remain partial/unproven. |
 | WS8 / §13 civic feedback | Personally witnessed useful service→bounded attributed receipt→later eligible civic choice. | WS3, WS16; keep transfer credit single. Render full-pack eat-at-store and then a real eligible recruitment decision; investigate zero ordinary meal receipts against actual eligible denominator. | Rules-49 tests/staged receipt retained. Receipt alone is not later civic behaviour, governance or survival proof. Other buildings require actual attributable use. |
 | WS9 / §14 demand/trade | Heard need→feasible work→surplus→customer exchange→return/delivery→changed work choice; repeated inter-settlement journeys. | WS6, WS7 and legitimate multi-settlement contact. Use Large profile with real complementary goods; trace stale/refused/interrupted journeys; retain zero opportunities. | Existing customer site deliveries retained. Produce-for-customer, ordinary swaps/returns, trade-review decisions and inter-settlement execution remain partial/unproven. |
 | WS10 / §17 practical knowledge | Wanted work→missing procedure→contact lesson or costly trial→learn→real output, across generations and loss. | WS6 physical workshops/ore/fuel. Stage loss/recovery and young learner→later smelt/forge/use; measure real opportunities after smithy completion. | Rules-52 tree/instruction/trial contracts retained. Ordinary higher techniques and generational useful-work evidence partial; aggregate unproven. |
@@ -690,6 +697,19 @@ Population 31/22/8 stays constant in this short window; no generational claim.
   those outcomes causally to storage. There are six hammers overall but no cart/trip.
   Report/source manifest and read-only final prerequisite snapshot retained; raw save
   is local and ignored. No new aggregate benefit established.
+- Rules-59 diagnosis and evidence: `cart_evidence/snapshot-r58-river45.json` (one-tick
+  snapshot of the retained rules-58 save: nobody wanting a cart at the end, six hammers,
+  no cart plan ever) and `cart_evidence/episodes-r58-{river,meadow,forest}` (44 of 44
+  hammer-holder cart-demand samples answered with planks or bricks for a site). Five new
+  contracts and the immutable rules-58 reference pass; `cart_evidence/episodes-r59-*`
+  and the `rich-no-cart-first` arm (61 forest samples identical to rules 58) are the
+  ordinary result: 52 of 52 answered with the cart, one plan adopted, zero carts.
+- Rules-59 stable boundary: `npm test -- --maxWorkers=4` **218 files / 1,494 tests
+  passed**, exit 0, 289.63 s (`cart_evidence/rules59-full-tests.log`), including all
+  historical goldens and predecessor continuations 53–58. `npm run typecheck`, `npm run
+  build` and `git diff --check` exit 0; the build retains the native-loader notices and
+  a 931.65 kB chunk warning. No assertions, goldens, predecessor hashes, capacities,
+  recipes or test thresholds were relaxed.
 - Rules-58 stable boundary: `npm test -- --maxWorkers=4` **216 files / 1,488 tests
   passed**, exit 0, 284.41 s (`viewer_evidence/rules58-full-tests.log`), including all
   historical goldens and predecessor continuations. `npm run typecheck`, `npm run build`
@@ -1143,7 +1163,7 @@ every swap (slice 7); the cart experience threshold first set at the staged pack
 form at every version below 54. Limits per contract document. Outstanding, not decided here: (a) the relocation cue and
 ranking (the eligible are hunger-critical, so food outranks the proposal; a proposal made before the hunger is acute, or
 weighed as a way out of it, is a different bounded change); (b) exchange journeys carrying goods by cart and the WS9
-exchange remainder; (c) the hammer (hand-tool plan) as the one blocker of every cart; (d) ore mining and the smithy's
+exchange remainder; (c) the hammer (hand-tool plan) as the one blocker of every cart, and after rules 59 the weight of the cart want against ordinary rest (`docs/CART_PRIORITY.md`); (d) ore mining and the smithy's
 timing, which keep the technique tree staged; (e) whether to push the rules-54/55 and rendered-examples commits.
 
 **Commits (local `main`, oldest first).** `ce50c0a` 45 · `80b0fe4` 46 · `2a05b30` 47 · `53b06ec` 48 · `de8af50` 49 ·

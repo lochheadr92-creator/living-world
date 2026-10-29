@@ -1,0 +1,48 @@
+{
+  "seed": "river",
+  "days": 45,
+  "arm": "current",
+  "rules": 59,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 143.324,
+  "alive": 26,
+  "counts": {
+    "adultSamples": 7965,
+    "cartDemand": 38,
+    "cartDemandWithHammer": 1,
+    "cartDemandNoHammer": 37,
+    "batchWantsCart": 1
+  },
+  "noCartBatchBecause": {
+    "batch wants planks instead": 31,
+    "batch wants bricks instead": 6,
+    "batch wants the cart": 1
+  },
+  "projectSlotWhenWanting": {
+    "slot held by stock:take the food home (8 more to put by)": 2,
+    "slot held by shelter:get 2 wood for the hut (it wants 2 wood)": 3,
+    "slot held by shelter:get 1 wood for the hut (it wants 1 wood)": 2,
+    "slot held by shelter:take 1 wood to the hut": 4,
+    "slot held by shelter:the hut has its materials; it wants building": 6,
+    "slot held by stock:take the food home (7 more to put by)": 4,
+    "slot held by stock:gather food to put by (9 more)": 1,
+    "slot held by tool:hoe": 7,
+    "slot held by stock:take the food home (12 more to put by)": 2,
+    "slot held by repair:mend the lean-to": 6,
+    "slot held by tool:spear": 1
+  },
+  "yardStarts": {
+    "hew_planks": 32,
+    "saw_planks": 12
+  },
+  "cartPlans": [],
+  "cartsBuilt": [],
+  "carts": 0,
+  "craftedHammers": 6,
+  "hash": "ef8d251a",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

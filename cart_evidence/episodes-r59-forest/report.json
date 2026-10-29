@@ -1,0 +1,64 @@
+{
+  "seed": "forest",
+  "days": 45,
+  "arm": "current",
+  "rules": 59,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 113.006,
+  "alive": 23,
+  "counts": {
+    "adultSamples": 6742,
+    "cartDemand": 80,
+    "cartDemandWithHammer": 44,
+    "cartDemandNoHammer": 36,
+    "batchWantsCart": 44
+  },
+  "noCartBatchBecause": {
+    "no hammer (hand or rack)": 4,
+    "batch wants planks instead": 19,
+    "batch wants the cart": 44,
+    "batch wants bricks instead": 13
+  },
+  "projectSlotWhenWanting": {
+    "slot held by stock:gather food to put by (5 more)": 2,
+    "slot held by shelter:the hut has its materials; it wants building": 1,
+    "slot held by stock:gather food to put by (9 more)": 1,
+    "slot held by stock:gather food to put by (3 more)": 8,
+    "free": 5,
+    "slot held by tool:saw": 7,
+    "critical need or danger": 4,
+    "slot held by tool:spear": 5,
+    "slot held by stock:gather food to put by (6 more)": 2,
+    "slot held by stock:gather food to put by (7 more)": 1,
+    "slot held by stock:take the food home (3 more to put by)": 4,
+    "another batch: cart": 12,
+    "slot held by batch:cart, repair:get 1 wood to mend the lean-to": 16,
+    "slot held by tool:axe": 9,
+    "slot held by stock:take the grain to the granary (5 more to put by)": 1,
+    "slot held by stock:take the grain to the granary (6 more to put by)": 2
+  },
+  "yardStarts": {
+    "hew_planks": 41,
+    "saw_planks": 33
+  },
+  "cartPlans": [
+    {
+      "tick": 77040,
+      "name": "Lena",
+      "id": 27503,
+      "since": 76897,
+      "status": "active",
+      "step": "get 1 more wood for the hewn planks",
+      "reason": "to haul heavy loads, after carrying 41 weight of materials to building sites in 7 loads these last days"
+    }
+  ],
+  "cartsBuilt": [],
+  "carts": 0,
+  "craftedHammers": 7,
+  "hash": "79b4b88b",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

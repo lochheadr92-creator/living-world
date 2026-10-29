@@ -1,0 +1,51 @@
+{
+  "seed": "forest",
+  "days": 45,
+  "arm": "current",
+  "rules": 58,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 115.617,
+  "alive": 24,
+  "counts": {
+    "adultSamples": 6742,
+    "cartDemand": 61,
+    "cartDemandWithHammer": 36,
+    "cartDemandNoHammer": 25,
+    "batchWantsCart": 0
+  },
+  "noCartBatchBecause": {
+    "no hammer (hand or rack)": 4,
+    "batch wants planks instead": 19,
+    "batch wants bricks instead": 38
+  },
+  "projectSlotWhenWanting": {
+    "slot held by stock:gather food to put by (5 more)": 2,
+    "slot held by shelter:the hut has its materials; it wants building": 1,
+    "slot held by stock:gather food to put by (9 more)": 1,
+    "slot held by stock:gather food to put by (3 more)": 8,
+    "free": 4,
+    "slot held by tool:saw": 7,
+    "critical need or danger": 2,
+    "slot held by tool:spear": 1,
+    "slot held by stock:gather food to put by (6 more)": 1,
+    "slot held by stock:gather food to put by (7 more)": 1,
+    "slot held by stock:take the food home (3 more to put by)": 4,
+    "another batch: bricks": 12,
+    "slot held by batch:bricks, repair:get 1 wood to mend the lean-to": 16,
+    "slot held by batch:bricks, repair:mend the lean-to": 1
+  },
+  "yardStarts": {
+    "hew_planks": 34,
+    "saw_planks": 20
+  },
+  "cartPlans": [],
+  "cartsBuilt": [],
+  "carts": 0,
+  "craftedHammers": 5,
+  "hash": "e644ce1e",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

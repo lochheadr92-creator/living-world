@@ -68,6 +68,7 @@ import type { FoodKind } from '../../src/sim/types';
 /** what counts as food when a store is weighed up; the same list provision.ts uses */
 const FOOD_ITEMS: readonly FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat'];
 import type { Activity, Person } from '../../src/sim/types';
+import { cartFirstOn, setCartFirst } from '../../src/sim/cart_priority';
 import { setMoodEffects } from '../../src/sim/mood';
 import { unregisterSource } from '../../src/sim/registry';
 import type { SourceType, World } from '../../src/sim/types';
@@ -288,6 +289,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-practical-care') return {spec:label,summary:'remove rules-56 childcare location communication, local-contact and helper-reserve revalidation, and time-based request settlement; historical watch behaviour restored, no effect below 56',install(){const was=practicalCareOn();setPracticalCare(false);return ()=>setPracticalCare(was);}};
   if (kind === 'rich-no-workshop-tools') return {spec:label,summary:'remove only the connection from workshop-required tools to hand-tool plans, crafting and material options; borrowing remains; no effect below 57',install(){const was=workshopToolsOn();setWorkshopTools(false);return ()=>setWorkshopTools(was);}};
   if (kind === 'rich-no-seed-storage') return {spec:label,summary:'remove only seed storage trips offered to free capacity for a wanted raw material; existing farming withdrawal remains; no effect below 58',install(){const was=seedStorageOn();setSeedStorage(false);return ()=>setSeedStorage(was);}};
+  if (kind === 'rich-no-cart-first') return {spec:label,summary:'the batch planner keeps the rules-58 order of wants, so a wanted cart yields to site materials; every other gate unchanged; no effect below 59',install(){const was=cartFirstOn();setCartFirst(false);return ()=>setCartFirst(was);}};
   if (kind === 'rich-no-craft-capacity') return {spec:label,summary:'restore pre-consumption capacity checking when a hand tool finishes; no effect below 58',install(){const was=craftCapacityOn();setCraftCapacity(false);return ()=>setCraftCapacity(was);}};
   if (kind === 'rich-no-relocation-extensions') return {spec:label,summary:'relocation keeps the rules-20 whole-household form: no subgroup consent, succession, return or search; no effect below rules 54',install(){const was=relocationExtensionsOn();setRelocationExtensions(false);return ()=>setRelocationExtensions(was);}};
   if (kind === 'rich-no-succession') return {spec:label,summary:'nothing a dead member left unfinished is recorded or taken up; plans, sites, piles and promises at death unchanged; no effect below rules 53',install(){const was=successionOn();setSuccession(false);return ()=>setSuccession(was);}};
