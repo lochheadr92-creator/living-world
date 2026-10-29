@@ -127,13 +127,40 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 ### WS6 Production chains and workshop use
 - **Current.** `recipes.ts`, `production.ts` (supply planner to depth 3), `facilities.ts`, `act_production.ts`.
   Day-30 rules-43 saves: planks 25-34, bricks 6-12, charcoal 0/3/0, iron 0, ore unmined, flour/bread/jars/handles 0.
-- **Gap.** Demand not reaching ore/flour/handles; to be diagnosed chain by chain.
-- **Status.** Impl `partial` · Contract `partial` · E2E `partial` · Ordinary `partial` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis (45-day audits, rules 48, `chain_evidence/audit-45-*`).** Wants were constant (planks and bricks by ~20
+  people, jars by 9-18, carts by 1-6) and every step was offered, yet kilns fired 1-4 batches in 29 days, no jar,
+  handle or cart was ever made, house sites waited weeks at 6 %. Two structural causes: no persistence between a
+  chain's steps (each leaf re-derived and attenuated at every decision), and a batch left in its work phase could
+  never be got back to (any job blocked every operate as "busy"; the maker called away to drink lost it to the stall
+  limit). Ore stays untouched only because no smithy finished within 45 days (sites laid out on days 37-39); demand for
+  iron, flour and bread cannot arise before the workshop exists.
+- **Contract (rules 50, `docs/BATCH_PLAN.md`).** A private batch plan (after food, shelter, roof and tool plans) sees
+  one wanted workshop product through: get the raw input, bring it, run the recipe, wait or collect, haul to the site;
+  it adds no option, only names the planner's own options as its steps so the existing nudge carries them; it needs the
+  tool, the technique and a known source for every raw input before it is taken up, and ends with a stated reason. A
+  batch in its work phase can be resumed by its maker at once and by anyone with access after 300 ticks. A processed
+  input the same workshop makes from known raw inputs is made first under the same plan (handles before a cart, flour
+  before bread), one stage only; a hand-tool or roof plan may be taken on beside a batch (one extra plan), because the
+  first lab showed a batch holding the one slot cost about seven hand tools per world. Switches
+  `rich-no-batch-plans`, `rich-no-batch-resume`. Owners `src/sim/batch_plan.ts`, `facilities.ts resumableJob`;
+  `intent.ts` hooks, adoption, credit; `production.ts planRecipe` offers the way back.
+- **Chains covered by the mechanism.** planks (yard), handles (yard), bricks and jars (kiln), charcoal (kiln, with the
+  technique), iron (smithy), flour and bread (bakery), cart (yard, hammer first). Quarry stone is not a batch plan:
+  the quarry already runs on the ordinary site haul and had 12 / 9 / 3 stone produced.
+- **Status.** Impl `yes` · Contract `yes` (7 cases) · E2E `yes` (staged: clay → kiln → fired → collected → hauled to the
+  house; a farmer's jar fired and in hand; a stalled batch resumed; flour milled then bread baked under one plan) · Ordinary `yes` (14 / 13 / 4 plans adopted, 5 / 6 / 0 finished; first handles, jars and charcoal plans in ordinary worlds; table in the slice log) · Rendered `partial` (plan
+  goal and step on the person card through the existing plan panel; "get back to it" named in the option) · Aggregate
+  `unproven` (lab rows in the slice log).
 
 ### WS7 Transport, carts, capacity
 - **Current.** `production.ts wantsCart` reads current known site deficits ≥ 40 weight (no hauling history despite the
   comment); `cart_haul` serves known sites only. No cart in any ordinary run.
-- **Status.** Impl `partial` · Contract `partial` · E2E `partial (staged haul scene)` · Ordinary `no` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis (45-day audits).** Cart wanted by 3 / 6 / 1 people; "Building a handcart: needs a hammer" blocked 5 / 146 / 4
+  samples and no hammer was crafted in 45 days (hammers exist but are held by others); handles were never made because
+  the cart recipe's inputs are not planned while its tool is missing. Rules 50's batch plan covers the cart once a hammer
+  is in hand; the hammer is the hand-tool plan's job.
+- **Status.** Impl `partial` (batch plan reaches the cart recipe) · Contract `partial` · E2E `partial (staged haul scene)`
+  · Ordinary `no` · Rendered `partial` · Aggregate `unproven`.
 
 ### WS8 Public projects and civic benefit
 - **Current.** Rules 42 `civic_benefit.ts recordCivicBenefit`, one call site after a successful `withdraw`
@@ -148,7 +175,7 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 - **Status.** Impl `yes` · Contract `yes` (4 cases, `tests/civic_food_benefit.test.ts`; rules-42 tests unchanged) · E2E
   `yes` (staged: witnessed completion → public meal → receipt → experience 0.04 → 0.08, which the existing rules-42
   recruit path reads) · Ordinary `no` (0 meal receipts of 1 witnessed public meal in three seeds; table in the slice log) · Rendered `partial` (log line "the shared storehouse … helped me: I ate";
-  recruit note; no new page check) · Aggregate `unproven` (lab rows in the slice log).
+  recruit note; no new page check) · Aggregate `unproven` (8-seed lab: nothing beyond noise).
 
 ### WS9 Demand, specialisation, exchange
 - **Current.** Trade choice `trade.ts`, local demand rules 43, exchange journeys rules 22 (smoke: zero everywhere).
@@ -291,4 +318,49 @@ witness had already earned the project's single receipt by a withdrawal. Receipt
 meal. Ordinary activation of the meal path is therefore unproven here: 0 receipts of 1 witnessed meal, with the receipt
 already taken; the contract is proven staged only.
 
-(lab rows: `civic_food_evidence/lab-civic-food`, recorded below when run)
+Lab `civic_food_evidence/lab-civic-food` (8 seeds, control + nudge + `rich-no-civic-food-benefit`, run on the rules-50 tree with
+only the meal receipt removed): deaths −0.6 [−1.7, +0.3], people +0.4 [−0.6, +1.3], retained shared projects completed −0.1
+[−0.3, 0] and failed +0.3 [+0.1, +0.5] (within the noise floor), projects done +4.1 (within noise) for the ablation; nothing
+distinguishable from chance. No harm established, no benefit claimed.
+
+### Slice 6 — rules 50 batch plans and resumed batches (WS6, WS7 part), 2026-10-29
+
+Predecessor reference: `tests/v49_continuation.expected.json` recorded from `de8af50` by `scripts/v49_reference.ts --write`.
+Contract and the two root causes: `docs/BATCH_PLAN.md`. Tests: `tests/batch_plan.test.ts` (7), focused run 22 files / 235
+tests (intentions, reconsideration, projects, chains, economy, settlement economy, home, shelter, techniques, learner
+instruction, local demand, project helpers, stored materials, leave-heaviest, winter reserve, craft explanation, v48/v49
+continuation).
+
+Chain audit, `scripts/chain_audit.ts`, Normal, immigration off, 45 days, same seeds at rules 48 (before) and 50 (final
+source): horizons reached, conservation held, observer purity held at every 240-tick sample. Diverged worlds, not pairs.
+
+| seed | rules | deaths | planks made | bricks made | handles | charcoal | jars | carts | kiln built (day) | smithy | bakery | sites open at end | batch plans adopted / done / dropped (by product) |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---|---|---|---|
+| meadow | 48 | 1 | 22 | 12 | 0 | 0 | 0 | 0 | 16.1 | site 81 % | built 37.4 | houses 6 %, 6 %; hut 31 % | n/a |
+| meadow | 50 | 0 | 34 | 15 | 2 | 0 | 2 | 0 | 16.1 | built 21.5 | built 32.4 | houses 81 %, 6 %; hut 56 % | 14 / 5 / 9 (planks 7 → 2 done, jars 4 → 2, bricks 3 → 1) |
+| river | 48 | 10 | 30 | 3 | 0 | 0 | 0 | 0 | 36.1 | site 6 % | none | houses 6 %, 6 %; hall 46 % | n/a |
+| river | 50 | 8 | 32 | 9 | 0 | 6 | 0 | 0 | 20.4 | built 29.4 | site 6 % | house 6 % | 13 / 6 / 7 (planks 6 → 1, charcoal 4 → 4, bricks 2 → 1, jar 1 → 0) |
+| forest | 48 | 22 | 9 | 3 | 0 | 0 | 0 | 0 | 18.0 | none | site 6 % | granary 81 % | n/a |
+| forest | 50 | 22 | 7 | 3 | 0 | 0 | 0 | 0 | 18.0 | none | site 6 % | granary 56 % | 4 / 0 / 3, 1 active (bricks 3, planks 1) |
+
+The first handles (2, meadow) and water jars (2, meadow, both under a jar plan) ever made in an ordinary world, and the
+first charcoal plans finished (river, 4 of 4, 6 charcoal); meadow's smithy was built on day 21.5 against a site at 81 %
+on day 45 before, river's on day 29.4 against 6 %. Diverged worlds, so none of this is a paired effect; the lab rows
+below are the only aggregate reading. Drop reasons in the final runs (19 drops): "time is up" at a named step (collect
+the planks or bricks 5, firing 4, get more clay or wood 3, hewing 1) 13, "the site came by its planks some other way" 2,
+"the site is finished or gone" 1, and "gave it up after N tries: nothing there to take" 2, the last being a collect
+attempted on a batch the person believed ready that was not, or whose output somebody else's earmark had taken: a
+preserved failure that the person's record names. Forest lost 22 of 30 in its second winter at both versions. No cart
+was built (no cart plan adopted: the hammer-holders did not want one, the wanters held no hammer). Evidence:
+`chain_evidence/audit-45-{seed}` (rules 48) and `-r50` (final source; report, plans, samples, provenance, final save).
+Earlier rules-50 runs with two-day patience, and with the batch holding the one project slot, were overwritten by the
+final form; their numbers are not kept.
+
+Lab rows (final source, 8 seeds, 30 days, control + nudge against `rich-no-batch-plans`; rows are ablation − reference;
+`chain_evidence/lab-batch/report.txt`): workplaces −0.1 [−0.9, +0.8], solid homes −0.1, buildings +0.8 [−0.9, +2.3],
+tools +5.0 [+1.1, +9.6] (systematic, within the ±8.7 floor; was +6.9 before the beside-a-tool rule), projects done +4.3
+[0, +9.4], deaths −2.0 [−5.2, +0.3], people +1.4, all not distinguishable from chance except "below critical hunger at
+day 30" 0.9 → 0.0 [−2.3, −0.1], marked larger than chance (floor ±0.8) and carried by one seed: river, a world on the
+edge of famine in both arms, whose famine fell on day 23 without plans (3 dead, recovered by day 30) and on day 29-30
+with them (1 dead, 5 hungry at the snapshot, none of them at a batch; `scripts/chain_hunger_trace.ts`, logs beside the
+report). Recorded as a timing artefact with the question left open; no benefit claimed, no harm established.

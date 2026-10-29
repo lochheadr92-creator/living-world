@@ -35,6 +35,7 @@ import { leaveHeaviestOption } from './leave_heaviest';
 import type { Belief, BeliefKind, BuildingType, Commitment, FoodKind, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { hasFoodFetch } from './food_help';
 import { hasDeliveryPlace } from './delivery_place';
+import './batch_plan';
 import { isFood } from './social';
 import { T } from './types';
 

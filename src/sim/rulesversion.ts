@@ -97,10 +97,11 @@ import type { Settings, World } from './types';
 // the household's workshop site, the open-site cap or the stale-site sweep while the window is open (src/sim/winter_shelter.ts).
 // Version 48: a promise to a person names the asker's home as the agreed place to leave it, and a kept promise leans the next ask (src/sim/delivery_place.ts).
 // Version 49: a meal from a witnessed public storehouse is a personal benefit received, counted once by what left the store (src/sim/civic_benefit.ts).
-export const CURRENT_RULES_VERSION = 49;
+// Version 50: a private batch plan sees a wanted workshop product through from input to use (src/sim/batch_plan.ts).
+export const CURRENT_RULES_VERSION = 50;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

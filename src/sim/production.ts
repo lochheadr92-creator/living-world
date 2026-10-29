@@ -3,6 +3,7 @@ import { isRich } from './mood';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
+import { hasBatchResume } from './facilities';
 import { cartLoaded } from './carts';
 import { invRoom, weightOf } from './economy';
 import { delBelief, noteFailure, recentFailure } from './knowledge';
@@ -260,7 +261,7 @@ function skillBonus(p: Person, r: Recipe): number {
   return r.skill ? (p.skills[r.skill] - 1) * 9 : 0;
 }
 
-function toolAvailable(ctx: Ctx, f: Fac, r: Recipe): boolean {
+export function toolAvailable(ctx: Ctx, f: Fac, r: Recipe): boolean {
   if (!r.tool?.required) return true;
   const kind = r.tool.kind;
   return unitsOf(ctx.p.inv[kind]) > 0 || (f.b.tools ?? []).includes(kind);
@@ -291,7 +292,12 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   if (busy) {
     // somebody is working: join them if the recipe is the one that is wanted and has room for another pair of hands
     const running = RECIPE_BY_ID[snap!.job as string];
-    if (running && running.id === r.id && running.workers > 1 && r.id !== 'quarry_stone') operateLeaf(ctx, f, r, base * 0.8, `${why} (lend a hand)`, tag, true, siteId);
+    // rules 50 (facilities.ts resumableJob): a batch of this person's own, still being worked as they remember it, is one to get back
+    // to, not a busy workshop; the handler resumes the job as it stands
+    // (any recipe of theirs at this workshop: the stage before a product, flour before bread, is theirs to finish as much as the product)
+    const mine = hasBatchResume(world) && running && snap!.client === p.id && snap!.burn === 0 && snap!.progress < 1;
+    if (mine) operateLeaf(ctx, f, running, base * 0.97, `${why} (get back to it)`, tag, false, siteId);
+    else if (running && running.id === r.id && running.workers > 1 && r.id !== 'quarry_stone') operateLeaf(ctx, f, r, base * 0.8, `${why} (lend a hand)`, tag, true, siteId);
     else addBlocked(ctx, 'operate', r.doing, b.id, `the ${nameOf(b)} is busy with ${running ? running.label : 'a batch'}`, tag);
     return;
   }

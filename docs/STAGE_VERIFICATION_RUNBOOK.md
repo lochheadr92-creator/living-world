@@ -263,3 +263,13 @@ Contract: [CIVIC_FOOD_BENEFIT.md](CIVIC_FOOD_BENEFIT.md).
 - Contracts: `npx vitest run tests/civic_food_benefit.test.ts tests/civic_benefit.test.ts tests/v48_continuation.test.ts`.
 - Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/civic_food_observe.ts civic_food_evidence/ordinary-30-meadow meadow 30`.
 - Lab harm check: `node scripts/lab.mjs --out civic_food_evidence/lab-civic-food --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-civic-food-benefit`.
+
+## Rules 50 batch plans and resumed batches
+
+Contract and the chain diagnosis: [BATCH_PLAN.md](BATCH_PLAN.md).
+
+- Contracts: `npx vitest run tests/batch_plan.test.ts tests/intentions.test.ts tests/plan_reconsider.test.ts tests/v49_continuation.test.ts`.
+- Chain audit: `node node_modules/vite-node/dist/cli.mjs scripts/chain_audit.ts chain_evidence/audit-45-meadow-r50 meadow 45`
+  (same optional arguments as the other observation scripts; writes sampled wants, blocked steps by reason, facility records,
+  sites, tools, ledger by chain item, ground stock and the final save).
+- Lab harm check: `node scripts/lab.mjs --out chain_evidence/lab-batch --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-batch-plans`.

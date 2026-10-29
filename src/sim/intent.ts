@@ -51,6 +51,8 @@ import { hyp } from './util';
 
 /** how much a plan may tilt a choice. Deliberately small: a plan is a preference, never an override. */
 const NUDGE = 14;
+/** how long a batch plan (rules 50) is given; mirrored in batch_plan.ts BATCH_PATIENCE */
+const BATCH_PATIENCE_TICKS = DAY * 3;
 /** the same number, for the ranking code, which has already asked `intentFor` which plan an option serves */
 export const NUDGE_FOR_PLAN = NUDGE;
 /** the evening: late enough to see the night coming, early enough to do something about it */
@@ -89,7 +91,7 @@ export function setReconsider(on: boolean): void {
 export const reconsiderOn = (): boolean => reconsider;
 
 /** Does the person know a source of `item` they reckon has anything left, counting regrowth? */
-function hasKnownResource(world: World, p: Person, item: ItemKind): boolean {
+export function hasKnownResource(world: World, p: Person, item: ItemKind): boolean {
   if (usesMaterialStock(world, 'plan') && rememberedMaterialStores(world, p, item).length) return true;
   for (const st of Object.keys(SOURCE_ITEM) as SourceType[]) {
     if (SOURCE_ITEM[st] !== item) continue;
@@ -284,7 +286,20 @@ type Step = { kind: Intention['stepKind']; target: number; item: ItemKind | null
  * The step that would serve this plan now. The shelter is looked up afresh each time, so one that has stopped being a shelter (the
  * belief dropped on finding it gone) simply stops being the target and the step moves on.
  */
+// Rules 50 (batch_plan.ts): a batch plan's want, step and outcome live beside the planner that offers its options; they are
+// installed from there, so that this module does not import the planner (which imports this one).
+export interface BatchHooks {
+  want: (ctx: Ctx) => { item: string; recipe: string; facilityId: number; qty: number; forSite: number; why: string; wants: Partial<Items> } | null;
+  step: (ctx: Ctx, i: Intention) => Step;
+  outcome: (world: World, p: Person, i: Intention) => { status: 'done' | 'dropped'; reason: string } | null;
+}
+let batchHooks: BatchHooks | null = null;
+export function setBatchHooks(h: BatchHooks): void {
+  batchHooks = h;
+}
+
 function stepFor(ctx: Ctx, i: Intention): Step {
+  if (i.kind === 'batch') return batchHooks ? batchHooks.step(ctx, i) : { kind: 'none', target: 0, item: null, step: '', key: null, blocked: 'no batch planning' };
   if (i.kind === 'tool') return toolStep(ctx, i);
   if (i.kind === 'repair') return repairStep(ctx, i);
   if (i.kind === 'stock') return stockStep(ctx, i);
@@ -331,6 +346,7 @@ function projectOutcome(world: World, p: Person, i: Intention): { status: 'done'
   }
   if (i.kind === 'stock') return stockOutcome(world, p, i);
   if (i.kind === 'shelter') return shelterOutcome(world, p, i);
+  if (i.kind === 'batch') return batchHooks ? batchHooks.outcome(world, p, i) : { status: 'dropped', reason: 'no batch planning' };
   if (i.kind === 'repair') {
     const b = ownHomeBelief(p);
     if (!b) return { status: 'dropped', reason: 'there is no home of theirs left to mend' };
@@ -719,7 +735,8 @@ export function planDeliveringTo(p: Person, siteId: number): Intention | null {
 export function creditHauled(p: Person, siteId: number, units: number): void {
   if (units <= 0 || !siteId || !p.intentions.length) return;
   for (const i of p.intentions) {
-    if (i.status !== 'active' || i.kind !== 'shelter' || i.aboutId !== siteId) continue;
+    // a household shelter plan for this site, or (rules 50) a batch plan whose output was for it
+    if (i.status !== 'active' || !((i.kind === 'shelter' && i.aboutId === siteId) || (i.kind === 'batch' && i.forSite === siteId))) continue;
     i.worked += units;
   }
 }
@@ -845,12 +862,15 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
     }
     const n = stepFor(ctx, i);
     if (i.blocked && !n.blocked) i.reason = 'taken up again';
-    if (i.aboutId && n.target && i.aboutId !== n.target) {
-      // two quite different things: the old one stopped being a shelter they know of, or a better one turned up
-      const stillKnown = shelters(ctx).some((s) => s.id === i.aboutId);
-      i.reason = stillKnown ? 'settled on a different shelter' : 'the shelter it was aiming for is no longer one they know of';
+    // (a batch plan, rules 50, is about its workshop whatever place its current step names: the site it hauls to is a step, not a change of mind)
+    if (i.kind !== 'batch') {
+      if (i.aboutId && n.target && i.aboutId !== n.target) {
+        // two quite different things: the old one stopped being a shelter they know of, or a better one turned up
+        const stillKnown = shelters(ctx).some((s) => s.id === i.aboutId);
+        i.reason = stillKnown ? 'settled on a different shelter' : 'the shelter it was aiming for is no longer one they know of';
+      }
+      if (n.target) i.aboutId = n.target;
     }
-    if (n.target) i.aboutId = n.target;
     i.step = n.step;
     i.stepKind = n.kind;
     i.stepTarget = n.target;
@@ -902,7 +922,9 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
   // and one project. Nothing here says which of them they work on next: that is the ordinary ranking's business, and a plan is only
   // ever a bounded preference in it.
   const live = p.intentions.filter((i) => i.status === 'active');
-  if (live.length >= MAX_INTENTIONS) return live[0];
+  // (rules 50: a batch plan does not count against the cap, so a tool or roof plan fits beside it; see adoptProject)
+  const cap = MAX_INTENTIONS + (runsRulesVersion(world, 50) && live.some((i) => i.kind === 'batch') ? 1 : 0);
+  if (live.length >= cap) return live[0];
   // Children do not make plans of their own. They still seek shelter at night - that option is open to everyone (options_survival.ts
   // optShelter) - but looking a night ahead, weighing needs against daylight and carrying a goal across activities is adult work, and
   // the same `stage` the engine already uses to keep children off adult tasks decides it here.
@@ -957,7 +979,12 @@ function adoptProject(ctx: Ctx): Intention | null {
   // again here because this is also reached directly.
   const live = p.intentions.filter((i) => i.status === 'active');
   if (live.length >= MAX_INTENTIONS) return null;
-  if (live.some((i) => i.kind !== 'night')) return null;
+  // Rules 50: a hand-tool or roof plan may be taken on beside a batch plan. A batch holds a workshop product through for up to
+  // three days, and the 8-seed lab showed it costing about seven hand tools per world when it also held the one project slot;
+  // tools unlock more than any one batch, so the batch no longer blocks them. A batch is still never taken on beside another
+  // project, and there is never more than one batch.
+  const batchBeside = runsRulesVersion(world, 50) && live.some((i) => i.kind === 'batch');
+  if (live.some((i) => i.kind !== 'night' && !(batchBeside && i.kind === 'batch'))) return null;
 
   // How long since the last plan of a kind ended, used below: the same rule for every kind, counted from the END, because
   // "gave up on it, still short three" followed at once by "means to do it" is the same decision made again with nothing new
@@ -1053,7 +1080,47 @@ function adoptProject(ctx: Ctx): Intention | null {
 
   const roof = repairWanted(ctx);
   const tool = roof ? null : toolWanted(ctx);
-  if (!roof && !tool) return null;
+  // A BATCH AT A KNOWN WORKSHOP (rules version 50, batch_plan.ts; the hook returns null below 50 and with the lab switch off):
+  // after the roof and the tool, which unlock more, and on the same one-a-day cooldown as every other kind.
+  if (!roof && !tool) {
+    const batch = batchHooks && !batchBeside && !onCooldown('batch') ? batchHooks.want(ctx) : null;
+    if (!batch) return null;
+    const made: Intention = {
+      id: world.nextId++,
+      kind: 'batch',
+      goal: batch.item === 'cart' ? 'build a handcart at the timber yard' : `see ${batch.qty} ${batch.item} through at the ${(p.beliefs[batch.facilityId]?.btype ?? 'workshop').replace('_', ' ')}${batch.forSite ? ' for the site' : ''}`,
+      since: world.tick,
+      until: world.tick + BATCH_PATIENCE_TICKS,
+      status: 'active',
+      reason: batch.why,
+      setAside: 0,
+      aboutId: batch.facilityId,
+      wants: batch.wants,
+      makes: batch.item,
+      sheltered: 0,
+      worked: 0,
+      ended: 0,
+      reserve: batch.qty,
+      recipe: batch.recipe,
+      forSite: batch.forSite,
+      step: '',
+      stepKind: 'none',
+      stepTarget: 0,
+      stepItem: null,
+      stepKey: null,
+      blocked: '',
+    };
+    const st = stepFor(ctx, made);
+    made.step = st.step;
+    made.stepKind = st.kind;
+    made.stepTarget = st.target;
+    made.stepItem = st.item;
+    made.stepKey = st.key;
+    made.blocked = st.blocked;
+    p.intentions.push(made);
+    addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
+    return made;
+  }
   const kind: Intention['kind'] = roof ? 'repair' : 'tool';
   // One of a kind at a time, and not straight after the last one of that kind ended.
   if (onCooldown(kind)) return null;

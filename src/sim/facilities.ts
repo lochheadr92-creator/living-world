@@ -1,5 +1,6 @@
 import { recordWorkshopOutput } from './settlement_economy';
 import { techniqueBlocker } from './techniques';
+import { runsRulesVersion } from './rulesversion';
 import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
 import { addItem, ledgerConsume, ledgerCreate, weightOf, takeFrom } from './economy';
@@ -15,6 +16,26 @@ import type { Building, Earmark, FacilitySnapshot, FacilityState, Items, ItemKin
 
 /** A batch nobody has worked on for this long is shelved: its inputs go back on the shelves unharmed. */
 export const STALL_LIMIT = DAY * 2;
+// Rules 50: a batch left in its work phase is not lost to its own maker. Before 50 any job under way answered every operate with
+// "a batch is already under way", so a person called away mid-batch (thirst, a wolf, night) could never come back to it, and the
+// batch sat until the stall limit shelved it: the 45-day chain audits show kilns "busy" for days with nothing being made.
+// The maker may get back to their own batch at any time; anyone with access may pick up a batch nobody has worked for
+// RESUME_AFTER ticks. Nothing is drawn from the shelves again: the job keeps its inputs, its progress and its client.
+export const RESUME_AFTER = 300;
+let batchResume = true;
+/** Lab switch `rich-no-batch-resume`: a batch under way blocks every operate as before 50; no effect below 50. */
+export function setBatchResume(on: boolean): void {
+  batchResume = on;
+}
+export const batchResumeOn = (): boolean => batchResume;
+export const hasBatchResume = (world: World): boolean => batchResume && world.settings.dynamics === 'rich' && runsRulesVersion(world, 50);
+/** Is this the job that `p` may get back to: the same recipe, still being worked, theirs or abandoned long enough? */
+export function resumableJob(world: World, b: Building, p: Person, r: Recipe): boolean {
+  const job = b.ops?.job;
+  if (!hasBatchResume(world) || !job || job.phase !== 'work' || job.recipe !== r.id) return false;
+  if (!mayUse(world, p, b)) return false;
+  return job.client === p.id || world.tick - job.lastWork > RESUME_AFTER;
+}
 /** Finished goods and delivered inputs are held for whoever they belong to this long, then become the workplace's own stock. */
 export const EARMARK_TERM = Math.round(DAY * 1.5);
 
@@ -326,7 +347,7 @@ export function startBlocker(world: World, b: Building, p: Person, r: Recipe): s
   if (r.at !== b.type) return 'wrong kind of workplace';
   const technique = techniqueBlocker(world,p,r.id);
   if(technique)return technique;
-  if (ops.job) return ops.job.phase === 'burn' ? 'the fire is already burning a batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room' : 'a batch is already under way';
+  if (ops.job && !resumableJob(world, b, p, r)) return ops.job.phase === 'burn' ? 'the fire is already burning a batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room' : 'a batch is already under way';
   if (!mayUse(world, p, b)) return 'not theirs to use';
   if (b.condition < 12) return 'too run down to use';
   if (r.tool?.required) {
@@ -363,6 +384,8 @@ function weightOfList(items: Items): number {
 
 /** Start a batch. Inputs and fuel leave the shelves (they still exist: they are held by the batch). Returns an error text or null. */
 export function startJob(world: World, b: Building, p: Person, r: Recipe, client: number, purpose: string, destSite = 0): string | null {
+  // rules 50: getting back to a batch under way is not starting one; the job stands as it is
+  if (resumableJob(world, b, p, r)) return null;
   const why = startBlocker(world, b, p, r);
   if (why) return why;
   const ops = opsOf(b)!;

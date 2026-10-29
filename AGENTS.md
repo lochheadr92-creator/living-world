@@ -44,7 +44,9 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-Current rules version 49 makes a meal from a witnessed public storehouse a personal benefit received, counted once when the meal ends by exactly what left the store (`src/sim/civic_benefit.ts recordCivicFoodBenefit`, `docs/CIVIC_FOOD_BENEFIT.md`); lab removal `rich-no-civic-food-benefit`; the rules-48 reference was recorded from `53b06ec` first.
+Current rules version 50 lets an adult take on one batch at a known workshop as a private plan that persists from input to use (dig or collect the input, bring it, run the recipe, collect the output, haul it to the site; a processed input the same workshop makes is made first, one stage only; a hand-tool or roof plan may run beside the batch), and lets a batch left in its work phase be got back to by its maker at once or by anyone with access after 300 ticks instead of blocking the workshop as busy (`src/sim/batch_plan.ts`, `facilities.ts resumableJob`, `docs/BATCH_PLAN.md`); lab removals `rich-no-batch-plans` and `rich-no-batch-resume`; the rules-49 reference was recorded from `de8af50` first.
+
+Rules version 49 makes a meal from a witnessed public storehouse a personal benefit received, counted once when the meal ends by exactly what left the store (`src/sim/civic_benefit.ts recordCivicFoodBenefit`, `docs/CIVIC_FOOD_BENEFIT.md`); lab removal `rich-no-civic-food-benefit`; the rules-48 reference was recorded from `53b06ec` first.
 
 Rules version 48 lets a promise to a person name the asker's home as the agreed place to leave it when the helper knows that home, keeps it by an ordinary deposit credited once from what moved, and leans a hungry person's choice of whom to ask on remembered trust by at most ±4 (`src/sim/delivery_place.ts`, `docs/DELIVERY_PLACE.md`); lab removal `rich-no-delivery-place`; the rules-47 reference was recorded from `2a05b30` first.
 

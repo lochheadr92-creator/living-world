@@ -6,6 +6,8 @@ import { seekCarerOn, setSeekCarer } from '../../src/sim/welfare';
 import { winterReserveOn, setWinterReserve } from '../../src/sim/provision';
 import { winterShelterOn, setWinterShelter } from '../../src/sim/winter_shelter';
 import { deliveryPlaceOn, setDeliveryPlace } from '../../src/sim/delivery_place';
+import { batchPlansOn, setBatchPlans } from '../../src/sim/batch_plan';
+import { batchResumeOn, setBatchResume } from '../../src/sim/facilities';
 import {backgroundsOn,setBackgrounds} from '../../src/sim/background';
 import { achievementAftermathOn, setAchievementAftermath } from '../../src/sim/achievement';
 import { projectHelperChoiceOn, setProjectHelperChoice } from '../../src/sim/options_social';
@@ -273,6 +275,8 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-winter-shelter') return {spec:label,summary:'no pre-winter cue on laying out, finishing or mending a home, and a home site is blocked by its own workshop site and the open-site cap and cancelled for idleness as before; no effect below rules 47',install(){const was=winterShelterOn();setWinterShelter(false);return ()=>setWinterShelter(was);}};
   if (kind === 'rich-no-delivery-place') return {spec:label,summary:'a promise to a person names no place to leave it and the food ask ignores trust; hand-over, credit and consequences unchanged; no effect below rules 48',install(){const was=deliveryPlaceOn();setDeliveryPlace(false);return ()=>setDeliveryPlace(was);}};
   if (kind === 'rich-no-civic-food-benefit') return {spec:label,summary:'remove the public-food meal receipt only; withdrawal receipts and physical food unchanged; no effect below rules 49',install(){const was=civicFoodBenefitOn();setCivicFoodBenefit(false);return ()=>setCivicFoodBenefit(was);}};
+  if (kind === 'rich-no-batch-plans') return {spec:label,summary:'no batch plan is taken on; every workshop option stays as it was; no effect below rules 50',install(){const was=batchPlansOn();setBatchPlans(false);return ()=>setBatchPlans(was);}};
+  if (kind === 'rich-no-batch-resume') return {spec:label,summary:'a batch under way blocks every operate as before rules 50; the batch plan itself is unchanged; no effect below 50',install(){const was=batchResumeOn();setBatchResume(false);return ()=>setBatchResume(was);}};
   if (kind === 'rich-uniform-backgrounds') return {spec:label,summary:'retain previous starting skills and universal adult charcoal knowledge for future creation only; existing people unchanged',install(){const was=backgroundsOn();setBackgrounds(false);return ()=>setBackgrounds(was);}};
   if (kind === 'rich-no-achievement-aftermath') return {spec:label,summary:'remove construction satisfaction and later hopes only; no effect below rules 38',apply:()=> 'achievement aftermath off',install(){const was=achievementAftermathOn();setAchievementAftermath(false);return ()=>setAchievementAftermath(was);}};
   if (kind === 'rich-no-reconsider') return {spec:label,summary:'remove plan reconsideration only; changes nothing below version 34',apply:()=> 'plan reconsideration off',install(){const was=reconsiderOn();setReconsider(false);return ()=>setReconsider(was);}};

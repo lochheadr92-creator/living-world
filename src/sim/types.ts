@@ -313,7 +313,7 @@ export type CommitmentStatus = 'active' | 'done' | 'broken' | 'cancelled' | 'exp
 export interface Intention {
   id: number;
   /** the family of plan; each kind knows how to find its next step and when it is finished */
-  kind: 'night' | 'tool' | 'repair' | 'stock' | 'shelter';
+  kind: 'night' | 'tool' | 'repair' | 'stock' | 'shelter' | 'batch';
   /** what they mean to bring about, in their own terms */
   goal: string;
   since: number;
@@ -360,6 +360,9 @@ export interface Intention {
    */
   reserve?: number;
   cue?: 'season' | 'hardship';
+  /** For a batch plan (`batch`, rules version 50): the recipe it runs and the site its output is for (0 for none). Absent on every other kind and below 50. */
+  recipe?: string;
+  forSite?: number;
 }
 
 /** nobody juggles more than this many private plans at once */
