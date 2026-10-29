@@ -3,6 +3,7 @@ import { validateHouseholdPractices } from '../sim/household_practices';
 import { validateAlignments } from '../sim/political_alignment';
 import { validateExchangeJourneys } from '../sim/exchange_journeys';
 import { validateCustomers } from '../sim/customers';
+import { validateTechniques } from '../sim/techniques';
 import { validateEconomicObservations } from '../sim/settlement_economy';
 import { validateRelocations } from '../sim/relocation';
 import { validateTownships } from '../sim/townships';
@@ -227,6 +228,7 @@ export function deserializeWorld(json: string): World {
   validateRelocations(w);
   validateExchangeJourneys(w);
   validateCustomers(w);
+  validateTechniques(w);
   validateAlignments(w);
   validateHouseholdPractices(w);
   validateGoalHistory(w);

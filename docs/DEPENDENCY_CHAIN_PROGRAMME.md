@@ -205,7 +205,25 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 
 ### WS10 Knowledge, teaching, technique dependencies
 - **Current.** One technique (charcoal), person-held; lessons 180 ticks; learner requests (41); backgrounds (44).
-- **Status.** Impl `partial` · Contract `yes (charcoal)` · E2E `yes (charcoal)` · Ordinary `1 lesson (meadow)` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis.** The smithy's recipes (`smelt_iron`, `forge_*`) needed only skill, tool and materials: one procedure is not
+  a tree, and a procedure whose last holder died had no way back. No ordinary 45-day world had a standing smithy before
+  day 21, so the iron chain's knowledge was never tested there.
+- **Contract (rules 52, `docs/TECHNIQUE_TREE.md`).** Three procedures: charcoal firing, iron smelting (needs charcoal to
+  learn or try), iron forging (needs smelting). Who starts knowing comes from the rules-44 background with its own salts
+  (a specialist smith; the experienced sometimes; never the inexperienced; a smelter arrives knowing the fire). The same
+  lesson teaches any of them (offer to child or apprentice; the learner asks for the first procedure lacking on the way).
+  A person whose wanted work has been blocked by a procedure for two days, holding the one before it, may try it untaught:
+  real inputs and time, two failed batches, the third yields the goods and the procedure, recorded with its cost. Knowing,
+  proficiency, tool, materials and willingness stay five separate facts. Switch `rich-no-technique-tree`. Owner
+  `src/sim/techniques.ts`; `background.ts backgroundKnows`; gates in `facilities.ts` and `production.ts` (the trial leaf);
+  lessons in `social.ts` and `options_social.ts`; the want noted in `decision.ts`.
+- **Status.** Impl `yes` · Contract `yes` (7 cases, `tests/technique_tree.test.ts`; rules 18/41/44 tests unchanged) · E2E
+  `yes` (staged: want → blocked → lesson refused/taught → forging after → real iron; want → two days → trial → two failed
+  batches → iron and the procedure; last holder dead → gap → trial) · Ordinary `partial` (backgrounds seed 3-4 smelters per
+  village; 4 charcoal lessons learned; forest lost a smelter and a forger to death; smelting and forging wanted but no ore
+  mined and no smithy before day 33, so no lesson or trial past charcoal in 135 seed-days; table in the slice log) ·
+  Rendered `yes` (three lines on the person card; page check `scripts/browser/technique_tree_check.mjs` 4 / 4) · Aggregate
+  `unproven` (lab rows in the slice log).
 
 ### WS11 Household projects, succession, culture
 - **Current.** Promises released on death; organiser death confers no office; supper practice (24); aspirations (38).
@@ -424,3 +442,46 @@ tools +1.6 [−2.3, +5.2], projects adopted +7.2 [−1.1, +14.3] (7 / 1 seeds), 
 −0.8, ask units delivered +0.1, below critical hunger +0.4 [+0.1, +0.9] (systematic, within the ±0.8 floor): "nothing moved
 by more than a one-draw nudge moves it". The projects-adopted lean (7 of 8 seeds fewer with the slice on) is the same
 direction as the swap-rule lab and is noted as a lead to watch, not a result. No benefit claimed, no harm established.
+
+### Slice 8 — rules 52 technique tree and knowledge continuity (WS10), 2026-10-29
+
+Predecessor reference: `tests/v51_continuation.expected.json` recorded from `7dd9066` by `scripts/v51_reference.ts --write`
+(commits `573a18a`, `cdb7a03`). Contract: `docs/TECHNIQUE_TREE.md`. Tests: `tests/technique_tree.test.ts` (7); the rules
+18 / 41 / 44 technique, learner-instruction and background tests unchanged; focused 12 files / 74 tests. Page check
+`scripts/browser/technique_tree_check.mjs` 4 / 4 (a holder's card "Iron smelting: known on arrival (initial background)"; another's
+"Iron smelting: not learned. Smithy proficiency alone does not supply this technique. Iron forging: not learned (must learn
+iron smelting first)."; `technique_evidence/rendered`).
+
+A correction found by this slice's observer: the rules-51 customers code pruned lapsed leads inside option generation,
+which observers run too; the daily option sample threw "Observer mutated state". Pruning moved to the decision
+(`decision.ts`), the purity test now covers a lead past its window, and the fix is in this commit (noted in `docs/CUSTOMERS.md`).
+
+Ordinary observation, `scripts/technique_observe.ts`, Normal, immigration off, 45 days, rules 52 final source
+(`technique_evidence/obs-45-{seed}`): horizons reached, conservation held, observer purity held at every daily sample
+(every awake person's options generated and the world serialized before and after).
+
+| seed | alive / dead | holders at start (charcoal / smelting / forging) | at end | holders lost to death | lessons learned | lesson offers / requests started | option samples wanting a procedure | samples blocked by one | smithy built (day) | ore mined | iron | trials |
+|---|---|---|---|---|---|---:|---|---|---:|---:|---:|---:|
+| meadow | 28 / 3 | 5 / 4 / 4 | 8 / 4 / 4 | 0 / 0 / 0 | charcoal 3 (Pia from Hal, Mona from Dax, Talia from Yara) | 8 / 8 | charcoal 47 | charcoal 32, forging 20 | 33.4 | 0 | 0 | 0 |
+| river | 28 / 5 | 7 / 4 / 1 | 8 / 4 / 1 | 0 / 0 / 0 | charcoal 1 (Talia from Milo) | 0 / 6 | charcoal 38, smelting 8, forging 8 | charcoal 35, forging 14 | 37.4 | 0 | 0 | 0 |
+| forest | 8 / 22 | 6 / 3 / 2 | 4 / 2 / 1 | 2 / 1 / 1 | none | 0 / 0 | none | none | none | 0 | 0 | 0 |
+
+Read plainly: the backgrounds seed three to four smelters and one to four forgers per village; charcoal firing passed in
+four real lessons (the first ordinary lessons since the rules-44 Pia/Hana chain), and in forest two charcoal holders, a
+smelter and a forger died in the second winter, leaving one forger: the loss the slice is about, observed. Smelting and
+forging were wanted (river, 8 samples each, people with worn tools wanting iron ones and lacking forging), the smithies
+stood only from day 33 and 37, and no ore was mined in any seed (`oreTaken` 0, as the rules-48 audits found), so no lesson
+in smelting or forging was asked for in time and no trial could begin: the trial route needs the ore the taught route
+needs, and in a 45-day Normal world the iron chain's physical prerequisite is still missing (workstream 6's open ore
+finding). The procedures' gates, lessons and trial are contract- and page-proven; their ordinary occurrence past charcoal
+is a denominator of zero here, not a result.
+
+Lab rows (final source, 8 seeds, 30 days, control + nudge against `rich-no-technique-tree`; rows are ablation − reference;
+`technique_evidence/lab-tree/report.txt`): solid homes −0.2, buildings +0.2 [−1.1, +1.4], people +0.6, deaths −0.7 [−1.7, +0.3], below critical +0.1, mean hunger 0,
+tools +1.6 [−1.8, +4.4], projects adopted +5.9 [+1.4, +10.3] (7 / 1 seeds, systematic within the ±17.3 floor), projects
+done +2.9 [+0.4, +5.3] (within the ±14.5 floor), charcoal holders at end +0.4 [+0.1, +0.8] (within the ±0.7 floor), taught
+charcoal +0.2: "nothing moved by more than a one-draw nudge moves it". The projects rows have a plain cause: with the gate
+off, everyone may plan the smithy's recipes, so iron-tool plans are adopted that the procedure now withholds from people
+who do not hold it; none of them made iron in any world. The charcoal-holders row (fewer with the tree on, 4 / 0 seeds)
+is a lead to look at in a later slice (a holder's lesson may now be about smelting rather than charcoal). No benefit
+claimed, no harm established.

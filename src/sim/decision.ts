@@ -25,6 +25,8 @@ import { productionOptions } from './production';
 import { applyReliefGuard } from './relief';
 import { markSetAside } from './social';
 import { reviewTrade, tradeNudge, tradeReason } from './trade';
+import { noteTechniqueWant } from './techniques';
+import { pruneCustomers } from './customers';
 import type { Activity, ActivityKind, Intention, NeedKey, OptionSummary, Person, World } from './types';
 
 import { hyp } from './util';
@@ -194,11 +196,15 @@ function whyWander(ctx: Ctx, ranked: Option[], at: number): void {
 /** Choose what to do when free. */
 export function decide(world: World, p: Person, trigger: string): void {
   if (probe.on) probe.decisions++;
+  // rules 51 (customers.ts): lapsed customer leads are marked here, by the decision, so that option generation stays pure for observers
+  pruneCustomers(world, p);
   const ctx = generateOptions(world, p, true);
   // a private plan is taken up, carried on, set aside, finished or given up here, before anything is ranked (rich worlds only)
   reviewIntentions(ctx);
   // and a trade is taken up, kept, changed or given up, from their own skills and what they can see others doing (rich only)
   reviewTrade(ctx);
+  // rules 52 (techniques.ts): when a procedure first stands in the way of wanted work, the decision notes it; the trial reads the age
+  noteTechniqueWant(world, p, ctx.techniqueWanted?.kind);
   const ext = externalController();
   if (ext !== null && ext.controls(world, p)) {
     externalDecide(world, p, ctx, trigger, ext);

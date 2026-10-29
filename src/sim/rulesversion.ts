@@ -99,10 +99,11 @@ import type { Settings, World } from './types';
 // Version 49: a meal from a witnessed public storehouse is a personal benefit received, counted once by what left the store (src/sim/civic_benefit.ts).
 // Version 50: a private batch plan sees a wanted workshop product through from input to use (src/sim/batch_plan.ts).
 // Version 51: an unmet ask for a material is remembered as a customer, supplied later as a swap or gift, and the return read by the trade review (src/sim/customers.ts).
-export const CURRENT_RULES_VERSION = 51;
+// Version 52: smelting and forging are held procedures after charcoal, taught the same way, and worked out by costly trial when nobody is there to teach them (src/sim/techniques.ts).
+export const CURRENT_RULES_VERSION = 52;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

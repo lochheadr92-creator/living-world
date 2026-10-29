@@ -1,4 +1,4 @@
-import { techniqueBlocker, hasLearnerInstruction } from './techniques';
+import { techniqueBlocker, hasLearnerInstruction, techniqueLacking, trialAllowed, firstLacking, TECHNIQUES } from './techniques';
 import { isRich } from './mood';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
@@ -282,13 +282,27 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   const { world, p } = ctx;
   const b = f.b;
   const technique = techniqueBlocker(world,p,r.id);
-  if(technique){
-    if(hasLearnerInstruction(world)&&r.id==='burn_charcoal')ctx.techniqueWanted??={kind:'charcoal',for:why};
-    addBlocked(ctx,'operate',r.doing,b.id,technique,tag);return;
+  const lacking = technique ? techniqueLacking(world,p,r.id) : undefined;
+  if(technique&&lacking){
+    // the procedure they could learn or try next is the first one lacking on the way (smelting before forging)
+    const next = firstLacking(world,p,lacking);
+    if(hasLearnerInstruction(world))ctx.techniqueWanted??={kind:next,for:why};
+    // rules 52 (techniques.ts): wanted long enough with nobody to teach it, the work may be tried untaught; the leaf says so.
+    // When an earlier procedure is the one lacking, its own recipe at this workshop is the trial (smelting, for the forging wanted)
+    if(next!==lacking&&trialAllowed(world,p,next)&&depth<4){
+      const first=RECIPE_BY_ID[TECHNIQUES[next].recipes[0]];
+      if(first&&first.at===b.btype){planRecipe(ctx,f,first,item,unmet,base*0.9,`to work out ${TECHNIQUES[next].name} first, ${why}`,tag,depth+1,siteId);return;}
+    }
+    if(!(next===lacking&&trialAllowed(world,p,lacking))){addBlocked(ctx,'operate',r.doing,b.id,technique,tag);return;}
   }
+  const trial = !!technique;
   const snap = b.ops;
   const fresh = world.tick - b.seen < 500;
   const busy = fresh && snap?.job && snap.readyAt > world.tick;
+  if (busy && trial) {
+    addBlocked(ctx, 'operate', r.doing, b.id, 'the workshop is in use; a trial waits for it to be free', tag);
+    return;
+  }
   if (busy) {
     // somebody is working: join them if the recipe is the one that is wanted and has room for another pair of hands
     const running = RECIPE_BY_ID[snap!.job as string];
@@ -328,7 +342,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
     if (lack > 0) short[k] = lack;
   }
   if (!Object.keys(short).length) {
-    operateLeaf(ctx, f, r, base * 0.97, why, tag, false, siteId);
+    operateLeaf(ctx, f, r, base * 0.97, why, tag, false, siteId, trial);
     return;
   }
   // bring what is carried
@@ -361,12 +375,13 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   }
 }
 
-function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, tag: string, joining: boolean, siteId = 0): void {
+function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, tag: string, joining: boolean, siteId = 0, trial = false): void {
   const { world, p } = ctx;
   const b = f.b;
   const e = f.e;
   const crowd = ctx.seenPersons.filter((s) => s.act === 'operate' && hyp(s.x - b.x, s.y - b.y) < 5).length;
   const sc = new Scorer().add(why, util0).add('walking', -pen(e));
+  if (trial) sc.add(`nobody to teach me ${TECHNIQUES[techniqueLacking(world, p, r.id)!].name}: try it`, -4);
   const sb = skillBonus(p, r);
   if (sb > 0.5) sc.add('practised at it', sb);
   if (crowd >= r.workers) sc.add('already crowded', -12);
@@ -375,7 +390,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
   const util = sc.total * nightMult(ctx) * weatherMult(ctx);
   addOption(ctx, {
     kind: 'operate',
-    label: joining ? `Lend a hand at the ${nameOf(b)}` : r.doing,
+    label: joining ? `Lend a hand at the ${nameOf(b)}` : trial ? `${r.doing} untaught (a trial)` : r.doing,
     goal: why,
     need: null,
     util,
@@ -389,7 +404,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
       if (!spot) return null;
       return newActivity(world, p, {
         kind: 'operate',
-        label: joining ? `Heading to help at the ${nameOf(b)}` : r.doing,
+        label: joining ? `Heading to help at the ${nameOf(b)}` : trial ? `${r.doing} untaught (a trial)` : r.doing,
         goal: why,
         targetId: b.id,
         targetType: 'building',
@@ -400,7 +415,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
         utility: util,
         minCommit: 80,
         maxTicks: Math.max(900, r.work * 3),
-        data: { recipe: r.id, client: p.id, purpose: why, destSite: siteId },
+        data: { recipe: r.id, client: p.id, purpose: why, destSite: siteId, ...(trial ? { trial: true } : {}) },
       });
     },
   });

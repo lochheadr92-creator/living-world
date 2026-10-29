@@ -1,7 +1,7 @@
 import { exchangeJourneyOptions } from './exchange_journeys';
 import { askTrustBonus } from './delivery_place';
 import { supplyOptions } from './customers';
-import { heldTechniques, hasLearnerInstruction } from './techniques';
+import { heldTechniques, hasLearnerInstruction, TECHNIQUES, TECHNIQUE_KINDS, techniqueApplies, knowsTechnique, learnBlocker } from './techniques';
 import { mayCoordinate, councilFor } from './civic_decision';
 import { canInvite, projectAt, participation } from './townships';
 import { isRich } from './mood';
@@ -636,25 +636,40 @@ function optSupply(ctx: Ctx): void {
 // The teacher knows their own technique and family/apprentice relationship, not the other's private knowledge.
 function optTeachTechnique(ctx: Ctx): void {
  const {world,p}=ctx;
- if(!heldTechniques(world)||!p.techniques?.charcoal||ctx.critical||ctx.night) return;
- if(!beliefsByKind(p,['building']).some(b=>b.btype==='kiln'))return;
- for(const c of candidates(ctx)) {
-  if(c.d>10||(p.cooldowns['teach:'+c.q.id]??0)>world.tick)continue;
-  if(p.relations[c.q.id]?.kin!=='child'&&c.q.apprentice?.master!==p.id)continue;
-  if(stageOf(world,c.q)==='child')continue;
-  const sc=new Scorer().add('pass a useful technique to family or apprentice',20+8*p.traits.generosity).add('walking',-pen(c.d*6));
-  mkSocial(ctx,c,'teach_technique',{},`Offer ${c.q.name} charcoal firing instruction`,'pass on charcoal firing',null,sc,'teach');
+ if(!heldTechniques(world)||!p.techniques||ctx.critical||ctx.night) return;
+ // each held procedure in turn (rules 52: any of the tree; before it, charcoal alone), where the teacher knows the workshop it is for
+ for(const kind of TECHNIQUE_KINDS){
+  if(!techniqueApplies(world,kind)||!p.techniques[kind])continue;
+  const def=TECHNIQUES[kind];
+  const at=def.work==='kiln'?'kiln':'smithy';
+  if(!beliefsByKind(p,['building']).some(b=>b.btype===at))continue;
+  for(const c of candidates(ctx)) {
+   if(c.d>10||(p.cooldowns['teach:'+c.q.id]??0)>world.tick)continue;
+   if(p.relations[c.q.id]?.kin!=='child'&&c.q.apprentice?.master!==p.id)continue;
+   if(stageOf(world,c.q)==='child')continue;
+   // what the teacher can tell of the learner: a lesson is not offered on a procedure whose forerunner the teacher never saw them at
+   // (the learner's own knowledge stays private; the offer is answered at contact, where it is read)
+   const sc=new Scorer().add('pass a useful technique to family or apprentice',20+8*p.traits.generosity).add('walking',-pen(c.d*6));
+   if(kind!=='charcoal')sc.add('a procedure that takes another first',-3);
+   mkSocial(ctx,c,'teach_technique',kind==='charcoal'?{}:{technique:kind},`Offer ${c.q.name} ${def.name} instruction`,`pass on ${def.name}`,null,sc,'teach',kind==='charcoal'?'':':'+kind);
+  }
  }
 }
 
 function optRequestTechnique(ctx: Ctx): void {
  const {world,p}=ctx;
- if(!hasLearnerInstruction(world)||!ctx.techniqueWanted||p.techniques?.charcoal||ctx.stage==='child'||ctx.critical||ctx.night)return;
+ if(!hasLearnerInstruction(world)||!ctx.techniqueWanted||ctx.stage==='child'||ctx.critical||ctx.night)return;
+ const kind=ctx.techniqueWanted.kind;
+ if(knowsTechnique(world,p,kind))return;
+ const def=TECHNIQUES[kind];
+ // the one before it is not theirs yet: the ask would be refused, and the card says why (the forerunner is what to ask for)
+ const before=learnBlocker(world,p,kind);
+ if(before){addBlocked(ctx,'socialize',`Ask someone to teach ${def.name}`,0,before,'learn');return;}
  for(const c of candidates(ctx)) {
   if(c.d>10||(p.cooldowns['learn:'+c.q.id]??0)>world.tick)continue;
-  if(p.relations[c.q.id]?.kin!=='parent'&&p.apprentice?.master!==c.q.id&&c.s.work!=='kiln')continue;
-  const sc=new Scorer().add('I need charcoal firing for wanted work',24+8*p.traits.curiosity).add('walking',-pen(c.d*6));
-  mkSocial(ctx,c,'learn_technique',{},`Ask ${c.q.name} to teach charcoal firing`,'learn charcoal firing: '+ctx.techniqueWanted.for,null,sc,'learn','','I want to fire charcoal but have not learned how');
+  if(p.relations[c.q.id]?.kin!=='parent'&&p.apprentice?.master!==c.q.id&&c.s.work!==def.work)continue;
+  const sc=new Scorer().add(`I need ${def.name} for wanted work`,24+8*p.traits.curiosity).add('walking',-pen(c.d*6));
+  mkSocial(ctx,c,'learn_technique',kind==='charcoal'?{}:{technique:kind},`Ask ${c.q.name} to teach ${def.name}`,`learn ${def.name}: `+ctx.techniqueWanted.for,null,sc,'learn','',`I want to ${def.doing} but have not learned how`);
   break;
  }
 }

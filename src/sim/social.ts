@@ -1,4 +1,6 @@
 import { hasExchangeJourneys, tellTradeLead, endExchangeTalk, endExchangeApproach } from './exchange_journeys';
+import { TECHNIQUES } from './techniques';
+import type { TechniqueKind } from './techniques';
 import { noteCustomer, customerSupplied, setCustomerDeps } from './customers';
 import { offerLesson, answerLesson, answerRequestedLesson, finishLesson, interruptLesson, lessonProblem, LESSON_TICKS } from './techniques';
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
@@ -789,6 +791,8 @@ export interface ConvData {
   moot?: string;
   /** rules 51 (customers.ts): the request this offer or swap supplies, so the supplier's record and the ask close together */
   customer?: number;
+  /** rules 52 (techniques.ts): the procedure a lesson is about; absent for the rules-18 charcoal lesson */
+  technique?: TechniqueKind;
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -821,9 +825,9 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 function purposeGoal(purpose: ConvPurpose, name: string): string {
   switch (purpose) {
     case 'learn_technique':
-      return `to ask ${name} for charcoal firing instruction`;
+      return `to ask ${name} for instruction`;
     case 'teach_technique':
-      return `to teach ${name} charcoal firing`;
+      return `to teach ${name} a procedure`;
     case 'request':
       return `to ask ${name} for something`;
     case 'ask_info':
@@ -934,11 +938,11 @@ export function updateConversations(world: World): void {
       continue;
     }
     if(c.purpose==='teach_technique') {
-      const why=lessonProblem(world,A,B);
+      const why=lessonProblem(world,A,B,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
     }
     if(c.purpose==='learn_technique'&&c.lesson?.outcome==='learning') {
-      const why=lessonProblem(world,B,A);
+      const why=lessonProblem(world,B,A,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
     }
     if (world.tick < c.nextAt) continue;
@@ -977,11 +981,11 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
     }
     case 3: {
       if(c.purpose==='learn_technique'){
-        if(finishLesson(world,c,B,A))bubble(world,A,'I can fire charcoal for my work now.','happy',72);
+        if(finishLesson(world,c,B,A))bubble(world,A,`I can ${TECHNIQUES[lessonKind(c)].doing} for my work now.`,'happy',72);
         c.phase=4;c.nextAt=world.tick+16;break;
       }
       if(c.purpose==='teach_technique'){
-        if(finishLesson(world,c,A,B))bubble(world,B,'I understand how to fire charcoal now.','happy',72);
+        if(finishLesson(world,c,A,B))bubble(world,B,`I understand how to ${TECHNIQUES[lessonKind(c)].doing} now.`,'happy',72);
         c.phase=4;c.nextAt=world.tick+16;break;
       }
       if (!d.sour) {
@@ -1003,10 +1007,10 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
   switch (c.purpose) {
     case 'learn_technique':
       A.cooldowns['learn:'+B.id]=world.tick+2*DAY;
-      addLog(world,A,'social',`Asked ${B.name} to teach me charcoal firing for work I want to do.`);
-      bubble(world,A,'I need to fire charcoal. Could you teach me?','ask',64);break;
+      addLog(world,A,'social',`Asked ${B.name} to teach me ${TECHNIQUES[lessonKind(c)].name} for work I want to do.`);
+      bubble(world,A,`I need to ${TECHNIQUES[lessonKind(c)].doing}. Could you teach me?`,'ask',64);break;
     case 'teach_technique':
-      offerLesson(world,A,B);bubble(world,A,'Would you like to learn charcoal firing?','ask',64);break;
+      offerLesson(world,A,B,lessonKind(c));bubble(world,A,`Would you like to learn ${TECHNIQUES[lessonKind(c)].name}?`,'ask',64);break;
     case 'chat': {
       if (hashUnit(A.id, B.id, world.tick >> 5) < 0.4) {
         const atFire = world.buildings.some((b) => b.type === 'fire' && b.fuel > 0 && hyp(b.x + 0.5 - A.x, b.y + 0.5 - A.y) < 5);
@@ -1095,6 +1099,9 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
   }
 }
 
+/** the procedure a lesson is about (charcoal unless the conversation says otherwise) */
+const lessonKind = (c: Conversation): TechniqueKind => c.lesson?.kind ?? (c.data as ConvData).technique ?? 'charcoal';
+
 function reqOf(world: World, c: Conversation): Request | undefined {
   return world.requests.find((r) => r.id === c.requestId);
 }
@@ -1105,14 +1112,14 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
   switch (c.purpose) {
     case 'learn_technique': {
       const why=answerRequestedLesson(world,c,B,A);
-      bubble(world,B,why?`Not now: ${why}.`:'Yes, I can teach you charcoal firing.','say',72);
-      if(!why){if(A.activity)A.activity.label='Learning charcoal firing';if(B.activity)B.activity.label='Teaching charcoal firing';}
+      bubble(world,B,why?`Not now: ${why}.`:`Yes, I can teach you ${TECHNIQUES[lessonKind(c)].name}.`,'say',72);
+      if(!why){if(A.activity)A.activity.label=`Learning ${TECHNIQUES[lessonKind(c)].name}`;if(B.activity)B.activity.label=`Teaching ${TECHNIQUES[lessonKind(c)].name}`;}
       break;
     }
     case 'teach_technique': {
       const why=answerLesson(world,c,A,B);
-      bubble(world,B,why?`Not now: ${why}.`:'Yes, show me how to fire charcoal.','say',72);
-      if(!why){if(A.activity)A.activity.label='Teaching charcoal firing';if(B.activity)B.activity.label='Learning charcoal firing';}
+      bubble(world,B,why?`Not now: ${why}.`:`Yes, show me how to ${TECHNIQUES[lessonKind(c)].doing}.`,'say',72);
+      if(!why){if(A.activity)A.activity.label=`Teaching ${TECHNIQUES[lessonKind(c)].name}`;if(B.activity)B.activity.label=`Learning ${TECHNIQUES[lessonKind(c)].name}`;}
       break;
     }
     case 'chat': {

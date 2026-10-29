@@ -1,5 +1,5 @@
 import { recordWorkshopOutput } from './settlement_economy';
-import { techniqueBlocker } from './techniques';
+import { techniqueBlocker, techniqueLacking, trialAllowed, trialFinished } from './techniques';
 import { runsRulesVersion } from './rulesversion';
 import { notePractice, onSharedWork } from './apprentice';
 import { DAY, GRANARY_NEGLECT_MULT, GRANARY_SPOIL, GRANARY_TEND_EVERY, PERISHABLE, SKILL_GAIN, SKILL_MAX, WEIGHT } from './constants';
@@ -341,12 +341,13 @@ function depositOf(world: World, b: Building): Source | null {
 }
 
 /** Why this person cannot start this recipe here right now ('' if they can). The text is what the inspector shows. */
-export function startBlocker(world: World, b: Building, p: Person, r: Recipe): string {
+export function startBlocker(world: World, b: Building, p: Person, r: Recipe, trial = false): string {
   const ops = opsOf(b);
   if (!ops) return 'not a workplace';
   if (r.at !== b.type) return 'wrong kind of workplace';
   const technique = techniqueBlocker(world,p,r.id);
-  if(technique)return technique;
+  // rules 52: a trial of the procedure, when the person may try it untaught, is not blocked by not knowing it
+  if(technique&&!(trial&&trialAllowed(world,p,techniqueLacking(world,p,r.id)!)))return technique;
   if (ops.job && !resumableJob(world, b, p, r)) return ops.job.phase === 'burn' ? 'the fire is already burning a batch' : ops.job.phase === 'ready' ? 'finished goods are waiting for room' : 'a batch is already under way';
   if (!mayUse(world, p, b)) return 'not theirs to use';
   if (b.condition < 12) return 'too run down to use';
@@ -383,10 +384,10 @@ function weightOfList(items: Items): number {
 }
 
 /** Start a batch. Inputs and fuel leave the shelves (they still exist: they are held by the batch). Returns an error text or null. */
-export function startJob(world: World, b: Building, p: Person, r: Recipe, client: number, purpose: string, destSite = 0): string | null {
+export function startJob(world: World, b: Building, p: Person, r: Recipe, client: number, purpose: string, destSite = 0, trial = false): string | null {
   // rules 50: getting back to a batch under way is not starting one; the job stands as it is
   if (resumableJob(world, b, p, r)) return null;
-  const why = startBlocker(world, b, p, r);
+  const why = startBlocker(world, b, p, r, trial);
   if (why) return why;
   const ops = opsOf(b)!;
   const held: Items = {};
@@ -421,6 +422,7 @@ export function startJob(world: World, b: Building, p: Person, r: Recipe, client
     held,
     workers: {},
     blocked: '',
+    ...(trial && techniqueLacking(world, p, r.id) ? { trial: p.id } : {}),
   };
   ops.job = job;
   ops.lastBlocker = '';
@@ -448,7 +450,7 @@ export function workJob(world: World, b: Building, p: Person): 'continue' | 'wor
   const job = ops?.job;
   if (!ops || !job || job.phase !== 'work') return 'stopped';
   const r = recipeOf(job);
-  if(techniqueBlocker(world,p,r.id))return 'stopped';
+  if(techniqueBlocker(world,p,r.id)&&job.trial!==p.id)return 'stopped';
   const { tool } = recipeTool(world, p, b, r);
   const mult = r.tool ? recipeToolMultiplier(tool, r.tool.speed) : 1;
   const rate = workRate(world, p, r, mult);
@@ -578,6 +580,23 @@ export function finishJob(world: World, b: Building): boolean {
   }
   const client = job.client;
   const clientP = personById(world, client);
+  // rules 52 (techniques.ts): a batch run untaught counts as an attempt; the inputs above are spent either way, and only the
+  // attempt that works out the procedure goes on to make the goods
+  if (job.trial) {
+    const trialist = personById(world, job.trial);
+    const kind = trialist ? techniqueLacking(world, trialist, r.id) : undefined;
+    if (kind && trialist) {
+      const spent: Items = {};
+      for (const k of Object.keys(r.inputs) as ItemKind[]) if ((r.inputs[k] ?? 0) > 0) spent[k] = r.inputs[k];
+      for (const k of Object.keys(r.fuel) as ItemKind[]) if ((r.fuel[k] ?? 0) > 0) spent[k] = (spent[k] ?? 0) + (r.fuel[k] ?? 0);
+      if (!trialFinished(world, trialist, kind, spent, b.type.replace('_', ' '))) {
+        ops.wasted['a failed attempt'] = (ops.wasted['a failed attempt'] ?? 0) + 1;
+        ops.job = null;
+        ops.lastBlocker = '';
+        return true;
+      }
+    }
+  }
   // products
   if (r.fromDeposit) {
     const n = job.held[r.fromDeposit.item] ?? 0;

@@ -23,7 +23,7 @@ import { politicalAlignmentOn, setPoliticalAlignment } from '../../src/sim/polit
 import { exchangeJourneysOn, setExchangeJourneys } from '../../src/sim/exchange_journeys';
 import { relocationsOn, setRelocations } from '../../src/sim/relocation';
 import { setConstructionSafety, constructionSafetyOn } from '../../src/sim/construction_access';
-import { setTechniques, techniquesOn } from '../../src/sim/techniques';
+import { setTechniques, techniquesOn, techniqueTreeOn, setTechniqueTree } from '../../src/sim/techniques';
 import { setDevelopment, developmentOn } from '../../src/sim/development';
 import { setLocalMarket, localMarketOn } from '../../src/sim/market_contact';
 import { setCivicChoice, civicChoiceOn } from '../../src/sim/civic_decision';
@@ -277,6 +277,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-delivery-place') return {spec:label,summary:'a promise to a person names no place to leave it and the food ask ignores trust; hand-over, credit and consequences unchanged; no effect below rules 48',install(){const was=deliveryPlaceOn();setDeliveryPlace(false);return ()=>setDeliveryPlace(was);}};
   if (kind === 'rich-no-civic-food-benefit') return {spec:label,summary:'remove the public-food meal receipt only; withdrawal receipts and physical food unchanged; no effect below rules 49',install(){const was=civicFoodBenefitOn();setCivicFoodBenefit(false);return ()=>setCivicFoodBenefit(was);}};
   if (kind === 'rich-no-batch-plans') return {spec:label,summary:'no batch plan is taken on; every workshop option stays as it was; no effect below rules 50',install(){const was=batchPlansOn();setBatchPlans(false);return ()=>setBatchPlans(was);}};
+  if (kind === 'rich-no-technique-tree') return {spec:label,summary:'smelting and forging are read as known by everyone and nobody tries a procedure untaught; charcoal firing, lessons and backgrounds unchanged; no effect below rules 52',install(){const was=techniqueTreeOn();setTechniqueTree(false);return ()=>setTechniqueTree(was);}};
   if (kind === 'rich-no-customers') return {spec:label,summary:'no unmet ask is remembered as a customer, nothing is brought to one, and the trade review reads no returns; asks, barter, gifts and favours unchanged; no effect below rules 51',install(){const was=customersOn();setCustomers(false);return ()=>setCustomers(was);}};
   if (kind === 'rich-no-batch-resume') return {spec:label,summary:'a batch under way blocks every operate as before rules 50; the batch plan itself is unchanged; no effect below 50',install(){const was=batchResumeOn();setBatchResume(false);return ()=>setBatchResume(was);}};
   if (kind === 'rich-uniform-backgrounds') return {spec:label,summary:'retain previous starting skills and universal adult charcoal knowledge for future creation only; existing people unchanged',install(){const was=backgroundsOn();setBackgrounds(false);return ()=>setBackgrounds(was);}};

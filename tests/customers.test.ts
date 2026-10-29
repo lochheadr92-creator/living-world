@@ -221,6 +221,8 @@ it('rules 51: switch, exact replay, observer purity, and rules 50 unchanged', ()
   const f = scene(51);
   f.ask();
   f.free();
+  // a lead past its window: an observer must not mark it lapsed (the decision does)
+  f.w.tick += CUSTOMER_WINDOW;
   const saved = serializeWorld(f.w);
   const hash = hashWorld(f.w);
   for (let i = 0; i < 4; i++) {
@@ -242,7 +244,7 @@ it('rules 51: switch, exact replay, observer purity, and rules 50 unchanged', ()
   expect(liveLeads(before, benBefore)).toHaveLength(0);
   expect(rankOptions(generateOptions(before, benBefore, true, true)).find((o) => /^Bring Ada the planks/.test(o.label))).toBeUndefined();
   restore();
-  expect(liveLeads(before, benBefore)).toHaveLength(1);
+  expect(benBefore.customers).toHaveLength(1);
   const changed = deserializeWorld(saved);
   changed.persons.find((p) => p.id === f.ben.id)!.customers!.pop();
   expect(hashWorld(changed)).not.toBe(hash);

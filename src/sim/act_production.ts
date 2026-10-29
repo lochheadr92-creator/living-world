@@ -74,7 +74,7 @@ registerHandler('operate', {
       return;
     }
     if (!r) return 'no such work';
-    const err = startJob(world, b, p, r, (a.data.client as number) ?? p.id, (a.data.purpose as string) ?? '', (a.data.destSite as number) ?? 0);
+    const err = startJob(world, b, p, r, (a.data.client as number) ?? p.id, (a.data.purpose as string) ?? '', (a.data.destSite as number) ?? 0, !!a.data.trial);
     if (err) {
       noteBlocker(b, err);
       return err;

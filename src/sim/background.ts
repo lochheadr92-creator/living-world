@@ -32,6 +32,12 @@ export function backgroundKnowsCharcoal(w:World,id:number):boolean{
  const b=backgroundFor(w,id);
  return b.specialty==='kiln'||draw(w,id,30)<(b.kind==='inexperienced'?.05:b.kind==='experienced'?.75:b.kind==='generalist'?.3:.15);
 }
+/** Rules 52: the smithy's procedures at creation, from the same background with their own salts; forging only with smelting. */
+export function backgroundKnows(w:World,id:number,kind:'smelting'|'forging'):boolean{
+ const b=backgroundFor(w,id);
+ if(kind==='smelting')return b.specialty==='smith'||draw(w,id,31)<(b.kind==='inexperienced'?0:b.kind==='experienced'?.35:b.kind==='generalist'?.1:.04);
+ return b.specialty==='smith'||draw(w,id,32)<.6;
+}
 export function backgroundDescription(p:Person):string{
  const b=p.background;if(!b)return '';
  return b.kind==='inexperienced'?'Started with little practical experience.':b.kind==='experienced'?'Started with broad practical experience.':b.kind==='generalist'?'Started with a general practical background.':`Started with a specialty in ${b.specialty}; other skills may be much less developed.`;

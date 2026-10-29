@@ -80,6 +80,11 @@ window as that record, then dropped.
 Nothing else changed: who may ask, the barter valuation, the offer, the favour debt, the reserves, the trade's other
 triggers, the rules-43 demand window and bonus.
 
+**Correction in the rules-52 commit.** The first commit of this slice pruned lapsed leads inside option generation, which
+observers also run; the rules-52 technique observation's daily option sample caught it ("Observer mutated state"). Pruning
+now happens in the decision (`decision.ts decide`) and when a lead is noted, never in `supplyOptions`; the purity test covers a
+lead past its window read by an observer.
+
 ## Tests
 
 `tests/customers.test.ts` (7 staged contracts, Ada / Ben / Cora, Ben's four planks all promised to Cora's site): an ask

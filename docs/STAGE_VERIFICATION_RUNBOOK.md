@@ -284,3 +284,13 @@ Contract and the three findings (one township in Normal worlds, heard demand goi
   (asks by status, leads, supplies by route, returns, repeats, trades that read the record; purity checked daily).
 - Page check (dev server on 5182): `node scripts/browser/customers_check.mjs "http://127.0.0.1:5182/" customers_evidence/rendered meadow`.
 - Lab harm check: `node scripts/lab.mjs --out customers_evidence/lab-customers --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-customers`.
+
+## Rules 52 technique tree
+
+Contract: [TECHNIQUE_TREE.md](TECHNIQUE_TREE.md).
+
+- Contracts: `npx vitest run tests/technique_tree.test.ts tests/techniques.test.ts tests/learner_instruction.test.ts tests/backgrounds.test.ts tests/v51_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/technique_observe.ts technique_evidence/obs-45-meadow meadow 45`
+  (holders by procedure by day, holders lost to death, lessons by procedure, trials, option samples blocked by a procedure, smithies, iron).
+- Page check (dev server on 5182): `node scripts/browser/technique_tree_check.mjs "http://127.0.0.1:5182/" technique_evidence/rendered meadow`.
+- Lab harm check: `node scripts/lab.mjs --out technique_evidence/lab-tree --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-technique-tree`.

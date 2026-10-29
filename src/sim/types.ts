@@ -608,7 +608,9 @@ export interface Person {
   traits: Traits;
   skills: Skills;
   /** Version 18: held technique and its actual source; proficiency is separate. */
-  techniques?: { charcoal?: { source: 'initial' | 'taught'; learned: number; teacher: number; lesson?: number; started?: number } };
+  techniques?: Partial<Record<import('./techniques').TechniqueKind, { source: 'initial' | 'taught' | 'trial'; learned: number; teacher: number; lesson?: number; started?: number; attempts?: number; spent?: Items }>>;
+  /** rules 52 (techniques.ts): attempts at a procedure untaught, and what they cost, until it is worked out */
+  trials?: Partial<Record<import('./techniques').TechniqueKind, { attempts: number; spent: Items }>>;
   inv: Items;
   hhId: number;
   parents: number[];
@@ -809,6 +811,8 @@ export interface Job {
   burnLeft: number;
   burnTotal: number;
   held: Items;
+  /** rules 52 (techniques.ts): the batch is being run untaught by this person, as a trial of the procedure */
+  trial?: number;
   /** person id -> work ticks contributed to this batch */
   workers: Record<number, number>;
   blocked: string;
@@ -1097,7 +1101,7 @@ export type ConvPurpose =
 
 export interface Conversation {
   /** Version 18: current lesson only; completed knowledge belongs to the learner. */
-  lesson?: {since:number;until:number;outcome:'learning'|'learned'|'declined'|'interrupted';reason:string};
+  lesson?: {since:number;until:number;outcome:'learning'|'learned'|'declined'|'interrupted';reason:string;kind?:import('./techniques').TechniqueKind};
   id: number;
   a: number;
   b: number;
