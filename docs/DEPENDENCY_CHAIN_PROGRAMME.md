@@ -17,7 +17,7 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 
 ## Baseline (section 1)
 
-- HEAD `7625337` on `main`, rules 44, 18+ commits ahead of `origin/main` `39c3027`, nothing pushed by this programme.
+- HEAD `7625337` on `main`, rules 44, 18+ commits ahead of `origin/main` `39c3027`, nothing pushed by this programme until the owner said "Push" on 2026-10-29 after slice 9: `origin/main` moved `39c3027` → `953eb90` (36 commits, fast-forward).
 - Tracked tree clean; 72 untracked evidence directories/logs from earlier slices left as found. `gate_v35/` and
   `connection-civic-food-diagnosis.json` untracked, left as found.
 - Other worktrees untouched: `living-world` (dirty, `deepseek-b1`), `living-world-winter-shelter-v34` (`f33cd0b`, its rules
@@ -248,7 +248,29 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 
 ### WS12 Relocation, splitting, rescue, return
 - **Current.** Rules 20 whole-household relocation; any refusal ends it; no subgroup, succession, return or rescue.
-- **Status.** Impl `partial` · Contract `partial` · E2E `partial (staged)` · Ordinary `no` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis (rules 53, `scripts/relocation_observe.ts`, Normal, immigration off, 45 days, 240-tick samples of living
+  adults).** Sustained hardship with a remembered destination is common in the hungry seeds, but the proposal's gate, the whole
+  household in contact outdoors (awake, not talking, within 3 tiles), almost never holds, and no agreement was ever formed:
+
+  | seed | adult samples | in hardship | sustained (≥1 day) | with destination | …and household together | propose steps | agreements |
+  |---|---:|---:|---:|---:|---:|---:|---:|
+  | meadow | 7650 | 343 | 20 | 20 | 0 | 0 | 0 |
+  | river | 7617 | 1005 | 144 | 140 | 31 | 1 (failed: not heard together) | 0 |
+  | forest | 5185 | 809 | 169 | 169 | 37 | 0 | 0 |
+
+  So in ordinary worlds the chain stops at the first link: nobody can gather a whole household to hear a proposal, so
+  consent, departure, succession, return and rescue have no denominator at all. Rules 54 (slice 10) starts there.
+- **Delivered (rules 54, slice 10).** The proposal heard by the organiser and one other member; refusal keeps the agreement
+  (the refuser and their children stay; the unasked stay after a day); the travellers alone assemble, pack, depart, arrive
+  and found, forming a new household when stayers keep the old home; succession by an accepted traveller who knows the
+  organiser died or left; a return to the old home when the arrival fails; a bounded search for a traveller out of contact
+  at the place last seen. Owner `src/sim/relocation.ts`; contract `docs/RELOCATION_EXTENSIONS.md`; switch
+  `rich-no-relocation-extensions`; household history lines for successions, searches and the split.
+- **Status.** Impl `yes` · Contract `yes` (6 cases) · E2E `yes` (staged: heard by two of three → refusal → child stays →
+  organiser alone packs, walks, builds, founds a new household; succession after a witnessed death; return; search) ·
+  Ordinary `no` (the gate now opens in 85 samples across river and forest, but the proposal was chosen once and failed; no
+  agreement in 135 seed-days; table in the slice log) · Rendered `partial` (history lines; no page check) · Aggregate
+  `unproven` (lab rows in the slice log).
 
 ### WS13 Observable explanations
 - **Status.** Per chain; recorded with each slice.
@@ -542,3 +564,39 @@ itself moved preparations adopted by −14.0 and projects adopted by −16.3 in 
 reference for the preparation counts and the 8 / 0 says nothing a nudge does not. Practice off: nothing beyond chance
 (preparations adopted +5.4 [+1.9, +8.8], projects done +3.5, both within the floor). No benefit claimed, no harm
 established.
+
+### Slice 10 — rules 54 relocation extensions (WS12), 2026-10-29
+
+Predecessor reference: `tests/v53_continuation.expected.json` recorded from `953eb90` by `scripts/v53_reference.ts --write`
+(commits `b153317`, `953eb90`). Contract: `docs/RELOCATION_EXTENSIONS.md`. Tests: `tests/relocation_extensions.test.ts`
+(6); `tests/relocation.test.ts` (14) unchanged at rules 20. The staged run caught one contract defect before it was
+committed: packing sized the provisions by the whole household rather than the travellers, so the lone organiser filled
+her pack with food and water and had no room for the shelter wood; provisions are now two of each per traveller. No page
+check: the slice adds lines to the household history (successions, searches, the split) through the existing panel.
+
+Ordinary observation, `scripts/relocation_observe.ts`, Normal, immigration off, 45 days, rules 54
+(`relocation_evidence/obs-45-{seed}-r54`; horizons reached, conservation held, observer purity held every 240 ticks). The
+three worlds are byte-identical to their rules-53 runs (same hash), because no proposal was ever completed in either:
+
+| seed | adult samples | sustained hardship with destination | …whole household together (rules 20 gate) | …another member in contact (rules 54 gate) | propose steps | agreements |
+|---|---:|---:|---:|---:|---:|---:|
+| meadow | 7650 | 20 | 0 | 0 | 0 | 0 |
+| river | 7617 | 140 | 31 | 40 | 1 (failed) | 0 |
+| forest | 5185 | 169 | 37 | 45 | 0 | 0 |
+
+Read plainly: the rules-54 gate is open about a third more often than the rules-20 one (85 samples against 68), and still
+the option was chosen once in 135 seed-days. The eligible person is by definition a day into hunger with under two food
+units, so the food options outrank a 60-tick proposal at utility 48 almost every time the gate is open, and the one
+attempt (river) did not complete (the failure detail is not retained in the save; the completion needs the hearers still
+in contact and the hardship and destination still standing after 60 ticks). The subgroup, succession, return and search
+mechanisms are therefore proven staged and have no ordinary denominator yet. The next link is the cue and the ranking
+(a proposal made before the hunger is acute, or weighed against the food options as a way out of them), which is a
+different bounded change and is not made here.
+
+Lab rows (8 seeds, 30 days, control + nudge against `rich-no-relocation-extensions`; rows are ablation − reference;
+`relocation_evidence/lab-extensions/report.txt`). The ablation's final state is **identical to the control in 7 of 8
+seeds** and parts in one, 24.3 days after the fork: in seven worlds no proposal ever completed under either form, so the
+switch had nothing to act on. The rows (people +1.1 [+0.2, +2.1], deaths −1.4 [−2.4, −0.4], projects adopted +7.4,
+preparations adopted +6.5, the rest within chance) are that one seed's divergence read against the nudge noise, all
+"within the noise floor"; `retainedRelocationsSettled` is 0.0 on both arms. No benefit claimed, no harm established, and
+no aggregate claim is possible until the proposal is chosen in ordinary worlds.

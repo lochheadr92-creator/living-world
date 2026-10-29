@@ -295,6 +295,15 @@ Contract: [TECHNIQUE_TREE.md](TECHNIQUE_TREE.md).
 - Page check (dev server on 5182): `node scripts/browser/technique_tree_check.mjs "http://127.0.0.1:5182/" technique_evidence/rendered meadow`.
 - Lab harm check: `node scripts/lab.mjs --out technique_evidence/lab-tree --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-technique-tree`.
 
+## Rules 54 relocation extensions
+
+Contract: [RELOCATION_EXTENSIONS.md](RELOCATION_EXTENSIONS.md).
+
+- Contracts: `npx vitest run tests/relocation_extensions.test.ts tests/relocation.test.ts tests/townships.test.ts tests/v53_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/relocation_observe.ts relocation_evidence/obs-45-meadow-r54 meadow 45`
+  (240-tick eligibility samples: adults in hardship, sustained, with a destination, with the whole household together, with another member in contact; steps started by kind; agreements by phase with members' responses; successions, searches, splits, stayers; townships).
+- Lab harm check: `node scripts/lab.mjs --out relocation_evidence/lab-extensions --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-relocation-extensions`.
+
 ## Rules 53 continuity
 
 Contract: [CONTINUITY.md](CONTINUITY.md).
