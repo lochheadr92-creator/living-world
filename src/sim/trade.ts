@@ -22,6 +22,7 @@ import { DAY } from './constants';
 import { RECIPES } from './recipes';
 import { SOURCE_SKILL } from './constants';
 import { isRich } from './mood';
+import { repeatedDemand,pruneDemand,DEMAND_BONUS,hasLocalDemand } from './local_demand';
 import type { Ctx, Option } from './optutil';
 import type { ActivityKind, Belief, BuildingType, Person, SkillKey, SourceType, World } from './types';
 
@@ -155,7 +156,11 @@ export function reviewTrade(ctx: Ctx): void {
   if (!trades || !isRich(world) || ctx.stage === 'child') return;
   if ((p.cooldowns.trade ?? 0) > world.tick) return;
   p.cooldowns.trade = world.tick + TRADE_REVIEW;
+  pruneDemand(world,p);
   const sight = workInSight(p);
+  const demand=repeatedDemand(world,p);
+  const feasible=new Set(ctx.options.filter(o=>!o.blocked).map(o=>workOfOption(p,o)));
+  const bonus=(k:SkillKey)=>demand.has(k)&&feasible.has(k)?DEMAND_BONUS:0;
   const have = p.trade;
   if (have) {
     // A gathering-aligned trade can end if its recorded pay is poor over several outings; any trade can end if so many people
@@ -163,12 +168,13 @@ export function reviewTrade(ctx: Ctx): void {
     const pay = p.payoff?.[have.key];
     const poorly = !!pay && pay.n >= POOR_AFTER && pay.r < POOR_PAY;
     const crowded = sight.workers >= 3 && (sight.at.get(have.key) ?? 0) / sight.workers > CROWDED_SHARE;
-    if (!poorly && !crowded) return;
+    const pulled=Array.from(demand.keys()).some(k=>k!==have.key&&bonus(k)>0&&advantage(p,k,sight)+bonus(k)>=advantage(p,have.key,sight)+bonus(have.key)+SWITCH_MARGIN);
+    if (!poorly && !crowded && !pulled) return;
   }
   let best: SkillKey | null = null;
   let bestScore = -1e9;
   for (const k of SKILL_KEYS) {
-    const v = advantage(p, k, sight);
+    const v = advantage(p, k, sight)+bonus(k);
     if (v > bestScore) {
       bestScore = v;
       best = k;
@@ -184,13 +190,13 @@ export function reviewTrade(ctx: Ctx): void {
       // the same work is still the best they can see, even though it has paid badly or is crowded: they keep it and say why
       return;
     }
-    if (bestScore < advantage(p, have.key, sight) + SWITCH_MARGIN) return;
+    if (bestScore < advantage(p, have.key, sight)+bonus(have.key) + SWITCH_MARGIN) return;
   }
   const crowd = sight.workers > 0 ? (sight.at.get(best) ?? 0) / sight.workers : 0;
   p.trade = {
     key: best,
     since: world.tick,
-    why: have ? `${tradeWord(have.key)} was not paying` : crowd === 0 && sight.workers >= 2 ? 'nobody else here does it' : 'quicker at it than at anything else',
+    why: bonus(best)>0 ? `${demand.get(best)!.people} people asked me for ${demand.get(best)!.item}` : have ? `${tradeWord(have.key)} was not paying` : crowd === 0 && sight.workers >= 2 ? 'nobody else here does it' : 'quicker at it than at anything else',
   };
 }
 
@@ -205,7 +211,7 @@ export function tradeNudge(world: World, p: Person, o: Option): number {
 
 /** why the chosen option was tilted, for the decision record ('' when the trade had nothing to do with it) */
 export function tradeReason(world: World, p: Person, o: Option): string {
-  return tradeNudge(world, p, o) > 0 ? `${tradeWord(p.trade!.key)} is my trade` : '';
+  return tradeNudge(world, p, o) > 0 ? `${tradeWord(p.trade!.key)} is my trade${hasLocalDemand(world)&&/people asked me/.test(p.trade!.why)?`; ${p.trade!.why}`:''}` : '';
 }
 
 /** the trade as the person card says it, or '' for somebody who has none */

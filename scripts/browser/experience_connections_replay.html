@@ -1,0 +1,16 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Exact browser replay verification</title></head><body>
+<h1>Exact browser replay verification</h1><p id="result">Replaying exported manual choices…</p><button id="save" disabled>Save browser replay evidence</button>
+<script type="module">
+import { deserializeWorld,serializeWorld } from '/src/app/save.ts';
+import { runReplay } from '/src/agent/run.ts';
+import { hashWorld } from '/src/sim/world.ts';
+const path=new URLSearchParams(location.search).get('bundle');
+if(!path?.startsWith('/inhabitant_evidence/connections-'))throw new Error('A recorded connection bundle is required');
+const bundle=await(await fetch(path)).json();
+const replay=runReplay(deserializeWorld(bundle.start),bundle.transcript);
+const final=serializeWorld(replay.world),result={source:path,exactSerializedEqual:final===bundle.final,browserHash:bundle.transcript.end.hash,replayHash:hashWorld(replay.world)};
+document.getElementById('result').textContent=JSON.stringify(result,null,2);
+const save=document.getElementById('save');save.disabled=false;save.onclick=()=>{
+const url=URL.createObjectURL(new Blob([JSON.stringify({...result,replay:final})],{type:'application/json'}));
+const a=document.createElement('a');a.href=url;a.download='connection-browser-replay.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
+</script></body></html>

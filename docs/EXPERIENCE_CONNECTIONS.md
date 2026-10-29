@@ -103,7 +103,66 @@ make the unchanged 0.05 switch margin a clear boundary: completion alone contrib
 
 The actual manual Ben panel reproduced withdrawal, a neighbour's later invitation,
 changed support and a real building commitment. `connections-civic-manual-ui` screenshots
-show the reason. Its downloaded checkpoint (`connections-civic-manual-replay`) and
-both restricted runs replay exactly with conservation intact. No external model used.
+show the reason. Both restricted runs replay exactly with conservation intact.
+The manual checkpoint (`connections-civic-manual-replay`) matches the replay hash,
+but the exact cross-runtime serialized comparison FAILED: Ben's `heading` and
+`pheading` are 1.7201543304744753 in Chromium versus 1.7201543304744755 in Node.
+These are the only two differences. Preserve that result; do not weaken its exact
+comparison or change historical numerical rules. A same-browser exact replay is
+checked separately. No external model used.
 
-The local-demand link and ordinary-world observation remain pending.
+The separate same-browser replay passed exact serialized equality and hash `9da36361`;
+download retained as `connections-civic-manual-replay/browser-native-replay.json`.
+
+### Rules 43 contract before implementation
+
+Remember at most 12 material requests actually heard at conversational response,
+after stale/withdrawn asks have been rejected. Two distinct people asking for the
+same producible material within three days constitute repeated local demand. One
+person repeating an ask does not. Derive the associated skill from existing recipes
+(wood/stone from their existing gathering skills). Add at most 6 to trade comparison,
+only while ordinary work of that skill is actually offered. Keep the existing trade
+review interval, adoption threshold, switching margin and final work nudge. A demand
+may justify reconsideration, but does not grant skills, create materials, invent a
+production need or override survival. Expired demand stops influencing new reviews;
+an established trade remains governed by ordinary stickiness and returns.
+
+Stage two neighbours' actual requests, then compare adopted trade with this link
+removed. Verify actual material production without claiming that the link must
+increase output in that demonstration. Ordinary-world observation remains pending.
+
+### Rules 43 results and owner-directed natural diagnosis
+
+18 focused tests passed (demand, trades and rules-42 continuation), typecheck and
+diff check passed. Restricted runs in `connections-demand-first` execute two offered
+requests first, then the recipient's ordinary work. Enabled Ben adopts carpentry
+because two people asked for planks; disabled Ben has no trade. Both produce one
+plank, conserve goods and replay exactly. This proves the trade connection, not
+increased output. The manual panel (`connections-demand-manual-ui`) shows both
+completed plank work and the reason in Traits. Exported manual replay is exactly
+equal, hash `a9034dc3` (`connections-demand-manual-replay`).
+
+The owner explicitly requested natural activation rather than relying on staged
+verification. Three untouched Normal seeds were observed for six days, then each
+was independently observed from creation to day 30 with the same 180-second budget.
+Immigration was off in these diagnostic comparisons, not changed in product defaults.
+All six runs finished and conserved resources; observer samples were pure and source
+manifests stayed unchanged. Evidence: `connections-natural-diagnosis-{seed}` and
+`connections-natural-30-{seed}` under `inhabitant_evidence/`.
+
+| Window / seed | Personally heard requests | Demand-led trade adoptions | Learner requests offered in samples | Learned techniques | Public benefit receipts |
+|---|---:|---:|---:|---:|---:|
+| 6 days meadow | 28 | 0 | 0 | 0 | 0 |
+| 6 days river | 25 | 0 | 0 | 0 | 0 |
+| 6 days forest | 33 | 0 | 0 | 0 | 0 |
+| 30 days meadow | 89 | 1 | 0 | 0 | 0 |
+| 30 days river | 117 | 0 | 0 | 1 | 0 |
+| 30 days forest | 56 | 0 | 0 | 1 | 0 |
+
+Interpretation: workshops do develop after the early window. All adult founders
+and adult arrivals currently receive charcoal knowledge at creation; rare younger
+holders were taught through the older teacher-initiated path. Current public benefit
+only recognizes `withdraw`, while ordinary public food use runs through `eat_store`.
+These are upstream conditions and a missing actual-use path, not evidence that
+raising social scores is justified. The owner additionally authorizes strongly varied
+knowledge and skills for founders and immigrants; implement under a new boundary.

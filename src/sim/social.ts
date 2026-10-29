@@ -4,6 +4,7 @@ import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civ
 import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
 import { receivedCivicBenefit } from './civic_benefit';
+import { hearDemand } from './local_demand';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { runsRulesVersion } from './rulesversion';
@@ -1130,6 +1131,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           break;
         }
       }
+      hearDemand(world,B,A,req);
       const resp = evaluateRequest(world, B, A, req);
       if (resp.kind === 'give') {
         const moved = transfer(world, B.inv, A.inv, carryCap(world, A), resp.item, resp.n, 'person:' + B.id, 'person:' + A.id, 'gift on request');

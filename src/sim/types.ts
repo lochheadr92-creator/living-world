@@ -579,6 +579,7 @@ export interface Person {
   sharedSupper?: import('./household_practices').SharedSupper;
   civicAlignment?: import('./political_alignment').CivicAlignment[];
   tradeLeads?: import('./exchange_journeys').TradeLead[];
+  heardDemand?: import('./local_demand').HeardDemand[];
   exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
   relocationHardship?: number;
   socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper' }[];
