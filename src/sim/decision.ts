@@ -1,4 +1,5 @@
 import { relocationOptions } from './relocation';
+import { whileObserving } from './lifechanges';
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
@@ -39,6 +40,11 @@ const CHILD_FORBIDDEN: ActivityKind[] = ['build', 'haul', 'plan_site', 'repair',
  * things the planner notes as it goes (a promise held up, a request already considered, a worry) are not noted.
  */
 export function generateOptions(world: World, p: Person, collect = false, observer = false): Ctx {
+  // All observer entry points need the same guard, including callers outside the inspector.
+  return observer ? whileObserving(() => collectOptions(world, p, collect, true)) : collectOptions(world, p, collect, false);
+}
+
+function collectOptions(world: World, p: Person, collect: boolean, observer: boolean): Ctx {
   const ctx = makeCtx(world, p, collect, observer);
   survivalOptions(ctx);
   workOptions(ctx);
