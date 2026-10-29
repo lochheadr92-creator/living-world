@@ -30,7 +30,7 @@ writeFileSync(`${out}/provenance.json`,JSON.stringify({arm:arm||'current',head:e
 const FOODS:FoodKind[]=['berries','fruit','fish','grain','bread','meat'];
 const packFood=(p:Person)=>foodUnits(p.inv)+(p.inv.meat??0);
 const requests=new Map<number,unknown>(),deliveries:unknown[]=[],deaths:unknown[]=[],samples:unknown[]=[],carriedHungry:unknown[]=[],selected:unknown[]=[],seeks:{tick:number;person:number;name:string;label:string;target:number;hunger:number;outcome?:string}[]=[];
-const totals:Record<string,number>={samples:0,foodAskOffers:0,foodAskBlocked:0,seekOffers:0,seekBlocked:0,hungryWithFood:0,hungryWithFoodNoEatOption:0,hungryWithFoodEatBlocked:0};
+const totals:Record<string,number>={samples:0,foodAskOffers:0,foodAskBlocked:0,foodAskTrustLeaned:0,seekOffers:0,seekBlocked:0,hungryWithFood:0,hungryWithFoodNoEatOption:0,hungryWithFoodEatBlocked:0};
 let snapshot=new Map<number,{name:string;hh:number;x:number;y:number;hunger:number;food:number;inv:Record<string,number>;act:string}>();
 const snap=()=>{snapshot=new Map(w.persons.filter(p=>p.alive).map(p=>[p.id,{name:p.name,hh:p.hhId,x:p.x,y:p.y,hunger:p.needs.hunger,food:packFood(p),inv:{...p.inv},act:p.activity?`${p.activity.kind}:${p.activity.label}`:''}]));};
 w.hooks={onActivityStart(p,a){if(a.kind==='socialize'&&(a.data.reqKind==='food'||a.data.reqKind==='care'))selected.push({tick:w.tick,person:p.id,name:p.name,label:a.label,target:a.targetId});if(a.kind==='visit'&&a.data.seek)seeks.push({tick:w.tick,person:p.id,name:p.name,label:a.label,target:a.targetId,hunger:Math.round(p.needs.hunger)});},onTransfer(t){if(t.reason==='given'||t.reason==='gift on request')deliveries.push({tick:w.tick,...t});}};
@@ -49,6 +49,7 @@ while(w.tick<days*DAY){stepWorld(w);
   for(const p of w.persons.filter(p=>p.alive)){count('samples');const ctx=generateOptions(w,p,true,true);
    count('foodAskOffers',ctx.options.filter(o=>o.kind==='socialize'&&o.tag==='request'&&/ for food$/.test(o.label)).length);
    count('foodAskBlocked',ctx.blocked.filter(o=>o.tag==='request'&&/ for food$/.test(o.label)).length);
+   count('foodAskTrustLeaned',ctx.options.filter(o=>o.kind==='socialize'&&o.tag==='request'&&/ for food$/.test(o.label)&&o.parts.some(([n])=>n==='they came through before'||n==='they let me down before')).length);
    count('seekOffers',ctx.options.filter(o=>o.key.startsWith('seek:')).length);count('seekBlocked',ctx.blocked.filter(o=>/^Go and find /.test(o.label)).length);
    if(p.needs.hunger<30&&packFood(p)>=1){count('hungryWithFood');const eat=ctx.options.find(o=>o.kind==='eat');const blocked=ctx.blocked.find(o=>o.kind==='eat');
     if(!eat){count('hungryWithFoodNoEatOption');if(blocked)count('hungryWithFoodEatBlocked');}
@@ -66,6 +67,7 @@ const report={seed,days,immigration,arm:arm||'current',rulesVersion:w.settings.r
  foodRequests:foodReqs.length,foodRequestOutcomes:byOutcome,fetchPromises:foodReqs.filter(r=>r.commitmentId).length,
  promisedDelivered:foodReqs.filter(r=>r.commitmentId&&(r.delivered??0)>0).length,promisedDeliveredUnits:foodReqs.filter(r=>r.commitmentId).reduce((n,r)=>n+(r.delivered??0),0),
  giftsOnRequest:deliveries.filter((d:any)=>d.reason==='gift on request').length,gives:deliveries.filter((d:any)=>d.reason==='given').length,seeks:seeks.length,seekOutcomes:seeks.reduce((m:Record<string,number>,k)=>{m[k.outcome??'?']=(m[k.outcome??'?']??0)+1;return m;},{}),
+ doorPromises:w.persons.reduce((n,p)=>n+p.commitments.filter(c=>c.kind==='deliver'&&c.destKind==='building'&&foodReqs.some(r=>r.commitmentId===c.id)).length,0),doorDeliveries:w.persons.reduce((n,p)=>n+p.log.filter(l=>/at our door, as promised/.test(l.text)).length,0),
  totals,deathsWithFoodInPack:deaths.filter((d:any)=>(d.packFoodBefore??0)>=1).length,hungerDeathsWithSpareInHousehold:deaths.filter((d:any)=>d.cause==='hunger'&&d.membersWithSpare>0).length,
  hash:hashWorld(w),conservation:conservationReport(w)};
 for(const [name,data]of Object.entries({report,requests:foodReqs,deliveries,deaths,samples,carriedHungry,selected,seeks}))writeFileSync(`${out}/${name}.json`,JSON.stringify(data,null,2));writeFileSync(`${out}/final.json`,serializeWorld(w));

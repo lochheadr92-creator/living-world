@@ -1,4 +1,5 @@
 import { exchangeJourneyOptions } from './exchange_journeys';
+import { askTrustBonus } from './delivery_place';
 import { heldTechniques, hasLearnerInstruction } from './techniques';
 import { mayCoordinate, councilFor } from './civic_decision';
 import { canInvite, projectAt, participation } from './townships';
@@ -189,6 +190,10 @@ function optRequest(ctx: Ctx): void {
       sc.add(need === 'hunger' ? 'hungry' : 'thirsty', dr * 0.72 * plaus);
       sc.add(itemCheck(c.s) ? 'they are carrying some' : c.q.hhId === p.hhId ? 'family' : c.aff >= 25 ? 'a friend' : 'worth a try', plaus * 4);
       if (owed > 0) sc.add('they owe me a favour', 3 * Math.min(2, owed));
+      // rules 48 (delivery_place.ts): a neighbour who kept a promise is asked first, one who broke one last
+      const tb = askTrustBonus(world, p.relations[c.q.id]?.trust ?? 10);
+      if (tb > 0) sc.add('they came through before', tb);
+      else if (tb < 0) sc.add('they let me down before', tb);
       sc.add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
       const kind = stageOf(world, p) === 'child' ? 'care' : reqKind;
       mkSocial(ctx, c, 'request', { reqKind: kind as ConvData['reqKind'], item: reqKind === 'water' ? 'water' : null, amount: 2 }, `Ask ${c.q.name} for ${label}`, `to get ${label}`, need, sc, 'request', ':' + reqKind);

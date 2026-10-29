@@ -5,6 +5,7 @@ import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
 import { receivedCivicBenefit } from './civic_benefit';
 import { fetchableFood, hasFoodFetch } from './food_help';
+import { agreedPlace } from './delivery_place';
 import { hearDemand } from './local_demand';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
@@ -27,7 +28,7 @@ import {
   suspendActivity,
 } from './activities';
 import type { WorkResult } from './activities';
-import { BUILD_DEF, CONV_REACH, DAY, GREET_COOLDOWN, LOAN_TERM, NUTRITION, PROMISE_TTL, REQUEST_TTL } from './constants';
+import { BUILD_DEF, CONV_REACH, DAY, GREET_COOLDOWN, LOAN_TERM, NUTRITION, PROMISE_TTL, REQUEST_TTL, homeNoun } from './constants';
 import { foodUnits, pickFood, roomFor, transfer } from './economy';
 import { carryCap, isDependent, itemsToText, stageOf } from './people';
 import { addEvent, addFx, addLog, say as speak } from './events';
@@ -45,7 +46,7 @@ import { shareConcerns } from './welfare';
 import { lendTool, returnLoan } from './tools';
 import { toolsHeldBy } from './toolreg';
 import { isToolItem } from './toolreg';
-import type { Belief, Commitment, Conversation, ConvPurpose, ItemKind, Items, Person, Request, RequestKind, Speech, ToolKind, World } from './types';
+import type { Belief, Commitment, Conversation, ConvPurpose, ItemKind, Items, Person, Request, RequestKind, Speech, ToolKind, World, BuildingType } from './types';
 import { clamp, hyp } from './util';
 
 // ───────────────────────── small helpers ─────────────────────────
@@ -1190,11 +1191,16 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + DAY, destKind: req.destKind, destId: req.destId, milestone: req.kind === 'watch' ? 'watched' : 'fire kept' });
         } else {
           const kindC: Commitment['kind'] = req.kind === 'haul' || req.kind === 'goods' || toSite ? 'haul' : 'deliver';
-          addCommitment(world, B, req, { kind: kindC, item, amount: resp.n, siteId: req.siteId, deadline: world.tick + (kindC === 'haul' ? PROMISE_TTL + 600 : PROMISE_TTL), destKind: kindC === 'haul' ? 'site' : 'person', destId: kindC === 'haul' ? req.siteId : A.id });
+          // rules 48 (delivery_place.ts): a promise to a person names the asker's home as the place to leave it, when the helper
+          // knows that home; the hand-over in person stays the other way of keeping it
+          const place = kindC === 'deliver' ? agreedPlace(world, B, A) : null;
+          addCommitment(world, B, req, { kind: kindC, item, amount: resp.n, siteId: req.siteId, deadline: world.tick + (kindC === 'haul' ? PROMISE_TTL + 600 : PROMISE_TTL), destKind: kindC === 'haul' ? 'site' : place ? 'building' : 'person', destId: kindC === 'haul' ? req.siteId : place ? place.id : A.id });
+          if (place) c.data.place = place.id;
         }
         req.status = 'promised';
         if (isRich(world)) req.offered = resp.n; // they agreed to this much; the rest of the ask stays the asker's own problem
-        req.note = isRich(world) && resp.n < req.amount ? `${B.name} will bring ${resp.n} of the ${req.amount} ${item}` : `${B.name} will bring ${resp.n} ${item}`;
+        const where = c.data.place ? ` (or leave it at ${A.name}’s ${homeNoun((B.beliefs[c.data.place as number]?.btype ?? 'hut') as BuildingType)})` : '';
+        req.note = (isRich(world) && resp.n < req.amount ? `${B.name} will bring ${resp.n} of the ${req.amount} ${item}` : `${B.name} will bring ${resp.n} ${item}`) + where;
         if (req.kind === 'repair') {
           bubble(world, B, 'I’ll see to the roof.', 'say', 60);
           addLog(world, B, 'social', `Promised ${A.name} to mend their roof.`);

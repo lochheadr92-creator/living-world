@@ -246,3 +246,12 @@ Contract: [WINTER_SHELTER.md](WINTER_SHELTER.md).
 - Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/shelter_observe.ts shelter_evidence/ordinary-30-meadow-r47 meadow 30`
   (same optional arguments as the winter-reserve script; `46` as the fifth argument runs the same seed under rules 46).
 - Lab harm check: `node scripts/lab.mjs --out shelter_evidence/lab-shelter --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-winter-shelter`.
+
+## Rules 48 agreed delivery place
+
+Contract: [DELIVERY_PLACE.md](DELIVERY_PLACE.md).
+
+- Contracts: `npx vitest run tests/delivery_place.test.ts tests/food_help.test.ts tests/v47_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/food_help_observe.ts food_help_evidence/ordinary-30-meadow-r48 meadow 30`
+  (the food-help script; its report now carries `doorPromises`, `doorDeliveries` and `foodAskTrustLeaned`).
+- Lab harm check: `node scripts/lab.mjs --out food_help_evidence/lab-place --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-delivery-place`.

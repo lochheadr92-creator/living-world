@@ -37,6 +37,8 @@ import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
 import { creditHauled, creditStocked } from './intent';
 import { hasWinterReserve, isFoodKind } from './provision';
+import { hasDeliveryPlace } from './delivery_place';
+import { personById } from './registry';
 import { eatsAtTheStore } from './tableeating';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp, hyp } from './util';
@@ -501,15 +503,40 @@ registerHandler('deposit', {
         if (e.ent === 'building') {
           noteDeposit(world, e, p, k as ItemKind, m);
           // a food reserve is credited where the food actually moves, not from the store looking full afterwards
-          if (isFoodKind(k as ItemKind)) creditStocked(p, e.id, m, e.ent === 'building' && e.type === 'granary' && hasWinterReserve(world));
+          if (isFoodKind(k as ItemKind) && a.data.mode !== 'promise') creditStocked(p, e.id, m, e.ent === 'building' && e.type === 'granary' && hasWinterReserve(world));
           if (a.data.destSite) creditContribution(p, a.data.destSite as number, 12 * m);
         }
         if (e.ent === 'site' && e.contrib) e.contrib[p.hhId] = (e.contrib[p.hhId] ?? 0) + m;
       }
     }
     if (e.ent === 'building' || e.ent === 'site' || e.ent === 'pile') observe(world, p, e);
-    if (moved === 0) return partial ? 'fail:no room' : 'fail:nothing to put down';
+    if (moved === 0) {
+      if (a.data.mode === 'promise' && a.data.commitmentId) {
+        const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));
+        if (cm) {
+          cm.blocked = partial ? 'no room in the store to leave it' : 'had nothing to leave';
+          cm.blockedAt = world.tick;
+        }
+      }
+      return partial ? 'fail:no room' : 'fail:nothing to put down';
+    }
     a.cycle = moved;
+    // rules 48 (delivery_place.ts): left at the agreed place, the promise and the request record what actually arrived, once
+    if (a.data.mode === 'promise' && a.data.commitmentId && hasDeliveryPlace(world)) {
+      const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));
+      const gotHere = cm && cm.item ? ((a.data.moved ?? {}) as Record<string, number>)[cm.item] ?? 0 : 0;
+      if (cm && cm.item && gotHere > 0) {
+        cm.delivered = (cm.delivered ?? 0) + gotHere;
+        const rq = world.requests.find((x) => x.id === cm.requestId);
+        if (rq) rq.delivered = (rq.delivered ?? 0) + gotHere;
+        const A = personById(world, cm.to);
+        if (A) addLog(world, A, 'social', `${p.name} left ${gotHere} ${cm.item} at our door, as promised.`);
+        addLog(world, p, 'social', `Left ${gotHere} ${cm.item} at ${A?.name ?? 'their'}’s door, as promised.`);
+        if ((cm.delivered ?? 0) >= cm.amount) fulfillCommitment(world, p, cm.id);
+      }
+      // a promise left at the door is not a deposit of one's own: nothing is credited to a reserve plan or a site
+      a.data.moved = {};
+    }
     if (p.errand && p.errand.targetId === a.targetId) p.errand = null;
     if (c.kind === 'site') {
       addFx(world, 'deliver', e.ent === 'site' ? e.x + e.w / 2 : p.x, e.ent === 'site' ? e.y + e.h / 2 : p.y, 0);

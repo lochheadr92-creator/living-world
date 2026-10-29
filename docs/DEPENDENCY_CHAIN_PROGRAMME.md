@@ -108,8 +108,21 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 ### WS5 Cooperation, commitments, reliable contact
 - **Current.** Trust-based helper choice (39), stored-material promises (40), promise upkeep and relationship consequences
   (`social.ts updateCommitments`). Give fails with "was not where I expected" and clears whereabouts.
-- **Gap.** No agreed delivery place; repeated futile contact; no demonstrated repeated loop.
-- **Status.** Impl `partial` · Contract `partial` · E2E `no` · Ordinary `no` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis.** A promise to a person could be kept only by a hand-over; a helper arriving where the asker was last seen
+  found nobody, and expired/interrupted/broken food promises ran at 12-18 per seed per 30 days (rules 45). Trust moved
+  on kept (+6) and broken (−12) promises but the food ask never read it, so no later choice could change.
+- **Contract (rules 48, `docs/DELIVERY_PLACE.md`).** At promise time a helper who knows the asker's home names it as the
+  agreed place (said in the request note); keeping the promise is the hand-over or an ordinary deposit there, credited
+  once from what moved, fulfilling the commitment with the same consequences; the household eats from its own store; the
+  food/water ask leans on trust by at most ±4 ("they came through before" / "they let me down before"). Switch
+  `rich-no-delivery-place`. Owner `src/sim/delivery_place.ts`; `social.ts` promise, `options_work.ts` leave option,
+  `act_resource.ts` deposit credit, `options_social.ts` ask score.
+- **Preserved.** Expiry, interruption, refusal, death, "not where I expected", no-room obstacles; no tracking, no public
+  store as a place, no promise that anyone waits. Repeated futile asks are still bounded by the existing `asked` cooldown.
+- **Status.** Impl `yes` · Contract `yes` (4 cases, `tests/delivery_place.test.ts`) · E2E `yes` (staged: promise names
+  the hut → asker away → fish left at the door → promise kept → asker eats from her store; and kept promise → trust →
+  the reliable neighbour asked first) · Ordinary `yes` (place named on 52/40/12 promises, 7/1/0 left at a door; table in the slice log) · Rendered `partial` (request note names the place;
+  commitment row "n of m delivered"; log lines on both sides; no new page check) · Aggregate `unproven` (8-seed lab: nothing beyond noise either way).
 
 ### WS6 Production chains and workshop use
 - **Current.** `recipes.ts`, `production.ts` (supply planner to depth 3), `facilities.ts`, `act_production.ts`.
@@ -224,3 +237,32 @@ Lab `shelter_evidence/lab-shelter` (8 seeds, control + nudge + `rich-no-winter-s
 mean home condition −5.4 [−10.0, −0.8] for the ablation (both larger than chance: the slice adds them); deaths +0.4
 [−0.8, +1.9], homeless +0.6 [−0.1, +1.4], people +0.1 (not distinguishable from chance). Full table in
 `docs/WINTER_SHELTER.md`. No survival claim.
+
+### Slice 4 — rules 48 agreed delivery place (WS5), 2026-10-29
+
+Predecessor reference: `tests/v47_continuation.expected.json` recorded from `2a05b30` by `scripts/v47_reference.ts --write`
+before any behaviour change. Contract: `docs/DELIVERY_PLACE.md`. Tests: `tests/delivery_place.test.ts` (4), focused run
+12 files / 178 tests (food help, cooperation, project cooperation, commitments, social, stored materials, project helpers,
+recovery, preparation, v46/v47 continuation).
+
+Ordinary observation, `scripts/food_help_observe.ts`, Normal, immigration off, 30 days, rules 48
+(`food_help_evidence/ordinary-30-{seed}-r48`); horizons reached, conservation and observer purity held. The rules-45
+rows are the same seeds before this slice (diverged worlds, not a pair).
+
+| seed | rules | food/care asks | fetch promises | promised deliveries completed (asks / units) | promises naming a place | left at a door | sampled asks with a trust term | lapsed promises (expired, interrupted, broken, failed) | deaths (hunger) |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| meadow | 45 | 155 | 36 | 20 / 37 | n/a | n/a | 0 / 946 | 49 | 1 (0) |
+| meadow | 48 | 229 | 60 | 57 / 110 | 52 | 7 | 901 / 1211 | 37 | 1 (0) |
+| river | 45 | 399 | 65 | 33 / 57 | n/a | n/a | 0 / 1578 | 70 | 3 (2) |
+| river | 48 | 388 | 55 | 36 / 68 | 40 | 1 | 1258 / 1755 | 37 | 1 (0) |
+| forest | 45 | 350 | 54 | 22 / 35 | n/a | n/a | 0 / 1347 | 101 | 6 (5) |
+| forest | 48 | 381 | 53 | 47 / 86 | 12 | 0 | 1201 / 1698 | 28 | 22 (19) |
+
+Leaving goods at a door is rare in these worlds (most promises are kept in person, which the walk prefers when the asker
+is in reach); the place is named on most promises where the helper knows the home. Forest's 22 deaths are at the top of
+that seed's range (6, 15, 13, 21, 9 and 22 across the slices' runs); the lab rows below are the comparison that means
+anything.
+
+Lab `food_help_evidence/lab-place` (8 seeds, control + nudge + `rich-no-delivery-place`): deaths +0.5 [−0.9, +2.1], people −0.4
+[−2.4, +1.5], mean hunger +1.0 [−3.3, +5.3], ask units delivered −0.4 [−2.3, +1.3], home food per person 0 for the ablation; all
+not distinguishable from chance. No harm established, no benefit claimed.

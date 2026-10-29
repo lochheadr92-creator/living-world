@@ -34,6 +34,7 @@ import { hauntsFor, leisureOn, pickHaunt } from './leisure';
 import { leaveHeaviestOption } from './leave_heaviest';
 import type { Belief, BeliefKind, BuildingType, Commitment, FoodKind, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { hasFoodFetch } from './food_help';
+import { hasDeliveryPlace } from './delivery_place';
 import { isFood } from './social';
 import { T } from './types';
 
@@ -1497,6 +1498,45 @@ function optCommitments(ctx: Ctx): void {
       const remaining = c.amount - (c.delivered ?? 0);
       if (remaining <= 0) continue;
       if (have >= remaining || (have >= 1 && world.tick - c.made > 600)) {
+        // rules 48 (delivery_place.ts): the agreed place is the asker's home; leaving it there is the ordinary deposit, credited
+        // to the promise by what actually moves. Offered beside the hand-over; the walk decides which is nearer.
+        const place = c.destKind === 'building' && c.destId && hasDeliveryPlace(world) ? p.beliefs[c.destId] : undefined;
+        if (place && place.kind === 'building') {
+          const e2 = eta(ctx, place.x, place.y);
+          const sc2 = new Scorer().add(`promised ${to.name} ${c.item}`, 54 + 10 * Math.max(0, (p.relations[c.to]?.trust ?? 10) / 100)).add('leaving it at their door', -2).add('walking', -pen(e2));
+          const leave: Items = { [c.item]: Math.min(have, remaining) };
+          addOption(ctx, {
+            kind: 'deposit',
+            label: `Leave ${c.item} at ${to.name}’s ${homeNoun((place.btype ?? 'hut') as BuildingType)} as promised`,
+            goal: `to keep my promise to ${to.name}`,
+            need: null,
+            util: sc2.total,
+            parts: sc2.parts,
+            eta: e2 + 20,
+            key: `leave:${place.id}:promise:${c.id}`,
+            targetId: place.id,
+            tag: 'promise',
+            make: () => {
+              const spot = spotNear(world, p, place);
+              if (!spot) return null;
+              return newActivity(world, p, {
+                kind: 'deposit',
+                label: `Leaving ${c.item} at ${to.name}’s ${homeNoun((place.btype ?? 'hut') as BuildingType)} (promised)`,
+                goal: `to keep my promise to ${to.name}`,
+                targetId: place.id,
+                targetType: 'building',
+                tx: place.x,
+                ty: place.y,
+                spotX: spot.x,
+                spotY: spot.y,
+                utility: sc2.total,
+                minCommit: 40,
+                maxTicks: 700,
+                data: { items: leave, mode: 'promise', commitmentId: c.id },
+              });
+            },
+          });
+        }
         const loc = whereIs(ctx, c.to, c.siteId);
         if (!loc) {
           addBlocked(ctx, 'give', `Keep promise to ${to.name}`, c.to, 'does not know where to find them', 'promise');
