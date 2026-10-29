@@ -1,4 +1,5 @@
 import { learnerInstructionOn, setLearnerInstruction } from '../../src/sim/techniques';
+import { civicBenefitOn, setCivicBenefit } from '../../src/sim/civic_benefit';
 import { achievementAftermathOn, setAchievementAftermath } from '../../src/sim/achievement';
 import { projectHelperChoiceOn, setProjectHelperChoice } from '../../src/sim/options_social';
 import { storedMaterialPlansOn, setStoredMaterialPlans, storedMaterialPromisesOn, setStoredMaterialPromises } from '../../src/sim/material_stock';
@@ -257,6 +258,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-stored-material-promises') return {spec:label,summary:'remove remembered raw storage from promise feasibility and acquisition; no effect below rules 40',install(){const was=storedMaterialPromisesOn();setStoredMaterialPromises(false);return ()=>setStoredMaterialPromises(was);}};
   if (kind === 'rich-no-project-helper-choice') return {spec:label,summary:'use first feasible project-material helper instead of personal trust; no effect below rules 39',install(){const was=projectHelperChoiceOn();setProjectHelperChoice(false);return ()=>setProjectHelperChoice(was);}};
   if (kind === 'rich-no-learner-instruction') return {spec:label,summary:'remove learner-initiated instruction only; teacher offers unchanged; no effect below rules 41',install(){const was=learnerInstructionOn();setLearnerInstruction(false);return ()=>setLearnerInstruction(was);}};
+  if (kind === 'rich-no-civic-benefit') return {spec:label,summary:'remove personal public-store benefit credit only; physical goods unchanged; no effect below rules 42',install(){const was=civicBenefitOn();setCivicBenefit(false);return ()=>setCivicBenefit(was);}};
   if (kind === 'rich-no-achievement-aftermath') return {spec:label,summary:'remove construction satisfaction and later hopes only; no effect below rules 38',apply:()=> 'achievement aftermath off',install(){const was=achievementAftermathOn();setAchievementAftermath(false);return ()=>setAchievementAftermath(was);}};
   if (kind === 'rich-no-reconsider') return {spec:label,summary:'remove plan reconsideration only; changes nothing below version 34',apply:()=> 'plan reconsideration off',install(){const was=reconsiderOn();setReconsider(false);return ()=>setReconsider(was);}};
   if (kind === 'rich-no-leisure') return {spec:label,summary:'restore the single idle fallback (potter about near home) and nothing else; below version 28 it changes nothing',apply:(w)=>{w.settings.dynamics='rich';return 'rich dynamics on, varied spare time off';},install(){const was=leisureOnSwitch();setLeisure(false);return ()=>setLeisure(was);}};

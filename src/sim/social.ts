@@ -3,6 +3,7 @@ import { offerLesson, answerLesson, answerRequestedLesson, finishLesson, interru
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
+import { receivedCivicBenefit } from './civic_benefit';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
 import { runsRulesVersion } from './rulesversion';
@@ -1311,13 +1312,14 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         A.asked[B.id] = world.tick - 400;
         break;
       }
-      const w = (projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id) : 0) + 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
+      const w = (projectAt(world, d.siteId ?? 0) ? organiserExperience(B, A.id, world) : 0) + 0.2 + 0.45 * B.traits.diligence + 0.3 * B.traits.generosity + 0.4 * Math.max(0, (rel?.affinity ?? 0)) / 100 + (hashUnit(B.id, A.id, world.tick >> 5) - 0.5) * 0.15 - 0.5 * (personalDriveMax(world, B) / 100) + (rel?.kin ? 0.2 : 0);
       if (w >= 0.55 && siteBelief && (projectAt(world, d.siteId ?? 0) || world.byId.has(d.siteId ?? 0))) {
         observeOffer(world, 'recruit', A, B, siteBelief, () => tellBelief(world, A, B, siteBelief));
         if(project && councilFor(world,project))releaseOldSupport(world,B,project.siteId,'accepted another coordinator for this project');
         addCommitment(world, B, req, { kind: 'help_build', siteId: d.siteId ?? 0, amount: 1, deadline: world.tick + 1800, destKind: 'site', destId: d.siteId ?? 0, milestone: 'work on it or bring materials' });
         req.status = 'promised';
         req.note = council ? `${B.name} supports ${A.name} coordinating and will help build` : `${B.name} will help build`;
+        if(project&&receivedCivicBenefit(world,B,A.id))req.note+='; remembers benefiting from their earlier shared storehouse';
         bubble(world, B, council?`I support you coordinating it, ${A.name}.`:D.saying(D.RESP_PROMISE_HELP, B.id, A.id, world.tick >> 5), 'say', 64);
         addLog(world, B, 'social', `Agreed to help ${A.name} with the building.`);
         addEvent(world, 'social', `${B.name} agreed to help ${A.name} build.`, [A.id, B.id], A.x, A.y);

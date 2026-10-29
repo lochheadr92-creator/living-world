@@ -6,6 +6,7 @@ import type { CivicProject, Participation } from './townships';
 import { runsRulesVersion } from './rulesversion';
 import { knowsDeath, withinHearing } from './death_knowledge';
 import { addEvent } from './events';
+import { civicExperience } from './civic_benefit';
 export interface Council {
  candidates: { personId:number; tick:number; reason:string }[];
  coordinatorId:number;
@@ -55,9 +56,9 @@ export function nominate(w:World,a:Person,b:Person,q:CivicProject):void{
  addEvent(w,'social',`${a.name} proposed to coordinate the shared storehouse: ${reason}.`,[a.id,q.siteId],a.x,a.y);
 }
 /** Compare only the respondent's relationships and personally witnessed outcomes. */
-export function confidence(p:Person,id:number):number{
+export function confidence(p:Person,id:number,w?:World):number{
  const r=p.relations[id];
- const experience=Math.max(-0.12,Math.min(0.12,(p.civicOutcomes??[]).filter(m=>m.organiserId===id).reduce((n,m)=>n+(m.success?0.04:-0.04),0)));
+ const experience=civicExperience(p,id,w);
  return 0.004*(r?.affinity??0)+0.003*(r?.trust??10)+experience-(r?.grievance?0.15:0);
 }
 export function oppositionReason(w:World,p:Person,a:Person,q:CivicProject):string{
@@ -65,7 +66,7 @@ export function oppositionReason(w:World,p:Person,a:Person,q:CivicProject):strin
  const m=q.participants.find(m=>m.personId===p.id),old=m?.status==='supporting'?m.supports:0;
  if(!old||old===a.id||knowsDeath(p,old))return '';
  const prior=alignmentWeight(w,p,q.townshipId,q.id,old),alternative=alignmentWeight(w,p,q.townshipId,q.id,a.id);
- return confidence(p,a.id)+alternative>confidence(p,old)+prior+0.05?'':`prefers the organiser already supported (#${old})${prior?' after repeatedly choosing them on earlier projects':''}`;
+ return confidence(p,a.id,w)+alternative>confidence(p,old,w)+prior+0.05?'':`prefers the organiser already supported (#${old})${prior?' after repeatedly choosing them on earlier projects':''}`;
 }
 export function releaseOldSupport(w:World,p:Person,siteId:number,reason:string):void{
  for(const c of p.commitments)if(c.siteId===siteId&&c.status==='active'){

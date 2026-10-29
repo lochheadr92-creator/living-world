@@ -7,6 +7,7 @@ import { nearestHub } from './settlements';
 import { addEvent } from './events';
 import { stageOf } from './people';
 import { hyp } from './util';
+import { civicExperience, hasCivicBenefit } from './civic_benefit';
 
 export interface Township { origin?: { householdId:number; relocationId:number; fromTownship:number; shelterId:number; organiserId:number }; id: number; name: string; x: number; y: number; founded: number }
 export interface Participation {
@@ -108,13 +109,14 @@ export function finishProject(w: World, site: Site, building: Building | null, w
   const accountable=council?council.coordinatorId:project.organiserId;
   if(!accountable)continue; // a failed tied project is not attributed to an invented leader
   const memories = p.civicOutcomes ??= [];
-  memories.push({ projectId: project.id, organiserId: accountable, success: !!building, tick: w.tick });
+  memories.push({ projectId: project.id, organiserId: accountable, success: !!building, tick: w.tick,
+   ...(building&&hasCivicBenefit(w)?{buildingId:building.id}:{}) });
   if (memories.length > 24) memories.shift();
  }
 }
 /** Trust in organising comes only from the respondent's own witnessed outcomes, once per project. */
-export function organiserExperience(p: Person, organiserId: number): number {
- return Math.max(-0.12, Math.min(0.12, (p.civicOutcomes ?? []).filter(m => m.organiserId === organiserId).reduce((n, m) => n + (m.success ? 0.04 : -0.04), 0)));
+export function organiserExperience(p: Person, organiserId: number, w?:World): number {
+ return civicExperience(p,organiserId,w);
 }
 /** Participation is revocable. Needs interrupt ordinary work already; sustained emergency withdraws support. */
 export function reviewParticipation(w: World, p: Person): void {

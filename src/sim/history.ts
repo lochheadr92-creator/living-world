@@ -37,7 +37,7 @@ export function civicHistory(w: World, p: Person): { township: string; lines: st
   ...exchangeTownHistory(w,t.id),
   ...factionHistory(w,t.id),
   ...projects.slice(-2).flatMap(q => projectHistory(w,q)),
-  ...(p.civicOutcomes ?? []).slice(-3).map(m => `Personally witnessed ${name(w,m.organiserId)}'s project #${m.projectId} ${m.success ? 'complete' : 'fail'} at tick ${m.tick}; this informs willingness to support them again.`),
+  ...(p.civicOutcomes ?? []).slice(-3).map(m => `Personally witnessed ${name(w,m.organiserId)}'s project #${m.projectId} ${m.success ? 'complete' : 'fail'} at tick ${m.tick}; this informs willingness to support them again.${m.benefit ? ` Personally benefited: collected ${m.benefit.amount} ${m.benefit.item} at tick ${m.benefit.tick}; counted once for this project.` : ''}`),
   ...(projects.length ? [] : ['No shared project proposed yet.']),
  ] };
 }

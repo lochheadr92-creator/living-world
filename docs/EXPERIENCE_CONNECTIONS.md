@@ -75,4 +75,35 @@ Continuing that exact save through ordinary spare-time choices showed the finish
 charcoal event and three charcoal in the workshop production history. Both downloaded
 browser checkpoints replay exactly with conserved resources. No external model used.
 
-The remaining two links and ordinary-world observation are pending.
+### Rules 42 — personal public benefit
+
+Witnessed completion now records the building alongside the already known accountable
+organiser. An actual positive withdrawal from that public storehouse records one
+personal receipt. It adds 0.04 to existing civic experience, inside the unchanged
+0.12 total bound; repeated visits cannot accumulate credit. Unknown attribution,
+private stores and empty transfers give none. A later coordinator cannot rewrite
+the witnessed attribution. This bounded slice covers material withdrawals, not all
+public infrastructure. Pre-42 memories lack building attribution and are not backfilled.
+
+`rich-no-civic-benefit` removes recording and influence while leaving goods unchanged.
+Both civic confidence and willingness use the same owner calculation. The actual
+accepted response and inspector history explain remembered benefit.
+
+28 focused tests passed (benefit, collective choice, townships, rules-41 continuation),
+typecheck passed. The first fixture held the beneficiary still and a later setup let
+competing work interrupt the approach. Corrected staging places the beneficiary at
+the store and lets them move; production thresholds were not changed. A purity check
+also stopped calling fixture perception while measuring observer purity.
+
+`inhabitant_evidence/connections-civic-first`: both arms physically withdrew two stone.
+Enabled recorded benefit at tick 709 and switched support to Ada in an actual request
+at tick 1000; disabled kept Cora and refused the new proposal. Equal staged relationships
+make the unchanged 0.05 switch margin a clear boundary: completion alone contributes
+0.04; practical benefit supplies another 0.04. No population-effect claim.
+
+The actual manual Ben panel reproduced withdrawal, a neighbour's later invitation,
+changed support and a real building commitment. `connections-civic-manual-ui` screenshots
+show the reason. Its downloaded checkpoint (`connections-civic-manual-replay`) and
+both restricted runs replay exactly with conservation intact. No external model used.
+
+The local-demand link and ordinary-world observation remain pending.

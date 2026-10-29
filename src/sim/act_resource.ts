@@ -26,6 +26,7 @@ import {
 import { addFx, addLog } from './events';
 import { clearFailure, noteFailure, observe, delBelief, isWaterBeliefId } from './knowledge';
 import { mayDeposit, noteDeposit, noteWithdraw, withdrawAllowance } from './facilities';
+import { recordCivicBenefit } from './civic_benefit';
 import { carryCap } from './people';
 import { taskMultiplier, wearFor } from './tools';
 import type { ToolTask } from './tools';
@@ -616,6 +617,7 @@ registerHandler('withdraw', {
       moved += m;
       if (m > 0 && e && e.ent === 'building') {
         noteWithdraw(world, e, p, k as ItemKind, m);
+        recordCivicBenefit(world, p, e, k as ItemKind, m);
         if (isToolItem(k as ItemKind)) borrowFromRack(world, p, k as ToolKind, m);
       }
     }
