@@ -168,7 +168,8 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   seven foot loads → demand with its own words; reserve food carted home and credited; batch inputs carted to the kiln;
   puller dies → household member recovers the load to the site; partial unload at a full lean-to) · Ordinary `partial`
   (the experience ground is reached by 7 people in three worlds and the demand surfaces 95 times, blocked by the hammer every
-  time; no cart exists, so no trip; table in the slice log) · Rendered `partial` (person-card line; no page check) ·
+  time; no cart exists, so no trip; table in the slice log) · Rendered `yes` (person-card line; page check
+  `scripts/browser/chains_check.mjs` transport 1 / 1, `chain_evidence/rendered/transport.png`) ·
   Aggregate `unproven` (lab rows in the slice log). Exchange goods are not carted (limit kept).
 
 ### WS8 Public projects and civic benefit
@@ -252,7 +253,9 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   her wood to the site by his hands; reserve laid → three winter meals each → practice learned, child from mother → cue
   two days earlier, held into adulthood) · Ordinary `partial` (5 undertakings recorded at deaths, 0 taken up; the practice
   learned by 5 people in three seeds, 4 of them from the layer, one early-cue preparation; table in the slice log) ·
-  Rendered `partial` (the practice line on the person card; plan goal "finish what X began"; no household-card line yet) ·
+  Rendered `yes` (the practice line on the person card; plan goal "finish what X began"; the household history's "Ada left
+  the household home unfinished …" line, page check `scripts/browser/chains_check.mjs` continuity 1 / 1,
+  `chain_evidence/rendered/continuity.png`) ·
   Aggregate `unproven` (lab rows in the slice log).
 
 ### WS12 Relocation, splitting, rescue, return
@@ -278,14 +281,33 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 - **Status.** Impl `yes` · Contract `yes` (6 cases) · E2E `yes` (staged: heard by two of three → refusal → child stays →
   organiser alone packs, walks, builds, founds a new household; succession after a witnessed death; return; search) ·
   Ordinary `no` (the gate now opens in 85 samples across river and forest, but the proposal was chosen once and failed; no
-  agreement in 135 seed-days; table in the slice log) · Rendered `partial` (history lines; no page check) · Aggregate
+  agreement in 135 seed-days; table in the slice log) · Rendered `yes` (history lines for the succession and the search,
+  page check `scripts/browser/chains_check.mjs` 2 / 2, `chain_evidence/rendered/{succession,rescue}.png`) · Aggregate
   `unproven` (lab rows in the slice log).
 
 ### WS13 Observable explanations
-- **Status.** Per chain; recorded with each slice.
+- **Per chain.** Each slice's rendered status names what the viewer sees and where it was checked: rules 45 (page check
+  5 / 5), 46-48 (plan step text, option labels, request notes, decision "because"), 49 (log line), 50 (plan panel), 51
+  ("Their customers" rows, page check), 52 (three person-card lines, page check 4 / 4), 53 (practice line; household
+  history line for what was left unfinished), 54 (household history lines for successions, searches and the split), 55
+  (person-card line for what was carried). The rendered examples for 53-55 are staged saves built by running the contract
+  steps (`scripts/chains_demo.ts` → `chain_evidence/rendered-saves/`), read in a headless page through the DOM
+  (`scripts/browser/chains_check.mjs`, 8 / 8 including an observer-purity check per save), screenshots in
+  `chain_evidence/rendered/`.
+- **Honesty of the lines.** A promise is a request note until delivery ("delivered N of M"); a plan step is "take the food
+  home", not "stored"; a search records "found nobody"; a cart demand says on which ground it is wanted; a relocation
+  outcome names who stayed. Nothing reconstructs a motive from a later success.
+- **Status.** Impl `yes` · Contract `n/a` · E2E `yes` (page checks) · Ordinary `n/a` · Rendered `yes` · Aggregate `n/a`.
 
 ### WS14 Evidence and corrected findings
-- Corrections kept (see brief section 14); every new claim below names its boundary event and denominator.
+- Corrections kept (see brief section 14); every new claim below names its boundary event and denominator. Audit at the
+  end of the programme (2026-10-29): a search of the eleven slice documents and this register for the corrected claims
+  (seventeen empty packs, a built forest granary, charcoal never made, iron impossible, the two-day window, stale source
+  counts) finds none of them restated. Two of this programme's own first readings were corrected on the way and the
+  corrections are kept in the slice logs: the swap-plausibility rule (slice 7) and the cart experience threshold (slice 11).
+- Every observation script deep-copies by serializing before and after each sample and throws on any difference, and
+  records the source manifest; the instrumentation is shown not to change state or the random stream in every run above.
+- **Status.** Impl `yes` · Contract `n/a` · E2E `n/a` · Ordinary `n/a` · Rendered `n/a` · Aggregate `n/a`.
 
 ## Slice log
 

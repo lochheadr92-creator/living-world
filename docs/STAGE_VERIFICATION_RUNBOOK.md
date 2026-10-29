@@ -295,6 +295,11 @@ Contract: [TECHNIQUE_TREE.md](TECHNIQUE_TREE.md).
 - Page check (dev server on 5182): `node scripts/browser/technique_tree_check.mjs "http://127.0.0.1:5182/" technique_evidence/rendered meadow`.
 - Lab harm check: `node scripts/lab.mjs --out technique_evidence/lab-tree --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-technique-tree`.
 
+## Rendered examples of the chain lines (rules 53-55)
+
+- `npx vite --port 5182`, then `npx vite-node scripts/chains_demo.ts` (staged saves into `chain_evidence/rendered-saves/`) and
+  `node scripts/browser/chains_check.mjs "http://127.0.0.1:5182/" chain_evidence/rendered` (8 checks, screenshots).
+
 ## Rules 55 transport
 
 Contract: [TRANSPORT.md](TRANSPORT.md).
