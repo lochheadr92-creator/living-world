@@ -1,12 +1,14 @@
 // The event feed (bottom-left): what has just happened, newest first, with category filters.
 // Rebuilt only when a new event arrives or the filter changes; the relative times tick over every couple of seconds.
 import { agoText } from '../sim/inspect';
+import { DAY } from '../sim/constants';
 import type { EventKind, WorldEvent } from '../sim/types';
 import { EVENT_COLORS } from '../render/palette';
 import { Every, h, KeyedList, setBool, setHidden, setText, setVar, toggle } from './dom';
 import { icon } from './icons';
 import type { Part, UICtx } from './context';
 import type { Slots } from './layout';
+import { feedRows, type FeedRow } from './feed_rows';
 
 interface Category {
   id: string;
@@ -26,23 +28,6 @@ export const FEED_CATEGORIES: Category[] = [
   { id: 'chronicle', label: 'Chronicle', kinds: null, tip: 'The settlement\'s record, kept after the feed has moved on: lives, the land, what was built, what was held, what was fought over' },
 ];
 
-const MAX_ROWS = 30;
-/** in the full list, workshop output is frequent: at most this many distinct lines of it, so it cannot drown out the rest */
-const WORK_LINES_IN_ALL = 3;
-
-interface FeedRow {
-  ev: WorldEvent;
-  /** how many events of this kind (same thing made again) the line stands for */
-  count: number;
-  key: string;
-}
-
-/** "Mira finished sawn planks at the timber yard." and "Tom and Ana finished sawn planks at the timber yard." are one line */
-function workKey(text: string): string {
-  const m = /^.*? finished (.+)$/.exec(text);
-  return m ? `fin:${m[1]}` : text;
-}
-
 interface EvRow {
   el: HTMLLIElement;
   btn: HTMLButtonElement;
@@ -51,6 +36,10 @@ interface EvRow {
   time: HTMLElement;
   ico: HTMLElement;
   ev: WorldEvent | null;
+  details: HTMLDetailsElement;
+  summary: HTMLElement;
+  members: HTMLElement;
+  signature: string;
 }
 
 export function createFeed(ctx: UICtx, slots: Slots): Part {
@@ -135,7 +124,10 @@ export function createFeed(ctx: UICtx, slots: Slots): Part {
       const text = h('span', { class: 'ev-text' });
       const time = h('span', { class: 'ev-time num' });
       const btn = h('button', { type: 'button', class: 'ev-btn' }, h('span', { class: 'ev-mark' }, dot, ico), text, time);
-      const row: EvRow = { el: h('li', { class: flashNext ? 'ev fresh' : 'ev' }, btn), btn, dot, ico, text, time, ev: null };
+      const summary = h('summary', null, 'Show each event');
+      const members = h('div');
+      const details = h('details', { class: 'feed-members', hidden: true }, summary, members);
+      const row: EvRow = { el: h('li', { class: flashNext ? 'ev fresh' : 'ev' }, btn, details), btn, dot, ico, text, time, ev: null, details, summary, members, signature: '' };
       if (flashNext) window.setTimeout(() => row.el.classList.remove('fresh'), 1300);
       btn.addEventListener('click', () => {
         const ev = row.ev;
@@ -157,10 +149,20 @@ export function createFeed(ctx: UICtx, slots: Slots): Part {
       const col = EVENT_COLORS[ev.kind] ?? '#8fa8b8';
       setVar(r.dot, '--c', col);
       r.ico.style.color = col;
-      const text = row.count > 1 ? `${ev.text.replace(/.$/, '')} ×${row.count}` : ev.text;
+      const text = row.count > 1 ? `${ev.text} And ${row.count - 1} earlier similar events.` : ev.text;
       setText(r.text, text);
       setText(r.time, agoText(game.world, ev.tick));
       r.btn.setAttribute('aria-label', `${text} (${agoText(game.world, ev.tick)}). Show where.`);
+      setHidden(r.details,row.count < 2);
+      setText(r.summary,`Show each of ${row.count} events`);
+      const signature=row.members.map(e=>e.id).join(',');
+      if(signature!==r.signature) {
+        r.signature=signature;
+        r.members.replaceChildren(...row.members.map(event=>h('button',{type:'button',class:'ev-btn',onClick:()=>{
+          const id=event.ids.find(id=>game.world.byId.has(id));
+          if(id) game.focusEntity(id); else game.flyTo(event.x,event.y);
+        }},`${event.text} (day ${Math.floor(event.tick / DAY) + 1}, tick ${event.tick})`)));
+      }
     },
   );
 
@@ -213,28 +215,7 @@ export function createFeed(ctx: UICtx, slots: Slots): Part {
     flashNext = list.size > 0 && filter === lastFilter && !force;
     lastFilter = filter;
 
-    const rows: FeedRow[] = [];
-    const seenWork = new Map<string, FeedRow>();
-    let workLines = 0;
-    for (let i = events.length - 1; i >= 0 && rows.length < MAX_ROWS; i--) {
-      const ev = events[i];
-      if (!matches(ev)) continue;
-      if (ev.kind === 'work') {
-        const k = workKey(ev.text);
-        const prev = seenWork.get(k);
-        if (prev) {
-          prev.count++;
-          continue;
-        }
-        if (filter === 'all' && workLines >= WORK_LINES_IN_ALL) continue;
-        const row: FeedRow = { ev, count: 1, key: `w:${k}` };
-        seenWork.set(k, row);
-        rows.push(row);
-        workLines++;
-        continue;
-      }
-      rows.push({ ev, count: 1, key: String(ev.id) });
-    }
+    const rows = feedRows(events, filter, matches);
     const hadScroll = listEl.scrollTop > 4;
     const before = listEl.scrollHeight;
     list.sync(rows, (r) => r.key);

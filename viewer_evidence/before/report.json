@@ -1,0 +1,66 @@
+{
+  "phase": "before",
+  "source": "953eb90a5a94bf69a73bba02e1c49d5e99c7cc7d",
+  "rules": 53,
+  "checks": [
+    {
+      "name": "wide: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "medium: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "close: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "near: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "viewing preserves full serialized world and RNG",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "snapshots": [
+    {
+      "name": "wide",
+      "zoom": 0.3,
+      "overlays": null,
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0
+    },
+    {
+      "name": "medium",
+      "zoom": 0.9,
+      "overlays": null,
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0
+    },
+    {
+      "name": "close",
+      "zoom": 1.8,
+      "overlays": null,
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0
+    },
+    {
+      "name": "near",
+      "zoom": 3.2,
+      "overlays": null,
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0
+    }
+  ]
+}

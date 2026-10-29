@@ -8,9 +8,11 @@ import { CharacterRenderer } from './characters';
 import { Critters, Effects, ambientColor, drawGlows, drawWeather } from './effects';
 import { CanvasInput } from './input';
 import { project } from './iso';
-import { drawBubble, drawFootprintHighlight, drawGlyphBadge, drawKnowledge, drawLabel, drawPath, drawPerceptionRadius, glyphFor } from './overlays';
+import { drawBubble, drawFootprintHighlight, drawGlyphBadge, drawKnowledge, drawLabel, measureLabel, drawPath, drawPerceptionRadius, glyphFor } from './overlays';
 import { Scenery } from './scenery';
 import { TerrainPainter } from './terrain';
+import { speechVisible, type ViewRect } from '../app/viewer';
+import { intersects, overlayPolicy, placeBubble, speechDetail, SpeechLayoutCache, type SpeechDetail } from './speech_layout';
 
 interface Drawable {
   d: number;
@@ -40,6 +42,12 @@ export class Renderer {
   /** exposed for the debug readout */
   lastFrameMs = 0;
   drawnCount = 0;
+  lastOverlayMs = 0;
+  /** Measured visible geometry for diagnostics and browser contracts; never simulation state. */
+  lastOverlayLayout: (ViewRect & { id: number; type: 'speech' | 'label' | 'glyph'; detail?: SpeechDetail; truncated?: boolean; fontSize?: number })[] = [];
+  private speechCache = new SpeechLayoutCache();
+  private speechLevel: SpeechDetail | undefined;
+  private speechSlots = new Map<number, { text: string; slot: number }>();
 
   constructor(
     private canvas: HTMLCanvasElement,
@@ -91,6 +99,11 @@ export class Renderer {
     // aim at the middle of the part of the screen the inspector leaves visible, not the middle of the window
     const shift = g.viewInsetRight / 2 / g.camera.zoom;
     if (follow) follow.x += shift;
+    if (g.fly && g.viewer.reducedMotion) {
+      g.camera.x = g.fly.x + shift; g.camera.y = g.fly.y;
+      if (g.fly.zoom !== null) g.camera.zoom = g.fly.zoom;
+      g.fly = null;
+    }
     const done = updateCamera(g.camera, dt, follow, g.fly && shift ? { ...g.fly, x: g.fly.x + shift } : g.fly);
     if (done) g.fly = null;
     clampCamera(g.camera, g.world, { w: this.w, h: this.h });
@@ -114,6 +127,9 @@ export class Renderer {
       this.terrain = new TerrainPainter(world);
       this.fx.reset();
       this.heads.clear();
+      this.speechCache.clear();
+      this.speechSlots.clear();
+      this.speechLevel = undefined;
       this.lastSim = game.simTime();
     }
     const terrain = this.terrain!;
@@ -355,76 +371,78 @@ export class Renderer {
     }
   }
 
-  private drawScreenOverlays(world: World, simT: number, hoverId: number): void {
+  private drawScreenOverlays(world: World, _simT: number, hoverId: number): void {
+    const started = performance.now();
     const { ctx, game, w, h } = this;
-    const cam = game.camera;
-    const z = cam.zoom;
-    const toScreen = (hx: number, hy: number) => ({ x: (hx - cam.x) * z + w / 2, y: (hy - cam.y) * z + h / 2 });
-    const ov = game.overlays;
-    const tick = world.tick;
-
-    // intention glyphs for everyone
-    if (ov.intentions) {
-      for (const p of world.persons) {
-        const hd = this.heads.get(p.id);
-        if (!hd || !p.activity) continue;
-        const d = p.activity.data;
-        const stype = (d.running ?? d.recipe ?? d.stype) as string | undefined;
-        const gl = glyphFor(p.activity.kind, stype);
-        if (!gl) continue;
-        const s = toScreen(hd.x, hd.y);
-        const size = Math.max(7, 9 * Math.min(1.25, z + 0.2));
-        drawGlyphBadge(ctx, gl.id, gl.color, s.x, s.y - 12 * Math.min(1, z + 0.3) - size * 0.4, size);
-      }
-    }
-
-    // name labels
-    const labelFor = (id: number, emphasis: boolean) => {
-      const hd = this.heads.get(id);
-      const e = world.byId.get(id);
-      if (!hd || !e || e.ent !== 'person') return;
-      const s = toScreen(hd.x, hd.y);
-      drawLabel(ctx, e.name, s.x, s.y - 14 * Math.min(1, z + 0.3) - (ov.intentions && e.activity ? 14 : 0), emphasis);
-    };
-    if (ov.labels && z > 0.5) for (const p of world.persons) if (p.id !== game.selectedId && this.heads.has(p.id)) labelFor(p.id, false);
-    if (game.selectedId && this.heads.has(game.selectedId)) labelFor(game.selectedId, true);
-    else if (hoverId && this.heads.has(hoverId)) labelFor(hoverId, false);
-
-    // speech bubbles: a handful at a time, selected person first
-    const speakers: { p: Person; pri: number }[] = [];
-    for (const p of world.persons) {
-      if (!p.speech || p.speech.until <= tick) continue;
-      const hd = this.heads.get(p.id);
-      if (!hd) continue;
-      let pri = 5;
-      if (p.id === game.selectedId) pri = 0;
-      else if (p.speech.kind === 'warn' || p.speech.kind === 'angry') pri = 1;
-      else if (p.speech.kind === 'ask') pri = 2;
-      else if (p.speech.kind === 'happy') pri = 3;
-      speakers.push({ p, pri });
-    }
-    speakers.sort((a, b) => a.pri - b.pri || a.p.id - b.p.id);
-    const limit = z < 0.5 ? 2 : z < 0.8 ? 4 : 7;
-    const placed: { x: number; y: number; w: number; h: number }[] = [];
-    for (const { p, pri } of speakers.slice(0, limit)) {
-      if (z < 0.5 && pri > 1) continue;
+    const cam = game.camera, z = cam.zoom, ov = game.overlays;
+    const large = game.viewer.textSize === 'large';
+    const policy = overlayPolicy(z, large);
+    const level = this.speechLevel = speechDetail(z, this.speechLevel);
+    const bounds = { x: 8, y: 8, w: Math.max(0, w - 16), h: Math.max(0, h - 16) };
+    const occupied: ViewRect[] = [...game.viewOcclusions];
+    this.lastOverlayLayout = [];
+    const people = world.persons.filter(p => p.alive && this.heads.has(p.id)).map(p => {
       const hd = this.heads.get(p.id)!;
-      const s = toScreen(hd.x, hd.y);
-      const rem = p.speech!.until - tick;
-      const a = Math.min(1, rem / 12);
-      let by = s.y - 8 - (ov.intentions && p.activity ? 16 : 0) - (game.selectedId === p.id ? 18 : 0);
-      // nudge up if it would sit on top of another bubble
-      for (let tries = 0; tries < 4; tries++) {
-        const bw = Math.min(190, p.speech!.text.length * 6.6 + 16);
-        const bh = 30;
-        const hit = placed.find((q) => Math.abs(q.x - s.x) < (q.w + bw) / 2 && Math.abs(q.y - by) < (q.h + bh) / 2 + 2);
-        if (!hit) {
-          placed.push({ x: s.x, y: by, w: bw, h: bh });
-          break;
-        }
-        by -= 34;
+      return { p, s: { x: (hd.x - cam.x) * z + w / 2, y: (hd.y - cam.y) * z + h / 2 } };
+    }).filter(({s}) => s.x >= 0 && s.x <= w && s.y >= 0 && s.y <= h);
+    // Reserve the selected person. Protecting every body in a crowd would suppress even priority speech.
+    for (const {p,s} of people) if (p.id === game.selectedId) occupied.push({x:s.x - 6 * z, y:s.y, w:12 * z, h:24 * z});
+    const priority = (p: Person) => p.id === game.selectedId ? 0 : p.speech?.kind === 'warn' || p.speech?.kind === 'angry' ? 1 : p.speech?.kind === 'ask' ? 2 : 3;
+    people.sort((a,b) => priority(a.p) - priority(b.p) || a.p.id - b.p.id);
+    const labelled = new Set<number>();
+    const labelFor = ({p,s}: typeof people[number], emphasis: boolean) => {
+      const scale = large ? 1.2 : 1;
+      const size = measureLabel(ctx,p.name,emphasis,scale);
+      const rect = {x:s.x - size.w / 2,y:s.y - size.h - 5,w:size.w,h:size.h};
+      if (rect.x < bounds.x || rect.x+rect.w > bounds.x+bounds.w || rect.y < bounds.y || rect.y+rect.h > bounds.y+bounds.h || occupied.some(q => intersects(rect,q,2))) return;
+      drawLabel(ctx,p.name,s.x,rect.y+rect.h,emphasis,scale);
+      occupied.push(rect); labelled.add(p.id);
+      this.lastOverlayLayout.push({...rect,id:p.id,type:'label'});
+    };
+    const selected = people.find(({p}) => p.id === game.selectedId);
+    if (selected) labelFor(selected,true);
+    const active = new Set<number>();
+    let count = 0;
+    for (const {p,s} of people) {
+      if (!p.speech || p.speech.until <= world.tick || !speechVisible(game.viewer.speech,p.id === game.selectedId)) continue;
+      active.add(p.id);
+      if (count >= policy.bubbles) continue;
+      const anchor = {x:s.x,y:s.y - (labelled.has(p.id) ? (large ? 23 : 19) + 10 : 5)};
+      const previous = this.speechSlots.get(p.id);
+      const obstacles = [...occupied,{x:s.x - 6 * z,y:s.y,w:12 * z,h:24 * z}];
+      let layout = this.speechCache.get(ctx,p.speech.text,z,level,large,bounds.w);
+      let box = placeBubble(layout,anchor,bounds,obstacles,previous?.text === p.speech.text ? previous.slot : undefined);
+      if (!box && level !== 'marker') {
+        layout = this.speechCache.get(ctx,p.speech.text,z,'marker',large,bounds.w);
+        box = placeBubble(layout,anchor,bounds,obstacles);
       }
-      drawBubble(ctx, p.speech!.text, s.x, by, p.speech!.kind, a);
+      if (!box) continue;
+      count++;
+      this.speechSlots.set(p.id,{text:p.speech.text,slot:box.slot});
+      drawBubble(ctx,layout,box,s,p.speech.kind,Math.min(1,(p.speech.until-world.tick)/12),game.viewer.contrast === 'high');
+      occupied.push(box);
+      this.lastOverlayLayout.push({...box,id:p.id,type:'speech',detail:layout.detail,truncated:layout.truncated,fontSize:layout.fontSize});
     }
+    for (const id of this.speechSlots.keys()) if (!active.has(id)) this.speechSlots.delete(id);
+    // Ordinary names and icons use what space remains, rather than competing with speech in independent passes.
+    let labels = 0, glyphs = 0;
+    for (const item of people) {
+      const {p,s} = item;
+      if (!labelled.has(p.id) && (p.id === hoverId || ov.labels && level !== 'marker' && labels < policy.labels)) {
+        labelFor(item,false); if (labelled.has(p.id)) labels++;
+      }
+      if (!ov.intentions || !p.activity || !(p.id === game.selectedId || level !== 'marker' && glyphs < policy.glyphs)) continue;
+      const d = p.activity.data;
+      const gl = glyphFor(p.activity.kind,(d.running ?? d.recipe ?? d.stype) as string | undefined);
+      if (!gl) continue;
+      const size = Math.max(8,Math.min(11,z * 9)) * (large ? 1.2 : 1);
+      const y = s.y - size - 5 - (labelled.has(p.id) ? (large ? 23 : 19) + 3 : 0);
+      const rect = {x:s.x-size,y:y-size,w:2*size,h:2*size};
+      if (rect.x < bounds.x || rect.x+rect.w > bounds.x+bounds.w || rect.y < bounds.y || rect.y+rect.h > bounds.y+bounds.h || occupied.some(q=>intersects(rect,q,3))) continue;
+      drawGlyphBadge(ctx,gl.id,gl.color,s.x,y,size);
+      occupied.push(rect); glyphs++;
+      this.lastOverlayLayout.push({...rect,id:p.id,type:'glyph'});
+    }
+    this.lastOverlayMs = performance.now() - started;
   }
 }

@@ -27,6 +27,7 @@ import { createTransport } from './transport';
 import { createWorldMenu } from './worldmenu';
 import { createInhabitPanel } from './inhabit';
 import type { InhabitDriver } from '../app/inhabit';
+import { createViewerControls } from './viewer';
 
 export interface UIHandle {
   /** called every animation frame with real elapsed seconds; implementations throttle their own DOM work */
@@ -91,6 +92,7 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
   const inspector = createInspector(ctx, slots); // above the minimap
   const minimap = createMinimap(ctx, slots);
   const overlays = createOverlays(ctx, slots);
+  const viewer = createViewerControls(ctx, slots);
   const shortcuts = createShortcuts(ctx, menu, help);
   const named: [string, Part][] = [
     ['toasts', toasts],
@@ -105,6 +107,7 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
     ['inspector', inspector],
     ['minimap', minimap],
     ['overlays', overlays],
+    ['viewer', viewer],
     ['shortcuts', shortcuts],
   ];
   if (extras.inhabit) named.push(['inhabit', createInhabitPanel(ctx, slots, extras.inhabit)]);
@@ -119,6 +122,10 @@ export function mountUI(game: Game, root: HTMLElement, extras: { inhabit?: Inhab
         break;
       case 'overlay':
         prefs.overlays = { ...game.overlays };
+        persist.savePrefs();
+        break;
+      case 'viewer':
+        prefs.viewer = { ...game.viewer };
         persist.savePrefs();
         break;
       case 'debug':

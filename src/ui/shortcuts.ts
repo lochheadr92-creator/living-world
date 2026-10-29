@@ -67,6 +67,15 @@ export function createShortcuts(ctx: UICtx, menu: WorldMenu, help: HelpPart): Pa
         if (sel && sel.ent === 'person') game.setFollow(!game.following);
         break;
       }
+      case 'n':
+      case 'N': {
+        const people = game.world.persons.filter(p => p.alive).sort((a,b) => a.id-b.id);
+        if (!people.length) return;
+        const current = people.findIndex(p => p.id === game.selectedId);
+        const next = current < 0 ? (e.shiftKey ? people.length-1 : 0) : (current + (e.shiftKey ? -1 : 1) + people.length) % people.length;
+        game.focusEntity(people[next].id);
+        break;
+      }
       case '?':
       case 'h':
       case 'H':

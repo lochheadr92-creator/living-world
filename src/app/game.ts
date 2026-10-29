@@ -6,6 +6,7 @@ import { CURRENT_RULES_VERSION } from '../sim/rulesversion';
 import { hashWorld, stepWorld } from '../sim/world';
 import { project } from '../render/iso';
 import type { SceneId, Settings, World } from '../sim/types';
+import { viewerPreferences, type ViewerPreferences, type ViewRect } from './viewer';
 
 export const SPEEDS = [0.5, 1, 2, 4, 8, 16] as const;
 export const MAX_STEPS_PER_FRAME = 40;
@@ -52,7 +53,7 @@ export interface CameraState {
   zoom: number;
 }
 
-export type GameEvent = 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'follow' | 'scene' | 'debug' | 'step';
+export type GameEvent = 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'viewer' | 'follow' | 'scene' | 'debug' | 'step';
 
 /** around each tick the clock runs (an outside driver's hooks, src/app/inhabit.ts); `afterTick` returning false ends the frame's stepping */
 export interface TickHooks {
@@ -73,6 +74,9 @@ export class Game {
   following = false;
   debug = false;
   overlays: Overlays = { perception: false, paths: false, intentions: false, knowledge: false, labels: false };
+  viewer = viewerPreferences();
+  /** Actual visible panel rectangles in CSS screen pixels, maintained by the UI. Derived, never saved with the world. */
+  viewOcclusions: ViewRect[] = [];
   camera: CameraState = { x: 0, y: 0, zoom: 1 };
   /** entity currently under the mouse pointer (set by the canvas input handler) and where on screen */
   hover: { id: number; px: number; py: number } | null = null;
@@ -97,6 +101,11 @@ export class Game {
   constructor(settings?: Partial<Settings>) {
     this.settings = { ...defaultSettings(), dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION, ...settings };
     this.world = createWorld(this.settings);
+  }
+
+  setViewer(patch: Partial<ViewerPreferences>): void {
+    this.viewer = viewerPreferences({ ...this.viewer, ...patch });
+    this.emit('viewer');
   }
 
   // ── time ──

@@ -1,6 +1,7 @@
 // Small persisted preferences (localStorage). Every access is guarded: storage can be missing or blocked.
 import type { ProfileName } from '../sim/profiles';
 import type { Overlays } from './game';
+import { viewerPreferences, type ViewerPreferences } from './viewer';
 
 export interface Prefs {
   seed: string;
@@ -10,6 +11,7 @@ export interface Prefs {
   size: ProfileName;
   speed: number;
   overlays: Overlays;
+  viewer: ViewerPreferences;
   debug: boolean;
   inspectorOpen: boolean;
   feedOpen: boolean;
@@ -26,6 +28,7 @@ export const DEFAULT_PREFS: Prefs = {
   size: 'normal',
   speed: 1,
   overlays: { perception: false, paths: false, intentions: false, knowledge: false, labels: false },
+  viewer: viewerPreferences(),
   debug: false,
   inspectorOpen: true,
   feedOpen: true,
@@ -35,7 +38,7 @@ export const DEFAULT_PREFS: Prefs = {
 export function loadPrefs(): Prefs {
   try {
     const raw = localStorage.getItem(KEY);
-    if (!raw) return { ...DEFAULT_PREFS, overlays: { ...DEFAULT_PREFS.overlays } };
+    if (!raw) return { ...DEFAULT_PREFS, overlays: { ...DEFAULT_PREFS.overlays }, viewer: viewerPreferences() };
     // The retired mode preference must not keep an existing installation on the old simulation.
     const { rich: _retiredMode, ...p } = JSON.parse(raw) as Partial<Prefs> & { rich?: boolean };
     return {
@@ -44,9 +47,10 @@ export function loadPrefs(): Prefs {
       // a stored size that is not one we know (an old or edited value) is the village
       size: p.size === 'large' || p.size === 'huge' || p.size === 'town' ? p.size : 'normal',
       overlays: { ...DEFAULT_PREFS.overlays, ...(p.overlays ?? {}) },
+      viewer: viewerPreferences(p.viewer),
     };
   } catch {
-    return { ...DEFAULT_PREFS, overlays: { ...DEFAULT_PREFS.overlays } };
+    return { ...DEFAULT_PREFS, overlays: { ...DEFAULT_PREFS.overlays }, viewer: viewerPreferences() };
   }
 }
 

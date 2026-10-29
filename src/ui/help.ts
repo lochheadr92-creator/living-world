@@ -29,6 +29,7 @@ const GROUPS: { title: string; rows: KeyRow[] }[] = [
     rows: [
       [['Click'], 'a person, building, field or resource to look inside'],
       [['F'], 'follow the selected person (or double-click them)'],
+      [['N', 'Shift+N'], 'inspect the next or previous living person without a mouse'],
       [['Esc'], 'let go, close menus'],
     ],
   },
@@ -44,6 +45,7 @@ const GROUPS: { title: string; rows: KeyRow[] }[] = [
 ];
 
 const INSPECTOR_NOTES: [string, string][] = [
+  ['View preferences', 'The View menu controls map speech, text size, contrast and reduced motion. Warnings follow the speech setting. Full current speech remains in the person panel at every zoom. Grouped workshop feed rows can be expanded to see each event.'],
   ['What are they up to?', 'Five plain answers: what they are doing, why, what they hope for, what is in the way, and how the last try went.'],
   ['Promises, talk and quarrels', 'A person’s card also shows what they have promised and how earlier promises ended (done, expired, moot, interrupted, failed or broken), the conversation they are in and the last one, a shared meal they are hosting or have said yes to and the last one, who they are worried about, and who they are still sore at. A part with nothing to show stays hidden.'],
   ['What they know is not what exists.', 'People only know what they have seen or been told, and memories go stale. “Opportunities” lists things nearby they could have used, and why they did not.'],

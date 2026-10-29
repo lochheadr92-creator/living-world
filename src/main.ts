@@ -14,6 +14,7 @@ const game = new Game(inhabit ? settingsFromConfig(inhabit) : currentWorldSettin
 game.speed = prefs.speed;
 const driver = inhabit ? new InhabitDriver(game, inhabit) : null;
 Object.assign(game.overlays, prefs.overlays);
+game.viewer = { ...prefs.viewer };
 game.debug = prefs.debug;
 
 // start looking at the camp

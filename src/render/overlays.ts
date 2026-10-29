@@ -1,6 +1,7 @@
 import type { Entity, Person, Speech, World } from '../sim/types';
 import type { ActivityKind } from '../sim/types';
 import { NEED_COLORS } from './palette';
+import { OVERLAY_FONT, type BubbleLayout, type BubblePlacement } from './speech_layout';
 
 // ───────────────────────── world-space overlays (drawn in the iso plane) ─────────────────────────
 export function drawFootprintHighlight(ctx: CanvasRenderingContext2D, e: Entity, simT: number, color = '255,214,120', strong = true): void {
@@ -571,7 +572,6 @@ export function drawGlyphBadge(ctx: CanvasRenderingContext2D, id: string, color:
 }
 
 // ───────────────────────── speech bubbles & labels (screen space) ─────────────────────────
-const FONT = '600 12px Inter, "Segoe UI", system-ui, sans-serif';
 const BUBBLE: Record<Speech['kind'], { bg: string; fg: string; edge: string }> = {
   say: { bg: 'rgba(250,250,246,0.96)', fg: '#1f2a33', edge: 'rgba(40,50,60,0.45)' },
   ask: { bg: 'rgba(224,240,255,0.97)', fg: '#16324a', edge: 'rgba(60,110,160,0.6)' },
@@ -581,69 +581,58 @@ const BUBBLE: Record<Speech['kind'], { bg: string; fg: string; edge: string }> =
   think: { bg: 'rgba(235,238,242,0.9)', fg: '#4a5560', edge: 'rgba(100,110,120,0.5)' },
 };
 
-function wrap(ctx: CanvasRenderingContext2D, text: string, maxW: number): string[] {
-  const words = text.split(' ');
-  const lines: string[] = [];
-  let cur = '';
-  for (const w of words) {
-    const t = cur ? cur + ' ' + w : w;
-    if (ctx.measureText(t).width > maxW && cur) {
-      lines.push(cur);
-      cur = w;
-    } else cur = t;
-  }
-  if (cur) lines.push(cur);
-  return lines;
-}
-
-export function drawBubble(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, kind: Speech['kind'], alpha: number, scale = 1): { w: number; h: number } {
+/** A measured screen-space bubble. The leader always ends at the actual speaker, even after displacement. */
+export function drawBubble(ctx: CanvasRenderingContext2D, layout: BubbleLayout, box: BubblePlacement,
+  speaker: { x: number; y: number }, kind: Speech['kind'], alpha: number, highContrast = false): void {
   ctx.save();
-  ctx.font = FONT;
-  const lines = wrap(ctx, text, 170);
-  const lh = 15;
-  const w = Math.max(...lines.map((l) => ctx.measureText(l).width)) + 16;
-  const h = lines.length * lh + 10;
   const col = BUBBLE[kind];
-  const bx = x - w / 2;
-  const by = y - h - 9;
+  const { x: bx, y: by, w, h } = box;
   ctx.globalAlpha = alpha;
-  ctx.shadowColor = 'rgba(0,0,0,0.28)';
-  ctx.shadowBlur = 6 * scale;
-  ctx.shadowOffsetY = 2;
-  ctx.fillStyle = col.bg;
-  roundRect(ctx, bx, by, w, h, 8);
-  ctx.fill();
-  ctx.shadowColor = 'transparent';
-  ctx.strokeStyle = col.edge;
-  ctx.lineWidth = 1;
-  ctx.stroke();
-  // tail
-  ctx.fillStyle = col.bg;
+  ctx.font = layout.font;
+  ctx.lineWidth = layout.outline * (highContrast ? 1.5 : 1);
+  ctx.strokeStyle = highContrast ? col.fg : col.edge;
+  ctx.fillStyle = highContrast ? '#fffdf5' : col.bg;
+  // Nearest edge and a short tail, with a fine leader for shifted bubbles.
+  const cx = Math.max(bx + layout.radius, Math.min(bx + w - layout.radius, speaker.x));
+  const cy = speaker.y >= by + h ? by + h : speaker.y < by ? by : Math.max(by + layout.radius, Math.min(by + h - layout.radius, speaker.y));
+  const ex = speaker.x < bx ? bx : speaker.x > bx + w ? bx + w : cx;
+  const ey = cy;
+  const len = Math.hypot(speaker.x - ex, speaker.y - ey) || 1;
+  const dx = (speaker.x - ex) / len, dy = (speaker.y - ey) / len;
+  const tail = Math.min(layout.tail, len);
+  ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(speaker.x, speaker.y); ctx.stroke();
   ctx.beginPath();
-  ctx.moveTo(x - 5, by + h - 0.5);
-  ctx.lineTo(x, by + h + 7);
-  ctx.lineTo(x + 5, by + h - 0.5);
-  ctx.closePath();
-  ctx.fill();
-  ctx.strokeStyle = col.edge;
-  ctx.beginPath();
-  ctx.moveTo(x - 5, by + h);
-  ctx.lineTo(x, by + h + 7);
-  ctx.lineTo(x + 5, by + h);
-  ctx.stroke();
-  ctx.fillStyle = col.fg;
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  lines.forEach((l, i) => ctx.fillText(l, x, by + 5 + lh * i + lh / 2));
+  ctx.moveTo(ex - dy * layout.tail * .6, ey + dx * layout.tail * .6);
+  ctx.lineTo(ex + dx * tail, ey + dy * tail);
+  ctx.lineTo(ex + dy * layout.tail * .6, ey - dx * layout.tail * .6);
+  ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.shadowColor = 'rgba(0,0,0,0.2)'; ctx.shadowBlur = 3 * layout.outline;
+  roundRect(ctx, bx, by, w, h, Math.min(layout.radius, h / 2)); ctx.fill();
+  ctx.shadowColor = 'transparent'; ctx.stroke();
+  ctx.fillStyle = col.fg; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  if (layout.detail === 'marker') {
+    ctx.font = `700 ${Math.min(layout.fontSize, h * .8)}px ${OVERLAY_FONT}`;
+    ctx.fillText(kind === 'warn' || kind === 'angry' ? '!' : kind === 'ask' ? '?' : '···', bx + w / 2, by + h / 2);
+  } else {
+    layout.lines.forEach((line, i) => ctx.fillText(line, bx + w / 2, by + layout.padding + (i + .5) * layout.lineHeight));
+    if (kind === 'warn' || kind === 'angry') {
+      // A shape cue as well as colour, within the measured body.
+      ctx.fillRect(bx + 2 * layout.outline, by + layout.radius, 2 * layout.outline, Math.max(0, h - 2 * layout.radius));
+    }
+  }
   ctx.restore();
-  return { w, h };
 }
 
-export function drawLabel(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, emphasis = false): void {
+export function measureLabel(ctx: CanvasRenderingContext2D, text: string, emphasis = false, scale = 1) {
+  const font = `${emphasis ? 700 : 600} ${(emphasis ? 12.5 : 11) * scale}px ${OVERLAY_FONT}`;
+  ctx.font = font;
+  return { font, w: ctx.measureText(text).width + 12 * scale, h: (emphasis ? 19 : 16) * scale };
+}
+
+export function drawLabel(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, emphasis = false, scale = 1): void {
   ctx.save();
-  ctx.font = emphasis ? '700 12.5px Inter, "Segoe UI", system-ui, sans-serif' : '600 11px Inter, "Segoe UI", system-ui, sans-serif';
-  const w = ctx.measureText(text).width + 12;
-  const h = emphasis ? 19 : 16;
+  const { font, w, h } = measureLabel(ctx, text, emphasis, scale);
+  ctx.font = font;
   ctx.fillStyle = emphasis ? 'rgba(16,24,32,0.88)' : 'rgba(16,24,32,0.7)';
   roundRect(ctx, x - w / 2, y - h, w, h, 7);
   ctx.fill();

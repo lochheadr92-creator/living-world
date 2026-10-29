@@ -24,3 +24,7 @@ civic_evidence/*active.json
 civic_evidence/*completed.json
 civic_evidence/final.json
 civic_evidence/*-save.json
+
+# Local viewer/benchmark input saves are retained on disk; commit reports and screenshots.
+viewer_evidence/**/fixture.json
+viewer_evidence/performance/*-save.json

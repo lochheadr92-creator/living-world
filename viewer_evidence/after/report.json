@@ -1,0 +1,1238 @@
+{
+  "phase": "after",
+  "source": "953eb90a5a94bf69a73bba02e1c49d5e99c7cc7d",
+  "sourceHashes": {
+    "src/app/viewer.ts": "48f70bb371c88543f72526008c90b53ed8c1ecf54d560eca3cc7f90b9b1004da",
+    "src/app/prefs.ts": "9de63a32eff5a553d0567222967627c7fd8310859e4ce57295c2b2a0a2229442",
+    "src/app/game.ts": "d5b36b08687341fdd5f40c8d7f2eed74db6d2ecc14d079929f507228c2c893ca",
+    "src/main.ts": "03ccd3cc9e78bbae63a8a5a46387b482b57aacaf05a7fb978af7ffc6b5a607ac",
+    "src/render/speech_layout.ts": "b2956e313362da9ab37f6adf8d2ab7c8833e6a5a1012e9038d58c773d7ca962d",
+    "src/render/renderer.ts": "8f765a7907a10aa8e3eb976b501931d797f7cc9c166976031116a985da3a97c7",
+    "src/render/overlays.ts": "80e5d9b0f824dfd4039e466e352d10cc2152012495bdd98ff9d6c1b7a8a2e51f",
+    "src/styles.css": "0880ddf5b094218f3b7d841e83c45effcd9e2e2d5f3a97982144e6ba8ff006d5",
+    "src/ui/index.ts": "305eb584a1b1c638e85d69ee44e7416d41c81fa953e17cb9be8a0212756f3b77",
+    "src/ui/viewer.ts": "ebea673ac69aff7d6db00f91b64b409d840528c836cf3c489fbec56fc22bf8a6",
+    "src/ui/feed.ts": "468c7a190a96d174690289b92d02afb2bd9b08a61dcdce30784b17ac86ef5353",
+    "src/ui/feed_rows.ts": "ce0d23593f19464bdc01d26f348b6494ec6c03082f783509bd41d47ef7f24609",
+    "src/ui/shortcuts.ts": "7851e327e87df412de371cbfa30952565061c6e4258b0a5151f851d4b2286275",
+    "scripts/browser/speech_zoom_check.mjs": "c9d7a855c326b6e80df79df6ad785e59da1d93c1558786ad00a6ab0ba90d9795"
+  },
+  "rules": 53,
+  "checks": [
+    {
+      "name": "wide: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "wide: selected speech has the intended detail",
+      "ok": true,
+      "detail": {
+        "x": 550.0845698082127,
+        "y": 389.8888095320857,
+        "w": 18.86,
+        "h": 13.12,
+        "slot": 0,
+        "id": 939,
+        "type": "speech",
+        "detail": "marker",
+        "truncated": true,
+        "fontSize": 10.5
+      }
+    },
+    {
+      "name": "wide: warning remains distinguishable",
+      "ok": true
+    },
+    {
+      "name": "wide: names, intentions and speech do not overlap",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "medium: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "medium: selected speech has the intended detail",
+      "ok": true,
+      "detail": {
+        "x": 453.80889572589444,
+        "y": 328.431816079541,
+        "w": 169.46962739748668,
+        "h": 45.930380747036224,
+        "slot": 0,
+        "id": 939,
+        "type": "speech",
+        "detail": "preview",
+        "truncated": true,
+        "fontSize": 12.31943530458937
+      }
+    },
+    {
+      "name": "medium: names, intentions and speech do not overlap",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "close: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "close: selected speech has the intended detail",
+      "ok": true,
+      "detail": {
+        "x": 408.1914327250793,
+        "y": 264.71082838266966,
+        "w": 197.79197224839243,
+        "h": 67.47555840061136,
+        "slot": 0,
+        "id": 939,
+        "type": "speech",
+        "detail": "full",
+        "truncated": false,
+        "fontSize": 13.376779808912305
+      }
+    },
+    {
+      "name": "close: names, intentions and speech do not overlap",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "near: full selected speech in panel",
+      "ok": true,
+      "detail": "I will bring the grain to our home, then come back for the rest."
+    },
+    {
+      "name": "near: selected speech has the intended detail",
+      "ok": true,
+      "detail": {
+        "x": 338.60880484228835,
+        "y": 212.3273016755811,
+        "w": 239.093212890625,
+        "h": 54.5,
+        "slot": 0,
+        "id": 939,
+        "type": "speech",
+        "detail": "full",
+        "truncated": false,
+        "fontSize": 14.5
+      }
+    },
+    {
+      "name": "near: names, intentions and speech do not overlap",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "name": "before and after use exactly the same paused simulation state",
+      "ok": true
+    },
+    {
+      "name": "wide marker area is less than one tenth of close speech area",
+      "ok": true
+    },
+    {
+      "name": "close and very close text enlarge with an upper bound",
+      "ok": true
+    },
+    {
+      "name": "keyboard zoom changes the view",
+      "ok": true
+    },
+    {
+      "name": "wheel zoom changes the view",
+      "ok": true
+    },
+    {
+      "name": "two-pointer pinch changes the view",
+      "ok": true
+    },
+    {
+      "name": "following retains selected speech priority",
+      "ok": true
+    },
+    {
+      "name": "keyboard can choose Hidden, including warnings",
+      "ok": true
+    },
+    {
+      "name": "selected-only hides other speech including warnings",
+      "ok": true
+    },
+    {
+      "name": "desktop-scaled: overlays stay within canvas and outside panels",
+      "ok": true,
+      "detail": {
+        "rects": [
+          {
+            "x": 309.86914720221415,
+            "y": 321.45552218678716,
+            "w": 53.0279296875,
+            "h": 22.8,
+            "id": 939,
+            "type": "label"
+          },
+          {
+            "x": 321.2956537164801,
+            "y": 288.70451132425114,
+            "w": 30.174916658968062,
+            "h": 20.991246371456043,
+            "slot": 0,
+            "id": 939,
+            "type": "speech",
+            "detail": "marker",
+            "truncated": true,
+            "fontSize": 16.052135770694765
+          },
+          {
+            "x": 435.8630396719514,
+            "y": 285.33383052293516,
+            "w": 202.47190905646934,
+            "h": 60.102893578830425,
+            "slot": 7,
+            "id": 940,
+            "type": "speech",
+            "detail": "full",
+            "truncated": false,
+            "fontSize": 16.052135770694765
+          },
+          {
+            "x": 11.039698345660728,
+            "y": 345.5210249493134,
+            "w": 232.14242602424278,
+            "h": 60.102893578830425,
+            "slot": 1,
+            "id": 945,
+            "type": "speech",
+            "detail": "full",
+            "truncated": false,
+            "fontSize": 16.052135770694765
+          },
+          {
+            "x": 299.56418825103384,
+            "y": 429.2419180715027,
+            "w": 30.174916658968062,
+            "h": 20.991246371456043,
+            "slot": 1,
+            "id": 946,
+            "type": "speech",
+            "detail": "marker",
+            "truncated": true,
+            "fontSize": 16.052135770694765
+          },
+          {
+            "x": 235.13804215301542,
+            "y": 272.6158584035762,
+            "w": 49.075765991210936,
+            "h": 19.2,
+            "id": 956,
+            "type": "label"
+          },
+          {
+            "x": 127.92015333749121,
+            "y": 311.85292472424004,
+            "w": 41.554083251953124,
+            "h": 19.2,
+            "id": 957,
+            "type": "label"
+          },
+          {
+            "x": 25.998537683725306,
+            "y": 268.78298648721665,
+            "w": 41.8505615234375,
+            "h": 19.2,
+            "id": 959,
+            "type": "label"
+          },
+          {
+            "x": 224.88987685211487,
+            "y": 626.2144809903098,
+            "w": 46.633001708984374,
+            "h": 19.2,
+            "id": 972,
+            "type": "label"
+          },
+          {
+            "x": 218.5672005594622,
+            "y": 576.7105480762044,
+            "w": 37.85448303222656,
+            "h": 19.2,
+            "id": 975,
+            "type": "label"
+          },
+          {
+            "x": 203.35575115711367,
+            "y": 688.4140991618463,
+            "w": 32.801351928710936,
+            "h": 19.2,
+            "id": 976,
+            "type": "label"
+          },
+          {
+            "x": 141.4531769403918,
+            "y": 644.0243276746431,
+            "w": 42.256613159179686,
+            "h": 19.2,
+            "id": 977,
+            "type": "label"
+          },
+          {
+            "x": 289.2172110786864,
+            "y": 593.2460662028209,
+            "w": 34.444906616210936,
+            "h": 19.2,
+            "id": 980,
+            "type": "label"
+          },
+          {
+            "x": 91.79441110814894,
+            "y": 473.4662223278652,
+            "w": 41.824789428710936,
+            "h": 19.2,
+            "id": 982,
+            "type": "label"
+          }
+        ],
+        "panels": [
+          {
+            "x": 12,
+            "y": 12,
+            "w": 456.546875,
+            "h": 46
+          },
+          {
+            "x": 12,
+            "y": 100,
+            "w": 507.171875,
+            "h": 50.34375
+          },
+          {
+            "x": 665.265625,
+            "y": 12,
+            "w": 346.734375,
+            "h": 48
+          },
+          {
+            "x": 12,
+            "y": 122,
+            "w": 652,
+            "h": 115.484375
+          },
+          {
+            "x": 12,
+            "y": 715.8125,
+            "w": 340,
+            "h": 40.1875
+          },
+          {
+            "x": 650,
+            "y": 142,
+            "w": 26,
+            "h": 52
+          },
+          {
+            "x": 676,
+            "y": 128,
+            "w": 336,
+            "h": 436
+          },
+          {
+            "x": 830,
+            "y": 574,
+            "w": 182,
+            "h": 182
+          },
+          {
+            "x": 374.40625,
+            "y": 712,
+            "w": 204,
+            "h": 44
+          },
+          {
+            "x": 578.40625,
+            "y": 714,
+            "w": 71.1875,
+            "h": 42
+          },
+          {
+            "x": 338.59375,
+            "y": 355.125,
+            "w": 310,
+            "h": 391.875
+          }
+        ],
+        "w": 1024,
+        "h": 768,
+        "speech": "I will bring the grain to our home, then come back for the rest."
+      }
+    },
+    {
+      "name": "desktop-scaled: full speech remains in inspector",
+      "ok": true
+    },
+    {
+      "name": "phone: overlays stay within canvas and outside panels",
+      "ok": true,
+      "detail": {
+        "rects": [],
+        "panels": [
+          {
+            "x": 12,
+            "y": 12,
+            "w": 155,
+            "h": 38
+          },
+          {
+            "x": 274.9375,
+            "y": 12,
+            "w": 118.140625,
+            "h": 36
+          },
+          {
+            "x": 173,
+            "y": 12,
+            "w": 79.171875,
+            "h": 36
+          },
+          {
+            "x": 12,
+            "y": 78,
+            "w": 366,
+            "h": 137.75
+          },
+          {
+            "x": 12,
+            "y": 794,
+            "w": 42,
+            "h": 38
+          },
+          {
+            "x": 16,
+            "y": 237.75,
+            "w": 26,
+            "h": 52
+          },
+          {
+            "x": 42,
+            "y": 223.75,
+            "w": 336,
+            "h": 556.25
+          },
+          {
+            "x": 62.40625,
+            "y": 788,
+            "w": 204,
+            "h": 44
+          },
+          {
+            "x": 266.40625,
+            "y": 790,
+            "w": 61.1875,
+            "h": 42
+          },
+          {
+            "x": 16.59375,
+            "y": 431.125,
+            "w": 310,
+            "h": 391.875
+          }
+        ],
+        "w": 390,
+        "h": 844,
+        "speech": "I will bring the grain to our home, then come back for the rest."
+      }
+    },
+    {
+      "name": "phone: full speech remains in inspector",
+      "ok": true
+    },
+    {
+      "name": "short: overlays stay within canvas and outside panels",
+      "ok": true,
+      "detail": {
+        "rects": [
+          {
+            "x": 178.78465628535866,
+            "y": 250.63000790173405,
+            "w": 30.174916658968062,
+            "h": 20.991246371456043,
+            "slot": 0,
+            "id": 945,
+            "type": "speech",
+            "detail": "marker",
+            "truncated": true,
+            "fontSize": 16.052135770694765
+          },
+          {
+            "x": 35.924636862008114,
+            "y": 339.46355807291144,
+            "w": 41.824789428710936,
+            "h": 19.2,
+            "id": 982,
+            "type": "label"
+          }
+        ],
+        "panels": [
+          {
+            "x": 12,
+            "y": 12,
+            "w": 456.546875,
+            "h": 46
+          },
+          {
+            "x": 12,
+            "y": 100,
+            "w": 507.171875,
+            "h": 50.34375
+          },
+          {
+            "x": 541.265625,
+            "y": 12,
+            "w": 346.734375,
+            "h": 48
+          },
+          {
+            "x": 12,
+            "y": 122,
+            "w": 528,
+            "h": 115.484375
+          },
+          {
+            "x": 12,
+            "y": 447.8125,
+            "w": 236,
+            "h": 40.1875
+          },
+          {
+            "x": 526,
+            "y": 142,
+            "w": 26,
+            "h": 52
+          },
+          {
+            "x": 552,
+            "y": 128,
+            "w": 336,
+            "h": 360
+          },
+          {
+            "x": 312.40625,
+            "y": 444,
+            "w": 204,
+            "h": 44
+          },
+          {
+            "x": 516.40625,
+            "y": 446,
+            "w": 71.1875,
+            "h": 42
+          },
+          {
+            "x": 276.59375,
+            "y": 154,
+            "w": 310,
+            "h": 325
+          }
+        ],
+        "w": 900,
+        "h": 500,
+        "speech": "I will bring the grain to our home, then come back for the rest."
+      }
+    },
+    {
+      "name": "short: full speech remains in inspector",
+      "ok": true
+    },
+    {
+      "name": "viewer preferences persist separately from simulation settings",
+      "ok": true
+    },
+    {
+      "name": "viewing preserves full serialized world and RNG",
+      "ok": true
+    },
+    {
+      "name": "grouped feed exposes each original event with keyboard",
+      "ok": true
+    },
+    {
+      "name": "keyboard reaches another person and their inspector",
+      "ok": true
+    },
+    {
+      "name": "feed and keyboard inspection preserve the staged world",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ],
+  "snapshots": [
+    {
+      "name": "wide",
+      "zoom": 0.3,
+      "overlays": [
+        {
+          "x": 537.4195991050876,
+          "y": 412.10880953208573,
+          "w": 44.18994140625,
+          "h": 19,
+          "id": 939,
+          "type": "label"
+        },
+        {
+          "x": 550.0845698082127,
+          "y": 389.8888095320857,
+          "w": 18.86,
+          "h": 13.12,
+          "slot": 0,
+          "id": 939,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 10.5
+        },
+        {
+          "x": 579.1012636640305,
+          "y": 381.84563726642875,
+          "w": 18.86,
+          "h": 13.12,
+          "slot": 7,
+          "id": 940,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 10.5
+        },
+        {
+          "x": 593.2547985388037,
+          "y": 428.4969202237713,
+          "w": 18.86,
+          "h": 13.12,
+          "slot": 2,
+          "id": 943,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 10.5
+        },
+        {
+          "x": 607.5036627177471,
+          "y": 395.9745926058786,
+          "w": 18.86,
+          "h": 13.12,
+          "slot": 7,
+          "id": 944,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 10.5
+        },
+        {
+          "x": 522.1143659440492,
+          "y": 385.21016967082517,
+          "w": 18.86,
+          "h": 13.12,
+          "slot": 8,
+          "id": 945,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 10.5
+        }
+      ],
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0,
+      "warningHead": {
+        "x": 176.67087888010155,
+        "y": 1225.218790888096
+      },
+      "camera": {
+        "x": 660,
+        "y": 1245,
+        "zoom": 0.3
+      }
+    },
+    {
+      "name": "medium",
+      "zoom": 0.9,
+      "overlays": [
+        {
+          "x": 516.4487387215128,
+          "y": 384.3264285962572,
+          "w": 44.18994140625,
+          "h": 19,
+          "id": 939,
+          "type": "label"
+        },
+        {
+          "x": 453.80889572589444,
+          "y": 328.431816079541,
+          "w": 169.46962739748668,
+          "h": 45.930380747036224,
+          "slot": 0,
+          "id": 939,
+          "type": "speech",
+          "detail": "preview",
+          "truncated": true,
+          "fontSize": 12.31943530458937
+        },
+        {
+          "x": 573.5860579218275,
+          "y": 406.3471383666306,
+          "w": 22.83546614052777,
+          "h": 15.88554166297584,
+          "slot": 0,
+          "id": 940,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 12.31943530458937
+        },
+        {
+          "x": 632.428627386091,
+          "y": 396.25614815459784,
+          "w": 155.849342363307,
+          "h": 45.930380747036224,
+          "slot": 2,
+          "id": 943,
+          "type": "speech",
+          "detail": "preview",
+          "truncated": false,
+          "fontSize": 12.31943530458937
+        },
+        {
+          "x": 658.7932550829775,
+          "y": 448.73400438498015,
+          "w": 22.83546614052777,
+          "h": 15.88554166297584,
+          "slot": 0,
+          "id": 944,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 12.31943530458937
+        },
+        {
+          "x": 331.5725180839262,
+          "y": 386.39589649575936,
+          "w": 158.68634797854136,
+          "h": 45.930380747036224,
+          "slot": 1,
+          "id": 945,
+          "type": "speech",
+          "detail": "preview",
+          "truncated": false,
+          "fontSize": 12.31943530458937
+        },
+        {
+          "x": 527.0838550319327,
+          "y": 438.74535853722716,
+          "w": 22.83546614052777,
+          "h": 15.88554166297584,
+          "slot": 0,
+          "id": 946,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 12.31943530458937
+        },
+        {
+          "x": 572.0807050478221,
+          "y": 449.67057581295626,
+          "w": 22.83546614052777,
+          "h": 15.88554166297584,
+          "slot": 0,
+          "id": 949,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 12.31943530458937
+        },
+        {
+          "x": 295.69387026694307,
+          "y": 400.07822343062026,
+          "w": 27.48486328125,
+          "h": 16,
+          "id": 953,
+          "type": "label"
+        },
+        {
+          "x": 376.3763184837527,
+          "y": 359.1901607464719,
+          "w": 34.87548828125,
+          "h": 16,
+          "id": 959,
+          "type": "label"
+        },
+        {
+          "x": 775.3394091559683,
+          "y": 481.09359143990287,
+          "w": 31.89453125,
+          "h": 16,
+          "id": 968,
+          "type": "label"
+        },
+        {
+          "x": 702.0857121796828,
+          "y": 454.60621664662983,
+          "w": 39.8330078125,
+          "h": 16,
+          "id": 969,
+          "type": "label"
+        },
+        {
+          "x": 551.1204317609858,
+          "y": 510.7752738305869,
+          "w": 34.72509765625,
+          "h": 16,
+          "id": 971,
+          "type": "label"
+        },
+        {
+          "x": 475.02492233308425,
+          "y": 537.9059079980185,
+          "w": 38.86083984375,
+          "h": 16,
+          "id": 972,
+          "type": "label"
+        },
+        {
+          "x": 473.32666936131847,
+          "y": 513.1539415409659,
+          "w": 31.54541015625,
+          "h": 16,
+          "id": 975,
+          "type": "label"
+        },
+        {
+          "x": 466.5631306342653,
+          "y": 569.0057170837867,
+          "w": 27.33447265625,
+          "h": 16,
+          "id": 976,
+          "type": "label"
+        }
+      ],
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0,
+      "warningHead": {
+        "x": 176.67087888010155,
+        "y": 1225.218790888096
+      },
+      "camera": {
+        "x": 326.66666666666663,
+        "y": 1245,
+        "zoom": 0.9
+      }
+    },
+    {
+      "name": "close",
+      "zoom": 1.8,
+      "overlays": [
+        {
+          "x": 484.99244814615054,
+          "y": 342.6528571925144,
+          "w": 44.18994140625,
+          "h": 19,
+          "id": 939,
+          "type": "label"
+        },
+        {
+          "x": 408.1914327250793,
+          "y": 264.71082838266966,
+          "w": 197.79197224839243,
+          "h": 67.47555840061136,
+          "slot": 0,
+          "id": 939,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 13.376779808912305
+        },
+        {
+          "x": 605.4740523934162,
+          "y": 353.8416085403141,
+          "w": 168.66915425522836,
+          "h": 50.08574464902536,
+          "slot": 2,
+          "id": 940,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 13.376779808912305
+        },
+        {
+          "x": 672.3559092915852,
+          "y": 426.34234562384796,
+          "w": 25.145763882473386,
+          "h": 17.492705309546704,
+          "slot": 0,
+          "id": 943,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 13.376779808912305
+        },
+        {
+          "x": 775.8884467157161,
+          "y": 438.61534057701317,
+          "w": 179.127558796244,
+          "h": 50.08574464902536,
+          "slot": 2,
+          "id": 944,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 13.376779808912305
+        },
+        {
+          "x": 221.5943844763957,
+          "y": 374.02880296669235,
+          "w": 193.38534077866586,
+          "h": 50.08574464902536,
+          "slot": 1,
+          "id": 945,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 13.376779808912305
+        },
+        {
+          "x": 494.4302942631566,
+          "y": 451.2310882209859,
+          "w": 25.145763882473386,
+          "h": 17.492705309546704,
+          "slot": 0,
+          "id": 946,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 13.376779808912305
+        },
+        {
+          "x": 584.4239942949354,
+          "y": 473.0815227724439,
+          "w": 25.145763882473386,
+          "h": 17.492705309546704,
+          "slot": 0,
+          "id": 949,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 13.376779808912305
+        },
+        {
+          "x": 35.13017217451113,
+          "y": 371.15644686124045,
+          "w": 27.48486328125,
+          "h": 16,
+          "id": 953,
+          "type": "label"
+        },
+        {
+          "x": 302.0872927824041,
+          "y": 332.45025972996723,
+          "w": 34.62841796875,
+          "h": 16,
+          "id": 957,
+          "type": "label"
+        },
+        {
+          "x": 200.1903811081304,
+          "y": 289.38032149294384,
+          "w": 34.87548828125,
+          "h": 16,
+          "id": 959,
+          "type": "label"
+        },
+        {
+          "x": 951.2976013469493,
+          "y": 403.8236619995815,
+          "w": 31.40576171875,
+          "h": 16,
+          "id": 966,
+          "type": "label"
+        },
+        {
+          "x": 549.6034123500964,
+          "y": 592.5505476611739,
+          "w": 34.72509765625,
+          "h": 16,
+          "id": 971,
+          "type": "label"
+        },
+        {
+          "x": 399.48026458804344,
+          "y": 646.8118159960369,
+          "w": 38.86083984375,
+          "h": 16,
+          "id": 972,
+          "type": "label"
+        },
+        {
+          "x": 360.78635842363474,
+          "y": 651.7012581190633,
+          "w": 31.142578125,
+          "h": 16,
+          "id": 973,
+          "type": "label"
+        },
+        {
+          "x": 392.4260438007619,
+          "y": 597.3078830819317,
+          "w": 31.54541015625,
+          "h": 16,
+          "id": 975,
+          "type": "label"
+        },
+        {
+          "x": 376.7934975966555,
+          "y": 709.0114341675735,
+          "w": 27.33447265625,
+          "h": 16,
+          "id": 976,
+          "type": "label"
+        },
+        {
+          "x": 315.67885672954304,
+          "y": 664.6216626803704,
+          "w": 35.2138671875,
+          "h": 16,
+          "id": 977,
+          "type": "label"
+        },
+        {
+          "x": 462.79192040885323,
+          "y": 613.8434012085481,
+          "w": 28.7041015625,
+          "h": 16,
+          "id": 980,
+          "type": "label"
+        },
+        {
+          "x": 265.9841106726908,
+          "y": 494.06355733359237,
+          "w": 34.85400390625,
+          "h": 16,
+          "id": 982,
+          "type": "label"
+        }
+      ],
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0,
+      "warningHead": {
+        "x": 176.67087888010155,
+        "y": 1225.218790888096
+      },
+      "camera": {
+        "x": 243.33333333333331,
+        "y": 1245,
+        "zoom": 1.8
+      }
+    },
+    {
+      "name": "near",
+      "zoom": 3.2,
+      "overlays": [
+        {
+          "x": 436.0604405844759,
+          "y": 277.8273016755811,
+          "w": 44.18994140625,
+          "h": 19,
+          "id": 939,
+          "type": "label"
+        },
+        {
+          "x": 338.60880484228835,
+          "y": 212.3273016755811,
+          "w": 239.093212890625,
+          "h": 54.5,
+          "slot": 0,
+          "id": 939,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 14.5
+        },
+        {
+          "x": 629.346812416325,
+          "y": 340.0501308419073,
+          "w": 246.428173828125,
+          "h": 35.650000000000006,
+          "slot": 2,
+          "id": 940,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 14.5
+        },
+        {
+          "x": 658.1272016665098,
+          "y": 392.14714905356084,
+          "w": 232.381298828125,
+          "h": 54.5,
+          "slot": 0,
+          "id": 943,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 14.5
+        },
+        {
+          "x": 912.5057356559694,
+          "y": 467.20898779603885,
+          "w": 27.599999999999998,
+          "h": 19.2,
+          "slot": 6,
+          "id": 944,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 14.5
+        },
+        {
+          "x": 88.1961989761075,
+          "y": 357.0884764888018,
+          "w": 209.93037109375,
+          "h": 54.5,
+          "slot": 1,
+          "id": 945,
+          "type": "speech",
+          "detail": "full",
+          "truncated": false,
+          "fontSize": 14.5
+        },
+        {
+          "x": 444.20564658558794,
+          "y": 471.69380255958384,
+          "w": 27.599999999999998,
+          "h": 19.2,
+          "slot": 0,
+          "id": 946,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 14.5
+        },
+        {
+          "x": 604.1944466420836,
+          "y": 510.53901953995364,
+          "w": 27.599999999999998,
+          "h": 19.2,
+          "slot": 0,
+          "id": 949,
+          "type": "speech",
+          "detail": "marker",
+          "truncated": true,
+          "fontSize": 14.5
+        },
+        {
+          "x": 301.33883683815725,
+          "y": 187.60123272765048,
+          "w": 40.896484375,
+          "h": 16,
+          "id": 956,
+          "type": "label"
+        },
+        {
+          "x": 107.17734971212121,
+          "y": 257.3560172977195,
+          "w": 34.62841796875,
+          "h": 16,
+          "id": 957,
+          "type": "label"
+        },
+        {
+          "x": 256.62522366694463,
+          "y": 188.62043454730954,
+          "w": 36.69091796875,
+          "h": 16,
+          "id": 958,
+          "type": "label"
+        },
+        {
+          "x": 847.2213690428667,
+          "y": 290.67814897106507,
+          "w": 36.8359375,
+          "h": 16,
+          "id": 962,
+          "type": "label"
+        },
+        {
+          "x": 652.2615080665746,
+          "y": 216.88669519718167,
+          "w": 37.99072265625,
+          "h": 16,
+          "id": 963,
+          "type": "label"
+        },
+        {
+          "x": 547.2436043776019,
+          "y": 719.7565291754204,
+          "w": 34.72509765625,
+          "h": 16,
+          "id": 971,
+          "type": "label"
+        },
+        {
+          "x": 281.9663525402022,
+          "y": 816.2210062151768,
+          "w": 38.86083984375,
+          "h": 16,
+          "id": 972,
+          "type": "label"
+        },
+        {
+          "x": 210.1756398017394,
+          "y": 824.9133477672236,
+          "w": 31.142578125,
+          "h": 16,
+          "id": 973,
+          "type": "label"
+        },
+        {
+          "x": 266.5806262621183,
+          "y": 728.2140143678786,
+          "w": 31.54541015625,
+          "h": 16,
+          "id": 975,
+          "type": "label"
+        },
+        {
+          "x": 390.5705646678223,
+          "y": 757.610491037419,
+          "w": 28.7041015625,
+          "h": 16,
+          "id": 980,
+          "type": "label"
+        },
+        {
+          "x": 43.08164271499186,
+          "y": 544.6685463708309,
+          "w": 34.85400390625,
+          "h": 16,
+          "id": 982,
+          "type": "label"
+        }
+      ],
+      "speech": "I will bring the grain to our home, then come back for the rest.",
+      "tick": 0,
+      "warningHead": {
+        "x": 176.67087888010155,
+        "y": 1225.218790888096
+      },
+      "camera": {
+        "x": 206.875,
+        "y": 1245,
+        "zoom": 3.2
+      }
+    }
+  ]
+}

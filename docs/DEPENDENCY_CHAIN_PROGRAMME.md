@@ -258,6 +258,199 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 
 ## Slice log
 
+## Owner expansion and continuation register — 2026-10-29
+
+This section extends the same register for the expanded 25-part owner brief. All
+earlier workstreams, adverse results, nulls and evidence limits above remain in force.
+"Yes" in an earlier mechanism row does not complete the expanded situation. Historical
+ordinary counts above keep their recorded rules/settings; they are not relabelled as
+current-rules aggregate or rendered proof.
+
+### Authority for this continuation
+
+- Start: `living-world-integrate`, `main@953eb90a5a94bf69a73bba02e1c49d5e99c7cc7d`,
+  committed rules 53. Tracked relocation/history/lab/rules/register changes and extensive
+  untracked evidence were present; rules 54 is already occupied by that candidate.
+- Isolation: `C:\Users\RJLoc\.codex\worktrees\living-world-viewer-programme\living-world`,
+  branch `codex/viewer-programme`, based on the committed tip. Neither the dirty main
+  candidate nor older dirty `deepseek-b1` checkout was overwritten, stashed or committed.
+  Existing Vite processes were left running; this branch uses port 5286, PID recorded
+  in the execution transcript. No stopped ensemble was resumed.
+- Rules-53 predecessor: expected JSON first committed at `b153317`, source note corrected
+  at `953eb90`, source `557f647` after continuity. It contains full serialization digests
+  before/after save restoration, river/Normal/no immigration, ticks 5380→9600. It applies
+  to rules-53 simulation continuation; copied batch-plan wording in two test comments
+  is inaccurate provenance prose, not a reason to regenerate the immutable values.
+- No successor rules number is allocated by this viewer phase. Before any simulation
+  edit, recheck main's candidate and capture the actual predecessor once it is settled.
+- Owner sections 1, 2, 22–25 govern authority, registration, evidence, compatibility,
+  review and delivery across every row below. No remote publication is authorized.
+
+### Existing workstreams: expanded acceptance and exact next transitions
+
+Each row inherits its existing implementation/owner, rules boundary, contract tests,
+physical proof, ordinary denominators, rendered status and aggregate limits from the
+named WS section above. This table adds the remaining transition/dependency and next
+action for the expanded brief; no previous row is removed or promoted by inheritance.
+
+| Register / owner brief | Intended observable completion and missing transition | Dependencies and exact next action | Acceptance still outstanding |
+|---|---|---|---|
+| WS2 / §5 food assistance | A needy member contacts a capable helper, exact food is acquired/delivered/eaten once; household food remains in physical packs/stores. | Contact (WS5), care (WS17). Re-run rules-45 contracts on the current tip, then stage moved recipient, stale stock, interrupted/partial non-berry delivery and adult-to-adult household distribution. | Existing fish/berry/seek proof and ordinary counts retained. Full expanded household distribution and current rendered negative cases partial; aggregate unproven. |
+| WS3 / §6 seasonal reserves | Gather→deposit→preserve→withdraw/distribute→eat→replenish over an actual winter. Distinguish time expiry from stock/access/spoilage failure. | Homes, granary access, food help. Continue fixed ordinary worlds through preparation and winter; retain per-kind flows and adverse forest outcomes; render granary-share meals. | Existing rules-46 contracts/staged use and lab retained. Current rendered winter flow and recovery remain partial; survival benefit unproven. |
+| WS4 / §7 homes | Notice wear/loss→repair/replacement/upgrade→materials→finish→occupy; later response changes after genuine failure. | Labour/care, material reservations, competition with workshops. Stage collapse, abandoned site, limited-labour neighbour help and upgrade; check warmth/rest/spoilage consequences. | Existing shelter tests and housing-condition lab effect retained. Expanded recovery/failure-memory evidence partial; survival unproven. |
+| WS5 / §10 cooperation | Communicated commitment→contact/acquisition→actual fulfilment→relevant later choice, preserving refusal and expiry. | WS2, WS4, WS19. Stage repeated real delivery, changed home/access/capacity, moved recipient, cancellation and later eligible helper choice. | Rules-48 physical/ordinary deliveries retained; repeated natural cooperation, rendered failure distinctions and later eligible decision remain partial; aggregate unproven. |
+| WS6 / §11 production | Each listed recipe chain reaches useful consumption, including missing tool/procedure acquisition, without forcing industry. | WS7 tools/carts, WS10 procedures, WS18 resources. Trace `production.ts planRecipe → ctx.toolWanted → options_work.ts wantedTool/intent.ts toolWanted` before extending gates; use real offered eligibility. | Batch persistence/resumption already implemented. Ore→iron→forged use, bread eaten, cart tool prerequisite and every downstream chain not all proven; aggregate unproven. |
+| WS7 / §12 transport | Needed load→components/tool→cart→load/route/unload→use→upkeep/recovery, goods always physically located. | WS6 and equipment access. Reproduce missing-hammer offer chain, then build and haul a useful load; stage route block, changed demand, death and recovery. | Existing staged construction haul retained. Ordinary carts, provisioning/exchange transport and full recovery scenarios remain unproven. |
+| WS8 / §13 civic feedback | Personally witnessed useful service→bounded attributed receipt→later eligible civic choice. | WS3, WS16; keep transfer credit single. Render full-pack eat-at-store and then a real eligible recruitment decision; investigate zero ordinary meal receipts against actual eligible denominator. | Rules-49 tests/staged receipt retained. Receipt alone is not later civic behaviour, governance or survival proof. Other buildings require actual attributable use. |
+| WS9 / §14 demand/trade | Heard need→feasible work→surplus→customer exchange→return/delivery→changed work choice; repeated inter-settlement journeys. | WS6, WS7 and legitimate multi-settlement contact. Use Large profile with real complementary goods; trace stale/refused/interrupted journeys; retain zero opportunities. | Existing customer site deliveries retained. Produce-for-customer, ordinary swaps/returns, trade-review decisions and inter-settlement execution remain partial/unproven. |
+| WS10 / §17 practical knowledge | Wanted work→missing procedure→contact lesson or costly trial→learn→real output, across generations and loss. | WS6 physical workshops/ore/fuel. Stage loss/recovery and young learner→later smelt/forge/use; measure real opportunities after smithy completion. | Rules-52 tree/instruction/trial contracts retained. Ordinary higher techniques and generational useful-work evidence partial; aggregate unproven. |
+| WS11 / §18 succession/culture | Informed survivor voluntarily completes the same material undertaking; shared real practice changes later choices. | WS2/3/4/6, WS20. Render witness versus told-only succession, cancellation and intermediate save; extend only diagnosed incapacity/departure gaps. | Rules-53 staged death succession and ordinary winter transmission retained. Natural succession 0/5 recorded undertakings; incapacity/departure and viable population continuity not established. |
+| WS12 / §19 relocation | Discuss→individual consent/protection→physical subgroup journey→confirmation/shelter/membership; rescue/return/succession. | WS17/20, food, contact, known destinations. Preserve the concurrent main rules-54 candidate; inspect its completed diff and evidence before integration, then address remaining dependent-care/return gaps. | This branch retains rules-20/53 semantics. Uncommitted rules-54 changes are not accepted proof; no next version may silently collide. |
+| WS13 / §20 causal explanations | Need, knowledge, prerequisite, actual amounts/contributors, pauses/failures and later influence visible in existing inspectors/history. | Every mechanism row. Use stored causes only; add screenshot checks to each physical journey; verify selected building entrances/occupants/work and carried goods. | Existing inspector details retained; programme-wide rendered causal coverage incomplete. No second simulation or inferred motives. |
+| WS14 / §22 scenario evidence | Every claim has A–G: contract negatives, physical execution, ledger/ownership, intermediate continuation, observer purity, rendered view, ordinary denominator. | All rows. Record opportunity→offer→selection→start→completion→use→feedback; paired control/nudge only for aggregate claims. | Dated evidence stays attributed. No single Normal world, staged success, receipt or DOM presence substitutes for all seven purposes. |
+
+### WS15 Zoom-aware speech and viewer readability (§3–4)
+
+- **Observable / owner:** small markers at wide zoom, readable previews/full speech as
+  the camera approaches; selected person first. `render/speech_layout.ts`, `overlays.ts`,
+  `renderer.ts`, `app/viewer.ts`, `ui/viewer.ts`, existing prefs/person panel.
+- **Missing transition / implementation:** fixed font/wrap and estimated collision height
+  replaced by shared measured geometry, bounded wrapping/placement, content hysteresis,
+  panel exclusion and one names/intention/speech budget. Preferences automatic/selected/
+  hidden, text size, contrast and reduced motion; native keyboard controls. Feed grouping
+  retains expandable underlying events; N/Shift+N reaches people without hovering.
+- **Dependencies / boundary:** observation state only, rules remain 53. No dependence on
+  the concurrent relocation candidate. Saved speech and RNG untouched.
+- **Contract:** `speech_layout`, `viewer_purity`, `feed_rows`; existing controller/current
+  world tests. **Physical E2E:** not a simulation change; real browser camera/control path.
+- **Ordinary:** no behavioural activation claim; staged exact paused fixture for comparative
+  readability. Existing worlds can use the controls. **Rendered:** retained before/after
+  scenes, crowd, long token, warnings, four zooms, panels, three extra viewport/DPR settings.
+- **Aggregate:** simulation benefit n/a; human comprehension unmeasured. **Limit/next:**
+  visually review all captures, finish input/preference tests and full checks; complete
+  entrance/occupant/carried-goods and causal-history coverage per WS13. See VIEWER_READABILITY.md.
+
+### WS16 Shared infrastructure upkeep (§8)
+
+- **Observable:** damaged shared workshops, granaries, storehouses, halls/equipment are
+  repaired/replaced for a legitimate beneficiary and subsequently used.
+- **Existing owner:** `options_work.ts repairStake/materialNeeds/optRepairAndFire`,
+  `act_build.ts repair`, `facilities.ts startBlocker`, `carts.ts`. Shared facility repair
+  is already eligible; a building below condition 12 cannot operate.
+- **Missing transition:** complete acquisition→interrupted/concurrent repair→use and
+  replacement proof. The current stake treats every known public facility as shared
+  responsibility; inspect whether actual ownership/use/contribution knowledge is adequate.
+- **Dependencies/boundary:** material access, tool/work costs, WS6/8. No new rules allocated.
+- **Contract/E2E/conservation/save/purity:** existing repair/economy coverage only; add a
+  staged run-down facility repaired with real goods, then a real batch or storage service;
+  competitors, collapse during work and no-beneficiary negatives.
+- **Ordinary/rendered/aggregate:** unmeasured for expanded upkeep; unproven. **Next:** run
+  the useful-operation contract before changing repair responsibility or adding state.
+
+### WS17 Care during illness, injury and old age (§9)
+
+- **Observable:** locally known incapacity uncovers responsibilities, a capable helper
+  supplies real food/water/warmth/rest/childcare and later returns to ordinary duties.
+- **Existing owner:** `welfare.ts`, `illness.ts`, `life.ts`, survival/social options and
+  executed care gifts; household membership and concerns. No separate medical framework.
+- **Missing transition:** capable-provider/carer incapacity, isolated elder, own-dependant
+  protection and recovery handback across the full chain.
+- **Dependencies/boundary:** WS2 contact/food, WS5 commitments, WS20 dependants. Existing
+  rules preserved pending diagnosis; new state requires lifecycle/knower/save/hash bounds.
+- **Contract/physical/save/purity:** existing welfare/food-help contracts partial; add
+  multi-dependant illness fixture with real competing obligations and no-helper failure.
+- **Ordinary/rendered/aggregate:** expanded opportunity denominators and rendered recovery
+  not established; benefit unproven. **Next:** audit the observed distress→care eligibility
+  seam before adding any new care activity or changing survival priorities.
+
+### WS18 Resource exhaustion and adaptation (§15)
+
+- **Observable:** depleted remembered sources produce a local knowledge update and a
+  feasible different acquisition, production, farming, exchange or relocation response.
+- **Existing owner:** geology/deposits, `knowledge.ts`, `options_work.ts gatherMaterial`,
+  production supply planning, farming/regrowth, rules-34 plan reconsideration.
+- **Missing transition:** repeat failed trips and downstream adaptation across finite
+  versus renewable sources; no evidence yet for every requested adaptation route.
+- **Dependencies/boundary:** WS6/9/12, local beliefs only. No replenishment or global map
+  knowledge; version any decision-changing repair after predecessor verification.
+- **Contract/physical/save/purity:** existing geology, observer-truth/reconsideration
+  tests partial; stage a real exhausted source→observed failure→alternative outcome.
+- **Ordinary/rendered/aggregate:** denominator and current rendered response pending;
+  benefit unproven. **Next:** count exhausted-source offers/starts/revisits from fixed saved
+  worlds and trace existing failure cooldown consumers before implementation.
+
+### WS19 Disputes, access and obligations (§16)
+
+- **Observable:** personally learned conflicting claims or broken obligations produce
+  proportionate disagreement, mediation/refusal/access/separation and later effects.
+- **Existing owner:** `social.ts`, `relations.ts`, `grievance.ts`/grievance consumers,
+  ownership/access and crews (rules-35 refusal to rejoin while a grievance persists).
+- **Missing transition:** distinguish inability, valid refusal, accidental interruption,
+  stale source/route failure, deliberate breach, theft and disputed contribution.
+- **Dependencies/boundary:** WS5 commitments, real ownership and local news. No courts,
+  warfare or automatic deceit attribution. Rules unchanged until outcome audit.
+- **Contract/physical/save/purity:** existing cooperation/conflict/crew tests partial;
+  new cause-specific obligation→grievance→later option/access scenario required.
+- **Ordinary/rendered/aggregate:** expanded outcomes/denominators not established;
+  benefit unproven. **Next:** inspect `updateCommitments` status attribution and actual
+  relationship consequences against each cause before changing any penalty.
+
+### WS20 Population and caregiving continuity (§18)
+
+- **Observable:** births/ageing/deaths/household changes adjust real responsibilities;
+  households may fail when no feasible carer remains, without replacement guarantees.
+- **Existing owner:** `lifecycle.ts`, `households.ts`, `people.ts`, welfare, succession,
+  household-practice/winter-practice records. Material/knowledge/promise inheritance differ.
+- **Missing transition:** incapacity/departure succession and changing capable-worker/
+  dependant ratios have not been demonstrated as a viable ordinary household chain.
+- **Dependencies/boundary:** WS11/17/12. No forced births or compensating immigration;
+  existing save/version boundaries retained.
+- **Contract/physical/save/purity:** existing life/household/succession/practice tests
+  partial; stage provider death, ageing and household split with real resource accounting.
+- **Ordinary/rendered/aggregate:** household viability through transitions unmeasured;
+  benefit unproven. **Next:** instrument eligible carers/dependants and actual care at
+  each transition; preserve deaths and unattended cases rather than retuning demographics.
+
+### WS21 Mature-world performance, persistence and retention (§21)
+
+- **Observable:** mature worlds remain inspectable/playable and load/continue without
+  losing obligations, identities, ancestry, ownership, knowledge or meaningful history.
+- **Existing owner:** `world.ts` stepping, renderer/cache, `app/save.ts`, inspectors,
+  `historical_index.ts`, rules-25 operational retention. New speech cache bounded at 256.
+- **Missing transition:** current mature-world timing, heap/save size, load/serialization,
+  inspector/history-query and browser frame/layout costs measured separately.
+- **Dependencies/boundary:** recorded saves with settings/provenance and unchanged
+  same-runtime continuation; derived caches only. No simulation history truncation added.
+- **Contract/physical/save/purity:** cache-bound and full observer-purity tests added;
+  existing save/retention tests retained. Benchmark actual accumulated state, not cloned
+  decorative records or only startup, before choosing an optimisation.
+- **Ordinary/rendered/aggregate:** use the existing rules-53 day-45 save with its manifest;
+  small/large fresh and mature Normal browser/Node observations pending. Mature Large
+  current-rule evidence still required. No performance-improvement claim without before/
+  after measurements. **Next:** bounded benchmark using the saved mature world, no ensemble
+  restart; report contention and stop limits explicitly.
+
+### Continuation execution log
+
+- Initial archive refresh succeeded, 1 available new prompt appended. Two unavailable
+  historical ChatGPT conversations remain marked partial; no fresh remote-history claim.
+- Speech baseline captured before production changes. Focused initial test exposed
+  absent default preference migration (1 failed / 5 passed); connected validated defaults,
+  retaining that failure in the transcript. Layout review found over-conservative crowd
+  protection; fixed and added close-selected expansion assertions.
+- Focused existing controller/current-world/worldsize plus speech: **38/38 passed**.
+  Expanded layout/purity/feed contracts: **9/9 passed**. Typecheck and build exit 0.
+  Browser initial expanded pass: **30/30** including input, preference and full-save purity.
+  Full suite `npm test -- --maxWorkers=4`: **204 files / 1,433 tests passed**, exit 0,
+  305.24 seconds. This includes the rules-53 reference and historical goldens. The later
+  feed tests and layout-review fixes passed a focused rerun (9/9); final browser **34/34**.
+  Review failures are retained in `viewer_evidence/review-failures.json`: warning marker
+  placement needed a bounded extra nearby slot, and the feed keyboard driver needed the
+  real Enter character event. Neither required weakening an assertion. Build retains existing Vite native-loader and >900 kB chunk warnings; not
+  presented as new failures or silently suppressed.
+
+## Slice log (continued)
+
 ### Slice 1 — rules 45 food help (WS2), 2026-10-29
 
 Predecessor reference: `tests/v44_continuation.expected.json` recorded from `7625337` by `scripts/v44_reference.ts --write`
