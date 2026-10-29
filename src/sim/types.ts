@@ -336,6 +336,8 @@ export interface Intention {
   wants: Partial<Items>;
   /** for a tool plan, which tool */
   makes: string;
+  /** rules 53 (succession.ts): whose unfinished undertaking this plan continues, and how far they had got */
+  succeeding?: { from: number; name: string; worked: number };
   /** ticks actually spent sheltering for this plan, credited by the activity itself as it ends or is set aside */
   sheltered: number;
   /**
@@ -581,6 +583,10 @@ export interface Person {
   /** Version 27: the last few places spare time was spent at (leisure.ts); absent in any world below version 27. */
   leisure?: import('./leisure').Leisure;
   sharedSupper?: import('./household_practices').SharedSupper;
+  /** rules 53 (winter_practice.ts): the practice of keeping winter stores, and how it was learned */
+  winterPractice?: import('./winter_practice').WinterPractice;
+  /** rules 53: meals eaten from the household's stores this winter */
+  winterMeals?: { year: number; meals: number };
   civicAlignment?: import('./political_alignment').CivicAlignment[];
   tradeLeads?: import('./exchange_journeys').TradeLead[];
   heardDemand?: import('./local_demand').HeardDemand[];
@@ -1001,6 +1007,10 @@ export interface Animal {
 
 export interface Household {
   relocations?: import('./relocation').Relocation[];
+  /** rules 53 (succession.ts): undertakings members left unfinished at death, for a survivor to take up */
+  unfinished?: import('./succession').Unfinished[];
+  /** rules 53 (winter_practice.ts): the year the household's winter reserve was laid, and by whom */
+  reserveLaid?: { year: number; by: number; tick: number };
   townshipId?: number;
   id: number;
   name: string;

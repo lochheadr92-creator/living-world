@@ -41,6 +41,7 @@ import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
 import type { Ctx } from './optutil';
 import { runsRulesVersion } from './rulesversion';
+import { winterPracticeLead } from './winter_practice';
 import type { Belief, BuildingType, FoodKind, ItemKind, Person, World } from './types';
 
 /** the rules version at which household food preparation starts; nothing here applies to a world below it */
@@ -307,14 +308,17 @@ export function preparationWanted(ctx: Ctx): PrepWant | null {
     return { target, short, cue: 'hardship', why, aboutId: home.id, until: world.tick + DAY * 2 };
   }
 
-  // otherwise the season, and only when there is enough of the window left to do anything in
+  // otherwise the season, and only when there is enough of the window left to do anything in. Rules 53 (winter_practice.ts): a
+  // holder of the practice of keeping winter stores sees the window open PRACTICE_LEAD days earlier, and says so.
   const left = ticksUntilWinter(world);
-  if (seasonShort < MIN_SHORTFALL || !inPreWinter(world) || left < DAY * 0.3) return null;
+  const lead = winterPracticeLead(world, p);
+  const window = ((hasWinterReserve(world) ? PREPARE_DAYS_WINTER_RESERVE : PREPARE_DAYS) + lead) * DAY;
+  if (seasonShort < MIN_SHORTFALL || left <= 0 || left > window || left < DAY * 0.3) return null;
   return {
     target: seasonTarget,
     short: seasonShort,
     cue: 'season',
-    why: 'winter is close and the store is thin',
+    why: lead && left > window - lead * DAY ? 'winter is coming and we keep stores: the store is thin' : 'winter is close and the store is thin',
     aboutId: home.id,
     until: world.tick + left,
   };

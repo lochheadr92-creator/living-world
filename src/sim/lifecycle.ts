@@ -12,6 +12,7 @@ import { dropNear } from './buildings';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
 import { intentionsOnDeath } from './intent';
+import { collectUnfinished, recordUnfinished } from './succession';
 import { socialOnDeath } from './social';
 import { foodUnits, ledgerCreate, releaseAllFor } from './economy';
 import { addEvent, addLog } from './events';
@@ -233,10 +234,13 @@ export function killPerson(world: World, p: Person, cause: string): void {
   const age = Math.floor(ageYears(world, p));
   if (p.cartId) unhitch(world, p);
   toolsOnDeath(world, p);
+  // rules 53 (succession.ts): what they leave unfinished is read off their plans before the plans are dropped
+  const unfinished = collectUnfinished(world, p);
   intentionsOnDeath(world, p); // after the activity ended, so what they really did was credited first and nothing accrues now
   if (!hasLocalDeath(world)) mourn(world, p);
   socialOnDeath(world, p);
-  dropNear(world, p.x, p.y, p.inv, `${p.name}'s belongings`, p.id);
+  const belongings = dropNear(world, p.x, p.y, p.inv, `${p.name}'s belongings`, p.id);
+  recordUnfinished(world, p, unfinished, belongings);
   p.inv = {};
   // grave marker on a nearby free tile
   const gx = Math.floor(p.x);

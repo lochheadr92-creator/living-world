@@ -21,6 +21,7 @@ import { describeLifeEvent, whileObserving } from './lifechanges';
 import { describeCrew } from './crews';
 import { describeTrade } from './trade';
 import { describeCustomers } from './customers';
+import { describeWinterPractice } from './winter_practice';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -160,6 +161,8 @@ export interface PersonView {
   trade: string;
   /** rules 51: the person's own customer record, a line each */
   customers: string[];
+  /** rules 53: the practice of keeping winter stores, as the person holds it */
+  winterPractice: string[];
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -600,6 +603,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     heard: describeHeard(world, p),
     trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
     customers: describeCustomers(world, p),
+    winterPractice: describeWinterPractice(world, p),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },

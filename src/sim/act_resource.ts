@@ -37,6 +37,7 @@ import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
 import { creditHauled, creditStocked } from './intent';
 import { customerSuppliedAtSite } from './customers';
+import { noteWinterMeal } from './winter_practice';
 import { hasWinterReserve, isFoodKind } from './provision';
 import { hasDeliveryPlace } from './delivery_place';
 import { personById } from './registry';
@@ -346,6 +347,8 @@ registerHandler('eat_store', {
       const ate = a.data.table ? a.cycle : 0;
       const units = took + ate;
       if (e && e.ent === 'building' && e.hhId === 0 && e.type === 'storehouse' && units > 0 && a.data.food) recordCivicFoodBenefit(world, p, e, a.data.food as ItemKind, units);
+      // rules 53 (winter_practice.ts): a winter meal from the household's own store or a granary counts toward the practice
+      if (e && e.ent === 'building' && outcome === 'success') noteWinterMeal(world, p, e, units);
     }
     if (a.data.table) {
       // A meal at a store was taken a bite at a time, so what it came to is known only now: the belief about the store is

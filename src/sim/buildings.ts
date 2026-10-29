@@ -122,8 +122,8 @@ export function makeHousePile(world: World, x: number, y: number, items: Items, 
 }
 
 /** Drop items on the nearest free tile near (x, y) so nothing silently disappears. */
-export function dropNear(world: World, fx: number, fy: number, items: Items, note: string, fromHolder = 0): void {
-  if (isEmptyItems(items)) return;
+export function dropNear(world: World, fx: number, fy: number, items: Items, note: string, fromHolder = 0): Pile | null {
+  if (isEmptyItems(items)) return null;
   const cx = Math.floor(fx);
   const cy = Math.floor(fy);
   for (let r = 0; r < 5; r++) {
@@ -133,13 +133,12 @@ export function dropNear(world: World, fx: number, fy: number, items: Items, not
         const tx = cx + dx;
         const ty = cy + dy;
         if (isWalkable(world, tx, ty)) {
-          makeHousePile(world, tx, ty, items, note, fromHolder);
-          return;
+          return makeHousePile(world, tx, ty, items, note, fromHolder);
         }
       }
     }
   }
-  makeHousePile(world, cx, cy, items, note, fromHolder);
+  return makeHousePile(world, cx, cy, items, note, fromHolder);
 }
 
 /** Shares of what it took to build, by household (materials count 1 a unit, work 1 per 25 ticks). */

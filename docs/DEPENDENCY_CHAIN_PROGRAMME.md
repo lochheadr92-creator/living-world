@@ -228,7 +228,23 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 ### WS11 Household projects, succession, culture
 - **Current.** Promises released on death; organiser death confers no office; supper practice (24); aspirations (38).
   No mechanism continues another person's undertaking.
-- **Status.** Impl `no` · Contract `no` · E2E `no` · Ordinary `no` · Rendered `no` · Aggregate `unproven`.
+- **Contract (rules 53, `docs/CONTINUITY.md`).** At death, each active plan that served the household (shelter for its
+  site, stock for its store, batch for its site, a hand tool) is recorded on the household with how far it had got, what
+  was gathered and the pile it fell into; an adult of the household who knows of the death (rules 14), within six days,
+  with no live plan of that kind, takes it up as the ordinary plan of that kind naming whom it continues (a witness learns
+  the pile; one merely told does not); an undertaking that no longer stands is cancelled with the reason. The practice of
+  keeping winter stores: a season reserve that reached its target marks the household's reserve laid; winter meals from
+  the household's store or a granary (or a feed of a dependant) are counted on each member; at winter's end the layer
+  who ate three holds it as their own and any member who ate three holds it from the layer, child or adult; a holder's
+  season cue opens two days earlier. Switches `rich-no-succession`, `rich-no-winter-practice`. Owners
+  `src/sim/succession.ts`, `src/sim/winter_practice.ts`; call sites in `lifecycle.ts`, `intent.ts`, `act_resource.ts`,
+  `social.ts`, `hardship.ts`, `provision.ts`.
+- **Status.** Impl `yes` · Contract `yes` (8 cases) · E2E `yes` (staged: plan → death → record → witness takes it up →
+  her wood to the site by his hands; reserve laid → three winter meals each → practice learned, child from mother → cue
+  two days earlier, held into adulthood) · Ordinary `partial` (5 undertakings recorded at deaths, 0 taken up; the practice
+  learned by 5 people in three seeds, 4 of them from the layer, one early-cue preparation; table in the slice log) ·
+  Rendered `partial` (the practice line on the person card; plan goal "finish what X began"; no household-card line yet) ·
+  Aggregate `unproven` (lab rows in the slice log).
 
 ### WS12 Relocation, splitting, rescue, return
 - **Current.** Rules 20 whole-household relocation; any refusal ends it; no subgroup, succession, return or rescue.
@@ -485,3 +501,44 @@ off, everyone may plan the smithy's recipes, so iron-tool plans are adopted that
 who do not hold it; none of them made iron in any world. The charcoal-holders row (fewer with the tree on, 4 / 0 seeds)
 is a lead to look at in a later slice (a holder's lesson may now be about smelting rather than charcoal). No benefit
 claimed, no harm established.
+
+### Slice 9 — rules 53 succession and the practice of keeping winter stores (WS11), 2026-10-29
+
+Predecessor reference: `tests/v52_continuation.expected.json` recorded from `d2a1543` by `scripts/v52_reference.ts --write`
+(commits `2b213f5`, `98fd719`). Contract: `docs/CONTINUITY.md`. Tests: `tests/succession.test.ts` (4),
+`tests/winter_practice.test.ts` (4); focused 18 files / 229 tests (plans, home, preparation, winter reserve, projects,
+death knowledge, household practices, batch plan, customers, technique tree, reconsideration, food help, civic food,
+golden, lifecycle, v52 continuation). The first full run found one old-save test broken by the new validator (a save with
+no plans column); the validator now tolerates it, and the suite was rerun on the final source (below). No page check for
+this slice: the practice is one line on the person card and the succession plan reads through the existing plan panel
+("finish what Ada began: …"); recorded as Rendered `partial`.
+
+Ordinary observation, `scripts/continuity_observe.ts`, Normal, immigration off, 45 days, rules 53
+(`continuity_evidence/obs-45-{seed}`; the final source differs from the observed one only in the validator line above):
+horizons reached, conservation held, observer purity held daily.
+
+| seed | alive / dead | unfinished recorded (kind) | taken up | cancelled | reserves laid (year) | people who ate a store meal in winter | practice holders (source, from) | season plans by holders / others | early-cue adoptions |
+|---|---|---|---:|---:|---|---:|---|---|---:|
+| meadow | 31 / 1 | 0 | 0 | 0 | 2 (years 2, 4) | 32 | Eli (family, Jonas), Lena (family, Jonas) | 0 / 25 | 0 |
+| river | 22 / 9 | 2 (stock, batch) | 0 | 0 | 2 (years 2, 2) | 23 | Corin (family, Emre) | 0 / 13 | 0 |
+| forest | 8 / 22 | 3 (stock, tool, tool) | 0 | 0 | 3 (years 4, 3, 3) | 6 | Lena (laid), Kaia (family, Hal) | 3 / 10 | 1 |
+
+Read plainly: five undertakings were recorded at deaths and none taken up in 135 seed-days. River's one (Yan's food
+reserve, day 24.6) had one surviving adult in the household, Cole, who knew of the death and already had a stock plan of
+his own, so the record stood until its window passed; forest's three fell in the famine of days 20-23 that took 22 of 30
+people, the households with them. The mechanism's preconditions (a survivor who knows, without a plan of that kind,
+within six days, the kind's own cue live) are the contract's, and in these worlds they did not meet; the staged proof is
+the evidence of the mechanism, and this is the honest ordinary count. The practice was learned by five people, four from
+the one who laid the reserve (Jonas's two, Emre's one, Hal's one) and one as her own (Lena, forest), the transmission the
+brief asks for, observed in an ordinary world; forest's holders took three season plans, one of them on the early cue
+("winter is coming and we keep stores"), the one ordinary occurrence of the practice changing a choice.
+
+Lab rows (8 seeds, 30 days, control + nudge against `rich-no-succession` and `rich-no-winter-practice`; rows are
+ablation − reference; `continuity_evidence/lab-continuity/report.txt`). Succession off: workplaces +0.3, solid homes
++0.4, buildings +1.2 [−0.9, +3.0], people +1.1, deaths −1.0 [−2.3, +0.4], mean hunger −3.3 [−5.6, −1.0] (1 / 7 seeds),
+tools +2.4, projects adopted +4.6, preparations adopted +7.6 [+3.1, +12.7] (7 / 1), done +3.6, units put by +62.6
+[+51.1, +76.6] (8 / 0): every one within the noise floor (±74.8 on units, ±12.5 on adoptions), and the one-draw nudge arm
+itself moved preparations adopted by −14.0 and projects adopted by −16.3 in 7 of 8 seeds, so the control is not a steady
+reference for the preparation counts and the 8 / 0 says nothing a nudge does not. Practice off: nothing beyond chance
+(preparations adopted +5.4 [+1.9, +8.8], projects done +3.5, both within the floor). No benefit claimed, no harm
+established.

@@ -294,3 +294,12 @@ Contract: [TECHNIQUE_TREE.md](TECHNIQUE_TREE.md).
   (holders by procedure by day, holders lost to death, lessons by procedure, trials, option samples blocked by a procedure, smithies, iron).
 - Page check (dev server on 5182): `node scripts/browser/technique_tree_check.mjs "http://127.0.0.1:5182/" technique_evidence/rendered meadow`.
 - Lab harm check: `node scripts/lab.mjs --out technique_evidence/lab-tree --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-technique-tree`.
+
+## Rules 53 continuity
+
+Contract: [CONTINUITY.md](CONTINUITY.md).
+
+- Contracts: `npx vitest run tests/succession.test.ts tests/winter_practice.test.ts tests/intentions.test.ts tests/household_preparation.test.ts tests/winter_reserve.test.ts tests/v52_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/continuity_observe.ts continuity_evidence/obs-45-meadow meadow 45`
+  (unfinished records and what was taken up, reserves laid, winter meals, practice holders by source, season plans by holders, early-cue adoptions).
+- Lab harm check: `node scripts/lab.mjs --out continuity_evidence/lab-continuity --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-succession,rich-no-winter-practice`.

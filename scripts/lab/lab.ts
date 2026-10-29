@@ -8,6 +8,8 @@ import { winterShelterOn, setWinterShelter } from '../../src/sim/winter_shelter'
 import { deliveryPlaceOn, setDeliveryPlace } from '../../src/sim/delivery_place';
 import { batchPlansOn, setBatchPlans } from '../../src/sim/batch_plan';
 import { customersOn, setCustomers } from '../../src/sim/customers';
+import { successionOn, setSuccession } from '../../src/sim/succession';
+import { winterPracticeOn, setWinterPractice } from '../../src/sim/winter_practice';
 import { batchResumeOn, setBatchResume } from '../../src/sim/facilities';
 import {backgroundsOn,setBackgrounds} from '../../src/sim/background';
 import { achievementAftermathOn, setAchievementAftermath } from '../../src/sim/achievement';
@@ -277,6 +279,8 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-delivery-place') return {spec:label,summary:'a promise to a person names no place to leave it and the food ask ignores trust; hand-over, credit and consequences unchanged; no effect below rules 48',install(){const was=deliveryPlaceOn();setDeliveryPlace(false);return ()=>setDeliveryPlace(was);}};
   if (kind === 'rich-no-civic-food-benefit') return {spec:label,summary:'remove the public-food meal receipt only; withdrawal receipts and physical food unchanged; no effect below rules 49',install(){const was=civicFoodBenefitOn();setCivicFoodBenefit(false);return ()=>setCivicFoodBenefit(was);}};
   if (kind === 'rich-no-batch-plans') return {spec:label,summary:'no batch plan is taken on; every workshop option stays as it was; no effect below rules 50',install(){const was=batchPlansOn();setBatchPlans(false);return ()=>setBatchPlans(was);}};
+  if (kind === 'rich-no-succession') return {spec:label,summary:'nothing a dead member left unfinished is recorded or taken up; plans, sites, piles and promises at death unchanged; no effect below rules 53',install(){const was=successionOn();setSuccession(false);return ()=>setSuccession(was);}};
+  if (kind === 'rich-no-winter-practice') return {spec:label,summary:'no winter meal is counted, nothing is learned at winter\'s end and no season cue opens earlier; the reserve itself unchanged; no effect below rules 53',install(){const was=winterPracticeOn();setWinterPractice(false);return ()=>setWinterPractice(was);}};
   if (kind === 'rich-no-technique-tree') return {spec:label,summary:'smelting and forging are read as known by everyone and nobody tries a procedure untaught; charcoal firing, lessons and backgrounds unchanged; no effect below rules 52',install(){const was=techniqueTreeOn();setTechniqueTree(false);return ()=>setTechniqueTree(was);}};
   if (kind === 'rich-no-customers') return {spec:label,summary:'no unmet ask is remembered as a customer, nothing is brought to one, and the trade review reads no returns; asks, barter, gifts and favours unchanged; no effect below rules 51',install(){const was=customersOn();setCustomers(false);return ()=>setCustomers(was);}};
   if (kind === 'rich-no-batch-resume') return {spec:label,summary:'a batch under way blocks every operate as before rules 50; the batch plan itself is unchanged; no effect below 50',install(){const was=batchResumeOn();setBatchResume(false);return ()=>setBatchResume(was);}};

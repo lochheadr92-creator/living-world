@@ -48,6 +48,8 @@ import type { Ctx, Option } from './optutil';
 import { MAX_INTENTIONS } from './types';
 import type { Activity, BeliefKind, BuildingType, Intention, ItemKind, Items, Person, Request, SourceType, ToolKind, World } from './types';
 import { hyp } from './util';
+import { successionWanted, successionBlocker, takeUp, cancelUnfinished } from './succession';
+import { noteReserveLaid } from './winter_practice';
 
 /** how much a plan may tilt a choice. Deliberately small: a plan is a preference, never an override. */
 const NUDGE = 14;
@@ -799,7 +801,10 @@ export function settleIntentions(world: World, p: Person): void {
       i.stepKey = null;
       i.wants = {}; // what it had spoken for is spare again the moment it ends
       if (i.kind === 'stock') notePrepEnded(made.status === 'done');
+      // rules 53 (winter_practice.ts): a season reserve that reached its target is the household's laid reserve for the year
+      if (i.kind === 'stock' && i.cue === 'season' && made.status === 'done') noteReserveLaid(world, p);
       addLog(world, p, 'work', `${made.status === 'done' ? 'Finished' : 'Gave up on'}: ${i.goal} - ${made.reason}.`);
+      if (i.succeeding && made.status === 'done') addLog(world, p, 'work', `Finished what ${i.succeeding.name} began.`);
       continue;
     }
     const out = nightOutcome(world, p, i);
@@ -967,6 +972,46 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
 
 
 /**
+ * Rules 53: the plan that continues an unfinished undertaking, built by its kind's own rules (the site's want for a shelter, the
+ * tool's recipe for a tool, the preparation cue for a store, the batch want for a batch); null when the kind's own rules give
+ * nothing to do now (the record waits, within its window).
+ */
+function succeedPlan(ctx: Ctx, u: import('./succession').Unfinished, onCooldown: (kind: Intention['kind']) => boolean): Intention | null {
+  const { world, p } = ctx;
+  if (onCooldown(u.kind)) return null;
+  const base = { id: world.nextId++, since: world.tick, status: 'active' as const, setAside: 0, sheltered: 0, worked: 0, ended: 0, step: '', stepKind: 'none' as const, stepTarget: 0, stepItem: null, stepKey: null, blocked: '' };
+  let made: Intention | null = null;
+  if (u.kind === 'shelter') {
+    const want = shelterWanted(ctx);
+    if (!want || want.aboutId !== u.aboutId) return null;
+    made = { ...base, kind: 'shelter', goal: `get the household's ${BUILD_DEF[want.what].label} built`, until: want.until, reason: want.why, aboutId: want.aboutId, wants: want.wants, makes: '' };
+  } else if (u.kind === 'tool') {
+    const r = TOOL_RECIPE[u.makes as ToolKind];
+    if (!r) return null;
+    made = { ...base, kind: 'tool', goal: `make a ${u.makes}`, until: world.tick + DAY * 2, reason: `${u.name} meant to make one`, aboutId: 0, wants: { wood: r.wood, stone: r.stone }, makes: u.makes };
+  } else if (u.kind === 'stock') {
+    const want = preparationWanted(ctx);
+    if (!want) return null;
+    made = { ...base, kind: 'stock', goal: `put ${want.target} units of food by for the household`, until: want.until, reason: want.why, aboutId: want.aboutId, wants: {}, makes: '', reserve: want.target, cue: want.cue };
+    notePrepAdopted(want.cue);
+  } else if (u.kind === 'batch') {
+    const want = batchHooks?.want(ctx);
+    if (!want || want.forSite !== u.forSite) return null;
+    made = { ...base, kind: 'batch', goal: `see ${want.qty} ${want.item} through at the ${(p.beliefs[want.facilityId]?.btype ?? 'workshop').replace('_', ' ')} for the site`, until: world.tick + BATCH_PATIENCE_TICKS, reason: want.why, aboutId: want.facilityId, wants: want.wants, makes: String(want.item), recipe: want.recipe, forSite: want.forSite };
+  }
+  if (!made) return null;
+  const st = stepFor(ctx, made);
+  made.step = st.step;
+  made.stepKind = st.kind;
+  made.stepTarget = st.target;
+  made.stepItem = st.item;
+  made.stepKey = st.key;
+  made.blocked = st.blocked;
+  p.intentions.push(made);
+  return made;
+}
+
+/**
  * A project worth taking on today: a tool that would make the work easier, or a roof that is going. Both are adopted only when the
  * materials are what stands in the way - when they are already to hand the ordinary option covers it and no plan is needed.
  */
@@ -1035,6 +1080,22 @@ function adoptProject(ctx: Ctx): Intention | null {
     notePrepAdopted(stock.cue);
     addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
     return made;
+  }
+
+  // Rules 53 (succession.ts): what a dead member of the household left unfinished comes before the survivor's own roof or axe,
+  // when they know of the death and the undertaking still stands by their own knowledge. The plan is the ordinary kind's plan
+  // with a note of whom it continues; a record that cannot be continued is cancelled with the reason.
+  const succ = successionWanted(ctx);
+  if (succ) {
+    const why = successionBlocker(ctx, succ);
+    if (why) cancelUnfinished(world, p, succ, why);
+    else {
+      const made = succeedPlan(ctx, succ, onCooldown);
+      if (made) {
+        takeUp(world, p, succ, made);
+        return made;
+      }
+    }
   }
 
   // A HOME COMES BEFORE A ROOF OR AN AXE (rules version 7; `shelterWanted` returns null in any world below it, so

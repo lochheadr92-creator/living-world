@@ -2,6 +2,7 @@ import { hasExchangeJourneys, tellTradeLead, endExchangeTalk, endExchangeApproac
 import { TECHNIQUES } from './techniques';
 import type { TechniqueKind } from './techniques';
 import { noteCustomer, customerSupplied, setCustomerDeps } from './customers';
+import { noteWinterCare } from './winter_practice';
 import { offerLesson, answerLesson, answerRequestedLesson, finishLesson, interruptLesson, lessonProblem, LESSON_TICKS } from './techniques';
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
@@ -221,6 +222,8 @@ export function onGift(world: World, giver: Person, receiver: Person, items: Ite
   endGrievanceOnGift(world, giver, receiver, sev);
   giver.stats.given += 1;
   receiver.stats.received += 1;
+  // rules 53 (winter_practice.ts): a dependant fed in winter from a household that keeps stores lives the winter's meals too
+  if (mode === 'care' && isFoodGift(items)) noteWinterCare(world, receiver, giver, Object.values(items).reduce((n, v) => n + (v ?? 0), 0));
   addLog(world, giver, 'social', `Gave ${txt} to ${receiver.name}${mode === 'care' ? ' (looking after them)' : ''}.`);
   addLog(world, receiver, 'social', `${giver.name} gave me ${txt}.`);
   think(world, receiver, 'gift:' + giver.id, 8, Math.round(DAY * 0.7), `${giver.name} gave me ${txt}`);

@@ -12,6 +12,7 @@ import { ledgerSpoil } from './economy';
 import { DAY, DAYS_PER_YEAR } from './constants';
 import { hashString, hashUnit } from './rng';
 import { isRich, think } from './mood';
+import { winterEnded } from './winter_practice';
 
 /** An experiment switch (beside the world, not in it): with it off, a rich world has no lean seasons, winter, faster spoilage or bolder wolves (the lab uses it to tell stakes from mood). */
 let stakes = true;
@@ -33,7 +34,11 @@ export function updateHardship(world: World): void {
     if (into === DAYS_PER_YEAR - WINTER_LENGTH) {
       addEvent(world, 'nature', 'Winter sets in: the cold deepens and the land gives less.');
       for (const p of world.persons) if (p.alive) think(world, p, 'winter', -4, WINTER_LENGTH * DAY, 'it is winter');
-    } else if (into === 0 && world.tick >= DAY) addEvent(world, 'nature', 'Winter loosens its grip.');
+    } else if (into === 0 && world.tick >= DAY) {
+      addEvent(world, 'nature', 'Winter loosens its grip.');
+      // rules 53 (winter_practice.ts): those who laid a reserve and ate from it through the winter learn to keep stores
+      winterEnded(world);
+    }
   }
   floodTick(world);
   const h = world.hardship;
