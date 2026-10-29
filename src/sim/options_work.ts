@@ -13,6 +13,7 @@ import { runsRulesVersion } from './rulesversion';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
+import { seedStorageOption } from './seed_storage';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { findBuildSpot } from './buildings';
@@ -404,6 +405,9 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
     cands.push({ b, est: u.est, e, score });
   }
   cands.sort((a, b) => b.score - a.score);
+  if (cands.length) seedStorageOption(ctx, item, base, why, nightMult(ctx) * weatherMult(ctx));
+  if (cands.length && world.settings.dynamics === 'rich' && runsRulesVersion(world, 58) && invRoom(world, p, item) < 1)
+    addBlocked(ctx, 'gather', `Get ${item} ${why}`, 0, `no room in my pack for one ${item}`, tag);
   for (const c of cands.slice(0, 2)) {
     const type = c.b.kind as SourceType;
     const room = roomFor(p.inv, 9999, item) && invRoom(world, p, item);

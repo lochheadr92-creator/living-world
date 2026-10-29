@@ -1,0 +1,114 @@
+{
+  "head": "8dd13739d5b39c8c066889b02fcd80911dfb2c3b",
+  "rules": 58,
+  "sourceHashes": {
+    "scripts/browser/seed_storage_check.mjs": "a65940f1aef6f5a89ea294889738ebe372bc6f70a1eb1d4b9cd8fb3514879fa9",
+    "tests/helpers/seed_storage.ts": "518505f9c0c93a54af49922a6dab001b40b2c4c546e6c3805efc4f8c6a4fa135",
+    "src/sim/seed_storage.ts": "bcd2b6748d1f882b4fc8c7b079e8a90e67788ad454b889e7f9bf4fe2e96d85f4",
+    "src/sim/options_work.ts": "6ea8fd2040be8f86c5d71bc38284253841b24318cee86041516e5e506d4481a6",
+    "src/sim/act_resource.ts": "b2013fc8a103e73b0de781a0a7c124a7a23f120646f37e132bbdb7dfcc15a1de",
+    "src/sim/act_build.ts": "961c2744f9b8a2f0f31da624245dfcfc1c15e627470516032fb1a7f5e643bdc4",
+    "src/sim/rulesversion.ts": "c6d7e584ea7a1df6c07b26151f28c988ee0f7762d0dde4f6379c56aa6bb0dc23"
+  },
+  "evidence": "STAGED full harvest pack, known home, workshop demand and farm plots/household. Explicit actual offered choices via the inhabitant boundary. Real storage, acquisition, crafting, sowing, withdrawal and second sowing; no claim of ordinary selection or aggregate benefit.",
+  "checks": [
+    {
+      "name": "full pack, truthful material blocker and a physical home storage offer",
+      "ok": true,
+      "detail": {
+        "seeds": 38,
+        "stoneRoom": 0,
+        "offered": true,
+        "blocked": [
+          {
+            "kind": "gather",
+            "label": "Get wood for my household’s storehouse",
+            "goal": "",
+            "need": null,
+            "util": 0,
+            "parts": [],
+            "eta": 0,
+            "key": "gather:0",
+            "targetId": 0,
+            "blocked": "no room in my pack for one wood",
+            "tag": "site"
+          },
+          {
+            "kind": "gather",
+            "label": "Get stone for my household’s storehouse",
+            "goal": "",
+            "need": null,
+            "util": 0,
+            "parts": [],
+            "eta": 0,
+            "key": "gather:0",
+            "targetId": 0,
+            "blocked": "no room in my pack for one stone",
+            "tag": "site"
+          }
+        ],
+        "pure": true
+      }
+    },
+    {
+      "name": "seed physically reaches the home, planting reserve remains, travelling continuation is exact",
+      "ok": true,
+      "detail": {
+        "before": 38,
+        "kept": 3,
+        "stored": 35,
+        "same": true,
+        "room": 2,
+        "result": {
+          "tick": 1053,
+          "label": "Taking 35 spare seeds home",
+          "outcome": "success",
+          "detail": "done"
+        },
+        "conserved": true
+      }
+    },
+    {
+      "name": "freed space enables real acquisition and hammer crafting counts consumed inputs",
+      "ok": true,
+      "detail": {
+        "before": {
+          "bread": 1,
+          "water": 1,
+          "seeds": 3,
+          "wood": 1,
+          "stone": 2
+        },
+        "after": {
+          "bread": 1,
+          "water": 1,
+          "seeds": 3,
+          "hammer": 1
+        },
+        "conserved": true
+      }
+    },
+    {
+      "name": "stored seeds are physically retrieved after planting and used for another real crop",
+      "ok": true,
+      "detail": {
+        "stored": 35,
+        "usedUp": 0,
+        "retrieved": 3,
+        "storeAfter": 32,
+        "growing": 4,
+        "conserved": true
+      }
+    },
+    {
+      "name": "viewing the outcome preserves the entire saved state",
+      "ok": true,
+      "detail": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

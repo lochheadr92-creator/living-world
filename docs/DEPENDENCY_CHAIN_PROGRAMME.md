@@ -7,7 +7,8 @@ until its evidence is recorded, and a row never disappears because it is hard.
 
 The expanded owner programme remains **partially delivered**. Current continuation
 adds viewer improvements, measured care/upkeep/mature-world evidence, rules 56 practical
-childcare and rules 57 workshop tool prerequisites. The older rules-44–55 report below
+childcare, rules 57 workshop tool prerequisites, and rules 58 physical seed storage
+and correct post-consumption craft capacity. The older rules-44–55 report below
 is historical scope, not closure of the expanded WS15–21 or their dependencies.
 
 Status fields (each row carries all six): **Impl** implemented · **Contract** contract-tested · **E2E** connected end to end
@@ -190,6 +191,25 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   insufficient room for one stone while carrying seeds/tools/other goods. Next:
   trace the capacity transition and known home storage, then establish physical
   unloading/retrieval without changing capacities, recipes or selection scores.
+- **Rules-58 capacity continuation:** one-day unmodified rules-57 trace establishes
+  episodic pack blockage, remembered homes and spare seeds; eating sometimes frees room.
+  `seed_storage.ts` now offers physical home storage, retains planting seeds and promised/
+  planned quantities, and revalidates ownership/reserves/capacity at transfer. Existing
+  farming withdrawal retrieves those goods. `act_build.ts` now evaluates output capacity
+  after subtracting consumed inputs; no weight, recipe or capacity changed.
+  Ten contracts, exact travelling continuation, and Chromium **6/6**: store→gather→hammer;
+  store→three plantings→withdraw→new plot→fourth planting. Explicitly staged. Contract,
+  state lifecycle, review findings and isolated removals: [SEED_STORAGE.md](SEED_STORAGE.md).
+  Whole transport acceptance, exchange and aggregate benefit remain partial/unproven.
+  Ordinary rules-58 river/Normal/no immigration reaches day 45: 9,030 adult samples,
+  307 storage-offer samples, 12 starts, 10 successful deposits / one interior failure /
+  one priority interruption, 66 seeds stored by ten people. Six hammers crafted overall;
+  **zero carts and zero cart trips**. This is activation evidence, not a causal benefit
+  comparison. `viewer_evidence/seed58-river45/report.json` retains the failed trips and
+  995 later work records. The final retained hammer plans belong to Alma and Arlo;
+  both have real material options at that snapshot. Next trace actual selection,
+  interruption and workshop component flow over a cart-demand episode rather than
+  assume the former seed blockage explains every missing cart.
 
 ### WS8 Public projects and civic benefit
 - **Current.** Rules 42 `civic_benefit.ts recordCivicBenefit`, one call site after a successful `withdraw`
@@ -368,6 +388,9 @@ current-rules aggregate or rendered proof.
   Rules 56 practical care committed at `4f68699`, viewer hierarchy/history at `737c233`.
   Immutable rules-56 ordinary and active-childcare references committed at `a465c2e`
   before rules 57; both pass on the successor. Main's prior rules-55 reference is intact.
+- Rules 57 committed at `d5eeadd`. Its immutable ordinary and active hammer-craft
+  references were captured there and committed at `8dd1373` before rules 58. Never
+  overwrite these values to make a successor pass.
 
 ### Existing workstreams: expanded acceptance and exact next transitions
 
@@ -410,7 +433,8 @@ action for the expanded brief; no previous row is removed or promoted by inherit
   readability. Existing worlds can use the controls. **Rendered:** retained before/after
   scenes, crowd, long token, warnings, four zooms, panels, three extra viewport/DPR settings.
 - **Aggregate:** simulation benefit n/a; human comprehension unmeasured. **Limit/next:**
-  visually review all captures, finish input/preference tests and full checks; complete
+  final browser **39/39** and visual capture review complete; full suite/typecheck/build
+  passed at the viewer integration boundaries. Complete
   entrance/occupant/carried-goods and causal-history coverage per WS13. See VIEWER_READABILITY.md.
 
 ### WS16 Shared infrastructure upkeep (§8)
@@ -485,9 +509,13 @@ action for the expanded brief; no previous row is removed or promoted by inherit
   knowledge; version any decision-changing repair after predecessor verification.
 - **Contract/physical/save/purity:** existing geology, observer-truth/reconsideration
   tests partial; stage a real exhausted source→observed failure→alternative outcome.
-- **Ordinary/rendered/aggregate:** denominator and current rendered response pending;
-  benefit unproven. **Next:** count exhausted-source offers/starts/revisits from fixed saved
-  worlds and trace existing failure cooldown consumers before implementation.
+- **Ordinary/rendered/aggregate:** the fixed day-45 checkpoint found zero offers against
+  an empty current personal regrowth estimate (old remembered quantities alone were
+  misleading); full finite-exhaustion adaptation and rendered response remain pending.
+  Rules-58 seed storage restores physical acquisition space and later planting, but
+  is not evidence for exhausted-resource adaptation. Benefit unproven. **Next:** stage
+  actual finite depletion→observed failure→known alternative, then count ordinary
+  opportunities and later choices without global supply knowledge.
 
 ### WS19 Disputes, access and obligations (§16)
 
@@ -544,8 +572,9 @@ Population 31/22/8 stays constant in this short window; no generational claim.
   losing obligations, identities, ancestry, ownership, knowledge or meaningful history.
 - **Existing owner:** `world.ts` stepping, renderer/cache, `app/save.ts`, inspectors,
   `historical_index.ts`, rules-25 operational retention. New speech cache bounded at 256.
-- **Missing transition:** current mature-world timing, heap/save size, load/serialization,
-  inspector/history-query and browser frame/layout costs measured separately.
+- **Missing transition:** timing, heap/save size, load/serialization, inspector/history
+  and frame/layout costs are measured below for fresh 54 and mature Normal 53. Current
+  mature Large and retention growth remain unmeasured.
 - **Dependencies/boundary:** recorded saves with settings/provenance and unchanged
   same-runtime continuation; derived caches only. No simulation history truncation added.
 - **Contract/physical/save/purity:** cache-bound and full observer-purity tests added;
@@ -596,6 +625,26 @@ Population 31/22/8 stays constant in this short window; no generational claim.
   `viewer_evidence/tool57-river45/`; raw `final.json` is retained locally and ignored.
   Conservation and sampled full-save observer purity pass. No cart completed; no
   aggregate causal claim. This null result remains part of the programme.
+- Rules-58 review and evidence: ten new contracts plus seven workshop-tool contracts
+  and the immutable rules-57 continuation pass (18/18); rendered storage/farming **6/6**,
+  same-Chromium travelling continuation and full-save viewing purity pass. Review fixed
+  pre-consumption crafting capacity; seed transfers revalidate promises even if the
+  lab removes new offers after departure. Fixture index/ledger errors are recorded in
+  `SEED_STORAGE.md`, with their initial failing log retained.
+- Rules-58 ordinary observation: `npx vite-node scripts/seed_storage_observe.ts
+  viewer_evidence/seed58-river45`, fixed river/Normal/no immigration, 45 days/108,000
+  ticks, 300-second stop. Horizon reached in 145.126 s, ledger/purity pass. Ten completed
+  storage trips move 66 seeds; the two adverse endings remain. Later successful
+  crafting by storers includes picks, a hoe, a basket and a saw, without attributing
+  those outcomes causally to storage. There are six hammers overall but no cart/trip.
+  Report/source manifest and read-only final prerequisite snapshot retained; raw save
+  is local and ignored. No new aggregate benefit established.
+- Rules-58 stable boundary: `npm test -- --maxWorkers=4` **216 files / 1,488 tests
+  passed**, exit 0, 284.41 s (`viewer_evidence/rules58-full-tests.log`), including all
+  historical goldens and predecessor continuations. `npm run typecheck`, `npm run build`
+  and `git diff --check` exit 0. Build retains native-loader notices and a 931.38 kB
+  chunk warning; full-suite output retains TimeoutOverflowWarning. No assertions,
+  goldens, predecessor hashes, capacities, recipes or test thresholds were relaxed.
 
 - Initial archive refresh succeeded, 1 available new prompt appended. Two unavailable
   historical ChatGPT conversations remain marked partial; no fresh remote-history claim.

@@ -1,0 +1,4030 @@
+{
+  "input": "viewer_evidence/tool57-river45/final.json",
+  "sha256": "15c2530b3f6d931d64ae82065433e92527d7c815aa38f57bc7578db0d14515ec",
+  "rules": 57,
+  "from": 108000,
+  "to": 110400,
+  "pure": true,
+  "exactContinuation": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "samples": [
+    {
+      "tick": 108000,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "weight": 17.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 57.76850000000029,
+        "thirst": 85.17247993286563,
+        "energy": 93.02110880844575,
+        "warmth": 27.060237135379932,
+        "safety": 93.88312869218245,
+        "social": 88.12336279052744
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 107998,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108000,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "berries": 2,
+        "wood": 1
+      },
+      "weight": 16,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 35.438999999987296,
+        "thirst": 68.18875727229039,
+        "energy": 100,
+        "warmth": 12.942320514808987,
+        "safety": 67.62702859521998,
+        "social": 38.11784047179802
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 107999,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 107297,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Warming up by the fire"
+    },
+    {
+      "tick": 108000,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 77.45650000000467,
+        "thirst": 96.06394514641124,
+        "energy": 96.63999999999947,
+        "warmth": 20.152762315407465,
+        "safety": 83.93837951516241,
+        "social": 30.906204346036446
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 107997,
+          "stock": {
+            "grain": 6,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 10.575592244380687
+        },
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 10.491615278779546
+        }
+      ],
+      "activity": "Sheltering at the hut"
+    },
+    {
+      "tick": 108120,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "weight": 17.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 54.16850000000015,
+        "thirst": 80.37247993286488,
+        "energy": 96.55110880844587,
+        "warmth": 30.520079496042598,
+        "safety": 93.9896524630231,
+        "social": 86.72041839697414
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108118,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108120,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "berries": 2,
+        "wood": 1
+      },
+      "weight": 16,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 31.83899999998716,
+        "thirst": 63.38875727228975,
+        "energy": 100,
+        "warmth": 13.177466117974221,
+        "safety": 67.59047007930913,
+        "social": 37.452335870726785
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108119,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 107297,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Warming up by the fire"
+    },
+    {
+      "tick": 108120,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 73.85650000000453,
+        "thirst": 91.26394514641049,
+        "energy": 99.04999999999949,
+        "warmth": 25.595744656100976,
+        "safety": 91.71348232653399,
+        "social": 29.373326571398426
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108117,
+          "stock": {
+            "grain": 6,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.04196656766368
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.031902348367671
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108240,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "weight": 17.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 50.568500000000014,
+        "thirst": 75.57247993286413,
+        "energy": 100,
+        "warmth": 36.87386768509729,
+        "safety": 93.99908385108813,
+        "social": 85.31747400342084
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108238,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108240,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "berries": 2,
+        "wood": 1
+      },
+      "weight": 16,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 28.238999999987023,
+        "thirst": 58.588757272289854,
+        "energy": 99.91999999999999,
+        "warmth": 18.92140478021215,
+        "safety": 67.59046842914235,
+        "social": 36.650331269655474
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108239,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 107297,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Eating"
+    },
+    {
+      "tick": 108240,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 70.2565000000044,
+        "thirst": 86.46394514640974,
+        "energy": 100,
+        "warmth": 34.482129134426515,
+        "safety": 93.797556589241,
+        "social": 28.21494879676059
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108237,
+          "stock": {
+            "grain": 6,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.044421603663375
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.034363736346934
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108360,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "weight": 17.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 46.96849999999988,
+        "thirst": 70.77247993286338,
+        "energy": 100,
+        "warmth": 44.207950207527624,
+        "safety": 93.99991888612423,
+        "social": 83.91452960986754
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108358,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108360,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1
+      },
+      "weight": 14,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 48.638999999986886,
+        "thirst": 53.788757272289956,
+        "energy": 95.11999999999924,
+        "warmth": 12.80729922794466,
+        "safety": 63.06705500602868,
+        "social": 35.05032666858425
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108359,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 108359,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Sheltering at the hut"
+    },
+    {
+      "tick": 108360,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 66.65650000000426,
+        "thirst": 81.66394514640899,
+        "energy": 96.63999999999947,
+        "warmth": 25.186354267646717,
+        "safety": 70.84693505567947,
+        "social": 26.867571022122636
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108357,
+          "stock": {
+            "grain": 6,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1011",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 8.513723348603762
+        },
+        {
+          "key": "gather:1164",
+          "label": "Cutting stone for my household’s smithy",
+          "util": 8.415936203037504
+        }
+      ],
+      "activity": "At the market"
+    },
+    {
+      "tick": 108480,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "weight": 17.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 43.36849999999974,
+        "thirst": 65.97247993286263,
+        "energy": 100,
+        "warmth": 51.043367065956176,
+        "safety": 93.99999281834998,
+        "social": 82.51158521631424
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108478,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108480,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1
+      },
+      "weight": 14,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 45.03899999998675,
+        "thirst": 48.98875727229006,
+        "energy": 97.45999999999924,
+        "warmth": 32.74668175565653,
+        "safety": 89.71605031502797,
+        "social": 33.47132206751321
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108368,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 108479,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108480,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 63.05650000000412,
+        "thirst": 76.86394514640824,
+        "energy": 91.83999999999872,
+        "warmth": 17.288110742143683,
+        "safety": 63.350944246455754,
+        "social": 25.18769324748466
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108477,
+          "stock": {
+            "grain": 6,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.044421603663375
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.034363736346934
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108600,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "weight": 17.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 39.768499999999605,
+        "thirst": 61.17247993286238,
+        "energy": 100,
+        "warmth": 56.26930983705009,
+        "safety": 93.999999364152,
+        "social": 81.10864082276095
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108598,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108600,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1
+      },
+      "weight": 14,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 41.43899999998661,
+        "thirst": 44.18875727229016,
+        "energy": 100,
+        "warmth": 47.38265021122876,
+        "safety": 93.62070820802757,
+        "social": 31.965817466442232
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108368,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 108599,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108600,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 59.456500000003984,
+        "thirst": 72.06394514640749,
+        "energy": 95.43999999999886,
+        "warmth": 39.87445642809879,
+        "safety": 91.28639780252193,
+        "social": 24.046815472846884
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108597,
+          "stock": {
+            "grain": 6,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.044421603663375
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.034363736346934
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108720,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3,
+        "grain": 2
+      },
+      "weight": 17.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 36.16849999999947,
+        "thirst": 56.37247993286248,
+        "energy": 100,
+        "warmth": 59.09127960220098,
+        "safety": 93.99999994370337,
+        "social": 79.70569642920765
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108718,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108720,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1
+      },
+      "weight": 14,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 37.83899999998648,
+        "thirst": 39.38875727229026,
+        "energy": 100,
+        "warmth": 54.775048658405524,
+        "safety": 93.96641831159639,
+        "social": 30.46031286537125
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108368,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 108719,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108720,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 55.85650000000385,
+        "thirst": 67.26394514640674,
+        "energy": 99.039999999999,
+        "warmth": 51.12833552846914,
+        "safety": 93.75974343401079,
+        "social": 23.003937698209082
+      },
+      "activeHammer": false,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108717,
+          "stock": {
+            "grain": 5,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.044421603663375
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.034363736346934
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108840,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 3
+      },
+      "weight": 15.5,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 76.56849999999933,
+        "thirst": 51.572479932862585,
+        "energy": 98.87999999999982,
+        "warmth": 59.03097223909809,
+        "safety": 93.9999999950156,
+        "social": 78.21525203565429
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108838,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Eating"
+    },
+    {
+      "tick": 108840,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1
+      },
+      "weight": 14,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 34.23899999998634,
+        "thirst": 34.588757272290366,
+        "energy": 100,
+        "warmth": 56.934588407084746,
+        "safety": 93.99702674874621,
+        "social": 28.95480826430027
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108368,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 108839,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108840,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 52.25650000000371,
+        "thirst": 62.46394514640627,
+        "energy": 100,
+        "warmth": 55.02681316362381,
+        "safety": 93.7342424142575,
+        "social": 21.765059923571332
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108837,
+          "stock": {
+            "grain": 5,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.041476903998166
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 9.031411417782408
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108960,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 84.9684999999992,
+        "thirst": 46.77247993286269,
+        "energy": 100,
+        "warmth": 60.03746769053366,
+        "safety": 93.99999999955871,
+        "social": 76.39230764210069
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 108958,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 108960,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1
+      },
+      "weight": 14,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 30.638999999986204,
+        "thirst": 54.98875727229044,
+        "energy": 97.4799999999996,
+        "warmth": 39.602777809610856,
+        "safety": 59.7861331055706,
+        "social": 27.690803663229396
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 108368,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 108959,
+          "stock": {
+            "grain": 14
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Drinking at the water"
+    },
+    {
+      "tick": 108960,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 2,
+        "berries": 2
+      },
+      "weight": 10,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 48.656500000003575,
+        "thirst": 57.66394514640637,
+        "energy": 100,
+        "warmth": 57.94308659415181,
+        "safety": 93.6022350851201,
+        "social": 20.652182148933544
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 108957,
+          "stock": {
+            "grain": 5,
+            "berries": 1
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109080,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 81.36849999999906,
+        "thirst": 41.97247993286279,
+        "energy": 100,
+        "warmth": 62.1386509442648,
+        "safety": 93.99999999996092,
+        "social": 74.74086324854721
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109078,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109080,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 2
+      },
+      "weight": 16,
+      "cap": 18,
+      "stoneRoom": 0,
+      "needs": {
+        "hunger": 70.63399999998606,
+        "thirst": 94.34075727228965,
+        "energy": 91.92399999999908,
+        "warmth": 20.019381985961303,
+        "safety": 81.81098962853031,
+        "social": 26.601799062158587
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109079,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109079,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Eating"
+    },
+    {
+      "tick": 109080,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 89.05650000000344,
+        "thirst": 52.86394514640647,
+        "energy": 98.1199999999997,
+        "warmth": 52.978550472357455,
+        "safety": 92.03791661767015,
+        "social": 19.560304374295747
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109077,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Talking with Thea"
+    },
+    {
+      "tick": 109200,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 77.76849999999892,
+        "thirst": 98.77247993286275,
+        "energy": 96.07999999999939,
+        "warmth": 41.93964378068418,
+        "safety": 63.56969912476352,
+        "social": 73.43591885499362
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109165,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.6793576147423597
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.2849454177856385
+        }
+      ]
+    },
+    {
+      "tick": 109200,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 89.03399999998592,
+        "thirst": 89.5407572722889,
+        "energy": 93.14399999999897,
+        "warmth": 31.839829375027527,
+        "safety": 90.27250313990955,
+        "social": 25.09629446108767
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109199,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.262269057331741
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 4.000896071348057
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109200,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 85.4565000000033,
+        "thirst": 48.063945146406574,
+        "energy": 93.31999999999896,
+        "warmth": 35.209681195532895,
+        "safety": 79.62042265494055,
+        "social": 36.29228641731679
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109197,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Talking with Nico"
+    },
+    {
+      "tick": 109320,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 74.16849999999879,
+        "thirst": 93.972479932862,
+        "energy": 94.98999999999903,
+        "warmth": 30.260776292897962,
+        "safety": 87.26016863311546,
+        "social": 72.4284744614401
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109318,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.1216865745580553
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.0169135131311973
+        }
+      ],
+      "activity": "Warming up by the fire"
+    },
+    {
+      "tick": 109320,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 85.43399999998579,
+        "thirst": 84.74075727228815,
+        "energy": 96.7439999999991,
+        "warmth": 38.386697168808944,
+        "safety": 93.66997535741496,
+        "social": 23.590789860016688
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109319,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.261585435543086
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 4.000048142876905
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109320,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 81.85650000000317,
+        "thirst": 43.26394514640668,
+        "energy": 92.08999999999858,
+        "warmth": 31.404482515517955,
+        "safety": 90.21313514483911,
+        "social": 52.870268460337684
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109317,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109440,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 70.56849999999865,
+        "thirst": 89.17247993286125,
+        "energy": 98.58999999999916,
+        "warmth": 22.858987329823012,
+        "safety": 91.58034541369626,
+        "social": 71.76403006788604
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109438,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.120515892136124
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.0156779604406196
+        }
+      ],
+      "activity": "Warming up by the fire"
+    },
+    {
+      "tick": 109440,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 81.83399999998565,
+        "thirst": 79.9407572722874,
+        "energy": 100,
+        "warmth": 35.310026893695614,
+        "safety": 91.77133428500531,
+        "social": 22.064285258945713
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109439,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.262002360902005
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 4.000565275139275
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109440,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 78.25650000000303,
+        "thirst": 38.46394514640678,
+        "energy": 95.68999999999872,
+        "warmth": 32.206431543644506,
+        "safety": 93.66471904142338,
+        "social": 52.06539068569981
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109437,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109560,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 66.96849999999851,
+        "thirst": 84.3724799328605,
+        "energy": 100,
+        "warmth": 16.599848598398648,
+        "safety": 92.93603372059258,
+        "social": 70.96308567433194
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109558,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.097917723610879
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.097917723610879
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109560,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 78.23399999998551,
+        "thirst": 75.14075727228665,
+        "energy": 100,
+        "warmth": 28.599503284532513,
+        "safety": 92.95606692455192,
+        "social": 20.544780657874735
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109559,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.261186925406899
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 3.9995538518871756
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109560,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 74.6565000000029,
+        "thirst": 33.66394514640688,
+        "energy": 97.04999999999862,
+        "warmth": 23.88263106781279,
+        "safety": 76.44416417309239,
+        "social": 51.096012911061926
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109557,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Drinking at the water"
+    },
+    {
+      "tick": 109680,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 63.36849999999838,
+        "thirst": 79.57247993285975,
+        "energy": 100,
+        "warmth": 15.263336203108542,
+        "safety": 93.90579868896914,
+        "social": 69.56014128077864
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109678,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.096709289497856
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.096709289497856
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109680,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 74.63399999998538,
+        "thirst": 70.3407572722859,
+        "energy": 100,
+        "warmth": 21.091541969047764,
+        "safety": 93.90757238623159,
+        "social": 19.039276056803754
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109679,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.260505733534732
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 3.9987089373564877
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109680,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 71.05650000000276,
+        "thirst": 96.06394514640618,
+        "energy": 95.95999999999826,
+        "warmth": 14.966558158143648,
+        "safety": 87.76016926043773,
+        "social": 49.59113513642392
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109677,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.732746647146423
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.72809381435996
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109800,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 59.76849999999824,
+        "thirst": 74.772479932859,
+        "energy": 100,
+        "warmth": 11.717867526422546,
+        "safety": 93.99165961631336,
+        "social": 68.15719688722534
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109798,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.095503558696917
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.095503558696917
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109800,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 71.03399999998524,
+        "thirst": 65.54075727228515,
+        "energy": 100,
+        "warmth": 14.54861418860598,
+        "safety": 93.99181665569581,
+        "social": 17.533771455732772
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109799,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.25982607447782
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 3.997865924049136
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109800,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 67.45650000000262,
+        "thirst": 91.26394514640543,
+        "energy": 99.5599999999984,
+        "warmth": 11.573723085760658,
+        "safety": 93.4475386601491,
+        "social": 48.36625736178575
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109797,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.731610932025917
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.726955160773686
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109920,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 56.168499999998104,
+        "thirst": 69.97247993285825,
+        "energy": 100,
+        "warmth": 8.807355638319516,
+        "safety": 93.99926156017067,
+        "social": 66.75425249367204
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 109918,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.0931002387180477
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.0931002387180477
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109920,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 67.4339999999851,
+        "thirst": 60.74075727228498,
+        "energy": 100,
+        "warmth": 10.182243037164003,
+        "safety": 93.99927546410355,
+        "social": 16.02826685466179
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 109919,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.258471372374545
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 3.996185622890865
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 109920,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 63.856500000002484,
+        "thirst": 86.46394514640468,
+        "energy": 100,
+        "warmth": 8.737345001999742,
+        "safety": 93.95108624820627,
+        "social": 47.337379587147716
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 109917,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.731610932025917
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.726955160773686
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110040,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 52.56849999999797,
+        "thirst": 65.1724799328575,
+        "energy": 100,
+        "warmth": 8.006895636644533,
+        "safety": 93.99993462010836,
+        "social": 65.35130810011874
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 110038,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1073",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.091902634245224
+        },
+        {
+          "key": "gather:1071",
+          "label": "Breaking stone for the shared smithy",
+          "util": 3.091902634245224
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110040,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 63.83399999998497,
+        "thirst": 55.94075727228508,
+        "energy": 100,
+        "warmth": 8.674675408234318,
+        "safety": 93.99993585113299,
+        "social": 14.522762253590809
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 110039,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1163",
+          "label": "Cutting stone for the shared bakery",
+          "util": 4.2577963203736555
+        },
+        {
+          "key": "gather:1059",
+          "label": "Breaking stone for the shared bakery",
+          "util": 3.995348323933223
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110040,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 60.25650000000235,
+        "thirst": 81.66394514640393,
+        "energy": 100,
+        "warmth": 7.972891625283483,
+        "safety": 93.99566928046914,
+        "social": 46.53250181250984
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 110037,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.730477753948896
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.725819050795059
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110160,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 48.96849999999783,
+        "thirst": 60.372479932857395,
+        "energy": 100,
+        "warmth": 9.95490649728628,
+        "safety": 93.9999942114035,
+        "social": 63.948363706565445
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 110158,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110160,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 60.23399999998483,
+        "thirst": 51.140757272285185,
+        "energy": 100,
+        "warmth": 10.279245656783473,
+        "safety": 93.99999432039579,
+        "social": 13.017257652519827
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 110159,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110160,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 56.65650000000221,
+        "thirst": 76.86394514640318,
+        "energy": 100,
+        "warmth": 9.938390824105408,
+        "safety": 93.99961656730538,
+        "social": 45.72762403787197
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 110157,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.729347125216119
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 4.724685496756661
+        }
+      ],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110280,
+      "person": "Ben",
+      "pack": {
+        "hoe": 1,
+        "seeds": 12,
+        "spear": 1,
+        "basket": 1,
+        "stone": 1,
+        "axe": 1,
+        "wood": 1,
+        "berries": 2
+      },
+      "weight": 14.5,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 45.368499999997695,
+        "thirst": 55.5724799328575,
+        "energy": 100,
+        "warmth": 14.719257227714605,
+        "safety": 93.99999948748999,
+        "social": 62.54541931301215
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 10267,
+          "type": "hut",
+          "seen": 110278,
+          "stock": {}
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1237,
+          "state": "tilled"
+        },
+        {
+          "id": 1280,
+          "state": "growing"
+        },
+        {
+          "id": 1539,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110280,
+      "person": "Petra",
+      "pack": {
+        "basket": 1,
+        "seeds": 26,
+        "saw": 1,
+        "axe": 1,
+        "spear": 1,
+        "hoe": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "weight": 15,
+      "cap": 18,
+      "stoneRoom": 1,
+      "needs": {
+        "hunger": 56.633999999984695,
+        "thirst": 46.34075727228529,
+        "energy": 100,
+        "warmth": 14.876788040804218,
+        "safety": 93.9999994971399,
+        "social": 11.511753051448846
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 1130,
+          "type": "lean_to",
+          "seen": 109094,
+          "stock": {}
+        },
+        {
+          "id": 2852,
+          "type": "hut",
+          "seen": 110279,
+          "stock": {
+            "grain": 10
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 4055,
+          "state": "growing"
+        },
+        {
+          "id": 4434,
+          "state": "growing"
+        },
+        {
+          "id": 8282,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [],
+      "activity": "Resting inside the hut"
+    },
+    {
+      "tick": 110280,
+      "person": "Ivy",
+      "pack": {
+        "seeds": 12,
+        "basket": 1,
+        "saw": 1,
+        "hoe": 1,
+        "grain": 3,
+        "berries": 2
+      },
+      "weight": 11,
+      "cap": 18,
+      "stoneRoom": 2,
+      "needs": {
+        "hunger": 53.056500000002075,
+        "thirst": 72.06394514640243,
+        "energy": 100,
+        "warmth": 14.71123560174462,
+        "safety": 93.99996605168491,
+        "social": 44.922746263234096
+      },
+      "activeHammer": true,
+      "rememberedHomes": [
+        {
+          "id": 7432,
+          "type": "hut",
+          "seen": 110277,
+          "stock": {
+            "berries": 3
+          }
+        }
+      ],
+      "rememberedPlots": [
+        {
+          "id": 1604,
+          "state": "growing"
+        },
+        {
+          "id": 9991,
+          "state": "growing"
+        },
+        {
+          "id": 10954,
+          "state": "growing"
+        },
+        {
+          "id": 19133,
+          "state": "growing"
+        },
+        {
+          "id": 19152,
+          "state": "growing"
+        }
+      ],
+      "materialOptions": [
+        {
+          "key": "gather:1064",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 22.060779123157772
+        },
+        {
+          "key": "gather:1067",
+          "label": "Breaking stone for my household’s smithy",
+          "util": 22.041048499725953
+        }
+      ],
+      "activity": "Resting inside the hut"
+    }
+  ],
+  "starts": [
+    {
+      "tick": 108032,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108075,
+      "person": "Petra",
+      "kind": "warm",
+      "label": "Warming up by the fire",
+      "goal": "to get warm (12/100)"
+    },
+    {
+      "tick": 108237,
+      "person": "Petra",
+      "kind": "eat",
+      "label": "Eating",
+      "goal": "to ease hunger (28/100)"
+    },
+    {
+      "tick": 108257,
+      "person": "Petra",
+      "kind": "attend",
+      "label": "At the market",
+      "goal": "to trade"
+    },
+    {
+      "tick": 108258,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108276,
+      "person": "Ivy",
+      "kind": "socialize",
+      "label": "Chat with Basil",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 108277,
+      "person": "Ivy",
+      "kind": "attend",
+      "label": "At the market",
+      "goal": "to trade"
+    },
+    {
+      "tick": 108292,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108389,
+      "person": "Ivy",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108552,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108637,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108739,
+      "person": "Ivy",
+      "kind": "socialize",
+      "label": "Chat with Nico",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 108740,
+      "person": "Ivy",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108812,
+      "person": "Ben",
+      "kind": "eat",
+      "label": "Eating",
+      "goal": "to ease hunger (33/100)"
+    },
+    {
+      "tick": 108842,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108880,
+      "person": "Ivy",
+      "kind": "socialize",
+      "label": "Chat with Nico",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 108881,
+      "person": "Ivy",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 108897,
+      "person": "Petra",
+      "kind": "drink",
+      "label": "Drinking at the water",
+      "goal": "to quench thirst (32/100)"
+    },
+    {
+      "tick": 108976,
+      "person": "Petra",
+      "kind": "gather",
+      "label": "Gathering wild grain",
+      "goal": "to ease hunger (30/100)"
+    },
+    {
+      "tick": 109032,
+      "person": "Ivy",
+      "kind": "socialize",
+      "label": "Chat with Nico",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109033,
+      "person": "Ivy",
+      "kind": "give",
+      "label": "Bringing berries to Nico",
+      "goal": "to look after Nico",
+      "items": {
+        "berries": 2
+      }
+    },
+    {
+      "tick": 109034,
+      "person": "Ivy",
+      "kind": "eat_store",
+      "label": "Eating at home",
+      "goal": "to ease hunger (46/100)"
+    },
+    {
+      "tick": 109054,
+      "person": "Petra",
+      "kind": "eat",
+      "label": "Eating",
+      "goal": "to ease hunger (27/100)"
+    },
+    {
+      "tick": 109060,
+      "person": "Ivy",
+      "kind": "socialize",
+      "label": "Chat with Thea",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109084,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109102,
+      "person": "Ben",
+      "kind": "drink",
+      "label": "Drinking at the water",
+      "goal": "to quench thirst (41/100)"
+    },
+    {
+      "tick": 109141,
+      "person": "Ivy",
+      "kind": "socialize",
+      "label": "Chat with Basil",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109146,
+      "person": "Ivy",
+      "kind": "socialize",
+      "label": "Chat with Nico",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109190,
+      "person": "Petra",
+      "kind": "socialize",
+      "label": "Chat with Kai",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109191,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109200,
+      "person": "Ben",
+      "kind": "visit",
+      "label": "Taking berries to Zia",
+      "goal": "to bring berries to Zia",
+      "items": {
+        "berries": 1
+      }
+    },
+    {
+      "tick": 109201,
+      "person": "Ben",
+      "kind": "warm",
+      "label": "Warming up by the fire",
+      "goal": "to get warm (41/100)"
+    },
+    {
+      "tick": 109236,
+      "person": "Ivy",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109337,
+      "person": "Petra",
+      "kind": "socialize",
+      "label": "Chat with Kai",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109338,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Staying at my hut",
+      "goal": "waiting for the light"
+    },
+    {
+      "tick": 109430,
+      "person": "Petra",
+      "kind": "socialize",
+      "label": "Chat with Kai",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109431,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Staying at my hut",
+      "goal": "waiting for the light"
+    },
+    {
+      "tick": 109506,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109510,
+      "person": "Petra",
+      "kind": "socialize",
+      "label": "Chat with Kai",
+      "goal": "to catch up and share news"
+    },
+    {
+      "tick": 109511,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109528,
+      "person": "Ivy",
+      "kind": "drink",
+      "label": "Drinking at the water",
+      "goal": "to quench thirst (35/100)"
+    },
+    {
+      "tick": 109589,
+      "person": "Ivy",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109771,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109786,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 109886,
+      "person": "Ivy",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 110031,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 110046,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 110146,
+      "person": "Ivy",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 110291,
+      "person": "Petra",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    },
+    {
+      "tick": 110306,
+      "person": "Ben",
+      "kind": "rest",
+      "label": "Sheltering at the hut",
+      "goal": "to wait out the weather"
+    }
+  ]
+}

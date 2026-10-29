@@ -1,9 +1,11 @@
 import { relocationPackingBlocker } from './relocation';
+import { spareSeed } from './seed_storage';
+import { runsRulesVersion } from './rulesversion';
 import { mayCollectMaterialStock } from './material_stock';
 import { creditProject, mayWorkProject } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
-import { LOAN_TERM, NUTRITION, SOURCE_SKILL, SKILL_MAX, WATER_VALUE, WORK } from './constants';
+import { LOAN_TERM, NUTRITION, SOURCE_SKILL, SKILL_MAX, WATER_VALUE, WORK, isHomeType } from './constants';
 import { notePractice } from './apprentice';
 import { riskOfHarm } from './life';
 import { onTheft } from './misdeeds';
@@ -504,7 +506,14 @@ registerHandler('deposit', {
     let partial = false;
     const e = world.byId.get(a.targetId)!;
     for (const k of Object.keys(want)) {
-      const n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
+      let n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
+      if (a.data.seedStash && world.settings.dynamics === 'rich' && runsRulesVersion(world,58)) {
+        if (e.ent !== 'building' || !isHomeType(e.type) || e.hhId !== a.data.seedOwner || p.hhId !== a.data.seedOwner) return 'fail:the seed store is no longer our home';
+        if (k !== 'seeds') return 'fail:only spare seed belongs in this trip';
+        n = Math.min(n, spareSeed(p));
+        if (n === 0) return 'fail:the seed is now needed for planting or promises';
+        if (n < want[k]) partial = true;
+      }
       if (n <= 0) continue;
       if (e.ent === 'building' && !mayDeposit(e, k as ItemKind)) {
         partial = true;
