@@ -14,7 +14,7 @@ import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import { isFacilityType } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { findBuildSpot } from './buildings';
-import { invRoom, roomFor } from './economy';
+import { foodUnits, invRoom, roomFor } from './economy';
 import { dayFraction } from './environment';
 import { findPlotSpot } from './farming';
 import { delBelief, estimatedAmount, missingMaterials, noteFailure, recentFailure } from './knowledge';
@@ -30,7 +30,9 @@ import { affinityOf } from './relations';
 import { hashUnit } from './rng';
 import { hauntsFor, leisureOn, pickHaunt } from './leisure';
 import { leaveHeaviestOption } from './leave_heaviest';
-import type { Belief, BeliefKind, BuildingType, Commitment, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
+import type { Belief, BeliefKind, BuildingType, Commitment, FoodKind, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
+import { hasFoodFetch } from './food_help';
+import { isFood } from './social';
 import { T } from './types';
 
 import { payNudge } from './learning';
@@ -1357,16 +1359,19 @@ function optCare(ctx: Ctx): void {
     }
     // someone who is asleep or already holding food does not need it pressed on them
     if (seenNow && seenNow.asleep && d.needs.hunger > 18 && d.needs.thirst > 18) continue;
-    if (seenNow && !thirsty && seenNow.carrying.some((k) => k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain')) continue;
+    // (rules 45: any food they carry counts, bread and meat included; before 45 only the four wild kinds were looked for)
+    if (seenNow && !thirsty && seenNow.carrying.some((k) => (runsRulesVersion(world, 45) ? isFood(k) : k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain'))) continue;
     if ((d.cooldowns.fedUntil ?? 0) > world.tick) continue;
     const px = seenNow ? seenNow.x : wh!.x;
     const py = seenNow ? seenNow.y : wh!.y;
     const e = eta(ctx, px, py);
     const give: Items = {};
     let what = '';
-    if (hungry && ctx.food > 0) {
+    if (hungry && (runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food) > 0) {
       // give what fits best
-      const k = (['berries', 'fruit', 'grain', 'fish'] as ItemKind[]).find((x) => (p.inv[x] ?? 0) > 0);
+      // rules 45: a carer holding only bread or meat is no longer empty-handed towards a hungry dependant
+      const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat'] : ['berries', 'fruit', 'grain', 'fish'];
+      const k = kinds.find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
         give[k] = Math.min(p.inv[k] ?? 0, d.needs.hunger < 25 ? 3 : 2);
         what = k;
@@ -1522,7 +1527,8 @@ function optCommitments(ctx: Ctx): void {
           // handled by water run with a bump below
           optPromisedWater(ctx, remaining - have, to.name);
         } else {
-          foragePlans(ctx, { urgency: 54, mode: 'stock', baseLabel: `promised ${to.name} food` });
+          // rules 45: a promise names the food kind the helper knows a source of, so only that kind is foraged for it
+          foragePlans(ctx, { urgency: 54, mode: 'stock', baseLabel: `promised ${to.name} food`, only: hasFoodFetch(world) && isFood(c.item) ? (c.item as FoodKind) : undefined });
         }
         if (ctx.options.length === before) markBlocked(ctx, c, `no ${c.item} to be had from anywhere they know of`);
       }

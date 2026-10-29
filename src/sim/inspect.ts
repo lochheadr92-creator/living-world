@@ -542,9 +542,9 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
       progress: quantified
         ? `${r.delivered ?? c!.delivered ?? 0} of ${c!.amount} ${c!.item} brought${c!.amount < r.amount ? ` (${r.amount} asked for)` : ''}`
         : r.delivered
-          ? `${r.delivered} of ${r.amount} ${r.item} brought`
+          ? `${r.delivered} of ${r.amount}${r.item ? ` ${r.item}` : ''} brought`
           : r.offered !== undefined && r.offered < r.amount
-            ? `${r.offered} of ${r.amount} ${r.item} agreed to`
+            ? `${r.offered} of ${r.amount}${r.item ? ` ${r.item}` : ''} agreed to`
             : '',
     });
   }

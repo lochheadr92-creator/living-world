@@ -22,7 +22,7 @@ import { outstandingForPlan, projectAsksOn } from './intent';
 import { attendOptions } from './occasions';
 import { wantsAmends } from './grievance';
 import { mealOptions } from './meals';
-import { welfareOptions } from './welfare';
+import { welfareOptions, seekCarerOptions } from './welfare';
 import { toolsHeldBy } from './toolreg';
 import type { ConvData } from './social';
 import { hashUnit } from './rng';
@@ -629,6 +629,7 @@ export function socialOptions(ctx: Ctx): void {
   attendOptions(ctx);
   aloneOptions(ctx);
   welfareOptions(ctx);
+  seekCarerOptions(ctx);
   optRequest(ctx);
   optAskInfo(ctx);
   optWarn(ctx);

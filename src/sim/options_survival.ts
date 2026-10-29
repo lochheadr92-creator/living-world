@@ -7,7 +7,8 @@ import { hasHabitation, indoorHome } from './habitation';
 import { payNudge } from './learning';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
-import { invRoom } from './economy';
+import { foodUnits, invRoom } from './economy';
+import { runsRulesVersion } from './rulesversion';
 import { delBelief, estimatedAmount, recentFailure } from './knowledge';
 import { FOOD_VALUE, SOURCE_VERB } from './labels';
 import { hashUnit } from './rng';
@@ -28,7 +29,8 @@ import {
   traitMods,
 } from './optutil';
 import type { Ctx } from './optutil';
-import type { Belief, SourceType } from './types';
+import type { Belief, FoodKind, SourceType } from './types';
+import { SOURCE_FOOD } from './food_help';
 import { WORK } from './constants';
 
 import { hyp } from './util';
@@ -142,10 +144,12 @@ function optFlee(ctx: Ctx): void {
 }
 
 // ───────────────────────── eating ─────────────────────────
-interface ForageOpts {
+export interface ForageOpts {
   urgency: number;
   mode: 'eat' | 'stock';
   baseLabel: string;
+  /** only sources yielding this kind (a promise to bring a named food, rules 45); absent means any food source */
+  only?: FoodKind;
 }
 
 export function foragePlans(ctx: Ctx, o: ForageOpts): void {
@@ -153,6 +157,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
   const tm = traitMods(p);
   const cands: { b: Belief; est: number; e: number; val: number; score: number }[] = [];
   for (const b of beliefsByKind(p, FOOD_KINDS as unknown as Belief['kind'][])) {
+    if (o.only && SOURCE_FOOD[b.kind] !== o.only) continue;
     const u = sourceUsable(ctx, b, 1);
     if (!u.ok) {
       addBlocked(ctx, 'gather', `${SOURCE_VERB[b.kind as SourceType]}`, b.id, u.why ?? 'unusable', 'food');
@@ -234,8 +239,12 @@ function optEat(ctx: Ctx): void {
   const { world, p } = ctx;
   const dr = ctx.drives.hunger;
   if (dr <= 0) return;
-  const keep = p.needs.hunger > 20 ? Math.min(ctx.food, ctx.dependents.length * 2) : 0;
-  if (ctx.food - keep > 0) {
+  // Rules 45: everything the person could eat counts here, meat and bread included. `ctx.food` counts only the four wild
+  // kinds (the ones a trip home would put down, see provision.ts), so before 45 a hungry person carrying only meat or bread
+  // was never offered a meal from their own pack, although the meal itself (act_resource.ts, pickFood) would have eaten it.
+  const food = runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food;
+  const keep = p.needs.hunger > 20 ? Math.min(food, ctx.dependents.length * 2) : 0;
+  if (food - keep > 0) {
     const sc = new Scorer().add('hungry', dr).add('food in pack', 4);
     addOption(ctx, {
       kind: 'eat',
@@ -250,7 +259,7 @@ function optEat(ctx: Ctx): void {
       tag: 'food',
       // unparameterised this eats until satisfied or out of food; a controller may ask for fewer portions or a lower target
       bounds: [
-        { kind: 'count', field: 'portions', min: 1, max: Math.max(1, Math.floor(ctx.food - keep)), note: 'how many portions to eat (default: until satisfied)' },
+        { kind: 'count', field: 'portions', min: 1, max: Math.max(1, Math.floor(food - keep)), note: 'how many portions to eat (default: until satisfied)' },
         { kind: 'until', field: 'untilHunger', min: Math.min(100, Math.ceil(p.needs.hunger) + 1), max: 100, note: 'stop once hunger has risen to this' },
       ],
       make: () =>
@@ -266,7 +275,7 @@ function optEat(ctx: Ctx): void {
           data: { keep },
         }),
     });
-  } else if (ctx.food > 0) {
+  } else if (food > 0) {
     addBlocked(ctx, 'eat', 'Eat carried food', 0, 'saving the food for dependents', 'food');
   }
 

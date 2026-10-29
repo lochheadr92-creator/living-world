@@ -4,6 +4,7 @@ import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civ
 import { rememberRequest } from './social_memory';
 import { recordProjectResponse, projectAt, canInvite, organiserExperience } from './townships';
 import { receivedCivicBenefit } from './civic_benefit';
+import { fetchableFood, hasFoodFetch } from './food_help';
 import { hearDemand } from './local_demand';
 import { outstandingForPlan, planShortfall, plannedFor } from './intent';
 import { isRich, think } from './mood';
@@ -440,9 +441,12 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
     item = 'seeds';
   }
   const w = willingness(world, B, A, sev);
-  if (!item) return { kind: 'decline', reason: dislike ? 'disliked' : 'no_item' };
-  const sur = surplusOf(world, B, item);
-  if (sur >= 1) {
+  // Rules 45 (food_help.ts): with no food to spare in the pack, which kind could B go and fetch from a source they know?
+  // Null below 45, when the switch is off, or when they know of none - and then everything below is exactly as it was.
+  const fetchKind = (req.kind === 'food' || req.kind === 'care') && (!item || surplusOf(world, B, item) < 1) ? fetchableFood(world, B) : null;
+  if (!item && !fetchKind) return { kind: 'decline', reason: dislike ? 'disliked' : 'no_item' };
+  const sur = item ? surplusOf(world, B, item) : 0;
+  if (item && sur >= 1) {
     if (w >= 0.6) {
       const want = req.kind === 'food' || req.kind === 'care' ? Math.min(sur, Math.max(1, Math.ceil(sev * 3))) : Math.min(sur, req.amount);
       const n = Math.max(1, want);
@@ -452,9 +456,14 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
     return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(world, B) > 35 ? 'own_need' : 'unwilling' };
   }
   // nothing to hand over right now: could B fetch some?
-  if (w >= 0.66 && personalDriveMax(world, B) < 38 && B.commitments.filter((c) => c.status === 'active').length < 2 && canObtain(world, B, item) && (item === 'wood' || item === 'stone' || item === 'water' || item === 'clay' || item === 'ore' || ((item === 'planks' || item === 'bricks' || item === 'handles') && B.commitments.length < 3) || isFood(item))) {
+  if (fetchKind) {
+    // Rules 45: the promise names the kind B knows a source of, so the foraging and the delivery bring that kind and no other
+    if (w >= 0.66 && personalDriveMax(world, B) < 38 && B.commitments.filter((c) => c.status === 'active').length < 2) return { kind: 'promise', item: fetchKind, n: Math.max(1, req.amount) };
+  } else if (item && !(hasFoodFetch(world) && isFood(item)) && w >= 0.66 && personalDriveMax(world, B) < 38 && B.commitments.filter((c) => c.status === 'active').length < 2 && canObtain(world, B, item) && (item === 'wood' || item === 'stone' || item === 'water' || item === 'clay' || item === 'ore' || ((item === 'planks' || item === 'bricks' || item === 'handles') && B.commitments.length < 3) || isFood(item))) {
+    // (below 45 a food promise still falls back to "berries" here, as recorded; at 45 and later only a known kind is promised)
     return { kind: 'promise', item: isFood(item) ? (B.inv[item] ? item : 'berries') : item, n: Math.max(1, req.amount) };
   }
+  if (!item) return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(world, B) > 35 ? 'own_need' : 'unwilling' };
   const have = B.inv[item] ?? 0;
   if (have > 0) {
     // They have some but none spare. In a rich world which claim is on it is known exactly, so the answer says that rather than

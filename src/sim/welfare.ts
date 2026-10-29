@@ -3,7 +3,9 @@ import { watchTick } from './responsibilities';
 import { faceToward, newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { DAY, workRules } from './constants';
-import { carryCap, isDependent, stageOf } from './people';
+import { carryCap, isAdultWorker, isDependent, stageOf } from './people';
+import { isRich } from './mood';
+import { runsRulesVersion } from './rulesversion';
 import { addEvent, addLog } from './events';
 import { transfer } from './economy';
 import { Scorer, addBlocked, addOption, eta, pen, traitMods, whereIs } from './optutil';
@@ -191,6 +193,89 @@ export function welfareOptions(ctx: Ctx): void {
   }
 }
 
+/**
+ * Rules 45: a dependant who is hungry or thirsty, sees no good way to see to it alone and has no household adult in sight,
+ * may go to where they believe one is - in sight, last seen lately, at home, or last seen long ago (whereIs), their own
+ * knowledge and nothing else. Arriving is the whole of it: once the adult is in view, the ordinary ask (options_social.ts
+ * optRequest, a `care` request) and the adult's ordinary care option (options_work.ts optCare) take over, and both can still
+ * say no. Going to the wrong place fails as every visit does ("was not where I expected"), forgets the stale whereabouts and
+ * waits before looking again. Nothing here feeds anyone, moves food, or reads the adult's pack: the dependant does not know
+ * whether they carry anything, only that they are the people who look after them.
+ */
+export const SEEK_RETRY = 600;
+let seekCarer = true;
+/** Lab switch `rich-no-seek-carer`: removes only the dependant's step of going to find a household adult; no effect below rules 45. */
+export function setSeekCarer(on: boolean): void {
+  seekCarer = on;
+}
+export const seekCarerOn = (): boolean => seekCarer;
+export function seekCarerOptions(ctx: Ctx): void {
+  const { world, p } = ctx;
+  if (!seekCarer || !isRich(world) || !runsRulesVersion(world, 45) || !workRules(world.settings.scene)) return;
+  if (ctx.stage !== 'child' && !isDependent(world, p)) return;
+  const need: 'hunger' | 'thirst' | null = ctx.drives.hunger >= 40 ? 'hunger' : ctx.drives.thirst >= 40 ? 'thirst' : null;
+  if (!need) return;
+  const dr = ctx.drives[need];
+  // only when there is no good way to see to it alone: the same rule the ask for food uses (options_social.ts)
+  let self = 0;
+  for (const o of ctx.options) if (o.need === need && o.util > self && (o.tag === 'food' || o.tag === 'water')) self = o.util;
+  if (self > dr * 0.62) return;
+  const adults = ctx.members.filter((m) => m.id !== p.id && m.alive && isAdultWorker(world, m) && !isDependent(world, m));
+  if (!adults.length) return;
+  if (adults.some((m) => ctx.seenPersons.some((s) => s.id === m.id))) return; // in sight already: asking and caring take it from here
+  let best: { m: Person; loc: { x: number; y: number; how: string }; e: number } | null = null;
+  for (const m of adults) {
+    if ((p.cooldowns['seek' + m.id] ?? 0) > world.tick) {
+      addBlocked(ctx, 'visit', `Go and find ${m.name}`, m.id, 'looked for them lately and they were not there', 'care');
+      continue;
+    }
+    const loc = whereIs(ctx, m.id, 0);
+    if (!loc) {
+      addBlocked(ctx, 'visit', `Go and find ${m.name}`, m.id, 'does not know where they are', 'care');
+      continue;
+    }
+    const e = eta(ctx, loc.x, loc.y);
+    if (!best || e < best.e) best = { m, loc, e };
+  }
+  if (!best) return;
+  const { m, loc, e } = best;
+  const sc = new Scorer()
+    .add(need === 'hunger' ? 'hungry, and nothing to eat in reach' : 'thirsty, and no water in reach', dr * 0.55)
+    .add(`${m.name} would see to me (${loc.how})`, 6)
+    .add('walking', -pen(e));
+  if (sc.total < 8) return;
+  const goal = `to find ${m.name}, who can see to me`;
+  addOption(ctx, {
+    kind: 'visit',
+    label: `Go and find ${m.name}`,
+    goal,
+    need,
+    util: sc.total,
+    parts: sc.parts,
+    eta: e + 12,
+    key: `seek:${m.id}`,
+    targetId: m.id,
+    tag: 'care',
+    make: () =>
+      newActivity(world, p, {
+        kind: 'visit',
+        label: `Going to find ${m.name}`,
+        goal,
+        need,
+        targetId: m.id,
+        targetType: 'person',
+        tx: loc.x,
+        ty: loc.y,
+        spotX: loc.x,
+        spotY: loc.y,
+        utility: sc.total,
+        minCommit: 60,
+        maxTicks: 900,
+        data: { seek: true, about: m.id, items: {}, sticky: true },
+      }),
+  });
+}
+
 registerHandler('visit', {
   availability: 0.5,
   pose: () => 'stand',
@@ -209,6 +294,7 @@ registerHandler('visit', {
         if (c.kind === 'missing') p.concerns = p.concerns.filter((x) => x !== c);
       }
       p.cooldowns['check' + t.id] = world.tick + Math.round(CHECK_COOLDOWN * 0.5);
+      if (a.data.seek) p.cooldowns['seek' + t.id] = world.tick + SEEK_RETRY;
       return `${t.name} was not where I expected`;
     }
     a.tx = t.x;
@@ -222,6 +308,13 @@ registerHandler('visit', {
     if (a.data.watch) return watchTick(world, p, a, t);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
+    // rules 45: a dependant who came looking for this adult has found them; what follows is the ordinary ask and care
+    if (a.data.seek) {
+      addLog(world, p, 'social', `Found ${t.name}.`);
+      a.data.outcome = 'found';
+      a.cycle = 1;
+      return 'done';
+    }
     // come to see the bereaved: being there is the visit (rich only: the concern is never raised elsewhere)
     if (a.data.concern === 'bereaved') {
       onLookedInOnBereaved(world, p, t);

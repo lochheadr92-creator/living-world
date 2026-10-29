@@ -215,3 +215,14 @@ Use the integration checkout and a fresh evidence directory for each invocation.
 New worlds use 44. Existing saves do not receive reassigned skills or erased knowledge.
 Current held-technique variation concerns charcoal firing; all eleven proficiency
 skills vary. Long-run balance and population-level benefit remain unmeasured.
+
+## Rules 45 food help
+
+Contract and root causes: [FOOD_HELP.md](FOOD_HELP.md). Register: [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md).
+
+- Contracts: `npx vitest run tests/food_help.test.ts tests/v44_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/food_help_observe.ts food_help_evidence/ordinary-30-meadow meadow 30`.
+  Seeds meadow/river/forest, Normal profile, immigration off unless `arrivals`, at most 60 days and 240 seconds per
+  seed. Writes report, food/care requests with outcomes, promised and on-the-spot deliveries, death-moment snapshots
+  (pack, home store, household members' spare food and distance), hungry-with-food samples, provenance and final save.
+  The run refuses to write if any source file changed while it ran.
