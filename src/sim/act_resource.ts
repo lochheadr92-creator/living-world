@@ -36,7 +36,7 @@ import { fellTree } from './sources';
 import { distToFootprint, isWater } from './registry';
 import { isToolItem } from './toolreg';
 import { creditHauled, creditStocked } from './intent';
-import { isFoodKind } from './provision';
+import { hasWinterReserve, isFoodKind } from './provision';
 import { eatsAtTheStore } from './tableeating';
 import type { Activity, FoodKind, Items, ItemKind, Person, Source, ToolKind, World } from './types';
 import { clamp, hyp } from './util';
@@ -227,7 +227,15 @@ function eatTick(world: World, p: Person, a: Activity): WorkResult {
   const table = a.data.table ? tableItems(world, a) : null;
   if (a.data.table && !table) return a.cycle > 0 ? 'done' : 'fail:the store is gone';
   const from = table ?? p.inv;
+  // rules 46: a bite taken at the granary's bins is a bite out of the household's share (or the ration), and stops at it
+  const store = a.data.table ? world.byId.get(a.targetId) : undefined;
+  const bins = !!store && store.ent === 'building' && store.type === 'granary' && hasWinterReserve(world);
+  if (bins && ((a.data.ration as number) ?? 0) < 1) return a.cycle > 0 ? 'done' : 'fail:nothing of ours left in the bins';
   const eaten = consume(world, from, k, 1, 'eaten');
+  if (bins && eaten > 0) {
+    noteWithdraw(world, store, p, k, eaten);
+    a.data.ration = ((a.data.ration as number) ?? 0) - eaten;
+  }
   if (a.data.table && eaten === 0 && a.cycle === 0) return 'fail:somebody else had finished the food';
   if (eaten > 0) {
     p.needs.hunger = clamp(p.needs.hunger + NUTRITION[k], 0, 100);
@@ -275,12 +283,24 @@ registerHandler('eat_store', {
     observe(world, p, e);
     const items = e.ent === 'building' ? e.store.items : e.items;
     let want = Math.ceil((92 - p.needs.hunger) / 18);
+    // rules 46: at a granary the meal is bounded by the household's share or the emergency ration (facilities.ts), checked unit by
+    // unit against the bins as they are now, and each unit taken is booked against the share
+    const bins = e.ent === 'building' && e.type === 'granary' && hasWinterReserve(world);
+    // the allowance is asked once per kind, for the whole meal, and spent unit by unit: the emergency ration is a ration, not a
+    // right renewed with every bite
+    const budget: Partial<Record<ItemKind, number>> = {};
+    const allowed = (k: ItemKind): number => (budget[k] ??= bins && e.ent === 'building' ? withdrawAllowance(world, e, p, k, want) : want);
     let tookAny = false;
     for (let guard = 0; guard < 12 && want > 0; guard++) {
       const k = pickFood(items, p.needs.hunger + (a.cycle * 14));
       if (!k) break;
+      if (bins && allowed(k) < 1) break;
       const got = transfer(world, items, p.inv, carryCap(world, p), k, 1, e.ent === 'building' ? 'building:' + e.id : 'pile:' + e.id, 'person:' + p.id, 'eat from store');
       if (!got) break;
+      if (bins) {
+        noteWithdraw(world, e, p, k, got);
+        budget[k] = (budget[k] ?? 0) - got;
+      }
       tookAny = true;
       want--;
       a.cycle++;
@@ -289,11 +309,12 @@ registerHandler('eat_store', {
       // Version 9: nothing could be moved into the pack. If that is because the pack is full and the store DOES hold food, the
       // meal is eaten at the store (tableeating.ts); the store is not written off, because it is not empty.
       const k = eatsAtTheStore(world) ? pickFood(items, p.needs.hunger) : null;
-      if (k) {
+      if (k && (!bins || allowed(k) >= 1)) {
         a.data.table = true;
         a.data.food = k;
         a.duration = WORK.eat;
         a.data.keep = 0;
+        if (bins) a.data.ration = allowed(k); // the meal at the bins stops at the ration
         return;
       }
       noteFailure(world, p, a.targetId, 'no food there');
@@ -480,7 +501,7 @@ registerHandler('deposit', {
         if (e.ent === 'building') {
           noteDeposit(world, e, p, k as ItemKind, m);
           // a food reserve is credited where the food actually moves, not from the store looking full afterwards
-          if (isFoodKind(k as ItemKind)) creditStocked(p, e.id, m);
+          if (isFoodKind(k as ItemKind)) creditStocked(p, e.id, m, e.ent === 'building' && e.type === 'granary' && hasWinterReserve(world));
           if (a.data.destSite) creditContribution(p, a.data.destSite as number, 12 * m);
         }
         if (e.ent === 'site' && e.contrib) e.contrib[p.hhId] = (e.contrib[p.hhId] ?? 0) + m;

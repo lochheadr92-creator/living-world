@@ -40,6 +40,9 @@ import {
   notePrepStored,
   preparationWanted,
   preparesFood,
+  hasWinterReserve,
+  knownGranary,
+  reserveHeld,
 } from './provision';
 import type { Ctx, Option } from './optutil';
 import { MAX_INTENTIONS } from './types';
@@ -524,17 +527,26 @@ function repairStep(ctx: Ctx, i: Intention): Step {
  * claimed only once it is in the store.
  */
 function stockStep(ctx: Ctx, i: Intention): Step {
-  const { p } = ctx;
+  const { world, p } = ctx;
   const home = homeStoreBelief(p);
   if (!home) return { kind: 'none', target: 0, item: null, step: 'find somewhere of their own to put food by', key: null, blocked: 'no home of their own that they know of' };
   const want = i.reserve ?? 0;
-  const short = Math.max(0, want - foodInBelief(home));
+  const winter = hasWinterReserve(world) && i.cue === 'season';
+  const short = Math.max(0, want - (winter ? reserveHeld(world, p, home) : foodInBelief(home)));
   if (short <= 0) return { kind: 'none', target: home.id, item: null, step: 'the store has what it needs', key: null, blocked: '' };
+  // rules 46: grain for the winter goes to the granary's bins when the person knows one, where it keeps; everything else, and
+  // every plan below 46 or from the hardship cue, goes home as before
+  const g = winter ? knownGranary(world, p) : null;
+  if (g && (p.inv.grain ?? 0) >= GRANARY_TRIP) {
+    return { kind: 'store', target: g.id, item: 'grain', step: `take the grain to the granary (${short} more to put by)`, key: `bring:${g.id}:grain`, blocked: '' };
+  }
   if (foodToStore(p) >= CARRY_TO_STORE) {
     return { kind: 'store', target: home.id, item: null, step: `take the food home (${short} more to put by)`, key: `deposit:${home.id}:food`, blocked: '' };
   }
   return { kind: 'forage', target: 0, item: null, step: `gather food to put by (${short} more)`, key: null, blocked: '' };
 }
+/** carrying this much grain, a winter reserve goes to the granary rather than waiting for a full load */
+export const GRANARY_TRIP = 3;
 
 /**
  * Has a food reserve come to something? Judged on the store as the person believes it - refreshed every time they are there,
@@ -552,7 +564,7 @@ function stockOutcome(world: World, p: Person, i: Intention): { status: 'done' |
   const home = homeStoreBelief(p);
   if (!home) return { status: 'dropped', reason: 'there is no home of theirs left to put anything by in' };
   const want = i.reserve ?? 0;
-  const inStore = foodInBelief(home);
+  const inStore = hasWinterReserve(world) && i.cue === 'season' ? reserveHeld(world, p, home) : foodInBelief(home);
   if (inStore >= want && i.worked > 0) return { status: 'done', reason: `put ${units(i.worked)} of food by; the store holds ${inStore}` };
   if (inStore >= want) return { status: 'dropped', reason: `the store came to hold ${inStore} without their doing` };
   if (world.tick > i.until) {
@@ -568,10 +580,12 @@ function stockOutcome(world: World, p: Person, i: Intention): { status: 'done' |
  * (act_resource.ts, the deposit handler, as each kind transfers). Without this a plan could call itself finished because the
  * store happens to be full - which is also true when somebody else filled it.
  */
-export function creditStocked(p: Person, buildingId: number, units: number): void {
+export function creditStocked(p: Person, buildingId: number, units: number, granary = false): void {
   if (units <= 0 || !buildingId || !p.intentions.length) return;
   for (const i of p.intentions) {
-    if (i.status !== 'active' || i.kind !== 'stock' || i.aboutId !== buildingId) continue;
+    if (i.status !== 'active' || i.kind !== 'stock') continue;
+    // the plan's own store, or (rules 46, the caller says so) the granary a season plan sends its grain to
+    if (i.aboutId !== buildingId && !(granary && i.cue === 'season')) continue;
     i.worked += units;
     notePrepStored(units);
   }

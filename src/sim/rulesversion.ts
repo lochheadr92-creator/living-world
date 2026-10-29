@@ -92,10 +92,11 @@ import type { Settings, World } from './types';
 // Version 43: repeated personally heard material demand informs feasible trade choices.
 // Version 44: varied starting skill backgrounds and non-universal adult technique knowledge.
 // Version 45: an empty-handed food helper may promise the food kind they personally know a source of (src/sim/food_help.ts).
-export const CURRENT_RULES_VERSION = 45;
+// Version 46: a winter reserve of two days' eating put by in what keeps, and the granary's bins feed the households that filled them (src/sim/provision.ts).
+export const CURRENT_RULES_VERSION = 46;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

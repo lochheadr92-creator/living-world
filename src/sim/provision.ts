@@ -75,6 +75,77 @@ export const RESERVE_CAP = 12;
 /** how many days before winter sets in the seasonal cue opens */
 export const PREPARE_DAYS = 2;
 
+// ───────────────────────── the winter reserve (rules version 46) ─────────────────────────
+//
+// What the ordinary rules-45 worlds showed (winter_reserve_evidence/ordinary-30-*): about half of everything put into a home
+// store spoiled before anyone ate it (berries were ~60 % of the loss), the season plan's one-day cushion was reached in about
+// half the plans, and the granaries that got built held nothing because nobody could eat from one. So the bounded change is
+// not a bigger pile of the same food: it is (1) a season target of two days' eating rather than one, still bounded by the
+// store's room, with a day more notice; (2) a season plan that puts by what KEEPS - grain, when the person knows a wild grain
+// source - before any other kind; (3) the granary connected to eating, within the household's own share or the emergency
+// ration facilities.ts already allows. The hardship cue, its target and everything below 46 are unchanged.
+export const WINTER_RESERVE_FROM_VERSION = 46;
+/** the season target: this many days' eating for the household, never more than SEASON_CAP or the store's room */
+export const SEASON_RESERVE_DAYS = 2;
+export const SEASON_CAP = 20;
+/** the pre-winter window at 46 and later: one day more notice for the larger target */
+export const PREPARE_DAYS_WINTER_RESERVE = 3;
+let winterReserve = true;
+/** Lab switch `rich-no-winter-reserve`: season target, window, durable preference and granary eating back to rules 45; no effect below 46. */
+export function setWinterReserve(on: boolean): void {
+  winterReserve = on;
+}
+export const winterReserveOn = (): boolean => winterReserve;
+export const hasWinterReserve = (world: World): boolean => winterReserve && preparesFood(world) && runsRulesVersion(world, WINTER_RESERVE_FROM_VERSION);
+/** Is this person carrying out a season-cue reserve plan right now? Then what they gather to put by should be what keeps. */
+export function durableReserve(world: World, p: Person): boolean {
+  return hasWinterReserve(world) && p.intentions.some((i) => i.status === 'active' && i.kind === 'stock' && i.cue === 'season');
+}
+
+/**
+ * A granary this person knows and may use (communal, their own household's, or one they helped raise), as a belief. The bins
+ * keep grain at a fifth of the ordinary spoilage when tended (constants.ts GRANARY_SPOIL), which is what makes them worth a
+ * walk with a winter reserve. Null below 46.
+ */
+export function knownGranary(world: World, p: Person): Belief | null {
+  if (!hasWinterReserve(world)) return null;
+  let best: Belief | null = null;
+  let bestD = Infinity;
+  for (const b of beliefsByKind(p, ['building'])) {
+    if (b.btype !== 'granary') continue;
+    const real = world.byId.get(b.id);
+    const mine = b.hh === 0 || b.hh === p.hhId || (real && real.ent === 'building' && (real.ops?.builders[p.hhId] ?? 0) >= 0.2);
+    if (!mine) continue;
+    const d = Math.hypot(b.x - p.x, b.y - p.y);
+    if (d < bestD) {
+      bestD = d;
+      best = b;
+    }
+  }
+  return best;
+}
+
+/**
+ * What the household holds in the granary's bins, by its own books: `ops.shares` is the record of what each household put in
+ * and has not taken out (facilities.ts), so reading one's own entry is reading one's own ledger, not the bins of others.
+ * Zero below 46, with no granary known, or with no share.
+ */
+export function granaryShare(world: World, p: Person): number {
+  const g = knownGranary(world, p);
+  const real = g ? world.byId.get(g.id) : undefined;
+  if (!real || real.ent !== 'building' || !real.ops) return 0;
+  const sh = real.ops.shares[p.hhId];
+  if (!sh) return 0;
+  let n = 0;
+  for (const k of FOODS) n += sh[k] ?? 0;
+  return n;
+}
+
+/** The reserve as the person counts it: the home store as they remember it, plus (rules 46) their household's granary share. */
+export function reserveHeld(world: World, p: Person, home: Belief): number {
+  return foodInBelief(home) + granaryShare(world, p);
+}
+
 /** the household can see it is short: its visible food is under this fraction of a day's eating for its members */
 export const LOW_FOOD_DAYS = 0.5;
 
@@ -172,7 +243,7 @@ export function ticksUntilWinter(world: World): number {
 /** Is it the window in which winter is near enough to prepare for? */
 export const inPreWinter = (world: World): boolean => {
   const left = ticksUntilWinter(world);
-  return left > 0 && left <= PREPARE_DAYS * DAY;
+  return left > 0 && left <= (hasWinterReserve(world) ? PREPARE_DAYS_WINTER_RESERVE : PREPARE_DAYS) * DAY;
 };
 
 /** Did this person go hungry within the last day, by their own record? mood.ts writes this thought when hunger passes critical. */
@@ -211,16 +282,21 @@ export function preparationWanted(ctx: Ctx): PrepWant | null {
   if (!home) return null;
 
   const members = Math.max(1, ctx.members.length);
-  const inStore = foodInBelief(home);
+  // rules 46: the household's granary share is part of what it has put by; below 46 the home store alone, as before
+  const inStore = hasWinterReserve(world) ? reserveHeld(world, p, home) : foodInBelief(home);
   const target = Math.min(DAY_FOOD * RESERVE_DAYS * members, RESERVE_CAP, inStore + roomInBelief(home));
   const short = target - inStore;
-  if (short < MIN_SHORTFALL) return null;
+  // rules 46: the season asks for more than the one-day cushion, still bounded by the room the store has - unless a granary is
+  // known, whose bins have room enough; below 46 (and with the switch off) the season target is the cushion, exactly as before
+  const seasonTarget = hasWinterReserve(world) ? Math.min(DAY_FOOD * SEASON_RESERVE_DAYS * members, SEASON_CAP, knownGranary(world, p) ? Infinity : inStore + roomInBelief(home)) : target;
+  const seasonShort = seasonTarget - inStore;
+  if (short < MIN_SHORTFALL && seasonShort < MIN_SHORTFALL) return null;
 
   // hardship first: a household that can see it is short is reacting to that, whatever the date is
   const carried = foodCarried(p);
   const low = inStore + carried < DAY_FOOD * members * LOW_FOOD_DAYS;
   const hungry = wentHungryRecently(world, p);
-  if (low || hungry) {
+  if ((low || hungry) && short >= MIN_SHORTFALL) {
     const why = hungry
       ? low
         ? 'went hungry lately and there is next to nothing at home'
@@ -233,10 +309,10 @@ export function preparationWanted(ctx: Ctx): PrepWant | null {
 
   // otherwise the season, and only when there is enough of the window left to do anything in
   const left = ticksUntilWinter(world);
-  if (!inPreWinter(world) || left < DAY * 0.3) return null;
+  if (seasonShort < MIN_SHORTFALL || !inPreWinter(world) || left < DAY * 0.3) return null;
   return {
-    target,
-    short,
+    target: seasonTarget,
+    short: seasonShort,
     cue: 'season',
     why: 'winter is close and the store is thin',
     aboutId: home.id,

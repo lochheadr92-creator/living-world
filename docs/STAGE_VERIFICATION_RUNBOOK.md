@@ -226,3 +226,14 @@ Contract and root causes: [FOOD_HELP.md](FOOD_HELP.md). Register: [DEPENDENCY_CH
   seed. Writes report, food/care requests with outcomes, promised and on-the-spot deliveries, death-moment snapshots
   (pack, home store, household members' spare food and distance), hungry-with-food samples, provenance and final save.
   The run refuses to write if any source file changed while it ran.
+
+## Rules 46 winter reserve
+
+Contract and diagnosis: [WINTER_RESERVE.md](WINTER_RESERVE.md).
+
+- Contracts: `npx vitest run tests/winter_reserve.test.ts tests/household_preparation.test.ts tests/v45_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/winter_reserve_observe.ts winter_reserve_evidence/ordinary-30-meadow-r46 meadow 30`.
+  Optional fourth to sixth arguments: `arrivals|none`, a rules version or `current`, a lab arm such as `rich-no-winter-reserve`
+  (a same-seed comparison, not a paired control). Writes per-day food flows into and out of every store type, ledger spoilage
+  and eating deltas, stock-plan records by cue, household rows at each winter boundary, hungry-in-winter samples, provenance
+  with source hashes and the final save; refuses to write if any source file changed while it ran.

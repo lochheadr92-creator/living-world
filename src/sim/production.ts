@@ -11,6 +11,8 @@ import type { Ctx } from './optutil';
 import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
+import { GRANARY_TRIP } from './intent';
+import { durableReserve } from './provision';
 import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
 import { RECIPES, RECIPE_BY_ID, acceptedAt, isFacilityType, recipesAt, recipesMaking } from './recipes';
@@ -655,22 +657,25 @@ function optTendGranary(ctx: Ctx): void {
 
 /** A household with spare grain, flour or bread puts it in the granary, where it keeps. */
 function optGranaryStore(ctx: Ctx): void {
-  const { p } = ctx;
+  const { world, p } = ctx;
   const g = facilitiesOf(ctx, 'granary')[0];
   if (!g) return;
-  const keep = ctx.drives.hunger > 0 ? 4 : 3;
+  // rules 46: a winter reserve (provision.ts durableReserve) takes grain to the bins a few at a time, keeping two back for
+  // the day; everyone else, and every world below 46, waits for the ordinary load
+  const winter = durableReserve(world, p);
+  const keep = winter ? 2 : ctx.drives.hunger > 0 ? 4 : 3;
   const items: Items = {};
   let n = 0;
   for (const k of ['grain', 'flour', 'bread'] as ItemKind[]) {
     const have = unitsOf(p.inv[k]);
     const give = k === 'grain' ? Math.max(0, have - keep) : have;
-    if (give >= 2) {
+    if (give >= (winter ? 1 : 2)) {
       items[k] = give;
       n += give;
     }
   }
-  if (n < 3) return;
-  depositLeaf(ctx, g.b, items, 11 + Math.min(10, n) + 5 * p.traits.diligence, 'to keep our grain from spoiling', 'store');
+  if (n < (winter ? GRANARY_TRIP - 2 : 3)) return;
+  depositLeaf(ctx, g.b, items, 11 + Math.min(10, n) + 5 * p.traits.diligence, winter ? 'to put grain by for the winter where it keeps' : 'to keep our grain from spoiling', 'store');
 }
 
 /**

@@ -63,8 +63,26 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   shown (`prep_out12`). Winter: regrowth 40 %, crops 30 %, stored spoilage ×3 (`hardship.ts`), low home condition raises
   spoilage. Granary shares and spoilage multiplier in `facilities.ts`.
 - **Gap.** Target is a one-day cushion; access during scarcity, spoilage and replenishment not traced separately.
-- **Contract.** To be established after diagnosis (per-flow ledger of gathered/deposited/withdrawn/eaten/spoiled/lost).
-- **Status.** Impl `partial` · Contract `partial` · E2E `no` · Ordinary `partial` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis (rules 45, three seeds, 30 days).** About half of everything put into home stores spoiled before it was
+  eaten (531/1113, 512/1076, 205/465 units; berries ~60 % of the loss, grain next); season plans reached the one-day
+  cushion in about half the cases; hardship plans churned (45 % never put anything by in their two days); the granaries that
+  stood were empty because nobody could eat from one; stores were empty at every winter's end. Preservation, not the
+  target, was the real constraint.
+- **Contract (rules 46, `docs/WINTER_RESERVE.md`).** Season target two days' eating (cap 20, bounded by room unless a
+  granary is known), window three days; a season plan gathers grain when it knows a wild grain source, takes grain to a
+  known granary (share counts as reserve, deposit credited), and a household eats from the granary within its share or the
+  emergency ration, booked unit by unit. Hardship cue untouched. Switch `rich-no-winter-reserve` (one strategy, removed
+  together). Owner `src/sim/provision.ts`; `intent.ts` stock step/outcome, `production.ts optGranaryStore`,
+  `options_survival.ts eat_store`, `act_resource.ts` share booking.
+- **Flows traced.** `scripts/winter_reserve_observe.ts`: deposits and eating per store type, ledger spoilage and eating per
+  day, per-kind spoilage from the ledger, plan records by cue, household rows at each winter boundary.
+- **Preserved failures.** Larger targets mostly run out of their window ("time is up" in the plan record); lean-to
+  households stay bounded by 12 weight of room; berries still spoil at home; forest still loses most of a household in its
+  second winter.
+- **Status.** Impl `yes` · Contract `yes` (6 cases, `tests/winter_reserve.test.ts`) · E2E `yes` (staged: season plan →
+  grain to granary → credited share → eaten within share) · Ordinary `yes` (granary 11 in / 4 eaten in two seeds; season
+  units 47/62/5) · Rendered `partial` (plan step text "take the grain to the granary", option "Eat from the granary",
+  existing plan panel; no new page check) · Aggregate `unproven` (8-seed lab: nothing beyond noise except the plan counts; deaths in the adverse direction within noise).
 
 ### WS4 Shelter maintenance, replacement, recovery
 - **Current.** Site layout `optPlanBuild`; fetch plan rules 7 (`shelter.ts`); build `act_build.ts`; occupancy rules 3;
@@ -153,4 +171,15 @@ final save).
 
 Rendered: `scripts/browser/food_help_check.mjs` against the page's own river village, 5/5 (`food_help_evidence/rendered2/`, `docs/FOOD_HELP.md` Rendered section).
 
-Checks at the integration boundary: `npm run typecheck` clean; `npm test -- --maxWorkers=4` 184 files / 1360 tests passed (before the capable gate; rerun after it recorded in the commit); `npm run build` clean; `git diff --check` clean.
+Checks at the integration boundary: `npm run typecheck` clean; `npm test -- --maxWorkers=4` 184 files / 1360 tests passed (before the capable gate; rerun after it recorded in the commit); `npm run build` clean; `git diff --check` clean. Commit `ce50c0a`.
+
+### Slice 2 — rules 46 winter reserve (WS3), 2026-10-29
+
+Predecessor reference: `tests/v45_continuation.expected.json` recorded from `ce50c0a` by `scripts/v45_reference.ts --write`
+before any behaviour change. Contract and both ordinary tables: `docs/WINTER_RESERVE.md`. Tests:
+`tests/winter_reserve.test.ts` (6), focused run 13 files / 158 tests including `household_preparation`, v1/v2/v45
+continuation, economy, settlement economy, chains, intentions, plan reconsideration. Lab harm check
+`winter_reserve_evidence/lab-reserve` (8 seeds, control + nudge + `rich-no-winter-reserve`): season plans −8.3 and plans done
++11.8 for the ablation (larger than chance, the mechanism itself), mean hunger −5.4 and units put by +54.6 (within noise),
+deaths −1.9 [−4.6, +0.3] and people +2.4 [−0.1, +5.3] (not distinguishable from chance; the death direction is adverse and
+is recorded as the thing to watch). Full table in `docs/WINTER_RESERVE.md`. No benefit claimed.

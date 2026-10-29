@@ -1,6 +1,7 @@
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
+import { durableReserve } from './provision';
 import { explainsHousing } from './shelter';
 import { makesSpears } from './defence';
 import { isThreat } from './wildlife';
@@ -161,7 +162,7 @@ export function siteRelation(ctx: Ctx, b: Belief): { ok: boolean; mult: number; 
 
 // ───────────────────────── food stockpiling ─────────────────────────
 function optStockpile(ctx: Ctx): void {
-  const { p } = ctx;
+  const { world, p } = ctx;
   if (ctx.drives.hunger > 22) return; // personal hunger is handled elsewhere
   const hs = hhState(ctx);
   const tm = traitMods(p);
@@ -177,7 +178,13 @@ function optStockpile(ctx: Ctx): void {
   const prepping = preparingReserve(p);
   if (base < 6 && !prepping) return;
   if (ctx.food >= 8) return; // already carrying plenty: bring it home instead
-  foragePlans(ctx, { urgency: base, mode: 'stock', baseLabel: hs.shortage > 0.5 ? 'household is short of food' : prepping ? 'putting food by for the household' : 'building a food reserve' });
+  // rules 46: a season reserve is put by in what keeps. Grain spoils at a fifth of the rate of berries (constants.ts PERISHABLE),
+  // so a plan for the winter gathers grain when the person knows a wild grain source worth the walk, and only falls back to
+  // any food when none is; a hardship plan and every world below 46 gather as before.
+  const durable = durableReserve(world, p);
+  const before = ctx.options.length;
+  foragePlans(ctx, { urgency: base, mode: 'stock', baseLabel: hs.shortage > 0.5 ? 'household is short of food' : durable ? 'putting grain by for the winter' : prepping ? 'putting food by for the household' : 'building a food reserve', only: durable ? 'grain' : undefined });
+  if (durable && ctx.options.length === before) foragePlans(ctx, { urgency: base, mode: 'stock', baseLabel: 'putting food by for the winter (no grain to be had)' });
 }
 
 function optDepositFood(ctx: Ctx): void {

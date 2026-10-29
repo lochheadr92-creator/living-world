@@ -8,6 +8,8 @@ import { payNudge } from './learning';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
 import { foodUnits, invRoom } from './economy';
+import { withdrawAllowance } from './facilities';
+import { hasWinterReserve } from './provision';
 import { runsRulesVersion } from './rulesversion';
 import { delBelief, estimatedAmount, recentFailure } from './knowledge';
 import { FOOD_VALUE, SOURCE_VERB } from './labels';
@@ -29,7 +31,7 @@ import {
   traitMods,
 } from './optutil';
 import type { Ctx } from './optutil';
-import type { Belief, FoodKind, SourceType } from './types';
+import type { Belief, FoodKind, ItemKind, Person, SourceType, World } from './types';
 import { SOURCE_FOOD } from './food_help';
 import { WORK } from './constants';
 
@@ -235,6 +237,15 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
   }
 }
 
+/** Units of grain, bread or flour-free food this person may take from a granary now: their household's share, or the emergency ration. */
+function granaryRation(world: World, p: Person, id: number): number {
+  const b = world.byId.get(id);
+  if (!b || b.ent !== 'building' || b.type !== 'granary') return 0;
+  let n = 0;
+  for (const k of ['grain', 'bread'] as ItemKind[]) n += withdrawAllowance(world, b, p, k, b.store.items[k] ?? 0);
+  return n;
+}
+
 function optEat(ctx: Ctx): void {
   const { world, p } = ctx;
   const dr = ctx.drives.hunger;
@@ -286,8 +297,12 @@ function optEat(ctx: Ctx): void {
     const comm = b.kind === 'building' && b.btype === 'storehouse';
     const pile = b.kind === 'pile';
     const theirs = tempted && b.kind === 'building' && !mine && b.hh !== undefined && b.hh !== p.hhId && isHomeType(b.btype);
-    if (!mine && !comm && !pile && !theirs) continue;
-    const fc = foodCount(b.items ?? {});
+    // Rules 46: the granary's bins feed the households that filled them. What may be taken is the household's own share, or the
+    // emergency ration facilities.ts already grants the starving (withdrawAllowance); the share is the household's own record
+    // of what it put in, so reading it is reading their own books, not the bins of others. Below 46 a granary is not eaten from.
+    const bins = b.kind === 'building' && b.btype === 'granary' && hasWinterReserve(world) ? granaryRation(world, p, b.id) : 0;
+    if (!mine && !comm && !pile && !theirs && !bins) continue;
+    const fc = b.btype === 'granary' ? bins : foodCount(b.items ?? {});
     if (fc < 1) {
       if (mine || comm) addBlocked(ctx, 'eat_store', 'Eat from the stores', b.id, 'remembers it being empty', 'food');
       continue;
@@ -297,13 +312,13 @@ function optEat(ctx: Ctx): void {
       continue;
     }
     const e = eta(ctx, b.x, b.y);
-    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(mine ? 'my own home' : comm ? 'communal store' : theirs ? 'not mine to take' : 'goods lying about', mine ? 2 : theirs ? -18 : -1);
+    const sc = new Scorer().add('hungry', dr * 0.92).add('walking', -pen(e)).add(mine ? 'my own home' : comm ? 'communal store' : bins ? 'our share in the granary' : theirs ? 'not mine to take' : 'goods lying about', mine ? 2 : bins ? 1 : theirs ? -18 : -1);
     if (theirs) sc.add('conscience', -(8 * p.traits.caution + 6 * p.traits.generosity));
     if (theirs && sc.total < 8) continue;
     const theirName = theirs ? `${householdById(world, b.hh!)?.name ?? 'another'} household` : '';
     addOption(ctx, {
       kind: 'eat_store',
-      label: mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : theirs ? `Take food from the ${theirName}'s store` : 'Take food from a pile',
+      label: mine ? 'Eat from the home store' : comm ? 'Eat from the storehouse' : bins ? 'Eat from the granary' : theirs ? `Take food from the ${theirName}'s store` : 'Take food from a pile',
       goal: 'to ease hunger',
       need: 'hunger',
       util: sc.total,
@@ -317,8 +332,8 @@ function optEat(ctx: Ctx): void {
         if (!spot) return null;
         return newActivity(world, p, {
           kind: 'eat_store',
-          label: mine ? 'Eating at home' : theirs ? `Taking food from the ${theirName}'s store` : 'Eating from the stores',
-          data: theirs ? { steal: b.hh } : {},
+          label: mine ? 'Eating at home' : theirs ? `Taking food from the ${theirName}'s store` : bins ? 'Eating from the granary' : 'Eating from the stores',
+          data: theirs ? { steal: b.hh } : bins ? { ration: bins } : {},
           goal: `to ease hunger (${Math.round(p.needs.hunger)}/100)`,
           need: 'hunger',
           targetId: b.id,
