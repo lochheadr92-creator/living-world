@@ -122,6 +122,9 @@ describe("the smithy's fuel comes to the kiln (rules version 10)", () => {
     const smithy = createBuilding(w, 'smithy', hx - 5, hy + 8, 0);
     const pair = w.persons.filter((q) => q.alive).slice(0, 2);
     for (const q of pair) {
+      // This fixture isolates the standing fuel WANT. Rules 44 no longer grant
+      // every adult the procedure; stage its required knowledge explicitly.
+      q.techniques = {charcoal:{source:'initial',learned:w.tick,teacher:0}};
       observe(w, q, kiln);
       observe(w, q, smithy);
       const t = mintTool(w, 'axe', 0, q.hhId, q.id, q.inv, q.id, 'test equipment');

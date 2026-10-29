@@ -1,5 +1,6 @@
 import { initialiseTechniques } from './techniques';
 import { initialSkills } from './development';
+import {backgroundFor,variedBackgrounds} from './background';
 import { elderFactor } from './life';
 import { AGE_ADULT, AGE_CHILD, AGE_ELDER, BASKET_BONUS, CARRY_CAP, TICKS_PER_YEAR } from './constants';
 import type { RNG } from './rng';
@@ -184,7 +185,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
       social: 45 + rng.next() * 45,
     },
     traits,
-    skills: initialSkills(world, o.age, makeSkills(rng, traits)),
+    skills: initialSkills(world, o.age, makeSkills(rng, traits),id),
     inv: {},
     hhId: o.hhId,
     parents: o.parents ? o.parents.slice() : [],
@@ -230,6 +231,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     concerns: [],
     lastInteraction: null,
   };
+  if(variedBackgrounds(world)&&o.age>0)p.background=backgroundFor(world,p.id);
   initialiseTechniques(world,p,o.age);
   p.pheading = p.heading;
   return p;

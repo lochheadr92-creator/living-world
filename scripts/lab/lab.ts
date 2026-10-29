@@ -1,6 +1,7 @@
 import { learnerInstructionOn, setLearnerInstruction } from '../../src/sim/techniques';
 import { civicBenefitOn, setCivicBenefit } from '../../src/sim/civic_benefit';
 import { localDemandOn, setLocalDemand } from '../../src/sim/local_demand';
+import {backgroundsOn,setBackgrounds} from '../../src/sim/background';
 import { achievementAftermathOn, setAchievementAftermath } from '../../src/sim/achievement';
 import { projectHelperChoiceOn, setProjectHelperChoice } from '../../src/sim/options_social';
 import { storedMaterialPlansOn, setStoredMaterialPlans, storedMaterialPromisesOn, setStoredMaterialPromises } from '../../src/sim/material_stock';
@@ -261,6 +262,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-learner-instruction') return {spec:label,summary:'remove learner-initiated instruction only; teacher offers unchanged; no effect below rules 41',install(){const was=learnerInstructionOn();setLearnerInstruction(false);return ()=>setLearnerInstruction(was);}};
   if (kind === 'rich-no-civic-benefit') return {spec:label,summary:'remove personal public-store benefit credit only; physical goods unchanged; no effect below rules 42',install(){const was=civicBenefitOn();setCivicBenefit(false);return ()=>setCivicBenefit(was);}};
   if (kind === 'rich-no-local-demand') return {spec:label,summary:'remove heard material demand from trade review only; requests and work unchanged; no effect below rules 43',install(){const was=localDemandOn();setLocalDemand(false);return ()=>setLocalDemand(was);}};
+  if (kind === 'rich-uniform-backgrounds') return {spec:label,summary:'retain previous starting skills and universal adult charcoal knowledge for future creation only; existing people unchanged',install(){const was=backgroundsOn();setBackgrounds(false);return ()=>setBackgrounds(was);}};
   if (kind === 'rich-no-achievement-aftermath') return {spec:label,summary:'remove construction satisfaction and later hopes only; no effect below rules 38',apply:()=> 'achievement aftermath off',install(){const was=achievementAftermathOn();setAchievementAftermath(false);return ()=>setAchievementAftermath(was);}};
   if (kind === 'rich-no-reconsider') return {spec:label,summary:'remove plan reconsideration only; changes nothing below version 34',apply:()=> 'plan reconsideration off',install(){const was=reconsiderOn();setReconsider(false);return ()=>setReconsider(was);}};
   if (kind === 'rich-no-leisure') return {spec:label,summary:'restore the single idle fallback (potter about near home) and nothing else; below version 28 it changes nothing',apply:(w)=>{w.settings.dynamics='rich';return 'rich dynamics on, varied spare time off';},install(){const was=leisureOnSwitch();setLeisure(false);return ()=>setLeisure(was);}};

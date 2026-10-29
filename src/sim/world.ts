@@ -394,6 +394,7 @@ export function hashWorld(world: World): string {
   for (const g of world.graves) if(g.death) push(`GraveIdentity${g.id}:${JSON.stringify(g.death)}`);
   for (const p of world.persons) if (p.socialMemory) push(`SocialMemory${p.id}:${JSON.stringify(p.socialMemory)}`);
   for (const p of world.persons) if (p.heardDemand) push(`HeardDemand${p.id}:${JSON.stringify(p.heardDemand)}`);
+  for (const p of world.persons) if (p.background) push(`Background${p.id}:${JSON.stringify(p.background)}`);
   if (world.economicObservations) push('EconomicObservations' + JSON.stringify(world.economicObservations));
   for (const h of world.households) if (h.relocations) push('Relocations' + h.id + JSON.stringify(h.relocations));
   for(const p of world.persons)if(p.sharedSupper)push('SharedSupper'+p.id+JSON.stringify(p.sharedSupper));

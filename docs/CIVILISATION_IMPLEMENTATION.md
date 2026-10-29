@@ -1,5 +1,36 @@
 # Civilisation implementation register
 
+## Experience connections and varied backgrounds — 2026-10-29
+
+Local main continued from `393e71f`; original dirty deepseek checkout and all existing
+evidence preserved. Owner requests local commits only; nothing pushed. Rules 41 adds
+learner-requested instruction; 42 personal public-store benefit; 43 repeated heard
+material demand in feasible trade choice; 44 strongly varied starting proficiency
+and non-universal adult charcoal knowledge. Existing saves keep their recorded rules;
+newborns remain novices and later gains come from work. Each predecessor was captured
+before its successor. One current product, no new player-facing mode.
+
+All three connections have staged mechanism/ablation and actual manual panel evidence.
+The owner's subsequent natural-activation request exposed universal adult knowledge
+as an upstream constraint. Ordinary meadow with varied backgrounds and arrivals then
+produced four learner requests and one completed Pia/Hana lesson, followed by three
+physical charcoal. River recorded one personal public benefit. Other counts, including
+zero demand-led trades in the new follow-up, remain explicit. Meadow stopped at the
+180-second budget on day 42.2; river/forest reached day 45. No aggregate benefit or
+frequency guarantee. No product immigration default changed.
+
+A direct observer purity defect was reproduced and fixed (expired life memories).
+Same-browser exact manual replay passes; civic and Mira cross-runtime comparisons
+retain tiny heading differences and are not called exact successes. Details, review
+findings and current verification: [EXPERIENCE_CONNECTIONS.md](EXPERIENCE_CONNECTIONS.md).
+
+Final current-tree suite: **1349 passing tests / 182 files** (254.67 seconds, four
+workers); typecheck/build and diff check pass. Historical references unchanged. Earlier
+two fixture failures were diagnosed and repaired without relaxing the behavioral
+assertions; their failed run remains recorded. Scoped implementation and natural
+occurrence verified; population-level benefit and frequent activation remain unproven.
+
+
 ## Remembered stores, plans and promises — 2026-10-29
 
 Continued authoritative local main from `0fba6ed`; separate dirty `deepseek-b1`

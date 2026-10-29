@@ -5,6 +5,7 @@ import { runsRulesVersion } from './rulesversion';
 import { addEvent, addLog } from './events';
 import type { Conversation, Person, World } from './types';
 import { hyp } from './util';
+import {variedBackgrounds,backgroundKnowsCharcoal} from './background';
 let enabled = true;
 export const techniquesOn = (): boolean => enabled;
 export function setTechniques(on: boolean): void { enabled = on; }
@@ -16,7 +17,7 @@ export const hasLearnerInstruction = (w: World): boolean => learnerInstruction &
 export const LESSON_TICKS = 180;
 export function initialiseTechniques(w: World,p: Person,age: number): void {
  if (!heldTechniques(w)) return;
- p.techniques = age >= AGE_ADULT ? {charcoal:{source:'initial',learned:w.tick,teacher:0}} : {};
+ p.techniques = age >= AGE_ADULT&&(!variedBackgrounds(w)||backgroundKnowsCharcoal(w,p.id)) ? {charcoal:{source:'initial',learned:w.tick,teacher:0}} : {};
 }
 export function knowsCharcoal(w: World,p: Person): boolean { return !heldTechniques(w) || !!p.techniques?.charcoal; }
 export function techniqueBlocker(w: World,p: Person,recipe: string): string {

@@ -1,6 +1,7 @@
 import { deceasedById } from './historical_index';
 import { homeDeliveryProgress, homePlanPause, homeSiteRequirements } from './inspect_home_plan';
 import { describeTechniques, lessonProgress } from './techniques';
+import {backgroundDescription} from './background';
 import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
@@ -589,7 +590,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     injury: describeInjury(world, p),
     lifeEvent: describeLifeEvent(world, p),
     crew: describeCrew(world, p),
-    skillExplanation: skillExplanation(world),
+    skillExplanation: [backgroundDescription(p),skillExplanation(world)].filter(Boolean).join(' '),
     techniques: describeTechniques(world,p),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),

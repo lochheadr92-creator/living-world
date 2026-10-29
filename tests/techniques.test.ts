@@ -16,8 +16,8 @@ import {currentWorldSettings} from '../src/sim/profiles';
 import {parseIntervention} from '../scripts/lab/lab';
 const charcoal=RECIPE_BY_ID.burn_charcoal;
 afterEach(()=>setTechniques(true));
-it('initial adult competence is viable; newborns do not inherit techniques or gain them by a birthday',()=>{
- const w=createWorld(currentWorldSettings('normal','techniques',{immigration:false}));
+it('historical initial adult competence is universal; newborns do not inherit techniques or gain them by a birthday',()=>{
+ const w=createWorld({...currentWorldSettings('normal','techniques',{immigration:false}),rulesVersion:43});
  expect(w.persons.filter(p=>p.techniques?.charcoal).length).toBeGreaterThan(15);
  const m=w.persons.find(p=>p.sex==='f')!;giveBirth(w,m);const child=w.persons.at(-1)!;
  expect(child.techniques).toEqual({});const before=serializeWorld(w);describePerson(w,child.id);expect(serializeWorld(w)).toBe(before);

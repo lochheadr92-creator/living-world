@@ -9,11 +9,11 @@ const [file,out]=process.argv.slice(2);
 if(!file||!out||existsSync(out))throw new Error('Downloaded bundle and fresh output required');
 const raw=readFileSync(file,'utf8');
 const b=JSON.parse(raw) as {staged:boolean;actor:string;startPath:string;start:string;final:string;transcript:Transcript};
-if(!b.staged||!b.transcript?.end)throw new Error('Stop the manual run before exporting its bundle');
+if(typeof b.staged!=='boolean'||!b.transcript?.end)throw new Error('Stop the manual run before exporting its bundle');
 mkdirSync(out,{recursive:true});
 const r=runReplay(deserializeWorld(b.start),b.transcript),final=serializeWorld(r.world);
 const p=r.world.persons.find(p=>p.id===b.transcript.header.personId)!;
-const report={staged:true,externalModel:false,actor:b.actor,startPath:b.startPath,protocol:b.transcript.header.protocol,
+const report={staged:b.staged,manual:true,externalModel:false,actor:b.actor,startPath:b.startPath,protocol:b.transcript.header.protocol,
   observationVersion:b.transcript.header.observationVersion,tick:r.world.tick,browserHash:b.transcript.end.hash,replayHash:hashWorld(r.world),
   fullSerializedEqual:final===b.final,applied:b.transcript.end.applied,rejected:b.transcript.end.rejected,
   outcomes:b.transcript.outcomes,requests:r.world.requests.filter(q=>q.from===p.id||q.to===p.id),

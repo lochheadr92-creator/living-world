@@ -4,7 +4,9 @@ import type { InhabitantObservation } from '../agent/observe';
 export function lastInhabitantSummary(doing: InhabitantObservation['doing']): string {
   const work = doing.lastResult, talk = doing.lastInteraction;
   const workText = work ? `${work.label} — ${work.outcome}` : '';
-  const talkText = talk ? `${talk.purpose} — ${talk.outcome}` : '';
+  const talkLabel = talk?.purpose === 'learn_technique' ? 'Asked for instruction'
+    : talk?.purpose === 'teach_technique' ? 'Offered instruction' : talk?.purpose;
+  const talkText = talk ? `${talkLabel} — ${talk.outcome}` : '';
   if (!work) return talkText;
   if (!talk) return workText;
   if (work.t === undefined) return `${workText}; ${talkText} (order unknown)`;

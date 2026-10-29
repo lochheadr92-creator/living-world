@@ -11,8 +11,8 @@ import {runLive,runReplay} from '../src/agent/run';
 import {chooser} from './helpers/inhabit';
 import {serializeWorld,deserializeWorld} from '../src/app/save';
 afterEach(()=>setExternalController(null));
-function fixture(){
- const w=createWorld(currentWorldSettings('town','meadow',{immigration:false}));
+function fixture(rulesVersion?:number){
+ const w=createWorld({...currentWorldSettings('town','meadow',{immigration:false}),...(rulesVersion?{rulesVersion}:{})});
  while(w.tick<118)stepWorld(w);
  const p=w.persons.find(p=>p.name==='Odette')!;
  abortActivity(w,p,'STAGED decision boundary');p.nextThink=w.tick;
@@ -27,16 +27,17 @@ it('reproduces differing household/hunger offers and preserves the historical fi
  setExternalController({controls:()=>true,choose:()=>({kind:'pick',key:hunger.key})});
  decide(w,p,'test legacy');expect(p.activity?.goal).toBe('to bring food home');
 });
-it('new public identities select the actual hunger alternative with its own amount and replay exactly',async()=>{
- const {w,p}=fixture();const initial=serializeWorld(w);
+it.each([[43,'Picking fruit'],[44,'Gathering wild grain']] as const)('rules %i public identities select the actual hunger alternative with its own amount and replay exactly',async(rulesVersion,label)=>{
+ const {w,p}=fixture(rulesVersion);const initial=serializeWorld(w);
  const result=await runLive(w,p.id,chooser('choose-hunger',o=>{
   expect(new Set(o.options.map(o=>o.key)).size).toBe(o.options.length);
-  // Fruit is the two-unit contract. Successor trajectories can offer berries
-  // (three units) ahead of it; order is not the identity under test.
-  const selected=o.options.find(o=>o.goal==='to ease hunger'&&o.label==='Picking fruit'&&o.key.includes('#choice:'))!;
+  // Changed starting proficiency changes the early walk. Both recorded scenes
+  // offer two units for hunger versus a larger household quantity at the same source.
+  const selected=o.options.find(o=>o.goal==='to ease hunger'&&o.label===label&&o.key.includes('#choice:'))!;
   expect(selected.limits?.find(b=>b.field==='amount')?.max).toBe(2);
   return selected.key;
  }),{until:119});
+ expect(result.transcript.calls.map(c=>c.result?.status)).toEqual(['applied']);
  const active=result.world.persons.find(q=>q.id===p.id)!.activity!;
  expect(active.goal).toBe('to ease hunger (59/100)');expect(active.amount).toBe(2);
  expect(result.transcript.calls.find(c=>c.result?.status==='applied')!.result!.key).toContain('#choice:');

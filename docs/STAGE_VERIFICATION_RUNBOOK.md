@@ -184,3 +184,34 @@ For long local runs, use detached `Start-Process node` with separate output/erro
 `node_modules/vite-node/dist/cli.mjs` entry point. Check the PID and completion file.
 These observation scripts refuse an existing output directory; unlike lab ensembles,
 they do not resume unfinished seeds.
+
+## Rules 41–44 experience connections
+
+Contract, all nulls, budget stop and exact-replay scope: [EXPERIENCE_CONNECTIONS.md](EXPERIENCE_CONNECTIONS.md).
+Use the integration checkout and a fresh evidence directory for each invocation.
+
+- Mechanism scripts: `scripts/learner_instruction_inhabitant.ts`,
+  `scripts/civic_benefit_inhabitant.ts`, `scripts/local_demand_inhabitant.ts`.
+  Each takes a fresh output directory and labels its staged state.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/experience_connections_observe.ts inhabitant_evidence/connections-new-meadow meadow 45 arrivals`.
+  Seeds are meadow/river/forest, Normal profile, maximum 45 days and 180 seconds per
+  seed. Omitting `arrivals` disables immigration for that diagnostic only. Sampled
+  offers, actual selected actions, heard requests, new people, receipts, source hashes,
+  conservation, initial snapshot and final save are separate evidence. A budget stop
+  is partial, not a completed horizon. Do not silently retry it or replace its seed.
+- Reconstruct a previously observed natural interval (at most three days):
+  `node node_modules/vite-node/dist/cli.mjs scripts/experience_connections_natural_trace.ts inhabitant_evidence/connections-background-45-meadow/natural-lesson-start.json inhabitant_evidence/connections-pia-new-trace 1013 94477`.
+  No controller or action selection; final tick 94477 includes execution tick 94476.
+- Manual browser harness: `/scripts/browser/experience_connections_manual.html?start=/inhabitant_evidence/connections-.../start.json&actor=Name`.
+  Uses actual Game, Renderer, inspector and manual InhabitDriver. Stop and export via
+  **Save verification bundle**. Natural checkpoints retain their arrival setting;
+  manual continuation is labelled separately from natural simulation evidence.
+- Exact Node replay: `node node_modules/vite-node/dist/cli.mjs scripts/experience_connections_manual_replay.ts <downloaded-bundle.json> <fresh-output>`.
+  A matching simulation hash is insufficient when the serialized comparison fails.
+  Same-browser replay is separately available at
+  `/scripts/browser/experience_connections_replay.html?bundle=/inhabitant_evidence/connections-.../bundle.json`.
+  Export its result and report cross-runtime heading differences honestly.
+
+New worlds use 44. Existing saves do not receive reassigned skills or erased knowledge.
+Current held-technique variation concerns charcoal firing; all eleven proficiency
+skills vary. Long-run balance and population-level benefit remain unmeasured.
