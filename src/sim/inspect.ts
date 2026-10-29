@@ -171,7 +171,7 @@ export interface PersonView {
   carry: { used: number; cap: number };
   position: { x: number; y: number };
   activity: { label: string; goal: string; phase: string; progress: number; target: string; blocked: string; kind: string; moving: boolean } | null;
-  qa: { doing: string; why: string; trying: string; stopping: string; lastAttempt: string; plan: string };
+  qa: { doing: string; why: string; trying: string; stopping: string; stoppingIsHistorical: boolean; lastAttempt: string; plan: string };
   /** every plan they are carrying, each on its own terms (rich worlds; empty otherwise) */
   plans: PlanView[];
   /** equipment in hand, with wear and loan status */
@@ -279,6 +279,7 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   let why = lastDec?.because ? `Weighed up: ${lastDec.because}` : 'Nothing is pressing.';
   let trying = '—';
   let stopping = 'Nothing in the way.';
+  let stoppingIsHistorical = false;
   if (p.pose === 'sleep') {
     doing = 'Asleep.';
     stopping = p.needs.energy >= 90 ? 'Almost rested.' : 'Nothing; sleeping recovers energy and health.';
@@ -301,7 +302,8 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
     else if (p.needs.hunger < 14 || p.needs.thirst < 14) stopping = 'Dangerously weak; everything else will have to wait.';
   } else if (lastDec && lastDec.blocked.length) {
     const b = lastDec.blocked[0];
-    stopping = `${b.label}: ${b.blocked}.`;
+    stopping = `${b.label}: ${b.blocked} (at the last decision, ${agoText(world, lastDec.tick)}).`;
+    stoppingIsHistorical = true;
   }
   if (!a && lastDec && p.pose !== 'sleep') doing = lastDec.chosen ? `Between tasks (last chose “${lastDec.chosen.label}”).` : doing;
   const r = p.lastResult;
@@ -315,7 +317,7 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   const planText = toShow.map((i) => planLine(world, p, i, a)).join(' ');
   const room = indoorHome(world, p);
   if (room) doing = 'Inside ' + describeEntityName(world, room) + ' #' + room.id + '. ' + doing;
-  return { doing, why, trying, stopping, lastAttempt: last, plan: planText };
+  return { doing, why, trying, stopping, stoppingIsHistorical, lastAttempt: last, plan: planText };
 }
 
 // ───────────────────────── "why didn't they take that?" ─────────────────────────
@@ -483,7 +485,7 @@ function homeLine(world: World, p: Person, homeB: Building | null): string {
   if (homeB && isSolidHome(homeB.type)) return where;
   const blocked = p.lastDecision?.blocked.find((b) => b.kind === 'plan_site');
   if (!blocked || !blocked.blocked) return where;
-  return `${where} — ${blocked.blocked}`;
+  return `${where} — last considered ${agoText(world, p.lastDecision!.tick)}: ${blocked.blocked}`;
 }
 
 export function describePerson(world: World, id: number, opts: { opportunities?: boolean } = {}): PersonView | null {

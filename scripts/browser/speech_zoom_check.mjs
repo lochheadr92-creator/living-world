@@ -104,12 +104,15 @@ try {
     const selectedBefore=await ev('window.__game.selectedId');
     await ev('document.activeElement.blur()'); await b.key('n','KeyN',78); await b.sleep(200);
     check('keyboard reaches another person and their inspector',await ev('window.__game.selectedId')!==selectedBefore);
+    check('personal needs precede collapsed civic detail and have visible touch labels',await ev(`(()=>{const needs=document.querySelector('.needs'),civic=document.querySelector('.civic-panel');return !civic.open&&!!(needs.compareDocumentPosition(civic)&Node.DOCUMENT_POSITION_FOLLOWING)&&[...needs.querySelectorAll('.need-label')].map(n=>n.textContent).join(',')==='Food,Water,Energy,Warmth,Safety,Company';})()`));
+    await ev(`document.querySelector('.need').focus()`); await b.sleep(200);
+    check('keyboard focus exposes detailed need information without hover',await ev(`document.activeElement.matches('.need')&&!document.querySelector('.uitip').hidden&&document.querySelector('.uitip').textContent.includes('Food:')`));
     check('feed and keyboard inspection preserve the staged world',await ev(`(async()=>{const {serializeWorld}=await import('/src/app/save.ts');return serializeWorld(window.__game.world)===window.__feedFixture;})()`));
     await b.shot(`${out}/feed-events.png`);
   }
   const errors = b.events.filter(e => e.method === 'Runtime.exceptionThrown');
   check('no browser exceptions', errors.length === 0, errors);
-  const paths=['src/app/viewer.ts','src/app/prefs.ts','src/app/game.ts','src/main.ts','src/render/speech_layout.ts','src/render/renderer.ts','src/render/overlays.ts','src/styles.css','src/ui/index.ts','src/ui/viewer.ts','src/ui/feed.ts','src/ui/feed_rows.ts','src/ui/shortcuts.ts','scripts/browser/speech_zoom_check.mjs'];
+  const paths=['src/app/viewer.ts','src/app/prefs.ts','src/app/game.ts','src/main.ts','src/render/speech_layout.ts','src/render/renderer.ts','src/render/overlays.ts','src/styles.css','src/ui/index.ts','src/ui/viewer.ts','src/ui/person.ts','src/sim/inspect.ts','src/ui/feed.ts','src/ui/feed_rows.ts','src/ui/shortcuts.ts','scripts/browser/speech_zoom_check.mjs'];
   const sourceHashes=Object.fromEntries(paths.flatMap(path=>{try{return [[path,createHash('sha256').update(readFileSync(path)).digest('hex')]];}catch{return [];}}));
   writeFileSync(`${out}/report.json`, JSON.stringify({phase,source:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sourceHashes,rules:fixture.rules,checks,snapshots},null,2));
 } finally { await b.close(); }

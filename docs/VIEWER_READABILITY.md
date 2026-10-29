@@ -102,6 +102,21 @@ through running worlds. Exact commands and current results are in the programme 
 
 ## Limits and next work
 
+Final person-panel review found two additional explanation/readability problems. Historical
+last-decision blockers could still read as current after eating; they now identify the
+recorded decision and its age, while actual activity blockers stay current. Needs and
+possessions precede civic/history detail; civic detail starts collapsed and remembers the
+viewer choice. Visible need labels work without hover, and need/tool keyboard focus exposes
+the existing detailed tooltip. `tests/inspector_blocker_age.test.ts` covers historical versus
+current meaning and full-state observer purity. The final viewer browser check passes
+**39/39** at `viewer_evidence/final-viewer/`; the elder's actual post-meal screenshot at
+`viewer_evidence/practical-blocker-final/care-eaten.png` was visually checked.
+
+Existing modules touched for this follow-up: `inspect.ts` derives historical age without
+state mutation; `ui/person.ts` presents it and prioritises personal information;
+`styles.css` gives visible needs room; the browser check exercises keyboard and touch-readable
+labels. None changes simulation semantics.
+
 Content-level changes and line rewrapping are discrete; geometry grows in small
 bounded increments and content-level hysteresis prevents threshold chatter. This is
 not a claim of continuously animated text reflow. Crowded low-priority messages may

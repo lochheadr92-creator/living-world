@@ -95,7 +95,8 @@ function makeNeedCell(key: NeedKey, label: string): NeedCell {
   ico.style.color = NEED_COLORS[key] ?? '#cccccc';
   const el = h(
     'div',
-    { class: 'need', role: 'meter', 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-label': label },
+    { class: 'need', role: 'meter', tabindex: 0, 'aria-valuemin': '0', 'aria-valuemax': '100', 'aria-label': label },
+    h('span', { class: 'need-label' }, label),
     h('div', { class: 'need-top' }, ico, val),
     bar.el,
   );
@@ -107,7 +108,7 @@ function makeNeedCell(key: NeedKey, label: string): NeedCell {
       setState(el, 'is-', n.state);
       el.setAttribute('aria-valuenow', String(Math.round(n.value)));
       el.setAttribute('aria-valuetext', `${n.label} ${Math.round(n.value)} of 100${n.state === 'ok' ? '' : `, ${n.state}`}`);
-      // the cells are icons only, so the name lives in the tooltip
+      // The visible label also works on touch; keyboard focus reveals the detailed state.
       el.setAttribute('data-tip', `${label}: ${Math.round(n.value)} of 100${n.state === 'ok' ? '' : ` (${n.state})`}`);
     },
   };
@@ -129,7 +130,8 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const homeEl = h('div', { class: 'p-home' });
   const townEl = h('div', { class: 'p-township' });
   const civicLines = h('div', { class: 'civic-lines' });
-  const civicPanel = h('details', { class: 'civic-panel', open: true }, h('summary', null, 'Township & shared work'), civicLines);
+  const civicPanel = h('details', { class: 'civic-panel', open: ctx.state.sections.civic ?? false }, h('summary', null, 'Township & shared work'), civicLines);
+  civicPanel.addEventListener('toggle', () => { ctx.state.sections.civic = civicPanel.open; ctx.saveState(); });
   const relationshipLines = h('div');
   const relationshipPanel = h('details', { class: 'civic-panel relationship-history' }, h('summary', null, 'Relationship history'), relationshipLines);
   const historyLines = h('div');
@@ -204,7 +206,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
       const kind = t.kind as ItemKind;
       const ico = icon(kind in ITEM_LABEL ? itemIconNameOf(kind) : 'hammer', 17, 'tool-ico');
       ico.style.color = legible(ITEM_COLORS[kind] ?? '#c8c8c0', 0.34);
-      const el = h('span', { class: 'tool', role: 'img' }, ico, h('span', { class: 'tool-wear' }, wear));
+      const el = h('span', { class: 'tool', role: 'img', tabindex: 0 }, ico, h('span', { class: 'tool-wear' }, wear));
       return { el, wear };
     },
     (c, t) => {
@@ -231,8 +233,9 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
 
   const makeQA = (name: IconName, question: string, cls: string) => {
     const a = h('dd', { class: 'qa-a' });
-    const el = h('div', { class: `qa-row ${cls}` }, h('dt', { class: 'qa-q' }, icon(name, 15, 'qa-ico'), h('span', null, question)), a);
-    return { el, a };
+    const q = h('span', null, question);
+    const el = h('div', { class: `qa-row ${cls}` }, h('dt', { class: 'qa-q' }, icon(name, 15, 'qa-ico'), q), a);
+    return { el, a, q };
   };
   const qDoing = makeQA('q_doing', 'What are they doing?', 'q-doing');
   const qWhy = makeQA('q_why', 'Why did they choose it?', 'q-why');
@@ -282,7 +285,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   const sections = createPersonSections(ctx, hooks);
 
   // the answer to "what are they up to?" comes first: it is the reason to open the panel. Needs and belongings are context for it.
-  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, civicPanel, historyPanel, relationshipPanel, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, sections.el);
+  const body = h('div', { class: 'p-body scroll' }, vitals, thoughtsEl, upto, h('div', { class: 'cap blk-h' }, 'Needs'), needsEl, inv, civicPanel, historyPanel, relationshipPanel, sections.el);
   const el = h('div', { class: 'insp-person' }, head, body);
 
   // ───────── rendering ─────────
@@ -363,6 +366,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     setText(qWhy.a, v.qa.why);
     setText(qTrying.a, v.qa.trying);
     setText(qStopping.a, v.qa.stopping);
+    setText(qStopping.q, v.qa.stoppingIsHistorical ? 'Last recorded blocker' : 'What is stopping them?');
     setText(qLast.a, v.qa.lastAttempt);
     // a private plan: only shown when they have one, so an ordinary person's card is no longer than it was
     // One line per plan they are carrying, each saying how its own step stands. They are listed, not ranked: the one they are

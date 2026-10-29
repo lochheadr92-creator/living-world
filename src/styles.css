@@ -1637,7 +1637,7 @@ kbd {
 /* needs */
 .needs {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 4px;
 }
 .need {
@@ -1659,6 +1659,10 @@ kbd {
 }
 .need-val {
   font-weight: 650;
+}
+.need-label {
+  font-size: calc(11px * var(--viewer-text-scale, 1));
+  overflow-wrap: anywhere;
 }
 .need .bar {
   height: 4px;
