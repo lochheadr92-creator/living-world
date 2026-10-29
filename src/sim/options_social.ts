@@ -1,5 +1,5 @@
 import { exchangeJourneyOptions } from './exchange_journeys';
-import { heldTechniques } from './techniques';
+import { heldTechniques, hasLearnerInstruction } from './techniques';
 import { mayCoordinate, councilFor } from './civic_decision';
 import { canInvite, projectAt, participation } from './townships';
 import { isRich } from './mood';
@@ -612,6 +612,18 @@ function optTeachTechnique(ctx: Ctx): void {
  }
 }
 
+function optRequestTechnique(ctx: Ctx): void {
+ const {world,p}=ctx;
+ if(!hasLearnerInstruction(world)||!ctx.techniqueWanted||p.techniques?.charcoal||ctx.stage==='child'||ctx.critical||ctx.night)return;
+ for(const c of candidates(ctx)) {
+  if(c.d>10||(p.cooldowns['learn:'+c.q.id]??0)>world.tick)continue;
+  if(p.relations[c.q.id]?.kin!=='parent'&&p.apprentice?.master!==c.q.id&&c.s.work!=='kiln')continue;
+  const sc=new Scorer().add('I need charcoal firing for wanted work',24+8*p.traits.curiosity).add('walking',-pen(c.d*6));
+  mkSocial(ctx,c,'learn_technique',{},`Ask ${c.q.name} to teach charcoal firing`,'learn charcoal firing: '+ctx.techniqueWanted.for,null,sc,'learn','','I want to fire charcoal but have not learned how');
+  break;
+ }
+}
+
 export function socialOptions(ctx: Ctx): void {
   mealOptions(ctx);
   attendOptions(ctx);
@@ -627,6 +639,7 @@ export function socialOptions(ctx: Ctx): void {
   optPropose(ctx);
   optTrade(ctx);
   optTeachTechnique(ctx);
+  optRequestTechnique(ctx);
   optChat(ctx);
   void eta;
 }

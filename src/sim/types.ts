@@ -1085,7 +1085,8 @@ export type ConvPurpose =
   | 'lend'
   | 'report'
   | 'mediate'
-  | 'teach_technique';
+  | 'teach_technique'
+  | 'learn_technique';
 
 export interface Conversation {
   /** Version 18: current lesson only; completed knowledge belongs to the learner. */

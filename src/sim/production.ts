@@ -1,4 +1,4 @@
-import { techniqueBlocker } from './techniques';
+import { techniqueBlocker, hasLearnerInstruction } from './techniques';
 import { isRich } from './mood';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
@@ -279,7 +279,10 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   const { world, p } = ctx;
   const b = f.b;
   const technique = techniqueBlocker(world,p,r.id);
-  if(technique){addBlocked(ctx,'operate',r.doing,b.id,technique,tag);return;}
+  if(technique){
+    if(hasLearnerInstruction(world)&&r.id==='burn_charcoal')ctx.techniqueWanted??={kind:'charcoal',for:why};
+    addBlocked(ctx,'operate',r.doing,b.id,technique,tag);return;
+  }
   const snap = b.ops;
   const fresh = world.tick - b.seen < 500;
   const busy = fresh && snap?.job && snap.readyAt > world.tick;

@@ -9,6 +9,10 @@ let enabled = true;
 export const techniquesOn = (): boolean => enabled;
 export function setTechniques(on: boolean): void { enabled = on; }
 export const heldTechniques = (w: World): boolean => enabled && isRich(w) && runsRulesVersion(w,18);
+let learnerInstruction = true;
+export const learnerInstructionOn = (): boolean => learnerInstruction;
+export function setLearnerInstruction(on: boolean): void { learnerInstruction = on; }
+export const hasLearnerInstruction = (w: World): boolean => learnerInstruction && heldTechniques(w) && runsRulesVersion(w,41);
 export const LESSON_TICKS = 180;
 export function initialiseTechniques(w: World,p: Person,age: number): void {
  if (!heldTechniques(w)) return;
@@ -40,6 +44,19 @@ export function answerLesson(w: World,c: Conversation,a: Person,b: Person): stri
  if (!why&&b.traits.curiosity+Math.max(0,b.relations[a.id]?.affinity??0)/100<0.45) why='would rather do something else';
  c.lesson={since:w.tick,until:w.tick+LESSON_TICKS,outcome:why?'declined':'learning',reason:why||'accepted charcoal firing instruction'};
  addLog(w,b,'social',why?`Declined ${a.name}'s lesson: ${why}.`:`Accepted charcoal firing instruction from ${a.name}.`);
+ return why;
+}
+/** The recipient answers a learner's request. No teacher knowledge is read by the
+ * learner's chooser; it is checked here, at actual conversational contact. */
+export function answerRequestedLesson(w: World,c: Conversation,teacher: Person,learner: Person): string {
+ if(c.lesson)return c.lesson.outcome==='declined'?c.lesson.reason:'';
+ let why=!hasLearnerInstruction(w)?'requested instruction is unavailable':lessonProblem(w,teacher,learner);
+ if(!why&&teacher.commitments.some(x=>x.status==='active'))why='has an outstanding commitment to attend to';
+ if(!why&&((teacher.relations[learner.id]?.trust??10)<0||(teacher.relations[learner.id]?.affinity??0)<-5))why='does not want to teach this person';
+ if(!why&&teacher.traits.generosity+Math.max(0,teacher.relations[learner.id]?.affinity??0)/100<0.45)why='does not want to spend time teaching now';
+ if(!why)return answerLesson(w,c,teacher,learner);
+ c.lesson={since:w.tick,until:w.tick+LESSON_TICKS,outcome:'declined',reason:why};
+ addLog(w,learner,'social',`${teacher.name} declined my request for instruction: ${why}.`);
  return why;
 }
 export function finishLesson(w: World,c: Conversation,a: Person,b: Person): boolean {

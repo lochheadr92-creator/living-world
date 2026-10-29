@@ -373,6 +373,7 @@ export interface InteractionView {
 }
 
 const PURPOSE_TEXT: Record<string, string> = {
+  learn_technique: 'asking to learn charcoal firing',
   teach_technique: 'charcoal firing instruction',
   chat: 'a chat',
   request: 'asking for something',
@@ -393,6 +394,7 @@ const PURPOSE_TEXT: Record<string, string> = {
 
 /** the same purposes as they read when the other person was the one who came over: "<name> came to <name> …" */
 const PURPOSE_THEIRS: Record<string, string> = {
+  learn_technique: 'to ask for charcoal firing instruction',
   teach_technique: 'to offer charcoal firing instruction',
   chat: 'for a chat',
   request: 'with a request',

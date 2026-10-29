@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Staged experience connection verification</title></head>
+<body>
+  <div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+  <script type="module">
+    // Staged starting state; actual renderer, manual panel, actions and driver.
+    import '/src/styles.css';
+    import { Game } from '/src/app/game.ts';
+    import { deserializeWorld, serializeWorld } from '/src/app/save.ts';
+    import { InhabitDriver, inhabitConfigFromUrl } from '/src/app/inhabit.ts';
+    import { Renderer } from '/src/render/renderer.ts';
+    import { mountUI } from '/src/ui/index.ts';
+    const params = new URLSearchParams(location.search);
+    const startPath = params.get('start'), actor = params.get('actor') ?? 'Ada';
+    if (!startPath?.startsWith('/inhabitant_evidence/connections-') || !['Ada','Ben'].includes(actor)) throw new Error('Supply a recorded experience-connection checkpoint and actor');
+    const start = await (await fetch(startPath)).text();
+    const world = deserializeWorld(start);
+    const game = new Game(world.settings);
+    game.restoreWorld(world, world.settings);
+    const cfg = inhabitConfigFromUrl(`?inhabit=${actor}&manual=1&from=0&days=0.6&noarrivals=1`, { seed: world.seed });
+    const driver = new InhabitDriver(game, cfg);
+    const renderer = new Renderer(document.getElementById('world'), game);
+    const ui = mountUI(game, document.getElementById('ui'), { inhabit: driver });
+    // Export authoritative evidence after interaction, separate from inhabitant knowledge.
+    const saveEvidence = document.createElement('button');
+    saveEvidence.textContent = 'Save verification bundle';
+    saveEvidence.style.cssText = 'position:fixed;top:70px;left:45%;z-index:1000';
+    saveEvidence.onclick = () => {
+      const bundle = { staged: true, actor, startPath, start, final: serializeWorld(game.world), transcript: driver.transcriptNow() };
+      const url = URL.createObjectURL(new Blob([JSON.stringify(bundle)], { type: 'application/json' }));
+      const a = document.createElement('a'); a.href = url;
+      a.download = `experience-connections-${actor}-${startPath.split('/').at(-1).replace('.json','')}-bundle.json`;
+      a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    };
+    document.body.append(saveEvidence);
+    await driver.start(); game.setSpeed(16);
+    let last = performance.now();
+    function frame(now) {
+      const dt = (now-last)/1000; last=now;
+      game.advance(dt); renderer.frame(Math.min(0.25,dt)); ui.update(Math.min(0.25,dt));
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

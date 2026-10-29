@@ -83,6 +83,8 @@ export interface Ctx {
   options: Option[];
   /** set by the production planner when a plan was stopped only by lacking a tool: the social planner may ask to borrow one */
   toolWanted?: { kind: ToolKind; for: string };
+  /** Derived from the person's own wanted production, never another person's knowledge. */
+  techniqueWanted?: { kind: 'charcoal'; for: string };
 }
 
 const FOOD_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain'];
