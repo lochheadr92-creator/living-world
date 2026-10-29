@@ -41,6 +41,12 @@ depends on which one is the real constraint:
 A bounded improvement must first establish which of these is the actual constraint in an ordinary world; the programme
 is explicit that the answer is not "demand ever-larger stockpiles."
 
+**First diagnostic result** (`scripts/seasonal_prep_diagnostic.ts`, meadow, rules 44, 36 days): store food is **drawn to
+near zero by deep winter every year** (49 → 0 by year-day 11, and again each winter), so the reserve is **eaten, not
+spoiled or left unused** — the binding constraint is #1, it is too small. Eaten vs spoiled is ~87 % / ~13 % (3728 vs 559
+units), so spoilage is a minor factor here, not the thing that strands households. A larger reserve is therefore the
+right shape for the improvement, not a spoilage or distribution fix.
+
 ## Contract (rules 46, to be implemented)
 
 1. **Per-flow trace.** Add an observation (never saved, never hashed) that follows a household reserve's food through
