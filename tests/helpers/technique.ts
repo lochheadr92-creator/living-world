@@ -1,5 +1,6 @@
 // Staged young family member and known kiln. No maturation clock is accelerated.
 import { stage,addPerson,building,done,pin } from './kit';
+import { LEGACY_WORLD } from './util';
 import { observe } from '../../src/sim/knowledge';
 import { perceive } from '../../src/sim/perception';
 import { relOf } from '../../src/sim/relations';
@@ -7,7 +8,9 @@ import { generateOptions,rankOptions } from '../../src/sim/decision';
 import { startActivity,abortActivity } from '../../src/sim/activities';
 import { stepWorld } from '../../src/sim/world';
 export function techniqueFixture(seed='technique-contract'){
- const s=stage(seed);s.w.settings.dynamics='rich';s.w.settings.rulesVersion=18;s.w.birthCount=0;
+ // built as it always was: a legacy base set to the version this contract is about (18). The same fixture built on the current
+ // rules, with or without its township founded first, does not start the lesson (id- and township-sensitive staging), so it stays here.
+ const s=stage(seed,'natural',LEGACY_WORLD);s.w.settings.dynamics='rich';s.w.settings.rulesVersion=18;s.w.birthCount=0;
  const a=addPerson(s,'Ada',40.5,40.5,{hunger:98,thirst:98,energy:98,traits:{generosity:0.9,sociability:1}});
  const b=addPerson(s,'Ben',42,40.5,{age:12,hh:a.hhId,hunger:98,thirst:98,energy:98,traits:{curiosity:0.9,sociability:1}});
  const kiln=building(s,'kiln',44,43,0,{wood:6});const smithy=building(s,'smithy',48,43);

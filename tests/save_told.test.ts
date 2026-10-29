@@ -10,15 +10,15 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import type { World } from '../src/sim/types';
 import { hashWorld } from '../src/sim/world';
 import { deepHash } from './helpers/golden';
-import { natural, run } from './helpers/util';
+import { natural, run, LEGACY_WORLD } from './helpers/util';
 
 const told = (w: World) => w.persons.flatMap((p) => Object.values(p.beliefs)).filter((b) => b.src === 'told');
 
-// Two kinds of world. The default one (unversioned, authored) is where packed belief rows are written, so it is where live and
+// Two kinds of world. The legacy default one (unversioned, authored; pinned here, since the test helper now builds current rules) is where packed belief rows are written, so it is where live and
 // reloaded bytes could part. The product one (rich, current rules) never packs today, because other person fields are undefined; the
 // same invariants must hold there, and would matter the day that changes.
 const CONFIGS: Array<{ name: string; make: (seed: string) => World; packs: boolean }> = [
-  { name: 'default world', make: (seed) => natural(seed), packs: true },
+  { name: 'default world', make: (seed) => natural(seed, LEGACY_WORLD), packs: true },
   { name: 'product world', make: (seed) => createWorld(currentWorldSettings('normal', seed, { immigration: false })), packs: false },
 ];
 

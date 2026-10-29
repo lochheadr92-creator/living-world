@@ -7,13 +7,15 @@ import { killPerson } from '../src/sim/lifecycle';
 import { setMoodEffects, moodWeight, quarrelFactor, think, thoughtsOf, updateMood } from '../src/sim/mood';
 import { describePerson } from '../src/sim/inspect';
 import { hashWorld } from '../src/sim/world';
-import { natural, run } from './helpers/util';
+import { natural, run, LEGACY_WORLD } from './helpers/util';
 
 const rich = (seed: string) => natural(seed, { dynamics: 'rich' });
+// the legacy world these tests compare against, pinned: the helper's default is now the current rules, in which rich is on
+const ordinary = (seed: string) => natural(seed, LEGACY_WORLD);
 
 describe('rich dynamics', () => {
   it('leave an ordinary world without a mood or a season', () => {
-    const w = natural('rich-off');
+    const w = ordinary('rich-off');
     run(w, 1200);
     expect(w.persons.every((p) => p.mood === undefined)).toBe(true);
     expect(w.hardship).toBeUndefined();
@@ -28,7 +30,7 @@ describe('rich dynamics', () => {
     run(b, 900);
     expect(hashWorld(a)).toBe(hashWorld(b));
     expect(a.persons.filter((p) => p.alive).every((p) => p.mood !== undefined)).toBe(true);
-    expect(hashWorld(a)).not.toBe(hashWorld((() => { const c = natural('rich-a'); run(c, 900); return c; })()));
+    expect(hashWorld(a)).not.toBe(hashWorld((() => { const c = ordinary('rich-a'); run(c, 900); return c; })()));
   });
 
   it('save and load a rich world exactly', () => {
@@ -114,7 +116,7 @@ describe('rich dynamics', () => {
   });
 
   it('shows a person\'s thoughts in the inspector, and only in a rich world', () => {
-    const off = natural('rich-view');
+    const off = ordinary('rich-view');
     run(off, 300);
     expect(describePerson(off, off.persons[0].id)!.thoughts).toBeNull();
     const w = rich('rich-view');
@@ -154,7 +156,7 @@ describe('rich dynamics', () => {
     expect(coldSnap(w)).toBeCloseTo(12, 5);
     expect(regrowRate(w)).toBeLessThan(0.5);
     expect(growthRate(w)).toBeLessThan(0.4);
-    const off = natural('rich-winter-off');
+    const off = ordinary('rich-winter-off');
     off.tick = 10 * DAY;
     expect(winterDepth(off)).toBe(0);
     expect(coldSnap(off)).toBe(0);
@@ -164,7 +166,7 @@ describe('rich dynamics', () => {
 
   it('makes food go off faster and wolves bolder, only in a rich world', () => {
     const w = rich('rich-stakes');
-    const off = natural('rich-stakes');
+    const off = ordinary('rich-stakes');
     expect(spoilStore(off)).toBe(1);
     expect(spoilPile(off)).toBe(1);
     expect(spoilStore(w)).toBeGreaterThan(2);

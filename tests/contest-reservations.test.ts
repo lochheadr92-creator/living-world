@@ -91,7 +91,9 @@ describe('reservations are released', () => {
     expect(ana.activity).toBeNull();
     expect([...w.reservations.values()].filter((r) => r.owner === ana.id)).toHaveLength(0);
     expect(bush.amount).toBe(before);
-    expect(bush.reserved).toBeLessThanOrEqual(1); // only the other person's claim may remain
+    // what is still held is exactly other people's claims (the scene has more than one other person on the current rules)
+    const held = [...w.reservations.values()].filter((r) => r.kind === 'unit' && r.target === bush.id).reduce((n, r) => n + r.amount, 0);
+    expect(bush.reserved).toBe(held);
     expect(conservationReport(w).ok).toBe(true);
   });
 

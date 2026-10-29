@@ -6,12 +6,12 @@ import { tellBelief } from '../src/sim/social';
 import { makeSource } from '../src/sim/sources';
 import { RNG } from '../src/sim/rng';
 import type { Activity, ActivityKind, Person, World } from '../src/sim/types';
-import { natural, person, run, settingsFor } from './helpers/util';
+import { natural, person, run, settingsFor, flatWorld } from './helpers/util';
 import { snapshotInitial } from '../src/sim/economy';
 
 /** a hungry person, a second person, and one berry bush well outside anyone's sight */
 function remoteBushWorld(): { w: World; bush: ReturnType<typeof makeSource>; ben: Person; ana: Person } {
-  const w = testKit.flatWorld(settingsFor('knowledge', { scene: 'help' }));
+  const w = flatWorld(settingsFor('knowledge', { scene: 'help' }));
   w.camp = { x: 40.5, y: 36.5 };
   const rng = new RNG(5);
   const ben = testKit.addPerson(w, rng, { name: 'Ben', x: 40.5, y: 44.5, sex: 'm', hunger: 25 });

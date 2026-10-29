@@ -10,7 +10,7 @@ import { RNG } from '../src/sim/rng';
 import { updateNeeds } from '../src/sim/needs';
 import { updateEnvironment } from '../src/sim/environment';
 import { createBuilding } from '../src/sim/buildings';
-import { natural, person, run, settingsFor } from './helpers/util';
+import { natural, person, run, settingsFor, flatWorld } from './helpers/util';
 
 describe('life stages, birth and death', () => {
   it('a child is born to a couple, joins their household, and has the right family ties', () => {
@@ -77,7 +77,7 @@ describe('life stages, birth and death', () => {
   });
 
   it('a parent feeds a hungry child: care is a real transfer driven by the parent’s own decision', () => {
-    const w = testKit.flatWorld(settingsFor('care', { scene: 'help' }));
+    const w = flatWorld(settingsFor('care', { scene: 'help' }));
     w.camp = { x: 40.5, y: 36.5 };
     const rng = new RNG(3);
     const mum = testKit.addPerson(w, rng, { name: 'Mum', x: 40.5, y: 44.5, age: 32, hunger: 85, inv: { berries: 5 }, traits: { generosity: 0.7 } });
@@ -96,7 +96,7 @@ describe('life stages, birth and death', () => {
 
 describe('weather, night and shelter act on exposure', () => {
   it('nights are cold, but a fire or a hut keeps people warm', () => {
-    const w = testKit.flatWorld(settingsFor('cold', { scene: 'help' }));
+    const w = flatWorld(settingsFor('cold', { scene: 'help' }));
     w.camp = { x: 40.5, y: 36.5 };
     const rng = new RNG(8);
     const open = testKit.addPerson(w, rng, { name: 'Open', x: 20.5, y: 50.5 });
@@ -105,6 +105,7 @@ describe('weather, night and shelter act on exposure', () => {
     const hut = createBuilding(w, 'hut', 30, 60, 0);
     const indoors = testKit.addPerson(w, rng, { name: 'Indoors', x: hut.x + 1, y: hut.y + 1 });
     testKit.finish(w, 'help');
+    indoors.indoors = hut.id; // on the current rules a hut shelters whoever is actually inside it, not anyone standing near
     w.tick = 1700; // around half past midnight
     for (const p of w.persons) p.needs.warmth = 80;
     expect(lightAt((w.tick / 2400 + 0.3) % 1)).toBeLessThan(0.05);
@@ -114,7 +115,7 @@ describe('weather, night and shelter act on exposure', () => {
       for (const p of w.persons) updateNeeds(w, p);
     }
     expect(w.weather.temp).toBeLessThan(12);
-    expect(shelterAt(w, indoors.x, indoors.y).kind).toBe('hut');
+    expect(shelterAt(w, indoors.x, indoors.y, indoors).kind).toBe('hut');
     expect(open.needs.warmth).toBeLessThan(55);
     expect(warm.needs.warmth).toBeGreaterThan(open.needs.warmth + 20);
     expect(indoors.needs.warmth).toBeGreaterThan(open.needs.warmth + 20);
@@ -122,12 +123,13 @@ describe('weather, night and shelter act on exposure', () => {
   });
 
   it('rain soaks people who are not under cover', () => {
-    const w = testKit.flatWorld(settingsFor('rain', { scene: 'help' }));
+    const w = flatWorld(settingsFor('rain', { scene: 'help' }));
     const rng = new RNG(9);
     const wet = testKit.addPerson(w, rng, { name: 'Wet', x: 20.5, y: 50.5 });
     const hut = createBuilding(w, 'hut', 30, 60, 0);
     const dry = testKit.addPerson(w, rng, { name: 'Dry', x: hut.x + 1, y: hut.y + 1 });
     testKit.finish(w, 'help');
+    dry.indoors = hut.id; // inside the hut, as the current rules require for its cover
     w.tick = 300; // mid-morning
     w.weather.kind = 'rain';
     w.weather.rain = 0.7;

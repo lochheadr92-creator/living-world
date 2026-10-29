@@ -12,11 +12,11 @@ import { RNG } from '../../src/sim/rng';
 import { testKit } from '../../src/sim/scenes';
 import { makeSource } from '../../src/sim/sources';
 import type { Person, World } from '../../src/sim/types';
-import { settingsFor } from './util';
+import { settingsFor, flatWorld } from './util';
 
 /** a hungry person, a second person, and one berry bush well outside anyone's sight (the knowledge tests' fixture) */
 export function remoteBushWorld(seed = 'inhabitant-bush') {
-  const w = testKit.flatWorld(settingsFor(seed, { scene: 'help' }));
+  const w = flatWorld(settingsFor(seed, { scene: 'help' }));
   w.camp = { x: 40.5, y: 36.5 };
   const rng = new RNG(5);
   const ben = testKit.addPerson(w, rng, { name: 'Ben', x: 40.5, y: 44.5, sex: 'm', hunger: 25 });

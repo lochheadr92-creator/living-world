@@ -190,6 +190,7 @@ describe('how a promise ends', () => {
     const cm = commit(w, maker, { kind: 'haul', to: asker.id, item: 'wood', amount: 3, siteId: st.id });
     w.sites.splice(w.sites.indexOf(st), 1);
     w.byId.delete(st.id);
+    forget(maker, st.id); // in a rich world the maker has to learn it is gone (by going there), which clears the belief
     checkCommitments(w, maker);
     expect(cm.status).toBe('moot');
     expect(relOf(asker, maker.id).grievance).toBeNull();
@@ -314,14 +315,14 @@ describe('promises turn into real work and real deliveries', () => {
 
 describe('recovered site courier', () => {
   function fixture() {
-    const s = stage('haul-full-pack');
+    // built at the version it tests (11) from the start: a world made on the current rules carries township state that a
+    // version-11 world cannot have, and would not reload
+    const s = stage('haul-full-pack', 'natural', { dynamics: 'rich', rulesVersion: 11 });
     const owner = addPerson(s, 'Ola', 44, 26, { inv: { stone: 12 } });
     const giver = addPerson(s, 'Gil', 46, 26, { sex: 'm', inv: { fruit: 6, planks: 6 }, traits: { generosity: 0.95, diligence: 0.9 } });
     const st = site(s, 'granary', 40, 28, owner.hhId, owner.id);
     s.w.camp = { x: 44.5, y: 26.5 };
     const w = done(s);
-    w.settings.dynamics = 'rich';
-    w.settings.rulesVersion = 11;
     friends(owner, giver, 50, 50);
     for (const e of [st]) {
       observe(w, owner, e);

@@ -14,11 +14,11 @@ import type { Person, World } from '../src/sim/types';
 import { T } from '../src/sim/types';
 import { computeWaterDist } from '../src/sim/worldgen';
 import { makeWolf } from '../src/sim/wildlife';
-import { natural, run, settingsFor } from './helpers/util';
+import { natural, run, settingsFor, flatWorld } from './helpers/util';
 
 /** a flat test world with the lake along the north edge; the camp (and the camera) is in the middle */
 function lakeWorld(name: string, scene: 'help' | 'natural' = 'help') {
-  const w = testKit.flatWorld(settingsFor(name, { scene }));
+  const w = flatWorld(settingsFor(name, { scene }));
   return { w, rng: new RNG(hashString(name)) };
 }
 

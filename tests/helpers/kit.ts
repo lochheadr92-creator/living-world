@@ -6,8 +6,8 @@ import { observe } from '../../src/sim/knowledge';
 import { RNG, hashString } from '../../src/sim/rng';
 import { testKit } from '../../src/sim/scenes';
 import { mintTool } from '../../src/sim/tools';
-import type { Building, BuildingType, Entity, Items, Person, Tool, ToolKind, Traits, World } from '../../src/sim/types';
-import { settingsFor } from './util';
+import type { Building, BuildingType, Entity, Items, Person, Settings, Tool, ToolKind, Traits, World } from '../../src/sim/types';
+import { flatWorld, settingsFor } from './util';
 
 export interface Stage {
   w: World;
@@ -15,8 +15,8 @@ export interface Stage {
 }
 
 /** a flat, natural-rules world (so workshops, meals and welfare are active) with the lake along the north edge */
-export function stage(name: string, scene: 'natural' | 'help' = 'natural'): Stage {
-  const w = testKit.flatWorld(settingsFor(name, { scene }));
+export function stage(name: string, scene: 'natural' | 'help' = 'natural', extra: Partial<Settings> = {}): Stage {
+  const w = flatWorld(settingsFor(name, { scene, ...extra }));
   return { w, rng: new RNG(hashString(name)) };
 }
 

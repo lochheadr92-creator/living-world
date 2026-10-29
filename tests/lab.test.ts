@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { runLab, parseIntervention } from '../scripts/lab/lab';
 import { paired, verdict } from '../scripts/lab/stats';
 import { hashWorld } from '../src/sim/world';
-import { natural, run } from './helpers/util';
+import { natural, run, LEGACY_WORLD } from './helpers/util';
 
 const FORK = 0.1;
 const DAYS = 0.3;
@@ -34,7 +34,8 @@ describe('the counterfactual lab', () => {
   });
 
   it('an authored world takes on no projects, so the project tallies are zero', () => {
-    const o = by('control').outcome;
+    // the legacy world, pinned: the lab above runs the current rules, where people do take on projects
+    const o = runLab(natural('lab-a', LEGACY_WORLD), FORK, DAYS, [], 60)[0].outcome;
     expect([o.projectsAdopted, o.projectsDone, o.projectAsks, o.askUnitsDelivered]).toEqual([0, 0, 0, 0]);
   });
 

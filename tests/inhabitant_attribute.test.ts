@@ -9,7 +9,7 @@ import { observationFromPrompt } from '../src/agent/protocol';
 import { runLive } from '../src/agent/run';
 import { goalKeeperModel, pickerModel } from '../src/agent/stubs';
 import type { Transcript } from '../src/agent/transcript';
-import { natural, run } from './helpers/util';
+import { natural, run, LEGACY_WORLD } from './helpers/util';
 
 const DAY = 2400;
 const memoryRun = (): Transcript => JSON.parse(readFileSync('experiments/memory-pavel-gpt5/transcript.json', 'utf8')) as Transcript;
@@ -82,7 +82,9 @@ describe('attribution', () => {
   });
 
   it('on the goal keeper: every pursued choice is attributed to the goal, by its place reference', async () => {
-    const w = natural('meadow');
+    // LEGACY_WORLD: the recorded goal-keeper experiment (as in inhabitant_memory.test.ts); on the current rules no choice in this
+    // window is pursued past the first option offered (0, measured)
+    const w = natural('meadow', LEGACY_WORLD);
     run(w, DAY);
     const p = w.persons.find((q) => q.name === 'Pavel')!;
     const m = await runLive(w, p.id, goalKeeperModel(), { until: DAY + 700, memory: true });
@@ -101,7 +103,7 @@ describe('attribution', () => {
     expect(a.summary.pursuingByReference).toBe(pursued.length);
     expect(a.summary.plans.followed).toBeGreaterThanOrEqual(pursued.length);
     // the same world under a model that keeps no notes: nothing to attribute
-    const w2 = natural('meadow');
+    const w2 = natural('meadow', LEGACY_WORLD);
     run(w2, DAY);
     const n = await runLive(w2, p.id, pickerModel('first'), { until: DAY + 700 });
     expect(attribute(n.transcript).summary.candidates).toBe(0);

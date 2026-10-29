@@ -255,6 +255,18 @@ Do not launch expensive ensembles just because a feature now runs by default. De
 
 Historical goldens remain compatibility checks, not the definition of the current product. This transition does not re-record them or change the save format.
 
+**Test worlds (2026-10-29).** The shared test helper `tests/helpers/util.ts` (`settingsFor`, `natural`, `scene`, and through them `stage`
+in `tests/helpers/kit.ts`) now builds worlds on the current rules: rich dynamics at `CURRENT_RULES_VERSION`. Before this its worlds were
+built from `defaultSettings`, which is unversioned and has no dynamics, so every rich-only and version-gated mechanic was off in the 23
+test files that did not pin their own. A test that passes `dynamics` or `rulesVersion` still gets exactly that, which is how the
+compatibility and continuation references hold an older generation. A test whose subject is the legacy world (a recorded experiment,
+the "off" side of an on/off comparison), or that has not yet been made to work on the current rules, says so with `LEGACY_WORLD`
+and gives the reason where it is used; search for that name to see everything that still runs with mechanics off. `defaultSettings`
+itself, the goldens and the versioned references are unchanged. Staged flat worlds (`flatWorld`) found their township up front under a
+reserved id, so it does not take an entity id: hand-made scenarios are tuned to the ids their people get, and an id moved by one,
+with no rule changed, broke 9 of them. `immigration: false` remains explicit in the many tests that need a fixed population.
+`tests/test_helpers.test.ts` pins the default.
+
 ## Civilisation reconciliation (2026-10-24)
 
 Versions 8/9 collided across divergent branches. Local-main meanings (ore search,

@@ -98,6 +98,7 @@ describe('requests have answers and consequences', () => {
     };
     // kept
     const kept = mk(1);
+    kept.c.delivered = 2; // the wood arrived: in a rich world whether the ask was met is what actually arrived, not that a promise was closed
     const trustBefore = relOf(ana, ben.id).trust;
     fulfillCommitment(w, ben, kept.c.id);
     expect(kept.c.status).toBe('done');

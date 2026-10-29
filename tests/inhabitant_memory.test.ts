@@ -20,7 +20,7 @@ import type { InhabitantState, World } from '../src/sim/types';
 import { hashWorld } from '../src/sim/world';
 import { deepHash } from './helpers/golden';
 import { adult, observeNow, remoteBushWorld } from './helpers/inhabit';
-import { natural, run } from './helpers/util';
+import { natural, run, LEGACY_WORLD } from './helpers/util';
 
 const DAY = 2400;
 
@@ -28,7 +28,9 @@ const DAY = 2400;
 let pavelStart: { text: string; id: number } | null = null;
 function pavelWorld(): { w: World; id: number } {
   if (!pavelStart) {
-    const w = natural('meadow');
+    // LEGACY_WORLD: a recorded experiment (docs/INHABITANT.md). On the current rules the goal is adopted in this window but none of
+    // the choices that follow differ from the first option offered (0 pursued, measured), so its claim is not reproduced there.
+    const w = natural('meadow', LEGACY_WORLD);
     run(w, DAY);
     const p = w.persons.find((q) => q.name === 'Pavel')!;
     pavelStart = { text: serializeWorld(w), id: p.id };

@@ -91,7 +91,8 @@ describe('saving and loading', () => {
     expect(cart.puller).toBeGreaterThan(0);
     const puller = b.byId.get(cart.puller);
     expect(puller && puller.ent === 'person' && puller.cartId === cart.id).toBe(true);
-    for (let i = 0; i < 2500; i++) stepWorld(b);
+    // the house goes up about 45% later on the current rules than it did on the legacy world (tick 2963 against 2027 here)
+    for (let i = 0; i < 6000 && !b.buildings.some((x) => x.type === 'house'); i++) stepWorld(b);
     expect(b.buildings.some((x) => x.type === 'house')).toBe(true);
     expect(b.sites).toHaveLength(0);
     expect(conservationReport(b).ok).toBe(true);
@@ -103,8 +104,11 @@ describe('saving and loading', () => {
   });
 
   it('an ordinary world a few days in, with a yard and a kiln at work, saves and resumes exactly', () => {
-    const a = natural('save-load-workshops');
-    run(a, 15500);
+    // run until a workshop exists: on the current rules the first one comes later than on the legacy world (about tick 14.8k
+    // against 12.9k on this seed, and none within 30k on 'save-load-workshops', which this test used before)
+    const a = natural('meadow');
+    for (let i = 0; i < 40000 && !a.buildings.some((x) => x.ops); i++) stepWorld(a);
+    run(a, 600); // let it get to work
     expect(a.buildings.some((x) => x.ops)).toBe(true);
     const b = deserializeWorld(serializeWorld(a));
     expect(hashWorld(b)).toBe(hashWorld(a));

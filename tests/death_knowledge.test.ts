@@ -14,7 +14,7 @@ import { currentWorldSettings } from '../src/sim/profiles';
 import { generateOptions, rankOptions } from '../src/sim/decision';
 afterEach(()=>setLocalDeath(true));
 function setup(v=14){
- const s=stage('local-death');s.w.settings.dynamics='rich';s.w.settings.rulesVersion=v;
+ const s=stage('local-death','natural',{dynamics:'rich',rulesVersion:v});
  if(v>=14)s.w.birthCount=0;
  const a=addPerson(s,'Ada',40,40),b=addPerson(s,'Ben',42,40),c=addPerson(s,'Cora',75,40);
  for(const p of [b,c]){const r=relOf(p,a.id);r.kin=p===c?'partner':'sibling';r.affinity=90;}

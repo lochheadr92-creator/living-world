@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { trace } from '../scripts/cascade/trace';
 import { addEvent } from '../src/sim/events';
 import { hashWorld } from '../src/sim/world';
-import { natural, run } from './helpers/util';
+import { natural, run, LEGACY_WORLD } from './helpers/util';
 
 describe('the cascade tracer', () => {
   it('leaves the world exactly where it would have been', () => {
@@ -15,7 +15,9 @@ describe('the cascade tracer', () => {
   });
 
   it('links happenings that share a person within a day, across systems, and not otherwise', () => {
-    const w = natural('trace-b');
+    // LEGACY_WORLD: exact transition counts need a quiet world. On the current rules people are much busier in this window (28
+    // links against 14), so other happenings of p and q come between the staged ones and the staged pairs are not adjacent.
+    const w = natural('trace-b', LEGACY_WORLD);
     const [p, q, r] = w.persons.filter((x) => x.alive);
     const rep = trace(w, 0.5, (x) => {
       if (x.tick === 100) addEvent(x, 'danger', 'first', [p.id]);
