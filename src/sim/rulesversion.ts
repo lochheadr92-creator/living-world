@@ -104,10 +104,11 @@ import type { Settings, World } from './types';
 // Version 54: relocation by the consenting part of a household (stayers keep the old home; the travellers found a new household), succession of a dead or departed organiser, a return when the destination fails, and a bounded search for a traveller out of contact (src/sim/relocation.ts).
 // Version 55: what a person has carried to sites is the ground for wanting a cart, a cart serves the household's food reserve and batch plans beyond the building site, and a loaded cart left standing is recovered (src/sim/transport.ts).
 // Version 56: childcare promises use communicated or personally known locations; watching keeps physical contact and revalidates the helper's food/water reserves (responsibilities.ts).
-export const CURRENT_RULES_VERSION = 56;
+// Version 57: a required tool exposed by wanted workshop work connects to ordinary hand-tool materials, plans and crafting (options_work.ts).
+export const CURRENT_RULES_VERSION = 57;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

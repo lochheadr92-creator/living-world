@@ -1,0 +1,328 @@
+{
+  "head": "a465c2e62826500cecd4efe47e0d17cdf9bd4107",
+  "rules": 57,
+  "sourceHashes": {
+    "scripts/browser/tool_prerequisite_check.mjs": "4334ef2e6ece22abdf469ff4ef2a99be87ff73b4a69d95eca771fe4b0c9daf42",
+    "tests/helpers/tool_prerequisite.ts": "7df08257574ebbd42fb4760ee159d5916ae03fb0d57ec6e4448474110a87d7d4",
+    "src/sim/options_work.ts": "f526c196201e9856bc4e54f57b439e29e358613250f63bfe645d73cab03799b2",
+    "src/sim/decision.ts": "26f354203c8198768a9509ded3ed3e897617cbc9b98974415719dfaf908b0da0",
+    "src/sim/rulesversion.ts": "93b93f003a55a2d40067081ff0c72eb1b39934884359e7173f1264dc265d3558"
+  },
+  "evidence": "STAGED workshop, component stock, raw sources and heavy site demand. Explicit actual offered choices through the inhabitant selection boundary; physical acquisition, work, survival costs, cart use and exact same-browser continuation. No claim of natural activation or aggregate benefit.",
+  "checks": [
+    {
+      "name": "actual offered workshop demand requires the missing hammer; inspection is pure",
+      "ok": true,
+      "detail": {
+        "demand": [
+          {
+            "item": "cart",
+            "qty": 1,
+            "have": 0,
+            "base": 16.800000000000004,
+            "why": "to haul heavy loads",
+            "tag": "craft"
+          }
+        ],
+        "required": {
+          "kind": "hammer",
+          "for": "building a handcart"
+        },
+        "pure": true
+      }
+    },
+    {
+      "name": "physical acquisition and delivery preserve the tool plan reservation",
+      "ok": true,
+      "detail": {
+        "reservedWood": 1,
+        "inv": {
+          "bread": 1,
+          "water": 1,
+          "wood": 1,
+          "stone": 2
+        },
+        "siteWood": 3,
+        "plan": {
+          "id": 10,
+          "kind": "tool",
+          "goal": "make a hammer",
+          "since": 1000,
+          "until": 5800,
+          "status": "active",
+          "reason": "it would make the work easier, and the makings are short",
+          "setAside": 0,
+          "aboutId": 0,
+          "wants": {
+            "wood": 1,
+            "stone": 2
+          },
+          "makes": "hammer",
+          "sheltered": 0,
+          "worked": 0,
+          "ended": 0,
+          "step": "get 2 more stone for the hammer",
+          "stepKind": "get",
+          "stepTarget": 0,
+          "stepItem": "stone",
+          "stepKey": null,
+          "blocked": ""
+        },
+        "conserved": true
+      }
+    },
+    {
+      "name": "real hammer crafting and intermediate save continuation succeed",
+      "ok": true,
+      "detail": {
+        "held": 1,
+        "continued": true,
+        "conserved": true,
+        "decision": {
+          "tick": 1642,
+          "trigger": "free (external)",
+          "chosen": {
+            "kind": "craft",
+            "label": "Make a hammer",
+            "utility": 3.1,
+            "parts": [
+              [
+                "wants a hammer",
+                25
+              ],
+              [
+                "walking",
+                -10.9
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "sleep",
+              "label": "Sleep at my hut",
+              "utility": 38,
+              "parts": [
+                [
+                  "bedtime",
+                  48.9
+                ],
+                [
+                  "walking",
+                  -10.9
+                ]
+              ]
+            },
+            {
+              "kind": "build",
+              "label": "Build the storehouse",
+              "utility": 7,
+              "parts": [
+                [
+                  "building work to do",
+                  43.6
+                ],
+                [
+                  "walking",
+                  -12.5
+                ],
+                [
+                  "good builder",
+                  0.6
+                ]
+              ]
+            },
+            {
+              "kind": "wander",
+              "label": "Potter about near home",
+              "utility": 6,
+              "parts": [
+                [
+                  "nothing pressing",
+                  6
+                ],
+                [
+                  "a change of scene",
+                  2
+                ],
+                [
+                  "spare time stays a fallback",
+                  -2
+                ]
+              ]
+            }
+          ],
+          "blocked": [
+            {
+              "kind": "rest",
+              "label": "Stay in shelter until it is light",
+              "utility": 0,
+              "parts": [],
+              "blocked": "not at a shelter"
+            },
+            {
+              "kind": "operate",
+              "label": "Building a handcart",
+              "utility": 0,
+              "parts": [],
+              "blocked": "needs a hammer and has none (and none is on the rack)"
+            }
+          ],
+          "considered": 4,
+          "knownPlaces": 6,
+          "seenNow": 0,
+          "because": "chosen from outside"
+        }
+      }
+    },
+    {
+      "name": "an offered workshop activity consumes staged components and creates the owned cart",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "carts": [
+          {
+            "id": 25,
+            "ownerHh": 1,
+            "load": {}
+          }
+        ],
+        "workshopStock": {},
+        "conserved": true
+      }
+    },
+    {
+      "name": "after real drink and sleep, the offered cart trip physically delivers useful stone",
+      "ok": true,
+      "detail": {
+        "siteStone": 14,
+        "stockBefore": 30,
+        "stockAfter": 16,
+        "cartLoad": {},
+        "decision": {
+          "tick": 2355,
+          "trigger": "free (external)",
+          "chosen": {
+            "kind": "cart_haul",
+            "label": "Cart 14 stone to the storehouse site",
+            "utility": 56.4,
+            "parts": [
+              [
+                "a cart can move all of it in one go",
+                36.6
+              ],
+              [
+                "it would take 4 trips on foot",
+                34.3
+              ],
+              [
+                "walking",
+                -14.5
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "gather",
+              "label": "Chopping wood for my household’s storehouse",
+              "utility": 42,
+              "parts": [
+                [
+                  "for my household’s storehouse",
+                  45.6
+                ],
+                [
+                  "walking",
+                  -5.3
+                ],
+                [
+                  "good at it",
+                  1.1
+                ],
+                [
+                  "has paid me well before (1.3×)",
+                  0.6
+                ]
+              ]
+            },
+            {
+              "kind": "gather",
+              "label": "Breaking stone for my household’s storehouse",
+              "utility": 38.3,
+              "parts": [
+                [
+                  "for my household’s storehouse",
+                  45.6
+                ],
+                [
+                  "walking",
+                  -6.8
+                ],
+                [
+                  "good at it",
+                  -0.6
+                ]
+              ]
+            },
+            {
+              "kind": "withdraw",
+              "label": "Collect 3 stone from the storehouse",
+              "utility": 31.4,
+              "parts": [
+                [
+                  "for my household’s storehouse",
+                  43.3
+                ],
+                [
+                  "walking",
+                  -11.9
+                ]
+              ]
+            },
+            {
+              "kind": "build",
+              "label": "Build the storehouse",
+              "utility": 29.2,
+              "parts": [
+                [
+                  "building work to do",
+                  43.6
+                ],
+                [
+                  "walking",
+                  -15
+                ],
+                [
+                  "good builder",
+                  0.6
+                ]
+              ]
+            }
+          ],
+          "blocked": [],
+          "considered": 7,
+          "knownPlaces": 7,
+          "seenNow": 0,
+          "because": "chosen from outside"
+        },
+        "result": {
+          "tick": 2581,
+          "label": "Hauling 14 stone to the storehouse site",
+          "outcome": "success",
+          "detail": "done"
+        },
+        "tick": 2582,
+        "conserved": true
+      }
+    },
+    {
+      "name": "viewing the outcome preserves world state",
+      "ok": true,
+      "detail": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

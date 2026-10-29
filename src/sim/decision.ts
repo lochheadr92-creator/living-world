@@ -20,7 +20,7 @@ import { probe, probeWander } from './probe';
 import type { Ctx, Option } from './optutil';
 import { socialOptions } from './options_social';
 import { survivalOptions } from './options_survival';
-import { workOptions } from './options_work';
+import { workOptions, workshopToolOptions } from './options_work';
 import { productionOptions } from './production';
 import { applyReliefGuard } from './relief';
 import { markSetAside } from './social';
@@ -51,6 +51,7 @@ function collectOptions(world: World, p: Person, collect: boolean, observer: boo
   survivalOptions(ctx);
   workOptions(ctx);
   productionOptions(ctx);
+  workshopToolOptions(ctx);
   socialOptions(ctx);
   relocationOptions(ctx);
   if (probe.on) {

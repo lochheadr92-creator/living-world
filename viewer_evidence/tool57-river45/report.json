@@ -1,0 +1,176 @@
+{
+  "seed": "river",
+  "days": 45,
+  "immigration": false,
+  "arm": "current",
+  "rulesVersion": 57,
+  "tick": 108000,
+  "stop": "horizon",
+  "seconds": 139.241,
+  "alive": 24,
+  "deaths": 9,
+  "samples": {
+    "adults": 7890,
+    "withHauling": 3392,
+    "withExperience": 8,
+    "wantCartDeficit": 6,
+    "wantCartExperience": 8,
+    "cartBlocked": 10
+  },
+  "blockers": {
+    "needs a hammer and has none (and none is on the rack)": 10
+  },
+  "peopleEverExperienced": 1,
+  "peopleEverWantingCart": 5,
+  "starts": {
+    "footHaul": 241
+  },
+  "trips": [],
+  "carts": [],
+  "haulLogs": 9,
+  "cartHaulLogs": 0,
+  "leftLoaded": 0,
+  "hauling": [
+    {
+      "name": "Emre",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 34247,
+      "perTrip": 3
+    },
+    {
+      "name": "Ben",
+      "alive": true,
+      "weight": 10,
+      "trips": 2,
+      "since": 67365,
+      "perTrip": 5
+    },
+    {
+      "name": "Zia",
+      "alive": true,
+      "weight": 2,
+      "trips": 1,
+      "since": 82135,
+      "perTrip": 2
+    },
+    {
+      "name": "Milo",
+      "alive": true,
+      "weight": 13,
+      "trips": 5,
+      "since": 24748,
+      "perTrip": 2.6
+    },
+    {
+      "name": "Abel",
+      "alive": true,
+      "weight": 4,
+      "trips": 1,
+      "since": 86368,
+      "perTrip": 4
+    },
+    {
+      "name": "Ivo",
+      "alive": true,
+      "weight": 4,
+      "trips": 1,
+      "since": 84437,
+      "perTrip": 4
+    },
+    {
+      "name": "Ines",
+      "alive": true,
+      "weight": 10,
+      "trips": 4,
+      "since": 104014,
+      "perTrip": 2.5
+    },
+    {
+      "name": "Tomas",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 72813,
+      "perTrip": 3
+    },
+    {
+      "name": "Kai",
+      "alive": true,
+      "weight": 16,
+      "trips": 2,
+      "since": 75426,
+      "perTrip": 8
+    },
+    {
+      "name": "Petra",
+      "alive": true,
+      "weight": 4,
+      "trips": 1,
+      "since": 72351,
+      "perTrip": 4
+    },
+    {
+      "name": "Cole",
+      "alive": true,
+      "weight": 3,
+      "trips": 1,
+      "since": 72147,
+      "perTrip": 3
+    },
+    {
+      "name": "Ivy",
+      "alive": true,
+      "weight": 18,
+      "trips": 4,
+      "since": 106329,
+      "perTrip": 4.5
+    },
+    {
+      "name": "Basil",
+      "alive": true,
+      "weight": 18,
+      "trips": 4,
+      "since": 1225,
+      "perTrip": 4.5
+    },
+    {
+      "name": "Talia",
+      "alive": true,
+      "weight": 9,
+      "trips": 1,
+      "since": 46500,
+      "perTrip": 9
+    },
+    {
+      "name": "Alma",
+      "alive": true,
+      "weight": 8,
+      "trips": 1,
+      "since": 67631,
+      "perTrip": 8
+    },
+    {
+      "name": "Jax",
+      "alive": true,
+      "weight": 13,
+      "trips": 2,
+      "since": 17934,
+      "perTrip": 6.5
+    },
+    {
+      "name": "Lena",
+      "alive": true,
+      "weight": 6,
+      "trips": 1,
+      "since": 106213,
+      "perTrip": 6
+    }
+  ],
+  "hash": "066e9d5a",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

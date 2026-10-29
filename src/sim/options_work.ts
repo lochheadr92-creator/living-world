@@ -328,9 +328,20 @@ setToolWant((ctx) => wantedTool(ctx));
 /** every tool somebody can make by hand; the water jar is fired at a kiln, not whittled, so it is not one of them */
 export type HandTool = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'spear';
 
+let workshopTools = true;
+export const workshopToolsOn = (): boolean => workshopTools;
+export function setWorkshopTools(on: boolean): void { workshopTools = on; }
+function workshopTool(ctx: Ctx): HandTool | null {
+  if (!workshopTools || ctx.world.settings.dynamics !== 'rich' || !runsRulesVersion(ctx.world, 57) || ctx.stage === 'child') return null;
+  const tool = ctx.toolWanted?.kind;
+  return tool && tool !== 'jar' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
+}
+
 export function wantedTool(ctx: Ctx): HandTool | null {
   const { p, world } = ctx;
   if (ctx.stage === 'child') return null;
+  const prerequisite = workshopTool(ctx);
+  if (prerequisite) return prerequisite;
   const has = (t: ToolKind) => (p.inv[t] ?? 0) > 0;
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
@@ -873,6 +884,29 @@ function optCraft(ctx: Ctx): void {
   craftCandidates(ctx);
 }
 
+/** Production discovers its required tool after ordinary work options have been built.
+ * Reuse hand crafting and local material acquisition for that one actual prerequisite.
+ * Existing choices (including borrowing later in socialOptions) remain on offer. */
+export function workshopToolOptions(ctx: Ctx): void {
+  const tool = workshopTool(ctx);
+  if (!tool || craftNeedsBlock(ctx)) return;
+  const scratch: Ctx = { ...ctx, options: [], blocked: [] };
+  craftOption(scratch, tool);
+  const r = TOOL_RECIPE[tool];
+  const forPlan = ctx.p.intentions.some(i => i.status === 'active' && i.kind === 'tool' && i.makes === tool);
+  for (const item of ['wood', 'stone'] as const) {
+    const have = forPlan ? ctx.p.inv[item] ?? 0 : freeOf(ctx.p, item);
+    const short = r[item] - have;
+    if (short > 0) gatherMaterial(scratch, item, short, 15 * ctx.p.traits.diligence + 6,
+      `to make a ${tool} for ${ctx.toolWanted!.for}`, 'craft');
+  }
+  // The earlier work pass may already offer the same physical trip for another purpose.
+  // Keep its established amount/ordering; another copy must not buy another draw in decide.
+  const keys = new Set(ctx.options.map(o => o.key));
+  for (const o of scratch.options) if (!keys.has(o.key)) { ctx.options.push(o); keys.add(o.key); }
+  for (const o of scratch.blocked) if (!ctx.blocked.some(b => b.key === o.key && b.blocked === o.blocked)) ctx.blocked.push(o);
+}
+
 /** The existing work gate, shared with the inhabitant explanation; no thresholds change. */
 function craftNeedsBlock(ctx: Ctx): string | null {
   const needs = [ctx.drives.hunger > 30 ? 'eat' : '', ctx.drives.thirst > 30 ? 'drink' : ''].filter(Boolean);
@@ -928,7 +962,7 @@ function craftOption(ctx: Ctx, tool: HandTool): void {
   const target = best;
   const e = eta(ctx, target.x, target.y);
   // a spear is not made to work faster; it is made because there are wolves about, and the reason it is offered says so
-  const why = tool === 'spear' ? 'to have something to face a wolf with' : 'to work faster';
+  const why = workshopTool(ctx) === tool ? `to begin ${ctx.toolWanted!.for}` : tool === 'spear' ? 'to have something to face a wolf with' : 'to work faster';
   const sc = new Scorer().add(tool === 'spear' ? 'wolves about and nothing to face one with' : `wants ${/^[aeiou]/.test(tool) ? 'an' : 'a'} ${tool}`, 17 + 8 * p.traits.diligence).add('walking', -pen(e));
   const util = sc.total * nightMult(ctx);
   addOption(ctx, {

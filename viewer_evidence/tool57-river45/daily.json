@@ -1,0 +1,317 @@
+[
+  {
+    "day": 1,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 9
+  },
+  {
+    "day": 2,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 14
+  },
+  {
+    "day": 3,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 16
+  },
+  {
+    "day": 4,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 16
+  },
+  {
+    "day": 5,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 17
+  },
+  {
+    "day": 6,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 17
+  },
+  {
+    "day": 7,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 17
+  },
+  {
+    "day": 8,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 18
+  },
+  {
+    "day": 9,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 18
+  },
+  {
+    "day": 10,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 11,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 12,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 13,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 14,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 15,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 16,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 17,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 18,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 19,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 20,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 21,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 22,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 23,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 20
+  },
+  {
+    "day": 24,
+    "alive": 30,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 25,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 26,
+    "alive": 30,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 27,
+    "alive": 30,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 28,
+    "alive": 30,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 29,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 30,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 31,
+    "alive": 31,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 32,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 18
+  },
+  {
+    "day": 33,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 18
+  },
+  {
+    "day": 34,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 18
+  },
+  {
+    "day": 35,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 18
+  },
+  {
+    "day": 36,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 37,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 38,
+    "alive": 29,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 39,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 40,
+    "alive": 28,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 41,
+    "alive": 27,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 19
+  },
+  {
+    "day": 42,
+    "alive": 25,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 17
+  },
+  {
+    "day": 43,
+    "alive": 24,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 17
+  },
+  {
+    "day": 44,
+    "alive": 24,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 17
+  },
+  {
+    "day": 45,
+    "alive": 24,
+    "carts": 0,
+    "loadedCarts": 0,
+    "withHauling": 17
+  }
+]

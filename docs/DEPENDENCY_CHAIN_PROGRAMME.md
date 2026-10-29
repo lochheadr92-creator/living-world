@@ -5,6 +5,11 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
+The expanded owner programme remains **partially delivered**. Current continuation
+adds viewer improvements, measured care/upkeep/mature-world evidence, rules 56 practical
+childcare and rules 57 workshop tool prerequisites. The older rules-44–55 report below
+is historical scope, not closure of the expanded WS15–21 or their dependencies.
+
 Status fields (each row carries all six): **Impl** implemented · **Contract** contract-tested · **E2E** connected end to end
 in one staged physical run · **Ordinary** observed in an ordinary seeded world (with denominators) · **Rendered** inspectable
 and understandable in the page · **Aggregate** benefit measured (paired control/nudge) or explicitly unproven.
@@ -171,6 +176,20 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   time; no cart exists, so no trip; table in the slice log) · Rendered `yes` (person-card line; page check
   `scripts/browser/chains_check.mjs` transport 1 / 1, `chain_evidence/rendered/transport.png`) ·
   Aggregate `unproven` (lab rows in the slice log). Exchange goods are not carted (limit kept).
+- **Rules-57 continuation:** the actual workshop-required tool fact now reaches ordinary
+  hand-tool material/craft options and private tool plans. Borrowing/racks remain valid.
+  Seven contracts and Chromium 7/7: raw acquisition → retained reservation → hammer →
+  cart → real drink/sleep/eat → 14 stone carted to the site, exact intermediate save
+  continuation and conservation. [WORKSHOP_TOOL_PREREQUISITES.md](WORKSHOP_TOOL_PREREQUISITES.md).
+  This closes the diagnosed missing connection, not the entire transport row or its
+  ordinary/aggregate acceptance. Exchange transport and interruption/route variants remain.
+  Fixed river/Normal/no-immigration, 45 days under rules 57: 7,890 adult samples,
+  14 cart-demand samples, 10 missing-hammer samples, 241 foot-haul starts, three
+  crafted hammers, **zero carts/trips**. Ledger and sampled observer purity pass.
+  Five retained hammer plans include four ended short of stone. Ben and Petra have
+  insufficient room for one stone while carrying seeds/tools/other goods. Next:
+  trace the capacity transition and known home storage, then establish physical
+  unloading/retrieval without changing capacities, recipes or selection scores.
 
 ### WS8 Public projects and civic benefit
 - **Current.** Rules 42 `civic_benefit.ts recordCivicBenefit`, one call site after a successful `withdraw`
@@ -345,6 +364,10 @@ current-rules aggregate or rendered proof.
   Main also corrected the stale rules-53 test comments; reference values were not changed.
 - Owner sections 1, 2, 22–25 govern authority, registration, evidence, compatibility,
   review and delivery across every row below. No remote publication is authorized.
+- Related main rendered examples/report through `4e63b63` were integrated at `9beba7c`.
+  Rules 56 practical care committed at `4f68699`, viewer hierarchy/history at `737c233`.
+  Immutable rules-56 ordinary and active-childcare references committed at `a465c2e`
+  before rules 57; both pass on the successor. Main's prior rules-55 reference is intact.
 
 ### Existing workstreams: expanded acceptance and exact next transitions
 
@@ -359,8 +382,8 @@ action for the expanded brief; no previous row is removed or promoted by inherit
 | WS3 / §6 seasonal reserves | Gather→deposit→preserve→withdraw/distribute→eat→replenish over an actual winter. Distinguish time expiry from stock/access/spoilage failure. | Homes, granary access, food help. Continue fixed ordinary worlds through preparation and winter; retain per-kind flows and adverse forest outcomes; render granary-share meals. | Existing rules-46 contracts/staged use and lab retained. Current rendered winter flow and recovery remain partial; survival benefit unproven. |
 | WS4 / §7 homes | Notice wear/loss→repair/replacement/upgrade→materials→finish→occupy; later response changes after genuine failure. | Labour/care, material reservations, competition with workshops. Stage collapse, abandoned site, limited-labour neighbour help and upgrade; check warmth/rest/spoilage consequences. | Existing shelter tests and housing-condition lab effect retained. Expanded recovery/failure-memory evidence partial; survival unproven. |
 | WS5 / §10 cooperation | Communicated commitment→contact/acquisition→actual fulfilment→relevant later choice, preserving refusal and expiry. | WS2, WS4, WS19. Stage repeated real delivery, changed home/access/capacity, moved recipient, cancellation and later eligible helper choice. | Rules-48 physical/ordinary deliveries retained; repeated natural cooperation, rendered failure distinctions and later eligible decision remain partial; aggregate unproven. |
-| WS6 / §11 production | Each listed recipe chain reaches useful consumption, including missing tool/procedure acquisition, without forcing industry. | WS7 tools/carts, WS10 procedures, WS18 resources. Trace `production.ts planRecipe → ctx.toolWanted → options_work.ts wantedTool/intent.ts toolWanted` before extending gates; use real offered eligibility. | Batch persistence/resumption already implemented. Ore→iron→forged use, bread eaten, cart tool prerequisite and every downstream chain not all proven; aggregate unproven. |
-| WS7 / §12 transport | Needed load→components/tool→cart→load/route/unload→use→upkeep/recovery, goods always physically located. | WS6 and equipment access. Reproduce missing-hammer offer chain, then build and haul a useful load; stage route block, changed demand, death and recovery. | Existing staged construction haul retained. Ordinary carts, provisioning/exchange transport and full recovery scenarios remain unproven. |
+| WS6 / §11 production | Each listed recipe chain reaches useful consumption, including missing tool/procedure acquisition, without forcing industry. | WS7 tools/carts, WS10 procedures, WS18 resources. Rules 57 connects the actual required hand tool to plans/materials/crafting. Next trace capacity and physically accessible storage for blocked input acquisition. | Batch persistence/resumption retained; raw materials→hammer→cart→use proven staged. Ore→iron→forged use, bread eaten and every downstream chain not all proven; aggregate unproven. |
+| WS7 / §12 transport | Needed load→components/tool→cart→load/route/unload→use→upkeep/recovery, goods always physically located. | WS6 and equipment access. Rules 57 proves missing-hammer acquisition through cart delivery of 14 stone. Next investigate pack/storage blockage, then route block, changed demand and recovery variants. | Ordinary rules-57 river reaches 45 days: 14 demand samples, 3 crafted hammers, zero carts/trips. Provisioning/exchange transport and full recovery scenarios remain partial/unproven. |
 | WS8 / §13 civic feedback | Personally witnessed useful service→bounded attributed receipt→later eligible civic choice. | WS3, WS16; keep transfer credit single. Render full-pack eat-at-store and then a real eligible recruitment decision; investigate zero ordinary meal receipts against actual eligible denominator. | Rules-49 tests/staged receipt retained. Receipt alone is not later civic behaviour, governance or survival proof. Other buildings require actual attributable use. |
 | WS9 / §14 demand/trade | Heard need→feasible work→surplus→customer exchange→return/delivery→changed work choice; repeated inter-settlement journeys. | WS6, WS7 and legitimate multi-settlement contact. Use Large profile with real complementary goods; trace stale/refused/interrupted journeys; retain zero opportunities. | Existing customer site deliveries retained. Produce-for-customer, ordinary swaps/returns, trade-review decisions and inter-settlement execution remain partial/unproven. |
 | WS10 / §17 practical knowledge | Wanted work→missing procedure→contact lesson or costly trial→learn→real output, across generations and loss. | WS6 physical workshops/ore/fuel. Stage loss/recovery and young learner→later smelt/forge/use; measure real opportunities after smithy completion. | Rules-52 tree/instruction/trial contracts retained. Ordinary higher techniques and generational useful-work evidence partial; aggregate unproven. |
@@ -559,6 +582,20 @@ Population 31/22/8 stays constant in this short window; no generational claim.
   native Vite loader notices and a 928.31 kB chunk warning; test output retains the
   existing TimeoutOverflowWarning. Browser watch 6/6, existing care/upkeep 5/5, viewer
   39/39. No aggregate effect established by this continuation.
+- Rules-57 stable boundary: `npm test -- --maxWorkers=4` **214 files / 1,477 tests
+  passed**, exit 0, 282.66 s (`viewer_evidence/rules57-full-final.log`). Typecheck,
+  build and diff check exit 0; historical goldens and predecessor continuations pass.
+  Build retains the native loader notices and a 929.12 kB chunk warning; tests retain
+  TimeoutOverflowWarning. Focused tool prerequisite contracts 7/7; rendered journey
+  7/7 with exact same-Chromium intermediate continuation. The first full-suite run
+  was stopped after a new tool-record fixture failure; its log is retained and is
+  not reported as passing. The fixture was repaired without weakening assertions.
+- Rules-57 ordinary observation: existing `transport_observe.ts`, fixed river/Normal,
+  no immigration, 45 days/108,000 ticks, 300-second stop; horizon reached in 139.241 s.
+  Report, daily totals, source manifest and retained-plan snapshot are under
+  `viewer_evidence/tool57-river45/`; raw `final.json` is retained locally and ignored.
+  Conservation and sampled full-save observer purity pass. No cart completed; no
+  aggregate causal claim. This null result remains part of the programme.
 
 - Initial archive refresh succeeded, 1 available new prompt appended. Two unavailable
   historical ChatGPT conversations remain marked partial; no fresh remote-history claim.
@@ -931,7 +968,11 @@ deaths −1.4 [−2.4, −0.4] (floor ±3.1), projects adopted +7.4, preparation
 much), tools +1.4 [−1.8, +4.2], the rest indistinguishable from chance. No cart was made on any arm (the hammer), so the
 rows measure the demand's side effects on planning, not transport. No benefit claimed, no harm established.
 
-## Final report (2026-10-29)
+## Earlier rules-44–55 delivery report (2026-10-29)
+
+Preserved from the related main delivery. Its "final" scope ends at rules 55 and
+does not mark this owner's expanded programme complete. Current continuation status
+and unresolved acceptance requirements are in WS15–21 and the expansion table above.
 
 **Versions.** Started from `main` `7625337`, rules 44. Final: `main` at the commit after `8e1d11f`, rules 55
 (`CURRENT_RULES_VERSION`), save format unchanged, every version 44-55 supported and pinned by its own continuation
