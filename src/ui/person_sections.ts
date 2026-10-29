@@ -366,7 +366,10 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const heardBox = h('div', { class: 'list heard' });
   // the trade they have settled on, if any: one line, in their own terms (trade.ts; an apprenticeship is said beside it)
   const tradeLine = h('p', { class: 'trait-sum' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, payHead, payBox, heardHead, heardBox);
+  // rules 51 (customers.ts): who asked them for a material they had none of, and what was brought and returned; the heading goes when there is nothing
+  const customerHead = h('div', { class: 'sub-h cap' }, 'Their customers');
+  const customerBox = h('div', { class: 'list customers' });
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, customerHead, customerBox, payHead, payBox, heardHead, heardBox);
   const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
     heardBox,
     () => {
@@ -545,6 +548,12 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         setText(techniqueText,v.techniques.join(' '));setHidden(techniqueText,!v.techniques.length);
         setText(tradeLine, v.trade ? `Their trade: ${v.trade}.` : '');
         setHidden(tradeLine, !v.trade);
+        setHidden(customerHead, v.customers.length === 0);
+        setHidden(customerBox, v.customers.length === 0);
+        if (customerBox.dataset.key !== v.customers.join('|')) {
+          customerBox.dataset.key = v.customers.join('|');
+          customerBox.replaceChildren(...v.customers.map((t) => h('div', { class: 'row' }, t)));
+        }
         setHidden(payHead, v.payoffs.length === 0);
         payList.sync(v.payoffs, (s) => s.key);
         setHidden(heardHead, v.heard.length === 0);

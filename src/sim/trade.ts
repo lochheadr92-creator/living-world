@@ -23,6 +23,7 @@ import { RECIPES } from './recipes';
 import { SOURCE_SKILL } from './constants';
 import { isRich } from './mood';
 import { repeatedDemand,pruneDemand,DEMAND_BONUS,hasLocalDemand } from './local_demand';
+import { servedBonus, demandLapsed } from './customers';
 import type { Ctx, Option } from './optutil';
 import type { ActivityKind, Belief, BuildingType, Person, SkillKey, SourceType, World } from './types';
 
@@ -160,7 +161,8 @@ export function reviewTrade(ctx: Ctx): void {
   const sight = workInSight(p);
   const demand=repeatedDemand(world,p);
   const feasible=new Set(ctx.options.filter(o=>!o.blocked).map(o=>workOfOption(p,o)));
-  const bonus=(k:SkillKey)=>demand.has(k)&&feasible.has(k)?DEMAND_BONUS:0;
+  // rules 51 (customers.ts): a customer supplied in the window holds the trade that made the goods a little more firmly
+  const bonus=(k:SkillKey)=>(demand.has(k)&&feasible.has(k)?DEMAND_BONUS:0)+servedBonus(world,p,k);
   const have = p.trade;
   if (have) {
     // A gathering-aligned trade can end if its recorded pay is poor over several outings; any trade can end if so many people
@@ -169,7 +171,9 @@ export function reviewTrade(ctx: Ctx): void {
     const poorly = !!pay && pay.n >= POOR_AFTER && pay.r < POOR_PAY;
     const crowded = sight.workers >= 3 && (sight.at.get(have.key) ?? 0) / sight.workers > CROWDED_SHARE;
     const pulled=Array.from(demand.keys()).some(k=>k!==have.key&&bonus(k)>0&&advantage(p,k,sight)+bonus(k)>=advantage(p,have.key,sight)+bonus(have.key)+SWITCH_MARGIN);
-    if (!poorly && !crowded && !pulled) return;
+    // rules 51: a trade taken up because people asked, whose asks all lapsed unsupplied, is looked at again
+    const lapsed=/people asked me/.test(have.why)&&demandLapsed(world,p,have.key);
+    if (!poorly && !crowded && !pulled && !lapsed) return;
   }
   let best: SkillKey | null = null;
   let bestScore = -1e9;
@@ -196,7 +200,7 @@ export function reviewTrade(ctx: Ctx): void {
   p.trade = {
     key: best,
     since: world.tick,
-    why: bonus(best)>0 ? `${demand.get(best)!.people} people asked me for ${demand.get(best)!.item}` : have ? `${tradeWord(have.key)} was not paying` : crowd === 0 && sight.workers >= 2 ? 'nobody else here does it' : 'quicker at it than at anything else',
+    why: demand.has(best)&&feasible.has(best) ? `${demand.get(best)!.people} people asked me for ${demand.get(best)!.item}` : servedBonus(world,p,best)>0 ? 'people I supplied came back for more' : have ? `${tradeWord(have.key)} was not paying` : crowd === 0 && sight.workers >= 2 ? 'nobody else here does it' : 'quicker at it than at anything else',
   };
 }
 

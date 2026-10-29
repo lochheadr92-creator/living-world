@@ -1,5 +1,6 @@
 import { exchangeJourneyOptions } from './exchange_journeys';
 import { askTrustBonus } from './delivery_place';
+import { supplyOptions } from './customers';
 import { heldTechniques, hasLearnerInstruction } from './techniques';
 import { mayCoordinate, councilFor } from './civic_decision';
 import { canInvite, projectAt, participation } from './townships';
@@ -596,11 +597,40 @@ function optTrade(ctx: Ctx): void {
     const hasWant = want.item === 'fish' ? c.s.carrying.some((k) => isFood(k)) : c.s.carrying.includes(want.item);
     if (!hasWant) continue;
     if ((p.asked[c.q.id] ?? -9999) > world.tick - 700) continue;
+    // Rules 51 (docs/CUSTOMERS.md) measured this swap: 132 proposed in three 45-day worlds, every one refused ("nothing to
+    // spare" 86, "no room to carry the swap" 46); proposing it only to somebody seen carrying more than one, one for one, was
+    // tried and refused just as often (155 of 155) while costing projects in the lab, so the swap stands as it was.
     const askItem: ItemKind = want.item === 'fish' ? (c.s.carrying.find((k) => isFood(k)) as ItemKind) : want.item;
     const sc = new Scorer().add('a swap could give me what I lack', 14 + 0.05 * c.aff).add('walking', -pen(c.d * 6));
     mkSocial(ctx, c, 'trade', { item: askItem, amount: want.n, offer: offer.item, offerAmount: Math.min(offer.n, want.n + 1) }, `Offer ${c.q.name} a swap: ${offer.item} for ${askItem}`, `to get ${askItem}`, null, sc, 'trade', ':' + askItem);
   }
   void hashUnit;
+}
+
+// rules 51 (customers.ts): bring a customer what they asked for, as a swap or a gift through the existing conversations
+function optSupply(ctx: Ctx): void {
+  const { world, p } = ctx;
+  supplyOptions(ctx, (c, purpose, conv, label, goal, sc, keySuffix) => {
+    const rel = p.relations[c.q.id];
+    const cand: Cand = { s: ctx.seenPersons.find((s) => s.id === c.q.id)!, q: c.q, aff: rel?.affinity ?? 0, fam: rel?.familiarity ?? 0, d: c.d };
+    if ((p.cooldowns['talk' + c.q.id] ?? 0) > world.tick) return;
+    mkSocial(ctx, cand, purpose, conv as ConvData, label, goal, null, sc, 'trade', keySuffix);
+  }, (q, item, loc, sc) => {
+    const goal = `to supply ${q.name} with the ${item} they asked for`;
+    addOption(ctx, {
+      kind: 'visit',
+      label: `Take ${item} to ${q.name}`,
+      goal,
+      need: null,
+      util: sc.total,
+      parts: sc.parts,
+      eta: eta(ctx, loc.x, loc.y) + 12,
+      key: `supply:${q.id}:${item}`,
+      targetId: q.id,
+      tag: 'trade',
+      make: () => newActivity(world, p, { kind: 'visit', label: `Taking ${item} to ${q.name}`, goal, need: null, targetId: q.id, targetType: 'person', tx: loc.x, ty: loc.y, spotX: loc.x, spotY: loc.y, utility: sc.total, minCommit: 60, maxTicks: 900, data: { seek: true, about: q.id, items: {}, sticky: true } }),
+    });
+  });
 }
 
 // The teacher knows their own technique and family/apprentice relationship, not the other's private knowledge.
@@ -644,6 +674,7 @@ export function socialOptions(ctx: Ctx): void {
   optRecruit(ctx);
   optPropose(ctx);
   optTrade(ctx);
+  optSupply(ctx);
   optTeachTechnique(ctx);
   optRequestTechnique(ctx);
   optChat(ctx);

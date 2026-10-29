@@ -20,6 +20,7 @@ import { describeApprentice } from './apprentice';
 import { describeLifeEvent, whileObserving } from './lifechanges';
 import { describeCrew } from './crews';
 import { describeTrade } from './trade';
+import { describeCustomers } from './customers';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -157,6 +158,8 @@ export interface PersonView {
   heard: HeardView[];
   /** the trade they have settled on and why, in their own terms (rich only; '' for somebody with none) */
   trade: string;
+  /** rules 51: the person's own customer record, a line each */
+  customers: string[];
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -596,6 +599,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     payoffs: describePay(p),
     heard: describeHeard(world, p),
     trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
+    customers: describeCustomers(world, p),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },

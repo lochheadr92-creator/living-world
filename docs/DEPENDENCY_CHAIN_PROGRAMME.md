@@ -179,7 +179,29 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 
 ### WS9 Demand, specialisation, exchange
 - **Current.** Trade choice `trade.ts`, local demand rules 43, exchange journeys rules 22 (smoke: zero everywhere).
-- **Status.** Impl `partial` · Contract `partial` · E2E `partial (staged)` · Ordinary `no` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis (rules-50 audits, 45 days, three seeds).** Ordinary (Normal) worlds found one township, so the rules-22
+  inter-settlement chain has a denominator of zero there (no trade lead can be told; `tellTradeLead` needs two townships;
+  the Large profile has four). Heard demand (rules 43) reached 5 / 5 / 1 people and no trade was ever taken up for it (two
+  different askers inside three days is rare), and nothing connected a maker's later surplus to the people who had asked
+  or told the maker whether the work paid. The local swap (`optTrade`) wants only fish-when-short or an own-site's wood or
+  stone and fired 0 times in 135 seed-days.
+- **Contract (rules 51, `docs/CUSTOMERS.md`).** An ask for wood, stone or a workshop good turned down because the person
+  had none to spare (not by choice) is remembered as a customer lead for six days; while it is live and the goods are
+  spare they may be brought to the asker as a swap through the barter (when they carry something the supplier lacks and
+  values more, two for one at most), as a gift through the offer (the ordinary favour debt), after a walk to where they
+  were last known, or by the ordinary haul to the asker's own household site; each lead is supplied once and records the
+  units and what came back; the open request closes as delivered later. The trade review reads the record: a served
+  customer holds the trade (+4); a demand-taken trade whose leads all lapsed is reviewed again. Switch `rich-no-customers`.
+  Owner `src/sim/customers.ts`; call sites in `social.ts` (the decline, the offer and barter resolutions), `act_resource.ts`
+  (the site haul), `options_social.ts` (the options), `trade.ts` (the review), `inspect.ts` + `person_sections.ts` (card).
+- **Not done here.** Inter-settlement exchange (needs a Large-profile observation; rules 22 untouched); a lapsed promise
+  as a lead; produce-for-a-customer (the lead speaks for nothing; the person makes goods for their own reasons and the
+  lead only says where spare ones may go).
+- **Status.** Impl `partial` (customers yes; exchange untouched) · Contract `yes` (7 cases, `tests/customers.test.ts`) ·
+  E2E `yes` (staged: ask → declined → lead → planks spare → gift / swap / walk / site haul → record → trade review) ·
+  Ordinary `partial` (9 leads of 33 refusals in three 45-day seeds, 2 supplied, both hauled to the asker's site; no hand-over,
+  swap, return or trade reading in 135 seed-days; table in the slice log) · Rendered `yes` ("Their customers" lines on the
+  person card; page check `scripts/browser/customers_check.mjs` 4 / 4) · Aggregate `unproven` (lab rows in the slice log).
 
 ### WS10 Knowledge, teaching, technique dependencies
 - **Current.** One technique (charcoal), person-held; lessons 180 ticks; learner requests (41); backgrounds (44).
@@ -364,3 +386,41 @@ day 30" 0.9 → 0.0 [−2.3, −0.1], marked larger than chance (floor ±0.8) an
 edge of famine in both arms, whose famine fell on day 23 without plans (3 dead, recovered by day 30) and on day 29-30
 with them (1 dead, 5 hungry at the snapshot, none of them at a batch; `scripts/chain_hunger_trace.ts`, logs beside the
 report). Recorded as a timing artefact with the question left open; no benefit claimed, no harm established.
+
+### Slice 7 — rules 51 customers (WS9 first part), 2026-10-29
+
+Predecessor reference: `tests/v50_continuation.expected.json` recorded from `7c70fb0` by `scripts/v50_reference.ts --write`
+(commit `6fa3509`). Contract and the three findings (one township in a Normal world; heard demand going nowhere; the local
+swap never accepted): `docs/CUSTOMERS.md`. Tests: `tests/customers.test.ts` (7); focused 16 files / 120 tests (customers,
+local demand, trade, cooperation trade, exchange journeys, project cooperation, delivery place, food help, occasions,
+misdeeds, golden, inspect purity, v49/v50 continuation, batch plan, intentions). Page check `scripts/browser/customers_check.mjs`
+4 / 4 on the page's own meadow world (a lead row "Yara asked me for 4 wood 0.1 days ago; none to spare yet", a supplied row
+"Sven asked me for stone … I took them 1 … to their site, and nothing came back for it"; `customers_evidence/rendered`).
+
+Ordinary observation, `scripts/customers_observe.ts`, Normal, immigration off, 45 days, rules 51 final source
+(`customers_evidence/obs-45-{seed}`): horizons reached, conservation held, observer purity held daily. Denominators first:
+
+| seed | alive / dead | material asks made (wood, stone, planks, bricks) | declined, by the words | leads (item) | supplied | by hand / swap / site | units | returns | repeat | lapsed | trades reading the record |
+|---|---|---:|---|---|---:|---|---:|---|---:|---:|---:|
+| meadow | 28 / 3 | 30 | own need 5, unwilling 5, making 4, committed 1 | 2 (wood) | 0 | 0 / 0 / 0 | 0 | none | 0 | 0 | 0 of 19 |
+| river | 27 / 6 | 21 | own need 7, unwilling 4, committed 3, making 1 | 7 (wood 5, planks 2) | 2 | 0 / 0 / 2 | 6 planks | none | 0 | 2 | 0 of 19 |
+| forest | 8 / 22 | 6 | unwilling 1, enough 1, own need 1 | 0 | 0 | 0 / 0 / 0 | 0 | none | 0 | 0 | 0 of 6 |
+
+Read plainly: the lead is written where the brief said it should be (an ask turned down for want of spare goods: 28 of 33
+refusals were for want, not by choice, and 9 leads came of them, two more having lapsed), and two of them were supplied,
+both by Emre hauling planks to the sites of the two people who had asked him (river, day 38). Nothing was brought into a
+hand, nothing swapped, nothing came back, and no trade read the record in 135 seed-days: a maker's spare goods go to a
+site before they go to a person, and the people who asked for wood seldom came within sight of the holder again while the
+holder had any spare. The chain's first two links now exist and fire; the return link exists and has not fired in an
+ordinary world. The local swap (unchanged) was proposed 132 times and refused 132 times (86 "nothing to spare", 46 "no
+room"); the one-for-one-to-a-plenty-carrier rule tried against it was refused 155 of 155 times and cost projects in the
+lab (`customers_evidence/lab-customers-swaprule`: projects adopted +7.9 without the slice, 8 of 8 seeds; done +7.1, 7 of 8),
+so it was taken out before the commit and the swap stands as it was, its failure recorded. Inter-settlement exchange: 1
+township in every Normal world, 0 leads, 0 journeys: a denominator of zero, not a result.
+
+Lab rows (leads alone, final source, 8 seeds, 30 days, control + nudge against `rich-no-customers`; rows are ablation −
+reference; `customers_evidence/lab-customers/report.txt`): workplaces +0.3 [−0.3, +0.8], solid homes +0.1, buildings +0.9 [−0.6, +2.3], people +0.4, deaths −0.8 [−2.3, +0.7],
+tools +1.6 [−2.3, +5.2], projects adopted +7.2 [−1.1, +14.3] (7 / 1 seeds), projects done +2.9 [−3.9, +8.1], project asks
+−0.8, ask units delivered +0.1, below critical hunger +0.4 [+0.1, +0.9] (systematic, within the ±0.8 floor): "nothing moved
+by more than a one-draw nudge moves it". The projects-adopted lean (7 of 8 seeds fewer with the slice on) is the same
+direction as the swap-rule lab and is noted as a lead to watch, not a result. No benefit claimed, no harm established.

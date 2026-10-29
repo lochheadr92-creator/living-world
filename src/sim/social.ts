@@ -1,4 +1,5 @@
 import { hasExchangeJourneys, tellTradeLead, endExchangeTalk, endExchangeApproach } from './exchange_journeys';
+import { noteCustomer, customerSupplied, setCustomerDeps } from './customers';
 import { offerLesson, answerLesson, answerRequestedLesson, finishLesson, interruptLesson, lessonProblem, LESSON_TICKS } from './techniques';
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
@@ -290,7 +291,7 @@ export function createRequest(world: World, from: Person, to: Person, o: Request
   return r;
 }
 
-function settle(world: World, r: Request, status: Request['status'], note: string): void {
+export function settle(world: World, r: Request, status: Request['status'], note: string): void {
   r.status = status;
   r.note = note;
   r.resolved = world.tick;
@@ -786,6 +787,8 @@ export interface ConvData {
   pair?: number;
   /** why an ask got no answer: it had stopped being an ask (withdrawn, expired, already answered) by the time it was reached */
   moot?: string;
+  /** rules 51 (customers.ts): the request this offer or swap supplies, so the supplier's record and the ask close together */
+  customer?: number;
 }
 
 function convOf(world: World, id: number): Conversation | undefined {
@@ -1143,6 +1146,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       }
       hearDemand(world,B,A,req);
       const resp = evaluateRequest(world, B, A, req);
+      // rules 51 (customers.ts): asked in person and unable to supply, B remembers A as a customer for it
+      if (resp.kind === 'decline') noteCustomer(world, B, A, req, resp.reason);
       if (resp.kind === 'give') {
         const moved = transfer(world, B.inv, A.inv, carryCap(world, A), resp.item, resp.n, 'person:' + B.id, 'person:' + A.id, 'gift on request');
         if (moved > 0) {
@@ -1307,6 +1312,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
       if (moved > 0) {
         onGift(world, A, B, got, isDependent(world, B) ? 'care' : 'offer');
         bubble(world, B, D.saying(D.THANKS, B.id, A.id, world.tick >> 5, { n: A.name }), 'happy', 52);
+        if (d.customer) customerSupplied(world, A, B, got, d.customer, null);
       }
       break;
     }
@@ -1432,6 +1438,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         if (m1 > 0 && m2 > 0) {
           settle(world, req, 'fulfilled', `swapped ${m2} ${take} for ${m1} ${give}`);
           endExchangeTalk(world,A,d.exchangeJourney,req,req.note);
+          if (d.customer) customerSupplied(world, A, B, { [take]: m2 }, d.customer, { item: give, n: m1 });
           bubble(world, B, D.saying(D.TRADE_OK, B.id, A.id, world.tick >> 5), 'say', 46);
           adjustRel(A, B.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
           adjustRel(B, A.id, world.tick, { aff: 1.8, trust: 1.5, fam: 0.5 });
@@ -1801,3 +1808,5 @@ void NUTRITION;
 void noteFailure;
 void drive;
 
+// rules 51 (customers.ts) reads the barter valuation, the spare-goods rule and the request settlement from here, bound at load
+setCustomerDeps({ surplusOf, valueOf, settle });

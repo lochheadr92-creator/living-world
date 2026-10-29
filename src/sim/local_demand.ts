@@ -13,6 +13,8 @@ export function setLocalDemand(on:boolean):void{enabled=on;}
 export const hasLocalDemand=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,43);
 const skills=new Map<ItemKind,SkillKey>([['wood','wood'],['stone','stone']]);
 for(const r of RECIPES)if(r.skill)for(const item of Object.keys(r.outputs) as ItemKind[])if(!skills.has(item))skills.set(item,r.skill);
+/** Pure: the skill a material's work trains, or undefined for things nobody is asked to make. */
+export const demandSkill=(item:ItemKind):SkillKey|undefined=>skills.get(item);
 export function pruneDemand(w:World,p:Person):void{
  if(!hasLocalDemand(w)||!p.heardDemand)return;
  p.heardDemand=p.heardDemand.filter(m=>m.tick<=w.tick&&w.tick-m.tick<DEMAND_WINDOW).slice(-DEMAND_LIMIT);

@@ -273,3 +273,14 @@ Contract and the chain diagnosis: [BATCH_PLAN.md](BATCH_PLAN.md).
   (same optional arguments as the other observation scripts; writes sampled wants, blocked steps by reason, facility records,
   sites, tools, ledger by chain item, ground stock and the final save).
 - Lab harm check: `node scripts/lab.mjs --out chain_evidence/lab-batch --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-batch-plans`.
+
+## Rules 51 customers
+
+Contract and the three findings (one township in Normal worlds, heard demand going nowhere, the local swap never firing):
+[CUSTOMERS.md](CUSTOMERS.md).
+
+- Contracts: `npx vitest run tests/customers.test.ts tests/local_demand.test.ts tests/trade.test.ts tests/v50_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/customers_observe.ts customers_evidence/obs-45-meadow meadow 45`
+  (asks by status, leads, supplies by route, returns, repeats, trades that read the record; purity checked daily).
+- Page check (dev server on 5182): `node scripts/browser/customers_check.mjs "http://127.0.0.1:5182/" customers_evidence/rendered meadow`.
+- Lab harm check: `node scripts/lab.mjs --out customers_evidence/lab-customers --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-customers`.

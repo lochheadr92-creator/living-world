@@ -584,6 +584,8 @@ export interface Person {
   civicAlignment?: import('./political_alignment').CivicAlignment[];
   tradeLeads?: import('./exchange_journeys').TradeLead[];
   heardDemand?: import('./local_demand').HeardDemand[];
+  /** rules 51 (customers.ts): people who asked this person for a material they had none of, and what was later supplied and returned */
+  customers?: import('./customers').Customer[];
   exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
   relocationHardship?: number;
   socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper' }[];
