@@ -44,7 +44,9 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-Current rules version 46 makes the household's winter reserve two days' eating put by in what keeps: a season plan gathers grain when it knows a wild grain source, takes it to a known granary whose share then counts as reserve, and a household may eat from the granary within its share or the emergency ration (`src/sim/provision.ts`, `docs/WINTER_RESERVE.md`); lab removal `rich-no-winter-reserve` (one strategy, removed together); the rules-45 reference was recorded from `ce50c0a` first.
+Current rules version 47 gives a fed adult's own-home shelter work a pre-winter nudge and, while the winter window is open, lets a household lay its home out past its own workshop site and the open-site cap and keeps its home site through the stale-site sweep (`src/sim/winter_shelter.ts`, `docs/WINTER_SHELTER.md`, adapted from the unmerged `claude/winter-shelter-v34` whose number collided with main's 34); lab removal `rich-no-winter-shelter`; the rules-46 reference was recorded from `80b0fe4` first.
+
+Rules version 46 makes the household's winter reserve two days' eating put by in what keeps: a season plan gathers grain when it knows a wild grain source, takes it to a known granary whose share then counts as reserve, and a household may eat from the granary within its share or the emergency ration (`src/sim/provision.ts`, `docs/WINTER_RESERVE.md`); lab removal `rich-no-winter-reserve` (one strategy, removed together); the rules-45 reference was recorded from `ce50c0a` first.
 
 Rules version 45 lets a food or care helper with nothing to spare promise the food kind they personally know a wild source of, forage that kind and deliver it, and lets a hungry person eat (or bring a dependant) the meat or bread they carry (`src/sim/food_help.ts`, `docs/FOOD_HELP.md`); isolated lab removal `rich-no-food-fetch`; the rules-44 reference was recorded from `7625337` first. The programme register for the dependency-chain work is `docs/DEPENDENCY_CHAIN_PROGRAMME.md`.
 

@@ -237,3 +237,12 @@ Contract and diagnosis: [WINTER_RESERVE.md](WINTER_RESERVE.md).
   (a same-seed comparison, not a paired control). Writes per-day food flows into and out of every store type, ledger spoilage
   and eating deltas, stock-plan records by cue, household rows at each winter boundary, hungry-in-winter samples, provenance
   with source hashes and the final save; refuses to write if any source file changed while it ran.
+
+## Rules 47 winter shelter
+
+Contract: [WINTER_SHELTER.md](WINTER_SHELTER.md).
+
+- Contracts: `npx vitest run tests/winter_shelter.test.ts tests/v46_continuation.test.ts tests/household_home.test.ts tests/shelter.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/shelter_observe.ts shelter_evidence/ordinary-30-meadow-r47 meadow 30`
+  (same optional arguments as the winter-reserve script; `46` as the fifth argument runs the same seed under rules 46).
+- Lab harm check: `node scripts/lab.mjs --out shelter_evidence/lab-shelter --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-winter-shelter`.

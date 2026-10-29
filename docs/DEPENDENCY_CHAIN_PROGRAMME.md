@@ -89,8 +89,21 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   repair want `intent.ts repairWanted` (cond < 55); upgrade `production.ts upgradeWish`; collapse `destroyBuilding`;
   stale sites `world.ts clearStaleSites`. Candidate `claude/winter-shelter-v34`: pre-winter boost, workshop-site
   exemption, stale home sites kept in the window (`winter_shelter.ts`), no death claim.
-- **Gap.** No replacement-after-loss behaviour, no remembered-failure fallback, limited-labour households.
-- **Status.** Impl `partial` · Contract `partial` · E2E `no` · Ordinary `partial` · Rendered `partial` · Aggregate `unproven`.
+- **Diagnosis.** In the rules-45/46 runs nearly every household was housed at both winters (0-1 homeless of 11-13),
+  1-3 homes per seed were below condition 40 by the second winter (doubled spoilage), exposure deaths were 2-5 per
+  winter in forest. Replacement after collapse is the lean-to-first ladder (collapse sets `homeId = 0`); an abandoned
+  site leaves its materials in a pile; a plan that cannot be fed is relinquished (34); nobody-able households ask a
+  neighbour to mend the roof. What was missing was the candidate's three winter blockers and the pre-winter push.
+- **Contract (rules 47, `docs/WINTER_SHELTER.md`).** Pre-winter nudge (+12, "winter is coming") on laying out, hauling
+  to, building and mending the household's own home while fed; during the window a household wanting a home is not
+  blocked by its own workshop site or the open-site cap, and its home site is not swept for idleness. Switch
+  `rich-no-winter-shelter`. Owner `src/sim/winter_shelter.ts`; `options_work.ts optSites/optPlanBuild/optRepairAndFire`,
+  `world.ts clearStaleSites`.
+- **Not added (recorded).** Rebuild-in-place after collapse; a home plan for households of only children and elders;
+  a remembered-failure memory beyond the existing 700-tick site cooldown and rules-34 relinquishing.
+- **Status.** Impl `yes` · Contract `yes` (12 cases, `tests/winter_shelter.test.ts`) · E2E `partial` (staged: cap and
+  workshop exemptions, site kept, nudge named; the existing chain tests cover fetch → build → occupy) · Ordinary `yes` (nudged starts in every seed; table in the slice log) · Rendered `partial` (the nudge is named in the decision "because"; blocked reasons on the card) ·
+  Aggregate `partial` (8-seed lab: +1.4 solid homes and +5.4 condition beyond noise; deaths and homelessness within chance).
 
 ### WS5 Cooperation, commitments, reliable contact
 - **Current.** Trust-based helper choice (39), stored-material promises (40), promise upkeep and relationship consequences
@@ -183,3 +196,31 @@ continuation, economy, settlement economy, chains, intentions, plan reconsiderat
 +11.8 for the ablation (larger than chance, the mechanism itself), mean hunger −5.4 and units put by +54.6 (within noise),
 deaths −1.9 [−4.6, +0.3] and people +2.4 [−0.1, +5.3] (not distinguishable from chance; the death direction is adverse and
 is recorded as the thing to watch). Full table in `docs/WINTER_RESERVE.md`. No benefit claimed.
+
+### Slice 3 — rules 47 winter shelter (WS4), 2026-10-29
+
+Predecessor reference: `tests/v46_continuation.expected.json` recorded from `80b0fe4` by `scripts/v46_reference.ts --write`
+before any behaviour change. Contract: `docs/WINTER_SHELTER.md`. Tests: `tests/winter_shelter.test.ts` (12, adapted from
+the candidate at a fresh number), focused run 5 files / 74 tests with v46 continuation, household home, shelter, winter reserve.
+
+Ordinary observation, `scripts/shelter_observe.ts`, Normal, immigration off, 30 days, same seeds under rules 46 (explicit
+version) and 47 (current); horizons reached, conservation and observer-purity checks passed. Diverged worlds, not a pair.
+
+| seed | rules | "winter is coming" offers sampled / starts under it (haul, build, repair, hut, lean-to) | home plans blocked by the cap (samples) | homes laid out / finished / abandoned / collapsed | repairs done | homes at end (below 40) | homeless at end | deaths (exposure, of them without a home) |
+|---|---|---|---:|---|---:|---|---:|---|
+| meadow | 46 | 0 / none | 440 | 15 / 13 / 1 / 1 | 3 | 20 | 0 | 1 (0, 0) |
+| meadow | 47 | 449 / 35, 28, 43, 10, 0 | 308 | 16 / 15 / 1 / 0 | 7 | 22 | 0 | 0 (0, 0) |
+| river | 46 | 0 / none | 368 | 17 / 12 / 2 / 2 | 2 | 20 | 0 | 1 (0, 0) |
+| river | 47 | 386 / 19, 14, 54, 10, 1 | 309 | 18 / 15 / 2 / 0 | 6 | 19 | 1 | 4 (1, 1) |
+| forest | 46 | 0 / none | 328 | 16 / 12 / 4 / 2 | 2 | 10 | 0 | 21 (8, 8) |
+| forest | 47 | 453 / 17, 13, 48, 4, 3 | 232 | 16 / 15 / 1 / 4 | 2 | 17 | 0 | 9 (2, 2) |
+
+The own-workshop-site block was not seen in any sample at either version (0 of 1,694-2,038 blocked home plans; the cap
+and "already laid out a home" are what block). Forest at 46 is the candidate's lead made concrete: eight exposure deaths
+among people whose household had no home. Evidence: `shelter_evidence/ordinary-30-{seed}-r46|r47` (report, samples,
+winter rows, deaths with home and condition, events, nudged starts, provenance, final save).
+
+Lab `shelter_evidence/lab-shelter` (8 seeds, control + nudge + `rich-no-winter-shelter`): solid homes −1.4 [−2.8, −0.3] and
+mean home condition −5.4 [−10.0, −0.8] for the ablation (both larger than chance: the slice adds them); deaths +0.4
+[−0.8, +1.9], homeless +0.6 [−0.1, +1.4], people +0.1 (not distinguishable from chance). Full table in
+`docs/WINTER_SHELTER.md`. No survival claim.
