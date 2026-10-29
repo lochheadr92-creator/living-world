@@ -1,5 +1,5 @@
 import { onLookedInOnBereaved } from './lifechanges';
-import { watchTick } from './responsibilities';
+import { hasPracticalCare, watchTick } from './responsibilities';
 import { faceToward, newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { DAY, workRules } from './constants';
@@ -303,6 +303,8 @@ registerHandler('visit', {
   work(world, p, a): WorkResult {
     const t = personById(world, a.targetId);
     if (!t) return 'fail:they are no longer around';
+    // New watches establish local contact before even orienting toward the child.
+    if (a.data.watch && hasPracticalCare(world)) return watchTick(world, p, a, t);
     faceToward(p, t.x, t.y);
     // a promised watch over a child (responsibilities.ts; rich only): stay, see to them, keep the promise
     if (a.data.watch) return watchTick(world, p, a, t);

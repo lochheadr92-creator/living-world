@@ -1,0 +1,109 @@
+{
+  "head": "4136255fae9ea2844260682bf1790dbbb77466cd",
+  "sourceHashes": {
+    "scripts/practical_care_observe.ts": "93d39d8578da0aa47c68bdbc036900aa24e61f2e4fe814b395cc79aefc802df4",
+    "src/sim/responsibilities.ts": "5b3189268e27e009854af968af7dfa8a5b7b4361e4c3fe32a4c1c6011041f74d",
+    "src/sim/options_work.ts": "aa7847c036365bdcf38d51ad075458769e38276dae0d61963b62c5286f991d20",
+    "src/sim/social.ts": "3fb0620d5001cb5103b75045ecac0e7bf48c8617a4463058f6ab6210b8f2ea86",
+    "src/sim/welfare.ts": "b9c8969cc5fa38a6859660c5a7adc59488301170e06bfb78f57c91626e532f0c",
+    "src/sim/rulesversion.ts": "08d782ff761a38334c296ac921ece5896f4b1f95dfff9fdc6fae396eef893dce"
+  },
+  "question": "Do ordinary five-day Normal worlds expose and select practical childcare? Fixed seeds and no staged injuries or resources. Zero opportunities remain zero, not success.",
+  "budgetSeconds": 120,
+  "seconds": 34.8761371,
+  "results": [
+    {
+      "seed": "meadow",
+      "settings": {
+        "seed": "meadow",
+        "population": 28,
+        "harsh": false,
+        "immigration": false,
+        "scene": "natural",
+        "dynamics": "rich",
+        "rulesVersion": 56
+      },
+      "tick": 12000,
+      "stop": "horizon",
+      "counts": {
+        "personSamples": 1400,
+        "incapacitatedSamples": 0,
+        "parentsWithUncoveredChildren": 0,
+        "requestOffers": 0,
+        "watchOffers": 0,
+        "watchStarts": 0,
+        "watchFoodUnits": 0,
+        "watchWaterUnits": 0
+      },
+      "requests": [],
+      "endings": [],
+      "active": [],
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "river",
+      "settings": {
+        "seed": "river",
+        "population": 28,
+        "harsh": false,
+        "immigration": false,
+        "scene": "natural",
+        "dynamics": "rich",
+        "rulesVersion": 56
+      },
+      "tick": 12000,
+      "stop": "horizon",
+      "counts": {
+        "personSamples": 1400,
+        "incapacitatedSamples": 60,
+        "parentsWithUncoveredChildren": 0,
+        "requestOffers": 0,
+        "watchOffers": 0,
+        "watchStarts": 0,
+        "watchFoodUnits": 0,
+        "watchWaterUnits": 0
+      },
+      "requests": [],
+      "endings": [],
+      "active": [],
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      }
+    },
+    {
+      "seed": "forest",
+      "settings": {
+        "seed": "forest",
+        "population": 28,
+        "harsh": false,
+        "immigration": false,
+        "scene": "natural",
+        "dynamics": "rich",
+        "rulesVersion": 56
+      },
+      "tick": 12000,
+      "stop": "horizon",
+      "counts": {
+        "personSamples": 1400,
+        "incapacitatedSamples": 20,
+        "parentsWithUncoveredChildren": 0,
+        "requestOffers": 0,
+        "watchOffers": 0,
+        "watchStarts": 0,
+        "watchFoodUnits": 0,
+        "watchWaterUnits": 0
+      },
+      "requests": [],
+      "endings": [],
+      "active": [],
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      }
+    }
+  ]
+}

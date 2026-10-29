@@ -23,7 +23,7 @@ import { delBelief, estimatedAmount, missingMaterials, noteFailure, recentFailur
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { drive } from './needs';
 import { stageOf } from './people';
-import { fireCommitment } from './responsibilities';
+import { fireCommitment, hasPracticalCare } from './responsibilities';
 import { Scorer, addBlocked, addOption, beliefsByKind, countBeliefsOfKind, dangerAt, eta, foodCount, pen, rankWaterSpots, sourceUsable, spotNear, traitMods, whereIs } from './optutil';
 import type { Ctx } from './optutil';
 import { foragePlans } from './options_survival';
@@ -1458,7 +1458,12 @@ function optCommitments(ctx: Ctx): void {
       // a promise to keep an eye on a child (responsibilities.ts): go and stay with them
       const child = world.byId.get(c.destId ?? 0);
       if (!child || child.ent !== 'person' || !child.alive) continue;
-      const loc = whereIs(ctx, child.id, 0) ?? { x: child.x, y: child.y };
+      const loc = whereIs(ctx, child.id, 0) ?? (hasPracticalCare(world) ? null : { x: child.x, y: child.y });
+      if (!loc || (hasPracticalCare(world) && (p.cooldowns['check' + child.id] ?? 0) > world.tick)) {
+        markBlocked(ctx, c, !loc ? 'does not know where the child is' : 'lost contact; waiting before looking again');
+        addBlocked(ctx, 'visit', `Keep an eye on ${child.name}`, child.id, !loc ? 'does not know where the child is' : 'lost contact; waiting before looking again', 'promise');
+        continue;
+      }
       const e = eta(ctx, loc.x, loc.y);
       const to = world.byId.get(c.to);
       const sc = new Scorer().add(`promised ${to && to.ent === 'person' ? to.name : 'someone'} to keep an eye on ${child.name}`, 48).add('walking', -pen(e));

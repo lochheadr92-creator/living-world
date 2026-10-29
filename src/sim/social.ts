@@ -20,7 +20,7 @@ import { noteDeed, noteDeedNear, reputationOf, shareRumour } from './reputation'
 import { expose } from './illness';
 import { leanOn, onMovedHousehold } from './lifechanges';
 import { hears, mediate } from './mediation';
-import { laidUp, onDutyDeclined, settleFirePromise } from './responsibilities';
+import { communicateWatchLocation, hasPracticalCare, laidUp, onDutyDeclined, settleFirePromise } from './responsibilities';
 import {
   canInterruptForTalk,
   endActivity,
@@ -574,8 +574,10 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
     // The promise was kept; whether the ASK was met is a different question, and the answer is what actually arrived. (Rich only:
     // an authored world records what it always did.)
     const got = req.delivered ?? c.delivered ?? 0;
-    const full = !isRich(world) || got >= req.amount;
-    settle(world, req, full ? 'fulfilled' : 'partial', full ? 'promise kept' : `promise kept: ${got} of the ${req.amount} asked for`);
+    // A watch promises time and attention, not a quantity of goods. Its actual work milestone is the evidence.
+    const watched = hasPracticalCare(world) && req.kind === 'watch' && c.kind === 'work' && c.milestone === 'watched' && (c.contrib ?? 0) >= 40;
+    const full = !isRich(world) || got >= req.amount || watched;
+    settle(world, req, full ? 'fulfilled' : 'partial', watched ? 'kept watch for the agreed time' : full ? 'promise kept' : `promise kept: ${got} of the ${req.amount} asked for`);
   }
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
@@ -1204,6 +1206,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + PROMISE_TTL + 900, destKind: 'building', destId: req.destId, milestone: req.milestone || 'sound again' });
         } else if (req.kind === 'watch' || req.kind === 'fire') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + DAY, destKind: req.destKind, destId: req.destId, milestone: req.kind === 'watch' ? 'watched' : 'fire kept' });
+          if (req.kind === 'watch' && req.destId) communicateWatchLocation(world, A, B, req.destId);
         } else {
           const kindC: Commitment['kind'] = req.kind === 'haul' || req.kind === 'goods' || toSite ? 'haul' : 'deliver';
           // rules 48 (delivery_place.ts): a promise to a person names the asker's home as the place to leave it, when the helper

@@ -313,9 +313,10 @@ current-rules aggregate or rendered proof.
 - No successor rules number is allocated by this viewer phase. Before any simulation
   edit, recheck main's candidate and capture the actual predecessor once it is settled.
 - Local viewer commit `acce167`; related committed main work `aaa95ce` and `f244b5d`
-  integrated at `5033c9e` (rules 54). Main's uncommitted rules-55 transport changes
-  are still being edited and are not copied or committed here. This is an active
-  compatibility dependency for further simulation changes, not permission to reuse 55.
+  integrated at `5033c9e` (rules 54). Subsequently committed transport `94f5f8a` and
+  predecessor reference `b086c9a` were integrated at `4136255` (rules 55). Untracked
+  main evidence remains untouched. The reference and transport contracts passed here
+  (7 tests, 2 files, 12.10 s), before allocating rules 56 to practical childcare.
 - Rules-54 predecessor is immutable `tests/v54_continuation.expected.json`, recorded
   from `aaa95ce`, river/Normal/no immigration, ticks 5480→9600. Its test and the six
   relocation-extension tests passed after integration (16 tests including viewer tests).
@@ -408,12 +409,24 @@ action for the expanded brief; no previous row is removed or promoted by inherit
   no known location exists; `watchTick` transfers the helper's last bread despite zero
   `surplusOf`, neglecting their own child's reserve. Two historical characterization
   tests reproduce these execution/knowledge defects without redefining them as success.
+- **Rules-56 extension:** actual accepted contact communicates the parent's aged location;
+  unknown location blocks, remote/interior contact loss fails and delays retry, and food/
+  water transfers protect the helper's own reserves. A completed time milestone fulfils
+  the watch request once without inventing a goods quantity. Owners `responsibilities.ts`,
+  `options_work.ts`, `welfare.ts`, `social.ts`; contract [PRACTICAL_CARE.md](PRACTICAL_CARE.md).
+  Eight focused new cases and same-runtime intermediate continuation; actual Chromium
+  request→travel→watch→five bread transferred→completed promise→child eats, **6/6** checks.
+  Staged availability and explicit offered-action selection are labelled in the artifacts.
 - **Ordinary/rendered/aggregate:** short fixed day-45 checkpoint observations recorded;
   full illness/provider handback, isolation, failed-care and recovery remain unproven.
-  **Next:** after the concurrent predecessor is committed, allocate a non-colliding
-  successor, communicate only legitimately known childcare locations, remove live
-  fallback, revalidate contact and reserves at delivery, preserve old rules, add
-  positive/negative physical watch and no-helper scenarios. No aggregate benefit claimed.
+  New rules-56 five-day meadow/river/forest census: 1,400 living-person samples per seed;
+  0/60/20 incapacitated samples, **zero uncovered-parent opportunities**, zero watch
+  offers/requests/starts/transfers. All reached tick 12,000, conservation/purity pass.
+  `viewer_evidence/watch56-ordinary-final/report.json`; no seed substitution or benefit claim.
+  **Next:** obtain current-rules ordinary watch opportunity/selection/outcome denominators;
+  complete recovery handback and care across interiors, with no-helper and competing
+  dependant cases. Practical warmth request settlement needs its own physical check.
+  Full row remains **partial**. No aggregate benefit claimed.
 
 ### WS18 Resource exhaustion and adaptation (§15)
 
@@ -504,6 +517,26 @@ Population 31/22/8 stays constant in this short window; no generational claim.
   added; these observations do not prove indefinite growth bounds or a speed improvement.
 
 ### Continuation execution log
+
+- Second integrated boundary (rules 54): **208 files / 1,452 tests**, 279.03 s, exit 0;
+  typecheck/build/diff check passed. Mature-world measurements and existing care/upkeep
+  evidence committed at `cc0e2dc`. Source manifests retain measured versions, including
+  rules-53 mature saves; no relabelling as current rules.
+- Fresh viewer review: stale last-decision blockers were displayed as current even after
+  eating. They now carry their age and a historical heading; an actual activity blocker
+  remains current. Needs/possessions precede collapsed civic detail, visible need labels
+  work on touch and keyboard focus exposes details. Two purity/meaning contract tests;
+  final speech/viewer browser **39/39**, including unchanged full serialized state.
+- Rules-56 childcare review found request settlement compared time duties with goods;
+  fixed using the actual completed watch milestone. Remote orientation was also gated
+  behind local contact. Full-pack and lost-contact negative tests preserve goods and
+  leave unfinished promises unfulfilled. No approval loop or unrequested remote action.
+- Rules-56 stable boundary: `npm test -- --maxWorkers=4` **212 files / 1,469 tests passed**,
+  exit 0, 280.52 s (`viewer_evidence/rules56-full-tests.log`), including predecessor
+  continuations and historical goldens. Typecheck/build/diff check passed. Build retains
+  native Vite loader notices and a 928.31 kB chunk warning; test output retains the
+  existing TimeoutOverflowWarning. Browser watch 6/6, existing care/upkeep 5/5, viewer
+  39/39. No aggregate effect established by this continuation.
 
 - Initial archive refresh succeeded, 1 available new prompt appended. Two unavailable
   historical ChatGPT conversations remain marked partial; no fresh remote-history claim.

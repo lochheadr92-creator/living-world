@@ -1,0 +1,128 @@
+{
+  "head": "4136255fae9ea2844260682bf1790dbbb77466cd",
+  "rules": 56,
+  "sourceHashes": {
+    "scripts/browser/practical_watch_check.mjs": "adc20c968ef691fe0cefbf8b70e17816c45f0b2031a828f4fa6fe2132385a243",
+    "tests/helpers/practical_care.ts": "2b1483bea33a8be6afd28362f2e563f259fae4ca5fa48800cb8e6138afc027c2",
+    "src/sim/responsibilities.ts": "5b3189268e27e009854af968af7dfa8a5b7b4361e4c3fe32a4c1c6011041f74d",
+    "src/sim/welfare.ts": "b9c8969cc5fa38a6859660c5a7adc59488301170e06bfb78f57c91626e532f0c",
+    "src/sim/options_work.ts": "aa7847c036365bdcf38d51ad075458769e38276dae0d61963b62c5286f991d20",
+    "src/sim/social.ts": "3fb0620d5001cb5103b75045ecac0e7bf48c8617a4463058f6ab6210b8f2ea86",
+    "src/sim/inspect.ts": "e1a77e91ff5947eb4a266199e90e077ad57a2597f2fd268b118a837556905e7c",
+    "src/ui/person.ts": "41b420b1b9ac2d240cde349fb3bbe02a48675d06867da63434db6532c6867941"
+  },
+  "evidence": "STAGED prerequisites and explicit selections of offered request, watch and eat actions. Recipient remaining in place is staged. No claim of ordinary selection, sustained childcare coverage, full injury recovery or aggregate benefit.",
+  "checks": [
+    {
+      "name": "accepted conversation communicates an aged location to a helper who did not know it",
+      "ok": true,
+      "detail": {
+        "unknown": true,
+        "status": "promised",
+        "communicated": {
+          "x": 64,
+          "y": 40,
+          "tick": 0
+        },
+        "actualChild": {
+          "x": 64,
+          "y": 40
+        },
+        "notes": [
+          {
+            "tick": 39,
+            "text": "Ada told me where they last saw the child I agreed to watch (tick 0).",
+            "kind": "social"
+          }
+        ]
+      }
+    },
+    {
+      "name": "offered watch physically travels and option inspection is pure",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "pure": true,
+        "start": {
+          "x": 42,
+          "y": 40
+        },
+        "now": {
+          "x": 43.524185582411064,
+          "y": 40
+        },
+        "phase": "travel"
+      }
+    },
+    {
+      "name": "physical care finishes the time promise, delivers food and survives an intermediate save exactly",
+      "ok": true,
+      "detail": {
+        "status": "done",
+        "request": "fulfilled",
+        "contribution": 40,
+        "delivered": [
+          {
+            "from": "person:6",
+            "to": "person:4",
+            "item": "bread",
+            "n": 1,
+            "reason": "watched over"
+          },
+          {
+            "from": "person:6",
+            "to": "person:4",
+            "item": "bread",
+            "n": 1,
+            "reason": "watched over"
+          },
+          {
+            "from": "person:6",
+            "to": "person:4",
+            "item": "bread",
+            "n": 1,
+            "reason": "watched over"
+          },
+          {
+            "from": "person:6",
+            "to": "person:4",
+            "item": "bread",
+            "n": 1,
+            "reason": "watched over"
+          },
+          {
+            "from": "person:6",
+            "to": "person:4",
+            "item": "bread",
+            "n": 1,
+            "reason": "watched over"
+          }
+        ],
+        "childBread": 5,
+        "continued": true,
+        "conserved": true,
+        "tick": 582
+      }
+    },
+    {
+      "name": "the child eats physically delivered bread",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "before": 25.158999999999438,
+        "after": 100,
+        "conserved": true
+      }
+    },
+    {
+      "name": "viewer mode changes and inspectors preserve complete world state",
+      "ok": true,
+      "detail": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}
