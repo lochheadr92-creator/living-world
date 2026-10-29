@@ -743,4 +743,3 @@ timing, which keep the technique tree staged; (e) whether to push the rules-54/5
 `8e1d11f` rendered examples, then this report. The owner said "Push" after slice 9 and `origin/main` was moved
 `39c3027` → `953eb90` (36 commits, fast-forward) on 2026-10-29; the commits from `aaa95ce` on are not pushed. No PR was
 opened; no history was rewritten.
-
