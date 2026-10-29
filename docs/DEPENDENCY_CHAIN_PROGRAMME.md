@@ -138,7 +138,17 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 ### WS8 Public projects and civic benefit
 - **Current.** Rules 42 `civic_benefit.ts recordCivicBenefit`, one call site after a successful `withdraw`
   (`act_resource.ts`). Public food use runs through `eat_store` (43 starts vs 5 withdraws in 30 days) and earns nothing.
-- **Status.** Impl `partial` · Contract `yes (withdraw)` · E2E `partial` · Ordinary `1 receipt (river)` · Rendered `partial` · Aggregate `unproven`.
+- **Contract (rules 49, `docs/CIVIC_FOOD_BENEFIT.md`).** A meal from a witnessed public storehouse earns the one receipt per
+  project, counted once when the meal ends by exactly what left the store (units moved to the pack at the start, or bites
+  eaten at the store with a full pack); empty attempts, arrivals and unwitnessed stores earn nothing; attribution stays
+  the person's own witnessed record; the ±0.12 experience bound is unchanged. Switch `rich-no-civic-food-benefit`.
+  Owner `src/sim/civic_benefit.ts`; one call site in the `eat_store` handler's end (`act_resource.ts`).
+- **Other public buildings.** No receipt for halls or granaries: no single attributable transfer; judged by use (granary
+  use is now measured by the rules-46 flows).
+- **Status.** Impl `yes` · Contract `yes` (4 cases, `tests/civic_food_benefit.test.ts`; rules-42 tests unchanged) · E2E
+  `yes` (staged: witnessed completion → public meal → receipt → experience 0.04 → 0.08, which the existing rules-42
+  recruit path reads) · Ordinary `no` (0 meal receipts of 1 witnessed public meal in three seeds; table in the slice log) · Rendered `partial` (log line "the shared storehouse … helped me: I ate";
+  recruit note; no new page check) · Aggregate `unproven` (lab rows in the slice log).
 
 ### WS9 Demand, specialisation, exchange
 - **Current.** Trade choice `trade.ts`, local demand rules 43, exchange journeys rules 22 (smoke: zero everywhere).
@@ -266,3 +276,19 @@ anything.
 Lab `food_help_evidence/lab-place` (8 seeds, control + nudge + `rich-no-delivery-place`): deaths +0.5 [−0.9, +2.1], people −0.4
 [−2.4, +1.5], mean hunger +1.0 [−3.3, +5.3], ask units delivered −0.4 [−2.3, +1.3], home food per person 0 for the ablation; all
 not distinguishable from chance. No harm established, no benefit claimed.
+
+### Slice 5 — rules 49 public food benefit (WS8), 2026-10-29
+
+Predecessor reference: `tests/v48_continuation.expected.json` recorded from `53b06ec` by `scripts/v48_reference.ts --write`.
+Contract: `docs/CIVIC_FOOD_BENEFIT.md`. Tests: `tests/civic_food_benefit.test.ts` (4) with the rules-42 tests, table eating and
+the v48 continuation (the first attempt wrote the meal's pack count into activity data for every version and moved the v48
+continuation; it is gated on 49 now and the reference holds).
+
+Ordinary observation, `scripts/civic_food_observe.ts`, Normal, immigration off, 30 days, rules 49
+(`civic_food_evidence/ordinary-30-{seed}`): one public storehouse completed in each seed; witnesses holding its completion
+record 1 / 4 / 1; public meal starts 10 / 0 / 0 and withdrawals 5 / 2 / 1; meals by a witness 1 / 0 / 0, and that one
+witness had already earned the project's single receipt by a withdrawal. Receipts 1 / 0 / 0, all by withdrawal, none by a
+meal. Ordinary activation of the meal path is therefore unproven here: 0 receipts of 1 witnessed meal, with the receipt
+already taken; the contract is proven staged only.
+
+(lab rows: `civic_food_evidence/lab-civic-food`, recorded below when run)

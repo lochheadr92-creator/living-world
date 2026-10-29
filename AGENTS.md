@@ -44,7 +44,9 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-Current rules version 48 lets a promise to a person name the asker's home as the agreed place to leave it when the helper knows that home, keeps it by an ordinary deposit credited once from what moved, and leans a hungry person's choice of whom to ask on remembered trust by at most ±4 (`src/sim/delivery_place.ts`, `docs/DELIVERY_PLACE.md`); lab removal `rich-no-delivery-place`; the rules-47 reference was recorded from `2a05b30` first.
+Current rules version 49 makes a meal from a witnessed public storehouse a personal benefit received, counted once when the meal ends by exactly what left the store (`src/sim/civic_benefit.ts recordCivicFoodBenefit`, `docs/CIVIC_FOOD_BENEFIT.md`); lab removal `rich-no-civic-food-benefit`; the rules-48 reference was recorded from `53b06ec` first.
+
+Rules version 48 lets a promise to a person name the asker's home as the agreed place to leave it when the helper knows that home, keeps it by an ordinary deposit credited once from what moved, and leans a hungry person's choice of whom to ask on remembered trust by at most ±4 (`src/sim/delivery_place.ts`, `docs/DELIVERY_PLACE.md`); lab removal `rich-no-delivery-place`; the rules-47 reference was recorded from `2a05b30` first.
 
 Rules version 47 gives a fed adult's own-home shelter work a pre-winter nudge and, while the winter window is open, lets a household lay its home out past its own workshop site and the open-site cap and keeps its home site through the stale-site sweep (`src/sim/winter_shelter.ts`, `docs/WINTER_SHELTER.md`, adapted from the unmerged `claude/winter-shelter-v34` whose number collided with main's 34); lab removal `rich-no-winter-shelter`; the rules-46 reference was recorded from `80b0fe4` first.
 

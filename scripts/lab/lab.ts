@@ -1,5 +1,5 @@
 import { learnerInstructionOn, setLearnerInstruction } from '../../src/sim/techniques';
-import { civicBenefitOn, setCivicBenefit } from '../../src/sim/civic_benefit';
+import { civicBenefitOn, setCivicBenefit, civicFoodBenefitOn, setCivicFoodBenefit } from '../../src/sim/civic_benefit';
 import { localDemandOn, setLocalDemand } from '../../src/sim/local_demand';
 import { foodFetchOn, setFoodFetch } from '../../src/sim/food_help';
 import { seekCarerOn, setSeekCarer } from '../../src/sim/welfare';
@@ -272,6 +272,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-winter-reserve') return {spec:label,summary:'season reserve target, window, durable preference and granary eating back to rules 45 together; hardship cue unchanged; no effect below rules 46',install(){const was=winterReserveOn();setWinterReserve(false);return ()=>setWinterReserve(was);}};
   if (kind === 'rich-no-winter-shelter') return {spec:label,summary:'no pre-winter cue on laying out, finishing or mending a home, and a home site is blocked by its own workshop site and the open-site cap and cancelled for idleness as before; no effect below rules 47',install(){const was=winterShelterOn();setWinterShelter(false);return ()=>setWinterShelter(was);}};
   if (kind === 'rich-no-delivery-place') return {spec:label,summary:'a promise to a person names no place to leave it and the food ask ignores trust; hand-over, credit and consequences unchanged; no effect below rules 48',install(){const was=deliveryPlaceOn();setDeliveryPlace(false);return ()=>setDeliveryPlace(was);}};
+  if (kind === 'rich-no-civic-food-benefit') return {spec:label,summary:'remove the public-food meal receipt only; withdrawal receipts and physical food unchanged; no effect below rules 49',install(){const was=civicFoodBenefitOn();setCivicFoodBenefit(false);return ()=>setCivicFoodBenefit(was);}};
   if (kind === 'rich-uniform-backgrounds') return {spec:label,summary:'retain previous starting skills and universal adult charcoal knowledge for future creation only; existing people unchanged',install(){const was=backgroundsOn();setBackgrounds(false);return ()=>setBackgrounds(was);}};
   if (kind === 'rich-no-achievement-aftermath') return {spec:label,summary:'remove construction satisfaction and later hopes only; no effect below rules 38',apply:()=> 'achievement aftermath off',install(){const was=achievementAftermathOn();setAchievementAftermath(false);return ()=>setAchievementAftermath(was);}};
   if (kind === 'rich-no-reconsider') return {spec:label,summary:'remove plan reconsideration only; changes nothing below version 34',apply:()=> 'plan reconsideration off',install(){const was=reconsiderOn();setReconsider(false);return ()=>setReconsider(was);}};

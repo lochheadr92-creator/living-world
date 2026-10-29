@@ -26,7 +26,7 @@ import {
 import { addFx, addLog } from './events';
 import { clearFailure, noteFailure, observe, delBelief, isWaterBeliefId } from './knowledge';
 import { mayDeposit, noteDeposit, noteWithdraw, withdrawAllowance } from './facilities';
-import { recordCivicBenefit } from './civic_benefit';
+import { hasCivicFoodBenefit, recordCivicBenefit, recordCivicFoodBenefit } from './civic_benefit';
 import { carryCap } from './people';
 import { taskMultiplier, wearFor } from './tools';
 import type { ToolTask } from './tools';
@@ -325,6 +325,7 @@ registerHandler('eat_store', {
     observe(world, p, e);
     // taken from another household's store (rich only): who saw decides what it costs
     if (a.data.steal && e.ent === 'building') onTheft(world, p, e, a.cycle);
+    if (hasCivicFoodBenefit(world)) a.data.took = a.cycle; // rules 49: what left the store for the pack (the meal's own count restarts at the first bite)
     a.cycle = 0;
     const k = pickFood(p.inv, p.needs.hunger);
     if (!k) return 'could not take food';
@@ -335,6 +336,16 @@ registerHandler('eat_store', {
   work: (world, p, a) => eatTick(world, p, a),
   onEnd(world, p, a, outcome, detail) {
     if (outcome === 'success') addLog(world, p, 'need', 'Ate a meal from the stores.');
+    // rules 49 (civic_benefit.ts): a meal from a public storehouse is a benefit received, counted once when the meal ends by what
+    // actually left the store for this person: the units moved to the pack at the start (a.data.took), or the bites eaten at the
+    // table. Nothing is counted for arriving or for an empty store.
+    {
+      const e = world.byId.get(a.targetId);
+      const took = (a.data.took as number) ?? 0;
+      const ate = a.data.table ? a.cycle : 0;
+      const units = took + ate;
+      if (e && e.ent === 'building' && e.hhId === 0 && e.type === 'storehouse' && units > 0 && a.data.food) recordCivicFoodBenefit(world, p, e, a.data.food as ItemKind, units);
+    }
     if (a.data.table) {
       // A meal at a store was taken a bite at a time, so what it came to is known only now: the belief about the store is
       // refreshed as it stands after the meal, and a meal at another household's store is reported once, for what was eaten.

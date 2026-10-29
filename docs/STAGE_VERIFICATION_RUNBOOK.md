@@ -255,3 +255,11 @@ Contract: [DELIVERY_PLACE.md](DELIVERY_PLACE.md).
 - Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/food_help_observe.ts food_help_evidence/ordinary-30-meadow-r48 meadow 30`
   (the food-help script; its report now carries `doorPromises`, `doorDeliveries` and `foodAskTrustLeaned`).
 - Lab harm check: `node scripts/lab.mjs --out food_help_evidence/lab-place --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-delivery-place`.
+
+## Rules 49 public food benefit
+
+Contract: [CIVIC_FOOD_BENEFIT.md](CIVIC_FOOD_BENEFIT.md).
+
+- Contracts: `npx vitest run tests/civic_food_benefit.test.ts tests/civic_benefit.test.ts tests/v48_continuation.test.ts`.
+- Ordinary observation: `node node_modules/vite-node/dist/cli.mjs scripts/civic_food_observe.ts civic_food_evidence/ordinary-30-meadow meadow 30`.
+- Lab harm check: `node scripts/lab.mjs --out civic_food_evidence/lab-civic-food --seeds 8 --fork 0 --days 30 --profile normal --branches nudge:1,rich-no-civic-food-benefit`.
