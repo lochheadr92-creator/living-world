@@ -1,3 +1,4 @@
+import { describeUnfinished } from './succession';
 import { deceasedById } from './historical_index';
 import { supperHistory } from './household_practices';
 import { factionHistory } from './political_alignment';
@@ -48,6 +49,7 @@ export function householdHistory(w: World, p: Person): string[] {
  return [ `${h.name} household formed at tick ${h.formed}; formation cause is not recorded.`,
   `Members: ${h.members.map(id => name(w,id)).join(', ')}.`,
   ...supperHistory(w,p),
+  ...describeUnfinished(w,h),
   home?.ent === 'building' ? `Home #${home.id}: ${home.type}; recorded builders: ${(home.builtBy ?? []).map(id => name(w,id)).join(', ') || 'unknown'}.` : 'No current home.',
   ...(h.relocations??[]).slice(-3).flatMap(r=>[
    `Relocation #${r.id}: ${r.phase}. Organiser: ${name(w,r.organiserId)}. Destination: ${r.destination.x.toFixed(0)}, ${r.destination.y.toFixed(0)}.`,

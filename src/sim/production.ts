@@ -13,6 +13,7 @@ import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nigh
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
 import { GRANARY_TRIP } from './intent';
+import { cartExperience, cartTripOptions } from './transport';
 import { durableReserve } from './provision';
 import { baseHub } from './settlements';
 import { projectLimit, projectsUnderWay } from './act_build';
@@ -574,9 +575,12 @@ export function demandsOf(ctx: Ctx): Demand[] {
     out.push({ item: 'jar', qty: 1, have: 0, base: 10 * tm.work, why: 'to carry more water at a time', tag: 'craft' });
   }
 
-  // a handcart for the one who keeps hauling heavy loads over a long way
-  if (facilitiesOf(ctx, 'timber_yard').length && wantsCart(ctx)) {
-    out.push({ item: 'cart', qty: 1, have: 0, base: 14 * tm.work, why: 'to haul heavy loads', tag: 'craft' });
+  // a handcart for the one who keeps hauling heavy loads over a long way: known site deficits (rules 20), or what they have
+  // really carried lately (rules 55, transport.ts)
+  if (facilitiesOf(ctx, 'timber_yard').length) {
+    const carried = cartExperience(ctx);
+    if (wantsCart(ctx)) out.push({ item: 'cart', qty: 1, have: 0, base: 14 * tm.work, why: 'to haul heavy loads', tag: 'craft' });
+    else if (carried && !hasCartAlready(ctx)) out.push({ item: 'cart', qty: 1, have: 0, base: 14 * tm.work, why: `to haul heavy loads, ${carried}`, tag: 'craft' });
   }
 
   // bread for a household that has grain to spare
@@ -596,11 +600,15 @@ export function demandsOf(ctx: Ctx): Demand[] {
   return out;
 }
 
-/** Someone who has just been carrying heavy materials a long way wants wheels. */
-function wantsCart(ctx: Ctx): boolean {
+function hasCartAlready(ctx: Ctx): boolean {
   const { p, world } = ctx;
-  if (world.carts.some((c) => c.ownerHh === p.hhId || c.ownerHh === 0)) return false;
-  if (beliefsByKind(p, ['cart']).some((b) => b.hh === p.hhId || b.hh === 0)) return false;
+  if (world.carts.some((c) => c.ownerHh === p.hhId || c.ownerHh === 0)) return true;
+  return beliefsByKind(p, ['cart']).some((b) => b.hh === p.hhId || b.hh === 0);
+}
+/** Known outstanding work heavy enough to want wheels for (the rules-20 reason; what they have carried is transport.ts). */
+function wantsCart(ctx: Ctx): boolean {
+  const { p } = ctx;
+  if (hasCartAlready(ctx)) return false;
   let heavy = 0;
   for (const s of beliefsByKind(p, ['site'])) {
     if (!(s.hh === p.hhId || s.hh === 0)) continue;
@@ -1096,6 +1104,7 @@ export function productionOptions(ctx: Ctx): void {
   optTendGranary(ctx);
   optToolMaintenance(ctx);
   optCartHaul(ctx);
+  cartTripOptions(ctx);
   optRackSpare(ctx);
   optPlanFacilities(ctx);
   optPlanUpgrade(ctx);

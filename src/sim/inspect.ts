@@ -22,6 +22,7 @@ import { describeCrew } from './crews';
 import { describeTrade } from './trade';
 import { describeCustomers } from './customers';
 import { describeWinterPractice } from './winter_practice';
+import { describeHauling } from './transport';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
@@ -163,6 +164,8 @@ export interface PersonView {
   customers: string[];
   /** rules 53: the practice of keeping winter stores, as the person holds it */
   winterPractice: string[];
+  /** rules 55 (transport.ts): what they have carried to building sites lately */
+  hauling: string[];
   needs: NeedView[];
   inventory: ItemView[];
   carry: { used: number; cap: number };
@@ -604,6 +607,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
     customers: describeCustomers(world, p),
     winterPractice: describeWinterPractice(world, p),
+    hauling: describeHauling(world, p),
     needs,
     inventory: itemList(p.inv),
     carry: { used: weightOf(p.inv), cap: carryCap(world, p) },

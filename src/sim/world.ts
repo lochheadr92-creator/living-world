@@ -408,6 +408,7 @@ export function hashWorld(world: World): string {
   for (const h of world.households) if (h.reserveLaid) push('ReserveLaid' + h.id + JSON.stringify(h.reserveLaid));
   for (const p of world.persons) if (p.winterPractice) push('WinterPractice' + p.id + JSON.stringify(p.winterPractice));
   for (const p of world.persons) if (p.winterMeals) push('WinterMeals' + p.id + JSON.stringify(p.winterMeals));
+  for (const p of world.persons) if (p.hauling) push('Hauling' + p.id + JSON.stringify(p.hauling));
   for (const p of world.persons) for (const i of p.intentions) if (i.succeeding) push('Succeeding' + i.id + JSON.stringify(i.succeeding));
   for(const m of world.meals)if(m.supperContact)push('SupperContact'+m.id+JSON.stringify(m.supperContact));
   for(const p of world.persons)if(p.civicAlignment)push('CivicAlignment'+p.id+JSON.stringify(p.civicAlignment));

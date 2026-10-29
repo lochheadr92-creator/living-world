@@ -587,6 +587,8 @@ export interface Person {
   winterPractice?: import('./winter_practice').WinterPractice;
   /** rules 53: meals eaten from the household's stores this winter */
   winterMeals?: { year: number; meals: number };
+  /** rules 55 (transport.ts): what they have carried to building sites on foot lately, the ground of wanting a cart */
+  hauling?: import('./transport').Hauling;
   civicAlignment?: import('./political_alignment').CivicAlignment[];
   tradeLeads?: import('./exchange_journeys').TradeLead[];
   heardDemand?: import('./local_demand').HeardDemand[];
