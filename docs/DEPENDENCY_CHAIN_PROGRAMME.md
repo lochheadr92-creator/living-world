@@ -168,7 +168,8 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   seven foot loads → demand with its own words; reserve food carted home and credited; batch inputs carted to the kiln;
   puller dies → household member recovers the load to the site; partial unload at a full lean-to) · Ordinary `partial`
   (the experience ground is reached by 7 people in three worlds and the demand surfaces 95 times, blocked by the hammer every
-  time; no cart exists, so no trip; table in the slice log) · Rendered `partial` (person-card line; no page check) ·
+  time; no cart exists, so no trip; table in the slice log) · Rendered `yes` (person-card line; page check
+  `scripts/browser/chains_check.mjs` transport 1 / 1, `chain_evidence/rendered/transport.png`) ·
   Aggregate `unproven` (lab rows in the slice log). Exchange goods are not carted (limit kept).
 
 ### WS8 Public projects and civic benefit
@@ -252,7 +253,9 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   her wood to the site by his hands; reserve laid → three winter meals each → practice learned, child from mother → cue
   two days earlier, held into adulthood) · Ordinary `partial` (5 undertakings recorded at deaths, 0 taken up; the practice
   learned by 5 people in three seeds, 4 of them from the layer, one early-cue preparation; table in the slice log) ·
-  Rendered `partial` (the practice line on the person card; plan goal "finish what X began"; no household-card line yet) ·
+  Rendered `yes` (the practice line on the person card; plan goal "finish what X began"; the household history's "Ada left
+  the household home unfinished …" line, page check `scripts/browser/chains_check.mjs` continuity 1 / 1,
+  `chain_evidence/rendered/continuity.png`) ·
   Aggregate `unproven` (lab rows in the slice log).
 
 ### WS12 Relocation, splitting, rescue, return
@@ -278,14 +281,33 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
 - **Status.** Impl `yes` · Contract `yes` (6 cases) · E2E `yes` (staged: heard by two of three → refusal → child stays →
   organiser alone packs, walks, builds, founds a new household; succession after a witnessed death; return; search) ·
   Ordinary `no` (the gate now opens in 85 samples across river and forest, but the proposal was chosen once and failed; no
-  agreement in 135 seed-days; table in the slice log) · Rendered `partial` (history lines; no page check) · Aggregate
+  agreement in 135 seed-days; table in the slice log) · Rendered `yes` (history lines for the succession and the search,
+  page check `scripts/browser/chains_check.mjs` 2 / 2, `chain_evidence/rendered/{succession,rescue}.png`) · Aggregate
   `unproven` (lab rows in the slice log).
 
 ### WS13 Observable explanations
-- **Status.** Per chain; recorded with each slice.
+- **Per chain.** Each slice's rendered status names what the viewer sees and where it was checked: rules 45 (page check
+  5 / 5), 46-48 (plan step text, option labels, request notes, decision "because"), 49 (log line), 50 (plan panel), 51
+  ("Their customers" rows, page check), 52 (three person-card lines, page check 4 / 4), 53 (practice line; household
+  history line for what was left unfinished), 54 (household history lines for successions, searches and the split), 55
+  (person-card line for what was carried). The rendered examples for 53-55 are staged saves built by running the contract
+  steps (`scripts/chains_demo.ts` → `chain_evidence/rendered-saves/`), read in a headless page through the DOM
+  (`scripts/browser/chains_check.mjs`, 8 / 8 including an observer-purity check per save), screenshots in
+  `chain_evidence/rendered/`.
+- **Honesty of the lines.** A promise is a request note until delivery ("delivered N of M"); a plan step is "take the food
+  home", not "stored"; a search records "found nobody"; a cart demand says on which ground it is wanted; a relocation
+  outcome names who stayed. Nothing reconstructs a motive from a later success.
+- **Status.** Impl `yes` · Contract `n/a` · E2E `yes` (page checks) · Ordinary `n/a` · Rendered `yes` · Aggregate `n/a`.
 
 ### WS14 Evidence and corrected findings
-- Corrections kept (see brief section 14); every new claim below names its boundary event and denominator.
+- Corrections kept (see brief section 14); every new claim below names its boundary event and denominator. Audit at the
+  end of the programme (2026-10-29): a search of the eleven slice documents and this register for the corrected claims
+  (seventeen empty packs, a built forest granary, charcoal never made, iron impossible, the two-day window, stale source
+  counts) finds none of them restated. Two of this programme's own first readings were corrected on the way and the
+  corrections are kept in the slice logs: the swap-plausibility rule (slice 7) and the cart experience threshold (slice 11).
+- Every observation script deep-copies by serializing before and after each sample and throws on any difference, and
+  records the source manifest; the instrumentation is shown not to change state or the random stream in every run above.
+- **Status.** Impl `yes` · Contract `n/a` · E2E `n/a` · Ordinary `n/a` · Rendered `n/a` · Aggregate `n/a`.
 
 ## Owner expansion and continuation register — 2026-10-29
 
@@ -908,3 +930,84 @@ fork: the first foot haul changes the demand list at once. Every row is within t
 deaths −1.4 [−2.4, −0.4] (floor ±3.1), projects adopted +7.4, preparations adopted +6.5 (the nudge arm moves these as
 much), tools +1.4 [−1.8, +4.2], the rest indistinguishable from chance. No cart was made on any arm (the hammer), so the
 rows measure the demand's side effects on planning, not transport. No benefit claimed, no harm established.
+
+## Final report (2026-10-29)
+
+**Versions.** Started from `main` `7625337`, rules 44. Final: `main` at the commit after `8e1d11f`, rules 55
+(`CURRENT_RULES_VERSION`), save format unchanged, every version 44-55 supported and pinned by its own continuation
+reference (`tests/v44_continuation.expected.json` … `tests/v55_continuation.expected.json`, each recorded before its
+successor).
+
+**Status per workstream** (the six fields in full are in each WS row above).
+
+| WS | delivered | rules | ordinary activation | aggregate |
+|---|---|---|---|---|
+| 1 baseline | register, diagnoses, references | — | — | — |
+| 2 food help | fetch promises, carers, eating what is carried | 45 | yes | unproven |
+| 3 winter reserve | durable reserve, granary use | 46 | yes | unproven |
+| 4 winter shelter | push before winter, site kept | 47 | yes | +1.4 solid homes, +5.4 condition (beyond noise, slice 3) |
+| 5 delivery place | agreed door, trust lean | 48 | yes | unproven |
+| 6 production chains | batch plans, resumed batches, two-stage recipes | 50 | yes | unproven |
+| 7 transport | carried experience, trips for live plans, recovery | 55 | partial (demand yes; no cart, so no trip) | unproven |
+| 8 civic benefit | public-meal receipt | 49 | no (0 receipts of 1 witnessed meal) | unproven |
+| 9 demand and exchange | customers; exchange journeys untouched | 51 | partial (9 leads, 2 supplied, 0 returns) | unproven |
+| 10 technique tree | smelting, forging, lessons by kind, trial | 52 | partial (gates and lessons; no ore mined) | unproven |
+| 11 succession, culture | unfinished taken up; winter-stores practice | 53 | partial (5 recorded, 0 taken up; 5 holders) | unproven |
+| 12 relocation | subgroup consent, succession, return, search | 54 | no (gate opens, proposal chosen once, failed) | unproven (identical to control in 7 / 8 seeds) |
+| 13 explanations | lines per chain; rendered examples 53-55 | — | — | — |
+| 14 evidence | corrections kept; audit clean | — | — | — |
+
+**Root causes confirmed and capabilities added.** Food/care asks with nothing spare returned `no_item` before any fetch
+branch (45: the promise to forage); the winter reserve was cushion-sized and the granary never fed (46); the home got no
+push before winter and sites lapsed through it (47); a promise named no place and trust was never read in the ask (48);
+`recordCivicBenefit` had one call site, on `withdraw`, while meals ran through `eat_store` (49); no persistence between a
+batch's input and its use, inputs not planned while the tool was missing (50); a declined ask was forgotten (51);
+smelting and forging were universal and nothing lost could be regained (52); plans died with their makers and no practice
+outlived a winter (53); a relocation needed the whole household in contact outdoors, which held in 68 of 329 eligible
+samples, so nothing was ever proposed (54); the cart was wanted on deficits alone, offered sites alone, and never recovered
+(55).
+
+**Existing modules changed and why.** `social.ts` (food-help fetch branch, delivery place, customer deps), `intent.ts`
+(stock/season targets, batch and succession adoption, `succeeding`), `provision.ts` (granary, practice lead), `hardship.ts`
+(winter end hook), `shelter.ts` and `buildings.ts` (winter push, site kept, `dropNear` returns the pile), `act_resource.ts`
+(civic meal receipt, winter meal count, haul experience), `act_production.ts` (batch resume, cart recovery leg, store
+unloading rules), `production.ts` (two-stage recipes, cart demand ground, trip offers), `options_social.ts` (customer
+supply, technique lessons), `techniques.ts` and `background.ts` (tree, salts), `lifecycle.ts` (unfinished records),
+`relocation.ts` (extensions), `decision.ts` (customer pruning in `decide`), `history.ts` and `inspect.ts` and the person
+panel (lines), `rulesversion.ts`, `save.ts` validators, `world.ts` hash coverage, `scripts/lab/lab.ts` switches. New owner
+modules: `food_help.ts`, `winter_reserve.ts`, `winter_shelter.ts`, `delivery_place.ts`, `civic_benefit.ts` (extended),
+`batch_plan.ts`, `customers.ts`, `techniques.ts` (extended), `succession.ts`, `winter_practice.ts`, `transport.ts`.
+
+**End-to-end outcomes and rendered evidence.** Every slice has staged proof through the external selection boundary (the
+contract tests, eleven files) and its lines in the inspector; page checks: food help 5 / 5, customers, technique tree
+4 / 4, chains (53-55) 8 / 8 with screenshots under `*_evidence/rendered/`.
+
+**Test and runtime results.** Final full suite 205 files / 1439 tests passed (`npm test -- --maxWorkers=4`), typecheck and
+build clean, `git diff --check` clean, at every slice. Thirty-three 45-day ordinary observations (eleven slices by three
+seeds) reached their horizon with conservation held and observer purity held at every sample; eleven 8-seed labs.
+
+**Ordinary activation versus staged proof.** Stated per row and in the table above. The chains that fire in ordinary
+Normal worlds are food help, the winter reserve and shelter push, the delivery place, batch plans (first handles, jars,
+charcoal), customers at sites, the practice of winter stores (5 holders), and the cart demand (7 people). The chains proven
+only staged are the public-meal receipt, exchange returns, smelting/forging/trial, succession of the unfinished, every
+relocation extension, and every cart trip; the register names for each the link that stops them (one township; no ore
+mined and late smithies; survivors with a plan of that kind, or dead; the hunger-critical ranking; the hammer).
+
+**Aggregate effects.** Established beyond the noise floor: none, except slice 3's +1.4 solid homes and +5.4 mean condition
+(winter shelter). Every other lab row is within the floor; the control is not a steady reference for preparation and
+project counts (a one-draw nudge moves them as much). No benefit is claimed anywhere else.
+
+**Preserved failures, limits, outstanding decisions.** Kept as found and recorded: the swap-plausibility rule that refused
+every swap (slice 7); the cart experience threshold first set at the staged pack (slice 11); the rules-20 whole-household
+form at every version below 54. Limits per contract document. Outstanding, not decided here: (a) the relocation cue and
+ranking (the eligible are hunger-critical, so food outranks the proposal; a proposal made before the hunger is acute, or
+weighed as a way out of it, is a different bounded change); (b) exchange journeys carrying goods by cart and the WS9
+exchange remainder; (c) the hammer (hand-tool plan) as the one blocker of every cart; (d) ore mining and the smithy's
+timing, which keep the technique tree staged; (e) whether to push the rules-54/55 and rendered-examples commits.
+
+**Commits (local `main`, oldest first).** `ce50c0a` 45 · `80b0fe4` 46 · `2a05b30` 47 · `53b06ec` 48 · `de8af50` 49 ·
+`7c70fb0` 50 · `6fa3509` v50 ref · `7dd9066` 51 · `573a18a` + `cdb7a03` v51 ref · `d2a1543` 52 · `2b213f5` + `98fd719` v52 ref
+· `557f647` 53 · `b153317` + `953eb90` v53 ref · `aaa95ce` 54 · `f244b5d` v54 ref · `94f5f8a` 55 · `b086c9a` v55 ref ·
+`8e1d11f` rendered examples, then this report. The owner said "Push" after slice 9 and `origin/main` was moved
+`39c3027` → `953eb90` (36 commits, fast-forward) on 2026-10-29; the commits from `aaa95ce` on are not pushed. No PR was
+opened; no history was rewritten.
