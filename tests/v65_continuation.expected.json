@@ -1,0 +1,28 @@
+{
+  "source": "93f59e36511d7dbd130c4458abaf8dfdb9eded71, rules 65 before successor behaviour",
+  "ordinary": {
+    "saved": "49cd83afcc84662848d8ac6f96615650d6838d4c00673b08e0e67c62d9cabef4",
+    "uninterrupted": "3903a17dd5ba159a67fa837af4f910d5cb466b88171d2ea847f2862eb0003d9a",
+    "continued": "3903a17dd5ba159a67fa837af4f910d5cb466b88171d2ea847f2862eb0003d9a"
+  },
+  "travellingSource": {
+    "saved": "1ad556f84b5aed7b51814fddae031daedfc1f647094350360b3f551572295e2e",
+    "uninterrupted": "13b6218e6410b6efe334cb63c40148295d9703beb1e960f039a95a58bf8e5960",
+    "continued": "13b6218e6410b6efe334cb63c40148295d9703beb1e960f039a95a58bf8e5960"
+  },
+  "travellingStock": {
+    "saved": "2125c8f7848eda6e4280d2fda87d4b2cdbce8b750aeaabfbac800f2328c71e0d",
+    "uninterrupted": "26928a14eef6d613b7d217273b7da3a5e38940a422e55e8c41d6c1359634e39c",
+    "continued": "26928a14eef6d613b7d217273b7da3a5e38940a422e55e8c41d6c1359634e39c"
+  },
+  "travellingWater": {
+    "saved": "fca3d5d06ce30f334db85735eb54196fa87321976b2421b4fc41986474823999",
+    "uninterrupted": "2486bd8e961e029c2d1f13ebcb66dfdc3fa74d660e0069cd8b43956eb34b030f",
+    "continued": "2486bd8e961e029c2d1f13ebcb66dfdc3fa74d660e0069cd8b43956eb34b030f"
+  },
+  "outsideResident": {
+    "saved": "685865236cf487cd2da6e801d608557067e954022be05f23d8cd658568cce3c2",
+    "uninterrupted": "3ad781f939423ab8d4b579a04aecfdb8f4687f41d06e41c1518dfaa8df4f188a",
+    "continued": "3ad781f939423ab8d4b579a04aecfdb8f4687f41d06e41c1518dfaa8df4f188a"
+  }
+}
