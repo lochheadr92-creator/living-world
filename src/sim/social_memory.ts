@@ -12,7 +12,7 @@ export function rememberRequest(w: World, r: Request): void {
   if(role==='asker' && (!other || other.ent!=='person' || p.indoors!==other.indoors || hyp(p.x-other.x,p.y-other.y)>3))continue;
   const memories=p.socialMemory??=[];
   if(memories.some(m=>m.requestId===r.id))continue;
-  const task=taskReceipt(w,r);
+  const task=taskReceipt(w,r,role);
   memories.push({requestId:r.id,otherId,siteId:r.siteId,tick:w.tick,outcome:r.status,reason:r.note||'reason not recorded',role,...(task?{task}:{})});
   if(memories.length>32)memories.shift();
  }

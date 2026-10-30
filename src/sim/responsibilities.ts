@@ -19,6 +19,7 @@ import { sameSpace } from './habitation';
 import { senseRadius } from './perception';
 import type { Activity, Commitment, Items, ItemKind, Person, World } from './types';
 import { hyp } from './util';
+import {hasWatchLearning} from './helper_learning';
 
 /** how long a watch lasts, and how often the watcher looks at the child's needs */
 export const WATCH_TICKS = 300;
@@ -104,6 +105,14 @@ export function watchTick(world: World, p: Person, a: Activity, child: Person): 
   if (a.progress < WATCH_TICKS) return 'continue';
   const c = p.commitments.find((x) => x.id === a.data.commitmentId);
   if (c && c.status === 'active') {
+    if(hasWatchLearning(world)){
+      const r=world.requests.find(r=>r.id===c.requestId&&r.kind==='watch'&&r.to===p.id&&r.destId===child.id);
+      if(r){
+        const asker=world.byId.get(r.from);
+        const witnessed=asker?.ent==='person'&&asker.alive&&asker.pose!=='sleep'&&asker.activity?.kind!=='sleep'&&sameSpace(world,asker,p)&&sameSpace(world,asker,child)&&hyp(asker.x-p.x,asker.y-p.y)<=Math.min(3,senseRadius(world,asker))&&hyp(asker.x-child.x,asker.y-child.y)<=senseRadius(world,asker);
+        r.helperWork={kind:'watch',target:child.id,eventId:a.id,tick:world.tick,witnessId:witnessed?r.from:0};
+      }
+    }
     c.contrib = (c.contrib ?? 0) + 40;
     fulfillCommitment(world, p, c.id);
   }

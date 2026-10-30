@@ -1046,6 +1046,8 @@ export type RequestStatus = 'pending' | 'promised' | 'fulfilled' | 'partial' | '
 export interface Request {
   /** Rules 78: last actual hand-over to this requester, not a promise or remote site arrival. */
   helperReceipt?: import('./helper_learning').HelperReceipt;
+  /** Rules 79: physical watch completion and the requester who could see its completion, if any. */
+  helperWork?: import('./helper_learning').HelperWork;
   id: number;
   kind: RequestKind;
   from: number;

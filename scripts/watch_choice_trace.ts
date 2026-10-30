@@ -1,0 +1,10 @@
+import {laterWatchScene} from '../tests/helpers/watch_learning';
+import {stepWorld} from '../src/sim/world';
+import {generateOptions,rankOptions} from '../src/sim/decision';
+import {setWatchLearning} from '../src/sim/helper_learning';
+import {perceive} from '../src/sim/perception';
+const f=laterWatchScene();
+perceive(f.w,f.parent);
+const asks=()=>rankOptions(generateOptions(f.w,f.parent,true,true)).filter(o=>o.key.endsWith(':request:watch')).map(o=>({key:o.key,target:o.targetId,score:o.util,reason:o.selectionReason}));
+const on=asks();setWatchLearning(false);const off=asks();setWatchLearning(true);
+console.log(JSON.stringify({tick:f.w.tick,parent:{x:f.parent.x,y:f.parent.y,needs:f.parent.needs,cooldowns:f.parent.cooldowns},helper:{x:f.helper.x,y:f.helper.y,activity:f.helper.activity},other:{x:f.other.x,y:f.other.y},on,off,requests:f.w.requests},null,2));

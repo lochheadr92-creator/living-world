@@ -1,5 +1,5 @@
 import { exchangeJourneyOptions } from './exchange_journeys';
-import {helperExperience,materialRequestKind} from './helper_learning';
+import {helperExperience,materialRequestKind,watchExperience} from './helper_learning';
 import { askTrustBonus } from './delivery_place';
 import { supplyOptions } from './customers';
 import { heldTechniques, hasLearnerInstruction, TECHNIQUES, TECHNIQUE_KINDS, techniqueApplies, knowsTechnique, learnBlocker } from './techniques';
@@ -216,8 +216,9 @@ function optRequest(ctx: Ctx): void {
           .add(kids.length ? `laid up, and ${kids[0].name} needs seeing to` : 'laid up, and the fire is getting low', 18 + 8 * (p.illness?.severity ?? 0.5))
           .add(c.aff >= 25 ? 'a friend' : c.fam >= 4 ? 'a neighbour' : 'worth a try', c.aff >= 25 ? 5 : 2)
           .add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
+        const experience=kids.length?watchExperience(world,p,c.q.id):{bonus:0,reason:''};if(experience.bonus)sc.add(experience.reason,experience.bonus);
         if (!ctx.observer) p.cooldowns['askduty' + c.q.id] = world.tick + 400; // (the wait starts when they consider it; the inspector asking must not start it)
-        if (kids.length) mkSocial(ctx, c, 'request', { reqKind: 'watch', destKind: 'person', destId: kids[0].id, purpose: `keep an eye on ${kids[0].name}` }, `Ask ${c.q.name} to keep an eye on ${kids[0].name}`, `to have ${kids[0].name} seen to while I am laid up`, null, sc, 'request', ':watch');
+        if (kids.length) mkSocial(ctx, c, 'request', { reqKind: 'watch', destKind: 'person', destId: kids[0].id, purpose: `keep an eye on ${kids[0].name}` }, `Ask ${c.q.name} to keep an eye on ${kids[0].name}`, `to have ${kids[0].name} seen to while I am laid up`, null, sc, 'request', ':watch', experience.reason);
         else mkSocial(ctx, c, 'request', { reqKind: 'fire', destKind: 'building', destId: fire!.id, purpose: 'keep the fire going' }, `Ask ${c.q.name} to keep the fire going`, 'to have the fire kept while I am laid up', null, sc, 'request', ':fire');
       }
     }

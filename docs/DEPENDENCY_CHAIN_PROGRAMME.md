@@ -5,7 +5,7 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **78**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **79**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
 choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, learned personal daily preferences, personally scoped work amounts/durations, and private food/water preparation retaining a useful work purpose through a drink break. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
@@ -28,6 +28,16 @@ pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-o
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
 
+### Rules 79 — personally witnessed childcare completion
+
+Predecessor 78 was pinned at `0f26bc7`. `WATCH_LEARNING.md` records actual watch completion, distinct own-work and
+requester-witness sources, a bounded childcare-only preference, exact saved continuation and a later voluntarily
+accepted physical watch. Full suite 265 files / 1,771 tests and build pass; rendered check 6/6. The matched staged
+choice changes Ben/Cora after a quiet interval; it is not ordinary frequency or viability evidence. Fixed ordinary
+results are recorded in the contract document. Broader competence and communication remain open. Next audit:
+existing generic promise completion can still change a distant requester's trust/thanks without contact; reproduce
+that path before correcting attribution and adding locally communicated outcomes.
+
 ### Rules 78 — task-specific direct material receipts
 
 Predecessor 77 was pinned at `f84dbaf`. `HELPER_LEARNING.md` records typed existing request memories, physically sourced
@@ -35,7 +45,7 @@ hand-over references, bounded task-matched choice and request/event deduplicatio
 changes helper, and the chosen helper can still validly refuse for their own work. Final full suite 263 files / 1,757
 tests, focused 20/20, fresh-server browser 7/7 and build pass. Three fixed ordinary windows record 1/8/6 direct receipts
 but zero later influenced starts/offers; no aggregate benefit claim. Other work/care competence, communication, conflicting
-reports and all other open rows remain. The next audit traces construction requests after a communicated making refusal.
+reports and all other open rows remain. The construction-request making-refusal diagnostic recorded no repeated eligible offers or requests; the hypothesised defect was not reproduced.
 
 ### Rules 77 — corrected histories are not current failures
 
