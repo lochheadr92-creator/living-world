@@ -1,3 +1,4 @@
+import {validatePromiseKnowledge} from '../sim/promise_knowledge';
 import {validateProjectGraphs} from '../sim/project_graph';
 import {validateRoutines} from '../sim/daily_routines';
 import {validateWorkScopes} from '../sim/action_scope';
@@ -252,6 +253,7 @@ export function deserializeWorld(json: string): World {
   validateSourceExperience(w);
   validateRouteExperience(w);
   validateHelperLearning(w);
+  validatePromiseKnowledge(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);

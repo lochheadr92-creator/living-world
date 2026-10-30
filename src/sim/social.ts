@@ -56,6 +56,7 @@ import type { Belief, Commitment, Conversation, ConvPurpose, ItemKind, Items, Pe
 import { clamp, hyp } from './util';
 import { hasLocalGiving } from './local_giving';
 import {noteHelperReceipt} from './helper_learning';
+import {hasPromiseKnowledge,recordPromiseCompletion,receiveCompletionReport,acknowledgeCompletionReport,completionContact} from './promise_knowledge';
 import { noteCarePackFailure } from './care_capacity';
 
 // ───────────────────────── small helpers ─────────────────────────
@@ -575,6 +576,11 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
     const full = !isRich(world) || got >= req.amount || watched;
     settle(world, req, full ? 'fulfilled' : 'partial', watched ? 'kept watch for the agreed time' : full ? 'promise kept' : `promise kept: ${got} of the ${req.amount} asked for`);
   }
+  if(hasPromiseKnowledge(world)){
+    const witnessed=req&&recordPromiseCompletion(world,A,B,req,c);
+    if(witnessed&&A){bubble(world,A,D.saying(D.THANKS,A.id,B.id,world.tick>>4,{n:B.name}),'happy');addEvent(world,'social',`${A.name} saw ${B.name} complete a promised contribution.`,[A.id,B.id],A.x,A.y);}
+    return;
+  }
   if (A) {
     adjustRel(A, B.id, world.tick, { aff: 3, trust: 6, note: `${B.name} kept their promise` });
     adjustRel(B, A.id, world.tick, { aff: 1, trust: 1 });
@@ -631,7 +637,8 @@ export function checkCommitments(world: World, p: Person): void {
         c.status = did ? 'done' : 'moot';
         c.reason = did ? 'mended' : 'it was mended by someone else';
         if (req && req.status === 'promised') settle(world, req, did ? 'fulfilled' : 'cancelled', c.reason);
-        if (did) adjustRel(A, p.id, world.tick, { aff: 3, trust: 5, note: `${p.name} mended our roof` });
+        if(did&&hasPromiseKnowledge(world)){if(req)recordPromiseCompletion(world,A,p,req,c);}
+        else if (did) adjustRel(A, p.id, world.tick, { aff: 3, trust: 5, note: `${p.name} mended our roof` });
         continue;
       }
     }
@@ -651,6 +658,7 @@ export function checkCommitments(world: World, p: Person): void {
     const total = c.kind === 'help_build' || c.kind === 'work' ? 40 : Math.max(1, c.amount);
     const got = c.kind === 'help_build' || c.kind === 'work' ? Math.min(total, c.contrib ?? 0) : Math.min(total, c.delivered ?? 0);
     const frac = got / total;
+    if(hasPromiseKnowledge(world)&&frac>=1){fulfillCommitment(world,p,c.id);continue;}
     if (frac >= 1) {
       c.status = 'done';
       if (req && req.status === 'promised') settle(world, req, 'fulfilled', 'did what they promised');
@@ -825,6 +833,8 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 
 function purposeGoal(purpose: ConvPurpose, name: string): string {
   switch (purpose) {
+    case 'report':
+      return `to report completed work to ${name}`;
     case 'learn_technique':
       return `to ask ${name} for instruction`;
     case 'teach_technique':
@@ -882,9 +892,10 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
+  const report=hasPromiseKnowledge(world)&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
-  const resultText = c.lesson ? c.lesson.outcome : outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
-  const detailText = c.lesson ? c.lesson.reason : outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
+  const resultText = c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
+  const detailText = c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
   // a fever passes in talk (rich only; nothing in an authored world)
@@ -938,6 +949,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
+    if(hasPromiseKnowledge(world)&&c.purpose==='report'&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(c.purpose==='teach_technique') {
       const why=lessonProblem(world,A,B,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
@@ -1006,6 +1018,10 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
+    case 'report': {
+      const text=receiveCompletionReport(world,A,B,d.requestId??0,c.id);c.data.reportDelivered=!!text;c.data.reportText=text??'No personally retained completion could be reported.';
+      if(text)bubble(world,A,text,'say',70);break;
+    }
     case 'learn_technique':
       A.cooldowns['learn:'+B.id]=world.tick+2*DAY;
       addLog(world,A,'social',`Asked ${B.name} to teach me ${TECHNIQUES[lessonKind(c)].name} for work I want to do.`);
@@ -1111,6 +1127,10 @@ function reqOf(world: World, c: Conversation): Request | undefined {
 function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: ConvData): void {
   const req = reqOf(world, c);
   switch (c.purpose) {
+    case 'report': {
+      c.data.reportAcknowledged=!!c.data.reportDelivered&&acknowledgeCompletionReport(world,A,B,d.requestId??0);
+      if(c.data.reportAcknowledged)bubble(world,B,'I have heard your report. Thank you for telling me.','say',65);break;
+    }
     case 'learn_technique': {
       const why=answerRequestedLesson(world,c,B,A);
       bubble(world,B,why?`Not now: ${why}.`:`Yes, I can teach you ${TECHNIQUES[lessonKind(c)].name}.`,'say',72);

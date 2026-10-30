@@ -1,3 +1,4 @@
+import {hasPromiseKnowledge} from './promise_knowledge';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { footprintOccupied, hasLayoutClaims, layoutClaimBlock, LAYOUT_OCCUPANCY_WAIT } from './layout_claims';
 import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
@@ -167,6 +168,7 @@ registerHandler('repair', {
     creditRepair(p, b.id, b.condition - before);
     wearFor(world, p, 'repair', a.duration);
     a.cycle++;
+    if(hasPromiseKnowledge(world))for(const c of p.commitments)if(c.status==='active'&&c.kind==='work'&&c.destKind==='building'&&c.destId===b.id&&c.milestone!=='fire kept')c.contrib=(c.contrib??0)+40;
     a.progress = 0;
     p.skills.build = Math.min(SKILL_MAX, p.skills.build + 0.003);
     notePractice(world, p, 'build', 0.003);
@@ -178,7 +180,7 @@ registerHandler('repair', {
   onEnd(world, p, a) {
     const b = world.byId.get(a.targetId);
     if (a.cycle > 0 && b && b.ent === 'building') {
-      for (const c of p.commitments) if (c.status === 'active' && c.kind === 'work' && c.destKind === 'building' && c.destId === b.id) c.contrib = (c.contrib ?? 0) + 40 * a.cycle;
+      if(!hasPromiseKnowledge(world))for (const c of p.commitments) if (c.status === 'active' && c.kind === 'work' && c.destKind === 'building' && c.destId === b.id) c.contrib = (c.contrib ?? 0) + 40 * a.cycle;
       addLog(world, p, 'work', `Repaired the ${buildingLabel(b.type)} (now ${Math.round(b.condition)}% sound).`);
       if (b.condition >= 92) addEvent(world, 'build', `${p.name} repaired a ${buildingLabel(b.type)}.`, [p.id], b.x, b.y);
     }

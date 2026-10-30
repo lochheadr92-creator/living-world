@@ -1,5 +1,6 @@
 import { exchangeJourneyOptions } from './exchange_journeys';
 import {helperExperience,materialRequestKind,watchExperience} from './helper_learning';
+import {pendingCompletionReports} from './promise_knowledge';
 import { askTrustBonus } from './delivery_place';
 import { supplyOptions } from './customers';
 import { heldTechniques, hasLearnerInstruction, TECHNIQUES, TECHNIQUE_KINDS, techniqueApplies, knowsTechnique, learnBlocker } from './techniques';
@@ -686,6 +687,13 @@ export function socialOptions(ctx: Ctx): void {
   aloneOptions(ctx);
   welfareOptions(ctx);
   seekCarerOptions(ctx);
+  let reportsOffered=0;
+  for(const m of pendingCompletionReports(ctx.world,ctx.p)){
+    const c=candidates(ctx).find(c=>c.q.id===m.otherId&&c.d<=14);if(!c)continue;
+    const sc=new Scorer().add('they have not acknowledged my completed contribution',18).add('walking',-pen(c.d*6));
+    mkSocial(ctx,c,'report',{requestId:m.requestId},`Tell ${c.q.name} my promised work is complete`,`report my own completion of request #${m.requestId}`,null,sc,'report',':'+m.requestId,`My retained completion of request #${m.requestId} has no acknowledgement; I can tell ${c.q.name} in person`);
+    if(++reportsOffered>=2)break;
+  }
   optRequest(ctx);
   optAskInfo(ctx);
   optWarn(ctx);
