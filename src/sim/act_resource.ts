@@ -209,10 +209,11 @@ registerHandler('gather', {
     const name = a.data.stype ? String(a.data.stype).replace('_', ' ') : 'source';
     if (outcome === 'failed' || (outcome === 'partial' && a.cycle === 0)) {
       if (a.targetId) noteFailure(world, p, a.targetId, detail);
-      if (s) observe(world, p, s);
+      const arrived=!runsRulesVersion(world,75)||a.phase==='work';
+      if (s&&arrived) observe(world, p, s);
       a.data.logged = true;
-      addLog(world, p, 'work', `${detail === 'nothing left' ? 'The ' + name + ' was empty when I got there' : 'Could not use the ' + name + ': ' + detail}.`);
-      if (a.data.contest || detail.startsWith('someone')) {
+      addLog(world, p, 'work', `${detail === 'nothing left' ? 'The ' + name + ' was empty when I got there' : 'Could not use the ' + name + ': ' + detail}.${arrived?'':' I did not reach it; its current stock is unknown.'}`);
+      if (arrived&&(a.data.contest || detail.startsWith('someone'))) {
         if (s && s.lastTaker && s.lastTaker !== p.id && world.tick - s.lastTakeTick < 60) contestLost(world, p, s.lastTaker, s);
       }
     } else if (a.cycle > 0) {

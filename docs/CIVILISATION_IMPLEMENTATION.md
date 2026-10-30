@@ -2,6 +2,12 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **75** repairs the knowledge boundary after failed gathering travel: no unseen stock refresh or last-taker
+attribution before actual arrival. Existing logs state the uncertainty. Full suite 257 files / 1,732 tests, rendered
+6/6, typecheck/build pass; zero gathering travel failures in the three ordinary five-day worlds. The staged repeat-route
+diagnostic records three further failed attempts without altered cooldowns. See `SOURCE_CONTACT.md`; repeated-route
+learning is next. Predecessor 74 was pinned at `5d86090`.
+
 Rules **74** adds source-specific gathering experience inside the existing payoff owner, verified empty-place warnings
 and firsthand correction without hidden stock or rumour truth detection. All three fixed five-day worlds show actual
 source-influenced starts, and a matched ordinary decision changes its actual source. Full regression 255 files / 1,726
