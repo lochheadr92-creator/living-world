@@ -350,7 +350,7 @@ function beginWork(world: World, p: Person, a: Activity): void {
   if (home) {
     const refused = enterHome(world, p, home);
     if (refused) { endActivity(world, p, 'failed', refused); return; }
-    a.label = (a.kind === 'sleep' ? 'Sleeping' : a.kind === 'flee' ? 'Taking refuge' : 'Resting') + ' inside the ' + home.type;
+    a.label = (a.kind === 'sleep' ? 'Sleeping' : a.kind === 'flee' ? 'Taking refuge' : a.kind === 'drink' ? 'Drinking stored water' : 'Resting') + ' inside the ' + home.type;
   }
   a.phase = 'work';
   a.progress = 0;

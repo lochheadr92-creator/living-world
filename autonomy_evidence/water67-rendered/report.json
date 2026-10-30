@@ -1,0 +1,64 @@
+{
+  "rules": 67,
+  "evidence": "Staged need, full pack, water reserve and ended rest; ordinary selection and actual consumption. Competing water loss is explicitly staged.",
+  "sourceHashes": {
+    "src/sim/stored_water.ts": "1a51abf161dbd3088c95df589bd808cac1c10aadc6b0a6240602f3e1d434a7e6",
+    "src/sim/stored_water_access.ts": "91f77911b44d9dd08f3502fd5c8dcb4cb6f1cc86e9500019adb05730f20391fa",
+    "src/sim/act_resource.ts": "a1dcab316930459536f6ab0c6f2b57665e94096460cb366371d73c8785c47043",
+    "src/sim/habitation.ts": "747945950a242cb75db4e679afc8df13679abdf45cd82e93707a9e1bf841cdbd",
+    "src/sim/activities.ts": "b4add06c0d5171d8724c4e01239f939871d3710240d45a7af6da1ee92adcd4da",
+    "src/sim/options_survival.ts": "b4bfcde753950973a572e099583065a2e4a674a602b93a394c5713488cb1261f",
+    "scripts/browser/stored_water_check.mjs": "4e5d4e72aadb424eb96e30b83e595ce36f13bd3c1d7ba39ab1686fa823d13dc9"
+  },
+  "checks": [
+    {
+      "name": "full-pack resident autonomously starts drinking actual stored water indoors",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "pure": true,
+        "kind": "drink",
+        "stored": true,
+        "inside": 5,
+        "home": 5,
+        "load": 6
+      }
+    },
+    {
+      "name": "one accounted unit relieves thirst without adding pack space",
+      "ok": true,
+      "detail": {
+        "store": 1,
+        "thirst": 55.68000000000001,
+        "water": 0,
+        "load": 6,
+        "beforeLoad": 6,
+        "drunk": 1,
+        "equal": true,
+        "pure": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "competing consumption stops drinking and revises known stock",
+      "ok": true,
+      "detail": {
+        "result": {
+          "tick": 7,
+          "label": "Drinking stored water inside the hut",
+          "outcome": "failed",
+          "detail": "no water left"
+        },
+        "thirst": 19.680000000000007,
+        "known": 0,
+        "drunk": 0,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

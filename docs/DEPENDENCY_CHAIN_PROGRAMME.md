@@ -5,9 +5,9 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **66**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **67**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
-choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, and resident return-care from personal room observations. The older
+choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, and physical drinking from known household water stores. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
 
 ## Autonomy and environment continuation — 2026-10-30
@@ -49,7 +49,7 @@ remain attributed evidence, not newly repeated measurements.
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |
 | Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`; 39–51 | Requests/refusals, named home, later delivery/customer receipt | Ability/location questions, inability, counteramount/place, delay, cancellation/acknowledgment only where missing; actual contact and locally held grounds. |
 | Household coordination / incomplete (A9, WS5/11/17/20) | `responsibilities.ts`, `welfare.ts`, `intent.ts`, `social.ts`; 48/53/56 | Voluntary promises, childcare protections, death succession | Contacted intentions avoid duplicate trips and permit complementary work; provider absence causes reconsideration; private plans, promises and physical contributions stay distinct. |
-| Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`, `care_capacity.ts`, `resident_contact.ts`, `resident_care.ts`; 45/48/56/62/63/66 | Same-room gifts, actual-receipt cooldown, failed food hand-over → home deposit → table meal, including prior ordinary use; rules 66 connects personally remembered need → real resident return/entry → receipt/use, with short ordinary null results | Guest access, full water packs and other missing lawful handoffs remain. Preserve partial quantities, unknown/full homes and actual consumption. No through-wall transfer or invented room. |
+| Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`, `care_capacity.ts`, `resident_contact.ts`, `resident_care.ts`, `stored_water.ts`; 45/48/56/62/63/66/67 | Same-room gifts, actual-receipt cooldown, failed food hand-over → home deposit → table meal, including prior ordinary use; rules 66 connects personally remembered need → real resident return/entry → receipt/use, with short ordinary null results | Rules 67 adds full-pack drinking from actual owned stored water; donor recovery after a failed water hand-over, guest access and other missing lawful handoffs remain. Preserve partial quantities, unknown/full homes and actual consumption. No through-wall transfer or invented room. |
 | Illness/injury/elder care / incomplete (WS17) | `welfare.ts`, `responsibilities.ts`, `illness.ts`, `life.ts`, `resident_contact.ts`, `resident_care.ts`; 56/66 | Injured elder receives/eats bread after actual resident return; visible condition is remembered and revised through contact/news; childcare saves/purity; zero new return-care starts in three fresh five-day windows | Acquire necessities, warmth/childcare, cover duties, hand responsibility back after recovery; no-helper failure visible. Ordinary care reliability and household viability remain unproven. |
 | Homes and shared upkeep / incomplete (WS4/16) | `shelter.ts`, `winter_shelter.ts`, `buildings.ts`, `facilities.ts`; 47+ | Physical repair then kiln use; prewinter housing-condition evidence | Material acquisition, concurrent interruption/collapse, replacement, limited labour and justified public responsibility; repair/rebuild costs and later occupation/use. |
 | Succession beyond death / incomplete (WS11/20) | `succession.ts`, `lifecycle.ts`; 53 | Staged death takeover; historical ordinary 0/5 records taken up | Informed acceptance during incapacity/departure, rival successors, original worker recovery, already-complete goal and missing goods. No copied goods/skills/promises. |
@@ -369,7 +369,17 @@ is now pinned by the checkpoint below. Connect a lawful direct-use/shared-store 
 at a freshly verified successor version. Keep the full A1–A16 / WS15–21 scope: plans, routines, coordination, ordinary care and
 industry, ecology/water/hazards, household continuity, inspection/AI and mature-world validation remain unfinished.
 
-### Current continuation checkpoint — rules 66
+### Stored household water prerequisite — rules 67
+
+Rules 66 runtime `720ceeb` was pinned in `f5e6f5d` before edits. The reproduced gap was personally known home water that a full-pack resident could not drink. `stored_water.ts` derives a bounded ordinary option from personal building beliefs; `stored_water_access.ts` owns version and actual household/room access. Existing drinking, entrance and conservation owners execute it. See `docs/STORED_WATER.md` for touched modules and the review finding/fix.
+
+Twelve focused contracts pass, plus the unchanged predecessor reference. The rendered runner passes 4/4; three images were visually inspected. Full initial regression: 239 files / 1,593 tests, 309.30 seconds; final regression after the failed-sip knowledge fix passed **239 files / 1,593 tests in 311.31 seconds** (`autonomy-full-tests67-final.log`). Typecheck/build passed. Historical expectations were not changed.
+
+Fixed ordinary five-day Normal worlds (immigration off) meadow/river/forest each reached tick 12,000: 2,800 living-person samples, **zero known stored-water samples, offers, starts or portions**. Each passed 100 observer-purity checks, full serialized observed/unobserved twin equality and conservation. Durations 17.22 / 19.94 / 18.04 seconds; no omissions. Reports `autonomy_evidence/r67-*-5-reviewed`, script `scripts/stored_water_observe.ts`. This proves the tested staged mechanism, not ordinary occurrence, welfare or survival benefit.
+
+Next connected dependency: a personally failed water hand-over must lead to lawful owned-home provision, retaining helper reserves/promises, actual deposit and later resident consumption. Then continue every unresolved A1–A16 and WS15–21 capability; this slice is not programme completion.
+
+### Historical continuation checkpoint — rules 66
 
 Last fully verified runtime commit: **`720ceeb2f2c5e00c55e18eddff4dff924c966052`**. Rules 65 was delivered as `93f59e3`
 and pinned as `37feb45`. This checkpoint adds no new simulation behavior: it freezes rules 66 in

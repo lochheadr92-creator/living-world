@@ -1,3 +1,4 @@
+import {storedWaterOptions} from './stored_water';
 import { newActivity } from './activities';
 import { hasNightWaitBoundary } from './night_wait';
 import { DAY } from './constants';
@@ -360,6 +361,7 @@ function optDrink(ctx: Ctx): void {
   const { world, p } = ctx;
   const dr = ctx.drives.thirst;
   if (dr <= 0) return;
+  storedWaterOptions(ctx);
   if (ctx.water > 0) {
     const sc = new Scorer().add('thirsty', dr * 1.02).add('water in pack', 3);
     addOption(ctx, {

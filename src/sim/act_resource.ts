@@ -1,3 +1,4 @@
+import {isStoredDrink,storedWaterSource} from './stored_water_access';
 import { relocationPackingBlocker } from './relocation';
 import { spareSeed } from './seed_storage';
 import { careFoodAvailable, careStoreBlocker } from './care_capacity';
@@ -396,6 +397,13 @@ registerHandler('drink', {
   availability: 0.55,
   pose: () => 'drink',
   begin(world, p, a) {
+    if(isStoredDrink(world,a)){
+      const store=storedWaterSource(world,p,a);
+      if(!store)return 'the household water store is inaccessible';
+      observe(world,p,store);
+      if((store.store.items.water??0)<1)return 'no water left in the home store';
+      a.duration=8;return;
+    }
     if (a.data.fromInv) {
       if ((p.inv.water ?? 0) < 1) return 'no water on me';
       a.duration = 8;
@@ -416,13 +424,18 @@ registerHandler('drink', {
     forgetUnreachableWater(p, a, outcome, detail);
   },
   work(world, p, a): WorkResult {
-    if (a.data.fromInv) {
+    if (a.data.fromInv || isStoredDrink(world,a)) {
+      const store=isStoredDrink(world,a)?storedWaterSource(world,p,a):null;
+      if(isStoredDrink(world,a)&&!store)return 'fail:the household water store is inaccessible';
+      const supply=store?store.store.items:p.inv;
       a.progress++;
       if (a.progress < a.duration) return 'continue';
-      if (consume(world, p.inv, 'water', 1, 'drunk') < 1) return 'fail:no water left';
+      if(store)observe(world,p,store); // a failed sip also reveals the now-empty store
+      if (consume(world, supply, 'water', 1, 'drunk') < 1) return 'fail:no water left';
+      if(store)observe(world,p,store);
       p.needs.thirst = clamp(p.needs.thirst + WATER_VALUE, 0, 100);
       a.cycle++;
-      if (p.needs.thirst >= 88 || (p.inv.water ?? 0) < 1) return 'done';
+      if (p.needs.thirst >= 88 || (supply.water ?? 0) < 1) return 'done';
       a.progress = 0;
       return 'continue';
     }

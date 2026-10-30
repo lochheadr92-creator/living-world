@@ -12,6 +12,7 @@ resident entry, revalidated hand-over and actual consumption. Full regression: *
 final focused care/AI-observation checks **23/23**, rendered checks **5/5**, typecheck/build and diff check passed.
 Three fresh five-day ordinary runs found zero new return-care starts; staged and rendered execution do not establish
 ordinary reliability. See `docs/RESIDENT_CARE.md`. The rules-64 published checkpoint below is historical after this continuation.
+Rules **67** adds actual household-store drinking for full-pack residents, with ownership/entry/stock checks, saved twins and a rendered failure. Three fresh five-day worlds had no known stored-water opportunities; ordinary use and benefit remain unproven. See `docs/STORED_WATER.md`.
 The active programme, four-class capability map, remaining transitions and evidence are maintained in
 [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
 Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch
