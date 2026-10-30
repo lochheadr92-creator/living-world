@@ -1,0 +1,40 @@
+{
+  "rules": 66,
+  "fixture": "STAGED injury, full pack and need; actual offered return and water hand-over; then staged accounted home water as a separate availability probe",
+  "failed": {
+    "tick": 14,
+    "result": {
+      "tick": 13,
+      "label": "Bringing water to Eli at home",
+      "outcome": "failed",
+      "detail": "they had no room to carry it"
+    },
+    "waterBefore": 3,
+    "waterAfter": 3,
+    "recipientWater": 0,
+    "recipientThirst": 19.440000000000012,
+    "fedUntil": 0,
+    "rememberedFailure": null
+  },
+  "knownStoredWater": 2,
+  "waterOptions": [
+    {
+      "key": "explore",
+      "label": "Search for water"
+    },
+    {
+      "key": "socialize:2:request:water",
+      "label": "Ask Ada for water"
+    },
+    {
+      "key": "socialize:2:ask_info:water",
+      "label": "Ask Ada where to find water"
+    }
+  ],
+  "pure": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "limit": "No claim that every household lacks an alternative: this fixture has no known shore. No water-capacity bypass or new drinking primitive is implemented."
+}

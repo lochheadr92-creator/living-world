@@ -11,6 +11,7 @@ import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
 import { keepCurrent } from './kept_target';
+import { residentCareOptions } from './resident_care';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
@@ -1413,9 +1414,12 @@ function directionName(world: World, x: number, y: number): string {
 // ───────────────────────── looking after others ─────────────────────────
 function optCare(ctx: Ctx): void {
   const { world, p } = ctx;
-  if (ctx.dependents.length === 0 || ctx.stage === 'child') return;
+  if (ctx.stage === 'child') return;
+  const roomContacts=residentCareOptions(ctx);
+  if (ctx.dependents.length === 0) return;
   const tm = traitMods(p);
   for (const d of ctx.dependents) {
+    if (roomContacts.has(d.id)) continue;
     const child = stageOf(world, d) === 'child';
     const hungry = d.needs.hunger < (child ? 66 : 50);
     const thirsty = d.needs.thirst < (child ? 58 : 46);

@@ -89,6 +89,20 @@ are not directly comparable with the earlier 45-day totals. Completed work spell
 the reports retain every shorter bin and censored open spell. No survival, leisure, productivity or cart-adoption benefit
 is established by these partial ordinary runs. No need pressure or switching threshold was tuned.
 
+## Two ordinary events reproduced for the continuation record
+
+`scripts/kept_target_story.ts` replays the first 180 ticks of the same rules-65 Normal meadow seed, immigration off,
+with no forced action. The retained events match the original trace. At tick **120**, Jax **#1019** is working at tree
+**#259** (activity **1079**). His running gather is eligible and ranked first with retention and absent without it.
+He then completes at tick **178**, having gathered **two wood**; his carried wood rises from one at the sample to two
+at completion. This is an actual linked outcome, not evidence that the sampled removal would have caused a different
+choice or that population productivity improved.
+
+The preserved failure is Isla **#1031** walking to berry bush **#815** (activity **1132**), also a restored eligible
+candidate at tick **120**. At tick **123**, the real reservation check refuses her with "someone else is already taking
+it"; cycle/output is **zero**. Retention did not grant ownership or suppress that failure. Full observed/unobserved
+continuations match and conservation passes. Report: `autonomy_evidence/r65-meadow-story.json`.
+
 ## Verification verdict
 
 **TURN_INTEGRATION_VERIFIED for this bounded rules-65 mechanism; the full autonomy/environment programme is incomplete.**

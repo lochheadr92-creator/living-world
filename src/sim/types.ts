@@ -629,7 +629,7 @@ export interface Person {
   beliefs: Record<number, Belief>;
   /** index of belief ids by kind (maintained by putBelief / delBelief) */
   bykind: Partial<Record<BeliefKind, number[]>>;
-  whereabouts: Record<number, { x: number; y: number; tick: number }>;
+  whereabouts: Record<number, { x: number; y: number; tick: number; room?: { homeId: number; name: string; hungry: boolean; thirsty: boolean; needsCare: boolean; household: boolean } }>;
   explored: Uint8Array;
   seen: SeenEntity[];
   relations: Record<number, Relation>;

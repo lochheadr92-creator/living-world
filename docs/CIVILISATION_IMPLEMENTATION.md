@@ -7,7 +7,11 @@ Rules **65** then retains a still-eligible running source, stock or drinking des
 travel, gathering/delivery, withdrawal, drinking, invalidation, saved continuation and rendered checks pass; full suite
 235 files / 1,556 tests. Three ordinary budget stops show actual opportunities but do not complete 45-day validation or
 establish aggregate benefit. See `docs/KEPT_TARGET.md` and the current programme section for exact limits and the next
-reproduced resident-entry care gap. The rules-64 published checkpoint below is historical after this continuation.
+reproduced resident-entry care gap. That gap is implemented at rules **66**: personal room/need knowledge leads to real
+resident entry, revalidated hand-over and actual consumption. Full regression: **237 files / 1,580 tests passed**;
+final focused care/AI-observation checks **23/23**, rendered checks **5/5**, typecheck/build and diff check passed.
+Three fresh five-day ordinary runs found zero new return-care starts; staged and rendered execution do not establish
+ordinary reliability. See `docs/RESIDENT_CARE.md`. The rules-64 published checkpoint below is historical after this continuation.
 The active programme, four-class capability map, remaining transitions and evidence are maintained in
 [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
 Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch

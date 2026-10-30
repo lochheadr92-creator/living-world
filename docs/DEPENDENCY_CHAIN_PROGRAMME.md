@@ -5,16 +5,16 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **65**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **66**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
-choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, and retaining a valid running destination for ordinary review. The older
+choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, and resident return-care from personal room observations. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
 
 ## Autonomy and environment continuation — 2026-10-30
 
-The rules-65 continuation starts from published `c101a78`, with unchanged `origin/main` and the concurrent branch
-`be786a8` freshly checked. Rules 64 was already pinned in `e6a6d27`. Current changes, tests, ordinary budget stops and
-remaining work are recorded in the rules-65 section below; the older rules-64 checkpoint remains historical.
+Rules 65 was integrated and pushed as `93f59e3`, then pinned in `37feb45` before resident-entry care work.
+The concurrent branch remains `be786a8`; its conflicting 59/60 meanings are preserved. The rules-66 section records
+this continuation; the earlier rules-65 and rules-64 sections retain their own evidence and limits.
 
 The owner's 30 October autonomy/environment prompt is one authorized implementation programme. This section extends this
 register; it does not replace the existing WS evidence or declare their unfinished journeys complete. The audit's rules-58
@@ -49,8 +49,8 @@ remain attributed evidence, not newly repeated measurements.
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |
 | Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`; 39–51 | Requests/refusals, named home, later delivery/customer receipt | Ability/location questions, inability, counteramount/place, delay, cancellation/acknowledgment only where missing; actual contact and locally held grounds. |
 | Household coordination / incomplete (A9, WS5/11/17/20) | `responsibilities.ts`, `welfare.ts`, `intent.ts`, `social.ts`; 48/53/56 | Voluntary promises, childcare protections, death succession | Contacted intentions avoid duplicate trips and permit complementary work; provider absence causes reconsideration; private plans, promises and physical contributions stay distinct. |
-| Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`, `care_capacity.ts`; 45/48/56/62/63 | Same-room resident gifts, work-time contact, actual-receipt cooldown, personally failed food hand-over → home deposit → table meal, including ordinary use; details below | Outside-interior contact and full water packs remain, along with missing lawful handoffs. Preserve partial quantities, unknown/full homes and actual eating. No through-wall transfer or invented room. |
-| Illness/injury/elder care / incomplete (WS17) | `welfare.ts`, `responsibilities.ts`, `illness.ts`, `life.ts`; 56 | Injured elder receives/eats bread; childcare saves/purity; zero ordinary uncovered-parent opportunities in short census | Acquire necessities, contact, warmth/childcare, cover duties, hand responsibility back after recovery; no-helper failure visible. |
+| Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`, `care_capacity.ts`, `resident_contact.ts`, `resident_care.ts`; 45/48/56/62/63/66 | Same-room gifts, actual-receipt cooldown, failed food hand-over → home deposit → table meal, including prior ordinary use; rules 66 connects personally remembered need → real resident return/entry → receipt/use, with short ordinary null results | Guest access, full water packs and other missing lawful handoffs remain. Preserve partial quantities, unknown/full homes and actual consumption. No through-wall transfer or invented room. |
+| Illness/injury/elder care / incomplete (WS17) | `welfare.ts`, `responsibilities.ts`, `illness.ts`, `life.ts`, `resident_contact.ts`, `resident_care.ts`; 56/66 | Injured elder receives/eats bread after actual resident return; visible condition is remembered and revised through contact/news; childcare saves/purity; zero new return-care starts in three fresh five-day windows | Acquire necessities, warmth/childcare, cover duties, hand responsibility back after recovery; no-helper failure visible. Ordinary care reliability and household viability remain unproven. |
 | Homes and shared upkeep / incomplete (WS4/16) | `shelter.ts`, `winter_shelter.ts`, `buildings.ts`, `facilities.ts`; 47+ | Physical repair then kiln use; prewinter housing-condition evidence | Material acquisition, concurrent interruption/collapse, replacement, limited labour and justified public responsibility; repair/rebuild costs and later occupation/use. |
 | Succession beyond death / incomplete (WS11/20) | `succession.ts`, `lifecycle.ts`; 53 | Staged death takeover; historical ordinary 0/5 records taken up | Informed acceptance during incapacity/departure, rival successors, original worker recovery, already-complete goal and missing goods. No copied goods/skills/promises. |
 | Relocation and population viability / measurement plus incomplete handovers (WS12/20) | `relocation.ts`, `lifecycle.ts`, `households.ts`; 20/54 | Subgroup/succession/return/search staged; one failed ordinary proposal in prior 135 seed-days | Trace cue→consent→dependants/provisions→travel→confirmation/home, organiser loss and return. Long horizon covers birth/ageing/adoption/split/loss without forced population. |
@@ -323,7 +323,7 @@ partial windows, not new 45-day evidence or a comparison with the older complete
 work spells and failed/interrupted travel are retained in `autonomy_evidence/r65-*`. Longer windows, matched comparisons
 and current mature Large remain pending; [AUTONOMY_VALIDATION.md](AUTONOMY_VALIDATION.md) has exact commands and estimates.
 
-**Next dependency already reproduced:** `scripts/resident_care_diagnostic.ts` shows a member leaving their own home,
+**Next dependency at the rules-65 checkpoint (implemented below at 66):** `scripts/resident_care_diagnostic.ts` shows a member leaving their own home,
 still knowing the injured elder and holding bread, with `canEnterHome` allowing entry. The existing offered gift fails
 immediately with “they are inside a different space”; nobody receives food. Indoor perception also leaves whereabouts
 at its older outdoor observation. A successor must preserve locally observed room/need knowledge, use the actual owned
@@ -331,7 +331,45 @@ entrance, validate access/contact at execution, and retain failures for stale lo
 Do not grant general guest admission or use live remote location as a planning shortcut. Pin rules 65 before this change.
 The entire A1–A16/WS programme remains the scope after this next dependency; it is not narrowed to either repair.
 
-### Historical continuation checkpoint — rules 64, superseded by the rules-65 section
+### Resident return-care transition — rules 66
+
+Predecessor implementation `93f59e3` and immutable continuation `37feb45` were committed and pushed before this change.
+The reproduced rules-65 outside/inside failure is connected by personally observed room/need/condition knowledge,
+an ordinary return journey, the real resident entrance check and a timed same-room hand-over. The recipient then eats
+or drinks the supplied item. Hidden recovery/death/location does not silently rewrite the new offer; firsthand recovery,
+outdoor sight and learned death news do. The full-food-pack store fallback remains reachable after departure.
+The contract, module ownership, review findings and evidence are in [RESIDENT_CARE.md](RESIDENT_CARE.md).
+
+Negative cases preserve blocked entrance, changed ownership, moved recipient, death, lost supplies, new promises,
+recovery and interruption. The actual death path creates an entrance-blocking grave; its test retains that outcome.
+No generic guest admission or full-water-pack recovery is added. Fresh review separated an initial handler import cycle,
+removed live remote-health and live-registry dependencies from candidate membership, and preserved the prior food-store connection.
+These are this agent's reviewed repairs, not independent-review approval.
+
+Three predeclared fresh Normal, immigration-off five-day runs each reached tick **12,000**. Each sampled **2,800**
+living-person states; recent room-contact person samples were **14 / 135 / 114** and contact-pair samples
+**14 / 227 / 161** (meadow/river/forest). New offers, eligible options, selections, starts, receipts and later uses
+were all **zero**. There were **106 / 72 / 84** starts of other give actions. These are repeated samples, not independent
+opportunities. All 100 observer snapshots per seed were pure, full observed/unobserved saved continuations matched,
+daily/final conservation passed and no trace rows were omitted. Final reports are `autonomy_evidence/r66-resident-*5-reviewed`.
+The null does not establish absence in mature households or a benefit; the new journey's completion evidence is staged.
+
+Final rendered checks passed **5/5**, including physical entry, actual bread receipt/eating, blocked-door failure,
+saved continuation and observer purity. Four real screenshots were inspected. Full regression passed **237 files /
+1,580 tests** in **313.35 seconds**; final focused care/AI-observation tests passed **23/23**, build/typecheck and diff
+checks passed. Historical references are unchanged. **TURN_INTEGRATION_VERIFIED** applies to this bounded transition after the actual-death registry repair and full rerun;
+the complete programme, ordinary care reliability and aggregate benefit are not verified by it.
+
+**Next physical dependency:** water cannot enter a full recipient pack, and the existing food-store recovery only
+handles food. `tests/resident_care.test.ts` preserves an actual failed water hand-over with no donor loss, invented space
+or fed marker. `scripts/care_water_diagnostic.ts` also confirms that two personally observed water in the owned home store
+do not currently offer a drink; only waterskin/shore drinking exists. The staged fixture has no known shore and still
+offers search, request and information choices. Evidence: `autonomy_evidence/resident66-water-gap-reviewed.json`. Connect a lawful
+direct-use/shared-store alternative without creating pack capacity, then pin rules 66
+before any successor behaviour. Keep the full A1–A16 / WS15–21 scope: plans, routines, coordination, ordinary care and
+industry, ecology/water/hazards, household continuity, inspection/AI and mature-world validation remain unfinished.
+
+### Historical continuation checkpoint — rules 64, superseded by the later sections
 
 Recorded from **`e6a6d27`** after its successful main push. Runtime implementation: **`1acf4fa`**. This following commit
 changes documentation only. Product checkout: `C:\dev\Claude Experiment\living-world-integrate`, `main`; retained working

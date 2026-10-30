@@ -44,7 +44,7 @@ export function careFoodAvailable(w:World,p:Person,to:number,item:ItemKind):numb
 }
 
 /** Pure option derivation. Return true when the remembered capacity problem replaces the food hand-over. */
-export function careStoreOption(ctx:Ctx,q:Person,items:Items,base:number,px:number,py:number):boolean{
+export function careStoreOption(ctx:Ctx,q:Pick<Person,'id'|'name'>,items:Items,base:number,px:number,py:number):boolean{
  const {world,p}=ctx;
  if(!hasCareCapacity(world)||recentFailure(world,p,q.id,CARE_PACK_MEMORY)?.reason!==CARE_PACK_FAILURE)return false;
  const item=(Object.keys(items) as ItemKind[]).find(k=>isFoodKind(k)&&(items[k]??0)>0);

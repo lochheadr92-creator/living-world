@@ -3,6 +3,8 @@ import { TECHNIQUES } from './techniques';
 import type { TechniqueKind } from './techniques';
 import { noteCustomer, customerSupplied, setCustomerDeps } from './customers';
 import { noteWinterCare } from './winter_practice';
+import { needsResidentCare, residentCareItems } from './resident_care';
+import { isResidentCare } from './resident_contact';
 import { offerLesson, answerLesson, answerRequestedLesson, finishLesson, interruptLesson, lessonProblem, LESSON_TICKS } from './techniques';
 import { councilFor, nominate, oppositionReason, releaseOldSupport } from './civic_decision';
 import { rememberRequest } from './social_memory';
@@ -1764,7 +1766,9 @@ registerHandler('give', {
     faceToward(t, p.x, p.y, 0.5);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
-    const want = (a.data.items ?? {}) as Record<string, number>;
+    const requested=(a.data.items ?? {}) as Items;
+    const want = residentCareItems(world,p,t,a,requested) as Record<string,number>;
+    if(isResidentCare(world,a)&&Object.keys(want).length===0){t.cooldowns.pause=0;return needsResidentCare(t,requested)?'fail:no spare supplies remain for this hand-over':'fail:they no longer need the supplies I brought';}
     const got: Items = {};
     let moved = 0;
     if ((a.data.mode as string) === 'return') {

@@ -1,0 +1,52 @@
+{
+  "rules": 66,
+  "fixture": "STAGED injury, full pack and need; actual offered return and water hand-over; then staged accounted home water as a separate availability probe",
+  "failed": {
+    "tick": 14,
+    "result": {
+      "tick": 13,
+      "label": "Bringing water to Eli at home",
+      "outcome": "failed",
+      "detail": "they had no room to carry it"
+    },
+    "waterBefore": 3,
+    "waterAfter": 3,
+    "recipientWater": 0,
+    "recipientThirst": 19.440000000000012,
+    "fedUntil": 0,
+    "rememberedFailure": null
+  },
+  "knownStoredWater": 2,
+  "waterOptions": [
+    {
+      "key": "explore",
+      "label": "Search for water"
+    },
+    {
+      "key": "socialize:2:request:water",
+      "label": "Ask Ada for water"
+    },
+    {
+      "key": "socialize:2:ask_info:water",
+      "label": "Ask Ada where to find water"
+    }
+  ],
+  "pure": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "limit": "No claim that every household lacks an alternative: this fixture has no known shore. No water-capacity bypass or new drinking primitive is implemented.",
+  "head": "37feb45fbe4a6e3662f5e7b8c2a172008837f9a6",
+  "sourceHashes": {
+    "src/sim/options_survival.ts": "b8bdf9a356896fd793bc674eb6883e9782c4d6453f7d6b6a04762b92ab700271",
+    "src/sim/act_resource.ts": "dc58c95bdeeb0d96db8505c10e78ae3a789827e0a3797069c4a198fa5c436fd6",
+    "src/sim/resident_care.ts": "830d7e71b193dc66b8a6526dd74928227fb9300c0da4815ea4141fad263f3156",
+    "src/sim/resident_contact.ts": "5098bf19a0ffa1d7d1e3a953c6202a561a7cdad7bdd1d39f750e7209d5060616",
+    "src/sim/care_capacity.ts": "e2e33a03fe13cc93ebf084998f859b823b9a4b439ce6483d2abe45ba252ad4ef",
+    "src/sim/perception.ts": "807a98563c69e8aad491197ed6f137645baf95135709c01c7f960968e4dc50e7",
+    "src/sim/activities.ts": "fdd3aef83b1ab29e98b5cb454ca889d62774ba36df1e25e42ed54dae2fa1de5a",
+    "src/sim/social.ts": "d2a3710afcfc5bdbee5388cbbd10edafad569c755a33c07e9716a18e54219069",
+    "scripts/care_water_diagnostic.ts": "f738aa44ddb547e7c3e453bfe27dcccbb88384a8d87ece1643e52b381d2372f2"
+  }
+}

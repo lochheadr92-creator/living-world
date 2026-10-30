@@ -1,0 +1,82 @@
+{
+  "settings": {
+    "seed": "meadow",
+    "population": 28,
+    "harsh": false,
+    "immigration": false,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 65
+  },
+  "until": 180,
+  "samples": [
+    {
+      "tick": 120,
+      "person": 1019,
+      "name": "Jax",
+      "activity": 1079,
+      "key": "gather:259",
+      "phase": "work",
+      "withRetention": true,
+      "withoutRetention": false,
+      "eligible": true,
+      "best": "gather:259",
+      "inventory": {
+        "fruit": 3,
+        "wood": 1
+      }
+    },
+    {
+      "tick": 120,
+      "person": 1031,
+      "name": "Isla",
+      "activity": 1132,
+      "key": "gather:815",
+      "phase": "travel",
+      "withRetention": true,
+      "withoutRetention": false,
+      "eligible": true,
+      "best": "gather:860",
+      "inventory": {
+        "pick": 1
+      }
+    }
+  ],
+  "endings": [
+    {
+      "tick": 123,
+      "person": 1031,
+      "name": "Isla",
+      "activity": 1132,
+      "target": 815,
+      "targetKind": "berry_bush",
+      "cycle": 0,
+      "outcome": "failed",
+      "detail": "someone else is already taking it",
+      "inventory": {
+        "pick": 1
+      }
+    },
+    {
+      "tick": 178,
+      "person": 1019,
+      "name": "Jax",
+      "activity": 1079,
+      "target": 259,
+      "targetKind": "tree",
+      "cycle": 2,
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "fruit": 3,
+        "wood": 2
+      }
+    }
+  ],
+  "continuationEqual": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "limit": "Short exact replay of the retained ordinary rules-65 seed. Retention was sampled against disabled alternatives without enacting the ablation. Subsequent success does not prove retention caused it or improved aggregate outcomes."
+}

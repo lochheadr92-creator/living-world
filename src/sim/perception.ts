@@ -2,6 +2,7 @@ import { SENSE_RADIUS } from './constants';
 import { indoorHome, sameSpace } from './habitation';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
 import { isRich } from './mood';
+import { rememberRoomContact } from './resident_contact';
 import { stageOf } from './people';
 import { probe } from './probe';
 import { visibleWork } from './trade';
@@ -119,7 +120,9 @@ export function perceive(world: World, p: Person): void {
   if (home) {
     if (observe(world, p, home)) fresh++;
     for (const q of world.persons) {
-      if (q !== p && q.alive && sameSpace(world, p, q)) p.seen.push(describeSeenPerson(world, q));
+      if (q !== p && q.alive && sameSpace(world, p, q)) {
+        const seen=describeSeenPerson(world,q);p.seen.push(seen);rememberRoomContact(world,p,seen,q.hhId===p.hhId,q.name);
+      }
     }
     p.lastPercept = { tick: world.tick, seen: p.seen.length, newBeliefs: fresh };
     return;

@@ -2,6 +2,7 @@ import { injuryFactor } from './life';
 import { hasLayoutClaims, layoutClaimBlock } from './layout_claims';
 import { isBoundedNightWait } from './night_wait';
 import { hasHabitation, indoorHome, interiorTarget, doorPoint, enterHome, prepareIndoorActivity, staysIndoors } from './habitation';
+import { arriveForResidentCare, isResidentCareJourney } from './resident_contact';
 import { BASE_SPEED, MIN_COMMIT, REVIEW_EVERY, TURN_RATE } from './constants';
 import { cartSpeedFactor } from './carts';
 import { carryCap } from './people';
@@ -233,6 +234,8 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
   if ((a.targetType === 'person' || a.targetType === 'animal') && (world.tick + p.id) % 10 === 0) {
     const sighted = p.seen.find((s) => s.id === a.targetId);
     if (sighted) {
+      // Seeing the recipient outside replaces the remembered indoor destination.
+      if (isResidentCareJourney(world,a)) delete a.data.careHome;
       const dx = p.x - sighted.x;
       const dy = p.y - sighted.y;
       const d = hyp(dx, dy) || 1;
@@ -332,6 +335,8 @@ export function startActivity(world: World, p: Person, a: Activity): void {
 }
 
 function beginWork(world: World, p: Person, a: Activity): void {
+  const careRefused=arriveForResidentCare(world,p,a);
+  if(careRefused){endActivity(world,p,'failed',careRefused);return;}
   const home = interiorTarget(world, a);
   if (hasHabitation(world) && a.data.homeEntry && !home) {
     endActivity(world, p, 'failed', 'the home is no longer there'); return;
@@ -419,7 +424,7 @@ export function stepActivity(world: World, p: Person): void {
       beginWork(world, p, a);
       if (p.activity !== a) return;
     }
-    if (a.targetType === 'person') {
+    if (a.targetType === 'person' && !(a.phase === 'travel' && isResidentCareJourney(world,a))) {
       const q = world.byId.get(a.targetId);
       if (q?.ent === 'person' && (p.indoors ?? 0) !== (q.indoors ?? 0)) {
         endActivity(world, p, 'failed', 'they are inside a different space'); return;

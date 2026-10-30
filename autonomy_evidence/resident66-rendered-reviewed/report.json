@@ -1,0 +1,106 @@
+{
+  "head": "37feb45fbe4a6e3662f5e7b8c2a172008837f9a6",
+  "rules": 66,
+  "evidence": "STAGED household, injury, food and initial legal departure. Return, entry, receipt and eating use ordinary choices. Negative case selects a legal care action and imposes a blocked entrance. Not evidence of ordinary adoption or welfare benefit.",
+  "sourceHashes": {
+    "src/sim/resident_contact.ts": "5098bf19a0ffa1d7d1e3a953c6202a561a7cdad7bdd1d39f750e7209d5060616",
+    "src/sim/resident_care.ts": "830d7e71b193dc66b8a6526dd74928227fb9300c0da4815ea4141fad263f3156",
+    "src/sim/perception.ts": "807a98563c69e8aad491197ed6f137645baf95135709c01c7f960968e4dc50e7",
+    "src/sim/options_work.ts": "d84d5e0a6c7f4cd3fbf5da0d638f2cbab792612698d78c771b7d94dff81e3a94",
+    "src/sim/activities.ts": "fdd3aef83b1ab29e98b5cb454ca889d62774ba36df1e25e42ed54dae2fa1de5a",
+    "src/sim/social.ts": "d2a3710afcfc5bdbee5388cbbd10edafad569c755a33c07e9716a18e54219069",
+    "src/sim/types.ts": "51a051c349f07e6b928f4ce4a39e0de3c209bfac83a882cd497fe0e5a1ff57bc",
+    "src/sim/rulesversion.ts": "2c020faa158005189f6aa59fba42945cde543f3b6e97ef62f2bae7068f354cfa",
+    "tests/helpers/resident_care.ts": "282907588b17b67ee48cecd811acd6b3f7a7edc8caf192bc5e20848bd3be4dbc",
+    "scripts/browser/resident_care_check.mjs": "7af8f40057c452611e288cea0d1887991a69e47bcd78127d518087e4554eb836"
+  },
+  "checks": [
+    {
+      "name": "remembered indoor need leads to an ordinary return journey",
+      "ok": true,
+      "detail": {
+        "pure": true,
+        "memory": {
+          "x": 40.5,
+          "y": 42.5,
+          "tick": 0,
+          "room": {
+            "homeId": 5,
+            "name": "Eli",
+            "hungry": true,
+            "thirsty": false,
+            "needsCare": true,
+            "household": true
+          }
+        },
+        "offered": true,
+        "kind": "give",
+        "care": true,
+        "phase": "travel",
+        "goal": "to help Eli, last seen needing bread inside our home",
+        "position": [
+          40.31486444497077,
+          46.24036928239919
+        ],
+        "seen": false
+      }
+    },
+    {
+      "name": "helper enters the lawful home before handing anything over",
+      "ok": true,
+      "detail": {
+        "phase": "work",
+        "giverInside": 5,
+        "receiverInside": 5,
+        "expected": 5
+      }
+    },
+    {
+      "name": "real same-room receipt is followed by eating, with exact saved continuation",
+      "ok": true,
+      "detail": {
+        "tick": 172,
+        "receipts": [
+          {
+            "tick": 96,
+            "n": 2,
+            "item": "bread",
+            "giverInside": 5,
+            "receiverInside": 5
+          }
+        ],
+        "home": 5,
+        "hungerBefore": 18.43999999999994,
+        "hunger": 44.839999999999876,
+        "eaten": 1,
+        "helperBread": 1,
+        "elderBread": 1,
+        "activity": "eat",
+        "conserved": true,
+        "equal": true,
+        "pure": true
+      }
+    },
+    {
+      "name": "blocked entrance reports failure and preserves the carried food",
+      "ok": true,
+      "detail": {
+        "result": {
+          "tick": 83,
+          "label": "Bringing bread to Eli at home",
+          "outcome": "failed",
+          "detail": "home entrance is blocked"
+        },
+        "helperBread": 3,
+        "elderBread": 0,
+        "inside": 0,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}
