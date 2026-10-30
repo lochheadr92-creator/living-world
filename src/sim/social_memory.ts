@@ -3,6 +3,7 @@ import { hyp } from './util';
 // execution; this retains the known outcome after those operational records expire.
 import type { World, Request } from './types';
 import { runsRulesVersion } from './rulesversion';
+import {taskReceipt} from './helper_learning';
 export function rememberRequest(w: World, r: Request): void {
  if (w.settings.dynamics !== 'rich' || !runsRulesVersion(w,13) || !['declined','fulfilled','partial','broken','interrupted','failed'].includes(r.status)) return;
  for(const [id,otherId,role] of [[r.from,r.to,'asker'],[r.to,r.from,'helper']] as const){
@@ -11,7 +12,8 @@ export function rememberRequest(w: World, r: Request): void {
   if(role==='asker' && (!other || other.ent!=='person' || p.indoors!==other.indoors || hyp(p.x-other.x,p.y-other.y)>3))continue;
   const memories=p.socialMemory??=[];
   if(memories.some(m=>m.requestId===r.id))continue;
-  memories.push({requestId:r.id,otherId,siteId:r.siteId,tick:w.tick,outcome:r.status,reason:r.note||'reason not recorded',role});
+  const task=taskReceipt(w,r);
+  memories.push({requestId:r.id,otherId,siteId:r.siteId,tick:w.tick,outcome:r.status,reason:r.note||'reason not recorded',role,...(task?{task}:{})});
   if(memories.length>32)memories.shift();
  }
 }

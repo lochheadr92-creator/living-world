@@ -4,6 +4,7 @@ import {validateWorkScopes} from '../sim/action_scope';
 import {validateJourneys} from '../sim/journey_state';
 import {validateSourceExperience} from '../sim/source_learning';
 import {validateRouteExperience} from '../sim/route_learning';
+import {validateHelperLearning} from '../sim/helper_learning';
 import { validateGoalHistory } from '../sim/life';
 import { validateHouseholdPractices } from '../sim/household_practices';
 import { validateAlignments } from '../sim/political_alignment';
@@ -250,6 +251,7 @@ export function deserializeWorld(json: string): World {
   validateJourneys(w);
   validateSourceExperience(w);
   validateRouteExperience(w);
+  validateHelperLearning(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);

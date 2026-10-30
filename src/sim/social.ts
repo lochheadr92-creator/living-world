@@ -55,6 +55,7 @@ import { isToolItem } from './toolreg';
 import type { Belief, Commitment, Conversation, ConvPurpose, ItemKind, Items, Person, Request, RequestKind, Speech, ToolKind, World, BuildingType } from './types';
 import { clamp, hyp } from './util';
 import { hasLocalGiving } from './local_giving';
+import {noteHelperReceipt} from './helper_learning';
 import { noteCarePackFailure } from './care_capacity';
 
 // ───────────────────────── small helpers ─────────────────────────
@@ -1160,6 +1161,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         if (moved > 0) {
           const items: Items = { [resp.item]: moved };
           req.delivered = (req.delivered ?? 0) + moved; // handed over here and now: this is a delivery, not a promise
+          noteHelperReceipt(world,req,B,A,resp.item,moved,'conversation',c.id);
           // In a rich world the three quantities are kept apart: asked for, agreed to, actually handed over - and an ask that was
           // only partly answered is recorded as that, leaving nobody owing the difference. An authored world keeps the record it
           // always kept (the golden fingerprints are its contract), which is the one place this slice does not sharpen.
@@ -1809,6 +1811,7 @@ registerHandler('give', {
       // the request the promise answers records the same arrival, so "how much came" has one source whichever way it came
       const rq = cm ? world.requests.find((x) => x.id === cm.requestId) : undefined;
       if (rq && cm && cm.item) rq.delivered = (rq.delivered ?? 0) + (got[cm.item] ?? 0);
+      if(rq&&cm?.item)noteHelperReceipt(world,rq,p,t,cm.item,got[cm.item]??0,'activity',a.id);
       if (cm && (cm.delivered ?? 0) >= cm.amount) fulfillCommitment(world, p, cm.id);
     }
     return 'done';

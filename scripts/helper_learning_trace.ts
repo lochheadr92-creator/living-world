@@ -1,0 +1,12 @@
+import {materialPromiseScene,materialChoice} from '../tests/helpers/stored_materials';
+import {runLive} from '../src/agent/run';
+import {stubModel} from '../src/agent/model';
+import {observationFromPrompt} from '../src/agent/protocol';
+import {generateOptions,rankOptions} from '../src/sim/decision';
+import {helperExperience} from '../src/sim/helper_learning';
+import {conservationReport} from '../src/sim/economy';
+const f=materialPromiseScene(78);
+const model=stubModel('helper-learning-trace',req=>{const o=observationFromPrompt(req.user)!;return JSON.stringify({choose:materialChoice(o,'promise').key,why:'Choose offered material help and useful work.'});});
+const result=await runLive(f.w,f.ada.id,model,{until:2000});
+for(const p of result.world.persons)console.log(JSON.stringify({person:p.id,name:p.name,x:p.x,y:p.y,inv:p.inv,activity:p.activity?.kind,receipt:p.socialMemory,trust:p.relations,plans:p.intentions,experience:helperExperience(result.world,p,f.ben.id,'stone','stone'),options:rankOptions(generateOptions(result.world,p,true,true)).slice(0,8).map(o=>({key:o.key,label:o.label,why:o.selectionReason}))}));
+console.log(JSON.stringify({conserved:conservationReport(result.world).ok}));

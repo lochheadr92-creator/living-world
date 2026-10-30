@@ -605,7 +605,7 @@ export interface Person {
   customers?: import('./customers').Customer[];
   exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
   relocationHardship?: number;
-  socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper' }[];
+  socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper'; task?: import('./helper_learning').HelperTask }[];
   civicOutcomes?: { projectId: number; organiserId: number; success: boolean; tick: number; buildingId?: number; benefit?: {tick:number;item:ItemKind;amount:number} }[];
   ent: 'person';
   id: number;
@@ -1044,6 +1044,8 @@ export type RequestKind = 'food' | 'water' | 'wood' | 'stone' | 'seeds' | 'tool'
 export type RequestStatus = 'pending' | 'promised' | 'fulfilled' | 'partial' | 'declined' | 'expired' | 'failed' | 'broken' | 'interrupted' | 'cancelled';
 
 export interface Request {
+  /** Rules 78: last actual hand-over to this requester, not a promise or remote site arrival. */
+  helperReceipt?: import('./helper_learning').HelperReceipt;
   id: number;
   kind: RequestKind;
   from: number;

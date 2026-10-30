@@ -1,4 +1,5 @@
 import { exchangeJourneyOptions } from './exchange_journeys';
+import {helperExperience,materialRequestKind} from './helper_learning';
 import { askTrustBonus } from './delivery_place';
 import { supplyOptions } from './customers';
 import { heldTechniques, hasLearnerInstruction, TECHNIQUES, TECHNIQUE_KINDS, techniqueApplies, knowsTechnique, learnBlocker } from './techniques';
@@ -286,10 +287,11 @@ function optRequest(ctx: Ctx): void {
       // on the table and the ask carries the cost of the alternative: a quick trip of their own beats asking a favour, a long one
       // may not.
       const quick = ctx.options.some((o) => o.yields === item && o.eta < 260);
-      // Stable ties preserve sight order. This reads only the asker's relationship;
+      // Stable ties preserve sight order. This reads only the asker's relationship and personal receipts;
       // no remote helper inventory, plans, willingness or world event is consulted.
+      const experience=new Map(cands.map(c=>[c.q.id,helperExperience(world,p,c.q.id,materialRequestKind(item),item)]));
       const helpers = hasProjectHelperChoice(world)
-        ? cands.slice().sort((a, b) => trustOf(p, b.q.id) - trustOf(p, a.q.id)) : cands;
+        ? cands.slice().sort((a, b) => trustOf(p, b.q.id)+experience.get(b.q.id)!.bonus-trustOf(p, a.q.id)-experience.get(a.q.id)!.bonus) : cands;
       for (const c of helpers) {
         if (c.d > 12 || !c.s.carrying.includes(item)) continue;
         if (c.s.child || stageOf(world, c.q) === 'child') continue;
@@ -323,8 +325,8 @@ function optRequest(ctx: Ctx): void {
           sc,
           'request',
           ':plan:' + item,
-          hasProjectHelperChoice(world) && trustOf(p, c.q.id) !== 10
-            ? (trustOf(p, c.q.id) > 10 ? `I trust ${c.q.name}; they may still need it themselves` : `I am wary of ${c.q.name}, but can still ask`) : '',
+          hasProjectHelperChoice(world) ? [trustOf(p, c.q.id) !== 10
+            ? (trustOf(p, c.q.id) > 10 ? `I trust ${c.q.name}; they may still need it themselves` : `I am wary of ${c.q.name}, but can still ask`) : '',experience.get(c.q.id)!.reason].filter(Boolean).join('; ') : '',
         );
         break; // one person at a time about one thing
       }
@@ -349,6 +351,8 @@ function optRequest(ctx: Ctx): void {
         if ((p.asked[c.q.id] ?? -9999) > world.tick - 650) continue;
         const raw = item === 'wood' || item === 'stone';
         const sc = new Scorer().add(`the building needs ${item}`, 24 * traitMods(p).work).add('they are carrying some', 4).add('walking', -pen(c.d * 6));
+        const experience=helperExperience(world,p,c.q.id,materialRequestKind(item),item);
+        sc.add('personally received this material on an earlier request',experience.bonus);
         mkSocial(
           ctx,
           c,
@@ -360,6 +364,7 @@ function optRequest(ctx: Ctx): void {
           sc,
           'request',
           ':' + item,
+          experience.reason,
         );
       }
     }

@@ -1,4 +1,5 @@
 import { describeUnfinished } from './succession';
+import {describeHelperTask} from './helper_learning';
 import { deceasedById } from './historical_index';
 import { supperHistory } from './household_practices';
 import { factionHistory } from './political_alignment';
@@ -74,7 +75,7 @@ export function relationshipHistory(w: World, p: Person): string[] {
   if(r.deathKnown) rows.push(`Death learned at tick ${r.deathKnown.learned}: ${r.deathKnown.source}${r.deathKnown.via ? ` from ${name(w,r.deathKnown.via)}` : ''}.`);
   if(r.grievance) rows.push(`Open grievance: ${r.grievance.detail} (since tick ${r.grievance.since}).`);
   const receipts=(p.socialMemory??[]).filter(m=>m.otherId===other).slice(-3);
-  for(const m of receipts)rows.push(`Request #${m.requestId}, ${m.role}, tick ${m.tick}: ${m.outcome} — ${m.reason}${m.siteId ? `; site #${m.siteId}` : ''}.`);
+    for(const m of receipts)rows.push(`Request #${m.requestId}, ${m.role}, tick ${m.tick}: ${m.outcome} — ${m.reason}${m.siteId ? `; site #${m.siteId}` : ''}. ${describeHelperTask(m.task)}`);
   for(const note of r.history.slice(-2))rows.push(`Remembered at tick ${note.tick}: ${note.text}. Event link not recorded.`);
   if(!receipts.length&&!r.history.length)rows.push('Earlier cause not recorded.');
  }
