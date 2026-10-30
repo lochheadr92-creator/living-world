@@ -1,5 +1,10 @@
 # Journey source recovery — rules 73
 
+Runtime implementation: `1b41ded`. The rules-73 ordinary, failed-source, replacement-travel and impossible-abandonment
+continuation reference is recorded from that runtime before any successor behavior. `tests/helpers/journey_recovery.ts`
+and `tests/helpers/v73ref.ts` are now frozen reference fixtures. Later changes must not regenerate their expected values
+or silently alter the source-learning diagnostic's rules-73 meaning.
+
 Predecessor 72 runtime `83a56fd`, pinned/published `d9fd3ab`. The retained diagnostic is
 `scripts/journey_recovery_diagnostic.ts`: after a physical failure at the original tree, the private intention has no
 next step while a personally known replacement tree offers legal same-material work. This is staged gap evidence.
