@@ -28,6 +28,30 @@ pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-o
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
 
+### Rules 84 candidate — requester withdrawal, actual contact and truthful late reconciliation
+
+`REQUEST_CANCELLATION.md` records local requester observation, pending withdrawal in existing
+bounded memory, actual speech to the nearby helper, matching work/claim release and separate
+acknowledgement. A helper's private promise does not change remotely. Already completed work
+stays complete and can be reported during the response. Explicit source/role/contact/save
+validation and old-rules removal are covered. Initial runtime `fb55f77` was pinned at `eba0b94`;
+the later overlapping-obligation fix preserves both frozen continuations unchanged.
+
+The final ownership review reproduced two overlapping-work failures and corrected explicit
+binding/target fallback. The stopped initial full run is not a pass. Corrected focused checks
+pass **99 tests / six files**, with typecheck. Final browser 10/10 and build pass; final full
+regression is running. Fresh ordinary final-source reruns reproduce every count below, with exact saved twins,
+100 pure inspections per world and balanced resources. Final saves validate and continue exactly.
+Initial ordinary river/forest/meadow counts: 11/4/8 own cancellations, 14/5/13 starts,
+8/3/6 heard messages, 7/3/6 acknowledgements. All heard messages arrived after the obligation
+already ended; stopping active work is staged evidence. No survival/productivity claim.
+
+The next explicit-84 diagnostic records a real failed approach at tick 324 and actual requester
+rendezvous at 526 while the helper's promise is still active until 2440. The child is alive,
+the helper has no critical need, but no active-delay explanation or renegotiation is offered.
+See `scripts/promise_delay_diagnostic.ts`. Ability/location questions, counteroffers, delay,
+distant helper search and the wider programme remain open. This is not full-prompt completion.
+
 ### Rules 83 — personally discovered target changes and cancellation explanations
 
 Runtime `26e8153` and immutable reference `57b5fe4` pass the final release gate:
@@ -188,7 +212,7 @@ remain attributed evidence, not newly repeated measurements.
 | Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`, `kept_target.ts`, `journey_recovery.ts`; 34/36/37/50/61/63/65/73 | Required-tool/capacity recovery, valid running destinations, bounded same-purpose known-source alternatives after actual trip failure, saved useful work and truthful abandonment/claim release | Other temporary obstructions, route/helper/workshop loss, general goal composition, help/renegotiation and ordinary reliable recovery remain. No ordinary trip adoption in the short 73 windows. |
 | Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Rules 74 source-specific gathering, personal correction and later ordinary influence are verified in `SOURCE_LEARNING.md`. Rules 76 adds bounded repeated-approach learning/correction (`ROUTE_LEARNING.md`), with ordinary null results. Rules 78 retains task-specific direct material receipts and bounded later helper choice (`HELPER_LEARNING.md`), with ordinary recording but no later influenced starts. Broader work/care competence, willingness communication and conflicting-report revision remain; no aggregate-benefit claim. Rules 79 adds witnessed childcare-specific learning; 80/81 personally sourced completion/failure reports; 82 heard expectations and locally known death. Broader competence and conflicting-report revision remain. |
-| Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`, `promise_knowledge.ts`, `promise_outcomes.ts`, `promise_expectations.ts`, `promise_targets.ts`; 39–51/80–83 | Requests/refusals, named home, delivery/customer receipts; actual completion/failure explanations and acknowledgement; spoken expected time, private timeout and later heard revision; personally observed target loss, truthful partial-haul cancellation and actual explanation/acknowledgement | Ability/location questions, counteramount/place, delay and requester-initiated cancellation remain; preserve actual contact, local grounds and unknown causes. No claim of general cooperation closure. |
+| Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`, `promise_knowledge.ts`, `promise_outcomes.ts`, `promise_expectations.ts`, `promise_targets.ts`, `request_cancellation.ts`; 39–51/80–84 | Requests/refusals, named home, delivery/customer receipts; actual completion/failure explanations and acknowledgement; spoken expected time, private timeout and later heard revision; personally observed target loss, truthful partial-haul cancellation and actual explanation/acknowledgement; candidate requester target withdrawal through real contact, preserving already-ended outcomes | Ability/location questions, counteramount/place, delay and wider requester cancellation remain; preserve actual contact, local grounds and unknown causes. No claim of general cooperation closure. |
 | Household coordination / incomplete (A9, WS5/11/17/20) | `responsibilities.ts`, `welfare.ts`, `intent.ts`, `social.ts`; 48/53/56 | Voluntary promises, childcare protections, death succession | Contacted intentions avoid duplicate trips and permit complementary work; provider absence causes reconsideration; private plans, promises and physical contributions stay distinct. |
 | Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`, `care_capacity.ts`, `resident_contact.ts`, `resident_care.ts`, `stored_water.ts`; 45/48/56/62/63/66/67/68 | Same-room gifts, actual-receipt cooldown, failed food hand-over → home deposit → table meal, including prior ordinary use; rules 66 connects personally remembered need → real resident return/entry → receipt/use, with short ordinary null results | Rules 67/68 connect failed water hand-over, owned-home provision and actual stored drinking. Ordinary care reliability, guest access and other missing lawful handoffs remain. Preserve partial quantities, unknown/full homes and actual consumption. No through-wall transfer or invented room. |
 | Illness/injury/elder care / incomplete (WS17) | `welfare.ts`, `responsibilities.ts`, `illness.ts`, `life.ts`, `resident_contact.ts`, `resident_care.ts`; 56/66 | Injured elder receives/eats bread after actual resident return; visible condition is remembered and revised through contact/news; childcare saves/purity; zero new return-care starts in three fresh five-day windows | Acquire necessities, warmth/childcare, cover duties, hand responsibility back after recovery; no-helper failure visible. Ordinary care reliability and household viability remain unproven. |

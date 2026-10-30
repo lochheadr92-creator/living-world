@@ -118,3 +118,34 @@ heard agreement; the offer set has neither an active-delay explanation nor a ren
 `autonomy-delay85-before.log` retains the full state and pure inspection/save/resource checks.
 This is a source-audited gap in active-promise communication, not evidence that more time alone
 would fix the obstruction or protect the child. The child is alive at the diagnostic horizon.
+
+
+## Final review finding: overlapping obligations
+
+Two explicit unit overlap variants reproduced a real settlement defect: the target-based
+fallback discarded suspended work even when it was explicitly bound to another active
+obligation, or still served another obligation at the same site. Both failed before the fix
+(`autonomy-cancel84-overlap-before.log`, 2 failed / 19 passed). The initial full run was stopped
+for this concrete finding (`autonomy-cancel84-full-tests.log`); it is not a passing suite.
+
+The conversation owner now respects an explicit activity/commitment binding. Target fallback
+is used only when no explicit binding exists and no other active personal obligation still
+needs that target. The original cancellation still ends its own obligation. The tests stage
+the second obligation to isolate this ownership boundary; they do not claim two naturally
+accepted requests. The physical cancellation conversation is unchanged. Immutable rules-84
+reference `eba0b94`, recorded from candidate `fb55f77`, remains unchanged and must pass after
+this fix; no expected hashes are regenerated.
+
+
+The corrected ownership-focused run passes **99 tests / six files**, including immutable 83
+and 84 references (`autonomy-cancel84-overlap-fixed.log`). Corrected typecheck/build and fresh
+browser **10/10** pass (`autonomy-cancel84-overlap-typecheck.log`, `autonomy-cancel84-final-build.log`,
+`autonomy-cancel84-final-browser.log`). Final screenshots/report are in
+`autonomy_evidence/cancel84-final-rendered`.
+
+Final-source ordinary reruns `autonomy_evidence/r84-final-{seed}` reproduce every count in the
+table above, with 32.8 / 29.2 / 29.4 seconds for river/forest/meadow. All horizons, exact twins,
+100 purity checks per seed, source manifests and ledgers pass. Final-save validation, exact
+round trips and 120-tick continuations also pass for all three
+(`autonomy-cancel84-final-saved-continuations.log`). Initial observations remain candidate
+provenance; the final-source measurements are the corrected release evidence.

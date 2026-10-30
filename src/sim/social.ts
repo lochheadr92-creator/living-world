@@ -1060,7 +1060,10 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
     case 'cancel_request': {
       const heard=receiveCancellation(world,A,B,d.requestId??0,c.id);c.data.cancelDelivered=!!heard;c.data.cancelText=heard?.text??'No matching cancellation could be conveyed.';
       if(heard){
-        if(heard.stopped){const held=B.suspended;if(held&&(held.data.commitmentId===heard.commitmentId||held.targetId===heard.targetId&&['repair','build','haul','fuel_fire'].includes(held.kind))){releaseClaims(world,held.claims);B.suspended=null;addLog(world,B,'work','Stopped the suspended work after hearing its cancellation.');}
+        if(heard.stopped){const held=B.suspended;
+          const stillPromised=B.commitments.some(other=>other.status==='active'&&other.id!==heard.commitmentId&&(other.destId===heard.targetId||other.siteId===heard.targetId));
+          const matching=held&&(held.data.commitmentId!==undefined?held.data.commitmentId===heard.commitmentId:held.targetId===heard.targetId&&['repair','build','haul','fuel_fire'].includes(held.kind)&&!stillPromised);
+          if(held&&matching){releaseClaims(world,held.claims);B.suspended=null;addLog(world,B,'work','Stopped the suspended work after hearing its cancellation.');}
           const r=world.requests.find(r=>r.id===d.requestId&&r.from===A.id&&r.to===B.id);if(r?.status==='promised')settle(world,r,'cancelled',`${A.name} cancelled the request in person.`);
         }
         bubble(world,A,heard.text,'say',70);

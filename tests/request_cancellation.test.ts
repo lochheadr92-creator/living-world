@@ -74,3 +74,13 @@ it('an interruption before the cancellation is spoken leaves the helper obligati
  expect(f.parent.socialMemory!.find(m=>m.requestId===f.request.id)?.cancellation?.acknowledgedAt).toBeUndefined();
  expect(f.request.status).toBe('promised');expect(conservationReport(f.w).ok).toBe(true);
 });
+
+
+it.each([true,false])('preserves suspended work for another active obligation at the same target (explicit binding: %s)',explicit=>{
+ const f=cancellationContactScene();
+ // Unit overlap setup: a second accepted obligation shares the target. The cancellation conversation remains physical.
+ const other={...f.c,id:f.c.id+5000,requestId:f.request.id+5000};f.helper.commitments.push(other);startTalk(f);
+ const work=f.helper.activity!;if(explicit)work.data.commitmentId=other.id;else delete work.data.commitmentId;
+ const restore=setExternalController({controls:(_w,p)=>[f.parent.id,f.helper.id].includes(p.id),choose:()=>({kind:'defer'})});
+ try{for(let n=0;n<400&&!f.helper.socialMemory?.some(m=>m.cancellation);n++)stepWorld(f.w);expect(f.c.status).toBe('cancelled');expect(other.status).toBe('active');expect(f.helper.suspended?.id).toBe(work.id);}finally{restore();}
+});
