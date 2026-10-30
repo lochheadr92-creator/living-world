@@ -117,3 +117,11 @@ person samples retain that outcome; four contain an eligible explanation option.
 activity starts in this window. These samples are not independent people. The ordinary runs
 establish a retained partial outcome and feasible offers, but no ordinary heard explanation,
 no ordinary route-failure attribution and no aggregate benefit.
+
+
+Runtime commit: `ca58c071f9fdb9cd69970e9c53d0aa1987a3c283`. The immutable rules-81 reference is
+recorded from this commit before successor behavior. It covers forest across the ordinary
+partial deadline outcome, a saved failed journey through the original deadline without remote
+knowledge, and speech-before-acknowledgement continued through a real reply. The separate
+reference check passes 1/1 in 13.46 seconds (`autonomy-v81-check.log`); typecheck passes. Do not
+re-record its expected file or modify the frozen fixture to conceal successor regressions.
