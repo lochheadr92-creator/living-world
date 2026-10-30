@@ -1,0 +1,14 @@
+import { indoorCareScene } from '../tests/helpers/indoor_care';
+import { generateOptions } from '../src/sim/decision';
+import { startActivity } from '../src/sim/activities';
+import { stepWorld } from '../src/sim/world';
+import { serializeWorld } from '../src/app/save';
+import { conservationReport } from '../src/sim/economy';
+const f=indoorCareScene(61),before=serializeWorld(f.w);
+const option=generateOptions(f.w,f.helper,true,true).options.find(o=>o.kind==='give'&&o.targetId===f.elder.id&&o.tag==='care');
+if(!option)throw new Error('No local care option');
+if(serializeWorld(f.w)!==before)throw new Error('Observer changed state');
+const indoorBefore={helper:f.helper.indoors,elder:f.elder.indoors};
+startActivity(f.w,f.helper,option.make!()!);
+stepWorld(f.w);
+console.log(JSON.stringify({rules:61,evidence:'STAGED same-household real admission, then selected offered care',indoorBefore,indoorAfter:{helper:f.helper.indoors??0,elder:f.elder.indoors??0},result:f.helper.lastResult,helperInventory:f.helper.inv,elderInventory:f.elder.inv,conservation:conservationReport(f.w)},null,2));
