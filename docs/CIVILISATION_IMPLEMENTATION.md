@@ -2,7 +2,7 @@
 
 ## Current continuation pointer — 2026-10-30
 
-This continuation started from local main `1448583`, rules **59**. Main and origin/main were advanced through `af357ee` (rules **63**); the isolated continuation now implements rules **64**. The additions align batch-plan recipes, stop/recover required-tool loss, allow lawful same-room care and remembered full-pack food recovery through a household store, and prioritise required tools over conveniences while preserving their physical prerequisites. Its full programme and evidence remain open.
+This continuation started from local main `1448583`, rules **59**. Main and origin/main were advanced through `e6a6d27` (rules **64**, implementation `1acf4fa` plus its immutable continuation reference). The additions align batch-plan recipes, stop/recover required-tool loss, allow lawful same-room care and remembered full-pack food recovery through a household store, and prioritise required tools over conveniences while preserving their physical prerequisites. Its full programme and evidence remain open.
 The active programme, four-class capability map, remaining transitions and evidence are maintained in
 [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
 Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch

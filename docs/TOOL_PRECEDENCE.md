@@ -101,6 +101,6 @@ zero. Observation is pure and conservation holds. Output: `autonomy_evidence/kep
 The first draft reused a candidate fixture's `pin()` and therefore waited in place; its local log is retained as
 `autonomy-kept-target64-diagnostic.log` and is not evidence of 85 ticks of walking. The corrected diagnostic retains the
 external selection only during the actual initial walk, then releases it before ordinary review. Future implementation
-must pin 64 first, adapt `c9c5dcf` at the next unused main rules version, and test real motion, valid/invalid sources,
+uses the rules-64 continuation now pinned at `e6a6d27` from `1acf4fa`, adapts `c9c5dcf` at the next unused main rules version, and tests real motion, valid/invalid sources,
 water and stores, urgent interruption, bounded candidates and exact continuation. Its candidate tests include a silently
 skippable water case and a danger-labelled case without actual danger; those are not adequate acceptance evidence here.

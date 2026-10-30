@@ -5,18 +5,21 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Current continuation
-adds viewer improvements, measured care/upkeep/mature-world evidence, rules 56 practical
-childcare, rules 57 workshop tool prerequisites, and rules 58 physical seed storage
-and correct post-consumption craft capacity. The older rules-44–55 report below
-is historical scope, not closure of the expanded WS15–21 or their dependencies.
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **64**:
+viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
+choice and tool-loss recovery, lawful indoor care, full-pack food recovery, and required-tool precedence. The older
+reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
 
 ## Autonomy and environment continuation — 2026-10-30
 
+Published checkpoint: main and origin/main reached **`e6a6d27`**, rules **64**, on 30 October. The implementation is
+`1acf4fa`; `e6a6d27` pins its continuation before any successor. The precise continuation instructions below preserve
+the still-open programme. This documentation-only update follows those commits.
+
 The owner's 30 October autonomy/environment prompt is one authorized implementation programme. This section extends this
 register; it does not replace the existing WS evidence or declare their unfinished journeys complete. The audit's rules-58
-baseline is superseded by local main `14485835ebe35c2d79447447c6bd9b4833534543`, rules **59**. `origin/main`, freshly fetched,
-is `7b2a680`; the two local commits are the immutable 58 reference and cart priority. No tracked main edits were present.
+baseline was superseded at the initial audit by local main `14485835ebe35c2d79447447c6bd9b4833534543`, rules **59**.
+`origin/main` was then `7b2a680`; the two local commits were the immutable 58 reference and cart priority. No tracked main edits were present.
 Existing untracked evidence and historical worktrees are preserved. Work is isolated at
 `C:\dev\Claude Experiment\living-world-autonomy`, branch `codex/autonomy-environment`, based on that exact local main.
 The newer unmerged seasonal-preparation branch `49655bb` and winter candidate `f33cd0b` remain historical inputs, not
@@ -30,8 +33,9 @@ adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage 
 Classifications are **connected**, **incomplete**, **absent**, and **measurement**. Connected means the named bounded
 mechanism exists with its stated evidence; it does not mean every ordinary journey succeeds. Measurement means the next
 action is measurement, not presumed implementation. Absent is limited to the named missing capability, not the whole subsystem.
-Every row retains the six existing evidence dimensions and the failures in its WS row. The source and contracts were
-inspected at 1448583; historical run counts below remain attributed evidence, not newly repeated measurements.
+Every row retains the six existing evidence dimensions and the failures in its WS row. The map began with source and
+contracts at 1448583; the rows updated through rules 64 point to their subsequent evidence. Historical run counts below
+remain attributed evidence, not newly repeated measurements.
 
 | Capability / classification | Source owner and current rules boundary | Known evidence | Missing transition and observable completion condition |
 |---|---|---|---|
@@ -292,6 +296,65 @@ The still-stocked target falls outside the source generator's top-two list, maki
 The bounded candidate-retention adaptation from `c9c5dcf` remains unimplemented; pin 64 and allocate the next unused
 main rules version before changing behaviour. Do not copy its conflicting version label, frozen-walk fixture or
 silently skipped water test. The complete A1–A16/WS programme above remains authoritative and incomplete.
+
+### Precise continuation checkpoint — rules 64, full programme incomplete
+
+Recorded from **`e6a6d27`** after its successful main push. Runtime implementation: **`1acf4fa`**. This following commit
+changes documentation only. Product checkout: `C:\dev\Claude Experiment\living-world-integrate`, `main`; retained working
+checkout: `C:\dev\Claude Experiment\living-world-autonomy`, `codex/autonomy-environment`. Both contain the same delivered
+simulation. The latter retains ignored raw saves and verification logs; do not remove it or mix its saves with the
+concurrent branch's different 59/60 meanings. Source, tests, reports and screenshots are committed. No source work is
+left uncommitted. Main's pre-existing untracked evidence inventory is preserved; the original dirty `deepseek-b1`
+checkout and all historical worktrees remain untouched. No PR or additional approval is required by this workflow.
+
+Verification classification: **bounded mechanisms verified; whole programme incomplete; aggregate benefit unproven**.
+The final simulation passed 232 files / 1,546 tests, typecheck, build and 8/8 rendered checks. The subsequent immutable
+rules-64 test passed separately (one test, 10.46 seconds), and typecheck passed again. Its four saved continuations match
+uninterrupted state and conserve resources. No earlier expected reference was regenerated. Current Normal 45-day
+measurements and their budget continuation are above. Actual current mature Large, generational/ecological outcomes and
+matched ensembles remain pending under the repository's costly-run policy; exact runnable commands and estimates are
+in [AUTONOMY_VALIDATION.md](AUTONOMY_VALIDATION.md). Earlier fresh-Large/retained-Normal timings are not that validation.
+
+The changed owners and reason for each are in the per-slice contracts: `BATCH_RECIPE_CHOICE.md`, `REQUIRED_TOOL_RECOVERY.md`,
+`LOCAL_GIVING.md`, `CARE_CAPACITY.md`, `TOOL_PRECEDENCE.md`. Most recent code owners are `production.ts`, `options_work.ts`,
+`optutil.ts`, `rulesversion.ts` and the lab. Measurement scripts are separate from simulation decisions. Current logs
+include `autonomy-full-tests64-final.log`, `autonomy-typecheck64-checkpoint.log`, `autonomy-build64-final.log`,
+`autonomy-tools64-browser-final.log`, and `autonomy-v64-reference-test.log` in the retained working checkout.
+
+**Exact next task:** repair the reproduced false-zero utility of a valid running source/store/water target when the
+generator's bounded candidate list drops it. Inspect the bounded adaptation in concurrent `c9c5dcf` (last fetched branch
+head `be786a8`); do not merge its branch or reuse its rules 60. The predecessor is now pinned, so allocate the next unused
+main rules version after refreshing current state (65 if main is unchanged). Keep at most the existing top-k plus the
+valid running target, preserve source/access/capacity/urgent-need rejection and ordinary switching scores, and prove
+physical travel, actual invalidation and continuation. Reproduce water and store cases without silent test skips.
+Then continue the entire A1–A16/WS programme through its dependencies: this next repair is not a replacement scope.
+
+First state check:
+
+```powershell
+git -C "C:\dev\Claude Experiment\living-world-integrate" status --short
+```
+
+Then the already runnable reproduction, from that checkout:
+
+```powershell
+npx vite-node scripts/kept_target_diagnostic.ts
+```
+
+Paste-ready continuation:
+
+> Continue the entire Living World Autonomy and Environment Expansion programme in
+> `C:\dev\Claude Experiment\living-world-integrate`. Read the current AGENTS.md/WORKFLOW and the rules-64 continuation
+> checkpoint in docs/DEPENDENCY_CHAIN_PROGRAMME.md. Rules 64 implementation is 1acf4fa, its immutable predecessor
+> reference for a successor is e6a6d27, and both were pushed to main. Preserve pre-existing untracked evidence, historical
+> worktrees and raw saves in living-world-autonomy. Verify actual branch/HEAD/status rather than assuming these pointers
+> are still current. The full programme is unfinished: do not treat the next repair as its whole scope. Start with the
+> physically reproduced running-target/top-k false-zero problem in scripts/kept_target_diagnostic.ts; adapt c9c5dcf only
+> after reviewing its tests and conflicting rules label, at the next unused main version. Keep source knowledge, resource
+> accounting, reservations, urgent needs, save/replay and observer purity authoritative. Continue tested slices, retain
+> failed outcomes and distinguish staged proof, ordinary use and aggregate benefit. Follow the authorized direct-main
+> commit/integration/push workflow without adding PRs or repeat approvals. Costly validation remains explicitly pending
+> with exact commands in docs/AUTONOMY_VALIDATION.md.
 
 ## Earlier implementation checkpoint — expanded programme still open (rules 58)
 
