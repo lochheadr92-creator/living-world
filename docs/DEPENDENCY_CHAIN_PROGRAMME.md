@@ -52,8 +52,13 @@ world (`viewer_evidence/tool59-river45/`) names the hammer and offers the borrow
 and changes no decision in 45 days: the four cart wanters are each inside another
 project the whole time and the cart is outranked by the planks and bricks the same
 sites want. Those two grounds are recorded in WS7 as design tensions, not gates to
-patch. Before another simulation change, record the rules-59 predecessor and verify
-the next unused version; never regenerate the pinned 53–58 references.
+patch. The §4 time budget was then measured in three ordinary worlds
+(`scripts/time_budget.ts`), which diagnosed a structural defect in the review of
+running activities (a target walked toward fell off the generators' top-k cuts and was
+scored as nothing), pinned the rules-59 reference (`367471a`) and delivered rules 60
+(`docs/KEPT_TARGET.md`); its paired ensemble is pending on the owner's machine. Before
+another simulation change, record the rules-60 predecessor and verify the next unused
+version; never regenerate the pinned 53–59 references.
 
 All remaining expanded rows stay in scope: whole winter food flows, home recovery and
 limited labour, shared maintenance acquisition/replacement, care through interiors
@@ -685,7 +690,7 @@ yet owns. Status words elsewhere in this file are unchanged by the map.
 
 | Brief area | Class | Source owner · rules boundary | Known evidence | Missing transition | Observable completion |
 |---|---|---|---|---|---|
-| §4 time budget, spare time | measured → incomplete | `needs.ts`, `decision.ts` (`reviewActivity`, `currentUtility`), `relief.ts`, `leisure.ts` (28) | `scripts/time_budget.ts`, `viewer_evidence/time_budget/{river,meadow,forest}30/` (rules 59, 30 days, pure, conserved): leisure 0.4 / 0.9 / 0.5 % of living ticks, travel 38 / 36 / 42 %, needs 24 / 27 / 18 %, work 10–11 %, critical-need exposure 2.8 / 2.2 / 5.9 %; 32–36 % of living ticks sit in activities later ended failed or interrupted; 4,400 ± 200 interruptions per world for "something better came up" against ~250 for danger and ~200 for a deadlier need; 2,100–2,600 aborted journeys. In river, 614 gather trips were dropped mid-walk for another gather: the dropped option was still on offer in 41 and the target still believed stocked in 390 (`currentUtility` scores an absent option 0, and the source generators offer only the top two, so a target walked toward falls off the table as distances change and any option beats it). | the diagnosed zero-standing of a running activity whose option fell past a top-k cut (rules 60 slice); then re-measure before any need, foresight or leisure retuning | an adequately supplied household shows repeated discretionary periods; a disrupted one changes rhythm for a recorded reason |
+| §4 time budget, spare time | measured → incomplete | `needs.ts`, `decision.ts` (`reviewActivity`, `currentUtility`), `relief.ts`, `leisure.ts` (28) | `scripts/time_budget.ts`, `viewer_evidence/time_budget/{river,meadow,forest}30/` (rules 59, 30 days, pure, conserved): leisure 0.4 / 0.9 / 0.5 % of living ticks, travel 38 / 36 / 42 %, needs 24 / 27 / 18 %, work 10–11 %, critical-need exposure 2.8 / 2.2 / 5.9 %; 32–36 % of living ticks sit in activities later ended failed or interrupted; 4,400 ± 200 interruptions per world for "something better came up" against ~250 for danger and ~200 for a deadlier need; 2,100–2,600 aborted journeys. In river, 614 gather trips were dropped mid-walk for another gather: the dropped option was still on offer in 41 and the target still believed stocked in 390 (`currentUtility` scores an absent option 0, and the source generators offer only the top two, so a target walked toward falls off the table as distances change and any option beats it). | **Delivered as rules 60** (`src/sim/kept_target.ts`, `docs/KEPT_TARGET.md`, six contracts, lab `rich-no-kept-target`, rules-59 reference pinned first): the running activity's own source, water spot or store stays past the top-k cuts. Rules-60 reruns (`viewer_evidence/time_budget/*30-rules60/`): "something better" interruptions 4,421 → 4,032 / 4,236 → 4,008 / 4,569 → 3,384; gather dropped at the source for another gather 397 → 90 / 320 → 67 / 504 → 96; lost-time share 33.4 → 30.9 / 31.9 → 32.0 / 35.8 → 31.4 %; leisure 0.4 → 1.1 / 0.9 → 1.1 / 0.5 → 0.5 %; deaths 3 → 0 / 0 → 0 / 5 → 9 (single draws; adverse forest outcome preserved). Paired control/nudge ensemble with `rich-no-kept-target` **pending** on the owner's machine. Next: the remaining lost-time classes (rest interrupted by a rising need is the largest; may be correct), then re-measure before any need, foresight or leisure retuning | an adequately supplied household shows repeated discretionary periods; a disrupted one changes rhythm for a recorded reason |
 | §4 learned routines | absent | none (night/supper/winter practices are the nearest: `intent.ts` night, `household_practices.ts`, `winter_practice.ts`) | — | personal, interruptible, season/injury/dependant-sensitive preferences learned from repeated success | the inspector shows a routine with its origin; the person deviates for a visible reason |
 | §5 bounded hierarchical intentions | incomplete | `intent.ts` (six kinds), `batch_plan.ts` (50, one stage before) | plan contracts; batch persistence; succession | a goal with prerequisite steps, alternatives, retries, cycle/unreachable rejection, revalidation at boundaries, claims released on every ending | one multi-step project survives a drink break and an intermediate save, loses a source, takes a legitimate alternative and completes; a matched impossible case ends with a reason |
 | §5 bounded waiting beyond daylight | incomplete | `night_wait.ts` (27), `batch_plan.ts` wait step, `layout_claims.ts` occupant wait (30) | contracts | waiting for a communicated meeting, a promised delivery or temporary occupancy with cost, timeout and next choice | a wait is shown with its reason and ends by arrival or timeout |
@@ -737,6 +742,12 @@ yet owns. Status words elsewhere in this file are unchanged by the map.
   offered and its target still believed stocked). Fixed river, meadow and forest,
   Normal, no immigration, 30 days each (175.6 / 152.2 / 163.4 s), pure and conserved;
   reports and provenance under `viewer_evidence/time_budget/`. Numbers in the §4 row.
+- Rules-60 (2026-10-30): rules-59 reference `367471a` recorded first (river and meadow
+  ordinary continuations). `src/sim/kept_target.ts` plus five one-line applications;
+  `tests/kept_target.test.ts` 6/6; typecheck exit 0; goldens unchanged (`scripts/golden.ts --write` rewrote an
+  identical file: the golden cases run on legacy `defaultSettings`, outside the current rules); rules-60 time budgets river/meadow/forest
+  30 days (191.1 / 168.6 / 146.8 s), pure and conserved. Full-suite and build results
+  are recorded in the rules-60 commit message and below once run.
 
 - Second integrated boundary (rules 54): **208 files / 1,452 tests**, 279.03 s, exit 0;
   typecheck/build/diff check passed. Mature-world measurements and existing care/upkeep
