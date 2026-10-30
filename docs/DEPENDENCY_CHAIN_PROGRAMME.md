@@ -389,6 +389,13 @@ Fresh five-day Normal, immigration off, meadow/river/forest all reached tick 12,
 
 `scripts/care_water_gap.ts` repeats river and matches its exact final save. The five samples are Jax at ticks 600–1080, with no known household home and zero spare water. This is not five feasible delivery opportunities. Preserve the adverse absence of infrastructure/supplies and do not tune scoring to manufacture water or homes. Broader acquisitions, care duties, production and every other remaining capability-map row stay open.
 
+### Current continuation checkpoint — rules 70
+
+Verified runtime: **`0dc486d`**. Its immutable reference captures ordinary meadow, the first learning trip, an autonomous
+learned choice, source depletion and injury-context change before rules 71. Separate reference test **1/1, 10.79 seconds**
+(`autonomy-v70-check.log`), additional to the full suite below. The writer refuses overwrite or recording under a successor.
+Next transition is the A4 quantity/trip-preparation audit described below; no unfinished programme row is dropped.
+
 ### Learned personal daily preferences — rules 70
 
 The rules-69 predecessor was pinned at `f01ba1e` before behavior changed. Rules 70 connects accepted legal activities to
