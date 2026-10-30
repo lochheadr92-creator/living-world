@@ -1,3 +1,4 @@
+import { harvestPressure } from './ecology';
 import {isStoredDrink,storedWaterSource} from './stored_water_access';
 import {projectAvailable} from './project_step';
 import { relocationPackingBlocker } from './relocation';
@@ -154,6 +155,7 @@ registerHandler('gather', {
     if (a.data.purpose === 'eat' && invRoom(world, p, s.item) < 1 && NUTRITION[s.item as FoodKind] !== undefined && p.needs.hunger < 85 && s.amount >= 1) {
       // a full pack must not mean going hungry: eat it right there (the unit leaves the source and is consumed)
       s.amount -= 1;
+      harvestPressure(world, s, 1);
       ledgerConsume(world, s.item, 1, 'eaten at the source');
       p.needs.hunger = clamp(p.needs.hunger + NUTRITION[s.item as FoodKind], 0, 100);
       p.lastAteTick = world.tick;

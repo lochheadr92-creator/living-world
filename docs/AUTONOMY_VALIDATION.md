@@ -120,3 +120,45 @@ Return only `$runRoot-care-ensemble/report.txt`, not the progress lines. Rerunni
 source revision** resumes unfinished seeds. Compare the intervention with the control and both nudges, preserving deaths,
 zeros, labour displacement and uncertain effects. Existing lab output checks rules compatibility, not every source hash;
 the revision-specific output root is therefore required. A later source revision must use a fresh directory.
+
+
+## Pending long ecological occurrence and matched comparison (rules 86 onward)
+
+Persistent condition now has short-window and staged mechanism evidence. The five-day screen is
+not the required long recovery/generation or mature Large evidence. Use a freshly published
+revision and `$runRoot` as above. The observer additionally accepts days and a wall-time budget;
+its defaults remain 5 days / 170 seconds. These 45-day runs allow 20 minutes each and may still
+stop explicitly at budget. Estimated cost is several minutes per seed, dependent on surviving
+population and observer overhead. Do not divide a costly horizon into small agent-run chunks.
+
+```powershell
+npx --no-install tsx scripts/ecology_observe.ts river "$runRoot-ecology-river45" 45 1200
+```
+
+```powershell
+npx --no-install tsx scripts/ecology_observe.ts forest "$runRoot-ecology-forest45" 45 1200
+```
+
+```powershell
+npx --no-install tsx scripts/ecology_observe.ts meadow "$runRoot-ecology-meadow45" 45 1200
+```
+
+Return each report.json with source manifest, stop reason, condition bands, actual starts/endings,
+rest opportunities, failures, retained stories, conservation and saved-twin results. These are
+ordinary occurrence measurements, not controls for benefit. Saves remain local. A budget stop is
+a partial result, not a pass at 45 days.
+
+For aggregate effects, use the existing fixed-seed Large matched-control/nudge design. The
+four-arm 24-seed, 45-day suite has the same approximately 90-minute all-core estimate as above:
+
+```powershell
+node scripts/lab.mjs --out "$runRoot-ecology-ensemble" --seeds 24 --fork 0 --days 45 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-ecology
+```
+
+```powershell
+npx vite-node scripts/lab_report.ts -- "$runRoot-ecology-ensemble"
+```
+
+Return report.txt, preserving labour displacement, mortality, failed journeys and null results.
+The current mature Large generation/performance commands earlier in this document still apply.
+None of these costly ecology/combined-world results has been claimed as run or passed here.

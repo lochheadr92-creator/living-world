@@ -1,7 +1,8 @@
+import { conditionAt, cultivationPressure, fieldResting, hasEcology, tendCondition } from './ecology';
 import { notePractice } from './apprentice';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
-import { WORK } from './constants';
+import { DAY, WORK } from './constants';
 import { claimPlot, consume, harvestPlot } from './economy';
 import { noteHarvest } from './occasions';
 import { addEvent, addFx, addLog } from './events';
@@ -9,7 +10,7 @@ import { createPlot } from './farming';
 import { observe } from './knowledge';
 import { taskMultiplier, wearFor } from './tools';
 import { isFreeLand } from './registry';
-import type { Person, Plot, World } from './types';
+import type { Activity, Person, Plot, World } from './types';
 import { T } from './types';
 
 function plotOf(world: World, a: { targetId: number }): Plot | null {
@@ -24,6 +25,21 @@ function claim(world: World, p: Person, plot: Plot, a: { claims: number[]; expir
   return true;
 }
 
+/** Revalidate the physical plot boundary, including a household/claim change during work. */
+function fieldWorkBlocker(w: World, p: Person, pl: Plot, claimed = false): string | undefined {
+  if (!hasEcology(w)) return;
+  if (p.indoors || Math.hypot(p.x - pl.x - 0.5, p.y - pl.y - 0.5) > 2) return 'not beside the field';
+  if (!p.hhId || pl.hhId !== p.hhId) return 'this field belongs to another household';
+  if (claimed && (pl.claimedBy !== p.id || ![...w.reservations.values()].some(r => r.kind === 'plot' && r.target === pl.id && r.owner === p.id && r.expires >= w.tick))) return 'no longer holds the field claim';
+}
+function continuingFieldBlocker(w: World, p: Person, pl: Plot, a: Activity): string | undefined {
+  if (!hasEcology(w)) return;
+  const blocked = fieldWorkBlocker(w, p, pl, true); if (blocked) return blocked;
+  const expected = a.kind === 'till' ? 'tilling' : a.kind === 'plant' || a.data.ecologyRest ? 'tilled' : a.kind === 'harvest' ? 'ripe' : 'growing';
+  if (pl.state !== expected) return 'the field changed during work';
+  if (a.kind === 'plant' && fieldResting(w, pl)) return 'the field is resting';
+}
+
 // ───────────────────────── till ─────────────────────────
 registerHandler('till', {
   availability: 0.3,
@@ -33,11 +49,13 @@ registerHandler('till', {
     if (!plot) {
       const x = a.data.px as number;
       const y = a.data.py as number;
+      if (hasEcology(world) && (a.data.hh !== p.hhId || !p.hhId || p.indoors || Math.hypot(p.x-x-0.5,p.y-y-0.5)>2)) return 'cannot prepare that household field from here';
       if (!isFreeLand(world, x, y) || world.terrain[y * world.W + x] !== T.GRASS) return 'the ground there is no longer free';
       plot = createPlot(world, x, y, a.data.hh as number);
       a.targetId = plot.id;
       addFx(world, 'dust', x + 0.5, y + 0.5, 0);
     }
+    const blocked = fieldWorkBlocker(world, p, plot); if (blocked) return blocked;
     if (plot.state !== 'tilling') return 'the ground is already prepared';
     if (!claim(world, p, plot, a)) return 'someone else is working that plot';
     a.tx = plot.x + 0.5;
@@ -49,6 +67,7 @@ registerHandler('till', {
   work(world, p, a): WorkResult {
     const plot = plotOf(world, a);
     if (!plot) return 'fail:the plot is gone';
+    const blocked = continuingFieldBlocker(world, p, plot, a); if (blocked) return `fail:${blocked}`;
     faceToward(p, a.tx, a.ty);
     a.progress++;
     plot.progress = Math.min(1, a.progress / a.duration);
@@ -70,7 +89,7 @@ registerHandler('till', {
       const hh = world.households.find((h) => h.id === plot.hhId);
       if (hh && world.plots.filter((x) => x.hhId === hh.id).length === 1) addEvent(world, 'farm', `${p.name} broke ground for the first ${hh.name} field.`, [p.id], plot.x, plot.y);
     }
-    if (plot) observe(world, p, plot);
+    if (plot && (!hasEcology(world) || (!p.indoors && Math.hypot(p.x-plot.x-0.5,p.y-plot.y-0.5)<=2))) observe(world, p, plot);
   },
 });
 
@@ -81,8 +100,10 @@ registerHandler('plant', {
   begin(world, p, a) {
     const plot = plotOf(world, a);
     if (!plot) return 'the plot is gone';
+    const blocked = fieldWorkBlocker(world, p, plot); if (blocked) return blocked;
     observe(world, p, plot);
     if (plot.state !== 'tilled') return 'it is not ready for seed';
+    if (fieldResting(world, plot)) return 'the field is resting before the next crop';
     if ((p.inv.seeds ?? 0) < 1) return 'no seeds on me';
     if (!claim(world, p, plot, a)) return 'someone else is working that plot';
     a.tx = plot.x + 0.5;
@@ -92,10 +113,13 @@ registerHandler('plant', {
   work(world, p, a): WorkResult {
     const plot = plotOf(world, a);
     if (!plot) return 'fail:the plot is gone';
+    const blocked = continuingFieldBlocker(world, p, plot, a); if (blocked) return `fail:${blocked}`;
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
     if (consume(world, p.inv, 'seeds', 1, 'sown') < 1) return 'fail:no seeds left';
+    cultivationPressure(world, plot);
+    delete plot.fallowUntil;
     plot.state = 'growing';
     plot.progress = 0;
     plot.care = 0.6;
@@ -121,8 +145,12 @@ registerHandler('tend', {
   begin(world, p, a) {
     const plot = plotOf(world, a);
     if (!plot) return 'the plot is gone';
+    const blocked = fieldWorkBlocker(world, p, plot); if (blocked) return blocked;
     observe(world, p, plot);
-    if (plot.state !== 'growing') return 'nothing growing there to tend';
+    if (a.data.ecologyRest) {
+      if (!hasEcology(world) || plot.state !== 'tilled' || fieldResting(world, plot)) return 'the field is not available to rest';
+      if (conditionAt(world, plot.x, plot.y) >= 0.8) return 'the field has already recovered';
+    } else if (plot.state !== 'growing') return 'nothing growing there to tend';
     if (!claim(world, p, plot, a)) return 'someone else is working that plot';
     a.tx = plot.x + 0.5;
     a.ty = plot.y + 0.5;
@@ -131,16 +159,21 @@ registerHandler('tend', {
   work(world, p, a): WorkResult {
     const plot = plotOf(world, a);
     if (!plot) return 'fail:the plot is gone';
+    const blocked = continuingFieldBlocker(world, p, plot, a); if (blocked) return `fail:${blocked}`;
     faceToward(p, a.tx, a.ty);
     a.progress++;
-    if (a.progress === Math.floor(a.duration / 2)) addFx(world, 'splash', a.tx, a.ty, 0);
+    if (a.progress === Math.floor(a.duration / 2)) addFx(world, !hasEcology(world) || (p.inv.water ?? 0) >= 1 ? 'splash' : 'dust', a.tx, a.ty, 0);
     if (a.progress < a.duration) return 'continue';
     let bonus = 0.5;
     if ((p.inv.water ?? 0) >= 1) {
-      consume(world, p.inv, 'water', 1, 'watering crops');
+      consume(world, p.inv, 'water', 1, a.data.ecologyRest ? 'watering rested soil' : 'watering crops');
       bonus = 1;
     }
-    plot.care = Math.min(1, plot.care + bonus);
+    tendCondition(world, plot, bonus === 1);
+    if (a.data.ecologyRest) {
+      plot.fallowUntil = world.tick + 3 * DAY;
+      addEvent(world, 'farm', `${p.name} prepared a field for rest before another crop.`, [p.id], plot.x, plot.y);
+    } else plot.care = Math.min(1, plot.care + bonus);
     plot.lastTended = world.tick;
     p.cooldowns['tend' + plot.id] = world.tick;
     wearFor(world, p, 'tend', a.duration);
@@ -151,7 +184,7 @@ registerHandler('tend', {
     return 'done';
   },
   onEnd(world, p, a, outcome) {
-    if (outcome === 'success') addLog(world, p, 'work', 'Tended the crops.');
+    if (outcome === 'success') addLog(world, p, 'work', a.data.ecologyRest ? 'Prepared the field to rest for three days before another crop.' : 'Tended the crops.');
   },
 });
 
@@ -162,6 +195,7 @@ registerHandler('harvest', {
   begin(world, p, a) {
     const plot = plotOf(world, a);
     if (!plot) return 'the plot is gone';
+    const blocked = fieldWorkBlocker(world, p, plot); if (blocked) return blocked;
     observe(world, p, plot);
     if (plot.state !== 'ripe') return 'it is not ripe';
     if (!claim(world, p, plot, a)) return 'someone else is harvesting it';
@@ -172,6 +206,7 @@ registerHandler('harvest', {
   work(world, p, a): WorkResult {
     const plot = plotOf(world, a);
     if (!plot) return 'fail:the plot is gone';
+    const blocked = continuingFieldBlocker(world, p, plot, a); if (blocked) return `fail:${blocked}`;
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress % 14 === 7) addFx(world, 'pick', a.tx, a.ty, 0);

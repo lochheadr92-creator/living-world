@@ -1,3 +1,4 @@
+import { productiveRate } from './ecology';
 import { hasMemoryRetention } from './memory_retention';
 import { hubWithin } from './settlements';
 import { regrowRate } from './hardship';
@@ -66,7 +67,7 @@ export function updateSources(world: World): void {
     const s = list[i];
     if (s.type === 'tree') {
       if (s.growth < 1) {
-        s.growth = Math.min(1, s.growth + 1 / SAPLING_TICKS);
+        s.growth = Math.min(1, s.growth + productiveRate(world, s.x, s.y) / SAPLING_TICKS);
         const target = Math.floor(s.max * s.growth + 1e-6);
         if (s.amount < target) {
           s.amount++;
@@ -89,7 +90,7 @@ export function updateSources(world: World): void {
       continue;
     }
     if (s.regrowEvery > 0 && s.amount < s.max) {
-      s.regrowTimer += rainBoost * regrowRate(world);
+      s.regrowTimer += rainBoost * regrowRate(world) * productiveRate(world, s.x, s.y);
       if (s.regrowTimer >= s.regrowEvery) {
         s.regrowTimer = 0;
         s.amount++;

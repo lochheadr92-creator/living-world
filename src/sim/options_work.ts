@@ -1,3 +1,4 @@
+import { hasEcology } from './ecology';
 import {hasPromiseExpectations,promisedPerson,promisedLocation} from './promise_expectations';
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
@@ -1047,7 +1048,7 @@ function optFarm(ctx: Ctx): void {
       addBlocked(ctx, 'tend', 'Work the field', b.id, `tried recently: ${fail.reason}`, 'farm');
       continue;
     }
-    const mk = (kind: 'till' | 'plant' | 'tend' | 'harvest', label: string, goal: string, util: number, parts: [string, number][]) => {
+    const mk = (kind: 'till' | 'plant' | 'tend' | 'harvest', label: string, goal: string, util: number, parts: [string, number][], rest = false) => {
       addOption(ctx, {
         kind,
         label,
@@ -1068,6 +1069,7 @@ function optFarm(ctx: Ctx): void {
             goal,
             targetId: b.id,
             targetType: 'plot',
+            ...(rest ? {data:{ecologyRest:true}} : {}),
             tx: b.x,
             ty: b.y,
             spotX: spot.x,
@@ -1083,8 +1085,18 @@ function optFarm(ctx: Ctx): void {
       const sc = new Scorer().add('unfinished ground', 22 * mult + insecure).add('walking', -pen(e));
       mk('till', 'Finish preparing the field', 'to ready the ground for seed', sc.total, sc.parts);
     } else if (b.state === 'tilled') {
+      const worn = hasEcology(world) && (b.ecology === 'worn' || b.ecology === 'strained');
+      if (hasEcology(world) && (b.fallowUntil ?? 0) > world.tick) {
+        addBlocked(ctx, 'plant', 'Plant seed', b.id, 'remembers this field was prepared to rest before another crop', 'farm');
+        continue;
+      }
+      if (worn && hs.foodStock >= 2) {
+        const sc = new Scorer().add(`remembered ${b.ecology} field needs rest before another crop`, (b.ecology === 'worn' ? 42 : 36) * mult).add('walking', -pen(e));
+        mk('tend', 'Prepare the field to rest', 'to let the ground recover before another crop', sc.total, sc.parts, true);
+      }
       if (seedsAvail >= 1) {
         const sc = new Scorer().add('seed in hand, ground ready', 34 * mult + insecure).add('walking', -pen(e));
+        if (worn) sc.add(`remembered ${b.ecology} ground may yield less`, b.ecology === 'worn' ? -10 : -4);
         mk('plant', 'Plant seed', 'to grow a crop', sc.total, sc.parts);
       } else {
         addBlocked(ctx, 'plant', 'Plant seed', b.id, 'has no seeds', 'farm');
@@ -1104,7 +1116,7 @@ function optFarm(ctx: Ctx): void {
   // break new ground
   const plotsNow = world.plots.filter((pl) => pl.hhId === hh.id).length;
   if (seedsAvail >= 1 && plotsNow < wantPlots && !myPlots.some((b) => b.state === 'tilling')) {
-    const plantable = myPlots.filter((b) => b.state === 'tilled').length;
+    const plantable = myPlots.filter((b) => b.state === 'tilled' && (!hasEcology(world) || (b.fallowUntil ?? 0) <= world.tick)).length;
     if (plantable < seedsAvail) {
       const key = -2000;
       if (!recentFailure(world, p, key, 800)) {

@@ -1,3 +1,4 @@
+import { updateEcology } from './ecology';
 import { retainOperationalMemory } from './memory_retention';
 import { hasLayoutClaims, layoutFingerprint } from './layout_claims';
 import { updateRelocationPressure } from './relocation';
@@ -70,6 +71,7 @@ export function stepWorld(world: World): void {
   updateHardship(world);
   occasionsTick(world);
   crewsTick(world);
+  updateEcology(world);
   updateSources(world);
   updatePlots(world);
   updateBuildings(world);
@@ -327,6 +329,9 @@ export function hashWorld(world: World): string {
     }
     push(`R${r4(aff)},${r4(fam)}|B${Object.keys(p.beliefs).length}`);
   }
+  if (world.ecology) push('Ecology' + JSON.stringify(world.ecology));
+  for (const pl of world.plots) if (pl.fallowUntil !== undefined) push('FieldRest' + pl.id + ':' + pl.fallowUntil);
+  for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.ecology !== undefined || b.fallowUntil !== undefined) push('EcologyMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.ecology + ':' + b.fallowUntil);
   for (const s of world.sources) push(`S${s.id}:${s.amount},${r4(s.growth)},${s.reserved}`);
   for (const b of world.buildings) push(`B${b.id}:${b.type},${r4(b.condition)},${r4(b.fuel)},${JSON.stringify(b.store.items)}`);
   for (const s of world.sites) push(`C${s.id}:${r4(s.work)},${JSON.stringify(s.delivered)},${JSON.stringify(s.used)}`);

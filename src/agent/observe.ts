@@ -45,7 +45,8 @@ import { hyp } from '../sim/util';
  * 10 distinguishes a remembered promise obstacle from a current obstruction.
  * 11 exposes the person's own aspiration and fulfilled history.
  * 12 explains personal trust used to select a project helper. */
-export const OBSERVATION_VERSION = 12;
+// 13 adds dated coarse ecological signs and remembered field rest, never live soil data.
+export const OBSERVATION_VERSION = 13;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -89,6 +90,8 @@ export interface ObservedPlace {
   state?: string;
   progress?: number;
   condition?: number;
+  ecology?: string;
+  fieldRest?: string;
   fuel?: number;
   tools?: string[];
 }
@@ -265,6 +268,8 @@ function describePlace(world: World, p: Person, b: Belief, version: number): Obs
   if (b.items && Object.keys(b.items).length) out.items = { ...b.items };
   if (b.need && Object.keys(b.need).length) out.missing = { ...b.need };
   if (b.state) out.state = b.state;
+  if (version >= 13 && b.ecology) out.ecology = `${b.ecology} when observed; current condition and recovery date unknown`;
+  if (version >= 13 && b.fallowUntil !== undefined) out.fieldRest = `Prepared to rest until tick ${b.fallowUntil}, as last observed`;
   if (b.progress !== undefined && (b.kind === 'site' || b.kind === 'plot')) out.progress = Math.round(b.progress * 100) / 100;
   if (b.cond !== undefined && b.kind === 'building') out.condition = Math.round(b.cond);
   if (b.fuel !== undefined && b.btype === 'fire') out.fuel = Math.round(b.fuel);

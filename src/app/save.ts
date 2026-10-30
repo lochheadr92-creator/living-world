@@ -1,3 +1,4 @@
+import { validateEcology } from '../sim/ecology';
 import {validatePromiseDelays} from '../sim/promise_delays';
 import {validateRequestCancellation} from '../sim/request_cancellation';
 import {validatePromiseTargets} from '../sim/promise_targets';
@@ -264,6 +265,7 @@ export function deserializeWorld(json: string): World {
   validatePromiseTargets(w);
   validateRequestCancellation(w);
   validatePromiseDelays(w);
+  validateEcology(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);

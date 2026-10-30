@@ -1,3 +1,4 @@
+import { biological, conditionAt, ecologicalSign, hasEcology, rememberedGrowth } from './ecology';
 import { deathStory, hasLocalDeath } from './death_knowledge';
 import { SOURCE_REGROW } from './constants';
 import {correctSourceExperience} from './source_learning';
@@ -33,6 +34,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       const b = blank(e.id, e.type, e.x + 0.5, e.y + 0.5, tick);
       b.amount = e.amount;
       b.max = e.max;
+      if (hasEcology(world) && biological(e)) b.ecology = ecologicalSign(conditionAt(world, e.x, e.y));
       return b;
     }
     case 'building': {
@@ -68,6 +70,10 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       b.progress = e.progress;
       b.hh = e.hhId;
       b.amount = e.stock;
+      if (hasEcology(world)) {
+        b.ecology = ecologicalSign(conditionAt(world, e.x, e.y));
+        if (e.fallowUntil !== undefined) b.fallowUntil = e.fallowUntil;
+      }
       return b;
     }
     case 'pile': {
@@ -169,7 +175,7 @@ export function estimatedAmount(world: World, b: Belief): number {
   if (b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot' || b.kind === 'rock') {
     const every = SOURCE_REGROW[b.kind as Source['type']];
     if (every > 0) {
-      const gained = Math.floor((world.tick - b.seen) / every);
+      const gained = Math.floor((world.tick - b.seen) * rememberedGrowth(world, b) / every);
       return Math.min(b.max, b.amount + Math.max(0, gained));
     }
   }

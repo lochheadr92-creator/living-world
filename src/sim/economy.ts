@@ -1,3 +1,4 @@
+import { harvestPressure } from './ecology';
 import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy';
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
 import { carryCap } from './people';
@@ -173,6 +174,7 @@ export function gatherFromSource(world: World, src: Source, p: Person, n: number
   if (m <= 0) return 0;
   recordPersonalProduction(world,p,'gathering',src.item,m,src.id);
   src.amount -= m;
+  harvestPressure(world, src, m);
   addItem(p.inv, src.item, m);
   world.hooks?.onTransfer?.({ from: 'source:' + src.id, to: 'person:' + p.id, item: src.item, n: m, reason: 'gather' });
   return m;

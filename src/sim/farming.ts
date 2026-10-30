@@ -1,3 +1,4 @@
+import { conditionAt } from './ecology';
 import { nearestHub } from './settlements';
 import { growthRate } from './hardship';
 import { CARE_DECAY, GROW_TICKS, RIPE_ROT_TICKS } from './constants';
@@ -43,12 +44,12 @@ export function updatePlots(world: World): void {
       pl.careAcc += (pl.care - pl.careAcc) * 0.002;
       const lightF = 0.25 + 0.75 * world.light;
       const warm = w.temp < 4 ? 0.4 : 1;
-      pl.progress += (1 / GROW_TICKS) * (0.45 + 0.55 * pl.care) * lightF * warm * growthRate(world);
+      pl.progress += (1 / GROW_TICKS) * (0.45 + 0.55 * pl.care) * lightF * warm * growthRate(world) * (0.5 + 0.5 * conditionAt(world, pl.x, pl.y));
       if (pl.progress >= 1) {
         pl.progress = 1;
         pl.state = 'ripe';
         pl.ripeTick = world.tick;
-        const grain = 3 + Math.round(pl.careAcc * 4);
+        const grain = Math.max(1, Math.floor((3 + Math.round(pl.careAcc * 4)) * (0.5 + 0.5 * conditionAt(world, pl.x, pl.y))));
         const seeds = 1 + (pl.careAcc > 0.6 ? 1 : 0);
         pl.stock = grain;
         pl.seedStock = seeds;

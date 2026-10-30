@@ -95,6 +95,9 @@ export interface Belief {
   btype?: string;
   hh?: number;
   cond?: number;
+  /** Coarse productive condition at the existing observation timestamp. */
+  ecology?: import('./ecology').EcologicalSign;
+  fallowUntil?: number;
   items?: Items;
   need?: Items;
   state?: string;
@@ -941,6 +944,8 @@ export interface Site {
 
 export type PlotState = 'tilling' | 'tilled' | 'growing' | 'ripe';
 export interface Plot {
+  /** Physical preparation for a bounded rest period; soil condition stays on the tile. */
+  fallowUntil?: number;
   ent: 'plot';
   id: number;
   x: number;
@@ -1260,6 +1265,7 @@ export interface SpatialGrid {
 }
 
 export interface World {
+  ecology?: Record<number, import('./ecology').EcologicalCondition>;
   exchangeReceipts?: import('./exchange_journeys').ExchangeReceipt[];
   economicObservations?: import('./settlement_economy').EconomicObservations;
   /** Lifetime births from rules 14; absent historical records are not reconstructed from prose. */

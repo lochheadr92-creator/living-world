@@ -1,3 +1,4 @@
+import { ecologyEnabled, setEcology } from '../../src/sim/ecology';
 import {buildPromiseSettlementOn,setBuildPromiseSettlement} from '../../src/sim/promise_knowledge';
 import {promiseDelaysOn,setPromiseDelays} from '../../src/sim/promise_delays';
 import {requestCancellationOn,setRequestCancellation} from '../../src/sim/request_cancellation';
@@ -331,6 +332,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-helper-learning')return {spec:label,summary:'remove task-specific direct-receipt learning; preserve ordinary relationship trust and voluntary replies',install(){const was=helperLearningOn();setHelperLearning(false);return ()=>setHelperLearning(was);}};
   if(kind==='rich-no-watch-learning')return {spec:label,summary:'remove witnessed watch-completion learning; preserve practical care and voluntary replies',install(){const was=watchLearningOn();setWatchLearning(false);return ()=>setWatchLearning(was);}};
   if(kind==='rich-no-build-promise-settlement')return {spec:label,summary:'retain prior deferred settlement after an actual 40-tick accepted building share',install(){const was=buildPromiseSettlementOn();setBuildPromiseSettlement(false);return ()=>setBuildPromiseSettlement(was);}};
+  if(kind==='rich-no-ecology')return {spec:label,summary:'remove persistent productive condition, observation and field rest',install(){const was=ecologyEnabled();setEcology(false);return ()=>setEcology(was);}};
   if(kind==='rich-no-promise-delays')return {spec:label,summary:'remove active-promise delay explanations and one bounded deadline negotiation',install(){const was=promiseDelaysOn();setPromiseDelays(false);return ()=>setPromiseDelays(was);}};
   if(kind==='rich-no-request-cancellation')return {spec:label,summary:'remove requester-initiated target cancellation and its communication',install(){const was=requestCancellationOn();setRequestCancellation(false);return ()=>setRequestCancellation(was);}};
   if(kind==='rich-no-promise-targets')return {spec:label,summary:'restore hidden target-loss cancellation and prior site-completion inference',install(){const was=promiseTargetsOn();setPromiseTargets(false);return ()=>setPromiseTargets(was);}};

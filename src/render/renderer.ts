@@ -218,7 +218,7 @@ export class Renderer {
     for (const it of list) {
       switch (it.k) {
         case 0:
-          this.scenery.drawSource(ctx, it.o as Source, simT, wind);
+          this.scenery.drawSource(ctx, it.o as Source, simT, wind, world);
           break;
         case 1:
           this.scenery.drawBuilding(ctx, it.o as Building, simT);

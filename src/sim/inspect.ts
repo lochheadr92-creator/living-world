@@ -1,3 +1,4 @@
+import { biological, conditionAt, ecologyNotes, fieldResting, hasEcology } from './ecology';
 import {hasPromiseExpectations,personalRequests} from './promise_expectations';
 import { deceasedById } from './historical_index';
 import {describeRouteExperience} from './route_learning';
@@ -8,7 +9,7 @@ import { skillExplanation } from './development';
 import { civicHistory, householdHistory, projectHistory, relationshipHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
-import { BUILD_DEF, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
+import { BUILD_DEF, DAY, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
 import { generateOptions, rankOptions } from './decision';
 import { clockText, dayNumber, phaseName, weatherLabel, dayFraction } from './environment';
 import { householdOf } from './buildings';
@@ -707,11 +708,17 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'source': {
       const s: Source = e;
       const rows: [string, string][] = [['Contains', `${s.amount} ${s.item}`]];
-      const bars = [{ label: s.item, value: s.amount, max: s.max, tone: 'food' }];
+      const bars: EntityView['bars'] = [{ label: s.item, value: s.amount, max: s.max, tone: 'food' }];
       const notes: string[] = [];
+      if (hasEcology(world) && biological(s)) {
+        bars.push({label:'Productive condition',value:conditionAt(world,s.x,s.y),max:1,tone:'food'});
+        notes.push(...ecologyNotes(world,s.x,s.y));
+      }
       if (s.type === 'tree') {
         rows.push(['Growth', s.growth >= 1 ? 'full-grown' : `${Math.round(s.growth * 100)}% grown`]);
         notes.push(s.growth < 0.55 ? 'Too young to harvest.' : 'Chopping all the wood fells the tree; saplings grow slowly from mature trees.');
+      } else if (hasEcology(world) && biological(s)) {
+        rows.push(['Renewal', 'Growth depends on productive condition, weather and season; current stock is separate.']);
       } else if (s.regrowEvery > 0) {
         rows.push(['Renews', `1 ${s.item} every ${secondsText(s.regrowEvery)}${s.amount < s.max ? ` (next in ${secondsText(Math.max(0, s.regrowEvery - s.regrowTimer))})` : ' (full)'}`]);
       }
@@ -776,8 +783,13 @@ export function describeEntity(world: World, id: number): EntityView | null {
         bars.push({ label: 'Growth', value: pl.progress, max: 1, tone: 'ok' });
         bars.push({ label: 'Care (water & weeding)', value: pl.care, max: 1, tone: pl.care < 0.3 ? 'warn' : 'ok' });
       }
+      if (hasEcology(world)) {
+        bars.push({label:'Productive condition',value:conditionAt(world,pl.x,pl.y),max:1,tone:conditionAt(world,pl.x,pl.y)<0.45?'warn':'ok'});
+        if (fieldResting(world,pl)) rows[0]=['State','Resting before another crop'];
+        if (pl.fallowUntil !== undefined) rows.push(['Prepared rest', pl.fallowUntil > world.tick ? `About ${((pl.fallowUntil-world.tick)/DAY).toFixed(1)} days remaining; recovery is not guaranteed by then` : 'The prepared rest has elapsed; the current ground condition still affects growth']);
+      }
       if (pl.state === 'ripe') rows.push(['Ready to harvest', `${pl.stock} grain, ${pl.seedStock} seed`]);
-      return { kind: 'plot', ...base, title: 'Field plot', subtitle: 'Farmland', rows, bars, notes: [], position: { x: pl.x + 0.5, y: pl.y + 0.5 } };
+      return { kind: 'plot', ...base, title: 'Field plot', subtitle: 'Farmland', rows, bars, notes: ecologyNotes(world,pl.x,pl.y), position: { x: pl.x + 0.5, y: pl.y + 0.5 } };
     }
     case 'pile':
       return { kind: 'pile', ...base, title: 'Pile of goods', subtitle: e.note || 'Left lying about', rows: [['Lying here since', agoText(world, e.since)]], bars: [], items: itemList(e.items), notes: ['Perishable food slowly spoils out in the open.'], position: { x: e.x + 0.5, y: e.y + 0.5 } };

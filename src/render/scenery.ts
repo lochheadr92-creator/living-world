@@ -1,3 +1,4 @@
+import { biological, conditionAt, fieldResting } from '../sim/ecology';
 import { hashUnit } from '../sim/rng';
 import type { Building, Grave, Pile, Plot, Site, Source, World } from '../sim/types';
 import { BuildingPainter, sack } from './buildings';
@@ -15,8 +16,16 @@ export class Scenery {
   private sites = new SiteDrawer(this.cache);
 
   // ───────── natural sources ─────────
-  drawSource(ctx: CanvasRenderingContext2D, s: Source, simT: number, wind: number): void {
+  drawSource(ctx: CanvasRenderingContext2D, s: Source, simT: number, wind: number, world?: World): void {
     const [x, y] = iso(s.x + 0.5, s.y + 0.5);
+    const condition = world && biological(s) ? conditionAt(world,s.x,s.y) : 1;
+    if (condition < 0.8) {
+      // Sparse, dry ground cover is a visual sign, not salvageable material.
+      ctx.fillStyle = condition < 0.45 ? 'rgba(173,140,83,0.65)' : 'rgba(165,148,87,0.35)';
+      ctx.beginPath(); ctx.ellipse(x,y+1,22,9,0,0,Math.PI*2); ctx.fill();
+      ctx.strokeStyle='#a39560'; ctx.lineWidth=1.4;
+      for(let i=0;i<(condition<0.45?6:3);i++){const px=x-18+i*7,py=y+5+(i%2)*2;ctx.beginPath();ctx.moveTo(px,py);ctx.lineTo(px-2,py-5);ctx.lineTo(px+2,py-3);ctx.stroke();}
+    }
     switch (s.type) {
       case 'tree': {
         const spr = treeSprite(this.cache, s.variant);
@@ -271,7 +280,8 @@ export class Scenery {
     const P = (a: number, b: number): [number, number] => iso(pl.x + a, pl.y + b);
     const rowsDone = pl.state === 'tilling' ? pl.progress : 1;
     const c = [P(0.05, 0.05), P(0.95, 0.05), P(0.95, 0.95), P(0.05, 0.95)];
-    const soil = pl.state === 'tilling' ? '#a98456' : pl.care > 0.55 ? '#6f4a2a' : '#80582f';
+    const condition = conditionAt(world,pl.x,pl.y);
+    const soil = condition < 0.45 ? '#b59b71' : condition < 0.8 ? '#98784d' : pl.state === 'tilling' ? '#a98456' : pl.care > 0.55 ? '#6f4a2a' : '#80582f';
     poly(ctx, c, soil);
     // furrows
     ctx.lineCap = 'round';
@@ -295,10 +305,15 @@ export class Scenery {
       ctx.lineTo(b[0], b[1] - 1.8);
       ctx.stroke();
     }
+    if (fieldResting(world,pl)) {
+      // Low protective cover on deliberately rested soil; not an inventory crop.
+      ctx.strokeStyle='#90a969';ctx.lineWidth=1.5;
+      for(let i=0;i<9;i++){const [px,py]=P(0.18+(i%3)*0.3,0.2+Math.floor(i/3)*0.28);ctx.beginPath();ctx.moveTo(px-2,py-3);ctx.lineTo(px,py);ctx.lineTo(px+2,py-4);ctx.stroke();}
+    }
     // plants
     if (pl.state === 'growing' || pl.state === 'ripe') {
       const g = pl.state === 'ripe' ? 1 : pl.progress;
-      const h = 3 + 14 * Math.pow(g, 0.85);
+      const h = 3 + 14 * Math.pow(g, 0.85) * (0.5+0.5*condition);
       const wilt = pl.care < 0.25 && pl.state === 'growing';
       for (let r = 0; r < nRows; r++) {
         const t = 0.14 + (r / (nRows - 1)) * 0.72;

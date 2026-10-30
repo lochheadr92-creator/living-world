@@ -1,3 +1,4 @@
+import { rememberedConditionCost } from './ecology';
 import {storedWaterOptions} from './stored_water';
 import { newActivity } from './activities';
 import { hasNightWaitBoundary } from './night_wait';
@@ -177,7 +178,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       if (s.act === 'gather' && hyp(s.x - b.x, s.y - b.y) < 3.5) crowd++;
     }
     const yieldF = Math.min(1, 0.45 + 0.18 * Math.min(u.est, 4));
-    const score = o.urgency * 0.85 * yieldF + 3 * (val / 28) - pen(e) - 26 * dng * tm.caution - Math.max(0, crowd - 1) * 5 - 0.5 * Math.max(0, 3 - u.est) * 2;
+    const score = o.urgency * 0.85 * yieldF + 3 * (val / 28) - pen(e) - 26 * dng * tm.caution - Math.max(0, crowd - 1) * 5 - 0.5 * Math.max(0, 3 - u.est) * 2 - rememberedConditionCost(world, b);
     cands.push({ b, est: u.est, e, val, score });
   }
   cands.sort((a, b) => b.score - a.score);
@@ -193,6 +194,8 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     else sc.add(o.baseLabel, o.urgency * Math.min(1, 0.45 + 0.18 * Math.min(c.est, 4)));
     sc.add('well-liked food', 3 * (c.val / 28));
     sc.add('walking', -pen(c.e));
+    const conditionCost = rememberedConditionCost(world, b);
+    if (conditionCost) sc.add(`remembered ${b.ecology} patch (observed at tick ${b.seen})`, -conditionCost);
     const skill = p.skills[type === 'fish_spot' ? 'fish' : 'forage'];
     sc.add('good at it', (skill - 1) * 5);
     const pay = payNudge(world, p, type,b.id);
