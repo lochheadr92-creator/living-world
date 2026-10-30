@@ -10,6 +10,16 @@ import { mealOf, previousMealOf } from './meals';
 import { missingMaterials } from './knowledge';
 import type { BeliefKind, Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, SourceType, World } from './types';
 
+/** The active worker's job owns its progress; operate activities do not advance their own duration counter. */
+export function workshopProgress(world: World, p: Person): number | undefined {
+  const a = p.activity;
+  if (!a || a.kind !== 'operate' || a.phase !== 'work') return undefined;
+  const b = world.byId.get(a.targetId);
+  const job = b?.ent === 'building' ? b.ops?.job : undefined;
+  if (!job || job.recipe !== (a.data.running ?? a.data.recipe) || job.total <= 0) return undefined;
+  return Math.max(0, Math.min(1, job.progress / job.total));
+}
+
 export interface Bar {
   label: string;
   value: number;

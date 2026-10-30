@@ -31,7 +31,7 @@ import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
-import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews } from './inspect_work';
+import { commitmentViews, concernViews, describeCartSections, describeFacility, describeSiteSections, grievanceViews, interactionViews, mealViews, toolViews, workshopProgress } from './inspect_work';
 import type { CommitmentView, InteractionView, MealView, Section, ToolView, GrievanceView } from './inspect_work';
 import type { Activity, Building, Entity, Intention, Items, ItemKind, NeedKey, Person, Plot, Source, World } from './types';
 import { NEED_KEYS } from './constants';
@@ -619,7 +619,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
           label: a.label,
           goal: a.goal,
           phase: a.phase,
-          progress: lessonProgress(world,p) ?? (a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0),
+          progress: lessonProgress(world,p) ?? workshopProgress(world,p) ?? (a.duration > 0 ? Math.min(1, a.progress / a.duration) : 0),
           target: targetText(world, a),
           blocked: a.blocked,
           kind: a.kind,
