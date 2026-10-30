@@ -153,3 +153,14 @@ The previously failing entry points, target tests and frozen rules-82 continuati
 Final full suite, browser/build and ordinary measurements use `autonomy-target83-final-*`
 logs, `target83-final-rendered` and `r83-final-*` roots; results are filled in when finished.
 The release results above retain the functional haul correction but predate this dependency fix.
+
+## Frozen continuation baseline
+
+Local runtime commit `26e8153` contains the corrected haul semantics and dependency direction.
+It is a candidate snapshot, not a release claim while final full regression is pending.
+The immutable rules-83 reference records ordinary river tick 3000 through 3600, including the
+actual 2/4-wood cancellation report; an accepted remembered repair saved through local absence
+discovery; and the actual cancellation conversation saved after hearing but before acknowledgement.
+`tests/helpers/v83ref.ts` and `scripts/v83_reference.ts` check full serialized hashes, exact twins
+and resource balance. The pinned check passes 1/1 in 6.00 seconds
+(`autonomy-target83-reference-check.log`), and typecheck passes. No prior reference was overwritten.
