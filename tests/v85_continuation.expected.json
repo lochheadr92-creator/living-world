@@ -1,0 +1,23 @@
+{
+  "source": "8d41d2af8b75d8449e81fd79a02f882f710b97a1, rules 85 before successor behaviour",
+  "ordinary": {
+    "saved": "73c4c97b700a8195c2ae3994aa2ae483f1c3895ddc13518767b5b670f307f252",
+    "uninterrupted": "c43633d005c9eae81b755f74d6482c48074c8e868b7929f1faa32de06e611627",
+    "continued": "c43633d005c9eae81b755f74d6482c48074c8e868b7929f1faa32de06e611627"
+  },
+  "building": {
+    "saved": "8e4ef559fe654123a67d7de7857a6206cd108b7c3c73a3ce03205aa594705dda",
+    "uninterrupted": "3b07487211679027e97c14fb45d936e2394a67183ba94f75c90dd37e9043ba41",
+    "continued": "3b07487211679027e97c14fb45d936e2394a67183ba94f75c90dd37e9043ba41"
+  },
+  "accepted": {
+    "saved": "734608b4abcd33e8120b06837448e2ffa0d252b049342107924efc8d3229e24f",
+    "uninterrupted": "7cd02ccd836e7dc6f0b2acfa19695f7329b428b50e5452604d364cc1b07a56d0",
+    "continued": "7cd02ccd836e7dc6f0b2acfa19695f7329b428b50e5452604d364cc1b07a56d0"
+  },
+  "refused": {
+    "saved": "b17bd68a6b5160341e8daa366d3900b0f12d7b39dc58a558c6eee8d5c85da584",
+    "uninterrupted": "8c79676cf5fad1e8d8670a4c983fc978f976e1bb983b824d91f4aec8dc7737a7",
+    "continued": "8c79676cf5fad1e8d8670a4c983fc978f976e1bb983b824d91f4aec8dc7737a7"
+  }
+}
