@@ -83,6 +83,10 @@ caused a parse failure; it was fixed and the final focused tests/build rerun. No
 
 ## Validation
 
+Follow-on audit: rules 77 corrects four operational readers that still treated resolved route histories as active failures.
+See `CORRECTED_FAILURES.md`; the rules-76 reference preserves its original behavior. The 76 tests below established route
+recording/correction but did not cover those downstream readers inside their remaining failure windows.
+
 - Full suite: **259 files / 1,742 tests passed**, 178.26 seconds (`autonomy-route76-full-tests.log`). This ran on frozen
   implementation/tests before the final count/first-attempt wording refinement. Final focused route/contact/predecessor
   tests: **15/15**, 12.19 seconds (`autonomy-route76-release-focused.log`). That refinement changes explanation text only.

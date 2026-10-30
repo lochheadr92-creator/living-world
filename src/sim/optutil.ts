@@ -6,7 +6,7 @@ import { findWaterAccessNear, isWalkable, isWaterAccess } from './registry';
 import { drive } from './needs';
 import { householdOf } from './buildings';
 import { homeBuildingOf, membersOf } from './households';
-import { estimatedAmount, isWaterBeliefId, recentFailure } from './knowledge';
+import { currentFailure, estimatedAmount, isWaterBeliefId, recentFailure } from './knowledge';
 import { isDependent, stageOf } from './people';
 import { dayFraction } from './environment';
 import type { Activity, ActivityKind, Belief, Building, Household, ItemKind, NeedKey, Person, SeenEntity, Stage, ToolKind, World } from './types';
@@ -232,9 +232,9 @@ export function rankWaterSpots(ctx: Ctx, limit = 2): WaterSpot[] {
   for (const k in p.failures) {
     const id = Number(k);
     if (!isWaterBeliefId(id)) continue;
-    const f = p.failures[id];
+    const f = currentFailure(world, p, id);
     const wb = p.beliefs[id];
-    if (!wb || world.tick - f.tick > 700) continue;
+    if (!f || !wb || world.tick - f.tick > 700) continue;
     trouble.push({ x: wb.x, y: wb.y, w: f.count > 1 ? 1 : 0.7 });
   }
   const caution = traitMods(p).caution;

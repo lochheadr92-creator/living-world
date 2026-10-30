@@ -7,7 +7,7 @@
 // kind, so that the promise, the foraging and the delivery all agree on what is being brought. Nothing here reads the
 // world's true sources, anyone else's pack, or any store; nothing here changes state.
 import type { FoodKind, Person, World } from './types';
-import { estimatedAmount } from './knowledge';
+import { currentFailure, estimatedAmount } from './knowledge';
 import { isAdultWorker, isDependent } from './people';
 import { runsRulesVersion } from './rulesversion';
 import { hyp } from './util';
@@ -25,7 +25,7 @@ export const SOURCE_FOOD: Readonly<Partial<Record<string, FoodKind>>> = { berry_
 
 /** A source's belief is a usable place to fetch food from: not lately found wanting, and believed to hold at least two. */
 function usable(world: World, B: Person, id: number): boolean {
-  const f = B.failures[id];
+  const f = currentFailure(world, B, id);
   if (f && world.tick - f.tick < 520) return false;
   const b = B.beliefs[id];
   return !!b && estimatedAmount(world, b) >= 2;

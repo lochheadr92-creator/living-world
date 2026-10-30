@@ -1,6 +1,6 @@
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
-import { estimatedAmount, learn } from './knowledge';
+import { currentFailure, estimatedAmount, learn } from './knowledge';
 import { BELIEF_NOUN } from './labels';
 import { isFacilityType } from './recipes';
 import { addLog } from './events';
@@ -44,7 +44,8 @@ export function pickNews(world: World, S: Person, L: Person, max = 2): Belief[] 
     if (b.kind === 'danger' && (b.amount <= 0 || world.tick - b.seen > 900)) continue;
     if (b.kind === 'water') continue;
     const isFood = b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot';
-    const depletedNews = isFood && b.amount <= 0 && S.failures[b.id] !== undefined && world.tick - S.failures[b.id].tick < 1100 && b.seen >= S.failures[b.id].tick - 60;
+    const failure = currentFailure(world, S, b.id);
+    const depletedNews = isFood && b.amount <= 0 && failure !== undefined && world.tick - failure.tick < 1100 && b.seen >= failure.tick - 60;
     if (isFood && b.amount <= 0 && !depletedNews) continue; // an old, stale 'empty' is not news
     if (b.kind === 'tree' && hashUnit(S.id, b.id, world.tick >> 7) > 0.08) continue;
     if (S.told[toldKey(L.id, b.id)] !== undefined && world.tick - S.told[toldKey(L.id, b.id)] < 3500) continue;

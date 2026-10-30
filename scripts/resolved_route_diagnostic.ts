@@ -1,0 +1,20 @@
+import {stage,addPerson,site,done,give} from '../tests/helpers/kit';
+import {makeSource} from '../src/sim/sources';
+import {observe} from '../src/sim/knowledge';
+import {generateOptions} from '../src/sim/decision';
+import {startActivity} from '../src/sim/activities';
+import {stepWorld} from '../src/sim/world';
+import {canObtain} from '../src/sim/social';
+import {T} from '../src/sim/types';
+const s=stage('resolved-route'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=76;
+const p=addPerson(s,'Mara',20.5,30.5,{age:35,hunger:100,thirst:100,energy:100});
+const target=site(s,'hut',20,40,p.hhId,p.id);const tree=makeSource(w,'tree',28,30,12);give(w,p,'axe');done(s);observe(w,p,tree);observe(w,p,target);
+const key=`gather:${tree.id}`;
+function start(){const ctx=generateOptions(w,p,true,true),o=ctx.options.find(o=>o.key===key),a=o?.make?.();if(!a)throw new Error('No legal gather: '+JSON.stringify(ctx.options.map(o=>o.key)));a.data.optKey=key;startActivity(w,p,a);return a;}
+const a=start();for(let y=0;y<w.H;y++)w.terrain[y*w.W+24]=T.DEEP;
+for(let n=0;n<20&&p.activity?.id===a.id;n++)stepWorld(w);
+console.log(JSON.stringify({phase:'failed',tick:w.tick,f:p.failures[tree.id],canObtain:canObtain(w,p,'wood')}));
+p.cooldowns.pause=1e12;while(w.tick<(p.cooldowns['opt:'+key]??0)+1)stepWorld(w);
+for(let y=0;y<w.H;y++)w.terrain[y*w.W+24]=y<12?T.DEEP:y<14?T.SHALLOW:y<16?T.SAND:T.GRASS;
+p.cooldowns.pause=0;const b=start();for(let n=0;n<500&&!p.failures[tree.id]?.resolved;n++)stepWorld(w);
+console.log(JSON.stringify({phase:'arrival',tick:w.tick,activity:b.id,f:p.failures[tree.id],canObtain:canObtain(w,p,'wood'),x:p.x,y:p.y}));

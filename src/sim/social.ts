@@ -39,7 +39,7 @@ import { foodUnits, pickFood, roomFor, transfer } from './economy';
 import { carryCap, isDependent, itemsToText, stageOf } from './people';
 import { addEvent, addFx, addLog, say as speak } from './events';
 import { addToHousehold, householdById, membersOf } from './households';
-import { estimatedAmount, learn, noteFailure } from './knowledge';
+import { currentFailure, estimatedAmount, learn, noteFailure } from './knowledge';
 import { adjustRel, relOf, spark } from './relations';
 import { hashUnit } from './rng';
 import * as D from './dialogue';
@@ -330,7 +330,7 @@ export function canObtain(world: World, B: Person, item: ItemKind): boolean {
   if (usesMaterialStock(world, 'promise') && rememberedMaterialStores(world, B, item).length) return true;
   const need = item === 'wood' ? 'tree' : item === 'stone' ? 'rock' : item === 'clay' ? 'clay_pit' : item === 'ore' ? 'ore_vein' : item === 'water' ? 'water' : null;
   const usable = (b: Belief): boolean => {
-    const f = B.failures[b.id];
+    const f = currentFailure(world, B, b.id);
     if (f && world.tick - f.tick < 520) return false; // they have just found it did not work
     return estimatedAmount(world, b) >= 1;
   };

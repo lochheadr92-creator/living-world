@@ -5,7 +5,7 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **76**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **77**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
 choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, learned personal daily preferences, personally scoped work amounts/durations, and private food/water preparation retaining a useful work purpose through a drink break. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
@@ -27,6 +27,14 @@ wholesale integration candidates; current rules 46/47 already own their integrat
 pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-oatizp` using 59 for tool precedence and
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
+
+### Rules 77 — corrected histories are not current failures
+
+Predecessor 76 was pinned at `c1c9fcc`. `CORRECTED_FAILURES.md` records a physical arrival that still blocked the material
+promise check, and the four corrected operational readers: material/food availability, water route cost and depletion news.
+Full suite 261 files / 1,748 tests, focused 5/5, rendered 5/5, typecheck and build pass. The three fixed five-day worlds again
+have no route failures or corrections: no ordinary activation/benefit claim. Existing history and rules-76 continuations
+are preserved. Task-specific helper learning remains next; wider programme rows remain incomplete.
 
 ### Rules 76 — bounded local route experience
 

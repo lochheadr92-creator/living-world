@@ -198,6 +198,12 @@ export function recentFailure(world: World, p: Person, id: number, within: numbe
   return undefined;
 }
 
+/** Operational readers must not mistake retained, corrected route history for a present failure. */
+export function currentFailure(world: World, p: Person, id: number): Person['failures'][number] | undefined {
+  const f = p.failures[id];
+  return f?.resolved && runsRulesVersion(world, 77) ? undefined : f;
+}
+
 export function clearFailure(p: Person, id: number): void {
   if(p.failures[id]?.route){p.failures[id].resolved=true;return;}
   delete p.failures[id];
