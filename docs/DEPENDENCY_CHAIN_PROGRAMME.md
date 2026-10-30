@@ -42,15 +42,18 @@ needs and historical blocker age, `4f68699` practical childcare (56), `a465c2e` 
 through integration commits `5033c9e`, `4136255` and `9beba7c`.
 
 **Resume at the next actual transition, not a new programme.** Inspect this register
-and current branch/process state first. `viewer_evidence/seed58-river45/final.json`
-is the unmodified current-rules ordinary save at tick 108,000; source/settings hashes
-are in its sibling provenance file. There were 65 cart-demand samples and 33
-missing-hammer blocker samples, six crafted hammers overall, but no cart. The final
-retained hammer plans (Alma/Arlo) have material options; do not assume seed blockage
-explains those remaining failures. Trace actual offered choices, selected activities,
-interruptions, reservations and workshop component stock across the next demand
-episode. Before another simulation change, record the rules-58 predecessor and
-verify the next unused version; never regenerate the pinned 53–57 references.
+and current branch/process state first. The 2026-10-30 continuation (below, "Owner
+autonomy and environment expansion — capability map") traced the rules-58 cart-demand
+episodes gate by gate (`scripts/cart_trace.ts`, `viewer_evidence/tool58-river35-trace/`),
+found the rules-57 lacking-tool connection naming a convenience saw where the cart's
+required hammer stood in the way, pinned the rules-58 reference (`8dafc2c`) and
+delivered rules 59 (`docs/REQUIRED_TOOL_PRECEDENCE.md`). The rules-59 ordinary river
+world (`viewer_evidence/tool59-river45/`) names the hammer and offers the borrow ask,
+and changes no decision in 45 days: the four cart wanters are each inside another
+project the whole time and the cart is outranked by the planks and bricks the same
+sites want. Those two grounds are recorded in WS7 as design tensions, not gates to
+patch. Before another simulation change, record the rules-59 predecessor and verify
+the next unused version; never regenerate the pinned 53–58 references.
 
 All remaining expanded rows stay in scope: whole winter food flows, home recovery and
 limited labour, shared maintenance acquisition/replacement, care through interiors
@@ -261,6 +264,33 @@ Dated evidence reused here is from `docs/EXPERIENCE_CONNECTIONS.md`, `docs/STORE
   both have real material options at that snapshot. Next trace actual selection,
   interruption and workshop component flow over a cart-demand episode rather than
   assume the former seed blockage explains every missing cart.
+- **Rules-59 tool precedence continuation (2026-10-30):** the trace was run
+  (`scripts/cart_trace.ts`; every demand sample decomposed in
+  `viewer_evidence/tool58-river35-trace/demand_episodes.json`, 38 demand samples of
+  6,265 adult samples; the 45-day run before it had identical counts). Findings, all
+  verified in the samples: the planner's lacking tool during cart demand was the saw
+  (13) or none (20), the hammer only 5 times, because the site's planks were planned
+  before the cart and the first tool found stood; every demand sample had another
+  project live (hut 15, food reserve 9, roof 6, hoe 7, spear 1 of 38) so no hammer plan
+  could be adopted; 22 / 38 samples had a hammer carrier in sight and one borrow ask
+  (for a saw) was offered; the six hammer holders never met the cart's grounds (1,303
+  hammer-in-pack samples without demand); no cart batch was ever wanted, and in the
+  one sample with hammer and demand together the batch planner wanted planks. Rules
+  59 repairs the first fact (`production.ts noteToolWanted`, contract
+  `docs/REQUIRED_TOOL_PRECEDENCE.md`, five contracts, lab `rich-no-tool-precedence`,
+  rules-58 reference pinned first). Ordinary rules-59 river 45 days: hammer (required)
+  named in 18 / 38 demand samples, hammer borrow asks offered in 2 (utilities 20.8–23.3
+  against tops of 36.5–43.2), no craft (no wanter held two stone), and a final world
+  physically identical to rules 58 apart from the ask cooldown keys. Six hammers,
+  **zero carts, zero loans**. Status unchanged: Impl `yes` · Contract `yes` · E2E `yes`
+  (staged) · Ordinary `partial` · Rendered `yes` · Aggregate `unproven`. **Remaining
+  grounds, recorded as design tensions rather than gates:** (a) the people who want a
+  cart are occupied by the project that grounds the want, and the want outlives
+  neither the project nor the six-day hauling window; (b) the cart batch is outranked
+  by site planks/bricks whenever both are wanted. A demand grounded in witnessed
+  hauling by others, or a yard-side standing want like the smithy's charcoal (rules
+  10), would be a new mechanism needing its own evidence; raising the cart's weight,
+  letting a hammer plan jump the project slot or granting hammers is excluded.
 
 ### WS8 Public projects and civic benefit
 - **Current.** Rules 42 `civic_benefit.ts recordCivicBenefit`, one call site after a successful `withdraw`
@@ -641,7 +671,63 @@ Population 31/22/8 stays constant in this short window; no generational claim.
   demonstrated bottleneck before optimisation. No history discarded or simulation cache
   added; these observations do not prove indefinite growth bounds or a speed improvement.
 
+### Owner autonomy and environment expansion — capability map (2026-10-30)
+
+Baseline refreshed at `7b2a680` (rules 58, main = this branch's base), then rules 59
+delivered on top. Classification follows the owner brief: **connected** (implemented
+and connected end to end in the current product world), **incomplete** (implemented,
+a named transition missing), **absent** (no owner in source), **measure** (ordinary
+behaviour unknown until measured; no defect may be inferred before then). Each row
+names its source owner, rules boundary, known evidence, missing transition and the
+observable condition that would close it. Rows already carried by WS2–WS21 above are
+referenced, not duplicated; this map adds the brief's §4–§12 areas that no workstream
+yet owns. Status words elsewhere in this file are unchanged by the map.
+
+| Brief area | Class | Source owner · rules boundary | Known evidence | Missing transition | Observable completion |
+|---|---|---|---|---|---|
+| §4 time budget, spare time | measure | `needs.ts`, `decision.ts`, `relief.ts`, `leisure.ts` (28) | leisure contracts; no living-person tick budget by exclusive activity exists | an instrument counting sleep / eat-drink-warm / travel / work / social / leisure / waiting / failure-recovery ticks, critical-need exposure, uninterrupted work and aborted journeys per person; no retuning before it | an adequately supplied household shows repeated discretionary periods; a disrupted one changes rhythm for a recorded reason |
+| §4 learned routines | absent | none (night/supper/winter practices are the nearest: `intent.ts` night, `household_practices.ts`, `winter_practice.ts`) | — | personal, interruptible, season/injury/dependant-sensitive preferences learned from repeated success | the inspector shows a routine with its origin; the person deviates for a visible reason |
+| §5 bounded hierarchical intentions | incomplete | `intent.ts` (six kinds), `batch_plan.ts` (50, one stage before) | plan contracts; batch persistence; succession | a goal with prerequisite steps, alternatives, retries, cycle/unreachable rejection, revalidation at boundaries, claims released on every ending | one multi-step project survives a drink break and an intermediate save, loses a source, takes a legitimate alternative and completes; a matched impossible case ends with a reason |
+| §5 bounded waiting beyond daylight | incomplete | `night_wait.ts` (27), `batch_plan.ts` wait step, `layout_claims.ts` occupant wait (30) | contracts | waiting for a communicated meeting, a promised delivery or temporary occupancy with cost, timeout and next choice | a wait is shown with its reason and ends by arrival or timeout |
+| §5 modest foresight, trip provisioning | incomplete | `provision.ts` season cue (2/46), `winter_shelter.ts` (47), `relocation.ts` supplies (54) | contracts, staged journeys | preparing food/water/tools for an ordinary long trip and keeping a return margin | a traveller provisions before leaving and turns back short of margin |
+| §6 retention audit, experience summaries | measure → incomplete | `memory_retention.ts` (25), `social_memory.ts`, `knowledge.ts`, `reputation.ts` | retention tests; request receipts bounded | audit of expiry against revisit/obligation/meeting intervals; bounded summaries with source, tick, confidence after operational records expire | a witnessed event survives the relevant delay and save/load and changes an eligible later choice; an uninformed person does not react |
+| §6 source/route/helper reliability learning | incomplete | `learning.ts` (payoff), `knowledge.ts noteFailure`, `relations.ts` trust | contracts | experienced source reliability, repeated route failure, task-specific helper reliability; willingness kept apart from ability; repeated reports of one event not multiplied | the inspector shows why a source or helper is avoided and the choice differs from an uninformed person's |
+| §6 structured cooperation speech | incomplete | `social.ts` requests/commitments, `dialogue.ts`, `customers.ts` (51), `delivery_place.ts` (48) | contracts, staged deliveries | ask-ability/location, explain inability, counter-offer, delay update, cancel, acknowledge receipt as structured acts with local evidence | a renegotiated promise is visible with both sides' knowledge; prose never creates a fact |
+| §6 conflicting reports, revision | incomplete | `reputation.ts` (teller, age, hearsay) | contracts | revision rule when a later observation contradicts a rumour; disagreement recorded only on grounds | a corrected rumour stops influencing choices by the defined rule |
+| §6 proportionate dispute consequences | measure | WS19 | WS19 | WS19 audit of commitment status attribution first | WS19 |
+| §7 household coordination, complementary work | incomplete | `households.ts`, `provision.ts`, `shelter.ts`, `succession.ts` (53) | staged per workstream | members communicate intended supply, avoid duplicate trips, reconsider on provider loss; private intention / accepted obligation / delivered contribution kept distinct | two members take complementary steps for one household goal and the inspector shows who intended, promised and delivered what |
+| §7 food/water assistance across interiors, full packs, non-berry food | incomplete | WS2 (45), WS17 (56) | WS2/WS17 | lawful entrance, agreed deposit, shared meal, partial delivery; never through a wall | WS2 acceptance |
+| §7 care journeys, handback | incomplete | WS17 | WS17 | WS17 | WS17 |
+| §7 home repair/replacement after collapse, limited labour | incomplete | WS4 (47), `buildings.ts` decay | WS4 | WS4 | WS4 |
+| §7 succession for incapacity/departure | incomplete | WS11 (53) | WS11 | WS11 | WS11 |
+| §7 relocation, splits, return | incomplete | WS12 (54) | WS12 | WS12 | WS12 |
+| §7 births, ageing, knowledge handover, viability | measure | WS20, WS10 | WS20 | WS20 | WS20 |
+| §8 cart transition | incomplete | WS7 (55/57/58/59) | this continuation | two design tensions recorded in WS7 | an ordinary cart built, loaded, unloaded and its load used |
+| §8 recipe chains to use | incomplete | WS6 (50/52/57/58) | WS6 | ore→iron→forged use, bread eaten, every chain to use with denominators | WS6 acceptance |
+| §8 demand to supply, inter-settlement journeys | incomplete | WS9 (51), `exchange_journeys.ts` | WS9 | WS9 | WS9 |
+| §8 winter reserve whole flow | incomplete | WS3 (46) | WS3 | WS3 | WS3 |
+| §8 shared upkeep | incomplete | WS16 | WS16 | WS16 | WS16 |
+| §9 local patch condition, overharvest, fallow | absent | `sources.ts` (amount, max, regrow timer), `farming.ts`, `hardship.ts regrowRate` | regrowth is a timer to a fixed max; no health/capacity state | bounded long-term capacity distinct from stock, reduced by repeated harvest/cultivation, restored by rest/tending; people observe and respond | two comparable patches diverge under different pressure and recover under different treatment; save/load and conservation hold |
+| §9 changing water supply | absent | lake tiles and `waterDist` (`types.ts`), `fetch_water` | drinking and fetching draw from no stock | bounded water bodies/sources with recharge, extraction and accessible shore; revalidation at travel and extraction; constructed well/collector as a bounded access facility | a small source dries, a person learns it locally and completes a feasible response or fails visibly |
+| §9 finite depletion adaptation | measure | WS18, `geology.ts` (26) | WS18 | WS18 | WS18 |
+| §10 persistent hazards, damaged access | incomplete | `hardship.ts floodTick` (instantaneous), `wildlife.ts`, `pathfinding.ts` terrain, `world.ts roadsTick` | contracts | footprint, onset, duration, recovery and signs; remembered dangerous routes; hazard after departure, outdated warning, access change while indoors | the same place is visibly changed after damage, stays so across save/load and alters a later feasible action |
+| §10 material marks, debris, salvage | incomplete | `buildings.ts` salvage/piles, stumps (25), recipe waste as a sink | contracts | worn plots, offcuts/rubble as physical by-products counted once, bounded collection/disposal | visible salvage with a ledger origin; cleanup has a cost |
+| §11 shared places for a reason, seating/porch, meeting arrangements | incomplete | `leisure.ts` (28), `occasions.ts`, `meals.ts`, `tableeating.ts` | contracts | meeting arrangements with arrival, waiting, cancellation; affordances only where missing | repeat visits and relationships form around a useful place; a reserved person chooses a quieter one |
+| §12 causal inspector across time | incomplete | WS13, `history.ts`, `inspect.ts`, `historical_index.ts` | WS13 | bounded references from decision → observation → belief → option → activity → transfer → outcome → later consequence; "known then" versus "true now"; unrecorded/compacted said so | a viewer answers the brief's seven questions through a pause and save/load without state or RNG change |
+| §12 AI proposal path | absent | `agent/protocol.ts` (selects one option, bounds, notes), `external.ts` | transcripts replay | versioned, schema-validated intention proposals translated by the engine into ordinary actions, rejecting unknown ids, stale ticks, illegal bounds, impossible dependencies and repeats, recorded for replay | invalid proposals yield truthful rejection and safe fallback with no partial mutation; historical transcripts replay under their own protocols |
+
 ### Continuation execution log
+
+- Rules-59 (2026-10-30): branch `ccr-8527b59e-oatizp` from `7b2a680`; the
+  rules-58 reference `8dafc2c` recorded first (`npx vitest run tests/v58_continuation.test.ts`
+  passed, 25.5 s). `scripts/cart_trace.ts` runs: rules 58 one day (smoke, pure), rules
+  58 45 days (261.7 s, pure, conserved) and 35 days (196.5 s) with the full
+  decomposition, rules 59 45 days (268.2 s). `npm run typecheck` exit 0. Focused
+  `tests/tool_precedence.test.ts` 5/5; `tests/tool_prerequisite.test.ts` and
+  `tests/rules_version.test.ts` with it 40/40; goldens, v57/v58 continuations,
+  batch_plan, transport, seed_storage and inhabitant_protocol 34/34 (goldens unchanged:
+  no ordinary golden case differs under rules 59). Full-suite and build results are in
+  the slice entry below.
 
 - Second integrated boundary (rules 54): **208 files / 1,452 tests**, 279.03 s, exit 0;
   typecheck/build/diff check passed. Mature-world measurements and existing care/upkeep
