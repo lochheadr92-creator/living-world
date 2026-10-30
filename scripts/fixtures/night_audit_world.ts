@@ -5,8 +5,10 @@ import { createBuilding } from '../../src/sim/buildings';
 import { observe } from '../../src/sim/knowledge';
 import { newActivity, startActivity } from '../../src/sim/activities';
 import { updateEnvironment } from '../../src/sim/environment';
-export function nightAuditWorld(){
-const w=testKit.flatWorld(currentWorldSettings('normal','staged-night-audit',{immigration:false}));
+export function nightAuditWorld(rulesVersion?:number){
+const settings=currentWorldSettings('normal','staged-night-audit',{immigration:false});
+if(rulesVersion!==undefined)settings.rulesVersion=rulesVersion;
+const w=testKit.flatWorld(settings);
 const rng=new RNG(7);
 const p=testKit.addPerson(w,rng,{name:'Ada',x:40.5,y:40.5,hunger:95,thirst:95,energy:95});
 const q=testKit.addPerson(w,rng,{name:'Ben',x:12.5,y:40.5,hunger:95,thirst:95,energy:95});

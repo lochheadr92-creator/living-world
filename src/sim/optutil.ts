@@ -1,4 +1,5 @@
 import { isThreat } from './wildlife';
+import { rememberedDry, rememberedWaterCost } from './water_access';
 import { hasKeptTarget } from './kept_target';
 import { indoorHome, sameSpace } from './habitation';
 import { moveSpeed, standSpotFor } from './activities';
@@ -213,6 +214,7 @@ export function fleeRadius(p: Person): number {
 }
 
 export interface WaterSpot {
+  supplyCost: number;
   b: Belief;
   e: number;
   dng: number;
@@ -240,11 +242,13 @@ export function rankWaterSpots(ctx: Ctx, limit = 2): WaterSpot[] {
   const caution = traitMods(p).caution;
   const all: WaterSpot[] = [];
   for (const b of beliefsByKind(p, ['water'])) {
+    if (rememberedDry(world,b)) { addBlocked(ctx,'drink','Drink at the water',b.id,'personally remembered dry shore; no known recovery yet','water'); continue; }
     const e = eta(ctx, b.x, b.y);
     const dng = dangerAt(ctx, b.x, b.y);
     let tr = 0;
     for (const t of trouble) if (hyp(t.x - b.x, t.y - b.y) < 8) tr = Math.max(tr, t.w);
-    all.push({ b, e, dng, trouble: tr, cost: pen(e) + 30 * dng * caution + 16 * tr });
+    const supplyCost=rememberedWaterCost(world,b);
+    all.push({ b, e, dng, trouble: tr, supplyCost, cost: pen(e) + 30 * dng * caution + 16 * tr + supplyCost });
   }
   all.sort((a, b) => a.cost - b.cost);
   const picked: WaterSpot[] = [];

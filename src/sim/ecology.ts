@@ -1,4 +1,5 @@
 import { DAY } from './constants';
+import { nearbyWaterFraction } from './hydrology';
 import { runsRulesVersion } from './rulesversion';
 import type { Belief, Plot, Source, World } from './types';
 
@@ -61,7 +62,9 @@ export function updateEcology(w: World): void {
     if (e && e.ent !== 'source' && e.ent !== 'plot') continue;
     if (e?.ent === 'source' && !biological(e)) continue;
     if (e?.ent === 'plot' && (e.state === 'growing' || e.state === 'ripe' || e.state === 'tilling')) continue;
-    const moisture = e?.ent === 'source' && e.type === 'fish_spot' ? 1 : Math.min(1.5, 0.5 + w.weather.rain + (w.waterDist[i] < 9 ? 0.25 : 0));
+    const supply=nearbyWaterFraction(w,i%w.W,Math.floor(i/w.W),8);
+    const nearbyMoisture=w.waterDist[i]<9?0.25*(supply===undefined?1:Math.min(1,supply/0.25)):0;
+    const moisture = e?.ent === 'source' && e.type === 'fish_spot' ? (supply===undefined?1:Math.min(1,supply/0.25)) : Math.min(1.5, 0.5 + w.weather.rain + nearbyMoisture);
     const climate = (w.weather.temp < 4 ? 0.25 : 1) * (w.hardship?.kind === 'dry' ? 0.3 : 1);
     const rested = e?.ent === 'plot' && fieldResting(w, e) ? 2 : 1;
     c.condition = Math.min(1, c.condition + (0.06 * 60 / DAY) * moisture * climate * rested);

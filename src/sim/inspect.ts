@@ -1,4 +1,5 @@
 import { biological, conditionAt, ecologyNotes, fieldResting, hasEcology } from './ecology';
+import { describeWater } from './inspect_water';
 import {hasPromiseExpectations,personalRequests} from './promise_expectations';
 import { deceasedById } from './historical_index';
 import {describeRouteExperience} from './route_learning';
@@ -700,6 +701,7 @@ export interface EntityView {
 }
 
 export function describeEntity(world: World, id: number): EntityView | null {
+  const water=describeWater(world,id);if(water)return water;
   const e = world.byId.get(id);
   if (!e) return null;
   if (e.ent === 'person') return null;

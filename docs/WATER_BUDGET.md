@@ -91,3 +91,141 @@ depleted source and replenished source with source history, distinct from the in
 belief. A fresh current-protocol live/stub replay must actually expose the new coarse signs.
 Ordinary measurement will keep the fixed three seeds and adverse cases; no scarcity tuning to
 force a pleasing story or claim of household/survival benefit without a paired experiment.
+
+## Rules 87 candidate — connected implementation and predeclared measurements
+
+Predecessor 86 is published at `e26ac6f`, runtime `21537ba`, immutable continuation `8b58b93`.
+`hydrology.ts` now owns connected terrain-water bodies, deterministic initialization and weather
+accounting. Each shallow cell contributes two water units; each deep cell eight. Initial stock
+is included before the first ledger snapshot. Captured rainfall is two units per tile/day at
+full rain, capped by capacity; overflow is never captured inventory. Evaporation is
+`(0.04 + max(0, temperature-10)*0.004)` units per tile/day, tripled during a dry spell. Updates
+run every 60 ticks with fractional remainders below one. These are declared simulation parameters,
+not empirical hydrology or a claim of balanced ordinary scarcity. There is no unlimited recharge.
+
+Actual draws reduce that body; fetching transfers to a real pack with a transfer hook and no
+creation entry, and shore drinking consumes one unit per completed eight-tick sip for the
+existing WATER_VALUE relief. This deliberately adopts the existing carried/stored sip timing
+for current shore drinking; rules 86 and older retain their continuous shore-drinking path.
+Every draw revalidates current physical contact, exterior access, capacity and remaining water.
+Partial completion, interrupted work and competition remain separate. Stored water, household
+delivery, crop watering and carried drinking reuse their existing inventories and actions.
+
+`water_access.ts` owns actual shore contact and coarse wet/low/dry observations. Low means less
+than a quarter of capacity; dry means less than one unit. Fresh dry memories exclude that access
+for half a day, allowing existing search/known alternatives; later reconsideration retains a
+fading uncertainty cost over three days. Household fetching, promises, trip preparation, advice
+and relocation use personal memories. Arrival checks current local availability. No remote
+live stock enters these decisions. Physically associated dry fish sources lose their remaining
+fish with a spoilage entry; low water slows renewal. Adjacent ecology recovery uses actual water
+availability in its environmental moisture term. Terrain/path geometry is preserved.
+
+Natural water is selectable in the existing map and inspector with view-only identifiers; it
+does not become an invented entity or container. Dry/low colors and current drawn/rain/loss
+counters are visible. AI protocols 25/26 expose observation 14 coarse dated water signs through
+the existing offer validator; protocols 23/24 retain observation 13. Lab removal is
+`rich-no-water-budget`. No new well is justified yet by the inspected ordinary access evidence;
+that conditional requirement remains open if an unmet facility need is demonstrated.
+
+Focused contracts currently pass **19 tests / 3 files**, including frozen 86, actual shore
+depletion, partial-sip save, alternative-source drinking after departure, fetching and useful
+carried consumption, lost pack room, interrupted work, current fish loss, rain/evaporation,
+unknown source purity, malformed history, no-known-water search, and indoor execution rejection.
+Browser `water87-rendered` passes **10/10** with screenshots visually inspected: the same small
+source is wet, dries after Ada's actual two sips, and refills under declared sustained rain.
+The larger source stays wet. A real canvas click opens the water inspector; selection survives
+a tick and the mid-drink save continues exactly. This is staged evidence, not ordinary scarcity.
+
+The first ledger/version contract run deliberately found the two missing integration boundaries
+before they were connected (`autonomy-water87-before.log`, 2 failed / 1 passed). Subsequent test
+fixture mistakes are retained: water observations belong in `remembered.water`, and live runs
+return a rewound world rather than mutating the original reference throughout; raw belief removal
+also violated its derived index, and a made-up indoor object was not the engine's numeric home
+reference. Fixtures now use the real schema, returned world, deletion API and execution boundary.
+No valid engine expectation or historical continuation was weakened to pass these checks.
+
+Ordinary predeclaration: Normal, rich/current 87, no immigration, fixed river/forest/meadow,
+five days (12,000 ticks), 170 seconds per seed. `scripts/water_observe.ts` records source budgets,
+actual shore/carried/stored drink and fetch starts/endings, repeated wet/low/dry memories,
+condition-reason choices and bounded counterfactual removal samples, plus failures and useful
+consumption. Each run keeps an exact unobserved twin, 100 full-save purity checks, daily ledger
+checks and a validated final save. Zero depletion or adaptation remains a valid result. Full
+regression, ordinary results, long drought/recovery and mature Large cost are pending here until
+their actual results are recorded; earlier ecology results do not establish those claims.
+
+## Five-day ordinary results
+
+All fixed runs reached 12,000 ticks, with 2,800 repeated living-person samples, 100 full-save
+purity checks, exact unobserved twins, daily conservation and exact validated final saves.
+Each retains 28 living people and zero deaths; that is not a survival benefit result.
+
+| Seed | Shore drink starts / success / interrupted | Fetch starts / success | Carried drink success | Drawn / rain captured / evaporated units | End stock / capacity | Seconds |
+|---|---|---|---:|---|---|---:|
+| river | 220 / 214 / 5 | 3 / 3 | 11 | 406 / 0 / 130 | 2,244 / 2,780 | 34.24 |
+| forest | 216 / 198 / 15 | 5 / 5 | 14 | 401 / 508 / 149 | 3,008 / 3,050 | 29.17 |
+| meadow | 215 / 205 / 9 | 2 / 2 | 10 | 395 / 328 / 113 | 2,040 / 2,220 | 29.97 |
+
+One/three/one shore drinks are still active at the horizon; starts are not completions. There
+are zero failed/partial water endings and zero stored-drink starts in these windows. All nine
+natural bodies remain wet. Repeated wet-memory counts are 51,624 / 42,113 / 40,605; low/dry
+memories, dry-source blocks, condition-reason starts and sampled choice changes under removal
+are all zero. Small-source depletion, recovery, remembered alternatives and no-known-water
+search remain staged mechanism evidence. Do not describe ordinary danger diversion as a
+response to the new hydrological scarcity layer. Final save sizes: 3,295,529 / 2,767,952 /
+2,543,574 bytes, not mature Large measurements. Source manifests and artifacts live at
+`autonomy_evidence/r87-{river,forest,meadow}`; observer logs retain exit 0.
+
+Reproducible ordinary story (`scripts/water_story.ts`, fixed rules 87, same settings): river,
+Yan #1134 completes two wood at tree #582 at tick 122, chooses his personally observed wet
+access #1000232 at 123 because of thirst, walks there and consumes one real unit from body
+#3644 at 169, raising thirst satisfaction to 93.9. He then chooses discretionary wandering
+at 170. This is a recorded need → observation → actual draw → relief → next choice chain,
+not proof that the water budget increased leisure. The later attempt to speak to Petra #1132
+fails at 286 because she is busy, and remains in the story.
+
+Preserved adverse water journey: forest, Talia #937 heads for remembered access #1000292 at
+442 but is interrupted at 464 by nearby danger, before any sip. She flees, later tries asking
+#908 for water, and at 579 chooses another remembered access, #1000192. No water appeared in
+her pack or body draw counter merely for starting the journey. Both 800-tick story replays
+match exact unobserved twins and balanced ledgers. The water observer's `adverse` array contains
+failed/partial endings; these interruptions are explicitly counted and retained in its early
+`stories` and the dedicated reproduction, rather than being silently called successes.
+
+## Historical fixture finding from the full regression
+
+`autonomy-water87-full-tests.log` passed **1,924 tests** and failed three historical provenance
+fixtures (284 files, 402.79 seconds). `v27_save_provenance.test.ts` created the latest night
+world, then rewrote only its rules number to 26, 27 or 28. That left rules-87 water inventory
+inside a purported historical save, correctly refused by `validateWater`. The fixture now
+accepts an explicit creation-time version; provenance and storage callers request their real
+historical version before initialization. All original marker/round-trip assertions remain.
+An added negative contract continues to reject a relabelled current water world. The current
+runtime and historical validator were not relaxed. Corrected focused verification is **39
+tests / 5 files**, including a new physical source → fetched water → crop-care → saved-result
+chain (`autonomy-water87-save-fixture-fixed.log`). The final full rerun is recorded below when
+finished. Ordinary and browser runtime evidence is unchanged by these fixture-only repairs.
+
+## Release review
+
+Fresh review traced initialization → personal observation → offered shore action → physical
+contact/capacity → draw/transfer or consumption → save validation → current-world inspection.
+Natural stocks enter initial totals once; actual rain is creation, extraction is a transfer or
+consumption and actual evaporation/fish loss is spoilage. Distant choices use dated signs.
+No changes to old continuation fixtures were needed. The historical save-fixture defect above
+was repaired at creation rather than weakening the validator. Typecheck passes after that fix;
+release build passes with the existing Vite import-extension/bundle warnings. The existing timer
+overflow warning is retained in test logs. No survival, aggregate benefit, ordinary scarcity or
+mature-world performance claim follows from these checks.
+
+Existing modules touched, and why: world/worldgen/scenes/economy/save own lifecycle, stock and
+persistence; act_resource owns physical drinking/fetching; perception/knowledge consumers own
+local supply expectations; sources/ecology own real water-dependent productivity; pathfinding
+terrain remains unchanged; the existing map, inspector and AI observation expose actual new
+state within their distinct viewer/personal boundaries. New hydrology and water-access modules
+own finite source accounting and local contact, keeping those responsibilities out of central
+world and activity modules.
+
+Final full regression: **284 files / 1,928 tests passed in 401.29 seconds**
+(`autonomy-water87-final-full-tests.log`). Typecheck and release build pass; rendered checks
+10/10 and the three ordinary exact-twin runs above use this unchanged runtime. Immutable
+rules-87 reference is recorded from the following runtime commit before successor edits.

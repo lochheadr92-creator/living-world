@@ -1,9 +1,10 @@
 import { productiveRate } from './ecology';
+import { nearbyWaterFraction } from './hydrology';
 import { hasMemoryRetention } from './memory_retention';
 import { hubWithin } from './settlements';
 import { regrowRate } from './hardship';
 import { SAPLING_TICKS, SOURCE_ITEM, SOURCE_MAX, SOURCE_REGROW } from './constants';
-import { ledgerCreate } from './economy';
+import { ledgerCreate, ledgerSpoil } from './economy';
 import { addFx } from './events';
 import { hashUnit } from './rng';
 import { isFreeLand, newId, registerSource, unregisterSource } from './registry';
@@ -89,8 +90,14 @@ export function updateSources(world: World): void {
       }
       continue;
     }
+    const waterFraction=s.type==='fish_spot'?nearbyWaterFraction(world,s.x,s.y):undefined;
+    if(waterFraction===0){
+      if(s.amount>0){ledgerSpoil(world,'fish',s.amount,'fish lost in a dry source');s.amount=0;}
+      continue;
+    }
+    const waterRate=waterFraction===undefined?1:Math.min(1,waterFraction/0.25);
     if (s.regrowEvery > 0 && s.amount < s.max) {
-      s.regrowTimer += rainBoost * regrowRate(world) * productiveRate(world, s.x, s.y);
+      s.regrowTimer += rainBoost * regrowRate(world) * productiveRate(world, s.x, s.y) * waterRate;
       if (s.regrowTimer >= s.regrowEvery) {
         s.regrowTimer = 0;
         s.amount++;

@@ -1,3 +1,5 @@
+import { selectedWater } from '../sim/inspect_water';
+import { waterSign } from '../sim/hydrology';
 // Two small floating labels, each a single reused element:
 //  * the UI tooltip: any element with a data-tip attribute (delegated, so panels can scroll or clip freely)
 //  * the hover tooltip that follows the pointer over things in the world (driven by game.hover)
@@ -187,16 +189,17 @@ export function createHoverTip(ctx: UICtx): Part {
       const hv = game.hover;
       if (!hv || pressed) return hide();
       const e = game.world.byId.get(hv.id);
-      if (!e) return hide();
-      let name: string;
+      const water=selectedWater(game.world,hv.id);
+      if (!e && !water) return hide();
+      let name='';
       let act = '';
-      if (e.ent === 'person') {
+      if(water){name=waterSign(water)==='dry'?'Dry water source':waterSign(water)==='low'?'Low water source':'Natural water source';act=`${water.amount} of ${water.capacity} water units; click for history`;} else if (e?.ent === 'person') {
         name = e.name;
         act = personActivity(e);
-      } else if (e.ent === 'animal') {
+      } else if (e?.ent === 'animal') {
         name = describeEntityName(game.world, e);
         act = e.type === 'deer' ? (e.state === 'retreat' ? 'bolting' : 'grazing') : WOLF_STATE[e.state] ?? '';
-      } else {
+      } else if(e) {
         name = describeEntityName(game.world, e);
         act = thingStatus(game.world, e);
       }

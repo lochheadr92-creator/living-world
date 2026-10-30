@@ -1,3 +1,4 @@
+import { rememberedDry, rememberedWaterCost } from './water_access';
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
 import { currentFailure, estimatedAmount, learn } from './knowledge';
@@ -91,10 +92,10 @@ export function answerInfo(world: World, B: Person, A: Person, infoKind: string)
   let bs = -1e9;
   for (const k in B.beliefs) {
     const b = B.beliefs[k as unknown as number];
-    if (!kinds.includes(b.kind)) continue;
+    if (!kinds.includes(b.kind) || (b.kind === 'water' && rememberedDry(world,b))) continue;
     const est = estimatedAmount(world, b);
     if (b.kind !== 'water' && b.kind !== 'tree' && est < 1) continue;
-    const score = -hyp(b.x - A.x, b.y - A.y) * 0.4 + Math.min(est, 5) * 1.2 - (world.tick - b.seen) / 1500 + (b.kind === 'fish_spot' || b.kind === 'fruit_tree' ? 1 : 0);
+    const score = -(b.kind === 'water' ? rememberedWaterCost(world,b) : 0) - hyp(b.x - A.x, b.y - A.y) * 0.4 + Math.min(est, 5) * 1.2 - (world.tick - b.seen) / 1500 + (b.kind === 'fish_spot' || b.kind === 'fruit_tree' ? 1 : 0);
     if (score > bs) {
       bs = score;
       best = b;

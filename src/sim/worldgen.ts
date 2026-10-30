@@ -4,6 +4,7 @@ import { foundMembership } from './townships';
 import { DEPOSIT_TYPES, MAP_H, MAP_W, SOURCE_MAX } from './constants';
 import { createBuilding } from './buildings';
 import { addItem, emptyLedger, snapshotInitial } from './economy';
+import { initializeWater } from './hydrology';
 import { addToHousehold, createHousehold } from './households';
 import { captureHouseholdCamp } from './cohortcapture';
 import { ACCESS_CELL, observe, putBelief, waterBeliefId } from './knowledge';
@@ -573,6 +574,7 @@ export function generateNatural(settings: Settings): World {
   // drop resources that ended up unreachable
   finalizeReachability(world, hubs);
   computeAccessCells(world);
+  initializeWater(world);
   seedKnowledge(world, gen);
   lookAround(world);
   snapshotInitial(world);

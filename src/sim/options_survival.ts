@@ -398,6 +398,7 @@ function optDrink(ctx: Ctx): void {
     const sc = new Scorer().add('thirsty', dr * 0.98).add('walking', -pen(c.e));
     if (c.dng > 0) sc.add('wolf nearby', -30 * c.dng * traitMods(p).caution);
     if (c.trouble > 0) sc.add('was driven off near here', -16 * c.trouble);
+    if (c.supplyCost) sc.add(`remembered ${c.b.waterSupply} water (observed at tick ${c.b.seen})`,-c.supplyCost);
     addOption(ctx, {
       kind: 'drink',
       label: 'Go and drink at the water',

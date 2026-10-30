@@ -48,10 +48,13 @@ export const PROTOCOL_V22 = 'inhabitant/22';
 /** 23/24 expose dated coarse ecological signs and remembered field rest (observation 13). */
 export const PROTOCOL_V23 = 'inhabitant/23';
 export const PROTOCOL_V24 = 'inhabitant/24';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24];
+/** 25/26 expose dated coarse natural-water availability (observation 14). */
+export const PROTOCOL_V25 = 'inhabitant/25';
+export const PROTOCOL_V26 = 'inhabitant/26';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24, PROTOCOL_V25, PROTOCOL_V26];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V24 : PROTOCOL_V23;
+  return memory ? PROTOCOL_V26 : PROTOCOL_V25;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
@@ -67,10 +70,11 @@ export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V19 || protocol === PROTOCOL_V20) return 11;
   if (protocol === PROTOCOL_V21 || protocol === PROTOCOL_V22) return 12;
   if (protocol === PROTOCOL_V23 || protocol === PROTOCOL_V24) return 13;
+  if (protocol === PROTOCOL_V25 || protocol === PROTOCOL_V26) return 14;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24 || protocol === PROTOCOL_V26;
 }
 
 export interface Proposal {

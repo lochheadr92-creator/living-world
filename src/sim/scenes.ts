@@ -4,6 +4,7 @@ import { newCart } from './carts';
 import { createBuilding, createSite } from './buildings';
 import { DAY, START_FRAC } from './constants';
 import { addItem, snapshotInitial } from './economy';
+import { initializeWater } from './hydrology';
 import { addToHousehold, createHousehold } from './households';
 import { observe, putBelief } from './knowledge';
 import { createPerson } from './people';
@@ -125,6 +126,7 @@ function befriend(a: Person, b: Person, affinity: number, trust: number): void {
 }
 
 function finish(world: World, scene: SceneId): World {
+  initializeWater(world);
   everyoneKnowsTheLake(world);
   lookAround(world);
   world.sceneLabel = SCENE_LABELS[scene];

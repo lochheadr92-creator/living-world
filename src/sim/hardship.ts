@@ -1,3 +1,4 @@
+import { hasWaterBudget } from './hydrology';
 // Stakes: want and danger that reach people. Only in worlds with rich dynamics; every function here returns the neutral value (1 or 0)
 // in any other, so those worlds are unchanged to the last digit.
 //
@@ -59,7 +60,7 @@ export function updateHardship(world: World): void {
   if (into >= 4 && into < 8 && hashUnit(key, day, 0xd217) < DRY_CHANCE) {
     const length = Math.round((2 + 3 * hashUnit(key, day, 0xd218)) * DAY);
     world.hardship = { kind: 'dry', since: world.tick, until: world.tick + length };
-    addEvent(world, 'nature', 'A dry spell sets in: the bushes parch and the fields crack; the water still runs.');
+    addEvent(world, 'nature', hasWaterBudget(world) ? 'A dry spell sets in: bushes parch, fields crack and natural water evaporates faster.' : 'A dry spell sets in: the bushes parch and the fields crack; the water still runs.');
     for (const p of world.persons) if (p.alive) think(world, p, 'dry', -4, length, 'the dry spell');
     return;
   }

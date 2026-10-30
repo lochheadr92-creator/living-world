@@ -1,3 +1,5 @@
+import { rememberedDry, waterSupplyNear } from './water_access';
+import { hasWaterBudget } from './hydrology';
 // Household relocation owns agreements and their bounded history. Movement, stores,
 // hauling and construction retain their existing owners. Rules 20; never a player order.
 //
@@ -70,7 +72,7 @@ const active = (r: Relocation): boolean => r.phase !== 'failed' && r.phase !== '
 export const currentRelocation = (hh: Household | undefined): Relocation | undefined => hh?.relocations?.find(active);
 const near = (a: {x:number;y:number}, b: {x:number;y:number}, radius=3): boolean => hyp(a.x-b.x,a.y-b.y)<=radius;
 const contact = (a: Person,b: Person): boolean => a.alive && b.alive && !a.indoors && !b.indoors && near(a,b) && !b.convId && b.pose!=='sleep';
-const fresh = (w: World,b: Belief): boolean => (b.kind==='water'||b.amount>0) && w.tick-b.seen<=DAY*2;
+const fresh = (w: World,b: Belief): boolean => (b.kind==='water'?!rememberedDry(w,b):b.amount>0) && w.tick-b.seen<=DAY*2;
 const foodKinds = ['berry_bush','fruit_tree','fish_spot'] as const;
 
 /** Personal sustained hardship, sampled in the simulation, never in an observer read. */
@@ -143,7 +145,7 @@ function membershipHolds(w: World,hh: Household,r: Relocation): boolean {
 const oldHome=(w: World,hh: Household,r: Relocation)=>{const b=w.byId.get(r.oldHomeId);return b?.ent==='building'&&b.hhId===hh.id?b:undefined;};
 function knowSuitable(w: World,p: Person,r: Relocation): boolean {
  // Only arrival may inspect the real water access. Food must be freshly seen there.
- return near(p,r.destination,8)&&isWaterAccess(w,Math.floor(r.destination.x),Math.floor(r.destination.y)) &&
+ return near(p,r.destination,8)&&isWaterAccess(w,Math.floor(r.destination.x),Math.floor(r.destination.y)) && (!hasWaterBudget(w)||['wet','low'].includes(waterSupplyNear(w,r.destination.x,r.destination.y)??'')) &&
   beliefsByKind(p,[...foodKinds]).some(b=>b.amount>0&&b.src==='seen'&&w.tick-b.seen<120&&near(b,r.destination,10));
 }
 function offer(ctx: Ctx,step: string,label: string,r?: Relocation,target?: Person,at?: {x:number;y:number}): void {

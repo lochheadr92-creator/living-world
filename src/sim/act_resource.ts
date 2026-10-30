@@ -1,4 +1,6 @@
 import { harvestPressure } from './ecology';
+import { drawWater, hasWaterBudget } from './hydrology';
+import { observeShore, waterContact, workingWater } from './water_access';
 import {isStoredDrink,storedWaterSource} from './stored_water_access';
 import {projectAvailable} from './project_step';
 import { relocationPackingBlocker } from './relocation';
@@ -397,6 +399,14 @@ function forgetUnreachableWater(p: Person, a: Activity, outcome: string, detail:
   if (outcome === 'failed' && isWaterBeliefId(a.targetId) && /no way|blocked/.test(detail)) delBelief(p, a.targetId);
 }
 
+function beginNaturalWater(world: World, p: Person, a: Activity): string | undefined {
+  const here=waterContact(world,p);
+  if(!here)return 'not at an accessible water shore';
+  observeShore(world,p);
+  if(here.body.amount<1)return 'the water source is dry';
+  a.data.wx=here.x;a.data.wy=here.y;a.data.waterBody=here.body.id;
+}
+
 registerHandler('drink', {
   availability: 0.55,
   pose: () => 'drink',
@@ -412,6 +422,10 @@ registerHandler('drink', {
       if ((p.inv.water ?? 0) < 1) return 'no water on me';
       a.duration = 8;
       return;
+    }
+    if(hasWaterBudget(world)) {
+      const blocked=beginNaturalWater(world,p,a);if(blocked)return blocked;
+      a.duration=8;return;
     }
     const w = waterFacing(world, p);
     if (!w) {
@@ -443,6 +457,19 @@ registerHandler('drink', {
       a.progress = 0;
       return 'continue';
     }
+    if(hasWaterBudget(world)) {
+      const body=workingWater(world,p,a);
+      if(!body)return a.cycle>0?'partial:cannot reach that shore now':'fail:cannot reach that shore now';
+      faceToward(p,a.data.wx,a.data.wy,3);a.progress++;
+      if(a.progress<a.duration)return 'continue';
+      observeShore(world,p);
+      const got=drawWater(world,body,1);
+      if(!got)return a.cycle>0?'partial:the water source is dry':'fail:the water source is dry';
+      ledgerConsume(world,'water',got,'drunk at natural water');
+      p.needs.thirst=clamp(p.needs.thirst+WATER_VALUE,0,100);a.cycle++;a.progress=0;
+      observeShore(world,p);addFx(world,'splash',a.data.wx,a.data.wy,0);
+      return p.needs.thirst>=88?'done':'continue';
+    }
     faceToward(p, a.data.wx, a.data.wy, 3);
     a.progress++;
     p.needs.thirst = clamp(p.needs.thirst + 2.8, 0, 100);
@@ -455,6 +482,10 @@ registerHandler('fetch_water', {
   availability: 0.5,
   pose: () => 'drink',
   begin(world, p, a) {
+    if(hasWaterBudget(world)) {
+      const blocked=beginNaturalWater(world,p,a);if(blocked)return blocked;
+      a.duration=WORK.water;a.progress=0;return;
+    }
     const w = waterFacing(world, p);
     if (!w) {
       delBelief(p, a.targetId);
@@ -469,10 +500,16 @@ registerHandler('fetch_water', {
     forgetUnreachableWater(p, a, outcome, detail);
   },
   work(world, p, a): WorkResult {
+    const body=hasWaterBudget(world)?workingWater(world,p,a):undefined;
+    if(hasWaterBudget(world)&&!body)return a.cycle>0?'partial:cannot reach that shore now':'fail:cannot reach that shore now';
     faceToward(p, a.data.wx, a.data.wy, 3);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
-    const got = produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
+    if(body)observeShore(world,p);
+    if(body&&roomFor(p.inv,carryCap(world,p),'water')<1)return a.cycle>0?'partial:cannot carry more':'fail:cannot carry more';
+    const got = body ? drawWater(world,body,1) : produce(world, p.inv, carryCap(world, p), 'water', 1, 'water drawn from the lake');
+    if(body&&!got)return a.cycle>0?'partial:the water source is dry':'fail:the water source is dry';
+    if(body&&got){addItem(p.inv,'water',got);world.hooks?.onTransfer?.({from:'water:'+body.id,to:'person:'+p.id,item:'water',n:got,reason:'natural water drawn'});observeShore(world,p);}
     if (got <= 0) return a.cycle > 0 ? 'partial:cannot carry more' : 'fail:cannot carry more';
     addFx(world, 'splash', a.data.wx, a.data.wy, 0);
     a.cycle++;

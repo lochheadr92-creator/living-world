@@ -1,4 +1,6 @@
 import type { Game } from '../app/game';
+import { waterBodyAt } from '../sim/hydrology';
+import { waterViewId } from '../sim/inspect_water';
 import { indoorHome } from '../sim/habitation';
 import { gridQuery } from '../sim/registry';
 import type { Entity } from '../sim/types';
@@ -128,5 +130,7 @@ export function pickEntity(game: Game, vw: number, vh: number, px: number, py: n
       }
     }
   });
-  return best;
+  if(best)return best;
+  const water=waterBodyAt(w,ground.x,ground.y);
+  return water?waterViewId(water):0;
 }

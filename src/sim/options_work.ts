@@ -1280,6 +1280,7 @@ function optWaterRun(ctx: Ctx): void {
   const sc = new Scorer().add(need > 0 ? 'someone at home is thirsty' : 'water for the crops', base * traitMods(p).work).add('walking', -pen(e));
   if (spot.dng > 0) sc.add('wolf nearby', -30 * spot.dng * traitMods(p).caution);
   if (spot.trouble > 0) sc.add('was driven off near here', -16 * spot.trouble);
+  if (spot.supplyCost) sc.add(`remembered ${b.waterSupply} water (observed at tick ${b.seen})`,-spot.supplyCost);
   addOption(ctx, {
     kind: 'fetch_water',
     label: 'Fetch water',
@@ -1769,6 +1770,7 @@ function optPromisedWater(ctx: Ctx, n: number, who: string): void {
   const sc = new Scorer().add(`promised ${who} water`, 52).add('walking', -pen(e));
   if (spot.dng > 0) sc.add('wolf nearby', -30 * spot.dng * traitMods(p).caution);
   if (spot.trouble > 0) sc.add('was driven off near here', -16 * spot.trouble);
+  if (spot.supplyCost) sc.add(`remembered ${b.waterSupply} water (observed at tick ${b.seen})`,-spot.supplyCost);
   addOption(ctx, {
     kind: 'fetch_water',
     label: 'Fetch water as promised',

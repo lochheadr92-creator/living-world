@@ -1,4 +1,5 @@
 import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
+import { waterSupplyNear } from './water_access';
 import { SENSE_RADIUS } from './constants';
 import { indoorHome, sameSpace } from './habitation';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
@@ -182,7 +183,8 @@ export function perceive(world: World, p: Person): void {
       const id = waterBeliefId(idx);
       const old = p.beliefs[id];
       if (!old) fresh++;
-      putBelief(p, { id, kind: 'water', x: tx + 0.5, y: ty + 0.5, amount: 0, max: 0, seen: world.tick, src: 'seen', from: 0, learned: old ? old.learned : world.tick });
+      const supply=waterSupplyNear(world,tx+0.5,ty+0.5);
+      putBelief(p, { id, kind: 'water', x: tx + 0.5, y: ty + 0.5, amount: 0, max: 0, seen: world.tick, src: 'seen', from: 0, learned: old ? old.learned : world.tick, ...(supply?{waterSupply:supply}:{}) });
     }
   }
 

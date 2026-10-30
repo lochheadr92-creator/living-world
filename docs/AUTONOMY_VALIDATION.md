@@ -162,3 +162,39 @@ npx vite-node scripts/lab_report.ts -- "$runRoot-ecology-ensemble"
 Return report.txt, preserving labour displacement, mortality, failed journeys and null results.
 The current mature Large generation/performance commands earlier in this document still apply.
 None of these costly ecology/combined-world results has been claimed as run or passed here.
+
+## Rules 87 water budget — long validation remains pending
+
+The five-day Normal windows verify accounting and ordinary draws, not natural depletion or
+long drought recovery: all nine bodies remain wet. Use a fresh `$runRoot` after checkout checks
+above. At the measured short-run rate, each 45-day Normal run is roughly 4–6 minutes and may
+cost more as the world accumulates. These are owner-run commands, not claimed results.
+
+```powershell
+npx --no-install tsx scripts/water_observe.ts river "$runRoot-water-river45" 45 1200
+```
+
+```powershell
+npx --no-install tsx scripts/water_observe.ts forest "$runRoot-water-forest45" 45 1200
+```
+
+```powershell
+npx --no-install tsx scripts/water_observe.ts meadow "$runRoot-water-meadow45" 45 1200
+```
+
+Return each report.json, including horizon/budget stop, actual stock/recharge/loss, low/dry
+opportunities and refusals, repeated-observation denominators, interruptions, deaths and final
+save size. Do not extend a favourable seed alone or treat all draws as useful deliveries.
+For an aggregate claim, the existing control/nudge method and a genuine Large profile apply:
+
+```powershell
+node scripts/lab.mjs --out "$runRoot-water-ensemble" --seeds 24 --fork 0 --days 45 --profile large --dynamics rich --branches nudge:1,nudge:2,rich-no-water-budget
+```
+
+```powershell
+npx vite-node scripts/lab_report.ts -- "$runRoot-water-ensemble"
+```
+
+The prior repository estimate for this scale is about 90 minutes on 24 busy cores; current
+cost is unmeasured. Retain displacement and adverse outcomes. The accumulated current-rules
+Large performance commands above remain necessary; short initial saves are not a substitute.

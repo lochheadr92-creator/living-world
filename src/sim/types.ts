@@ -97,6 +97,7 @@ export interface Belief {
   cond?: number;
   /** Coarse productive condition at the existing observation timestamp. */
   ecology?: import('./ecology').EcologicalSign;
+  waterSupply?: import('./hydrology').WaterSign;
   fallowUntil?: number;
   items?: Items;
   need?: Items;
@@ -1265,6 +1266,7 @@ export interface SpatialGrid {
 }
 
 export interface World {
+  waterBodies?: import('./hydrology').WaterBody[];
   ecology?: Record<number, import('./ecology').EcologicalCondition>;
   exchangeReceipts?: import('./exchange_journeys').ExchangeReceipt[];
   economicObservations?: import('./settlement_economy').EconomicObservations;

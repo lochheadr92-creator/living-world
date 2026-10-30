@@ -3,6 +3,7 @@ import { deceasedById } from '../sim/historical_index';
 // slides in when something is selected, remembers when it was hidden, and refreshes the content at ~4 Hz.
 // Content comes only from the read-only view-models in sim/inspect.ts.
 import { describeEntity, describeEntityName, describePerson } from '../sim/inspect';
+import { selectedWater } from '../sim/inspect_water';
 import { Every, h, setAttr, setBool, setHidden, setText } from './dom';
 import { icon } from './icons';
 import { createEntityPanel } from './entity';
@@ -154,7 +155,7 @@ export function createInspector(ctx: UICtx, slots: Slots): Part {
     const world = game.world;
     const id = game.selectedId;
     const e = id ? world.byId.get(id) : undefined;
-    const next: Mode = !e ? 'empty' : e.ent === 'person' ? 'person' : 'entity';
+    const next: Mode = selectedWater(world,id) ? 'entity' : !e ? 'empty' : e.ent === 'person' ? 'person' : 'entity';
 
     if (next !== mode || id !== shownId) {
       shownId = id;

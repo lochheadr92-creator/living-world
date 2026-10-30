@@ -1,4 +1,5 @@
 import type { CameraState } from '../app/game';
+import { waterBodyAt, waterSign } from '../sim/hydrology';
 import { hashString, hashUnit } from '../sim/rng';
 import { T } from '../sim/types';
 import type { World } from '../sim/types';
@@ -173,7 +174,8 @@ export class TerrainPainter {
           const wave = Math.sin(t * 0.85 + x * 0.52 + y * 0.37) + 0.6 * Math.sin(t * 1.4 - x * 0.31 + y * 0.6);
           k = Math.max(0, Math.min(STEPS - 1, k + Math.round(wave * 0.9)));
         }
-        ctx.fillStyle = PAL[type][k];
+        const waterBody=waterBodyAt(world,x,y),supply=waterBody?waterSign(waterBody):undefined;
+        ctx.fillStyle = supply==='dry' ? '#a69b7a' : supply==='low' ? mix(PAL[type][k],'#b6ad87',0.5) : PAL[type][k];
         ctx.beginPath();
         ctx.moveTo(sx, sy - 0.6);
         ctx.lineTo(sx + 32.9, sy + 16);
@@ -214,7 +216,8 @@ export class TerrainPainter {
           ctx.closePath();
           ctx.fill();
         }
-        if (type === T.SHALLOW || type === T.DEEP) {
+        const waterBody=waterBodyAt(world,x,y),dryWater=waterBody&&waterSign(waterBody)==='dry';
+        if ((type === T.SHALLOW || type === T.DEEP) && !dryWater) {
           // foam where water meets land
           const nb: [number, number, number, number, number][] = [
             [1, 0, 32, 16, 0], // right-front edge

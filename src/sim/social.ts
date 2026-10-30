@@ -1,3 +1,4 @@
+import { rememberedDry } from './water_access';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
 import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
@@ -347,7 +348,7 @@ export function canObtain(world: World, B: Person, item: ItemKind): boolean {
   for (const k in B.beliefs) {
     const b = B.beliefs[k as unknown as number];
     if (item === 'stone' && b.kind === 'outcrop' && usable(b)) return true;
-    if (need && b.kind === need && (b.kind === 'water' ? true : usable(b))) return true;
+    if (need && b.kind === need && (b.kind === 'water' ? !rememberedDry(world,b) : usable(b))) return true;
     if (b.kind === 'building' && (b.items?.[item] ?? 0) >= 1 && (b.hh === B.hhId || b.hh === 0 || b.btype === 'storehouse') && !need) return true;
     if (!need && isFood(item) && (b.kind === 'berry_bush' || b.kind === 'fruit_tree' || b.kind === 'wild_grain' || b.kind === 'fish_spot') && estimatedAmount(world, b) >= 2) return true;
   }
