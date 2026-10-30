@@ -66,3 +66,9 @@ Long/mature-world benefit remains subject to `AUTONOMY_VALIDATION.md`. This corr
 prompt. Next: retain task-specific helper evidence through the existing request receipts, with ability distinct from
 willingness and inability distinct from bad faith. The physical rules-76 delivery diagnostic remains valid prior evidence
 (`scripts/helper_task_diagnostic.ts`, `autonomy-helper77-before.log`); its filename is historical, not a rules-77 claim.
+
+Rules 77 is now pinned from runtime `8063625805b71e012164dc4b3cccc9640c04bb8e` in
+`tests/v77_continuation.expected.json`: ordinary meadow, the physically corrected recent route, and an actual voluntarily
+fulfilled two-stone promise with retained receipt and exact AI transcript replay. Reference check **1/1**, 12.61 seconds
+(`autonomy-v77-check.log`); reference typecheck passes. Recorders refuse overwrite or recording under a successor. The
+rules-77 route fixture and explicitly versioned material-help fixture used there are part of the immutable contract.
