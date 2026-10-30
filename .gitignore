@@ -34,3 +34,4 @@ viewer_evidence/final-authority-before.json
 
 # Raw autonomous-programme saves remain local; reports/manifests are retained.
 autonomy_evidence/**/final-save.json
+autonomy_evidence/**/*-save.json
