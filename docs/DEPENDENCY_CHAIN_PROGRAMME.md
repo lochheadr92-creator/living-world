@@ -379,6 +379,12 @@ Fixed ordinary five-day Normal worlds (immigration off) meadow/river/forest each
 
 Next connected dependency: a personally failed water hand-over must lead to lawful owned-home provision, retaining helper reserves/promises, actual deposit and later resident consumption. Then continue every unresolved A1–A16 and WS15–21 capability; this slice is not programme completion.
 
+### Current continuation checkpoint — rules 67
+
+Runtime **`f51c642652a9e60fdb69019668e3f950e2995420`** implements stored-water drinking. Its immutable reference was captured before rules-68 production edits, covering ordinary meadow, in-progress stored drinking, competing stock loss, physical return and blocked entrance. The separate reference test passed **1/1 in 10.87 seconds** (`autonomy-v67-check.log`); this is additional to the runtime full suite, not a new full-run total. `scripts/v67_reference.ts` refuses overwrite or capture under a successor version.
+
+The next contract reproduces the absent water-care deposit after a real zero-receipt hand-over (`autonomy-care-water68-before.log`, expected deposit, received undefined). Implement that transition at rules 68, preserving food and mixed-supply failures, helper reserves/promises and physical store ownership/capacity. All other open rows remain active.
+
 ### Historical continuation checkpoint — rules 66
 
 Last fully verified runtime commit: **`720ceeb2f2c5e00c55e18eddff4dff924c966052`**. Rules 65 was delivered as `93f59e3`

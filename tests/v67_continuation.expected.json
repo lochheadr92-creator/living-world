@@ -1,0 +1,28 @@
+{
+  "source": "f51c642652a9e60fdb69019668e3f950e2995420, rules 67 before successor behaviour",
+  "ordinary": {
+    "saved": "390d4cd5c464ebe553e0adae226dc85f62fc5a396c6dae77ecf50c000bc1f138",
+    "uninterrupted": "7edc75ef3adc9c9db9577c0fbde071fbc3d5fc7154459a597233e9120045999b",
+    "continued": "7edc75ef3adc9c9db9577c0fbde071fbc3d5fc7154459a597233e9120045999b"
+  },
+  "drinking": {
+    "saved": "c7b063788c26ae35d3a47bc67611ba89f6f16a1764293e8c4669f345ce42f453",
+    "uninterrupted": "3910d6ba40d5b5c784a89ac6043372e58d21ed5d080843f55c3c6364197af636",
+    "continued": "3910d6ba40d5b5c784a89ac6043372e58d21ed5d080843f55c3c6364197af636"
+  },
+  "emptied": {
+    "saved": "3d6c6d6980e63c53fba5767831341eba040483ac67193b82fe3b42c4de67bf50",
+    "uninterrupted": "bb089ce784464252131575e48e7dd750557fbf6ce0039cc16d7e210f1ed31db1",
+    "continued": "bb089ce784464252131575e48e7dd750557fbf6ce0039cc16d7e210f1ed31db1"
+  },
+  "returning": {
+    "saved": "7ee9f015c0c3f96490689e31d45f5e69af81f7b55347b8458ffbf24e4f91a381",
+    "uninterrupted": "a61019c34de7518cacbcb02c9e9ae528365ffacf8a3902b96a88da8789dc50f9",
+    "continued": "a61019c34de7518cacbcb02c9e9ae528365ffacf8a3902b96a88da8789dc50f9"
+  },
+  "blocked": {
+    "saved": "7bf7da93a4d3fab01c39862c37ffe7311957970dd040ab5cb41d2dc3775a1815",
+    "uninterrupted": "f855498f1890c6577756f0af7e1f7aef5fe00055d8dae8a106deb64132da687d",
+    "continued": "f855498f1890c6577756f0af7e1f7aef5fe00055d8dae8a106deb64132da687d"
+  }
+}
