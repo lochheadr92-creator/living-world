@@ -1,0 +1,44 @@
+{
+  "rules": 64,
+  "tick": 1086,
+  "person": 2,
+  "phase": "travel",
+  "oldKey": "gather:5",
+  "oldOffered": false,
+  "believedAmount": 8,
+  "actualPosition": {
+    "x": 39.83014817073091,
+    "y": 51.68799115960293
+  },
+  "nearSourcesSeen": [
+    1084,
+    1084
+  ],
+  "best": {
+    "key": "gather:6",
+    "utility": 42.290341513308505
+  },
+  "candidates": [
+    {
+      "key": "gather:6",
+      "utility": 42.290341513308505
+    },
+    {
+      "key": "gather:7",
+      "utility": 42.08364924708664
+    }
+  ],
+  "pure": true,
+  "held": false,
+  "afterKey": "gather:6",
+  "lastResult": {
+    "tick": 1086,
+    "label": "Chopping wood",
+    "outcome": "interrupted",
+    "detail": "something better came up"
+  },
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  }
+}

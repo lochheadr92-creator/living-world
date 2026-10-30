@@ -1,0 +1,23 @@
+{
+  "source": "1acf4faec224db9022302cb41eebd4dab5281e66, rules 64 before successor behaviour",
+  "ordinary": {
+    "saved": "100990291b817bdf9704f56a0a5eaaf05c4f0cebe1293ccb8d33fc5417c54d23",
+    "uninterrupted": "a555e875a606d805df54c47e06c2e9ceb967f5e93794660c6943280a37d59341",
+    "continued": "a555e875a606d805df54c47e06c2e9ceb967f5e93794660c6943280a37d59341"
+  },
+  "care": {
+    "saved": "44dd2b150c3b868a75cdb91adfb3a7cf6ceae5858be905249a44c7c306aff44d",
+    "uninterrupted": "f83c0f876906a191223c2bd111ebe290d9e562a2474e49f1fa97cc6d37740024",
+    "continued": "f83c0f876906a191223c2bd111ebe290d9e562a2474e49f1fa97cc6d37740024"
+  },
+  "competingTools": {
+    "saved": "45c02ec6eefec6114bcae6307a1aaf6771d79cb788b12842b887f22a499bc3d0",
+    "uninterrupted": "6b96b97b3060ba73cb6a439063e586806342b3e87d85bee4e3160861b1ab9e95",
+    "continued": "6b96b97b3060ba73cb6a439063e586806342b3e87d85bee4e3160861b1ab9e95"
+  },
+  "travellingSource": {
+    "saved": "ba6b9b6136afc60fcb11ad4c10796c148ee09c64f76f87de0d16a022985a931c",
+    "uninterrupted": "ce2175bef9023704a07a43483d994e4f93666eb6725b9ff12d46727a2d5b0a62",
+    "continued": "ce2175bef9023704a07a43483d994e4f93666eb6725b9ff12d46727a2d5b0a62"
+  }
+}
