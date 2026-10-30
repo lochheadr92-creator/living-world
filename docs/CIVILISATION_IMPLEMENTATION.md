@@ -2,6 +2,16 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **84** connects requester-local target withdrawal to actual cancellation and acknowledgement,
+without remotely ending the helper's obligation. Overlapping obligations preserve other suspended
+work; late cancellation preserves completed work and enables truthful reports. Corrected full
+suite **276 files / 1,860 tests**, focused **99/6**, browser **10/10**, typecheck/build and three
+fixed ordinary five-day windows pass. Ordinary heard/acknowledged counts are 8/7, 3/3 and 6/6;
+all heard messages were late, so active-work stopping remains staged evidence. Runtime `fb55f77`
+and overlap fix `4359a4a`, immutable reference `eba0b94`; see `REQUEST_CANCELLATION.md`.
+Active-delay communication, counteroffers, ability/location questions and wider household,
+ecology, water, hazard and continuity work remain open. This is not full-prompt completion.
+
 Rules **83** connects local target discovery, truthful partial contributions and cancellation
 explanations with actual acknowledgement. Ordinary river includes two heard explanations of
 incomplete hauling after site completion; forest/meadow include none. Full regression passes

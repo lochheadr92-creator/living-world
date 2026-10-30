@@ -149,3 +149,14 @@ table above, with 32.8 / 29.2 / 29.4 seconds for river/forest/meadow. All horizo
 round trips and 120-tick continuations also pass for all three
 (`autonomy-cancel84-final-saved-continuations.log`). Initial observations remain candidate
 provenance; the final-source measurements are the corrected release evidence.
+
+
+## Completed release gate
+
+The corrected full suite passes **276 files / 1,860 tests**, exit 0, **374.73 seconds**
+(`autonomy-cancel84-final-full-tests.log`). The immutable rules-84 reference passes both
+separately and in this full suite. Existing Vite import-extension, bundle-size and
+TimeoutOverflow warnings are retained. Runtime commits `fb55f77` and `4359a4a`, with immutable
+reference `eba0b94`, are ready for direct integration. Earlier pending statements preserve
+checkpoint chronology; the rules-84 release gate is now complete. This does not close the
+entire autonomy/environment programme or its pending costly mature-world validation.
