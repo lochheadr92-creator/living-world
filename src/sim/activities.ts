@@ -376,7 +376,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   // time under shelter is credited to the plan it served before the activity is let go of (rest and sleep alike)
   creditShelterFrom(p, a);
   // and what a gathering trip came to is written into the person's own estimate of what that kind of work pays them
-  recordPay(world, p, a);
+  recordPay(world, p, a,outcome);
   recordRoutine(world,p,a,outcome,detail);
   recordJourney(world,p,a,outcome,detail);
   releaseClaims(world, a.claims);

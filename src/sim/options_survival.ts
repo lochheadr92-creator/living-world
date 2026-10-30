@@ -195,7 +195,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     sc.add('walking', -pen(c.e));
     const skill = p.skills[type === 'fish_spot' ? 'fish' : 'forage'];
     sc.add('good at it', (skill - 1) * 5);
-    const pay = payNudge(world, p, type);
+    const pay = payNudge(world, p, type,b.id);
     if (pay) sc.add(pay.label, pay.value);
     const dng = dangerAt(ctx, b.x, b.y);
     if (dng > 0) sc.add('wolf nearby', -26 * dng * tm.caution);
@@ -210,6 +210,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       parts: sc.parts,
       eta: expected,
       scopeEstimate: {walk:c.e,work:WORK[type]??25,amount:units,item:SOURCE_FOOD[type]},
+      ...(pay?.sourceReason?{selectionReason:pay.sourceReason}:{}),
       key: `gather:${b.id}`,
       targetId: b.id,
       tag: 'food',

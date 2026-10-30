@@ -14,6 +14,7 @@
 // looked up in the world behind the person's back: the two numbers it reads are the activity's own plan and its own outcome.
 import { SOURCE_SKILL } from './constants';
 import { isRich } from './mood';
+import {hasSourceLearning,recordSourceExperience,sourceExperience} from './source_learning';
 import type { Activity, Payoff, Person, SkillKey, SourceType, World } from './types';
 
 /**
@@ -55,7 +56,7 @@ export function payRatio(world: World, a: Activity): number | null {
 }
 
 /** Called once, when a gathering activity ends for any reason. Rich only; a person without the field (an old save) gets one. */
-export function recordPay(world: World, p: Person, a: Activity): void {
+export function recordPay(world: World, p: Person, a: Activity, outcome?:string): void {
   if (!learning || a.kind !== 'gather' || !isRich(world)) return;
   const type = a.data.stype as SourceType | undefined;
   const k = type ? payKeyOf(type) : undefined;
@@ -63,8 +64,15 @@ export function recordPay(world: World, p: Person, a: Activity): void {
   const r = payRatio(world, a);
   if (r === null) return;
   const pay = (p.payoff ??= {});
+  if(hasSourceLearning(world)&&Number.isSafeInteger(a.id)&&a.id>0){
+    if(a.data.sourcePayRecorded)return;
+    a.data.sourcePayRecorded=true;
+    if(pay[k]?.sources?.some(e=>e.events.some(h=>h.activity===a.id)))return;
+    if(recordSourceExperience(world,p,a,k,r,outcome))return;
+  }
   const e = pay[k];
   if (!e) pay[k] = { n: 1, r: round3(r) };
+  else if(e.n===0&&hasSourceLearning(world)){e.n=1;e.r=round3(r);}
   else {
     e.n++;
     e.r = round3(e.r + ALPHA * (r - e.r));
@@ -78,21 +86,28 @@ const fmtRatio = (r: number): string => `${Math.round(r * 10) / 10}×`;
  * them better than the plan, negative when worse, nothing before they have tried it. The label says which, so the decision record
  * carries it like any other reason.
  */
-export function payNudge(world: World, p: Person, type: SourceType): { label: string; value: number } | null {
+export function payNudge(world: World, p: Person, type: SourceType, target?:number): { label: string; value: number; sourceReason?:string } | null {
   if (!learning || !isRich(world)) return null;
   const k = payKeyOf(type);
-  const e = k ? p.payoff?.[k] : undefined;
-  if (!e || e.n < 1) return null;
-  const settled = Math.min(1, e.n / SETTLED_AFTER);
-  const v = Math.round(Math.max(-PAY_NUDGE_MAX, Math.min(PAY_NUDGE_MAX, 7 * Math.log(e.r))) * settled * 10) / 10;
+  const general = k ? p.payoff?.[k] : undefined;
+  const local=k&&target?sourceExperience(world,p,k,target):undefined;
+  const e=local?.n?local:general;
+  const empty=local?.empty&&local.empty.corrected===undefined?local.empty:undefined;
+  if ((!e || e.n < 1)&&!empty) return null;
+  const settled = Math.min(1, (e?.n??0) / SETTLED_AFTER);
+  const base=Math.max(-PAY_NUDGE_MAX, Math.min(PAY_NUDGE_MAX, 7 * Math.log(e?.r??1))) * settled;
+  const v = Math.round(Math.max(-PAY_NUDGE_MAX,Math.min(PAY_NUDGE_MAX,base-(empty?2*empty.count:0)))*10)/10;
   if (Math.abs(v) < 0.1) return null;
-  return { label: v > 0 ? `has paid me well before (${fmtRatio(e.r)})` : `has paid me poorly before (${fmtRatio(e.r)})`, value: v };
+  if(empty)return {label:`${base!==0?`work estimate ${fmtRatio(e?.r??1)}; `:''}my visit here found no stock (${empty.count} recorded empty ${empty.count===1?'visit':'visits'})`,value:v,sourceReason:`I personally found this source empty; later firsthand stock observation can correct that expectation.`};
+  if(local?.n)return {label:`my work at this source paid ${fmtRatio(local.r)} of its estimate (${local.n} ${local.n===1?'outcome':'outcomes'})`,value:v,sourceReason:'This estimate comes from my own completed gathering at this particular source.'};
+  return { label: v > 0 ? `has paid me well before (${fmtRatio(e!.r)})` : `has paid me poorly before (${fmtRatio(e!.r)})`, value: v };
 }
 
 /** The estimates as the inspector shows them, best-paying first: what this person has found to pay, in their own experience. */
 export function describePay(p: Person): { key: SkillKey; ratio: number; n: number }[] {
   const pay = p.payoff ?? {};
   return (Object.keys(pay) as SkillKey[])
+    .filter(key=>pay[key]!.n>0||!pay[key]!.sources)
     .map((key) => ({ key, ratio: (pay[key] as Payoff).r, n: (pay[key] as Payoff).n }))
     .sort((a, b) => b.ratio - a.ratio);
 }

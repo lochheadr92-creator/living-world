@@ -449,6 +449,7 @@ export interface ResultRecord {
 export interface Payoff {
   n: number;
   r: number;
+  sources?:import('./source_learning').SourceExperience[];
 }
 
 /** what a person hopes for (life.ts; rich worlds only): the hope, since when, how far along (read from the world), when reached (0: not yet) */

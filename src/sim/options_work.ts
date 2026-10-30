@@ -420,7 +420,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
     const sc = new Scorer().add(why, base).add('walking', -pen(c.e));
     const sk = p.skills[type === 'tree' ? 'wood' : 'stone'];
     sc.add('good at it', (sk - 1) * 5);
-    const pay = payNudge(world, p, type);
+    const pay = payNudge(world, p, type,c.b.id);
     if (pay) sc.add(pay.label, pay.value);
     const dng = dangerAt(ctx, c.b.x, c.b.y);
     if (dng > 0) sc.add('wolf nearby', -24 * dng * tm.caution);
@@ -435,6 +435,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
       parts: sc.parts,
       eta: expected,
       scopeEstimate: {walk:c.e,work:WORK[type],amount:units,item},
+      ...(pay?.sourceReason?{selectionReason:pay.sourceReason}:{}),
       ...(runsRulesVersion(world,73)&&siteId?{purposeSite:siteId}:{}),
       key: `gather:${c.b.id}`,
       targetId: c.b.id,

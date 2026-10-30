@@ -357,6 +357,8 @@ export function hashWorld(world: World): string {
       const pay = p.payoff ?? {};
       const ks = Object.keys(pay) as (keyof typeof pay)[];
       if (p.alive && ks.length) push(`Y${p.id}:${ks.map((k) => `${k},${pay[k]!.n},${pay[k]!.r}`).join(';')}`);
+      for(const k of ks)if(pay[k]?.sources)push('SourceExperience'+p.id+':'+k+JSON.stringify(pay[k]!.sources));
+      for(const a of [p.activity,p.suspended])if(a?.data.sourcePayRecorded)push('SourcePayRecorded'+p.id+':'+a.id);
     }
     // the trade somebody has settled on bears on what they choose, so it is in the fingerprint like a plan or an estimate
     for (const p of world.persons) if (p.alive && p.trade) push(`T${p.id}:${p.trade.key},${p.trade.since}`);

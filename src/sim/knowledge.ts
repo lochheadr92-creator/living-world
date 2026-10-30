@@ -1,5 +1,6 @@
 import { deathStory, hasLocalDeath } from './death_knowledge';
 import { SOURCE_REGROW } from './constants';
+import {correctSourceExperience} from './source_learning';
 import { cloneItems } from './economy';
 import { facilitySnapshot } from './facilities';
 import { toolsHeldBy } from './toolreg';
@@ -158,6 +159,7 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if (!b) return false;
   b.origin = p.id;
   b.hops = 0;
+  if(e.ent==='source')correctSourceExperience(world,p,e.id,e.amount);
   if (runsRulesVersion(world, 32) && e.ent === 'source') noteDepletedSource(world, p, e, b);
   return learn(p, b);
 }

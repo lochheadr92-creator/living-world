@@ -1,6 +1,12 @@
 # Civilisation implementation register
 
-## Current continuation pointer — 2026-10-30
+## Current continuation pointer — 2026-10-31
+
+Rules **74** adds source-specific gathering experience inside the existing payoff owner, verified empty-place warnings
+and firsthand correction without hidden stock or rumour truth detection. All three fixed five-day worlds show actual
+source-influenced starts, and a matched ordinary decision changes its actual source. Full regression 255 files / 1,726
+tests, rendered 7/7, typecheck/build pass. Source learning is one A7 component; broader reliability and aggregate benefit
+remain open. See `SOURCE_LEARNING.md`. Rules 73 was pinned first at `04ffff3`.
 
 Rules **73** connects a prepared trip's personally failed gathering source to a bounded legal alternative for the same
 material and purpose, including the same known site where applicable. Saved progress survives; impossible known-source

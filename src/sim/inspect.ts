@@ -13,6 +13,7 @@ import { householdOf } from './buildings';
 import { indoorHome, hasHabitation, occupants, homeCapacity } from './habitation';
 import { planHelp, planOfActivity } from './intent';
 import { describePay } from './learning';
+import {describeSourceExperience} from './source_learning';
 import { describeHeard } from './reputation';
 import { describeIllness } from './illness';
 import { describeGoal, describeInjury } from './life';
@@ -158,6 +159,7 @@ export interface PersonView {
   techniques: string[];
   /** what each kind of gathering has paid them, in their own experience (rich only; empty otherwise), best first */
   payoffs: { key: string; ratio: number; n: number }[];
+  sourceExperience?:string[];
   /** what they have seen and been told of other people (rich only; empty otherwise), freshest first */
   heard: HeardView[];
   /** the trade they have settled on and why, in their own terms (rich only; '' for somebody with none) */
@@ -619,6 +621,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     techniques: describeTechniques(world,p),
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
+    ...(Object.values(p.payoff??{}).some(e=>e.sources?.length)?{sourceExperience:describeSourceExperience(p)}:{}),
     heard: describeHeard(world, p),
     trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
     customers: describeCustomers(world, p),
