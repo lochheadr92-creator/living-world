@@ -125,3 +125,21 @@ partial deadline outcome, a saved failed journey through the original deadline w
 knowledge, and speech-before-acknowledgement continued through a real reply. The separate
 reference check passes 1/1 in 13.46 seconds (`autonomy-v81-check.log`); typecheck passes. Do not
 re-record its expected file or modify the frozen fixture to conceal successor regressions.
+
+
+## Next cancellation/death-knowledge reproduction
+
+`scripts/promise_cancellation_diagnostic.ts` explicitly runs rules 81. After the real accepted
+watch and actual blocked journey, the parent dies through the real lifecycle at tick 307
+(declared staged cause). The helper is 17 units away. `knowsDeath(helper,parent)` stays false,
+no personal receipt arrives and the relationship is unchanged, but the helper's commitment
+immediately changes from active to moot with reason **Ada died**. The shared request becomes
+cancelled with the same reason. Save/load preserves it and the ledger balances. Exact evidence:
+`autonomy-cancellation82-before.log`. This is not fixed by rules 81.
+
+The owning paths are `lifecycle.ts:killPerson` → `social.ts:socialOnDeath` and the `!A` branch
+of `checkCommitments`. `death_knowledge.ts` already owns actual witness/told/grave knowledge.
+The follow-up must also audit requester decision readers (`outstandingForPlan`, `openRequest`,
+and watch/fire asking guards): a shared request's true engine status is not by itself the
+requester's knowledge. Physical death/claim cleanup must remain immediate, while personal
+obligations/expectations must change only on local knowledge or their own known timeout.
