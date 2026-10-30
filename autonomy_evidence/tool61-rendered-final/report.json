@@ -1,0 +1,130 @@
+{
+  "head": "a3202439162cab18832890d9a5bdeb17e28d472e",
+  "rules": 61,
+  "evidence": "STAGED initial tools/raw inputs, explicit saw loss, externally selected legal actions and 20 ticks of waiting. No ordinary-adoption claim. Preserved no-known-water cart failure.",
+  "sourceHashes": {
+    "src/sim/facilities.ts": "efda09485b54e0ccd9894332e2e1edc8c0211d17945da91e699c8dbb6aa23bb5",
+    "src/sim/production.ts": "1fb308d3bccc330418d597512e85e10a5428aa88df2740e30c2af1b1eba753cc",
+    "src/sim/act_production.ts": "4d3c4afb915792492b434239fa02b5175c9bd8d35155b55d42a3385d732510f3",
+    "src/sim/rulesversion.ts": "a56e7b2234e7731e9bbd1ecd0fbfb7785deef4d96a1742a99bdc28c9767e4db7",
+    "tests/helpers/batch_recipe.ts": "de14c4584d756b5ef19fa3288ec62201b7dcf721bbc392b7277726bafb35fe0e",
+    "scripts/browser/tool_recovery_check.mjs": "da8417439e37b21658a1dfa6f7a1e23ee650f46d09b38548908ea751ed29c4ec"
+  },
+  "checks": [
+    {
+      "name": "missing saw stops before unpaid work, retains inputs and explains replacement",
+      "ok": true,
+      "detail": {
+        "tick": 1090,
+        "person": 2,
+        "yard": 5,
+        "progressBefore": 7,
+        "progressAfter": 7,
+        "held": {
+          "wood": 3
+        },
+        "result": {
+          "tick": 1089,
+          "label": "Sawing planks",
+          "outcome": "partial",
+          "detail": "needs a saw; the unfinished batch keeps its materials and progress"
+        },
+        "wanted": {
+          "kind": "saw",
+          "for": "finishing sawing planks"
+        },
+        "illegalOffer": false,
+        "pure": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "waiting save continuation is exact and adds no workshop progress",
+      "ok": true,
+      "detail": {
+        "equal": true,
+        "progress": 7
+      }
+    },
+    {
+      "name": "gathering pays travel and reaches the real pack limit",
+      "ok": true,
+      "detail": {
+        "tick": 1762,
+        "inv": {
+          "bread": 1,
+          "water": 1,
+          "hammer": 1,
+          "wood": 2,
+          "stone": 1
+        },
+        "result": {
+          "tick": 1761,
+          "label": "Breaking stone",
+          "outcome": "success",
+          "detail": "done"
+        },
+        "jobProgress": 7,
+        "conserved": true
+      }
+    },
+    {
+      "name": "sleep, drink, gathering and crafting make a real replacement without advancing the batch",
+      "ok": true,
+      "detail": {
+        "tick": 2541,
+        "inputs": {
+          "bread": 1,
+          "hammer": 1,
+          "wood": 2,
+          "stone": 2
+        },
+        "inv": {
+          "bread": 1,
+          "hammer": 1,
+          "saw": 1
+        },
+        "sameJob": true,
+        "held": {
+          "wood": 3
+        },
+        "progress": 7,
+        "conserved": true
+      }
+    },
+    {
+      "name": "same-job resumption produces planks with exact save continuation and no repeated input charge",
+      "ok": true,
+      "detail": {
+        "tick": 2692,
+        "equal": true,
+        "planks": 2,
+        "wood": 5,
+        "woodBefore": 5,
+        "job": null,
+        "conserved": true
+      }
+    },
+    {
+      "name": "preserved downstream failure: no known water prevents the longer cart job",
+      "ok": true,
+      "detail": {
+        "tick": 2745,
+        "offered": true,
+        "eligible": false,
+        "blockers": [
+          "would leave them too far from water for too long (no water known; thirst would fall to 34)"
+        ],
+        "planks": 4,
+        "carts": 0,
+        "pure": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

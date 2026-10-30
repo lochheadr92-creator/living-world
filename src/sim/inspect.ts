@@ -307,6 +307,10 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
   }
   if (!a && lastDec && p.pose !== 'sleep') doing = lastDec.chosen ? `Between tasks (last chose “${lastDec.chosen.label}”).` : doing;
   const r = p.lastResult;
+  if (!a && p.pose !== 'sleep' && r && (r.outcome === 'partial' || r.outcome === 'failed') && r.tick >= (lastDec?.tick ?? -1)) {
+    stopping = `${r.label}: ${r.detail || r.outcome} (at the last attempt, ${agoText(world, r.tick)}).`;
+    stoppingIsHistorical = true;
+  }
   const last = r ? `${r.label} → ${r.outcome}${r.detail ? ': ' + r.detail : ''} (${agoText(world, r.tick)})` : 'Nothing yet.';
   // Every plan they are carrying, each in their own terms. Three different things are kept apart for each one, because they fail in
   // different ways: the step they have SETTLED ON, whether that step is actually UNDER WAY (the activity they are running is that

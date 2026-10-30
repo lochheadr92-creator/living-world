@@ -91,6 +91,12 @@ registerHandler('operate', {
     if (!b || !b.ops) return 'fail:the workplace is gone';
     faceToward(p, a.tx, a.ty);
     const res = workJob(world, b, p);
+    if (res === 'missing_tool') {
+      const kind = recipeOf(b.ops.job!).tool!.kind;
+      const why = `needs a ${kind === 'pick' ? 'pickaxe' : kind}; the unfinished batch keeps its materials and progress`;
+      noteBlocker(b, why);
+      return a.cycle > 0 ? `partial:${why}` : `fail:${why}`;
+    }
     if (res !== 'stopped' && a.data.destSite) creditContribution(p, a.data.destSite as number, 1);
     if (res === 'stopped') return a.cycle > 0 ? 'done' : 'fail:there was nothing to work on';
     a.cycle++;

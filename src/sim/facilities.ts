@@ -29,6 +29,10 @@ export function setBatchResume(on: boolean): void {
 }
 export const batchResumeOn = (): boolean => batchResume;
 export const hasBatchResume = (world: World): boolean => batchResume && world.settings.dynamics === 'rich' && runsRulesVersion(world, 50);
+let requiredToolRecovery = true;
+export const requiredToolRecoveryOn = (): boolean => requiredToolRecovery;
+export function setRequiredToolRecovery(on: boolean): void { requiredToolRecovery = on; }
+export const hasRequiredToolRecovery = (world: World): boolean => requiredToolRecovery && world.settings.dynamics === 'rich' && runsRulesVersion(world, 61);
 /** Is this the job that `p` may get back to: the same recipe, still being worked, theirs or abandoned long enough? */
 export function resumableJob(world: World, b: Building, p: Person, r: Recipe): boolean {
   const job = b.ops?.job;
@@ -445,13 +449,15 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
 }
 
 /** One tick of work on the running batch. Returns whether it is still going. */
-export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' {
+export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' | 'missing_tool' {
   const ops = b.ops;
   const job = ops?.job;
   if (!ops || !job || job.phase !== 'work') return 'stopped';
   const r = recipeOf(job);
   if(techniqueBlocker(world,p,r.id)&&job.trial!==p.id)return 'stopped';
   const { tool } = recipeTool(world, p, b, r);
+  // The last tick a tool survives is valid work. Once absent, paid inputs/progress wait for a replacement.
+  if (hasRequiredToolRecovery(world) && r.tool?.required && !tool) return 'missing_tool';
   const mult = r.tool ? recipeToolMultiplier(tool, r.tool.speed) : 1;
   const rate = workRate(world, p, r, mult);
   job.progress += rate;

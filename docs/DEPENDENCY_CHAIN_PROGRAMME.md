@@ -143,6 +143,45 @@ acquire a replacement through existing physical actions and resume. Pin rules 60
 preserve old saves, optional-tool work and the final valid tick of a tool that breaks from wear. A missing replacement
 must leave a truthful unfinished job, not fabricated goods or a successful result.
 
+### Rules 61: required-tool loss, replacement and retained work
+
+Implemented the predeclared negative/recovery contract, with rules 60 pinned at `a320243` first. Details, six contracts,
+costs and preserved failures: [REQUIRED_TOOL_RECOVERY.md](REQUIRED_TOOL_RECOVERY.md). A required saw lost during work stops
+before the next work credit, leaves the batch paid at 7/60 with three wood, requests a replacement, and can resume after
+ordinary gathering, sleep, drinking and crafting. Required hammer, optional axe, rack exclusion, final valid wear tick,
+same-runtime save/replay and no-replacement shelving are covered. The rendered staged sequence passes 7/7 checks. A later
+cart job remains blocked without known water; this is not portrayed as successful downstream transport.
+
+Fresh rules-61 Normal/immigration-off meadow, river and forest all reached 45 days. Their exclusive time counts and batch
+sample denominators match the rules-60 table above exactly. Wall times were **136.41 / 157.46 / 106.75 seconds**. Resource
+conservation passed daily/finally and all **900 purity checks per seed** passed. Actual workshop starts were **139 / 53 /
+58**; required-tool-loss endings were **0 / 0 / 0**. This is a zero activation result, not evidence of widespread recovery.
+Final living counts were **32 / 26 / 14**, and carts **0 / 0 / 0**. Adverse forest outcome retained; no benefit claimed.
+Reports/source manifests: `autonomy_evidence/r61-{meadow,river,forest}`.
+
+Final stable-source full suite: **1,512 tests / 224 files passed**, 289.74 seconds; typecheck passed after the inspector
+correction. The earlier full run mixed the cached pre-correction inspector with the newly edited regression and failed
+that assertion (1 failed / 1511 passed); it was not used as validation. Its log remains `autonomy-full-tests61.log` and
+the unchanged-source pass is `autonomy-full-tests61-stable.log`. Existing native-config and timer-overflow notices remain.
+
+An ordinary causal example is Arlo (#1150), river: brick plan #29064 began at tick **77175**, with samples **77280–83880**
+at known kiln #23890 moving through clay/wood acquisition and collection. The retained outcome records **four bricks
+brought to its site**; seven marked starts ended in three successes, two interruptions, one crowded-workshop failure and
+one empty-collection failure. The report does not retain an exact completion timestamp or prove those bricks were later
+consumed. This is delivery evidence with costs, not a complete industrial or governance claim.
+
+Fresh delivery failures make WS2/5/17 the next contact diagnostic: **605 / 202 / 140** `different space` endings and
+**263 / 145 / 136** full-recipient-pack endings out of **1645 / 927 / 743** give starts (meadow/river/forest). A start is
+not an independent opportunity; some actions can span the endpoint. The interior guard correctly prevents through-wall
+transfers. Inspection also finds that even a giver already in the recipient's home must leave before giving, because
+`habitation.staysIndoors` permits eating/rest but no hand-over. Reproduce same-room resident care before widening entry.
+
+A fresh fetch found concurrent branch `origin/ccr-8527b59e-oatizp` at `78f01c9`. Its `c4ba75b` independently uses **59**
+for required-tool precedence; this main lineage already uses **59** for cart ordering. Do not merge its version label or
+load its rules-59 saves under this lineage. Its required-versus-convenience tool repair is relevant reusable work;
+review and, if still needed, adapt it at the next unused version after pinning this lineage. Its reported historical
+ordinary null result is not current-source evidence. The branch and its originals remain untouched.
+
 ## Earlier implementation checkpoint — expanded programme still open (rules 58)
 
 This continuation started from committed `953eb90` / rules 53 with concurrent main

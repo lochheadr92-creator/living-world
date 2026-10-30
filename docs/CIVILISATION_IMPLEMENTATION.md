@@ -2,8 +2,8 @@
 
 ## Current continuation pointer — 2026-10-30
 
-This continuation started from local main `1448583`, rules **59**. The isolated candidate now implements rules **60**,
-aligning batch-plan recipes with offered production recipes; its full programme and evidence remain open.
+This continuation started from local main `1448583`, rules **59**. The isolated candidate now implements rules **61**,
+aligning batch-plan recipes with offered production recipes and stopping/recovering required-tool loss; its full programme and evidence remain open.
 The active programme, four-class capability map, remaining transitions and evidence are maintained in
 [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
 Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch
