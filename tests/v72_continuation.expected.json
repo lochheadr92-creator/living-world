@@ -1,0 +1,28 @@
+{
+  "source": "83a56fd681d73f364ce4b4720cb88341b2f01e18, rules 72 before successor behaviour",
+  "ordinary": {
+    "saved": "20d8b572d842dcfeae40dd92d9ee8a20e68ccae84da627323880e41603dc5d6f",
+    "uninterrupted": "4473584d3c29d423ffe9c0f53f5896828968b34151ad09bc3e93f984afc7f8c4",
+    "continued": "4473584d3c29d423ffe9c0f53f5896828968b34151ad09bc3e93f984afc7f8c4"
+  },
+  "preparing": {
+    "saved": "7cbcaad8ea7d55ca8ac9d28348680ac066ba4e093ec26015ac8d32b524c04943",
+    "uninterrupted": "584c0f3c9ce5878cc57b1fb3f3862d3d54377d38a4250f3c55f3a804eb781358",
+    "continued": "584c0f3c9ce5878cc57b1fb3f3862d3d54377d38a4250f3c55f3a804eb781358"
+  },
+  "drinking": {
+    "saved": "7b1d9c95c9d8c325a770e01deb3e2e7d67b58b6913f100b2aee3b00d3b7a7b21",
+    "uninterrupted": "7c5b76886e693b493fd4b8ffa1059c3bc398b63bdce555b9295f65a1a75575f5",
+    "continued": "7c5b76886e693b493fd4b8ffa1059c3bc398b63bdce555b9295f65a1a75575f5"
+  },
+  "travelling": {
+    "saved": "7d2e4c6d345dce8f482e0edb90cf76ab3c683fa59f0cd8fcf75c4229ae36b28f",
+    "uninterrupted": "2595aa21a5040083aeed41ab73727b3b7e5747018ade97f2ff7ffb8d24ecf3fc",
+    "continued": "2595aa21a5040083aeed41ab73727b3b7e5747018ade97f2ff7ffb8d24ecf3fc"
+  },
+  "lostSource": {
+    "saved": "0c30263bbb73fb0bfb904477fd7587d3c488e4ceeb73e27fc4cc804c13042a94",
+    "uninterrupted": "b6abbb561a830adb2878a2e6c74c6848d8c7318fddb9a473d9eea40189c23b40",
+    "continued": "b6abbb561a830adb2878a2e6c74c6848d8c7318fddb9a473d9eea40189c23b40"
+  }
+}

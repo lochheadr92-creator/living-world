@@ -1,5 +1,9 @@
 # Personal trip preparation — rules 72
 
+Runtime implementation: `83a56fd`. The rules-72 ordinary/preparation/drinking/travel/lost-source reference was recorded
+from that commit before any successor behavior. `tests/helpers/journey.ts` and `tests/helpers/v72ref.ts` are now frozen
+reference fixtures; later behavior must use a fresh fixture/version and must not regenerate historical expected values.
+
 Predecessor rules 71 runtime `8df52c0`, published/pinned `511f26b`. The read-only predecessor diagnostic establishes a
 specific missing transition: known useful distant work is withheld for the water margin while nearby water is known,
 but personal trip preparation supplies no fetch-water option. This is a staged mechanism gap, not an ordinary failure rate.
@@ -99,6 +103,10 @@ Preparing supplies can therefore fail to make a trip immediately worthwhile; ene
 The forecast does not predict future random weather, account exactly for the future route/load, or guarantee a return.
 
 The journey retains one exact work key; it does not yet replace a permanently lost work source with a different known source.
+`scripts/journey_recovery_diagnostic.ts` reproduces that gap at rules 72: the original source physically yields
+"nothing to take yet", the intention still has no feasible next step for source #6, while personally known source #8
+offers the same wood work legally (utility 33.61, outward estimate 69.17 ticks). Its read-only inspection is pure and
+conservation holds (`autonomy-journey73-before.log`). This is a staged missing connection, not an ordinary failure rate.
 Broader contingent goal composition, relevant obstruction/recovery alternatives, communicated meeting/delivery waits,
 additional trip-tool paths, household coordination, ecology and every unfinished programme row remain in
 `DEPENDENCY_CHAIN_PROGRAMME.md`. No aggregate productivity, welfare, survival or mature-world benefit is established.
