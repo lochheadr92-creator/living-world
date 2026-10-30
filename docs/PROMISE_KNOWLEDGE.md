@@ -140,3 +140,14 @@ Runtime commit: `7e66620059ac805dbee5da8935a655bd44a506a1`. The immutable rules-
 commit before successor behaviour. It covers ordinary forest across the real report, a distant completion whose
 requester remains uninformed, and a save after speech but before acknowledgement continued through the actual reply.
 Its expected file and the version-80 fixture must not be re-recorded to make a successor pass.
+
+## Next failure-attribution reproduction
+
+`scripts/promise_failure_diagnostic.ts` explicitly runs rules 80. A real accepted watch is followed by the parent's
+physical departure to x=25. A declared staged impassable strip blocks the helper's actual offered journey. It fails at
+tick 306 with “no way to get there.” The world advances normally to the original deadline; both people remain alive.
+At tick 2474, distance 17, the obligation becomes `broken`, the distant parent loses 12 trust and 5 affinity, receives
+a supposedly firsthand unreliable story, updates `lastMet`, and opens a weight-38 broken-promise grievance. No report
+or requester receipt exists. The ledger balances. `autonomy-failure81-before.log` preserves the exact before/after.
+The failed activity did not retain a commitment-specific blocker, and expiry treats missing current blocker evidence
+as blame. This is the next concrete repair and communication dependency, not a result already fixed by rules 80.
