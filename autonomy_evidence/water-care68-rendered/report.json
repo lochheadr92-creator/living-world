@@ -1,0 +1,87 @@
+{
+  "rules": 68,
+  "evidence": "Staged need, full pack and donor supplies; first offered gift explicitly selected. Recovery deposit and later stored drinking are autonomous. Competing storage is explicitly staged.",
+  "sourceHashes": {
+    "src/sim/care_capacity.ts": "19a0083201bd4155ed1b1e12f14162ae82b836d59999e94526b873c343b275f7",
+    "src/sim/act_resource.ts": "7f179e0d38796a46f67cf7f4cbeddb647f13bcecc210bbe372ba0dc1d4e0a7ca",
+    "src/sim/options_work.ts": "7830179e4a44445901b3b5cc5e3717514e3b53f1a9a0e56749e6e69eb78648b2",
+    "src/sim/resident_care.ts": "05c62604066b1de9bde0359f54462e094fdf2c6677aa04c8b15b82b99ac670e8",
+    "src/sim/rulesversion.ts": "acf57873c8f639aa46ece29421660f388930a52ab38461e4c3263e77adc97048",
+    "tests/helpers/care_water.ts": "beef3ae08ba33daa7851544846bb55d1a35c0905e196633c0a78292f8adc1eab",
+    "scripts/browser/care_water_check.mjs": "79715bc7994d9339a714b7c7a4b6b5baa07d85c4021e505b1ca9dda3a8d9fe78"
+  },
+  "checks": [
+    {
+      "name": "actual failed water hand-over leads to an autonomous legal deposit",
+      "ok": true,
+      "detail": {
+        "offered": true,
+        "pure": true,
+        "kind": "deposit",
+        "care": true,
+        "reason": {
+          "tick": 13,
+          "reason": "recipient could not carry the water",
+          "count": 1
+        },
+        "fed": 0,
+        "tick": 15
+      }
+    },
+    {
+      "name": "ordinary transfer leaves actual water in the owned home and retains helper supplies",
+      "ok": true,
+      "detail": {
+        "events": [
+          {
+            "from": "person:2",
+            "to": "building:5",
+            "item": "water",
+            "n": 1,
+            "reason": "deposit"
+          }
+        ],
+        "water": 2,
+        "store": 1,
+        "equal": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "full-pack recipient later drinks stored water with exact saved continuation",
+      "ok": true,
+      "detail": {
+        "started": true,
+        "thirst": 49.12000000000015,
+        "water": 0,
+        "load": 6,
+        "beforeLoad": 6,
+        "drunk": 1,
+        "equal": true,
+        "pure": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "store filling during the trip fails without losing carried water",
+      "ok": true,
+      "detail": {
+        "result": {
+          "tick": 22,
+          "label": "Leaving water at home for Eli",
+          "outcome": "failed",
+          "detail": "no room"
+        },
+        "held": 3,
+        "water": 3,
+        "stored": 0,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

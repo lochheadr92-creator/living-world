@@ -1,7 +1,7 @@
 import {isStoredDrink,storedWaterSource} from './stored_water_access';
 import { relocationPackingBlocker } from './relocation';
 import { spareSeed } from './seed_storage';
-import { careFoodAvailable, careStoreBlocker } from './care_capacity';
+import { careFoodAvailable, careWaterAvailable, careStoreBlocker } from './care_capacity';
 import { runsRulesVersion } from './rulesversion';
 import { mayCollectMaterialStock } from './material_stock';
 import { creditProject, mayWorkProject } from './townships';
@@ -526,8 +526,9 @@ registerHandler('deposit', {
     for (const k of Object.keys(want)) {
       let n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
       if (a.data.careStore && runsRulesVersion(world, 63)) {
-        n = Math.min(n, careFoodAvailable(world, p, a.data.careRecipient as number, k as ItemKind));
-        if (n <= 0) return 'fail:the food is now needed for my own needs, others or promises';
+        const water = a.data.careWaterStore && runsRulesVersion(world, 68);
+        n = Math.min(n, water ? careWaterAvailable(world, p, a.data.careRecipient as number) : careFoodAvailable(world, p, a.data.careRecipient as number, k as ItemKind));
+        if (n <= 0) return water ? 'fail:the water is now needed for my own needs, others or promises' : 'fail:the food is now needed for my own needs, others or promises';
         if (n < want[k]) partial = true;
       }
       if (a.data.seedStash && world.settings.dynamics === 'rich' && runsRulesVersion(world,58)) {
@@ -589,7 +590,7 @@ registerHandler('deposit', {
     if (c.kind === 'site') {
       addFx(world, 'deliver', e.ent === 'site' ? e.x + e.w / 2 : p.x, e.ent === 'site' ? e.y + e.h / 2 : p.y, 0);
     }
-    return partial ? a.data.careStore ? 'partial:only food that remained spare and fit was left' : 'partial:no room for everything' : 'done';
+    return partial ? a.data.careStore ? a.data.careWaterStore && runsRulesVersion(world, 68) ? 'partial:only water that remained spare and fit was left' : 'partial:only food that remained spare and fit was left' : 'partial:no room for everything' : 'done';
   },
   onEnd(world, p, a, outcome) {
     if (a.cycle > 0) {

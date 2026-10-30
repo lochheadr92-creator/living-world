@@ -1,7 +1,7 @@
 // A resident can return to personally observed need in their own home. Remembered room
 // contact is not live remote location; entrance and hand-over are checked on arrival.
 import {newActivity} from './activities';
-import {careFoodAvailable,careStoreOption} from './care_capacity';
+import {careFoodAvailable,careStoreOption,careWaterStoreOption} from './care_capacity';
 import {knowsDeath} from './death_knowledge';
 import {isHomeType} from './constants';
 import {Scorer,addBlocked,addOption,eta,pen,traitMods} from './optutil';
@@ -48,6 +48,9 @@ function residentCareOption(ctx:Ctx,q:Pick<Person,'id'|'name'>):boolean{
  if(careStoreOption(ctx,q,items,base+(family?8:0),wh.x,wh.y)){
   for(const k of Object.keys(items) as ItemKind[])if(isFoodKind(k))delete items[k];
   if(!Object.keys(items).length)return true;
+ }
+ if(careWaterStoreOption(ctx,q,items,base+(family?8:0),wh.x,wh.y)){
+  delete items.water;if(!Object.keys(items).length)return true;
  }
  const what=Object.keys(items).join(' and '),walk=eta(ctx,wh.x,wh.y),sc=new Scorer().add(`last saw ${q.name} needing ${what}`,base).add('walking',-pen(walk));
  if(family)sc.add('family',8);

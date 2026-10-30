@@ -23,7 +23,7 @@ import { foodUnits, invRoom, roomFor } from './economy';
 import { dayFraction } from './environment';
 import { findPlotSpot } from './farming';
 import { delBelief, estimatedAmount, missingMaterials, noteFailure, recentFailure } from './knowledge';
-import { careStoreOption } from './care_capacity';
+import { careStoreOption, careWaterStoreOption } from './care_capacity';
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { drive } from './needs';
 import { stageOf } from './people';
@@ -1469,6 +1469,14 @@ function optCare(ctx: Ctx): void {
       what = Object.keys(give).join(' and ');
       sc = new Scorer().add(`${d.name} needs ${what}`, (26 + Math.max(0, (child ? 60 : 46) - d.needs.thirst) * 0.9) * tm.give).add('walking', -pen(e));
       if (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner') sc.add('family', 8);
+    }
+    const waterBase = (26 + Math.max(0, (child ? 60 : 46) - d.needs.thirst) * 0.9) * tm.give
+      + (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner' ? 8 : 0);
+    if (careWaterStoreOption(ctx, d, give, waterBase, px, py)) {
+      delete give.water;
+      if (!Object.keys(give).length) continue;
+      what = Object.keys(give).join(' and ');
+      sc = new Scorer().add(`${d.name} needs ${what}`, foodBase).add('walking', -pen(e));
     }
     addOption(ctx, {
       kind: 'give',
