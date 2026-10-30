@@ -51,6 +51,29 @@ git pull --ff-only
 $runRoot = "autonomy_owner_" + (git rev-parse --short HEAD)
 ```
 
+Rules-65 retained Normal runs stopped at their per-run budgets after 20.5 / 14.4 / 17.05 days. They establish observed
+candidate-retention opportunities, not the 45-day result or a performance regression. For complete current Normal
+windows, run the following sequentially against one published revision, retaining source manifests and exact stop
+reasons. Allow roughly 3–8 minutes each on an otherwise idle core, including observation overhead; the 20-minute safety
+budget produces an explicit partial result if reached. Return each `report.json` and `kept-target.json`. An existing
+output is refused; do not overwrite the retained partial evidence.
+
+```powershell
+npx vite-node scripts/autonomy_observe.ts -- --out "$runRoot-kept-meadow" --seed meadow --days 45 --budget 1200 --kept
+```
+
+```powershell
+npx vite-node scripts/autonomy_observe.ts -- --out "$runRoot-kept-river" --seed river --days 45 --budget 1200 --kept
+```
+
+```powershell
+npx vite-node scripts/autonomy_observe.ts -- --out "$runRoot-kept-forest" --seed forest --days 45 --budget 1200 --kept
+```
+
+For a retention-specific aggregate comparison, use the matched ensemble command below with
+`--branches nudge:1,nudge:2,rich-no-kept-target` and a distinct `$runRoot-kept-ensemble` output. The same approximately
+90-minute estimate and interpretation limits apply. All these longer results are pending.
+
 Generate a genuine Large meadow world with 100 founders across four camps, immigration off, for 45 days. No people,
 history, workshops or resources are staged. Expect roughly **12–25 minutes on an otherwise idle core**, plus instrumentation
 overhead; the explicit one-hour safety budget produces a labelled partial save if reached. This is generation for an

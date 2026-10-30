@@ -12,6 +12,7 @@ import { hasCareCapacity } from './care_capacity';
 import { withdrawAllowance } from './facilities';
 import { hasWinterReserve } from './provision';
 import { runsRulesVersion } from './rulesversion';
+import { keepCurrent } from './kept_target';
 import { delBelief, estimatedAmount, recentFailure } from './knowledge';
 import { FOOD_VALUE, SOURCE_VERB } from './labels';
 import { hashUnit } from './rng';
@@ -179,7 +180,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     cands.push({ b, est: u.est, e, val, score });
   }
   cands.sort((a, b) => b.score - a.score);
-  for (const c of cands.slice(0, 3)) {
+  for (const c of keepCurrent(ctx, cands, 3, c => `gather:${c.b.id}`)) {
     const b = c.b;
     const type = b.kind as SourceType;
     const room = invRoom(world, p, type === 'fish_spot' ? 'fish' : type === 'wild_grain' ? 'grain' : type === 'fruit_tree' ? 'fruit' : 'berries');

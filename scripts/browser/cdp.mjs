@@ -56,6 +56,12 @@ export async function launch({ port = 9333, width = 1440, height = 900, profile 
   let id = 0;
   const pending = new Map();
   const events = [];
+  // Browser.close may close the socket before replying. Settle pending commands so
+  // a completed verification does not exit with an unresolved top-level await.
+  ws.onclose = () => {
+    for (const { rej } of pending.values()) rej(new Error('Browser connection closed'));
+    pending.clear();
+  };
   ws.onmessage = (ev) => {
     const m = JSON.parse(ev.data);
     if (m.id && pending.has(m.id)) {

@@ -12,6 +12,7 @@ import type { Ctx } from './optutil';
 import { friendlyTo, gatherMaterial, hhState, isRawMaterial, materialNeeds, nightMult, settlementAnchor, weatherMult } from './options_work';
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
+import { keepCurrent } from './kept_target';
 import { GRANARY_TRIP } from './intent';
 import { cartExperience, cartTripOptions } from './transport';
 import { durableReserve } from './provision';
@@ -485,7 +486,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
   found.sort((a, c) => a.e - c.e);
   let total = 0;
   for (const f of found) total += f.n;
-  for (const f of found.slice(0, 2)) {
+  for (const f of keepCurrent(ctx, found, 2, c => `collect:${c.b.id}:${item}`)) {
     const take = Math.min(f.n, Math.max(1, Math.ceil(unmet)), invRoom(ctx.world, p, item as ItemKind));
     if (take < 1) continue;
     collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag);

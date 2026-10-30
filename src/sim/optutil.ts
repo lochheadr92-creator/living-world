@@ -1,4 +1,5 @@
 import { isThreat } from './wildlife';
+import { hasKeptTarget } from './kept_target';
 import { indoorHome, sameSpace } from './habitation';
 import { moveSpeed, standSpotFor } from './activities';
 import { findWaterAccessNear, isWalkable, isWaterAccess } from './registry';
@@ -242,6 +243,10 @@ export function rankWaterSpots(ctx: Ctx, limit = 2): WaterSpot[] {
   for (const c of all) {
     if (picked.every((q) => hyp(q.b.x - c.b.x, q.b.y - c.b.y) > 7)) picked.push(c);
     if (picked.length >= limit) break;
+  }
+  if (hasKeptTarget(world)) {
+    const current = all.find(c => `drink:${c.b.id}` === p.activity?.data.optKey);
+    if (current && !picked.includes(current)) picked.push(current);
   }
   return picked;
 }

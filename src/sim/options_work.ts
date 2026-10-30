@@ -10,6 +10,7 @@ import { BUILD_DEF, DAY, FIRE_MAX_FUEL, REPAIR_USES, SUNRISE, TOOLS, TOOL_RECIPE
 import { openSitesNear, repairMaterial } from './act_build';
 import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
+import { keepCurrent } from './kept_target';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
@@ -390,7 +391,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
   if (usesMaterialStock(world, tag === 'promise' ? 'promise' : 'plan')) {
     const stores = rememberedMaterialStores(world, p, item).map(b => ({ b, e: eta(ctx, b.x, b.y) }));
     stores.sort((a, b) => a.e - b.e);
-    for (const { b } of stores.slice(0, 2)) collectMaterialStock(ctx, b, item, want, base, why, tag);
+    for (const { b } of keepCurrent(ctx, stores, 2, c => `collect:${c.b.id}:${item}`)) collectMaterialStock(ctx, b, item, want, base, why, tag);
   }
   const tm = traitMods(p);
   const kinds: BeliefKind[] = RAW_KINDS[item];
@@ -409,7 +410,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
   if (cands.length) seedStorageOption(ctx, item, base, why, nightMult(ctx) * weatherMult(ctx));
   if (cands.length && world.settings.dynamics === 'rich' && runsRulesVersion(world, 58) && invRoom(world, p, item) < 1)
     addBlocked(ctx, 'gather', `Get ${item} ${why}`, 0, `no room in my pack for one ${item}`, tag);
-  for (const c of cands.slice(0, 2)) {
+  for (const c of keepCurrent(ctx, cands, 2, c => `gather:${c.b.id}`)) {
     const type = c.b.kind as SourceType;
     const room = roomFor(p.inv, 9999, item) && invRoom(world, p, item);
     if (room < 1) continue;

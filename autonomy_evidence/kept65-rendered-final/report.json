@@ -1,0 +1,130 @@
+{
+  "head": "c101a788ae266a7b9444f99e6379c83ef4bb8b74",
+  "rules": 65,
+  "evidence": "STAGED needs, geometry, initial knowledge and initial selection. Initial controller released after actual walking. Subsequent review, gathering, delivery and drinking are ordinary simulation. No ordinary-adoption or benefit claim.",
+  "sourceHashes": {
+    "src/sim/kept_target.ts": "68da7d813fe89b3a5246dc452dcaa0117f9f8cc39361a4f1c54af4d8032b6f04",
+    "src/sim/options_survival.ts": "b8bdf9a356896fd793bc674eb6883e9782c4d6453f7d6b6a04762b92ab700271",
+    "src/sim/options_work.ts": "0e7de1e2fd93f948178ddbd35c782e1a030df0c9ef07ceffce6f278666d63357",
+    "src/sim/production.ts": "a0c336df12a8de6cca1b09847f95cd7faa845246ee6f46f682267ac71207cd3a",
+    "src/sim/optutil.ts": "c70cfed9d41d3c93bdfde404c05f547f64e0e2823ecd11ddf9dd97890c2228f5",
+    "src/sim/rulesversion.ts": "53b3d132d69ecc3a5ef27fa3ca121d62c426cfb50c681bb7478e42a1557a348d",
+    "tests/helpers/kept_target.ts": "0d988f5f6f76a480f891026847ad26c0cc842f1ec75547b045ee72d1d905abd2",
+    "scripts/browser/kept_target_check.mjs": "e79e1fcee62e9c3a229d5b7f3530327e227c8a4314ca4d8f77adfcc640fd9b1a"
+  },
+  "checks": [
+    {
+      "name": "predecessor drops a valid running destination after actual discovery",
+      "ok": true,
+      "detail": {
+        "position": [
+          39.83014817073091,
+          51.68799115960293
+        ],
+        "offered": false,
+        "held": false,
+        "result": {
+          "tick": 1086,
+          "label": "Chopping wood",
+          "outcome": "interrupted",
+          "detail": "something better came up"
+        }
+      }
+    },
+    {
+      "name": "current rules score and retain the real destination",
+      "ok": true,
+      "detail": {
+        "key": "gather:5",
+        "position": [
+          39.83014817073091,
+          51.68799115960293
+        ],
+        "known": [
+          1084,
+          1084
+        ],
+        "offers": [
+          {
+            "key": "gather:6",
+            "utility": 42.290341513308505
+          },
+          {
+            "key": "gather:7",
+            "utility": 42.08364924708664
+          },
+          {
+            "key": "gather:5",
+            "utility": 39.5171201776756
+          }
+        ],
+        "held": true,
+        "pure": true
+      }
+    },
+    {
+      "name": "walking reaches the chosen tree and starts real work",
+      "ok": true,
+      "detail": {
+        "phase": "work",
+        "target": 5,
+        "expected": 5,
+        "position": [
+          39.482281526527366,
+          57.49812523704022
+        ]
+      }
+    },
+    {
+      "name": "gathered wood reaches the household site under ordinary choices and exact saved continuation",
+      "ok": true,
+      "detail": {
+        "tick": 1386,
+        "delivered": 1,
+        "source": 7,
+        "inventory": {},
+        "result": {
+          "tick": 1385,
+          "label": "Delivering wood to the building site",
+          "outcome": "success",
+          "detail": "done"
+        },
+        "equal": true,
+        "pure": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "observed depletion removes the destination and permits a different choice",
+      "ok": true,
+      "detail": {
+        "offered": false,
+        "held": false,
+        "result": {
+          "tick": 1086,
+          "label": "Chopping wood",
+          "outcome": "interrupted",
+          "detail": "something better came up"
+        },
+        "conserved": true
+      }
+    },
+    {
+      "name": "retained shore journey reaches water and quenches real thirst",
+      "ok": true,
+      "detail": {
+        "held": true,
+        "phase": "work",
+        "kind": "drink",
+        "thirstBefore": 46.56000000000018,
+        "thirst": 61.440000000000204,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

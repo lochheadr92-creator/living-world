@@ -1,0 +1,5753 @@
+[
+ {
+  "tick": 23280,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 4,
+   "berries": 2,
+   "fish": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 23279,
+   "src": "seen",
+   "from": 0,
+   "learned": 23279,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 98.4945999999994,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 82.45723857752095,
+   "thirst": 45.77147149180361,
+   "energy": 90.0288079884434,
+   "warmth": 17.772514553626863,
+   "safety": 83.86940113773262,
+   "social": 72.86854916864019
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 67.17826541975772
+  }
+ },
+ {
+  "tick": 23400,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 4,
+   "berries": 2,
+   "fish": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 23399,
+   "src": "seen",
+   "from": 0,
+   "learned": 23399,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 98.33859999999933,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 78.85723857752082,
+   "thirst": 40.97147149180371,
+   "energy": 92.64880798844344,
+   "warmth": 24.100258126971667,
+   "safety": 91.28013407274673,
+   "social": 71.84910260529779
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 59.188641812817956
+  }
+ },
+ {
+  "tick": 23520,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 4,
+   "berries": 2,
+   "fish": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 23519,
+   "src": "seen",
+   "from": 0,
+   "learned": 23519,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 98.18259999999927,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 75.25723857752068,
+   "thirst": 36.171471491803814,
+   "energy": 96.24880798844357,
+   "warmth": 26.344170245158033,
+   "safety": 91.9362646021531,
+   "social": 70.82965604195539
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000230",
+   "utilityBeforeRanking": 56.26575553808981
+  }
+ },
+ {
+  "tick": 23640,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 4,
+   "berries": 2,
+   "fish": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 23564,
+   "src": "seen",
+   "from": 0,
+   "learned": 23564,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 98.12409999999925,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 4.508717328190371
+   }
+  ],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to keep the fire going",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone to make a saw for sawing planks",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "visit:1108",
+    "label": "Check on Viktor",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1116",
+    "label": "Bring something to Milo",
+    "reason": "has nothing to spare for someone thirsty"
+   },
+   {
+    "key": "visit:1119",
+    "label": "Bring something to Cora",
+    "reason": "has nothing to spare for someone hungry"
+   },
+   {
+    "key": "visit:1132",
+    "label": "Check on Petra",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 71.65723857752054,
+   "thirst": 92.97147149180378,
+   "energy": 92.35880798844292,
+   "warmth": 17.958871807251295,
+   "safety": 79.26023336269377,
+   "social": 69.6877094786134
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 63.46415437014588
+  }
+ },
+ {
+  "tick": 23760,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 4,
+   "berries": 2,
+   "fish": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 23759,
+   "src": "seen",
+   "from": 0,
+   "learned": 23759,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 97.87059999999914,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 5.507212832372614
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get wood to keep the fire going",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone to make a saw for sawing planks",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "visit:1113",
+    "label": "Check on Zia",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 68.05723857752041,
+   "thirst": 93.77147149180303,
+   "energy": 91.26880798844256,
+   "warmth": 20.802370973141674,
+   "safety": 89.9445943590652,
+   "social": 68.63326291527112
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 63.84246524067815
+  }
+ },
+ {
+  "tick": 23880,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 4,
+   "berries": 2,
+   "fish": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 23879,
+   "src": "seen",
+   "from": 0,
+   "learned": 23879,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 97.71459999999908,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 25.467925747180157
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get wood to keep the fire going",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone to make a saw for sawing planks",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "visit:1113",
+    "label": "Check on Zia",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 64.45723857752027,
+   "thirst": 88.97147149180228,
+   "energy": 94.8688079884427,
+   "warmth": 30.67057979303157,
+   "safety": 91.81801875696269,
+   "social": 67.61381635192872
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "fuel:1102",
+   "utilityBeforeRanking": 48.82483229999235
+  }
+ },
+ {
+  "tick": 24000,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 2,
+   "fish": 1
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 23999,
+   "src": "seen",
+   "from": 0,
+   "learned": 23999,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 97.55859999999902,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 27.550315744329577
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 26.527868499004516
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "eat_store:1118",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 60.857238577520135,
+   "thirst": 84.17147149180153,
+   "energy": 94.68880798844243,
+   "warmth": 39.483808338011926,
+   "safety": 91.98388776786547,
+   "social": 66.59436978858632
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 9626
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 27.550315744329577
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "gather:992",
+   "utilityBeforeRanking": 34.60247142200766
+  }
+ },
+ {
+  "tick": 24120,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 2,
+   "fish": 1,
+   "grain": 1
+  },
+  "stepRoom": 2,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24017,
+   "src": "seen",
+   "from": 0,
+   "learned": 24017,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 97.53519999999901,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 23.386800052927896
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 22.364352807602835
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "eat_store:1118",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "failed there 68 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "failed there 68 ticks ago (nothing left)"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 56.76223857751998,
+   "thirst": 78.57947149180075,
+   "energy": 88.96480798844196,
+   "warmth": 27.19269302362287,
+   "safety": 84.00175818381588,
+   "social": 65.46992322524414
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work",
+   "plan": 9626
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 23.386800052927896
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "gather:989",
+   "utilityBeforeRanking": 37.82436385816061
+  }
+ },
+ {
+  "tick": 24240,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 2,
+   "fish": 1,
+   "grain": 2
+  },
+  "stepRoom": 2,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24017,
+   "src": "seen",
+   "from": 0,
+   "learned": 24017,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 97.53519999999901,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 24.681525303243646
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 23.659078057918585
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:1118",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "failed there 188 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "failed there 188 ticks ago (nothing left)"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 52.53223857751982,
+   "thirst": 72.77147149179996,
+   "energy": 82.98880798844156,
+   "warmth": 24.144196375217586,
+   "safety": 84.00000007936035,
+   "social": 64.45047666190175
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "travel"
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 24.681525303243646
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 55.723702650620694
+  }
+ },
+ {
+  "tick": 24360,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 2,
+   "fish": 1,
+   "grain": 2
+  },
+  "stepRoom": 2,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24359,
+   "src": "seen",
+   "from": 0,
+   "learned": 24359,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 97.09059999999883,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:1118",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "failed there 308 ticks ago (nothing left)"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 48.93223857751968,
+   "thirst": 67.9714714917992,
+   "energy": 81.75880798844119,
+   "warmth": 47.05381322322419,
+   "safety": 91.00143628198687,
+   "social": 63.43103009855935
+  },
+  "activity": {
+   "kind": "converse",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "eat:0",
+   "utilityBeforeRanking": 34.156372513416116
+  }
+ },
+ {
+  "tick": 24480,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 2,
+   "grain": 2
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24479,
+   "src": "seen",
+   "from": 0,
+   "learned": 24479,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 96.93459999999877,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 26.551303679499764
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 25.528856434174703
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "failed there 428 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 73.33223857751955,
+   "thirst": 63.171471491798606,
+   "energy": 76.95880798844044,
+   "warmth": 59.90917948535152,
+   "safety": 91.91158929262582,
+   "social": 81.3055947749327
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 9626
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 26.551303679499764
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "gather:941",
+   "utilityBeforeRanking": 30.46196013457535
+  }
+ },
+ {
+  "tick": 24600,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 2,
+   "grain": 2
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24599,
+   "src": "seen",
+   "from": 0,
+   "learned": 24599,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 96.7785999999987,
+   "fuel": 0,
+   "items": {
+    "planks": 1,
+    "wood": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 3
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 27.518239243824937
+   },
+   {
+    "key": "operate:9196:hew_planks",
+    "utilityBeforeRanking": 28.199870740708313
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "failed there 97 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 69.53723857751959,
+   "thirst": 58.059471491798696,
+   "energy": 71.7948079884398,
+   "warmth": 51.398657837588935,
+   "safety": 84.00035711082538,
+   "social": 79.63864821159123
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work",
+   "plan": 9626
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 27.518239243824937
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "gather:941",
+   "utilityBeforeRanking": 35.77705390216157
+  }
+ },
+ {
+  "tick": 24720,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 2,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24719,
+   "src": "seen",
+   "from": 0,
+   "learned": 24719,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 96.62259999999864,
+   "fuel": 0,
+   "items": {
+    "planks": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 2
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "failed there 217 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   },
+   {
+    "key": "withdraw:9196",
+    "label": "Collect 2 planks",
+    "reason": "tried recently and found none to take"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Hewing planks",
+    "reason": "tried recently and could not get on"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "tried recently and could not get on"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 65.81723857751956,
+   "thirst": 53.06747149179879,
+   "energy": 66.77080798843912,
+   "warmth": 48.45878138120444,
+   "safety": 84.00000001611916,
+   "social": 77.81070164824996
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:945",
+   "utilityBeforeRanking": 35.18528562670971
+  }
+ },
+ {
+  "tick": 24840,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 5,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24839,
+   "src": "seen",
+   "from": 0,
+   "learned": 24839,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 96.46659999999858,
+   "fuel": 0,
+   "items": {
+    "planks": 2,
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 2
+    },
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:1118",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:945",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "failed there 337 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:945",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "failed there 337 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   },
+   {
+    "key": "gather:944",
+    "label": "Picking berries",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 37)"
+   },
+   {
+    "key": "gather:1093",
+    "label": "Fishing",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 32)"
+   },
+   {
+    "key": "deposit:1118:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 37)"
+   },
+   {
+    "key": "explore",
+    "label": "Look for timber",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 27)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 61.48223857751973,
+   "thirst": 47.09147149179885,
+   "energy": 60.59880798843893,
+   "warmth": 46.51620565609298,
+   "safety": 84.00000000000074,
+   "social": 76.36075508490845
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:941",
+   "utilityBeforeRanking": 32.598428455308856
+  }
+ },
+ {
+  "tick": 24960,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24899,
+   "src": "seen",
+   "from": 0,
+   "learned": 24899,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 96.38859999999855,
+   "fuel": 0,
+   "items": {
+    "planks": 2,
+    "wood": 1
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.014104493378868533,
+    "burn": 0,
+    "output": {
+     "planks": 2
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 24987.730595595902,
+    "client": 1134,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:1118",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:945",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "failed there 457 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 57.664738577519586,
+   "thirst": 41.94347149179894,
+   "energy": 55.392807988438946,
+   "warmth": 43.427546960505865,
+   "safety": 84.00000000000009,
+   "social": 74.67280852156694
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000223",
+   "utilityBeforeRanking": 52.340465789565386
+  }
+ },
+ {
+  "tick": 25080,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 24899,
+   "src": "seen",
+   "from": 0,
+   "learned": 24899,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 96.38859999999855,
+   "fuel": 0,
+   "items": {
+    "planks": 2,
+    "wood": 1
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.014104493378868533,
+    "burn": 0,
+    "output": {
+     "planks": 2
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 24987.730595595902,
+    "client": 1134,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 23.439001358320034
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 22.416554112994973
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:1118",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:945",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone to make a saw for sawing planks",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "visit:1112",
+    "label": "Bring something to Ben",
+    "reason": "has nothing to spare for someone thirsty"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 54.06473857751945,
+   "thirst": 95.94347149179838,
+   "energy": 50.59280798843905,
+   "warmth": 38.39368275231464,
+   "safety": 84.00000000000009,
+   "social": 72.83086195822565
+  },
+  "activity": {
+   "kind": "withdraw",
+   "phase": "travel",
+   "plan": 9592
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 23.439001358320034
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "collect:9196:planks",
+   "utilityBeforeRanking": 23.439001358320034
+  }
+ },
+ {
+  "tick": 25200,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 25199,
+   "src": "seen",
+   "from": 0,
+   "learned": 25199,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 95.99859999999839,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.5435435726536193,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 25240.081078461175,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 6.07140406156073
+   },
+   {
+    "key": "operate:9196:hew_planks",
+    "utilityBeforeRanking": 4.94671209170316
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:945",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:941",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "the timber yard is busy with hewn planks"
+   },
+   {
+    "key": "visit:1112",
+    "label": "Bring something to Ben",
+    "reason": "has nothing to spare for someone thirsty"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 50.61323857751932,
+   "thirst": 91.31947149179769,
+   "energy": 47.191762490021745,
+   "warmth": 33.83989634739973,
+   "safety": 70.87654135496821,
+   "social": 71.63917988269809
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 6.07140406156073
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "sleep:1118",
+   "utilityBeforeRanking": 45.05849015857294
+  }
+ },
+ {
+  "tick": 25320,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 25319,
+   "src": "seen",
+   "from": 0,
+   "learned": 25319,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 95.84259999999833,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 25345.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "gather:941",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 48.63323857751924,
+   "thirst": 88.43947149179758,
+   "energy": 57.81861595048817,
+   "warmth": 36.99316362058575,
+   "safety": 78.33576580743306,
+   "social": 70.95534591369578
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:1118",
+   "utilityBeforeRanking": 47.42134087495423
+  }
+ },
+ {
+  "tick": 25440,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 25439,
+   "src": "seen",
+   "from": 0,
+   "learned": 25439,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 95.68659999999826,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 25465.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "gather:941",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 46.65323857751917,
+   "thirst": 85.55947149179747,
+   "energy": 68.40716049145544,
+   "warmth": 33.4824343271434,
+   "safety": 78.99618967263976,
+   "social": 70.27151194469347
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:1118",
+   "utilityBeforeRanking": 42.7617166407412
+  }
+ },
+ {
+  "tick": 25560,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 25559,
+   "src": "seen",
+   "from": 0,
+   "learned": 25559,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 95.5305999999982,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 25585.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 44.67323857751909,
+   "thirst": 82.67947149179736,
+   "energy": 78.68745205364445,
+   "warmth": 27.296755701254547,
+   "safety": 79.0546621967626,
+   "social": 69.58767797569116
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:1118",
+   "utilityBeforeRanking": 38.23772521162333
+  }
+ },
+ {
+  "tick": 25680,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 25679,
+   "src": "seen",
+   "from": 0,
+   "learned": 25679,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 95.37459999999814,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 25705.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 42.69323857751902,
+   "thirst": 79.79947149179725,
+   "energy": 88.5775923961262,
+   "warmth": 20.865407646676406,
+   "safety": 79.05983922966138,
+   "social": 68.90384400668886
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 59.99283422559494
+  }
+ },
+ {
+  "tick": 25800,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 25799,
+   "src": "seen",
+   "from": 0,
+   "learned": 25799,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 95.21859999999808,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 25825.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 39.33623857751889,
+   "thirst": 75.2874714917966,
+   "energy": 89.16853609386364,
+   "warmth": 22.71150722142928,
+   "safety": 89.85685007532015,
+   "social": 67.87523933249761
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 60.758433081815845
+  }
+ },
+ {
+  "tick": 25920,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 6,
+   "grain": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 25919,
+   "src": "seen",
+   "from": 0,
+   "learned": 25919,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 95.06259999999801,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 25945.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 35.736238577518755,
+   "thirst": 70.48747149179584,
+   "energy": 92.76853609386377,
+   "warmth": 26.787578059842662,
+   "safety": 91.81025006473607,
+   "social": 66.85579276915522
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "eat:0",
+   "utilityBeforeRanking": 64.29306824720138
+  }
+ },
+ {
+  "tick": 26040,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "wood": 1,
+   "berries": 5
+  },
+  "stepRoom": 2,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26039,
+   "src": "seen",
+   "from": 0,
+   "learned": 26039,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.90659999999795,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26065.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 5.977652685011121
+   },
+   {
+    "key": "operate:9196:hew_planks",
+    "utilityBeforeRanking": 4.852960715153552
+   }
+  ],
+  "blockers": [
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "the timber yard is busy with hewn planks"
+   },
+   {
+    "key": "visit:1116",
+    "label": "Bring something to Milo",
+    "reason": "has nothing to spare for someone thirsty"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 88.13623857751861,
+   "thirst": 65.6874714917951,
+   "energy": 93.07853609386356,
+   "warmth": 30.791217448385666,
+   "safety": 91.98319994438187,
+   "social": 65.83634620581282
+  },
+  "activity": {
+   "kind": "fuel_fire",
+   "phase": "work"
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 5.977652685011121
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "fuel:1102",
+   "utilityBeforeRanking": 53.12217131501711
+  }
+ },
+ {
+  "tick": 26160,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26159,
+   "src": "seen",
+   "from": 0,
+   "learned": 26159,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.75059999999789,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26185.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 6.023194704885774
+   },
+   {
+    "key": "operate:9196:hew_planks",
+    "utilityBeforeRanking": 4.898502735028204
+   }
+  ],
+  "blockers": [
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "the timber yard is busy with hewn planks"
+   },
+   {
+    "key": "visit:1112",
+    "label": "Bring something to Ben",
+    "reason": "has nothing to spare for someone thirsty"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 84.53623857751847,
+   "thirst": 60.8874714917949,
+   "energy": 96.46853609386368,
+   "warmth": 38.88193416310979,
+   "safety": 91.99851255881384,
+   "social": 64.81689964247042
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work",
+   "plan": 10115
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 6.023194704885774
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "shelter:1102",
+   "utilityBeforeRanking": 28
+  }
+ },
+ {
+  "tick": 26280,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26279,
+   "src": "seen",
+   "from": 0,
+   "learned": 26279,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.59459999999783,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26305.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 28.982414463947123
+   },
+   {
+    "key": "operate:9196:hew_planks",
+    "utilityBeforeRanking": 23.87017823732181
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "the timber yard is busy with hewn planks"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 80.93623857751834,
+   "thirst": 56.087471491795,
+   "energy": 98.38853609386364,
+   "warmth": 45.178026244354314,
+   "safety": 91.99986830512158,
+   "social": 63.79745307912802
+  },
+  "activity": {
+   "kind": "withdraw",
+   "phase": "travel"
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 28.982414463947123
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "collect:9196:planks",
+   "utilityBeforeRanking": 28.982414463947123
+  }
+ },
+ {
+  "tick": 26400,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 2
+  },
+  "stepRoom": 5,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26399,
+   "src": "seen",
+   "from": 0,
+   "learned": 26399,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.43859999999776,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26425.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:934",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   },
+   {
+    "key": "gather:1093",
+    "label": "Fishing",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 31)"
+   },
+   {
+    "key": "gather:1095",
+    "label": "Fishing",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 30)"
+   },
+   {
+    "key": "build:10201",
+    "label": "Build the hut",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 37)"
+   },
+   {
+    "key": "explore",
+    "label": "Look for timber",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 34)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 77.3362385775182,
+   "thirst": 51.2874714917951,
+   "energy": 93.58853609386288,
+   "warmth": 38.12244615534139,
+   "safety": 57.4354736292738,
+   "social": 62.561006515785635
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 9626
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:943",
+   "utilityBeforeRanking": 25.93735021247834
+  }
+ },
+ {
+  "tick": 26520,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 3
+  },
+  "stepRoom": 4,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26519,
+   "src": "seen",
+   "from": 0,
+   "learned": 26519,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.2825999999977,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26545.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:934",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 35)"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 38)"
+   },
+   {
+    "key": "gather:1093",
+    "label": "Fishing",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 25)"
+   },
+   {
+    "key": "give:1121",
+    "label": "Bring berries to Ivo",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 33)"
+   },
+   {
+    "key": "explore",
+    "label": "Look for timber",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 30)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 73.2637385775185,
+   "thirst": 45.731471491795176,
+   "energy": 87.9065360938624,
+   "warmth": 32.620905866708426,
+   "safety": 67.58589610564819,
+   "social": 61.209059952443
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000223",
+   "utilityBeforeRanking": 37.71734768179474
+  }
+ },
+ {
+  "tick": 26640,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26639,
+   "src": "seen",
+   "from": 0,
+   "learned": 26639,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.12659999999764,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26665.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "warm:1102",
+    "label": "Warm up at the fire",
+    "reason": "thinks the fire has gone out"
+   },
+   {
+    "key": "gather:934",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too thirsty to start a building"
+   },
+   {
+    "key": "gather:1093",
+    "label": "Fishing",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 25)"
+   },
+   {
+    "key": "gather:1095",
+    "label": "Fishing",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 24)"
+   },
+   {
+    "key": "gather:937",
+    "label": "Picking berries",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 30)"
+   },
+   {
+    "key": "deposit:1118:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 31)"
+   },
+   {
+    "key": "give:1121",
+    "label": "Bring berries to Ivo",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 28)"
+   },
+   {
+    "key": "explore",
+    "label": "Look for timber",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 27)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 68.94373857751901,
+   "thirst": 39.779471491795235,
+   "energy": 81.76253609386205,
+   "warmth": 35.77580087608341,
+   "safety": 76.80240399658341,
+   "social": 59.591113389100535
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000223",
+   "utilityBeforeRanking": 52.80951417657041
+  }
+ },
+ {
+  "tick": 26760,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26639,
+   "src": "seen",
+   "from": 0,
+   "learned": 26639,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.12659999999764,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26665.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 9.989391319831508
+   }
+  ],
+  "blockers": [
+   {
+    "key": "warm:1102",
+    "label": "Warm up at the fire",
+    "reason": "thinks the fire has gone out"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   },
+   {
+    "key": "visit:1125",
+    "label": "Check on Ines",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 65.26123857751895,
+   "thirst": 96.44747149179504,
+   "energy": 76.80853609386135,
+   "warmth": 42.16333781572882,
+   "safety": 80.74840328045417,
+   "social": 57.38866682575814
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work",
+   "plan": 9626
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 9.989391319831508
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "gather:1095",
+   "utilityBeforeRanking": 34.681101002768074
+  }
+ },
+ {
+  "tick": 26880,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5,
+   "fish": 2
+  },
+  "stepRoom": 2,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26639,
+   "src": "seen",
+   "from": 0,
+   "learned": 26639,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.12659999999764,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26665.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 8.543917229587443
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:5855",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 60.761238577519016,
+   "thirst": 90.20747149179424,
+   "energy": 70.3285360938611,
+   "warmth": 50.144569275049086,
+   "safety": 82.21269643785244,
+   "social": 55.1092202624157
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work",
+   "plan": 9626
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 8.543917229587443
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "gather:1095",
+   "utilityBeforeRanking": 32.585216923047824
+  }
+ },
+ {
+  "tick": 27000,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5,
+   "fish": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26639,
+   "src": "seen",
+   "from": 0,
+   "learned": 26639,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.12659999999764,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26665.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 17.263892461885987
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:5855",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for a friend’s hut",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 56.37373857751885,
+   "thirst": 84.14747149179344,
+   "energy": 64.0585360938608,
+   "warmth": 57.61886818192808,
+   "safety": 83.35089164424166,
+   "social": 52.82977369907325
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work"
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 17.263892461885987
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "collect:9196:planks",
+   "utilityBeforeRanking": 17.263892461885987
+  }
+ },
+ {
+  "tick": 27120,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5,
+   "fish": 3,
+   "wood": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 26639,
+   "src": "seen",
+   "from": 0,
+   "learned": 26639,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 94.12659999999764,
+   "fuel": 0,
+   "items": {
+    "planks": 3
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.7096263309644472,
+    "burn": 0,
+    "output": {
+     "planks": 3
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 26665.1336302132,
+    "client": 1138,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 20.66171714089399
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:5855",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to keep the fire going",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for a friend’s hut",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood for the shared hall (hewn planks)",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 52.278738577518695,
+   "thirst": 78.55547149179266,
+   "energy": 58.334536093860706,
+   "warmth": 63.212723210125965,
+   "safety": 83.94252932701251,
+   "social": 50.550327135730804
+  },
+  "activity": {
+   "kind": "give",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "give:1122",
+   "utilityBeforeRanking": 36.27270770299132
+  }
+ },
+ {
+  "tick": 27240,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5,
+   "fish": 3,
+   "wood": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 27239,
+   "src": "seen",
+   "from": 0,
+   "learned": 27239,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 93.34659999999732,
+   "fuel": 0,
+   "items": {
+    "planks": 4,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 4
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (10 planks)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   },
+   {
+    "key": "give:1122",
+    "label": "Care for Eli",
+    "reason": "does not know where they are"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 48.67873857751856,
+   "thirst": 73.75547149179191,
+   "energy": 53.53453609386081,
+   "warmth": 68.45898083424365,
+   "safety": 83.99491166886952,
+   "social": 48.69088057238853
+  },
+  "activity": {
+   "kind": "attend",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "attend:10584",
+   "utilityBeforeRanking": 48.4639166099325
+  }
+ },
+ {
+  "tick": 27360,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5,
+   "fish": 3,
+   "wood": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 27359,
+   "src": "seen",
+   "from": 0,
+   "learned": 27359,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 93.19059999999726,
+   "fuel": 0,
+   "items": {
+    "planks": 5,
+    "wood": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 5
+    },
+    "inputs": {
+     "wood": 1
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "too hungry to start a building"
+   },
+   {
+    "key": "give:1122",
+    "label": "Care for Eli",
+    "reason": "does not know where they are"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 45.07873857751842,
+   "thirst": 68.95547149179116,
+   "energy": 48.73453609386091,
+   "warmth": 84.0453765932229,
+   "safety": 91.21595983886262,
+   "social": 47.67143400904613
+  },
+  "activity": {
+   "kind": "give",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "eat:0",
+   "utilityBeforeRanking": 43.04906482111134
+  }
+ },
+ {
+  "tick": 27480,
+  "person": 1120,
+  "name": "Abel",
+  "plan": 9592,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "berries": 5,
+   "fish": 1,
+   "wood": 1
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 27479,
+   "src": "seen",
+   "from": 0,
+   "learned": 27479,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 93.0345999999972,
+   "fuel": 0,
+   "items": {
+    "planks": 5
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 5
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1120,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 29.973056079297542
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 28.95060883397248
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:2804",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (unknown)"
+   },
+   {
+    "key": "plan_site:0",
+    "label": "Lay out a hut",
+    "reason": "the household has already laid out a hut"
+   },
+   {
+    "key": "give:1122",
+    "label": "Care for Eli",
+    "reason": "does not know where they are"
+   },
+   {
+    "key": "operate:9196",
+    "label": "Sawing planks",
+    "reason": "needs a saw and has none (and none is on the rack)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 97.47873857751829,
+   "thirst": 64.15547149179041,
+   "energy": 43.93453609386101,
+   "warmth": 86.69031335084645,
+   "safety": 88.41816615523155,
+   "social": 46.2074874457037
+  },
+  "activity": {
+   "kind": "withdraw",
+   "phase": "travel",
+   "plan": 9592
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 29.973056079297542
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "collect:9196:planks",
+   "utilityBeforeRanking": 29.973056079297542
+  }
+ },
+ {
+  "tick": 31560,
+  "person": 1138,
+  "name": "Basil",
+  "plan": 12722,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "berries": 3,
+   "hammer": 1,
+   "stone": 1,
+   "seeds": 2,
+   "saw": 1,
+   "wood": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 29516,
+   "src": "seen",
+   "from": 0,
+   "learned": 29516,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 90.38649999999613,
+   "fuel": 0,
+   "items": {
+    "planks": 4
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 4
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1138,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 22.354088321540583
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 21.276971544936398
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for a friend’s hut",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (7 planks)"
+   },
+   {
+    "key": "build:12126",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 wood, 3 stone)"
+   },
+   {
+    "key": "give:1140",
+    "label": "Care for Nico",
+    "reason": "does not know where they are"
+   },
+   {
+    "key": "visit:1144",
+    "label": "Check on Alma",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 72.55050000000213,
+   "thirst": 65.58017556327944,
+   "energy": 71.14062382884548,
+   "warmth": 51.18492470990711,
+   "safety": 84.00000000000009,
+   "social": 42.77566791644764
+  },
+  "activity": {
+   "kind": "withdraw",
+   "phase": "travel",
+   "plan": 12722
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 22.354088321540583
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "collect:9196:planks",
+   "utilityBeforeRanking": 22.354088321540583
+  }
+ },
+ {
+  "tick": 31680,
+  "person": 1138,
+  "name": "Basil",
+  "plan": 12722,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "berries": 3,
+   "hammer": 1,
+   "stone": 1,
+   "seeds": 2,
+   "saw": 1,
+   "wood": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 31679,
+   "src": "seen",
+   "from": 0,
+   "learned": 31679,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 87.30228249999307,
+   "fuel": 0,
+   "items": {
+    "planks": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 2
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1138,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 29.8787033531892
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 28.801586576585013
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for a friend’s hut",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (7 planks)"
+   },
+   {
+    "key": "give:1139",
+    "label": "Care for Thea",
+    "reason": "does not know where they are"
+   },
+   {
+    "key": "give:1140",
+    "label": "Care for Nico",
+    "reason": "does not know where they are"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 68.950500000002,
+   "thirst": 60.780175563279265,
+   "energy": 66.34062382884473,
+   "warmth": 67.21926836451595,
+   "safety": 86.97322174278308,
+   "social": 41.85037046318093
+  },
+  "activity": {
+   "kind": "withdraw",
+   "phase": "travel",
+   "plan": 12722
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 29.8787033531892
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "collect:9196:planks",
+   "utilityBeforeRanking": 29.8787033531892
+  }
+ },
+ {
+  "tick": 31800,
+  "person": 1138,
+  "name": "Basil",
+  "plan": 12722,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "berries": 3,
+   "hammer": 1,
+   "stone": 1,
+   "seeds": 2,
+   "saw": 1,
+   "wood": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 31799,
+   "src": "seen",
+   "from": 0,
+   "learned": 31799,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 87.09714249999259,
+   "fuel": 0,
+   "items": {
+    "planks": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1138,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 30.069612475025526
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 28.992495698421337
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get stone for a friend’s hut",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "give:1139",
+    "label": "Care for Thea",
+    "reason": "does not know where they are"
+   },
+   {
+    "key": "give:1140",
+    "label": "Care for Nico",
+    "reason": "does not know where they are"
+   },
+   {
+    "key": "explore",
+    "label": "Explore somewhere new",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 35)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 65.23050000000197,
+   "thirst": 55.78817556327936,
+   "energy": 61.31662382884437,
+   "warmth": 79.2854967704162,
+   "safety": 84.002895494011,
+   "social": 41.08257300991417
+  },
+  "activity": {
+   "kind": "build",
+   "phase": "work"
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 30.069612475025526
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "build:7329",
+   "utilityBeforeRanking": 37.53664535715837
+  }
+ },
+ {
+  "tick": 31920,
+  "person": 1138,
+  "name": "Basil",
+  "plan": 12722,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "berries": 3,
+   "hammer": 1,
+   "stone": 1,
+   "seeds": 2,
+   "saw": 1,
+   "wood": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 31919,
+   "src": "seen",
+   "from": 0,
+   "learned": 31919,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 86.8920024999921,
+   "fuel": 0,
+   "items": {
+    "planks": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1138,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "eat_store:2079",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "give:1140",
+    "label": "Care for Nico",
+    "reason": "does not know where they are"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 38)"
+   },
+   {
+    "key": "gather:993",
+    "label": "Gathering wild grain",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 37)"
+   },
+   {
+    "key": "gather:1091",
+    "label": "Fishing",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 36)"
+   },
+   {
+    "key": "explore",
+    "label": "Explore somewhere new",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 28)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 60.85800000000203,
+   "thirst": 49.752175563279415,
+   "energy": 55.074623828844175,
+   "warmth": 89.9390115533296,
+   "safety": 84.0000001306959,
+   "social": 40.40577555664726
+  },
+  "activity": {
+   "kind": "converse",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000230",
+   "utilityBeforeRanking": 28.00963187158379
+  }
+ },
+ {
+  "tick": 32040,
+  "person": 1138,
+  "name": "Basil",
+  "plan": 12722,
+  "makes": "planks",
+  "step": "take the wood to the timber yard",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "store",
+   "target": 9196,
+   "item": "wood",
+   "step": "take the wood to the timber yard",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "berries": 3,
+   "hammer": 1,
+   "stone": 1,
+   "seeds": 2,
+   "saw": 1,
+   "wood": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 32030,
+   "src": "seen",
+   "from": 0,
+   "learned": 32030,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 86.70224799999166,
+   "fuel": 0,
+   "items": {},
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1138,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "eat_store:2079",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 57.25800000000189,
+   "thirst": 44.95217556327952,
+   "energy": 50.27462382884428,
+   "warmth": 94.69048526817728,
+   "safety": 89.25797128384346,
+   "social": 54.5022833229444
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000230",
+   "utilityBeforeRanking": 44.77894495757467
+  }
+ },
+ {
+  "tick": 32160,
+  "person": 1138,
+  "name": "Basil",
+  "plan": 12722,
+  "makes": "planks",
+  "step": "take the wood to the timber yard",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "store",
+   "target": 9196,
+   "item": "wood",
+   "step": "take the wood to the timber yard",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "berries": 3,
+   "hammer": 1,
+   "stone": 1,
+   "seeds": 2,
+   "saw": 1,
+   "wood": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 32159,
+   "src": "seen",
+   "from": 0,
+   "learned": 32159,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 86.48172249999114,
+   "fuel": 0,
+   "items": {},
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1138,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 28.22553629266714
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "eat_store:2079",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for a friend’s hut",
+    "reason": "no room in my pack for one stone"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 53.658000000001756,
+   "thirst": 96.15217556327906,
+   "energy": 45.47462382884438,
+   "warmth": 96.15726431010701,
+   "safety": 88.06400079979846,
+   "social": 54.105485869677686
+  },
+  "activity": {
+   "kind": "deposit",
+   "phase": "travel",
+   "plan": 12722
+  },
+  "offered": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 28.22553629266714
+   }
+  ],
+  "eligible": [
+   "bring:9196:wood"
+  ],
+  "first": {
+   "key": "bring:9196:wood",
+   "utilityBeforeRanking": 28.22553629266714
+  }
+ },
+ {
+  "tick": 32280,
+  "person": 1138,
+  "name": "Basil",
+  "plan": 12722,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "berries": 3,
+   "hammer": 1,
+   "stone": 1,
+   "seeds": 2,
+   "saw": 1
+  },
+  "stepRoom": 4,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 32279,
+   "src": "seen",
+   "from": 0,
+   "learned": 32279,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 86.27658249999065,
+   "fuel": 0,
+   "items": {
+    "planks": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 2
+    },
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1138,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 32.573653497229934
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "eat_store:2079",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (4 planks)"
+   },
+   {
+    "key": "give:1139",
+    "label": "Care for Thea",
+    "reason": "does not know where they are"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 50.05800000000162,
+   "thirst": 91.35217556327831,
+   "energy": 40.67462382884448,
+   "warmth": 80.37949705205558,
+   "safety": 84.01033618903962,
+   "social": 53.372688416410966
+  },
+  "activity": {
+   "kind": "withdraw",
+   "phase": "work",
+   "plan": 12722
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 32.573653497229934
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "collect:9196:planks",
+   "utilityBeforeRanking": 32.573653497229934
+  }
+ },
+ {
+  "tick": 34080,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 13738,
+  "makes": "planks",
+  "step": "get 3 more wood for the hewn planks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "wood",
+   "step": "get 3 more wood for the hewn planks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "seeds": 3,
+   "pick": 1,
+   "berries": 2,
+   "spear": 1,
+   "grain": 2,
+   "hoe": 1
+  },
+  "stepRoom": 3,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 32407,
+   "src": "seen",
+   "from": 0,
+   "learned": 32407,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 86.05363834999027,
+   "fuel": 0,
+   "items": {},
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (2 planks)"
+   },
+   {
+    "key": "build:11913",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (1 wood)"
+   },
+   {
+    "key": "visit:8969",
+    "label": "Check on Delia",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 74.38149999999597,
+   "thirst": 75.82241458381704,
+   "energy": 73.45399999999712,
+   "warmth": 86.4043665643812,
+   "safety": 84.00000000000009,
+   "social": 42.91692213261758
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 13738
+  },
+  "offered": [
+   {
+    "key": "gather:440",
+    "utilityBeforeRanking": 19.550202699882124
+   },
+   {
+    "key": "gather:439",
+    "utilityBeforeRanking": 19.407673024236804
+   },
+   {
+    "key": "gather:440",
+    "utilityBeforeRanking": 21.49747176118442
+   },
+   {
+    "key": "gather:439",
+    "utilityBeforeRanking": 21.3549420855391
+   }
+  ],
+  "eligible": [
+   "gather:440",
+   "gather:439",
+   "gather:440",
+   "gather:439"
+  ],
+  "first": {
+   "key": "gather:440",
+   "utilityBeforeRanking": 21.49747176118442
+  }
+ },
+ {
+  "tick": 34200,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 13738,
+  "makes": "planks",
+  "step": "take the wood to the timber yard",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "store",
+   "target": 9196,
+   "item": "wood",
+   "step": "take the wood to the timber yard",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "seeds": 3,
+   "pick": 1,
+   "berries": 2,
+   "spear": 1,
+   "grain": 2,
+   "hoe": 1,
+   "wood": 3
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 32407,
+   "src": "seen",
+   "from": 0,
+   "learned": 32407,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 86.05363834999027,
+   "fuel": 0,
+   "items": {},
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {},
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 8.13045411113817
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to help keep a neighbour’s lean-to standing",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (2 planks)"
+   },
+   {
+    "key": "visit:8969",
+    "label": "Check on Delia",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 70.30899999999626,
+   "thirst": 70.26641458381626,
+   "energy": 67.77199999999664,
+   "warmth": 92.80845596857287,
+   "safety": 84.00000000000009,
+   "social": 41.36533603111035
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 8.13045411113817
+   }
+  ],
+  "eligible": [
+   "bring:9196:wood"
+  ],
+  "first": {
+   "key": "gather:953",
+   "utilityBeforeRanking": 31.60969480844007
+  }
+ },
+ {
+  "tick": 34320,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 13738,
+  "makes": "planks",
+  "step": "take the wood to the timber yard",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "store",
+   "target": 9196,
+   "item": "wood",
+   "step": "take the wood to the timber yard",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "seeds": 3,
+   "pick": 1,
+   "berries": 3,
+   "spear": 1,
+   "grain": 2,
+   "hoe": 1,
+   "wood": 3
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 34318,
+   "src": "seen",
+   "from": 0,
+   "learned": 34318,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 81.56646799998947,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": "hew_planks",
+    "progress": 0.03187248647445813,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {
+     "planks": 1
+    },
+    "readyAt": 34405.1314762173,
+    "client": 1128,
+    "tended": 22121
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "operate:9196:hew_planks",
+    "utilityBeforeRanking": 13.349930021975908
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to help keep a neighbour’s lean-to standing",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (2 planks)"
+   },
+   {
+    "key": "visit:8969",
+    "label": "Check on Delia",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 66.63399999999619,
+   "thirst": 65.3464145838155,
+   "energy": 62.83199999999614,
+   "warmth": 96.50708295477843,
+   "safety": 84.00000000000009,
+   "social": 40.258249929603
+  },
+  "activity": {
+   "kind": "deposit",
+   "phase": "travel",
+   "plan": 13738
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "deposit:8686:food",
+   "utilityBeforeRanking": 17.738569101535205
+  }
+ },
+ {
+  "tick": 34440,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 13738,
+  "makes": "planks",
+  "step": "collect the planks from the timber yard",
+  "key": "collect:9196:planks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 9196,
+   "item": "planks",
+   "step": "collect the planks from the timber yard",
+   "key": "collect:9196:planks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "seeds": 3,
+   "pick": 1,
+   "berries": 2,
+   "spear": 1,
+   "hoe": 1,
+   "wood": 3
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 9196,
+   "kind": "building",
+   "x": 30.5,
+   "y": 37,
+   "amount": 0,
+   "max": 0,
+   "seen": 34411,
+   "src": "seen",
+   "from": 0,
+   "learned": 34411,
+   "btype": "timber_yard",
+   "hh": 0,
+   "cond": 81.44556799998942,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "planks": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "planks": 1
+    },
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 22121
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 14.771178614263818
+   },
+   {
+    "key": "bring:9196:wood",
+    "utilityBeforeRanking": 14.054548105112765
+   }
+  ],
+  "blockers": [
+   {
+    "key": "build:7329",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (2 planks)"
+   },
+   {
+    "key": "visit:8969",
+    "label": "Check on Delia",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 63.033999999996055,
+   "thirst": 60.54641458381537,
+   "energy": 58.031999999996245,
+   "warmth": 98.29690832899776,
+   "safety": 84.00000000000009,
+   "social": 39.238663828095824
+  },
+  "activity": {
+   "kind": "socialize",
+   "phase": "travel"
+  },
+  "offered": [
+   {
+    "key": "collect:9196:planks",
+    "utilityBeforeRanking": 14.771178614263818
+   }
+  ],
+  "eligible": [
+   "collect:9196:planks"
+  ],
+  "first": {
+   "key": "socialize:1146:chat",
+   "utilityBeforeRanking": 28.333862802422935
+  }
+ }
+]

@@ -5,16 +5,16 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **64**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **65**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
-choice and tool-loss recovery, lawful indoor care, full-pack food recovery, and required-tool precedence. The older
+choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, and retaining a valid running destination for ordinary review. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
 
 ## Autonomy and environment continuation — 2026-10-30
 
-Published checkpoint: main and origin/main reached **`e6a6d27`**, rules **64**, on 30 October. The implementation is
-`1acf4fa`; `e6a6d27` pins its continuation before any successor. The precise continuation instructions below preserve
-the still-open programme. This documentation-only update follows those commits.
+The rules-65 continuation starts from published `c101a78`, with unchanged `origin/main` and the concurrent branch
+`be786a8` freshly checked. Rules 64 was already pinned in `e6a6d27`. Current changes, tests, ordinary budget stops and
+remaining work are recorded in the rules-65 section below; the older rules-64 checkpoint remains historical.
 
 The owner's 30 October autonomy/environment prompt is one authorized implementation programme. This section extends this
 register; it does not replace the existing WS evidence or declare their unfinished journeys complete. The audit's rules-58
@@ -44,7 +44,7 @@ remain attributed evidence, not newly repeated measurements.
 | Learned daily routines / absent beyond existing night/supper/winter practices (A2) | `intent.ts`, `household_practices.ts`, `winter_practice.ts`; 24/27/53 | Actual supper and winter practice transmission, WS11 | Experience-based morning/water/work/rest preferences, bounded and interruptible; revise after season/injury/dependant/travel changes. Matched people choose differently for an inspectable reason. |
 | General bounded contingent goals / absent (A3) | `types.ts` Intention, `intent.ts`, `batch_plan.ts`; six specialised kinds, 50 | One-workshop batch with one precursor stage; no general declarative goal graph | Bounded depth/steps/search/retries/history, registered actions, cycle/unreachable rejection; project survives drink/save/source loss and completes; impossible case ends and releases claims. |
 | Quantities, foresight, useful waits / incomplete (A4) | `activities.ts`, `relief.ts`, `intent.ts`, `night_wait.ts`; 27/30/50 | External bounds, daylight wait, footprint wait, batch resumption | Autonomous quantities/durations based on capacity/need; provision round trip; communicated meeting/batch/delivery waits have costs, timeout and next action. No future weather oracle. |
-| Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`; 34/36/37/50/61/63 | Reconsideration, partial shelter delivery, required-tool loss/replacement, bounded remembered food-capacity recovery | Preserve progress through other temporary obstructions; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Source/helper loss and general composition remain. |
+| Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`, `kept_target.ts`; 34/36/37/50/61/63/65 | Reconsideration, partial shelter delivery, required-tool loss/replacement, bounded remembered food-capacity recovery; valid running destinations remain scored after discovery | Preserve progress through other temporary obstructions; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Source/helper loss and general composition remain. |
 | Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |
 | Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`; 39–51 | Requests/refusals, named home, later delivery/customer receipt | Ability/location questions, inability, counteramount/place, delay, cancellation/acknowledgment only where missing; actual contact and locally held grounds. |
@@ -297,7 +297,41 @@ The bounded candidate-retention adaptation from `c9c5dcf` remains unimplemented;
 main rules version before changing behaviour. Do not copy its conflicting version label, frozen-walk fixture or
 silently skipped water test. The complete A1–A16/WS programme above remains authoritative and incomplete.
 
-### Precise continuation checkpoint — rules 64, full programme incomplete
+### Rules 65 — a running destination is still an alternative
+
+`src/sim/kept_target.ts` repairs the reproduced false-zero current utility without changing decision scores or switching
+thresholds. Food/raw-source/stock generators retain the valid running target as at most one extra candidate; drinking
+does the same after its shore-spacing cut. Normal local knowledge, source/access/capacity checks, urgency and physical
+execution remain. `rich-no-kept-target` is lab-only. This adapts `c9c5dcf` at the next unused main number; the concurrent
+branch's conflicting rules 60 and its saves remain separate. Main's rules 64 was pinned in `e6a6d27` and reverified first.
+
+Actual walking/perception tests replace the candidate's frozen-walk fixture and skipped water test. Source travel reaches
+wood and ordinary delivery; raw and processed stock are physically withdrawn; water is reached and drunk; saved twins,
+resource accounting and observer purity pass. Depletion, missing beliefs, forbidden homes, real full packs, wolves and
+critical thirst preserve rejection or interruption. Final rendered checks pass 7/7 with real screenshots. The browser
+shutdown failure was repaired and its earlier exit-13 result retained. Details: [KEPT_TARGET.md](KEPT_TARGET.md).
+
+Full suite: **235 files / 1,556 tests passed**, 966.69 seconds; focused final stock tests, typecheck, build and diff check
+passed. Historical expectations were not regenerated. This is **TURN_INTEGRATION_VERIFIED** for the bounded mechanism,
+not completion of this programme or independent review.
+
+The three Normal, immigration-off ordinary runs stopped at their 170-second budgets after **20.5 / 14.4 / 17.05 days**
+(meadow/river/forest). Each conserved resources and preserved every observer snapshot. Their 413 / 343 / 459 restored
+candidate samples include 410 / 340 / 448 eligible ones; linked activities include actual successful work and drinking,
+as well as depletion/reservation/pack failures and legitimate urgent interruptions. No carts were built. These are
+partial windows, not new 45-day evidence or a comparison with the older complete windows. Full counts, denominators,
+work spells and failed/interrupted travel are retained in `autonomy_evidence/r65-*`. Longer windows, matched comparisons
+and current mature Large remain pending; [AUTONOMY_VALIDATION.md](AUTONOMY_VALIDATION.md) has exact commands and estimates.
+
+**Next dependency already reproduced:** `scripts/resident_care_diagnostic.ts` shows a member leaving their own home,
+still knowing the injured elder and holding bread, with `canEnterHome` allowing entry. The existing offered gift fails
+immediately with “they are inside a different space”; nobody receives food. Indoor perception also leaves whereabouts
+at its older outdoor observation. A successor must preserve locally observed room/need knowledge, use the actual owned
+entrance, validate access/contact at execution, and retain failures for stale location, obstruction or missing permission.
+Do not grant general guest admission or use live remote location as a planning shortcut. Pin rules 65 before this change.
+The entire A1–A16/WS programme remains the scope after this next dependency; it is not narrowed to either repair.
+
+### Historical continuation checkpoint — rules 64, superseded by the rules-65 section
 
 Recorded from **`e6a6d27`** after its successful main push. Runtime implementation: **`1acf4fa`**. This following commit
 changes documentation only. Product checkout: `C:\dev\Claude Experiment\living-world-integrate`, `main`; retained working

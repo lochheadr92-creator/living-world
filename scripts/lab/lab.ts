@@ -11,6 +11,7 @@ import { requiredToolRecoveryOn, setRequiredToolRecovery } from '../../src/sim/f
 import { localGivingOn, setLocalGiving } from '../../src/sim/local_giving';
 import { careCapacityOn, setCareCapacity } from '../../src/sim/care_capacity';
 import { toolPrecedenceOn, setToolPrecedence } from '../../src/sim/production';
+import { keptTargetOn, setKeptTarget } from '../../src/sim/kept_target';
 import { customersOn, setCustomers } from '../../src/sim/customers';
 import { successionOn, setSuccession } from '../../src/sim/succession';
 import { winterPracticeOn, setWinterPractice } from '../../src/sim/winter_practice';
@@ -299,6 +300,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-local-giving') return {spec:label,summary:'restore pre-62 forced exit for same-room gifts, start-only range checks and fed cooldown after zero receipt',install(){const was=localGivingOn();setLocalGiving(false);return ()=>setLocalGiving(was);}};
   if (kind === 'rich-no-care-capacity') return {spec:label,summary:'remove rules-63 full-pack food-care memory and home-store alternatives; ordinary giving and storage unchanged',install(){const was=careCapacityOn();setCareCapacity(false);return ()=>setCareCapacity(was);}};
   if (kind === 'rich-no-tool-precedence') return {spec:label,summary:'restore the first missing workshop tool instead of preferring a required tool to a convenience',install(){const was=toolPrecedenceOn();setToolPrecedence(false);return ()=>setToolPrecedence(was);}};
+  if (kind === 'rich-no-kept-target') return {spec:label,summary:'allow the short candidate list to omit the running journey destination',install(){const was=keptTargetOn();setKeptTarget(false);return ()=>setKeptTarget(was);}};
   if (kind === 'rich-no-craft-capacity') return {spec:label,summary:'restore pre-consumption capacity checking when a hand tool finishes; no effect below 58',install(){const was=craftCapacityOn();setCraftCapacity(false);return ()=>setCraftCapacity(was);}};
   if (kind === 'rich-no-relocation-extensions') return {spec:label,summary:'relocation keeps the rules-20 whole-household form: no subgroup consent, succession, return or search; no effect below rules 54',install(){const was=relocationExtensionsOn();setRelocationExtensions(false);return ()=>setRelocationExtensions(was);}};
   if (kind === 'rich-no-succession') return {spec:label,summary:'nothing a dead member left unfinished is recorded or taken up; plans, sites, piles and promises at death unchanged; no effect below rules 53',install(){const was=successionOn();setSuccession(false);return ()=>setSuccession(was);}};
