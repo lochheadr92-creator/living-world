@@ -2,6 +2,17 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **85** settles an actually supplied building share before the deadline without declaring
+the site finished or informing a distant requester. Genuine remaining failed attempts can be
+explained and a single six-hour extension accepted/refused through actual contact. Original
+and revised agreement provenance remains distinct. Full regression **277 files / 1,880 tests**,
+focused **114/6**, browser **11/11**, typecheck/build and fixed ordinary windows pass; immutable
+reference and supplementary real partial-work refusal each pass separately **1/1**. Runtime
+`8d41d2a`, reference `319746d`; `PROMISE_DELAYS.md` preserves findings and nulls. Ordinary early
+settlements 4/1/0, but zero delay conversation starts. Broader work continues with persistent
+ecological condition (`ECOLOGY_CONDITION.md`); communication and every other open programme row
+remain required. This is not full-prompt completion.
+
 Rules **84** connects requester-local target withdrawal to actual cancellation and acknowledgement,
 without remotely ending the helper's obligation. Overlapping obligations preserve other suspended
 work; late cancellation preserves completed work and enables truthful reports. Corrected full

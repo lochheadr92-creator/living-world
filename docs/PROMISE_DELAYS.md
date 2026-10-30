@@ -139,3 +139,47 @@ release browser **11/11** and build pass (`autonomy-delay85-release-browser.log`
 completed contribution is recorded beside the visibly unfinished hut; Ada remains uninformed.
 The corrected full suite is running separately as `autonomy-delay85-release-full-tests.log`.
 Source is frozen during that run and release ordinary measurements.
+
+
+## Release observations and complete gate
+
+| Seed | Early completed shares at unfinished sites | Pending delay samples | Nearby eligible samples | Starts | Heard | Accepted / refused | Seconds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| river | 4 | 3 | 0 | 0 | 0 | 0 / 0 | 32.2 |
+| forest | 1 | 31 | 5 | 0 | 0 | 0 / 0 | 29.9 |
+| meadow | 0 | 1 | 1 | 0 | 0 | 0 / 0 | 30.4 |
+
+All three release windows reach 12,000 ticks, retain exact unobserved twins, pass 100 pure
+inspection checks each, validate/round-trip their final saves and balance resources. These
+are distinct retained early-share records and repeated proposal samples, not population rates.
+Cole's ordinary request #3811/commitment #3814 now settles at tick 7065, before deadline 8767,
+with the larger site #3650 still present. The river trace records four such early settlements,
+forest one and meadow none. None of the short ordinary windows starts a delay conversation.
+Acceptance/refusal and useful repair after clearing therefore remain staged mechanism evidence.
+No comparison establishes a survival, productivity or household-viability improvement.
+
+The corrected full regression passes **277 files / 1,880 tests**, exit 0, **378.38 seconds**
+(`autonomy-delay85-release-full-tests.log`). Immutable continuation `319746d`, recorded from
+runtime `8d41d2a`, passes separately **1/1**, 10.19 seconds
+(`autonomy-delay85-reference-check.log`). It pins ordinary river 6800→7300 through two early
+settlements, a real completed share at an unfinished staged site, and accepted/refused speech
+saved after hearing but before the answer. Every continuation compares complete serialized
+hashes and resources. No older reference was overwritten.
+
+A supplementary real partial-work test creates a declared skilled builder and an unsupplied
+lean-to, obtains real recruitment, and physically performs ten contribution ticks before the
+existing material limit ends the action. The helper reports that actual incomplete share.
+Its initial assertion wrongly expected agreement: the retained diagnostic shows the requester's
+trust had drifted to **9.8015968**, below the declared acceptance threshold of 10. The correct
+response was refusal. The fixture, threshold and runtime were left unchanged. The corrected
+contract asserts that exact refusal/reason, the unchanged deadline, the real ten-tick report,
+zero received work credit, no completion and conserved resources. It passes **1/1**
+(`autonomy-delay85-partial-verified.log`); the original failure/diagnostic remain in
+`autonomy-delay85-partial-work.log` and `autonomy-delay85-partial-diagnostic.log`. This test and
+the new reference were added after the full run began and are additional focused checks,
+not counted as part of its 1,880 tests. Earlier pending statements record checkpoint chronology.
+
+The entire autonomy/environment programme remains partial. The next broader workstream is the
+explicitly missing persistent ecological condition and its physical local responses, audited
+in `ECOLOGY_CONDITION.md`. Open communication/coordination requirements remain in the programme
+register and are not displaced or declared complete by that change of workstream.
