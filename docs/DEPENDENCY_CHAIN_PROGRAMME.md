@@ -30,16 +30,23 @@ adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage 
 
 ### Rules 83 — personally discovered target changes and cancellation explanations
 
-Candidate in progress from published `60d7adc`; immutable predecessor 82 is `a331382`.
+Candidate runtime `26e8153` and immutable reference `57b5fe4` are locally committed; published
+main remains `60d7adc` until final full regression passes. Immutable predecessor 82 is `a331382`.
 `PROMISE_TARGETS.md` records the hidden roof-loss reproduction, actual local discovery,
 truthful partial work, real cancellation conversation/acknowledgement and observed completion.
 The existing commitment and bounded request receipt own evidence; no second general memory store.
 The initial ordinary river trace exposed construction completion being confused with a fulfilled
 haul. That finding is repaired and has an ordinary tick-1000 regression; original measurements
 and the deliberately stopped first full run are retained. Release focused checks pass 49 tests
-in four files, browser 10/10, typecheck/build pass. Final full regression/ordinary results are
-recorded after the frozen candidate completes. General requester-initiated cancellation, delays,
+in four files, browser 10/10, typecheck/build pass. A later full-suite entry-order defect was traced to a registration cycle and repaired by keeping
+settlement in its existing owner; 94 tests across the affected entry points and reference pass.
+Final browser/build and all three fixed five-day ordinary reruns pass. River records two actual
+target explanations with true partial quantities; forest/meadow record none. Final full regression
+is still running; neither stopped earlier full run is a passing result. General requester-initiated cancellation, delays,
 ability/location questions, conflicting reports and broader programme work remain open.
+The next explicit-83 requester-discovery diagnostic reaches the absent home at tick 209 while
+the uninformed helper still retains the promise; no requester cancellation is yet offered.
+See `scripts/requester_cancellation_diagnostic.ts` and `PROMISE_TARGETS.md`.
 
 ### Rules 82 — heard agreements and personal cancellation knowledge
 

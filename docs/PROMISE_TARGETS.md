@@ -164,3 +164,9 @@ discovery; and the actual cancellation conversation saved after hearing but befo
 `tests/helpers/v83ref.ts` and `scripts/v83_reference.ts` check full serialized hashes, exact twins
 and resource balance. The pinned check passes 1/1 in 6.00 seconds
 (`autonomy-target83-reference-check.log`), and typecheck passes. No prior reference was overwritten.
+
+Final post-dependency-fix ordinary reruns complete all 12,000 ticks in 28.8 / 26.1 / 26.2
+seconds (river/forest/meadow), preserving the release table counts exactly. All three exact
+twins, 100 purity checks each, source manifests and resource ledgers pass. The final browser
+also passes 10/10 and final build passes (`autonomy-target83-final-browser.log`,
+`autonomy-target83-final-build.log`). Final full-suite status remains pending at this checkpoint.
