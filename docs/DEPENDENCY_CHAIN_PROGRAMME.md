@@ -389,6 +389,19 @@ Fresh five-day Normal, immigration off, meadow/river/forest all reached tick 12,
 
 `scripts/care_water_gap.ts` repeats river and matches its exact final save. The five samples are Jax at ticks 600–1080, with no known household home and zero spare water. This is not five feasible delivery opportunities. Preserve the adverse absence of infrastructure/supplies and do not tune scoring to manufacture water or homes. Broader acquisitions, care duties, production and every other remaining capability-map row stay open.
 
+### Current continuation checkpoint — rules 69
+
+Last fully verified runtime: **`e86befb60b5f0a89588d19fd66eadda9856fea9a`**. Before successor behavior, its immutable reference
+captures ordinary meadow, autonomous production, a paid firing save, a competing promise during delivery and a recompiled
+lost-stock prerequisite. The separate reference test passed **1/1 in 10.38 seconds** (`autonomy-v69-check.log`). It is additional
+to the earlier full suite, not a new full-suite total. The reference writer refuses overwrite or capture under a successor.
+
+Next implementation transition: A2 learned daily preferences, using actual completed activities and existing payoff/practice
+owners. Establish a bounded, personal time/context preference from repeated success, inspect its provenance, let urgent needs
+and changed season/injury/dependants/travel invalidate its influence, and prove two otherwise matched people can make different
+legal choices because only one has the relevant experience. Existing supper/winter practices must not be duplicated. This is
+the next contract to investigate, not an implemented feature or a promise of ordinary benefit. The complete programme remains open.
+
 ### Bounded production prerequisite journey — rules 69
 
 Rules 69 connects a saved, personally derived production graph to existing batch intentions and ordinary physical actions.

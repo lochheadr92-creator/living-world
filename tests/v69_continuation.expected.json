@@ -1,0 +1,28 @@
+{
+  "source": "e86befb60b5f0a89588d19fd66eadda9856fea9a, rules 69 before successor behaviour",
+  "ordinary": {
+    "saved": "c422e700a0410bc497475e77b499a0c5a3d973d1ed3997ed5c71ca9d5d15ee48",
+    "uninterrupted": "45b495596e8c26c31e1fd05060c3b4e10c5d874055ae381e26a083bb7cfe352a",
+    "continued": "45b495596e8c26c31e1fd05060c3b4e10c5d874055ae381e26a083bb7cfe352a"
+  },
+  "production": {
+    "saved": "b73f668f60a39b83c9c645ecff091ab14a0fd00246a6d2d3168448fae3c93ac5",
+    "uninterrupted": "29ba7743529d0a11fcdb48d9c7a9a083e761db331f4a7cc62efe119e6c1f0133",
+    "continued": "29ba7743529d0a11fcdb48d9c7a9a083e761db331f4a7cc62efe119e6c1f0133"
+  },
+  "firing": {
+    "saved": "b75767aa023e85011c83185e23722ded7b8309129ecae2dec77dc3d923dfcc25",
+    "uninterrupted": "e1ae576c1bb1ccc804b19dfc0909647ddaed6804b31e8f5addb416c3a79b0177",
+    "continued": "e1ae576c1bb1ccc804b19dfc0909647ddaed6804b31e8f5addb416c3a79b0177"
+  },
+  "competingPromise": {
+    "saved": "ef151d6eb624ec93e4c69ceaa3bf2e6acd63ab178ba281ef6ff054cc27189903",
+    "uninterrupted": "6db9440c532a19053467413b00d7755f97b376ac97414764e4a3e50cc304e015",
+    "continued": "6db9440c532a19053467413b00d7755f97b376ac97414764e4a3e50cc304e015"
+  },
+  "reconsidered": {
+    "saved": "d6fb1f1e7796f4a0b87b69d7f17e010e238cc7fe6d707f7cbd9bc5fc539d3436",
+    "uninterrupted": "d896f94ba4bb8fbd49e7d04dc115f0d0a8157d64b3bbb19846800920d922f802",
+    "continued": "d896f94ba4bb8fbd49e7d04dc115f0d0a8157d64b3bbb19846800920d922f802"
+  }
+}
