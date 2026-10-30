@@ -4,6 +4,7 @@
 import { isSolidHome } from './constants';
 import { isWalkable } from './registry';
 import { runsRulesVersion } from './rulesversion';
+import { hasLocalGiving } from './local_giving';
 import type { Activity, Building, Person, World } from './types';
 
 export const HABITATION_FROM_VERSION = 3;
@@ -62,7 +63,11 @@ export function leaveHome(w: World, p: Person): string | null {
   return null;
 }
 /** Only these ordinary activities may execute without leaving the interior. */
-export function staysIndoors(p: Person, a: Activity): boolean {
+export function staysIndoors(w: World, p: Person, a: Activity): boolean {
+  if (hasLocalGiving(w) && a.kind === 'give' && indoorHome(w, p)) {
+    const q = w.byId.get(a.targetId);
+    if (q?.ent === 'person' && q.alive && q.indoors === p.indoors) return true;
+  }
   return (a.kind === 'sleep' || a.kind === 'rest') && (!a.targetId || a.targetId === p.indoors)
     || a.kind === 'flee' && a.data.homeRefuge === true && a.targetId === p.indoors
     || a.kind === 'eat' && !a.targetId
@@ -71,7 +76,7 @@ export function staysIndoors(p: Person, a: Activity): boolean {
 /** The lifecycle calls this before movement/work, so even direct/controller actions cannot act through walls. */
 export function prepareIndoorActivity(w: World, p: Person, a: Activity): string | null {
   if (!hasHabitation(w)) return null;
-  if (p.indoors && !staysIndoors(p, a)) return leaveHome(w, p);
+  if (p.indoors && !staysIndoors(w, p, a)) return leaveHome(w, p);
   return null;
 }
 /** Reset travelling activity after a valid exit; its route must start at the door. */

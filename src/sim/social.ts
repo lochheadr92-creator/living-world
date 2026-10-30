@@ -52,6 +52,7 @@ import { toolsHeldBy } from './toolreg';
 import { isToolItem } from './toolreg';
 import type { Belief, Commitment, Conversation, ConvPurpose, ItemKind, Items, Person, Request, RequestKind, Speech, ToolKind, World, BuildingType } from './types';
 import { clamp, hyp } from './util';
+import { hasLocalGiving } from './local_giving';
 
 // ───────────────────────── small helpers ─────────────────────────
 const toldKey = (listener: number, beliefId: number): number => listener * 1_000_000 + beliefId;
@@ -1757,6 +1758,7 @@ registerHandler('give', {
   work(world, p, a): WorkResult {
     const t = personOf(world, a.targetId);
     if (!t) return 'fail:they are gone';
+    if (hasLocalGiving(world) && hyp(t.x - p.x, t.y - p.y) > 3.2) return 'fail:they moved out of reach before the hand-over';
     faceToward(p, t.x, t.y);
     faceToward(t, p.x, p.y, 0.5);
     a.progress++;
@@ -1786,7 +1788,7 @@ registerHandler('give', {
       moved += m;
     }
     t.cooldowns.pause = 0;
-    t.cooldowns.fedUntil = world.tick + 120; // let them eat before anyone else fusses over them
+    if (!hasLocalGiving(world) || moved > 0) t.cooldowns.fedUntil = world.tick + 120; // only actual receipt gives them time to eat
     if (moved <= 0) {
       if (a.data.commitmentId) {
         const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));

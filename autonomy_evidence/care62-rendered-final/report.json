@@ -1,0 +1,180 @@
+{
+  "head": "d22f89b6e5453c8432fd6fed79883de1da5de8b0",
+  "rules": 62,
+  "evidence": "STAGED residents admitted through their real door, injury and initial food. Positive actions chosen autonomously; full-pack negative selects an offered action externally. Not an ordinary-world frequency claim.",
+  "sourceHashes": {
+    "src/sim/local_giving.ts": "db4cb8a0184d56c6318e9b6599de388415e7c16706fa99984c77cea8ad8f90cf",
+    "src/sim/habitation.ts": "5cf3dd544be278c86b7465e2a7c7143d958755d63d30ca69c965308581318c10",
+    "src/sim/activities.ts": "2d83c31374ddf9c5823338d50627ac8676ea8e6696a5496611037c31ed1575d7",
+    "src/sim/social.ts": "3946e1d848b0678d4139ec7ec41ae6a6282dfa2c51d2c6abf33b6491dddc3ac6",
+    "src/sim/rulesversion.ts": "81404566b7202c99f1d377f974295de56cd8350ba5019570b63e87519212cd73",
+    "src/render/renderer.ts": "1e6c65a9facdf77878f42f7b3d1a78d292e5143e0439479177c316b429004bc8",
+    "tests/helpers/indoor_care.ts": "3c1c13de9b7489f640f4e83416ae9c7ec540477cfca9df33f88da07d92cc5177",
+    "scripts/browser/indoor_giving_check.mjs": "deaaada760b23ad5a2a93293ff6454517d2011c64c996d9e15987ced4e61f583"
+  },
+  "checks": [
+    {
+      "name": "resident autonomously chooses the local care action and remains in the same room",
+      "ok": true,
+      "detail": {
+        "tick": 1,
+        "chosen": {
+          "tick": 0,
+          "trigger": "free",
+          "chosen": {
+            "kind": "give",
+            "label": "Bring bread to Eli",
+            "utility": 53,
+            "parts": [
+              [
+                "Eli needs bread",
+                53
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "socialize",
+              "label": "Ask Eli where to find food",
+              "utility": 31.8,
+              "parts": [
+                [
+                  "does not know where to find food",
+                  29.8
+                ],
+                [
+                  "someone to ask",
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "explore",
+              "label": "Explore somewhere new",
+              "utility": 24.3,
+              "parts": [
+                [
+                  "curiosity",
+                  30.2
+                ],
+                [
+                  "walking",
+                  -7.9
+                ],
+                [
+                  "daylight to spare",
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "wander",
+              "label": "Potter about near home",
+              "utility": 6,
+              "parts": [
+                [
+                  "nothing pressing",
+                  6
+                ],
+                [
+                  "a change of scene",
+                  2
+                ],
+                [
+                  "not much for it",
+                  -0.5
+                ],
+                [
+                  "spare time stays a fallback",
+                  -1.5
+                ]
+              ]
+            }
+          ],
+          "blocked": [],
+          "considered": 4,
+          "knownPlaces": 1,
+          "seenNow": 1,
+          "because": "Eli needs bread +53"
+        },
+        "activity": "give",
+        "phase": "work",
+        "helperRoom": 5,
+        "elderRoom": 5,
+        "home": 5
+      }
+    },
+    {
+      "name": "real bread passes inside the home, with exact intermediate continuation",
+      "ok": true,
+      "detail": {
+        "tick": 14,
+        "transfers": [
+          {
+            "from": "person:2",
+            "to": "person:4",
+            "item": "bread",
+            "n": 3,
+            "reason": "given",
+            "tick": 13,
+            "helperRoom": 5,
+            "elderRoom": 5
+          }
+        ],
+        "helper": {
+          "water": 1
+        },
+        "elder": {
+          "bread": 3
+        },
+        "equal": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "elder later chooses to eat the received food, paying ordinary rest and review time",
+      "ok": true,
+      "detail": {
+        "tick": 174,
+        "hungerBefore": 19.97,
+        "hungerAfter": 44.77999999999987,
+        "elder": {
+          "bread": 2
+        },
+        "activity": "eat",
+        "pose": "eat",
+        "inside": 5,
+        "eaten": 1,
+        "equal": true,
+        "pure": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "full-pack failure neither transfers food nor marks an unfed person as fed",
+      "ok": true,
+      "detail": {
+        "result": {
+          "tick": 13,
+          "label": "Bringing bread to Eli",
+          "outcome": "failed",
+          "detail": "they had no room to carry it"
+        },
+        "helper": {
+          "bread": 3,
+          "water": 1
+        },
+        "elder": {
+          "wood": 3
+        },
+        "fedUntil": 0,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

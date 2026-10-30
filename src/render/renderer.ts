@@ -176,11 +176,16 @@ export class Renderer {
     });
     const huts = world.buildings.filter((b) => b.type === 'hut' || b.type === 'house');
     const hidden = new Set<number>();
+    const residents = new Map<number, Person[]>();
     for (const p of world.persons) {
       const x = p.px + (p.x - p.px) * alphaT;
       const y = p.py + (p.y - p.py) * alphaT;
-      if (indoorHome(world, p)) {
+      const home = indoorHome(world, p);
+      if (home) {
         hidden.add(p.id);
+        const group = residents.get(home.id) ?? [];
+        group.push(p);
+        residents.set(home.id, group);
         continue;
       }
       if (!hasHabitation(world) && p.pose === 'sleep') {
@@ -264,18 +269,23 @@ export class Renderer {
       const hy = (hut.x + hut.w / 2 + (hut.y + hut.h / 2)) * 16 - (hut.type === 'house' ? 94 : 70);
       if (this.visible(cam, hut.x + hut.w / 2, hut.y + hut.h / 2, 120, 110)) {
         if (p.pose === 'sleep') this.drawZzz(ctx, hx, hy, simT, p.id);
-        if (hasHabitation(world)) {
+        if (hasHabitation(world) && n === 0) {
+          const group = residents.get(hut.id) ?? [];
+          const selected = group.find(person => person.id === game.selectedId);
           ctx.save();
           ctx.font = 'bold 10px "Segoe UI", sans-serif';
           ctx.textAlign = 'center';
           ctx.lineWidth = 3;
           ctx.strokeStyle = '#203027'; ctx.fillStyle = '#fff6ce';
-          const label = p.id === game.selectedId ? p.name + ' · inside' : '⌂';
-          ctx.strokeText(label, hx, hy); ctx.fillText(label, hx, hy);
+          const doing = selected?.activity?.kind === 'give' && selected.activity.phase === 'work'
+            ? 'Handing over · ' : selected?.pose === 'eat' ? 'Eating · ' : '';
+          const label = doing + group.length + ' inside';
+          const center = hx - (n - 0.5) * 14;
+          ctx.strokeText(label, center, hy); ctx.fillText(label, center, hy);
           ctx.restore();
         }
       }
-      if (p.id === game.selectedId) this.heads.set(p.id, { x: hx, y: hy - 6 });
+      if (p.id === game.selectedId) this.heads.set(p.id, { x: hasHabitation(world) ? hx - (n - 0.5) * 14 : hx, y: hy - 14 });
     }
 
     // ── particles, creatures and light ──

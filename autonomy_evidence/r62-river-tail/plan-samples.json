@@ -1,0 +1,5549 @@
+[
+ {
+  "tick": 99960,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 98195,
+   "src": "seen",
+   "from": 0,
+   "learned": 98195,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 26.707546000096837,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:942",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:941",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "failed there 267 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:934",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:944",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:1095",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "something more pressing comes first"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 17.264999999999766,
+   "thirst": 95.73801968109017,
+   "energy": 20.070743981461085,
+   "warmth": 58.59025313757236,
+   "safety": 66.68088276632103,
+   "social": 33.77065614416209
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:977",
+   "utilityBeforeRanking": 62.68294256041939
+  }
+ },
+ {
+  "tick": 100080,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 98195,
+   "src": "seen",
+   "from": 0,
+   "learned": 98195,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 26.707546000096837,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:941",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "failed there 387 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:944",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:978",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:977",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:1095",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 45.49249999999962,
+   "thirst": 90.6620196810894,
+   "energy": 14.948743981461202,
+   "warmth": 49.79367463070471,
+   "safety": 66.67274079277689,
+   "social": 31.784038160566
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 49.43441902246063
+  }
+ },
+ {
+  "tick": 100200,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 98195,
+   "src": "seen",
+   "from": 0,
+   "learned": 98195,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 26.707546000096837,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:943",
+    "label": "Picking berries",
+    "reason": "failed there 507 ticks ago (nothing left)"
+   },
+   {
+    "key": "gather:944",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:978",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:977",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "warm:1102",
+    "label": "Warm up at the fire",
+    "reason": "thinks the fire has gone out"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 41.89249999999949,
+   "thirst": 85.86201968108865,
+   "energy": 10.148743981461305,
+   "warmth": 42.905152397744025,
+   "safety": 66.67274042526708,
+   "social": 29.797420176969908
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 61.50667759861983
+  }
+ },
+ {
+  "tick": 100320,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100319,
+   "src": "seen",
+   "from": 0,
+   "learned": 100319,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 24.15874600009523,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:944",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:978",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:977",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "warm:1102",
+    "label": "Warm up at the fire",
+    "reason": "thinks the fire has gone out"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "something more pressing comes first"
+   }
+  ],
+  "margin": false,
+  "criticals": [
+   "energy"
+  ],
+  "needs": {
+   "hunger": 38.29249999999935,
+   "thirst": 81.0620196810879,
+   "energy": 5.3487439814613476,
+   "warmth": 38.60471615256885,
+   "safety": 66.67274042525057,
+   "social": 27.884302193373795
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 81.35210527204445
+  }
+ },
+ {
+  "tick": 100440,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100400,
+   "src": "seen",
+   "from": 0,
+   "learned": 100400,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 24.06154600009517,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:944",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "something more pressing comes first"
+   }
+  ],
+  "margin": false,
+  "criticals": [
+   "energy"
+  ],
+  "needs": {
+   "hunger": 35.20549999999923,
+   "thirst": 76.87001968108736,
+   "energy": 6.318268060567564,
+   "warmth": 58.002972509870645,
+   "safety": 86.71968496894452,
+   "social": 26.436051196141502
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 85.8446313928448
+  }
+ },
+ {
+  "tick": 100560,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100400,
+   "src": "seen",
+   "from": 0,
+   "learned": 100400,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 24.06154600009517,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 33.22549999999916,
+   "thirst": 73.99001968108725,
+   "energy": 20.11230203712683,
+   "warmth": 74.92949114222877,
+   "safety": 93.35541639437552,
+   "social": 25.84006580106276
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 58.49395088337006
+  }
+ },
+ {
+  "tick": 100680,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100400,
+   "src": "seen",
+   "from": 0,
+   "learned": 100400,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 24.06154600009517,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 31.245499999999083,
+   "thirst": 71.11001968108714,
+   "energy": 33.9123020371267,
+   "warmth": 86.83789959917608,
+   "safety": 93.942929938764,
+   "social": 25.24408040598402
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:991",
+   "utilityBeforeRanking": 46.96757364047282
+  }
+ },
+ {
+  "tick": 100800,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100400,
+   "src": "seen",
+   "from": 0,
+   "learned": 100400,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 24.06154600009517,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 29.265499999999008,
+   "thirst": 68.23001968108703,
+   "energy": 47.71230203712694,
+   "warmth": 93.60719691904161,
+   "safety": 93.99494713818184,
+   "social": 24.648095010905276
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:940",
+   "utilityBeforeRanking": 49.38644765014736
+  }
+ },
+ {
+  "tick": 100920,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100400,
+   "src": "seen",
+   "from": 0,
+   "learned": 100400,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 24.06154600009517,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 27.285499999998933,
+   "thirst": 65.35001968108692,
+   "energy": 61.51230203712718,
+   "warmth": 96.89502966947798,
+   "safety": 93.9995526303634,
+   "social": 24.052109615826534
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 37955
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:940",
+   "utilityBeforeRanking": 51.249099191306875
+  }
+ },
+ {
+  "tick": 101040,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:948",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:990",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:993",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 23.7529999999988,
+   "thirst": 60.6300196810868,
+   "energy": 57.487302037127286,
+   "warmth": 95.85816977289244,
+   "safety": 84.00074438070276,
+   "social": 22.123434656752
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:947",
+   "utilityBeforeRanking": 53.832987303379184
+  }
+ },
+ {
+  "tick": 101160,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:948",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:946",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:947",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:950",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:993",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 20.152999999998663,
+   "thirst": 55.8300196810869,
+   "energy": 52.68730203712739,
+   "warmth": 92.58541560178485,
+   "safety": 84.00000003359962,
+   "social": 20.710816673155893
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:984",
+   "utilityBeforeRanking": 55.19219265736006
+  }
+ },
+ {
+  "tick": 101280,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:946",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:947",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:950",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:993",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 16.40899999999852,
+   "thirst": 50.77401968108703,
+   "energy": 47.56730203712744,
+   "warmth": 95.01700141546829,
+   "safety": 80.69554563670783,
+   "social": 19.259698689559738
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 38265
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:987",
+   "utilityBeforeRanking": 55.2098097472527
+  }
+ },
+ {
+  "tick": 101400,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:946",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:947",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:950",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:987",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:988",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:993",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [
+   "hunger"
+  ],
+  "needs": {
+   "hunger": 12.808999999998575,
+   "thirst": 45.974019681087135,
+   "energy": 42.76730203712754,
+   "warmth": 97.57976859820862,
+   "safety": 83.70743064015412,
+   "social": 18.372080705963743
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:980",
+   "utilityBeforeRanking": 62.9766565146722
+  }
+ },
+ {
+  "tick": 101520,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:946",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:947",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:950",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "sleep:0",
+    "label": "Sleep",
+    "reason": "too thirsty or hungry to sleep"
+   }
+  ],
+  "margin": false,
+  "criticals": [
+   "hunger"
+  ],
+  "needs": {
+   "hunger": 9.208999999998651,
+   "thirst": 41.17401968108724,
+   "energy": 37.967302037127645,
+   "warmth": 98.82449895603015,
+   "safety": 83.97409653125445,
+   "social": 17.190462722367673
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:994",
+   "utilityBeforeRanking": 64.69221836898302
+  }
+ },
+ {
+  "tick": 101640,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:980",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "sleep:0",
+    "label": "Sleep",
+    "reason": "too thirsty or hungry to sleep"
+   }
+  ],
+  "margin": false,
+  "criticals": [
+   "hunger"
+  ],
+  "needs": {
+   "hunger": 5.608999999998657,
+   "thirst": 36.37401968108734,
+   "energy": 33.16730203712775,
+   "warmth": 99.42906174039747,
+   "safety": 83.99770656198105,
+   "social": 15.546844738771536
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:1092",
+   "utilityBeforeRanking": 68.8301507233836
+  }
+ },
+ {
+  "tick": 101760,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:980",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "sleep:0",
+    "label": "Sleep",
+    "reason": "too thirsty or hungry to sleep"
+   }
+  ],
+  "margin": false,
+  "criticals": [
+   "hunger"
+  ],
+  "needs": {
+   "hunger": 2.008999999998657,
+   "thirst": 31.574019681087442,
+   "energy": 28.36730203712785,
+   "warmth": 98.59038188181623,
+   "safety": 83.99979694387659,
+   "social": 14.659226755175487
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:935",
+   "utilityBeforeRanking": 70.9786702783562
+  }
+ },
+ {
+  "tick": 101880,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "a wolf about",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:980",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:973",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 46.12399999999855,
+   "thirst": 99.11801968108729,
+   "energy": 23.035302037127977,
+   "warmth": 94.31717431245661,
+   "safety": 83.99998202184275,
+   "social": 12.6936087715794
+  },
+  "activity": {
+   "kind": "socialize",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "socialize:1137:chat",
+   "utilityBeforeRanking": 67.63374576987441
+  }
+ },
+ {
+  "tick": 102000,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:973",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 42.523999999998416,
+   "thirst": 94.31801968108654,
+   "energy": 24.255302037128104,
+   "warmth": 87.27979471685522,
+   "safety": 78.88508013277105,
+   "social": 11.823490787983348
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "socialize:1116:chat",
+   "utilityBeforeRanking": 69.9166009365944
+  }
+ },
+ {
+  "tick": 102120,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:973",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:1092",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 38.92399999999828,
+   "thirst": 89.51801968108579,
+   "energy": 20.85530203712821,
+   "warmth": 78.33431326586422,
+   "safety": 78.22427663690326,
+   "social": 28.113080529588025
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 38265
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:994",
+   "utilityBeforeRanking": 43.266388969446716
+  }
+ },
+ {
+  "tick": 102240,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": -2.732177221339033
+   }
+  ],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "gather:973",
+    "label": "Picking fruit",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:994",
+    "label": "Gathering wild grain",
+    "reason": "failed there 102 ticks ago (someone else is already taking it)"
+   },
+   {
+    "key": "gather:995",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 79.07649999999813,
+   "thirst": 84.32201968108502,
+   "energy": 15.593302037128336,
+   "warmth": 68.43758585848529,
+   "safety": 78.2242468097632,
+   "social": 27.386462545991982
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:2270",
+   "utilityBeforeRanking": 39.63941089621952
+  }
+ },
+ {
+  "tick": 102360,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 7.714874575134192
+   }
+  ],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "gather:994",
+    "label": "Gathering wild grain",
+    "reason": "failed there 222 ticks ago (someone else is already taking it)"
+   },
+   {
+    "key": "gather:995",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 75.476499999998,
+   "thirst": 79.52201968108427,
+   "energy": 10.793302037128438,
+   "warmth": 58.597816571510975,
+   "safety": 78.22424680841691,
+   "social": 26.65984456239594
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:2270",
+   "utilityBeforeRanking": 56.30812373164932
+  }
+ },
+ {
+  "tick": 102480,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 11.838146324586882
+   }
+  ],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "something more pressing comes first"
+   },
+   {
+    "key": "gather:994",
+    "label": "Gathering wild grain",
+    "reason": "failed there 342 ticks ago (someone else is already taking it)"
+   },
+   {
+    "key": "gather:995",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   }
+  ],
+  "margin": false,
+  "criticals": [
+   "energy"
+  ],
+  "needs": {
+   "hunger": 71.87649999999786,
+   "thirst": 74.72201968108352,
+   "energy": 5.993302037128495,
+   "warmth": 58.556188824603566,
+   "safety": 78.22424680841691,
+   "social": 25.933226578799896
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:2270",
+   "utilityBeforeRanking": 74.15480049183117
+  }
+ },
+ {
+  "tick": 102600,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 13.105404347401924
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 69.50499999999842,
+   "thirst": 71.37801968108326,
+   "energy": 13.94824899062628,
+   "warmth": 59.64771824759904,
+   "safety": 75.14997800429366,
+   "social": 25.17617164149614
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:2270",
+   "utilityBeforeRanking": 66.89151025623066
+  }
+ },
+ {
+  "tick": 102720,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 14.134885430859073
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 67.5249999999992,
+   "thirst": 68.49801968108315,
+   "energy": 25.987523637492778,
+   "warmth": 59.59409863193718,
+   "safety": 77.95205758831197,
+   "social": 24.580186246417398
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:2270",
+   "utilityBeforeRanking": 61.75558742927666
+  }
+ },
+ {
+  "tick": 102840,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 13.815866509600909
+   },
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 0.159560761539105
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1149",
+    "label": "Bring something to Lena",
+    "reason": "has nothing to spare for someone hurt"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1106",
+    "label": "Bring something to Mira",
+    "reason": "has nothing to spare for someone hungry"
+   },
+   {
+    "key": "visit:1122",
+    "label": "Check on Eli",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 65.54499999999997,
+   "thirst": 65.61801968108304,
+   "energy": 38.036675060261906,
+   "warmth": 60.36815907446166,
+   "safety": 66.79993703498546,
+   "social": 23.984200851338656
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:2270",
+   "utilityBeforeRanking": 56.4543470654569
+  }
+ },
+ {
+  "tick": 102960,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 13.162175632438235
+   },
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 0.1584333960208534
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1149",
+    "label": "Bring something to Lena",
+    "reason": "has nothing to spare for someone hurt"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 63.56500000000056,
+   "thirst": 62.73801968108293,
+   "energy": 50.09787506026189,
+   "warmth": 63.220701788985984,
+   "safety": 68.80528368391745,
+   "social": 23.388215456259914
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "socialize:1131:chat",
+   "utilityBeforeRanking": 48.81455685668961
+  }
+ },
+ {
+  "tick": 103080,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 2,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 22.82507800012094
+   },
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 1.2806275012701906
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the lean-to",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1149",
+    "label": "Bring something to Lena",
+    "reason": "has nothing to spare for someone hurt"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 61.585000000000484,
+   "thirst": 59.85801968108282,
+   "energy": 62.15907506026188,
+   "warmth": 68.51681342127414,
+   "safety": 77.03411215645535,
+   "social": 22.792230061181172
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 38686
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "socialize:1138:chat",
+   "utilityBeforeRanking": 55.50644291449388
+  }
+ },
+ {
+  "tick": 103200,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "wood": 1,
+   "clay": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 100988,
+   "src": "seen",
+   "from": 0,
+   "learned": 100988,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 23.355946000094725,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "repair:18258",
+    "utilityBeforeRanking": 21.61196154931738
+   },
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 1.5231181610607702
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 57.395500000000325,
+   "thirst": 54.042019681082856,
+   "energy": 57.75770506026167,
+   "warmth": 76.0510152599732,
+   "safety": 83.38325510868496,
+   "social": 22.07976394134117
+  },
+  "activity": {
+   "kind": "repair",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "socialize:1139:chat",
+   "utilityBeforeRanking": 53.99945768484975
+  }
+ },
+ {
+  "tick": 103320,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103310,
+   "src": "seen",
+   "from": 0,
+   "learned": 103310,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 20.56954600009297,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 53.54800000000018,
+   "thirst": 48.84601968108294,
+   "energy": 52.49570506026168,
+   "warmth": 86.4066822400933,
+   "safety": 90.35620391865207,
+   "social": 35.53331906207906
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 38265
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:934",
+   "utilityBeforeRanking": 27.816487676768254
+  }
+ },
+ {
+  "tick": 103440,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103310,
+   "src": "seen",
+   "from": 0,
+   "learned": 103310,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 20.56954600009297,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:18258:bricks",
+    "utilityBeforeRanking": 14.620466444199236
+   },
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": -0.8173681707102016
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:992",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1139",
+    "label": "Check on Thea",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1132",
+    "label": "Bring something to Petra",
+    "reason": "has nothing to spare for someone hurt"
+   },
+   {
+    "key": "visit:1106",
+    "label": "Bring something to Mira",
+    "reason": "has nothing to spare for someone thirsty"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 49.94800000000004,
+   "thirst": 97.24601968108279,
+   "energy": 47.69570506026178,
+   "warmth": 90.06060224117807,
+   "safety": 84.03302807260499,
+   "social": 34.01570107848307
+  },
+  "activity": {
+   "kind": "socialize",
+   "phase": "travel"
+  },
+  "offered": [
+   {
+    "key": "collect:18258:bricks",
+    "utilityBeforeRanking": 14.620466444199236
+   }
+  ],
+  "eligible": [
+   "collect:18258:bricks"
+  ],
+  "first": {
+   "key": "socialize:1149:chat",
+   "utilityBeforeRanking": 41.14794825808693
+  }
+ },
+ {
+  "tick": 103560,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103310,
+   "src": "seen",
+   "from": 0,
+   "learned": 103310,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 20.56954600009297,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:990",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 46.34799999999991,
+   "thirst": 92.44601968108203,
+   "energy": 42.89570506026188,
+   "warmth": 95.17245647119586,
+   "safety": 91.0802428380467,
+   "social": 49.86779082008766
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "travel",
+   "plan": 38265
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:936",
+   "utilityBeforeRanking": 26.861160008159548
+  }
+ },
+ {
+  "tick": 103680,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103310,
+   "src": "seen",
+   "from": 0,
+   "learned": 103310,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 20.56954600009297,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": -2.265415967033846
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:990",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:990",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the hut",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1139",
+    "label": "Check on Thea",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1106",
+    "label": "Bring something to Mira",
+    "reason": "has nothing to spare for someone thirsty"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 54.30549999999975,
+   "thirst": 86.93801968108126,
+   "energy": 37.26970506026181,
+   "warmth": 96.84115123124278,
+   "safety": 84.00053487660652,
+   "social": 48.406172836491656
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work",
+   "plan": 38265
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:22313",
+   "utilityBeforeRanking": 34.86750589053673
+  }
+ },
+ {
+  "tick": 103800,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103310,
+   "src": "seen",
+   "from": 0,
+   "learned": 103310,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 20.56954600009297,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 1.2351040415717067
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:935",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:936",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the hut",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 62.66799999999961,
+   "thirst": 82.0780196810805,
+   "energy": 33.659705060261906,
+   "warmth": 98.46575413298557,
+   "safety": 89.47084090290987,
+   "social": 46.93755485289546
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "rest:here",
+   "utilityBeforeRanking": 25.629843336379118
+  }
+ },
+ {
+  "tick": 103920,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 18258,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:18258:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103310,
+   "src": "seen",
+   "from": 0,
+   "learned": 103310,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 20.56954600009297,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2,
+    "bricks": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 3
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 1.2343575135475602
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:935",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:1091",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:935",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:1091",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to repair the hut",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 58.865499999999464,
+   "thirst": 76.95401968107974,
+   "energy": 34.99170506026196,
+   "warmth": 99.25482017254753,
+   "safety": 91.77607363375813,
+   "social": 45.34993686929942
+  },
+  "activity": {
+   "kind": "harvest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:22313",
+   "utilityBeforeRanking": 42.086900252398266
+  }
+ },
+ {
+  "tick": 104040,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104039,
+   "src": "seen",
+   "from": 0,
+   "learned": 104039,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 19.69474600009242,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 21.663549799527345
+   },
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 6.818284946194662
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:935",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:1091",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:935",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:1091",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to keep the fire going",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to help keep a neighbour’s kiln standing (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1139",
+    "label": "Check on Thea",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 55.10799999999932,
+   "thirst": 71.90201968107898,
+   "energy": 29.897705060262,
+   "warmth": 99.6380678043979,
+   "safety": 84.94603487472388,
+   "social": 43.96181888570331
+  },
+  "activity": {
+   "kind": "explore",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:22313",
+   "utilityBeforeRanking": 34.79156563629532
+  }
+ },
+ {
+  "tick": 104160,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104159,
+   "src": "seen",
+   "from": 0,
+   "learned": 104159,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 37.5507460000926,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 14.397374195175978
+   },
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": 3.120329019300865
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:1091",
+    "label": "Fishing",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to keep the fire going",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to help keep a neighbour’s kiln standing (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1139",
+    "label": "Check on Thea",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 51.507999999999186,
+   "thirst": 67.10201968107823,
+   "energy": 28.737705060262115,
+   "warmth": 98.69189566526958,
+   "safety": 84.00004270182417,
+   "social": 42.37070090210731
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:22313",
+   "utilityBeforeRanking": 30.53370334414319
+  }
+ },
+ {
+  "tick": 104280,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:18258:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104279,
+   "src": "seen",
+   "from": 0,
+   "learned": 104279,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.40674600009294,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:2270",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:6644",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "eat_store:8571",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 47.90799999999905,
+   "thirst": 62.30201968107779,
+   "energy": 32.33770506026225,
+   "warmth": 94.3664793327693,
+   "safety": 84.00000000192746,
+   "social": 40.41558291851124
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:975",
+   "utilityBeforeRanking": 26.703923795535967
+  }
+ },
+ {
+  "tick": 104400,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104297,
+   "src": "seen",
+   "from": 0,
+   "learned": 104297,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.38514600009299,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:18258:clay",
+    "utilityBeforeRanking": -0.45003788322999155
+   }
+  ],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to help keep a neighbour’s timber-yard standing",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "operate:18258",
+    "label": "Burning charcoal",
+    "reason": "has not learned charcoal firing"
+   },
+   {
+    "key": "visit:1139",
+    "label": "Check on Thea",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1107",
+    "label": "Check on Emre",
+    "reason": "they are not close enough to go looking"
+   },
+   {
+    "key": "visit:1132",
+    "label": "Bring berries to Petra",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 35)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 92.022999999999,
+   "thirst": 57.04601968107787,
+   "energy": 27.49570506026238,
+   "warmth": 87.30374205627398,
+   "safety": 68.65524132216235,
+   "social": 38.42896493491515
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 51.22919972421564
+  }
+ },
+ {
+  "tick": 104520,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104519,
+   "src": "seen",
+   "from": 0,
+   "learned": 104519,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.11874600009361,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 88.42299999999886,
+   "thirst": 52.246019681077975,
+   "energy": 22.695705060262483,
+   "warmth": 78.34594443570451,
+   "safety": 66.67282991075146,
+   "social": 36.44234695131906
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 70.50804295445059
+  }
+ },
+ {
+  "tick": 104640,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104564,
+   "src": "seen",
+   "from": 0,
+   "learned": 104564,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.064746000093734,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "deposit:2270:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 38)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 85.82199999999929,
+   "thirst": 48.63001968107795,
+   "energy": 29.365705060262407,
+   "warmth": 84.98639756557824,
+   "safety": 88.5433818491405,
+   "social": 35.313285730642
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 68.07677871973922
+  }
+ },
+ {
+  "tick": 104760,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104564,
+   "src": "seen",
+   "from": 0,
+   "learned": 104564,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.064746000093734,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "deposit:2270:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 35)"
+   },
+   {
+    "key": "deposit:6644:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 38)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 83.84200000000007,
+   "thirst": 45.75001968107784,
+   "energy": 43.16570506026257,
+   "warmth": 91.93234147757313,
+   "safety": 93.51688263664505,
+   "social": 34.71730033556326
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 61.17604209446986
+  }
+ },
+ {
+  "tick": 104880,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104564,
+   "src": "seen",
+   "from": 0,
+   "learned": 104564,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.064746000093734,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "deposit:2270:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 32)"
+   },
+   {
+    "key": "deposit:6644:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 35)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 81.86200000000085,
+   "thirst": 42.87001968107773,
+   "energy": 56.965705060262806,
+   "warmth": 91.70296374570727,
+   "safety": 93.95722581637158,
+   "social": 34.12131494048452
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 54.27457396945247
+  }
+ },
+ {
+  "tick": 105000,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104564,
+   "src": "seen",
+   "from": 0,
+   "learned": 104564,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.064746000093734,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "deposit:2270:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 29)"
+   },
+   {
+    "key": "deposit:6644:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 32)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 79.88200000000163,
+   "thirst": 39.99001968107762,
+   "energy": 70.76570506026263,
+   "warmth": 88.97551199859333,
+   "safety": 93.99621286477397,
+   "social": 33.525329545405775
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 47.373842457795725
+  }
+ },
+ {
+  "tick": 105120,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 104564,
+   "src": "seen",
+   "from": 0,
+   "learned": 104564,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 55.064746000093734,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "deposit:2270:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 26)"
+   },
+   {
+    "key": "deposit:6644:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 29)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 77.9020000000024,
+   "thirst": 37.11001968107751,
+   "energy": 84.56570506026202,
+   "warmth": 86.69609849385711,
+   "safety": 93.99966469510336,
+   "social": 32.92934415032703
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:6644",
+   "utilityBeforeRanking": 40.476930409549716
+  }
+ },
+ {
+  "tick": 105240,
+  "person": 1150,
+  "name": "Arlo",
+  "plan": 37274,
+  "makes": "bricks",
+  "step": "get 1 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 1 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "spear": 1,
+   "seeds": 4,
+   "stone": 2,
+   "saw": 1,
+   "clay": 1,
+   "berries": 4
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 18258,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 105239,
+   "src": "seen",
+   "from": 0,
+   "learned": 105239,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.25474600009562,
+   "fuel": 0,
+   "items": {
+    "wood": 2,
+    "clay": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2,
+     "clay": 2
+    },
+    "blocked": "",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 45809
+   },
+   "origin": 1150,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "deposit:2270:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 27)"
+   },
+   {
+    "key": "deposit:6644:food",
+    "label": "Bring food home",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 26)"
+   },
+   {
+    "key": "deposit:8571:food",
+    "label": "Add food to the storehouse",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 24)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 75.4225000000029,
+   "thirst": 33.638019681077466,
+   "energy": 92.63070506026136,
+   "warmth": 81.4737035881186,
+   "safety": 73.86048178494045,
+   "social": 32.02008037378886
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "travel",
+   "plan": 39675
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000230",
+   "utilityBeforeRanking": 58.27180890493871
+  }
+ }
+]

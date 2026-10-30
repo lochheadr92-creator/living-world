@@ -311,9 +311,9 @@ export function startActivity(world: World, p: Person, a: Activity): void {
     a.spotX = d.x; a.spotY = d.y;
     a.path = []; a.pi = 0; a.pathTries = 0;
     a.phase = p.indoors === home.id ? 'work' : 'travel';
-  } else if (indoorHome(world, p) && staysIndoors(p, a)) {
+  } else if (indoorHome(world, p) && staysIndoors(world, p, a)) {
     a.phase = 'work';
-  } else if (indoorHome(world, p) && !staysIndoors(p, a)) {
+  } else if (indoorHome(world, p) && !staysIndoors(world, p, a)) {
     // Even a "here" action must leave before its handler may mutate anything.
     a.data.indoorHere = a.phase === 'work';
     a.phase = 'travel';
@@ -415,7 +415,7 @@ export function stepActivity(world: World, p: Person): void {
         if (p.activity !== a) return;
       }
     }
-    if (p.indoors && staysIndoors(p, a) && a.phase === 'travel') {
+    if (p.indoors && staysIndoors(world, p, a) && a.phase === 'travel') {
       beginWork(world, p, a);
       if (p.activity !== a) return;
     }

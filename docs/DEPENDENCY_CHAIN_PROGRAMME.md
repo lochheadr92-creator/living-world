@@ -182,6 +182,27 @@ load its rules-59 saves under this lineage. Its required-versus-convenience tool
 review and, if still needed, adapt it at the next unused version after pinning this lineage. Its reported historical
 ordinary null result is not current-source evidence. The branch and its originals remain untouched.
 
+### Rules 62: same-room care, actual contact and truthful receipt
+
+The diagnosed same-home failure is repaired without granting entrance permissions. A giver already in the recipient's
+valid room remains there, work revalidates range, and zero receipt no longer marks the recipient fed. Existing carrying
+capacity, physical transfers, partial amounts and walls remain authoritative. Rules 61 was pinned at `d22f89b` first.
+Contracts, owners, costs, ordinary denominators, failure cases and rendered review: [LOCAL_GIVING.md](LOCAL_GIVING.md).
+
+Seven new contracts pass; full suite **1,520 tests / 226 files** passed, 295.37 seconds. Final rendered staged check passed
+**5/5**, with autonomous positive choices and an externally selected full-pack negative. Visual review found and fixed
+overlapping home labels; the count and actual selected activity are now readable. Viewer/care regressions and final
+typecheck/build pass. No cutaway animation or new controls were added.
+
+Fresh Normal meadow/forest reached day 45; river's retained 170-second budget stop at day 41.65 was continued from its
+unchanged save to day 45. All conserve and all 900 purity samples per complete seed pass. Carts remain **0/0/0**. Meadow
+ended with 30 people and forest with 9: adverse outcomes retained, no aggregate benefit claimed. The ensuing five-day
+unchanged-save trace found **20/0/1** same-home item receipts followed by **20/0/1** same-kind meals (meadow/river/forest),
+from **76/7/4** same-home starts. Full serialized unobserved twins matched. Forest Zeke #935 gave Talia #937 a berry in
+home #23610 at tick 110553; she ate that kind at 110562. Full-pack failure remains real and now correctly leaves no fed
+cooldown; repeated futile offers are the next capacity/recovery diagnostic. Removing a false cooldown alone does not
+create a viable alternative. WS2/5/17 are still incomplete, as are all other unresolved capability-map rows.
+
 ## Earlier implementation checkpoint — expanded programme still open (rules 58)
 
 This continuation started from committed `953eb90` / rules 53 with concurrent main
