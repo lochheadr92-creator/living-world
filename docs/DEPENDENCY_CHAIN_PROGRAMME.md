@@ -47,6 +47,13 @@ top choices differ in 0/3/3 samples (833/473/699 retained-agreement samples); al
 target-loss knowledge, delays/counteroffers, conflicting reports, wider care/household/environment
 transitions and mature-world acceptance remain open.
 
+Rules 82 runtime `e67ced2` and immutable continuation `a331382` are published on main.
+The next explicit-82 reproduction (`scripts/promise_target_diagnostic.ts`,
+`autonomy-target83-before.log`) establishes remote repair-target destruction leaking into an
+uninformed helper's obligation at tick 76 while their observed-condition belief remains unchanged.
+Local target-loss, truthful settlement and actual explanation are the next bounded transition;
+see `PROMISE_EXPECTATIONS.md`. No rules-83 behavior is implemented at this checkpoint.
+
 ### Rules 81 — personal failure evidence and explanations
 
 Predecessor 80 is pinned at `d4ba59d`. `PROMISE_OUTCOMES.md` records the actual failed-trip

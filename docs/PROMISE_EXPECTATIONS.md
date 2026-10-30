@@ -131,3 +131,35 @@ restored twins and ledgers pass. Typecheck and the focused continuation check pa
 expected the ordinary report before 3600 and failed; `autonomy-promise82-reference-record.log`
 is retained. The observed five-day evidence established its real timing before recording.
 No existing reference was overwritten.
+
+## Next reproduced gap: promised repair target loss
+
+Rules 82 and its immutable reference were integrated/pushed through `a331382`; runtime is
+`e67ced2`. Main's 989 pre-existing untracked paths were preserved exactly. The concurrent
+branch remains `be786a8` with its separate historical rule meanings.
+
+`scripts/promise_target_diagnostic.ts` reproduces the next gap at explicit rules 82. Edda
+actually requests roof repair and Ned accepts commitment #11 at tick 37. At tick 76, Ned
+remains at (42,40), with a remembered hut centred at (61,41), condition 38, observation tick 0.
+A declared staged collapse uses `destroyBuilding` (real unregister/scatter/household cleanup),
+then normal commitment review. Ned's unchanged belief still describes the damaged hut, but
+his private obligation becomes moot with reason “the building is gone.” His personal request
+reader repeats that hidden fact. Edda's heard expectation correctly remains promised.
+Save round-trip and resource conservation pass (`autonomy-target83-before.log`). This is a
+staged knowledge-boundary defect, not a measurement of ordinary collapse frequency.
+
+Owning path: `social.ts/checkCommitments` reads the live building registry before consulting
+personal knowledge. `options_work.ts/optRepairAndFire` already generates repair from remembered
+buildings, with the accepted obligation contributing stake. `perception.ts/refreshBeliefs`
+removes missing-place beliefs only within local sensing range and outside an interior;
+`act_build.ts` revalidates the actual building on repair arrival. These are legitimate local
+observation boundaries. A missing belief alone must not be promoted to proof of destruction.
+The neighbouring site-completion branch also conflates disappearance with completion after a
+deadline and deserves bounded review before claiming target-loss handling is complete.
+
+Next implementation must preserve an uninformed obligation until local evidence or its own
+deadline, record the actual observed target loss without fabricated completion or blame,
+release the matching action/claims, and let a real explanation revise the requester's existing
+expectation. Existing reports/acknowledgement and bounded commitment/request memory should own
+that transition. Do not change the frozen 82 reference. General household repair/rebuilding,
+public access responsibility and arbitrary cancellation remain wider open requirements.
