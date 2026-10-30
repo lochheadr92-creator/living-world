@@ -119,17 +119,8 @@ export function reserveOf(world: World, p: Person, item: ItemKind): number {
  * Goods this person has promised to someone and not yet handed over. Nothing is stored for this: it is read off the open
  * commitments, so it vanishes the moment a promise is kept, set aside, expires, is moot, or its maker dies.
  */
-export function reservedFor(world: World, p: Person, item: ItemKind): number {
-  let n = 0;
-  for (const c of p.commitments) {
-    if (c.status !== 'active' || c.item !== item) continue;
-    if (c.kind === 'deliver' || c.kind === 'haul') n += Math.max(0, c.amount - (c.delivered ?? 0));
-  }
-  // materials a plan of their own has spoken for are not spare either, and stop being spoken for when the plan ends
-  n += plannedFor(p, item);
-  void world;
-  return n;
-}
+import {reservedFor} from './reserved_goods';
+export {reservedFor} from './reserved_goods';
 
 /** How much of what `from` asked for (and has not yet got) is already spoken for by pending requests and promises. */
 export function outstandingFor(world: World, from: number, item: ItemKind, destId = 0): number {

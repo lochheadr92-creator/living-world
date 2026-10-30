@@ -314,7 +314,7 @@ export type CommitmentStatus = 'active' | 'done' | 'broken' | 'cancelled' | 'exp
 export interface Intention {
   id: number;
   /** the family of plan; each kind knows how to find its next step and when it is finished */
-  kind: 'night' | 'tool' | 'repair' | 'stock' | 'shelter' | 'batch';
+  kind: 'night' | 'tool' | 'repair' | 'stock' | 'shelter' | 'batch' | 'journey';
   /** what they mean to bring about, in their own terms */
   goal: string;
   since: number;
@@ -368,6 +368,8 @@ export interface Intention {
   forSite?: number;
   /** Rules 69: declarative, personally derived prerequisites for this production intention. */
   project?: ProjectGraph;
+  /** Rules 72: preparation and retained purpose for a personally known work trip. */
+  journey?: import('./journey_state').Journey;
 }
 
 /** nobody juggles more than this many private plans at once */

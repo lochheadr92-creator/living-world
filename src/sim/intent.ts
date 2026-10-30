@@ -1,4 +1,5 @@
 import type {ProjectGraph} from './project_graph';
+import {journeyStep,journeyOutcome} from './journey_state';
 // Private plans (rich worlds only). A person who can see the evening coming may decide to do something about it, carry that decision
 // across several separate activities, set it aside when something more pressing happens, and then take it up again, change it, or give
 // it up for a stated reason.
@@ -122,11 +123,8 @@ export function setToolWant(fn: (ctx: Ctx) => ToolKind | null): void {
   wantedTool = fn;
 }
 
-export function plannedFor(p: Person, item: ItemKind): number {
-  let n = 0;
-  for (const i of p.intentions) if (i.status === 'active') n += i.wants[item] ?? 0;
-  return n;
-}
+import {plannedFor} from './reserved_goods';
+export {plannedFor} from './reserved_goods';
 
 /**
  * How much of a material is free for some OTHER purpose of this person's own: what they carry, less what their own plans have
@@ -304,6 +302,7 @@ export function setBatchHooks(h: BatchHooks): void {
 }
 
 function stepFor(ctx: Ctx, i: Intention): Step {
+  if(i.kind==='journey')return journeyStep(ctx,i);
   if (i.kind === 'batch') return batchHooks ? batchHooks.step(ctx, i) : { kind: 'none', target: 0, item: null, step: '', key: null, blocked: 'no batch planning' };
   if (i.kind === 'tool') return toolStep(ctx, i);
   if (i.kind === 'repair') return repairStep(ctx, i);
@@ -329,6 +328,7 @@ function nextStep(ctx: Ctx): Step {
  * there and working on it.
  */
 function projectOutcome(world: World, p: Person, i: Intention): { status: 'done' | 'dropped'; reason: string } | null {
+  if(i.kind==='journey')return journeyOutcome(world,p,i);
   if (i.kind === 'tool') {
     const have = (p.inv[i.makes as ItemKind] ?? 0) > 0;
     // finished only if their own hands made it (credited by the craft handler). A tool of that kind can be in the pack without
@@ -872,7 +872,7 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
     const n = stepFor(ctx, i);
     if (i.blocked && !n.blocked) i.reason = 'taken up again';
     // (a batch plan, rules 50, is about its workshop whatever place its current step names: the site it hauls to is a step, not a change of mind)
-    if (i.kind !== 'batch') {
+    if (i.kind !== 'batch' && i.kind !== 'journey') {
       if (i.aboutId && n.target && i.aboutId !== n.target) {
         // two quite different things: the old one stopped being a shelter they know of, or a better one turned up
         const stillKnown = shelters(ctx).some((s) => s.id === i.aboutId);
@@ -887,7 +887,7 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
     i.stepKey = n.key;
     i.blocked = n.blocked;
     // rules 34+: a material-fetch plan with no known source and no promise owed is relinquished, rather than retried forever.
-    if (reconsider && runsRulesVersion(world, 34) && n.kind === 'get' && n.item) {
+    if (reconsider && runsRulesVersion(world, 34) && n.kind === 'get' && n.item && i.kind!=='journey') {
       const owed = outstandingForPlan(world, p.id, n.item, i.id);
       const known = i.kind === 'batch' && batchHooks?.canAcquire ? batchHooks.canAcquire(ctx,i,n.item) : hasKnownResource(world,p,n.item);
       if (owed <= 0 && !known) {
@@ -933,7 +933,7 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
   // ever a bounded preference in it.
   const live = p.intentions.filter((i) => i.status === 'active');
   // (rules 50: a batch plan does not count against the cap, so a tool or roof plan fits beside it; see adoptProject)
-  const cap = MAX_INTENTIONS + (runsRulesVersion(world, 50) && live.some((i) => i.kind === 'batch') ? 1 : 0);
+  const cap = MAX_INTENTIONS + (runsRulesVersion(world, 50) && live.some((i) => i.kind === 'batch') ? 1 : 0) + (runsRulesVersion(world,72)&&live.some(i=>i.kind==='journey')?1:0);
   if (live.length >= cap) return live[0];
   // Children do not make plans of their own. They still seek shelter at night - that option is open to everyone (options_survival.ts
   // optShelter) - but looking a night ahead, weighing needs against daylight and carrying a goal across activities is adult work, and
@@ -1029,7 +1029,7 @@ function adoptProject(ctx: Ctx): Intention | null {
   // One project at a time. A plan for the night is a different kind of thing and does not stand in the way of one: somebody can
   // mean to make an axe and also mean to get through the night. The cap on how many plans in all is checked by the caller, and
   // again here because this is also reached directly.
-  const live = p.intentions.filter((i) => i.status === 'active');
+  const live = p.intentions.filter((i) => i.status === 'active' && !(runsRulesVersion(world,72)&&i.kind==='journey'));
   if (live.length >= MAX_INTENTIONS) return null;
   // Rules 50: a hand-tool or roof plan may be taken on beside a batch plan. A batch holds a workshop product through for up to
   // three days, and the 8-seed lab showed it costing about seven hand tools per world when it also held the one project slot;
@@ -1229,6 +1229,7 @@ function adoptProject(ctx: Ctx): Intention | null {
  */
 export function servesIntent(i: Intention | null, o: Option): boolean {
   if (!i || i.status !== 'active') return false;
+  if(i.kind==='journey')return !!i.stepKey&&o.key===i.stepKey;
   if (i.stepKey && o.key === i.stepKey) return true;
   switch (i.stepKind) {
     case 'drink':

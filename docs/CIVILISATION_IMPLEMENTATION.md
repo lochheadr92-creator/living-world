@@ -2,6 +2,12 @@
 
 ## Current continuation pointer — 2026-10-30
 
+Rules **72** now adds bounded physical personal trip provisions and retains the work purpose across a real drink break.
+The staged rendered chain subsequently gathers wood and uses it in construction; 14 trip contracts, 7 browser checks,
+full suite 251 files / 1,703 tests, typecheck and build pass. Three fresh five-day worlds offered preparation but adopted
+zero journeys. Natural activation and aggregate benefit remain unproven. Predecessor 71 was pinned at `511f26b` first.
+See `TRIP_PREPARATION.md`; lost-source alternatives and the expanded programme remain open.
+
 This continuation started from local main `1448583`, rules **59**. Main and origin/main were advanced through `e6a6d27` (rules **64**, implementation `1acf4fa` plus its immutable continuation reference). The additions align batch-plan recipes, stop/recover required-tool loss, allow lawful same-room care and remembered full-pack food recovery through a household store, and prioritise required tools over conveniences while preserving their physical prerequisites. Its full programme and evidence remain open.
 Rules **65** then retains a still-eligible running source, stock or drinking destination for ordinary review. Staged
 travel, gathering/delivery, withdrawal, drinking, invalidation, saved continuation and rendered checks pass; full suite

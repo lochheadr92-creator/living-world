@@ -128,7 +128,7 @@ function nameOf(b: Belief): string {
 }
 
 /** Go and take stock out of a store, a workplace's shelves or a heap. */
-function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind): void {
+export function collectLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: string, tag: string, parts: [string, number][] = [], materialStock?: ItemKind): void {
   const { world, p } = ctx;
   if (recentFailure(world, p, b.id, 320)) {
     addBlocked(ctx, 'withdraw', `Collect ${itemPhrase(items)}`, b.id, `tried recently and found none to take`, tag);

@@ -70,7 +70,7 @@ export function collectUnfinished(world: World, p: Person): Unfinished[] {
   if (!hasSuccession(world)) return [];
   const out: Unfinished[] = [];
   for (const i of p.intentions) {
-    if (i.status !== 'active' || i.kind === 'night' || i.kind === 'repair') continue;
+    if (i.status !== 'active' || i.kind === 'night' || i.kind === 'repair' || i.kind==='journey') continue;
     // a batch for no site of the household's, or a shelter for no site, serves nobody after them
     if (i.kind === 'batch' && !i.forSite) continue;
     if (i.kind === 'shelter' && !i.aboutId) continue;

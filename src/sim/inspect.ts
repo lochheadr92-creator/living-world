@@ -275,6 +275,7 @@ function helpText(world: World, p: Person, plan: Intention): string {
   return ' ' + say.join(' ');
 }
 
+import {describeJourney} from './journey_state';
 function buildQA(world: World, p: Person): PersonView['qa'] {
   const a = p.activity;
   const lastDec = p.lastDecision;
@@ -343,6 +344,7 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
     );
   let text = `${cap(i.goal)}. Step: ${i.step || '—'} — ${state}.`;
   if(i.project)text+=` ${describeProject(i.project)}`;
+  if(i.journey)text+=` ${describeJourney(i.journey)}`;
   // A food reserve is the one live plan whose sentence has to carry two more things, because the whole point of it is that a
   // viewer can follow local evidence to a real consequence: WHAT WAS ACTUALLY PUT BY (not what was meant), and WHY it was taken
   // on, which for this kind is evidence about the household rather than a restatement of the goal. No other kind is touched,

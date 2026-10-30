@@ -5,9 +5,9 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **71**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **72**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
-choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, learned personal daily preferences, and personally scoped work amounts/durations. The older
+choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, learned personal daily preferences, personally scoped work amounts/durations, and private food/water preparation retaining a useful work purpose through a drink break. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
 
 ## Autonomy and environment continuation — 2026-10-30
@@ -28,6 +28,17 @@ pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-o
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
 
+### Rules 72 — bounded trip provisions and retained purpose
+
+Predecessor 71 runtime `8df52c0` was pinned at `511f26b` before this change. `TRIP_PREPARATION.md` records the contract,
+failure/review trail and limits. An existing legal distant work offer can motivate real food/water preparation, one bounded
+saved private intention, a physical need break, resumed work and ordinary subsequent useful delivery. Staged browser chain
+7/7; final trip contracts 14/14; full suite 251 files / 1,703 tests, typecheck and build pass. Earlier rules remain protected.
+Three fresh Normal five-day windows offered preparation at 4/4/10 sampled points but adopted **zero** journeys. Exact twins,
+100 whole-world purity checks per seed and conservation passed. Ordinary activation and aggregate benefit remain unproven.
+The journey still names one exact work place: lost-source alternatives are the next exposed recovery gap. A4/A5 and the
+whole expanded prompt remain incomplete; this is a connected bounded mechanism, not closure of the programme.
+
 ### Current capability map (source reconciliation, not fresh ordinary-world acceptance)
 
 Classifications are **connected**, **incomplete**, **absent**, and **measurement**. Connected means the named bounded
@@ -43,7 +54,7 @@ remain attributed evidence, not newly repeated measurements.
 | Time available for work/leisure / measurement (A1) | `decision.ts`, `needs.ts`, `relief.ts`, `leisure.ts`; leisure 28, tastes 31 | `activity_mix.ts` counts starts only; no support for 95% survival claim | Exclusive living-person tick budget, critical exposure, work spells, repeated aborted travel, actual endings and sampled blockers. Adequately supplied household repeatedly works and uses discretionary time; disrupted rhythm has recorded cause. |
 | Learned daily routines / connected mechanism, ordinary acceptance incomplete (A2) | `daily_routines.ts`, `decision.ts`, `activities.ts`; 70; supper/winter 24/27/53 retained | Actual trips earn bounded context/time preferences; matched autonomous choice differs; injury/season/care/contact/loss/cost/urgency suppress influence; saved physical and rendered proof | Three fresh five-day worlds acquire experience but offer zero routine nudges at samples and start zero named routine choices. Ordinary repeat work/discretionary rhythm and disrupted-household acceptance remain unproven; no pressure retuning or benefit claim. |
 | General bounded contingent goals / incomplete (A3) | `project_graph.ts`, `project_compile.ts`, `project_step.ts`, `batch_plan.ts`; production graph 69 | Bounded validated production tree, autonomous staged forged axe, exact saves, physical inputs, loss/retry/deadline contracts; `BOUNDED_PROJECTS.md` | Production mechanism connected; other goal families, general contingent composition and ordinary activation remain. Three fresh five-day worlds observed no projects. |
-| Quantities, foresight, useful waits / incomplete (A4) | `action_scope.ts`, `activities.ts`, `relief.ts`, `intent.ts`, `night_wait.ts`; work scope 71, project wait 69, prior 27/30/50 | Personally bounded quantity/spell from need/pack/return/duty estimates; physical saved partial/resumed work reaches construction; ordinary narrowed starts 6/17/14 in three fresh five-day worlds | Provision food/water/tools for a round trip; communicated meeting/delivery waits; other supported action families and aggregate acceptance. No future weather oracle or claim of fulfilled duty from a narrowed trip. |
+| Quantities, foresight, useful waits / incomplete (A4) | `action_scope.ts`, `journey.ts`, `journey_state.ts`, `activities.ts`, `intent.ts`, `night_wait.ts`; trip provisions 72, scope 71, project wait 69 | Scoped quantity/spell, physical bounded food/water preparation, retained work purpose through actual drinking and useful construction with exact saves; narrowed ordinary scope starts 6/17/14 at 71; zero trip adoptions in three five-day 72 worlds | Broader trip-tool preparation, communicated meeting/delivery waits, other action families, ordinary activation and aggregate acceptance. Lost-source alternatives remain. No future weather oracle or claim of fulfilled duty from a narrowed trip. |
 | Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`, `kept_target.ts`; 34/36/37/50/61/63/65 | Reconsideration, partial shelter delivery, required-tool loss/replacement, bounded remembered food-capacity recovery; valid running destinations remain scored after discovery | Preserve progress through other temporary obstructions; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Source/helper loss and general composition remain. |
 | Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |

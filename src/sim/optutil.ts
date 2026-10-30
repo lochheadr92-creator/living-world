@@ -9,7 +9,7 @@ import { homeBuildingOf, membersOf } from './households';
 import { estimatedAmount, isWaterBeliefId, recentFailure } from './knowledge';
 import { isDependent, stageOf } from './people';
 import { dayFraction } from './environment';
-import type { Activity, Belief, Building, Household, ItemKind, NeedKey, Person, SeenEntity, Stage, ToolKind, World } from './types';
+import type { Activity, ActivityKind, Belief, Building, Household, ItemKind, NeedKey, Person, SeenEntity, Stage, ToolKind, World } from './types';
 import { NEED_KEYS, CRITICAL, THIRST_RATE, isHomeType } from './constants';
 import type { BeliefKind } from './types';
 
@@ -30,6 +30,8 @@ export interface OptionLimit {
 }
 
 export interface Option {
+  /** A legal preparation for this personally known work option (derived, never saved as executable code). */
+  journeyFor?: {key:string;label:string;kind:ActivityKind;target:number;item:ItemKind|null;quantity:number;water:number;food:number;expected:number};
   /** Personal cost estimate used to narrow a legal work trip at rules 71; never an execution grant. */
   scopeEstimate?: import('./action_scope').ScopeEstimate;
   /** Derived during ranking only, when taste changes the preferred work. */

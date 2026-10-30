@@ -32,6 +32,7 @@ import type { Activity, ActivityKind, Intention, NeedKey, OptionSummary, Person,
 import { hyp } from './util';
 import {prepareRoutine,tiltRoutineChoices} from './daily_routines';
 import {scopeWorkOptions} from './action_scope';
+import {journeyOptions} from './journey';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
@@ -56,6 +57,7 @@ function collectOptions(world: World, p: Person, collect: boolean, observer: boo
   workshopToolOptions(ctx);
   socialOptions(ctx);
   relocationOptions(ctx);
+  journeyOptions(ctx);
   scopeWorkOptions(ctx);
   if (probe.on) {
     probe.generations++;

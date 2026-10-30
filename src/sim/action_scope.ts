@@ -1,6 +1,7 @@
 // Personal estimates narrow legal work; they never grant stock, time or future knowledge.
 import {CRITICAL,HUNGER_RATE,THIRST_RATE,ENERGY_RATE,isHomeType} from './constants';
 import {runsRulesVersion} from './rulesversion';
+import {journeyCredit} from './journey_supplies';
 import type {Ctx,Option} from './optutil';
 import type {ItemKind,World} from './types';
 export interface ScopeEstimate {walk:number;work:number;amount?:number;item?:ItemKind;}
@@ -9,18 +10,19 @@ export const actionScopeOn=()=>enabled;
 export function setActionScope(on:boolean):void{enabled=on;}
 export const hasActionScope=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,71);
 /** The return is to a remembered own home, or back to the departure point if none is known. */
-export function workWindow(ctx:Ctx,o:Option,e:ScopeEstimate):{work:number;back:number;reason:string}{
+export function workWindow(ctx:Ctx,o:Option,e:ScopeEstimate,extraWater=0,extraFood=0):{work:number;back:number;reason:string}{
  const {p,world}=ctx,b=p.beliefs[o.targetId],x=b?.x??p.x,y=b?.y??p.y,speed=Math.max(0.01,ctx.speed);
  const homes=Object.values(p.beliefs).filter(b=>b.kind==='building'&&b.hh===p.hhId&&isHomeType(b.btype));
  homes.sort((a,b)=>Math.hypot(a.x-x,a.y-y)-Math.hypot(b.x-x,b.y-y)||a.id-b.id);
  const home=homes[0],back=Math.ceil(Math.hypot((home?.x??p.x)-x,(home?.y??p.y)-y)/speed*1.2);
  const margin=9+Math.round(6*p.traits.caution),harsh=world.settings.harsh?1.18:1,heat=1+Math.max(0,world.weather.temp-19)*0.04;
+ const supplies=journeyCredit(world,p,extraWater,extraFood);
  const budget:[number,string][]=[
-  [(p.needs.hunger-CRITICAL.hunger-margin)/(HUNGER_RATE*1.25*harsh),'food margin'],
-  [(p.needs.thirst-CRITICAL.thirst-margin)/(THIRST_RATE*1.3*harsh*heat),'water margin'],
+  [(p.needs.hunger+supplies.food-CRITICAL.hunger-margin)/(HUNGER_RATE*1.25*harsh),'food margin'],
+  [(p.needs.thirst+supplies.water-CRITICAL.thirst-margin)/(THIRST_RATE*1.3*harsh*heat),'water margin'],
   [(p.needs.energy-CRITICAL.energy-margin)/(ENERGY_RATE*1.35*(ctx.stage==='elder'?1.15:1)),'energy for the return'],
  ];
- let [available,reason]=budget.sort((a,b)=>a[0]-b[0])[0];available-=e.walk+back+20;
+ let [available,reason]=budget.sort((a,b)=>a[0]-b[0])[0];available-=e.walk+back+20+supplies.ticks;
  for(const c of p.commitments){
   if(c.status!=='active'||o.tag==='promise'||c.siteId===o.targetId||c.destId===o.targetId||c.to===o.targetId)continue;
   const due=c.deadline+(c.grace??0);if(due<=world.tick)continue;

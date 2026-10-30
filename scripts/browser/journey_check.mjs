@@ -1,0 +1,31 @@
+import {existsSync,mkdirSync,readFileSync,writeFileSync} from 'node:fs';
+import {resolve,join,sep} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomUUID,createHash} from 'node:crypto';
+import {launch} from './cdp.mjs';
+const [url='http://127.0.0.1:5288/',out='autonomy_evidence/journey72-rendered']=process.argv.slice(2);
+if(existsSync(out))throw new Error('Fresh output required');
+const root=resolve(tmpdir()),profile=resolve(join(root,'living-world-journey-'+randomUUID()));
+if(!profile.startsWith(root+sep)||existsSync(profile))throw new Error('Unsafe temporary profile');
+let occupied=false;try{await fetch('http://127.0.0.1:9367/json/version');occupied=true;}catch{}if(occupied)throw new Error('Browser port already in use');
+mkdirSync(out,{recursive:true});const b=await launch({port:9367,width:1440,height:1000,profile}),checks=[];
+const check=(name,ok,detail)=>{checks.push({name,ok:!!ok,detail});console.log(`${ok?'PASS':'FAIL'} ${name}`);};
+const shot=async(name)=>{await b.evaluate(`(()=>{const f=window.__trip,g=window.__game,pt=f.project(f.p.x,f.p.y);g.select(f.p.id);g.fly=null;g.camera={x:pt.sx,y:pt.sy,zoom:2.3};window.__ui.update(1);document.querySelector('.q-doing')?.scrollIntoView({block:'start'});})()`);await b.sleep(200);await b.shot(join(out,name+'.png'));};
+try{
+ await b.send('Page.addScriptToEvaluateOnNewDocument',{source:'localStorage.setItem('+JSON.stringify('living-world:prefs:v1')+','+JSON.stringify(JSON.stringify({inspectorOpen:true,feedOpen:true}))+');localStorage.setItem('+JSON.stringify('living-world:ui:v1')+','+JSON.stringify(JSON.stringify({hinted:true,sections:{uptoMore:true}}))+');'});
+ await b.send('Page.navigate',{url});for(let n=0;n<80&&!await b.evaluate('!!window.__game');n++)await b.sleep(100);
+ const prep=await b.evaluate(`(async()=>{const {journeyScene}=await import('/tests/helpers/journey.ts'),select=await import('/tests/helpers/tool_prerequisite.ts'),econ=await import('/src/sim/economy.ts'),save=await import('/src/app/save.ts'),{stepWorld}=await import('/src/sim/world.ts'),{project}=await import('/src/render/iso.ts'),{generateOptions}=await import('/src/sim/decision.ts');const f=journeyScene();Object.assign(f,{select,econ,save,stepWorld,project,generateOptions});window.__trip=f;const o=generateOptions(f.w,f.p,true,true).options.find(o=>o.journeyFor);f.chosen=select.selectPrerequisite(f.w,f.p,o.key);f.twin=save.deserializeWorld(save.serializeWorld(f.w));window.__game.setPlaying(false);window.__game.restoreWorld(f.w,f.w.settings);return {key:o.key,goal:o.goal,plan:f.p.intentions.find(i=>i.journey),water:f.p.inv.water??0};})()`);
+ check('selected legal preparation adopts a saved work purpose before acquiring goods',prep.plan.journey&&prep.water===0,prep);await shot('preparing');
+ const visible=await b.evaluate(`document.querySelector('.inspector')?.textContent||document.body.textContent`);check('rendered inspector names retained purpose and real consumption requirement',visible.includes('Retaining the work purpose')&&visible.includes('real eating or drinking'),visible.slice(-4000));
+ const collected=await b.evaluate(`(()=>{const f=window.__trip;try{for(let n=0;n<700&&f.p.activity?.id===f.chosen.act.id;n++){f.stepWorld(f.w);f.stepWorld(f.twin);}return {water:f.p.inv.water,thirst:f.p.needs.thirst,cycles:f.chosen.act.cycle,equal:f.save.serializeWorld(f.w)===f.save.serializeWorld(f.twin),conserved:f.econ.conservationReport(f.w).ok};}finally{f.chosen.restore();f.p.cooldowns.pause=0;f.p.nextThink=f.w.tick;}})()`);
+ check('water is physically collected without free thirst relief',collected.water===collected.cycles&&collected.water>0&&collected.thirst<70&&collected.equal&&collected.conserved,collected);await shot('provisions-carried');
+ const drink=await b.evaluate(`(()=>{const f=window.__trip;for(let n=0;n<1200&&f.p.activity?.data.optKey!=='drink:inv';n++)f.stepWorld(f.w);f.twin=f.save.deserializeWorld(f.save.serializeWorld(f.w));return {activity:f.p.activity?.kind,key:f.p.activity?.data.optKey,plan:f.p.intentions.find(i=>i.journey),tick:f.w.tick};})()`);
+ check('autonomous drink break preserves the original trip intention',drink.key==='drink:inv'&&drink.plan.status==='active',drink);await shot('drink-break');
+ const departed=await b.evaluate(`(()=>{const f=window.__trip;for(let n=0;n<1200&&!(f.p.activity?.data.optKey===f.key&&f.p.activity.phase==='travel');n++){f.stepWorld(f.w);f.stepWorld(f.twin);}const equal=f.save.serializeWorld(f.w)===f.save.serializeWorld(f.twin);f.twin=f.save.deserializeWorld(f.save.serializeWorld(f.w));return {key:f.p.activity?.data.optKey,phase:f.p.activity?.phase,water:f.p.inv.water??0,thirst:f.p.needs.thirst,equal};})()`);
+ check('after consuming supplies the person departs for the retained work with exact continuation',departed.key===prep.plan.journey.key&&departed.phase==='travel'&&departed.water===0&&departed.equal,departed);await shot('departing-for-work');
+ const used=await b.evaluate(`(()=>{const f=window.__trip;for(let n=0;n<1500&&!(f.target.used.wood>0);n++){f.stepWorld(f.w);f.stepWorld(f.twin);}return {used:f.target.used,work:f.target.work,plan:f.p.intentions.find(i=>i.journey),equal:f.save.serializeWorld(f.w)===f.save.serializeWorld(f.twin),conserved:f.econ.conservationReport(f.w).ok};})()`);
+ check('autonomous work produces wood that reaches real construction',used.used.wood>0&&used.work>0&&used.plan.status==='done'&&used.equal&&used.conserved,used);await shot('wood-used');
+ const errors=b.events.filter(e=>e.method==='Runtime.exceptionThrown');check('no browser exceptions',errors.length===0,errors);
+ const files=['src/sim/journey.ts','src/sim/journey_state.ts','src/sim/journey_supplies.ts','src/sim/action_scope.ts','tests/helpers/journey.ts','scripts/browser/journey_check.mjs'];
+ writeFileSync(out+'/report.json',JSON.stringify({rules:72,evidence:'STAGED source, known water, home, demand and starting needs. The initial legal preparation is explicitly selected. Subsequent drinking, travel, collection and useful construction are autonomous. This is not an ordinary-world frequency or aggregate-benefit claim.',sourceHashes:Object.fromEntries(files.map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')])),checks},null,2));if(checks.some(c=>!c.ok))process.exitCode=1;
+}finally{await b.close();}
