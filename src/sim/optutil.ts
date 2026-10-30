@@ -81,8 +81,13 @@ export interface Ctx {
   observer: boolean;
   blocked: Option[];
   options: Option[];
-  /** set by the production planner when a plan was stopped only by lacking a tool: the social planner may ask to borrow one */
-  toolWanted?: { kind: ToolKind; for: string };
+  /**
+   * Set by the production planner when a plan was stopped only by lacking a tool: the social planner may ask to borrow one and
+   * the hand-tool pass (rules 57) may make one. `required` (rules 59, production.ts) says whether the wanted thing has NO other
+   * way of being made by this person: a hammer for a cart is required, a saw for planks that could be hewn is a convenience, and
+   * a required tool takes the place of a convenience found earlier. Absent below rules 59, where the first tool found stands.
+   */
+  toolWanted?: { kind: ToolKind; for: string; required?: boolean };
   /** Derived from the person's own wanted production, never another person's knowledge. */
   techniqueWanted?: { kind: import('./techniques').TechniqueKind; for: string };
 }

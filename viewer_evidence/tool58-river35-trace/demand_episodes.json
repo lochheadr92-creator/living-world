@@ -1,0 +1,3826 @@
+{
+ "summary": {
+  "demandSamples": 38,
+  "people": {
+   "Cole": {
+    "samples": 2,
+    "firstDay": 12.1,
+    "lastDay": 33.2
+   },
+   "Cora": {
+    "samples": 21,
+    "firstDay": 12.9,
+    "lastDay": 14.9
+   },
+   "Basil": {
+    "samples": 9,
+    "firstDay": 19.5,
+    "lastDay": 21.1
+   },
+   "Arlo": {
+    "samples": 6,
+    "firstDay": 32.5,
+    "lastDay": 33
+   }
+  },
+  "withHammerInPack": 1,
+  "withHammerCarrierInSight": 22,
+  "toolWanted": {
+   "hammer": 5,
+   "saw": 13,
+   "none": 20
+  },
+  "hammerAskOffered": 1,
+  "hammerCraftOffered": 0,
+  "withAnotherProjectLive": 38,
+  "batchWantedCart": 0,
+  "hammerInPackWithoutDemand": 1303,
+  "hammerHoldersWithoutDemand": [
+   "Kai",
+   "Zia",
+   "Tomas",
+   "Ben",
+   "Cole",
+   "Petra"
+  ]
+ },
+ "samples": [
+  {
+   "tick": 29040,
+   "day": 12.1,
+   "who": "Cole",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "hammer",
+    "for": "building a handcart"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "stock:put 8 units of food by for the"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 154,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "gather:417",
+     "util": 37.6
+    },
+    {
+     "key": "gather:416",
+     "util": 37
+    },
+    {
+     "key": "gather:1164",
+     "util": 32.4
+    }
+   ],
+   "doing": {
+    "kind": "build",
+    "label": "Building the quarry",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 1,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 30960,
+   "day": 12.9,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built",
+    "night:be fed, watered and under shel"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 37,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "warm:1102",
+     "util": 34.5
+    },
+    {
+     "key": "shelter:1118",
+     "util": 30
+    },
+    {
+     "key": "eat_store:1118",
+     "util": 22.7
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping by my lean-to",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 31200,
+   "day": 13,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 7,
+     "trust": 14.996251508640444,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 62,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "socialize:1121:request:food",
+     "util": 40.5
+    },
+    {
+     "key": "socialize:1134:request:food",
+     "util": 34.7
+    },
+    {
+     "key": "socialize:1140:request:food",
+     "util": 31.7
+    }
+   ],
+   "doing": {
+    "kind": "warm",
+    "label": "Warming up by the fire",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 31440,
+   "day": 13.1,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 6.9,
+     "trust": 14.976266502605883,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 70,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "eat:0",
+     "util": 60.7
+    },
+    {
+     "key": "gather:934",
+     "util": 43.1
+    },
+    {
+     "key": "gather:937",
+     "util": 42.2
+    }
+   ],
+   "doing": {
+    "kind": "converse",
+    "label": "Talking with Abel",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 31680,
+   "day": 13.2,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 218,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "give:1121",
+     "util": 32.5
+    },
+    {
+     "key": "attend:12958",
+     "util": 31.2
+    },
+    {
+     "key": "harvest:1500",
+     "util": 27
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Chopping wood",
+    "forPlan": 11954
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 31920,
+   "day": 13.3,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 236,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 3,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "give:1121",
+     "util": 38.9
+    },
+    {
+     "key": "haul:11621",
+     "util": 30.6
+    },
+    {
+     "key": "attend:12958",
+     "util": 30.5
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Chopping wood",
+    "forPlan": 11954
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 3,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 32160,
+   "day": 13.4,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1112,
+     "d": 2.2,
+     "trust": 20.044449723041932,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 6.7,
+     "trust": 21.345813895851478,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 5.5,
+     "trust": 21.206572945094656,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 38,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 3,
+      "pack": 4,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [
+    {
+     "key": "operate:10283:hew_planks",
+     "util": 29.8,
+     "label": "Hewing planks"
+    }
+   ],
+   "topOptions": [
+    {
+     "key": "repair:1118",
+     "util": 38
+    },
+    {
+     "key": "attend:12958",
+     "util": 37
+    },
+    {
+     "key": "harvest:1500",
+     "util": 34.6
+    }
+   ],
+   "doing": {
+    "kind": "repair",
+    "label": "Repairing the lean-to",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 3,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 4,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 32400,
+   "day": 13.5,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 6.6,
+     "trust": 14.89712268749814,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 1,
+     "trust": 21.300430640268072,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 1.8,
+     "trust": 21.161746653314278,
+     "aff": 0
+    },
+    {
+     "id": 1112,
+     "d": 7.1,
+     "trust": 20.004271924149766,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 75,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "sleep:1118",
+     "util": 43.2
+    },
+    {
+     "key": "fuel:1102",
+     "util": 37.8
+    },
+    {
+     "key": "harvest:2479",
+     "util": 34.2
+    }
+   ],
+   "doing": {
+    "kind": "attend",
+    "label": "At the harvest feast",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 1,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 32640,
+   "day": 13.6,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1128,
+     "d": 3.7,
+     "trust": 21.255228917707,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 4,
+     "trust": 21.11709966670102,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 44,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "warm:1102",
+     "util": 53.8
+    },
+    {
+     "key": "sleep:1118",
+     "util": 45.4
+    },
+    {
+     "key": "sleep:1102",
+     "util": 35.9
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping by my lean-to",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 1,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 32880,
+   "day": 13.7,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 5,
+     "trust": 14.858024059961155,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 3.7,
+     "trust": 21.210208002036172,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 4,
+     "trust": 21.072631268034215,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 48,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "warm:1102",
+     "util": 72.9
+    },
+    {
+     "key": "give:1121",
+     "util": 51.7
+    },
+    {
+     "key": "rest:home:1118",
+     "util": 45.7
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping by my lean-to",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 1,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 33120,
+   "day": 13.8,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 2.5,
+     "trust": 14.83859196372131,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 0.8,
+     "trust": 21.165367170028027,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 2.2,
+     "trust": 21.02834074296208,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 96,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "give:1122",
+     "util": 80.7
+    },
+    {
+     "key": "warm:1102",
+     "util": 75.3
+    },
+    {
+     "key": "give:1121",
+     "util": 62.7
+    }
+   ],
+   "doing": {
+    "kind": "warm",
+    "label": "Warming up by the fire",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 33360,
+   "day": 13.9,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 2.5,
+     "trust": 14.819237595866424,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 0.8,
+     "trust": 21.120705701347916,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 2.2,
+     "trust": 20.98422737999023,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 95,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "give:1122",
+     "util": 87.9
+    },
+    {
+     "key": "warm:1102",
+     "util": 75.3
+    },
+    {
+     "key": "give:1121",
+     "util": 69.5
+    }
+   ],
+   "doing": {
+    "kind": "warm",
+    "label": "Warming up by the fire",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 33600,
+   "day": 14,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 1.5,
+     "trust": 14.799960645482958,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 1,
+     "trust": 21.076222878542524,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 89,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "give:1122",
+     "util": 81.1
+    },
+    {
+     "key": "give:1121",
+     "util": 77.2
+    },
+    {
+     "key": "warm:1102",
+     "util": 75.4
+    }
+   ],
+   "doing": {
+    "kind": "warm",
+    "label": "Warming up by the fire",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 33840,
+   "day": 14.1,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 0.6,
+     "trust": 14.780760802901026,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 4.2,
+     "trust": 20.896529308588388,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 5.3,
+     "trust": 21.031917987028354,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 83,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "gather:1091",
+     "util": 58.5
+    },
+    {
+     "key": "gather:991",
+     "util": 57.6
+    },
+    {
+     "key": "gather:940",
+     "util": 57.1
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Fishing",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 34080,
+   "day": 14.2,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1112,
+     "d": 3.7,
+     "trust": 19.727491425494406,
+     "aff": 0
+    },
+    {
+     "id": 1113,
+     "d": 3.6,
+     "trust": 14.761637759689423,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 5.7,
+     "trust": 20.852943191354033,
+     "aff": 0
+    },
+    {
+     "id": 1128,
+     "d": 4.5,
+     "trust": 22.186190315080236,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 98,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "harvest:2479",
+     "util": 44.8
+    },
+    {
+     "key": "gather:940",
+     "util": 33.9
+    },
+    {
+     "key": "gather:936",
+     "util": 31.7
+    }
+   ],
+   "doing": {
+    "kind": "harvest",
+    "label": "Harvest the crop",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 34320,
+   "day": 14.3,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1131,
+     "d": 3.5,
+     "trust": 20.809531418588616,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "shelter:get the household's hut built"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 121,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "gather:939",
+     "util": 48.2
+    },
+    {
+     "key": "gather:948",
+     "util": 42.3
+    },
+    {
+     "key": "gather:946",
+     "util": 41.1
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Picking berries",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 34560,
+   "day": 14.4,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1128,
+     "d": 7.2,
+     "trust": 22.088895771604637,
+     "aff": 0
+    },
+    {
+     "id": 1112,
+     "d": 3.5,
+     "trust": 19.64982713395326,
+     "aff": 0
+    },
+    {
+     "id": 1113,
+     "d": 3.5,
+     "trust": 14.723620843816063,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 8.3,
+     "trust": 20.766293292914263,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "tried recently and could not get on"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 52,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "give:1122",
+     "util": 73
+    },
+    {
+     "key": "gather:936",
+     "util": 25.7
+    },
+    {
+     "key": "gather:937",
+     "util": 25.6
+    }
+   ],
+   "doing": {
+    "kind": "give",
+    "label": "Bringing grain to Eli",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 34800,
+   "day": 14.5,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 2.8,
+     "trust": 14.704726360440798,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 118,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "give:1122",
+     "util": 47.9
+    },
+    {
+     "key": "sleep:14045",
+     "util": 45.1
+    },
+    {
+     "key": "sleep:1118",
+     "util": 38.9
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping by my hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 35040,
+   "day": 14.6,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 124,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "sleep:14045",
+     "util": 51.4
+    },
+    {
+     "key": "give:1122",
+     "util": 45.2
+    },
+    {
+     "key": "sleep:1118",
+     "util": 38.6
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 35280,
+   "day": 14.7,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 124,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "drink:1000268",
+     "util": 51.2
+    },
+    {
+     "key": "give:1122",
+     "util": 49.5
+    },
+    {
+     "key": "drink:1000250",
+     "util": 45.9
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 35520,
+   "day": 14.8,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1131,
+     "d": 7.8,
+     "trust": 20.59506341096884,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 67,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 4,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [
+    {
+     "key": "operate:10283:hew_planks",
+     "util": 6.6,
+     "label": "Hewing planks"
+    }
+   ],
+   "topOptions": [
+    {
+     "key": "sleep:14045",
+     "util": 35.9
+    },
+    {
+     "key": "sleep:1118",
+     "util": 33.9
+    },
+    {
+     "key": "eat:0",
+     "util": 23.4
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping by my hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 35760,
+   "day": 14.9,
+   "who": "Cora",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 36 weight of materials to building sites in 8 loads these last days",
+    "base": 13.8
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 120,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 2,
+      "pack": 0,
+      "lack": 2,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 4,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [
+    {
+     "key": "operate:10283:hew_planks",
+     "util": 5.5,
+     "label": "Hewing planks"
+    }
+   ],
+   "topOptions": [
+    {
+     "key": "shelter:14045",
+     "util": 30
+    },
+    {
+     "key": "rest:home:14045",
+     "util": 26
+    },
+    {
+     "key": "socialize:1120:mediate:1122",
+     "util": 20.2
+    }
+   ],
+   "doing": {
+    "kind": "rest",
+    "label": "Resting inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 46800,
+   "day": 19.5,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "tool:hoe"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 93,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "warm:1102",
+     "util": 48.7
+    },
+    {
+     "key": "eat:0",
+     "util": 38.3
+    },
+    {
+     "key": "rest:home:15841",
+     "util": 37.4
+    }
+   ],
+   "doing": null,
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 47040,
+   "day": 19.6,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 4.4,
+     "trust": 17.630698341840787,
+     "aff": 0
+    },
+    {
+     "id": 1131,
+     "d": 2.8,
+     "trust": 14.648542615151019,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "tool:hoe"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 106,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "eat:0",
+     "util": 54.9
+    },
+    {
+     "key": "rest:home:15841",
+     "util": 52.5
+    },
+    {
+     "key": "sleep:15841",
+     "util": 41.5
+    }
+   ],
+   "doing": {
+    "kind": "warm",
+    "label": "Warming up by the fire",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 47280,
+   "day": 19.7,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "tool:hoe"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 129,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "rest:home:15841",
+     "util": 61.8
+    },
+    {
+     "key": "sleep:15841",
+     "util": 53
+    },
+    {
+     "key": "sleep:2307",
+     "util": 41
+    }
+   ],
+   "doing": {
+    "kind": "rest",
+    "label": "Resting inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 47520,
+   "day": 19.8,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "tool:hoe"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 122,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "sleep:15841",
+     "util": 49.5
+    },
+    {
+     "key": "rest:home:15841",
+     "util": 47.3
+    },
+    {
+     "key": "drink:1000230",
+     "util": 39.9
+    }
+   ],
+   "doing": {
+    "kind": "rest",
+    "label": "Resting inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 47760,
+   "day": 19.9,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1135,
+     "d": 6.5,
+     "trust": 12.023955602000816,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 3
+    }
+   },
+   "livePlans": [
+    "tool:hoe"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 86,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "drink:1000230",
+     "util": 61.9
+    },
+    {
+     "key": "drink:1000269",
+     "util": 58.8
+    },
+    {
+     "key": "sleep:15841",
+     "util": 43
+    }
+   ],
+   "doing": {
+    "kind": "drink",
+    "label": "Drinking at the water",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 0,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 48000,
+   "day": 20,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "hammer",
+    "for": "building a handcart"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 2
+    }
+   },
+   "livePlans": [
+    "tool:hoe"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 278,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 1,
+      "lack": 1,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "gather:17448",
+     "util": 42.1
+    },
+    {
+     "key": "gather:617",
+     "util": 41.3
+    },
+    {
+     "key": "gather:17448",
+     "util": 38.8
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Chopping wood",
+    "forPlan": 17258
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 48240,
+   "day": 20.1,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1128,
+     "d": 8.5,
+     "trust": 22.15917787001425,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "hammer",
+    "for": "building a handcart"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "tool:hoe"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 153,
+    "hammerOnRack": false,
+    "realJob": {
+     "recipe": "hew_planks",
+     "client": 1134,
+     "phase": "work",
+     "progress": 51,
+     "total": 90
+    },
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 4,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [
+    {
+     "key": "socialize:1128:request:tool:hammer",
+     "util": 21.9,
+     "label": "Ask Tomas to lend a hammer"
+    }
+   ],
+   "topOptions": [
+    {
+     "key": "operate:17852:quarry_stone",
+     "util": 36.5
+    },
+    {
+     "key": "give:1140",
+     "util": 31.2
+    },
+    {
+     "key": "seed_stash:2307",
+     "util": 29.7
+    }
+   ],
+   "doing": {
+    "kind": "operate",
+    "label": "Cutting stone",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 50400,
+   "day": 21,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 31 weight of materials to building sites in 6 loads these last days",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1128,
+     "d": 8.7,
+     "trust": 22.928386176048434,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "hammer",
+    "for": "building a handcart"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": true,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 23,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 4,
+      "pack": 0,
+      "lack": 0,
+      "stage": null
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "gather:993",
+     "util": 43.6
+    },
+    {
+     "key": "gather:972",
+     "util": 42.5
+    },
+    {
+     "key": "gather:1097",
+     "util": 41
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Picking berries",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 50640,
+   "day": 21.1,
+   "who": "Basil",
+   "demand": {
+    "why": "to haul heavy loads, after carrying 31 weight of materials to building sites in 6 loads these last days",
+    "base": 15
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1128,
+     "d": 5.7,
+     "trust": 22.876672631344242,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "hammer",
+    "for": "building a handcart"
+   },
+   "batchWanted": {
+    "item": "planks",
+    "wants": {
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "stock:put 12 units of food by for th"
+   ],
+   "batchCooldown": true,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 180,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 4,
+      "pack": 0,
+      "lack": 0,
+      "stage": null
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 2,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "gather:948",
+     "util": 36.1
+    },
+    {
+     "key": "gather:992",
+     "util": 35.2
+    },
+    {
+     "key": "gather:953",
+     "util": 35.2
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Gathering wild grain",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 2,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 2,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 1
+   }
+  },
+  {
+   "tick": 78000,
+   "day": 32.5,
+   "who": "Arlo",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.5
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "bricks",
+    "wants": {
+     "clay": 4,
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "repair:get the roof sound again"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 53,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 1,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "sleep:5743",
+     "util": 50
+    },
+    {
+     "key": "sleep:2231",
+     "util": 42.2
+    },
+    {
+     "key": "socialize:1145:trade:stone",
+     "util": 12.5
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping by my hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 78240,
+   "day": 32.6,
+   "who": "Arlo",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.5
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "bricks",
+    "wants": {
+     "clay": 4,
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "repair:get the roof sound again"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 107,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 1,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "sleep:5743",
+     "util": 53.4
+    },
+    {
+     "key": "sleep:2231",
+     "util": 42.7
+    },
+    {
+     "key": "shelter:5743",
+     "util": 22
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 78480,
+   "day": 32.7,
+   "who": "Arlo",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.5
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "bricks",
+    "wants": {
+     "clay": 4,
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "repair:get the roof sound again"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 107,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 1,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "sleep:5743",
+     "util": 39.6
+    },
+    {
+     "key": "sleep:2231",
+     "util": 30.6
+    },
+    {
+     "key": "shelter:5743",
+     "util": 30
+    }
+   ],
+   "doing": {
+    "kind": "sleep",
+    "label": "Sleeping inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 78720,
+   "day": 32.8,
+   "who": "Arlo",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.5
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "bricks",
+    "wants": {
+     "clay": 4,
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "repair:get the roof sound again"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 107,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 1,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "drink:1000230",
+     "util": 44.8
+    },
+    {
+     "key": "drink:1000232",
+     "util": 41.8
+    },
+    {
+     "key": "shelter:5743",
+     "util": 30
+    }
+   ],
+   "doing": {
+    "kind": "rest",
+    "label": "Resting inside the hut",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 78960,
+   "day": 32.9,
+   "who": "Arlo",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.5
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "bricks",
+    "wants": {
+     "clay": 4,
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "repair:get the roof sound again"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 101,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 1,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "drink:1000230",
+     "util": 59.9
+    },
+    {
+     "key": "drink:1000232",
+     "util": 57
+    },
+    {
+     "key": "socialize:1149:chat",
+     "util": 46.2
+    }
+   ],
+   "doing": {
+    "kind": "drink",
+    "label": "Drinking at the water",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 79200,
+   "day": 33,
+   "who": "Arlo",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.5
+   },
+   "hammerInPack": false,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1128,
+     "d": 6.7,
+     "trust": 11.249527988488689,
+     "aff": 0
+    },
+    {
+     "id": 1112,
+     "d": 1.7,
+     "trust": 15.905330054144024,
+     "aff": 0
+    },
+    {
+     "id": 1113,
+     "d": 0.7,
+     "trust": 20.590414117157867,
+     "aff": 0
+    },
+    {
+     "id": 1132,
+     "d": 1.7,
+     "trust": 13.854961745435734,
+     "aff": 0
+    }
+   ],
+   "toolWanted": {
+    "kind": "saw",
+    "for": "sawing planks"
+   },
+   "batchWanted": {
+    "item": "bricks",
+    "wants": {
+     "clay": 4,
+     "wood": 1
+    }
+   },
+   "livePlans": [
+    "repair:get the roof sound again"
+   ],
+   "batchCooldown": false,
+   "criticals": [],
+   "blockedHandcart": [
+    "needs a hammer and has none (and none is on the rack)"
+   ],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 85,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 2,
+      "pack": 1,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [],
+   "topOptions": [
+    {
+     "key": "warm:1102",
+     "util": 43.3
+    },
+    {
+     "key": "rest:home:5743",
+     "util": 35.6
+    },
+    {
+     "key": "socialize:1140:offer",
+     "util": 30.9
+    }
+   ],
+   "doing": {
+    "kind": "warm",
+    "label": "Warming up by the fire",
+    "forPlan": 0
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 0,
+    "axe": 0,
+    "saw": 0
+   }
+  },
+  {
+   "tick": 79680,
+   "day": 33.2,
+   "who": "Cole",
+   "demand": {
+    "why": "to haul heavy loads",
+    "base": 13.8
+   },
+   "hammerInPack": true,
+   "hhMemberHasHammer": [],
+   "hammerCarriersInSight": [
+    {
+     "id": 1113,
+     "d": 5.6,
+     "trust": 19.324389529612123,
+     "aff": 0
+    },
+    {
+     "id": 1132,
+     "d": 7.5,
+     "trust": 15.621041763142623,
+     "aff": 0
+    }
+   ],
+   "toolWanted": null,
+   "batchWanted": {
+    "item": "planks",
+    "wants": {}
+   },
+   "livePlans": [
+    "tool:spear"
+   ],
+   "batchCooldown": true,
+   "criticals": [],
+   "blockedHandcart": [],
+   "yard": {
+    "yardKnown": true,
+    "yardId": 10283,
+    "eta": 34,
+    "hammerOnRack": false,
+    "realJob": null,
+    "inputs": {
+     "planks": {
+      "need": 4,
+      "shelf": 1,
+      "pack": 0,
+      "lack": 3,
+      "stage": "hew_planks"
+     },
+     "handles": {
+      "need": 2,
+      "shelf": 0,
+      "pack": 0,
+      "lack": 2,
+      "stage": "split_handles"
+     },
+     "wood": {
+      "need": 2,
+      "shelf": 3,
+      "pack": 1,
+      "lack": 0,
+      "stage": null
+     }
+    },
+    "technique": ""
+   },
+   "hammerOptions": [
+    {
+     "key": "operate:10283:saw_planks",
+     "util": 39.3,
+     "label": "Sawing planks"
+    },
+    {
+     "key": "operate:10283:saw_planks",
+     "util": 15.3,
+     "label": "Sawing planks"
+    },
+    {
+     "key": "operate:10283:split_handles",
+     "util": 11.3,
+     "label": "Shaping handles"
+    }
+   ],
+   "topOptions": [
+    {
+     "key": "operate:10283:saw_planks",
+     "util": 39.3
+    },
+    {
+     "key": "gather:26561",
+     "util": 38.1
+    },
+    {
+     "key": "gather:649",
+     "util": 37.1
+    }
+   ],
+   "doing": {
+    "kind": "gather",
+    "label": "Chopping wood",
+    "forPlan": 29388
+   },
+   "free": {
+    "wood": 0,
+    "stone": 0
+   },
+   "inv": {
+    "wood": 1,
+    "planks": 0,
+    "handles": 0,
+    "hammer": 1,
+    "axe": 1,
+    "saw": 1
+   }
+  }
+ ]
+}

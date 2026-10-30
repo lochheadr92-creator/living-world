@@ -7,6 +7,7 @@ import { winterReserveOn, setWinterReserve } from '../../src/sim/provision';
 import { winterShelterOn, setWinterShelter } from '../../src/sim/winter_shelter';
 import { deliveryPlaceOn, setDeliveryPlace } from '../../src/sim/delivery_place';
 import { batchPlansOn, setBatchPlans } from '../../src/sim/batch_plan';
+import { toolPrecedenceOn, setToolPrecedence } from '../../src/sim/production';
 import { customersOn, setCustomers } from '../../src/sim/customers';
 import { successionOn, setSuccession } from '../../src/sim/succession';
 import { winterPracticeOn, setWinterPractice } from '../../src/sim/winter_practice';
@@ -287,6 +288,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-transport') return {spec:label,summary:'nothing carried on foot is counted toward wanting a cart, no cart trip beyond a building site is offered and no loaded cart is recovered; site hauls and the cart itself unchanged; no effect below rules 55',install(){const was=transportOn();setTransport(false);return ()=>setTransport(was);}};
   if (kind === 'rich-no-practical-care') return {spec:label,summary:'remove rules-56 childcare location communication, local-contact and helper-reserve revalidation, and time-based request settlement; historical watch behaviour restored, no effect below 56',install(){const was=practicalCareOn();setPracticalCare(false);return ()=>setPracticalCare(was);}};
   if (kind === 'rich-no-workshop-tools') return {spec:label,summary:'remove only the connection from workshop-required tools to hand-tool plans, crafting and material options; borrowing remains; no effect below 57',install(){const was=workshopToolsOn();setWorkshopTools(false);return ()=>setWorkshopTools(was);}};
+  if (kind === 'rich-no-tool-precedence') return {spec:label,summary:'remove only the rules-59 precedence of a required tool over a convenience in the planner\'s missing-tool fact; the first tool found stands; no effect below 59',install(){const was=toolPrecedenceOn();setToolPrecedence(false);return ()=>setToolPrecedence(was);}};
   if (kind === 'rich-no-seed-storage') return {spec:label,summary:'remove only seed storage trips offered to free capacity for a wanted raw material; existing farming withdrawal remains; no effect below 58',install(){const was=seedStorageOn();setSeedStorage(false);return ()=>setSeedStorage(was);}};
   if (kind === 'rich-no-craft-capacity') return {spec:label,summary:'restore pre-consumption capacity checking when a hand tool finishes; no effect below 58',install(){const was=craftCapacityOn();setCraftCapacity(false);return ()=>setCraftCapacity(was);}};
   if (kind === 'rich-no-relocation-extensions') return {spec:label,summary:'relocation keeps the rules-20 whole-household form: no subgroup consent, succession, return or search; no effect below rules 54',install(){const was=relocationExtensionsOn();setRelocationExtensions(false);return ()=>setRelocationExtensions(was);}};

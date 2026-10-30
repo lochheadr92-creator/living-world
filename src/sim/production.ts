@@ -22,11 +22,37 @@ import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { toolOf } from './tools';
 import { stageOf } from './people';
-import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind } from './types';
+import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind, World } from './types';
 import { hashUnit } from './rng';
 
 import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
+
+// ───────────────────────── the tool that really stands in the way (rules version 59) ─────────────────────────
+// The planner notes the first tool a wanted recipe lacks (`ctx.toolWanted`), and rules 57 connects that one tool to borrowing,
+// materials, crafting and the private tool plan. Traced in an ordinary river world (scripts/cart_trace.ts, 2026-10-30): the
+// person hauling wood to her own hut wanted a cart, the cart wanted a hammer she lacked, and the tool she was recorded as lacking
+// was the SAW - for sawing the site's planks, which she could hew without any tool at all - because the site's planks were planned
+// before the cart and the first tool found stood. The hammer, without which no cart can be built, was never the tool asked for,
+// gathered for or crafted. From version 59 a tool that is REQUIRED (nothing this person could run makes the wanted thing without
+// it) takes the place of a convenience found earlier; a convenience never displaces a required one. Nothing else changes: the
+// same blockers are recorded, the same options offered, and a world below 59 keeps the first tool found.
+export const TOOL_PRECEDENCE_FROM_VERSION = 59;
+let toolPrecedence = true;
+export const toolPrecedenceOn = (): boolean => toolPrecedence;
+/** Lab switch `rich-no-tool-precedence`: the first tool found stands, as before rules 59; no effect below 59. */
+export function setToolPrecedence(on: boolean): void {
+  toolPrecedence = on;
+}
+export const hasToolPrecedence = (world: World): boolean => toolPrecedence && isRich(world) && runsRulesVersion(world, TOOL_PRECEDENCE_FROM_VERSION);
+/** Record a lacking tool as the one wanted, under the version's precedence rule. */
+function noteToolWanted(ctx: Ctx, kind: ToolKind, doing: string, required: boolean | undefined): void {
+  if (!hasToolPrecedence(ctx.world)) {
+    ctx.toolWanted ??= { kind, for: doing };
+    return;
+  }
+  if (!ctx.toolWanted || (required && !ctx.toolWanted.required)) ctx.toolWanted = { kind, for: doing, required: !!required };
+}
 
 /** What somebody believes the settlement needs made or fetched, in the order they would care about it. */
 export interface Demand {
@@ -279,7 +305,7 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
  * One batch of a recipe at a workplace: everything the batch needs is either there (so go and work), carried (so bring it),
  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
  */
-function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0): void {
+function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean): void {
   const { world, p } = ctx;
   const b = f.b;
   const technique = techniqueBlocker(world,p,r.id);
@@ -322,7 +348,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   }
   if (!toolAvailable(ctx, f, r)) {
     addBlocked(ctx, 'operate', r.doing, b.id, `needs a ${r.tool!.kind === 'pick' ? 'pickaxe' : r.tool!.kind} and has none (and none is on the rack)`, tag);
-    ctx.toolWanted ??= { kind: r.tool!.kind, for: r.doing.toLowerCase() };
+    noteToolWanted(ctx, r.tool!.kind, r.doing.toLowerCase(), toolRequired);
     return;
   }
   if (r.fromDeposit && snap && snap.deposit >= 0 && snap.deposit < r.fromDeposit.n) {
@@ -488,6 +514,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   }
   if (depth >= 3) return;
   const recipes = item === 'tend' ? recipesAt('granary') : recipesMaking(item);
+  const toolRequired = toolRequiredFor(ctx, item, recipes);
   const seen = new Set<string>();
   for (const r of recipes) {
     const fac = facilitiesOf(ctx, r.at)[0];
@@ -501,8 +528,25 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
     // prefer the better way of making something when its tool is to hand: sawing beats hewing
     if (r.id === 'hew_planks' && (unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw'))) continue;
     if (r.id === 'saw_planks' && !(unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw')) && unitsOf(p.inv.axe) > 0) continue;
-    planRecipe(ctx, fac, r, item, remaining, base, why, tag, depth, siteId);
+    planRecipe(ctx, fac, r, item, remaining, base, why, tag, depth, siteId, toolRequired);
   }
+}
+
+/**
+ * Rules 59: is a tool one of this item's recipes lacks the ONLY way to the item, as far as this person can tell? False when the
+ * item is a raw material (it can be gathered by hand), or when some recipe for it at a workshop they know and may use needs no tool
+ * they lack and no procedure they have not learned. Undefined below 59, where the question is not asked.
+ */
+function toolRequiredFor(ctx: Ctx, item: ItemKind | 'cart' | 'tend', recipes: Recipe[]): boolean | undefined {
+  if (!hasToolPrecedence(ctx.world)) return undefined;
+  if (item !== 'cart' && item !== 'tend' && isRawMaterial(item)) return false;
+  for (const r of recipes) {
+    const fac = facilitiesOf(ctx, r.at)[0];
+    if (!fac) continue;
+    if (techniqueBlocker(ctx.world, ctx.p, r.id)) continue;
+    if (toolAvailable(ctx, fac, r)) return false;
+  }
+  return true;
 }
 
 // ───────────────────────── what is wanted ─────────────────────────

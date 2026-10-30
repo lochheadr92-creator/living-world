@@ -1,0 +1,1037 @@
+{
+  "rules": 58,
+  "seed": "river",
+  "days": 35,
+  "tick": 84000,
+  "stop": "horizon",
+  "seconds": 196.506,
+  "pure": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "counts": {
+    "adults": 6265,
+    "cartDemand": 38,
+    "hammerInPack": 1304,
+    "hammerOnRack": 0,
+    "batchWantedCart": 0,
+    "cartPlanLive": 0,
+    "blockedHandcart": 19
+  },
+  "carts": 0,
+  "craftedHammers": 6,
+  "planEvents": [],
+  "yardOps": [
+    {
+      "tick": 28864,
+      "day": 12.03,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 29914,
+      "day": 12.46,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 29935,
+      "day": 12.47,
+      "who": "Alma",
+      "id": 1144,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 31526,
+      "day": 13.14,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 31635,
+      "day": 13.18,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared hall (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 32228,
+      "day": 13.43,
+      "who": "Milo",
+      "id": 1116,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 34143,
+      "day": 14.23,
+      "who": "Talia",
+      "id": 1142,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 34242,
+      "day": 14.27,
+      "who": "Milo",
+      "id": 1116,
+      "recipe": "hew_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared hall (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 34247,
+      "day": 14.27,
+      "who": "Zia",
+      "id": 1113,
+      "recipe": "hew_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for my household’s hall (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 35879,
+      "day": 14.95,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 35942,
+      "day": 14.98,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 36127,
+      "day": 15.05,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 36659,
+      "day": 15.27,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 36681,
+      "day": 15.28,
+      "who": "Kai",
+      "id": 1131,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 36994,
+      "day": 15.41,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 37024,
+      "day": 15.43,
+      "who": "Kai",
+      "id": 1131,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 37099,
+      "day": 15.46,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 38282,
+      "day": 15.95,
+      "who": "Cole",
+      "id": 1135,
+      "recipe": "saw_planks",
+      "label": "Sawing planks",
+      "goal": "for the shared hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 38483,
+      "day": 16.03,
+      "who": "Zia",
+      "id": 1113,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 38966,
+      "day": 16.24,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for my household’s hall (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 48149,
+      "day": 20.06,
+      "who": "Zia",
+      "id": 1113,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 48155,
+      "day": 20.06,
+      "who": "Yan",
+      "id": 1134,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 48340,
+      "day": 20.14,
+      "who": "Basil",
+      "id": 1138,
+      "recipe": "saw_planks",
+      "label": "Sawing planks",
+      "goal": "for my household’s granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 48360,
+      "day": 20.15,
+      "who": "Milo",
+      "id": 1116,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 48394,
+      "day": 20.16,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 48488,
+      "day": 20.2,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 48721,
+      "day": 20.3,
+      "who": "Ben",
+      "id": 1112,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for my household’s hall",
+      "forPlan": 0
+    },
+    {
+      "tick": 50297,
+      "day": 20.96,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared granary (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 51482,
+      "day": 21.45,
+      "who": "Milo",
+      "id": 1116,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 60696,
+      "day": 25.29,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 64994,
+      "day": 27.08,
+      "who": "Basil",
+      "id": 1138,
+      "recipe": "saw_planks",
+      "label": "Sawing planks",
+      "goal": "for my household’s granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 65190,
+      "day": 27.16,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "saw_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared granary (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 65332,
+      "day": 27.22,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "saw_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared granary (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 65455,
+      "day": 27.27,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "saw_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared granary (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 65690,
+      "day": 27.37,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "saw_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared granary (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 65852,
+      "day": 27.44,
+      "who": "Talia",
+      "id": 1142,
+      "recipe": "saw_planks",
+      "label": "Heading to help at the timber yard",
+      "goal": "for the shared granary (lend a hand)",
+      "forPlan": 0
+    },
+    {
+      "tick": 74543,
+      "day": 31.06,
+      "who": "Arlo",
+      "id": 1150,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 79718,
+      "day": 33.22,
+      "who": "Ivo",
+      "id": 1121,
+      "recipe": "hew_planks",
+      "label": "Hewing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    },
+    {
+      "tick": 79770,
+      "day": 33.24,
+      "who": "Zia",
+      "id": 1113,
+      "recipe": "saw_planks",
+      "label": "Sawing planks",
+      "goal": "for the shared granary",
+      "forPlan": 0
+    }
+  ],
+  "holderActs": 0,
+  "daily": [
+    {
+      "day": 1,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [],
+      "yards": []
+    },
+    {
+      "day": 2,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [],
+      "yards": []
+    },
+    {
+      "day": 3,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [],
+      "yards": []
+    },
+    {
+      "day": 4,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [],
+      "yards": []
+    },
+    {
+      "day": 5,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [],
+      "yards": []
+    },
+    {
+      "day": 6,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [],
+      "yards": []
+    },
+    {
+      "day": 7,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [],
+      "yards": []
+    },
+    {
+      "day": 8,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [
+        "Kai"
+      ],
+      "yards": []
+    },
+    {
+      "day": 9,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [
+        "Kai"
+      ],
+      "yards": []
+    },
+    {
+      "day": 10,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Kai"
+      ],
+      "yards": []
+    },
+    {
+      "day": 11,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Zia",
+        "Tomas",
+        "Kai"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 12,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Zia",
+        "Tomas",
+        "Kai"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 13,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Zia",
+        "Tomas",
+        "Kai"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 14,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 15,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": {
+            "recipe": "hew_planks",
+            "client": 1150,
+            "phase": "work"
+          },
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 16,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 17,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 18,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 19,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 20,
+      "alive": 30,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 21,
+      "alive": 30,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 22,
+      "alive": 30,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 23,
+      "alive": 29,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 24,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 25,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 26,
+      "alive": 30,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 27,
+      "alive": 31,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 28,
+      "alive": 31,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": {
+            "recipe": "saw_planks",
+            "client": 1138,
+            "phase": "work"
+          },
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 29,
+      "alive": 30,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": {
+            "recipe": "saw_planks",
+            "client": 1138,
+            "phase": "work"
+          },
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 30,
+      "alive": 30,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 31,
+      "alive": 30,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 32,
+      "alive": 28,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 33,
+      "alive": 27,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 34,
+      "alive": 27,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    },
+    {
+      "day": 35,
+      "alive": 27,
+      "carts": 0,
+      "hammers": [
+        "Ben",
+        "Zia",
+        "Tomas",
+        "Kai",
+        "Petra",
+        "Cole"
+      ],
+      "yards": [
+        {
+          "id": 10283,
+          "job": null,
+          "produced": {
+            "planks": 18
+          }
+        }
+      ]
+    }
+  ]
+}

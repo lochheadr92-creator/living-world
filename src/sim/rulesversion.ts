@@ -106,10 +106,13 @@ import type { Settings, World } from './types';
 // Version 56: childcare promises use communicated or personally known locations; watching keeps physical contact and revalidates the helper's food/water reserves (responsibilities.ts).
 // Version 57: a required tool exposed by wanted workshop work connects to ordinary hand-tool materials, plans and crafting (options_work.ts).
 // Version 58: spare seed can be physically stored at a remembered household home to free a blocked material trip (seed_storage.ts); hand-tool capacity counts consumed inputs (act_build.ts).
-export const CURRENT_RULES_VERSION = 58;
+// Version 59: a tool without which a wanted thing cannot be made at all (a hammer for a cart) takes precedence over a convenience
+// found earlier (a saw for planks that could be hewn) as the tool the planner says is lacking, so borrowing, materials, crafting
+// and the private tool plan go after the right one (production.ts noteToolWanted).
+export const CURRENT_RULES_VERSION = 59;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
