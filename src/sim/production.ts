@@ -1,7 +1,7 @@
 import { techniqueBlocker, hasLearnerInstruction, techniqueLacking, trialAllowed, firstLacking, TECHNIQUES } from './techniques';
 import { isRich } from './mood';
 import { newActivity } from './activities';
-import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, isSolidHome, workRules } from './constants';
+import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, WORK, isSolidHome, workRules } from './constants';
 import { findBuildSpot } from './buildings';
 import { hasBatchResume, hasRequiredToolRecovery } from './facilities';
 import { cartLoaded } from './carts';
@@ -244,6 +244,7 @@ function waterLeaf(ctx: Ctx, n: number, util0: number, why: string, tag: string)
     util,
     parts: sc.parts,
     eta: spot.e + 50,
+    scopeEstimate: {walk:spot.e,work:WORK.water,amount:Math.min(Math.max(2,Math.min(4,n)),invRoom(world,p,'water')),item:'water'},
     key: 'fetch_water:production',
     targetId: b.id,
     tag,
@@ -426,6 +427,7 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
     util,
     parts: sc.parts,
     eta: e + r.work,
+    scopeEstimate: {walk:e,work:r.work},
     key: `operate:${b.id}:${r.id}`,
     targetId: b.id,
     tag,

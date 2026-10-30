@@ -298,6 +298,7 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
     }
     why = a.data.why ? `Weighed up: ${a.data.why}` : lastDec?.because ? `Weighed up: ${lastDec.because}` : a.goal;
     trying = a.goal ? a.goal[0].toUpperCase() + a.goal.slice(1) + (tgt ? ` (${tgt})` : '') + '.' : '—';
+    if(a.data.workScope)trying+=' '+a.data.workScope.reason+'. These are estimates; the work can be interrupted.';
     if (a.blocked) stopping = a.blocked[0].toUpperCase() + a.blocked.slice(1) + '.';
     // The activity's stall counter is evidence; time since the original start is
     // not (a conversation can have just resumed it at the same position).

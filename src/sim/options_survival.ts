@@ -209,6 +209,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       util: sc.total,
       parts: sc.parts,
       eta: expected,
+      scopeEstimate: {walk:c.e,work:WORK[type]??25,amount:units,item:SOURCE_FOOD[type]},
       key: `gather:${b.id}`,
       targetId: b.id,
       tag: 'food',

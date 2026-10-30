@@ -30,6 +30,8 @@ export interface OptionLimit {
 }
 
 export interface Option {
+  /** Personal cost estimate used to narrow a legal work trip at rules 71; never an execution grant. */
+  scopeEstimate?: import('./action_scope').ScopeEstimate;
   /** Derived during ranking only, when taste changes the preferred work. */
   workTasteReason?: string;
   /** Personal evidence supporting a time/context preference, derived during ranking. */

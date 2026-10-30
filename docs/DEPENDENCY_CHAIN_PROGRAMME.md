@@ -5,9 +5,9 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **70**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **71**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
-choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, and learned personal daily preferences. The older
+choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, learned personal daily preferences, and personally scoped work amounts/durations. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
 
 ## Autonomy and environment continuation — 2026-10-30
@@ -43,7 +43,7 @@ remain attributed evidence, not newly repeated measurements.
 | Time available for work/leisure / measurement (A1) | `decision.ts`, `needs.ts`, `relief.ts`, `leisure.ts`; leisure 28, tastes 31 | `activity_mix.ts` counts starts only; no support for 95% survival claim | Exclusive living-person tick budget, critical exposure, work spells, repeated aborted travel, actual endings and sampled blockers. Adequately supplied household repeatedly works and uses discretionary time; disrupted rhythm has recorded cause. |
 | Learned daily routines / connected mechanism, ordinary acceptance incomplete (A2) | `daily_routines.ts`, `decision.ts`, `activities.ts`; 70; supper/winter 24/27/53 retained | Actual trips earn bounded context/time preferences; matched autonomous choice differs; injury/season/care/contact/loss/cost/urgency suppress influence; saved physical and rendered proof | Three fresh five-day worlds acquire experience but offer zero routine nudges at samples and start zero named routine choices. Ordinary repeat work/discretionary rhythm and disrupted-household acceptance remain unproven; no pressure retuning or benefit claim. |
 | General bounded contingent goals / incomplete (A3) | `project_graph.ts`, `project_compile.ts`, `project_step.ts`, `batch_plan.ts`; production graph 69 | Bounded validated production tree, autonomous staged forged axe, exact saves, physical inputs, loss/retry/deadline contracts; `BOUNDED_PROJECTS.md` | Production mechanism connected; other goal families, general contingent composition and ordinary activation remain. Three fresh five-day worlds observed no projects. |
-| Quantities, foresight, useful waits / incomplete (A4) | `activities.ts`, `relief.ts`, `intent.ts`, `night_wait.ts`; 27/30/50 | External bounds, daylight wait, footprint wait, batch resumption | Autonomous quantities/durations based on capacity/need; provision round trip; communicated meeting/batch/delivery waits have costs, timeout and next action. No future weather oracle. |
+| Quantities, foresight, useful waits / incomplete (A4) | `action_scope.ts`, `activities.ts`, `relief.ts`, `intent.ts`, `night_wait.ts`; work scope 71, project wait 69, prior 27/30/50 | Personally bounded quantity/spell from need/pack/return/duty estimates; physical saved partial/resumed work reaches construction; ordinary narrowed starts 6/17/14 in three fresh five-day worlds | Provision food/water/tools for a round trip; communicated meeting/delivery waits; other supported action families and aggregate acceptance. No future weather oracle or claim of fulfilled duty from a narrowed trip. |
 | Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`, `kept_target.ts`; 34/36/37/50/61/63/65 | Reconsideration, partial shelter delivery, required-tool loss/replacement, bounded remembered food-capacity recovery; valid running destinations remain scored after discovery | Preserve progress through other temporary obstructions; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Source/helper loss and general composition remain. |
 | Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |
@@ -389,7 +389,26 @@ Fresh five-day Normal, immigration off, meadow/river/forest all reached tick 12,
 
 `scripts/care_water_gap.ts` repeats river and matches its exact final save. The five samples are Jax at ticks 600–1080, with no known household home and zero spare water. This is not five feasible delivery opportunities. Preserve the adverse absence of infrastructure/supplies and do not tune scoring to manufacture water or homes. Broader acquisitions, care duties, production and every other remaining capability-map row stay open.
 
-### Current continuation checkpoint — rules 70
+### Personally scoped trips and work spells — rules 71
+
+Predecessor rules 70 was pinned at `15dbf6e`. Rules 71 narrows supported material/food/water trips and resumable work
+spells against personal needs, known return cost and accepted duties. Existing demand/capacity and physical actions remain
+authoritative. Paid work stays after a partial spell; the staged resumed plank reaches actual construction. Full contract,
+owners, review findings, ordinary story/failure and limitations: `ACTION_SCOPE.md`.
+
+Full suite **249 files / 1,686 tests in 160.75 seconds**. Final then-15 scope cases plus immutable rules 70: **16/16**;
+final scope file with the additional real water case: **16/16**. Typecheck/build passed; rendered **7/7** with expanded
+explanation and physical result inspected. Ordinary fresh Normal five-day meadow/river/forest, immigration off: **6/17/14
+actual narrowed starts**; 2,800 living-person samples, 100 purity checks, exact twins and conservation per seed. Failures
+and interruptions remain. No aggregate or mature-world benefit claim. The full programme and costly owner validation stay open.
+
+Next A4 dependency: practical trip provisioning. Existing needs options drink at a shore or from held water; generic water
+collection responds to crops, dependants, production or promises. Audit the missing personal preparation for a known
+long trip, through real acquisition and retained purpose after a drink/tool break. Reuse bounded projects and legal
+actions; do not turn a carried promise into food/water, guarantee future weather or automatically equip a person. Pin
+rules 71 before changing behavior. Then continue communication, coordination, ecology and every other open map row.
+
+### Historical continuation checkpoint — rules 70
 
 Verified runtime: **`0dc486d`**. Its immutable reference captures ordinary meadow, the first learning trip, an autonomous
 learned choice, source depletion and injury-context change before rules 71. Separate reference test **1/1, 10.79 seconds**

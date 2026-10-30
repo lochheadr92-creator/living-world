@@ -18,6 +18,9 @@ Rules **69** connects bounded production prerequisites across workshops; three s
 Rules **70** connects experience-earned daily preferences, with real-trip/save/changed-choice/rendered proof. Three short
 ordinary worlds accumulated experience but showed zero sampled preference nudges or named starts; repeated household
 rhythm and benefit remain unproven. See `BOUNDED_PROJECTS.md` and `DAILY_ROUTINES.md`.
+Rules **71** adds personally estimated work amounts and spells, with retained paid progress, actual resumed construction
+and ordinary narrowed starts in all three short worlds. It does not complete trip provisioning or establish aggregate
+benefit; see `ACTION_SCOPE.md`.
 The active programme, four-class capability map, remaining transitions and evidence are maintained in
 [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
 Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch

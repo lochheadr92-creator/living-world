@@ -466,7 +466,7 @@ export function stepActivity(world: World, p: Person): void {
   if (lim && lim.ticks !== undefined) {
     a.data.spent = ((a.data.spent as number) ?? 0) + 1;
     if ((a.data.spent as number) > lim.ticks) {
-      endActivity(world, p, 'success', `stopped after the ${lim.ticks} ticks asked for`);
+      endActivity(world, p, a.data.workScope ? 'partial' : 'success', a.data.workScope ? `completed the planned ${lim.ticks}-tick work spell; unfinished work remains at the place` : `stopped after the ${lim.ticks} ticks asked for`);
       return;
     }
   }
