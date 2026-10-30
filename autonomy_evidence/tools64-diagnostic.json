@@ -1,0 +1,30 @@
+{
+  "rules": 64,
+  "demands": [
+    {
+      "item": "planks",
+      "why": "for my household’s storehouse"
+    },
+    {
+      "item": "cart",
+      "why": "to haul heavy loads"
+    }
+  ],
+  "wanted": {
+    "kind": "hammer",
+    "for": "building a handcart",
+    "required": true
+  },
+  "blocked": [
+    {
+      "label": "Sawing planks",
+      "why": "needs a saw and has none (and none is on the rack)"
+    },
+    {
+      "label": "Building a handcart",
+      "why": "needs a hammer and has none (and none is on the rack)"
+    }
+  ],
+  "crafts": [],
+  "pure": true
+}

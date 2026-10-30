@@ -908,7 +908,18 @@ export function workshopToolOptions(ctx: Ctx): void {
   // The earlier work pass may already offer the same physical trip for another purpose.
   // Keep its established amount/ordering; another copy must not buy another draw in decide.
   const keys = new Set(ctx.options.map(o => o.key));
-  for (const o of scratch.options) if (!keys.has(o.key)) { ctx.options.push(o); keys.add(o.key); }
+  for (const o of scratch.options) {
+    if (!keys.has(o.key)) { ctx.options.push(o); keys.add(o.key); }
+    else if (ctx.toolWanted?.required && o.key === `craft:${tool}`) {
+      // Rules 64: an earlier generic craft offer keeps its score, place and ordering, but now
+      // knows the specific work this tool is required for. Preserve that cause at action start.
+      const prior = ctx.options.find(candidate => candidate.key === o.key)!;
+      if (prior.goal === o.goal) continue;
+      prior.goal = o.goal;
+      const make = prior.make;
+      if (make) prior.make = () => { const a = make(); if (a) a.goal = o.goal; return a; };
+    }
+  }
   for (const o of scratch.blocked) if (!ctx.blocked.some(b => b.key === o.key && b.blocked === o.blocked)) ctx.blocked.push(o);
 }
 

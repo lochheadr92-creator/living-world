@@ -1,0 +1,151 @@
+{
+  "head": "b824caaf57d1832f32e82ab01f0dd124728ed7c0",
+  "rules": 64,
+  "evidence": "STAGED known resources, stocked cart components and demand; every action explicitly selected through legal options. No ordinary-adoption claim.",
+  "sourceHashes": {
+    "src/sim/production.ts": "4a29f1f8e545769582b01ed5af9259c5c87352b33a838aa828975fc0235003e1",
+    "src/sim/optutil.ts": "3b5d9eabd040f5896a7c2386f7de73e1a574d643ceb2294d1bfa076f9a734a0b",
+    "src/sim/rulesversion.ts": "d49cdca4f8da3b623770f8c2ac3bf1bf274746acfa93d81bf08812cd7d05872f",
+    "tests/helpers/tool_precedence.ts": "2dd877fd7dc9bcd27d3ac9abbfd9cd5973f772c82cb581ba6c83ec7f6fae7b6d",
+    "scripts/browser/tool_precedence_check.mjs": "ab405f7b86092f5c706b5d1b98098841b4fa1d02705f37d4e432e35bdceda774"
+  },
+  "checks": [
+    {
+      "name": "hammer required by the cart takes precedence without inventing its inputs",
+      "ok": true,
+      "detail": {
+        "wanted": {
+          "kind": "hammer",
+          "for": "building a handcart",
+          "required": true
+        },
+        "blockers": [
+          "needs a saw and has none (and none is on the rack)",
+          "needs a hammer and has none (and none is on the rack)"
+        ],
+        "craftOffered": false,
+        "pure": true
+      }
+    },
+    {
+      "name": "real gathered wood and stone support a hammer plan and physical crafting",
+      "ok": false,
+      "detail": {
+        "tick": 1340,
+        "inputs": {
+          "bread": 1,
+          "water": 1,
+          "wood": 1,
+          "stone": 2
+        },
+        "phase": "work",
+        "goal": "to work faster",
+        "plan": {
+          "id": 10,
+          "kind": "tool",
+          "goal": "make a hammer",
+          "since": 1000,
+          "until": 5800,
+          "status": "active",
+          "reason": "it would make the work easier, and the makings are short",
+          "setAside": 0,
+          "aboutId": 0,
+          "wants": {
+            "wood": 1,
+            "stone": 2
+          },
+          "makes": "hammer",
+          "sheltered": 0,
+          "worked": 0,
+          "ended": 0,
+          "step": "make the hammer",
+          "stepKind": "make",
+          "stepTarget": 0,
+          "stepItem": null,
+          "stepKey": "craft:hammer",
+          "blocked": ""
+        },
+        "conserved": true
+      }
+    },
+    {
+      "name": "crafted hammer costs inputs and saved continuation is exact",
+      "ok": true,
+      "detail": {
+        "equal": true,
+        "inventory": {
+          "bread": 1,
+          "water": 1,
+          "hammer": 1
+        },
+        "result": {
+          "tick": 1409,
+          "label": "Making a hammer",
+          "outcome": "success",
+          "detail": "done"
+        },
+        "conserved": true
+      }
+    },
+    {
+      "name": "the new hammer is used on the actual cart batch",
+      "ok": true,
+      "detail": {
+        "phase": "work",
+        "job": "build_cart",
+        "progress": 8.749999999999998,
+        "conserved": true
+      }
+    },
+    {
+      "name": "the completed cart carries actual stone after needs are met",
+      "ok": true,
+      "detail": {
+        "tick": 2188,
+        "load": {
+          "stone": 14
+        },
+        "phase": "travel",
+        "carts": 1,
+        "conserved": true
+      }
+    },
+    {
+      "name": "useful delivered stone equals the real stock withdrawal; inspection is pure",
+      "ok": true,
+      "detail": {
+        "tick": 2264,
+        "delivered": 14,
+        "withdrawn": 14,
+        "result": {
+          "tick": 2263,
+          "label": "Hauling 14 stone to the storehouse site",
+          "outcome": "success",
+          "detail": "done"
+        },
+        "conserved": true,
+        "pure": true
+      }
+    },
+    {
+      "name": "missing known inputs preserve an impossible case",
+      "ok": true,
+      "detail": {
+        "wanted": {
+          "kind": "hammer",
+          "for": "building a handcart",
+          "required": true
+        },
+        "craft": false,
+        "sourceTrip": false,
+        "carts": 0,
+        "pure": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

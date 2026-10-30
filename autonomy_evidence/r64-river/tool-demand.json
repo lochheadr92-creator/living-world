@@ -1,0 +1,4281 @@
+{
+  "method": "Repeated living-person samples. Displaced means the first missing tool in the same state with precedence disabled differs. Craft opportunity counts apply only to displaced samples; they are not actual decisions. Craft starts/endings are actual hooks. No counterfactual trajectory or benefit is inferred.",
+  "counts": {
+    "livingPersonSamples": 23387,
+    "wanted": 1550,
+    "required": 131,
+    "displaced": 12,
+    "craftOffered": 0,
+    "craftEligible": 0,
+    "craftRankedFirst": 0,
+    "omittedSamples": 0,
+    "omittedEvents": 0
+  },
+  "starts": {
+    "pick": 11,
+    "hoe": 12,
+    "basket": 20,
+    "axe": 9,
+    "spear": 8,
+    "saw": 11,
+    "hammer": 8
+  },
+  "endings": {
+    "pick|interrupted|something better came up": 9,
+    "pick|success|done": 2,
+    "hoe|success|done": 6,
+    "basket|success|done": 11,
+    "basket|interrupted|something better came up": 9,
+    "axe|success|done": 6,
+    "spear|success|done": 5,
+    "saw|success|done": 5,
+    "saw|interrupted|something better came up": 6,
+    "axe|interrupted|something better came up": 3,
+    "hammer|interrupted|something better came up": 5,
+    "hammer|success|done": 3,
+    "spear|interrupted|something better came up": 3,
+    "hoe|interrupted|something better came up": 6
+  },
+  "samples": [
+    {
+      "tick": 24480,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "operate:8875:hew_planks",
+        "utility": 40.77349215761621
+      },
+      "inventory": {
+        "berries": 3,
+        "seeds": 6,
+        "wood": 2,
+        "stone": 1
+      },
+      "needs": {
+        "hunger": 52.673499999993304,
+        "thirst": 53.61217556330448,
+        "energy": 85.71999999999781,
+        "warmth": 46.79001461800946,
+        "safety": 84.00005526811364,
+        "social": 99.42914390499107
+      },
+      "activity": {
+        "kind": "build",
+        "phase": "work",
+        "goal": "to finish my household’s granary"
+      },
+      "plans": [
+        {
+          "id": 9907,
+          "kind": "tool",
+          "makes": "saw",
+          "step": "get 1 more stone for the saw"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Eat carried food",
+          "reason": "saving the food for dependents"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Get wood for my household’s granary",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for my household’s granary",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (8 planks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 4 stone)"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Get stone for my household’s granary",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        },
+        {
+          "label": "Check on Ines",
+          "reason": "they are not close enough to go looking"
+        },
+        {
+          "label": "Check on Theo",
+          "reason": "they are not close enough to go looking"
+        },
+        {
+          "label": "Check on Jonas",
+          "reason": "they are not close enough to go looking"
+        },
+        {
+          "label": "Ask someone for stone",
+          "reason": "no room in my pack for it"
+        }
+      ],
+      "options": [
+        {
+          "key": "operate:8875:hew_planks",
+          "utility": 40.77349215761621
+        },
+        {
+          "key": "operate:9888:quarry_stone",
+          "utility": 31.09501353863658
+        },
+        {
+          "key": "till:new",
+          "utility": 25.380174265970467
+        },
+        {
+          "key": "gather:945",
+          "utility": 18.58093739534013
+        },
+        {
+          "key": "give:1140",
+          "utility": 23.539616455638622
+        },
+        {
+          "key": "drink:1000249",
+          "utility": 21.940720118739392
+        },
+        {
+          "key": "gather:944",
+          "utility": 18.106927177341788
+        },
+        {
+          "key": "gather:972",
+          "utility": 17.622876636560793
+        }
+      ]
+    },
+    {
+      "tick": 42000,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "sleep:4417",
+        "utility": 52.56111796120054
+      },
+      "inventory": {
+        "seeds": 9,
+        "wood": 2,
+        "stone": 1,
+        "berries": 2
+      },
+      "needs": {
+        "hunger": 68.77049999999903,
+        "thirst": 75.65041458380031,
+        "energy": 44.561999999994704,
+        "warmth": 95.95699946451779,
+        "safety": 79.09028926435758,
+        "social": 92.90303260186032
+      },
+      "activity": {
+        "kind": "build",
+        "phase": "work",
+        "goal": "to finish my household’s house"
+      },
+      "plans": [
+        {
+          "id": 17464,
+          "kind": "tool",
+          "makes": "basket",
+          "step": "get 1 more wood for the basket"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 stone, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Cutting stone",
+          "reason": "the quarry is busy with cut stone"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        },
+        {
+          "label": "Ask someone for wood",
+          "reason": "no room in my pack for it"
+        }
+      ],
+      "options": [
+        {
+          "key": "sleep:4417",
+          "utility": 52.56111796120054
+        },
+        {
+          "key": "sleep:2273",
+          "utility": 42.38126892890057
+        },
+        {
+          "key": "shelter:4417",
+          "utility": 22
+        },
+        {
+          "key": "haul:17594",
+          "utility": 22.753547236770803
+        },
+        {
+          "key": "haul:17084",
+          "utility": 20.356895339462582
+        },
+        {
+          "key": "seed_stash:4417",
+          "utility": 7.217241505714346
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        },
+        {
+          "key": "operate:8875:hew_planks",
+          "utility": 6.264631791876099
+        }
+      ]
+    },
+    {
+      "tick": 42120,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "sleep:4417",
+        "utility": 56.48497275471697
+      },
+      "inventory": {
+        "seeds": 9,
+        "wood": 2,
+        "stone": 1,
+        "berries": 2
+      },
+      "needs": {
+        "hunger": 66.10499999999978,
+        "thirst": 71.85841458380001,
+        "energy": 52.79899999999481,
+        "warmth": 97.60277930319324,
+        "safety": 91.33685988918043,
+        "social": 92.4319401968671
+      },
+      "activity": {
+        "kind": "sleep",
+        "phase": "work",
+        "goal": "to recover energy (43/100)"
+      },
+      "plans": [
+        {
+          "id": 17464,
+          "kind": "tool",
+          "makes": "basket",
+          "step": "get 1 more wood for the basket"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 stone, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        }
+      ],
+      "options": [
+        {
+          "key": "sleep:4417",
+          "utility": 56.48497275471697
+        },
+        {
+          "key": "sleep:2273",
+          "utility": 45.74979035809603
+        },
+        {
+          "key": "give:12259",
+          "utility": 28.56678184982681
+        },
+        {
+          "key": "haul:17594",
+          "utility": 22.805038726699195
+        },
+        {
+          "key": "shelter:4417",
+          "utility": 22
+        },
+        {
+          "key": "haul:17084",
+          "utility": 20.40234135573732
+        },
+        {
+          "key": "operate:9888:quarry_stone",
+          "utility": 5.201819095645281
+        },
+        {
+          "key": "seed_stash:4417",
+          "utility": 7.226559560287974
+        }
+      ]
+    },
+    {
+      "tick": 42240,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "sleep:4417",
+        "utility": 49.5842682508647
+      },
+      "inventory": {
+        "seeds": 9,
+        "wood": 2,
+        "stone": 1,
+        "berries": 2
+      },
+      "needs": {
+        "hunger": 64.12500000000055,
+        "thirst": 68.9784145837999,
+        "energy": 66.59899999999489,
+        "warmth": 98.83567520459545,
+        "safety": 93.76421123981686,
+        "social": 91.93391436641433
+      },
+      "activity": {
+        "kind": "sleep",
+        "phase": "work",
+        "goal": "to recover energy (43/100)"
+      },
+      "plans": [
+        {
+          "id": 17464,
+          "kind": "tool",
+          "makes": "basket",
+          "step": "get 1 more wood for the basket"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 stone, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        }
+      ],
+      "options": [
+        {
+          "key": "sleep:4417",
+          "utility": 49.5842682508647
+        },
+        {
+          "key": "sleep:2273",
+          "utility": 39.67467138658522
+        },
+        {
+          "key": "haul:17594",
+          "utility": 22.801872375693435
+        },
+        {
+          "key": "shelter:4417",
+          "utility": 22
+        },
+        {
+          "key": "haul:17084",
+          "utility": 20.397657597101457
+        },
+        {
+          "key": "operate:9888:quarry_stone",
+          "utility": 5.2009074121294265
+        },
+        {
+          "key": "seed_stash:4417",
+          "utility": 7.226404569440485
+        },
+        {
+          "key": "operate:8875:hew_planks",
+          "utility": 6.2587982116132945
+        }
+      ]
+    },
+    {
+      "tick": 42360,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "sleep:4417",
+        "utility": 42.683565320785
+      },
+      "inventory": {
+        "seeds": 9,
+        "wood": 2,
+        "stone": 1,
+        "berries": 2
+      },
+      "needs": {
+        "hunger": 62.14500000000053,
+        "thirst": 66.0984145837998,
+        "energy": 80.39899999999427,
+        "warmth": 97.24563686997026,
+        "safety": 93.97912376476067,
+        "social": 91.43588853596155
+      },
+      "activity": {
+        "kind": "sleep",
+        "phase": "work",
+        "goal": "to recover energy (43/100)"
+      },
+      "plans": [
+        {
+          "id": 17464,
+          "kind": "tool",
+          "makes": "basket",
+          "step": "get 1 more wood for the basket"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 stone, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        }
+      ],
+      "options": [
+        {
+          "key": "sleep:4417",
+          "utility": 42.683565320785
+        },
+        {
+          "key": "sleep:2273",
+          "utility": 33.59955938246135
+        },
+        {
+          "key": "haul:17594",
+          "utility": 22.79871309791409
+        },
+        {
+          "key": "shelter:4417",
+          "utility": 22
+        },
+        {
+          "key": "haul:17084",
+          "utility": 20.392984301388132
+        },
+        {
+          "key": "seed_stash:4417",
+          "utility": 7.226249924822882
+        },
+        {
+          "key": "operate:9888:quarry_stone",
+          "utility": 5.199997765198876
+        },
+        {
+          "key": "wander",
+          "utility": 6
+        }
+      ]
+    },
+    {
+      "tick": 42480,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "shelter:4417",
+        "utility": 22
+      },
+      "inventory": {
+        "seeds": 9,
+        "wood": 2,
+        "stone": 1,
+        "berries": 2
+      },
+      "needs": {
+        "hunger": 60.15150000000045,
+        "thirst": 63.20241458379969,
+        "energy": 94.04399999999366,
+        "warmth": 90.8372109101285,
+        "safety": 93.99815166254139,
+        "social": 90.93867886991664
+      },
+      "activity": {
+        "kind": "rest",
+        "phase": "work",
+        "goal": "waiting for the light"
+      },
+      "plans": [
+        {
+          "id": 17464,
+          "kind": "tool",
+          "makes": "basket",
+          "step": "get 1 more wood for the basket"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Eat carried food",
+          "reason": "saving the food for dependents"
+        },
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 stone, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        },
+        {
+          "label": "Ask someone for wood",
+          "reason": "no room in my pack for it"
+        }
+      ],
+      "options": [
+        {
+          "key": "shelter:4417",
+          "utility": 22
+        },
+        {
+          "key": "haul:17594",
+          "utility": 21.821343701980265
+        },
+        {
+          "key": "haul:17084",
+          "utility": 19.51698283677468
+        },
+        {
+          "key": "rest:home:4417",
+          "utility": 12.847548441410535
+        },
+        {
+          "key": "warm:1102",
+          "utility": 11.749440951517458
+        },
+        {
+          "key": "gather:940",
+          "utility": 8.031213240915765
+        },
+        {
+          "key": "gather:991",
+          "utility": 7.68428568181861
+        },
+        {
+          "key": "operate:9888:quarry_stone",
+          "utility": 4.976895886973999
+        }
+      ]
+    },
+    {
+      "tick": 42600,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "give:12259",
+        "utility": 36.26050531311304
+      },
+      "inventory": {
+        "seeds": 9,
+        "wood": 2,
+        "stone": 1,
+        "berries": 2
+      },
+      "needs": {
+        "hunger": 56.55150000000032,
+        "thirst": 58.40241458379979,
+        "energy": 96.87399999999371,
+        "warmth": 79.91236375122497,
+        "safety": 93.99983635213334,
+        "social": 90.53859276840772
+      },
+      "activity": {
+        "kind": "give",
+        "phase": "work",
+        "goal": "to look after Orla"
+      },
+      "plans": [
+        {
+          "id": 17464,
+          "kind": "tool",
+          "makes": "basket",
+          "step": "get 1 more wood for the basket"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Eat carried food",
+          "reason": "saving the food for dependents"
+        },
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 stone, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        },
+        {
+          "label": "Ask someone for wood",
+          "reason": "no room in my pack for it"
+        }
+      ],
+      "options": [
+        {
+          "key": "give:12259",
+          "utility": 36.26050531311304
+        },
+        {
+          "key": "shelter:4417",
+          "utility": 22
+        },
+        {
+          "key": "haul:17594",
+          "utility": 20.604136555859657
+        },
+        {
+          "key": "gather:940",
+          "utility": 15.020159305500263
+        },
+        {
+          "key": "gather:991",
+          "utility": 14.671457641570148
+        },
+        {
+          "key": "rest:home:4417",
+          "utility": 17.948308273625056
+        },
+        {
+          "key": "haul:17084",
+          "utility": 18.424992084536374
+        },
+        {
+          "key": "warm:1102",
+          "utility": 16.959318725027238
+        }
+      ]
+    },
+    {
+      "tick": 42720,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "gather:940",
+        "utility": 22.263189399587098
+      },
+      "inventory": {
+        "seeds": 9,
+        "wood": 2,
+        "stone": 1
+      },
+      "needs": {
+        "hunger": 52.95150000000018,
+        "thirst": 53.60241458379989,
+        "energy": 100,
+        "warmth": 72.31668454921777,
+        "safety": 93.99998551096597,
+        "social": 90.1385066668988
+      },
+      "activity": {
+        "kind": "rest",
+        "phase": "work",
+        "goal": "waiting for the light"
+      },
+      "plans": [
+        {
+          "id": 17464,
+          "kind": "tool",
+          "makes": "basket",
+          "step": "get 1 more wood for the basket"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 stone, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (3 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        },
+        {
+          "label": "Bring something to Alma",
+          "reason": "has nothing to spare for someone thirsty"
+        }
+      ],
+      "options": [
+        {
+          "key": "gather:940",
+          "utility": 22.263189399587098
+        },
+        {
+          "key": "gather:990",
+          "utility": 21.226441239656115
+        },
+        {
+          "key": "gather:991",
+          "utility": 21.981446726930702
+        },
+        {
+          "key": "drink:1000230",
+          "utility": 22.600676289033014
+        },
+        {
+          "key": "shelter:4417",
+          "utility": 22
+        },
+        {
+          "key": "haul:17594",
+          "utility": 20.818535946000402
+        },
+        {
+          "key": "drink:1000232",
+          "utility": 20.868971143156262
+        },
+        {
+          "key": "eat_store:4417",
+          "utility": 20.144389886544893
+        }
+      ]
+    },
+    {
+      "tick": 45960,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "haul:19001",
+        "utility": 54.98176091722728
+      },
+      "inventory": {
+        "berries": 4,
+        "seeds": 8,
+        "stone": 1,
+        "wood": 1,
+        "grain": 1
+      },
+      "needs": {
+        "hunger": 51.60099999998905,
+        "thirst": 79.56017556323803,
+        "energy": 77.72199999999727,
+        "warmth": 79.00890735113025,
+        "safety": 84.00000000000009,
+        "social": 81.85840180883855
+      },
+      "activity": {
+        "kind": "haul",
+        "phase": "work",
+        "goal": "to help finish my household’s house"
+      },
+      "plans": [
+        {
+          "id": 17644,
+          "kind": "stock",
+          "makes": "",
+          "step": "take the food home (6 more to put by)"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "failed there 367 ticks ago (nothing left)"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Fishing",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (8 stone)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (7 planks, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        }
+      ],
+      "options": [
+        {
+          "key": "haul:19001",
+          "utility": 54.98176091722728
+        },
+        {
+          "key": "deposit:6139:food",
+          "utility": 21.381760917227275
+        },
+        {
+          "key": "repair:2307",
+          "utility": 31.648740707635696
+        },
+        {
+          "key": "bring:8875:wood",
+          "utility": 26.36723890508936
+        },
+        {
+          "key": "eat:0",
+          "utility": 27.99769230771758
+        },
+        {
+          "key": "socialize:1108:request:wood",
+          "utility": 26.14833852779192
+        },
+        {
+          "key": "eat_store:6139",
+          "utility": 23.05963784032745
+        },
+        {
+          "key": "deposit:2307:food",
+          "utility": 18.194991606341112
+        }
+      ]
+    },
+    {
+      "tick": 46200,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "gather:955",
+        "utility": 26.621188578339318
+      },
+      "inventory": {
+        "berries": 6,
+        "seeds": 8,
+        "stone": 1
+      },
+      "needs": {
+        "hunger": 67.95099999998891,
+        "thirst": 69.2401755632365,
+        "energy": 67.28199999999602,
+        "warmth": 92.9084118057823,
+        "safety": 84.00000000000009,
+        "social": 79.65430690230694
+      },
+      "activity": {
+        "kind": "gather",
+        "phase": "work",
+        "goal": "to bring food home"
+      },
+      "plans": [
+        {
+          "id": 17644,
+          "kind": "stock",
+          "makes": "",
+          "step": "gather food to put by (4 more)"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Fishing",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (7 stone)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (7 planks, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (5 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        }
+      ],
+      "options": [
+        {
+          "key": "gather:955",
+          "utility": 26.621188578339318
+        },
+        {
+          "key": "gather:975",
+          "utility": 17.361304759765744
+        },
+        {
+          "key": "seed_stash:6139",
+          "utility": 23.83064132816716
+        },
+        {
+          "key": "explore",
+          "utility": 21.674073493333083
+        },
+        {
+          "key": "deposit:6139:food",
+          "utility": 13.992065463765218
+        },
+        {
+          "key": "deposit:2307:food",
+          "utility": 12.933841871878984
+        },
+        {
+          "key": "haul:17084",
+          "utility": 12.917165543286801
+        },
+        {
+          "key": "till:17043",
+          "utility": 11.542751524772688
+        }
+      ]
+    },
+    {
+      "tick": 46320,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "deposit:6139:food",
+        "utility": 24.41496896565347
+      },
+      "inventory": {
+        "berries": 7,
+        "seeds": 8,
+        "stone": 1
+      },
+      "needs": {
+        "hunger": 64.26849999998885,
+        "thirst": 64.30817556323575,
+        "energy": 62.32799999999561,
+        "warmth": 96.55563128404306,
+        "safety": 84.00000000000009,
+        "social": 78.498009449041
+      },
+      "activity": {
+        "kind": "deposit",
+        "phase": "travel",
+        "goal": "to feed the household"
+      },
+      "plans": [
+        {
+          "id": 17644,
+          "kind": "stock",
+          "makes": "",
+          "step": "take the food home (4 more to put by)"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Get wood for my household’s house",
+          "reason": "no room in my pack for one wood"
+        },
+        {
+          "label": "Get stone for the shared kiln",
+          "reason": "no room in my pack for one stone"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (5 stone)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 planks, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (3 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        }
+      ],
+      "options": [
+        {
+          "key": "deposit:6139:food",
+          "utility": 24.41496896565347
+        },
+        {
+          "key": "socialize:1139:request:wood",
+          "utility": 26.132829550337433
+        },
+        {
+          "key": "socialize:1147:request:wood",
+          "utility": 27.231187350919043
+        },
+        {
+          "key": "socialize:1119:request:wood",
+          "utility": 27.204050795049806
+        },
+        {
+          "key": "deposit:2307:food",
+          "utility": 21.188758556457692
+        },
+        {
+          "key": "explore",
+          "utility": 21.416257603547532
+        },
+        {
+          "key": "till:17043",
+          "utility": 19.50841954087753
+        },
+        {
+          "key": "socialize:1139:trade:wood",
+          "utility": 15.395188041184284
+        }
+      ]
+    },
+    {
+      "tick": 46440,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "wanted": {
+        "kind": "hammer",
+        "for": "building a handcart",
+        "required": true
+      },
+      "earlier": {
+        "kind": "saw",
+        "for": "sawing planks"
+      },
+      "offered": false,
+      "eligible": false,
+      "first": {
+        "key": "gather:392",
+        "utility": 39.51853699967425
+      },
+      "inventory": {
+        "berries": 2,
+        "seeds": 8,
+        "stone": 1,
+        "wood": 1
+      },
+      "needs": {
+        "hunger": 60.3009999999887,
+        "thirst": 58.92017556323578,
+        "energy": 56.84199999999557,
+        "warmth": 97.86324333258975,
+        "safety": 84.00000000000009,
+        "social": 77.75471199577555
+      },
+      "activity": {
+        "kind": "gather",
+        "phase": "work",
+        "goal": "for my household’s house"
+      },
+      "plans": [
+        {
+          "id": 19246,
+          "kind": "repair",
+          "makes": "",
+          "step": "get 1 wood to mend the lean-to"
+        }
+      ],
+      "blockers": [
+        {
+          "label": "Eat carried food",
+          "reason": "saving the food for dependents"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Picking berries",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Gathering wild grain",
+          "reason": "believes it is empty"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (3 stone)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (6 planks, 6 bricks)"
+        },
+        {
+          "label": "Work on the building site",
+          "reason": "site is waiting for materials (3 wood, 8 planks, 6 bricks)"
+        },
+        {
+          "label": "Firing bricks",
+          "reason": "does not know of a kiln they may use"
+        },
+        {
+          "label": "Sawing planks",
+          "reason": "needs a saw and has none (and none is on the rack)"
+        },
+        {
+          "label": "Building a handcart",
+          "reason": "needs a hammer and has none (and none is on the rack)"
+        }
+      ],
+      "options": [
+        {
+          "key": "gather:392",
+          "utility": 39.51853699967425
+        },
+        {
+          "key": "gather:376",
+          "utility": 38.5347787815326
+        },
+        {
+          "key": "repair:2307",
+          "utility": 29.827362722334655
+        },
+        {
+          "key": "gather:955",
+          "utility": 22.547025405815127
+        },
+        {
+          "key": "bring:8875:wood",
+          "utility": 20.423219618408936
+        },
+        {
+          "key": "collect:8875:planks",
+          "utility": 21.64575759009371
+        },
+        {
+          "key": "gather:1059",
+          "utility": 19.657412593872877
+        },
+        {
+          "key": "gather:1164",
+          "utility": 18.492694850726124
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "tick": 588,
+      "person": 1131,
+      "name": "Kai",
+      "hh": 1129,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 763,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 872,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "berries": 2,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 989,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 1050,
+      "person": 1131,
+      "name": "Kai",
+      "hh": 1129,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "pick": 1
+      }
+    },
+    {
+      "tick": 1070,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "berries": 2,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 2475,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 2580,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 2743,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 2893,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 3004,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "fish": 2,
+        "wood": 3,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 3012,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 3225,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 3278,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 3337,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "fish": 1,
+        "wood": 1,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 3490,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 3496,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 3604,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 2,
+        "stone": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 4681,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 4850,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 5521,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "grain": 4,
+        "seeds": 1,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 5685,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "hoe": 1,
+        "grain": 4,
+        "seeds": 1,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 5888,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "grain": 2,
+        "berries": 4,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 5994,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "grain": 2,
+        "berries": 4,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 7585,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "berries": 3,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 7646,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "berries": 3,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 8050,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "stone": 1,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 8182,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "stone": 1,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 9481,
+      "person": 1144,
+      "name": "Alma",
+      "hh": 1143,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "axe": 1,
+        "berries": 3,
+        "wood": 4
+      }
+    },
+    {
+      "tick": 9526,
+      "person": 1144,
+      "name": "Alma",
+      "hh": 1143,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "axe": 1,
+        "berries": 3,
+        "wood": 1,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 10744,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "stone": 2,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 10946,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "stone": 2,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 11932,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "basket": 1,
+        "grain": 3,
+        "wood": 2,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 12047,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "basket": 1,
+        "grain": 3,
+        "axe": 1
+      }
+    },
+    {
+      "tick": 12634,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "stone": 2,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 12831,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "stone": 2,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 14566,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "wood": 3,
+        "stone": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 14785,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "wood": 1,
+        "seeds": 1,
+        "spear": 1
+      }
+    },
+    {
+      "tick": 16952,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "stone": 1,
+        "fish": 1,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 17066,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "stone": 1,
+        "fish": 1,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 17097,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "stone": 1,
+        "fish": 1,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 17170,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "stone": 1,
+        "fish": 1,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 17740,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "basket": 1,
+        "axe": 1,
+        "wood": 4,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 17955,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 2,
+        "basket": 1,
+        "axe": 1,
+        "wood": 4,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 19091,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "wood": 2,
+        "stone": 2,
+        "grain": 4
+      }
+    },
+    {
+      "tick": 19209,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "wood": 2,
+        "stone": 2,
+        "grain": 4
+      }
+    },
+    {
+      "tick": 19401,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "start",
+      "tool": "pick",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "wood": 2,
+        "stone": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 19652,
+      "person": 1112,
+      "name": "Ben",
+      "hh": 1110,
+      "event": "end",
+      "tool": "pick",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "grain": 2,
+        "pick": 1
+      }
+    },
+    {
+      "tick": 19808,
+      "person": 1144,
+      "name": "Alma",
+      "hh": 1143,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "axe": 1,
+        "wood": 2,
+        "basket": 1,
+        "fish": 3,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 19857,
+      "person": 1106,
+      "name": "Mira",
+      "hh": 1103,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 4,
+        "grain": 1,
+        "berries": 1,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 19862,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 1,
+        "spear": 1,
+        "berries": 2,
+        "wood": 4
+      }
+    },
+    {
+      "tick": 19911,
+      "person": 1120,
+      "name": "Abel",
+      "hh": 1117,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 3,
+        "seeds": 1,
+        "fish": 1,
+        "grain": 3
+      }
+    },
+    {
+      "tick": 19941,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "grain": 7,
+        "stone": 1,
+        "wood": 2
+      }
+    },
+    {
+      "tick": 19948,
+      "person": 1144,
+      "name": "Alma",
+      "hh": 1143,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "axe": 1,
+        "basket": 1,
+        "fish": 3,
+        "saw": 1
+      }
+    },
+    {
+      "tick": 20014,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 1,
+        "spear": 1,
+        "berries": 2,
+        "wood": 1,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 20026,
+      "person": 1106,
+      "name": "Mira",
+      "hh": 1103,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 4,
+        "grain": 1,
+        "berries": 1,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 20072,
+      "person": 1120,
+      "name": "Abel",
+      "hh": 1117,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "wood": 3,
+        "seeds": 1,
+        "fish": 1,
+        "grain": 3
+      }
+    },
+    {
+      "tick": 20164,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "grain": 7,
+        "axe": 1
+      }
+    },
+    {
+      "tick": 21478,
+      "person": 1120,
+      "name": "Abel",
+      "hh": 1117,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "wood": 3,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 21586,
+      "person": 1120,
+      "name": "Abel",
+      "hh": 1117,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 1,
+        "grain": 2,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 21894,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "basket": 1,
+        "wood": 2,
+        "fruit": 3,
+        "seeds": 1,
+        "stone": 3
+      }
+    },
+    {
+      "tick": 21967,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "fruit": 3,
+        "seeds": 1,
+        "stone": 2,
+        "spear": 1
+      }
+    },
+    {
+      "tick": 22007,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "berries": 3,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 22102,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "berries": 3,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 22314,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "berries": 3,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 22433,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "berries": 3,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 22569,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 8,
+        "berries": 2,
+        "wood": 4
+      }
+    },
+    {
+      "tick": 22578,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "berries": 3,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 22738,
+      "person": 1145,
+      "name": "Jax",
+      "hh": 1143,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 8,
+        "berries": 2,
+        "wood": 4
+      }
+    },
+    {
+      "tick": 22779,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "berries": 3,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 24330,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 24485,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 26269,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "stone": 3
+      }
+    },
+    {
+      "tick": 26392,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "seeds": 1,
+        "wood": 2,
+        "stone": 3
+      }
+    },
+    {
+      "tick": 27434,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "seeds": 2,
+        "stone": 2,
+        "spear": 1,
+        "wood": 3,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 27542,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "seeds": 2,
+        "stone": 2,
+        "spear": 1,
+        "wood": 3,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 29050,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "seeds": 2,
+        "stone": 2,
+        "spear": 1,
+        "wood": 3,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 29259,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "seeds": 2,
+        "spear": 1,
+        "wood": 1,
+        "berries": 3,
+        "saw": 1
+      }
+    },
+    {
+      "tick": 36887,
+      "person": 1149,
+      "name": "Lena",
+      "hh": 1148,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "wood": 6,
+        "stone": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 36995,
+      "person": 1149,
+      "name": "Lena",
+      "hh": 1148,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "wood": 6,
+        "stone": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 38387,
+      "person": 1149,
+      "name": "Lena",
+      "hh": 1148,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "wood": 6,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 38404,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 38481,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "berries": 1,
+        "seeds": 1,
+        "stone": 1,
+        "wood": 2
+      }
+    },
+    {
+      "tick": 38503,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1
+      }
+    },
+    {
+      "tick": 38523,
+      "person": 1149,
+      "name": "Lena",
+      "hh": 1148,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "wood": 4,
+        "axe": 1
+      }
+    },
+    {
+      "tick": 38751,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "berries": 1,
+        "seeds": 1,
+        "axe": 1
+      }
+    },
+    {
+      "tick": 40667,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 2,
+        "wood": 4
+      }
+    },
+    {
+      "tick": 40783,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 2,
+        "wood": 4
+      }
+    },
+    {
+      "tick": 40890,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "seeds": 1,
+        "spear": 1,
+        "wood": 4,
+        "saw": 1,
+        "berries": 1,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 41058,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "seeds": 1,
+        "spear": 1,
+        "wood": 2,
+        "saw": 1,
+        "berries": 1,
+        "axe": 1
+      }
+    },
+    {
+      "tick": 41628,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 2,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 41731,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 2,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 42657,
+      "person": 1107,
+      "name": "Emre",
+      "hh": 1103,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 12,
+        "berries": 2,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 42758,
+      "person": 1107,
+      "name": "Emre",
+      "hh": 1103,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 12,
+        "berries": 2,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 43071,
+      "person": 1120,
+      "name": "Abel",
+      "hh": 1117,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "berries": 4,
+        "stone": 1,
+        "wood": 2
+      }
+    },
+    {
+      "tick": 43102,
+      "person": 1107,
+      "name": "Emre",
+      "hh": 1103,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 12,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 43107,
+      "person": 1144,
+      "name": "Alma",
+      "hh": 1143,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "axe": 1,
+        "basket": 1,
+        "seeds": 5,
+        "berries": 2,
+        "wood": 2,
+        "saw": 1,
+        "stone": 1,
+        "fish": 1
+      }
+    },
+    {
+      "tick": 43114,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 3,
+        "wood": 3
+      }
+    },
+    {
+      "tick": 43165,
+      "person": 1144,
+      "name": "Alma",
+      "hh": 1143,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "axe": 1,
+        "basket": 1,
+        "seeds": 5,
+        "berries": 2,
+        "saw": 1,
+        "fish": 1,
+        "spear": 1
+      }
+    },
+    {
+      "tick": 43191,
+      "person": 1120,
+      "name": "Abel",
+      "hh": 1117,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "berries": 4,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 43267,
+      "person": 1107,
+      "name": "Emre",
+      "hh": 1103,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 12,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 43289,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 3,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 43835,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "seeds": 1,
+        "spear": 1,
+        "wood": 2,
+        "saw": 1,
+        "berries": 2,
+        "axe": 1,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 43994,
+      "person": 1132,
+      "name": "Petra",
+      "hh": 1129,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "seeds": 1,
+        "spear": 1,
+        "saw": 1,
+        "berries": 2,
+        "axe": 1,
+        "stone": 1,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 44219,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 5,
+        "spear": 1,
+        "basket": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 44384,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 5,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1
+      }
+    },
+    {
+      "tick": 45847,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "wood": 3,
+        "fruit": 1,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 45941,
+      "person": 1149,
+      "name": "Lena",
+      "hh": 1148,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "wood": 4,
+        "axe": 1,
+        "berries": 2,
+        "seeds": 2,
+        "grain": 1,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 46016,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "wood": 3,
+        "fruit": 1,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 46201,
+      "person": 1149,
+      "name": "Lena",
+      "hh": 1148,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "wood": 2,
+        "axe": 1,
+        "berries": 2,
+        "seeds": 2,
+        "grain": 1,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 51395,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 5,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "stone": 3,
+        "grain": 1,
+        "wood": 1,
+        "berries": 1
+      }
+    },
+    {
+      "tick": 51407,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "wood": 2,
+        "fish": 2,
+        "stone": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 51549,
+      "person": 1119,
+      "name": "Cora",
+      "hh": 1117,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "pick": 1,
+        "fish": 2,
+        "grain": 1,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 51565,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 5,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "stone": 1,
+        "grain": 1,
+        "berries": 1,
+        "hammer": 1
+      }
+    },
+    {
+      "tick": 60243,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "wood": 2,
+        "stone": 1,
+        "berries": 4,
+        "fruit": 1
+      }
+    },
+    {
+      "tick": 60341,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "wood": 2,
+        "stone": 1,
+        "berries": 4,
+        "fruit": 1
+      }
+    },
+    {
+      "tick": 60453,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "wood": 2,
+        "stone": 1,
+        "berries": 4,
+        "fruit": 1
+      }
+    },
+    {
+      "tick": 60562,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "wood": 2,
+        "stone": 1,
+        "berries": 4,
+        "fruit": 1
+      }
+    },
+    {
+      "tick": 60662,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "wood": 2,
+        "stone": 1,
+        "berries": 4,
+        "fruit": 1
+      }
+    },
+    {
+      "tick": 60743,
+      "person": 1113,
+      "name": "Zia",
+      "hh": 1110,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "hoe": 1,
+        "seeds": 3,
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "berries": 4,
+        "fruit": 1,
+        "spear": 1
+      }
+    },
+    {
+      "tick": 62601,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "saw",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "wood": 3,
+        "fish": 1,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 62882,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "saw",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "wood": 1,
+        "fish": 1,
+        "saw": 1
+      }
+    },
+    {
+      "tick": 67897,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 6,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "wood": 3,
+        "grain": 3,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 68013,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 6,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "wood": 3,
+        "grain": 3,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 68064,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 6,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "wood": 3,
+        "grain": 3,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 68178,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 6,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "wood": 3,
+        "grain": 3,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 69571,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "axe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 6,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "wood": 2,
+        "grain": 1,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 69737,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "axe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 6,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "grain": 1,
+        "axe": 1
+      }
+    },
+    {
+      "tick": 69810,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 3,
+        "basket": 1,
+        "clay": 2,
+        "wood": 1,
+        "stone": 2,
+        "fish": 1
+      }
+    },
+    {
+      "tick": 69914,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 3,
+        "basket": 1,
+        "clay": 2,
+        "wood": 1,
+        "stone": 2,
+        "fish": 1
+      }
+    },
+    {
+      "tick": 69963,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 3,
+        "basket": 1,
+        "clay": 2,
+        "wood": 1,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 70100,
+      "person": 1125,
+      "name": "Ines",
+      "hh": 1123,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 3,
+        "basket": 1,
+        "clay": 2,
+        "hammer": 1
+      }
+    },
+    {
+      "tick": 70710,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "wood": 5,
+        "saw": 1,
+        "seeds": 2,
+        "stone": 1,
+        "fruit": 1
+      }
+    },
+    {
+      "tick": 70822,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "wood": 5,
+        "saw": 1,
+        "seeds": 2,
+        "stone": 1,
+        "fruit": 1
+      }
+    },
+    {
+      "tick": 71946,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "spear",
+      "goal": "to have something to face a wolf with",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "wood": 2,
+        "saw": 1,
+        "seeds": 2,
+        "stone": 1
+      }
+    },
+    {
+      "tick": 72096,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "spear",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 2,
+        "spear": 1
+      }
+    },
+    {
+      "tick": 77342,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 10,
+        "stone": 1,
+        "wood": 2,
+        "fish": 1
+      }
+    },
+    {
+      "tick": 77343,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "grain": 2,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 77456,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 10,
+        "stone": 1,
+        "wood": 2,
+        "fish": 1
+      }
+    },
+    {
+      "tick": 77463,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "grain": 2,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 77549,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 4,
+        "stone": 1,
+        "grain": 1,
+        "wood": 3,
+        "berries": 1
+      }
+    },
+    {
+      "tick": 77666,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 4,
+        "stone": 1,
+        "grain": 1,
+        "berries": 1,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 77749,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 10,
+        "stone": 1,
+        "wood": 2,
+        "fish": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 77858,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 10,
+        "stone": 1,
+        "wood": 2,
+        "fish": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 77903,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 78000,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 79241,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 79347,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "wood": 2,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 79465,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 79532,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "start",
+      "tool": "hammer",
+      "goal": "to work faster",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "wood": 1,
+        "stone": 2
+      }
+    },
+    {
+      "tick": 79562,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 79619,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 79681,
+      "person": 1128,
+      "name": "Tomas",
+      "hh": 1126,
+      "event": "end",
+      "tool": "hammer",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "basket": 1,
+        "axe": 1,
+        "saw": 1,
+        "seeds": 5,
+        "spear": 1,
+        "hammer": 1
+      }
+    },
+    {
+      "tick": 79719,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 79776,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 79859,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 80220,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 80358,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "interrupted",
+      "detail": "something better came up",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2,
+        "grain": 2
+      }
+    }
+  ]
+}

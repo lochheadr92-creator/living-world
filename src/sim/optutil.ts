@@ -81,8 +81,10 @@ export interface Ctx {
   observer: boolean;
   blocked: Option[];
   options: Option[];
-  /** set by the production planner when a plan was stopped only by lacking a tool: the social planner may ask to borrow one */
-  toolWanted?: { kind: ToolKind; for: string };
+  /** Missing workshop tool, used by borrowing and hand-tool preparation. Rules 64 marks a tool
+   * required when there is no known alternative; it displaces an earlier convenience tool.
+   * Derived only, absent below 64. A paid batch requires its actual recipe's tool. */
+  toolWanted?: { kind: ToolKind; for: string; required?: boolean };
   /** Derived from the person's own wanted production, never another person's knowledge. */
   techniqueWanted?: { kind: import('./techniques').TechniqueKind; for: string };
 }

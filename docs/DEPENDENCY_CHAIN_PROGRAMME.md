@@ -20,8 +20,10 @@ is `7b2a680`; the two local commits are the immutable 58 reference and cart prio
 Existing untracked evidence and historical worktrees are preserved. Work is isolated at
 `C:\dev\Claude Experiment\living-world-autonomy`, branch `codex/autonomy-environment`, based on that exact local main.
 The newer unmerged seasonal-preparation branch `49655bb` and winter candidate `f33cd0b` remain historical inputs, not
-wholesale integration candidates; current rules 46/47 already own their integrated concepts. No pending branch inspected
-allocates rules 60. Recheck before allocating it. Rules/save/protocol/lineage numbers remain independent.
+wholesale integration candidates; current rules 46/47 already own their integrated concepts. At that initial audit no
+pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-oatizp` using 59 for tool precedence and
+60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
+adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
 
 ### Current capability map (source reconciliation, not fresh ordinary-world acceptance)
 
@@ -49,7 +51,7 @@ inspected at 1448583; historical run counts below remain attributed evidence, no
 | Succession beyond death / incomplete (WS11/20) | `succession.ts`, `lifecycle.ts`; 53 | Staged death takeover; historical ordinary 0/5 records taken up | Informed acceptance during incapacity/departure, rival successors, original worker recovery, already-complete goal and missing goods. No copied goods/skills/promises. |
 | Relocation and population viability / measurement plus incomplete handovers (WS12/20) | `relocation.ts`, `lifecycle.ts`, `households.ts`; 20/54 | Subgroup/succession/return/search staged; one failed ordinary proposal in prior 135 seed-days | Trace cue→consent→dependants/provisions→travel→confirmation/home, organiser loss and return. Long horizon covers birth/ageing/adoption/split/loss without forced population. |
 | Practical knowledge continuity / incomplete (WS10/20) | `techniques.ts`, `learning.ts`, `background.ts`; 41/44/52 | Actual charcoal teaching and output; higher procedures/trials staged | Last skilled worker lost; learner learns through contact and later produces useful output; no automatic skill inheritance. |
-| Raw inputs→tools→workshop→use / incomplete (WS6) | `production.ts`, `recipes.ts`, `facilities.ts`, `options_work.ts`; 50/57/58/60/61 | Seed storage, tool-aligned batch recipes, stopped/recovered required-tool loss, staged cart → haul → construction; ordinary seed storage | Required versus convenience tool demand remains diagnosed; finish planks/handles/bricks/jar/charcoal/iron/forging/flour/bread/cart through ordinary useful work or meals; diagnose ore and downstream selection. |
+| Raw inputs→tools→workshop→use / incomplete (WS6) | `production.ts`, `recipes.ts`, `facilities.ts`, `options_work.ts`; 50/57/58/60/61/64 | Seed storage, tool-aligned batch recipes, stopped/recovered required-tool loss, required-before-convenience tool demand, staged cart → haul → construction; ordinary seed storage | Required-tool prioritisation is connected; finish planks/handles/bricks/jar/charcoal/iron/forging/flour/bread/cart through ordinary useful work or meals; diagnose ore and downstream selection. |
 | Cart adoption order / connected at 59; useful carts incomplete (WS7) | `cart_priority.ts`, `batch_plan.ts`, `transport.ts`; 50/55/57/58/59 | Historical 52/52 hammer-holder samples answer cart; one Lena plan, zero carts | Next trace offered versus eligible versus chosen plan steps, actual interruptions, component stock and source loss before tuning weight. Complete construction→load→route→unload→use/wear/recovery ordinarily and staged negatives. |
 | Demand, customers, inter-settlement trade / incomplete (WS9) | `customers.ts`, `trade.ts`, `exchange_journeys.ts`, `production.ts`; 22/43/51 | Customer site delivery exists; historical ordinary swaps/returns absent | Produce personally requested good, lawful swap/gift/delivery, later trade review, repeated multi-settlement returns with feasible costs; retain refusals/stale leads. |
 | Winter food flow / incomplete (WS3) | `provision.ts`, `winter_reserve.ts`, `facilities.ts`; 46/53 | Grain shares and eating; larger target has no established survival benefit | Acquisition→preservation→access→distribution/eat→replenish; record expiry/spoilage/labour/displacement and adverse household. |
@@ -255,10 +257,41 @@ failure changing a feasible action followed by useful consumption, not a unique-
 Preserved ordinary limit: forest Thea #934 left one berry for Brigid #14896 at home **31370**, tick **112686**, after the
 recorded full-pack failure at **112150**; no matching meal by Brigid appears in the remainder of the five-day trace.
 
-Next physical prerequisite: `scripts/tool_precedence_diagnostic.ts` reproduces the current-rules saw-for-hammer conflict
-without mutating state. A site needs planks, which can be hewn by hand; a wanted cart requires a hammer; the planner records
-the optional saw because it is encountered first. Adapt the reviewed concurrent `c4ba75b` repair at the next unused version,
-including rules-61 paid-job recovery, after pinning this predecessor. Do not import its conflicting rules-59 saves.
+The next diagnosed prerequisite was the saw-for-hammer conflict. The rules-63 result is retained in `autonomy-tool-precedence63.log`; the current `scripts/tool_precedence_diagnostic.ts` follows current rules and now reports the required hammer. Rules 64 below adapts the reviewed concurrent repair without importing its conflicting rules-59 saves.
+
+### Rules 64: required workshop tools before conveniences
+
+The optional saw no longer hides the cart's required hammer. Known alternative recipes determine precedence; paid
+batches still require their actual tool. The existing physical gathering, craft, borrow, rack, capacity and reservation
+checks remain. The current craft action retains its known workshop purpose in the inspector. Rules 63 was pinned at
+`b824caa` before this change. Adaptation provenance, exact limits, review findings and physical/rendered evidence are in
+[TOOL_PRECEDENCE.md](TOOL_PRECEDENCE.md); the concurrent branch's 59/60 declarations were not imported.
+
+Final full suite **1,546 tests / 232 files**, typecheck, build and diff check pass. Final focused regressions: 17/4;
+rendered physical chain: **8/8**, visually inspected. One gathered wood and two stone become a hammer; that hammer builds
+a cart from supplied workshop components; actual need relief precedes a 14-stone haul. This proves the staged connection.
+The first rendered failure exposed a generic crafting purpose hiding the known cart prerequisite; its corrected text
+is stored at action start, not inferred afterwards. Original failures and screenshots are retained.
+
+Current fixed Normal worlds, immigration off, all reach day 45; river's 97,080-tick budget stop is continued unchanged.
+All conserve and preserve all 900 observation samples per complete seed. No aggregate improvement is established.
+
+| Seed | Living-person ticks | Travel | Work | Leisure | Displaced tool samples | Craft offered / eligible / first in displaced samples | Living at end / carts |
+|---|---:|---:|---:|---:|---:|---|---|
+| meadow | 3,169,446 | 1,220,719 | 333,191 | 25,192 | 57 | 0 / 0 / 0 | 31 / 0 |
+| river | 3,087,888 | 1,253,594 | 312,346 | 18,784 | 12 | 0 / 0 / 0 | 25 / 0 |
+| forest | 2,273,975 | 936,991 | 237,541 | 22,196 | 29 | 11 / 11 / 0 | 13 / 0 |
+
+Displacement is a same-state comparison of the recorded tool with the lab removal, not an alternate simulated trajectory.
+Repeated samples are not independent opportunities. Actual hammer starts/completions are separately 9/5, 8/3 and 12/8;
+they are not all consequences of precedence. The ordinary cart/use and broader household outcomes remain open.
+
+Next reproduced cause: `scripts/kept_target_diagnostic.ts` now uses actual walking and perception, then ordinary review.
+The still-stocked target falls outside the source generator's top-two list, making its current utility zero. At tick
+1086 Hana switches after walking about 11 tiles; no critical need or resource loss explains this particular switch.
+The bounded candidate-retention adaptation from `c9c5dcf` remains unimplemented; pin 64 and allocate the next unused
+main rules version before changing behaviour. Do not copy its conflicting version label, frozen-walk fixture or
+silently skipped water test. The complete A1–A16/WS programme above remains authoritative and incomplete.
 
 ## Earlier implementation checkpoint — expanded programme still open (rules 58)
 

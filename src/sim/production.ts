@@ -22,11 +22,24 @@ import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { toolOf } from './tools';
 import { stageOf } from './people';
-import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind } from './types';
+import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind, World } from './types';
 import { hashUnit } from './rng';
 
 import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
+
+// Rules 64: a missing tool with no known alternative takes precedence over an efficiency tool
+// found earlier (for example, the cart's hammer over a saw when planks can be hewn by hand).
+// Derived planning context only; crafting, borrowing and execution keep their ordinary checks.
+export const TOOL_PRECEDENCE_FROM_VERSION = 64;
+let toolPrecedence = true;
+export const toolPrecedenceOn = (): boolean => toolPrecedence;
+export function setToolPrecedence(on: boolean): void { toolPrecedence = on; }
+export const hasToolPrecedence = (world: World): boolean => toolPrecedence && isRich(world) && runsRulesVersion(world, TOOL_PRECEDENCE_FROM_VERSION);
+function noteToolWanted(ctx: Ctx, kind: ToolKind, doing: string, required?: boolean): void {
+  if (!hasToolPrecedence(ctx.world)) { ctx.toolWanted ??= { kind, for: doing }; return; }
+  if (!ctx.toolWanted || (required && !ctx.toolWanted.required)) ctx.toolWanted = { kind, for: doing, required: !!required };
+}
 
 /** What somebody believes the settlement needs made or fetched, in the order they would care about it. */
 export interface Demand {
@@ -287,7 +300,7 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
  * One batch of a recipe at a workplace: everything the batch needs is either there (so go and work), carried (so bring it),
  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
  */
-function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0): void {
+function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean): void {
   const { world, p } = ctx;
   const b = f.b;
   const technique = techniqueBlocker(world,p,r.id);
@@ -321,7 +334,8 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
     const mine = hasBatchResume(world) && running && snap!.client === p.id && snap!.burn === 0 && snap!.progress < 1;
     if (hasRequiredToolRecovery(world) && mine && !toolAvailable(ctx, f, running)) {
       addBlocked(ctx, 'operate', running.doing, b.id, `needs a ${running.tool!.kind}; the unfinished batch can wait`, tag);
-      ctx.toolWanted ??= { kind: running.tool!.kind, for: `finishing ${running.doing.toLowerCase()}` };
+      // A paid batch must finish its actual recipe; an unstarted alternative cannot replace its tool.
+      noteToolWanted(ctx, running.tool!.kind, `finishing ${running.doing.toLowerCase()}`, true);
       return;
     }
     if (mine) operateLeaf(ctx, f, running, base * 0.97, `${why} (get back to it)`, tag, false, siteId);
@@ -335,7 +349,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   }
   if (!toolAvailable(ctx, f, r)) {
     addBlocked(ctx, 'operate', r.doing, b.id, `needs a ${r.tool!.kind === 'pick' ? 'pickaxe' : r.tool!.kind} and has none (and none is on the rack)`, tag);
-    ctx.toolWanted ??= { kind: r.tool!.kind, for: r.doing.toLowerCase() };
+    noteToolWanted(ctx, r.tool!.kind, r.doing.toLowerCase(), toolRequired);
     return;
   }
   if (r.fromDeposit && snap && snap.deposit >= 0 && snap.deposit < r.fromDeposit.n) {
@@ -501,6 +515,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   }
   if (depth >= 3) return;
   const recipes = item === 'tend' ? recipesAt('granary') : recipesMaking(item);
+  const toolRequired = toolRequiredFor(ctx, recipes);
   const seen = new Set<string>();
   for (const r of recipes) {
     const fac = facilitiesOf(ctx, r.at)[0];
@@ -513,8 +528,19 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
     }
     // prefer the better way of making something when its tool is to hand: sawing beats hewing
     if (!preferredRecipeForTools(ctx, fac, r)) continue;
-    planRecipe(ctx, fac, r, item, remaining, base, why, tag, depth, siteId);
+    planRecipe(ctx, fac, r, item, remaining, base, why, tag, depth, siteId, toolRequired);
   }
+}
+
+/** A known alternative, not a promise of completion: stock, routes and tools are checked again at execution. */
+function toolRequiredFor(ctx: Ctx, recipes: Recipe[]): boolean | undefined {
+  if (!hasToolPrecedence(ctx.world)) return undefined;
+  for (const r of recipes) {
+    const fac = facilitiesOf(ctx, r.at)[0];
+    if (!fac || techniqueBlocker(ctx.world, ctx.p, r.id)) continue;
+    if (toolAvailable(ctx, fac, r)) return false;
+  }
+  return true;
 }
 
 // ───────────────────────── what is wanted ─────────────────────────

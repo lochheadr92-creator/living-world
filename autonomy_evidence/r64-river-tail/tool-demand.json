@@ -1,0 +1,159 @@
+{
+  "method": "Repeated living-person samples. Displaced means the first missing tool in the same state with precedence disabled differs. Craft opportunity counts apply only to displaced samples; they are not actual decisions. Craft starts/endings are actual hooks. No counterfactual trajectory or benefit is inferred.",
+  "counts": {
+    "livingPersonSamples": 2345,
+    "wanted": 1,
+    "required": 0,
+    "displaced": 0,
+    "craftOffered": 0,
+    "craftEligible": 0,
+    "craftRankedFirst": 0,
+    "omittedSamples": 0,
+    "omittedEvents": 0
+  },
+  "starts": {
+    "hoe": 3,
+    "basket": 1
+  },
+  "endings": {
+    "hoe|success|done": 3,
+    "basket|success|done": 1
+  },
+  "samples": [],
+  "events": [
+    {
+      "tick": 98702,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 2,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "axe": 1,
+        "stone": 2,
+        "berries": 1,
+        "wood": 2
+      }
+    },
+    {
+      "tick": 98831,
+      "person": 1150,
+      "name": "Arlo",
+      "hh": 1148,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 2,
+        "spear": 1,
+        "basket": 1,
+        "saw": 1,
+        "hammer": 1,
+        "axe": 1,
+        "stone": 1,
+        "berries": 1,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 99370,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 12,
+        "stone": 1,
+        "wood": 2
+      }
+    },
+    {
+      "tick": 99510,
+      "person": 1142,
+      "name": "Talia",
+      "hh": 1141,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 12,
+        "hoe": 1
+      }
+    },
+    {
+      "tick": 103289,
+      "person": 1135,
+      "name": "Cole",
+      "hh": 1133,
+      "event": "start",
+      "tool": "basket",
+      "goal": "to work faster",
+      "inventory": {
+        "axe": 1,
+        "hoe": 1,
+        "seeds": 4,
+        "wood": 3,
+        "grain": 3
+      }
+    },
+    {
+      "tick": 103382,
+      "person": 1135,
+      "name": "Cole",
+      "hh": 1133,
+      "event": "end",
+      "tool": "basket",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "axe": 1,
+        "hoe": 1,
+        "seeds": 4,
+        "grain": 3,
+        "basket": 1
+      }
+    },
+    {
+      "tick": 106606,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "event": "start",
+      "tool": "hoe",
+      "goal": "to work faster",
+      "inventory": {
+        "seeds": 6,
+        "stone": 1,
+        "basket": 1,
+        "berries": 4,
+        "wood": 2
+      }
+    },
+    {
+      "tick": 106699,
+      "person": 1138,
+      "name": "Basil",
+      "hh": 1136,
+      "event": "end",
+      "tool": "hoe",
+      "outcome": "success",
+      "detail": "done",
+      "inventory": {
+        "seeds": 6,
+        "basket": 1,
+        "berries": 4,
+        "hoe": 1
+      }
+    }
+  ]
+}
