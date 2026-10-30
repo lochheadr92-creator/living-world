@@ -32,6 +32,8 @@ export interface OptionLimit {
 export interface Option {
   /** Derived during ranking only, when taste changes the preferred work. */
   workTasteReason?: string;
+  /** Personal evidence supporting a time/context preference, derived during ranking. */
+  routineReason?: string;
   /** Why this recipient was selected; not an additional utility modifier. */
   selectionReason?: string;
   kind: Activity['kind'];

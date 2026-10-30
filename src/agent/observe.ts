@@ -309,17 +309,18 @@ function commitmentText(world: World, p: Person, c: Person['commitments'][number
 }
 
 function describeOption(world: World, p: Person, o: Option, showScores: boolean, version: number): ObservedOption {
+  const selection=[o.selectionReason,o.routineReason].filter(Boolean).join(' · ');
   const out: ObservedOption = {
     key: o.key,
     kind: o.kind,
     label: cleanText(o.label, 120),
-    goal: cleanText(version >= 9 && o.kind === 'build' && o.goal.startsWith('to finish ') ? 'to work on ' + o.goal.slice('to finish '.length) : o.goal + (version >= 12 && o.selectionReason ? ` · ${o.selectionReason}` : ''), 160),
+    goal: cleanText(version >= 9 && o.kind === 'build' && o.goal.startsWith('to finish ') ? 'to work on ' + o.goal.slice('to finish '.length) : o.goal + (version >= 12 && selection ? ` · ${selection}` : ''), 160),
     need: o.need,
     eta: o.eta > 0 ? durationText(o.eta, version) + (version >= 8 && o.kind === 'plan_site' ? ' (the walk there is not counted)' : '') : 'now',
     target: describeTarget(world, p, o.targetId, version),
   };
   if (showScores) out.score = Math.round(o.util * 10) / 10;
-  if (version >= 12 && o.selectionReason) out.selectionReason = cleanText(o.selectionReason, 160);
+  if (version >= 12 && selection) out.selectionReason = cleanText(selection, 160);
   if (version >= 3 && o.bounds && o.bounds.length) {
     out.limits = o.bounds.map((b) => ({ field: b.field, kind: b.kind, min: b.min, max: b.max, note: cleanText(b.note, 160) }));
   }

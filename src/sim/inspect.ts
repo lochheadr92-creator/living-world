@@ -38,6 +38,7 @@ import { NEED_KEYS } from './constants';
 
 import { hyp } from './util';
 import {describeProject} from './project_graph';
+import {describeRoutines} from './daily_routines';
 export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
 
 export function agoText(world: World, tick: number): string {
@@ -165,6 +166,7 @@ export interface PersonView {
   customers: string[];
   /** rules 53: the practice of keeping winter stores, as the person holds it */
   winterPractice: string[];
+  dailyRoutines: string[];
   /** rules 55 (transport.ts): what they have carried to building sites lately */
   hauling: string[];
   needs: NeedView[];
@@ -615,6 +617,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
     customers: describeCustomers(world, p),
     winterPractice: describeWinterPractice(world, p),
+    dailyRoutines: describeRoutines(world,p),
     hauling: describeHauling(world, p),
     needs,
     inventory: itemList(p.inv),

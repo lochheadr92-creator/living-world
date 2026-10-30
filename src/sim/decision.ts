@@ -30,6 +30,7 @@ import { pruneCustomers } from './customers';
 import type { Activity, ActivityKind, Intention, NeedKey, OptionSummary, Person, World } from './types';
 
 import { hyp } from './util';
+import {prepareRoutine,tiltRoutineChoices} from './daily_routines';
 /** which shortage kills fastest: water, then food, then cold, then danger, then exhaustion */
 const CRITICAL_ORDER: NeedKey[] = ['thirst', 'hunger', 'warmth', 'safety', 'energy'];
 
@@ -113,6 +114,7 @@ export function rankOptions(ctx: Ctx): Option[] {
     s: chooser === 'random' ? hashUnit(p.id, world.tick >> 5, hashKey(o.key) ^ 0x5bd1e995) : (moody ? o.util * moodWeight(p, o.kind) : o.util) + (intentFor(p, o) ? NUDGE_FOR_PLAN : 0) + tradeNudge(world, p, o) + goalNudge(world, p, o) + crewNudge(world, p, o) + hashUnit(p.id, world.tick >> 5, hashKey(o.key)) * 1.4,
   }));
   if (chooser !== 'random') tiltWorkChoices(world, p, scored);
+  if (chooser !== 'random') tiltRoutineChoices(ctx,scored);
   scored.sort((a, b) => b.s - a.s);
   return scored.map((x) => x.o);
 }
@@ -124,7 +126,7 @@ export function rankOptions(ctx: Ctx): Option[] {
  */
 function because(o: Option, plan: Intention | null = null, trade = ''): string {
   const forPlan = planReason(plan, o);
-  const lead = [forPlan, trade, o.workTasteReason, o.selectionReason].filter(Boolean).join(' · ');
+  const lead = [forPlan, trade, o.workTasteReason, o.selectionReason, o.routineReason].filter(Boolean).join(' · ');
   if (!o.parts.length) return lead ? `${lead} · ${o.goal}` : o.goal;
   const top = [...o.parts].sort((a, b) => Math.abs(b[1]) - Math.abs(a[1])).slice(0, 4);
   const parts = top.map(([n, v]) => `${n} ${v > 0 ? '+' : '−'}${Math.abs(Math.round(v))}`).join(' · ');
@@ -163,6 +165,7 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
       continue;
     }
     act.data.optKey = o.key;
+    prepareRoutine(world,p,act,o);
     const plan = intentFor(p, o);
     const why = because(o, plan, tradeReason(world, p, o));
     act.data.why = why;
@@ -284,6 +287,7 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
       continue;
     }
     act.data.optKey = o.key;
+    prepareRoutine(world,p,act,o);
     const plan = intentFor(p, o);
     act.data.why = plan ? `chosen from outside, and a step toward “${plan.goal}”` : 'chosen from outside';
     if (plan) act.data.forPlan = plan.id;
@@ -364,6 +368,7 @@ export function reviewActivity(world: World, p: Person): void {
     if (!act) return;
     const why = danger ? 'danger nearby' : criticalMismatch ? `a more urgent need (${ctx.critical})` : 'something better came up';
     act.data.optKey = best.key;
+    prepareRoutine(world,p,act,best);
     act.data.why = because(best, null, tradeReason(world, p, best));
     if (probe.on && best.kind === 'wander') probeWander((ctx.stage === 'child' ? 'child ' : 'adult ') + 'review');
     record(world, p, ctx, ranked, best, danger ? 'danger' : criticalMismatch ? 'urgent need' : 'review');

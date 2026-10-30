@@ -14,6 +14,10 @@ Three fresh five-day ordinary runs found zero new return-care starts; staged and
 ordinary reliability. See `docs/RESIDENT_CARE.md`. The rules-64 published checkpoint below is historical after this continuation.
 Rules **67** adds actual household-store drinking for full-pack residents, with ownership/entry/stock checks, saved twins and a rendered failure. Three fresh five-day worlds had no known stored-water opportunities; ordinary use and benefit remain unproven. See `docs/STORED_WATER.md`.
 Rules **68** connects failed water hand-over to physical home provision and the recipient's later drinking. The complete staged chain and full-store failure are rendered; ordinary river failure samples lacked both a known home and spare water. See `docs/WATER_CARE_CAPACITY.md` for evidence limits.
+Rules **69** connects bounded production prerequisites across workshops; three short ordinary worlds observed no projects.
+Rules **70** connects experience-earned daily preferences, with real-trip/save/changed-choice/rendered proof. Three short
+ordinary worlds accumulated experience but showed zero sampled preference nudges or named starts; repeated household
+rhythm and benefit remain unproven. See `BOUNDED_PROJECTS.md` and `DAILY_ROUTINES.md`.
 The active programme, four-class capability map, remaining transitions and evidence are maintained in
 [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
 Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch

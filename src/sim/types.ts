@@ -588,6 +588,7 @@ export interface Person {
   sharedSupper?: import('./household_practices').SharedSupper;
   /** rules 53 (winter_practice.ts): the practice of keeping winter stores, and how it was learned */
   winterPractice?: import('./winter_practice').WinterPractice;
+  dailyRoutines?: import('./daily_routines').DailyRoutines;
   /** rules 53: meals eaten from the household's stores this winter */
   winterMeals?: { year: number; meals: number };
   /** rules 55 (transport.ts): what they have carried to building sites on foot lately, the ground of wanting a cart */

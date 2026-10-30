@@ -16,6 +16,7 @@ import { hashUnit } from './rng';
 import { distToFootprint, entityPos, isWalkable } from './registry';
 import type { Activity, ActivityKind, Entity, NeedKey, Person, PoseKind, World } from './types';
 import { clamp, hyp, turnToward } from './util';
+import {recordRoutine} from './daily_routines';
 
 // ───────────────────────── handler registry ─────────────────────────
 export type WorkResult = 'continue' | 'done' | `fail:${string}` | `partial:${string}`;
@@ -375,6 +376,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   creditShelterFrom(p, a);
   // and what a gathering trip came to is written into the person's own estimate of what that kind of work pays them
   recordPay(world, p, a);
+  recordRoutine(world,p,a,outcome,detail);
   releaseClaims(world, a.claims);
   p.activity = null;
   const h = handlers[a.kind];

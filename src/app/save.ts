@@ -1,4 +1,5 @@
 import {validateProjectGraphs} from '../sim/project_graph';
+import {validateRoutines} from '../sim/daily_routines';
 import { validateGoalHistory } from '../sim/life';
 import { validateHouseholdPractices } from '../sim/household_practices';
 import { validateAlignments } from '../sim/political_alignment';
@@ -240,6 +241,7 @@ export function deserializeWorld(json: string): World {
   validateHouseholdPractices(w);
   validateGoalHistory(w);
   validateProjectGraphs(w);
+  validateRoutines(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);
