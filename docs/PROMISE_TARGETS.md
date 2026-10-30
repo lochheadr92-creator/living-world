@@ -1,5 +1,11 @@
 # Personally discovered promise-target changes — rules 83
 
+Final release gate: **273 files / 1,837 tests pass**, 378.29 seconds
+(`autonomy-target83-final-full-tests.log`). Runtime `26e8153`, immutable reference `57b5fe4`.
+The reference separately passes 1/1; final browser 10/10, typecheck/build and three fixed ordinary
+reruns pass. Earlier pending/stopped-run notes below preserve chronology; the final gate is now
+complete. No claim of full-programme completion or aggregate benefit.
+
 Rules 82 is pinned at `a331382`, from runtime `e67ced2`. The published baseline `60d7adc`
 contains `scripts/promise_target_diagnostic.ts`: an actual accepted roof-repair promise,
 then declared remote collapse through the normal building lifecycle. At tick 76 Ned remains

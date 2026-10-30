@@ -2,6 +2,15 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **83** connects local target discovery, truthful partial contributions and cancellation
+explanations with actual acknowledgement. Ordinary river includes two heard explanations of
+incomplete hauling after site completion; forest/meadow include none. Full regression passes
+**273 files / 1,837 tests**, immutable reference 1/1, browser 10/10, typecheck/build and three
+fixed five-day windows with exact saves, inspection purity and resources. Runtime `26e8153`,
+reference `57b5fe4`; `PROMISE_TARGETS.md` preserves the repaired haul-credit and loading defects.
+Requester-initiated cancellation, delay/counteroffers, conflicting reports and broader programme
+requirements remain open. This is not full-prompt completion.
+
 Rules **82** records heard agreements and their communicated waiting period, uses personally known
 remaining amounts, and preserves an uninformed person's obligation/expectation after a remote death.
 Actual grave discovery or spoken reports can revise that knowledge. Full regression passes
