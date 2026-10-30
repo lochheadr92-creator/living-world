@@ -1,0 +1,23 @@
+{
+  "source": "f131e596a59f4197453c6cc7da81f59397590131, rules 74 before successor behaviour",
+  "ordinary": {
+    "saved": "abf08f8bdd6714c437a1ec22cb1d0233f26a09adfb9b486fe4f1819f82eb1f91",
+    "uninterrupted": "3fedfaa4b9326d6396b24f804853fcdaa7ecabfbe898f94b5d9aedc5702efb26",
+    "continued": "3fedfaa4b9326d6396b24f804853fcdaa7ecabfbe898f94b5d9aedc5702efb26"
+  },
+  "empty": {
+    "saved": "5a3712797387aa49818cbdd269507ff5658a503f62210bd07ee6d651a8936645",
+    "uninterrupted": "d5ed64775e7a0214c68ab5850698ae4d400ef19bd5afcec94d303d73b3e428d3",
+    "continued": "d5ed64775e7a0214c68ab5850698ae4d400ef19bd5afcec94d303d73b3e428d3"
+  },
+  "corrected": {
+    "saved": "b39ea9dbf7c86dc6118df4c1ee77588b781c4a8b0f87a0dd89beb5d011826ff6",
+    "uninterrupted": "ec23dd6dbba5b6702bb23ccadf91c2a2076d0c65b9ec71ba2b97ea64685eb17a",
+    "continued": "ec23dd6dbba5b6702bb23ccadf91c2a2076d0c65b9ec71ba2b97ea64685eb17a"
+  },
+  "productive": {
+    "saved": "09820f17cbd06f7cabb69f31d6365fcd6d14732b76fc4b3465b06e652c5853a1",
+    "uninterrupted": "1e5ee34a9534c664c1b0de31c7d4ceb9d3c5dfbcaf5ac7295490afcbf058d35d",
+    "continued": "1e5ee34a9534c664c1b0de31c7d4ceb9d3c5dfbcaf5ac7295490afcbf058d35d"
+  }
+}
