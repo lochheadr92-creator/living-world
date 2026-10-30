@@ -1,0 +1,18 @@
+{
+  "source": "af357eeedec8cd0a6daec30aa7754229230fa6fe, rules 63 before successor behaviour",
+  "ordinary": {
+    "saved": "e8aee3d3fd9852b4f6b3aa30c640a34bc01474c0f7e87624c4d225c452ef3dba",
+    "uninterrupted": "a26b00d48d576dd019504ec0fb3a35fbac7378f0c8af99c6888f891ada7c6e8d",
+    "continued": "a26b00d48d576dd019504ec0fb3a35fbac7378f0c8af99c6888f891ada7c6e8d"
+  },
+  "care": {
+    "saved": "73609061705ce6079f5e092746c404a88c6edd3ad79d84ed0971431780a246dc",
+    "uninterrupted": "0c4716dcf6b211e58a59b6a7966fff5e743e6e0acc677d61c50a563a99df0e38",
+    "continued": "0c4716dcf6b211e58a59b6a7966fff5e743e6e0acc677d61c50a563a99df0e38"
+  },
+  "competingTools": {
+    "saved": "78369e493b784c68e7527e8f10c32f81ddc5c7347664ee7ff506a71719d32e5f",
+    "uninterrupted": "33f19a688a46407167ba7412e946f247c03d1aa7a8f9ee90029572190a1e4821",
+    "continued": "33f19a688a46407167ba7412e946f247c03d1aa7a8f9ee90029572190a1e4821"
+  }
+}
