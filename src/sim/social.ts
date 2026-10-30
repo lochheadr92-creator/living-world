@@ -1,3 +1,5 @@
+import {hasBuildPromiseSettlement} from './promise_knowledge';
+import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
 import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
 import {hasPromiseTargets,targetOutcome} from './promise_targets';
 import {hasPromiseExpectations,rememberExpectation,updateExpectations,expectedOutstanding} from './promise_expectations';
@@ -622,6 +624,8 @@ export function checkCommitments(world: World, p: Person): void {
       }
       continue;
     }
+    // The accepted building share uses the same 40-tick contract as deadline settlement; a whole site is not owed.
+    if(hasBuildPromiseSettlement(world)&&c.kind==='help_build'&&(c.contrib??0)>=40){fulfillCommitment(world,p,c.id);continue;}
     const A = personOf(world, c.to);
     const req = world.requests.find((r) => r.id === c.requestId);
     if(!A&&hasPromiseExpectations(world)&&!knowsDeath(p,c.to)){
@@ -870,6 +874,8 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 
 function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
   switch (purpose) {
+    case 'delay_request':
+      return `to explain a delay and ask ${name} for more time`;
     case 'cancel_request':
       return `to cancel obsolete work with ${name}`;
     case 'report':
@@ -931,7 +937,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
-  const report=hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
+  const report=hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
   const resultText = c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
   const detailText = c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
@@ -988,7 +994,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
-    if(((hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
+    if(((hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request'||hasPromiseDelays(world)&&c.purpose==='delay_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(c.purpose==='teach_technique') {
       const why=lessonProblem(world,A,B,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
@@ -1057,6 +1063,10 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
+    case 'delay_request': {
+      const text=receiveDelayProposal(world,A,B,d.requestId??0,c.id);c.data.delayDelivered=!!text;c.data.delayText=text??'No active failed attempt could be explained.';
+      if(text)bubble(world,A,text,'say',70);break;
+    }
     case 'cancel_request': {
       const heard=receiveCancellation(world,A,B,d.requestId??0,c.id);c.data.cancelDelivered=!!heard;c.data.cancelText=heard?.text??'No matching cancellation could be conveyed.';
       if(heard){
@@ -1179,6 +1189,10 @@ function reqOf(world: World, c: Conversation): Request | undefined {
 function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: ConvData): void {
   const req = reqOf(world, c);
   switch (c.purpose) {
+    case 'delay_request': {
+      const text=c.data.delayDelivered?answerDelayProposal(world,A,B,d.requestId??0):null;c.data.delayAnswered=!!text;c.data.delayReply=text??'The proposal received no answer.';
+      if(text)bubble(world,B,text,'say',70);break;
+    }
     case 'cancel_request': {
       const response=c.data.cancelDelivered?acknowledgeCancellation(world,A,B,d.requestId??0):null;c.data.cancelAcknowledged=!!response;
       if(response){let text=response==='stopped'?'I have heard you. I will stop that request.':'That obligation had already ended.';

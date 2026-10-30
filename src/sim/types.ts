@@ -409,6 +409,7 @@ export interface Commitment {
   blockedAt?: number;
   attempt?: import('./promise_outcomes').PromiseAttempt;
   targetEvidence?: import('./promise_targets').PromiseTargetEvidence;
+  delay?: import('./promise_delays').PromiseDelay;
   /** for a promise to work: the milestone that settles it */
   milestone?: string;
 }
@@ -1123,6 +1124,7 @@ export type ConvPurpose =
   | 'lend'
   | 'report'
   | 'cancel_request'
+  | 'delay_request'
   | 'mediate'
   | 'teach_technique'
   | 'learn_technique';

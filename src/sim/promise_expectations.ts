@@ -1,10 +1,11 @@
+import {describeDelay} from './promise_delays';
 // The requester remembers a heard agreement, not the helper's private progress or lifecycle state.
 import {DAY,ALL_ITEMS} from './constants';
 import {runsRulesVersion} from './rulesversion';
 import {knowsDeath} from './death_knowledge';
 import {addLog} from './events';
 import type {Commitment,ItemKind,Person,Request,RequestStatus,World} from './types';
-export interface PromiseExpectation {commitmentId:number;conversationId:number;made:number;deadline:number;amount:number;item:ItemKind|null;planId:number;destId:number;otherName:string;received:number;endedAt?:number;source?:'observed completion'|'helper report'|'known death'|'own timeout'|'own cancellation'}
+export interface PromiseExpectation {commitmentId:number;conversationId:number;made:number;deadline:number;amount:number;item:ItemKind|null;planId:number;destId:number;otherName:string;received:number;delay?:import('./promise_delays').PromiseDelay;endedAt?:number;source?:'observed completion'|'helper report'|'known death'|'own timeout'|'own cancellation'}
 type Memory=NonNullable<Person['socialMemory']>[number];
 let enabled=true;
 export const promiseExpectationsOn=()=>enabled;
@@ -80,7 +81,7 @@ export function personalRequests(w:World,p:Person):Request[]{
 }
 export function describeExpectation(e:PromiseExpectation|undefined):string{
  if(!e)return '';
- return ` Heard agreement: conversation #${e.conversationId}, tick ${e.made}, commitment #${e.commitmentId}; expected by tick ${e.deadline}. ${e.endedAt===undefined?'Waiting on personal knowledge, not the helper’s private progress.':`Expectation ended by ${e.source} at tick ${e.endedAt}.`}`;
+ return ` Heard agreement: conversation #${e.conversationId}, tick ${e.made}, commitment #${e.commitmentId}; ${e.delay?.response==='accepted'?`originally expected by tick ${e.delay.originalExpectedDeadline}; revised in conversation #${e.delay.conversationId} at tick ${e.delay.responseAt} to tick ${e.deadline}`:`expected by tick ${e.deadline}`}. ${e.endedAt===undefined?'Waiting on personal knowledge, not the helper’s private progress.':`Expectation ended by ${e.source} at tick ${e.endedAt}.`}${describeDelay(e.delay)}`;
 }
 export function validatePromiseExpectations(w:World):void{
  const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;

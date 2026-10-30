@@ -1,3 +1,4 @@
+import {pendingDelayProposals} from './promise_delays';
 import {pendingCancellations} from './request_cancellation';
 import {expectsCare} from './promise_expectations';
 import { exchangeJourneyOptions } from './exchange_journeys';
@@ -689,6 +690,13 @@ export function socialOptions(ctx: Ctx): void {
   aloneOptions(ctx);
   welfareOptions(ctx);
   seekCarerOptions(ctx);
+  let delaysOffered=0;
+  for(const promise of pendingDelayProposals(ctx.world,ctx.p)){
+    const c=candidates(ctx).find(c=>c.q.id===promise.to&&c.d<=14);if(!c)continue;
+    const sc=new Scorer().add('my actual failed attempt needs explaining before the promise ends',29).add('walking',-pen(c.d*6));
+    mkSocial(ctx,c,'delay_request',{requestId:promise.requestId},`Explain my delay to ${c.q.name}`,'to explain an obstacle and ask for more time',null,sc,'delay',':'+promise.requestId,'I remember trying and failing; extra time needs their agreement');
+    if(++delaysOffered>=2)break;
+  }
   let cancellationsOffered=0;
   for(const m of pendingCancellations(ctx.world,ctx.p)){
     const c=candidates(ctx).find(c=>c.q.id===m.otherId&&c.d<=14);if(!c)continue;

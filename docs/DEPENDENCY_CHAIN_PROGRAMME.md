@@ -28,6 +28,25 @@ pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-o
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
 
+### Rules 85 candidate — completed building shares and bounded delay negotiation
+
+`PROMISE_DELAYS.md` records active failed-attempt explanation through actual contact, a single
+six-hour extension accepted or refused from the requester's own urgency/trust, separate hearing
+and answer, interruption retry, original-versus-revised deadline provenance and actual repair
+after a declared obstruction clears. Speech creates no goods, work credit or certainty that
+more time solves the obstruction. One proposal is retained per commitment and in the bounded
+heard expectation. Lab removal: `rich-no-promise-delays`; predecessor 84 pinned at `eba0b94`.
+
+Ordinary diagnosis found already-supplied building shares falsely remaining active until their
+deadlines. The actual-work regression failed before correction. Existing `help_build` fulfillment
+now settles at the same 40-contribution-tick threshold promptly, without claiming the whole site
+is finished or informing a distant requester. Separate removal: `rich-no-build-promise-settlement`.
+Delay choices exclude already-supplied contributions independently. Corrected focused **114/6**,
+release browser **11/11**, typecheck/build pass. The initial full suite was stopped for the
+finding; corrected full regression and release ordinary observations are pending. General
+counteramount/place, ability/location questions, later updates and broader programme work remain
+open; this is not whole-prompt completion.
+
 ### Rules 84 — requester withdrawal, actual contact and truthful late reconciliation
 
 `REQUEST_CANCELLATION.md` records local requester observation, pending withdrawal in existing

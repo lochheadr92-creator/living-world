@@ -10,6 +10,10 @@ import {addLog} from './events';
 import type {Commitment,Person,Request,World} from './types';
 export interface CompletionKnowledge {source:'own completion'|'observed completion'|'helper report';tick:number;from:number;completedAt:number;commitmentId:number;activityId:number;conversationId?:number;acknowledgedAt?:number;reportAfter?:number}
 type Memory=NonNullable<Person['socialMemory']>[number];
+let buildSettlement=true;
+export const buildPromiseSettlementOn=()=>buildSettlement;
+export function setBuildPromiseSettlement(on:boolean):void{buildSettlement=on;}
+export const hasBuildPromiseSettlement=(w:World)=>buildSettlement&&w.settings.dynamics==='rich'&&runsRulesVersion(w,85);
 let enabled=true;
 export const promiseKnowledgeOn=()=>enabled;
 export function setPromiseKnowledge(on:boolean):void{enabled=on;}

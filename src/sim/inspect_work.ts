@@ -1,3 +1,4 @@
+import {describeDelay} from './promise_delays';
 // Read-only descriptions of workplaces, building sites, carts, tools, promises and meals for the inspectors.
 // Nothing here changes the world or draws random numbers.
 import { BUILD_DEF, GRANARY_TEND_EVERY, SOURCE_ITEM, TOOL_DEFS } from './constants';
@@ -368,6 +369,7 @@ export function commitmentViews(world: World, p: Person): CommitmentView[] {
     if (c.kind === 'deliver' || c.kind === 'haul') parts.push(`${c.delivered ?? 0} of ${c.amount} delivered`);
     if (c.kind === 'help_build' || c.kind === 'work') parts.push(`${Math.min(100, Math.round(((c.contrib ?? 0) / 40) * 100))}% of a fair share of work done`);
     if (c.reason) parts.push(c.reason);
+    if(c.delay)parts.push(describeDelay(c.delay));
     if (c.status === 'active' && c.blocked && c.blockedAt && world.tick - c.blockedAt < 600) parts.push(`last reported obstacle: ${c.blocked}`);
     if (c.status === 'active' && c.setAside && world.tick - c.setAside < 600) parts.push('put aside while they see to their own needs');
     return { id: c.id, text: commitmentText(world, c), status: c.status, detail: parts.join(' · '), due: c.status === 'active' ? inFuture(world, c.deadline + (c.grace ?? 0)) : ago(world, c.made) };
@@ -383,6 +385,7 @@ export interface InteractionView {
 }
 
 const PURPOSE_TEXT: Record<string, string> = {
+  delay_request: 'explaining a delay and asking for more time',
   learn_technique: 'asking to learn charcoal firing',
   teach_technique: 'charcoal firing instruction',
   chat: 'a chat',
