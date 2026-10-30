@@ -1,0 +1,18 @@
+{
+  "source": "e704d0156fb0d156591a3fe297fe1f1155247bf4, rules 79 before successor behaviour",
+  "ordinary": {
+    "saved": "ac7d12bb9b6276ff9c1cb3fe8e3e97e8cfef4bf7eed04398f730bc707194422a",
+    "uninterrupted": "c5c95ac206353abb3b3d007f83a49604e90fa22275be8999b2d1e2cd96422158",
+    "continued": "c5c95ac206353abb3b3d007f83a49604e90fa22275be8999b2d1e2cd96422158"
+  },
+  "watch": {
+    "saved": "2a589a96dda91dd1804a1ccf565171889a9f2d3a04ccb13c7620138ade6e361c",
+    "uninterrupted": "39c23c10770434c406f8fb3cbbdddc2373035bb0cb0ed5d43161a488caef8ab8",
+    "continued": "39c23c10770434c406f8fb3cbbdddc2373035bb0cb0ed5d43161a488caef8ab8"
+  },
+  "learnedChoice": {
+    "saved": "c4fe33f054e44728118cecc34fa3c3b718c8c0bb76463951c49582b25848daf8",
+    "uninterrupted": "1aa8f3849923c5b7712e05c6732ad82715df322694b55ac2a5cac8f55b0f5a76",
+    "continued": "1aa8f3849923c5b7712e05c6732ad82715df322694b55ac2a5cac8f55b0f5a76"
+  }
+}

@@ -79,6 +79,11 @@ The second staged watch completes at tick 1243 with `witnessId: 0`: the parent h
 correctly does not award a second witnessed-completion preference. The older generic trust/thanks effect described in
 the review below is still visible. This distinction is preserved rather than presenting all successful work as known.
 
+Runtime commit: `e704d0156fb0d156591a3fe297fe1f1155247bf4`. The rules-79 reference is recorded from that commit,
+before successor behaviour, using ordinary meadow continuation, an active watch through witnessed completion, and
+the saved delayed choice through the second accepted watch. Its expectation and fixture must not be re-recorded to
+make a successor pass.
+
 Broader work competence, asking about ability, delay/cancellation communication, conflicting reports, recovery handover
 and the wider A7/A8/household programme remain open.
 
@@ -93,3 +98,10 @@ Separate finding for the next audit: `fulfillCommitment` still awards the reques
 deed and thanks whenever the requester exists, independently of contact. Rules 79's new completion memory is local,
 but this older generic relationship effect may inform a distant or sleeping requester. This is not fixed or declared
 verified here; reproduce the full physical path before changing attribution or adding communication.
+
+That reproduction now exists in `scripts/remote_promise_diagnostic.ts`, explicitly rules 79, with retained output
+`autonomy-remote80-before.log`. An actual accepted watch finishes at tick 581 with parent/helper distance **22.15**.
+The requester receives no completion receipt (`witnessId: 0`), yet trust increases **70.3145728 → 76.3145728**, affinity
+increases by 3, `lastMet` becomes 581, and a supposedly firsthand reliable story names the parent as origin. No contact
+occurs in that tick. The ledger balances. This establishes a remote attribution defect; the next rules version must
+preserve the physical completion while making knowledge and any acknowledgement depend on observation or speech.
