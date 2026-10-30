@@ -11,7 +11,112 @@ childcare, rules 57 workshop tool prerequisites, and rules 58 physical seed stor
 and correct post-consumption craft capacity. The older rules-44–55 report below
 is historical scope, not closure of the expanded WS15–21 or their dependencies.
 
-## Current implementation checkpoint — expanded programme still open
+## Autonomy and environment continuation — 2026-10-30
+
+The owner's 30 October autonomy/environment prompt is one authorized implementation programme. This section extends this
+register; it does not replace the existing WS evidence or declare their unfinished journeys complete. The audit's rules-58
+baseline is superseded by local main `14485835ebe35c2d79447447c6bd9b4833534543`, rules **59**. `origin/main`, freshly fetched,
+is `7b2a680`; the two local commits are the immutable 58 reference and cart priority. No tracked main edits were present.
+Existing untracked evidence and historical worktrees are preserved. Work is isolated at
+`C:\dev\Claude Experiment\living-world-autonomy`, branch `codex/autonomy-environment`, based on that exact local main.
+The newer unmerged seasonal-preparation branch `49655bb` and winter candidate `f33cd0b` remain historical inputs, not
+wholesale integration candidates; current rules 46/47 already own their integrated concepts. No pending branch inspected
+allocates rules 60. Recheck before allocating it. Rules/save/protocol/lineage numbers remain independent.
+
+### Current capability map (source reconciliation, not fresh ordinary-world acceptance)
+
+Classifications are **connected**, **incomplete**, **absent**, and **measurement**. Connected means the named bounded
+mechanism exists with its stated evidence; it does not mean every ordinary journey succeeds. Measurement means the next
+action is measurement, not presumed implementation. Absent is limited to the named missing capability, not the whole subsystem.
+Every row retains the six existing evidence dimensions and the failures in its WS row. The source and contracts were
+inspected at 1448583; historical run counts below remain attributed evidence, not newly repeated measurements.
+
+| Capability / classification | Source owner and current rules boundary | Known evidence | Missing transition and observable completion condition |
+|---|---|---|---|
+| Existing private plans / connected | `intent.ts`, `batch_plan.ts`, `activities.ts`; 1–59, batch 50 | Plan, batch, interruption and intermediate-save contracts; WS6 | Preserve six fixed kinds, limits, lawful execution and release. Extend only gaps below. |
+| Time available for work/leisure / measurement (A1) | `decision.ts`, `needs.ts`, `relief.ts`, `leisure.ts`; leisure 28, tastes 31 | `activity_mix.ts` counts starts only; no support for 95% survival claim | Exclusive living-person tick budget, critical exposure, work spells, repeated aborted travel, actual endings and sampled blockers. Adequately supplied household repeatedly works and uses discretionary time; disrupted rhythm has recorded cause. |
+| Learned daily routines / absent beyond existing night/supper/winter practices (A2) | `intent.ts`, `household_practices.ts`, `winter_practice.ts`; 24/27/53 | Actual supper and winter practice transmission, WS11 | Experience-based morning/water/work/rest preferences, bounded and interruptible; revise after season/injury/dependant/travel changes. Matched people choose differently for an inspectable reason. |
+| General bounded contingent goals / absent (A3) | `types.ts` Intention, `intent.ts`, `batch_plan.ts`; six specialised kinds, 50 | One-workshop batch with one precursor stage; no general declarative goal graph | Bounded depth/steps/search/retries/history, registered actions, cycle/unreachable rejection; project survives drink/save/source loss and completes; impossible case ends and releases claims. |
+| Quantities, foresight, useful waits / incomplete (A4) | `activities.ts`, `relief.ts`, `intent.ts`, `night_wait.ts`; 27/30/50 | External bounds, daylight wait, footprint wait, batch resumption | Autonomous quantities/durations based on capacity/need; provision round trip; communicated meeting/batch/delivery waits have costs, timeout and next action. No future weather oracle. |
+| Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`; 34/36/37/50 | Reconsideration, partial shelter delivery, suspended work | Preserve progress through temporary obstruction; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Cover source/tool/helper loss. |
+| Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
+| Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |
+| Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`; 39–51 | Requests/refusals, named home, later delivery/customer receipt | Ability/location questions, inability, counteramount/place, delay, cancellation/acknowledgment only where missing; actual contact and locally held grounds. |
+| Household coordination / incomplete (A9, WS5/11/17/20) | `responsibilities.ts`, `welfare.ts`, `intent.ts`, `social.ts`; 48/53/56 | Voluntary promises, childcare protections, death succession | Contacted intentions avoid duplicate trips and permit complementary work; provider absence causes reconsideration; private plans, promises and physical contributions stay distinct. |
+| Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`; 45/48/56 | Real non-berry help, deposits, eating; current checkpoint had 9 different-interior and 6 capacity give failures | Complete lawful entrance/contact, moved/full recipients, partial quantities and actual eating. No through-wall transfer or invented pack room. |
+| Illness/injury/elder care / incomplete (WS17) | `welfare.ts`, `responsibilities.ts`, `illness.ts`, `life.ts`; 56 | Injured elder receives/eats bread; childcare saves/purity; zero ordinary uncovered-parent opportunities in short census | Acquire necessities, contact, warmth/childcare, cover duties, hand responsibility back after recovery; no-helper failure visible. |
+| Homes and shared upkeep / incomplete (WS4/16) | `shelter.ts`, `winter_shelter.ts`, `buildings.ts`, `facilities.ts`; 47+ | Physical repair then kiln use; prewinter housing-condition evidence | Material acquisition, concurrent interruption/collapse, replacement, limited labour and justified public responsibility; repair/rebuild costs and later occupation/use. |
+| Succession beyond death / incomplete (WS11/20) | `succession.ts`, `lifecycle.ts`; 53 | Staged death takeover; historical ordinary 0/5 records taken up | Informed acceptance during incapacity/departure, rival successors, original worker recovery, already-complete goal and missing goods. No copied goods/skills/promises. |
+| Relocation and population viability / measurement plus incomplete handovers (WS12/20) | `relocation.ts`, `lifecycle.ts`, `households.ts`; 20/54 | Subgroup/succession/return/search staged; one failed ordinary proposal in prior 135 seed-days | Trace cue→consent→dependants/provisions→travel→confirmation/home, organiser loss and return. Long horizon covers birth/ageing/adoption/split/loss without forced population. |
+| Practical knowledge continuity / incomplete (WS10/20) | `techniques.ts`, `learning.ts`, `background.ts`; 41/44/52 | Actual charcoal teaching and output; higher procedures/trials staged | Last skilled worker lost; learner learns through contact and later produces useful output; no automatic skill inheritance. |
+| Raw inputs→tools→workshop→use / incomplete (WS6) | `production.ts`, `recipes.ts`, `facilities.ts`, `options_work.ts`; 50/57/58 | Seed storage, hammer/crafting and staged cart chain; ordinary seed storage | Planks/handles/bricks/jar/charcoal/iron/forging/flour/bread/cart through useful work or meals; diagnose ore and downstream selection. |
+| Cart adoption order / connected at 59; useful carts incomplete (WS7) | `cart_priority.ts`, `batch_plan.ts`, `transport.ts`; 50/55/57/58/59 | Historical 52/52 hammer-holder samples answer cart; one Lena plan, zero carts | Next trace offered versus eligible versus chosen plan steps, actual interruptions, component stock and source loss before tuning weight. Complete construction→load→route→unload→use/wear/recovery ordinarily and staged negatives. |
+| Demand, customers, inter-settlement trade / incomplete (WS9) | `customers.ts`, `trade.ts`, `exchange_journeys.ts`, `production.ts`; 22/43/51 | Customer site delivery exists; historical ordinary swaps/returns absent | Produce personally requested good, lawful swap/gift/delivery, later trade review, repeated multi-settlement returns with feasible costs; retain refusals/stale leads. |
+| Winter food flow / incomplete (WS3) | `provision.ts`, `winter_reserve.ts`, `facilities.ts`; 46/53 | Grain shares and eating; larger target has no established survival benefit | Acquisition→preservation→access→distribution/eat→replenish; record expiry/spoilage/labour/displacement and adverse household. |
+| Civic feedback / incomplete (WS8) | `civic_benefit.ts`, `townships.ts`; 42/49 | Staged attributed meal receipt and support comparison | Trace actual personal service to later eligible support choice; receipt alone does not establish governance change. |
+| Renewable patch/field long-term condition / absent (A10, WS18) | `sources.ts`, `farming.ts`, `hardship.ts`; current regrowth/weather, finite minerals 26 | Stock/max/regrow timer and crop state; no pressure-dependent persistent fertility layer | Stock distinct from productive condition; pressure/rest/tending/fallow/replant change future yield, people respond locally, conservation/save hold. Comparable patches diverge and recover. |
+| Bounded water supply / absent (A11) | `act_resource.ts`, `sources.ts`, `environment.ts`; current shore drinking/fetching | Extraction has no finite hydrological stock | Source capacity/recharge/loss/extraction/access; local learning and feasible route/storage/provision/crop/fish responses. Construct well/collector only if needed, with siting/cost/maintenance and bounded source. |
+| Durable hazards and access repair / incomplete (A12) | `hardship.ts`, `environment.ts`, `pathfinding.ts`, `transport.ts` | Instant shore flood losses/damage, terrain costs, weather, wolves | Local footprint/onset/duration/recovery/signs, after-departure and indoor access change, stale warning, lawful costly clearing/drainage/repair. |
+| Persistent material traces and debris / incomplete (A13) | `sources.ts`, `buildings.ts`, `world.ts`, `recipes.ts`; stump retention 25 | Roads/stumps/piles/salvage, recipe waste sink | Persistent worn/cleared plots, physically originated by-products/rubble only where useful; bounded collection/reuse/disposal, no double salvage credit. |
+| Shared places and meetings / incomplete (A14) | `leisure.ts`, `meals.ts`, `occasions.ts`, `household_practices.ts`; 24/28 | Existing destination choice, meals, gatherings, private alternatives | Ordinary repeat useful contact; communicated arrival/wait/cancel/reschedule and later choice. Build affordance only for demonstrated gap; no global summons. |
+| Proportionate dispute consequences / incomplete (WS19) | `social.ts`, `relations.ts`, `reputation.ts`, access/crews; 35/48 | Grievances, mediation, crew exit/re-entry guard | Audit attribution for inability/refusal/interruption/stale info/breach/theft/contribution; explanation/restitution/refusal only from knowable grounds, no multiplied punishment. |
+| Causal inspection across time / incomplete (A15, WS13) | `inspect.ts`, `history.ts`, existing panels | Motives/options/blockers/plans/history; zoom speech and blocker age checked | Bounded references observation→belief then→choice→actual work/transfer→outcome→later influence; current truth separate; compacted/unknown explicit; real rendered scene per slice. |
+| AI bounded goal proposals / absent beyond offered-action selection (A16) | `agent/protocol.ts`, `observe.ts`, `transcript.ts`, `external.ts`; protocols 21/22, observation 12 | Legal offered key, bounded limits/notes, historical replay | Versioned schema for A3 goal/revision/composition, stale/unknown/cycle/repeat rejection, no partial unauthorized mutation; autonomous network-free same capability; no observer-only secrets. |
+| Combined ordinary and mature Large / measurement (WS14/21) | Existing lab, replay, mature/performance tools; pin actual current rules | Prior mature Normal 53 and fresh Large 54, not mature 59 | Fixed adverse seeds, real multi-settlement and generational/ecological horizons; tick/frame/heap/save/load/inspection cost. Expensive ensembles use exact runnable commands, pending until returned. |
+
+### Predeclared next diagnostic
+
+Question: why does the ordinary rules-59 cart plan fail to finish? Preserve fixed Normal meadow/river/forest, immigration
+off, up to 45 days, with a 170-second per-run budget and explicit budget stops. `scripts/autonomy_observe.ts` adds exact
+start-of-tick living-person occupancy (mutually exclusive categories), actual activity endings, repeated aborted-travel
+time, work-spell histograms and 120-tick active-batch step samples. Sampled options are not independent opportunities or
+time spent. Fixed bodily critical thresholds are distinct from anticipatory thirst in the decision engine. No quotas,
+pressure retuning, claim of improvement or invented counterfactual is authorized by this measurement alone.
+
+Instrumentation adds only an optional unsaved `onActivityEnd` observer hook; pure accounting lives in `scripts/observers`.
+Its full serialized twin-continuation test must pass. The rules-59 predecessor covers both an ordinary river continuation
+and a staged active cart build, captured from 1448583 before successor behaviour. Expected outcomes for a later repair
+will be declared after the baseline identifies the causal gap.
+
+### Fresh rules-59 time baseline
+
+`autonomy_evidence/baseline-r59-{meadow,river,forest}` records source manifests, exact settings, reports, plan samples and
+local ignored final saves. All reached day 45 (108,000 ticks); no budget stops; conservation held daily/finally and
+all 900 sampled observations per seed preserved full serialized state/RNG. The focused instrumentation/continuation/cart/
+probe run passed **17 tests / 4 files**. Typecheck passed. This establishes measurement purity, not aggregate improvement.
+
+| Seed | Living-person ticks | Travel | Work | Leisure | Active-batch samples | Step offered / eligible / ranked first | Carts | Seconds |
+|---|---:|---:|---:|---:|---:|---|---:|---:|
+| meadow | 3,204,528 | 1,151,397 | 328,656 | 29,350 | 360 | 92 / 91 / 14 | 0 | 115.32 |
+| river | 3,056,766 | 1,187,124 | 306,800 | 9,708 | 730 | 170 / 163 / 21 | 0 | 134.37 |
+| forest | 2,763,749 | 1,110,416 | 284,796 | 16,228 | 549 | 169 / 169 / 46 | 0 | 110.41 |
+
+Denominators are living-person ticks or repeated 120-tick active-plan samples, never independent opportunities. Remaining
+exclusive categories and each person's totals are in each report. Travel cannot be relabelled survival without its
+purpose. The 95% assertion is unsupported. In forest, Lena (person **908**, household **906**) adopted cart plan **27503**
+at tick **76897**, ending at its tick **84097** deadline. Of 60 active-cart samples, 45 had the production health/need
+margin, 17 had an eligible matching step and 2 ranked that step first; one marked plan activity started and succeeded.
+The plan still expired while intending to hew planks. Forest also retains 477 gathering journeys ending `nothing left`
+with 34,389 sampled travel ticks (308 repeated person/kind/target endings); these are causal leads, not proof that all
+the travel was avoidable. No mortality or efficiency benefit claimed.
+
+### First bounded repair contract (WS6/7)
+
+**RUNTIME_LOGIC_BUG**, reproduced before implementation: in a staged saw-holder cart case, `batchStep` names
+`operate:5:hew_planks` while the ordinary supply planner offers `operate:5:saw_planks` and suppresses hewing. The failing
+test asserts the actual offered key, not a desired outcome count. The same mismatch exists at primary batch adoption:
+`batchWanted` chooses the first recipe, while supply applies the held/rack tool preference. This is a prerequisite-choice
+defect; it is not established as the sole cause of Lena's failure (her sampled hewing step was sometimes offered).
+
+Expected repair: at the next unused rules boundary, the plan applies the existing supply planner's tool preference to
+primary and precursor recipes. Saw in hand or personally remembered on the rack selects sawing; no known saw preserves
+hewing; a running precursor remains resumable; actual tool loss is revalidated by the existing handler. Preserve every
+priority, survival gate, source/access/material requirement and plan deadline. Failure case: loss of the saw before
+arrival cannot create planks; after local knowledge refresh the feasible hewing alternative remains. Staged physical
+proof must include raw wood→planks→cart→actual delivery/use, an interruption and exact save continuation. Ordinary
+occurrence and the continuing zero-cart case must be reported separately. Rules-59 reference is committed at `f3b9fb1`.
+
+## Earlier implementation checkpoint — expanded programme still open (rules 58)
 
 This continuation started from committed `953eb90` / rules 53 with concurrent main
 changes already in progress. Its verified implementation now ends at `c41b3f6` /

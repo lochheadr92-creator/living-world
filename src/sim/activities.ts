@@ -381,6 +381,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   if (outcome === 'failed' && !a.data.logged) addLog(world, p, 'work', `Gave up “${a.label}”: ${detail}.`);
   if (p.pose !== 'sleep' || outcome !== 'interrupted') p.pose = 'stand';
   p.nextThink = world.tick;
+  world.hooks?.onActivityEnd?.(p, a, outcome, detail);
 }
 
 /** Drop whatever is going on (e.g., death, fleeing) and release everything. */

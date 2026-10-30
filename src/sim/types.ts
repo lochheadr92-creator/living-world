@@ -1330,6 +1330,8 @@ export interface World {
   /** optional hooks (tests / debug). Never required by the simulation. */
   hooks?: {
     onActivityStart?: (p: Person, a: Activity) => void;
+    /** Observation only; called once at the ordinary ending boundary, after claims are released. Never saved. */
+    onActivityEnd?: (p: Person, a: Activity, outcome: 'success' | 'failed' | 'interrupted' | 'partial', detail: string) => void;
     /** Observation only, including a fatal bite before the person leaves the live registry. */
     onWolfBite?: (p: Person, wolf: Animal) => void;
     onTransfer?: (info: { from: string; to: string; item: ItemKind; n: number; reason: string }) => void;

@@ -1,5 +1,15 @@
 # Civilisation implementation register
 
+## Current continuation pointer — 2026-10-30
+
+Current source is local main `1448583`, rules **59**, beyond this document's older rules-44 opening section.
+The active programme, four-class capability map, remaining transitions and evidence are maintained in
+[DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
+Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch
+planner's cart/site-material ordering. These are implemented mechanisms with the limits recorded there. The latest
+ordinary cart evidence still has zero completed carts; the expanded autonomy/environment programme remains open.
+Older dated statuses and local-only publication statements below describe their own sessions, not current main.
+
 ## Experience connections and varied backgrounds — 2026-10-29
 
 Local main continued from `393e71f`; original dirty deepseek checkout and all existing
