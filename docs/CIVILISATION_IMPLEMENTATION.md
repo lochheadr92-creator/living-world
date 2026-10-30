@@ -2,11 +2,13 @@
 
 ## Current continuation pointer — 2026-10-30
 
-Current source is local main `1448583`, rules **59**, beyond this document's older rules-44 opening section.
+This continuation started from local main `1448583`, rules **59**. The isolated candidate now implements rules **60**,
+aligning batch-plan recipes with offered production recipes; its full programme and evidence remain open.
 The active programme, four-class capability map, remaining transitions and evidence are maintained in
 [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md), "Autonomy and environment continuation".
 Rules 45–58 supplied food-help, winter, cooperation, workshop, continuity and capacity links; rules 59 changes the batch
-planner's cart/site-material ordering. These are implemented mechanisms with the limits recorded there. The latest
+planner's cart/site-material ordering; rules 60 reuses the supply planner's held/rack-tool preference for batch recipes.
+These are implemented mechanisms with the limits recorded there. The latest
 ordinary cart evidence still has zero completed carts; the expanded autonomy/environment programme remains open.
 Older dated statuses and local-only publication statements below describe their own sessions, not current main.
 

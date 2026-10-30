@@ -4,6 +4,8 @@ import { CRITICAL, NEED_KEYS } from '../../src/sim/constants';
 import { drive } from '../../src/sim/needs';
 import { generateOptions, rankOptions } from '../../src/sim/decision';
 import { servesIntent } from '../../src/sim/intent';
+import { batchStep } from '../../src/sim/batch_plan';
+import { invRoom } from '../../src/sim/economy';
 import type { Activity, Person, World } from '../../src/sim/types';
 
 export const TIME_CATEGORIES = ['sleep', 'eating_drinking_warming', 'travel', 'work', 'social_contact', 'leisure', 'waiting', 'failure_recovery', 'rest', 'defence', 'idle'] as const;
@@ -113,7 +115,7 @@ export class TimeBudget {
       if (ranked[0] && servesIntent(i, ranked[0])) this.sampleCounts.stepRankedFirst++;
       if (!margin) this.sampleCounts.noProductionMargin++;
       if (this.planSamples.length >= 20000) { this.sampleCounts.omittedRows++; continue; }
-      this.planSamples.push({ tick: world.tick, person: p.id, name: p.name, plan: i.id, makes: i.makes, step: i.step, key: i.stepKey, blocked: i.blocked, margin, criticals: ctx.criticals, needs: { ...p.needs }, activity: p.activity ? { kind: p.activity.kind, phase: p.activity.phase, plan: p.activity.data.forPlan } : null, offered: offered.map(o => ({ key: o.key, utilityBeforeRanking: o.util })), eligible: eligible.map(o => o.key), first: ranked[0] ? { key: ranked[0].key, utilityBeforeRanking: ranked[0].util } : null });
+      this.planSamples.push({ tick: world.tick, person: p.id, name: p.name, plan: i.id, makes: i.makes, step: i.step, key: i.stepKey, blocked: i.blocked, currentStep: batchStep(ctx,i), inventory: {...p.inv}, stepRoom: i.stepItem ? invRoom(world,p,i.stepItem) : null, workshop: p.beliefs[i.aboutId] ? {...p.beliefs[i.aboutId]} : null, workshopOffers: ctx.options.filter(o=>o.targetId===i.aboutId).map(o=>({key:o.key,utilityBeforeRanking:o.util})), blockers: ctx.blocked.map(o=>({key:o.key,label:o.label,reason:o.blocked})), margin, criticals: ctx.criticals, needs: { ...p.needs }, activity: p.activity ? { kind: p.activity.kind, phase: p.activity.phase, plan: p.activity.data.forPlan } : null, offered: offered.map(o => ({ key: o.key, utilityBeforeRanking: o.util })), eligible: eligible.map(o => o.key), first: ranked[0] ? { key: ranked[0].key, utilityBeforeRanking: ranked[0].util } : null });
     }
   }
 

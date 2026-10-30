@@ -268,6 +268,14 @@ export function toolAvailable(ctx: Ctx, f: Fac, r: Recipe): boolean {
   return unitsOf(ctx.p.inv[kind]) > 0 || (f.b.tools ?? []).includes(kind);
 }
 
+/** The supply planner's existing choice between equivalent recipes, from held/remembered equipment only. */
+export function preferredRecipeForTools(ctx: Ctx, f: Pick<Fac, 'b'>, r: Recipe): boolean {
+  const saw = unitsOf(ctx.p.inv.saw) > 0 || (f.b.tools ?? []).includes('saw');
+  if (r.id === 'hew_planks' && saw) return false;
+  if (r.id === 'saw_planks' && !saw && unitsOf(ctx.p.inv.axe) > 0) return false;
+  return true;
+}
+
 function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
   if (item === 'cart') return 1;
   if (r.toolOut && r.toolOut.kind === item) return 1;
@@ -499,8 +507,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
       continue;
     }
     // prefer the better way of making something when its tool is to hand: sawing beats hewing
-    if (r.id === 'hew_planks' && (unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw'))) continue;
-    if (r.id === 'saw_planks' && !(unitsOf(p.inv.saw) > 0 || (fac.b.tools ?? []).includes('saw')) && unitsOf(p.inv.axe) > 0) continue;
+    if (!preferredRecipeForTools(ctx, fac, r)) continue;
     planRecipe(ctx, fac, r, item, remaining, base, why, tag, depth, siteId);
   }
 }

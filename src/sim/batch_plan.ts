@@ -24,7 +24,7 @@ import { isRich } from './mood';
 import { runsRulesVersion } from './rulesversion';
 import { RECIPE_BY_ID, recipesMaking } from './recipes';
 import type { Recipe } from './recipes';
-import { demandsOf, facilitiesOf, toolAvailable } from './production';
+import { demandsOf, facilitiesOf, toolAvailable, preferredRecipeForTools } from './production';
 import { techniqueBlocker } from './techniques';
 import { isRawMaterial } from './options_work';
 import { rankWaterSpots } from './optutil';
@@ -47,6 +47,12 @@ export function setBatchPlans(on: boolean): void {
   enabled = on;
 }
 export const hasBatchPlans = (world: World): boolean => enabled && isRich(world) && runsRulesVersion(world, BATCH_FROM_VERSION);
+
+let recipeChoice = true;
+export const batchRecipeChoiceOn = (): boolean => recipeChoice;
+export function setBatchRecipeChoice(on: boolean): void { recipeChoice = on; }
+/** Rules 60: name the same feasible recipe the ordinary supply planner offers. */
+const hasRecipeChoice = (world: World): boolean => recipeChoice && isRich(world) && runsRulesVersion(world, 60);
 
 const unitsOf = (n: number | undefined): number => n ?? 0;
 const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
@@ -84,6 +90,7 @@ export function batchWanted(ctx: Ctx): BatchWant | null {
       if (!r) continue;
       const fac = facilitiesOf(ctx, r.at)[0];
       if (!fac) continue;
+      if (hasRecipeChoice(world) && !preferredRecipeForTools(ctx, fac, r)) continue;
       if (techniqueBlocker(world, p, r.id)) continue;
       if (!toolAvailable(ctx, fac, r)) continue;
       // one workshop at a time: a processed input the shelf and the pack lack is this plan's to make only when the same workshop
@@ -130,6 +137,7 @@ function stageBefore(world: World, ctx: Ctx, fac: { b: Belief }, main: Recipe, k
   const { p } = ctx;
   for (const sub of recipesMaking(k)) {
     if (sub.at !== main.at || sub.id === main.id) continue;
+    if (hasRecipeChoice(world) && !preferredRecipeForTools(ctx, fac, sub)) continue;
     if (techniqueBlocker(world, p, sub.id)) continue;
     if (!toolAvailable(ctx, fac as never, sub)) continue;
     const need = takes(sub);

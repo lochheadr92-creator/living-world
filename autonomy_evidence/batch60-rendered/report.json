@@ -1,0 +1,100 @@
+{
+  "head": "e30094849e50564728132cba8c816a4dd58d1503",
+  "rules": 60,
+  "evidence": "STAGED supplied tools/raw inputs/site/load; explicitly selected legal actions. Forced interruption then actual drink, sleep, work and delivery. No ordinary-adoption or aggregate claim.",
+  "sourceHashes": {
+    "src/sim/batch_plan.ts": "ed9602b352de70a0ba3cb6ed034ca730697fdc900bfaf9bfcf639d7ba0586eb7",
+    "src/sim/production.ts": "48f98945c20c6d18fb8902a08bd03a1556d40b13008b51c20d8c596aae3ba403",
+    "src/sim/rulesversion.ts": "1a7cf07df5a966f97ff68f271886dc400856872b6e7899c29f2c1aecaeac21f6",
+    "tests/helpers/batch_recipe.ts": "de14c4584d756b5ef19fa3288ec62201b7dcf721bbc392b7277726bafb35fe0e",
+    "scripts/browser/batch_recipe_check.mjs": "7948d99837ac4a601e5e68e862f93526cce691306ca471716044af2bd148f96f"
+  },
+  "checks": [
+    {
+      "name": "plan names the offered sawing action and observation is pure",
+      "ok": true,
+      "detail": {
+        "step": "sawing planks first, for a handcart",
+        "key": "operate:5:saw_planks",
+        "offered": true,
+        "pure": true
+      }
+    },
+    {
+      "name": "real workshop holds consumed inputs while sawing visibly advances",
+      "ok": true,
+      "detail": {
+        "phase": "work",
+        "pose": "saw",
+        "recipe": "saw_planks",
+        "progress": 7,
+        "held": {
+          "wood": 3
+        }
+      }
+    },
+    {
+      "name": "drink costs water; resumed work and intermediate save produce identical state",
+      "ok": true,
+      "detail": {
+        "equal": true,
+        "planks": 2,
+        "water": 0,
+        "conserved": true
+      }
+    },
+    {
+      "name": "two real batches supply a physically built household cart",
+      "ok": true,
+      "detail": {
+        "status": "done",
+        "carts": [
+          {
+            "id": 20,
+            "hh": 1,
+            "load": {}
+          }
+        ],
+        "stock": {},
+        "conserved": true
+      }
+    },
+    {
+      "name": "the loaded cart travels with physical stone",
+      "ok": true,
+      "detail": {
+        "load": {
+          "stone": 14
+        },
+        "person": {
+          "x": 54.542599196522495,
+          "y": 38.52024965770543
+        },
+        "cart": {
+          "x": 53.64260069027138,
+          "y": 38.51574150322336
+        },
+        "phase": "travel",
+        "conserved": true
+      }
+    },
+    {
+      "name": "unloaded stone is consumed by real construction and inspection stays pure",
+      "ok": true,
+      "detail": {
+        "tick": 1858,
+        "delivered": 14,
+        "used": 3,
+        "work": 38.688999999999986,
+        "cartLoad": {},
+        "conserved": true,
+        "pure": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

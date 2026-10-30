@@ -94,7 +94,7 @@ probe run passed **17 tests / 4 files**. Typecheck passed. This establishes meas
 Denominators are living-person ticks or repeated 120-tick active-plan samples, never independent opportunities. Remaining
 exclusive categories and each person's totals are in each report. Travel cannot be relabelled survival without its
 purpose. The 95% assertion is unsupported. In forest, Lena (person **908**, household **906**) adopted cart plan **27503**
-at tick **76897**, ending at its tick **84097** deadline. Of 60 active-cart samples, 45 had the production health/need
+at tick **76897**, with deadline **84097** and recorded expiry by tick **85257**. Of 60 active-cart samples, 45 had the production health/need
 margin, 17 had an eligible matching step and 2 ranked that step first; one marked plan activity started and succeeded.
 The plan still expired while intending to hew planks. Forest also retains 477 gathering journeys ending `nothing left`
 with 34,389 sampled travel ticks (308 repeated person/kind/target endings); these are causal leads, not proof that all
@@ -115,6 +115,33 @@ priority, survival gate, source/access/material requirement and plan deadline. F
 arrival cannot create planks; after local knowledge refresh the feasible hewing alternative remains. Staged physical
 proof must include raw wood→planks→cart→actual delivery/use, an interruption and exact save continuation. Ordinary
 occurrence and the continuing zero-cart case must be reported separately. Rules-59 reference is committed at `f3b9fb1`.
+
+### Rules 60: recipe choice and visible workshop progress
+
+Implemented the bounded WS6/7 contract above; see [BATCH_RECIPE_CHOICE.md](BATCH_RECIPE_CHOICE.md). Six contract tests pass,
+including physical sawing, a drink interruption, same-job save continuation, cart assembly, hauling and useful construction.
+The rendered staged chain passes 7/7 checks (`autonomy_evidence/batch60-rendered-final/report.json`). Visual review exposed
+and fixed a separate observer defect: actual job progress 7/60 now displays 12%, rather than 0%. The progress/purity test,
+six recipe tests and viewer-purity test pass (8 tests / 3 files). The full suite before that display-only fix passed
+**1,504 tests / 221 files**, 258.28 seconds. Build/typecheck also passed after the display fix (autonomy-build60.log); the existing 900 kB chunk warning remains.
+
+Fresh fixed Normal, immigration-off runs at rules 60 all reached 108,000 ticks (45 days), with daily/final conservation
+and 900 full-state/RNG observation-purity checks each. Exact source manifests accompany all reports. Their simulation
+sources precede only the display-only progress fix. These are occurrence diagnostics, not paired effectiveness tests.
+
+| Seed | Living-person ticks | Travel | Work | Leisure | Active-batch samples | Step offered / eligible / ranked first | Carts | Seconds |
+|---|---:|---:|---:|---:|---:|---|---:|---:|
+| meadow | 3,204,528 | 1,151,397 | 328,656 | 29,350 | 360 | 92 / 91 / 14 | 0 | 127.05 |
+| river | 3,040,400 | 1,227,926 | 318,657 | 10,978 | 456 | 113 / 106 / 18 | 0 | 146.55 |
+| forest | 2,295,742 | 950,092 | 249,654 | 16,912 | 609 | 192 / 191 / 62 | 0 | 97.79 |
+
+Reports: `autonomy_evidence/r60-{meadow,river,forest}`. No spontaneous useful cart or aggregate improvement is established.
+The broader rows stay open. The next negative test reproduced a required saw disappearing during work while the next
+tick still advanced progress 7→8.4. The busy-job resume branch also bypasses missing-tool acquisition. Predeclare the
+next repair: preserve paid inputs/progress, stop before untooled work or contribution, expose the real missing tool,
+acquire a replacement through existing physical actions and resume. Pin rules 60 before changing these semantics;
+preserve old saves, optional-tool work and the final valid tick of a tool that breaks from wear. A missing replacement
+must leave a truthful unfinished job, not fabricated goods or a successful result.
 
 ## Earlier implementation checkpoint — expanded programme still open (rules 58)
 
