@@ -389,6 +389,23 @@ Fresh five-day Normal, immigration off, meadow/river/forest all reached tick 12,
 
 `scripts/care_water_gap.ts` repeats river and matches its exact final save. The five samples are Jax at ticks 600–1080, with no known household home and zero spare water. This is not five feasible delivery opportunities. Preserve the adverse absence of infrastructure/supplies and do not tune scoring to manufacture water or homes. Broader acquisitions, care duties, production and every other remaining capability-map row stay open.
 
+### Current continuation checkpoint — rules 71
+
+Verified runtime **`8df52c0c5e521a888ec2acc1326cc8e1c8d3518e`**. Its immutable continuation captures ordinary meadow,
+a narrowed material trip, paid retained work, resumed work and source depletion before any rules-72 behavior. The
+separate reference test passed **1/1 in 12.06 seconds** (`autonomy-v71-check.log`), additional to the full run below.
+Expected files cannot be overwritten or captured under a successor. The helper fixtures used by this reference are frozen.
+
+Next transition reproduced at this predecessor by `scripts/trip_preparation_diagnostic.ts`
+(`autonomy-trip72-before.log`): staged Mara, tick 0, thirst 70, bread and axe but no carried water, personally known nearby
+shore and distant tree **#6**. The requested wood trip is withheld for the **water margin**, but no personal fetch-water
+option exists; legal alternatives are initial site work, exploration and pottering. The diagnostic is pure and conserved,
+not an ordinary activation or welfare measurement. Existing water collection is coupled to crops, care, promises or
+production. A personally derived trip preparation must acquire actual provisions and retain its useful purpose across
+the later drink break. Carrying supplies must support a bounded estimate of real consumption stops, not grant need relief
+without drinking/eating. Preserve urgent needs, pack space, failed/stale sources, tool eligibility and unknown routes.
+Use this concrete A4 dependency before adding more scores or calling the remaining programme complete.
+
 ### Personally scoped trips and work spells — rules 71
 
 Predecessor rules 70 was pinned at `15dbf6e`. Rules 71 narrows supported material/food/water trips and resumable work
