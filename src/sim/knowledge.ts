@@ -183,6 +183,7 @@ export function beliefAge(world: World, b: Belief): number {
 export function noteFailure(world: World, p: Person, id: number, reason: string): void {
   const f = p.failures[id];
   if (f) {
+    delete f.resolved;
     f.tick = world.tick;
     f.reason = reason;
     f.count++;
@@ -193,11 +194,12 @@ export function noteFailure(world: World, p: Person, id: number, reason: string)
 
 export function recentFailure(world: World, p: Person, id: number, within: number): { tick: number; reason: string; count: number } | undefined {
   const f = p.failures[id];
-  if (f && world.tick - f.tick < within) return f;
+  if (f && !f.resolved && world.tick - f.tick < within) return f;
   return undefined;
 }
 
 export function clearFailure(p: Person, id: number): void {
+  if(p.failures[id]?.route){p.failures[id].resolved=true;return;}
   delete p.failures[id];
 }
 

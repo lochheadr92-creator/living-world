@@ -564,7 +564,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   for (const k of Object.keys(p.failures)) {
     const id = Number(k);
     const f = p.failures[id];
-    if (world.tick - f.tick > 900) continue;
+    if (f.resolved || world.tick - f.tick > 900) continue;
     failures.push({ place: describeTarget(world, p, id, version) ?? `#${id}`, when: ageText(world, version, f.tick), reason: cleanText(f.reason, 100) });
   }
   failures.sort((m, n) => m.when.localeCompare(n.when));

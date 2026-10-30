@@ -1,4 +1,5 @@
 import { injuryFactor } from './life';
+import {recordRouteDeparture,recordRouteArrival,recordRouteFailure} from './route_learning';
 import { hasLayoutClaims, layoutClaimBlock } from './layout_claims';
 import { isBoundedNightWait } from './night_wait';
 import { hasHabitation, indoorHome, interiorTarget, doorPoint, enterHome, prepareIndoorActivity, staysIndoors } from './habitation';
@@ -327,6 +328,7 @@ export function startActivity(world: World, p: Person, a: Activity): void {
   a.start = world.tick;
   a.lastX = p.x;
   a.lastY = p.y;
+  recordRouteDeparture(world,p,a);
   p.nextThink = world.tick + REVIEW_EVERY + Math.floor(hashUnit(p.id, world.tick, 3) * 18);
   world.hooks?.onActivityStart?.(p, a);
   if (a.phase === 'work') beginWork(world, p, a);
@@ -383,6 +385,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   p.activity = null;
   const h = handlers[a.kind];
   if (h?.onEnd) h.onEnd(world, p, a, outcome, detail);
+  recordRouteFailure(world,p,a,outcome,detail);
   // anti-thrash: an option that just failed outright (or achieved nothing) is not re-picked straight away
   const optKey = a.data.optKey as string | undefined;
   if (optKey && (outcome === 'failed' || (outcome === 'partial' && a.cycle === 0 && a.progress < 4))) p.cooldowns['opt:' + optKey] = world.tick + 80;
@@ -454,6 +457,7 @@ export function stepActivity(world: World, p: Person): void {
       return;
     }
     p.pose = 'stand';
+    recordRouteArrival(world,p,a);
     beginWork(world, p, a);
     if (p.activity !== a) return;
     // a multi-leg handler (a cart going out to the load) may have sent it travelling again: nothing is done until it gets there

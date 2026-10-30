@@ -361,6 +361,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const skillExplanation = h('p', { class: 'trait-sum skill-explanation' });
   const payHead = h('div', { class: 'sub-h cap' }, 'What has paid them');
   const sourceExperienceLine=h('p',{class:'source-experience-line'});
+  const routeExperienceLine=h('p',{class:'route-experience-line'});
   const payBox = h('div', { class: 'skills' });
   // what they have seen and been told of others (rich worlds only; the heading goes when there is nothing)
   const heardHead = h('div', { class: 'sub-h cap' }, 'What they have heard of people');
@@ -375,7 +376,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
   const haulingLine = h('p', { class: 'trait-sum hauling' });
   const customerHead = h('div', { class: 'sub-h cap' }, 'Their customers');
   const customerBox = h('div', { class: 'list customers' });
-  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, winterLine, routineLine, haulingLine, customerHead, customerBox, payHead, payBox,sourceExperienceLine, heardHead, heardBox);
+  traitSec.body.append(traitSummary, traitBox, h('div', { class: 'sub-h cap' }, 'Skills'), skillExplanation, skillBox, techniqueText, tradeLine, winterLine, routineLine, haulingLine, customerHead, customerBox, payHead, payBox,sourceExperienceLine,routeExperienceLine, heardHead, heardBox);
   const heardList = new KeyedList<HeardView, { el: HTMLElement; text: HTMLElement; via: HTMLElement }>(
     heardBox,
     () => {
@@ -568,6 +569,7 @@ export function createPersonSections(ctx: UICtx, hooks: SectionHooks): PersonSec
         setHidden(payHead, v.payoffs.length === 0);
         payList.sync(v.payoffs, (s) => s.key);
         setText(sourceExperienceLine,(v.sourceExperience??[]).join(' '));setHidden(sourceExperienceLine,!v.sourceExperience?.length);
+        setText(routeExperienceLine,(v.routeExperience??[]).join(' '));setHidden(routeExperienceLine,!v.routeExperience?.length);
         setHidden(heardHead, v.heard.length === 0);
         heardList.sync(v.heard, (r) => `${r.about}:${r.text}`);
       }

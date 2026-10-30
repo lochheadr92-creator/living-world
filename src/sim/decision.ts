@@ -1,4 +1,5 @@
 import { relocationOptions } from './relocation';
+import {applyRouteExperience} from './route_learning';
 import { whileObserving } from './lifechanges';
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
@@ -57,6 +58,7 @@ function collectOptions(world: World, p: Person, collect: boolean, observer: boo
   workshopToolOptions(ctx);
   socialOptions(ctx);
   relocationOptions(ctx);
+  applyRouteExperience(ctx);
   journeyOptions(ctx);
   scopeWorkOptions(ctx);
   if (probe.on) {

@@ -5,6 +5,7 @@ import {actionScopeOn,setActionScope} from '../../src/sim/action_scope';
 import {journeysOn,setJourneys} from '../../src/sim/journey_supplies';
 import {journeyRecoveryOn,setJourneyRecovery} from '../../src/sim/journey_recovery';
 import {sourceLearningOn,setSourceLearning} from '../../src/sim/source_learning';
+import {routeLearningOn,setRouteLearning} from '../../src/sim/route_learning';
 import {storedWaterOn,setStoredWater} from '../../src/sim/stored_water_access';
 import { learnerInstructionOn, setLearnerInstruction } from '../../src/sim/techniques';
 import { civicBenefitOn, setCivicBenefit, civicFoodBenefitOn, setCivicFoodBenefit } from '../../src/sim/civic_benefit';
@@ -317,6 +318,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-journeys')return {spec:label,summary:'remove personal trip provisioning, retained work purpose and carried provision estimates',install(){const was=journeysOn();setJourneys(false);return ()=>setJourneys(was);}};
   if(kind==='rich-no-journey-recovery')return {spec:label,summary:'remove personally failed trip source alternatives and their bounded abandonment',install(){const was=journeyRecoveryOn();setJourneyRecovery(false);return ()=>setJourneyRecovery(was);}};
   if(kind==='rich-no-source-learning')return {spec:label,summary:'remove source-specific gathering experience and firsthand correction; retain category payoff',install(){const was=sourceLearningOn();setSourceLearning(false);return ()=>setSourceLearning(was);}};
+  if(kind==='rich-no-route-learning')return {spec:label,summary:'remove personal route experience and bounded reconsideration intervals; preserve ordinary failure handling',install(){const was=routeLearningOn();setRouteLearning(false);return ()=>setRouteLearning(was);}};
   if(kind==='rich-no-stored-water')return {spec:label,summary:'remove household stored-water drinking offers',install(){const was=storedWaterOn();setStoredWater(false);return ()=>setStoredWater(was);}};
   if (kind === 'rich-no-resident-care') return {spec:label,summary:'remove remembered indoor contact and resident care-return offers',install(){const was=residentCareOn();setResidentCare(false);return ()=>setResidentCare(was);}};
   if (kind === 'rich-no-craft-capacity') return {spec:label,summary:'restore pre-consumption capacity checking when a hand tool finishes; no effect below 58',install(){const was=craftCapacityOn();setCraftCapacity(false);return ()=>setCraftCapacity(was);}};

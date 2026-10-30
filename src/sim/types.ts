@@ -160,6 +160,8 @@ export interface Failure {
   tick: number;
   reason: string;
   count: number;
+  route?:import('./route_learning').RouteExperience;
+  resolved?:true;
 }
 
 export interface LogEntry {

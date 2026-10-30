@@ -2,6 +2,13 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **76** adds bounded approach-specific route experience in the existing failure owner. Repeated actual path failures
+defer the same approach; physical arrival corrects it without certifying stock or permission. Staged alternative stone
+work and later recovered wood feed real crafting, while the original missing-stone building case remains incomplete.
+Full suite 259 files / 1,742 tests, final focused 15/15, rendered 8/8 and build pass. All fixed five-day ordinary worlds
+had zero qualifying failures; no ordinary activation or aggregate benefit claim. See `ROUTE_LEARNING.md`. Predecessor
+75 was pinned at `6bd1a91`. Task-specific helper reliability and conflicting reports remain open.
+
 Rules **75** repairs the knowledge boundary after failed gathering travel: no unseen stock refresh or last-taker
 attribution before actual arrival. Existing logs state the uncertainty. Full suite 257 files / 1,732 tests, rendered
 6/6, typecheck/build pass; zero gathering travel failures in the three ordinary five-day worlds. The staged repeat-route
