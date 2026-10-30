@@ -24,6 +24,7 @@ import { toolOf } from './tools';
 import { stageOf } from './people';
 import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind, World } from './types';
 import { hashUnit } from './rng';
+import { keepCurrent } from './kept_target';
 
 import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
@@ -484,7 +485,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
   found.sort((a, c) => a.e - c.e);
   let total = 0;
   for (const f of found) total += f.n;
-  for (const f of found.slice(0, 2)) {
+  for (const f of keepCurrent(ctx, found, 2, (x) => `collect:${x.b.id}:${item}`)) {
     const take = Math.min(f.n, Math.max(1, Math.ceil(unmet)), invRoom(ctx.world, p, item as ItemKind));
     if (take < 1) continue;
     collectLeaf(ctx, f.b, { [item]: take } as Items, base * 0.95, why, tag);

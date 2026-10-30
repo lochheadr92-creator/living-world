@@ -32,6 +32,7 @@ import { isFreeLand } from './registry';
 import { affinityOf } from './relations';
 import { hashUnit } from './rng';
 import { hauntsFor, leisureOn, pickHaunt } from './leisure';
+import { keepCurrent } from './kept_target';
 import { leaveHeaviestOption } from './leave_heaviest';
 import type { Belief, BeliefKind, BuildingType, Commitment, FoodKind, Items, ItemKind, Person, SourceType, ToolKind, World } from './types';
 import { hasFoodFetch } from './food_help';
@@ -389,7 +390,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
   if (usesMaterialStock(world, tag === 'promise' ? 'promise' : 'plan')) {
     const stores = rememberedMaterialStores(world, p, item).map(b => ({ b, e: eta(ctx, b.x, b.y) }));
     stores.sort((a, b) => a.e - b.e);
-    for (const { b } of stores.slice(0, 2)) collectMaterialStock(ctx, b, item, want, base, why, tag);
+    for (const { b } of keepCurrent(ctx, stores, 2, (x) => `collect:${x.b.id}:${item}`)) collectMaterialStock(ctx, b, item, want, base, why, tag);
   }
   const tm = traitMods(p);
   const kinds: BeliefKind[] = RAW_KINDS[item];
@@ -408,7 +409,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
   if (cands.length) seedStorageOption(ctx, item, base, why, nightMult(ctx) * weatherMult(ctx));
   if (cands.length && world.settings.dynamics === 'rich' && runsRulesVersion(world, 58) && invRoom(world, p, item) < 1)
     addBlocked(ctx, 'gather', `Get ${item} ${why}`, 0, `no room in my pack for one ${item}`, tag);
-  for (const c of cands.slice(0, 2)) {
+  for (const c of keepCurrent(ctx, cands, 2, (x) => `gather:${x.b.id}`)) {
     const type = c.b.kind as SourceType;
     const room = roomFor(p.inv, 9999, item) && invRoom(world, p, item);
     if (room < 1) continue;

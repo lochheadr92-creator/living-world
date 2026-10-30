@@ -1,4 +1,5 @@
 import { newActivity } from './activities';
+import { keepCurrent } from './kept_target';
 import { hasNightWaitBoundary } from './night_wait';
 import { DAY } from './constants';
 import { isRich } from './mood';
@@ -178,7 +179,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     cands.push({ b, est: u.est, e, val, score });
   }
   cands.sort((a, b) => b.score - a.score);
-  for (const c of cands.slice(0, 3)) {
+  for (const c of keepCurrent(ctx, cands, 3, (x) => `gather:${x.b.id}`)) {
     const b = c.b;
     const type = b.kind as SourceType;
     const room = invRoom(world, p, type === 'fish_spot' ? 'fish' : type === 'wild_grain' ? 'grain' : type === 'fruit_tree' ? 'fruit' : 'berries');

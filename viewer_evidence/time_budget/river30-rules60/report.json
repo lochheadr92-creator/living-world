@@ -1,0 +1,1751 @@
+{
+  "seed": "river",
+  "days": 30,
+  "immigration": false,
+  "rules": 60,
+  "tick": 72000,
+  "stop": "horizon",
+  "seconds": 191.127,
+  "pure": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "alive": 31,
+  "deaths": 0,
+  "livingTicks": 2138229,
+  "share": {
+    "sleep": 0.197,
+    "needs": 0.2113,
+    "travel": 0.3972,
+    "work": 0.106,
+    "social": 0.0686,
+    "leisure": 0.0107,
+    "danger": 0.0011,
+    "waiting": 0.0025,
+    "idle": 0.0057
+  },
+  "criticalShare": 0.0332,
+  "lostShare": 0.3089,
+  "abortedJourneys": 2294,
+  "ends": {
+    "success": 7879,
+    "unknown": 2900,
+    "interrupted": 4290,
+    "partial": 791,
+    "failed": 2168
+  },
+  "interruptedBy": {
+    "better": 4032,
+    "need": 153,
+    "danger": 203
+  },
+  "interruptions": {
+    "rest/work -> drink (better)": {
+      "n": 169,
+      "ticks": 50018,
+      "travelTicks": 1910,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/travel -> gather (better)": {
+      "n": 495,
+      "ticks": 42901,
+      "travelTicks": 43396,
+      "oldKeyStillOffered": 58,
+      "oldTargetStillBelieved": 180
+    },
+    "rest/work -> gather (better)": {
+      "n": 154,
+      "ticks": 39773,
+      "travelTicks": 2637,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "rest/work -> eat (better)": {
+      "n": 80,
+      "ticks": 19816,
+      "travelTicks": 1789,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "rest/work -> eat_store (better)": {
+      "n": 50,
+      "ticks": 18447,
+      "travelTicks": 994,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "rest/work -> sleep (better)": {
+      "n": 112,
+      "ticks": 14527,
+      "travelTicks": 1988,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/work -> drink (better)": {
+      "n": 83,
+      "ticks": 12178,
+      "travelTicks": 5071,
+      "oldKeyStillOffered": 27,
+      "oldTargetStillBelieved": 83
+    },
+    "gather/work -> gather (better)": {
+      "n": 90,
+      "ticks": 11968,
+      "travelTicks": 6319,
+      "oldKeyStillOffered": 38,
+      "oldTargetStillBelieved": 90
+    },
+    "gather/work -> eat (better)": {
+      "n": 62,
+      "ticks": 11241,
+      "travelTicks": 5302,
+      "oldKeyStillOffered": 17,
+      "oldTargetStillBelieved": 62
+    },
+    "rest/work -> socialize (better)": {
+      "n": 48,
+      "ticks": 10159,
+      "travelTicks": 565,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/work -> sleep (better)": {
+      "n": 66,
+      "ticks": 8598,
+      "travelTicks": 3535,
+      "oldKeyStillOffered": 43,
+      "oldTargetStillBelieved": 66
+    },
+    "rest/work -> rest (better)": {
+      "n": 36,
+      "ticks": 7648,
+      "travelTicks": 532,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/work -> socialize (better)": {
+      "n": 64,
+      "ticks": 7582,
+      "travelTicks": 3870,
+      "oldKeyStillOffered": 19,
+      "oldTargetStillBelieved": 64
+    },
+    "rest/work -> give (better)": {
+      "n": 44,
+      "ticks": 6972,
+      "travelTicks": 961,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/travel -> flee (danger)": {
+      "n": 118,
+      "ticks": 5946,
+      "travelTicks": 6064,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "rest/work -> wander (better)": {
+      "n": 19,
+      "ticks": 5453,
+      "travelTicks": 101,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/travel -> socialize (better)": {
+      "n": 72,
+      "ticks": 5208,
+      "travelTicks": 5280,
+      "oldKeyStillOffered": 19,
+      "oldTargetStillBelieved": 42
+    },
+    "warm/work -> rest (better)": {
+      "n": 28,
+      "ticks": 5117,
+      "travelTicks": 887,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/work -> rest (better)": {
+      "n": 39,
+      "ticks": 4930,
+      "travelTicks": 1722,
+      "oldKeyStillOffered": 18,
+      "oldTargetStillBelieved": 39
+    },
+    "rest/work -> warm (better)": {
+      "n": 18,
+      "ticks": 4859,
+      "travelTicks": 84,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "attend/work -> drink (better)": {
+      "n": 24,
+      "ticks": 4406,
+      "travelTicks": 2774,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/travel -> sleep (better)": {
+      "n": 51,
+      "ticks": 4343,
+      "travelTicks": 4394,
+      "oldKeyStillOffered": 31,
+      "oldTargetStillBelieved": 32
+    },
+    "gather/work -> give (better)": {
+      "n": 40,
+      "ticks": 4228,
+      "travelTicks": 2066,
+      "oldKeyStillOffered": 18,
+      "oldTargetStillBelieved": 40
+    },
+    "warm/work -> drink (better)": {
+      "n": 21,
+      "ticks": 3775,
+      "travelTicks": 334,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "repair/work -> gather (better)": {
+      "n": 22,
+      "ticks": 3711,
+      "travelTicks": 1784,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "wander/travel -> sleep (better)": {
+      "n": 43,
+      "ticks": 3540,
+      "travelTicks": 3583,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "socialize/travel -> gather (better)": {
+      "n": 60,
+      "ticks": 3518,
+      "travelTicks": 3578,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "explore/travel -> sleep (better)": {
+      "n": 17,
+      "ticks": 3470,
+      "travelTicks": 3487,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "rest/work -> deposit (better)": {
+      "n": 15,
+      "ticks": 3416,
+      "travelTicks": 252,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "explore/travel -> flee (danger)": {
+      "n": 22,
+      "ticks": 3327,
+      "travelTicks": 3349,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "socialize/travel -> socialize (better)": {
+      "n": 66,
+      "ticks": 3257,
+      "travelTicks": 3323,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "sleep/work -> drink (need)": {
+      "n": 6,
+      "ticks": 3109,
+      "travelTicks": 865,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "sleep/work -> gather (need)": {
+      "n": 8,
+      "ticks": 3021,
+      "travelTicks": 1144,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/travel -> eat (better)": {
+      "n": 50,
+      "ticks": 2965,
+      "travelTicks": 3015,
+      "oldKeyStillOffered": 15,
+      "oldTargetStillBelieved": 31
+    },
+    "explore/travel -> gather (better)": {
+      "n": 15,
+      "ticks": 2791,
+      "travelTicks": 2806,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "wander/travel -> socialize (better)": {
+      "n": 39,
+      "ticks": 2664,
+      "travelTicks": 2703,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "give/travel -> gather (better)": {
+      "n": 47,
+      "ticks": 2530,
+      "travelTicks": 2577,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/work -> flee (danger)": {
+      "n": 22,
+      "ticks": 2528,
+      "travelTicks": 1844,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "warm/work -> sleep (better)": {
+      "n": 18,
+      "ticks": 2506,
+      "travelTicks": 1040,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "rest/work -> drink (need)": {
+      "n": 14,
+      "ticks": 2505,
+      "travelTicks": 636,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "explore/travel -> eat (better)": {
+      "n": 10,
+      "ticks": 2490,
+      "travelTicks": 2500,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "flee/travel -> gather (better)": {
+      "n": 43,
+      "ticks": 2448,
+      "travelTicks": 2491,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "attend/work -> attend (better)": {
+      "n": 15,
+      "ticks": 2369,
+      "travelTicks": 1242,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "warm/work -> gather (better)": {
+      "n": 15,
+      "ticks": 2333,
+      "travelTicks": 651,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/travel -> drink (better)": {
+      "n": 40,
+      "ticks": 2331,
+      "travelTicks": 2371,
+      "oldKeyStillOffered": 10,
+      "oldTargetStillBelieved": 23
+    },
+    "sleep/work -> eat (need)": {
+      "n": 5,
+      "ticks": 2236,
+      "travelTicks": 502,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/travel -> give (better)": {
+      "n": 33,
+      "ticks": 2172,
+      "travelTicks": 2205,
+      "oldKeyStillOffered": 11,
+      "oldTargetStillBelieved": 18
+    },
+    "build/work -> gather (better)": {
+      "n": 14,
+      "ticks": 2133,
+      "travelTicks": 497,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "attend/work -> socialize (better)": {
+      "n": 10,
+      "ticks": 1907,
+      "travelTicks": 1284,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "attend/work -> gather (better)": {
+      "n": 11,
+      "ticks": 1764,
+      "travelTicks": 671,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "repair/work -> harvest (better)": {
+      "n": 15,
+      "ticks": 1747,
+      "travelTicks": 483,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "flee/travel -> socialize (better)": {
+      "n": 30,
+      "ticks": 1731,
+      "travelTicks": 1761,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "explore/travel -> drink (better)": {
+      "n": 8,
+      "ticks": 1710,
+      "travelTicks": 1718,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "build/work -> drink (better)": {
+      "n": 9,
+      "ticks": 1684,
+      "travelTicks": 234,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "gather/work -> rest (need)": {
+      "n": 9,
+      "ticks": 1664,
+      "travelTicks": 836,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "warm/work -> eat (better)": {
+      "n": 10,
+      "ticks": 1647,
+      "travelTicks": 259,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "attend/work -> eat (better)": {
+      "n": 9,
+      "ticks": 1592,
+      "travelTicks": 725,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "give/travel -> give (better)": {
+      "n": 28,
+      "ticks": 1556,
+      "travelTicks": 1584,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "attend/work -> deposit (better)": {
+      "n": 11,
+      "ticks": 1539,
+      "travelTicks": 485,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    },
+    "drink/work -> gather (better)": {
+      "n": 22,
+      "ticks": 1441,
+      "travelTicks": 1075,
+      "oldKeyStillOffered": 0,
+      "oldTargetStillBelieved": 0
+    }
+  },
+  "lostBy": {
+    "rest: something better came up": 185035,
+    "gather: something better came up": 133061,
+    "gather: nothing left": 38847,
+    "warm: something better came up": 22205,
+    "attend: something better came up": 20905,
+    "wander: something better came up": 17985,
+    "explore: something better came up": 15566,
+    "repair: something better came up": 15287,
+    "harvest: cannot carry any more": 13461,
+    "give: something better came up": 12717,
+    "build: something better came up": 11741,
+    "socialize: something better came up": 10248,
+    "flee: something better came up": 10070,
+    "gather: danger nearby": 8692,
+    "drink: something better came up": 8545,
+    "rest: they are inside a different space": 6997,
+    "gather: someone else is already taking it": 6219,
+    "sleep: a more urgent need (hunger)": 5454,
+    "fuel_fire: something better came up": 5346,
+    "deposit: something better came up": 5118,
+    "give: they had no room to carry it": 4474,
+    "gather: it is gone": 4183,
+    "harvest: something better came up": 3669,
+    "explore: danger nearby": 3349,
+    "craft: something better came up": 3348,
+    "sleep: a more urgent need (thirst)": 3115,
+    "haul: something better came up": 3105,
+    "till: something better came up": 2662,
+    "withdraw: there was nothing to take": 2566,
+    "operate: something better came up": 2552,
+    "socialize: they walked away": 2143,
+    "rest: a more urgent need (thirst)": 2087,
+    "rest: a more urgent need (hunger)": 1963,
+    "plan_site: too many projects under way already": 1802,
+    "plan_site: something better came up": 1768,
+    "drink: a more urgent need (warmth)": 1760,
+    "rest: a more urgent need (energy)": 1681,
+    "rest: a more urgent need (warmth)": 1541,
+    "gather: a more urgent need (warmth)": 1490,
+    "visit: they needed something I did not have on me": 1472
+  },
+  "households": [
+    {
+      "hh": 1103,
+      "members": [
+        "Mira",
+        "Emre",
+        "Viktor",
+        "Theo",
+        "Jonas"
+      ],
+      "ticks": 338263,
+      "leisure": 0.017,
+      "social": 0.102,
+      "critical": 0.042,
+      "lost": 0.312
+    },
+    {
+      "hh": 1110,
+      "members": [
+        "Ben",
+        "Zia"
+      ],
+      "ticks": 144000,
+      "leisure": 0,
+      "social": 0.06,
+      "critical": 0.009,
+      "lost": 0.287
+    },
+    {
+      "hh": 1114,
+      "members": [
+        "Milo"
+      ],
+      "ticks": 72000,
+      "leisure": 0.001,
+      "social": 0.048,
+      "critical": 0.05,
+      "lost": 0.34
+    },
+    {
+      "hh": 1117,
+      "members": [
+        "Cora",
+        "Abel",
+        "Ivo",
+        "Eli",
+        "Wilma"
+      ],
+      "ticks": 329863,
+      "leisure": 0.006,
+      "social": 0.073,
+      "critical": 0.041,
+      "lost": 0.315
+    },
+    {
+      "hh": 1123,
+      "members": [
+        "Ines"
+      ],
+      "ticks": 72000,
+      "leisure": 0,
+      "social": 0.062,
+      "critical": 0.025,
+      "lost": 0.296
+    },
+    {
+      "hh": 1126,
+      "members": [
+        "Tomas"
+      ],
+      "ticks": 72000,
+      "leisure": 0.001,
+      "social": 0.053,
+      "critical": 0.034,
+      "lost": 0.264
+    },
+    {
+      "hh": 1129,
+      "members": [
+        "Kai",
+        "Petra"
+      ],
+      "ticks": 144000,
+      "leisure": 0,
+      "social": 0.058,
+      "critical": 0.029,
+      "lost": 0.334
+    },
+    {
+      "hh": 1133,
+      "members": [
+        "Yan",
+        "Cole"
+      ],
+      "ticks": 144000,
+      "leisure": 0,
+      "social": 0.057,
+      "critical": 0.064,
+      "lost": 0.337
+    },
+    {
+      "hh": 1136,
+      "members": [
+        "Ivy",
+        "Basil",
+        "Thea",
+        "Nico"
+      ],
+      "ticks": 288000,
+      "leisure": 0.027,
+      "social": 0.059,
+      "critical": 0.011,
+      "lost": 0.283
+    },
+    {
+      "hh": 1141,
+      "members": [
+        "Talia"
+      ],
+      "ticks": 72000,
+      "leisure": 0,
+      "social": 0.045,
+      "critical": 0.031,
+      "lost": 0.279
+    },
+    {
+      "hh": 1143,
+      "members": [
+        "Alma",
+        "Jax",
+        "Edda",
+        "Faye"
+      ],
+      "ticks": 288000,
+      "leisure": 0.025,
+      "social": 0.069,
+      "critical": 0.031,
+      "lost": 0.309
+    },
+    {
+      "hh": 1148,
+      "members": [
+        "Lena",
+        "Arlo",
+        "Hana"
+      ],
+      "ticks": 174103,
+      "leisure": 0.001,
+      "social": 0.064,
+      "critical": 0.039,
+      "lost": 0.332
+    }
+  ],
+  "people": [
+    {
+      "name": "Mira",
+      "hh": 1103,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.234,
+        "needs": 0.153,
+        "travel": 0.393,
+        "work": 0.138,
+        "social": 0.075,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.002,
+        "idle": 0.006
+      },
+      "criticalShare": 0.019,
+      "criticalBy": {
+        "hunger": 126,
+        "warmth": 1008,
+        "energy": 269
+      },
+      "ends": {
+        "success": 226,
+        "unknown": 115,
+        "interrupted": 163,
+        "partial": 43,
+        "failed": 105
+      },
+      "lostShare": 0.323,
+      "abortedJourneys": 93,
+      "workRuns": 179,
+      "medianWorkRun": 36,
+      "longestWorkRun": 353
+    },
+    {
+      "name": "Emre",
+      "hh": 1103,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.222,
+        "needs": 0.17,
+        "travel": 0.399,
+        "work": 0.136,
+        "social": 0.065,
+        "leisure": 0,
+        "danger": 0.001,
+        "waiting": 0.001,
+        "idle": 0.006
+      },
+      "criticalShare": 0.076,
+      "criticalBy": {
+        "safety": 132,
+        "hunger": 1941,
+        "warmth": 1497,
+        "energy": 1798,
+        "thirst": 76
+      },
+      "ends": {
+        "partial": 41,
+        "interrupted": 205,
+        "success": 239,
+        "unknown": 91,
+        "failed": 91
+      },
+      "lostShare": 0.361,
+      "abortedJourneys": 129,
+      "workRuns": 166,
+      "medianWorkRun": 48,
+      "longestWorkRun": 284
+    },
+    {
+      "name": "Viktor",
+      "hh": 1103,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.136,
+        "needs": 0.271,
+        "travel": 0.359,
+        "work": 0.07,
+        "social": 0.117,
+        "leisure": 0.041,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.07,
+      "criticalBy": {
+        "warmth": 1266,
+        "thirst": 55,
+        "hunger": 2915,
+        "energy": 750,
+        "safety": 47
+      },
+      "ends": {
+        "partial": 17,
+        "success": 230,
+        "interrupted": 156,
+        "unknown": 173,
+        "failed": 54
+      },
+      "lostShare": 0.277,
+      "abortedJourneys": 89,
+      "workRuns": 53,
+      "medianWorkRun": 86,
+      "longestWorkRun": 263
+    },
+    {
+      "name": "Theo",
+      "hh": 1103,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.163,
+        "needs": 0.236,
+        "travel": 0.342,
+        "work": 0.097,
+        "social": 0.135,
+        "leisure": 0.023,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.027,
+      "criticalBy": {
+        "warmth": 1435,
+        "hunger": 109,
+        "energy": 387
+      },
+      "ends": {
+        "partial": 18,
+        "unknown": 207,
+        "interrupted": 137,
+        "success": 199,
+        "failed": 68
+      },
+      "lostShare": 0.278,
+      "abortedJourneys": 73,
+      "workRuns": 81,
+      "medianWorkRun": 70,
+      "longestWorkRun": 624
+    },
+    {
+      "name": "Ben",
+      "hh": 1110,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.21,
+        "needs": 0.183,
+        "travel": 0.386,
+        "work": 0.149,
+        "social": 0.056,
+        "leisure": 0,
+        "danger": 0.003,
+        "waiting": 0.005,
+        "idle": 0.007
+      },
+      "criticalShare": 0.007,
+      "criticalBy": {
+        "warmth": 327,
+        "safety": 198
+      },
+      "ends": {
+        "success": 349,
+        "interrupted": 131,
+        "unknown": 83,
+        "partial": 20,
+        "failed": 108
+      },
+      "lostShare": 0.268,
+      "abortedJourneys": 58,
+      "workRuns": 304,
+      "medianWorkRun": 22,
+      "longestWorkRun": 389
+    },
+    {
+      "name": "Zia",
+      "hh": 1110,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.215,
+        "needs": 0.171,
+        "travel": 0.416,
+        "work": 0.12,
+        "social": 0.065,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.006,
+        "idle": 0.007
+      },
+      "criticalShare": 0.01,
+      "criticalBy": {
+        "warmth": 689
+      },
+      "ends": {
+        "partial": 24,
+        "unknown": 75,
+        "success": 298,
+        "failed": 117,
+        "interrupted": 127
+      },
+      "lostShare": 0.306,
+      "abortedJourneys": 60,
+      "workRuns": 225,
+      "medianWorkRun": 31,
+      "longestWorkRun": 199
+    },
+    {
+      "name": "Milo",
+      "hh": 1114,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.235,
+        "needs": 0.179,
+        "travel": 0.461,
+        "work": 0.068,
+        "social": 0.048,
+        "leisure": 0.001,
+        "danger": 0,
+        "waiting": 0.003,
+        "idle": 0.006
+      },
+      "criticalShare": 0.05,
+      "criticalBy": {
+        "warmth": 1128,
+        "thirst": 20,
+        "safety": 124,
+        "hunger": 1489,
+        "energy": 845
+      },
+      "ends": {
+        "success": 254,
+        "failed": 101,
+        "interrupted": 135,
+        "unknown": 55,
+        "partial": 19
+      },
+      "lostShare": 0.34,
+      "abortedJourneys": 71,
+      "workRuns": 182,
+      "medianWorkRun": 24,
+      "longestWorkRun": 107
+    },
+    {
+      "name": "Cora",
+      "hh": 1117,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.211,
+        "needs": 0.179,
+        "travel": 0.421,
+        "work": 0.11,
+        "social": 0.071,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.003,
+        "idle": 0.006
+      },
+      "criticalShare": 0.088,
+      "criticalBy": {
+        "hunger": 2449,
+        "warmth": 2046,
+        "energy": 1787,
+        "thirst": 87
+      },
+      "ends": {
+        "success": 229,
+        "failed": 97,
+        "partial": 23,
+        "unknown": 83,
+        "interrupted": 171
+      },
+      "lostShare": 0.364,
+      "abortedJourneys": 100,
+      "workRuns": 140,
+      "medianWorkRun": 38,
+      "longestWorkRun": 295
+    },
+    {
+      "name": "Abel",
+      "hh": 1117,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.238,
+        "needs": 0.138,
+        "travel": 0.402,
+        "work": 0.142,
+        "social": 0.074,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.006
+      },
+      "criticalShare": 0.031,
+      "criticalBy": {
+        "warmth": 2124,
+        "safety": 55,
+        "hunger": 62,
+        "thirst": 2
+      },
+      "ends": {
+        "failed": 72,
+        "success": 277,
+        "partial": 34,
+        "interrupted": 151,
+        "unknown": 110
+      },
+      "lostShare": 0.289,
+      "abortedJourneys": 93,
+      "workRuns": 219,
+      "medianWorkRun": 27,
+      "longestWorkRun": 209
+    },
+    {
+      "name": "Ivo",
+      "hh": 1117,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.187,
+        "needs": 0.237,
+        "travel": 0.433,
+        "work": 0.073,
+        "social": 0.05,
+        "leisure": 0.008,
+        "danger": 0.006,
+        "waiting": 0,
+        "idle": 0.006
+      },
+      "criticalShare": 0.02,
+      "criticalBy": {
+        "warmth": 1394,
+        "safety": 45,
+        "thirst": 13
+      },
+      "ends": {
+        "partial": 43,
+        "failed": 47,
+        "success": 304,
+        "interrupted": 144,
+        "unknown": 82
+      },
+      "lostShare": 0.281,
+      "abortedJourneys": 90,
+      "workRuns": 192,
+      "medianWorkRun": 16,
+      "longestWorkRun": 195
+    },
+    {
+      "name": "Eli",
+      "hh": 1117,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.164,
+        "needs": 0.254,
+        "travel": 0.351,
+        "work": 0.117,
+        "social": 0.084,
+        "leisure": 0.021,
+        "danger": 0.004,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.025,
+      "criticalBy": {
+        "safety": 98,
+        "warmth": 1630,
+        "thirst": 50
+      },
+      "ends": {
+        "partial": 25,
+        "success": 249,
+        "unknown": 129,
+        "interrupted": 138,
+        "failed": 44
+      },
+      "lostShare": 0.272,
+      "abortedJourneys": 74,
+      "workRuns": 109,
+      "medianWorkRun": 62,
+      "longestWorkRun": 356
+    },
+    {
+      "name": "Ines",
+      "hh": 1123,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.24,
+        "needs": 0.139,
+        "travel": 0.42,
+        "work": 0.132,
+        "social": 0.062,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.002,
+        "idle": 0.005
+      },
+      "criticalShare": 0.025,
+      "criticalBy": {
+        "warmth": 1284,
+        "safety": 48,
+        "hunger": 422,
+        "thirst": 25
+      },
+      "ends": {
+        "success": 217,
+        "interrupted": 127,
+        "unknown": 69,
+        "failed": 62,
+        "partial": 21
+      },
+      "lostShare": 0.296,
+      "abortedJourneys": 58,
+      "workRuns": 126,
+      "medianWorkRun": 63,
+      "longestWorkRun": 288
+    },
+    {
+      "name": "Tomas",
+      "hh": 1126,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.218,
+        "needs": 0.172,
+        "travel": 0.41,
+        "work": 0.14,
+        "social": 0.053,
+        "leisure": 0.001,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.034,
+      "criticalBy": {
+        "safety": 142,
+        "hunger": 870,
+        "warmth": 1187,
+        "thirst": 22,
+        "energy": 201
+      },
+      "ends": {
+        "success": 270,
+        "interrupted": 128,
+        "unknown": 66,
+        "failed": 58,
+        "partial": 18
+      },
+      "lostShare": 0.264,
+      "abortedJourneys": 59,
+      "workRuns": 173,
+      "medianWorkRun": 47,
+      "longestWorkRun": 518
+    },
+    {
+      "name": "Kai",
+      "hh": 1129,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.202,
+        "needs": 0.208,
+        "travel": 0.395,
+        "work": 0.112,
+        "social": 0.063,
+        "leisure": 0,
+        "danger": 0.003,
+        "waiting": 0.011,
+        "idle": 0.006
+      },
+      "criticalShare": 0.03,
+      "criticalBy": {
+        "safety": 103,
+        "hunger": 256,
+        "warmth": 1428,
+        "thirst": 113,
+        "energy": 261
+      },
+      "ends": {
+        "success": 254,
+        "unknown": 85,
+        "interrupted": 165,
+        "failed": 87,
+        "partial": 20
+      },
+      "lostShare": 0.35,
+      "abortedJourneys": 86,
+      "workRuns": 165,
+      "medianWorkRun": 43,
+      "longestWorkRun": 200
+    },
+    {
+      "name": "Petra",
+      "hh": 1129,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.203,
+        "needs": 0.208,
+        "travel": 0.396,
+        "work": 0.127,
+        "social": 0.053,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.005,
+        "idle": 0.007
+      },
+      "criticalShare": 0.027,
+      "criticalBy": {
+        "warmth": 1444,
+        "thirst": 16,
+        "hunger": 485
+      },
+      "ends": {
+        "interrupted": 125,
+        "partial": 22,
+        "success": 346,
+        "unknown": 72,
+        "failed": 85
+      },
+      "lostShare": 0.317,
+      "abortedJourneys": 49,
+      "workRuns": 300,
+      "medianWorkRun": 24,
+      "longestWorkRun": 125
+    },
+    {
+      "name": "Yan",
+      "hh": 1133,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.215,
+        "needs": 0.195,
+        "travel": 0.416,
+        "work": 0.106,
+        "social": 0.061,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.002,
+        "idle": 0.004
+      },
+      "criticalShare": 0.083,
+      "criticalBy": {
+        "warmth": 1052,
+        "hunger": 2644,
+        "energy": 2250
+      },
+      "ends": {
+        "success": 203,
+        "interrupted": 154,
+        "partial": 27,
+        "failed": 45,
+        "unknown": 74
+      },
+      "lostShare": 0.339,
+      "abortedJourneys": 62,
+      "workRuns": 150,
+      "medianWorkRun": 50,
+      "longestWorkRun": 153
+    },
+    {
+      "name": "Cole",
+      "hh": 1133,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.201,
+        "needs": 0.202,
+        "travel": 0.436,
+        "work": 0.092,
+        "social": 0.053,
+        "leisure": 0,
+        "danger": 0.001,
+        "waiting": 0.009,
+        "idle": 0.006
+      },
+      "criticalShare": 0.044,
+      "criticalBy": {
+        "warmth": 1522,
+        "hunger": 1137,
+        "thirst": 26,
+        "energy": 506
+      },
+      "ends": {
+        "success": 254,
+        "partial": 29,
+        "unknown": 73,
+        "interrupted": 154,
+        "failed": 82
+      },
+      "lostShare": 0.335,
+      "abortedJourneys": 83,
+      "workRuns": 185,
+      "medianWorkRun": 29,
+      "longestWorkRun": 139
+    },
+    {
+      "name": "Ivy",
+      "hh": 1136,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.229,
+        "needs": 0.157,
+        "travel": 0.439,
+        "work": 0.098,
+        "social": 0.068,
+        "leisure": 0,
+        "danger": 0.001,
+        "waiting": 0.002,
+        "idle": 0.006
+      },
+      "criticalShare": 0.019,
+      "criticalBy": {
+        "warmth": 817,
+        "energy": 500,
+        "safety": 65
+      },
+      "ends": {
+        "partial": 52,
+        "failed": 68,
+        "interrupted": 140,
+        "success": 278,
+        "unknown": 100
+      },
+      "lostShare": 0.288,
+      "abortedJourneys": 81,
+      "workRuns": 209,
+      "medianWorkRun": 23,
+      "longestWorkRun": 196
+    },
+    {
+      "name": "Basil",
+      "hh": 1136,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.225,
+        "needs": 0.163,
+        "travel": 0.452,
+        "work": 0.102,
+        "social": 0.043,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.01,
+        "idle": 0.006
+      },
+      "criticalShare": 0.017,
+      "criticalBy": {
+        "safety": 80,
+        "warmth": 590,
+        "energy": 559
+      },
+      "ends": {
+        "success": 317,
+        "partial": 48,
+        "interrupted": 140,
+        "unknown": 65,
+        "failed": 49
+      },
+      "lostShare": 0.269,
+      "abortedJourneys": 82,
+      "workRuns": 254,
+      "medianWorkRun": 23,
+      "longestWorkRun": 131
+    },
+    {
+      "name": "Thea",
+      "hh": 1136,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.129,
+        "needs": 0.345,
+        "travel": 0.356,
+        "work": 0.071,
+        "social": 0.069,
+        "leisure": 0.025,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.006
+      },
+      "criticalShare": 0.004,
+      "criticalBy": {
+        "safety": 29,
+        "warmth": 279
+      },
+      "ends": {
+        "failed": 71,
+        "partial": 33,
+        "success": 274,
+        "unknown": 116,
+        "interrupted": 125
+      },
+      "lostShare": 0.3,
+      "abortedJourneys": 73,
+      "workRuns": 118,
+      "medianWorkRun": 32,
+      "longestWorkRun": 184
+    },
+    {
+      "name": "Nico",
+      "hh": 1136,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.11,
+        "needs": 0.386,
+        "travel": 0.33,
+        "work": 0.031,
+        "social": 0.056,
+        "leisure": 0.082,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.004,
+      "criticalBy": {
+        "warmth": 266
+      },
+      "ends": {
+        "partial": 12,
+        "unknown": 94,
+        "interrupted": 117,
+        "success": 306,
+        "failed": 25
+      },
+      "lostShare": 0.277,
+      "abortedJourneys": 42,
+      "workRuns": 35,
+      "medianWorkRun": 50,
+      "longestWorkRun": 192
+    },
+    {
+      "name": "Talia",
+      "hh": 1141,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.229,
+        "needs": 0.161,
+        "travel": 0.418,
+        "work": 0.14,
+        "social": 0.045,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0.002,
+        "idle": 0.006
+      },
+      "criticalShare": 0.031,
+      "criticalBy": {
+        "warmth": 2228
+      },
+      "ends": {
+        "success": 274,
+        "interrupted": 122,
+        "failed": 82,
+        "partial": 23,
+        "unknown": 53
+      },
+      "lostShare": 0.279,
+      "abortedJourneys": 50,
+      "workRuns": 184,
+      "medianWorkRun": 25,
+      "longestWorkRun": 471
+    },
+    {
+      "name": "Alma",
+      "hh": 1143,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.233,
+        "needs": 0.144,
+        "travel": 0.443,
+        "work": 0.102,
+        "social": 0.066,
+        "leisure": 0,
+        "danger": 0.001,
+        "waiting": 0.005,
+        "idle": 0.007
+      },
+      "criticalShare": 0.018,
+      "criticalBy": {
+        "warmth": 1176,
+        "safety": 6,
+        "energy": 113
+      },
+      "ends": {
+        "failed": 111,
+        "success": 347,
+        "unknown": 92,
+        "interrupted": 136,
+        "partial": 36
+      },
+      "lostShare": 0.277,
+      "abortedJourneys": 84,
+      "workRuns": 278,
+      "medianWorkRun": 23,
+      "longestWorkRun": 218
+    },
+    {
+      "name": "Jax",
+      "hh": 1143,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.223,
+        "needs": 0.167,
+        "travel": 0.427,
+        "work": 0.121,
+        "social": 0.05,
+        "leisure": 0,
+        "danger": 0.002,
+        "waiting": 0.003,
+        "idle": 0.006
+      },
+      "criticalShare": 0.02,
+      "criticalBy": {
+        "safety": 231,
+        "warmth": 1178
+      },
+      "ends": {
+        "partial": 34,
+        "success": 298,
+        "failed": 103,
+        "unknown": 80,
+        "interrupted": 135
+      },
+      "lostShare": 0.296,
+      "abortedJourneys": 88,
+      "workRuns": 242,
+      "medianWorkRun": 32,
+      "longestWorkRun": 254
+    },
+    {
+      "name": "Edda",
+      "hh": 1143,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.118,
+        "needs": 0.373,
+        "travel": 0.324,
+        "work": 0.05,
+        "social": 0.072,
+        "leisure": 0.058,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.067,
+      "criticalBy": {
+        "warmth": 1022,
+        "hunger": 2641,
+        "energy": 1156
+      },
+      "ends": {
+        "failed": 34,
+        "partial": 10,
+        "success": 297,
+        "unknown": 120,
+        "interrupted": 130
+      },
+      "lostShare": 0.34,
+      "abortedJourneys": 60,
+      "workRuns": 56,
+      "medianWorkRun": 48,
+      "longestWorkRun": 255
+    },
+    {
+      "name": "Faye",
+      "hh": 1143,
+      "ticks": 72000,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.132,
+        "needs": 0.343,
+        "travel": 0.325,
+        "work": 0.064,
+        "social": 0.088,
+        "leisure": 0.04,
+        "danger": 0.002,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.019,
+      "criticalBy": {
+        "warmth": 1213,
+        "thirst": 37,
+        "safety": 88
+      },
+      "ends": {
+        "failed": 47,
+        "partial": 10,
+        "interrupted": 132,
+        "success": 262,
+        "unknown": 134
+      },
+      "lostShare": 0.322,
+      "abortedJourneys": 59,
+      "workRuns": 66,
+      "medianWorkRun": 71,
+      "longestWorkRun": 164
+    },
+    {
+      "name": "Lena",
+      "hh": 1148,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.224,
+        "needs": 0.167,
+        "travel": 0.448,
+        "work": 0.107,
+        "social": 0.047,
+        "leisure": 0,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.006
+      },
+      "criticalShare": 0.025,
+      "criticalBy": {
+        "safety": 296,
+        "warmth": 1115,
+        "hunger": 379
+      },
+      "ends": {
+        "success": 278,
+        "interrupted": 154,
+        "unknown": 61,
+        "failed": 70,
+        "partial": 32
+      },
+      "lostShare": 0.322,
+      "abortedJourneys": 93,
+      "workRuns": 200,
+      "medianWorkRun": 31,
+      "longestWorkRun": 260
+    },
+    {
+      "name": "Arlo",
+      "hh": 1148,
+      "ticks": 72000,
+      "adultTicks": 72000,
+      "share": {
+        "sleep": 0.227,
+        "needs": 0.16,
+        "travel": 0.416,
+        "work": 0.116,
+        "social": 0.069,
+        "leisure": 0,
+        "danger": 0.002,
+        "waiting": 0.004,
+        "idle": 0.006
+      },
+      "criticalShare": 0.051,
+      "criticalBy": {
+        "warmth": 909,
+        "safety": 167,
+        "hunger": 1185,
+        "energy": 1386
+      },
+      "ends": {
+        "success": 246,
+        "interrupted": 157,
+        "failed": 81,
+        "unknown": 101,
+        "partial": 33
+      },
+      "lostShare": 0.311,
+      "abortedJourneys": 103,
+      "workRuns": 167,
+      "medianWorkRun": 40,
+      "longestWorkRun": 265
+    },
+    {
+      "name": "Jonas",
+      "hh": 1103,
+      "ticks": 50263,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.146,
+        "needs": 0.268,
+        "travel": 0.343,
+        "work": 0.09,
+        "social": 0.124,
+        "leisure": 0.023,
+        "danger": 0,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.009,
+      "criticalBy": {
+        "warmth": 389,
+        "safety": 41
+      },
+      "ends": {
+        "interrupted": 108,
+        "partial": 12,
+        "success": 131,
+        "failed": 47,
+        "unknown": 114
+      },
+      "lostShare": 0.328,
+      "abortedJourneys": 53,
+      "workRuns": 43,
+      "medianWorkRun": 85,
+      "longestWorkRun": 298
+    },
+    {
+      "name": "Wilma",
+      "hh": 1117,
+      "ticks": 41863,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.183,
+        "needs": 0.199,
+        "travel": 0.35,
+        "work": 0.166,
+        "social": 0.092,
+        "leisure": 0,
+        "danger": 0.007,
+        "waiting": 0,
+        "idle": 0.004
+      },
+      "criticalShare": 0.04,
+      "criticalBy": {
+        "warmth": 314,
+        "hunger": 1354
+      },
+      "ends": {
+        "success": 102,
+        "failed": 36,
+        "partial": 6,
+        "interrupted": 104,
+        "unknown": 73
+      },
+      "lostShare": 0.404,
+      "abortedJourneys": 58,
+      "workRuns": 51,
+      "medianWorkRun": 113,
+      "longestWorkRun": 448
+    },
+    {
+      "name": "Hana",
+      "hh": 1148,
+      "ticks": 30103,
+      "adultTicks": 0,
+      "share": {
+        "sleep": 0.158,
+        "needs": 0.264,
+        "travel": 0.34,
+        "work": 0.132,
+        "social": 0.094,
+        "leisure": 0.005,
+        "danger": 0.002,
+        "waiting": 0,
+        "idle": 0.005
+      },
+      "criticalShare": 0.045,
+      "criticalBy": {
+        "warmth": 3,
+        "hunger": 1178,
+        "safety": 183
+      },
+      "ends": {
+        "interrupted": 79,
+        "success": 71,
+        "partial": 6,
+        "unknown": 55,
+        "failed": 21
+      },
+      "lostShare": 0.405,
+      "abortedJourneys": 41,
+      "workRuns": 30,
+      "medianWorkRun": 122,
+      "longestWorkRun": 403
+    }
+  ]
+}

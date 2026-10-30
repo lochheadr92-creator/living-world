@@ -13,6 +13,7 @@ import { NEED_KEYS, CRITICAL, THIRST_RATE, isHomeType } from './constants';
 import type { BeliefKind } from './types';
 
 import { hyp } from './util';
+import { hasKeptTarget } from './kept_target';
 /**
  * What a controller may narrow about an action, and the range the engine will honour. A limit is a STOP CONDITION only: it can make
  * an action finish sooner than it otherwise would, never do more, reach further or produce more than the unparameterised action.
@@ -245,6 +246,13 @@ export function rankWaterSpots(ctx: Ctx, limit = 2): WaterSpot[] {
   for (const c of all) {
     if (picked.every((q) => hyp(q.b.x - c.b.x, q.b.y - c.b.y) > 7)) picked.push(c);
     if (picked.length >= limit) break;
+  }
+  // rules 60 (kept_target.ts): the spot a running drink trip is about stays on the table past the limit (a water-fetching
+  // trip is keyed without a spot and never falls off for this reason)
+  const key = hasKeptTarget(world) ? p.activity?.data.optKey : undefined;
+  if (typeof key === 'string' && !picked.some((c) => key === `drink:${c.b.id}`)) {
+    const cur = all.find((c) => key === `drink:${c.b.id}`);
+    if (cur) picked.push(cur);
   }
   return picked;
 }
