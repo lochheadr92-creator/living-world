@@ -30,6 +30,8 @@ export interface OptionLimit {
 }
 
 export interface Option {
+  /** Material work serving this particular known construction site, when applicable. */
+  purposeSite?: number;
   /** A legal preparation for this personally known work option (derived, never saved as executable code). */
   journeyFor?: {key:string;label:string;kind:ActivityKind;target:number;item:ItemKind|null;quantity:number;water:number;food:number;expected:number};
   /** Personal cost estimate used to narrow a legal work trip at rules 71; never an execution grant. */

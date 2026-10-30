@@ -2,6 +2,12 @@
 
 ## Current continuation pointer — 2026-10-30
 
+Rules **73** connects a prepared trip's personally failed gathering source to a bounded legal alternative for the same
+material and purpose, including the same known site where applicable. Saved progress survives; impossible known-source
+cases abandon and release claims. Recent verdicts remain visible and consumed provisions cease being claimed. Final full
+suite 253 files / 1,714 tests, focused 25/25, rendered 7/7, typecheck/build pass. Ordinary five-day runs again adopt zero
+journeys, so ordinary recovery/benefit remains unproven. See `JOURNEY_RECOVERY.md`; predecessor 72 was pinned at `d9fd3ab`.
+
 Rules **72** now adds bounded physical personal trip provisions and retains the work purpose across a real drink break.
 The staged rendered chain subsequently gathers wood and uses it in construction; 14 trip contracts, 7 browser checks,
 full suite 251 files / 1,703 tests, typecheck and build pass. Three fresh five-day worlds offered preparation but adopted

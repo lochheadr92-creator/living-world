@@ -388,7 +388,7 @@ export type RawMaterial = 'wood' | 'stone' | 'clay' | 'ore';
 export const RAW_KINDS: Record<RawMaterial, BeliefKind[]> = { wood: ['tree'], stone: ['rock', 'outcrop'], clay: ['clay_pit'], ore: ['ore_vein'] };
 export const isRawMaterial = (k: ItemKind): k is RawMaterial => k === 'wood' || k === 'stone' || k === 'clay' || k === 'ore';
 
-export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: number, why: string, tag: string): void {
+export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: number, why: string, tag: string, siteId?:number): void {
   const { world, p } = ctx;
   if (usesMaterialStock(world, tag === 'promise' ? 'promise' : 'plan')) {
     const stores = rememberedMaterialStores(world, p, item).map(b => ({ b, e: eta(ctx, b.x, b.y) }));
@@ -435,6 +435,7 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
       parts: sc.parts,
       eta: expected,
       scopeEstimate: {walk:c.e,work:WORK[type],amount:units,item},
+      ...(runsRulesVersion(world,73)&&siteId?{purposeSite:siteId}:{}),
       key: `gather:${c.b.id}`,
       targetId: c.b.id,
       tag,
@@ -470,16 +471,17 @@ export function gatherMaterial(ctx: Ctx, item: RawMaterial, want: number, base: 
 function optMaterials(ctx: Ctx): void {
   const needs = materialNeeds(ctx);
   if (!needs.length) return;
-  const byItem: Record<string, { n: number; base: number; why: string; tag: string }> = {};
+  const byItem: Record<string, { n: number; base: number; why: string; tag: string; siteId?:number }> = {};
   for (const n of needs) {
     const cur = byItem[n.item];
-    if (!cur) byItem[n.item] = { n: n.n, base: n.base, why: n.why, tag: n.tag };
+    if (!cur) byItem[n.item] = { n: n.n, base: n.base, why: n.why, tag: n.tag, siteId:n.siteId };
     else {
       cur.n += n.n;
       if (n.base > cur.base) {
         cur.base = n.base;
         cur.why = n.why;
         cur.tag = n.tag;
+        cur.siteId=n.siteId;
       }
     }
   }
@@ -495,7 +497,7 @@ function optMaterials(ctx: Ctx): void {
     if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) continue;
     // Version 33: a gather with no room to start may be preceded by leaving a left-over nothing wants (leave_heaviest.ts)
     leaveHeaviestOption(ctx, { item, base: need.base * traitMods(ctx.p).work, why: need.why, sources: RAW_KINDS[item], mult: nightMult(ctx) * weatherMult(ctx), wanted });
-    gatherMaterial(ctx, item, missing, need.base * traitMods(ctx.p).work, need.why, need.tag);
+    gatherMaterial(ctx, item, missing, need.base * traitMods(ctx.p).work, need.why, need.tag, need.siteId);
   }
 }
 

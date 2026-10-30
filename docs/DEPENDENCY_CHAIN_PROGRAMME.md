@@ -5,7 +5,7 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **72**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **73**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
 choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, learned personal daily preferences, personally scoped work amounts/durations, and private food/water preparation retaining a useful work purpose through a drink break. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
@@ -27,6 +27,17 @@ wholesale integration candidates; current rules 46/47 already own their integrat
 pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-oatizp` using 59 for tool precedence and
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
+
+### Rules 73 — failed-source alternatives and truthful abandonment
+
+Rules 72 runtime `83a56fd` was pinned/published at `d9fd3ab` before this change. `JOURNEY_RECOVERY.md` records bounded
+known-source replacement after real failure, same-material/purpose/site checks, retained progress, consumption-claim release,
+and visible abandonment when no known positive source remains. The full staged chain survives drinking and source loss,
+uses the replacement wood after ordinary sleep/meal breaks, and continues exactly from a recovery save. Final full regression:
+253 files / 1,714 tests; final focused trip/recovery/predecessor 25/25; rendered 7/7; typecheck/build pass.
+The fixed five-day ordinary release worlds again offer preparation at 4/4/10 samples but adopt zero journeys; no ordinary
+source-recovery or aggregate-benefit claim. Earlier mixed-revision validation was rejected and retained, then rerun on frozen
+source. The next recorded gap is A7's absence of source-specific learning alongside the existing category payoff.
 
 ### Rules 72 — bounded trip provisions and retained purpose
 
@@ -55,7 +66,7 @@ remain attributed evidence, not newly repeated measurements.
 | Learned daily routines / connected mechanism, ordinary acceptance incomplete (A2) | `daily_routines.ts`, `decision.ts`, `activities.ts`; 70; supper/winter 24/27/53 retained | Actual trips earn bounded context/time preferences; matched autonomous choice differs; injury/season/care/contact/loss/cost/urgency suppress influence; saved physical and rendered proof | Three fresh five-day worlds acquire experience but offer zero routine nudges at samples and start zero named routine choices. Ordinary repeat work/discretionary rhythm and disrupted-household acceptance remain unproven; no pressure retuning or benefit claim. |
 | General bounded contingent goals / incomplete (A3) | `project_graph.ts`, `project_compile.ts`, `project_step.ts`, `batch_plan.ts`; production graph 69 | Bounded validated production tree, autonomous staged forged axe, exact saves, physical inputs, loss/retry/deadline contracts; `BOUNDED_PROJECTS.md` | Production mechanism connected; other goal families, general contingent composition and ordinary activation remain. Three fresh five-day worlds observed no projects. |
 | Quantities, foresight, useful waits / incomplete (A4) | `action_scope.ts`, `journey.ts`, `journey_state.ts`, `activities.ts`, `intent.ts`, `night_wait.ts`; trip provisions 72, scope 71, project wait 69 | Scoped quantity/spell, physical bounded food/water preparation, retained work purpose through actual drinking and useful construction with exact saves; narrowed ordinary scope starts 6/17/14 at 71; zero trip adoptions in three five-day 72 worlds | Broader trip-tool preparation, communicated meeting/delivery waits, other action families, ordinary activation and aggregate acceptance. Lost-source alternatives remain. No future weather oracle or claim of fulfilled duty from a narrowed trip. |
-| Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`, `kept_target.ts`; 34/36/37/50/61/63/65 | Reconsideration, partial shelter delivery, required-tool loss/replacement, bounded remembered food-capacity recovery; valid running destinations remain scored after discovery | Preserve progress through other temporary obstructions; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Source/helper loss and general composition remain. |
+| Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`, `kept_target.ts`, `journey_recovery.ts`; 34/36/37/50/61/63/65/73 | Required-tool/capacity recovery, valid running destinations, bounded same-purpose known-source alternatives after actual trip failure, saved useful work and truthful abandonment/claim release | Other temporary obstructions, route/helper/workshop loss, general goal composition, help/renegotiation and ordinary reliable recovery remain. No ordinary trip adoption in the short 73 windows. |
 | Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |
 | Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`; 39–51 | Requests/refusals, named home, later delivery/customer receipt | Ability/location questions, inability, counteramount/place, delay, cancellation/acknowledgment only where missing; actual contact and locally held grounds. |

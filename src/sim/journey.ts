@@ -1,6 +1,7 @@
 // Derived personal provisioning options. Only a selected, physically started action adopts an intention.
 import {DAY,NUTRITION,WORK} from './constants';
 import {SOURCE_FOOD} from './food_help';
+import {hasJourneyRecovery} from './journey_recovery';
 import {workWindow} from './action_scope';
 import {newActivity} from './activities';
 import {weightOf} from './economy';
@@ -25,6 +26,7 @@ function attach(ctx:Ctx,o:Option,work:Option,water:number,food:number):void{
   if(!i){
    i={id:world.nextId++,kind:'journey',goal:`prepare for ${work.label.toLowerCase()}`,since:world.tick,until:world.tick+2*DAY,status:'active',reason:o.selectionReason!,setAside:0,aboutId:work.targetId,wants:{},makes:'',sheltered:0,worked:0,ended:0,step:o.label,stepKind:'none',stepTarget:o.targetId,stepItem:null,stepKey:o.key,blocked:'',journey:{...j,tries:0,history:[]}} as Intention;
    p.intentions.push(i);
+   if(hasJourneyRecovery(world))i.journey!.recovery={tag:work.tag??'',site:work.purposeSite??0,failures:[],changes:[]};
   }
   // Claim only this bounded private provision. Existing promises and other plans retain their claims.
   const wants:Items={water:Math.min(2,Math.floor(journeyAvailable(world,p,'water'))+water)};

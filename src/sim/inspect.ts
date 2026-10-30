@@ -375,6 +375,9 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
 export function planViews(world: World, p: Person): PlanView[] {
   const liveOnes = p.intentions.filter((i) => i.status === 'active');
   const shown = liveOnes.length ? liveOnes : [...p.intentions].reverse().filter((i) => i.status !== 'active').slice(0, 1);
+  // A new night/project plan must not immediately hide the just-observed source-recovery verdict.
+  const recentTrip=p.intentions.filter(i=>i.journey?.recovery&&i.status!=='active'&&world.tick-i.ended<600).sort((a,b)=>b.ended-a.ended)[0];
+  if(recentTrip&&!shown.includes(recentTrip))shown.push(recentTrip);
   const a = p.activity;
   return shown.map((i) => ({
     id: i.id,

@@ -1,5 +1,6 @@
 import type {ProjectGraph} from './project_graph';
 import {journeyStep,journeyOutcome} from './journey_state';
+import {reviewJourneyRecovery} from './journey_recovery';
 // Private plans (rich worlds only). A person who can see the evening coming may decide to do something about it, carry that decision
 // across several separate activities, set it aside when something more pressing happens, and then take it up again, change it, or give
 // it up for a stated reason.
@@ -869,6 +870,7 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
       }
     }
     if (i.kind === 'batch') batchHooks?.review?.(ctx,i);
+    if (i.kind === 'journey') reviewJourneyRecovery(ctx,i);
     const n = stepFor(ctx, i);
     if (i.blocked && !n.blocked) i.reason = 'taken up again';
     // (a batch plan, rules 50, is about its workshop whatever place its current step names: the site it hauls to is a step, not a change of mind)
