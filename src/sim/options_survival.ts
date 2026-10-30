@@ -8,6 +8,7 @@ import { payNudge } from './learning';
 import { NUTRITION, isHomeType, isSolidHome, homeNoun } from './constants';
 import { carryCap } from './people';
 import { foodUnits, invRoom } from './economy';
+import { hasCareCapacity } from './care_capacity';
 import { withdrawAllowance } from './facilities';
 import { hasWinterReserve } from './provision';
 import { runsRulesVersion } from './rulesversion';
@@ -302,7 +303,7 @@ function optEat(ctx: Ctx): void {
     // of what it put in, so reading it is reading their own books, not the bins of others. Below 46 a granary is not eaten from.
     const bins = b.kind === 'building' && b.btype === 'granary' && hasWinterReserve(world) ? granaryRation(world, p, b.id) : 0;
     if (!mine && !comm && !pile && !theirs && !bins) continue;
-    const fc = b.btype === 'granary' ? bins : foodCount(b.items ?? {});
+    const fc = b.btype === 'granary' ? bins : hasCareCapacity(world) ? foodUnits(b.items ?? {}) : foodCount(b.items ?? {});
     if (fc < 1) {
       if (mine || comm) addBlocked(ctx, 'eat_store', 'Eat from the stores', b.id, 'remembers it being empty', 'food');
       continue;

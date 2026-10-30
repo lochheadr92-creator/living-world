@@ -1,0 +1,3690 @@
+[
+ {
+  "tick": 105960,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2,
+   "grain": 3
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 2.856133871363948
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": -12.984693843175032
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:989",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to keep the fire going",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "visit:1119",
+    "label": "Check on Cora",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 82.03050000000263,
+   "thirst": 89.02447993283857,
+   "energy": 70.5503070113099,
+   "warmth": 87.66663131108534,
+   "safety": 83.99979757034929,
+   "social": 98.6785103388878
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:1237",
+   "utilityBeforeRanking": 39.20087295724185
+  }
+ },
+ {
+  "tick": 106080,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2,
+   "grain": 3
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 14.79952260987091
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": -1.0413051046680692
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to help keep a neighbour’s quarry standing",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 78.1005000000028,
+   "thirst": 92.0964799328378,
+   "energy": 65.13430701130933,
+   "warmth": 89.31513469835627,
+   "safety": 83.99998207730935,
+   "social": 97.9405659453339
+  },
+  "activity": {
+   "kind": "deposit",
+   "phase": "travel",
+   "plan": 40297
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "deposit:7095:food",
+   "utilityBeforeRanking": 16.245316263975
+  }
+ },
+ {
+  "tick": 106200,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2,
+   "grain": 3
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 14.688272435387859
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": -1.1525552791511213
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:938",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to help keep a neighbour’s quarry standing",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 74.33550000000281,
+   "thirst": 87.03247993283703,
+   "energy": 60.02630701130917,
+   "warmth": 93.52628457917825,
+   "safety": 83.99999841316308,
+   "social": 96.9471215517802
+  },
+  "activity": {
+   "kind": "deposit",
+   "phase": "travel",
+   "plan": 40297
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "deposit:7095:food",
+   "utilityBeforeRanking": 16.767604338348587
+  }
+ },
+ {
+  "tick": 106320,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2,
+   "grain": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 15.985081788477668
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 0.14425407393868817
+   }
+  ],
+  "blockers": [
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 70.57050000000282,
+   "thirst": 81.96847993283627,
+   "energy": 54.91830701130921,
+   "warmth": 93.53717352535615,
+   "safety": 83.99999985950481,
+   "social": 95.63167715822678
+  },
+  "activity": {
+   "kind": "harvest",
+   "phase": "travel",
+   "plan": 40297
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:1280",
+   "utilityBeforeRanking": 43.20306511966033
+  }
+ },
+ {
+  "tick": 106440,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2,
+   "grain": 3
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 12.375420558072852
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": -3.465407156466128
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:0",
+    "label": "Get wood to help keep a neighbour’s quarry standing",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 66.64050000000299,
+   "thirst": 76.6404799328355,
+   "energy": 49.502307011309185,
+   "warmth": 92.85747938643318,
+   "safety": 83.99999998756087,
+   "social": 94.80623276467294
+  },
+  "activity": {
+   "kind": "deposit",
+   "phase": "travel",
+   "plan": 40297
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "seed_stash:7095",
+   "utilityBeforeRanking": 19.0560147064954
+  }
+ },
+ {
+  "tick": 106560,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 17.345138742050217
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 1.5043110275112372
+   }
+  ],
+  "blockers": [
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "visit:1119",
+    "label": "Check on Cora",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 62.99550000000285,
+   "thirst": 71.76847993283475,
+   "energy": 44.61830701130927,
+   "warmth": 89.86182185972203,
+   "safety": 83.99999999889867,
+   "social": 93.6972883711192
+  },
+  "activity": {
+   "kind": "gather",
+   "phase": "work",
+   "plan": 40297
+  },
+  "offered": [
+   {
+    "key": "gather:1160",
+    "utilityBeforeRanking": 23.91951198324969
+   },
+   {
+    "key": "gather:1161",
+    "utilityBeforeRanking": 18.865942866146018
+   },
+   {
+    "key": "gather:1160",
+    "utilityBeforeRanking": 7.724888091337719
+   },
+   {
+    "key": "gather:1161",
+    "utilityBeforeRanking": 2.6713189742340435
+   }
+  ],
+  "eligible": [
+   "gather:1160",
+   "gather:1161",
+   "gather:1160",
+   "gather:1161"
+  ],
+  "first": {
+   "key": "gather:1160",
+   "utilityBeforeRanking": 23.91951198324969
+  }
+ },
+ {
+  "tick": 106680,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 4,
+   "grain": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 16.033672498200893
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 0.19284478366191138
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "visit:1119",
+    "label": "Check on Cora",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 59.0280000000027,
+   "thirst": 66.38047993283398,
+   "energy": 39.13230701130923,
+   "warmth": 85.34638306401718,
+   "safety": 83.9999999999025,
+   "social": 93.1343439775648
+  },
+  "activity": {
+   "kind": "harvest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:1280",
+   "utilityBeforeRanking": 41.37351821936048
+  }
+ },
+ {
+  "tick": 106680,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2,
+   "grain": 1,
+   "stone": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106677,
+   "src": "seen",
+   "from": 0,
+   "learned": 106677,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.514630000123994,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 1
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 1
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:1127",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to make a hoe",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for the shared smithy",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (8 stone, 4 bricks)"
+   },
+   {
+    "key": "operate:19694",
+    "label": "Firing bricks",
+    "reason": "tried recently and could not get on"
+   },
+   {
+    "key": "operate:19694",
+    "label": "Firing a water jar",
+    "reason": "tried recently and could not get on"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 57.67950000000096,
+   "thirst": 64.99199999979055,
+   "energy": 40.57599999998945,
+   "warmth": 96.9534174527717,
+   "safety": 89.9318967608138,
+   "social": 44.788350104439196
+  },
+  "activity": {
+   "kind": "haul",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "haul:41333",
+   "utilityBeforeRanking": 27.87404553083623
+  }
+ },
+ {
+  "tick": 106800,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 3.0625775360017635
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": -0.4224045611968121
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "visit:1119",
+    "label": "Check on Cora",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 55.39050000000256,
+   "thirst": 61.520479932833666,
+   "energy": 34.26230701130932,
+   "warmth": 75.96818392005042,
+   "safety": 77.15478604212569,
+   "social": 92.1023995840112
+  },
+  "activity": {
+   "kind": "harvest",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "harvest:1280",
+   "utilityBeforeRanking": 25.971973069427015
+  }
+ },
+ {
+  "tick": 106800,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2,
+   "grain": 1,
+   "stone": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106797,
+   "src": "seen",
+   "from": 0,
+   "learned": 106797,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.37063000012433,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:1127",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:939",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:940",
+    "label": "Picking berries",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "gather:991",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get wood to make a hoe",
+    "reason": "no room in my pack for one wood"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for the shared smithy",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (7 stone, 4 bricks)"
+   },
+   {
+    "key": "operate:19694",
+    "label": "Firing bricks",
+    "reason": "tried recently and could not get on"
+   },
+   {
+    "key": "operate:19694",
+    "label": "Firing a water jar",
+    "reason": "tried recently and could not get on"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 54.01950000000082,
+   "thirst": 60.09599999979049,
+   "energy": 35.66399999998953,
+   "warmth": 83.28716824050767,
+   "safety": 77.67552268022023,
+   "social": 43.60500051171
+  },
+  "activity": {
+   "kind": "haul",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "haul:41333",
+   "utilityBeforeRanking": 26.10437214451599
+  }
+ },
+ {
+  "tick": 106920,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 3.3325893623522496
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": -0.15239273484632604
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:989",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay to carry more water at a time (a water jar)",
+    "reason": "no room in my pack for one clay"
+   },
+   {
+    "key": "visit:1119",
+    "label": "Check on Cora",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 51.46050000000241,
+   "thirst": 56.19247993283375,
+   "energy": 30.386307011309444,
+   "warmth": 62.38456244047036,
+   "safety": 66.79851618139179,
+   "social": 91.02145519045774
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:7095",
+   "utilityBeforeRanking": 61.73933661185393
+  }
+ },
+ {
+  "tick": 106920,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106911,
+   "src": "seen",
+   "from": 0,
+   "learned": 106911,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.23383000012465,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "operate:19694:fire_jar",
+    "utilityBeforeRanking": 1.1208585973631264
+   }
+  ],
+  "blockers": [
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   },
+   {
+    "key": "withdraw:19694",
+    "label": "Collect 1 bricks",
+    "reason": "tried recently and found none to take"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 72.41350000000071,
+   "thirst": 55.263999999790585,
+   "energy": 31.371999999989598,
+   "warmth": 65.15718140820843,
+   "safety": 66.7149437204221,
+   "social": 42.218880742811294
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:18206",
+   "utilityBeforeRanking": 67.0625567647236
+  }
+ },
+ {
+  "tick": 107040,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:989",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 47.860500000002276,
+   "thirst": 51.39247993283385,
+   "energy": 31.81630701130957,
+   "warmth": 50.29284965907487,
+   "safety": 60.81168167354841,
+   "social": 89.30351079690422
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:7095",
+   "utilityBeforeRanking": 63.57484942816612
+  }
+ },
+ {
+  "tick": 107040,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106911,
+   "src": "seen",
+   "from": 0,
+   "learned": 106911,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.23383000012465,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   },
+   {
+    "key": "withdraw:29441:salvage",
+    "label": "Gather up what was left behind",
+    "reason": "would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 37)"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 70.43350000000149,
+   "thirst": 52.383999999790475,
+   "energy": 45.171999999989815,
+   "warmth": 73.47776936363866,
+   "safety": 91.58423915979813,
+   "social": 41.67592586499258
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:18206",
+   "utilityBeforeRanking": 60.161707664477674
+  }
+ },
+ {
+  "tick": 107160,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:989",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 44.84100000000216,
+   "thirst": 47.28047993283388,
+   "energy": 33.2757700136851,
+   "warmth": 46.04948708409317,
+   "safety": 80.07764597662573,
+   "social": 87.9378216220671
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:7095",
+   "utilityBeforeRanking": 66.12821065794917
+  }
+ },
+ {
+  "tick": 107160,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106911,
+   "src": "seen",
+   "from": 0,
+   "learned": 106911,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.23383000012465,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 68.45350000000226,
+   "thirst": 49.503999999790366,
+   "energy": 58.971999999990054,
+   "warmth": 70.3978887538756,
+   "safety": 93.78611367419384,
+   "social": 41.13297098717386
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:18206",
+   "utilityBeforeRanking": 53.26128491304453
+  }
+ },
+ {
+  "tick": 107280,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "gather:989",
+    "label": "Gathering wild grain",
+    "reason": "believes it is empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 42.861000000002086,
+   "thirst": 44.40047993283377,
+   "energy": 46.378465245166204,
+   "warmth": 51.94420547967158,
+   "safety": 92.76734439143277,
+   "social": 87.39093830400137
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:7095",
+   "utilityBeforeRanking": 59.57608377808834
+  }
+ },
+ {
+  "tick": 107280,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106911,
+   "src": "seen",
+   "from": 0,
+   "learned": 106911,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.23383000012465,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 66.47350000000304,
+   "thirst": 46.62399999979026,
+   "energy": 72.77199999998975,
+   "warmth": 63.77017036907885,
+   "safety": 93.98106295970797,
+   "social": 40.59001610935515
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:18206",
+   "utilityBeforeRanking": 46.360863361892825
+  }
+ },
+ {
+  "tick": 107400,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 40.88100000000201,
+   "thirst": 41.52047993283366,
+   "energy": 59.615444464820264,
+   "warmth": 51.15950090188599,
+   "safety": 93.89086329461375,
+   "social": 86.84405498593563
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000268",
+   "utilityBeforeRanking": 54.25565225688624
+  }
+ },
+ {
+  "tick": 107400,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "nothing there to take",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106911,
+   "src": "seen",
+   "from": 0,
+   "learned": 106911,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.23383000012465,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 64.49350000000382,
+   "thirst": 43.74399999979015,
+   "energy": 86.52046845561533,
+   "warmth": 56.90334591734991,
+   "safety": 93.9983233547368,
+   "social": 40.04706123153643
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "sleep:18206",
+   "utilityBeforeRanking": 39.48578959882944
+  }
+ },
+ {
+  "tick": 107520,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 38.901000000001936,
+   "thirst": 38.64047993283355,
+   "energy": 72.723607164202,
+   "warmth": 48.81770101803738,
+   "safety": 93.9903372682688,
+   "social": 86.29717166786989
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000268",
+   "utilityBeforeRanking": 59.02591345751056
+  }
+ },
+ {
+  "tick": 107520,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106911,
+   "src": "seen",
+   "from": 0,
+   "learned": 106911,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.23383000012465,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:1127",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 61.798000000003924,
+   "thirst": 40.01599999979013,
+   "energy": 91.92108849066112,
+   "warmth": 40.08286591951055,
+   "safety": 64.80482155809571,
+   "social": 38.944561187965526
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000230",
+   "utilityBeforeRanking": 49.957962985185475
+  }
+ },
+ {
+  "tick": 107520,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 41606,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "seeds": 2,
+   "fruit": 1,
+   "wood": 4,
+   "berries": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106957,
+   "src": "seen",
+   "from": 0,
+   "learned": 106957,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.17863000012478,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 40.73949999998214,
+   "thirst": 39.71841458362642,
+   "energy": 92.2889345093569,
+   "warmth": 45.635039752420816,
+   "safety": 68.3593396692164,
+   "social": 45.98702253511788
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "travel",
+   "plan": 41459
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000231",
+   "utilityBeforeRanking": 56.345549344129346
+  }
+ },
+ {
+  "tick": 107640,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 3,
+   "grain": 2
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "eat_store:15954",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 36.92100000000186,
+   "thirst": 35.76047993283344,
+   "energy": 85.6958590181556,
+   "warmth": 47.501712514705474,
+   "safety": 93.9991444822878,
+   "social": 85.75028834980415
+  },
+  "activity": {
+   "kind": "sleep",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "eat:0",
+   "utilityBeforeRanking": 61.87461538461109
+  }
+ },
+ {
+  "tick": 107640,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 107547,
+   "src": "seen",
+   "from": 0,
+   "learned": 107547,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 53.47063000012643,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:19694:bricks",
+    "utilityBeforeRanking": 2.8555057798987633
+   },
+   {
+    "key": "operate:19694:fire_jar",
+    "utilityBeforeRanking": -0.05278571336890167
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:1127",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 58.19800000000379,
+   "thirst": 88.41599999979006,
+   "energy": 87.12108849066037,
+   "warmth": 24.42273223274869,
+   "safety": 75.03499168773268,
+   "social": 37.663211595236106
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "travel"
+  },
+  "offered": [
+   {
+    "key": "collect:19694:bricks",
+    "utilityBeforeRanking": 2.8555057798987633
+   }
+  ],
+  "eligible": [
+   "collect:19694:bricks"
+  ],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 55.401186696097426
+  }
+ },
+ {
+  "tick": 107640,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 41606,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "seeds": 2,
+   "wood": 4,
+   "berries": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 106957,
+   "src": "seen",
+   "from": 0,
+   "learned": 106957,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 54.17863000012478,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "operate:19694:fire_jar",
+    "utilityBeforeRanking": 0.7566559480090503
+   }
+  ],
+  "blockers": [
+   {
+    "key": "rest:0",
+    "label": "Stay in shelter until it is light",
+    "reason": "not at a shelter"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for the shared smithy",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 65.13949999998201,
+   "thirst": 96.51841458362594,
+   "energy": 87.48893450935616,
+   "warmth": 24.7368817605146,
+   "safety": 74.6892098380132,
+   "social": 44.73643643361057
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "travel"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "rest:home:4417",
+   "utilityBeforeRanking": 52.609221492644956
+  }
+ },
+ {
+  "tick": 107760,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [],
+  "blockers": [
+   {
+    "key": "give:24781",
+    "label": "Care for Wes",
+    "reason": "does not know where they are"
+   }
+  ],
+  "margin": false,
+  "criticals": [],
+  "needs": {
+   "hunger": 90.36050000000176,
+   "thirst": 34.992479932833405,
+   "energy": 92.28010535230271,
+   "warmth": 44.90569260089788,
+   "safety": 73.01357659968399,
+   "social": 84.93164981302206
+  },
+  "activity": {
+   "kind": "drink",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "drink:1000268",
+   "utilityBeforeRanking": 63.707369665823265
+  }
+ },
+ {
+  "tick": 107760,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 107547,
+   "src": "seen",
+   "from": 0,
+   "learned": 107547,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 53.47063000012643,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:19694:bricks",
+    "utilityBeforeRanking": 3.5354512029893828
+   },
+   {
+    "key": "operate:19694:fire_jar",
+    "utilityBeforeRanking": 0.627159709721718
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:1127",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 54.59800000000365,
+   "thirst": 83.61599999978931,
+   "energy": 87.57108849066017,
+   "warmth": 34.767540192622484,
+   "safety": 90.11163159257474,
+   "social": 37.06086200250678
+  },
+  "activity": {
+   "kind": "warm",
+   "phase": "work"
+  },
+  "offered": [
+   {
+    "key": "collect:19694:bricks",
+    "utilityBeforeRanking": 3.5354512029893828
+   }
+  ],
+  "eligible": [
+   "collect:19694:bricks"
+  ],
+  "first": {
+   "key": "warm:1102",
+   "utilityBeforeRanking": 32.282182897811225
+  }
+ },
+ {
+  "tick": 107760,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 41606,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "seeds": 2,
+   "wood": 4,
+   "berries": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 107668,
+   "src": "seen",
+   "from": 0,
+   "learned": 107668,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 53.325430000126765,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "operate:19694:fire_jar",
+    "utilityBeforeRanking": 1.009550337956553
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for the shared smithy",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 61.53949999998187,
+   "thirst": 91.71841458362519,
+   "energy": 88.56893450935603,
+   "warmth": 34.39502871832746,
+   "safety": 89.49477404992258,
+   "social": 43.65035033210314
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "shelter:4417",
+   "utilityBeforeRanking": 30
+  }
+ },
+ {
+  "tick": 107880,
+  "person": 1112,
+  "name": "Ben",
+  "plan": 39363,
+  "makes": "bricks",
+  "step": "get 3 more clay for the fired bricks",
+  "key": null,
+  "blocked": "",
+  "currentStep": {
+   "kind": "get",
+   "target": 0,
+   "item": "clay",
+   "step": "get 3 more clay for the fired bricks",
+   "key": null,
+   "blocked": ""
+  },
+  "inventory": {
+   "hoe": 1,
+   "seeds": 12,
+   "basket": 1,
+   "axe": 1,
+   "pick": 1,
+   "clay": 1,
+   "stone": 1,
+   "berries": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 103765,
+   "src": "seen",
+   "from": 0,
+   "learned": 103765,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 22.009030000116894,
+   "fuel": 0,
+   "items": {
+    "wood": 2
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {},
+    "inputs": {
+     "wood": 2
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1112,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": 11.60672996803179
+   },
+   {
+    "key": "bring:19694:clay",
+    "utilityBeforeRanking": -4.2340977465071905
+   }
+  ],
+  "blockers": [
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "visit:1119",
+    "label": "Check on Cora",
+    "reason": "they are not close enough to go looking"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 86.76050000000163,
+   "thirst": 94.59247993283267,
+   "energy": 93.22010535230257,
+   "warmth": 43.64641041259624,
+   "safety": 87.20266518800172,
+   "social": 83.49720541946873
+  },
+  "activity": {
+   "kind": "harvest",
+   "phase": "travel"
+  },
+  "offered": [
+   {
+    "key": "gather:1161",
+    "utilityBeforeRanking": 25.299073766060722
+   },
+   {
+    "key": "gather:1160",
+    "utilityBeforeRanking": 15.048165465561242
+   },
+   {
+    "key": "gather:1161",
+    "utilityBeforeRanking": 9.104449874148747
+   },
+   {
+    "key": "gather:1160",
+    "utilityBeforeRanking": -1.146458426350732
+   }
+  ],
+  "eligible": [
+   "gather:1161",
+   "gather:1160",
+   "gather:1161",
+   "gather:1160"
+  ],
+  "first": {
+   "key": "harvest:1280",
+   "utilityBeforeRanking": 34.648460636008195
+  }
+ },
+ {
+  "tick": 107880,
+  "person": 1128,
+  "name": "Tomas",
+  "plan": 41453,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "basket": 1,
+   "axe": 1,
+   "saw": 1,
+   "seeds": 12,
+   "spear": 1,
+   "hammer": 1,
+   "wood": 2
+  },
+  "stepRoom": 1,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 107877,
+   "src": "seen",
+   "from": 0,
+   "learned": 107877,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 53.07463000012735,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1128,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "collect:19694:bricks",
+    "utilityBeforeRanking": 18.03129459026014
+   },
+   {
+    "key": "operate:19694:fire_jar",
+    "utilityBeforeRanking": 4.811787802679843
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat_store:1127",
+    "label": "Eat from the stores",
+    "reason": "remembers it being empty"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 50.96050000000351,
+   "thirst": 78.75599999978856,
+   "energy": 88.23108849066003,
+   "warmth": 43.34487511747793,
+   "safety": 91.83280787828369,
+   "social": 36.51101240977749
+  },
+  "activity": {
+   "kind": "harvest",
+   "phase": "work"
+  },
+  "offered": [
+   {
+    "key": "collect:19694:bricks",
+    "utilityBeforeRanking": 18.03129459026014
+   }
+  ],
+  "eligible": [
+   "collect:19694:bricks"
+  ],
+  "first": {
+   "key": "harvest:17438",
+   "utilityBeforeRanking": 40.86237546845365
+  }
+ },
+ {
+  "tick": 107880,
+  "person": 1145,
+  "name": "Jax",
+  "plan": 41606,
+  "makes": "bricks",
+  "step": "collect the bricks from the kiln",
+  "key": "collect:19694:bricks",
+  "blocked": "",
+  "currentStep": {
+   "kind": "make",
+   "target": 19694,
+   "item": "bricks",
+   "step": "collect the bricks from the kiln",
+   "key": "collect:19694:bricks",
+   "blocked": ""
+  },
+  "inventory": {
+   "seeds": 2,
+   "wood": 4,
+   "berries": 1
+  },
+  "stepRoom": 0,
+  "workshop": {
+   "id": 19694,
+   "kind": "building",
+   "x": 32,
+   "y": 34,
+   "amount": 0,
+   "max": 0,
+   "seen": 107668,
+   "src": "seen",
+   "from": 0,
+   "learned": 107668,
+   "btype": "kiln",
+   "hh": 0,
+   "cond": 53.325430000126765,
+   "fuel": 0,
+   "items": {
+    "bricks": 1,
+    "wood": 2,
+    "clay": 3
+   },
+   "ops": {
+    "job": null,
+    "progress": 0,
+    "burn": 0,
+    "output": {
+     "bricks": 1
+    },
+    "inputs": {
+     "wood": 2,
+     "clay": 3
+    },
+    "blocked": "it is burning; there is nothing to do but wait",
+    "deposit": -1,
+    "yields": {},
+    "readyAt": 0,
+    "client": 0,
+    "tended": 48004
+   },
+   "origin": 1145,
+   "hops": 0
+  },
+  "workshopOffers": [
+   {
+    "key": "operate:19694:fire_jar",
+    "utilityBeforeRanking": 5.092344151238102
+   }
+  ],
+  "blockers": [
+   {
+    "key": "eat:0",
+    "label": "Eat carried food",
+    "reason": "saving the food for dependents"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get stone for the shared smithy",
+    "reason": "no room in my pack for one stone"
+   },
+   {
+    "key": "build:26466",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (3 bricks)"
+   },
+   {
+    "key": "build:41333",
+    "label": "Work on the building site",
+    "reason": "site is waiting for materials (5 stone, 4 bricks)"
+   },
+   {
+    "key": "gather:0",
+    "label": "Get clay for the shared bakery (fired bricks)",
+    "reason": "no room in my pack for one clay"
+   }
+  ],
+  "margin": true,
+  "criticals": [],
+  "needs": {
+   "hunger": 57.939499999981734,
+   "thirst": 86.91841458362444,
+   "energy": 92.16893450935616,
+   "warmth": 45.01436442479595,
+   "safety": 93.60111687823039,
+   "social": 42.69726423059571
+  },
+  "activity": {
+   "kind": "rest",
+   "phase": "work"
+  },
+  "offered": [],
+  "eligible": [],
+  "first": {
+   "key": "gather:992",
+   "utilityBeforeRanking": 27.610380009881716
+  }
+ }
+]

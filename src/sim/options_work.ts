@@ -21,6 +21,7 @@ import { foodUnits, invRoom, roomFor } from './economy';
 import { dayFraction } from './environment';
 import { findPlotSpot } from './farming';
 import { delBelief, estimatedAmount, missingMaterials, noteFailure, recentFailure } from './knowledge';
+import { careStoreOption } from './care_capacity';
 import { SOURCE_NOUN, SOURCE_VERB } from './labels';
 import { drive } from './needs';
 import { stageOf } from './people';
@@ -1441,9 +1442,18 @@ function optCare(ctx: Ctx): void {
     }
     if (Object.keys(give).length === 0) continue;
     const sev = Math.max(hungry ? (child ? 68 : 50) - d.needs.hunger : 0, thirsty ? (child ? 60 : 46) - d.needs.thirst : 0);
-    const sc = new Scorer().add(`${d.name} needs ${what}`, (26 + sev * 0.9) * tm.give).add('walking', -pen(e));
+    let sc = new Scorer().add(`${d.name} needs ${what}`, (26 + sev * 0.9) * tm.give).add('walking', -pen(e));
     const rel = p.relations[d.id];
     if (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner') sc.add('family', 8);
+    const foodBase = (26 + Math.max(0, (child ? 68 : 50) - d.needs.hunger) * 0.9) * tm.give
+      + (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner' ? 8 : 0);
+    if (careStoreOption(ctx, d, give, foodBase, px, py)) {
+      for (const k of Object.keys(give) as ItemKind[]) if (isFood(k)) delete give[k];
+      if (!Object.keys(give).length) continue;
+      what = Object.keys(give).join(' and ');
+      sc = new Scorer().add(`${d.name} needs ${what}`, (26 + Math.max(0, (child ? 60 : 46) - d.needs.thirst) * 0.9) * tm.give).add('walking', -pen(e));
+      if (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner') sc.add('family', 8);
+    }
     addOption(ctx, {
       kind: 'give',
       label: `Bring ${what} to ${d.name}`,

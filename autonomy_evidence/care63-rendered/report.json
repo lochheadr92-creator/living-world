@@ -1,0 +1,263 @@
+{
+  "head": "3e25e186a96c4342ed433b74556f5a3a53fabf07",
+  "rules": 63,
+  "evidence": "STAGED injured resident, full pack, home and initial food; initial legal gift selected externally, recovery deposit and meal chosen autonomously. Negative store change is imposed after departure.",
+  "sourceHashes": {
+    "src/sim/care_capacity.ts": "4521ad1413a146b1c4d3c546543573f02c80ddfcf1c098beb81eb4d8e85ef88b",
+    "src/sim/options_work.ts": "5c2d5ef46a7a9c5985c35d9e0386b13c96b9a6f43ad618e9d09254d9eab4afd8",
+    "src/sim/options_survival.ts": "6f80de7968c72b140d63a7ad6e3f69e6fd36c9af7e3f5576cec4776b1b14cb5a",
+    "src/sim/act_resource.ts": "dc58c95bdeeb0d96db8505c10e78ae3a789827e0a3797069c4a198fa5c436fd6",
+    "src/sim/social.ts": "bf5926d2bc33ef681183496a77face6154a0cd4fb28118d8448bb4b4a6d715f9",
+    "src/sim/rulesversion.ts": "1dec5ec16f70988ffe09d03de7288037553e362e100eeaea0c101cb4412ae932",
+    "src/render/renderer.ts": "1e6c65a9facdf77878f42f7b3d1a78d292e5143e0439479177c316b429004bc8",
+    "tests/helpers/care_capacity.ts": "8f6c4b7f2ab92500e5afd33008f84d3f1df64b52b2bb62e3faef56ecae8f9326",
+    "scripts/browser/care_capacity_check.mjs": "4c47b269a1b7798cbb3f19bf688dc462c80a4d7d74c110c0de5759294b707a34"
+  },
+  "checks": [
+    {
+      "name": "actual failed hand-over creates personal capacity memory without claiming receipt",
+      "ok": true,
+      "detail": {
+        "tick": 14,
+        "result": {
+          "tick": 13,
+          "label": "Bringing bread to Eli",
+          "outcome": "failed",
+          "detail": "they had no room to carry it"
+        },
+        "failure": {
+          "tick": 13,
+          "reason": "recipient could not carry the food",
+          "count": 1
+        },
+        "held": {
+          "bread": 3,
+          "water": 1
+        },
+        "elder": {
+          "wood": 3
+        },
+        "fedUntil": 0,
+        "conserved": true
+      }
+    },
+    {
+      "name": "autonomous recovery selects the known household store for the recorded capacity reason",
+      "ok": true,
+      "detail": {
+        "tick": 15,
+        "decision": {
+          "tick": 14,
+          "trigger": "free",
+          "chosen": {
+            "kind": "deposit",
+            "label": "Leave bread at home for Eli",
+            "utility": 52.3,
+            "parts": [
+              [
+                "Eli needs food",
+                53.4
+              ],
+              [
+                "walking",
+                -1.1
+              ]
+            ]
+          },
+          "alternatives": [
+            {
+              "kind": "socialize",
+              "label": "Ask Eli where to find food",
+              "utility": 31.8,
+              "parts": [
+                [
+                  "does not know where to find food",
+                  29.8
+                ],
+                [
+                  "someone to ask",
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "explore",
+              "label": "Explore somewhere new",
+              "utility": 24.3,
+              "parts": [
+                [
+                  "curiosity",
+                  30.2
+                ],
+                [
+                  "walking",
+                  -7.9
+                ],
+                [
+                  "daylight to spare",
+                  2
+                ]
+              ]
+            },
+            {
+              "kind": "wander",
+              "label": "Potter about near home",
+              "utility": 6,
+              "parts": [
+                [
+                  "nothing pressing",
+                  6
+                ],
+                [
+                  "a change of scene",
+                  2
+                ],
+                [
+                  "not much for it",
+                  -0.5
+                ],
+                [
+                  "spare time stays a fallback",
+                  -1.5
+                ]
+              ]
+            }
+          ],
+          "blocked": [
+            {
+              "kind": "give",
+              "label": "Bring bread to Eli",
+              "utility": 0,
+              "parts": [],
+              "blocked": "their pack recently had no room for food"
+            }
+          ],
+          "considered": 4,
+          "knownPlaces": 1,
+          "seenNow": 1,
+          "because": "the last hand-over failed because their pack was full · Eli needs food +53 · walking −1"
+        },
+        "activity": {
+          "id": 9,
+          "kind": "deposit",
+          "label": "Leaving 2 bread at home for Eli",
+          "goal": "to make food accessible to Eli",
+          "need": null,
+          "phase": "work",
+          "targetId": 5,
+          "targetType": "building",
+          "tx": 41,
+          "ty": 41,
+          "spotX": 40.560140746808614,
+          "spotY": 42.43604127834551,
+          "item": null,
+          "amount": 0,
+          "start": 14,
+          "minCommit": 54,
+          "expire": 614,
+          "progress": 1,
+          "pprogress": 0,
+          "duration": 9,
+          "cycle": 0,
+          "path": [
+            40.560140746808614,
+            42.43604127834551
+          ],
+          "pi": 2,
+          "pathTries": 1,
+          "stuck": 0,
+          "lastX": 40.5,
+          "lastY": 42.5,
+          "claims": [],
+          "utility": 52.28303401915781,
+          "blocked": "",
+          "data": {
+            "items": {
+              "bread": 2
+            },
+            "careStore": true,
+            "careRecipient": 4,
+            "careOwner": 1,
+            "optKey": "care_store:5:4",
+            "why": "the last hand-over failed because their pack was full · Eli needs food +53 · walking −1",
+            "indoorHere": false
+          }
+        },
+        "home": 5
+      }
+    },
+    {
+      "name": "ordinary physical deposit leaves two bread and preserves one for the helper",
+      "ok": true,
+      "detail": {
+        "tick": 23,
+        "events": [
+          {
+            "from": "person:2",
+            "to": "building:5",
+            "item": "bread",
+            "n": 2,
+            "reason": "deposit",
+            "tick": 22
+          }
+        ],
+        "store": {
+          "bread": 2
+        },
+        "held": {
+          "bread": 1,
+          "water": 1
+        },
+        "equal": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "elder autonomously eats from the store while carrying the same full load",
+      "ok": true,
+      "detail": {
+        "tick": 174,
+        "hungerBefore": 19.309999999999974,
+        "hungerAfter": 44.77999999999987,
+        "activity": "eat_store",
+        "table": true,
+        "load": 6,
+        "originalLoad": 6,
+        "held": {
+          "wood": 3
+        },
+        "home": 5,
+        "eaten": 1,
+        "equal": true,
+        "pure": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "a store that fills during the trip still fails and leaves the bread with the helper",
+      "ok": true,
+      "detail": {
+        "tick": 23,
+        "result": {
+          "tick": 22,
+          "label": "Leaving 2 bread at home for Eli",
+          "outcome": "failed",
+          "detail": "no room"
+        },
+        "held": {
+          "bread": 3,
+          "water": 1
+        },
+        "store": {
+          "seeds": 160
+        },
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -44,7 +44,7 @@ Scaling and performance history: `docs/SCALING.md`.
 
 ## Current civilisation implementation
 
-The current rules version and the one-paragraph record of every version since 40 are kept in [AGENTS.md](AGENTS.md) ("Current civilisation implementation"; rules 62 on 2026-10-30, the dependency-chain programme `docs/DEPENDENCY_CHAIN_PROGRAMME.md` covering rules 45-62 and the expanded viewer/care/upkeep/continuity requirements). The paragraphs below describe rules 39 and earlier and are kept as history.
+The current rules version and the one-paragraph record of every version since 40 are kept in [AGENTS.md](AGENTS.md) ("Current civilisation implementation"; rules 63 on 2026-10-30, the dependency-chain programme `docs/DEPENDENCY_CHAIN_PROGRAMME.md` covering rules 45-63 and the expanded viewer/care/upkeep/continuity requirements). The paragraphs below describe rules 39 and earlier and are kept as history.
 
 Rules version 39 uses personal trust to choose among otherwise eligible visible helpers for a tool plan's material request (`src/sim/options_social.ts`). Observation 12 / protocols 21-22 explain the choice without guaranteeing help. The isolated lab removal is `rich-no-project-helper-choice`; rules 38 and earlier retain their recorded choice. Staged execution, exact manual replay, ordinary null results and limits: `docs/MEANINGFUL_CONNECTIONS.md`.
 

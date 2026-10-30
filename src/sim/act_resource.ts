@@ -1,5 +1,6 @@
 import { relocationPackingBlocker } from './relocation';
 import { spareSeed } from './seed_storage';
+import { careFoodAvailable, careStoreBlocker } from './care_capacity';
 import { runsRulesVersion } from './rulesversion';
 import { mayCollectMaterialStock } from './material_stock';
 import { creditProject, mayWorkProject } from './townships';
@@ -483,6 +484,8 @@ registerHandler('deposit', {
   availability: 0.45,
   pose: () => 'store',
   begin(world, p, a) {
+    const careBlocked = careStoreBlocker(world, p, a);
+    if (careBlocked) return careBlocked;
     const c = containerItems(world, a.targetId);
     if (!c) {
       delBelief(p, a.targetId);
@@ -496,6 +499,8 @@ registerHandler('deposit', {
     a.ty = door.y;
   },
   work(world, p, a): WorkResult {
+    const careBlocked = careStoreBlocker(world, p, a);
+    if (careBlocked) return `fail:${careBlocked}`;
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
@@ -507,6 +512,11 @@ registerHandler('deposit', {
     const e = world.byId.get(a.targetId)!;
     for (const k of Object.keys(want)) {
       let n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
+      if (a.data.careStore && runsRulesVersion(world, 63)) {
+        n = Math.min(n, careFoodAvailable(world, p, a.data.careRecipient as number, k as ItemKind));
+        if (n <= 0) return 'fail:the food is now needed for my own needs, others or promises';
+        if (n < want[k]) partial = true;
+      }
       if (a.data.seedStash && world.settings.dynamics === 'rich' && runsRulesVersion(world,58)) {
         if (e.ent !== 'building' || !isHomeType(e.type) || e.hhId !== a.data.seedOwner || p.hhId !== a.data.seedOwner) return 'fail:the seed store is no longer our home';
         if (k !== 'seeds') return 'fail:only spare seed belongs in this trip';
@@ -566,7 +576,7 @@ registerHandler('deposit', {
     if (c.kind === 'site') {
       addFx(world, 'deliver', e.ent === 'site' ? e.x + e.w / 2 : p.x, e.ent === 'site' ? e.y + e.h / 2 : p.y, 0);
     }
-    return partial ? 'partial:no room for everything' : 'done';
+    return partial ? a.data.careStore ? 'partial:only food that remained spare and fit was left' : 'partial:no room for everything' : 'done';
   },
   onEnd(world, p, a, outcome) {
     if (a.cycle > 0) {

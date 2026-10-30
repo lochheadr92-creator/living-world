@@ -110,10 +110,11 @@ import type { Settings, World } from './types';
 // Version 60: batch plans choose the same held/rack-tool recipe as their offered production steps, including precursors.
 // Version 61: required workshop tools are revalidated every work tick; paused owned batches request replacement tools.
 // Version 62: same-room gifts remain indoors, contact is revalidated during hand-over, and zero receipt grants no fed cooldown.
-export const CURRENT_RULES_VERSION = 62;
+// Version 63: a personally failed full-pack food hand-over can use a known household store, preserving reserves and access.
+export const CURRENT_RULES_VERSION = 63;
 
 /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62];
+export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63];
 
 /**
  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.

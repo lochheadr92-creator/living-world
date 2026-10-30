@@ -38,18 +38,18 @@ inspected at 1448583; historical run counts below remain attributed evidence, no
 | Learned daily routines / absent beyond existing night/supper/winter practices (A2) | `intent.ts`, `household_practices.ts`, `winter_practice.ts`; 24/27/53 | Actual supper and winter practice transmission, WS11 | Experience-based morning/water/work/rest preferences, bounded and interruptible; revise after season/injury/dependant/travel changes. Matched people choose differently for an inspectable reason. |
 | General bounded contingent goals / absent (A3) | `types.ts` Intention, `intent.ts`, `batch_plan.ts`; six specialised kinds, 50 | One-workshop batch with one precursor stage; no general declarative goal graph | Bounded depth/steps/search/retries/history, registered actions, cycle/unreachable rejection; project survives drink/save/source loss and completes; impossible case ends and releases claims. |
 | Quantities, foresight, useful waits / incomplete (A4) | `activities.ts`, `relief.ts`, `intent.ts`, `night_wait.ts`; 27/30/50 | External bounds, daylight wait, footprint wait, batch resumption | Autonomous quantities/durations based on capacity/need; provision round trip; communicated meeting/batch/delivery waits have costs, timeout and next action. No future weather oracle. |
-| Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`; 34/36/37/50 | Reconsideration, partial shelter delivery, suspended work | Preserve progress through temporary obstruction; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Cover source/tool/helper loss. |
+| Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`; 34/36/37/50/61/63 | Reconsideration, partial shelter delivery, required-tool loss/replacement, bounded remembered food-capacity recovery | Preserve progress through other temporary obstructions; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Source/helper loss and general composition remain. |
 | Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
 | Reliability learning and conflicting reports / incomplete (A7) | `learning.ts`, `knowledge.ts`, `reputation.ts`; existing pay, failure, teller/origin and recency state | Firsthand observation supersedes older hearsay; no general 20-tick amnesia | Source/route/work/helper-specific learning; ability separate from willingness; correction stops obsolete influence; uninformed person does not react; single event counted once. |
 | Cooperation speech acts / incomplete (A8) | `social.ts`, `social_memory.ts`, `delivery_place.ts`, `customers.ts`; 39–51 | Requests/refusals, named home, later delivery/customer receipt | Ability/location questions, inability, counteramount/place, delay, cancellation/acknowledgment only where missing; actual contact and locally held grounds. |
 | Household coordination / incomplete (A9, WS5/11/17/20) | `responsibilities.ts`, `welfare.ts`, `intent.ts`, `social.ts`; 48/53/56 | Voluntary promises, childcare protections, death succession | Contacted intentions avoid duplicate trips and permit complementary work; provider absence causes reconsideration; private plans, promises and physical contributions stay distinct. |
-| Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`; 45/48/56 | Real non-berry help, deposits, eating; current checkpoint had 9 different-interior and 6 capacity give failures | Complete lawful entrance/contact, moved/full recipients, partial quantities and actual eating. No through-wall transfer or invented pack room. |
+| Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`, `care_capacity.ts`; 45/48/56/62/63 | Same-room resident gifts, work-time contact, actual-receipt cooldown, personally failed food hand-over → home deposit → table meal, including ordinary use; details below | Outside-interior contact and full water packs remain, along with missing lawful handoffs. Preserve partial quantities, unknown/full homes and actual eating. No through-wall transfer or invented room. |
 | Illness/injury/elder care / incomplete (WS17) | `welfare.ts`, `responsibilities.ts`, `illness.ts`, `life.ts`; 56 | Injured elder receives/eats bread; childcare saves/purity; zero ordinary uncovered-parent opportunities in short census | Acquire necessities, contact, warmth/childcare, cover duties, hand responsibility back after recovery; no-helper failure visible. |
 | Homes and shared upkeep / incomplete (WS4/16) | `shelter.ts`, `winter_shelter.ts`, `buildings.ts`, `facilities.ts`; 47+ | Physical repair then kiln use; prewinter housing-condition evidence | Material acquisition, concurrent interruption/collapse, replacement, limited labour and justified public responsibility; repair/rebuild costs and later occupation/use. |
 | Succession beyond death / incomplete (WS11/20) | `succession.ts`, `lifecycle.ts`; 53 | Staged death takeover; historical ordinary 0/5 records taken up | Informed acceptance during incapacity/departure, rival successors, original worker recovery, already-complete goal and missing goods. No copied goods/skills/promises. |
 | Relocation and population viability / measurement plus incomplete handovers (WS12/20) | `relocation.ts`, `lifecycle.ts`, `households.ts`; 20/54 | Subgroup/succession/return/search staged; one failed ordinary proposal in prior 135 seed-days | Trace cue→consent→dependants/provisions→travel→confirmation/home, organiser loss and return. Long horizon covers birth/ageing/adoption/split/loss without forced population. |
 | Practical knowledge continuity / incomplete (WS10/20) | `techniques.ts`, `learning.ts`, `background.ts`; 41/44/52 | Actual charcoal teaching and output; higher procedures/trials staged | Last skilled worker lost; learner learns through contact and later produces useful output; no automatic skill inheritance. |
-| Raw inputs→tools→workshop→use / incomplete (WS6) | `production.ts`, `recipes.ts`, `facilities.ts`, `options_work.ts`; 50/57/58 | Seed storage, hammer/crafting and staged cart chain; ordinary seed storage | Planks/handles/bricks/jar/charcoal/iron/forging/flour/bread/cart through useful work or meals; diagnose ore and downstream selection. |
+| Raw inputs→tools→workshop→use / incomplete (WS6) | `production.ts`, `recipes.ts`, `facilities.ts`, `options_work.ts`; 50/57/58/60/61 | Seed storage, tool-aligned batch recipes, stopped/recovered required-tool loss, staged cart → haul → construction; ordinary seed storage | Required versus convenience tool demand remains diagnosed; finish planks/handles/bricks/jar/charcoal/iron/forging/flour/bread/cart through ordinary useful work or meals; diagnose ore and downstream selection. |
 | Cart adoption order / connected at 59; useful carts incomplete (WS7) | `cart_priority.ts`, `batch_plan.ts`, `transport.ts`; 50/55/57/58/59 | Historical 52/52 hammer-holder samples answer cart; one Lena plan, zero carts | Next trace offered versus eligible versus chosen plan steps, actual interruptions, component stock and source loss before tuning weight. Complete construction→load→route→unload→use/wear/recovery ordinarily and staged negatives. |
 | Demand, customers, inter-settlement trade / incomplete (WS9) | `customers.ts`, `trade.ts`, `exchange_journeys.ts`, `production.ts`; 22/43/51 | Customer site delivery exists; historical ordinary swaps/returns absent | Produce personally requested good, lawful swap/gift/delivery, later trade review, repeated multi-settlement returns with feasible costs; retain refusals/stale leads. |
 | Winter food flow / incomplete (WS3) | `provision.ts`, `winter_reserve.ts`, `facilities.ts`; 46/53 | Grain shares and eating; larger target has no established survival benefit | Acquisition→preservation→access→distribution/eat→replenish; record expiry/spoilage/labour/displacement and adverse household. |
@@ -202,6 +202,63 @@ from **76/7/4** same-home starts. Full serialized unobserved twins matched. Fore
 home #23610 at tick 110553; she ate that kind at 110562. Full-pack failure remains real and now correctly leaves no fed
 cooldown; repeated futile offers are the next capacity/recovery diagnostic. Removing a false cooldown alone does not
 create a viable alternative. WS2/5/17 are still incomplete, as are all other unresolved capability-map rows.
+
+### Rules 63: personal capacity recovery through the home store
+
+The failed food hand-over now creates bounded personal operational memory (six entries, 600-tick relevance), and the
+helper can choose an ordinary physical deposit at a known household home near the dependant's remembered location.
+The trip preserves personal food, other dependants' portions and commitments, and revalidates ownership and capacity.
+The existing full-pack table meal supplies actual consumption. Its planner now recognises bread/meat in a known store;
+the first physical test exposed that missing recognition. Rules 62 was pinned first at `3e25e18`.
+Source owners, expected failure cases, review findings and contracts: [CARE_CAPACITY.md](CARE_CAPACITY.md).
+
+Final full suite: **1,536 tests / 229 files**, 162.20 seconds. Focused care/scoring: **15 tests / 2 files**. Typecheck/build
+pass. Final rendered staged chain: **6/6**, with initial gift selected externally and autonomous recovery/deposit/eating.
+Review corrected food-only recovery inheriting thirst urgency; the negative regression first failed and then passed.
+The rule never turns a household deposit into a recipient gift or a fed cooldown. Water-pack recovery remains open.
+
+Final-source ordinary runs use Normal meadow/river/forest, immigration off, through day 45. Meadow's first segment stopped
+at tick **63,360** (170.04 seconds), then continued its unchanged save for 44,640 ticks (62.33 seconds). River stopped at
+**105,960** (170.15 seconds), then continued 2,040 ticks (3.73 seconds). Forest reached 108,000 ticks in 138.58 seconds.
+These actual budget stops are retained in `autonomy_evidence/r63-{meadow,river,forest}-final`, with `r63-{meadow,river}-tail`.
+The earlier `r63-meadow` run predates the scoring review and is not the final-source baseline.
+
+| Seed, combined exact 45-day segments | Living-person ticks | Travel | Work | Leisure | Give starts | Different-space endings | Full-pack endings | Living at end / carts |
+|---|---:|---:|---:|---:|---:|---:|---:|---|
+| meadow | 3,161,544 | 1,188,521 | 323,358 | 23,939 | 1,240 | 208 | 396 | 30 / 0 |
+| river | 3,087,888 | 1,253,594 | 312,346 | 18,784 | 999 | 150 | 168 | 25 / 0 |
+| forest | 2,282,402 | 965,038 | 241,107 | 20,972 | 570 | 34 | 161 | 14 / 0 |
+
+Only additive occupancy/start/ending counts are combined; distinct sampled plans are not naively summed across segments.
+All conserve; 900 pure state/RNG samples per complete seed. Adverse deaths, full packs and zero carts remain. No aggregate
+benefit is established without matched controls/nudges; the new path also costs time otherwise available for rest or care.
+
+The ensuing five-day unchanged-save trace, `scripts/care_capacity_observe.ts`, distinguishes eligibility, starts, actual
+deposits and intended-recipient same-kind table meals within a day. Repeated 120-tick personal-failure samples are not
+independent opportunities. All three unobserved full serialized twins match, with 100 purity checks and conservation.
+
+| Seed | Samples with recent failure | Offered / eligible / ranked first | Recovery starts | Physical deposits | Later intended-recipient table meals |
+|---|---:|---|---:|---:|---:|
+| meadow | 200 | 14 / 13 / 9 | 21 | 18 | 11 |
+| river | 62 | 3 / 3 / 2 | 3 | 3 | 2 |
+| forest | 24 | 2 / 2 / 1 | 1 | 1 | 0 |
+
+Meadow retained three interruptions. Forest's lone deposit does not prove the intended person ate. The first observer
+reports retained a mutable reference to the failure memory, so later retries changed the recorded historical timestamp.
+Review caught this impossible ordering; final `care63-{meadow,river,forest}-final` reports copy the memory at the event.
+Initial reports remain for audit but are invalid for historical failure timestamps. The engine state was unaffected.
+
+Ordinary meadow: Vik #1036 remembered a failed hand-over at **113145**, chose a recovery at tick **113146**, left one berry for Rafe #1037 at home **10824** at
+**113178**, and Rafe ate that kind directly at the store at **113280**. Hunger rose **27.9804 → 39.9549**, while the carried
+load remained **4.75**. Rest (50.3) and company (50.4) were passed over for that food deposit (77.7). This is a remembered
+failure changing a feasible action followed by useful consumption, not a unique-unit or household-survival claim.
+Preserved ordinary limit: forest Thea #934 left one berry for Brigid #14896 at home **31370**, tick **112686**, after the
+recorded full-pack failure at **112150**; no matching meal by Brigid appears in the remainder of the five-day trace.
+
+Next physical prerequisite: `scripts/tool_precedence_diagnostic.ts` reproduces the current-rules saw-for-hammer conflict
+without mutating state. A site needs planks, which can be hewn by hand; a wanted cart requires a hammer; the planner records
+the optional saw because it is encountered first. Adapt the reviewed concurrent `c4ba75b` repair at the next unused version,
+including rules-61 paid-job recovery, after pinning this predecessor. Do not import its conflicting rules-59 saves.
 
 ## Earlier implementation checkpoint — expanded programme still open (rules 58)
 

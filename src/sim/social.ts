@@ -53,6 +53,7 @@ import { isToolItem } from './toolreg';
 import type { Belief, Commitment, Conversation, ConvPurpose, ItemKind, Items, Person, Request, RequestKind, Speech, ToolKind, World, BuildingType } from './types';
 import { clamp, hyp } from './util';
 import { hasLocalGiving } from './local_giving';
+import { noteCarePackFailure } from './care_capacity';
 
 // ───────────────────────── small helpers ─────────────────────────
 const toldKey = (listener: number, beliefId: number): number => listener * 1_000_000 + beliefId;
@@ -1790,6 +1791,7 @@ registerHandler('give', {
     t.cooldowns.pause = 0;
     if (!hasLocalGiving(world) || moved > 0) t.cooldowns.fedUntil = world.tick + 120; // only actual receipt gives them time to eat
     if (moved <= 0) {
+      if (a.data.mode === 'care') noteCarePackFailure(world, p, t, want);
       if (a.data.commitmentId) {
         const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));
         if (cm) {
