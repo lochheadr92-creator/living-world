@@ -1,3 +1,4 @@
+import {hasPromiseTargets} from './promise_targets';
 import {hasPromiseExpectations,endExpectation} from './promise_expectations';
 import {hasPromiseOutcomes,unresolvedOutcome} from './promise_outcomes';
 import { hyp } from './util';
@@ -8,7 +9,7 @@ import { runsRulesVersion } from './rulesversion';
 import {taskReceipt} from './helper_learning';
 import {hasPromiseKnowledge,completionContact,canWitnessCompletion} from './promise_knowledge';
 export function rememberRequest(w: World, r: Request): void {
- if (w.settings.dynamics !== 'rich' || !runsRulesVersion(w,13) || !(['declined','fulfilled','partial','broken','interrupted','failed'].includes(r.status)||hasPromiseOutcomes(w)&&!!r.commitmentId&&r.status==='expired')) return;
+ if (w.settings.dynamics !== 'rich' || !runsRulesVersion(w,13) || !(['declined','fulfilled','partial','broken','interrupted','failed'].includes(r.status)||hasPromiseOutcomes(w)&&!!r.commitmentId&&r.status==='expired'||hasPromiseTargets(w)&&r.status==='cancelled'&&w.persons.find(p=>p.id===r.to)?.commitments.some(c=>c.requestId===r.id&&!!c.targetEvidence))) return;
  for(const [id,otherId,role] of [[r.from,r.to,'asker'],[r.to,r.from,'helper']] as const){
   const p=w.byId.get(id);if(!p||p.ent!=='person'||!p.alive)continue;
   const other=w.byId.get(otherId);

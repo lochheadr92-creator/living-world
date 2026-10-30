@@ -1,3 +1,4 @@
+import {hasPromiseTargets,describeTargetEvidence,validateTargetEvidence,type PromiseTargetEvidence} from './promise_targets';
 import {hasPromiseExpectations,storeKnownReport} from './promise_expectations';
 // Failed execution and knowledge of its outcome belong to the person who attempted the promise.
 import {DAY} from './constants';
@@ -6,7 +7,7 @@ import {completionContact,pendingCompletionReports} from './promise_knowledge';
 import {addLog} from './events';
 import type {Activity,Commitment,Person,Request,World} from './types';
 export interface PromiseAttempt {activityId:number;kind:Activity['kind'];targetId:number;phase:Activity['phase'];tick:number;reason:string;delivered:number;contrib:number;resolvedAt?:number}
-export interface PromiseResolution {source:'own outcome'|'helper report';tick:number;from:number;resolvedAt:number;commitmentId:number;attempt?:PromiseAttempt;conversationId?:number;acknowledgedAt?:number;reportAfter?:number}
+export interface PromiseResolution {source:'own outcome'|'helper report';tick:number;from:number;resolvedAt:number;commitmentId:number;attempt?:PromiseAttempt;targetEvidence?:PromiseTargetEvidence;conversationId?:number;acknowledgedAt?:number;reportAfter?:number}
 type Memory=NonNullable<Person['socialMemory']>[number];
 let enabled=true;
 export const promiseOutcomesOn=()=>enabled;
@@ -44,7 +45,7 @@ export function deadlineOutcome(w:World,c:Commitment,frac:number):void{
 }
 export function recordPromiseResolution(w:World,p:Person,r:Request,c:Commitment):void{
  const own=p.socialMemory?.find(m=>m.requestId===r.id&&m.role==='helper');if(!own||own.resolution)return;
- own.resolution={source:'own outcome',tick:w.tick,from:p.id,resolvedAt:w.tick,commitmentId:c.id,...(outstandingAttempt(c)?{attempt:{...outstandingAttempt(c)!}}:{})};
+ own.resolution={source:'own outcome',tick:w.tick,from:p.id,resolvedAt:w.tick,commitmentId:c.id,...(hasPromiseTargets(w)&&c.targetEvidence?{targetEvidence:{...c.targetEvidence}}:{}),...(outstandingAttempt(c)?{attempt:{...outstandingAttempt(c)!}}:{})};
  addLog(w,p,'social',`My promise ended: ${c.reason}. I have not yet explained the outcome to the requester.`);
 }
 export function pendingOutcomeReports(w:World,p:Person):Memory[]{
@@ -63,10 +64,11 @@ export function receiveOutcomeReport(w:World,speaker:Person,listener:Person,requ
  const known=memories.find(x=>x.requestId===requestId);
  if(!known||hasPromiseExpectations(w)&&known.expectation&&!known.resolution){
   const t=m.task,k=m.resolution;
-  storeKnownReport(w,listener,{requestId,otherId:speaker.id,siteId:m.siteId,tick:w.tick,outcome:m.outcome,reason:`${speaker.name} reported: ${m.reason}`,role:'asker',...(t?{task:{kind:t.kind,item:t.item,asked:t.asked,...(t.offered!==undefined?{offered:t.offered}:{})}}:{}),resolution:{source:'helper report',tick:w.tick,from:speaker.id,resolvedAt:k.resolvedAt,commitmentId:k.commitmentId,...(k.attempt?{attempt:{...k.attempt}}:{}),conversationId}});
+  storeKnownReport(w,listener,{requestId,otherId:speaker.id,siteId:m.siteId,tick:w.tick,outcome:m.outcome,reason:`${speaker.name} reported: ${m.reason}`,role:'asker',...(t?{task:{kind:t.kind,item:t.item,asked:t.asked,...(t.offered!==undefined?{offered:t.offered}:{})}}:{}),resolution:{source:'helper report',tick:w.tick,from:speaker.id,resolvedAt:k.resolvedAt,commitmentId:k.commitmentId,...(k.targetEvidence?{targetEvidence:{...k.targetEvidence}}:{}),...(k.attempt?{attempt:{...k.attempt}}:{}),conversationId}});
   if(memories.length>32)memories.shift();
  }
  addLog(w,listener,'social',`Heard ${speaker.name}'s explanation for request #${requestId}; this is their account, not an independently witnessed cause.`);
+ if(m.resolution.targetEvidence)return m.resolution.targetEvidence.source==='completed here'?'I finished the building work at the site, but did not deliver all the materials I had promised. There is no longer a site to receive them.':`The ${m.resolution.targetEvidence.kind} I promised to help with was no longer there when I looked. I do not know what happened.`;
  return m.resolution.attempt?`I tried to do what I promised, but ${m.resolution.attempt.reason}.`:m.outcome==='interrupted'?'I could not finish what I promised; I had to see to my own needs.':m.reason.includes('cause not established')?'I did not finish what I promised. I cannot give you a clear explanation.':`I could not finish what I promised: ${m.reason}.`;
 }
 export function acknowledgeOutcomeReport(w:World,speaker:Person,listener:Person,requestId:number):boolean{
@@ -77,7 +79,7 @@ export function acknowledgeOutcomeReport(w:World,speaker:Person,listener:Person,
 }
 export function describeResolution(k:PromiseResolution|undefined):string{
  if(!k)return '';
- return ` Outcome knowledge: ${k.source}, learned tick ${k.tick}; obligation ended tick ${k.resolvedAt}, commitment #${k.commitmentId}.${k.attempt?` Attempt: activity #${k.attempt.activityId}, ${k.attempt.kind}, tick ${k.attempt.tick}: ${k.attempt.reason}.`:''}${k.source==='helper report'?` From person #${k.from}, conversation #${k.conversationId}; reported, not independently witnessed. Intent is not established.`:k.acknowledgedAt===undefined?' No acknowledgement received.':` Acknowledged at tick ${k.acknowledgedAt}.`}`;
+ return ` Outcome knowledge: ${k.source}, learned tick ${k.tick}; obligation ended tick ${k.resolvedAt}, commitment #${k.commitmentId}.${describeTargetEvidence(k.targetEvidence)}${k.attempt?` Attempt: activity #${k.attempt.activityId}, ${k.attempt.kind}, tick ${k.attempt.tick}: ${k.attempt.reason}.`:''}${k.source==='helper report'?` From person #${k.from}, conversation #${k.conversationId}; reported, not independently witnessed. Intent is not established.`:k.acknowledgedAt===undefined?' No acknowledgement received.':` Acknowledged at tick ${k.acknowledgedAt}.`}`;
 }
 export function validatePromiseOutcomes(w:World):void{
  const integer=(n:unknown,min=0,max=Number.MAX_SAFE_INTEGER)=>Number.isSafeInteger(n)&&Number(n)>=min&&Number(n)<=max;
@@ -87,9 +89,10 @@ export function validatePromiseOutcomes(w:World):void{
  for(const p of w.persons){for(const c of p.commitments)if(c.attempt!==undefined)attempt(c.attempt);
  const memories=p.socialMemory??[];if(memories.some(m=>m.resolution!==undefined)&&(memories.length>32||new Set(memories.map(m=>m.requestId)).size!==memories.length))throw new Error('Invalid outcome memory count');
  for(const m of memories)if(m.resolution!==undefined){const k=m.resolution;
-  if(!allowed()||!k||!['own outcome','helper report'].includes(k.source)||!integer(k.tick,0,w.tick)||!integer(k.resolvedAt,0,k.tick)||!integer(k.commitmentId,1)||!unresolvedOutcome(m.outcome)||m.completion!==undefined||k.source==='own outcome'&&m.role!=='helper'||k.source==='helper report'&&m.role!=='asker'||k.from!==(k.source==='helper report'?m.otherId:p.id)||k.source==='helper report'&&!integer(k.conversationId,1)||k.acknowledgedAt!==undefined&&(k.source!=='own outcome'||!integer(k.acknowledgedAt,k.tick,w.tick))||!integer(m.tick,0,w.tick))throw new Error('Invalid personal promise outcome knowledge');
+  if(!allowed()||!k||!['own outcome','helper report'].includes(k.source)||!integer(k.tick,0,w.tick)||!integer(k.resolvedAt,0,k.tick)||!integer(k.commitmentId,1)||!(unresolvedOutcome(m.outcome)||runsRulesVersion(w,83)&&m.outcome==='cancelled'&&!!k.targetEvidence)||m.completion!==undefined||k.source==='own outcome'&&m.role!=='helper'||k.source==='helper report'&&m.role!=='asker'||k.from!==(k.source==='helper report'?m.otherId:p.id)||k.source==='helper report'&&!integer(k.conversationId,1)||k.acknowledgedAt!==undefined&&(k.source!=='own outcome'||!integer(k.acknowledgedAt,k.tick,w.tick))||!integer(m.tick,0,w.tick))throw new Error('Invalid personal promise outcome knowledge');
   if(k.source==='helper report'&&(m.task?.receipt||m.task?.workReceipt))throw new Error('Reported outcome is not firsthand task evidence');
   if(k.reportAfter!==undefined&&(k.source!=='own outcome'||!integer(k.reportAfter,k.tick,w.tick+400)))throw new Error('Invalid bounded outcome report retry');
+  if(k.targetEvidence!==undefined){validateTargetEvidence(w,k.targetEvidence,k.resolvedAt);if(m.outcome!=='cancelled')throw new Error('Target cancellation requires a cancelled outcome');}
   if(k.attempt!==undefined){attempt(k.attempt,k.resolvedAt);if(k.attempt.resolvedAt!==undefined)throw new Error('Resolved attempt cannot explain an unresolved outcome');}
  }
  }

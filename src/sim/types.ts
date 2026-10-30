@@ -408,6 +408,7 @@ export interface Commitment {
   blocked?: string;
   blockedAt?: number;
   attempt?: import('./promise_outcomes').PromiseAttempt;
+  targetEvidence?: import('./promise_targets').PromiseTargetEvidence;
   /** for a promise to work: the milestone that settles it */
   milestone?: string;
 }

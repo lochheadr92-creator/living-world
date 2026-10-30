@@ -1,3 +1,4 @@
+import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
 import { SENSE_RADIUS } from './constants';
 import { indoorHome, sameSpace } from './habitation';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
@@ -222,6 +223,7 @@ export function refreshAccessCell(world: World, cellIdx: number): number {
  * A person only notices a change if they are close enough to see the spot again.
  */
 export function refreshBeliefs(world: World, p: Person): void {
+  if(hasPromiseTargets(world)&&(p.pose==='sleep'||p.activity?.kind==='sleep'))return;
   if (indoorHome(world, p)) return; // cannot inspect the outside world through walls
   const r = senseRadius(world, p) * 0.92;
   for (const key of Object.keys(p.beliefs)) {
@@ -234,7 +236,7 @@ export function refreshBeliefs(world: World, p: Person): void {
     }
     if (b.kind === 'water') continue;
     if (!world.byId.has(id)) {
-      if (hyp(b.x - p.x, b.y - p.y) < r) delBelief(p, id);
+      if (hyp(b.x - p.x, b.y - p.y) < r) {observePromiseTarget(world,p,id,b.x,b.y);delBelief(p, id);}
     }
   }
 }

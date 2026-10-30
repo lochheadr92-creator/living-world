@@ -1,3 +1,4 @@
+import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
 import {hasPromiseKnowledge} from './promise_knowledge';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { footprintOccupied, hasLayoutClaims, layoutClaimBlock, LAYOUT_OCCUPANCY_WAIT } from './layout_claims';
@@ -62,6 +63,7 @@ registerHandler('build', {
   begin(world, p, a) {
     const site = world.byId.get(a.targetId);
     if (!site || site.ent !== 'site') {
+      observePromiseTarget(world,p,a.targetId,a.tx,a.ty);
       delBelief(p, a.targetId);
       return 'the site is already finished or gone';
     }
@@ -77,6 +79,7 @@ registerHandler('build', {
   work(world, p, a): WorkResult {
     const site = world.byId.get(a.targetId);
     if (!site || site.ent !== 'site') {
+      if(hasPromiseTargets(world)){observePromiseTarget(world,p,a.targetId,a.tx,a.ty);return a.cycle>0?'partial:the site is no longer here; its fate is unknown':'fail:the site is no longer here; its fate is unknown';}
       return a.cycle > 0 ? 'done' : 'fail:the site is gone';
     }
     if (!mayWorkProject(world, p, site.id)) return 'fail:participation withdrawn';
@@ -117,6 +120,7 @@ registerHandler('build', {
       onSharedWork(world, crew, 'build');
       addLog(world, p, 'work', `Finished building the ${buildingLabel(b.type)}.`);
       observe(world, p, b);
+      observePromiseTarget(world,p,site.id,site.x+site.w/2,site.y+site.h/2,'completed here');
       delBelief(p, site.id);
       return 'done';
     }
@@ -142,6 +146,7 @@ registerHandler('repair', {
   begin(world, p, a) {
     const b = world.byId.get(a.targetId);
     if (!b || b.ent !== 'building') {
+      observePromiseTarget(world,p,a.targetId,a.tx,a.ty);
       delBelief(p, a.targetId);
       return 'it is gone';
     }
@@ -154,7 +159,7 @@ registerHandler('repair', {
   },
   work(world, p, a): WorkResult {
     const b = world.byId.get(a.targetId);
-    if (!b || b.ent !== 'building') return 'fail:it is gone';
+    if (!b || b.ent !== 'building') {observePromiseTarget(world,p,a.targetId,a.tx,a.ty);return 'fail:it is gone';}
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress % 14 === 7) addFx(world, 'hammer', a.tx, a.ty, 0);
@@ -375,6 +380,7 @@ registerHandler('fuel_fire', {
   begin(world, p, a) {
     const f = world.byId.get(a.targetId);
     if (!f || f.ent !== 'building' || f.type !== 'fire') {
+      observePromiseTarget(world,p,a.targetId,a.tx,a.ty);
       delBelief(p, a.targetId);
       return 'the fire is gone';
     }
@@ -391,12 +397,13 @@ registerHandler('fuel_fire', {
   },
   work(world, p, a): WorkResult {
     const f = world.byId.get(a.targetId);
-    if (!f || f.ent !== 'building') return 'fail:the fire is gone';
+    if (!f || f.ent !== 'building') {observePromiseTarget(world,p,a.targetId,a.tx,a.ty);return 'fail:the fire is gone';}
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
     if (consume(world, p.inv, 'wood', 1, 'fuel for the fire') < 1) return a.cycle > 0 ? 'done' : 'fail:no wood to add';
     f.fuel = Math.min(FIRE_MAX_FUEL, f.fuel + FIRE_FUEL_PER_WOOD);
+    if(hasPromiseTargets(world))p.cooldowns['fedfire'+f.id]=world.tick;
     a.cycle++;
     a.progress = 0;
     addFx(world, 'ember', f.x + 0.5, f.y + 0.5, 0);

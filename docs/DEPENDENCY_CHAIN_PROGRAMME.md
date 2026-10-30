@@ -28,6 +28,19 @@ pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-o
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
 
+### Rules 83 — personally discovered target changes and cancellation explanations
+
+Candidate in progress from published `60d7adc`; immutable predecessor 82 is `a331382`.
+`PROMISE_TARGETS.md` records the hidden roof-loss reproduction, actual local discovery,
+truthful partial work, real cancellation conversation/acknowledgement and observed completion.
+The existing commitment and bounded request receipt own evidence; no second general memory store.
+The initial ordinary river trace exposed construction completion being confused with a fulfilled
+haul. That finding is repaired and has an ordinary tick-1000 regression; original measurements
+and the deliberately stopped first full run are retained. Release focused checks pass 49 tests
+in four files, browser 10/10, typecheck/build pass. Final full regression/ordinary results are
+recorded after the frozen candidate completes. General requester-initiated cancellation, delays,
+ability/location questions, conflicting reports and broader programme work remain open.
+
 ### Rules 82 — heard agreements and personal cancellation knowledge
 
 Predecessor 81 is pinned at `7f039b9`, from `ca58c07`; the remote-death reproduction is recorded

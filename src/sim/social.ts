@@ -1,3 +1,4 @@
+import {hasPromiseTargets,targetOutcome} from './promise_targets';
 import {hasPromiseExpectations,rememberExpectation,updateExpectations,expectedOutstanding} from './promise_expectations';
 import {knowsDeath} from './death_knowledge';
 import {hasPromiseOutcomes,deadlineOutcome,recordPromiseResolution,receiveOutcomeReport,acknowledgeOutcomeReport} from './promise_outcomes';
@@ -577,8 +578,9 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
     const got = req.delivered ?? c.delivered ?? 0;
     // A watch promises time and attention, not a quantity of goods. Its actual work milestone is the evidence.
     const watched = hasPracticalCare(world) && req.kind === 'watch' && c.kind === 'work' && c.milestone === 'watched' && (c.contrib ?? 0) >= 40;
-    const full = !isRich(world) || got >= req.amount || watched;
-    settle(world, req, full ? 'fulfilled' : 'partial', watched ? 'kept watch for the agreed time' : full ? 'promise kept' : `promise kept: ${got} of the ${req.amount} asked for`);
+    const workDone=hasPromiseTargets(world)&&['work','help_build'].includes(c.kind)&&((c.contrib??0)>=40||c.targetEvidence?.source==='completed here');
+    const full = !isRich(world) || got >= req.amount || watched || workDone;
+    settle(world, req, full ? 'fulfilled' : 'partial', watched ? 'kept watch for the agreed time' : workDone ? 'completed my promised work contribution' : full ? 'promise kept' : `promise kept: ${got} of the ${req.amount} asked for`);
   }
   if(hasPromiseKnowledge(world)){
     const witnessed=req&&recordPromiseCompletion(world,A,B,req,c);
@@ -608,6 +610,17 @@ export function checkCommitments(world: World, p: Person): void {
   updateExpectations(world,p);
   for (const c of p.commitments) {
     if (c.status !== 'active') continue;
+    if(hasPromiseTargets(world)&&settleFirePromise(world,p,c))continue;
+    const targetResult=targetOutcome(world,c);
+    if(targetResult){
+      if(targetResult.done)fulfillCommitment(world,p,c.id);
+      else {
+        c.status='moot';c.reason=targetResult.reason;
+        const a=p.activity;if(a&&(a.data.commitmentId===c.id||a.targetId===c.targetEvidence!.targetId&&['repair','build','haul','fuel_fire'].includes(a.kind)))endActivity(world,p,'interrupted',c.reason);
+        const r=world.requests.find(r=>r.id===c.requestId);if(r){if(r.status==='promised')settle(world,r,'cancelled',c.reason);else rememberRequest(world,{...r,status:'cancelled',note:c.reason});recordPromiseResolution(world,p,r,c);}
+      }
+      continue;
+    }
     const A = personOf(world, c.to);
     const req = world.requests.find((r) => r.id === c.requestId);
     if(!A&&hasPromiseExpectations(world)&&!knowsDeath(p,c.to)){
@@ -632,7 +645,7 @@ export function checkCommitments(world: World, p: Person): void {
     if (p.pose === 'sleep' || (p.activity && p.activity.need)) c.grace = (c.grace ?? 0) + 40;
     // a building that no longer needs help. In a rich world the maker has to have found that out for themselves: while they still
     // carry a belief about the site, the promise stands (they learn it is gone by going there, which clears the belief).
-    if ((c.kind === 'help_build' || c.kind === 'haul' || c.kind === 'work') && c.siteId && !world.byId.has(c.siteId) && !(isRich(world) && p.beliefs[c.siteId] !== undefined && world.tick < c.deadline + (c.grace ?? 0))) {
+    if (!hasPromiseTargets(world) && (c.kind === 'help_build' || c.kind === 'haul' || c.kind === 'work') && c.siteId && !world.byId.has(c.siteId) && !(isRich(world) && p.beliefs[c.siteId] !== undefined && world.tick < c.deadline + (c.grace ?? 0))) {
       const did = (c.contrib ?? 0) > 0 || (c.delivered ?? 0) > 0;
       c.status = did ? 'done' : 'moot';
       c.reason = did ? 'the building was finished with their help' : 'the building was finished or given up';
@@ -641,7 +654,7 @@ export function checkCommitments(world: World, p: Person): void {
     }
     if (c.kind === 'work' && c.destKind === 'building') {
       const target = c.destId ? world.byId.get(c.destId) : undefined;
-      if (!target || target.ent !== 'building') {
+      if (!hasPromiseTargets(world)&&(!target || target.ent !== 'building')) {
         c.status = 'moot';
         c.reason = 'the building is gone';
         if (req && req.status === 'promised') settle(world, req, 'cancelled', c.reason);
@@ -649,7 +662,7 @@ export function checkCommitments(world: World, p: Person): void {
       }
       // a promise to keep a fire going is kept by feeding it (responsibilities.ts), not by the state of a roof
       if (settleFirePromise(world, p, c)) continue;
-      const seenCond = c.milestone === 'fire kept' ? -1 : isRich(world) ? p.beliefs[target.id]?.cond : target.condition;
+      const seenCond = c.milestone === 'fire kept' ? -1 : isRich(world) ? p.beliefs[c.destId??0]?.cond : target?.ent==='building'?target.condition:undefined;
       if ((seenCond ?? -1) >= 62) {
         const did = (c.contrib ?? 0) > 0;
         c.status = did ? 'done' : 'moot';
@@ -1398,6 +1411,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         req.note = council ? `${B.name} supports ${A.name} coordinating and will help build` : `${B.name} will help build`;
         if(project&&receivedCivicBenefit(world,B,A.id))req.note+='; remembers benefiting from their earlier shared storehouse';
         bubble(world, B, council?`I support you coordinating it, ${A.name}.`:D.saying(D.RESP_PROMISE_HELP, B.id, A.id, world.tick >> 5), 'say', 64);
+        if(hasPromiseTargets(world)){const agreed=B.commitments.find(x=>x.id===req.commitmentId);if(agreed)rememberExpectation(world,A,B,req,agreed,c.id);}
         addLog(world, B, 'social', `Agreed to help ${A.name} with the building.`);
         addEvent(world, 'social', `${B.name} agreed to help ${A.name} build.`, [A.id, B.id], A.x, A.y);
       } else {
