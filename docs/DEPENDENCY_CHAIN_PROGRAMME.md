@@ -389,6 +389,12 @@ Fresh five-day Normal, immigration off, meadow/river/forest all reached tick 12,
 
 `scripts/care_water_gap.ts` repeats river and matches its exact final save. The five samples are Jax at ticks 600–1080, with no known household home and zero spare water. This is not five feasible delivery opportunities. Preserve the adverse absence of infrastructure/supplies and do not tune scoring to manufacture water or homes. Broader acquisitions, care duties, production and every other remaining capability-map row stay open.
 
+### Current continuation checkpoint — rules 68
+
+Last fully verified runtime: **`2eb6ebf29d2b12da93348d8998d1194e603b78fb`**. Its immutable continuation is captured before any rules-69 behavior changes: ordinary meadow, autonomous water provision, full-store invalidation, mixed food/water failure, and a real return delivery suspended by conversation and then resumed. The separate reference test passed **1/1 in 10.13 seconds** (`autonomy-v68-check.log`); do not add it to the earlier full-suite count and call that a new full run. The reference writer refuses overwrite or capture under a successor.
+
+Next implementation dependency: resume the unfinished production/planning chain, rather than retuning the five river samples that had no home or spare water. Current `batch_plan.ts` still composes only one same-workshop precursor; general bounded declarative goals (A3) remain absent. Audit the actual tool → ingredients → workshop → useful output path and reuse the registered actions/private intentions when adding bounded prerequisites, waits and recovery. A3 is a dependency for the remaining sustained multistep production and household duties, not a declaration that WS6/7 or practical care are complete. Preserve all open A1–A16/WS15–21 rows, ordinary/aggregate nulls and owner-run long validation in `docs/AUTONOMY_VALIDATION.md`.
+
 ### Historical continuation checkpoint — rules 67
 
 Runtime **`f51c642652a9e60fdb69019668e3f950e2995420`** implements stored-water drinking. Its immutable reference was captured before rules-68 production edits, covering ordinary meadow, in-progress stored drinking, competing stock loss, physical return and blocked entrance. The separate reference test passed **1/1 in 10.87 seconds** (`autonomy-v67-check.log`); this is additional to the runtime full suite, not a new full-run total. `scripts/v67_reference.ts` refuses overwrite or capture under a successor version.

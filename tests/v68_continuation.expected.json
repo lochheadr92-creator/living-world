@@ -1,0 +1,28 @@
+{
+  "source": "2eb6ebf29d2b12da93348d8998d1194e603b78fb, rules 68 before successor behaviour",
+  "ordinary": {
+    "saved": "b6e9ebc495eb7299de439317411b7c89f920cc4830d12a7b5373ce3dbcba5bb5",
+    "uninterrupted": "eda50c8b2aa07c001b077560f0adc35aa7371c95e7ada094a9fa052673c14cad",
+    "continued": "eda50c8b2aa07c001b077560f0adc35aa7371c95e7ada094a9fa052673c14cad"
+  },
+  "provision": {
+    "saved": "2f7d2ce9847c1c92de7572f0bc8c6f3e60ccab8af4d002fd6a9749124528eb2f",
+    "uninterrupted": "26c7b2ee50f12c968d496df907db83ae865c9fde30a8632fac63de0482c40cf1",
+    "continued": "26c7b2ee50f12c968d496df907db83ae865c9fde30a8632fac63de0482c40cf1"
+  },
+  "fullStore": {
+    "saved": "972b2d81ec46743468bd27348312d7c43ab31833f532d56bfc6a489df1701152",
+    "uninterrupted": "2d917d6abae132326838906c1979cc84bf2c94bafa9b6074e8a6cf6689cab88d",
+    "continued": "2d917d6abae132326838906c1979cc84bf2c94bafa9b6074e8a6cf6689cab88d"
+  },
+  "mixedFailure": {
+    "saved": "014c9db06c650aa214218eb66eab1f96af224d072aa1881f108cbc2d51eb7f80",
+    "uninterrupted": "39774edca8397197ad1af5c6d37d98573459c315c412a7f9df5bfa0fe5e52be7",
+    "continued": "39774edca8397197ad1af5c6d37d98573459c315c412a7f9df5bfa0fe5e52be7"
+  },
+  "suspendedReturn": {
+    "saved": "98be704985e019d04dd5494f9ebf8a2a43e790a7d2fe1bd670ddc53c3f0989c5",
+    "uninterrupted": "18136007abdb76f18466acb033f224e9e445695d747a5dd6720b64cf799b014e",
+    "continued": "18136007abdb76f18466acb033f224e9e445695d747a5dd6720b64cf799b014e"
+  }
+}
