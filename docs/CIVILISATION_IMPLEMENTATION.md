@@ -2,6 +2,8 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **86** adds persistent productive condition separate from harvestable stock, actual extraction/sowing pressure, paid field care/rest, weather-dependent recovery and dated personal source choices (`ECOLOGY_CONDITION.md`). Full regression **281 files / 1,908 tests**, typecheck/build and browser **10/10** pass; immutable continuation passes separately **1/1**. Runtime `21537ba`, reference `8b58b93`. Three fixed five-day worlds record 77/92/95 condition-reason gathering starts, but zero field-rest offers/starts; long recovery, mature-world cost and aggregate benefit remain pending. New AI protocols 23/24 expose observation 13 through actual live/stub replay, preserving older protocols. Next: finite water supply under `WATER_BUDGET.md`. The full owner programme remains incomplete.
+
 Rules **85** settles an actually supplied building share before the deadline without declaring
 the site finished or informing a distant requester. Genuine remaining failed attempts can be
 explained and a single six-hour extension accepted/refused through actual contact. Original
