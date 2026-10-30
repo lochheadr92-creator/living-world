@@ -229,3 +229,5 @@ Final full regression: **284 files / 1,928 tests passed in 401.29 seconds**
 (`autonomy-water87-final-full-tests.log`). Typecheck and release build pass; rendered checks
 10/10 and the three ordinary exact-twin runs above use this unchanged runtime. Immutable
 rules-87 reference is recorded from the following runtime commit before successor edits.
+
+Runtime committed at `1e21d6a`; immutable reference `8d5d89a` passes separately 1/1 in 1.78 seconds (`autonomy-water87-reference-check.log`). Earlier recorded continuation fixtures remain unchanged.
