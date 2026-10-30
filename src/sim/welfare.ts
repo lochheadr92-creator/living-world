@@ -1,3 +1,4 @@
+import {hasPromiseExpectations} from './promise_expectations';
 import { onLookedInOnBereaved } from './lifechanges';
 import { hasPracticalCare, watchTick } from './responsibilities';
 import { faceToward, newActivity, registerHandler } from './activities';
@@ -281,7 +282,7 @@ registerHandler('visit', {
   pose: () => 'stand',
   begin(world, p, a) {
     const t = personById(world, a.targetId);
-    if (!t) return 'they are no longer around';
+    if (!t) {if(hasPromiseExpectations(world)&&a.data.commitmentId){delete p.whereabouts[a.targetId];p.cooldowns['check'+a.targetId]=world.tick+240;return 'they were not where I expected';}return 'they are no longer around';}
     a.duration = 12;
     // arrived at where they were expected: look around (the ordinary perception has just refreshed what is in view)
     // standing where they were expected, they can see (or not) who is there: anyone this close is in plain view

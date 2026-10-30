@@ -1,3 +1,5 @@
+import {hasPromiseExpectations,rememberExpectation,updateExpectations,expectedOutstanding} from './promise_expectations';
+import {knowsDeath} from './death_knowledge';
 import {hasPromiseOutcomes,deadlineOutcome,recordPromiseResolution,receiveOutcomeReport,acknowledgeOutcomeReport} from './promise_outcomes';
 import { hasExchangeJourneys, tellTradeLead, endExchangeTalk, endExchangeApproach } from './exchange_journeys';
 import { TECHNIQUES } from './techniques';
@@ -127,6 +129,7 @@ export {reservedFor} from './reserved_goods';
 
 /** How much of what `from` asked for (and has not yet got) is already spoken for by pending requests and promises. */
 export function outstandingFor(world: World, from: number, item: ItemKind, destId = 0): number {
+  if(hasPromiseExpectations(world)){const p=world.byId.get(from);return p?.ent==='person'?expectedOutstanding(world,p,item,undefined,destId):0;}
   let n = 0;
   for (const r of world.requests) {
     if (r.from !== from || r.item !== item) continue;
@@ -553,7 +556,7 @@ export function socialOnDeath(world: World, p: Person): void {
     if (r.from === p.id) {
       settle(world, r, 'cancelled', `${p.name} died`);
       const owner = world.byId.get(r.to);
-      if (owner && owner.ent === 'person') for (const c of owner.commitments) if (c.requestId === r.id && c.status === 'active') {
+      if (owner && owner.ent === 'person'&&(!hasPromiseExpectations(world)||knowsDeath(owner,p.id))) for (const c of owner.commitments) if (c.requestId === r.id && c.status === 'active') {
         c.status = 'moot';
         c.reason = `${p.name} died`;
       }
@@ -602,15 +605,29 @@ export function fulfillCommitment(world: World, B: Person, commitmentId: number)
  * Time asleep and time spent on survival does not count against the deadline.
  */
 export function checkCommitments(world: World, p: Person): void {
+  updateExpectations(world,p);
   for (const c of p.commitments) {
     if (c.status !== 'active') continue;
     const A = personOf(world, c.to);
     const req = world.requests.find((r) => r.id === c.requestId);
+    if(!A&&hasPromiseExpectations(world)&&!knowsDeath(p,c.to)){
+      if(p.pose==='sleep'||p.activity?.need)c.grace=(c.grace??0)+40;
+      const effective=c.deadline+(c.grace??0);
+      if(world.tick>effective&&!(p.activity?.data.commitmentId===c.id&&world.tick<effective+300)){
+        const total=c.kind==='help_build'||c.kind==='work'?40:Math.max(1,c.amount),got=c.kind==='help_build'||c.kind==='work'?c.contrib??0:c.delivered??0;
+        if(got>=total)fulfillCommitment(world,p,c.id);else {deadlineOutcome(world,c,got/total);if(req){const own={...req,status:c.status as 'expired'|'interrupted'|'failed',note:c.reason!};rememberRequest(world,own);recordPromiseResolution(world,p,own,c);}}
+      }
+      continue;
+    }
     if (!A) {
       c.status = 'moot';
-      c.reason = 'the other person is gone';
+      c.reason = hasPromiseExpectations(world)?'learned that the requester died':'the other person is gone';
+      if(hasPromiseExpectations(world)&&p.activity?.data.commitmentId===c.id)endActivity(world,p,'interrupted',c.reason);
       if (req && (req.status === 'promised' || req.status === 'pending')) settle(world, req, 'cancelled', 'the other person is gone');
       continue;
+    }
+    if(hasPromiseExpectations(world)&&c.milestone==='watched'&&c.destId&&knowsDeath(p,c.destId)){
+      c.status='moot';c.reason='learned that the child died';if(p.activity?.data.commitmentId===c.id)endActivity(world,p,'interrupted',c.reason);if(req&&req.status==='promised')settle(world,req,'cancelled',c.reason);continue;
     }
     if (p.pose === 'sleep' || (p.activity && p.activity.need)) c.grace = (c.grace ?? 0) + 40;
     // a building that no longer needs help. In a rich world the maker has to have found that out for themselves: while they still
@@ -1260,6 +1277,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
           addLog(world, A, 'social', `${B.name} promised to bring me ${resp.n} ${item}.`);
           addEvent(world, 'social', `${B.name} promised ${A.name} ${item}.`, [A.id, B.id], A.x, A.y);
         }
+        const agreed=B.commitments.find(x=>x.id===req.commitmentId);if(agreed)rememberExpectation(world,A,B,req,agreed,c.id);
         adjustRel(A, B.id, world.tick, { aff: 1.5, trust: 1 });
       } else {
         const lines = resp.reason === 'no_item' ? D.RESP_NO_ITEM : resp.reason === 'own_need' || resp.reason === 'in_use' ? D.RESP_OWN_NEED : resp.reason === 'disliked' ? D.RESP_DISLIKED : D.RESP_UNWILLING;
@@ -1763,7 +1781,7 @@ registerHandler('give', {
   pose: () => 'give',
   begin(world, p, a) {
     const t = personOf(world, a.targetId);
-    if (!t) return 'they are gone';
+    if (!t) {if(hasPromiseExpectations(world)&&a.data.commitmentId){delete p.whereabouts[a.targetId];return 'they were not where I expected';}return 'they are gone';}
     if (hyp(t.x - p.x, t.y - p.y) > 3.2) {
       // not where I expected: update what I know and give up for now
       delete p.whereabouts[t.id];

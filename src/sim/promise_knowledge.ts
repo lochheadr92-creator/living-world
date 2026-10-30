@@ -1,3 +1,4 @@
+import {hasPromiseExpectations,endExpectation,storeKnownReport} from './promise_expectations';
 // Completion is an engine fact; knowledge and acknowledgement belong to people in contact.
 import {DAY} from './constants';
 import {runsRulesVersion} from './rulesversion';
@@ -31,7 +32,7 @@ export function recordPromiseCompletion(w:World,asker:Person|null,helper:Person,
  if(own&&!own.completion)own.completion=evidence;
  if(!asker||!canWitnessCompletion(w,asker,helper,r))return false;
  const known=asker.socialMemory?.find(m=>m.requestId===r.id&&m.role==='asker');if(!known||known.completion)return false;
- known.completion={...evidence,source:'observed completion',from:asker.id};if(own?.completion)own.completion.acknowledgedAt=w.tick;
+ known.completion={...evidence,source:'observed completion',from:asker.id};endExpectation(w,known,'observed completion');if(own?.completion)own.completion.acknowledgedAt=w.tick;
  adjustRel(asker,helper.id,w.tick,{aff:3,trust:6,note:`Saw ${helper.name} complete their promised contribution`});
  adjustRel(helper,asker.id,w.tick,{aff:1,trust:1});
  noteDeed(w,asker,helper,'reliable',`Saw ${helper.name} complete a promise to ${asker.name}`,true);
@@ -47,9 +48,9 @@ export function receiveCompletionReport(w:World,speaker:Person,listener:Person,r
  const m=pendingCompletionReports(w,speaker).find(m=>m.requestId===requestId&&m.otherId===listener.id);if(!m?.completion)return null;
  m.completion.reportAfter=w.tick+400;
  const memories=listener.socialMemory??=[],known=memories.find(x=>x.requestId===requestId);
- if(!known){
+ if(!known||hasPromiseExpectations(w)&&known.expectation&&!known.completion){
   const t=m.task;
-  memories.push({requestId,otherId:speaker.id,siteId:m.siteId,tick:w.tick,outcome:m.outcome,reason:`${speaker.name} reported: ${m.reason}`,role:'asker',...(t?{task:{kind:t.kind,item:t.item,asked:t.asked,...(t.offered!==undefined?{offered:t.offered}:{})}}:{}),completion:{source:'helper report',tick:w.tick,from:speaker.id,completedAt:m.completion.completedAt,commitmentId:m.completion.commitmentId,activityId:m.completion.activityId,conversationId}});
+  storeKnownReport(w,listener,{requestId,otherId:speaker.id,siteId:m.siteId,tick:w.tick,outcome:m.outcome,reason:`${speaker.name} reported: ${m.reason}`,role:'asker',...(t?{task:{kind:t.kind,item:t.item,asked:t.asked,...(t.offered!==undefined?{offered:t.offered}:{})}}:{}),completion:{source:'helper report',tick:w.tick,from:speaker.id,completedAt:m.completion.completedAt,commitmentId:m.completion.commitmentId,activityId:m.completion.activityId,conversationId}});
   if(memories.length>32)memories.shift();
  }
  addLog(w,listener,'social',`Heard ${speaker.name}'s completion report for request #${requestId}; the work itself was not witnessed here.`);

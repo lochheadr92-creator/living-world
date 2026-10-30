@@ -1,3 +1,5 @@
+import {completionContact} from './promise_knowledge';
+import {noteExpectedReceipt} from './promise_expectations';
 // Task-specific experience belongs to the existing bounded request receipts, not a second memory store.
 import {ALL_ITEMS,DAY} from './constants';
 import {runsRulesVersion} from './rulesversion';
@@ -18,6 +20,7 @@ export const hasHelperLearning=(w:World)=>enabled&&w.settings.dynamics==='rich'&
 export function noteHelperReceipt(w:World,r:Request,giver:Person,receiver:Person,item:ItemKind,amount:number,eventKind:HelperReceipt['eventKind'],eventId:number):void{
  if(!hasHelperLearning(w)||r.to!==giver.id||r.from!==receiver.id||amount<=0)return;
  r.helperReceipt={item,amount,tick:w.tick,eventKind,eventId};
+ if(completionContact(w,giver,receiver))noteExpectedReceipt(w,receiver,r.id,item,amount);
 }
 export function taskReceipt(w:World,r:Request,role:'asker'|'helper'='asker'):HelperTask|undefined{
  if(!hasHelperLearning(w)&&!hasWatchLearning(w))return;

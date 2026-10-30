@@ -2,15 +2,23 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **82** records heard agreements and their communicated waiting period, uses personally known
+remaining amounts, and preserves an uninformed person's obligation/expectation after a remote death.
+Actual grave discovery or spoken reports can revise that knowledge. Full regression passes
+**271 files / 1,819 tests**, final focused **17/17**, browser **10/10**, typecheck and build.
+See `PROMISE_EXPECTATIONS.md` for initial failed demonstrations, corrected measurement counters
+and ordinary evidence. Non-death cancellation, target-loss knowledge, delays/counteroffers,
+conflicting reports and broader household/environment work remain open. The programme is partial.
+
 Rules **81** connects actual failed obligation attempts to personal deadline outcomes and real explanations, avoiding
 invented remote blame. Rules **80** separates completed work from personally observed/heard completion and adds
 acknowledgement; **79** learns from personally witnessed childcare completion; **78** retains task-specific direct
 material receipts; **77** stops corrected route histories from acting as current failures. Detailed boundaries,
 ordinary counts and unfinished capabilities remain in `DEPENDENCY_CHAIN_PROGRAMME.md`, `PROMISE_OUTCOMES.md`,
 `PROMISE_KNOWLEDGE.md`, `WATCH_LEARNING.md`, `HELPER_LEARNING.md` and `CORRECTED_FAILURES.md`.
-The entire autonomy/environment programme remains partial. Deadline failure attribution is connected; cancellation,
-death-target knowledge, expectations, delay/counteroffers, conflicting reports and wider household/environment work
-remain open. The rules-81 reporting fixture retains an adverse child thirst death; it demonstrates explanation,
+The entire autonomy/environment programme remains partial. Deadline failure attribution is connected; the rules-81 checkpoint left cancellation,
+death-target knowledge and expectations open (partly addressed by 82 above). Delay/counteroffers,
+conflicting reports and wider household/environment work remain open. The rules-81 reporting fixture retains an adverse child thirst death; it demonstrates explanation,
 not successful care. Full rules-81 regression passes 269 files / 1,801 tests; earlier rows remain historical evidence.
 
 Rules **76** adds bounded approach-specific route experience in the existing failure owner. Repeated actual path failures

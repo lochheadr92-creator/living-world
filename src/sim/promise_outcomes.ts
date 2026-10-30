@@ -1,3 +1,4 @@
+import {hasPromiseExpectations,storeKnownReport} from './promise_expectations';
 // Failed execution and knowledge of its outcome belong to the person who attempted the promise.
 import {DAY} from './constants';
 import {runsRulesVersion} from './rulesversion';
@@ -59,9 +60,10 @@ export function receiveOutcomeReport(w:World,speaker:Person,listener:Person,requ
  const m=pendingOutcomeReports(w,speaker).find(m=>m.requestId===requestId&&m.otherId===listener.id);if(!m?.resolution)return null;
  m.resolution.reportAfter=w.tick+400;
  const memories=listener.socialMemory??=[];
- if(!memories.some(x=>x.requestId===requestId)){
+ const known=memories.find(x=>x.requestId===requestId);
+ if(!known||hasPromiseExpectations(w)&&known.expectation&&!known.resolution){
   const t=m.task,k=m.resolution;
-  memories.push({requestId,otherId:speaker.id,siteId:m.siteId,tick:w.tick,outcome:m.outcome,reason:`${speaker.name} reported: ${m.reason}`,role:'asker',...(t?{task:{kind:t.kind,item:t.item,asked:t.asked,...(t.offered!==undefined?{offered:t.offered}:{})}}:{}),resolution:{source:'helper report',tick:w.tick,from:speaker.id,resolvedAt:k.resolvedAt,commitmentId:k.commitmentId,...(k.attempt?{attempt:{...k.attempt}}:{}),conversationId}});
+  storeKnownReport(w,listener,{requestId,otherId:speaker.id,siteId:m.siteId,tick:w.tick,outcome:m.outcome,reason:`${speaker.name} reported: ${m.reason}`,role:'asker',...(t?{task:{kind:t.kind,item:t.item,asked:t.asked,...(t.offered!==undefined?{offered:t.offered}:{})}}:{}),resolution:{source:'helper report',tick:w.tick,from:speaker.id,resolvedAt:k.resolvedAt,commitmentId:k.commitmentId,...(k.attempt?{attempt:{...k.attempt}}:{}),conversationId}});
   if(memories.length>32)memories.shift();
  }
  addLog(w,listener,'social',`Heard ${speaker.name}'s explanation for request #${requestId}; this is their account, not an independently witnessed cause.`);

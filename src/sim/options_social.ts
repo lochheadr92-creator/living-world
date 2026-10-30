@@ -1,3 +1,4 @@
+import {expectsCare} from './promise_expectations';
 import { exchangeJourneyOptions } from './exchange_journeys';
 import {helperExperience,materialRequestKind,watchExperience} from './helper_learning';
 import {pendingPromiseReports} from './promise_outcomes';
@@ -206,7 +207,7 @@ function optRequest(ctx: Ctx): void {
   tryNeed('thirst', 'water', (s) => s.carrying.includes('water'), 'water');
 
   // laid up (rich only): a neighbour to keep an eye on the children, or the fire going (responsibilities.ts)
-  if (laidUp(world, p) && !world.requests.some((r) => r.from === p.id && (r.kind === 'watch' || r.kind === 'fire') && (r.status === 'pending' || r.status === 'promised'))) {
+  if (laidUp(world, p) && !expectsCare(world,p)) {
     const kids = childrenNeedingWatch(world, p);
     const fire = kids.length ? null : beliefsByKind(p, ['building']).find((b) => b.btype === 'fire' && hyp(b.x - p.x, b.y - p.y) < 12 && (b.fuel ?? 0) - (world.tick - b.seen) * 0.85 < 400 && (p.inv.wood ?? 0) < 1);
     if (kids.length || fire) {

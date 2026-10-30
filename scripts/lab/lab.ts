@@ -1,3 +1,4 @@
+import {promiseExpectationsOn,setPromiseExpectations} from '../../src/sim/promise_expectations';
 import {promiseOutcomesOn,setPromiseOutcomes} from '../../src/sim/promise_outcomes';
 import {careWaterOn,setCareWater} from '../../src/sim/care_capacity';
 import {projectPlansOn,setProjectPlans} from '../../src/sim/project_step';
@@ -325,6 +326,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-route-learning')return {spec:label,summary:'remove personal route experience and bounded reconsideration intervals; preserve ordinary failure handling',install(){const was=routeLearningOn();setRouteLearning(false);return ()=>setRouteLearning(was);}};
   if(kind==='rich-no-helper-learning')return {spec:label,summary:'remove task-specific direct-receipt learning; preserve ordinary relationship trust and voluntary replies',install(){const was=helperLearningOn();setHelperLearning(false);return ()=>setHelperLearning(was);}};
   if(kind==='rich-no-watch-learning')return {spec:label,summary:'remove witnessed watch-completion learning; preserve practical care and voluntary replies',install(){const was=watchLearningOn();setWatchLearning(false);return ()=>setWatchLearning(was);}};
+  if(kind==='rich-no-promise-expectations')return {spec:label,summary:'remove heard-agreement expectations and restore prior shared request readers and death cancellation',install(){const was=promiseExpectationsOn();setPromiseExpectations(false);return ()=>setPromiseExpectations(was);}};
   if(kind==='rich-no-promise-outcomes')return {spec:label,summary:'remove personal failed-attempt evidence and outcome reporting; restore prior deadline attribution',install(){const was=promiseOutcomesOn();setPromiseOutcomes(false);return ()=>setPromiseOutcomes(was);}};
   if(kind==='rich-no-promise-knowledge')return {spec:label,summary:'remove local completion knowledge and reporting; restore prior promise attribution',install(){const was=promiseKnowledgeOn();setPromiseKnowledge(false);return ()=>setPromiseKnowledge(was);}};
   if(kind==='rich-no-stored-water')return {spec:label,summary:'remove household stored-water drinking offers',install(){const was=storedWaterOn();setStoredWater(false);return ()=>setStoredWater(was);}};

@@ -1,3 +1,4 @@
+import {hasPromiseExpectations,promisedPerson,promisedLocation} from './promise_expectations';
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
@@ -1537,9 +1538,10 @@ function optCommitments(ctx: Ctx): void {
     if (c.status !== 'active') continue;
     if (c.kind === 'work' && c.milestone === 'watched') {
       // a promise to keep an eye on a child (responsibilities.ts): go and stay with them
-      const child = world.byId.get(c.destId ?? 0);
-      if (!child || child.ent !== 'person' || !child.alive) continue;
-      const loc = whereIs(ctx, child.id, 0) ?? (hasPracticalCare(world) ? null : { x: child.x, y: child.y });
+      const actualChild=world.byId.get(c.destId??0);
+      const child=hasPromiseExpectations(world)?promisedPerson(world,p,c.destId??0):actualChild?.ent==='person'&&actualChild.alive?actualChild:null;
+      if(!child)continue;
+      const loc=hasPromiseExpectations(world)?promisedLocation(p,child.id):whereIs(ctx,child.id,0)??(hasPracticalCare(world)?null:{x:(child as Person).x,y:(child as Person).y});
       if (!loc || (hasPracticalCare(world) && (p.cooldowns['check' + child.id] ?? 0) > world.tick)) {
         markBlocked(ctx, c, !loc ? 'does not know where the child is' : 'lost contact; waiting before looking again');
         addBlocked(ctx, 'visit', `Keep an eye on ${child.name}`, child.id, !loc ? 'does not know where the child is' : 'lost contact; waiting before looking again', 'promise');
@@ -1547,7 +1549,8 @@ function optCommitments(ctx: Ctx): void {
       }
       const e = eta(ctx, loc.x, loc.y);
       const to = world.byId.get(c.to);
-      const sc = new Scorer().add(`promised ${to && to.ent === 'person' ? to.name : 'someone'} to keep an eye on ${child.name}`, 48).add('walking', -pen(e));
+      const askerName=hasPromiseExpectations(world)?promisedPerson(world,p,c.to)?.name??'someone':to&&to.ent==='person'?to.name:'someone';
+      const sc = new Scorer().add(`promised ${askerName} to keep an eye on ${child.name}`, 48).add('walking', -pen(e));
       addOption(ctx, {
         kind: 'visit',
         label: `Keep an eye on ${child.name} as promised`,
@@ -1579,8 +1582,9 @@ function optCommitments(ctx: Ctx): void {
       continue;
     }
     if (c.kind === 'deliver' && c.item) {
-      const to = world.byId.get(c.to);
-      if (!to || to.ent !== 'person' || !to.alive) continue;
+      const actualRecipient=world.byId.get(c.to);
+      const to=hasPromiseExpectations(world)?promisedPerson(world,p,c.to):actualRecipient?.ent==='person'&&actualRecipient.alive?actualRecipient:null;
+      if(!to)continue;
       const have = p.inv[c.item] ?? 0;
       const remaining = c.amount - (c.delivered ?? 0);
       if (remaining <= 0) continue;
@@ -1624,7 +1628,7 @@ function optCommitments(ctx: Ctx): void {
             },
           });
         }
-        const loc = whereIs(ctx, c.to, c.siteId);
+        const loc = hasPromiseExpectations(world)?promisedLocation(p,c.to):whereIs(ctx, c.to, c.siteId);
         if (!loc) {
           addBlocked(ctx, 'give', `Keep promise to ${to.name}`, c.to, 'does not know where to find them', 'promise');
           markBlocked(ctx, c, 'did not know where to find them');

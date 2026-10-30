@@ -1,3 +1,4 @@
+import {hasPromiseExpectations,endExpectation} from './promise_expectations';
 import {hasPromiseOutcomes,unresolvedOutcome} from './promise_outcomes';
 import { hyp } from './util';
 // A bounded durable receipt of an answered request. Requests/commitments still own
@@ -11,12 +12,14 @@ export function rememberRequest(w: World, r: Request): void {
  for(const [id,otherId,role] of [[r.from,r.to,'asker'],[r.to,r.from,'helper']] as const){
   const p=w.byId.get(id);if(!p||p.ent!=='person'||!p.alive)continue;
   const other=w.byId.get(otherId);
+  if(role==='asker'&&hasPromiseExpectations(w)&&r.commitmentId&&!['fulfilled','partial'].includes(r.status))continue;
   if(role==='asker'&&hasPromiseOutcomes(w)&&r.commitmentId&&unresolvedOutcome(r.status))continue;
   if(role==='asker' && (!other || other.ent!=='person' || p.indoors!==other.indoors || hyp(p.x-other.x,p.y-other.y)>3))continue;
   if(role==='asker'&&hasPromiseKnowledge(w)&&other?.ent==='person'&&(!completionContact(w,p,other)||(r.commitmentId&&['fulfilled','partial'].includes(r.status)&&!canWitnessCompletion(w,p,other,r))))continue;
   const memories=p.socialMemory??=[];
-  if(memories.some(m=>m.requestId===r.id))continue;
+  const existing=memories.find(m=>m.requestId===r.id);
   const task=taskReceipt(w,r,role);
+  if(existing){if(hasPromiseExpectations(w)&&existing.expectation&&role==='asker'){existing.tick=w.tick;existing.outcome=r.status;existing.reason=r.note||'reason not recorded';existing.task=task;endExpectation(w,existing,'observed completion');}continue;}
   memories.push({requestId:r.id,otherId,siteId:r.siteId,tick:w.tick,outcome:r.status,reason:r.note||'reason not recorded',role,...(task?{task}:{})});
   if(memories.length>32)memories.shift();
  }

@@ -1,3 +1,4 @@
+import {hasPromiseExpectations,personalRequests} from './promise_expectations';
 import { deceasedById } from './historical_index';
 import {describeRouteExperience} from './route_learning';
 import { homeDeliveryProgress, homePlanPause, homeSiteRequirements } from './inspect_home_plan';
@@ -549,14 +550,14 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
   if (p.children.length) family.push({ label: 'Children', names: nm(p.children) });
 
   const requests: RequestView[] = [];
-  for (const r of world.requests) {
+  for (const r of personalRequests(world,p)) {
     if (r.from !== p.id && r.to !== p.id) continue;
     if (world.tick - (r.resolved || r.created) > 3000) continue;
     const text =
       r.kind === 'food' ? 'food' : r.kind === 'water' ? 'water' : r.kind === 'info' ? `where to find ${r.infoKind}` : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : r.kind === 'watch' ? 'an eye kept on a child' : r.kind === 'fire' ? 'the fire kept going' : `${r.amount} ${r.item ?? r.kind}`;
     // how far a promise has actually got is the promiser's own commitment, not the request: a promise is not a delivery
     const promiser = world.byId.get(r.to);
-    const c = promiser && promiser.ent === 'person' ? promiser.commitments.find((x) => x.id === r.commitmentId) : undefined;
+    const c = (!hasPromiseExpectations(world)||r.to===p.id)&&promiser && promiser.ent === 'person' ? promiser.commitments.find((x) => x.id === r.commitmentId) : undefined;
     const quantified = c && (c.kind === 'deliver' || c.kind === 'haul') && c.item;
     requests.push({
       id: r.id,

@@ -1,3 +1,4 @@
+import {hasPromiseExpectations,expectedOutstanding,personalRequests} from './promise_expectations';
 import type {ProjectGraph} from './project_graph';
 import {journeyStep,journeyOutcome} from './journey_state';
 import {reviewJourneyRecovery} from './journey_recovery';
@@ -179,6 +180,7 @@ export function planShortfall(p: Person, planId: number, item: ItemKind): number
  * pack already and is not counted here twice.
  */
 export function outstandingForPlan(world: World, from: number, item: ItemKind, planId: number): number {
+  if(hasPromiseExpectations(world)){const p=world.byId.get(from);return p?.ent==='person'?expectedOutstanding(world,p,item,planId):0;}
   let n = 0;
   for (const r of world.requests) {
     if (r.from !== from || r.item !== item || r.planId !== planId) continue;
@@ -206,15 +208,15 @@ export interface PlanHelp {
 /** What asking for help came to, for this plan: one entry per request, newest last. Read off the requests and the promiser's own commitment. */
 export function planHelp(world: World, p: Person, i: Intention): PlanHelp[] {
   const out: PlanHelp[] = [];
-  for (const r of world.requests) {
+  for (const r of personalRequests(world,p)) {
     if (r.from !== p.id || r.planId !== i.id || !r.item) continue;
     const owner = world.byId.get(r.to);
-    const c = owner && owner.ent === 'person' ? owner.commitments.find((x) => x.id === r.commitmentId) : undefined;
+    const c = !hasPromiseExpectations(world)&&owner && owner.ent === 'person' ? owner.commitments.find((x) => x.id === r.commitmentId) : undefined;
     out.push({
-      who: owner && owner.ent === 'person' ? owner.name : 'someone',
+      who: hasPromiseExpectations(world)?p.socialMemory?.find(m=>m.requestId===r.id)?.expectation?.otherName??(owner?.ent==='person'?owner.name:'someone'):owner && owner.ent === 'person' ? owner.name : 'someone',
       item: r.item,
       asked: r.amount,
-      owed: c && c.status === 'active' ? Math.max(0, c.amount - (c.delivered ?? 0)) : 0,
+      owed: hasPromiseExpectations(world)?r.status==='promised'?Math.max(0,(r.offered??r.amount)-(r.delivered??0)):0:c && c.status === 'active' ? Math.max(0, c.amount - (c.delivered ?? 0)) : 0,
       // what arrived is recorded on the request, because it may have been handed over on the spot with no promise in between;
       // the promiser's own commitment is the fallback for anything recorded only there
       delivered: r.delivered ?? c?.delivered ?? 0,

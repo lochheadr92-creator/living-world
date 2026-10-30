@@ -1,3 +1,4 @@
+import {personalRequests} from '../sim/promise_expectations';
 import { describeGoal } from '../sim/life';
 import { deceasedById } from '../sim/historical_index';
 import { choiceKeys } from './choice_keys';
@@ -541,7 +542,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   }));
 
   const requests: InhabitantObservation['people']['requests'] = [];
-  for (const r of world.requests) {
+  for (const r of personalRequests(world,p)) {
     if (r.from !== p.id && r.to !== p.id) continue;
     if (world.tick - (r.resolved || r.created) > 3000) continue;
     const what = r.kind === 'info' ? `where to find ${r.infoKind}` : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : `${r.amount} ${r.item ?? r.kind}`;

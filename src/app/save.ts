@@ -1,3 +1,4 @@
+import {validatePromiseExpectations} from '../sim/promise_expectations';
 import {validatePromiseOutcomes} from '../sim/promise_outcomes';
 import {validatePromiseKnowledge} from '../sim/promise_knowledge';
 import {validateProjectGraphs} from '../sim/project_graph';
@@ -256,6 +257,7 @@ export function deserializeWorld(json: string): World {
   validateHelperLearning(w);
   validatePromiseKnowledge(w);
   validatePromiseOutcomes(w);
+  validatePromiseExpectations(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);
