@@ -135,3 +135,8 @@ It does not establish that every historical settlement path is locally informed.
 failure/blame, death/unavailable targets, delay updates, counteroffers, disputed reports, outstanding-request readers
 and broader household coordination still require audit and implementation under the full programme. No aggregate
 benefit or mature household viability is claimed.
+
+Runtime commit: `7e66620059ac805dbee5da8935a655bd44a506a1`. The immutable rules-80 reference is recorded from this
+commit before successor behaviour. It covers ordinary forest across the real report, a distant completion whose
+requester remains uninformed, and a save after speech but before acknowledgement continued through the actual reply.
+Its expected file and the version-80 fixture must not be re-recorded to make a successor pass.
