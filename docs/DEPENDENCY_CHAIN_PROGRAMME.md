@@ -364,10 +364,42 @@ the complete programme, ordinary care reliability and aggregate benefit are not 
 handles food. `tests/resident_care.test.ts` preserves an actual failed water hand-over with no donor loss, invented space
 or fed marker. `scripts/care_water_diagnostic.ts` also confirms that two personally observed water in the owned home store
 do not currently offer a drink; only waterskin/shore drinking exists. The staged fixture has no known shore and still
-offers search, request and information choices. Evidence: `autonomy_evidence/resident66-water-gap-reviewed.json`. Connect a lawful
-direct-use/shared-store alternative without creating pack capacity, then pin rules 66
-before any successor behaviour. Keep the full A1–A16 / WS15–21 scope: plans, routines, coordination, ordinary care and
+offers search, request and information choices. Evidence: `autonomy_evidence/resident66-water-gap-reviewed.json`. Rules 66
+is now pinned by the checkpoint below. Connect a lawful direct-use/shared-store alternative without creating pack capacity
+at a freshly verified successor version. Keep the full A1–A16 / WS15–21 scope: plans, routines, coordination, ordinary care and
 industry, ecology/water/hazards, household continuity, inspection/AI and mature-world validation remain unfinished.
+
+### Current continuation checkpoint — rules 66
+
+Last fully verified runtime commit: **`720ceeb2f2c5e00c55e18eddff4dff924c966052`**. Rules 65 was delivered as `93f59e3`
+and pinned as `37feb45`. This checkpoint adds no new simulation behavior: it freezes rules 66 in
+`tests/v66_continuation.expected.json`, using `tests/helpers/v66ref.ts` and `scripts/v66_reference.ts`. The reference was
+captured from `720ceeb` before any rules-67 edits. It covers ordinary meadow, actual resident travel, an in-progress indoor
+hand-over, the full-water-pack failure with stored home water, and an unseen death. Full serialized saved twins and
+conservation match in all five cases. Its separate test passed **1/1** in **11.08 seconds**; final typecheck also passed.
+The full 237-file / 1,580-test run above is the runtime verification; do not invent a larger full-run total by adding this
+separate reference check to it. Never regenerate any predecessor reference to hide a regression.
+
+Product checkout: `C:\dev\Claude Experiment\living-world-integrate`, `main`. Retained implementation/evidence checkout:
+`C:\dev\Claude Experiment\living-world-autonomy`, `codex/autonomy-environment`. Ignored raw saves and local verification
+logs remain in the latter. Final-source ordinary evidence uses the **`-reviewed`** directories, with explicit source
+manifests; earlier pre-publication reports are preserved and must not be silently mixed with these saves. The other
+worktrees, existing main evidence and the concurrent candidate `be786a8` remain separate. Its rules 59/60 meanings collide
+with main and must never be used to relabel this lineage's saves.
+
+The next executable transition is water assistance when the intended recipient has no pack space. Trace lawful stored
+water access and direct consumption through `options_survival.ts`, `act_resource.ts`, `habitation.ts`, `care_capacity.ts`
+and the existing timed give boundary. Choose the smallest physically coherent connection; state the local trigger,
+cost, permission, need/reserve checks, interruption and failure before editing. Recheck main, concurrent work and the
+next unused rules version first. Use the pinned full-water-pack case as the predecessor, then add focused physical,
+saved-continuation, rendered and fixed ordinary evidence without forcing a positive natural outcome.
+
+The entire capability map remains the authorized scope. General plans, routines, coordination and communication,
+remaining care/access/production chains, ecological condition, finite water, lasting hazards/debris, household and
+knowledge continuity, causal inspection/AI proposals and combined mature-world acceptance are still unfinished.
+Costly current-Large, matched and long-horizon measurements remain **pending** under `AGENTS.md`, with executable
+PowerShell commands and estimates in `AUTONOMY_VALIDATION.md`. This checkpoint is not programme completion or an
+aggregate-benefit claim, and does not create a new approval requirement for subsequent authorized slices.
 
 ### Historical continuation checkpoint — rules 64, superseded by the later sections
 

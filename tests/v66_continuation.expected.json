@@ -1,0 +1,28 @@
+{
+  "source": "720ceeb2f2c5e00c55e18eddff4dff924c966052, rules 66 before successor behaviour",
+  "ordinary": {
+    "saved": "073bd463378aa03e29adb145c4ce8595cef15d2008b1c881f3e3c2e4a7641776",
+    "uninterrupted": "b3c392fa3f4a1f3df61f74d36d0f92b81a14cff2d1e1cbefc7d23c1125982f04",
+    "continued": "b3c392fa3f4a1f3df61f74d36d0f92b81a14cff2d1e1cbefc7d23c1125982f04"
+  },
+  "returningResident": {
+    "saved": "374c33cd5e58e5e3289d0e9d53fa979acf8e5925ad974b5a6da33dbc361c2d60",
+    "uninterrupted": "eacbe12b605b25322ba833e57c12c0856166c5123c4d28327b458755e235bf8d",
+    "continued": "eacbe12b605b25322ba833e57c12c0856166c5123c4d28327b458755e235bf8d"
+  },
+  "indoorHandOver": {
+    "saved": "d8195109ecc336fd6aaa2442fa798601693bdcab70a2074352a5d4141a78db38",
+    "uninterrupted": "e655dcecd63adf0cee731ef3d879ac43a2a753e32b6f7c62e9d17c2c9824e9da",
+    "continued": "e655dcecd63adf0cee731ef3d879ac43a2a753e32b6f7c62e9d17c2c9824e9da"
+  },
+  "fullWaterPack": {
+    "saved": "511203936d471742f5c29c50efb5cdbabea8ed864e37dc0a7798097250df7501",
+    "uninterrupted": "5f5952029a7fc3333ef52a6abf43810ed792b091416787dd4cb9eb711fd3960e",
+    "continued": "5f5952029a7fc3333ef52a6abf43810ed792b091416787dd4cb9eb711fd3960e"
+  },
+  "unseenDeath": {
+    "saved": "1e282645d7462a312b0006ac2b18a7a5a98eace770c7066fd9cdc0c1c18d8ab8",
+    "uninterrupted": "170c6faf373a8e9d64c02c638bffbbb3e283bb999b27cd01e44de5025950361c",
+    "continued": "170c6faf373a8e9d64c02c638bffbbb3e283bb999b27cd01e44de5025950361c"
+  }
+}
