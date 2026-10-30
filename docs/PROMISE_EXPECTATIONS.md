@@ -119,3 +119,15 @@ learned delays, counteroffers, conflicting reports, group/helper caps and relate
 readers still require audit and implementation. This does not close all communication,
 dispute, household, environmental or mature-world requirements. The programme register remains
 the authority; costly mature/ensemble validation remains pending under `AUTONOMY_VALIDATION.md`.
+
+## Immutable successor baseline
+
+Runtime `e67ced2` supplies the rules-82 continuation reference before any rules-83 change.
+`tests/helpers/v82ref.ts` freezes ordinary forest tick 4400 through 5600 (the actual report is
+heard at 5421 after the agreed deadline), an unaware helper's saved actual grave journey, and
+a late explanation saved after hearing but before acknowledgement. Full serialized hashes,
+restored twins and ledgers pass. Typecheck and the focused continuation check pass (1/1,
+7.46 seconds; `autonomy-promise82-reference-check.log`). The initial unrecorded trial incorrectly
+expected the ordinary report before 3600 and failed; `autonomy-promise82-reference-record.log`
+is retained. The observed five-day evidence established its real timing before recording.
+No existing reference was overwritten.
