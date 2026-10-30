@@ -1,3 +1,4 @@
+import {recordRequesterTarget} from './request_cancellation';
 // Local target changes belong to the existing accepted obligation, then its bounded outcome receipt.
 import {runsRulesVersion} from './rulesversion';
 import {senseRadius} from './perception';
@@ -16,6 +17,7 @@ export function promiseTarget(c:Commitment):{id:number;kind:'building'|'site'}|n
 /** Called only at physical missing-place observation or by the worker who actually completes this site. */
 export function observePromiseTarget(w:World,p:Person,id:number,x:number,y:number,source:PromiseTargetEvidence['source']='observed absence'):void{
  if(!hasPromiseTargets(w)||!p.alive||p.indoors||p.pose==='sleep'||p.activity?.kind==='sleep'||w.byId.has(id)||Math.hypot(p.x-x,p.y-y)>senseRadius(w,p)*0.92)return;
+ const remembered=p.beliefs[id];if(remembered?.kind==='building'||remembered?.kind==='site')recordRequesterTarget(w,p,{targetId:id,kind:remembered.kind,tick:w.tick,x,y,source});
  for(const c of p.commitments){const t=promiseTarget(c);if(c.status!=='active'||!t||t.id!==id||c.targetEvidence)continue;
   if(source==='completed here'&&(t.kind!=='site'||(c.contrib??0)<=0))continue;
   c.targetEvidence={targetId:id,kind:t.kind,tick:w.tick,x,y,source};

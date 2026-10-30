@@ -176,3 +176,11 @@ seconds (river/forest/meadow), preserving the release table counts exactly. All 
 twins, 100 purity checks each, source manifests and resource ledgers pass. The final browser
 also passes 10/10 and final build passes (`autonomy-target83-final-browser.log`,
 `autonomy-target83-final-build.log`). Final full-suite status remains pending at this checkpoint.
+
+
+## Completed release gate
+
+The final full regression subsequently completed: **273 files / 1,837 tests pass**, 378.29
+seconds, in `autonomy-target83-final-full-tests.log`. The final browser, build, ordinary windows
+and immutable reference above were then integrated and pushed at `4fb33cc`. Earlier pending
+statements describe the earlier checkpoints; the rules-83 release gate is complete.

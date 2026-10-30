@@ -1,3 +1,4 @@
+import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
 import {hasPromiseTargets,targetOutcome} from './promise_targets';
 import {hasPromiseExpectations,rememberExpectation,updateExpectations,expectedOutstanding} from './promise_expectations';
 import {knowsDeath} from './death_knowledge';
@@ -39,7 +40,7 @@ import {
 } from './activities';
 import type { WorkResult } from './activities';
 import { BUILD_DEF, CONV_REACH, DAY, GREET_COOLDOWN, LOAN_TERM, NUTRITION, PROMISE_TTL, REQUEST_TTL, homeNoun } from './constants';
-import { foodUnits, pickFood, roomFor, transfer } from './economy';
+import { foodUnits, pickFood, roomFor, transfer, releaseClaims } from './economy';
 import { carryCap, isDependent, itemsToText, stageOf } from './people';
 import { addEvent, addFx, addLog, say as speak } from './events';
 import { addToHousehold, householdById, membersOf } from './households';
@@ -869,6 +870,8 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 
 function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
   switch (purpose) {
+    case 'cancel_request':
+      return `to cancel obsolete work with ${name}`;
     case 'report':
       return hasPromiseOutcomes(world)?`to report on promised work to ${name}`:`to report completed work to ${name}`;
     case 'learn_technique':
@@ -928,7 +931,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
-  const report=(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
+  const report=hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
   const resultText = c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
   const detailText = c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
@@ -985,7 +988,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
-    if((hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
+    if(((hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(c.purpose==='teach_technique') {
       const why=lessonProblem(world,A,B,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
@@ -1054,6 +1057,16 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
+    case 'cancel_request': {
+      const heard=receiveCancellation(world,A,B,d.requestId??0,c.id);c.data.cancelDelivered=!!heard;c.data.cancelText=heard?.text??'No matching cancellation could be conveyed.';
+      if(heard){
+        if(heard.stopped){const held=B.suspended;if(held&&(held.data.commitmentId===heard.commitmentId||held.targetId===heard.targetId&&['repair','build','haul','fuel_fire'].includes(held.kind))){releaseClaims(world,held.claims);B.suspended=null;addLog(world,B,'work','Stopped the suspended work after hearing its cancellation.');}
+          const r=world.requests.find(r=>r.id===d.requestId&&r.from===A.id&&r.to===B.id);if(r?.status==='promised')settle(world,r,'cancelled',`${A.name} cancelled the request in person.`);
+        }
+        bubble(world,A,heard.text,'say',70);
+      }
+      break;
+    }
     case 'report': {
       const text=receiveCompletionReport(world,A,B,d.requestId??0,c.id)??receiveOutcomeReport(world,A,B,d.requestId??0,c.id);c.data.reportDelivered=!!text;c.data.reportText=text??'No personally retained completion could be reported.';
       if(text)bubble(world,A,text,'say',70);break;
@@ -1163,6 +1176,14 @@ function reqOf(world: World, c: Conversation): Request | undefined {
 function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: ConvData): void {
   const req = reqOf(world, c);
   switch (c.purpose) {
+    case 'cancel_request': {
+      const response=c.data.cancelDelivered?acknowledgeCancellation(world,A,B,d.requestId??0):null;c.data.cancelAcknowledged=!!response;
+      if(response){let text=response==='stopped'?'I have heard you. I will stop that request.':'That obligation had already ended.';
+        if(response==='already ended'){const detail=receiveCompletionReport(world,B,A,d.requestId??0,c.id)??receiveOutcomeReport(world,B,A,d.requestId??0,c.id);if(detail)text+=' '+detail;}
+        c.data.cancelReply=text;bubble(world,B,text,'say',70);
+      }
+      break;
+    }
     case 'report': {
       c.data.reportAcknowledged=!!c.data.reportDelivered&&(acknowledgeCompletionReport(world,A,B,d.requestId??0)||acknowledgeOutcomeReport(world,A,B,d.requestId??0));
       if(c.data.reportAcknowledged)bubble(world,B,'I have heard your report. Thank you for telling me.','say',65);break;

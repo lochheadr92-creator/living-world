@@ -1,3 +1,4 @@
+import {pendingCancellations} from './request_cancellation';
 import {expectsCare} from './promise_expectations';
 import { exchangeJourneyOptions } from './exchange_journeys';
 import {helperExperience,materialRequestKind,watchExperience} from './helper_learning';
@@ -688,6 +689,13 @@ export function socialOptions(ctx: Ctx): void {
   aloneOptions(ctx);
   welfareOptions(ctx);
   seekCarerOptions(ctx);
+  let cancellationsOffered=0;
+  for(const m of pendingCancellations(ctx.world,ctx.p)){
+    const c=candidates(ctx).find(c=>c.q.id===m.otherId&&c.d<=14);if(!c)continue;
+    const sc=new Scorer().add('my requested work is no longer needed; they have not acknowledged cancellation',28).add('walking',-pen(c.d*6));
+    mkSocial(ctx,c,'cancel_request',{requestId:m.requestId},`Tell ${c.q.name} to stop my obsolete request`,'to cancel work I no longer need',null,sc,'cancel',':'+m.requestId,'My own target observation changed the need; I must tell the helper in person');
+    if(++cancellationsOffered>=2)break;
+  }
   let reportsOffered=0;
   for(const m of pendingPromiseReports(ctx.world,ctx.p)){
     const c=candidates(ctx).find(c=>c.q.id===m.otherId&&c.d<=14);if(!c)continue;

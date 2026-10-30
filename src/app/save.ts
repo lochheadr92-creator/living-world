@@ -1,3 +1,4 @@
+import {validateRequestCancellation} from '../sim/request_cancellation';
 import {validatePromiseTargets} from '../sim/promise_targets';
 import {validatePromiseExpectations} from '../sim/promise_expectations';
 import {validatePromiseOutcomes} from '../sim/promise_outcomes';
@@ -260,6 +261,7 @@ export function deserializeWorld(json: string): World {
   validatePromiseOutcomes(w);
   validatePromiseExpectations(w);
   validatePromiseTargets(w);
+  validateRequestCancellation(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);
