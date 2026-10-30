@@ -1,3 +1,4 @@
+import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
 import { injuryFactor } from './life';
 import {recordRouteDeparture,recordRouteArrival,recordRouteFailure} from './route_learning';
 import { hasLayoutClaims, layoutClaimBlock } from './layout_claims';
@@ -368,7 +369,7 @@ function beginWork(world: World, p: Person, a: Activity): void {
       return;
     }
   }
-  if (p.activity === a && h) p.pose = h.pose(a);
+  if (p.activity === a && h) {correctPromiseApproach(world,p,a);p.pose = h.pose(a);}
 }
 
 /** Single place where activities end: every claim is released, the outcome is recorded. */
@@ -385,6 +386,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   p.activity = null;
   const h = handlers[a.kind];
   if (h?.onEnd) h.onEnd(world, p, a, outcome, detail);
+  recordPromiseAttempt(world,p,a,outcome,detail);
   recordRouteFailure(world,p,a,outcome,detail);
   // anti-thrash: an option that just failed outright (or achieved nothing) is not re-picked straight away
   const optKey = a.data.optKey as string | undefined;

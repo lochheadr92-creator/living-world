@@ -2,6 +2,17 @@
 
 ## Current continuation pointer — 2026-10-31
 
+Rules **81** connects actual failed obligation attempts to personal deadline outcomes and real explanations, avoiding
+invented remote blame. Rules **80** separates completed work from personally observed/heard completion and adds
+acknowledgement; **79** learns from personally witnessed childcare completion; **78** retains task-specific direct
+material receipts; **77** stops corrected route histories from acting as current failures. Detailed boundaries,
+ordinary counts and unfinished capabilities remain in `DEPENDENCY_CHAIN_PROGRAMME.md`, `PROMISE_OUTCOMES.md`,
+`PROMISE_KNOWLEDGE.md`, `WATCH_LEARNING.md`, `HELPER_LEARNING.md` and `CORRECTED_FAILURES.md`.
+The entire autonomy/environment programme remains partial. Deadline failure attribution is connected; cancellation,
+death-target knowledge, expectations, delay/counteroffers, conflicting reports and wider household/environment work
+remain open. The rules-81 reporting fixture retains an adverse child thirst death; it demonstrates explanation,
+not successful care. Full rules-81 regression passes 269 files / 1,801 tests; earlier rows remain historical evidence.
+
 Rules **76** adds bounded approach-specific route experience in the existing failure owner. Repeated actual path failures
 defer the same approach; physical arrival corrects it without certifying stock or permission. Staged alternative stone
 work and later recovered wood feed real crafting, while the original missing-stone building case remains incomplete.

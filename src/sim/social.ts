@@ -1,3 +1,4 @@
+import {hasPromiseOutcomes,deadlineOutcome,recordPromiseResolution,receiveOutcomeReport,acknowledgeOutcomeReport} from './promise_outcomes';
 import { hasExchangeJourneys, tellTradeLead, endExchangeTalk, endExchangeApproach } from './exchange_journeys';
 import { TECHNIQUES } from './techniques';
 import type { TechniqueKind } from './techniques';
@@ -659,6 +660,11 @@ export function checkCommitments(world: World, p: Person): void {
     const got = c.kind === 'help_build' || c.kind === 'work' ? Math.min(total, c.contrib ?? 0) : Math.min(total, c.delivered ?? 0);
     const frac = got / total;
     if(hasPromiseKnowledge(world)&&frac>=1){fulfillCommitment(world,p,c.id);continue;}
+    if(hasPromiseOutcomes(world)&&frac<1){
+      deadlineOutcome(world,c,frac);
+      if(req&&req.status==='promised'){settle(world,req,c.status as 'expired'|'interrupted'|'failed',c.reason!);recordPromiseResolution(world,p,req,c);}
+      continue;
+    }
     if (frac >= 1) {
       c.status = 'done';
       if (req && req.status === 'promised') settle(world, req, 'fulfilled', 'did what they promised');
@@ -815,7 +821,7 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
   // initiator: the 'socialize' activity becomes the conversation
   actA.kind = 'converse';
   actA.label = `Talking with ${B.name}`;
-  actA.goal = purposeGoal(purpose, B.name);
+  actA.goal = purposeGoal(world, purpose, B.name);
   actA.phase = 'work';
   actA.progress = 0;
   actA.data = { convId: c.id, role: 'a' };
@@ -831,10 +837,10 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
   faceToward(B, A.x, A.y, 3);
 }
 
-function purposeGoal(purpose: ConvPurpose, name: string): string {
+function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
   switch (purpose) {
     case 'report':
-      return `to report completed work to ${name}`;
+      return hasPromiseOutcomes(world)?`to report on promised work to ${name}`:`to report completed work to ${name}`;
     case 'learn_technique':
       return `to ask ${name} for instruction`;
     case 'teach_technique':
@@ -892,7 +898,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
-  const report=hasPromiseKnowledge(world)&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
+  const report=(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
   const resultText = c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
   const detailText = c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
@@ -949,7 +955,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
-    if(hasPromiseKnowledge(world)&&c.purpose==='report'&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
+    if((hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(c.purpose==='teach_technique') {
       const why=lessonProblem(world,A,B,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
@@ -1019,7 +1025,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
     case 'report': {
-      const text=receiveCompletionReport(world,A,B,d.requestId??0,c.id);c.data.reportDelivered=!!text;c.data.reportText=text??'No personally retained completion could be reported.';
+      const text=receiveCompletionReport(world,A,B,d.requestId??0,c.id)??receiveOutcomeReport(world,A,B,d.requestId??0,c.id);c.data.reportDelivered=!!text;c.data.reportText=text??'No personally retained completion could be reported.';
       if(text)bubble(world,A,text,'say',70);break;
     }
     case 'learn_technique':
@@ -1128,7 +1134,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
   const req = reqOf(world, c);
   switch (c.purpose) {
     case 'report': {
-      c.data.reportAcknowledged=!!c.data.reportDelivered&&acknowledgeCompletionReport(world,A,B,d.requestId??0);
+      c.data.reportAcknowledged=!!c.data.reportDelivered&&(acknowledgeCompletionReport(world,A,B,d.requestId??0)||acknowledgeOutcomeReport(world,A,B,d.requestId??0));
       if(c.data.reportAcknowledged)bubble(world,B,'I have heard your report. Thank you for telling me.','say',65);break;
     }
     case 'learn_technique': {
