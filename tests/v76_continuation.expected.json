@@ -1,0 +1,23 @@
+{
+  "source": "398e2a0307b27016365befa7218a443abe7dd05f, rules 76 before successor behaviour",
+  "ordinary": {
+    "saved": "c93798f92520c3bd193f6b5c79c4bdc4978caf49187f461466294f41d4dd12d6",
+    "uninterrupted": "c5699c724ef9cde3ae2ce8dd6861e4215c47de5385127e5784e40082d358ddd9",
+    "continued": "c5699c724ef9cde3ae2ce8dd6861e4215c47de5385127e5784e40082d358ddd9"
+  },
+  "deferred": {
+    "saved": "c67b4c76b42102ba0d1869f1bdee3cead72cb9f6d643c071121dd08eae2830ec",
+    "uninterrupted": "cde60391e151a77a3a26e68a3ea3156b6afb24188d17cd098b26d55c9ebb618d",
+    "continued": "cde60391e151a77a3a26e68a3ea3156b6afb24188d17cd098b26d55c9ebb618d"
+  },
+  "travel": {
+    "saved": "249ee9d3b11cbd7fd8e6aad29e802b570c5d26ebc78beb9dd686290a7a326027",
+    "uninterrupted": "da52894cf2dfb321aaefb02a41da6f059ed3b9b4c6464b28d0660d889e627f76",
+    "continued": "da52894cf2dfb321aaefb02a41da6f059ed3b9b4c6464b28d0660d889e627f76"
+  },
+  "correctedUse": {
+    "saved": "d2eccc159a57fdfe783c2c2c6f749381feb9b01767098345f4f053694fda6c3f",
+    "uninterrupted": "281076845ddb3b4b7928cce49a7e34f49c9f34afb96018d7b08570bb960d7003",
+    "continued": "281076845ddb3b4b7928cce49a7e34f49c9f34afb96018d7b08570bb960d7003"
+  }
+}

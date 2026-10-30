@@ -120,3 +120,9 @@ long-term benefit. Task-specific helper reliability and conflicting reports rema
 request receipt in `social_memory.ts` retains outcome/reason/person/site but not request kind/item or demonstrated task
 ability; helper choice in `options_social.ts` still uses general personal trust. Audit the actual settlement and contribution
 paths before adding any task-specific inference. The wider autonomy/environment programme remains incomplete.
+
+The next diagnostic is now physical: `scripts/helper_task_diagnostic.ts` / `autonomy-helper77-before.log`, explicit rules
+76. Ada 2 requests two stone from Ben 7 (request 22); Ben voluntarily promises, withdraws and delivers two stone, and Ada
+crafts a pick. Both receipts at tick 989 say only “promise kept,” with no task kind, item or delivered quantity. The outsider
+has no receipt, resources balance, and the transcript replays exactly. This establishes the structured-retention gap; it
+does not justify a helper-selection weight or treating inability as bad faith.
