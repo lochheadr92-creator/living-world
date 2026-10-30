@@ -125,6 +125,15 @@ Longer and mature-world validation remains pending under `AUTONOMY_VALIDATION.md
 reduced success threshold was used.
 
 Next local audit: the private-plan ask path consults the existing communicated `MAKING_NOTE`, whereas the construction
-ask path does not. This is an inspected pre-existing eligibility gap, not yet a reproduced repeated-request failure.
-Trace actual refusal, remaining material, contact and cooldown before extending it. Keep that operational willingness
-question separate from the real past delivery and from work/care competence that has never been demonstrated.
+ask path does not. `scripts/helper_refusal_diagnostic.ts` explicitly runs rules 78 through tick 4000 after the actual
+making refusal at tick 2327. It finds **no subsequent eligible request at its ten-tick samples and no repeated request**;
+resources balance (`autonomy-refusal79-before.log`). The source-path difference is not yet a reproduced behavior defect.
+Trace remaining material, contact and cooldown before changing it; do not implement a speculative guard from the source
+comparison alone. Keep that operational willingness question separate from the real past delivery and from work/care
+competence that has never been demonstrated. Continue the wider missing cooperation/communication requirements.
+
+Rules 78 is pinned from runtime `1b51d3df54cd60575741133720ccb2fe6beb4e52` in
+`tests/v78_continuation.expected.json`: ordinary meadow, retained direct receipt through the later selected request, and
+the valid refusal followed by ordinary continuation. Reference check **1/1**, 12.92 seconds (`autonomy-v78-check.log`),
+and reference typecheck pass. The recorder refuses overwrite or capture under successor rules. Its helper fixture and
+the explicit 78 material-help path are now immutable predecessor evidence.
