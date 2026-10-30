@@ -1,5 +1,6 @@
 import { isThreat } from './wildlife';
 import { isBoundedNightWait } from './night_wait';
+import {runsRulesVersion} from './rulesversion';
 import { distToFootprint } from './registry';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
@@ -61,11 +62,18 @@ registerHandler('rest', {
       a.progress++;
       return 'continue';
     }
+    if(a.data.projectWait&&runsRulesVersion(world,69)){
+      const plan=p.intentions.find(i=>i.id===a.data.forPlan&&i.status==='active'&&i.project);
+      if(!plan)return 'partial:the project is no longer active';
+      const known=p.beliefs[a.targetId]?.ops;
+      if(!known||known.client!==p.id||!known.burn)return 'partial:no longer expecting that batch';
+      if(world.tick>=known.readyAt){a.blocked='time to check the batch';return 'done';}
+    }
     a.progress++;
     if (a.progress >= a.duration) return 'done';
     // Resting for energy ends once the person is rested. Waiting out the weather in a home (need 'warmth') is also a `rest`, but is not
     // about energy: ending it because the person happens to be rested made them finish after one tick and decide again, every tick.
-    if (a.need !== 'warmth' && p.needs.energy >= 98) return 'done';
+    if (a.need !== 'warmth' && !(a.data.projectWait&&runsRulesVersion(world,69)) && p.needs.energy >= 98) return 'done';
     return 'continue';
   },
 });

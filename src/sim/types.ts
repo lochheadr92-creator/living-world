@@ -1,4 +1,5 @@
 import type { Township, CivicProject } from './townships';
+import type { ProjectGraph } from './project_graph';
 import type { RNG } from './rng';
 
 // ───────────────────────────── terrain ─────────────────────────────
@@ -365,6 +366,8 @@ export interface Intention {
   /** For a batch plan (`batch`, rules version 50): the recipe it runs and the site its output is for (0 for none). Absent on every other kind and below 50. */
   recipe?: string;
   forSite?: number;
+  /** Rules 69: declarative, personally derived prerequisites for this production intention. */
+  project?: ProjectGraph;
 }
 
 /** nobody juggles more than this many private plans at once */

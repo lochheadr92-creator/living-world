@@ -1,4 +1,5 @@
 import {careWaterOn,setCareWater} from '../../src/sim/care_capacity';
+import {projectPlansOn,setProjectPlans} from '../../src/sim/project_step';
 import {storedWaterOn,setStoredWater} from '../../src/sim/stored_water_access';
 import { learnerInstructionOn, setLearnerInstruction } from '../../src/sim/techniques';
 import { civicBenefitOn, setCivicBenefit, civicFoodBenefitOn, setCivicFoodBenefit } from '../../src/sim/civic_benefit';
@@ -305,6 +306,7 @@ export function parseIntervention(specIn: string): Intervention {
   if (kind === 'rich-no-tool-precedence') return {spec:label,summary:'restore the first missing workshop tool instead of preferring a required tool to a convenience',install(){const was=toolPrecedenceOn();setToolPrecedence(false);return ()=>setToolPrecedence(was);}};
   if (kind === 'rich-no-kept-target') return {spec:label,summary:'allow the short candidate list to omit the running journey destination',install(){const was=keptTargetOn();setKeptTarget(false);return ()=>setKeptTarget(was);}};
   if(kind==='rich-no-water-care')return {spec:label,summary:'remove water hand-over capacity memory and household-store recovery offers',install(){const was=careWaterOn();setCareWater(false);return ()=>setCareWater(was);}};
+  if(kind==='rich-no-project-plans')return {spec:label,summary:'remove bounded production prerequisite adoption and step offers; ordinary production remains',install(){const was=projectPlansOn();setProjectPlans(false);return ()=>setProjectPlans(was);}};
   if(kind==='rich-no-stored-water')return {spec:label,summary:'remove household stored-water drinking offers',install(){const was=storedWaterOn();setStoredWater(false);return ()=>setStoredWater(was);}};
   if (kind === 'rich-no-resident-care') return {spec:label,summary:'remove remembered indoor contact and resident care-return offers',install(){const was=residentCareOn();setResidentCare(false);return ()=>setResidentCare(was);}};
   if (kind === 'rich-no-craft-capacity') return {spec:label,summary:'restore pre-consumption capacity checking when a hand tool finishes; no effect below 58',install(){const was=craftCapacityOn();setCraftCapacity(false);return ()=>setCraftCapacity(was);}};

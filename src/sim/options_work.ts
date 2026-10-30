@@ -45,6 +45,7 @@ import { T } from './types';
 
 import { payNudge } from './learning';
 import { hyp } from './util';
+import {projectAvailable,projectCraftPlan} from './project_step';
 const unitsOf = (n: number | undefined): number => n ?? 0;
 
 // ───────────────────────── household situation ─────────────────────────
@@ -901,8 +902,9 @@ export function workshopToolOptions(ctx: Ctx): void {
   craftOption(scratch, tool);
   const r = TOOL_RECIPE[tool];
   const forPlan = ctx.p.intentions.some(i => i.status === 'active' && i.kind === 'tool' && i.makes === tool);
+  const project = projectCraftPlan(ctx,tool);
   for (const item of ['wood', 'stone'] as const) {
-    const have = forPlan ? ctx.p.inv[item] ?? 0 : freeOf(ctx.p, item);
+    const have = project ? projectAvailable(ctx.world,ctx.p,project,item) : forPlan ? ctx.p.inv[item] ?? 0 : freeOf(ctx.p, item);
     const short = r[item] - have;
     if (short > 0) gatherMaterial(scratch, item, short, 15 * ctx.p.traits.diligence + 6,
       `to make a ${tool} for ${ctx.toolWanted!.for}`, 'craft');
@@ -962,8 +964,9 @@ function craftOption(ctx: Ctx, tool: HandTool): void {
   // for - the same rule the site deliveries, the camp fire and a neighbour's roof already follow (intent.ts freeOf). Without this,
   // the wood someone had set aside for a basket could go into an axe instead.
   const forPlan = p.intentions.some((i) => i.status === 'active' && i.kind === 'tool' && i.makes === tool);
-  const haveWood = forPlan ? ctx.wood : freeOf(p, 'wood');
-  const haveStone = forPlan ? ctx.stone : freeOf(p, 'stone');
+  const project = projectCraftPlan(ctx,tool);
+  const haveWood = project ? projectAvailable(world,p,project,'wood') : forPlan ? ctx.wood : freeOf(p, 'wood');
+  const haveStone = project ? projectAvailable(world,p,project,'stone') : forPlan ? ctx.stone : freeOf(p, 'stone');
   if (haveWood < r.wood || haveStone < r.stone) return;
   // workspace: home, storehouse, or the fire
   let best: Belief | null = null;
@@ -1010,7 +1013,7 @@ function craftOption(ctx: Ctx, tool: HandTool): void {
         utility: util,
         minCommit: 80,
         maxTicks: 700,
-        data: { tool },
+        data: { tool, ...(project ? {forPlan:project.id,projectCraft:project.id} : {}) },
       });
     },
   });

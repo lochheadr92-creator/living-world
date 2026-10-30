@@ -22,6 +22,7 @@ import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
 import { clamp } from './util';
 import { itemsToText } from './people';
+import {projectAvailable} from './project_step';
 
 // ───────────────────────── build ─────────────────────────
 function allowedFraction(site: Site): number {
@@ -216,6 +217,12 @@ registerHandler('craft', {
     const tool = a.data.tool as ToolKind;
     const r = TOOL_RECIPE[tool];
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'fail:the materials went missing';
+    if(a.data.projectCraft&&runsRulesVersion(world,69)){
+      const plan=p.intentions.find(i=>i.id===a.data.projectCraft&&i.status==='active'&&i.project);
+      if(!plan)return 'fail:the project was cancelled';
+      if(!plan.project!.nodes.some(n=>n.method==='hand'&&n.item===tool))return 'fail:that tool is not a project prerequisite';
+      if(projectAvailable(world,p,plan,'wood')<r.wood||projectAvailable(world,p,plan,'stone')<r.stone)return 'fail:the materials are needed for another plan or promise';
+    }
     if (!craftedToolFits(world, p, tool)) return 'fail:no room to carry it';
     consume(world, p.inv, 'wood', r.wood, 'crafting: ' + tool);
     consume(world, p.inv, 'stone', r.stone, 'crafting: ' + tool);

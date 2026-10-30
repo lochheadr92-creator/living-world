@@ -37,6 +37,7 @@ import type { Activity, Building, Entity, Intention, Items, ItemKind, NeedKey, P
 import { NEED_KEYS } from './constants';
 
 import { hyp } from './util';
+import {describeProject} from './project_graph';
 export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
 
 export function agoText(world: World, tick: number): string {
@@ -338,6 +339,7 @@ function planLine(world: World, p: Person, i: Intention, a: Activity | null): st
           : i.kind === 'shelter' ? 'waiting to take this step' : 'settled on, not started'
     );
   let text = `${cap(i.goal)}. Step: ${i.step || '—'} — ${state}.`;
+  if(i.project)text+=` ${describeProject(i.project)}`;
   // A food reserve is the one live plan whose sentence has to carry two more things, because the whole point of it is that a
   // viewer can follow local evidence to a real consequence: WHAT WAS ACTUALLY PUT BY (not what was meant), and WHY it was taken
   // on, which for this kind is evidence about the household rather than a restatement of the goal. No other kind is touched,

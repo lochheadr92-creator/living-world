@@ -1,4 +1,5 @@
 import {isStoredDrink,storedWaterSource} from './stored_water_access';
+import {projectAvailable} from './project_step';
 import { relocationPackingBlocker } from './relocation';
 import { spareSeed } from './seed_storage';
 import { careFoodAvailable, careWaterAvailable, careStoreBlocker } from './care_capacity';
@@ -525,6 +526,14 @@ registerHandler('deposit', {
     const e = world.byId.get(a.targetId)!;
     for (const k of Object.keys(want)) {
       let n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
+      if(a.data.projectSupply&&runsRulesVersion(world,69)){
+        const plan=p.intentions.find(i=>i.id===a.data.projectSupply&&i.status==='active'&&i.project);
+        if(!plan)return 'fail:the project was cancelled';
+        if(!plan.project!.nodes.some(node=>node.destination===a.targetId&&node.item===k))return 'fail:that delivery is not a project prerequisite';
+        n=Math.min(n,projectAvailable(world,p,plan,k as ItemKind));
+        if(n<=0)return 'fail:the material is needed for another plan or promise';
+        if(n<want[k])partial=true;
+      }
       if (a.data.careStore && runsRulesVersion(world, 63)) {
         const water = a.data.careWaterStore && runsRulesVersion(world, 68);
         n = Math.min(n, water ? careWaterAvailable(world, p, a.data.careRecipient as number) : careFoodAvailable(world, p, a.data.careRecipient as number, k as ItemKind));

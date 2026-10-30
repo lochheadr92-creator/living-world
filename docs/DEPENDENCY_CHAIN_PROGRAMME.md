@@ -5,9 +5,9 @@ Owner brief: complete understandable situations, need → informed choice → ph
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **68**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **69**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
-choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, and failed-water-hand-over recovery through owned-home provision. The older
+choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, and bounded saved production prerequisites across workshops. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
 
 ## Autonomy and environment continuation — 2026-10-30
@@ -42,7 +42,7 @@ remain attributed evidence, not newly repeated measurements.
 | Existing private plans / connected | `intent.ts`, `batch_plan.ts`, `activities.ts`; 1–59, batch 50 | Plan, batch, interruption and intermediate-save contracts; WS6 | Preserve six fixed kinds, limits, lawful execution and release. Extend only gaps below. |
 | Time available for work/leisure / measurement (A1) | `decision.ts`, `needs.ts`, `relief.ts`, `leisure.ts`; leisure 28, tastes 31 | `activity_mix.ts` counts starts only; no support for 95% survival claim | Exclusive living-person tick budget, critical exposure, work spells, repeated aborted travel, actual endings and sampled blockers. Adequately supplied household repeatedly works and uses discretionary time; disrupted rhythm has recorded cause. |
 | Learned daily routines / absent beyond existing night/supper/winter practices (A2) | `intent.ts`, `household_practices.ts`, `winter_practice.ts`; 24/27/53 | Actual supper and winter practice transmission, WS11 | Experience-based morning/water/work/rest preferences, bounded and interruptible; revise after season/injury/dependant/travel changes. Matched people choose differently for an inspectable reason. |
-| General bounded contingent goals / absent (A3) | `types.ts` Intention, `intent.ts`, `batch_plan.ts`; six specialised kinds, 50 | One-workshop batch with one precursor stage; no general declarative goal graph | Bounded depth/steps/search/retries/history, registered actions, cycle/unreachable rejection; project survives drink/save/source loss and completes; impossible case ends and releases claims. |
+| General bounded contingent goals / incomplete (A3) | `project_graph.ts`, `project_compile.ts`, `project_step.ts`, `batch_plan.ts`; production graph 69 | Bounded validated production tree, autonomous staged forged axe, exact saves, physical inputs, loss/retry/deadline contracts; `BOUNDED_PROJECTS.md` | Production mechanism connected; other goal families, general contingent composition and ordinary activation remain. Three fresh five-day worlds observed no projects. |
 | Quantities, foresight, useful waits / incomplete (A4) | `activities.ts`, `relief.ts`, `intent.ts`, `night_wait.ts`; 27/30/50 | External bounds, daylight wait, footprint wait, batch resumption | Autonomous quantities/durations based on capacity/need; provision round trip; communicated meeting/batch/delivery waits have costs, timeout and next action. No future weather oracle. |
 | Relevant recovery / incomplete (A5) | `intent.ts`, `knowledge.ts`, `batch_plan.ts`, `facilities.ts`, `care_capacity.ts`, `kept_target.ts`; 34/36/37/50/61/63/65 | Reconsideration, partial shelter delivery, required-tool loss/replacement, bounded remembered food-capacity recovery; valid running destinations remain scored after discovery | Preserve progress through other temporary obstructions; retry/alternative/partial/help/abandonment with hysteresis and truthful cause. Source/helper loss and general composition remain. |
 | Durable identity, trust and operational memory / connected, retention adequacy measurement (A6) | `relations.ts`, `social_memory.ts`, `reputation.ts`, `knowledge.ts`; 13/25/35/39/48 | Saved relationships, receipts, gossip and bounded operational expiry | Measure revisit/obligation/contact delays before changing timers. Bounded meaningful summaries retain event/source/tick/confidence/person/place; unknown remains unknown. |
@@ -389,7 +389,26 @@ Fresh five-day Normal, immigration off, meadow/river/forest all reached tick 12,
 
 `scripts/care_water_gap.ts` repeats river and matches its exact final save. The five samples are Jax at ticks 600–1080, with no known household home and zero spare water. This is not five feasible delivery opportunities. Preserve the adverse absence of infrastructure/supplies and do not tune scoring to manufacture water or homes. Broader acquisitions, care duties, production and every other remaining capability-map row stay open.
 
-### Current continuation checkpoint — rules 68
+### Bounded production prerequisite journey — rules 69
+
+Rules 69 connects a saved, personally derived production graph to existing batch intentions and ordinary physical actions.
+Staged autonomous worn-axe demand proceeds through charcoal, transport, smelting, forging and collection, with exact save
+continuation and conservation. A separately selected legal wood trip proves actual new-tool use. Structural and recipe
+validation, bounded reconsideration, cancellation/promise checks and full-energy firing waits are covered. The inspector
+shows the real production chain and uncertain cost. Source owners, review findings and limits: `BOUNDED_PROJECTS.md`.
+
+Full regression passed **245 files / 1,643 tests in 150.24 seconds**; final focused **30/30** includes immutable rules 68.
+Two later hand-tool boundary cases also passed in the **16/16** recovery file; do not add them to the earlier full-run count.
+Rendered checks **7/7**, with adopted/firing/use and scrolled-explanation images inspected. Build/typecheck passed; 962.06 kB
+bundle notice remains. Old expected files unchanged. Fixed fresh Normal meadow/river/forest, immigration off, five days each:
+**zero observed projects or starts**, 2,800 living-person samples each, 100 purity samples each, exact twins and conservation.
+No ordinary activation, welfare, productivity or mature-world benefit is claimed. Long owner validation remains pending.
+
+The full owner prompt remains active. A3 production is connected; A2 routines, remaining A3/A4/A5 goals and recovery,
+coordination, ecology, deeper causal records, AI proposals and other WS15–21/A1–A16 gaps are not closed by this slice.
+Before rules 70 behavior, capture the immutable rules-69 ordinary/production/recovery reference from the committed runtime.
+
+### Historical continuation checkpoint — rules 68
 
 Last fully verified runtime: **`2eb6ebf29d2b12da93348d8998d1194e603b78fb`**. Its immutable continuation is captured before any rules-69 behavior changes: ordinary meadow, autonomous water provision, full-store invalidation, mixed food/water failure, and a real return delivery suspended by conversation and then resumed. The separate reference test passed **1/1 in 10.13 seconds** (`autonomy-v68-check.log`); do not add it to the earlier full-suite count and call that a new full run. The reference writer refuses overwrite or capture under a successor.
 

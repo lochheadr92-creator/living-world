@@ -31,6 +31,11 @@ import { rankWaterSpots } from './optutil';
 import { hasKnownResource, setBatchHooks } from './intent';
 import { orderBatchWants } from './cart_priority';
 import type { Intention } from './types';
+import {compileProject} from './project_compile';
+import {hasProjectPlans,nextProjectStep,recordProjectStep} from './project_step';
+import {toolsHeldBy} from './toolreg';
+import type {ProjectGraph} from './project_graph';
+import {PROJECT_LIMITS} from './project_graph';
 
 export const BATCH_FROM_VERSION = 50;
 /** a want worth a plan: the planner's base weight for it, after traits */
@@ -72,6 +77,7 @@ export interface BatchWant {
   forSite: number;
   why: string;
   wants: Partial<Items>;
+  project?:ProjectGraph;
 }
 
 /**
@@ -81,6 +87,16 @@ export interface BatchWant {
 export function batchWanted(ctx: Ctx): BatchWant | null {
   const { world, p } = ctx;
   if (!hasBatchPlans(world) || ctx.stage === 'child') return null;
+  if(hasProjectPlans(world)){
+    const wants=orderBatchWants(world,demandsOf(ctx).filter(d=>(BATCH_ITEMS.has(String(d.item))||d.tier===1)&&d.base>=BATCH_MIN_BASE).sort((a,b)=>b.base-a.base));
+    for(const d of wants){
+      const quantity=Math.max(1,Math.min(24,Math.ceil(d.qty))),compiled=compileProject(ctx,{item:d.item,quantity,tier:d.tier??0});
+      if(!compiled.ok)continue;
+      const root=compiled.graph.nodes.find(n=>n.id===compiled.graph.root)!;
+      if(root.method!=='recipe')continue;
+      return {item:d.item,recipe:root.recipe,facilityId:root.place,qty:quantity,forSite:d.siteId??0,why:d.why,wants:{},project:compiled.graph};
+    }
+  }
   // rules 59 (cart_priority.ts): a wanted cart comes before the site materials it would haul; the gates below still apply to it
   const wants = orderBatchWants(world, demandsOf(ctx).filter((d) => BATCH_ITEMS.has(String(d.item)) && d.base >= BATCH_MIN_BASE).sort((a, b) => b.base - a.base));
   for (const d of wants) {
@@ -155,6 +171,15 @@ type Step = { kind: Intention['stepKind']; target: number; item: ItemKind | null
 /** The step that serves a batch plan now, from the person's beliefs about the workshop and their own pack. */
 export function batchStep(ctx: Ctx, i: Intention): Step {
   const { world, p } = ctx;
+  if(i.project&&hasProjectPlans(world)){
+    if(i.forSite&&(p.inv[i.makes as ItemKind]??0)>0&&i.worked<(i.reserve??1))return {kind:'deliver',target:i.forSite,item:i.makes as ItemKind,step:`bring ${i.makes} to the site`,key:`haul:${i.forSite}`,blocked:''};
+    const s=nextProjectStep(ctx,i.project,i),item=s.node.item==='cart'?null:s.node.item;
+    const key=s.phase==='collect'?`collect:${s.target}:${s.node.item}`:s.phase==='operate'?`operate:${s.target}:${s.node.recipe}`:
+      s.phase==='craft'?`craft:${s.node.item}`:s.phase==='wait'?`project_wait:${i.id}:${s.node.id}`:s.phase==='acquire'&&item==='water'?'fetch_water:production':null;
+    const kind=s.phase==='acquire'?'get':s.phase==='deposit'?'store':s.phase==='wait'?'stay':s.phase==='blocked'||s.phase==='done'?'none':'make';
+    const label=s.phase==='operate'?`work on ${s.node.item}`:s.phase==='deposit'?`bring ${s.node.item} to the workshop`:s.phase==='wait'?s.reason:s.phase==='blocked'?s.reason:`${s.phase} ${s.node.item}`;
+    return {kind,target:s.target,item,step:`${label} for ${i.makes}`,key,blocked:s.phase==='blocked'?s.reason:''};
+  }
   const b = p.beliefs[i.aboutId];
   const r = i.recipe ? RECIPE_BY_ID[i.recipe] : undefined;
   if (!b || b.kind !== 'building' || !r) return { kind: 'none', target: 0, item: null, step: 'find the workshop again', key: null, blocked: 'the workshop is no longer one they know of' };
@@ -213,6 +238,7 @@ export function batchStep(ctx: Ctx, i: Intention): Step {
 
 /** How a batch plan ends: the goods reached their use, or a stated reason why not. */
 export function batchOutcome(world: World, p: Person, i: Intention): { status: 'done' | 'dropped'; reason: string } | null {
+  if(i.project?.failure)return {status:'dropped',reason:i.project.failure};
   if (!hasBatchPlans(world)) return { status: 'dropped', reason: 'seeing a batch through is no longer part of these rules' };
   const b = p.beliefs[i.aboutId];
   if (!b || b.kind !== 'building') return { status: 'dropped', reason: 'the workshop is no longer one they know of' };
@@ -224,7 +250,7 @@ export function batchOutcome(world: World, p: Person, i: Intention): { status: '
     if (!site || site.ent !== 'site') return { status: 'dropped', reason: `the site the ${i.makes} were for is finished or gone` };
     if (i.worked >= qty) return { status: 'done', reason: `brought ${Math.round(i.worked)} ${i.makes} from the ${b.btype?.replace('_', ' ')} to the site` };
     if (unitsOf(site.delivered[i.makes as ItemKind]) + unitsOf(site.used[i.makes as ItemKind]) >= unitsOf(site.required[i.makes as ItemKind])) return { status: 'dropped', reason: `the site came by its ${i.makes} some other way` };
-  } else if (unitsOf(p.inv[i.makes as ItemKind]) >= qty) {
+  } else if ((i.project?.goal.tier===1?toolsHeldBy(world,p.id,i.makes as import('./types').ToolKind).filter(t=>t.tier===1).length:unitsOf(p.inv[i.makes as ItemKind])) >= qty) {
     return { status: 'done', reason: `has the ${i.makes} from the ${b.btype?.replace('_', ' ')}` };
   }
   if (world.tick > i.until) return { status: 'dropped', reason: i.step ? `the time is up (was going to ${i.step})` : 'the time is up' };
@@ -241,4 +267,22 @@ export function servesBatch(i: Intention, o: Option): boolean {
   return false;
 }
 
-setBatchHooks({ want: batchWanted, step: batchStep, outcome: batchOutcome });
+/** Reconsider a lost prerequisite from current personal knowledge, with bounded attempts and time between them. */
+function reviewBatchProject(ctx:Ctx,i:Intention):void{
+ if(!i.project||!hasProjectPlans(ctx.world))return;
+ const g=i.project,step=nextProjectStep(ctx,g,i);
+ if(step.phase==='blocked'&&g.retries<PROJECT_LIMITS.retries&&(g.retryAt===undefined||ctx.world.tick-g.retryAt>=240)){
+  const fresh=compileProject(ctx,g.goal,i),attempt=g.retries+1;
+  g.retries=attempt;g.retryAt=ctx.world.tick;
+  if(fresh.ok){
+   fresh.graph.retries=attempt;fresh.graph.retryAt=ctx.world.tick;
+   fresh.graph.history=[{tick:ctx.world.tick,node:fresh.graph.root,reason:`Replanned after ${step.reason}`}];
+   i.project=fresh.graph;
+  }else if(attempt===PROJECT_LIMITS.retries)g.failure=`No feasible prerequisites after ${attempt} reconsiderations: ${fresh.reason}`.slice(0,240);
+ }
+ recordProjectStep(ctx,i);
+}
+
+setBatchHooks({ want: batchWanted, step: batchStep, outcome: batchOutcome, review: reviewBatchProject,
+ canAcquire: (ctx,i,item) => i.project && hasProjectPlans(ctx.world)
+  ? compileProject(ctx,{item,quantity:1,tier:0}).ok : hasKnownResource(ctx.world,ctx.p,item) });

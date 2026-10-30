@@ -25,6 +25,7 @@ import { toolOf } from './tools';
 import { stageOf } from './people';
 import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind, World } from './types';
 import { hashUnit } from './rng';
+import {hasProjectPlans,nextProjectStep} from './project_step';
 
 import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
@@ -1139,6 +1140,7 @@ export function productionOptions(ctx: Ctx): void {
   if (p.health < 45) return;
   const demands = demandsOf(ctx);
   for (const d of demands) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
+  projectOptions(ctx);
   optGranaryStore(ctx);
   optTendGranary(ctx);
   optToolMaintenance(ctx);
@@ -1147,6 +1149,41 @@ export function productionOptions(ctx: Ctx): void {
   optRackSpare(ctx);
   optPlanFacilities(ctx);
   optPlanUpgrade(ctx);
+}
+
+/** A saved prerequisite selects which existing leaf needs an offer, without bypassing that leaf's checks. */
+function projectOptions(ctx:Ctx):void{
+ if(!hasProjectPlans(ctx.world))return;
+ for(const i of ctx.p.intentions){
+  if(i.status!=='active'||!i.project)continue;
+  if(i.forSite&&(ctx.p.inv[i.makes as ItemKind]??0)>0)continue;
+  const step=nextProjectStep(ctx,i.project,i),n=step.node,item=n.item as ItemKind;
+  const scratch:Ctx={...ctx,options:[],blocked:[]},why=`to ${i.goal}`,base=28,tag='craft';
+  const b=step.target?ctx.p.beliefs[step.target]:undefined;
+  if(step.phase==='acquire'&&n.item!=='cart')supply(scratch,item,step.quantity,base,why,tag,0,n.destination?ctx.p.beliefs[n.destination]:null);
+  if(step.phase==='deposit'&&b&&n.item!=='cart')depositLeaf(scratch,b,{[item]:step.quantity},base,why,tag);
+  if(step.phase==='collect'&&b&&n.item!=='cart'){
+   const count=Math.min(step.quantity,invRoom(ctx.world,ctx.p,item));if(count>=1)collectLeaf(scratch,b,{[item]:count},base,why,tag);
+  }
+  if(step.phase==='operate'&&b){
+   const r=RECIPE_BY_ID[n.recipe],fac=r?facilitiesOf(ctx,r.at).find(f=>f.b.id===b.id):undefined;
+   if(r&&fac)planRecipe(scratch,fac,r,n.item,step.quantity,base,why,tag,0);
+  }
+  if(step.phase==='craft')scratch.toolWanted={kind:item as ToolKind,for:i.goal,required:true};
+  if(step.phase==='wait')addOption(scratch,{kind:'rest',label:'Wait for my batch',goal:step.reason,need:null,util:base,parts:[['my batch is still finishing',base]],eta:step.wait,key:`project_wait:${i.id}:${n.id}`,targetId:step.target,tag:'rest',
+   make:()=>newActivity(ctx.world,ctx.p,{kind:'rest',label:'Waiting for my batch',goal:step.reason,targetId:step.target,here:true,amount:step.wait,utility:base,minCommit:10,maxTicks:step.wait+20,data:{projectWait:true,forPlan:i.id}})});
+  if(step.phase==='blocked')addBlocked(scratch,'operate',i.goal,step.target,step.reason,tag);
+  if(scratch.toolWanted)ctx.toolWanted=scratch.toolWanted;
+  for(const o of scratch.options){
+   if(step.phase==='acquire'&&n.item!=='cart'&&(o.kind==='withdraw'||o.kind==='gather'||o.kind==='fetch_water'))o.yields=item;
+   const prior=ctx.options.find(x=>x.key===o.key),offer=prior??o;
+   if(prior&&o.yields)prior.yields=o.yields;
+   const make=offer.make;
+   if(make)offer.make=()=>{const a=make();if(a){a.data.forPlan=i.id;if(a.kind==='deposit')a.data.projectSupply=i.id;}return a;};
+   if(!prior)ctx.options.push(offer);
+  }
+  for(const o of scratch.blocked)if(!ctx.blocked.some(x=>x.key===o.key&&x.blocked===o.blocked))ctx.blocked.push(o);
+ }
 }
 
 void RECIPES;

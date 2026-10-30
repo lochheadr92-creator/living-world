@@ -1,3 +1,4 @@
+import type {ProjectGraph} from './project_graph';
 // Private plans (rich worlds only). A person who can see the evening coming may decide to do something about it, carry that decision
 // across several separate activities, set it aside when something more pressing happens, and then take it up again, change it, or give
 // it up for a stated reason.
@@ -291,7 +292,9 @@ type Step = { kind: Intention['stepKind']; target: number; item: ItemKind | null
 // Rules 50 (batch_plan.ts): a batch plan's want, step and outcome live beside the planner that offers its options; they are
 // installed from there, so that this module does not import the planner (which imports this one).
 export interface BatchHooks {
-  want: (ctx: Ctx) => { item: string; recipe: string; facilityId: number; qty: number; forSite: number; why: string; wants: Partial<Items> } | null;
+  review?: (ctx: Ctx, i: Intention) => void;
+  canAcquire?: (ctx: Ctx, i: Intention, item: ItemKind) => boolean;
+  want: (ctx: Ctx) => { item: string; recipe: string; facilityId: number; qty: number; forSite: number; why: string; wants: Partial<Items>; project?: ProjectGraph } | null;
   step: (ctx: Ctx, i: Intention) => Step;
   outcome: (world: World, p: Person, i: Intention) => { status: 'done' | 'dropped'; reason: string } | null;
 }
@@ -865,6 +868,7 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
         continue;
       }
     }
+    if (i.kind === 'batch') batchHooks?.review?.(ctx,i);
     const n = stepFor(ctx, i);
     if (i.blocked && !n.blocked) i.reason = 'taken up again';
     // (a batch plan, rules 50, is about its workshop whatever place its current step names: the site it hauls to is a step, not a change of mind)
@@ -885,7 +889,8 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
     // rules 34+: a material-fetch plan with no known source and no promise owed is relinquished, rather than retried forever.
     if (reconsider && runsRulesVersion(world, 34) && n.kind === 'get' && n.item) {
       const owed = outstandingForPlan(world, p.id, n.item, i.id);
-      if (owed <= 0 && !hasKnownResource(world, p, n.item)) {
+      const known = i.kind === 'batch' && batchHooks?.canAcquire ? batchHooks.canAcquire(ctx,i,n.item) : hasKnownResource(world,p,n.item);
+      if (owed <= 0 && !known) {
         i.status = 'dropped';
         i.ended = world.tick;
         i.reason = `no known source of ${n.item} with anything left`;
@@ -997,7 +1002,9 @@ function succeedPlan(ctx: Ctx, u: import('./succession').Unfinished, onCooldown:
   } else if (u.kind === 'batch') {
     const want = batchHooks?.want(ctx);
     if (!want || want.forSite !== u.forSite) return null;
+    if(want.project&&want.item!==u.makes)return null;
     made = { ...base, kind: 'batch', goal: `see ${want.qty} ${want.item} through at the ${(p.beliefs[want.facilityId]?.btype ?? 'workshop').replace('_', ' ')} for the site`, until: world.tick + BATCH_PATIENCE_TICKS, reason: want.why, aboutId: want.facilityId, wants: want.wants, makes: String(want.item), recipe: want.recipe, forSite: want.forSite };
+    if(want.project){made.project=want.project;made.reserve=want.qty;}
   }
   if (!made) return null;
   const st = stepFor(ctx, made);
@@ -1164,6 +1171,7 @@ function adoptProject(ctx: Ctx): Intention | null {
       reserve: batch.qty,
       recipe: batch.recipe,
       forSite: batch.forSite,
+      ...(batch.project ? {project:batch.project} : {}),
       step: '',
       stepKind: 'none',
       stepTarget: 0,
