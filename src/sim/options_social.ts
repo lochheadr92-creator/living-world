@@ -8,6 +8,7 @@ import {careReturns} from './care_handback';
 import {expectsCare} from './promise_expectations';
 import { exchangeJourneyOptions } from './exchange_journeys';
 import {helperExperience,materialRequestKind,watchExperience} from './helper_learning';
+import {accountsExperience} from './checked_accounts';
 import {pendingPromiseReports} from './promise_outcomes';
 import { askTrustBonus } from './delivery_place';
 import { supplyOptions } from './customers';
@@ -405,7 +406,9 @@ function optAskInfo(ctx: Ctx): void {
       if (c.d > 14) continue;
       if ((p.asked[c.q.id] ?? -9999) > world.tick - 500) continue;
       const sc = new Scorer().add(`does not know where to find ${w.kind}`, w.drive * 0.62).add(c.aff >= 20 ? 'a friend' : 'someone to ask', 2 + c.aff * 0.05).add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
-      mkSocial(ctx, c, 'ask_info', { infoKind: w.kind }, `Ask ${c.q.name} where to find ${w.kind}`, `to learn where ${w.kind} can be found`, null, sc, 'info', ':' + w.kind);
+      // rules 107 (checked_accounts.ts): what became of their earlier accounts of places, when I checked them myself
+      const accounts = accountsExperience(world, p, c.q.id); if (accounts.bonus) sc.add(accounts.reason, accounts.bonus);
+      mkSocial(ctx, c, 'ask_info', { infoKind: w.kind }, `Ask ${c.q.name} where to find ${w.kind}`, `to learn where ${w.kind} can be found`, null, sc, 'info', ':' + w.kind, accounts.reason);
     }
   }
   // rules 105 (location_question.ts): somebody I promised something to and cannot place may be asked after

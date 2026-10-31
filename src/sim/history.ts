@@ -16,6 +16,7 @@ import { mandate } from './civic_decision';
 import type { World, Person, Items } from './types';
 import type { CivicProject } from './townships';
 import { townshipOf } from './townships';
+import {describeAccounts} from './checked_accounts';
 const name = (w: World, id: number) => w.persons.find(p => p.id === id)?.name ?? deceasedById(w,id)?.name ?? `person #${id}`;
 const items = (i: Items) => Object.entries(i).map(([k,n]) => `${n} ${k}`).join(', ') || 'no materials';
 export function projectHistory(w: World, q: CivicProject): string[] {
@@ -82,6 +83,7 @@ export function relationshipHistory(w: World, p: Person): string[] {
   if(r.deathKnown) rows.push(`Death learned at tick ${r.deathKnown.learned}: ${r.deathKnown.source}${r.deathKnown.via ? ` from ${name(w,r.deathKnown.via)}` : ''}.`);
   for(const k of r.workHeard??[])rows.push(`Heard ${k.name}'s undertaking #${k.planId} at tick ${k.heardAt}, ${k.via==='meal'?'at supper':'conversation'} #${k.conversationId}: ${k.goal}; reported work ${Math.round(k.worked)}. ${r.handovers?.some(h=>h.work.planId===k.planId||h.helperPlan===k.planId)?'Any handover agreement is recorded separately below.':'No takeover was promised.'}${k.obstacle?` Last personal obstacle: ${k.obstacle}.`:''}${k.deferredAt!==undefined?` Left that reserve to them since tick ${k.deferredAt}; no promise made.`:''}`);
   if(r.grievance) rows.push(`Open grievance: ${r.grievance.detail} (since tick ${r.grievance.since}).`);
+  if(r.accounts)rows.push(describeAccounts(r.accounts));
   for(const h of r.handovers??[])rows.push(`Undertaking #${h.work.planId}, handover conversation #${h.id}: ${h.state}; ${h.cause}, proposed at tick ${h.proposedAt}${h.answeredAt!==undefined?`, answered at ${h.answeredAt}`:''}. ${h.reason}. Reported earlier work ${h.work.worked}; goods, skills and other promises were not transferred.${h.state==='accepted'?' Responsibility returns only through an informed agreement.':''}`);
   if(r.meeting){const e=r.meeting;rows.push(`Meal #${e.mealId}, place #${e.placeId}, agreed tick ${e.agreedAt}: ${e.outcome}; ${e.source} at tick ${e.tick} (${e.confidence}). ${e.reason}. A failed prior arrangement can allow more preparation time; it does not establish bad faith.`);}
   const receipts=(p.socialMemory??[]).filter(m=>m.otherId===other).slice(-3);

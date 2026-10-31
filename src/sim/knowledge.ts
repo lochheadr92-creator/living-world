@@ -2,6 +2,7 @@ import { biological, conditionAt, ecologicalSign, hasEcology, rememberedGrowth }
 import { deathStory, hasLocalDeath } from './death_knowledge';
 import { SOURCE_REGROW } from './constants';
 import {correctSourceExperience} from './source_learning';
+import { checkAccount } from './checked_accounts';
 import { cloneItems } from './economy';
 import { facilitySnapshot } from './facilities';
 import { toolsHeldBy } from './toolreg';
@@ -168,6 +169,8 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   b.origin = p.id;
   b.hops = 0;
   if(e.ent==='source')correctSourceExperience(world,p,e.id,e.amount);
+  // rules 107 (checked_accounts.ts): a told account of this place, now seen in person, is held to its teller on grounds
+  if (e.ent === 'source') { const told = p.beliefs[e.id]; if (told && told.src === 'told') checkAccount(world, p, told, e.amount, estimatedAmount(world, told)); }
   if (runsRulesVersion(world, 32) && e.ent === 'source') noteDepletedSource(world, p, e, b);
   return learn(p, b);
 }

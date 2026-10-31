@@ -2,6 +2,7 @@ import { rememberedDry, rememberedWaterCost } from './water_access';
 import { nearestHub } from './settlements';
 import * as D from './dialogue';
 import { currentFailure, estimatedAmount, learn } from './knowledge';
+import { noteDisagreement } from './checked_accounts';
 import { BELIEF_NOUN } from './labels';
 import { isFacilityType } from './recipes';
 import { addLog } from './events';
@@ -70,6 +71,7 @@ export function tellBelief(world: World, S: Person, L: Person, b: Belief): boole
   const old = L.beliefs[b.id];
   const isNew = !old || b.seen > old.seen + 200;
   if (!isNew) return false;
+  if (old) noteDisagreement(world, S, L, old, b); // rules 107: a differing newer account of a place seen oneself is logged
   const copy: Belief = { ...b, src: 'told', from: S.id, learned: world.tick, origin: b.origin ?? S.id, hops: (b.hops ?? 0) + 1 };
   // (a field that is absent stays absent: a key set to undefined is dropped by a save, so the saved and the live record would differ)
   if (b.items) copy.items = { ...b.items };

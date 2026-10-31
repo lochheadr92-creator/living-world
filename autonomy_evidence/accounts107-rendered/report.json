@@ -1,0 +1,127 @@
+{
+  "rules": 107,
+  "evidence": "STAGED first-hand account told by the engine's own telling, the bush declared stripped after the teller saw it; the walk, the check, the tally, the trust note and the later choice of whom to ask are the engine's own. No ordinary frequency claim.",
+  "checks": [
+    {
+      "name": "Ada holds Ben's first-hand account of the bush (told, one mouth, about 6) and nothing is held yet",
+      "ok": true,
+      "detail": {
+        "belief": {
+          "id": 8,
+          "kind": "berry_bush",
+          "x": 58.5,
+          "y": 40.5,
+          "amount": 6,
+          "max": 6,
+          "seen": 0,
+          "src": "told",
+          "from": 5,
+          "learned": 0,
+          "ecology": "vigorous",
+          "origin": 5,
+          "hops": 1
+        },
+        "trust": 10,
+        "log": "Ben told me about a berry bush a short walk south-east of camp."
+      }
+    },
+    {
+      "name": "she walks there on his word, finds it short, and holds the account to him once with a dated note; Cara holds nothing; the save is valid",
+      "ok": true,
+      "detail": {
+        "accounts": {
+          "checked": 1,
+          "borneOut": 0,
+          "last": {
+            "tick": 358,
+            "id": 8,
+            "kind": "berry_bush",
+            "described": 6,
+            "expected": 6,
+            "found": 1,
+            "borneOut": false,
+            "toldAt": 0
+          }
+        },
+        "trust": 7,
+        "log": [
+          "Ben's account of the berry bush (about 6, told 0.1 days ago from their own sight) was not borne out: 1 there. 0 of 1 of their accounts have been borne out when I checked."
+        ],
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "Ada's relationship history shows the checked account and its grounds",
+      "ok": true,
+      "detail": "Relationship history\n\nBen: trust 7, affinity 30.\n\nAccounts of places checked: 1, borne out 0. Last: the berry bush #8 described as about 6 (told at tick 0), 1 there at tick 358 against about 6 expected: not borne out. Grounds are my own sight only; what others may have taken meanwhile is unknown to me.\n\nRemembered at tick 358: the berry bush Ben described (about 6) held only 1 when I got there 0.1 days later. Event link not recorded.\n\nCara: trust 10, affinity 30.\n\nEarlier cause not recorded.\n\nRe"
+    },
+    {
+      "name": "whom to ask next is weighed by it: Cara over Ben by four, with the tally as the stated reason",
+      "ok": true,
+      "detail": {
+        "ben": {
+          "util": 10.701177424747812,
+          "parts": [
+            [
+              "does not know where to find wood",
+              13.6
+            ],
+            [
+              "a friend",
+              3.5
+            ],
+            [
+              "walking",
+              -2.4
+            ],
+            [
+              "0 of 1 of their accounts of places was borne out when I checked (last: the berry bush, tick 358); past accounts, not a guarantee of this one",
+              -4
+            ]
+          ]
+        },
+        "cara": {
+          "util": 14.701177424747812,
+          "parts": [
+            [
+              "does not know where to find wood",
+              13.6
+            ],
+            [
+              "a friend",
+              3.5
+            ],
+            [
+              "walking",
+              -2.4
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "name": "left to herself she asks Cara, with asking Ben passed over",
+      "ok": true,
+      "detail": {
+        "chosen": "Ask Cara where to find wood",
+        "alternatives": [
+          "Picking berries",
+          "Ask Cara for food",
+          "Ask Ben for food",
+          "Ask Ben where to find wood"
+        ]
+      }
+    },
+    {
+      "name": "the panel states the choice and the reason",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 30\nClover household\nHome: no home yet — last considered just now: too hungry to start a building\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nLess\nWHAT ARE THEY DOING?\nAsk Cara where to find wood — walking to Cara (5 tiles to go).\non the way\nWHY DID THEY CHOOSE IT?\nWeighed up: does not know where to find wood +14 · a friend +4 · walking −2\nWHA"
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -149,6 +149,8 @@ export interface Relation {
   workHeard?: import('./continuity_knowledge').HeardUndertaking[];
   workTold?: import('./continuity_knowledge').ToldUndertaking[];
   handovers?: import('./handover_state').WorkHandover[];
+  /** rules 107 (checked_accounts.ts): this person's own checks of the other's first-hand accounts of places */
+  accounts?: import('./checked_accounts').CheckedAccounts;
   /** the live grievance this person holds against the other, if any (set by an actual incident, closed by amends or time) */
   grievance: Grievance | null;
   /** last time a grievance between these two was closed (stops a settled quarrel from starting the same apology loop again) */
