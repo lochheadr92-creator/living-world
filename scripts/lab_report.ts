@@ -27,8 +27,9 @@ for (const f of readdirSync(dir)) {
 }
 const seeds = [...bySeed.keys()].filter((s) => bySeed.get(s)!.has('control')).sort();
 if (!seeds.length) {
+  // nothing to report is a failure, not an empty success: a caller that reads only the exit code must not take it for a result
   console.log('no lab results found in ' + dir);
-  process.exit(0);
+  process.exit(1);
 }
 const first = bySeed.get(seeds[0])!.get('control')!;
 // a run made before a metric existed has no value for it: report the metrics every row carries, and say which are missing
