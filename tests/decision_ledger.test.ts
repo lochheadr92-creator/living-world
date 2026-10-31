@@ -37,7 +37,7 @@ it('a staged decision keeps what was known then: the choice, what was passed ove
  const f=promisedSupplyScene(103,3,[70,12]);askWood(f);f.ada.cooldowns.pause=0;f.ada.nextThink=f.w.tick;const t=f.w.tick;
  for(let n=0;n<200&&!(f.ada.decisions?.some(e=>e.tick>=t&&e.activityId));n++)stepWorld(f.w);
  const e=f.ada.decisions!.find(e=>e.tick>=t&&e.activityId)!;expect(e.setAside.some(s=>/Ben promised 3 wood, expected by tick \d+/.test(s.reason))).toBe(true);
- const before=serializeWorld(f.w);const view=describePerson(f.w,f.ada.id);expect(view.decisionHistory.some(r=>r.includes(`chose “${e.chosen}”`)&&/Set aside then: .*Ben promised 3 wood/.test(r))).toBe(true);
+ const before=serializeWorld(f.w);const view=describePerson(f.w,f.ada.id)!;expect(view.decisionHistory.some(r=>r.includes(`chose “${e.chosen}”`)&&/Set aside then: .*Ben promised 3 wood/.test(r))).toBe(true);
  const ctx=generateOptions(f.w,f.ada,true,true);observeInhabitant(f.w,f.ada,ctx,rankOptions(ctx));expect(serializeWorld(f.w)).toBe(before);
  for(let n=0;n<1200&&!e.outcome;n++)stepWorld(f.w);expect(e.outcome).toBeDefined();expect(decisionHistory(f.w,f.ada).some(r=>r.includes(`chose “${e.chosen}”`)&&r.includes(`ended ${e.outcome} at tick ${e.endedAt}`))).toBe(true);
  // the entry is not re-scored: the reason recorded then survives even after the promise has lapsed
