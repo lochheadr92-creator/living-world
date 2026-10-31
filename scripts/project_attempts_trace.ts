@@ -8,6 +8,7 @@ import { DAY } from '../src/sim/constants';
 import { conservationReport } from '../src/sim/economy';
 import { serializeWorld } from '../src/app/save';
 import type { Request } from '../src/sim/types';
+import {gitProvenance} from './observers/provenance';
 
 const [out, seed] = process.argv.slice(2);
 if (!out || !['meadow', 'river', 'forest'].includes(seed) || existsSync(out)) throw new Error('Supply new output and registered seed');
@@ -44,7 +45,7 @@ while (w.tick < 6 * DAY) {
   if (w.tick % 240 === 0 && Date.now() - started > 180000) { stop = 'runtime budget'; break; }
 }
 for(const a of attempts)delete a.lastSignature;
-const report = { seed, rules: 39, ticks: w.tick, stop, head: execFileSync('git', ['rev-parse', 'HEAD'], {encoding:'utf8'}).trim(),
+const report = { seed, rules: 39, ticks: w.tick, stop, ...gitProvenance(),
   hash: hashWorld(w), conservation: conservationReport(w), attempts, requests: [...requests.values()], seconds: (Date.now()-started)/1000 };
 writeFileSync(`${out}/report.json`, JSON.stringify(report, null, 2));
 writeFileSync(`${out}/final.json`, serializeWorld(w));

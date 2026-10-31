@@ -11,6 +11,7 @@ import {conservationReport} from '../src/sim/economy';
 import {isDependent,isAdultWorker} from '../src/sim/people';
 import {estimatedAmount} from '../src/sim/knowledge';
 import type {Activity,Person} from '../src/sim/types';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 const [root,out='viewer_evidence/checkpoint']=process.argv.slice(2).filter(s=>s!=='--');
 if(!root)throw new Error('Pass the existing continuity evidence directory.');mkdirSync(out,{recursive:true});
 const sha=(s:string)=>createHash('sha256').update(s).digest('hex');
@@ -50,7 +51,7 @@ for(const seed of ['meadow','river','forest']){
  rows.push(row);console.log(JSON.stringify({seed,ticks:w.tick-start,samples:personSamples,dependentNeedSamples,incapacitySamples,repairOffers:offers.repair??0,repairStarts:starts.repair??0,careOffers:offers['give:care']??0,careStarts:starts['give:care']??0,pure,continued:row.continuationEqual}));
 }
 const files=['scripts/programme_checkpoint.ts','src/sim/options_work.ts','src/sim/welfare.ts','src/sim/responsibilities.ts','src/sim/world.ts'];
-writeFileSync(join(out,'report.json'),JSON.stringify({head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sourceHashes:Object.fromEntries(files.map(f=>[f,sha(readFileSync(f,'utf8'))])),question:'Which care/upkeep/depletion opportunities and physical starts occur in the first half-day after the three retained ordinary day-45 checkpoints?',
+writeFileSync(join(out,'report.json'),JSON.stringify({...gitProvenance(),sourceHashes:sourceManifest(files),question:'Which care/upkeep/depletion opportunities and physical starts occur in the first half-day after the three retained ordinary day-45 checkpoints?',
 method:'1200 ticks or 30 seconds per seed. Fixed meadow/river/forest, original rules/settings retained. Offers sampled every 120 ticks for each living person; repeated offers are person-time samples, not unique opportunities. Starts/transfers observed at their actual boundaries. Unobserved restored twin stepped identically.',
 limits:'Short rules-53 continuation, not a complete winter/generation, not current rules 54/55, not a benefit comparison. Capable-worker counts are observer diagnostics, never inhabitant knowledge. Starts do not prove completion or downstream use; no fabricated completion or feedback denominator.',rows},null,2));
 if(rows.some(r=>!r.observerPure||!r.continuationEqual||!r.conservation.ok))process.exitCode=1;

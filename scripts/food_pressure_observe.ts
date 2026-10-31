@@ -1,3 +1,4 @@
+import {gitProvenance,sourceManifest} from './observers/provenance';
 // Diagnose a retained ordinary food crisis without changing needs, resources, knowledge or rules.
 import{existsSync,mkdirSync,readFileSync,readdirSync,writeFileSync}from'node:fs';
 import{createHash}from'node:crypto';
@@ -14,7 +15,7 @@ import{TimeBudget}from'./observers/time_budget';
 const[input,out,daysArg='6']=process.argv.slice(2).filter(x=>x!=='--'),days=Number(daysArg);
 if(!input||!out||existsSync(out)||!Number.isInteger(days)||days<1||days>10)throw new Error('Retained save, fresh output and 1..10 days required');
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/food_pressure_observe.ts','scripts/observers/time_budget.ts').sort();
-const manifest=()=>Object.fromEntries(files.map(f=>[f,hash(readFileSync(f,'utf8'))])),source=manifest();
+const manifest=()=>sourceManifest(files),source=manifest();
 const raw=readFileSync(input,'utf8'),w=deserializeWorld(raw),twin=deserializeWorld(serializeWorld(w)),start=w.tick,began=performance.now(),counts:Record<string,number>={},people:Record<number,any>={},snapshots:any[]=[],stories:any[]=[],endings:any[]=[];
 const bump=(r:Record<string,number>,k:string)=>r[k]=(r[k]??0)+1;
 const targetNames=new Set(['Bram','Ada']);
@@ -34,5 +35,5 @@ while(w.tick<start+days*2400){
  stepWorld(w);stepWorld(twin);if(w.tick%2400===0&&!conservationReport(w).ok)throw new Error('Conservation failed');if(w.tick%120===0&&performance.now()-began>600000)throw new Error('Ten-minute budget exceeded');
 }
 detach();delete w.hooks;const final=serializeWorld(w);if(final!==serializeWorld(twin)||final!==serializeWorld(deserializeWorld(final)))throw new Error('Twin/reload differs');if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed');
-const report={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),input,inputHash:hash(raw),source,settings:w.settings,start,end:w.tick,days,seconds:(performance.now()-began)/1000,samples,pureChecks,counts,people,snapshots,stories,endings,deaths:w.deceased.filter(d=>d.tick>=start),timeBudget:time.report(),continuationEqual:true,conservation:conservationReport(w),limits:'Historical rules retained. Six days predeclared after inspecting the retained forest crisis. All living people counted. Bram/Ada are diagnostic leads; first 160 critical snapshots and 180 endings only. Global resource totals are observer facts, not knowledge given to anyone, and do not establish access or adequacy. Repeated samples are not independent decisions. No intervention or causal benefit estimate.'};
+const report={...gitProvenance(),input,inputHash:hash(raw),source,settings:w.settings,start,end:w.tick,days,seconds:(performance.now()-began)/1000,samples,pureChecks,counts,people,snapshots,stories,endings,deaths:w.deceased.filter(d=>d.tick>=start),timeBudget:time.report(),continuationEqual:true,conservation:conservationReport(w),limits:'Historical rules retained. Six days predeclared after inspecting the retained forest crisis. All living people counted. Bram/Ada are diagnostic leads; first 160 critical snapshots and 180 endings only. Global resource totals are observer facts, not knowledge given to anyone, and do not establish access or adequacy. Repeated samples are not independent decisions. No intervention or causal benefit estimate.'};
 mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({start,end:w.tick,seconds:report.seconds,samples,pureChecks,counts,deaths:report.deaths.length,conserved:report.conservation.ok}));

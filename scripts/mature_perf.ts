@@ -15,6 +15,7 @@ import { householdHistory, relationshipHistory, civicHistory } from '../src/sim/
 import { conservationReport } from '../src/sim/economy';
 import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
 import type { World } from '../src/sim/types';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 
 const args=process.argv.slice(2).filter(a=>a!=='--');
 const currentLarge=args.includes('--current-large');
@@ -37,7 +38,7 @@ function census(w: World) {
     arrays:Object.fromEntries(Object.entries(w).filter(([,v])=>Array.isArray(v)).map(([k,v])=>[k,(v as unknown[]).length])) };
 }
 const files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/mature_perf.ts').sort();
-const manifest=()=>Object.fromEntries(files.map(f=>[f,sha(readFileSync(f,'utf8'))]));
+const manifest=()=>sourceManifest(files);
 const sourceHashes=manifest();
 const cases: {name:string;create:()=>World;source:string}[] = [
   {name:'normal-new',create:()=>createWorld(currentWorldSettings('normal','meadow',{immigration:false})),source:'fresh current product world'},
@@ -70,7 +71,7 @@ if(JSON.stringify(sourceHashes)!==JSON.stringify(manifest()))throw new Error('So
 const report={question:'What do current fresh Normal/Large and the supplied genuine accumulated world cost to step, inspect, save and load?',
   workload:'240 ticks maximum and 20 seconds per case, including exact same-runtime restored continuation; 60 inspector/history queries, five save/load repetitions. No ensemble.',
   limitations:[...(currentLarge?[]:['Retained input is measured under its own rules; no current mature Large claim.']),'Timing on an active development machine, not a controlled speed comparison.','Node heap is process heap at sample time, including transient allocations; not retained world size.','An extinct input has no person inspector/history samples; zero samples are not zero cost.'],
-  head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sourceHashes,node:process.version,platform:platform(),cpu:cpus()[0]?.model,cores:cpus().length,
+  ...gitProvenance(),sourceHashes,node:process.version,platform:platform(),cpu:cpus()[0]?.model,cores:cpus().length,
   matureFileHash:sha(matureRaw),results};
 writeFileSync(join(out,'headless.json'),JSON.stringify(report,null,2));
 if(results.some(r=>!r.observerPure||!r.continuationEqual||!r.conservation.ok))process.exitCode=1;

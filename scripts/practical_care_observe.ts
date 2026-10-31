@@ -10,6 +10,7 @@ import {childrenNeedingWatch,laidUp} from '../src/sim/responsibilities';
 import {serializeWorld} from '../src/app/save';
 import {conservationReport} from '../src/sim/economy';
 import {DAY} from '../src/sim/constants';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 const out=process.argv[2];if(!out||existsSync(out))throw new Error('Fresh output directory required');
 mkdirSync(out,{recursive:true});
 const results=[];const began=performance.now(),limitMs=120000;
@@ -38,6 +39,6 @@ for(const seed of ['meadow','river','forest']){
  if(stop==='budget')break;
 }
 const paths=['scripts/practical_care_observe.ts','src/sim/responsibilities.ts','src/sim/options_work.ts','src/sim/social.ts','src/sim/welfare.ts','src/sim/rulesversion.ts'];
-const report={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),sourceHashes:Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')])),question:'Do ordinary five-day Normal worlds expose and select practical childcare? Fixed seeds and no staged injuries or resources. Zero opportunities remain zero, not success.',budgetSeconds:120,seconds:(performance.now()-began)/1000,results};
+const report={...gitProvenance(),sourceHashes:sourceManifest(paths),question:'Do ordinary five-day Normal worlds expose and select practical childcare? Fixed seeds and no staged injuries or resources. Zero opportunities remain zero, not success.',budgetSeconds:120,seconds:(performance.now()-began)/1000,results};
 writeFileSync(`${out}/report.json`,JSON.stringify(report,null,2));console.log(JSON.stringify(results.map(({seed,tick,stop,counts,requests,endings})=>({seed,tick,stop,counts,requests,endings}))));
 if(results.some(r=>r.stop!=='horizon'))process.exitCode=2;

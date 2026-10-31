@@ -16,15 +16,16 @@ import {conservationReport} from '../src/sim/economy';
 import {stageOf} from '../src/sim/people';
 import {parseIntervention} from './lab/lab';
 import type {ItemKind} from '../src/sim/types';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 const [out,seed,daysArg,arrivalsArg,versionArg,armArg]=process.argv.slice(2),days=Number(daysArg??30),immigration=arrivalsArg==='arrivals',version=versionArg&&versionArg!=='current'?Number(versionArg):undefined,arm=armArg??'';
 if(!out||existsSync(out)||!['meadow','river','forest'].includes(seed)||!Number.isInteger(days)||days<1||days>90)throw new Error('Fresh output, registered seed and 1-90 days required');
 if(arm)parseIntervention(arm).install!();
 mkdirSync(out,{recursive:true});
 const paths=readdirSync('src',{recursive:true}).map(String).filter(p=>p.endsWith('.ts')).map(p=>'src/'+p).concat(['scripts/chain_audit.ts']).sort();
-const manifest=()=>Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]));const source=manifest();
+const manifest=()=>sourceManifest(paths);const source=manifest();
 const w=createWorld({...currentWorldSettings('normal',seed,{immigration}),...(version?{rulesVersion:version}:{})});
 const initialGround:Record<string,number>={};for(const s of w.sources){initialGround[s.type]=(initialGround[s.type]??0)+s.amount;}
-writeFileSync(`${out}/provenance.json`,JSON.stringify({arm:arm||'current',head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),source,settings:w.settings,days,budgetSeconds:300,observer:'pure 240-tick samples of demands and blocked reasons, facility records, ledger'},null,2));
+writeFileSync(`${out}/provenance.json`,JSON.stringify({arm:arm||'current',...gitProvenance(),source,settings:w.settings,days,budgetSeconds:300,observer:'pure 240-tick samples of demands and blocked reasons, facility records, ledger'},null,2));
 const CHAIN_ITEMS:ItemKind[]=['planks','handles','bricks','jar','charcoal','iron','flour','bread','ore','clay','stone','wood','cart' as ItemKind];
 const wants:Record<string,number>={},wantsPeople:Record<string,Set<number>>={},blocked:Record<string,number>={},blockedBy:Record<string,Record<string,number>>={},toolWanted:Record<string,number>={},techniqueWanted=0;let techWanted=0;
 const samples:unknown[]=[];const firstBuilt:Record<string,number>={};const firstSite:Record<string,number>={};const began=Date.now();let stop='horizon';
