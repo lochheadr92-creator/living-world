@@ -1,0 +1,23 @@
+{
+  "source": "4e9848415f8214f3e1a43f40590e5582195aa098, rules 113 before successor behaviour",
+  "ordinary": {
+    "saved": "f353f61c6a1fcdbccf008c7f90a2908bffe8d6b673581b894d16a9fda050d026",
+    "uninterrupted": "060810631cb4e95a26bb990e94fa325e255dd74c80c2e9e4e7be5cef5655c3ce",
+    "continued": "060810631cb4e95a26bb990e94fa325e255dd74c80c2e9e4e7be5cef5655c3ce"
+  },
+  "eatenAtSource": {
+    "saved": "9fe5561ed35f9dbc397a5278a180e377154767e251d0213a2745ebd7a9871ce2",
+    "uninterrupted": "15530680b542a1e80b969324dc25d369063762bffe6481b93893eb4b290abaf1",
+    "continued": "15530680b542a1e80b969324dc25d369063762bffe6481b93893eb4b290abaf1"
+  },
+  "retainedHarvest": {
+    "saved": "17198572e4d6f133ed636617e40c9d67630a24ae776cdf50883aa132b7d4edbf",
+    "uninterrupted": "2d536de70e06e16ada48ffdc75e5b293c2dbb13bc63be453eeb0dbc7ecac3d49",
+    "continued": "2d536de70e06e16ada48ffdc75e5b293c2dbb13bc63be453eeb0dbc7ecac3d49"
+  },
+  "separateCarriedGrain": {
+    "saved": "0b0014b6815916d6d998da20949b33313691dbf51b4d91e1d0508eb4ef600b23",
+    "uninterrupted": "722c4d2d086137f3f6fe8282329512071a4be0dea212d43e1dc62513deda326f",
+    "continued": "722c4d2d086137f3f6fe8282329512071a4be0dea212d43e1dc62513deda326f"
+  }
+}
