@@ -266,3 +266,24 @@ npx --no-install vite-node scripts/meal_leftovers_observe.ts -- forest "$runRoot
 ```powershell
 npx --no-install vite-node scripts/meal_leftovers_observe.ts -- meadow "$runRoot-meals-meadow45" 45 1200
 ```
+
+## Rules 91 personal arrangements (pending owner-run measurements)
+
+The fixed short screen has two forest meals and a repeated visitor, a river refusal and
+no meadow meals. It has zero cancellation-update or replacement starts. Run longer fixed
+screens to measure those opportunities without forcing attendance or rerolling seeds.
+Allow about 6–15 minutes per seed, with a 1,200-second cap; each output directory must be
+new. Return `report.json`, retaining failures and the source manifest. Use
+`rich-no-meeting-knowledge` with the existing controls/nudges for aggregate claims.
+
+```powershell
+npx --no-install vite-node scripts/meeting_arrangements_observe.ts -- river "$runRoot-arrangements-river45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/meeting_arrangements_observe.ts -- forest "$runRoot-arrangements-forest45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/meeting_arrangements_observe.ts -- meadow "$runRoot-arrangements-meadow45" 45 1200
+```

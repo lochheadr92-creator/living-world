@@ -120,3 +120,27 @@ These are source findings, not new ordinary incidence measurements or delivered 
 Continue the existing WS11/20 row: establish locally informed records and actual ownership,
 then voluntary temporary/departure handover, competing acceptance, original-worker recovery,
 already-complete work and missing goods. Do not copy private skills, goods or obligations.
+
+Further source tracing during rules 91 identifies an earlier information boundary:
+`collectUnfinished` copies the deceased's private plan, progress and carried quantities into
+the household record. `successionWanted` treats knowing the death as sufficient to read that
+entire record, including a never-communicated tool intention. Death news alone does not
+communicate private work or belongings. The existing rules-53 test explicitly expects that
+historical behavior; preserve it below the new boundary instead of weakening its contract.
+
+An informed continuity extension therefore needs actual work/intention communication while
+the worker is alive, or explicitly sourced observation of a public undertaking. Keep the
+observer's truthful record separate from what a prospective successor has learned. The
+same contact machinery can support voluntary temporary coverage and eventual handback,
+without copying skills, inventory or promises. Missing knowledge should leave the normal
+household-building/reserve cues available rather than granting an unseen private project.
+
+The declared rules-91 boundary fixture `autonomy_evidence/continuity92-audit.ts` reproduces
+three source findings (`autonomy-continuity92-audit2.log`): a registered axe on an unseen
+housemate blocks the tool undertaking; a remote cancelled site blocks a still-remembered
+site; and adopting as a past death witness refreshes a pile **42.426 tiles away**, changing
+the belief timestamp from 0 to 100 and remembered wood from three to zero. Conservation
+still holds. The first audit's tool count lacked its required identity record and did not
+reproduce the tool finding; that fixture error and first log are retained. The corrected
+fixture uses the standard starting-equipment helper. These are staged boundary proofs,
+not ordinary incidence, repaired behavior or evidence of household benefit.
