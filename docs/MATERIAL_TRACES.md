@@ -183,3 +183,8 @@ main at rules-88 `ef7a0c9`; the conflicting historical 59/60 branch remains `be7
 other inspected candidate is old rules 8. No competing 89 implementation was found. Main's
 989 pre-existing untracked paths remain unchanged. The immutable 89 reference will be
 captured from the committed runtime before successor behavior is added.
+
+Captured from runtime `aa38124`, reference commit `ab66ee5`: ordinary, paid partial timber
+work, physical collection and partially consumed fire fuel. Separate immutable test **1/1**
+passes in **2.29 seconds**. No old reference changed. The next diagnosed shared-place
+dependency is recorded in `MEETING_ARRANGEMENTS.md`; its audit is not delivered behavior.
