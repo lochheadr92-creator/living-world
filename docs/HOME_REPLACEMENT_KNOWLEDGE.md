@@ -46,6 +46,13 @@ the layout, allowed upgrades and actual gathering/hauling/paid partial construct
 with save continuation. Final focused run: 80/80 across five files, including the
 housing/layout regressions, meat validation and rules-107 reference. Typecheck passes.
 
+Runtime commit `8193b8f`; immutable reference `51b8591`, recorded before any rules-109
+code, passes 1/1. Full rules-108 regression: **342 files / 2,217 tests passed**,
+646.38 seconds on the owner's Windows machine (`autonomy-home108-full-tests.log`).
+The reference test was added after that run's collection and checked separately.
+The fixture/typecheck correction and final physical-work contract also have their
+separate final focused pass; no invalid-source completion is claimed.
+
 ## Ordinary and visible evidence
 
 Five ordinary days each, Normal river and meadow, no induced loss: 2,800 live-person

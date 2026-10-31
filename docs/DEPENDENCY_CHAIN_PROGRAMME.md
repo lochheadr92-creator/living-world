@@ -16,6 +16,10 @@
   `HOME_REPLACEMENT_KNOWLEDGE.md`. Five-day ordinary loss-boundary screens are null.
   A corrected staged fixture reaches paid construction but stalls near completion
   and dies of thirst under both 107 and 108. Full WS16 recovery stays open.
+  Runtime `8193b8f`, immutable reference `51b8591` (1/1 separately); full rules-108
+  regression **342 files / 2,217 tests passed**, 646.38 s, final focused 80/80,
+  typecheck/build pass. Complete rules-107 45-day measurements are recorded in
+  `20f922f` and `AUTONOMY_VALIDATION.md`; all three ordinary seeds still have zero carts.
 
 The older checkpoint statements below are provenance, not the current frontier.
 The entire owner programme remains incomplete.
