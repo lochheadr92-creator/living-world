@@ -1,0 +1,67 @@
+{
+  "scene": "STAGED supplied hunger, source, pack and accepted offered action; direct execution of its physical handler. This proves the input boundary, not ordinary adoption or welfare.",
+  "checks": [
+    {
+      "name": "source grain feeds the hungry full-pack gatherer",
+      "ok": true,
+      "detail": {
+        "rules": 113,
+        "hunger": 32,
+        "source": 1,
+        "seeds": 6,
+        "oldSeeds": 7,
+        "created": 0,
+        "paid": 0,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no seed is created without grain payment; predecessor retained",
+      "ok": true,
+      "detail": {
+        "rules": 113,
+        "hunger": 32,
+        "source": 1,
+        "seeds": 6,
+        "oldSeeds": 7,
+        "created": 0,
+        "paid": 0,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "accepted harvest saves and continues exactly with balanced items",
+      "ok": true,
+      "detail": {
+        "rules": 113,
+        "hunger": 32,
+        "source": 1,
+        "seeds": 6,
+        "oldSeeds": 7,
+        "created": 0,
+        "paid": 0,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "rendered inspector identifies the staged gatherer",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nHeron household\nNo home yet\nTownship: Willowbank\nMOOD\nOkay\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nDeciding what to do next.\nNEEDS\nFood\n32\nWater\n95\nEnergy\n95\nWarmth\n79\nSafety\n85\nCompany\n70\nCARRYING\n×5\n×6\n11.5 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\n2\nKnows\n1\nFamily\nTraits"
+    },
+    {
+      "name": "inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

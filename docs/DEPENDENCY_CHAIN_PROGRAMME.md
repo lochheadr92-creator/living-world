@@ -2,6 +2,13 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
+- Rules 113 candidate: wild-grain seed conversion requires an actual carried grain
+  input, including when the harvested grain was eaten at its source. No partial
+  payment or new random draw; predecessor/lab behaviour preserved. See
+  `WILD_SEED_INPUT.md`: focused 55/5, rendered 6/6 and typecheck/build pass. Full
+  regression and six five-day ordinary 112/113 comparisons are running. The forest
+  food crisis and overall food-system viability remain unresolved.
+
 - Retained forest food-crisis diagnosis: days 18.1–24.1 at original rules 107,
   exact twins/reload, 120 pure checks and conserved items. All 754 critical-hunger
   samples have food offers, but 608 are travelling to gather; stores reach zero.

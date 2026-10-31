@@ -1,7 +1,7 @@
 # Living World: notes for Codex (read this first)
 
-Current state (31 October 2026): rules 112 occasion recovery after conversation (`OCCASION_RECOVERY.md`),
-after 111 ongoing occasion participation; the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 113 paid wild-grain seed input (`WILD_SEED_INPUT.md`),
+after 112 occasion recovery; the autonomy/environment programme continues from the register.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 

@@ -1,4 +1,5 @@
 import {pileAccessBlocker} from './pile_access';
+import {saveSeedFromGrain} from './wild_seed';
 import { harvestPressure } from './ecology';
 import { hasFloodAccess } from './flood';
 import { drawWater, hasWaterBudget } from './hydrology';
@@ -186,9 +187,7 @@ registerHandler('gather', {
     let retained=got;
     if (s.type === 'wild_grain' && world.rng.chance(0.2)) {
       // shell some of the grain heads for seed
-      consume(world, p.inv, 'grain', 1, 'saved as seed');
-      produce(world, p.inv, carryCap(world, p), 'seeds', 1, 'seed saved from wild grain');
-      retained--;
+      retained-=saveSeedFromGrain(world,p);
     }
     if(a.data.careSupply)a.data.careAcquired=(a.data.careAcquired??0)+retained;
     observe(world, p, s);
