@@ -9,6 +9,7 @@ import { durableReserve } from './provision';
 import { explainsHousing } from './shelter';
 import {hasHomeReplacement,layoutHome} from './home_replacement';
 import {knownConstructionWork} from './construction_finish';
+import {waterSearchPurpose} from './water_search';
 import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
 import { makesSpears } from './defence';
 import { isThreat } from './wildlife';
@@ -1351,10 +1352,12 @@ function optWaterRun(ctx: Ctx): void {
 // ───────────────────────── exploring ─────────────────────────
 function optExplore(ctx: Ctx): void {
   const { world, p } = ctx;
-  if (ctx.stage === 'child' || ctx.night) return;
+  if (ctx.stage === 'child') return;
   // someone hungry with no known way to eat has every reason to go looking
   const noFoodLead = ctx.drives.hunger > 25 && !ctx.options.some((o) => o.tag === 'food' && (o.kind === 'gather' || o.kind === 'eat' || o.kind === 'eat_store'));
   const noWaterLead = ctx.drives.thirst > 18 && !ctx.options.some((o) => o.tag === 'water');
+  const waterSearch=waterSearchPurpose(ctx,noWaterLead);
+  if(ctx.night&&!waterSearch?.afterDark)return;
   // timber is wanted (a house to raise, a roof to mend) but there is no tree they know of left to fell
   const woodWanted = ctx.wood < 2 && materialNeeds(ctx).some((n) => n.item === 'wood');
   const noWoodLead = woodWanted && !ctx.options.some((o) => o.kind === 'gather' && (o.tag === 'site' || o.tag === 'repair' || o.tag === 'fire' || o.tag === 'craft'));
@@ -1389,8 +1392,8 @@ function optExplore(ctx: Ctx): void {
   // pick a frontier: sample points and prefer those whose surroundings are unexplored
   let best: { x: number; y: number; score: number } | null = null;
   const hub = nearestHub(world, p.x, p.y);
-  const ax = ctx.home ? ctx.home.x : hub.x;
-  const ay = ctx.home ? ctx.home.y : hub.y;
+  const ax = waterSearch?.x ?? (ctx.home ? ctx.home.x : hub.x);
+  const ay = waterSearch?.y ?? (ctx.home ? ctx.home.y : hub.y);
   for (let i = 0; i < 16; i++) {
     const ang = hashUnit(p.id, Math.floor(world.tick / 60), i * 7) * Math.PI * 2;
     const r = rMin + hashUnit(p.id, Math.floor(world.tick / 60), i * 13 + 1) * (rMax - rMin);
@@ -1418,7 +1421,7 @@ function optExplore(ctx: Ctx): void {
   if (!best) return;
   const target = best;
   const e = hyp(target.x - p.x, target.y - p.y) * 1.18 / Math.max(0.03, ctx.speed);
-  const sc = new Scorer().add('curiosity', base * (hs.shortage > 0.6 ? 1 : 0.9)).add('walking', -pen(e) * 0.5).add('daylight to spare', 2);
+  const sc = new Scorer().add('curiosity', base * (hs.shortage > 0.6 ? 1 : 0.9)).add('walking', -pen(e) * 0.5).add(ctx.night&&waterSearch?.afterDark?'critical thirst after dark':'daylight to spare', 2);
   addOption(ctx, {
     kind: 'explore',
     label: noWaterLead ? 'Search for water' : noWoodLead && !noFoodLead ? 'Look for timber' : dLead && !noFoodLead ? `Look for ${dLead.what === 'clay_pit' ? 'clay' : dLead.what === 'ore_vein' ? 'ore' : 'stone'}` : 'Explore somewhere new',
@@ -1438,8 +1441,9 @@ function optExplore(ctx: Ctx): void {
       }
       return newActivity(world, p, {
         kind: 'explore',
-        label: noWoodLead && !noFoodLead ? 'Looking for timber' : 'Exploring',
-        goal: noWoodLead && !noFoodLead ? 'to find trees to fell' : foodKnown < 4 ? 'to look for food sources' : 'to see what is out there',
+        label: waterSearch?.label ?? (noWoodLead && !noFoodLead ? 'Looking for timber' : 'Exploring'),
+        goal: waterSearch?.goal ?? (noWoodLead && !noFoodLead ? 'to find trees to fell' : foodKnown < 4 ? 'to look for food sources' : 'to see what is out there'),
+        ...(waterSearch?{need:waterSearch.need}:{}),
         tx: spot.x,
         ty: spot.y,
         spotX: spot.x,

@@ -1,0 +1,145 @@
+{
+  "rules": 110,
+  "limits": "STAGED depleted carried water and critical thirst after dark, no inserted water knowledge. Autonomous search, perception, travel and drinking. Old rules also eventually find water in this scene; no general survival benefit claimed.",
+  "checks": [
+    {
+      "name": "critical night search starts with a truthful purpose and no supplied water knowledge",
+      "ok": true,
+      "detail": {
+        "tick": 1801,
+        "activity": {
+          "id": 8,
+          "kind": "explore",
+          "label": "Searching for water",
+          "goal": "to find water",
+          "need": "thirst",
+          "phase": "travel",
+          "targetId": 0,
+          "targetType": "",
+          "tx": 29.5,
+          "ty": 16.5,
+          "spotX": 29.5,
+          "spotY": 16.5,
+          "item": null,
+          "amount": 0,
+          "start": 1800,
+          "minCommit": 1920,
+          "expire": 2900,
+          "progress": 0,
+          "pprogress": 0,
+          "duration": 0,
+          "cycle": 0,
+          "path": [
+            29.5,
+            16.5
+          ],
+          "pi": 0,
+          "pathTries": 1,
+          "stuck": 0,
+          "lastX": 30,
+          "lastY": 30,
+          "claims": [],
+          "utility": 54.70269683540438,
+          "blocked": "",
+          "data": {
+            "where": "the north country",
+            "optKey": "explore",
+            "why": "curiosity +58 · walking −5 · critical thirst after dark +2"
+          }
+        },
+        "waterKnown": 0,
+        "conserved": true
+      }
+    },
+    {
+      "name": "searching-after-dark inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "the inspector shows Searching for water",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nLinden household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nOkay\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nSearching for water (13 tiles to go).\non the way\nWHAT IS STOPPING THEM?\nDangerously weak; everything else will have to wait.\nNEEDS\nFood\n95\nWater\n5\nEnergy\n95\nWarmth\n87\nSafety\n83\nCompany\n70\nCARRYING\n×3\n3 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\nKnows\n4\nFamily\nTraits"
+    },
+    {
+      "name": "actual travel discovers a shore and produces a drinking activity",
+      "ok": true,
+      "detail": {
+        "tick": 1932,
+        "activity": {
+          "id": 9,
+          "kind": "drink",
+          "label": "Drinking at the water",
+          "goal": "to quench thirst (0/100)",
+          "need": "thirst",
+          "phase": "travel",
+          "targetId": 1000067,
+          "targetType": "tile",
+          "tx": 29.5,
+          "ty": 13.5,
+          "spotX": 29.5,
+          "spotY": 13.5,
+          "item": null,
+          "amount": 0,
+          "start": 1931,
+          "minCommit": 1961,
+          "expire": 2731,
+          "progress": 0,
+          "pprogress": 0,
+          "duration": 0,
+          "cycle": 0,
+          "path": [
+            29.5,
+            14.5,
+            29.5,
+            13.5
+          ],
+          "pi": 0,
+          "pathTries": 1,
+          "stuck": 0,
+          "lastX": 29.5,
+          "lastY": 16.5,
+          "claims": [],
+          "utility": 95.83774145812097,
+          "blocked": "",
+          "data": {
+            "optKey": "drink:1000067",
+            "why": "thirsty +98 · walking −2",
+            "routeAttempt": {
+              "target": 1000067,
+              "x": 29.5,
+              "y": 16.5,
+              "gx": 29.5,
+              "gy": 13.5,
+              "kind": "drink",
+              "cart": false
+            }
+          }
+        },
+        "waterKnown": 1,
+        "same": true
+      }
+    },
+    {
+      "name": "discovered-shore inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "real drinking restores thirst with exact continuation and accounting",
+      "ok": true,
+      "detail": {
+        "tick": 1983,
+        "drank": true,
+        "thirst": 100,
+        "waterConsumed": 6,
+        "same": true,
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}
