@@ -1,18 +1,18 @@
 # Dependency-chain programme register
 
-**31 October 2026 owner stop/handoff:** rules 98 roof-duty code/tests/tools are
-saved as an as-is checkpoint. Verification is partial; do not promote the full
-programme or rules 98 to complete. See [Claude continuation](CLAUDE_AUTONOMY_HANDOFF.md)
-for exact evidence, pending regression/review/reference work and the preserved
-[original owner prompt](AUTONOMY_ENVIRONMENT_OWNER_PROMPT.txt). The rules-97 delivery
-statement below remains the last completed checkpoint.
+**31 October 2026:** the Codex as-is checkpoint for rules 98 was verified, reviewed
+and pinned by Claude in a fresh clone (full regression, build, rendered and ordinary
+screen reproduced; one spoken-refusal finding fixed). Rules 98 is the last completed
+checkpoint; the programme itself remains incomplete. Handoff provenance:
+[Claude continuation](CLAUDE_AUTONOMY_HANDOFF.md) and the preserved
+[original owner prompt](AUTONOMY_ENVIRONMENT_OWNER_PROMPT.txt).
 
 Started 2026-10-29 from `main` `7625337` (rules 44) in `C:\dev\Claude Experiment\living-world-integrate`.
 Owner brief: complete understandable situations, need → informed choice → physical action → useful outcome → remembered
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays
 until its evidence is recorded, and a row never disappears because it is hard.
 
-The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **97**:
+The expanded owner programme remains **partially delivered**. Verified delivery now extends through rules **98**:
 viewer improvements, care/upkeep measurements, practical childcare, physical tool/storage prerequisites, batch recipe
 choice and tool-loss recovery, lawful indoor care, full-pack food recovery, required-tool precedence, retaining a valid running destination for ordinary review, resident return-care from personal room observations, physical drinking from known household water stores, failed-water-hand-over recovery through owned-home provision, bounded saved production prerequisites across workshops, learned personal daily preferences, personally scoped work amounts/durations, and private food/water preparation retaining a useful work purpose through a drink break. The older
 reports below are historical scope, not closure of the expanded WS15–21, A1–A16 or their dependencies.
@@ -34,6 +34,10 @@ wholesale integration candidates; current rules 46/47 already own their integrat
 pending branch inspected allocated rules 60. A later fetch found `ccr-8527b59e-oatizp` using 59 for tool precedence and
 60 for keeping a running target; those meanings collide with this lineage's 59/60. Preserve that branch and its saves;
 adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage numbers remain independent.
+
+### Rules 98 — heard roof duties
+
+Rules **98** connects heard roof-repair duties to a dated communicated home, lawful wood-patch acquisition and physical repair (`REPAIR_DUTY.md`). Runtime `259f028` (Codex checkpoint `3534da8` plus one review fix); full regression on the checkpoint **318 files / 2,142 tests**, 1,281.36 s on a shared four-core container; focused **34/4**, typecheck, build and rendered **8/8** reproduced in a fresh clone. Immutable reference `4cd6828` separately passes **1/1**, 6.15 s, typecheck clean. Staged acceptance at 37 without a known home leads to one real wood unit, paid repair from 351, fulfilment at 1,275 (condition 73) and Ada sleeping inside from 1,398. Review fixed one spoken refusal that named a fire instead of the home. The river five-day screen reproduced here shows six ordinary repair starts, one sampled roof-request offer and zero spoken roof requests or active duties; forest and meadow stand as Codex evidence with the same null result, meadow retaining Talia #1029's thirst death at 8746. Ordinary activation of the duty chain, shared upkeep, replacement after collapse and household viability remain unproven. Next: the remaining programme rows in the owner's order, beginning with the measured time-budget/household-rhythm diagnosis and the cart trace. The entire owner programme remains incomplete.
 
 ### Rules 97 — agreed childcare return
 
@@ -315,7 +319,7 @@ remain attributed evidence, not newly repeated measurements.
 | Household coordination / incomplete (A9, WS5/11/17/20) | `responsibilities.ts`, `welfare.ts`, `intent.ts`, `social.ts`; 48/53/56 | Voluntary promises, childcare protections, death succession | Contacted intentions avoid duplicate trips and permit complementary work; provider absence causes reconsideration; private plans, promises and physical contributions stay distinct. |
 | Food/water assistance / incomplete (WS2/5/17) | `food_help.ts`, `options_work.ts`, `social.ts`, `delivery_place.ts`, `care_capacity.ts`, `resident_contact.ts`, `resident_care.ts`, `stored_water.ts`; 45/48/56/62/63/66/67/68 | Same-room gifts, actual-receipt cooldown, failed food hand-over → home deposit → table meal, including prior ordinary use; rules 66 connects personally remembered need → real resident return/entry → receipt/use, with short ordinary null results | Rules 67/68 connect failed water hand-over, owned-home provision and actual stored drinking. Ordinary care reliability, guest access and other missing lawful handoffs remain. Preserve partial quantities, unknown/full homes and actual consumption. No through-wall transfer or invented room. |
 | Illness/injury/elder care / incomplete (WS17) | `welfare.ts`, `responsibilities.ts`, `illness.ts`, `life.ts`, `resident_contact.ts`, `resident_care.ts`; 56/66 | Injured elder receives/eats bread after actual resident return; visible condition is remembered and revised through contact/news; childcare saves/purity; zero new return-care starts in three fresh five-day windows | Rules 95 staged necessity acquisition, return and consumption connected; ordinary starts 0/1/1 and zero receipts. Rules 96 staged fire-duty fuel and warmth connected, ordinary requests/starts zero. Rules 97 connects actual recovery proposal/answer and retained watch progress; ordinary handbacks zero. Cover duties and sustained care after recovery remain; no-helper failure must stay visible. Ordinary care reliability and household viability remain unproven. |
-| Homes and shared upkeep / incomplete (WS4/16) | `shelter.ts`, `winter_shelter.ts`, `buildings.ts`, `facilities.ts`; 47+ | Physical repair then kiln use; prewinter housing-condition evidence | Material acquisition, concurrent interruption/collapse, replacement, limited labour and justified public responsibility; repair/rebuild costs and later occupation/use. |
+| Homes and shared upkeep / incomplete (WS4/16) | `shelter.ts`, `winter_shelter.ts`, `buildings.ts`, `facilities.ts`, `repair_duty.ts`; 47+, roof duty 98 | Physical repair then kiln use; prewinter housing-condition evidence. Rules 98: an accepted roof request conveys the asker's dated home belief, the helper obtains one lawful wood patch, repairs with reserved goods protected and the resident later sleeps inside (staged, rendered 8/8); ordinary five-day screens show zero spoken roof requests (`REPAIR_DUTY.md`). | Ordinary activation of requested repair, concurrent interruption/collapse, replacement after collapse, limited adult labour and justified public responsibility with no duplicate repair credit; rebuild costs and later occupation/use. |
 | Succession beyond death / connected mechanism, ordinary uptake unproven (WS11/20) | `work_handover.ts`, `handover_state.ts`, `intent.ts`, `social.ts`; 94 | Actual staged offer/answer, retained-plan delivery and agreed handback; refusal, competing proposal, ended work, absent materials and personally heard stayer covered. Three five-day worlds: zero starts. `WORK_HANDOVER.md`. | Measure ordinary qualified opportunities, selection, useful cover and later informed return; complete broader care and household continuity. No copied goods/skills/promises. |
 | Relocation and population viability / measurement plus incomplete handovers (WS12/20) | `relocation.ts`, `lifecycle.ts`, `households.ts`; 20/54 | Subgroup/succession/return/search staged; one failed ordinary proposal in prior 135 seed-days | Trace cue→consent→dependants/provisions→travel→confirmation/home, organiser loss and return. Long horizon covers birth/ageing/adoption/split/loss without forced population. |
 | Practical knowledge continuity / incomplete (WS10/20) | `techniques.ts`, `learning.ts`, `background.ts`; 41/44/52 | Actual charcoal teaching and output; higher procedures/trials staged | Last skilled worker lost; learner learns through contact and later produces useful output; no automatic skill inheritance. |

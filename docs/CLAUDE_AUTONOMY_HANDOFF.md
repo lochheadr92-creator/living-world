@@ -4,6 +4,16 @@ The owner stopped implementation and requested committing/pushing the work **as 
 then a continuation prompt for Claude. This is a checkpoint, not programme completion.
 No additional simulation behaviour was changed for the handoff.
 
+## Resumed by Claude — 31 October 2026
+
+Steps 1–3 of "Exact next task" are done on `main`: full regression on the checkpoint
+(318 files / 2,142 tests), build, rendered 8/8 and the river screen were reproduced in
+a fresh clone; one review finding (a stale roof refusal spoken as a fire) was fixed with
+a test in `259f028`; the immutable rules-98 continuation is `4cd6828`. The next unused
+rules number was confirmed as 99 (no branch, tag or source uses it). Results:
+`REPAIR_DUTY.md` and the programme register. The rest of this file is the original
+Codex handoff, kept as provenance.
+
 ## Start here
 
 - Repository: https://github.com/lochheadr92-creator/living-world

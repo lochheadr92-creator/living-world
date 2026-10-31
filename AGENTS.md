@@ -1,8 +1,8 @@
 # Living World: notes for Codex (read this first)
 
-Current owner stop/handoff (31 October 2026): rules 98 was saved as an as-is
-checkpoint, with final verification/reference work pending. Read
-[docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md) before continuing.
+Current state (31 October 2026): rules 98 is verified, reviewed and pinned (`259f028`,
+reference `4cd6828`); the autonomy/environment programme continues from the register.
+Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
 
@@ -47,6 +47,8 @@ Scaling and performance history: `docs/SCALING.md`.
 - Owner workflow decision (2026-10-21): record review findings and their fixes once. A fixed finding with appropriate regression evidence does not automatically require another independent review. Repeat review or verification only for relevant changes, new evidence or unresolved defects. See `docs/DEVELOPMENT_POLICY.md`.
 
 ## Current civilisation implementation
+
+Rules **98** connects heard roof-repair duties to a dated communicated home, lawful wood-patch acquisition and physical repair (`REPAIR_DUTY.md`). Runtime `259f028` (Codex checkpoint `3534da8` plus one review fix); full regression on the checkpoint **318 files / 2,142 tests**, 1,281.36 s on a shared four-core container; focused **34/4**, typecheck, build and rendered **8/8** reproduced in a fresh clone. Immutable reference `4cd6828` separately passes **1/1**, 6.15 s, typecheck clean. Staged acceptance at 37 without a known home leads to one real wood unit, paid repair from 351, fulfilment at 1,275 (condition 73) and Ada sleeping inside from 1,398. Review fixed one spoken refusal that named a fire instead of the home. The river five-day screen reproduced here shows six ordinary repair starts, one sampled roof-request offer and zero spoken roof requests or active duties; forest and meadow stand as Codex evidence with the same null result, meadow retaining Talia #1029's thirst death at 8746. Ordinary activation of the duty chain, shared upkeep, replacement after collapse and household viability remain unproven. Next: the remaining programme rows in the owner's order, beginning with the measured time-budget/household-rhythm diagnosis and the cart trace. The entire owner programme remains incomplete.
 
 Rules **97** connects actual recovery handback and retained paid childcare (`CARE_RECOVERY_HANDBACK.md`). Runtime `745a92d`; full regression **315 files / 2,124 tests**, **437.41 s**; focused **63/6**, build and rendered **7/7** pass. Immutable reference `543be3f` separately passes **1/1**, **2.62 s**, with typecheck clean. Actual proposal at 331 and answer at 353 return the remaining watch while retaining 212 physical watch ticks and awarding no full-watch credit. Three ordinary five-day worlds preserve exact twins and resources but show zero watch requests or handbacks; meadow retains Talia #1029's thirst death at 8746. Exact activity occupancy is recorded; ordinary care reliability and sustained welfare remain unproven. Next: two reproduced roof-repair gaps under `REPAIR_DUTY.md` (uncommunicated target and missing wood fallback acquisition). The entire owner programme remains incomplete.
 
