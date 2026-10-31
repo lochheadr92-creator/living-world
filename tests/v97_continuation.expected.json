@@ -1,0 +1,33 @@
+{
+  "source": "745a92d1178c839933cf2c1a34d3cf854feb747e, rules 97 before successor behaviour",
+  "ordinary": {
+    "saved": "797fee928b02308ccb502e79b430c7cf3055c6a8225487c986633ae1ced8cc7a",
+    "uninterrupted": "d8f15bf08ccd1925c77ac8df19db4f76c23ccab66ba9c1bea3cbecb0c49cc64e",
+    "continued": "d8f15bf08ccd1925c77ac8df19db4f76c23ccab66ba9c1bea3cbecb0c49cc64e"
+  },
+  "paid": {
+    "saved": "1cbefbe50f1e11dd639c20a8e262d6a7554204b45b02b18c12aa391f0d3fb72c",
+    "uninterrupted": "d75d54c45b860acb36dfed050b7b3e5823efeec4dbb69ef7f1b6356109f9b342",
+    "continued": "d75d54c45b860acb36dfed050b7b3e5823efeec4dbb69ef7f1b6356109f9b342"
+  },
+  "proposal": {
+    "saved": "dd976a0a48c6e91f07c7508bdfa74e99b9b0a2af15b16564321ba8da3c2cd7af",
+    "uninterrupted": "f4eb988eae8f73760203959aa3a22e5951c02686e87dff704dc345d36525fe2d",
+    "continued": "f4eb988eae8f73760203959aa3a22e5951c02686e87dff704dc345d36525fe2d"
+  },
+  "accepted": {
+    "saved": "f4eb988eae8f73760203959aa3a22e5951c02686e87dff704dc345d36525fe2d",
+    "uninterrupted": "66d3c05d88be7b6c5df5d77ada6c22b3918d797da2e4900605bdf9705038da15",
+    "continued": "66d3c05d88be7b6c5df5d77ada6c22b3918d797da2e4900605bdf9705038da15"
+  },
+  "resumed": {
+    "saved": "5350fa7758c85e6135389a9bb183dbf25e6fd8de5149d2146598dd926a9bf995",
+    "uninterrupted": "757d217401bbca07daed95a730d78f69aa0518675dabf12bf0f59582d7e3e188",
+    "continued": "757d217401bbca07daed95a730d78f69aa0518675dabf12bf0f59582d7e3e188"
+  },
+  "competing": {
+    "saved": "16f76e7b35936804f10f84af065af924c24f506db5d8a386517bd1a01e30e0dc",
+    "uninterrupted": "30cccd0dd42ca62306adf4111a4057c25ed4a325e15a170b1339ba3fe50f72a0",
+    "continued": "30cccd0dd42ca62306adf4111a4057c25ed4a325e15a170b1339ba3fe50f72a0"
+  }
+}
