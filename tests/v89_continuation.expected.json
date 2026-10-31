@@ -1,0 +1,23 @@
+{
+  "source": "aa38124c02133ef39bcfd6346afe64c043b76a3b, rules 89 before successor behaviour",
+  "ordinary": {
+    "saved": "b558681f1a752b675b642447ce555e940ee8e0c964f31f34d9049af2e60dd048",
+    "uninterrupted": "852c4b8b6ead78d233ed82b4c0c36bea3cd29e4acf0baa3f8b989c2cb7fc11dd",
+    "continued": "852c4b8b6ead78d233ed82b4c0c36bea3cd29e4acf0baa3f8b989c2cb7fc11dd"
+  },
+  "paid": {
+    "saved": "7eef74716bc985b173a775a3092ea8064ccb678b86ec4eb74c5d833cd5563f5c",
+    "uninterrupted": "436fb95b24c8a6ce02f9c651c3eb4b73739c4fc6cf079a6c34943d649d96445d",
+    "continued": "436fb95b24c8a6ce02f9c651c3eb4b73739c4fc6cf079a6c34943d649d96445d"
+  },
+  "collection": {
+    "saved": "96368cfc6d7cdef39c39b8aefd9240240cfe5e448b0be73ad342b6311d9c5e42",
+    "uninterrupted": "11a60f9a95ffd961d979eecb07df36041805dd33f0dab0baf540688f72a7edd2",
+    "continued": "11a60f9a95ffd961d979eecb07df36041805dd33f0dab0baf540688f72a7edd2"
+  },
+  "burning": {
+    "saved": "beea55cbacb60a774c59940f76544594363e51a6b512e1541e8a3796717254c3",
+    "uninterrupted": "ed26504595f9a5d77d523e25a57dc6e22f873780873b6f33c1e4b8a504e8ea48",
+    "continued": "ed26504595f9a5d77d523e25a57dc6e22f873780873b6f33c1e4b8a504e8ea48"
+  }
+}
