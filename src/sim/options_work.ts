@@ -7,6 +7,7 @@ import { newActivity } from './activities';
 import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from './intent';
 import { durableReserve } from './provision';
 import { explainsHousing } from './shelter';
+import {hasHomeReplacement,layoutHome} from './home_replacement';
 import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
 import { makesSpears } from './defence';
 import { isThreat } from './wildlife';
@@ -685,9 +686,10 @@ function optPlanBuild(ctx: Ctx): void {
   const { world, p, hh } = ctx;
   if (!hh || ctx.stage === 'child') return;
   if (world.settings.scene !== 'natural') return; // staged scenes stay exactly as staged
-  const wantsHome = !ctx.home || ctx.home.type === 'lean_to';
+  const home=layoutHome(ctx);
+  const wantsHome = !home || home.type === 'lean_to';
   if (ctx.drives.hunger > 28 || ctx.drives.thirst > 28) {
-    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', ctx.drives.hunger > 28 ? 'too hungry to start a building' : 'too thirsty to start a building');
+    if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', ctx.drives.hunger > 28 ? 'too hungry to start a building' : 'too thirsty to start a building');
     return;
   }
   const tm = traitMods(p);
@@ -699,14 +701,14 @@ function optPlanBuild(ctx: Ctx): void {
   if (mySites.length > 0) {
     // Not a dead end: the household has already started something, and the site's own card, the build and haul options and
     // (from rules version 7) the shelter plan are where a viewer follows it from here.
-    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', `the household has already laid out a ${BUILD_DEF[(mySites[0].btype ?? 'hut') as BuildingType].label}`);
+    if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', `the household has already laid out a ${BUILD_DEF[(mySites[0].btype ?? 'hut') as BuildingType].label}`);
     return;
   }
   if (world.sites.filter((s) => s.hhId === hh.id && (!ownHomeOnly || isHomeType(s.type))).length > 0) return; // someone in my household already started one
   const rules = rulesOf(world);
   const anchor = settlementAnchor(ctx);
   if (!ownHomeOnly && openSitesNear(world, anchor) >= rules.maxOpenSites) {
-    if (wantsHome) noteHousingBlock(ctx, ctx.home ? 'hut' : 'lean_to', 'too much already being built here at once');
+    if (wantsHome) noteHousingBlock(ctx, home ? 'hut' : 'lean_to', 'too much already being built here at once');
     return;
   }
   const hs = hhState(ctx);
@@ -738,10 +740,9 @@ function optPlanBuild(ctx: Ctx): void {
       targetId: 0,
       tag: 'build',
       make: () => {
-        const home = ctx.home;
-        const hub = (hasTownships(world) && type === 'storehouse' ? townshipOf(world, p) : undefined) ?? baseHub(world, p, home);
-        const ax = home ? home.x + home.w / 2 : hub.x;
-        const ay = home ? home.y + home.h / 2 : hub.y;
+        const hub = (hasTownships(world) && type === 'storehouse' ? townshipOf(world, p) : undefined) ?? (hasHomeReplacement(world)?nearestHub(world,home?.x??p.x,home?.y??p.y):baseHub(world,p,ctx.home));
+        const ax = home ? home.x : hub.x;
+        const ay = home ? home.y : hub.y;
         let spot = null as { x: number; y: number } | null;
         if (type === 'storehouse') spot = findBuildSpot(world, p, type, hub.x, hub.y, 4, 11, 7);
         else if (type === 'fire') spot = findBuildSpot(world, p, type, ax, ay, 3, 9, 5);
@@ -773,12 +774,12 @@ function optPlanBuild(ctx: Ctx): void {
     });
   };
 
-  if (!ctx.home) {
+  if (!home) {
     if (knowTrees) {
       const urgent = 22 + (hs.shortage < 0.6 ? 6 : 0) + 4 * Math.min(members, 3);
       tryPlan('lean_to', urgent, 'no shelter of our own yet');
     } else noteHousingBlock(ctx, 'lean_to', 'does not know of three trees to cut');
-  } else if (ctx.home.type === 'lean_to') {
+  } else if (home.type === 'lean_to') {
     // The conditions for a household in a lean-to to lay out a proper hut. They are UNCHANGED except that, from rules
     // version 9, a household of one may build one too: the labour and the materials never needed a crew, only the rule
     // did. Each one still says when it is the one holding things up, instead of the whole question disappearing.

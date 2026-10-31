@@ -1,0 +1,251 @@
+{
+  "rules": 107,
+  "evidence": "STAGED supplied yard and tools, reduced site demand, one scripted protocol proposal then autonomous decisions. No real-model, ordinary frequency or aggregate benefit claim.",
+  "checks": [
+    {
+      "name": "actual protocol adopts a bounded plan without creating the cart",
+      "ok": true,
+      "detail": {
+        "person": 2,
+        "tick": 1,
+        "plan": {
+          "id": 12,
+          "kind": "batch",
+          "goal": "build a handcart at the timber yard",
+          "since": 0,
+          "until": 7200,
+          "status": "active",
+          "reason": "proposed from outside",
+          "setAside": 0,
+          "aboutId": 5,
+          "wants": {},
+          "makes": "cart",
+          "sheltered": 0,
+          "worked": 0,
+          "ended": 0,
+          "reserve": 1,
+          "recipe": "build_cart",
+          "forSite": 0,
+          "project": {
+            "version": 1,
+            "goal": {
+              "item": "cart",
+              "quantity": 1,
+              "tier": 0
+            },
+            "root": 1,
+            "nodes": [
+              {
+                "id": 1,
+                "item": "cart",
+                "quantity": 1,
+                "tier": 0,
+                "destination": 0,
+                "method": "recipe",
+                "place": 5,
+                "recipe": "build_cart",
+                "dependencies": [
+                  2,
+                  4,
+                  5
+                ],
+                "alternatives": [],
+                "estimatedTicks": 310
+              },
+              {
+                "id": 2,
+                "item": "planks",
+                "quantity": 4,
+                "tier": 0,
+                "destination": 5,
+                "method": "recipe",
+                "place": 5,
+                "recipe": "saw_planks",
+                "dependencies": [
+                  3
+                ],
+                "alternatives": [
+                  "hew_planks"
+                ],
+                "estimatedTicks": 120
+              },
+              {
+                "id": 3,
+                "item": "wood",
+                "quantity": 3,
+                "tier": 0,
+                "destination": 5,
+                "method": "present",
+                "place": 0,
+                "recipe": "",
+                "dependencies": [],
+                "alternatives": [],
+                "estimatedTicks": 0
+              },
+              {
+                "id": 4,
+                "item": "handles",
+                "quantity": 2,
+                "tier": 0,
+                "destination": 5,
+                "method": "present",
+                "place": 0,
+                "recipe": "",
+                "dependencies": [],
+                "alternatives": [],
+                "estimatedTicks": 0
+              },
+              {
+                "id": 5,
+                "item": "wood",
+                "quantity": 2,
+                "tier": 0,
+                "destination": 5,
+                "method": "present",
+                "place": 0,
+                "recipe": "",
+                "dependencies": [],
+                "alternatives": [],
+                "estimatedTicks": 0
+              }
+            ],
+            "current": 0,
+            "completed": [],
+            "retries": 0,
+            "history": []
+          },
+          "step": "work on planks for cart",
+          "stepKind": "make",
+          "stepTarget": 5,
+          "stepItem": "planks",
+          "stepKey": "operate:5:saw_planks",
+          "blocked": ""
+        },
+        "protocol": "inhabitant/31",
+        "observation": 17,
+        "proposed": 1,
+        "carts": 0,
+        "replay": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "the proposal transcript replays to the exact saved state",
+      "ok": true
+    },
+    {
+      "name": "the inspector shows the real cart plan",
+      "ok": true,
+      "detail": "H\nHana\nFollow\nAdult, 35\nWillow household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nCheerful\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nChopping wood — walking to Tree (5 tiles to go).\non the way\nWHAT ARE THEY SET ON?\nBuild a handcart at the timber yard. Step: work on planks for cart — settled on, not started. Planned production: sawn planks → a handcart. Estimated work and firing: 310 ticks, plus travel and interruptions.\nNEEDS\nFood\n100\nWater\n100\nEnergy\n100\nWarmth\n95\nSafety\n94\nCompany\n70\nCARRYING\n×3\n×3\n9.5 / 12\nTOOLS\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\n1\nKnows\n6\nFamily\nTraits"
+    },
+    {
+      "name": "rendering does not mutate the world",
+      "ok": true
+    },
+    {
+      "name": "after the proposal the autonomous person reaches paid cart assembly",
+      "ok": true,
+      "detail": {
+        "tick": 288,
+        "activity": {
+          "id": 19,
+          "kind": "operate",
+          "label": "Building a handcart",
+          "goal": "to build a handcart at the timber yard",
+          "need": null,
+          "phase": "work",
+          "targetId": 5,
+          "targetType": "building",
+          "tx": 47.5,
+          "ty": 41,
+          "spotX": 46.375922510353845,
+          "spotY": 42.43374424236826,
+          "item": null,
+          "amount": 0,
+          "start": 257,
+          "minCommit": 337,
+          "expire": 1157,
+          "progress": 31,
+          "pprogress": 30,
+          "duration": 0,
+          "cycle": 31,
+          "path": [
+            46.375922510353845,
+            42.43374424236826
+          ],
+          "pi": 2,
+          "pathTries": 1,
+          "stuck": 0,
+          "lastX": 46.375922510353845,
+          "lastY": 42.43374424236826,
+          "claims": [],
+          "utility": 47.41539950368816,
+          "blocked": "",
+          "data": {
+            "recipe": "build_cart",
+            "client": 2,
+            "purpose": "to build a handcart at the timber yard",
+            "destSite": 0,
+            "forPlan": 12,
+            "optKey": "operate:5:build_cart",
+            "dailyRoutine": {
+              "key": "operate:5:build_cart",
+              "label": "Building a handcart",
+              "kind": "operate",
+              "target": 5,
+              "phase": 1,
+              "context": {
+                "winter": false,
+                "household": 1,
+                "home": 4,
+                "injury": "well",
+                "family": "0:",
+                "contact": "0:",
+                "losses": "0:"
+              },
+              "eta": 210.8779244455411,
+              "energy": 88.9939999999986,
+              "warmth": 81.07068115028306
+            },
+            "why": "a step toward “build a handcart at the timber yard”: work on cart for cart · carpentry is my trade · to build a handcart at the timber yard +27 · everything for it is already at the timber yard +18 · practised at it +4 · walking −1",
+            "routeAttempt": {
+              "target": 5,
+              "x": 46.375922510353845,
+              "y": 42.43374424236826,
+              "gx": 47.5,
+              "gy": 41,
+              "kind": "operate",
+              "cart": false
+            },
+            "running": "build_cart",
+            "started": true
+          }
+        },
+        "same": true
+      }
+    },
+    {
+      "name": "real inputs produce the owned cart with exact continuation and conservation",
+      "ok": true,
+      "detail": {
+        "tick": 365,
+        "carts": [
+          {
+            "id": 20,
+            "ownerHh": 1
+          }
+        ],
+        "household": 1,
+        "planks": 4,
+        "same": true,
+        "conserved": true,
+        "valid": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -1,5 +1,29 @@
 # Dependency-chain programme register
 
+## Codex resumed from Claude — 31 October 2026
+
+- Published baseline `056dbac` full regression now verified on the owner's Windows
+  machine: **339 files / 2,204 tests passed**, 556.86 seconds. This closes the
+  unrerun protocol-number correction gap in the historical handoff.
+- A16: `6efd02e` handles null/missing direct-controller proposal goals safely and
+  adds a real-page scripted proposal → paid assembly → owned cart check (7/7).
+  No real-model, other goal-family or aggregate-benefit claim.
+- `0182849` fixes valid meat receipt save rejection and the omission of meat from
+  conservation checks. Captured ordinary forest save reload and 1,200-tick twins
+  pass with all item totals. See `MEAT_SAVE_VALIDATION.md`.
+- Rules 108: remembered-home layout decisions and physical duplicate allocation
+  checks, owner `home_replacement.ts`, lab removal and tests. See
+  `HOME_REPLACEMENT_KNOWLEDGE.md`. Five-day ordinary loss-boundary screens are null.
+  A corrected staged fixture reaches paid construction but stalls near completion
+  and dies of thirst under both 107 and 108. Full WS16 recovery stays open.
+  Runtime `8193b8f`, immutable reference `51b8591` (1/1 separately); full rules-108
+  regression **342 files / 2,217 tests passed**, 646.38 s, final focused 80/80,
+  typecheck/build pass. Complete rules-107 45-day measurements are recorded in
+  `20f922f` and `AUTONOMY_VALIDATION.md`; all three ordinary seeds still have zero carts.
+
+The older checkpoint statements below are provenance, not the current frontier.
+The entire owner programme remains incomplete.
+
 **31 October 2026:** the Codex as-is checkpoint for rules 98 was verified, reviewed
 and pinned by Claude in a fresh clone (full regression, build, rendered and ordinary
 screen reproduced; one spoken-refusal finding fixed). Rules 98 is the last completed
@@ -38,6 +62,12 @@ adapt individual mechanisms at fresh versions only. Rules/save/protocol/lineage 
 ### Proposed projects — AI bounded goal proposals (A16), no rules version
 
 The inhabitant seam gains one more answer: a bounded production goal, validated by the existing planner from the person's own knowledge and adopted through the ordinary gates as the ordinary batch plan, or refused with the reason (`PROPOSED_PROJECTS.md`, owner `src/sim/proposals.ts`; protocol inhabitant/31 and /32, observation 17). With nothing installed the autonomous world is byte for byte unchanged, so no rules version, reference or lab switch; the goldens and the rules-107 reference hold. Staged: eight refusals with reasons and an unchanged save, adoption with the compiled graph, repeat and second-batch refusals, nothing below rules 69; through the controller seam a refusal then an adoption in one decision; through the protocol the scripted proposer records a replayable run in which the cart is built from its proposal (four planks consumed), a tampered quantity diverges, later repeats are refused on the recorded gates. Full regression 339 files / 2,204 tests: 336 files passed and the three protocol tests pinning the previous protocol numbers (29/30, observation 16) were updated to 31/32 and 17 in the same commit, passing 13/13 with the proposals tests afterwards; no simulation test failed; the full suite re-run at `056dbac` passes **339 files / 2,204 tests, 1,702.99 s**. Other goal families, revision and composition (A3) and a real-model run remain open. Handoff: `CLAUDE_AUTONOMY_HANDOFF.md`.
+
+Continuation review of A16: the direct-controller null/undefined-goal rejection
+label is repaired; focused checks **19/7** and a new actual-protocol rendered
+scene **7/7** pass (`PROPOSED_PROJECTS.md`). The ordinary world is unchanged. The
+full baseline rerun and the previously deferred 45-day Windows observations are
+in progress; their outcomes are not yet claimed. Other goal families remain open.
 
 ### Rules 107 — checked accounts of places
 

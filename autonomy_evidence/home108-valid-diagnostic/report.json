@@ -1,0 +1,4217 @@
+{
+  "limits": "STAGED observed collapse, valid berry_bush source, finite goods, no controlled decisions. Both historical and candidate outcomes retained. Not ordinary frequency or an aggregate benefit comparison.",
+  "reports": [
+    {
+      "version": 107,
+      "tick": 12000,
+      "alive": false,
+      "home": 0,
+      "deaths": [
+        {
+          "id": 2,
+          "name": "Ada",
+          "tick": 7371,
+          "cause": "thirst",
+          "age": 35
+        }
+      ],
+      "consumed": {
+        "water": 3,
+        "bread": 3,
+        "berries": 3,
+        "wood": 4,
+        "grain": 2
+      },
+      "exact": true,
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      },
+      "events": [
+        {
+          "tick": 0,
+          "event": "start",
+          "kind": "gather",
+          "goal": "to bring food home",
+          "target": 9
+        },
+        {
+          "tick": 145,
+          "event": "end",
+          "kind": "gather",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 145,
+          "event": "start",
+          "kind": "plan_site",
+          "goal": "no shelter of our own yet",
+          "target": 0
+        },
+        {
+          "tick": 266,
+          "event": "end",
+          "kind": "plan_site",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 267,
+          "event": "start",
+          "kind": "build",
+          "goal": "to finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 367,
+          "event": "end",
+          "kind": "build",
+          "result": "partial",
+          "detail": "no materials to work with (4 wood)"
+        },
+        {
+          "tick": 368,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to find trees to fell",
+          "target": 0
+        },
+        {
+          "tick": 582,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 583,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 765,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 765,
+          "event": "start",
+          "kind": "drink",
+          "goal": "to quench thirst (62/100)",
+          "target": 0
+        },
+        {
+          "tick": 772,
+          "event": "end",
+          "kind": "drink",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 773,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 909,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 910,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to find trees to fell",
+          "target": 0
+        },
+        {
+          "tick": 1120,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 1121,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (59/100)",
+          "target": 0
+        },
+        {
+          "tick": 1130,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 1131,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 1300,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 1300,
+          "event": "start",
+          "kind": "sleep",
+          "goal": "to recover energy (39/100)",
+          "target": 0
+        },
+        {
+          "tick": 1993,
+          "event": "end",
+          "kind": "sleep",
+          "result": "success",
+          "detail": "rested"
+        },
+        {
+          "tick": 1994,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 2094,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2095,
+          "event": "start",
+          "kind": "drink",
+          "goal": "to quench thirst (54/100)",
+          "target": 0
+        },
+        {
+          "tick": 2102,
+          "event": "end",
+          "kind": "drink",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2103,
+          "event": "start",
+          "kind": "sleep",
+          "goal": "to recover energy (89/100)",
+          "target": 0
+        },
+        {
+          "tick": 2173,
+          "event": "end",
+          "kind": "sleep",
+          "result": "success",
+          "detail": "rested"
+        },
+        {
+          "tick": 2174,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 2273,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 2273,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 2504,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2505,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (58/100)",
+          "target": 0
+        },
+        {
+          "tick": 2524,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2525,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 7
+        },
+        {
+          "tick": 2776,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2777,
+          "event": "start",
+          "kind": "gather",
+          "goal": "to bring food home",
+          "target": 9
+        },
+        {
+          "tick": 2891,
+          "event": "end",
+          "kind": "gather",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 2891,
+          "event": "start",
+          "kind": "haul",
+          "goal": "to help finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 2973,
+          "event": "end",
+          "kind": "haul",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2974,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 3083,
+          "event": "end",
+          "kind": "gather",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3083,
+          "event": "start",
+          "kind": "drink",
+          "goal": "to quench thirst (50/100)",
+          "target": 0
+        },
+        {
+          "tick": 3090,
+          "event": "end",
+          "kind": "drink",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3091,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 3269,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3270,
+          "event": "start",
+          "kind": "haul",
+          "goal": "to help finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 3300,
+          "event": "end",
+          "kind": "haul",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3301,
+          "event": "start",
+          "kind": "build",
+          "goal": "to finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 3570,
+          "event": "end",
+          "kind": "build",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3570,
+          "event": "start",
+          "kind": "rest",
+          "goal": "to recover energy (30/100)",
+          "target": 0
+        },
+        {
+          "tick": 3666,
+          "event": "end",
+          "kind": "rest",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3666,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (60/100)",
+          "target": 0
+        },
+        {
+          "tick": 3675,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3676,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 3726,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3726,
+          "event": "start",
+          "kind": "sleep",
+          "goal": "to recover energy (30/100)",
+          "target": 0
+        },
+        {
+          "tick": 4548,
+          "event": "end",
+          "kind": "sleep",
+          "result": "success",
+          "detail": "rested"
+        },
+        {
+          "tick": 4549,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 4621,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 4622,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 4675,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 4675,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 4904,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 4905,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5104,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 5104,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (58/100)",
+          "target": 0
+        },
+        {
+          "tick": 5123,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5124,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5156,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "a more urgent need (thirst)"
+        },
+        {
+          "tick": 5156,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 5381,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5382,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5599,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5600,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5650,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "a more urgent need (thirst)"
+        },
+        {
+          "tick": 5650,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 5883,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5884,
+          "event": "start",
+          "kind": "rest",
+          "goal": "to recover energy (41/100)",
+          "target": 0
+        },
+        {
+          "tick": 5989,
+          "event": "end",
+          "kind": "rest",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 5989,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6145,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 6145,
+          "event": "start",
+          "kind": "eat_store",
+          "goal": "to ease hunger (51/100)",
+          "target": 10
+        },
+        {
+          "tick": 6259,
+          "event": "end",
+          "kind": "eat_store",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6260,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6379,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6380,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6475,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6476,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6561,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6562,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6647,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6648,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6697,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6698,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6821,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6822,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6935,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6936,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 7079,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 7080,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 7371,
+          "event": "end",
+          "kind": "explore",
+          "result": "interrupted",
+          "detail": "died"
+        }
+      ],
+      "samples": [
+        {
+          "tick": 300,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 85.01000000000056,
+            "thirst": 81.41599999999806,
+            "energy": 81.15199999999868,
+            "warmth": 81.14139703099929,
+            "safety": 84.00000000001367,
+            "social": 64.90000000000123
+          },
+          "inv": {
+            "bread": 3,
+            "water": 3,
+            "berries": 3
+          },
+          "activity": {
+            "kind": "build",
+            "phase": "work",
+            "target": 19
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 600,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 75.50000000000068,
+            "thirst": 68.59999999999616,
+            "energy": 68.19999999999709,
+            "warmth": 95.61027209171013,
+            "safety": 84.00000000000009,
+            "social": 59.80000000000069
+          },
+          "inv": {
+            "bread": 3,
+            "water": 3,
+            "berries": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 900,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 66.12500000000068,
+            "thirst": 91.99999999999467,
+            "energy": 55.49999999999646,
+            "warmth": 99.12672782332567,
+            "safety": 84.00000000000009,
+            "social": 54.69999999999979
+          },
+          "inv": {
+            "bread": 3,
+            "water": 2,
+            "berries": 3
+          },
+          "activity": {
+            "kind": "gather",
+            "phase": "work",
+            "target": 6
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 1200,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 87.05000000000041,
+            "thirst": 79.87999999999279,
+            "energy": 43.35999999999669,
+            "warmth": 87.22656111486718,
+            "safety": 68.05947258944602,
+            "social": 49.599999999998886
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 1
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 1500,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 80.73650000000158,
+            "thirst": 71.06399999999198,
+            "energy": 55.79719999999655,
+            "warmth": 63.43882546324324,
+            "safety": 66.0000000000282,
+            "social": 46.868099999998826
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 1
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 1800,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 75.78650000000353,
+            "thirst": 63.863999999991705,
+            "energy": 79.64616715798266,
+            "warmth": 42.90549777631995,
+            "safety": 66.00000000000009,
+            "social": 45.338099999999194
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 1
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 2100,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 68.95550000000507,
+            "thirst": 54.24799999999159,
+            "energy": 88.98401722705542,
+            "warmth": 37.85323289627462,
+            "safety": 66.00000000000009,
+            "social": 42.54669999999911
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 2
+          },
+          "activity": {
+            "kind": "drink",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 2400,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 60.900500000005266,
+            "thirst": 79.36799999999012,
+            "energy": 84.96202826583007,
+            "warmth": 51.27421512211243,
+            "safety": 83.3579409167194,
+            "social": 38.279699999998506
+          },
+          "inv": {
+            "bread": 2,
+            "water": 1,
+            "berries": 3,
+            "wood": 2
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 2700,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 93.90050000000493,
+            "thirst": 67.36799999998824,
+            "energy": 72.9620282658282,
+            "warmth": 75.31198062027369,
+            "safety": 83.9985023935491,
+            "social": 33.1796999999976
+          },
+          "inv": {
+            "bread": 1,
+            "water": 1,
+            "berries": 2,
+            "wood": 2
+          },
+          "activity": {
+            "kind": "gather",
+            "phase": "travel",
+            "target": 7
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 3000,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 84.34550000000509,
+            "thirst": 54.47999999998798,
+            "energy": 59.92602826582722,
+            "warmth": 94.65188622970437,
+            "safety": 83.99999650682449,
+            "social": 28.07969999999752
+          },
+          "inv": {
+            "bread": 1,
+            "water": 1,
+            "berries": 2
+          },
+          "activity": {
+            "kind": "gather",
+            "phase": "work",
+            "target": 6
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {
+                "wood": 3
+              }
+            }
+          ]
+        },
+        {
+          "tick": 3300,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 73.32800000000658,
+            "thirst": 75.25199999998664,
+            "energy": 44.160028265826696,
+            "warmth": 98.96916428766833,
+            "safety": 83.99999999185216,
+            "social": 22.97969999999768
+          },
+          "inv": {
+            "bread": 1,
+            "berries": 2,
+            "wood": 4
+          },
+          "activity": {
+            "kind": "haul",
+            "phase": "work",
+            "target": 19
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {
+                "wood": 3
+              }
+            }
+          ]
+        },
+        {
+          "tick": 3600,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 62.30300000000792,
+            "thirst": 60.011999999985235,
+            "energy": 30.41002826582634,
+            "warmth": 87.20065686402931,
+            "safety": 68.05947258944234,
+            "social": 17.879699999997843
+          },
+          "inv": {
+            "bread": 1,
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "rest",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 3900,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 85.6385000000089,
+            "thirst": 50.779999999985186,
+            "energy": 44.344428265826274,
+            "warmth": 63.43456667196453,
+            "safety": 66.0000000000282,
+            "social": 14.838399999997817
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 4200,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 80.68850000001085,
+            "thirst": 43.57999999998491,
+            "energy": 68.19321658962411,
+            "warmth": 42.90479760925979,
+            "safety": 66.00000000000009,
+            "social": 13.308399999997652
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 4500,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 75.73850000001279,
+            "thirst": 36.37999999998464,
+            "energy": 90.39793257863757,
+            "warmth": 37.853117785230125,
+            "safety": 66.00000000000009,
+            "social": 11.778399999997488
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 4800,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 67.40000000001282,
+            "thirst": 25.16399999998481,
+            "energy": 83.9755111379271,
+            "warmth": 51.27419619726818,
+            "safety": 83.3579409167194,
+            "social": 7.261499999997557
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 5100,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 58.40000000001248,
+            "thirst": 13.163999999985066,
+            "energy": 71.97551113792522,
+            "warmth": 75.31197750893247,
+            "safety": 83.9985023935491,
+            "social": 2.1614999999975013
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 5400,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 73.40000000001214,
+            "thirst": 1.1639999999851698,
+            "energy": 59.975511137924066,
+            "warmth": 94.65188571818389,
+            "safety": 83.99999650682449,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 5700,
+          "alive": true,
+          "health": 86.45000000000077,
+          "needs": {
+            "hunger": 64.4000000000118,
+            "thirst": 0,
+            "energy": 47.97551113792432,
+            "warmth": 98.96916420357182,
+            "safety": 83.99999999185216,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6000,
+          "alive": true,
+          "health": 71.45000000000162,
+          "needs": {
+            "hunger": 55.40000000001146,
+            "thirst": 0,
+            "energy": 43.32551113792461,
+            "warmth": 87.20065685020346,
+            "safety": 68.05947258944234,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6300,
+          "alive": true,
+          "health": 56.450000000002476,
+          "needs": {
+            "hunger": 90.40000000001112,
+            "thirst": 0,
+            "energy": 31.325511137924863,
+            "warmth": 63.43456666969161,
+            "safety": 66.0000000000282,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6600,
+          "alive": true,
+          "health": 41.45000000000333,
+          "needs": {
+            "hunger": 81.40000000001078,
+            "thirst": 0,
+            "energy": 19.32551113792512,
+            "warmth": 42.90479760888618,
+            "safety": 66.00000000000009,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6900,
+          "alive": true,
+          "health": 26.450000000003786,
+          "needs": {
+            "hunger": 72.40000000001044,
+            "thirst": 0,
+            "energy": 7.32551113792536,
+            "warmth": 37.85311778516872,
+            "safety": 66.00000000000009,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 7200,
+          "alive": true,
+          "health": 10.280000000003636,
+          "needs": {
+            "hunger": 63.400000000010095,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 51.27419619725806,
+            "safety": 83.3579409167194,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 7500,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 7800,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 8100,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 8400,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 8700,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9000,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9300,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9600,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9900,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 10200,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 10500,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 10800,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 11100,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 11400,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 11700,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 12000,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "version": 108,
+      "tick": 12000,
+      "alive": false,
+      "home": 0,
+      "deaths": [
+        {
+          "id": 2,
+          "name": "Ada",
+          "tick": 7371,
+          "cause": "thirst",
+          "age": 35
+        }
+      ],
+      "consumed": {
+        "water": 3,
+        "bread": 3,
+        "berries": 3,
+        "wood": 4,
+        "grain": 2
+      },
+      "exact": true,
+      "conservation": {
+        "ok": true,
+        "diffs": []
+      },
+      "events": [
+        {
+          "tick": 0,
+          "event": "start",
+          "kind": "gather",
+          "goal": "to bring food home",
+          "target": 9
+        },
+        {
+          "tick": 145,
+          "event": "end",
+          "kind": "gather",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 145,
+          "event": "start",
+          "kind": "plan_site",
+          "goal": "no shelter of our own yet",
+          "target": 0
+        },
+        {
+          "tick": 266,
+          "event": "end",
+          "kind": "plan_site",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 267,
+          "event": "start",
+          "kind": "build",
+          "goal": "to finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 367,
+          "event": "end",
+          "kind": "build",
+          "result": "partial",
+          "detail": "no materials to work with (4 wood)"
+        },
+        {
+          "tick": 368,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to find trees to fell",
+          "target": 0
+        },
+        {
+          "tick": 582,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 583,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 765,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 765,
+          "event": "start",
+          "kind": "drink",
+          "goal": "to quench thirst (62/100)",
+          "target": 0
+        },
+        {
+          "tick": 772,
+          "event": "end",
+          "kind": "drink",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 773,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 909,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 910,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to find trees to fell",
+          "target": 0
+        },
+        {
+          "tick": 1120,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 1121,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (59/100)",
+          "target": 0
+        },
+        {
+          "tick": 1130,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 1131,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 1300,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 1300,
+          "event": "start",
+          "kind": "sleep",
+          "goal": "to recover energy (39/100)",
+          "target": 0
+        },
+        {
+          "tick": 1993,
+          "event": "end",
+          "kind": "sleep",
+          "result": "success",
+          "detail": "rested"
+        },
+        {
+          "tick": 1994,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 2094,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2095,
+          "event": "start",
+          "kind": "drink",
+          "goal": "to quench thirst (54/100)",
+          "target": 0
+        },
+        {
+          "tick": 2102,
+          "event": "end",
+          "kind": "drink",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2103,
+          "event": "start",
+          "kind": "sleep",
+          "goal": "to recover energy (89/100)",
+          "target": 0
+        },
+        {
+          "tick": 2173,
+          "event": "end",
+          "kind": "sleep",
+          "result": "success",
+          "detail": "rested"
+        },
+        {
+          "tick": 2174,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 2273,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 2273,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 2504,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2505,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (58/100)",
+          "target": 0
+        },
+        {
+          "tick": 2524,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2525,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 7
+        },
+        {
+          "tick": 2776,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2777,
+          "event": "start",
+          "kind": "gather",
+          "goal": "to bring food home",
+          "target": 9
+        },
+        {
+          "tick": 2891,
+          "event": "end",
+          "kind": "gather",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 2891,
+          "event": "start",
+          "kind": "haul",
+          "goal": "to help finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 2973,
+          "event": "end",
+          "kind": "haul",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 2974,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 3083,
+          "event": "end",
+          "kind": "gather",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3083,
+          "event": "start",
+          "kind": "drink",
+          "goal": "to quench thirst (50/100)",
+          "target": 0
+        },
+        {
+          "tick": 3090,
+          "event": "end",
+          "kind": "drink",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3091,
+          "event": "start",
+          "kind": "gather",
+          "goal": "for my household’s lean-to",
+          "target": 6
+        },
+        {
+          "tick": 3269,
+          "event": "end",
+          "kind": "gather",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3270,
+          "event": "start",
+          "kind": "haul",
+          "goal": "to help finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 3300,
+          "event": "end",
+          "kind": "haul",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3301,
+          "event": "start",
+          "kind": "build",
+          "goal": "to finish my household’s lean-to",
+          "target": 19
+        },
+        {
+          "tick": 3570,
+          "event": "end",
+          "kind": "build",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3570,
+          "event": "start",
+          "kind": "rest",
+          "goal": "to recover energy (30/100)",
+          "target": 0
+        },
+        {
+          "tick": 3666,
+          "event": "end",
+          "kind": "rest",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3666,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (60/100)",
+          "target": 0
+        },
+        {
+          "tick": 3675,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 3676,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 3726,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 3726,
+          "event": "start",
+          "kind": "sleep",
+          "goal": "to recover energy (30/100)",
+          "target": 0
+        },
+        {
+          "tick": 4548,
+          "event": "end",
+          "kind": "sleep",
+          "result": "success",
+          "detail": "rested"
+        },
+        {
+          "tick": 4549,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 4621,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 4622,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 4675,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 4675,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 4904,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 4905,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5104,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 5104,
+          "event": "start",
+          "kind": "eat",
+          "goal": "to ease hunger (58/100)",
+          "target": 0
+        },
+        {
+          "tick": 5123,
+          "event": "end",
+          "kind": "eat",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5124,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5156,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "a more urgent need (thirst)"
+        },
+        {
+          "tick": 5156,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 5381,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5382,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5599,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5600,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 5650,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "a more urgent need (thirst)"
+        },
+        {
+          "tick": 5650,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 5883,
+          "event": "end",
+          "kind": "explore",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 5884,
+          "event": "start",
+          "kind": "rest",
+          "goal": "to recover energy (41/100)",
+          "target": 0
+        },
+        {
+          "tick": 5989,
+          "event": "end",
+          "kind": "rest",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 5989,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6145,
+          "event": "end",
+          "kind": "wander",
+          "result": "interrupted",
+          "detail": "something better came up"
+        },
+        {
+          "tick": 6145,
+          "event": "start",
+          "kind": "eat_store",
+          "goal": "to ease hunger (51/100)",
+          "target": 10
+        },
+        {
+          "tick": 6259,
+          "event": "end",
+          "kind": "eat_store",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6260,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6379,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6380,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6475,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6476,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6561,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6562,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6647,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6648,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6697,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6698,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6821,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6822,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 6935,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 6936,
+          "event": "start",
+          "kind": "wander",
+          "goal": "nothing needs doing right now",
+          "target": 0
+        },
+        {
+          "tick": 7079,
+          "event": "end",
+          "kind": "wander",
+          "result": "success",
+          "detail": "done"
+        },
+        {
+          "tick": 7080,
+          "event": "start",
+          "kind": "explore",
+          "goal": "to look for food sources",
+          "target": 0
+        },
+        {
+          "tick": 7371,
+          "event": "end",
+          "kind": "explore",
+          "result": "interrupted",
+          "detail": "died"
+        }
+      ],
+      "samples": [
+        {
+          "tick": 300,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 85.01000000000056,
+            "thirst": 81.41599999999806,
+            "energy": 81.15199999999868,
+            "warmth": 81.14139703099929,
+            "safety": 84.00000000001367,
+            "social": 64.90000000000123
+          },
+          "inv": {
+            "bread": 3,
+            "water": 3,
+            "berries": 3
+          },
+          "activity": {
+            "kind": "build",
+            "phase": "work",
+            "target": 19
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 600,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 75.50000000000068,
+            "thirst": 68.59999999999616,
+            "energy": 68.19999999999709,
+            "warmth": 95.61027209171013,
+            "safety": 84.00000000000009,
+            "social": 59.80000000000069
+          },
+          "inv": {
+            "bread": 3,
+            "water": 3,
+            "berries": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 900,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 66.12500000000068,
+            "thirst": 91.99999999999467,
+            "energy": 55.49999999999646,
+            "warmth": 99.12672782332567,
+            "safety": 84.00000000000009,
+            "social": 54.69999999999979
+          },
+          "inv": {
+            "bread": 3,
+            "water": 2,
+            "berries": 3
+          },
+          "activity": {
+            "kind": "gather",
+            "phase": "work",
+            "target": 6
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 1200,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 87.05000000000041,
+            "thirst": 79.87999999999279,
+            "energy": 43.35999999999669,
+            "warmth": 87.22656111486718,
+            "safety": 68.05947258944602,
+            "social": 49.599999999998886
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 1
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 1500,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 80.73650000000158,
+            "thirst": 71.06399999999198,
+            "energy": 55.79719999999655,
+            "warmth": 63.43882546324324,
+            "safety": 66.0000000000282,
+            "social": 46.868099999998826
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 1
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 1800,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 75.78650000000353,
+            "thirst": 63.863999999991705,
+            "energy": 79.64616715798266,
+            "warmth": 42.90549777631995,
+            "safety": 66.00000000000009,
+            "social": 45.338099999999194
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 1
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 2100,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 68.95550000000507,
+            "thirst": 54.24799999999159,
+            "energy": 88.98401722705542,
+            "warmth": 37.85323289627462,
+            "safety": 66.00000000000009,
+            "social": 42.54669999999911
+          },
+          "inv": {
+            "bread": 2,
+            "water": 2,
+            "berries": 3,
+            "wood": 2
+          },
+          "activity": {
+            "kind": "drink",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 2400,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 60.900500000005266,
+            "thirst": 79.36799999999012,
+            "energy": 84.96202826583007,
+            "warmth": 51.27421512211243,
+            "safety": 83.3579409167194,
+            "social": 38.279699999998506
+          },
+          "inv": {
+            "bread": 2,
+            "water": 1,
+            "berries": 3,
+            "wood": 2
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 2700,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 93.90050000000493,
+            "thirst": 67.36799999998824,
+            "energy": 72.9620282658282,
+            "warmth": 75.31198062027369,
+            "safety": 83.9985023935491,
+            "social": 33.1796999999976
+          },
+          "inv": {
+            "bread": 1,
+            "water": 1,
+            "berries": 2,
+            "wood": 2
+          },
+          "activity": {
+            "kind": "gather",
+            "phase": "travel",
+            "target": 7
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 3000,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 84.34550000000509,
+            "thirst": 54.47999999998798,
+            "energy": 59.92602826582722,
+            "warmth": 94.65188622970437,
+            "safety": 83.99999650682449,
+            "social": 28.07969999999752
+          },
+          "inv": {
+            "bread": 1,
+            "water": 1,
+            "berries": 2
+          },
+          "activity": {
+            "kind": "gather",
+            "phase": "work",
+            "target": 6
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {
+                "wood": 3
+              }
+            }
+          ]
+        },
+        {
+          "tick": 3300,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 73.32800000000658,
+            "thirst": 75.25199999998664,
+            "energy": 44.160028265826696,
+            "warmth": 98.96916428766833,
+            "safety": 83.99999999185216,
+            "social": 22.97969999999768
+          },
+          "inv": {
+            "bread": 1,
+            "berries": 2,
+            "wood": 4
+          },
+          "activity": {
+            "kind": "haul",
+            "phase": "work",
+            "target": 19
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 12.017895187727726,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {},
+              "delivered": {
+                "wood": 3
+              }
+            }
+          ]
+        },
+        {
+          "tick": 3600,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 62.30300000000792,
+            "thirst": 60.011999999985235,
+            "energy": 30.41002826582634,
+            "warmth": 87.20065686402931,
+            "safety": 68.05947258944234,
+            "social": 17.879699999997843
+          },
+          "inv": {
+            "bread": 1,
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "rest",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 3900,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 85.6385000000089,
+            "thirst": 50.779999999985186,
+            "energy": 44.344428265826274,
+            "warmth": 63.43456667196453,
+            "safety": 66.0000000000282,
+            "social": 14.838399999997817
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 4200,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 80.68850000001085,
+            "thirst": 43.57999999998491,
+            "energy": 68.19321658962411,
+            "warmth": 42.90479760925979,
+            "safety": 66.00000000000009,
+            "social": 13.308399999997652
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 4500,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 75.73850000001279,
+            "thirst": 36.37999999998464,
+            "energy": 90.39793257863757,
+            "warmth": 37.853117785230125,
+            "safety": 66.00000000000009,
+            "social": 11.778399999997488
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "sleep",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 4800,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 67.40000000001282,
+            "thirst": 25.16399999998481,
+            "energy": 83.9755111379271,
+            "warmth": 51.27419619726818,
+            "safety": 83.3579409167194,
+            "social": 7.261499999997557
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 5100,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 58.40000000001248,
+            "thirst": 13.163999999985066,
+            "energy": 71.97551113792522,
+            "warmth": 75.31197750893247,
+            "safety": 83.9985023935491,
+            "social": 2.1614999999975013
+          },
+          "inv": {
+            "berries": 2,
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 5400,
+          "alive": true,
+          "health": 100,
+          "needs": {
+            "hunger": 73.40000000001214,
+            "thirst": 1.1639999999851698,
+            "energy": 59.975511137924066,
+            "warmth": 94.65188571818389,
+            "safety": 83.99999650682449,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 5700,
+          "alive": true,
+          "health": 86.45000000000077,
+          "needs": {
+            "hunger": 64.4000000000118,
+            "thirst": 0,
+            "energy": 47.97551113792432,
+            "warmth": 98.96916420357182,
+            "safety": 83.99999999185216,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6000,
+          "alive": true,
+          "health": 71.45000000000162,
+          "needs": {
+            "hunger": 55.40000000001146,
+            "thirst": 0,
+            "energy": 43.32551113792461,
+            "warmth": 87.20065685020346,
+            "safety": 68.05947258944234,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6300,
+          "alive": true,
+          "health": 56.450000000002476,
+          "needs": {
+            "hunger": 90.40000000001112,
+            "thirst": 0,
+            "energy": 31.325511137924863,
+            "warmth": 63.43456666969161,
+            "safety": 66.0000000000282,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6600,
+          "alive": true,
+          "health": 41.45000000000333,
+          "needs": {
+            "hunger": 81.40000000001078,
+            "thirst": 0,
+            "energy": 19.32551113792512,
+            "warmth": 42.90479760888618,
+            "safety": 66.00000000000009,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 6900,
+          "alive": true,
+          "health": 26.450000000003786,
+          "needs": {
+            "hunger": 72.40000000001044,
+            "thirst": 0,
+            "energy": 7.32551113792536,
+            "warmth": 37.85311778516872,
+            "safety": 66.00000000000009,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "wander",
+            "phase": "work",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 7200,
+          "alive": true,
+          "health": 10.280000000003636,
+          "needs": {
+            "hunger": 63.400000000010095,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 51.27419619725806,
+            "safety": 83.3579409167194,
+            "social": 0
+          },
+          "inv": {
+            "wood": 3
+          },
+          "activity": {
+            "kind": "explore",
+            "phase": "travel",
+            "target": 0
+          },
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 7500,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 7800,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 8100,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 8400,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 8700,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9000,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9300,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9600,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 9900,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 10200,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 10500,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 10800,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 11100,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 11400,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 11700,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        },
+        {
+          "tick": 12000,
+          "alive": false,
+          "health": 0,
+          "needs": {
+            "hunger": 58.2400000000099,
+            "thirst": 0,
+            "energy": 0,
+            "warmth": 64.60884185441932,
+            "safety": 83.98011800256309,
+            "social": 0
+          },
+          "inv": {},
+          "activity": null,
+          "home": 0,
+          "sites": [
+            {
+              "id": 19,
+              "work": 197.6603902139764,
+              "workTotal": 200,
+              "required": {
+                "wood": 4
+              },
+              "used": {
+                "wood": 4
+              },
+              "delivered": {}
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

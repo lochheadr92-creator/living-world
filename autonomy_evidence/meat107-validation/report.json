@@ -1,0 +1,77 @@
+[
+  {
+    "path": "../living-world-integrate/autonomy_evidence/helper-receipt107-first-invalid/final.json",
+    "sha256": "c24c9d0e40b60ec9d50e9cbee88f7b01969338dd9e00fd3a8218d383c7d3fa9b",
+    "rules": 107,
+    "tick": 43440,
+    "continuedTicks": 1200,
+    "exactLoad": true,
+    "exactContinuation": true,
+    "exactReload": true,
+    "meat": {
+      "initial": 0,
+      "created": 4,
+      "consumed": 0,
+      "spoiled": 0,
+      "actual": 4
+    },
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "continuedConservation": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "path": "../living-world-integrate/autonomy_evidence/resume107-cart-river-45/final.json",
+    "sha256": "617321183741bb0aed52021cd2e4bd8ac0023aa8ce313afb37c8e86ad58ab31e",
+    "rules": 107,
+    "tick": 108000,
+    "continuedTicks": 1200,
+    "exactLoad": true,
+    "exactContinuation": true,
+    "exactReload": true,
+    "meat": {
+      "initial": 0,
+      "created": 0,
+      "consumed": 0,
+      "spoiled": 0,
+      "actual": 0
+    },
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "continuedConservation": {
+      "ok": true,
+      "diffs": []
+    }
+  },
+  {
+    "path": "../living-world-integrate/autonomy_evidence/resume107-cart-meadow-45/final.json",
+    "sha256": "6bbeb42e65ffc1cf1395a491a8029ee232d887b4f34705775a294b11f8c71110",
+    "rules": 107,
+    "tick": 108000,
+    "continuedTicks": 1200,
+    "exactLoad": true,
+    "exactContinuation": true,
+    "exactReload": true,
+    "meat": {
+      "initial": 0,
+      "created": 0,
+      "consumed": 0,
+      "spoiled": 0,
+      "actual": 0
+    },
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "continuedConservation": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

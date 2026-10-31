@@ -3,6 +3,68 @@
 The capability register remains `DEPENDENCY_CHAIN_PROGRAMME.md`. This file supplies runnable validation and records
 performance-method limits; it does not close any unimplemented capability or substitute for ordinary evidence.
 
+## 31 October 2026: 45-day Normal observations at published rules 107
+
+The previously deferred work was run detached on the owner's Windows machine.
+Source was frozen at `056dbac`; Normal profile, immigration off, 45 days, no induced
+demand, supplies or choices. Each successful run reached tick 108,000, with 900
+pure observer samples, an exact unobserved twin, valid final save and the then-current
+conservation check. River/meadow retained saves also pass the corrected all-item
+check and exact 1,200-tick saved continuation after the meat correction `0182849`.
+
+| Observation | River at 107 | Meadow at 107 |
+|---|---:|---:|
+| Person samples | 21,553 | 23,447 |
+| Prepared operate offers sampled | 0 | 14 |
+| Prepared operate ranked first | 0 | 2 |
+| Project workshop starts | 1 fire_bricks | 2 hew_planks, 1 burn_charcoal |
+| Successful project workshop endings | 1 | 2 |
+| Carts at end / cart-haul starts | 0 / 0 | 0 / 0 |
+| Heard stock undertakings | 3 | 11 |
+| Reserve left to teller | 0 | 0 |
+| Sampled concurrent plans for one store | 1,273 | 1,801 |
+| Season stock plans adopted | 13 | 17 |
+| Undertakings heard at supper | 0 | 2 |
+| Completed shared meals | 0 | 1 |
+| Sampled fetching set aside for a promise | 237 | 331 |
+| Site material requests seen fulfilled | 6 | 11 |
+| Location-question offers sampled | 37 | 32 |
+| Location questions started | 0 | 1 (failed) |
+| Final living population / deaths | 17 / 14 | 23 / 6 |
+
+These are observed occurrences and nulls, not an aggregate-benefit claim. Repeated
+samples are not independent opportunities; request status counts can include the
+same request at different stages. Meadow's one shared meal had household guests
+seated for at least twenty ticks and a shareable undertaking, supplying one actual
+opportunity for the rules-104 channel. No ordinary cart usefulness is established.
+
+Historical river contrasts were also run: pinned rules 99 had 6 heard stock
+undertakings, 14 season plans, 1,501 two-plans-for-one-store samples and 18 deaths;
+pinned rules 100 had 3 fulfilled site requests, zero sampled promise-based fetch
+deferrals and 17 deaths. The 107 worlds include many intervening changes. These
+are **not** isolated estimates of rules 100/101 effectiveness or mortality benefit.
+
+The three original forest screens failed final save validation on a valid meat
+receipt. The failure was preserved and reproduced at tick 43,440; see
+`MEAT_SAVE_VALIDATION.md`. Corrected reruns at frozen `0182849` are separate outputs,
+not replacements for the failed evidence. All three now reach day 45, with exact
+twins, valid final saves and full item conservation. Forest has four prepared work
+offers, all four ranked first; five plank operations started, four succeeded and
+one was interrupted; zero carts/trips. Three stock undertakings were heard, six
+season plans adopted, 781 repeated concurrent-store-plan samples, zero reserves
+left to a teller. Promises set aside own fetching in 192 samples, four site requests
+were seen fulfilled, 67 location-question offers sampled, and one location question
+was actually fulfilled. Final population is 4 with **27 deaths**. These outcomes
+do not establish viability or cart usefulness. Reports are in
+`autonomy_evidence/resume107-forest-{cart,supply,promise}-corrected-45`.
+
+Reports: `autonomy_evidence/resume107-{cart,supply,promise}-{river,meadow}-45`,
+plus `resume107-supply-river-at99-45` and `resume107-promise-river-at100-45`.
+Full saved worlds remain local and uncommitted. Source manifests distinguish these
+rules-107 observations from later rules-108 development. The older pending commands
+below retain their historical purpose; current mature Large and matched ensemble
+benefit validations remain outstanding.
+
 ## Performance tool verification at rules 63
 
 `scripts/mature_perf.ts` now names the supplied retained world honestly, refuses an existing output directory, captures
