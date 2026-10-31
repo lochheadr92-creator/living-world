@@ -1392,7 +1392,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         adjustRel(A, B.id, world.tick, { aff: 1.5, trust: 1 });
       } else {
         const lines = resp.reason === 'no_item' ? D.RESP_NO_ITEM : resp.reason === 'own_need' || resp.reason === 'in_use' ? D.RESP_OWN_NEED : resp.reason === 'disliked' ? D.RESP_DISLIKED : D.RESP_UNWILLING;
-        if (resp.reason === 'no_place') bubble(world, B, 'I do not know which fire I could reach from that old account.', 'say', 54);
+        if (resp.reason === 'no_place') bubble(world, B, req.kind === 'repair' ? 'I do not know which home I could reach from that old account.' : 'I do not know which fire I could reach from that old account.', 'say', 54);
         else if (resp.reason === 'enough') bubble(world, B, 'I think that’s been seen to already.', 'say', 54);
         else if (resp.reason === 'committed') bubble(world, B, 'I’ve already promised that to them.', 'say', 54);
         else if (resp.reason === 'in_use') bubble(world, B, 'I’m using it just now — ask me later?', 'say', 54);

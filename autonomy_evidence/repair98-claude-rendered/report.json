@@ -1,0 +1,359 @@
+{
+  "rules": 98,
+  "evidence": "STAGED elder, damaged remote home and known tree; offered request selected, then autonomous acquisition/repair and resident sleep. No ordinary frequency or aggregate welfare claim.",
+  "checks": [
+    {
+      "name": "actual roof acceptance communicates dated location and repair purpose",
+      "ok": true,
+      "detail": {
+        "unknown": true,
+        "request": {
+          "id": 11,
+          "kind": "repair",
+          "from": 2,
+          "to": 5,
+          "item": "wood",
+          "amount": 1,
+          "offer": null,
+          "offerAmount": 0,
+          "siteId": 0,
+          "infoKind": "",
+          "created": 15,
+          "expires": 715,
+          "status": "promised",
+          "note": "Ben will patch the roof with available materials; no wood has been delivered.",
+          "resolved": 0,
+          "purpose": "the roof is failing",
+          "destKind": "building",
+          "destId": 6,
+          "deadline": 0,
+          "milestone": "sound again",
+          "toolKind": null,
+          "outcome": "",
+          "commitmentId": 12,
+          "offered": 1
+        },
+        "known": {
+          "id": 6,
+          "kind": "building",
+          "btype": "house",
+          "x": 63,
+          "y": 41,
+          "amount": 0,
+          "max": 0,
+          "seen": 0,
+          "src": "told",
+          "from": 2,
+          "learned": 37,
+          "origin": 2,
+          "hops": 1,
+          "hh": 1,
+          "cond": 20
+        }
+      }
+    },
+    {
+      "name": "autonomous acquisition reaches paid physical roof work",
+      "ok": true,
+      "detail": {
+        "tick": 351,
+        "activity": {
+          "id": 18,
+          "kind": "repair",
+          "label": "Repairing the house",
+          "goal": "to patch the roof as promised",
+          "need": null,
+          "phase": "work",
+          "targetId": 6,
+          "targetType": "building",
+          "tx": 63,
+          "ty": 41,
+          "spotX": 62.59164777006954,
+          "spotY": 42.379526717960836,
+          "item": null,
+          "amount": 0,
+          "start": 185,
+          "minCommit": 245,
+          "expire": 885,
+          "progress": 5,
+          "pprogress": 4,
+          "duration": 72,
+          "cycle": 0,
+          "path": [
+            46.5,
+            42.5,
+            62.59164777006954,
+            42.379526717960836
+          ],
+          "pi": 4,
+          "pathTries": 1,
+          "stuck": 0,
+          "lastX": 60.62190395109977,
+          "lastY": 42.39427359199376,
+          "claims": [],
+          "utility": 35.23267225919767,
+          "blocked": "",
+          "data": {
+            "commitmentId": 12,
+            "optKey": "repair:6",
+            "dailyRoutine": {
+              "key": "repair:6",
+              "label": "Repair the house",
+              "kind": "repair",
+              "target": 6,
+              "phase": 1,
+              "context": {
+                "winter": false,
+                "household": 4,
+                "home": 0,
+                "injury": "well",
+                "family": "0:",
+                "contact": "0:",
+                "losses": "0:"
+              },
+              "eta": 262.39039629717615,
+              "energy": 91.78999999999907,
+              "warmth": 77.27056328754844
+            },
+            "why": "I promised to patch this roof +48 · walking −13",
+            "routeAttempt": {
+              "target": 6,
+              "x": 45.438043780252336,
+              "y": 40.50597610599361,
+              "gx": 63,
+              "gy": 41,
+              "kind": "repair",
+              "cart": false
+            }
+          }
+        },
+        "inventory": {
+          "bread": 2,
+          "water": 2,
+          "wood": 1
+        },
+        "events": [
+          {
+            "tick": 100,
+            "start": "gather",
+            "goal": "to obtain a wood patch for the roof I promised to repair (#6)"
+          },
+          {
+            "tick": 184,
+            "end": "gather",
+            "cycle": 1,
+            "outcome": "success",
+            "detail": "done",
+            "condition": 19.814999999999774
+          },
+          {
+            "tick": 185,
+            "start": "repair",
+            "goal": "to patch the roof as promised"
+          }
+        ]
+      }
+    },
+    {
+      "name": "person inspector explains the accepted repair purpose",
+      "ok": true,
+      "detail": "BBenexpectingFollowAdult, 33Sorrel householdHome: no home yet — last considered 17s ago: does not know of three trees to cutTownship: WillowbankMoodContentHealth100On their mindWhat are they up to?MoreWhat are they doing?Repairing the house (7% of this task).7%Why did they choose it?Weighed up: I promised to patch this roof +48 · walking −13What are they trying to achieve?To patch the roof as promised (House).What is stopping them?Nothing in the way.What happened after their last attempt?Chopping wood → success: done (17s ago)What are they set on?NeedsFood89Water85Energy85Warmth84Safety84Company86Carrying×2×2×1nothing7 / 12ToolsnoneTownship & shared workWillowbank: 2 households. Membership belongs to the household and does not change with walking.Recent recorded production and resource flows:gathering: 1 wood; 1 recorded days. Last source #7 at tick 184.Too little repeated activity recorded to describe a specialisation.No transfers between township affiliations recorded.No repeated-support faction currently established.No shared project proposed yet.Household historySorrel household formed at tick 0; formation cause is not recorded.Members: Ben.No current home.Request #11: Ada asked Ben; promised: Ben will patch the roof with available materials; no wood has been delivered.; promise #12.Relationship historyAda: trust 80, affinity 79.Earlier cause not recorded.ConversationTalking nowStepOutcomeLast conversation28s agoAdacame to Ben with a requestStepOutcomePromised (Ben will patch the roof with available materials; no wood has been delivered.)Shared mealThis mealAt· hosted byGuestsOn the tableHow it endedLast mealAt· hosted byGuestsOn the tableHow it endedPromises1Activedue in 4 minDo some work for Ada (sound again)0% of a fair share of work doneQuarrelsWorriesNearbyPeople1Requests1Recent3Knows2FamilyTraitsOpportunities nearbyNothing nearby that they could use right now.RelationshipsThey have not got to know anyone yet.RequestsNo requests lately.Recent experiencesNothing much has happened yet.What they knowShow remembered places on the mapFamilyNo family nearby that they know of.Traits & skillsSkillsTheir customersWhat has paid themWhat they have heard of peopleDebug · last decision"
+    },
+    {
+      "name": "rendered inspection leaves full state unchanged",
+      "ok": true
+    },
+    {
+      "name": "saved continuation spends real material and restores the roof",
+      "ok": true,
+      "detail": {
+        "tick": 1276,
+        "request": {
+          "id": 11,
+          "kind": "repair",
+          "from": 2,
+          "to": 5,
+          "item": "wood",
+          "amount": 1,
+          "offer": null,
+          "offerAmount": 0,
+          "siteId": 0,
+          "infoKind": "",
+          "created": 15,
+          "expires": 715,
+          "status": "fulfilled",
+          "note": "mended",
+          "resolved": 1275,
+          "purpose": "the roof is failing",
+          "destKind": "building",
+          "destId": 6,
+          "deadline": 0,
+          "milestone": "sound again",
+          "toolKind": null,
+          "outcome": "kept",
+          "commitmentId": 12,
+          "offered": 1
+        },
+        "condition": 72.72400000000144,
+        "repairs": 3,
+        "events": [
+          {
+            "tick": 100,
+            "start": "gather",
+            "goal": "to obtain a wood patch for the roof I promised to repair (#6)"
+          },
+          {
+            "tick": 184,
+            "end": "gather",
+            "cycle": 1,
+            "outcome": "success",
+            "detail": "done",
+            "condition": 19.814999999999774
+          },
+          {
+            "tick": 185,
+            "start": "repair",
+            "goal": "to patch the roof as promised"
+          },
+          {
+            "tick": 417,
+            "end": "repair",
+            "cycle": 1,
+            "outcome": "partial",
+            "detail": "ran out of materials",
+            "condition": 37.58199999999949
+          },
+          {
+            "tick": 418,
+            "start": "gather",
+            "goal": "to obtain a wood patch for the roof I promised to repair (#6)"
+          },
+          {
+            "tick": 600,
+            "end": "gather",
+            "cycle": 1,
+            "outcome": "success",
+            "detail": "done",
+            "condition": 37.398999999999916
+          },
+          {
+            "tick": 601,
+            "start": "repair",
+            "goal": "to patch the roof as promised"
+          },
+          {
+            "tick": 657,
+            "start": "converse",
+            "goal": "a chat"
+          },
+          {
+            "tick": 726,
+            "end": "converse",
+            "cycle": 0,
+            "outcome": "success",
+            "detail": "finished a conversation",
+            "condition": 37.27300000000021
+          },
+          {
+            "tick": 872,
+            "end": "repair",
+            "cycle": 1,
+            "outcome": "partial",
+            "detail": "ran out of materials",
+            "condition": 55.12700000000055
+          },
+          {
+            "tick": 873,
+            "start": "gather",
+            "goal": "to obtain a wood patch for the roof I promised to repair (#6)"
+          },
+          {
+            "tick": 1053,
+            "end": "gather",
+            "cycle": 1,
+            "outcome": "success",
+            "detail": "done",
+            "condition": 54.94600000000097
+          },
+          {
+            "tick": 1054,
+            "start": "repair",
+            "goal": "to patch the roof as promised"
+          },
+          {
+            "tick": 1114,
+            "end": "repair",
+            "cycle": 0,
+            "outcome": "interrupted",
+            "detail": "something better came up",
+            "condition": 54.885000000001114
+          },
+          {
+            "tick": 1114,
+            "start": "drink",
+            "goal": "to quench thirst (52/100)"
+          },
+          {
+            "tick": 1129,
+            "end": "drink",
+            "cycle": 2,
+            "outcome": "success",
+            "detail": "done",
+            "condition": 54.87000000000115
+          },
+          {
+            "tick": 1130,
+            "start": "repair",
+            "goal": "to patch the roof as promised"
+          },
+          {
+            "tick": 1268,
+            "end": "repair",
+            "cycle": 1,
+            "outcome": "partial",
+            "detail": "ran out of materials",
+            "condition": 72.73100000000147
+          },
+          {
+            "tick": 1269,
+            "start": "eat",
+            "goal": "to ease hunger (59/100)"
+          }
+        ],
+        "same": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "resident autonomously enters the repaired home and benefits from actual shelter and sleep",
+      "ok": true,
+      "detail": {
+        "arrival": 1398,
+        "tick": 1448,
+        "home": 6,
+        "indoors": 6,
+        "activity": "sleep",
+        "before": 35.69199999999532,
+        "after": 41.44199999999542,
+        "shelter": {
+          "bonus": 14,
+          "cover": 1,
+          "kind": "hut"
+        },
+        "same": true,
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "home inspector names the real occupant",
+      "ok": true,
+      "detail": "House\nBuilt 2.4 min ago\n\nA hut rebuilt in place with planked walls and a brick hearth: warmer, roomier, slower to decay.\n\nAda\nOwner\nBrook household\nIndoors\nAda: Sleeping inside the house\nRoom for\n8 household members\nStorage\n0/70 used\nHousehold\nAda\nCondition\n73%"
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

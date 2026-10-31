@@ -72,3 +72,8 @@ it('an own-roof plan can spend its share while another promised wood remains pro
  const o=generateOptions(w,p,true,true).options.find(o=>o.kind==='repair'&&o.targetId===home.id);expect(o).toBeDefined();startActivity(w,p,o!.make!()!);const release=setExternalController({controls:()=>true,choose:()=>({kind:'defer'})});try{for(let n=0;n<400&&p.activity;n++)stepWorld(w);}finally{release();}
  expect(w.ledger.reasons['-repairs']).toBe(2);expect(p.inv.wood).toBe(1);expect(plan.worked).toBeGreaterThan(0);expect(p.lastResult?.detail).toContain('reserved');expect(conservationReport(w).ok).toBe(true);
 });
+it('a stale roof refusal is spoken about the home, not a fire',()=>{
+ const f=repairDutyScene();f.w.tick=DAY+1;const ask=generateOptions(f.w,f.parent,true,true).options.find(o=>o.key.endsWith(':repair'));expect(ask).toBeDefined();startActivity(f.w,f.parent,ask!.make!()!);
+ const release=setExternalController({controls:()=>true,choose:()=>({kind:'defer'})});let spoken='';try{for(let n=0;n<200&&!spoken;n++){stepWorld(f.w);const r=f.w.requests.find(r=>r.kind==='repair');if(r?.status==='declined')spoken=f.helper.speech?.text??'';}}finally{release();}
+ expect(f.w.requests.find(r=>r.kind==='repair')).toMatchObject({status:'declined',note:'no place'});expect(spoken).toContain('home');expect(spoken).not.toContain('fire');expect(f.helper.commitments).toHaveLength(0);expect(f.helper.beliefs[f.home.id]).toBeUndefined();
+});
