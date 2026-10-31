@@ -157,6 +157,8 @@ export interface ForageOpts {
   baseLabel: string;
   /** only sources yielding this kind (a promise to bring a named food, rules 45); absent means any food source */
   only?: FoodKind;
+  /** A bounded spare portion for personally observed household care. */
+  supplyFor?: {id:number;name:string;seen:number;amount:number};
 }
 
 export function foragePlans(ctx: Ctx, o: ForageOpts): void {
@@ -183,13 +185,14 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     cands.push({ b, est: u.est, e, val, score });
   }
   cands.sort((a, b) => b.score - a.score);
-  for (const c of keepCurrent(ctx, cands, 3, c => `gather:${c.b.id}`)) {
+  const optionKey=(id:number)=>o.supplyFor?`care_supply:${o.supplyFor.id}:gather:${id}`:`gather:${id}`;
+  for (const c of keepCurrent(ctx, cands, 3, c => optionKey(c.b.id))) {
     const b = c.b;
     const type = b.kind as SourceType;
     const room = invRoom(world, p, type === 'fish_spot' ? 'fish' : type === 'wild_grain' ? 'grain' : type === 'fruit_tree' ? 'fruit' : 'berries');
     if (room < 1 && o.mode !== 'eat') continue; // (hungry people can still eat on the spot with a full pack)
     const need = o.mode === 'eat' ? Math.ceil((90 - p.needs.hunger) / c.val) + (p.traits.diligence > 0.55 && room > 0 ? 1 : 0) : Math.round(3 + 3 * p.traits.diligence);
-    const units = Math.max(1, Math.min(Math.floor(c.est), need, o.mode === 'eat' ? need : room));
+    const units = Math.max(1, Math.min(Math.floor(c.est), o.supplyFor?.amount??need, o.mode === 'eat' ? need : room));
     const sc = new Scorer();
     if (o.mode === 'eat') sc.add('hungry', o.urgency * 0.85 * Math.min(1, 0.45 + 0.18 * Math.min(c.est, 4)));
     else sc.add(o.baseLabel, o.urgency * Math.min(1, 0.45 + 0.18 * Math.min(c.est, 4)));
@@ -203,11 +206,11 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
     if (pay) sc.add(pay.label, pay.value);
     const dng = dangerAt(ctx, b.x, b.y);
     if (dng > 0) sc.add('wolf nearby', -26 * dng * tm.caution);
-    const purpose = o.mode === 'eat' ? 'to ease hunger' : 'to stock the household';
+    const purpose = o.supplyFor?`to obtain food for ${o.supplyFor.name}, last seen needing it at tick ${o.supplyFor.seen}`:o.mode === 'eat' ? 'to ease hunger' : 'to stock the household';
     const expected = c.e + units * (WORK[type] ?? 25);
     addOption(ctx, {
       kind: 'gather',
-      label: `${SOURCE_VERB[type]}`,
+      label: o.supplyFor?`${SOURCE_VERB[type]} for ${o.supplyFor.name}`:`${SOURCE_VERB[type]}`,
       goal: purpose,
       need: o.mode === 'eat' ? 'hunger' : null,
       util: sc.total,
@@ -215,9 +218,9 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
       eta: expected,
       scopeEstimate: {walk:c.e,work:WORK[type]??25,amount:units,item:SOURCE_FOOD[type]},
       ...(pay?.sourceReason?{selectionReason:pay.sourceReason}:{}),
-      key: `gather:${b.id}`,
+      key: optionKey(b.id),
       targetId: b.id,
-      tag: 'food',
+      tag: o.supplyFor?'care':'food',
       // `units` is what the engine already planned to take here, itself bounded by the source and the pack
       bounds: [{ kind: 'count', field: 'amount', min: 1, max: Math.max(1, units), note: 'how many to take (the engine still stops at what the source holds and the pack can carry)' }],
       make: () => {
@@ -226,7 +229,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
         return newActivity(world, p, {
           kind: 'gather',
           label: SOURCE_VERB[type],
-          goal: o.mode === 'eat' ? `to ease hunger (${Math.round(p.needs.hunger)}/100)` : 'to bring food home',
+          goal: o.supplyFor?purpose:o.mode === 'eat' ? `to ease hunger (${Math.round(p.needs.hunger)}/100)` : 'to bring food home',
           need: o.mode === 'eat' ? 'hunger' : null,
           targetId: b.id,
           targetType: 'source',
@@ -239,7 +242,7 @@ export function foragePlans(ctx: Ctx, o: ForageOpts): void {
           minCommit: 60,
           maxTicks: 1100,
           // `eta` is the expectation the person's own estimate of what pays is later judged against (learning.ts)
-          data: { purpose: o.mode, stype: type, eta: expected },
+          data: { purpose: o.mode, stype: type, eta: expected, ...(o.supplyFor?{careSupply:{to:o.supplyFor.id,seen:o.supplyFor.seen}}:{}) },
         });
       },
     });

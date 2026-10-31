@@ -16,6 +16,8 @@ import { rulesOf, within } from './rules';
 import { runsRulesVersion } from './rulesversion';
 import { keepCurrent } from './kept_target';
 import { residentCareOptions } from './resident_care';
+import {prioritizeCareReturn} from './care_supply';
+import {activeCareJourney} from './care_journey';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
@@ -1533,7 +1535,7 @@ function optCare(ctx: Ctx): void {
           utility: sc.total,
           minCommit: 40,
           maxTicks: 600,
-          data: { items: give, mode: 'care' },
+          data: { items: give, mode: 'care', ...(activeCareJourney(p)?.to===d.id?{residentCare:true}:{}) },
         });
       },
     });
@@ -1940,6 +1942,7 @@ export function workOptions(ctx: Ctx): void {
   optClaimHome(ctx);
   optExplore(ctx);
   optIdle(ctx);
+  prioritizeCareReturn(ctx);
 }
 
 void estimatedAmount;

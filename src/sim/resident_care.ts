@@ -1,7 +1,9 @@
 // A resident can return to personally observed need in their own home. Remembered room
 // contact is not live remote location; entrance and hand-over are checked on arrival.
 import {newActivity} from './activities';
-import {careFoodAvailable,careStoreOption,careWaterStoreOption} from './care_capacity';
+import {careSupplyOptions} from './care_supply';
+import {careFoodAvailable,careWaterAvailable,careStoreOption,careWaterStoreOption} from './care_capacity';
+import {runsRulesVersion} from './rulesversion';
 import {knowsDeath} from './death_knowledge';
 import {isHomeType} from './constants';
 import {Scorer,addBlocked,addOption,eta,pen,traitMods} from './optutil';
@@ -14,7 +16,7 @@ import type {Activity,ItemKind,Items,Person,World} from './types';
 function available(w:World,p:Person,to:number,k:ItemKind):number{
  if(p.needs.hunger<40||p.needs.thirst<30||p.needs.energy<20)return 0;
  if(isFoodKind(k))return careFoodAvailable(w,p,to,k);
- if(k==='water')return Math.max(0,Math.min(surplusOf(w,p,k),(p.inv.water??0)-reservedFor(w,p,k)));
+ if(k==='water')return runsRulesVersion(w,95)?careWaterAvailable(w,p,to):Math.max(0,Math.min(surplusOf(w,p,k),(p.inv.water??0)-reservedFor(w,p,k)));
  return 0;
 }
 
@@ -42,7 +44,7 @@ function residentCareOption(ctx:Ctx,q:Pick<Person,'id'|'name'>):boolean{
  const items:Items={};
  if(room.hungry){const k=(['berries','fruit','grain','fish','bread','meat'] as ItemKind[]).find(k=>available(world,p,q.id,k)>=1);if(k)items[k]=Math.min(2,available(world,p,q.id,k));}
  if(room.thirsty&&available(world,p,q.id,'water')>=1)items.water=1;
- if(!Object.keys(items).length){addBlocked(ctx,'give',`Return to help ${q.name}`,q.id,'must keep supplies for my own needs, others or promises','care');return true;}
+ if(!Object.keys(items).length){addBlocked(ctx,'give',`Return to help ${q.name}`,q.id,'must keep supplies for my own needs, others or promises','care');careSupplyOptions(ctx,q,room.hungry,room.thirsty,wh.tick);return true;}
  const kin=p.relations[q.id]?.kin,family=kin==='child'||kin==='parent'||kin==='partner',base=42*traitMods(p).give;
  // A personally failed hand-over must still reach the existing household-store fallback.
  if(careStoreOption(ctx,q,items,base+(family?8:0),wh.x,wh.y)){

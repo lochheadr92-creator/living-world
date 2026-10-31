@@ -1,0 +1,25 @@
+import {existsSync,mkdirSync,writeFileSync} from 'node:fs';
+import {resolve,join,sep} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomUUID} from 'node:crypto';
+import {launch} from './cdp.mjs';
+const [url='http://127.0.0.1:5290/',out='autonomy_evidence/care95-rendered']=process.argv.slice(2);
+if(existsSync(out))throw new Error('Fresh output required');const root=resolve(tmpdir()),profile=resolve(join(root,'living-world-care-'+randomUUID()));if(!profile.startsWith(root+sep)||existsSync(profile))throw new Error('Unsafe temporary profile');
+let occupied=false;try{await fetch('http://127.0.0.1:9368/json/version');occupied=true;}catch{}if(occupied)throw new Error('Browser port in use');
+mkdirSync(out,{recursive:true});const b=await launch({port:9368,width:1440,height:1000,profile}),checks=[];
+const check=(name,ok,detail)=>{checks.push({name,ok:!!ok,detail});console.log(`${ok?'PASS':'FAIL'} ${name}`);};
+const shot=async name=>{await b.evaluate(`(()=>{window.__game.select(window.__care.helper.id);window.__ui.update(1);for(const p of document.querySelectorAll('.insp-person details')){if(p.textContent.includes('Care journey for Eli')){p.open=true;p.scrollIntoView({block:'center'});}}window.__ui.update(1);})()`);await b.sleep(200);await b.shot(join(out,name+'.png'));return b.evaluate("document.querySelector('.insp-person')?.textContent||''");};
+try{
+ await b.send('Page.navigate',{url});for(let n=0;n<80&&!await b.evaluate('!!window.__game');n++)await b.sleep(100);
+ for(const water of [false,true]){
+  const kind=water?'water':'food';
+  await b.evaluate(`(async()=>{const {careSupplyScene}=await import('/tests/helpers/care_supply.ts'),save=await import('/src/app/save.ts'),{stepWorld}=await import('/src/sim/world.ts'),{project}=await import('/src/render/iso.ts'),{generateOptions}=await import('/src/sim/decision.ts'),econ=await import('/src/sim/economy.ts');const f=careSupplyScene(95,${water});Object.assign(f,{save,stepWorld,generateOptions,econ,receipts:[],starts:[]});f.before=${water}?f.elder.needs.thirst:f.elder.needs.hunger;f.w.hooks={onActivityStart:(p,a)=>{if(p.id===f.helper.id)f.starts.push({tick:f.w.tick,kind:a.kind,goal:a.goal});},onTransfer:t=>{if(t.from==='person:'+f.helper.id&&t.to==='person:'+f.elder.id)f.receipts.push({...t,tick:f.w.tick,sameRoom:(f.helper.indoors??0)===(f.elder.indoors??0),distance:Math.hypot(f.helper.x-f.elder.x,f.helper.y-f.elder.y)});}};window.__care=f;const g=window.__game;g.setPlaying(false);g.restoreWorld(f.w,f.w.settings);g.fly=null;const pt=project(43,42);g.camera={x:pt.sx+100,y:pt.sy,zoom:2};})()`);
+  const offer=await b.evaluate(`(()=>{const f=window.__care;return f.generateOptions(f.w,f.helper,true,true).options.filter(o=>o.key.startsWith('care_supply:')).map(o=>({key:o.key,goal:o.goal,bounds:o.bounds}));})()`);check(kind+' acquisition is an offered bounded legal action',offer.length>0&&offer[0].bounds[0].max===2,offer);await shot(kind+'-observed-need-and-offer');
+  const partial=await b.evaluate(`(()=>{const f=window.__care,item='${water?'water':'grain'}';for(let n=0;n<180&&(f.helper.inv[item]??0)<1;n++)f.stepWorld(f.w);f.saved=f.save.serializeWorld(f.w);f.twin=f.save.deserializeWorld(f.saved);return {tick:f.w.tick,journey:f.helper.careJourney,activity:f.helper.activity?.kind,amount:f.helper.inv[item]};})()`);check(kind+' ordinary choice begins actual paid acquisition',partial.journey?.phase==='acquire'&&partial.amount===1,partial);
+  const text=await shot(kind+'-paid-partial-acquisition');check(kind+' inspector retains the care purpose',text.includes('Care journey for Eli')&&text.includes('acquire'),text);check(kind+' rendered observation is pure',await b.evaluate('window.__care.saved===window.__care.save.serializeWorld(window.__care.w)'));
+  const receipt=await b.evaluate(`(()=>{const f=window.__care;for(let n=0;n<600&&(${water} ? f.elder.needs.thirst:f.elder.needs.hunger)<f.before+5;n++){f.stepWorld(f.w);f.stepWorld(f.twin);}return {tick:f.w.tick,journey:f.helper.careJourney,receipts:f.receipts,starts:f.starts,need:${water}?f.elder.needs.thirst:f.elder.needs.hunger,before:f.before,own:f.helper.inv['${water?'water':'grain'}'],same:f.save.serializeWorld(f.w)===f.save.serializeWorld(f.twin),conserved:f.econ.conservationReport(f.w).ok};})()`);
+  check(kind+' saved acquisition reaches real contact, receipt and consumption',receipt.same&&receipt.conserved&&receipt.journey?.phase==='delivered'&&receipt.receipts.some(r=>r.sameRoom&&r.distance<=3.2)&&receipt.need>receipt.before+5&&receipt.own>=1,receipt);await shot(kind+'-received-and-consumed');
+ }
+ const errors=b.events.filter(e=>e.method==='Runtime.exceptionThrown');check('no browser exceptions',errors.length===0,errors);
+ writeFileSync(out+'/report.json',JSON.stringify({rules:95,evidence:'STAGED initial incapacity, household and real nearby supplies. Thereafter autonomous selection, physical acquisition, moving recipient/contact, receipt and consumption; intermediate save and rendering checks. No ordinary frequency claim.',checks},null,2));if(checks.some(c=>!c.ok))process.exitCode=1;
+}finally{await b.close();}

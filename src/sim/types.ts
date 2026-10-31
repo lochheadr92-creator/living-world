@@ -702,6 +702,7 @@ export interface Person {
   log: LogEntry[];
   lastDecision: DecisionRecord | null;
   lastResult: ResultRecord | null;
+  careJourney?: import('./care_journey').CareJourney;
   lastPercept: { tick: number; seen: number; newBeliefs: number };
   nextThink: number;
   cooldowns: Record<string, number>;

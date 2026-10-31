@@ -3,6 +3,7 @@ import {hasMeetingKnowledge,receiveMeetingCancellation,acknowledgeMeetingCancell
 import {hasContinuityKnowledge,hearUndertaking,acknowledgeUndertaking} from './continuity_knowledge';
 import {proposeHandover,answerHandover,type HandoverMode} from './work_handover';
 import {hasWorkHandover} from './handover_state';
+import {careJourneyReceipt} from './care_journey';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
 import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
@@ -222,6 +223,7 @@ export function witness(world: World, kind: 'gift' | 'quarrel' | 'help', actor: 
 
 /** Items have moved from `giver` to `receiver`: both remember it and onlookers notice. */
 export function onGift(world: World, giver: Person, receiver: Person, items: Items, mode: string): void {
+  careJourneyReceipt(world,giver,receiver.id,items);
   const hungerSev = isFoodGift(items) ? clamp((60 - receiver.needs.hunger) / 60, 0, 1) : 0;
   const thirstSev = (items.water ?? 0) > 0 ? clamp((60 - receiver.needs.thirst) / 60, 0, 1) : 0;
   const sev = Math.max(hungerSev, thirstSev, 0.2);
@@ -1935,7 +1937,7 @@ registerHandler('give', {
     if (t.activity && t.activity.kind === 'sleep') endActivity(world, t, 'interrupted', 'woken to be fed');
     const mode = (a.data.mode as string) ?? 'give';
     onGift(world, p, t, got, mode);
-    bubble(world, p, D.saying(mode === 'care' ? D.CARE_LINES : D.OFFER_LINES, p.id, t.id, world.tick >> 5, { n: t.name, what: Object.keys(got)[0] }), 'say', 56);
+    bubble(world, p, mode==='care'&&runsRulesVersion(world,95)?`Here is ${itemsToText(got)}, ${t.name}.`:D.saying(mode === 'care' ? D.CARE_LINES : D.OFFER_LINES, p.id, t.id, world.tick >> 5, { n: t.name, what: Object.keys(got)[0] }), 'say', 56);
     bubbleLater(world, t, D.saying(D.THANKS, t.id, p.id, world.tick >> 5, { n: p.name }), 14);
     if (mode === 'promise' && a.data.commitmentId) {
       const cm = p.commitments.find((x) => x.id === (a.data.commitmentId as number));

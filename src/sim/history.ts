@@ -54,6 +54,7 @@ export function householdHistory(w: World, p: Person): string[] {
  return [ `${h.name} household formed at tick ${h.formed}; formation cause is not recorded.`,
   `Members: ${h.members.map(id => name(w,id)).join(', ')}.`,
   ...supperHistory(w,p),
+  ...(p.careJourney?[`Care journey for ${p.careJourney.name}: ${p.careJourney.phase}; observed at tick ${p.careJourney.seen}, started ${p.careJourney.since}, ends by ${p.careJourney.until}. ${p.careJourney.reason}.`]:[]),
   ...describeUnfinished(w,h),
   home?.ent === 'building' ? `Home #${home.id}: ${home.type}; recorded builders: ${(home.builtBy ?? []).map(id => name(w,id)).join(', ') || 'unknown'}.` : 'No current home.',
   ...(h.relocations??[]).slice(-3).flatMap(r=>[

@@ -229,6 +229,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
   abortActivity(world, p, 'died');
   releaseAllFor(world, p.id);
   p.alive = false;
+  if(p.careJourney&&['acquire','return'].includes(p.careJourney.phase)){p.careJourney.phase='failed';p.careJourney.reason='the carer died';p.careJourney.ended=world.tick;}
   p.diedTick = world.tick;
   p.deathCause = cause;
   p.pose = 'stand';

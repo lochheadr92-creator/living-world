@@ -8,6 +8,7 @@ import {projectAvailable} from './project_step';
 import { relocationPackingBlocker } from './relocation';
 import { spareSeed } from './seed_storage';
 import { careFoodAvailable, careWaterAvailable, careStoreBlocker } from './care_capacity';
+import {careJourneyReceipt} from './care_journey';
 import { runsRulesVersion } from './rulesversion';
 import { mayCollectMaterialStock } from './material_stock';
 import { creditProject, mayWorkProject } from './townships';
@@ -182,11 +183,14 @@ registerHandler('gather', {
     if (s.type === 'tree' || s.type === 'rock') riskOfHarm(world, p, s.type, 0.004);
     p.skills[sk] = Math.min(SKILL_MAX, p.skills[sk] + 0.004);
     notePractice(world, p, sk, 0.004);
+    let retained=got;
     if (s.type === 'wild_grain' && world.rng.chance(0.2)) {
       // shell some of the grain heads for seed
       consume(world, p.inv, 'grain', 1, 'saved as seed');
       produce(world, p.inv, carryCap(world, p), 'seeds', 1, 'seed saved from wild grain');
+      retained--;
     }
+    if(a.data.careSupply)a.data.careAcquired=(a.data.careAcquired??0)+retained;
     observe(world, p, s);
     clearFailure(p, s.id);
     if (s.type === 'tree' && s.amount <= 0 && s.growth >= 0.55) {
@@ -517,6 +521,7 @@ registerHandler('fetch_water', {
     if(body&&!got)return a.cycle>0?'partial:the water source is dry':'fail:the water source is dry';
     if(body&&got){addItem(p.inv,'water',got);world.hooks?.onTransfer?.({from:'water:'+body.id,to:'person:'+p.id,item:'water',n:got,reason:'natural water drawn'});observeShore(world,p);}
     if (got <= 0) return a.cycle > 0 ? 'partial:cannot carry more' : 'fail:cannot carry more';
+    if(a.data.careSupply)a.data.careAcquired=(a.data.careAcquired??0)+got;
     addFx(world, 'splash', a.data.wx, a.data.wy, 0);
     a.cycle++;
     a.progress = 0;
@@ -607,6 +612,7 @@ registerHandler('deposit', {
       if (m < n) partial = true;
       if (m > 0) {
         a.data.moved = { ...(a.data.moved ?? {}), [k]: ((a.data.moved ?? {})[k] ?? 0) + m };
+        if(a.data.careStore)careJourneyReceipt(world,p,a.data.careRecipient as number,{[k]:m},true);
         if (e.ent === 'building' && isToolItem(k as ItemKind)) donateToRack(world, e.id, p, k as ToolKind, m);
         if (e.ent === 'building') {
           noteDeposit(world, e, p, k as ItemKind, m);

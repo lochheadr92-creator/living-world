@@ -22,6 +22,7 @@ import type { Activity, ActivityKind, Entity, NeedKey, Person, PoseKind, World }
 import { clamp, hyp, turnToward } from './util';
 import {recordRoutine} from './daily_routines';
 import {recordJourney} from './journey_state';
+import {startCareJourney,endCareAcquisition} from './care_journey';
 
 // ───────────────────────── handler registry ─────────────────────────
 export type WorkResult = 'continue' | 'done' | `fail:${string}` | `partial:${string}`;
@@ -332,6 +333,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
 export function startActivity(world: World, p: Person, a: Activity): void {
   if (p.activity) endActivity(world, p, 'interrupted', 'switched to something else');
   p.activity = a;
+  startCareJourney(world,p,a);
   if (hasLayoutClaims(world) && a.kind === 'plan_site') {
     const blocked = layoutClaimBlock(world, p, a);
     if (blocked) { endActivity(world, p, 'failed', blocked); return; }
@@ -408,6 +410,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   recordPay(world, p, a,outcome);
   recordRoutine(world,p,a,outcome,detail);
   recordJourney(world,p,a,outcome,detail);
+  endCareAcquisition(world,p,a,outcome,detail);
   releaseClaims(world, a.claims);
   p.activity = null;
   const h = handlers[a.kind];
@@ -431,6 +434,13 @@ export function abortActivity(world: World, p: Person, detail: string): void {
     releaseClaims(world, p.suspended.claims);
     p.suspended = null;
   }
+}
+
+/** End only the acquisition tied to this now-invalid care purpose. */
+export function cancelCareAcquisition(world:World,p:Person,to:number,seen:number,reason:string):void{
+ const matches=(a:Activity|null)=>a?.data.careSupply?.to===to&&a.data.careSupply.seen===seen;
+ if(matches(p.activity))endActivity(world,p,'interrupted',reason);
+ if(matches(p.suspended)){releaseClaims(world,p.suspended!.claims);p.suspended=null;}
 }
 
 export function stepActivity(world: World, p: Person): void {
