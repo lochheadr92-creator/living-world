@@ -1,3 +1,4 @@
+import {hasLivedLife} from './lived_life';
 import {hasMealLeftovers,mayTakeKnownPile} from './meal_leftovers';
 import {foodUnits} from './economy';
 import {carryCap} from './people';
@@ -1192,7 +1193,7 @@ function projectOptions(ctx:Ctx):void{
   const step=nextProjectStep(ctx,i.project,i),n=step.node,item=n.item as ItemKind;
   const scratch:Ctx={...ctx,options:[],blocked:[]},why=`to ${i.goal}`,base=28,tag='craft';
   const b=step.target?ctx.p.beliefs[step.target]:undefined;
-  if(step.phase==='acquire'&&n.item!=='cart')supply(scratch,item,step.quantity,base,why,tag,0,n.destination?ctx.p.beliefs[n.destination]:null);
+  if(step.phase==='acquire'&&n.item!=='cart')supply(scratch,item,step.quantity,base,why,tag,0,n.destination?ctx.p.beliefs[n.destination]:null,hasLivedLife(ctx.world)?0:undefined);
   if(step.phase==='deposit'&&b&&n.item!=='cart')depositLeaf(scratch,b,{[item]:step.quantity},base,why,tag);
   if(step.phase==='collect'&&b&&n.item!=='cart'){
    const count=Math.min(step.quantity,invRoom(ctx.world,ctx.p,item));if(count>=1)collectLeaf(scratch,b,{[item]:count},base,why,tag);
