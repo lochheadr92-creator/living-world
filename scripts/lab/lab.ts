@@ -1,6 +1,7 @@
 import {meetingKnowledgeOn,setMeetingKnowledge} from '../../src/sim/meeting_knowledge';
 import {continuityKnowledgeOn,setContinuityKnowledge} from '../../src/sim/continuity_knowledge';
 import {estateCustodyOn,setEstateCustody} from '../../src/sim/estate';
+import {workHandoverOn,setWorkHandover} from '../../src/sim/handover_state';
 import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
@@ -342,6 +343,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-flood-access')return {spec:label,summary:'remove durable flood footprints and personal access responses; retain historical onset damage',install(){const was=floodAccessEnabled();setFloodAccess(false);return ()=>setFloodAccess(was);}};
   if(kind==='rich-no-continuity-knowledge')return {spec:label,summary:'retain historical shared unfinished work knowledge without personal communication',install(){const was=continuityKnowledgeOn();setContinuityKnowledge(false);return ()=>setContinuityKnowledge(was);}};
   if(kind==='rich-no-estate-custody')return {spec:label,summary:'new deaths leave historical public heaps; existing physical ownership remains',install(){const was=estateCustodyOn();setEstateCustody(false);return ()=>setEstateCustody(was);}};
+  if(kind==='rich-no-work-handover')return {spec:label,summary:'remove informed living-worker handover and handback conversations',install(){const was=workHandoverOn();setWorkHandover(false);return ()=>setWorkHandover(was);}};
   if(kind==='rich-no-meeting-knowledge')return {spec:label,summary:'retain shared-status meal decisions; remove private heard appointments and replacement invitations',install(){const was=meetingKnowledgeOn();setMeetingKnowledge(false);return ()=>setMeetingKnowledge(was);}};
   if(kind==='rich-no-meal-leftovers')return {spec:label,summary:'retain historical automatic table return; remove owned leftover recovery',install(){const was=mealLeftoversOn();setMealLeftovers(false);return ()=>setMealLeftovers(was);}};
   if(kind==='rich-no-offcuts')return {spec:label,summary:'remove newly recoverable timber fuel and its use; retain the original waste sink',install(){const was=offcutsOn();setOffcuts(false);return ()=>setOffcuts(was);}};

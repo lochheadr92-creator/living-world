@@ -1,4 +1,5 @@
 import {hasPromiseExpectations,expectedOutstanding,personalRequests} from './promise_expectations';
+import {hasWorkHandover,handedOver} from './handover_state';
 import type {ProjectGraph} from './project_graph';
 import {journeyStep,journeyOutcome} from './journey_state';
 import {reviewJourneyRecovery} from './journey_recovery';
@@ -1026,6 +1027,22 @@ function succeedPlan(ctx: Ctx, u: import('./succession').Unfinished, onCooldown:
  * A project worth taking on today: a tool that would make the work easier, or a roof that is going. Both are adopted only when the
  * materials are what stands in the way - when they are already to hand the ordinary option covers it and no plan is needed.
  */
+/** Explicit consent still uses the ordinary plan owners, needs and physical prerequisites. */
+export function acceptCommunicatedPlan(ctx:Ctx,k:import('./continuity_knowledge').HeardUndertaking,returning=false):{plan?:Intention;reason:string}{
+ const {world,p}=ctx;
+ if(!hasWorkHandover(world)||ctx.stage==='child')return {reason:'not eligible for this adult undertaking'};
+ if(ctx.criticals.length||ctx.dangers.length)return {reason:'urgent needs come first'};
+ if(p.intentions.some(i=>i.status==='active'&&i.kind!=='night'&&i.kind!=='journey')||p.intentions.filter(i=>i.status==='active').length>=MAX_INTENTIONS)return {reason:'I already have work of my own to finish'};
+ if(!returning&&handedOver(p,k.kind))return {reason:'I already entrusted this kind of work to someone else'};
+ const u:import('./succession').Unfinished={id:k.conversationId,planId:k.planId,by:k.from,name:k.name,tick:k.heardAt,kind:k.kind,aboutId:k.aboutId,makes:k.makes,recipe:k.recipe,forSite:k.forSite,worked:k.worked,carried:{},pileId:0,goal:k.goal};
+ const blocked=successionBlocker(ctx,u);if(blocked)return {reason:blocked};
+ if(k.kind==='stock'){const reserve=preparationWanted(ctx);if(reserve&&reserve.aboutId!==k.aboutId)return {reason:'my eligible reserve plan names a different home store'};}
+ const made=succeedPlan(ctx,u,()=>false);if(!made)return {reason:'there is no eligible remaining undertaking in my knowledge'};
+ if(made.stepKind==='get'&&made.stepItem&&!hasKnownResource(world,p,made.stepItem)&&!(made.kind==='batch'&&batchHooks?.canAcquire?.(ctx,made,made.stepItem))){
+  made.status='dropped';made.ended=world.tick;made.reason=`no known source of ${made.stepItem} with anything left`;made.wants={};made.step='';made.stepKind='none';made.stepKey=null;return {reason:made.reason};
+ }
+ return {plan:made,reason:'eligible personal continuation'};
+}
 function adoptProject(ctx: Ctx): Intention | null {
   const { world, p } = ctx;
   if (ctx.stage === 'child') return null;
@@ -1046,6 +1063,7 @@ function adoptProject(ctx: Ctx): Intention | null {
   // "gave up on it, still short three" followed at once by "means to do it" is the same decision made again with nothing new
   // to go on.
   const onCooldown = (kind: Intention['kind']): boolean => {
+    if(hasWorkHandover(world)&&handedOver(p,kind))return true;
     const last = [...p.intentions].reverse().find((i) => i.kind === kind);
     return !!last && world.tick - (last.status === 'active' ? last.since : last.ended || last.since) < DAY;
   };

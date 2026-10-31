@@ -148,6 +148,7 @@ export interface Relation {
   meeting?: import('./meeting_knowledge').MeetingExperience;
   workHeard?: import('./continuity_knowledge').HeardUndertaking[];
   workTold?: import('./continuity_knowledge').ToldUndertaking[];
+  handovers?: import('./handover_state').WorkHandover[];
   /** the live grievance this person holds against the other, if any (set by an actual incident, closed by amends or time) */
   grievance: Grievance | null;
   /** last time a grievance between these two was closed (stops a settled quarrel from starting the same apology loop again) */
@@ -350,6 +351,8 @@ export interface Intention {
   makes: string;
   /** rules 53 (succession.ts): whose unfinished undertaking this plan continues, and how far they had got */
   succeeding?: { from: number; name: string; worked: number };
+  /** Rules 94: an explicitly accepted living-worker undertaking, not death succession. */
+  handoverId?: number;
   /** ticks actually spent sheltering for this plan, credited by the activity itself as it ends or is set aside */
   sheltered: number;
   /**
@@ -1142,6 +1145,7 @@ export type ConvPurpose =
   | 'delay_request'
   | 'cancel_meeting'
   | 'share_work'
+  | 'handover_work'
   | 'mediate'
   | 'teach_technique'
   | 'learn_technique';

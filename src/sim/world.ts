@@ -27,6 +27,7 @@ import './social';
 
 import { stepActivity, abortActivity } from './activities';
 import { settleIntentions } from './intent';
+import {reviewHandovers} from './work_handover';
 import { BELIEF_REFRESH_EVERY, DECAY_PER_TICK, PERCEIVE_EVERY, PERISHABLE, PROJECT_PATIENCE, SITE_PATIENCE, isHomeType } from './constants';
 import { decide, reviewActivity, urgentInterrupt } from './decision';
 import { winterShelterWindow } from './winter_shelter';
@@ -137,6 +138,7 @@ function stepPerson(world: World, p: Person): void {
   // what the world has already decided about this person's own plans, settled on the tick it became due rather than whenever they
   // next happen to think (intent.ts settleIntentions). Rich worlds only, and free for anyone carrying no plans.
   settleIntentions(world, p);
+  reviewHandovers(world,p);
   if ((tick + p.id) % PERCEIVE_EVERY === 0) perceive(world, p);
   if ((tick + p.id) % BELIEF_REFRESH_EVERY === 0) refreshBeliefs(world, p);
   if ((tick + p.id) % 12 === 5) noteConcerns(world, p);
@@ -438,6 +440,7 @@ export function hashWorld(world: World): string {
     for (const a of [p.activity,p.suspended]) if(a?.data.journeyId||a?.data.journeyRecorded)push('JourneyActivity'+a.id+':'+a.data.journeyId+':'+a.data.journeyRecorded);
   }
   for (const p of world.persons) for (const i of p.intentions) if (i.succeeding) push('Succeeding' + i.id + JSON.stringify(i.succeeding));
+  for(const p of world.persons){for(const i of p.intentions)if(i.handoverId!==undefined)push('HandoverPlan'+i.id+':'+i.handoverId);for(const [id,r] of Object.entries(p.relations))if(r.handovers)push('Handovers'+p.id+':'+id+JSON.stringify(r.handovers));}
   for(const m of world.meals)if(m.supperContact)push('SupperContact'+m.id+JSON.stringify(m.supperContact));
   for(const m of world.meals)if(m.tableOwnerHh!==undefined)push('MealOwner'+m.id+':'+m.tableOwnerHh);
   for(const m of world.meals)if(m.heard)push('MealKnowledge'+m.id+JSON.stringify(m.heard)+':'+m.replacesMealId+':'+m.replacementId);
