@@ -1,0 +1,13 @@
+{
+  "source": "c52d7d49adfb78efcef22e2d3293d50c93bbf238, rules 114 before successor behaviour",
+  "ordinary": {
+    "saved": "703cc0027f7e256f993c670cab06d872ef986062aa02dbfcaf906f58aefaa93c",
+    "uninterrupted": "a59018e8bf7301133b5a59b54a0a74b6c6d099e314cd4469b8020f614c890e5b",
+    "continued": "a59018e8bf7301133b5a59b54a0a74b6c6d099e314cd4469b8020f614c890e5b"
+  },
+  "hungryHarvest": {
+    "saved": "9afaf1df5d222ad2a0226ecba5b3fad412f5d12800d27fd23135210c58946af4",
+    "uninterrupted": "3da792baf6c5494c456f09bc4891b3fd15c556c5f30878571d20ea4704dd2afe",
+    "continued": "3da792baf6c5494c456f09bc4891b3fd15c556c5f30878571d20ea4704dd2afe"
+  }
+}
