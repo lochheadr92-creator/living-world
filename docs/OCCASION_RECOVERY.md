@@ -51,4 +51,36 @@ no events, goods, knowledge or choices. The expected transition is a real paused
 ordinary visit resuming when still valid, with an explicit ending if no longer
 valid. Source is frozen during the runs. Same-tick transitions can be missed;
 lost-progress counts are lower bounds, and the worlds can diverge. Full regression
-and these four windows are running; no aggregate household benefit is claimed.
+and these four windows were then completed; no aggregate household benefit is claimed.
+
+## Final verification and ordinary results
+
+Frozen runtime `33d22ed`, immutable predecessor reference `d770860`. Full regression
+passed **351 files / 2,260 tests**, 494.97 s. The subsequently added immutable-112
+reference and recovery suite separately passed **12 tests / 2 files**. No old
+reference was regenerated. Build/typecheck and the rendered 8/8 check pass.
+
+All four predeclared windows reached day 20 with 400 pure-observer checks each,
+exact unobserved twins, exact reloads and conserved items. Reports are retained in
+`autonomy_evidence/recovery{111,112}-{meadow,river}-20/report.json`; full saves stay
+local. Results are counts from divergent worlds, not matched opportunities:
+
+| Measure | Meadow 111 | Meadow 112 | River 111 | River 112 |
+| --- | ---: | ---: | ---: | ---: |
+| Observed pauses | 4 | 4 | 10 | 6 |
+| Progress retained at pause (ticks) | 0 | 375 | 0 | 156 |
+| Progress lost at pause (lower bound) | 260 | 0 | 804 | 0 |
+| Same visit resumed with recorded progress | 0 | 4 | 0 | 6 |
+| Paused visit discarded without ending | 4 | 0 | 10 | 0 |
+| Successful attendance endings | 17 | 14 | 66 | 52 |
+| Admitted participation ticks | 2,739 | 2,289 | 11,423 | 8,867 |
+| Deaths | 4 | 4 | 0 | 0 |
+| Population at end | 24 | 24 | 31 | 31 |
+
+No attendance remained active or paused at either endpoint. The first matching
+meadow pause episodes resume at 112 and disappear at 111. This establishes ordinary
+activation of the repaired transition. Total completions and participation fell in
+both successor windows; preserve that adverse result rather than presenting the
+transition repair as overall social or household benefit. The meadow death records
+are unchanged. A1's adequate-margin household and repeated discretionary rhythm,
+disruption recovery, and longer population viability remain open.
