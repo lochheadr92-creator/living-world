@@ -3,7 +3,7 @@
 import { describe, expect, it } from 'vitest';
 import { deserializeWorld, serializeWorld } from '../src/app/save';
 import { OBSERVATION_VERSION } from '../src/agent/observe';
-import { PROTOCOL_V27, PROTOCOL_V28, observationVersionFor } from '../src/agent/protocol';
+import { PROTOCOL_V29, PROTOCOL_V30, observationVersionFor } from '../src/agent/protocol';
 import { runLive, runReplay } from '../src/agent/run';
 import { pickerModel } from '../src/agent/stubs';
 import { ReplayDiverged } from '../src/agent/transcript';
@@ -25,10 +25,10 @@ describe('the observation version in the header', () => {
   it('a run records the version its protocol implies, and a replay reads it', async () => {
     const plain = await recorded(false);
     const noted = await recorded(true);
-    expect(plain.t.header.protocol).toBe(PROTOCOL_V27);
-    expect(plain.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V27));
-    expect(noted.t.header.protocol).toBe(PROTOCOL_V28);
-    expect(noted.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V28));
+    expect(plain.t.header.protocol).toBe(PROTOCOL_V29);
+    expect(plain.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V29));
+    expect(noted.t.header.protocol).toBe(PROTOCOL_V30);
+    expect(noted.t.header.observationVersion).toBe(observationVersionFor(PROTOCOL_V30));
     expect(noted.t.header.observationVersion).toBe(OBSERVATION_VERSION);
     expect(hashWorld(runReplay(deserializeWorld(plain.start), plain.t).world)).toBe(plain.hash);
     expect(hashWorld(runReplay(deserializeWorld(noted.start), noted.t).world)).toBe(noted.hash);

@@ -1,3 +1,4 @@
+import {meetingKnowledgeOn,setMeetingKnowledge} from '../../src/sim/meeting_knowledge';
 import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
@@ -337,6 +338,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-watch-learning')return {spec:label,summary:'remove witnessed watch-completion learning; preserve practical care and voluntary replies',install(){const was=watchLearningOn();setWatchLearning(false);return ()=>setWatchLearning(was);}};
   if(kind==='rich-no-build-promise-settlement')return {spec:label,summary:'retain prior deferred settlement after an actual 40-tick accepted building share',install(){const was=buildPromiseSettlementOn();setBuildPromiseSettlement(false);return ()=>setBuildPromiseSettlement(was);}};
   if(kind==='rich-no-flood-access')return {spec:label,summary:'remove durable flood footprints and personal access responses; retain historical onset damage',install(){const was=floodAccessEnabled();setFloodAccess(false);return ()=>setFloodAccess(was);}};
+  if(kind==='rich-no-meeting-knowledge')return {spec:label,summary:'retain shared-status meal decisions; remove private heard appointments and replacement invitations',install(){const was=meetingKnowledgeOn();setMeetingKnowledge(false);return ()=>setMeetingKnowledge(was);}};
   if(kind==='rich-no-meal-leftovers')return {spec:label,summary:'retain historical automatic table return; remove owned leftover recovery',install(){const was=mealLeftoversOn();setMealLeftovers(false);return ()=>setMealLeftovers(was);}};
   if(kind==='rich-no-offcuts')return {spec:label,summary:'remove newly recoverable timber fuel and its use; retain the original waste sink',install(){const was=offcutsOn();setOffcuts(false);return ()=>setOffcuts(was);}};
   if(kind==='rich-no-water-budget')return {spec:label,summary:'remove finite natural supply, weather accounting and personal dry-water responses',install(){const was=waterBudgetEnabled();setWaterBudget(false);return ()=>setWaterBudget(was);}};

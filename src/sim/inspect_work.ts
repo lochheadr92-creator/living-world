@@ -9,6 +9,7 @@ import { RECIPES, recipesAt } from './recipes';
 import type { Recipe } from './recipes';
 import { toolsHeldBy } from './toolreg';
 import { mealOf, previousMealOf } from './meals';
+import {hasMeetingKnowledge,describeHeardMeeting} from './meeting_knowledge';
 import { missingMaterials } from './knowledge';
 import type { BeliefKind, Building, Cart, Commitment, Items, ItemKind, Meal, Person, Site, SourceType, World } from './types';
 
@@ -388,6 +389,7 @@ export interface InteractionView {
 }
 
 const PURPOSE_TEXT: Record<string, string> = {
+  cancel_meeting: 'explaining a cancelled meal',
   delay_request: 'explaining a delay and asking for more time',
   learn_technique: 'asking to learn charcoal firing',
   teach_technique: 'charcoal firing instruction',
@@ -457,6 +459,7 @@ export function interactionViews(world: World, p: Person): { current: Interactio
 }
 
 export interface MealView {
+  personal?: boolean;
   place: string;
   host: string;
   status: string;
@@ -477,7 +480,8 @@ export function mealView(world: World, m: Meal): MealView {
 export function mealViews(world: World, p: Person): { current: MealView | null; previous: MealView | null } {
   const cur = mealOf(world, p);
   const prev = previousMealOf(world, p);
-  return { current: cur ? mealView(world, cur) : null, previous: prev ? mealView(world, prev) : null };
+  const view=(m:Meal|null)=>{if(!m)return null;const v=mealView(world,m),k=m.heard?.[p.id];if(hasMeetingKnowledge(world)&&k){v.personal=true;v.host=k.hostName;v.status=k.ended?(k.ateAt!==undefined?'done':k.ended.source==='own timeout'?'missed':'cancelled'):k.arrivedAt!==undefined?'waiting':k.reply==='accepted'?'agreed':'inviting';v.table=k.ateAt!==undefined?'I ate my serving':k.sawTable?'A table was serving when I was here':'No table contents observed';v.end=describeHeardMeeting(k)+(m.replacesMealId?` Replaces meal #${m.replacesMealId}; other guests keep what they heard.`:'');}return v;};
+  return { current: view(cur), previous: view(prev) };
 }
 
 export interface GrievanceView {

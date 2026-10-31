@@ -1,5 +1,6 @@
 import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
 import {hasMealLeftovers} from './meal_leftovers';
+import {hasMeetingKnowledge,hearInvitation,hearReply,personalMeal,endMeetingKnowledge,updateMeetingKnowledge,canForgetMeeting,atMeeting,receiveMeetingCancellation,acknowledgeMeetingCancellation} from './meeting_knowledge';
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import { isRich, think } from './mood';
 import { expose } from './illness';
@@ -43,6 +44,7 @@ export function openMeals(world: World): Meal[] {
 /** The meal this person is hosting or has accepted an invitation to (still to happen or under way). */
 export function mealOf(world: World, p: Person): Meal | null {
   for (const m of world.meals) {
+    if(hasMeetingKnowledge(world)){const known=personalMeal(m,p);if(known&&known.status!=='done'&&known.status!=='cancelled')return known;continue;}
     if (m.status === 'done' || m.status === 'cancelled') continue;
     if (m.host === p.id || m.accepted.includes(p.id)) return m;
   }
@@ -52,6 +54,7 @@ export function mealOf(world: World, p: Person): Meal | null {
 export function previousMealOf(world: World, p: Person): Meal | null {
   for (let i = world.meals.length - 1; i >= 0; i--) {
     const m = world.meals[i];
+    if(hasMeetingKnowledge(world)){const known=personalMeal(m,p);if(known&&(known.status==='done'||known.status==='cancelled'))return known;continue;}
     if ((m.status === 'done' || m.status === 'cancelled') && (m.host === p.id || m.invited.includes(p.id))) return m;
   }
   return null;
@@ -60,6 +63,7 @@ export function previousMealOf(world: World, p: Person): Meal | null {
 /** Servings of the host's own food spoken for by a meal they have called: not theirs to give away meanwhile. */
 export function mealReserved(world: World, p: Person): number {
   let n = 0;
+  if(hasMeetingKnowledge(world)){for(const m of world.meals){const k=m.heard?.[p.id];if(m.host===p.id&&k&&!k.ended&&!k.sawTable)n+=k.accepted.length+1;}return n;}
   for (const m of world.meals) if (m.host === p.id && (m.status === 'inviting') && foodUnits(m.table) === 0) n += m.reserved + 1;
   return n;
 }
@@ -121,6 +125,7 @@ export function mealOptions(ctx: Ctx): void {
     return;
   }
   if (ctx.drives.hunger > 24 || ctx.drives.thirst > 24 || ctx.drives.energy > 40) return;
+  replacementOptions(ctx);
   // an invitation to extend: only to friends or housemates, and only with food actually in hand
   if ((p.cooldowns.hostMeal ?? 0) > world.tick) return;
   if (!hostingWindow(ctx)) return;
@@ -137,7 +142,7 @@ export function mealOptions(ctx: Ctx): void {
     if (s.asleep || s.busyTalking || s.child) continue;
     const q = personById(world, s.id);
     if (!q || !q.alive || q.hhId === p.hhId && false) continue;
-    if (mealOf(world, q)) continue;
+    if (!hasMeetingKnowledge(world)&&mealOf(world, q)) continue;
     if ((p.cooldowns['invite' + q.id] ?? 0) > world.tick) continue;
     const rel = p.relations[q.id];
     const aff = rel?.affinity ?? 0;
@@ -154,6 +159,7 @@ export function mealOptions(ctx: Ctx): void {
     .add('food to share and good company to share it with', (7 + 14 * (p.traits.sociability * 0.6 + p.traits.generosity * 0.4)) * tm.social)
     .add('walking', -pen(hyp(q.x - p.x, q.y - p.y) * 6));
   if (place.hall) sc.add('a hall to eat in', 3);
+  if(hasMeetingKnowledge(world)&&p.relations[q.id]?.meeting?.outcome==='ate')sc.add('I remember sharing food with them',2);
   const practice=supperWeight(world,p);if(practice)sc.add('the learned practice of sharing supper',practice);
   if (sc.total < 7) return;
   const s = ctx.seenPersons.find((x) => x.id === q.id)!;
@@ -202,7 +208,7 @@ function hostOptions(ctx: Ctx, m: Meal): void {
     for (const s of ctx.seenPersons) {
       if (s.asleep || s.busyTalking || s.child) continue;
       const q = personById(world, s.id);
-      if (!q || m.invited.includes(q.id) || mealOf(world, q)) continue;
+      if (!q || m.invited.includes(q.id) || !hasMeetingKnowledge(world)&&mealOf(world, q)) continue;
       if ((p.cooldowns['invite' + q.id] ?? 0) > world.tick) continue;
       const rel = p.relations[q.id];
       if ((rel?.affinity ?? 0) < 6 && q.hhId !== p.hhId) continue;
@@ -247,12 +253,12 @@ function hostOptions(ctx: Ctx, m: Meal): void {
     }
   }
   // go and lay the table, in time
-  const place = world.byId.get(m.placeId);
+  const place = hasMeetingKnowledge(world)?p.beliefs[m.placeId]:world.byId.get(m.placeId);
   const px = m.x;
   const py = m.y;
   const eHome = (hyp(px - p.x, py - p.y) * 1.18) / Math.max(0.03, ctx.speed);
   const due = m.at - eHome - 140;
-  if (world.tick >= Math.min(due, m.at - 160) && (m.status === 'inviting' || m.status === 'gathering') && (place || m.placeName === 'the fire')) {
+  if ((!hasMeetingKnowledge(world)||m.accepted.length>0) && world.tick >= Math.min(due, m.at - 160) && (m.status === 'inviting' || m.status === 'gathering') && (place || m.placeName === 'the fire')) {
     const sc = new Scorer().add('guests are coming: lay the table', 60).add('walking', -pen(eHome) * 0.3);
     addOption(ctx, {
       kind: 'host_meal',
@@ -287,6 +293,22 @@ function hostOptions(ctx: Ctx, m: Meal): void {
   }
 }
 
+/** A single fresh invitation after a personally failed meal; each listener must hear and answer. */
+function replacementOptions(ctx:Ctx):void{
+ const {world,p}=ctx;if(!hasMeetingKnowledge(world)||spareFood(ctx)<3)return;
+ const place=placeFor(ctx);if(!place)return;
+ for(const old of world.meals.slice().reverse()){
+  const k=old.heard?.[p.id];if(old.host!==p.id||old.replacesMealId||old.replacementId||!k?.ended||k.ateAt!==undefined||!k.accepted.length||world.tick-k.ended.tick<120||world.tick-k.ended.tick>DAY)continue;
+  const seen=ctx.seenPersons.find(s=>k.accepted.includes(s.id)&&!s.asleep&&!s.busyTalking&&hyp(s.x-p.x,s.y-p.y)<=14);if(!seen)continue;
+  const q=personById(world,seen.id);if(!q)continue;
+  const sc=new Scorer().add('our previous meal failed; propose one new time with more preparation',24).add('walking',-pen(hyp(seen.x-p.x,seen.y-p.y)*6));
+  addOption(ctx,{kind:'socialize',label:`Arrange another meal with ${q.name}`,goal:'to agree a new time and place after our failed meal',need:'social',util:sc.total,parts:sc.parts,eta:eta(ctx,seen.x,seen.y)+70,key:`socialize:${q.id}:reschedule:${old.id}`,targetId:q.id,tag:'meal',
+   make:()=>newActivity(world,p,{kind:'socialize',label:`Proposing another meal to ${q.name}`,goal:'to agree a replacement meal',need:'social',targetId:q.id,targetType:'person',tx:seen.x,ty:seen.y,spotX:seen.x-1.35,spotY:seen.y,utility:sc.total,minCommit:40,maxTicks:420,
+    data:{purpose:'invite',conv:{replacesMealId:old.id,mealPlan:{placeId:place.id,placeName:place.name,x:place.x,y:place.y}}}})});
+  break;
+ }
+}
+
 function guestOptions(ctx: Ctx, m: Meal): void {
   const { world, p } = ctx;
   if (m.status === 'eating' && m.arrived.includes(p.id) && !m.ate.includes(p.id)) {
@@ -297,7 +319,8 @@ function guestOptions(ctx: Ctx, m: Meal): void {
   // leave early enough to arrive when the meal starts
   if (world.tick < m.at - e - 160) return;
   if (world.tick > m.at + 500) return;
-  const sc = new Scorer().add(`promised to eat with ${personById(world, m.host)?.name ?? 'them'}`, 58).add('walking', -pen(e) * 0.3);
+  const hostName=hasMeetingKnowledge(world)?m.heard?.[p.id]?.hostName:personById(world,m.host)?.name;
+  const sc = new Scorer().add(`promised to eat with ${hostName??'them'}`, 58).add('walking', -pen(e) * 0.3);
   addOption(ctx, {
     kind: 'attend_meal',
     label: `Go to the shared meal at ${m.placeName}`,
@@ -332,7 +355,7 @@ function guestOptions(ctx: Ctx, m: Meal): void {
 
 /** Somewhere to stand at the place: next to the hall or fire itself, spread out so people do not stack up. */
 function mealSpot(world: World, p: Person, m: Meal): { x: number; y: number } {
-  const e = world.byId.get(m.placeId);
+  const e = hasMeetingKnowledge(world)?undefined:world.byId.get(m.placeId);
   if (e) {
     const spot = standSpotFor(world, p, e);
     if (spot) return spot;
@@ -348,11 +371,18 @@ export interface MealPlan {
   y: number;
 }
 
-export function inviteAsk(world: World, A: Person, B: Person, d: { mealId?: number; mealPlan?: MealPlan }): number {
+export function inviteAsk(world: World, A: Person, B: Person, d: { mealId?: number; mealPlan?: MealPlan;replacesMealId?:number },conversationId?:number): number {
+  const previous=d.replacesMealId?world.meals.find(m=>m.id===d.replacesMealId):undefined;
+  if(hasMeetingKnowledge(world)&&d.replacesMealId){
+    const k=previous?.heard?.[A.id];
+    if(!previous||previous.host!==A.id||previous.replacesMealId||previous.replacementId||!k?.ended||k.ateAt!==undefined||!k.accepted.includes(B.id)||mealOf(world,A)||!d.mealPlan||!conversationId||foodUnits(A.inv)<3)return 0;
+    if(!receiveMeetingCancellation(world,A,B,previous.id,conversationId))return 0;
+  }
   let m = d.mealId ? world.meals.find((x) => x.id === d.mealId) : undefined;
+  if(hasMeetingKnowledge(world)&&m&&(m.host!==A.id||m.heard?.[A.id]?.ended||m.invited.length>=MAX_GUESTS&&!m.invited.includes(B.id)))return 0;
   if (!m && d.mealPlan) {
     if(hasMealLeftovers(world)&&world.meals.length>=60){
-      const old=world.meals.findIndex(x=>(x.status==='done'||x.status==='cancelled')&&tableUnits(x)===0);
+      const old=world.meals.findIndex(x=>(x.status==='done'||x.status==='cancelled')&&tableUnits(x)===0&&canForgetMeeting(world,x));
       if(old<0){bubble(world,A,'There are too many meals still being arranged. Let us finish those first.');return 0;}
       world.meals.splice(old,1);
     }
@@ -377,6 +407,11 @@ export function inviteAsk(world: World, A: Person, B: Person, d: { mealId?: numb
       end: '',
     };
     world.meals.push(m);
+    if(hasMeetingKnowledge(world)){
+      if(previous){m.replacesMealId=previous.id;previous.replacementId=m.id;}
+      const experience=A.relations[B.id]?.meeting;
+      if(previous||experience&&experience.outcome!=='ate')m.at+=240;
+    }
     if(hasMealLeftovers(world))m.tableOwnerHh=A.hhId;
     if (!hasMealLeftovers(world)&&world.meals.length > 60) world.meals.splice(0, world.meals.length - 60);
     addLog(world, A, 'social', `Decided to share a meal at ${m.placeName}.`);
@@ -384,32 +419,36 @@ export function inviteAsk(world: World, A: Person, B: Person, d: { mealId?: numb
   if (!m) return 0;
   d.mealId = m.id;
   if (!m.invited.includes(B.id)) m.invited.push(B.id);
-  bubble(world, A, m.placeName === 'the communal hall' ? `Eat with us at the hall tonight, ${B.name}?` : `Come and eat with us by the fire, ${B.name}?`, 'ask', 62);
+  hearInvitation(world,m,A,B,conversationId);
+  bubble(world, A, hasMeetingKnowledge(world)&&previous?`Our earlier meal did not work out. Shall we meet at ${m.placeName} instead, with more time to prepare?`:m.placeName === 'the communal hall' ? `Eat with us at the hall tonight, ${B.name}?` : `Come and eat with us by the fire, ${B.name}?`, 'ask', 62);
   return m.id;
 }
 
 export function inviteRespond(world: World, A: Person, B: Person, mealId: number): void {
   const m = world.meals.find((x) => x.id === mealId);
-  if (!m || m.status !== 'inviting') {
+  if(hasMeetingKnowledge(world)&&m?.replacesMealId)acknowledgeMeetingCancellation(world,A,B,m.replacesMealId);
+  if (!m || (hasMeetingKnowledge(world)?!m.heard?.[A.id]||!!m.heard[A.id].ended:m.status !== 'inviting')) {
     bubble(world, B, 'Sounds nice — but it seems the plan fell through.', 'say', 52);
     return;
   }
   const rel = B.relations[A.id];
+  if(hasMeetingKnowledge(world)&&m.heard?.[B.id]?.reply!=='pending')return;
   const aff = rel?.affinity ?? 0;
   const hungry = B.needs.hunger < 70;
   let why = '';
   if (mealOf(world, B)) why = 'already promised to eat elsewhere';
   else if (B.needs.thirst < 22 || B.needs.hunger < 12 || B.needs.energy < 14) why = 'had more pressing needs';
   else if (rel && rel.avoidUntil > world.tick) why = 'was not on good terms with the host';
-  else if (m.accepted.length + 1 >= Math.min(MAX_GUESTS + 1, foodUnits(A.inv))) why = 'there was no room at the table';
+  else if ((hasMeetingKnowledge(world)?m.heard![A.id].accepted.length:m.accepted.length) + 1 >= Math.min(MAX_GUESTS + 1, foodUnits(A.inv))) why = 'there was no room at the table';
   // a reserved person often declines a crowded table, and that is not a slight (rich only)
-  else if (isRich(world) && isReserved(B) && m.accepted.length >= 3 && hashUnit(B.id, A.id, world.tick >> 4) < 0.6) why = 'would rather eat quietly tonight';
+  else if (isRich(world) && isReserved(B) && (hasMeetingKnowledge(world)?m.heard![A.id].accepted.length:m.accepted.length) >= 3 && hashUnit(B.id, A.id, world.tick >> 4) < 0.6) why = 'would rather eat quietly tonight';
   else {
     const w = 0.34 + 0.4 * B.traits.sociability + 0.3 * Math.max(0, aff) / 100 + (hungry ? 0.18 : 0) + (B.hhId === A.hhId ? 0.2 : 0) - 0.4 * (Math.max(0, 40 - B.needs.energy) / 40);
     if (hashUnit(B.id, A.id, world.tick >> 4) > w) why = 'preferred to stay on with their own plans';
   }
   noteContact(world, 'invitation', A.id, B.id, `${m.id}:${world.tick}`);
   if (why) {
+    hearReply(world,m,A,B,why);
     m.missed[B.id] = `declined: ${why}`;
     A.cooldowns['invite' + B.id] = world.tick + INVITE_COOLDOWN;
     bubble(world, B, why === 'there was no room at the table' ? 'Save it for the others — thank you.' : 'Thank you, but not tonight.', 'say', 52);
@@ -417,6 +456,7 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
     return;
   }
   m.accepted.push(B.id);
+  hearReply(world,m,A,B,'');
   m.reserved = m.accepted.length;
   // the invitation carries the place with it: the guest now knows where to go (and how old that knowledge is)
   const pb = A.beliefs[m.placeId];
@@ -429,11 +469,17 @@ export function inviteRespond(world: World, A: Person, B: Person, mealId: number
 }
 
 // ───────────────────────── endings ─────────────────────────
-export function cancelMeal(world: World, m: Meal, why: string): void {
+export function cancelMeal(world: World, m: Meal, why: string,actor?:Person): void {
   if (m.status === 'done' || m.status === 'cancelled') return;
   m.status = 'cancelled';
   m.end = why;
   returnTable(world, m);
+  if(hasMeetingKnowledge(world)){
+    if(actor&&actor.id===m.host){endMeetingKnowledge(world,m,actor,{source:'own choice',reason:why});actor.cooldowns.hostMeal=world.tick+HOST_COOLDOWN_FAILED;}
+    for(const [id,k] of Object.entries(m.heard??{})){const p=personById(world,Number(id));if(p&&atMeeting(p,k)&&k.sawTable)endMeetingKnowledge(world,m,p,{source:'local experience',reason:k.ateAt!==undefined?'I ate at the table':'The table stopped serving; I do not know every cause'});}
+    if(m.accepted.length)addEvent(world,'social',`The shared meal at ${m.placeName} was called off (${why}).`,[m.host,...m.accepted].slice(0,3),m.x,m.y);
+    return;
+  }
   const host = personById(world, m.host);
   if (host) {
     host.cooldowns.hostMeal = world.tick + HOST_COOLDOWN_FAILED;
@@ -489,7 +535,10 @@ function finishMeal(world: World, m: Meal): void {
   finishSupperPractice(world,m);
   returnTable(world, m);
   const host = personById(world, m.host);
-  if (host) host.cooldowns.hostMeal = world.tick + HOST_COOLDOWN_DONE;
+  if (host && (!hasMeetingKnowledge(world)||atMeeting(host,m))) {
+    host.cooldowns.hostMeal = world.tick + HOST_COOLDOWN_DONE;
+    if(hasMeetingKnowledge(world)&&m.heard?.[host.id]?.sawTable)endMeetingKnowledge(world,m,host,{source:'local experience',reason:m.heard[host.id].ateAt!==undefined?'I ate at the shared table':'The shared meal here finished'});
+  }
   const ate = m.ate.map((id) => personById(world, id)).filter((x): x is Person => !!x);
   for (const a of ate)
     for (const b of ate) {
@@ -511,6 +560,8 @@ function finishMeal(world: World, m: Meal): void {
 // ───────────────────────── upkeep ─────────────────────────
 export function mealTick(world: World): void {
   for (const m of world.meals) {
+    const knownCancellation=updateMeetingKnowledge(world,m);
+    if(knownCancellation)cancelMeal(world,m,knownCancellation,personById(world,m.host)??undefined);
     if (m.status === 'done' || m.status === 'cancelled') continue;
     const host = personById(world, m.host);
     if (!host || !host.alive) {
@@ -598,15 +649,21 @@ registerHandler('host_meal', {
   pose: (a) => (a.data.eating ? 'eat' : a.data.laid ? 'sit' : 'store'),
   begin(world, p, a) {
     const m = mealById(world, a);
+    if(hasMeetingKnowledge(world)){
+      const k=m?.heard?.[p.id];if(!m||m.host!==p.id||!k||k.ended)return 'I no longer have this hosting arrangement';
+      if(!atMeeting(p,k))return 'must reach the agreed place outdoors';
+      if(!k.accepted.length){cancelMeal(world,m,'nobody accepted the invitation',p);return 'nobody accepted the invitation';}
+      if(m.status==='done'||m.status==='cancelled'){endMeetingKnowledge(world,m,p,{source:'local experience',reason:'I reached the place, but this meal is no longer being served'});return 'the meal is not being served here';}
+    }
     if (!m || m.status === 'done' || m.status === 'cancelled') return 'the meal was called off';
     a.duration = 30;
     if (m.status === 'inviting') {
       // lay the table with food that is really in the pack
       if(hasMealLeftovers(world))m.tableOwnerHh=p.hhId;
-      const need = m.accepted.length + 1;
+      const need = (hasMeetingKnowledge(world)?m.heard?.[p.id]?.accepted.length??0:m.accepted.length) + 1;
       let have = foodUnits(p.inv);
       if (have < need) {
-        cancelMeal(world, m, 'the host did not have enough food after all');
+        cancelMeal(world, m, 'the host did not have enough food after all',p);
         return 'not enough food to lay a table';
       }
       let left = need + Math.min(1, have - need);
@@ -622,16 +679,18 @@ registerHandler('host_meal', {
       m.servings = tableUnits(m);
       have = m.servings;
       if (have < need) {
-        cancelMeal(world, m, 'the host did not have enough food after all');
+        cancelMeal(world, m, 'the host did not have enough food after all',p);
         return 'not enough food to lay a table';
       }
       m.status = 'gathering';
+      if(hasMeetingKnowledge(world)&&m.heard?.[p.id])m.heard[p.id].sawTable=true;
       addFx(world, 'built', m.x, m.y, 0);
       bubble(world, p, 'Come and eat — the table is ready.', 'say', 60);
     }
   },
   work(world, p, a): WorkResult {
     const m = mealById(world, a);
+    if(hasMeetingKnowledge(world)&&m){const k=m.heard?.[p.id];if(!k||!atMeeting(p,k))return 'fail:must remain at the agreed table outdoors';}
     if (!m) return 'fail:the meal was called off';
     if (m.status === 'cancelled') return 'fail:the meal was called off';
     if (m.status === 'done') return 'done';
@@ -642,6 +701,7 @@ registerHandler('host_meal', {
       a.progress++;
       if (a.progress >= 22 && !m.ate.includes(p.id)) {
         if (eatServing(world, m, p)) {
+          if(hasMeetingKnowledge(world)&&m.heard?.[p.id])m.heard[p.id].ateAt=world.tick;
           m.ate.push(p.id);
           a.cycle++;
         } else m.ate.push(p.id);
@@ -660,7 +720,7 @@ registerHandler('host_meal', {
     const m = mealById(world, a);
     if (m && (m.status === 'inviting' || m.status === 'gathering') && outcome !== 'success') {
       // the host was pulled away before the meal began
-      if (m.host === p.id) cancelMeal(world, m, detail.includes('wolf') || detail.includes('danger') ? 'danger' : `the host had to leave (${detail})`);
+      if (m.host === p.id) cancelMeal(world, m, detail.includes('wolf') || detail.includes('danger') ? 'danger' : `the host had to leave (${detail})`,p);
     }
   },
 });
@@ -670,6 +730,13 @@ registerHandler('attend_meal', {
   pose: (a) => (a.data.eating ? 'eat' : 'sit'),
   begin(world, p, a) {
     const m = mealById(world, a);
+    if(hasMeetingKnowledge(world)){
+      const k=m?.heard?.[p.id];if(!m||!k||k.reply!=='accepted'||k.ended)return 'I no longer have this accepted arrangement';
+      if(!atMeeting(p,k))return 'must reach the agreed place outdoors';
+      k.arrivedAt=world.tick;a.duration=24;faceToward(p,k.x,k.y-1);
+      if(m.status==='done'||m.status==='cancelled'){a.label='Waiting at the agreed meal place';return;}
+      k.sawTable=tableUnits(m)>0;
+    }
     if (!m || m.status === 'done' || m.status === 'cancelled') return 'the meal was called off';
     if (!m.arrived.includes(p.id)) m.arrived.push(p.id);
     a.duration = 24;
@@ -677,6 +744,15 @@ registerHandler('attend_meal', {
   },
   work(world, p, a): WorkResult {
     const m = mealById(world, a);
+    if(hasMeetingKnowledge(world)){
+      const k=m?.heard?.[p.id];if(!m||!k)return 'fail:the heard arrangement is no longer retained';
+      if(!atMeeting(p,k))return 'fail:must remain at the agreed place outdoors';
+      if(k.ended)return k.ateAt!==undefined?'done':`fail:${k.ended.reason}`;
+      if(p.needs.thirst<14||p.needs.energy<8)return 'fail:an urgent need of my own came first';
+      if(world.tick>k.at+500){endMeetingKnowledge(world,m,p,{source:'own timeout',reason:'I waited through the agreed window; the cause is unknown'});return 'fail:the agreed waiting window passed';}
+      if(m.status==='done'||m.status==='cancelled'){a.label='Waiting at the agreed meal place';return 'continue';}
+      k.sawTable=tableUnits(m)>0;
+    }
     if (!m) return 'fail:the meal was called off';
     if (m.status === 'cancelled') return 'fail:the meal was called off';
     if (m.status === 'done') return m.ate.includes(p.id) ? 'done' : 'fail:it was over before they ate';
@@ -693,6 +769,7 @@ registerHandler('attend_meal', {
       a.progress++;
       if (a.progress >= a.duration && !m.ate.includes(p.id)) {
         if (eatServing(world, m, p)) {
+          if(hasMeetingKnowledge(world)&&m.heard?.[p.id]){m.heard[p.id].ateAt=world.tick;endMeetingKnowledge(world,m,p,{source:'local experience',reason:'I ate at the shared table'});}
           m.ate.push(p.id);
           a.cycle++;
           return 'done';
@@ -706,6 +783,7 @@ registerHandler('attend_meal', {
   },
   onEnd(world, p, a, outcome, detail) {
     const m = mealById(world, a);
+    if(hasMeetingKnowledge(world)&&m&&outcome!=='success')endMeetingKnowledge(world,m,p,{source:'own choice',reason:detail});
     if (m && outcome !== 'success' && m.status !== 'done' && m.status !== 'cancelled') {
       m.arrived = m.arrived.filter((x) => x !== p.id);
       m.missed[p.id] ??= detail;

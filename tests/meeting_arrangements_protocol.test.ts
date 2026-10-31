@@ -1,0 +1,23 @@
+import {expect,it} from 'vitest';
+import {leftoverScene} from './helpers/meal_leftovers';
+import {cancelMeal} from '../src/sim/meals';
+import {stubModel} from '../src/agent/model';
+import {runLive,runReplay} from '../src/agent/run';
+import {observationFromPrompt,observationVersionFor,PROTOCOL_V27,PROTOCOL_V28} from '../src/agent/protocol';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+import {observeInhabitant} from '../src/agent/observe';
+import {generateOptions,rankOptions} from '../src/sim/decision';
+it.each([false,true])('exposes only the AI guest\'s heard appointment and replays actual uninformed waiting (memory %s)',async memory=>{
+ const f=leftoverScene(91,false);f.w.tick=f.meal.at-80;f.guest.cooldowns.pause=0;f.guest.nextThink=0;
+ const ctx=generateOptions(f.w,f.guest,true,true),before=observeInhabitant(f.w,f.guest,ctx,rankOptions(ctx));
+ cancelMeal(f.w,f.meal,'the host secretly lost the supplies');
+ const afterCtx=generateOptions(f.w,f.guest,true,true),after=observeInhabitant(f.w,f.guest,afterCtx,rankOptions(afterCtx));
+ expect(after.people.meetings).toEqual(before.people.meetings);expect(after.people.meetings![0].ending).toBeUndefined();
+ expect(observeInhabitant(f.w,f.guest,afterCtx,rankOptions(afterCtx),{version:15}).people).not.toHaveProperty('meetings');
+ for(const old of [PROTOCOL_V27,PROTOCOL_V28])expect(observationVersionFor(old)).toBe(15);
+ const initial=serializeWorld(f.w),model=stubModel('keep-heard-appointment',req=>{const o=observationFromPrompt(req.user)!;expect(o.people.meetings![0].ending).toBeUndefined();const choice=o.options.find(x=>x.key===`attend_meal:${f.meal.id}`)??o.options[0];return JSON.stringify({choose:choice.key,why:'Go to the appointment I accepted'});});
+ const result=await runLive(f.w,f.guest.id,model,{until:f.w.tick+250,memory});
+ expect(result.transcript.asks.some(a=>a.observation.options.some(o=>o.key===`attend_meal:${f.meal.id}`))).toBe(true);
+ expect(result.world.persons.find(p=>p.id===f.guest.id)!.activity?.kind).toBe('attend_meal');
+ expect(serializeWorld(runReplay(deserializeWorld(initial),result.transcript).world)).toBe(serializeWorld(result.world));
+});

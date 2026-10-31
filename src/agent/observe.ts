@@ -48,7 +48,7 @@ import { hyp } from '../sim/util';
 // 13 adds dated coarse ecological signs and remembered field rest, never live soil data.
 // 14 adds dated coarse natural-water supply, never exact remote hydrological stock.
 // 15 adds dated local flood-ground observations, without actual recovery deadlines.
-export const OBSERVATION_VERSION = 15;
+export const OBSERVATION_VERSION = 16;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -167,6 +167,7 @@ export interface InhabitantObservation {
     worries: { about: string; kind: string; seen: string; source: string }[];
     requests: { direction: 'I asked' | 'asked of me'; other: string; what: string; status: string; note: string; when: string }[];
     promises: { text: string; status: string; detail: string; due: string }[];
+    meetings?: {id:number;host:string;place:string;agreedAt:number;heardAt:number;from:number;conversationId?:number;reply:string;arrivedAt?:number;ateAt?:number;ending?:{tick:number;source:string;reason:string};laterExplanation?:{tick:number;source:string;reason:string}}[];
   };
   /** p.log, p.failures */
   recent: { memory: { when: string; text: string; kind: string; t?: number }[]; failures: { place: string; when: string; reason: string }[] };
@@ -596,7 +597,8 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     doing,
     seen: { people: seenPeople, wolves },
     remembered: { places, water, dangers, counts, ...(version>=15?{floods:nearest(byKind.flood,12).map(b=>describePlace(world,p,b,version))}:{}) },
-    people: { relations: relations.slice(0, 14), whereabouts, worries, requests: requests.slice(0, 8), promises },
+    people: { relations: relations.slice(0, 14), whereabouts, worries, requests: requests.slice(0, 8), promises,
+      ...(version>=16?{meetings:world.meals.filter(m=>!!m.heard?.[p.id]).slice(-6).map(m=>{const k=m.heard![p.id];return {id:m.id,host:k.hostName,place:k.placeName,agreedAt:k.at,heardAt:k.heardAt,from:k.from,...(k.conversationId?{conversationId:k.conversationId}:{}),reply:k.reply,...(k.arrivedAt!==undefined?{arrivedAt:k.arrivedAt}:{}),...(k.ateAt!==undefined?{ateAt:k.ateAt}:{}),...(k.ended?{ending:{tick:k.ended.tick,source:k.ended.source,reason:k.ended.reason}}:{}),...(k.laterExplanation?{laterExplanation:{tick:k.laterExplanation.tick,source:k.laterExplanation.source,reason:k.laterExplanation.reason}}:{})};})}:{}) },
     recent: {
       memory: p.log
         .slice(-14)

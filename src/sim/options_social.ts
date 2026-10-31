@@ -1,3 +1,4 @@
+import {pendingMeetingUpdates} from './meeting_knowledge';
 import {pendingDelayProposals} from './promise_delays';
 import {pendingCancellations} from './request_cancellation';
 import {expectsCare} from './promise_expectations';
@@ -690,6 +691,13 @@ export function socialOptions(ctx: Ctx): void {
   aloneOptions(ctx);
   welfareOptions(ctx);
   seekCarerOptions(ctx);
+  let meetingsOffered=0;
+  for(const update of pendingMeetingUpdates(ctx.world,ctx.p)){
+    const c=candidates(ctx).find(c=>c.q.id===update.guest&&c.d<=14);if(!c)continue;
+    const sc=new Scorer().add('I need to tell them our meal arrangement ended',30).add('walking',-pen(c.d*6));
+    mkSocial(ctx,c,'cancel_meeting',{mealId:update.meal.id},`Explain the cancelled meal to ${c.q.name}`,'to communicate a change to our arrangement',null,sc,'meal-update',':'+update.meal.id);
+    if(++meetingsOffered>=2)break;
+  }
   let delaysOffered=0;
   for(const promise of pendingDelayProposals(ctx.world,ctx.p)){
     const c=candidates(ctx).find(c=>c.q.id===promise.to&&c.d<=14);if(!c)continue;

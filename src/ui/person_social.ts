@@ -37,6 +37,9 @@ const PROMISE_BADGE: Record<string, [tone: string, label: string, tip: string]> 
 };
 
 const MEAL_BADGE: Record<string, [tone: string, label: string]> = {
+  agreed: ['info', 'Agreed'],
+  waiting: ['accent', 'Waiting'],
+  missed: ['muted', 'Window passed'],
   inviting: ['info', 'Inviting'],
   gathering: ['accent', 'Gathering'],
   eating: ['good', 'Eating'],
@@ -174,7 +177,8 @@ function makeMealBlock(label: string, live: boolean, deps: SocialDeps): MealBloc
   const tableV = h('dd');
   const tableRow = h('div', { class: 'sx-kv' }, h('dt', null, 'On the table'), tableV);
   const endV = h('dd');
-  const endRow = h('div', { class: 'sx-kv' }, h('dt', null, 'How it ended'), endV);
+  const endLabel=h('dt',null,'How it ended');
+  const endRow = h('div', { class: 'sx-kv' }, endLabel, endV);
   const guests = new KeyedList<MealView['guests'][number], GuestRow>(
     guestsBox,
     () => {
@@ -221,6 +225,7 @@ function makeMealBlock(label: string, live: boolean, deps: SocialDeps): MealBloc
       setText(tableV, table || 'nothing yet');
       setHidden(tableRow, over && !table);
       setText(endV, m.end ? cap(m.end) : '');
+      setText(endLabel,m.personal?'What they know':'How it ended');
       setHidden(endRow, !m.end);
     },
   };

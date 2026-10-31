@@ -2,6 +2,7 @@ import { validateEcology } from '../sim/ecology';
 import { validateFlood } from '../sim/flood';
 import { validateOffcuts } from '../sim/offcuts';
 import { validateMealLeftovers } from '../sim/meal_leftovers';
+import { validateMeetingKnowledge } from '../sim/meeting_knowledge';
 import { validateWater } from '../sim/hydrology';
 import {validatePromiseDelays} from '../sim/promise_delays';
 import {validateRequestCancellation} from '../sim/request_cancellation';
@@ -274,6 +275,7 @@ export function deserializeWorld(json: string): World {
   validateFlood(w);
   validateOffcuts(w);
   validateMealLeftovers(w);
+  validateMeetingKnowledge(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);
   w.pgrid = makeGrid(w.W, w.H);

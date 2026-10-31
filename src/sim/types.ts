@@ -144,6 +144,8 @@ export interface Relation {
   /** favours: >0 they owe me, <0 I owe them */
   debt: number;
   history: { tick: number; text: string }[];
+  /** Latest personally sourced attendance experience; no ability or bad-faith inference. */
+  meeting?: import('./meeting_knowledge').MeetingExperience;
   /** the live grievance this person holds against the other, if any (set by an actual incident, closed by amends or time) */
   grievance: Grievance | null;
   /** last time a grievance between these two was closed (stops a settled quarrel from starting the same apology loop again) */
@@ -1134,6 +1136,7 @@ export type ConvPurpose =
   | 'report'
   | 'cancel_request'
   | 'delay_request'
+  | 'cancel_meeting'
   | 'mediate'
   | 'teach_technique'
   | 'learn_technique';
@@ -1155,6 +1158,9 @@ export interface Conversation {
 
 // ───────────────────────────── shared meals ─────────────────────────────
 export interface Meal {
+  heard?: Record<number,import('./meeting_knowledge').HeardMeeting>;
+  replacesMealId?: number;
+  replacementId?: number;
   /** Household supplying the real table food, retained even if the host later dies or moves. */
   tableOwnerHh?: number;
   supperContact?: import('./household_practices').SupperContact;
