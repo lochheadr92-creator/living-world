@@ -38,4 +38,3 @@ describe('a broken cart spills its tools with their records', () => {
   it('A1-CART: spilled tools keep their records and move with their counts', () => cartBreaksWithAnAxe());
   it('rules 116 preserves the historical cart spill', () => cartBreaksWithAnAxe(116));
 });
-

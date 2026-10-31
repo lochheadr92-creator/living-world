@@ -108,6 +108,69 @@ through a tiny `vite-node` CLI, retaining the existing JavaScript-runner/toolcha
 The CLI integration regression fails before this correction and passes after it with native
 stripping disabled. Six loader/report/continuation files passed 11/11; stage typecheck passed.
 
+## Final verification and measurement
+
+VERIFIED / TURN_INTEGRATION_VERIFIED for the bounded Stage 3 repair contracts. Full tracked
+suite on runtime source `50f2f78`: **378 files, 2,360 tests passed**, no skips/todos, 449.89 s.
+The preserved review probes were excluded as required. Historical goldens and all old
+continuation reference files are unchanged. New immutable references are 117 and 118 only.
+The stage-scoped typecheck passed; it excludes the untracked review tests and is not a claim
+that those evidence probes compile. Vite's existing native-config warning and a timer-overflow
+warning appeared in the full log; neither was a test failure.
+
+All three 25-day Normal worlds completed 60,000 ticks with immigration off, exact
+unobserved twins, final save round trips and item conservation. Every report names clean
+HEAD `50f2f78a107718c7839a5265b041927d45545c55`, `dirty: false`, no modified tracked paths,
+and **255 LF-normalised source hashes**, each independently checked against the frozen files.
+
+| Seed | Retained rules-115 alive | Rules-118 alive | Rules-118 deaths | Carts at end |
+|---|---:|---:|---:|---:|
+| forest | 0 | 21 | 10 | 0 |
+| river | 30 | 23 | 7 | 0 |
+| meadow | 28 | 26 | 2 | 0 |
+
+These are measurements, not pass/fail survival targets. The predecessor numbers come from
+the unchanged review `agent_f/ordinary_probe_<seed>_60000.json` files. Versions 115 and 118
+differ in several repairs and subsequent trajectories/births; this is not a paired ablation
+and does not establish a general survival benefit or isolate any one repair. River and meadow
+have fewer survivors here. Ordinary carts remain absent. The Part A no-adoption result is
+reported separately above and is not replaced by these later measurements.
+
+Local evidence (not committed): `stage3_evidence/full-suite.log`, `measurement-summary.json`,
+`part-a-forest117/report.json`, `part-b-25days/production-{forest,river,meadow}/report.json`,
+and `part-b-25days/reports/summary.csv`. Before/after regression logs are retained alongside.
+
+Commands actually run from the integration checkout:
+
+```powershell
+node node_modules/typescript/bin/tsc --noEmit -p tsconfig.stage.json
+node node_modules/vitest/vitest.mjs run tests --exclude "tests/zz_review_*" --maxWorkers=4
+node node_modules/vite-node/dist/cli.mjs scripts/first_cart_trace.ts -- stage3_evidence/part-a-forest117 117
+& .\scripts\run_longruns.ps1 -Source "C:\dev\Claude Experiment\living-world-integrate" -OutputRoot "C:\dev\Claude Experiment\living-world-integrate\stage3_evidence\part-b-25days" -Seeds forest,river,meadow -Checks production -Days 25 -BudgetSeconds 600
+```
+
+Do not rerun observation commands into their existing evidence directories. The reference
+recorders were run once with `--write`; do not re-record them to accommodate successors.
+
+## Delivery boundary and rollback
+
+Stage 3 remains on `stage-3-chain-fixes`; no merge or push was performed for this stage.
+Main remains `dbe229e`. No Stage 4 work started. Runtime findings are separate commits:
+F1 `52ec833`, A1-CART `fb74c8c`, E2 `8332614`, M3 `00219d1`, E3 `22bf6c6`, M1 `25622b2`.
+Lab provenance is `caab8f2` plus the loader compatibility correction `7eaf900`.
+Reference/trace records are `e7600d4` and `50f2f78`.
+
+Rollback: revert the Stage 3 commits newest first, keeping the rule registrations and their
+new reference tests together; do not relabel saves or rewrite existing references. H1/save
+format is unchanged. Existing dirt and all review evidence are preserved.
+
+After owner acceptance, the local fast-forward route is:
+
+```powershell
+git -C "C:\dev\Claude Experiment\living-world-integrate" switch main
+git -C "C:\dev\Claude Experiment\living-world-integrate" merge --ff-only stage-3-chain-fixes
+```
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).
