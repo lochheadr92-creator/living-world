@@ -2,6 +2,14 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
+- Retained forest food-crisis diagnosis: days 18.1–24.1 at original rules 107,
+  exact twins/reload, 120 pure checks and conserved items. All 754 critical-hunger
+  samples have food offers, but 608 are travelling to gather; stores reach zero.
+  Nineteen hunger deaths remain. `FOREST_FOOD_CRISIS.md` records limits and a
+  separately reproduced wild-grain conversion that can create a seed after
+  consuming zero carried grain. That physical-accounting repair is next; no
+  pressure tuning or survival benefit has been claimed.
+
 - Rules 111: an admitted guest keeps the option for the gathering still
   underway; no second visit or extra reward. The rules-107 days-45–50 household
   baseline exposed 33 admitted guests all interrupted, and zero leisure-category
@@ -46,8 +54,12 @@
   This closes that staged paid replacement/use gap, not household viability or
   ordinary collapse reliability. Runtime `9b45375`, immutable reference `0b3e23f`
   (1/1 separately); full regression **344 files / 2,226 tests passed**, 491.69 s.
-  The 45-day Large meadow accumulation is now running on frozen rules-109 source;
-  mature Large performance is not yet measured.
+  Genuine Large meadow accumulation reached day 45 with 110 alive, three deaths
+  and zero carts. `MATURE_LARGE_109.md` / `31bbc03` retain generation and benchmark
+  evidence: tick p95 25.65 ms, inspection 10.65 ms, save/load 202.83/796.20 ms,
+  21.78 MB serialized, paused frame submission 4.80 ms, page heap after GC 79.35 MB.
+  Pure inspection, exact 240-tick saved continuations and conservation pass. These
+  are frozen rules-109 measurements, not final current-rules performance.
 
 - Published baseline `056dbac` full regression now verified on the owner's Windows
   machine: **339 files / 2,204 tests passed**, 556.86 seconds. This closes the

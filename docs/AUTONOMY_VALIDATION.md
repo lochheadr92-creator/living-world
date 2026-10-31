@@ -3,6 +3,19 @@
 The capability register remains `DEPENDENCY_CHAIN_PROGRAMME.md`. This file supplies runnable validation and records
 performance-method limits; it does not close any unimplemented capability or substitute for ordinary evidence.
 
+## 31 October 2026: genuine Large day-45 measurement at frozen rules 109
+
+Completed generation and headless/browser measurements are now retained in
+`MATURE_LARGE_109.md`, `autonomy_evidence/mature109-large-meadow-45` and
+`autonomy_evidence/perf109-large-mature`. The real world has 110 living inhabitants,
+three deaths and zero carts. Tick p95 is 25.65 ms; save/load 202.83/796.20 ms;
+serialized size 21,781,866 bytes; paused browser frame submission p95 4.80 ms.
+Observer purity, bounded saved continuations and item accounting pass. The machine
+was also doing development work. Rules 109 was frozen while later slices advanced;
+this does not close the final combined **current-rules** Large requirement. The
+older pending commands below remain runnable recipes, not a claim this retained
+rules-109 measurement has not been done.
+
 ## 31 October 2026: 45-day Normal observations at published rules 107
 
 The previously deferred work was run detached on the owner's Windows machine.
