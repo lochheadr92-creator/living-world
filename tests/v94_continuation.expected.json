@@ -1,0 +1,23 @@
+{
+  "source": "4f3c398f63b04c0adcbed74808b3e57226cb5a54, rules 94 before successor behaviour",
+  "ordinary": {
+    "saved": "07e5c7105ad6996e84d594ff332b5f182c5b3acf9947aec4200782b942741a3a",
+    "uninterrupted": "b5a693a4ae749701c1fc29589f2818b08f583956e373a79f41d7e2357eba664b",
+    "continued": "b5a693a4ae749701c1fc29589f2818b08f583956e373a79f41d7e2357eba664b"
+  },
+  "hearing": {
+    "saved": "45c40b11091e5c82ac3e1372cf26ae1e6a6d8266af0ffa2397751f8ee6240322",
+    "uninterrupted": "b154f0011e393ce1d2c7df59c41af45a592e0477c610bbd0ff92ef3cdabed680",
+    "continued": "b154f0011e393ce1d2c7df59c41af45a592e0477c610bbd0ff92ef3cdabed680"
+  },
+  "delivery": {
+    "saved": "9cfe0a3dfb1d9d63149069bb65af562de7a3b16b952cdd225d7a77f85836b3fa",
+    "uninterrupted": "5fa73550ed3f93ea9389bc4b682b6ee6ab47cb82b1b4a65e48e87c32f3e7b348",
+    "continued": "5fa73550ed3f93ea9389bc4b682b6ee6ab47cb82b1b4a65e48e87c32f3e7b348"
+  },
+  "handback": {
+    "saved": "438a86c74df344fb4889628ea8bc6edde9ba5dab9f52ada47686c987261f28be",
+    "uninterrupted": "2fc6a5a8a4dc1cc8b6fea24dea9331868c5c7270ff80fdd58cac2462c57f3d49",
+    "continued": "2fc6a5a8a4dc1cc8b6fea24dea9331868c5c7270ff80fdd58cac2462c57f3d49"
+  }
+}
