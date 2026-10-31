@@ -1,4 +1,6 @@
 import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
+import { floodMovementBlocked, floodSpeed, hasFloodAccess, knownFloodCosts, observeFlood } from './flood';
+import { floodEscapePath, waitForFlood } from './flood_access';
 import { injuryFactor } from './life';
 import {recordRouteDeparture,recordRouteArrival,recordRouteFailure} from './route_learning';
 import { hasLayoutClaims, layoutClaimBlock } from './layout_claims';
@@ -164,6 +166,7 @@ export function moveSpeed(world: World, p: Person, run = false): number {
   if (p.health < 70) s *= 0.55 + 0.45 * (p.health / 70);
   if (p.injury) s *= injuryFactor(world, p);
   s *= terrainSpeed(world, p.x, p.y);
+  s *= floodSpeed(world,p);
   if (p.cartId) s *= cartSpeedFactor(world, p);
   if (world.light < 0.3) s *= 0.93;
   s *= 1 - 0.16 * world.weather.storm;
@@ -201,14 +204,14 @@ function groundBeside(world: World, p: Person, a: Activity): { x: number; y: num
   }
   cands.sort((m, n) => m.d - n.d);
   for (const c of cands.slice(0, 5)) {
-    const path = findPath(world, p.x, p.y, c.x, c.y, { exact: { x: c.x, y: c.y }, cart: p.cartId !== 0, caller: a.kind + '/beside' });
+    const path = findPath(world, p.x, p.y, c.x, c.y, { exact: { x: c.x, y: c.y }, cart: p.cartId !== 0, caller: a.kind + '/beside', localCosts:knownFloodCosts(world,p) });
     if (path) return { x: c.x, y: c.y, path };
   }
   return null;
 }
 
 function planPath(world: World, p: Person, a: Activity): boolean {
-  const path = findPath(world, p.x, p.y, a.spotX, a.spotY, { exact: { x: a.spotX, y: a.spotY }, cart: p.cartId !== 0, caller: a.kind });
+  const path = findPath(world, p.x, p.y, a.spotX, a.spotY, { exact: { x: a.spotX, y: a.spotY }, cart: p.cartId !== 0, caller: a.kind, localCosts:knownFloodCosts(world,p) });
   if (path === null) {
     if (a.targetType !== 'person') return false;
     const alt = groundBeside(world, p, a);
@@ -226,9 +229,23 @@ function planPath(world: World, p: Person, a: Activity): boolean {
 }
 
 function stepTravel(world: World, p: Person, a: Activity): TravelResult {
+  if(hasFloodAccess(world)){
+    if(a.data.floodRetreat&&a.pi>=a.path.length){delete a.data.floodRetreat;a.path=[];a.pi=0;a.pathTries=0;a.blocked='';}
+    if(!a.data.floodRetreat&&floodMovementBlocked(world,p,p.x,p.y)){
+      observeFlood(world,p);const escape=floodEscapePath(world,p);
+      if(!escape)return waitForFlood(world,p,a);
+      a.path=escape;a.pi=0;a.data.floodRetreat=true;delete a.data.floodWaitSince;a.blocked='';
+    }
+    if(a.data.floodWaitSince!==undefined){
+      if((world.tick-a.data.floodWaitSince)%30!==0)return waitForFlood(world,p,a);
+      observeFlood(world,p);if(!planPath(world,p,a))return waitForFlood(world,p,a);
+      delete a.data.floodWaitSince;a.blocked='';
+    }
+  }
   if (a.path.length === 0 && a.pi === 0 && a.pathTries === 0) {
     a.pathTries = 1;
     if (!planPath(world, p, a)) {
+      if(knownFloodCosts(world,p))return waitForFlood(world,p,a);
       a.blocked = 'no way to get there';
       return 'blocked';
     }
@@ -268,6 +285,15 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
     const dx = wx - p.x;
     const dy = wy - p.y;
     const d = hyp(dx, dy);
+    const step=Math.min(d,remaining),nx=d>1e-6?p.x+dx/d*step:p.x,ny=d>1e-6?p.y+dy/d*step:p.y;
+    if(hasFloodAccess(world)&&(!a.data.floodRetreat||!floodMovementBlocked(world,p,p.x,p.y))&&floodMovementBlocked(world,p,nx,ny)){
+      observeFlood(world,p);
+      if(a.data.floodObservedAt===undefined){a.data.floodObservedAt=world.tick;addLog(world,p,'work',`Saw flood-affected ground ahead during “${a.label}”; looking for a safe route.`);}
+      if(!planPath(world,p,a))return waitForFlood(world,p,a);
+      // The encounter is retained in the activity and personal log. A successful new
+      // route is not a current blocker while the traveller is moving around it.
+      a.blocked='';return 'moving';
+    }
     if (d > 1e-6) p.heading = turnToward(p.heading, Math.atan2(dy, dx), TURN_RATE * 1.3);
     if (d <= remaining) {
       p.x = wx;
@@ -299,7 +325,7 @@ function stepTravel(world: World, p: Person, a: Activity): TravelResult {
     a.lastX = p.x;
     a.lastY = p.y;
   }
-  return a.pi >= a.path.length ? 'arrived' : 'moving';
+  return a.pi >= a.path.length && !a.data.floodRetreat ? 'arrived' : 'moving';
 }
 
 // ───────────────────────── lifecycle of an activity ─────────────────────────
@@ -445,6 +471,13 @@ export function stepActivity(world: World, p: Person): void {
     endActivity(world, p, 'failed', 'unknown activity');
     return;
   }
+  if(!p.indoors&&a.phase==='work'&&floodMovementBlocked(world,p,p.x,p.y)){
+    // Completed transfers/work remain in their real owners. An unfinished cycle must be
+    // physically restarted after return; it cannot keep claiming or working across retreat.
+    releaseClaims(world,a.claims);a.claims=[];a.phase='travel';a.path=[];a.pi=0;a.pathTries=0;
+    a.data.floodInterruptedWorkAt=world.tick;observeFlood(world,p);
+    addLog(world,p,'work',`Flood-affected ground interrupted “${a.label}”; retreating with completed work retained.`);
+  }
   if (a.phase === 'travel') {
     const waiting = h.travelBlocker?.(world,p,a);
     if (waiting) { a.blocked=waiting; p.pose='stand'; return; }
@@ -455,7 +488,7 @@ export function stepActivity(world: World, p: Person): void {
       return;
     }
     if (r === 'moving') {
-      p.pose = a.data.run ? 'run' : 'walk';
+      p.pose = a.data.floodWaitSince!==undefined ? 'stand' : a.data.run ? 'run' : 'walk';
       return;
     }
     p.pose = 'stand';

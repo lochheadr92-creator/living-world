@@ -1,5 +1,6 @@
 import { biological, conditionAt, ecologyNotes, fieldResting, hasEcology } from './ecology';
 import { describeWater } from './inspect_water';
+import { describeFlood } from './inspect_flood';
 import {hasPromiseExpectations,personalRequests} from './promise_expectations';
 import { deceasedById } from './historical_index';
 import {describeRouteExperience} from './route_learning';
@@ -300,6 +301,9 @@ function buildQA(world: World, p: Person): PersonView['qa'] {
     if (a.phase === 'travel') {
       const dist = hyp(a.spotX - p.x, a.spotY - p.y);
       doing = `${a.label}${tgt ? ` — walking to ${tgt}` : ''} (${dist.toFixed(0)} tiles to go).`;
+      if(a.data.floodRetreat)doing=`Retreating from flood-affected ground before resuming “${a.label}”.`;
+      else if(a.data.floodWaitSince!==undefined)doing=`Waiting for a safe route before resuming “${a.label}”.`;
+      else if(a.data.floodObservedAt!==undefined)doing=`${a.label} — following a revised route after seeing flood-affected ground (${dist.toFixed(0)} tiles to go).`;
     } else {
       const pct = a.duration > 0 ? Math.round((a.progress / a.duration) * 100) : 0;
       doing = a.duration > 0 ? `${a.label} (${pct}% of this task).` : `${a.label}.`;
@@ -702,6 +706,7 @@ export interface EntityView {
 
 export function describeEntity(world: World, id: number): EntityView | null {
   const water=describeWater(world,id);if(water)return water;
+  const flood=describeFlood(world,id);if(flood)return flood;
   const e = world.byId.get(id);
   if (!e) return null;
   if (e.ent === 'person') return null;

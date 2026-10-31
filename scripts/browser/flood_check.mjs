@@ -1,0 +1,32 @@
+import {existsSync,mkdirSync,writeFileSync} from 'node:fs';
+import {resolve,join,sep} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomUUID} from 'node:crypto';
+import {launch} from './cdp.mjs';
+const [url='http://127.0.0.1:5290/',out='autonomy_evidence/flood88-rendered']=process.argv.slice(2);
+if(existsSync(out))throw new Error('Fresh output required');
+const root=resolve(tmpdir()),profile=resolve(join(root,'living-world-flood-'+randomUUID()));if(!profile.startsWith(root+sep)||existsSync(profile))throw new Error('Unsafe temporary profile');
+let occupied=false;try{await fetch('http://127.0.0.1:9367/json/version');occupied=true;}catch{}if(occupied)throw new Error('Browser port in use');
+mkdirSync(out,{recursive:true});const b=await launch({port:9367,width:1440,height:1000,profile}),checks=[];
+const check=(name,ok,detail)=>{checks.push({name,ok:!!ok,detail});console.log(`${ok?'PASS':'FAIL'} ${name}`);};
+const shot=async name=>{await b.evaluate('window.__ui.update(1)');await b.sleep(220);await b.shot(join(out,name+'.png'));return b.evaluate("document.querySelector('.insp-entity')?.textContent||''");};
+try{
+ await b.send('Page.addScriptToEvaluateOnNewDocument',{source:'localStorage.setItem('+JSON.stringify('living-world:prefs:v1')+','+JSON.stringify(JSON.stringify({inspectorOpen:true,feedOpen:true}))+');localStorage.setItem('+JSON.stringify('living-world:ui:v1')+','+JSON.stringify(JSON.stringify({hinted:true}))+');'});
+ await b.send('Page.navigate',{url});for(let n=0;n<80&&!await b.evaluate('!!window.__game');n++)await b.sleep(100);
+ await b.evaluate(`(async()=>{const fixture=await import('/tests/helpers/flood.ts'),save=await import('/src/app/save.ts'),flood=await import('/src/sim/flood.ts'),view=await import('/src/sim/inspect_flood.ts'),{stepWorld}=await import('/src/sim/world.ts'),{setExternalController}=await import('/src/sim/external.ts'),{project}=await import('/src/render/iso.ts'),{worldToScreen}=await import('/src/render/camera.ts'),econ=await import('/src/sim/economy.ts');const f=fixture.floodScene();Object.assign(f,{fixture,save,flood,view,stepWorld,setExternalController,project,worldToScreen,econ});window.__flood=f;f.w.weather.storm=0;const g=window.__game;g.setPlaying(false);g.restoreWorld(f.w,f.w.settings);const pt=project(43,40);g.fly=null;g.camera={x:pt.sx+100,y:pt.sy,zoom:2};})()`);
+ await shot('dry-route-before-onset');
+ const onset=await b.evaluate(`(()=>{const f=window.__flood;f.a=f.fixture.startFloodJourney(f);f.release=f.setExternalController({controls:()=>true,choose:()=>({kind:'defer'})});for(let n=0;n<15;n++)f.stepWorld(f.w);f.w.weather.storm=1;const began=f.flood.beginFlood(f.w);f.saved=f.save.serializeWorld(f.w);f.twin=f.save.deserializeWorld(f.saved);const g=window.__game,c=document.querySelector('canvas').getBoundingClientRect(),at=f.worldToScreen(g.camera,c.width,c.height,41.5,40.5);return {began,phase:f.a.phase,path:f.a.path.length,x:f.p.x,click:{x:c.left+at.x,y:c.top+at.y}};})()`);
+ check('real offered journey departs before declared storm onset',onset.began&&onset.phase==='travel'&&onset.path>0&&onset.x>36.5,onset);
+ await b.click(onset.click.x,onset.click.y);const text=await shot('flooded-route-after-departure');check('real ground click explains retained flood and access',text.includes('Flooded ground')&&text.includes('Unsafe to enter')&&text.includes('Storm over'),text);
+ check('rendered ground and inspector are pure',await b.evaluate('window.__flood.saved===window.__flood.save.serializeWorld(window.__flood.w)'));
+ const detour=await b.evaluate(`(()=>{const f=window.__flood;for(let n=0;n<250&&Math.abs(f.p.y-40.5)<1.1;n++){f.stepWorld(f.w);f.stepWorld(f.twin);}window.__game.select(f.p.id);return {x:f.p.x,y:f.p.y,memories:f.p.bykind.flood?.length??0,unsafe:f.flood.floodAt(f.w,f.p.x,f.p.y)==='flooded',notice:f.a.data.floodObservedAt};})()`);
+ check('traveller notices local ground and takes a real detour',Math.abs(detour.y-40.5)>1&&detour.memories>0&&!detour.unsafe,detour);await shot('actual-detour-and-person');
+ const completion=await b.evaluate(`(()=>{const f=window.__flood;for(let n=0;n<550&&f.p.activity?.id===f.a.id;n++){f.stepWorld(f.w);f.stepWorld(f.twin);}const equal=f.save.serializeWorld(f.w)===f.save.serializeWorld(f.twin);return {equal,cycles:f.a.cycle,berries:f.p.inv.berries??0,ledger:f.econ.conservationReport(f.w).ok};})()`);
+ check('detour completes physical food gathering with exact saved continuation',completion.equal&&completion.cycles>0&&completion.berries>0&&completion.ledger,completion);await shot('gathered-food-after-detour');
+ const recovery=await b.evaluate(`(()=>{const f=window.__flood;while(f.w.tick<f.w.flood.activeUntil)f.stepWorld(f.w);window.__game.select(f.view.floodViewAt(f.w,41,40));return {phase:f.flood.floodAt(f.w,41,40),saved:f.save.serializeWorld(f.save.deserializeWorld(f.save.serializeWorld(f.w)))===f.save.serializeWorld(f.w)};})()`);
+ const recoveryText=await shot('recovering-ground');check('real time changes flood ground to slow recovery with a valid save',recovery.phase==='recovering'&&recovery.saved&&recoveryText.includes('Slow on foot; carts wait'),recovery);
+ const clear=await b.evaluate(`(()=>{const f=window.__flood,end=f.w.flood.recoveryUntil;while(f.w.tick<=end)f.stepWorld(f.w);window.__game.restoreWorld(f.w,f.w.settings);const pt=f.project(43,40);window.__game.fly=null;window.__game.camera={x:pt.sx+100,y:pt.sy,zoom:2};return {cleared:!f.w.flood,ledger:f.econ.conservationReport(f.w).ok};})()`);
+ await shot('ground-after-natural-recovery');check('natural recovery clears the footprint without creating goods',clear.cleared&&clear.ledger,clear);
+ const errors=b.events.filter(e=>e.method==='Runtime.exceptionThrown');check('no browser exceptions',errors.length===0,errors);
+ writeFileSync(out+'/report.json',JSON.stringify({rules:88,evidence:'STAGED small shore, manually selected offered food journey, declared storm after departure; physical detour, gathering, saved continuation and elapsed natural recovery. Not ordinary flood occurrence or benefit.',checks},null,2));if(checks.some(c=>!c.ok))process.exitCode=1;
+}finally{try{await b.evaluate('window.__flood?.release?.()');}catch{}await b.close();}

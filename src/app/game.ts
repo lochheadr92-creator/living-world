@@ -1,5 +1,6 @@
 // The app controller: owns the world, the fixed-timestep clock and view state (selection, camera, overlays).
 import { selectedWater } from '../sim/inspect_water';
+import { selectedFlood } from '../sim/inspect_flood';
 // It knows nothing about canvases or DOM, so it is unit-testable and the simulation can never depend on frame rate.
 import { TPS } from '../sim/constants';
 import { createWorld, defaultSettings } from '../sim/factory';
@@ -193,7 +194,7 @@ export class Game {
 
   private tickOnce(): void {
     stepWorld(this.world);
-    if (this.selectedId && !this.world.byId.has(this.selectedId) && !selectedWater(this.world,this.selectedId)) {
+    if (this.selectedId && !this.world.byId.has(this.selectedId) && !selectedWater(this.world,this.selectedId) && !selectedFlood(this.world,this.selectedId)) {
       // the selected person died or the thing was removed
       this.selectedId = 0;
       this.following = false;

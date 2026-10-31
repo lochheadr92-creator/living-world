@@ -1,5 +1,6 @@
 import type { CameraState } from '../app/game';
 import { waterBodyAt, waterSign } from '../sim/hydrology';
+import { floodAt } from '../sim/flood';
 import { hashString, hashUnit } from '../sim/rng';
 import { T } from '../sim/types';
 import type { World } from '../sim/types';
@@ -175,7 +176,8 @@ export class TerrainPainter {
           k = Math.max(0, Math.min(STEPS - 1, k + Math.round(wave * 0.9)));
         }
         const waterBody=waterBodyAt(world,x,y),supply=waterBody?waterSign(waterBody):undefined;
-        ctx.fillStyle = supply==='dry' ? '#a69b7a' : supply==='low' ? mix(PAL[type][k],'#b6ad87',0.5) : PAL[type][k];
+        const flood=floodAt(world,x,y);
+        ctx.fillStyle = flood==='flooded' ? mix(PAL[type][k],'#4d96b7',0.78) : flood==='recovering' ? mix(PAL[type][k],'#705a45',0.65) : supply==='dry' ? '#a69b7a' : supply==='low' ? mix(PAL[type][k],'#b6ad87',0.5) : PAL[type][k];
         ctx.beginPath();
         ctx.moveTo(sx, sy - 0.6);
         ctx.lineTo(sx + 32.9, sy + 16);

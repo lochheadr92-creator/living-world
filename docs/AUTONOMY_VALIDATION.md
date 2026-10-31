@@ -198,3 +198,26 @@ npx vite-node scripts/lab_report.ts -- "$runRoot-water-ensemble"
 The prior repository estimate for this scale is about 90 minutes on 24 busy cores; current
 cost is unmeasured. Retain displacement and adverse outcomes. The accumulated current-rules
 Large performance commands above remain necessary; short initial saves are not a substitute.
+
+## Rules 88 flood follow-up (pending owner-run measurements)
+
+The fixed five-day Normal screen is in `FLOOD_ACCESS.md`: one ordinary forest onset, none in
+river/meadow. Longer recurrence/recovery and combined benefit remain pending. Use fresh output
+folders after pulling the verified release; repeat existing ensemble instructions with the
+`rich-no-flood-access` arm for matched control/nudge/removal analysis. No result is implied.
+Three 45-day Normal observation commands are below. Based only on the measured five-day cost,
+allow roughly 5–15 minutes per seed; this extrapolation is not a mature-world benchmark. Each
+run stops with a non-success status at its explicit 1,200-second limit and preserves its report.
+Return each output folder's `report.json`; those scripts require a fresh destination.
+
+```powershell
+npx --no-install tsx scripts/flood_observe.ts river "$runRoot-flood-river45" 45 1200
+```
+
+```powershell
+npx --no-install tsx scripts/flood_observe.ts forest "$runRoot-flood-forest45" 45 1200
+```
+
+```powershell
+npx --no-install tsx scripts/flood_observe.ts meadow "$runRoot-flood-meadow45" 45 1200
+```

@@ -1,5 +1,6 @@
 import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
 import { waterSupplyNear } from './water_access';
+import { observeFlood } from './flood';
 import { SENSE_RADIUS } from './constants';
 import { indoorHome, sameSpace } from './habitation';
 import { ACCESS_CELL, delBelief, learn, observe, putBelief, snapshotEntity, waterBeliefId } from './knowledge';
@@ -115,6 +116,7 @@ export function stampExplored(world: World, p: Person, r: number): void {
  * Only things within the person's sensing radius become observations; everything seen is snapshotted into beliefs.
  */
 export function perceive(world: World, p: Person): void {
+  observeFlood(world,p);
   const r = senseRadius(world, p);
   p.seen.length = 0;
   let fresh = 0;
@@ -236,7 +238,7 @@ export function refreshBeliefs(world: World, p: Person): void {
       else if (b.amount > 0 && hyp(b.x - p.x, b.y - p.y) < r && !p.seen.some((s) => s.id === id)) b.amount = 0; // they looked, it is gone
       continue;
     }
-    if (b.kind === 'water') continue;
+    if (b.kind === 'water' || b.kind === 'flood') continue;
     if (!world.byId.has(id)) {
       if (hyp(b.x - p.x, b.y - p.y) < r) {observePromiseTarget(world,p,id,b.x,b.y);delBelief(p, id);}
     }

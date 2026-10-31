@@ -1,4 +1,5 @@
 import { updateEcology } from './ecology';
+import { updateFlood } from './flood';
 import { updateWater } from './hydrology';
 import { retainOperationalMemory } from './memory_retention';
 import { hasLayoutClaims, layoutFingerprint } from './layout_claims';
@@ -69,6 +70,7 @@ export function stepWorld(world: World): void {
   }
 
   updateEnvironment(world);
+  updateFlood(world);
   updateHardship(world);
   occasionsTick(world);
   crewsTick(world);
@@ -333,6 +335,8 @@ export function hashWorld(world: World): string {
   }
   if (world.ecology) push('Ecology' + JSON.stringify(world.ecology));
   if (world.waterBodies) push('WaterBudget' + JSON.stringify(world.waterBodies));
+  if (world.flood) push('Flood' + JSON.stringify(world.flood));
+  for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.kind==='flood')push('FloodMemory'+p.id+':'+JSON.stringify(b));
   for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.waterSupply !== undefined) push('WaterMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.waterSupply);
   for (const pl of world.plots) if (pl.fallowUntil !== undefined) push('FieldRest' + pl.id + ':' + pl.fallowUntil);
   for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.ecology !== undefined || b.fallowUntil !== undefined) push('EcologyMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.ecology + ':' + b.fallowUntil);

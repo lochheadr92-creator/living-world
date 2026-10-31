@@ -1,4 +1,5 @@
 import { hasWaterBudget } from './hydrology';
+import { beginFlood, floodAt, hasFloodAccess } from './flood';
 // Stakes: want and danger that reach people. Only in worlds with rich dynamics; every function here returns the neutral value (1 or 0)
 // in any other, so those worlds are unchanged to the last digit.
 //
@@ -84,11 +85,12 @@ export const DRY_GROWTH = 0.3;
 function floodTick(world: World): void {
   if (world.weather.storm < 0.92 || world.tick % 30 !== 7) return;
   if (world.tick - (world.lastFlood ?? -99999) < 3 * DAY) return;
+  if (hasFloodAccess(world) && !beginFlood(world)) return;
   world.lastFlood = world.tick;
   let lost = 0;
   let hit = 0;
   for (const pl of world.piles.slice()) {
-    if (world.waterDist[pl.y * world.W + pl.x] > 2) continue;
+    if (hasFloodAccess(world) ? !floodAt(world,pl.x,pl.y) : world.waterDist[pl.y * world.W + pl.x] > 2) continue;
     for (const k of Object.keys(pl.items) as (keyof typeof pl.items)[]) {
       const n = pl.items[k] ?? 0;
       if (n > 0) {
@@ -101,7 +103,7 @@ function floodTick(world: World): void {
   for (const b of world.buildings) {
     if (b.type !== 'lean_to' && b.type !== 'hut') continue;
     const d = world.waterDist[Math.floor(b.y + b.h / 2) * world.W + Math.floor(b.x + b.w / 2)];
-    if (d > 2) continue;
+    if (hasFloodAccess(world) ? !floodAt(world,b.x+b.w/2,b.y+b.h/2) && !floodAt(world,b.doorX,b.doorY) : d > 2) continue;
     b.condition = Math.max(5, b.condition - 25);
     hit++;
   }

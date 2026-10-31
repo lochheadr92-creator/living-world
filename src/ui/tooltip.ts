@@ -1,4 +1,5 @@
 import { selectedWater } from '../sim/inspect_water';
+import { selectedFlood } from '../sim/inspect_flood';
 import { waterSign } from '../sim/hydrology';
 // Two small floating labels, each a single reused element:
 //  * the UI tooltip: any element with a data-tip attribute (delegated, so panels can scroll or clip freely)
@@ -104,6 +105,8 @@ export function createUITips(ctx: UICtx): Part {
 // ───────────────────────── hover tooltip ─────────────────────────
 function personActivity(p: Person): string {
   if (p.pose === 'sleep') return 'Sleeping';
+  if(p.activity?.data.floodRetreat)return 'Retreating from flood-affected ground';
+  if(p.activity?.data.floodWaitSince!==undefined)return 'Waiting for a safe route';
   if (p.activity) return p.activity.label;
   return 'Deciding what to do';
 }
@@ -190,10 +193,11 @@ export function createHoverTip(ctx: UICtx): Part {
       if (!hv || pressed) return hide();
       const e = game.world.byId.get(hv.id);
       const water=selectedWater(game.world,hv.id);
-      if (!e && !water) return hide();
+      const flood=selectedFlood(game.world,hv.id);
+      if (!e && !water && !flood) return hide();
       let name='';
       let act = '';
-      if(water){name=waterSign(water)==='dry'?'Dry water source':waterSign(water)==='low'?'Low water source':'Natural water source';act=`${water.amount} of ${water.capacity} water units; click for history`;} else if (e?.ent === 'person') {
+      if(flood){name=flood.sign==='flooded'?'Flooded ground':'Recovering shore';act='Click for actual ground condition and cause';}else if(water){name=waterSign(water)==='dry'?'Dry water source':waterSign(water)==='low'?'Low water source':'Natural water source';act=`${water.amount} of ${water.capacity} water units; click for history`;} else if (e?.ent === 'person') {
         name = e.name;
         act = personActivity(e);
       } else if (e?.ent === 'animal') {

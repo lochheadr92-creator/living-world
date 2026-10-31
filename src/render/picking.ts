@@ -1,3 +1,4 @@
+import {floodViewAt} from '../sim/inspect_flood';
 import type { Game } from '../app/game';
 import { waterBodyAt } from '../sim/hydrology';
 import { waterViewId } from '../sim/inspect_water';
@@ -132,5 +133,5 @@ export function pickEntity(game: Game, vw: number, vh: number, px: number, py: n
   });
   if(best)return best;
   const water=waterBodyAt(w,ground.x,ground.y);
-  return water?waterViewId(water):0;
+  return water?waterViewId(water):floodViewAt(w,ground.x,ground.y);
 }

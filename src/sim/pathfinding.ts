@@ -28,18 +28,21 @@ function ensure(n: number): void {
 
 /** set while a path is planned for someone pulling a cart: forest, stony ground and water are barred to wheels */
 let cartMode = false;
+let localCosts: ReadonlyMap<number,number> | undefined;
 
 /** movement cost multiplier of a tile, or 0 if impassable */
 export function tileCost(world: World, i: number): number {
   const t = world.terrain[i];
   if (t === T.DEEP || world.solid[i]) return 0;
   if (cartMode && (t === T.FOREST || t === T.STONY || t === T.SHALLOW)) return 0;
+  const local=localCosts?.get(i);
+  if(local===0)return 0;
   let c = 1;
   if (t === T.SHALLOW) c = 1.8;
   else if (t === T.FOREST) c = 1.12;
   const w = world.wear[i];
   if (w > 0) c *= 1 - 0.3 * Math.min(1, w);
-  return c;
+  return c*(local??1);
 }
 
 /** Speed multiplier for standing on the tile at (x, y). */
@@ -82,6 +85,8 @@ function lineClear(world: World, x0: number, y0: number, x1: number, y1: number)
 }
 
 export interface PathOpts {
+  /** Dated personal observations supplied by the caller; never current remote hazards. */
+  localCosts?: ReadonlyMap<number,number>;
   maxNodes?: number;
   /** accept any tile for which this returns true as the goal */
   goalFn?: (tx: number, ty: number) => boolean;
@@ -100,10 +105,12 @@ export interface PathOpts {
 export function findPath(world: World, sx: number, sy: number, gx: number, gy: number, opts: PathOpts = {}): number[] | null {
   if (probe.on) probe.pathCalls++;
   cartMode = !!opts.cart;
+  localCosts = opts.localCosts;
   try {
     return findPathInner(world, sx, sy, gx, gy, opts);
   } finally {
     cartMode = false;
+    localCosts = undefined;
   }
 }
 

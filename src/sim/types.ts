@@ -57,6 +57,7 @@ export interface Look {
 }
 
 export type BeliefKind =
+  | 'flood'
   | 'berry_bush'
   | 'fruit_tree'
   | 'tree'
@@ -1266,6 +1267,7 @@ export interface SpatialGrid {
 }
 
 export interface World {
+  flood?: import('./flood').Flood;
   waterBodies?: import('./hydrology').WaterBody[];
   ecology?: Record<number, import('./ecology').EcologicalCondition>;
   exchangeReceipts?: import('./exchange_journeys').ExchangeReceipt[];

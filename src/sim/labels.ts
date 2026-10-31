@@ -27,6 +27,7 @@ export const SOURCE_VERB: Record<SourceType, string> = {
 export const FOOD_VALUE: Record<string, number> = { berry_bush: 12, fruit_tree: 16, wild_grain: 22, fish_spot: 28 };
 
 export const BELIEF_NOUN: Record<BeliefKind, string> = {
+  flood: 'flood-affected ground',
   berry_bush: 'berry bush',
   fruit_tree: 'fruit tree',
   tree: 'tree',

@@ -47,7 +47,8 @@ import { hyp } from '../sim/util';
  * 12 explains personal trust used to select a project helper. */
 // 13 adds dated coarse ecological signs and remembered field rest, never live soil data.
 // 14 adds dated coarse natural-water supply, never exact remote hydrological stock.
-export const OBSERVATION_VERSION = 14;
+// 15 adds dated local flood-ground observations, without actual recovery deadlines.
+export const OBSERVATION_VERSION = 15;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -158,7 +159,7 @@ export interface InhabitantObservation {
   /** p.seen */
   seen: { people: ObservedPerson[]; wolves: { x: number; y: number; distance: number; direction: string }[] };
   /** p.beliefs (nearest of each kind; `counts` says how many of each kind are known in all) */
-  remembered: { places: ObservedPlace[]; water: ObservedPlace[]; dangers: ObservedPlace[]; counts: Record<string, number> };
+  remembered: { places: ObservedPlace[]; water: ObservedPlace[]; dangers: ObservedPlace[]; floods?: ObservedPlace[]; counts: Record<string, number> };
   /** p.relations, p.whereabouts, p.concerns, world.requests where from/to is p, p.commitments */
   people: {
     relations: { id: number; name: string; label: string; affinity: number; trust: number; familiarity: number; kin: string; lastMet: string; avoiding: boolean; owesMe: number; lastNote: string; grievance: string | null }[];
@@ -498,6 +499,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   const counts: Record<string, number> = {};
   for (const k of Object.keys(p.beliefs)) {
     const b = p.beliefs[Number(k)];
+    if(b.kind==='flood'&&version<15)continue;
     (byKind[b.kind] ??= []).push(b);
     counts[placeNoun({ ...b, btype: undefined })] = (counts[placeNoun({ ...b, btype: undefined })] ?? 0) + 1;
   }
@@ -593,7 +595,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     },
     doing,
     seen: { people: seenPeople, wolves },
-    remembered: { places, water, dangers, counts },
+    remembered: { places, water, dangers, counts, ...(version>=15?{floods:nearest(byKind.flood,12).map(b=>describePlace(world,p,b,version))}:{}) },
     people: { relations: relations.slice(0, 14), whereabouts, worries, requests: requests.slice(0, 8), promises },
     recent: {
       memory: p.log

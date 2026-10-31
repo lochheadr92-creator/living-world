@@ -2,6 +2,7 @@
 // Person.indoors is authoritative. Building.inside is a legacy unused field;
 // occupant lists are derived from people, never another saved source of truth.
 import {isStoredDrink} from './stored_water_access';
+import { floodMovementBlocked, observeFlood, observeFloodDoor } from './flood';
 import { isSolidHome } from './constants';
 import { isWalkable } from './registry';
 import { runsRulesVersion } from './rulesversion';
@@ -44,6 +45,8 @@ export function enterHome(w: World, p: Person, b: Building): string | null {
   if (refused) return refused;
   const d = doorPoint(b);
   if (Math.hypot(p.x - d.x, p.y - d.y) > 0.35) return 'must reach the home entrance';
+  observeFlood(w,p);
+  if(floodMovementBlocked(w,p,d.x,d.y))return 'home entrance is flooded';
   p.indoors = b.id;
   // Map coordinates remain the entrance anchor of this abstract interior.
   // They are not outdoor presence; every physical interaction checks location.
@@ -57,6 +60,8 @@ export function leaveHome(w: World, p: Person): string | null {
   const b = indoorHome(w, p);
   if (!b) { delete p.indoors; return null; }
   if (!isWalkable(w, b.doorX, b.doorY)) return 'home exit is blocked';
+  observeFloodDoor(w,p,b);
+  if(floodMovementBlocked(w,p,b.doorX,b.doorY))return 'home exit is flooded';
   const d = doorPoint(b);
   delete p.indoors;
   p.x = d.x; p.y = d.y;

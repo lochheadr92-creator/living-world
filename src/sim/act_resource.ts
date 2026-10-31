@@ -1,4 +1,5 @@
 import { harvestPressure } from './ecology';
+import { hasFloodAccess } from './flood';
 import { drawWater, hasWaterBudget } from './hydrology';
 import { observeShore, waterContact, workingWater } from './water_access';
 import {isStoredDrink,storedWaterSource} from './stored_water_access';
@@ -395,7 +396,9 @@ function waterFacing(world: World, p: Person): { x: number; y: number } | null {
 }
 
 /** A remembered drinking place nobody can walk to is not worth remembering: forget it so another (or a search) takes over. */
-function forgetUnreachableWater(p: Person, a: Activity, outcome: string, detail: string): void {
+function forgetUnreachableWater(world: World, p: Person, a: Activity, outcome: string, detail: string): void {
+  // A temporary remembered hazard changes the route, not the existence of the shore.
+  if(hasFloodAccess(world)&&a.data.floodWaitSince!==undefined)return;
   if (outcome === 'failed' && isWaterBeliefId(a.targetId) && /no way|blocked/.test(detail)) delBelief(p, a.targetId);
 }
 
@@ -439,7 +442,7 @@ registerHandler('drink', {
     addFx(world, 'splash', w.x, w.y, 0);
   },
   onEnd(world, p, a, outcome, detail) {
-    forgetUnreachableWater(p, a, outcome, detail);
+    forgetUnreachableWater(world, p, a, outcome, detail);
   },
   work(world, p, a): WorkResult {
     if (a.data.fromInv || isStoredDrink(world,a)) {
@@ -497,7 +500,7 @@ registerHandler('fetch_water', {
     a.progress = 0;
   },
   onEnd(world, p, a, outcome, detail) {
-    forgetUnreachableWater(p, a, outcome, detail);
+    forgetUnreachableWater(world, p, a, outcome, detail);
   },
   work(world, p, a): WorkResult {
     const body=hasWaterBudget(world)?workingWater(world,p,a):undefined;
