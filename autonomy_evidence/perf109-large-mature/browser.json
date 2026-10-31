@@ -1,0 +1,136 @@
+{
+  "head": "52b4ba3953685d99880087c4123a2d55e862d71d",
+  "sourceHashes": {
+    "scripts/browser/mature_perf_check.mjs": "e11a1743be8299c081be3aad3c5079438b088e2bb6ec108cc12218027666a13f",
+    "src/render/renderer.ts": "c0ff4a7d933b6d86c58674ea6d3f348dbb788097584048575d81d0aab7a39878",
+    "src/render/speech_layout.ts": "0a30ae6b98963afe55965a495b46ca864b8cf876e0f7da217495c59f4294c2d2",
+    "src/ui/index.ts": "305eb584a1b1c638e85d69ee44e7416d41c81fa953e17cb9be8a0212756f3b77"
+  },
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/156.0.8078.79",
+    "revision": "@a21ce95c24ce3964416f09ae1862f53f319eb4d0",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+    "jsVersion": "15.6.75.27"
+  },
+  "viewport": {
+    "width": 1440,
+    "height": 900,
+    "dpr": 1
+  },
+  "method": "Use exactly the unmodified snapshots named and hashed by headless.json. Observe 180 paused normal app rAF iterations; discard 30 warmups. Read existing renderer CPU timers without drawing an extra frame. Afterwards separately time 60 forced UI refreshes. Frame submission is CPU cost, not GPU completion.",
+  "results": [
+    {
+      "name": "normal-new",
+      "tick": 0,
+      "rules": 109,
+      "alive": 28,
+      "pure": true,
+      "visibleSpeech": 0,
+      "frameSubmissionMs": {
+        "count": 150,
+        "mean": 1.946000000735124,
+        "p50": 1.9000000059604645,
+        "p95": 2.2000000029802322,
+        "max": 2.5
+      },
+      "overlayLayoutMs": {
+        "count": 150,
+        "mean": 0.06466666678587596,
+        "p50": 0.09999999403953552,
+        "p95": 0.10000000894069672,
+        "max": 0.20000000298023224
+      },
+      "forcedUIRefreshMs": {
+        "count": 60,
+        "mean": 0.08333333333333333,
+        "p50": 0.09999999403953552,
+        "p95": 0.19999998807907104,
+        "max": 0.5
+      },
+      "rafIntervalMs": {
+        "count": 150,
+        "mean": 11.211999999980131,
+        "p50": 11.100000008940697,
+        "p95": 11.899999991059303,
+        "max": 14.899999991059303
+      },
+      "heapUsedBytes": 13033912
+    },
+    {
+      "name": "large-new",
+      "tick": 0,
+      "rules": 109,
+      "alive": 100,
+      "pure": true,
+      "visibleSpeech": 0,
+      "frameSubmissionMs": {
+        "count": 150,
+        "mean": 2.2286666668454806,
+        "p50": 2.0999999940395355,
+        "p95": 3,
+        "max": 3.5
+      },
+      "overlayLayoutMs": {
+        "count": 150,
+        "mean": 0.08600000063578288,
+        "p50": 0.09999999403953552,
+        "p95": 0.20000000298023224,
+        "max": 0.20000000298023224
+      },
+      "forcedUIRefreshMs": {
+        "count": 60,
+        "mean": 0.14333333323399225,
+        "p50": 0.10000000894069672,
+        "p95": 0.29999999701976776,
+        "max": 0.5
+      },
+      "rafIntervalMs": {
+        "count": 150,
+        "mean": 12.256000000039736,
+        "p50": 12,
+        "p95": 14.099999994039536,
+        "max": 21.5
+      },
+      "heapUsedBytes": 17636420
+    },
+    {
+      "name": "large-mature",
+      "tick": 108000,
+      "rules": 109,
+      "alive": 110,
+      "pure": true,
+      "visibleSpeech": 0,
+      "frameSubmissionMs": {
+        "count": 150,
+        "mean": 4.07000000089407,
+        "p50": 4.200000002980232,
+        "p95": 4.800000011920929,
+        "max": 5.200000002980232
+      },
+      "overlayLayoutMs": {
+        "count": 150,
+        "mean": 0.09800000001986821,
+        "p50": 0.09999999403953552,
+        "p95": 0.20000000298023224,
+        "max": 0.29999999701976776
+      },
+      "forcedUIRefreshMs": {
+        "count": 60,
+        "mean": 0.19166666666666668,
+        "p50": 0.20000000298023224,
+        "p95": 0.29999999701976776,
+        "max": 0.3999999910593033
+      },
+      "rafIntervalMs": {
+        "count": 150,
+        "mean": 18.01,
+        "p50": 18.200000002980232,
+        "p95": 20,
+        "max": 21.399999991059303
+      },
+      "heapUsedBytes": 79346856
+    }
+  ],
+  "errors": []
+}
