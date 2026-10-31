@@ -368,6 +368,8 @@ export function hashWorld(world: World): string {
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
     for (const p of world.persons) {
+      if (p.goal?.companyHope) push('CompanyHope'+p.id+':'+JSON.stringify(p.goal.companyHope));
+      for (const [id,r] of Object.entries(p.relations)) if (r.company) push('Company'+p.id+':'+id+':'+JSON.stringify(r.company));
       for (const i of p.intentions) if (i.shelterChecked !== undefined) push('NightExperience'+p.id+':'+i.id+':'+i.shelterChecked+':'+i.sheltered);
     }
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in

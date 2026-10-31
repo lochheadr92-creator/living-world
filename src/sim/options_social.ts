@@ -1,3 +1,5 @@
+import {companyReason} from './companionship';
+import {hasLivedLife} from './lived_life';
 import {pendingMeetingUpdates} from './meeting_knowledge';
 import { peopleToAskAfter } from './location_question';
 import {workToTell} from './continuity_knowledge';
@@ -131,6 +133,8 @@ function optChat(ctx: Ctx): void {
     if (c.d > 13) continue;
     const sc = new Scorer();
     sc.add('wants company', sd * tm.social * 0.85);
+    const continuing=companyReason(ctx.world,p,c.q.id);
+    if(continuing&&!ctx.critical&&!ctx.dangers.length)sc.add('make time for continuing company',continuing);
     // a relaxed chat when nothing presses, mostly in the evening around the fire
     if (sd <= 0 && ctx.night) sc.add('evening company', 3.4 * (p.traits.sociability - 0.15));
     sc.add(c.aff >= 20 ? 'a friend' : c.fam < 4 ? 'someone new' : 'a neighbour', sd > 0 ? c.aff * 0.12 + (c.fam < 4 ? 3 * p.traits.curiosity : 0) : 0);
@@ -672,11 +676,12 @@ function optTeachTechnique(ctx: Ctx): void {
   if(!beliefsByKind(p,['building']).some(b=>b.btype===at))continue;
   for(const c of candidates(ctx)) {
    if(c.d>10||(p.cooldowns['teach:'+c.q.id]??0)>world.tick)continue;
-   if(p.relations[c.q.id]?.kin!=='child'&&c.q.apprentice?.master!==p.id)continue;
+   const friend=hasLivedLife(world)&&ctx.stage==='elder'&&(p.relations[c.q.id]?.affinity??0)>=20&&!!p.relations[c.q.id]?.company;
+   if(p.relations[c.q.id]?.kin!=='child'&&c.q.apprentice?.master!==p.id&&!friend)continue;
    if(stageOf(world,c.q)==='child')continue;
    // what the teacher can tell of the learner: a lesson is not offered on a procedure whose forerunner the teacher never saw them at
    // (the learner's own knowledge stays private; the offer is answered at contact, where it is read)
-   const sc=new Scorer().add('pass a useful technique to family or apprentice',20+8*p.traits.generosity).add('walking',-pen(c.d*6));
+   const sc=new Scorer().add(friend?'pass a useful technique to a continuing companion':'pass a useful technique to family or apprentice',20+8*p.traits.generosity).add('walking',-pen(c.d*6));
    if(kind!=='charcoal')sc.add('a procedure that takes another first',-3);
    mkSocial(ctx,c,'teach_technique',kind==='charcoal'?{}:{technique:kind},`Offer ${c.q.name} ${def.name} instruction`,`pass on ${def.name}`,null,sc,'teach',kind==='charcoal'?'':':'+kind);
   }

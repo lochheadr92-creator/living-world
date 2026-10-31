@@ -1,3 +1,5 @@
+import {companyProgress} from './companionship';
+import {hasLivedLife} from './lived_life';
 import { runsRulesVersion } from './rulesversion';
 import { hasAchievementAftermath } from './achievement';
 // A life of one's own (rich worlds only): what a person hopes for, what hurts them, and how age tells.
@@ -90,6 +92,8 @@ export const GOAL_TEXT: Record<GoalKind, string> = {
   respected: 'a good name among their neighbours',
 };
 
+function goalWords(g:Goal):string{return g.companyHope?'lasting company and being useful to someone':GOAL_TEXT[g.kind];}
+
 function pickGoal(world: World, p: Person, eligible?: GoalKind[]): GoalKind {
   const t = p.traits;
   const r = hashUnit(key(world), p.id, eligible ? (p.goal?.done ?? 0) : 0x60a1);
@@ -120,6 +124,7 @@ export function goalProgress(world: World, p: Person, g: Goal): number {
       return isSolidHome(home.type) ? Math.min(1, home.condition / 60) : 0.25;
     }
     case 'family':
+      if(hasLivedLife(world)&&g.companyHope)return companyProgress(world,p);
       return (p.partnerId ? 0.5 : 0) + (p.children.length ? 0.5 : 0);
     case 'trade':
       return p.trade ? 1 : p.apprentice ? 0.6 : Math.max(0, Math.min(0.5, (Math.max(...Object.values(p.skills)) - 1) * 2));
@@ -144,7 +149,7 @@ export function goalNudge(world: World, p: Person, o: Option): number {
     case 'home':
       return o.kind === 'build' || o.kind === 'repair' || o.kind === 'haul' || o.kind === 'plan_site' ? GOAL_NUDGE : 0;
     case 'family':
-      return o.kind === 'socialize' && (o.tag === 'household' || o.tag === 'social') ? GOAL_NUDGE : 0;
+      return o.kind === 'socialize' && (o.tag === 'household' || o.tag === 'social' || hasLivedLife(world) && !!g.companyHope && ['teach','help','trade'].includes(o.tag??'')) ? GOAL_NUDGE : 0;
     case 'trade':
       return o.kind === 'operate' || o.kind === 'craft' || o.kind === 'tool_work' ? GOAL_NUDGE : 0;
     case 'stocked':
@@ -164,35 +169,41 @@ export function lifeTickRich(world: World, p: Person): void {
   let g = p.goal;
   if (!g) {
     g = p.goal = { kind: pickGoal(world, p), since: world.tick, progress: 0, done: 0 };
-    addLog(world, p, 'life', `What I hope for: ${GOAL_TEXT[g.kind]}.`);
+    addLog(world, p, 'life', `What I hope for: ${goalWords(g)}.`);
+  }
+  if(hasLivedLife(world)&&stage==='elder'&&g.kind==='family'&&!g.done&&!g.companyHope&&!p.partnerId&&!p.children.length&&world.tick-g.since>=2*DAY){
+    const companion=Object.entries(p.relations).find(([,r])=>r.company&&r.company.days>=2&&!r.deathKnown&&r.affinity>=20&&r.avoidUntil<=world.tick&&world.tick-r.company.last<=DAY);
+    if(companion){g.companyHope={since:world.tick,from:Number(companion[0])};addLog(world,p,'life','After spending time together, I now hope for lasting company and being useful to someone. My earlier hope was a family.');}
   }
   if (g.done) {
+    // Keep the achieved revised hope truthful; do not archive it as having raised a family.
+    if (hasLivedLife(world) && g.companyHope) return;
     if (!hasAchievementAftermath(world) || world.tick-g.done < 3*DAY) return;
     const previous = [...(g.previous ?? []), { kind: g.kind, done: g.done }];
     const eligible = (Object.keys(GOAL_TEXT) as GoalKind[]).filter(kind =>
       !previous.some(q => q.kind === kind) && goalProgress(world, p, {kind, since:world.tick, progress:0, done:0}) < 1);
     if (!eligible.length) return; // a fulfilled life is valid; never manufacture a new unmet need
     g = p.goal = { kind:pickGoal(world,p,eligible), since:world.tick, progress:0, done:0, previous };
-    addLog(world,p,'life',`After ${GOAL_TEXT[previous.at(-1)!.kind]}, I now hope for ${GOAL_TEXT[g.kind]}.`);
+    addLog(world,p,'life',`After ${GOAL_TEXT[previous.at(-1)!.kind]}, I now hope for ${goalWords(g)}.`);
   }
   g.progress = Math.round(goalProgress(world, p, g) * 100) / 100;
   if (g.progress >= 1) {
     g.done = world.tick;
-    addEvent(world, 'life', `${p.name} has what they hoped for: ${GOAL_TEXT[g.kind]}.`, [p.id], p.x, p.y);
-    addLog(world, p, 'life', `I have what I hoped for: ${GOAL_TEXT[g.kind]}.`);
-    think(world, p, 'goal', 12, 3 * DAY, `has ${GOAL_TEXT[g.kind]}`);
+    addEvent(world, 'life', `${p.name} has what they hoped for: ${goalWords(g)}.`, [p.id], p.x, p.y);
+    addLog(world, p, 'life', `I have what I hoped for: ${goalWords(g)}.`);
+    think(world, p, 'goal', 12, 3 * DAY, `has ${goalWords(g)}`);
     return;
   }
   // a hope long unmet weighs a little; one coming closer does not
-  if (world.tick - g.since > 10 * DAY && g.progress < 0.5) think(world, p, 'goal', -3, DAY, `still hopes for ${GOAL_TEXT[g.kind]}`);
+  if (world.tick - g.since > 10 * DAY && g.progress < 0.5) think(world, p, 'goal', -3, DAY, `still hopes for ${goalWords(g)}`);
 }
 
 /** for the inspector */
 export function describeGoal(world: World, p: Person): string | null {
   const g = p.goal;
   if (!g) return null;
-  if (g.done) return `has what they hoped for, ${GOAL_TEXT[g.kind]}`;
-  return `hopes for ${GOAL_TEXT[g.kind]} (${Math.round(g.progress * 100)}% there)${g.previous?.length ? `; earlier achieved: ${g.previous.map(q=>GOAL_TEXT[q.kind]).join(", ")}` : ""}`;
+  if (g.done) return `has what they hoped for, ${goalWords(g)}`;
+  return `hopes for ${goalWords(g)} (${Math.round(g.progress * 100)}% there)${g.previous?.length ? `; earlier achieved: ${g.previous.map(q=>GOAL_TEXT[q.kind]).join(", ")}` : ""}`;
 }
 export function describeInjury(world: World, p: Person): string | null {
   const i = p.injury;

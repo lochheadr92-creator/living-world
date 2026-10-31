@@ -133,6 +133,7 @@ export interface FacilitySnapshot {
 }
 
 export interface Relation {
+  company?: import('./companionship').CompanyExperience;
   deathKnown?: { learned: number; source: 'witness' | 'told' | 'grave'; via: number };
   affinity: number;
   trust: number;
@@ -476,6 +477,8 @@ export interface Payoff {
 /** what a person hopes for (life.ts; rich worlds only): the hope, since when, how far along (read from the world), when reached (0: not yet) */
 export type GoalKind = 'home' | 'family' | 'trade' | 'stocked' | 'respected';
 export interface Goal {
+  /** An elder reconsidered an unmet family hope after actually experiencing continuing company. */
+  companyHope?: {since:number;from:number};
   /** Earlier fulfilled hopes; at most one per kind, added only by rules 38 onward. */
   previous?: { kind: GoalKind; done: number }[];
   kind: GoalKind;

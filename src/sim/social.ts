@@ -1,3 +1,4 @@
+import {recordCompany} from './companionship';
 import {hasLivedLife} from './lived_life';
 import { rememberedDry } from './water_access';
 import { hasSuspendedEndings } from './suspended_endings';
@@ -996,6 +997,11 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
       x.needs.social = Math.min(100, x.needs.social + (9 + 11 * x.traits.sociability) * (rel.affinity >= 20 ? 1.2 : 1));
       x.stats.talked++;
       x.cooldowns['talk' + y.id] = world.tick + 220;
+    }
+    if(!c.data.sour&&(c.purpose==='chat'||c.lesson?.outcome==='learned'||c.data.giftReceipt?.outcome==='received gift')){
+      const taught=c.lesson?.outcome==='learned';
+      recordCompany(world,A,B,c.data.giftReceipt?.outcome==='received gift'||taught&&c.purpose==='teach_technique');
+      recordCompany(world,B,A,taught&&c.purpose==='learn_technique');
     }
     A.wave = world.tick + 20;
     B.wave = world.tick + 24;
