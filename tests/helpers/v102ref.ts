@@ -13,6 +13,6 @@ export function v102Continuation(){
  const w=createWorld({...currentWorldSettings('normal','river',{immigration:false}),rulesVersion:102});for(let n=0;n<600;n++)stepWorld(w);const ordinary=advance(w,120);
  const f=repairDutyScene(102,'hut',{wood:1,bread:2,water:2},35),first=requestRepair(f);if(first.status!=='promised')throw new Error('No first promise');
  const cal=secondAsker(f),second=askRepairFrom(f,cal);if(second.request.status!=='declined')throw new Error('Second ask not declined');const declined=advance(f.w,100);
- for(let n=0;n<2500&&first.status==='promised';n++)stepWorld(f.w);if(first.status!=='fulfilled'||f.w.ledger.reasons['-repairs']!==1)throw new Error('No single patch');const patched=advance(f.w,60);
+ for(let n=0;n<2500&&first.status==='promised';n++)stepWorld(f.w);if((first.status as string)!=='fulfilled'||f.w.ledger.reasons['-repairs']!==1)throw new Error('No single patch');const patched=advance(f.w,60);
  return {ordinary,declined,patched};
 }
