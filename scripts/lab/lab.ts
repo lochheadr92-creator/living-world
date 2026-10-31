@@ -8,6 +8,7 @@ import {careHandbackOn,setCareHandback} from '../../src/sim/care_handback';
 import {repairDutyOn,setRepairDuty} from '../../src/sim/repair_duty';
 import {readyStepOn,setReadyStep} from '../../src/sim/ready_step';
 import {householdSupplyOn,setHouseholdSupply} from '../../src/sim/household_supply';
+import {promisedSupplyOn,setPromisedSupply} from '../../src/sim/promised_supply';
 import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
@@ -353,6 +354,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-care-supply')return {spec:label,summary:'remove acquisition motivated by personally observed resident care; retain existing handoff',install(){const was=careSupplyOn();setCareSupply(false);return ()=>setCareSupply(was);}};
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};
   if(kind==='rich-no-care-handback')return {spec:label,summary:'remove explicit childcare recovery handback and retained watch progress',install(){const was=careHandbackOn();setCareHandback(false);return ()=>setCareHandback(was);}};
+  if(kind==='rich-no-promised-supply')return {spec:label,summary:'remove promised-material coverage of own site fetching and home-site planning; expectations are still remembered',install(){const was=promisedSupplyOn();setPromisedSupply(false);return ()=>setPromisedSupply(was);}};
   if(kind==='rich-no-household-supply')return {spec:label,summary:'remove deferral of a heard household reserve and complementary site material choice; heard records are still kept',install(){const was=householdSupplyOn();setHouseholdSupply(false);return ()=>setHouseholdSupply(was);}};
   if(kind==='rich-no-ready-step')return {spec:label,summary:'remove the prepared-step preference and same-workshop stock rule; rules 98 project steps',install(){const was=readyStepOn();setReadyStep(false);return ()=>setReadyStep(was);}};
   if(kind==='rich-no-repair-duty')return {spec:label,summary:'remove heard roof destinations and reserved-supply fallback preparation',install(){const was=repairDutyOn();setRepairDuty(false);return ()=>setRepairDuty(was);}};

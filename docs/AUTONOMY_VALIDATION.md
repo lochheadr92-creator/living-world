@@ -347,3 +347,19 @@ Start-Process npx -ArgumentList 'vite-node','scripts/household_supply_observe.ts
 Start-Process npx -ArgumentList 'vite-node','scripts/household_supply_observe.ts','meadow','autonomy_evidence/r100-meadow45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r100-meadow45.log -WindowStyle Hidden -PassThru
 Start-Process npx -ArgumentList 'vite-node','scripts/household_supply_observe.ts','river','autonomy_evidence/r100-river45-at99','45','1200','99' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r100-river45-at99.log -WindowStyle Hidden -PassThru
 ```
+
+## Rules 101 promised supply: ordinary occurrence over three winters (pending owner-run measurements)
+
+Five river days carry live site promises (see `PROMISED_SUPPLY.md`); the 45-day runs below measure fetches set aside,
+fetches still started for a promised item, promised/fulfilled/expired site requests and the rules-100 baseline. Paste back
+the final JSON line of each log; a single-seed contrast per seed is not an ensemble claim.
+
+```
+cd "C:\dev\Claude Experiment\living-world"
+git pull
+npm ci
+Start-Process npx -ArgumentList 'vite-node','scripts/promised_supply_observe.ts','river','autonomy_evidence/r101-river45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r101-river45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/promised_supply_observe.ts','forest','autonomy_evidence/r101-forest45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r101-forest45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/promised_supply_observe.ts','meadow','autonomy_evidence/r101-meadow45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r101-meadow45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/promised_supply_observe.ts','river','autonomy_evidence/r101-river45-at100','45','1200','100' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r101-river45-at100.log -WindowStyle Hidden -PassThru
+```

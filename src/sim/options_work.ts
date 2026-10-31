@@ -20,6 +20,7 @@ import {prioritizeCareReturn} from './care_supply';
 import {activeCareJourney} from './care_journey';
 import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
 import {hasRepairDuty,roofDuty,repairSupplies} from './repair_duty';
+import {promisedSupply,promisedText} from './promised_supply';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
@@ -297,7 +298,10 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   const needs: MatNeed[] = [];
   for (const { b, rel } of relevantSites(ctx)) {
     for (const k in b.need ?? {}) {
-      const n = unitsOf(b.need?.[k as ItemKind]);
+      let n = unitsOf(b.need?.[k as ItemKind]);
+      // rules 101 (promised_supply.ts): what somebody promised to bring for this site is not fetched again meanwhile
+      const promised = n > 0 ? promisedSupply(world, p, k as ItemKind, b.id) : null;
+      if (promised) { n = Math.max(0, n - promised.amount); const reason = promisedText(promised, k as ItemKind); if (!ctx.blocked.some((o) => o.targetId === b.id && o.blocked === reason)) addBlocked(ctx, 'gather', `Get ${k} for ${siteNoun(rel.why, b.btype)}`, b.id, reason, 'site'); }
       if (n > 0) needs.push({ item: k as ItemKind, n, base: 34 * rel.mult + 4, why: `for ${siteNoun(rel.why, b.btype)}`, tag: 'site', siteId: b.id });
     }
   }

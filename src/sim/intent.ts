@@ -24,7 +24,8 @@ import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { runsRulesVersion } from './rulesversion';
-import { deferReserve } from './household_supply';
+import { deferReserve, complementaryKind } from './household_supply';
+import { hasPromisedSupply, promisedSupply, promisedText } from './promised_supply';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import {
   SHELTER_BATCH,
@@ -662,15 +663,19 @@ function shelterStep(ctx: Ctx, i: Intention): Step {
   if (!site) return { kind: 'none', target: 0, item: null, step: 'find the site again', key: null, blocked: 'no home site of their own that they know of' };
   const what = BUILD_DEF[(site.btype ?? 'hut') as BuildingType].label;
   const need = remembersNeed(site);
+  // rules 101 (promised_supply.ts): what somebody promised to bring for the site is left out of the step, and said
+  let covered = '';
+  if (hasPromisedSupply(world)) for (const k of Object.keys(need) as ItemKind[]) { const ps = promisedSupply(world, p, k, site.id); if (ps) { covered += (covered ? '; ' : '') + promisedText(ps, k); const left = (need[k] ?? 0) - ps.amount; if (left > 0) need[k] = left; else delete need[k]; } }
   const kinds = Object.keys(need) as ItemKind[];
   if (!kinds.length) {
     // Nothing left to fetch, as they last saw it. The plan does not finish here - the hut is not built - and it does not
     // pretend to be doing something: it says so, and the ordinary build option is what gets on with it.
     i.wants = {};
-    return { kind: 'none', target: site.id, item: null, step: `the ${what} has its materials; it wants building`, key: null, blocked: '' };
+    return { kind: 'none', target: site.id, item: null, step: covered ? `the ${what} has what is not already promised; waiting on ${covered}` : `the ${what} has its materials; it wants building`, key: null, blocked: '' };
   }
-  // Re-aim at the first thing it wants, one trip's worth. The order is the site's own, which is the recipe's.
-  const k = kinds[0];
+  // Re-aim at the first thing it wants, one trip's worth. The order is the site's own, which is the recipe's. From rules 101 the
+  // step honours what a household member said they are fetching (household_supply.ts), as the plan's adoption did from rules 100.
+  const k = runsRulesVersion(world, 101) ? complementaryKind(world, p, site.id, kinds) : kinds[0];
   const take = Math.min(SHELTER_BATCH, Math.ceil(need[k] ?? 0));
   if ((i.wants[k] ?? 0) !== take || Object.keys(i.wants).length !== 1) i.wants = { [k]: take } as Partial<Items>;
   const short = stillNeededFor(p, i);
@@ -685,7 +690,7 @@ function shelterStep(ctx: Ctx, i: Intention): Step {
     const owed = outstandingForPlan(world, p.id, k, i.id);
     const from = owed > 0 ? planHelp(world, p, i).filter((h) => h.item === k && h.owed > 0).map((h) => h.who) : [];
     const also = owed > 0 ? ` (${from.length ? from.join(' and ') : 'someone'} promised ${owed}, not yet delivered)` : '';
-    return { kind: 'get', target: 0, item: k, step: `get ${lack} ${k} for the ${what} (it wants ${shortText(need)})${also}`, key: null, blocked: '' };
+    return { kind: 'get', target: 0, item: k, step: `get ${lack} ${k} for the ${what} (it wants ${shortText(need)})${also}${covered ? ` (${covered})` : ''}`, key: null, blocked: '' };
   }
   return { kind: 'deliver', target: site.id, item: k, step: `take ${take} ${k} to the ${what}`, key: `haul:${site.id}`, blocked: '' };
 }

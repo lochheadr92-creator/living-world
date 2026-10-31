@@ -1,0 +1,73 @@
+{
+  "rules": 101,
+  "evidence": "STAGED site, far sources, full-handed asker and carrying neighbour; the ask is selected from the offered options, everything after it is autonomous. No ordinary frequency or aggregate benefit claim.",
+  "checks": [
+    {
+      "name": "Ben really promises to haul the wood and Ada remembers the spoken hour",
+      "ok": true,
+      "detail": {
+        "request": {
+          "status": "promised",
+          "note": "Ben will bring 3 wood"
+        },
+        "expectation": {
+          "amount": 3,
+          "deadline": 2456,
+          "by": "Ben"
+        },
+        "woodFetch": false,
+        "waiting": "Ben promised 3 wood, expected by tick 2456",
+        "pure": true
+      }
+    },
+    {
+      "name": "no wood fetch is offered for the site meanwhile; the waiting is named; observation is pure",
+      "ok": true,
+      "detail": {
+        "request": {
+          "status": "promised",
+          "note": "Ben will bring 3 wood"
+        },
+        "expectation": {
+          "amount": 3,
+          "deadline": 2456,
+          "by": "Ben"
+        },
+        "woodFetch": false,
+        "waiting": "Ben promised 3 wood, expected by tick 2456",
+        "pure": true
+      }
+    },
+    {
+      "name": "Ada's inspector shows her home plan stepping to stone with the promised wood named",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 34\nMoss household\nHome: no home yet — last considered just now: the household has already laid out a hut\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nBuilding the hut — walking to Hut (under construction) (2 tiles to go).\non the way\nWHAT ARE THEY SET ON?\nGet the household's hut built. Step: get 4 stone for the hut (it wants 4 stone) (Ben promised 3 wood, expected by tick 2456) — waiting to take this step. 0 units carried there so far. Last known site requirements: 3 wood and 4 stone. Why: the household is still in no shelter of its own, and their hut wants 4 stone. Still needs 4 stone.\nNEEDS\nFood\n97\nWater\n96\nEnergy\n96\nWarmth\n83\nSafety\n84\nCompany\n86\nCARRYING\n×2\n×2\n5 / 12\nTOOLS\nnone\nTownship & shared work\n\nWillowbank: 2 households. Membership belongs to the household and does not change with walking.\n\nRecent recorded production an"
+    },
+    {
+      "name": "Ben physically delivers the three wood while Ada never sets out for wood; the saved continuation is exact",
+      "ok": true,
+      "detail": {
+        "tick": 124,
+        "wood": 3,
+        "request": "fulfilled",
+        "adaWoodTrips": [],
+        "adaStarts": [
+          "build:"
+        ],
+        "same": true,
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "the site panel shows the delivered wood",
+      "ok": true,
+      "detail": "Hut (under construction)\nMarked out 12s ago\nBUILDING PROGRESS\n1%\nMATERIALS SUPPLIED\nWood\n3 / 3\nStone\n0 / 4\nWORKING NOW\nAda\nFor\nMoss household\nStarted by\nAda\nStatus\nunder construction\nThe project\nWhy\nA proper home with a small store.\nMaterials\n\nStill needed: 4 stone. Work stops short of the part that"
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

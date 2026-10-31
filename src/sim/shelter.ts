@@ -39,6 +39,7 @@ import { beliefsByKind } from './optutil';
 import type { Ctx } from './optutil';
 import { runsRulesVersion } from './rulesversion';
 import { complementaryKind } from './household_supply';
+import { promisedSupply } from './promised_supply';
 import type { Belief, BuildingType, ItemKind, Items, Person, World } from './types';
 
 /** the rules version at which household shelter plans start; nothing here applies to a world below it */
@@ -170,6 +171,8 @@ export function shelterWanted(ctx: Ctx): ShelterWant | null {
   if (!site) return null;
   const what = (site.btype ?? 'hut') as BuildingType;
   const short = remembersNeed(site);
+  // rules 101 (promised_supply.ts): what somebody promised to bring for this site is not planned for again meanwhile
+  for (const k of Object.keys(short) as ItemKind[]) { const promised = promisedSupply(world, p, k, site.id); if (promised) { const left = (short[k] ?? 0) - promised.amount; if (left > 0) short[k] = left; else delete short[k]; } }
   const kinds = Object.keys(short) as ItemKind[];
   if (!kinds.length) return null;
   // One material at a time, and at most one trip's worth of it: a plan that spoke for the whole cost of a hut would hide
