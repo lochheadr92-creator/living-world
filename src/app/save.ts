@@ -5,6 +5,7 @@ import { validateMealLeftovers } from '../sim/meal_leftovers';
 import {validateEstateCustody} from '../sim/estate';
 import {validateWorkHandovers} from '../sim/work_handover';
 import {validateCareSupply} from '../sim/care_supply';
+import {validateCareHandback} from '../sim/care_handback';
 import { validateMeetingKnowledge } from '../sim/meeting_knowledge';
 import { validateWater } from '../sim/hydrology';
 import {validatePromiseDelays} from '../sim/promise_delays';
@@ -281,6 +282,7 @@ export function deserializeWorld(json: string): World {
   validateEstateCustody(w);
   validateWorkHandovers(w);
   validateCareSupply(w);
+  validateCareHandback(w);
   validateMeetingKnowledge(w);
   w.byId = new Map();
   w.grid = makeGrid(w.W, w.H);

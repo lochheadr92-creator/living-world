@@ -1,3 +1,4 @@
+import {careReturnHistory} from './care_handback';
 import {describeCancellation} from './request_cancellation';
 import {describeExpectation} from './promise_expectations';
 import {describeResolution} from './promise_outcomes';
@@ -87,5 +88,6 @@ export function relationshipHistory(w: World, p: Person): string[] {
   for(const note of r.history.slice(-2))rows.push(`Remembered at tick ${note.tick}: ${note.text}. Event link not recorded.`);
   if(!receipts.length&&!r.history.length)rows.push('Earlier cause not recorded.');
  }
+ rows.push(...careReturnHistory(p));
  return rows.length?rows:['No recorded relationships.'];
 }

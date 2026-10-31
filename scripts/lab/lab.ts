@@ -4,6 +4,7 @@ import {estateCustodyOn,setEstateCustody} from '../../src/sim/estate';
 import {workHandoverOn,setWorkHandover} from '../../src/sim/handover_state';
 import {careSupplyOn,setCareSupply} from '../../src/sim/care_supply';
 import {warmthDutyOn,setWarmthDuty} from '../../src/sim/warmth_duty';
+import {careHandbackOn,setCareHandback} from '../../src/sim/care_handback';
 import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
@@ -348,6 +349,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-work-handover')return {spec:label,summary:'remove informed living-worker handover and handback conversations',install(){const was=workHandoverOn();setWorkHandover(false);return ()=>setWorkHandover(was);}};
   if(kind==='rich-no-care-supply')return {spec:label,summary:'remove acquisition motivated by personally observed resident care; retain existing handoff',install(){const was=careSupplyOn();setCareSupply(false);return ()=>setCareSupply(was);}};
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};
+  if(kind==='rich-no-care-handback')return {spec:label,summary:'remove explicit childcare recovery handback and retained watch progress',install(){const was=careHandbackOn();setCareHandback(false);return ()=>setCareHandback(was);}};
   if(kind==='rich-no-meeting-knowledge')return {spec:label,summary:'retain shared-status meal decisions; remove private heard appointments and replacement invitations',install(){const was=meetingKnowledgeOn();setMeetingKnowledge(false);return ()=>setMeetingKnowledge(was);}};
   if(kind==='rich-no-meal-leftovers')return {spec:label,summary:'retain historical automatic table return; remove owned leftover recovery',install(){const was=mealLeftoversOn();setMealLeftovers(false);return ()=>setMealLeftovers(was);}};
   if(kind==='rich-no-offcuts')return {spec:label,summary:'remove newly recoverable timber fuel and its use; retain the original waste sink',install(){const was=offcutsOn();setOffcuts(false);return ()=>setOffcuts(was);}};

@@ -620,7 +620,7 @@ export interface Person {
   customers?: import('./customers').Customer[];
   exchangeJourneys?: import('./exchange_journeys').ExchangeJourney[];
   relocationHardship?: number;
-  socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper'; task?: import('./helper_learning').HelperTask; completion?: import('./promise_knowledge').CompletionKnowledge; resolution?: import('./promise_outcomes').PromiseResolution; expectation?: import('./promise_expectations').PromiseExpectation; cancellation?: import('./request_cancellation').CancellationKnowledge }[];
+  socialMemory?: { requestId: number; otherId: number; siteId: number; tick: number; outcome: string; reason: string; role: 'asker' | 'helper'; task?: import('./helper_learning').HelperTask; completion?: import('./promise_knowledge').CompletionKnowledge; resolution?: import('./promise_outcomes').PromiseResolution; expectation?: import('./promise_expectations').PromiseExpectation; cancellation?: import('./request_cancellation').CancellationKnowledge; careHandback?: import('./care_handback').CareHandback }[];
   civicOutcomes?: { projectId: number; organiserId: number; success: boolean; tick: number; buildingId?: number; benefit?: {tick:number;item:ItemKind;amount:number} }[];
   ent: 'person';
   id: number;
@@ -1147,6 +1147,7 @@ export type ConvPurpose =
   | 'cancel_meeting'
   | 'share_work'
   | 'handover_work'
+  | 'return_care'
   | 'mediate'
   | 'teach_technique'
   | 'learn_technique';

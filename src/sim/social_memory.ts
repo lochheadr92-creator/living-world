@@ -20,7 +20,11 @@ export function rememberRequest(w: World, r: Request): void {
   const memories=p.socialMemory??=[];
   const existing=memories.find(m=>m.requestId===r.id);
   const task=taskReceipt(w,r,role);
-  if(existing){if(hasPromiseExpectations(w)&&existing.expectation&&role==='asker'){existing.tick=w.tick;existing.outcome=r.status;existing.reason=r.note||'reason not recorded';existing.task=task;endExpectation(w,existing,'observed completion');}continue;}
+  if(existing){if(hasPromiseExpectations(w)&&existing.expectation&&role==='asker'){existing.tick=w.tick;existing.outcome=r.status;existing.reason=r.note||'reason not recorded';existing.task=task;endExpectation(w,existing,'observed completion');}
+   // A handback proposal creates a helper receipt before the watch ends. If the
+   // discussion is refused or interrupted, later actual work still owns its outcome.
+   if(runsRulesVersion(w,97)&&role==='helper'&&existing.careHandback){existing.tick=w.tick;existing.outcome=r.status;existing.reason=r.note||'reason not recorded';existing.task=task;}
+   continue;}
   memories.push({requestId:r.id,otherId,siteId:r.siteId,tick:w.tick,outcome:r.status,reason:r.note||'reason not recorded',role,...(task?{task}:{})});
   if(memories.length>32)memories.shift();
  }

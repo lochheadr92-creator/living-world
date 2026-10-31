@@ -3,6 +3,7 @@ import {workToTell} from './continuity_knowledge';
 import {handoverOffer,handoverFollowup} from './work_handover';
 import {pendingDelayProposals} from './promise_delays';
 import {pendingCancellations} from './request_cancellation';
+import {careReturns} from './care_handback';
 import {expectsCare} from './promise_expectations';
 import { exchangeJourneyOptions } from './exchange_journeys';
 import {helperExperience,materialRequestKind,watchExperience} from './helper_learning';
@@ -688,6 +689,11 @@ function optRequestTechnique(ctx: Ctx): void {
 }
 
 export function socialOptions(ctx: Ctx): void {
+  for(const m of careReturns(ctx.world,ctx.p)){
+    const c=candidates(ctx).find(c=>c.q.id===m.otherId&&c.d<=14);if(!c)continue;
+    const sc=new Scorer().add('I recovered and can ask to take childcare back',52).add('walking',-pen(c.d*6));
+    mkSocial(ctx,c,'return_care',{requestId:m.requestId},`Discuss taking care back with ${c.q.name}`,'to resume care through an agreed handback',null,sc,'care-return',':'+m.requestId,'My own recovery permits an offer; the helper must agree with the child present');
+  }
   for(const c of candidates(ctx)){
     if(c.d>10||c.s.child)continue;
     const follow=handoverFollowup(ctx.world,ctx.p,c.q.id),offer=c.q.hhId===ctx.p.hhId?handoverOffer(ctx.world,ctx.p,c.q.id):null;

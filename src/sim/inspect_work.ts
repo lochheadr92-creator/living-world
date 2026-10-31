@@ -389,6 +389,7 @@ export interface InteractionView {
 }
 
 const PURPOSE_TEXT: Record<string, string> = {
+  return_care: 'agreeing who resumes childcare',
   handover_work: 'agreeing who continues the undertaking',
   share_work: 'sharing a household undertaking',
   cancel_meeting: 'explaining a cancelled meal',
@@ -414,6 +415,7 @@ const PURPOSE_TEXT: Record<string, string> = {
 
 /** the same purposes as they read when the other person was the one who came over: "<name> came to <name> …" */
 const PURPOSE_THEIRS: Record<string, string> = {
+  return_care: 'to agree who resumes childcare',
   handover_work: 'to agree who continues the undertaking',
   share_work: 'to describe their household undertaking',
   learn_technique: 'to ask for charcoal firing instruction',

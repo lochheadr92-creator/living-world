@@ -5,6 +5,7 @@ import {proposeHandover,answerHandover,type HandoverMode} from './work_handover'
 import {hasWorkHandover} from './handover_state';
 import {careJourneyReceipt} from './care_journey';
 import {hasWarmthDuty,knownDutyFire,communicateFireLocation,fuelAvailable} from './warmth_duty';
+import {hasCareHandback,proposeCareReturn,answerCareReturn} from './care_handback';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
 import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
@@ -890,6 +891,7 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 
 function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
   switch (purpose) {
+    case 'return_care': return `to agree with ${name} about taking childcare back`;
     case 'handover_work': return `to agree with ${name} who continues the undertaking`;
     case 'share_work': return `to tell ${name} about my household work`;
     case 'cancel_meeting': return `to explain a cancelled meal to ${name}`;
@@ -956,7 +958,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
-  const report=hasWorkHandover(world)&&c.purpose==='handover_work'?{text:c.data.handoverAnswered?'handover answered':c.data.handoverDelivered?'handover heard without answer':'handover not conveyed',detail:c.data.handoverReply??c.data.handoverText??'No responsibility changed.'}:hasContinuityKnowledge(world)&&c.purpose==='share_work'?{text:c.data.workAcknowledged?'undertaking acknowledged':c.data.workDelivered?'undertaking heard without acknowledgement':'undertaking not conveyed',detail:c.data.workText??'No undertaking passed.'}:hasMeetingKnowledge(world)&&c.purpose==='cancel_meeting'?{text:c.data.meetingAcknowledged?'meal cancellation acknowledged':c.data.meetingDelivered?'meal cancellation heard, acknowledgement not received':'meal cancellation not delivered',detail:c.data.meetingText??'No meeting update passed.'}:hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
+  const report=hasCareHandback(world)&&c.purpose==='return_care'?{text:c.data.careReturnAnswered?'childcare return answered':c.data.careReturnHeard?'childcare return heard without answer':'childcare return not proposed',detail:c.data.careReturnReply??c.data.careReturnText??'No childcare responsibility changed.'}:hasWorkHandover(world)&&c.purpose==='handover_work'?{text:c.data.handoverAnswered?'handover answered':c.data.handoverDelivered?'handover heard without answer':'handover not conveyed',detail:c.data.handoverReply??c.data.handoverText??'No responsibility changed.'}:hasContinuityKnowledge(world)&&c.purpose==='share_work'?{text:c.data.workAcknowledged?'undertaking acknowledged':c.data.workDelivered?'undertaking heard without acknowledgement':'undertaking not conveyed',detail:c.data.workText??'No undertaking passed.'}:hasMeetingKnowledge(world)&&c.purpose==='cancel_meeting'?{text:c.data.meetingAcknowledged?'meal cancellation acknowledged':c.data.meetingDelivered?'meal cancellation heard, acknowledgement not received':'meal cancellation not delivered',detail:c.data.meetingText??'No meeting update passed.'}:hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
   const resultText = c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
   const detailText = c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
@@ -1013,7 +1015,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
-    if((hasWorkHandover(world)&&c.purpose==='handover_work'||hasContinuityKnowledge(world)&&c.purpose==='share_work'||hasMeetingKnowledge(world)&&(c.purpose==='cancel_meeting'||c.purpose==='invite')||(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request'||hasPromiseDelays(world)&&c.purpose==='delay_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
+    if((hasCareHandback(world)&&c.purpose==='return_care'||hasWorkHandover(world)&&c.purpose==='handover_work'||hasContinuityKnowledge(world)&&c.purpose==='share_work'||hasMeetingKnowledge(world)&&(c.purpose==='cancel_meeting'||c.purpose==='invite')||(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request'||hasPromiseDelays(world)&&c.purpose==='delay_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(c.purpose==='teach_technique') {
       const why=lessonProblem(world,A,B,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
@@ -1082,6 +1084,10 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
+    case 'return_care': {
+      const text=proposeCareReturn(world,A,B,d.requestId??0,c.id);c.data.careReturnHeard=!!text;c.data.careReturnText=text??'No current childcare return could be proposed.';
+      if(text)bubble(world,A,text,'say',75);break;
+    }
     case 'handover_work': {
       const text=proposeHandover(world,A,B,d.planId??0,c.id,d.handoverMode??'offer',d.handoverId??0);c.data.handoverDelivered=!!text;c.data.handoverText=text??'No current handover proposal could be conveyed.';
       if(text)bubble(world,A,text,'say',80);break;
@@ -1220,6 +1226,10 @@ function reqOf(world: World, c: Conversation): Request | undefined {
 function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: ConvData): void {
   const req = reqOf(world, c);
   switch (c.purpose) {
+    case 'return_care': {
+      const text=c.data.careReturnHeard?answerCareReturn(world,A,B,d.requestId??0,c.id):null;c.data.careReturnAnswered=!!text;c.data.careReturnReply=text??'No childcare return answer was heard.';
+      if(text)bubble(world,B,text,'say',75);break;
+    }
     case 'handover_work': {
       const text=c.data.handoverDelivered?answerHandover(world,A,B,d.handoverMode==='offer'||!d.handoverMode?c.id:d.handoverId??0,d.handoverMode??'offer',c.id):null;c.data.handoverAnswered=!!text;c.data.handoverReply=text??'No handover answer was heard.';
       if(text)bubble(world,B,text,'say',80);break;
