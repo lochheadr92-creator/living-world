@@ -1,0 +1,13 @@
+{
+  "source": "fef13048629887a25ebfaad88de0fdd76176a113, rules 115 before successor behaviour",
+  "ordinary": {
+    "saved": "e9e42ad9a824963aac3eeeefe8156ff9d11f9e3d25c8efee72f5a583e6f93eec",
+    "uninterrupted": "93d37daf0389e335c7b4720336a6f4349de88cd4c974e922464723586a719add",
+    "continued": "93d37daf0389e335c7b4720336a6f4349de88cd4c974e922464723586a719add"
+  },
+  "projectHandcraft": {
+    "saved": "a678791866350f042b3cddbb809d921a210e790b801cda06b826237409039f60",
+    "uninterrupted": "4c945b7428dde80d8f8199a487e10937320a36cf2fc24a3630e073537d7300ba",
+    "continued": "4c945b7428dde80d8f8199a487e10937320a36cf2fc24a3630e073537d7300ba"
+  }
+}
