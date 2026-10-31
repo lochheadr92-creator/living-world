@@ -1,0 +1,20 @@
+// Read-only ordinary full-pack/known-ripe-crop episode; exact continuation from a retained five-day world.
+import {existsSync,mkdirSync,readFileSync,readdirSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {execFileSync} from 'node:child_process';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+import {stepWorld} from '../src/sim/world';
+import {generateOptions,rankOptions} from '../src/sim/decision';
+import {conservationReport,foodUnits,invRoom} from '../src/sim/economy';
+const [input,out]=process.argv.slice(2).filter(a=>a!=='--');if(!input||!out||existsSync(out))throw new Error('Input and fresh output required');
+const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),raw=readFileSync(input,'utf8'),w=deserializeWorld(raw),twin=deserializeWorld(raw),from=w.tick,began=performance.now(),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/full_pack_crop_trace.ts').sort(),manifest=()=>Object.fromEntries(files.map(f=>[f,hash(readFileSync(f,'utf8'))])),source=manifest();let person=0,until=30*2400,pureChecks=0;const samples:unknown[]=[],events:unknown[]=[];let trigger:unknown;
+w.hooks={onActivityStart:(p,a)=>{if(p.id===person)events.push({event:'start',tick:w.tick,kind:a.kind,label:a.label,target:a.targetId});},onActivityEnd:(p,a,result,detail)=>{if(p.id===person)events.push({event:'end',tick:w.tick,kind:a.kind,result,detail,grain:a.data.grain});}};
+while(w.tick<until){
+ if(w.tick%60===0){const before=serializeWorld(w);for(const p of w.persons){if(!p.alive||(person&&p.id!==person))continue;const ctx=generateOptions(w,p,true,true),ripe=Object.values(p.beliefs).filter(b=>b.kind==='plot'&&b.hh===p.hhId&&b.state==='ripe'&&b.amount>=1);if(!person&&(ctx.drives.hunger<=30||ctx.stage==='child'||foodUnits(p.inv)>0||invRoom(w,p,'grain')>=1||!ripe.length))continue;
+  if(!person){person=p.id;until=w.tick+1800;trigger={tick:w.tick,person:p.id,name:p.name};mkdirSync(out,{recursive:true});writeFileSync(out+'/trigger.json',serializeWorld(w));}
+  const ranked=rankOptions(ctx);samples.push(structuredClone({tick:w.tick,person:p.id,alive:p.alive,position:{x:p.x,y:p.y},needs:p.needs,inv:p.inv,carriedFood:foodUnits(p.inv),grainRoom:invRoom(w,p,'grain'),activity:p.activity?{kind:p.activity.kind,label:p.activity.label,phase:p.activity.phase,target:p.activity.targetId}:null,knownRipe:ripe.map(b=>({belief:b,observerOnlyActual:w.byId.get(b.id)})),top:ranked.slice(0,4).map(o=>({key:o.key,label:o.label,need:o.need,util:o.util})),blocked:ctx.blocked.filter(o=>/harvest|pack|grain/i.test(o.label+' '+o.blocked)).map(o=>({label:o.label,reason:o.blocked}))}));}
+  if(serializeWorld(w)!==before)throw new Error('Impure observer');pureChecks++;
+ }
+ stepWorld(w);stepWorld(twin);if(w.tick%2400===0&&!conservationReport(w).ok)throw new Error('Unbalanced items');if(w.tick%120===0&&performance.now()-began>600000)throw new Error('Ten-minute budget');
+}
+delete w.hooks;const final=serializeWorld(w);if(final!==serializeWorld(twin)||final!==serializeWorld(deserializeWorld(final)))throw new Error('Twin/reload mismatch');if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed');const report={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),input,inputHash:hash(raw),source,settings:w.settings,from,tick:w.tick,seconds:(performance.now()-began)/1000,trigger,pureChecks,events,samples,continuationEqual:true,conservation:conservationReport(w),limits:'First ordinary full-pack hungry adult with no carried food and known ripe household grain, then 1800 ticks. Actual plot details are observer-only and never supplied to the person. One episode, not causal famine or general frequency evidence.'};mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({from,tick:w.tick,seconds:report.seconds,trigger,pureChecks,samples:samples.length,events:events.length,conserved:report.conservation.ok}));

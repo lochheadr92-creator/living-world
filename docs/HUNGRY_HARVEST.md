@@ -109,3 +109,30 @@ necessary before drawing a general conclusion.
 Report: `autonomy_evidence/harvest114-forest-45/report.json`; complete world local.
 No runtime was changed during the run. The previous pending paragraph is superseded
 by this completed result, not silently rewritten as success.
+
+## Full-pack crop follow-up: a real blocked option, not a demonstrated death cause
+
+`full_pack_crop_trace.ts` continues the exact retained forest day-five save at
+rules 114, without altering its rules or adding knowledge, goods or decisions.
+The first hungry adult with no carried food, no grain room and a known ripe
+household crop is Isla (929), tick 31,140. Her food level is 34.183. Her pack holds
+hoe, basket, axe, two seeds, one wood and four stone. The crop at (46,40), about two
+tiles away, really has three grain, is ripe and unclaimed; she observed it two
+ticks earlier. The hunger-harvest choice is blocked by capacity, while she is
+travelling to berries and has other food choices. Actual crop details are strictly
+observer facts and were never given to her decision process.
+
+The trace follows 1,800 ticks. It records fruit gathering, a failed crop arrival
+because another person is harvesting, a completed feast, empty wild-grain/fish
+arrivals, danger avoidance and later fishing. Her retained work log reports two
+fruit and two fish gathered. At tick 32,940 she is alive, food 70.108, with the same
+full non-food pack. This observation establishes recovery via existing alternatives;
+it does not attribute an exact nutritional share to each action or establish that
+the blocked crop access caused her much later hunger death. Do not turn the 87
+full-pack samples into 87 fatal or independent events.
+
+349 pure observer checks, exact unobserved twin/reload and all-item conservation
+pass; 131.14 s; 30 retained person samples and 28 action events. Report:
+`autonomy_evidence/full-pack-crop114-forest/report.json`. Input SHA-256 and frozen
+source hashes are included; trigger/final worlds remain local. This adds diagnostic
+evidence only, with no simulation change or survival-effect claim.
