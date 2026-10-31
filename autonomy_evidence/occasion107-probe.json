@@ -1,0 +1,1472 @@
+[
+  {
+    "tick": 108109,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "explore",
+        "label": "Look for timber",
+        "util": 29.494016639863723
+      },
+      {
+        "kind": "gather",
+        "label": "Gathering wild grain",
+        "util": 16.22238333091123
+      }
+    ]
+  },
+  {
+    "tick": 108113,
+    "person": 1027,
+    "name": "Quinn",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "socialize",
+        "label": "Chat with Yara",
+        "util": 29.462336999960854
+      },
+      {
+        "kind": "withdraw",
+        "label": "Collect 4 planks from the timber yard",
+        "util": 31.93706809378956
+      }
+    ]
+  },
+  {
+    "tick": 108207,
+    "person": 1027,
+    "name": "Quinn",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "withdraw",
+        "label": "Collect 4 planks from the timber yard",
+        "util": 33.903717168404526
+      },
+      {
+        "kind": "visit",
+        "label": "Look in on Wes",
+        "util": 29.601829825583437
+      }
+    ]
+  },
+  {
+    "tick": 108289,
+    "person": 1031,
+    "name": "Isla",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 1,
+    "duration": 95,
+    "age": 113,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "eat",
+        "label": "Eat what I am carrying",
+        "util": 34.24792127259192
+      },
+      {
+        "kind": "socialize",
+        "label": "Ask Bea for bricks",
+        "util": 29.722611434481824
+      }
+    ]
+  },
+  {
+    "tick": 108308,
+    "person": 1032,
+    "name": "Jonas",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 20,
+    "duration": 205,
+    "age": 154,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "eat",
+        "label": "Eat what I am carrying",
+        "util": 51.431153846144035
+      },
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 38.39202786733746
+      }
+    ]
+  },
+  {
+    "tick": 108324,
+    "person": 1026,
+    "name": "Yara",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 36,
+    "duration": 159,
+    "age": 117,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Chopping wood to keep the fire going",
+        "util": 18.493601349466804
+      },
+      {
+        "kind": "plant",
+        "label": "Plant seed",
+        "util": 30.47271392007294
+      }
+    ]
+  },
+  {
+    "tick": 108332,
+    "person": 1029,
+    "name": "Talia",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 44,
+    "duration": 113,
+    "age": 214,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "eat",
+        "label": "Eat what I am carrying",
+        "util": 46.07592307681425
+      },
+      {
+        "kind": "eat_store",
+        "label": "Eat from the home store",
+        "util": 35.533191154539196
+      }
+    ]
+  },
+  {
+    "tick": 108373,
+    "person": 1000,
+    "name": "Sven",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 5,
+    "duration": 201,
+    "age": 96,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "build",
+        "label": "Build the house",
+        "util": 37.272392211958596
+      },
+      {
+        "kind": "eat",
+        "label": "Eat what I am carrying",
+        "util": 38.76999999999355
+      }
+    ]
+  },
+  {
+    "tick": 108412,
+    "person": 1027,
+    "name": "Quinn",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 33,
+    "duration": 168,
+    "age": 95,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Chopping wood for my household’s house (fired bricks)",
+        "util": 20.469750722543523
+      },
+      {
+        "kind": "gather",
+        "label": "Chopping wood for my household’s house (sawn planks)",
+        "util": 20.469750722543523
+      }
+    ]
+  },
+  {
+    "tick": 108891,
+    "person": 1022,
+    "name": "Maren",
+    "result": "failed",
+    "detail": "it was over by the time I got there",
+    "phase": "work",
+    "progress": 0,
+    "duration": 0,
+    "age": 87,
+    "attended": false,
+    "occasionStatus": "done",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "eat_store",
+        "label": "Eat from the granary",
+        "util": 34.632998176724286
+      },
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 29.949621361919633
+      }
+    ]
+  },
+  {
+    "tick": 108907,
+    "person": 1023,
+    "name": "Dax",
+    "result": "failed",
+    "detail": "it was over by the time I got there",
+    "phase": "work",
+    "progress": 0,
+    "duration": 0,
+    "age": 22,
+    "attended": false,
+    "occasionStatus": "done",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "fuel_fire",
+        "label": "Add wood to the fire",
+        "util": 21.41225041260233
+      },
+      {
+        "kind": "operate",
+        "label": "Lend a hand at the kiln",
+        "util": 19.327299914394498
+      }
+    ]
+  },
+  {
+    "tick": 110809,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "tend",
+        "label": "Tend the crops",
+        "util": 20.57400369224145
+      },
+      {
+        "kind": "tend",
+        "label": "Tend the crops",
+        "util": 19.242971761370278
+      }
+    ]
+  },
+  {
+    "tick": 110900,
+    "person": 1031,
+    "name": "Isla",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "deposit",
+        "label": "Bring 2 wood to the kiln",
+        "util": 28.333737958784276
+      },
+      {
+        "kind": "tend",
+        "label": "Tend the crops",
+        "util": 22.466948646225912
+      }
+    ]
+  },
+  {
+    "tick": 110912,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "tend",
+        "label": "Tend the crops",
+        "util": 22.604952388542955
+      },
+      {
+        "kind": "socialize",
+        "label": "Offer Alma a swap: stone for grain",
+        "util": 15.255440362076003
+      }
+    ]
+  },
+  {
+    "tick": 111007,
+    "person": 1032,
+    "name": "Jonas",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 7,
+    "duration": 168,
+    "age": 105,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "deposit",
+        "label": "Bring food home",
+        "util": 20.204046748072436
+      },
+      {
+        "kind": "deposit",
+        "label": "Add food to the storehouse",
+        "util": 15.556905980785341
+      }
+    ]
+  },
+  {
+    "tick": 111019,
+    "person": 1022,
+    "name": "Maren",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 19,
+    "duration": 236,
+    "age": 209,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "eat",
+        "label": "Eat what I am carrying",
+        "util": 42.131153846148464
+      },
+      {
+        "kind": "gather",
+        "label": "Gathering wild grain",
+        "util": 28.660052248861305
+      }
+    ]
+  },
+  {
+    "tick": 111028,
+    "person": 1000,
+    "name": "Sven",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 28,
+    "duration": 223,
+    "age": 210,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 27.335403621742113
+      },
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 26.14344143803679
+      }
+    ]
+  },
+  {
+    "tick": 111030,
+    "person": 1018,
+    "name": "Alma",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 30,
+    "duration": 110,
+    "age": 211,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "tend",
+        "label": "Tend the crops",
+        "util": 12.554309596068645
+      },
+      {
+        "kind": "tend",
+        "label": "Tend the crops",
+        "util": 12.831139776207525
+      }
+    ]
+  },
+  {
+    "tick": 111060,
+    "person": 1036,
+    "name": "Vik",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 58,
+    "duration": 205,
+    "age": 228,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Picking fruit",
+        "util": 24.980616443244664
+      },
+      {
+        "kind": "eat_store",
+        "label": "Eat from the home store",
+        "util": 24.56303124607989
+      }
+    ]
+  },
+  {
+    "tick": 111075,
+    "person": 1026,
+    "name": "Yara",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 6,
+    "duration": 178,
+    "age": 218,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "deposit",
+        "label": "Bring 1 clay and 2 wood to the kiln",
+        "util": 25.39954576220552
+      },
+      {
+        "kind": "deposit",
+        "label": "Bring 2 wood to the timber yard",
+        "util": 23.053792241865665
+      }
+    ]
+  },
+  {
+    "tick": 111092,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "gathering",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "explore",
+        "label": "Look for timber",
+        "util": 24.295488127185187
+      },
+      {
+        "kind": "socialize",
+        "label": "Offer Alma a swap: stone for grain",
+        "util": 16.217366452538524
+      }
+    ]
+  },
+  {
+    "tick": 111116,
+    "person": 1029,
+    "name": "Talia",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 17,
+    "duration": 116,
+    "age": 196,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "deposit",
+        "label": "Bring 2 wood to the kiln",
+        "util": 30.16715530230637
+      },
+      {
+        "kind": "deposit",
+        "label": "Bring 2 wood to the timber yard",
+        "util": 27.79413536202096
+      }
+    ]
+  },
+  {
+    "tick": 111203,
+    "person": 1007,
+    "name": "Sofia",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 27,
+    "duration": 158,
+    "age": 111,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "socialize",
+        "label": "Ask Vik for stone",
+        "util": 25.663003344683247
+      },
+      {
+        "kind": "socialize",
+        "label": "Ask Bea for stone",
+        "util": 26.173339830413287
+      }
+    ]
+  },
+  {
+    "tick": 111238,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "gathering",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "socialize",
+        "label": "Offer Kai a swap: stone for grain",
+        "util": 11.916134100474753
+      },
+      {
+        "kind": "wander",
+        "label": "Wander down to the square",
+        "util": 6.000000000000002
+      }
+    ]
+  },
+  {
+    "tick": 111265,
+    "person": 1014,
+    "name": "Hal",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 25,
+    "duration": 222,
+    "age": 200,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 35.09173079457608
+      },
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 31.77245699827452
+      }
+    ]
+  },
+  {
+    "tick": 111318,
+    "person": 1001,
+    "name": "Bea",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 77,
+    "duration": 168,
+    "age": 103,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "eat",
+        "label": "Eat what I am carrying",
+        "util": 31.110769230755075
+      },
+      {
+        "kind": "gather",
+        "label": "Chopping wood to repair the lean-to",
+        "util": 15.472032699014282
+      }
+    ]
+  },
+  {
+    "tick": 111332,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "gathering",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "rest",
+        "label": "Shelter at the hut",
+        "util": 3.092345966734243
+      },
+      {
+        "kind": "socialize",
+        "label": "Offer Mona a swap: stone for berries",
+        "util": 12.783736340425417
+      }
+    ]
+  },
+  {
+    "tick": 111336,
+    "person": 1013,
+    "name": "Pia",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 8,
+    "duration": 112,
+    "age": 113,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 23.90811552886712
+      },
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 22.682225148623473
+      }
+    ]
+  },
+  {
+    "tick": 111494,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "rest",
+        "label": "Shelter at the hut",
+        "util": 5.67354446866997
+      },
+      {
+        "kind": "wander",
+        "label": "Potter about near home",
+        "util": 6
+      }
+    ]
+  },
+  {
+    "tick": 111566,
+    "person": 1027,
+    "name": "Quinn",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 14,
+    "duration": 103,
+    "age": 218,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "rest",
+        "label": "Shelter at the hut",
+        "util": 24.42782236629643
+      },
+      {
+        "kind": "deposit",
+        "label": "Bring food home",
+        "util": 19.20826653427005
+      }
+    ]
+  },
+  {
+    "tick": 115734,
+    "person": 1014,
+    "name": "Hal",
+    "result": "interrupted",
+    "detail": "danger nearby",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 8,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "flee",
+        "label": "Run to safety (home)",
+        "util": 111.82130303945355
+      }
+    ]
+  },
+  {
+    "tick": 115743,
+    "person": 1014,
+    "name": "Hal",
+    "result": "interrupted",
+    "detail": "danger nearby",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 8,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "flee",
+        "label": "Run to safety (home)",
+        "util": 115.68374912387321
+      }
+    ]
+  },
+  {
+    "tick": 115792,
+    "person": 1031,
+    "name": "Isla",
+    "result": "interrupted",
+    "detail": "danger nearby",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 54,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "flee",
+        "label": "Run to safety (home)",
+        "util": 105.93331677110103
+      }
+    ]
+  },
+  {
+    "tick": 115889,
+    "person": 1007,
+    "name": "Sofia",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 17,
+    "duration": 152,
+    "age": 148,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "rest",
+        "label": "Sit down and rest",
+        "util": 33.47605630665786
+      },
+      {
+        "kind": "sleep",
+        "label": "Sleep at my lean-to",
+        "util": 25.87128991418468
+      }
+    ]
+  },
+  {
+    "tick": 115904,
+    "person": 1022,
+    "name": "Maren",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 32,
+    "duration": 158,
+    "age": 227,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "repair",
+        "label": "Help repair a neighbour’s smithy",
+        "util": 23.83500470808702
+      },
+      {
+        "kind": "gather",
+        "label": "Chopping wood to keep the fire going",
+        "util": 13.151921540458597
+      }
+    ]
+  },
+  {
+    "tick": 115929,
+    "person": 1027,
+    "name": "Quinn",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 57,
+    "duration": 159,
+    "age": 173,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Picking fruit",
+        "util": 26.918650003215756
+      },
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 26.798882734452814
+      }
+    ]
+  },
+  {
+    "tick": 115940,
+    "person": 1001,
+    "name": "Bea",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 37,
+    "duration": 113,
+    "age": 267,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "plant",
+        "label": "Plant seed",
+        "util": 33.30460584447263
+      },
+      {
+        "kind": "deposit",
+        "label": "Bring food home",
+        "util": 20.722323577023417
+      }
+    ]
+  },
+  {
+    "tick": 115983,
+    "person": 1014,
+    "name": "Hal",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 60,
+    "attended": false,
+    "occasionStatus": "gathering",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "socialize",
+        "label": "Chat with Alma",
+        "util": 53.493901542472486
+      },
+      {
+        "kind": "attend",
+        "label": "Go to the feast at the hall",
+        "util": 33.27312044596339
+      }
+    ]
+  },
+  {
+    "tick": 116183,
+    "person": 1000,
+    "name": "Sven",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 29,
+    "duration": 129,
+    "age": 279,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "deposit",
+        "label": "Bring food home",
+        "util": 18.288686328968357
+      },
+      {
+        "kind": "gather",
+        "label": "Chopping wood to keep the fire going",
+        "util": 19.9202017852316
+      }
+    ]
+  },
+  {
+    "tick": 116191,
+    "person": 1013,
+    "name": "Pia",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 15,
+    "duration": 176,
+    "age": 101,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Fishing",
+        "util": 30.463245715885048
+      },
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 29.59991711899552
+      }
+    ]
+  },
+  {
+    "tick": 116296,
+    "person": 1032,
+    "name": "Jonas",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 77,
+    "duration": 225,
+    "age": 114,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 31.368594076965678
+      },
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 30.153483250441752
+      }
+    ]
+  },
+  {
+    "tick": 116369,
+    "person": 1024,
+    "name": "Mona",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 17,
+    "duration": 237,
+    "age": 151,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 15.086087283872688
+      },
+      {
+        "kind": "withdraw",
+        "label": "Collect 1 grain from the heap",
+        "util": 21.64811893607335
+      }
+    ]
+  },
+  {
+    "tick": 116437,
+    "person": 1019,
+    "name": "Jax",
+    "result": "failed",
+    "detail": "flood route stayed blocked after waiting",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 180,
+    "attended": false,
+    "occasionStatus": "gathering",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "sleep",
+        "label": "Sleep at my lean-to",
+        "util": 13.373253169692823
+      },
+      {
+        "kind": "rest",
+        "label": "Shelter at the lean-to",
+        "util": 7.423349598975756
+      }
+    ]
+  },
+  {
+    "tick": 118247,
+    "person": 1031,
+    "name": "Isla",
+    "result": "failed",
+    "detail": "no way to get there",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 0,
+    "attended": false,
+    "occasionStatus": "called",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "visit",
+        "label": "Look in on Lena",
+        "util": 33.238207391120355
+      },
+      {
+        "kind": "withdraw",
+        "label": "Collect 1 charcoal from the kiln",
+        "util": 23.220483862316325
+      }
+    ]
+  },
+  {
+    "tick": 118284,
+    "person": 1001,
+    "name": "Bea",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 12,
+    "duration": 166,
+    "age": 209,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Picking berries",
+        "util": 25.172955569608426
+      },
+      {
+        "kind": "gather",
+        "label": "Breaking stone to make a hoe",
+        "util": 10.967955549274262
+      }
+    ]
+  },
+  {
+    "tick": 118358,
+    "person": 1027,
+    "name": "Quinn",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 14,
+    "duration": 176,
+    "age": 171,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "deposit",
+        "label": "Bring 2 wood to the timber yard",
+        "util": 22.912765994371796
+      },
+      {
+        "kind": "repair",
+        "label": "Repair the hut",
+        "util": 22.712306517562823
+      }
+    ]
+  },
+  {
+    "tick": 118408,
+    "person": 1036,
+    "name": "Vik",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 12,
+    "duration": 181,
+    "age": 106,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "gather",
+        "label": "Chopping wood to make a spear",
+        "util": 6.560427341994512
+      },
+      {
+        "kind": "gather",
+        "label": "Chopping wood to make a spear",
+        "util": 6.705079100578348
+      }
+    ]
+  },
+  {
+    "tick": 118490,
+    "person": 1018,
+    "name": "Alma",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 17,
+    "duration": 138,
+    "age": 112,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "eat",
+        "label": "Eat what I am carrying",
+        "util": 32.436538461549496
+      },
+      {
+        "kind": "rest",
+        "label": "Sit down and rest",
+        "util": 29.526906807336783
+      }
+    ]
+  },
+  {
+    "tick": 118707,
+    "person": 1008,
+    "name": "Ivo",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 5,
+    "duration": 143,
+    "age": 120,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "sleep",
+        "label": "Sleep at my lean-to",
+        "util": 11.614283756259903
+      },
+      {
+        "kind": "rest",
+        "label": "Shelter at the lean-to",
+        "util": 7.952322777836162
+      }
+    ]
+  },
+  {
+    "tick": 118717,
+    "person": 1026,
+    "name": "Yara",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 32,
+    "duration": 148,
+    "age": 322,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 46.01194546941268
+      },
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 42.41051262132547
+      }
+    ]
+  },
+  {
+    "tick": 118812,
+    "person": 1032,
+    "name": "Jonas",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "work",
+    "progress": 40,
+    "duration": 237,
+    "age": 232,
+    "attended": true,
+    "occasionStatus": "gathering",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "sleep",
+        "label": "Sleep at my hut",
+        "util": 46.87052647948708
+      },
+      {
+        "kind": "rest",
+        "label": "Shelter at the hut",
+        "util": 15.582494554224414
+      }
+    ]
+  },
+  {
+    "tick": 118870,
+    "person": 1029,
+    "name": "Talia",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 268,
+    "attended": false,
+    "occasionStatus": "gathering",
+    "offered": true,
+    "critical": [],
+    "top": [
+      {
+        "kind": "sleep",
+        "label": "Sleep at my hut",
+        "util": 59.67281659490454
+      },
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 56.6444777443324
+      }
+    ]
+  },
+  {
+    "tick": 118890,
+    "person": 1024,
+    "name": "Mona",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 109,
+    "attended": false,
+    "occasionStatus": "done",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "sleep",
+        "label": "Sleep at my hut",
+        "util": 45.75868798251514
+      },
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 27.093152702867844
+      }
+    ]
+  },
+  {
+    "tick": 118891,
+    "person": 1000,
+    "name": "Sven",
+    "result": "failed",
+    "detail": "it was over by the time I got there",
+    "phase": "work",
+    "progress": 0,
+    "duration": 0,
+    "age": 102,
+    "attended": false,
+    "occasionStatus": "done",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "sleep",
+        "label": "Sleep at my house",
+        "util": 64.29173908494978
+      },
+      {
+        "kind": "sleep",
+        "label": "Sleep at my lean-to",
+        "util": 50.748295391187206
+      }
+    ]
+  },
+  {
+    "tick": 118919,
+    "person": 1019,
+    "name": "Jax",
+    "result": "interrupted",
+    "detail": "something better came up",
+    "phase": "travel",
+    "progress": 0,
+    "duration": 0,
+    "age": 257,
+    "attended": false,
+    "occasionStatus": "done",
+    "offered": false,
+    "critical": [],
+    "top": [
+      {
+        "kind": "sleep",
+        "label": "Sleep at my hut",
+        "util": 53.721255169442095
+      },
+      {
+        "kind": "drink",
+        "label": "Go and drink at the water",
+        "util": 46.85733609989546
+      }
+    ]
+  }
+]
