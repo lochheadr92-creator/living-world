@@ -36,7 +36,9 @@ the unchanged valid home-loss fixture's full gathering → hauling → building 
 sheltered sleep sequence. Focused housing/layout/golden/reference regression passes
 93 tests in six files before the additional journey test; the final construction
 file passes 8/8. Typecheck and production build pass (existing bundle-size warning).
-The full regression is running separately and is not yet claimed here.
+Full regression: **344 files / 2,226 tests passed**, 491.69 seconds on the owner's
+Windows machine (`autonomy-finish109-full-tests.log`). Runtime `9b45375`; immutable
+reference `0b3e23f` passes 1/1 separately (added after full-suite collection).
 
 Two real-page checks: `finish109-rendered` passes 5/5 for the explicitly staged
 199-of-200-work boundary; `home109-rendered` passes 7/7 for the same finite observed

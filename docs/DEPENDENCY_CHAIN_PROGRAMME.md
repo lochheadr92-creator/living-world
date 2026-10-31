@@ -8,7 +8,10 @@
   focused/build and rendered evidence. The unchanged valid collapse fixture now
   completes its lean-to and sleeps there at 109; later thirst death is preserved.
   This closes that staged paid replacement/use gap, not household viability or
-  ordinary collapse reliability. Full rules-109 regression is running separately.
+  ordinary collapse reliability. Runtime `9b45375`, immutable reference `0b3e23f`
+  (1/1 separately); full regression **344 files / 2,226 tests passed**, 491.69 s.
+  The 45-day Large meadow accumulation is now running on frozen rules-109 source;
+  mature Large performance is not yet measured.
 
 - Published baseline `056dbac` full regression now verified on the owner's Windows
   machine: **339 files / 2,204 tests passed**, 556.86 seconds. This closes the
