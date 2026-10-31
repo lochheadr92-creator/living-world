@@ -1,4 +1,5 @@
 import { validateEcology } from '../sim/ecology';
+import { validateDecisionLedger, normaliseDecisionLedger } from '../sim/decision_ledger';
 import { validateFlood } from '../sim/flood';
 import { validateOffcuts } from '../sim/offcuts';
 import { validateMealLeftovers } from '../sim/meal_leftovers';
@@ -269,6 +270,7 @@ export function deserializeWorld(json: string): World {
   validateRouteExperience(w);
   validateHelperLearning(w);
   validatePromiseKnowledge(w);
+  validateDecisionLedger(w);
   validatePromiseOutcomes(w);
   validatePromiseExpectations(w);
   validatePromiseTargets(w);
@@ -296,6 +298,8 @@ export function deserializeWorld(json: string): World {
     if (p.trade === undefined) p.trade = null;
     w.byId.set(p.id, p);
   }
+  // rules 103: a world that carries the decision ledger gives every person the fields; older saves gain empty ones on load
+  normaliseDecisionLedger(w);
   for (const a of w.animals) w.byId.set(a.id, a);
   for (const s of w.sources) {
     w.byId.set(s.id, s);

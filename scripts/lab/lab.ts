@@ -9,6 +9,7 @@ import {repairDutyOn,setRepairDuty,singleRoofDutyOn,setSingleRoofDuty} from '../
 import {readyStepOn,setReadyStep} from '../../src/sim/ready_step';
 import {householdSupplyOn,setHouseholdSupply} from '../../src/sim/household_supply';
 import {promisedSupplyOn,setPromisedSupply} from '../../src/sim/promised_supply';
+import {decisionLedgerOn,setDecisionLedger} from '../../src/sim/decision_ledger';
 import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
@@ -354,6 +355,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-care-supply')return {spec:label,summary:'remove acquisition motivated by personally observed resident care; retain existing handoff',install(){const was=careSupplyOn();setCareSupply(false);return ()=>setCareSupply(was);}};
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};
   if(kind==='rich-no-care-handback')return {spec:label,summary:'remove explicit childcare recovery handback and retained watch progress',install(){const was=careHandbackOn();setCareHandback(false);return ()=>setCareHandback(was);}};
+  if(kind==='rich-no-decision-ledger')return {spec:label,summary:'stop writing the personal decision ledger; no behaviour depends on it',install(){const was=decisionLedgerOn();setDecisionLedger(false);return ()=>setDecisionLedger(was);}};
   if(kind==='rich-no-single-roof-duty')return {spec:label,summary:'allow a second roof promise for a building already promised; rules 101 acceptance',install(){const was=singleRoofDutyOn();setSingleRoofDuty(false);return ()=>setSingleRoofDuty(was);}};
   if(kind==='rich-no-promised-supply')return {spec:label,summary:'remove promised-material coverage of own site fetching and home-site planning; expectations are still remembered',install(){const was=promisedSupplyOn();setPromisedSupply(false);return ()=>setPromisedSupply(was);}};
   if(kind==='rich-no-household-supply')return {spec:label,summary:'remove deferral of a heard household reserve and complementary site material choice; heard records are still kept',install(){const was=householdSupplyOn();setHouseholdSupply(false);return ()=>setHouseholdSupply(was);}};

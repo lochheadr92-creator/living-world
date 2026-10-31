@@ -11,12 +11,13 @@ import {setExternalController} from '../../src/sim/external';
 import {stepWorld} from '../../src/sim/world';
 import {produce,consume} from '../../src/sim/economy';
 import {carryCap} from '../../src/sim/people';
-export function promisedSupplyScene(version=101,woodNeed=3){
+/** `rockAt` defaults to the recorded rules-101 fixture's edge rock (80,12), which sits on the map boundary; a saved attempt to reach it fails validation, so later scenes pass an in-bounds rock. The default is kept because the rules-101 reference was recorded with it. */
+export function promisedSupplyScene(version=101,woodNeed=3,rockAt:[number,number]=[80,12]){
  const s=stage('promised-supply'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=version;
  const ada=addPerson(s,'Ada',40.5,40.5,{age:34,inv:{bread:2,water:2},hunger:100,thirst:100,energy:100});
  const ben=addPerson(s,'Ben',44.5,40.5,{age:33,inv:{wood:3,bread:2,water:2},hunger:100,thirst:100,energy:100,traits:{generosity:1,sociability:1}});
  const st=site(s,'hut',42,36,ada.hhId,ada.id);st.required.wood=woodNeed;
- const tree=makeSource(w,'tree',12,78,12),rock=makeSource(w,'rock',80,12,8);
+ const tree=makeSource(w,'tree',12,78,12),rock=makeSource(w,'rock',rockAt[0],rockAt[1],8);
  done(s);for(const p of [ada,ben]){pin(p);p.needs.warmth=95;p.needs.safety=95;p.cooldowns.trade=1e12;}
  // Ada's hands are full of ore nothing here wants, so a carrier's answer is a real promise to haul to the site (rules 11), not a gift
  produce(w,ada.inv,carryCap(w,ada),'ore',12,'declared full carried load');

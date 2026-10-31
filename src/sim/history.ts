@@ -1,4 +1,5 @@
 import {careReturnHistory} from './care_handback';
+import {carriesDecisionLedger} from './decision_ledger';
 import {describeCancellation} from './request_cancellation';
 import {describeExpectation} from './promise_expectations';
 import {describeResolution} from './promise_outcomes';
@@ -90,4 +91,18 @@ export function relationshipHistory(w: World, p: Person): string[] {
  }
  rows.push(...careReturnHistory(p));
  return rows.length?rows:['No recorded relationships.'];
+}
+
+/** Rules 103 (decision_ledger.ts): what was chosen, over what, with what set aside, and how it ended, newest first. */
+export function decisionHistory(w: World, p: Person): string[] {
+ if(!carriesDecisionLedger(w))return ['Decision history is not kept under these rules.'];
+ const ago=(tick:number)=>{const d=w.tick-tick;return d<60?'just now':d<2400?`${Math.round(d/100)} hundred ticks ago`.replace('1 hundred','one hundred'):`${(d/2400).toFixed(1)} days ago`;};
+ const rows:string[]=[];
+ for(const e of [...(p.decisions??[])].reverse()){
+  const ended=e.outcome?`ended ${e.outcome} at tick ${e.endedAt}${e.detail?`: ${e.detail}`:''}`:e.activityId?(p.activity?.id===e.activityId||p.suspended?.id===e.activityId?'still under way':'ending not recorded'):'nothing was started';
+  rows.push(`Tick ${e.tick} (${ago(e.tick)}), ${e.trigger}: ${e.chosen?`chose “${e.chosen}”`:'chose nothing'}${e.forPlan?` as a step of plan #${e.forPlan}`:''}; ${ended}. Passed over then: ${e.passedOver.length?e.passedOver.join(', '):'nothing'}. Set aside then: ${e.setAside.length?e.setAside.map(s=>`${s.label} (${s.reason||'no reason recorded'})`).join('; '):'nothing'}.`);
+ }
+ if(!rows.length)rows.push('No decision recorded yet.');
+ if(p.decisionsDropped)rows.push(`${p.decisionsDropped} earlier ${p.decisionsDropped===1?'decision was':'decisions were'} compacted and ${p.decisionsDropped===1?'is':'are'} not kept.`);
+ return rows;
 }

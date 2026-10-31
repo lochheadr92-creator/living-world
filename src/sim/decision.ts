@@ -1,6 +1,7 @@
 import { relocationOptions } from './relocation';
 import {applyRouteExperience} from './route_learning';
 import { whileObserving } from './lifechanges';
+import { ledgerDecision } from './decision_ledger';
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
@@ -139,7 +140,9 @@ function because(o: Option, plan: Intention | null = null, trade = ''): string {
   return lead ? `${lead} · ${parts}` : parts;
 }
 
-function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string, why?: string): void {
+function record(world: World, p: Person, ctx: Ctx, ranked: Option[], chosen: Option | null, trigger: string, why?: string, act: Activity | null = null): void {
+  // rules 103 (decision_ledger.ts): the same decision, kept with the activity it launched, for the inspector's history
+  ledgerDecision(world, p, ctx, ranked, chosen, trigger, act);
   const alts = ranked.filter((o) => o !== chosen).slice(0, 4).map(summarize);
   // The record keeps only the first six blocked options, and the housing question lands late in a long list because
   // `optPlanBuild` runs near the end. "Why is this household not building?" is the one a viewer most often wants, so from
@@ -178,7 +181,7 @@ function launch(world: World, p: Person, ctx: Ctx, trigger: string): boolean {
     // this activity IS the plan's current step, so the inspector can tell a step under way from a step merely settled on
     if (plan) act.data.forPlan = plan.id;
     if (probe.on && o.kind === 'wander') whyWander(ctx, ranked, i);
-    record(world, p, ctx, ranked, o, trigger, why);
+    record(world, p, ctx, ranked, o, trigger, why, act);
     startActivity(world, p, act);
     return true;
   }
@@ -302,7 +305,7 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
       // narrowing only: an amount limit may lower the activity's own planned quantity, never raise it
       if (lim.limit.amount !== undefined && act.amount > 0) act.amount = Math.min(act.amount, lim.limit.amount);
     }
-    record(world, p, ctx, ranked, o, trigger + ' (external)', 'chosen from outside');
+    record(world, p, ctx, ranked, o, trigger + ' (external)', 'chosen from outside', act);
     startActivity(world, p, act);
     ext.notify?.(world, p, { kind: 'applied', key: o.key, activity: act, ...(lim.limit ? { limit: lim.limit } : {}) });
     return;
@@ -377,7 +380,7 @@ export function reviewActivity(world: World, p: Person): void {
     prepareRoutine(world,p,act,best);
     act.data.why = because(best, null, tradeReason(world, p, best));
     if (probe.on && best.kind === 'wander') probeWander((ctx.stage === 'child' ? 'child ' : 'adult ') + 'review');
-    record(world, p, ctx, ranked, best, danger ? 'danger' : criticalMismatch ? 'urgent need' : 'review');
+    record(world, p, ctx, ranked, best, danger ? 'danger' : criticalMismatch ? 'urgent need' : 'review', undefined, act);
     if (danger || criticalMismatch) markSetAside(world, p);
     // being driven off from a place is remembered, so the same trip is not repeated at once
     if (danger && a.targetId && (a.kind === 'drink' || a.kind === 'gather' || a.kind === 'fetch_water')) noteFailure(world, p, a.targetId, 'a wolf came too close');

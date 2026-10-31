@@ -55,3 +55,6 @@ final saves local): five days / 12,000 ticks each (90.61 s at 101, 91.24 s at 10
 - Tool plans keep their rules-80 behaviour (the step names the promise, the person may still fetch); water, food and
   care promises are outside this slice. Counteroffers, ability and location questions (A8) remain absent.
 - No aggregate benefit, fewer-trips or survival claim is made; ordinary frequency is whatever the screens show.
+- Fixture note (found while recording rules 103): the staged scene's far rock sits on the map boundary (80,12). A saved
+  attempt to walk to it fails save validation, which none of the recorded rules-101 paths reach; the recorded reference
+  is kept as it is, and later scenes pass an in-bounds rock through the fixture's `rockAt` argument.

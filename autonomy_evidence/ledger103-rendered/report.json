@@ -1,0 +1,93 @@
+{
+  "rules": 103,
+  "evidence": "ORDINARY river world (no staging) run 900 ticks in the page; the person shown is the one with the most compacted decisions. Panel text is the inspector view of recorded state.",
+  "checks": [
+    {
+      "name": "an ordinary river person at rules 103 carries a bounded ledger with closed entries and a compaction count",
+      "ok": true,
+      "detail": {
+        "name": "Ben",
+        "entries": 8,
+        "closed": 7,
+        "dropped": 8,
+        "sample": [
+          {
+            "tick": 795,
+            "trigger": "free",
+            "key": "tend:1684",
+            "chosen": "Tend the crops",
+            "kind": "tend",
+            "targetId": 1684,
+            "forPlan": 0,
+            "activityId": 1710,
+            "passedOver": [
+              "Fishing",
+              "Gathering wild grain",
+              "Build the lean-to"
+            ],
+            "setAside": [
+              {
+                "label": "Work on the building site",
+                "reason": "site is waiting for materials (4 wood)"
+              },
+              {
+                "label": "Lay out a hut",
+                "reason": "too much already being built here at once"
+              }
+            ],
+            "outcome": "success",
+            "detail": "done",
+            "endedAt": 806
+          },
+          {
+            "tick": 807,
+            "trigger": "free",
+            "key": "gather:1091",
+            "chosen": "Fishing",
+            "kind": "gather",
+            "targetId": 1091,
+            "forPlan": 0,
+            "activityId": 1719,
+            "passedOver": [
+              "Gathering wild grain",
+              "Explore somewhere new",
+              "Picking berries"
+            ],
+            "setAside": [
+              {
+                "label": "Work on the building site",
+                "reason": "site is waiting for materials (4 wood)"
+              },
+              {
+                "label": "Lay out a hut",
+                "reason": "too much already being built here at once"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "the Recent decisions panel shows choices with endings, what was passed over and what was set aside; inspection leaves the state unchanged",
+      "ok": true,
+      "detail": {
+        "excerpt": "Recent decisions\n\nTick 807 (one hundred ticks ago), free: chose “Fishing”; still under way. Passed over then: Gathering wild grain, Explore somewhere new, Picking berries. Set aside then: Work on the building site (site is waiting for materials (4 wood)); Lay out a hut (too much already being built here at once).\n\nTick 795 (one hundred ticks ago), free: chose “Tend the crops”; ended success at tick 806: done. Passed over then: Fishing, Gathering wild grain, Build the lean-to. Set aside then: Work on the building site (site is waiting for materials (4 wood)); Lay out a hut (too much already being built here at once).\n\nTick 781 (one hundred ticks ago), free: chose “Plant seed”; ended success a",
+        "pure": true
+      }
+    },
+    {
+      "name": "the ledger reloads exactly and reads the same from the loaded world",
+      "ok": true,
+      "detail": {
+        "same": true,
+        "entries": 8,
+        "history": "Tick 807 (one hundred ticks ago), free: chose “Fishing”; still under way. Passed over then: Gathering wild grain, Explore somewhere new, Picking berries. Set aside then: Work on the building site (site is waiting for materials (4 wood)); Lay out a hut (too much already being built here at once)."
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

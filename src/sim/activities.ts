@@ -1,4 +1,5 @@
 import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
+import { closeDecision } from './decision_ledger';
 import { floodMovementBlocked, floodSpeed, hasFloodAccess, knownFloodCosts, observeFlood } from './flood';
 import { floodEscapePath, waitForFlood } from './flood_access';
 import { injuryFactor } from './life';
@@ -421,6 +422,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   const optKey = a.data.optKey as string | undefined;
   if (optKey && (outcome === 'failed' || (outcome === 'partial' && a.cycle === 0 && a.progress < 4))) p.cooldowns['opt:' + optKey] = world.tick + 80;
   if (a.kind !== 'converse' || outcome !== 'success') setResult(world, p, a.label, outcome, detail);
+  closeDecision(world, p, a, outcome, detail);
   if (outcome === 'failed' && !a.data.logged) addLog(world, p, 'work', `Gave up “${a.label}”: ${detail}.`);
   if (p.pose !== 'sleep' || outcome !== 'interrupted') p.pose = 'stand';
   p.nextThink = world.tick;

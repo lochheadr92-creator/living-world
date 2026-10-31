@@ -8,7 +8,7 @@ import { homeDeliveryProgress, homePlanPause, homeSiteRequirements } from './ins
 import { describeTechniques, lessonProgress } from './techniques';
 import {backgroundDescription} from './background';
 import { skillExplanation } from './development';
-import { civicHistory, householdHistory, projectHistory, relationshipHistory } from './history';
+import { civicHistory, householdHistory, projectHistory, relationshipHistory, decisionHistory } from './history';
 // Read-only view-models for the UI. Nothing in here mutates the world or consumes random numbers,
 // so inspecting a person can never change what happens next.
 import { BUILD_DEF, DAY, DEPOSIT_TYPES, NUTRITION, TICKS_PER_YEAR, isHomeType, isSolidHome } from './constants';
@@ -141,6 +141,8 @@ export interface PersonView {
   civic: { township: string; lines: string[] };
   householdHistory: string[];
   relationshipHistory: string[];
+  /** rules 103: recent decisions with what became of them */
+  decisionHistory: string[];
   householdColor: number;
   home: string;
   health: number;
@@ -612,6 +614,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     civic: civicHistory(world, p),
     householdHistory: householdHistory(world, p),
     relationshipHistory: relationshipHistory(world, p),
+    decisionHistory: decisionHistory(world, p),
     householdColor: hh ? hh.color : 0,
     home: homeLine(world, p, homeB && homeB.ent === 'building' ? homeB : null),
     health: p.health,

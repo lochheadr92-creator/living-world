@@ -702,6 +702,9 @@ export interface Person {
   log: LogEntry[];
   lastDecision: DecisionRecord | null;
   lastResult: ResultRecord | null;
+  /** rules 103 (decision_ledger.ts): recent decisions and what became of them; present only in worlds that carry the ledger */
+  decisions?: import('./decision_ledger').DecisionEntry[];
+  decisionsDropped?: number;
   careJourney?: import('./care_journey').CareJourney;
   lastPercept: { tick: number; seen: number; newBeliefs: number };
   nextThink: number;

@@ -1,4 +1,5 @@
 import { initialiseTechniques } from './techniques';
+import { carriesDecisionLedger } from './decision_ledger';
 import { initialSkills } from './development';
 import {backgroundFor,variedBackgrounds} from './background';
 import { elderFactor } from './life';
@@ -214,6 +215,7 @@ export function createPerson(world: World, rng: RNG, o: NewPersonOpts): Person {
     log: [],
     lastDecision: null,
     lastResult: null,
+    ...(carriesDecisionLedger(world) ? { decisions: [], decisionsDropped: 0 } : {}),
     lastPercept: { tick: 0, seen: 0, newBeliefs: 0 },
     nextThink: 0,
     cooldowns: {},
