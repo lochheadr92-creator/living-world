@@ -63,10 +63,27 @@ from the last attempt and stamps a successful revision as a new reconsideration;
 the unchanged 240-tick constant is shared with ordinary batch recovery. The
 corrected core/old-recording/immutable-113 run passes **10 tests / 3 files**.
 Build/typecheck and the final rendered run pass again. Full regression and three
-five-day uninstalled comparisons are running on the frozen corrected source.
+five-day uninstalled comparisons subsequently completed on frozen corrected source.
 
 Immutable older-protocol evidence: `tests/protocol31_32_revision_predecessor.json`
 was captured on unchanged main `e64789d`, before revision support. Both protocol
 31 and 32 transcripts replay to their exact final hashes. Never regenerate that
 record on successor source. No claim is made about general project revision,
 cross-family composition, real-model decisions or aggregate world benefit.
+
+## Final verified checkpoint
+
+Runtime `9425ac3`. The first completed full run had 355 passing files / 2,278 passing
+tests and one current-observation assertion still pinning 17. It was corrected to
+18; historical protocol-31/32 assertions remain 17. Focused 13 tests / 3 files pass,
+then the full suite was rerun end to end: **356 files / 2,279 tests passed**,
+332.66 s (`autonomy-project-revision-full-verified.log`). No unresolved failure is
+being carried as "likely fixed". The existing timeout-overflow warning is retained.
+
+The final rendered run passes 8/8 and its screenshots were inspected. All three
+five-day Normal river/meadow/forest worlds with no controller installed match the
+pre-revision rules-113 saves **byte for byte**. Each also has 100 pure checks,
+exact unobserved twins/reloads, conserved items, 28 alive and no deaths. Reports and
+SHA-256 comparisons are in `autonomy_evidence/revision-uninstalled-final-*-5`;
+full saves remain local. This supports the unchanged autonomous semantics and no
+rules bump; it is not evidence of ordinary autonomous revision or broad welfare.

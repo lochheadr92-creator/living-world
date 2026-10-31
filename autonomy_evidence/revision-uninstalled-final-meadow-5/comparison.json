@@ -1,0 +1,9 @@
+{
+  "seed": "meadow",
+  "same": true,
+  "before": "1A85D06CC0AAB7137E6912BB680CBCD19B62770E27153EE6E2165631CE1308EB",
+  "after": "1A85D06CC0AAB7137E6912BB680CBCD19B62770E27153EE6E2165631CE1308EB",
+  "predecessor": "4e98484",
+  "candidate": "source manifest in report.json",
+  "scope": "five days at unchanged rules113 without an installed controller"
+}

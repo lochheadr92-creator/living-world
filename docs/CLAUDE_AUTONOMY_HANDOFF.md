@@ -8,6 +8,54 @@ below is superseded. A16 null-goal handling and rendered physical execution are 
 and remaining gaps are recorded at the top of `DEPENDENCY_CHAIN_PROGRAMME.md`.
 The historical Claude checkpoint below is preserved as provenance.
 
+### Later Codex continuation: published through rules 113
+
+Published main `e64789d` includes rules 108 remembered-home replacement knowledge,
+109 final construction work, 110 purposeful water search, 111 ongoing gathering
+participation, 112 conversation pause/resumption and 113 paid wild-grain seed
+conversion. Each has its owner, removal switch, staged contracts, rendered checks,
+ordinary measurements, full regression and immutable continuation. References:
+108 `51b8591`, 109 `0b3e23f`, 110 `3430cb3`, 111 `5617c0d`, 112 `d770860`,
+113 `70a9f89`. The latest autonomous full regression is 353 files / 2,269 tests,
+plus the subsequently pinned 113 reference separately. Consult each slice document
+and the register for exact collection scope and adverse/null results.
+
+The deferred 45-day rules-107 validations were run. Three ordinary seeds still
+produced zero carts. The forest save failure was an omitted meat item in validation
+and accounting, corrected in `0182849`; the failure and exact first invalid receipt
+are retained. Forest famine remains: its days-18.1–24.1 trace records 19 hunger
+deaths and predominantly food travel, not a proven single cause. The staged seed
+defect is fixed at 113, but its six five-day ordinary windows had zero unpaid
+conversions at either version. Do not claim a survival benefit.
+
+Rules 111 allows admitted guests to finish an ongoing visit. At 112 the observed
+ordinary paused visits resume (meadow 4, river 6), preserving paid progress, but total
+successful visits fall in both divergent 20-day windows. Home replacement can be
+built and slept in in the staged full chain, yet that world later dies of thirst.
+These are transition repairs, not general household or population viability proof.
+
+The genuine Large day-45 benchmark at frozen 109 is completed (`MATURE_LARGE_109.md`):
+110 alive, three deaths, zero carts; tick p95 25.65 ms, save/load 202.83/796.20 ms,
+21,781,866 serialized bytes, paused browser frame p95 4.80 ms. It is not a final
+combined current-rules Large measurement or a live-playing frame-rate claim.
+
+Installed-inhabitant quantity revision is implemented on `codex/project-revision`
+at runtime `9425ac3`, now verified for promotion. It uses protocols 33/34,
+observation 18, shared bounded retry count/spacing and the original deadline.
+The rendered scripted case collects two paid planks by tick 948. Old protocol
+31/32 recordings replay exactly. A retry-timestamp review finding was fixed; the
+first completed full run passed 2,278 tests with one obsolete observation-number
+assertion. That test is corrected, focused 13/3 passes, and the complete rerun
+passes **356 files / 2,279 tests**, 332.66 s. Three final five-day uninstalled worlds match pre-revision 113 byte for
+byte. No real-model run is claimed. New fixed 45-day Normal river/meadow/forest
+screens are running in the frozen `living-world-continuation` checkout at `e64789d`.
+
+The programme remains incomplete. Priorities still include general goal families
+and composition, adequate-margin household rhythm and disruption recovery,
+ordinary cart/workshop chains, winter food and population viability, customer
+trade/returns, continuity, dispute attribution and remaining conflicting reports.
+Preserve original evidence, old references and unrelated dirty historical worktrees.
+
 The owner asked for a stop, commit, push and handoff after the proposed-projects slice. This is a checkpoint, not
 programme completion. Everything below the "Original Codex handoff" heading is the earlier provenance, kept unchanged.
 

@@ -2,14 +2,17 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
-- A3/A16 quantity-revision candidate: an installed inhabitant can revise its own
+- A3/A16 quantity revision: an installed inhabitant can revise its own
   active personal production quantity, keeping identity, deadline, paid work and
   bounded prior history; no goods are granted. Shared reconsideration budget/wait,
   physical execution, strict protocols 33/34, observation 18 and exact replay.
   `PROJECT_REVISION.md`: integration 40/10, corrected retry boundary 10/3, final
   rendered 8/8 and typecheck/build pass. Immutable old-protocol 31/32 recordings
-  replay exactly. Full corrected regression and ordinary uninstalled comparisons
-  are running. Other goal families/composition and real-model runs remain open.
+  replay exactly. Runtime `9425ac3`; after correcting one old current-observation
+  assertion, full rerun **356 files / 2,279 tests passed**, 332.66 s. Three final
+  five-day uninstalled worlds match pre-revision 113 byte for byte, with pure
+  observers, exact twins/reloads and conserved items. Other goal families/composition
+  and real-model runs remain open. No autonomous rules bump or benefit claim.
 
 - Rules 113: wild-grain seed conversion requires an actual carried grain
   input, including when the harvested grain was eaten at its source. No partial

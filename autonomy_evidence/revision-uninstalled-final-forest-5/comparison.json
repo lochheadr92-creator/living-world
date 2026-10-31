@@ -1,0 +1,9 @@
+{
+  "seed": "forest",
+  "same": true,
+  "before": "E09EFAF3A40568AED98694A343E3C2124B6821898955A71ECFDF401A3CD780F5",
+  "after": "E09EFAF3A40568AED98694A343E3C2124B6821898955A71ECFDF401A3CD780F5",
+  "predecessor": "4e98484",
+  "candidate": "source manifest in report.json",
+  "scope": "five days at unchanged rules113 without an installed controller"
+}

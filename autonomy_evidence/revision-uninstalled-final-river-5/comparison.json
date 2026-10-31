@@ -1,0 +1,9 @@
+{
+  "seed": "river",
+  "same": true,
+  "before": "C09F299C7045584AC2CEADD7913B64A019F9DF6344BD33E3D4D8C31EB1FC6A82",
+  "after": "C09F299C7045584AC2CEADD7913B64A019F9DF6344BD33E3D4D8C31EB1FC6A82",
+  "predecessor": "4e98484",
+  "candidate": "source manifest in report.json",
+  "scope": "five days at unchanged rules113 without an installed controller"
+}
