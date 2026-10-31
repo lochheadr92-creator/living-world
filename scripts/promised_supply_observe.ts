@@ -25,11 +25,12 @@ w.hooks={onActivityStart:(p,a)=>{if(a.kind==='gather'||a.kind==='withdraw'){for(
 const time=new TimeBudget(),detach=time.attach(w);let stop='horizon';
 while(w.tick<days*2400){
  time.sampleTick(w);
- for(const r of w.requests){const key=r.id+':'+r.status;if(requestsSeen.has(key))continue;requestsSeen.add(key);if(r.siteId&&(r.kind==='wood'||r.kind==='stone'||r.kind==='goods'||r.kind==='haul'))count('site material request:'+r.status);}
+ for(const r of w.requests){const key=r.id+':'+r.status;if(requestsSeen.has(key))continue;requestsSeen.add(key);if(r.siteId&&(r.kind==='wood'||r.kind==='stone'||r.kind==='goods'||r.kind==='haul'))count('site material request:'+r.status);if(r.kind==='info'&&r.infoKind==='person')count('location question:'+r.status);}
  if(w.tick%120===0){const before=serializeWorld(w);for(const p of w.persons){if(!p.alive)continue;samples++;
   for(const m of p.socialMemory??[]){const e=m.expectation;if(!e||!e.item||!e.destId)continue;const st=expectedStatus(w,p,m).status;if(st==='promised'&&e.amount>e.received)count('sampled live site promises');}
   const ctx=generateOptions(w,p,true,true),ranked=rankOptions(ctx);const waiting=ctx.blocked.filter(b=>/promised \d+ \w+, expected by tick/.test(b.blocked??''));if(waiting.length)count('sampled fetches set aside for a promise');
   if(ctx.options.some(o=>o.kind==='socialize'&&/^Ask .* for (wood|stone|planks|bricks)$/.test(o.label)))count('sampled site asks offered');
+  if(ctx.blocked.some(b=>b.blocked==='does not know where to find them'))count('sampled promises set aside for an unknown whereabouts');if(ctx.options.some(o=>o.kind==='socialize'&&/^Ask .* where .* is$/.test(o.label)))count('sampled location questions offered');
   observeInhabitant(w,p,ctx,ranked);describePerson(w,p.id);
  }if(serializeWorld(w)!==before)throw new Error('Impure observer');pureChecks++;}
  stepWorld(w);stepWorld(twin);if(w.tick%2400===0&&!conservationReport(w).ok)throw new Error('Conservation failed');if(w.tick%120===0&&performance.now()-began>budget*1000){stop='budget';break;}

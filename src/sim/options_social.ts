@@ -1,4 +1,5 @@
 import {pendingMeetingUpdates} from './meeting_knowledge';
+import { peopleToAskAfter } from './location_question';
 import {workToTell} from './continuity_knowledge';
 import {handoverOffer,handoverFollowup} from './work_handover';
 import {pendingDelayProposals} from './promise_delays';
@@ -405,6 +406,15 @@ function optAskInfo(ctx: Ctx): void {
       if ((p.asked[c.q.id] ?? -9999) > world.tick - 500) continue;
       const sc = new Scorer().add(`does not know where to find ${w.kind}`, w.drive * 0.62).add(c.aff >= 20 ? 'a friend' : 'someone to ask', 2 + c.aff * 0.05).add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
       mkSocial(ctx, c, 'ask_info', { infoKind: w.kind }, `Ask ${c.q.name} where to find ${w.kind}`, `to learn where ${w.kind} can be found`, null, sc, 'info', ':' + w.kind);
+    }
+  }
+  // rules 105 (location_question.ts): somebody I promised something to and cannot place may be asked after
+  for (const who of peopleToAskAfter(world, p)) {
+    for (const c of cands) {
+      if (c.d > 14 || c.q.id === who.id) continue;
+      if ((p.asked[c.q.id] ?? -9999) > world.tick - 500) continue;
+      const sc = new Scorer().add(`does not know where to find ${who.name}, whom I promised`, 20).add(c.aff >= 20 ? 'a friend' : 'someone to ask', 2 + c.aff * 0.05).add('walking', -pen((c.d * 1.18) / Math.max(0.03, ctx.speed)) * 0.6);
+      mkSocial(ctx, c, 'ask_info', { infoKind: 'person', destKind: 'person', destId: who.id }, `Ask ${c.q.name} where ${who.name} is`, `to find ${who.name} and keep my promise`, null, sc, 'info', ':person:' + who.id);
     }
   }
   void world;

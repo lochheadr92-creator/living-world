@@ -63,7 +63,7 @@ export function promisedPerson(w:World,p:Person,id:number):{id:number;name:strin
  if(knowsDeath(p,id))return null;const q=w.byId.get(id);return {id,name:q?.ent==='person'?q.name:w.deceased.find(d=>d.id===id)?.name??'the person I promised to help'};
 }
 export function promisedLocation(p:Person,id:number):{x:number;y:number;how:string}|null{
- const seen=p.seen.find(s=>s.ent==='person'&&s.id===id);if(seen)return {x:seen.x,y:seen.y,how:'in sight'};const old=p.whereabouts[id];return old?{x:old.x,y:old.y,how:'last remembered; may no longer be there'}:null;
+ const seen=p.seen.find(s=>s.ent==='person'&&s.id===id);if(seen)return {x:seen.x,y:seen.y,how:'in sight'};const old=p.whereabouts[id];return old?{x:old.x,y:old.y,how:old.from!==undefined?'where I was told they were last seen; may no longer be there':'last remembered; may no longer be there'}:null;
 }
 /** Pure shared reader for decisions, inspector and the restricted AI observation. */
 export function personalRequests(w:World,p:Person):Request[]{

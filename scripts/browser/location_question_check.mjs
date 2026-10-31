@@ -1,0 +1,26 @@
+import {existsSync,mkdirSync,writeFileSync} from 'node:fs';
+import {resolve,join,sep} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomUUID} from 'node:crypto';
+import {launch} from './cdp.mjs';
+const [url='http://127.0.0.1:5290/',out='autonomy_evidence/location105-rendered']=process.argv.slice(2);
+if(existsSync(out))throw new Error('Fresh output required');const root=resolve(tmpdir()),profile=resolve(join(root,'living-world-location-'+randomUUID()));if(!profile.startsWith(root+sep)||existsSync(profile))throw new Error('Unsafe temporary profile');
+let occupied=false;try{await fetch('http://127.0.0.1:9375/json/version');occupied=true;}catch{}if(occupied)throw new Error('Browser port in use');
+mkdirSync(out,{recursive:true});const b=await launch({port:9375,width:1440,height:1000,profile}),checks=[];
+const check=(name,ok,detail)=>{checks.push({name,ok:!!ok,detail});console.log(`${ok?'PASS':'FAIL'} ${name}`);};
+const shot=async(name,who)=>{await b.evaluate(`(()=>{const f=window.__loc,g=window.__game;const e=f.${who};g.select(e.id);g.fly=null;const q=f.project(e.x,e.y);g.camera={x:q.sx+100,y:q.sy,zoom:1.8};window.__ui.update(1);})()`);await b.sleep(200);await b.shot(join(out,name+'.png'));return b.evaluate("document.querySelector('.insp-person')?.innerText||''");};
+try{
+ await b.send('Page.navigate',{url});for(let n=0;n<80&&!await b.evaluate('!!window.__game');n++)await b.sleep(100);
+ await b.evaluate(`(async()=>{const {locationQuestionScene}=await import('/tests/helpers/location_question.ts'),save=await import('/src/app/save.ts'),{stepWorld}=await import('/src/sim/world.ts'),{project}=await import('/src/render/iso.ts'),decision=await import('/src/sim/decision.ts'),activities=await import('/src/sim/activities.ts'),external=await import('/src/sim/external.ts'),{hashUnit}=await import('/src/sim/rng.ts'),econ=await import('/src/sim/economy.ts');const f=locationQuestionScene(105);Object.assign(f,{save,stepWorld,project,decision,activities,external,hashUnit,econ});window.__loc=f;const g=window.__game;g.setPlaying(false);g.restoreWorld(f.w,f.w.settings);})()`);
+ const before=await b.evaluate(`(()=>{const f=window.__loc;const ctx=f.decision.generateOptions(f.w,f.ben,true,true);return {blocked:ctx.blocked.find(x=>x.blocked==='does not know where to find them')?.label,ask:ctx.options.find(o=>o.label==='Ask Cara where Ada is')?.label,note:f.ben.whereabouts[f.ada.id],log:f.ben.log.slice(-1)[0]?.text};})()`);
+ check('after the failed hand-over the promise is set aside for an unknown whereabouts and the question is offered',before.blocked==='Keep promise to Ada'&&before.ask==='Ask Cara where Ada is'&&before.note===undefined,before);
+ const panel=await shot('promise-set-aside-unknown-whereabouts','ben');check("Ben's inspector shows the set-aside promise",/promise|Ada/i.test(panel),panel.slice(0,300));
+ const asked=await b.evaluate(`(()=>{const f=window.__loc;for(let n=0;n<400&&f.hashUnit(f.cara.id,f.ben.id,f.w.tick>>4)>=0.9;n++)f.stepWorld(f.w);f.ben.cooldowns.pause=0;f.cara.nextThink=f.w.tick+600;const o=f.decision.generateOptions(f.w,f.ben,true,true).options.find(o=>o.label==='Ask Cara where Ada is');f.activities.startActivity(f.w,f.ben,o.make());const release=f.external.setExternalController({controls:()=>true,choose:()=>({kind:'defer'})});let question='',answer='';try{for(let n=0;n<400;n++){f.stepWorld(f.w);if(f.ben.speech?.text&&/Have you seen/.test(f.ben.speech.text))question=f.ben.speech.text;if(f.cara.speech?.text&&/I saw Ada/.test(f.cara.speech.text)){answer=f.cara.speech.text;break;}}}finally{release();}return {question,answer,info:f.w.requests.find(r=>r.kind==='info'&&r.from===f.ben.id)?.status,note:f.ben.whereabouts[f.ada.id]};})()`);
+ check('the question and the dated answer are actually spoken and the note is kept with the teller',/Have you seen Ada/.test(asked.question)&&/I saw Ada near there at tick \d+/.test(asked.answer)&&asked.info==='fulfilled'&&asked.note?.from!==undefined,asked);
+ await shot('cara-answers-where-she-saw-ada','cara');
+ const delivered=await b.evaluate(`(()=>{const f=window.__loc;f.twin=f.save.deserializeWorld(f.save.serializeWorld(f.w));f.ben.cooldowns.pause=0;for(let n=0;n<2500&&f.request.status==='promised';n++){f.stepWorld(f.w);f.stepWorld(f.twin);}return {status:f.request.status,fish:f.ada.inv.fish??0,same:f.save.serializeWorld(f.w)===f.save.serializeWorld(f.twin),valid:f.save.serializeWorld(f.save.deserializeWorld(f.save.serializeWorld(f.w)))===f.save.serializeWorld(f.w),conserved:f.econ.conservationReport(f.w).ok};})()`);
+ check('Ben then finds Ada where he was told and hands the fish over; the continuation is exact',delivered.status==='fulfilled'&&delivered.fish>0&&delivered.same&&delivered.valid&&delivered.conserved,delivered);
+ await shot('fish-delivered-after-asking','ada');
+ const errors=b.events.filter(e=>e.method==='Runtime.exceptionThrown');check('no browser exceptions',errors.length===0,errors);
+ writeFileSync(out+'/report.json',JSON.stringify({rules:105,evidence:'STAGED moved recipient and a bystander with a declared recent sighting; the question is the offered option selected by the check in a window where the idle bystander stops; the answer, the note and the delivery are autonomous. No ordinary frequency claim.',checks},null,2));if(checks.some(c=>!c.ok))process.exitCode=1;
+}finally{await b.close();}

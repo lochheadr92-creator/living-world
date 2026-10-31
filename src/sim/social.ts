@@ -7,6 +7,7 @@ import {careJourneyReceipt} from './care_journey';
 import {hasWarmthDuty,knownDutyFire,communicateFireLocation,fuelAvailable} from './warmth_duty';
 import {hasCareHandback,proposeCareReturn,answerCareReturn} from './care_handback';
 import {hasRepairDuty,knownDutyHome,communicateRoofLocation,repairSupplies,hasSingleRoofDuty,roofDuty} from './repair_duty';
+import {hasLocationQuestions,tellWhereabouts} from './location_question';
 import {repairMaterial} from './act_build';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
@@ -1158,9 +1159,12 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
       break;
     }
     case 'ask_info': {
-      const req = createRequest(world, A, B, { kind: 'info', infoKind: d.infoKind ?? 'food' });
+      // rules 105 (location_question.ts): a question about a person carries whom it is about
+      const aboutPerson = hasLocationQuestions(world) && d.infoKind === 'person' && !!d.destId;
+      const req = createRequest(world, A, B, { kind: 'info', infoKind: aboutPerson ? 'person' : d.infoKind ?? 'food', ...(aboutPerson ? { destKind: 'person' as const, destId: d.destId } : {}) });
       d.reqId = req.id;
       c.requestId = req.id;
+      if (aboutPerson) { bubble(world, A, `Have you seen ${personOf(world, d.destId!)?.name ?? 'the person I promised'}? I promised them something.`, 'ask', 56); break; }
       const thing = d.infoKind === 'wood' ? 'good trees' : d.infoKind === 'stone' ? 'stone' : d.infoKind === 'water' ? 'fresh water' : 'food';
       bubble(world, A, D.requestLine('info', A.id, B.id, { thing }), 'ask', 56);
       break;
@@ -1430,6 +1434,22 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
     }
     case 'ask_info': {
       if (!req) break;
+      if (hasLocationQuestions(world) && d.infoKind === 'person' && d.destId) {
+        // rules 105: the answer is B's own sight or dated note, kept by A only if newer than A's own, with the teller recorded
+        const name = personOf(world, d.destId)?.name ?? 'them';
+        const said = tellWhereabouts(world, B, A, d.destId);
+        if (said) {
+          bubble(world, B, `I saw ${name} near there at tick ${said.tick}; they may have moved since.`, 'say', 70);
+          settle(world, req, 'fulfilled', `told where they last saw ${name}`);
+          adjustRel(A, B.id, world.tick, { aff: 1.6, trust: 1.2, note: `${B.name} told me where they last saw ${name}` });
+          c.data.thank = true;
+        } else {
+          bubble(world, B, `Sorry, I haven’t seen ${name}.`, 'say', 54);
+          settle(world, req, 'failed', 'they did not know either');
+          adjustRel(A, B.id, world.tick, { aff: 0.2 });
+        }
+        break;
+      }
       const belief = answerInfo(world, B, A, d.infoKind ?? 'food');
       if (belief) {
         // One logical offer with two writes underneath: `tellBelief` may refuse on its own freshness rule and the direct `learn`

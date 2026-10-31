@@ -11,6 +11,7 @@ import { stepWorld } from '../../src/sim/world';
 import type { Person, Source, SourceType, World } from '../../src/sim/types';
 
 export interface FoodHelpScene {
+  s: ReturnType<typeof stage>;
   w: World;
   ada: Person;
   ben: Person;
@@ -21,7 +22,7 @@ export interface FoodHelpScene {
   release: () => void;
 }
 
-export function foodHelpScene(o: { version?: number; source?: SourceType | null; amount?: number; benInv?: Record<string, number> } = {}): FoodHelpScene {
+export function foodHelpScene(o: { version?: number; source?: SourceType | null; amount?: number; benInv?: Record<string, number>; sourceAt?: [number, number] } = {}): FoodHelpScene {
   const s = stage('food-help');
   const w = s.w;
   w.settings.dynamics = 'rich';
@@ -29,7 +30,7 @@ export function foodHelpScene(o: { version?: number; source?: SourceType | null;
   const ada = addPerson(s, 'Ada', 40.5, 40.5, { age: 30, hunger: 40, thirst: 100, energy: 100, traits: { generosity: 0.8, sociability: 1 } });
   const ben = addPerson(s, 'Ben', 42, 40.5, { age: 30, inv: o.benInv ?? {}, hunger: 100, thirst: 100, energy: 100, traits: { generosity: 1, diligence: 1, sociability: 1 } });
   const kind = o.source === undefined ? 'fish_spot' : o.source;
-  const source = kind ? makeSource(w, kind, 64, 38, o.amount ?? 8) : null;
+  const source = kind ? makeSource(w, kind, o.sourceAt?.[0] ?? 64, o.sourceAt?.[1] ?? 38, o.amount ?? 8) : null;
   if (source) observe(w, ben, source);
   for (const p of [ada, ben]) {
     pin(p);
@@ -62,5 +63,5 @@ export function foodHelpScene(o: { version?: number; source?: SourceType | null;
     ben.cooldowns.pause = 0;
     perceive(w, ben);
   };
-  return { w, ada, ben, source, ask, release };
+  return { s, w, ada, ben, source, ask, release };
 }

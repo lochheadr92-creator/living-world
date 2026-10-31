@@ -1,0 +1,51 @@
+{
+  "rules": 105,
+  "evidence": "STAGED moved recipient and a bystander with a declared recent sighting; the question is the offered option selected by the check in a window where the idle bystander stops; the answer, the note and the delivery are autonomous. No ordinary frequency claim.",
+  "checks": [
+    {
+      "name": "after the failed hand-over the promise is set aside for an unknown whereabouts and the question is offered",
+      "ok": true,
+      "detail": {
+        "blocked": "Keep promise to Ada",
+        "ask": "Ask Cara where Ada is",
+        "log": "Gave up “Bringing fish to Ada (promised)”: Ada was not where I expected."
+      }
+    },
+    {
+      "name": "Ben's inspector shows the set-aside promise",
+      "ok": true,
+      "detail": "B\nBen\nFollow\nAdult, 30\nSedge household\nNo home yet\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nBetween tasks (last chose “Take fish to Ada as promised”).\nLAST RECORDED BLOCKER\nBringing fish to Ada (promised): Ada was not where I expected (at the last attempt,"
+    },
+    {
+      "name": "the question and the dated answer are actually spoken and the note is kept with the teller",
+      "ok": true,
+      "detail": {
+        "question": "Have you seen Ada? I promised them something.",
+        "answer": "I saw Ada near there at tick 724; they may have moved since.",
+        "info": "fulfilled",
+        "note": {
+          "x": 30,
+          "y": 62,
+          "tick": 724,
+          "from": 23
+        }
+      }
+    },
+    {
+      "name": "Ben then finds Ada where he was told and hands the fish over; the continuation is exact",
+      "ok": true,
+      "detail": {
+        "status": "fulfilled",
+        "fish": 2,
+        "same": true,
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

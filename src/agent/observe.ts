@@ -556,7 +556,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
   for (const r of personalRequests(world,p)) {
     if (r.from !== p.id && r.to !== p.id) continue;
     if (world.tick - (r.resolved || r.created) > 3000) continue;
-    const what = r.kind === 'info' ? `where to find ${r.infoKind}` : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : `${r.amount} ${r.item ?? r.kind}`;
+    const what = r.kind === 'info' ? (r.infoKind === 'person' ? `where ${describeTarget(world, p, r.destId ?? 0, version)} is` : `where to find ${r.infoKind}`) : r.kind === 'help_build' ? 'help with building' : r.kind === 'trade' ? `${r.offer} for ${r.item}` : r.kind === 'care' ? 'food (care)' : `${r.amount} ${r.item ?? r.kind}`;
     requests.push({ direction: r.from === p.id ? 'I asked' : 'asked of me', other: nameOf(world, r.from === p.id ? r.to : r.from), what, status: r.status, note: cleanText(r.note, 120), when: ageText(world, version, r.created) });
   }
   requests.reverse();

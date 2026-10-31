@@ -333,7 +333,7 @@ export function whereIs(ctx: Ctx, personId: number, siteId = 0): { x: number; y:
   const s = ctx.seenPersons.find((x) => x.id === personId);
   if (s) return { x: s.x, y: s.y, how: 'in sight' };
   const wh = p.whereabouts[personId];
-  if (wh && world.tick - wh.tick < 900) return { x: wh.x, y: wh.y, how: 'last seen' };
+  if (wh && world.tick - wh.tick < 900) return { x: wh.x, y: wh.y, how: wh.from !== undefined ? 'where I was told they were last seen' : 'last seen' };
   const q = world.byId.get(personId);
   if (q && q.ent === 'person') {
     if (siteId && p.beliefs[siteId]) return { x: p.beliefs[siteId].x, y: p.beliefs[siteId].y, how: 'at their building site' };
