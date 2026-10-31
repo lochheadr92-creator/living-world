@@ -60,8 +60,32 @@ prerequisites, held/free inputs, duplicate tool intentions, offers/ranks, actual
 handcraft outcomes and carts/trips, with pure inspection, frozen source hashes,
 exact unobserved twins/reloads and full accounting. No supplied goods, knowledge,
 plans or decisions. Repeated samples are not independent opportunities. Full
-regression and these six windows are pending; pin 115 before any successor.
+regression and these six windows completed; 115 is pinned before any successor.
 
 The rules-114 forest day-45 extinction remains an adverse separate result. This
 input repair does not establish food security, cart usefulness or population
 viability. Required open programme rows remain open until their own evidence exists.
+
+## Final results
+
+Runtime `fef1304`, immutable continuation `bc80e48`. Full final regression passes
+**359 files / 2,303 tests**, 347.11 s (`autonomy-inputs115-full-reviewed.log`, exit 0).
+The immutable 115 reference was added after full collection and passes separately
+with the eleven input contracts: **12 tests / 2 files**, 15.81 s. Old references
+were not regenerated. The existing Node timeout-overflow test warning is retained.
+
+All six ordinary windows have **zero current hand-tool prerequisite samples,
+zero project handcraft starts and zero carts or cart trips**. They are null for
+the new transition, including forest through day 15. The earlier 113 cart episode
+does not recur in the divergent 114/115 forest windows; do not present it as a
+matched current-world episode. At each version, forest has 37 general handcraft
+starts, 27 successes and nine interruptions; meadow 23/9/13; river 12/8/3. Forest
+ends with 31 alive/no deaths; river and meadow 28/no deaths. Each 15-day window has
+300 pure checks and each five-day window 100, with exact unobserved twins/reloads,
+frozen runtime and conserved items. One general handcraft can remain underway at
+the end, so starts and endings need not balance within a finite window.
+
+Reports: `autonomy_evidence/inputs{114,115}-forest-15/report.json` and
+`inputs{114,115}-{river,meadow}-5/report.json`. Full saves remain local. Staged
+retention, autonomous physical hammer completion and release are established;
+ordinary activation, cart usefulness and aggregate benefit remain unproven.

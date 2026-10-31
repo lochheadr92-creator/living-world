@@ -2,14 +2,16 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
-- Rules 115 candidate: retain one current hand-tool prerequisite's inputs and avoid
-  a duplicate tool intention for that same step. `PROJECT_HAND_INPUTS.md` records
-  the actual cart trace, two reproduced omissions, two review findings and fixes,
-  focused 54/4, rendered 9/9 and passing typecheck/build. Full regression and ordinary
-  15-day forest / five-day river-meadow comparisons are pending. No cart, food or
-  general viability claim. Rules 114's longer forest run ended with zero survivors
-  despite 18 successful hunger harvests; that adverse result remains in
-  `HUNGRY_HARVEST.md` and WS3 remains open.
+- Rules 115: current hand-tool prerequisite inputs are retained without a second
+  tool intention claiming the same ingredients. `PROJECT_HAND_INPUTS.md`, runtime
+  `fef1304`, immutable `bc80e48`. Focused 54/4, rendered 9/9, typecheck/build and
+  full **359 files / 2,303 tests** pass (347.11 s); later reference/input 12/2 also
+  passes. Three paired ordinary windows (15-day forest, five-day river/meadow) have
+  no current hand-tool prerequisite, hence zero ordinary activation and zero carts.
+  All pure observers, twins/reloads and item accounts pass; no deaths in these
+  windows. General handcraft counts match predecessors. No cart or welfare benefit
+  is established. Rules 114's longer forest run has zero survivors despite 18
+  successful hunger harvests; the adverse report remains in `HUNGRY_HARVEST.md`.
 
 - Rules-113 long validation is complete: three Normal day-45 worlds, with exact
   saved continuations for river/meadow after execution-budget stops. Each has 900

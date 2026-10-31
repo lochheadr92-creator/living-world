@@ -2,6 +2,30 @@
 
 ## Current continuation pointer — 2026-10-31
 
+The current source/evidence register is `DEPENDENCY_CHAIN_PROGRAMME.md`, resumed
+from Claude through rules **115**. Latest runtime `fef1304`, immutable `bc80e48`:
+full **359 files / 2,303 tests** pass (347.11 s), plus later reference/input 12/2.
+`PROJECT_HAND_INPUTS.md` records staged autonomous hammer completion and ordinary
+null activation. Quantity revision is also delivered (`PROJECT_REVISION.md`),
+protocols 33/34, observation 18, with its full 356-file / 2,279-test rerun passing.
+
+Since the historical entries below, rules 98–107 connected duties, project steps,
+communication, care beliefs and checked place accounts; 108–115 connect remembered
+home replacement, final construction, purposeful water search, ongoing occasion
+attendance and recovery, paid wild-grain seeds, hungry ripe-grain harvesting and
+current hand-tool input retention. Each slice's own document/register entry owns
+its evidence and limits. Do not reimplement an old “next” item from the archive.
+
+The deferred Normal 45-day validation is complete at 107 and 113, and a genuine
+Large day-45 benchmark exists at frozen 109. These do not close current combined
+Large validation. No ordinary cart was completed in the retained long screens.
+Rules-114 forest ends with zero survivors despite active hungry harvesting; this
+adverse result is retained, not a claim that winter food is solved. General goals,
+customer journeys, household/population continuity, dispute attribution and remaining
+account correction are still open. See `CLAUDE_AUTONOMY_HANDOFF.md` for continuation.
+
+### Historical slice updates (preserved as provenance)
+
 Rules **97** connects actual recovery handback and retained paid childcare (`CARE_RECOVERY_HANDBACK.md`). Runtime `745a92d`; full regression **315 files / 2,124 tests**, **437.41 s**; focused **63/6**, build and rendered **7/7** pass. Immutable reference `543be3f` separately passes **1/1**, **2.62 s**, with typecheck clean. Actual proposal at 331 and answer at 353 return the remaining watch while retaining 212 physical watch ticks and awarding no full-watch credit. Three ordinary five-day worlds preserve exact twins and resources but show zero watch requests or handbacks; meadow retains Talia #1029's thirst death at 8746. Exact activity occupancy is recorded; ordinary care reliability and sustained welfare remain unproven. Next: two reproduced roof-repair gaps under `REPAIR_DUTY.md` (uncommunicated target and missing wood fallback acquisition). The entire owner programme remains incomplete.
 
 Rules **96** connects heard fire duties to real fuel acquisition, protected supplies and immediate actual-work completion (`WARMTH_DUTY_ACQUISITION.md`). Runtime `bf6d263`, immutable reference `9c1da59` (1/1, 2.43 s; typecheck clean). Full regression passes **312 files / 2,100 tests**, **435.67 s**; focused **72/6**, build and rendered **7/7** pass. Staged acceptance at 39 leads to gathering at 200, fuel work at 321 and one wood burnt at 464; the helper receives actual local warmth and the duty closes once. Three ordinary five-day screens show zero fire requests/starts; river has six repeated incapacity/known-low-fire samples, and meadow retains Talia's thirst death at 8746. Ordinary uptake and sustained care remain unproven. Next: reproduced recovery handback and lost watch-progress transitions under `CARE_RECOVERY_HANDBACK.md`. The entire owner programme remains incomplete.

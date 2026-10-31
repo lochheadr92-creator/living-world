@@ -8,7 +8,33 @@ below is superseded. A16 null-goal handling and rendered physical execution are 
 and remaining gaps are recorded at the top of `DEPENDENCY_CHAIN_PROGRAMME.md`.
 The historical Claude checkpoint below is preserved as provenance.
 
-### Latest continuation: rules 114 and quantity revision verified
+### Latest verified continuation: rules 115
+
+Runtime `fef1304` retains the current hand-tool prerequisite's inputs and avoids
+creating a second tool intention for that same hammer; immutable reference
+`bc80e48`. Complete regression **359 files / 2,303 tests passed**, 347.11 s, plus
+later-added reference/input 12/2. Focused 54/4, build/typecheck and rendered 9/9
+pass. Rendered autonomous physical crafting pays one wood/two stone and proceeds
+toward the cart at tick 147. Review found and repaired first-tick double counting
+and a duplicate same-hammer claim; failed/aborted evidence is retained locally.
+
+Six ordinary 114/115 windows (15-day forest, five-day river/meadow) have no current
+hand-tool prerequisite samples and no carts. The 113 cart episode did not recur
+in these divergent worlds. Staged completion is not ordinary activation or benefit.
+The **rules-114 forest day-45 result is adverse: zero survivors, 31 deaths**, despite
+18 successful hunger harvests and 36 grain harvested. Rules 113 had five survivors.
+See `PROJECT_HAND_INPUTS.md`, `HUNGRY_HARVEST.md` and `AUTONOMY_VALIDATION.md`.
+
+No full regression remains pending for delivered runtime. The owner programme is
+still incomplete: broader goal families/composition and a real-model proposal run;
+ordinary useful industry/carts and customer trade/returns; winter provisioning and
+viable population continuity; full household rhythm/recovery, dispute attribution
+and remaining conflicting accounts; final combined current-rules mature Large
+validation. Existing mechanisms and earlier evidence must be audited before adding
+anything. Preserve all nulls, deaths, predecessors and unrelated worktrees.
+
+### Earlier continuation: rules 114 and quantity revision
+
 
 Rules 114 (`HUNGRY_HARVEST.md`) allows a hungry adult to harvest personally known
 ripe household grain. Runtime `c52d7d4`, immutable `3655551`, full 357 files / 2,291
