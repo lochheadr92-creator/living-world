@@ -11,6 +11,7 @@ import { beginFlood, floodAt, hasFloodAccess } from './flood';
 // it ends. How hard it bites depends on the stores and the farmland the village happens to have: some worlds ride it out, some do not.
 import { addEvent } from './events';
 import { ledgerSpoil } from './economy';
+import { isToolItem } from './toolreg';
 import { DAY, DAYS_PER_YEAR } from './constants';
 import { hashString, hashUnit } from './rng';
 import { isRich, think } from './mood';
@@ -96,6 +97,8 @@ function floodTick(world: World): void {
       if (n > 0) {
         ledgerSpoil(world, k, n, 'flood');
         lost += n;
+        // a spoiled tool count takes its records with it: nothing may keep a record whose holder pile the flood emptied
+        if (isToolItem(k)) for (let i = world.tools.length - 1; i >= 0; i--) if (world.tools[i].holder === pl.id && world.tools[i].kind === k) world.tools.splice(i, 1);
       }
       delete pl.items[k];
     }
