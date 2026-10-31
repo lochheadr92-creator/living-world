@@ -1,3 +1,4 @@
+import {currentHandInputs} from './project_hand_inputs';
 // A BATCH PLAN: seeing a wanted workshop product through (rules version 50, rich worlds only).
 //
 // What the 45-day chain audits of ordinary rules-48 worlds showed (chain_evidence/audit-45-*): every seed wanted planks, bricks
@@ -283,6 +284,6 @@ function reviewBatchProject(ctx:Ctx,i:Intention):void{
  recordProjectStep(ctx,i);
 }
 
-setBatchHooks({ want: batchWanted, step: batchStep, outcome: batchOutcome, review: reviewBatchProject,
+setBatchHooks({ prepare:(ctx,i)=>{if(i.project&&currentHandInputs(ctx.world,i.project,nextProjectStep(ctx,i.project,i)))recordProjectStep(ctx,i);}, want: batchWanted, step: batchStep, outcome: batchOutcome, review: reviewBatchProject,
  canAcquire: (ctx,i,item) => i.project && hasProjectPlans(ctx.world)
   ? compileProject(ctx,{item,quantity:1,tier:0}).ok : hasKnownResource(ctx.world,ctx.p,item) });

@@ -1,3 +1,4 @@
+import {currentHandInputs} from './project_hand_inputs';
 // Pure interpretation of a saved prerequisite graph. It describes a next ordinary action; it never executes one.
 import {runsRulesVersion} from './rulesversion';
 import {reservedFor} from './social';
@@ -74,7 +75,7 @@ export function recordProjectStep(ctx:Ctx,i:Intention):void{
   if(g.history.length>PROJECT_LIMITS.history)g.history.splice(0,g.history.length-PROJECT_LIMITS.history);
  }
  g.current=step.node.id;g.completed=step.completed;
- // Claims cover the current physical trip, never distant stock or the whole prerequisite tree.
- i.wants=step.node.item==='cart'||step.phase==='blocked'||step.phase==='wait'||step.phase==='done'?{}:
-  step.phase==='acquire'||step.phase==='deposit'?{[step.node.item]:step.quantity}:{};
+ // Claims cover the current trip or immediate hand-tool inputs, never distant stock or the whole tree.
+ i.wants=currentHandInputs(ctx.world,g,step)??(step.node.item==='cart'||step.phase==='blocked'||step.phase==='wait'||step.phase==='done'?{}:
+  step.phase==='acquire'||step.phase==='deposit'?{[step.node.item]:step.quantity}:{});
 }

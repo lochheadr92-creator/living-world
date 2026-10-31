@@ -1,8 +1,8 @@
 # Living World: notes for Codex (read this first)
 
-Current state (31 October 2026): rules 114 hungry ripe-grain harvest (`HUNGRY_HARVEST.md`),
-after 113 paid wild-grain seed input; the autonomy/environment programme continues from the register.
-Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules are 114.
+Current state (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
+after 114 hungry ripe-grain harvest; the autonomy/environment programme continues from the register.
+Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules are 115.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 

@@ -1,3 +1,4 @@
+import {alreadyPreparingHandTool} from './project_hand_inputs';
 import {hasPromiseExpectations,expectedOutstanding,personalRequests} from './promise_expectations';
 import {hasWorkHandover,handedOver} from './handover_state';
 import type {ProjectGraph} from './project_graph';
@@ -296,6 +297,7 @@ type Step = { kind: Intention['stepKind']; target: number; item: ItemKind | null
 // Rules 50 (batch_plan.ts): a batch plan's want, step and outcome live beside the planner that offers its options; they are
 // installed from there, so that this module does not import the planner (which imports this one).
 export interface BatchHooks {
+  prepare?: (ctx: Ctx, i: Intention) => void;
   review?: (ctx: Ctx, i: Intention) => void;
   canAcquire?: (ctx: Ctx, i: Intention, item: ItemKind) => boolean;
   want: (ctx: Ctx) => { item: string; recipe: string; facilityId: number; qty: number; forSite: number; why: string; wants: Partial<Items>; project?: ProjectGraph } | null;
@@ -626,7 +628,7 @@ export function preparingReserve(p: Person): boolean {
 /** Would a tool be worth making, and is the only thing in the way the materials? */
 function toolWanted(ctx: Ctx): { tool: ToolKind; wants: Partial<Items> } | null {
   const t = wantedTool ? wantedTool(ctx) : null;
-  if (!t) return null;
+  if (!t || alreadyPreparingHandTool(ctx.world,ctx.p,t)) return null;
   const r = TOOL_RECIPE[t];
   // a plan that does not exist yet may count only what no live plan of theirs has already spoken for
   const spare: Partial<Items> = { wood: freeOf(ctx.p, 'wood'), stone: freeOf(ctx.p, 'stone') };
@@ -1026,6 +1028,7 @@ function succeedPlan(ctx: Ctx, u: import('./succession').Unfinished, onCooldown:
   made.stepKey = st.key;
   made.blocked = st.blocked;
   p.intentions.push(made);
+  if(made.kind==='batch')batchHooks?.prepare?.(ctx,made);
   return made;
 }
 
@@ -1098,6 +1101,7 @@ function makeBatchIntention(ctx: Ctx, batch: BatchWantLike): Intention {
   made.stepKey = st.key;
   made.blocked = st.blocked;
   p.intentions.push(made);
+  if(made.kind==='batch')batchHooks?.prepare?.(ctx,made);
   addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
   return made;
 }

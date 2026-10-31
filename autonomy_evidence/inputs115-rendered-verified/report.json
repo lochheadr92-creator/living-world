@@ -1,0 +1,90 @@
+{
+  "scene": "STAGED accepted cart proposal, prior knowledge, supplied workshop and held ingredients. Subsequent selection, travel and hand crafting autonomous; not ordinary cart-completion proof.",
+  "checks": [
+    {
+      "name": "current hammer ingredients are retained while the predecessor offers them to the other site",
+      "ok": true,
+      "detail": {
+        "wants": {
+          "wood": 1,
+          "stone": 2
+        },
+        "freeStone": 0,
+        "oldWants": {},
+        "oldHaul": true
+      }
+    },
+    {
+      "name": "ingredients-set-aside inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "inspector shows the cart undertaking and its hammer prerequisite",
+      "ok": true,
+      "detail": "L\nLena\nFollow\nAdult, 35\nWillow household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nCheerful\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nDeciding what to do next.\nWHAT ARE THEY SET ON?\nBuild a handcart at the timber yard. Step: craft hammer for cart — settled on, not started. Planned production: Make hammer → a handcart. Estimated work and firing: 270 ticks, plus travel and interruptions. Last change: craft: hammer.\nNEEDS\nFood\n100\nWater\n100\nEnergy\n100\nWarmth\n95\nSafety\n95\nCompany\n70\nCARRYING\n×1\n×2\n×1\n×1\n10.5 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\n1\nKnows\n5\nFamily\nTraits"
+    },
+    {
+      "name": "autonomous choices physically begin the hammer",
+      "ok": true,
+      "detail": {
+        "tick": 43,
+        "kind": "craft",
+        "tool": "hammer",
+        "progress": 1,
+        "inv": {
+          "wood": 1,
+          "stone": 2,
+          "water": 1,
+          "berries": 1
+        },
+        "oldInv": {
+          "wood": 1,
+          "stone": 2,
+          "water": 1,
+          "berries": 1
+        }
+      }
+    },
+    {
+      "name": "making-prerequisite-hammer inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "one hammer is physically made with its wood and stone paid",
+      "ok": true,
+      "detail": {
+        "wants": {},
+        "step": "work on cart for cart",
+        "tick": 147,
+        "hammer": 1,
+        "paid": 3,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "mid-work twins, reload and item accounting agree",
+      "ok": true,
+      "detail": {
+        "wants": {},
+        "step": "work on cart for cart",
+        "tick": 147,
+        "hammer": 1,
+        "paid": 3,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "hammer-made inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}
