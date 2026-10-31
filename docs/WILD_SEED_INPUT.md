@@ -42,9 +42,28 @@ each at 112 and 113, immigration off, no supplied goods, knowledge or decisions.
 `wild_seed_observe.ts` records the existing conversion-specific produced-seed and
 consumed-grain reasons, excess at each tick, pure inspection, unobserved twins,
 reload, full accounting and frozen source hashes. Per-tick excess is a lower bound
-if several people convert in one tick. Full regression and six windows are running.
+if several people convert in one tick. Full regression and six windows completed.
 No general food availability, winter survival or population benefit is claimed.
 
 Fresh review: the precheck must precede consumption so partial grain is preserved;
 the additional partial-input contract passes. Legacy mode returns the historical
 retained-food adjustment even when no grain was consumed. No new random draw occurs.
+
+## Final results
+
+Runtime `4e98484`; immutable reference `70a9f89`. Full regression passes **353 files /
+2,269 tests**, 282.41 s. The immutable-113 reference was added after collection and
+passes separately with the seed suite, **9 tests / 2 files**, 13.17 s. Earlier
+references were not regenerated. The full run emitted a Node timeout-overflow
+warning from an existing test; it completed successfully.
+
+All six ordinary windows reach day five with 28 living people, no deaths, 100 pure
+checks each, exact unobserved twins/reloads and balanced item accounts. For both
+112 and 113, river produces 22 seeds with 22 grain paid, meadow 31/31, forest 28/28.
+Observed unpaid conversions are **zero in every window**. This is a null activation
+result for the repaired defect, not evidence that it could never occur ordinarily.
+The staged case establishes the input boundary; these ordinary runs establish no
+food-system or survival benefit. Reports: `autonomy_evidence/seed{112,113}-{river,
+meadow,forest}-5/report.json`; full saves remain local. Initial observer launches
+used a nonexistent vite-node entry path and did not run; the retained reports are
+from successful `npx --no-install vite-node` executions on frozen source.
