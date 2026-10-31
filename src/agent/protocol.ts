@@ -57,10 +57,13 @@ export const PROTOCOL_V28 = 'inhabitant/28';
 /** 29/30 expose only personally heard meeting arrangements (observation 16). */
 export const PROTOCOL_V29 = 'inhabitant/29';
 export const PROTOCOL_V30 = 'inhabitant/30';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24, PROTOCOL_V25, PROTOCOL_V26, PROTOCOL_V27, PROTOCOL_V28, PROTOCOL_V29, PROTOCOL_V30];
+/** 31/32 let the inhabitant propose a bounded production goal of their own, validated and adopted or refused by the engine (observation 17). */
+export const PROTOCOL_V31 = 'inhabitant/31';
+export const PROTOCOL_V32 = 'inhabitant/32';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24, PROTOCOL_V25, PROTOCOL_V26, PROTOCOL_V27, PROTOCOL_V28, PROTOCOL_V29, PROTOCOL_V30, PROTOCOL_V31, PROTOCOL_V32];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V30 : PROTOCOL_V29;
+  return memory ? PROTOCOL_V32 : PROTOCOL_V31;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
@@ -79,15 +82,19 @@ export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V25 || protocol === PROTOCOL_V26) return 14;
   if (protocol === PROTOCOL_V27 || protocol === PROTOCOL_V28) return 15;
   if (protocol === PROTOCOL_V29 || protocol === PROTOCOL_V30) return 16;
+  if (protocol === PROTOCOL_V31 || protocol === PROTOCOL_V32) return 17;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24 || protocol === PROTOCOL_V26 || protocol === PROTOCOL_V28 || protocol === PROTOCOL_V30;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24 || protocol === PROTOCOL_V26 || protocol === PROTOCOL_V28 || protocol === PROTOCOL_V30 || protocol === PROTOCOL_V32;
 }
 
+export interface ProposedGoal { item: string; quantity: number; tier: 0 | 1 }
 export interface Proposal {
-  /** the key of one of the offered options */
+  /** the key of one of the offered options; for a proposed goal, "propose:<item>" */
   choose: string;
+  /** protocol 31/32: a production goal proposed instead of a pick, for the engine to validate (proposals.ts) */
+  propose?: ProposedGoal;
   /** the model's own account of why, kept for the observer; never shown to the simulation */
   why: string;
   /** with memory: the notes update, shape-checked (memory.ts), applied when the choice is consumed */
@@ -160,6 +167,12 @@ export function buildPrompt(input: PromptInput): { system: string; user: string 
     for (const r of input.rejected) lines.push(`- "${stripTags(r.key)}": ${stripTags(r.reason)}`);
     lines.push('Pick another option from the list.');
   }
+  // observation 17+ (protocol 31/32): the one other thing the inhabitant may do, said only when the shape carries it, so every
+  // older prompt stays as it was recorded
+  if (input.observation.canPropose) {
+    lines.push('');
+    lines.push(`Instead of picking an option you may propose one project of your own: a thing to have made at a workshop you know of. "canPropose" lists what you could propose at all (knowing the workshop is not knowing it can be done). Answer then with {"propose": {"item": "<one of canPropose.items>", "quantity": <${input.observation.canPropose.quantity.min} to ${input.observation.canPropose.quantity.max}>, "tier": 0 or 1 for an iron tool}, "why": "..."} instead of "choose". The world checks it against what you yourself know and either takes it on as a plan of yours (its steps appear among your options from the next moment) or refuses it and tells you why; this moment's action is then the world's own choice. Nothing is made by proposing.`);
+  }
   lines.push('');
   lines.push(memory ? 'Pick one option by its key and bring your notes up to date. Reply with the JSON object only.' : 'Pick one option by its key. Reply with the JSON object only.');
   return { system: memory ? SYSTEM_PROMPT_MEMORY : SYSTEM_PROMPT, user: lines.join('\n') };
@@ -227,10 +240,24 @@ export function parseProposal(text: string): ParsedProposal {
   }
   if (!v || typeof v !== 'object' || Array.isArray(v)) return { proposal: null, problem: 'the answer is not an object', notesProblem: null };
   const o = v as Record<string, unknown>;
-  if (typeof o.choose !== 'string' || o.choose.trim() === '') return { proposal: null, problem: '"choose" is missing or not a string', notesProblem: null };
-  if (o.choose.length > MAX_KEY) return { proposal: null, problem: '"choose" is too long to be an option key', notesProblem: null };
   const why = typeof o.why === 'string' ? clean(o.why, MAX_WHY) : '';
-  const proposal: Proposal = { choose: clean(o.choose.trim(), MAX_KEY), why };
+  let proposal: Proposal;
+  if (o.propose !== undefined) {
+    // a proposed goal (protocol 31/32): shape only here; whether it can be done is the engine's to judge from the person's own knowledge
+    if (o.choose !== undefined) return { proposal: null, problem: 'the answer both chooses and proposes; it may do one', notesProblem: null };
+    const g = o.propose;
+    if (!g || typeof g !== 'object' || Array.isArray(g)) return { proposal: null, problem: '"propose" is not an object', notesProblem: null };
+    const r = g as Record<string, unknown>;
+    if (typeof r.item !== 'string' || r.item.trim() === '' || r.item.length > 40) return { proposal: null, problem: '"propose.item" is missing or not a short string', notesProblem: null };
+    if (r.quantity !== undefined && (typeof r.quantity !== 'number' || !Number.isInteger(r.quantity))) return { proposal: null, problem: '"propose.quantity" must be a whole number', notesProblem: null };
+    if (r.tier !== undefined && r.tier !== 0 && r.tier !== 1) return { proposal: null, problem: '"propose.tier" must be 0 or 1', notesProblem: null };
+    const goal: ProposedGoal = { item: clean(r.item.trim(), 40), quantity: (r.quantity as number | undefined) ?? 1, tier: (r.tier as 0 | 1 | undefined) ?? 0 };
+    proposal = { choose: `propose:${goal.item}`, propose: goal, why };
+  } else {
+    if (typeof o.choose !== 'string' || o.choose.trim() === '') return { proposal: null, problem: '"choose" is missing or not a string', notesProblem: null };
+    if (o.choose.length > MAX_KEY) return { proposal: null, problem: '"choose" is too long to be an option key', notesProblem: null };
+    proposal = { choose: clean(o.choose.trim(), MAX_KEY), why };
+  }
   if (o.limit !== undefined) {
     // shape only: whether each field exists and is in range is the engine's to judge, against the option it belongs to
     if (!o.limit || typeof o.limit !== 'object' || Array.isArray(o.limit)) return { proposal: null, problem: '"limit" is not an object', notesProblem: null };

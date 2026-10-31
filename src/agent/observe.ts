@@ -34,6 +34,8 @@ import { weightOf } from '../sim/economy';
 import type { Ctx, Option } from '../sim/optutil';
 import type { Belief, BuildingType, ItemKind, Items, NeedKey, Person, World } from '../sim/types';
 import { hyp } from '../sim/util';
+import { proposableItems } from '../sim/proposals';
+import { PROJECT_LIMITS } from '../sim/project_graph';
 
 /** 2 adds the tick (`t`) to memory entries and the last result, so notes can refer to them; 1 is the shape protocol inhabitant/1 recorded.
  *  3 adds the limits an action accepts. */
@@ -48,7 +50,7 @@ import { hyp } from '../sim/util';
 // 13 adds dated coarse ecological signs and remembered field rest, never live soil data.
 // 14 adds dated coarse natural-water supply, never exact remote hydrological stock.
 // 15 adds dated local flood-ground observations, without actual recovery deadlines.
-export const OBSERVATION_VERSION = 16;
+export const OBSERVATION_VERSION = 17;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -176,6 +178,8 @@ export interface InhabitantObservation {
   setAside: { label: string; reason: string; target: string | null }[];
   /** active and recently-ended private plans, with what each has spoken for (version 7+) */
   plans?: { goal: string; kind: string; status: string; step: string; wants: Items; blocked: string; reason: string; since: string }[];
+  /** what the person could propose as a project of their own, from workshops they know of (version 17+; proposals.ts). Knowing a workshop is not feasibility: a proposal may still be refused. */
+  canPropose?: { items: string[]; quantity: { min: number; max: number }; tiers: (0 | 1)[] };
 }
 
 export interface ObserveOptions {
@@ -609,6 +613,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     options: ranked.slice(0, 30).map((o,index) => ({...describeOption(world, p, o, showScores, version), key: publicKeys[index]})),
     setAside: [...(version >= 5 ? blockedCraftNeeds(ctx) : []), ...ctx.blocked].slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId, version) })),
     ...(version >= 7 ? { plans: describePlans(world, p, version) } : {}),
+    ...(version >= 17 ? { canPropose: { items: proposableItems(ctx), quantity: { min: 1, max: PROJECT_LIMITS.quantity }, tiers: [0, 1] } } : {}),
   };
   return deepFreeze(obs);
 }

@@ -172,7 +172,7 @@ export function attribute(t: Transcript): Attribution {
       options: ask.observation.options.length,
       chosen: ask.proposal.choose,
       label: option?.label ?? null,
-      result: call?.result ? (call.result.status === 'applied' ? 'applied' : call.result.status === 'rejected' ? `refused: ${call.result.reason ?? ''}` : `engine chose ${call.result.label ?? ''}`) : null,
+      result: call?.result ? (call.result.status === 'applied' ? 'applied' : call.result.status === 'rejected' ? `refused: ${call.result.reason ?? ''}` : call.result.status === 'proposed' ? `proposed plan #${call.result.planId}; engine chose ${call.result.label ?? ''}` : `engine chose ${call.result.label ?? ''}`) : null,
       outcome: outcome ? `${outcome.outcome}${outcome.detail ? ` (${outcome.detail})` : ''}` : null,
       why,
       notesOnly,

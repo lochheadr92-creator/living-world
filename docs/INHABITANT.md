@@ -456,6 +456,13 @@ weak tier is 71 asks' worth.
 arm that answered differently every time. A plurality of one in three is printed as a majority and counted as a shift or a
 non-shift accordingly. Until that is fixed, a shift count from this tool is an upper bound, and the per-ask table is the result.
 
+## 2026-10-31 proposed projects
+
+Protocol inhabitant/31 and /32 (observation 17) let the inhabitant propose one bounded production goal instead of picking an
+option; the engine validates it with the existing planner from the person's own knowledge, adopts it as the ordinary batch
+plan or refuses it with a reason, and chooses that moment's action itself. Contract, limits and evidence:
+[PROPOSED_PROJECTS.md](PROPOSED_PROJECTS.md). Older recordings replay by their own protocol and shape, unchanged.
+
 ## 2026-10-25 audit follow-up
 
 Current queue and evidence: [INHABITANT_FIXES.md](INHABITANT_FIXES.md).

@@ -109,3 +109,26 @@ export function goalKeeperModel(opts: { readNotes?: boolean } = {}): ModelClient
     { readNotes },
   );
 }
+
+/**
+ * The proposer (docs/PROPOSED_PROJECTS.md), a test instrument. Proposes the one goal it was given the first time the observation
+ * says it could be proposed at all and no batch plan is active; after that it takes the first offered option that serves the plan
+ * (the engine marks a plan's own steps with the plan's goal), else the first option. With `once` it never proposes again after
+ * a refusal; without it, it proposes again at every free moment (the repeat control).
+ */
+export function proposerModel(goal: { item: string; quantity: number; tier: 0 | 1 }, opts: { once?: boolean } = {}): ModelClient {
+  let proposed = false;
+  return stubModel(`stub:proposer:${goal.item}`, (req) => {
+    const o = observationFromPrompt(req.user);
+    if (!o) throw new Error('no observation in the prompt');
+    const fallback = o.options[0]?.key ?? 'wander';
+    const plan = (o.plans ?? []).find((pl) => pl.kind === 'batch' && pl.status === 'active');
+    const rejected = /picked an option the world could not use/.test(req.user);
+    if (!plan && o.canPropose && !rejected && (!opts.once || !proposed)) {
+      proposed = true;
+      return JSON.stringify({ propose: goal, why: `scripted: proposing ${goal.quantity} ${goal.item}` });
+    }
+    const step = plan ? o.options.find((x) => x.goal === `to ${plan.goal}`) : undefined;
+    return JSON.stringify({ choose: step ? step.key : fallback, why: step ? `scripted: a step of my plan, ${step.label}` : 'scripted: first option' });
+  });
+}

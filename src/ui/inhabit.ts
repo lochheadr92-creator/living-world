@@ -223,8 +223,8 @@ export function createInhabitPanel(ctx: UICtx, slots: Slots, driver: InhabitDriv
     setText(detail, askingByHand ? `day ${dayNumber(w.tick)} ${clockText(w.tick)}` : `${driver.detail}${driver.personName ? ` · day ${dayNumber(w.tick)} ${clockText(w.tick)}` : ''}`);
     const d = driver.lastDecision();
     if (d) {
-      const label = d.call.choice.kind === 'pick' ? (d.ask.observation.options.find((o) => o.key === (d.call.choice as { key: string }).key)?.label ?? d.call.choice.key) : `engine (${d.call.choice.kind === 'fallback' ? d.call.choice.reason : ''})`;
-      const res = d.call.result ? (d.call.result.status === 'applied' ? 'applied' : d.call.result.status === 'rejected' ? `refused: ${d.call.result.reason}` : `engine chose ${d.call.result.label ?? ''}`) : '';
+      const label = d.call.choice.kind === 'pick' ? (d.ask.observation.options.find((o) => o.key === (d.call.choice as { key: string }).key)?.label ?? d.call.choice.key) : d.call.choice.kind === 'propose' ? `proposed ${d.call.choice.goal.quantity} ${d.call.choice.goal.item}` : `engine (${d.call.choice.kind === 'fallback' ? d.call.choice.reason : ''})`;
+      const res = d.call.result ? (d.call.result.status === 'applied' ? 'applied' : d.call.result.status === 'rejected' ? `refused: ${d.call.result.reason}` : d.call.result.status === 'proposed' ? `adopted as plan #${d.call.result.planId}; engine chose ${d.call.result.label ?? ''}` : `engine chose ${d.call.result.label ?? ''}`) : '';
       // what the choice came to is a separate thing from whether it was accepted: an accepted haul is not a delivered one
       const done = d.call.result?.activityId !== undefined ? driver.session?.transcript.outcomes.find((o) => o.activityId === d.call.result!.activityId) : undefined;
       const came = done ? `${done.outcome}${done.detail ? `: ${done.detail}` : ''}` : res === 'applied' ? 'still under way' : '';
@@ -250,7 +250,7 @@ export function createInhabitPanel(ctx: UICtx, slots: Slots, driver: InhabitDriv
       setHidden(notes, false);
     } else setHidden(notes, true);
     const t = driver.session?.transcript;
-    if (t) tally.push(`decisions ${t.calls.filter((c) => c.result?.status === 'applied').length}, engine ${t.calls.filter((c) => c.result?.status === 'fallback').length}, refused ${t.calls.filter((c) => c.result?.status === 'rejected').length}`);
+    if (t) tally.push(`decisions ${t.calls.filter((c) => c.result?.status === 'applied').length}, proposed ${t.calls.filter((c) => c.result?.status === 'proposed').length}, engine ${t.calls.filter((c) => c.result?.status === 'fallback').length}, refused ${t.calls.filter((c) => c.result?.status === 'rejected').length}`);
     // built fresh every time: reading the line back and appending to it grew it without end in a run that keeps no notes
     setText(counters, tally.join(' · '));
     setHidden(stop, s === 'finished' || s === 'dead' || s === 'failed');

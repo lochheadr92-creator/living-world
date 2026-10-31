@@ -18,7 +18,9 @@ export type ExternalChoice =
   /** the key of one of the offered options, optionally narrowed by limits the option declared in `bounds` */
   | { kind: 'pick'; key: string; limit?: Record<string, number>; offerIndex?: number }
   /** let the engine choose as it would for anyone, and say why the controller did not */
-  | { kind: 'fallback'; reason: string };
+  | { kind: 'fallback'; reason: string }
+  /** propose a bounded production goal (proposals.ts): validated and adopted as an ordinary plan, or refused; the engine then chooses this moment's action as for anyone */
+  | { kind: 'propose'; goal: { item: string; quantity: number; tier: 0 | 1 } };
 
 export type ExternalNote =
   /** a pick was accepted and the activity started (with the limits the engine actually accepted) */
@@ -28,7 +30,9 @@ export type ExternalNote =
   /** the engine chose instead (after a 'fallback', or after every retry was refused) */
   | { kind: 'fallback'; reason: string; activity: Activity | null }
   /** the engine ended the person's activity on its own authority (danger, a deadlier need) */
-  | { kind: 'override'; why: string; activity: Activity };
+  | { kind: 'override'; why: string; activity: Activity }
+  /** a proposed goal was adopted as plan `planId`; the engine chose this moment's action itself (null when nothing could start) */
+  | { kind: 'proposed'; goal: { item: string; quantity: number; tier: 0 | 1 }; planId: number; activity: Activity | null };
 
 export interface ExternalController {
   /** is this person driven from outside? */

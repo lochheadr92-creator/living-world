@@ -1049,6 +1049,77 @@ export function acceptCommunicatedPlan(ctx:Ctx,k:import('./continuity_knowledge'
  }
  return {plan:made,reason:'eligible personal continuation'};
 }
+/**
+ * How long since the last plan of a kind ended: the same rule for every kind, counted from the END, because "gave up on it,
+ * still short three" followed at once by "means to do it" is the same decision made again with nothing new to go on.
+ */
+function planCooldown(world: World, p: Person, kind: Intention['kind']): boolean {
+  if(hasWorkHandover(world)&&handedOver(p,kind))return true;
+  const last = [...p.intentions].reverse().find((i) => i.kind === kind);
+  return !!last && world.tick - (last.status === 'active' ? last.since : last.ended || last.since) < DAY;
+}
+
+export type BatchWantLike = NonNullable<ReturnType<BatchHooks['want']>>;
+
+/** The batch plan as adoptProject makes it from a want: one code path, whether the want was the planner's own or proposed. */
+function makeBatchIntention(ctx: Ctx, batch: BatchWantLike): Intention {
+  const { world, p } = ctx;
+  const made: Intention = {
+    id: world.nextId++,
+    kind: 'batch',
+    goal: batch.item === 'cart' ? 'build a handcart at the timber yard' : `see ${batch.qty} ${batch.item} through at the ${(p.beliefs[batch.facilityId]?.btype ?? 'workshop').replace('_', ' ')}${batch.forSite ? ' for the site' : ''}`,
+    since: world.tick,
+    until: world.tick + BATCH_PATIENCE_TICKS,
+    status: 'active',
+    reason: batch.why,
+    setAside: 0,
+    aboutId: batch.facilityId,
+    wants: batch.wants,
+    makes: batch.item,
+    sheltered: 0,
+    worked: 0,
+    ended: 0,
+    reserve: batch.qty,
+    recipe: batch.recipe,
+    forSite: batch.forSite,
+    ...(batch.project ? {project:batch.project} : {}),
+    step: '',
+    stepKind: 'none',
+    stepTarget: 0,
+    stepItem: null,
+    stepKey: null,
+    blocked: '',
+  };
+  const st = stepFor(ctx, made);
+  made.step = st.step;
+  made.stepKind = st.kind;
+  made.stepTarget = st.target;
+  made.stepItem = st.item;
+  made.stepKey = st.key;
+  made.blocked = st.blocked;
+  p.intentions.push(made);
+  addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
+  return made;
+}
+
+/**
+ * A batch proposed from outside (proposals.ts): adopted through the gates adoptProject applies to a batch of the planner's own
+ * (an adult, nothing actually wrong, the plan cap, one project at a time with a batch beside nothing but the night, the one-a-day
+ * batch cooldown), and made by the same code. Returns the plan or the gate that refused it; nothing is written on a refusal.
+ */
+export function adoptProposedBatch(ctx: Ctx, batch: BatchWantLike): { plan?: Intention; reason: string } {
+  const { world, p } = ctx;
+  if (ctx.stage === 'child') return { reason: 'a child does not take on a workshop project' };
+  if (ctx.criticals.length || ctx.dangers.length) return { reason: 'not while something is actually wrong' };
+  const live = p.intentions.filter((i) => i.status === 'active' && !(runsRulesVersion(world,72)&&i.kind==='journey'));
+  if (live.length >= MAX_INTENTIONS) return { reason: 'already holding as many plans as one person keeps' };
+  const batchBeside = runsRulesVersion(world, 50) && live.some((i) => i.kind === 'batch');
+  if (live.some((i) => i.kind !== 'night' && !(batchBeside && i.kind === 'batch'))) return { reason: 'one project at a time' };
+  if (batchBeside) return { reason: 'there is never more than one batch' };
+  if (planCooldown(world, p, 'batch')) return { reason: 'a batch plan ended less than a day ago' };
+  return { plan: makeBatchIntention(ctx, batch), reason: 'adopted' };
+}
+
 function adoptProject(ctx: Ctx): Intention | null {
   const { world, p } = ctx;
   if (ctx.stage === 'child') return null;
@@ -1068,11 +1139,7 @@ function adoptProject(ctx: Ctx): Intention | null {
   // How long since the last plan of a kind ended, used below: the same rule for every kind, counted from the END, because
   // "gave up on it, still short three" followed at once by "means to do it" is the same decision made again with nothing new
   // to go on.
-  const onCooldown = (kind: Intention['kind']): boolean => {
-    if(hasWorkHandover(world)&&handedOver(p,kind))return true;
-    const last = [...p.intentions].reverse().find((i) => i.kind === kind);
-    return !!last && world.tick - (last.status === 'active' ? last.since : last.ended || last.since) < DAY;
-  };
+  const onCooldown = (kind: Intention['kind']): boolean => planCooldown(world, p, kind);
 
   // Putting food by comes before a roof or an axe when its cue is live (rules version 2; `preparationWanted` returns null in
   // any world below it, so everything after this point is version 1's path, unchanged). The precedence is deliberate and
@@ -1184,42 +1251,7 @@ function adoptProject(ctx: Ctx): Intention | null {
   if (!roof && !tool) {
     const batch = batchHooks && !batchBeside && !onCooldown('batch') ? batchHooks.want(ctx) : null;
     if (!batch) return null;
-    const made: Intention = {
-      id: world.nextId++,
-      kind: 'batch',
-      goal: batch.item === 'cart' ? 'build a handcart at the timber yard' : `see ${batch.qty} ${batch.item} through at the ${(p.beliefs[batch.facilityId]?.btype ?? 'workshop').replace('_', ' ')}${batch.forSite ? ' for the site' : ''}`,
-      since: world.tick,
-      until: world.tick + BATCH_PATIENCE_TICKS,
-      status: 'active',
-      reason: batch.why,
-      setAside: 0,
-      aboutId: batch.facilityId,
-      wants: batch.wants,
-      makes: batch.item,
-      sheltered: 0,
-      worked: 0,
-      ended: 0,
-      reserve: batch.qty,
-      recipe: batch.recipe,
-      forSite: batch.forSite,
-      ...(batch.project ? {project:batch.project} : {}),
-      step: '',
-      stepKind: 'none',
-      stepTarget: 0,
-      stepItem: null,
-      stepKey: null,
-      blocked: '',
-    };
-    const st = stepFor(ctx, made);
-    made.step = st.step;
-    made.stepKind = st.kind;
-    made.stepTarget = st.target;
-    made.stepItem = st.item;
-    made.stepKey = st.key;
-    made.blocked = st.blocked;
-    p.intentions.push(made);
-    addLog(world, p, 'work', `Means to ${made.goal}: ${made.reason}.`);
-    return made;
+    return makeBatchIntention(ctx, batch);
   }
   const kind: Intention['kind'] = roof ? 'repair' : 'tool';
   // One of a kind at a time, and not straight after the last one of that kind ended.

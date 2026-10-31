@@ -1,4 +1,75 @@
-# Autonomy programme handoff to Claude — 31 October 2026
+# Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
+
+The owner asked for a stop, commit, push and handoff after the proposed-projects slice. This is a checkpoint, not
+programme completion. Everything below the "Original Codex handoff" heading is the earlier provenance, kept unchanged.
+
+## State at this handoff
+
+- Branch `main` (also pushed to `ccr-ebf20163-236tsz`). Current rules version **107**. Find the exact HEAD with
+  `git log -5 --oneline`; the last three slices are recorded in the register header of `docs/DEPENDENCY_CHAIN_PROGRAMME.md`.
+- First command: `git status --short`. Do not reset, clean, bulk-stage evidence or merge historical branches.
+- Read `AGENTS.md`, `CLAUDE.md`, `WORKFLOW.md`, `PRODUCT_VISION.md`, `docs/DEVELOPMENT_POLICY.md`,
+  `docs/BRANCH_LIFECYCLE.md`, `docs/AUTONOMY_ENVIRONMENT_OWNER_PROMPT.txt` (the full owner scope, unedited) and the
+  register before editing.
+
+## Delivered in this session (all on main, each with tests, docs, register entry; 98–107 with immutable references)
+
+| Slice | Runtime | Reference | Doc |
+| --- | --- | --- | --- |
+| Rules 98 roof duties verified and reviewed (one fix: stale roof refusal spoken as a fire) | `259f028` | `4cd6828` | `REPAIR_DUTY.md` |
+| Rules 99 prepared project steps (cart chain completes from its own decisions) | see register | see register | `READY_STEP.md` |
+| Rules 100 heard household supply defers a reserve, complements site materials | see register | see register | `HOUSEHOLD_SUPPLY.md` |
+| Rules 101 promised material counts against own fetching until the spoken time | see register | see register | `PROMISED_SUPPLY.md` |
+| Rules 102 no second roof promise for a building already promised | see register | see register | `REPAIR_DUTY.md` |
+| Rules 103 bounded personal decision ledger for the inspector | see register | see register | `DECISION_LEDGER.md` |
+| Rules 104 household undertakings told at a real shared supper | `69c391d` | `711ef2f` | `HOUSEHOLD_SUPPLY.md` |
+| Rules 105 asking a present neighbour where a promised person is | `06d3963` | `3cab1e1` | `LOCATION_QUESTION.md` |
+| Rules 106 care for an out-of-sight dependant decided from remembered signs | `fe28953` | `9879e96` | `REMEMBERED_NEED.md` |
+| Rules 107 checked first-hand accounts of places held to their teller | `a430195` | `4bcbb9c` | `CHECKED_ACCOUNTS.md` |
+| A16 proposed projects through the inhabitant seam (protocol 31/32, observation 17; no rules version) | this checkpoint | none (engine unchanged with nothing installed) | `PROPOSED_PROJECTS.md` |
+
+Each slice's ordinary five-day screens (river, mostly also meadow or forest) are in `autonomy_evidence/r<N>-*` with
+`report.json` committed; rendered checks in `autonomy_evidence/*-rendered`. Most ordinary screens are null or near-null
+results and are recorded as such: no workshop operation, no cart, no spoken roof request, no location question started,
+no weighed ask offered, within five ordinary days. Rules 107's ordinary checks (71 and 87 accounts checked in five river
+and meadow days) are the one mechanism seen active ordinarily.
+
+## Verification status of the last slice (A16 proposed projects)
+
+Full regression on the final source (shared four-core container, 1,690.76 s): **339 files / 2,204 tests, 336 files passed; the six failures were the three protocol tests (`ecology_protocol`, `flood_protocol`, `water_protocol`) pinning the previous current protocol numbers 29/30 and observation 16**, updated to 31/32 and 17 in this checkpoint commit and passing 13/13 afterwards together with the proposals tests. No simulation test failed. The suite was not re-run in full after that test-only correction.
+
+Focused: `tests/inhabit_proposals.test.ts` 4/4, with `inhabitant*.test.ts`, `inhabit_*.test.ts`, `golden.test.ts`,
+`v107_continuation.test.ts`, `ready_step.test.ts`, `batch_plan.test.ts` passing after the protocol-number updates;
+typecheck clean. No rendered check and no ordinary screen were made for it: the seam runs only with a controller
+installed, and no real-model run was made.
+
+## What remains (the whole owner programme is incomplete)
+
+Follow the register's capability map (`docs/DEPENDENCY_CHAIN_PROGRAMME.md`, "Capability / classification" table) and
+the owner prompt's order. Known open items, in rough priority:
+
+1. **Owner-run long validation.** `docs/AUTONOMY_VALIDATION.md` holds runnable 45-day commands for rules 99, 100 and
+   101 that were never run (too costly for the container). The WS6/WS7 ordinary production and cart evidence at the
+   current rules needs them: workshops are laid out around days 6–15, so five-day screens cannot show ordinary use.
+2. **A3 general contingent goals**: other goal families, revision of an adopted goal, composition across goals; A16
+   covers production goals only, and a real-model run with proposals was not made.
+3. **WS16/WS4** replacement after collapse, limited adult labour; **WS19** disputes attribution audit; **WS9** customers
+   and trade; **WS3** winter food flow; **WS10/20** knowledge continuity and population viability.
+4. **A7 leftovers**: rumour correction (`reputation.ts`) and accounts of promises, work and whereabouts are not graded.
+5. **A8 leftover**: the pre-56 watch fallback reads a child's true position; legacy only, preserved by the references,
+   recorded as open (a change would alter recorded behaviour below 56).
+6. **WS17** sustained care and cover duties after recovery; ordinary care reliability unproven.
+7. The `fedUntil` live read (a 120-tick window set only by an actual hand-over) remains, recorded in `REMEMBERED_NEED.md`.
+
+Conventions that held throughout: one slice per rules version, owner module at `src/sim/<name>.ts` with a lab switch
+`rich-no-<name>`, tests with a STAGED fixture under `tests/helpers/`, a rendered check under `scripts/browser/`, an
+observer under `scripts/<name>_observe.ts` run five days at the new version and at the pinned predecessor, docs under
+`docs/<NAME>.md`, then commit runtime → pin `scripts/vN_reference.ts --write` (never regenerate an older one) → record
+the register/AGENTS/CLAUDE entry → push `ccr-ebf20163-236tsz` and fast-forward `main`. Full regression takes about
+1,700–1,900 s on the shared four-core container; run it in the background and keep the session active.
+
+## Original Codex handoff (kept as provenance)
+
 
 The owner stopped implementation and requested committing/pushing the work **as is**,
 then a continuation prompt for Claude. This is a checkpoint, not programme completion.

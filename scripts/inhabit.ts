@@ -127,8 +127,8 @@ function report(t: Transcript, w: World): string {
   const outcomeOf = new Map(t.outcomes.map((o) => [o.call, o]));
   for (const c of t.calls) {
     const a = t.asks[c.ask];
-    const label = c.choice.kind === 'pick' ? `${a.observation.options.find((o) => o.key === (c.choice as { key: string }).key)?.label ?? '(not offered)'} [${c.choice.key}]` : c.choice.kind === 'fallback' ? `engine (${c.choice.reason})` : 'deferred';
-    const res = c.result ? (c.result.status === 'applied' ? 'applied' : c.result.status === 'rejected' ? `refused: ${c.result.reason}` : `engine chose ${c.result.label ?? 'nothing'}`) : '-';
+    const label = c.choice.kind === 'pick' ? `${a.observation.options.find((o) => o.key === (c.choice as { key: string }).key)?.label ?? '(not offered)'} [${c.choice.key}]` : c.choice.kind === 'fallback' ? `engine (${c.choice.reason})` : c.choice.kind === 'propose' ? `proposed ${c.choice.goal.quantity} ${c.choice.goal.item}` : 'deferred';
+    const res = c.result ? (c.result.status === 'applied' ? 'applied' : c.result.status === 'rejected' ? `refused: ${c.result.reason}` : c.result.status === 'proposed' ? `adopted as plan #${c.result.planId}; engine chose ${c.result.label ?? 'nothing'}` : `engine chose ${c.result.label ?? 'nothing'}`) : '-';
     const oc = outcomeOf.get(c.seq);
     lines.push(`t${c.tick} ${clockText(c.tick)} | ${a.observation.options.length} options | ${label} -> ${res} | ${a.proposal?.why ?? a.problem ?? ''} | ${oc ? `${oc.outcome}${oc.detail ? ': ' + oc.detail : ''} (t${oc.tick})` : ''}`);
   }

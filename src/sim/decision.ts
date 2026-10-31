@@ -4,6 +4,7 @@ import { whileObserving } from './lifechanges';
 import { ledgerDecision } from './decision_ledger';
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
+import { proposeProject } from './proposals';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
 import { unfitPerson } from './defence';
 import type { ExternalController } from './external';
@@ -270,6 +271,21 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
     if (choice.kind === 'fallback') {
       reason = choice.reason;
       break;
+    }
+    if (choice.kind === 'propose') {
+      // a proposed goal (proposals.ts): adopted through the ordinary gates or refused with the reason; adoption changes what is
+      // offered from the NEXT decision (the plan's steps and nudge), and this moment's action is the engine's own choice
+      const r = proposeProject(ctx, choice.goal);
+      const key = `propose:${String((choice.goal as { item?: unknown }).item ?? '?')}`;
+      if (!r.ok) {
+        reason = r.reason;
+        ext.notify?.(world, p, { kind: 'rejected', key, reason });
+        continue;
+      }
+      const started = launch(world, p, ctx, trigger);
+      if (!started) p.nextThink = world.tick + 15;
+      ext.notify?.(world, p, { kind: 'proposed', goal: { ...choice.goal }, planId: r.plan.id, activity: started ? p.activity : null });
+      return;
     }
     // New controllers identify a particular offered alternative; legacy inputs
     // retain their recorded first-key-match interpretation.
