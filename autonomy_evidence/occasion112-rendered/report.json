@@ -1,0 +1,70 @@
+{
+  "scene": "Staged familiar neighbour and supplied guest. Offered accepted chat, saved pause, real resumption and completion; no ordinary benefit claim.",
+  "checks": [
+    {
+      "name": "accepted chat pauses a real visit with progress",
+      "ok": true,
+      "detail": {
+        "kind": "converse",
+        "paused": true,
+        "paid": 35,
+        "deadline": 900,
+        "rules": 112
+      }
+    },
+    {
+      "name": "talking-at-feast inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "inspector shows the conversation",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nRowan household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nCheerful\nHEALTH\n100\nON THEIR MIND\n+6\nThe feast\nWhat are they up to?\nMore\nTalking with Ben.\n0%\nNEEDS\nFood\n94\nWater\n94\nEnergy\n94\nWarmth\n89\nSafety\n85\nCompany\n69\nCARRYING\n×3\n×3\n7.5 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nConversation\nnow\nTALKING NOW\nnow\nBen\ncame over for a chat\nStep\nSaying what it is about\nOutcome\nUnder way\nNearby\nPeople\n1\nRequests\nRecent\n1\nKnows\n2\nFamily\nTraits"
+    },
+    {
+      "name": "same visit resumes without losing progress or extending time",
+      "ok": true,
+      "detail": {
+        "kind": "attend",
+        "id": 8,
+        "expected": 8,
+        "progress": 35,
+        "paid": 35,
+        "deadline": 900,
+        "twins": true
+      }
+    },
+    {
+      "name": "resumed-feast inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "inspector shows resumed participation",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nRowan household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\n+6\nThe feast\nWhat are they up to?\nMore\nGood weather for work.\nAt the feast (18% of this task).\n18%\nNEEDS\nFood\n92\nWater\n91\nEnergy\n91\nWarmth\n82\nSafety\n84\nCompany\n92\nCARRYING\n×3\n×3\n7.5 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nConversation\nLAST CONVERSATION\njust now\nBen\ncame to Ada for a chat\nOutcome\nFriendly\nNearby\nPeople\n1\nRequests\nRecent\n1\nKnows\n2\nFamily\nTraits"
+    },
+    {
+      "name": "resumed visit completes once with exact saved continuation and accounting",
+      "ok": true,
+      "detail": {
+        "endings": [
+          {
+            "result": "success",
+            "detail": "done",
+            "progress": 190,
+            "duration": 190
+          }
+        ],
+        "admissions": 1,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
+import {hasOccasionRecovery,occasionResumeFailure} from './occasion_recovery';
 import { closeDecision } from './decision_ledger';
 import { floodMovementBlocked, floodSpeed, hasFloodAccess, knownFloodCosts, observeFlood } from './flood';
 import { floodEscapePath, waitForFlood } from './flood_access';
@@ -551,7 +552,7 @@ export function suspendActivity(world: World, p: Person): void {
   // the progress below is about to be thrown away: credit what it was worth first, or a broken night would count for nothing
   creditShelterFrom(p, a);
   releaseClaims(world, a.claims);
-  if (a.phase === 'work') {
+  if (a.phase === 'work' && !hasOccasionRecovery(world,a)) {
     a.phase = 'travel';
     a.path = [];
     a.pi = 0;
@@ -569,8 +570,13 @@ export function resumeSuspended(world: World, p: Person): boolean {
   if (!a) return false;
   p.suspended = null;
   if (p.activity) return false;
-  if (world.tick > a.expire && !isBoundedNightWait(world, a)) return false;
-  if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId) && !isBoundedNightWait(world, a)) return false;
+  if (hasOccasionRecovery(world,a)) {
+    const failure=occasionResumeFailure(world,p,a);
+    if(failure){p.activity=a;endActivity(world,p,'interrupted',failure);return false;}
+  } else {
+    if (world.tick > a.expire && !isBoundedNightWait(world, a)) return false;
+    if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId) && !isBoundedNightWait(world, a)) return false;
+  }
   p.activity = a;
   if (hasLayoutClaims(world) && a.kind === 'plan_site') {
     const blocked = layoutClaimBlock(world, p, a);
