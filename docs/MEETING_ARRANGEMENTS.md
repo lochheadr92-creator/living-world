@@ -1,7 +1,7 @@
 # Shared-place arrangements — current-source audit
 
-This audit follows the offcut candidate at rules 89. It is not delivered meeting behavior,
-and no rules-90 runtime is allocated until rules 89 completes verification and is pinned.
+This audit began against published rules 89. Rules 90 implements its physical leftover
+prerequisite (`MEAL_LEFTOVERS.md`); private arrangements remain the next implementation.
 It continues A4/A8/A14 and the existing shared-meal, household-practice and contact paths.
 
 ## Existing mechanisms to preserve
@@ -87,3 +87,71 @@ The actual start counters are host/guest **1/0, 1/3, 0/0** for river/forest/mead
 establish an ordinary successful shared meal and a refusal, not repeat attendance, later
 arrangement learning, a cancellation communication path or aggregate benefit. They reinforce
 the instruction to extend existing shared places rather than adding a duplicate hub.
+
+## Physical prerequisite and the next knowledge boundary
+
+The rules-90 candidate is documented separately in `MEAL_LEFTOVERS.md`. It keeps food at the
+site, preserves household ownership and uses actual bounded collection. It does not repair
+the distant cancellation log or the shared-status knowledge read. Its ordinary river trace
+also exposes an existing unhelpful transition: the host sets out food despite having heard
+the sole invitee decline; the gathering then cancels on the following tick. Do not conceal
+that refusal, force attendance or raise cleanup above every legitimate need to hide it.
+
+For the next slice, separate the operational table from each participant's personally heard
+arrangement. Existing meals already bound participants and live/history records. An explicit
+per-participant acceptance snapshot belongs to this operational meeting owner; it is not a
+second general social-memory database. Retained outcome experience should use the existing
+bounded relationship memory, with an explicit meal event identity and source, after the
+operational record expires. The request-receipt store has mandatory asker/helper semantics
+and is not the owner of attendance. Preserve its meaning and existing relationship/history
+bounds. Do not overload material commitment or helper competence with attendance.
+
+Audit every `mealOf` caller, including candidate invitations, guest departure, host invitations
+and the observer view. Other people's private attendance cannot be read just because they
+are visible. A guest's departure uses their heard time/place and their own timeout, even if
+the remote table manager has ended the meal. Arrival can establish an empty place or absent
+meal; it does not establish a death, refusal, wolf or deliberate breach elsewhere. Early
+arrival needs a bounded wait rather than omniscient immediate failure. A host who heard every
+guest refuse has local grounds to stop before setting out food.
+
+Actual cancellation/acknowledgement should reuse conversation processing, with contact
+rechecked through the existing same-space boundary. A global cancellation event remains an
+observer fact; it is not a broadcast to every guest. Host death, distant danger, loss of the
+place and urgent departure need separate knowledge tests. Preserve unknown causes, legitimate
+refusal, urgent alternatives and original invitation provenance through save/load.
+
+Time/place revision must be heard and voluntarily accepted. It cannot move already-laid food
+or silently revise an uninformed guest's original appointment. Bound revisions and retry,
+retain both old and new agreed information, and avoid a new generic hub or rigid schedule.
+The physical and communication slices still do not close ordinary repeated successful
+meetings, long-term household outcomes, broad causal inspection or AI goal proposals.
+
+## Predeclared next implementation and failure cases
+
+Rules 91 will retain each participant's heard place/time and answer inside the existing
+bounded meal owner. Decisions read only that participant's snapshot. Actual table stock,
+arrival and consumption remain physical world facts; a snapshot never creates food or
+reserves another household's goods. An ended remote table does not erase a living person's
+appointment. Locally observing an empty meeting place supplies no explanation of its cause.
+The guest may wait until the agreed time plus the existing 500-tick guest window, with
+urgent needs still able to interrupt. Personal timeout supplies a truthful unknown outcome.
+
+A host's own interruption, actual refusal or local observation supplies grounds to cancel;
+distant operational cleanup alone supplies none. A cancellation speech act and its later
+acknowledgement are separate contact-checked phases. Interrupted speech may be retried after
+a bounded cooldown. It cannot remove a different meal or another suspended obligation.
+
+One replacement invitation may follow a personally known failed arrangement. It uses a new
+meal ID, retains its predecessor, requires actual contact and a voluntary answer, and keeps
+unheard participants' original appointments intact. Already-laid food remains at its real
+site. No recursive revision chain, compulsory attendance or repeated postponement is allowed.
+The host's own remembered failed meeting can justify additional preparation time in that
+later invitation, without inferring bad faith or reducing unrelated helper competence.
+
+Predeclared success: actual invitation conversation, acceptance, saved travel/early waiting,
+physical shared food, and a personally sourced outcome influencing a later eligible choice.
+Failure cases: remote cancellation/death/place loss, different interiors, interrupted update
+before/after hearing, refusal of a replacement, urgent departure, unknown cause at an empty
+place, full operational history and stale/repeated revision. Historical rules-90 references
+must remain exact. Measure ordinary offered/selected/started/heard/answered/arrived/ate/end
+separately in the same fixed five-day seeds; retain zero or failed revision opportunities.

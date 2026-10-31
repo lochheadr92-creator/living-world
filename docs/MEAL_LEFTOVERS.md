@@ -2,7 +2,8 @@
 
 This is the physical prerequisite from `MEETING_ARRANGEMENTS.md`, not completion of meeting
 knowledge, cancellation, revision or the owner programme. Predecessor 89 is pinned at
-`ab66ee5` from runtime `aa38124`. The current candidate follows published `dd46b4e`.
+`ab66ee5` from runtime `aa38124`. Runtime `c766251` follows published `dd46b4e`;
+immutable reference `ec4eab7` passes separately **1/1** in **2.41 seconds**, with typecheck clean.
 
 ## Contract and causal defect
 

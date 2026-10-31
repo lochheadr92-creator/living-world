@@ -243,3 +243,26 @@ npx --no-install vite-node scripts/offcuts_observe.ts -- forest "$runRoot-offcut
 ```powershell
 npx --no-install vite-node scripts/offcuts_observe.ts -- meadow "$runRoot-offcuts-meadow45" 45 1200
 ```
+
+## Rules 90 shared-meal recovery follow-up (pending owner-run measurements)
+
+The short fixed screen shows one actual forest recovery and useful household/personal use,
+plus uncollected river food that spoils. It does not establish reliable repeated meetings
+or a welfare benefit. After publication, these longer screens retain ordinary refusals,
+failures, resource losses, offers, actual collections and later choices. Allow approximately
+6–15 minutes per seed, with a 1,200-second cap and uncertainty as the world accumulates.
+Each command requires a fresh output directory and does not resume; return its `report.json`.
+Use `rich-no-meal-leftovers` with controls and nudges in the existing matched lab for any
+aggregate claim; the unpaired short-world comparison is insufficient.
+
+```powershell
+npx --no-install vite-node scripts/meal_leftovers_observe.ts -- river "$runRoot-meals-river45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/meal_leftovers_observe.ts -- forest "$runRoot-meals-forest45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/meal_leftovers_observe.ts -- meadow "$runRoot-meals-meadow45" 45 1200
+```

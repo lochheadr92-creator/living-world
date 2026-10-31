@@ -97,3 +97,26 @@ No benefit is claimed.
   cannot source, waits and lapses like any plan.
 - One practice, one effect (the earlier cue); the second practice slice the brief allows (maintenance) is not here.
 - No aggregate claim.
+
+## Current-source follow-up audit during the autonomy programme
+
+Rules 90's shared-meal custody repair does **not** repair succession. The following source
+boundaries must be addressed before extending the death path to incapacity or departure:
+
+- `successionBlocker` reads live site existence and every living housemate's registered tools.
+  A remote completed site or an unseen tool can therefore end the undertaking without new
+  personal evidence. The statement above that this is entirely the survivor's knowledge is
+  too broad for the current implementation.
+- `takeUp` observes the live death pile whenever the successor once witnessed the death,
+  even if adoption occurs later and elsewhere. An original witness should retain the
+  original observation; witnessing death is not permission to refresh remote stock forever.
+- The historical wording "the pile's ownership" preserves registered tool identity, but an
+  ordinary death pile has no household access marker for its other goods. Current pile
+  withdrawal/eating treats those goods as public. Rules 90 introduces explicit custody only
+  for meal leftovers, not estates or collapse salvage. Do not claim that estate goods are
+  protected merely because their quantities balance or tool records retain an owner.
+
+These are source findings, not new ordinary incidence measurements or delivered repairs.
+Continue the existing WS11/20 row: establish locally informed records and actual ownership,
+then voluntary temporary/departure handover, competing acceptance, original-worker recovery,
+already-complete work and missing goods. Do not copy private skills, goods or obligations.
