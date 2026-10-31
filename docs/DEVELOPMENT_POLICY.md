@@ -26,6 +26,14 @@ simulation acceptance criteria, compatibility obligations or evidence limits.
 
 ## Product direction
 
+Owner decision, 1 November 2026: before planning or implementing a feature, apply
+[Feature increments: new capability and stronger connections](../PRODUCT_VISION.md#feature-increments-new-capability-and-stronger-connections).
+Each feature adds one meaningful new inhabitant capability and strengthens existing systems
+through the same causal chain, with evidence for both outcomes. Necessary connecting repairs
+belong to that feature; unrelated work does not. Dedicated repair, compatibility, performance
+and documentation tasks do not require a new mechanic. This adds no approval process and
+does not change the compatibility or evidence rules below.
+
 The authoritative product brief is [PRODUCT_VISION.md](../PRODUCT_VISION.md) (owner decision,
 2026-10-22): Living World is an autonomous world game with few direct controls, supported by a
 causal, deterministic simulation. People live their own lives; the viewer follows individuals,

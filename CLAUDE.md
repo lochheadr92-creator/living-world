@@ -1,5 +1,13 @@
 # Living World: notes for Claude (read this first)
 
+**Before planning or editing:** read `WORKFLOW.md` and `PRODUCT_VISION.md`, including
+[Feature increments: new capability and stronger connections](PRODUCT_VISION.md#feature-increments-new-capability-and-stronger-connections).
+Owner decision, 1 November 2026: each feature increment must add one meaningful new
+inhabitant mechanic/capability and strengthen existing systems through the same observable
+causal chain. Name both outcomes, complete the necessary connecting implementation and
+repairs, and verify both. Dedicated repairs, compatibility, performance and documentation
+tasks stay focused; they do not require an added mechanic. This is no extra approval gate.
+
 Current state (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
 after 114 hungry ripe-grain harvest; the autonomy/environment programme continues from the register.
 Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules are 115.
