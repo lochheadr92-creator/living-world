@@ -1,0 +1,18 @@
+{
+  "source": "9b45375797d1b8a15d76fde4b2513bdd4a73532f, rules 109 before successor behaviour",
+  "ordinary": {
+    "saved": "721cfd967582958c648368f37f65c84423e2ee88c7d49a325c9a493be4669e0c",
+    "uninterrupted": "469bde19bad5987497c893d6c8982aaa5d3b1079810f3b414ec894bc840a1a50",
+    "continued": "469bde19bad5987497c893d6c8982aaa5d3b1079810f3b414ec894bc840a1a50"
+  },
+  "finishing": {
+    "saved": "bb882b6b69c26bcb5a71a3064da27dafd6cec19c7925a353934c35c18cc5873a",
+    "uninterrupted": "6cd7351a5fb11b3ef8f9ef70eeba6dac6fffde250a08b45cebde3d9650530e98",
+    "continued": "6cd7351a5fb11b3ef8f9ef70eeba6dac6fffde250a08b45cebde3d9650530e98"
+  },
+  "shelter": {
+    "saved": "85cc7e9980be5e7bb4f6d3235d54449266464f7ca5c3f01fb1da939de5553405",
+    "uninterrupted": "7c0e42edc80747984459f03bc20939e115699081a735f8cf551dba21dc112b17",
+    "continued": "7c0e42edc80747984459f03bc20939e115699081a735f8cf551dba21dc112b17"
+  }
+}
