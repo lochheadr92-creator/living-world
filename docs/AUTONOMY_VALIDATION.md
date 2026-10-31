@@ -287,3 +287,24 @@ npx --no-install vite-node scripts/meeting_arrangements_observe.ts -- forest "$r
 ```powershell
 npx --no-install vite-node scripts/meeting_arrangements_observe.ts -- meadow "$runRoot-arrangements-meadow45" 45 1200
 ```
+
+## Rules 92 informed household continuity: longer ordinary screen (pending)
+
+After pulling the published rules-92 code, use the fresh `$runRoot` defined above.
+These are 45-day **Normal** screens, not a mature Large benchmark. Allow roughly 6–15
+minutes for the three commands depending on contention; each has a 1,200-second cap.
+The script requires fresh destinations and does not resume. Retain the reports and
+source manifests, including deaths, refusals, unknown work and zero successions.
+Return the three `report.json` summaries; no claimed benefit follows from counts alone.
+
+```powershell
+npx --no-install vite-node scripts/informed_continuity_observe.ts -- river "$runRoot-continuity-river45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/informed_continuity_observe.ts -- forest "$runRoot-continuity-forest45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/informed_continuity_observe.ts -- meadow "$runRoot-continuity-meadow45" 45 1200
+```
