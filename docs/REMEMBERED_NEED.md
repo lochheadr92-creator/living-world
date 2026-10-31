@@ -50,8 +50,13 @@ Perception already reports visible signs of a person in sight (`perception.ts de
 - Rendered (`scripts/browser/remembered_need_check.mjs`, 5/5, screenshot inspected): the same scene in the page; Ada's
   panel reads "Weighed up: Cal needs bread (looked so when I last saw them, tick 0) +75 · walking −1" and she walks to
   where she last saw him.
-- Ordinary (`scripts/remembered_need_observe.ts`, river Normal, five days, 106 against pinned 105): see the register
-  entry for the counts. The observer alone reads the dependant's true state to count how often remembered signs differ
+- Ordinary (`scripts/remembered_need_observe.ts`, river and meadow Normal, five days, 106 against pinned 105; the worlds
+  diverge, so the counts are not paired): out-of-sight care trips river 5 (2 on signs still true, 3 no longer true) against
+  41 on true needs, meadow 3 (2/1) against 92; dependants sampled hungry out of sight and not known to be, river 45 of 1,107
+  out-of-sight samples, meadow 6 of 942; remembered signs differing from the true state, river 72, meadow 66; no deaths.
+  Reports: `autonomy_evidence/r106-{river,meadow}` and `-at105`.
+- Regression: 335 files / 2,195 tests, one emergent charcoal test failed on the shifted meadow trajectory and was widened
+  with its measurements (`tests/iron_chain_stall.test.ts`); runtime `fe28953`, reference `9879e96`. The observer alone reads the dependant's true state to count how often remembered signs differ
   from it; nobody in the world does.
 
 ## Limits
