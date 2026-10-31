@@ -276,7 +276,7 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
       // a proposed goal (proposals.ts): adopted through the ordinary gates or refused with the reason; adoption changes what is
       // offered from the NEXT decision (the plan's steps and nudge), and this moment's action is the engine's own choice
       const r = proposeProject(ctx, choice.goal);
-      const key = `propose:${String((choice.goal as { item?: unknown }).item ?? '?')}`;
+      const key = `propose:${String((choice.goal as { item?: unknown } | null | undefined)?.item ?? '?')}`;
       if (!r.ok) {
         reason = r.reason;
         ext.notify?.(world, p, { kind: 'rejected', key, reason });

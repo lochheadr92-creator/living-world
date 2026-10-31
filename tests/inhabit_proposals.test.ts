@@ -24,14 +24,14 @@ it('a valid proposal is adopted through the ordinary gates as the ordinary plan,
  const f=fresh();for(let n=0;n<100;n++)stepWorld(f.w);expect(plan(f)).toBeUndefined(); // the planner has no want of its own here
  const ctx=generateOptions(f.w,f.p,true,true);
  expect(proposableItems(ctx)).toEqual(expect.arrayContaining(['cart','planks','handles']));expect(proposableItems(ctx)).not.toContain('bricks');
- const before=serializeWorld(f.w);
+ const before=serializeWorld(f.w),ledgerBefore=JSON.stringify(f.w.ledger);
  for(const [goal,reason] of [[{item:'unobtainium',quantity:1,tier:0},/unknown project item/],[{item:'cart',quantity:0,tier:0},/outside its bounded range/],[{item:'cart',quantity:25,tier:0},/outside its bounded range/],[{item:'planks',quantity:1,tier:1},/quality requires a tool/],[{item:'bricks',quantity:2,tier:0},/no personally known way|kiln/],[{item:'flour',quantity:2,tier:0},/no personally known way/],[{item:'wood',quantity:2,tier:0},/simply fetched/],[{item:'hammer',quantity:1,tier:0},/already has/]] as const){
   const r=proposeProject(ctx,goal);expect(r.ok,JSON.stringify(goal)).toBe(false);if(!r.ok)expect(r.reason).toMatch(reason);
  }
  expect(serializeWorld(f.w)).toBe(before);expect(plan(f)).toBeUndefined();
  const r=proposeProject(ctx,{item:'cart',quantity:1,tier:0});expect(r.ok).toBe(true);if(!r.ok)return;
  expect(r.plan).toMatchObject({kind:'batch',makes:'cart',reason:'proposed from outside',status:'active'});expect(r.plan.project?.goal).toEqual({item:'cart',quantity:1,tier:0});
- expect(f.w.carts).toHaveLength(0);expect(f.w.ledger.created.cart??0).toBe(0);
+ expect(f.w.carts).toHaveLength(0);expect(JSON.stringify(f.w.ledger)).toBe(ledgerBefore);
  // a second proposal: the same item is a repeat, another batch is refused by the one-batch rule
  expect(proposeProject(ctx,{item:'cart',quantity:1,tier:0})).toMatchObject({ok:false,reason:'already seeing cart through'});
  expect(proposeProject(ctx,{item:'planks',quantity:2,tier:0})).toMatchObject({ok:false,reason:'there is never more than one batch'});

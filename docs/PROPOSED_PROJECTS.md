@@ -56,7 +56,41 @@ small, so the planner has no cart want of its own and only a proposal can start 
 Existing inhabitant suites updated only for the new protocol and observation numbers. No ordinary-world claim: the
 seam runs only with a controller installed, and no real-model run was made.
 
-## Limits
+## Codex continuation review — 31 October 2026
+
+The direct external-controller boundary had one reproduced malformed-input failure:
+`proposeProject` correctly rejected a null/undefined goal, then `externalDecide`
+dereferenced that goal while constructing its rejection label. The tick threw
+instead of completing the bounded rejection/fallback path. The label now uses
+optional access. No proposal, goods, knowledge or plan is created on refusal.
+The model JSON parser already rejects these shapes; this repair covers the direct
+controller boundary as well. It changes no autonomous behaviour or rules version.
+
+The resumed typecheck also exposed an inherited test error: carts are entities,
+not keys in the item-creation ledger. The proposal test now compares the complete
+ledger before/after adoption instead of reading a nonexistent `created.cart` key,
+while still asserting that no cart entity exists. This strengthens the existing
+no-free-goods check and changes no runtime code.
+After that correction, typecheck passes and both proposal suites pass **6/6**
+in 3.84 s (`autonomy-proposals-boundary-final.log`).
+
+`tests/inhabit_proposal_boundary.test.ts`: both malformed goals now receive bounded
+rejections and fallback, leave no batch/cart, conserve resources and round-trip
+the full save. Focused proposal, boundary, protocol, version and immutable rules-107
+checks pass **19 tests / 7 files**, 5.20 s. The baseline full-suite rerun is separate
+and still running at this review; no full-pass claim is made here.
+
+`scripts/browser/proposed_project_check.mjs` passes **7/7** rendered checks at rules
+107 (`autonomy_evidence/proposals107-rendered`). A supplied staged yard and a
+reduced site deficit receive one scripted proposal through protocol 31 / observation
+17. The controller is then removed; autonomous work makes planks and assembles the
+owned cart from four planks. The proposal transcript replays exactly, subsequent
+saved twins stay exact, resources balance, and rendering leaves the save unchanged.
+The plan and actual assembly screenshots were visually inspected. This is not a
+real-model run, ordinary activation result or aggregate-benefit claim. The render
+predates only the rejection-label repair, which cannot run on this valid proposal.
+
+## Remaining limits
 
 Proposals are production goals only (the batch plan family); other goal families, revision of an adopted goal and
 composition across goals (A3) remain open. The engine, not the model, chooses the action at the moment of proposing.
