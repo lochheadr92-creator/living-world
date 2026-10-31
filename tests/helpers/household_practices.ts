@@ -10,8 +10,8 @@ import {stepWorld} from '../../src/sim/world';
 import {newActivity,startActivity} from '../../src/sim/activities';
 import {DAY} from '../../src/sim/constants';
 import type {Person} from '../../src/sim/types';
-export function supperFixture(){
- const s=stage('supper-practice-contract'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=24;w.tick=672;
+export function supperFixture(version=24){
+ const s=stage('supper-practice-contract'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=version;w.tick=672;
  const a=addPerson(s,'Ada',42,24,{age:54,inv:{berries:8,water:2},hunger:98,thirst:98,energy:98,traits:{sociability:1,generosity:1}});
  const b=addPerson(s,'Bea',44,24,{age:32,hh:a.hhId,inv:{berries:2,water:2},hunger:98,thirst:98,energy:98,traits:{sociability:1,generosity:1}});
  const hall=building(s,'hall',48,26),home=building(s,'hut',45,22,a.hhId),pantry=building(s,'storehouse',42,22,a.hhId,{berries:40,water:20});w.households.find(h=>h.id===a.hhId)!.homeId=home.id;

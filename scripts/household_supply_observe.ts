@@ -20,13 +20,17 @@ const w=createWorld(settings),initial=serializeWorld(w),twin=deserializeWorld(in
 const counts:Record<string,number>={},stories:unknown[]=[],plansSeen=new Set<number>(),heardSeen=new Set<string>(),deferSeen=new Set<string>();let samples=0,pureChecks=0;
 const count=(key:string,n=1)=>counts[key]=(counts[key]??0)+n,story=(event:unknown)=>{if(stories.length<160)stories.push(event);};
 w.hooks={onActivityStart:(p,a)=>{if(a.kind==='socialize'&&a.data.purpose==='share_work'){count('start:share_work');story({event:'tell',tick:w.tick,person:p.id,target:a.targetId});}},onActivityEnd:(p,a,outcome)=>{if(a.kind==='socialize'&&a.data.purpose==='share_work')count('ending:share_work:'+outcome);}};
+const mealsSeen=new Set<string>();
+const sampleMeals=()=>{for(const m of w.meals){const key=m.id+':'+m.status;if(mealsSeen.has(key))continue;mealsSeen.add(key);if(m.status!=='done')continue;count('meals done');const host=w.byId.get(m.host);if(host?.ent!=='person')continue;
+ const seated=Object.entries(m.supperContact?.guests??{}).filter(([id,c])=>c.ticks>=20&&w.byId.get(Number(id))?.ent==='person').map(([id])=>w.byId.get(Number(id)) as typeof host).filter(g=>g.hhId===host.hhId);
+ if(seated.length){count('meals done with a household guest seated 20+ ticks');if([host,...seated].some(q=>q.intentions.some(i=>i.status==='active'&&['tool','stock','shelter','batch'].includes(i.kind))))count('such meals where a diner carried a shareable undertaking');}}};
 const time=new TimeBudget(),detach=time.attach(w);let stop='horizon';
 while(w.tick<days*2400){
  time.sampleTick(w);
- if(w.tick%120===0){const before=serializeWorld(w);const byHousehold=new Map<number,Map<number,number[]>>();for(const p of w.persons){if(!p.alive)continue;samples++;
+ if(w.tick%120===0){sampleMeals();const before=serializeWorld(w);const byHousehold=new Map<number,Map<number,number[]>>();for(const p of w.persons){if(!p.alive)continue;samples++;
   for(const i of p.intentions){if(i.kind!=='stock')continue;if(!plansSeen.has(i.id)){plansSeen.add(i.id);count('stock plans adopted:'+(i.cue??'unknown'));}
    if(i.status==='active'){const hh=byHousehold.get(p.hhId)??new Map<number,number[]>();byHousehold.set(p.hhId,hh);hh.set(i.aboutId,[...(hh.get(i.aboutId)??[]),p.id]);}}
-  for(const [other,r] of Object.entries(p.relations))for(const k of r.workHeard??[]){const key=p.id+':'+k.planId;if(!heardSeen.has(key)){heardSeen.add(key);count('heard undertakings:'+k.kind);story({event:'heard',tick:w.tick,listener:p.id,from:Number(other),kind:k.kind,heardAt:k.heardAt});}
+  for(const [other,r] of Object.entries(p.relations))for(const k of r.workHeard??[]){const key=p.id+':'+k.planId;if(!heardSeen.has(key)){heardSeen.add(key);count('heard undertakings:'+k.kind);if(k.via==='meal')count('heard at supper');story({event:'heard',tick:w.tick,listener:p.id,from:Number(other),kind:k.kind,heardAt:k.heardAt});}
    if(k.deferredAt!==undefined&&!deferSeen.has(key)){deferSeen.add(key);count('reserve left to teller');story({event:'deferred',tick:w.tick,listener:p.id,from:Number(other),planId:k.planId,deferredAt:k.deferredAt});}}
   const ctx=generateOptions(w,p,true,true),ranked=rankOptions(ctx);if(ctx.options.some(o=>o.key.includes('share_work')))count('sampled share_work offers');observeInhabitant(w,p,ctx,ranked);describePerson(w,p.id);
  }

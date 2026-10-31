@@ -1,0 +1,58 @@
+{
+  "rules": 104,
+  "evidence": "STAGED family supper fixture (rules-24 practice scene built at 104) with a declared reserve plan; invitation, hosting, attendance and eating are the offered options the fixture selects; the telling is autonomous. No ordinary frequency claim.",
+  "checks": [
+    {
+      "name": "at the shared supper, after real time at the table, the host tells the guest what she is working on, with the meal id",
+      "ok": true,
+      "detail": {
+        "tick": 5904,
+        "status": "eating",
+        "ticks": 20,
+        "heard": {
+          "planId": 17,
+          "from": 2,
+          "name": "Ada",
+          "householdId": 1,
+          "heardAt": 5903,
+          "conversationId": 14,
+          "kind": "stock",
+          "aboutId": 7,
+          "makes": "",
+          "worked": 3,
+          "goal": "put 12 units of food by for the household",
+          "via": "meal"
+        },
+        "speech": "I am working to put 12 units of food by for the household; I have done 3 work so far.",
+        "dist": 0.21020508195250895
+      }
+    },
+    {
+      "name": "the table scene shows the host at the meal with the undertaking spoken",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 54\nHazel household\nHome: hut (99% sound)\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nI am working to put 12 units of food by for the household; I have done 3 work so far.\nGoing to lay the table at the communal hall (67% of this task).\n67%\n"
+    },
+    {
+      "name": "the guest's relationship history records it as heard at supper, information not a promise",
+      "ok": true,
+      "detail": "Heard Ada's undertaking #17 at tick 5903, at supper #14: put 12 units of food by for the household; reported work 3. No takeover was promised.\n\nRemembered at tick 5503: Ada invited me to eat. Event link not recorded.\n\nRecent decisions\nConversation\nLAST CONVERSATION\n36s ago\nAda\ncame to Bea with an in"
+    },
+    {
+      "name": "the meal finishes as before and the world reloads exactly",
+      "ok": true,
+      "detail": {
+        "status": "done",
+        "ate": [
+          2,
+          4
+        ],
+        "valid": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

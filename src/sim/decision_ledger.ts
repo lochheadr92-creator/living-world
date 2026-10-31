@@ -30,7 +30,7 @@ export function ledgerDecision(w:World,p:Person,ctx:Ctx,ranked:Option[],chosen:O
  if(!hasDecisionLedger(w))return;
  const entry:DecisionEntry={tick:w.tick,trigger:text(trigger,40),key:chosen?text(chosen.key,80):'',chosen:chosen?text(chosen.label):'',kind:chosen?.kind??'',targetId:chosen?.targetId??0,forPlan:act?.data.forPlan as number??0,activityId:act?.id??0,
   passedOver:ranked.filter(o=>o!==chosen).slice(0,3).map(o=>text(o.label,80)),setAside:ctx.blocked.slice(0,3).map(o=>({label:text(o.label,80),reason:text(o.blocked??'',120)}))};
- const list=p.decisions??=[];list.push(entry);
+ const list=p.decisions??=[];p.decisionsDropped??=0;list.push(entry);
  while(list.length>DECISION_LEDGER_CAP){list.shift();p.decisionsDropped=(p.decisionsDropped??0)+1;}
 }
 /** Activity-end only: the entry that launched this activity records how it ended. */

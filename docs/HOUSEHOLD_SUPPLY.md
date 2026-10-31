@@ -59,11 +59,27 @@ samples of a household with two active plans for one store, **zero deferrals**. 
 contested sources or the time limit; so the measured duplicate waste in this window is 1/24 and the dominant loss is food
 scarcity at sources, not coordination. A ten-day river screen at rules 100 (`autonomy_evidence/r100-river10`, 24,000 ticks in 194.25 s, 5,618 samples, 200 purity checks, exact twin, conserved, no deaths) does reach the season window: 48 reserve plans, 5 season-cued and 43 hardship-cued, 604 sampled `share_work` offers with 6 started (one failed), 2 heard reserve accounts, 397 two-plans-for-one-store samples and **zero deferrals**. Ordinary season deferral did not occur in ten days; the telling is the scarce step.
 
+## Rules 104 — told at supper (31 October 2026)
+
+The five- and ten-day river screens above showed why rules 100 could not act ordinarily: the `share_work` conversation
+started 4–6 times in several hundred offers, so the heard account almost never existed. A household supper is the place
+where the same people already sit within arm's reach for a while (`household_practices.ts supperContact`, rules 24).
+Rules 104 (`hasSupperTelling`, lab removal `rich-no-supper-telling`): once a guest has really sat with the host for
+twenty eating ticks and both are of one household, each tells the other one shareable undertaking through the rules-92
+record, with the meal's id and `via: 'meal'`, spoken at the table, bounded by the same once-a-day limit per listener;
+nothing is assigned or promised. The relationship history reads "at supper #N". Validation accepts `via` only at 104.
+
+Tests (`tests/supper_telling.test.ts`, 4): the staged family supper (the rules-24 practice fixture built at 104 with a
+declared reserve plan) tells after twenty real table ticks with the meal id, logs and shows it, saves and reloads exactly,
+conserves, and the fixture's next-day supper re-tells by replacing the one record; rules 103 and the ablation tell nothing;
+a supper record is refused below 104. Rendered `scripts/browser/supper_telling_check.mjs` **5/5**
+(`autonomy_evidence/supper104-rendered`). Ordinary river screens at 104 against pinned 103: (`scripts/household_supply_observe.ts`, reports committed, final saves local): river five days at 104 and at pinned 103 are identical (323 sampled `share_work` offers, 6 started, 22 hardship reserve plans, 228 two-plans-for-one-store samples, 1 reserve account heard in conversation, **zero** heard at supper), and so are forest five days (355 offers, 3 started, 17 plans) and forest ten days (653 offers, 4 started, 43 plans, 3 season-cued). The reason is the denominator: **no shared meal finished at all** in any of those windows (`meals done` 0), so the supper channel had no ordinary opportunity. Shared meals and the telling at them remain an ordinary-occurrence question for the longer owner-run horizons; the staged scene is the only direct evidence.
+
 ## Limits and what remains
 
 - The season-only contract follows the owner's protection of each member's own needs; extending deferral to hardship is
   not warranted by this measurement (1/24) and would need its own evidence.
-- The telling is rare ordinarily (4 of 341 offers in five river days at score 17); shared meals do not yet carry an
-  undertaking. Supper-time telling is a possible later transition, not implemented here.
+- The telling is rare ordinarily through conversation (4 of 341 offers in five river days at score 17); rules 104 adds the
+  supper as a second real-contact channel (section above).
 - No AI protocol change: the deferral is an adoption-time decision, not an offered action; the observation and transcript
   formats are unchanged. No aggregate benefit, fuller store or survival claim is made.

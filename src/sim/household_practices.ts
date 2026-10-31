@@ -4,6 +4,8 @@ import type { World, Person, Meal } from './types';
 import { runsRulesVersion } from './rulesversion';
 import { addLog } from './events';
 import { hyp } from './util';
+import { say } from './events';
+import { workToTell, hearUndertaking } from './continuity_knowledge';
 export interface SupperExperience {mealId:number; hostId:number; tick:number; role:'host'|'family'; root:number; generation:number}
 export interface SharedSupper {experiences:SupperExperience[]; learned?:{source:'practice'|'family'; teacher:number; root:number; generation:number; tick:number; meals:number[]}}
 export interface SupperContact {ate:number[]; guests:Record<number,{ticks:number;lastTick:number}>}
@@ -11,6 +13,20 @@ let enabled=true;
 export const householdPracticesOn=():boolean=>enabled;
 export function setHouseholdPractices(on:boolean):void{enabled=on;}
 export const hasHouseholdPractices=(w:World):boolean=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,24);
+// Rules 104: a household supper is real contact, so what a member is working on is said at the table. Five- and ten-day
+// screens at rules 100 showed the share_work conversation started 4-6 times in several hundred offers, so the heard
+// account that rules 100 consults almost never existed ordinarily; the supper is where the same people already sit
+// within arm's reach. The telling uses the rules-92 record and its once-a-day limit, carries the meal's id, and
+// assigns nothing.
+let telling=true;
+export const supperTellingOn=():boolean=>telling;
+export function setSupperTelling(on:boolean):void{telling=on;}
+export const hasSupperTelling=(w:World):boolean=>telling&&w.settings.dynamics==='rich'&&runsRulesVersion(w,104);
+const SUPPER_TELL_AT=20;
+function tellAtTable(w:World,a:Person,b:Person,m:Meal):void{
+ const work=workToTell(w,a,b.id);if(!work)return;
+ const text=hearUndertaking(w,a,b,work.id,m.id,'meal');if(text)say(w,a,text,'say',70);
+}
 export function supperWeight(w:World,p:Person):number{return hasHouseholdPractices(w)&&p.sharedSupper?.learned?4:0;}
 export function noteSupperPortion(w:World,m:Meal,p:Person):void{
  if(!hasHouseholdPractices(w))return;const record=m.supperContact??={ate:[],guests:{}};if(!record.ate.includes(p.id))record.ate.push(p.id);
@@ -22,6 +38,8 @@ export function supperContact(w:World,m:Meal,p:Person):void{
  if(host?.ent!=='person'||!host.alive||host.activity?.kind!=='host_meal'||host.activity.data.mealId!==m.id||(host.indoors??0)!==(p.indoors??0)||hyp(host.x-p.x,host.y-p.y)>4)return;
  const record=m.supperContact??={ate:[],guests:{}};const guest=record.guests[p.id]??={ticks:0,lastTick:-1};
  if(guest.lastTick!==w.tick){guest.ticks++;guest.lastTick=w.tick;}
+ // rules 104: once the two have really sat together a while, each tells the other what they are working on, at most once a day
+ if(hasSupperTelling(w)&&guest.ticks===SUPPER_TELL_AT&&host.hhId===p.hhId){tellAtTable(w,host,p,m);tellAtTable(w,p,host,m);}
 }
 function remember(w:World,p:Person,e:SupperExperience):void{
  const practice=p.sharedSupper??={experiences:[]};if(practice.learned||practice.experiences.some(x=>x.mealId===e.mealId))return;
