@@ -88,3 +88,24 @@ physical grain, mortality, pure observers, exact twins/reload and accounting wit
 no inserted supplies or decisions. Compare descriptively with the retained rules-113
 forest, not as evidence of general population viability from one seed. That result
 is pending and is not included in the delivered five-day evidence.
+
+## Adverse 45-day forest result
+
+The further frozen-114 screen completed tick 108,000 in 186.93 s, with 900 pure
+checks, exact unobserved twins/reloads and conserved items. It records 143 hungry
+known-ripe-crop samples: 56 with room and 87 with a full pack. Of the 56 with room,
+56 offer harvesting, 55 are eligible and 31 rank it first. There are 21 actual
+hunger-harvest starts, 18 successful endings and three failures, yielding 36 grain.
+These are physical harvests; this observer does not attribute subsequent eating.
+
+**All 31 people who lived in this world died; final population is zero.** The last
+death is at tick 55,958, well before day 45. The retained rules-113 forest ends with
+five alive and 27 deaths. These divergent single-seed totals are adverse evidence;
+there is no established survival benefit, and the new choice is not a demonstrated
+remedy for famine. Do not erase this result or label winter food complete. A wider
+comparison and a causal trace of food access, capacity and winter supply remain
+necessary before drawing a general conclusion.
+
+Report: `autonomy_evidence/harvest114-forest-45/report.json`; complete world local.
+No runtime was changed during the run. The previous pending paragraph is superseded
+by this completed result, not silently rewritten as success.
