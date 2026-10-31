@@ -1,0 +1,23 @@
+{
+  "source": "784189dfb5681e8a14b3e640201c88930aa9735c, rules 92 before successor behaviour",
+  "ordinary": {
+    "saved": "cd530b8593894d5839918b96465ffb2e1226819dff9d51b43c1c1a70ccdc9c00",
+    "uninterrupted": "82ee778b47f606d9c5bc8a98f1a9d7c65d70e3a53ae76520dd1426a7f0b43afe",
+    "continued": "82ee778b47f606d9c5bc8a98f1a9d7c65d70e3a53ae76520dd1426a7f0b43afe"
+  },
+  "hearing": {
+    "saved": "95ad023da1c11792083d3a9d732b62b5a64cf4a05adba8f2d8c9c43106e8c2c5",
+    "uninterrupted": "a73472934a5ab6ac1e443f210f453521248f5cddd3f37db78e3641611d55e9dc",
+    "continued": "a73472934a5ab6ac1e443f210f453521248f5cddd3f37db78e3641611d55e9dc"
+  },
+  "succession": {
+    "saved": "25dbd9a469ca1934aa8c3672cccef36aef7275e226109edf94fbf455455a6f70",
+    "uninterrupted": "95b1c22157f735f3c212c8be3873bedb7a9c9778d08dc40ce6b3c8c96f39b82a",
+    "continued": "95b1c22157f735f3c212c8be3873bedb7a9c9778d08dc40ce6b3c8c96f39b82a"
+  },
+  "privateWork": {
+    "saved": "52fff6f401f49e156eda2b1f49124a7fb3596e9c402e6f72d138f7e83ebafe3a",
+    "uninterrupted": "9b243b4a90557d2441a7890bbd20072f9794bf2730198e67bc4763b0a8649801",
+    "continued": "9b243b4a90557d2441a7890bbd20072f9794bf2730198e67bc4763b0a8649801"
+  }
+}
