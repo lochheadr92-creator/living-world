@@ -1,3 +1,5 @@
+import {hasLivedLife} from './lived_life';
+import {toolCapacityBlock} from './tool_feasibility';
 import {hungryHarvestOptions} from './hungry_harvest';
 import { hasEcology } from './ecology';
 import {mayTakeKnownPile} from './pile_access';
@@ -214,16 +216,18 @@ function optDepositFood(ctx: Ctx): void {
   const { world, p } = ctx;
   const keepSelf = ctx.drives.hunger > 0 ? 3 : 2;
   const surplus = ctx.food - keepSelf;
-  if (surplus < 2) return;
+  const partialReserve=hasLivedLife(world)&&preparingReserve(p);
+  if (surplus < (partialReserve?1:2)) return;
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
     const mine = b.hh === p.hhId && isHomeType(b.btype);
     const comm = b.btype === 'storehouse';
     if (!mine && !comm) continue;
+    if(surplus<2&&!mine)continue;
     const used = Object.entries(b.items ?? {}).reduce((s, [k, n]) => s + (n ?? 0) * WEIGHT[k as ItemKind], 0);
     const cap = BUILD_DEF[b.btype as BuildingType].cap;
-    if (cap - used < 2) {
+    if (cap - used < (partialReserve&&mine?1:2)) {
       addBlocked(ctx, 'deposit', 'Store food', b.id, 'remembers it being full', 'store');
       continue;
     }
@@ -375,7 +379,7 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   const { p, world } = ctx;
   if (ctx.stage === 'child') return null;
   const prerequisite = workshopTool(ctx);
-  if (prerequisite) return prerequisite;
+  if (prerequisite && !toolCapacityBlock(world,p,prerequisite)) return prerequisite;
   const has = (t: ToolKind) => (p.inv[t] ?? 0) > 0;
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') >= 1;
@@ -401,7 +405,7 @@ export function wantedTool(ctx: Ctx): HandTool | null {
   if (makesSpears(world) && !has('spear') && metAWolfLately(ctx)) options.push({ t: 'spear', w: 2.2 });
   if (!options.length) return null;
   options.sort((x, y) => y.w - x.w);
-  return options[0].t;
+  return options.find(o=>!toolCapacityBlock(world,p,o.t))?.t ?? null;
 }
 
 /** Has this person actually met a wolf lately - one in sight now, or one they saw and remember from within the last day? */
@@ -1925,10 +1929,23 @@ function optIdle(ctx: Ctx): void {
 }
 
 /** Rules version 27: the fallback, at one of several places a person knows (leisure.ts). Still the one 'wander' option, still worth 6. */
+/** Pure local destination selection; estimating an idle walk must not consume a random draw. */
+function leisureDestination(ctx:Ctx,ax:number,ay:number,reach:number):{x:number;y:number}|null{
+ const {world,p}=ctx;
+ for(let i=0;i<8;i++){
+  const ang=hashUnit(p.id,world.tick,i)*Math.PI*2,r=1.5+hashUnit(p.id,world.tick,i+11)*reach;
+  const x=ax+Math.cos(ang)*r,y=ay+Math.sin(ang)*r,tx=Math.floor(x),ty=Math.floor(y);
+  if(tx>1&&ty>1&&tx<world.W-1&&ty<world.H-1&&!world.solid[ty*world.W+tx]&&world.terrain[ty*world.W+tx]!==T.DEEP&&world.terrain[ty*world.W+tx]!==T.SHALLOW)return {x,y};
+ }
+ return null;
+}
+
 function optLeisure(ctx: Ctx): void {
   const { world, p } = ctx;
   const { h, sc } = pickHaunt(ctx, hauntsFor(ctx));
   const home = h.key === 'home';
+  const destination=hasLivedLife(world)?leisureDestination(ctx,h.x,h.y,home?4.5:3):null;
+  const duration=destination?eta(ctx,destination.x,destination.y)+38:40;
   addOption(ctx, {
     kind: 'wander',
     label: h.label,
@@ -1936,11 +1953,16 @@ function optLeisure(ctx: Ctx): void {
     need: null,
     util: sc.total,
     parts: sc.parts,
-    eta: 40,
+    eta: duration,
     key: 'wander',
     targetId: 0,
     tag: 'idle',
     make: () => {
+      if(destination){
+        const a=newActivity(world,p,{kind:'wander',label:h.doing,goal:'nothing needs doing right now',spotX:destination.x,spotY:destination.y,tx:destination.x,ty:destination.y,utility:sc.total,minCommit:20,maxTicks:Math.max(300,Math.ceil(duration)+120)});
+        if(a)a.data.haunt=h.key;
+        return a;
+      }
       const reach = home ? 4.5 : 3;
       for (let i = 0; i < 8; i++) {
         const ang = hashUnit(p.id, world.tick, i) * Math.PI * 2;

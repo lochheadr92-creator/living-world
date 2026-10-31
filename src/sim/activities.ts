@@ -1,3 +1,4 @@
+import {hasLivedLife} from './lived_life';
 import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
 import {hasOccasionRecovery,occasionResumeFailure} from './occasion_recovery';
 import {hasSuspendedEndings,ordinaryResumeFailure} from './suspended_endings';
@@ -408,7 +409,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   const a = p.activity;
   if (!a) return;
   // time under shelter is credited to the plan it served before the activity is let go of (rest and sleep alike)
-  creditShelterFrom(p, a);
+  if(!hasLivedLife(world))creditShelterFrom(p, a);
   // and what a gathering trip came to is written into the person's own estimate of what that kind of work pays them
   recordPay(world, p, a,outcome);
   recordRoutine(world,p,a,outcome,detail);
@@ -551,7 +552,7 @@ export function suspendActivity(world: World, p: Person): void {
   const a = p.activity;
   if (!a) return;
   // the progress below is about to be thrown away: credit what it was worth first, or a broken night would count for nothing
-  creditShelterFrom(p, a);
+  if(!hasLivedLife(world))creditShelterFrom(p, a);
   releaseClaims(world, a.claims);
   if (a.phase === 'work' && !hasOccasionRecovery(world,a)) {
     a.phase = 'travel';

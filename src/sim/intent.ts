@@ -1,3 +1,6 @@
+import {recordNightShelter} from './night_experience';
+import {hasLivedLife} from './lived_life';
+import {toolCapacityBlock} from './tool_feasibility';
 import {alreadyPreparingHandTool} from './project_hand_inputs';
 import {hasPromiseExpectations,expectedOutstanding,personalRequests} from './promise_expectations';
 import {hasWorkHandover,handedOver} from './handover_state';
@@ -569,7 +572,7 @@ function stockStep(ctx: Ctx, i: Intention): Step {
   if (g && (p.inv.grain ?? 0) >= GRANARY_TRIP) {
     return { kind: 'store', target: g.id, item: 'grain', step: `take the grain to the granary (${short} more to put by)`, key: `bring:${g.id}:grain`, blocked: '' };
   }
-  if (foodToStore(p) >= CARRY_TO_STORE) {
+  if (foodToStore(p) >= (hasLivedLife(world)?1:CARRY_TO_STORE)) {
     return { kind: 'store', target: home.id, item: null, step: `take the food home (${short} more to put by)`, key: `deposit:${home.id}:food`, blocked: '' };
   }
   return { kind: 'forage', target: 0, item: null, step: `gather food to put by (${short} more)`, key: null, blocked: '' };
@@ -805,7 +808,8 @@ export function settleIntentions(world: World, p: Person): void {
   if (!isRich(world) || !nightPlans || !p.alive || !p.intentions.length) return;
   for (const i of p.intentions) {
     if (i.status !== 'active') continue;
-    if (i.kind === 'night' && inMorning(world)) creditShelter(p, i.aboutId, shelterInFlight(p, i));
+    if(hasLivedLife(world))recordNightShelter(world,p,i);
+    else if (i.kind === 'night' && inMorning(world)) creditShelter(p, i.aboutId, shelterInFlight(p, i));
     const made = projectOutcome(world, p, i);
     if (made) {
       i.status = made.status;
@@ -859,6 +863,13 @@ export function reviewIntentions(ctx: Ctx): Intention | null {
   settleIntentions(world, p);
   for (const i of p.intentions) {
     if (i.status !== 'active') continue;
+    const capacity = i.kind === 'tool' ? toolCapacityBlock(world,p,i.makes as ToolKind) : null;
+    if(capacity){
+      i.status='dropped';i.ended=world.tick;i.reason=capacity;i.wants={};
+      i.step='';i.stepKind='none';i.stepItem=null;i.stepTarget=0;i.stepKey=null;i.blocked='';
+      addLog(world,p,'work',`Set aside ${i.goal}: ${capacity}.`);
+      continue;
+    }
     // a critical need or a wolf is not a change of mind: the plan stands and says it was set aside
     if (ctx.criticals.length || ctx.dangers.length) {
       i.setAside++;

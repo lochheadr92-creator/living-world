@@ -1,4 +1,5 @@
-import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
+import {hasLivedLife} from './lived_life';
+import {hasPromiseTargets,observePromiseTarget,finishedSiteHere} from './promise_targets';
 import {hasPromiseKnowledge} from './promise_knowledge';
 import {homeLayoutConflict} from './home_replacement';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
@@ -68,9 +69,10 @@ registerHandler('build', {
   begin(world, p, a) {
     const site = world.byId.get(a.targetId);
     if (!site || site.ent !== 'site') {
+      const finished=finishedSiteHere(world,p,a.targetId,a.tx,a.ty);
       observePromiseTarget(world,p,a.targetId,a.tx,a.ty);
       delBelief(p, a.targetId);
-      return 'the site is already finished or gone';
+      return finished?'the building is already complete; no further construction is needed':'the site is already finished or gone';
     }
     if (!mayWorkProject(world, p, site.id)) return 'has not agreed to this public project';
     observe(world, p, site);
@@ -80,11 +82,17 @@ registerHandler('build', {
     a.tx = site.x + site.w / 2;
     a.ty = site.y + site.h / 2;
     a.data.waited = 0;
+    if(hasLivedLife(world))a.data.siteType=site.type;
   },
   work(world, p, a): WorkResult {
     const site = world.byId.get(a.targetId);
     if (!site || site.ent !== 'site') {
-      if(hasPromiseTargets(world)){observePromiseTarget(world,p,a.targetId,a.tx,a.ty);return a.cycle>0?'partial:the site is no longer here; its fate is unknown':'fail:the site is no longer here; its fate is unknown';}
+      if(hasPromiseTargets(world)){
+        const finished=finishedSiteHere(world,p,a.targetId,a.tx,a.ty);
+        observePromiseTarget(world,p,a.targetId,a.tx,a.ty);if(hasLivedLife(world))delBelief(p,a.targetId);
+        const reason=finished?'the building is complete; my contribution is the work I actually did':'the site is no longer here; its fate is unknown';
+        return a.cycle>0?`partial:${reason}`:`fail:${reason}`;
+      }
       return a.cycle > 0 ? 'done' : 'fail:the site is gone';
     }
     if (!mayWorkProject(world, p, site.id)) return 'fail:participation withdrawn';

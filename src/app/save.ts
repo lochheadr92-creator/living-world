@@ -1,3 +1,4 @@
+import {validateNightExperience} from '../sim/night_experience';
 import { validateEcology } from '../sim/ecology';
 import { validateDecisionLedger, normaliseDecisionLedger } from '../sim/decision_ledger';
 import { validateLocationQuestions } from '../sim/location_question';
@@ -265,6 +266,7 @@ export function deserializeWorld(json: string): World {
   validateAlignments(w);
   validateHouseholdPractices(w);
   validateGoalHistory(w);
+  validateNightExperience(w);
   validateProjectGraphs(w);
   validateRoutines(w);
   validateWorkScopes(w);

@@ -17,7 +17,7 @@ export function recordRequesterTarget(w:World,p:Person,target:PromiseTargetEvide
  if(!hasRequestCancellation(w))return;
  for(const m of p.socialMemory??[]){const e=m.expectation;if(!e||m.role!=='asker'||m.cancellation||e.destId!==target.targetId&&m.siteId!==target.targetId||e.endedAt!==undefined&&e.source!=='own timeout')continue;
   m.cancellation={source:'own target observation',tick:w.tick,from:p.id,commitmentId:e.commitmentId,target:{...target}};
-  m.outcome='cancelled';m.tick=w.tick;m.reason=target.source==='completed here'?'I finished the site; I no longer need the remaining help. I still need to tell the helper.':'I saw that the requested target is no longer there; I no longer need work on it. I still need to tell the helper.';
+  m.outcome='cancelled';m.tick=w.tick;m.reason=target.source==='observed completion'?'I saw the completed building; I no longer need the remaining help. I still need to tell the helper.':target.source==='completed here'?'I finished the site; I no longer need the remaining help. I still need to tell the helper.':'I saw that the requested target is no longer there; I no longer need work on it. I still need to tell the helper.';
   e.endedAt=w.tick;e.source='own cancellation';addLog(w,p,'social',m.reason);
  }
 }
@@ -39,7 +39,7 @@ export function receiveCancellation(w:World,speaker:Person,listener:Person,reque
  if(old){if(!old.cancellation)old.cancellation=known;if(stopped){old.outcome='cancelled';old.reason=c!.reason!;old.tick=w.tick;}}
  else {const t=m.task;memories.push({requestId,otherId:speaker.id,siteId:m.siteId,tick:w.tick,outcome:stopped?'cancelled':c?.status==='done'?'fulfilled':c?.status==='moot'?'cancelled':c?.status??'cancelled',reason:c?.reason??'My obligation had already ended.',role:'helper',...(t?{task:{kind:t.kind,item:t.item,asked:t.asked,...(t.offered!==undefined?{offered:t.offered}:{})}}:{}),cancellation:known});if(memories.length>32)memories.shift();}
  addLog(w,listener,'social',`${speaker.name} asked me to stop request #${requestId}; ${stopped?'I accepted the cancellation':'my obligation had already ended'}. Their account does not establish my own observation of the target.`);
- return {text:k.target.source==='completed here'?'I finished the site. Please stop the remaining work I asked you to do.':'The place I asked you to help with is no longer there. Please stop that request.',commitmentId:k.commitmentId,targetId:k.target.targetId,stopped};
+ return {text:k.target.source==='observed completion'?'The building is complete. Please stop the remaining work I asked you to do.':k.target.source==='completed here'?'I finished the site. Please stop the remaining work I asked you to do.':'The place I asked you to help with is no longer there. Please stop that request.',commitmentId:k.commitmentId,targetId:k.target.targetId,stopped};
 }
 export function acknowledgeCancellation(w:World,speaker:Person,listener:Person,requestId:number):CancellationKnowledge['response']|null{
  if(!hasRequestCancellation(w)||!completionContact(w,speaker,listener))return null;

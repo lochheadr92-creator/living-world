@@ -367,6 +367,9 @@ export function hashWorld(world: World): string {
   if (hasLayoutClaims(world)) for (const p of world.persons) if (p.activity?.kind==='plan_site' || p.suspended?.kind==='plan_site') push(`LY${p.id}:${layoutFingerprint(p)}`);
   if (world.settings.dynamics === 'rich') {
     for (const p of world.persons) if (p.alive) push(`D${p.id}:${p.mood ? r4(p.mood.level) + ',' + p.mood.thoughts.length : '-'}`);
+    for (const p of world.persons) {
+      for (const i of p.intentions) if (i.shelterChecked !== undefined) push('NightExperience'+p.id+':'+i.id+':'+i.shelterChecked+':'+i.sheltered);
+    }
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in
     for (const c of world.crews ?? []) push(`W${c.id}:${c.members.join('.')}`);
     for (const t of world.traditions ?? []) push(`V${t.id}:${t.kind},${t.status},${t.held},${t.skipped}`);

@@ -1,3 +1,4 @@
+import {hasLivedLife} from './lived_life';
 // CUSTOMERS: SUPPLYING WHAT WAS ASKED FOR, AND WHAT CAME BACK (rules version 51, rich worlds only).
 //
 // Rules 43 gave a person a bounded memory of being asked for materials (local_demand.ts), and a trade can be taken up because
@@ -250,6 +251,10 @@ export function supplyOptions(ctx: Ctx, mk: (c: { q: Person; d: number }, purpos
       // a swap is two for one at most, as at the market: the barter refuses what the other pack cannot carry on top of what it holds
       if (want && !isDependent(world, q)) mk({ q, d }, 'trade', { item: want, amount: 1, offer: lead.item, offerAmount: Math.min(2, n), customer: lead.requestId }, `Bring ${q.name} the ${lead.item} they asked for, for ${want}`, `to supply ${q.name} with ${lead.item}`, sc.add('they carry something I could use', Math.min(4, gain)), ':' + lead.item);
       else mk({ q, d }, 'offer', { items: { [lead.item]: n }, customer: lead.requestId }, `Bring ${q.name} the ${lead.item} they asked for`, `to supply ${q.name} with ${lead.item}`, sc, ':' + lead.item);
+      continue;
+    }
+    if(hasLivedLife(world)&&seen){
+      addBlocked(ctx,'visit',`Take ${lead.item} to ${q.name}`,q.id,seen.asleep?'they are asleep':'they are already talking','trade');
       continue;
     }
     if ((p.cooldowns['seek' + q.id] ?? 0) > world.tick) {

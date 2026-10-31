@@ -1,3 +1,5 @@
+import {hasLivedLife} from './lived_life';
+import {SLEEP_RECOVER} from './constants';
 import {mayTakeKnownPile} from './meal_leftovers';
 import { rememberedConditionCost } from './ecology';
 import {storedWaterOptions} from './stored_water';
@@ -485,7 +487,7 @@ function optSleep(ctx: Ctx): void {
       need: 'energy',
       util: o.u,
       parts: o.sc.parts,
-      eta: o.e + 40,
+      eta: o.e + (hasLivedLife(world)?Math.ceil(Math.max(0,94-p.needs.energy)/(SLEEP_RECOVER*0.8)):40),
       key: `sleep:${bed.id}`,
       targetId: bed.id,
       tag: 'rest',
@@ -518,7 +520,7 @@ function optSleep(ctx: Ctx): void {
       need: 'energy',
       util: sc.total,
       parts: sc.parts,
-      eta: 5,
+      eta: hasLivedLife(world)?Math.ceil(Math.max(0,94-p.needs.energy)/(SLEEP_RECOVER*0.7)):5,
       key: 'sleep:here',
       targetId: 0,
       tag: 'rest',
@@ -564,7 +566,7 @@ function optWarmth(ctx: Ctx): void {
       need: 'warmth',
       util: sc.total,
       parts: sc.parts,
-      eta: e,
+      eta: e + (hasLivedLife(world)?240:0),
       key: `warm:${b.id}`,
       targetId: b.id,
       tag: 'warmth',
@@ -603,7 +605,7 @@ function optWarmth(ctx: Ctx): void {
       need: 'warmth',
       util: sc.total,
       parts: sc.parts,
-      eta: e,
+      eta: e + (hasLivedLife(world)?260:0),
       key: `rest:home:${b.id}`,
       targetId: b.id,
       tag: 'warmth',
@@ -699,7 +701,7 @@ function optRest(ctx: Ctx): void {
     need: 'energy',
     util: sc.total,
     parts: sc.parts,
-    eta: 5,
+    eta: hasLivedLife(world)?180:5,
     key: 'rest:here',
     targetId: 0,
     tag: 'rest',

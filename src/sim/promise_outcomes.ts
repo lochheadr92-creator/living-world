@@ -68,7 +68,7 @@ export function receiveOutcomeReport(w:World,speaker:Person,listener:Person,requ
   if(memories.length>32)memories.shift();
  }
  addLog(w,listener,'social',`Heard ${speaker.name}'s explanation for request #${requestId}; this is their account, not an independently witnessed cause.`);
- if(m.resolution.targetEvidence)return m.resolution.targetEvidence.source==='completed here'?'I finished the building work at the site, but did not deliver all the materials I had promised. There is no longer a site to receive them.':`The ${m.resolution.targetEvidence.kind} I promised to help with was no longer there when I looked. I do not know what happened.`;
+ if(m.resolution.targetEvidence)return m.resolution.targetEvidence.source==='observed completion'?'I saw the completed building where the site stood. I did not complete all of my promised contribution.':m.resolution.targetEvidence.source==='completed here'?'I finished the building work at the site, but did not deliver all the materials I had promised. There is no longer a site to receive them.':`The ${m.resolution.targetEvidence.kind} I promised to help with was no longer there when I looked. I do not know what happened.`;
  return m.resolution.attempt?`I tried to do what I promised, but ${m.resolution.attempt.reason}.`:m.outcome==='interrupted'?'I could not finish what I promised; I had to see to my own needs.':m.reason.includes('cause not established')?'I did not finish what I promised. I cannot give you a clear explanation.':`I could not finish what I promised: ${m.reason}.`;
 }
 export function acknowledgeOutcomeReport(w:World,speaker:Person,listener:Person,requestId:number):boolean{
