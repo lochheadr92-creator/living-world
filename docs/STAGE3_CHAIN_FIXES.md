@@ -56,6 +56,15 @@ The former rules-113 episode and all old saves/references are untouched. A rules
 reference pins a staged mid-acquisition save through paid hammer completion and exact
 continuation before Part B. The rules-116 and new rules-117 references both pass.
 
+## E2 (rules 118, Part B)
+
+VERIFIED: a critical thirsty person with no water lead had only idle choices while the
+ordinary explore cooldown remained. New contract failed before the fix. Critical water
+search now bypasses that cooldown; noncritical searches, rules 117 and the isolated
+`rich-no-critical-search` removal keep it. The existing water-search purpose determines
+eligibility and location; no source is supplied to the person. Baseline, water-search,
+new contracts and rules-117 continuation passed 147/147; stage-scoped typecheck passed.
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).

@@ -1,3 +1,4 @@
+import {hasCriticalSearch} from './water_search';
 import {hungryHarvestOptions} from './hungry_harvest';
 import { hasEcology } from './ecology';
 import {mayTakeKnownPile} from './pile_access';
@@ -1367,7 +1368,7 @@ function optExplore(ctx: Ctx): void {
   const dLead = depositLead(ctx);
   const noLead = noFoodLead || noWaterLead || noWoodLead || !!dLead;
   if (!noLead && (ctx.drives.hunger > 40 || ctx.drives.thirst > 40 || ctx.drives.energy > 40)) return;
-  if (world.tick - p.lastExploreTick < (noLead ? 250 : 520)) return;
+  if (world.tick - p.lastExploreTick < (noLead ? 250 : 520) && !(hasCriticalSearch(world) && waterSearch?.afterDark)) return;
   const tm = traitMods(p);
   const foodKnown = countBeliefsOfKind(p, 'berry_bush') + countBeliefsOfKind(p, 'fruit_tree') + countBeliefsOfKind(p, 'wild_grain') + countBeliefsOfKind(p, 'fish_spot');
   const hs = hhState(ctx);
