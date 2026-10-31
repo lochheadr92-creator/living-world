@@ -1,3 +1,4 @@
+import {hungryHarvestOn,setHungryHarvest} from '../../src/sim/hungry_harvest';
 import {meetingKnowledgeOn,setMeetingKnowledge} from '../../src/sim/meeting_knowledge';
 import {occasionParticipationOn,setOccasionParticipation} from '../../src/sim/occasion_participation';
 import {occasionRecoveryOn,setOccasionRecovery} from '../../src/sim/occasion_recovery';
@@ -371,6 +372,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-water-search')return {spec:label,summary:'restore home-anchored daytime-only exploration and its historical activity purpose',install(){const was=waterSearchOn();setWaterSearch(false);return ()=>setWaterSearch(was);}};
   if(kind==='rich-no-occasion-participation')return {spec:label,summary:'restore removal of the ongoing gathering after admission',install(){const was=occasionParticipationOn();setOccasionParticipation(false);return ()=>setOccasionParticipation(was);}};
   if(kind==='rich-no-occasion-recovery')return {spec:label,summary:'restore discarded occasion progress and entity-only resume validation',install(){const was=occasionRecoveryOn();setOccasionRecovery(false);return ()=>setOccasionRecovery(was);}};
+  if(kind==='rich-no-hungry-harvest')return {spec:label,summary:'restore suppression of ripe household crop harvesting during hunger',install(){const was=hungryHarvestOn();setHungryHarvest(false);return ()=>setHungryHarvest(was);}};
   if(kind==='rich-no-wild-seed-input')return {spec:label,summary:'restore seed conversion even when no carried grain was consumed',install(){const was=wildSeedInputOn();setWildSeedInput(false);return ()=>setWildSeedInput(was);}};
   if(kind==='rich-no-remembered-need')return {spec:label,summary:'remove deciding care for an out-of-sight dependant from how they looked when last seen; the live figures are read as before 106',install(){const was=rememberedNeedOn();setRememberedNeed(false);return ()=>setRememberedNeed(was);}};
   if(kind==='rich-no-location-questions')return {spec:label,summary:'remove asking a present neighbour where a promised person is; other info questions remain',install(){const was=locationQuestionsOn();setLocationQuestions(false);return ()=>setLocationQuestions(was);}};

@@ -1,3 +1,4 @@
+import {hungryHarvestOptions} from './hungry_harvest';
 import { hasEcology } from './ecology';
 import {mayTakeKnownPile} from './pile_access';
 import {hasOffcuts} from './offcuts';
@@ -1057,6 +1058,7 @@ function craftOption(ctx: Ctx, tool: HandTool): void {
 
 // ───────────────────────── farming ─────────────────────────
 function optFarm(ctx: Ctx): void {
+  hungryHarvestOptions(ctx);
   const { world, p, hh } = ctx;
   if (!hh || ctx.stage === 'child') return;
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 40) return;

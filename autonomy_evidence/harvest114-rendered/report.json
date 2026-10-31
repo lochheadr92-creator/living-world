@@ -1,0 +1,77 @@
+{
+  "scene": "STAGED supplied ripe crop, hunger and knowledge; all selection, travel, claim, harvest and eating autonomous. No ordinary-frequency or survival-benefit claim.",
+  "checks": [
+    {
+      "name": "hungry person autonomously reaches and works the known crop",
+      "ok": true,
+      "detail": {
+        "kind": "harvest",
+        "need": "hunger",
+        "progress": 1,
+        "oldOffered": false,
+        "grain": 4,
+        "hasClaim": true
+      }
+    },
+    {
+      "name": "predecessor retains the absent harvest offer",
+      "ok": true,
+      "detail": {
+        "kind": "harvest",
+        "need": "hunger",
+        "progress": 1,
+        "oldOffered": false,
+        "grain": 4,
+        "hasClaim": true
+      }
+    },
+    {
+      "name": "working-ripe-crop inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "inspector explains harvesting grain to eat",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nWren household\nHome: no home yet — last considered just now: too hungry to start a building\nTownship: Willowbank\nMOOD\nOkay\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nHarvesting grain to eat (2% of this task).\n2%\nWHAT IS STOPPING THEM?\nDangerously weak; everything else will have to wait.\nNEEDS\nFood\n10\nWater\n94\nEnergy\n94\nWarmth\n93\nSafety\n88\nCompany\n70\nCARRYING\n×3\n4.5 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\nKnows\n1\nFamily\nTraits"
+    },
+    {
+      "name": "physically harvested grain is eaten and the field claim is released",
+      "ok": true,
+      "detail": {
+        "tick": 65,
+        "hunger": 29.73500000000002,
+        "grain": 0,
+        "consumed": 1,
+        "oldConsumed": 0,
+        "claim": false,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "saved mid-work continuation, reload and accounting agree",
+      "ok": true,
+      "detail": {
+        "tick": 65,
+        "hunger": 29.73500000000002,
+        "grain": 0,
+        "consumed": 1,
+        "oldConsumed": 0,
+        "claim": false,
+        "twins": true,
+        "reload": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "eating-harvested-grain inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

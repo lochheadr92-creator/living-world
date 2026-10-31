@@ -1,8 +1,8 @@
 # Living World: notes for Claude (read this first)
 
-Current state (31 October 2026): rules 113 paid wild-grain seed input (`WILD_SEED_INPUT.md`),
-after 112 occasion recovery; the autonomy/environment programme continues from the register.
-Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); uninstalled rules remain 113.
+Current state (31 October 2026): rules 114 hungry ripe-grain harvest (`HUNGRY_HARVEST.md`),
+after 113 paid wild-grain seed input; the autonomy/environment programme continues from the register.
+Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules are 114.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
