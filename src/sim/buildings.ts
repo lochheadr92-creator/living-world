@@ -184,7 +184,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
     if (old && old.ent === 'building') {
       const was = buildingLabel(old.type);
       old.type = site.type;
-      old.upgrading = undefined;
+      delete old.upgrading;
       old.condition = 100;
       old.store.cap = BUILD_DEF[site.type].cap;
       if (world.settings.dynamics === 'rich') {
@@ -257,7 +257,7 @@ export function cancelSite(world: World, site: Site, why: string): void {
   unregisterSite(world, site);
   if (site.upgradeOf) {
     const old = world.byId.get(site.upgradeOf);
-    if (old && old.ent === 'building') old.upgrading = undefined;
+    if (old && old.ent === 'building') delete old.upgrading;
   }
   makeHousePile(world, site.x, site.y, site.delivered, 'abandoned building materials');
   addEvent(world, 'build', `The ${buildingLabel(site.type)} site was abandoned (${why}).`, [], site.x, site.y);
