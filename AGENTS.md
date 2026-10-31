@@ -1,7 +1,7 @@
 # Living World: notes for Codex (read this first)
 
-Current state (31 October 2026): rules 103 decision ledger (`DECISION_LEDGER.md`, runtime `cc7af17`,
-reference `426a8ca`) after rules 102 (`f6d7281`/`4c47dab`); the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 104 told at supper (`HOUSEHOLD_SUPPLY.md`, runtime `69c391d`,
+reference `711ef2f`) after rules 103 (`cc7af17`/`426a8ca`); the autonomy/environment programme continues from the register.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
@@ -47,6 +47,8 @@ Scaling and performance history: `docs/SCALING.md`.
 - Owner workflow decision (2026-10-21): record review findings and their fixes once. A fixed finding with appropriate regression evidence does not automatically require another independent review. Repeat review or verification only for relevant changes, new evidence or unresolved defects. See `docs/DEVELOPMENT_POLICY.md`.
 
 ## Current civilisation implementation
+
+Rules **104** tells household undertakings at a real shared supper (`HOUSEHOLD_SUPPLY.md`, "Told at supper"). Runtime `69c391d`; full regression **332 files collected on the shared four-core container (1,607.06 s): 331 passed / 2,184 tests**, the one unloadable file being the rules-104 reference test before its record was written (it passes 1/1 after the pin); focused **4/1**, typecheck, build and rendered **5/5** pass. Immutable reference `711ef2f` separately passes **1/1**, typecheck clean. After twenty real table ticks each household diner tells the other one shareable undertaking through the rules-92 record with the meal's id, spoken at the table, once a day per listener, assigning nothing; this gives rules 100 the heard account it could almost never get from the rare share_work conversation. River five days at 104 and pinned 103 are identical, and forest five and ten days likewise: zero tellings at supper because no shared meal finished in any of those windows (meals done 0), so the channel had no ordinary opportunity; recorded as a null with its denominator. Next: the remaining programme rows in the owner's order (a "where is <person>?" question for failed deliveries is the next diagnosed A8 gap). The entire owner programme remains incomplete.
 
 Rules **103** keeps a bounded personal ledger of recent decisions with the activity each launched and how it ended, shown as "Recent decisions" in the person panel (`DECISION_LEDGER.md`). Runtime `cc7af17`; full regression **329 files / 2,179 tests passed, exit 0** on the shared four-core container (1,392.16 s; the ledger test file was collected after the fixture's in-bounds rock change, and the reference test was added after the run and passes 1/1 separately); focused **3/1**, typecheck, build and rendered **4/4** pass. Immutable reference `426a8ca` separately passes **1/1**, typecheck clean. Entries keep what was known then (chosen option, three alternatives passed over, three set aside with their reasons), close at the real ending, cap at eight with the overflow counted, save with the person and stay out of the fingerprint; an ordinary river person shows closed choices with endings in the page. Cost on one river day: tick time unchanged within noise, serialized size +5.1% (99.6 kB for 28 people). Observation → belief links and later consequences beyond the activity's ending remain. Next: the remaining programme rows in the owner's order. The entire owner programme remains incomplete.
 
