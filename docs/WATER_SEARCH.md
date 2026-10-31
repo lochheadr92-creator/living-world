@@ -45,8 +45,10 @@ eligibility). Seven final water-search tests cover those, noncritical night,
 legacy/removal, own-position origin without inserted knowledge, personally seen
 water ending the urgent search, and autonomous travel → perception → actual drink
 across a saved journey. Focused water/construction/housing/reference: 24/24.
-Typecheck/build pass, with the existing bundle-size warning. Full regression is
-running separately. Review found the inherited daylight explanation at night;
+Typecheck/build pass, with the existing bundle-size warning. The final full regression
+passes **346 files / 2,234 tests**, 364.43 seconds. Runtime is `9242d60`; immutable
+reference `3430cb3` was added after collection and passes separately with the seven
+water-search tests (8/8). Review found the inherited daylight explanation at night;
 it was corrected and the full run restarted on that final source. The earlier
 interrupted log is retained and is not a full-pass claim.
 

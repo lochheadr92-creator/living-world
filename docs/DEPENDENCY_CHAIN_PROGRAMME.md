@@ -2,13 +2,14 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
-- Rules 110 candidate: purposeful water searches retain their need, explore from
+- Rules 110: purposeful water searches retain their need, explore from
   the searcher's own position and can answer critical thirst after dark. See
   `WATER_SEARCH.md`. Staged travel/discovery/drinking is saved, rendered and
   conserved; three five-day ordinary windows have no sampled opportunity and
   no activation. The retained collapsed-home case still dies of thirst. This
-  does not close proactive water planning or household viability. Full regression
-  is running separately on the final source.
+  does not close proactive water planning or household viability. Runtime `9242d60`,
+  immutable reference `3430cb3` (1/1 separately); final full regression **346 files /
+  2,234 tests passed**, 364.43 s. Rendered check 7/7, typecheck/build pass.
 
 - Rules 109 follows 108 with the diagnosed construction eligibility correction:
   known fully supplied work remains offered through its final two percent.
