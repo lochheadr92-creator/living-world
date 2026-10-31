@@ -8,6 +8,21 @@ below is superseded. A16 null-goal handling and rendered physical execution are 
 and remaining gaps are recorded at the top of `DEPENDENCY_CHAIN_PROGRAMME.md`.
 The historical Claude checkpoint below is preserved as provenance.
 
+### Latest continuation: rules 114 and quantity revision verified
+
+Rules 114 (`HUNGRY_HARVEST.md`) allows a hungry adult to harvest personally known
+ripe household grain. Runtime `c52d7d4`, immutable `3655551`, full 357 files / 2,291
+tests pass (353.77 s), plus later-added reference/harvest 13/2. Rendered 8/8 passes.
+Six five-day windows establish one ordinary forest hunger harvest (two grain),
+meadow offers without starting, and river null opportunity. No survival benefit is
+claimed. A 45-day forest follow-up is running on frozen 114. Quantity revision and
+its full 356-file / 2,279-test rerun were already published at `24bfc1d`.
+
+The 113 forest reached day 45 with five alive, 27 deaths and no carts. River and
+meadow reached their execution budgets at days 36.75 and 43.1; exact saved tails
+are being completed to day 45, preserving the original partial reports. A read-only
+trace of forest's first ordinary cart plan is running to identify its next blocker.
+
 ### Later Codex continuation: published through rules 113
 
 Published main `e64789d` includes rules 108 remembered-home replacement knowledge,

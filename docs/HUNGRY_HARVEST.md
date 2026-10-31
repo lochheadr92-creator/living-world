@@ -45,8 +45,46 @@ forest at 113 and 114, immigration off, no inserted goods, knowledge or decision
 accounting, pure inspection and frozen source hashes. Samples are repeated states,
 not independent decisions; believed grain is not guaranteed physically accessible.
 Harvested grain is not proof of eating. Divergent world totals do not establish
-survival benefit. Full regression and six ordinary windows are being collected.
+survival benefit. The six ordinary windows and full regression completed.
 
 The retained rules-107 forest famine endpoints have no ripe plots; this discovered
 choice omission has not been shown to cause that famine. Winter food and general
-population viability remain open. Immutable 114 is to be pinned before any successor.
+population viability remain open. Immutable 114 was pinned before any successor.
+
+## Ordinary five-day results
+
+All six windows reach tick 12,000 with 28 living people, zero deaths, 100 pure
+checks, exact unobserved twins/reloads and balanced all-item accounts. Runtime
+`c52d7d4`; immutable continuation `3655551` passes separately with harvest contracts,
+13 tests / 2 files (15.24 s), after the full suite had already collected its tests.
+
+| Rules | Seed | Hungry known ripe crop with room samples | Harvest offered | Ranked first | Hunger-harvest starts | Successes | Grain harvested |
+|---|---|---:|---:|---:|---:|---:|---:|
+| 113 | forest | 5 | 0 | 0 | 0 | 0 | 0 |
+| 113 | meadow | 5 | 0 | 0 | 0 | 0 | 0 |
+| 113 | river | 0 | 0 | 0 | 0 | 0 | 0 |
+| 114 | forest | 3 | 3 | 2 | 1 | 1 | 2 |
+| 114 | meadow | 5 | 5 | 0 | 0 | 0 | 0 |
+| 114 | river | 0 | 0 | 0 | 0 | 0 | 0 |
+
+Forest at 114 has one ordinary successful hunger harvest yielding two grain.
+Meadow has offered/eligible choices but no hunger-harvest start; river has no sampled
+opportunity. This establishes one ordinary activation, not frequency across seeds,
+subsequent consumption or winter/population benefit. Each meadow version also has
+seven hungry-known-crop samples with a full pack, and 14 total harvest starts with
+six success, six failure and two interruptions. Those pre-existing boundaries were
+preserved. Reports are `autonomy_evidence/harvest{113,114}-{seed}-5/report.json`;
+full worlds remain local.
+
+Full regression on the final runtime passes **357 files / 2,291 tests**, 353.77 s
+(`autonomy-harvest114-full-tests.log`). Immutable 114 was added after collection;
+its separate 13-test check above includes the twelve harvest contracts. The existing
+Node timeout-overflow test warning occurred without a failure. No old references
+were regenerated.
+
+A further predeclared ordinary forest 45-day screen is running on this frozen
+runtime in `autonomy_evidence/harvest114-forest-45`. It measures hunger harvests,
+physical grain, mortality, pure observers, exact twins/reload and accounting with
+no inserted supplies or decisions. Compare descriptively with the retained rules-113
+forest, not as evidence of general population viability from one seed. That result
+is pending and is not included in the delivered five-day evidence.

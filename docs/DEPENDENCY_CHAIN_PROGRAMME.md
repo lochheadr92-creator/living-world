@@ -2,11 +2,15 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
-- Rules 114 candidate: hungry adults can consider personally known ripe household
-  grain as hunger relief, through unchanged physical harvesting and later eating.
-  `HUNGRY_HARVEST.md`: focused 44/4, rendered 8/8, typecheck/build pass; full and
-  ordinary measurements pending. Predecessor/removal behaviour retained. This is
-  not a demonstrated cause or cure of the retained forest famine. WS3 stays open.
+- Rules 114: hungry adults can consider personally known ripe household grain
+  as hunger relief, through unchanged physical harvesting and later eating.
+  `HUNGRY_HARVEST.md`: runtime `c52d7d4`, immutable `3655551`; focused 44/4,
+  rendered 8/8, typecheck/build and full **357 files / 2,291 tests** pass (353.77 s),
+  plus subsequently added reference/harvest 13/2. Six five-day ordinary windows:
+  forest has one hunger harvest at 114 yielding two grain, meadow offers without
+  starting, river no opportunity. All exact twins/reloads, pure observers, conserved
+  items, 28 alive/no deaths. A longer forest screen is pending. WS3 remains open;
+  no famine remedy or general survival benefit is established.
 
 - A3/A16 quantity revision: an installed inhabitant can revise its own
   active personal production quantity, keeping identity, deadline, paid work and
