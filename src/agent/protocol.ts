@@ -60,10 +60,13 @@ export const PROTOCOL_V30 = 'inhabitant/30';
 /** 31/32 let the inhabitant propose a bounded production goal of their own, validated and adopted or refused by the engine (observation 17). */
 export const PROTOCOL_V31 = 'inhabitant/31';
 export const PROTOCOL_V32 = 'inhabitant/32';
-export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24, PROTOCOL_V25, PROTOCOL_V26, PROTOCOL_V27, PROTOCOL_V28, PROTOCOL_V29, PROTOCOL_V30, PROTOCOL_V31, PROTOCOL_V32];
+/** 33/34 add revision of an existing personal production quantity (observation 18). */
+export const PROTOCOL_V33 = 'inhabitant/33';
+export const PROTOCOL_V34 = 'inhabitant/34';
+export const PROTOCOL_VERSIONS: readonly string[] = [PROTOCOL_V1, PROTOCOL_V2, PROTOCOL_V3, PROTOCOL_V4, PROTOCOL_V5, PROTOCOL_V6, PROTOCOL_V7, PROTOCOL_V8, PROTOCOL_V9, PROTOCOL_V10, PROTOCOL_V11, PROTOCOL_V12, PROTOCOL_V13, PROTOCOL_V14, PROTOCOL_V15, PROTOCOL_V16, PROTOCOL_V17, PROTOCOL_V18, PROTOCOL_V19, PROTOCOL_V20, PROTOCOL_V21, PROTOCOL_V22, PROTOCOL_V23, PROTOCOL_V24, PROTOCOL_V25, PROTOCOL_V26, PROTOCOL_V27, PROTOCOL_V28, PROTOCOL_V29, PROTOCOL_V30, PROTOCOL_V31, PROTOCOL_V32, PROTOCOL_V33, PROTOCOL_V34];
 /** the protocol a new run speaks */
 export function protocolFor(memory: boolean): string {
-  return memory ? PROTOCOL_V32 : PROTOCOL_V31;
+  return memory ? PROTOCOL_V34 : PROTOCOL_V33;
 }
 /** the observation shape a protocol was recorded with (observe.ts). A recorded run keeps the shape it was made with, so it replays. */
 export function observationVersionFor(protocol: string): number {
@@ -83,10 +86,11 @@ export function observationVersionFor(protocol: string): number {
   if (protocol === PROTOCOL_V27 || protocol === PROTOCOL_V28) return 15;
   if (protocol === PROTOCOL_V29 || protocol === PROTOCOL_V30) return 16;
   if (protocol === PROTOCOL_V31 || protocol === PROTOCOL_V32) return 17;
+  if (protocol === PROTOCOL_V33 || protocol === PROTOCOL_V34) return 18;
   return 3;
 }
 export function protocolHasMemory(protocol: string): boolean {
-  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24 || protocol === PROTOCOL_V26 || protocol === PROTOCOL_V28 || protocol === PROTOCOL_V30 || protocol === PROTOCOL_V32;
+  return protocol === PROTOCOL_V2 || protocol === PROTOCOL_V4 || protocol === PROTOCOL_V6 || protocol === PROTOCOL_V8 || protocol === PROTOCOL_V10 || protocol === PROTOCOL_V12 || protocol === PROTOCOL_V14 || protocol === PROTOCOL_V16 || protocol === PROTOCOL_V18 || protocol === PROTOCOL_V20 || protocol === PROTOCOL_V22 || protocol === PROTOCOL_V24 || protocol === PROTOCOL_V26 || protocol === PROTOCOL_V28 || protocol === PROTOCOL_V30 || protocol === PROTOCOL_V32 || protocol === PROTOCOL_V34;
 }
 
 export interface ProposedGoal { item: string; quantity: number; tier: 0 | 1 }
@@ -95,6 +99,8 @@ export interface Proposal {
   choose: string;
   /** protocol 31/32: a production goal proposed instead of a pick, for the engine to validate (proposals.ts) */
   propose?: ProposedGoal;
+  /** protocol 33/34: the engine revalidates a revised quantity for this personal plan */
+  revise?: {planId:number;quantity:number};
   /** the model's own account of why, kept for the observer; never shown to the simulation */
   why: string;
   /** with memory: the notes update, shape-checked (memory.ts), applied when the choice is consumed */
@@ -169,6 +175,9 @@ export function buildPrompt(input: PromptInput): { system: string; user: string 
   }
   // observation 17+ (protocol 31/32): the one other thing the inhabitant may do, said only when the shape carries it, so every
   // older prompt stays as it was recorded
+  if(input.observation.canRevise?.length){
+    lines.push('You may instead revise the quantity of one of your own production plans listed in canRevise: {"revise":{"planId":<listed id>,"quantity":<whole number from 1 to 24>},"why":"..."}. This keeps the same item, quality, paid work and original deadline and spends one of its remaining reconsiderations. The engine checks your present knowledge and may refuse. It creates no goods, restarts no work and does not revise a site commitment. This moment\'s action is then the engine\'s choice.');
+  }
   if (input.observation.canPropose) {
     lines.push('');
     lines.push(`Instead of picking an option you may propose one project of your own: a thing to have made at a workshop you know of. "canPropose" lists what you could propose at all (knowing the workshop is not knowing it can be done). Answer then with {"propose": {"item": "<one of canPropose.items>", "quantity": <${input.observation.canPropose.quantity.min} to ${input.observation.canPropose.quantity.max}>, "tier": 0 or 1 for an iron tool}, "why": "..."} instead of "choose". The world checks it against what you yourself know and either takes it on as a plan of yours (its steps appear among your options from the next moment) or refuses it and tells you why; this moment's action is then the world's own choice. Nothing is made by proposing.`);
@@ -242,7 +251,13 @@ export function parseProposal(text: string): ParsedProposal {
   const o = v as Record<string, unknown>;
   const why = typeof o.why === 'string' ? clean(o.why, MAX_WHY) : '';
   let proposal: Proposal;
-  if (o.propose !== undefined) {
+  if(o.revise!==undefined){
+    if(o.choose!==undefined||o.propose!==undefined)return {proposal:null,problem:'a revision cannot also choose or propose',notesProblem:null};
+    if(o.limit!==undefined)return {proposal:null,problem:'a revision cannot set limits for an action',notesProblem:null};
+    const r=o.revise as Record<string,unknown>;
+    if(!r||typeof r!=='object'||Array.isArray(r)||Object.keys(r).some(k=>k!=='planId'&&k!=='quantity')||!Number.isSafeInteger(r.planId)||Number(r.planId)<=0||!Number.isSafeInteger(r.quantity))return {proposal:null,problem:'"revise" requires a positive planId and whole quantity only',notesProblem:null};
+    proposal={choose:`revise:${r.planId}`,revise:{planId:Number(r.planId),quantity:Number(r.quantity)},why};
+  } else if (o.propose !== undefined) {
     // a proposed goal (protocol 31/32): shape only here; whether it can be done is the engine's to judge from the person's own knowledge
     if (o.choose !== undefined) return { proposal: null, problem: 'the answer both chooses and proposes; it may do one', notesProblem: null };
     const g = o.propose;

@@ -1,0 +1,82 @@
+{
+  "scene": "Labelled staged workshop and scripted proposer/reviser, no real model or ordinary autonomous revision claim.",
+  "checks": [
+    {
+      "name": "an adopted four-plank goal has a fixed deadline",
+      "ok": true,
+      "detail": {
+        "id": 12,
+        "until": 7200,
+        "quantity": 4
+      }
+    },
+    {
+      "name": "original-four-plank-plan inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "scripted inhabitant revision is accepted once through protocol 33",
+      "ok": true,
+      "detail": {
+        "completed": {
+          "tick": 948,
+          "id": 12,
+          "until": 7200,
+          "quantity": 2,
+          "carried": 2,
+          "woodConsumed": 3
+        },
+        "protocol": "inhabitant/33",
+        "revised": 1,
+        "replay": true,
+        "conserved": true,
+        "reload": true
+      }
+    },
+    {
+      "name": "same plan completes with two physically collected planks before original deadline",
+      "ok": true,
+      "detail": {
+        "tick": 948,
+        "id": 12,
+        "until": 7200,
+        "quantity": 2,
+        "carried": 2,
+        "woodConsumed": 3
+      }
+    },
+    {
+      "name": "transcript replay, reload and material accounting agree",
+      "ok": true,
+      "detail": {
+        "completed": {
+          "tick": 948,
+          "id": 12,
+          "until": 7200,
+          "quantity": 2,
+          "carried": 2,
+          "woodConsumed": 3
+        },
+        "protocol": "inhabitant/33",
+        "revised": 1,
+        "replay": true,
+        "conserved": true,
+        "reload": true
+      }
+    },
+    {
+      "name": "revised-plan-completed inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "inspector identifies Hana and completed physical goods",
+      "ok": true,
+      "detail": "H\nHana\nFollow\nAdult, 35\nWillow household\nHome: hut (98% sound)\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nLooking for timber (27 tiles to go).\non the way\nWHAT ARE THEY SET ON?\nSee 2 planks through at the timber yard — done: has the planks from the timber yard (1.6 min ago).\nNEEDS\nFood\n71\nWater\n96\nEnergy\n61\nWarmth\n99\nSafety\n84\nCompany\n54\nCARRYING\n×3\n×2\n×2\n12 / 12\nTOOLS\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\n9\nKnows\n6\nFamily\nTraits"
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

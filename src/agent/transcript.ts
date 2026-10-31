@@ -59,7 +59,7 @@ export interface Call {
   /** exact: answered at the tick it was asked; lagged: the answer was applied at a later tick (no rewind was possible) */
   timing: 'exact' | 'lagged';
   /** what the engine made of it; null for a deferral */
-  result: { status: 'applied' | 'rejected' | 'fallback' | 'proposed'; key?: string; reason?: string; activityId?: number; label?: string; planId?: number } | null;
+  result: { status: 'applied' | 'rejected' | 'fallback' | 'proposed' | 'revised'; key?: string; reason?: string; activityId?: number; label?: string; planId?: number } | null;
   /** with memory, on a consuming call: the notes after this call's update (or unchanged), and what the update did */
   notesHash?: string;
   revision?: RevisionRecord;
@@ -121,7 +121,7 @@ export interface Transcript {
   overrides: OverrideRecord[];
   outcomes: OutcomeRecord[];
   observer: ObserverRecord[];
-  end: { tick: number; hash: string; died: boolean; calls: number; applied: number; rejected: number; fallbacks: number; proposed?: number; lagged: number; gate: Record<string, number | string | null> | null; notesHash?: string } | null;
+  end: { tick: number; hash: string; died: boolean; calls: number; applied: number; rejected: number; fallbacks: number; proposed?: number; revised?: number; lagged: number; gate: Record<string, number | string | null> | null; notesHash?: string } | null;
 }
 
 export class ReplayDiverged extends Error {
@@ -255,7 +255,11 @@ export class TranscriptController implements ExternalController {
         this.push({ seq: 0, tick: world.tick, attempt, ask: a.seq, observationHash: oh, worldHash: wh, choice: { kind: 'defer' }, timing: 'exact', result: null });
         return { kind: 'defer' };
       }
-      const choice: ExternalChoice = ask.proposal?.propose
+      const choice: ExternalChoice = ask.proposal?.revise
+        ? observation.version>=18
+          ? {kind:'revise',revision:{...ask.proposal.revise}}
+          : {kind:'fallback',reason:'this protocol does not take revisions'}
+        : ask.proposal?.propose
         ? observation.version >= 17
           ? { kind: 'propose', goal: { ...ask.proposal.propose } }
           : { kind: 'fallback', reason: 'this protocol does not take proposals' }
@@ -323,6 +327,7 @@ export class TranscriptController implements ExternalController {
       note.kind === 'applied' ? { status: 'applied', key: note.key, activityId: note.activity.id, label: note.activity.label }
       : note.kind === 'rejected' ? { status: 'rejected', key: note.key, reason: note.reason }
       : note.kind === 'proposed' ? { status: 'proposed', key: `propose:${note.goal.item}`, planId: note.planId, activityId: note.activity?.id, label: note.activity?.label }
+      : note.kind === 'revised' ? {status:'revised',key:`revise:${note.planId}`,planId:note.planId,activityId:note.activity?.id,label:note.activity?.label}
       : { status: 'fallback', reason: note.reason, activityId: note.activity?.id, label: note.activity?.label };
     const c = this.lastCall;
     if (!c) throw new Error('the engine reported a result with no call to attach it to');
@@ -331,7 +336,7 @@ export class TranscriptController implements ExternalController {
       if (!r || r.status !== result.status || r.key !== result.key || r.activityId !== result.activityId || r.planId !== result.planId) throw new ReplayDiverged(`call #${c.seq} at tick ${c.tick}: the engine ${describe(result)} where the transcript recorded ${r ? describe(r) : 'nothing'}`);
     } else c.result = result;
     if (note.kind === 'rejected') this.rejectedNow.push({ key: note.key, reason: note.reason });
-    if (note.kind === 'applied' || note.kind === 'proposed') {
+    if (note.kind === 'applied' || note.kind === 'proposed' || note.kind === 'revised') {
       this.lastApplied = c;
       if (state) state.turns++;
     }

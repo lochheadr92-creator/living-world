@@ -20,7 +20,9 @@ export type ExternalChoice =
   /** let the engine choose as it would for anyone, and say why the controller did not */
   | { kind: 'fallback'; reason: string }
   /** propose a bounded production goal (proposals.ts): validated and adopted as an ordinary plan, or refused; the engine then chooses this moment's action as for anyone */
-  | { kind: 'propose'; goal: { item: string; quantity: number; tier: 0 | 1 } };
+  | { kind: 'propose'; goal: { item: string; quantity: number; tier: 0 | 1 } }
+  /** revise only an existing personal production quantity, preserving its deadline and reconsideration budget */
+  | { kind: 'revise'; revision: { planId: number; quantity: number } };
 
 export type ExternalNote =
   /** a pick was accepted and the activity started (with the limits the engine actually accepted) */
@@ -32,7 +34,8 @@ export type ExternalNote =
   /** the engine ended the person's activity on its own authority (danger, a deadlier need) */
   | { kind: 'override'; why: string; activity: Activity }
   /** a proposed goal was adopted as plan `planId`; the engine chose this moment's action itself (null when nothing could start) */
-  | { kind: 'proposed'; goal: { item: string; quantity: number; tier: 0 | 1 }; planId: number; activity: Activity | null };
+  | { kind: 'proposed'; goal: { item: string; quantity: number; tier: 0 | 1 }; planId: number; activity: Activity | null }
+  | { kind: 'revised'; planId: number; quantity: number; activity: Activity | null };
 
 export interface ExternalController {
   /** is this person driven from outside? */

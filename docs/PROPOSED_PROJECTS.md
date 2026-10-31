@@ -95,5 +95,9 @@ predates only the rejection-label repair, which cannot run on this valid proposa
 
 ## Remaining limits
 
-Proposals are production goals only (the batch plan family); other goal families, revision of an adopted goal and
-composition across goals (A3) remain open. The engine, not the model, chooses the action at the moment of proposing.
+Proposals are production goals only (the batch plan family). `PROJECT_REVISION.md`
+adds a bounded revision of an adopted personal production quantity through protocols
+33/34, retaining its deadline and reconsideration budget. Other goal families,
+changing the item/quality, site-commitment renegotiation and composition across
+goals (A3) remain open. The engine chooses the action at the moment of proposing or
+revising. No real-model proposal/revision run or aggregate benefit is established.

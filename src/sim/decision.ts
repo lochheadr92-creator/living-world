@@ -5,6 +5,7 @@ import { ledgerDecision } from './decision_ledger';
 import { endActivity, startActivity } from './activities';
 import { EXTERNAL_RETRIES, externalController } from './external';
 import { proposeProject } from './proposals';
+import { reviseProject } from './project_revision';
 import { NUDGE_FOR_PLAN, intentFor, planReason, reviewIntentions } from './intent';
 import { unfitPerson } from './defence';
 import type { ExternalController } from './external';
@@ -286,6 +287,14 @@ function externalDecide(world: World, p: Person, ctx: Ctx, trigger: string, ext:
       if (!started) p.nextThink = world.tick + 15;
       ext.notify?.(world, p, { kind: 'proposed', goal: { ...choice.goal }, planId: r.plan.id, activity: started ? p.activity : null });
       return;
+    }
+    if(choice.kind==='revise'){
+      const r=reviseProject(ctx,choice.revision),key=`revise:${String((choice.revision as {planId?:unknown}|null|undefined)?.planId??'?')}`;
+      if(!r.ok){reason=r.reason;ext.notify?.(world,p,{kind:'rejected',key,reason});continue;}
+      // Rebuild this decision's options so a superseded quantity cannot start an old step.
+      const refreshed=generateOptions(world,p),started=launch(world,p,refreshed,trigger);
+      if(!started)p.nextThink=world.tick+15;
+      ext.notify?.(world,p,{kind:'revised',planId:r.plan.id,quantity:r.plan.project!.goal.quantity,activity:started?p.activity:null});return;
     }
     // New controllers identify a particular offered alternative; legacy inputs
     // retain their recorded first-key-match interpretation.

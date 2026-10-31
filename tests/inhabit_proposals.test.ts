@@ -13,7 +13,7 @@ import {observe} from '../src/sim/knowledge';
 import {stepWorld,hashWorld} from '../src/sim/world';
 import {runLive,runReplay} from '../src/agent/run';
 import {proposerModel,pickerModel} from '../src/agent/stubs';
-import {buildPrompt,parseProposal,PROTOCOL_V31,PROTOCOL_V32,observationVersionFor} from '../src/agent/protocol';
+import {buildPrompt,parseProposal,PROTOCOL_V33,PROTOCOL_V34,observationVersionFor} from '../src/agent/protocol';
 import {observeInhabitant,OBSERVATION_VERSION} from '../src/agent/observe';
 import {ReplayDiverged} from '../src/agent/transcript';
 import type {Transcript} from '../src/agent/transcript';
@@ -52,7 +52,7 @@ it('through the controller seam: adoption is notified, this moment is the engine
 it('the inhabitant protocol carries it: the scripted proposer records a replayable run in which the cart is built from the proposed plan',async()=>{
  const f=fresh();f.p.cooldowns.pause=0;const start=serializeWorld(f.w);
  const r=await runLive(f.w,f.p.id,proposerModel({item:'cart',quantity:1,tier:0}),{until:f.w.tick+3*2400});
- const t=r.transcript;expect(t.header.protocol).toBe(PROTOCOL_V31);expect(t.header.observationVersion).toBe(17);expect(observationVersionFor(PROTOCOL_V32)).toBe(17);expect(OBSERVATION_VERSION).toBe(17);
+ const t=r.transcript;expect(t.header.protocol).toBe(PROTOCOL_V33);expect(t.header.observationVersion).toBe(18);expect(observationVersionFor(PROTOCOL_V34)).toBe(18);expect(OBSERVATION_VERSION).toBe(18);
  const proposed=t.calls.filter(c=>c.result?.status==='proposed');expect(proposed).toHaveLength(1);expect(proposed[0].choice).toEqual({kind:'propose',goal:{item:'cart',quantity:1,tier:0}});
  expect(t.asks[proposed[0].ask].observation.canPropose?.items).toContain('cart');expect(t.end?.proposed).toBe(1);
  const steps=t.calls.filter(c=>c.result?.status==='applied'&&/scripted: a step of my plan/.test(t.asks[c.ask].proposal?.why??''));expect(steps.length).toBeGreaterThan(2);

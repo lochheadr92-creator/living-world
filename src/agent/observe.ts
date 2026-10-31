@@ -50,7 +50,7 @@ import { PROJECT_LIMITS } from '../sim/project_graph';
 // 13 adds dated coarse ecological signs and remembered field rest, never live soil data.
 // 14 adds dated coarse natural-water supply, never exact remote hydrological stock.
 // 15 adds dated local flood-ground observations, without actual recovery deadlines.
-export const OBSERVATION_VERSION = 17;
+export const OBSERVATION_VERSION = 18;
 
 export interface ObservedOption {
   /** the key the controller answers with: the engine's own option key */
@@ -180,6 +180,8 @@ export interface InhabitantObservation {
   plans?: { goal: string; kind: string; status: string; step: string; wants: Items; blocked: string; reason: string; since: string }[];
   /** what the person could propose as a project of their own, from workshops they know of (version 17+; proposals.ts). Knowing a workshop is not feasibility: a proposal may still be refused. */
   canPropose?: { items: string[]; quantity: { min: number; max: number }; tiers: (0 | 1)[] };
+  /** Own saved personal production goals only; feasibility is checked when a revision is requested. */
+  canRevise?: {planId:number;item:string;quantity:number;until:number;reconsiderationsLeft:number}[];
 }
 
 export interface ObserveOptions {
@@ -614,6 +616,7 @@ export function observeInhabitant(world: World, p: Person, ctx: Ctx, ranked: Opt
     setAside: [...(version >= 5 ? blockedCraftNeeds(ctx) : []), ...ctx.blocked].slice(0, 12).map((o) => ({ label: cleanText(o.label, 120), reason: cleanText(o.blocked ?? '', 160), target: describeTarget(world, p, o.targetId, version) })),
     ...(version >= 7 ? { plans: describePlans(world, p, version) } : {}),
     ...(version >= 17 ? { canPropose: { items: proposableItems(ctx), quantity: { min: 1, max: PROJECT_LIMITS.quantity }, tiers: [0, 1] } } : {}),
+    ...(version >= 18 ? {canRevise:p.intentions.filter(i=>i.status==='active'&&i.kind==='batch'&&i.project&&!i.forSite&&i.makes!=='cart').map(i=>({planId:i.id,item:i.project!.goal.item,quantity:i.project!.goal.quantity,until:i.until,reconsiderationsLeft:Math.max(0,PROJECT_LIMITS.retries-i.project!.retries)}))} : {}),
   };
   return deepFreeze(obs);
 }

@@ -219,6 +219,7 @@ export class LiveSession {
       rejected: calls.filter((c) => c.result?.status === 'rejected').length,
       fallbacks: calls.filter((c) => c.result?.status === 'fallback').length,
       proposed: calls.filter((c) => c.result?.status === 'proposed').length,
+      revised: calls.filter((c) => c.result?.status === 'revised').length,
       lagged: calls.filter((c) => c.timing === 'lagged').length,
       gate: this.gate.summary(),
       ...(this.memory ? { notesHash: notesHash(world.inhabitants?.[this.personId]?.notes) } : {}),

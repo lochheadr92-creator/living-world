@@ -35,7 +35,7 @@ import {compileProject} from './project_compile';
 import {hasProjectPlans,nextProjectStep,recordProjectStep} from './project_step';
 import {toolsHeldBy} from './toolreg';
 import type {ProjectGraph} from './project_graph';
-import {PROJECT_LIMITS} from './project_graph';
+import {PROJECT_LIMITS,PROJECT_RETRY_TICKS} from './project_graph';
 
 export const BATCH_FROM_VERSION = 50;
 /** a want worth a plan: the planner's base weight for it, after traits */
@@ -271,7 +271,7 @@ export function servesBatch(i: Intention, o: Option): boolean {
 function reviewBatchProject(ctx:Ctx,i:Intention):void{
  if(!i.project||!hasProjectPlans(ctx.world))return;
  const g=i.project,step=nextProjectStep(ctx,g,i);
- if(step.phase==='blocked'&&g.retries<PROJECT_LIMITS.retries&&(g.retryAt===undefined||ctx.world.tick-g.retryAt>=240)){
+ if(step.phase==='blocked'&&g.retries<PROJECT_LIMITS.retries&&(g.retryAt===undefined||ctx.world.tick-g.retryAt>=PROJECT_RETRY_TICKS)){
   const fresh=compileProject(ctx,g.goal,i),attempt=g.retries+1;
   g.retries=attempt;g.retryAt=ctx.world.tick;
   if(fresh.ok){

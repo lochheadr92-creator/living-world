@@ -5,6 +5,8 @@ import {runsRulesVersion} from './rulesversion';
 import type {ItemKind,ToolKind,World} from './types';
 
 export const PROJECT_LIMITS={nodes:32,depth:6,search:96,quantity:24,alternatives:4,retries:3,history:8} as const;
+/** Existing spacing between project reconsiderations, also respected by an installed reviser. */
+export const PROJECT_RETRY_TICKS=240;
 export interface ProjectGoal {item:ItemKind|'cart';quantity:number;tier:0|1;}
 export interface ProjectNode {
  id:number;
