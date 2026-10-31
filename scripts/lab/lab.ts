@@ -1,3 +1,4 @@
+import {setSuspendedEndings,suspendedEndingsOn} from '../../src/sim/suspended_endings';
 import {projectHandInputsOn,setProjectHandInputs} from '../../src/sim/project_hand_inputs';
 import {hungryHarvestOn,setHungryHarvest} from '../../src/sim/hungry_harvest';
 import {meetingKnowledgeOn,setMeetingKnowledge} from '../../src/sim/meeting_knowledge';
@@ -373,6 +374,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-water-search')return {spec:label,summary:'restore home-anchored daytime-only exploration and its historical activity purpose',install(){const was=waterSearchOn();setWaterSearch(false);return ()=>setWaterSearch(was);}};
   if(kind==='rich-no-occasion-participation')return {spec:label,summary:'restore removal of the ongoing gathering after admission',install(){const was=occasionParticipationOn();setOccasionParticipation(false);return ()=>setOccasionParticipation(was);}};
   if(kind==='rich-no-occasion-recovery')return {spec:label,summary:'restore discarded occasion progress and entity-only resume validation',install(){const was=occasionRecoveryOn();setOccasionRecovery(false);return ()=>setOccasionRecovery(was);}};
+  if(kind==='rich-no-suspended-endings')return {spec:label,summary:'restore the silent discard of a paused ordinary activity that cannot resume',install(){const was=suspendedEndingsOn();setSuspendedEndings(false);return ()=>setSuspendedEndings(was);}};
   if(kind==='rich-no-project-hand-inputs')return {spec:label,summary:'restore releasing immediate project hand-tool ingredients',install(){const was=projectHandInputsOn();setProjectHandInputs(false);return ()=>setProjectHandInputs(was);}};
   if(kind==='rich-no-hungry-harvest')return {spec:label,summary:'restore suppression of ripe household crop harvesting during hunger',install(){const was=hungryHarvestOn();setHungryHarvest(false);return ()=>setHungryHarvest(was);}};
   if(kind==='rich-no-wild-seed-input')return {spec:label,summary:'restore seed conversion even when no carried grain was consumed',install(){const was=wildSeedInputOn();setWildSeedInput(false);return ()=>setWildSeedInput(was);}};

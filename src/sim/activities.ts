@@ -1,5 +1,6 @@
 import {recordPromiseAttempt,correctPromiseApproach} from './promise_outcomes';
 import {hasOccasionRecovery,occasionResumeFailure} from './occasion_recovery';
+import {hasSuspendedEndings,ordinaryResumeFailure} from './suspended_endings';
 import { closeDecision } from './decision_ledger';
 import { floodMovementBlocked, floodSpeed, hasFloodAccess, knownFloodCosts, observeFlood } from './flood';
 import { floodEscapePath, waitForFlood } from './flood_access';
@@ -564,6 +565,18 @@ export function suspendActivity(world: World, p: Person): void {
   p.activity = null;
 }
 
+/**
+ * End an activity that is not the current one (it was paused) through the single ending path (rules 116, `suspended_endings.ts`).
+ * The caller has already taken it off `p.suspended`. Whatever the person is doing now (a conversation) is put back unchanged, with
+ * its pose and next-think time, so only the paused work's own records move.
+ */
+export function endSuspended(world: World, p: Person, a: Activity, outcome: 'failed' | 'interrupted' | 'partial', detail: string): void {
+  const current = p.activity, pose = p.pose, nextThink = p.nextThink;
+  p.activity = a;
+  endActivity(world, p, outcome, detail);
+  if (current) { p.activity = current; p.pose = pose; p.nextThink = nextThink; }
+}
+
 /** Pick up a suspended activity again if it is still valid. Returns true if resumed. */
 export function resumeSuspended(world: World, p: Person): boolean {
   const a = p.suspended;
@@ -573,6 +586,9 @@ export function resumeSuspended(world: World, p: Person): boolean {
   if (hasOccasionRecovery(world,a)) {
     const failure=occasionResumeFailure(world,p,a);
     if(failure){p.activity=a;endActivity(world,p,'interrupted',failure);return false;}
+  } else if (hasSuspendedEndings(world)) {
+    const failure = ordinaryResumeFailure(world, a, isBoundedNightWait(world, a));
+    if (failure) { endSuspended(world, p, a, failure.outcome, failure.detail); return false; }
   } else {
     if (world.tick > a.expire && !isBoundedNightWait(world, a)) return false;
     if (a.targetId && a.targetType !== 'person' && a.targetType !== 'tile' && !world.byId.has(a.targetId) && !isBoundedNightWait(world, a)) return false;
