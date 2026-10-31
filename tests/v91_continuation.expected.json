@@ -1,0 +1,28 @@
+{
+  "source": "3834df29bd903b4ab57f7adf8dbaac5ec1d0714e, rules 91 before successor behaviour",
+  "ordinary": {
+    "saved": "9c3ba3e8e21f1aa0484751860d5729201f3631014867ae5b42b9ff402be8f1bd",
+    "uninterrupted": "cd1bbf50fe1a270a6d9b50e4193027bf5c2cb0ef08193fa382a0fe1749a0a007",
+    "continued": "cd1bbf50fe1a270a6d9b50e4193027bf5c2cb0ef08193fa382a0fe1749a0a007"
+  },
+  "waiting": {
+    "saved": "b084329b0cf08495b678622e0158faac75e814921a69790351ae841c0536bdba",
+    "uninterrupted": "3c562047eff6a2c5865462ae3269195ce4fa0f3e895945d8ae235b98d55fcc6a",
+    "continued": "3c562047eff6a2c5865462ae3269195ce4fa0f3e895945d8ae235b98d55fcc6a"
+  },
+  "hearing": {
+    "saved": "879b69cc479f5a85befd5ae092f86259bd5a3410d9a84f5b2f70c114f7afd61b",
+    "uninterrupted": "7539521428387187298930b1f37148d160d36e083f144a058d3e581edb3f5d9f",
+    "continued": "7539521428387187298930b1f37148d160d36e083f144a058d3e581edb3f5d9f"
+  },
+  "proposal": {
+    "saved": "95a0574fb2ce12e21f265c0f717879d5593bb1c5349b784e7229c246ab03537f",
+    "uninterrupted": "174be6cfbbaf1199fb8a4f55df0025f6d705310c240ea329f76773c0795df086",
+    "continued": "174be6cfbbaf1199fb8a4f55df0025f6d705310c240ea329f76773c0795df086"
+  },
+  "food": {
+    "saved": "3cd60aa576de7b63a1302b0a9bcfdd9452442c6bd36b30ee58b8db262592baa2",
+    "uninterrupted": "4358ce20afb1b9cb1096dfb97e7be3bb47927183ae75923c84119e0ae22b6ba8",
+    "continued": "4358ce20afb1b9cb1096dfb97e7be3bb47927183ae75923c84119e0ae22b6ba8"
+  }
+}
