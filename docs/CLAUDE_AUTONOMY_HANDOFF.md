@@ -25,6 +25,20 @@ The **rules-114 forest day-45 result is adverse: zero survivors, 31 deaths**, de
 18 successful hunger harvests and 36 grain harvested. Rules 113 had five survivors.
 See `PROJECT_HAND_INPUTS.md`, `HUNGRY_HARVEST.md` and `AUTONOMY_VALIDATION.md`.
 
+The full-pack crop follow-up is complete and retained in `HUNGRY_HARVEST.md`.
+Isla at tick 31,140 has no carried food, no pack room and an actually ripe nearby
+household crop; harvesting is blocked. Over the next 1,800 ticks she recovers food
+from 34.183 to 70.108 through existing alternatives, with pure observation, exact
+twins/reload and accounting. This supports a real access limitation, not a demonstrated
+cause of her later death. No runtime change was made from that trace.
+
+Next implementation/measurement must follow the register's dependencies: trace an
+actual current-rules industry opportunity beyond these null windows, or a complete
+winter provisioning/access episode, before changing priorities or capacity. General
+goal families/composition and the other open rows still require their own bounded
+contracts. Do not repeat the now-complete baseline/full-regression or 107/113 long
+validation merely because historical sections below still describe them as pending.
+
 No full regression remains pending for delivered runtime. The owner programme is
 still incomplete: broader goal families/composition and a real-model proposal run;
 ordinary useful industry/carts and customer trade/returns; winter provisioning and

@@ -2,6 +2,24 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
+Current capability-map overlay for this continuation (the detailed earlier rows
+remain the full programme; a slice's narrow implementation is not closure of its
+broader row):
+
+| Capability | Classification | Owner / boundary | Current evidence | Missing transition / observable completion |
+|---|---|---|---|---|
+| Installed production quantity revision | Implemented and connected, within this bounded family | `project_revision.ts`; protocols 33/34, observation 18; no autonomous rules bump | Same plan/deadline, paid physical completion, exact current/old replay; full 2,279-test rerun | Real-model use remains unmeasured; do not claim other goals |
+| Other A3 goal families and cross-goal composition | Genuinely absent beyond the existing production proposal/revision path | Existing `intent.ts`, `project_compile.ts`, `proposals.ts` define the available boundary | No new non-production or general composition implementation in this continuation | Schema-validated feasible goals through ordinary owned actions, interruptions and useful completion |
+| Hungry ripe-grain access and winter food | Implemented but incomplete | `hungry_harvest.ts` at 114; existing reserves/care | Ordinary harvest activation; forest day 45 has zero survivors; full-pack episode recovers through alternatives | Actual winter provisioning/access/consumption and recovery, retaining adverse runs; no unsupported single-cause remedy |
+| Production prerequisite inputs and useful carts | Implemented but incomplete | `project_hand_inputs.ts` at 115; existing production/transport | Physical staged hammer, input payment/release; current ordinary windows null, long screens zero carts | Ordinary feasible cart chain through completion and useful hauling, with observed blockers |
+| Sustained household/social rhythm | Implemented but incomplete | `occasion_participation.ts` 111, `occasion_recovery.ts` 112, existing routines | Admitted visits complete and paused work resumes; aggregate visit totals fell in later comparisons | Adequate-margin repeated household rhythm and disruption recovery in ordinary worlds |
+| Replacement after home collapse | Implemented but incomplete | `home_replacement.ts` 108, `construction_finish.ts` 109, `water_search.ts` 110 | Staged replacement built and slept in; later thirst death retained | Connected recovery and sustained use/survival under declared ordinary opportunities |
+| Final combined current-rules mature Large | Uncertain pending measurement | Existing sim/save/viewer owners; `AUTONOMY_VALIDATION.md` | Genuine day-45 Large measured at frozen 109, not current 115 | Current mature population/state benchmark, pure inspection, persistence and rendering evidence |
+
+WS9 customer trade/returns, WS10/20 knowledge/population continuity, WS19 dispute
+attribution and the remaining A7 accounts/rumour correction stay open in their
+existing rows. No feature is inferred complete from this overlay.
+
 - Rules 115: current hand-tool prerequisite inputs are retained without a second
   tool intention claiming the same ingredients. `PROJECT_HAND_INPUTS.md`, runtime
   `fef1304`, immutable `bc80e48`. Focused 54/4, rendered 9/9, typecheck/build and
