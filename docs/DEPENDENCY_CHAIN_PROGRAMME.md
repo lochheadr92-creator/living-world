@@ -1,5 +1,25 @@
 # Dependency-chain programme register
 
+## Codex resumed from Claude — 31 October 2026
+
+- Published baseline `056dbac` full regression now verified on the owner's Windows
+  machine: **339 files / 2,204 tests passed**, 556.86 seconds. This closes the
+  unrerun protocol-number correction gap in the historical handoff.
+- A16: `6efd02e` handles null/missing direct-controller proposal goals safely and
+  adds a real-page scripted proposal → paid assembly → owned cart check (7/7).
+  No real-model, other goal-family or aggregate-benefit claim.
+- `0182849` fixes valid meat receipt save rejection and the omission of meat from
+  conservation checks. Captured ordinary forest save reload and 1,200-tick twins
+  pass with all item totals. See `MEAT_SAVE_VALIDATION.md`.
+- Rules 108: remembered-home layout decisions and physical duplicate allocation
+  checks, owner `home_replacement.ts`, lab removal and tests. See
+  `HOME_REPLACEMENT_KNOWLEDGE.md`. Five-day ordinary loss-boundary screens are null.
+  A corrected staged fixture reaches paid construction but stalls near completion
+  and dies of thirst under both 107 and 108. Full WS16 recovery stays open.
+
+The older checkpoint statements below are provenance, not the current frontier.
+The entire owner programme remains incomplete.
+
 **31 October 2026:** the Codex as-is checkpoint for rules 98 was verified, reviewed
 and pinned by Claude in a fresh clone (full regression, build, rendered and ordinary
 screen reproduced; one spoken-refusal finding fixed). Rules 98 is the last completed

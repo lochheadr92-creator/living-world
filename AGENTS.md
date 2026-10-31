@@ -1,7 +1,8 @@
 # Living World: notes for Codex (read this first)
 
-Current state (31 October 2026): rules 105 asking where a person is (`LOCATION_QUESTION.md`, runtime `06d3963`,
-reference `3cab1e1`) after rules 104 (`69c391d`/`711ef2f`); the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 108 personal housing knowledge (`HOME_REPLACEMENT_KNOWLEDGE.md`),
+after rules 107 checked accounts and A16 proposals; the autonomy/environment programme continues from the register.
+The corrected staged recovery still stalls near completion and ends in thirst; WS16 is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.

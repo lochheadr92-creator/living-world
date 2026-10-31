@@ -14,6 +14,7 @@ import {supperTellingOn,setSupperTelling} from '../../src/sim/household_practice
 import {locationQuestionsOn,setLocationQuestions} from '../../src/sim/location_question';
 import {rememberedNeedOn,setRememberedNeed} from '../../src/sim/remembered_need';
 import {checkedAccountsOn,setCheckedAccounts} from '../../src/sim/checked_accounts';
+import {homeReplacementOn,setHomeReplacement} from '../../src/sim/home_replacement';
 import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
@@ -360,6 +361,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-warmth-duty')return {spec:label,summary:'remove informed fire-duty acquisition and fuel reserve checks',install(){const was=warmthDutyOn();setWarmthDuty(false);return ()=>setWarmthDuty(was);}};
   if(kind==='rich-no-care-handback')return {spec:label,summary:'remove explicit childcare recovery handback and retained watch progress',install(){const was=careHandbackOn();setCareHandback(false);return ()=>setCareHandback(was);}};
   if(kind==='rich-no-checked-accounts')return {spec:label,summary:'remove holding a first-hand account of a place to its teller once checked; beliefs, hearsay replacement and other asks unchanged',install(){const was=checkedAccountsOn();setCheckedAccounts(false);return ()=>setCheckedAccounts(was);}};
+  if(kind==='rich-no-home-replacement-knowledge')return {spec:label,summary:'remove personal housing knowledge for layout and matching duplicate-home allocation checks',install(){const was=homeReplacementOn();setHomeReplacement(false);return ()=>setHomeReplacement(was);}};
   if(kind==='rich-no-remembered-need')return {spec:label,summary:'remove deciding care for an out-of-sight dependant from how they looked when last seen; the live figures are read as before 106',install(){const was=rememberedNeedOn();setRememberedNeed(false);return ()=>setRememberedNeed(was);}};
   if(kind==='rich-no-location-questions')return {spec:label,summary:'remove asking a present neighbour where a promised person is; other info questions remain',install(){const was=locationQuestionsOn();setLocationQuestions(false);return ()=>setLocationQuestions(was);}};
   if(kind==='rich-no-supper-telling')return {spec:label,summary:'remove the telling of household undertakings at a shared supper; conversations still tell',install(){const was=supperTellingOn();setSupperTelling(false);return ()=>setSupperTelling(was);}};

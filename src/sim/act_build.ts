@@ -1,5 +1,6 @@
 import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
 import {hasPromiseKnowledge} from './promise_knowledge';
+import {homeLayoutConflict} from './home_replacement';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { footprintOccupied, hasLayoutClaims, layoutClaimBlock, LAYOUT_OCCUPANCY_WAIT } from './layout_claims';
 import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
@@ -292,6 +293,7 @@ export function openSitesNear(world: World, near?: Spot): number {
 
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
+  const housing=homeLayoutConflict(world,type,hh,upgradeOf);if(housing)return housing;
   const rules = rulesOf(world);
   if (isFacilityType(type) || upgradeOf) {
     if (projectsUnderWay(world, !!upgradeOf, at) >= projectLimit(world)) return 'enough improvement projects are under way already';

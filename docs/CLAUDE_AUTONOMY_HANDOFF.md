@@ -1,5 +1,13 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Codex continuation update, 31 October:** the owner resumed implementation. The
+published `056dbac` baseline now passes the full 339-file / 2,204-test regression
+on the owner's Windows machine (556.86 s). The historical pending-run statement
+below is superseded. A16 null-goal handling and rendered physical execution are in
+`6efd02e`; meat receipt save/accounting repair in `0182849`. Current development
+and remaining gaps are recorded at the top of `DEPENDENCY_CHAIN_PROGRAMME.md`.
+The historical Claude checkpoint below is preserved as provenance.
+
 The owner asked for a stop, commit, push and handoff after the proposed-projects slice. This is a checkpoint, not
 programme completion. Everything below the "Original Codex handoff" heading is the earlier provenance, kept unchanged.
 

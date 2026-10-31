@@ -77,8 +77,11 @@ in 3.84 s (`autonomy-proposals-boundary-final.log`).
 `tests/inhabit_proposal_boundary.test.ts`: both malformed goals now receive bounded
 rejections and fallback, leave no batch/cart, conserve resources and round-trip
 the full save. Focused proposal, boundary, protocol, version and immutable rules-107
-checks pass **19 tests / 7 files**, 5.20 s. The baseline full-suite rerun is separate
-and still running at this review; no full-pass claim is made here.
+checks pass **19 tests / 7 files**, 5.20 s. The published `056dbac` baseline full
+rerun subsequently passed **339 files / 2,204 tests**, 556.86 s. That baseline run
+does not include the later null-goal tests. Final proposal/boundary tests pass 6/6
+and typecheck passes after replacing the inherited nonexistent `ledger.created.cart`
+assertion with an exact unchanged-whole-ledger assertion.
 
 `scripts/browser/proposed_project_check.mjs` passes **7/7** rendered checks at rules
 107 (`autonomy_evidence/proposals107-rendered`). A supplied staged yard and a
