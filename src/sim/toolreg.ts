@@ -37,11 +37,20 @@ export function bestOf(world: World, holderId: number, kind: ToolKind, user = 0)
 /** A record may leave its holder unless it is on a bench (a rack loan, `lender` 0) for someone other than the receiver. */
 const retaggable = (world: World, t: Tool, toId: number): boolean => !(t.loan && t.loan.lender === 0 && t.loan.due > world.tick && t.loan.borrower !== 0 && toId !== t.loan.borrower);
 
-/** How many records of a kind a transfer from one holder to another could move: the cap on the count it may move (a count must never leave its record behind). */
-export function retaggableCount(world: World, kind: ToolKind, fromId: number, toId: number): number {
-  let n = 0;
-  for (const t of world.tools) if (t.holder === fromId && t.kind === kind && retaggable(world, t, toId)) n++;
-  return n;
+/**
+ * How many of `n` tools a transfer from one holder to another may move: a count must never leave its record behind, so it is capped at
+ * the records that can be retagged. A count that has no records at all (equipment staged by a scene or test straight into a pile or
+ * store, which the registry never saw) has nothing to leave behind and moves as it always did.
+ */
+export function transferableCount(world: World, kind: ToolKind, n: number, fromId: number, toId: number): number {
+  let held = 0;
+  let movable = 0;
+  for (const t of world.tools) {
+    if (t.holder !== fromId || t.kind !== kind) continue;
+    held++;
+    if (retaggable(world, t, toId)) movable++;
+  }
+  return held === 0 ? n : Math.min(n, movable);
 }
 
 /** Move `n` tool records from one holder to another (the item counts were moved by the caller). Returns how many were moved. */
