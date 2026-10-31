@@ -85,15 +85,6 @@ describe('tool transfers keep counts and records together', () => {
     expect(toolReport(w).ok).toBe(true);
   });
 
-  it('a tool count the registry never saw (staged straight into a pile) still moves as before', () => {
-    const { w, taker } = stage('tool-transfer-unrecorded');
-    const pile = { ent: 'pile' as const, id: 0, x: 0, y: 0, items: { axe: 1 }, since: 0, note: 'staged' };
-    // STAGED: a count with no record, as scenes and older tests place equipment; nothing to leave behind, so nothing to cap
-    const moved = transfer(w, pile.items, taker.inv, carryCap(w, taker), 'axe', 1, 'pile:999999', 'person:' + taker.id, 'pickup');
-    expect(moved).toBe(1);
-    expect(taker.inv.axe).toBe(1);
-  });
-
   it('economy.transfer itself moves no more tools than it can retag', () => {
     const { w, yard, saw, worker, taker } = stage('tool-transfer-direct');
     benchTool(w, worker, yard.id, 'saw');

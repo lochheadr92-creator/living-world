@@ -2,7 +2,7 @@ import { harvestPressure } from './ecology';
 import { recordGoodsFlow, recordPersonalProduction } from './settlement_economy';
 import { ALL_ITEMS, JAR_WATER_UNITS, NUTRITION, WEIGHT } from './constants';
 import { carryCap } from './people';
-import { idFromTag, isToolItem, retagTools, transferableCount } from './toolreg';
+import { idFromTag, isToolItem, retagTools, retaggableCount } from './toolreg';
 import type { Building, FoodKind, Items, ItemKind, Ledger, Person, Plot, Reservation, Site, Source, Store, World } from './types';
 
 const FOOD_ORDER: FoodKind[] = ['berries', 'fruit', 'grain', 'fish', 'meat', 'bread'];
@@ -150,7 +150,7 @@ export function transfer(
   const room = roomFor(to, toCap, k);
   let m = Math.min(n, from[k] ?? 0, room);
   // a tool's count moves only with its record: one on a bench for someone else stays where its record stays
-  if (isToolItem(k)) m = transferableCount(world, k, m, idFromTag(fromTag), idFromTag(toTag));
+  if (isToolItem(k)) m = Math.min(m, retaggableCount(world, k, idFromTag(fromTag), idFromTag(toTag)));
   if (m <= 0) return 0;
   takeFrom(from, k, m);
   addItem(to, k, m);
