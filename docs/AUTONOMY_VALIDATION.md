@@ -3,6 +3,48 @@
 The capability register remains `DEPENDENCY_CHAIN_PROGRAMME.md`. This file supplies runnable validation and records
 performance-method limits; it does not close any unimplemented capability or substitute for ordinary evidence.
 
+## 31 October 2026: completed Normal day-45 observations at frozen rules 113
+
+Source `e64789d` was frozen throughout; fresh Normal river/meadow/forest,
+immigration off, no inserted supplies, knowledge or decisions. Forest reached
+108,000 ticks directly. River stopped at its 900-second budget at tick 88,200
+(day 36.75); meadow stopped at 103,440 (43.1). Both original partial reports are
+retained. `ready_step_observe.ts` now accepts an optional exact input save and an
+absolute target day. Their unchanged saved worlds were continued to 108,000 in
+fresh output directories. Input SHA-256 and serialized initial hash match the
+original final bytes; every runtime source hash matches across the join.
+
+The observer initializes already-active plan IDs at a resumed boundary, so it does
+not count them as new adoptions. Event/sample totals below sum the two disjoint
+segments, while deaths are cumulative final totals and are not added twice.
+Each seed has 900 pure checks, exact unobserved twins/reloads and balanced all-item
+accounts. The saved continuation is the real state, with no rules conversion.
+
+| Measurement at rules 113 | River | Meadow | Forest |
+|---|---:|---:|---:|
+| Person samples | 22,447 | 23,127 | 15,180 |
+| Project workshop starts | 6 hew_planks, 4 fire_bricks | 2 fire_bricks | 1 fire_bricks |
+| Successful project workshop endings | 9 | 2 | 1 |
+| Interrupted project workshop endings | 1 | 0 | 0 |
+| Prepared step offers / ranked first samples | 7 / 7 | 2 / 2 | 0 / 0 |
+| Cart plans observed | 0 | 0 | 1 |
+| Carts at end / cart-haul starts | 0 / 0 | 0 / 0 | 0 / 0 |
+| Alive / cumulative deaths | 19 / 13 | 25 / 6 | 5 / 27 |
+| Total measured seconds across segments | 990.28 | 924.30 | 558.76 |
+
+The single forest cart plan was first sampled at tick 17,880, person 908 (Lena).
+A separate exact-source trace is investigating its physical chain. Workshop use
+is observed, but ordinary cart completion/use is still unproven. Repeated samples
+are not independent decisions. Differences from the older rules-107 runs include
+several intervening mechanisms and are not isolated benefit estimates. These are
+Normal profile windows, not the final combined current-rules Large validation.
+
+Reports and immutable source manifests: `autonomy_evidence/current113-{seed}-45/`
+and river/meadow `-tail/`; summary `autonomy_evidence/current113-45-combined.json`.
+Full saves and execution logs remain local. Tail runs take 88.04 s (river) and
+22.63 s (meadow). The original budget stops are not represented as uninterrupted
+45-day successes.
+
 ## 31 October 2026: genuine Large day-45 measurement at frozen rules 109
 
 Completed generation and headless/browser measurements are now retained in

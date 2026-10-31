@@ -1,0 +1,5061 @@
+{
+  "head": "e64789d09d8056a4f28b5075cb9406e420d8fd83",
+  "seed": "river",
+  "input": "autonomy_evidence/current113-river-45/final.json",
+  "inputHash": "a6e6ea560a821c68fdb679c56689cf6ad05c43d60af938913d81edc4f4645645",
+  "from": 88200,
+  "settings": {
+    "seed": "river",
+    "population": 28,
+    "harsh": false,
+    "immigration": false,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 113
+  },
+  "source": {
+    "scripts/observers/time_budget.ts": "dafcae582422a79bf96d4ce914bff9895016ce4d7ab933884f66a0e69a6fcda2",
+    "scripts/ready_step_observe.ts": "de1e69f2840f195e144f4bcad200f1f0632406b6d0e26d639836bbd7f2c42478",
+    "src/agent\\attribute.ts": "4651738320a2639ba95ae179d9a5258fdd707961a8c748607fb068efc2b5699c",
+    "src/agent\\choice_keys.ts": "177e48df5150b1fff3e0b2ab6335395d797ea2a7e1fc6aecba5300e77a9773d4",
+    "src/agent\\counterfactual.ts": "537f14b68bc9e972c727c59d1af5e265abb5206bd07e7c670cb7fc3b64989b24",
+    "src/agent\\memory.ts": "4faa38143d80934573932de11a351acdf5d684416a0ed2c9181b7f8f5643685c",
+    "src/agent\\model.ts": "9ec6692242f7b33708f6bb92b6b3a638928c8189600b5e61a835d0ead831eb45",
+    "src/agent\\observe.ts": "38cb157291e5fe7f0d5881f0de7128beb5d9ee6165edc479dff68a40d7874590",
+    "src/agent\\protocol.ts": "672665d42d84ee63df88dd061aecf66795cea097c70acecc2c130c92c595f798",
+    "src/agent\\run.ts": "8492fdb2eb876acd032b781960878622565eb1a9df39d4a4839ea53f441813f7",
+    "src/agent\\stubs.ts": "e1d5c4a6b008d5ba763c9e3bab94d3293b4c2a9f904fd40275190cd82a9116df",
+    "src/agent\\time_text.ts": "f3fd47df819724215a8065ca4565b102d26f6bbe5a68cdec767bec80c16d0cd1",
+    "src/agent\\transcript.ts": "9822557f34b447e2c34f156ce14238aeef8c8f5faa13b83e9ba0bbb37c68052c",
+    "src/app\\game.ts": "ac61cc561f689a00a5590d864d6772b9ee9c4784b481927760fc18b987a760df",
+    "src/app\\inhabit.ts": "bb16fb7619e06e4de2d0b789b5f83aa6192705bf05c000b69fdda955a09b3acb",
+    "src/app\\prefs.ts": "9de63a32eff5a553d0567222967627c7fd8310859e4ce57295c2b2a0a2229442",
+    "src/app\\save.ts": "9781693e75ed87d11f7b912e4e1167bda31b3102ba513e5c8fae752abf037abd",
+    "src/app\\viewer.ts": "15cc26f370339628e810f29b55e871136f3e82694c90844d60646745bb2e947e",
+    "src/main.ts": "03ccd3cc9e78bbae63a8a5a46387b482b57aacaf05a7fb978af7ffc6b5a607ac",
+    "src/render\\bld_common.ts": "01a135acd065fdd0c5f2447c871ceeba0f8c1e98585dd782778f9f33dd33c89a",
+    "src/render\\bld_food.ts": "af596cce86e96fc5296083b7c467e7e83b848a6d2152f0572ce1a9cd5be9dd40",
+    "src/render\\bld_home.ts": "ddac17986dd22681b77bab3c895a71026857b5b1a01a2defeadd55eca010e354",
+    "src/render\\bld_work.ts": "bbc1ffac584425489312f130cde193a406426ea28a6d9824e7a90de74fcbd9aa",
+    "src/render\\buildings.ts": "db5499908af16cd044faa4bd5cde0b5382217bcb6dbcd48db57541ca9784a405",
+    "src/render\\camera.ts": "c9fb5f149ad2efa44f8329ba995f99264e5226d2a94b6408674fa1b49be500a6",
+    "src/render\\carts.ts": "356c7990f17529127a837f4da0cb53ba7a0c7a6f4c55cf54da200300548099da",
+    "src/render\\characters.ts": "6aaaf65784f09da8f5b30da16617ec3e51568290db6b03459761395a871c32ec",
+    "src/render\\construction.ts": "421bef461e6fcc45199cedc22bfe522a54ca2446674df764e352e26fab0469e8",
+    "src/render\\deposits.ts": "851cc4a46eb2165a90aecbf04e0100523d764b23e650e3eb631be3f1d49141bb",
+    "src/render\\effects.ts": "528f0abc483c14da4d5068c7c88c97e885cda56092ce73d1264f53274ca0c4ea",
+    "src/render\\goods.ts": "21b766c65a1316b710c2456639be64e9ce613bb12584959fdc1c000ff832a05d",
+    "src/render\\input.ts": "3de2e60c3a65ee75afe96c6e0839e2628440b02ca3c95e59b913b2f296b64728",
+    "src/render\\iso.ts": "047556eda482e0217ef17a21d7c25ed144ca23eaebce33f485df447046bfccba",
+    "src/render\\iso3d.ts": "08a045e9a5067596e8ff3fe0cea708367e3f4f8dffe8c3b7a0c03a858af8ad7e",
+    "src/render\\overlays.ts": "80e5d9b0f824dfd4039e466e352d10cc2152012495bdd98ff9d6c1b7a8a2e51f",
+    "src/render\\palette.ts": "620c27c354596d59a57694eee0cd3ef44b262cc40da23dcdab8f7aad1f148a64",
+    "src/render\\picking.ts": "c009455557470e765130482a3fdc3ba455a919c3beb07f4154e440b1d5ab1b45",
+    "src/render\\renderer.ts": "c0ff4a7d933b6d86c58674ea6d3f348dbb788097584048575d81d0aab7a39878",
+    "src/render\\scenery.ts": "48363e5d4bb40ab205c28e12f1a69ef08c608273d26028540320d1baf5244745",
+    "src/render\\speech_layout.ts": "0a30ae6b98963afe55965a495b46ca864b8cf876e0f7da217495c59f4294c2d2",
+    "src/render\\sprites.ts": "d38c0980ee9e69a28acdf33fd22e2eb7a2b53a526f36d403915ef51e1a6a357a",
+    "src/render\\structures.ts": "b298a7ef91e7e1ab7120099c808bbdf2dcb998c4465f6e9dd8c2e44680938590",
+    "src/render\\terrain.ts": "13c61d2aaf13c651e38dc2c1315ebfee9a1e128f8a40cedc95575d401b48ad16",
+    "src/render\\workstate.ts": "612868692cc1d5a87ee9d83d37fb6bc23cda87c55d98ce877a3b0dd72e51f209",
+    "src/sim\\achievement.ts": "1c54ca9db037109217e47729021a57952c0d6af02334b51ec8a3541c9bc45b25",
+    "src/sim\\act_build.ts": "197ff2e3a6878e7cd02edc390642a49df3c68abb99a45e1e7c73ec9546d3d790",
+    "src/sim\\act_farm.ts": "8ad451c28f42cddf8e4a7dec4f97398f6fb6d0bd25cb48808d4ff5a45b656c82",
+    "src/sim\\act_misc.ts": "be0570d4275bb064bcf1b4095830737d23c693492c8fa2ee1fce5b32c93dbcf7",
+    "src/sim\\act_production.ts": "378f206a925343c37b9ffdc95fa40abcb1b99b82696d8c9be5bd772df1070407",
+    "src/sim\\act_resource.ts": "ab10d92f14135f2800b8412a594db8d4a034543f676c1b6adfdedd739c7951d8",
+    "src/sim\\action_scope.ts": "a222bb8b750346be9c5e057b35b5c723f5e403efa384d056a29b6d669a483e8b",
+    "src/sim\\activities.ts": "0f36657168daaf226f33877150fae3370eda40b39d7c897a96144d9cb4702cda",
+    "src/sim\\apprentice.ts": "2ff985310446cae84578bf789d12501f65e35623ab47ac2973879e026388b325",
+    "src/sim\\background.ts": "7f3d4039b1e9b342ef1313bd93c9c878a692022e06cbd23747ae17dcf5fdcf15",
+    "src/sim\\batch_plan.ts": "b745177928a69a0c7919f1de1269a570a84f7729957d184eff923f7c252e40eb",
+    "src/sim\\buildings.ts": "4afe8ece909fd1f487c12e204d442f8a12d898024bf910a35e428190aa3a96fb",
+    "src/sim\\care_capacity.ts": "bcf251c8ed11014de2c63613bb3c14946bef29091a78cb2b4150984ada38fa61",
+    "src/sim\\care_handback.ts": "50ba0c7ecb5ee4780871ae3740010fdb3779606f14188e95acfff60397b02336",
+    "src/sim\\care_journey.ts": "c33ae3de1ac2aa1051512457f8fe2042b7cf8d8469557fda53164cd7df4d1f9a",
+    "src/sim\\care_supply.ts": "0b2117747505d6ebfb18543fe13797826ec6a1c951cb9031034b718dfcddfce6",
+    "src/sim\\cart_priority.ts": "14189007807613cf878f08b52381e77f34dfb5ac1e5306a47b75519fd16d5931",
+    "src/sim\\carts.ts": "dd394229f3ffba5f3e84088bcd542f38ce834b35d2fa112f907447af37bc51f7",
+    "src/sim\\checked_accounts.ts": "92e7e80194ed28d900d7bc21925c9b012881d8bff5b53d012bfd1d181bc4a0df",
+    "src/sim\\civic_benefit.ts": "ebb42d95199664f612f9dfc99ecb46fde810418542b892e84c4439f6272740e6",
+    "src/sim\\civic_decision.ts": "3e920d8a24a709b6da46902b9cb3602eae65770a9b6f20a67cab997b2f210d74",
+    "src/sim\\cohortcapture.ts": "e1e22a1496910cd2e244caaf1ba3f8b09695d2a577a477b38a1b9709412dbeb6",
+    "src/sim\\constants.ts": "29cce512930e34099ddf5e7a0ef95df5e30231964a2ef83ba8658406089a8df7",
+    "src/sim\\construction_access.ts": "1bfd47f071f7a6e1394cf731c9f38286260bc43f450ad905ada175526bbed064",
+    "src/sim\\construction_finish.ts": "814fed02b0553d7a67982f5cb93c9ad411c988261d7d5898474036f5233a8679",
+    "src/sim\\continuity_knowledge.ts": "ffe7ddea1ebb93975a339f8066094c96088b0073f2570cbd97c02da5aa2e27b4",
+    "src/sim\\crews.ts": "4211814e6a98d49383b3b4a9ad0ea9e6624f7a6c26f4fb5cbbbd861efd1a53d2",
+    "src/sim\\customers.ts": "5de8f3677cbff952f460abcaace939f40778198b0d028e015f153b58149fa8f8",
+    "src/sim\\daily_routines.ts": "4bdbe8f4bf17deae24c0a459827943cbc6b415e6a1659dfbf12f3caebdcc4be5",
+    "src/sim\\death_knowledge.ts": "6d09f3ddcb55e353a743c9d488358419ef47cd9242725d1775dc275bee96781a",
+    "src/sim\\decision.ts": "03afab3582ef875f5d29882aa1632a87ee507bb51871a93c6ee4cc3c27a4f0b2",
+    "src/sim\\decision_ledger.ts": "8a7a4a300a8ad24238f843e72bcd94e19cdc4367470b6139384df3bbdf37af58",
+    "src/sim\\defence.ts": "fe3d32107bb73be7359f64a295f3a0d977156745aa21ac9f3f3347ed92258ccc",
+    "src/sim\\delivery_place.ts": "6b47a46cbb61650eb11667db2c15d82cf24b7030d1579cd570fe903a30366bfb",
+    "src/sim\\development.ts": "40c1e3227b8fb1b5a75cc7e98bf0dadc8e66c59e99174771c8a65ba572746739",
+    "src/sim\\dialogue.ts": "7ec916f0232071b2992ca7c3dd6c20b1a0d61975db9e486bf4b4c13f16213176",
+    "src/sim\\ecology.ts": "85a19f886982f25091e59292cc8831e975d7e77e3947893dc55d157a6c4f947e",
+    "src/sim\\economy.ts": "b2f3c0aec065aec71866c877284697dab5d448068e426b0b9b8f3b528b7a912e",
+    "src/sim\\environment.ts": "7b9d97177cd00382ca89d8fbdc641d923837899f861f0ca512949130dc18a36f",
+    "src/sim\\estate.ts": "5a080f9652614327242094b69a85158f394c3cabf2601b4aaa02432e280c683b",
+    "src/sim\\events.ts": "d8f582a7cc1a8f913df9232716afffa52841608c4f7d9b272ac5e0ab18b27473",
+    "src/sim\\exchange_journeys.ts": "0738997112263f18169436c36dedd6e7c8cd7ab53e1a1bd5a04fde3c66ce25c1",
+    "src/sim\\external.ts": "93b179c40b9b5352e510c94224a28f1f1ea68cbcdeb05d88d7cbab0f4b9bded9",
+    "src/sim\\facilities.ts": "3206b7b31ae5e5c6e79c8fed2a33859769735234edb121273d16f9cc938baeec",
+    "src/sim\\factory.ts": "828dd6e98bfa34edfa6881e8f543237472dc3b9d6a94a9551b0a6d9091569a87",
+    "src/sim\\farming.ts": "31caf932e05c37f772699dcdb3b26103c8974b55f0197e206551da11c3f47fc0",
+    "src/sim\\flood.ts": "a363bc32926e4246694a44e4ea7f75007d12e9ab22884b450476f1efa02e146d",
+    "src/sim\\flood_access.ts": "6a71c9c61e5bd6831f0e726281fd78b49d738c8b34084cade936235069a2dfc6",
+    "src/sim\\food_help.ts": "fc6ec8e6c24ad41a765bf762f4e2973fea33b80ff96267284479dfb6a398cfd4",
+    "src/sim\\geology.ts": "b90be4ae2d379f4dd7fb0567344421fdda2f85a6c831a5ed33855caabe69f6c4",
+    "src/sim\\grievance.ts": "81f578c6ebe04f4960d80c91489e8ca5d5b01b04c951c13710e8b73b1b0d68b1",
+    "src/sim\\habitation.ts": "44abd62fc281ab2b1c99cd9f462be84974be23aa8552d87edd55d326e6c1cae0",
+    "src/sim\\handover_state.ts": "14e6371366fce669fefa3fd4f86e0362db3389ec4a57802154de3a76dd494e6e",
+    "src/sim\\hardship.ts": "2bf34ced88bac969363bf591fca52b2380b5e618bab3eaa90e60ce10068a39e4",
+    "src/sim\\helper_learning.ts": "e3903325ef542b081195ff34e4d5020939340a20cd7e673da20344742bfba8f6",
+    "src/sim\\historical_index.ts": "6db21ec33da45e5120a4f11e6d6bc418242feebb8e4a3e2e018527bcce8ffdd1",
+    "src/sim\\history.ts": "0223f6fee5fdce45a97cea8f6c2220471b98bfe15baec23191c84789281a7ec7",
+    "src/sim\\home_replacement.ts": "52a65ca147d9dac44a31289fa86d2e685e373cc122d2182ccee6889a9ebf4d03",
+    "src/sim\\household_practices.ts": "b068ffaf3b141edfca614e21be9c50f4939c4e0d76c0e363c2527c559f465646",
+    "src/sim\\household_supply.ts": "c022c0776029e9a6b253153607233501922907d74043f09f5dd08d90b3359e6b",
+    "src/sim\\households.ts": "28c2be772012b01546811f7cd18274c1e6dc8c1fdb0f210b049a0a2b8b99091c",
+    "src/sim\\hunting.ts": "1ce72d09bee4bad905d4a2feedd055a86a6903aa12d8dffa556f4a6ff2b5cf34",
+    "src/sim\\hydrology.ts": "b57f16a7395f20f32bd1d36f5a635ced70d4184bdb1a9faaf7502562eb511854",
+    "src/sim\\illness.ts": "15af5452a3521747063ccb64a8d7f417f1a795615afc4ec092600bbfe86c8682",
+    "src/sim\\inspect.ts": "f29aadddea851e8bf484dfc3d8bf87b196e061395cb0e12964c01c8b59715e17",
+    "src/sim\\inspect_flood.ts": "84dd2d87409590c946179fb3fe465c4fbd874d3c0bf0b23358ae7c5e0cac2728",
+    "src/sim\\inspect_home_plan.ts": "996a61fa5ebb2c7007a956283cb1660bf522b131666d790f5411580058939242",
+    "src/sim\\inspect_water.ts": "e787838ae949914f652904e3d2e31595bcefa6223e4d5d3f88f0008c157f4721",
+    "src/sim\\inspect_work.ts": "c2ca0ee90bfba176ff8d2d740646ec6be540f72b6ff678175caa2f8629c7a2f2",
+    "src/sim\\intent.ts": "77ace37d29608e09409eef4d8d35e6aae01db84db55316047e3ce22066d58f3f",
+    "src/sim\\journey.ts": "8574d08cf4915d543369a65d3b9a6ced54fa246e11cda361e90b0d8049a0fb0f",
+    "src/sim\\journey_recovery.ts": "c38596450c5e501c54ed0235ca913b6fab112b87af3c1a1ddb6d3bd652b83854",
+    "src/sim\\journey_state.ts": "4f3a5daa9363737ff2adb3f42ad95b6039b6afc126f397804875987d46708b03",
+    "src/sim\\journey_supplies.ts": "5023122976026af883544313f0d304cde1214a1f041b2d5e68d47eed407957cc",
+    "src/sim\\kept_target.ts": "f3f0d99021954fee1c00f11e7bfd2b2cb53f5f2c9e9bcac9465dc308e44bf447",
+    "src/sim\\knowledge.ts": "4841e42271ae1a42996cf999d7f0a7e80dc636311c42fa02a751002207049062",
+    "src/sim\\labels.ts": "3e9dac1944bec6993442b740632666f0af0efef9e43a2bfaeee5cd08708a9144",
+    "src/sim\\layout_claims.ts": "abbc76261affdc35e64ab15fc6db625ad4509961c8e72d40cf6182b738baad0f",
+    "src/sim\\learning.ts": "bfcfbe5cc5a77a2caf4cce0066727e62599f3d48abe82179e7ca764d20991fe6",
+    "src/sim\\leave_heaviest.ts": "e234b6bf18106d6114d76a9b227cee9d793b5d6949617157471c221592425605",
+    "src/sim\\leisure.ts": "cf96a02f905d8a42f080af6530545ff3c2a698e4bdc0233a33b8772db0427d15",
+    "src/sim\\life.ts": "72d57ce914a94d1e094c42022435431c2adf4452f2e93320f6b425fb730e6e29",
+    "src/sim\\lifechanges.ts": "140d14dc4479b9ac7f2f83c8890b7803f220f3dc5db3d9e52bb71317165114e9",
+    "src/sim\\lifecycle.ts": "e6fc9cfba084fc2db24ed4a368d8223ded1f77f68cb7300feba22874333272ca",
+    "src/sim\\local_demand.ts": "dfb620291502515177068664c2f993601c52e65ee9fdf2764797724c56605950",
+    "src/sim\\local_giving.ts": "3e8dc500bb9d58a13cc11b41096ce5c7e7c69149be4a5d24721fa627e6ce3748",
+    "src/sim\\location_question.ts": "3b8f176f67684320664af7937663b9e363a6ebcabd82000d36c79b2000a6a144",
+    "src/sim\\market_contact.ts": "3a39a197d9524e6065df070d7d5360782482c1a5a7dfa4eab0e7365b388760be",
+    "src/sim\\material_stock.ts": "5771b56abc710182321bf37868ae8d7286dd9793a8e2ecf13123f01a16c268a0",
+    "src/sim\\meal_leftovers.ts": "e64db99d44c781a84ca47c886553f39041559d35dcac4a4875d84f12b3714456",
+    "src/sim\\meals.ts": "e8a9d9971a084cdcea6eef0bde5f36f030990a1e98efda2f16ab4a2867392bb3",
+    "src/sim\\mediation.ts": "b6f2083e8c39f35f6706cc77d2ed321e390ec2c4bec75ff45327770d5c1add03",
+    "src/sim\\meeting_knowledge.ts": "fc1a80d6665c46af88ab62ede1568fa75efd5422ef923a228ec9025b14ae6177",
+    "src/sim\\memory_retention.ts": "eaa885de54fe36177f62171e2895c51d7d207258a34b9cea2d4f23d155680ee1",
+    "src/sim\\misdeeds.ts": "fb401bc11dfe94419717ea6d6b4d996c6d73d87e14674248f64b7637d9044060",
+    "src/sim\\mood.ts": "f4ea337f80c3abb8536b9e670a32b01f8b65b6d54fcddb94ef50ec0e09ebc740",
+    "src/sim\\needs.ts": "5d4f1790eba27dd2f304c489db32c20c43d7b3c11b119c5fcd5fee6e75aec149",
+    "src/sim\\news.ts": "24b0019630f45766159ece221e0c80161c36e857fcbf08a7b160cad425dfb5cd",
+    "src/sim\\night_wait.ts": "8d21a880145522ddf83589dd25cb12a8e90eca74f30928215cc4164485f0a4d0",
+    "src/sim\\occasion_participation.ts": "56691d1a069e918dd005fb83d199122125b6b56805a9e4af569c2d2f56652475",
+    "src/sim\\occasion_recovery.ts": "c6bf32c6a8211459493f62fe8ae27d79813f42283338ba4af89662956d7bc460",
+    "src/sim\\occasions.ts": "3ba6808445a1f60384f82c8d5386d2b452d2d1605ec53640592898de93cbffb0",
+    "src/sim\\offcuts.ts": "5956ec9748b6fe46796106731ef5984451065ea22aa0c3956bd3538603ccf301",
+    "src/sim\\options_social.ts": "176f74ad360d619328c3bb15c82ebc2a6c518057c630963f35fc548ef6fc971b",
+    "src/sim\\options_survival.ts": "02c99c72da065153d1e7dd8401dcd152f3f40bc3deb292f16a48db9b3e092f39",
+    "src/sim\\options_work.ts": "1a76877d4099f92b12a6d08d2980074faf903a6d89c081a41b359d0d62903619",
+    "src/sim\\optutil.ts": "247deab6ff45cadf3448a1a2666766199063298efd43a0c86af3677b7f267b79",
+    "src/sim\\pathfinding.ts": "a6a1d54d276bfdc4684104eb74747584eaa16c1463c6029986567e093a2e142e",
+    "src/sim\\people.ts": "cb326c25071c4d968305299915ec6338099ede4ab045e9ad90fd2125cf999a5b",
+    "src/sim\\perception.ts": "1ea6e368686f144b061191aad8ba708c6804b0f8fece5406cd02ee710aeb9642",
+    "src/sim\\pile_access.ts": "f1fe3c1da1a3cd2d40194e871365a6c9b2990464f6a831b0da7e59ce9aa8dcc6",
+    "src/sim\\political_alignment.ts": "43a7fb0946154ec6615716ea5cb9fb0998cc5598cbe2802fd1edb38fbec99b11",
+    "src/sim\\probe.ts": "9eb164556b9beafe69ec9b1a3301d4bcec74c0d125595d1cecf2e1900ca0c02c",
+    "src/sim\\production.ts": "1e42c88849af512cd7b241b0c9428a4475e15b2a4412735a3112ca3cbe884dd2",
+    "src/sim\\profiles.ts": "067e491a8c1790b3237aeb3b1fc503b332865bb63ee9e18a6e129f25a860de4e",
+    "src/sim\\project_compile.ts": "dfb58671c7b54fb643199de0c03493bb7bf4fae1f09fe0c000d7fb6a6d67a5df",
+    "src/sim\\project_graph.ts": "633c1a7dd3f3deacade597710d7bd9356c1eeb27a7de30be11200e3dfab2b542",
+    "src/sim\\project_step.ts": "34956130b51ba4e54f84200e90109cf88f8bcaafc843e96a5b8a3102e4267849",
+    "src/sim\\promise_delays.ts": "1f74f3eab6d3c3f94252a55d918658ad4f03ac2caa1264af2ffadf9ac969df4a",
+    "src/sim\\promise_expectations.ts": "5fd8ef3c10ef4bc1de0184ba6c6bc523689d93aa71312cda089ac677d0c2d46f",
+    "src/sim\\promise_knowledge.ts": "8395e56b454a68e30df369e79b8c250bbbcd48bdc4cd650264da8443372a9940",
+    "src/sim\\promise_outcomes.ts": "d1313a85f84f2971cbbd9304219dcee47dafa0bf637b84e68541fa5182b894e6",
+    "src/sim\\promise_targets.ts": "2b808616773b3e7ce64d981900faa089b70c48d7626de29c3e4108dadc2606ab",
+    "src/sim\\promised_supply.ts": "46581fd9ac23c263b3c422ef4f09e50e5a7132348b35a3a45672bc052e3fa7a5",
+    "src/sim\\proposals.ts": "49e889a0bf77ec32a8760b46d4ca841f44996325d8271f4afd9d50fd0c516581",
+    "src/sim\\provision.ts": "c206e7047240384916b93a0966f00a248b504c7df7e8ac12d6a87ca8c8c532d6",
+    "src/sim\\ready_step.ts": "c4cde60bbe16b1ce1e1d464a35494a9b76b165c70096965d019a616f179d50de",
+    "src/sim\\recipes.ts": "b33d9d64fef3a27c8a21a83cd5a295cf0b20e1cae26c6412459f7b97ff2c1db7",
+    "src/sim\\registry.ts": "af7f7cbb09e3c8f1e1e27aebb6e89903c099f6b54b81a4c89f7fa92521c56ccb",
+    "src/sim\\relations.ts": "487d081f6da7ccedc21fd9576366631f0ce52bb68c40b7eafaa3aa8588651260",
+    "src/sim\\relief.ts": "76146d43a1410e9df1c08604f627f30de147956acb59a8cae385ffcbb8f49e02",
+    "src/sim\\relocation.ts": "d34b063496491f2c51a6266c73103ef19f9d3e129bc9880863a555e53b3bf000",
+    "src/sim\\remembered_need.ts": "6e91681acbbec6737e047291abe49c69ad0b782b01fd425aef797d554199a747",
+    "src/sim\\repair_duty.ts": "2ddc8465b8702a6d43e846ac5ab2e2bd8817fec79b5154dd3976ceafc26a4cbb",
+    "src/sim\\reputation.ts": "c233bf327fab5a8f7f84cb76a7ee881d859b84d58ac56cc19d441cb050b6b8e0",
+    "src/sim\\request_cancellation.ts": "137109b8cf4e853ba79cc75949dd9d7cc534198186b821c45c6197dc058fdbe3",
+    "src/sim\\reserved_goods.ts": "a2f1d1e515a0c78f52097df98e936411e21ed2987b25a3d57ff7d9fb7eb7327a",
+    "src/sim\\resident_care.ts": "bb5893855c11d94684bef68ff684f9f42866b0170db3086819fbe168b796862a",
+    "src/sim\\resident_contact.ts": "0ea6cc5e9e26667565cfc61024e2f65b072079cb3e0e7cac5655103268c640bc",
+    "src/sim\\responsibilities.ts": "213e715da5c96f6d23679cb1196a59b22234e5a8bf0a981b0b4ea34d409a7025",
+    "src/sim\\rng.ts": "0d4462d1becbf82ae1c3eed0e044093095d98556a2edd92750993d77f2f687c9",
+    "src/sim\\route_learning.ts": "c6b06f70164d24362b2256df2fbc31f52d31e41f983143c8aedb38aeac3a75d2",
+    "src/sim\\rules.ts": "b99d47ff51ac3aa4d25164a08c6c38d08ae58df6e2fbbcbb55cc2b91e56d523c",
+    "src/sim\\rulesversion.ts": "ff9b5fe04071f2668d6ecf3362ef57a03be7179e4259c9e18cedd75592ea2b4c",
+    "src/sim\\scenes.ts": "a7367ccb6a980021c6911712be13a7cd19971768af6a3e422a101b60dfeef742",
+    "src/sim\\seed_storage.ts": "a04489a19e095a941e06c884a20cfa2910c76b4c900b5801c7066864c02494d6",
+    "src/sim\\settlement_economy.ts": "c74980cf75904e7326957398b7721c87b20a8cb5df2ac77174f161899730ec0a",
+    "src/sim\\settlements.ts": "478f355671a29987d66b58e580566ef1b4bd5ef088ee10faeeaa5cbc94cb1618",
+    "src/sim\\shelter.ts": "d5274e666e1bac555c20a676ab65de5eb759e42998fdc357f6270451ad76fe06",
+    "src/sim\\social.ts": "0b493f10eb9b9ce0bd86002d9d485c91d999e3cb042930a941d2b3a504d1c5b8",
+    "src/sim\\social_memory.ts": "96831367d01b98b973aeea601e10e95bcc0d7a228ea9b3e9ce5d953acee61c14",
+    "src/sim\\source_learning.ts": "34b6e28ee69cc4bc788be2f053cdea8473f8da35fc3857e957d73be4af8b0a33",
+    "src/sim\\sources.ts": "6ba81dac3e1c297e5412dd0eea17c6787c6232fee05a8c9fb72816c2d9dc5a9d",
+    "src/sim\\stored_water.ts": "1022a5fe4d8b14969aec8080fd55aaf3c8771c24c3283feeeb2285c1ee8e2366",
+    "src/sim\\stored_water_access.ts": "b06193d4065dee64e19cdfb238fd6280733a52b11bc23aa43fd4594d1e7af24e",
+    "src/sim\\succession.ts": "3f1416904c524eab75e2249360ce88df9bac2ef2c0663b4dd70fc8e23d7cc148",
+    "src/sim\\tableeating.ts": "72c6c363a49fc32497bebf9b81f64c44c0210d1e6ee654ffe5888327298e8994",
+    "src/sim\\techniques.ts": "3c0b22bd49ecf78b063de460897fa9fb01acaf7895375ce68fe532fc3daafa5b",
+    "src/sim\\temperament.ts": "dcb1491a885aba65928caa4bcf3373303d9c9b822c090fe5196e0c92a05be6d2",
+    "src/sim\\toolreg.ts": "2fd5da91f0394b78ab29713e90cdae95f04ffa8da65ffd674783eeb07e52d519",
+    "src/sim\\tools.ts": "dccc183ddc4cca070ffe945b04dd60c2e61dbc5bb2a2e8e7805a2682ea5c22bc",
+    "src/sim\\townships.ts": "31c00901eb2c86cbbbfdd169db3097efa71a796749a455ac0597187858500214",
+    "src/sim\\trade.ts": "0c899dbe81e783b250eed36aaf9d5f38b31a0c75dca3cd48bfb9bad3335d66a2",
+    "src/sim\\traditions.ts": "b094a83ce047b4653abbec87c71e636f220e5327c10bdc5df0f0ab27584d1f2f",
+    "src/sim\\transmission.ts": "79a2d660f22b8bc176f3045c3351bfa84efdb73551951e90247a85857aa8ac1b",
+    "src/sim\\transport.ts": "d85ebdab77e143352d59a95d6b1519eb8a64730c5a4995664bbb6443aac56a87",
+    "src/sim\\types.ts": "98dbc89444c6a26b8ee0db851841cb80fbb4d6fcb622029cafd536b53b953fd4",
+    "src/sim\\util.ts": "a84de16b3ddccd76a86c59c095e9ba6c1ec01b849a0d537187f3b951d5b0c37f",
+    "src/sim\\warmth_duty.ts": "8c9789c5d37171323a249f652f4fad1916bb80ec2dac4e38761f9fbec24a8616",
+    "src/sim\\water_access.ts": "879aa897fee888b83adb2922bfcf1765235347568908bddfb5a9b17824979891",
+    "src/sim\\water_search.ts": "3c9fdecf0884185b6028329ccd3bdf603c4aa6081912725a8de2756720f3e122",
+    "src/sim\\welfare.ts": "e4a6db0e3348622887e0ed31dc14af3d43b259f11ec1fc7d5a27e25d42a4f510",
+    "src/sim\\wild_seed.ts": "59742e08a21ab3b274b767bb4fc4ac19df7bf09fb1d70bc852bcfa12f80741c9",
+    "src/sim\\wildlife.ts": "32deb4c184a74f0b43cbf69414dfa642f0cb14f84c9f54d365b6e8aea7294f48",
+    "src/sim\\winter_practice.ts": "f3517db9ad63c8054461f04787873965e5acbc1a3ddab7be6b613e2f2516893d",
+    "src/sim\\winter_shelter.ts": "a813748e63f16d3edfd7b5c5ec5ba3d5ab61f76a20a3eb2db4024c1dab7608e5",
+    "src/sim\\work_handover.ts": "44746e4f47947d7a8b155b56d3cfc951c320e536c9943c0546174426b03250fa",
+    "src/sim\\world.ts": "b79bd78d7f506193cd77a0d520483ed7cbc5c5df3d67a3c1a8444854822de004",
+    "src/sim\\worldgen.ts": "8900e5dd1f635c46a9c7adcae76298d4dede45c5c853326e69923ce6deb0ce7b",
+    "src/ui\\context.ts": "bd775130ab63384ba5a08262e87b732a4790e37589779376b19ea5d37fbae634",
+    "src/ui\\debug.ts": "1a41c4033580589f9a32409278cab7a442c0d06a00a7954419c82d23a8e109d1",
+    "src/ui\\dom.ts": "801033386f96742b6fd32c5c48e0b635c5747a000343e9754ef5d35c8381e5c5",
+    "src/ui\\entity.ts": "60f694ceda93012ca669ee0bd5460813a291772ea1243dea2c9c8600bbd56c74",
+    "src/ui\\feed.ts": "468c7a190a96d174690289b92d02afb2bd9b08a61dcdce30784b17ac86ef5353",
+    "src/ui\\feed_rows.ts": "842256eee99f86f0b2346930f429a243943a3f736a9cb2ae27a1aaa770e44c0e",
+    "src/ui\\help.ts": "4db129e45e13c7cd7c14ef6fabff0bcbc8a68ea5cf48f8a0a1a7590c1d5f113e",
+    "src/ui\\icons.ts": "f65bf040fb6e5d1c6b63a7c2c988d76320162d208394d0fd73f7b4e492eb9d4d",
+    "src/ui\\index.ts": "305eb584a1b1c638e85d69ee44e7416d41c81fa953e17cb9be8a0212756f3b77",
+    "src/ui\\inhabit.ts": "f08031959310a5354c4af0dafb936fe8b29b9a44cbb9a1ffcffb98791aebea57",
+    "src/ui\\inhabit_summary.ts": "fe0f5b5317867e4e23df0a75c2f4828f2b4980ef1bc4863495a749456fefae1b",
+    "src/ui\\inspector.ts": "4665d0cfc1695d88695f24d753345808f127cc3a3b5b29b3d4bff7ece8da15f5",
+    "src/ui\\layout.ts": "a73b48fb1417042940c7e5af3501c61ff0c75edd420eefb49a591b3f5c385144",
+    "src/ui\\minimap.ts": "cc37a22941b0ff65d46f58be965aad755cbd6dd1c3cbb2a2540150aa714ea4da",
+    "src/ui\\minimapgeom.ts": "93a4af0111fe69e222303d529483628751e39c6aa2e6918ef796ab9e81267cb0",
+    "src/ui\\overlays.ts": "99e2555777951f0b71806c5d1587b92c4adeac0ac0d6b8ad5d437c859d3b9f97",
+    "src/ui\\person.ts": "eae295266c82cebf682f32d5a5ba3d77e6968486a23aff0a580ed518b9ed2ea2",
+    "src/ui\\person_sections.ts": "5c9e890e1c918544a8719d2b7e0b5a40cfea9ad575d05a0ccfed5a994674d2d1",
+    "src/ui\\person_social.ts": "02fbf815382ee197c2527e90f9bc1100b33b1bdfca9773efe517ba4780fc13cc",
+    "src/ui\\shortcuts.ts": "7851e327e87df412de371cbfa30952565061c6e4258b0a5151f851d4b2286275",
+    "src/ui\\toasts.ts": "999ead3ce4f89e5449088bccdc587fb2ea987ef92315f57b9c0b8b0177c69bc7",
+    "src/ui\\tooltip.ts": "59a2653451ba7796f89d07c186ff0c4c0fef37a79cbc33b7818ccde4dd874084",
+    "src/ui\\topbar.ts": "82d40a5fd24126bb85e591b763952f890650511b6daa4c4ee12a47b314be0f4d",
+    "src/ui\\transport.ts": "beb6aa0562feb4bbae5ad60439f55c6a8861aca00a82e608a23c147fa9959027",
+    "src/ui\\viewer.ts": "6f110152093e468b14428a07f78994bbc79984c2d2cf5dbb3473bc446d0f5038",
+    "src/ui\\widgets.ts": "5e57c2a23f7c03875ff39758b2b19c10441fe72a3007ccf97db48c4892454f24",
+    "src/ui\\worldmenu.ts": "d2560cee0c4dcdc5627b517b6162d60b44e56489056dff391e13c6b0998be367"
+  },
+  "initialHash": "a6e6ea560a821c68fdb679c56689cf6ad05c43d60af938913d81edc4f4645645",
+  "tick": 108000,
+  "days": 45,
+  "budget": 300,
+  "stop": "horizon",
+  "seconds": 88.04042550000001,
+  "population": 19,
+  "deaths": [
+    {
+      "id": 1116,
+      "name": "Milo",
+      "tick": 56636,
+      "cause": "hunger",
+      "age": 72
+    },
+    {
+      "id": 1140,
+      "name": "Nico",
+      "tick": 58167,
+      "cause": "hunger",
+      "age": 4
+    },
+    {
+      "id": 1137,
+      "name": "Ivy",
+      "tick": 58443,
+      "cause": "fever",
+      "age": 29
+    },
+    {
+      "id": 1131,
+      "name": "Kai",
+      "tick": 58932,
+      "cause": "hunger",
+      "age": 26
+    },
+    {
+      "id": 1134,
+      "name": "Yan",
+      "tick": 59170,
+      "cause": "hunger",
+      "age": 68
+    },
+    {
+      "id": 1138,
+      "name": "Basil",
+      "tick": 59687,
+      "cause": "hunger",
+      "age": 39
+    },
+    {
+      "id": 1121,
+      "name": "Ivo",
+      "tick": 60276,
+      "cause": "wolf attack",
+      "age": 12
+    },
+    {
+      "id": 1125,
+      "name": "Ines",
+      "tick": 61847,
+      "cause": "hunger",
+      "age": 29
+    },
+    {
+      "id": 1108,
+      "name": "Viktor",
+      "tick": 62025,
+      "cause": "hunger",
+      "age": 4
+    },
+    {
+      "id": 13792,
+      "name": "Wen",
+      "tick": 63595,
+      "cause": "hunger",
+      "age": 0
+    },
+    {
+      "id": 1139,
+      "name": "Thea",
+      "tick": 63931,
+      "cause": "hunger",
+      "age": 6
+    },
+    {
+      "id": 1149,
+      "name": "Lena",
+      "tick": 67069,
+      "cause": "hunger",
+      "age": 24
+    },
+    {
+      "id": 8979,
+      "name": "Yusuf",
+      "tick": 67855,
+      "cause": "hunger",
+      "age": 1
+    }
+  ],
+  "samples": 3135,
+  "pureChecks": 165,
+  "counts": {
+    "project plans already active at input:jar": 1,
+    "sampled project step:acquire": 64,
+    "project plans adopted:bricks": 3,
+    "sampled project step:collect": 32,
+    "sampled project step:deposit": 83,
+    "start:project operate:fire_bricks": 3,
+    "ending:project operate:success": 3,
+    "sampled project step:wait": 6,
+    "sampled project step:operate": 2,
+    "sampled operate step offered prepared": 2,
+    "sampled prepared step ranked first": 2,
+    "carts at end": 0
+  },
+  "stories": [
+    {
+      "event": "plan",
+      "tick": 89160,
+      "person": 1112,
+      "makes": "bricks",
+      "goal": "see 8 bricks through at the kiln for the site"
+    },
+    {
+      "event": "start",
+      "tick": 89429,
+      "person": 1112,
+      "recipe": "fire_bricks",
+      "ready": true,
+      "goal": "for my household’s house"
+    },
+    {
+      "event": "ending",
+      "tick": 89503,
+      "person": 1112,
+      "recipe": "fire_bricks",
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "event": "plan",
+      "tick": 92400,
+      "person": 1113,
+      "makes": "bricks",
+      "goal": "see 6 bricks through at the kiln for the site"
+    },
+    {
+      "event": "plan",
+      "tick": 98760,
+      "person": 1112,
+      "makes": "bricks",
+      "goal": "see 5 bricks through at the kiln for the site"
+    },
+    {
+      "event": "start",
+      "tick": 99113,
+      "person": 1113,
+      "recipe": "fire_bricks",
+      "ready": true,
+      "goal": "for my household’s house"
+    },
+    {
+      "event": "ending",
+      "tick": 99170,
+      "person": 1113,
+      "recipe": "fire_bricks",
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "event": "start",
+      "tick": 105665,
+      "person": 1112,
+      "recipe": "fire_bricks",
+      "ready": true,
+      "goal": "for my household’s house"
+    },
+    {
+      "event": "ending",
+      "tick": 105732,
+      "person": 1112,
+      "recipe": "fire_bricks",
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "timeBudget": {
+    "method": "Start-of-tick living-person occupancy; exclusive categories, actual endings, sampled batch-step opportunities. Critical exposure uses fixed bodily thresholds, not anticipatory thirst. Failure recovery is idle within 80 ticks of failure/interruption. Aborted travel may have achieved partial useful work; it is not automatically wasted time. Open work spells are right-censored.",
+    "livingTicks": 376200,
+    "totals": {
+      "sleep": 80704,
+      "eating_drinking_warming": 9115,
+      "travel": 163636,
+      "work": 32994,
+      "social_contact": 34098,
+      "leisure": 1925,
+      "waiting": 25558,
+      "failure_recovery": 440,
+      "rest": 24356,
+      "defence": 1852,
+      "idle": 1522
+    },
+    "criticalTicks": 22524,
+    "criticalByNeed": {
+      "warmth": 4723,
+      "safety": 1820,
+      "hunger": 8445,
+      "energy": 14216,
+      "thirst": 935
+    },
+    "starts": {
+      "rest": 247,
+      "socialize": 467,
+      "converse": 201,
+      "fuel_fire": 28,
+      "drink": 253,
+      "give": 66,
+      "eat": 177,
+      "sleep": 193,
+      "gather": 684,
+      "warm": 11,
+      "repair": 64,
+      "harvest": 81,
+      "explore": 15,
+      "tend": 20,
+      "withdraw": 26,
+      "flee": 122,
+      "haul": 16,
+      "deposit": 87,
+      "eat_store": 55,
+      "visit": 34,
+      "plant": 18,
+      "wander": 89,
+      "build": 12,
+      "craft": 7,
+      "operate": 9,
+      "defend": 3,
+      "fetch_water": 3,
+      "attend": 38,
+      "argue": 2,
+      "plan_site": 4,
+      "hunt": 1,
+      "till": 1
+    },
+    "endings": {
+      "rest|interrupted|something better came up": 136,
+      "socialize|failed|they are inside a different space": 35,
+      "sleep|success|rested": 143,
+      "gather|partial|nothing left": 90,
+      "converse|success|finished a conversation": 402,
+      "give|failed|they had no room to carry it": 22,
+      "rest|success|done": 61,
+      "drink|success|done": 223,
+      "eat|success|done": 173,
+      "fuel_fire|interrupted|a more urgent need (warmth)": 1,
+      "gather|interrupted|something better came up": 253,
+      "fuel_fire|success|done": 14,
+      "fuel_fire|interrupted|something better came up": 10,
+      "rest|success|daylight arrived": 26,
+      "sleep|success|morning came": 28,
+      "gather|failed|nothing left": 44,
+      "warm|interrupted|something better came up": 7,
+      "give|failed|they are not in the room I remembered": 4,
+      "harvest|success|done": 26,
+      "socialize|failed|Tomas was too busy to stop": 6,
+      "tend|success|done": 18,
+      "repair|partial|ran out of materials": 11,
+      "gather|interrupted|danger nearby": 66,
+      "give|success|done": 14,
+      "gather|success|done": 174,
+      "withdraw|success|done": 15,
+      "flee|interrupted|something better came up": 65,
+      "socialize|failed|Cora was already talking to someone": 2,
+      "deposit|success|done": 63,
+      "explore|interrupted|something better came up": 8,
+      "haul|success|done": 13,
+      "socialize|failed|Emre was too busy to stop": 8,
+      "socialize|interrupted|something better came up": 57,
+      "socialize|interrupted|danger nearby": 3,
+      "flee|success|done": 47,
+      "eat_store|success|done": 41,
+      "warm|success|done": 3,
+      "visit|success|done": 7,
+      "gather|success|felled the tree": 23,
+      "repair|interrupted|something better came up": 42,
+      "build|interrupted|something better came up": 9,
+      "socialize|failed|Theo was too busy to stop": 2,
+      "haul|interrupted|something better came up": 3,
+      "plant|success|done": 16,
+      "wander|interrupted|something better came up": 34,
+      "socialize|failed|Zia was too busy to stop": 3,
+      "harvest|failed|cannot carry any more": 45,
+      "socialize|failed|Cole was too busy to stop": 9,
+      "gather|failed|it is gone": 2,
+      "craft|success|done": 5,
+      "socialize|failed|Petra was too busy to stop": 6,
+      "withdraw|interrupted|something better came up": 6,
+      "operate|success|done": 3,
+      "operate|failed|it is burning; there is nothing to do but wait": 6,
+      "drink|interrupted|danger nearby": 13,
+      "deposit|interrupted|danger nearby": 5,
+      "socialize|failed|Eli was too busy to stop": 7,
+      "deposit|interrupted|something better came up": 18,
+      "give|interrupted|something better came up": 10,
+      "withdraw|failed|there was nothing to take": 5,
+      "plant|interrupted|something better came up": 2,
+      "socialize|failed|they walked away": 10,
+      "harvest|interrupted|something better came up": 6,
+      "visit|failed|Abel was not where I expected": 1,
+      "explore|success|done": 3,
+      "visit|failed|they are inside a different space": 10,
+      "sleep|interrupted|danger nearby": 5,
+      "sleep|partial|too cold to sleep": 5,
+      "defend|partial|it was already going": 1,
+      "socialize|failed|Dara had more pressing needs": 8,
+      "visit|failed|Dara was not where I expected": 2,
+      "drink|interrupted|something better came up": 10,
+      "socialize|failed|Mira was too busy to stop": 9,
+      "socialize|failed|Abel had more pressing needs": 2,
+      "repair|interrupted|danger nearby": 4,
+      "fetch_water|interrupted|something better came up": 1,
+      "rest|interrupted|danger nearby": 7,
+      "socialize|failed|Eli had more pressing needs": 5,
+      "fetch_water|success|done": 2,
+      "gather|interrupted|the observed need is too old to continue this journey": 1,
+      "socialize|failed|Ben was too busy to stop": 8,
+      "eat_store|failed|there is no food there": 1,
+      "wander|success|done": 51,
+      "visit|failed|Mira was not where I expected": 3,
+      "socialize|failed|Jax was too busy to stop": 9,
+      "gather|partial|someone else is already taking it": 13,
+      "socialize|failed|Alma was too busy to stop": 4,
+      "explore|interrupted|danger nearby": 3,
+      "visit|failed|Emre was not where I expected": 2,
+      "visit|failed|Theo was not where I expected": 1,
+      "socialize|failed|Arlo was too busy to stop": 10,
+      "socialize|failed|Talia was too busy to stop": 7,
+      "socialize|failed|Dara was too busy to stop": 3,
+      "socialize|failed|Edda had more pressing needs": 5,
+      "give|failed|Theo was not where I expected": 3,
+      "visit|failed|they needed something I did not have on me": 3,
+      "socialize|failed|Edda was busy": 1,
+      "attend|success|done": 30,
+      "attend|interrupted|something better came up": 7,
+      "socialize|failed|Edda was too busy to stop": 2,
+      "socialize|failed|could not find them": 1,
+      "craft|interrupted|something better came up": 2,
+      "fuel_fire|interrupted|danger nearby": 2,
+      "eat|interrupted|danger nearby": 3,
+      "defend|success|done": 1,
+      "sleep|interrupted|a more urgent need (warmth)": 6,
+      "give|failed|Vik was not where I expected": 1,
+      "give|failed|Edda was not where I expected": 2,
+      "eat_store|interrupted|something better came up": 9,
+      "socialize|failed|Theo was already talking to someone": 5,
+      "give|failed|they are inside a different space": 6,
+      "gather|failed|someone else is already taking it": 6,
+      "argue|success|done": 2,
+      "give|failed|Eli was not where I expected": 2,
+      "repair|partial|remaining repair materials are reserved": 5,
+      "wander|failed|took too long": 2,
+      "flee|interrupted|a more urgent need (hunger)": 5,
+      "give|failed|Dara was not where I expected": 1,
+      "flee|failed|took too long": 1,
+      "defend|failed|it would not give ground": 1,
+      "socialize|failed|Eli was already talking to someone": 5,
+      "socialize|failed|Arlo was already talking to someone": 1,
+      "sleep|interrupted|woken to be fed": 1,
+      "sleep|interrupted|a more urgent need (thirst)": 5,
+      "flee|interrupted|a more urgent need (thirst)": 2,
+      "rest|interrupted|a more urgent need (warmth)": 2,
+      "rest|interrupted|a more urgent need (energy)": 6,
+      "drink|failed|flood route stayed blocked after waiting": 1,
+      "visit|failed|Alma was not where I expected": 3,
+      "drink|interrupted|a more urgent need (energy)": 2,
+      "socialize|failed|Jax was asleep": 1,
+      "socialize|failed|Faye was already talking to someone": 1,
+      "socialize|failed|Mira was already talking to someone": 1,
+      "rest|interrupted|a more urgent need (hunger)": 5,
+      "socialize|failed|Ben had more pressing needs": 2,
+      "rest|interrupted|a more urgent need (thirst)": 1,
+      "socialize|failed|Mira had more pressing needs": 5,
+      "socialize|failed|Vik had more pressing needs": 3,
+      "plan_site|interrupted|something better came up": 1,
+      "socialize|failed|Edda was already talking to someone": 2,
+      "socialize|failed|Petra had more pressing needs": 2,
+      "socialize|failed|Talia was already talking to someone": 3,
+      "socialize|failed|Zia was already talking to someone": 1,
+      "socialize|failed|Faye had more pressing needs": 1,
+      "plan_site|success|done": 2,
+      "sleep|interrupted|a more urgent need (energy)": 6,
+      "flee|interrupted|a more urgent need (energy)": 2,
+      "gather|interrupted|a more urgent need (energy)": 2,
+      "eat|interrupted|a more urgent need (energy)": 1,
+      "sleep|interrupted|a more urgent need (hunger)": 5,
+      "gather|interrupted|a more urgent need (hunger)": 4,
+      "give|failed|no spare supplies remain for this hand-over": 1,
+      "eat_store|interrupted|a more urgent need (hunger)": 2,
+      "eat_store|interrupted|danger nearby": 2,
+      "socialize|failed|Theo had more pressing needs": 2,
+      "build|partial|no materials to work with (5 stone, 6 bricks)": 1,
+      "drink|interrupted|a more urgent need (hunger)": 3,
+      "socialize|failed|Jax had more pressing needs": 1,
+      "socialize|failed|Abel was too busy to stop": 1,
+      "visit|failed|Jax was not where I expected": 1,
+      "socialize|failed|Cole was already talking to someone": 1,
+      "gather|interrupted|a more urgent need (thirst)": 1,
+      "socialize|failed|Vik was already talking to someone": 1,
+      "gather|failed|no way to get there": 2,
+      "hunt|failed|cannot reach them": 1,
+      "repair|failed|nothing available to patch it with": 1,
+      "socialize|failed|Alma had more pressing needs": 1,
+      "tend|interrupted|something better came up": 2,
+      "socialize|failed|Vik was too busy to stop": 1,
+      "visit|failed|Cora was not where I expected": 1,
+      "socialize|failed|Emre was already talking to someone": 1,
+      "build|partial|no materials to work with (4 bricks)": 1,
+      "deposit|failed|that delivery is not a project prerequisite": 1,
+      "socialize|failed|Cora was too busy to stop": 1,
+      "wander|failed|no way to get there": 1,
+      "harvest|failed|someone else is harvesting it": 2,
+      "rest|partial|the project is no longer active": 1,
+      "till|success|done": 1,
+      "attend|failed|no way to get there": 1,
+      "wander|interrupted|danger nearby": 1,
+      "build|partial|no materials to work with (5 wood, 8 planks, 6 bricks)": 1,
+      "harvest|failed|it is not ripe": 1,
+      "harvest|failed|the field changed during work": 1
+    },
+    "blockedTicks": {
+      "waiting for 3 bricks": 102,
+      "waiting for 2 bricks": 19,
+      "Waiting for a safe route past remembered flood ground": 420,
+      "waiting for 1 bricks": 25,
+      "waiting for 6 stone, 6 bricks": 70,
+      "waiting for 5 stone, 6 bricks": 10,
+      "waiting for 4 bricks": 198,
+      "waiting for 5 wood, 8 planks, 6 bricks": 80
+    },
+    "failedTravel": {
+      "fuel_fire|interrupted|a more urgent need (warmth)": {
+        "endings": 1,
+        "travelTicks": 164,
+        "repeatEndings": 0
+      },
+      "rest|interrupted|something better came up": {
+        "endings": 38,
+        "travelTicks": 1395,
+        "repeatEndings": 16
+      },
+      "gather|interrupted|something better came up": {
+        "endings": 250,
+        "travelTicks": 24621,
+        "repeatEndings": 57
+      },
+      "fuel_fire|interrupted|something better came up": {
+        "endings": 10,
+        "travelTicks": 825,
+        "repeatEndings": 6
+      },
+      "gather|failed|nothing left": {
+        "endings": 44,
+        "travelTicks": 3627,
+        "repeatEndings": 7
+      },
+      "warm|interrupted|something better came up": {
+        "endings": 7,
+        "travelTicks": 276,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Tomas was too busy to stop": {
+        "endings": 6,
+        "travelTicks": 234,
+        "repeatEndings": 4
+      },
+      "gather|interrupted|danger nearby": {
+        "endings": 66,
+        "travelTicks": 3333,
+        "repeatEndings": 25
+      },
+      "flee|interrupted|something better came up": {
+        "endings": 65,
+        "travelTicks": 3517,
+        "repeatEndings": 44
+      },
+      "socialize|failed|Cora was already talking to someone": {
+        "endings": 2,
+        "travelTicks": 112,
+        "repeatEndings": 1
+      },
+      "explore|interrupted|something better came up": {
+        "endings": 8,
+        "travelTicks": 1370,
+        "repeatEndings": 3
+      },
+      "socialize|interrupted|something better came up": {
+        "endings": 57,
+        "travelTicks": 3164,
+        "repeatEndings": 22
+      },
+      "give|failed|they had no room to carry it": {
+        "endings": 20,
+        "travelTicks": 840,
+        "repeatEndings": 13
+      },
+      "socialize|interrupted|danger nearby": {
+        "endings": 3,
+        "travelTicks": 101,
+        "repeatEndings": 0
+      },
+      "socialize|failed|they are inside a different space": {
+        "endings": 4,
+        "travelTicks": 141,
+        "repeatEndings": 2
+      },
+      "repair|interrupted|something better came up": {
+        "endings": 39,
+        "travelTicks": 3363,
+        "repeatEndings": 18
+      },
+      "build|interrupted|something better came up": {
+        "endings": 7,
+        "travelTicks": 513,
+        "repeatEndings": 2
+      },
+      "socialize|failed|Theo was too busy to stop": {
+        "endings": 2,
+        "travelTicks": 22,
+        "repeatEndings": 0
+      },
+      "haul|interrupted|something better came up": {
+        "endings": 3,
+        "travelTicks": 378,
+        "repeatEndings": 1
+      },
+      "wander|interrupted|something better came up": {
+        "endings": 34,
+        "travelTicks": 3463,
+        "repeatEndings": 26
+      },
+      "socialize|failed|Zia was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 83,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Cole was too busy to stop": {
+        "endings": 9,
+        "travelTicks": 287,
+        "repeatEndings": 5
+      },
+      "gather|failed|it is gone": {
+        "endings": 2,
+        "travelTicks": 191,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Petra was too busy to stop": {
+        "endings": 6,
+        "travelTicks": 10,
+        "repeatEndings": 3
+      },
+      "withdraw|interrupted|something better came up": {
+        "endings": 6,
+        "travelTicks": 469,
+        "repeatEndings": 0
+      },
+      "drink|interrupted|danger nearby": {
+        "endings": 13,
+        "travelTicks": 345,
+        "repeatEndings": 0
+      },
+      "deposit|interrupted|danger nearby": {
+        "endings": 5,
+        "travelTicks": 270,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Emre was too busy to stop": {
+        "endings": 7,
+        "travelTicks": 173,
+        "repeatEndings": 5
+      },
+      "socialize|failed|Eli was too busy to stop": {
+        "endings": 7,
+        "travelTicks": 128,
+        "repeatEndings": 4
+      },
+      "deposit|interrupted|something better came up": {
+        "endings": 18,
+        "travelTicks": 1309,
+        "repeatEndings": 9
+      },
+      "give|interrupted|something better came up": {
+        "endings": 10,
+        "travelTicks": 899,
+        "repeatEndings": 6
+      },
+      "plant|interrupted|something better came up": {
+        "endings": 2,
+        "travelTicks": 195,
+        "repeatEndings": 1
+      },
+      "socialize|failed|they walked away": {
+        "endings": 10,
+        "travelTicks": 583,
+        "repeatEndings": 2
+      },
+      "harvest|interrupted|something better came up": {
+        "endings": 6,
+        "travelTicks": 817,
+        "repeatEndings": 3
+      },
+      "visit|failed|Abel was not where I expected": {
+        "endings": 1,
+        "travelTicks": 1,
+        "repeatEndings": 0
+      },
+      "sleep|interrupted|danger nearby": {
+        "endings": 5,
+        "travelTicks": 365,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Dara had more pressing needs": {
+        "endings": 8,
+        "travelTicks": 220,
+        "repeatEndings": 3
+      },
+      "harvest|failed|cannot carry any more": {
+        "endings": 35,
+        "travelTicks": 1250,
+        "repeatEndings": 28
+      },
+      "visit|failed|Dara was not where I expected": {
+        "endings": 2,
+        "travelTicks": 165,
+        "repeatEndings": 0
+      },
+      "drink|interrupted|something better came up": {
+        "endings": 10,
+        "travelTicks": 540,
+        "repeatEndings": 2
+      },
+      "socialize|failed|Mira was too busy to stop": {
+        "endings": 9,
+        "travelTicks": 168,
+        "repeatEndings": 3
+      },
+      "socialize|failed|Abel had more pressing needs": {
+        "endings": 2,
+        "travelTicks": 35,
+        "repeatEndings": 0
+      },
+      "repair|interrupted|danger nearby": {
+        "endings": 4,
+        "travelTicks": 197,
+        "repeatEndings": 3
+      },
+      "fetch_water|interrupted|something better came up": {
+        "endings": 1,
+        "travelTicks": 57,
+        "repeatEndings": 0
+      },
+      "rest|interrupted|danger nearby": {
+        "endings": 4,
+        "travelTicks": 573,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Eli had more pressing needs": {
+        "endings": 5,
+        "travelTicks": 92,
+        "repeatEndings": 3
+      },
+      "gather|interrupted|the observed need is too old to continue this journey": {
+        "endings": 1,
+        "travelTicks": 3,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Ben was too busy to stop": {
+        "endings": 8,
+        "travelTicks": 204,
+        "repeatEndings": 4
+      },
+      "eat_store|failed|there is no food there": {
+        "endings": 1,
+        "travelTicks": 41,
+        "repeatEndings": 0
+      },
+      "visit|failed|Mira was not where I expected": {
+        "endings": 2,
+        "travelTicks": 44,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Jax was too busy to stop": {
+        "endings": 9,
+        "travelTicks": 422,
+        "repeatEndings": 4
+      },
+      "socialize|failed|Alma was too busy to stop": {
+        "endings": 4,
+        "travelTicks": 46,
+        "repeatEndings": 0
+      },
+      "explore|interrupted|danger nearby": {
+        "endings": 3,
+        "travelTicks": 661,
+        "repeatEndings": 2
+      },
+      "visit|failed|Emre was not where I expected": {
+        "endings": 1,
+        "travelTicks": 65,
+        "repeatEndings": 0
+      },
+      "visit|failed|Theo was not where I expected": {
+        "endings": 1,
+        "travelTicks": 84,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Arlo was too busy to stop": {
+        "endings": 9,
+        "travelTicks": 204,
+        "repeatEndings": 3
+      },
+      "socialize|failed|Talia was too busy to stop": {
+        "endings": 6,
+        "travelTicks": 519,
+        "repeatEndings": 3
+      },
+      "socialize|failed|Dara was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 91,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Edda had more pressing needs": {
+        "endings": 5,
+        "travelTicks": 150,
+        "repeatEndings": 4
+      },
+      "give|failed|Theo was not where I expected": {
+        "endings": 3,
+        "travelTicks": 465,
+        "repeatEndings": 3
+      },
+      "visit|failed|they needed something I did not have on me": {
+        "endings": 3,
+        "travelTicks": 419,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Edda was busy": {
+        "endings": 1,
+        "travelTicks": 18,
+        "repeatEndings": 0
+      },
+      "attend|interrupted|something better came up": {
+        "endings": 7,
+        "travelTicks": 703,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Edda was too busy to stop": {
+        "endings": 2,
+        "travelTicks": 12,
+        "repeatEndings": 0
+      },
+      "socialize|failed|could not find them": {
+        "endings": 1,
+        "travelTicks": 155,
+        "repeatEndings": 1
+      },
+      "craft|interrupted|something better came up": {
+        "endings": 2,
+        "travelTicks": 202,
+        "repeatEndings": 0
+      },
+      "fuel_fire|interrupted|danger nearby": {
+        "endings": 2,
+        "travelTicks": 43,
+        "repeatEndings": 1
+      },
+      "sleep|interrupted|a more urgent need (warmth)": {
+        "endings": 6,
+        "travelTicks": 1404,
+        "repeatEndings": 1
+      },
+      "give|failed|Vik was not where I expected": {
+        "endings": 1,
+        "travelTicks": 63,
+        "repeatEndings": 0
+      },
+      "give|failed|Edda was not where I expected": {
+        "endings": 2,
+        "travelTicks": 69,
+        "repeatEndings": 1
+      },
+      "eat_store|interrupted|something better came up": {
+        "endings": 9,
+        "travelTicks": 747,
+        "repeatEndings": 2
+      },
+      "socialize|failed|Theo was already talking to someone": {
+        "endings": 5,
+        "travelTicks": 105,
+        "repeatEndings": 3
+      },
+      "give|failed|they are inside a different space": {
+        "endings": 2,
+        "travelTicks": 62,
+        "repeatEndings": 2
+      },
+      "gather|failed|someone else is already taking it": {
+        "endings": 6,
+        "travelTicks": 528,
+        "repeatEndings": 0
+      },
+      "give|failed|Eli was not where I expected": {
+        "endings": 2,
+        "travelTicks": 155,
+        "repeatEndings": 1
+      },
+      "wander|failed|took too long": {
+        "endings": 2,
+        "travelTicks": 560,
+        "repeatEndings": 2
+      },
+      "flee|interrupted|a more urgent need (hunger)": {
+        "endings": 5,
+        "travelTicks": 335,
+        "repeatEndings": 3
+      },
+      "give|failed|Dara was not where I expected": {
+        "endings": 1,
+        "travelTicks": 83,
+        "repeatEndings": 0
+      },
+      "flee|failed|took too long": {
+        "endings": 1,
+        "travelTicks": 75,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Eli was already talking to someone": {
+        "endings": 5,
+        "travelTicks": 241,
+        "repeatEndings": 3
+      },
+      "socialize|failed|Arlo was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 11,
+        "repeatEndings": 0
+      },
+      "sleep|interrupted|woken to be fed": {
+        "endings": 1,
+        "travelTicks": 147,
+        "repeatEndings": 1
+      },
+      "sleep|interrupted|a more urgent need (thirst)": {
+        "endings": 4,
+        "travelTicks": 402,
+        "repeatEndings": 2
+      },
+      "flee|interrupted|a more urgent need (thirst)": {
+        "endings": 2,
+        "travelTicks": 53,
+        "repeatEndings": 2
+      },
+      "rest|interrupted|a more urgent need (warmth)": {
+        "endings": 2,
+        "travelTicks": 1231,
+        "repeatEndings": 1
+      },
+      "rest|interrupted|a more urgent need (energy)": {
+        "endings": 5,
+        "travelTicks": 1815,
+        "repeatEndings": 3
+      },
+      "drink|interrupted|a more urgent need (energy)": {
+        "endings": 2,
+        "travelTicks": 157,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Jax was asleep": {
+        "endings": 1,
+        "travelTicks": 44,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Faye was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 79,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Mira was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 17,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Ben had more pressing needs": {
+        "endings": 2,
+        "travelTicks": 39,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Mira had more pressing needs": {
+        "endings": 4,
+        "travelTicks": 177,
+        "repeatEndings": 3
+      },
+      "socialize|failed|Vik had more pressing needs": {
+        "endings": 3,
+        "travelTicks": 106,
+        "repeatEndings": 1
+      },
+      "plan_site|interrupted|something better came up": {
+        "endings": 1,
+        "travelTicks": 160,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Edda was already talking to someone": {
+        "endings": 2,
+        "travelTicks": 41,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Petra had more pressing needs": {
+        "endings": 2,
+        "travelTicks": 49,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Talia was already talking to someone": {
+        "endings": 3,
+        "travelTicks": 102,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Zia was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 56,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Faye had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 13,
+        "repeatEndings": 1
+      },
+      "sleep|interrupted|a more urgent need (energy)": {
+        "endings": 6,
+        "travelTicks": 773,
+        "repeatEndings": 4
+      },
+      "flee|interrupted|a more urgent need (energy)": {
+        "endings": 2,
+        "travelTicks": 155,
+        "repeatEndings": 2
+      },
+      "gather|interrupted|a more urgent need (energy)": {
+        "endings": 2,
+        "travelTicks": 524,
+        "repeatEndings": 0
+      },
+      "sleep|interrupted|a more urgent need (hunger)": {
+        "endings": 5,
+        "travelTicks": 1308,
+        "repeatEndings": 3
+      },
+      "gather|interrupted|a more urgent need (hunger)": {
+        "endings": 4,
+        "travelTicks": 338,
+        "repeatEndings": 3
+      },
+      "give|failed|no spare supplies remain for this hand-over": {
+        "endings": 1,
+        "travelTicks": 9,
+        "repeatEndings": 1
+      },
+      "eat_store|interrupted|a more urgent need (hunger)": {
+        "endings": 2,
+        "travelTicks": 153,
+        "repeatEndings": 0
+      },
+      "eat_store|interrupted|danger nearby": {
+        "endings": 2,
+        "travelTicks": 44,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Theo had more pressing needs": {
+        "endings": 2,
+        "travelTicks": 41,
+        "repeatEndings": 0
+      },
+      "drink|interrupted|a more urgent need (hunger)": {
+        "endings": 3,
+        "travelTicks": 393,
+        "repeatEndings": 2
+      },
+      "socialize|failed|Jax had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 42,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Abel was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 5,
+        "repeatEndings": 0
+      },
+      "operate|failed|it is burning; there is nothing to do but wait": {
+        "endings": 2,
+        "travelTicks": 182,
+        "repeatEndings": 1
+      },
+      "visit|failed|Jax was not where I expected": {
+        "endings": 1,
+        "travelTicks": 47,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Cole was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 10,
+        "repeatEndings": 1
+      },
+      "visit|failed|Alma was not where I expected": {
+        "endings": 2,
+        "travelTicks": 76,
+        "repeatEndings": 1
+      },
+      "gather|interrupted|a more urgent need (thirst)": {
+        "endings": 1,
+        "travelTicks": 127,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Vik was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 73,
+        "repeatEndings": 0
+      },
+      "hunt|failed|cannot reach them": {
+        "endings": 1,
+        "travelTicks": 49,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Alma had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 45,
+        "repeatEndings": 0
+      },
+      "tend|interrupted|something better came up": {
+        "endings": 2,
+        "travelTicks": 90,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Vik was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 19,
+        "repeatEndings": 0
+      },
+      "visit|failed|Cora was not where I expected": {
+        "endings": 1,
+        "travelTicks": 49,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Emre was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 24,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Cora was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 7,
+        "repeatEndings": 0
+      },
+      "harvest|failed|someone else is harvesting it": {
+        "endings": 2,
+        "travelTicks": 100,
+        "repeatEndings": 2
+      },
+      "give|failed|they are not in the room I remembered": {
+        "endings": 1,
+        "travelTicks": 162,
+        "repeatEndings": 1
+      },
+      "withdraw|failed|there was nothing to take": {
+        "endings": 4,
+        "travelTicks": 241,
+        "repeatEndings": 2
+      },
+      "wander|interrupted|danger nearby": {
+        "endings": 1,
+        "travelTicks": 223,
+        "repeatEndings": 1
+      },
+      "harvest|failed|it is not ripe": {
+        "endings": 1,
+        "travelTicks": 27,
+        "repeatEndings": 1
+      },
+      "harvest|failed|the field changed during work": {
+        "endings": 1,
+        "travelTicks": 8,
+        "repeatEndings": 1
+      }
+    },
+    "completedWorkSpells": {
+      "1-29": 415,
+      "30-119": 295,
+      "120-299": 49,
+      "300+": 3
+    },
+    "openWorkSpells": [
+      {
+        "activity": 33534,
+        "ticks": 49
+      },
+      {
+        "activity": 33518,
+        "ticks": 16
+      },
+      {
+        "activity": 33554,
+        "ticks": 3
+      }
+    ],
+    "sampleCounts": {
+      "activeBatch": 0,
+      "stepOffered": 0,
+      "stepEligible": 0,
+      "stepRankedFirst": 0,
+      "noProductionMargin": 0,
+      "omittedRows": 0
+    },
+    "people": {
+      "1106": {
+        "name": "Mira",
+        "hh": 1103,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 3984,
+          "eating_drinking_warming": 662,
+          "travel": 9248,
+          "work": 1484,
+          "social_contact": 1196,
+          "leisure": 0,
+          "waiting": 497,
+          "failure_recovery": 17,
+          "rest": 2504,
+          "defence": 133,
+          "idle": 75
+        },
+        "criticalTicks": 4426
+      },
+      "1107": {
+        "name": "Emre",
+        "hh": 1103,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4818,
+          "eating_drinking_warming": 450,
+          "travel": 6868,
+          "work": 2822,
+          "social_contact": 2063,
+          "leisure": 0,
+          "waiting": 1281,
+          "failure_recovery": 18,
+          "rest": 1401,
+          "defence": 0,
+          "idle": 79
+        },
+        "criticalTicks": 2180
+      },
+      "1109": {
+        "name": "Theo",
+        "hh": 1103,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4266,
+          "eating_drinking_warming": 601,
+          "travel": 8817,
+          "work": 1409,
+          "social_contact": 2829,
+          "leisure": 29,
+          "waiting": 1304,
+          "failure_recovery": 42,
+          "rest": 410,
+          "defence": 30,
+          "idle": 63
+        },
+        "criticalTicks": 536
+      },
+      "1112": {
+        "name": "Ben",
+        "hh": 1110,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4222,
+          "eating_drinking_warming": 405,
+          "travel": 8904,
+          "work": 1872,
+          "social_contact": 1432,
+          "leisure": 0,
+          "waiting": 1347,
+          "failure_recovery": 25,
+          "rest": 1394,
+          "defence": 94,
+          "idle": 105
+        },
+        "criticalTicks": 234
+      },
+      "1113": {
+        "name": "Zia",
+        "hh": 1110,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4355,
+          "eating_drinking_warming": 384,
+          "travel": 8486,
+          "work": 1505,
+          "social_contact": 2246,
+          "leisure": 0,
+          "waiting": 2332,
+          "failure_recovery": 15,
+          "rest": 391,
+          "defence": 0,
+          "idle": 86
+        },
+        "criticalTicks": 0
+      },
+      "1119": {
+        "name": "Cora",
+        "hh": 1117,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4121,
+          "eating_drinking_warming": 617,
+          "travel": 9102,
+          "work": 1604,
+          "social_contact": 1683,
+          "leisure": 0,
+          "waiting": 140,
+          "failure_recovery": 25,
+          "rest": 2184,
+          "defence": 247,
+          "idle": 77
+        },
+        "criticalTicks": 956
+      },
+      "1120": {
+        "name": "Abel",
+        "hh": 1117,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4900,
+          "eating_drinking_warming": 446,
+          "travel": 9177,
+          "work": 2168,
+          "social_contact": 966,
+          "leisure": 0,
+          "waiting": 1298,
+          "failure_recovery": 25,
+          "rest": 298,
+          "defence": 444,
+          "idle": 78
+        },
+        "criticalTicks": 368
+      },
+      "1122": {
+        "name": "Eli",
+        "hh": 1117,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 3420,
+          "eating_drinking_warming": 319,
+          "travel": 8609,
+          "work": 1093,
+          "social_contact": 2898,
+          "leisure": 304,
+          "waiting": 2288,
+          "failure_recovery": 21,
+          "rest": 759,
+          "defence": 25,
+          "idle": 64
+        },
+        "criticalTicks": 0
+      },
+      "1128": {
+        "name": "Tomas",
+        "hh": 1126,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4098,
+          "eating_drinking_warming": 786,
+          "travel": 7915,
+          "work": 2256,
+          "social_contact": 1931,
+          "leisure": 0,
+          "waiting": 1609,
+          "failure_recovery": 4,
+          "rest": 993,
+          "defence": 109,
+          "idle": 99
+        },
+        "criticalTicks": 1190
+      },
+      "1132": {
+        "name": "Petra",
+        "hh": 1129,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4937,
+          "eating_drinking_warming": 435,
+          "travel": 8745,
+          "work": 1629,
+          "social_contact": 1368,
+          "leisure": 0,
+          "waiting": 1157,
+          "failure_recovery": 28,
+          "rest": 1081,
+          "defence": 334,
+          "idle": 86
+        },
+        "criticalTicks": 1220
+      },
+      "1135": {
+        "name": "Cole",
+        "hh": 1133,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4512,
+          "eating_drinking_warming": 726,
+          "travel": 8651,
+          "work": 1746,
+          "social_contact": 1647,
+          "leisure": 0,
+          "waiting": 1771,
+          "failure_recovery": 27,
+          "rest": 622,
+          "defence": 0,
+          "idle": 98
+        },
+        "criticalTicks": 88
+      },
+      "1142": {
+        "name": "Talia",
+        "hh": 1141,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 5129,
+          "eating_drinking_warming": 573,
+          "travel": 8515,
+          "work": 2104,
+          "social_contact": 1899,
+          "leisure": 0,
+          "waiting": 1222,
+          "failure_recovery": 36,
+          "rest": 234,
+          "defence": 0,
+          "idle": 88
+        },
+        "criticalTicks": 0
+      },
+      "1144": {
+        "name": "Alma",
+        "hh": 1143,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4514,
+          "eating_drinking_warming": 268,
+          "travel": 10147,
+          "work": 1035,
+          "social_contact": 1273,
+          "leisure": 0,
+          "waiting": 0,
+          "failure_recovery": 28,
+          "rest": 2458,
+          "defence": 20,
+          "idle": 57
+        },
+        "criticalTicks": 3301
+      },
+      "1145": {
+        "name": "Jax",
+        "hh": 1143,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 5207,
+          "eating_drinking_warming": 413,
+          "travel": 9953,
+          "work": 1866,
+          "social_contact": 1100,
+          "leisure": 0,
+          "waiting": 140,
+          "failure_recovery": 33,
+          "rest": 966,
+          "defence": 29,
+          "idle": 93
+        },
+        "criticalTicks": 1100
+      },
+      "1146": {
+        "name": "Edda",
+        "hh": 1143,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 3451,
+          "eating_drinking_warming": 326,
+          "travel": 8604,
+          "work": 852,
+          "social_contact": 2036,
+          "leisure": 646,
+          "waiting": 1670,
+          "failure_recovery": 20,
+          "rest": 2001,
+          "defence": 111,
+          "idle": 83
+        },
+        "criticalTicks": 326
+      },
+      "1147": {
+        "name": "Faye",
+        "hh": 1143,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 3272,
+          "eating_drinking_warming": 335,
+          "travel": 7034,
+          "work": 817,
+          "social_contact": 2564,
+          "leisure": 725,
+          "waiting": 2855,
+          "failure_recovery": 17,
+          "rest": 2109,
+          "defence": 0,
+          "idle": 72
+        },
+        "criticalTicks": 393
+      },
+      "1150": {
+        "name": "Arlo",
+        "hh": 1148,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 4696,
+          "eating_drinking_warming": 481,
+          "travel": 7550,
+          "work": 2527,
+          "social_contact": 1782,
+          "leisure": 0,
+          "waiting": 1837,
+          "failure_recovery": 24,
+          "rest": 810,
+          "defence": 0,
+          "idle": 93
+        },
+        "criticalTicks": 0
+      },
+      "16615": {
+        "name": "Dara",
+        "hh": 1117,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 3741,
+          "eating_drinking_warming": 442,
+          "travel": 9567,
+          "work": 2077,
+          "social_contact": 1598,
+          "leisure": 85,
+          "waiting": 456,
+          "failure_recovery": 23,
+          "rest": 1501,
+          "defence": 246,
+          "idle": 64
+        },
+        "criticalTicks": 3802
+      },
+      "21282": {
+        "name": "Vik",
+        "hh": 1143,
+        "ticks": 19800,
+        "categories": {
+          "sleep": 3061,
+          "eating_drinking_warming": 446,
+          "travel": 7744,
+          "work": 2128,
+          "social_contact": 1587,
+          "leisure": 136,
+          "waiting": 2354,
+          "failure_recovery": 12,
+          "rest": 2240,
+          "defence": 30,
+          "idle": 62
+        },
+        "criticalTicks": 2404
+      }
+    },
+    "plans": [
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 27083,
+        "kind": "stock",
+        "makes": "",
+        "since": 78788,
+        "until": 83588,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 96059,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 27562,
+        "kind": "night",
+        "makes": "",
+        "since": 80304,
+        "until": 81720,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 96059,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 27941,
+        "kind": "night",
+        "makes": "",
+        "since": 82388,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "step": "",
+        "lastSeen": 96059,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 28105,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 83605,
+        "until": 88405,
+        "status": "dropped",
+        "reason": "never got round to the hoe (still short 1 wood)",
+        "step": "",
+        "lastSeen": 96059,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 28892,
+        "kind": "night",
+        "makes": "",
+        "since": 87221,
+        "until": 88920,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 101611,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "failed|nothing left": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 27945,
+        "kind": "night",
+        "makes": "",
+        "since": 82390,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 94913,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 28266,
+        "kind": "stock",
+        "makes": "",
+        "since": 84438,
+        "until": 89238,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 94913,
+        "starts": 4,
+        "ends": {
+          "success|done": 1,
+          "failed|nothing left": 1,
+          "partial|nothing left": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 28460,
+        "kind": "night",
+        "makes": "",
+        "since": 85007,
+        "until": 86520,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 94913,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 28904,
+        "kind": "night",
+        "makes": "",
+        "since": 87252,
+        "until": 88920,
+        "status": "done",
+        "reason": "under shelter for 765 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 94913,
+        "starts": 0,
+        "ends": {
+          "success|morning came": 1
+        }
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 27582,
+        "kind": "night",
+        "makes": "",
+        "since": 80359,
+        "until": 81720,
+        "status": "dropped",
+        "reason": "only 154 ticks under shelter; the night mostly passed without it",
+        "step": "",
+        "lastSeen": 92450,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 27774,
+        "kind": "repair",
+        "makes": "",
+        "since": 81796,
+        "until": 86596,
+        "status": "done",
+        "reason": "mended it themselves (put back 56 of its condition)",
+        "step": "",
+        "lastSeen": 92450,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 28037,
+        "kind": "night",
+        "makes": "",
+        "since": 82828,
+        "until": 84120,
+        "status": "done",
+        "reason": "under shelter for 480 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 92450,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 28194,
+        "kind": "stock",
+        "makes": "",
+        "since": 84180,
+        "until": 88980,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 1 of 8)",
+        "step": "",
+        "lastSeen": 92450,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 26187,
+        "kind": "tool",
+        "makes": "axe",
+        "since": 75019,
+        "until": 79819,
+        "status": "dropped",
+        "reason": "had the makings for the axe but never sat down to it",
+        "step": "",
+        "lastSeen": 93102,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 26240,
+        "kind": "night",
+        "makes": "",
+        "since": 75220,
+        "until": 76920,
+        "status": "done",
+        "reason": "under shelter for 961 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 93102,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 27403,
+        "kind": "stock",
+        "makes": "",
+        "since": 79878,
+        "until": 84678,
+        "status": "dropped",
+        "reason": "put 2 units by, but the store is at 2 of 8 and the time is up",
+        "step": "",
+        "lastSeen": 93102,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 27575,
+        "kind": "night",
+        "makes": "",
+        "since": 80343,
+        "until": 81720,
+        "status": "done",
+        "reason": "under shelter for 990 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 93102,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 27996,
+        "kind": "night",
+        "makes": "",
+        "since": 82639,
+        "until": 84120,
+        "status": "done",
+        "reason": "under shelter for 686 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 102211,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 28361,
+        "kind": "tool",
+        "makes": "axe",
+        "since": 84683,
+        "until": 89483,
+        "status": "done",
+        "reason": "made the axe",
+        "step": "",
+        "lastSeen": 102211,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 28927,
+        "kind": "stock",
+        "makes": "",
+        "since": 87382,
+        "until": 92182,
+        "status": "dropped",
+        "reason": "put 3 units by, but the store is at 1 of 8 and the time is up",
+        "step": "",
+        "lastSeen": 102211,
+        "starts": 7,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "partial|nothing left": 3,
+          "failed|nothing left": 1,
+          "success|done": 1,
+          "partial|someone else is already taking it": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 26204,
+        "kind": "stock",
+        "makes": "",
+        "since": 75080,
+        "until": 79880,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 90110,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 26296,
+        "kind": "night",
+        "makes": "",
+        "since": 75403,
+        "until": 76920,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 90110,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 27408,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 79887,
+        "until": 84687,
+        "status": "dropped",
+        "reason": "never got round to the hoe (still short 1 stone)",
+        "step": "",
+        "lastSeen": 90110,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 27441,
+        "kind": "night",
+        "makes": "",
+        "since": 79977,
+        "until": 81720,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 90110,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 27958,
+        "kind": "night",
+        "makes": "",
+        "since": 82465,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 95236,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 28441,
+        "kind": "night",
+        "makes": "",
+        "since": 84948,
+        "until": 86520,
+        "status": "done",
+        "reason": "under shelter for 731 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 95236,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 28477,
+        "kind": "stock",
+        "makes": "",
+        "since": 85090,
+        "until": 89890,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 95236,
+        "starts": 3,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 27937,
+        "kind": "night",
+        "makes": "",
+        "since": 82384,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 94612,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 27967,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 82491,
+        "until": 87291,
+        "status": "done",
+        "reason": "made the spear",
+        "step": "",
+        "lastSeen": 94612,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 28789,
+        "kind": "stock",
+        "makes": "",
+        "since": 86837,
+        "until": 91637,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 94612,
+        "starts": 9,
+        "ends": {
+          "partial|nothing left": 3,
+          "interrupted|danger nearby": 1,
+          "interrupted|something better came up": 3,
+          "failed|nothing left": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 28906,
+        "kind": "night",
+        "makes": "",
+        "since": 87260,
+        "until": 88920,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 94612,
+        "starts": 1,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 26352,
+        "kind": "night",
+        "makes": "",
+        "since": 75632,
+        "until": 76920,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 89601,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 27193,
+        "kind": "tool",
+        "makes": "axe",
+        "since": 79264,
+        "until": 84064,
+        "status": "dropped",
+        "reason": "had the makings for the axe but never sat down to it",
+        "step": "",
+        "lastSeen": 89601,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 27962,
+        "kind": "night",
+        "makes": "",
+        "since": 82480,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "step": "",
+        "lastSeen": 89601,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 28175,
+        "kind": "stock",
+        "makes": "",
+        "since": 84074,
+        "until": 88874,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 89601,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 28395,
+        "kind": "night",
+        "makes": "",
+        "since": 84797,
+        "until": 86520,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 99283,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 28908,
+        "kind": "night",
+        "makes": "",
+        "since": 87266,
+        "until": 88920,
+        "status": "done",
+        "reason": "under shelter for 755 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 99283,
+        "starts": 3,
+        "ends": {
+          "success|rested": 2,
+          "success|done": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 26588,
+        "kind": "stock",
+        "makes": "",
+        "since": 76909,
+        "until": 81709,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 89645,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 27446,
+        "kind": "night",
+        "makes": "",
+        "since": 79990,
+        "until": 81720,
+        "status": "done",
+        "reason": "under shelter for 526 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 89645,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 27768,
+        "kind": "batch",
+        "makes": "jar",
+        "since": 81775,
+        "until": 88975,
+        "status": "dropped",
+        "reason": "the time is up (was going to acquire clay for jar)",
+        "step": "",
+        "lastSeen": 89645,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 28130,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 83828,
+        "until": 88628,
+        "status": "dropped",
+        "reason": "never got round to the spear (still short 1 stone)",
+        "step": "",
+        "lastSeen": 89645,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 28405,
+        "kind": "night",
+        "makes": "",
+        "since": 84816,
+        "until": 86520,
+        "status": "done",
+        "reason": "under shelter for 282 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 100720,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 28902,
+        "kind": "night",
+        "makes": "",
+        "since": 87250,
+        "until": 88920,
+        "status": "done",
+        "reason": "under shelter for 775 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 100720,
+        "starts": 1,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 26229,
+        "kind": "night",
+        "makes": "",
+        "since": 75174,
+        "until": 76920,
+        "status": "done",
+        "reason": "under shelter for 848 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 94739,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 27366,
+        "kind": "repair",
+        "makes": "",
+        "since": 79787,
+        "until": 84587,
+        "status": "dropped",
+        "reason": "had what it needed but never got to the roof",
+        "step": "",
+        "lastSeen": 94739,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 27579,
+        "kind": "night",
+        "makes": "",
+        "since": 80351,
+        "until": 81720,
+        "status": "done",
+        "reason": "under shelter for 572 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 94739,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 27970,
+        "kind": "night",
+        "makes": "",
+        "since": 82493,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 94739,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 28363,
+        "kind": "stock",
+        "makes": "",
+        "since": 84683,
+        "until": 89483,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 104264,
+        "starts": 3,
+        "ends": {
+          "partial|nothing left": 1,
+          "interrupted|something better came up": 1,
+          "failed|cannot carry any more": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 26913,
+        "kind": "night",
+        "makes": "",
+        "since": 77696,
+        "until": 79320,
+        "status": "done",
+        "reason": "under shelter for 720 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 92477,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 27029,
+        "kind": "stock",
+        "makes": "",
+        "since": 78524,
+        "until": 83324,
+        "status": "done",
+        "reason": "put 8 units of food by; the store holds 8",
+        "step": "",
+        "lastSeen": 92477,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 27556,
+        "kind": "tool",
+        "makes": "hammer",
+        "since": 80291,
+        "until": 85091,
+        "status": "dropped",
+        "reason": "had the makings for the hammer but never sat down to it",
+        "step": "",
+        "lastSeen": 92477,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 28575,
+        "kind": "stock",
+        "makes": "",
+        "since": 86041,
+        "until": 90841,
+        "status": "done",
+        "reason": "put 5 units of food by; the store holds 5",
+        "step": "",
+        "lastSeen": 92477,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 28855,
+        "kind": "repair",
+        "makes": "",
+        "since": 87099,
+        "until": 91899,
+        "status": "done",
+        "reason": "mended it themselves (put back 28 of its condition)",
+        "step": "",
+        "lastSeen": 98277,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 28989,
+        "kind": "tool",
+        "makes": "hammer",
+        "since": 87660,
+        "until": 92460,
+        "status": "dropped",
+        "reason": "never got round to the hammer (still short 2 stone)",
+        "step": "",
+        "lastSeen": 98277,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 26299,
+        "kind": "batch",
+        "makes": "bricks",
+        "since": 75417,
+        "until": 82617,
+        "status": "dropped",
+        "reason": "the site the bricks were for is finished or gone",
+        "step": "",
+        "lastSeen": 89704,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 26919,
+        "kind": "stock",
+        "makes": "",
+        "since": 77710,
+        "until": 82510,
+        "status": "done",
+        "reason": "put 5 units of food by; the store holds 14",
+        "step": "",
+        "lastSeen": 89704,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 27461,
+        "kind": "night",
+        "makes": "",
+        "since": 80038,
+        "until": 81720,
+        "status": "done",
+        "reason": "under shelter for 963 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 89704,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 27470,
+        "kind": "batch",
+        "makes": "jar",
+        "since": 80058,
+        "until": 87258,
+        "status": "dropped",
+        "reason": "the time is up (was going to bring clay to the workshop for jar)",
+        "step": "",
+        "lastSeen": 89704,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 27749,
+        "kind": "repair",
+        "makes": "",
+        "since": 81702,
+        "until": 86502,
+        "status": "done",
+        "reason": "mended it themselves (put back 28 of its condition)",
+        "step": "",
+        "lastSeen": 95249,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 27981,
+        "kind": "night",
+        "makes": "",
+        "since": 82570,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 95249,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 28149,
+        "kind": "stock",
+        "makes": "",
+        "since": 83929,
+        "until": 88729,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 95249,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 27438,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 79975,
+        "until": 84775,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 94772,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 27453,
+        "kind": "night",
+        "makes": "",
+        "since": 80008,
+        "until": 81720,
+        "status": "done",
+        "reason": "under shelter for 1262 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 94772,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 27987,
+        "kind": "night",
+        "makes": "",
+        "since": 82600,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 94772,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 28493,
+        "kind": "night",
+        "makes": "",
+        "since": 85150,
+        "until": 86520,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 94772,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 28558,
+        "kind": "stock",
+        "makes": "",
+        "since": 85900,
+        "until": 90700,
+        "status": "dropped",
+        "reason": "put 9 units by, but the store is at 0 of 12 and the time is up",
+        "step": "",
+        "lastSeen": 101581,
+        "starts": 4,
+        "ends": {
+          "partial|nothing left": 1,
+          "interrupted|danger nearby": 2,
+          "success|done": 1,
+          "failed|nothing left": 1
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 28899,
+        "kind": "night",
+        "makes": "",
+        "since": 87239,
+        "until": 88920,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 101581,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 26901,
+        "kind": "night",
+        "makes": "",
+        "since": 77672,
+        "until": 79320,
+        "status": "done",
+        "reason": "under shelter for 325 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 88681,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 26958,
+        "kind": "tool",
+        "makes": "basket",
+        "since": 77852,
+        "until": 82652,
+        "status": "dropped",
+        "reason": "had the makings for the basket but never sat down to it",
+        "step": "",
+        "lastSeen": 88681,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 27493,
+        "kind": "night",
+        "makes": "",
+        "since": 80117,
+        "until": 81720,
+        "status": "dropped",
+        "reason": "only 141 ticks under shelter; the night mostly passed without it",
+        "step": "",
+        "lastSeen": 88681,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 27978,
+        "kind": "night",
+        "makes": "",
+        "since": 82558,
+        "until": 84120,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 88681,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 28043,
+        "kind": "stock",
+        "makes": "",
+        "since": 82847,
+        "until": 87647,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 98551,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 28414,
+        "kind": "night",
+        "makes": "",
+        "since": 84840,
+        "until": 86520,
+        "status": "done",
+        "reason": "under shelter for 497 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 98551,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 28885,
+        "kind": "night",
+        "makes": "",
+        "since": 87199,
+        "until": 88920,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 98551,
+        "starts": 1,
+        "ends": {
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 29012,
+        "kind": "tool",
+        "makes": "basket",
+        "since": 88200,
+        "until": 93000,
+        "status": "done",
+        "reason": "made the basket",
+        "step": "",
+        "lastSeen": 98551,
+        "starts": 2,
+        "ends": {
+          "success|felled the tree": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 29040,
+        "kind": "stock",
+        "makes": "",
+        "since": 88465,
+        "until": 93265,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 101611,
+        "starts": 9,
+        "ends": {
+          "interrupted|something better came up": 3,
+          "partial|nothing left": 2,
+          "success|done": 3,
+          "failed|nothing left": 1
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 29130,
+        "kind": "stock",
+        "makes": "",
+        "since": 88874,
+        "until": 93674,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 100720,
+        "starts": 7,
+        "ends": {
+          "success|done": 4,
+          "interrupted|danger nearby": 2,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 29182,
+        "kind": "batch",
+        "makes": "bricks",
+        "since": 89045,
+        "until": 96245,
+        "status": "dropped",
+        "reason": "the time is up (was going to bring clay to the workshop for bricks)",
+        "step": "",
+        "lastSeen": 98843,
+        "starts": 10,
+        "ends": {
+          "success|done": 6,
+          "interrupted|something better came up": 3,
+          "failed|there was nothing to take": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 29192,
+        "kind": "repair",
+        "makes": "",
+        "since": 89112,
+        "until": 93912,
+        "status": "done",
+        "reason": "mended it themselves (put back 28 of its condition)",
+        "step": "",
+        "lastSeen": 99283,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "partial|ran out of materials": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 29243,
+        "kind": "repair",
+        "makes": "",
+        "since": 89283,
+        "until": 94083,
+        "status": "dropped",
+        "reason": "worked on it but it is still not sound (put back 28, it is at 55)",
+        "step": "",
+        "lastSeen": 105057,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1,
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 29270,
+        "kind": "repair",
+        "makes": "",
+        "since": 89336,
+        "until": 94136,
+        "status": "done",
+        "reason": "mended it themselves (put back 56 of its condition)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 4,
+        "ends": {
+          "success|felled the tree": 1,
+          "interrupted|something better came up": 4
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 29290,
+        "kind": "repair",
+        "makes": "",
+        "since": 89444,
+        "until": 94244,
+        "status": "done",
+        "reason": "mended it themselves (put back 28 of its condition)",
+        "step": "",
+        "lastSeen": 95249,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "partial|ran out of materials": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 29300,
+        "kind": "tool",
+        "makes": "axe",
+        "since": 89474,
+        "until": 94274,
+        "status": "done",
+        "reason": "made the axe",
+        "step": "",
+        "lastSeen": 99283,
+        "starts": 4,
+        "ends": {
+          "failed|it is gone": 1,
+          "interrupted|something better came up": 2,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 29324,
+        "kind": "repair",
+        "makes": "",
+        "since": 89530,
+        "until": 94330,
+        "status": "dropped",
+        "reason": "worked on it but it is still not sound (put back 28, it is at 61)",
+        "step": "",
+        "lastSeen": 104264,
+        "starts": 3,
+        "ends": {
+          "success|done": 2,
+          "partial|ran out of materials": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 29345,
+        "kind": "night",
+        "makes": "",
+        "since": 89620,
+        "until": 91320,
+        "status": "done",
+        "reason": "under shelter for 608 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 95236,
+        "starts": 4,
+        "ends": {
+          "success|rested": 1,
+          "failed|they are inside a different space": 1,
+          "partial|nothing left": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 29349,
+        "kind": "night",
+        "makes": "",
+        "since": 89631,
+        "until": 91320,
+        "status": "done",
+        "reason": "under shelter for 714 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 105057,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 29355,
+        "kind": "night",
+        "makes": "",
+        "since": 89641,
+        "until": 91320,
+        "status": "done",
+        "reason": "under shelter for 567 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 100720,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 29369,
+        "kind": "night",
+        "makes": "",
+        "since": 89704,
+        "until": 91320,
+        "status": "done",
+        "reason": "under shelter for 629 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 103309,
+        "starts": 3,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 29372,
+        "kind": "night",
+        "makes": "",
+        "since": 89708,
+        "until": 91320,
+        "status": "done",
+        "reason": "under shelter for 1039 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 98277,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 29392,
+        "kind": "night",
+        "makes": "",
+        "since": 89811,
+        "until": 91320,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 101718,
+        "starts": 4,
+        "ends": {
+          "interrupted|something better came up": 3,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 29430,
+        "kind": "night",
+        "makes": "",
+        "since": 89971,
+        "until": 91320,
+        "status": "done",
+        "reason": "under shelter for 533 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 98843,
+        "starts": 3,
+        "ends": {
+          "partial|too cold to sleep": 1,
+          "interrupted|something better came up": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 29451,
+        "kind": "tool",
+        "makes": "saw",
+        "since": 90110,
+        "until": 94910,
+        "status": "dropped",
+        "reason": "never got round to the saw (still short 1 wood and 2 stone)",
+        "step": "",
+        "lastSeen": 105560,
+        "starts": 1,
+        "ends": {
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 29507,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 90757,
+        "until": 95557,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 101581,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 29759,
+        "kind": "stock",
+        "makes": "",
+        "since": 91512,
+        "until": 96312,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 8)",
+        "step": "",
+        "lastSeen": 98843,
+        "starts": 7,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "partial|nothing left": 4,
+          "failed|someone else is already taking it": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 29793,
+        "kind": "stock",
+        "makes": "",
+        "since": 91632,
+        "until": 96432,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 103309,
+        "starts": 5,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|done": 2,
+          "failed|someone else is already taking it": 1,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 29830,
+        "kind": "tool",
+        "makes": "saw",
+        "since": 91732,
+        "until": 96532,
+        "status": "dropped",
+        "reason": "never got round to the saw (still short 1 wood)",
+        "step": "",
+        "lastSeen": 101718,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 29894,
+        "kind": "night",
+        "makes": "",
+        "since": 91971,
+        "until": 93720,
+        "status": "done",
+        "reason": "under shelter for 895 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 104264,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 29924,
+        "kind": "night",
+        "makes": "",
+        "since": 92091,
+        "until": 93720,
+        "status": "dropped",
+        "reason": "only 166 ticks under shelter; the night mostly passed without it",
+        "step": "",
+        "lastSeen": 105560,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 29926,
+        "kind": "night",
+        "makes": "",
+        "since": 92106,
+        "until": 93720,
+        "status": "done",
+        "reason": "under shelter for 624 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 101718,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|danger nearby": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 29952,
+        "kind": "night",
+        "makes": "",
+        "since": 92215,
+        "until": 93720,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 103309,
+        "starts": 1,
+        "ends": {
+          "success|morning came": 1
+        }
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 29960,
+        "kind": "night",
+        "makes": "",
+        "since": 92249,
+        "until": 93720,
+        "status": "dropped",
+        "reason": "only 235 ticks under shelter; the night mostly passed without it",
+        "step": "",
+        "lastSeen": 98843,
+        "starts": 2,
+        "ends": {
+          "success|done": 3
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 29980,
+        "kind": "batch",
+        "makes": "bricks",
+        "since": 92351,
+        "until": 99551,
+        "status": "dropped",
+        "reason": "the time is up (was going to collect bricks for bricks)",
+        "step": "",
+        "lastSeen": 102211,
+        "starts": 7,
+        "ends": {
+          "success|done": 5,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 29982,
+        "kind": "tool",
+        "makes": "saw",
+        "since": 92353,
+        "until": 97153,
+        "status": "dropped",
+        "reason": "never got round to the saw (still short 2 stone)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "failed|nothing left": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 29995,
+        "kind": "night",
+        "makes": "",
+        "since": 92437,
+        "until": 93720,
+        "status": "done",
+        "reason": "under shelter for 535 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 98277,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 30009,
+        "kind": "stock",
+        "makes": "",
+        "since": 92477,
+        "until": 97277,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 105661,
+        "starts": 6,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|done": 3,
+          "failed|nothing left": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 30058,
+        "kind": "tool",
+        "makes": "saw",
+        "since": 93274,
+        "until": 98074,
+        "status": "dropped",
+        "reason": "never got round to the saw (still short 1 stone)",
+        "step": "",
+        "lastSeen": 101611,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 30146,
+        "kind": "stock",
+        "makes": "",
+        "since": 93647,
+        "until": 98447,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 6,
+        "ends": {
+          "partial|nothing left": 2,
+          "success|done": 2,
+          "interrupted|danger nearby": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 30328,
+        "kind": "stock",
+        "makes": "",
+        "since": 94310,
+        "until": 99110,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 105057,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "interrupted|a more urgent need (energy)": 1
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 30348,
+        "kind": "night",
+        "makes": "",
+        "since": 94379,
+        "until": 96120,
+        "status": "done",
+        "reason": "under shelter for 918 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 5,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|done": 3,
+          "success|rested": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 30351,
+        "kind": "night",
+        "makes": "",
+        "since": 94386,
+        "until": 96120,
+        "status": "done",
+        "reason": "under shelter for 780 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 105560,
+        "starts": 4,
+        "ends": {
+          "success|done": 4
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 30355,
+        "kind": "night",
+        "makes": "",
+        "since": 94396,
+        "until": 96120,
+        "status": "done",
+        "reason": "under shelter for 693 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 105661,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 30362,
+        "kind": "night",
+        "makes": "",
+        "since": 94441,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|done": 1,
+          "interrupted|a more urgent need (warmth)": 1,
+          "interrupted|a more urgent need (energy)": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 30368,
+        "kind": "night",
+        "makes": "",
+        "since": 94466,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 101611,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 30382,
+        "kind": "night",
+        "makes": "",
+        "since": 94492,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 6,
+        "ends": {
+          "failed|Arlo was already talking to someone": 1,
+          "success|done": 3
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 30388,
+        "kind": "stock",
+        "makes": "",
+        "since": 94507,
+        "until": 99307,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 104264,
+        "starts": 7,
+        "ends": {
+          "interrupted|danger nearby": 1,
+          "success|done": 3,
+          "failed|someone else is already taking it": 1,
+          "partial|nothing left": 1,
+          "partial|someone else is already taking it": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 30409,
+        "kind": "night",
+        "makes": "",
+        "since": 94595,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 101718,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 30440,
+        "kind": "night",
+        "makes": "",
+        "since": 94673,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 105057,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|done": 1,
+          "interrupted|a more urgent need (warmth)": 1
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 30442,
+        "kind": "night",
+        "makes": "",
+        "since": 94673,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 101581,
+        "starts": 0,
+        "ends": {
+          "partial|someone else is already taking it": 1
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 30494,
+        "kind": "night",
+        "makes": "",
+        "since": 94878,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "only 157 ticks under shelter; the night mostly passed without it",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|done": 2,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 30497,
+        "kind": "night",
+        "makes": "",
+        "since": 94888,
+        "until": 96120,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 103309,
+        "starts": 0,
+        "ends": {
+          "partial|too cold to sleep": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 30508,
+        "kind": "stock",
+        "makes": "",
+        "since": 94976,
+        "until": 99776,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 12)",
+        "step": "",
+        "lastSeen": 105560,
+        "starts": 9,
+        "ends": {
+          "success|done": 3,
+          "interrupted|something better came up": 4,
+          "interrupted|danger nearby": 2
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 30527,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 95394,
+        "until": 100194,
+        "status": "dropped",
+        "reason": "never got round to the spear (still short 1 stone)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 30589,
+        "kind": "stock",
+        "makes": "",
+        "since": 95881,
+        "until": 100681,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 8)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 7,
+        "ends": {
+          "failed|nothing left": 2,
+          "interrupted|something better came up": 4,
+          "partial|nothing left": 2
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 30782,
+        "kind": "stock",
+        "makes": "",
+        "since": 96527,
+        "until": 101327,
+        "status": "dropped",
+        "reason": "put 2 units by, but the store is at 0 of 12 and the time is up",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 9,
+        "ends": {
+          "interrupted|something better came up": 5,
+          "success|done": 2,
+          "interrupted|danger nearby": 1,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 30804,
+        "kind": "stock",
+        "makes": "",
+        "since": 96573,
+        "until": 101373,
+        "status": "dropped",
+        "reason": "put 4 units by, but the store is at 0 of 12 and the time is up",
+        "step": "",
+        "lastSeen": 106243,
+        "starts": 10,
+        "ends": {
+          "interrupted|something better came up": 7,
+          "partial|nothing left": 2,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 30808,
+        "kind": "repair",
+        "makes": "",
+        "since": 96588,
+        "until": 101388,
+        "status": "dropped",
+        "reason": "never got to the roof (still short 1 wood)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 30865,
+        "kind": "night",
+        "makes": "",
+        "since": 96788,
+        "until": 98520,
+        "status": "done",
+        "reason": "under shelter for 783 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 30869,
+        "kind": "night",
+        "makes": "",
+        "since": 96799,
+        "until": 98520,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 30886,
+        "kind": "night",
+        "makes": "",
+        "since": 96817,
+        "until": 98520,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 30901,
+        "kind": "night",
+        "makes": "",
+        "since": 96842,
+        "until": 98520,
+        "status": "done",
+        "reason": "under shelter for 696 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 106243,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 30906,
+        "kind": "night",
+        "makes": "",
+        "since": 96853,
+        "until": 98520,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|morning came": 1
+        }
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 30910,
+        "kind": "night",
+        "makes": "",
+        "since": 96866,
+        "until": 98520,
+        "status": "done",
+        "reason": "under shelter for 883 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 30914,
+        "kind": "night",
+        "makes": "",
+        "since": 96873,
+        "until": 98520,
+        "status": "done",
+        "reason": "under shelter for 805 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 105661,
+        "starts": 1,
+        "ends": {
+          "success|rested": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 30938,
+        "kind": "night",
+        "makes": "",
+        "since": 96922,
+        "until": 98520,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 30943,
+        "kind": "night",
+        "makes": "",
+        "since": 96929,
+        "until": 98520,
+        "status": "done",
+        "reason": "under shelter for 493 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|done": 3,
+          "success|morning came": 1
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 30945,
+        "kind": "night",
+        "makes": "",
+        "since": 96931,
+        "until": 98520,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 30951,
+        "kind": "night",
+        "makes": "",
+        "since": 96957,
+        "until": 98520,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|done": 1,
+          "partial|nothing left": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 31179,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 98276,
+        "until": 103076,
+        "status": "done",
+        "reason": "made the spear",
+        "step": "",
+        "lastSeen": 105661,
+        "starts": 3,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 31227,
+        "kind": "stock",
+        "makes": "",
+        "since": 98438,
+        "until": 105600,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 8)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 6,
+        "ends": {
+          "partial|nothing left": 3,
+          "failed|someone else is already taking it": 1,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 31292,
+        "kind": "batch",
+        "makes": "bricks",
+        "since": 98653,
+        "until": 105853,
+        "status": "dropped",
+        "reason": "the time is up (was going to waiting for the batch I started for bricks)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 11,
+        "ends": {
+          "success|done": 5,
+          "interrupted|something better came up": 4,
+          "failed|that delivery is not a project prerequisite": 1,
+          "partial|the project is no longer active": 1
+        }
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 31312,
+        "kind": "stock",
+        "makes": "",
+        "since": 98731,
+        "until": 103531,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 8)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 12,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "partial|nothing left": 2,
+          "success|done": 5,
+          "failed|cannot reach them": 1,
+          "failed|no way to get there": 1,
+          "failed|nothing left": 1
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 31459,
+        "kind": "night",
+        "makes": "",
+        "since": 99171,
+        "until": 100920,
+        "status": "done",
+        "reason": "under shelter for 1005 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 31461,
+        "kind": "night",
+        "makes": "",
+        "since": 99172,
+        "until": 100920,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 31464,
+        "kind": "night",
+        "makes": "",
+        "since": 99185,
+        "until": 100920,
+        "status": "done",
+        "reason": "under shelter for 276 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|morning came": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 31475,
+        "kind": "night",
+        "makes": "",
+        "since": 99215,
+        "until": 100920,
+        "status": "done",
+        "reason": "under shelter for 933 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 31486,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 99263,
+        "until": 104063,
+        "status": "dropped",
+        "reason": "never got round to the spear (still short 1 stone)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|felled the tree": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 31495,
+        "kind": "night",
+        "makes": "",
+        "since": 99281,
+        "until": 100920,
+        "status": "done",
+        "reason": "under shelter for 706 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 31521,
+        "kind": "night",
+        "makes": "",
+        "since": 99356,
+        "until": 100920,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 106243,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 31538,
+        "kind": "repair",
+        "makes": "",
+        "since": 99409,
+        "until": 104209,
+        "status": "done",
+        "reason": "mended it themselves (put back 28 of its condition)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 31545,
+        "kind": "tool",
+        "makes": "hammer",
+        "since": 99456,
+        "until": 104256,
+        "status": "dropped",
+        "reason": "never got round to the hammer (still short 2 stone)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 31577,
+        "kind": "stock",
+        "makes": "",
+        "since": 99545,
+        "until": 104345,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 1 of 12)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "failed|nothing left": 1,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 31605,
+        "kind": "night",
+        "makes": "",
+        "since": 99690,
+        "until": 100920,
+        "status": "dropped",
+        "reason": "the night passed without shelter",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 4,
+        "ends": {
+          "failed|nothing left": 2,
+          "interrupted|something better came up": 1,
+          "success|done": 1,
+          "interrupted|danger nearby": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 31650,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 100277,
+        "until": 105077,
+        "status": "dropped",
+        "reason": "never got round to the spear (still short 1 stone)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 31662,
+        "kind": "stock",
+        "makes": "",
+        "since": 100359,
+        "until": 105159,
+        "status": "dropped",
+        "reason": "never got any food put by (the store is at 0 of 4)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 15,
+        "ends": {
+          "interrupted|something better came up": 3,
+          "interrupted|danger nearby": 8,
+          "success|done": 3,
+          "failed|someone else is already taking it": 1,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 31715,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 100693,
+        "until": 105493,
+        "status": "dropped",
+        "reason": "never got round to the hoe (still short 1 wood and 1 stone)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 31767,
+        "kind": "stock",
+        "makes": "",
+        "since": 100907,
+        "until": 105600,
+        "status": "dropped",
+        "reason": "put 5 units by, but the store is at 0 of 8 and the time is up",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 12,
+        "ends": {
+          "success|done": 9,
+          "interrupted|something better came up": 3,
+          "partial|someone else is already taking it": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 31983,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 101548,
+        "until": 106348,
+        "status": "done",
+        "reason": "made the hoe (Cole brought 2 of the wood)",
+        "step": "",
+        "lastSeen": 106243,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 31993,
+        "kind": "night",
+        "makes": "",
+        "since": 101572,
+        "until": 103320,
+        "status": "done",
+        "reason": "under shelter for 792 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 32000,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 101580,
+        "until": 106380,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "interrupted|danger nearby": 2,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 32005,
+        "kind": "night",
+        "makes": "",
+        "since": 101583,
+        "until": 103320,
+        "status": "done",
+        "reason": "under shelter for 864 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 32010,
+        "kind": "night",
+        "makes": "",
+        "since": 101591,
+        "until": 103320,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 32014,
+        "kind": "night",
+        "makes": "",
+        "since": 101601,
+        "until": 103320,
+        "status": "done",
+        "reason": "under shelter for 518 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|done": 1,
+          "success|morning came": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 32047,
+        "kind": "night",
+        "makes": "",
+        "since": 101683,
+        "until": 103320,
+        "status": "done",
+        "reason": "under shelter for 912 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 32062,
+        "kind": "night",
+        "makes": "",
+        "since": 101718,
+        "until": 103320,
+        "status": "done",
+        "reason": "under shelter for 603 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "failed|they are inside a different space": 1,
+          "partial|nothing left": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 32167,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 102191,
+        "until": 106991,
+        "status": "done",
+        "reason": "made the spear",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|felled the tree": 1,
+          "interrupted|something better came up": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 32361,
+        "kind": "stock",
+        "makes": "",
+        "since": 103255,
+        "until": 108055,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "gather food to put by (11 more)",
+        "lastSeen": 107999,
+        "starts": 27,
+        "ends": {
+          "partial|nothing left": 1,
+          "success|done": 3,
+          "failed|cannot carry any more": 17,
+          "failed|someone else is harvesting it": 2,
+          "interrupted|something better came up": 2,
+          "failed|it is not ripe": 1,
+          "failed|the field changed during work": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 32629,
+        "kind": "night",
+        "makes": "",
+        "since": 103978,
+        "until": 105720,
+        "status": "done",
+        "reason": "under shelter for 988 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 32632,
+        "kind": "night",
+        "makes": "",
+        "since": 103988,
+        "until": 105720,
+        "status": "done",
+        "reason": "under shelter for 809 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 32693,
+        "kind": "stock",
+        "makes": "",
+        "since": 104159,
+        "until": 105600,
+        "status": "dropped",
+        "reason": "put 3 units by, but the store is at 2 of 8 and the time is up",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|done": 4
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 32746,
+        "kind": "night",
+        "makes": "",
+        "since": 104293,
+        "until": 105720,
+        "status": "done",
+        "reason": "under shelter for 1133 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 4,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 2,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 32762,
+        "kind": "night",
+        "makes": "",
+        "since": 104343,
+        "until": 105720,
+        "status": "done",
+        "reason": "under shelter for 712 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|rested": 2,
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 32773,
+        "kind": "night",
+        "makes": "",
+        "since": 104390,
+        "until": 105720,
+        "status": "done",
+        "reason": "under shelter for 825 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 32781,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 104452,
+        "until": 109252,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 2 more wood for the hoe",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 32800,
+        "kind": "stock",
+        "makes": "",
+        "since": 104939,
+        "until": 109739,
+        "status": "done",
+        "reason": "put 11 units of food by; the store holds 14",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 7,
+        "ends": {
+          "success|done": 4,
+          "interrupted|something better came up": 2,
+          "partial|someone else is already taking it": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 32861,
+        "kind": "stock",
+        "makes": "",
+        "since": 105339,
+        "until": 110139,
+        "status": "done",
+        "reason": "put 5 units of food by; the store holds 5",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 6,
+        "ends": {
+          "success|done": 6
+        }
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 32895,
+        "kind": "stock",
+        "makes": "",
+        "since": 105470,
+        "until": 110270,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "step": "gather food to put by (9 more)",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 32923,
+        "kind": "stock",
+        "makes": "",
+        "since": 105511,
+        "until": 110311,
+        "status": "done",
+        "reason": "put 6 units of food by; the store holds 14",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 32974,
+        "kind": "tool",
+        "makes": "spear",
+        "since": 105593,
+        "until": 110393,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 1 more stone for the spear",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1142,
+        "name": "Talia",
+        "id": 32978,
+        "kind": "tool",
+        "makes": "hammer",
+        "since": 105601,
+        "until": 110401,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 1 more stone for the hammer",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 1150,
+        "name": "Arlo",
+        "id": 32982,
+        "kind": "tool",
+        "makes": "saw",
+        "since": 105609,
+        "until": 110409,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 2 more stone for the saw",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 33107,
+        "kind": "stock",
+        "makes": "",
+        "since": 105884,
+        "until": 110684,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "step": "take the food home (7 more to put by)",
+        "lastSeen": 107999,
+        "starts": 4,
+        "ends": {
+          "success|done": 4,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 33202,
+        "kind": "tool",
+        "makes": "saw",
+        "since": 106102,
+        "until": 110902,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 2 more wood for the saw",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1144,
+        "name": "Alma",
+        "id": 33298,
+        "kind": "night",
+        "makes": "",
+        "since": 106372,
+        "until": 108120,
+        "status": "done",
+        "reason": "under shelter for 821 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1107,
+        "name": "Emre",
+        "id": 33304,
+        "kind": "night",
+        "makes": "",
+        "since": 106394,
+        "until": 108120,
+        "status": "done",
+        "reason": "under shelter for 318 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1145,
+        "name": "Jax",
+        "id": 33317,
+        "kind": "stock",
+        "makes": "",
+        "since": 106446,
+        "until": 111246,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "take the food home (11 more to put by)",
+        "lastSeen": 107999,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 1128,
+        "name": "Tomas",
+        "id": 33335,
+        "kind": "tool",
+        "makes": "hammer",
+        "since": 106501,
+        "until": 111301,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 2 more stone for the hammer",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1132,
+        "name": "Petra",
+        "id": 33338,
+        "kind": "night",
+        "makes": "",
+        "since": 106511,
+        "until": 108120,
+        "status": "done",
+        "reason": "under shelter for 614 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 33353,
+        "kind": "night",
+        "makes": "",
+        "since": 106563,
+        "until": 108120,
+        "status": "done",
+        "reason": "under shelter for 712 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1120,
+        "name": "Abel",
+        "id": 33370,
+        "kind": "night",
+        "makes": "",
+        "since": 106618,
+        "until": 108120,
+        "status": "done",
+        "reason": "under shelter for 1081 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1106,
+        "name": "Mira",
+        "id": 33403,
+        "kind": "night",
+        "makes": "",
+        "since": 106707,
+        "until": 108120,
+        "status": "done",
+        "reason": "under shelter for 778 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1113,
+        "name": "Zia",
+        "id": 33406,
+        "kind": "night",
+        "makes": "",
+        "since": 106712,
+        "until": 108120,
+        "status": "done",
+        "reason": "under shelter for 485 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 107999,
+        "starts": 4,
+        "ends": {
+          "interrupted|something better came up": 3,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1135,
+        "name": "Cole",
+        "id": 33427,
+        "kind": "tool",
+        "makes": "hammer",
+        "since": 106788,
+        "until": 111588,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 2 more stone for the hammer",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1112,
+        "name": "Ben",
+        "id": 33498,
+        "kind": "stock",
+        "makes": "",
+        "since": 107779,
+        "until": 112579,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "step": "gather food to put by (7 more)",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1119,
+        "name": "Cora",
+        "id": 33565,
+        "kind": "tool",
+        "makes": "saw",
+        "since": 107962,
+        "until": 112762,
+        "status": "active",
+        "reason": "it would make the work easier, and the makings are short",
+        "step": "get 2 more wood for the saw",
+        "lastSeen": 107999,
+        "starts": 0,
+        "ends": {}
+      }
+    ]
+  },
+  "serializedBytes": 4750242,
+  "continuationEqual": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "limits": "Short ordinary occurrence screen, not aggregate benefit or mature Large performance. Repeated samples are not independent opportunities; a prepared step offered is not a cart or a useful trip."
+}

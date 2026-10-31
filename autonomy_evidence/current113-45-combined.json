@@ -1,0 +1,112 @@
+{
+  "results": [
+    {
+      "seed": "river",
+      "rules": 113,
+      "sourceHead": "e64789d09d8056a4f28b5075cb9406e420d8fd83",
+      "parts": [
+        "autonomy_evidence\\current113-river-45\\report.json",
+        "autonomy_evidence\\current113-river-45-tail\\report.json"
+      ],
+      "firstStop": "budget",
+      "firstTick": 88200,
+      "finalTick": 108000,
+      "totalSeconds": 990.2804586999999,
+      "population": 19,
+      "deaths": 13,
+      "pureChecks": 900,
+      "samples": 22447,
+      "counts": {
+        "project plans adopted:planks": 5,
+        "sampled project step:collect": 142,
+        "sampled project step:acquire": 543,
+        "start:project operate:hew_planks": 6,
+        "sampled project step:operate": 9,
+        "sampled operate step offered prepared": 7,
+        "sampled prepared step ranked first": 7,
+        "ending:project operate:success": 9,
+        "sampled project step:deposit": 202,
+        "project plans adopted:jar": 3,
+        "project plans adopted:bricks": 11,
+        "sampled operate step not offered": 2,
+        "ending:project operate:interrupted": 1,
+        "start:project operate:fire_bricks": 4,
+        "sampled project step:wait": 9,
+        "carts at end": 0
+      },
+      "exactTailInput": true,
+      "unchangedRuntime": true,
+      "continuationEqual": true,
+      "conservation": true
+    },
+    {
+      "seed": "meadow",
+      "rules": 113,
+      "sourceHead": "e64789d09d8056a4f28b5075cb9406e420d8fd83",
+      "parts": [
+        "autonomy_evidence\\current113-meadow-45\\report.json",
+        "autonomy_evidence\\current113-meadow-45-tail\\report.json"
+      ],
+      "firstStop": "budget",
+      "firstTick": 103440,
+      "finalTick": 108000,
+      "totalSeconds": 924.3005723,
+      "population": 25,
+      "deaths": 6,
+      "pureChecks": 900,
+      "samples": 23127,
+      "counts": {
+        "project plans adopted:planks": 1,
+        "sampled project step:collect": 85,
+        "project plans adopted:bricks": 3,
+        "sampled project step:acquire": 26,
+        "sampled project step:deposit": 17,
+        "start:project operate:fire_bricks": 2,
+        "sampled project step:operate": 2,
+        "sampled operate step offered prepared": 2,
+        "sampled prepared step ranked first": 2,
+        "ending:project operate:success": 2,
+        "sampled project step:wait": 5,
+        "carts at end": 0
+      },
+      "exactTailInput": true,
+      "unchangedRuntime": true,
+      "continuationEqual": true,
+      "conservation": true
+    },
+    {
+      "seed": "forest",
+      "rules": 113,
+      "sourceHead": "e64789d09d8056a4f28b5075cb9406e420d8fd83",
+      "parts": [
+        "autonomy_evidence\\current113-forest-45\\report.json"
+      ],
+      "firstStop": "horizon",
+      "firstTick": 108000,
+      "finalTick": 108000,
+      "totalSeconds": 558.7624236,
+      "population": 5,
+      "deaths": 27,
+      "pureChecks": 900,
+      "samples": 15180,
+      "counts": {
+        "project plans adopted:cart": 1,
+        "sampled project step:acquire": 272,
+        "project plans adopted:planks": 2,
+        "sampled project step:collect": 31,
+        "project plans adopted:jar": 1,
+        "sampled project step:deposit": 30,
+        "project plans adopted:bricks": 3,
+        "start:project operate:fire_bricks": 1,
+        "ending:project operate:success": 1,
+        "sampled project step:wait": 2,
+        "carts at end": 0
+      },
+      "exactTailInput": true,
+      "unchangedRuntime": true,
+      "continuationEqual": true,
+      "conservation": true
+    }
+  ],
+  "limits": "Fixed ordinary Normal seeds, no installed inhabitant. River/meadow are exact saved continuations after execution-budget stops; partial reports retained. Event/sample counts summed without duplicating active plans at the join or cumulative deaths. Not a general benefit claim or final current-rules Large validation."
+}
