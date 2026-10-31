@@ -1,0 +1,13 @@
+{
+  "source": "69c391db8b528b16b033f830766153a326b80806, rules 104 before successor behaviour",
+  "ordinary": {
+    "saved": "c2f8e2b4222909096bde3f24a69cd6f548b7bfb413dd936adb9babcc846d658e",
+    "uninterrupted": "0e09b965f91fe667f74f0f5d2eb515875a14372382a6d656a00f81a2e3fa2521",
+    "continued": "0e09b965f91fe667f74f0f5d2eb515875a14372382a6d656a00f81a2e3fa2521"
+  },
+  "told": {
+    "saved": "6826e5132dc95a1e6e80ae01f0ca888aa3b6a52ed020bb0c2f4229ff159194ea",
+    "uninterrupted": "10761f82b03f2824abdad7301e26379d7d0ae4fc1d37106294ceb872dc4017d7",
+    "continued": "10761f82b03f2824abdad7301e26379d7d0ae4fc1d37106294ceb872dc4017d7"
+  }
+}
