@@ -15,6 +15,20 @@
   no general welfare claim. Conversation resumption is a separately reproduced
   missing transition. A1 and social-place use remain incomplete.
 
+- Returned long-run batch follow-up: its preserved source was `056dbac`, before
+  the already-integrated meat validation fix `0182849`. Exact-source reproduction
+  captures the first invalid receipt at tick 43,326 (one meat delivered at 43,325);
+  current main loads it exactly and preserves 1,200-tick twins/conservation.
+  `aaaa732` adds three actual request/hand-over/save regressions at rules 78/107/110.
+  The already-retained corrected day-45 forest outputs were inspected, not rerun.
+  `scripts/run_longruns.ps1` now retains Windows child process handles and records
+  real exit codes, rejects incomplete reports and refuses existing output folders.
+  New one-day forest checks pass all three observers with exit 0; a deliberate
+  budget stop records exit 1 and fails the batch. Focused checks 15/15, related
+  save/economy/food/immutable-continuation checks 31/31 and typecheck pass.
+  No runtime rules or references changed; original reports/ZIP remain untouched.
+  See `MEAT_SAVE_VALIDATION.md` and `LONG_RUN_BATCH.md` for evidence and limits.
+
 - Rules 110: purposeful water searches retain their need, explore from
   the searcher's own position and can answer critical thirst after dark. See
   `WATER_SEARCH.md`. Staged travel/discovery/drinking is saved, rendered and
