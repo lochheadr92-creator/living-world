@@ -2,6 +2,9 @@
 
 ## Rules 95 implementation and verification
 
+Runtime commit `0926f3a`; immutable reference `af7d6f3` separately passes 1/1
+in 2.35 seconds, with reference typecheck clean.
+
 Predecessor rules 94 is published at `3807c42`, runtime `4f3c398`, immutable
 reference `842689b`. `care_supply.ts` owns bounded acquisition options derived
 from the existing resident contact. `care_journey.ts` owns one private purpose,
