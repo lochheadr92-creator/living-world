@@ -44,7 +44,7 @@ and meadow days) are the one mechanism seen active ordinarily.
 
 ## Verification status of the last slice (A16 proposed projects)
 
-Full regression on the final source (shared four-core container, 1,690.76 s): **339 files / 2,204 tests, 336 files passed; the six failures were the three protocol tests (`ecology_protocol`, `flood_protocol`, `water_protocol`) pinning the previous current protocol numbers 29/30 and observation 16**, updated to 31/32 and 17 in this checkpoint commit and passing 13/13 afterwards together with the proposals tests. No simulation test failed. The suite was not re-run in full after that test-only correction.
+Full regression on the final source (shared four-core container, 1,690.76 s): **339 files / 2,204 tests, 336 files passed; the six failures were the three protocol tests (`ecology_protocol`, `flood_protocol`, `water_protocol`) pinning the previous current protocol numbers 29/30 and observation 16**, updated to 31/32 and 17 in this checkpoint commit and passing 13/13 afterwards together with the proposals tests. No simulation test failed. Re-run in full after that correction at `056dbac`: **339 files / 2,204 tests passed, 1,702.99 s**.
 
 Focused: `tests/inhabit_proposals.test.ts` 4/4, with `inhabitant*.test.ts`, `inhabit_*.test.ts`, `golden.test.ts`,
 `v107_continuation.test.ts`, `ready_step.test.ts`, `batch_plan.test.ts` passing after the protocol-number updates;
