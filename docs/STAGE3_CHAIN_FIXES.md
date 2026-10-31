@@ -44,6 +44,18 @@ Rules 116 explicitly retains the former spill; no separate version bump was need
 Baseline and affected checks passed 142/142; the additional predecessor boundary passes
 with the repaired case (2/2). Stage-scoped typecheck passed. No ordinary activation claim.
 
+## Part A ordinary trace and predecessor pin
+
+VERIFIED measurement: `first_cart_trace.ts stage3_evidence/part-a-forest117 117` completed
+36,000 ticks (15 Normal forest days), no immigration, in 67.99 seconds. No cart plan was
+adopted, so there was no selected planner/hammer transition to trace; zero carts. This is a
+null opportunity result, not evidence that F1 has no effect. Exact twin/reload equality and
+item conservation passed. The report retains HEAD `fb74c8c`, dirty paths and source hashes;
+the script now accepts an explicit version, preserving its historical default 113.
+The former rules-113 episode and all old saves/references are untouched. A rules-117
+reference pins a staged mid-acquisition save through paid hammer completion and exact
+continuation before Part B. The rules-116 and new rules-117 references both pass.
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).
