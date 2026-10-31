@@ -1,3 +1,4 @@
+import {harvestPackFull} from './hungry_harvest';
 import {hasCriticalSearch} from './water_search';
 import {hungryHarvestOptions} from './hungry_harvest';
 import { hasEcology } from './ecology';
@@ -1140,6 +1141,7 @@ function optFarm(ctx: Ctx): void {
         mk('tend', 'Tend the crops', 'to help the crop grow', sc.total, sc.parts);
       }
     } else if (b.state === 'ripe') {
+      if(harvestPackFull(ctx)){addBlocked(ctx,'harvest','Harvest the crop',b.id,'no room to carry grain or seed from the crop','farm');continue;}
       const sc = new Scorer().add('ripe crop', 38 * Math.max(0.8, mult) + insecure * 1.2).add('walking', -pen(e));
       mk('harvest', 'Harvest the crop', 'to bring in food and seed', sc.total, sc.parts);
     }

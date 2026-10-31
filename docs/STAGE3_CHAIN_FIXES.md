@@ -78,6 +78,16 @@ conservation, failed-tile persistence, blocked sides and predecessor/removal con
 Baseline 135/135 and stage-scoped typecheck passed; related focused checks 29/29 before
 adding the all-sides-blocked case. This does not change plot ownership or create a field remotely.
 
+## E3 (shares rules 118)
+
+VERIFIED: the discretionary ripe-crop offer ignored full inventory; new contract failed
+before repair. The offer now reports no room when neither grain nor seed fits. Seed-only
+room remains eligible, and the staged physical harvest takes only that seed and conserves
+items. Old rules and `rich-no-harvest-capacity` retain the offer. Baseline 135/135 passed;
+the initial extended run exposed an incorrectly overweight new seed-room fixture (water
+weighs 1.5, not 1). Correcting its staged seed count left the contract unchanged; all 16
+harvest/related tests then passed. Stage-scoped typecheck passed.
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).
