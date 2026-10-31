@@ -1,4 +1,5 @@
 import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
+import {hasMealLeftovers} from './meal_leftovers';
 import { faceToward, newActivity, registerHandler, standSpotFor } from './activities';
 import { isRich, think } from './mood';
 import { expose } from './illness';
@@ -350,6 +351,11 @@ export interface MealPlan {
 export function inviteAsk(world: World, A: Person, B: Person, d: { mealId?: number; mealPlan?: MealPlan }): number {
   let m = d.mealId ? world.meals.find((x) => x.id === d.mealId) : undefined;
   if (!m && d.mealPlan) {
+    if(hasMealLeftovers(world)&&world.meals.length>=60){
+      const old=world.meals.findIndex(x=>(x.status==='done'||x.status==='cancelled')&&tableUnits(x)===0);
+      if(old<0){bubble(world,A,'There are too many meals still being arranged. Let us finish those first.');return 0;}
+      world.meals.splice(old,1);
+    }
     m = {
       id: world.nextId++,
       host: A.id,
@@ -371,7 +377,8 @@ export function inviteAsk(world: World, A: Person, B: Person, d: { mealId?: numb
       end: '',
     };
     world.meals.push(m);
-    if (world.meals.length > 60) world.meals.splice(0, world.meals.length - 60);
+    if(hasMealLeftovers(world))m.tableOwnerHh=A.hhId;
+    if (!hasMealLeftovers(world)&&world.meals.length > 60) world.meals.splice(0, world.meals.length - 60);
     addLog(world, A, 'social', `Decided to share a meal at ${m.placeName}.`);
   }
   if (!m) return 0;
@@ -445,6 +452,18 @@ export function cancelMeal(world: World, m: Meal, why: string): void {
 }
 
 function returnTable(world: World, m: Meal): void {
+  if(hasMealLeftovers(world)){
+    if(tableUnits(m)<=0)return;
+    // The table is an outdoor holding at the gathering place, not the host's remote pack.
+    // Preserve its owner and origin; collection uses ordinary travel and timed withdrawal.
+    const hhId=m.tableOwnerHh;
+    if(!hhId)throw new Error('Table food has no supplying household');
+    const pile=dropNear(world,m.x,m.y,m.table,`Food left from meal #${m.id} at ${m.placeName}`,0,{mealId:m.id,hostId:m.host,hhId});
+    if(!pile)throw new Error('Could not retain meal food');
+    pile.items={};
+    for(const k of Object.keys(m.table) as ItemKind[])transfer(world,m.table,pile.items,Infinity,k,m.table[k]??0,'meal:'+m.id,'pile:'+pile.id,'left at the meal site');
+    return;
+  }
   const host = personById(world, m.host);
   for (const k of Object.keys(m.table) as ItemKind[]) {
     const n = m.table[k] ?? 0;
@@ -583,6 +602,7 @@ registerHandler('host_meal', {
     a.duration = 30;
     if (m.status === 'inviting') {
       // lay the table with food that is really in the pack
+      if(hasMealLeftovers(world))m.tableOwnerHh=p.hhId;
       const need = m.accepted.length + 1;
       let have = foodUnits(p.inv);
       if (have < need) {

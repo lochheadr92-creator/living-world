@@ -1,3 +1,4 @@
+import {mayTakeKnownPile} from './meal_leftovers';
 import { rememberedConditionCost } from './ecology';
 import {storedWaterOptions} from './stored_water';
 import { newActivity } from './activities';
@@ -303,7 +304,7 @@ function optEat(ctx: Ctx): void {
   for (const b of beliefsByKind(p, ['building', 'pile'])) {
     const mine = b.kind === 'building' && b.hh === p.hhId && isHomeType(b.btype);
     const comm = b.kind === 'building' && b.btype === 'storehouse';
-    const pile = b.kind === 'pile';
+    const pile = b.kind === 'pile' && mayTakeKnownPile(p,b);
     const theirs = tempted && b.kind === 'building' && !mine && b.hh !== undefined && b.hh !== p.hhId && isHomeType(b.btype);
     // Rules 46: the granary's bins feed the households that filled them. What may be taken is the household's own share, or the
     // emergency ration facilities.ts already grants the starving (withdrawAllowance); the share is the household's own record

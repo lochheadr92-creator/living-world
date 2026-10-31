@@ -1,3 +1,4 @@
+import {mealPileBlocker} from './meal_leftovers';
 import { harvestPressure } from './ecology';
 import { hasFloodAccess } from './flood';
 import { drawWater, hasWaterBudget } from './hydrology';
@@ -236,6 +237,7 @@ function tableItems(world: World, a: Activity): Items | null {
 }
 
 function eatTick(world: World, p: Person, a: Activity): WorkResult {
+  if(a.data.table){const blocked=mealPileBlocker(p,world.byId.get(a.targetId));if(blocked)return `fail:${blocked}`;}
   a.progress++;
   if (a.progress < a.duration) return 'continue';
   const k = a.data.food as FoodKind;
@@ -296,6 +298,7 @@ registerHandler('eat_store', {
       delBelief(p, a.targetId);
       return 'it is gone';
     }
+    {const blocked=mealPileBlocker(p,e);if(blocked)return blocked;}
     observe(world, p, e);
     const items = e.ent === 'building' ? e.store.items : e.items;
     let want = Math.ceil((92 - p.needs.hunger) / 18);
@@ -366,7 +369,7 @@ registerHandler('eat_store', {
       // A meal at a store was taken a bite at a time, so what it came to is known only now: the belief about the store is
       // refreshed as it stands after the meal, and a meal at another household's store is reported once, for what was eaten.
       const e = world.byId.get(a.targetId);
-      if (e && (e.ent === 'building' || e.ent === 'pile')) {
+      if (e && (e.ent === 'building' || e.ent === 'pile') && !mealPileBlocker(p,e)) {
         observe(world, p, e);
         if (a.data.steal && e.ent === 'building') onTheft(world, p, e, a.cycle);
         if (outcome === 'failed' && foodUnits(e.ent === 'building' ? e.store.items : e.items) <= 0) noteFailure(world, p, a.targetId, 'no food there');
@@ -549,6 +552,7 @@ registerHandler('deposit', {
       return 'the place is gone';
     }
     const e = world.byId.get(a.targetId)!;
+    if(e.ent==='pile'&&e.mealFood)return 'keep other goods separate from the leftover meal food';
     observe(world, p, e);
     a.duration = transferDuration(a.data.items ?? {});
     const door = e.ent === 'building' || e.ent === 'site' ? { x: e.x + e.w / 2, y: e.y + e.h / 2 } : { x: p.x, y: p.y };
@@ -567,6 +571,7 @@ registerHandler('deposit', {
     let moved = 0;
     let partial = false;
     const e = world.byId.get(a.targetId)!;
+    if(e.ent==='pile'&&e.mealFood)return 'fail:keep other goods separate from the leftover meal food';
     for (const k of Object.keys(want)) {
       let n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
       if(a.data.projectSupply&&runsRulesVersion(world,69)){
@@ -742,6 +747,7 @@ registerHandler('withdraw', {
       return 'the place is gone';
     }
     const e = world.byId.get(a.targetId)!;
+    {const blocked=mealPileBlocker(p,e);if(blocked)return blocked;}
     observe(world, p, e);
     if (a.data.materialStock && (e.ent !== 'building' || !mayCollectMaterialStock(p, e))) return 'this material store is no longer shared or ours';
     a.duration = transferDuration(a.data.items ?? {});
@@ -758,6 +764,7 @@ registerHandler('withdraw', {
     const want = (a.data.items ?? {}) as Record<string, number>;
     let moved = 0;
     const e = world.byId.get(a.targetId);
+    {const blocked=mealPileBlocker(p,e);if(blocked)return `fail:${blocked}`;}
     if (a.data.materialStock && (!e || e.ent !== 'building' || !mayCollectMaterialStock(p, e))) {
       if (e) observe(world, p, e);
       return 'fail:this material store is no longer shared or ours';

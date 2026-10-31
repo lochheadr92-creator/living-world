@@ -22,7 +22,7 @@ export function v89Continuation(){
   selectOffcutOption(f,`collect:${f.yard.id}:offcuts`);stepWorld(f.w);const collection=advance(f.w,100);
   if(f.p.inv.offcuts!==2)throw new Error('Missing physical collection');
   const fuel=selectOffcutOption(f,`fuel:${f.fire.id}`);for(let n=0;n<500&&fuel.cycle<1;n++)stepWorld(f.w);
-  if(f.p.inv.offcuts!==1||f.w.ledger.consumed.offcuts!==1)throw new Error('Missing partially consumed fuel');const burning=advance(f.w,40);
-  if(f.w.ledger.consumed.offcuts!==2)throw new Error('Missing completed fuel use');return {ordinary,paid,collection,burning};
+  if(Number(f.p.inv.offcuts)!==1||f.w.ledger.consumed.offcuts!==1)throw new Error('Missing partially consumed fuel');const burning=advance(f.w,40);
+  if(Number(f.w.ledger.consumed.offcuts)!==2)throw new Error('Missing completed fuel use');return {ordinary,paid,collection,burning};
  }finally{release();}
 }

@@ -69,7 +69,9 @@ function hitStatic(game: Game, vw: number, vh: number, e: Entity, px: number, py
     if (Math.abs(px - cx) > 20 * z * (e.type === 'tree' ? 0.6 + 0.4 * e.growth : 1)) return -1;
   }
   // prefer the one drawn in front (the scaffold round a home being rebuilt is in front of the home)
-  return f.x + f.y + f.w + f.h + (e.ent === 'site' && e.upgradeOf ? 0.3 : 0);
+  // A leftover basket at the hall door is drawn in front when these bounding-box depths tie.
+  // Keep its visible food selectable; people still win through the earlier mobile hit test.
+  return f.x + f.y + f.w + f.h + (e.ent === 'site' && e.upgradeOf ? 0.3 : e.ent==='pile'&&e.mealFood ? 0.1 : 0);
 }
 
 export function pickEntity(game: Game, vw: number, vh: number, px: number, py: number): number {

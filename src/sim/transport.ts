@@ -1,3 +1,4 @@
+import {mayTakeKnownPile} from './meal_leftovers';
 // TRANSPORT BEYOND THE BUILDING SITE (rules version 55, rich worlds only).
 //
 // Before this, a handcart was wanted on the strength of known site deficits alone ("the one who keeps hauling heavy loads"
@@ -90,6 +91,7 @@ function bestSource(ctx: Ctx, wanted: Partial<Items>, cap: number, excludeId: nu
   const { p } = ctx;
   let best: { src: Belief; load: Items; weight: number } | null = null;
   for (const src of beliefsByKind(p, ['building', 'pile'])) {
+    if(!mayTakeKnownPile(p,src))continue;
     if (src.id === excludeId) continue;
     if (src.kind === 'building' && !(src.btype === 'storehouse' || src.btype === 'granary' || src.hh === p.hhId)) continue;
     const load: Items = {};

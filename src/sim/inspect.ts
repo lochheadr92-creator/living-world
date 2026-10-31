@@ -34,6 +34,7 @@ import { ACTIVITY_NOUN, BELIEF_NOUN, SOURCE_NOUN } from './labels';
 import { moodOf } from './needs';
 import { isRich, thoughtsOf } from './mood';
 import { ageYears, carryCap, itemsToText, stageOf, traitSummary } from './people';
+import { householdById } from './households';
 import { relLabel } from './relations';
 import { foodUnits, weightOf } from './economy';
 import { membersOf } from './households';
@@ -800,7 +801,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
       return { kind: 'plot', ...base, title: 'Field plot', subtitle: 'Farmland', rows, bars, notes: ecologyNotes(world,pl.x,pl.y), position: { x: pl.x + 0.5, y: pl.y + 0.5 } };
     }
     case 'pile':
-      return { kind: 'pile', ...base, title: 'Pile of goods', subtitle: e.note || 'Left lying about', rows: [['Lying here since', agoText(world, e.since)]], bars: [], items: itemList(e.items), notes: ['Perishable food slowly spoils out in the open.'], position: { x: e.x + 0.5, y: e.y + 0.5 } };
+      return { kind: 'pile', ...base, title: e.mealFood?'Leftover meal food':'Pile of goods', subtitle: e.note || 'Left lying about', rows: [['Lying here since', agoText(world, e.since)],...(e.mealFood?[["Belongs to",householdById(world,e.mealFood.hhId)?.name??`household #${e.mealFood.hhId}`] as [string,string]]:[])], bars: [], items: itemList(e.items), notes: ['Perishable food slowly spoils out in the open.',...(e.mealFood?['Food remains at the gathering place. A household member must reach it and spend time collecting it, with room in their pack.']:[])], position: { x: e.x + 0.5, y: e.y + 0.5 } };
     case 'grave':
       return { kind: 'grave', ...base, title: `Grave of ${e.name}`, subtitle: `Died ${agoText(world, e.died)}, aged ${e.age}`, rows: [], bars: [], notes: [], position: { x: e.x + 0.5, y: e.y + 0.5 } };
     case 'animal':

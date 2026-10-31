@@ -1,3 +1,6 @@
+import {hasMealLeftovers,mayTakeKnownPile} from './meal_leftovers';
+import {foodUnits} from './economy';
+import {carryCap} from './people';
 import { techniqueBlocker, hasLearnerInstruction, techniqueLacking, trialAllowed, firstLacking, TECHNIQUES } from './techniques';
 import {hasOffcuts} from './offcuts';
 import {fireFuelWanted} from './options_work';
@@ -462,6 +465,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
   const { world, p } = ctx;
   const found: { b: Belief; n: number; e: number }[] = [];
   for (const b of beliefsByKind(p, ['building', 'pile', 'cart'])) {
+    if(!mayTakeKnownPile(p,b))continue;
     if (dest && b.id === dest.id) continue;
     let n = stockAt(b, item);
     if (b.kind === 'building') {
@@ -820,6 +824,7 @@ function optCartHaul(ctx: Ctx): void {
     // where is the stuff? the one place that has the most of it
     let best: { src: Belief; load: Items; weight: number } | null = null;
     for (const src of beliefsByKind(p, ['building', 'pile'])) {
+      if(!mayTakeKnownPile(p,src))continue;
       if (src.id === site.id) continue;
       if (src.kind === 'building' && src.btype && isFacilityType(src.btype as BuildingType) && !mayUseBelief(ctx, src)) continue;
       if (src.kind === 'building' && !isFacilityType(src.btype as BuildingType) && src.btype !== 'storehouse') continue;
@@ -1143,6 +1148,18 @@ export function productionOptions(ctx: Ctx): void {
   if (!workRules(world.settings.scene)) return; // staged scenes stay exactly as staged
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
   if (p.health < 45) return;
+  if(hasMealLeftovers(world)){
+    // Only personally seen/heard household holdings; no lookup of a remote meal table.
+    const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
+    for(const b of known.slice(0,2)){
+      const items:Items={};let room=carryCap(world,p)-weightOf(p.inv),left=4;
+      for(const k of ['bread','meat','fish','fruit','grain','berries'] as const){
+        const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
+        if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
+      }
+      if(foodUnits(items)>0)collectLeaf(ctx,b,items,24+4*p.traits.generosity,'recover our leftover meal food before it spoils','meal');
+    }
+  }
   if(hasOffcuts(world)&&freeOf(p,'offcuts')<4&&freeOf(p,'wood')<2){
     const fires=beliefsByKind(p,['building']).filter(b=>b.btype==='fire'&&(b.fuel??0)-(world.tick-b.seen)*0.85<fireFuelWanted(world));
     if(fires.length)collectOptions(ctx,'offcuts',4-freeOf(p,'offcuts'),24+6*p.traits.generosity,'reuse known offcuts to keep a low fire burning','fire',null);

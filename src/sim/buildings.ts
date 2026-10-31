@@ -101,12 +101,12 @@ export function householdOf(world: World, p: Person): Household | undefined {
   return world.households.find((h) => h.id === p.hhId);
 }
 
-export function makeHousePile(world: World, x: number, y: number, items: Items, note: string, fromHolder = 0): Pile | null {
+export function makeHousePile(world: World, x: number, y: number, items: Items, note: string, fromHolder = 0, mealFood?:Pile['mealFood']): Pile | null {
   if (isEmptyItems(items)) return null;
   let target: Pile | null = null;
   // merge into an existing pile on the tile if present
   for (const pile of world.piles) {
-    if (pile.x === x && pile.y === y) {
+    if (!mealFood && !pile.mealFood && pile.x === x && pile.y === y) {
       for (const k in items) addItem(pile.items, k as keyof Items, items[k as keyof Items] ?? 0);
       target = pile;
       break;
@@ -114,6 +114,7 @@ export function makeHousePile(world: World, x: number, y: number, items: Items, 
   }
   if (!target) {
     target = { ent: 'pile', id: newId(world), x, y, items: cloneItems(items), since: world.tick, note };
+    if(mealFood)target.mealFood={...mealFood};
     registerGeneric(world, target);
   }
   // equipment keeps its identity: its records move to the heap along with the counts
@@ -122,7 +123,7 @@ export function makeHousePile(world: World, x: number, y: number, items: Items, 
 }
 
 /** Drop items on the nearest free tile near (x, y) so nothing silently disappears. */
-export function dropNear(world: World, fx: number, fy: number, items: Items, note: string, fromHolder = 0): Pile | null {
+export function dropNear(world: World, fx: number, fy: number, items: Items, note: string, fromHolder = 0, mealFood?:Pile['mealFood']): Pile | null {
   if (isEmptyItems(items)) return null;
   const cx = Math.floor(fx);
   const cy = Math.floor(fy);
@@ -133,12 +134,12 @@ export function dropNear(world: World, fx: number, fy: number, items: Items, not
         const tx = cx + dx;
         const ty = cy + dy;
         if (isWalkable(world, tx, ty)) {
-          return makeHousePile(world, tx, ty, items, note, fromHolder);
+          return makeHousePile(world, tx, ty, items, note, fromHolder, mealFood);
         }
       }
     }
   }
-  return makeHousePile(world, cx, cy, items, note, fromHolder);
+  return makeHousePile(world, cx, cy, items, note, fromHolder, mealFood);
 }
 
 /** Shares of what it took to build, by household (materials count 1 a unit, work 1 per 25 ticks). */

@@ -968,6 +968,8 @@ export interface Plot {
 }
 
 export interface Pile {
+  /** Rules 90: one physical leftover holding per meal; never merged with unrelated goods. */
+  mealFood?: {mealId:number;hostId:number;hhId:number};
   ent: 'pile';
   id: number;
   x: number;
@@ -1153,6 +1155,8 @@ export interface Conversation {
 
 // ───────────────────────────── shared meals ─────────────────────────────
 export interface Meal {
+  /** Household supplying the real table food, retained even if the host later dies or moves. */
+  tableOwnerHh?: number;
   supperContact?: import('./household_practices').SupperContact;
   id: number;
   host: number;
