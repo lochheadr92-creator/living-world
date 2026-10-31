@@ -56,7 +56,15 @@ characters); it is the price of keeping reasons as words.
 
 ## Limits and what remains
 
-- The ledger links decision → activity → ending. It does not yet link to the triggering observation or the belief relied
+- The ledger links each recorded decision to its launched activity and records the outcome whenever that activity reaches
+  the common ending path. VERIFIED at rules 116 (review 2, LW-01): a paused ordinary activity that cannot resume, or whose
+  request is cancelled while it is paused, now reaches that path (`tests/suspended_endings.test.ts`,
+  `tests/suspended_cancellation.test.ts`), and the five-day ordinary river scan that lost two at rules 115 loses none
+  (`tests/suspended_scan.test.ts`; one seed, five days, not a rate). Still open: `abortActivity` and `cancelCareAcquisition`
+  clear a paused activity without an ending (review 1, G3), as do the plan hand-over and care hand-back releases and a resume
+  when the person has already started something else (found by code reading, not reproduced); such an entry still shows
+  "ending not recorded". Rules 115 and earlier
+  keep the historical discard. The ledger does not yet link to the triggering observation or the belief relied
   on (A15 "observation → belief then → choice"), nor to a later consequence beyond the activity's own ending; those remain.
 - The AI inhabitant's observation is unchanged: it already sees its own last decision; the ledger is not exposed to it.
 - Authored and pre-103 worlds keep no ledger and say so.
