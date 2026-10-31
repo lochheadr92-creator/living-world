@@ -223,3 +223,7 @@ Release full regression completed: **287 files / 1,944 tests passed**, 410.34 se
 This replaces the two explicitly cancelled runs; neither cancelled run is counted as a pass.
 Immutable rules-88 continuation will be captured from the committed runtime before any
 successor behaviour is introduced.
+
+Captured from runtime `7502c1e` and committed as `1e48964`: ordinary, after-departure
+discovery/detour, actual retreat and saved waiting through natural recovery. Separate
+immutable test passes **1/1**, 2.25 seconds; historical references were not regenerated.
