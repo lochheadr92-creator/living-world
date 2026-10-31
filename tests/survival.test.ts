@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { newActivity, startActivity } from '../src/sim/activities';
 import { createBuilding, makeHousePile } from '../src/sim/buildings';
 import { reviewActivity } from '../src/sim/decision';
-import { conservationReport } from '../src/sim/economy';
+import { conservationReport, takeFrom } from '../src/sim/economy';
 import { putBelief, waterBeliefId } from '../src/sim/knowledge';
 import { conceptionTick, immigrationTick } from '../src/sim/lifecycle';
 import { fleeRadius, makeCtx, rankWaterSpots } from '../src/sim/optutil';
@@ -10,6 +10,7 @@ import { stageOf } from '../src/sim/people';
 import { spark } from '../src/sim/relations';
 import { RNG, hashString } from '../src/sim/rng';
 import { testKit } from '../src/sim/scenes';
+import { mintTool } from '../src/sim/tools';
 import type { Person, World } from '../src/sim/types';
 import { T } from '../src/sim/types';
 import { computeWaterDist } from '../src/sim/worldgen';
@@ -140,7 +141,10 @@ describe('what the dead leave behind', () => {
   it('belongings left on the ground are picked up and put to use, and nothing goes missing', () => {
     const { w, rng } = lakeWorld('salvage', 'natural');
     const heir = testKit.addPerson(w, rng, { name: 'Heir', x: 43.5, y: 43.5, hunger: 90, thirst: 90, energy: 90 });
-    makeHousePile(w, 48, 44, { wood: 3, axe: 1, berries: 2 }, 'old belongings');
+    // the axe is real equipment: it gets a record and goes to the heap through the same retagging drop a death uses
+    mintTool(w, 'axe', 0, heir.hhId, heir.id, heir.inv, 0, 'staged belongings', false);
+    takeFrom(heir.inv, 'axe', 1);
+    makeHousePile(w, 48, 44, { wood: 3, axe: 1, berries: 2 }, 'old belongings', heir.id);
     testKit.finish(w, 'natural');
     expect(w.piles).toHaveLength(1);
     run(w, 900);
