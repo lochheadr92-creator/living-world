@@ -1,0 +1,23 @@
+{
+  "source": "33d22ed20d3deac7d984536a5e236098abb28bbc, rules 112 before successor behaviour",
+  "ordinary": {
+    "saved": "2612d347b82721969beee127de754e0fa3fa0c1cb7b8c6a94553ee5ca812ddc0",
+    "uninterrupted": "7ca4eb4b72cce7406bf7678b3c962ab29c83d50b7f031c3e0f00ab17df13c500",
+    "continued": "7ca4eb4b72cce7406bf7678b3c962ab29c83d50b7f031c3e0f00ab17df13c500"
+  },
+  "paused": {
+    "saved": "db6c8a371bee5333a851e74a21fd841dfb67c53c44bc5043544f012f9a33471e",
+    "uninterrupted": "8deb03cd4a7e5a7fd6a6fdab5657b390b7315160ab74facb57be2174ac8caec5",
+    "continued": "8deb03cd4a7e5a7fd6a6fdab5657b390b7315160ab74facb57be2174ac8caec5"
+  },
+  "resumed": {
+    "saved": "8deb03cd4a7e5a7fd6a6fdab5657b390b7315160ab74facb57be2174ac8caec5",
+    "uninterrupted": "b5e6b5f6a0a656fc1f7692af641072bb949f8d89d472f98006a096f6abd039c5",
+    "continued": "b5e6b5f6a0a656fc1f7692af641072bb949f8d89d472f98006a096f6abd039c5"
+  },
+  "closed": {
+    "saved": "17f9e93763d1516b5bb5444faf9bda37e2a161e25f763e495baf3bffa5e1b19c",
+    "uninterrupted": "d26264fd835dbf019c4e9b9481490f9551f6583ee9dd6ca84d07711bd71dee60",
+    "continued": "d26264fd835dbf019c4e9b9481490f9551f6583ee9dd6ca84d07711bd71dee60"
+  }
+}

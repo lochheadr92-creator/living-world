@@ -10,6 +10,12 @@
   consuming zero carried grain. That physical-accounting repair is next; no
   pressure tuning or survival benefit has been claimed.
 
+- Rules 112 candidate: a real conversation preserves and can resume the gathering
+  already underway, through occasion-specific physical validity and its original
+  deadline. Invalid pauses end with a reason. See `OCCASION_RECOVERY.md`. Focused
+  contracts, rendered 8/8 and typecheck/build pass; full regression and four 20-day
+  ordinary pause/resume windows are running. No general household-benefit claim.
+
 - Rules 111: an admitted guest keeps the option for the gathering still
   underway; no second visit or extra reward. The rules-107 days-45–50 household
   baseline exposed 33 admitted guests all interrupted, and zero leisure-category

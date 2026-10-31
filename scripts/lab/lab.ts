@@ -1,5 +1,6 @@
 import {meetingKnowledgeOn,setMeetingKnowledge} from '../../src/sim/meeting_knowledge';
 import {occasionParticipationOn,setOccasionParticipation} from '../../src/sim/occasion_participation';
+import {occasionRecoveryOn,setOccasionRecovery} from '../../src/sim/occasion_recovery';
 import {continuityKnowledgeOn,setContinuityKnowledge} from '../../src/sim/continuity_knowledge';
 import {estateCustodyOn,setEstateCustody} from '../../src/sim/estate';
 import {workHandoverOn,setWorkHandover} from '../../src/sim/handover_state';
@@ -368,6 +369,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-construction-finish')return {spec:label,summary:'restore the historical last-two-percent exclusion for fully supplied construction',install(){const was=constructionFinishOn();setConstructionFinish(false);return ()=>setConstructionFinish(was);}};
   if(kind==='rich-no-water-search')return {spec:label,summary:'restore home-anchored daytime-only exploration and its historical activity purpose',install(){const was=waterSearchOn();setWaterSearch(false);return ()=>setWaterSearch(was);}};
   if(kind==='rich-no-occasion-participation')return {spec:label,summary:'restore removal of the ongoing gathering after admission',install(){const was=occasionParticipationOn();setOccasionParticipation(false);return ()=>setOccasionParticipation(was);}};
+  if(kind==='rich-no-occasion-recovery')return {spec:label,summary:'restore discarded occasion progress and entity-only resume validation',install(){const was=occasionRecoveryOn();setOccasionRecovery(false);return ()=>setOccasionRecovery(was);}};
   if(kind==='rich-no-remembered-need')return {spec:label,summary:'remove deciding care for an out-of-sight dependant from how they looked when last seen; the live figures are read as before 106',install(){const was=rememberedNeedOn();setRememberedNeed(false);return ()=>setRememberedNeed(was);}};
   if(kind==='rich-no-location-questions')return {spec:label,summary:'remove asking a present neighbour where a promised person is; other info questions remain',install(){const was=locationQuestionsOn();setLocationQuestions(false);return ()=>setLocationQuestions(was);}};
   if(kind==='rich-no-supper-telling')return {spec:label,summary:'remove the telling of household undertakings at a shared supper; conversations still tell',install(){const was=supperTellingOn();setSupperTelling(false);return ()=>setSupperTelling(was);}};

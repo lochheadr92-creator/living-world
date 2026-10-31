@@ -1,7 +1,7 @@
 # Living World: notes for Claude (read this first)
 
-Current state (31 October 2026): rules 111 ongoing occasion participation (`OCCASION_PARTICIPATION.md`),
-after 110 purposeful water search; the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 112 occasion recovery after conversation (`OCCASION_RECOVERY.md`),
+after 111 ongoing occasion participation; the autonomy/environment programme continues from the register.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
