@@ -5,7 +5,7 @@ import { footprintOccupied, hasLayoutClaims, layoutClaimBlock, LAYOUT_OCCUPANCY_
 import { proposeProject, creditProject, mayWorkProject, hasTownships } from './townships';
 import { faceToward, registerHandler } from './activities';
 import type { WorkResult } from './activities';
-import { BUILD_DEF, FIRE_FUEL_PER_WOOD, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WEIGHT, WORK, isHomeType, isSolidHome } from './constants';
+import { BUILD_DEF, FIRE_MAX_FUEL, REPAIR_FALLBACK_GAIN, REPAIR_GAIN, REPAIR_USES, SKILL_MAX, TOOL_RECIPE, WEIGHT, WORK, isHomeType, isSolidHome } from './constants';
 import { buildingLabel, completeSite, createSite } from './buildings';
 import { notePractice, onSharedWork } from './apprentice';
 import { riskOfHarm } from './life';
@@ -22,6 +22,7 @@ import { ORDINARY_RULES, rulesOf, within } from './rules';
 import { mintTool, taskMultiplier, wearFor } from './tools';
 import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
+import {fuelItem,fuelValue,hasOffcuts} from './offcuts';
 import { clamp } from './util';
 import { itemsToText } from './people';
 import {projectAvailable} from './project_step';
@@ -384,7 +385,8 @@ registerHandler('fuel_fire', {
       delBelief(p, a.targetId);
       return 'the fire is gone';
     }
-    if ((p.inv.wood ?? 0) < 1) return 'no wood to add';
+    if(a.data.fuelItem!==undefined&&(!hasOffcuts(world)||a.data.fuelItem!=='offcuts'))return 'invalid fire fuel';
+    if ((p.inv[fuelItem(world,a)] ?? 0) < 1) return 'no '+fuelItem(world,a)+' to add';
     if (f.fuel >= FIRE_MAX_FUEL * 0.8) {
       observe(world, p, f); // someone has already seen to it
       return 'it is burning well already';
@@ -401,20 +403,21 @@ registerHandler('fuel_fire', {
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress < a.duration) return 'continue';
-    if (consume(world, p.inv, 'wood', 1, 'fuel for the fire') < 1) return a.cycle > 0 ? 'done' : 'fail:no wood to add';
-    f.fuel = Math.min(FIRE_MAX_FUEL, f.fuel + FIRE_FUEL_PER_WOOD);
+    const item=fuelItem(world,a);
+    if (consume(world, p.inv, item, 1, 'fuel for the fire') < 1) return a.cycle > 0 ? 'done' : `fail:no ${item} to add`;
+    f.fuel = Math.min(FIRE_MAX_FUEL, f.fuel + fuelValue(item));
     if(hasPromiseTargets(world))p.cooldowns['fedfire'+f.id]=world.tick;
     a.cycle++;
     a.progress = 0;
     addFx(world, 'ember', f.x + 0.5, f.y + 0.5, 0);
     observe(world, p, f);
-    if (a.cycle >= a.amount || f.fuel >= FIRE_MAX_FUEL * 0.8 || (p.inv.wood ?? 0) < 1) return 'done';
+    if (a.cycle >= a.amount || f.fuel >= FIRE_MAX_FUEL * 0.8 || (p.inv[item] ?? 0) < 1) return 'done';
     return 'continue';
   },
   onEnd(world, p, a) {
     const f = world.byId.get(a.targetId);
     if (a.cycle > 0 && f && f.ent === 'building') {
-      addLog(world, p, 'work', `Fed the fire with ${a.cycle} log${a.cycle > 1 ? 's' : ''}.`);
+      addLog(world, p, 'work', fuelItem(world,a)==='offcuts'?`Fed the fire with ${a.cycle} recovered offcut fuel bundle${a.cycle>1?'s':''}.`:`Fed the fire with ${a.cycle} log${a.cycle > 1 ? 's' : ''}.`);
       // noted for a promise to keep the fire going (responsibilities.ts; rich only, so an authored world's record is untouched)
       if (world.settings.dynamics === 'rich') p.cooldowns['fedfire' + f.id] = world.tick;
       if (a.data.wasOut) addEvent(world, 'survival', `${p.name} relit the fire.`, [p.id], f.x, f.y);

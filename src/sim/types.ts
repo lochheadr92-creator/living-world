@@ -12,7 +12,7 @@ export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat'
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
-export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water';
+export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts';
 export type Items = Partial<Record<ItemKind, number>>;
 
 export interface Store {

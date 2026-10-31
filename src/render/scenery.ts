@@ -4,7 +4,7 @@ import type { Building, Grave, Pile, Plot, Site, Source, World } from '../sim/ty
 import { BuildingPainter, sack } from './buildings';
 import { SiteDrawer } from './construction';
 import { clayPitSprite, oreVeinSprite, outcropSprite, stageOf } from './deposits';
-import { brickStack, breadBasket, handleBundle, ironBars, lumpHeap, plankStack, sackPile } from './goods';
+import { brickStack, breadBasket, handleBundle, ironBars, lumpHeap, plankStack, sackPile, stackSprite } from './goods';
 import { HOUSEHOLD_COLORS } from './palette';
 import { BERRY_SPOTS, FRUIT_SPOTS, SpriteCache, blit, bushSprite, ellipse, fruitTreeSprite, graveSprite, groundShadow, poly, rockSprite, shade, stumpSprite, treeSprite } from './sprites';
 
@@ -406,6 +406,8 @@ export class Scenery {
           ctx.lineTo(px + 6, py - i * 3 - 2);
           ctx.stroke();
         }
+      } else if (k === 'offcuts') {
+        blit(ctx,stackSprite(this.cache,'offcuts',n),px,py,0.7);
       } else if (k === 'stone') {
         for (let i = 0; i < Math.min(3, n); i++) ellipse(ctx, px + (i - 1) * 4, py - (i === 1 ? 4 : 1), 4, 3, shade('#a8a79f', 0.88 + i * 0.07));
       } else if (k === 'water') {

@@ -1,4 +1,7 @@
 import { techniqueBlocker, hasLearnerInstruction, techniqueLacking, trialAllowed, firstLacking, TECHNIQUES } from './techniques';
+import {hasOffcuts} from './offcuts';
+import {fireFuelWanted} from './options_work';
+import {freeOf} from './intent';
 import { isRich } from './mood';
 import { newActivity } from './activities';
 import { BUILD_DEF, CARRY_CAP, DAY, GRANARY_TEND_EVERY, ITEM_LABEL, REPAIR_USES, TOOL_DEFS, WEIGHT, WORK, isSolidHome, workRules } from './constants';
@@ -1140,6 +1143,10 @@ export function productionOptions(ctx: Ctx): void {
   if (!workRules(world.settings.scene)) return; // staged scenes stay exactly as staged
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
   if (p.health < 45) return;
+  if(hasOffcuts(world)&&freeOf(p,'offcuts')<4&&freeOf(p,'wood')<2){
+    const fires=beliefsByKind(p,['building']).filter(b=>b.btype==='fire'&&(b.fuel??0)-(world.tick-b.seen)*0.85<fireFuelWanted(world));
+    if(fires.length)collectOptions(ctx,'offcuts',4-freeOf(p,'offcuts'),24+6*p.traits.generosity,'reuse known offcuts to keep a low fire burning','fire',null);
+  }
   const demands = demandsOf(ctx);
   for (const d of demands) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);
   projectOptions(ctx);

@@ -1,4 +1,5 @@
 import { recordWorkshopOutput } from './settlement_economy';
+import { recoveredOffcuts } from './offcuts';
 import { techniqueBlocker, techniqueLacking, trialAllowed, trialFinished } from './techniques';
 import { runsRulesVersion } from './rulesversion';
 import { notePractice, onSharedWork } from './apprentice';
@@ -326,8 +327,8 @@ export function recipeTool(world: World, p: Person, b: Building, r: Recipe): { t
   return { tool: t, bench: !!t };
 }
 
-function outputWeight(r: Recipe): number {
-  let w = 0;
+function outputWeight(r: Recipe, world:World): number {
+  let w = recoveredOffcuts(world,r)*WEIGHT.offcuts;
   for (const k of Object.keys(r.outputs) as ItemKind[]) w += (r.outputs[k] ?? 0) * WEIGHT[k];
   if (r.toolOut) w += WEIGHT[r.toolOut.kind];
   return w;
@@ -372,7 +373,7 @@ export function startBlocker(world: World, b: Building, p: Person, r: Recipe, tr
     if (!dep) return 'no stone outcrop to cut';
     if (dep.amount - dep.reserved < r.fromDeposit.n) return 'the outcrop is worked out';
   }
-  const out = outputWeight(r);
+  const out = outputWeight(r,world);
   if (out > 0 && storeFreeWeight(b) - (r.fromDeposit ? 0 : 0) < out - weightOfList(r.inputs) * 0) {
     // inputs leave the store when the job starts, so they free up room
     const freed = weightOfList(r.inputs) + weightOfList(r.fuel);
@@ -543,7 +544,8 @@ export function finishJob(world: World, b: Building): boolean {
   const job = ops?.job;
   if (!ops || !job) return false;
   const r = recipeOf(job);
-  const out = outputWeight(r);
+  const offcuts = recoveredOffcuts(world,r);
+  const out = outputWeight(r,world);
   const freed = weightOfList(job.held) - (r.fromDeposit ? 0 : 0);
   // the held inputs are not in the store, so the product needs its own room
   if (out > 0 && storeFreeWeight(b) < out - (r.fromDeposit ? 0 : 0) && !(r.cartOut || (r.toolOut && false))) {
@@ -568,8 +570,10 @@ export function finishJob(world: World, b: Building): boolean {
     const n = Math.min(job.held[k] ?? 0, r.inputs[k] ?? 0);
     if (n <= 0) continue;
     takeFrom(job.held, k, n);
-    const waste = Math.min(n, r.waste[k] ?? 0);
-    if (n - waste > 0) ledgerConsume(world, k, n - waste, `used in ${r.label}`);
+    const recovered = k==='wood'?Math.min(n,offcuts*0.5):0;
+    const waste = Math.max(0,Math.min(n, r.waste[k] ?? 0)-recovered);
+    if (n - waste - recovered > 0) ledgerConsume(world, k, n - waste - recovered, `used in ${r.label}`);
+    if (recovered > 0) ledgerConsume(world,k,recovered,`converted to recoverable offcut fuel from ${r.label}`);
     if (waste > 0) {
       ledgerConsume(world, k, waste, `wasted: ${r.wasteWhy}`);
       ops.wasted[r.wasteWhy] = (ops.wasted[r.wasteWhy] ?? 0) + waste;
@@ -614,13 +618,14 @@ export function finishJob(world: World, b: Building): boolean {
     }
     delete job.held[r.fromDeposit.item];
   }
-  for (const k of Object.keys(r.outputs) as ItemKind[]) {
+  const outputs:Items=offcuts?{...r.outputs,offcuts}:r.outputs;
+  for (const k of Object.keys(outputs) as ItemKind[]) {
     // what is cut from a deposit was moved above, not made: it must not be created a second time
     if (r.fromDeposit && r.fromDeposit.item === k) continue;
-    const n = r.outputs[k] ?? 0;
+    const n = outputs[k] ?? 0;
     if (n <= 0) continue;
     addItem(b.store.items, k, n);
-    ledgerCreate(world, k, n, `made ${r.label}`);
+    ledgerCreate(world, k, n, k==='offcuts'?`recovered fuel from ${r.label}`:`made ${r.label}`);
     bump(ops.produced, k, n);
     recordWorkshopOutput(world,b,k,n);
     if (client) addEarmark(world, b, { kind: 'out', item: k, n, owner: client, reason: job.purpose });
@@ -668,7 +673,7 @@ export function finishJob(world: World, b: Building): boolean {
     const q = personById(world, Number(k));
     if (q) {
       q.stats.crafted++;
-      addLog(world, q, 'work', `Finished ${r.label} at the ${b.type.replace('_', ' ')}.`);
+      addLog(world, q, 'work', `Finished ${r.label} at the ${b.type.replace('_', ' ')}.${offcuts?` Recovered ${offcuts} offcut fuel bundle${offcuts>1?'s':''} into its store.`:''}`);
     }
   }
   addFx(world, 'built', b.x + b.w / 2, b.y + b.h / 2, b.id);
@@ -695,6 +700,7 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
   const ins = new Set<ItemKind>();
   const outs = new Set<ItemKind>();
   for (const r of recipesAt(b.type)) {
+    if(recoveredOffcuts(world,r)>0)outs.add('offcuts');
     for (const k of Object.keys(r.inputs) as ItemKind[]) ins.add(k);
     for (const k of Object.keys(r.fuel) as ItemKind[]) ins.add(k);
     for (const k of Object.keys(r.outputs) as ItemKind[]) outs.add(k);
@@ -716,7 +722,7 @@ export function facilitySnapshot(world: World, b: Building): FacilitySnapshot | 
     inputs,
     blocked: ops.lastBlocker,
     deposit: dep ? dep.amount : -1,
-    yields: rr ? { ...rr.outputs, ...(rr.fromDeposit ? { [rr.fromDeposit.item]: rr.fromDeposit.n } : {}), ...(rr.toolOut ? { [rr.toolOut.kind]: 1 } : {}) } : {},
+    yields: rr ? { ...rr.outputs, ...(recoveredOffcuts(world,rr)>0?{offcuts:recoveredOffcuts(world,rr)}:{}), ...(rr.fromDeposit ? { [rr.fromDeposit.item]: rr.fromDeposit.n } : {}), ...(rr.toolOut ? { [rr.toolOut.kind]: 1 } : {}) } : {},
     readyAt: job ? (job.phase === 'burn' ? world.tick + job.burnLeft : job.phase === 'ready' ? world.tick : world.tick + Math.max(0, job.total - job.progress) + job.burnTotal) : 0,
     client: job ? job.client : 0,
     tended: ops.tended,

@@ -1548,6 +1548,7 @@ function drawProps(ctx: CanvasRenderingContext2D, parts: Part[], p: Person, pose
 }
 
 const SACK_TONES: Partial<Record<ItemKind, [string, string, string]>> = {
+  offcuts: ['#d5b783','#a38252','#6d5436'],
   flour: ['#f5eddc', '#d9ceb4', '#a89f88'],
   charcoal: ['#4a4641', '#2e2b28', '#171513'],
   clay: ['#d99a68', '#b6764a', '#85502e'],
@@ -1664,7 +1665,7 @@ function drawCarried(
   // ── on the back: the heaviest of the sacked goods ──
   let sackKind: ItemKind | null = null;
   let sackW = 0;
-  for (const k of ['stone', 'ore', 'clay', 'charcoal', 'flour'] as ItemKind[]) {
+  for (const k of ['stone', 'ore', 'clay', 'charcoal', 'flour', 'offcuts'] as ItemKind[]) {
     const w = (inv[k] ?? 0) * (k === 'charcoal' ? 3 : k === 'flour' ? 2 : 1);
     if (w > sackW) {
       sackW = w;

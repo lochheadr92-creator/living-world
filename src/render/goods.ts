@@ -388,10 +388,25 @@ export function handleBundle(cache: SpriteCache, n: number): Sprite {
 }
 
 /** Short names the stock code in scenery.ts and construction.ts uses. */
-export type StackKind = 'wood' | 'planks' | 'bricks' | 'stone' | 'cutstone' | 'clay' | 'ore' | 'charcoal' | 'iron' | 'flour' | 'grain' | 'bread' | 'handles';
+export type StackKind = 'wood' | 'planks' | 'bricks' | 'stone' | 'cutstone' | 'clay' | 'ore' | 'charcoal' | 'iron' | 'flour' | 'grain' | 'bread' | 'handles' | 'offcuts';
+
+/** Short irregular timber bundles, distinct from structural logs and finished boards. */
+function offcutBundles(cache:SpriteCache,n:number):Sprite{
+ const k=Math.max(1,Math.min(8,Math.ceil(n)));
+ return cache.get(`g:offcuts:${k}`,58,45,29,32,ctx=>{
+  const p=mk(0.7,0.5);ellipse(ctx,0,3,21,7,'rgba(20,28,18,0.22)');
+  for(let i=0;i<k;i++){
+   const y=0.1+(i%3)*0.16,z=2+Math.floor(i/3)*4;
+   log(ctx,p,0.12+hashUnit(i,3,1)*0.1,0.48+hashUnit(i,2,4)*0.2,y,z,2.2,0.9);
+   const a=p(0.35,y-0.06,z+2),b=p(0.35,y+0.06,z-1);line(ctx,a,b,'#6d6049',1.5);
+  }
+ });
+}
 
 export function stackSprite(cache: SpriteCache, kind: StackKind, n: number): Sprite {
   switch (kind) {
+    case 'offcuts':
+      return offcutBundles(cache,n);
     case 'wood':
       return logPile(cache, n);
     case 'planks':

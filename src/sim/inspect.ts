@@ -757,6 +757,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
         if (dwellers.length) rows.push(['Household', dwellers.join(', ')]);
       }
       const sections = b.ops ? describeFacility(world, b) : undefined;
+      if((b.store.items.offcuts??0)>0)notes.push('Recoverable timber offcuts occupy real storage. Collectable fuel, not structural wood; workshop ownership and claims still apply. Remaining sawdust and past waste cannot be reclaimed.');
       if (b.ops) {
         const job = b.ops.job;
         if (job) {

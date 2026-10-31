@@ -1,0 +1,20 @@
+import {expect,it} from 'vitest';
+import {offcutScene} from './helpers/offcuts';
+import {startJob,workJob} from '../src/sim/facilities';
+import {RECIPE_BY_ID} from '../src/sim/recipes';
+import {observe} from '../src/sim/knowledge';
+import {stubModel} from '../src/agent/model';
+import {runLive,runReplay} from '../src/agent/run';
+import {observationFromPrompt} from '../src/agent/protocol';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+import {conservationReport} from '../src/sim/economy';
+it.each([false,true])('exposes real collection/fuel through legal offers and replays the transcript (memory %s)',async memory=>{
+ const {w,p,yard,fire}=offcutScene();expect(startJob(w,yard,p,RECIPE_BY_ID.hew_planks,p.id,'staged paid boards')).toBeNull();
+ for(let n=0;n<400&&yard.ops?.job;n++)workJob(w,yard,p);
+ observe(w,p,yard);observe(w,p,fire);p.cooldowns.pause=0;p.nextThink=0;const initial=serializeWorld(w);
+ const model=stubModel('reuse-offcuts',req=>{const o=observationFromPrompt(req.user)!;const chosen=o.options.find(a=>a.key===`fuel:${fire.id}`)??o.options.find(a=>a.key===`collect:${yard.id}:offcuts`)??o.options[0];return JSON.stringify({choose:chosen.key,why:'Use the offered local fuel collection and fire work'});});
+ const result=await runLive(w,p.id,model,{until:400,memory});
+ expect(result.world.ledger.consumed.offcuts).toBe(2);expect(conservationReport(result.world).ok).toBe(true);
+ expect(result.transcript.asks.some(a=>a.observation.options.some(o=>o.key===`collect:${yard.id}:offcuts`))).toBe(true);
+ expect(serializeWorld(runReplay(deserializeWorld(initial),result.transcript).world)).toBe(serializeWorld(result.world));
+});

@@ -29,6 +29,7 @@ interface Slot {
 /** Listed back to front, so overlapping stacks are drawn in the right order. */
 const STOCK: Partial<Record<BuildKind, Slot[]>> = {
   timber_yard: [
+    { item: 'offcuts', kind: 'offcuts', fx: 1.45, fy: 1.85, per: 1, max: 8, layer: 1 },
     { item: 'handles', kind: 'handles', fx: 0.6, fy: 0.78, per: 1, max: 14, layer: 0 },
     { item: 'planks', kind: 'planks', fx: 2.38, fy: 0.8, per: 1, max: 14, layer: 0 },
     { item: 'wood', kind: 'wood', fx: 0.34, fy: 1.6, per: 2, max: 10, layer: 1 },

@@ -1,4 +1,5 @@
 import { hasEcology } from './ecology';
+import {hasOffcuts} from './offcuts';
 import {hasPromiseExpectations,promisedPerson,promisedLocation} from './promise_expectations';
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
 import { newActivity } from './activities';
@@ -300,7 +301,8 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
     if (b.btype === 'fire') {
       const fuel = (b.fuel ?? 0) - (world.tick - b.seen) * 0.85;
       if (fuel < fireFuelWanted(world)) {
-        if (hashUnit(p.id, Math.floor(world.tick / 400), b.id) < 0.3 + 0.45 * p.traits.generosity) needs.push({ item: 'wood', n: 2, base: 24 + 6 * p.traits.generosity, why: 'to keep the fire going', tag: 'fire' });
+        const need=hasOffcuts(world)?Math.max(0,2-freeOf(p,'offcuts')*0.5):2;
+        if (need>0&&hashUnit(p.id, Math.floor(world.tick / 400), b.id) < 0.3 + 0.45 * p.traits.generosity) needs.push({ item: 'wood', n: need, base: 24 + 6 * p.traits.generosity, why: 'to keep the fire going', tag: 'fire' });
       }
       continue;
     }
@@ -802,7 +804,8 @@ function optRepairAndFire(ctx: Ctx): void {
       const fuel = (b.fuel ?? 0) - (world.tick - b.seen) * 0.85;
       const wanted = fireFuelWanted(world);
       // wood a plan of theirs has spoken for is not firewood
-      const spare = freeOf(p, 'wood');
+      const item=hasOffcuts(world)&&freeOf(p,'offcuts')>=1?'offcuts':'wood';
+      const spare = freeOf(p, item);
       const promised = fireCommitment(p, b.id);
       if ((fuel > wanted && !promised) || spare < 1) continue;
       if (!(ctx.night || world.light < 0.55 || world.weather.rain > 0.3 || fuel < 150 || wanted > 500 || promised)) continue;
@@ -813,7 +816,7 @@ function optRepairAndFire(ctx: Ctx): void {
       if (cold) sc.add('cold', ctx.drives.warmth * 0.55);
       addOption(ctx, {
         kind: 'fuel_fire',
-        label: 'Add wood to the fire',
+        label: item==='offcuts'?'Add recovered offcuts to the fire':'Add wood to the fire',
         goal: cold ? 'to keep the fire burning and get warm' : 'to keep the fire burning',
         need: cold ? 'warmth' : null,
         util: sc.total,
@@ -835,7 +838,8 @@ function optRepairAndFire(ctx: Ctx): void {
             ty: b.y,
             spotX: spot.x,
             spotY: spot.y,
-            amount: Math.min(freeOf(p, 'wood'), 3),
+            amount: Math.min(freeOf(p,item), item==='offcuts'?6:3),
+            ...(item==='offcuts'?{data:{fuelItem:item}}:{}),
             utility: sc.total,
             minCommit: 30,
             maxTicks: 500,

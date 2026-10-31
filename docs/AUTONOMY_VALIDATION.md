@@ -221,3 +221,25 @@ npx --no-install tsx scripts/flood_observe.ts forest "$runRoot-flood-forest45" 4
 ```powershell
 npx --no-install tsx scripts/flood_observe.ts meadow "$runRoot-flood-meadow45" 45 1200
 ```
+
+## Rules 89 by-product follow-up (pending owner-run measurements)
+
+The fixed five-day Normal screen produces zero timber batches in all three seeds and hence
+zero recoverable offcut opportunities. This leaves ordinary activation unproven, rather than
+establishing a new supply defect. After the verified release is pushed, use fresh destinations
+for these longer ordinary screens. Based on the five-day observed cost, allow 6–15 minutes
+per 45-day seed, with a 1,200-second cap; accumulated-world cost is uncertain. Return each
+folder's `report.json`. These scripts do not resume and require fresh output roots. Existing
+matched ensembles should include `rich-no-offcuts` with control and nudges for benefit claims.
+
+```powershell
+npx --no-install vite-node scripts/offcuts_observe.ts -- river "$runRoot-offcuts-river45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/offcuts_observe.ts -- forest "$runRoot-offcuts-forest45" 45 1200
+```
+
+```powershell
+npx --no-install vite-node scripts/offcuts_observe.ts -- meadow "$runRoot-offcuts-meadow45" 45 1200
+```

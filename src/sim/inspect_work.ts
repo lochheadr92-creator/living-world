@@ -1,4 +1,5 @@
 import {describeDelay} from './promise_delays';
+import {recoveredOffcuts} from './offcuts';
 // Read-only descriptions of workplaces, building sites, carts, tools, promises and meals for the inspectors.
 // Nothing here changes the world or draws random numbers.
 import { BUILD_DEF, GRANARY_TEND_EVERY, SOURCE_ITEM, TOOL_DEFS } from './constants';
@@ -170,6 +171,8 @@ export function describeFacility(world: World, b: Building): Section[] {
   const sections: Section[] = [];
   const def = BUILD_DEF[b.type];
   const recs = recipesAt(b.type);
+  const recoverable=recs.filter(r=>recoveredOffcuts(world,r)>0);
+  if(recoverable.length)sections.push({title:'Recoverable timber fuel',notes:recoverable.map(r=>`${r.label}: ${recoveredOffcuts(world,r)} fuel bundle(s) from ${recoveredOffcuts(world,r)*0.5} wood units formerly discarded. Each bundle weighs 1 and fuels a fire half as long as a log. The rest remains waste. Collection takes a real trip and handling time; bundles use store space and belong to the batch client.`)});
   sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} → ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} · ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s burning` : ''}`] as [string, string]) });
   sections.push({ title: 'Who may use it', notes: [accessText(world, b)] });
 

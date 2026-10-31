@@ -6,6 +6,7 @@ import type { ItemKind, NeedKey } from '../sim/types';
 const DARK = '#0e1822';
 
 const ICONS = {
+  offcuts: `<path d="M2 5l7-2 1 3-7 2ZM5 9l8-2 1 3-8 2ZM2 12l7-1 1 3-7 1Z" fill="currentColor" stroke="none"/><path d="M6 4l2 9" stroke="${DARK}" stroke-width="1.5"/>`,
   // ───────── items ─────────
   berries: `<g fill="currentColor" stroke="none"><circle cx="5.1" cy="10.7" r="3"/><circle cx="10.9" cy="10.7" r="3"/><circle cx="8" cy="6.7" r="3"/></g><path d="M8 3.7c.1-1 .7-1.8 1.9-2.3" stroke="#7fb069" stroke-width="1.5"/><path d="M4.1 9.8c.2-.6.6-.9 1.1-1.1M9.9 9.8c.2-.6.6-.9 1.1-1.1M7 5.8c.2-.5.5-.8.9-.9" stroke="#fff" stroke-opacity=".5" stroke-width="1"/>`,
   fruit: `<path d="M8 5.2C6.7 4.3 3.6 4.5 3.2 7.7c-.4 3 1.5 6.3 3.6 6.3.5 0 .8-.3 1.2-.3s.7.3 1.2.3c2.1 0 4-3.3 3.6-6.3C12.4 4.5 9.3 4.3 8 5.2Z" fill="currentColor" stroke="none"/><path d="M8 5.2c0-1.3.5-2.3 1.6-3" stroke="#b58a52" stroke-width="1.4"/><path d="M9.6 3.2c.9-.9 2.2-.9 3-.3-.4 1.2-1.9 1.7-3 .9Z" fill="#7fb069" stroke="none"/><path d="M4.9 7.7c.1-.9.7-1.5 1.5-1.7" stroke="#fff" stroke-opacity=".5" stroke-width="1.1"/>`,

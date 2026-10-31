@@ -18,11 +18,12 @@ export const MAP_H = 80;
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
 export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
-export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS];
+export const ALL_ITEMS: ItemKind[] = [...FOODS, 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts'];
 /** hunger restored by one unit. Bread is milled and baked grain: see docs/ECONOMY.md for where the extra value comes from. */
 export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
+  offcuts: 1,
   meat: 1.5,
   berries: 1,
   fruit: 1,
@@ -61,6 +62,7 @@ export const GRANARY_SPOIL = 0.2;
 export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
+  offcuts: 'offcut fuel bundles',
   meat: 'meat',
   berries: 'berries',
   fruit: 'fruit',

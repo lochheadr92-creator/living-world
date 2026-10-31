@@ -28,6 +28,8 @@ export interface Recipe {
   /** the part of `inputs` that is not turned into a product */
   waste: Items;
   wasteWhy: string;
+  /** Rules 89: recover this many weight-1 fuel bundles from half as many wood units of declared waste. */
+  offcuts?: number;
   /** stone is cut out of an outcrop: moved from the deposit into the batch, so nothing is created */
   fromDeposit?: { item: ItemKind; n: number };
   /** the product is a piece of equipment, not a stack of goods */
@@ -60,6 +62,7 @@ export const RECIPES: Recipe[] = [
     outputs: { planks: 1 },
     waste: { wood: 2 },
     wasteWhy: 'chips and bark hewn away',
+    offcuts: 2,
     skill: 'carpentry',
     tool: { kind: 'axe', required: false, speed: 0.62 },
     workers: 2,
@@ -78,6 +81,7 @@ export const RECIPES: Recipe[] = [
     outputs: { planks: 2 },
     waste: { wood: 1 },
     wasteWhy: 'sawdust and offcuts',
+    offcuts: 1,
     skill: 'carpentry',
     tool: { kind: 'saw', required: true, speed: 1 },
     workers: 2,
