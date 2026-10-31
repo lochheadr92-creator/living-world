@@ -45,9 +45,14 @@ descriptions were never there when one arrived was asked again exactly like one 
   weighs Cara over Ben by four with the tally as reason; below 107 and with the lab removal they are asked alike. An
   account borne out counts +1 and +4; relayed, stale, late and small accounts are no grounds; a newer differing sight of
   Cara's is adopted and logged; saves round-trip, are refused relabelled 106, and a reloaded twin continues exactly.
-- Rendered (`scripts/browser/checked_accounts_check.mjs`): the same scene in the page, relationship history and the
-  choice of whom to ask; see the register entry for the result.
-- Ordinary (`scripts/checked_accounts_observe.ts`): see the register entry for the five-day counts.
+- Rendered (`scripts/browser/checked_accounts_check.mjs`, 7/7, screenshots inspected): the same scene in the page; the
+  relationship history reads "Accounts of places checked: 1, borne out 0" with its grounds, and left to herself Ada asks
+  Cara with asking Ben passed over (`autonomy_evidence/accounts107-rendered`).
+- Ordinary (`scripts/checked_accounts_observe.ts`, five days, Normal): river at 107, 71 accounts checked (64 borne out,
+  7 not), 12 disagreements logged, 2 relayed accounts found short; meadow at 107, 87 checked (76/11), 31 disagreements,
+  1 relayed; river at pinned 106, none. No sampled where-to-find ask was offered in either window, so the weighed choice
+  occurred only staged. No deaths. Reports: `autonomy_evidence/r107-{river,meadow}`, `r107-river-at106`.
+- Regression 337 files / 2,199 tests; runtime `a430195`, reference `4bcbb9c`.
 
 ## Limits
 

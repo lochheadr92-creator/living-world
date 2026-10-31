@@ -1,7 +1,7 @@
 # Living World: notes for Claude (read this first)
 
-Current state (31 October 2026): rules 106 care decided from remembered need (`REMEMBERED_NEED.md`, runtime `fe28953`,
-reference `9879e96`) after rules 105 (`06d3963`/`3cab1e1`); the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 107 checked accounts of places (`CHECKED_ACCOUNTS.md`, runtime `a430195`,
+reference `4bcbb9c`) after rules 106 (`fe28953`/`9879e96`); the autonomy/environment programme continues from the register.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
