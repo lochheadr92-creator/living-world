@@ -7,7 +7,7 @@ import { assertLabSourceUnchanged, labProvenance, lfHash } from '../scripts/obse
 
 it('retains runner and measurement source, reports it, resumes only the same content, and refuses changed content', () => {
   const out = mkdtempSync(join(tmpdir(), 'lw-lab-provenance-'));
-  const args = ['scripts/lab.mjs', '--out', out, '--seeds', '1', '--profile', 'normal', '--fork', '0', '--days', '0.01', '--branches', 'none'];
+  const args = ['--no-experimental-strip-types', 'scripts/lab.mjs', '--out', out, '--seeds', '1', '--profile', 'normal', '--fork', '0', '--days', '0.01', '--branches', 'none'];
   const run = () => spawnSync(process.execPath, args, { encoding: 'utf8', timeout: 60000 });
   const first = run();
   expect(first.status, first.stderr).toBe(0);

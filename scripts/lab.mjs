@@ -6,7 +6,6 @@ import { spawn, spawnSync } from 'node:child_process';
 import { cpus } from 'node:os';
 import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { labProvenance, assertLabSourceUnchanged } from './observers/provenance.ts';
 
 const args = process.argv.slice(2);
 const opt = (name, dflt) => {
@@ -27,6 +26,15 @@ const all = ['meadow', 'river', 'fern', 'aspen', 'birch', 'cedar', 'gen-1', 'gen
 const seeds = all.slice(0, n);
 const cores = Math.max(1, cpus().length);
 const vite = join('node_modules', 'vite-node', 'dist', 'cli.mjs');
+// Keep the runner plain JavaScript on supported Node releases; the shared TS helper uses the same loader as workers.
+const labProvenance = () => {
+  const result = spawnSync(process.execPath, [vite, 'scripts/lab/provenance_cli.ts'], { encoding: 'utf8' });
+  if (result.status !== 0) throw new Error(result.stderr || 'Could not capture lab provenance');
+  return JSON.parse(result.stdout);
+};
+const assertLabSourceUnchanged = before => {
+  if (JSON.stringify(labProvenance().source) !== JSON.stringify(before.source)) throw new Error('Source changed during lab run; results rejected.');
+};
 const provenance = labProvenance();
 // New lab directories retain the runner's start snapshot. Legacy directories cannot be relabelled with today's source.
 const provenancePath = join(out, 'provenance.json');

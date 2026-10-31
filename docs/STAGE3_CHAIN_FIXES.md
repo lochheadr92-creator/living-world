@@ -49,7 +49,9 @@ with the repaired case (2/2). Stage-scoped typecheck passed. No ordinary activat
 VERIFIED measurement: `first_cart_trace.ts stage3_evidence/part-a-forest117 117` completed
 36,000 ticks (15 Normal forest days), no immigration, in 67.99 seconds. No cart plan was
 adopted, so there was no selected planner/hammer transition to trace; zero carts. This is a
-null opportunity result, not evidence that F1 has no effect. Exact twin/reload equality and
+null opportunity result, not evidence that F1 has no effect. The final world ledger records
+five hammers created across the population; none can be attributed to the absent cart plan.
+Exact twin/reload equality and
 item conservation passed. The report retains HEAD `fb74c8c`, dirty paths and source hashes;
 the script now accepts an explicit version, preserving its historical default 113.
 The former rules-113 episode and all old saves/references are untouched. A rules-117
@@ -97,6 +99,14 @@ is currently occupied. A basket-assisted elder still adopts. Rules 117 and
 `rich-no-tool-plan-capacity` retain old adoption. New/related contracts passed 50/50;
 baseline plus final capacity contracts and rules-117 continuation passed 140/140.
 Stage-scoped typecheck passed. No cart graph redesign or F3/F4/F6 policy change is included.
+
+## Final review correction: lab loader compatibility
+
+VERIFIED: the first provenance implementation's direct `.ts` import from `lab.mjs` failed
+with native TypeScript stripping disabled. The runner now invokes the same shared helper
+through a tiny `vite-node` CLI, retaining the existing JavaScript-runner/toolchain boundary.
+The CLI integration regression fails before this correction and passes after it with native
+stripping disabled. Six loader/report/continuation files passed 11/11; stage typecheck passed.
 
 ## Deferred register
 
