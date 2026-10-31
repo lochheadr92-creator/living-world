@@ -1,7 +1,7 @@
 # Living World: notes for Claude (read this first)
 
-Current state (31 October 2026): rules 98 is verified, reviewed and pinned (`259f028`,
-reference `4cd6828`); the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 99 prepared project steps (`READY_STEP.md`, runtime `779d581`,
+reference `87ad1f9`) after the verified rules-98 checkpoint; the autonomy/environment programme continues from the register.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
