@@ -9,6 +9,7 @@ import { onBecameParent, onOrphanTaken, onPartnerLost } from './lifechanges';
 import { abortActivity, newActivity, startActivity } from './activities';
 import { AGE_OLD_DEATH_START, DAY, BIRTH_SPACING_TICKS, CONCEPTION_PER_YEAR, PREGNANCY_TICKS, TICKS_PER_YEAR, isHomeType } from './constants';
 import { dropNear } from './buildings';
+import {hasEstateCustody,dropEstate} from './estate';
 import { unhitch } from './carts';
 import { toolsOnDeath } from './tools';
 import { intentionsOnDeath } from './intent';
@@ -239,7 +240,7 @@ export function killPerson(world: World, p: Person, cause: string): void {
   intentionsOnDeath(world, p); // after the activity ended, so what they really did was credited first and nothing accrues now
   if (!hasLocalDeath(world)) mourn(world, p);
   socialOnDeath(world, p);
-  const belongings = dropNear(world, p.x, p.y, p.inv, `${p.name}'s belongings`, p.id);
+  const belongings = hasEstateCustody(world)?dropEstate(world,p):dropNear(world, p.x, p.y, p.inv, `${p.name}'s belongings`, p.id);
   recordUnfinished(world, p, unfinished, belongings);
   p.inv = {};
   // grave marker on a nearby free tile

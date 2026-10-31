@@ -1,4 +1,4 @@
-import {mealPileBlocker} from './meal_leftovers';
+import {pileAccessBlocker} from './pile_access';
 import { faceToward, registerHandler, standSpotFor } from './activities';
 import type { WorkResult } from './activities';
 import { ITEM_LABEL, TOOL_REPAIR, WORK } from './constants';
@@ -260,7 +260,7 @@ registerHandler('cart_haul', {
     }
     if (leg === 1) {
       // at the pile or store to load from
-      {const blocked=mealPileBlocker(p,world.byId.get(a.data.fromId as number));if(blocked)return blocked;}
+      {const blocked=pileAccessBlocker(p,world.byId.get(a.data.fromId as number));if(blocked)return blocked;}
       const c = containerOf(world, a.data.fromId as number);
       if (!c) return 'the place to load from is gone';
       a.duration = 14;
@@ -278,7 +278,7 @@ registerHandler('cart_haul', {
     a.progress++;
     if (leg === 1) {
       if (a.progress < a.duration) return 'continue';
-      {const blocked=mealPileBlocker(p,world.byId.get(a.data.fromId as number));if(blocked)return `fail:${blocked}`;}
+      {const blocked=pileAccessBlocker(p,world.byId.get(a.data.fromId as number));if(blocked)return `fail:${blocked}`;}
       const c = containerOf(world, a.data.fromId as number);
       if (!c) return 'fail:the place is gone';
       const want = a.data.items as Record<string, number>;

@@ -344,7 +344,7 @@ export function hashWorld(world: World): string {
   for (const b of world.buildings) push(`B${b.id}:${b.type},${r4(b.condition)},${r4(b.fuel)},${JSON.stringify(b.store.items)}`);
   for (const s of world.sites) push(`C${s.id}:${r4(s.work)},${JSON.stringify(s.delivered)},${JSON.stringify(s.used)}`);
   for (const pl of world.plots) push(`L${pl.id}:${pl.state},${r4(pl.progress)},${pl.stock},${pl.seedStock}`);
-  for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);}
+  for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);if(pile.estate)push(`Estate:${pile.id}:${JSON.stringify(pile.estate)}`);}
   // A wolf that was driven off keeps clear of one person for a while, which changes who it hunts next: that is part of
   // what the world is. Absent on every wolf that was never driven off, so an older world hashes exactly as it did.
   for (const a of world.animals) push(`A${a.id}:${r4(a.x)},${r4(a.y)},${a.state}${a.wary === undefined ? '' : `,w${a.wary},${a.waryOf ?? 0}`}`);

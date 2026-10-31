@@ -1157,7 +1157,7 @@ export function productionOptions(ctx: Ctx): void {
         const n=Math.min(left,b.items?.[k]??0,Math.floor(room/WEIGHT[k]));
         if(n>0){items[k]=n;left-=n;room-=n*WEIGHT[k];}
       }
-      if(foodUnits(items)>0)collectLeaf(ctx,b,items,24+4*p.traits.generosity,'recover our leftover meal food before it spoils','meal');
+      if(foodUnits(items)>0)collectLeaf(ctx,b,items,24+4*p.traits.generosity,runsRulesVersion(world,93)?'recover our food left outdoors before it spoils':'recover our leftover meal food before it spoils','meal');
     }
   }
   if(hasOffcuts(world)&&freeOf(p,'offcuts')<4&&freeOf(p,'wood')<2){

@@ -974,6 +974,8 @@ export interface Plot {
 export interface Pile {
   /** Rules 90: one physical leftover holding per meal; never merged with unrelated goods. */
   mealFood?: {mealId:number;hostId:number;hhId:number};
+  /** Rules 93: one physical parcel per existing owner; borrowed tools keep their owner. */
+  estate?: {personId:number;hhId:number;deathTick:number};
   ent: 'pile';
   id: number;
   x: number;

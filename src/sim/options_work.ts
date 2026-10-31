@@ -1,4 +1,5 @@
 import { hasEcology } from './ecology';
+import {mayTakeKnownPile} from './pile_access';
 import {hasOffcuts} from './offcuts';
 import {hasPromiseExpectations,promisedPerson,promisedLocation} from './promise_expectations';
 import { hasTownships, mayWorkProject, participation, townshipOf } from './townships';
@@ -1209,6 +1210,7 @@ function optSalvage(ctx: Ctx): void {
   const tm = traitMods(p);
   let considered = 0;
   for (const b of beliefsByKind(p, ['pile'])) {
+    if(runsRulesVersion(world,93)&&!mayTakeKnownPile(p,b))continue;
     if (++considered > 10) break;
     const items = b.items ?? {};
     const want: Items = {};
