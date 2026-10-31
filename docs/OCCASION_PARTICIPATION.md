@@ -35,7 +35,10 @@ across a save, one admission, pure observation, no re-entry, prior rules and lab
 removal, closed/remote/finished cases, critical thirst and stronger noncritical
 hunger. Together with occasions, market locality, traditions and immutable rules
 110, the focused run passes **28 tests in 5 files**. Typecheck/build pass with the
-existing bundle-size warning. Full regression is running on this final source.
+existing bundle-size warning. Full regression passes **348 files / 2,244 tests**,
+519.73 seconds, on the final source. Runtime `0d6db43`; immutable reference
+`5617c0d` was added after collection and passes separately (10/10 with the nine
+participation contracts).
 
 `occasion111-rendered` passes **7/7**, both screenshots inspected. The supplied
 adult is explicitly staged already at a known public fire. The engine's offered
@@ -51,6 +54,37 @@ budgets, critical exposure and adverse outcomes. The expected transition is that
 some admitted guests can complete participation ordinarily, while legitimate
 interruptions remain. No-opportunity windows remain null. Worlds may diverge, so
 raw differences are not paired opportunities or a general welfare estimate.
+
+All four runs reached tick 48,000, with 400 pure inspections, exact unobserved
+twins/reloads and conserved items. Reports: `occasion{110,111}-{meadow,river}-20`.
+
+| Ordinary measure | Meadow 110 | Meadow 111 | River 110 | River 111 |
+|---|---:|---:|---:|---:|
+| Living-person samples | 10,454 | 10,454 | 11,619 | 11,591 |
+| Attendance offered samples | 99 | 182 | 314 | 401 |
+| Attendance starts | 8 | 36 | 109 | 86 |
+| Activities observed physically admitted | 4 | 20 | 92 | 76 |
+| Admitted participation ticks | 153 | 2,739 | 3,323 | 11,423 |
+| Successful attendance endings | 0 | 17 | 2 | 66 |
+| Interrupted attendance endings | 5 | 1 | 87 | 4 |
+| Failed attendance endings | 3 | 14 | 10 | 6 |
+| All critical-need ticks | 77,533 | 74,463 | 18,558 | 13,459 |
+| All work ticks | 142,372 | 145,875 | 172,339 | 168,642 |
+| Deaths | 4 | 4 | 0 | 0 |
+| Final population | 24 | 24 | 32 | 31 |
+
+Ordinary ongoing-option samples at 111 are retained in all 24 meadow and 91 river
+cases. The old river run does sometimes finish (2), so the old defect is not an
+absolute ban. Meadow has the same four deaths in both versions. River has a
+different birth count; no population or survival benefit is established. Work
+time changes in opposite directions across the two seeds.
+
+Starts and endings are deliberately not forced to balance: meadow 111 has four
+starts with no ending callback, river 111 ten, and neither has attendance active
+or suspended in the final save. Review found a further execution gap: generic
+resumption looks for occasion ids in the entity registry and silently drops a
+paused visit. A staged suspension reproduces it. Rules 112 investigates that
+separate boundary; these counts alone do not attribute every missing ending to it.
 
 Open: arrival/access failures, late trips, repeated ordinary household leisure,
 adequate reserves and household viability. Staying longer may cost work or expose

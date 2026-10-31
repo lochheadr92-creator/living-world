@@ -2,13 +2,18 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
-- Rules 111 candidate: an admitted guest keeps the option for the gathering still
+- Rules 111: an admitted guest keeps the option for the gathering still
   underway; no second visit or extra reward. The rules-107 days-45–50 household
   baseline exposed 33 admitted guests all interrupted, and zero leisure-category
   ticks for all 15 adults (social contact is separate). See
   `HOUSEHOLD_RHYTHM_MEASUREMENT.md` and `OCCASION_PARTICIPATION.md`. Focused 28/5,
-  rendered 7/7 and typecheck/build pass; full regression and matched 20-day ordinary
-  screens are running. A1 and social-place use remain incomplete.
+  rendered 7/7 and typecheck/build pass; full regression **348 files / 2,244 tests
+  passed**, 519.73 s. Runtime `0d6db43`, immutable reference `5617c0d` separately
+  1/1. Twenty-day meadow/river ordinary attendance completes 17/66 times against
+  0/2 at 110, with pure observers, exact twins/reloads and conserved resources.
+  Mortality is unchanged in these two windows, work changes in opposite directions;
+  no general welfare claim. Conversation resumption is a separately reproduced
+  missing transition. A1 and social-place use remain incomplete.
 
 - Rules 110: purposeful water searches retain their need, explore from
   the searcher's own position and can answer critical thirst after dark. See
