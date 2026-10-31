@@ -23,6 +23,8 @@ import { mintTool, taskMultiplier, wearFor } from './tools';
 import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
 import {fuelItem,fuelValue,hasOffcuts} from './offcuts';
+import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
+import {settleFirePromise} from './responsibilities';
 import { clamp } from './util';
 import { itemsToText } from './people';
 import {projectAvailable} from './project_step';
@@ -387,6 +389,7 @@ registerHandler('fuel_fire', {
     }
     if(a.data.fuelItem!==undefined&&(!hasOffcuts(world)||a.data.fuelItem!=='offcuts'))return 'invalid fire fuel';
     if ((p.inv[fuelItem(world,a)] ?? 0) < 1) return 'no '+fuelItem(world,a)+' to add';
+    if(hasWarmthDuty(world)&&fuelAvailable(world,p,fuelItem(world,a))<1)return 'the fuel is reserved for another plan or promise';
     if (f.fuel >= FIRE_MAX_FUEL * 0.8) {
       observe(world, p, f); // someone has already seen to it
       return 'it is burning well already';
@@ -404,6 +407,8 @@ registerHandler('fuel_fire', {
     a.progress++;
     if (a.progress < a.duration) return 'continue';
     const item=fuelItem(world,a);
+    if(hasWarmthDuty(world)&&f.fuel>=FIRE_MAX_FUEL*0.8){observe(world,p,f);return a.cycle>0?'done':'fail:it is burning well already';}
+    if(hasWarmthDuty(world)&&fuelAvailable(world,p,item)<1)return a.cycle>0?'partial:remaining fuel is reserved':'fail:the fuel is reserved for another plan or promise';
     if (consume(world, p.inv, item, 1, 'fuel for the fire') < 1) return a.cycle > 0 ? 'done' : `fail:no ${item} to add`;
     f.fuel = Math.min(FIRE_MAX_FUEL, f.fuel + fuelValue(item));
     if(hasPromiseTargets(world))p.cooldowns['fedfire'+f.id]=world.tick;
@@ -411,6 +416,7 @@ registerHandler('fuel_fire', {
     a.progress = 0;
     addFx(world, 'ember', f.x + 0.5, f.y + 0.5, 0);
     observe(world, p, f);
+    if(hasWarmthDuty(world))for(const c of p.commitments)if(c.destId===f.id)settleFirePromise(world,p,c);
     if (a.cycle >= a.amount || f.fuel >= FIRE_MAX_FUEL * 0.8 || (p.inv[item] ?? 0) < 1) return 'done';
     return 'continue';
   },

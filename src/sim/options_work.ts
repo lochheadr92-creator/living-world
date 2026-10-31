@@ -18,6 +18,7 @@ import { keepCurrent } from './kept_target';
 import { residentCareOptions } from './resident_care';
 import {prioritizeCareReturn} from './care_supply';
 import {activeCareJourney} from './care_journey';
+import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
@@ -303,6 +304,11 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
   for (const b of beliefsByKind(p, ['building'])) {
     if (b.btype === 'fire') {
       const fuel = (b.fuel ?? 0) - (world.tick - b.seen) * 0.85;
+      const duty=hasWarmthDuty(world)&&fireCommitment(p,b.id);
+      if(duty){
+        if(fuel<FIRE_MAX_FUEL*0.8&&fuelAvailable(world,p,'offcuts')<1)needs.push({item:'wood',n:1,base:48,why:`to obtain fuel for the fire I promised to keep (#${b.id})`,tag:'fire'});
+        continue;
+      }
       if (fuel < fireFuelWanted(world)) {
         const need=hasOffcuts(world)?Math.max(0,2-freeOf(p,'offcuts')*0.5):2;
         if (need>0&&hashUnit(p.id, Math.floor(world.tick / 400), b.id) < 0.3 + 0.45 * p.traits.generosity) needs.push({ item: 'wood', n: need, base: 24 + 6 * p.traits.generosity, why: 'to keep the fire going', tag: 'fire' });
@@ -499,7 +505,7 @@ function optMaterials(ctx: Ctx): void {
     if (!need) continue;
     // what one of their own plans has spoken for does not count toward this need: otherwise they would stop fetching because the
     // basket's wood is in the pack, and then not hand that wood over either
-    const have = freeOf(ctx.p, item);
+    const have = hasWarmthDuty(ctx.world)&&need.tag==='fire'&&item==='wood'?fuelAvailable(ctx.world,ctx.p,'wood'):freeOf(ctx.p, item);
     const missing = need.n - have;
     if (missing <= 0) continue;
     if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) continue;
@@ -807,8 +813,8 @@ function optRepairAndFire(ctx: Ctx): void {
       const fuel = (b.fuel ?? 0) - (world.tick - b.seen) * 0.85;
       const wanted = fireFuelWanted(world);
       // wood a plan of theirs has spoken for is not firewood
-      const item=hasOffcuts(world)&&freeOf(p,'offcuts')>=1?'offcuts':'wood';
-      const spare = freeOf(p, item);
+      const item=hasOffcuts(world)&&fuelAvailable(world,p,'offcuts')>=1?'offcuts':'wood';
+      const spare = fuelAvailable(world,p, item);
       const promised = fireCommitment(p, b.id);
       if ((fuel > wanted && !promised) || spare < 1) continue;
       if (!(ctx.night || world.light < 0.55 || world.weather.rain > 0.3 || fuel < 150 || wanted > 500 || promised)) continue;
@@ -820,7 +826,7 @@ function optRepairAndFire(ctx: Ctx): void {
       addOption(ctx, {
         kind: 'fuel_fire',
         label: item==='offcuts'?'Add recovered offcuts to the fire':'Add wood to the fire',
-        goal: cold ? 'to keep the fire burning and get warm' : 'to keep the fire burning',
+        goal: hasWarmthDuty(world)&&promised?`to keep fire #${b.id} burning as promised`:cold ? 'to keep the fire burning and get warm' : 'to keep the fire burning',
         need: cold ? 'warmth' : null,
         util: sc.total,
         parts: sc.parts,
@@ -834,15 +840,15 @@ function optRepairAndFire(ctx: Ctx): void {
           return newActivity(world, p, {
             kind: 'fuel_fire',
             label: 'Feeding the fire',
-            goal: 'to keep the fire burning',
+            goal: hasWarmthDuty(world)&&promised?`to keep fire #${b.id} burning as promised`:'to keep the fire burning',
             targetId: b.id,
             targetType: 'building',
             tx: b.x,
             ty: b.y,
             spotX: spot.x,
             spotY: spot.y,
-            amount: Math.min(freeOf(p,item), item==='offcuts'?6:3),
-            ...(item==='offcuts'?{data:{fuelItem:item}}:{}),
+            amount: Math.min(fuelAvailable(world,p,item), item==='offcuts'?6:3),
+            ...(item==='offcuts'||hasWarmthDuty(world)&&promised?{data:{...(item==='offcuts'?{fuelItem:item}:{}),...(hasWarmthDuty(world)&&promised?{commitmentId:promised.id}:{})}}:{}),
             utility: sc.total,
             minCommit: 30,
             maxTicks: 500,

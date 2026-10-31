@@ -3,6 +3,8 @@ import {foodUnits} from './economy';
 import {carryCap} from './people';
 import { techniqueBlocker, hasLearnerInstruction, techniqueLacking, trialAllowed, firstLacking, TECHNIQUES } from './techniques';
 import {hasOffcuts} from './offcuts';
+import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
+import {fireCommitment} from './responsibilities';
 import {fireFuelWanted} from './options_work';
 import {freeOf} from './intent';
 import { isRich } from './mood';
@@ -1160,9 +1162,10 @@ export function productionOptions(ctx: Ctx): void {
       if(foodUnits(items)>0)collectLeaf(ctx,b,items,24+4*p.traits.generosity,runsRulesVersion(world,93)?'recover our food left outdoors before it spoils':'recover our leftover meal food before it spoils','meal');
     }
   }
-  if(hasOffcuts(world)&&freeOf(p,'offcuts')<4&&freeOf(p,'wood')<2){
+  if(hasOffcuts(world)&&fuelAvailable(world,p,'offcuts')<4&&fuelAvailable(world,p,'wood')<2){
     const fires=beliefsByKind(p,['building']).filter(b=>b.btype==='fire'&&(b.fuel??0)-(world.tick-b.seen)*0.85<fireFuelWanted(world));
-    if(fires.length)collectOptions(ctx,'offcuts',4-freeOf(p,'offcuts'),24+6*p.traits.generosity,'reuse known offcuts to keep a low fire burning','fire',null);
+    const duty=hasWarmthDuty(world)&&fires.find(b=>fireCommitment(p,b.id));
+    if(fires.length&&(!duty||fuelAvailable(world,p,'wood')<1&&fuelAvailable(world,p,'offcuts')<1))collectOptions(ctx,'offcuts',(duty?1:4)-fuelAvailable(world,p,'offcuts'),duty?48:24+6*p.traits.generosity,duty?`reuse known offcuts for the fire I promised to keep (#${duty.id})`:'reuse known offcuts to keep a low fire burning','fire',null);
   }
   const demands = demandsOf(ctx);
   for (const d of demands) supply(ctx, d.item, d.qty, d.base, d.why, d.tag, 0, null, d.item === 'cart' || d.tier ? d.have : undefined, d.siteId ?? 0);

@@ -4,6 +4,7 @@ import {hasContinuityKnowledge,hearUndertaking,acknowledgeUndertaking} from './c
 import {proposeHandover,answerHandover,type HandoverMode} from './work_handover';
 import {hasWorkHandover} from './handover_state';
 import {careJourneyReceipt} from './care_journey';
+import {hasWarmthDuty,knownDutyFire,communicateFireLocation,fuelAvailable} from './warmth_duty';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
 import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
@@ -321,7 +322,7 @@ type Response =
   | { kind: 'give'; item: ItemKind; n: number }
   | { kind: 'promise'; item: ItemKind | null; n: number }
   | { kind: 'lend'; tool: import('./types').Tool }
-  | { kind: 'decline'; reason: 'no_item' | 'own_need' | 'unwilling' | 'disliked' | 'committed' | 'enough' | 'in_use' | 'making' };
+  | { kind: 'decline'; reason: 'no_item' | 'no_place' | 'own_need' | 'unwilling' | 'disliked' | 'committed' | 'enough' | 'in_use' | 'making' };
 
 export function willingness(world: World, B: Person, A: Person, severity: number): number {
   const rel = B.relations[A.id];
@@ -394,6 +395,10 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   // a shared responsibility (responsibilities.ts; rich only): weighed against their own dependants, needs, promises and liking
   if (req.kind === 'watch' || req.kind === 'fire') {
     if (laidUp(world, B) || personalDriveMax(world, B) > 50) return { kind: 'decline', reason: 'own_need' };
+    if(req.kind==='fire'&&hasWarmthDuty(world)){
+      if(!req.destId||!knownDutyFire(world,A,req.destId)&&!knownDutyFire(world,B,req.destId))return {kind:'decline',reason:'no_place'};
+      if(fuelAvailable(world,B,'wood')<1&&fuelAvailable(world,B,'offcuts')<1&&!canObtain(world,B,'wood')&&!canObtain(world,B,'offcuts'))return {kind:'decline',reason:'no_item'};
+    }
     if (activeCommitments(B).length >= MAX_ACTIVE_COMMITMENTS) return { kind: 'decline', reason: 'committed' };
     const ownKids = membersOf(world, householdById(world, B.hhId)).filter((m) => m !== B && stageOf(world, m) === 'child').length;
     if (req.kind === 'watch' && ownKids >= 2) return { kind: 'decline', reason: 'own_need' };
@@ -1336,6 +1341,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         } else if (req.kind === 'watch' || req.kind === 'fire') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + DAY, destKind: req.destKind, destId: req.destId, milestone: req.kind === 'watch' ? 'watched' : 'fire kept' });
           if (req.kind === 'watch' && req.destId) communicateWatchLocation(world, A, B, req.destId);
+          if (req.kind === 'fire' && req.destId) communicateFireLocation(world,A,B,req.destId);
         } else {
           const kindC: Commitment['kind'] = req.kind === 'haul' || req.kind === 'goods' || toSite ? 'haul' : 'deliver';
           // rules 48 (delivery_place.ts): a promise to a person names the asker's home as the place to leave it, when the helper
@@ -1370,7 +1376,8 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         adjustRel(A, B.id, world.tick, { aff: 1.5, trust: 1 });
       } else {
         const lines = resp.reason === 'no_item' ? D.RESP_NO_ITEM : resp.reason === 'own_need' || resp.reason === 'in_use' ? D.RESP_OWN_NEED : resp.reason === 'disliked' ? D.RESP_DISLIKED : D.RESP_UNWILLING;
-        if (resp.reason === 'enough') bubble(world, B, 'I think that’s been seen to already.', 'say', 54);
+        if (resp.reason === 'no_place') bubble(world, B, 'I do not know which fire I could reach from that old account.', 'say', 54);
+        else if (resp.reason === 'enough') bubble(world, B, 'I think that’s been seen to already.', 'say', 54);
         else if (resp.reason === 'committed') bubble(world, B, 'I’ve already promised that to them.', 'say', 54);
         else if (resp.reason === 'in_use') bubble(world, B, 'I’m using it just now — ask me later?', 'say', 54);
         else if (resp.reason === 'making') bubble(world, B, 'I have some, but it is for something I am making.', 'say', 56);
