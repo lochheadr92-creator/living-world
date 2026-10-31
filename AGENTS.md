@@ -1,7 +1,7 @@
 # Living World: notes for Codex (read this first)
 
-Current state (31 October 2026): rules 102 one roof, one promise (`REPAIR_DUTY.md`, runtime `f6d7281`,
-reference `4c47dab`) after rules 101 (`8ca0112`/`573dc01`); the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 103 decision ledger (`DECISION_LEDGER.md`, runtime `cc7af17`,
+reference `426a8ca`) after rules 102 (`f6d7281`/`4c47dab`); the autonomy/environment programme continues from the register.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
@@ -47,6 +47,8 @@ Scaling and performance history: `docs/SCALING.md`.
 - Owner workflow decision (2026-10-21): record review findings and their fixes once. A fixed finding with appropriate regression evidence does not automatically require another independent review. Repeat review or verification only for relevant changes, new evidence or unresolved defects. See `docs/DEVELOPMENT_POLICY.md`.
 
 ## Current civilisation implementation
+
+Rules **103** keeps a bounded personal ledger of recent decisions with the activity each launched and how it ended, shown as "Recent decisions" in the person panel (`DECISION_LEDGER.md`). Runtime `cc7af17`; full regression **329 files / 2,179 tests passed, exit 0** on the shared four-core container (1,392.16 s; the ledger test file was collected after the fixture's in-bounds rock change, and the reference test was added after the run and passes 1/1 separately); focused **3/1**, typecheck, build and rendered **4/4** pass. Immutable reference `426a8ca` separately passes **1/1**, typecheck clean. Entries keep what was known then (chosen option, three alternatives passed over, three set aside with their reasons), close at the real ending, cap at eight with the overflow counted, save with the person and stay out of the fingerprint; an ordinary river person shows closed choices with endings in the page. Cost on one river day: tick time unchanged within noise, serialized size +5.1% (99.6 kB for 28 people). Observation → belief links and later consequences beyond the activity's ending remain. Next: the remaining programme rows in the owner's order. The entire owner programme remains incomplete.
 
 Rules **102** declines a second roof ask for a building the helper already holds a duty on, so one patch keeps one promise (`REPAIR_DUTY.md`, "One roof, one promise"). Runtime `f6d7281`; full regression **327 files / 2,175 tests on the shared four-core container (1,327.76 s): 2,174 passed**, the one failure being the new test's own exact-trust assertion before it was corrected to the receipt-based check (4/4 since, no source change); focused **4/1** plus repair-duty, protocol and reference files, typecheck, build and rendered **4/4** pass. Immutable reference `4c47dab` separately passes **1/1**, typecheck clean. The verified defect: at rules 100–101 two askers of one household both got a promise and one physical patch closed both with full credit, doubling the social record of one act; now the second asker hears "I have already promised to see to that roof", keeps no receipt and gains no completion trust. Ordinary second asks are unmeasured (zero spoken roof requests in every five-day screen). Next: a bounded per-person decision ledger for causal inspection (A15). The entire owner programme remains incomplete.
 
