@@ -21,6 +21,7 @@ import {activeCareJourney} from './care_journey';
 import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
 import {hasRepairDuty,roofDuty,repairSupplies} from './repair_duty';
 import {promisedSupply,promisedText} from './promised_supply';
+import {knownNeeds} from './remembered_need';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
@@ -184,7 +185,8 @@ function optStockpile(ctx: Ctx): void {
   const hs = hhState(ctx);
   const tm = traitMods(p);
   let depHunger = 0;
-  for (const d of ctx.dependents) depHunger = Math.max(depHunger, Math.max(0, 55 - d.needs.hunger) / 55);
+  // rules 106 (remembered_need.ts): a dependant out of sight counts as they looked when last seen, not as they are
+  for (const d of ctx.dependents) { const kn = knownNeeds(world, p, d, ctx.seenPersons.some((s) => s.id === d.id)); if (kn) depHunger = Math.max(depHunger, Math.max(0, 55 - kn.hunger) / 55); }
   const providerBonus = ctx.dependents.length > 0 ? 7 : 0;
   const base = (9 + 26 * hs.shortage + providerBonus + 18 * depHunger) * tm.work * nightMult(ctx) * weatherMult(ctx);
   // Somebody who has taken on putting a reserve by still gets the option when the ambient urge is below the floor - the plan
@@ -1294,7 +1296,8 @@ function optWaterRun(ctx: Ctx): void {
   if (ctx.drives.thirst > 20 || ctx.stage === 'child') return;
   if (ctx.water >= 2) return;
   let need = 0;
-  for (const d of ctx.dependents) need = Math.max(need, Math.max(0, 52 - d.needs.thirst) / 52);
+  // rules 106 (remembered_need.ts): a dependant out of sight counts as they looked when last seen, not as they are
+  for (const d of ctx.dependents) { const kn = knownNeeds(world, p, d, ctx.seenPersons.some((s) => s.id === d.id)); if (kn) need = Math.max(need, Math.max(0, 52 - kn.thirst) / 52); }
   const growing = world.plots.some((pl) => pl.hhId === p.hhId && pl.state === 'growing');
   const base = 7 + 28 * need + (growing ? 5 : 0);
   if (base < 11) return;
@@ -1469,19 +1472,28 @@ function optCare(ctx: Ctx): void {
   for (const d of ctx.dependents) {
     if (roomContacts.has(d.id)) continue;
     const child = stageOf(world, d) === 'child';
-    const hungry = d.needs.hunger < (child ? 66 : 50);
-    const thirsty = d.needs.thirst < (child ? 58 : 46);
-    const cold = d.needs.warmth < 34;
-    if (!hungry && !thirsty && !cold) continue;
     // where are they? only what this person has actually seen
     const seenNow = ctx.seenPersons.find((s) => s.id === d.id);
     const wh = p.whereabouts[d.id];
+    // rules 106 (remembered_need.ts): out of sight, how they LOOKED when last seen stands for how they are; before 106 the
+    // live figures were read whether or not the carer could see them
+    const kn = knownNeeds(world, p, d, !!seenNow);
+    if (!kn) {
+      if (wh && world.tick - wh.tick <= 700) addBlocked(ctx, 'give', `Care for ${d.name}`, d.id, 'has not seen how they are', 'care');
+      else addBlocked(ctx, 'give', `Care for ${d.name}`, d.id, 'does not know where they are', 'care');
+      continue;
+    }
+    const hungry = kn.hunger < (child ? 66 : 50);
+    const thirsty = kn.thirst < (child ? 58 : 46);
+    const cold = kn.warmth < 34;
+    if (!hungry && !thirsty && !cold) continue;
     if (!seenNow && (!wh || world.tick - wh.tick > 700)) {
       addBlocked(ctx, 'give', `Care for ${d.name}`, d.id, 'does not know where they are', 'care');
       continue;
     }
+    const lookedSo = kn.lookedAt !== undefined ? ` (looked so when I last saw them, tick ${kn.lookedAt})` : '';
     // someone who is asleep or already holding food does not need it pressed on them
-    if (seenNow && seenNow.asleep && d.needs.hunger > 18 && d.needs.thirst > 18) continue;
+    if (seenNow && seenNow.asleep && kn.hunger > 18 && kn.thirst > 18) continue;
     // (rules 45: any food they carry counts, bread and meat included; before 45 only the four wild kinds were looked for)
     if (seenNow && !thirsty && seenNow.carrying.some((k) => (runsRulesVersion(world, 45) ? isFood(k) : k === 'berries' || k === 'fruit' || k === 'fish' || k === 'grain'))) continue;
     if ((d.cooldowns.fedUntil ?? 0) > world.tick) continue;
@@ -1496,7 +1508,7 @@ function optCare(ctx: Ctx): void {
       const kinds: ItemKind[] = runsRulesVersion(world, 45) ? ['berries', 'fruit', 'grain', 'fish', 'bread', 'meat'] : ['berries', 'fruit', 'grain', 'fish'];
       const k = kinds.find((x) => (p.inv[x] ?? 0) > 0);
       if (k) {
-        give[k] = Math.min(p.inv[k] ?? 0, d.needs.hunger < 25 ? 3 : 2);
+        give[k] = Math.min(p.inv[k] ?? 0, kn.hunger < 25 ? 3 : 2);
         what = k;
       }
     }
@@ -1505,26 +1517,26 @@ function optCare(ctx: Ctx): void {
       what = what ? what + ' and water' : 'water';
     }
     if (Object.keys(give).length === 0) continue;
-    const sev = Math.max(hungry ? (child ? 68 : 50) - d.needs.hunger : 0, thirsty ? (child ? 60 : 46) - d.needs.thirst : 0);
-    let sc = new Scorer().add(`${d.name} needs ${what}`, (26 + sev * 0.9) * tm.give).add('walking', -pen(e));
+    const sev = Math.max(hungry ? (child ? 68 : 50) - kn.hunger : 0, thirsty ? (child ? 60 : 46) - kn.thirst : 0);
+    let sc = new Scorer().add(`${d.name} needs ${what}${lookedSo}`, (26 + sev * 0.9) * tm.give).add('walking', -pen(e));
     const rel = p.relations[d.id];
     if (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner') sc.add('family', 8);
-    const foodBase = (26 + Math.max(0, (child ? 68 : 50) - d.needs.hunger) * 0.9) * tm.give
+    const foodBase = (26 + Math.max(0, (child ? 68 : 50) - kn.hunger) * 0.9) * tm.give
       + (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner' ? 8 : 0);
     if (careStoreOption(ctx, d, give, foodBase, px, py)) {
       for (const k of Object.keys(give) as ItemKind[]) if (isFood(k)) delete give[k];
       if (!Object.keys(give).length) continue;
       what = Object.keys(give).join(' and ');
-      sc = new Scorer().add(`${d.name} needs ${what}`, (26 + Math.max(0, (child ? 60 : 46) - d.needs.thirst) * 0.9) * tm.give).add('walking', -pen(e));
+      sc = new Scorer().add(`${d.name} needs ${what}${lookedSo}`, (26 + Math.max(0, (child ? 60 : 46) - kn.thirst) * 0.9) * tm.give).add('walking', -pen(e));
       if (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner') sc.add('family', 8);
     }
-    const waterBase = (26 + Math.max(0, (child ? 60 : 46) - d.needs.thirst) * 0.9) * tm.give
+    const waterBase = (26 + Math.max(0, (child ? 60 : 46) - kn.thirst) * 0.9) * tm.give
       + (rel?.kin === 'child' || rel?.kin === 'parent' || rel?.kin === 'partner' ? 8 : 0);
     if (careWaterStoreOption(ctx, d, give, waterBase, px, py)) {
       delete give.water;
       if (!Object.keys(give).length) continue;
       what = Object.keys(give).join(' and ');
-      sc = new Scorer().add(`${d.name} needs ${what}`, foodBase).add('walking', -pen(e));
+      sc = new Scorer().add(`${d.name} needs ${what}${lookedSo}`, foodBase).add('walking', -pen(e));
     }
     addOption(ctx, {
       kind: 'give',

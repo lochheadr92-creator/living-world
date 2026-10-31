@@ -654,7 +654,7 @@ export interface Person {
   /** index of belief ids by kind (maintained by putBelief / delBelief) */
   bykind: Partial<Record<BeliefKind, number[]>>;
   /** `from` (rules 105): the person who told them, when the note came from an answer rather than their own sight */
-  whereabouts: Record<number, { x: number; y: number; tick: number; from?: number; room?: { homeId: number; name: string; hungry: boolean; thirsty: boolean; needsCare: boolean; household: boolean } }>;
+  whereabouts: Record<number, { x: number; y: number; tick: number; from?: number; seen?: { hungry: boolean; thirsty: boolean; cold: boolean }; room?: { homeId: number; name: string; hungry: boolean; thirsty: boolean; needsCare: boolean; household: boolean } }>;
   explored: Uint8Array;
   seen: SeenEntity[];
   relations: Record<number, Relation>;

@@ -1,0 +1,81 @@
+{
+  "rules": 106,
+  "evidence": "STAGED parent and child; the child's position and needs are declared. The care offered, the decision and its stated reason are the engine's own. No ordinary frequency claim.",
+  "checks": [
+    {
+      "name": "a child grown hungry out of sight is not known to be: no care is offered and nothing is set aside",
+      "ok": true,
+      "detail": {
+        "blocked": [],
+        "note": {
+          "x": 42,
+          "y": 40,
+          "tick": 0,
+          "seen": {
+            "hungry": false,
+            "thirsty": false,
+            "cold": false
+          }
+        }
+      }
+    },
+    {
+      "name": "in sight he is seen hungry and bread is offered on what she sees",
+      "ok": true,
+      "detail": {
+        "option": "Bring bread to Cal",
+        "parts": [
+          [
+            "Cal needs bread",
+            90.3
+          ],
+          [
+            "walking",
+            -1.4
+          ]
+        ],
+        "note": {
+          "x": 42,
+          "y": 40,
+          "tick": 0,
+          "seen": {
+            "hungry": true,
+            "thirsty": false,
+            "cold": false
+          }
+        }
+      }
+    },
+    {
+      "name": "out of sight again she sets out with bread on how he looked, dated to that sight, and the save is valid",
+      "ok": true,
+      "detail": {
+        "tick": 0,
+        "chosen": "Bring bread to Cal",
+        "parts": [
+          [
+            "Cal needs bread (looked so when I last saw them, tick 0)",
+            75.4
+          ],
+          [
+            "walking",
+            -1.4
+          ]
+        ],
+        "activity": "Bringing bread to Cal",
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "Ada's inspector shows the decision and its remembered-signs reason",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nBramble household\nHome: no home yet — last considered just now: does not know of three trees to cut\nTownship: Willowbank\nMOOD\nCheerful\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nLess\nWHAT ARE THEY DOING?\nBringing bread to Cal — walking to Cal (2 tiles to go).\non the way\nWHY DID THEY CHOOSE IT?\nWeighed up: Cal needs bread (looked so when I last saw them, tick 0) +75 · walk"
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 import { validateEcology } from '../sim/ecology';
 import { validateDecisionLedger, normaliseDecisionLedger } from '../sim/decision_ledger';
 import { validateLocationQuestions } from '../sim/location_question';
+import { validateRememberedSigns } from '../sim/remembered_need';
 import { validateFlood } from '../sim/flood';
 import { validateOffcuts } from '../sim/offcuts';
 import { validateMealLeftovers } from '../sim/meal_leftovers';
@@ -273,6 +274,7 @@ export function deserializeWorld(json: string): World {
   validatePromiseKnowledge(w);
   validateDecisionLedger(w);
   validateLocationQuestions(w);
+  validateRememberedSigns(w);
   validatePromiseOutcomes(w);
   validatePromiseExpectations(w);
   validatePromiseTargets(w);

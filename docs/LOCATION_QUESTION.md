@@ -13,7 +13,7 @@ deleted ("Ada was not where I expected") and from then on the promise is set asi
 them", however many neighbours who just saw the person stand beside the helper. The existing `ask_info` conversation
 asked only where food, water, wood or stone could be found; nobody could ask where a person was. (The same audit found
 two legacy reads of true state: dependant needs read out of sight in `optCare`, and the pre-56 watch fallback; neither is
-changed here and both are recorded in the register as open.)
+changed here and both are recorded in the register as open. The first is closed by rules 106, `REMEMBERED_NEED.md`.)
 
 ## Contract (rules 105)
 

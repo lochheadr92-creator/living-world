@@ -1,4 +1,5 @@
 import {hasPromiseTargets,observePromiseTarget} from './promise_targets';
+import { rememberSigns } from './remembered_need';
 import { waterSupplyNear } from './water_access';
 import { observeFlood } from './flood';
 import { SENSE_RADIUS } from './constants';
@@ -126,6 +127,7 @@ export function perceive(world: World, p: Person): void {
     for (const q of world.persons) {
       if (q !== p && q.alive && sameSpace(world, p, q)) {
         const seen=describeSeenPerson(world,q);p.seen.push(seen);rememberRoomContact(world,p,seen,q.hhId===p.hhId,q.name);
+        rememberSigns(world,p,seen); // rules 106: a sight indoors keeps how they looked as a sight outdoors does
       }
     }
     p.lastPercept = { tick: world.tick, seen: p.seen.length, newBeliefs: fresh };
@@ -145,8 +147,11 @@ export function perceive(world: World, p: Person): void {
       if (!e.alive) return;
       if (!sameSpace(world, p, e)) return;
       if (hyp(e.x - p.x, e.y - p.y) > r) return;
-      p.seen.push(describeSeenPerson(world, e));
+      const seenPerson = describeSeenPerson(world, e);
+      p.seen.push(seenPerson);
       p.whereabouts[e.id] = { x: e.x, y: e.y, tick: world.tick };
+      // rules 106 (remembered_need.ts): how they looked goes with the note of where they were
+      rememberSigns(world, p, seenPerson);
     } else if (e.ent === 'cart') {
       if (hyp(e.x - p.x, e.y - p.y) > r) return;
       if (observe(world, p, e)) fresh++;
