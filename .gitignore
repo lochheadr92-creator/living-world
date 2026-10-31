@@ -35,3 +35,6 @@ viewer_evidence/final-authority-before.json
 # Raw autonomous-programme saves remain local; reports/manifests are retained.
 autonomy_evidence/**/final-save.json
 autonomy_evidence/**/*-save.json
+
+# full final saves written beside each ordinary-screen report (about 3 MB each; never tracked, the report.json is the record)
+autonomy_evidence/**/final.json
