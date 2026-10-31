@@ -1,0 +1,18 @@
+{
+  "source": "0d6db43f807b87ecbdbaee9f4a9be4fe0d23ca99, rules 111 before successor behaviour",
+  "ordinary": {
+    "saved": "98f797410d12c3461039cb63174a7667410d15bdea5157a8f5c09e5a32d369a8",
+    "uninterrupted": "aaad2c981eef574ed7e1c4790750e04ada742638dc0124637dc1cdf3a6c05f51",
+    "continued": "aaad2c981eef574ed7e1c4790750e04ada742638dc0124637dc1cdf3a6c05f51"
+  },
+  "participation": {
+    "saved": "294facfb442560cc80b6f67e6362a02a69d4c6ab051ae3228648d0a4dcc2a77e",
+    "uninterrupted": "14454ede44bc7a79ac415231b18d6b3e7e7cad4157b9c7b3675045af1a1d2978",
+    "continued": "14454ede44bc7a79ac415231b18d6b3e7e7cad4157b9c7b3675045af1a1d2978"
+  },
+  "urgent": {
+    "saved": "b29b982db9722ae40d079490647a58b22bbce1bd89d770f58906b91a28e0321a",
+    "uninterrupted": "ebb9180b9340279987a2386c81da31d426eb35121bacb8b880e4c8edd57c6716",
+    "continued": "ebb9180b9340279987a2386c81da31d426eb35121bacb8b880e4c8edd57c6716"
+  }
+}
