@@ -1,0 +1,18 @@
+{
+  "source": "9242d603eb01835065301dd7dafee252f671005b, rules 110 before successor behaviour",
+  "ordinary": {
+    "saved": "a355bc885d32e8aa70e0c7ad742bd11dd5c25410fc9475a69b742447235f6086",
+    "uninterrupted": "2bd7ae66df7673252c55f8ec290748defb9b813618dac8e147a681f2e6cb763f",
+    "continued": "2bd7ae66df7673252c55f8ec290748defb9b813618dac8e147a681f2e6cb763f"
+  },
+  "searching": {
+    "saved": "d7e9e42443c6723f80b00c02eca91409a9123075e66c0e945f96817d1769cfd2",
+    "uninterrupted": "e5c2f01c065be56d505c135dca7213fb735a5b396847852bcef0425ef15176c1",
+    "continued": "e5c2f01c065be56d505c135dca7213fb735a5b396847852bcef0425ef15176c1"
+  },
+  "supplied": {
+    "saved": "e5c2f01c065be56d505c135dca7213fb735a5b396847852bcef0425ef15176c1",
+    "uninterrupted": "0761d0f9bc465d59a7852e522c8f98f3d13d26c38238f6b8b978a7c4cf1ae12c",
+    "continued": "0761d0f9bc465d59a7852e522c8f98f3d13d26c38238f6b8b978a7c4cf1ae12c"
+  }
+}
