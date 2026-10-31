@@ -1,7 +1,7 @@
 # Living World: notes for Claude (read this first)
 
-Current state (31 October 2026): rules 101 promised supply (`PROMISED_SUPPLY.md`, runtime `8ca0112`,
-reference `573dc01`) after rules 100 (`62e7268`/`116ad79`); the autonomy/environment programme continues from the register.
+Current state (31 October 2026): rules 102 one roof, one promise (`REPAIR_DUTY.md`, runtime `f6d7281`,
+reference `4c47dab`) after rules 101 (`8ca0112`/`573dc01`); the autonomy/environment programme continues from the register.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
