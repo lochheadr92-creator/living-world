@@ -11,15 +11,16 @@ import { conservationReport } from '../src/sim/economy';
 import { serializeWorld } from '../src/app/save';
 import { parseIntervention } from './lab/lab';
 import type { Request } from '../src/sim/types';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 
 const [out, seed] = process.argv.slice(2);
 if (!out || !['meadow', 'river', 'forest'].includes(seed)) throw new Error('Specify a fresh output directory and a registered seed');
 if (existsSync(out)) throw new Error('Never overwrite a prior experiment');
 mkdirSync(out, { recursive: true });
 const sourceFiles = [...readdirSync('src', { recursive: true }).map(String).filter(p => p.endsWith('.ts')).map(p => 'src/' + p), 'scripts/project_helpers_observe.ts', 'scripts/lab/lab.ts'].sort();
-const manifest = () => Object.fromEntries(sourceFiles.map(p => [p, createHash('sha256').update(readFileSync(p)).digest('hex')]));
+const manifest = () => sourceManifest(sourceFiles);
 const source = manifest();
-writeFileSync(`${out}/provenance.json`, JSON.stringify({ head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), source, seed, profile: 'normal', days: 6, immigration: false, runtimeBudgetSeconds: 180, stoppingRule: 'day 6, invariant failure, or runtime budget; no tuning/retry to change a null' }, null, 2));
+writeFileSync(`${out}/provenance.json`, JSON.stringify({ ...gitProvenance(), source, seed, profile: 'normal', days: 6, immigration: false, runtimeBudgetSeconds: 180, stoppingRule: 'day 6, invariant failure, or runtime budget; no tuning/retry to change a null' }, null, 2));
 const w = createWorld(currentWorldSettings('normal', seed, { immigration: false }));
 const choices: unknown[] = [], requests = new Map<number, Request>(), daily: unknown[] = [];
 let comparisons = 0, changed = 0, savedExample = false;

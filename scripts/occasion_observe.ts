@@ -1,3 +1,4 @@
+import {gitProvenance,sourceManifest} from './observers/provenance';
 // Fixed ordinary window, no supplied events/resources/decisions. Version is chosen at creation, never on a mature save.
 import{existsSync,mkdirSync,readFileSync,readdirSync,writeFileSync}from'node:fs';
 import{createHash}from'node:crypto';
@@ -13,7 +14,7 @@ import{TimeBudget}from'./observers/time_budget';
 const[seed,out,versionArg='111',daysArg='20']=process.argv.slice(2).filter(x=>x!=='--'),version=Number(versionArg),days=Number(daysArg);
 if(!seed||!out||existsSync(out)||![110,111].includes(version)||!Number.isInteger(days)||days<1||days>45)throw new Error('Seed, fresh output, rules 110/111 and 1..45 days required');
 const hash=(x:string)=>createHash('sha256').update(x).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/occasion_observe.ts','scripts/observers/time_budget.ts').sort();
-const manifest=()=>Object.fromEntries(files.map(f=>[f,hash(readFileSync(f,'utf8'))])),source=manifest();
+const manifest=()=>sourceManifest(files),source=manifest();
 const w=createWorld({...currentWorldSettings('normal',seed,{immigration:false}),rulesVersion:version}),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
 const counts:Record<string,number>={},arrived=new Set<number>(),stories:unknown[]=[],budget=new TimeBudget();
 const count=(k:string,n=1)=>counts[k]=(counts[k]??0)+n;
@@ -30,5 +31,5 @@ while(w.tick<days*2400){
 detach();delete w.hooks;const final=serializeWorld(w);
 if(final!==serializeWorld(twin)||final!==serializeWorld(deserializeWorld(final)))throw new Error('Twin or reload differs');
 if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed');
-const report={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),seed,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,continuationEqual:true,conservation:conservationReport(w),timeBudget:budget.report(),limits:'Ordinary fixed 20-day (or explicit CLI day count) window. Versions chosen at world creation. No inserted occasions, goods or decisions. Counts describe divergent worlds, not paired event opportunities or general household benefit. Arrival already grants the existing meeting/mood/exchange consequences; completion means staying through the bounded activity. Repeated samples are not independent decisions. First 160 endings retained.'};
+const report={...gitProvenance(),seed,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,continuationEqual:true,conservation:conservationReport(w),timeBudget:budget.report(),limits:'Ordinary fixed 20-day (or explicit CLI day count) window. Versions chosen at world creation. No inserted occasions, goods or decisions. Counts describe divergent worlds, not paired event opportunities or general household benefit. Arrival already grants the existing meeting/mood/exchange consequences; completion means staying through the bounded activity. Repeated samples are not independent decisions. First 160 endings retained.'};
 mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({...report,source:undefined,stories:undefined,timeBudget:undefined,conservation:report.conservation.ok}));

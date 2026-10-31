@@ -11,14 +11,15 @@ import {serializeWorld} from '../src/app/save';
 import {DAY} from '../src/sim/constants';
 import {conservationReport} from '../src/sim/economy';
 import {parseIntervention} from './lab/lab';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 const [out,seed,daysArg,arrivalsArg,versionArg,armArg]=process.argv.slice(2),days=Number(daysArg??30),immigration=arrivalsArg==='arrivals',version=versionArg&&versionArg!=='current'?Number(versionArg):undefined,arm=armArg??'';
 if(!out||existsSync(out)||!['meadow','river','forest'].includes(seed)||!Number.isInteger(days)||days<1||days>60)throw new Error('Fresh output, registered seed and 1-60 days required');
 if(arm)parseIntervention(arm).install!();
 mkdirSync(out,{recursive:true});
 const paths=readdirSync('src',{recursive:true}).map(String).filter(p=>p.endsWith('.ts')).map(p=>'src/'+p).concat(['scripts/civic_food_observe.ts']).sort();
-const manifest=()=>Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]));const source=manifest();
+const manifest=()=>sourceManifest(paths);const source=manifest();
 const w=createWorld({...currentWorldSettings('normal',seed,{immigration}),...(version?{rulesVersion:version}:{})});
-writeFileSync(`${out}/provenance.json`,JSON.stringify({arm:arm||'current',head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),source,settings:w.settings,days,budgetSeconds:240,observer:'transfer and activity hooks, personal civic records'},null,2));
+writeFileSync(`${out}/provenance.json`,JSON.stringify({arm:arm||'current',...gitProvenance(),source,settings:w.settings,days,budgetSeconds:240,observer:'transfer and activity hooks, personal civic records'},null,2));
 const meals:unknown[]=[];let publicMealStarts=0,publicWithdrawals=0;const unitsFromPublic:Record<string,number>={};
 const isPublicStore=(id:number)=>{const b=w.byId.get(id);return !!b&&b.ent==='building'&&b.type==='storehouse'&&b.hhId===0;};
 w.hooks={onActivityStart(p,a){if(a.kind==='eat_store'&&isPublicStore(a.targetId))publicMealStarts++;if(a.kind==='withdraw'&&isPublicStore(a.targetId))publicWithdrawals++;},

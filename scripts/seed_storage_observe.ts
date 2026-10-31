@@ -12,11 +12,12 @@ import {stageOf} from '../src/sim/people';
 import {generateOptions} from '../src/sim/decision';
 import {demandsOf} from '../src/sim/production';
 import type {Activity,Person} from '../src/sim/types';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 const [out]=process.argv.slice(2);if(!out||existsSync(out))throw new Error('A fresh output directory is required');mkdirSync(out,{recursive:true});
 const paths=readdirSync('src',{recursive:true}).map(String).filter(p=>p.endsWith('.ts')).map(p=>'src/'+p).concat(['scripts/seed_storage_observe.ts']).sort();
-const manifest=()=>Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')])),source=manifest();
+const manifest=()=>sourceManifest(paths),source=manifest();
 const w=createWorld(currentWorldSettings('normal','river',{immigration:false}));
-writeFileSync(`${out}/provenance.json`,JSON.stringify({head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),source,settings:w.settings,question:'Does bounded seed storage offer and physically complete in a fixed ordinary world, and what subsequent work occurs? No causal aggregate claim.',ticks:108000,budgetSeconds:300},null,2));
+writeFileSync(`${out}/provenance.json`,JSON.stringify({...gitProvenance(),source,settings:w.settings,question:'Does bounded seed storage offer and physically complete in a fixed ordinary world, and what subsequent work occurs? No causal aggregate claim.',ticks:108000,budgetSeconds:300},null,2));
 const samples={adults:0,storageOffered:0,cartDemand:0,cartBlockedByHammer:0},pending=new Map<number,{p:Person;a:Activity;start:number;seedBefore:number}>(),ends:unknown[]=[],laterWork:unknown[]=[];
 const storers=new Set<number>();let starts=0,seedTransferred=0,cartTrips=0,pure=true;
 w.hooks={onActivityStart(p,a){

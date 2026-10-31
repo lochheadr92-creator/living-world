@@ -6,8 +6,9 @@ import {currentWorldSettings} from '../src/sim/profiles';
 import {stepWorld} from '../src/sim/world';
 import {serializeWorld,deserializeWorld} from '../src/app/save';
 import {conservationReport} from '../src/sim/economy';
+import {sourceManifest} from './observers/provenance';
 const out=process.argv.slice(2).filter(a=>a!=='--')[0];if(!out||existsSync(out))throw new Error('Fresh output required');
-const source=Object.fromEntries(readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).sort().map(f=>['src/'+f,createHash('sha256').update(readFileSync('src/'+f)).digest('hex')]));
+const source=sourceManifest(readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).sort().map(f=>'src/'+f));
 const stories=[];
 for(const [seed,person] of [['river',1134],['forest',937]] as const){
  const w=createWorld({...currentWorldSettings('normal',seed,{immigration:false}),rulesVersion:87}),twin=deserializeWorld(serializeWorld(w)),records:unknown[]=[];

@@ -12,12 +12,13 @@ import { observationFromPrompt } from '../src/agent/protocol';
 import { conservationReport } from '../src/sim/economy';
 import { hashWorld } from '../src/sim/world';
 import { parseIntervention } from './lab/lab';
+import {gitProvenance} from './observers/provenance';
 
 const out = process.argv[2] ?? 'inhabitant_evidence/project-helpers-r39';
 if (existsSync(out)) throw new Error('Use a fresh evidence directory');
 mkdirSync(out, { recursive: true });
 const write = (name: string, data: unknown) => writeFileSync(`${out}/${name}`, typeof data === 'string' ? data : JSON.stringify(data, null, 2));
-write('provenance.json', { head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), diff: execFileSync('git', ['diff'], { encoding: 'utf8' }), staged: true });
+write('provenance.json', { ...gitProvenance(), diff: execFileSync('git', ['diff'], { encoding: 'utf8' }), staged: true });
 const f = projectHelperScene();
 write('before-gift.json', serializeWorld(f.w));
 write('before-gift-observation.json', observeNow(f.w, f.ada));

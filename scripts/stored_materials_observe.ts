@@ -12,13 +12,14 @@ import {generateOptions} from '../src/sim/decision';
 import {rememberedMaterialStores} from '../src/sim/material_stock';
 import {parseIntervention} from './lab/lab';
 import type {Request,ItemKind} from '../src/sim/types';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 
 const [out,seed]=process.argv.slice(2);if(!out||existsSync(out)||!['meadow','river','forest'].includes(seed))throw new Error('Fresh output and registered seed required');
 mkdirSync(out,{recursive:true});
 const paths=[...readdirSync('src',{recursive:true}).map(String).filter(p=>p.endsWith('.ts')).map(p=>'src/'+p),'scripts/stored_materials_observe.ts','scripts/lab/lab.ts'].sort();
-const manifest=()=>Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]));
+const manifest=()=>sourceManifest(paths);
 const source=manifest();
-writeFileSync(`${out}/provenance.json`,JSON.stringify({head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),source,seed,profile:'normal',days:6,immigration:false,budgetSeconds:180,stop:'day 6, invariant failure, or budget; no tuning'},null,2));
+writeFileSync(`${out}/provenance.json`,JSON.stringify({...gitProvenance(),source,seed,profile:'normal',days:6,immigration:false,budgetSeconds:180,stop:'day 6, invariant failure, or budget; no tuning'},null,2));
 const w=createWorld(currentWorldSettings('normal',seed,{immigration:false}));
 const selections:any[]=[],transfers:any[]=[],requests=new Map<number,Request>(),daily:any[]=[],samples:any[]=[],consequences:any[]=[];
 const finished=new Set<number>(),usedTools=new Set<number>(),knownRequestStatus=new Map<number,string>();

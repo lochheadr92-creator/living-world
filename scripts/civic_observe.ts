@@ -7,12 +7,13 @@ import { generateOptions, rankOptions } from '../src/sim/decision';
 import { conservationReport } from '../src/sim/economy';
 import { serializeWorld } from '../src/app/save';
 import { execFileSync } from 'node:child_process';
+import {gitProvenance} from './observers/provenance';
 const [out='inhabitant_evidence/civic-r36-meadow',seed='meadow',daysText='30']=process.argv.slice(2);
 if(existsSync(out))throw new Error('Use a fresh evidence directory; never overwrite an earlier run');
 mkdirSync(out,{recursive:true});
 const w=createWorld(currentWorldSettings('large',seed,{immigration:false}));
 const days=Number(daysText);if(!Number.isFinite(days)||days<=0||days>40)throw new Error('days must be 1..40');
-writeFileSync(`${out}/provenance.json`,JSON.stringify({head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),diff:execFileSync('git',['diff'],{encoding:'utf8'}),settings:w.settings,days},null,2));
+writeFileSync(`${out}/provenance.json`,JSON.stringify({...gitProvenance(),diff:execFileSync('git',['diff'],{encoding:'utf8'}),settings:w.settings,days},null,2));
 let deposits=0,withdrawals=0;
 const log=(entry:unknown)=>appendFileSync(`${out}/events.jsonl`,JSON.stringify({tick:w.tick,...entry as object})+'\n');
 w.hooks={onActivityStart(p,a){if(a.kind==='plan_site'&&a.data.type==='storehouse')log({kind:'chosen-layout',person:p.id,name:p.name});},onTransfer(t){

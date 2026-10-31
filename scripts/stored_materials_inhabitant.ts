@@ -11,13 +11,14 @@ import { observationFromPrompt } from '../src/agent/protocol';
 import { conservationReport, transfer } from '../src/sim/economy';
 import { hashWorld } from '../src/sim/world';
 import { parseIntervention } from './lab/lab';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 
 const out=process.argv[2];if(!out||existsSync(out))throw new Error('Supply a fresh evidence directory');
 mkdirSync(out,{recursive:true});
 const write=(n:string,v:unknown)=>writeFileSync(`${out}/${n}`,typeof v==='string'?v:JSON.stringify(v,null,2));
 const paths=[...readdirSync('src',{recursive:true}).map(String).filter(p=>p.endsWith('.ts')).map(p=>'src/'+p),'scripts/stored_materials_inhabitant.ts','scripts/lab/lab.ts','tests/helpers/stored_materials.ts'].sort();
-const manifest=()=>Object.fromEntries(paths.map(p=>[p,createHash('sha256').update(readFileSync(p)).digest('hex')]));
-const source=manifest();write('provenance.json',{head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),source,staged:true});
+const manifest=()=>sourceManifest(paths);
+const source=manifest();write('provenance.json',{...gitProvenance(),source,staged:true});
 const reports=[];
 let promiseCheckpoint='';
 for(const scenario of ['plan','promise'] as const){

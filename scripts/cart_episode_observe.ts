@@ -21,6 +21,7 @@ import { techniqueBlocker } from '../src/sim/techniques';
 import { hasKnownResource } from '../src/sim/intent';
 import type { Ctx } from '../src/sim/optutil';
 import { parseIntervention } from './lab/lab';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 
 const [out, seedArg, daysArg, versionArg, armArg] = process.argv.slice(2);
 const version = versionArg && versionArg !== 'current' ? Number(versionArg) : undefined;
@@ -31,10 +32,10 @@ if (!out || existsSync(out) || !['meadow', 'river', 'forest'].includes(seed) || 
 if (arm) parseIntervention(arm).install!();
 mkdirSync(out, { recursive: true });
 const paths = readdirSync('src', { recursive: true }).map(String).filter((p) => p.endsWith('.ts')).map((p) => 'src/' + p).concat(['scripts/cart_episode_observe.ts']).sort();
-const manifest = () => Object.fromEntries(paths.map((p) => [p, createHash('sha256').update(readFileSync(p)).digest('hex')]));
+const manifest = () => sourceManifest(paths);
 const source = manifest();
 const w = createWorld({ ...currentWorldSettings('normal', seed as 'river', { immigration: false }), ...(version ? { rulesVersion: version } : {}) });
-writeFileSync(`${out}/provenance.json`, JSON.stringify({ head: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), source, settings: w.settings, days, arm: arm || 'current', budgetSeconds: 400, observer: '240-tick samples of adults wanting a cart, traced through the batch planner; activity-start hook for yard batches' }, null, 2));
+writeFileSync(`${out}/provenance.json`, JSON.stringify({ ...gitProvenance(), source, settings: w.settings, days, arm: arm || 'current', budgetSeconds: 400, observer: '240-tick samples of adults wanting a cart, traced through the batch planner; activity-start hook for yard batches' }, null, 2));
 
 const unitsOf = (n: number | undefined): number => n ?? 0;
 const cartish = /handcart|handles|planks|timber yard/i;

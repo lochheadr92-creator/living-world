@@ -11,10 +11,11 @@ import {generateOptions} from '../src/sim/decision';
 import {setHomeReplacement} from '../src/sim/home_replacement';
 import {ownHomeBeliefFor} from '../src/sim/shelter';
 import {isHomeType} from '../src/sim/constants';
+import {gitProvenance,sourceManifest} from './observers/provenance';
 const [seed,out,daysArg='5',budgetArg='240']=process.argv.slice(2).filter(a=>a!=='--'),days=Number(daysArg),budget=Number(budgetArg);
 if(!seed||!out||existsSync(out)||!Number.isInteger(days)||days<1||days>365||!Number.isFinite(budget)||budget<=0)throw new Error('Seed, fresh output, days 1..365, positive seconds budget required');
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/home_replacement_observe.ts').sort();
-const manifest=()=>Object.fromEntries(files.map(f=>[f,hash(readFileSync(f,'utf8'))])),source=manifest();
+const manifest=()=>sourceManifest(files),source=manifest();
 const w=createWorld(currentWorldSettings('normal',seed,{immigration:false})),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
 const counts:Record<string,number>={},stories:unknown[]=[];let samples=0,pureChecks=0,stop='horizon';
 const count=(key:string)=>counts[key]=(counts[key]??0)+1,story=(x:unknown)=>{if(stories.length<80)stories.push(x);};
@@ -34,5 +35,5 @@ while(w.tick<days*2400){
  if(w.tick%120===0&&performance.now()-began>budget*1000){stop='budget';break;}
 }
 delete w.hooks;const final=serializeWorld(w);if(final!==serializeWorld(twin))throw new Error('Unobserved twin changed');if(final!==serializeWorld(deserializeWorld(final)))throw new Error('Invalid final save');if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed during observation');
-const report={head:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),seed,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,continuationEqual:true,conservation:conservationReport(w),limits:'Ordinary occurrence screen; repeated samples are not independent opportunities. Removed-boundary offers are pure option comparisons in the same state, not a counterfactual trajectory or aggregate effect. No induced collapse.'};
+const report={...gitProvenance(),seed,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,continuationEqual:true,conservation:conservationReport(w),limits:'Ordinary occurrence screen; repeated samples are not independent opportunities. Removed-boundary offers are pure option comparisons in the same state, not a counterfactual trajectory or aggregate effect. No induced collapse.'};
 mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({...report,source:undefined,stories:undefined}));if(stop!=='horizon')process.exitCode=1;
