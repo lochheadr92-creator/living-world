@@ -1,5 +1,15 @@
 # Heard roof-repair duties: next bounded transition
 
+## Owner-requested checkpoint — 31 October 2026
+
+Rules 98 is now implemented and committed as an **as-is handoff**, not a completed
+release claim. The diagnosis/contract below is retained as historical provenance.
+Focused checks passed 45 tests, rendered checks 8/8, and typecheck/build passed.
+Three ordinary five-day observations conserved resources but did not establish an
+actual new requested-repair chain. Full regression completion, final review and
+the immutable rules-98 reference remain to be confirmed/completed by the successor.
+Exact changed files, evidence and next steps: [Claude handoff](CLAUDE_AUTONOMY_HANDOFF.md).
+
 ## Rules 97 source and physical reproduction
 
 `autonomy_evidence/repair98-before.ts` stages elderly Ada (#2), neighbour Ben (#5)
@@ -47,6 +57,6 @@ where a target or material is lost after agreement. Distinguish repairing a paid
 contribution from promising a fully restored building, and audit the existing
 condition threshold before changing that contract. Predeclare any such change.
 
-No rules-98 implementation, successful repaired roof or ordinary frequency is
-claimed by this diagnosis. Public/shared upkeep and ordinary household survival
+At the time of this diagnosis, no rules-98 implementation, successful repaired roof
+or ordinary frequency was claimed. Public/shared upkeep and ordinary household survival
 remain separate programme requirements.

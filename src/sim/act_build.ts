@@ -24,6 +24,7 @@ import { carryCap } from './people';
 import type { Building, Items, ItemKind, Person, Site, ToolKind, World } from './types';
 import {fuelItem,fuelValue,hasOffcuts} from './offcuts';
 import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
+import {hasRepairDuty,repairSupplies} from './repair_duty';
 import {settleFirePromise} from './responsibilities';
 import { clamp } from './util';
 import { itemsToText } from './people';
@@ -154,7 +155,7 @@ registerHandler('repair', {
       return 'it is gone';
     }
     observe(world, p, b);
-    if (!repairMaterial(b, p.inv)) return 'nothing to patch it with';
+    if (!repairMaterial(b, hasRepairDuty(world)?repairSupplies(world,p,b.id):p.inv)) return hasRepairDuty(world)?'nothing available to patch it with':'nothing to patch it with';
     if (b.condition > 90) return 'it is in good shape already';
     a.tx = b.x + b.w / 2;
     a.ty = b.y + b.h / 2;
@@ -163,12 +164,13 @@ registerHandler('repair', {
   work(world, p, a): WorkResult {
     const b = world.byId.get(a.targetId);
     if (!b || b.ent !== 'building') {observePromiseTarget(world,p,a.targetId,a.tx,a.ty);return 'fail:it is gone';}
+    if(hasRepairDuty(world)&&b.condition>90)return a.cycle>0?'partial:it is in good shape already':'fail:it is in good shape already';
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress % 14 === 7) addFx(world, 'hammer', a.tx, a.ty, 0);
     if (a.progress < a.duration) return 'continue';
-    const mat = repairMaterial(b, p.inv);
-    if (!mat) return a.cycle > 0 ? 'partial:ran out of materials' : 'fail:ran out of materials';
+    const mat = repairMaterial(b, hasRepairDuty(world)?repairSupplies(world,p,b.id):p.inv);
+    if (!mat) {const reason=hasRepairDuty(world)&&repairMaterial(b,p.inv)?'repair materials are reserved':'ran out of materials';return a.cycle>0?`partial:${reason}`:`fail:${reason}`;}
     consume(world, p.inv, mat.item, 1, 'repairs');
     const before = b.condition;
     b.condition = Math.min(100, b.condition + mat.gain);
@@ -182,7 +184,7 @@ registerHandler('repair', {
     notePractice(world, p, 'build', 0.003);
     observe(world, p, b);
     if (b.condition >= 92) return 'done';
-    if (!repairMaterial(b, p.inv)) return 'partial:ran out of materials';
+    if (!repairMaterial(b, hasRepairDuty(world)?repairSupplies(world,p,b.id):p.inv)) return hasRepairDuty(world)&&repairMaterial(b,p.inv)?'partial:remaining repair materials are reserved':'partial:ran out of materials';
     return 'continue';
   },
   onEnd(world, p, a) {

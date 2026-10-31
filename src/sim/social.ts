@@ -6,6 +6,8 @@ import {hasWorkHandover} from './handover_state';
 import {careJourneyReceipt} from './care_journey';
 import {hasWarmthDuty,knownDutyFire,communicateFireLocation,fuelAvailable} from './warmth_duty';
 import {hasCareHandback,proposeCareReturn,answerCareReturn} from './care_handback';
+import {hasRepairDuty,knownDutyHome,communicateRoofLocation,repairSupplies} from './repair_duty';
+import {repairMaterial} from './act_build';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
 import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
@@ -419,14 +421,16 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
     return { kind: 'decline', reason: dislike ? 'disliked' : 'unwilling' };
   }
   if (req.kind === 'repair') {
+    if(hasRepairDuty(world)&&(!req.destId||!knownDutyHome(world,A,req.destId)&&!knownDutyHome(world,B,req.destId)))return {kind:'decline',reason:'no_place'};
     const sound = stageOf(world, B) === 'adult' || stageOf(world, B) === 'youth';
     const w0 = willingness(world, B, A, 0.5) + 0.1;
     if (!sound) return { kind: 'decline', reason: 'unwilling' };
     if (activeCommitments(B).length >= MAX_ACTIVE_COMMITMENTS) return { kind: 'decline', reason: 'own_need' };
-    const has = (B.inv.wood ?? 0) > 0 || canObtain(world, B, 'wood');
+    const roof=hasRepairDuty(world)?knownDutyHome(world,B,req.destId??0)??knownDutyHome(world,A,req.destId??0):undefined;
+    const has = hasRepairDuty(world)?!!repairMaterial({type:roof!.btype as BuildingType},repairSupplies(world,B,req.destId??0))||canObtain(world,B,'wood'):(B.inv.wood ?? 0) > 0 || canObtain(world, B, 'wood');
     if (!has) return { kind: 'decline', reason: 'no_item' };
     // having none to spare is not the same as having none: say which it is
-    if ((B.inv.wood ?? 0) > 0 && surplusOf(world, B, 'wood') <= 0 && plannedFor(B, 'wood') > 0) return { kind: 'decline', reason: 'making' };
+    if (!hasRepairDuty(world)&&(B.inv.wood ?? 0) > 0 && surplusOf(world, B, 'wood') <= 0 && plannedFor(B, 'wood') > 0) return { kind: 'decline', reason: 'making' };
     if (w0 >= 0.62 && personalDriveMax(world, B) < 40) return { kind: 'promise', item: 'wood', n: 1 };
     return { kind: 'decline', reason: dislike ? 'disliked' : personalDriveMax(world, B) > 35 ? 'own_need' : 'unwilling' };
   }
@@ -1348,6 +1352,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const toSite = !!req.siteId && !!item && !isFood(item) && item !== 'water';
         if (req.kind === 'repair') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + PROMISE_TTL + 900, destKind: 'building', destId: req.destId, milestone: req.milestone || 'sound again' });
+          if(req.destId)communicateRoofLocation(world,A,B,req.destId);
         } else if (req.kind === 'watch' || req.kind === 'fire') {
           addCommitment(world, B, req, { kind: 'work', item: null, amount: 1, siteId: 0, deadline: world.tick + DAY, destKind: req.destKind, destId: req.destId, milestone: req.kind === 'watch' ? 'watched' : 'fire kept' });
           if (req.kind === 'watch' && req.destId) communicateWatchLocation(world, A, B, req.destId);
@@ -1365,6 +1370,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const where = c.data.place ? ` (or leave it at ${A.name}’s ${homeNoun((B.beliefs[c.data.place as number]?.btype ?? 'hut') as BuildingType)})` : '';
         req.note = (isRich(world) && resp.n < req.amount ? `${B.name} will bring ${resp.n} of the ${req.amount} ${item}` : `${B.name} will bring ${resp.n} ${item}`) + where;
         if (req.kind === 'repair') {
+          if(hasRepairDuty(world))req.note=`${B.name} will patch the roof with available materials; no wood has been delivered.`;
           bubble(world, B, 'I’ll see to the roof.', 'say', 60);
           addLog(world, B, 'social', `Promised ${A.name} to mend their roof.`);
           addLog(world, A, 'social', `${B.name} promised to mend our roof.`);

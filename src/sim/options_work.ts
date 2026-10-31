@@ -19,6 +19,7 @@ import { residentCareOptions } from './resident_care';
 import {prioritizeCareReturn} from './care_supply';
 import {activeCareJourney} from './care_journey';
 import {hasWarmthDuty,fuelAvailable} from './warmth_duty';
+import {hasRepairDuty,roofDuty,repairSupplies} from './repair_duty';
 import { baseHub, nearestHub } from './settlements';
 import { collectMaterialStock, depositLead } from './production';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
@@ -315,6 +316,11 @@ export function materialNeeds(ctx: Ctx): MatNeed[] {
       }
       continue;
     }
+    const duty=hasRepairDuty(world)&&roofDuty(p,b.id);
+    if(duty){
+      if((b.cond??100)<62&&!repairMaterial({type:(b.btype??'hut') as BuildingType},repairSupplies(world,p,b.id)))needs.push({item:'wood',n:1,base:48,why:`to obtain a wood patch for the roof I promised to repair (#${b.id})`,tag:'repair-duty'});
+      continue;
+    }
     const stake = repairStake(ctx, b);
     if (stake > 0 && (b.cond ?? 100) < (stake === 1 ? 55 : 45)) {
       const cond = b.cond ?? 55;
@@ -505,7 +511,7 @@ function optMaterials(ctx: Ctx): void {
     if (!need) continue;
     // what one of their own plans has spoken for does not count toward this need: otherwise they would stop fetching because the
     // basket's wood is in the pack, and then not hand that wood over either
-    const have = hasWarmthDuty(ctx.world)&&need.tag==='fire'&&item==='wood'?fuelAvailable(ctx.world,ctx.p,'wood'):freeOf(ctx.p, item);
+    const have = hasRepairDuty(ctx.world)&&need.tag==='repair-duty'?repairSupplies(ctx.world,ctx.p,0)[item]??0:hasWarmthDuty(ctx.world)&&need.tag==='fire'&&item==='wood'?fuelAvailable(ctx.world,ctx.p,'wood'):freeOf(ctx.p, item);
     const missing = need.n - have;
     if (missing <= 0) continue;
     if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30) continue;
@@ -857,25 +863,25 @@ function optRepairAndFire(ctx: Ctx): void {
       });
       continue;
     }
-    const stake = repairStake(ctx, b);
-    if (stake > 0 && (b.cond ?? 100) < (stake === 1 ? 60 : 45)) {
+    const duty=hasRepairDuty(world)&&roofDuty(p,b.id),stake = repairStake(ctx, b);
+    if (stake > 0 && (b.cond ?? 100) < (duty?62:stake === 1 ? 60 : 45)) {
       // the material a plan of theirs has spoken for counts only for the thing that plan is about: the wood meant for their own
       // roof is not wood for a neighbour's. (For the plan's own building it is the plan's step, and the whole pack counts.)
       const forThis = p.intentions.some((i) => i.status === 'active' && i.aboutId === b.id);
-      if (!repairMaterial({ type: (b.btype ?? 'hut') as BuildingType }, forThis ? p.inv : freeInv(p))) continue;
+      if (!repairMaterial({ type: (b.btype ?? 'hut') as BuildingType }, hasRepairDuty(world)?repairSupplies(world,p,b.id):forThis ? p.inv : freeInv(p))) continue;
       const fail = recentFailure(world, p, b.id, 300);
       if (fail) continue;
       const own = stake === 1;
       const cond = b.cond ?? 60;
       // a roof that has all but gone is an emergency in cold or wet weather
       const chill = Math.max(0, Math.min(1, (10 - world.weather.temp) / 15)) + 0.4 * Math.min(1, world.weather.rain + world.weather.storm);
-      const sc = new Scorer().add(own ? 'needs repair' : 'a neighbour’s home is falling apart', (18 + (60 - cond) * 0.6) * (1 + 0.5 * Math.min(1, chill)) * tm.work * stake).add('walking', -pen(e));
+      const sc = new Scorer().add(duty?'I promised to patch this roof':own ? 'needs repair' : 'a neighbour’s home is falling apart', duty?48:(18 + (60 - cond) * 0.6) * (1 + 0.5 * Math.min(1, chill)) * tm.work * stake).add('walking', -pen(e));
       if (winterCue(world) && own) sc.add('winter is coming', WINTER_SHELTER_BOOST);
       const util = sc.total * (cond < 35 ? Math.max(nightMult(ctx), 0.55) : nightMult(ctx)) * weatherMult(ctx);
       addOption(ctx, {
         kind: 'repair',
         label: own ? `Repair the ${BUILD_DEF[(b.btype ?? 'hut') as BuildingType].label}` : `Help repair a neighbour’s ${BUILD_DEF[(b.btype ?? 'hut') as BuildingType].label}`,
-        goal: own ? 'to keep it sound' : 'to keep a neighbour’s roof over their head',
+        goal: duty?'to patch the roof as promised':own ? 'to keep it sound' : 'to keep a neighbour’s roof over their head',
         need: null,
         util,
         parts: sc.parts,
@@ -889,9 +895,10 @@ function optRepairAndFire(ctx: Ctx): void {
           return newActivity(world, p, {
             kind: 'repair',
             label: `Repairing the ${BUILD_DEF[(b.btype ?? 'hut') as BuildingType].label}`,
-            goal: 'to keep it sound',
+            goal: duty?'to patch the roof as promised':'to keep it sound',
             targetId: b.id,
             targetType: 'building',
+            ...(duty?{data:{commitmentId:duty.id}}:{}),
             tx: b.x,
             ty: b.y,
             spotX: spot.x,

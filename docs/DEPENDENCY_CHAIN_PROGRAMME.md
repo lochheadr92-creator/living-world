@@ -1,5 +1,12 @@
 # Dependency-chain programme register
 
+**31 October 2026 owner stop/handoff:** rules 98 roof-duty code/tests/tools are
+saved as an as-is checkpoint. Verification is partial; do not promote the full
+programme or rules 98 to complete. See [Claude continuation](CLAUDE_AUTONOMY_HANDOFF.md)
+for exact evidence, pending regression/review/reference work and the preserved
+[original owner prompt](AUTONOMY_ENVIRONMENT_OWNER_PROMPT.txt). The rules-97 delivery
+statement below remains the last completed checkpoint.
+
 Started 2026-10-29 from `main` `7625337` (rules 44) in `C:\dev\Claude Experiment\living-world-integrate`.
 Owner brief: complete understandable situations, need → informed choice → physical action → useful outcome → remembered
 consequence → changed future behaviour, across the workstreams below. This file is the continuation point: every row stays

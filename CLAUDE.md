@@ -1,5 +1,9 @@
 # Living World: notes for Claude (read this first)
 
+Current owner stop/handoff (31 October 2026): rules 98 was saved as an as-is
+checkpoint, with final verification/reference work pending. Read
+[docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md) before continuing.
+
 Branch lifecycle: [docs/BRANCH_LIFECYCLE.md](docs/BRANCH_LIFECYCLE.md). Use main for active work; listed historical branches are retired, with unique work preserved.
 
 Two files govern how work happens here, and both come before the technical map below.
