@@ -48,6 +48,7 @@ const node = (script, rest, stdout) =>
 console.log(`running ${seeds.length} seeds on ${cores} cores into ${out}/`);
 let next = 0;
 let finished = 0;
+let failed = 0;
 async function worker() {
   while (next < seeds.length) {
     const seed = seeds[next++];
@@ -59,13 +60,19 @@ async function worker() {
     const file = createWriteStream(path);
     const code = await node('scripts/lab_seed.ts', ['--seed', seed, ...extra], file);
     await new Promise((r) => file.end(r));
+    if (code !== 0) failed++;
     console.log(`seed ${seed} ${code === 0 ? 'done' : 'FAILED (' + code + ')'}  [${++finished}/${seeds.length}]`);
   }
 }
 await Promise.all(Array.from({ length: Math.min(cores, seeds.length) }, worker));
 const reportFile = join(out, 'report.txt');
 const report = createWriteStream(reportFile);
-await node('scripts/lab_report.ts', [out, ...(opt('story', '') ? ['--story', opt('story', '')] : [])], report);
+const reportCode = await node('scripts/lab_report.ts', [out, ...(opt('story', '') ? ['--story', opt('story', '')] : [])], report);
 await new Promise((r) => report.end(r));
 console.log('\n' + readFileSync(reportFile, 'utf8'));
 console.log(`report saved in ${reportFile}`);
+// A seed that failed is a measurement that does not exist: the run as a whole must say so to whoever reads only the exit code.
+if (failed > 0 || reportCode !== 0) {
+  console.error(`lab incomplete: ${failed} of ${seeds.length} seed worker(s) failed${reportCode !== 0 ? ', report exited ' + reportCode : ''}`);
+  process.exitCode = 1;
+}
