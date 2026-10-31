@@ -38,6 +38,7 @@ import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
 import type { Ctx } from './optutil';
 import { runsRulesVersion } from './rulesversion';
+import { complementaryKind } from './household_supply';
 import type { Belief, BuildingType, ItemKind, Items, Person, World } from './types';
 
 /** the rules version at which household shelter plans start; nothing here applies to a world below it */
@@ -173,7 +174,8 @@ export function shelterWanted(ctx: Ctx): ShelterWant | null {
   if (!kinds.length) return null;
   // One material at a time, and at most one trip's worth of it: a plan that spoke for the whole cost of a hut would hide
   // eight wood from the fire and from everybody else's roof for days. The order is the site's own, which is the recipe's.
-  const k = kinds[0];
+  // rules 100 (household_supply.ts): a material a household member said they are fetching for this site is left to them
+  const k = complementaryKind(world, p, site.id, kinds);
   const take = Math.min(SHELTER_BATCH, Math.ceil(short[k] ?? 0));
   if (take <= 0) return null;
   const home = ownHomeBeliefFor(p);

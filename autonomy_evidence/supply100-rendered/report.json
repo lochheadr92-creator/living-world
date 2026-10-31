@@ -1,0 +1,91 @@
+{
+  "rules": 100,
+  "evidence": "STAGED two-adult household before winter; Ada's plan, the telling, Ben's deferral and his later take-up are autonomous engine decisions after the staged offer selection. No ordinary frequency or aggregate benefit claim.",
+  "checks": [
+    {
+      "name": "Ada takes on the season reserve herself",
+      "ok": true,
+      "detail": {
+        "plan": {
+          "kind": "stock",
+          "cue": "season",
+          "goal": "put 16 units of food by for the household",
+          "reserve": 16
+        }
+      }
+    },
+    {
+      "name": "Ada's inspector names the reserve plan",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 34\nSorrel household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nCheerful\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nDeciding what to do next.\nWHAT ARE THEY SET ON?\nPut 16 units of food by for the household. Step: gather food to put by (10 more) — settled on, not star"
+    },
+    {
+      "name": "Ada tells Ben in a real conversation and Ben keeps a dated personal record",
+      "ok": true,
+      "detail": {
+        "offer": "Tell Ben about my stock work",
+        "speech": "I am working to put 16 units of food by for the household; I have done 0 work so far.",
+        "heard": [
+          {
+            "planId": 7,
+            "from": 2,
+            "name": "Ada",
+            "householdId": 1,
+            "heardAt": 15013,
+            "conversationId": 9,
+            "kind": "stock",
+            "aboutId": 5,
+            "makes": "",
+            "worked": 0,
+            "goal": "put 16 units of food by for the household"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ben leaves the reserve to Ada, says why in his own record and promises nothing",
+      "ok": true,
+      "detail": {
+        "pure": true,
+        "taken": null,
+        "stock": false,
+        "deferredAt": 15014,
+        "log": [
+          "Heard Ada's undertaking #7: put 16 units of food by for the household; reported progress 0 at tick 15013. This is information, not my promise.",
+          "Ada said they are putting food by for the household (heard at tick 15013); I leave that reserve to them for now. I have promised nothing, and I will see to it myself if the store runs low or the account goes stale."
+        ],
+        "history": [
+          "Heard Ada's undertaking #7 at tick 15013, conversation #9: put 16 units of food by for the household; reported work 0. No takeover was promised. Left that reserve to them since tick 15014; no promise made."
+        ],
+        "commitments": 0
+      }
+    },
+    {
+      "name": "the expanded relationship history shows the reserve left to Ada without a promise",
+      "ok": true,
+      "detail": "Relationship history\n\nAda: trust 11, affinity 4.\n\nHeard Ada's undertaking #7 at tick 15013, conversation #9: put 16 units of food by for the household; reported work 0. No takeover was promised. Left that reserve to them since tick 15014; no promise made.\n\nEarlier cause not recorded.\n\nConversation\nLAST CONVERSATION\njust now\nAda\ncame to Ben to describe their household undertaking\nOutcome\nUndertaking acknowledged (I am working to put 16 units of food by for the household; I have done 0 work so far"
+    },
+    {
+      "name": "Ben's inspector shows no reserve plan of his own",
+      "ok": true,
+      "detail": "B\nBen\nFollow\nAdult, 30\nSorrel household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nI understand what you are working on. I have not promised to take it over.\nDeciding what to do next.\nNEEDS\nFood\n90\nWater\n89\nEnergy\n89\nWarmth\n97\nSafety\n84\nCompany\n84\nCARRYING\nnothing\n0 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationshi"
+    },
+    {
+      "name": "a day later, with no fresh account, Ben takes the reserve on himself; the save reloads exactly",
+      "ok": true,
+      "detail": {
+        "taken": {
+          "kind": "stock",
+          "cue": "season"
+        },
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

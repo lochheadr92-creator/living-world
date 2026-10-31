@@ -328,3 +328,22 @@ Paste back the single JSON line at the end of each `r99-*45.log` (counts: projec
 offered prepared/unprepared and ranked first, project operate starts/endings, cart hauls, carts at end). A `stop` of
 `budget` means the horizon was not reached; re-run with a larger last argument. Zero carts remains a recorded result.
 A matched comparison against `rich-no-ready-step` through `scripts/lab.mjs` is a separate, later step and is not implied.
+
+## Rules 100 heard household supply: ordinary season deferral (pending owner-run measurements)
+
+Five river days never reach a season window (winter sets in on day 8 of a twelve-day year), so every ordinary reserve plan
+in the cloud screen was hardship-cued and nothing could be deferred. The 45-day runs below pass three winters; run them
+detached in parallel (about seven to nine minutes each on the 24-core machine) and paste back the final JSON line of each
+log. Count `reserve left to teller`, `heard undertakings:stock`, `start:share_work`, `stock plans adopted:season` and the
+two-plans-for-one-store samples. A second set pinned at rules 99 (last argument `99`) gives the paired baseline; it is a
+single-seed contrast per seed, not an ensemble claim.
+
+```
+cd "C:\dev\Claude Experiment\living-world"
+git pull
+npm ci
+Start-Process npx -ArgumentList 'vite-node','scripts/household_supply_observe.ts','river','autonomy_evidence/r100-river45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r100-river45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/household_supply_observe.ts','forest','autonomy_evidence/r100-forest45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r100-forest45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/household_supply_observe.ts','meadow','autonomy_evidence/r100-meadow45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r100-meadow45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/household_supply_observe.ts','river','autonomy_evidence/r100-river45-at99','45','1200','99' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r100-river45-at99.log -WindowStyle Hidden -PassThru
+```

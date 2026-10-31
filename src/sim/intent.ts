@@ -24,6 +24,7 @@ import { isRich } from './mood';
 import { beliefsByKind } from './optutil';
 import { estimatedAmount, recentFailure } from './knowledge';
 import { runsRulesVersion } from './rulesversion';
+import { deferReserve } from './household_supply';
 import { rememberedMaterialStores, usesMaterialStock } from './material_stock';
 import {
   SHELTER_BATCH,
@@ -1072,7 +1073,10 @@ function adoptProject(ctx: Ctx): Intention | null {
   // any world below it, so everything after this point is version 1's path, unchanged). The precedence is deliberate and
   // narrow: it applies only on the days the cue is open, and when the reserve is on its cooldown the older projects are
   // reached exactly as they always were.
-  const stock = onCooldown('stock') ? null : preparationWanted(ctx);
+  const wanted = onCooldown('stock') ? null : preparationWanted(ctx);
+  // rules 100 (household_supply.ts): a season reserve a household member said they are putting by is left to them while that
+  // account is fresh; a hardship cue, which the person can see for themselves, is never deferred
+  const stock = wanted && wanted.cue === 'season' && deferReserve(world, p, wanted.aboutId) ? null : wanted;
   if (stock) {
     const made: Intention = {
       id: world.nextId++,
