@@ -1,0 +1,24 @@
+import {existsSync,mkdirSync,writeFileSync} from 'node:fs';
+import {resolve,join,sep} from 'node:path';
+import {tmpdir} from 'node:os';
+import {randomUUID} from 'node:crypto';
+import {launch} from './cdp.mjs';
+const [url='http://127.0.0.1:5290/',out='autonomy_evidence/roof102-rendered']=process.argv.slice(2);
+if(existsSync(out))throw new Error('Fresh output required');const root=resolve(tmpdir()),profile=resolve(join(root,'living-world-roof102-'+randomUUID()));if(!profile.startsWith(root+sep)||existsSync(profile))throw new Error('Unsafe temporary profile');
+let occupied=false;try{await fetch('http://127.0.0.1:9372/json/version');occupied=true;}catch{}if(occupied)throw new Error('Browser port in use');
+mkdirSync(out,{recursive:true});const b=await launch({port:9372,width:1440,height:1000,profile}),checks=[];
+const check=(name,ok,detail)=>{checks.push({name,ok:!!ok,detail});console.log(`${ok?'PASS':'FAIL'} ${name}`);};
+const shot=async(name,who='helper')=>{await b.evaluate(`(()=>{const f=window.__roof2,g=window.__game;const e=f.${who};g.select(e.id);g.fly=null;const q=f.project(e.x,e.y);g.camera={x:q.sx+100,y:q.sy,zoom:1.8};window.__ui.update(1);for(const d of document.querySelectorAll('.insp-person details'))d.open=true;window.__ui.update(1);})()`);await b.sleep(200);await b.shot(join(out,name+'.png'));return b.evaluate("document.querySelector('.insp-person')?.innerText||''");};
+try{
+ await b.send('Page.navigate',{url});for(let n=0;n<80&&!await b.evaluate('!!window.__game');n++)await b.sleep(100);
+ await b.evaluate(`(async()=>{const {repairDutyScene,requestRepair,secondAsker,askRepairFrom}=await import('/tests/helpers/repair_duty.ts'),save=await import('/src/app/save.ts'),{stepWorld}=await import('/src/sim/world.ts'),{project}=await import('/src/render/iso.ts'),econ=await import('/src/sim/economy.ts');const f=repairDutyScene(102,'hut',{wood:1,bread:2,water:2},35);f.first=requestRepair(f);f.cal=secondAsker(f);Object.assign(f,{save,stepWorld,project,econ,askRepairFrom});window.__roof2=f;const g=window.__game;g.setPlaying(false);g.restoreWorld(f.w,f.w.settings);})()`);
+ const second=await b.evaluate(`(()=>{const f=window.__roof2;const r=f.askRepairFrom(f,f.cal);f.second=r.request;return {first:f.first.status,second:{status:r.request.status,note:r.request.note},spoken:r.spoken,duties:f.helper.commitments.filter(c=>c.kind==='work'&&c.destId===f.home.id).length};})()`);
+ check('the second ask about the same roof is declined and the helper says why',second.first==='promised'&&second.second.status==='declined'&&second.second.note==='committed'&&second.spoken==='I have already promised to see to that roof.'&&second.duties===1,second);
+ await b.evaluate(`(()=>{const f=window.__roof2;f.helper.speech={text:'I have already promised to see to that roof.',until:f.w.tick+400,kind:'say'};window.__ui.update(1);})()`);
+ const helperText=await shot('one-roof-one-promise','helper');const view=await b.evaluate(`(async()=>{const f=window.__roof2,{describePerson}=await import('/src/sim/inspect.ts');const v=JSON.stringify(describePerson(f.w,f.helper.id));return {roof:(v.match(/sound again|mend (their|our) roof/g)??[]).length,ada:/Ada/.test(v),calPromise:/Promised Cal/.test(v),log:f.helper.log.slice(-4).map(l=>l.text)};})()`);check('the inspector view of the helper records one roof promise, to Ada, and none to Cal',view.roof>=1&&view.ada&&!view.calPromise&&view.log.some(l=>/Promised Ada/.test(l))&&!view.log.some(l=>/Promised Cal/.test(l)),{view,panel:helperText.slice(0,200)});
+ const done=await b.evaluate(`(()=>{const f=window.__roof2;f.twin=f.save.deserializeWorld(f.save.serializeWorld(f.w));for(let n=0;n<2500&&f.first.status==='promised';n++){f.stepWorld(f.w);f.stepWorld(f.twin);}return {first:f.first.status,second:f.second.status,repairs:f.w.ledger.reasons['-repairs'],condition:f.home.condition,duties:f.helper.commitments.filter(c=>c.kind==='work'&&c.destId===f.home.id).map(c=>({status:c.status,contrib:c.contrib})),same:f.save.serializeWorld(f.w)===f.save.serializeWorld(f.twin),conserved:f.econ.conservationReport(f.w).ok};})()`);
+ check('one real patch keeps the one promise; the declined ask stays declined; the continuation is exact',done.first==='fulfilled'&&done.second==='declined'&&done.repairs===1&&done.duties.length===1&&done.duties[0].status==='done'&&done.same&&done.conserved,done);
+ await shot('patched-once','helper');
+ const errors=b.events.filter(e=>e.method==='Runtime.exceptionThrown');check('no browser exceptions',errors.length===0,errors);
+ writeFileSync(out+'/report.json',JSON.stringify({rules:102,evidence:'STAGED elder household with two askers and one helper holding one wood; both asks are offered options selected by the check, answers and the patch are autonomous. The spoken refusal is re-shown for the screenshot after the conversation ended. No ordinary frequency claim.',checks},null,2));if(checks.some(c=>!c.ok))process.exitCode=1;
+}finally{await b.close();}

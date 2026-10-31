@@ -66,6 +66,24 @@ household survival benefit, public/shared upkeep, replacement after collapse and
 households with limited adult labour. The condition-62 contribution settlement is
 unchanged; a fulfilled duty is a paid patch, not a promise of a fully restored home.
 
+## Rules 102 — one roof, one promise (31 October 2026)
+
+A probe on the rules-100 runtime (`scripts` not needed: `tests/single_roof_duty.test.ts` reproduces it as the legacy
+case) showed that a helper asked by two elders of the same household about the same damaged hut accepted both asks
+through the real request path, held two active `sound again` duties, and after **one** physical wood patch (ledger
+`-repairs` 1, condition 35 → 62) both duties settled `done` with contribution 40 each and both requests `fulfilled`:
+one act, two completion receipts, two trust gains. The physical world was exact; the social record was doubled.
+
+Rules 102 (`repair_duty.ts hasSingleRoofDuty`, lab removal `rich-no-single-roof-duty`): a helper who already holds an
+active duty for that building declines a further ask about it with `committed` and says "I have already promised to see to
+that roof." The one patch keeps the one promise; the second asker keeps no receipt and gains no completion trust. Rules 101
+and earlier retain the recorded double acceptance (the legacy and ablation cases assert it). A different building is
+answered on its own merits as before. Tests: `tests/single_roof_duty.test.ts` (4) with exact twin continuation and
+conservation; rendered `scripts/browser/single_roof_duty_check.mjs` **4/4** (`autonomy_evidence/roof102-rendered`).
+Ordinary roof requests were zero in every five-day screen so far, so the ordinary frequency of a second ask is unmeasured;
+the per-cycle credit loop in `act_build.ts` is unchanged and now cannot credit two roof duties on one building for one
+helper, while `help_build` shares keep their own contract.
+
 ## Rules 97 source and physical reproduction
 
 `autonomy_evidence/repair98-before.ts` stages elderly Ada (#2), neighbour Ben (#5)

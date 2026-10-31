@@ -9,6 +9,14 @@ let enabled=true;
 export const repairDutyOn=()=>enabled;
 export const setRepairDuty=(on:boolean):void=>{enabled=on;};
 export const hasRepairDuty=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,98);
+// Rules 102: one roof, one promise. Verified on the rules-100 staged scene (docs/REPAIR_DUTY.md): a helper asked by two
+// members of the same household accepted both, and one physical patch then closed both promises with full credit each,
+// doubling the social record of one act. A helper who already holds an active duty for that building now says so and
+// declines the second ask; the one patch keeps the one promise. Rules 101 and earlier retain their recorded acceptance.
+let single=true;
+export const singleRoofDutyOn=()=>single;
+export const setSingleRoofDuty=(on:boolean):void=>{single=on;};
+export const hasSingleRoofDuty=(w:World)=>single&&w.settings.dynamics==='rich'&&runsRulesVersion(w,102);
 export function roofDuty(p:Person,id:number){return p.commitments.find(c=>c.status==='active'&&c.kind==='work'&&c.destKind==='building'&&c.destId===id&&c.milestone==='sound again');}
 export function knownDutyHome(w:World,p:Person,id:number){const b=p.beliefs[id];return b?.kind==='building'&&isHomeType(b.btype)&&w.tick-b.seen<=DAY&&(b.cond??0)>0?b:undefined;}
 export function communicateRoofLocation(w:World,asker:Person,helper:Person,id:number):void{

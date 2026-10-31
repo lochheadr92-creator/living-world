@@ -1,0 +1,59 @@
+{
+  "rules": 102,
+  "evidence": "STAGED elder household with two askers and one helper holding one wood; both asks are offered options selected by the check, answers and the patch are autonomous. The spoken refusal is re-shown for the screenshot after the conversation ended. No ordinary frequency claim.",
+  "checks": [
+    {
+      "name": "the second ask about the same roof is declined and the helper says why",
+      "ok": true,
+      "detail": {
+        "first": "promised",
+        "second": {
+          "status": "declined",
+          "note": "committed"
+        },
+        "spoken": "I have already promised to see to that roof.",
+        "duties": 1
+      }
+    },
+    {
+      "name": "the inspector view of the helper records one roof promise, to Ada, and none to Cal",
+      "ok": true,
+      "detail": {
+        "view": {
+          "roof": 2,
+          "ada": true,
+          "calPromise": false,
+          "log": [
+            "Ada described the home I agreed to patch, last observed at tick 0. I must reach it and use real materials.",
+            "Promised Ada to mend their roof.",
+            "Turned down Cal's request (committed)."
+          ]
+        },
+        "panel": "B\nBen\nFollow\nAdult, 33\nSorrel household\nNo home yet\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nI have already promised to see to that roof.\nDeciding what to d"
+      }
+    },
+    {
+      "name": "one real patch keeps the one promise; the declined ask stays declined; the continuation is exact",
+      "ok": true,
+      "detail": {
+        "first": "fulfilled",
+        "second": "declined",
+        "repairs": 1,
+        "condition": 62.25880000000018,
+        "duties": [
+          {
+            "status": "done",
+            "contrib": 40
+          }
+        ],
+        "same": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import {hasWorkHandover} from './handover_state';
 import {careJourneyReceipt} from './care_journey';
 import {hasWarmthDuty,knownDutyFire,communicateFireLocation,fuelAvailable} from './warmth_duty';
 import {hasCareHandback,proposeCareReturn,answerCareReturn} from './care_handback';
-import {hasRepairDuty,knownDutyHome,communicateRoofLocation,repairSupplies} from './repair_duty';
+import {hasRepairDuty,knownDutyHome,communicateRoofLocation,repairSupplies,hasSingleRoofDuty,roofDuty} from './repair_duty';
 import {repairMaterial} from './act_build';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
@@ -422,6 +422,8 @@ export function evaluateRequest(world: World, B: Person, A: Person, req: Request
   }
   if (req.kind === 'repair') {
     if(hasRepairDuty(world)&&(!req.destId||!knownDutyHome(world,A,req.destId)&&!knownDutyHome(world,B,req.destId)))return {kind:'decline',reason:'no_place'};
+    // rules 102 (repair_duty.ts): a roof already promised is not promised again to somebody else
+    if(hasSingleRoofDuty(world)&&req.destId&&roofDuty(B,req.destId))return {kind:'decline',reason:'committed'};
     const sound = stageOf(world, B) === 'adult' || stageOf(world, B) === 'youth';
     const w0 = willingness(world, B, A, 0.5) + 0.1;
     if (!sound) return { kind: 'decline', reason: 'unwilling' };
@@ -1394,7 +1396,7 @@ function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: Co
         const lines = resp.reason === 'no_item' ? D.RESP_NO_ITEM : resp.reason === 'own_need' || resp.reason === 'in_use' ? D.RESP_OWN_NEED : resp.reason === 'disliked' ? D.RESP_DISLIKED : D.RESP_UNWILLING;
         if (resp.reason === 'no_place') bubble(world, B, req.kind === 'repair' ? 'I do not know which home I could reach from that old account.' : 'I do not know which fire I could reach from that old account.', 'say', 54);
         else if (resp.reason === 'enough') bubble(world, B, 'I think that’s been seen to already.', 'say', 54);
-        else if (resp.reason === 'committed') bubble(world, B, 'I’ve already promised that to them.', 'say', 54);
+        else if (resp.reason === 'committed') bubble(world, B, hasSingleRoofDuty(world) && req.kind === 'repair' ? 'I have already promised to see to that roof.' : 'I’ve already promised that to them.', 'say', 54);
         else if (resp.reason === 'in_use') bubble(world, B, 'I’m using it just now — ask me later?', 'say', 54);
         else if (resp.reason === 'making') bubble(world, B, 'I have some, but it is for something I am making.', 'say', 56);
         else bubble(world, B, D.saying(lines, B.id, A.id, world.tick >> 5), 'say', 56);
