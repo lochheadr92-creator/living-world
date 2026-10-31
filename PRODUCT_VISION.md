@@ -51,6 +51,55 @@ Ask it alongside correctness and maintainability, not instead of them. A change 
 tests and leaves nothing for a viewer to notice is not finished, it is half delivered. A change
 that reads well on screen but misrepresents the state underneath is worse than not shipping it.
 
+## Feature increments: new capability and stronger connections
+
+Owner decision, 1 November 2026. Read this before planning or implementing a feature.
+
+**Each feature increment must add one meaningful new inhabitant mechanic/capability and
+strengthen existing systems through the same coherent, observable situation.** New capability
+and deeper connections are delivered together. The world does not have to finish every
+existing system before gaining a new capability.
+
+Before implementation, state:
+
+1. What an inhabitant can now do that they could not do before, and what a viewer will notice.
+2. Which existing systems gain a concrete new use, recovery path or lasting consequence,
+   and the exact transitions that connect them to the new mechanic.
+3. The bounded situation to complete: legitimate local observation or communication ->
+   decision -> ordinary physical action -> useful outcome or explained failure -> saved
+   consequence and later influence where applicable.
+4. The relevant interruption, refusal, loss, cancellation and recovery cases, the owning
+   modules, and the evidence needed to establish both the new capability and its connections.
+
+Strengthening must change useful behaviour: for example, remembered demand starts feasible
+production, an existing workshop serves an actual customer, or an experienced outcome changes
+a later cooperation choice. Extra fields, logs, modifiers or module dependencies alone do not
+establish a stronger system. Reuse existing owners and execution paths; introduce new state or
+abstractions only for a demonstrated missing capability with a bounded lifecycle.
+
+An authorised feature includes the necessary connecting implementation and repairs across
+that causal chain. Carry it through to completion without stopping for routine implementation
+choices. Several focused steps and commits may deliver one feature; each intermediate result
+must retain its actual scope. Unrelated defects, redesigns and neighbouring features stay
+outside the increment. This policy does not override explicit task boundaries or authorise
+starting a feature during an assessment.
+
+Verify the new mechanic and the behaviour it strengthens, including relevant negative cases,
+resource/ownership accounting, determinism, save/replay compatibility and rendered explanation.
+Apply the existing numeric rules-version policy. Keep staged mechanism evidence, ordinary-world
+opportunity/activation, and aggregate benefit separate; report nulls, adverse outcomes and
+unverified links honestly. A staged complete chain does not establish ordinary uptake.
+
+For example, agreeing to make goods for someone could connect a personally heard request to
+production prerequisites, actual delivery, a remembered outcome and a later customer choice.
+This illustrates the delivery shape; it does not claim that mechanic exists or reorder the
+authorised programme.
+
+**Dedicated integrity/bug fixes, compatibility work, performance work and documentation tasks
+remain focused and do not require a new mechanic.** Existing repair work is not expanded by this
+rule. No mandatory PR, second reviewer or extra approval step is added; `WORKFLOW.md` remains
+the delivery authority.
+
 ## Foundations that remain
 
 These are not traded away for a better-looking scene:
