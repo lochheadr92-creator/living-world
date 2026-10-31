@@ -1,4 +1,5 @@
 import { rememberedDry } from './water_access';
+import { hasSuspendedEndings } from './suspended_endings';
 import {hasMeetingKnowledge,receiveMeetingCancellation,acknowledgeMeetingCancellation} from './meeting_knowledge';
 import {hasContinuityKnowledge,hearUndertaking,acknowledgeUndertaking} from './continuity_knowledge';
 import {proposeHandover,answerHandover,type HandoverMode} from './work_handover';
@@ -48,6 +49,7 @@ import {
   newActivity,
   registerHandler,
   resumeSuspended,
+  endSuspended,
   startActivity,
   suspendActivity,
 } from './activities';
@@ -1117,7 +1119,7 @@ function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvDa
         if(heard.stopped){const held=B.suspended;
           const stillPromised=B.commitments.some(other=>other.status==='active'&&other.id!==heard.commitmentId&&(other.destId===heard.targetId||other.siteId===heard.targetId));
           const matching=held&&(held.data.commitmentId!==undefined?held.data.commitmentId===heard.commitmentId:held.targetId===heard.targetId&&['repair','build','haul','fuel_fire'].includes(held.kind)&&!stillPromised);
-          if(held&&matching){releaseClaims(world,held.claims);B.suspended=null;addLog(world,B,'work','Stopped the suspended work after hearing its cancellation.');}
+          if(held&&matching){releaseClaims(world,held.claims);B.suspended=null;addLog(world,B,'work','Stopped the suspended work after hearing its cancellation.');if(hasSuspendedEndings(world))endSuspended(world,B,held,'interrupted',`${A.name} cancelled the request it was for`);}
           const r=world.requests.find(r=>r.id===d.requestId&&r.from===A.id&&r.to===B.id);if(r?.status==='promised')settle(world,r,'cancelled',`${A.name} cancelled the request in person.`);
         }
         bubble(world,A,heard.text,'say',70);
