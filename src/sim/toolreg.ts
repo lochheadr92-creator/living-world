@@ -34,6 +34,16 @@ export function bestOf(world: World, holderId: number, kind: ToolKind, user = 0)
   return best;
 }
 
+/** A record may leave its holder unless it is on a bench (a rack loan, `lender` 0) for someone other than the receiver. */
+const retaggable = (world: World, t: Tool, toId: number): boolean => !(t.loan && t.loan.lender === 0 && t.loan.due > world.tick && t.loan.borrower !== 0 && toId !== t.loan.borrower);
+
+/** How many records of a kind a transfer from one holder to another could move: the cap on the count it may move (a count must never leave its record behind). */
+export function retaggableCount(world: World, kind: ToolKind, fromId: number, toId: number): number {
+  let n = 0;
+  for (const t of world.tools) if (t.holder === fromId && t.kind === kind && retaggable(world, t, toId)) n++;
+  return n;
+}
+
 /** Move `n` tool records from one holder to another (the item counts were moved by the caller). Returns how many were moved. */
 export function retagTools(world: World, kind: ToolKind, n: number, fromId: number, toId: number, prefer = 0): number {
   if (n <= 0 || !fromId || !toId) return 0;
@@ -47,7 +57,7 @@ export function retagTools(world: World, kind: ToolKind, n: number, fromId: numb
   }
   for (const t of world.tools) {
     if (moved >= n) break;
-    if (t.holder === fromId && t.kind === kind && !(t.loan && t.loan.lender === 0 && t.loan.due > world.tick && t.loan.borrower !== 0 && toId !== t.loan.borrower)) {
+    if (t.holder === fromId && t.kind === kind && retaggable(world, t, toId)) {
       t.holder = toId;
       moved++;
     }
