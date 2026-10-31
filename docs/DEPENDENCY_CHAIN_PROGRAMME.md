@@ -2,11 +2,16 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
-- Rules 112 candidate: a real conversation preserves and can resume the gathering
+- Rules 112: a real conversation preserves and can resume the gathering
   already underway, through occasion-specific physical validity and its original
   deadline. Invalid pauses end with a reason. See `OCCASION_RECOVERY.md`. Focused
-  contracts, rendered 8/8 and typecheck/build pass; full regression and four 20-day
-  ordinary pause/resume windows are running. No general household-benefit claim.
+  contracts, rendered 8/8 and typecheck/build pass; full regression **351 files /
+  2,260 tests passed**, 494.97 s, plus immutable reference/recovery 12/2 separately.
+  Runtime `33d22ed`, immutable reference `d770860`. Four 20-day ordinary windows:
+  meadow/river at 112 resume all 4/6 observed pauses without lost progress or silent
+  discard, against 4/10 discarded pauses at 111. Total successful visits nevertheless
+  fall 17→14 and 66→52; mortality unchanged. Transition activation is established,
+  overall social benefit is not. A1 remains open.
 
 - Rules 111: an admitted guest keeps the option for the gathering still
   underway; no second visit or extra reward. The rules-107 days-45–50 household
