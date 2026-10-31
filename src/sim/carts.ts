@@ -1,3 +1,4 @@
+import {runsRulesVersion} from './rulesversion';
 import { CART_CAP, CART_SPEED_EMPTY, CART_SPEED_LOADED, CART_WEAR_PER_TILE } from './constants';
 import { weightOf } from './economy';
 import { addEvent } from './events';
@@ -112,7 +113,7 @@ export function breakCart(world: World, c: Cart, p: Person | null): void {
   if (i >= 0) world.carts.splice(i, 1);
   world.byId.delete(c.id);
   // the load is spilled where it stood; the broken cart is not recovered (its wood and planks are written off)
-  makeHousePile(world, Math.floor(c.x), Math.floor(c.y), c.load, 'spilled from a broken cart');
+  makeHousePile(world, Math.floor(c.x), Math.floor(c.y), c.load, 'spilled from a broken cart', world.settings.dynamics === 'rich' && runsRulesVersion(world,117) ? c.id : undefined);
   addEvent(world, 'work', `A handcart broke under its load${p ? ` while ${p.name} was pulling it` : ''}.`, p ? [p.id] : [], c.x, c.y);
 }
 

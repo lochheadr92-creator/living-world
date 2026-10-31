@@ -35,6 +35,15 @@ lighter pack; a separate boundary assertion preserves refusal when there is no r
 Focused project/continuation checks: 16/16 before adding the explicit full-pack boundary.
 This is mechanism evidence, not an ordinary cart completion claim.
 
+## A1-CART (shares rules 117)
+
+VERIFIED: activating the Stage 1 todo reproduced the orphaned holder record. The spill now
+passes the cart holder to the existing `makeHousePile` retagging path under rich rules 117.
+The tool can then transfer out of the heap with its original record and balanced items.
+Rules 116 explicitly retains the former spill; no separate version bump was needed.
+Baseline and affected checks passed 142/142; the additional predecessor boundary passes
+with the repaired case (2/2). Stage-scoped typecheck passed. No ordinary activation claim.
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).
