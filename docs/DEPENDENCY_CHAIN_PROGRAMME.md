@@ -1,5 +1,10 @@
 # Dependency-chain programme register
 
+**Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
+recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
+repair checkpoint; it does not close the wider repair/autonomy programme. Rendered
+verification is currently unavailable because local browser use is disabled.
+
 ## Codex resumed from Claude — 31 October 2026
 
 Current capability-map overlay for this continuation (the detailed earlier rows

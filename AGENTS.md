@@ -1,6 +1,11 @@
 # Living World: notes for Codex (read this first)
 
-**Before planning or editing:** read `WORKFLOW.md` and `PRODUCT_VISION.md`, including
+**Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
+recorded in [docs/PAVEL_LIVED_LIFE.md](docs/PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
+repair checkpoint; it does not close the wider repair/autonomy programme. Rendered
+verification is currently unavailable because local browser use is disabled.
+
+**Before planning, editing, committing or pushing:** read `WORKFLOW.md` and `PRODUCT_VISION.md`, including
 [Feature increments: new capability and stronger connections](PRODUCT_VISION.md#feature-increments-new-capability-and-stronger-connections).
 Owner decision, 1 November 2026: each feature increment must add one meaningful new
 inhabitant mechanic/capability and strengthen existing systems through the same observable
@@ -8,9 +13,9 @@ causal chain. Name both outcomes, complete the necessary connecting implementati
 repairs, and verify both. Dedicated repairs, compatibility, performance and documentation
 tasks stay focused; they do not require an added mechanic. This is no extra approval gate.
 
-Current state (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
+Historical baseline (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
 after 114 hungry ripe-grain harvest; the autonomy/environment programme continues from the register.
-Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules are 115.
+Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules were 115 at that checkpoint; this branch now uses 117.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 

@@ -38,3 +38,9 @@ autonomy_evidence/**/*-save.json
 
 # full final saves written beside each ordinary-screen report (about 3 MB each; never tracked, the report.json is the record)
 autonomy_evidence/**/final.json
+
+# Pavel screens: reproducible full saves and transcripts remain local; commit small reports.
+pavel_evidence/**/*-final.json
+pavel_evidence/**/live-initial.json
+pavel_evidence/**/live-transcript.json
+pavel_evidence/**/*-observations.json

@@ -1,0 +1,45 @@
+{
+  "runtime": "756d52a90aeae79a51b6e0cf6934edec9006b9cb",
+  "fullRegression": {
+    "command": "npx vitest run --maxWorkers=8",
+    "exit": 0,
+    "filesPassed": 374,
+    "filesSkipped": 1,
+    "testsPassed": 2352,
+    "todo": 1,
+    "seconds": 288.03,
+    "output": "\n RUN  v5.0.3 C:/dev/Claude Experiment/living-world-pavel\n\n(node:52228) TimeoutOverflowWarning: 1099511627776 does not fit into a 32-bit signed integer.\nTimeout duration was set to 1.\n(Use `node --trace-warnings ...` to show where the warning was created)\n\n Test Files  374 passed | 1 skipped (375)\n      Tests  2352 passed | 1 todo (2353)\n   Start at  07:38:54\n   Duration  288.03s (tests 92%, import 7%, transform 1%)\n\n"
+  },
+  "focused": {
+    "command": "See docs/PAVEL_LIVED_LIFE.md for the 13-file command",
+    "files": 13,
+    "tests": 122,
+    "exit": 0
+  },
+  "additionalPhysicalResumption": {
+    "command": "npx vitest run tests/pavel_resume.test.ts --maxWorkers=1",
+    "files": 1,
+    "tests": 1,
+    "exit": 0,
+    "scope": "Staged accepted basket transfer and restricted offered-choice completion, exact continuation; not ordinary autonomous completion"
+  },
+  "build": {
+    "command": "npm run build",
+    "exit": 0,
+    "warning": "Existing production chunk exceeds 900 kB advisory"
+  },
+  "screens": "final117/report.json",
+  "rendered": {
+    "verified": false,
+    "reason": "Local browser use is disabled in Work settings"
+  },
+  "acceptanceVerdict": "INCONCLUSIVE for full requested acceptance because rendered verification is unavailable",
+  "preliminaryFullRun": {
+    "log": "pavel-full-tests.log (retained locally)",
+    "passed": 2349,
+    "failed": 2,
+    "todo": 1,
+    "seconds": 360.59,
+    "reason": "Runtime loaded before final lab-preference and paused-shelter fixes; both new edge-case tests failed there, then passed against corrected frozen runtime"
+  }
+}

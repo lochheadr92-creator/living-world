@@ -1,5 +1,10 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
+recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
+repair checkpoint; it does not close the wider repair/autonomy programme. Rendered
+verification is currently unavailable because local browser use is disabled.
+
 **Codex continuation update, 31 October:** the owner resumed implementation. The
 published `056dbac` baseline now passes the full 339-file / 2,204-test regression
 on the owner's Windows machine (556.86 s). The historical pending-run statement
