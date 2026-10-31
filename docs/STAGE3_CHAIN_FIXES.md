@@ -88,6 +88,16 @@ the initial extended run exposed an incorrectly overweight new seed-room fixture
 weighs 1.5, not 1). Correcting its staged seed count left the contract unchanged; all 16
 harvest/related tests then passed. Stage-scoped typecheck passed.
 
+## M1 (shares rules 118)
+
+VERIFIED: the elder fixture adopted an axe plan requiring 7 carried weight with capacity 6.
+The private tool-plan adoption owner now compares complete recipe weight with the person's
+capacity before adoption. It does not suppress feasible fetching simply because the pack
+is currently occupied. A basket-assisted elder still adopts. Rules 117 and
+`rich-no-tool-plan-capacity` retain old adoption. New/related contracts passed 50/50;
+baseline plus final capacity contracts and rules-117 continuation passed 140/140.
+Stage-scoped typecheck passed. No cart graph redesign or F3/F4/F6 policy change is included.
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).
