@@ -308,3 +308,23 @@ npx --no-install vite-node scripts/informed_continuity_observe.ts -- forest "$ru
 ```powershell
 npx --no-install vite-node scripts/informed_continuity_observe.ts -- meadow "$runRoot-continuity-meadow45" 45 1200
 ```
+
+## Rules 99 prepared project steps: ordinary cart activation (pending owner-run measurements)
+
+The cloud five-day river screen adopted no project and operated no workshop; the question whether an ordinary world now
+finishes a cart needs the 45-day horizon of the rules-64 screens. Three seeds, detached, about seven to nine minutes each
+on the 24-core machine at the rules-65 rate (14–20 days per 170 s); run them in parallel:
+
+```
+cd "C:\dev\Claude Experiment\living-world"
+git pull
+npm ci
+Start-Process npx -ArgumentList 'vite-node','scripts/ready_step_observe.ts','river','autonomy_evidence/r99-river45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r99-river45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/ready_step_observe.ts','forest','autonomy_evidence/r99-forest45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r99-forest45.log -WindowStyle Hidden -PassThru
+Start-Process npx -ArgumentList 'vite-node','scripts/ready_step_observe.ts','meadow','autonomy_evidence/r99-meadow45','45','1200' -WorkingDirectory "C:\dev\Claude Experiment\living-world" -RedirectStandardOutput r99-meadow45.log -WindowStyle Hidden -PassThru
+```
+
+Paste back the single JSON line at the end of each `r99-*45.log` (counts: project plans adopted, sampled operate steps
+offered prepared/unprepared and ranked first, project operate starts/endings, cart hauls, carts at end). A `stop` of
+`budget` means the horizon was not reached; re-run with a larger last argument. Zero carts remains a recorded result.
+A matched comparison against `rich-no-ready-step` through `scripts/lab.mjs` is a separate, later step and is not implied.

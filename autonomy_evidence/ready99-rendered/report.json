@@ -1,0 +1,380 @@
+{
+  "rules": 99,
+  "evidence": "STAGED yard, components, tools and site demand; every decision from adoption to cart use is autonomous. No ordinary frequency or aggregate benefit claim.",
+  "checks": [
+    {
+      "name": "two autonomous saw batches leave every cart component on the remembered shelf",
+      "ok": true,
+      "detail": {
+        "tick": 257,
+        "history": [
+          {
+            "tick": 100,
+            "node": 2,
+            "reason": "operate: planks"
+          }
+        ],
+        "shelf": {
+          "handles": 2,
+          "wood": 2,
+          "planks": 4,
+          "offcuts": 2
+        },
+        "offer": {
+          "key": "operate:5:build_cart",
+          "util": 47.41539950368816,
+          "parts": [
+            [
+              "to build a handcart at the timber yard",
+              27.2
+            ],
+            [
+              "walking",
+              -1.5
+            ],
+            [
+              "practised at it",
+              3.7
+            ],
+            [
+              "everything for it is already at the timber yard",
+              18
+            ]
+          ]
+        },
+        "first": "operate:5:build_cart",
+        "pure": true,
+        "events": [
+          {
+            "tick": 0,
+            "start": "gather",
+            "goal": "for my household’s storehouse"
+          },
+          {
+            "tick": 99,
+            "end": "gather",
+            "outcome": "success",
+            "detail": "done"
+          },
+          {
+            "tick": 100,
+            "start": "operate",
+            "recipe": "saw_planks",
+            "goal": "to haul heavy loads (a handcart)"
+          },
+          {
+            "tick": 213,
+            "end": "operate",
+            "recipe": "saw_planks",
+            "outcome": "success",
+            "detail": "done"
+          },
+          {
+            "tick": 214,
+            "start": "operate",
+            "recipe": "saw_planks",
+            "goal": "to haul heavy loads (a handcart)"
+          },
+          {
+            "tick": 256,
+            "end": "operate",
+            "recipe": "saw_planks",
+            "outcome": "success",
+            "detail": "done"
+          }
+        ]
+      }
+    },
+    {
+      "name": "the assembly offer names the prepared step and ranks first; observing changes nothing",
+      "ok": true,
+      "detail": {
+        "tick": 257,
+        "history": [
+          {
+            "tick": 100,
+            "node": 2,
+            "reason": "operate: planks"
+          }
+        ],
+        "shelf": {
+          "handles": 2,
+          "wood": 2,
+          "planks": 4,
+          "offcuts": 2
+        },
+        "offer": {
+          "key": "operate:5:build_cart",
+          "util": 47.41539950368816,
+          "parts": [
+            [
+              "to build a handcart at the timber yard",
+              27.2
+            ],
+            [
+              "walking",
+              -1.5
+            ],
+            [
+              "practised at it",
+              3.7
+            ],
+            [
+              "everything for it is already at the timber yard",
+              18
+            ]
+          ]
+        },
+        "first": "operate:5:build_cart",
+        "pure": true,
+        "events": [
+          {
+            "tick": 0,
+            "start": "gather",
+            "goal": "for my household’s storehouse"
+          },
+          {
+            "tick": 99,
+            "end": "gather",
+            "outcome": "success",
+            "detail": "done"
+          },
+          {
+            "tick": 100,
+            "start": "operate",
+            "recipe": "saw_planks",
+            "goal": "to haul heavy loads (a handcart)"
+          },
+          {
+            "tick": 213,
+            "end": "operate",
+            "recipe": "saw_planks",
+            "outcome": "success",
+            "detail": "done"
+          },
+          {
+            "tick": 214,
+            "start": "operate",
+            "recipe": "saw_planks",
+            "goal": "to haul heavy loads (a handcart)"
+          },
+          {
+            "tick": 256,
+            "end": "operate",
+            "recipe": "saw_planks",
+            "outcome": "success",
+            "detail": "done"
+          }
+        ]
+      }
+    },
+    {
+      "name": "yard inspector shows the sawn planks and handles",
+      "ok": true,
+      "detail": "Timber yard\nBuilt 26s ago\nIdle\n\nLast used just now.\n\nAT WORK\nHana\nMADE HERE SO FAR\n×4\n×2\nCAN MAKE HERE\nhewn planks\nsawn planks\ntool handles\na handcart\nOwner\neveryone\nStorage\n15/70 used\nCondition\n100%\nRecoverable timber fuel\nWhat it is for\nWho may use it\nIdle — what is stopping it\n\nHewing planks: needs 1 more wood brought in.\n\nSawing planks: needs 1 more wood brought in; needs a saw (none on the rack: whoever works here has to bring one).\n\nBuilding a handcart: needs a hammer (none on the rack: whoever works here has to bring one).\n\nFor the observer: 7 wood: nearest at a tree 10 tiles away; gathered, not made; 1 person knows a source of it.\n\nStock\n×2\n×2\n×4\n×2\n\n15/70 of the store used.\n\n4 planks set aside for Hana (to haul heavy loads (a handcart)), held in 6 min.\n\n2 offcuts set aside for Hana (to haul heavy loads (a handcart)), held in 6 min.\n\nOutput\nHands that have worked here"
+    },
+    {
+      "name": "the person is physically assembling the cart at the yard and the inspector gives the prepared reason",
+      "ok": true,
+      "detail": {
+        "assembling": {
+          "tick": 288,
+          "activity": {
+            "kind": "operate",
+            "recipe": "build_cart",
+            "phase": "work",
+            "progress": 31,
+            "why": "a step toward “build a handcart at the timber yard”: work on cart for cart · carpentry is my trade · to build a handcart at the timber yard +27 · everything for it is already at the timber yard +18 · practised at it +4 · walking −1"
+          },
+          "job": {
+            "id": "build_cart",
+            "client": 2,
+            "phase": "work"
+          }
+        },
+        "assemblyText": "HHanaexpectingFollowAdult, 35Willow householdHome: hut (100% sound)Township: WillowbankMoodContentHealth100On their mindWhat are they up to?MoreWhat are they doing?Building a handcart.29%Why did they choose it?Weighed up: a step toward “build a handcart at the timber yard”: work on cart for cart · carpentry is my trade · to build a handcart at the timber yard +27 · everything for it is already at "
+      }
+    },
+    {
+      "name": "the saved continuation finishes the same cart without interruption and the plan closes",
+      "ok": true,
+      "detail": {
+        "tick": 366,
+        "carts": [
+          {
+            "id": 20,
+            "hh": 1,
+            "x": 46.5,
+            "y": 42.5
+          }
+        ],
+        "plan": {
+          "id": 12,
+          "kind": "batch",
+          "goal": "build a handcart at the timber yard",
+          "since": 0,
+          "until": 7200,
+          "status": "done",
+          "reason": "the household has its handcart",
+          "setAside": 0,
+          "aboutId": 5,
+          "wants": {},
+          "makes": "cart",
+          "sheltered": 0,
+          "worked": 0,
+          "ended": 365,
+          "reserve": 1,
+          "recipe": "build_cart",
+          "forSite": 0,
+          "project": {
+            "version": 1,
+            "goal": {
+              "item": "cart",
+              "quantity": 1,
+              "tier": 0
+            },
+            "root": 1,
+            "nodes": [
+              {
+                "id": 1,
+                "item": "cart",
+                "quantity": 1,
+                "tier": 0,
+                "destination": 0,
+                "method": "recipe",
+                "place": 5,
+                "recipe": "build_cart",
+                "dependencies": [
+                  2,
+                  4,
+                  5
+                ],
+                "alternatives": [],
+                "estimatedTicks": 310
+              },
+              {
+                "id": 2,
+                "item": "planks",
+                "quantity": 4,
+                "tier": 0,
+                "destination": 5,
+                "method": "recipe",
+                "place": 5,
+                "recipe": "saw_planks",
+                "dependencies": [
+                  3
+                ],
+                "alternatives": [
+                  "hew_planks"
+                ],
+                "estimatedTicks": 120
+              },
+              {
+                "id": 3,
+                "item": "wood",
+                "quantity": 3,
+                "tier": 0,
+                "destination": 5,
+                "method": "present",
+                "place": 0,
+                "recipe": "",
+                "dependencies": [],
+                "alternatives": [],
+                "estimatedTicks": 0
+              },
+              {
+                "id": 4,
+                "item": "handles",
+                "quantity": 2,
+                "tier": 0,
+                "destination": 5,
+                "method": "present",
+                "place": 0,
+                "recipe": "",
+                "dependencies": [],
+                "alternatives": [],
+                "estimatedTicks": 0
+              },
+              {
+                "id": 5,
+                "item": "wood",
+                "quantity": 2,
+                "tier": 0,
+                "destination": 5,
+                "method": "present",
+                "place": 0,
+                "recipe": "",
+                "dependencies": [],
+                "alternatives": [],
+                "estimatedTicks": 0
+              }
+            ],
+            "current": 1,
+            "completed": [
+              2,
+              4,
+              5
+            ],
+            "retries": 0,
+            "history": [
+              {
+                "tick": 100,
+                "node": 2,
+                "reason": "operate: planks"
+              },
+              {
+                "tick": 257,
+                "node": 1,
+                "reason": "operate: cart"
+              }
+            ]
+          },
+          "step": "",
+          "stepKind": "none",
+          "stepTarget": 5,
+          "stepItem": null,
+          "stepKey": null,
+          "blocked": ""
+        },
+        "same": true,
+        "conserved": true,
+        "interrupted": false
+      }
+    },
+    {
+      "name": "the cart is then actually used: a single trip delivers real stone to the site",
+      "ok": true,
+      "detail": {
+        "tick": 692,
+        "before": 0,
+        "after": 14,
+        "haul": [
+          {
+            "tick": 531,
+            "start": "cart_haul",
+            "goal": "to bring the materials in one trip"
+          },
+          {
+            "tick": 691,
+            "end": "cart_haul",
+            "outcome": "success",
+            "detail": "done"
+          }
+        ],
+        "same": true,
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "site inspector shows the delivered stone",
+      "ok": true,
+      "detail": "Storehouse (under construction)\nMarked out 1.2 min ago\nBUILDING PROGRESS\n6%\n\nWork has paused for lack of 10 wood, 26 stone.\n\nMATERIALS SUPPLIED\nWood\n0 / 10\nStone\n14 / 40\nNOBODY WORKING RIGHT NOW\nFor\nWillow household\nStarted by\nHana\nStatus\nwaiting for 10 wood, 40 stone\nThe project\nWhy\nA shared store "
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -143,7 +143,7 @@ describe('a world this build cannot run is refused, not reinterpreted', () => {
 
   it.each([
     ['from the future', CURRENT_RULES_VERSION + 1],
-    ['far in the future', 99],
+    ['far in the future', CURRENT_RULES_VERSION + 50],
     ['not a whole number', 1.5],
     ['zero', 0],
     ['negative', -1],
@@ -164,7 +164,7 @@ describe('a world this build cannot run is refused, not reinterpreted', () => {
     const game = new Game({ seed: 'rv-intact' });
     game.advanceTicks(30);
     const before = { hash: game.stateHash, tick: game.world.tick, seed: game.settings.seed };
-    const text = tamper(current('rv-other'), 99);
+    const text = tamper(current('rv-other'), CURRENT_RULES_VERSION + 50);
     // whatever the caller does with the failure, the refusal happens before anything is replaced
     expect(() => {
       const w = deserializeWorld(text);
@@ -177,7 +177,7 @@ describe('a world this build cannot run is refused, not reinterpreted', () => {
 
   it('refuses to overwrite a save with a world whose version it could not load back', async () => {
     const game = new Game({ seed: 'rv-nosave' });
-    (game.settings as { rulesVersion?: unknown }).rulesVersion = 99;
+    (game.settings as { rulesVersion?: unknown }).rulesVersion = CURRENT_RULES_VERSION + 50;
     const { saveGame } = await import('../src/app/save');
     const setItem = vi.fn();
     vi.stubGlobal('localStorage', { getItem: () => null, setItem, removeItem: vi.fn() });

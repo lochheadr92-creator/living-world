@@ -34,6 +34,7 @@ import { stageOf } from './people';
 import type { Belief, BuildingType, Items, ItemKind, Person, ToolKind, World } from './types';
 import { hashUnit } from './rng';
 import {hasProjectPlans,nextProjectStep} from './project_step';
+import {hasReadyStep,stepPrepared,READY_STEP_BONUS} from './ready_step';
 
 import { hyp } from './util';
 const unitsOf = (n: number | undefined): number => n ?? 0;
@@ -311,7 +312,7 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
  * One batch of a recipe at a workplace: everything the batch needs is either there (so go and work), carried (so bring it),
  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
  */
-function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean): void {
+function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean, ready = ''): void {
   const { world, p } = ctx;
   const b = f.b;
   const technique = techniqueBlocker(world,p,r.id);
@@ -349,7 +350,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
       noteToolWanted(ctx, running.tool!.kind, `finishing ${running.doing.toLowerCase()}`, true);
       return;
     }
-    if (mine) operateLeaf(ctx, f, running, base * 0.97, `${why} (get back to it)`, tag, false, siteId);
+    if (mine) operateLeaf(ctx, f, running, base * 0.97, `${why} (get back to it)`, tag, false, siteId, false, ready);
     else if (running && running.id === r.id && running.workers > 1 && r.id !== 'quarry_stone') operateLeaf(ctx, f, r, base * 0.8, `${why} (lend a hand)`, tag, true, siteId);
     else addBlocked(ctx, 'operate', r.doing, b.id, `the ${nameOf(b)} is busy with ${running ? running.label : 'a batch'}`, tag);
     return;
@@ -381,7 +382,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
     if (lack > 0) short[k] = lack;
   }
   if (!Object.keys(short).length) {
-    operateLeaf(ctx, f, r, base * 0.97, why, tag, false, siteId, trial);
+    operateLeaf(ctx, f, r, base * 0.97, why, tag, false, siteId, trial, ready);
     return;
   }
   // bring what is carried
@@ -414,7 +415,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   }
 }
 
-function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, tag: string, joining: boolean, siteId = 0, trial = false): void {
+function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, tag: string, joining: boolean, siteId = 0, trial = false, ready = ''): void {
   const { world, p } = ctx;
   const b = f.b;
   const e = f.e;
@@ -426,6 +427,8 @@ function operateLeaf(ctx: Ctx, f: Fac, r: Recipe, util0: number, why: string, ta
   if (crowd >= r.workers) sc.add('already crowded', -12);
   if (r.id === 'quarry_stone') sc.add('cuts stone far faster than breaking small rocks', 5);
   if (r.id === 'saw_planks') sc.add('a saw wastes far less wood', 4);
+  // rules 99 (ready_step.ts): a prepared step of one's own project is worth finishing
+  if (ready) sc.add(ready, READY_STEP_BONUS);
   const util = sc.total * nightMult(ctx) * weatherMult(ctx);
   addOption(ctx, {
     kind: 'operate',
@@ -1196,7 +1199,9 @@ function projectOptions(ctx:Ctx):void{
   }
   if(step.phase==='operate'&&b){
    const r=RECIPE_BY_ID[n.recipe],fac=r?facilitiesOf(ctx,r.at).find(f=>f.b.id===b.id):undefined;
-   if(r&&fac)planRecipe(scratch,fac,r,n.item,step.quantity,base,why,tag,0);
+   // rules 99 (ready_step.ts): everything the step takes is on the shelf as last seen, and the tool is to hand
+   const ready=r&&fac&&stepPrepared(ctx.world,ctx.p,b,r,toolAvailable(ctx,fac,r))?`everything for it is already at the ${nameOf(b)}`:'';
+   if(r&&fac)planRecipe(scratch,fac,r,n.item,step.quantity,base,why,tag,0,0,undefined,ready);
   }
   if(step.phase==='craft')scratch.toolWanted={kind:item as ToolKind,for:i.goal,required:true};
   if(step.phase==='wait')addOption(scratch,{kind:'rest',label:'Wait for my batch',goal:step.reason,need:null,util:base,parts:[['my batch is still finishing',base]],eta:step.wait,key:`project_wait:${i.id}:${n.id}`,targetId:step.target,tag:'rest',
@@ -1207,6 +1212,8 @@ function projectOptions(ctx:Ctx):void{
    if(step.phase==='acquire'&&n.item!=='cart'&&(o.kind==='withdraw'||o.kind==='gather'||o.kind==='fetch_water'))o.yields=item;
    const prior=ctx.options.find(x=>x.key===o.key),offer=prior??o;
    if(prior&&o.yields)prior.yields=o.yields;
+   // rules 99 (ready_step.ts): the plan's reading of the same leaf, when it is the stronger one, is the one weighed and explained
+   if(prior&&hasReadyStep(ctx.world)&&o.util>prior.util){prior.util=o.util;prior.parts=o.parts;prior.goal=o.goal;}
    const make=offer.make;
    if(make)offer.make=()=>{const a=make();if(a){a.data.forPlan=i.id;if(a.kind==='deposit')a.data.projectSupply=i.id;}return a;};
    if(!prior)ctx.options.push(offer);

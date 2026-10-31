@@ -6,6 +6,7 @@ import type {Ctx} from './optutil';
 import {eta} from './optutil';
 import type {Intention,ItemKind,Person,ToolKind,World} from './types';
 import {PROJECT_LIMITS} from './project_graph';
+import {hasReadyStep} from './ready_step';
 import type {ProjectGraph,ProjectNode} from './project_graph';
 let enabled=true;
 export const projectPlansOn=()=>enabled;
@@ -49,7 +50,8 @@ export function nextProjectStep(ctx:Ctx,graph:ProjectGraph,plan:Pick<Intention,'
   if(n.method==='recipe'&&(!b||b.kind!=='building'))return answer(n,'blocked',n.place,remaining,'the workshop is no longer known');
   if(b){
    const snap=b.ops,mine=snap?.client===p.id&&snap.job===n.recipe;
-   if(n.item!=='cart'&&(b.items?.[n.item]??0)>0)return answer(n,'collect',b.id,remaining);
+   // rules 99 (ready_step.ts): output already at the workshop that is also its destination is stock, not something to collect
+   if(n.item!=='cart'&&(b.items?.[n.item]??0)>0&&!(hasReadyStep(world)&&n.place===n.destination))return answer(n,'collect',b.id,remaining);
    if(mine&&snap!.burn===0&&snap!.progress<1)return answer(n,'operate',b.id,remaining);
    if(mine&&snap!.burn>0){
     const until=snap!.readyAt-world.tick;
