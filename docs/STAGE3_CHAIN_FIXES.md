@@ -65,6 +65,19 @@ search now bypasses that cooldown; noncritical searches, rules 117 and the isola
 eligibility and location; no source is supplied to the person. Baseline, water-search,
 new contracts and rules-117 continuation passed 147/147; stage-scoped typecheck passed.
 
+## M3 (shares rules 118)
+
+VERIFIED: the new regression selected a free field whose fixed standing tile was a building
+footprint. Field selection now retains that side when reachable, otherwise checks the other
+adjacent sides with the existing pathfinder; no reachable side means no selected field.
+The ordinary activity uses that chosen standing point. The till handler records a failed
+new-field trip against a deterministic tile key in existing failure memory, suppressing
+that tile for 800 ticks. Older rules and `rich-no-reachable-tilling` preserve the former path.
+Six focused boundaries pass, including actual field work, exact saved continuation,
+conservation, failed-tile persistence, blocked sides and predecessor/removal controls.
+Baseline 135/135 and stage-scoped typecheck passed; related focused checks 29/29 before
+adding the all-sides-blocked case. This does not change plot ownership or create a field remotely.
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).

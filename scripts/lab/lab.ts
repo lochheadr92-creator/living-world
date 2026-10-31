@@ -1,3 +1,4 @@
+import {reachableTillingOn,setReachableTilling} from '../../src/sim/farming';
 import {criticalSearchOn,setCriticalSearch} from '../../src/sim/water_search';
 import {projectAcquireOn,setProjectAcquire} from '../../src/sim/project_acquire';
 import {setSuspendedEndings,suspendedEndingsOn} from '../../src/sim/suspended_endings';
@@ -190,6 +191,7 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * isolate trades alone. `rich-stakes-only` and `rich-mood-only` separate the original stakes/mood mechanisms, not all later systems. `rich` switches current dynamics on at the fork of a legacy run. `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
+  if(specIn==='rich-no-reachable-tilling')return {spec:specIn,summary:'restore fixed south-side tilling and unrecorded tile failures',install(){const was=reachableTillingOn();setReachableTilling(false);return ()=>setReachableTilling(was);}};
   if(specIn==='rich-no-critical-search')return {spec:specIn,summary:'restore exploration cooldown for critical water searches',install(){const was=criticalSearchOn();setCriticalSearch(false);return ()=>setCriticalSearch(was);}};
   if(specIn==='rich-no-project-acquire')return {spec:specIn,summary:'restore double subtraction of carried project inputs',install(){const was=projectAcquireOn();setProjectAcquire(false);return ()=>setProjectAcquire(was);}};
   const spec = ALIASES[specIn] ?? specIn;

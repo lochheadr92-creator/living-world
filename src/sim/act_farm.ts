@@ -6,8 +6,8 @@ import { DAY, WORK } from './constants';
 import { claimPlot, consume, harvestPlot } from './economy';
 import { noteHarvest } from './occasions';
 import { addEvent, addFx, addLog } from './events';
-import { createPlot } from './farming';
-import { observe } from './knowledge';
+import { createPlot,hasReachableTilling,plotFailureKey } from './farming';
+import { observe,noteFailure } from './knowledge';
 import { taskMultiplier, wearFor } from './tools';
 import { isFreeLand } from './registry';
 import type { Activity, Person, Plot, World } from './types';
@@ -82,7 +82,9 @@ registerHandler('till', {
     observe(world, p, plot);
     return 'done';
   },
-  onEnd(world, p, a, outcome) {
+  onEnd(world, p, a, outcome, detail) {
+    if(hasReachableTilling(world)&&outcome==='failed'&&typeof a.data.px==='number'&&typeof a.data.py==='number')
+      noteFailure(world,p,plotFailureKey(world,a.data.px,a.data.py),detail);
     const plot = plotOf(world, a);
     if (plot && outcome === 'success') {
       addLog(world, p, 'work', 'Prepared a patch of ground for planting.');
