@@ -2,6 +2,9 @@
 
 ## Rules 96 implementation and evidence
 
+Runtime `bf6d263`; immutable reference `9c1da59` passes separately 1/1 in
+2.43 seconds, with reference typecheck clean.
+
 Predecessor rules 95 is published at `6629b3d` (runtime `0926f3a`, immutable
 reference `af7d6f3`). `warmth_duty.ts` owns the new switch, personal fire-account
 communication and available-fuel calculation. Existing social acceptance, material
