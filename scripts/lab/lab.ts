@@ -1,3 +1,4 @@
+import {projectAcquireOn,setProjectAcquire} from '../../src/sim/project_acquire';
 import {setSuspendedEndings,suspendedEndingsOn} from '../../src/sim/suspended_endings';
 import {projectHandInputsOn,setProjectHandInputs} from '../../src/sim/project_hand_inputs';
 import {hungryHarvestOn,setHungryHarvest} from '../../src/sim/hungry_harvest';
@@ -188,6 +189,7 @@ export const DEFAULT_BRANCHES = ['nudge:1', 'nudge:2', 'no-wolf-memory', 'random
  * isolate trades alone. `rich-stakes-only` and `rich-mood-only` separate the original stakes/mood mechanisms, not all later systems. `rich` switches current dynamics on at the fork of a legacy run. `no-wood`, `no-food`, `no-clay` are aliases of `remove`.
  */
 export function parseIntervention(specIn: string): Intervention {
+  if(specIn==='rich-no-project-acquire')return {spec:specIn,summary:'restore double subtraction of carried project inputs',install(){const was=projectAcquireOn();setProjectAcquire(false);return ()=>setProjectAcquire(was);}};
   const spec = ALIASES[specIn] ?? specIn;
   const [kind, a, b] = spec.split(':');
   const label = specIn;

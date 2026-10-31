@@ -21,6 +21,20 @@ VERIFIED: 11/11 focused provenance, CLI failure, legacy reporting and resume tes
 uses the existing untracked `tsconfig.stage.json`, excluding `tests/zz_review_*`.
 Logs are local under `stage3_evidence/` and are not committed. No simulation code changed.
 
+## F1 (rules 117)
+
+VERIFIED runtime logic bug: `nextProjectStep` returns a remaining quantity, but `supply`
+subtracted carried inputs again. The project call now passes a zero held override under
+rules 117. Older rules and `rich-no-project-acquire` retain the original path.
+The untouched review probe passed five defect/control assertions with two expected contract
+failures. New regressions failed before the fix; the staged lighter-pack scene now acquires
+the inputs and crafts a paid hammer, conserves items and continues exactly after save/load.
+Fixture correction: the review's one-stone ordinary pack weighs 10/12 and cannot fit another
+3-weight stone, so its missing offer is also physically correct. The offer contract uses its
+lighter pack; a separate boundary assertion preserves refusal when there is no room.
+Focused project/continuation checks: 16/16 before adding the explicit full-pack boundary.
+This is mechanism evidence, not an ordinary cart completion claim.
+
 ## Deferred register
 
 - H1: no format 5 until a format-independent continuation digest (after Stage 6).
