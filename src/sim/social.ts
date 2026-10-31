@@ -1,5 +1,6 @@
 import { rememberedDry } from './water_access';
 import {hasMeetingKnowledge,receiveMeetingCancellation,acknowledgeMeetingCancellation} from './meeting_knowledge';
+import {hasContinuityKnowledge,hearUndertaking,acknowledgeUndertaking} from './continuity_knowledge';
 import {hasBuildPromiseSettlement} from './promise_knowledge';
 import {hasPromiseDelays,receiveDelayProposal,answerDelayProposal} from './promise_delays';
 import {hasRequestCancellation,receiveCancellation,acknowledgeCancellation} from './request_cancellation';
@@ -878,6 +879,7 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 
 function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
   switch (purpose) {
+    case 'share_work': return `to tell ${name} about my household work`;
     case 'cancel_meeting': return `to explain a cancelled meal to ${name}`;
     case 'delay_request':
       return `to explain a delay and ask ${name} for more time`;
@@ -942,7 +944,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const told = c.purpose === 'warn' && outcome === 'success' ? warnReport(c) : null;
   // an ask that had stopped being an ask by the time it was answered: said as that, and not as a favour given or refused
   const moot = typeof c.data.moot === 'string' ? (c.data.moot as string) : '';
-  const report=hasMeetingKnowledge(world)&&c.purpose==='cancel_meeting'?{text:c.data.meetingAcknowledged?'meal cancellation acknowledged':c.data.meetingDelivered?'meal cancellation heard, acknowledgement not received':'meal cancellation not delivered',detail:c.data.meetingText??'No meeting update passed.'}:hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
+  const report=hasContinuityKnowledge(world)&&c.purpose==='share_work'?{text:c.data.workAcknowledged?'undertaking acknowledged':c.data.workDelivered?'undertaking heard without acknowledgement':'undertaking not conveyed',detail:c.data.workText??'No undertaking passed.'}:hasMeetingKnowledge(world)&&c.purpose==='cancel_meeting'?{text:c.data.meetingAcknowledged?'meal cancellation acknowledged':c.data.meetingDelivered?'meal cancellation heard, acknowledgement not received':'meal cancellation not delivered',detail:c.data.meetingText??'No meeting update passed.'}:hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
   const resultText = c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
   const detailText = c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
@@ -999,7 +1001,7 @@ export function updateConversations(world: World): void {
       finishConversation(world, c, 'interrupted');
       continue;
     }
-    if((hasMeetingKnowledge(world)&&(c.purpose==='cancel_meeting'||c.purpose==='invite')||(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request'||hasPromiseDelays(world)&&c.purpose==='delay_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
+    if((hasContinuityKnowledge(world)&&c.purpose==='share_work'||hasMeetingKnowledge(world)&&(c.purpose==='cancel_meeting'||c.purpose==='invite')||(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request'||hasPromiseDelays(world)&&c.purpose==='delay_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(c.purpose==='teach_technique') {
       const why=lessonProblem(world,A,B,lessonKind(c));
       if(why){interruptLesson(c,why);finishConversation(world,c,'interrupted');continue;}
@@ -1068,6 +1070,10 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
+    case 'share_work': {
+      const text=hearUndertaking(world,A,B,d.planId??0,c.id);c.data.workDelivered=!!text;c.data.workText=text??'No active household undertaking could be conveyed.';
+      if(text)bubble(world,A,text,'say',70);break;
+    }
     case 'cancel_meeting': {
       const text=receiveMeetingCancellation(world,A,B,d.mealId??0,c.id);c.data.meetingDelivered=!!text;c.data.meetingText=text??'No matching cancellation could be conveyed';
       if(text)bubble(world,A,text,'say',70);break;
@@ -1198,6 +1204,10 @@ function reqOf(world: World, c: Conversation): Request | undefined {
 function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: ConvData): void {
   const req = reqOf(world, c);
   switch (c.purpose) {
+    case 'share_work': {
+      c.data.workAcknowledged=!!c.data.workDelivered&&acknowledgeUndertaking(world,A,B,d.planId??0,c.id);
+      if(c.data.workAcknowledged)bubble(world,B,'I understand what you are working on. I have not promised to take it over.','say',60);break;
+    }
     case 'cancel_meeting': {
       c.data.meetingAcknowledged=!!c.data.meetingDelivered&&acknowledgeMeetingCancellation(world,A,B,d.mealId??0);
       if(c.data.meetingAcknowledged)bubble(world,B,'I have heard you. Our old meal arrangement is cancelled.','say',60);break;

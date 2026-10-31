@@ -34,9 +34,11 @@ import { beliefsByKind } from './optutil';
 import { observe } from './knowledge';
 import { toolsHeldBy } from './toolreg';
 import { isAdultWorker } from './people';
+import {hasContinuityKnowledge,validateContinuityKnowledge} from './continuity_knowledge';
 
 export interface Unfinished {
   id: number;
+  planId?: number;
   /** who left it, and their name as the record keeps it after they are gone */
   by: number;
   name: string;
@@ -76,7 +78,7 @@ export function collectUnfinished(world: World, p: Person): Unfinished[] {
     if (i.kind === 'shelter' && !i.aboutId) continue;
     const carried: Items = {};
     for (const k of Object.keys(i.wants) as (keyof Items)[]) if ((p.inv[k] ?? 0) > 0) carried[k] = Math.min(p.inv[k] ?? 0, i.wants[k] ?? 0);
-    out.push({ id: world.nextId++, by: p.id, name: p.name, tick: world.tick, kind: i.kind, aboutId: i.aboutId, makes: i.makes, ...(i.recipe ? { recipe: i.recipe } : {}), ...(i.forSite ? { forSite: i.forSite } : {}), worked: i.worked, carried, pileId: 0, goal: i.goal });
+    out.push({ id: world.nextId++, ...(hasContinuityKnowledge(world)?{planId:i.id}:{}), by: p.id, name: p.name, tick: world.tick, kind: i.kind, aboutId: i.aboutId, makes: i.makes, ...(i.recipe ? { recipe: i.recipe } : {}), ...(i.forSite ? { forSite: i.forSite } : {}), worked: i.worked, carried, pileId: 0, goal: i.goal });
   }
   return out;
 }
@@ -110,6 +112,12 @@ export function successionWanted(ctx: Ctx): Unfinished | null {
     const learned = p.relations[u.by]?.deathKnown?.learned ?? u.tick;
     if (world.tick - learned > SUCCESSION_WINDOW) continue;
     if (p.intentions.some((i) => i.status === 'active' && i.kind === u.kind)) continue;
+    if(hasContinuityKnowledge(world)){
+      const k=p.relations[u.by]?.workHeard?.find(k=>k.planId===u.planId&&k.householdId===p.hhId&&(k.retryAfter??0)<=world.tick);
+      if(!k)continue;
+      // Only the dated communicated account is available to a successor, never death-time pack/progress.
+      return {id:u.id,planId:k.planId,by:k.from,name:k.name,tick:learned,kind:k.kind,aboutId:k.aboutId,makes:k.makes,recipe:k.recipe,forSite:k.forSite,worked:k.worked,goal:k.goal,carried:{},pileId:0};
+    }
     return u;
   }
   return null;
@@ -123,10 +131,17 @@ export function successionBlocker(ctx: Ctx, u: Unfinished): string {
     const b = beliefsByKind(p, ['site']).find((x) => x.id === siteId);
     if (!b) return 'does not know of the site';
     if (b.hh !== p.hhId) return 'the site is not the household\'s';
-    const e = world.byId.get(siteId);
-    if (!e || e.ent !== 'site') return 'the site is finished or gone';
+    if(!hasContinuityKnowledge(world)){
+      const e = world.byId.get(siteId);
+      if (!e || e.ent !== 'site') return 'the site is finished or gone';
+    }
   }
   if (u.kind === 'tool') {
+    if(hasContinuityKnowledge(world)){
+      if(toolsHeldBy(world,p.id,u.makes as never).length)return `I already have a ${u.makes}`;
+      if(ctx.seenPersons.some(s=>s.carrying.includes(u.makes as never)&&world.persons.some(q=>q.id===s.id&&q.hhId===p.hhId)))return `I see a household member carrying a ${u.makes}`;
+      return '';
+    }
     const hhMembers = world.persons.filter((q) => q.alive && q.hhId === p.hhId);
     if (hhMembers.some((q) => toolsHeldBy(world, q.id, u.makes as never).length)) return `the household has a ${u.makes} now`;
   }
@@ -143,7 +158,7 @@ export function takeUp(world: World, p: Person, u: Unfinished, plan: Intention):
   }
   plan.succeeding = { from: u.by, name: u.name, worked: u.worked };
   plan.goal = `finish what ${u.name} began: ${plan.goal}`;
-  if (u.pileId && p.relations[u.by]?.deathKnown?.source === 'witness') {
+  if (!hasContinuityKnowledge(world) && u.pileId && p.relations[u.by]?.deathKnown?.source === 'witness') {
     const pile = world.byId.get(u.pileId);
     if (pile && pile.ent === 'pile') observe(world, p, pile);
   }
@@ -153,6 +168,11 @@ export function takeUp(world: World, p: Person, u: Unfinished, plan: Intention):
 
 /** A record that cannot be continued is cancelled with the reason (intent.ts, when the survivor looks at it). */
 export function cancelUnfinished(world: World, p: Person, u: Unfinished, why: string): void {
+  if(hasContinuityKnowledge(world)){
+    const k=p.relations[u.by]?.workHeard?.find(k=>k.planId===u.planId);
+    if(k){k.retryAfter=world.tick+400;k.obstacle=why.slice(0,240);addLog(world,p,'work',`Cannot yet continue ${u.name}'s undertaking: ${why}. Other people keep their own knowledge.`);}
+    return;
+  }
   const hh = householdById(world, p.hhId);
   if (hh?.unfinished) {
     hh.unfinished = hh.unfinished.filter((x) => x.id !== u.id);
@@ -168,10 +188,12 @@ export function describeUnfinished(world: World, hh: Household): string[] {
 }
 
 export function validateSuccession(world: World): void {
+  validateContinuityKnowledge(world);
   for (const hh of world.households) {
     if (!hh.unfinished) continue;
     if (!runsRulesVersion(world, 53) || hh.unfinished.length > UNFINISHED_LIMIT) throw new Error('Invalid unfinished records');
     for (const u of hh.unfinished) if (!Number.isFinite(u.id) || !Number.isFinite(u.by) || !Number.isFinite(u.tick) || !['shelter', 'tool', 'stock', 'batch'].includes(u.kind)) throw new Error('Invalid unfinished record');
+    for(const u of hh.unfinished)if(u.planId!==undefined&&(!runsRulesVersion(world,92)||!Number.isSafeInteger(u.planId)||u.planId<=0))throw new Error('Invalid unfinished plan identity');
   }
   for (const p of world.persons) for (const i of p.intentions ?? []) if (i.succeeding && !runsRulesVersion(world, 53)) throw new Error('Invalid succession on a plan');
 }

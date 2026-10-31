@@ -77,6 +77,7 @@ export function relationshipHistory(w: World, p: Person): string[] {
   const other=Number(id);
   rows.push(`${name(w,other)}: trust ${Math.round(r.trust)}, affinity ${Math.round(r.affinity)}${r.kin ? `; ${r.kin}` : ''}.`);
   if(r.deathKnown) rows.push(`Death learned at tick ${r.deathKnown.learned}: ${r.deathKnown.source}${r.deathKnown.via ? ` from ${name(w,r.deathKnown.via)}` : ''}.`);
+  for(const k of r.workHeard??[])rows.push(`Heard ${k.name}'s undertaking #${k.planId} at tick ${k.heardAt}, conversation #${k.conversationId}: ${k.goal}; reported work ${Math.round(k.worked)}. No takeover was promised.${k.obstacle?` Last personal obstacle: ${k.obstacle}.`:''}`);
   if(r.grievance) rows.push(`Open grievance: ${r.grievance.detail} (since tick ${r.grievance.since}).`);
   if(r.meeting){const e=r.meeting;rows.push(`Meal #${e.mealId}, place #${e.placeId}, agreed tick ${e.agreedAt}: ${e.outcome}; ${e.source} at tick ${e.tick} (${e.confidence}). ${e.reason}. A failed prior arrangement can allow more preparation time; it does not establish bad faith.`);}
   const receipts=(p.socialMemory??[]).filter(m=>m.otherId===other).slice(-3);

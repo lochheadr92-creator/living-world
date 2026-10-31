@@ -146,6 +146,8 @@ export interface Relation {
   history: { tick: number; text: string }[];
   /** Latest personally sourced attendance experience; no ability or bad-faith inference. */
   meeting?: import('./meeting_knowledge').MeetingExperience;
+  workHeard?: import('./continuity_knowledge').HeardUndertaking[];
+  workTold?: import('./continuity_knowledge').ToldUndertaking[];
   /** the live grievance this person holds against the other, if any (set by an actual incident, closed by amends or time) */
   grievance: Grievance | null;
   /** last time a grievance between these two was closed (stops a settled quarrel from starting the same apology loop again) */
@@ -1137,6 +1139,7 @@ export type ConvPurpose =
   | 'cancel_request'
   | 'delay_request'
   | 'cancel_meeting'
+  | 'share_work'
   | 'mediate'
   | 'teach_technique'
   | 'learn_technique';

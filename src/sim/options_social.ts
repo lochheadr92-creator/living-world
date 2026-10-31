@@ -1,4 +1,5 @@
 import {pendingMeetingUpdates} from './meeting_knowledge';
+import {workToTell} from './continuity_knowledge';
 import {pendingDelayProposals} from './promise_delays';
 import {pendingCancellations} from './request_cancellation';
 import {expectsCare} from './promise_expectations';
@@ -686,6 +687,13 @@ function optRequestTechnique(ctx: Ctx): void {
 }
 
 export function socialOptions(ctx: Ctx): void {
+  for(const c of candidates(ctx)){
+    if(c.q.hhId!==ctx.p.hhId||c.d>10||c.s.child)continue;
+    const work=workToTell(ctx.world,ctx.p,c.q.id);if(!work)continue;
+    const sc=new Scorer().add('let a household member know what I am working on',17).add('walking',-pen(c.d*6));
+    mkSocial(ctx,c,'share_work',{planId:work.id},`Tell ${c.q.name} about my ${work.kind} work`,'communicate my undertaking without assigning it',null,sc,'work-news',':'+work.id);
+    break;
+  }
   mealOptions(ctx);
   attendOptions(ctx);
   aloneOptions(ctx);
