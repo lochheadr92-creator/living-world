@@ -2,6 +2,14 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
+- Rules 111 candidate: an admitted guest keeps the option for the gathering still
+  underway; no second visit or extra reward. The rules-107 days-45–50 household
+  baseline exposed 33 admitted guests all interrupted, and zero leisure-category
+  ticks for all 15 adults (social contact is separate). See
+  `HOUSEHOLD_RHYTHM_MEASUREMENT.md` and `OCCASION_PARTICIPATION.md`. Focused 28/5,
+  rendered 7/7 and typecheck/build pass; full regression and matched 20-day ordinary
+  screens are running. A1 and social-place use remain incomplete.
+
 - Rules 110: purposeful water searches retain their need, explore from
   the searcher's own position and can answer critical thirst after dark. See
   `WATER_SEARCH.md`. Staged travel/discovery/drinking is saved, rendered and

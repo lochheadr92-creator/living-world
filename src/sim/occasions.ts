@@ -1,4 +1,5 @@
 import { deceasedById } from './historical_index';
+import { continuingOccasion } from './occasion_participation';
 import { hasLocalMarket, presentAt, togetherAt } from './market_contact';
 import { hasLocalDeath, knowsDeath } from './death_knowledge';
 // Occasions (rich worlds only): a place and a time at which many people gather at once - a funeral, a wedding, a feast for a birth or
@@ -193,7 +194,8 @@ export function attendOptions(ctx: Ctx): void {
   if (ctx.criticals.length || ctx.dangers.length) return;
   for (const o of list) {
     // worth setting out for a little before it opens, so that people arrive as it begins rather than as it ends
-    if (o.status === 'done' || o.attended.includes(p.id) || o.about.includes(p.id)) continue;
+    const continuing=continuingOccasion(ctx,o);
+    if (o.status === 'done' || (o.attended.includes(p.id) && !continuing) || o.about.includes(p.id)) continue;
     if (hasLocalDeath(world) && o.kind==='funeral' && (!o.about.some(id=>knowsDeath(p,id)) || !p.beliefs[o.placeId] || o.status!=='gathering' || p.indoors || hyp(o.x-p.x,o.y-p.y)>10)) continue;
     if (o.status === 'called' && world.tick < o.at - 200) continue;
     if(hasLocalMarket(world)&&!p.beliefs[o.placeId])continue;
@@ -219,7 +221,7 @@ export function attendOptions(ctx: Ctx): void {
     if (sc.total < 8) continue;
     addOption(ctx, {
       kind: 'attend',
-      label: `Go to the ${KIND_LABEL[o.kind]} at ${o.placeName}`,
+      label: `${continuing?'Stay at':'Go to'} the ${KIND_LABEL[o.kind]} at ${o.placeName}`,
       goal: o.kind === 'funeral' ? 'to mourn' : o.kind === 'market' ? 'to trade' : 'to celebrate',
       need: 'social',
       util: sc.total,

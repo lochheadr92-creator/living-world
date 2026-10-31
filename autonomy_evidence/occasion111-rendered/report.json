@@ -1,0 +1,72 @@
+{
+  "scene": "Staged supplied adult physically admitted via an offered engine action. No ordinary-household benefit claim.",
+  "checks": [
+    {
+      "name": "physically admitted guest remains participating",
+      "ok": true,
+      "detail": {
+        "kind": "attend",
+        "progress": 30,
+        "duration": 190,
+        "admitted": true,
+        "rules": 111
+      }
+    },
+    {
+      "name": "participating-at-feast inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "inspector describes ongoing feast",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nRowan household\nHome: hut (100% sound)\nTownship: Willowbank\nMOOD\nCheerful\nHEALTH\n100\nON THEIR MIND\n+6\nThe feast\nWhat are they up to?\nMore\nAt the feast (16% of this task).\n16%\nNEEDS\nFood\n94\nWater\n94\nEnergy\n94\nWarmth\n90\nSafety\n85\nCompany\n69\nCARRYING\n×3\n×3\n7.5 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\n1\nKnows\n2\nFamily\nTraits"
+    },
+    {
+      "name": "bounded participation finishes successfully",
+      "ok": true,
+      "detail": {
+        "endings": [
+          {
+            "result": "success",
+            "detail": "done",
+            "progress": 190,
+            "duration": 190
+          }
+        ],
+        "admissions": 1,
+        "twins": true,
+        "reload": true,
+        "conserved": true,
+        "tick": 190
+      }
+    },
+    {
+      "name": "one admission, exact saved continuation and conserved items",
+      "ok": true,
+      "detail": {
+        "endings": [
+          {
+            "result": "success",
+            "detail": "done",
+            "progress": 190,
+            "duration": 190
+          }
+        ],
+        "admissions": 1,
+        "twins": true,
+        "reload": true,
+        "conserved": true,
+        "tick": 190
+      }
+    },
+    {
+      "name": "finished-feast inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}
