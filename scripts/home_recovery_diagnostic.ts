@@ -6,8 +6,8 @@ import {refreshBeliefs} from '../src/sim/perception';
 import {stepWorld} from '../src/sim/world';
 import {serializeWorld,deserializeWorld} from '../src/app/save';
 import {conservationReport} from '../src/sim/economy';
-const [out]=process.argv.slice(2).filter(a=>a!=='--');if(!out||existsSync(out))throw new Error('Fresh output required');mkdirSync(out,{recursive:true});
-const reports=[107,108].map(version=>{
+const [out,...versions]=process.argv.slice(2).filter(a=>a!=='--');if(!out||existsSync(out))throw new Error('Fresh output required');mkdirSync(out,{recursive:true});
+const reports=(versions.length?versions.map(Number):[107,108]).map(version=>{
  const f=observedReplacementScene(version);destroyBuilding(f.w,f.home,'collapsed in sight');refreshBeliefs(f.w,f.p);
  const twin=deserializeWorld(serializeWorld(f.w)),events:unknown[]=[],samples:unknown[]=[];
  f.w.hooks={onActivityStart:(p,a)=>{if(p.id===f.p.id)events.push({tick:f.w.tick,event:'start',kind:a.kind,goal:a.goal,target:a.targetId});},onActivityEnd:(p,a,result,detail)=>{if(p.id===f.p.id)events.push({tick:f.w.tick,event:'end',kind:a.kind,result,detail});}};

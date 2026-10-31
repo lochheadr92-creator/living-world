@@ -1,0 +1,329 @@
+{
+  "rules": 109,
+  "limits": "STAGED observed collapse, one adult, finite supplied inventory and known resources. Replacement choices autonomous. No ordinary activation or long-term survival claim; the retained five-day fixture is adverse.",
+  "checks": [
+    {
+      "name": "observed loss reaches real paid replacement work",
+      "ok": true,
+      "detail": {
+        "tick": 3322,
+        "activity": {
+          "id": 55,
+          "kind": "build",
+          "label": "Building the lean-to",
+          "goal": "to finish my household’s lean-to",
+          "need": null,
+          "phase": "work",
+          "targetId": 19,
+          "targetType": "site",
+          "tx": 43.5,
+          "ty": 49.5,
+          "spotX": 42.62062353778165,
+          "spotY": 48.44078131597489,
+          "item": null,
+          "amount": 0,
+          "start": 3301,
+          "minCommit": 3421,
+          "expire": 4701,
+          "progress": 21,
+          "pprogress": 20,
+          "duration": 0,
+          "cycle": 21,
+          "path": [
+            42.62062353778165,
+            48.44078131597489
+          ],
+          "pi": 2,
+          "pathTries": 1,
+          "stuck": 0,
+          "lastX": 42.62062353778165,
+          "lastY": 48.44078131597489,
+          "claims": [
+            56
+          ],
+          "utility": 37.74809998405474,
+          "blocked": "",
+          "data": {
+            "optKey": "build:19",
+            "dailyRoutine": {
+              "key": "build:19",
+              "label": "Build the lean-to",
+              "kind": "build",
+              "target": 19,
+              "phase": 2,
+              "context": {
+                "winter": false,
+                "household": 1,
+                "home": 0,
+                "injury": "well",
+                "family": "0:",
+                "contact": "0:",
+                "losses": "0:"
+              },
+              "eta": 114.72892588671144,
+              "energy": 44.066028265826695,
+              "warmth": 98.9614209094632
+            },
+            "why": "building work to do +41 · good builder −2 · walking −1",
+            "routeAttempt": {
+              "target": 19,
+              "x": 42.62062353778165,
+              "y": 48.44078131597489,
+              "gx": 43.5,
+              "gy": 49.5,
+              "kind": "build",
+              "cart": false
+            },
+            "waited": 0
+          }
+        },
+        "starts": [
+          {
+            "tick": 0,
+            "kind": "gather",
+            "goal": "to bring food home"
+          },
+          {
+            "tick": 145,
+            "kind": "plan_site",
+            "goal": "no shelter of our own yet"
+          },
+          {
+            "tick": 267,
+            "kind": "build",
+            "goal": "to finish my household’s lean-to"
+          },
+          {
+            "tick": 368,
+            "kind": "explore",
+            "goal": "to find trees to fell"
+          },
+          {
+            "tick": 583,
+            "kind": "wander",
+            "goal": "nothing needs doing right now"
+          },
+          {
+            "tick": 765,
+            "kind": "drink",
+            "goal": "to quench thirst (62/100)"
+          },
+          {
+            "tick": 773,
+            "kind": "gather",
+            "goal": "for my household’s lean-to"
+          },
+          {
+            "tick": 910,
+            "kind": "explore",
+            "goal": "to find trees to fell"
+          },
+          {
+            "tick": 1121,
+            "kind": "eat",
+            "goal": "to ease hunger (59/100)"
+          },
+          {
+            "tick": 1131,
+            "kind": "wander",
+            "goal": "nothing needs doing right now"
+          },
+          {
+            "tick": 1300,
+            "kind": "sleep",
+            "goal": "to recover energy (39/100)"
+          },
+          {
+            "tick": 1994,
+            "kind": "gather",
+            "goal": "for my household’s lean-to"
+          },
+          {
+            "tick": 2095,
+            "kind": "drink",
+            "goal": "to quench thirst (54/100)"
+          },
+          {
+            "tick": 2103,
+            "kind": "sleep",
+            "goal": "to recover energy (89/100)"
+          },
+          {
+            "tick": 2174,
+            "kind": "wander",
+            "goal": "nothing needs doing right now"
+          },
+          {
+            "tick": 2273,
+            "kind": "explore",
+            "goal": "to look for food sources"
+          },
+          {
+            "tick": 2505,
+            "kind": "eat",
+            "goal": "to ease hunger (58/100)"
+          },
+          {
+            "tick": 2525,
+            "kind": "gather",
+            "goal": "for my household’s lean-to"
+          },
+          {
+            "tick": 2777,
+            "kind": "gather",
+            "goal": "to bring food home"
+          },
+          {
+            "tick": 2891,
+            "kind": "haul",
+            "goal": "to help finish my household’s lean-to"
+          },
+          {
+            "tick": 2974,
+            "kind": "gather",
+            "goal": "for my household’s lean-to"
+          },
+          {
+            "tick": 3083,
+            "kind": "drink",
+            "goal": "to quench thirst (50/100)"
+          },
+          {
+            "tick": 3091,
+            "kind": "gather",
+            "goal": "for my household’s lean-to"
+          },
+          {
+            "tick": 3270,
+            "kind": "haul",
+            "goal": "to help finish my household’s lean-to"
+          },
+          {
+            "tick": 3301,
+            "kind": "build",
+            "goal": "to finish my household’s lean-to"
+          }
+        ],
+        "wood": 1,
+        "same": true
+      }
+    },
+    {
+      "name": "replacement-under-construction inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "the inspector describes the real construction",
+      "ok": true,
+      "detail": "A\nAda\nFollow\nAdult, 35\nMarsh household\nHome: no home yet — last considered just now: the household has already laid out a lean-to\nTownship: Willowbank\nMOOD\nContent\nHEALTH\n100\nON THEIR MIND\nWhat are they up to?\nMore\nBuilding the lean-to.\n0%\nWHAT ARE THEY SET ON?\nGet the household's lean-to built. Step: the lean-to has its materials; it wants building — waiting to take this step. 4 units carried there so far. No materials missing in the last known site record. Why: the household is still in no shelter of its own, and their lean-to wants 4 wood. · Be fed, watered and under shelter before dark. Step: find somewhere to shelter — on hold: no shelter remembered nearby.\nNEEDS\nFood\n73\nWater\n74\nEnergy\n43\nWarmth\n99\nSafety\n84\nCompany\n23\nCARRYING\n×1\n×2\n×3\n9 / 12\nTOOLS\nnone\nTownship & shared work\nHousehold history\nRelationship history\nRecent decisions\nNearby\nPeople\nRequests\nRecent\n14\nKnows\n7\nFamily\nTraits"
+    },
+    {
+      "name": "the finite material and labour produce an owned replacement",
+      "ok": true,
+      "detail": {
+        "tick": 3574,
+        "home": {
+          "ent": "building",
+          "id": 57,
+          "type": "lean_to",
+          "x": 43,
+          "y": 49,
+          "w": 1,
+          "h": 1,
+          "condition": 100,
+          "hhId": 1,
+          "store": {
+            "items": {},
+            "cap": 12
+          },
+          "fuel": 0,
+          "builtTick": 3573,
+          "doorX": 43,
+          "doorY": 50,
+          "variant": 3,
+          "inside": [],
+          "builtBy": [
+            2
+          ],
+          "built": 3573
+        },
+        "wood": 4,
+        "same": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "across a save the person uses shelter and restores energy",
+      "ok": true,
+      "detail": {
+        "tick": 3636,
+        "activity": {
+          "id": 59,
+          "kind": "sleep",
+          "label": "Sleeping by my lean-to",
+          "goal": "to recover energy (29/100)",
+          "need": "energy",
+          "phase": "work",
+          "targetId": 57,
+          "targetType": "building",
+          "tx": 42.62062353778165,
+          "ty": 48.44078131597489,
+          "spotX": 43.62789937388152,
+          "spotY": 50.59650382036343,
+          "item": null,
+          "amount": 0,
+          "start": 3574,
+          "minCommit": 3824,
+          "expire": 5374,
+          "progress": 31,
+          "pprogress": 30,
+          "duration": 0,
+          "cycle": 0,
+          "path": [
+            42.5,
+            50.5,
+            43.62789937388152,
+            50.59650382036343
+          ],
+          "pi": 4,
+          "pathTries": 1,
+          "stuck": 0,
+          "lastX": 42.880737769433495,
+          "lastY": 50.53257617670319,
+          "claims": [],
+          "utility": 32.728472369354485,
+          "blocked": "",
+          "data": {
+            "optKey": "sleep:57",
+            "why": "a step toward “be fed, watered and under shelter before dark”: stay at my lean-to until it is light · tired +34 · walking −1",
+            "forPlan": 53,
+            "routeAttempt": {
+              "target": 57,
+              "x": 42.62062353778165,
+              "y": 48.44078131597489,
+              "gx": 43.5,
+              "gy": 49.5,
+              "kind": "sleep",
+              "cart": false
+            },
+            "energy0": 28.09802826582634
+          }
+        },
+        "cover": 0.55,
+        "energyBefore": 28.09802826582634,
+        "energy": 31.113328265826336,
+        "same": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "replacement-slept-in inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

@@ -2,6 +2,14 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
+- Rules 109 follows 108 with the diagnosed construction eligibility correction:
+  known fully supplied work remains offered through its final two percent.
+  `CONSTRUCTION_FINISH.md` records owner, lab removal, immutable-108 check,
+  focused/build and rendered evidence. The unchanged valid collapse fixture now
+  completes its lean-to and sleeps there at 109; later thirst death is preserved.
+  This closes that staged paid replacement/use gap, not household viability or
+  ordinary collapse reliability. Full rules-109 regression is running separately.
+
 - Published baseline `056dbac` full regression now verified on the owner's Windows
   machine: **339 files / 2,204 tests passed**, 556.86 seconds. This closes the
   unrerun protocol-number correction gap in the historical handoff.

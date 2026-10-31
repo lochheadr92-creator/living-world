@@ -8,6 +8,7 @@ import { freeInv, freeOf, planDeliveringTo, preparingReserve, setToolWant } from
 import { durableReserve } from './provision';
 import { explainsHousing } from './shelter';
 import {hasHomeReplacement,layoutHome} from './home_replacement';
+import {knownConstructionWork} from './construction_finish';
 import { WINTER_SHELTER_BOOST, winterCue, winterShelterWindow } from './winter_shelter';
 import { makesSpears } from './defence';
 import { isThreat } from './wildlife';
@@ -611,7 +612,7 @@ function optSites(ctx: Ctx): void {
     // work on it
     const avail = fractionAvailable(b);
     const done = b.progress ?? 0;
-    const canWork = done < Math.min(1, 0.06 + avail) - 0.02;
+    const canWork = knownConstructionWork(world,done,avail);
     if (!canWork) {
       // rules 32+: derive the shortfall from the site's ledger (required minus delivered minus used), not the stale
       // belief snapshot, so the reason does not list material that has already been delivered. The text is part of the

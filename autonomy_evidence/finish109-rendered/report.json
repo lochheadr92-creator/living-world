@@ -1,0 +1,45 @@
+{
+  "rules": 109,
+  "limits": "STAGED boundary case: prior 199 work and consumed materials staged and accounted; remaining work selected and executed autonomously. No full recovery, survival or ordinary-frequency claim.",
+  "checks": [
+    {
+      "name": "known last work is actually offered with accounted prior materials",
+      "ok": true,
+      "detail": {
+        "site": 4,
+        "offered": true,
+        "work": 199,
+        "total": 200,
+        "wood": 4,
+        "conserved": true
+      }
+    },
+    {
+      "name": "unfinished-before-choice inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "autonomous final labour completes an owned lean-to exactly across a save",
+      "ok": true,
+      "detail": {
+        "tick": 17,
+        "home": 7,
+        "building": "lean_to",
+        "built": 1,
+        "wood": 4,
+        "same": true,
+        "valid": true,
+        "conserved": true
+      }
+    },
+    {
+      "name": "completed-after-work inspection is pure",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}
