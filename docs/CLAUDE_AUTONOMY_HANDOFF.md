@@ -20,8 +20,11 @@ its full 356-file / 2,279-test rerun were already published at `24bfc1d`.
 
 The 113 forest reached day 45 with five alive, 27 deaths and no carts. River and
 meadow reached their execution budgets at days 36.75 and 43.1; exact saved tails
-are being completed to day 45, preserving the original partial reports. A read-only
-trace of forest's first ordinary cart plan is running to identify its next blocker.
+now complete day 45, preserving original partial reports. All three seeds have
+900 pure checks, exact twins/reloads and conserved items. Final alive/deaths are
+19/13 river, 25/6 meadow, 5/27 forest; zero carts. `FIRST_CART_113.md` records
+the next reproduced lead: the cart plan does not retain its immediate hammer
+ingredients, which are spent on a different site before the plan expires.
 
 ### Later Codex continuation: published through rules 113
 

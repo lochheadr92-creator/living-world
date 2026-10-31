@@ -2,6 +2,16 @@
 
 ## Codex resumed from Claude — 31 October 2026
 
+- Rules-113 long validation is complete: three Normal day-45 worlds, with exact
+  saved continuations for river/meadow after execution-budget stops. Each has 900
+  pure checks, exact twins/reloads and conserved items. Workshop completions are
+  9/2/1 (river/meadow/forest); carts remain zero; alive/deaths 19/13, 25/6, 5/27.
+  `AUTONOMY_VALIDATION.md` retains both partial reports and tail provenance.
+  `FIRST_CART_113.md` traces the single forest cart plan: immediate hammer inputs
+  are not retained, stone goes to another site, and the plan later expires. The
+  next bounded contract is retention of current hand-tool prerequisite inputs,
+  not a claim of cart or population success.
+
 - Rules 114: hungry adults can consider personally known ripe household grain
   as hunger relief, through unchanged physical harvesting and later eating.
   `HUNGRY_HARVEST.md`: runtime `c52d7d4`, immutable `3655551`; focused 44/4,
