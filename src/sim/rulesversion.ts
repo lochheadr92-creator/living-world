@@ -263,8 +263,14 @@ export const RULES_LINEAGE = 'main-iron-warmth-smithy';
 export const RULES_27_GENERATION = 'main-night-wait-boundary-27';
 // Unmerged e415b4b used 29 for work tastes without main's event snapshot fix.
 export const RULES_29_GENERATION = 'main-event-participant-snapshots-29';
+// Unmerged Pavel/Talia builds (c3f1310, 57ffc48) used 119 for childhood and 120 for resumed gathering credit; on main those
+// behaviours are 120 and 121, and 119/120 are lived life and childhood. Unmarked 117 stays Stage 3's: marking it would change
+// the recorded rules-117 save digests, and lived-life state in such a save is refused by its own validators below 119.
+export const RULES_119_GENERATION = 'main-lived-life-after-stage3-119';
+export const RULES_120_GENERATION = 'main-childhood-after-stage3-120';
+const GENERATIONS: Readonly<Record<number, string>> = { 27: RULES_27_GENERATION, 29: RULES_29_GENERATION, 119: RULES_119_GENERATION, 120: RULES_120_GENERATION };
 export function saveRulesGeneration(version: unknown): string | undefined {
- return version === 27 ? RULES_27_GENERATION : version === 29 ? RULES_29_GENERATION : undefined;
+ return typeof version === 'number' ? GENERATIONS[version] : undefined;
 }
 export function validateSaveLineage(version: unknown, lineage: unknown, generation?: unknown): void {
  if (lineage !== undefined && lineage !== RULES_LINEAGE) throw new Error('Unknown rules lineage; keep this save with its original build.');
@@ -274,4 +280,6 @@ export function validateSaveLineage(version: unknown, lineage: unknown, generati
   throw new Error('Ambiguous rules version 27: night-wait and unmerged leisure branches used this number. Original save preserved; open with its original build. No automatic migration is safe.');
  if (version === 29 && generation !== RULES_29_GENERATION)
   throw new Error('Ambiguous rules version 29: event snapshots and unmerged work tastes used this number. Original save preserved; open with its original build. No automatic migration is safe.');
+ if ((version === 119 || version === 120) && generation !== saveRulesGeneration(version))
+  throw new Error(`Ambiguous rules version ${version}: the unmerged Pavel/Talia builds used this number for different behaviour. Original save preserved; open with its original build. No automatic migration is safe.`);
 }
