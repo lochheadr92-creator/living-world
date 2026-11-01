@@ -63,7 +63,7 @@ Run on 2 November 2026 in the isolated worktree `living-world-pavel-talia-integr
 - Reference counts equal the branch records: 119 has company 14 and night experience 3;
   120 has 24 childhood experiences.
 
-Not done at this point: no rendered check (added below), no long-run or ensemble measurement,
+Not done at this point: no rendered check (added below), no long-run (added below) or ensemble measurement,
 no re-run of the Pavel/Talia evidence screens. Combining Stage 3 with Pavel/Talia has no
 measured benefit claim. The local log is `integration_evidence/` (not committed).
 
@@ -125,3 +125,47 @@ attempts:
 **Push.** All checks passed and the 26 outgoing commits matched this record, so main was pushed
 without force: `dbe229e..3f65f8c`. The integration worktree, its branch and all untracked
 evidence were kept.
+
+## 25-day long runs at rules 121 (2 November 2026)
+
+Owner instruction: run the three-seed long-run check on merged 121, make immigration on the
+standard, then run immigration off as well. From `df9757d` the long-run observers
+(`ready_step_observe.ts`, `household_supply_observe.ts`, `promised_supply_observe.ts`) use
+`currentWorldSettings('normal', seed)`, the settings of a new product world, so arrivals are on.
+Earlier evidence recorded with arrivals off keeps its dated description.
+
+Both runs: `scripts/run_longruns.ps1 -Checks production -Seeds forest,river,meadow -Days 25
+-BudgetSeconds 1800`, Normal profile, 28 founders, rules 121. Arrivals on ran from the main
+checkout at `df9757d`. Arrivals off ran from the integration worktree at `3f65f8c`, whose `src/`
+is identical to `df9757d` and whose observers still force arrivals off. Both sources were clean.
+Every run reached tick 60,000 with conservation, an exact unobserved-twin continuation and 500
+observer-purity checks passing. One earlier arrivals-off attempt at `ef1e528` was stopped
+unfinished when the standard changed; its partial folder is kept.
+
+| Seed | Rules 118, arrivals off (Stage 3) | Rules 121, arrivals off | Rules 121, arrivals on |
+|---|---|---|---|
+| forest | 21 alive, 10 deaths | **1 alive, 28 deaths** | **4 alive, 29 deaths** (4 arrivals) |
+| river | 23 alive, 7 deaths | 24 alive, 6 deaths | 19 alive, 21 deaths (10 arrivals) |
+| meadow | 26 alive, 2 deaths | 28 alive, 2 deaths | 33 alive, 8 deaths (11 arrivals) |
+
+Arrivals are derived as everyone who lived, less 28 founders and recorded births (1-2 per run).
+No run built or held a cart.
+
+Observed:
+- Forest collapses at rules 121 with or without arrivals. Arrivals off: hunger 16 (days
+  18.9-23.2), wolf 4, thirst 4, exposure 3, fever 1. Arrivals on: hunger 14 (days 21.9-23.1),
+  exposure 6, fever 4, thirst 3, wolf 1, injuries 1. Stage 3's rules-118 forest also had a
+  late hunger cluster (6 deaths, days 23.1-23.7), but far smaller.
+- River and meadow at rules 121 with arrivals off are close to Stage 3's rules 118.
+- With arrivals on, river loses more people (hunger 13, days 22.7-24.9) and meadow ends larger.
+
+Limits. One run per seed and setting; each world is chaotic, and 118 and 121 differ in several
+rules and their whole trajectories. These runs do not establish that the Pavel/Talia rules cause
+the forest collapse, nor that arrivals cause the river losses; they show where to look. A paired
+ablation (`rich-no-lived-life`, `rich-no-childhood` against control and nudges over many seeds)
+would be needed for attribution. No survival target is claimed or failed.
+
+Evidence (local, untracked, in the main checkout): `integration121_evidence/longrun-25days-arrivals/`,
+`integration121_evidence/longrun-25days-noarrivals/`, their `.log` files, and the stopped
+`integration121_evidence/longrun-25days/`. Stage 3 figures are from
+`stage3_evidence/part-b-25days/reports/`.
