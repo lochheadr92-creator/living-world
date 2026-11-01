@@ -63,6 +63,65 @@ Run on 2 November 2026 in the isolated worktree `living-world-pavel-talia-integr
 - Reference counts equal the branch records: 119 has company 14 and night experience 3;
   120 has 24 childhood experiences.
 
-Not done: no rendered/browser check, no long-run or ensemble measurement, no re-run of the
-Pavel/Talia evidence screens. Combining Stage 3 with Pavel/Talia has no measured benefit
-claim. The local log is `integration_evidence/` (not committed).
+Not done at this point: no rendered check (added below), no long-run or ensemble measurement,
+no re-run of the Pavel/Talia evidence screens. Combining Stage 3 with Pavel/Talia has no
+measured benefit claim. The local log is `integration_evidence/` (not committed).
+
+## Browser verification and push (2 November 2026)
+
+**Tested commit:** `3f65f8c`, merged main, served by `vite` from the main checkout (no tracked
+modifications) at `http://127.0.0.1:5273/`. **Method:** headless Chrome driven by the committed
+`scripts/browser/cdp.mjs`. Claude in Chrome was not connected. Each check evaluates the running
+page and reads the rendered inspector text.
+
+| Check | Result |
+|---|---|
+| Committed `scripts/browser/current_world_check.mjs` | 15/15: save, load, page reload, legacy round trip, no page errors |
+| Focused Pavel/Talia/rules-121 check | 13/13 (detail below) |
+| Stored-save envelope check | 4/4 on rerun, after one corrected assertion (below) |
+
+Observed in the focused check:
+- A new ordinary meadow world runs rules 121. After 3,000 ticks, 20 people hold
+  continuing-company records and 5 night-shelter accountings exist.
+- Pavel's rendered relationship history shows "Spent time with Mona again: 1 day of
+  continuing company."
+- Family time, play and foraging practice all occurred. Talia's rendered panel shows "A
+  guessing game together for 120 ticks. With Wes."
+- A rules-121 save loads back to tick 3000, hash `65d4a72c`, survives a page reload, and
+  continues 120 ticks.
+- In the page, a rules-120 save is marked and roundtrips, and an unmarked one is refused as
+  ambiguous.
+- With a decision waiting in Talia's by-hand session, Load ends it ("the previous session ended
+  before the swap") and nothing is left waiting.
+- No page exceptions.
+
+The focused check's own envelope assertion (D2) checked nothing, because the save is in
+IndexedDB, not localStorage. The separate stored-save check covers it. It decompresses the
+IndexedDB record and finds rules 121 in both the settings and the envelope, no generation
+marker, the main lineage, and the same hash `65d4a72c` in a fresh browser launch. Its earlier
+attempts:
+- The first errored because the headless profile does not persist across launches. Its log was
+  overwritten and its empty output folder removed.
+- The second failed 1 of 4 checks, because the assertion wrongly expected an empty `scene`
+  where natural worlds store `"natural"`. That log is retained.
+- The rerun, with only that assertion corrected, passed 4/4.
+
+**Evidence locations.** None of this is committed.
+- Logs, screenshots and `report.json` files are local, untracked evidence in
+  `C:\dev\Claude Experiment\living-world-pavel-talia-integration\integration_evidence\`:
+  `browser-current-world.log`, `browser-pavel-talia-121.log` and folder,
+  `browser-stored-save-121.log` (the failed run), and `browser-stored-save-121-rerun.log`
+  and folder.
+- The focused and stored-save scripts were session scratch files outside the repository.
+- The only committed files involved are `scripts/browser/cdp.mjs` and
+  `current_world_check.mjs`.
+
+**Limits.**
+- The screenshots show the top of each inspector panel. The relationship-history notes were
+  confirmed in the rendered page text.
+- One seed, about 3,000 ticks. No long run, ensemble, mature-world viability or benefit claim.
+- No interactive visit with a real (non-headless) user browser.
+
+**Push.** All checks passed and the 26 outgoing commits matched this record, so main was pushed
+without force: `dbe229e..3f65f8c`. The integration worktree, its branch and all untracked
+evidence were kept.
