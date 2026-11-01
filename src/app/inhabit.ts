@@ -208,7 +208,11 @@ export class InhabitDriver {
     readonly game: Game,
     readonly cfg: InhabitConfig,
     private readonly model: ModelClient = cfg.manual ? manualModel() : httpModel(cfg),
-  ) {}
+  ) {
+    game.subscribe(e=>{
+      if(e==='beforeWorldChange'&&!this.over)this.end('finished','world changed; the previous session ended before the swap');
+    });
+  }
 
   /** the hand-control handle, when this person is answered by hand */
   manual(): ManualModel | null {
@@ -232,11 +236,12 @@ export class InhabitDriver {
     game.setPlaying(false);
     const target = Math.round(this.cfg.fromDay * DAY);
     while (game.world.tick < target) {
+      if(this.over)return;
       game.advanceTicks(Math.min(120, target - game.world.tick));
       this.set('preparing', `fast-forwarding to day ${this.cfg.fromDay} (${Math.round((100 * game.world.tick) / Math.max(1, target))}%)`);
       await new Promise<void>((r) => setTimeout(r, 0));
     }
-    this.begin();
+    if(!this.over)this.begin();
   }
 
   private begin(): void {

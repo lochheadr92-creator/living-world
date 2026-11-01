@@ -159,3 +159,31 @@ build pass; the existing bundle-size advisory remains. The ordinary screens at 1
 record 162/130/154 participant endings through tick 12120, with exact saved
 continuation and conservation. Meadow Talia retains a non-kin game with Eli at 7804;
 forest Talia retains two non-kin games. These establish ordinary activation only.
+
+## App boundary found while restoring the final saved world
+
+After the complete visit was exported, the development page reloaded. Loading the
+saved day-five world while the new page held an unanswered day-two decision left that
+old decision visible and its controller attached. A later answer could rewind the app
+back into the replaced world. This was reproduced through the actual Load button.
+
+`Game` now emits a boundary event before a restart or successful restore replaces the
+world. `InhabitDriver` ends its session against the old world, releases the pending
+manual request and tick hooks, and ignores late completions. Initial fast-forward also
+stops if the world changes while it is yielding. This is an app controller lifecycle
+repair, not a simulation rule change; rules remain 120 and the completed life recording
+remains tied to runtime `7cd424b`.
+
+Three new contracts cover pending Load, pending New World and a load during initial
+preparation. The first two also strictly replay the closed old session and prove that
+late answers cannot mutate the replacement world. Together with existing controller
+and current-world contracts: 33/33 pass across five files. Save/storage/lineage checks
+pass separately 26/26 across three files. TypeScript/build pass. The actual browser
+Load now shows “world changed; the previous session ended before the swap” and
+“Nothing to decide just now” at day 5; `world-load-fixed.txt/.jpg` preserve the result.
+
+Final full regression after this app correction: **380 files passed, 1 skipped;
+2,380 tests passed, 1 todo; exit 0; 351.90 seconds**. No further runtime changes
+followed that run. The final working branch retains both completed-life transcripts,
+their strict replay evidence, the unchanged rules-119 reference and the new app
+boundary regression tests.

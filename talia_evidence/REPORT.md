@@ -16,7 +16,7 @@ its untracked evidence were preserved. Main was not merged or pushed.
 Rules 119 (`3b78731`) adds the childhood capability and food/replay/quiet/clock repairs.
 Its complete three-day browser visit revealed a further resumed-gathering result defect.
 Rules 120 repairs that defect while retaining the immutable rules-119 continuation.
-Final source, settings, artifact hashes and commands are recorded in `provenance.json`.
+Life-test source, settings, artifact hashes and commands are recorded in `provenance.json`.
 
 ## What changed, and what it means to an inhabitant
 
@@ -129,8 +129,8 @@ gets enough family time or that childhood welfare improves across mature worlds.
 
 ## Verification and reproduction
 
-Final rules-120 full suite: **379 files passed, 1 skipped; 2,377 tests passed, 1 todo;
-exit 0; 316.78 seconds**. TypeScript and production build pass. The existing skipped
+Final branch full suite, including the app world-change repair: **380 files passed,
+1 skipped; 2,380 tests passed, 1 todo; exit 0; 351.90 seconds**. TypeScript and production build pass. The existing skipped
 file, todo, timeout-overflow warning in the budget test and bundle-size advisory were
 not changed. Focused childhood/food/resumption/continuation coverage passes 38/38.
 The complete earlier rules-119 run also passed (377 files, 2,372 tests); its additional
@@ -159,6 +159,28 @@ saves and development logs) are preserved locally at
 `C:\dev\Claude Experiment\living-world-talia-diagnostics-20261101` with a README.
 They are separate from the final acceptance evidence committed on this branch.
 The final build also strictly replays the complete rules-119 transcript unchanged.
+
+### Saved-world controller boundary
+
+Restoring the final save exposed a further app issue: a pending decision from a newly
+started world remained visible after Load. The controller could subsequently rewind
+over the loaded world. The final app now ends the prior session before any successful
+world replacement, records its end against the old world, clears the pending request
+and prevents a late answer from replacing the loaded world. Initial fast-forward is
+also cancelled when a world is replaced.
+
+This app-only correction leaves the simulation rules and the 38-decision recording
+unchanged. The new Load/New World/initial-preparation contracts, existing controller
+tests and current-world tests pass 33/33; save/storage/lineage tests pass 26/26; build
+passes. The browser test starts with an unanswered decision, loads the saved day-five
+world, and visibly confirms the old session has ended with no decision left waiting.
+See `world-load-fixed.txt`, `world-load-fixed.jpg`, `world-change-tests.log` and
+`world-change-save-tests.log`. The earlier completed-life provenance remains `7cd424b`;
+this later app repair is separately committed.
+
+The full suite was then rerun on the final app source: 380 files and 2,380 tests pass
+(one existing skipped file and one todo), exit 0, 351.90 seconds. The raw result is
+`full-suite-final-app.log` with exit status in `full-suite-final-app.exit`.
 
 ## Talia's feelings
 

@@ -1,0 +1,171 @@
+- generic "The simulated world"
+- heading "Living World" [level=1]
+- 'button "World menu. Current seed: meadow"':
+  - generic: meadow
+- button "Copy seed":
+- button "Help and controls":
+- button "Fold the top bar":
+- group "World summary":
+  - generic: 07:11
+  - generic: Day 5 · dawn
+  - generic: Rain
+  - generic: 7 °C
+  - generic: 29 people
+  - generic: 9 children · 2 elders
+  - generic: 12 households
+  - generic: 14 homes
+- toolbar "Time controls":
+  - button "Play":
+  - button "Step forward one tick":
+  - group "Simulation speed":
+    - button "Speed 0.5×": 0.5×
+    - button "Speed 1×": 1×
+    - button "Speed 2×": 2×
+    - button "Speed 4×": 4×
+    - button "Speed 8×": 8×
+    - button "Speed 16×" [pressed]: 16×
+- status:
+  - generic: Paused
+- region "AI inhabitant":
+  - generic: AI inhabitant
+  - generic: Talia · by hand · notes
+  - generic: finished
+  - generic: world changed; the previous session ended before the swap · day 5 07:11
+  - generic: Your turn
+  - generic: Nothing to decide just now.
+  - generic: "inferences: 0 new, 0 kept, 0 up, 0 down, 0 revised, 0 dropped · decisions 0, proposed 0, engine 0, refused 0"
+  - button "Save transcript"
+- region "Happenings feed":
+  - button "Happenings" [expanded]:
+    - generic: Happenings
+  - group "Filter happenings by kind":
+    - button "All" [pressed]
+    - button "Life"
+    - button "Social"
+    - button "Build & farm"
+    - button "Workshops"
+    - button "Danger & conflict"
+    - button "Nature"
+    - button "Chronicle"
+  - log "Recent happenings":
+    - button "Pavel warned Eli about a wolf. (22 world min ago). Show where.":
+      - generic: Pavel warned Eli about a wolf.
+      - generic: 22 world min ago
+    - button "Crops are ripening in the Brook field. (1 world h 53 min ago). Show where.":
+      - generic: Crops are ripening in the Brook field.
+      - generic: 1 world h 53 min ago
+    - 'button "Pia has what they hoped for: a solid home of their own. (8 world h 53 min ago). Show where."':
+      - generic: "Pia has what they hoped for: a solid home of their own."
+      - generic: 8 world h 53 min ago
+    - button "Jonas and Sofia are on good terms again (it faded with time). (10 world h 19 min ago). Show where.":
+      - generic: Jonas and Sofia are on good terms again (it faded with time).
+      - generic: 10 world h 19 min ago
+    - button "Rain begins to fall. (10 world h 35 min ago). Show where.":
+      - generic: Rain begins to fall.
+      - generic: 10 world h 35 min ago
+    - button "Zeke gave 1 fish to Quinn. (12 world h 36 min ago). Show where.":
+      - generic: Zeke gave 1 fish to Quinn.
+      - generic: 12 world h 36 min ago
+    - button "Rafe and Wes are on good terms again (it faded with time). (12 world h 46 min ago). Show where.":
+      - generic: Rafe and Wes are on good terms again (it faded with time).
+      - generic: 12 world h 46 min ago
+    - button "Sven brought in the first harvest. (13 world h 8 min ago). Show where.":
+      - generic: Sven brought in the first harvest.
+      - generic: 13 world h 8 min ago
+    - button "Zed marked out a lean-to for the Alder household. (15 world h 1 min ago). Show where.":
+      - generic: Zed marked out a lean-to for the Alder household.
+      - generic: 15 world h 1 min ago
+    - button "Isla marked out a hut for the Sedge household. (15 world h 7 min ago). Show where.":
+      - generic: Isla marked out a hut for the Sedge household.
+      - generic: 15 world h 7 min ago
+    - button "Alma finished a hut for the Hazel household. (15 world h 16 min ago). Show where.":
+      - generic: Alma finished a hut for the Hazel household.
+      - generic: 15 world h 16 min ago
+    - button "Crops are ripening in the Juniper field. (15 world h 33 min ago). Show where.":
+      - generic: Crops are ripening in the Juniper field.
+      - generic: 15 world h 33 min ago
+    - button "Pia finished a hut for the Sorrel household. (17 world h 10 min ago). Show where.":
+      - generic: Pia finished a hut for the Sorrel household.
+      - generic: 17 world h 10 min ago
+    - button "Felix gave 2 fish to Zeke. (17 world h 34 min ago). Show where.":
+      - generic: Felix gave 2 fish to Zeke.
+      - generic: 17 world h 34 min ago
+    - button "Isla warned Zeke about a wolf. (18 world h 35 min ago). Show where.":
+      - generic: Isla warned Zeke about a wolf.
+      - generic: 18 world h 35 min ago
+    - button "Yara made a basket. (18 world h 53 min ago). Show where.":
+      - generic: Yara made a basket.
+      - generic: 18 world h 53 min ago
+    - button "Quinn promised Wes grain. (22 world h 18 min ago). Show where.":
+      - generic: Quinn promised Wes grain.
+      - generic: 22 world h 18 min ago
+    - button "Vik gave 1 berries to Zeke. (23 world h 50 min ago). Show where.":
+      - generic: Vik gave 1 berries to Zeke.
+      - generic: 23 world h 50 min ago
+    - button "Talia and Felix argued over the last berries. (23 world h 51 min ago). Show where.":
+      - generic: Talia and Felix argued over the last berries.
+      - generic: 23 world h 51 min ago
+    - 'button "Maren has what they hoped for: a solid home of their own. (1 world day 1 h 40 min ago). Show where."':
+      - generic: "Maren has what they hoped for: a solid home of their own."
+      - generic: 1 world day 1 h 40 min ago
+    - button "Pia warned Abel about a wolf. (1 world day 3 h 49 min ago). Show where.":
+      - generic: Pia warned Abel about a wolf.
+      - generic: 1 world day 3 h 49 min ago
+    - button "Clouds gather overhead. (1 world day 7 h 44 min ago). Show where.":
+      - generic: Clouds gather overhead.
+      - generic: 1 world day 7 h 44 min ago
+    - button "Alma marked out a hut for the Hazel household. (1 world day 12 h 27 min ago). Show where.":
+      - generic: Alma marked out a hut for the Hazel household.
+      - generic: 1 world day 12 h 27 min ago
+    - button "Maren has taken Dax on as an apprentice at building. (1 world day 13 h 13 min ago). Show where.":
+      - generic: Maren has taken Dax on as an apprentice at building.
+      - generic: 1 world day 13 h 13 min ago
+    - button "Maren finished a hut for the Thistle household. (1 world day 13 h 13 min ago). Show where.":
+      - generic: Maren finished a hut for the Thistle household.
+      - generic: 1 world day 13 h 13 min ago
+    - button "Sofia made a basket. (1 world day 15 h 56 min ago). Show where.":
+      - generic: Sofia made a basket.
+      - generic: 1 world day 15 h 56 min ago
+    - button "Jax warned Rafe about a wolf. (1 world day 19 h 45 min ago). Show where.":
+      - generic: Jax warned Rafe about a wolf.
+      - generic: 1 world day 19 h 45 min ago
+    - button "Dax promised Mona stone. (1 world day 21 h 7 min ago). Show where.":
+      - generic: Dax promised Mona stone.
+      - generic: 1 world day 21 h 7 min ago
+    - button "A traveller, Zed, arrives at the settlement. (1 world day 21 h 53 min ago). Show where.":
+      - generic: A traveller, Zed, arrives at the settlement.
+      - generic: 1 world day 21 h 53 min ago
+    - button "Felix made a basket. (1 world day 22 h 22 min ago). Show where.":
+      - generic: Felix made a basket.
+      - generic: 1 world day 22 h 22 min ago
+- button "Hide the inspector" [expanded]:
+- complementary "Inspector":
+  - heading "Look inside the world" [level=2]
+  - paragraph: Click a person, a building, a field or a resource to look inside.
+  - paragraph:
+    - text: Press
+    - generic: "?"
+    - text: for the controls.
+- button "Map" [expanded]:
+- img "Map of the whole world. Click or drag to move the camera."
+- group "Map overlays":
+  - button "Perception overlay":
+    - generic: Perception
+  - button "Paths overlay":
+    - generic: Paths
+  - button "Intentions overlay":
+    - generic: Intentions
+  - button "Knowledge overlay":
+    - generic: Knowledge
+  - button "Labels overlay":
+    - generic: Labels
+- generic "View"
+- option "Automatic" [selected]
+- option "Selected person only"
+- option "Hidden"
+- option "Normal" [selected]
+- option "Large"
+- option "Standard" [selected]
+- option "High"
+- status:
+  - generic: Loaded the saved world (seed meadow, day 5)

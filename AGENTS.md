@@ -7,6 +7,8 @@ starts at Pavel's rules-117 commit `c3f1310`; rules 118 belongs to the separate 
 lineage and is intentionally unsupported here. Read the feature's verification record
 and `talia_evidence/REPORT.md` for the rendered visit and its exact limits. Rules 120
 add truthful partial outcomes when gathering resumes after paid units were acquired.
+Load and New World now close the previous inhabitant controller before replacing its
+world; preserve the pending-answer and initial-preparation regression contracts.
 The immutable rules-119 reference was committed at `3b78731` before that repair. The earlier
 [Pavel record](docs/PAVEL_LIVED_LIFE.md) remains historical evidence. This increment
 does not close the wider repair/autonomy programme or authorize integration into main.

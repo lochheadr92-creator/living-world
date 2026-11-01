@@ -55,7 +55,7 @@ export interface CameraState {
   zoom: number;
 }
 
-export type GameEvent = 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'viewer' | 'follow' | 'scene' | 'debug' | 'step';
+export type GameEvent = 'beforeWorldChange' | 'restart' | 'play' | 'speed' | 'select' | 'overlay' | 'viewer' | 'follow' | 'scene' | 'debug' | 'step';
 
 /** around each tick the clock runs (an outside driver's hooks, src/app/inhabit.ts); `afterTick` returning false ends the frame's stepping */
 export interface TickHooks {
@@ -259,6 +259,7 @@ export class Game {
 
   // ── worlds ──
   restart(opts: Partial<Settings> = {}): void {
+    this.emit('beforeWorldChange');
     // A restart creates a new current world. Explicit diagnostic settings can still request legacy rules;
     // restoring an existing save uses restoreWorld instead and never passes through this default.
     // a restart makes a NEW world: the current rules generation, whatever the world being left was running
@@ -276,6 +277,7 @@ export class Game {
 
   /** Swap in a world that was loaded from a save. */
   restoreWorld(world: World, settings: Settings): void {
+    this.emit('beforeWorldChange');
     this.settings = { ...settings };
     this.world = world;
     this.acc = 0;

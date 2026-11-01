@@ -2,6 +2,7 @@ import {readFileSync,writeFileSync,existsSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {sourcesFingerprint} from '../scripts/inhabit/sources';
+if(existsSync('talia_evidence/provenance.json'))throw new Error('Refusing to rebind an already recorded life to newer sources');
 const t=JSON.parse(readFileSync('talia_evidence/final-transcript.json','utf8'));
 const v=JSON.parse(readFileSync('talia_evidence/final-transcript-verified.json','utf8'));
 execFileSync('git',['diff','--exit-code','HEAD','--','src','scripts/lab/lab.ts']);
