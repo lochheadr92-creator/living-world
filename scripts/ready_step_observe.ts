@@ -18,7 +18,7 @@ if(!seed||!out||existsSync(out)||!Number.isInteger(days)||days<1||days>365||!Num
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/ready_step_observe.ts','scripts/observers/time_budget.ts').sort();
 const manifest=()=>sourceManifest(files),source=manifest();
 const inputRaw=input?readFileSync(input,'utf8'):undefined;
-const w=inputRaw?deserializeWorld(inputRaw):createWorld(currentWorldSettings('normal',seed,{immigration:false})),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
+const w=inputRaw?deserializeWorld(inputRaw):createWorld(currentWorldSettings('normal',seed)),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
 if(w.settings.seed!==seed||w.tick>=days*2400)throw new Error('Input seed must match and precede the target day');
 const from=w.tick;
 const counts:Record<string,number>={},stories:unknown[]=[],plansSeen=new Set<number>();let samples=0,pureChecks=0;

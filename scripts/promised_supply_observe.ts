@@ -17,7 +17,7 @@ const [seed,out,daysArg='5',budgetArg='170',rulesArg='']=process.argv.slice(2).f
 if(!seed||!out||existsSync(out)||!Number.isInteger(days)||days<1||days>365||!Number.isFinite(budget)||budget<=0)throw new Error('Seed, fresh output, integer days 1..365 and positive seconds budget required');
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/promised_supply_observe.ts','scripts/observers/time_budget.ts').sort();
 const manifest=()=>sourceManifest(files),source=manifest();
-const settings=currentWorldSettings('normal',seed,{immigration:false});if(rulesArg)settings.rulesVersion=Number(rulesArg);
+const settings=currentWorldSettings('normal',seed);if(rulesArg)settings.rulesVersion=Number(rulesArg);
 const w=createWorld(settings),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
 const counts:Record<string,number>={},stories:unknown[]=[],requestsSeen=new Set<string>();let samples=0,pureChecks=0;
 const count=(key:string,n=1)=>counts[key]=(counts[key]??0)+n,story=(event:unknown)=>{if(stories.length<160)stories.push(event);};
