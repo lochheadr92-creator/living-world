@@ -50,7 +50,7 @@ export function describeTargetEvidence(k:PromiseTargetEvidence|undefined):string
  return k?` Target evidence: ${k.source}, ${k.kind} #${k.targetId}, tick ${k.tick}, at (${k.x}, ${k.y}).`:'';
 }
 export function validateTargetEvidence(w:World,k:PromiseTargetEvidence,maxTick=w.tick):void{
- if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,83)||!k||!Number.isSafeInteger(k.targetId)||k.targetId<=0||!['building','site'].includes(k.kind)||!Number.isSafeInteger(k.tick)||k.tick<0||k.tick>maxTick||!Number.isFinite(k.x)||!Number.isFinite(k.y)||k.x<0||k.y<0||k.x>w.W||k.y>w.H||!['observed absence','completed here',...(runsRulesVersion(w,117)?['observed completion']:[])].includes(k.source)||(k.source==='completed here'||k.source==='observed completion')&&k.kind!=='site')throw new Error('Invalid personal promise target evidence');
+ if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,83)||!k||!Number.isSafeInteger(k.targetId)||k.targetId<=0||!['building','site'].includes(k.kind)||!Number.isSafeInteger(k.tick)||k.tick<0||k.tick>maxTick||!Number.isFinite(k.x)||!Number.isFinite(k.y)||k.x<0||k.y<0||k.x>w.W||k.y>w.H||!['observed absence','completed here',...(runsRulesVersion(w,119)?['observed completion']:[])].includes(k.source)||(k.source==='completed here'||k.source==='observed completion')&&k.kind!=='site')throw new Error('Invalid personal promise target evidence');
 }
 export function validatePromiseTargets(w:World):void{
  for(const p of w.persons)for(const c of p.commitments)if(c.targetEvidence!==undefined){const k=c.targetEvidence,t=promiseTarget(c);validateTargetEvidence(w,k);if(!t||t.id!==k.targetId||t.kind!==k.kind||k.tick<c.made)throw new Error('Target evidence does not match promise');}

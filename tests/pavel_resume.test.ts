@@ -15,7 +15,7 @@ import {relOf} from '../src/sim/relations';
 import {updateEnvironment} from '../src/sim/environment';
 
 it('an actual received basket permits the elder to resume and physically make the formerly impossible pick',()=>{
- const s=stage('pavel-physical-resume'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=117;w.tick=1000;updateEnvironment(w);
+ const s=stage('pavel-physical-resume'),w=s.w;w.settings.dynamics='rich';w.settings.rulesVersion=119;w.tick=1000;updateEnvironment(w);
  const p=addPerson(s,'Pavel',40,40,{age:71,inv:{wood:2},hunger:100,thirst:100,energy:100}),q=addPerson(s,'Dax',41,40,{age:30,hunger:100,thirst:100,energy:100});give(w,q,'basket');
  const home=building(s,'hut',34,34,p.hhId,{grain:12});w.households.find(h=>h.id===p.hhId)!.homeId=home.id;
  const rock=makeSource(w,'rock',43,43,10),trees=[makeSource(w,'tree',44,40,10),makeSource(w,'tree',44,42,10),makeSource(w,'tree',42,44,10)];

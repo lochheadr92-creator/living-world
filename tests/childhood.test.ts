@@ -67,7 +67,7 @@ it.each(['separation','urgent need','interrupted'] as const)('does not award a l
 });
 it('keeps observer calls pure, old rules and the lab removal unchanged, and urgent relief first',()=>{
  const {w,p,offer}=scene();const before=serializeWorld(w);for(let i=0;i<3;i++)offer();expect(serializeWorld(w)).toBe(before);
- w.settings.rulesVersion=117;expect(offer()).toBeUndefined();w.settings.rulesVersion=CURRENT_RULES_VERSION;
+ w.settings.rulesVersion=119;expect(offer()).toBeUndefined();w.settings.rulesVersion=CURRENT_RULES_VERSION;
  try{setChildhood(false);expect(offer()).toBeUndefined();}finally{setChildhood(true);}
  p.needs.thirst=2;expect(offer()).toBeUndefined();
 });
@@ -107,5 +107,5 @@ it('uses world-clock ages in both inspector paths while preserving old controlle
  const {w,p,q}=scene();w.tick=5000;p.lastInteraction={tick:4800,partner:q.id,purpose:'family_time',role:'asked',outcome:'completed',detail:''};
  const before=serializeWorld(w);expect(agoText(w,4800)).toBe('2 world h ago');expect(interactionViews(w,p).previous?.when).toBe('2 world h ago');
  expect(observedAge(w,5,4950)).toBe('5s ago');expect(serializeWorld(w)).toBe(before);
- w.settings.rulesVersion=117;expect(agoText(w,4800)).toBe('20s ago');
+ w.settings.rulesVersion=119;expect(agoText(w,4800)).toBe('20s ago');
 });

@@ -88,7 +88,7 @@ export function childTimeReport(c:Conversation,interrupted:boolean):{text:string
 }
 
 export function validateChildhood(w:World):void{
- const allowed=()=>w.settings.dynamics==='rich'&&runsRulesVersion(w,119);
+ const allowed=()=>w.settings.dynamics==='rich'&&runsRulesVersion(w,120);
  for(const p of w.persons){let count=0;
   for(const r of Object.values(p.relations)){if(!r.childhood)continue;count++;
    if(!allowed()||!Array.isArray(r.childhood)||r.childhood.length>3||new Set(r.childhood.map(e=>e.kind)).size!==r.childhood.length||r.childhood.some(e=>!isChildTime(e.kind)||!Number.isSafeInteger(e.last)||e.last<0||e.last>w.tick||!Number.isSafeInteger(e.times)||e.times<1||e.times>3))throw new Error('Invalid childhood experience');

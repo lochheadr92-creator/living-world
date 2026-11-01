@@ -47,7 +47,7 @@ export function prepareRoutine(w:World,p:Person,a:Activity,o:Option):void{
  // These are remembered measurements, not live needs. The fingerprint already
  // measures live needs to four decimals; retaining engine-specific last bits here
  // made browser recordings fail headless replay despite identical observations.
- const measure=(n:number)=>runsRulesVersion(w,119)?Math.round(n*10000)/10000:n;
+ const measure=(n:number)=>runsRulesVersion(w,120)?Math.round(n*10000)/10000:n;
  a.data.dailyRoutine={key:o.key,label:o.label.slice(0,120),kind:a.kind,target:o.targetId,phase:phase(w.tick),context:routineContext(w,p),eta:measure(o.eta),energy:measure(p.needs.energy),warmth:measure(p.needs.warmth)} satisfies RoutineStart;
 }
 function achieved(p:Person,a:Activity,s:RoutineStart,outcome:string):boolean{

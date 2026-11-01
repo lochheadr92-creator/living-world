@@ -51,7 +51,7 @@ import {describeRoutines} from './daily_routines';
 export type Selection = { kind: 'none' } | { kind: 'entity'; id: number };
 
 export function agoText(world: World, tick: number): string {
-  return runsRulesVersion(world,119)?worldAge(world.tick,tick):legacyAgeText(world,tick);
+  return runsRulesVersion(world,120)?worldAge(world.tick,tick):legacyAgeText(world,tick);
 }
 /** Historical controller observations retain their original seconds-at-1x wording. */
 export function legacyAgeText(world:World,tick:number):string{

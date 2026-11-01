@@ -17,6 +17,6 @@ export function recordNightShelter(w:World,p:Person,i:Intention):void{
 }
 export function validateNightExperience(w:World):void{
  for(const p of w.persons)for(const i of p.intentions??[]){const t=i.shelterChecked;if(t===undefined)continue;
-  if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,117)||i.kind!=='night'||!Number.isSafeInteger(t)||t<i.since||t>w.tick)throw new Error('Invalid personal shelter accounting');
+  if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,119)||i.kind!=='night'||!Number.isSafeInteger(t)||t<i.since||t>w.tick)throw new Error('Invalid personal shelter accounting');
  }
 }

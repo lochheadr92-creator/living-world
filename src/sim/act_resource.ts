@@ -144,7 +144,7 @@ registerHandler('gather', {
       if (err.startsWith('someone')) a.data.contest = true;
       // Resuming after company re-enters begin. Earlier paid units still belong
       // to this activity, just as when a later cycle runs out during work.
-      if (world.settings.dynamics==='rich' && runsRulesVersion(world,120) && a.cycle>0) {
+      if (world.settings.dynamics==='rich' && runsRulesVersion(world,121) && a.cycle>0) {
         endActivity(world,p,'partial',err);return;
       }
       return err;

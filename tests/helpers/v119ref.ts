@@ -1,4 +1,4 @@
-// Rules-119 reference: record once on the completed increment, never update for successor behaviour.
+// Immutable rules-119 (Pavel) ordinary company and shelter continuation; never rewrite after recording.
 import {createHash} from 'node:crypto';
 import {createWorld} from '../../src/sim/factory';
 import {currentWorldSettings} from '../../src/sim/profiles';
@@ -10,11 +10,12 @@ export function v119Continuation(){
  const digest=(w:World)=>createHash('sha256').update(serializeWorld(w)).digest('hex');
  const w=createWorld({...currentWorldSettings('normal','meadow',{immigration:true}),rulesVersion:119});
  for(let n=0;n<3000;n++)stepWorld(w);
- const experiences=w.persons.flatMap(p=>Object.values(p.relations).flatMap(r=>r.childhood??[]));
- if(!experiences.some(e=>e.kind==='family_time')||!experiences.some(e=>e.kind==='play_together')||!experiences.some(e=>e.kind==='learn_foraging'))throw new Error('Reference did not exercise childhood');
+ const company=w.persons.reduce((n,p)=>n+Object.values(p.relations).filter(r=>r.company).length,0);
+ const nightExperience=w.persons.reduce((n,p)=>n+p.intentions.filter(i=>i.shelterChecked!==undefined).length,0);
+ if(!company||!nightExperience)throw new Error('Reference did not exercise company and night experience');
  const saved=digest(w),copy=deserializeWorld(serializeWorld(w));
  for(let n=0;n<120;n++){stepWorld(w);stepWorld(copy);}
  const uninterrupted=digest(w),continued=digest(copy);
  if(uninterrupted!==continued||!conservationReport(w).ok||!conservationReport(copy).ok)throw new Error('Invalid rules-119 continuation');
- return {experiences:experiences.length,saved,uninterrupted,continued};
+ return {company,nightExperience,saved,uninterrupted,continued};
 }

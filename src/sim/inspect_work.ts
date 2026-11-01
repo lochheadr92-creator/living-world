@@ -111,7 +111,7 @@ export function itemsText(items: Items): string {
 }
 
 function ago(world: World, tick: number): string {
-  if(runsRulesVersion(world,119))return worldAge(world.tick,tick);
+  if(runsRulesVersion(world,120))return worldAge(world.tick,tick);
   const d = world.tick - tick;
   if (d < 40) return 'just now';
   if (d < 600) return `${Math.round(d / 10)}s ago`;
@@ -121,7 +121,7 @@ function ago(world: World, tick: number): string {
 
 function inFuture(world: World, tick: number): string {
   const d = tick - world.tick;
-  if(runsRulesVersion(world,119))return d<=0?'now':`in ${worldDuration(d)}`;
+  if(runsRulesVersion(world,120))return d<=0?'now':`in ${worldDuration(d)}`;
   if (d <= 0) return 'now';
   if (d < 600) return `in ${Math.round(d / 10)}s`;
   return `in ${Math.round((d / 600) * 10) / 10} min`;

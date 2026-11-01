@@ -359,7 +359,7 @@ export interface Intention {
   handoverId?: number;
   /** ticks actually spent sheltering for this plan, credited by the activity itself as it ends or is set aside */
   sheltered: number;
-  /** Last physical night-shelter accounting tick (rules 117). */
+  /** Last physical night-shelter accounting tick (rules 119). */
   shelterChecked?: number;
   /**
    * What this person's own hands put into the thing, credited where the work really happens: condition put back for a repair

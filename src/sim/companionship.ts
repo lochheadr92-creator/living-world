@@ -38,10 +38,10 @@ export function companyProgress(w:World,p:Person):number{
 export function validateCompany(w:World):void{
  for(const p of w.persons){let count=0;
   for(const r of Object.values(p.relations)){const c=r.company;if(!c)continue;count++;
-   if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,117)||![c.first,c.last,c.days,c.helped].every(Number.isSafeInteger)||c.first<0||c.last<c.first||c.last>w.tick||c.days<1||c.days>3||c.helped<0||c.helped>3)throw new Error('Invalid continuing-company experience');
+   if(w.settings.dynamics!=='rich'||!runsRulesVersion(w,119)||![c.first,c.last,c.days,c.helped].every(Number.isSafeInteger)||c.first<0||c.last<c.first||c.last>w.tick||c.days<1||c.days>3||c.helped<0||c.helped>3)throw new Error('Invalid continuing-company experience');
   }
   if(count>4)throw new Error('Too many continuing-company records');
   const h=p.goal?.companyHope;
-  if(h&&(w.settings.dynamics!=='rich'||!runsRulesVersion(w,117)||p.goal?.kind!=='family'||!Number.isSafeInteger(h.since)||h.since<0||h.since>w.tick||!Number.isSafeInteger(h.from)||h.from<=0))throw new Error('Invalid company hope');
+  if(h&&(w.settings.dynamics!=='rich'||!runsRulesVersion(w,119)||p.goal?.kind!=='family'||!Number.isSafeInteger(h.since)||h.since<0||h.since>w.tick||!Number.isSafeInteger(h.from)||h.from<=0))throw new Error('Invalid company hope');
  }
 }

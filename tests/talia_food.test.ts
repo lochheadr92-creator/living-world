@@ -24,7 +24,7 @@ it('does not donate a promised fish or grant access to another household store',
  expect(generateOptions(w,p).options.some(o=>o.key===`deposit:${home.id}:food`)).toBe(false);
  p.commitments=[];p.beliefs[home.id].hh=999;expect(generateOptions(w,p).options.some(o=>o.key===`deposit:${home.id}:food`)).toBe(false);
 });
-it('keeps the predecessor food offers unchanged',()=>{const {w,p,home}=child(117);expect(generateOptions(w,p).options.some(o=>o.key===`deposit:${home.id}:food`)).toBe(false);});
+it('keeps the predecessor food offers unchanged',()=>{const {w,p,home}=child(119);expect(generateOptions(w,p).options.some(o=>o.key===`deposit:${home.id}:food`)).toBe(false);});
 it('lets a hungry child eat their own food despite a sibling, with the old rule retained by the lab removal',()=>{
  const s=stage('child-breakfast');s.w.settings.dynamics='rich';s.w.settings.rulesVersion=CURRENT_RULES_VERSION;
  const p=addPerson(s,'Talia',40,40,{age:8,inv:{berries:2},hunger:45});addPerson(s,'Wes',41,40,{age:10,hh:p.hhId});done(s);
