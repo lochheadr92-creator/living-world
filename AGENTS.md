@@ -5,7 +5,9 @@ returns, quiet boundaries and replay/clock repairs are recorded in
 [docs/TALIA_LIVED_CHILDHOOD.md](docs/TALIA_LIVED_CHILDHOOD.md). This separate branch
 starts at Pavel's rules-117 commit `c3f1310`; rules 118 belongs to the separate repair
 lineage and is intentionally unsupported here. Read the feature's verification record
-and `talia_evidence/REPORT.md` for the rendered visit and its exact limits. The earlier
+and `talia_evidence/REPORT.md` for the rendered visit and its exact limits. Rules 120
+add truthful partial outcomes when gathering resumes after paid units were acquired.
+The immutable rules-119 reference was committed at `3b78731` before that repair. The earlier
 [Pavel record](docs/PAVEL_LIVED_LIFE.md) remains historical evidence. This increment
 does not close the wider repair/autonomy programme or authorize integration into main.
 
@@ -19,7 +21,7 @@ tasks stay focused; they do not require an added mechanic. This is no extra appr
 
 Historical baseline (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
 after 114 hungry ripe-grain harvest; the autonomy/environment programme continues from the register.
-Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules were 115 at that checkpoint; this branch now uses 117.
+Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules were 115 at that checkpoint; this branch now uses 120.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 

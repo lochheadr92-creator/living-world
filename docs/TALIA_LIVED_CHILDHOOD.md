@@ -81,6 +81,15 @@ No simulation duration or rate was altered for this presentation repair.
 
 ## Verification record
 
+Existing modules touched, and why: social options and conversations expose and execute
+the new childhood owner's invitations; existing food options apply child carrying and
+self-care policy; temperament supplies quiet boundaries; relations/history/inspection
+show retained experiences; save and world hashing preserve and validate that state.
+Daily routines normalize captured measurements at their owner, and shared time text
+keeps the inspector and controller on the same world clock without changing old
+observations. The lab provides the childhood removal switch. The follow-up gather
+handler repair owns truthful credit for its previously acquired units.
+
 The frozen runtime passes `npx vitest run --maxWorkers=8`: **377 files passed,
 1 skipped; 2,372 tests passed, 1 todo; exit 0; 316.56 seconds**. The existing skip,
 todo and budget-test timeout-overflow warning were not changed. `npm run build`
@@ -118,3 +127,34 @@ activation, not aggregate welfare or mature-world benefit.
 The rendered manual visit and its strict replay are documented in
 [`../talia_evidence/REPORT.md`](../talia_evidence/REPORT.md). The original rules-117
 recording and both exploratory pilots remain separate from final acceptance evidence.
+
+## Repair found by inhabiting the completed increment: rules 120
+
+The complete rules-119 browser visit made 42 applied choices over ticks 2400–9600.
+Strict replay passed with final hash `074e00e6`, identical independently reconstructed
+saves, exact save round-trip and another 120 ticks of identical saved continuation;
+conservation passed. During that visit Talia caught one fish, paused for Wes's game,
+then resumed at an empty source. The paid fish remained in her pack, but the activity
+reported total failure and claimed the spot had been empty on arrival. This is a
+reproduced defect, not ordinary resource exhaustion.
+
+Rules 120 repairs the gather handler's re-entry: if paid gathering cycles already
+exist, a new acquisition blocker ends the activity as partial. The existing ending
+path releases claims, closes the decision and reports the units actually acquired.
+Zero paid cycles still fail. No food, progress or credit is manufactured. This also
+applies to non-social suspension because the gather handler owns the paid units.
+
+The rules-119 runtime, tests and immutable continuation were committed as `3b78731`
+before this change. That reference is never rewritten. The focused physical regression
+gathers a real unit, suspends and releases its claim, lets another person take the
+remaining unit, saves/reloads, then resumes both copies. It proves the retained unit,
+partial result, closed decision, exact saved continuation and conservation; rules 119
+retains its original failed result. Focused subsystem verification passes 38/38 across
+five files, including the 14 childhood contracts and immutable rules-119 reference.
+
+Final rules-120 full regression: **379 files passed, 1 skipped; 2,377 tests passed,
+1 todo; exit 0; 316.78 seconds**, using eight workers. TypeScript and the production
+build pass; the existing bundle-size advisory remains. The ordinary screens at 120
+record 162/130/154 participant endings through tick 12120, with exact saved
+continuation and conservation. Meadow Talia retains a non-kin game with Eli at 7804;
+forest Talia retains two non-kin games. These establish ordinary activation only.
