@@ -154,6 +154,11 @@ recorders were run once with `--write`; do not re-record them to accommodate suc
 
 ## Delivery boundary and rollback
 
+**Integrated (2 November 2026, owner instruction "merge all works into main"):** main was
+fast-forwarded `dbe229e..320c521` and then carries Pavel/Talia as rules 119-121 on top
+([PAVEL_TALIA_INTEGRATION.md](PAVEL_TALIA_INTEGRATION.md)). The record below describes the
+stage as delivered on its branch.
+
 Stage 3 remains on `stage-3-chain-fixes`; no merge or push was performed for this stage.
 Main remains `dbe229e`. No Stage 4 work started. Runtime findings are separate commits:
 F1 `52ec833`, A1-CART `fb74c8c`, E2 `8332614`, M3 `00219d1`, E3 `22bf6c6`, M1 `25622b2`.

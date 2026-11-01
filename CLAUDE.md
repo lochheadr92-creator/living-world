@@ -8,7 +8,11 @@ causal chain. Name both outcomes, complete the necessary connecting implementati
 repairs, and verify both. Dedicated repairs, compatibility, performance and documentation
 tasks stay focused; they do not require an added mechanic. This is no extra approval gate.
 
-Current state (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
+**Current main (2 November 2026): rules 121** — Stage 3 repairs 117-118, then Pavel's lived life 119,
+Talia's childhood 120 and resumed gathering credit 121 (numbered 117/119/120 on their branches); see
+[docs/PAVEL_TALIA_INTEGRATION.md](docs/PAVEL_TALIA_INTEGRATION.md).
+
+Historical baseline (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
 after 114 hungry ripe-grain harvest; the autonomy/environment programme continues from the register.
 Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules are 115.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.

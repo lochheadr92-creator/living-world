@@ -1,5 +1,11 @@
 # Pavel: achievable intentions and continuing relationships (rules 117)
 
+> **Integrated on main as rules 119 (2 November 2026).** Stage 3 took 117 and 118 first, so
+> this increment was renumbered from 117 to 119 at integration. "Rules 117" below and in
+> `pavel_evidence/` refers to the branch numbering and is historical evidence. Pavel's project
+> acquisition fix (`5d0bb78`) is the same change as Stage 3 F1 and now runs through
+> `hasProjectAcquire` from rules 117. See [PAVEL_TALIA_INTEGRATION.md](PAVEL_TALIA_INTEGRATION.md).
+
 Delivery branch: `feature/pavel-lived-life`, isolated worktree
 `C:\dev\Claude Experiment\living-world-pavel`. Base:
 `dbe229e75e805adab83a25518921c7ab2626a7f1` (rules 116).

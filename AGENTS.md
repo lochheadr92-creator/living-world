@@ -1,17 +1,16 @@
 # Living World: notes for Codex (read this first)
 
-**Talia branch increment (1 November 2026):** rules 119 childhood time, child food
-returns, quiet boundaries and replay/clock repairs are recorded in
-[docs/TALIA_LIVED_CHILDHOOD.md](docs/TALIA_LIVED_CHILDHOOD.md). This separate branch
-starts at Pavel's rules-117 commit `c3f1310`; rules 118 belongs to the separate repair
-lineage and is intentionally unsupported here. Read the feature's verification record
-and `talia_evidence/REPORT.md` for the rendered visit and its exact limits. Rules 120
-add truthful partial outcomes when gathering resumes after paid units were acquired.
-Load and New World now close the previous inhabitant controller before replacing its
-world; preserve the pending-answer and initial-preparation regression contracts.
-The immutable rules-119 reference was committed at `3b78731` before that repair. The earlier
-[Pavel record](docs/PAVEL_LIVED_LIFE.md) remains historical evidence. This increment
-does not close the wider repair/autonomy programme or authorize integration into main.
+**Current main (2 November 2026): rules 121.** Stage 3 chain repairs are rules 117-118
+([docs/STAGE3_CHAIN_FIXES.md](docs/STAGE3_CHAIN_FIXES.md)). Pavel's lived life
+([docs/PAVEL_LIVED_LIFE.md](docs/PAVEL_LIVED_LIFE.md)) is rules **119**, Talia's childhood
+([docs/TALIA_LIVED_CHILDHOOD.md](docs/TALIA_LIVED_CHILDHOOD.md)) is **120**, and resumed
+gathering credit is **121**. On their branches these were numbered 117, 119 and 120; the
+feature records and `pavel_evidence/`, `talia_evidence/` keep the old numbers as historical
+evidence. Renumbering, conflict resolution, save provenance (unmarked 119/120 saves are
+refused as ambiguous) and verification: [docs/PAVEL_TALIA_INTEGRATION.md](docs/PAVEL_TALIA_INTEGRATION.md).
+Load and New World close the previous inhabitant controller before replacing its world;
+preserve the pending-answer and initial-preparation regression contracts. The wider
+repair/autonomy programme remains incomplete.
 
 **Before planning, editing, committing or pushing:** read `WORKFLOW.md` and `PRODUCT_VISION.md`, including
 [Feature increments: new capability and stronger connections](PRODUCT_VISION.md#feature-increments-new-capability-and-stronger-connections).
@@ -23,7 +22,7 @@ tasks stay focused; they do not require an added mechanic. This is no extra appr
 
 Historical baseline (31 October 2026): rules 115 current hand-tool input retention (`PROJECT_HAND_INPUTS.md`),
 after 114 hungry ripe-grain harvest; the autonomy/environment programme continues from the register.
-Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules were 115 at that checkpoint; this branch now uses 120.
+Installed inhabitant quantity revisions use protocols 33/34, observation 18 (`PROJECT_REVISION.md`); autonomous rules were 115 at that checkpoint; main now uses 121.
 The valid staged recovery now builds and uses a replacement, but later ends in thirst; WS16 viability is not complete.
 Handoff provenance: [docs/CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
 

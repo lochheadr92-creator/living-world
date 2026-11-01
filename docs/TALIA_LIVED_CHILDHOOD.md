@@ -1,5 +1,11 @@
 # Talia: food that gets home, and time to be a child
 
+> **Integrated on main as rules 120 and 121 (2 November 2026).** Childhood (branch rules 119)
+> is now 120; resumed gathering credit (branch rules 120) is now 121; Pavel's 117 is now 119.
+> Version numbers below and in `talia_evidence/` are branch numbering and historical evidence.
+> Unmarked 119/120 saves from the branch build are refused as ambiguous. See
+> [PAVEL_TALIA_INTEGRATION.md](PAVEL_TALIA_INTEGRATION.md).
+
 ## Authority and starting point
 
 Owner instruction, 1 November 2026: implement Talia's requests in a separate branch,
