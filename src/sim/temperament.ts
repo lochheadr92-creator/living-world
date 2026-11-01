@@ -6,6 +6,8 @@
 // (sociability below 0.4) with much of it feels crowded (a thought) and sees an option to take some time alone: a walk to a
 // spot away from everyone and a while sitting there, after which the count is cleared and they feel the quiet. A sociable
 // person feels a full table more (meals.ts). An authored world never creates `p.crowd`.
+import {hasChildhood} from './childhood_rules';
+import {stageOf} from './people';
 import { newActivity, registerHandler } from './activities';
 import type { WorkResult } from './activities';
 import { DAY } from './constants';
@@ -84,16 +86,19 @@ export function crowdTick(world: World, p: Person): void {
 
 /** a tile at least ALONE_DIST from everyone, within reach, or null */
 function quietSpot(world: World, p: Person): { x: number; y: number } | null {
+  const child=hasChildhood(world)&&stageOf(world,p)==='child';
   // nearer first, then farther out: in a town of a hundred the quiet is at the edge of the woods, not in the lanes
   for (let i = 0; i < 18; i++) {
     const ang = hashUnit(p.id, world.tick, i) * Math.PI * 2;
-    const r = ALONE_DIST + 1 + hashUnit(p.id, world.tick, i + 20) * 10 + i;
+    const r = child?7+hashUnit(p.id,world.tick,i+20)*3:ALONE_DIST + 1 + hashUnit(p.id, world.tick, i + 20) * 10 + i;
     const x = Math.floor(p.x + Math.cos(ang) * r);
     const y = Math.floor(p.y + Math.sin(ang) * r);
     if (!isWalkable(world, x, y)) continue;
+    if(child&&!p.explored[y*world.W+x])continue;
     let ok = true;
-    for (const q of world.persons) {
-      if (q === p || !q.alive) continue;
+    for (const q of child?p.seen.filter(q=>q.ent==='person'):world.persons) {
+      if (q.id === p.id) continue;
+      if(!child&&'alive' in q&&!q.alive)continue;
       if (hyp(q.x - x - 0.5, q.y - y - 0.5) < ALONE_DIST) {
         ok = false;
         break;
@@ -106,8 +111,10 @@ function quietSpot(world: World, p: Person): { x: number; y: number } | null {
 
 export function aloneOptions(ctx: Ctx): void {
   const { world, p } = ctx;
-  if (!isRich(world) || !isReserved(p) || (p.crowd ?? 0) < CROWDED_AT) return;
-  if (ctx.criticals.length || ctx.dangers.length || ctx.night) return;
+  const child=hasChildhood(world)&&ctx.stage==='child';
+  const wantsQuiet=child&&p.mood?.thoughts.some(t=>t.kind==='crowded'&&t.until>world.tick)&&!p.mood?.thoughts.some(t=>t.kind==='quiet'&&t.until>world.tick);
+  if (!isRich(world) || !isReserved(p) || (p.crowd ?? 0) < CROWDED_AT&&!wantsQuiet) return;
+  if (ctx.criticals.length || (child?ctx.dangers.some(b=>hyp(b.x-p.x,b.y-p.y)<14):ctx.dangers.length) || ctx.night) return;
   const spot = quietSpot(world, p);
   if (!spot) return;
   const e = eta(ctx, spot.x + 0.5, spot.y + 0.5);

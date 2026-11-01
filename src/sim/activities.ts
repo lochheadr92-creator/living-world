@@ -424,7 +424,7 @@ export function endActivity(world: World, p: Person, outcome: 'success' | 'faile
   // anti-thrash: an option that just failed outright (or achieved nothing) is not re-picked straight away
   const optKey = a.data.optKey as string | undefined;
   if (optKey && (outcome === 'failed' || (outcome === 'partial' && a.cycle === 0 && a.progress < 4))) p.cooldowns['opt:' + optKey] = world.tick + 80;
-  if (a.kind !== 'converse' || outcome !== 'success') setResult(world, p, a.label, outcome, detail);
+  if (a.kind !== 'converse' || outcome !== 'success' || a.data.childhoodResult) setResult(world, p, a.label, outcome, detail);
   closeDecision(world, p, a, outcome, detail);
   if (outcome === 'failed' && !a.data.logged) addLog(world, p, 'work', `Gave up “${a.label}”: ${detail}.`);
   if (p.pose !== 'sleep' || outcome !== 'interrupted') p.pose = 'stand';

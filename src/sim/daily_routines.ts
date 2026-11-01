@@ -44,7 +44,11 @@ function changed(a:RoutineContext,b:RoutineContext):string{
 export function prepareRoutine(w:World,p:Person,a:Activity,o:Option):void{
  if(!hasRoutines(w)||!KINDS.includes(a.kind)||!Number.isFinite(o.eta)||o.eta<=0||o.key.length>160)return;
  if(a.data.projectWait||a.data.daylightAt||a.data.layoutWait||a.kind==='wander'&&!a.data.haunt)return;
- a.data.dailyRoutine={key:o.key,label:o.label.slice(0,120),kind:a.kind,target:o.targetId,phase:phase(w.tick),context:routineContext(w,p),eta:o.eta,energy:p.needs.energy,warmth:p.needs.warmth} satisfies RoutineStart;
+ // These are remembered measurements, not live needs. The fingerprint already
+ // measures live needs to four decimals; retaining engine-specific last bits here
+ // made browser recordings fail headless replay despite identical observations.
+ const measure=(n:number)=>runsRulesVersion(w,119)?Math.round(n*10000)/10000:n;
+ a.data.dailyRoutine={key:o.key,label:o.label.slice(0,120),kind:a.kind,target:o.targetId,phase:phase(w.tick),context:routineContext(w,p),eta:measure(o.eta),energy:measure(p.needs.energy),warmth:measure(p.needs.warmth)} satisfies RoutineStart;
 }
 function achieved(p:Person,a:Activity,s:RoutineStart,outcome:string):boolean{
  if(outcome!=='success')return false;

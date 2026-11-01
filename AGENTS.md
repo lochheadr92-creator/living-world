@@ -1,9 +1,13 @@
 # Living World: notes for Codex (read this first)
 
-**Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
-recorded in [docs/PAVEL_LIVED_LIFE.md](docs/PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
-repair checkpoint; it does not close the wider repair/autonomy programme. Rendered
-verification is currently unavailable because local browser use is disabled.
+**Talia branch increment (1 November 2026):** rules 119 childhood time, child food
+returns, quiet boundaries and replay/clock repairs are recorded in
+[docs/TALIA_LIVED_CHILDHOOD.md](docs/TALIA_LIVED_CHILDHOOD.md). This separate branch
+starts at Pavel's rules-117 commit `c3f1310`; rules 118 belongs to the separate repair
+lineage and is intentionally unsupported here. Read the feature's verification record
+and `talia_evidence/REPORT.md` for the rendered visit and its exact limits. The earlier
+[Pavel record](docs/PAVEL_LIVED_LIFE.md) remains historical evidence. This increment
+does not close the wider repair/autonomy programme or authorize integration into main.
 
 **Before planning, editing, committing or pushing:** read `WORKFLOW.md` and `PRODUCT_VISION.md`, including
 [Feature increments: new capability and stronger connections](PRODUCT_VISION.md#feature-increments-new-capability-and-stronger-connections).

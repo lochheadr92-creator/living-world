@@ -319,9 +319,10 @@ function fnv(h: number, s: string): number {
 const r4 = (v: number): string => (Math.round(v * 10000) / 10000).toString();
 
 /** A compact fingerprint of everything that matters. Same seed + settings + ticks => same hash. */
-export function hashWorld(world: World): string {
+export function hashWorld(world: World, trace?: (part: string) => void): string {
   let h = 2166136261;
   const push = (s: string) => {
+    trace?.(s);
     h = fnv(h, s);
   };
   push(`T${world.tick}|${world.rng.a},${world.rng.b},${world.rng.c},${world.rng.d}|${world.weather.kind}`);
@@ -370,6 +371,7 @@ export function hashWorld(world: World): string {
     for (const p of world.persons) {
       if (p.goal?.companyHope) push('CompanyHope'+p.id+':'+JSON.stringify(p.goal.companyHope));
       for (const [id,r] of Object.entries(p.relations)) if (r.company) push('Company'+p.id+':'+id+':'+JSON.stringify(r.company));
+      for (const [id,r] of Object.entries(p.relations)) if (r.childhood) push('Childhood'+p.id+':'+id+':'+JSON.stringify(r.childhood));
       for (const i of p.intentions) if (i.shelterChecked !== undefined) push('NightExperience'+p.id+':'+i.id+':'+i.shelterChecked+':'+i.sheltered);
     }
     // a plan's bearing on the world is its kind, its state and the step it is pressing for - not the words it is written in
@@ -463,6 +465,7 @@ export function hashWorld(world: World): string {
   for(const p of world.persons)if(p.techniques)push(`Techniques${p.id}:${JSON.stringify(p.techniques)}`);
   for(const p of world.persons)if(p.trials)push(`Trials${p.id}:${JSON.stringify(p.trials)}`);
   for(const c of world.conversations)if(c.lesson)push(`Lesson${c.id}:${JSON.stringify(c.lesson)}`);
+  for(const c of world.conversations)if(c.childhood)push(`ChildTime${c.id}:${JSON.stringify(c.childhood)}`);
   if (world.inhabitants) for (const k of Object.keys(world.inhabitants).sort((a, b) => Number(a) - Number(b))) push(`E${k}:${JSON.stringify(world.inhabitants[Number(k)])}`);
   push(JSON.stringify(world.ledger.created) + JSON.stringify(world.ledger.consumed) + JSON.stringify(world.ledger.spoiled));
   // 'partial' is an answered ask that brought something: counted with 'fulfilled' here, so this number means what it always meant

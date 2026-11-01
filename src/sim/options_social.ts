@@ -1,3 +1,4 @@
+import {CHILD_TIMES,wantsChildTime,childTimeName,childTimeTicks} from './childhood';
 import {companyReason} from './companionship';
 import {hasLivedLife} from './lived_life';
 import {pendingMeetingUpdates} from './meeting_knowledge';
@@ -707,6 +708,16 @@ function optRequestTechnique(ctx: Ctx): void {
 }
 
 export function socialOptions(ctx: Ctx): void {
+  if(ctx.stage==='child'&&!ctx.critical&&!ctx.night&&!ctx.dangers.some(b=>hyp(b.x-ctx.p.x,b.y-ctx.p.y)<10)&&Math.min(ctx.p.needs.hunger,ctx.p.needs.thirst,ctx.p.needs.energy)>42){
+    for(const c of candidates(ctx))for(const kind of CHILD_TIMES){
+      if(!wantsChildTime(ctx.world,ctx.p,c.q,kind))continue;
+      const remembered=ctx.p.relations[c.q.id]?.childhood?.find(e=>e.kind===kind);
+      const sc=new Scorer().add(kind==='learn_foraging'?'curious about learning':'time for childhood',18+(kind==='learn_foraging'?8*ctx.p.traits.curiosity:6*ctx.p.traits.sociability)).add('walking',-pen(c.d*6));
+      if(remembered)sc.add('remembered time together',Math.min(3,remembered.times));
+      mkSocial(ctx,c,kind,{},`${childTimeName(kind)} with ${c.q.name}`,`to ask for time together; they must agree`, 'social',sc,'childhood');
+      const offered=ctx.options[ctx.options.length-1];if(offered?.key===`socialize:${c.q.id}:${kind}`)offered.eta+=childTimeTicks(kind);
+    }
+  }
   for(const m of careReturns(ctx.world,ctx.p)){
     const c=candidates(ctx).find(c=>c.q.id===m.otherId&&c.d<=14);if(!c)continue;
     const sc=new Scorer().add('I recovered and can ask to take childcare back',52).add('walking',-pen(c.d*6));

@@ -133,6 +133,7 @@ export interface FacilitySnapshot {
 }
 
 export interface Relation {
+  childhood?: import('./childhood').ChildhoodExperience[];
   company?: import('./companionship').CompanyExperience;
   deathKnown?: { learned: number; source: 'witness' | 'told' | 'grave'; via: number };
   affinity: number;
@@ -1139,6 +1140,9 @@ export interface Request {
 }
 
 export type ConvPurpose =
+  | 'family_time'
+  | 'play_together'
+  | 'learn_foraging'
   | 'chat'
   | 'request'
   | 'info'
@@ -1164,6 +1168,7 @@ export type ConvPurpose =
   | 'learn_technique';
 
 export interface Conversation {
+  childhood?: import('./childhood').ChildhoodSession;
   /** Version 18: current lesson only; completed knowledge belongs to the learner. */
   lesson?: {since:number;until:number;outcome:'learning'|'learned'|'declined'|'interrupted';reason:string;kind?:import('./techniques').TechniqueKind};
   id: number;

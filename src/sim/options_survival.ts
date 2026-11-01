@@ -1,3 +1,4 @@
+import {hasChildhood} from './childhood_rules';
 import {hasLivedLife} from './lived_life';
 import {SLEEP_RECOVER} from './constants';
 import {mayTakeKnownPile} from './meal_leftovers';
@@ -268,7 +269,7 @@ function optEat(ctx: Ctx): void {
   // kinds (the ones a trip home would put down, see provision.ts), so before 45 a hungry person carrying only meat or bread
   // was never offered a meal from their own pack, although the meal itself (act_resource.ts, pickFood) would have eaten it.
   const food = runsRulesVersion(world, 45) ? foodUnits(p.inv) : ctx.food;
-  const keep = p.needs.hunger > 20 ? Math.min(food, ctx.dependents.length * 2) : 0;
+  const keep = p.needs.hunger > 20 && !(hasChildhood(world) && ctx.stage==='child') ? Math.min(food, ctx.dependents.length * 2) : 0;
   if (food - keep > 0) {
     const sc = new Scorer().add('hungry', dr).add('food in pack', 4);
     addOption(ctx, {

@@ -1,4 +1,6 @@
+import {isChildTime,childQuestion,childTimeName,beginChildTime,childTimeProblem,childTurn,finishChildTime,childTimeReport} from './childhood';
 import {recordCompany} from './companionship';
+import {hasChildhood} from './childhood_rules';
 import {hasLivedLife} from './lived_life';
 import { rememberedDry } from './water_access';
 import { hasSuspendedEndings } from './suspended_endings';
@@ -813,6 +815,7 @@ import { noteContact, observeOffer } from './transmission';
 function acceptsTalk(world: World, b: Person, a: Person, purpose: ConvPurpose): { ok: boolean; why: string } {
   if (!b.alive || b.pose === 'sleep') return { ok: false, why: 'was asleep' };
   if (b.convId) return { ok: false, why: 'was already talking to someone' };
+  if(hasChildhood(world)&&stageOf(world,b)==='child'&&b.activity?.kind==='alone'&&['chat','trade','invite','propose','recruit','family_time','play_together','learn_foraging','learn_technique','teach_technique'].includes(purpose))return {ok:false,why:'wanted to finish some quiet time'};
   const avail = canInterruptForTalk(b);
   if (avail <= 0) return { ok: false, why: 'was busy' };
   const rel = b.relations[a.id];
@@ -901,6 +904,7 @@ function openConversation(world: World, A: Person, B: Person, actA: import('./ty
 }
 
 function purposeGoal(world: World, purpose: ConvPurpose, name: string): string {
+  if(isChildTime(purpose))return `${childTimeName(purpose)} with ${name}`;
   switch (purpose) {
     case 'return_care': return `to agree with ${name} about taking childcare back`;
     case 'handover_work': return `to agree with ${name} who continues the undertaking`;
@@ -949,11 +953,12 @@ function warnReport(c: Conversation): { text: string; detail: string; outcome: '
   return { text: 'never got to it', detail: 'the talk ended before the warning was passed', outcome: 'partial' };
 }
 
-function endTalkActivity(world: World, p: Person, outcome: 'success' | 'interrupted'): void {
+function endTalkActivity(world: World, p: Person, outcome: 'success' | 'interrupted', detail?:string): void {
   p.convId = 0;
   if (p.activity && p.activity.kind === 'converse') {
     p.activity.data.finished = true;
-    endActivity(world, p, outcome, outcome === 'success' ? 'finished a conversation' : 'conversation cut short');
+    if(detail)p.activity.data.childhoodResult=true;
+    endActivity(world, p, outcome, detail ?? (outcome === 'success' ? 'finished a conversation' : 'conversation cut short'));
   }
   if (!p.activity) resumeSuspended(world, p);
 }
@@ -972,8 +977,9 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
   const report=hasCareHandback(world)&&c.purpose==='return_care'?{text:c.data.careReturnAnswered?'childcare return answered':c.data.careReturnHeard?'childcare return heard without answer':'childcare return not proposed',detail:c.data.careReturnReply??c.data.careReturnText??'No childcare responsibility changed.'}:hasWorkHandover(world)&&c.purpose==='handover_work'?{text:c.data.handoverAnswered?'handover answered':c.data.handoverDelivered?'handover heard without answer':'handover not conveyed',detail:c.data.handoverReply??c.data.handoverText??'No responsibility changed.'}:hasContinuityKnowledge(world)&&c.purpose==='share_work'?{text:c.data.workAcknowledged?'undertaking acknowledged':c.data.workDelivered?'undertaking heard without acknowledgement':'undertaking not conveyed',detail:c.data.workText??'No undertaking passed.'}:hasMeetingKnowledge(world)&&c.purpose==='cancel_meeting'?{text:c.data.meetingAcknowledged?'meal cancellation acknowledged':c.data.meetingDelivered?'meal cancellation heard, acknowledgement not received':'meal cancellation not delivered',detail:c.data.meetingText??'No meeting update passed.'}:hasPromiseDelays(world)&&c.purpose==='delay_request'?{text:c.data.delayAnswered?'delay proposal answered':c.data.delayDelivered?'delay explained, answer not heard':'delay explanation not delivered',detail:c.data.delayReply??c.data.delayText??'No delay explanation passed.'}:hasRequestCancellation(world)&&c.purpose==='cancel_request'?{text:c.data.cancelAcknowledged?'cancellation acknowledged':c.data.cancelDelivered?'cancellation heard, acknowledgement not received':'cancellation not delivered',detail:c.data.cancelReply??c.data.cancelText??'No cancellation passed.'}:(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'?{text:c.data.reportAcknowledged?'report acknowledged':c.data.reportDelivered?'report heard, acknowledgement not received':'report not delivered',detail:c.data.reportText??'No completion report passed.'}:null;
   if(outcome==='interrupted')interruptLesson(c,'the lesson was cut short');
   const gift=hasLivedLife(world)&&c.purpose==='offer'?c.data.giftReceipt:null;
-  const resultText = gift ? gift.outcome : c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
-  const detailText = gift ? gift.detail : c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
+  const childhood=childTimeReport(c,outcome==='interrupted');
+  const resultText = childhood?childhood.text:gift ? gift.outcome : c.lesson ? c.lesson.outcome : report?report.text:outcome === 'interrupted' ? 'cut short' : moot ? 'nothing was needed' : told ? told.text : req ? (req.outcome || req.status) : c.data.sour ? 'ended sourly' : 'friendly';
+  const detailText = childhood?childhood.detail:gift ? gift.detail : c.lesson ? c.lesson.reason : report?report.detail:outcome === 'interrupted' ? 'one of them had to go' : moot ? moot : told ? told.detail : req ? req.note : '';
   if (A) A.lastInteraction = { tick: world.tick, partner: c.b, purpose: c.purpose, role: 'asked', outcome: resultText, detail: detailText };
   if (B) B.lastInteraction = { tick: world.tick, partner: c.a, purpose: c.purpose, role: 'answered', outcome: resultText, detail: detailText };
   // a fever passes in talk (rich only; nothing in an authored world)
@@ -981,7 +987,7 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
     expose(world, A, B, 0.12);
     expose(world, B, A, 0.12);
   }
-  if (outcome === 'success' && A && B) {
+  if (outcome === 'success' && A && B && !childhood) {
     for (const [x, y] of [[A, B], [B, A]] as [Person, Person][]) {
       const rel = relOf(x, y.id);
       // how well do these two get along? temperaments that fit warm up quickly, ones that clash do not
@@ -1007,8 +1013,9 @@ function finishConversation(world: World, c: Conversation, outcome: 'success' | 
     B.wave = world.tick + 24;
   }
   if (A) endExchangeTalk(world,A,c.data.exchangeJourney,req,detailText||resultText);
-  if (A) endTalkActivity(world, A, outcome);
-  if (B) endTalkActivity(world, B, outcome);
+  const childEnd=childhood?(c.childhood?.outcome==='completed'?'success':'interrupted'):outcome;
+  if (A) endTalkActivity(world, A, childEnd,childhood?`${resultText}: ${detailText}`:undefined);
+  if (B) endTalkActivity(world, B, childEnd,childhood?`${resultText}: ${detailText}`:undefined);
 }
 
 /** Called when someone is removed from the world mid-conversation. */
@@ -1031,6 +1038,10 @@ export function updateConversations(world: World): void {
     if (hyp(A.x - B.x, A.y - B.y) > CONV_REACH + 2.5 || world.tick - c.start > 400) {
       finishConversation(world, c, 'interrupted');
       continue;
+    }
+    if(isChildTime(c.purpose)){
+      if(!completionContact(world,A,B)||(c.childhood?.outcome==='sharing'&&childTimeProblem(world,c,A,B))){finishConversation(world,c,'interrupted');continue;}
+      const turn=childTurn(world,c,A,B);if(turn)bubble(world,turn.p,turn.text,'happy',24);
     }
     if((hasCareHandback(world)&&c.purpose==='return_care'||hasWorkHandover(world)&&c.purpose==='handover_work'||hasContinuityKnowledge(world)&&c.purpose==='share_work'||hasMeetingKnowledge(world)&&(c.purpose==='cancel_meeting'||c.purpose==='invite')||(hasPromiseKnowledge(world)||hasPromiseOutcomes(world))&&c.purpose==='report'||hasRequestCancellation(world)&&c.purpose==='cancel_request'||hasPromiseDelays(world)&&c.purpose==='delay_request')&&!completionContact(world,A,B)){finishConversation(world,c,'interrupted');continue;}
     if(c.purpose==='teach_technique') {
@@ -1072,10 +1083,11 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
       phaseRespond(world, c, A, B, d);
       recordProjectResponse(world, A, B, reqOf(world, c));
       c.phase = 3;
-      c.nextAt = world.tick + (c.lesson?.outcome==='learning'?LESSON_TICKS:22);
+      c.nextAt = c.childhood?.outcome==='sharing'?c.childhood.until:world.tick + (c.lesson?.outcome==='learning'?LESSON_TICKS:22);
       break;
     }
     case 3: {
+      if(isChildTime(c.purpose))finishChildTime(world,c,A,B);
       if(c.purpose==='learn_technique'){
         if(finishLesson(world,c,B,A))bubble(world,A,`I can ${TECHNIQUES[lessonKind(c)].doing} for my work now.`,'happy',72);
         c.phase=4;c.nextAt=world.tick+16;break;
@@ -1099,6 +1111,7 @@ function advance(world: World, c: Conversation, A: Person, B: Person): void {
 
 // ── phase 1: the initiator says what they came for ──
 function phaseAsk(world: World, c: Conversation, A: Person, B: Person, d: ConvData & { reqId?: number }): void {
+  if(isChildTime(c.purpose)){bubble(world,A,childQuestion(c.purpose),'say',70);return;}
   const vars = { n: B.name } as Record<string, string | number>;
   switch (c.purpose) {
     case 'return_care': {
@@ -1244,6 +1257,7 @@ function reqOf(world: World, c: Conversation): Request | undefined {
 
 // ── phase 2: the other person answers, and the answer has consequences ──
 function phaseRespond(world: World, c: Conversation, A: Person, B: Person, d: ConvData): void {
+  if(isChildTime(c.purpose)){bubble(world,B,beginChildTime(world,c,A,B),'say',70);return;}
   const req = reqOf(world, c);
   switch (c.purpose) {
     case 'return_care': {

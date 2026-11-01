@@ -1,4 +1,6 @@
 import {hasLivedLife} from './lived_life';
+import {hasChildhood} from './childhood_rules';
+import {reservedFor} from './reserved_goods';
 import {toolCapacityBlock} from './tool_feasibility';
 import {hungryHarvestOptions} from './hungry_harvest';
 import { hasEcology } from './ecology';
@@ -214,10 +216,13 @@ function optStockpile(ctx: Ctx): void {
 
 function optDepositFood(ctx: Ctx): void {
   const { world, p } = ctx;
+  const smallPack = hasChildhood(world) && ctx.stage === 'child';
   const keepSelf = ctx.drives.hunger > 0 ? 3 : 2;
-  const surplus = ctx.food - keepSelf;
+  const foodKinds: ItemKind[] = ['grain', 'fish', 'fruit', 'berries'];
+  const unreserved = smallPack ? Object.fromEntries(foodKinds.map(k=>[k,Math.max(0,(p.inv[k]??0)-reservedFor(world,p,k))])) : p.inv;
+  const surplus = (smallPack ? foodKinds.reduce((n,k)=>n+(unreserved[k]??0),0) : ctx.food) - keepSelf;
   const partialReserve=hasLivedLife(world)&&preparingReserve(p);
-  if (surplus < (partialReserve?1:2)) return;
+  if (surplus < (partialReserve||smallPack?1:2)) return;
   const mem = Math.max(1, ctx.members.length);
   void mem;
   for (const b of beliefsByKind(p, ['building'])) {
@@ -227,7 +232,7 @@ function optDepositFood(ctx: Ctx): void {
     if(surplus<2&&!mine)continue;
     const used = Object.entries(b.items ?? {}).reduce((s, [k, n]) => s + (n ?? 0) * WEIGHT[k as ItemKind], 0);
     const cap = BUILD_DEF[b.btype as BuildingType].cap;
-    if (cap - used < (partialReserve&&mine?1:2)) {
+    if (cap - used < ((partialReserve||smallPack)&&mine?1:2)) {
       addBlocked(ctx, 'deposit', 'Store food', b.id, 'remembers it being full', 'store');
       continue;
     }
@@ -236,24 +241,28 @@ function optDepositFood(ctx: Ctx): void {
       .add('surplus food', 10 + Math.min(surplus, 8) * 1.2)
       .add(mine ? 'for my household' : 'for everyone', mine ? 4 + ctx.dependents.length * 3 : 2 + 5 * p.traits.generosity)
       .add('walking', -pen(e));
-    if (sc.total < 8) continue;
+    if (sc.total < 8 && !(smallPack && mine)) continue;
     const items: Record<string, number> = {};
     // deposit the better-keeping foods and keep a little for myself
     let toStore = surplus;
     for (const k of ['grain', 'fish', 'fruit', 'berries'] as ItemKind[]) {
-      const have = p.inv[k] ?? 0;
+      const have = unreserved[k] ?? 0;
       const give = Math.min(have, toStore);
       if (give > 0) {
         items[k] = give;
         toStore -= give;
       }
     }
+    if(smallPack&&mine&&!Object.keys(items).some(k=>(items[k]??0)>0&&cap-used>=WEIGHT[k as ItemKind])){
+      addBlocked(ctx,'deposit','Bring food home',b.id,'no carried surplus portion fits the remembered space','store');continue;
+    }
+    if(smallPack&&mine&&sc.total<8)sc.add('return a small surplus home',8-sc.total);
     addOption(ctx, {
       kind: 'deposit',
       label: mine ? 'Bring food home' : 'Add food to the storehouse',
       goal: mine ? 'to feed the household' : 'to share with the community',
       need: null,
-      util: sc.total * nightMult(ctx),
+      util: (smallPack && mine ? Math.max(8,sc.total) : sc.total) * nightMult(ctx),
       parts: sc.parts,
       eta: e + 20,
       key: `deposit:${b.id}:food`,
