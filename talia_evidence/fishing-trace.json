@@ -1,0 +1,78 @@
+[
+  {
+    "tick": 7632,
+    "kind": "converse",
+    "cycle": 0,
+    "amount": 0,
+    "outcome": "success",
+    "detail": "A guessing game completed: A guessing game together for 120 ticks.",
+    "inventory": {
+      "fish": 1
+    },
+    "data": {
+      "convId": 3807,
+      "role": "b",
+      "finished": true,
+      "childhoodResult": true
+    }
+  },
+  {
+    "tick": 7633,
+    "kind": "gather",
+    "cycle": 1,
+    "amount": 3,
+    "outcome": "failed",
+    "detail": "nothing left",
+    "inventory": {
+      "fish": 1
+    },
+    "data": {
+      "purpose": "stock",
+      "stype": "fish_spot",
+      "eta": 163.83351028128203,
+      "limit": {
+        "amount": 3
+      },
+      "workScope": {
+        "reason": "plan up to 3 fish; estimated return 343 ticks",
+        "expected": 163.83351028128203,
+        "returnTicks": 343,
+        "field": "amount",
+        "value": 3
+      },
+      "optKey": "gather:984",
+      "dailyRoutine": {
+        "key": "gather:984",
+        "label": "Fishing",
+        "kind": "gather",
+        "target": 984,
+        "phase": 1,
+        "context": {
+          "winter": false,
+          "household": 1025,
+          "home": 2001,
+          "injury": "well",
+          "family": "0:",
+          "contact": "3:1026,1027,1028",
+          "losses": "0:"
+        },
+        "eta": 163.8335,
+        "energy": 89.85,
+        "warmth": 67.3237,
+        "recorded": true
+      },
+      "why": "chosen from outside",
+      "routeAttempt": {
+        "target": 984,
+        "x": 28.692655273912642,
+        "y": 27.038364969231154,
+        "gx": 27.5,
+        "gy": 25.5,
+        "kind": "gather",
+        "cart": false
+      },
+      "sourcePayRecorded": true,
+      "logged": true
+    }
+  }
+]

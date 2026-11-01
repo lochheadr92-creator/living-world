@@ -1,0 +1,130 @@
+{
+  "created": "2026-11-01T02:14:36.030Z",
+  "branch": "feature/talia-lived-childhood",
+  "runtimeCommit": "7cd424bbbc98221bfba5b99ea5850c913e5a134e",
+  "sourcesFingerprint": "1058192c",
+  "base": "c3f1310709831d7e90be2bdcbc023f33c8a391a8",
+  "featureCommit": "3b78731",
+  "originalExperiment": "C:\\dev\\Claude Experiment\\living-world-civilian-visit-20261101\\civilian_evidence",
+  "separateRepairCheckoutPreserved": {
+    "path": "C:\\dev\\Claude Experiment\\living-world-integrate",
+    "headAtStart": "320c521f1fa84658c77f73d2875a4c0858d5a10b"
+  },
+  "url": "http://127.0.0.1:5188/?inhabit=Talia&manual=1&memory=1&seed=meadow&from=1&days=3",
+  "header": {
+    "version": 1,
+    "protocol": "inhabitant/34",
+    "mode": "live",
+    "seed": "meadow",
+    "settings": {
+      "seed": "meadow",
+      "population": 28,
+      "harsh": false,
+      "immigration": true,
+      "scene": "natural",
+      "dynamics": "rich",
+      "rulesVersion": 120
+    },
+    "personId": 1029,
+    "personName": "Talia",
+    "startTick": 2400,
+    "startHash": "9c577284",
+    "sim": {
+      "behaviour": "22b83b7c:3780a61a"
+    },
+    "model": {
+      "id": "manual",
+      "kind": "manual",
+      "config": {
+        "by": "hand"
+      }
+    },
+    "budget": {
+      "maxCallsPerDay": 1048576,
+      "maxInputChars": 120000,
+      "maxOutputTokens": 8000,
+      "timeoutMs": 2147483647,
+      "maxConsecutiveFailures": 5,
+      "maxRetryMs": 300000,
+      "probeEvery": 10
+    },
+    "observe": {
+      "showScores": false
+    },
+    "observationVersion": 18,
+    "memory": {
+      "version": 1,
+      "limits": {
+        "goals": 6,
+        "intentions": 6,
+        "inferences": 12,
+        "uncertainties": 8,
+        "journal": 40,
+        "textChars": 200,
+        "journalChars": 240,
+        "basisPerInference": 6,
+        "refChars": 60,
+        "totalChars": 12000,
+        "journalShown": 12
+      }
+    }
+  },
+  "end": {
+    "tick": 9600,
+    "hash": "e35d5f95",
+    "died": false,
+    "calls": 38,
+    "applied": 38,
+    "rejected": 0,
+    "fallbacks": 0,
+    "proposed": 0,
+    "revised": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 38,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 1161094,
+      "outputTokens": 0,
+      "givenUp": null
+    },
+    "notesHash": "6ae51878"
+  },
+  "calls": 38,
+  "finalHash": "e35d5f95",
+  "method": "Rendered manual LiveSession; actual offered choices only; others autonomous; no world edits. Reconstructed full save is headless, not browser-exported bytes.",
+  "checks": {
+    "strictReplay": true,
+    "independentReplays": true,
+    "saveRoundtrip": true,
+    "continued120": true,
+    "conservation": true,
+    "fullSuite": {
+      "files": 379,
+      "tests": 2377,
+      "skippedFiles": 1,
+      "todoTests": 1,
+      "exit": 0
+    },
+    "buildExit": 0
+  },
+  "artifactSHA256": {
+    "final-transcript.json": "e0b76102d438be897520c6c91a71143de88d3cea8b6eb927b9540837d3248c23",
+    "final-transcript-verified.json": "7cdf5bed2841099bda366f4dd975eaa2dfbcc60d6b199e4bc1baa6b1eccbe433",
+    "final-transcript-world.json": "a2f1d621370b0cd072c6a4ef28ae458ee8d2174caa9a2deee3d7500f44f2c110",
+    "summary.json": "e25765cf7d93d5b6d28ee6668c3fa7ffbffb63b523c6464577193192b02ad3b0",
+    "ordinary.json": "46a949e0a80115b4b1ceddf66e7837a65d37a71c86ed865592c094601f09a9c2",
+    "ordinary-summary.json": "6ab55aed35f3b63bf00c2f803ccaf51bd99a6e1a7797fbd3d60fc4a4d2584a80",
+    "learning-final.jpg": "a61f8708c3f1d435867731363e1c6f75c37762cfd3d36401a3bb918cb7cf812d",
+    "final-life.jpg": "382f10e75b5658fdf21daddc4270c0b1abfc32ba60364e24d943be7aec29a8a8",
+    "final-view.txt": "ede02202167a9162e2a3652ddda10fd1ba99793364caa3e68048b487b7f09864",
+    "life119-transcript.json": "f647813059601a28dd1aad1e1e0e758639218848ba1fb1eedc764aa18e3935c8",
+    "life119-transcript-verified.json": "f2eceb5dab5e5db17aad828648de22f56686452c3dc8d45dc2aad72e92ceb4c8",
+    "fishing-trace.json": "745a9915206671ee20d2f1379da9c3a4354ad6a42744dd080ae5ad7718f4148a",
+    "replay-root-cause.json": "b4929ffd5fdc1e9c2cf9212f257974fa2c32c01b99ec83a3140fe22b222dd63a",
+    "full-suite-rules120.log": "e0f489a8a3b159ce90dc576858cdcb90368da7e1e0ecbe780294b0320078b430",
+    "build-rules120.log": "9e6b71778f8e5c324b478b10833a590e4e906ef56d1c65999a3e8f775d043794",
+    "rules120-focused.log": "e881ec8f80b59f00ff6a32507846198c7fee1953cebea2019ea3d10c86101313"
+  }
+}

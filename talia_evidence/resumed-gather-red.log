@@ -1,0 +1,42 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-talia
+
+ ❯ tests/resumed_gather_credit.test.ts (3 tests | 1 failed) 44ms
+   × retains paid gathering across suspension at rules 120 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/resumed_gather_credit.test.ts > retains paid gathering across suspension at rules 120
+AssertionError: expected 'failed' to be 'partial' // Object.is equality
+
+Expected: "partial"
+Received: "failed"
+
+ ❯ tests/resumed_gather_credit.test.ts:25:37
+     23|   for(let i=0;i<10&&child.activity;i++){world.tick++;stepActivity(worl…
+     24|   expect(child.activity).toBeNull();expect(child.inv.berries).toBe(1);
+     25|   expect(child.lastResult?.outcome).toBe(version===120?'partial':'fail…
+       |                                     ^
+     26|   expect(child.decisions?.[0].outcome).toBe(version===120?'partial':'f…
+     27|   if(version===120)expect(child.log.some(e=>e.text.includes('Gathered …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 2 passed (3)
+   Start at  11:59:47
+   Duration  1.70s (transform 86%, import 11%, tests 3%)
+

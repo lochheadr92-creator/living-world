@@ -1,0 +1,5238 @@
+[
+  {
+    "seed": "meadow",
+    "tick": 12120,
+    "hash": "875829a3",
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "continuationEqual": true,
+    "events": [
+      {
+        "tick": 215,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 215,
+        "who": "Pia",
+        "age": -973306,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 236,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 236,
+        "who": "Sofia",
+        "age": -1152725,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 386,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 386,
+        "who": "Hal",
+        "age": -1162984,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 454,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 454,
+        "who": "Sofia",
+        "age": -1152725,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 497,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 497,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 523,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 523,
+        "who": "Jonas",
+        "age": -698900,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 654,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 654,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 683,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 683,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 702,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 702,
+        "who": "Hal",
+        "age": -1162984,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 757,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 757,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 781,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 781,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 872,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 872,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 954,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 954,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 1086,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "interrupted",
+        "detail": "invitation declined: someone needed to take care of themselves"
+      },
+      {
+        "tick": 1086,
+        "who": "Vik",
+        "age": -1239078,
+        "outcome": "interrupted",
+        "detail": "invitation declined: someone needed to take care of themselves"
+      },
+      {
+        "tick": 2312,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 2312,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 2335,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 2335,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 2731,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 2731,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 2817,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 2817,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 2920,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 2920,
+        "who": "Hal",
+        "age": -1162984,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 3078,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3078,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3114,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3114,
+        "who": "Felix",
+        "age": -2149157,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3154,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3154,
+        "who": "Pavel",
+        "age": -2048850,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3193,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3193,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3246,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3246,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3318,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3318,
+        "who": "Jax",
+        "age": -1377568,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3321,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3321,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3397,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3397,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3438,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 3438,
+        "who": "Quinn",
+        "age": -939285,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 3489,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3489,
+        "who": "Ivo",
+        "age": -1243171,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3573,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3573,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3644,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3644,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3657,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3657,
+        "who": "Ivo",
+        "age": -1243171,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3660,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3660,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3705,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3705,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 4853,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 4853,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 4872,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 4872,
+        "who": "Pia",
+        "age": -973306,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5003,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5003,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5217,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5217,
+        "who": "Pia",
+        "age": -973306,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5322,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 5322,
+        "who": "Bea",
+        "age": -943370,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 5386,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5386,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5559,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5559,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5710,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5710,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5733,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 5733,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 5810,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5810,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 6036,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 6036,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 6047,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 6047,
+        "who": "Dax",
+        "age": -972936,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7239,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7239,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7291,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7291,
+        "who": "Jonas",
+        "age": -698900,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7311,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 7311,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 7373,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 7373,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 7569,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7569,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7569,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7569,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7584,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7584,
+        "who": "Vik",
+        "age": -1239078,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7820,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 7820,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 7857,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7857,
+        "who": "Vik",
+        "age": -1239078,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 8170,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 8170,
+        "who": "Hal",
+        "age": -1162984,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 8179,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 8179,
+        "who": "Ivo",
+        "age": -1243171,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 8184,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8184,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8190,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 8190,
+        "who": "Sofia",
+        "age": -1152725,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 8248,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 8248,
+        "who": "Dax",
+        "age": -972936,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 8285,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 8285,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 8447,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 8447,
+        "who": "Jonas",
+        "age": -698900,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 9615,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 9615,
+        "who": "Maren",
+        "age": -793340,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 9757,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9757,
+        "who": "Pavel",
+        "age": -2048850,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9904,
+        "who": "Eli",
+        "age": -117704,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9904,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9920,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 9920,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 9926,
+        "who": "Rafe",
+        "age": -178940,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 9926,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 9930,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9930,
+        "who": "Sofia",
+        "age": -1152725,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10151,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10151,
+        "who": "Jonas",
+        "age": -698900,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10226,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10226,
+        "who": "Sofia",
+        "age": -1152725,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10399,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10399,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10547,
+        "who": "Mona",
+        "age": -272014,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10547,
+        "who": "Jonas",
+        "age": -698900,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10579,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 10579,
+        "who": "Ivo",
+        "age": -1243171,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 10589,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 10589,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 10677,
+        "who": "Orla",
+        "age": -54760,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 10677,
+        "who": "Isla",
+        "age": -1263115,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 10695,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10695,
+        "who": "Pia",
+        "age": -973306,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10809,
+        "who": "Kai",
+        "age": -108158,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10809,
+        "who": "Sofia",
+        "age": -1152725,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10824,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10824,
+        "who": "Wes",
+        "age": -165257,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10828,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10828,
+        "who": "Jonas",
+        "age": -698900,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10870,
+        "who": "Abel",
+        "age": -152586,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10870,
+        "who": "Hal",
+        "age": -1162984,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 12115,
+        "who": "Talia",
+        "age": -245562,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 12115,
+        "who": "Lena",
+        "age": -100657,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      }
+    ],
+    "talia": {
+      "needs": {
+        "hunger": 76.46063837101678,
+        "thirst": 83.72079999999731,
+        "energy": 69.77080000000666,
+        "warmth": 62.61916389127806,
+        "safety": 83.96203933865611,
+        "social": 88.58084593951756
+      },
+      "health": 100,
+      "relations": {
+        "997": {
+          "affinity": 1.0992391612403583,
+          "trust": 14.402032388284056,
+          "familiarity": 9.8,
+          "lastMet": 7945,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2404,
+              "text": "Pavel warned me about a wolf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1000": {
+          "affinity": 2.772233665624878,
+          "trust": 15.515838104386152,
+          "familiarity": 8.3,
+          "lastMet": 9499,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2721,
+              "text": "worked alongside Sven"
+            },
+            {
+              "tick": 5011,
+              "text": "Sven warned me about a wolf"
+            },
+            {
+              "tick": 7548,
+              "text": "the fruit tree Sven described (about 4) held only 3 when I got there 1.0 days later"
+            },
+            {
+              "tick": 7587,
+              "text": "the stone outcrop Sven described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 2,
+            "borneOut": 1,
+            "last": {
+              "tick": 7587,
+              "id": 1053,
+              "kind": "outcrop",
+              "described": 91,
+              "expected": 91,
+              "found": 91,
+              "borneOut": true,
+              "toldAt": 5033
+            }
+          }
+        },
+        "1001": {
+          "affinity": 12.929312135158154,
+          "trust": 22.171111281659417,
+          "familiarity": 10.8,
+          "lastMet": 9708,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": -0.5,
+          "history": [
+            {
+              "tick": 5221,
+              "text": "worked alongside Bea"
+            },
+            {
+              "tick": 7276,
+              "text": "Bea gave me 1 berries"
+            },
+            {
+              "tick": 9702,
+              "text": "the wild grain Bea described (about 3) was bare when I got there 1.0 days later"
+            },
+            {
+              "tick": 9708,
+              "text": "the wild grain Bea described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 2,
+            "borneOut": 1,
+            "last": {
+              "tick": 9708,
+              "id": 860,
+              "kind": "wild_grain",
+              "described": 5,
+              "expected": 5,
+              "found": 5,
+              "borneOut": true,
+              "toldAt": 7298
+            }
+          }
+        },
+        "1004": {
+          "affinity": 27.75257654244765,
+          "trust": 32.2221283268603,
+          "familiarity": 5.8,
+          "lastMet": 8295,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 5164,
+              "text": "Felix warned me about a wolf"
+            },
+            {
+              "tick": 5221,
+              "text": "worked alongside Felix"
+            },
+            {
+              "tick": 7572,
+              "text": "the fruit tree Felix described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 1,
+            "borneOut": 1,
+            "last": {
+              "tick": 7572,
+              "id": 844,
+              "kind": "fruit_tree",
+              "described": 6,
+              "expected": 8,
+              "found": 4,
+              "borneOut": true,
+              "toldAt": 5186
+            }
+          }
+        },
+        "1007": {
+          "affinity": -6.615871923779463,
+          "trust": 16.029541521778384,
+          "familiarity": 6.1,
+          "lastMet": 11949,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 793,
+              "text": "saw Sofia help Kai"
+            },
+            {
+              "tick": 2645,
+              "text": "saw Sofia help Kai"
+            },
+            {
+              "tick": 2721,
+              "text": "worked alongside Sofia"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1008": {
+          "affinity": 33.956535730916166,
+          "trust": 33.85676049492301,
+          "familiarity": 7.699999999999999,
+          "lastMet": 10722,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 1047,
+              "text": "the fishing spot Ivo described was as described when I got there"
+            },
+            {
+              "tick": 2257,
+              "text": "saw Ivo help Orla"
+            },
+            {
+              "tick": 6769,
+              "text": "saw Ivo help Sofia"
+            },
+            {
+              "tick": 9871,
+              "text": "worked alongside Ivo"
+            },
+            {
+              "tick": 10704,
+              "text": "the wild grain Ivo described was as described when I got there"
+            },
+            {
+              "tick": 10722,
+              "text": "the wild grain Ivo described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 3,
+            "borneOut": 3,
+            "last": {
+              "tick": 10722,
+              "id": 865,
+              "kind": "wild_grain",
+              "described": 5,
+              "expected": 5,
+              "found": 5,
+              "borneOut": true,
+              "toldAt": 10563
+            }
+          }
+        },
+        "1009": {
+          "affinity": 13.558644714923437,
+          "trust": 24.703459287200594,
+          "familiarity": 4.8,
+          "lastMet": 3709,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2113,
+              "text": "Kai warned me about a wolf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1010": {
+          "affinity": 13.087736837732958,
+          "trust": 24.9559336579553,
+          "familiarity": 6.5,
+          "lastMet": 9921,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 71,
+              "text": "worked alongside Orla"
+            },
+            {
+              "tick": 9871,
+              "text": "worked alongside Orla"
+            },
+            {
+              "tick": 9921,
+              "text": "worked alongside Orla"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1013": {
+          "affinity": 2.554542571895052,
+          "trust": 13.953442230476476,
+          "familiarity": 5,
+          "lastMet": 9527,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1014": {
+          "affinity": 2.289412955685648,
+          "trust": 12.15217185154002,
+          "familiarity": 6.5,
+          "lastMet": 5221,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 5221,
+              "text": "worked alongside Hal"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1015": {
+          "affinity": 21.72593697241353,
+          "trust": 18.82572650248329,
+          "familiarity": 9.3,
+          "lastMet": 11571,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2487,
+              "text": "Abel warned me about a wolf"
+            },
+            {
+              "tick": 4938,
+              "text": "the fishing spot Abel described (about 4) held only 3 when I got there 1.0 days later"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 1,
+            "borneOut": 0,
+            "last": {
+              "tick": 4938,
+              "id": 985,
+              "kind": "fish_spot",
+              "described": 4,
+              "expected": 10,
+              "found": 3,
+              "borneOut": false,
+              "toldAt": 2509
+            }
+          }
+        },
+        "1018": {
+          "affinity": 12.075834804297592,
+          "trust": 28.870616228867892,
+          "familiarity": 5.5,
+          "lastMet": 7147,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 5221,
+              "text": "worked alongside Alma"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1019": {
+          "affinity": 16.51695487145975,
+          "trust": 24.59447218279832,
+          "familiarity": 7.3,
+          "lastMet": 10507,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2871,
+              "text": "worked alongside Jax"
+            },
+            {
+              "tick": 3642,
+              "text": "Jax warned me about a wolf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1022": {
+          "affinity": 1.8957463850430316,
+          "trust": 23.483105947440638,
+          "familiarity": 5.5,
+          "lastMet": 8211,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1023": {
+          "affinity": 18.17215002196245,
+          "trust": 27.817949782971326,
+          "familiarity": 2,
+          "lastMet": -1198,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1024": {
+          "affinity": 6.761879837233768,
+          "trust": 18.837185748322955,
+          "familiarity": 4,
+          "lastMet": 8127,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 5221,
+              "text": "worked alongside Mona"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1026": {
+          "affinity": 92.33494586018084,
+          "trust": 83.9,
+          "familiarity": 46.3,
+          "lastMet": 6926,
+          "kin": "parent",
+          "avoidUntil": 0,
+          "debt": -0.5,
+          "history": [
+            {
+              "tick": 71,
+              "text": "worked alongside Yara"
+            },
+            {
+              "tick": 271,
+              "text": "worked alongside Yara"
+            },
+            {
+              "tick": 2871,
+              "text": "worked alongside Yara"
+            },
+            {
+              "tick": 4704,
+              "text": "Yara gave me 1 berries"
+            },
+            {
+              "tick": 5055,
+              "text": "the clay pit Yara described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 1,
+            "borneOut": 1,
+            "last": {
+              "tick": 5055,
+              "id": 1051,
+              "kind": "clay_pit",
+              "described": 41,
+              "expected": 41,
+              "found": 41,
+              "borneOut": true,
+              "toldAt": 4770
+            }
+          }
+        },
+        "1027": {
+          "affinity": 88.89999999999999,
+          "trust": 82,
+          "familiarity": 43.3,
+          "lastMet": 6811,
+          "kin": "parent",
+          "avoidUntil": 0,
+          "debt": -0.5,
+          "history": [
+            {
+              "tick": 30,
+              "text": "Quinn gave me 1 fruit"
+            },
+            {
+              "tick": 4636,
+              "text": "saw Quinn help Wes"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1028": {
+          "affinity": 83.99119559174505,
+          "trust": 84.9,
+          "familiarity": 50.5,
+          "lastMet": 11997,
+          "kin": "sibling",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 6020,
+              "text": "Family time together for 120 ticks. With Wes."
+            },
+            {
+              "tick": 6020,
+              "text": "Spent time with Wes again: 3 days of continuing company."
+            },
+            {
+              "tick": 9831,
+              "text": "the wild grain Wes described was as described when I got there"
+            },
+            {
+              "tick": 10383,
+              "text": "Family time together for 120 ticks. With Wes."
+            },
+            {
+              "tick": 10383,
+              "text": "Spent time with Wes again: 3 days of continuing company."
+            },
+            {
+              "tick": 11997,
+              "text": "the ore vein Wes described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "childhood": [
+            {
+              "kind": "play_together",
+              "last": 741,
+              "times": 1
+            },
+            {
+              "kind": "family_time",
+              "last": 10383,
+              "times": 3
+            }
+          ],
+          "company": {
+            "first": 481,
+            "last": 10383,
+            "days": 3,
+            "helped": 0
+          },
+          "accounts": {
+            "checked": 2,
+            "borneOut": 2,
+            "last": {
+              "tick": 11997,
+              "id": 1055,
+              "kind": "ore_vein",
+              "described": 22,
+              "expected": 22,
+              "found": 22,
+              "borneOut": true,
+              "toldAt": 10808
+            }
+          }
+        },
+        "1031": {
+          "affinity": 22.516908380005873,
+          "trust": 32.67869631338844,
+          "familiarity": 9.3,
+          "lastMet": 11697,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 41,
+              "text": "saw Isla help Eli"
+            },
+            {
+              "tick": 71,
+              "text": "worked alongside Isla"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1032": {
+          "affinity": 2.7131821098897566,
+          "trust": 16.80120418574368,
+          "familiarity": 8.5,
+          "lastMet": 1281,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1033": {
+          "affinity": 14.22279487973956,
+          "trust": 23.702452019564355,
+          "familiarity": 10,
+          "lastMet": 7804,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 71,
+              "text": "worked alongside Eli"
+            },
+            {
+              "tick": 7804,
+              "text": "A guessing game together for 120 ticks. With Eli."
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "childhood": [
+            {
+              "kind": "play_together",
+              "last": 7804,
+              "times": 1
+            }
+          ]
+        },
+        "1034": {
+          "affinity": 22.49157425724775,
+          "trust": 23.01530752701094,
+          "familiarity": 11.8,
+          "lastMet": 12099,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 71,
+              "text": "worked alongside Lena"
+            },
+            {
+              "tick": 8053,
+              "text": "Lena warned me about a wolf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1036": {
+          "affinity": 8.892320573942039,
+          "trust": 23.890462375682148,
+          "familiarity": 6.8,
+          "lastMet": 7973,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 6911,
+              "text": "saw Vik help Ivo"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1037": {
+          "affinity": -5.467965427798214,
+          "trust": 15.524125864369028,
+          "familiarity": 9.5,
+          "lastMet": 11885,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1039": {
+          "affinity": 22.921191672671583,
+          "trust": 27.51743055592593,
+          "familiarity": 9.5,
+          "lastMet": 10619,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1040": {
+          "affinity": -2.152930198610634,
+          "trust": 20.182887702235575,
+          "familiarity": 7.8,
+          "lastMet": 11725,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 9778,
+              "text": "Zeke warned me about a wolf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "3444": {
+          "affinity": 0,
+          "trust": 10,
+          "familiarity": 0.5,
+          "lastMet": 11473,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        }
+      },
+      "skills": {
+        "forage": 1.0751954953636849,
+        "fish": 0.8612428774014242,
+        "wood": 0.9833043872939145,
+        "stone": 0.7914215102940831,
+        "build": 0.8146958220631415,
+        "farm": 0.9001989768251049,
+        "craft": 0.7679902346132037,
+        "carpentry": 0.9041656026888729,
+        "kiln": 0.8403012682201414,
+        "smith": 0.9189306733787306,
+        "bake": 0.9965671664041302
+      }
+    }
+  },
+  {
+    "seed": "river",
+    "tick": 12120,
+    "hash": "702f0edb",
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "continuationEqual": true,
+    "events": [
+      {
+        "tick": 106,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 106,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 321,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 321,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 379,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 379,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 489,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 489,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 555,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 555,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 720,
+        "who": "Faye",
+        "age": -87641,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 720,
+        "who": "Cora",
+        "age": -914501,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 782,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 782,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 919,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 919,
+        "who": "Mira",
+        "age": -925988,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 943,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 943,
+        "who": "Emre",
+        "age": -948255,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 1086,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 1086,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 1170,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 1170,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 2339,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 2339,
+        "who": "Cora",
+        "age": -914501,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 2598,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 2598,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 2644,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 2644,
+        "who": "Emre",
+        "age": -948255,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 2863,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 2863,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 2951,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 2951,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3003,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3003,
+        "who": "Alma",
+        "age": -1141922,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3107,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3107,
+        "who": "Faye",
+        "age": -87641,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3272,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3272,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3284,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3284,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3287,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3287,
+        "who": "Emre",
+        "age": -948255,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3441,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 3441,
+        "who": "Kai",
+        "age": -716554,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 3493,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3493,
+        "who": "Arlo",
+        "age": -1224461,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 4727,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 4727,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 4989,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 4989,
+        "who": "Mira",
+        "age": -925988,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5103,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5103,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5154,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5154,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5291,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5291,
+        "who": "Emre",
+        "age": -948255,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5329,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5329,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5343,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5343,
+        "who": "Jax",
+        "age": -705924,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5375,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5375,
+        "who": "Petra",
+        "age": -626665,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5386,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5386,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5452,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5452,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5737,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5737,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5781,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5781,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5788,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5788,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5868,
+        "who": "Faye",
+        "age": -87641,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5868,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5961,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5961,
+        "who": "Mira",
+        "age": -925988,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 6010,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 6010,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 6069,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 6069,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7245,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7245,
+        "who": "Emre",
+        "age": -948255,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7303,
+        "who": "Faye",
+        "age": -87641,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7303,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7317,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7317,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7364,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7364,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7479,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7479,
+        "who": "Cole",
+        "age": -1072227,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7637,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7637,
+        "who": "Emre",
+        "age": -948255,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7687,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7687,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7780,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7780,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7912,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7912,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 8076,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8076,
+        "who": "Mira",
+        "age": -925988,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8092,
+        "who": "Uri",
+        "age": -176504,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 8092,
+        "who": "Dara",
+        "age": -826885,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 8221,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8221,
+        "who": "Ivy",
+        "age": -781775,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8475,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 8475,
+        "who": "Ivy",
+        "age": -781775,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 9622,
+        "who": "Faye",
+        "age": -87641,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 9622,
+        "who": "Jax",
+        "age": -705924,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 9830,
+        "who": "Faye",
+        "age": -87641,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9830,
+        "who": "Jax",
+        "age": -705924,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9957,
+        "who": "Eli",
+        "age": -96728,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9957,
+        "who": "Ivy",
+        "age": -781775,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10144,
+        "who": "Faye",
+        "age": -87641,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 10144,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 10261,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10261,
+        "who": "Viktor",
+        "age": -65409,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10315,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10315,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10479,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 10479,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 10563,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10563,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10639,
+        "who": "Thea",
+        "age": -136689,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10639,
+        "who": "Nico",
+        "age": -69778,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10665,
+        "who": "Ivo",
+        "age": -310437,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10665,
+        "who": "Abel",
+        "age": -1020590,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10803,
+        "who": "Edda",
+        "age": -199798,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10803,
+        "who": "Basil",
+        "age": -1076979,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10921,
+        "who": "Theo",
+        "age": -123179,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10921,
+        "who": "Ivy",
+        "age": -781775,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      }
+    ],
+    "talia": {
+      "needs": {
+        "hunger": 43.73550000001295,
+        "thirst": 56.519999999996486,
+        "energy": 88.79999999999825,
+        "warmth": 81.46822517985315,
+        "safety": 85.1122517288579,
+        "social": 53.69719281722982
+      },
+      "health": 100,
+      "relations": {
+        "1106": {
+          "affinity": 8.784148352798631,
+          "trust": 18.314810383776535,
+          "familiarity": 5.8,
+          "lastMet": 1223,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 1223,
+              "text": "saw Mira help Viktor"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1107": {
+          "affinity": 19.149638016887177,
+          "trust": 21.074877112252537,
+          "familiarity": 4.5,
+          "lastMet": 2113,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1108": {
+          "affinity": -4.296380715645013,
+          "trust": 8.23362581343202,
+          "familiarity": 8.5,
+          "lastMet": 2078,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1109": {
+          "affinity": -4.850886996488975,
+          "trust": 17.53392366199739,
+          "familiarity": 4,
+          "lastMet": -1714,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1112": {
+          "affinity": 15.04983618348668,
+          "trust": 26.39551483576662,
+          "familiarity": 9.3,
+          "lastMet": 5958,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 5779,
+              "text": "saw Ben help Milo"
+            },
+            {
+              "tick": 5858,
+              "text": "worked alongside Ben"
+            },
+            {
+              "tick": 5908,
+              "text": "worked alongside Ben"
+            },
+            {
+              "tick": 5958,
+              "text": "worked alongside Ben"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1113": {
+          "affinity": 10.763306741832954,
+          "trust": 24.193296539040578,
+          "familiarity": 10,
+          "lastMet": 9443,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 8258,
+              "text": "worked alongside Zia"
+            },
+            {
+              "tick": 8308,
+              "text": "worked alongside Zia"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1116": {
+          "affinity": 15.279721698881797,
+          "trust": 18.56213937290372,
+          "familiarity": 10.5,
+          "lastMet": 9658,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 9658,
+              "text": "worked alongside Milo"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1119": {
+          "affinity": 14.305961547593242,
+          "trust": 20.490563842115105,
+          "familiarity": 8,
+          "lastMet": 7267,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1120": {
+          "affinity": 0.858516780238239,
+          "trust": 21.416035140601945,
+          "familiarity": 3.5,
+          "lastMet": 4388,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1121": {
+          "affinity": 11.559296535019225,
+          "trust": 28.38214847142425,
+          "familiarity": 4.8,
+          "lastMet": 4799,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 4799,
+              "text": "saw Ivo help Cora"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1122": {
+          "affinity": 0,
+          "trust": 22.326045623943134,
+          "familiarity": 3.5,
+          "lastMet": 5556,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1125": {
+          "affinity": 12.756086237344666,
+          "trust": 27.053712966663824,
+          "familiarity": 9.3,
+          "lastMet": 9540,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 558,
+              "text": "worked alongside Ines"
+            },
+            {
+              "tick": 608,
+              "text": "worked alongside Ines"
+            },
+            {
+              "tick": 658,
+              "text": "worked alongside Ines"
+            },
+            {
+              "tick": 3066,
+              "text": "Ines warned me about a wolf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1128": {
+          "affinity": -2.7159595175053086,
+          "trust": 17.271270352623564,
+          "familiarity": 6,
+          "lastMet": -1472,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1131": {
+          "affinity": 8.04193685520256,
+          "trust": 24.16009672031805,
+          "familiarity": 7,
+          "lastMet": 10573,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1132": {
+          "affinity": -14.475344880168894,
+          "trust": 14.832913015238352,
+          "familiarity": 5.5,
+          "lastMet": 4430,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2558,
+              "text": "worked alongside Petra"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1134": {
+          "affinity": 5.1672651739532744,
+          "trust": 17.356485708755013,
+          "familiarity": 8,
+          "lastMet": 4780,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1135": {
+          "affinity": 22.923338988051217,
+          "trust": 25.683671803736477,
+          "familiarity": 9.1,
+          "lastMet": 11878,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 7945,
+              "text": "the fishing spot Cole described was as described when I got there"
+            },
+            {
+              "tick": 8543,
+              "text": "Spent time with Cole again: 1 day of continuing company."
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 1,
+            "borneOut": 1,
+            "last": {
+              "tick": 7945,
+              "id": 1092,
+              "kind": "fish_spot",
+              "described": 10,
+              "expected": 10,
+              "found": 6,
+              "borneOut": true,
+              "toldAt": 6862
+            }
+          },
+          "company": {
+            "first": 8543,
+            "last": 8543,
+            "days": 1,
+            "helped": 0
+          }
+        },
+        "1137": {
+          "affinity": 23.579675383627254,
+          "trust": 30.971623659369044,
+          "familiarity": 9.600000000000001,
+          "lastMet": 12050,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": -0.5,
+          "history": [
+            {
+              "tick": 841,
+              "text": "the clay pit Ivy described was as described when I got there"
+            },
+            {
+              "tick": 7108,
+              "text": "worked alongside Ivy"
+            },
+            {
+              "tick": 10458,
+              "text": "worked alongside Ivy"
+            },
+            {
+              "tick": 12012,
+              "text": "Ivy gave me 1 stone"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 1,
+            "borneOut": 1,
+            "last": {
+              "tick": 841,
+              "id": 1161,
+              "kind": "clay_pit",
+              "described": 57,
+              "expected": 57,
+              "found": 57,
+              "borneOut": true,
+              "toldAt": 744
+            }
+          }
+        },
+        "1138": {
+          "affinity": 13.607686213573363,
+          "trust": 18.49657968174131,
+          "familiarity": 7.5,
+          "lastMet": 8112,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 3008,
+              "text": "worked alongside Basil"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1139": {
+          "affinity": 19.02468540875094,
+          "trust": 22.53940581160952,
+          "familiarity": 4,
+          "lastMet": 8000,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1140": {
+          "affinity": 7.7322687505903245,
+          "trust": 21.15878830360228,
+          "familiarity": 11.5,
+          "lastMet": 11824,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 3358,
+              "text": "worked alongside Nico"
+            },
+            {
+              "tick": 3408,
+              "text": "worked alongside Nico"
+            },
+            {
+              "tick": 3558,
+              "text": "worked alongside Nico"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1144": {
+          "affinity": 0,
+          "trust": 15.44954122881568,
+          "familiarity": 9,
+          "lastMet": 7216,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2558,
+              "text": "worked alongside Alma"
+            },
+            {
+              "tick": 2608,
+              "text": "worked alongside Alma"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1145": {
+          "affinity": -8.166215261481987,
+          "trust": 8.800479883667839,
+          "familiarity": 5,
+          "lastMet": 7146,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1146": {
+          "affinity": 25.398623933258815,
+          "trust": 22.28047949025448,
+          "familiarity": 4.3,
+          "lastMet": 11977,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 11977,
+              "text": "Spent time with Edda again: 1 day of continuing company."
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "company": {
+            "first": 11977,
+            "last": 11977,
+            "days": 1,
+            "helped": 0
+          }
+        },
+        "1147": {
+          "affinity": 12.674879376622991,
+          "trust": 21.034297906924266,
+          "familiarity": 6,
+          "lastMet": -1769,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1149": {
+          "affinity": 19.356394764030295,
+          "trust": 25.21200453227836,
+          "familiarity": 2.5,
+          "lastMet": 3436,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "1150": {
+          "affinity": 30.87891936188691,
+          "trust": 36.58859068367704,
+          "familiarity": 6.5,
+          "lastMet": 3198,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "3565": {
+          "affinity": 1.2909159250000002,
+          "trust": 10.8928144,
+          "familiarity": 0.3,
+          "lastMet": 11669,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 11669,
+              "text": "saw Dara help Uri"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        }
+      },
+      "skills": {
+        "forage": 0.7929578323680908,
+        "fish": 0.8989746635472402,
+        "wood": 0.6901516253976152,
+        "stone": 0.6196664369199425,
+        "build": 0.9819764711281174,
+        "farm": 1.7495033139828593,
+        "craft": 0.5867021762346849,
+        "carpentry": 0.7619869288755581,
+        "kiln": 0.68259508383926,
+        "smith": 0.7651394743006676,
+        "bake": 0.7434839686611667
+      }
+    }
+  },
+  {
+    "seed": "forest",
+    "tick": 12120,
+    "hash": "ebbf2000",
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    },
+    "continuationEqual": true,
+    "events": [
+      {
+        "tick": 191,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 191,
+        "who": "Edda",
+        "age": -1017949,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 246,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 246,
+        "who": "Greta",
+        "age": -1006072,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 275,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.0192."
+      },
+      {
+        "tick": 275,
+        "who": "Delia",
+        "age": -1127361,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.0192."
+      },
+      {
+        "tick": 455,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 455,
+        "who": "Greta",
+        "age": -1006072,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 459,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 459,
+        "who": "Edda",
+        "age": -1017949,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 498,
+        "who": "Viktor",
+        "age": -57850,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 498,
+        "who": "Tomas",
+        "age": -1015093,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 526,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 526,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 529,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 529,
+        "who": "Zeke",
+        "age": -1218705,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 547,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 547,
+        "who": "Faye",
+        "age": -891371,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 683,
+        "who": "Viktor",
+        "age": -57850,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 683,
+        "who": "Tomas",
+        "age": -1015093,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 709,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 709,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 863,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 863,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 1199,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 1199,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 1211,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 1211,
+        "who": "Mira",
+        "age": -703337,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 1313,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 1313,
+        "who": "Faye",
+        "age": -891371,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 1358,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 1358,
+        "who": "Zeke",
+        "age": -1218705,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: our time together was cut short; no completed experience or skill awarded"
+      },
+      {
+        "tick": 2605,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 2605,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 2890,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 2890,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 2911,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 2911,
+        "who": "Theo",
+        "age": -1048891,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3228,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3228,
+        "who": "Lena",
+        "age": -936612,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3239,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3239,
+        "who": "Greta",
+        "age": -1006072,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3310,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3310,
+        "who": "Faye",
+        "age": -891371,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3354,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3354,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3455,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3455,
+        "who": "Zeke",
+        "age": -1218705,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3498,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3498,
+        "who": "Viktor",
+        "age": -57850,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 3558,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3558,
+        "who": "Maren",
+        "age": -730342,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 3596,
+        "who": "Viktor",
+        "age": -57850,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3596,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 3643,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 3643,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 4795,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 4795,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 4896,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 4896,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 4980,
+        "who": "Viktor",
+        "age": -57850,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 4980,
+        "who": "Ada",
+        "age": -1377619,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5013,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 5013,
+        "who": "Tomas",
+        "age": -1015093,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 5015,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5015,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5132,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5132,
+        "who": "Hal",
+        "age": -943330,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5308,
+        "who": "Viktor",
+        "age": -57850,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5308,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5426,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5426,
+        "who": "Thea",
+        "age": -1225742,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5532,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5532,
+        "who": "Greta",
+        "age": -1006072,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5576,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5576,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5611,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5611,
+        "who": "Zeke",
+        "age": -1218705,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5739,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5739,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 5747,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5747,
+        "who": "Hal",
+        "age": -943330,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 5757,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: we did not get to spend the requested time together"
+      },
+      {
+        "tick": 5757,
+        "who": "Ada",
+        "age": -1377619,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: we did not get to spend the requested time together"
+      },
+      {
+        "tick": 5762,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5762,
+        "who": "Tomas",
+        "age": -1015093,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5826,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5826,
+        "who": "Maren",
+        "age": -730342,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5952,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5952,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 5955,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5955,
+        "who": "Petra",
+        "age": -1915781,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5985,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 5985,
+        "who": "Ada",
+        "age": -1377619,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 6002,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 6002,
+        "who": "Faye",
+        "age": -891371,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 6183,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 6183,
+        "who": "Theo",
+        "age": -1048891,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7228,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7228,
+        "who": "Faye",
+        "age": -891371,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7289,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7289,
+        "who": "Zeke",
+        "age": -1218705,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7423,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 7423,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 7837,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7837,
+        "who": "Hal",
+        "age": -943330,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 7844,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7844,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 7985,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 7985,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 8351,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 8351,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 8418,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8418,
+        "who": "Theo",
+        "age": -1048891,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8445,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 8445,
+        "who": "Petra",
+        "age": -1915781,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9516,
+        "who": "Oren",
+        "age": -64247,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: we did not get to spend the requested time together"
+      },
+      {
+        "tick": 9516,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "interrupted",
+        "detail": "time together unfinished: we did not get to spend the requested time together"
+      },
+      {
+        "tick": 9612,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 9612,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 9612,
+        "who": "Oren",
+        "age": -64247,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 9612,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 9643,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9643,
+        "who": "Faye",
+        "age": -891371,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9704,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9704,
+        "who": "Ada",
+        "age": -1377619,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9744,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 9744,
+        "who": "Zeke",
+        "age": -1218705,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 9899,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 9899,
+        "who": "Nico",
+        "age": -239452,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 9983,
+        "who": "Oren",
+        "age": -64247,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 9983,
+        "who": "Rafe",
+        "age": -901971,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10005,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10005,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10051,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 10051,
+        "who": "Thea",
+        "age": -1225742,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I cannot teach you more about foraging yet"
+      },
+      {
+        "tick": 10154,
+        "who": "Talia",
+        "age": -212572,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10154,
+        "who": "Zeke",
+        "age": -1218705,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10155,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10155,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10158,
+        "who": "Oren",
+        "age": -64247,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10158,
+        "who": "Rafe",
+        "age": -901971,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10377,
+        "who": "Oren",
+        "age": -64247,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10377,
+        "who": "Hana",
+        "age": -290943,
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now"
+      },
+      {
+        "tick": 10436,
+        "who": "Tessa",
+        "age": -109484,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10436,
+        "who": "Faye",
+        "age": -891371,
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks."
+      },
+      {
+        "tick": 10751,
+        "who": "Silas",
+        "age": -257316,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 10751,
+        "who": "Cole",
+        "age": -120775,
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks."
+      },
+      {
+        "tick": 10788,
+        "who": "Kaia",
+        "age": -69942,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10788,
+        "who": "Thea",
+        "age": -1225742,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10878,
+        "who": "Arlo",
+        "age": -182259,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 10878,
+        "who": "Theo",
+        "age": -1048891,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 12096,
+        "who": "Viktor",
+        "age": -57850,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      },
+      {
+        "tick": 12096,
+        "who": "Hal",
+        "age": -943330,
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025."
+      }
+    ],
+    "talia": {
+      "needs": {
+        "hunger": 81.01425000000489,
+        "thirst": 75.37039999999567,
+        "energy": 92.26240000000082,
+        "warmth": 58.40545793223809,
+        "safety": 72.64265990340344,
+        "social": 81.16379291373029
+      },
+      "health": 100,
+      "relations": {
+        "899": {
+          "affinity": -1.0243062798099987,
+          "trust": 18.294605487033067,
+          "familiarity": 9.5,
+          "lastMet": 10669,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2463,
+              "text": "worked alongside Petra"
+            },
+            {
+              "tick": 5113,
+              "text": "worked alongside Petra"
+            },
+            {
+              "tick": 5163,
+              "text": "worked alongside Petra"
+            },
+            {
+              "tick": 5313,
+              "text": "worked alongside Petra"
+            },
+            {
+              "tick": 5363,
+              "text": "worked alongside Petra"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "902": {
+          "affinity": -6.684804199043477,
+          "trust": 7.652701028884531,
+          "familiarity": 2.5,
+          "lastMet": 63,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 63,
+              "text": "worked alongside Bram"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "905": {
+          "affinity": 10.171866826601185,
+          "trust": 21.664827696385064,
+          "familiarity": 3,
+          "lastMet": 6707,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 63,
+              "text": "worked alongside Mira"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "908": {
+          "affinity": 26.79643847362127,
+          "trust": 31.629383747066182,
+          "familiarity": 5,
+          "lastMet": 2619,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "911": {
+          "affinity": -2.2852003191306807,
+          "trust": 12.477823876585692,
+          "familiarity": 3,
+          "lastMet": -1595,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "914": {
+          "affinity": 28.715681521888477,
+          "trust": 25.409799031802653,
+          "familiarity": 8.3,
+          "lastMet": 10810,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 10810,
+              "text": "saw Edda help Viktor"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "915": {
+          "affinity": 0,
+          "trust": 13.00453412517338,
+          "familiarity": 4.5,
+          "lastMet": 2263,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "916": {
+          "affinity": 2.6251874633558057,
+          "trust": 14.748662507622493,
+          "familiarity": 3.5,
+          "lastMet": 10704,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "917": {
+          "affinity": 13.328354675500192,
+          "trust": 16.506424898927175,
+          "familiarity": 6.8,
+          "lastMet": 10157,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 895,
+              "text": "saw Hana quarrel"
+            },
+            {
+              "tick": 2874,
+              "text": "A guessing game together for 120 ticks. With Hana."
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "childhood": [
+            {
+              "kind": "play_together",
+              "last": 2874,
+              "times": 1
+            }
+          ]
+        },
+        "920": {
+          "affinity": 11.163202349575457,
+          "trust": 19.773307138400146,
+          "familiarity": 6.8,
+          "lastMet": 9521,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2463,
+              "text": "worked alongside Yusuf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "923": {
+          "affinity": 7.085777275759347,
+          "trust": 22.395825489566462,
+          "familiarity": 10.8,
+          "lastMet": 9801,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 163,
+              "text": "worked alongside Faye"
+            },
+            {
+              "tick": 313,
+              "text": "worked alongside Faye"
+            },
+            {
+              "tick": 895,
+              "text": "saw Faye quarrel"
+            },
+            {
+              "tick": 4665,
+              "text": "saw Faye help Tessa"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "924": {
+          "affinity": 13.272719138666622,
+          "trust": 24.436625447108053,
+          "familiarity": 8.3,
+          "lastMet": 11691,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 163,
+              "text": "worked alongside Hal"
+            },
+            {
+              "tick": 4873,
+              "text": "saw Hal quarrel"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "925": {
+          "affinity": 15.207897810480905,
+          "trust": 28.463177855510803,
+          "familiarity": 8,
+          "lastMet": 11955,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 163,
+              "text": "worked alongside Kaia"
+            },
+            {
+              "tick": 1013,
+              "text": "worked alongside Kaia"
+            },
+            {
+              "tick": 1063,
+              "text": "worked alongside Kaia"
+            },
+            {
+              "tick": 1113,
+              "text": "worked alongside Kaia"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "926": {
+          "affinity": 15.955837087964108,
+          "trust": 27.426205946881762,
+          "familiarity": 10.5,
+          "lastMet": 8356,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 5263,
+              "text": "worked alongside Tessa"
+            },
+            {
+              "tick": 7463,
+              "text": "worked alongside Tessa"
+            },
+            {
+              "tick": 7513,
+              "text": "worked alongside Tessa"
+            },
+            {
+              "tick": 7863,
+              "text": "worked alongside Tessa"
+            },
+            {
+              "tick": 8013,
+              "text": "worked alongside Tessa"
+            },
+            {
+              "tick": 8063,
+              "text": "worked alongside Tessa"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "928": {
+          "affinity": 12.872348456684067,
+          "trust": 21.98091519061122,
+          "familiarity": 8.8,
+          "lastMet": 11915,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2463,
+              "text": "worked alongside Jax"
+            },
+            {
+              "tick": 4794,
+              "text": "saw Jax help Dov"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "929": {
+          "affinity": 11.386906769808112,
+          "trust": 26.28612602961141,
+          "familiarity": 7.5,
+          "lastMet": 7863,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 213,
+              "text": "worked alongside Isla"
+            },
+            {
+              "tick": 263,
+              "text": "worked alongside Isla"
+            },
+            {
+              "tick": 313,
+              "text": "worked alongside Isla"
+            },
+            {
+              "tick": 7663,
+              "text": "worked alongside Isla"
+            },
+            {
+              "tick": 7713,
+              "text": "worked alongside Isla"
+            },
+            {
+              "tick": 7863,
+              "text": "worked alongside Isla"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "931": {
+          "affinity": 31.279572993181876,
+          "trust": 35.238338760483366,
+          "familiarity": 10.8,
+          "lastMet": 2362,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 63,
+              "text": "worked alongside Greta"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "932": {
+          "affinity": 18.450543112917906,
+          "trust": 27.84675815464149,
+          "familiarity": 10,
+          "lastMet": 8013,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 1063,
+              "text": "worked alongside Silas"
+            },
+            {
+              "tick": 1113,
+              "text": "worked alongside Silas"
+            },
+            {
+              "tick": 1163,
+              "text": "worked alongside Silas"
+            },
+            {
+              "tick": 1213,
+              "text": "worked alongside Silas"
+            },
+            {
+              "tick": 7863,
+              "text": "worked alongside Silas"
+            },
+            {
+              "tick": 8013,
+              "text": "worked alongside Silas"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "934": {
+          "affinity": 91.48293626995337,
+          "trust": 83.40000000000002,
+          "familiarity": 44.599999999999994,
+          "lastMet": 11775,
+          "kin": "parent",
+          "avoidUntil": 0,
+          "debt": -0.5,
+          "history": [
+            {
+              "tick": 63,
+              "text": "worked alongside Thea"
+            },
+            {
+              "tick": 163,
+              "text": "worked alongside Thea"
+            },
+            {
+              "tick": 4701,
+              "text": "Thea gave me 1 berries"
+            },
+            {
+              "tick": 4871,
+              "text": "saw Thea help Cole"
+            },
+            {
+              "tick": 9963,
+              "text": "saw Thea help Edda"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "935": {
+          "affinity": 100,
+          "trust": 86.4,
+          "familiarity": 53.099999999999994,
+          "lastMet": 11817,
+          "kin": "parent",
+          "avoidUntil": 0,
+          "debt": -0.5,
+          "history": [
+            {
+              "tick": 7273,
+              "text": "Spent time with Zeke again: 3 days of continuing company."
+            },
+            {
+              "tick": 7634,
+              "text": "the fishing spot Zeke described was as described when I got there"
+            },
+            {
+              "tick": 9728,
+              "text": "Family time together for 120 ticks. With Zeke."
+            },
+            {
+              "tick": 9728,
+              "text": "Spent time with Zeke again: 3 days of continuing company."
+            },
+            {
+              "tick": 10138,
+              "text": "Foraging practice together for 160 ticks; foraging skill improved by 0.025. With Zeke."
+            },
+            {
+              "tick": 10235,
+              "text": "the wild grain Zeke described (about 5) was bare when I got there 0.2 days later"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "childhood": [
+            {
+              "kind": "family_time",
+              "last": 9728,
+              "times": 2
+            },
+            {
+              "kind": "learn_foraging",
+              "last": 10138,
+              "times": 3
+            }
+          ],
+          "company": {
+            "first": 513,
+            "last": 9728,
+            "days": 3,
+            "helped": 0
+          },
+          "accounts": {
+            "checked": 2,
+            "borneOut": 1,
+            "last": {
+              "tick": 10235,
+              "id": 767,
+              "kind": "wild_grain",
+              "described": 5,
+              "expected": 5,
+              "found": 0,
+              "borneOut": false,
+              "toldAt": 9728
+            }
+          }
+        },
+        "936": {
+          "affinity": 75.75802930719027,
+          "trust": 83.40000000000005,
+          "familiarity": 48.5,
+          "lastMet": 11579,
+          "kin": "sibling",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 693,
+              "text": "Spent time with Cole again: 1 day of continuing company."
+            },
+            {
+              "tick": 7713,
+              "text": "worked alongside Cole"
+            },
+            {
+              "tick": 7863,
+              "text": "worked alongside Cole"
+            },
+            {
+              "tick": 8013,
+              "text": "worked alongside Cole"
+            },
+            {
+              "tick": 8063,
+              "text": "worked alongside Cole"
+            },
+            {
+              "tick": 9506,
+              "text": "the clay pit Cole described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "childhood": [
+            {
+              "kind": "family_time",
+              "last": 693,
+              "times": 1
+            }
+          ],
+          "company": {
+            "first": 693,
+            "last": 693,
+            "days": 1,
+            "helped": 0
+          },
+          "accounts": {
+            "checked": 1,
+            "borneOut": 1,
+            "last": {
+              "tick": 9506,
+              "id": 956,
+              "kind": "clay_pit",
+              "described": 21,
+              "expected": 21,
+              "found": 21,
+              "borneOut": true,
+              "toldAt": 7969
+            }
+          }
+        },
+        "939": {
+          "affinity": 11.038884702219844,
+          "trust": 18.28787900736095,
+          "familiarity": 7,
+          "lastMet": 2463,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 63,
+              "text": "worked alongside Maren"
+            },
+            {
+              "tick": 163,
+              "text": "worked alongside Maren"
+            },
+            {
+              "tick": 2463,
+              "text": "worked alongside Maren"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "940": {
+          "affinity": 27.195913616366433,
+          "trust": 32.150839298113624,
+          "familiarity": 16.900000000000002,
+          "lastMet": 11492,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2463,
+              "text": "worked alongside Dov"
+            },
+            {
+              "tick": 4873,
+              "text": "saw Dov quarrel"
+            },
+            {
+              "tick": 7364,
+              "text": "the clay pit Dov described was as described when I got there"
+            },
+            {
+              "tick": 8013,
+              "text": "worked alongside Dov"
+            },
+            {
+              "tick": 8063,
+              "text": "worked alongside Dov"
+            },
+            {
+              "tick": 10211,
+              "text": "the ore vein Dov described was as described when I got there"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "accounts": {
+            "checked": 2,
+            "borneOut": 2,
+            "last": {
+              "tick": 10211,
+              "id": 961,
+              "kind": "ore_vein",
+              "described": 23,
+              "expected": 23,
+              "found": 23,
+              "borneOut": true,
+              "toldAt": 8185
+            }
+          }
+        },
+        "942": {
+          "affinity": 21.069615167201327,
+          "trust": 26.29638265454446,
+          "familiarity": 11.3,
+          "lastMet": 7563,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 2272,
+              "text": "saw Delia help Nico"
+            },
+            {
+              "tick": 2463,
+              "text": "worked alongside Delia"
+            },
+            {
+              "tick": 7563,
+              "text": "worked alongside Delia"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "943": {
+          "affinity": 0,
+          "trust": 13.213315122444062,
+          "familiarity": 6.699999999999999,
+          "lastMet": 10453,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 19,
+              "text": "saw Theo help Nico"
+            },
+            {
+              "tick": 53,
+              "text": "saw Theo help Arlo"
+            },
+            {
+              "tick": 339,
+              "text": "saw Theo help Arlo"
+            },
+            {
+              "tick": 2463,
+              "text": "worked alongside Theo"
+            },
+            {
+              "tick": 4664,
+              "text": "saw Theo help Arlo"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "944": {
+          "affinity": 28.602098361260932,
+          "trust": 27.080301865916923,
+          "familiarity": 4,
+          "lastMet": 5936,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 5936,
+              "text": "A guessing game together for 120 ticks. With Nico."
+            },
+            {
+              "tick": 5936,
+              "text": "Spent time with Nico again: 1 day of continuing company."
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999,
+          "childhood": [
+            {
+              "kind": "play_together",
+              "last": 5936,
+              "times": 1
+            }
+          ],
+          "company": {
+            "first": 5936,
+            "last": 5936,
+            "days": 1,
+            "helped": 0
+          }
+        },
+        "945": {
+          "affinity": 11.925650922329284,
+          "trust": 21.99330878762937,
+          "familiarity": 6.5,
+          "lastMet": 10313,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 163,
+              "text": "worked alongside Arlo"
+            },
+            {
+              "tick": 213,
+              "text": "worked alongside Arlo"
+            },
+            {
+              "tick": 263,
+              "text": "worked alongside Arlo"
+            },
+            {
+              "tick": 313,
+              "text": "worked alongside Arlo"
+            },
+            {
+              "tick": 10313,
+              "text": "worked alongside Arlo"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "3349": {
+          "affinity": 1.2077212729210138,
+          "trust": 10.827348752388698,
+          "familiarity": 0.8,
+          "lastMet": 7011,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 7011,
+              "text": "saw Sofia help Oren"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        },
+        "3351": {
+          "affinity": 2.8,
+          "trust": 12.799999999999999,
+          "familiarity": 0,
+          "lastMet": 12108,
+          "kin": "",
+          "avoidUntil": 0,
+          "debt": 0,
+          "history": [
+            {
+              "tick": 12086,
+              "text": "Oren warned me about a wolf"
+            }
+          ],
+          "grievance": null,
+          "settledAt": -99999
+        }
+      },
+      "skills": {
+        "forage": 0.624,
+        "fish": 0.40011814924162853,
+        "wood": 0.3956450371223197,
+        "stone": 0.39714071463968126,
+        "build": 0.4908030791172639,
+        "farm": 0.5297622136624922,
+        "craft": 0.5095617943568729,
+        "carpentry": 0.46413202587102015,
+        "kiln": 0.3743714823889641,
+        "smith": 0.9116649009615614,
+        "bake": 0.48372283635244845
+      }
+    }
+  }
+]

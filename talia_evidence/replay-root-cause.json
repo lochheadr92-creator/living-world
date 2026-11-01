@@ -1,0 +1,12 @@
+{
+  "baseline": "c3f1310709831d7e90be2bdcbc023f33c8a391a8",
+  "rules": 117,
+  "differences": [
+    {
+      "index": 4980,
+      "browser": "RoutineActivity1022:2014{\"key\":\"build:2002\",\"label\":\"Build the hut\",\"kind\":\"build\",\"target\":2002,\"phase\":1,\"context\":{\"winter\":false,\"household\":1020,\"home\":1021,\"injury\":\"well\",\"family\":\"1:1024\",\"contact\":\"2:1023,1024\",\"losses\":\"0:\"},\"eta\":117.31655976476324,\"energy\":84.47074968048436,\"warmth\":71.21084038161287}",
+      "node": "RoutineActivity1022:2014{\"key\":\"build:2002\",\"label\":\"Build the hut\",\"kind\":\"build\",\"target\":2002,\"phase\":1,\"context\":{\"winter\":false,\"household\":1020,\"home\":1021,\"injury\":\"well\",\"family\":\"1:1024\",\"contact\":\"2:1023,1024\",\"losses\":\"0:\"},\"eta\":117.31655976476324,\"energy\":84.47074968048436,\"warmth\":71.21084038161288}"
+    }
+  ],
+  "repair": "Rules 119 rounds captured routine measurements to four decimals; no replay checks bypassed."
+}

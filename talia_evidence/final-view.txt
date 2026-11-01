@@ -1,0 +1,271 @@
+- generic "The simulated world"
+- heading "Living World" [level=1]
+- 'button "World menu. Current seed: meadow"':
+  - generic: meadow
+- button "Copy seed":
+- button "Help and controls":
+- button "Fold the top bar":
+- group "World summary":
+  - generic: 07:11
+  - generic: Day 5 · dawn
+  - generic: Rain
+  - generic: 7 °C
+  - generic: 29 people
+  - generic: 9 children · 2 elders
+  - generic: 12 households
+  - generic: 14 homes
+- toolbar "Time controls":
+  - button "Play":
+  - button "Step forward one tick":
+  - group "Simulation speed":
+    - button "Speed 0.5×": 0.5×
+    - button "Speed 1×": 1×
+    - button "Speed 2×": 2×
+    - button "Speed 4×": 4×
+    - button "Speed 8×": 8×
+    - button "Speed 16×" [pressed]: 16×
+- status:
+  - generic: Paused
+- region "AI inhabitant":
+  - generic: AI inhabitant
+  - generic: Talia · by hand · notes
+  - generic: finished
+  - generic: the 3-day window is over; save the transcript to keep it · day 5 07:11
+  - generic: 06:00 · Go and drink at the water → applied
+  - generic: "unfinished: the window ended while this was still under way"
+  - generic: Get water after the night. Quinn has given me another berry, and I still have the fish for breakfast afterwards.
+  - generic: Your turn
+  - generic: Nothing to decide just now.
+  - generic: "inferences: 0 new, 0 kept, 0 up, 0 down, 0 revised, 0 dropped · decisions 38, proposed 0, engine 0, refused 0"
+  - button "Save transcript"
+- region "Happenings feed":
+  - button "Happenings" [expanded]:
+    - generic: Happenings
+  - group "Filter happenings by kind":
+    - button "All" [pressed]
+    - button "Life"
+    - button "Social"
+    - button "Build & farm"
+    - button "Workshops"
+    - button "Danger & conflict"
+    - button "Nature"
+    - button "Chronicle"
+  - log "Recent happenings":
+    - button "Pavel warned Eli about a wolf. (15 world min ago). Show where.":
+      - generic: Pavel warned Eli about a wolf.
+      - generic: 22 world min ago
+    - button "Crops are ripening in the Brook field. (1 world h 46 min ago). Show where.":
+      - generic: Crops are ripening in the Brook field.
+      - generic: 1 world h 53 min ago
+    - 'button "Pia has what they hoped for: a solid home of their own. (8 world h 46 min ago). Show where."':
+      - generic: "Pia has what they hoped for: a solid home of their own."
+      - generic: 8 world h 53 min ago
+    - button "Jonas and Sofia are on good terms again (it faded with time). (10 world h 12 min ago). Show where.":
+      - generic: Jonas and Sofia are on good terms again (it faded with time).
+      - generic: 10 world h 19 min ago
+    - button "Rain begins to fall. (10 world h 28 min ago). Show where.":
+      - generic: Rain begins to fall.
+      - generic: 10 world h 35 min ago
+    - button "Zeke gave 1 fish to Quinn. (12 world h 29 min ago). Show where.":
+      - generic: Zeke gave 1 fish to Quinn.
+      - generic: 12 world h 36 min ago
+    - button "Rafe and Wes are on good terms again (it faded with time). (12 world h 39 min ago). Show where.":
+      - generic: Rafe and Wes are on good terms again (it faded with time).
+      - generic: 12 world h 46 min ago
+    - button "Sven brought in the first harvest. (13 world h 1 min ago). Show where.":
+      - generic: Sven brought in the first harvest.
+      - generic: 13 world h 8 min ago
+    - button "Zed marked out a lean-to for the Alder household. (14 world h 53 min ago). Show where.":
+      - generic: Zed marked out a lean-to for the Alder household.
+      - generic: 15 world h 1 min ago
+    - button "Isla marked out a hut for the Sedge household. (15 world h ago). Show where.":
+      - generic: Isla marked out a hut for the Sedge household.
+      - generic: 15 world h 7 min ago
+    - button "Alma finished a hut for the Hazel household. (15 world h 9 min ago). Show where.":
+      - generic: Alma finished a hut for the Hazel household.
+      - generic: 15 world h 16 min ago
+    - button "Crops are ripening in the Juniper field. (15 world h 26 min ago). Show where.":
+      - generic: Crops are ripening in the Juniper field.
+      - generic: 15 world h 33 min ago
+    - button "Pia finished a hut for the Sorrel household. (17 world h 2 min ago). Show where.":
+      - generic: Pia finished a hut for the Sorrel household.
+      - generic: 17 world h 10 min ago
+    - button "Felix gave 2 fish to Zeke. (17 world h 27 min ago). Show where.":
+      - generic: Felix gave 2 fish to Zeke.
+      - generic: 17 world h 34 min ago
+    - button "Isla warned Zeke about a wolf. (18 world h 28 min ago). Show where.":
+      - generic: Isla warned Zeke about a wolf.
+      - generic: 18 world h 35 min ago
+    - button "Yara made a basket. (18 world h 46 min ago). Show where.":
+      - generic: Yara made a basket.
+      - generic: 18 world h 53 min ago
+    - button "Quinn promised Wes grain. (22 world h 11 min ago). Show where.":
+      - generic: Quinn promised Wes grain.
+      - generic: 22 world h 18 min ago
+    - button "Vik gave 1 berries to Zeke. (23 world h 43 min ago). Show where.":
+      - generic: Vik gave 1 berries to Zeke.
+      - generic: 23 world h 50 min ago
+    - button "Talia and Felix argued over the last berries. (23 world h 44 min ago). Show where.":
+      - generic: Talia and Felix argued over the last berries.
+      - generic: 23 world h 51 min ago
+    - 'button "Maren has what they hoped for: a solid home of their own. (1 world day 1 h 32 min ago). Show where."':
+      - generic: "Maren has what they hoped for: a solid home of their own."
+      - generic: 1 world day 1 h 40 min ago
+    - button "Pia warned Abel about a wolf. (1 world day 3 h 42 min ago). Show where.":
+      - generic: Pia warned Abel about a wolf.
+      - generic: 1 world day 3 h 49 min ago
+    - button "Clouds gather overhead. (1 world day 7 h 37 min ago). Show where.":
+      - generic: Clouds gather overhead.
+      - generic: 1 world day 7 h 44 min ago
+    - button "Alma marked out a hut for the Hazel household. (1 world day 12 h 20 min ago). Show where.":
+      - generic: Alma marked out a hut for the Hazel household.
+      - generic: 1 world day 12 h 27 min ago
+    - button "Maren has taken Dax on as an apprentice at building. (1 world day 13 h 5 min ago). Show where.":
+      - generic: Maren has taken Dax on as an apprentice at building.
+      - generic: 1 world day 13 h 13 min ago
+    - button "Maren finished a hut for the Thistle household. (1 world day 13 h 5 min ago). Show where.":
+      - generic: Maren finished a hut for the Thistle household.
+      - generic: 1 world day 13 h 13 min ago
+    - button "Sofia made a basket. (1 world day 15 h 49 min ago). Show where.":
+      - generic: Sofia made a basket.
+      - generic: 1 world day 15 h 56 min ago
+    - button "Jax warned Rafe about a wolf. (1 world day 19 h 38 min ago). Show where.":
+      - generic: Jax warned Rafe about a wolf.
+      - generic: 1 world day 19 h 45 min ago
+    - button "Dax promised Mona stone. (1 world day 21 h ago). Show where.":
+      - generic: Dax promised Mona stone.
+      - generic: 1 world day 21 h 7 min ago
+    - button "A traveller, Zed, arrives at the settlement. (1 world day 21 h 46 min ago). Show where.":
+      - generic: A traveller, Zed, arrives at the settlement.
+      - generic: 1 world day 21 h 53 min ago
+    - button "Felix made a basket. (1 world day 22 h 14 min ago). Show where.":
+      - generic: Felix made a basket.
+      - generic: 1 world day 22 h 22 min ago
+- button "Hide the inspector" [expanded]:
+- complementary "Inspector":
+  - generic: T
+  - heading "Talia" [level=2]
+  - button "Follow this person with the camera" [pressed]:
+    - generic: Following
+  - button "Show on the map":
+  - button "Close inspector":
+  - generic "Age in years. A year of life takes 12 days here.": Child, 8
+  - generic: Moss household
+  - generic: "Home: lean-to (77% sound)"
+  - generic: "Township: Willowbank"
+  - generic: Mood
+  - generic: Content
+  - generic: Health
+  - generic: "100"
+  - generic: On their mind
+  - generic: "+7"
+  - generic: Quinn gave me 1 berries
+  - generic: "-6"
+  - generic: Has had too much company
+  - generic: "0"
+  - generic: Argued with Felix
+  - region "What are they up to?":
+    - heading "What are they up to?" [level=3]
+    - button "More":
+      - generic: More
+    - definition: Drinking at the water (25% of this task).
+    - definition:
+      - generic: 25%
+  - generic: Needs
+  - group "Needs":
+    - meter "Food":
+      - generic: Food
+      - generic: "61"
+    - meter "Water":
+      - generic: Water
+      - generic: "34"
+    - meter "Energy":
+      - generic: Energy
+      - generic: "96"
+    - meter "Warmth":
+      - generic: Warmth
+      - generic: "48"
+    - meter "Safety":
+      - generic: Safety
+      - generic: "84"
+    - meter "Company":
+      - generic: Company
+      - generic: "95"
+  - generic: Carrying
+  - img "1 fish":
+    - generic: ×1
+  - img "1 berries":
+    - generic: ×1
+  - generic: 2.5 / 5
+  - generic: Tools
+  - generic: none
+  - generic "Township & shared work"
+  - generic "Household history"
+  - generic "Relationship history"
+  - generic "Recent decisions"
+  - button "Conversation" [expanded]:
+    - generic: Conversation
+  - group "Last conversation":
+    - generic: Last conversation
+    - generic: 12 world h 50 min ago
+    - button "Look at Wes": Wes
+    - generic: · a warning
+    - term: Outcome
+    - definition: Warned them (they had not heard; they know now)
+  - button "Quarrels 1" [expanded]:
+    - generic: Quarrels
+    - generic: "1"
+  - button "Look at Felix": Felix
+  - generic: Competition
+  - generic: started 23 world h 51 min ago
+  - generic: We argued over the last berries
+  - generic: Sore
+  - meter "Soreness"
+  - generic: "22"
+  - generic: Apologies
+  - generic: 1 of 3
+  - button "Worries 1":
+    - generic: Worries
+    - generic: "1"
+  - group "More about them":
+    - button "Nearby":
+      - generic: Nearby
+    - button "People 14":
+      - generic: People
+      - generic: "14"
+    - button "Requests":
+      - generic: Requests
+    - button "Recent 14":
+      - generic: Recent
+      - generic: "14"
+    - button "Knows 183":
+      - generic: Knows
+      - generic: "183"
+    - button "Family 2":
+      - generic: Family
+      - generic: "2"
+    - button "Traits":
+      - generic: Traits
+- button "Map" [expanded]:
+- img "Map of the whole world. Click or drag to move the camera."
+- group "Map overlays":
+  - button "Perception overlay":
+    - generic: Perception
+  - button "Paths overlay":
+    - generic: Paths
+  - button "Intentions overlay":
+    - generic: Intentions
+  - button "Knowledge overlay":
+    - generic: Knowledge
+  - button "Labels overlay":
+    - generic: Labels
+- generic "View"
+- option "Automatic" [selected]
+- option "Selected person only"
+- option "Hidden"
+- option "Normal" [selected]
+- option "Large"
+- option "Standard" [selected]
+- option "High"
+- status:
+  - generic: Transcript saved

@@ -1,0 +1,124 @@
+[
+  {
+    "seed": "meadow",
+    "tick": 12120,
+    "hash": "875829a3",
+    "conservation": true,
+    "exactContinuation": true,
+    "participantEndings": 162,
+    "taliaNonKinPlay": [
+      {
+        "id": "1033",
+        "experiences": [
+          {
+            "kind": "play_together",
+            "last": 7804,
+            "times": 1
+          }
+        ],
+        "history": [
+          {
+            "tick": 71,
+            "text": "worked alongside Eli"
+          },
+          {
+            "tick": 7804,
+            "text": "A guessing game together for 120 ticks. With Eli."
+          }
+        ]
+      }
+    ],
+    "outcomes": {
+      "success": 110,
+      "interrupted": 52
+    },
+    "kinds": {
+      "Foraging practice completed": 46,
+      "Family time completed": 42,
+      "A guessing game completed": 22,
+      "invitation declined": 46,
+      "time together unfinished": 6
+    }
+  },
+  {
+    "seed": "river",
+    "tick": 12120,
+    "hash": "702f0edb",
+    "conservation": true,
+    "exactContinuation": true,
+    "participantEndings": 130,
+    "taliaNonKinPlay": [],
+    "outcomes": {
+      "interrupted": 38,
+      "success": 92
+    },
+    "kinds": {
+      "invitation declined": 34,
+      "Family time completed": 34,
+      "A guessing game completed": 16,
+      "Foraging practice completed": 42,
+      "time together unfinished": 4
+    }
+  },
+  {
+    "seed": "forest",
+    "tick": 12120,
+    "hash": "ebbf2000",
+    "conservation": true,
+    "exactContinuation": true,
+    "participantEndings": 154,
+    "taliaNonKinPlay": [
+      {
+        "id": "917",
+        "experiences": [
+          {
+            "kind": "play_together",
+            "last": 2874,
+            "times": 1
+          }
+        ],
+        "history": [
+          {
+            "tick": 895,
+            "text": "saw Hana quarrel"
+          },
+          {
+            "tick": 2874,
+            "text": "A guessing game together for 120 ticks. With Hana."
+          }
+        ]
+      },
+      {
+        "id": "944",
+        "experiences": [
+          {
+            "kind": "play_together",
+            "last": 5936,
+            "times": 1
+          }
+        ],
+        "history": [
+          {
+            "tick": 5936,
+            "text": "A guessing game together for 120 ticks. With Nico."
+          },
+          {
+            "tick": 5936,
+            "text": "Spent time with Nico again: 1 day of continuing company."
+          }
+        ]
+      }
+    ],
+    "outcomes": {
+      "interrupted": 38,
+      "success": 116
+    },
+    "kinds": {
+      "invitation declined": 32,
+      "Family time completed": 36,
+      "Foraging practice completed": 60,
+      "A guessing game completed": 20,
+      "time together unfinished": 6
+    }
+  }
+]

@@ -112,7 +112,8 @@ after successful solitude. Tests retain each relevant boundary. The quiet-contac
 fixture originally pinned the inviting person's activity and was corrected to allow
 the actual contact attempt. No runtime rule was weakened to satisfy it.
 
-Earlier development runs remain in `talia_evidence/`: one loaded the pre-fix food policy
+Earlier development runs are preserved locally in the sibling directory
+`C:\dev\Claude Experiment\living-world-talia-diagnostics-20261101`: one loaded the pre-fix food policy
 before a newly written lab-removal test was collected; another mixed development and
 hit subprocess timeouts under unrestricted concurrency. The frozen eight-worker run
 above is the final full result. Test timeouts and assertions were not relaxed.

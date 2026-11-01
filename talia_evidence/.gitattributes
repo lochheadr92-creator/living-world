@@ -1,0 +1,6 @@
+# Recorded evidence keeps its exact bytes across Windows checkouts.
+*.json -text
+# Raw tool output includes CRLF, trailing spaces and blank terminal lines.
+*.log -text whitespace=cr-at-eol,-blank-at-eof,-blank-at-eol
+*.txt -text
+*.jpg binary

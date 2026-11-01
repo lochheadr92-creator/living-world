@@ -1,0 +1,12 @@
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-talia
+
+(node:13732) TimeoutOverflowWarning: 1099511627776 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+ Test Files  377 passed | 1 skipped (378)
+      Tests  2372 passed | 1 todo (2373)
+   Start at  11:43:14
+   Duration  316.56s (tests 92%, import 7%, transform 1%)
+

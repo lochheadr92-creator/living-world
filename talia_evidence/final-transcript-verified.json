@@ -1,0 +1,1049 @@
+{
+  "source": {
+    "behaviour": "22b83b7c:3780a61a"
+  },
+  "settings": {
+    "seed": "meadow",
+    "population": 28,
+    "harsh": false,
+    "immigration": true,
+    "scene": "natural",
+    "dynamics": "rich",
+    "rulesVersion": 120
+  },
+  "start": 2400,
+  "end": {
+    "tick": 9600,
+    "hash": "e35d5f95",
+    "died": false,
+    "calls": 38,
+    "applied": 38,
+    "rejected": 0,
+    "fallbacks": 0,
+    "proposed": 0,
+    "revised": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 38,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 1161094,
+      "outputTokens": 0,
+      "givenUp": null
+    },
+    "notesHash": "6ae51878"
+  },
+  "calls": 38,
+  "applied": 38,
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 2075,
+      "label": "Drinking at the water",
+      "tick": 2720,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 1,
+      "activityId": 2146,
+      "label": "Bringing food home",
+      "tick": 2932,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 2274,
+      "label": "Family time with Wes",
+      "tick": 3122,
+      "outcome": "success",
+      "detail": "Family time completed: Family time together for 120 ticks."
+    },
+    {
+      "call": 3,
+      "activityId": 2381,
+      "label": "Tell Ivo to stop my obsolete request",
+      "tick": 3165,
+      "outcome": "failed",
+      "detail": "Ivo was too busy to stop"
+    },
+    {
+      "call": 4,
+      "activityId": 2401,
+      "label": "A guessing game with Wes",
+      "tick": 3350,
+      "outcome": "success",
+      "detail": "A guessing game completed: A guessing game together for 120 ticks."
+    },
+    {
+      "call": 5,
+      "activityId": 2485,
+      "label": "Foraging practice with Felix",
+      "tick": 3370,
+      "outcome": "failed",
+      "detail": "Felix was too busy to stop"
+    },
+    {
+      "call": 6,
+      "activityId": 2497,
+      "label": "Gathering wild grain",
+      "tick": 3498,
+      "outcome": "partial",
+      "detail": "nothing left"
+    },
+    {
+      "call": 7,
+      "activityId": 2550,
+      "label": "Bringing food home",
+      "tick": 3609,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 8,
+      "activityId": 2591,
+      "label": "Sleeping by my lean-to",
+      "tick": 3992,
+      "outcome": "success",
+      "detail": "rested"
+    },
+    {
+      "call": 9,
+      "activityId": 2617,
+      "label": "Eating",
+      "tick": 4012,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 10,
+      "activityId": 2618,
+      "label": "Staying at my lean-to",
+      "tick": 4681,
+      "outcome": "success",
+      "detail": "daylight arrived"
+    },
+    {
+      "call": 11,
+      "activityId": 2757,
+      "label": "Drinking at the water",
+      "tick": 4827,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 12,
+      "activityId": 2835,
+      "label": "Foraging practice with Bea",
+      "tick": 4951,
+      "outcome": "failed",
+      "detail": "Bea was too busy to stop"
+    },
+    {
+      "call": 13,
+      "activityId": 2904,
+      "label": "Picking berries",
+      "tick": 5075,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 14,
+      "activityId": 2980,
+      "label": "Bringing food home",
+      "tick": 5250,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 15,
+      "activityId": 3057,
+      "label": "Eating",
+      "tick": 5280,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 16,
+      "activityId": 3072,
+      "label": "Foraging practice with Yara",
+      "tick": 5503,
+      "outcome": "success",
+      "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.0051."
+    },
+    {
+      "call": 17,
+      "activityId": 3174,
+      "label": "Picking berries",
+      "tick": 5570,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 18,
+      "activityId": 3205,
+      "label": "Family time with Quinn",
+      "tick": 5774,
+      "outcome": "success",
+      "detail": "Family time completed: Family time together for 120 ticks."
+    },
+    {
+      "call": 19,
+      "activityId": 3296,
+      "label": "A guessing game with Kai",
+      "tick": 5858,
+      "outcome": "interrupted",
+      "detail": "invitation declined: I have already had that time today; I want to do something else now"
+    },
+    {
+      "call": 20,
+      "activityId": 3339,
+      "label": "Bringing food home",
+      "tick": 5915,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 21,
+      "activityId": 3373,
+      "label": "Drinking at the water",
+      "tick": 6067,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 22,
+      "activityId": 3422,
+      "label": "Sleeping by my lean-to",
+      "tick": 6630,
+      "outcome": "success",
+      "detail": "rested"
+    },
+    {
+      "call": 23,
+      "activityId": 3471,
+      "label": "Eating",
+      "tick": 6650,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 24,
+      "activityId": 3477,
+      "label": "Staying at my lean-to",
+      "tick": 7085,
+      "outcome": "success",
+      "detail": "daylight arrived"
+    },
+    {
+      "call": 25,
+      "activityId": 3589,
+      "label": "A guessing game with Orla",
+      "tick": 7100,
+      "outcome": "failed",
+      "detail": "Orla was too busy to stop"
+    },
+    {
+      "call": 26,
+      "activityId": 3596,
+      "label": "A guessing game with Rafe",
+      "tick": 7179,
+      "outcome": "interrupted",
+      "detail": "invitation declined: I have already had that time today; I want to do something else now"
+    },
+    {
+      "call": 27,
+      "activityId": 3652,
+      "label": "Picking berries",
+      "tick": 7216,
+      "outcome": "failed",
+      "detail": "someone else is already taking it"
+    },
+    {
+      "call": 28,
+      "activityId": 3701,
+      "label": "Drinking at the water",
+      "tick": 7555,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 29,
+      "activityId": 3849,
+      "label": "Fishing",
+      "tick": 7882,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 30,
+      "activityId": 4013,
+      "label": "Eating",
+      "tick": 7902,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 31,
+      "activityId": 4025,
+      "label": "Make peace with Felix",
+      "tick": 8039,
+      "outcome": "failed",
+      "detail": "ended sourly"
+    },
+    {
+      "call": 32,
+      "activityId": 4094,
+      "label": "A guessing game with Lena",
+      "tick": 8075,
+      "outcome": "failed",
+      "detail": "Lena was too busy to stop"
+    },
+    {
+      "call": 33,
+      "activityId": 4124,
+      "label": "Sitting alone for a while",
+      "tick": 8185,
+      "outcome": "interrupted",
+      "detail": "danger nearby"
+    },
+    {
+      "call": 34,
+      "activityId": 4216,
+      "label": "Warn Wes about the wolf",
+      "tick": 8318,
+      "outcome": "success",
+      "detail": "they had not heard; they know now"
+    },
+    {
+      "call": 35,
+      "activityId": 4266,
+      "label": "Sleeping by my lean-to",
+      "tick": 8929,
+      "outcome": "success",
+      "detail": "rested"
+    },
+    {
+      "call": 36,
+      "activityId": 4346,
+      "label": "Staying at my lean-to",
+      "tick": 9481,
+      "outcome": "success",
+      "detail": "daylight arrived"
+    },
+    {
+      "call": 37,
+      "activityId": 4436,
+      "label": "Drinking at the water",
+      "tick": 9600,
+      "outcome": "unfinished",
+      "detail": "the window ended while this was still under way"
+    }
+  ],
+  "hash": "e35d5f95",
+  "warnings": [],
+  "saveSHA256": "a2f1d621370b0cd072c6a4ef28ae458ee8d2174caa9a2deee3d7500f44f2c110",
+  "exactIndependentReplays": true,
+  "exactSaveRoundtrip": true,
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "person": {
+    "name": "Talia",
+    "health": 100,
+    "needs": {
+      "hunger": 61.39810000000484,
+      "thirst": 34.29159999999535,
+      "energy": 96.19200000000042,
+      "warmth": 47.55970310087652,
+      "safety": 84.02306013779716,
+      "social": 95.23081970896392
+    },
+    "skills": {
+      "forage": 1.0443107330538333,
+      "fish": 0.8732428774014243,
+      "wood": 0.9833043872939145,
+      "stone": 0.7914215102940831,
+      "build": 0.8146958220631415,
+      "farm": 0.9001989768251049,
+      "craft": 0.7679902346132037,
+      "carpentry": 0.9041656026888729,
+      "kiln": 0.8403012682201414,
+      "smith": 0.9189306733787306,
+      "bake": 0.9965671664041302
+    },
+    "inventory": {
+      "fish": 1,
+      "berries": 1
+    },
+    "relations": {
+      "997": {
+        "affinity": 0.8457369055657471,
+        "trust": 14.582050267796598,
+        "familiarity": 9.3,
+        "lastMet": 2442,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 2404,
+            "text": "Pavel warned me about a wolf"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1000": {
+        "affinity": 2.0835640999899994,
+        "trust": 17.39561504744759,
+        "familiarity": 6.8,
+        "lastMet": 5021,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 4899,
+            "text": "Sven warned me about a wolf"
+          },
+          {
+            "tick": 5021,
+            "text": "worked alongside Sven"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1001": {
+        "affinity": 5.636093209418722,
+        "trust": 20.453831818827872,
+        "familiarity": 8,
+        "lastMet": 4963,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1004": {
+        "affinity": 21.97217131836232,
+        "trust": 28.295568693213365,
+        "familiarity": 7.8999999999999995,
+        "lastMet": 9121,
+        "kin": "",
+        "avoidUntil": 8272,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 7215,
+            "text": "Felix got the last berries before me"
+          },
+          {
+            "tick": 7215,
+            "text": "sore: Felix got the last berries before me"
+          },
+          {
+            "tick": 7215,
+            "text": "argued over the last berries"
+          },
+          {
+            "tick": 7843,
+            "text": "saw Felix help Zeke"
+          }
+        ],
+        "grievance": {
+          "cause": "competition",
+          "detail": "we argued over the last berries",
+          "since": 7215,
+          "weight": 22,
+          "apologies": 1,
+          "lastAmends": 0
+        },
+        "settledAt": -99999
+      },
+      "1007": {
+        "affinity": -8.6288685700594,
+        "trust": 15.946115407712243,
+        "familiarity": 4.1,
+        "lastMet": 9289,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 793,
+            "text": "saw Sofia help Kai"
+          },
+          {
+            "tick": 4645,
+            "text": "saw Sofia help Kai"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1008": {
+        "affinity": 36.3321874293413,
+        "trust": 31.50023347984468,
+        "familiarity": 7.199999999999999,
+        "lastMet": 8349,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 1047,
+            "text": "the fishing spot Ivo described was as described when I got there"
+          },
+          {
+            "tick": 2257,
+            "text": "saw Ivo help Orla"
+          },
+          {
+            "tick": 6965,
+            "text": "saw Ivo help Orla"
+          },
+          {
+            "tick": 7045,
+            "text": "Ivo warned me about a wolf"
+          },
+          {
+            "tick": 8349,
+            "text": "the wild grain Ivo described (about 4) held only 2 when I got there 0.5 days later"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999,
+        "accounts": {
+          "checked": 2,
+          "borneOut": 1,
+          "last": {
+            "tick": 8349,
+            "id": 862,
+            "kind": "wild_grain",
+            "described": 4,
+            "expected": 5,
+            "found": 2,
+            "borneOut": false,
+            "toldAt": 7067
+          }
+        }
+      },
+      "1009": {
+        "affinity": 14.240361430846397,
+        "trust": 25.58611183578025,
+        "familiarity": 4.3,
+        "lastMet": 5841,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 2113,
+            "text": "Kai warned me about a wolf"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1010": {
+        "affinity": 11.453665468805628,
+        "trust": 24.764332722536707,
+        "familiarity": 5,
+        "lastMet": 8071,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 71,
+            "text": "worked alongside Orla"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1013": {
+        "affinity": 1.503589760112819,
+        "trust": 14.115115345149567,
+        "familiarity": 3,
+        "lastMet": -1325,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1014": {
+        "affinity": 5.154443057938103,
+        "trust": 14.885353066789952,
+        "familiarity": 9.1,
+        "lastMet": 7582,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 3282,
+            "text": "saw Hal help Abel"
+          },
+          {
+            "tick": 7310,
+            "text": "Hal warned me about a wolf"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1015": {
+        "affinity": 22.173039815969418,
+        "trust": 19.295431799215965,
+        "familiarity": 8.8,
+        "lastMet": 2568,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 2491,
+            "text": "Abel warned me about a wolf"
+          },
+          {
+            "tick": 2568,
+            "text": "the fishing spot Abel described (about 4) held only 1 when I got there 0.0 days later"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999,
+        "accounts": {
+          "checked": 1,
+          "borneOut": 0,
+          "last": {
+            "tick": 2568,
+            "id": 985,
+            "kind": "fish_spot",
+            "described": 4,
+            "expected": 5,
+            "found": 1,
+            "borneOut": false,
+            "toldAt": 2513
+          }
+        }
+      },
+      "1018": {
+        "affinity": 11.420800487501324,
+        "trust": 29.27015759146946,
+        "familiarity": 4.5,
+        "lastMet": 5551,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1019": {
+        "affinity": 13.388498398126302,
+        "trust": 22.300728248803942,
+        "familiarity": 5,
+        "lastMet": 6013,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1022": {
+        "affinity": 5.892572872711613,
+        "trust": 27.024656690566125,
+        "familiarity": 6.8,
+        "lastMet": 7546,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 7508,
+            "text": "Maren warned me about a wolf"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1023": {
+        "affinity": 18.820592136665006,
+        "trust": 28.546601745125965,
+        "familiarity": 2,
+        "lastMet": -1198,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1024": {
+        "affinity": 5.243313601865624,
+        "trust": 18.82641734488296,
+        "familiarity": 2,
+        "lastMet": -440,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1026": {
+        "affinity": 92.36016926995323,
+        "trust": 82.1,
+        "familiarity": 45.8,
+        "lastMet": 9345,
+        "kin": "parent",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 71,
+            "text": "worked alongside Yara"
+          },
+          {
+            "tick": 271,
+            "text": "worked alongside Yara"
+          },
+          {
+            "tick": 4426,
+            "text": "Spent time with Yara again: 1 day of continuing company."
+          },
+          {
+            "tick": 5486,
+            "text": "Foraging practice together for 160 ticks; foraging skill improved by 0.0051. With Yara."
+          },
+          {
+            "tick": 5511,
+            "text": "the wild grain Yara described was as described when I got there"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999,
+        "company": {
+          "first": 4426,
+          "last": 4426,
+          "days": 1,
+          "helped": 0
+        },
+        "childhood": [
+          {
+            "kind": "learn_foraging",
+            "last": 5486,
+            "times": 1
+          }
+        ],
+        "accounts": {
+          "checked": 1,
+          "borneOut": 1,
+          "last": {
+            "tick": 5511,
+            "id": 863,
+            "kind": "wild_grain",
+            "described": 3,
+            "expected": 3,
+            "found": 2,
+            "borneOut": true,
+            "toldAt": 5486
+          }
+        }
+      },
+      "1027": {
+        "affinity": 95.42738159342892,
+        "trust": 84.8,
+        "familiarity": 45.5,
+        "lastMet": 9465,
+        "kin": "parent",
+        "avoidUntil": 0,
+        "debt": -1,
+        "history": [
+          {
+            "tick": 30,
+            "text": "Quinn gave me 1 fruit"
+          },
+          {
+            "tick": 5757,
+            "text": "Family time together for 120 ticks. With Quinn."
+          },
+          {
+            "tick": 5757,
+            "text": "Spent time with Quinn again: 1 day of continuing company."
+          },
+          {
+            "tick": 7871,
+            "text": "worked alongside Quinn"
+          },
+          {
+            "tick": 9465,
+            "text": "Quinn gave me 1 berries"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999,
+        "childhood": [
+          {
+            "kind": "family_time",
+            "last": 5757,
+            "times": 1
+          }
+        ],
+        "company": {
+          "first": 5757,
+          "last": 5757,
+          "days": 1,
+          "helped": 0
+        }
+      },
+      "1028": {
+        "affinity": 78.9784834836086,
+        "trust": 82.10000000000001,
+        "familiarity": 48.8,
+        "lastMet": 8352,
+        "kin": "sibling",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 481,
+            "text": "Spent time with Wes again: 1 day of continuing company."
+          },
+          {
+            "tick": 571,
+            "text": "worked alongside Wes"
+          },
+          {
+            "tick": 741,
+            "text": "A guessing game together for 120 ticks. With Wes."
+          },
+          {
+            "tick": 3105,
+            "text": "Family time together for 120 ticks. With Wes."
+          },
+          {
+            "tick": 3105,
+            "text": "Spent time with Wes again: 2 days of continuing company."
+          },
+          {
+            "tick": 3333,
+            "text": "A guessing game together for 120 ticks. With Wes."
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999,
+        "childhood": [
+          {
+            "kind": "family_time",
+            "last": 3105,
+            "times": 2
+          },
+          {
+            "kind": "play_together",
+            "last": 3333,
+            "times": 2
+          }
+        ],
+        "company": {
+          "first": 481,
+          "last": 3105,
+          "days": 2,
+          "helped": 0
+        }
+      },
+      "1031": {
+        "affinity": 28.151351389009587,
+        "trust": 38.252648602403994,
+        "familiarity": 10.100000000000001,
+        "lastMet": 8439,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 41,
+            "text": "saw Isla help Eli"
+          },
+          {
+            "tick": 71,
+            "text": "worked alongside Isla"
+          },
+          {
+            "tick": 5521,
+            "text": "worked alongside Isla"
+          },
+          {
+            "tick": 7670,
+            "text": "Isla warned me about a wolf"
+          },
+          {
+            "tick": 8439,
+            "text": "the wild grain Isla described was as described when I got there"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999,
+        "accounts": {
+          "checked": 1,
+          "borneOut": 1,
+          "last": {
+            "tick": 8439,
+            "id": 860,
+            "kind": "wild_grain",
+            "described": 5,
+            "expected": 5,
+            "found": 3,
+            "borneOut": true,
+            "toldAt": 7692
+          }
+        }
+      },
+      "1032": {
+        "affinity": 3.109997376260755,
+        "trust": 17.07933443278774,
+        "familiarity": 9,
+        "lastMet": 9555,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1033": {
+        "affinity": 11.241903192498983,
+        "trust": 23.7785815081882,
+        "familiarity": 8,
+        "lastMet": 71,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 71,
+            "text": "worked alongside Eli"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1034": {
+        "affinity": 19.12561221557702,
+        "trust": 20.218713027338453,
+        "familiarity": 9.5,
+        "lastMet": 2018,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 71,
+            "text": "worked alongside Lena"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1036": {
+        "affinity": 7.39029562855646,
+        "trust": 23.597320054976088,
+        "familiarity": 5.5,
+        "lastMet": 2177,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1037": {
+        "affinity": -5.635950426027896,
+        "trust": 15.750030931971617,
+        "familiarity": 10,
+        "lastMet": 7181,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1039": {
+        "affinity": 25.62257546735963,
+        "trust": 28.975132976706284,
+        "familiarity": 11,
+        "lastMet": 9471,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 5021,
+            "text": "worked alongside Edda"
+          },
+          {
+            "tick": 5071,
+            "text": "worked alongside Edda"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      },
+      "1040": {
+        "affinity": -4.268377619566746,
+        "trust": 18.369003037477952,
+        "familiarity": 5.8,
+        "lastMet": 8340,
+        "kin": "",
+        "avoidUntil": 0,
+        "debt": 0,
+        "history": [
+          {
+            "tick": 8340,
+            "text": "saw Zeke help Quinn"
+          }
+        ],
+        "grievance": null,
+        "settledAt": -99999
+      }
+    },
+    "mood": {
+      "level": -5.9,
+      "thoughts": [
+        {
+          "kind": "argued:1004",
+          "value": -12,
+          "since": 7215,
+          "until": 9615,
+          "why": "argued with Felix"
+        },
+        {
+          "kind": "crowded",
+          "value": -6.123154715772477,
+          "since": 9591,
+          "until": 10791,
+          "why": "has had too much company"
+        },
+        {
+          "kind": "gift:1027",
+          "value": 8,
+          "since": 9465,
+          "until": 11145,
+          "why": "Quinn gave me 1 berries"
+        }
+      ]
+    }
+  },
+  "continued": true
+}

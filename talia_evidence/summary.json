@@ -1,0 +1,2710 @@
+{
+  "start": 2400,
+  "end": {
+    "tick": 9600,
+    "hash": "e35d5f95",
+    "died": false,
+    "calls": 38,
+    "applied": 38,
+    "rejected": 0,
+    "fallbacks": 0,
+    "proposed": 0,
+    "revised": 0,
+    "lagged": 0,
+    "gate": {
+      "calls": 38,
+      "failures": 0,
+      "refused": 0,
+      "retries": 0,
+      "inputChars": 1161094,
+      "outputTokens": 0,
+      "givenUp": null
+    },
+    "notesHash": "6ae51878"
+  },
+  "answered": 38,
+  "results": {
+    "applied": 38
+  },
+  "outcomeCounts": {
+    "success": 26,
+    "failed": 7,
+    "partial": 1,
+    "interrupted": 3,
+    "unfinished": 1
+  },
+  "ranges": {
+    "health": [
+      100,
+      100
+    ],
+    "mood": [
+      -15,
+      9
+    ]
+  },
+  "onlyWander": [],
+  "decisions": [
+    {
+      "tick": 2602,
+      "time": {
+        "tick": 2602,
+        "day": 2,
+        "clock": "09:13",
+        "phase": "morning",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 14
+      },
+      "choice": {
+        "choose": "drink:1000130",
+        "why": "Get a drink nearby before taking my spare food home."
+      },
+      "last": {
+        "label": "Picking berries",
+        "outcome": "failed",
+        "detail": "someone else is already taking it",
+        "when": "1 world min ago",
+        "t": 2601
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "they already knew",
+        "detail": "they knew as much or more already",
+        "when": "44 world min ago",
+        "t": 2529
+      },
+      "needs": {
+        "hunger": {
+          "value": 91,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 59,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 88,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 97,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1,
+        "grain": 1
+      },
+      "thoughts": [
+        "-6 has had too much company"
+      ]
+    },
+    {
+      "tick": 2720,
+      "time": {
+        "tick": 2720,
+        "day": 2,
+        "clock": "10:24",
+        "phase": "morning",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 16
+      },
+      "choice": {
+        "choose": "deposit:2001:food",
+        "why": "Bring the spare grain home while keeping two pieces of food for myself."
+      },
+      "last": {
+        "label": "Drinking at the water",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 2719
+      },
+      "interaction": {
+        "purpose": "trade",
+        "outcome": "refused",
+        "detail": "nothing to spare",
+        "when": "16 world min ago",
+        "t": 2694
+      },
+      "needs": {
+        "hunger": {
+          "value": 88,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 91,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 84,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 91,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1,
+        "grain": 1
+      },
+      "thoughts": [
+        "-6 has had too much company"
+      ]
+    },
+    {
+      "tick": 2932,
+      "time": {
+        "tick": 2932,
+        "day": 2,
+        "clock": "12:31",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 18
+      },
+      "choice": {
+        "choose": "socialize:1028:family_time",
+        "why": "I brought the grain home. Now I want to sit with Wes and hear about their morning."
+      },
+      "last": {
+        "label": "Bringing food home",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 2931
+      },
+      "interaction": {
+        "purpose": "trade",
+        "outcome": "refused",
+        "detail": "nothing to spare",
+        "when": "2 world h 23 min ago",
+        "t": 2694
+      },
+      "needs": {
+        "hunger": {
+          "value": 82,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 83,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 78,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 97,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 98,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "-5 has had too much company"
+      ]
+    },
+    {
+      "tick": 3122,
+      "time": {
+        "tick": 3122,
+        "day": 2,
+        "clock": "14:25",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 19
+      },
+      "choice": {
+        "choose": "socialize:1008:cancel_request:1606",
+        "why": "I should tell Ivo that the old request is no longer needed before doing something else."
+      },
+      "last": {
+        "label": "Family time with Wes",
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks.",
+        "when": "1 world min ago",
+        "t": 3121
+      },
+      "interaction": {
+        "purpose": "family_time",
+        "outcome": "Family time completed",
+        "detail": "Family time together for 120 ticks.",
+        "when": "1 world min ago",
+        "t": 3121
+      },
+      "needs": {
+        "hunger": {
+          "value": 77,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 77,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 72,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 99,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "+4 Family time with Wes",
+        "-4 has had too much company"
+      ]
+    },
+    {
+      "tick": 3165,
+      "time": {
+        "tick": 3165,
+        "day": 2,
+        "clock": "14:51",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 19
+      },
+      "choice": {
+        "choose": "socialize:1028:play_together",
+        "why": "Wes is here. Let us take turns guessing things we can see before I fetch food for the evening."
+      },
+      "last": {
+        "label": "Tell Ivo to stop my obsolete request",
+        "outcome": "failed",
+        "detail": "Ivo was too busy to stop",
+        "when": "1 world min ago",
+        "t": 3164
+      },
+      "interaction": {
+        "purpose": "family_time",
+        "outcome": "Family time completed",
+        "detail": "Family time together for 120 ticks.",
+        "when": "26 world min ago",
+        "t": 3121
+      },
+      "needs": {
+        "hunger": {
+          "value": 76,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 75,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 70,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 99,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 85,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "+4 Family time with Wes",
+        "-3 has had too much company"
+      ]
+    },
+    {
+      "tick": 3350,
+      "time": {
+        "tick": 3350,
+        "day": 2,
+        "clock": "16:42",
+        "phase": "evening",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 16
+      },
+      "choice": {
+        "choose": "socialize:1004:learn_foraging",
+        "why": "I enjoyed the game. Felix is nearby and familiar; I will ask whether they can show me how to recognise food plants."
+      },
+      "last": {
+        "label": "A guessing game with Wes",
+        "outcome": "success",
+        "detail": "A guessing game completed: A guessing game together for 120 ticks.",
+        "when": "1 world min ago",
+        "t": 3349
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "A guessing game completed",
+        "detail": "A guessing game together for 120 ticks.",
+        "when": "1 world min ago",
+        "t": 3349
+      },
+      "needs": {
+        "hunger": {
+          "value": 72,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 69,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 64,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 98,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "+4 A guessing game with Wes",
+        "+3 Family time with Wes",
+        "-2 has had too much company"
+      ]
+    },
+    {
+      "tick": 3370,
+      "time": {
+        "tick": 3370,
+        "day": 2,
+        "clock": "16:53",
+        "phase": "evening",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 16
+      },
+      "choice": {
+        "choose": "gather:863",
+        "why": "Felix is busy. I will gather some grain while it is still light and take it home."
+      },
+      "last": {
+        "label": "Foraging practice with Felix",
+        "outcome": "failed",
+        "detail": "Felix was too busy to stop",
+        "when": "1 world min ago",
+        "t": 3369
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "A guessing game completed",
+        "detail": "A guessing game together for 120 ticks.",
+        "when": "13 world min ago",
+        "t": 3349
+      },
+      "needs": {
+        "hunger": {
+          "value": 71,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 68,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 64,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 98,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 86,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "+4 A guessing game with Wes",
+        "+3 Family time with Wes",
+        "-2 has had too much company"
+      ]
+    },
+    {
+      "tick": 3498,
+      "time": {
+        "tick": 3498,
+        "day": 2,
+        "clock": "18:10",
+        "phase": "dusk",
+        "light": "dim",
+        "weather": "Cloudy",
+        "tempC": 14
+      },
+      "choice": {
+        "choose": "deposit:2001:food",
+        "why": "The grain patch is empty, but I did gather one portion. I can bring that home without using the two pieces I kept for myself."
+      },
+      "last": {
+        "label": "Gathering wild grain",
+        "outcome": "partial",
+        "detail": "nothing left",
+        "when": "1 world min ago",
+        "t": 3497
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "A guessing game completed",
+        "detail": "A guessing game together for 120 ticks.",
+        "when": "1 world h 29 min ago",
+        "t": 3349
+      },
+      "needs": {
+        "hunger": {
+          "value": 68,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 64,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 59,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 93,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 99,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1,
+        "grain": 1
+      },
+      "thoughts": [
+        "+4 A guessing game with Wes",
+        "+3 Family time with Wes",
+        "-2 has had too much company"
+      ]
+    },
+    {
+      "tick": 3609,
+      "time": {
+        "tick": 3609,
+        "day": 2,
+        "clock": "19:17",
+        "phase": "dusk",
+        "light": "dark",
+        "weather": "Cloudy",
+        "tempC": 12
+      },
+      "choice": {
+        "choose": "sleep:2001",
+        "why": "Go to bed at home after a full day of food, family and play."
+      },
+      "last": {
+        "label": "Bringing food home",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 3608
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "A guessing game completed",
+        "detail": "A guessing game together for 120 ticks.",
+        "when": "2 world h 36 min ago",
+        "t": 3349
+      },
+      "needs": {
+        "hunger": {
+          "value": 65,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 60,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 56,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 88,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 68,
+          "state": "ok"
+        },
+        "social": {
+          "value": 97,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "+3 A guessing game with Wes",
+        "+2 Family time with Wes",
+        "-1 has had too much company"
+      ]
+    },
+    {
+      "tick": 3992,
+      "time": {
+        "tick": 3992,
+        "day": 2,
+        "clock": "23:07",
+        "phase": "night",
+        "light": "dark",
+        "weather": "Cloudy",
+        "tempC": 6
+      },
+      "choice": {
+        "choose": "eat:0",
+        "why": "Eat the food I kept for myself, then stay sheltered until morning."
+      },
+      "last": {
+        "label": "Sleeping by my lean-to",
+        "outcome": "success",
+        "detail": "rested",
+        "when": "1 world min ago",
+        "t": 3991
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "A guessing game completed",
+        "detail": "A guessing game together for 120 ticks.",
+        "when": "6 world h 26 min ago",
+        "t": 3349
+      },
+      "needs": {
+        "hunger": {
+          "value": 60,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 52,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 94,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 76,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 96,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fruit": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "+2 A guessing game with Wes",
+        "+1 Family time with Wes"
+      ]
+    },
+    {
+      "tick": 4012,
+      "time": {
+        "tick": 4012,
+        "day": 2,
+        "clock": "23:19",
+        "phase": "night",
+        "light": "dark",
+        "weather": "Cloudy",
+        "tempC": 6
+      },
+      "choice": {
+        "choose": "shelter:2001",
+        "why": "Stay safely at our lean-to until daylight."
+      },
+      "last": {
+        "label": "Eating",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 4011
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "A guessing game completed",
+        "detail": "A guessing game together for 120 ticks.",
+        "when": "6 world h 38 min ago",
+        "t": 3349
+      },
+      "needs": {
+        "hunger": {
+          "value": 87,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 52,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 93,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 74,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 95,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": [
+        "+2 A guessing game with Wes",
+        "+1 Family time with Wes"
+      ]
+    },
+    {
+      "tick": 4681,
+      "time": {
+        "tick": 4681,
+        "day": 3,
+        "clock": "06:00",
+        "phase": "dawn",
+        "light": "dim",
+        "weather": "Clear",
+        "tempC": 8
+      },
+      "choice": {
+        "choose": "drink:1000148",
+        "why": "I am thirsty after the night. Go straight to the nearest known water."
+      },
+      "last": {
+        "label": "Staying at my lean-to",
+        "outcome": "success",
+        "detail": "daylight arrived",
+        "when": "1 world min ago",
+        "t": 4680
+      },
+      "interaction": {
+        "purpose": "chat",
+        "outcome": "friendly",
+        "detail": "",
+        "when": "2 world h 33 min ago",
+        "t": 4426
+      },
+      "needs": {
+        "hunger": {
+          "value": 70,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 29,
+          "state": "low"
+        },
+        "energy": {
+          "value": 100,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 66,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 82,
+          "state": "ok"
+        },
+        "social": {
+          "value": 99,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": []
+    },
+    {
+      "tick": 4827,
+      "time": {
+        "tick": 4827,
+        "day": 3,
+        "clock": "07:28",
+        "phase": "dawn",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 11
+      },
+      "choice": {
+        "choose": "socialize:1001:learn_foraging",
+        "why": "I am rested and have had water. Ask Bea for a little food-plant practice while we are nearby."
+      },
+      "last": {
+        "label": "Drinking at the water",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 4826
+      },
+      "interaction": {
+        "purpose": "chat",
+        "outcome": "friendly",
+        "detail": "",
+        "when": "4 world h 1 min ago",
+        "t": 4426
+      },
+      "needs": {
+        "hunger": {
+          "value": 66,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 96,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 95,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 72,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 98,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": []
+    },
+    {
+      "tick": 4951,
+      "time": {
+        "tick": 4951,
+        "day": 3,
+        "clock": "08:42",
+        "phase": "morning",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 13
+      },
+      "choice": {
+        "choose": "gather:810",
+        "why": "Bea cannot stop. Gather berries for breakfast and for home before asking someone else."
+      },
+      "last": {
+        "label": "Foraging practice with Bea",
+        "outcome": "failed",
+        "detail": "Bea was too busy to stop",
+        "when": "1 world min ago",
+        "t": 4950
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "8 world min ago",
+        "t": 4937
+      },
+      "needs": {
+        "hunger": {
+          "value": 63,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 92,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 91,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 72,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 81,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": []
+    },
+    {
+      "tick": 5075,
+      "time": {
+        "tick": 5075,
+        "day": 3,
+        "clock": "09:57",
+        "phase": "morning",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 15
+      },
+      "choice": {
+        "choose": "deposit:2001:food",
+        "why": "Take one spare portion home and keep enough for my own meal. I want the berries to help the family as well."
+      },
+      "last": {
+        "label": "Picking berries",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 5074
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "1 world h 23 min ago",
+        "t": 4937
+      },
+      "needs": {
+        "hunger": {
+          "value": 59,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 87,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 86,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 78,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 99,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 4
+      },
+      "thoughts": []
+    },
+    {
+      "tick": 5250,
+      "time": {
+        "tick": 5250,
+        "day": 3,
+        "clock": "11:41",
+        "phase": "morning",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 18
+      },
+      "choice": {
+        "choose": "eat:0",
+        "why": "Eat the berries I kept, then see whether Yara has time to practise with me."
+      },
+      "last": {
+        "label": "Bringing food home",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 5249
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "3 world h 8 min ago",
+        "t": 4937
+      },
+      "needs": {
+        "hunger": {
+          "value": 55,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 81,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 81,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 92,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 98,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 3
+      },
+      "thoughts": []
+    },
+    {
+      "tick": 5280,
+      "time": {
+        "tick": 5280,
+        "day": 3,
+        "clock": "12:00",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 18
+      },
+      "choice": {
+        "choose": "socialize:1026:learn_foraging",
+        "why": "Ask Yara to practise recognising food plants together. I have eaten and can give her my attention."
+      },
+      "last": {
+        "label": "Eating",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 5279
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "3 world h 26 min ago",
+        "t": 4937
+      },
+      "needs": {
+        "hunger": {
+          "value": 90,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 80,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 80,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 93,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 98,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": []
+    },
+    {
+      "tick": 5503,
+      "time": {
+        "tick": 5503,
+        "day": 3,
+        "clock": "14:13",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 19
+      },
+      "choice": {
+        "choose": "gather:806",
+        "why": "Try what Yara taught me at this nearby berry bush, then see whether we can spend some family time together."
+      },
+      "last": {
+        "label": "Foraging practice with Yara",
+        "outcome": "success",
+        "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.0051.",
+        "when": "1 world min ago",
+        "t": 5502
+      },
+      "interaction": {
+        "purpose": "learn_foraging",
+        "outcome": "Foraging practice completed",
+        "detail": "Foraging practice together for 160 ticks; foraging skill improved by 0.0051.",
+        "when": "1 world min ago",
+        "t": 5502
+      },
+      "needs": {
+        "hunger": {
+          "value": 85,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 72,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 73,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 98,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": [
+        "+4 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 5570,
+      "time": {
+        "tick": 5570,
+        "day": 3,
+        "clock": "14:53",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 19
+      },
+      "choice": {
+        "choose": "socialize:1027:family_time",
+        "why": "I have practised with Yara and picked berries. I want to sit with Quinn and tell them about my day."
+      },
+      "last": {
+        "label": "Picking berries",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 5569
+      },
+      "interaction": {
+        "purpose": "learn_foraging",
+        "outcome": "Foraging practice completed",
+        "detail": "Foraging practice together for 160 ticks; foraging skill improved by 0.0051.",
+        "when": "41 world min ago",
+        "t": 5502
+      },
+      "needs": {
+        "hunger": {
+          "value": 82,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 69,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 70,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 99,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 3
+      },
+      "thoughts": [
+        "+4 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 5774,
+      "time": {
+        "tick": 5774,
+        "day": 3,
+        "clock": "16:56",
+        "phase": "evening",
+        "light": "daylight",
+        "weather": "Clear",
+        "tempC": 17
+      },
+      "choice": {
+        "choose": "socialize:1009:play_together",
+        "why": "I liked telling Quinn about my day. Kai is nearby now; I will ask them to take turns playing a guessing game."
+      },
+      "last": {
+        "label": "Family time with Quinn",
+        "outcome": "success",
+        "detail": "Family time completed: Family time together for 120 ticks.",
+        "when": "1 world min ago",
+        "t": 5773
+      },
+      "interaction": {
+        "purpose": "family_time",
+        "outcome": "Family time completed",
+        "detail": "Family time together for 120 ticks.",
+        "when": "1 world min ago",
+        "t": 5773
+      },
+      "needs": {
+        "hunger": {
+          "value": 77,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 62,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 63,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 98,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 3
+      },
+      "thoughts": [
+        "+4 Family time with Quinn",
+        "+3 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 5858,
+      "time": {
+        "tick": 5858,
+        "day": 3,
+        "clock": "17:46",
+        "phase": "dusk",
+        "light": "dim",
+        "weather": "Clear",
+        "tempC": 16
+      },
+      "choice": {
+        "choose": "deposit:2001:food",
+        "why": "Kai has already played and wants something else. Take my spare berries home, then get water before bed."
+      },
+      "last": {
+        "label": "Talking with Kai",
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now",
+        "when": "1 world min ago",
+        "t": 5857
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "invitation declined",
+        "detail": "I have already had that time today; I want to do something else now",
+        "when": "1 world min ago",
+        "t": 5857
+      },
+      "needs": {
+        "hunger": {
+          "value": 75,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 59,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 61,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 95,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 99,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 3
+      },
+      "thoughts": [
+        "+4 Family time with Quinn",
+        "+3 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 5915,
+      "time": {
+        "tick": 5915,
+        "day": 3,
+        "clock": "18:20",
+        "phase": "dusk",
+        "light": "dim",
+        "weather": "Clear",
+        "tempC": 15
+      },
+      "choice": {
+        "choose": "drink:1000148",
+        "why": "Drink before settling down so I do not wake up as thirsty tomorrow."
+      },
+      "last": {
+        "label": "Bringing food home",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 5914
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "invitation declined",
+        "detail": "I have already had that time today; I want to do something else now",
+        "when": "35 world min ago",
+        "t": 5857
+      },
+      "needs": {
+        "hunger": {
+          "value": 74,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 57,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 59,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 95,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 82,
+          "state": "ok"
+        },
+        "social": {
+          "value": 98,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 2
+      },
+      "thoughts": [
+        "+4 Family time with Quinn",
+        "+3 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 6067,
+      "time": {
+        "tick": 6067,
+        "day": 3,
+        "clock": "19:52",
+        "phase": "dusk",
+        "light": "dark",
+        "weather": "Clear",
+        "tempC": 12
+      },
+      "choice": {
+        "choose": "sleep:2001",
+        "why": "Go home to sleep after drinking. I want a rested morning with time for other children."
+      },
+      "last": {
+        "label": "Drinking at the water",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 6066
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "invitation declined",
+        "detail": "I have already had that time today; I want to do something else now",
+        "when": "2 world h 6 min ago",
+        "t": 5857
+      },
+      "needs": {
+        "hunger": {
+          "value": 70,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 88,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 54,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 93,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 98,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 2
+      },
+      "thoughts": [
+        "+3 Family time with Quinn",
+        "+2 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 6630,
+      "time": {
+        "tick": 6630,
+        "day": 4,
+        "clock": "01:30",
+        "phase": "night",
+        "light": "dark",
+        "weather": "Cloudy",
+        "tempC": 4
+      },
+      "choice": {
+        "choose": "eat:0",
+        "why": "Have the berries I saved, then stay sheltered for the remaining dark hours."
+      },
+      "last": {
+        "label": "Sleeping by my lean-to",
+        "outcome": "success",
+        "detail": "rested",
+        "when": "1 world min ago",
+        "t": 6629
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "invitation declined",
+        "detail": "I have already had that time today; I want to do something else now",
+        "when": "7 world h 44 min ago",
+        "t": 5857
+      },
+      "needs": {
+        "hunger": {
+          "value": 60,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 75,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 94,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 64,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 95,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "berries": 2
+      },
+      "thoughts": [
+        "+1 Family time with Quinn",
+        "+0 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 6650,
+      "time": {
+        "tick": 6650,
+        "day": 4,
+        "clock": "01:41",
+        "phase": "night",
+        "light": "dark",
+        "weather": "Cloudy",
+        "tempC": 4
+      },
+      "choice": {
+        "choose": "shelter:2001",
+        "why": "Stay by our shelter until morning."
+      },
+      "last": {
+        "label": "Eating",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 6649
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "invitation declined",
+        "detail": "I have already had that time today; I want to do something else now",
+        "when": "7 world h 56 min ago",
+        "t": 5857
+      },
+      "needs": {
+        "hunger": {
+          "value": 84,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 74,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 93,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 63,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 95,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": [
+        "+1 Family time with Quinn",
+        "+0 Foraging practice with Yara"
+      ]
+    },
+    {
+      "tick": 7085,
+      "time": {
+        "tick": 7085,
+        "day": 4,
+        "clock": "06:02",
+        "phase": "dawn",
+        "light": "dim",
+        "weather": "Cloudy",
+        "tempC": 8
+      },
+      "choice": {
+        "choose": "socialize:1010:play_together",
+        "why": "It is a new morning and I am rested. Ask Orla to play a guessing game together."
+      },
+      "last": {
+        "label": "Staying at my lean-to",
+        "outcome": "success",
+        "detail": "daylight arrived",
+        "when": "1 world min ago",
+        "t": 7084
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "1 world min ago",
+        "t": 7083
+      },
+      "needs": {
+        "hunger": {
+          "value": 73,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 60,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 98,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 66,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": []
+    },
+    {
+      "tick": 7100,
+      "time": {
+        "tick": 7100,
+        "day": 4,
+        "clock": "06:11",
+        "phase": "dawn",
+        "light": "dim",
+        "weather": "Cloudy",
+        "tempC": 8
+      },
+      "choice": {
+        "choose": "socialize:1037:play_together",
+        "why": "Orla is occupied. Rafe is nearby too; I will ask if they have time for a game."
+      },
+      "last": {
+        "label": "A guessing game with Orla",
+        "outcome": "failed",
+        "detail": "Orla was too busy to stop",
+        "when": "1 world min ago",
+        "t": 7099
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "10 world min ago",
+        "t": 7083
+      },
+      "needs": {
+        "hunger": {
+          "value": 72,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 59,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 97,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 66,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 80,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": []
+    },
+    {
+      "tick": 7179,
+      "time": {
+        "tick": 7179,
+        "day": 4,
+        "clock": "06:59",
+        "phase": "dawn",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 9
+      },
+      "choice": {
+        "choose": "gather:807",
+        "why": "Rafe wants to do something else. Pick nearby berries for breakfast and home instead."
+      },
+      "last": {
+        "label": "Talking with Rafe",
+        "outcome": "interrupted",
+        "detail": "invitation declined: I have already had that time today; I want to do something else now",
+        "when": "1 world min ago",
+        "t": 7178
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "invitation declined",
+        "detail": "I have already had that time today; I want to do something else now",
+        "when": "1 world min ago",
+        "t": 7178
+      },
+      "needs": {
+        "hunger": {
+          "value": 70,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 56,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 95,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 71,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 80,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": []
+    },
+    {
+      "tick": 7254,
+      "time": {
+        "tick": 7254,
+        "day": 4,
+        "clock": "07:44",
+        "phase": "dawn",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 11
+      },
+      "choice": {
+        "choose": "drink:1000149",
+        "why": "That argument with Felix was upsetting. Leave the crowded berry patch and get some water before choosing another source of food."
+      },
+      "last": {
+        "label": "Arguing with Felix",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 7253
+      },
+      "interaction": {
+        "purpose": "play_together",
+        "outcome": "invitation declined",
+        "detail": "I have already had that time today; I want to do something else now",
+        "when": "46 world min ago",
+        "t": 7178
+      },
+      "needs": {
+        "hunger": {
+          "value": 69,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 54,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 92,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 68,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 83,
+          "state": "ok"
+        },
+        "social": {
+          "value": 99,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": [
+        "-12 argued with Felix"
+      ]
+    },
+    {
+      "tick": 7555,
+      "time": {
+        "tick": 7555,
+        "day": 4,
+        "clock": "10:44",
+        "phase": "morning",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 16
+      },
+      "choice": {
+        "choose": "gather:984",
+        "why": "Try fishing at the known water spot. I need food, and I want to avoid another dispute at the berry patch."
+      },
+      "last": {
+        "label": "Drinking at the water",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 7554
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "5 world min ago",
+        "t": 7546
+      },
+      "needs": {
+        "hunger": {
+          "value": 61,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 100,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 83,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 83,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 81,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {},
+      "thoughts": [
+        "-10 argued with Felix"
+      ]
+    },
+    {
+      "tick": 7882,
+      "time": {
+        "tick": 7882,
+        "day": 4,
+        "clock": "14:01",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 18
+      },
+      "choice": {
+        "choose": "eat:0",
+        "why": "Eat enough of the fish to recover from hunger before deciding what I can bring home."
+      },
+      "last": {
+        "label": "Fishing",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 7881
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "1 world h 44 min ago",
+        "t": 7708
+      },
+      "needs": {
+        "hunger": {
+          "value": 52,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 87,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 70,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 96,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 82,
+          "state": "ok"
+        },
+        "social": {
+          "value": 99,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 3
+      },
+      "thoughts": [
+        "-9 argued with Felix",
+        "-6 has had too much company"
+      ]
+    },
+    {
+      "tick": 7902,
+      "time": {
+        "tick": 7902,
+        "day": 4,
+        "clock": "14:13",
+        "phase": "afternoon",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 18
+      },
+      "choice": {
+        "choose": "socialize:1004:apologize",
+        "why": "I have eaten and feel less pressed. I want to make peace with Felix rather than carry the argument through the rest of my day."
+      },
+      "last": {
+        "label": "Eating",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 7901
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "1 world h 56 min ago",
+        "t": 7708
+      },
+      "needs": {
+        "hunger": {
+          "value": 100,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 87,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 70,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 97,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 83,
+          "state": "ok"
+        },
+        "social": {
+          "value": 99,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 1
+      },
+      "thoughts": [
+        "-9 argued with Felix",
+        "-6 has had too much company"
+      ]
+    },
+    {
+      "tick": 8039,
+      "time": {
+        "tick": 8039,
+        "day": 4,
+        "clock": "15:35",
+        "phase": "evening",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 18
+      },
+      "choice": {
+        "choose": "socialize:1034:play_together",
+        "why": "Making peace did not go well. Ask Lena for a guessing game, then head home for the evening."
+      },
+      "last": {
+        "label": "Eating",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world h 23 min ago",
+        "t": 7901
+      },
+      "interaction": {
+        "purpose": "apologize",
+        "outcome": "ended sourly",
+        "detail": "",
+        "when": "1 world min ago",
+        "t": 8038
+      },
+      "needs": {
+        "hunger": {
+          "value": 96,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 82,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 65,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 98,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 1
+      },
+      "thoughts": [
+        "-8 argued with Felix",
+        "-6 has had too much company"
+      ]
+    },
+    {
+      "tick": 8075,
+      "time": {
+        "tick": 8075,
+        "day": 4,
+        "clock": "15:57",
+        "phase": "evening",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 17
+      },
+      "choice": {
+        "choose": "alone",
+        "why": "I have had enough company and unsuccessful conversations. Take some quiet time in a nearby place I know."
+      },
+      "last": {
+        "label": "A guessing game with Lena",
+        "outcome": "failed",
+        "detail": "Lena was too busy to stop",
+        "when": "1 world min ago",
+        "t": 8074
+      },
+      "interaction": {
+        "purpose": "apologize",
+        "outcome": "ended sourly",
+        "detail": "",
+        "when": "22 world min ago",
+        "t": 8038
+      },
+      "needs": {
+        "hunger": {
+          "value": 96,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 81,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 64,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 98,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 84,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 1
+      },
+      "thoughts": [
+        "-8 argued with Felix",
+        "-6 has had too much company"
+      ]
+    },
+    {
+      "tick": 8228,
+      "time": {
+        "tick": 8228,
+        "day": 4,
+        "clock": "17:28",
+        "phase": "evening",
+        "light": "daylight",
+        "weather": "Cloudy",
+        "tempC": 15
+      },
+      "choice": {
+        "choose": "socialize:1028:warn",
+        "why": "I saw a wolf while trying to find quiet. Tell Wes so they can avoid it too, then head back toward home."
+      },
+      "last": {
+        "label": "Running from the wolf toward other people",
+        "outcome": "success",
+        "detail": "done",
+        "when": "1 world min ago",
+        "t": 8227
+      },
+      "interaction": {
+        "purpose": "apologize",
+        "outcome": "ended sourly",
+        "detail": "",
+        "when": "1 world h 54 min ago",
+        "t": 8038
+      },
+      "needs": {
+        "hunger": {
+          "value": 91,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 75,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 59,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 94,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 77,
+          "state": "ok"
+        },
+        "social": {
+          "value": 98,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 1
+      },
+      "thoughts": [
+        "-7 argued with Felix",
+        "-6 has had too much company"
+      ]
+    },
+    {
+      "tick": 8318,
+      "time": {
+        "tick": 8318,
+        "day": 4,
+        "clock": "18:22",
+        "phase": "dusk",
+        "light": "dim",
+        "weather": "Cloudy",
+        "tempC": 14
+      },
+      "choice": {
+        "choose": "sleep:2001",
+        "why": "Wes heard the warning. Go home and sleep after a difficult afternoon; I still have a fish for breakfast."
+      },
+      "last": {
+        "label": "Running from the wolf toward other people",
+        "outcome": "success",
+        "detail": "done",
+        "when": "55 world min ago",
+        "t": 8227
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "1 world min ago",
+        "t": 8317
+      },
+      "needs": {
+        "hunger": {
+          "value": 89,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 72,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 56,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 89,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 83,
+          "state": "ok"
+        },
+        "social": {
+          "value": 100,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 1
+      },
+      "thoughts": [
+        "-6 argued with Felix",
+        "-5 has had too much company"
+      ]
+    },
+    {
+      "tick": 8929,
+      "time": {
+        "tick": 8929,
+        "day": 5,
+        "clock": "00:29",
+        "phase": "night",
+        "light": "dark",
+        "weather": "Rain",
+        "tempC": 1
+      },
+      "choice": {
+        "choose": "shelter:2001",
+        "why": "Stay sheltered through the rest of the night and let the day’s upset fade."
+      },
+      "last": {
+        "label": "Sleeping by my lean-to",
+        "outcome": "success",
+        "detail": "rested",
+        "when": "1 world min ago",
+        "t": 8928
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "6 world h 7 min ago",
+        "t": 8317
+      },
+      "needs": {
+        "hunger": {
+          "value": 78,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 57,
+          "state": "ok"
+        },
+        "energy": {
+          "value": 94,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 49,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 78,
+          "state": "ok"
+        },
+        "social": {
+          "value": 97,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 1
+      },
+      "thoughts": [
+        "-3 argued with Felix",
+        "-2 has had too much company"
+      ]
+    },
+    {
+      "tick": 9481,
+      "time": {
+        "tick": 9481,
+        "day": 5,
+        "clock": "06:00",
+        "phase": "dawn",
+        "light": "dim",
+        "weather": "Rain",
+        "tempC": 5
+      },
+      "choice": {
+        "choose": "drink:1000148",
+        "why": "Get water after the night. Quinn has given me another berry, and I still have the fish for breakfast afterwards."
+      },
+      "last": {
+        "label": "Staying at my lean-to",
+        "outcome": "success",
+        "detail": "daylight arrived",
+        "when": "1 world min ago",
+        "t": 9480
+      },
+      "interaction": {
+        "purpose": "warn",
+        "outcome": "warned them",
+        "detail": "they had not heard; they know now",
+        "when": "11 world h 38 min ago",
+        "t": 8317
+      },
+      "needs": {
+        "hunger": {
+          "value": 64,
+          "state": "ok"
+        },
+        "thirst": {
+          "value": 38,
+          "state": "low"
+        },
+        "energy": {
+          "value": 100,
+          "state": "ok"
+        },
+        "warmth": {
+          "value": 44,
+          "state": "ok"
+        },
+        "safety": {
+          "value": 82,
+          "state": "ok"
+        },
+        "social": {
+          "value": 96,
+          "state": "ok"
+        }
+      },
+      "pack": {
+        "fish": 1,
+        "berries": 1
+      },
+      "thoughts": [
+        "+8 Quinn gave me 1 berries",
+        "-6 has had too much company",
+        "-1 argued with Felix"
+      ]
+    }
+  ],
+  "outcomes": [
+    {
+      "call": 0,
+      "activityId": 2075,
+      "label": "Drinking at the water",
+      "tick": 2720,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 1,
+      "activityId": 2146,
+      "label": "Bringing food home",
+      "tick": 2932,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 2,
+      "activityId": 2274,
+      "label": "Family time with Wes",
+      "tick": 3122,
+      "outcome": "success",
+      "detail": "Family time completed: Family time together for 120 ticks."
+    },
+    {
+      "call": 3,
+      "activityId": 2381,
+      "label": "Tell Ivo to stop my obsolete request",
+      "tick": 3165,
+      "outcome": "failed",
+      "detail": "Ivo was too busy to stop"
+    },
+    {
+      "call": 4,
+      "activityId": 2401,
+      "label": "A guessing game with Wes",
+      "tick": 3350,
+      "outcome": "success",
+      "detail": "A guessing game completed: A guessing game together for 120 ticks."
+    },
+    {
+      "call": 5,
+      "activityId": 2485,
+      "label": "Foraging practice with Felix",
+      "tick": 3370,
+      "outcome": "failed",
+      "detail": "Felix was too busy to stop"
+    },
+    {
+      "call": 6,
+      "activityId": 2497,
+      "label": "Gathering wild grain",
+      "tick": 3498,
+      "outcome": "partial",
+      "detail": "nothing left"
+    },
+    {
+      "call": 7,
+      "activityId": 2550,
+      "label": "Bringing food home",
+      "tick": 3609,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 8,
+      "activityId": 2591,
+      "label": "Sleeping by my lean-to",
+      "tick": 3992,
+      "outcome": "success",
+      "detail": "rested"
+    },
+    {
+      "call": 9,
+      "activityId": 2617,
+      "label": "Eating",
+      "tick": 4012,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 10,
+      "activityId": 2618,
+      "label": "Staying at my lean-to",
+      "tick": 4681,
+      "outcome": "success",
+      "detail": "daylight arrived"
+    },
+    {
+      "call": 11,
+      "activityId": 2757,
+      "label": "Drinking at the water",
+      "tick": 4827,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 12,
+      "activityId": 2835,
+      "label": "Foraging practice with Bea",
+      "tick": 4951,
+      "outcome": "failed",
+      "detail": "Bea was too busy to stop"
+    },
+    {
+      "call": 13,
+      "activityId": 2904,
+      "label": "Picking berries",
+      "tick": 5075,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 14,
+      "activityId": 2980,
+      "label": "Bringing food home",
+      "tick": 5250,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 15,
+      "activityId": 3057,
+      "label": "Eating",
+      "tick": 5280,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 16,
+      "activityId": 3072,
+      "label": "Foraging practice with Yara",
+      "tick": 5503,
+      "outcome": "success",
+      "detail": "Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.0051."
+    },
+    {
+      "call": 17,
+      "activityId": 3174,
+      "label": "Picking berries",
+      "tick": 5570,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 18,
+      "activityId": 3205,
+      "label": "Family time with Quinn",
+      "tick": 5774,
+      "outcome": "success",
+      "detail": "Family time completed: Family time together for 120 ticks."
+    },
+    {
+      "call": 19,
+      "activityId": 3296,
+      "label": "A guessing game with Kai",
+      "tick": 5858,
+      "outcome": "interrupted",
+      "detail": "invitation declined: I have already had that time today; I want to do something else now"
+    },
+    {
+      "call": 20,
+      "activityId": 3339,
+      "label": "Bringing food home",
+      "tick": 5915,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 21,
+      "activityId": 3373,
+      "label": "Drinking at the water",
+      "tick": 6067,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 22,
+      "activityId": 3422,
+      "label": "Sleeping by my lean-to",
+      "tick": 6630,
+      "outcome": "success",
+      "detail": "rested"
+    },
+    {
+      "call": 23,
+      "activityId": 3471,
+      "label": "Eating",
+      "tick": 6650,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 24,
+      "activityId": 3477,
+      "label": "Staying at my lean-to",
+      "tick": 7085,
+      "outcome": "success",
+      "detail": "daylight arrived"
+    },
+    {
+      "call": 25,
+      "activityId": 3589,
+      "label": "A guessing game with Orla",
+      "tick": 7100,
+      "outcome": "failed",
+      "detail": "Orla was too busy to stop"
+    },
+    {
+      "call": 26,
+      "activityId": 3596,
+      "label": "A guessing game with Rafe",
+      "tick": 7179,
+      "outcome": "interrupted",
+      "detail": "invitation declined: I have already had that time today; I want to do something else now"
+    },
+    {
+      "call": 27,
+      "activityId": 3652,
+      "label": "Picking berries",
+      "tick": 7216,
+      "outcome": "failed",
+      "detail": "someone else is already taking it"
+    },
+    {
+      "call": 28,
+      "activityId": 3701,
+      "label": "Drinking at the water",
+      "tick": 7555,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 29,
+      "activityId": 3849,
+      "label": "Fishing",
+      "tick": 7882,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 30,
+      "activityId": 4013,
+      "label": "Eating",
+      "tick": 7902,
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "call": 31,
+      "activityId": 4025,
+      "label": "Make peace with Felix",
+      "tick": 8039,
+      "outcome": "failed",
+      "detail": "ended sourly"
+    },
+    {
+      "call": 32,
+      "activityId": 4094,
+      "label": "A guessing game with Lena",
+      "tick": 8075,
+      "outcome": "failed",
+      "detail": "Lena was too busy to stop"
+    },
+    {
+      "call": 33,
+      "activityId": 4124,
+      "label": "Sitting alone for a while",
+      "tick": 8185,
+      "outcome": "interrupted",
+      "detail": "danger nearby"
+    },
+    {
+      "call": 34,
+      "activityId": 4216,
+      "label": "Warn Wes about the wolf",
+      "tick": 8318,
+      "outcome": "success",
+      "detail": "they had not heard; they know now"
+    },
+    {
+      "call": 35,
+      "activityId": 4266,
+      "label": "Sleeping by my lean-to",
+      "tick": 8929,
+      "outcome": "success",
+      "detail": "rested"
+    },
+    {
+      "call": 36,
+      "activityId": 4346,
+      "label": "Staying at my lean-to",
+      "tick": 9481,
+      "outcome": "success",
+      "detail": "daylight arrived"
+    },
+    {
+      "call": 37,
+      "activityId": 4436,
+      "label": "Drinking at the water",
+      "tick": 9600,
+      "outcome": "unfinished",
+      "detail": "the window ended while this was still under way"
+    }
+  ]
+}
