@@ -1,4 +1,4 @@
-// Follow the first ordinary cart undertaking at pinned rules 113, without adding state or decisions.
+// Follow the first ordinary cart undertaking at an explicit rules version (default 113), without adding state or decisions.
 import {existsSync,mkdirSync,readFileSync,readdirSync,writeFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
@@ -10,10 +10,10 @@ import {generateOptions,rankOptions} from '../src/sim/decision';
 import {conservationReport} from '../src/sim/economy';
 import {nextProjectStep} from '../src/sim/project_step';
 import {gitProvenance,sourceManifest} from './observers/provenance';
-const [out]=process.argv.slice(2).filter(a=>a!=='--');if(!out||existsSync(out))throw new Error('Fresh output required');
+const [out,versionText='113']=process.argv.slice(2).filter(a=>a!=='--');if(!out||existsSync(out))throw new Error('Fresh output required');
 const hash=(s:string)=>createHash('sha256').update(s).digest('hex');
 const files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/first_cart_trace.ts').sort(),manifest=()=>sourceManifest(files),source=manifest();
-const w=createWorld({...currentWorldSettings('normal','forest',{immigration:false}),rulesVersion:113}),twin=deserializeWorld(serializeWorld(w)),began=performance.now();let person=0,plan=0,until=15*2400,pureChecks=0,omitted=0;const events:unknown[]=[],samples:unknown[]=[];let adopted:unknown,finalPlan:unknown;
+const w=createWorld({...currentWorldSettings('normal','forest',{immigration:false}),rulesVersion:Number(versionText)}),twin=deserializeWorld(serializeWorld(w)),began=performance.now();let person=0,plan=0,until=15*2400,pureChecks=0,omitted=0;const events:unknown[]=[],samples:unknown[]=[];let adopted:unknown,finalPlan:unknown;
 const event=(value:unknown)=>{if(events.length<5000)events.push(value);else omitted++;};
 w.hooks={onActivityStart:(p,a)=>{if(p.id===person)event({tick:w.tick,event:'start',kind:a.kind,label:a.label,goal:a.goal,target:a.targetId,data:structuredClone(a.data)});},onActivityEnd:(p,a,outcome,detail)=>{if(p.id===person)event({tick:w.tick,event:'end',kind:a.kind,label:a.label,outcome,detail,progress:a.progress,data:structuredClone(a.data)});}};
 let stop='horizon';
@@ -27,4 +27,4 @@ while(w.tick<until){
  if(w.tick%2400===0&&!conservationReport(w).ok)throw new Error('Unbalanced items');if(w.tick%120===0&&performance.now()-began>600000){stop='budget';break;}
 }
 delete w.hooks;const final=serializeWorld(w);if(final!==serializeWorld(twin)||final!==serializeWorld(deserializeWorld(final)))throw new Error('Twin/reload mismatch');if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed');
-const report={...gitProvenance(),source,settings:w.settings,tick:w.tick,seconds:(performance.now()-began)/1000,stop,adopted,finalPlan,pureChecks,continuationEqual:true,conservation:conservationReport(w),carts:w.carts.length,events,samples,omitted,limits:'One first ordinary forest cart plan at pinned rules 113. No injected knowledge, goods or decisions. Repeated samples are not independent opportunities; counters and histories are not evidence of hidden intent. Does not estimate all-world reliability or benefit.'};mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({tick:w.tick,seconds:report.seconds,stop,person,plan,pureChecks,events:events.length,samples:samples.length,carts:w.carts.length,conservation:report.conservation.ok}));if(stop==='budget')process.exitCode=1;
+const report={...gitProvenance(),source,settings:w.settings,tick:w.tick,seconds:(performance.now()-began)/1000,stop,adopted,finalPlan,pureChecks,continuationEqual:true,conservation:conservationReport(w),carts:w.carts.length,events,samples,omitted,limits:`One first ordinary forest cart plan at pinned rules ${versionText}. No injected knowledge, goods or decisions. Repeated samples are not independent opportunities; counters and histories are not evidence of hidden intent. Does not estimate all-world reliability or benefit.`};mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({tick:w.tick,seconds:report.seconds,stop,person,plan,pureChecks,events:events.length,samples:samples.length,carts:w.carts.length,conservation:report.conservation.ok}));if(stop==='budget')process.exitCode=1;

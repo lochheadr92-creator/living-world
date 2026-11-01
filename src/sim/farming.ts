@@ -6,7 +6,10 @@ import { ledgerCreate, ledgerSpoil } from './economy';
 import { addEvent, addFx } from './events';
 import { homeBuildingOf } from './households';
 import { hashUnit } from './rng';
-import { isFreeLand, newId, registerPlot } from './registry';
+import { isFreeLand, isWalkable, newId, registerPlot } from './registry';
+import { findPath } from './pathfinding';
+import { recentFailure } from './knowledge';
+import { runsRulesVersion } from './rulesversion';
 import type { Person, Plot, World } from './types';
 import { T } from './types';
 import { dist } from './util';
@@ -77,13 +80,19 @@ export function updatePlots(world: World): void {
 }
 
 /** Where could this person start a new field plot? Near home, on grass they have seen, next to other plots if possible. */
-export function findPlotSpot(world: World, p: Person): { x: number; y: number } | null {
+let reachableTilling=true;
+export const reachableTillingOn=()=>reachableTilling;
+export function setReachableTilling(on:boolean):void{reachableTilling=on;}
+export const hasReachableTilling=(w:World)=>reachableTilling&&w.settings.dynamics==='rich'&&runsRulesVersion(w,118);
+/** Negative, disjoint from entity IDs and the existing small negative generic failure keys. */
+export const plotFailureKey=(w:World,x:number,y:number)=>-100000-y*w.W-x;
+export function findPlotSpot(world: World, p: Person): { x: number; y: number; spotX?:number; spotY?:number } | null {
   const home = homeBuildingOf(world, p);
   const hub = nearestHub(world, p.x, p.y);
   const ax = home ? home.x + home.w / 2 : hub.x;
   const ay = home ? home.y + home.h / 2 : hub.y;
   const mine = world.plots.filter((pl) => pl.hhId === p.hhId);
-  let best: { x: number; y: number } | null = null;
+  let best: { x: number; y: number; spotX?:number; spotY?:number } | null = null;
   let bs = -1e9;
   for (let y = Math.floor(ay - 13); y <= Math.ceil(ay + 13); y++) {
     for (let x = Math.floor(ax - 13); x <= Math.ceil(ax + 13); x++) {
@@ -106,6 +115,14 @@ export function findPlotSpot(world: World, p: Person): { x: number; y: number } 
       // not on top of other households' land
       for (const o of world.plots) if (o.hhId !== p.hhId && Math.abs(o.x - x) + Math.abs(o.y - y) < 3) score -= 3;
       if (score > bs) {
+        if(hasReachableTilling(world)){
+          if(recentFailure(world,p,plotFailureKey(world,x,y),800))continue;
+          // Keep the former south-side position where reachable; otherwise try the other adjacent sides.
+          const standing=[[x,y+1],[x+1,y],[x,y-1],[x-1,y]].find(([sx,sy])=>
+            isWalkable(world,sx,sy)&&findPath(world,p.x,p.y,sx+0.5,sy+0.5,{exact:{x:sx+0.5,y:sy+0.5},cart:!!p.cartId,caller:'field standing'})!==null);
+          if(!standing)continue;
+          bs=score;best={x,y,spotX:standing[0]+0.5,spotY:standing[1]+0.5};continue;
+        }
         bs = score;
         best = { x, y };
       }

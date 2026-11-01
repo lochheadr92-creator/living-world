@@ -1,6 +1,11 @@
 // A personally motivated water search: no source location or future supply is supplied here.
 import {runsRulesVersion} from './rulesversion';
 import type {Ctx} from './optutil';
+import type {World} from './types';
+let criticalCooldown=true;
+export const criticalSearchOn=()=>criticalCooldown;
+export function setCriticalSearch(on:boolean):void{criticalCooldown=on;}
+export const hasCriticalSearch=(w:World)=>criticalCooldown&&w.settings.dynamics==='rich'&&runsRulesVersion(w,118);
 let enabled=true;
 export const waterSearchOn=()=>enabled;
 export function setWaterSearch(on:boolean):void{enabled=on;}

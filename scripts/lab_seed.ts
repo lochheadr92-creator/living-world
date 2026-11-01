@@ -7,6 +7,9 @@ import { createWorld } from '../src/sim/factory';
 import { freshRunSettings, parseRunRules, runRulesVersion } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { DEFAULT_BRANCHES, runLab, runBranch, parseIntervention } from './lab/lab';
+import { labProvenance, assertLabSourceUnchanged } from './observers/provenance';
+
+const provenance = labProvenance();
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
 const opt = (name: string, dflt: string): string => {
@@ -35,7 +38,7 @@ const world = createWorld(settings);
 // (scripts/gates.ts) refuse to compare them rather than quietly treating one as a baseline for the other.
 // `rulesVersion` is on every row beside `dynamics`, explicitly null for an unversioned run: a reader must never have to
 // guess a generation from the word "rich".
-const emit=(r:ReturnType<typeof runBranch>)=>console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,...(geologyComparison?{generationComparison:true}:{}),...r,hashes:undefined}));
+const emit=(r:ReturnType<typeof runBranch>)=>{assertLabSourceUnchanged(provenance);console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,provenance,...(geologyComparison?{generationComparison:true}:{}),...r,hashes:undefined}));};
 runLab(world,fork,days,branches,sample,emit);
 if(geologyComparison){
  let baseline;setDepositGeology(false);try{baseline=createWorld(settings);}finally{setDepositGeology(true);}
@@ -43,4 +46,5 @@ if(geologyComparison){
  emit({...r,divergedAfterTicks:serializeWorld(baseline)!==serializeWorld(world)?0:null,spec:'no-geology-at-generation',summary:'same seed and source locations; spatial mineral quantity field disabled at generation',note:'Different initial mineral quantities; not a post-fork transfer or deletion.'});
 }
 // a last line so that a runner can tell a finished seed from one cut short (the lab.mjs runner skips finished seeds when re-run)
+assertLabSourceUnchanged(provenance);
 console.log(JSON.stringify({ seed, done: true }));

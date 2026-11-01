@@ -15,7 +15,7 @@ export function sourceManifest(files: string[]): Record<string, string> {
 }
 
 export interface GitProvenance {
-  /** the commit checked out when the run began */
+  /** the commit checked out when gitProvenance is called (call time, not necessarily run start) */
   head: string;
   /** whether any tracked file differed from that commit (untracked files, such as evidence folders, do not count) */
   dirty: boolean;
@@ -28,4 +28,15 @@ export function gitProvenance(): GitProvenance {
   const status = execFileSync('git', ['status', '--porcelain', '--untracked-files=no'], { encoding: 'utf8' });
   const modified = status.split(/\r?\n/).filter((l) => l.trim().length > 0).map((l) => l.slice(3).trim());
   return { head, dirty: modified.length > 0, modified };
+}
+
+/** Lab inputs: tracked source/tooling, plus new source files in an uncommitted implementation. */
+export function labProvenance() {
+  const files = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '--', 'src', 'scripts', 'package.json', 'package-lock.json', 'vite.config.ts'], { encoding: 'utf8' })
+    .split(/\r?\n/).filter(Boolean).sort();
+  return { ...gitProvenance(), source: sourceManifest([...new Set(files)]) };
+}
+
+export function assertLabSourceUnchanged(before: ReturnType<typeof labProvenance>): void {
+  if (JSON.stringify(labProvenance().source) !== JSON.stringify(before.source)) throw new Error('Source changed during lab run; results rejected.');
 }

@@ -8,6 +8,11 @@ import {Scorer,addOption,addBlocked,beliefsByKind,eta,pen,spotNear,dangerAt} fro
 import type {Ctx} from './optutil';
 import type {World} from './types';
 let enabled=true;
+let capacity=true;
+export const harvestCapacityOn=()=>capacity;
+export function setHarvestCapacity(on:boolean):void{capacity=on;}
+/** Discretionary harvest may take seed alone; block only when neither output fits. */
+export const harvestPackFull=(ctx:Ctx)=>capacity&&ctx.world.settings.dynamics==='rich'&&runsRulesVersion(ctx.world,118)&&invRoom(ctx.world,ctx.p,'grain')<1&&invRoom(ctx.world,ctx.p,'seeds')<1;
 export const hungryHarvestOn=()=>enabled;
 export function setHungryHarvest(on:boolean):void{enabled=on;}
 export const hasHungryHarvest=(w:World)=>enabled&&w.settings.dynamics==='rich'&&runsRulesVersion(w,114);

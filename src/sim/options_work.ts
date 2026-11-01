@@ -2,6 +2,8 @@ import {hasLivedLife} from './lived_life';
 import {hasChildhood} from './childhood_rules';
 import {reservedFor} from './reserved_goods';
 import {toolCapacityBlock} from './tool_feasibility';
+import {harvestPackFull} from './hungry_harvest';
+import {hasCriticalSearch} from './water_search';
 import {hungryHarvestOptions} from './hungry_harvest';
 import { hasEcology } from './ecology';
 import {mayTakeKnownPile} from './pile_access';
@@ -1152,6 +1154,7 @@ function optFarm(ctx: Ctx): void {
         mk('tend', 'Tend the crops', 'to help the crop grow', sc.total, sc.parts);
       }
     } else if (b.state === 'ripe') {
+      if(harvestPackFull(ctx)){addBlocked(ctx,'harvest','Harvest the crop',b.id,'no room to carry grain or seed from the crop','farm');continue;}
       const sc = new Scorer().add('ripe crop', 38 * Math.max(0.8, mult) + insecure * 1.2).add('walking', -pen(e));
       mk('harvest', 'Harvest the crop', 'to bring in food and seed', sc.total, sc.parts);
     }
@@ -1188,8 +1191,8 @@ function optFarm(ctx: Ctx): void {
               goal: 'to grow food near home',
               tx: spot.x + 0.5,
               ty: spot.y + 0.5,
-              spotX: spot.x + 0.5,
-              spotY: spot.y + 1.5,
+              spotX: spot.spotX ?? spot.x + 0.5,
+              spotY: spot.spotY ?? spot.y + 1.5,
               utility: sc.total,
               minCommit: 80,
               maxTicks: 700,
@@ -1380,7 +1383,7 @@ function optExplore(ctx: Ctx): void {
   const dLead = depositLead(ctx);
   const noLead = noFoodLead || noWaterLead || noWoodLead || !!dLead;
   if (!noLead && (ctx.drives.hunger > 40 || ctx.drives.thirst > 40 || ctx.drives.energy > 40)) return;
-  if (world.tick - p.lastExploreTick < (noLead ? 250 : 520)) return;
+  if (world.tick - p.lastExploreTick < (noLead ? 250 : 520) && !(hasCriticalSearch(world) && waterSearch?.afterDark)) return;
   const tm = traitMods(p);
   const foodKnown = countBeliefsOfKind(p, 'berry_bush') + countBeliefsOfKind(p, 'fruit_tree') + countBeliefsOfKind(p, 'wild_grain') + countBeliefsOfKind(p, 'fish_spot');
   const hs = hhState(ctx);

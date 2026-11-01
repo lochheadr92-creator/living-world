@@ -21,7 +21,7 @@ import {reviewJourneyRecovery} from './journey_recovery';
 // In an authored world every function here is a no-op and `p.intentions` stays empty, so authored behaviour is untouched.
 import { BUILD_DEF, DAY, SOURCE_ITEM, TOOL_RECIPE, homeNoun, isHomeType } from './constants';
 import { carryCap } from './people';
-import { roomFor } from './economy';
+import { roomFor,weightOf } from './economy';
 import { dayFraction } from './environment';
 import { addLog } from './events';
 import { isRich } from './mood';
@@ -629,10 +629,14 @@ export function preparingReserve(p: Person): boolean {
 }
 
 /** Would a tool be worth making, and is the only thing in the way the materials? */
+let toolPlanCapacity=true;
+export const toolPlanCapacityOn=()=>toolPlanCapacity;
+export function setToolPlanCapacity(on:boolean):void{toolPlanCapacity=on;}
 function toolWanted(ctx: Ctx): { tool: ToolKind; wants: Partial<Items> } | null {
   const t = wantedTool ? wantedTool(ctx) : null;
   if (!t || alreadyPreparingHandTool(ctx.world,ctx.p,t)) return null;
   const r = TOOL_RECIPE[t];
+  if(toolPlanCapacity&&ctx.world.settings.dynamics==='rich'&&runsRulesVersion(ctx.world,118)&&weightOf({wood:r.wood,stone:r.stone})>carryCap(ctx.world,ctx.p))return null;
   // a plan that does not exist yet may count only what no live plan of theirs has already spoken for
   const spare: Partial<Items> = { wood: freeOf(ctx.p, 'wood'), stone: freeOf(ctx.p, 'stone') };
   const short: Partial<Items> = {};

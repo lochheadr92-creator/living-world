@@ -4,7 +4,7 @@
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn, spawnSync } from 'node:child_process';
 import { cpus } from 'node:os';
-import { createWriteStream, existsSync, mkdirSync, readFileSync } from 'node:fs';
+import { createWriteStream, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const args = process.argv.slice(2);
@@ -26,6 +26,18 @@ const all = ['meadow', 'river', 'fern', 'aspen', 'birch', 'cedar', 'gen-1', 'gen
 const seeds = all.slice(0, n);
 const cores = Math.max(1, cpus().length);
 const vite = join('node_modules', 'vite-node', 'dist', 'cli.mjs');
+// Keep the runner plain JavaScript on supported Node releases; the shared TS helper uses the same loader as workers.
+const labProvenance = () => {
+  const result = spawnSync(process.execPath, [vite, 'scripts/lab/provenance_cli.ts'], { encoding: 'utf8' });
+  if (result.status !== 0) throw new Error(result.stderr || 'Could not capture lab provenance');
+  return JSON.parse(result.stdout);
+};
+const assertLabSourceUnchanged = before => {
+  if (JSON.stringify(labProvenance().source) !== JSON.stringify(before.source)) throw new Error('Source changed during lab run; results rejected.');
+};
+const provenance = labProvenance();
+// New lab directories retain the runner's start snapshot. Legacy directories cannot be relabelled with today's source.
+const provenancePath = join(out, 'provenance.json');
 // A changed default must never resume old results as if they measured the current simulation - and "both rich" does not mean
 // "the same rules", since every generation of the rich rules has carried that one word. The comparison is by rules VERSION
 // and lives in scripts/lab/guard.ts, which owns it and can read the version constant. It runs here, before anything is
@@ -37,7 +49,14 @@ const vite = join('node_modules', 'vite-node', 'dist', 'cli.mjs');
   });
   if (guard.status !== 0) process.exit(guard.status ?? 1);
 }
+if (existsSync(out)) {
+  if (!existsSync(provenancePath) && readdirSync(out).some(f => /^lab_.+\.jsonl$/.test(f)))
+    throw new Error('Lab directory has no source provenance; use a fresh output directory.');
+  if (existsSync(provenancePath) && JSON.stringify(JSON.parse(readFileSync(provenancePath, 'utf8')).source) !== JSON.stringify(provenance.source))
+    throw new Error('Lab source differs from the retained run; use a fresh output directory.');
+}
 mkdirSync(out, { recursive: true });
+if (!existsSync(provenancePath)) writeFileSync(provenancePath, JSON.stringify(provenance, null, 2) + '\n');
 const node = (script, rest, stdout) =>
   new Promise((resolve) => {
     const p = spawn(process.execPath, [vite, script, '--', ...rest], { stdio: ['ignore', stdout ? 'pipe' : 'inherit', 'inherit'] });
@@ -65,6 +84,7 @@ async function worker() {
   }
 }
 await Promise.all(Array.from({ length: Math.min(cores, seeds.length) }, worker));
+assertLabSourceUnchanged(provenance);
 const reportFile = join(out, 'report.txt');
 const report = createWriteStream(reportFile);
 const reportCode = await node('scripts/lab_report.ts', [out, ...(opt('story', '') ? ['--story', opt('story', '')] : [])], report);
