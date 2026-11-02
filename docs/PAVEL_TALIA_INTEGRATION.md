@@ -173,7 +173,8 @@ Evidence (local, untracked, in the main checkout): `integration121_evidence/long
 ## Plan and owner decisions (2 November 2026)
 
 The next plan is `knowledge/living-world/domain-plan-revised` in the owner's brain vault
-(`C:\dev\brain`). Its first step is the paired attribution named above (P0.1). The owner settled
+(`C:\dev\brain`). Its first step is the paired attribution named above (P0.1), recorded in
+`docs/FOREST_ATTRIBUTION.md`. The owner settled
 eight plan decisions on 2 November 2026. Their records, with reasons and rejected alternatives,
 are in `C:\dev\brain\decisions\manual\claude-living-world\`, not in this repo:
 
