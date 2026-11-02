@@ -80,3 +80,71 @@ and `rich-no-reachable-tilling`.
   `status.json`, `summary.md`, `summary.json`, `population_by_day.csv`, and each run's `report.json`,
   `final.json` and logs.
 - `p01_evidence/scripts/` holds the runner and analysis scripts.
+
+## P0.1b switch ablation at rules 121
+
+**Method.**
+- The lab ran from the frozen `3df2ac8` worktree at rules 121, with arrivals off (forced by `lab_seed.ts`), on the
+  Normal profile.
+- Forest was run directly with `scripts/lab_seed.ts --seed forest`, forking at day 4 and running 21 days. The eight
+  standard seeds were run with `scripts/lab.mjs --seeds 8` (meadow, river, fern, aspen, birch, cedar, gen-1 and gen-2),
+  with the same fork and days.
+- The arms are the control, `nudge:1`, `nudge:2`, `rich-no-childhood`, `rich-no-lived-life`, `rich-no-critical-search`
+  and `rich-no-reachable-tilling`.
+- Forest's noise floor was then widened with `nudge:3` to `nudge:8` at day 4. The tilling and childhood arms were
+  repeated at fork days 2, 3, 5 and 6, each with `nudge:1` to `nudge:4` and each ending at day 25.
+- The forest control is 1 alive with 28 deaths. Its population by day equals the P0.1a arrivals-off rules-121 run, and
+  four separate processes gave the identical control state.
+
+**Forest: alive at day 25.**
+
+| Fork day | Control and nudges | Tilling off | Childhood off |
+|---|---|---|---|
+| 2 | 1, 9, 4, 12, 6 | 16 | 11 |
+| 3 | 1, 10, 1, 10, 6 | 16 | 1 |
+| 4 | 1, 2, 1, 1, 4, 15, 5, 1, 9 | 16 | 5 |
+| 5 | 1, 2, 1, 3, 1 | 16 | 7 |
+| 6 | 1, 6, 16, 3, 11 | 1 | 4 |
+
+At day 4, lived life off gives 2 alive and critical search off gives 1.
+
+- The 24 nudges give 1 to 16 alive, a mean of 5.8. One extra random draw is enough to move forest across most of the
+  range, so the control's 1 alive is a low draw.
+- Tilling off is effectively one alternative trajectory, not five.
+  - From fork days 2 to 5 it first differs from the control at the same tick, 12,600 (day 5.25), and ends in an
+    identical final save with 16 alive.
+  - From day 6, after that point, it ends with 1 alive.
+  - Both outcomes lie within the nudge range.
+- Childhood off diverges at once at every fork day, giving 5 independent draws with a mean of 5.6. That is the same as
+  the nudges.
+- Critical search off ends in exactly the control's state, in forest and in all eight standard seeds. The switch never
+  fires in these worlds.
+
+**Eight standard seeds.** The lab report (`p01b-8seeds/report.txt`) compares each arm against control and nudges, paired
+by seed:
+- No arm's people or deaths differ from chance: childhood off +1.6 people, lived life off +1.6 and tilling off +1.7.
+  Every interval includes zero.
+- One non-survival effect is larger than chance. Removing lived life raises completed household food preparations,
+  `prepDone`, from 7.6 to 12.9 (higher in 7 of 8 seeds). It also raises person-days spent on preparation steps,
+  `prepDays`, from 14.6 to 28.2 (higher in 8 of 8). So at rules 119 and above, households prepare less food themselves.
+  This measurement does not show whether that matters for survival.
+
+## P0.1 result
+
+**Chronic seed fragility.** No rules step is named:
+- Forest at rules 121 collapses in its second winter (days 20-24) in most draws.
+- How many survive depends on single random draws, anywhere from 1 to 16 of 28.
+- No switch for rules 118-121 moves the forest outcome beyond that spread.
+- No switch moves the survivors of the eight standard seeds beyond chance.
+- The P0.1a step from rules 119 to 120 (18 to 1 alive) lies within the forest's demonstrated spread.
+
+So, per the plan, step P0.2 (repair) is not needed.
+
+**Open question.** P0.1 cannot answer whether forest's distribution at rules 121 is worse than at 118. The one
+rules-118 forest run kept 21 alive, which is above all 24 rules-121 nudges. A rules-118 noise floor needs the lab to pin a
+rules version: `lab_seed.ts` takes only the current rules, `authored` or `rich-unversioned`. That is a bounded tooling
+change, which needs owner approval under the plan.
+
+**Evidence.** This is local and untracked:
+- `p01_evidence/p01b-forest/`, `p01b-8seeds/`, `p01b-forest-nudges/` and `p01b-forest-forks/`;
+- `p01b-summary.md`, `p01b-launch.json` and `scripts/p01b_analyse.mjs`.
