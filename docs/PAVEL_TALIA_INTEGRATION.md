@@ -169,3 +169,25 @@ Evidence (local, untracked, in the main checkout): `integration121_evidence/long
 `integration121_evidence/longrun-25days-noarrivals/`, their `.log` files, and the stopped
 `integration121_evidence/longrun-25days/`. Stage 3 figures are from
 `stage3_evidence/part-b-25days/reports/`.
+
+## Plan and owner decisions (2 November 2026)
+
+The next plan is `knowledge/living-world/domain-plan-revised` in the owner's brain vault
+(`C:\dev\brain`). Its first step is the paired attribution named above (P0.1). The owner settled
+eight plan decisions on 2 November 2026. Their records, with reasons and rejected alternatives,
+are in `C:\dev\brain\decisions\manual\claude-living-world\`, not in this repo:
+
+- D1: arrivals stay on for new product worlds and long runs, and off in the lab, until the forest
+  attribution reports.
+- D2: one behaviour stream at a time. Measurements run beside it only from a frozen worktree.
+- D3: Normal profile for plan Phases 0-3, 5 and 6. Large for Phases 4 and 7.
+- D4: language is deferred until at least 10 in 100 conversations are between people of different
+  founding townships, on 2 of 3 seeds.
+- D5: WS19 applies as written. Only restitution requests and public accounts are allowed: no
+  courts, warfare, exclusion, threats or casualties. It is revisited after the outcome audit.
+- D6: LW-03 is settled. `adoptOrphans` becomes knowledge-gated, so only a carer who knows of the
+  child can take them. This comes in a later rules version.
+- D7: decision records for this project live in the brain folder above.
+- D8: `WORKFLOW.md` is unchanged. Phase ends are checkpoints, not approval gates.
+
+No code, rules version or measurement changed with these records.
