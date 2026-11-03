@@ -2,12 +2,14 @@ import {setDepositGeology} from '../src/sim/geology';
 import {serializeWorld} from '../src/app/save';
 // One seed of the counterfactual lab (see scripts/lab/lab.ts). Prints one JSON line per branch.
 //   npx vite-node scripts/lab_seed.ts -- --seed meadow [--profile large] [--fork 4] [--days 8] [--branches nudge:1,nudge:2,...] [--sample 120]
+//     [--arrivals on|off] [--rules N]
 // Run many seeds in parallel, then aggregate: node scripts/lab.mjs --out lab_out --seeds 8
 import { createWorld } from '../src/sim/factory';
 import { freshRunSettings, parseRunRules, runRulesVersion } from '../src/sim/profiles';
 import type { ProfileName } from '../src/sim/profiles';
 import { DEFAULT_BRANCHES, runLab, runBranch, parseIntervention } from './lab/lab';
 import { labProvenance, assertLabSourceUnchanged } from './observers/provenance';
+import { parseArrivals, parsePinnedRules } from './lab/guard';
 
 const provenance = labProvenance();
 
@@ -29,16 +31,23 @@ const branches = opt('branches', DEFAULT_BRANCHES.join(',')).split(',').filter((
 // is: a measurement of "the current simulation" that quietly ran the unversioned baseline would be worthless.
 const rules = parseRunRules(opt('dynamics', 'rich'));
 const dynamics = rules === 'authored' ? 'authored' : 'rich';
-const rulesVersion = runRulesVersion(rules);
+// `--rules N` runs an earlier generation of the rich rules on today's code, as a saved world of that version continues. Its rows
+// carry `rulesPinned: true` beside the version, so a pinned run is never read as a measurement of the current simulation.
+const pinned = parsePinnedRules(opt('rules', ''), rules);
+const rulesVersion = pinned ?? runRulesVersion(rules);
+// Arrivals are on, as in a new world in the app: the owner's instruction of 3 November 2026 is to measure the world with
+// everything on. Until then the lab always forced them off; `--arrivals off` reproduces those runs and the recorded gate baselines.
+const arrivals = parseArrivals(opt('arrivals', 'on'));
 const geologyComparison=opt('geology-comparison','no')==='yes';
 if(geologyComparison&&fork!==0)throw new Error('Generation geology comparison requires --fork 0; no post-fork resource rewrite is permitted');
-const settings=freshRunSettings(rules,profile,seed,{immigration:false});
+const settings=freshRunSettings(rules,profile,seed,{immigration:arrivals});
+if (pinned !== undefined) settings.rulesVersion = pinned;
 const world = createWorld(settings);
 // `dynamics` goes on every row: a result from a rich world is not comparable with one from an authored world, and the gates
 // (scripts/gates.ts) refuse to compare them rather than quietly treating one as a baseline for the other.
 // `rulesVersion` is on every row beside `dynamics`, explicitly null for an unversioned run: a reader must never have to
-// guess a generation from the word "rich".
-const emit=(r:ReturnType<typeof runBranch>)=>{assertLabSourceUnchanged(provenance);console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,provenance,...(geologyComparison?{generationComparison:true}:{}),...r,hashes:undefined}));};
+// guess a generation from the word "rich". `arrivals` is on every row for the same reason.
+const emit=(r:ReturnType<typeof runBranch>)=>{assertLabSourceUnchanged(provenance);console.log(JSON.stringify({seed,profile,fork,days,dynamics,rulesVersion,...(pinned!==undefined?{rulesPinned:true}:{}),arrivals,provenance,...(geologyComparison?{generationComparison:true}:{}),...r,hashes:undefined}));};
 runLab(world,fork,days,branches,sample,emit);
 if(geologyComparison){
  let baseline;setDepositGeology(false);try{baseline=createWorld(settings);}finally{setDepositGeology(true);}

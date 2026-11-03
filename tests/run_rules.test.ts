@@ -13,7 +13,7 @@ import { createWorld } from '../src/sim/factory';
 import { freshRunSettings, parseRunRules, runRulesVersion, settingsForProfile } from '../src/sim/profiles';
 import type { RunRules } from '../src/sim/profiles';
 import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
-import { checkResumable, incompatible, rowRules, wantedRules } from '../scripts/lab/guard';
+import { checkResumable, incompatible, parseArrivals, parsePinnedRules, rowRules, wantedRules } from '../scripts/lab/guard';
 
 describe('a fresh run from the command line', () => {
   it.each(['normal', 'large', 'huge', 'town'] as const)('is the current simulation, version and all, for %s', (profile) => {
@@ -62,15 +62,24 @@ const run = (script: string, args: string[]): string =>
   execFileSync(process.execPath, [vite, script, '--', ...args], { encoding: 'utf8', timeout: 240_000, stdio: ['ignore', 'pipe', 'pipe'] });
 
 describe('the scripts themselves, run as a person would run them', () => {
-  it('a default lab seed run records the current rules version on every row', () => {
+  it('a default lab seed run records the current rules version, with arrivals on, on every row', () => {
     const out = run('scripts/lab_seed.ts', ['--seed', 'meadow', '--profile', 'normal', '--fork', '0', '--days', '0', '--branches', 'control']);
-    const rows = out.split('\n').filter((l) => l.trim().startsWith('{')).map((l) => JSON.parse(l) as { spec?: string; dynamics?: string; rulesVersion?: number | null });
+    const rows = out.split('\n').filter((l) => l.trim().startsWith('{')).map((l) => JSON.parse(l) as { spec?: string; dynamics?: string; rulesVersion?: number | null; rulesPinned?: boolean; arrivals?: boolean });
     const real = rows.filter((r) => r.spec);
     expect(real.length).toBeGreaterThan(0);
     for (const r of real) {
       expect(r.dynamics).toBe('rich');
       expect(r.rulesVersion, JSON.stringify(r)).toBe(CURRENT_RULES_VERSION);
+      expect(r.rulesPinned, 'a current run is not marked pinned').toBeUndefined();
+      expect(r.arrivals, 'arrivals on, as in a new world in the app').toBe(true);
     }
+  }, 300_000);
+
+  it('a pinned lab seed run records the version it ran and says it was pinned; --arrivals off is recorded too', () => {
+    const out = run('scripts/lab_seed.ts', ['--seed', 'meadow', '--profile', 'normal', '--fork', '0', '--days', '0', '--branches', 'control', '--rules', '118', '--arrivals', 'off']);
+    const real = out.split('\n').filter((l) => l.trim().startsWith('{')).map((l) => JSON.parse(l) as { spec?: string; rulesVersion?: number | null; rulesPinned?: boolean; arrivals?: boolean }).filter((r) => r.spec);
+    expect(real.length).toBeGreaterThan(0);
+    for (const r of real) expect(r).toMatchObject({ rulesVersion: 118, rulesPinned: true, arrivals: false });
   }, 300_000);
 
   it('an explicitly legacy lab run records no version, rather than the current one', () => {
@@ -114,8 +123,8 @@ describe('the scripts themselves, run as a person would run them', () => {
 });
 
 describe('the lab will not mix one generation of rules with another', () => {
-  const rows = (dynamics?: string, rulesVersion?: number | null) =>
-    JSON.stringify({ seed: 'meadow', spec: 'control', ...(dynamics === undefined ? {} : { dynamics }), ...(rulesVersion === undefined ? {} : { rulesVersion }) }) + '\n' + JSON.stringify({ seed: 'meadow', done: true });
+  const rows = (dynamics?: string, rulesVersion?: number | null, arrivals?: boolean) =>
+    JSON.stringify({ seed: 'meadow', spec: 'control', ...(dynamics === undefined ? {} : { dynamics }), ...(rulesVersion === undefined ? {} : { rulesVersion }), ...(arrivals === undefined ? {} : { arrivals }) }) + '\n' + JSON.stringify({ seed: 'meadow', done: true });
 
   const dir = (content: string) => {
     const d = mkdtempSync(join(tmpdir(), 'living-world-rules-'));
@@ -124,7 +133,7 @@ describe('the lab will not mix one generation of rules with another', () => {
   };
 
   it('matching dynamics but a different rules version is incompatible', () => {
-    expect(incompatible(rowRules({ dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION }), wantedRules('rich'))).toBeNull();
+    expect(incompatible(rowRules({ dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION, arrivals: true }), wantedRules('rich'))).toBeNull();
     // a genuine earlier generation, not a made-up number: version 1 really is a set of rows that must not be mixed with version 2
     const older = incompatible(rowRules({ dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION - 1 }), wantedRules('rich'));
     expect(older, 'both rich, different generations').toMatch(/rules version/);
@@ -139,16 +148,17 @@ describe('the lab will not mix one generation of rules with another', () => {
   });
 
   it('still lets an explicitly legacy run resume its own results', () => {
+    // rows from before arrivals were recorded ran with them off, so only an arrivals-off run may resume them
     const d = dir(rows('authored'));
     try {
-      expect(checkResumable(d, ['meadow'], 'authored')).toBeNull();
-      expect(checkResumable(d, ['meadow'], 'rich')).toMatch(/Use a new output directory/);
+      expect(checkResumable(d, ['meadow'], 'authored', false, false)).toBeNull();
+      expect(checkResumable(d, ['meadow'], 'rich', false, false)).toMatch(/Use a new output directory/);
     } finally {
       rmSync(d, { recursive: true, force: true });
     }
     const u = dir(rows('rich'));
     try {
-      expect(checkResumable(u, ['meadow'], 'rich-unversioned'), 'an unversioned rich directory resumes an unversioned rich run').toBeNull();
+      expect(checkResumable(u, ['meadow'], 'rich-unversioned', false, false), 'an unversioned rich directory resumes an unversioned rich run').toBeNull();
     } finally {
       rmSync(u, { recursive: true, force: true });
     }
@@ -174,12 +184,52 @@ describe('the lab will not mix one generation of rules with another', () => {
   }, 120_000);
 
   it('accepts a directory whose rows were run under the same rules', () => {
-    const d = dir(rows('rich', CURRENT_RULES_VERSION));
+    const d = dir(rows('rich', CURRENT_RULES_VERSION, true));
     try {
       expect(checkResumable(d, ['meadow'], 'rich')).toBeNull();
     } finally {
       rmSync(d, { recursive: true, force: true });
     }
+  });
+
+  it('will not mix runs with and without arrivals, and reads an unrecorded setting as off', () => {
+    expect(rowRules({ dynamics: 'rich', rulesVersion: CURRENT_RULES_VERSION }).arrivals, 'the lab forced arrivals off before they were recorded').toBe(false);
+    const off = dir(rows('rich', CURRENT_RULES_VERSION));
+    try {
+      expect(checkResumable(off, ['meadow'], 'rich'), 'a current run (arrivals on) cannot resume arrivals-off rows').toMatch(/arrivals off results, requested .*arrivals on/);
+      expect(checkResumable(off, ['meadow'], 'rich', false, false)).toBeNull();
+    } finally {
+      rmSync(off, { recursive: true, force: true });
+    }
+  });
+
+  it('will not mix a pinned earlier version with current results, either way round', () => {
+    const current = dir(rows('rich', CURRENT_RULES_VERSION, true));
+    try {
+      expect(checkResumable(current, ['meadow'], 'rich', false, true, 118)).toMatch(/rules version 121.*requested rich, rules version 118/);
+    } finally {
+      rmSync(current, { recursive: true, force: true });
+    }
+    const pinned = dir(rows('rich', 118, true));
+    try {
+      expect(checkResumable(pinned, ['meadow'], 'rich', false, true, 118)).toBeNull();
+      expect(checkResumable(pinned, ['meadow'], 'rich')).toMatch(/Use a new output directory/);
+    } finally {
+      rmSync(pinned, { recursive: true, force: true });
+    }
+  });
+
+  it('reads --arrivals and --rules strictly, refusing by name rather than defaulting', () => {
+    expect(parseArrivals('on')).toBe(true);
+    expect(parseArrivals('off')).toBe(false);
+    expect(() => parseArrivals('yes')).toThrow(/on or off/);
+    expect(parsePinnedRules('', 'rich')).toBeUndefined();
+    expect(parsePinnedRules('118', 'rich')).toBe(118);
+    expect(() => parsePinnedRules(String(CURRENT_RULES_VERSION), 'rich'), 'pinning the current version would only disguise a current run').toThrow(/current version/);
+    expect(() => parsePinnedRules('118', 'authored')).toThrow(/cannot be combined/);
+    expect(() => parsePinnedRules('5', 'rich'), 'an unintegrated generation').toThrow(/--rules 5/);
+    expect(() => parsePinnedRules(String(CURRENT_RULES_VERSION + 1), 'rich'), 'a version from the future').toThrow(/newer build/);
+    expect(() => parsePinnedRules('abc', 'rich')).toThrow(/--rules abc/);
   });
 
   it('says nothing about a directory that does not exist yet', () => {

@@ -1,5 +1,6 @@
 // Run the counterfactual lab on every core of this machine, then print the report. Works on Windows, macOS, Linux.
 //   node scripts/lab.mjs [--out current_lab_out] [--seeds 8] [--fork 4] [--days 8] [--profile large] [--branches nudge:1,nudge:2,no-wood] [--dynamics rich] [--story meadow]
+//     [--arrivals on|off] [--rules N]   (arrivals on by default, as in the app; --rules pins an earlier rich rules version)
 // Re-running with the same --out skips seeds that finished, so an interrupted run can be resumed.
 // Needs Node 22+ and `npm ci` done. A seed costs about (fork + branches × days) simulated days of CPU.
 import { spawn, spawnSync } from 'node:child_process';
@@ -22,6 +23,11 @@ const extra = ['--fork', opt('fork', '4'), '--days', opt('days', '8'), '--profil
 if (opt('branches', '')) extra.push('--branches', opt('branches', ''));
 extra.push('--dynamics', dynamics);
 if(opt('geology-comparison','no')==='yes')extra.push('--geology-comparison','yes');
+// both are validated by the guard below before any worker starts
+const arrivals = opt('arrivals', 'on');
+const pinnedRules = opt('rules', '');
+extra.push('--arrivals', arrivals);
+if (pinnedRules) extra.push('--rules', pinnedRules);
 const all = ['meadow', 'river', 'fern', 'aspen', 'birch', 'cedar', 'gen-1', 'gen-2', 'gen-3', 'gen-4', 'gen-5', 'gen-6', ...Array.from({ length: 20 }, (_, i) => `nov-${i + 1}`)];
 const seeds = all.slice(0, n);
 const cores = Math.max(1, cpus().length);
@@ -41,10 +47,10 @@ const provenancePath = join(out, 'provenance.json');
 // A changed default must never resume old results as if they measured the current simulation - and "both rich" does not mean
 // "the same rules", since every generation of the rich rules has carried that one word. The comparison is by rules VERSION
 // and lives in scripts/lab/guard.ts, which owns it and can read the version constant. It runs here, before anything is
-// created and before any worker starts, and it only reads the existing files. It checks rules and generation-comparison setting, not source provenance:
+// created and before any worker starts, and it only reads the existing files. It checks rules, arrivals and generation-comparison setting, not source provenance:
 // use a fresh directory after any source revision change.
 {
-  const guard = spawnSync(process.execPath, [vite, join('scripts', 'lab', 'guard_cli.ts'), '--', '--out', out, '--seeds', seeds.join(','), '--dynamics', dynamics, '--geology-comparison', opt('geology-comparison','no')], {
+  const guard = spawnSync(process.execPath, [vite, join('scripts', 'lab', 'guard_cli.ts'), '--', '--out', out, '--seeds', seeds.join(','), '--dynamics', dynamics, '--geology-comparison', opt('geology-comparison','no'), '--arrivals', arrivals, ...(pinnedRules ? ['--rules', pinnedRules] : [])], {
     stdio: ['ignore', 'inherit', 'inherit'],
   });
   if (guard.status !== 0) process.exit(guard.status ?? 1);

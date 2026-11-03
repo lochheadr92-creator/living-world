@@ -7,6 +7,7 @@ import { METRICS } from './lab/lab';
 import type { BranchResult, Metric } from './lab/lab';
 import { mean, paired, sd, verdict } from './lab/stats';
 import { labProvenance } from './observers/provenance';
+import { CURRENT_RULES_VERSION } from '../src/sim/rulesversion';
 
 const args = process.argv.slice(2).filter((a) => a !== '--');
 const dir = args.find((a) => !a.startsWith('--') && !args[args.indexOf(a) - 1]?.startsWith('--')) ?? '.';
@@ -14,7 +15,7 @@ const storySeed = args.includes('--story') ? args[args.indexOf('--story') + 1] :
 const vsArg = args.includes('--vs') ? args[args.indexOf('--vs') + 1] ?? '' : '';
 for (const a of args) if (a.startsWith('--') && !['--story', '--vs'].includes(a)) console.error(`unknown option ${a} (ignored)`);
 
-type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; generationComparison?:boolean; provenance?: ReturnType<typeof labProvenance> };
+type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: string; rulesVersion?: number | null; rulesPinned?: boolean; arrivals?: boolean; generationComparison?:boolean; provenance?: ReturnType<typeof labProvenance> };
 const bySeed = new Map<string, Map<string, Row>>();
 for (const f of readdirSync(dir)) {
   if (!/^lab_.+\.jsonl$/.test(f)) continue;
@@ -47,6 +48,11 @@ const refMean = (seed: string, spec: string, m: Metric): number =>
 const num = (v: number, d = 1) => (Math.abs(v) < 10 ** -d / 2 ? '0' : (v > 0 ? '+' : '') + v.toFixed(d));
 
 console.log(`Counterfactual lab: ${seeds.length} seeds (${seeds.join(', ')}), ${first.profile} profile, forked at day ${first.fork}, run ${first.days} days.`);
+// which world was measured, said on the report itself. A row from before arrivals were recorded ran with them off (the lab forced
+// that until 3 November 2026); a pinned rules version is an earlier generation run on today's code, never the current simulation.
+const worldOf = (r: Row) => `${r.dynamics ?? 'authored'}, ${typeof r.rulesVersion === 'number' ? `rules version ${r.rulesVersion}${r.rulesPinned ? ` (pinned with --rules; the current version is ${CURRENT_RULES_VERSION})` : ''}` : 'unversioned'}, arrivals ${r.arrivals === true ? 'on' : 'off'}`;
+const worlds = [...new Set(allRows.map(worldOf))];
+console.log(worlds.length === 1 ? `World: ${worlds[0]}.` : `World: MIXED, not comparable (${worlds.join(' | ')}).`);
 console.log('Report-generation provenance (not measurement source): ' + JSON.stringify(labProvenance()));
 for (const seed of seeds) {
   const records = [...new Set([...bySeed.get(seed)!.values()].map(r => r.provenance ? JSON.stringify(r.provenance) : 'UNKNOWN (legacy measurement; source was not recorded)'))];

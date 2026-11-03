@@ -4,6 +4,7 @@
 // Two quite different jobs, kept apart on purpose:
 //   CHECKING a run against a baseline (the gate; exit code 1 on a failure)
 //     node scripts/lab.mjs --out gate_run --seeds 8 --fork 0 --days 12 --branches none      (control-only runs, from day 0)
+//       (add --arrivals off to check against a baseline recorded before 3 November 2026: the lab then forced arrivals off)
 //     npx vite-node scripts/gates.ts -- gate_run                        against docs/gates.json, the authored baseline
 //     npx vite-node scripts/gates.ts -- gate_run --file docs/gates-rich.json      against some other baseline
 //   CREATING a baseline (not a check: it asserts nothing, it only writes down where a world sat)
@@ -45,7 +46,7 @@ const GATED: Metric[] = ['people', 'deaths', 'workplaces', 'solidHomes', 'buildi
 const SD_FLOOR = 0.5;
 const MIN_PEOPLE = 50;
 
-type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: 'authored' | 'rich'; rulesVersion?: number | null };
+type Row = BranchResult & { seed: string; profile: string; fork: number; days: number; dynamics?: 'authored' | 'rich'; rulesVersion?: number | null; arrivals?: boolean };
 const rows: Row[] = [];
 for (const f of readdirSync(dir)) {
   if (!/^lab_.+\.jsonl$/.test(f)) continue;
@@ -73,13 +74,15 @@ const dynamics = rows[0].dynamics ?? 'authored';
 // generation of the rich rules has carried that one word. A row with no version was run before versions existed (or
 // deliberately unversioned), which is a different thing again, and is kept as null rather than read as the current one.
 const rulesVersion = rows[0].rulesVersion ?? null;
-const sameRules = (r: Row) => (r.dynamics ?? 'authored') === dynamics && (r.rulesVersion ?? null) === rulesVersion;
+// The lab forced arrivals off until 3 November 2026, so a row (or a baseline) that does not say ran without them.
+const arrivals = rows[0].arrivals === true;
+const sameRules = (r: Row) => (r.dynamics ?? 'authored') === dynamics && (r.rulesVersion ?? null) === rulesVersion && (r.arrivals === true) === arrivals;
 const mixed = rows.some((r) => !sameRules(r) || r.profile !== rows[0].profile || r.fork !== rows[0].fork || r.days !== rows[0].days);
 if (mixed) {
-  console.log('the rows in ' + dir + ' come from different experiments (dynamics/rules version/profile/fork/days): nothing here is comparable');
+  console.log('the rows in ' + dir + ' come from different experiments (dynamics/rules version/arrivals/profile/fork/days): nothing here is comparable');
   process.exit(1);
 }
-const header = { dynamics, rulesVersion, profile: rows[0].profile, fork: rows[0].fork, days: rows[0].days, branch: spec, n: rows.length };
+const header = { dynamics, rulesVersion, arrivals, profile: rows[0].profile, fork: rows[0].fork, days: rows[0].days, branch: spec, n: rows.length };
 
 if (record) {
   writeFileSync(FILE, JSON.stringify({ ...header, recordedFrom: rows.map((r) => r.seed).sort(), metrics: now }, null, 2) + '\n');
@@ -91,13 +94,15 @@ if (!existsSync(FILE)) {
   console.log(`${FILE} does not exist: record a baseline for this experiment first (--record --file ${FILE})`);
   process.exit(1);
 }
-const base = JSON.parse(readFileSync(FILE, 'utf8')) as typeof header & { dynamics?: 'authored' | 'rich'; rulesVersion?: number | null; branch?: string; metrics: typeof now };
+const base = JSON.parse(readFileSync(FILE, 'utf8')) as typeof header & { dynamics?: 'authored' | 'rich'; rulesVersion?: number | null; arrivals?: boolean; branch?: string; metrics: typeof now };
 const baseDyn = base.dynamics ?? 'authored';
 const baseRules = base.rulesVersion ?? null;
+const baseArrivals = base.arrivals === true;
 // a gate compares like with like: a rich run checked against the authored baseline would pass or fail for the wrong reason
 const differs = [
   baseDyn !== dynamics ? `dynamics ${baseDyn} vs ${dynamics}` : '',
   baseRules !== rulesVersion ? `rules version ${baseRules ?? 'unversioned'} vs ${rulesVersion ?? 'unversioned'}` : '',
+  baseArrivals !== arrivals ? `arrivals ${baseArrivals ? 'on' : 'off'} vs ${arrivals ? 'on' : 'off'} (lab runs default to arrivals on; --arrivals off matches a baseline recorded before 3 November 2026)` : '',
   base.profile !== header.profile ? `profile ${base.profile} vs ${header.profile}` : '',
   base.fork !== header.fork ? `fork day ${base.fork} vs ${header.fork}` : '',
   base.days !== header.days ? `days ${base.days} vs ${header.days}` : '',
@@ -108,7 +113,7 @@ if (differs.length) {
   process.exit(1);
 }
 let failed = 0;
-console.log(`gates: ${rows.length} seeds (${dynamics}, ${header.profile}, from day ${header.fork}, ${header.days} days, branch “${spec}”) against ${base.n} recorded in ${FILE}`);
+console.log(`gates: ${rows.length} seeds (${dynamics}, arrivals ${arrivals ? 'on' : 'off'}, ${header.profile}, from day ${header.fork}, ${header.days} days, branch “${spec}”) against ${base.n} recorded in ${FILE}`);
 for (const m of GATED) {
   if (!base.metrics[m] || !now[m]) {
     console.log(`  skip  ${m.padEnd(14)} ${!base.metrics[m] ? `not in ${FILE}: re-record the baseline to gate it` : 'not in this run'}`);
