@@ -148,3 +148,48 @@ change, which needs owner approval under the plan.
 **Evidence.** This is local and untracked:
 - `p01_evidence/p01b-forest/`, `p01b-8seeds/`, `p01b-forest-nudges/` and `p01b-forest-forks/`;
 - `p01b-summary.md`, `p01b-launch.json` and `scripts/p01b_analyse.mjs`.
+
+## P0.1c forest floors at rules 118 and 121 (3 November 2026)
+
+The owner approved the lab change (`--rules N`) and asked for the lab to run with every capability on, arrivals
+included. Both landed in `b5694c7`; the decisions are in the brain
+(`decisions/manual/claude-living-world/2026-11-03-arrivals-on-everywhere` and `2026-11-03-lab-rules-pin`).
+
+**Method.**
+- Lab runs from a frozen detached worktree at `b5694c7`, Normal profile, seed forest, every draw ending at day 25.
+- Four arms: rules 118 (pinned) and 121, each with arrivals on and off.
+- Each arm has 25 draws, the same design as P0.1b: the control, `nudge:1` to `nudge:8` forked at day 4, and
+  `nudge:1` to `nudge:4` forked at days 2, 3, 5 and 6.
+- Checks:
+  - every row finished, from clean `b5694c7`, with the rules, pin and arrivals asked for;
+  - each arm's 8 controls are identical;
+  - each control equals the P0.1a single run for that rules version and setting, so the pin and the arrivals switch
+    reproduce the observer runs exactly;
+  - all 25 arrivals-off rules-121 draws end in the same final state as P0.1b's (frozen `3df2ac8`), so the change left
+    arrivals-off lab runs unchanged.
+
+**Forest: alive at day 25.** Alive includes arrived people when arrivals are on.
+
+| Arm | Control alive (deaths) | Mean | sd | Median | Range | Draws with 10+ alive | Mean alive at day 20 |
+|---|---|---|---|---|---|---|---|
+| 118, arrivals on | 3 (30) | 3.1 | 2.6 | 3 | 0-8 | 0 of 25 | 27.6 |
+| 121, arrivals on | 4 (29) | 5.6 | 3.7 | 5 | 0-15 | 2 of 25 | 26.6 |
+| 118, arrivals off | 21 (10) | 8.7 | 6.2 | 8 | 1-21 | 12 of 25 | 26.7 |
+| 121, arrivals off | 1 (28) | 5.6 | 4.7 | 4 | 1-16 | 6 of 25 | 27.8 |
+
+Rules 118 minus rules 121, alive at day 25. The draws are unpaired; the test is a permutation test of the difference in
+means, with a bootstrap interval:
+- Arrivals on: -2.4 (95% interval -4.2 to -0.7, p = 0.01).
+- Arrivals off: +3.1 (95% interval 0.1 to 6.0, p = 0.06).
+
+**Result.**
+- With arrivals on, the product setting, rules 121 is not worse than 118 for forest. It keeps slightly more people,
+  and 118 never brings 10 through.
+- With arrivals off, 118 keeps about 3 more on average, at the edge of chance. The single rules-118 run's 21 alive is
+  the top of its range, not its typical outcome.
+- In every arm forest has about 27 people at day 20 and loses most of them in the second winter. The collapse is
+  chronic to the seed under both rule sets. It is not a regression from rules 119-121.
+- This closes P0.1's open question. Step P0.2 (repair) is still not needed.
+
+**Evidence.** This is local and untracked: `p01_evidence/p01c-floors/` (rows, `summary.md`, `summary.json`,
+`launch.json`), `scripts/p01c_launch.ps1` and `scripts/p01c_analyse.mjs`.
