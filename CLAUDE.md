@@ -51,6 +51,9 @@ Scaling and performance history: `docs/SCALING.md`.
   references where they apply.
 - Product direction never justifies expanding a bounded task. Write the idea down and raise it.
 
+## Unfamiliar technical pieces
+- For unfamiliar technical pieces (algorithms, libraries, tooling), not Living World's own behaviour rules, briefly check how established open-source projects do it before writing from scratch, and note what you compared in the commit or relevant doc. Anything borrowed must stay deterministic (seeded RNG, no wall-clock time), and check the licence before copying code.
+
 ## Decisions already made (do not reopen without a reason)
 - Seeded randomness stays (replay, inspector, the lab). The golden fingerprints (`tests/golden.test.ts`) no longer constrain a change
   meant to alter behaviour: re-record them in the commit that changes rules. Ensemble gates (`scripts/gates.ts`, `docs/gates.json`) are the
