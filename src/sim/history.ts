@@ -1,3 +1,4 @@
+import {BUILD_DEF} from './constants';
 import {careReturnHistory} from './care_handback';
 import {carriesDecisionLedger} from './decision_ledger';
 import {describeCancellation} from './request_cancellation';
@@ -26,7 +27,7 @@ export function projectHistory(w: World, q: CivicProject): string[] {
  const coordinator=q.status==='active'?mandate(w,q):q.council?.coordinatorId;
  const supported = q.participants.filter(m => m.personId !== q.organiserId && m.status === 'supporting').length;
  return [
-  `Shared storehouse #${q.siteId}: ${q.status}. ${q.council?'Proposed by':'Organiser'}: ${name(w, q.organiserId)}${!organiser || organiser.ent !== 'person' || !organiser.alive ? ' (no longer present; supporters may continue)' : ''}.`,
+  `Shared ${q.type?BUILD_DEF[q.type].label:'storehouse'} #${q.siteId}: ${q.status}. ${q.council?'Proposed by':'Organiser'}: ${name(w, q.organiserId)}${!organiser || organiser.ent !== 'person' || !organiser.alive ? ' (no longer present; supporters may continue)' : ''}.`,
   `Proposed: ${q.reason}. Voluntary support: ${supported}.`,
   ...(q.council ? [`Coordinator: ${coordinator?name(w,coordinator):'none; insufficient or tied support'}. Construction requires two people and a clear lead in support.`,...q.council.candidates.map(c=>`${name(w,c.personId)} proposes to coordinate: ${c.reason}; ${q.participants.filter(m=>m.status==='supporting'&&m.supports===c.personId).length} supporting.`),...q.participants.flatMap(m=>(m.decisions??[]).map(d=>`${name(w,m.personId)} ${d.accepted?'supported':'refused'} ${name(w,d.candidateId)}: ${d.reason}.`))] : []),
   q.status === 'active' ? `Still needed: ${missing || 'materials supplied'}${site?.ent === 'site' ? `; ${Math.ceil(site.workTotal - site.work)} work` : '; site unavailable'}.` : `Outcome: ${q.outcome}.`,

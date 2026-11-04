@@ -1,3 +1,4 @@
+import {mayShareType} from './shared_projects';
 import {rodCraftBlock} from './fishing_rods';
 import {hasBrewing} from './brewing';
 import {workshopSiteProblem} from './recovered_workshops';
@@ -400,8 +401,9 @@ registerHandler('plan_site', {
     if(a.data.improvement==='hearth'){
       const block=hearthInstallBlock(world,p,up);if(block)return `fail:${block}`;
     }
-    const site = createSite(world, type, sx, sy, type==='well'?0:a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined,...(a.data.improvement==='hearth'?{improvement:'hearth' as const}:{}) });
-    proposeProject(world, p, site, a.goal);
+    if(a.data.communal&&!mayShareType(world,type))return 'fail:this building cannot be a shared project';
+    const site = createSite(world, type, sx, sy, type==='well'||a.data.communal?0:a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined,...(a.data.improvement==='hearth'?{improvement:'hearth' as const}:{}) });
+    proposeProject(world, p, site, a.goal, a.data.communal===true);
     observe(world, p, site);
     const hh = householdOf(world, p);
     const verb = site.improvement==='hearth'?'marked out an indoor hearth for the':up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';

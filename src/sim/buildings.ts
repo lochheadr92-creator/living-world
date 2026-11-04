@@ -3,7 +3,7 @@ import { constructionAftermath } from './achievement';
 import {HEARTH_COST,HEARTH_WORK,hearthInstallBlock} from './hearth';
 import {losePreservationRack} from './preservation';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
-import { finishProject, hasTownships } from './townships';
+import { finishProject, hasTownships, projectAt } from './townships';
 import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
 import { evacuateHome } from './habitation';
 import { addItem, addCapped, isEmptyItems, cloneItems } from './economy';
@@ -224,7 +224,7 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
     }
   }
   const shares = builderShares(site);
-  const owner = titleHolder(site, shares);
+  const owner = projectAt(world,site.id)?.type ? 0 : titleHolder(site, shares);
   const b = createBuilding(world, site.type, site.x, site.y, isFacilityType(site.type) ? owner : site.hhId, { condition: 100, fuel: 0 });
   if (b.ops) {
     b.ops.builders = shares;

@@ -1,3 +1,5 @@
+import {mayShareType} from './shared_projects';
+import {BUILD_DEF} from './constants';
 import { initialiseCouncil, councilFor, councilAllowsWork, mayAskSupport, recordChoice, recount, type Council } from './civic_decision';
 // Civic identity and collective work. This module owns saved civic records, not inventories,
 // navigation or construction. Those remain with their existing physical action handlers.
@@ -18,6 +20,7 @@ export interface Participation {
  materials: Items; work: number;
 }
 export interface CivicProject {
+ type?: import('./types').BuildingType;
  council?: Council;
  id: number; townshipId: number; siteId: number; organiserId: number;
  proposed: number; reason: string; status: 'active' | 'completed' | 'failed';
@@ -55,21 +58,21 @@ export function mayWorkProject(w: World, p: Person, siteId: number): boolean {
  return !project || participation(w, p, siteId)?.status === 'supporting' && councilAllowsWork(w,p,project);
 }
 /** Existing plan_site has been chosen and physically marked out. No materials are created. */
-export function proposeProject(w: World, p: Person, site: Site, reason: string): void {
- if (!hasTownships(w) || site.type !== 'storehouse') return;
+export function proposeProject(w: World, p: Person, site: Site, reason: string, communal=false): void {
+ if (!hasTownships(w) || (site.type !== 'storehouse'&&!(communal&&mayShareType(w,site.type)&&site.hhId===0)) || w.civicProjects?.some(q=>q.siteId===site.id)) return;
  const town = townshipOf(w, p);
  if (!town) return;
  site.hhId = 0; // public store; grants no access to any private store or pack
  const projects = w.civicProjects ??= [];
- projects.push({ id: w.nextId++, townshipId: town.id, siteId: site.id, organiserId: p.id,
+ projects.push({ ...(communal?{type:site.type}:{}), id: w.nextId++, townshipId: town.id, siteId: site.id, organiserId: p.id,
   proposed: w.tick, reason, status: 'active', outcome: '', participants: [
-   { personId: p.id, requestId: 0, since: w.tick, status: 'supporting', reason: 'proposed this shared storehouse', materials: {}, work: 0 },
+   { personId: p.id, requestId: 0, since: w.tick, status: 'supporting', reason: `proposed this shared ${site.type==='storehouse'?'storehouse':BUILD_DEF[site.type].label}`, materials: {}, work: 0 },
   ] });
  initialiseCouncil(w,projects[projects.length-1]);
  // Bounded recent project detail. Completed buildings and household ownership are never removed.
  const ended = projects.filter(q => q.status !== 'active');
  for (const old of ended.slice(0, Math.max(0, ended.length - 24))) projects.splice(projects.indexOf(old), 1);
- addEvent(w, 'social', `${p.name} proposed a shared storehouse for ${town.name}: ${reason}.`, [p.id, site.id], p.x, p.y);
+ addEvent(w, 'social', `${p.name} proposed a shared ${site.type==='storehouse'?'storehouse':BUILD_DEF[site.type].label} for ${town.name}: ${reason}.`, [p.id, site.id], p.x, p.y);
 }
 /** A real, co-present conversation has reached its response phase. One answer per resident. */
 export function recordProjectResponse(w: World, asker: Person, responder: Person, req: Request | undefined): void {
@@ -137,7 +140,7 @@ export function reviewParticipation(w: World, p: Person): void {
    if (req) { req.status = 'interrupted'; req.note = m.reason; req.resolved = w.tick; req.outcome = 'interrupted'; }
   }
   recount(w,project);
-  addEvent(w, 'social', `${p.name} withdrew from the shared storehouse: ${m.reason}.`, [p.id, project.siteId], p.x, p.y);
+  addEvent(w, 'social', `${p.name} withdrew from the shared ${project.type?BUILD_DEF[project.type].label:'storehouse'}: ${m.reason}.`, [p.id, project.siteId], p.x, p.y);
  }
 }
 export function canInvite(w: World, organiser: Person, q: Person, siteId: number): boolean {

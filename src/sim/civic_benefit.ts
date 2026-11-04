@@ -1,3 +1,5 @@
+import {mayShareType} from './shared_projects';
+import {BUILD_DEF} from './constants';
 // Personal use of a public project. Attribution is captured at witnessed completion,
 // never reconstructed from the world's current coordinator or another person's memory.
 import type { Building, ItemKind, Person, World } from './types';
@@ -11,11 +13,11 @@ export const receivedCivicBenefit=(w:World,p:Person,id:number)=>hasCivicBenefit(
 
 /** Called only after the physical transfer has succeeded. One receipt per project. */
 export function recordCivicBenefit(w:World,p:Person,b:Building,item:ItemKind,amount:number,how:'collected'|'ate'='collected'):void{
- if(!hasCivicBenefit(w)||b.hhId!==0||b.type!=='storehouse'||amount<=0)return;
+ if(!hasCivicBenefit(w)||b.hhId!==0||(b.type!=='storehouse'&&!mayShareType(w,b.type))||amount<=0)return;
  const memory=p.civicOutcomes?.find(m=>m.success&&m.buildingId===b.id);
  if(!memory||memory.benefit)return;
  memory.benefit={tick:w.tick,item,amount};
- addLog(w,p,'social',`The shared storehouse from project #${memory.projectId} helped me: I ${how} ${amount} ${item}. I remember who coordinated it.`);
+ addLog(w,p,'social',`The shared ${b.type==='storehouse'?'storehouse':BUILD_DEF[b.type].label} from project #${memory.projectId} helped me: I ${how} ${amount} ${item}. I remember who coordinated it.`);
 }
 // Rules 49: public food counts too. Ordinary public food use runs through `eat_store`, not `withdraw` (43 meals against 5
 // withdrawals in 30 days of a rules-43 river world), so a witnessed storehouse that fed somebody earned them nothing. The

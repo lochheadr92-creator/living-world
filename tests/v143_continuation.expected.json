@@ -1,0 +1,12 @@
+{
+  "source": {
+    "head": "260cd88901ea41c7eb41c7bfe9d271df8eb3a7b9",
+    "rules": 143,
+    "content": "c1f149ed00d4827f5654ec72f1d4eb66c8604efc828f4f8a89f4247c90118b0d",
+    "note": "Recorded before successor behavior; ordinary world plus separately staged in-flight shared project"
+  },
+  "saved": "2873138df5ee1f415cda63cda483dab9517b414cfecf0d24fe5ab3fa6067aefb",
+  "continued": "b46684e443ed438acb5d9535222ca1565afc2d50b70766583b8eac1f723d70cd",
+  "staged": "a45c1bd8ed3cc99c6bb2559ad33c07daf2d49fca1390f01f2b722a590fc64447",
+  "stagedContinued": "c82eef167008f4807887078bb7fe9400e5142a0e5b92a0749f7a2af889d08f1e"
+}

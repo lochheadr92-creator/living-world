@@ -1,3 +1,4 @@
+import {BUILD_DEF} from './constants';
 import { rememberAlignment, alignmentWeight } from './political_alignment';
 // A bounded collective choice over who coordinates ONE existing public project.
 // Support is recorded only by actual recruitment conversations. This owns no goods.
@@ -53,7 +54,7 @@ export function nominate(w:World,a:Person,b:Person,q:CivicProject):void{
  m.status='supporting';m.supports=a.id;m.reason=reason;
  rememberAlignment(w,a,q.id,q.townshipId,a.id);
  recount(w,q);
- addEvent(w,'social',`${a.name} proposed to coordinate the shared storehouse: ${reason}.`,[a.id,q.siteId],a.x,a.y);
+ addEvent(w,'social',`${a.name} proposed to coordinate the shared ${q.type?BUILD_DEF[q.type].label:'storehouse'}: ${reason}.`,[a.id,q.siteId],a.x,a.y);
 }
 /** Compare only the respondent's relationships and personally witnessed outcomes. */
 export function confidence(p:Person,id:number,w?:World):number{

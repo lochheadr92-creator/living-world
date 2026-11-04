@@ -1,0 +1,37 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/shared_projects.test.ts (6 tests | 1 failed) 849ms
+   × collects the building materials from real home stores within carrying capacity 575ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/shared_projects.test.ts > collects the building materials from real home stores within carrying capacity
+AssertionError: {"a":[{"tick":26,"text":"Marked out a spot for a grain mill.","kind":"work"},{"tick":29,"text":"Wanted a word with Ben, who was too busy to stop.","kind":"social"},{"tick":29,"text":"Gave up “Propose shared work”: Ben was too busy to stop.","kind":"work"},{"tick":263,"text":"Explored the north-east country; nothing new turned up.","kind":"info"},{"tick":834,"text":"Worked on the building site for a while (no materials to work with (8 wood, 4 planks, 4 stone)).","kind":"work"},{"tick":924,"text":"Took 4 items from storage.","kind":"work"},{"tick":998,"text":"Delivered 4 planks to the building site.","kind":"work"},{"tick":1062,"text":"Took 5 items from storage.","kind":"work"},{"tick":1094,"text":"What I hope for: a good name among their neighbours.","kind":"life"},{"tick":2478,"text":"My agreed waiting period ended without a known completion; the cause is unknown.","kind":"social"},{"tick":3168,"text":"Means to be ready for the night: thirsty enough that the night would be hard.","kind":"need"}],"b":[{"tick":333,"text":"Explored the south-east country; nothing new turned up.","kind":"info"},{"tick":655,"text":"Agreed to help Ada with the building.","kind":"social"},{"tick":867,"text":"Took 3 items from storage.","kind":"work"},{"tick":935,"text":"What I hope for: a family.","kind":"life"},{"tick":3168,"text":"Means to be ready for the night: thirsty enough that the night would be hard.","kind":"need"}]}: expected 'active' to be 'completed' // Object.is equality
+
+Expected: "completed"
+Received: "active"
+
+ ❯ tests/shared_projects.test.ts:22:725
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 5 passed (6)
+   Start at  17:05:51
+   Duration  2.69s (transform 60%, tests 33%, import 8%)
+

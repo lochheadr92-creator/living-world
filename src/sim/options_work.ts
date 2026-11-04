@@ -1,3 +1,4 @@
+import {addSharedProjectOption} from './shared_projects';
 import {hasRods} from './fishing_rods';
 import {hasCellars,cellarDemand} from './cellars';
 import {wellDemand,hasWells,wellFetchOptions} from './wells';
@@ -800,6 +801,7 @@ function optPlanBuild(ctx: Ctx): void {
         });
       },
     });
+    addSharedProjectOption(ctx,type,ctx.options.at(-1));
   };
 
   if (!home) {
