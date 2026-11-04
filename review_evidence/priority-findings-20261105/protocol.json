@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "79e3ac402ebd93812c93b53c7947e406649dbafe",
+  "rules": 153,
+  "days": 30,
+  "seeds": ["forest", "river", "life-stages-6"],
+  "profiles": ["normal", "large"],
+  "selection": "Before stepping: first child aged at least five by initial population order (else first child), first youth, the child's first present adult parent (else first adult), first elder. No replacement after death. Missing initial stages remain absent. Track all founders separately to avoid relying solely on selected lives.",
+  "measurement": "Autonomous worlds, rich dynamics, arrivals on, harsh off. Daily pure inhabitant observations. Every-tick founder needs and time budget, activity outcomes and selected-person logs/transfers. Daily exact twin comparison and conservation. Final 120-tick save continuation. Retain deaths, absent stages, nulls and failures.",
+  "comparison": "Compare six natural worlds and initial-stage founder cohorts descriptively. Map profiles change size, population and founding camps together; seed text is not a biome setting. No causal effect of age or map size alone. Earlier five-day rules-155 candidate is contextual only, not a same-version baseline.",
+  "isolation": "Exported committed source and copied dependencies outside all game worktrees. At most two below-normal-priority workers. Do not modify shared checkout, Git refs, Brain, running servers or other processes."
+}

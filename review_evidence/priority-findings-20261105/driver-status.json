@@ -1,0 +1,32 @@
+[
+  {
+    "profile": "normal",
+    "seed": "forest",
+    "code": 0
+  },
+  {
+    "profile": "normal",
+    "seed": "river",
+    "code": 0
+  },
+  {
+    "profile": "normal",
+    "seed": "life-stages-6",
+    "code": 0
+  },
+  {
+    "profile": "large",
+    "seed": "forest",
+    "code": 0
+  },
+  {
+    "profile": "large",
+    "seed": "river",
+    "code": 1
+  },
+  {
+    "profile": "large",
+    "seed": "life-stages-6",
+    "code": 0
+  }
+]

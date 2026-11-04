@@ -1,0 +1,109 @@
+[
+  {
+    "world": "normal-forest",
+    "name": "Hana",
+    "age": 10.13,
+    "start": {
+      "tick": 836,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Chopping wood",
+      "goal": "to keep the fire going",
+      "target": 344,
+      "why": "plan up to 1 wood; estimated return 57 ticks \u00b7 to keep the fire going +26 \u00b7 walking \u22126 \u00b7 good at it +1"
+    },
+    "end": {
+      "tick": 930,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Chopping wood",
+      "goal": "to keep the fire going",
+      "result": "success",
+      "detail": "done"
+    },
+    "transfers": [
+      {
+        "tick": 930,
+        "from": "source:344",
+        "to": "person:917",
+        "item": "wood",
+        "n": 1,
+        "reason": "gather"
+      }
+    ]
+  },
+  {
+    "world": "normal-forest",
+    "name": "Hana",
+    "age": 10.55,
+    "start": {
+      "tick": 12778,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Chopping wood",
+      "goal": "to repair the lean-to",
+      "target": 3558,
+      "why": "plan up to 1 wood; estimated return 119 ticks \u00b7 to repair the lean-to +34 \u00b7 walking \u22122 \u00b7 good at it +1 \u00b7 has paid me well before (1.4\u00d7) +1"
+    },
+    "end": {
+      "tick": 12828,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Chopping wood",
+      "goal": "to repair the lean-to",
+      "result": "success",
+      "detail": "done"
+    },
+    "transfers": [
+      {
+        "tick": 12828,
+        "from": "source:3558",
+        "to": "person:917",
+        "item": "wood",
+        "n": 1,
+        "reason": "gather"
+      }
+    ]
+  },
+  {
+    "world": "normal-life-stages-6",
+    "name": "Zed",
+    "age": 10.6,
+    "start": {
+      "tick": 22002,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Chopping wood",
+      "goal": "to repair the lean-to",
+      "target": 7116,
+      "why": "plan up to 2 wood; estimated return 47 ticks \u00b7 to repair the lean-to +36 \u00b7 walking \u22125 \u00b7 good at it \u22123"
+    },
+    "end": {
+      "tick": 22321,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Chopping wood",
+      "goal": "to repair the lean-to",
+      "result": "success",
+      "detail": "done"
+    },
+    "transfers": [
+      {
+        "tick": 22193,
+        "from": "source:7116",
+        "to": "person:867",
+        "item": "wood",
+        "n": 1,
+        "reason": "gather"
+      },
+      {
+        "tick": 22321,
+        "from": "source:7116",
+        "to": "person:867",
+        "item": "wood",
+        "n": 1,
+        "reason": "gather"
+      }
+    ]
+  }
+]
