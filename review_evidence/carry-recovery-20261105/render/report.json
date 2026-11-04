@@ -1,0 +1,19 @@
+{
+  "ordinary": true,
+  "world": "Normal meadow, arrivals on, rules 157",
+  "found": {
+    "tick": 511,
+    "reason": "Care for Abel: is carrying food already",
+    "hit": {
+      "id": 1014,
+      "name": "Hal",
+      "stage": "adult"
+    }
+  },
+  "checks": {
+    "ordinaryCarerWithheld": true,
+    "visibleInPanel": true,
+    "pure": true,
+    "noExceptions": true
+  }
+}

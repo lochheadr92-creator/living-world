@@ -1,0 +1,43 @@
+{
+ "tick": 9120,
+ "inv": {},
+ "needs": {
+  "hunger": 11.550628585309527,
+  "thirst": 53.13099999999432,
+  "energy": 45.802000000006444,
+  "warmth": 7.39783622262578,
+  "safety": 68.01774908105571,
+  "social": 88.6408156116615
+ },
+ "drives": {
+  "hunger": 87.16596823854498,
+  "thirst": 29.697692307705406,
+  "energy": 0.45692307690820566,
+  "warmth": 88.61871350365264,
+  "safety": 0,
+  "social": 0
+ },
+ "criticals": [
+  "hunger",
+  "warmth"
+ ],
+ "stage": "child",
+ "eatOptions": [],
+ "top": [
+  {
+   "k": "gather:1093",
+   "u": 70.6
+  },
+  {
+   "k": "gather:997",
+   "u": 52
+  },
+  {
+   "k": "gather:973",
+   "u": 48.8
+  }
+ ],
+ "blockedEat": [],
+ "intentions": [],
+ "pure": true
+}

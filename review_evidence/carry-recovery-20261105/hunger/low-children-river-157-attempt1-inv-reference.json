@@ -1,0 +1,256 @@
+{
+ "seed": "river",
+ "rules": "157",
+ "by": {
+  "no food | gather": 11,
+  "no food | warm": 1,
+  "holds food | gather": 8,
+  "holds food | eat": 1,
+  "holds food | socialize": 1
+ },
+ "rows": [
+  {
+   "tick": 8640,
+   "name": "Eli",
+   "age": null,
+   "hunger": 25,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "last": "This estimate comes from my own completed gathering at this particular source. · hungry +58 · walking −16 · my work at this source paid 0.2× of its estimate (2 outcomes) −4 · good at it −3"
+  },
+  {
+   "tick": 8700,
+   "name": "Eli",
+   "age": null,
+   "hunger": 23,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "last": "This estimate comes from my own completed gathering at this particular source. · hungry +62 · walking −6 · good at it −3 · my work at this source paid 0.4× of its estimate (1 outcome) −2"
+  },
+  {
+   "tick": 8760,
+   "name": "Eli",
+   "age": null,
+   "hunger": 22,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +64 · walking −9 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 8820,
+   "name": "Eli",
+   "age": null,
+   "hunger": 20,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +64 · walking −9 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 8880,
+   "name": "Eli",
+   "age": null,
+   "hunger": 19,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +64 · walking −9 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 8940,
+   "name": "Eli",
+   "age": null,
+   "hunger": 17,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +64 · walking −9 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9000,
+   "name": "Eli",
+   "age": null,
+   "hunger": 15,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Warming up by the fire",
+   "last": "cold +74 · walking −16 · company at the fire +2"
+  },
+  {
+   "tick": 9060,
+   "name": "Eli",
+   "age": null,
+   "hunger": 13,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9120,
+   "name": "Eli",
+   "age": null,
+   "hunger": 12,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9180,
+   "name": "Eli",
+   "age": null,
+   "hunger": 10,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9240,
+   "name": "Eli",
+   "age": null,
+   "hunger": 8,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9300,
+   "name": "Eli",
+   "age": null,
+   "hunger": 6,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9360,
+   "name": "Eli",
+   "age": null,
+   "hunger": 4,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9420,
+   "name": "Eli",
+   "age": null,
+   "hunger": 2,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9480,
+   "name": "Eli",
+   "age": null,
+   "hunger": 0,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +72 · walking −4 · good at it −3 · well-liked food +3"
+  },
+  {
+   "tick": 9540,
+   "name": "Eli",
+   "age": null,
+   "hunger": 0,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Eating",
+   "last": "hungry +100 · food in pack +4"
+  },
+  {
+   "tick": 14340,
+   "name": "Eli",
+   "age": null,
+   "hunger": 24,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Fishing",
+   "last": "hungry +61 · walking −7 · has paid me poorly before (0.1×) −6 · good at it −3"
+  },
+  {
+   "tick": 14400,
+   "name": "Eli",
+   "age": null,
+   "hunger": 22,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "last": "hungry +63 · has paid me poorly before (0.1×) −6 · walking −6 · good at it −3"
+  },
+  {
+   "tick": 14460,
+   "name": "Eli",
+   "age": null,
+   "hunger": 20,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "last": "hungry +63 · has paid me poorly before (0.1×) −6 · walking −6 · good at it −3"
+  },
+  {
+   "tick": 14520,
+   "name": "Eli",
+   "age": null,
+   "hunger": 18,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "last": "hungry +63 · has paid me poorly before (0.1×) −6 · walking −6 · good at it −3"
+  },
+  {
+   "tick": 14580,
+   "name": "Eli",
+   "age": null,
+   "hunger": 16,
+   "inv": {
+    "berries": 2
+   },
+   "doing": "Picking berries",
+   "last": "hungry +63 · has paid me poorly before (0.1×) −6 · walking −6 · good at it −3"
+  },
+  {
+   "tick": 14640,
+   "name": "Thea",
+   "age": null,
+   "hunger": 25,
+   "inv": {
+    "seeds": 3,
+    "berries": 1
+   },
+   "doing": "Ask Edda for food",
+   "last": "hungry +52 · they are carrying some +4 · walking −3 · they came through before +2"
+  }
+ ]
+}

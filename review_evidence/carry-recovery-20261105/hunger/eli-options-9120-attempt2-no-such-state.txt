@@ -1,0 +1,18 @@
+[{"id":1122,"inv":{}}]
+C:\dev\Claude Experiment\living-world-carry\src\sim\buildings.ts:124
+  return world.households.find((h) => h.id === p.hhId);
+                                                 ^
+
+TypeError: Cannot read properties of undefined (reading 'hhId')
+    at C:\dev\Claude Experiment\living-world-carry\src\sim\buildings.ts:111:50
+    at Array.find (<anonymous>)
+    at householdOf (C:\dev\Claude Experiment\living-world-carry\src\sim\buildings.ts:111:27)
+    at makeCtx (C:\dev\Claude Experiment\living-world-carry\src\sim\optutil.ts:114:14)
+    at collectOptions (C:\dev\Claude Experiment\living-world-carry\src\sim\decision.ts:60:15)
+    at C:\dev\Claude Experiment\living-world-carry\src\sim\decision.ts:56:42
+    at whileObserving (C:\dev\Claude Experiment\living-world-carry\src\sim\lifechanges.ts:44:12)
+    at generateOptions (C:\dev\Claude Experiment\living-world-carry\src\sim\decision.ts:56:21)
+    at C:\dev\Claude Experiment\living-world-carry\review_evidence\carry-recovery-20261105\hunger\eli-options.ts:10:11
+    at ViteNodeRunner.runModule (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:369:4)
+
+Node.js v24.19.0

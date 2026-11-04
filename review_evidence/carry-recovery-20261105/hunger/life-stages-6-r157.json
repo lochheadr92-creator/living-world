@@ -1,0 +1,261 @@
+{
+ "seed": "life-stages-6",
+ "kid": {
+  "samples": 2800,
+  "sum": 191063.22005872586,
+  "below25": 15,
+  "below10": 2,
+  "deaths": 0,
+  "mean": 68.2368643066878
+ },
+ "rules": 157,
+ "days": 10,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 31,
+ "count": {
+  "give(care):success": 15,
+  "give(care):failed": 5,
+  "path:roaming:they had no room to carry it": 1,
+  "give(care):detail:they had no room to carry it": 1,
+  "give(care):fail:recipient no room": 1,
+  "path:roaming:X has just been looked after": 1,
+  "give(care):detail:Ivy has just been looked after": 1,
+  "give(care):fail:other": 4,
+  "offer:partial": 1,
+  "offer:received": 6,
+  "give(care):interrupted": 3,
+  "path:roaming:X was not where I expected": 3,
+  "give(care):detail:Isla was not where I expected": 1,
+  "give(promise):success": 2,
+  "give(care):detail:Ivy was not where I expected": 1,
+  "give(care):detail:Bea was not where I expected": 1
+ },
+ "hadFoodCases": [],
+ "careStores": [],
+ "failures": [
+  {
+   "tick": 616,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 879,
+    "name": "Zora",
+    "inv": {
+     "fruit": 2,
+     "water": 1,
+     "hoe": 1,
+     "basket": 1,
+     "berries": 3
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "free": {
+     "fruit": 2,
+     "water": 1,
+     "hoe": 1,
+     "basket": 1,
+     "berries": 3,
+     "wood": 0,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 56
+   },
+   "to": {
+    "id": 880,
+    "name": "Isla",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 4,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 61,
+    "unreservedOther": 5
+   },
+   "items": {
+    "water": 1
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 1071,
+   "kind": "give(care)",
+   "cause": "other",
+   "giver": {
+    "id": 875,
+    "name": "Tomas",
+    "inv": {
+     "berries": 5,
+     "wood": 3
+    },
+    "weight": 11,
+    "cap": 12,
+    "free": {
+     "berries": 5,
+     "wood": 0,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 61
+   },
+   "to": {
+    "id": 876,
+    "name": "Ivy",
+    "sameHh": true,
+    "inv": {
+     "berries": 2
+    },
+    "weight": 2,
+    "cap": 5,
+    "free": {
+     "seeds": 1
+    },
+    "stage": "child",
+    "hunger": 64,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 12139,
+   "kind": "give(care)",
+   "cause": "other",
+   "giver": {
+    "id": 879,
+    "name": "Zora",
+    "inv": {
+     "hoe": 1,
+     "basket": 1,
+     "berries": 2,
+     "spear": 1
+    },
+    "weight": 5.5,
+    "cap": 18,
+    "free": {
+     "hoe": 1,
+     "basket": 1,
+     "berries": 2,
+     "spear": 1
+    },
+    "stage": "adult",
+    "hunger": 82
+   },
+   "to": {
+    "id": 880,
+    "name": "Isla",
+    "sameHh": true,
+    "inv": {},
+    "weight": 0,
+    "cap": 5,
+    "free": {
+     "seeds": 4,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 84,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 616
+  },
+  {
+   "tick": 14753,
+   "kind": "give(care)",
+   "cause": "other",
+   "giver": {
+    "id": 874,
+    "name": "Juno",
+    "inv": {
+     "seeds": 2,
+     "berries": 2,
+     "fish": 1
+    },
+    "weight": 4,
+    "cap": 12,
+    "free": {
+     "seeds": 2,
+     "berries": 2,
+     "fish": 1,
+     "wood": 0,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 76
+   },
+   "to": {
+    "id": 876,
+    "name": "Ivy",
+    "sameHh": true,
+    "inv": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "weight": 1.25,
+    "cap": 5,
+    "free": {
+     "seeds": 1
+    },
+    "stage": "child",
+    "hunger": 89,
+    "unreservedOther": 1
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 21617,
+   "kind": "give(care)",
+   "cause": "other",
+   "giver": {
+    "id": 900,
+    "name": "Oren",
+    "inv": {
+     "berries": 1,
+     "basket": 1
+    },
+    "weight": 2,
+    "cap": 18,
+    "free": {
+     "berries": 1,
+     "basket": 1
+    },
+    "stage": "adult",
+    "hunger": 48
+   },
+   "to": {
+    "id": 901,
+    "name": "Bea",
+    "sameHh": true,
+    "inv": {
+     "seeds": 1
+    },
+    "weight": 0.25,
+    "cap": 5,
+    "free": {
+     "seeds": 1
+    },
+    "stage": "child",
+    "hunger": 56,
+    "unreservedOther": 1
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": null
+  }
+ ]
+}

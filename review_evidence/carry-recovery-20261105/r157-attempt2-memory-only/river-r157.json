@@ -1,0 +1,1324 @@
+{
+ "seed": "river",
+ "rules": 157,
+ "days": 10,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 29,
+ "count": {
+  "give(care):failed": 24,
+  "give(care):detail:Ivo is already being attended to": 1,
+  "give(care):fail:other": 3,
+  "give(care):success": 36,
+  "give(care):detail:Theo has just been looked after": 1,
+  "give(care):interrupted": 7,
+  "give(care):detail:they already have food with them": 20,
+  "give(care):fail:recipient no room": 21,
+  "give(care):repeat within 600 of a failure": 7,
+  "give(promise):success": 6,
+  "give(care):detail:Theo is already being attended to": 1,
+  "give(care):detail:Eli was not where I expected": 1,
+  "offer:partial": 1,
+  "offer:received": 2,
+  "give(promise):failed": 3,
+  "give(promise):detail:they are inside a different space": 1,
+  "give(promise):fail:recipient no room": 2,
+  "give(promise):detail:Yan has just been looked after": 1,
+  "give(promise):fail:other": 1,
+  "give(promise):detail:Mira has just been looked after": 1
+ },
+ "careStores": [],
+ "failures": [
+  {
+   "tick": 21,
+   "kind": "give(care)",
+   "cause": "other",
+   "giver": {
+    "id": 1120,
+    "name": "Abel",
+    "inv": {
+     "fruit": 1,
+     "water": 1
+    },
+    "weight": 2.5,
+    "cap": 12,
+    "free": {
+     "fruit": 1,
+     "water": 1,
+     "wood": 0,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 83
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {},
+    "weight": 0,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 64,
+    "unreservedOther": 0
+   },
+   "items": {
+    "fruit": 1
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 491,
+   "kind": "give(care)",
+   "cause": "other",
+   "giver": {
+    "id": 1107,
+    "name": "Emre",
+    "inv": {
+     "fruit": 2,
+     "fish": 1,
+     "wood": 1
+    },
+    "weight": 5.5,
+    "cap": 12,
+    "free": {
+     "fruit": 2,
+     "fish": 1,
+     "wood": 0,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 49
+   },
+   "to": {
+    "id": 1109,
+    "name": "Theo",
+    "sameHh": true,
+    "inv": {
+     "berries": 2
+    },
+    "weight": 2,
+    "cap": 5,
+    "free": {
+     "seeds": 3,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 63,
+    "unreservedOther": 2
+   },
+   "items": {
+    "fruit": 2
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 1836,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1120,
+    "name": "Abel",
+    "inv": {
+     "wood": 1,
+     "berries": 4
+    },
+    "weight": 6,
+    "cap": 12,
+    "free": {
+     "wood": 0,
+     "berries": 4,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 45
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 65,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 21
+  },
+  {
+   "tick": 2039,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 4,
+     "berries": 4,
+     "stone": 1
+    },
+    "weight": 17.25,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 2,
+     "berries": 4,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 72
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 60,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 2160,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 4,
+     "berries": 4,
+     "stone": 1
+    },
+    "weight": 17.25,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 2,
+     "berries": 4,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 69
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 57,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 2039
+  },
+  {
+   "tick": 2216,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1120,
+    "name": "Abel",
+    "inv": {
+     "wood": 1,
+     "berries": 3
+    },
+    "weight": 5,
+    "cap": 12,
+    "free": {
+     "wood": 0,
+     "berries": 3,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 78
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 55,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 1836
+  },
+  {
+   "tick": 2318,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 4,
+     "berries": 4,
+     "stone": 1
+    },
+    "weight": 17.25,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 2,
+     "berries": 4,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 65
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 52,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 2160
+  },
+  {
+   "tick": 4667,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1107,
+    "name": "Emre",
+    "inv": {
+     "wood": 3,
+     "berries": 2
+    },
+    "weight": 8,
+    "cap": 12,
+    "free": {
+     "wood": 0,
+     "berries": 2,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 89
+   },
+   "to": {
+    "id": 1109,
+    "name": "Theo",
+    "sameHh": true,
+    "inv": {
+     "seeds": 1,
+     "berries": 3,
+     "fish": 1
+    },
+    "weight": 4.75,
+    "cap": 5,
+    "free": {
+     "seeds": 3,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 44,
+    "unreservedOther": 2
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 491
+  },
+  {
+   "tick": 4677,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1106,
+    "name": "Mira",
+    "inv": {
+     "seeds": 3,
+     "berries": 2,
+     "hoe": 1
+    },
+    "weight": 3.75,
+    "cap": 12,
+    "free": {
+     "seeds": 3,
+     "berries": 2,
+     "hoe": 1
+    },
+    "stage": "adult",
+    "hunger": 43
+   },
+   "to": {
+    "id": 1109,
+    "name": "Theo",
+    "sameHh": true,
+    "inv": {
+     "seeds": 1,
+     "berries": 3,
+     "fish": 1
+    },
+    "weight": 4.75,
+    "cap": 5,
+    "free": {
+     "seeds": 3,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 44,
+    "unreservedOther": 2
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 6618,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1106,
+    "name": "Mira",
+    "inv": {
+     "seeds": 5,
+     "hoe": 1,
+     "grain": 3
+    },
+    "weight": 5.25,
+    "cap": 12,
+    "free": {
+     "seeds": 5,
+     "hoe": 1,
+     "grain": 3
+    },
+    "stage": "adult",
+    "hunger": 71
+   },
+   "to": {
+    "id": 1109,
+    "name": "Theo",
+    "sameHh": true,
+    "inv": {
+     "seeds": 1,
+     "berries": 3,
+     "grain": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "free": {
+     "seeds": 3,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 43,
+    "unreservedOther": 4
+   },
+   "items": {
+    "grain": 2
+   },
+   "repeatOfFailureAt": 4677
+  },
+  {
+   "tick": 7380,
+   "kind": "give(care)",
+   "cause": "other",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 1,
+     "stone": 1,
+     "grain": 1
+    },
+    "weight": 8.25,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "seeds": 1,
+     "wood": 1,
+     "stone": 1,
+     "grain": 1
+    },
+    "stage": "adult",
+    "hunger": 48
+   },
+   "to": {
+    "id": 1122,
+    "name": "Eli",
+    "sameHh": true,
+    "inv": {},
+    "weight": 0,
+    "cap": 5,
+    "free": {
+     "berries": 3,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 56,
+    "unreservedOther": 0
+   },
+   "items": {
+    "grain": 1
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 16275,
+   "kind": "give(promise)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1138,
+    "name": "Basil",
+    "inv": {
+     "seeds": 1,
+     "wood": 2,
+     "berries": 3
+    },
+    "weight": 7.25,
+    "cap": 12,
+    "free": {
+     "seeds": 1,
+     "wood": 0,
+     "berries": 3,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 56
+   },
+   "to": {
+    "id": 1140,
+    "name": "Nico",
+    "sameHh": true,
+    "inv": {
+     "berries": 1,
+     "grain": 3,
+     "seeds": 2
+    },
+    "weight": 4.5,
+    "cap": 5,
+    "free": {
+     "seeds": 2,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 76,
+    "unreservedOther": 5
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 16988,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "wood": 2,
+     "berries": 1
+    },
+    "weight": 7,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "wood": 2,
+     "berries": 1
+    },
+    "stage": "adult",
+    "hunger": 49
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 58,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": 2318
+  },
+  {
+   "tick": 17000,
+   "kind": "give(promise)",
+   "cause": "other",
+   "giver": {
+    "id": 1113,
+    "name": "Zia",
+    "inv": {
+     "rod": 1,
+     "seeds": 1,
+     "wood": 3,
+     "fruit": 1
+    },
+    "weight": 8.25,
+    "cap": 12,
+    "free": {
+     "rod": 1,
+     "seeds": 1,
+     "wood": 3,
+     "fruit": 1
+    },
+    "stage": "adult",
+    "hunger": 57
+   },
+   "to": {
+    "id": 1134,
+    "name": "Yan",
+    "sameHh": false,
+    "inv": {
+     "basket": 1,
+     "wood": 5
+    },
+    "weight": 11,
+    "cap": 12,
+    "free": {
+     "basket": 1,
+     "wood": 5
+    },
+    "stage": "elder",
+    "hunger": 40,
+    "unreservedOther": 6
+   },
+   "items": {
+    "fruit": 1
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 17810,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1106,
+    "name": "Mira",
+    "inv": {
+     "seeds": 5,
+     "hoe": 1,
+     "cutting": 1,
+     "wood": 1,
+     "grain": 1,
+     "berries": 1
+    },
+    "weight": 6.75,
+    "cap": 12,
+    "free": {
+     "seeds": 5,
+     "hoe": 1,
+     "cutting": 1,
+     "wood": 1,
+     "grain": 1,
+     "berries": 1
+    },
+    "stage": "adult",
+    "hunger": 80
+   },
+   "to": {
+    "id": 1109,
+    "name": "Theo",
+    "sameHh": true,
+    "inv": {
+     "seeds": 3,
+     "grain": 2,
+     "berries": 2
+    },
+    "weight": 4.75,
+    "cap": 5,
+    "free": {
+     "seeds": 3,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 52,
+    "unreservedOther": 5
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": 6618
+  },
+  {
+   "tick": 17866,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1107,
+    "name": "Emre",
+    "inv": {
+     "seeds": 1,
+     "cutting": 1,
+     "berries": 2
+    },
+    "weight": 2.75,
+    "cap": 12,
+    "free": {
+     "seeds": 1,
+     "cutting": 1,
+     "berries": 2
+    },
+    "stage": "adult",
+    "hunger": 55
+   },
+   "to": {
+    "id": 1109,
+    "name": "Theo",
+    "sameHh": true,
+    "inv": {
+     "seeds": 3,
+     "grain": 2,
+     "berries": 2
+    },
+    "weight": 4.75,
+    "cap": 5,
+    "free": {
+     "seeds": 3,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 50,
+    "unreservedOther": 5
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 4667
+  },
+  {
+   "tick": 18541,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1137,
+    "name": "Ivy",
+    "inv": {
+     "basket": 1,
+     "fish": 2,
+     "berries": 1,
+     "wood": 1,
+     "grain": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "fish": 2,
+     "berries": 1,
+     "wood": 0,
+     "grain": 1,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 64
+   },
+   "to": {
+    "id": 1140,
+    "name": "Nico",
+    "sameHh": true,
+    "inv": {
+     "berries": 2,
+     "seeds": 2,
+     "fish": 1,
+     "grain": 1
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 2,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 65,
+    "unreservedOther": 4
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 18581,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1138,
+    "name": "Basil",
+    "inv": {
+     "seeds": 2,
+     "wood": 3,
+     "berries": 1,
+     "grain": 1
+    },
+    "weight": 8.5,
+    "cap": 12,
+    "free": {
+     "seeds": 2,
+     "wood": 3,
+     "berries": 1,
+     "grain": 1
+    },
+    "stage": "adult",
+    "hunger": 71
+   },
+   "to": {
+    "id": 1140,
+    "name": "Nico",
+    "sameHh": true,
+    "inv": {
+     "berries": 2,
+     "seeds": 2,
+     "fish": 1,
+     "grain": 1
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 2,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 63,
+    "unreservedOther": 4
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": 16275
+  },
+  {
+   "tick": 18656,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1137,
+    "name": "Ivy",
+    "inv": {
+     "basket": 1,
+     "fish": 2,
+     "berries": 1,
+     "wood": 1,
+     "grain": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "fish": 2,
+     "berries": 1,
+     "wood": 0,
+     "grain": 1,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 60
+   },
+   "to": {
+    "id": 1140,
+    "name": "Nico",
+    "sameHh": true,
+    "inv": {
+     "berries": 2,
+     "seeds": 2,
+     "fish": 1,
+     "grain": 1
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 2,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 62,
+    "unreservedOther": 4
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": 18541
+  },
+  {
+   "tick": 18784,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1137,
+    "name": "Ivy",
+    "inv": {
+     "basket": 1,
+     "fish": 2,
+     "berries": 1,
+     "wood": 1,
+     "grain": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "fish": 2,
+     "berries": 1,
+     "wood": 0,
+     "grain": 1,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 56
+   },
+   "to": {
+    "id": 1140,
+    "name": "Nico",
+    "sameHh": true,
+    "inv": {
+     "berries": 2,
+     "seeds": 2,
+     "fish": 1,
+     "grain": 1
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 2,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 58,
+    "unreservedOther": 4
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": 18656
+  },
+  {
+   "tick": 18791,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1120,
+    "name": "Abel",
+    "inv": {
+     "wood": 3,
+     "stone": 1,
+     "fruit": 1
+    },
+    "weight": 10,
+    "cap": 12,
+    "free": {
+     "wood": 3,
+     "stone": 1,
+     "fruit": 1
+    },
+    "stage": "adult",
+    "hunger": 55
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 52,
+    "unreservedOther": 5
+   },
+   "items": {
+    "fruit": 1
+   },
+   "repeatOfFailureAt": 2216
+  },
+  {
+   "tick": 18828,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "wood": 2,
+     "berries": 2
+    },
+    "weight": 8,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "wood": 2,
+     "berries": 2
+    },
+    "stage": "adult",
+    "hunger": 36
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 51,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 16988
+  },
+  {
+   "tick": 18932,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "wood": 2,
+     "berries": 2
+    },
+    "weight": 8,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "wood": 2,
+     "berries": 2
+    },
+    "stage": "adult",
+    "hunger": 33
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 48,
+    "unreservedOther": 0
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 18828
+  },
+  {
+   "tick": 18947,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1120,
+    "name": "Abel",
+    "inv": {
+     "wood": 3,
+     "stone": 1,
+     "fruit": 1
+    },
+    "weight": 10,
+    "cap": 12,
+    "free": {
+     "wood": 3,
+     "stone": 1,
+     "fruit": 1
+    },
+    "stage": "adult",
+    "hunger": 52
+   },
+   "to": {
+    "id": 1121,
+    "name": "Ivo",
+    "sameHh": true,
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "free": {
+     "seeds": 1,
+     "berries": 1
+    },
+    "stage": "child",
+    "hunger": 48,
+    "unreservedOther": 5
+   },
+   "items": {
+    "fruit": 1
+   },
+   "repeatOfFailureAt": 18791
+  },
+  {
+   "tick": 19341,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1107,
+    "name": "Emre",
+    "inv": {
+     "seeds": 1,
+     "cutting": 1,
+     "berries": 1,
+     "fish": 1
+    },
+    "weight": 3.25,
+    "cap": 12,
+    "free": {
+     "seeds": 1,
+     "cutting": 1,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "adult",
+    "hunger": 79
+   },
+   "to": {
+    "id": 1109,
+    "name": "Theo",
+    "sameHh": true,
+    "inv": {
+     "seeds": 3,
+     "berries": 2,
+     "grain": 2
+    },
+    "weight": 4.75,
+    "cap": 5,
+    "free": {
+     "seeds": 3,
+     "berries": 1,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 61,
+    "unreservedOther": 5
+   },
+   "items": {
+    "berries": 1
+   },
+   "repeatOfFailureAt": 17866
+  },
+  {
+   "tick": 20126,
+   "kind": "give(promise)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1107,
+    "name": "Emre",
+    "inv": {
+     "seeds": 1,
+     "cutting": 1,
+     "berries": 1,
+     "fish": 2
+    },
+    "weight": 4.75,
+    "cap": 12,
+    "free": {
+     "seeds": 1,
+     "cutting": 1,
+     "berries": 1,
+     "fish": 2
+    },
+    "stage": "adult",
+    "hunger": 54
+   },
+   "to": {
+    "id": 1106,
+    "name": "Mira",
+    "sameHh": true,
+    "inv": {
+     "seeds": 6,
+     "hoe": 1,
+     "cutting": 1,
+     "wood": 1,
+     "berries": 2,
+     "grain": 3,
+     "fish": 1
+    },
+    "weight": 11.5,
+    "cap": 12,
+    "free": {
+     "seeds": 6,
+     "hoe": 1,
+     "cutting": 1,
+     "wood": 0,
+     "berries": 2,
+     "grain": 3,
+     "fish": 1,
+     "stone": 0
+    },
+    "stage": "adult",
+    "hunger": 64,
+    "unreservedOther": 13
+   },
+   "items": {
+    "fish": 1
+   },
+   "repeatOfFailureAt": null
+  },
+  {
+   "tick": 23985,
+   "kind": "give(care)",
+   "cause": "recipient no room",
+   "giver": {
+    "id": 1119,
+    "name": "Cora",
+    "inv": {
+     "basket": 1,
+     "pick": 1,
+     "berries": 3,
+     "stone": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "free": {
+     "basket": 1,
+     "pick": 1,
+     "berries": 3,
+     "stone": 1
+    },
+    "stage": "adult",
+    "hunger": 49
+   },
+   "to": {
+    "id": 1122,
+    "name": "Eli",
+    "sameHh": true,
+    "inv": {
+     "berries": 3,
+     "fish": 1
+    },
+    "weight": 4.5,
+    "cap": 5,
+    "free": {
+     "berries": 3,
+     "fish": 1
+    },
+    "stage": "child",
+    "hunger": 46,
+    "unreservedOther": 1
+   },
+   "items": {
+    "berries": 2
+   },
+   "repeatOfFailureAt": 7380
+  }
+ ]
+}
