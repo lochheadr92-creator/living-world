@@ -12,6 +12,12 @@ Failed-before logs reproduce three assertions for each repair. Final targeted ve
 
 ## Inventory and implementation path
 
+### Resumed trap chain — rules 150 candidate
+
+A checked, personally known catch still generated a reset offer although the physical reset handler refused it while any body record existed. Two new assertions reproduced the mismatch. Rules 150 routes the existing reset motive into recovery of that exact known body's remaining meat, hide and fat, using the same paid ingredient-sized butchery. Unknown, stale, foreign and full-pack cases do not acquire phantom goods or remote knowledge. An empty/expired body record no longer prevents physical reset; its accounting/history remains intact. No catch probability, animal origin or yield changes.
+
+The staged checked-catch fixture then runs ordinary autonomous decisions: rules 149 records five refused resets and two meat meals; rules 150 records no refused reset, three meat meals and three total trap cycles by the same 2,400-tick horizon. Both preserve exact unobserved twins and conservation. This is one staged trajectory, not ordinary terrain uptake or population benefit. Targeted regression passes 38 tests in six files, including immutable 149/150 continuations; build passes. Four rendered checks pass and the recovery screenshot was inspected. The first purity test mistakenly called the state-changing activity constructor before comparing state; it was corrected to test option generation before constructing an action. Raw evidence remains in `survival_evidence/continuation-20261104/`.
+
 Assignment: owner prompt, 4 November 2026. Starting checkout is
 `C:\dev\Claude Experiment\living-world-integrate`, `main`,
 `61cb6e5139adbedfd52f463fc635a90d4172327b`, rules 121. Verified before editing:

@@ -9,12 +9,14 @@ import {toolById,toolsHeldBy} from './toolreg';
 import {breakTool} from './tools';
 import {observe,noteFailure,recentFailure,delBelief} from './knowledge';
 import {addLog} from './events';
-import {addOption,pen} from './optutil';
+import {addOption,addBlocked,pen} from './optutil';
 import type {Ctx} from './optutil';
 import {hashString,hashUnit} from './rng';
 import {makeCarcass,hasRecoverableParts} from './carcass';
 import {reservedFor} from './reserved_goods';
 import {harvestPressure} from './ecology';
+import {supplyFromCarcass} from './carcass_supply';
+import {DAY} from './constants';
 export const GEAR_WAIT=600,GEAR_CATCH_LIFE=1200,GEAR_ABANDON=48000;
 export const hasGear=(w:World)=>w.settings.dynamics==='rich'&&runsRulesVersion(w,126);
 export const isGear=(t:Tool)=>t.kind==='net'||t.kind==='trap';
@@ -39,7 +41,10 @@ function problem(w:World,p:Person,a:Activity):string|undefined{
  const t=toolById(w,g.toolId);if(!t||t.holder!==b.id)return 'the physical gear is gone';
  if(op==='check'&&g.state==='armed')return 'the catch window has not finished';
  if(op==='reset'&&(g.state==='armed'||!g.checked||(b.items.fish??0)>0))return 'check and empty the gear first';
- if(op==='reset'&&g.bodyId&&w.byId.has(g.bodyId))return 'recover the previous body first';
+ if(op==='reset'&&g.bodyId&&w.byId.has(g.bodyId)){
+  const previous=w.byId.get(g.bodyId)!;
+  if(!runsRulesVersion(w,150)||previous.ent!=='pile'||hasRecoverableParts(w,previous))return 'recover the previous body first';
+ }
  if(op==='reset'&&t.wear>=100)return 'the gear is broken';
  if(op==='repair'&&(p.inv.fibre??0)-reservedFor(w,p,'fibre')<1)return 'no spare fibre for repair';
  if(op==='retrieve'&&((b.items.fish??0)>0||roomFor(p.inv,carryCap(w,p),g.kind)<1))return 'empty the catch and make pack room first';
@@ -116,6 +121,16 @@ export function gearOptions(ctx:Ctx):void{
  for(const b of Object.values(p.beliefs)){
   const g=b.gear;if(!g||g.hhId!==p.hhId)continue;
   if(g.state==='armed'){if(w.tick>=g.readyAt)offer('check',b.id,b.x,b.y,42);continue;}
+  if(runsRulesVersion(w,150)&&g.kind==='trap'&&g.checked&&g.bodyId){
+   const caught=p.beliefs[g.bodyId];
+   const part=caught?.state==='carcass'&&w.tick-caught.seen<=DAY&&
+     (caught.hh===0||caught.hh===p.hhId)?(['meat','hide','fat'] as const).find(k=>(caught.carcassParts?.[k]??0)>0):undefined;
+   if(part){
+    supplyFromCarcass(ctx,part,28,'recover the checked trap catch before resetting',caught.carcassParts![part],caught.id);
+    addBlocked(ctx,'gear_work','Reset the trap',b.id,'recover the known catch first','food');
+    continue;
+   }
+  }
   if(!g.checked||g.catch>0)offer('check',b.id,b.x,b.y,42);
   else if(g.wear>=60&&(p.inv.fibre??0)>0)offer('repair',b.id,b.x,b.y,35);
   else if(g.wear<100)offer('reset',b.id,b.x,b.y,28);

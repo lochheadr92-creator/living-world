@@ -1,0 +1,12 @@
+{
+  "source": {
+    "head": "2447bc24e6b6f0b58c660c7bf87f2c1b7ec25634",
+    "rules": 150,
+    "content": "3ea323b0070f62d267e1836d1e4715672b94c2db00c90be2bb65b37407a6d608",
+    "note": "Recorded before successor behavior; ordinary world and staged autonomous trap recovery"
+  },
+  "saved": "7178a9b11fabf64e9052510b9310f8b14d49230b0292415f1fbf3f8a7f752317",
+  "continued": "26950dcfb941949a862a15f08967e7c25fc22eb4c77e7bf751bd658c62c2a79c",
+  "staged": "7730f86c552c592149148292ee4632566ac658ecd73cad0ec2fcdca59c9dc684",
+  "stagedContinued": "29e94d6757bd3abe4e912d31fc5e2ff7c22263330995149f90132e615848cba5"
+}

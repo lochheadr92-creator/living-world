@@ -19,9 +19,10 @@ function sources(ctx:Ctx,part:CarcassPart){
 }
 export function knownCarcassUnits(ctx:Ctx,part:CarcassPart):number{return sources(ctx,part).reduce((n,b)=>n+(b.carcassParts?.[part]??0),0);}
 /** Request only the recipe's missing units; every recovered portion still pays its own work. */
-export function supplyFromCarcass(ctx:Ctx,part:CarcassPart,base:number,why:string,quantity=1):void{
+export function supplyFromCarcass(ctx:Ctx,part:CarcassPart,base:number,why:string,quantity=1,bodyId?:number):void{
  const {world:w,p}=ctx;if(ctx.dangers.length||weightOf(p.inv)+WEIGHT[part]>carryCap(w,p))return;
  for(const b of sources(ctx,part)){
+  if(bodyId!==undefined&&b.id!==bodyId)continue;
   const amount=hasCarcassBatches(w)?Math.max(1,Math.min(4,Math.ceil(quantity),b.carcassParts?.[part]??0,Math.floor((carryCap(w,p)-weightOf(p.inv))/WEIGHT[part]))):1;
   const travel=Math.hypot(b.x-p.x,b.y-p.y)/Math.max(.03,ctx.speed),util=base-pen(travel)*.6;if(util<5)continue;
   const key=`butcher:${b.id}:${part}`,prior=ctx.options.find(o=>o.key===key);if(prior&&prior.util>=util)continue;
