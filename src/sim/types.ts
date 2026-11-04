@@ -227,6 +227,7 @@ export interface SeenEntity {
 }
 
 export type ActivityKind =
+  | 'pay_respects'
   | 'tree_work'
   | 'relocate'
   | 'exchange_journey'
@@ -626,6 +627,7 @@ export interface Trade {
 }
 
 export interface Person {
+  placeMemories?: import('./personal_places').PlaceMemory[];
   background?: import('./background').Background;
   /** Version 27: the last few places spare time was spent at (leisure.ts); absent in any world below version 27. */
   leisure?: import('./leisure').Leisure;

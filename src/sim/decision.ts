@@ -1,3 +1,4 @@
+import {placeOptions} from './options_places';
 import {runsRulesVersion} from './rulesversion';
 import { relocationOptions } from './relocation';
 import {applyRouteExperience} from './route_learning';
@@ -61,6 +62,7 @@ function collectOptions(world: World, p: Person, collect: boolean, observer: boo
   productionOptions(ctx);
   workshopToolOptions(ctx);
   socialOptions(ctx);
+  placeOptions(ctx);
   relocationOptions(ctx);
   applyRouteExperience(ctx);
   journeyOptions(ctx);

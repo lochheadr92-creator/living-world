@@ -1,0 +1,12 @@
+{
+  "source": {
+    "head": "d07092fed7af4e7ea5384b3ad03f2004a418541f",
+    "rules": 141,
+    "content": "366f8aba8ada8c5e6f8336d5427faf6bd6ed1f0251a8b32c6ac611e1c925d5a3",
+    "note": "Recorded before successor behavior; ordinary world plus separately staged in-flight grave visit"
+  },
+  "saved": "7c37200e7146a1026a5fbf436f107213612bddb1ae3f17840cba83be0537e3cd",
+  "continued": "ec8b8430817b492d82cd9d0f69e8adb47dbc583ae87c43965d5f26abaaa0644d",
+  "staged": "dd1e13caebd8af9cd943424500d7a792bb357825999cc0e2762dd7c77ef8f35e",
+  "stagedContinued": "17cae940697ececf4ccd4527dc625ee183e7fc77d0f49bc48b7640e84aa4b92f"
+}

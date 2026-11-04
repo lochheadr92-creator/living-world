@@ -1,3 +1,4 @@
+import {rememberedDanger} from './personal_places';
 import { isThreat } from './wildlife';
 import { rememberedDry, rememberedWaterCost } from './water_access';
 import { hasKeptTarget } from './kept_target';
@@ -193,7 +194,7 @@ export function pen(etaTicks: number): number {
 
 /** 0..1: how worrying is the area around (x, y) given what the person knows about dangers */
 export function dangerAt(ctx: Ctx, x: number, y: number, r = 10): number {
-  let s = 0;
+  let s = rememberedDanger(ctx.world,ctx.p,x,y,r);
   for (const b of ctx.dangers) {
     const d = hyp(b.x - x, b.y - y);
     if (d < r) s = Math.max(s, 1 - d / r);

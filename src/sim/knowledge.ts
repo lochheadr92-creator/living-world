@@ -1,3 +1,4 @@
+import {rememberGrave} from './personal_places';
 import {ownedGearRules,ownedGearAt} from './gear_stock';
 import { biological, conditionAt, ecologicalSign, hasEcology, rememberedGrowth } from './ecology';
 import { deathStory, hasLocalDeath } from './death_knowledge';
@@ -174,6 +175,7 @@ function noteDepletedSource(world: World, p: Person, e: Source, b: Belief): void
 /** Direct observation of one entity by one person. Returns true if this was new to them. */
 export function observe(world: World, p: Person, e: Entity): boolean {
   if (hasLocalDeath(world) && e.ent==='grave' && e.death && !p.indoors && p.pose!=='sleep' && Math.hypot(p.x-e.x,p.y-e.y)<=10) deathStory(world,p,e.death,'grave');
+  if(e.ent==='grave')rememberGrave(world,p,e);
   const b = snapshotEntity(world, e, world.tick);
   if (!b) return false;
   if(e.ent==='building'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,124)&&textileGoods(world).some(k=>(e.store.items[k]??0)>0)){

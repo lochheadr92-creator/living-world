@@ -50,6 +50,7 @@ export const BELIEF_NOUN: Record<BeliefKind, string> = {
 };
 
 export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
+  pay_respects:'paying respects',
   tree_work:'tree work',
   relocate: 'household relocation',
   exchange_journey: 'exchange journey',

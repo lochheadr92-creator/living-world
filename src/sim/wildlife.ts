@@ -1,3 +1,4 @@
+import {rememberBite} from './personal_places';
 import { addEvent, addFx, addLog } from './events';
 import { isRich, think } from './mood';
 import { wolfNerve } from './hardship';
@@ -255,6 +256,7 @@ function bite(world: World, a: Animal, t: Person): void {
   if (stageOf(world, t) === 'child') dmg *= 1.4;
   if (t.pose === 'sleep') dmg *= 1.2;
   t.health = Math.max(0, t.health - dmg);
+  rememberBite(world,t,a.id);
   t.needs.safety = Math.max(0, t.needs.safety - 50);
   t.cooldowns.hurt = world.tick;
   world.hooks?.onWolfBite?.(t, a);

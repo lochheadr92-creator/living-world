@@ -1,3 +1,4 @@
+import {describePlaces} from './personal_places';
 import {wellBody,WELL_CAP} from './wells';
 import {hasNourishment,nourishmentCapacity,nourishmentOf} from './nourishment';
 import {hasRecoverableParts} from './carcass';
@@ -179,6 +180,7 @@ export interface PersonView {
   payoffs: { key: string; ratio: number; n: number }[];
   sourceExperience?:string[];
   routeExperience?:string[];
+  personalPlaces?:string[];
   /** what they have seen and been told of other people (rich only; empty otherwise), freshest first */
   heard: HeardView[];
   /** the trade they have settled on and why, in their own terms (rich only; '' for somebody with none) */
@@ -652,6 +654,7 @@ export function describePerson(world: World, id: number, opts: { opportunities?:
     skills: Object.entries(p.skills).map(([key, value]) => ({ key, value })),
     payoffs: describePay(p),
     ...(Object.values(p.payoff??{}).some(e=>e.sources?.length)?{sourceExperience:describeSourceExperience(p)}:{}),
+    ...(p.placeMemories?.length?{personalPlaces:describePlaces(world,p)}:{}),
     ...(Object.values(p.failures).some(f=>f.route)?{routeExperience:describeRouteExperience(world,p)}:{}),
     heard: describeHeard(world, p),
     trade: [describeTrade(p), describeApprentice(world, p)].filter(Boolean).join('; '),
