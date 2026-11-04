@@ -1,3 +1,6 @@
+import {recipeAvailable} from './recipes';
+import {knownTextileStock} from './textile_stock';
+import {hasClothing,isTextile,TEXTILES,visibleChildNeedsGarment} from './clothing';
 import {hasProjectAcquire} from './project_acquire';
 import {hearthOptions,knownColdHearth} from './hearth';
 import {hasPreservation} from './preservation';
@@ -127,7 +130,7 @@ export function knowsEnough(ctx: Ctx, type: BuildingType): boolean {
   return n >= rules.facilityAllowance;
 }
 
-const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
+const stockAt = (ctx:Ctx,b: Belief, item: ItemKind): number => knownTextileStock(ctx.world,ctx.p,b,item);
 
 function belief(ctx: Ctx, id: number): Belief | undefined {
   return ctx.p.beliefs[id];
@@ -321,7 +324,7 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
  */
 function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean, ready = ''): void {
-  if(r.preservation&&!hasPreservation(ctx.world))return;
+  if(!recipeAvailable(ctx.world,r)||r.preservation&&!hasPreservation(ctx.world))return;
   const { world, p } = ctx;
   const b = f.b;
   const technique = techniqueBlocker(world,p,r.id);
@@ -392,7 +395,7 @@ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend
   }
   const short: Items = {};
   for (const k of Object.keys(need) as ItemKind[]) {
-    const lack = unitsOf(need[k]) - stockAt(b, k);
+    const lack = unitsOf(need[k]) - stockAt(ctx,b, k);
     if (lack > 0) short[k] = lack;
   }
   if (!Object.keys(short).length) {
@@ -488,7 +491,7 @@ function collectOptions(ctx: Ctx, item: ItemKind | 'cart', unmet: number, base: 
     if(!mayTakeKnownPile(p,b))continue;
     if (dest && b.id === dest.id) continue;
     if(rememberedOnly&&world.tick-b.seen>DAY)continue;
-    let n = stockAt(b, item);
+    let n = stockAt(ctx,b, item);
     if (b.kind === 'building') {
       if (b.btype === 'granary') {
         // only the household's own share may be drawn out for its own purposes
@@ -583,13 +586,23 @@ function toolRequiredFor(ctx: Ctx, recipes: Recipe[]): boolean | undefined {
 }
 
 // ───────────────────────── what is wanted ─────────────────────────
-const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread'];
+const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'fibre'];
 const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0;
 
 /** Demands this person is aware of: from building sites they know, repairs, their own tools, their household's table. */
 export function demandsOf(ctx: Ctx): Demand[] {
   const { world, p } = ctx;
   const out: Demand[] = [];
+  if(hasClothing(world)){
+    const cold=p.needs.warmth<65||world.weather.temp<12;
+    for(const kind of TEXTILES){
+      const childNeeds=kind==='garment'&&ctx.seenPersons.some(s=>visibleChildNeedsGarment(ctx,s));
+      if(!cold&&!childNeeds)continue;
+      const target=1+(childNeeds?1:0),have=p.inv[kind]??0;
+      if(have<target)out.push({item:kind,qty:target,have,base:kind==='garment'?32:25,why:childNeeds?'insulation for me and the child in cold weather':'personal insulation against the cold',tag:'craft'});
+    }
+    if(toolsHeldBy(world,p.id).some(t=>isTextile(t.kind)&&t.wear>=45)&&(p.inv.fibre??0)<1)out.push({item:'fibre',qty:1,have:0,base:28,why:'mend worn insulation',tag:'craft'});
+  }
   if(hasPreservation(world)){
     const raw=preservationSurplus(ctx);
     // A finite food job belongs to the same planner as other workshop batches.
@@ -632,7 +645,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
   if (facilitiesOf(ctx, 'smithy').length) {
     let worst: { kind: ToolKind; wear: number } | null = null;
     for (const t of toolsHeldBy(world, p.id)) {
-      if (t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
+      if (isTextile(t.kind) || t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
       if (toolsHeldBy(world, p.id, t.kind).some((x) => x.tier === 1)) continue;
       if (t.wear >= 18 && (!worst || t.wear > worst.wear)) worst = { kind: t.kind, wear: t.wear };
     }
@@ -709,7 +722,7 @@ function wantsCart(ctx: Ctx): boolean {
 function optToolMaintenance(ctx: Ctx): void {
   const { world, p } = ctx;
   for (const t of toolsHeldBy(world, p.id)) {
-    if (t.kind === 'jar' || t.wear < 52) continue;
+    if (isTextile(t.kind) || t.kind === 'jar' || t.wear < 52) continue;
     const mat = unitsOf(p.inv.handles) > 0 ? 'handles' : unitsOf(p.inv.wood) > 0 ? 'wood' : null;
     if (!mat) continue;
     const sc = new Scorer().add(`my ${TOOL_DEFS[t.kind].label} is wearing out`, 9 + (t.wear - 52) * 0.55 + 6 * p.traits.diligence);
@@ -870,7 +883,7 @@ function optCartHaul(ctx: Ctx): void {
       const load: Items = {};
       let w = 0;
       for (const k of kinds) {
-        const n = Math.min(unitsOf(need[k]), stockAt(src, k));
+        const n = Math.min(unitsOf(need[k]), stockAt(ctx,src, k));
         if (n <= 0) continue;
         const room = Math.floor((cartEnt.cap - w) / WEIGHT[k]);
         const take = Math.min(n, room);
@@ -989,11 +1002,13 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
 
   if (!knowsEnough(ctx, 'timber_yard')) {
     let s = 0;
+    const insulation=hasClothing(world)&&!p.inv.garment&&(p.needs.warmth<65||world.weather.temp<12);
+    if(insulation)s+=.6;
     const planks = planksWanted(ctx);
     if (planks > 0) s += 0.9;
     if (wish > 0.5) s += 0.55;
     if ((p.skills.carpentry > 1.05 || p.traits.curiosity > 0.6) && init > 0.5) s += 0.15;
-    if (s >= 0.5) out.push({ type: 'timber_yard', signal: Math.min(1, s), why: planks > 0 ? 'planks are wanted and there is no yard to saw them' : 'the old hut is too small and too poor a roof: a yard would give us planks' });
+    if (s >= 0.5) out.push({ type: 'timber_yard', signal: Math.min(1, s), why: planks > 0 ? 'planks are wanted and there is no yard to saw them' : insulation?'the cold calls for fibre insulation and there is no yard to make it':'the old hut is too small and too poor a roof: a yard would give us planks' });
   }
   if (!knowsOfAny(ctx, 'quarry') && outcrops.length > 0) {
     let s = 0;

@@ -1,0 +1,37 @@
+{
+  "source": {
+    "head": "ec9857af120486eb05f183e52fd482be04be00d6",
+    "rules": 124,
+    "content": "437a4802a9492c6aa256065ad9d07d025f27d015e683410bee1a1ba0dd08f183",
+    "note": "Recorded before any successor behaviour; paid textile and ordinary continuation"
+  },
+  "ordinary": {
+    "saved": "d96c971a1f60a8ac3d398ebc7f3e1e41168aa9d5c26bbfd4873771723d07d5de",
+    "uninterrupted": "97bb1b53a00b352dc928d7897b085e3555bed5b18ee38fccc06b2a7e6ff1deec",
+    "continued": "97bb1b53a00b352dc928d7897b085e3555bed5b18ee38fccc06b2a7e6ff1deec"
+  },
+  "weaving": {
+    "saved": "1916a80f3ac45cf5e64994c24e2f943790932eba43e4ba26fe8d64d7e417a125",
+    "uninterrupted": "f7c0a296e9a0350866f9d0764990ddcde1fac2094b993e4d42d247562aeb64b2",
+    "continued": "f7c0a296e9a0350866f9d0764990ddcde1fac2094b993e4d42d247562aeb64b2"
+  },
+  "dressing": {
+    "saved": "da918a5532e2fb41ee54dc94c7323796be5fe9e07b8abc5b26d4c286236784ad",
+    "uninterrupted": "e115a099fc24a1a83b2e85dd83dcf01b2a71679cd1c87c72bd4558320b82a28a",
+    "continued": "e115a099fc24a1a83b2e85dd83dcf01b2a71679cd1c87c72bd4558320b82a28a"
+  },
+  "exposed": {
+    "saved": "5b35c5c0d4e9fc0d57a47871eb2d20f3e1c3cd0342b6c224f343c39a04cab1f7",
+    "uninterrupted": "d7d26157abf73a8a0f5fde4ad2a2c7c67dde36b023eff94d4f5ae05b55f6556f",
+    "continued": "d7d26157abf73a8a0f5fde4ad2a2c7c67dde36b023eff94d4f5ae05b55f6556f"
+  },
+  "paidWood": 1,
+  "paidFibre": 3,
+  "garment": {
+    "wear": 0.6160000000000004,
+    "textile": {
+      "wet": 0.0893999999999996,
+      "equipped": true
+    }
+  }
+}

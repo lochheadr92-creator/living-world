@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staged clothing verification</title></head><body>
+<div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+<div style="position:fixed;top:70px;left:10px;width:190px;z-index:2000;background:#15251c;padding:10px;color:white"><strong>STAGED clothing contract</strong> <button id="make">Make, collect and wear</button> <button id="fail">Wear in rain; try repair</button><output id="result"></output></div>
+<script type="module">
+import '/src/styles.css';
+import {Game} from '/src/app/game.ts';import {Renderer} from '/src/render/renderer.ts';import {mountUI} from '/src/ui/index.ts';import {project} from '/src/render/iso.ts';
+import {clothingScene} from '/tests/helpers/clothing.ts';import {generateOptions} from '/src/sim/decision.ts';import {startActivity,stepActivity,newActivity} from '/src/sim/activities.ts';
+import {clothingTick,clothingWarmth} from '/src/sim/clothing.ts';import {observe} from '/src/sim/knowledge.ts';import {serializeWorld,deserializeWorld} from '/src/app/save.ts';import {conservationReport} from '/src/sim/economy.ts';
+const {w,p,b}=clothingScene(),g=new Game(w.settings);g.restoreWorld(w,w.settings);g.setPlaying(false);g.select(p.id);
+const pt=project(41,41);g.camera={x:pt.sx+120,y:pt.sy,zoom:2};
+const renderer=new Renderer(document.getElementById('world'),g),ui=mountUI(g,document.getElementById('ui')),result=document.getElementById('result');
+function finish(){for(let i=0;i<700&&p.activity;i++){w.tick++;stepActivity(w,p);}if(p.activity)throw Error('Activity did not finish');}
+function verify(){const before=serializeWorld(w);ui.update(1);result.textContent=` Paid wood: ${w.ledger.consumed.wood??0}; paid fibre: ${w.ledger.consumed.fibre??0}; protection: +${clothingWarmth(w,p).toFixed(1)} degrees; conservation: ${conservationReport(w).ok}; pure: ${before===serializeWorld(w)}; exact save: ${before===serializeWorld(deserializeWorld(before))}`;}
+document.getElementById('make').onclick=()=>{
+ for(const recipe of ['strip_fibre','weave_garment']){const o=generateOptions(w,p,true,true).options.find(o=>o.key===`operate:${b.id}:${recipe}`);if(!o)throw Error('Recipe not offered: '+recipe);startActivity(w,p,o.make());finish();observe(w,p,b);}
+ const take=generateOptions(w,p,true,true).options.find(o=>o.kind==='withdraw'&&o.make?.()?.data.items?.garment);if(!take)throw Error('Collection not offered');startActivity(w,p,take.make());finish();
+ const dress=generateOptions(w,p,true,true).options.find(o=>o.key.startsWith('dress:'));if(!dress)throw Error('Dressing not offered');startActivity(w,p,dress.make());finish();verify();
+};
+document.getElementById('fail').onclick=()=>{w.weather.rain=1;for(let i=0;i<30000;i++){w.tick++;clothingTick(w);}const t=w.tools.find(t=>t.holder===p.id&&t.kind==='garment');if(!t)throw Error('No garment');startActivity(w,p,newActivity(w,p,{kind:'tool_work',label:'Mend my garment',goal:'repair worn insulation',here:true,data:{textile:'repair',toolId:t.id}}));finish();verify();};
+function frame(){renderer.frame(.016);ui.update(.016);requestAnimationFrame(frame);}frame();verify();
+</script></body></html>

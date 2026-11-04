@@ -1,4 +1,5 @@
 import {currentHandInputs} from './project_hand_inputs';
+import {knownTextileStock} from './textile_stock';
 // Pure interpretation of a saved prerequisite graph. It describes a next ordinary action; it never executes one.
 import {runsRulesVersion} from './rulesversion';
 import {reservedFor} from './social';
@@ -41,7 +42,7 @@ export function nextProjectStep(ctx:Ctx,graph:ProjectGraph,plan:Pick<Intention,'
   if(n.destination&&(!dest||dest.kind!=='building'))return answer(n,'blocked',n.destination,0,'the receiving workshop is no longer known');
   const held=n.item==='cart'?Object.values(p.beliefs).filter(b=>b.kind==='cart'&&b.hh===p.hhId).length:
    n.tier===1?toolsHeldBy(world,p.id,n.item as ToolKind).filter(t=>t.tier===1).length:projectAvailable(world,p,plan,n.item);
-  const stock=dest?.items?.[n.item as ItemKind]??0;
+  const stock=knownTextileStock(world,p,dest??undefined,n.item as ItemKind);
   if((n.destination?stock:held)>=n.quantity){completed.push(id);return null;}
   const remaining=n.quantity-(n.destination?stock:held);
   if(n.destination&&held>0)return answer(n,'deposit',n.destination,Math.min(held,remaining));
@@ -52,7 +53,7 @@ export function nextProjectStep(ctx:Ctx,graph:ProjectGraph,plan:Pick<Intention,'
   if(b){
    const snap=b.ops,mine=snap?.client===p.id&&snap.job===n.recipe;
    // rules 99 (ready_step.ts): output already at the workshop that is also its destination is stock, not something to collect
-   if(n.item!=='cart'&&(b.items?.[n.item]??0)>0&&!(hasReadyStep(world)&&n.place===n.destination))return answer(n,'collect',b.id,remaining);
+   if(n.item!=='cart'&&knownTextileStock(world,p,b,n.item)>0&&!(hasReadyStep(world)&&n.place===n.destination))return answer(n,'collect',b.id,remaining);
    if(mine&&snap!.burn===0&&snap!.progress<1)return answer(n,'operate',b.id,remaining);
    if(mine&&snap!.burn>0){
     const until=snap!.readyAt-world.tick;

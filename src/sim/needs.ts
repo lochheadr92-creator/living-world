@@ -1,3 +1,4 @@
+import {clothingWarmth} from './clothing';
 import {hearthWarmth} from './hearth';
 import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
 import { nearLitFire } from './perception';
@@ -99,7 +100,7 @@ export function updateNeeds(world: World, p: Person): void {
   const sh = shelterAt(world, p.x, p.y, p);
   const fire = indoorHome(world, p) ? 0 : fireWarmth(world, p.x, p.y);
   const wet = w.rain * 3.6 * (1 - sh.cover);
-  const eff = w.temp + 2 + sh.bonus + fire + hearthWarmth(world,p) - wet;
+  const eff = w.temp + 2 + sh.bonus + fire + hearthWarmth(world,p) + clothingWarmth(world,p) - wet;
   const target = clamp(50 + (eff - 10) * 5, 0, 100);
   n.warmth += (target - n.warmth) * 0.006;
 

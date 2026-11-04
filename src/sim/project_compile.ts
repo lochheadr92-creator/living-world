@@ -1,3 +1,5 @@
+import {recipeAvailable} from './recipes';
+import {knownTextileStock} from './textile_stock';
 // Build a finite prerequisite tree from personal knowledge. Compilation creates no action, reservation or material.
 import {TOOL_DEFS,TOOL_RECIPE,isHomeType} from './constants';
 import {hasKnownResource} from './intent';
@@ -29,12 +31,12 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
   const key=item+':'+tier+':'+destination;if(path.has(key))throw new Error('cyclic production dependency for '+item);
   const chain=new Set(path);chain.add(key);
   const node:ProjectNode={id:nodes.length+1,item,quantity,tier,destination,method:'present',place:0,recipe:'',dependencies:[],alternatives:[],estimatedTicks:0};nodes.push(node);
-  const shelf=destination?p.beliefs[destination]?.items?.[item as ItemKind]??0:0;
+  const shelf=destination?knownTextileStock(world,p,p.beliefs[destination],item as ItemKind):0;
   const held=item==='cart'?0:tier===1?toolsHeldBy(world,p.id,item as ToolKind).filter(t=>t.tier===1).length:Math.max(0,(p.inv[item]??0)-reservedFor(world,p,item)+(ownPlan?.wants[item]??0));
   if(shelf+held>=quantity)return node.id;
   // Reuse remembered workshop output. Owned food reserves retain the ordinary supply planner's separate surplus gate.
   if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'].includes(item)){
-   const stored=Object.values(p.beliefs).some(b=>b.id!==destination&&b.kind==='building'&&(b.items?.[item]??0)>=quantity&&
+   const stored=Object.values(p.beliefs).some(b=>b.id!==destination&&b.kind==='building'&&knownTextileStock(world,p,b,item)>=quantity&&
     (b.btype==='storehouse'||(b.hh===p.hhId&&isHomeType(b.btype))||!!b.btype&&facilitiesOf(ctx,b.btype as BuildingType).some(f=>f.b.id===b.id)));
    if(stored){node.method='supply';return node.id;}
   }
@@ -50,6 +52,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
   }
   let failure='no personally known way to obtain '+item;
   for(const r of recipesMaking(item)){
+   if(!recipeAvailable(world,r))continue;
    if(tier===1&&r.toolOut?.tier!==1)continue;
    if(techniqueBlocker(world,p,r.id)){failure=techniqueBlocker(world,p,r.id)!;continue;}
    for(const fac of facilitiesOf(ctx,r.at).slice(0,PROJECT_LIMITS.alternatives)){
@@ -62,7 +65,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
      for(const k of Object.keys(recipeInputs(r)) as ItemKind[])node.dependencies.push(build(k,recipeInputs(r)[k]!,0,fac.b.id,depth+1,chain));
      const perBatch=r.cartOut||r.toolOut?1:r.outputs[item as ItemKind]??r.fromDeposit?.n??1;
      node.estimatedTicks=Math.ceil(quantity/perBatch)*(r.work+r.burn+node.dependencies.reduce((n,id)=>n+nodes[id-1].estimatedTicks,0));
-     node.alternatives=recipesMaking(item).filter(other=>other.id!==r.id&&facilitiesOf(ctx,other.at).length>0&&!techniqueBlocker(world,p,other.id)).slice(0,PROJECT_LIMITS.alternatives).map(other=>other.id);
+     node.alternatives=recipesMaking(item).filter(other=>other.id!==r.id&&recipeAvailable(world,other)&&facilitiesOf(ctx,other.at).length>0&&!techniqueBlocker(world,p,other.id)).slice(0,PROJECT_LIMITS.alternatives).map(other=>other.id);
      return node.id;
     }catch(e){failure=e instanceof Error?e.message:String(e);nodes.splice(checkpoint);node.dependencies=[];}
    }

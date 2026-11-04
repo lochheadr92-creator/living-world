@@ -95,6 +95,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
 };
 
 export const ITEM_ICON: Record<ItemKind, string> = {
+  fibre:'fibre',garment:'garment',blanket:'blanket',bedding:'bedding',
   dried_fish:'fish', smoked_fish:'fish', dried_meat:'meat', smoked_meat:'meat',
   offcuts: 'wood',
   meat: 'meat',

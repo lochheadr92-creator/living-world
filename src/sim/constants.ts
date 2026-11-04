@@ -16,8 +16,8 @@ export const MAP_H = 80;
 
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
-export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
+export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'];
+export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre'];
 // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
 export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS];
@@ -25,6 +25,7 @@ export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MAT
 export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26 };
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
+  fibre:.25, garment:.75, blanket:.75, bedding:1,
   dried_fish:1, smoked_fish:1, dried_meat:1, smoked_meat:1,
   offcuts: 1,
   meat: 1.5,
@@ -65,6 +66,7 @@ export const GRANARY_SPOIL = 0.2;
 export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
+  fibre:'bast fibre', garment:'fibre garment', blanket:'fibre blanket', bedding:'fibre bedroll',
   dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
   offcuts: 'offcut fuel bundles',
   meat: 'meat',
@@ -340,6 +342,9 @@ export interface ToolDef {
   blurb: string;
 }
 export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
+  garment:{label:'fibre garment',hand:null,wear:.002,blurb:'insulation while worn'},
+  blanket:{label:'fibre blanket',hand:null,wear:.002,blurb:'insulation while sleeping'},
+  bedding:{label:'fibre bedroll',hand:null,wear:.002,blurb:'insulation beneath its sleeping owner'},
   axe: { label: 'axe', hand: { cost: { wood: 2, stone: 1 }, work: 90 }, wear: 0.036, blurb: 'felling trees (and hewing planks the hard way)' },
   pick: { label: 'pickaxe', hand: { cost: { wood: 2, stone: 2 }, work: 100 }, wear: 0.044, blurb: 'breaking rock and digging clay and ore' },
   hoe: { label: 'hoe', hand: { cost: { wood: 2, stone: 1 }, work: 80 }, wear: 0.028, blurb: 'breaking ground and tending crops' },

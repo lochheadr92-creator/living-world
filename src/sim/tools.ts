@@ -1,6 +1,7 @@
 import { injuryFactor } from './life';
 import { LOAN_TERM, TOOL_DEFS, TOOL_DULL_FROM, TOOL_EFFECT, TOOLS } from './constants';
-import { addItem, ledgerConsume, ledgerCreate, takeFrom } from './economy';
+import { addItem, ledgerConsume, ledgerCreate, takeFrom, roomFor } from './economy';
+import {carryCap} from './people';
 import { addEvent, addLog } from './events';
 import { bestOf, holderItems, retagTools, toolById, toolsHeldBy } from './toolreg';
 import { newId } from './registry';
@@ -109,6 +110,7 @@ export function mintTool(
     madeTick: world.tick,
     maker,
   };
+  if(kind==='garment'||kind==='blanket'||kind==='bedding')t.textile={wet:0,equipped:false};
   world.tools.push(t);
   addItem(items, kind, 1);
   if (ledger) ledgerCreate(world, kind, 1, reason);
@@ -173,9 +175,11 @@ export function wearFor(world: World, p: Person, task: ToolTask, ticks: number):
 /** A tool leaves one person's hands for another's on loan. The caller records the promise to return it. */
 export function lendTool(world: World, t: Tool, from: Person, to: Person, due: number): boolean {
   if (t.holder !== from.id || t.loan) return false;
+  if(t.textile&&roomFor(to.inv,carryCap(world,to),t.kind)<1)return false;
   takeFrom(from.inv, t.kind, 1);
   addItem(to.inv, t.kind, 1);
   t.holder = to.id;
+  if(t.textile)t.textile.equipped=false;
   t.loan = { lender: from.id, borrower: to.id, due };
   return true;
 }
@@ -183,9 +187,11 @@ export function lendTool(world: World, t: Tool, from: Person, to: Person, due: n
 /** The borrower hands it back: it returns to the lender's hands and the loan is closed. */
 export function returnLoan(world: World, t: Tool, borrower: Person, lender: Person): boolean {
   if (t.holder !== borrower.id || !t.loan) return false;
+  if(t.textile&&roomFor(lender.inv,carryCap(world,lender),t.kind)<1)return false;
   takeFrom(borrower.inv, t.kind, 1);
   addItem(lender.inv, t.kind, 1);
   t.holder = lender.id;
+  if(t.textile)t.textile.equipped=false;
   t.loan = null;
   return true;
 }
@@ -193,11 +199,13 @@ export function returnLoan(world: World, t: Tool, borrower: Person, lender: Pers
 /** Take a tool from a rack (a shared store): the rack's loan has no lender, the borrower answers to everyone. */
 export function checkoutFromRack(world: World, t: Tool, rackItems: Items, to: Person): boolean {
   if (t.loan || t.holder === to.id || !(rackItems[t.kind] ?? 0)) return false;
+  if(t.textile&&roomFor(to.inv,carryCap(world,to),t.kind)<1)return false;
   const rack = world.byId.get(t.holder);
   if (!rack || rack.ent !== 'building') return false;
   takeFrom(rackItems, t.kind, 1);
   addItem(to.inv, t.kind, 1);
   t.holder = to.id;
+  if(t.textile)t.textile.equipped=false;
   t.loan = { lender: 0, borrower: to.id, due: world.tick + LOAN_TERM };
   return true;
 }

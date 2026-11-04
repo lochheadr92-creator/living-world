@@ -1,4 +1,5 @@
 import {currentHandInputs} from './project_hand_inputs';
+import {knownTextileStock} from './textile_stock';
 // A BATCH PLAN: seeing a wanted workshop product through (rules version 50, rich worlds only).
 //
 // What the 45-day chain audits of ordinary rules-48 worlds showed (chain_evidence/audit-45-*): every seed wanted planks, bricks
@@ -45,7 +46,7 @@ export const BATCH_MIN_BASE = 8;
 /** how long a batch plan is given: two trips for the inputs, the work, a burn of up to 420 ticks and the collection do not fit in two days */
 export const BATCH_PATIENCE = DAY * 3;
 /** what a batch plan may be about: the workshop products the planner wants, plus the two things fired or built from them */
-export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart',...PRESERVED_FOODS]);
+export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart','fibre','garment','blanket','bedding',...PRESERVED_FOODS]);
 
 let enabled = true;
 export const batchPlansOn = (): boolean => enabled;
@@ -62,7 +63,7 @@ export function setBatchRecipeChoice(on: boolean): void { recipeChoice = on; }
 const hasRecipeChoice = (world: World): boolean => recipeChoice && isRich(world) && runsRulesVersion(world, 60);
 
 const unitsOf = (n: number | undefined): number => n ?? 0;
-const stockAt = (b: Belief, item: ItemKind): number => unitsOf(b.items?.[item]);
+const stockAt = (ctx:Ctx,b: Belief, item: ItemKind): number => knownTextileStock(ctx.world,ctx.p,b,item);
 /** everything a recipe takes, inputs and fuel together */
 function takes(r: Recipe): Items {
   const need: Items = {};
@@ -117,7 +118,7 @@ export function batchWanted(ctx: Ctx): BatchWant | null {
       const short: Partial<Items> = {};
       let feasible = true;
       for (const k of Object.keys(need) as ItemKind[]) {
-        const lack = unitsOf(need[k]) - stockAt(fac.b, k) - unitsOf(p.inv[k]);
+        const lack = unitsOf(need[k]) - stockAt(ctx,fac.b, k) - unitsOf(p.inv[k]);
         if (lack <= 0) continue;
         if (knownInput(ctx, k)) {
           short[k] = lack;
@@ -129,7 +130,7 @@ export function batchWanted(ctx: Ctx): BatchWant | null {
           break;
         }
         for (const kk of Object.keys(takes(sub)) as ItemKind[]) {
-          const lack2 = unitsOf(takes(sub)[kk]) - stockAt(fac.b, kk) - unitsOf(p.inv[kk]);
+          const lack2 = unitsOf(takes(sub)[kk]) - stockAt(ctx,fac.b, kk) - unitsOf(p.inv[kk]);
           if (lack2 > 0) short[kk] = unitsOf(short[kk]) + lack2;
         }
       }
@@ -159,7 +160,7 @@ function stageBefore(world: World, ctx: Ctx, fac: { b: Belief }, main: Recipe, k
     if (techniqueBlocker(world, p, sub.id)) continue;
     if (!toolAvailable(ctx, fac as never, sub)) continue;
     const need = takes(sub);
-    const ok = (Object.keys(need) as ItemKind[]).every((kk) => unitsOf(need[kk]) - stockAt(fac.b, kk) - unitsOf(p.inv[kk]) <= 0 || knownInput(ctx, kk));
+    const ok = (Object.keys(need) as ItemKind[]).every((kk) => unitsOf(need[kk]) - stockAt(ctx,fac.b, kk) - unitsOf(p.inv[kk]) <= 0 || knownInput(ctx, kk));
     if (ok) return sub;
   }
   return null;
@@ -203,13 +204,13 @@ export function batchStep(ctx: Ctx, i: Intention): Step {
   if (mine && snap.readyAt > world.tick + 300) return { kind: 'none', target: b.id, item: null, step: `wait for the ${r.label} at the ${b.btype?.replace('_', ' ')}`, key: null, blocked: '' };
   // (a 'make' step with the collect key, not a 'get': a 'get' is a fetch from a natural source, and the rules-34 review would
   // relinquish a plan fetching bricks from nowhere; the output is on the shelf, and the option that collects it is matched by key)
-  if (i.makes !== 'cart' && (stockAt(b, made) >= 1 || mine)) return { kind: 'make', target: b.id, item: made, step: `collect the ${i.makes} from the ${b.btype?.replace('_', ' ')}`, key: `collect:${b.id}:${i.makes}`, blocked: '' };
+  if (i.makes !== 'cart' && (stockAt(ctx,b, made) >= 1 || mine)) return { kind: 'make', target: b.id, item: made, step: `collect the ${i.makes} from the ${b.btype?.replace('_', ' ')}`, key: `collect:${b.id}:${i.makes}`, blocked: '' };
   // inputs the shelf lacks: fetch what the pack lacks, bring what it holds; a processed input the same workshop makes is made first
   const inputSteps = (rr: Recipe): Step | null => {
     const need = takes(rr);
     const toBring: ItemKind[] = [];
     for (const k of Object.keys(need) as ItemKind[]) {
-      const onShelf = stockAt(b, k);
+      const onShelf = stockAt(ctx,b, k);
       const lack = unitsOf(need[k]) - onShelf;
       if (lack <= 0) continue;
       const have = unitsOf(p.inv[k]);

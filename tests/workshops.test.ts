@@ -76,8 +76,11 @@ describe('the recipe table is a closed, acyclic accounting', () => {
     expect(TOOL_DEFS.hammer.hand).toBeTruthy();
     // wood, stone, clay, ore and grain come out of the ground by hand; nothing in the first links of the chain is made by a workshop
     for (const r of RECIPES.filter((x) => x.at === 'timber_yard' || x.at === 'quarry' || x.at === 'kiln')) {
-      for (const k of Object.keys(r.inputs)) expect(['wood', 'clay', 'planks', 'handles']).toContain(k);
+      for (const k of Object.keys(r.inputs)) expect(['wood', 'clay', 'planks', 'handles', 'fibre']).toContain(k);
     }
+    // Fibre is now another paid first-stage yard product, obtainable without equipment.
+    expect(RECIPE_BY_ID.strip_fibre.inputs).toEqual({wood:1});
+    expect(RECIPE_BY_ID.strip_fibre.tool).toBeUndefined();
   });
 
   it('bread is worth documenting: four loaves from what raw grain gives three, because the dough takes up water', () => {

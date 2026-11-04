@@ -1,3 +1,5 @@
+import {runsRulesVersion} from './rulesversion';
+import type {World} from './types';
 import { CART_COST } from './constants';
 import type { BuildingType, FacilityState, Items, ItemKind, SkillKey, ToolKind } from './types';
 
@@ -11,6 +13,7 @@ import type { BuildingType, FacilityState, Items, ItemKind, SkillKey, ToolKind }
  * the ledger.
  */
 export interface Recipe {
+  minRules?:number;
   id: string;
   label: string;
   /** e.g. "Sawing planks" */
@@ -51,7 +54,10 @@ export interface Recipe {
 
 const none: Items = {};
 
+export const recipeAvailable=(w:World,r:Recipe):boolean=>!r.minRules||w.settings.dynamics==='rich'&&runsRulesVersion(w,r.minRules);
 export const RECIPES: Recipe[] = [
+  {id:'strip_fibre',label:'bast fibre',doing:'Separating and twisting bast fibre',at:'timber_yard',inputs:{wood:1},fuel:{},work:60,burn:0,outputs:{fibre:3},waste:{},wasteWhy:'',skill:null,workers:1,serves:['fibre'],benefit:'Three fibre bundles separated from gathered wood.',minRules:124},
+  ...(['garment','blanket','bedding'] as const).map((kind):Recipe=>({id:`weave_${kind}`,label:`fibre ${kind}`,doing:`Weaving a ${kind}`,at:'timber_yard',inputs:{fibre:kind==='bedding'?4:3},fuel:{},work:100,burn:0,outputs:{},toolOut:{kind,tier:0},waste:{},wasteWhy:'',skill:null,workers:1,serves:[kind],benefit:'Paid personal insulation with finite wear and wetness.',minRules:124})),
   ...(['fish', 'meat'] as const).flatMap(raw => (['dry','smoke'] as const).map((method):Recipe => ({
     id:`${method}_${raw}`, label:`${method==='dry'?'dried':'smoked'} ${raw}`,
     doing:`${method==='dry'?'Drying':'Smoking'} ${raw}`, at:'food_rack',
@@ -318,6 +324,7 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     for (const k of Object.keys(r.outputs) as ItemKind[]) set.add(k);
   }
   if (type === 'timber_yard') {
+    set.add('garment');set.add('blanket');set.add('bedding');
     set.add('wood');
     set.add('planks');
     set.add('handles');

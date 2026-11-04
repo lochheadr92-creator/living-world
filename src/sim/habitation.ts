@@ -71,6 +71,7 @@ export function leaveHome(w: World, p: Person): string | null {
 }
 /** Only these ordinary activities may execute without leaving the interior. */
 export function staysIndoors(w: World, p: Person, a: Activity): boolean {
+  if(runsRulesVersion(w,124)&&a.kind==='tool_work'&&a.data.textile)return true;
   if((isStoredDrink(w,a)||isHearthAction(w,a))&&a.targetId===p.indoors)return true;
   if (hasLocalGiving(w) && a.kind === 'give' && indoorHome(w, p)) {
     const q = w.byId.get(a.targetId);

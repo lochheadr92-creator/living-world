@@ -1,3 +1,4 @@
+import {textileBegin,textileWork} from './clothing';
 import {pileAccessBlocker} from './pile_access';
 import { faceToward, registerHandler, standSpotFor } from './activities';
 import type { WorkResult } from './activities';
@@ -130,6 +131,7 @@ registerHandler('tool_work', {
   availability: 0.4,
   pose: () => 'craft',
   begin(world, p, a) {
+    if(a.data.textile)return textileBegin(world,p,a);
     if (a.data.cartId) {
       const c = world.byId.get(a.data.cartId as number);
       if (!c || c.ent !== 'cart') return 'the cart is gone';
@@ -151,6 +153,7 @@ registerHandler('tool_work', {
     a.ty = p.y;
   },
   work(world, p, a): WorkResult {
+    if(a.data.textile)return textileWork(world,p,a);
     a.progress++;
     if (a.progress % 12 === 6) addFx(world, 'hammer', p.x, p.y, 0);
     if (a.progress < a.duration) return 'continue';

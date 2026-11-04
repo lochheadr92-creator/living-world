@@ -1,3 +1,4 @@
+import {recipeAvailable} from './recipes';
 import { recordWorkshopOutput } from './settlement_economy';
 import {preservationStartBlocker,preservationCanAdvance,preservationReady} from './preservation';
 import { recoveredOffcuts } from './offcuts';
@@ -348,6 +349,7 @@ function depositOf(world: World, b: Building): Source | null {
 
 /** Why this person cannot start this recipe here right now ('' if they can). The text is what the inspector shows. */
 export function startBlocker(world: World, b: Building, p: Person, r: Recipe, trial = false): string {
+  if(!recipeAvailable(world,r))return 'this recipe is not available under these rules';
   const accessibleFood=r.preservation?foodUnits(Object.fromEntries(Object.keys(b.store.items).map(k=>[k,usableUnits(world,b,p,k as ItemKind)]))):0;
   const preservationBlock=preservationStartBlocker(world,p,r,accessibleFood);
   if(preservationBlock)return preservationBlock;
@@ -444,6 +446,7 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
   const job = b.ops?.job;
   if (!job) return 'nothing is being made';
   const r = recipeOf(job);
+  if(!recipeAvailable(world,r))return 'this recipe is not available under these rules';
   if (job.phase !== 'work') return job.phase === 'burn' ? r.preservation==='dry'?'it is drying; there is nothing to do but wait':'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
   const technique = techniqueBlocker(world,p,r.id);
   if(technique)return technique;
@@ -460,6 +463,7 @@ export function workJob(world: World, b: Building, p: Person): 'continue' | 'wor
   const job = ops?.job;
   if (!ops || !job || job.phase !== 'work') return 'stopped';
   const r = recipeOf(job);
+  if(!recipeAvailable(world,r))return 'stopped';
   if(r.preservation){
     if(!mayUse(world,p,b)){ops.lastBlocker='the rack is no longer theirs to use';return 'preservation_failed';}
     if(!preservationCanAdvance(world,b))return 'preservation_failed';

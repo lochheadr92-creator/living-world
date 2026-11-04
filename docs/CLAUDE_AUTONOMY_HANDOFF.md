@@ -1,5 +1,15 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Survival continuation, 4 November 2026:** integration main now has the rules-124
+fibre-clothing increment. Exact current-source replay matches check6 forest/
+river 25-day saves; forest includes child garment use, river blanket sleep use.
+Focused final checks pass 53/4 plus the 122/123 references; broad regression
+retains 31 baseline failures (2,531 passes), and typecheck/build retain the two
+existing nullable errors. The immutable 124 reference is recorded and passes.
+Carcasses are next. Bedroll manufacture is observed but ordinary use remains
+under measurement; hide/wool routes and families 4–7/final comparisons remain
+open. See `SURVIVAL_CAPABILITIES.md` for parameters, limitations and live evidence.
+
 **Latest checkpoint, 4 November 2026:** rules 123 indoor hearths follow committed
 preservation (`de35037`). Both frozen `hearth-check2` Normal arrivals-on 25-day
 runs passed integrity checks and showed paid occupied heat (forest 48,228 ticks,

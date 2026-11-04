@@ -6,6 +6,10 @@ import type { ItemKind, NeedKey } from '../sim/types';
 const DARK = '#0e1822';
 
 const ICONS = {
+  fibre: `<path d="M2 13Q8 10 7 2M6 14Q12 9 11 2M3 4l9 7M3 8l8 5" fill="none" stroke="currentColor" stroke-width="1.4"/>`,
+  garment: `<path d="M5 2 1 5l2 3 2-1v7h6V7l2 1 2-3-4-3Q8 5 5 2Z" fill="currentColor"/>`,
+  blanket: `<path d="M3 2h10v12H3Z" fill="currentColor"/><path d="M3 5h10M5 2v12" stroke="#fff" stroke-opacity=".5"/>`,
+  bedding: `<path d="M2 4h12v8H2Z" fill="currentColor"/><ellipse cx="4" cy="8" rx="2" ry="4" stroke="#fff" stroke-opacity=".5" fill="none"/>`,
   offcuts: `<path d="M2 5l7-2 1 3-7 2ZM5 9l8-2 1 3-8 2ZM2 12l7-1 1 3-7 1Z" fill="currentColor" stroke="none"/><path d="M6 4l2 9" stroke="${DARK}" stroke-width="1.5"/>`,
   // ───────── items ─────────
   berries: `<g fill="currentColor" stroke="none"><circle cx="5.1" cy="10.7" r="3"/><circle cx="10.9" cy="10.7" r="3"/><circle cx="8" cy="6.7" r="3"/></g><path d="M8 3.7c.1-1 .7-1.8 1.9-2.3" stroke="#7fb069" stroke-width="1.5"/><path d="M4.1 9.8c.2-.6.6-.9 1.1-1.1M9.9 9.8c.2-.6.6-.9 1.1-1.1M7 5.8c.2-.5.5-.8.9-.9" stroke="#fff" stroke-opacity=".5" stroke-width="1"/>`,

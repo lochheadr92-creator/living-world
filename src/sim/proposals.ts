@@ -12,7 +12,7 @@ import {hasBatchPlans} from './batch_plan';
 import {adoptProposedBatch} from './intent';
 import type {Ctx} from './optutil';
 import {facilitiesOf} from './production';
-import {RECIPES} from './recipes';
+import {RECIPES,recipeAvailable} from './recipes';
 import type {Intention,ItemKind} from './types';
 export type ProposalResult={ok:true;plan:Intention;searched:number}|{ok:false;reason:string};
 /** the goal as text, for notes and logs */
@@ -42,6 +42,7 @@ export function proposableItems(ctx:Ctx):string[]{
  if(!hasProjectPlans(ctx.world)||!hasBatchPlans(ctx.world)||ctx.stage==='child')return [];
  const out=new Set<string>();
  for(const r of RECIPES){
+  if(!recipeAvailable(ctx.world,r))continue;
   if(!facilitiesOf(ctx,r.at).length)continue;
   if(r.cartOut)out.add('cart');
   if(r.toolOut)out.add(r.toolOut.kind);

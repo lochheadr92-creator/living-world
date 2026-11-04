@@ -1,3 +1,4 @@
+import {clothingOptions} from './clothing';
 import {hasChildhood} from './childhood_rules';
 import {hasLivedLife} from './lived_life';
 import {SLEEP_RECOVER} from './constants';
@@ -731,6 +732,7 @@ function optRest(ctx: Ctx): void {
 }
 
 export function survivalOptions(ctx: Ctx): void {
+  clothingOptions(ctx);
   optFlee(ctx);
   // Standing and facing it is the other answer to a wolf (defence.ts, rules version 4). It is offered here, beside
   // fleeing, because it answers the same situation; which of the two a person takes is the ranking's business, and

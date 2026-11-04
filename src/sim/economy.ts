@@ -145,16 +145,18 @@ export function transfer(
   fromTag: string,
   toTag: string,
   reason: string,
+  preferTool = 0,
 ): number {
   if (n <= 0) return 0;
   const room = roomFor(to, toCap, k);
   let m = Math.min(n, from[k] ?? 0, room);
   // a tool's count moves only with its record: one on a bench for someone else stays where its record stays
-  if (isToolItem(k)) m = Math.min(m, retaggableCount(world, k, idFromTag(fromTag), idFromTag(toTag)));
+  if (preferTool && !isToolItem(k)) return 0;
+  if (isToolItem(k)) m = Math.min(m, retaggableCount(world, k, idFromTag(fromTag), idFromTag(toTag), preferTool));
   if (m <= 0) return 0;
   takeFrom(from, k, m);
   addItem(to, k, m);
-  if (isToolItem(k)) retagTools(world, k, m, idFromTag(fromTag), idFromTag(toTag));
+  if (isToolItem(k)) retagTools(world, k, m, idFromTag(fromTag), idFromTag(toTag), preferTool);
   recordGoodsFlow(world,fromTag,toTag,k,m,reason);
   world.hooks?.onTransfer?.({ from: fromTag, to: toTag, item: k, n: m, reason });
   return m;

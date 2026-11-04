@@ -1,4 +1,5 @@
 import {isChildTime,childQuestion,childTimeName,beginChildTime,childTimeProblem,childTurn,finishChildTime,childTimeReport} from './childhood';
+import {textileGiftProblem} from './clothing';
 import {recordCompany} from './companionship';
 import {hasChildhood} from './childhood_rules';
 import {hasLivedLife} from './lived_life';
@@ -187,6 +188,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
+  fibre:1.2,garment:5,blanket:5,bedding:6,
     dried_fish:2.6, smoked_fish:2.8, dried_meat:2.6, smoked_meat:2.8,
     offcuts: 0.7,
     berries: 1, fruit: 1.3, fish: 2, grain: 1.6, bread: 2.4, meat: 2.2, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
@@ -1946,6 +1948,7 @@ registerHandler('give', {
   availability: 0.4,
   pose: () => 'give',
   begin(world, p, a) {
+    const textileProblem=textileGiftProblem(world,p,a);if(textileProblem)return textileProblem;
     const t = personOf(world, a.targetId);
     if (!t) {if(hasPromiseExpectations(world)&&a.data.commitmentId){delete p.whereabouts[a.targetId];return 'they were not where I expected';}return 'they are gone';}
     if (hyp(t.x - p.x, t.y - p.y) > 3.2) {
@@ -1954,7 +1957,7 @@ registerHandler('give', {
       return `${t.name} was not where I expected`;
     }
     if ((t.cooldowns.pause ?? 0) > world.tick) return `${t.name} is already being attended to`;
-    if ((t.cooldowns.fedUntil ?? 0) > world.tick) return `${t.name} has just been looked after`;
+    if (!(runsRulesVersion(world,124)&&a.data.textileDelivery) && (t.cooldowns.fedUntil ?? 0) > world.tick) return `${t.name} has just been looked after`;
     a.duration = 14;
     // the other person stops for a moment to receive (one giver at a time)
     t.cooldowns.pause = world.tick + a.duration + 3;
@@ -1962,6 +1965,7 @@ registerHandler('give', {
     faceToward(t, p.x, p.y, 3);
   },
   work(world, p, a): WorkResult {
+    const textileProblem=textileGiftProblem(world,p,a);if(textileProblem)return `fail:${textileProblem}`;
     const t = personOf(world, a.targetId);
     if (!t) return 'fail:they are gone';
     if (hasLocalGiving(world) && hyp(t.x - p.x, t.y - p.y) > 3.2) return 'fail:they moved out of reach before the hand-over';
@@ -1991,12 +1995,12 @@ registerHandler('give', {
       return 'done';
     }
     for (const k of Object.keys(want)) {
-      const m = transfer(world, p.inv, t.inv, carryCap(world, t), k as ItemKind, Math.min(want[k], p.inv[k as ItemKind] ?? 0), 'person:' + p.id, 'person:' + t.id, 'given');
+      const m = transfer(world, p.inv, t.inv, carryCap(world, t), k as ItemKind, Math.min(want[k], p.inv[k as ItemKind] ?? 0), 'person:' + p.id, 'person:' + t.id, 'given', runsRulesVersion(world,124)&&a.data.textileDelivery?a.data.deliveryTool:0);
       if (m > 0) got[k as ItemKind] = m;
       moved += m;
     }
     t.cooldowns.pause = 0;
-    if (!hasLocalGiving(world) || moved > 0) t.cooldowns.fedUntil = world.tick + 120; // only actual receipt gives them time to eat
+    if ((!hasLocalGiving(world) || moved > 0)&&!(runsRulesVersion(world,124)&&a.data.textileDelivery)) t.cooldowns.fedUntil = world.tick + 120; // only actual food receipt gives them time to eat
     if (moved <= 0) {
       if (a.data.mode === 'care') noteCarePackFailure(world, p, t, want);
       if (a.data.commitmentId) {
@@ -2010,7 +2014,7 @@ registerHandler('give', {
     }
     a.cycle = moved;
     // being handed food or water wakes a sleeper
-    if (t.activity && t.activity.kind === 'sleep') endActivity(world, t, 'interrupted', 'woken to be fed');
+    if (t.activity && t.activity.kind === 'sleep') endActivity(world, t, 'interrupted', runsRulesVersion(world,124)&&a.data.textileDelivery?'woken to receive a garment':'woken to be fed');
     const mode = (a.data.mode as string) ?? 'give';
     onGift(world, p, t, got, mode);
     bubble(world, p, mode==='care'&&runsRulesVersion(world,95)?`Here is ${itemsToText(got)}, ${t.name}.`:D.saying(mode === 'care' ? D.CARE_LINES : D.OFFER_LINES, p.id, t.id, world.tick >> 5, { n: t.name, what: Object.keys(got)[0] }), 'say', 56);
@@ -2025,6 +2029,9 @@ registerHandler('give', {
       if (cm && (cm.delivered ?? 0) >= cm.amount) fulfillCommitment(world, p, cm.id);
     }
     return 'done';
+  },
+  onEnd(world,p,a,outcome,detail){
+    if(runsRulesVersion(world,124)&&a.data.textileDelivery&&outcome==='failed')noteFailure(world,p,a.targetId,detail);
   },
 });
 

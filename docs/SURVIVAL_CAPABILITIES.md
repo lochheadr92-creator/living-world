@@ -280,23 +280,138 @@ rerun; the other 31 are the previously reproduced review failures. No full-green
 claim is made. Verdict: **TURN_INTEGRATION_VERIFIED** for the bounded hearth chain;
 aggregate benefit and the remaining five families are unverified.
 
-## 3. Clothing and bedding — pending
+## 3. Fibre clothing — rules 124; ordinary bedroll use and later materials remain open
 
-Complete plant-fibre acquisition and actual finite protection first; hide branch
-remains pending until stream 4 supplies and prepares hides.
-Source audit found no existing fibre resource. The selected implementation route
-is bast fibre processed from physically gathered wood at the existing timber
-yard, followed by fibre equipment recipes there. This is an implementing-agent
-design choice, not a new owner decision. Reuse the durable equipment registry for
-identity, condition, holders and transfers; add explicit wetness and equipped/laid
-state, bounded to one garment/blanket per person and actual bedding places. Do not
-use cosmetic Look fields. Exposure instrumentation now records the child's actual
-location, action, cover and household situation before selecting any care repair.
+New capability: inhabitants make, carry, ready, dry and mend owned insulation;
+carers can physically deliver a spare garment to a visible dependent. The same
+chain gives timber yards, supply plans, personal stock knowledge, indoor heat
+and existing delivery/estate handling useful additional work. Look stays cosmetic.
+
+Parameters: one wood and 60 work yields three bast-fibre bundles at a timber
+yard. A garment or blanket takes three fibre and 100 work; a bedroll takes four
+fibre and 100 work. Readying takes 20 work. One readied garment gives at most
+6 degrees; one blanket and one bedroll each add at most 4, only while their
+holder actually sleeps. Bedrolls are personal carried bedding, not building
+bonuses. Spares add no heat. Weights are 0.75 garment/blanket, 1 bedroll and
+0.25 fibre. Condition scales protection linearly; fully wet gear loses 80%.
+Exposed rain adds up to 0.0008 wetness/tick; shelter reduces wetting. Dry weather
+removes 0.0002/tick, plus 0.00003 per actual indoor hearth degree. Active use
+adds 0.002 wear/tick (50,000 continuous ticks without repair). One unreserved
+fibre and 60 work repairs 35 wear, capped at new condition. Transfers clear the
+readied slot; wear-out destroys and accounts for the actual item.
+
+The exposure trace showed outdoor travel, lean-to cover and cold carers, not a
+proven missing child-transport mechanism. Child delivery therefore uses existing
+physical give/travel/capacity checks and bounded failed-delivery memory. Receipt
+does not count as feeding. A visible dependent without a garment supplies demand
+when already cold or when observed weather is below 12 degrees, matching the
+adult preparation threshold. Children can ready, but cannot manufacture or mend.
+
+Twenty-two focused tests cover offered paid production, two-batch bedroll inputs,
+child preparation/delivery, sleep-only protection, slots, wetness, repair,
+interruption, full packs, competitors, death/recovery, exact saves, strict state
+validation and observer purity. Clothing/planning/legacy/predecessor checks
+passed 45 tests in six files (6.39 s); the subsequent child-weather correction
+passed 28 in four (6.92 s). Immutable 122/123 references remain unchanged.
+Typecheck7 and build3 exit 2 only on the two retained nullable review-test errors.
+Full check2 exited 1: 417 files/2,518 tests passed, 15 files/33 tests failed,
+three expected failures, 802.32 s. Beyond the 31 baseline failures, it exposed
+an old-protocol recipe-catalogue mismatch (fixed by rules filtering) and a
+120-second tool-report timeout; both unchanged files then passed (three tests,
+61.98 s). Check4's broader suite exited 1 after 424.09 s: 419 files/2,526 tests passed,
+13 files/31 tests failed, three expected failures. All failing files are the
+retained baseline review cases; no additional failure recurred. Logs are retained under
+`survival_evidence/resume-20261104/clothing-*`.
+
+Rendered `scripts/browser/clothing_check.mjs` passes seven assertions, including
+paid production, actual dry/wet protection and a real no-fibre repair failure.
+Inspected screenshots and results: `survival_evidence/clothing-rendered-access/`.
+No aggregate survival benefit is established.
+
+Successive frozen ordinary candidates remain under `survival_evidence/clothing-check*/`:
+
+| Candidate | Forest, 25 days | River, 25 days | Scope |
+| --- | --- | --- | --- |
+| check1 | 3 garments; 50,808 adult protection ticks; 0 survivors | retained report | Before persistent batch-plan connection |
+| check3 | 4 garments; 79,156 adult protection ticks; 2 survivors | 3 garments, 1 blanket; 502 blanket sleeping-use ticks; 27 survivors | Before usable-stock correction |
+| check4 | 6 garments, 1 blanket; 125,591 adult and 36,210 elder garment ticks; 540 blanket ticks; 1 survivor | 4 garments, 1 blanket; 69,707 adult garment ticks; 2,284 blanket ticks | Dated personal stock; no bedroll or child use |
+| check5 | 9 garments, 2 blankets; 16,831 child garment ticks; 13 survivors | 4 garments, 1 blanket; 69,707 adult garment and 2,284 blanket ticks; 27 survivors | Adds child preparation; before loaned-garment gift correction |
+| check6 | 10 garments; 188,737 adult, 21,968 elder and 9,118 child protection ticks; one repair; 7 survivors | 4 garments, 1 blanket; 69,707 garment and 2,284 blanket ticks; 27 survivors | Owned, individually selected garment deliveries |
+
+Completed check3/4 runs pass exact unobserved twins, save/120-tick continuation,
+conservation and 500 pure-observer checks each. Check4's 146 forest bedroll work
+offers establish opportunity, not completion. Check5 establishes ordinary child delivery and use. Bedroll use remains an
+open acceptance issue; 50-day meadow/fern/aspen searches are running. A started
+run is not completion evidence.
+
+The check2 trace `fibre-failures.json` established repeated attempts to use three
+fibre earmarked for somebody else: total stock was observed without its access
+limit. Current rules store a dated, observer-specific usable count for the four
+new textile goods alongside physical totals. Hearing another person's count
+does not grant access; execution still checks actual ownership. This also lets a
+maker prepare another fibre batch instead of treating reserved inputs as theirs.
+Old material paths retain their semantics. The check5 delivery trace exactly
+matches the forest final save and records nine attempts: one success, two
+interruptions, six refusals. A second trace establishes that the refusal at
+36040 was a loaned garment (#12309, due 38337), despite sufficient recipient
+space. Check6 offers only owned, unloaned spares and binds the saved delivery to
+that item. Losing it fails explicitly, without substituting worn or borrowed
+gear. The existing transfer path now accepts an optional exact tool identity;
+other callers retain their behavior. New red/green ownership tests and related
+tool/estate/predecessor checks pass 35 tests in three collected files (6.16 s). Typecheck8
+still has only the two baseline nullable errors. A final ownership audit also
+covered direct lending, returns and rack checkout: textiles now retain capacity
+limits and arrive unready. Those paths passed 39 tests in four actual files
+(8.25 s), including `tool_transfer_records.test.ts`. The immutable rules-124
+reference is captured and passes (1/1, 9.29 s); never regenerate it. Final
+malformed-batch/fibre validation rejects missing paid inputs, shortened work
+and invalid quantities. The resulting clothing/workshop/transfer/124-reference
+suite passes 53 tests in four files (7.96 s); final 122/123 references also pass.
+Typecheck10/build5 retain only the two existing nullable errors. Check6 broad
+regression: 419 files/2,531 tests passed, 13 files/31 baseline tests failed,
+three expected failures (472.04 s). Hide and possible wool routes
+await streams 4 and 6.
+
+Final source replay (`clothing-final-replay/audit.json`) matches both observed
+check6 final saves byte for byte, initial hashes match, all source files match
+the final tree, and exact load/continuation/conservation pass. The first replay
+harness attempt failed creating its output directory after simulation; those
+failed logs remain. The corrected harness creates a fresh directory first.
+Check6 costs: forest 11 completed fibre batches from 11 wood, 10 completed
+garments, 1,683 operation-work ticks and 1,736 operation-travel ticks; river five
+fibre batches from five wood, five textiles, 831 operation-work ticks and 406
+operation-travel ticks. Collection, gathering, giving and interrupted attempts
+are separately retained in the reports; these are not total lifecycle costs.
+
+Expanded check5 searches retained nulls: fern 50 days made 10 garments and one
+blanket, with seven fibre repairs and child use; aspen made 10 garments with
+three repairs and child use. Neither made bedding. Meadow 50 days made 13
+garments, one blanket and one bedroll, but the latter two still waited at the
+yard. A current-source day-50–60 continuation retains that input's provenance;
+a 100-day fern search is also running. No completed ordinary bedroll-use claim
+is made yet. This does not block the independent carcass input work. Family 3
+remains open for this evidence and the explicitly deferred hide/wool routes.
 
 ## 4. Carcass recovery — pending
 
-Trace ordinary hunting failures before changing decisions. Complete finite
-butchery and meat/hide/fat consumers, then rerun streams 1 and 3 integration.
+Hunting is traced before any change: rules-123 forest had five pursuits and
+three failed strikes; later clothing candidates also recorded successful kills.
+Keep the existing deer population, pursuit choices and strike chance. The old
+success path currently creates four meat plus one per party member, carries
+what fits and spoils the rest immediately.
+
+Planned implementation choice (agent design, not a new owner decision): one
+existing `Pile` with a carcass payload stores the removed animal's identity,
+household access, finite remaining contents, claim and paid partial work.
+The kill creates that body once instead of the instant reward. `economy.ts`
+counts its unprocessed contents; `world.ts` expires/cleans it; `knowledge.ts`
+records the location/access sign, not live distant contents. `carcass.ts` owns
+basic paid butchery with real reach/capacity and per-unit progress. Start with
+four meat, one hide and one fat, independent of party size, a 4,800-tick lifetime
+and 120 work per recovered unit; tests and ordinary evidence must establish the
+resulting costs. Connect hide to the existing garment recipe/registry and raw
+fat through fuelled rendering into a fully recognised finite-life food. Preserve
+old rules and rerun preservation/clothing integration.
 
 ## 5. Traps and nets — pending
 
@@ -335,6 +450,17 @@ unfinished material/work. These draws share prefixes; do not describe them as
 terrain/seed contexts. The baseline is frozen at `61cb6e5` with only this observer
 runner added. Its forest control reproduced retained P0.1c's hash `ae96c7d7` and
 four survivors exactly, with conservation and exact save/continuation checks.
-The `b5694c7..61cb6e5` difference is documentation only. Baseline cohort work and
-launch status are in `survival_evidence/aggregate-baseline/`; do not infer the
-remaining draws completed merely from their launch.
+The `b5694c7..61cb6e5` difference is documentation only. All 75 baseline draws
+completed and passed `survival_evidence/aggregate-baseline/final-audit.json`:
+matching source manifests, within-seed initial hashes, final save hashes,
+conservation and recorded exact continuation; all 25 forest hashes match P0.1c.
+Day-25 survivor distributions (25 per seed): forest mean 5.56, median 5, range
+0–15; river mean 20.72, median 20, range 11–32; meadow mean 29.8, median 30,
+range 23–36. These are baseline descriptions, not programme benefit.
+
+The original PowerShell launcher stopped after 61 starts on a locked status
+file; its children completed. Most original process exit codes were unavailable,
+so retained results were validated directly. The replacement launcher
+(`ec9857a`, `scripts/survival_cohort.mjs`) validated those 61 results and completed
+14 remaining draws with explicit exit 0 records, then exited 0. Its status-file
+write is replaceable and nonfatal. No incomplete run was treated as a success.

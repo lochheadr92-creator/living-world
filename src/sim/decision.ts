@@ -1,3 +1,4 @@
+import {runsRulesVersion} from './rulesversion';
 import { relocationOptions } from './relocation';
 import {applyRouteExperience} from './route_learning';
 import { whileObserving } from './lifechanges';
@@ -100,7 +101,7 @@ export function rankOptions(ctx: Ctx): Option[] {
   // the same thing as being impossible, and dropping it here is what made a plan impossible to carry across several activities.
   // Every hard filter below (children, the relief guard, critical needs, fleeing, cooldowns) still applies to it.
   let opts = ctx.options.filter((o) => o.make && (o.util > 0 || intentFor(p, o) !== null));
-  if (ctx.stage === 'child') opts = opts.filter((o) => !CHILD_FORBIDDEN.includes(o.kind) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm');
+  if (ctx.stage === 'child') opts = opts.filter((o) => (!CHILD_FORBIDDEN.includes(o.kind) || runsRulesVersion(ctx.world,124)&&o.key.startsWith('dress:')) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm');
   // work that would strand someone away from water or food is not taken on (see relief.ts)
   opts = applyReliefGuard(ctx, opts);
   if (ctx.criticals.length) {
@@ -201,7 +202,7 @@ function whyWander(ctx: Ctx, ranked: Option[], at: number): void {
   else if (usable.length === 0) probeWander(who + 'unusable');
   else if (ranked.length === 1) {
     // usable options were all removed by rankOptions: a child's limits, then what the relief guard and a critical need leave
-    const forChild = ctx.stage === 'child' ? usable.filter((o) => !CHILD_FORBIDDEN.includes(o.kind) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm') : usable;
+    const forChild = ctx.stage === 'child' ? usable.filter((o) => (!CHILD_FORBIDDEN.includes(o.kind) || runsRulesVersion(ctx.world,124)&&o.key.startsWith('dress:')) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm') : usable;
     probeWander(who + (forChild.length === 0 ? 'filtered:child-limits' : ctx.criticals.length ? 'filtered:critical-need' : 'filtered:relief-guard'));
   } else probeWander(who + 'outscored:' + ranked[1].kind);
   // what the options set aside said, once per decision (only collected for a free person's decision)

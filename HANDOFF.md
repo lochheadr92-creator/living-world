@@ -1,13 +1,25 @@
 # Survival continuation — 4 November 2026
 
-Current work is in `living-world-integrate`, main, base `61cb6e5`.
-See [SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md) and the current
-entry in [CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
-Rules 122 preservation and 123 indoor hearths have bounded ordinary activation; all seven families
-are authorised, with body reserves last. Full-command baseline failures are
-retained and documented. Next is plant-fibre clothing/bedding; aggregate benefit
-is unmeasured. Frozen rules-121 baseline cost cohorts are running under
-`survival_evidence/aggregate-baseline/` (launcher PID 10548; verify live).
+Active integration: `main`, rules 124. Preservation 122 (`de35037`) and hearth
+123 (`62100b9`) are committed; the fibre-clothing increment is being committed.
+Current source exactly reproduces both check6 25-day final saves, with twins,
+continuation, conservation and pure observers. Child garment use is observed
+in forest; blanket sleeping use in river. Latest focused checks: 53/4 plus
+122/123 references; broad check6: 2,531 pass, 31 retained baseline failures.
+Typecheck/build retain only the two existing nullable review-test errors.
+
+Rules-124 immutable continuation is recorded and passes; never regenerate.
+The new carcass increment is next. Family 3 remains open for ordinary bedroll
+use (made in meadow, still awaiting collection at day 50) and deferred hide/
+wool routes. Frozen current-source meadow day-50–60 continuation and check6
+fern 100-day search are running. Evidence and exact scope:
+`docs/SURVIVAL_CAPABILITIES.md`, `survival_evidence/clothing-check*/`,
+`survival_evidence/clothing-final-replay/audit.json`.
+
+All seven families remain authorised, reserves last. Traps/nets, one domestic
+species, reserves, deferred connections and final comparisons remain pending.
+All 75 rules-121 baseline draws pass the retained final data audit. Do not push
+unrelated older local commits; preserve all untracked evidence/review tests.
 
 # Codex integration checkpoint (2026-10-27)
 

@@ -38,9 +38,9 @@ export function bestOf(world: World, holderId: number, kind: ToolKind, user = 0)
 const retaggable = (world: World, t: Tool, toId: number): boolean => !(t.loan && t.loan.lender === 0 && t.loan.due > world.tick && t.loan.borrower !== 0 && toId !== t.loan.borrower);
 
 /** How many records of a kind a transfer from one holder to another could move: the cap on the count it may move (a count must never leave its record behind). */
-export function retaggableCount(world: World, kind: ToolKind, fromId: number, toId: number): number {
+export function retaggableCount(world: World, kind: ToolKind, fromId: number, toId: number, prefer = 0): number {
   let n = 0;
-  for (const t of world.tools) if (t.holder === fromId && t.kind === kind && retaggable(world, t, toId)) n++;
+  for (const t of world.tools) if ((!prefer || t.id === prefer) && t.holder === fromId && t.kind === kind && retaggable(world, t, toId)) n++;
   return n;
 }
 
@@ -52,13 +52,16 @@ export function retagTools(world: World, kind: ToolKind, n: number, fromId: numb
     const t = toolById(world, prefer);
     if (t && t.holder === fromId) {
       t.holder = toId;
+      if(t.textile)t.textile.equipped=false;
       moved++;
     }
   }
-  for (const t of world.tools) {
+  const candidates=world.tools.slice().sort((a,b)=>Number(a.textile?.equipped??false)-Number(b.textile?.equipped??false));
+  for (const t of candidates) {
     if (moved >= n) break;
     if (t.holder === fromId && t.kind === kind && retaggable(world, t, toId)) {
       t.holder = toId;
+      if(t.textile)t.textile.equipped=false;
       moved++;
     }
   }
@@ -66,7 +69,7 @@ export function retagTools(world: World, kind: ToolKind, n: number, fromId: numb
 }
 
 export function isToolItem(k: ItemKind): k is ToolKind {
-  return k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'spear';
+  return k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'spear' || k === 'garment' || k === 'blanket' || k === 'bedding';
 }
 
 /** The Items container physically holding things for an entity id, if it has one. */
@@ -103,7 +106,7 @@ export function toolReport(world: World): { ok: boolean; problems: string[] } {
     if (items && (items[kind as ItemKind] ?? 0) !== n) problems.push(`holder ${hid} has ${items[kind as ItemKind] ?? 0} ${kind} in its items but ${n} tool records`);
   }
   const check = (id: number, items: Items) => {
-    for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'] as ToolKind[]) {
+    for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'] as ToolKind[]) {
       const have = items[k] ?? 0;
       if (have > 0 && (counted[id + ':' + k] ?? 0) !== have) problems.push(`holder ${id} counts ${have} ${k} but has ${counted[id + ':' + k] ?? 0} tool records`);
     }

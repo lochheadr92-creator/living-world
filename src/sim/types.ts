@@ -9,9 +9,9 @@ export type TerrainType = (typeof T)[keyof typeof T];
 // ───────────────────────────── items ─────────────────────────────
 export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
-export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear';
+export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding';
 /** Raw materials and the things made from them. */
-export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
+export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts';
 export type Items = Partial<Record<ItemKind, number>>;
 
@@ -78,6 +78,8 @@ export type BeliefKind =
 
 /** What a person believes about one place/thing. Always a snapshot with a timestamp and an origin. */
 export interface Belief {
+  /** Usable new textile goods personally checked at this belief's seen date. */
+  textileStock?:{observer:number;items:Items};
   id: number;
   kind: BeliefKind;
   x: number;
@@ -905,6 +907,7 @@ export interface FacilityState {
 
 // ───────────────────────────── tools and carts ─────────────────────────────
 export interface Tool {
+  textile?: {wet:number;equipped:boolean};
   ent: 'tool';
   id: number;
   kind: ToolKind;

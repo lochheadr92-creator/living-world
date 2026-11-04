@@ -1,3 +1,4 @@
+import {clothingTick} from './clothing';
 import { updateEcology } from './ecology';
 import {hearthTick} from './hearth';
 import {runsPreservation} from './preservation';
@@ -92,6 +93,7 @@ export function stepWorld(world: World): void {
   if (tick % 90 === 0) decayWear(world);
   roadsTick(world);
 
+  clothingTick(world);
   updateWildlife(world);
   rebuildMobileGrid(world);
 
@@ -353,6 +355,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
     }
     push(`R${r4(aff)},${r4(fam)}|B${Object.keys(p.beliefs).length}`);
   }
+  for(const t of world.tools)if(t.textile)push('Textile'+t.id+JSON.stringify(t.textile));
   if (world.ecology) push('Ecology' + JSON.stringify(world.ecology));
   if (world.waterBodies) push('WaterBudget' + JSON.stringify(world.waterBodies));
   if (world.flood) push('Flood' + JSON.stringify(world.flood));

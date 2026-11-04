@@ -4,7 +4,8 @@ import { SOURCE_REGROW } from './constants';
 import {correctSourceExperience} from './source_learning';
 import { checkAccount } from './checked_accounts';
 import { cloneItems } from './economy';
-import { facilitySnapshot } from './facilities';
+import { facilitySnapshot,usableUnits } from './facilities';
+import {TEXTILE_GOODS} from './textile_stock';
 import { toolsHeldBy } from './toolreg';
 import { noteBeliefWrite } from './transmission';
 import { addLog } from './events';
@@ -167,6 +168,9 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if (hasLocalDeath(world) && e.ent==='grave' && e.death && !p.indoors && p.pose!=='sleep' && Math.hypot(p.x-e.x,p.y-e.y)<=10) deathStory(world,p,e.death,'grave');
   const b = snapshotEntity(world, e, world.tick);
   if (!b) return false;
+  if(e.ent==='building'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,124)&&TEXTILE_GOODS.some(k=>(e.store.items[k]??0)>0)){
+    b.textileStock={observer:p.id,items:Object.fromEntries(TEXTILE_GOODS.map(k=>[k,usableUnits(world,e,p,k)]))};
+  }
   if(e.ent==='building'&&e.hearth){
     if(p.indoors===e.id)b.hearth={...e.hearth,seen:world.tick};
     else if(p.beliefs[e.id]?.hearth)b.hearth={...p.beliefs[e.id].hearth!};

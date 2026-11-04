@@ -9,6 +9,7 @@
 // node from "collecting" its own output from the workshop that is also its destination, which looped collect/deposit
 // instead of making the remaining quantity.
 import {runsRulesVersion} from './rulesversion';
+import {knownTextileStock} from './textile_stock';
 import type {Belief,ItemKind,Person,World} from './types';
 import type {Recipe} from './recipes';
 let enabled=true;
@@ -25,7 +26,7 @@ export function stepPrepared(w:World,p:Person,b:Belief,r:Recipe,toolAvailable:bo
  // their own batch of this very recipe, under way as they last saw it: its inputs are in the job, not on the shelf
  if(snap?.job===r.id&&snap.client===p.id&&snap.burn===0&&snap.progress<1)return true;
  if(snap?.job&&snap.readyAt>w.tick)return false;
- for(const k of Object.keys(r.inputs) as ItemKind[])if(unitsOf(b.items?.[k])<unitsOf(r.inputs[k]))return false;
- for(const k of Object.keys(r.fuel) as ItemKind[])if(unitsOf(b.items?.[k])<unitsOf(r.fuel[k]))return false;
+ for(const k of Object.keys(r.inputs) as ItemKind[])if(knownTextileStock(w,p,b,k)<unitsOf(r.inputs[k]))return false;
+ for(const k of Object.keys(r.fuel) as ItemKind[])if(knownTextileStock(w,p,b,k)<unitsOf(r.fuel[k]))return false;
  return true;
 }

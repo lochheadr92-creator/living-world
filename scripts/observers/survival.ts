@@ -1,4 +1,5 @@
 import {PRESERVED_FOODS} from '../../src/sim/constants';
+import {clothingWarmth,TEXTILES} from '../../src/sim/clothing';
 import {RECIPE_BY_ID} from '../../src/sim/recipes';
 import {preservationSurplus} from '../../src/sim/production';
 import {stageOf} from '../../src/sim/people';
@@ -29,12 +30,15 @@ export function survivalObserver(w:World){
       if(related(a))inc(`chain starts:${a.kind}`);
       if(hearthRelated(a))inc(`hearth starts:${a.kind}`);
       if(a.kind==='hunt')inc('hunting pursuits started');
+      if(a.data.textile)inc(`textile starts:${a.data.textile}`);
+      if(a.kind==='operate'&&/^(strip_fibre|weave_)/.test(String(a.data.recipe)))inc(`textile starts:${a.data.recipe}`);
       if(a.kind==='operate'&&RECIPE_BY_ID[String(a.data.recipe)]?.preservation)inc(`starts:${a.data.recipe}`);
       if(a.kind==='plan_site'&&a.data.type==='food_rack')inc('starts:rack layout');
     },
     onActivityEnd(p,a,outcome,detail){
       previous?.onActivityEnd?.(p,a,outcome,detail);
       if(related(a))inc(`chain ends:${a.kind}:${outcome}:${detail}`);
+      if(a.data.textile||a.kind==='operate'&&/^(strip_fibre|weave_)/.test(String(a.data.running??a.data.recipe)))inc(`textile ends:${a.data.textile??a.data.running??a.data.recipe}:${outcome}:${detail}`);
       if(hearthRelated(a))inc(`hearth ends:${a.kind}:${outcome}:${detail}`);
       if(a.kind==='hunt'){
         inc(`hunting ends:${outcome}:${detail}`);
@@ -46,6 +50,7 @@ export function survivalObserver(w:World){
     },
     onTransfer(info){
       previous?.onTransfer?.(info);
+      if(info.item==='garment'&&info.reason==='given')inc('textile garments given',info.n);
       if(PRESERVED_FOODS.includes(info.item as typeof PRESERVED_FOODS[number]))inc(`transfer:${info.item}:${info.reason}`,info.n);
       if(info.item==='fish'&&info.to.startsWith('building:')&&w.byId.get(Number(info.to.split(':')[1]))?.ent==='building')inc('fish delivered to buildings',info.n);
       if(info.to.startsWith('building:')&&w.buildings.some(b=>b.id===Number(info.to.split(':')[1])&&b.type==='food_rack'))inc(`delivered to rack:${info.item}`,info.n);
@@ -56,6 +61,7 @@ export function survivalObserver(w:World){
       inc('sampled personally visible deer',ctx.p.seen.filter(s=>s.ent==='animal'&&ctx.world.byId.get(s.id)?.ent==='animal'&&(ctx.world.byId.get(s.id) as {type?:string}).type==='deer').length);
       inc('sampled eligible hunt offers',ctx.options.filter(o=>o.kind==='hunt').length);
       for(const o of ctx.options)if(o.key.startsWith('hearth_'))inc(`sampled hearth offers:${o.kind}`);
+      for(const o of ctx.options)if(/fibre|garment|blanket|bedding|^dress:|^clothe_child:/.test(o.key)||/^Mend my (garment|blanket|bedding)$/.test(o.label))inc(`sampled textile offers:${o.kind}`);
       const raw=preservationSurplus(ctx);
       if(raw&&ctx.stage!=='child')inc(`sampled known surplus:${raw}`);
       for(const o of ctx.options)if(o.key==='plan_site:food_rack')inc('sampled offers:rack layout');
@@ -82,6 +88,9 @@ export function survivalObserver(w:World){
     tick(){
       for(const s of w.sites)if(s.improvement==='hearth')fittingSites.add(s.id);
       for(const p of w.persons)if(p.alive){
+        const textileHeat=clothingWarmth(w,p);
+        if(textileHeat>0){inc(`textile protected ticks:${stageOf(w,p)}`);inc(`textile degree-ticks:${stageOf(w,p)}`,textileHeat);}
+        if(p.activity&&(p.activity.data.textile||/fibre|garment|blanket|bedding|insulation/.test(p.activity.goal+' '+p.activity.label)))inc(`textile person ticks:${p.activity.kind}:${p.activity.phase}`);
         if(p.activity&&hearthRelated(p.activity))inc(`hearth person ticks:${p.activity.kind}:${p.activity.phase}`);
         const b=p.indoors?w.byId.get(p.indoors):null;
         if(b?.ent==='building'&&b.hearth&&b.hearth.heat>0){inc('hearth heated occupant ticks');inc('hearth occupant degree-ticks',b.hearth.heat);}
@@ -108,6 +117,7 @@ export function survivalObserver(w:World){
       }
     },
     report(){return {counts,decisions,chainDecisions,coldEpisodes,racks:w.buildings.filter(b=>b.type==='food_rack').length,
+      textiles:{made:Object.fromEntries(['fibre',...TEXTILES].map(k=>[k,w.ledger.created[k as keyof typeof w.ledger.created]??0])),remaining:w.tools.filter(t=>t.textile).length,repairFibre:w.ledger.reasons['-mending textiles']??0},
       hearths:w.buildings.filter(b=>b.hearth).length,hearthFuelConsumed:w.ledger.reasons['-fuel for indoor hearth']??0,
       made:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.created[k]??0])),
       consumed:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.consumed[k]??0])),

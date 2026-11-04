@@ -1,3 +1,4 @@
+import {isTextile} from './clothing';
 import {hasLivedLife} from './lived_life';
 import {hearthInstallBlock,isHearthAction,hearthFuelBegin,hearthFuelWork} from './hearth';
 import {hasPromiseTargets,observePromiseTarget,finishedSiteHere} from './promise_targets';
@@ -227,6 +228,7 @@ registerHandler('craft', {
   pose: () => 'craft',
   begin(world, p, a) {
     const tool = a.data.tool as ToolKind;
+    if(isTextile(tool))return 'textiles must be woven at a timber yard';
     const r = TOOL_RECIPE[tool];
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'missing materials';
     const b = world.byId.get(a.targetId);
@@ -241,6 +243,7 @@ registerHandler('craft', {
     if (a.progress % 12 === 6) addFx(world, 'hammer', p.x, p.y, 0);
     if (a.progress < a.duration) return 'continue';
     const tool = a.data.tool as ToolKind;
+    if(isTextile(tool))return 'fail:textiles must be woven at a timber yard';
     const r = TOOL_RECIPE[tool];
     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'fail:the materials went missing';
     if(a.data.projectCraft&&runsRulesVersion(world,69)){

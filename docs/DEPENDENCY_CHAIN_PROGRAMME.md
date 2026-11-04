@@ -7,8 +7,10 @@ heat, with both 25-day ordinary checks complete. Scope and remaining work for
 all seven authorised streams are in [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md).
 Rules 122 has bounded ordinary fish-preservation use in forest and null use in
 river; existing full-suite/typecheck failures remain reported. The revised owner
-attachment authorises body reserves last. Clothing is next; aggregate survival
-benefit remain pending. The historical branch notes below retain their original scope.
+attachment authorises body reserves last. Rules-124 fibre clothing has ordinary garment, child-delivery and blanket use;
+bedroll use and deferred hide/wool routes remain open (see the same capability
+document). Carcasses are next; traps/nets, domestic animals and reserves remain pending.
+Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
 
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
 recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116

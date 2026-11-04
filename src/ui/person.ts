@@ -202,6 +202,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
   // the equipment they hold: one small icon each, worn ones paler with a thin bar beneath
   const toolChips = h('div', { class: 'tool-chips' });
   const toolsEmpty = h('span', { class: 'inv-empty' }, 'none');
+  const textileLines = h('div', {class:'p-home',style:'white-space:pre-line;line-height:1.5'});
   const toolList = new KeyedList<ToolView, ToolComp>(
     toolChips,
     (t) => {
@@ -228,6 +229,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     { class: 'inv' },
     h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Carrying'), invChips, invEmpty, h('div', { class: 'carry', 'data-tip': 'How much they can carry. Heavy things like stone count for more.' }, carryBar.el, carryTxt)),
     h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Tools'), toolChips, toolsEmpty),
+    textileLines,
   );
 
   // ───────── what are they up to? ─────────
@@ -363,6 +365,9 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
     invList.sync(goods, (it) => it.kind);
     setHidden(invEmpty, goods.length > 0);
     toolList.sync(held, (t) => String(t.id));
+    const textiles=held.filter(t=>['garment','blanket','bedding'].includes(t.kind));
+    setText(textileLines,textiles.map(t=>`${t.label}; ${100-t.wear}% condition`).join('\n'));
+    setHidden(textileLines,textiles.length===0);
     setHidden(toolsEmpty, held.length > 0);
     carryBar.set(v.carry.cap > 0 ? v.carry.used / v.carry.cap : 0, v.carry.used >= v.carry.cap - 0.01 ? 'var(--warn)' : 'var(--accent)');
     setText(carryTxt, `${round1(v.carry.used)} / ${v.carry.cap}`);
