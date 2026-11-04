@@ -1,0 +1,1957 @@
+{
+  "fenn": {
+    "daily": [
+      {
+        "tick": 48000,
+        "id": 4044,
+        "name": "Fenn",
+        "sex": "m",
+        "age": 8.53326388888889,
+        "stage": "child",
+        "hhId": 4041,
+        "alive": true,
+        "health": 100,
+        "needs": {
+          "hunger": 87.95100000000971,
+          "thirst": 85.3935999999984,
+          "energy": 97.18229726945005,
+          "warmth": 76.93513218949191,
+          "safety": 93.93189232691196,
+          "social": 83.2775029604111
+        },
+        "inventory": {
+          "wood": 2,
+          "seeds": 1
+        },
+        "load": 4.25,
+        "capacity": 5,
+        "skills": {
+          "forage": 0.9786,
+          "fish": 0.35396280828610327,
+          "wood": 0.8049066923904102,
+          "stone": 0.49841078675574024,
+          "build": 0.3652251560136078,
+          "farm": 0.44338934519104545,
+          "craft": 0.4877323340092464,
+          "carpentry": 0.3719835274297972,
+          "kiln": 0.39260307710708947,
+          "smith": 0.45686762125646646,
+          "bake": 0.48045642234143043
+        },
+        "stats": {
+          "gathered": 57,
+          "given": 0,
+          "received": 6,
+          "built": 0,
+          "talked": 61,
+          "farmed": 0,
+          "crafted": 0
+        },
+        "local": {
+          "self": {
+            "name": "Fenn",
+            "sex": "m",
+            "stage": "child",
+            "ageYears": 8,
+            "character": "frugal, sociable, diligent",
+            "skills": {
+              "forage": 0.98,
+              "fish": 0.35,
+              "wood": 0.8,
+              "stone": 0.5,
+              "build": 0.37,
+              "farm": 0.44,
+              "craft": 0.49,
+              "carpentry": 0.37,
+              "kiln": 0.39,
+              "smith": 0.46,
+              "bake": 0.48
+            },
+            "health": 100,
+            "nourishment": {
+              "stored": 24,
+              "capacity": 24
+            },
+            "needs": {
+              "hunger": {
+                "value": 88,
+                "state": "ok"
+              },
+              "thirst": {
+                "value": 85,
+                "state": "ok"
+              },
+              "energy": {
+                "value": 97,
+                "state": "ok"
+              },
+              "warmth": {
+                "value": 77,
+                "state": "ok"
+              },
+              "safety": {
+                "value": 94,
+                "state": "ok"
+              },
+              "social": {
+                "value": 83,
+                "state": "ok"
+              }
+            },
+            "aspiration": null,
+            "carrying": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "load": {
+              "used": 4.3,
+              "cap": 5
+            },
+            "spokenFor": {},
+            "available": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "tools": [],
+            "pullingCart": false,
+            "position": {
+              "x": 69.5,
+              "y": 67.5
+            },
+            "mood": 1,
+            "thoughts": [
+              "-5 the lean season"
+            ],
+            "trade": null,
+            "techniques": []
+          },
+          "household": {
+            "name": "Moss",
+            "members": [
+              {
+                "name": "Ines",
+                "kin": "parent"
+              },
+              {
+                "name": "Oren",
+                "kin": "parent"
+              }
+            ],
+            "home": "hut 2 tiles north-east (66% sound when last seen)",
+            "partner": null,
+            "parents": [
+              "Ines",
+              "Oren"
+            ],
+            "children": []
+          },
+          "doing": {
+            "activity": {
+              "label": "Resting inside the hut",
+              "goal": "to wait out the weather",
+              "phase": "work",
+              "progress": 0.37,
+              "target": "hut 2 tiles north-east (seen 2 world min ago)",
+              "blocked": "",
+              "since": "58 world min ago"
+            },
+            "suspended": null,
+            "conversation": null,
+            "lastResult": {
+              "label": "Eating at home",
+              "outcome": "success",
+              "detail": "done",
+              "when": "59 world min ago",
+              "t": 47902
+            },
+            "lastInteraction": {
+              "purpose": "trade",
+              "outcome": "refused",
+              "detail": "nothing to spare",
+              "when": "12 world h 44 min ago",
+              "t": 46727
+            },
+            "lastChoice": {
+              "label": "Shelter at the hut",
+              "when": "58 world min ago",
+              "trigger": "free"
+            }
+          }
+        },
+        "options": [
+          {
+            "label": "Shelter at the hut",
+            "goal": "to get out of the weather"
+          },
+          {
+            "label": "Warm up at the fire",
+            "goal": "to get warm"
+          },
+          {
+            "label": "Shelter at the lean-to",
+            "goal": "to get out of the weather"
+          },
+          {
+            "label": "Potter about near home",
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "blocked": [
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking fruit",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Get wood to fuel our cold home hearth",
+            "reason": "no room in my pack for one wood"
+          }
+        ]
+      },
+      {
+        "tick": 50400,
+        "id": 4044,
+        "name": "Fenn",
+        "sex": "m",
+        "age": 8.616597222222222,
+        "stage": "child",
+        "hhId": 4041,
+        "alive": true,
+        "health": 100,
+        "needs": {
+          "hunger": 75.32475000001642,
+          "thirst": 57.39799999999426,
+          "energy": 95.84000000000046,
+          "warmth": 30.52626736988062,
+          "safety": 84.00019607288957,
+          "social": 44.52037769075381
+        },
+        "inventory": {
+          "wood": 2,
+          "seeds": 1
+        },
+        "load": 4.25,
+        "capacity": 5,
+        "skills": {
+          "forage": 0.9786,
+          "fish": 0.35396280828610327,
+          "wood": 0.8049066923904102,
+          "stone": 0.49841078675574024,
+          "build": 0.3652251560136078,
+          "farm": 0.44338934519104545,
+          "craft": 0.4877323340092464,
+          "carpentry": 0.3719835274297972,
+          "kiln": 0.39260307710708947,
+          "smith": 0.45686762125646646,
+          "bake": 0.48045642234143043
+        },
+        "stats": {
+          "gathered": 57,
+          "given": 0,
+          "received": 6,
+          "built": 0,
+          "talked": 61,
+          "farmed": 0,
+          "crafted": 0
+        },
+        "local": {
+          "self": {
+            "name": "Fenn",
+            "sex": "m",
+            "stage": "child",
+            "ageYears": 8,
+            "character": "frugal, sociable, diligent",
+            "skills": {
+              "forage": 0.98,
+              "fish": 0.35,
+              "wood": 0.8,
+              "stone": 0.5,
+              "build": 0.37,
+              "farm": 0.44,
+              "craft": 0.49,
+              "carpentry": 0.37,
+              "kiln": 0.39,
+              "smith": 0.46,
+              "bake": 0.48
+            },
+            "health": 100,
+            "nourishment": {
+              "stored": 24,
+              "capacity": 24
+            },
+            "needs": {
+              "hunger": {
+                "value": 75,
+                "state": "ok"
+              },
+              "thirst": {
+                "value": 57,
+                "state": "ok"
+              },
+              "energy": {
+                "value": 96,
+                "state": "ok"
+              },
+              "warmth": {
+                "value": 31,
+                "state": "low"
+              },
+              "safety": {
+                "value": 84,
+                "state": "ok"
+              },
+              "social": {
+                "value": 45,
+                "state": "ok"
+              }
+            },
+            "aspiration": null,
+            "carrying": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "load": {
+              "used": 4.3,
+              "cap": 5
+            },
+            "spokenFor": {},
+            "available": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "tools": [],
+            "pullingCart": false,
+            "position": {
+              "x": 69.3,
+              "y": 69
+            },
+            "mood": -16,
+            "thoughts": [
+              "-4 the lean season",
+              "-3 it is winter"
+            ],
+            "trade": null,
+            "techniques": []
+          },
+          "household": {
+            "name": "Moss",
+            "members": [
+              {
+                "name": "Ines",
+                "kin": "parent"
+              },
+              {
+                "name": "Oren",
+                "kin": "parent"
+              }
+            ],
+            "home": "hut 3 tiles north-east (61% sound when last seen)",
+            "partner": null,
+            "parents": [
+              "Ines",
+              "Oren"
+            ],
+            "children": []
+          },
+          "doing": {
+            "activity": {
+              "label": "Foraging practice with Ines",
+              "goal": "Could you help me practise recognising food plants?",
+              "phase": "work",
+              "progress": 0,
+              "target": "Ines (in sight, 1 tiles south)",
+              "blocked": "",
+              "since": "41 world min ago"
+            },
+            "suspended": null,
+            "conversation": {
+              "partner": "Ines",
+              "purpose": "learn_foraging"
+            },
+            "lastResult": {
+              "label": "Pottering about",
+              "outcome": "success",
+              "detail": "done",
+              "when": "41 world min ago",
+              "t": 50331
+            },
+            "lastInteraction": {
+              "purpose": "trade",
+              "outcome": "refused",
+              "detail": "nothing to spare",
+              "when": "1 world day 12 h 44 min ago",
+              "t": 46727
+            },
+            "lastChoice": {
+              "label": "Foraging practice with Ines",
+              "when": "41 world min ago",
+              "trigger": "free"
+            }
+          }
+        },
+        "options": [
+          {
+            "label": "Shelter at the hut",
+            "goal": "to get warm"
+          },
+          {
+            "label": "Shelter at the lean-to",
+            "goal": "to get warm"
+          },
+          {
+            "label": "Go and drink at the water",
+            "goal": "to quench thirst"
+          },
+          {
+            "label": "Offer Ines II a swap: wood for berries",
+            "goal": "to get berries"
+          },
+          {
+            "label": "Chat with Cass II",
+            "goal": "to catch up and share news"
+          }
+        ],
+        "blocked": [
+          {
+            "label": "Warm up at the fire",
+            "reason": "thinks the fire has gone out"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking fruit",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          }
+        ]
+      },
+      {
+        "tick": 52800,
+        "id": 4044,
+        "name": "Fenn",
+        "sex": "m",
+        "age": 8.699930555555556,
+        "stage": "child",
+        "hhId": 4041,
+        "alive": true,
+        "health": 80.05000000000194,
+        "needs": {
+          "hunger": 14.12475000001739,
+          "thirst": 33.495999999994595,
+          "energy": 71.61600000000689,
+          "warmth": 21.757568489334083,
+          "safety": 93.99998379812403,
+          "social": 80.99807561601816
+        },
+        "inventory": {
+          "wood": 2,
+          "seeds": 1
+        },
+        "load": 4.25,
+        "capacity": 5,
+        "skills": {
+          "forage": 0.9786,
+          "fish": 0.35396280828610327,
+          "wood": 0.8049066923904102,
+          "stone": 0.49841078675574024,
+          "build": 0.3652251560136078,
+          "farm": 0.44338934519104545,
+          "craft": 0.4877323340092464,
+          "carpentry": 0.3719835274297972,
+          "kiln": 0.39260307710708947,
+          "smith": 0.45686762125646646,
+          "bake": 0.48045642234143043
+        },
+        "stats": {
+          "gathered": 57,
+          "given": 0,
+          "received": 6,
+          "built": 0,
+          "talked": 65,
+          "farmed": 0,
+          "crafted": 0
+        },
+        "local": {
+          "self": {
+            "name": "Fenn",
+            "sex": "m",
+            "stage": "child",
+            "ageYears": 8,
+            "character": "frugal, sociable, diligent",
+            "skills": {
+              "forage": 0.98,
+              "fish": 0.35,
+              "wood": 0.8,
+              "stone": 0.5,
+              "build": 0.37,
+              "farm": 0.44,
+              "craft": 0.49,
+              "carpentry": 0.37,
+              "kiln": 0.39,
+              "smith": 0.46,
+              "bake": 0.48
+            },
+            "health": 80,
+            "nourishment": {
+              "stored": 24,
+              "capacity": 24
+            },
+            "needs": {
+              "hunger": {
+                "value": 14,
+                "state": "low"
+              },
+              "thirst": {
+                "value": 33,
+                "state": "low"
+              },
+              "energy": {
+                "value": 72,
+                "state": "ok"
+              },
+              "warmth": {
+                "value": 22,
+                "state": "low"
+              },
+              "safety": {
+                "value": 94,
+                "state": "ok"
+              },
+              "social": {
+                "value": 81,
+                "state": "ok"
+              }
+            },
+            "aspiration": null,
+            "carrying": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "load": {
+              "used": 4.3,
+              "cap": 5
+            },
+            "spokenFor": {},
+            "available": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "tools": [],
+            "pullingCart": false,
+            "position": {
+              "x": 69.5,
+              "y": 67.5
+            },
+            "mood": -31,
+            "thoughts": [
+              "-9 is cold",
+              "-3 the lean season",
+              "-2 it is winter"
+            ],
+            "trade": null,
+            "techniques": []
+          },
+          "household": {
+            "name": "Moss",
+            "members": [
+              {
+                "name": "Ines",
+                "kin": "parent"
+              },
+              {
+                "name": "Oren",
+                "kin": "parent"
+              }
+            ],
+            "home": "hut 2 tiles north-east (57% sound when last seen)",
+            "partner": null,
+            "parents": [
+              "Ines",
+              "Oren"
+            ],
+            "children": []
+          },
+          "doing": {
+            "activity": {
+              "label": "Resting inside the hut",
+              "goal": "to wait out the weather",
+              "phase": "work",
+              "progress": 0.72,
+              "target": "hut 2 tiles north-east (seen 2 world min ago)",
+              "blocked": "",
+              "since": "1 world h 53 min ago"
+            },
+            "suspended": null,
+            "conversation": null,
+            "lastResult": {
+              "label": "Resting inside the hut",
+              "outcome": "success",
+              "detail": "done",
+              "when": "1 world h 53 min ago",
+              "t": 52611
+            },
+            "lastInteraction": {
+              "purpose": "request",
+              "outcome": "refused",
+              "detail": "no item",
+              "when": "10 world h 53 min ago",
+              "t": 51712
+            },
+            "lastChoice": {
+              "label": "Shelter at the hut",
+              "when": "1 world h 53 min ago",
+              "trigger": "free"
+            }
+          }
+        },
+        "options": [
+          {
+            "label": "Gathering wild grain",
+            "goal": "to ease hunger"
+          },
+          {
+            "label": "Picking fruit",
+            "goal": "to ease hunger"
+          },
+          {
+            "label": "Picking berries",
+            "goal": "to ease hunger"
+          },
+          {
+            "label": "Shelter at the hut",
+            "goal": "to get out of the weather"
+          },
+          {
+            "label": "Drink at the well",
+            "goal": "drink the water I remember in that well"
+          }
+        ],
+        "blocked": [
+          {
+            "label": "Eat from the stores",
+            "reason": "remembers it being empty"
+          },
+          {
+            "label": "Eat from the stores",
+            "reason": "remembers it being empty"
+          },
+          {
+            "label": "Eat from the stores",
+            "reason": "remembers it being empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Gathering wild grain",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Warm up at the fire",
+            "reason": "thinks the fire has gone out"
+          }
+        ]
+      },
+      {
+        "tick": 55200,
+        "id": 4044,
+        "name": "Fenn",
+        "sex": "m",
+        "age": 8.78326388888889,
+        "stage": "child",
+        "hhId": 4041,
+        "alive": true,
+        "health": 54.86083333335228,
+        "needs": {
+          "hunger": 0,
+          "thirst": 37.864999999994474,
+          "energy": 4.862400000011856,
+          "warmth": 8.761984160504428,
+          "safety": 83.4340594919258,
+          "social": 44.8432687884535
+        },
+        "inventory": {
+          "wood": 2,
+          "seeds": 1
+        },
+        "load": 4.25,
+        "capacity": 5,
+        "skills": {
+          "forage": 0.9826,
+          "fish": 0.35396280828610327,
+          "wood": 0.8049066923904102,
+          "stone": 0.49841078675574024,
+          "build": 0.3652251560136078,
+          "farm": 0.44338934519104545,
+          "craft": 0.4877323340092464,
+          "carpentry": 0.3719835274297972,
+          "kiln": 0.39260307710708947,
+          "smith": 0.45686762125646646,
+          "bake": 0.48045642234143043
+        },
+        "stats": {
+          "gathered": 58,
+          "given": 0,
+          "received": 6,
+          "built": 0,
+          "talked": 65,
+          "farmed": 0,
+          "crafted": 0
+        },
+        "local": {
+          "self": {
+            "name": "Fenn",
+            "sex": "m",
+            "stage": "child",
+            "ageYears": 8,
+            "character": "frugal, sociable, diligent",
+            "skills": {
+              "forage": 0.98,
+              "fish": 0.35,
+              "wood": 0.8,
+              "stone": 0.5,
+              "build": 0.37,
+              "farm": 0.44,
+              "craft": 0.49,
+              "carpentry": 0.37,
+              "kiln": 0.39,
+              "smith": 0.46,
+              "bake": 0.48
+            },
+            "health": 55,
+            "nourishment": {
+              "stored": 0,
+              "capacity": 24
+            },
+            "needs": {
+              "hunger": {
+                "value": 0,
+                "state": "critical"
+              },
+              "thirst": {
+                "value": 38,
+                "state": "low"
+              },
+              "energy": {
+                "value": 5,
+                "state": "critical"
+              },
+              "warmth": {
+                "value": 9,
+                "state": "critical"
+              },
+              "safety": {
+                "value": 83,
+                "state": "ok"
+              },
+              "social": {
+                "value": 45,
+                "state": "ok"
+              }
+            },
+            "aspiration": null,
+            "carrying": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "load": {
+              "used": 4.3,
+              "cap": 5
+            },
+            "spokenFor": {},
+            "available": {
+              "wood": 2,
+              "seeds": 1
+            },
+            "tools": [],
+            "pullingCart": false,
+            "position": {
+              "x": 59,
+              "y": 75
+            },
+            "mood": -71,
+            "thoughts": [
+              "-20 has gone hungry",
+              "-12 is hurt",
+              "-10 is cold",
+              "-2 the lean season",
+              "-1 it is winter"
+            ],
+            "trade": null,
+            "techniques": []
+          },
+          "household": {
+            "name": "Moss",
+            "members": [
+              {
+                "name": "Ines",
+                "kin": "parent"
+              },
+              {
+                "name": "Oren",
+                "kin": "parent"
+              }
+            ],
+            "home": "hut 14 tiles east (52% sound when last seen)",
+            "partner": null,
+            "parents": [
+              "Ines",
+              "Oren"
+            ],
+            "children": []
+          },
+          "doing": {
+            "activity": {
+              "label": "Picking berries",
+              "goal": "to ease hunger (0/100)",
+              "phase": "travel",
+              "progress": 0,
+              "target": "berry bush 5 tiles north-west (seen 2 world min ago)",
+              "blocked": "",
+              "since": "49 world min ago"
+            },
+            "suspended": null,
+            "conversation": null,
+            "lastResult": {
+              "label": "Picking berries",
+              "outcome": "interrupted",
+              "detail": "something better came up",
+              "when": "49 world min ago",
+              "t": 55118
+            },
+            "lastInteraction": {
+              "purpose": "request",
+              "outcome": "refused",
+              "detail": "no item",
+              "when": "1 world day 10 h 53 min ago",
+              "t": 51712
+            },
+            "lastChoice": {
+              "label": "Picking berries",
+              "when": "49 world min ago",
+              "trigger": "review"
+            }
+          }
+        },
+        "options": [
+          {
+            "label": "Gathering wild grain",
+            "goal": "to ease hunger"
+          },
+          {
+            "label": "Picking berries",
+            "goal": "to ease hunger"
+          },
+          {
+            "label": "Picking berries",
+            "goal": "to ease hunger"
+          }
+        ],
+        "blocked": [
+          {
+            "label": "Eat from the stores",
+            "reason": "remembers it being empty"
+          },
+          {
+            "label": "Eat from the stores",
+            "reason": "remembers it being empty"
+          },
+          {
+            "label": "Eat from the stores",
+            "reason": "remembers it being empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          },
+          {
+            "label": "Picking berries",
+            "reason": "believes it is empty"
+          }
+        ]
+      }
+    ],
+    "death": {
+      "id": 4044,
+      "name": "Fenn",
+      "tick": 56961,
+      "cause": "hunger",
+      "age": 8,
+      "last": {
+        "needs": {
+          "hunger": 0,
+          "thirst": 65.79599999999394,
+          "energy": 0,
+          "warmth": 26.178329817015147,
+          "safety": 73.28085170155381,
+          "social": 39.613501780891866
+        },
+        "pack": {
+          "wood": 2,
+          "seeds": 1
+        },
+        "doing": "Picking berries",
+        "why": "to ease hunger (0/100)",
+        "attempt": "Fishing: interrupted; something better came up",
+        "blocked": [],
+        "memories": [
+          "Tick 56217: The berry bush I had remembered (about 2, 3.0 min old) was bare when I got close.",
+          "Tick 56417: We are a crew now: Ines, Oren.",
+          "Tick 56934: The tree I had remembered (about 3, 3.1 min old) was down to 1 when I got close."
+        ],
+        "water": {
+          "x": 72.5,
+          "y": 78.5,
+          "distance": 0.5164527766941112,
+          "seen": 56958
+        }
+      }
+    },
+    "lateTransfers": []
+  },
+  "inesEvents": [
+    {
+      "tick": 55455,
+      "kind": "end",
+      "activity": "converse",
+      "label": "Talking with Abel",
+      "goal": "a chat",
+      "result": "success",
+      "detail": "finished a conversation"
+    },
+    {
+      "tick": 55486,
+      "kind": "end",
+      "activity": "give",
+      "label": "Bringing fruit to Fenn",
+      "goal": "to look after Fenn",
+      "result": "failed",
+      "detail": "Fenn was not where I expected"
+    },
+    {
+      "tick": 55487,
+      "kind": "start",
+      "activity": "socialize",
+      "label": "Ask Fenn for food",
+      "goal": "to get food",
+      "target": 4044,
+      "why": "hungry +19 \u00b7 they owe me a favour +5 \u00b7 they came through before +4 \u00b7 walking \u22123"
+    },
+    {
+      "tick": 55540,
+      "kind": "end",
+      "activity": "socialize",
+      "label": "Ask Fenn for food",
+      "goal": "to get food",
+      "result": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "tick": 55540,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Picking fruit",
+      "goal": "to ease hunger (44/100)",
+      "target": 3607,
+      "why": "hungry +35 \u00b7 walking \u22129 \u00b7 has paid me poorly before (0.6\u00d7) \u22123 \u00b7 good at it +2"
+    },
+    {
+      "tick": 55540,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Picking fruit",
+      "goal": "to ease hunger (44/100)",
+      "result": "failed",
+      "detail": "no way to get there"
+    },
+    {
+      "tick": 55541,
+      "kind": "start",
+      "activity": "socialize",
+      "label": "Ask Fenn for food",
+      "goal": "to get food",
+      "target": 4044,
+      "why": "hungry +21 \u00b7 they owe me a favour +5 \u00b7 they came through before +4 \u00b7 family +3"
+    },
+    {
+      "tick": 55654,
+      "kind": "end",
+      "activity": "converse",
+      "label": "Talking with Fenn",
+      "goal": "to ask Fenn for something",
+      "result": "success",
+      "detail": "finished a conversation"
+    },
+    {
+      "tick": 55655,
+      "kind": "start",
+      "activity": "give",
+      "label": "Bringing fruit to Fenn",
+      "goal": "to look after Fenn",
+      "target": 4044,
+      "why": "Fenn needs fruit +50 \u00b7 family +8 \u00b7 walking \u22121"
+    },
+    {
+      "tick": 55678,
+      "kind": "end",
+      "activity": "give",
+      "label": "Bringing fruit to Fenn",
+      "goal": "to look after Fenn",
+      "result": "failed",
+      "detail": "they had no room to carry it"
+    },
+    {
+      "tick": 55679,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Picking fruit",
+      "goal": "to ease hunger (40/100)",
+      "target": 3607,
+      "why": "hungry +43 \u00b7 walking \u22129 \u00b7 has paid me poorly before (0.5\u00d7) \u22125 \u00b7 good at it +2"
+    },
+    {
+      "tick": 55679,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Picking fruit",
+      "goal": "to ease hunger (40/100)",
+      "result": "failed",
+      "detail": "no way to get there"
+    },
+    {
+      "tick": 55680,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Fishing",
+      "goal": "to ease hunger (40/100)",
+      "target": 3973,
+      "why": "hungry +43 \u00b7 walking \u221215 \u00b7 has paid me poorly before (0.6\u00d7) \u22124 \u00b7 well-liked food +3"
+    },
+    {
+      "tick": 55816,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Fishing",
+      "goal": "to ease hunger (40/100)",
+      "result": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "tick": 55816,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Fishing",
+      "goal": "to ease hunger (36/100)",
+      "target": 3995,
+      "why": "This estimate comes from my own completed gathering at this particular source. \u00b7 hungry +51 \u00b7 walking \u221211 \u00b7 well-liked food +3 \u00b7 good at it \u22122"
+    },
+    {
+      "tick": 55911,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Fishing",
+      "goal": "to ease hunger (36/100)",
+      "result": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "tick": 55911,
+      "kind": "start",
+      "activity": "gather",
+      "label": "Picking berries",
+      "goal": "to ease hunger (33/100)",
+      "target": 3282,
+      "why": "hungry +54 \u00b7 walking \u22127 \u00b7 has paid me poorly before (0.4\u00d7) \u22126 \u00b7 good at it +2"
+    },
+    {
+      "tick": 56008,
+      "kind": "end",
+      "activity": "gather",
+      "label": "Picking berries",
+      "goal": "to ease hunger (33/100)",
+      "result": "failed",
+      "detail": "nothing left"
+    },
+    {
+      "tick": 56009,
+      "kind": "start",
+      "activity": "socialize",
+      "label": "Ask Ivo for food",
+      "goal": "to get food",
+      "target": 4146,
+      "why": "a step toward \u201cbe fed, watered and under shelter before dark\u201d: eat before the night \u00b7 hungry +48 \u00b7 they are carrying some +4 \u00b7 walking \u22121"
+    },
+    {
+      "tick": 56095,
+      "kind": "end",
+      "activity": "converse",
+      "label": "Talking with Ivo",
+      "goal": "to ask Ivo for something",
+      "result": "success",
+      "detail": "finished a conversation"
+    },
+    {
+      "tick": 56096,
+      "kind": "start",
+      "activity": "eat",
+      "label": "Eating",
+      "goal": "to ease hunger (27/100)",
+      "target": 0,
+      "why": "a step toward \u201cbe fed, watered and under shelter before dark\u201d: eat before the night \u00b7 hungry +70 \u00b7 food in pack +4"
+    },
+    {
+      "tick": 56105,
+      "kind": "end",
+      "activity": "eat",
+      "label": "Eating",
+      "goal": "to ease hunger (27/100)",
+      "result": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 56106,
+      "kind": "start",
+      "activity": "drink",
+      "label": "Drinking at the water",
+      "goal": "to quench thirst (50/100)",
+      "target": 1000978,
+      "why": "thirsty +36 \u00b7 walking \u22126"
+    },
+    {
+      "tick": 56215,
+      "kind": "end",
+      "activity": "drink",
+      "label": "Drinking at the water",
+      "goal": "to quench thirst (50/100)",
+      "result": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 56216,
+      "kind": "start",
+      "activity": "attend",
+      "label": "At the feast",
+      "goal": "to celebrate",
+      "target": 85977,
+      "why": "a feast +30 \u00b7 walking \u221212 \u00b7 company +7"
+    },
+    {
+      "tick": 56216,
+      "kind": "end",
+      "activity": "attend",
+      "label": "At the feast",
+      "goal": "to celebrate",
+      "result": "failed",
+      "detail": "no way to get there"
+    },
+    {
+      "tick": 56217,
+      "kind": "start",
+      "activity": "attend",
+      "label": "At the harvest feast",
+      "goal": "to celebrate",
+      "target": 85616,
+      "why": "a harvest feast +30 \u00b7 walking \u221212 \u00b7 company +7"
+    },
+    {
+      "tick": 56217,
+      "kind": "end",
+      "activity": "attend",
+      "label": "At the harvest feast",
+      "goal": "to celebrate",
+      "result": "failed",
+      "detail": "no way to get there"
+    },
+    {
+      "tick": 56218,
+      "kind": "start",
+      "activity": "tree_work",
+      "label": "Taking a living tree cutting",
+      "goal": "replant trees near home",
+      "target": 1951,
+      "why": "few remembered trees near home +23 \u00b7 walking \u22121"
+    },
+    {
+      "tick": 56264,
+      "kind": "end",
+      "activity": "tree_work",
+      "label": "Taking a living tree cutting",
+      "goal": "replant trees near home",
+      "result": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "tick": 56264,
+      "kind": "start",
+      "activity": "socialize",
+      "label": "Ask Abel II for food",
+      "goal": "to get food",
+      "target": 4188,
+      "why": "hungry +19 \u00b7 they are carrying some +4 \u00b7 walking \u22123"
+    },
+    {
+      "tick": 56312,
+      "kind": "end",
+      "activity": "socialize",
+      "label": "Ask Abel II for food",
+      "goal": "to get food",
+      "result": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "tick": 56312,
+      "kind": "start",
+      "activity": "attend",
+      "label": "At the feast",
+      "goal": "to celebrate",
+      "target": 85977,
+      "why": "a feast +30 \u00b7 walking \u221212 \u00b7 company +7"
+    },
+    {
+      "tick": 56312,
+      "kind": "end",
+      "activity": "attend",
+      "label": "At the feast",
+      "goal": "to celebrate",
+      "result": "failed",
+      "detail": "no way to get there"
+    },
+    {
+      "tick": 56313,
+      "kind": "start",
+      "activity": "attend",
+      "label": "At the harvest feast",
+      "goal": "to celebrate",
+      "target": 85616,
+      "why": "a harvest feast +30 \u00b7 walking \u221212 \u00b7 company +7"
+    },
+    {
+      "tick": 56313,
+      "kind": "end",
+      "activity": "attend",
+      "label": "At the harvest feast",
+      "goal": "to celebrate",
+      "result": "failed",
+      "detail": "no way to get there"
+    },
+    {
+      "tick": 56314,
+      "kind": "start",
+      "activity": "explore",
+      "label": "Looking for timber",
+      "goal": "to find trees to fell",
+      "target": 0,
+      "why": "curiosity +31 \u00b7 walking \u221211 \u00b7 daylight to spare +2"
+    },
+    {
+      "tick": 56476,
+      "kind": "end",
+      "activity": "explore",
+      "label": "Looking for timber",
+      "goal": "to find trees to fell",
+      "result": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "tick": 56476,
+      "kind": "start",
+      "activity": "sleep",
+      "label": "Sleeping by my hut",
+      "goal": "to recover energy (33/100)",
+      "target": 21167,
+      "why": "tired +67 \u00b7 walking \u221225"
+    }
+  ],
+  "inesRelevantLogs": [
+    {
+      "tick": 53056,
+      "text": "Gave up \u201cChat with Fenn\u201d: they are inside a different space.",
+      "kind": "work"
+    },
+    {
+      "tick": 53057,
+      "text": "Means to put 12 units of food by for the household: there is next to nothing at home to fall back on.",
+      "kind": "work"
+    },
+    {
+      "tick": 53104,
+      "text": "Fed the indoor hearth with 2 wood.",
+      "kind": "work"
+    },
+    {
+      "tick": 53204,
+      "text": "The fruit tree I had remembered (about 2, 4.3 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53275,
+      "text": "Wanted a word with Fenn, who had more pressing needs.",
+      "kind": "social"
+    },
+    {
+      "tick": 53275,
+      "text": "Gave up \u201cChat with Fenn\u201d: Fenn had more pressing needs.",
+      "kind": "work"
+    },
+    {
+      "tick": 53297,
+      "text": "Wanted a word with Oren, who had more pressing needs.",
+      "kind": "social"
+    },
+    {
+      "tick": 53297,
+      "text": "Gave up \u201cChat with Oren\u201d: Oren had more pressing needs.",
+      "kind": "work"
+    },
+    {
+      "tick": 53352,
+      "text": "Ada II told me Rafe looked hungry not long ago.",
+      "kind": "social"
+    },
+    {
+      "tick": 53352,
+      "text": "Ada II told me Dara helped Lia.",
+      "kind": "info"
+    },
+    {
+      "tick": 53407,
+      "text": "Went to the feast at the hall (4 already there).",
+      "kind": "social"
+    },
+    {
+      "tick": 53573,
+      "text": "Means to be ready for the night: hungry enough that the night would be hard.",
+      "kind": "need"
+    },
+    {
+      "tick": 53633,
+      "text": "The wild grain I had remembered (about 3, 16.3 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53633,
+      "text": "The rock outcrop I had remembered (about 6, 16.3 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53639,
+      "text": "The wild grain I had remembered (about 2, 16.3 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53639,
+      "text": "The wild grain I had remembered (about 4, 16.3 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53666,
+      "text": "The rock outcrop I had remembered (about 6, 16.4 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53696,
+      "text": "The fishing spot I had remembered (about 5, 28.2 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53705,
+      "text": "The fishing spot I had remembered (about 3, 28.2 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53744,
+      "text": "The fishing spot I had remembered (about 2, 52.1 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 53837,
+      "text": "Gathered 1 fish from the fish spot.",
+      "kind": "work"
+    },
+    {
+      "tick": 53837,
+      "text": "The fish spot has been picked clean.",
+      "kind": "info"
+    },
+    {
+      "tick": 53934,
+      "text": "Faye II told me Fenn looked hungry not long ago.",
+      "kind": "social"
+    },
+    {
+      "tick": 53934,
+      "text": "Faye II told me Kira II helped Ada II.",
+      "kind": "info"
+    },
+    {
+      "tick": 54072,
+      "text": "Turned down Rolf's request (own need).",
+      "kind": "social"
+    },
+    {
+      "tick": 54094,
+      "text": "Rolf told me Fenn looked hungry not long ago.",
+      "kind": "social"
+    },
+    {
+      "tick": 54094,
+      "text": "Rolf told me Bram III helped Clara III.",
+      "kind": "info"
+    },
+    {
+      "tick": 54094,
+      "text": "Rolf says the wild grain holds about 1; I remembered about 5 when I saw it myself at tick 46613. Theirs is the newer sight, so I go by it until I see for myself.",
+      "kind": "info"
+    },
+    {
+      "tick": 54094,
+      "text": "Rolf told me about a wild grain a fair way west of camp.",
+      "kind": "info"
+    },
+    {
+      "tick": 54137,
+      "text": "The berry bush I had remembered (about 2, 1.5 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 54854,
+      "text": "Slept and recovered 66 energy.",
+      "kind": "need"
+    },
+    {
+      "tick": 54884,
+      "text": "The berry bush I had remembered (about 2, 1.2 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 54989,
+      "text": "The fruit tree I had remembered (about 2, 14.1 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 54992,
+      "text": "The berry bush I had remembered (about 2, 14.1 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55008,
+      "text": "Gathered 1 fruit from the fruit tree.",
+      "kind": "work"
+    },
+    {
+      "tick": 55008,
+      "text": "The fruit tree has been picked clean.",
+      "kind": "info"
+    },
+    {
+      "tick": 55010,
+      "text": "The berry bush I had remembered (about 4, 14.3 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55040,
+      "text": "The berry bush I had remembered (about 2, 14.3 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55043,
+      "text": "The berry bush I had remembered (about 2, 14.4 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55067,
+      "text": "The berry bush I had remembered (about 6, 18.0 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55080,
+      "text": "Got through the night under shelter (638 ticks of it).",
+      "kind": "need"
+    },
+    {
+      "tick": 55167,
+      "text": "Turned down Zora II's request (own need).",
+      "kind": "social"
+    },
+    {
+      "tick": 55189,
+      "text": "Zora II told me Dov looked hungry not long ago.",
+      "kind": "social"
+    },
+    {
+      "tick": 55189,
+      "text": "Zora II told me Basil II helped Faye II.",
+      "kind": "info"
+    },
+    {
+      "tick": 55189,
+      "text": "Zora II warned me about a wolf north of camp.",
+      "kind": "danger"
+    },
+    {
+      "tick": 55301,
+      "text": "The berry bush I had remembered (about 4, 14.6 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55334,
+      "text": "The berry bush I had remembered (about 6, 14.6 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55337,
+      "text": "The berry bush I had remembered (about 5, 14.5 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55337,
+      "text": "The tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55349,
+      "text": "The berry bush I had remembered (about 6, 14.4 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55364,
+      "text": "The berry bush I had remembered (about 6, 22.3 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55364,
+      "text": "The tree I had remembered (about 2, 14.3 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55373,
+      "text": "The wild grain I had remembered (about 4, 14.5 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55376,
+      "text": "The fruit tree I had remembered (about 4, 14.3 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55382,
+      "text": "The berry bush I had remembered (about 5, 14.3 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55385,
+      "text": "The wild grain I had remembered (about 5, 14.6 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55439,
+      "text": "Abel told me Ivo II helped Eli II.",
+      "kind": "info"
+    },
+    {
+      "tick": 55460,
+      "text": "The berry bush I had remembered (about 6, 14.4 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55463,
+      "text": "The berry bush I had remembered (about 2, 14.4 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55466,
+      "text": "The wild grain I had remembered (about 5, 22.7 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55466,
+      "text": "The berry bush I had remembered (about 2, 14.4 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55472,
+      "text": "The tree I had remembered (about 5, 14.5 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55486,
+      "text": "Gave up \u201cBringing fruit to Fenn\u201d: Fenn was not where I expected.",
+      "kind": "work"
+    },
+    {
+      "tick": 55505,
+      "text": "The tree I had remembered (about 5, 14.6 min old) was down to 2 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55540,
+      "text": "Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.",
+      "kind": "work"
+    },
+    {
+      "tick": 55549,
+      "text": "Saw that Pavel died.",
+      "kind": "life"
+    },
+    {
+      "tick": 55594,
+      "text": "Asked Fenn for food.",
+      "kind": "social"
+    },
+    {
+      "tick": 55616,
+      "text": "Fenn said no (no item).",
+      "kind": "social"
+    },
+    {
+      "tick": 55638,
+      "text": "Fenn told me Esme looked hungry not long ago.",
+      "kind": "social"
+    },
+    {
+      "tick": 55638,
+      "text": "Fenn told me Una II picked a quarrel with Oren.",
+      "kind": "info"
+    },
+    {
+      "tick": 55638,
+      "text": "Fenn told me about a fishing spot by the water, a fair way east of camp.",
+      "kind": "info"
+    },
+    {
+      "tick": 55678,
+      "text": "Gave up \u201cBringing fruit to Fenn\u201d: they had no room to carry it.",
+      "kind": "work"
+    },
+    {
+      "tick": 55679,
+      "text": "Could not use the fruit tree: no way to get there. I did not reach it; its current stock is unknown.",
+      "kind": "work"
+    },
+    {
+      "tick": 55709,
+      "text": "The fruit tree I had remembered (about 2, 0.0 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55721,
+      "text": "The fruit tree I had remembered (about 7, 15.2 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55775,
+      "text": "The rock outcrop I had remembered (about 3, 46.8 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55787,
+      "text": "The tree I had remembered (about 3, 46.8 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55799,
+      "text": "The tree I had remembered (about 4, 46.9 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55817,
+      "text": "Moved away from Ines's crew.",
+      "kind": "social"
+    },
+    {
+      "tick": 55859,
+      "text": "The tree I had remembered (about 5, 47.1 min old) was down to 2 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55880,
+      "text": "The fishing spot I had remembered (about 4, 7.3 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55889,
+      "text": "The tree I had remembered (about 3, 47.1 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55901,
+      "text": "The tree I had remembered (about 2, 47.2 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 55925,
+      "text": "The tree I had remembered (about 5, 47.4 min old) was down to 2 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 56008,
+      "text": "The berry bush was empty when I got there.",
+      "kind": "work"
+    },
+    {
+      "tick": 56009,
+      "text": "Means to be ready for the night: nowhere to shelter nearby for the night.",
+      "kind": "need"
+    },
+    {
+      "tick": 56035,
+      "text": "Asked Ivo for food.",
+      "kind": "social"
+    },
+    {
+      "tick": 56057,
+      "text": "Ivo gave me 1 berries.",
+      "kind": "social"
+    },
+    {
+      "tick": 56079,
+      "text": "Ivo told me Kira took food from the Hazel 30 household's store.",
+      "kind": "info"
+    },
+    {
+      "tick": 56079,
+      "text": "Ivo told me about a wild grain a short walk south of camp.",
+      "kind": "info"
+    },
+    {
+      "tick": 56216,
+      "text": "Gave up \u201cAt the feast\u201d: no way to get there.",
+      "kind": "work"
+    },
+    {
+      "tick": 56217,
+      "text": "Gave up \u201cAt the harvest feast\u201d: no way to get there.",
+      "kind": "work"
+    },
+    {
+      "tick": 56312,
+      "text": "Gave up \u201cAt the feast\u201d: no way to get there.",
+      "kind": "work"
+    },
+    {
+      "tick": 56313,
+      "text": "Gave up \u201cAt the harvest feast\u201d: no way to get there.",
+      "kind": "work"
+    },
+    {
+      "tick": 56417,
+      "text": "We are a crew now: Oren, Fenn.",
+      "kind": "social"
+    },
+    {
+      "tick": 56558,
+      "text": "The tree I had remembered (about 4, 5.7 min old) was down to 1 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 56600,
+      "text": "The rock outcrop I had remembered (about 5, 8.2 min old) was down to 2 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 57279,
+      "text": "Slept and recovered 69 energy.",
+      "kind": "need"
+    },
+    {
+      "tick": 57480,
+      "text": "Got through the night under shelter (778 ticks of it).",
+      "kind": "need"
+    },
+    {
+      "tick": 57516,
+      "text": "The berry bush was empty when I got there.",
+      "kind": "work"
+    },
+    {
+      "tick": 57557,
+      "text": "The berry bush I had remembered (about 2, 2.9 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 57611,
+      "text": "The fruit tree I had remembered (about 2, 3.6 min old) was bare when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 57637,
+      "text": "The fruit tree was empty when I got there.",
+      "kind": "work"
+    },
+    {
+      "tick": 57638,
+      "text": "Read at the grave that Lia died.",
+      "kind": "life"
+    },
+    {
+      "tick": 57814,
+      "text": "The fish spot was empty when I got there.",
+      "kind": "work"
+    },
+    {
+      "tick": 57858,
+      "text": "Gave up on: put 12 units of food by for the household - never got any food put by (the store is at 0 of 12).",
+      "kind": "work"
+    },
+    {
+      "tick": 57974,
+      "text": "Means to make a pick: it would make the work easier, and the makings are short.",
+      "kind": "work"
+    },
+    {
+      "tick": 58143,
+      "text": "The berry bush was empty when I got there.",
+      "kind": "work"
+    },
+    {
+      "tick": 58217,
+      "text": "Moved away from Ines's crew.",
+      "kind": "social"
+    },
+    {
+      "tick": 58327,
+      "text": "Gathered 1 fish from the fish spot.",
+      "kind": "work"
+    },
+    {
+      "tick": 58327,
+      "text": "The fish spot has been picked clean.",
+      "kind": "info"
+    },
+    {
+      "tick": 58541,
+      "text": "The tree I had remembered (about 5, 3.2 min old) was down to 2 when I got close.",
+      "kind": "info"
+    },
+    {
+      "tick": 58541,
+      "text": "Read at the grave that Fenn died.",
+      "kind": "life"
+    }
+  ]
+}

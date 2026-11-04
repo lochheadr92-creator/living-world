@@ -1,0 +1,87 @@
+{
+  "verifiedUtc": "2026-11-04T15:05:29.871791+00:00",
+  "frozenInputsUnchanged": true,
+  "originalDriver": [
+    {
+      "profile": "normal",
+      "seed": "forest",
+      "code": 0
+    },
+    {
+      "profile": "normal",
+      "seed": "river",
+      "code": 0
+    },
+    {
+      "profile": "normal",
+      "seed": "life-stages-6",
+      "code": 0
+    },
+    {
+      "profile": "large",
+      "seed": "forest",
+      "code": 0
+    },
+    {
+      "profile": "large",
+      "seed": "river",
+      "code": 1
+    },
+    {
+      "profile": "large",
+      "seed": "life-stages-6",
+      "code": 0
+    }
+  ],
+  "outcomes": [
+    {
+      "world": "large-forest",
+      "supplemental": false,
+      "checks": "PASS within stated scope",
+      "originalExactChecks": "PASS",
+      "population": 0,
+      "founders": 0
+    },
+    {
+      "world": "large-life-stages-6",
+      "supplemental": false,
+      "checks": "PASS within stated scope",
+      "originalExactChecks": "PASS",
+      "population": 131,
+      "founders": 91
+    },
+    {
+      "world": "normal-forest",
+      "supplemental": false,
+      "checks": "PASS within stated scope",
+      "originalExactChecks": "PASS",
+      "population": 7,
+      "founders": 6
+    },
+    {
+      "world": "normal-life-stages-6",
+      "supplemental": false,
+      "checks": "PASS within stated scope",
+      "originalExactChecks": "PASS",
+      "population": 24,
+      "founders": 19
+    },
+    {
+      "world": "normal-river",
+      "supplemental": false,
+      "checks": "PASS within stated scope",
+      "originalExactChecks": "PASS",
+      "population": 24,
+      "founders": 22
+    },
+    {
+      "world": "large-river",
+      "supplemental": true,
+      "checks": "PASS within stated scope",
+      "originalExactChecks": "NOT PASSED",
+      "population": 76,
+      "founders": 63
+    }
+  ],
+  "limitation": "Five original passes, one original failure with a separately verified semantic continuation. Not a full software test suite."
+}

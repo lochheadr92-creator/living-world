@@ -1,0 +1,128 @@
+[
+  {
+    "world": "large-forest",
+    "sourceCounts": {
+      "tree": 3357,
+      "berry_bush": 160,
+      "fruit_tree": 78,
+      "wild_grain": 84,
+      "rock": 348,
+      "fish_spot": 40,
+      "clay_pit": 12,
+      "outcrop": 7,
+      "ore_vein": 8
+    },
+    "initialWildFoodUnits": {
+      "berries": 658,
+      "fruit": 425,
+      "grain": 289,
+      "fish": 290
+    },
+    "animalCount": 14
+  },
+  {
+    "world": "large-life-stages-6",
+    "sourceCounts": {
+      "tree": 3253,
+      "berry_bush": 163,
+      "fruit_tree": 75,
+      "wild_grain": 84,
+      "rock": 392,
+      "fish_spot": 40,
+      "clay_pit": 12,
+      "outcrop": 8,
+      "ore_vein": 8
+    },
+    "initialWildFoodUnits": {
+      "berries": 663,
+      "fruit": 430,
+      "grain": 284,
+      "fish": 268
+    },
+    "animalCount": 14
+  },
+  {
+    "world": "large-river",
+    "sourceCounts": {
+      "tree": 3518,
+      "berry_bush": 162,
+      "fruit_tree": 78,
+      "wild_grain": 78,
+      "rock": 344,
+      "fish_spot": 40,
+      "clay_pit": 12,
+      "outcrop": 8,
+      "ore_vein": 8
+    },
+    "initialWildFoodUnits": {
+      "berries": 656,
+      "fruit": 419,
+      "grain": 262,
+      "fish": 294
+    },
+    "animalCount": 14
+  },
+  {
+    "world": "normal-forest",
+    "sourceCounts": {
+      "tree": 699,
+      "berry_bush": 39,
+      "fruit_tree": 19,
+      "wild_grain": 21,
+      "rock": 107,
+      "fish_spot": 9,
+      "clay_pit": 3,
+      "outcrop": 2,
+      "ore_vein": 2
+    },
+    "initialWildFoodUnits": {
+      "berries": 157,
+      "fruit": 104,
+      "grain": 62,
+      "fish": 60
+    },
+    "animalCount": 5
+  },
+  {
+    "world": "normal-life-stages-6",
+    "sourceCounts": {
+      "tree": 692,
+      "berry_bush": 42,
+      "fruit_tree": 20,
+      "wild_grain": 17,
+      "rock": 72,
+      "fish_spot": 10,
+      "clay_pit": 3,
+      "outcrop": 2,
+      "ore_vein": 2
+    },
+    "initialWildFoodUnits": {
+      "berries": 163,
+      "fruit": 104,
+      "grain": 61,
+      "fish": 79
+    },
+    "animalCount": 5
+  },
+  {
+    "world": "normal-river",
+    "sourceCounts": {
+      "tree": 933,
+      "berry_bush": 37,
+      "fruit_tree": 18,
+      "wild_grain": 20,
+      "rock": 82,
+      "fish_spot": 11,
+      "clay_pit": 3,
+      "outcrop": 2,
+      "ore_vein": 2
+    },
+    "initialWildFoodUnits": {
+      "berries": 146,
+      "fruit": 91,
+      "grain": 74,
+      "fish": 70
+    },
+    "animalCount": 5
+  }
+]
