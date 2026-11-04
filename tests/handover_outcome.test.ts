@@ -87,7 +87,7 @@ it('in sight, brings a thirsty dependant holding food water only, never food on 
  consume(f.w,f.helper.inv,'water',f.helper.inv.water??0,'staged: no water');
  const dry=offered();expect(dry.give).toBeUndefined();expect(dry.ctx.blocked.some(b=>b.targetId===f.elder.id&&b.blocked==='is carrying food already')).toBe(true);
  produce(f.w,f.helper.inv,carryCap(f.w,f.helper),'water',1,'staged carer water');
- const wet=offered().give;expect(wet).toBeDefined();expect(Object.keys((wet!.make()!.data.items??{}) as object)).toEqual(['water']);
+ const wet=offered().give;expect(wet).toBeDefined();expect(Object.keys((wet!.make!()!.data.items??{}) as object)).toEqual(['water']);
  const old=indoorCareScene(156);produce(old.w,old.elder.inv,carryCap(old.w,old.elder),'berries',3,'staged');old.elder.needs.hunger=30;old.elder.needs.thirst=35;
  produce(old.w,old.helper.inv,carryCap(old.w,old.helper),'berries',2,'staged');consume(old.w,old.helper.inv,'water',old.helper.inv.water??0,'staged');perceive(old.w,old.helper);
  expect(generateOptions(old.w,old.helper,true,true).options.some(o=>o.key===`give:${old.elder.id}`)).toBe(true);
