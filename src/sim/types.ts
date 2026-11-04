@@ -105,6 +105,8 @@ export interface Belief {
   state?: string;
   progress?: number;
   fuel?: number;
+  /** Visible fitting, with thermal state only when actually observed indoors. */
+  hearth?: {fuel:number|null;heat:number|null;seen:number};
   /** what a facility looked like when last seen: running recipe, progress, stock waiting for pickup */
   ops?: FacilitySnapshot;
   /** equipment on a rack / in a store when last seen */
@@ -826,6 +828,8 @@ export interface Building {
   hhId: number;
   store: Store;
   fuel: number;
+  /** Paid home fitting; absent means no installed hearth. */
+  hearth?: {fuel:number;heat:number};
   builtTick: number;
   doorX: number;
   doorY: number;
@@ -959,6 +963,7 @@ export interface Site {
   variant: number;
   /** a home being improved in place: the building that stands here */
   upgradeOf?: number;
+  improvement?: 'hearth';
   /** a quarry site is laid out beside this deposit */
   depositId?: number;
   /** household id -> value contributed (1 per unit of material, 1 per 25 work ticks): decides who holds title when it is finished */

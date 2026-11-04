@@ -1,12 +1,13 @@
 # Dependency-chain programme register
 
 **Survival assignment, 4 November 2026 — in progress:** the active integration
-checkout was verified at main `61cb6e5`, rules 121. Candidate rules 122 implements
-the first stream, preservation. Scope, ownership, evidence and remaining work for
+checkout started from main `61cb6e5`, rules 121. Rules 122 implements
+preservation; rules 123 implements paid indoor hearths, fuel supply and occupied
+heat, with both 25-day ordinary checks complete. Scope and remaining work for
 all seven authorised streams are in [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md).
 Rules 122 has bounded ordinary fish-preservation use in forest and null use in
 river; existing full-suite/typecheck failures remain reported. The revised owner
-attachment authorises body reserves last. Later streams and aggregate survival
+attachment authorises body reserves last. Clothing is next; aggregate survival
 benefit remain pending. The historical branch notes below retain their original scope.
 
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are

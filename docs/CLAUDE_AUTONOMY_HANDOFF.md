@@ -1,5 +1,18 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Latest checkpoint, 4 November 2026:** rules 123 indoor hearths follow committed
+preservation (`de35037`). Both frozen `hearth-check2` Normal arrivals-on 25-day
+runs passed integrity checks and showed paid occupied heat (forest 48,228 ticks,
+river 87,594). Final validation and current-save checks passed; the broader suite
+retains 31 pre-existing review failures after resolving two missing-fixture
+diagnostics. Full-command typecheck/build remain non-green on the two retained
+nullable review tests. All evidence/parameters are in `SURVIVAL_CAPABILITIES.md`.
+The rules-123 immutable reference is captured. Continue plant-fibre gear/bedding,
+then carcasses, traps/nets, animals and paid reserves; complete deferred inputs.
+Rules-121 baseline cost cohorts are running in a separate frozen worktree:
+`survival_evidence/aggregate-baseline/status.json` (launcher PID 10548; check live).
+The following preservation-only checkpoint is historical.
+
 **Active survival continuation, 4 November 2026:** use
 `C:\dev\Claude Experiment\living-world-integrate`, main, base `61cb6e5`.
 Rules-122 preservation has paid drying/smoking, known surplus supply, existing

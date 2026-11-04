@@ -1,10 +1,11 @@
 import { constructionAftermath } from './achievement';
+import {HEARTH_COST,HEARTH_WORK,hearthInstallBlock} from './hearth';
 import {losePreservationRack} from './preservation';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { finishProject, hasTownships } from './townships';
 import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
 import { evacuateHome } from './habitation';
-import { addItem, isEmptyItems, cloneItems } from './economy';
+import { addItem, addCapped, isEmptyItems, cloneItems } from './economy';
 import { addEvent, addFx } from './events';
 import { isFacilityType, newOps } from './recipes';
 import { hashUnit } from './rng';
@@ -56,10 +57,15 @@ export function createSite(
   y: number,
   hhId: number,
   creatorId: number,
-  opts: { upgradeOf?: number; depositId?: number } = {},
+  opts: { upgradeOf?: number; depositId?: number; improvement?: 'hearth' } = {},
 ): Site {
   const d = BUILD_DEF[type];
-  const required: Items = { ...d.cost };
+  if(opts.improvement){
+    const p=world.byId.get(creatorId);
+    const block=p?.ent==='person'?hearthInstallBlock(world,p,opts.upgradeOf??0):'missing builder';
+    if(block)throw Error(block);
+  }
+  const required: Items = opts.improvement==='hearth'?{...HEARTH_COST}:{ ...d.cost };
   const s: Site = {
     ent: 'site',
     id: newId(world),
@@ -74,7 +80,7 @@ export function createSite(
     delivered: {},
     used: {},
     work: 0,
-    workTotal: d.work,
+    workTotal: opts.improvement==='hearth'?HEARTH_WORK:d.work,
     createdTick: world.tick,
     lastWorkTick: world.tick,
     maxWorkers: d.workers,
@@ -82,6 +88,7 @@ export function createSite(
     variant: Math.floor(hashUnit(x, y, 91) * 4),
     contrib: {},
   };
+  if(opts.improvement)s.improvement=opts.improvement;
   if (opts.upgradeOf) s.upgradeOf = opts.upgradeOf;
   if (opts.depositId) s.depositId = opts.depositId;
   registerSite(world, s);
@@ -184,6 +191,18 @@ export function completeSite(world: World, site: Site, builder: Person | null): 
     const old = world.byId.get(site.upgradeOf);
     if (old && old.ent === 'building') {
       const was = buildingLabel(old.type);
+      if(site.improvement==='hearth'){
+        old.hearth={fuel:0,heat:0};delete old.upgrading;
+        const excess:Items={};
+        for(const k of Object.keys(site.delivered) as (keyof Items)[]){
+          const n=site.delivered[k]??0,stored=addCapped(old.store.items,old.store.cap,k,n);
+          if(n>stored)excess[k]=n-stored;
+        }
+        makeHousePile(world,old.doorX,old.doorY,excess,'leftover hearth materials');
+        addEvent(world,'build',`${who} fitted a hearth in the ${label}.`,builder?[builder.id]:[],old.x,old.y);
+        finishProject(world,site,old,'materials supplied and hearth fitted');
+        return old;
+      }
       old.type = site.type;
       delete old.upgrading;
       old.condition = 100;

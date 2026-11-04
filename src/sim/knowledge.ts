@@ -44,6 +44,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       b.hh = e.hhId;
       b.cond = e.condition;
       b.fuel = e.fuel;
+      if(e.hearth)b.hearth={fuel:null,heat:null,seen:tick};
       b.items = cloneItems(e.store.items);
       if (e.ops) b.ops = facilitySnapshot(world, e);
       const racked = toolsHeldBy(world, e.id);
@@ -166,6 +167,10 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if (hasLocalDeath(world) && e.ent==='grave' && e.death && !p.indoors && p.pose!=='sleep' && Math.hypot(p.x-e.x,p.y-e.y)<=10) deathStory(world,p,e.death,'grave');
   const b = snapshotEntity(world, e, world.tick);
   if (!b) return false;
+  if(e.ent==='building'&&e.hearth){
+    if(p.indoors===e.id)b.hearth={...e.hearth,seen:world.tick};
+    else if(p.beliefs[e.id]?.hearth)b.hearth={...p.beliefs[e.id].hearth!};
+  }
   b.origin = p.id;
   b.hops = 0;
   if(e.ent==='source')correctSourceExperience(world,p,e.id,e.amount);

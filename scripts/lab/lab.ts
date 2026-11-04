@@ -34,6 +34,7 @@ import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
 import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
 import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
 import {preservationOn,setPreservation} from '../../src/sim/preservation';
+import {hearthOn,setHearth} from '../../src/sim/hearth';
 import { waterBudgetEnabled, setWaterBudget } from '../../src/sim/hydrology';
 import { ecologyEnabled, setEcology } from '../../src/sim/ecology';
 import {buildPromiseSettlementOn,setBuildPromiseSettlement} from '../../src/sim/promise_knowledge';
@@ -406,6 +407,7 @@ export function parseIntervention(specIn: string): Intervention {
   if(kind==='rich-no-meal-leftovers')return {spec:label,summary:'retain historical automatic table return; remove owned leftover recovery',install(){const was=mealLeftoversOn();setMealLeftovers(false);return ()=>setMealLeftovers(was);}};
   if(kind==='rich-no-offcuts')return {spec:label,summary:'remove newly recoverable timber fuel and its use; retain the original waste sink',install(){const was=offcutsOn();setOffcuts(false);return ()=>setOffcuts(was);}};
   if(kind==='rich-no-preservation')return {spec:label,summary:'disable preservation decisions and new batches; keep food properties and existing paid contents',install(){const was=preservationOn();setPreservation(false);return ()=>setPreservation(was);}};
+  if(kind==='rich-no-hearth')return {spec:label,summary:'disable new hearth decisions; keep installed heat and paid construction',install(){const was=hearthOn();setHearth(false);return ()=>setHearth(was);}};
   if(kind==='rich-no-water-budget')return {spec:label,summary:'remove finite natural supply, weather accounting and personal dry-water responses',install(){const was=waterBudgetEnabled();setWaterBudget(false);return ()=>setWaterBudget(was);}};
   if(kind==='rich-no-ecology')return {spec:label,summary:'remove persistent productive condition, observation and field rest',install(){const was=ecologyEnabled();setEcology(false);return ()=>setEcology(was);}};
   if(kind==='rich-no-promise-delays')return {spec:label,summary:'remove active-promise delay explanations and one bounded deadline negotiation',install(){const was=promiseDelaysOn();setPromiseDelays(false);return ()=>setPromiseDelays(was);}};

@@ -2,6 +2,7 @@
 // Person.indoors is authoritative. Building.inside is a legacy unused field;
 // occupant lists are derived from people, never another saved source of truth.
 import {isStoredDrink} from './stored_water_access';
+import {isHearthAction} from './hearth';
 import { floodMovementBlocked, observeFlood, observeFloodDoor } from './flood';
 import { isSolidHome } from './constants';
 import { isWalkable } from './registry';
@@ -70,7 +71,7 @@ export function leaveHome(w: World, p: Person): string | null {
 }
 /** Only these ordinary activities may execute without leaving the interior. */
 export function staysIndoors(w: World, p: Person, a: Activity): boolean {
-  if(isStoredDrink(w,a)&&a.targetId===p.indoors)return true;
+  if((isStoredDrink(w,a)||isHearthAction(w,a))&&a.targetId===p.indoors)return true;
   if (hasLocalGiving(w) && a.kind === 'give' && indoorHome(w, p)) {
     const q = w.byId.get(a.targetId);
     if (q?.ent === 'person' && q.alive && q.indoors === p.indoors) return true;
@@ -88,7 +89,7 @@ export function prepareIndoorActivity(w: World, p: Person, a: Activity): string 
 }
 /** Reset travelling activity after a valid exit; its route must start at the door. */
 export function interiorTarget(w: World, a: Activity): Building | null {
-  if (!hasHabitation(w) || (a.kind !== 'sleep' && a.kind !== 'rest' && !(a.kind === 'flee' && a.data.homeRefuge === true) && !isStoredDrink(w,a))) return null;
+  if (!hasHabitation(w) || (a.kind !== 'sleep' && a.kind !== 'rest' && !(a.kind === 'flee' && a.data.homeRefuge === true) && !isStoredDrink(w,a)&&!isHearthAction(w,a))) return null;
   const b = w.byId.get(a.targetId);
   return b?.ent === 'building' && isSolidHome(b.type) ? b : null;
 }

@@ -252,7 +252,7 @@ export function describeEntityName(world: World, e: Entity): string {
     case 'building':
       return BUILD_DEF[e.type].label[0].toUpperCase() + BUILD_DEF[e.type].label.slice(1);
     case 'site':
-      return `${BUILD_DEF[e.type].label[0].toUpperCase()}${BUILD_DEF[e.type].label.slice(1)} (under construction)`;
+      return e.improvement==='hearth'?'Indoor hearth (under construction)':`${BUILD_DEF[e.type].label[0].toUpperCase()}${BUILD_DEF[e.type].label.slice(1)} (under construction)`;
     case 'plot':
       return 'Field plot';
     case 'pile':
@@ -760,6 +760,11 @@ export function describeEntity(world: World, id: number): EntityView | null {
         rows.push(['State', b.fuel > 0 ? 'burning' : 'out']);
       }
       if (b.store.cap > 0) rows.push(['Storage', `${Math.round(weightOf(b.store.items))}/${b.store.cap} used`]);
+      if(b.hearth){
+        rows.push(['Indoor hearth',b.hearth.fuel>0?'burning':b.hearth.heat>0?'fuel exhausted; residual heat is cooling':'cold; needs fuel']);
+        rows.push(['Room heat',`+${b.hearth.heat.toFixed(1)} degrees for occupants only`]);
+        rows.push(['Hearth fuel',`${b.hearth.fuel.toFixed(0)} ticks of paid fuel remaining`]);
+      }
       if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push(['Built by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
       const notes: string[] = [];
       if (isHomeType(b.type)) {
@@ -776,7 +781,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
         }
         notes.push(BUILD_DEF[b.type].blurb);
       }
-      if (b.upgrading) notes.push('Being rebuilt as a house: still lived in while the work goes on.');
+      if (b.upgrading) notes.push(world.sites.find(s=>s.id===b.upgrading)?.improvement==='hearth'?'An indoor hearth is being fitted; the home remains occupied.':'Being rebuilt as a house: still lived in while the work goes on.');
       return { kind: 'building', ...base, title: describeEntityName(world, e), subtitle: `Built ${agoText(world, b.builtTick)}`, rows, bars, items: itemList(b.store.items), notes, position: { x: b.x + b.w / 2, y: b.y + b.h / 2 }, sections };
     }
     case 'site': {

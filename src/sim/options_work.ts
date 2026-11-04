@@ -1,3 +1,4 @@
+import {knownColdHearth} from './hearth';
 import {hasLivedLife} from './lived_life';
 import {hasChildhood} from './childhood_rules';
 import {reservedFor} from './reserved_goods';
@@ -317,6 +318,7 @@ export function relevantSites(ctx: Ctx): { b: Belief; rel: ReturnType<typeof sit
 export function materialNeeds(ctx: Ctx): MatNeed[] {
   const { p, world } = ctx;
   const needs: MatNeed[] = [];
+  for(const b of beliefsByKind(p,['building']))if(knownColdHearth(ctx,b)&&fuelAvailable(world,p,'offcuts')<1)needs.push({item:'wood',n:2,base:34,why:'to fuel our cold home hearth',tag:'fire'});
   for (const { b, rel } of relevantSites(ctx)) {
     for (const k in b.need ?? {}) {
       let n = unitsOf(b.need?.[k as ItemKind]);

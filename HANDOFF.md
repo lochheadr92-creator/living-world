@@ -3,9 +3,11 @@
 Current work is in `living-world-integrate`, main, base `61cb6e5`.
 See [SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md) and the current
 entry in [CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
-Rules 122 preservation has bounded ordinary activation; all seven families
+Rules 122 preservation and 123 indoor hearths have bounded ordinary activation; all seven families
 are authorised, with body reserves last. Full-command baseline failures are
-retained and documented. Next is indoor heating; aggregate benefit is unmeasured.
+retained and documented. Next is plant-fibre clothing/bedding; aggregate benefit
+is unmeasured. Frozen rules-121 baseline cost cohorts are running under
+`survival_evidence/aggregate-baseline/` (launcher PID 10548; verify live).
 
 # Codex integration checkpoint (2026-10-27)
 

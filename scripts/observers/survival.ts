@@ -1,6 +1,8 @@
 import {PRESERVED_FOODS} from '../../src/sim/constants';
 import {RECIPE_BY_ID} from '../../src/sim/recipes';
 import {preservationSurplus} from '../../src/sim/production';
+import {stageOf} from '../../src/sim/people';
+import {shelterAt,fireWarmth} from '../../src/sim/needs';
 import type {Ctx,Option} from '../../src/sim/optutil';
 import type {World} from '../../src/sim/types';
 
@@ -14,6 +16,10 @@ export function survivalObserver(w:World){
   const chainDecisions:unknown[]=[];
   const lastChainDay=new Map<number,number>();
   const sampledPeople=new Set<string>();
+  const coldEpisodes:unknown[]=[];
+  const lastCold=new Map<number,number>();
+  const fittingSites=new Set<number>();
+  const hearthRelated=(a:{data:Record<string,any>;targetId?:number})=>a.data.improvement==='hearth'||a.data.hearth===true||!!a.targetId&&fittingSites.has(a.targetId);
   const related=(a:{kind:string;targetId?:number;goal?:string;label?:string})=>
     /keep spare food|preserv/i.test((a.goal??'')+' '+(a.label??''))||
     ['operate','deposit','withdraw'].includes(a.kind)&&w.buildings.some(b=>b.id===a.targetId&&b.type==='food_rack');
@@ -21,12 +27,20 @@ export function survivalObserver(w:World){
     onActivityStart(p,a){
       previous?.onActivityStart?.(p,a);
       if(related(a))inc(`chain starts:${a.kind}`);
+      if(hearthRelated(a))inc(`hearth starts:${a.kind}`);
+      if(a.kind==='hunt')inc('hunting pursuits started');
       if(a.kind==='operate'&&RECIPE_BY_ID[String(a.data.recipe)]?.preservation)inc(`starts:${a.data.recipe}`);
       if(a.kind==='plan_site'&&a.data.type==='food_rack')inc('starts:rack layout');
     },
     onActivityEnd(p,a,outcome,detail){
       previous?.onActivityEnd?.(p,a,outcome,detail);
       if(related(a))inc(`chain ends:${a.kind}:${outcome}:${detail}`);
+      if(hearthRelated(a))inc(`hearth ends:${a.kind}:${outcome}:${detail}`);
+      if(a.kind==='hunt'){
+        inc(`hunting ends:${outcome}:${detail}`);
+        const tries=Number(a.data.tries??0);
+        if(tries>0){inc('hunting actual strikes',tries);inc(outcome==='success'?'hunting kills':'hunting failed strikes');}
+      }
       if(a.kind==='operate'&&RECIPE_BY_ID[String(a.data.running??a.data.recipe)]?.preservation)inc(`ends:${outcome}:${detail}`);
       if(a.kind==='plan_site'&&a.data.type==='food_rack')inc(`rack layout ends:${outcome}:${detail}`);
     },
@@ -39,6 +53,9 @@ export function survivalObserver(w:World){
   };
   return {
     sample(ctx:Ctx,ranked:Option[]=[]){
+      inc('sampled personally visible deer',ctx.p.seen.filter(s=>s.ent==='animal'&&ctx.world.byId.get(s.id)?.ent==='animal'&&(ctx.world.byId.get(s.id) as {type?:string}).type==='deer').length);
+      inc('sampled eligible hunt offers',ctx.options.filter(o=>o.kind==='hunt').length);
+      for(const o of ctx.options)if(o.key.startsWith('hearth_'))inc(`sampled hearth offers:${o.kind}`);
       const raw=preservationSurplus(ctx);
       if(raw&&ctx.stage!=='child')inc(`sampled known surplus:${raw}`);
       for(const o of ctx.options)if(o.key==='plan_site:food_rack')inc('sampled offers:rack layout');
@@ -63,6 +80,22 @@ export function survivalObserver(w:World){
       }
     },
     tick(){
+      for(const s of w.sites)if(s.improvement==='hearth')fittingSites.add(s.id);
+      for(const p of w.persons)if(p.alive){
+        if(p.activity&&hearthRelated(p.activity))inc(`hearth person ticks:${p.activity.kind}:${p.activity.phase}`);
+        const b=p.indoors?w.byId.get(p.indoors):null;
+        if(b?.ent==='building'&&b.hearth&&b.hearth.heat>0){inc('hearth heated occupant ticks');inc('hearth occupant degree-ticks',b.hearth.heat);}
+        if(p.needs.warmth<=6){
+          const age=stageOf(w,p);inc(`exposure ticks:${age}`);
+          if(age==='child'&&w.tick-(lastCold.get(p.id)??-2400)>=2400){
+            lastCold.set(p.id,w.tick);
+            coldEpisodes.push({tick:w.tick,person:p.id,health:p.health,needs:{...p.needs},x:p.x,y:p.y,indoors:p.indoors??null,activity:p.activity?{kind:p.activity.kind,phase:p.activity.phase,target:p.activity.targetId}:null,
+              shelter:shelterAt(w,p.x,p.y,p),fire:p.indoors?0:fireWarmth(w,p.x,p.y),hearth:b?.ent==='building'?b.hearth:null,
+              household:w.persons.filter(q=>q.alive&&q.hhId===p.hhId&&q!==p).map(q=>({id:q.id,stage:stageOf(w,q),x:q.x,y:q.y,needs:{...q.needs},action:q.activity?.kind,target:q.activity?.targetId}))});
+            if(coldEpisodes.length>48)coldEpisodes.shift();
+          }
+        }
+      }
       for(const p of w.persons)if(p.alive&&p.activity&&related(p.activity))inc(`chain person ticks:${p.activity.kind}:${p.activity.phase}`);
       for(const b of w.buildings){
         const j=b.ops?.job;
@@ -74,7 +107,8 @@ export function survivalObserver(w:World){
         }
       }
     },
-    report(){return {counts,decisions,chainDecisions,racks:w.buildings.filter(b=>b.type==='food_rack').length,
+    report(){return {counts,decisions,chainDecisions,coldEpisodes,racks:w.buildings.filter(b=>b.type==='food_rack').length,
+      hearths:w.buildings.filter(b=>b.hearth).length,hearthFuelConsumed:w.ledger.reasons['-fuel for indoor hearth']??0,
       made:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.created[k]??0])),
       consumed:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.consumed[k]??0])),
       spoiled:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.spoiled[k]??0])),

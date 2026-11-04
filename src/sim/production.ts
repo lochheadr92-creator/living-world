@@ -1,4 +1,5 @@
 import {hasProjectAcquire} from './project_acquire';
+import {hearthOptions,knownColdHearth} from './hearth';
 import {hasPreservation} from './preservation';
 import {PRESERVED_FOODS} from './constants';
 import {hasMealLeftovers,mayTakeKnownPile} from './meal_leftovers';
@@ -1229,6 +1230,9 @@ export function productionOptions(ctx: Ctx): void {
   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
   if (p.health < 45) return;
   preservationOptions(ctx);
+  hearthOptions(ctx);
+  if(beliefsByKind(p,['building']).some(b=>knownColdHearth(ctx,b))&&fuelAvailable(world,p,'wood')<1&&fuelAvailable(world,p,'offcuts')<1&&hasOffcuts(world))
+    collectOptions(ctx,'offcuts',2,34,'reuse known offcuts to heat our home','fire',null);
   if(hasMealLeftovers(world)){
     // Only personally seen/heard household holdings; no lookup of a remote meal table.
     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));

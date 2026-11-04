@@ -1,4 +1,5 @@
 import {hasLivedLife} from './lived_life';
+import {hearthInstallBlock,isHearthAction,hearthFuelBegin,hearthFuelWork} from './hearth';
 import {hasPromiseTargets,observePromiseTarget,finishedSiteHere} from './promise_targets';
 import {hasPromiseKnowledge} from './promise_knowledge';
 import {homeLayoutConflict} from './home_replacement';
@@ -96,6 +97,10 @@ registerHandler('build', {
       return a.cycle > 0 ? 'done' : 'fail:the site is gone';
     }
     if (!mayWorkProject(world, p, site.id)) return 'fail:participation withdrawn';
+    if(site.improvement==='hearth'){
+      const block=hearthInstallBlock(world,p,site.upgradeOf??0);
+      if(block)return `fail:${block}`;
+    }
     faceToward(p, a.tx, a.ty);
     const cap = site.workTotal * Math.min(1, 0.06 + allowedFraction(site));
     if (site.work >= cap - 1e-9) {
@@ -131,7 +136,7 @@ registerHandler('build', {
       // everyone who put work into it finished it together (rich only: where a builder may take on an apprentice)
       const crew = world.persons.filter((q) => q.alive && (q === p || q.commitments.some((c) => c.siteId === site.id && (c.contrib ?? 0) > 0)));
       onSharedWork(world, crew, 'build');
-      addLog(world, p, 'work', `Finished building the ${buildingLabel(b.type)}.`);
+      addLog(world, p, 'work', site.improvement==='hearth'?`Finished fitting a hearth in the ${buildingLabel(b.type)}.`:`Finished building the ${buildingLabel(b.type)}.`);
       observe(world, p, b);
       observePromiseTarget(world,p,site.id,site.x+site.w/2,site.y+site.h/2,'completed here');
       delBelief(p, site.id);
@@ -342,6 +347,9 @@ registerHandler('plan_site', {
     const sx = a.data.sx as number;
     const sy = a.data.sy as number;
     const up = (a.data.upgradeOf as number) ?? 0;
+    if(a.data.improvement==='hearth'){
+      const block=hearthInstallBlock(world,p,up);if(block)return block;
+    }
     if (!up) for (let yy = sy; yy < sy + d.h; yy++) for (let xx = sx; xx < sx + d.w; xx++) if (!isFreeLand(world, xx, yy)) return 'the spot is no longer free';
     // someone may have started a project while this person was walking over
     const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0, { x: sx + d.w / 2, y: sy + d.h / 2 });
@@ -375,13 +383,16 @@ registerHandler('plan_site', {
       return 'fail:the footprint would obstruct access';
     }
     if (hasLayoutClaims(world)) { delete a.data.layoutWaitSince; a.blocked = ''; }
-    const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
+    if(a.data.improvement==='hearth'){
+      const block=hearthInstallBlock(world,p,up);if(block)return `fail:${block}`;
+    }
+    const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined,...(a.data.improvement==='hearth'?{improvement:'hearth' as const}:{}) });
     proposeProject(world, p, site, a.goal);
     observe(world, p, site);
     const hh = householdOf(world, p);
-    const verb = up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';
+    const verb = site.improvement==='hearth'?'marked out an indoor hearth for the':up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';
     addEvent(world, 'build', `${p.name} ${verb} ${buildingLabel(type)}${hh ? ` for the ${hh.name} household` : ''}.`.replace('a a ', 'a '), [p.id], sx, sy);
-    addLog(world, p, 'work', up ? `Marked out the ${buildingLabel(type)} that will replace our home.` : `Marked out a spot for a ${buildingLabel(type)}.`);
+    addLog(world, p, 'work', site.improvement==='hearth'?'Marked out an indoor hearth for our home.':up ? `Marked out the ${buildingLabel(type)} that will replace our home.` : `Marked out a spot for a ${buildingLabel(type)}.`);
     addFx(world, 'built', site.x + site.w / 2, site.y + site.h / 2, 0);
     a.targetId = site.id;
     return 'done';
@@ -393,6 +404,7 @@ registerHandler('fuel_fire', {
   availability: 0.5,
   pose: () => 'store',
   begin(world, p, a) {
+    if(isHearthAction(world,a))return hearthFuelBegin(world,p,a);
     const f = world.byId.get(a.targetId);
     if (!f || f.ent !== 'building' || f.type !== 'fire') {
       observePromiseTarget(world,p,a.targetId,a.tx,a.ty);
@@ -413,6 +425,7 @@ registerHandler('fuel_fire', {
     observe(world, p, f);
   },
   work(world, p, a): WorkResult {
+    if(isHearthAction(world,a))return hearthFuelWork(world,p,a);
     const f = world.byId.get(a.targetId);
     if (!f || f.ent !== 'building') {observePromiseTarget(world,p,a.targetId,a.tx,a.ty);return 'fail:the fire is gone';}
     faceToward(p, a.tx, a.ty);
@@ -433,6 +446,10 @@ registerHandler('fuel_fire', {
     return 'continue';
   },
   onEnd(world, p, a) {
+    if(isHearthAction(world,a)){
+      if(a.cycle>0)addLog(world,p,'work',`Fed the indoor hearth with ${a.cycle} ${fuelItem(world,a)}.`);
+      return;
+    }
     const f = world.byId.get(a.targetId);
     if (a.cycle > 0 && f && f.ent === 'building') {
       addLog(world, p, 'work', fuelItem(world,a)==='offcuts'?`Fed the fire with ${a.cycle} recovered offcut fuel bundle${a.cycle>1?'s':''}.`:`Fed the fire with ${a.cycle} log${a.cycle > 1 ? 's' : ''}.`);

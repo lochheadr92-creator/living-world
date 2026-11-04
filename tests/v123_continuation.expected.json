@@ -1,0 +1,30 @@
+{
+  "source": {
+    "head": "de35037cc65ce39ff0f54f27803312252470b01f",
+    "rules": 123,
+    "content": "a5e0a93bc805ec531315b0094b6f73d5f233afd4337ed2738b06c36f0727232c",
+    "note": "Recorded before any successor behaviour; paid hearth and ordinary continuation"
+  },
+  "ordinary": {
+    "saved": "d997ca3c45dd393dd9596278b29544499d032deef47afc5b11d71f5b797c5f60",
+    "uninterrupted": "67c86d41cd626db3c3bc94b2f74078efcf105df5183abca1f78838e766284e1f",
+    "continued": "67c86d41cd626db3c3bc94b2f74078efcf105df5183abca1f78838e766284e1f"
+  },
+  "working": {
+    "saved": "76281f8e56ab7b9b49fa19351f1ff07d704d883dad1e267b09092b1ebb6e755d",
+    "uninterrupted": "398644b286a0de86041013af6ee5964820ef73c572e4c2df24e791f8f4fe5b4b",
+    "continued": "398644b286a0de86041013af6ee5964820ef73c572e4c2df24e791f8f4fe5b4b"
+  },
+  "burning": {
+    "saved": "84039641c3c68f89c081d149e76e546deaf0fed73146545ddb6442ca810f04fa",
+    "uninterrupted": "2404767b7cf7088d6d61aba47ab4f74a32812d4541b99e483692194aa0f7fb33",
+    "continued": "2404767b7cf7088d6d61aba47ab4f74a32812d4541b99e483692194aa0f7fb33"
+  },
+  "cooling": {
+    "saved": "2404767b7cf7088d6d61aba47ab4f74a32812d4541b99e483692194aa0f7fb33",
+    "uninterrupted": "ed5ca262dd194a1b9319d3ecdca7e1cf846af8a10863da206ac6d4d97eaea3b1",
+    "continued": "ed5ca262dd194a1b9319d3ecdca7e1cf846af8a10863da206ac6d4d97eaea3b1"
+  },
+  "heat": 0.9996940107706167,
+  "fuelUsed": 2
+}

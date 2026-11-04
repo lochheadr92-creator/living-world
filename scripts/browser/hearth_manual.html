@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staged hearth verification</title></head><body>
+<div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+<div style="position:fixed;top:70px;left:10px;width:200px;z-index:2000;background:#15251c;padding:10px;color:white"><strong>STAGED hearth contract</strong> <button id="fuel">Run offered fuel work</button> <button id="cool">Run until fuel exhausted</button><output id="result"></output></div>
+<script type="module">
+import '/src/styles.css';
+import {Game} from '/src/app/game.ts';
+import {Renderer} from '/src/render/renderer.ts';
+import {mountUI} from '/src/ui/index.ts';
+import {project} from '/src/render/iso.ts';
+import {hearthScene} from '/tests/helpers/hearth.ts';
+import {generateOptions} from '/src/sim/decision.ts';
+import {startActivity,stepActivity} from '/src/sim/activities.ts';
+import {hearthTick} from '/src/sim/hearth.ts';
+import {serializeWorld,deserializeWorld} from '/src/app/save.ts';
+import {conservationReport} from '/src/sim/economy.ts';
+const {w,p,b}=hearthScene(),g=new Game(w.settings);g.restoreWorld(w,w.settings);g.setPlaying(false);g.select(b.id);
+const pt=project(41,41);g.camera={x:pt.sx+120,y:pt.sy,zoom:2};
+const renderer=new Renderer(document.getElementById('world'),g),ui=mountUI(g,document.getElementById('ui'));
+const result=document.getElementById('result');
+function verify(){const before=serializeWorld(w);ui.update(1);const pure=before===serializeWorld(w);const exact=before===serializeWorld(deserializeWorld(before));result.textContent=` Paid wood: ${w.ledger.consumed.wood??0}; indoors: ${p.indoors===b.id}; conservation: ${conservationReport(w).ok}; pure: ${pure}; exact save: ${exact}`;}
+document.getElementById('fuel').onclick=()=>{
+ const o=generateOptions(w,p,true,true).options.find(o=>o.key==='hearth_fuel:'+b.id);
+ if(!o){result.textContent='No fuel activity is currently offered';return;}
+ startActivity(w,p,o.make());for(let n=0;n<300&&p.activity;n++){w.tick++;stepActivity(w,p);}
+ for(let n=0;n<100;n++){w.tick++;hearthTick(w,b);}verify();
+};
+document.getElementById('cool').onclick=()=>{while(b.hearth.fuel>0){w.tick++;hearthTick(w,b);}verify();};
+function frame(){renderer.frame(0.016);ui.update(0.016);requestAnimationFrame(frame);}frame();verify();
+</script></body></html>

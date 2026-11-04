@@ -1,4 +1,5 @@
 import { updateEcology } from './ecology';
+import {hearthTick} from './hearth';
 import {runsPreservation} from './preservation';
 import {PRESERVED_FOODS} from './constants';
 import { updateFlood } from './flood';
@@ -189,6 +190,7 @@ function updateBuildings(world: World): void {
       }
       continue;
     }
+    hearthTick(world,b);
     b.condition -= DECAY_PER_TICK[b.type] * stormy;
     if (b.condition <= 0) {
       for (const p of world.persons) if (p.activity && p.activity.targetId === b.id) abortActivity(world, p, 'the building collapsed');
@@ -360,6 +362,9 @@ export function hashWorld(world: World, trace?: (part: string) => void): string 
   for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.ecology !== undefined || b.fallowUntil !== undefined) push('EcologyMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.ecology + ':' + b.fallowUntil);
   for (const s of world.sources) push(`S${s.id}:${s.amount},${r4(s.growth)},${s.reserved}`);
   for (const b of world.buildings) push(`B${b.id}:${b.type},${r4(b.condition)},${r4(b.fuel)},${JSON.stringify(b.store.items)}`);
+  for(const b of world.buildings)if(b.hearth)push('Hearth'+b.id+JSON.stringify(b.hearth));
+  for(const s of world.sites)if(s.improvement)push('Fitting'+s.id+':'+s.improvement+':'+s.upgradeOf);
+  for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.hearth)push('HearthMemory'+p.id+':'+b.id+JSON.stringify(b.hearth));
   for (const s of world.sites) push(`C${s.id}:${r4(s.work)},${JSON.stringify(s.delivered)},${JSON.stringify(s.used)}`);
   for (const pl of world.plots) push(`L${pl.id}:${pl.state},${r4(pl.progress)},${pl.stock},${pl.seedStock}`);
   for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);if(pile.estate)push(`Estate:${pile.id}:${JSON.stringify(pile.estate)}`);}

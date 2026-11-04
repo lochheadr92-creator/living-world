@@ -201,23 +201,97 @@ green claim is made. Mechanism/turn integration and bounded use are established;
 reliable uptake and causal survival benefit are unproven. Carcass/fat connections
 and final programme measurements remain required.
 
-## 2. Indoor heating — pending
+## 2. Indoor heating — rules 123 implemented; bounded ordinary activation
 
-Complete paid hearth/fuel/occupied heat/cooling chain and dependant connection.
-Source review identifies an existing in-place `Site.upgradeOf` construction path:
-the intended bounded extension is a hearth improvement on a real hut/house,
-with paid site inputs/work and one nullable hearth state owned by that building.
-This avoids adding a second crafting system or a free-standing building that
-pretends to be indoors. Existing `fuel_fire` labour and fuel conversion can serve
-the installed hearth, subject to actual room access. Room heat and remaining
-burn energy must persist; personal thermal knowledge must retain its observation
-age. Child rest/refuge already uses real home entry, but its effective connection
-to the new heat still needs tests and ordinary observation before delivery.
+The existing in-place construction path fits a hearth into an owned solid home
+for one wood, two stone and 160 work. It does not repair the home. Installation
+starts cold with no fuel. Existing material acquisition, hauling, building and
+`fuel_fire` activities supply and tend it; no separate inventory or scheduler.
+Each fuel unit takes 24 work and contributes the existing 380 burn ticks for
+wood or 190 for recovered offcuts. Capacity is 1,520 ticks. One tick burns per
+world tick; heat rises by 0.08 degrees per burn tick, up to 18 degrees, while
+losing 0.004–0.010 of its current value according to building condition.
+After exhaustion only cooling remains. Heat reaches actual occupants through
+`needs.ts`; outdoor fire heat remains excluded indoors.
+
+Choices use known household homes, personally felt cold/current local weather,
+unreserved carried fuel and independently dated indoor fuel observations.
+Exterior sight reveals the fitting but never refreshes remembered thermal state.
+Existing wood/offcut acquisition connects the cold-home cue to the next fuel
+trip. The lab ablation `rich-no-hearth` suppresses new choices; existing paid
+fittings keep burning and cooling. Old saves gain no fitting or heat, and malformed
+new thermal state is rejected. Destruction removes the fitting; interrupted work,
+competing tenders, full storage and excess materials settle physically.
+
+The final focused command covers hearth, habitation, preservation and immutable
+rules-122/123 continuations: 61 tests in five files passed, exit 0. The exact-full-
+pack correction was then checked by all nine hearth tests (exit 0). Typecheck and
+build each exit 2 solely on the two retained nullable review-test errors described
+above. Logs: `survival_evidence/resume-20261104/hearth-*`. Rules 123's immutable
+reference was captured before introducing any successor behaviour.
+
+`scripts/browser/hearth_check.mjs` runs through the supported CUA tab API, with
+six passing assertions in `survival_evidence/hearth-check2/rendered-report.json`.
+It checks actual fuel work, occupancy, heat, exhaustion, conservation, pure UI
+and exact saves. Success/failure screenshots were inspected. The first script
+launch using direct CDP was blocked by automatic approval review; the supported
+API replaced it. A first supported run found a collapsed inspector; its failed
+report is retained, and the setup now explicitly opens the inspector.
+
+Frozen `hearth-check1` retains the first candidate. `hearth-check2` adds correct
+project completion, capacity-safe excess material handling, and observer-only
+construction/hunting/exposure counters. Both 25-day Normal arrivals-on runs
+completed at tick 60,000, exit 0, with conservation, exact unobserved twins,
+save continuation and 500 pure-observer checks each:
+
+| Observation | Forest | River |
+|---|---:|---:|
+| Hearths remaining | 7 | 6 |
+| Fuel activities started / completed / interrupted | 42 / 33 / 9 | 64 / 47 / 17 |
+| Fuel units consumed (wood/offcuts) | 59 | 87 |
+| Fuel tending work / travel person-ticks | 1,429 / 1,538 | 2,135 / 2,770 |
+| Hearth construction work person-ticks | 3,788 | 5,126 |
+| Occupied ticks receiving heat | 48,228 | 87,594 |
+| People alive at day 25 (descriptive) | 2 | 23 |
+
+Failed layouts, missing building materials, changed ownership, interruptions and
+unfinished projects remain in the reports. These runs establish paid construction,
+renewed fuel supply and actual occupied heat, not reliable survival benefit.
+Forest's five hunting pursuits produced three actual strikes, all failed; river
+had no selected hunt. Sampled visible deer / eligible hunt offers were 146 / 38
+and 59 / 8 respectively; samples are not unique opportunities. Child-exposure
+episodes include travel outdoors and rests under lean-to cover. No transport
+repair is inferred from a death label or added in this increment.
+
+After freezing, save validation was strengthened so a missing fitting marker
+cannot turn a cheap hearth site into a home rebuild; cost key ordering remains
+valid. The ten hearth tests plus both predecessor references passed (12 total),
+and construction/home replacement/save/township/hearth regression passed 51 tests.
+All 269 checked runtime/config/observer files match frozen check2 except this
+validation-only difference and the rules-version comment. Both final saves load
+byte-exactly under the final validator and continue with conservation. Evidence:
+`hearth-check2/source-comparison.json` and `current-validation.json`.
+
+The broader check1 run exited 1: 416 files passed, 14 retained review files failed;
+2,505 tests passed, 33 failed, three expected failures (513.66 seconds). The two
+additional famine diagnostics lacked their historical input in the frozen tree.
+Supplying the exact original fixture (matching SHA-256) made both pass in a focused
+rerun; the other 31 are the previously reproduced review failures. No full-green
+claim is made. Verdict: **TURN_INTEGRATION_VERIFIED** for the bounded hearth chain;
+aggregate benefit and the remaining five families are unverified.
 
 ## 3. Clothing and bedding — pending
 
 Complete plant-fibre acquisition and actual finite protection first; hide branch
 remains pending until stream 4 supplies and prepares hides.
+Source audit found no existing fibre resource. The selected implementation route
+is bast fibre processed from physically gathered wood at the existing timber
+yard, followed by fibre equipment recipes there. This is an implementing-agent
+design choice, not a new owner decision. Reuse the durable equipment registry for
+identity, condition, holders and transfers; add explicit wetness and equipped/laid
+state, bounded to one garment/blanket per person and actual bedding places. Do not
+use cosmetic Look fields. Exposure instrumentation now records the child's actual
+location, action, cover and household situation before selecting any care repair.
 
 ## 4. Carcass recovery — pending
 
@@ -250,3 +324,17 @@ and declared horizon. Verify retained baseline provenance/completion before use.
 Use the documented cross-version comparison, never bypass `gates.ts` rules-version
 validation. Include food loss, exposure, fuel/feed/labour and displaced care/work;
 bounded activation, reliable uptake and measured benefit remain separate claims.
+
+Declared comparison design (before final treatment results): Normal, arrivals on,
+through day 25 (the second winter ends at day 24), 25 draws each in forest, river
+and meadow. Per seed: one control; nudges 1–8 at day 4; nudges 1–4 at days 2, 3,
+5 and 6. `scripts/survival_ensemble.ts` uses the existing lab nudge operation and
+collects whole-horizon age-specific hunger/exposure, ledger, time budgets and
+unfinished material/work. These draws share prefixes; do not describe them as
+75 independent worlds. Compare within each seed and report the limits of three
+terrain/seed contexts. The baseline is frozen at `61cb6e5` with only this observer
+runner added. Its forest control reproduced retained P0.1c's hash `ae96c7d7` and
+four survivors exactly, with conservation and exact save/continuation checks.
+The `b5694c7..61cb6e5` difference is documentation only. Baseline cohort work and
+launch status are in `survival_evidence/aggregate-baseline/`; do not infer the
+remaining draws completed merely from their launch.
