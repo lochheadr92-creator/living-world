@@ -15,6 +15,8 @@ export const CARCASS_LIFETIME=4800;
 const PARTS:CarcassPart[]=['meat','hide','fat'];
 const zero=()=>({meat:0,hide:0,fat:0});
 export const hasCarcasses=(w:World):boolean=>w.settings.dynamics==='rich'&&runsRulesVersion(w,125);
+/** Current recovery truth; retained origin records are not remaining products. */
+export const hasRecoverableParts=(w:World,b:Pile):boolean=>!!b.carcass&&w.tick-b.since<CARCASS_LIFETIME&&PARTS.some(k=>b.carcass!.remaining[k]>0);
 
 /** The one origin of recoverable parts. It consumes an actual live animal,
  * never a historical id or a second call on an already removed body. */

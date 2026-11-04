@@ -12,7 +12,7 @@ import {addLog} from './events';
 import {addOption,pen} from './optutil';
 import type {Ctx} from './optutil';
 import {hashString,hashUnit} from './rng';
-import {makeCarcass} from './carcass';
+import {makeCarcass,hasRecoverableParts} from './carcass';
 import {reservedFor} from './reserved_goods';
 import {harvestPressure} from './ecology';
 export const GEAR_WAIT=600,GEAR_CATCH_LIFE=1200,GEAR_ABANDON=48000;
@@ -60,7 +60,9 @@ registerHandler('gear_work',{
   if(op==='check'){
    g.checked=true;const n=b.items.fish??0;
    if(n){const got=transfer(w,b.items,p.inv,carryCap(w,p),'fish',n,'pile:'+b.id,'person:'+p.id,'collect net catch');observe(w,p,b);if(got<n)return 'partial:pack is full';}
-   addLog(w,p,'work',n?'Collected the net catch.':g.bodyId?'Checked the trap: a body needs butchering.':'Checked the '+g.kind+': empty.');
+   const caught=g.bodyId?w.byId.get(g.bodyId):undefined;
+   const lost=g.bodyId&&runsRulesVersion(w,133)&&!(caught?.ent==='pile'&&hasRecoverableParts(w,caught));
+   addLog(w,p,'work',n?'Collected the net catch.':lost?'Checked the trap: no recoverable catch remains.':g.bodyId?'Checked the trap: a body needs butchering.':'Checked the '+g.kind+': empty.');
   }else if(op==='reset')arm(w,g,t);
   else if(op==='repair'){consume(w,p.inv,'fibre',1,'repairing deployed gear');t.wear=Math.max(0,t.wear-40);if(g.state==='broken')g.state='ready';}
   else if(op==='retrieve'){transfer(w,b.items,p.inv,carryCap(w,p),g.kind,1,'pile:'+b.id,'person:'+p.id,'retrieve gear',t.id);unregisterPile(w,b);delBelief(p,b.id);return 'done';}

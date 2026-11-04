@@ -1,0 +1,19 @@
+{
+  "source": {
+    "head": "216619d59e9cc094accb797ee8d0426a4c791b48",
+    "rules": 133,
+    "content": "86210bc6355cf48e0d5b5400eaa7b7527d2d1757ec0a967e424f5ee0687301d7",
+    "note": "Recorded before successor behavior; ordinary and lost-trap-catch paid check continuations"
+  },
+  "ordinary": {
+    "saved": "05226c38bd6ef44bb9c45a627fc6b683d2a1a8b2fe408345a75427962732f924",
+    "continued": "d9ebe3e178c095ca580259c67459dadaebf5de2f4ae60216c8414cb40ab542d5"
+  },
+  "midCheck": "0ddcd881a2d2531b227361de24dc9900099adbeaa75c8c0f66b29bd6cd6840bb",
+  "checked": "78e62017302dd1441fa6872b48cd0fe0dbd2e1167041e4cff7031aa586a90fa0",
+  "log": {
+    "tick": 5072,
+    "text": "Checked the trap: no recoverable catch remains.",
+    "kind": "work"
+  }
+}
