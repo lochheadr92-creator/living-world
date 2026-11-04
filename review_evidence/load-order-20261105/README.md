@@ -44,3 +44,21 @@ sha256 in `A.large-files.sha256`.
 
 The watcher I wrote to wait for the runs looked for a day-21 line in B's log, but the driver stops at day 19, so it ran on after both
 runs had finished. It affected no result.
+
+## Rules 160 (branch `load-order`, unpublished)
+
+The repair the A/B points at: `src/app/save.ts` sorts each loaded grid cell by id when `runsRulesVersion(w, 160)`; below 160 a loaded
+world keeps its recorded order (so rules 159 and earlier replay exactly as before). Lab removal: none needed, the sort has no behaviour of its own.
+
+- **Live behaviour unchanged** (`live-unchanged.ts`, `live-unchanged-{forest,meadow,river}.log`): Normal worlds run 5 days at rules 159 and 160 are
+  identical except for the version label, no first-difference tick.
+- **Twin runs, rules 159 and 160** (`twin-days.ts`, `twin-large-river-r159.*`, `twin-large-river-r160.*`): 30-day Large river, exact twin compared
+  every day. Both match on all 30 days. So the 159 control is a **null** for the mismatch: it does not fail either way, which is why the A/B above
+  at rules 153 was needed.
+- **Tests:** `tests/load_order.test.ts`, 3 tests (id-ordered cells at 160 after load; old order kept at 159; an ordinary river world's cells equal
+  and a 2-day exact twin). Immutable continuation reference for 160 recorded (`a7f15a66`).
+- **Full suite** (`../agent-20261105-160/suite/`): 2,908 tests, 2,898 pass, 7 fail, 3 pending. The failures are the known load-only timeouts:
+  `lab_defaults` (3), `lab_report` (2), `zz_review_g_observer_purity` (1), `zz_review_main_toolreport_saves` (1) and a 10 s hook timeout in
+  `zz_review_h_retention`. **Isolated rerun on a quiet machine** (`../agent-20261105-160/isolated/rerun-quiet.log`): those files plus
+  `zz_review_b_observer_purity` and `load_order`, 7 files, 16 of 16 pass, exit 0.
+- **Not claimed:** any behavioural benefit. This changes only a loaded world's internal ordering, so a loaded copy replays like the live one.

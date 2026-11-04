@@ -1,0 +1,10 @@
+{
+ "profile": "large",
+ "seed": "river",
+ "rules": 159,
+ "days": 30,
+ "daysChecked": 30,
+ "firstMismatchDay": null,
+ "exactEqualEveryDay": true,
+ "mismatches": []
+}
