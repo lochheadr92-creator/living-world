@@ -74,7 +74,8 @@ export type BeliefKind =
   | 'clay_pit'
   | 'ore_vein'
   | 'outcrop'
-  | 'danger';
+  | 'danger'
+  | 'prey';
 
 /** What a person believes about one place/thing. Always a snapshot with a timestamp and an origin. */
 export interface Belief {

@@ -525,6 +525,90 @@ with a bounded dated deer-sighting-to-trap-site link under the next rules versio
 retain scarcity, catch chance and hunting behavior. Do not claim all seven
 families complete. Deferred ordinary hide/fat/preserved-meat use remains open.
 
+### Trap-site connection — rules127 candidate
+
+The forest126 trace motivates a bounded memory link, not more deer or stronger
+hunting. People retain up to four dated deer sightings through actual perception
+and the existing belief system. Newest dates/IDs retain a deterministic bounded
+set. A trap is commissioned and placed only when a known tree is within six
+tiles of one of those sightings; newest sightings are tried first, then the
+closest qualifying tree. Memories can be stale: choices do not inspect current
+hidden animal locations. All126 work, catch chance, ownership and loss remain.
+The goal names the dated sighting without asserting it was personally seen when
+it could have been reported. Older rules preserve their original behavior.
+
+Initial tests reproduced nearest-tree placement and unnecessary trap demand.
+Current six contracts cover observed/unobserved animals, bounded memory, exact
+saves/purity, old-rule refusal, actual offered placement through a caught body,
+and demand eligibility. The126 reference caught an accidental saved-goal change;
+it was corrected in source, never regenerated. Staged browser proof shows no
+site before observation and one real deer becoming a finite body and one eaten
+meat (`trap-ground-rendered-check1/`). These do not prove ordinary uptake.
+
+Frozen trap-ground-check1 forest/river25 runs predate the final demand link and
+neutral goal wording; preserve them as candidate evidence. Frozen check2 holds
+current source for forest/river25 and the affected test run. The earlier main
+`trap-ground-affected.log` is not accepted as stable-source evidence because
+source changed while it could still be active; its scope note preserves that
+limit. Typecheck1/build1 still show only the two existing review nullable errors.
+The current127 affected run passed70tests/10files in64.45s. Typecheck2/build2
+retain only the two unrelated nullable review errors. Reference127 was captured
+before the successor fix (digest9100b98c82e47eed8221a9d2ba8c51070e297167d32d5fc855429ac466e8b39a);
+its test and126 plus six feature contracts pass8tests/3files. Never regenerate it.
+Rendered check2 passes6assertions; the settled screenshot is
+`trap-ground-rendered-check2/trap-food-visible.png`.
+
+Fresh review classified a RUNTIME_LOGIC_BUG: check1 forest's trap owner924 switched
+grounds547->562->589->569 between39115and39319 without completing a placement.
+`currentUtility` treats an omitted current option as zero. A moving deer replaced
+the only offered ground, so the next review discarded the journey. A focused
+regression reproduces the missing option. Rules128 now retains at most the one
+already-selected, still-known tree beside the newest alternative, scored normally.
+It grants no sticky commitment or utility increase: critical thirst still interrupts.
+The saved activity already holds the selected place and original dated goal;
+no new beneficial save defaults or remote animal reads are needed.
+
+`trap-ground-kept-red.log` has the expected assertion failure. Final focused
+`trap-ground-kept-path2.log` passes37tests/5files, including both immutable126/127
+references, paid placement after the sighting moves, exact save and critical
+thirst interruption. The intermediate path failure was a fixture missing the
+ledger entry for an added tree; corrected without changing runtime or assertions.
+Frozen check3 is current128 source for new forest/river25 runs. Check1/2 remain
+127 evidence, not128 acceptance. Full128 command results, ordinary activation,
+reference128 and commit were initially pending. The captured128 reference now
+passes, including the retained journey after the deer moves; digest
+f031d7d052d73eb535a7952b1ab08d780d1a0816b2ac9127d3c616918a30ddb2.
+Final focused reference/gear set:30tests/5files,6.78s,exit0. Typecheck4/build4 each
+exit2 on only the two existing nullable review files; standalone Vite bundle
+passes. Rendered check4 has8passing assertions, and both settled success/failure
+images were inspected. The trap inspector distinguishes a present body, a body
+no longer here and no catch, and reads actual remaining decay time; it does not
+label trap outcomes as fish.
+
+The48,000-tick forest manufacturing diagnosis (`trap-ground-demand-trace/`) is
+observer-only and has no every-tick twin/source-change guard. It records5,859
+person samples,2,101 with prey and qualifying ground,1,539 with trap demand;
+only one sample had an offered key matching trap manufacture/collection or gear
+placement. The sample filter includes net placement, so this last count does
+not establish a trap-manufacture offer. Most recorded top choices concern
+immediate needs. This does not justify lowering costs or boosting utility.
+Meadow and aspen60-day runs are underway in final-source frozen check4 to test
+ordinary completion under different available work/supply histories.
+
+127 final-candidate forest25 ends10alive, river25ends27alive; neither made a trap.
+Forest made4nets,placed1,caught1fish,none collected; river made2nets,placed1,
+caught6,collected1,no directly attributed meal. Both exact twins/save+120,
+conservation and500pure samples pass.128forest25 likewise ends10alive; its
+river25 is still running. These are bounded observations, not benefit claims.
+The preceding126fern60 now completes28alive,72caught30collected22direct meals,
+13successful repairs,7full-pack partials and2trapplacements/0trapped bodies.
+Final126source replay is byte-identical (`gear-check4/fern-60d/replay-audit.json`).
+
+The dated-ground/retained-journey mechanism is implemented and tested, while
+ordinary trap-to-food completion is still open. Its frozen measurements can
+continue while the next single behaviour stream is developed. No family-wide
+completion or survival benefit is claimed.
+
 ## 6. Domestic animals — pending
 
 Species decision awaits source inspection. Account for recurring output and all

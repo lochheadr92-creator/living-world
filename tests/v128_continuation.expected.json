@@ -1,0 +1,74 @@
+{
+  "source": {
+    "head": "2fdf0ea159c56af9adac1ce24f376d34e5c6c976",
+    "rules": 128,
+    "content": "f031d7d052d73eb535a7952b1ab08d780d1a0816b2ac9127d3c616918a30ddb2",
+    "note": "Recorded before any successor behaviour; retained trap journey after a moving sighting and paid gear manufacture/placement continuation"
+  },
+  "ordinary": {
+    "saved": "1e5b182030bec2a24ff31814efa49bd58ca7c84f875844a2295f1db1671cab13",
+    "uninterrupted": "5369eb2409ff6a6559b1d8f4cbe1acdb376cd98c8e769f9f3cf12ad04df14187",
+    "continued": "5369eb2409ff6a6559b1d8f4cbe1acdb376cd98c8e769f9f3cf12ad04df14187"
+  },
+  "sighting": {
+    "saved": "ed3711f4760217c7f6f58c441fbb71bbcddc2d89a845a65ac615aee98bf0ac76",
+    "uninterrupted": "78254e3ff6591aaa4e2f6bfc61909d2ca2fef1b6b66cc3d0d747c39863f7260d",
+    "continued": "78254e3ff6591aaa4e2f6bfc61909d2ca2fef1b6b66cc3d0d747c39863f7260d"
+  },
+  "manufacture": {
+    "saved": "536ba54ae6365c4dba9a7162d5f25cebf75f8fe9910eedc20a19e30f332b8a0a",
+    "uninterrupted": "f058f9ae178cd5dd68a2c62836faabbe40377effde59d58f1985fe99c68ca737",
+    "continued": "f058f9ae178cd5dd68a2c62836faabbe40377effde59d58f1985fe99c68ca737"
+  },
+  "placing": {
+    "saved": "247a0682c74dac50dc3f74f89d90702d50bbdd4b9ae2ef7f45312e394c0fdb24",
+    "uninterrupted": "21354a130a817c5fa1113bcba2bbb537d259fa062c1cd8a33fdf3aa9351d61fd",
+    "continued": "21354a130a817c5fa1113bcba2bbb537d259fa062c1cd8a33fdf3aa9351d61fd"
+  },
+  "waiting": {
+    "saved": "7599b666eb399ce2162cd54fae3529d8c6d7784fc49acfd4aa107a814caeb70a",
+    "uninterrupted": "af97665e7a0cd7deaff6024fb4a8485603d1624cee02f552273c29bcde18ae52",
+    "continued": "af97665e7a0cd7deaff6024fb4a8485603d1624cee02f552273c29bcde18ae52"
+  },
+  "gear": [
+    {
+      "id": 11,
+      "items": {
+        "net": 1,
+        "fish": 2
+      },
+      "gear": {
+        "kind": "net",
+        "toolId": 7,
+        "owner": 2,
+        "hhId": 1,
+        "sourceId": 5,
+        "setAt": 325,
+        "readyAt": 925,
+        "cycle": 1,
+        "state": "ready",
+        "checked": false,
+        "catchTick": 925,
+        "bodyId": null,
+        "lastTended": 325
+      }
+    }
+  ],
+  "tool": {
+    "ent": "tool",
+    "id": 7,
+    "kind": "net",
+    "tier": 0,
+    "wear": 10,
+    "ownerHh": 1,
+    "holder": 11,
+    "loan": null,
+    "madeTick": 210,
+    "maker": 2
+  },
+  "consumed": {
+    "fibre": 3,
+    "wood": 2,
+    "fish": 2
+  }
+}

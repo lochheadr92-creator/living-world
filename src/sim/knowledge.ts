@@ -93,6 +93,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       return blank(e.id, 'grave', e.x + 0.5, e.y + 0.5, tick);
     }
     case 'animal': {
+      if(e.type==='deer'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,127)){const b=blank(e.id,'prey',e.x,e.y,tick);b.amount=1;b.max=1;return b;}
       const b = blank(e.id, 'danger', e.x, e.y, tick);
       b.amount = 1;
       return b;
@@ -125,6 +126,8 @@ export function putBelief(p: Person, b: Belief): void {
     if (arr) arr.splice(arr.indexOf(b.id), 1);
     (p.bykind[b.kind] ??= []).push(b.id);
   }
+  // Moving animals are remembered as four dated sightings, not a growing global herd map.
+  if(b.kind==='prey'){const sightings=Object.values(p.beliefs).filter(x=>x.kind==='prey').sort((a,b)=>b.seen-a.seen||b.id-a.id);for(const old of sightings.slice(4))delBelief(p,old.id);}
 }
 
 export function delBelief(p: Person, id: number): void {

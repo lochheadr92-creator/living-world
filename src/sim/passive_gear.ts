@@ -86,16 +86,29 @@ export function gearTick(w:World):void{
  }
 }
 export function knowsSetGear(ctx:Ctx,kind:'net'|'trap'):boolean{return Object.values(ctx.p.beliefs).some(b=>b.gear?.kind===kind&&b.gear.hhId===ctx.p.hhId);}
+/** Ground known from a bounded dated sighting, never the animal's current hidden position. */
+export function knownTrapGround(ctx:Ctx){
+ const {p}=ctx,trees=Object.values(p.beliefs).filter(b=>b.kind==='tree').sort((a,b)=>Math.hypot(p.x-a.x,p.y-a.y)-Math.hypot(p.x-b.x,p.y-b.y));
+ const sightings=Object.values(p.beliefs).filter(b=>b.kind==='prey').sort((a,b)=>b.seen-a.seen||b.id-a.id);
+ for(const sight of sightings){const ground=trees.filter(b=>Math.hypot(b.x-sight.x,b.y-sight.y)<=6).sort((a,b)=>Math.hypot(a.x-sight.x,a.y-sight.y)-Math.hypot(b.x-sight.x,b.y-sight.y))[0];if(ground)return {ground,sight};}
+}
 export function gearOptions(ctx:Ctx):void{
  const {world:w,p}=ctx;if(!hasGear(w)||ctx.stage==='child'||ctx.dangers.length)return;
- const offer=(op:string,id:number,x:number,y:number,base:number,toolId?:number)=>{
+ const offer=(op:string,id:number,x:number,y:number,base:number,toolId?:number,reason?:string)=>{
   if(recentFailure(w,p,id,240))return;const travel=Math.hypot(p.x-x,p.y-y)/Math.max(.03,ctx.speed),util=base-pen(travel)*.6;
-  if(util<5)return;addOption(ctx,{kind:'gear_work',key:`gear:${op}:${op==='place'?toolId+':':''}${id}`,label:`${op==='place'?'Set':op==='check'?'Check':op==='reset'?'Reset':op==='repair'?'Repair':'Retrieve'} ${op==='place'?'my gear':'the gear'}`,goal:'return later for food from finite local stocks',need:'hunger',util,parts:[['owned gear work',base],['walking',-pen(travel)*.6]],eta:travel+durations[op],targetId:id,tag:'food',make:()=>newActivity(w,p,{kind:'gear_work',label:op+' gear',goal:'use owned gear for food',targetId:id,targetType:op==='place'?'source':'pile',tx:x,ty:y,spotX:x,spotY:y,utility:util,minCommit:10,maxTicks:900,data:{op,toolId}})});
+  if(util<5)return;addOption(ctx,{kind:'gear_work',key:`gear:${op}:${op==='place'?toolId+':':''}${id}`,label:`${op==='place'?'Set':op==='check'?'Check':op==='reset'?'Reset':op==='repair'?'Repair':'Retrieve'} ${op==='place'?'my gear':'the gear'}`,goal:reason??'return later for food from finite local stocks',need:'hunger',util,parts:[['owned gear work',base],['walking',-pen(travel)*.6]],eta:travel+durations[op],targetId:id,tag:'food',make:()=>newActivity(w,p,{kind:'gear_work',label:op+' gear',goal:reason??'use owned gear for food',targetId:id,targetType:op==='place'?'source':'pile',tx:x,ty:y,spotX:x,spotY:y,utility:util,minCommit:10,maxTicks:900,data:{op,toolId}})});
  };
  for(const t of toolsHeldBy(w,p.id).filter(isGear)){
   if(t.loan||t.wear>=100||t.ownerHh!==p.hhId||knowsSetGear(ctx,t.kind as 'net'|'trap'))continue;
   const candidates=Object.values(p.beliefs).filter(b=>b.kind===(t.kind==='net'?'fish_spot':'tree')).sort((a,b)=>Math.hypot(p.x-a.x,p.y-a.y)-Math.hypot(p.x-b.x,p.y-b.y));
-  const b=candidates[0];if(b)offer('place',b.id,b.x+(t.kind==='trap'?1:0),b.y,35,t.id);
+  if(t.kind==='trap'&&runsRulesVersion(w,127)){
+   const target=knownTrapGround(ctx);if(target){const {ground,sight}=target;offer('place',ground.id,ground.x+1,ground.y,35,t.id,`set a trap near a deer sighting from ${w.tick-sight.seen} ticks ago`);}
+   // Like keepCurrent, retain one already-selected journey in the candidate set.
+   // A newer moving sighting does not erase the dated grounds for that journey.
+   const a=p.activity,selected=a?.kind==='gear_work'&&a.data.op==='place'&&a.data.toolId===t.id?p.beliefs[a.targetId]:undefined;
+   if(runsRulesVersion(w,128)&&selected?.kind==='tree'&&selected.id!==target?.ground.id)
+    offer('place',selected.id,selected.x+1,selected.y,35,t.id,a!.goal);
+  }else{const b=candidates[0];if(b)offer('place',b.id,b.x+(t.kind==='trap'?1:0),b.y,35,t.id);}
  }
  for(const b of Object.values(p.beliefs)){
   const g=b.gear;if(!g||g.hhId!==p.hhId)continue;
@@ -114,7 +127,7 @@ export function validateGear(w:World):void{
  for(const c of containers){check(c.items);for(const k of ['net','trap'] as const)if((c.items[k]??0)!==w.tools.filter(t=>t.holder===c.id&&t.kind===k).length)throw Error('gear count without physical record');}
  for(const l of [w.ledger.initial,w.ledger.created,w.ledger.consumed,w.ledger.spoiled])check(l);
  for(const t of w.tools)if(isGear(t)&&(!hasGear(w)||t.tier!==0||!Number.isFinite(t.wear)||t.wear<0||t.wear>100||!containers.some(c=>c.id===t.holder)))throw Error('invalid physical gear');
- for(const p of w.persons){for(const b of Object.values(p.beliefs)){check(b.items);if(b.gearStock&&(!hasGear(w)||!['building','cart','pile'].includes(b.kind)||!int(b.gearStock.observer)||!b.gearStock.items||Object.entries(b.gearStock.items).some(([k,n])=>!['net','trap'].includes(k)||!int(n))))throw Error('invalid owned gear observation');if(b.gear&&(!hasGear(w)||b.kind!=='pile'||!['net','trap'].includes(b.gear.kind)||!int(b.gear.readyAt)||!int(b.gear.toolId)||!int(b.gear.hhId)||typeof b.gear.checked!=='boolean'||!['armed','ready','broken'].includes(b.gear.state)||!Number.isFinite(b.gear.wear)||b.gear.wear<0||b.gear.wear>100||!int(b.gear.catch)||b.gear.catch>2))throw Error('invalid gear observation');}
+ for(const p of w.persons){const prey=Object.values(p.beliefs).filter(b=>b.kind==='prey');if(prey.length>4||prey.some(b=>!hasGear(w)||!runsRulesVersion(w,127)||!int(b.id)||b.id<=0||!Number.isFinite(b.x)||!Number.isFinite(b.y)||!int(b.seen)||b.seen>w.tick||b.amount!==1||b.max!==1))throw Error('invalid deer sighting');for(const b of Object.values(p.beliefs)){check(b.items);if(b.gearStock&&(!hasGear(w)||!['building','cart','pile'].includes(b.kind)||!int(b.gearStock.observer)||!b.gearStock.items||Object.entries(b.gearStock.items).some(([k,n])=>!['net','trap'].includes(k)||!int(n))))throw Error('invalid owned gear observation');if(b.gear&&(!hasGear(w)||b.kind!=='pile'||!['net','trap'].includes(b.gear.kind)||!int(b.gear.readyAt)||!int(b.gear.toolId)||!int(b.gear.hhId)||typeof b.gear.checked!=='boolean'||!['armed','ready','broken'].includes(b.gear.state)||!Number.isFinite(b.gear.wear)||b.gear.wear<0||b.gear.wear>100||!int(b.gear.catch)||b.gear.catch>2))throw Error('invalid gear observation');}
  for(const a of [p.activity,p.suspended])if(a?.kind==='gear_work'&&(!hasGear(w)||!Object.hasOwn(durations,a.data.op)||(a.phase==='work'&&(a.duration!==durations[a.data.op]||!int(a.progress)||a.progress>=a.duration))))throw Error('invalid gear work');}
  for(const b of w.buildings){const j=b.ops?.job;if(!j||!['make_net','make_trap'].includes(j.recipe))continue;
   const wood=j.recipe==='make_net'?2:4;

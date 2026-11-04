@@ -1,5 +1,5 @@
 import {knownGearStock} from './gear_stock';
-import {hasGear,knowsSetGear} from './passive_gear';
+import {hasGear,knowsSetGear,knownTrapGround} from './passive_gear';
 import {hasCarcasses} from './carcass';
 import {recipeAvailable} from './recipes';
 import {knownTextileStock} from './textile_stock';
@@ -599,7 +599,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
   const { world, p } = ctx;
   const out: Demand[] = [];
   if(hasGear(world)&&ctx.stage!=='child')for(const kind of ['net','trap'] as const){
-    const known=Object.values(p.beliefs).some(b=>b.kind===(kind==='net'?'fish_spot':'tree'));
+    const known=kind==='trap'&&runsRulesVersion(world,127)?!!knownTrapGround(ctx):Object.values(p.beliefs).some(b=>b.kind===(kind==='net'?'fish_spot':'tree'));
     if(known&&!p.inv[kind]&&!knowsSetGear(ctx,kind))out.push({item:kind,qty:1,have:0,base:28,why:'set owned gear for later food',tag:'craft'});
     if(Object.values(p.beliefs).some(b=>b.gear?.kind===kind&&b.gear.hhId===p.hhId&&b.gear.wear>=60)&&!p.inv.fibre)out.push({item:'fibre',qty:1,have:0,base:32,why:'mend owned gear',tag:'craft'});
   }

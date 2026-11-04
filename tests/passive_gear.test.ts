@@ -1,3 +1,4 @@
+import {carcassTick,CARCASS_LIFETIME} from '../src/sim/carcass';
 import {gearObserver} from '../scripts/observers/gear';
 import {expect,it} from 'vitest';
 import {stage,addPerson,done,learn,building} from './helpers/kit';
@@ -64,7 +65,9 @@ it('a trap consumes one real nearby deer into one body without telling a distant
  // Earlier staged deer are moved away; only this actual target is in reach.
  for(const a of w.animals)if(a!==deer){a.x=60;a.y=60;}p.x=10;p.y=10;w.tick=b.gear!.readyAt;gearTick(w);
  const corpse=w.piles.find(b=>b.carcass)!;expect(corpse.carcass!.animalId).toBe(deer.id);expect(w.animals).not.toContain(deer);expect(p.beliefs[corpse.id]).toBeUndefined();expect(p.inv.meat??0).toBe(0);gearTick(w);expect(w.piles.filter(b=>b.carcass)).toHaveLength(1);expect(conservationReport(w).ok).toBe(true);
- const before=serializeWorld(w);describeEntity(w,b.id);generateOptions(w,p,true,true);expect(serializeWorld(w)).toBe(before);
+ const before=serializeWorld(w);const view=describeEntity(w,b.id)!;expect(view.subtitle).toBe('Body awaiting butchery');expect(view.rows.find(r=>r[0]==='Catch')?.[1]).toBe(`Body #${corpse.id}`);generateOptions(w,p,true,true);expect(serializeWorld(w)).toBe(before);
+ w.tick=corpse.since+CARCASS_LIFETIME;carcassTick(w);w.tick+=120;carcassTick(w);
+ expect(describeEntity(w,b.id)!.rows.find(r=>r[0]==='Catch')?.[1]).toBe(`Body #${corpse.id} no longer here`);expect(conservationReport(w).ok).toBe(true);
 });
 it('rejects malformed catch state and premature completion without beneficial defaults',()=>{
  const {w,p,fish,t}=scene();act(w,p,fish.id,'place',t.id);finish(w,p);const b=w.piles.find(b=>b.gear)!;b.items.fish=2;expect(()=>deserializeWorld(serializeWorld(w))).toThrow(/gear/);delete b.items.fish;b.gear!.catchTick=1;expect(()=>deserializeWorld(serializeWorld(w))).toThrow(/gear/);

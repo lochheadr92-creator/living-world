@@ -1,3 +1,44 @@
+# Active survival continuation — dirty rules128, main2fdf0ea
+
+Still implementing the owner's entire seven-family programme, not complete.
+126 remains last commit. 127 immutable is now captured/passing before128:
+`tests/v127_continuation.expected.json`, digest9100b98c82e47eed8221a9d2ba8c51070e297167d32d5fc855429ac466e8b39a.
+Do not rewrite126/127 references.127 added dated trap ground + manufacture gate.
+Fresh review found repeated target switching as moving deer replaced the only
+eligible ground (check1 forest owner924, ticks39115–39319). Red test confirms.
+128 keeps at most one selected known tree beside the new alternative, using
+normal scores/review.37tests/5files pass including real placement, exact save,
+critical thirst override and126/127 references. UI inspector now distinguishes
+trap bodies/absent bodies from net fish;28tests/3files pass after that change.
+Final typecheck4/build4 retain only2known review nullable errors; Vite bundle passes.
+Browser `trap-ground-rendered-check4`8PASS after inspector wording edit;
+`trap_ground_check.mjs` now exists and includes moving-sighting placement.
+
+Frozen sources/runs (do not edit active measured files):
+-127 check1 forest+river25 complete: forest11alive/no trap placed, river25alive.
+-127 check2 forest25 complete10alive, river25complete27alive. Neither made a trap.
+ All exact twins/save/conserve/pure500. Original counter evidence retained.
+-127 check2 fern60 session90840, last74400/12alive/no gear yet.
+-128 check3 forest25 session90907, river25session35386; last24000.267src snapshot
+ predates presentation-only inspector edit. New source file manifest in
+ survival_evidence/resume-20261104/trap-ground-check3-source.json.
+-127 manufacturing diagnosis session16385 uses new observer-only
+ scripts/trap_ground_trace.ts in check2, target48000; output
+ survival_evidence/trap-ground-demand-trace. It samples known prey/ground/demand,
+ offers and competing decisions. Do not change demand just to force uptake.
+-126 check3 fern60 complete:28alive,72fishcaught30collected22directnetmeals,
+ 13successful repairs,7full-pack partials,2trapplacements0trappedbodies.
+ Final126source check4 replay session39702 running to60days; compare final bytes
+ to gear-check3/fern-60d when complete. This isolates earlier loan-capacity edit.
+
+Remaining: finish128 ordinary/diagnostic evidence and any justified connection;
+Immutable128 now captured/passing (f031d7d052d73eb535a7952b1ab08d780d1a0816b2ac9127d3c616918a30ddb2).
+Then focusedcommit, register/Brain checkpoint and continue domestic
+species, deferred hide/fat/preserved meat/wool, reserves LAST, final cohorts.
+Species/reserve implementation not started. Existing Brain checksum remains
+7bd70606b3b0510fff866678949deef50f3f720bfe481315efd56b5cae06c2aa.
+Start archive refresh succeeded(total2212). End refresh still required. No push.
+
 # Survival continuation — rules126 checkpoint, 4 November 2026
 
 Net route is observed end-to-end; physical traps work in staged tests but their

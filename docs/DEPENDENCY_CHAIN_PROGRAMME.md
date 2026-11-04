@@ -13,7 +13,8 @@ Rules125 adds finite carcasses and paid butchery: ordinary recovered meat is
 eaten, while ordinary hide/fat processing remains open despite complete staged
 paths. The later hide/wool links remain in the same capability document.
 Rules126 makes and deploys physical traps/nets; river25 proves net-caught fish eaten.
-The trap-site-to-witnessed-wildlife link and ordinary trap body remain open.
+Rules127–128 connect dated deer grounds and retain selected trap journeys;
+ordinary trap-to-food completion remains under frozen measurement.
 Domestic animals and reserves remain pending.
 Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
 
