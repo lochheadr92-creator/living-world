@@ -1,0 +1,6 @@
+{
+  "started": "2026-11-04T02:20:13.8186730+10:00",
+  "pid": 41060,
+  "source": "C:\\dev\\Claude Experiment\\living-world-survival-check10",
+  "command": "npm test -- --maxWorkers=8"
+}

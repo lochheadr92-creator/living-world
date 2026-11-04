@@ -1,0 +1,5 @@
+{
+  "status": "stopped; not acceptance evidence",
+  "reason": "Runtime sources changed after Vitest imported them and before queued updated tests loaded. Also source guard detected scripts changed. Focused consistent-source tests pass. Rerun full suite on frozen reviewed checkout.",
+  "time": "2026-11-04T13:45:55.664444"
+}

@@ -1,0 +1,139 @@
+- generic "The simulated world"
+- 'button "World menu. Current seed: forest"':
+  - generic: forest
+- button "Unfold the top bar" [pressed]:
+- group "World summary":
+  - generic: 07:12
+  - generic: 18 people
+- toolbar "Time controls":
+  - button "Play":
+  - button "Step forward one tick":
+  - generic: 1×
+- status:
+  - generic: Paused
+- generic: ▾
+- region "Happenings feed":
+  - button "Happenings":
+    - generic: Happenings
+- button "Hide the inspector" [expanded]:
+- complementary "Inspector":
+  - generic: "Y"
+  - heading "Yusuf" [level=2]
+  - button "Follow this person with the camera":
+    - generic: Follow
+  - button "Show on the map":
+  - button "Close inspector":
+  - generic "Age in years. A year of life takes 12 days here.": Adult, 31
+  - generic: Finch household
+  - generic: "Home: hut (63% sound)"
+  - generic: "Township: Willowbank"
+  - generic: Mood
+  - generic: Content
+  - generic: Health
+  - generic: "100"
+  - generic: On their mind
+  - generic: "+1"
+  - generic: Grief shared at the funeral
+  - region "What are they up to?":
+    - heading "What are they up to?" [level=3]
+    - button "More":
+      - generic: More
+    - definition: Picking fruit (81% of this task).
+    - definition:
+      - generic: 81%
+    - term:
+      - generic: What are they set on?
+    - definition: "See 1 fibre through at the timber yard. Step: collect fibre for fibre — settled on, not started. Planned production: bast fibre. Estimated work and firing: 60 ticks, plus travel and interruptions. Last change: collect: fibre. Set aside 5 times so far. · Put 4 units of food by for the household. Step: gather food to put by (4 more) — under way (Picking fruit). 0 of 4 units put by so far. Why: went hungry lately and there is next to nothing at home."
+  - generic: Needs
+  - group "Needs":
+    - meter "Food":
+      - generic: Food
+      - generic: "28"
+    - meter "Water":
+      - generic: Water
+      - generic: "50"
+    - meter "Energy":
+      - generic: Energy
+      - generic: "79"
+    - meter "Warmth":
+      - generic: Warmth
+      - generic: "55"
+    - meter "Safety":
+      - generic: Safety
+      - generic: "84"
+    - meter "Company":
+      - generic: Company
+      - generic: "64"
+  - meter "Stored nourishment":
+    - generic: Stored nourishment 36.0 / 36
+  - generic: Carrying
+  - img "4 seeds":
+    - generic: ×4
+  - img "1 stone":
+    - generic: ×1
+  - img "6 wood":
+    - generic: ×6
+  - generic: 18 / 18
+  - generic: Tools
+  - img "pickaxe, 15 percent worn":
+  - img "basket, 22 percent worn":
+  - generic "Township & shared work"
+  - generic "Household history"
+  - generic "Relationship history"
+  - generic "Recent decisions"
+  - button "Conversation" [expanded]:
+    - generic: Conversation
+  - group "Last conversation":
+    - generic: Last conversation
+    - generic: 1 world h 45 min ago
+    - button "Look at Hal": Hal
+    - generic: · asking for something
+    - term: Outcome
+    - definition: Refused (own need)
+  - button "Promises 1" [expanded]:
+    - generic: Promises
+    - generic: "1"
+  - generic: Moot
+  - generic: made 7 world days 14 h 29 min ago
+  - generic: Haul 2 stone to the building site, as promised to someone
+  - generic: 0 of 2 delivered · I saw the completed building at the site. My promised contribution remains 0/2; I do not claim the other work.
+  - button "Worries 5":
+    - generic: Worries
+    - generic: "5"
+  - group "More about them":
+    - button "Nearby":
+      - generic: Nearby
+    - button "People 14":
+      - generic: People
+      - generic: "14"
+    - button "Requests 2":
+      - generic: Requests
+      - generic: "2"
+    - button "Recent 14":
+      - generic: Recent
+      - generic: "14"
+    - button "Knows 698":
+      - generic: Knows
+      - generic: "698"
+    - button "Family":
+      - generic: Family
+    - button "Traits":
+      - generic: Traits
+- group "Map overlays":
+  - button "Perception overlay":
+  - button "Paths overlay":
+  - button "Intentions overlay":
+  - button "Knowledge overlay":
+  - button "Labels overlay":
+- generic "View"
+- option "Automatic" [selected]
+- option "Selected person only"
+- option "Hidden"
+- option "Normal" [selected]
+- option "Large"
+- option "Standard" [selected]
+- option "High"
+- status
+- strong: ORDINARY forest, day25
+- paragraph: Normal, arrivals on, no nudge. Yusuf has low immediate food satisfaction but paid nourishment remains. This is the unchanged saved world; no jobs or goods were assigned.
+- status: "Rules 132; tick 60000; exact saved state: true; conservation: true."

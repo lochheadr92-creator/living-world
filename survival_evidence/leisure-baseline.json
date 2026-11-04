@@ -1,0 +1,4240 @@
+{
+  "mode": "baseline",
+  "days": [
+    {
+      "tick": 2400,
+      "keys": [
+        "home"
+      ]
+    },
+    {
+      "tick": 4800,
+      "keys": [
+        "home"
+      ]
+    },
+    {
+      "tick": 7200,
+      "keys": [
+        "home",
+        "water",
+        "trees"
+      ]
+    },
+    {
+      "tick": 9600,
+      "keys": [
+        "home",
+        "water",
+        "trees"
+      ]
+    }
+  ],
+  "wanders": [
+    {
+      "tick": 565,
+      "person": 999,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about the camp",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 998,
+            "home": 0,
+            "injury": "well",
+            "family": "1:1000",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 280.1207,
+          "energy": 62.6073,
+          "warmth": 94.7401,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 589,
+      "person": 981,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 979,
+            "home": 980,
+            "injury": "well",
+            "family": "1:983",
+            "contact": "2:982,983",
+            "losses": "0:"
+          },
+          "eta": 392.0926,
+          "energy": 61.4643,
+          "warmth": 95.4013,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 694,
+      "person": 981,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 979,
+            "home": 980,
+            "injury": "well",
+            "family": "1:983",
+            "contact": "2:982,983",
+            "losses": "0:"
+          },
+          "eta": 241.4673,
+          "energy": 57.2643,
+          "warmth": 97.5554,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 1242,
+      "person": 963,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 957,
+            "home": 959,
+            "injury": "well",
+            "family": "0:",
+            "contact": "3:960,961,962",
+            "losses": "0:"
+          },
+          "eta": 343.4365,
+          "energy": 42.3782,
+          "warmth": 84.3223,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 1261,
+      "person": 974,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 972,
+            "home": 973,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 54.1048,
+          "energy": 46.0207,
+          "warmth": 99.1203,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · a change of scene +2 · spare time stays a fallback −1 · not much for it −1"
+      }
+    },
+    {
+      "tick": 2855,
+      "person": 987,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 1,
+          "context": {
+            "winter": false,
+            "household": 984,
+            "home": 985,
+            "injury": "cut:128",
+            "family": "0:",
+            "contact": "1:986",
+            "losses": "0:"
+          },
+          "eta": 442.6242,
+          "energy": 55.7318,
+          "warmth": 84.0667,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · a change of scene +2 · spare time stays a fallback −2"
+      }
+    },
+    {
+      "tick": 2980,
+      "person": 997,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 995,
+            "home": 1941,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 341.1096,
+          "energy": 61.122,
+          "warmth": 92.7768,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 3018,
+      "person": 983,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 979,
+            "home": 980,
+            "injury": "well",
+            "family": "0:",
+            "contact": "2:981,982",
+            "losses": "0:"
+          },
+          "eta": 425.6639,
+          "energy": 66.75,
+          "warmth": 93.5146,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · a change of scene +2 · spare time stays a fallback −2"
+      }
+    },
+    {
+      "tick": 3070,
+      "person": 993,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 992,
+            "home": 1592,
+            "injury": "well",
+            "family": "1:994",
+            "contact": "1:994",
+            "losses": "0:"
+          },
+          "eta": 357.2207,
+          "energy": 62.692,
+          "warmth": 95.3669,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2"
+      }
+    },
+    {
+      "tick": 3148,
+      "person": 1000,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about the camp",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 998,
+            "home": 0,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:999",
+            "losses": "0:"
+          },
+          "eta": 289.6051,
+          "energy": 68.0016,
+          "warmth": 98.3357,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2"
+      }
+    },
+    {
+      "tick": 3617,
+      "person": 991,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 988,
+            "home": 2096,
+            "injury": "well",
+            "family": "0:",
+            "contact": "2:989,990",
+            "losses": "0:"
+          },
+          "eta": 194.6033,
+          "energy": 54.0608,
+          "warmth": 86.3566,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2"
+      }
+    },
+    {
+      "tick": 4246,
+      "person": 1000,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 0,
+          "context": {
+            "winter": false,
+            "household": 998,
+            "home": 2446,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:999",
+            "losses": "0:"
+          },
+          "eta": 104.9035,
+          "energy": 90.64,
+          "warmth": 58.707,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2"
+      }
+    },
+    {
+      "tick": 4460,
+      "person": 962,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 0,
+          "context": {
+            "winter": false,
+            "household": 957,
+            "home": 959,
+            "injury": "well",
+            "family": "0:",
+            "contact": "3:960,961,963",
+            "losses": "0:"
+          },
+          "eta": 108.0017,
+          "energy": 90.3376,
+          "warmth": 57.959,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · a change of scene +2 · spare time stays a fallback −2"
+      }
+    },
+    {
+      "tick": 4976,
+      "person": 994,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 1,
+          "context": {
+            "winter": false,
+            "household": 992,
+            "home": 1592,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:993",
+            "losses": "0:"
+          },
+          "eta": 49.4705,
+          "energy": 89.4784,
+          "warmth": 77.3035,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 5004,
+      "person": 994,
+      "label": "Pottering about at the water's edge",
+      "data": {
+        "haunt": "water",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Stroll to the water's edge",
+          "kind": "wander",
+          "target": 0,
+          "phase": 1,
+          "context": {
+            "winter": false,
+            "household": 992,
+            "home": 1592,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:993",
+            "losses": "0:"
+          },
+          "eta": 107.6826,
+          "energy": 88.5824,
+          "warmth": 80.8231,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · the walk −2 · a change of scene +2"
+      }
+    },
+    {
+      "tick": 5120,
+      "person": 994,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 1,
+          "context": {
+            "winter": false,
+            "household": 992,
+            "home": 1592,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:993",
+            "losses": "0:"
+          },
+          "eta": 87.6643,
+          "energy": 84.8704,
+          "warmth": 90.389,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · been here lately −2 · spare time stays a fallback +1 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 5206,
+      "person": 994,
+      "label": "Sitting out among the trees",
+      "data": {
+        "haunt": "trees",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Wander out to the trees",
+          "kind": "wander",
+          "target": 0,
+          "phase": 1,
+          "context": {
+            "winter": false,
+            "household": 992,
+            "home": 1592,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:993",
+            "losses": "0:"
+          },
+          "eta": 147.0513,
+          "energy": 82.1184,
+          "warmth": 93.9941,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · the walk −2 · a change of scene +2 · spare time stays a fallback +1"
+      }
+    },
+    {
+      "tick": 5432,
+      "person": 994,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 992,
+            "home": 1592,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:993",
+            "losses": "0:"
+          },
+          "eta": 146.1617,
+          "energy": 74.8864,
+          "warmth": 97.2649,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · been here lately −1 · a favourite spot +1 · spare time stays a fallback +1"
+      }
+    },
+    {
+      "tick": 5773,
+      "person": 996,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 995,
+            "home": 1941,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 449.0654,
+          "energy": 45.1967,
+          "warmth": 73.6584,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 5915,
+      "person": 1004,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 1001,
+            "home": 1596,
+            "injury": "well",
+            "family": "0:",
+            "contact": "2:1002,1003",
+            "losses": "0:"
+          },
+          "eta": 278.1148,
+          "energy": 58.0272,
+          "warmth": 63.6115,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 6014,
+      "person": 960,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 957,
+            "home": 959,
+            "injury": "well",
+            "family": "2:962,963",
+            "contact": "3:961,962,963",
+            "losses": "0:"
+          },
+          "eta": 347.8291,
+          "energy": 35.5196,
+          "warmth": 57.331,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · a change of scene +2 · spare time stays a fallback −1"
+      }
+    },
+    {
+      "tick": 6819,
+      "person": 1002,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 0,
+          "context": {
+            "winter": false,
+            "household": 1001,
+            "home": 1596,
+            "injury": "well",
+            "family": "1:1004",
+            "contact": "2:1003,1004",
+            "losses": "0:"
+          },
+          "eta": 85.025,
+          "energy": 95.68,
+          "warmth": 45.6549,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2"
+      }
+    },
+    {
+      "tick": 7601,
+      "person": 963,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 1,
+          "context": {
+            "winter": false,
+            "household": 957,
+            "home": 959,
+            "injury": "well",
+            "family": "0:",
+            "contact": "3:960,961,962",
+            "losses": "0:"
+          },
+          "eta": 308.8181,
+          "energy": 79.5012,
+          "warmth": 84.6038,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 7680,
+      "person": 996,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 995,
+            "home": 1941,
+            "injury": "well",
+            "family": "0:",
+            "contact": "1:997",
+            "losses": "0:"
+          },
+          "eta": 399.3135,
+          "energy": 68.0691,
+          "warmth": 87.3987,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 7848,
+      "person": 997,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 995,
+            "home": 1941,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 412.7001,
+          "energy": 60.3334,
+          "warmth": 95.3273,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −2 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 8314,
+      "person": 999,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 998,
+            "home": 2446,
+            "injury": "well",
+            "family": "1:1000",
+            "contact": "1:1000",
+            "losses": "0:"
+          },
+          "eta": 320.8623,
+          "energy": 46.234,
+          "warmth": 89.4052,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    },
+    {
+      "tick": 8376,
+      "person": 1004,
+      "label": "Pottering about",
+      "data": {
+        "haunt": "home",
+        "optKey": "wander",
+        "dailyRoutine": {
+          "key": "wander",
+          "label": "Potter about near home",
+          "kind": "wander",
+          "target": 0,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 1001,
+            "home": 1596,
+            "injury": "well",
+            "family": "0:",
+            "contact": "2:1002,1003",
+            "losses": "0:"
+          },
+          "eta": 294.2893,
+          "energy": 54.7689,
+          "warmth": 85.6812,
+          "recorded": true
+        },
+        "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+      }
+    }
+  ],
+  "starts": {
+    "Picking berries": 239,
+    "Breaking new ground": 23,
+    "Chat with Zeke": 2,
+    "Family time with Nora": 4,
+    "Chopping wood": 119,
+    "Collecting 2 wood": 2,
+    "Fishing": 29,
+    "Marking out a lean-to": 6,
+    "Gathering wild grain": 74,
+    "Talking with Sven": 11,
+    "Foraging practice with Otto": 6,
+    "Chat with Basil": 1,
+    "Talking with Wen": 9,
+    "Chat with Tariq": 1,
+    "Family time with Clara": 1,
+    "Talking with Faye": 9,
+    "Foraging practice with Wren": 2,
+    "Talking with Mona": 13,
+    "Plant seed": 19,
+    "Finish preparing the field": 16,
+    "Tend the crops": 26,
+    "Bringing food home": 47,
+    "A guessing game with Fenn": 8,
+    "Tell Rhea about my tool work": 1,
+    "Talking with Quinn": 10,
+    "Chat with Faye": 2,
+    "A guessing game with Hugo": 4,
+    "Foraging practice with Talia": 1,
+    "Building the lean-to": 23,
+    "Foraging practice with Zeke": 3,
+    "Eating": 144,
+    "Talking with Mira": 14,
+    "Bringing water to Wen": 1,
+    "Foraging practice with Nora": 3,
+    "Foraging practice with Lena": 4,
+    "Family time with Hal": 1,
+    "Collecting 1 wood": 4,
+    "Foraging practice with Quinn": 6,
+    "Talking with Fenn": 9,
+    "Family time with Rhea": 2,
+    "Talking with Hal": 14,
+    "Talking with Wes": 12,
+    "A guessing game with Mona": 6,
+    "Talking with Hugo": 11,
+    "Ask for work cover from Leo": 4,
+    "Family time with Otto": 5,
+    "Foraging practice with Clara": 3,
+    "Delivering wood to the building site": 33,
+    "Talking with Bram": 6,
+    "Looking for timber": 6,
+    "Tell Petra about my tool work": 1,
+    "Talking with Abel": 5,
+    "Drinking at the water": 167,
+    "Exploring": 24,
+    "Eating at home": 36,
+    "Foraging practice with Rhea": 6,
+    "Foraging practice with Wilma": 3,
+    "Ask Faye for water": 2,
+    "A guessing game with Mira": 5,
+    "Drinking": 14,
+    "Ask Basil for wood": 3,
+    "A guessing game with Hal": 7,
+    "Bringing fruit to Wen": 1,
+    "Family time with Lena": 2,
+    "Bringing berries to Sven": 2,
+    "Bringing berries to Wen": 4,
+    "A guessing game with Wen": 8,
+    "Bringing water to Mona": 1,
+    "Breaking stone": 31,
+    "Pottering about": 25,
+    "Arguing with Wes": 1,
+    "Arguing with Otto": 1,
+    "Chat with Petra": 1,
+    "Bringing fruit to Sven": 2,
+    "Bringing berries and water to Hugo": 1,
+    "Bringing berries to Hal": 6,
+    "Making a hoe": 1,
+    "Inviting Petra to a meal": 1,
+    "Talking with Talia": 4,
+    "A guessing game with Sven": 3,
+    "Family time with Basil": 2,
+    "Ask Lena for wood": 1,
+    "Fetching water": 2,
+    "Resting": 23,
+    "Sleeping by my lean-to": 105,
+    "Going to eat at the fire": 1,
+    "Ask Otto for wood": 1,
+    "Ask Cole for wood": 3,
+    "Talking with Cole": 3,
+    "Inviting Quinn to the meal": 1,
+    "Going to lay the table at the fire": 1,
+    "Ask Wilma for wood": 1,
+    "Tell Abel about my tool work": 1,
+    "A guessing game with Wes": 2,
+    "Talking with Arlo": 4,
+    "Sleeping by the fire": 31,
+    "Staying at the fire": 22,
+    "Staying at my lean-to": 69,
+    "Running from the wolf toward the fire": 12,
+    "Marking out a hut": 8,
+    "Feeding the fire": 11,
+    "Tell Arlo about my tool work": 2,
+    "Tell Basil to stop my obsolete request": 1,
+    "Foraging practice with Tariq": 2,
+    "Foraging practice with Cole": 4,
+    "Warn Fenn about the wolf": 5,
+    "Chat with Mona": 1,
+    "Talking with Dov": 5,
+    "Arguing with Leo": 1,
+    "Arguing with Nora": 1,
+    "Ask Arlo for wood": 1,
+    "Bringing berries to Fenn": 2,
+    "Talking with Petra": 5,
+    "Warn Mona about the wolf": 3,
+    "Building the hut": 22,
+    "Offer Bram a swap: berries for wood": 1,
+    "Ask Quinn for wood": 1,
+    "Running from the wolf toward away from it": 17,
+    "Ask Cole for food": 5,
+    "Talking with Lena": 3,
+    "Tell Clara about my tool work": 1,
+    "Bringing fruit to Hugo": 1,
+    "Bringing berries to Hugo": 3,
+    "Family time with Fenn": 2,
+    "Making an axe": 2,
+    "Warn Wen about the wolf": 5,
+    "Warn Leo about the wolf": 3,
+    "Picking fruit": 47,
+    "Warn Hal about the wolf": 5,
+    "Talking with Tariq": 3,
+    "Ask Abel for stone": 2,
+    "Running from the wolf toward other people": 1,
+    "Warn Wren about the wolf": 2,
+    "Delivering stone to the building site": 8,
+    "Offer Abel a swap: fruit for stone": 1,
+    "Tell Dov about my tool work": 1,
+    "Foraging practice with Arlo": 1,
+    "Talking with Clara": 8,
+    "Warn Mira about the wolf": 6,
+    "Tell Lena to stop my obsolete request": 2,
+    "Family time with Cole": 1,
+    "Family time with Talia": 1,
+    "Offer berries to Tariq": 1,
+    "Taking grain to Tariq": 2,
+    "Family time with Quinn": 4,
+    "Offer grain to Tariq": 2,
+    "Ask Hal for water": 1,
+    "Talking with Rhea": 2,
+    "Ask Clara for wood": 1,
+    "Fetching water (promised)": 3,
+    "Family time with Dov": 2,
+    "Delivering wood & stone to the building site": 1,
+    "Leaving water at Rhea’s lean-to (promised)": 2,
+    "Bringing berries to Mona": 5,
+    "Chat with Rhea": 1,
+    "Taking fruit to Rhea": 1,
+    "Tell Clara to stop my obsolete request": 1,
+    "Ask Petra for wood": 1,
+    "Warn Dov about the wolf": 1,
+    "Ask Quinn for food": 3,
+    "Pottering about at the water's edge": 1,
+    "Foraging practice with Faye": 1,
+    "Foraging practice with Dov": 4,
+    "Leaving berries at Rhea’s lean-to (promised)": 1,
+    "Offer fruit to Abel": 2,
+    "Chat with Cole": 1,
+    "Talking with Wilma": 4,
+    "Sitting out among the trees": 1,
+    "Tell Mira my promised work is complete": 1,
+    "Talking with Basil": 1,
+    "Offer berries to Otto": 2,
+    "Collecting 1 grain": 1,
+    "Warn Cole about the wolf": 2,
+    "Sitting alone for a while": 2,
+    "Offer berries to Abel": 1,
+    "Explain to Cole why my promised work ended": 1,
+    "Offer grain to Abel": 1,
+    "Tell Rhea my promised work is complete": 1,
+    "Warming up by the fire": 16,
+    "Making a basket": 1,
+    "Foraging practice with Petra": 1,
+    "Foraging practice with Abel": 1,
+    "Offer Wes a swap: wood for berries": 1,
+    "Offer fruit to Nora": 1,
+    "Sheltering at the lean-to": 2,
+    "Sleeping by my hut": 6,
+    "Staying at my hut": 5,
+    "Tell Abel to stop my obsolete request": 1,
+    "Chat with Clara": 2,
+    "Warn Hugo about the wolf": 2,
+    "Taking berries to Bram": 1,
+    "Chat with Wen": 1,
+    "Bringing berries to Mira": 2,
+    "Foraging practice with Leo": 1,
+    "Warn Sven about the wolf": 4,
+    "Ask Lena for food": 2,
+    "Offer fish to Zeke": 1,
+    "Talking with Wren": 1,
+    "Repairing the lean-to": 2,
+    "Warn Wes about the wolf": 2,
+    "Bringing berries to Wes": 1,
+    "Ask Wes for food": 3,
+    "Bringing berries to Bram (promised)": 1,
+    "Running from the wolf toward home": 2,
+    "Warn Otto about the wolf": 1,
+    "Warn Petra about the wolf": 2,
+    "Ask Basil for food": 3,
+    "Ask Rhea for food": 4,
+    "Ask Wren for food": 1,
+    "Talking with Nora": 6,
+    "Warn Faye about the wolf": 1,
+    "Ask Hal for wood": 1,
+    "Talking with Leo": 2,
+    "Warn Rhea about the wolf": 1,
+    "Ask Wilma for food": 3,
+    "Ask Otto for food": 6,
+    "Offer Wren a swap: wood for berries": 1,
+    "Warn Zeke about the wolf": 1,
+    "Ask Fenn for food": 7,
+    "Ask Nora for food": 1,
+    "Ask Abel for food": 1,
+    "Talking with Zeke": 6,
+    "Ask Clara for food": 3,
+    "Ask Dov for food": 6,
+    "Ask Bram for stone": 1,
+    "Going to find Nora": 1,
+    "Ask Petra for food": 2,
+    "Offer berries to Sven": 1,
+    "Offer berries to Faye": 1,
+    "Offer fish to Nora": 1,
+    "Ask Mona for food": 2,
+    "Offer fish to Bram": 1,
+    "Offer berries to Zeke": 1,
+    "Offer fish to Sven": 1,
+    "Bringing grain to Nora (promised)": 1,
+    "Foraging practice with Basil": 1,
+    "Offer fish to Leo": 1,
+    "Taking grain to Clara": 1,
+    "Offer berries to Leo": 1,
+    "Leaving grain at Nora’s lean-to (promised)": 1,
+    "Ask Tariq for food": 4,
+    "Offer Cole a swap: wood for berries": 1,
+    "Ask Bram for food": 1,
+    "Taking food from the Sorrel household's store": 2,
+    "Taking fruit to Sven": 1,
+    "Offer berries to Hal": 1,
+    "Ask Zeke for food": 1,
+    "Explain to Petra why my promised work ended": 1,
+    "Offer Otto a swap: wood for berries": 1,
+    "Ask Leo for wood": 1,
+    "Ask Arlo for food": 1,
+    "Leaving berries at Quinn’s lean-to (promised)": 1,
+    "Offer grain to Zeke": 1,
+    "Offer grain to Hal": 1,
+    "Offer fish to Hal": 1,
+    "Warn Lena about the wolf": 1,
+    "Ask Hugo for food": 1,
+    "Bringing grain to Mona": 1,
+    "Ask Talia for food": 1,
+    "Offer grain to Leo": 1
+  },
+  "time": {
+    "method": "Start-of-tick living-person occupancy; exclusive categories, actual endings, sampled batch-step opportunities. Critical exposure uses fixed bodily thresholds, not anticipatory thirst. Failure recovery is idle within 80 ticks of failure/interruption. Aborted travel may have achieved partial useful work; it is not automatically wasted time. Open work spells are right-censored.",
+    "livingTicks": 268800,
+    "totals": {
+      "sleep": 64968,
+      "eating_drinking_warming": 9143,
+      "travel": 90726,
+      "work": 35179,
+      "social_contact": 36144,
+      "leisure": 252,
+      "waiting": 27680,
+      "failure_recovery": 256,
+      "rest": 3130,
+      "defence": 150,
+      "idle": 1172
+    },
+    "criticalTicks": 1557,
+    "criticalByNeed": {
+      "safety": 567,
+      "energy": 510,
+      "thirst": 19,
+      "hunger": 480
+    },
+    "starts": {
+      "gather": 539,
+      "till": 39,
+      "socialize": 317,
+      "withdraw": 7,
+      "plan_site": 14,
+      "converse": 180,
+      "plant": 19,
+      "tend": 26,
+      "deposit": 52,
+      "build": 45,
+      "eat": 144,
+      "give": 35,
+      "haul": 42,
+      "explore": 30,
+      "drink": 181,
+      "eat_store": 38,
+      "wander": 27,
+      "argue": 4,
+      "craft": 4,
+      "fetch_water": 5,
+      "rest": 121,
+      "sleep": 142,
+      "attend_meal": 1,
+      "host_meal": 1,
+      "flee": 32,
+      "fuel_fire": 11,
+      "visit": 7,
+      "alone": 2,
+      "warm": 16,
+      "repair": 2
+    },
+    "endings": {
+      "withdraw|success|done": 7,
+      "gather|failed|someone else is already taking it": 20,
+      "socialize|failed|Zeke was too busy to stop": 3,
+      "socialize|failed|Basil was too busy to stop": 4,
+      "gather|partial|someone else is already taking it": 42,
+      "socialize|failed|Wren was too busy to stop": 1,
+      "gather|success|done": 134,
+      "gather|partial|nothing left": 51,
+      "plan_site|failed|the household already has a home layout under way": 1,
+      "till|success|done": 18,
+      "converse|success|finished a conversation": 232,
+      "till|interrupted|something better came up": 19,
+      "plan_site|success|done": 10,
+      "plant|success|done": 18,
+      "tend|success|done": 24,
+      "socialize|failed|Fenn was too busy to stop": 4,
+      "socialize|failed|Hugo was too busy to stop": 2,
+      "gather|success|felled the tree": 17,
+      "converse|success|Family time completed: Family time together for 120 ticks.": 36,
+      "socialize|failed|Faye was too busy to stop": 4,
+      "plan_site|failed|too many projects under way already": 2,
+      "socialize|failed|Talia was too busy to stop": 1,
+      "gather|interrupted|something better came up": 177,
+      "socialize|failed|Hal was too busy to stop": 3,
+      "deposit|partial|no room for everything": 2,
+      "converse|success|Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.025.": 42,
+      "socialize|failed|Mona was too busy to stop": 5,
+      "gather|partial|the tree is used up": 4,
+      "converse|interrupted|invitation declined: I cannot teach you more about foraging yet": 4,
+      "build|interrupted|something better came up": 21,
+      "give|success|done": 22,
+      "haul|success|done": 36,
+      "eat|success|done": 141,
+      "socialize|failed|Rhea was too busy to stop": 2,
+      "drink|success|done": 165,
+      "eat_store|success|done": 33,
+      "build|partial|no materials to work with (4 wood)": 3,
+      "deposit|success|done": 44,
+      "socialize|failed|Wilma was too busy to stop": 2,
+      "till|failed|someone else is working that plot": 2,
+      "socialize|failed|Mira was already talking to someone": 3,
+      "haul|interrupted|something better came up": 6,
+      "explore|success|done": 14,
+      "socialize|failed|Quinn was too busy to stop": 3,
+      "give|failed|Wen has just been looked after": 1,
+      "gather|failed|it is gone": 19,
+      "argue|success|done": 4,
+      "wander|interrupted|something better came up": 22,
+      "socialize|failed|Mira was too busy to stop": 3,
+      "converse|success|A guessing game completed: A guessing game together for 120 ticks.": 18,
+      "socialize|interrupted|something better came up": 31,
+      "gather|failed|the source it was for was gone when the conversation ended": 2,
+      "socialize|failed|Petra was too busy to stop": 3,
+      "socialize|failed|Hal was already talking to someone": 2,
+      "converse|interrupted|invitation declined: I have already had that time today; I want to do something else now": 20,
+      "fetch_water|success|done": 5,
+      "drink|interrupted|something better came up": 9,
+      "build|success|done": 6,
+      "craft|success|done": 4,
+      "rest|interrupted|something better came up": 105,
+      "socialize|failed|Wen was too busy to stop": 3,
+      "build|failed|the site is already finished or gone": 3,
+      "rest|success|done": 3,
+      "explore|interrupted|something better came up": 8,
+      "attend_meal|success|done": 1,
+      "deposit|interrupted|something better came up": 6,
+      "host_meal|success|done": 1,
+      "sleep|interrupted|danger nearby": 2,
+      "flee|interrupted|something better came up": 23,
+      "sleep|success|rested": 132,
+      "plan_site|interrupted|something better came up": 1,
+      "give|failed|they had no room to carry it": 9,
+      "fuel_fire|success|done": 8,
+      "fuel_fire|interrupted|something better came up": 3,
+      "rest|success|daylight arrived": 11,
+      "sleep|success|morning came": 4,
+      "explore|interrupted|danger nearby": 5,
+      "socialize|failed|Tariq was too busy to stop": 1,
+      "socialize|failed|Cole was too busy to stop": 4,
+      "build|partial|no materials to work with (1 wood)": 1,
+      "plan_site|failed|another layout already reserves this footprint or its access gap": 1,
+      "socialize|failed|Mona was already talking to someone": 1,
+      "plant|failed|it is not ready for seed": 1,
+      "build|partial|no materials to work with (4 stone)": 2,
+      "build|partial|no materials to work with (8 wood, 4 stone)": 4,
+      "flee|success|done": 3,
+      "gather|failed|nothing left": 32,
+      "build|failed|the site it was for was gone when the conversation ended": 1,
+      "give|failed|Hugo is already being attended to": 1,
+      "gather|interrupted|danger nearby": 10,
+      "explore|failed|no way to get there": 1,
+      "socialize|failed|Otto was too busy to stop": 3,
+      "socialize|interrupted|danger nearby": 1,
+      "wander|interrupted|danger nearby": 1,
+      "flee|failed|no way to get there": 6,
+      "socialize|failed|Wen was already talking to someone": 1,
+      "converse|success|Foraging practice completed: Foraging practice together for 160 ticks; foraging skill improved by 0.0079.": 2,
+      "socialize|failed|Fenn was already talking to someone": 4,
+      "plan_site|interrupted|danger nearby": 1,
+      "drink|interrupted|danger nearby": 2,
+      "visit|failed|Tariq was not where I expected": 1,
+      "visit|success|done": 2,
+      "rest|interrupted|danger nearby": 2,
+      "sleep|interrupted|a more urgent need (energy)": 1,
+      "drink|interrupted|a more urgent need (energy)": 1,
+      "socialize|failed|Rhea had more pressing needs": 1,
+      "give|failed|Hal has just been looked after": 1,
+      "build|partial|no materials to work with (3 stone)": 1,
+      "wander|success|done": 4,
+      "socialize|failed|they walked away": 5,
+      "socialize|failed|Wes wanted to finish some quiet time": 1,
+      "socialize|failed|Abel had more pressing needs": 3,
+      "alone|interrupted|something better came up": 1,
+      "gather|failed|no way to get there": 15,
+      "converse|interrupted|time together unfinished: we did not get to spend the requested time together": 4,
+      "eat|interrupted|something better came up": 1,
+      "warm|success|done": 11,
+      "build|partial|no materials to work with (2 stone)": 1,
+      "build|partial|completed the planned 23-tick work spell; unfinished work remains at the place": 1,
+      "build|partial|the building is complete; my contribution is the work I actually did": 1,
+      "tend|interrupted|something better came up": 1,
+      "warm|interrupted|something better came up": 5,
+      "socialize|failed|they are inside a different space": 1,
+      "eat|interrupted|danger nearby": 1,
+      "visit|failed|Bram was not where I expected": 1,
+      "socialize|failed|Leo was too busy to stop": 1,
+      "socialize|failed|Zeke had more pressing needs": 2,
+      "socialize|failed|Lena was already talking to someone": 2,
+      "socialize|failed|Hugo was already talking to someone": 1,
+      "repair|interrupted|something better came up": 1,
+      "socialize|failed|Sven was too busy to stop": 1,
+      "eat_store|interrupted|something better came up": 5,
+      "socialize|failed|Wes was already talking to someone": 1,
+      "socialize|failed|Leo was already talking to someone": 1,
+      "socialize|failed|Wren was already talking to someone": 1,
+      "socialize|failed|Wilma was already talking to someone": 1,
+      "socialize|failed|Nora was already talking to someone": 2,
+      "socialize|failed|Otto was already talking to someone": 1,
+      "socialize|failed|Nora had more pressing needs": 2,
+      "alone|partial|company came": 1,
+      "socialize|failed|Dov was already talking to someone": 2,
+      "socialize|failed|Quinn was already talking to someone": 2,
+      "visit|failed|Nora was not where I expected": 1,
+      "socialize|failed|Clara was too busy to stop": 1,
+      "socialize|failed|Faye had more pressing needs": 1,
+      "socialize|failed|Bram was too busy to stop": 1,
+      "visit|failed|Clara was not where I expected": 1,
+      "give|failed|Nora was not where I expected": 1,
+      "socialize|failed|Cole had more pressing needs": 1,
+      "socialize|failed|Lena was too busy to stop": 1,
+      "socialize|failed|Arlo was already talking to someone": 1,
+      "visit|failed|Sven was not where I expected": 1,
+      "socialize|failed|Clara was asleep": 1,
+      "socialize|failed|Fenn was asleep": 1,
+      "sleep|interrupted|a more urgent need (hunger)": 1,
+      "socialize|failed|Hal had more pressing needs": 1,
+      "sleep|interrupted|woken to be fed": 1,
+      "socialize|failed|could not find them": 1,
+      "socialize|failed|Leo had more pressing needs": 1
+    },
+    "blockedTicks": {
+      "waiting for 4 wood": 315,
+      "waiting for 1 wood": 159,
+      "waiting for 2 wood": 176,
+      "waiting for 4 wood, 4 stone": 76,
+      "waiting for 8 wood, 4 stone": 326,
+      "waiting for 3 wood, 4 stone": 18,
+      "waiting for 4 stone": 66,
+      "waiting for 3 stone": 276,
+      "waiting for 2 stone": 80,
+      "waiting for 1 stone": 45
+    },
+    "failedTravel": {
+      "gather|failed|someone else is already taking it": {
+        "endings": 15,
+        "travelTicks": 790,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Zeke was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 115,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Basil was too busy to stop": {
+        "endings": 4,
+        "travelTicks": 123,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Wren was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 3,
+        "repeatEndings": 0
+      },
+      "till|interrupted|something better came up": {
+        "endings": 19,
+        "travelTicks": 1481,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Fenn was too busy to stop": {
+        "endings": 4,
+        "travelTicks": 78,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Hugo was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 3,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Faye was too busy to stop": {
+        "endings": 4,
+        "travelTicks": 115,
+        "repeatEndings": 1
+      },
+      "plan_site|failed|too many projects under way already": {
+        "endings": 2,
+        "travelTicks": 119,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Talia was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 19,
+        "repeatEndings": 0
+      },
+      "gather|interrupted|something better came up": {
+        "endings": 172,
+        "travelTicks": 11528,
+        "repeatEndings": 17
+      },
+      "socialize|failed|Hal was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 13,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Mona was too busy to stop": {
+        "endings": 4,
+        "travelTicks": 83,
+        "repeatEndings": 0
+      },
+      "converse|interrupted|invitation declined: I cannot teach you more about foraging yet": {
+        "endings": 2,
+        "travelTicks": 90,
+        "repeatEndings": 0
+      },
+      "build|interrupted|something better came up": {
+        "endings": 15,
+        "travelTicks": 838,
+        "repeatEndings": 4
+      },
+      "socialize|failed|Rhea was too busy to stop": {
+        "endings": 2,
+        "travelTicks": 14,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Wilma was too busy to stop": {
+        "endings": 2,
+        "travelTicks": 113,
+        "repeatEndings": 0
+      },
+      "till|failed|someone else is working that plot": {
+        "endings": 2,
+        "travelTicks": 37,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Mira was already talking to someone": {
+        "endings": 3,
+        "travelTicks": 119,
+        "repeatEndings": 0
+      },
+      "haul|interrupted|something better came up": {
+        "endings": 6,
+        "travelTicks": 420,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Quinn was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 31,
+        "repeatEndings": 0
+      },
+      "give|failed|Wen has just been looked after": {
+        "endings": 1,
+        "travelTicks": 16,
+        "repeatEndings": 0
+      },
+      "gather|failed|it is gone": {
+        "endings": 19,
+        "travelTicks": 1329,
+        "repeatEndings": 0
+      },
+      "wander|interrupted|something better came up": {
+        "endings": 22,
+        "travelTicks": 1759,
+        "repeatEndings": 7
+      },
+      "socialize|failed|Mira was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 83,
+        "repeatEndings": 1
+      },
+      "socialize|interrupted|something better came up": {
+        "endings": 31,
+        "travelTicks": 1699,
+        "repeatEndings": 8
+      },
+      "gather|failed|the source it was for was gone when the conversation ended": {
+        "endings": 2,
+        "travelTicks": 20,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Petra was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 139,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Hal was already talking to someone": {
+        "endings": 2,
+        "travelTicks": 168,
+        "repeatEndings": 0
+      },
+      "converse|interrupted|invitation declined: I have already had that time today; I want to do something else now": {
+        "endings": 10,
+        "travelTicks": 227,
+        "repeatEndings": 1
+      },
+      "drink|interrupted|something better came up": {
+        "endings": 9,
+        "travelTicks": 654,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Wen was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 62,
+        "repeatEndings": 1
+      },
+      "build|failed|the site is already finished or gone": {
+        "endings": 3,
+        "travelTicks": 232,
+        "repeatEndings": 1
+      },
+      "explore|interrupted|something better came up": {
+        "endings": 8,
+        "travelTicks": 1374,
+        "repeatEndings": 3
+      },
+      "deposit|interrupted|something better came up": {
+        "endings": 6,
+        "travelTicks": 626,
+        "repeatEndings": 1
+      },
+      "sleep|interrupted|danger nearby": {
+        "endings": 2,
+        "travelTicks": 43,
+        "repeatEndings": 0
+      },
+      "rest|interrupted|something better came up": {
+        "endings": 14,
+        "travelTicks": 178,
+        "repeatEndings": 3
+      },
+      "flee|interrupted|something better came up": {
+        "endings": 23,
+        "travelTicks": 1271,
+        "repeatEndings": 11
+      },
+      "plan_site|interrupted|something better came up": {
+        "endings": 1,
+        "travelTicks": 97,
+        "repeatEndings": 0
+      },
+      "give|failed|they had no room to carry it": {
+        "endings": 9,
+        "travelTicks": 272,
+        "repeatEndings": 5
+      },
+      "fuel_fire|interrupted|something better came up": {
+        "endings": 3,
+        "travelTicks": 198,
+        "repeatEndings": 0
+      },
+      "explore|interrupted|danger nearby": {
+        "endings": 5,
+        "travelTicks": 455,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Tariq was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 20,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Cole was too busy to stop": {
+        "endings": 4,
+        "travelTicks": 60,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Mona was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 7,
+        "repeatEndings": 0
+      },
+      "plant|failed|it is not ready for seed": {
+        "endings": 1,
+        "travelTicks": 49,
+        "repeatEndings": 0
+      },
+      "gather|failed|nothing left": {
+        "endings": 32,
+        "travelTicks": 2599,
+        "repeatEndings": 6
+      },
+      "build|failed|the site it was for was gone when the conversation ended": {
+        "endings": 1,
+        "travelTicks": 44,
+        "repeatEndings": 0
+      },
+      "give|failed|Hugo is already being attended to": {
+        "endings": 1,
+        "travelTicks": 29,
+        "repeatEndings": 0
+      },
+      "gather|interrupted|danger nearby": {
+        "endings": 10,
+        "travelTicks": 451,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Otto was too busy to stop": {
+        "endings": 3,
+        "travelTicks": 175,
+        "repeatEndings": 0
+      },
+      "socialize|interrupted|danger nearby": {
+        "endings": 1,
+        "travelTicks": 47,
+        "repeatEndings": 0
+      },
+      "wander|interrupted|danger nearby": {
+        "endings": 1,
+        "travelTicks": 55,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Wen was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 7,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Fenn was already talking to someone": {
+        "endings": 4,
+        "travelTicks": 152,
+        "repeatEndings": 1
+      },
+      "plan_site|interrupted|danger nearby": {
+        "endings": 1,
+        "travelTicks": 16,
+        "repeatEndings": 0
+      },
+      "drink|interrupted|danger nearby": {
+        "endings": 2,
+        "travelTicks": 31,
+        "repeatEndings": 0
+      },
+      "visit|failed|Tariq was not where I expected": {
+        "endings": 1,
+        "travelTicks": 111,
+        "repeatEndings": 0
+      },
+      "sleep|interrupted|a more urgent need (energy)": {
+        "endings": 1,
+        "travelTicks": 457,
+        "repeatEndings": 0
+      },
+      "drink|interrupted|a more urgent need (energy)": {
+        "endings": 1,
+        "travelTicks": 36,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Rhea had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 2,
+        "repeatEndings": 0
+      },
+      "give|failed|Hal has just been looked after": {
+        "endings": 1,
+        "travelTicks": 111,
+        "repeatEndings": 0
+      },
+      "socialize|failed|they walked away": {
+        "endings": 5,
+        "travelTicks": 238,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Wes wanted to finish some quiet time": {
+        "endings": 1,
+        "travelTicks": 70,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Abel had more pressing needs": {
+        "endings": 3,
+        "travelTicks": 105,
+        "repeatEndings": 0
+      },
+      "alone|interrupted|something better came up": {
+        "endings": 1,
+        "travelTicks": 86,
+        "repeatEndings": 0
+      },
+      "converse|interrupted|time together unfinished: we did not get to spend the requested time together": {
+        "endings": 2,
+        "travelTicks": 90,
+        "repeatEndings": 0
+      },
+      "eat|interrupted|something better came up": {
+        "endings": 1,
+        "travelTicks": 1,
+        "repeatEndings": 0
+      },
+      "tend|interrupted|something better came up": {
+        "endings": 1,
+        "travelTicks": 1,
+        "repeatEndings": 0
+      },
+      "warm|interrupted|something better came up": {
+        "endings": 5,
+        "travelTicks": 366,
+        "repeatEndings": 0
+      },
+      "visit|failed|Bram was not where I expected": {
+        "endings": 1,
+        "travelTicks": 32,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Leo was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 2,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Zeke had more pressing needs": {
+        "endings": 2,
+        "travelTicks": 31,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Lena was already talking to someone": {
+        "endings": 2,
+        "travelTicks": 75,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Hugo was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 47,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Sven was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 87,
+        "repeatEndings": 0
+      },
+      "eat_store|interrupted|something better came up": {
+        "endings": 5,
+        "travelTicks": 339,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Wes was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 1,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Leo was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 4,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Wren was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 19,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Wilma was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 86,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Nora was already talking to someone": {
+        "endings": 2,
+        "travelTicks": 67,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Otto was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 51,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Nora had more pressing needs": {
+        "endings": 2,
+        "travelTicks": 24,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Dov was already talking to someone": {
+        "endings": 2,
+        "travelTicks": 70,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Quinn was already talking to someone": {
+        "endings": 2,
+        "travelTicks": 52,
+        "repeatEndings": 1
+      },
+      "visit|failed|Nora was not where I expected": {
+        "endings": 1,
+        "travelTicks": 41,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Clara was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 18,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Faye had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 29,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Bram was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 40,
+        "repeatEndings": 0
+      },
+      "visit|failed|Clara was not where I expected": {
+        "endings": 1,
+        "travelTicks": 35,
+        "repeatEndings": 0
+      },
+      "give|failed|Nora was not where I expected": {
+        "endings": 1,
+        "travelTicks": 171,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Cole had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 25,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Lena was too busy to stop": {
+        "endings": 1,
+        "travelTicks": 75,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Arlo was already talking to someone": {
+        "endings": 1,
+        "travelTicks": 51,
+        "repeatEndings": 0
+      },
+      "visit|failed|Sven was not where I expected": {
+        "endings": 1,
+        "travelTicks": 157,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Clara was asleep": {
+        "endings": 1,
+        "travelTicks": 128,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Fenn was asleep": {
+        "endings": 1,
+        "travelTicks": 8,
+        "repeatEndings": 1
+      },
+      "sleep|interrupted|a more urgent need (hunger)": {
+        "endings": 1,
+        "travelTicks": 201,
+        "repeatEndings": 0
+      },
+      "socialize|failed|Hal had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 36,
+        "repeatEndings": 0
+      },
+      "sleep|interrupted|woken to be fed": {
+        "endings": 1,
+        "travelTicks": 46,
+        "repeatEndings": 0
+      },
+      "socialize|failed|could not find them": {
+        "endings": 1,
+        "travelTicks": 55,
+        "repeatEndings": 1
+      },
+      "socialize|failed|Leo had more pressing needs": {
+        "endings": 1,
+        "travelTicks": 9,
+        "repeatEndings": 0
+      }
+    },
+    "completedWorkSpells": {
+      "1-29": 272,
+      "30-119": 313,
+      "120-299": 70
+    },
+    "openWorkSpells": [
+      {
+        "activity": 4442,
+        "ticks": 13
+      },
+      {
+        "activity": 4478,
+        "ticks": 9
+      }
+    ],
+    "sampleCounts": {
+      "activeBatch": 0,
+      "stepOffered": 0,
+      "stepEligible": 0,
+      "stepRankedFirst": 0,
+      "noProductionMargin": 0,
+      "omittedRows": 0
+    },
+    "people": {
+      "960": {
+        "name": "Rhea",
+        "hh": 957,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2913,
+          "eating_drinking_warming": 243,
+          "travel": 3557,
+          "work": 902,
+          "social_contact": 1852,
+          "leisure": 0,
+          "waiting": 0,
+          "failure_recovery": 5,
+          "rest": 96,
+          "defence": 0,
+          "idle": 32
+        },
+        "criticalTicks": 89
+      },
+      "961": {
+        "name": "Quinn",
+        "hh": 957,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2807,
+          "eating_drinking_warming": 235,
+          "travel": 2621,
+          "work": 1605,
+          "social_contact": 1812,
+          "leisure": 0,
+          "waiting": 363,
+          "failure_recovery": 4,
+          "rest": 106,
+          "defence": 0,
+          "idle": 47
+        },
+        "criticalTicks": 0
+      },
+      "962": {
+        "name": "Fenn",
+        "hh": 957,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2044,
+          "eating_drinking_warming": 262,
+          "travel": 2516,
+          "work": 1020,
+          "social_contact": 2244,
+          "leisure": 0,
+          "waiting": 1303,
+          "failure_recovery": 5,
+          "rest": 170,
+          "defence": 0,
+          "idle": 36
+        },
+        "criticalTicks": 0
+      },
+      "963": {
+        "name": "Hal",
+        "hh": 957,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 1800,
+          "eating_drinking_warming": 531,
+          "travel": 2746,
+          "work": 998,
+          "social_contact": 2586,
+          "leisure": 0,
+          "waiting": 880,
+          "failure_recovery": 16,
+          "rest": 0,
+          "defence": 0,
+          "idle": 43
+        },
+        "criticalTicks": 0
+      },
+      "966": {
+        "name": "Wren",
+        "hh": 964,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2321,
+          "eating_drinking_warming": 483,
+          "travel": 3248,
+          "work": 1969,
+          "social_contact": 345,
+          "leisure": 0,
+          "waiting": 1187,
+          "failure_recovery": 5,
+          "rest": 0,
+          "defence": 0,
+          "idle": 42
+        },
+        "criticalTicks": 0
+      },
+      "967": {
+        "name": "Otto",
+        "hh": 964,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2578,
+          "eating_drinking_warming": 224,
+          "travel": 2860,
+          "work": 1139,
+          "social_contact": 1545,
+          "leisure": 0,
+          "waiting": 1087,
+          "failure_recovery": 7,
+          "rest": 117,
+          "defence": 0,
+          "idle": 43
+        },
+        "criticalTicks": 0
+      },
+      "968": {
+        "name": "Wen",
+        "hh": 964,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 1840,
+          "eating_drinking_warming": 244,
+          "travel": 3360,
+          "work": 541,
+          "social_contact": 2008,
+          "leisure": 0,
+          "waiting": 1558,
+          "failure_recovery": 14,
+          "rest": 0,
+          "defence": 0,
+          "idle": 35
+        },
+        "criticalTicks": 0
+      },
+      "971": {
+        "name": "Zeke",
+        "hh": 969,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2550,
+          "eating_drinking_warming": 227,
+          "travel": 4441,
+          "work": 748,
+          "social_contact": 759,
+          "leisure": 0,
+          "waiting": 599,
+          "failure_recovery": 13,
+          "rest": 221,
+          "defence": 0,
+          "idle": 42
+        },
+        "criticalTicks": 394
+      },
+      "974": {
+        "name": "Faye",
+        "hh": 972,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2265,
+          "eating_drinking_warming": 695,
+          "travel": 3293,
+          "work": 970,
+          "social_contact": 701,
+          "leisure": 44,
+          "waiting": 1174,
+          "failure_recovery": 13,
+          "rest": 400,
+          "defence": 0,
+          "idle": 45
+        },
+        "criticalTicks": 147
+      },
+      "977": {
+        "name": "Nora",
+        "hh": 975,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2318,
+          "eating_drinking_warming": 220,
+          "travel": 2866,
+          "work": 1371,
+          "social_contact": 1229,
+          "leisure": 0,
+          "waiting": 1542,
+          "failure_recovery": 7,
+          "rest": 0,
+          "defence": 0,
+          "idle": 47
+        },
+        "criticalTicks": 0
+      },
+      "978": {
+        "name": "Sven",
+        "hh": 975,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 1694,
+          "eating_drinking_warming": 225,
+          "travel": 3212,
+          "work": 831,
+          "social_contact": 1870,
+          "leisure": 0,
+          "waiting": 1726,
+          "failure_recovery": 17,
+          "rest": 0,
+          "defence": 0,
+          "idle": 25
+        },
+        "criticalTicks": 18
+      },
+      "981": {
+        "name": "Arlo",
+        "hh": 979,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2136,
+          "eating_drinking_warming": 528,
+          "travel": 3703,
+          "work": 1191,
+          "social_contact": 690,
+          "leisure": 0,
+          "waiting": 1171,
+          "failure_recovery": 7,
+          "rest": 122,
+          "defence": 0,
+          "idle": 52
+        },
+        "criticalTicks": 0
+      },
+      "982": {
+        "name": "Abel",
+        "hh": 979,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2273,
+          "eating_drinking_warming": 233,
+          "travel": 3294,
+          "work": 1450,
+          "social_contact": 690,
+          "leisure": 0,
+          "waiting": 1449,
+          "failure_recovery": 9,
+          "rest": 165,
+          "defence": 0,
+          "idle": 37
+        },
+        "criticalTicks": 0
+      },
+      "983": {
+        "name": "Petra",
+        "hh": 979,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2280,
+          "eating_drinking_warming": 192,
+          "travel": 3972,
+          "work": 1177,
+          "social_contact": 930,
+          "leisure": 0,
+          "waiting": 1001,
+          "failure_recovery": 7,
+          "rest": 0,
+          "defence": 0,
+          "idle": 41
+        },
+        "criticalTicks": 0
+      },
+      "986": {
+        "name": "Leo",
+        "hh": 984,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2424,
+          "eating_drinking_warming": 240,
+          "travel": 3115,
+          "work": 2046,
+          "social_contact": 654,
+          "leisure": 0,
+          "waiting": 626,
+          "failure_recovery": 2,
+          "rest": 444,
+          "defence": 0,
+          "idle": 49
+        },
+        "criticalTicks": 90
+      },
+      "987": {
+        "name": "Bram",
+        "hh": 984,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2604,
+          "eating_drinking_warming": 235,
+          "travel": 2977,
+          "work": 2399,
+          "social_contact": 552,
+          "leisure": 0,
+          "waiting": 785,
+          "failure_recovery": 1,
+          "rest": 0,
+          "defence": 7,
+          "idle": 40
+        },
+        "criticalTicks": 0
+      },
+      "989": {
+        "name": "Lena",
+        "hh": 988,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2733,
+          "eating_drinking_warming": 187,
+          "travel": 2475,
+          "work": 2044,
+          "social_contact": 1271,
+          "leisure": 0,
+          "waiting": 839,
+          "failure_recovery": 9,
+          "rest": 0,
+          "defence": 0,
+          "idle": 42
+        },
+        "criticalTicks": 0
+      },
+      "990": {
+        "name": "Cole",
+        "hh": 988,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2157,
+          "eating_drinking_warming": 455,
+          "travel": 2668,
+          "work": 1274,
+          "social_contact": 1202,
+          "leisure": 0,
+          "waiting": 1793,
+          "failure_recovery": 5,
+          "rest": 0,
+          "defence": 0,
+          "idle": 46
+        },
+        "criticalTicks": 0
+      },
+      "991": {
+        "name": "Hugo",
+        "hh": 988,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 1910,
+          "eating_drinking_warming": 545,
+          "travel": 2403,
+          "work": 1511,
+          "social_contact": 1939,
+          "leisure": 0,
+          "waiting": 1251,
+          "failure_recovery": 5,
+          "rest": 0,
+          "defence": 0,
+          "idle": 36
+        },
+        "criticalTicks": 0
+      },
+      "993": {
+        "name": "Basil",
+        "hh": 992,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2774,
+          "eating_drinking_warming": 246,
+          "travel": 4204,
+          "work": 1112,
+          "social_contact": 886,
+          "leisure": 0,
+          "waiting": 231,
+          "failure_recovery": 4,
+          "rest": 91,
+          "defence": 0,
+          "idle": 52
+        },
+        "criticalTicks": 42
+      },
+      "994": {
+        "name": "Mira",
+        "hh": 992,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2186,
+          "eating_drinking_warming": 228,
+          "travel": 3317,
+          "work": 828,
+          "social_contact": 2117,
+          "leisure": 161,
+          "waiting": 706,
+          "failure_recovery": 17,
+          "rest": 0,
+          "defence": 0,
+          "idle": 40
+        },
+        "criticalTicks": 59
+      },
+      "996": {
+        "name": "Tariq",
+        "hh": 995,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2809,
+          "eating_drinking_warming": 167,
+          "travel": 3871,
+          "work": 1536,
+          "social_contact": 839,
+          "leisure": 0,
+          "waiting": 121,
+          "failure_recovery": 6,
+          "rest": 207,
+          "defence": 0,
+          "idle": 44
+        },
+        "criticalTicks": 0
+      },
+      "997": {
+        "name": "Wilma",
+        "hh": 995,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2729,
+          "eating_drinking_warming": 254,
+          "travel": 3799,
+          "work": 1132,
+          "social_contact": 552,
+          "leisure": 0,
+          "waiting": 535,
+          "failure_recovery": 9,
+          "rest": 404,
+          "defence": 143,
+          "idle": 43
+        },
+        "criticalTicks": 640
+      },
+      "999": {
+        "name": "Talia",
+        "hh": 998,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2297,
+          "eating_drinking_warming": 450,
+          "travel": 3630,
+          "work": 1312,
+          "social_contact": 505,
+          "leisure": 0,
+          "waiting": 1048,
+          "failure_recovery": 4,
+          "rest": 301,
+          "defence": 0,
+          "idle": 53
+        },
+        "criticalTicks": 42
+      },
+      "1000": {
+        "name": "Wes",
+        "hh": 998,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 1919,
+          "eating_drinking_warming": 445,
+          "travel": 2883,
+          "work": 1075,
+          "social_contact": 1678,
+          "leisure": 31,
+          "waiting": 1506,
+          "failure_recovery": 27,
+          "rest": 0,
+          "defence": 0,
+          "idle": 36
+        },
+        "criticalTicks": 0
+      },
+      "1002": {
+        "name": "Clara",
+        "hh": 1001,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2114,
+          "eating_drinking_warming": 664,
+          "travel": 3005,
+          "work": 1129,
+          "social_contact": 1340,
+          "leisure": 16,
+          "waiting": 1289,
+          "failure_recovery": 7,
+          "rest": 0,
+          "defence": 0,
+          "idle": 36
+        },
+        "criticalTicks": 36
+      },
+      "1003": {
+        "name": "Dov",
+        "hh": 1001,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2360,
+          "eating_drinking_warming": 225,
+          "travel": 3385,
+          "work": 1073,
+          "social_contact": 1369,
+          "leisure": 0,
+          "waiting": 837,
+          "failure_recovery": 13,
+          "rest": 286,
+          "defence": 0,
+          "idle": 52
+        },
+        "criticalTicks": 0
+      },
+      "1004": {
+        "name": "Mona",
+        "hh": 1001,
+        "ticks": 9600,
+        "categories": {
+          "sleep": 2133,
+          "eating_drinking_warming": 260,
+          "travel": 3305,
+          "work": 796,
+          "social_contact": 1979,
+          "leisure": 0,
+          "waiting": 1073,
+          "failure_recovery": 18,
+          "rest": 0,
+          "defence": 0,
+          "idle": 36
+        },
+        "criticalTicks": 0
+      }
+    },
+    "plans": [
+      {
+        "person": 960,
+        "name": "Rhea",
+        "id": 1021,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "failed|it is gone": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 961,
+        "name": "Quinn",
+        "id": 1023,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "partial|the tree is used up": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 966,
+        "name": "Wren",
+        "id": 1027,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the hoe (still short 1 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 967,
+        "name": "Otto",
+        "id": 1029,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 977,
+        "name": "Nora",
+        "id": 1034,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "put the household home ahead of the unfinished tool; released its materials",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 981,
+        "name": "Arlo",
+        "id": 1037,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "put the household home ahead of the unfinished tool; released its materials",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 982,
+        "name": "Abel",
+        "id": 1039,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "put the household home ahead of the unfinished tool; released its materials",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 986,
+        "name": "Leo",
+        "id": 1042,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "done",
+        "reason": "made the hoe",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 4,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|felled the tree": 1,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 987,
+        "name": "Bram",
+        "id": 1044,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "put the household home ahead of the unfinished tool; released its materials",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 7,
+        "ends": {
+          "interrupted|something better came up": 6,
+          "success|felled the tree": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 989,
+        "name": "Lena",
+        "id": 1046,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "put the household home ahead of the unfinished tool; released its materials",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 5,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "failed|it is gone": 3,
+          "partial|the tree is used up": 1
+        }
+      },
+      {
+        "person": 990,
+        "name": "Cole",
+        "id": 1048,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "failed|someone else is already taking it": 1,
+          "partial|the tree is used up": 1
+        }
+      },
+      {
+        "person": 993,
+        "name": "Basil",
+        "id": 1051,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "partial|someone else is already taking it": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 996,
+        "name": "Tariq",
+        "id": 1054,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 997,
+        "name": "Wilma",
+        "id": 1056,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "partial|the tree is used up": 1
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 1058,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "put the household home ahead of the unfinished tool; released its materials",
+        "step": "",
+        "lastSeen": 8163,
+        "starts": 2,
+        "ends": {
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1002,
+        "name": "Clara",
+        "id": 1061,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 1003,
+        "name": "Dov",
+        "id": 1063,
+        "kind": "tool",
+        "makes": "pick",
+        "since": 0,
+        "until": 4800,
+        "status": "dropped",
+        "reason": "never got round to the pick (still short 2 stone)",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "partial|someone else is already taking it": 1
+        }
+      },
+      {
+        "person": 983,
+        "name": "Petra",
+        "id": 1361,
+        "kind": "tool",
+        "makes": "axe",
+        "since": 468,
+        "until": 5268,
+        "status": "dropped",
+        "reason": "put the household home ahead of the unfinished tool; released its materials",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 1506,
+        "kind": "night",
+        "makes": "",
+        "since": 781,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 862 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 8163,
+        "starts": 3,
+        "ends": {
+          "success|rested": 2,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 967,
+        "name": "Otto",
+        "id": 1515,
+        "kind": "night",
+        "makes": "",
+        "since": 805,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 848 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 4,
+        "ends": {
+          "success|done": 2,
+          "success|rested": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 961,
+        "name": "Quinn",
+        "id": 1527,
+        "kind": "night",
+        "makes": "",
+        "since": 820,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 765 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "success|rested": 1
+        }
+      },
+      {
+        "person": 966,
+        "name": "Wren",
+        "id": 1531,
+        "kind": "night",
+        "makes": "",
+        "since": 828,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 948 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 971,
+        "name": "Zeke",
+        "id": 1536,
+        "kind": "night",
+        "makes": "",
+        "since": 836,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 935 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 977,
+        "name": "Nora",
+        "id": 1556,
+        "kind": "night",
+        "makes": "",
+        "since": 885,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 1006 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 989,
+        "name": "Lena",
+        "id": 1559,
+        "kind": "night",
+        "makes": "",
+        "since": 890,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 753 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|rested": 1
+        }
+      },
+      {
+        "person": 990,
+        "name": "Cole",
+        "id": 1618,
+        "kind": "night",
+        "makes": "",
+        "since": 1009,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 901 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 996,
+        "name": "Tariq",
+        "id": 1664,
+        "kind": "night",
+        "makes": "",
+        "since": 1122,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 764 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 993,
+        "name": "Basil",
+        "id": 1682,
+        "kind": "night",
+        "makes": "",
+        "since": 1155,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 860 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 983,
+        "name": "Petra",
+        "id": 1695,
+        "kind": "night",
+        "makes": "",
+        "since": 1178,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 910 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 960,
+        "name": "Rhea",
+        "id": 1710,
+        "kind": "night",
+        "makes": "",
+        "since": 1201,
+        "until": 2520,
+        "status": "done",
+        "reason": "under shelter for 759 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|danger nearby": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 971,
+        "name": "Zeke",
+        "id": 1800,
+        "kind": "stock",
+        "makes": "",
+        "since": 2111,
+        "until": 6911,
+        "status": "dropped",
+        "reason": "put 2 units by, but the store is at 1 of 4 and the time is up",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 5,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 2,
+          "partial|someone else is already taking it": 1,
+          "failed|someone else is already taking it": 1
+        }
+      },
+      {
+        "person": 986,
+        "name": "Leo",
+        "id": 1803,
+        "kind": "stock",
+        "makes": "",
+        "since": 2119,
+        "until": 6919,
+        "status": "done",
+        "reason": "put 6 units of food by; the store holds 8",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 981,
+        "name": "Arlo",
+        "id": 1950,
+        "kind": "stock",
+        "makes": "",
+        "since": 2427,
+        "until": 7227,
+        "status": "dropped",
+        "reason": "put 2 units by, but the store is at 0 of 12 and the time is up",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "success|done": 2,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 1964,
+        "kind": "shelter",
+        "makes": "",
+        "since": 2445,
+        "until": 9645,
+        "status": "dropped",
+        "reason": "the site they were fetching for is no longer one they know of",
+        "step": "",
+        "lastSeen": 8163,
+        "starts": 4,
+        "ends": {
+          "failed|it is gone": 1,
+          "success|done": 3,
+          "success|felled the tree": 1
+        }
+      },
+      {
+        "person": 982,
+        "name": "Abel",
+        "id": 1968,
+        "kind": "shelter",
+        "makes": "",
+        "since": 2454,
+        "until": 9654,
+        "status": "done",
+        "reason": "the household has a hut, and they carried 6 of its materials",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 4,
+        "ends": {
+          "success|done": 3,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 974,
+        "name": "Faye",
+        "id": 2004,
+        "kind": "tool",
+        "makes": "axe",
+        "since": 2500,
+        "until": 7300,
+        "status": "done",
+        "reason": "made the axe",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 3
+        }
+      },
+      {
+        "person": 989,
+        "name": "Lena",
+        "id": 2006,
+        "kind": "shelter",
+        "makes": "",
+        "since": 2501,
+        "until": 9701,
+        "status": "dropped",
+        "reason": "the site they were fetching for is no longer one they know of",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 989,
+        "name": "Lena",
+        "id": 2099,
+        "kind": "stock",
+        "makes": "",
+        "since": 2670,
+        "until": 7470,
+        "status": "dropped",
+        "reason": "put 4 units by, but the store is at 7 of 12 and the time is up",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 986,
+        "name": "Leo",
+        "id": 2186,
+        "kind": "shelter",
+        "makes": "",
+        "since": 2826,
+        "until": 10026,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "step": "get 1 stone for the hut (it wants 1 stone)",
+        "lastSeen": 9599,
+        "starts": 8,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|felled the tree": 2,
+          "success|done": 4,
+          "interrupted|danger nearby": 1
+        }
+      },
+      {
+        "person": 997,
+        "name": "Wilma",
+        "id": 2386,
+        "kind": "night",
+        "makes": "",
+        "since": 3169,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 243 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 1002,
+        "name": "Clara",
+        "id": 2390,
+        "kind": "night",
+        "makes": "",
+        "since": 3193,
+        "until": 4920,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 989,
+        "name": "Lena",
+        "id": 2410,
+        "kind": "night",
+        "makes": "",
+        "since": 3210,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 965 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 987,
+        "name": "Bram",
+        "id": 2415,
+        "kind": "night",
+        "makes": "",
+        "since": 3221,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 895 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 967,
+        "name": "Otto",
+        "id": 2425,
+        "kind": "night",
+        "makes": "",
+        "since": 3246,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 929 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1003,
+        "name": "Dov",
+        "id": 2432,
+        "kind": "night",
+        "makes": "",
+        "since": 3271,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 856 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 971,
+        "name": "Zeke",
+        "id": 2438,
+        "kind": "night",
+        "makes": "",
+        "since": 3287,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 869 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 996,
+        "name": "Tariq",
+        "id": 2441,
+        "kind": "night",
+        "makes": "",
+        "since": 3291,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 758 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1,
+          "success|rested": 1
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 2465,
+        "kind": "night",
+        "makes": "",
+        "since": 3378,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 990 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 8163,
+        "starts": 1,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 977,
+        "name": "Nora",
+        "id": 2483,
+        "kind": "shelter",
+        "makes": "",
+        "since": 3424,
+        "until": 10624,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "get 4 stone for the hut (it wants 4 stone)",
+        "lastSeen": 9599,
+        "starts": 5,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|felled the tree": 1,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 986,
+        "name": "Leo",
+        "id": 2504,
+        "kind": "night",
+        "makes": "",
+        "since": 3459,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 886 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 961,
+        "name": "Quinn",
+        "id": 2517,
+        "kind": "night",
+        "makes": "",
+        "since": 3470,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 836 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 960,
+        "name": "Rhea",
+        "id": 2533,
+        "kind": "night",
+        "makes": "",
+        "since": 3502,
+        "until": 4920,
+        "status": "done",
+        "reason": "under shelter for 720 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "success|done": 2
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 2547,
+        "kind": "stock",
+        "makes": "",
+        "since": 3528,
+        "until": 8328,
+        "status": "done",
+        "reason": "put 7 units of food by; the store holds 8",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 2
+        }
+      },
+      {
+        "person": 987,
+        "name": "Bram",
+        "id": 2610,
+        "kind": "shelter",
+        "makes": "",
+        "since": 4024,
+        "until": 11224,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "step": "the hut has its materials; it wants building",
+        "lastSeen": 9599,
+        "starts": 6,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|felled the tree": 1,
+          "success|done": 3
+        }
+      },
+      {
+        "person": 960,
+        "name": "Rhea",
+        "id": 2802,
+        "kind": "stock",
+        "makes": "",
+        "since": 4816,
+        "until": 9616,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "step": "take the food home (9 more to put by)",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 996,
+        "name": "Tariq",
+        "id": 2813,
+        "kind": "stock",
+        "makes": "",
+        "since": 4827,
+        "until": 9627,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "step": "take the food home (3 more to put by)",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 961,
+        "name": "Quinn",
+        "id": 2910,
+        "kind": "stock",
+        "makes": "",
+        "since": 4988,
+        "until": 9788,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "step": "gather food to put by (9 more)",
+        "lastSeen": 9599,
+        "starts": 4,
+        "ends": {
+          "success|done": 2,
+          "interrupted|something better came up": 1,
+          "partial|nothing left": 1
+        }
+      },
+      {
+        "person": 983,
+        "name": "Petra",
+        "id": 2982,
+        "kind": "stock",
+        "makes": "",
+        "since": 5103,
+        "until": 9903,
+        "status": "active",
+        "reason": "settled on a different shelter",
+        "step": "gather food to put by (12 more)",
+        "lastSeen": 9599,
+        "starts": 9,
+        "ends": {
+          "interrupted|something better came up": 3,
+          "failed|nothing left": 1,
+          "failed|no way to get there": 1,
+          "success|done": 1,
+          "partial|nothing left": 2
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 3128,
+        "kind": "tool",
+        "makes": "basket",
+        "since": 5390,
+        "until": 10190,
+        "status": "done",
+        "reason": "made the basket",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 967,
+        "name": "Otto",
+        "id": 3235,
+        "kind": "night",
+        "makes": "",
+        "since": 5589,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 963 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 971,
+        "name": "Zeke",
+        "id": 3237,
+        "kind": "night",
+        "makes": "",
+        "since": 5593,
+        "until": 7320,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 986,
+        "name": "Leo",
+        "id": 3240,
+        "kind": "night",
+        "makes": "",
+        "since": 5593,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 624 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 983,
+        "name": "Petra",
+        "id": 3248,
+        "kind": "night",
+        "makes": "",
+        "since": 5596,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 1006 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1003,
+        "name": "Dov",
+        "id": 3259,
+        "kind": "night",
+        "makes": "",
+        "since": 5613,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 943 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 3261,
+        "kind": "night",
+        "makes": "",
+        "since": 5622,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 537 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 961,
+        "name": "Quinn",
+        "id": 3269,
+        "kind": "night",
+        "makes": "",
+        "since": 5652,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 707 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "success|rested": 1
+        }
+      },
+      {
+        "person": 993,
+        "name": "Basil",
+        "id": 3288,
+        "kind": "night",
+        "makes": "",
+        "since": 5685,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 814 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 997,
+        "name": "Wilma",
+        "id": 3290,
+        "kind": "night",
+        "makes": "",
+        "since": 5696,
+        "until": 7320,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 996,
+        "name": "Tariq",
+        "id": 3305,
+        "kind": "night",
+        "makes": "",
+        "since": 5727,
+        "until": 7320,
+        "status": "done",
+        "reason": "under shelter for 789 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 977,
+        "name": "Nora",
+        "id": 3346,
+        "kind": "night",
+        "makes": "",
+        "since": 5860,
+        "until": 7320,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 974,
+        "name": "Faye",
+        "id": 3353,
+        "kind": "tool",
+        "makes": "hoe",
+        "since": 5893,
+        "until": 10693,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "get 2 more wood for the hoe",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 982,
+        "name": "Abel",
+        "id": 3398,
+        "kind": "stock",
+        "makes": "",
+        "since": 6034,
+        "until": 10834,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "take the food home (12 more to put by)",
+        "lastSeen": 9599,
+        "starts": 5,
+        "ends": {
+          "failed|nothing left": 2,
+          "interrupted|danger nearby": 1,
+          "failed|no way to get there": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1002,
+        "name": "Clara",
+        "id": 3479,
+        "kind": "stock",
+        "makes": "",
+        "since": 6819,
+        "until": 11619,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "step": "take the food home (12 more to put by)",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 971,
+        "name": "Zeke",
+        "id": 3550,
+        "kind": "shelter",
+        "makes": "",
+        "since": 7093,
+        "until": 14293,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "take 2 wood to the hut; no room for a full batch",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 967,
+        "name": "Otto",
+        "id": 3590,
+        "kind": "stock",
+        "makes": "",
+        "since": 7156,
+        "until": 11956,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "take the food home (12 more to put by)",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 2
+        }
+      },
+      {
+        "person": 990,
+        "name": "Cole",
+        "id": 3604,
+        "kind": "shelter",
+        "makes": "",
+        "since": 7182,
+        "until": 14382,
+        "status": "active",
+        "reason": "taken up again",
+        "step": "get 3 stone for the hut (it wants 3 stone)",
+        "lastSeen": 9599,
+        "starts": 6,
+        "ends": {
+          "success|felled the tree": 1,
+          "success|done": 4,
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 997,
+        "name": "Wilma",
+        "id": 3610,
+        "kind": "stock",
+        "makes": "",
+        "since": 7187,
+        "until": 11987,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "step": "take the food home (3 more to put by)",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "partial|nothing left": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 993,
+        "name": "Basil",
+        "id": 3621,
+        "kind": "tool",
+        "makes": "axe",
+        "since": 7206,
+        "until": 12006,
+        "status": "done",
+        "reason": "made the axe",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 2
+        }
+      },
+      {
+        "person": 1003,
+        "name": "Dov",
+        "id": 3628,
+        "kind": "stock",
+        "makes": "",
+        "since": 7212,
+        "until": 12012,
+        "status": "active",
+        "reason": "set aside: a wolf about",
+        "step": "gather food to put by (12 more)",
+        "lastSeen": 9599,
+        "starts": 5,
+        "ends": {
+          "partial|someone else is already taking it": 1,
+          "partial|nothing left": 2,
+          "failed|no way to get there": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 966,
+        "name": "Wren",
+        "id": 3632,
+        "kind": "stock",
+        "makes": "",
+        "since": 7220,
+        "until": 12020,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "step": "gather food to put by (12 more)",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 989,
+        "name": "Lena",
+        "id": 3979,
+        "kind": "shelter",
+        "makes": "",
+        "since": 7871,
+        "until": 15071,
+        "status": "active",
+        "reason": "the household is still in a lean-to, and their hut wants 3 stone",
+        "step": "get 3 stone for the hut (it wants 3 stone)",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 974,
+        "name": "Faye",
+        "id": 4038,
+        "kind": "night",
+        "makes": "",
+        "since": 7974,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 976 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 5,
+        "ends": {
+          "failed|Lena was already talking to someone": 1,
+          "interrupted|something better came up": 2,
+          "success|done": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 971,
+        "name": "Zeke",
+        "id": 4040,
+        "kind": "night",
+        "makes": "",
+        "since": 7980,
+        "until": 9720,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 7,
+        "ends": {
+          "failed|Quinn was already talking to someone": 1,
+          "interrupted|something better came up": 1,
+          "success|done": 3
+        }
+      },
+      {
+        "person": 989,
+        "name": "Lena",
+        "id": 4047,
+        "kind": "night",
+        "makes": "",
+        "since": 7994,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 935 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 981,
+        "name": "Arlo",
+        "id": 4054,
+        "kind": "night",
+        "makes": "",
+        "since": 8000,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 782 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 997,
+        "name": "Wilma",
+        "id": 4059,
+        "kind": "night",
+        "makes": "",
+        "since": 8007,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 927 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 1,
+          "interrupted|danger nearby": 1
+        }
+      },
+      {
+        "person": 977,
+        "name": "Nora",
+        "id": 4066,
+        "kind": "night",
+        "makes": "",
+        "since": 8016,
+        "until": 9720,
+        "status": "dropped",
+        "reason": "sheltered, but still thirsty at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 5,
+        "ends": {
+          "interrupted|something better came up": 2,
+          "success|done": 2,
+          "success|rested": 1
+        }
+      },
+      {
+        "person": 987,
+        "name": "Bram",
+        "id": 4079,
+        "kind": "night",
+        "makes": "",
+        "since": 8048,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 1071 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "success|rested": 1,
+          "success|done": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 961,
+        "name": "Quinn",
+        "id": 4084,
+        "kind": "night",
+        "makes": "",
+        "since": 8055,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 812 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 7,
+        "ends": {
+          "success|done": 2,
+          "success|rested": 1,
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 986,
+        "name": "Leo",
+        "id": 4089,
+        "kind": "night",
+        "makes": "",
+        "since": 8061,
+        "until": 9720,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|done": 1
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 4111,
+        "kind": "night",
+        "makes": "",
+        "since": 8110,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 869 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "interrupted|something better came up": 1
+        }
+      },
+      {
+        "person": 1003,
+        "name": "Dov",
+        "id": 4149,
+        "kind": "night",
+        "makes": "",
+        "since": 8184,
+        "until": 9720,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 3,
+        "ends": {
+          "failed|Clara was asleep": 1,
+          "failed|no way to get there": 1,
+          "success|done": 1
+        }
+      },
+      {
+        "person": 983,
+        "name": "Petra",
+        "id": 4160,
+        "kind": "night",
+        "makes": "",
+        "since": 8194,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 508 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|done": 2
+        }
+      },
+      {
+        "person": 982,
+        "name": "Abel",
+        "id": 4167,
+        "kind": "night",
+        "makes": "",
+        "since": 8201,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 961 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "success|rested": 1,
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 967,
+        "name": "Otto",
+        "id": 4179,
+        "kind": "night",
+        "makes": "",
+        "since": 8233,
+        "until": 9720,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry and thirsty at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 1,
+        "ends": {
+          "success|daylight arrived": 1
+        }
+      },
+      {
+        "person": 1002,
+        "name": "Clara",
+        "id": 4202,
+        "kind": "night",
+        "makes": "",
+        "since": 8267,
+        "until": 9720,
+        "status": "dropped",
+        "reason": "sheltered, but still hungry at dawn",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 2,
+        "ends": {
+          "interrupted|something better came up": 2
+        }
+      },
+      {
+        "person": 960,
+        "name": "Rhea",
+        "id": 4270,
+        "kind": "night",
+        "makes": "",
+        "since": 8422,
+        "until": 9720,
+        "status": "done",
+        "reason": "under shelter for 687 ticks of the night, fed and watered by morning",
+        "step": "",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {
+          "success|rested": 1
+        }
+      },
+      {
+        "person": 999,
+        "name": "Talia",
+        "id": 4345,
+        "kind": "stock",
+        "makes": "",
+        "since": 9188,
+        "until": 13988,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "step": "take the food home (7 more to put by)",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      },
+      {
+        "person": 993,
+        "name": "Basil",
+        "id": 4366,
+        "kind": "stock",
+        "makes": "",
+        "since": 9255,
+        "until": 14055,
+        "status": "active",
+        "reason": "there is next to nothing at home to fall back on",
+        "step": "take the food home (8 more to put by)",
+        "lastSeen": 9599,
+        "starts": 0,
+        "ends": {}
+      }
+    ]
+  },
+  "racks": [],
+  "ledger": {
+    "initial": {
+      "grain": 85,
+      "water": 2457,
+      "berries": 245,
+      "seeds": 10,
+      "fruit": 125,
+      "axe": 2,
+      "basket": 2,
+      "pick": 1,
+      "hoe": 1,
+      "wood": 2969,
+      "stone": 860,
+      "fish": 82,
+      "clay": 114,
+      "ore": 56
+    },
+    "created": {
+      "wood": 357,
+      "fruit": 66,
+      "berries": 250,
+      "grain": 89,
+      "fish": 48,
+      "seeds": 28,
+      "hoe": 1,
+      "axe": 2,
+      "water": 246,
+      "basket": 1
+    },
+    "consumed": {
+      "seeds": 18,
+      "grain": 94,
+      "berries": 267,
+      "water": 313,
+      "fruit": 49,
+      "wood": 65,
+      "fish": 34,
+      "stone": 11
+    },
+    "spoiled": {
+      "berries": 56,
+      "fruit": 9,
+      "water": 94,
+      "grain": 2
+    },
+    "reasons": {
+      "+tree growth": 357,
+      "+regrowth: fruit tree": 66,
+      "+regrowth: berry bush": 250,
+      "+regrowth: wild grain": 89,
+      "+regrowth: fish spot": 48,
+      "xstored food spoiled": 67,
+      "-sown": 18,
+      "xnatural water evaporation": 94,
+      "-saved as seed": 28,
+      "+seed saved from wild grain": 28,
+      "-eaten": 401,
+      "-drunk at natural water": 297,
+      "-construction: lean to": 20,
+      "-drunk": 16,
+      "-crafting: hoe": 3,
+      "+crafted: hoe": 1,
+      "-eaten at a shared meal": 2,
+      "-fuel for the fire": 17,
+      "-eaten at the source": 13,
+      "-construction: hut": 26,
+      "-crafting: axe": 6,
+      "+crafted: axe": 2,
+      "+rain captured in natural water": 246,
+      "-crafting: basket": 3,
+      "+crafted: basket": 1,
+      "-repairs": 1
+    }
+  }
+}

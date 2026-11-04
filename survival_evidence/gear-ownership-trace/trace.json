@@ -1,0 +1,932 @@
+{
+  "events": [
+    {
+      "tick": 17999,
+      "person": 924,
+      "kind": "operate",
+      "data": {
+        "recipe": "make_net",
+        "client": 924,
+        "purpose": "set owned gear for later food",
+        "destSite": 0,
+        "optKey": "operate:7164:make_net",
+        "dailyRoutine": {
+          "key": "operate:7164:make_net",
+          "label": "Making a net",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 3,
+          "context": {
+            "winter": false,
+            "household": 921,
+            "home": 922,
+            "injury": "well",
+            "family": "2:925,926",
+            "contact": "3:923,925,926",
+            "losses": "0:"
+          },
+          "eta": 200.1855,
+          "energy": 46.68,
+          "warmth": 94.5202,
+          "recorded": true
+        },
+        "why": "carpentry is my trade · set owned gear for later food +27 · walking −1",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 48.45357078886591,
+          "y": 46.611826480622405,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        },
+        "running": "make_net",
+        "started": true
+      },
+      "outcome": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "tick": 20386,
+      "person": 924,
+      "kind": "operate",
+      "data": {
+        "recipe": "make_net",
+        "client": 924,
+        "purpose": "insulation for me and the child in cold weather (get back to it)",
+        "destSite": 0,
+        "optKey": "operate:7164:make_net",
+        "dailyRoutine": {
+          "key": "operate:7164:make_net",
+          "label": "Making a net",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 3,
+          "context": {
+            "winter": true,
+            "household": 921,
+            "home": 922,
+            "injury": "well",
+            "family": "2:925,926",
+            "contact": "3:923,925,926",
+            "losses": "0:"
+          },
+          "eta": 219.5782,
+          "energy": 37.2272,
+          "warmth": 76.3195,
+          "recorded": true
+        },
+        "why": "carpentry is my trade · insulation for me and the child in cold weather (get back to it) +31 · walking −3",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 50.62321291728877,
+          "y": 49.560689071775414,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        },
+        "running": "make_net",
+        "joined": true
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 31935,
+      "from": "building:7164",
+      "to": "person:924",
+      "item": "net",
+      "n": 1,
+      "reason": "withdraw"
+    },
+    {
+      "tick": 32077,
+      "person": 908,
+      "kind": "operate",
+      "data": {
+        "recipe": "make_net",
+        "client": 908,
+        "purpose": "set owned gear for later food",
+        "destSite": 0,
+        "optKey": "operate:7164:make_net",
+        "dailyRoutine": {
+          "key": "operate:7164:make_net",
+          "label": "Making a net",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 906,
+            "home": 907,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 338.4277,
+          "energy": 51.5263,
+          "warmth": 98.9657,
+          "recorded": true
+        },
+        "why": "set owned gear for later food +27 · walking −11",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 57.5,
+          "y": 57.5,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        },
+        "running": "weave_garment",
+        "joined": true
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 32118,
+      "from": "person:924",
+      "to": "pile:12849",
+      "item": "net",
+      "n": 1,
+      "reason": "set gear"
+    },
+    {
+      "tick": 32118,
+      "person": 924,
+      "kind": "gear_work",
+      "data": {
+        "op": "place",
+        "toolId": 8751,
+        "optKey": "gear:place:8751:886",
+        "why": "owned gear work +35 · walking −4",
+        "routeAttempt": {
+          "target": 886,
+          "x": 48.45357078886591,
+          "y": 46.611826480622405,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 32257,
+      "person": 908,
+      "kind": "operate",
+      "data": {
+        "recipe": "make_net",
+        "client": 908,
+        "purpose": "set owned gear for later food",
+        "destSite": 0,
+        "optKey": "operate:7164:make_net",
+        "dailyRoutine": {
+          "key": "operate:7164:make_net",
+          "label": "Making a net",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 906,
+            "home": 907,
+            "injury": "well",
+            "family": "0:",
+            "contact": "0:",
+            "losses": "0:"
+          },
+          "eta": 201.732,
+          "energy": 47.1263,
+          "warmth": 98.4169,
+          "recorded": true
+        },
+        "why": "set owned gear for later food +27 · walking −1",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 48.41162394825369,
+          "y": 49.38163808116224,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        },
+        "running": "make_net",
+        "started": true
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 32266,
+      "from": "building:7164",
+      "to": "person:908",
+      "item": "net",
+      "n": 1,
+      "reason": "withdraw"
+    },
+    {
+      "tick": 32646,
+      "from": "person:908",
+      "to": "pile:13024",
+      "item": "net",
+      "n": 1,
+      "reason": "set gear"
+    },
+    {
+      "tick": 32646,
+      "person": 908,
+      "kind": "gear_work",
+      "data": {
+        "op": "place",
+        "toolId": 12917,
+        "optKey": "gear:place:12917:886",
+        "why": "owned gear work +35 · walking −4",
+        "routeAttempt": {
+          "target": 886,
+          "x": 48.41162394825369,
+          "y": 49.38163808116224,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 33009,
+      "person": 924,
+      "kind": "gear_work",
+      "data": {
+        "op": "check",
+        "optKey": "gear:check:12849",
+        "why": "owned gear work +42 · walking −1",
+        "routeAttempt": {
+          "target": 12849,
+          "x": 53.5,
+          "y": 57.5,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 33049,
+      "person": 924,
+      "kind": "gear_work",
+      "data": {
+        "op": "reset",
+        "optKey": "gear:reset:12849",
+        "why": "owned gear work +28 · walking −0",
+        "routeAttempt": {
+          "target": 12849,
+          "x": 52.5,
+          "y": 59.5,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 33688,
+      "person": 908,
+      "kind": "gear_work",
+      "data": {
+        "op": "check",
+        "optKey": "gear:check:13024",
+        "why": "owned gear work +42 · walking −7",
+        "routeAttempt": {
+          "target": 13024,
+          "x": 38.360309570329264,
+          "y": 45.496959301107566,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 33814,
+      "person": 923,
+      "kind": "gear_work",
+      "data": {
+        "op": "check",
+        "optKey": "gear:check:12849",
+        "why": "owned gear work +42 · walking −4",
+        "routeAttempt": {
+          "target": 12849,
+          "x": 59.181610145977466,
+          "y": 49.618132807243505,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 33825,
+      "person": 924,
+      "kind": "gear_work",
+      "data": {
+        "op": "check",
+        "optKey": "gear:check:12849",
+        "why": "owned gear work +42 · walking −4",
+        "routeAttempt": {
+          "target": 12849,
+          "x": 52.530812819791024,
+          "y": 49.47465926539153,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 33943,
+      "person": 924,
+      "kind": "gear_work",
+      "data": {
+        "op": "reset",
+        "optKey": "gear:reset:12849",
+        "why": "owned gear work +28 · walking −0",
+        "routeAttempt": {
+          "target": 12849,
+          "x": 52.5,
+          "y": 59.5,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 34032,
+      "person": 908,
+      "kind": "gear_work",
+      "data": {
+        "op": "reset",
+        "optKey": "gear:reset:13024",
+        "why": "owned gear work +28 · walking −5",
+        "routeAttempt": {
+          "target": 13024,
+          "x": 50.55144898598083,
+          "y": 70.5556245279964,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 34514,
+      "person": 924,
+      "kind": "operate",
+      "data": {
+        "recipe": "make_trap",
+        "client": 924,
+        "purpose": "set owned gear for later food",
+        "destSite": 0,
+        "optKey": "operate:7164:make_trap",
+        "dailyRoutine": {
+          "key": "operate:7164:make_trap",
+          "label": "Making a trap",
+          "kind": "operate",
+          "target": 7164,
+          "phase": 2,
+          "context": {
+            "winter": false,
+            "household": 921,
+            "home": 922,
+            "injury": "well",
+            "family": "2:925,926",
+            "contact": "2:923,926",
+            "losses": "0:"
+          },
+          "eta": 194.8765,
+          "energy": 63.11,
+          "warmth": 68.6157,
+          "recorded": true
+        },
+        "why": "carpentry is my trade · set owned gear for later food +27 · walking −1",
+        "routeAttempt": {
+          "target": 7164,
+          "x": 45.44008986616973,
+          "y": 49.404790811659765,
+          "gx": 46.5,
+          "gy": 48,
+          "kind": "operate",
+          "cart": false
+        },
+        "running": "make_trap",
+        "started": true
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 34523,
+      "from": "building:7164",
+      "to": "person:924",
+      "item": "trap",
+      "n": 1,
+      "reason": "withdraw"
+    },
+    {
+      "tick": 34638,
+      "person": 923,
+      "kind": "gear_work",
+      "data": {
+        "op": "check",
+        "optKey": "gear:check:12849",
+        "why": "owned gear work +42 · walking −0",
+        "routeAttempt": {
+          "target": 12849,
+          "x": 51.6125855084986,
+          "y": 60.61710809760338,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 34725,
+      "from": "person:924",
+      "to": "pile:13772",
+      "item": "trap",
+      "n": 1,
+      "reason": "set gear"
+    },
+    {
+      "tick": 34725,
+      "person": 924,
+      "kind": "gear_work",
+      "data": {
+        "op": "place",
+        "toolId": 13664,
+        "optKey": "gear:place:13664:10738",
+        "why": "owned gear work +35 · walking −4",
+        "routeAttempt": {
+          "target": 10738,
+          "x": 45.44008986616973,
+          "y": 49.404790811659765,
+          "gx": 57.5,
+          "gy": 53.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 34860,
+      "person": 908,
+      "kind": "gear_work",
+      "data": {
+        "op": "check",
+        "optKey": "gear:check:13024",
+        "why": "owned gear work +42 · walking −5",
+        "routeAttempt": {
+          "target": 13024,
+          "x": 56.50921653271653,
+          "y": 71.50736424122006,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 34953,
+      "person": 924,
+      "kind": "gear_work",
+      "data": {
+        "op": "check",
+        "optKey": "gear:check:12849",
+        "why": "owned gear work +42 · walking −3",
+        "routeAttempt": {
+          "target": 12849,
+          "x": 58.5,
+          "y": 53.5,
+          "gx": 52.5,
+          "gy": 59.5,
+          "kind": "gear_work",
+          "cart": false
+        }
+      },
+      "outcome": "interrupted",
+      "detail": "something better came up"
+    }
+  ],
+  "samples": [
+    {
+      "tick": 32040,
+      "person": 924,
+      "inv": {
+        "basket": 1,
+        "axe": 1,
+        "seeds": 9,
+        "wood": 2,
+        "berries": 2,
+        "net": 1
+      },
+      "hh": 921,
+      "dangers": [],
+      "tools": [
+        {
+          "ent": "tool",
+          "id": 8751,
+          "kind": "net",
+          "tier": 0,
+          "wear": 0,
+          "ownerHh": 921,
+          "holder": 924,
+          "loan": null,
+          "madeTick": 20386,
+          "maker": 924
+        }
+      ],
+      "offers": [
+        {
+          "key": "gear:place:8751:886",
+          "util": 35
+        },
+        {
+          "key": "gather:893",
+          "util": 24.683149622041665
+        },
+        {
+          "key": "gather:887",
+          "util": 23.089134895531384
+        },
+        {
+          "key": "gather:873",
+          "util": 6.31693485131724
+        }
+      ],
+      "gear": [
+        {
+          "key": "gear:place:8751:886",
+          "util": 35
+        }
+      ]
+    },
+    {
+      "tick": 32280,
+      "person": 908,
+      "inv": {
+        "axe": 1,
+        "seeds": 2,
+        "stone": 2,
+        "berries": 3,
+        "net": 1
+      },
+      "hh": 906,
+      "dangers": [],
+      "tools": [
+        {
+          "ent": "tool",
+          "id": 12917,
+          "kind": "net",
+          "tier": 0,
+          "wear": 0,
+          "ownerHh": 906,
+          "holder": 908,
+          "loan": null,
+          "madeTick": 32257,
+          "maker": 908
+        }
+      ],
+      "offers": [
+        {
+          "key": "gear:place:12917:886",
+          "util": 31.882798040135945
+        },
+        {
+          "key": "eat:0",
+          "util": 22.6005461961881
+        },
+        {
+          "key": "sleep:3965",
+          "util": 8.296635686235525
+        },
+        {
+          "key": "operate:7164:strip_fibre",
+          "util": 22.716217706293254
+        }
+      ],
+      "gear": [
+        {
+          "key": "gear:place:12917:886",
+          "util": 31.882798040135945
+        }
+      ]
+    },
+    {
+      "tick": 32400,
+      "person": 908,
+      "inv": {
+        "axe": 1,
+        "seeds": 2,
+        "stone": 2,
+        "berries": 3,
+        "net": 1
+      },
+      "hh": 906,
+      "dangers": [],
+      "tools": [
+        {
+          "ent": "tool",
+          "id": 12917,
+          "kind": "net",
+          "tier": 0,
+          "wear": 0,
+          "ownerHh": 906,
+          "holder": 908,
+          "loan": null,
+          "madeTick": 32257,
+          "maker": 908
+        }
+      ],
+      "offers": [
+        {
+          "key": "gear:place:12917:886",
+          "util": 34.930537431541424
+        },
+        {
+          "key": "eat:0",
+          "util": 30.90823850388072
+        },
+        {
+          "key": "sleep:3965",
+          "util": -2.2538455189382276
+        },
+        {
+          "key": "gather:887",
+          "util": 8.341985210037416
+        }
+      ],
+      "gear": [
+        {
+          "key": "gear:place:12917:886",
+          "util": 34.930537431541424
+        }
+      ]
+    },
+    {
+      "tick": 32520,
+      "person": 908,
+      "inv": {
+        "axe": 1,
+        "seeds": 2,
+        "stone": 2,
+        "berries": 3,
+        "net": 1
+      },
+      "hh": 906,
+      "dangers": [],
+      "tools": [
+        {
+          "ent": "tool",
+          "id": 12917,
+          "kind": "net",
+          "tier": 0,
+          "wear": 0,
+          "ownerHh": 906,
+          "holder": 908,
+          "loan": null,
+          "madeTick": 32257,
+          "maker": 908
+        }
+      ],
+      "offers": [
+        {
+          "key": "sleep:3965",
+          "util": 39.966417261113456
+        },
+        {
+          "key": "eat:0",
+          "util": 39.215930811573344
+        },
+        {
+          "key": "gear:place:12917:886",
+          "util": 34.9305256301987
+        },
+        {
+          "key": "sleep:907",
+          "util": 32.15487820328978
+        }
+      ],
+      "gear": [
+        {
+          "key": "gear:place:12917:886",
+          "util": 34.9305256301987
+        }
+      ]
+    },
+    {
+      "tick": 32640,
+      "person": 908,
+      "inv": {
+        "axe": 1,
+        "seeds": 2,
+        "stone": 2,
+        "berries": 3,
+        "net": 1
+      },
+      "hh": 906,
+      "dangers": [],
+      "tools": [
+        {
+          "ent": "tool",
+          "id": 12917,
+          "kind": "net",
+          "tier": 0,
+          "wear": 0,
+          "ownerHh": 906,
+          "holder": 908,
+          "loan": null,
+          "madeTick": 32257,
+          "maker": 908
+        }
+      ],
+      "offers": [
+        {
+          "key": "sleep:3965",
+          "util": 42.77565437798132
+        },
+        {
+          "key": "eat:0",
+          "util": 48.76977696541986
+        },
+        {
+          "key": "sleep:907",
+          "util": 34.64279848924157
+        },
+        {
+          "key": "gear:place:12917:886",
+          "util": 35
+        }
+      ],
+      "gear": [
+        {
+          "key": "gear:place:12917:886",
+          "util": 35
+        }
+      ]
+    },
+    {
+      "tick": 34560,
+      "person": 924,
+      "inv": {
+        "basket": 1,
+        "axe": 1,
+        "seeds": 4,
+        "wood": 1,
+        "berries": 2,
+        "grain": 1,
+        "fish": 1,
+        "trap": 1
+      },
+      "hh": 921,
+      "dangers": [],
+      "tools": [
+        {
+          "ent": "tool",
+          "id": 13664,
+          "kind": "trap",
+          "tier": 0,
+          "wear": 0,
+          "ownerHh": 921,
+          "holder": 924,
+          "loan": null,
+          "madeTick": 34514,
+          "maker": 924
+        }
+      ],
+      "offers": [
+        {
+          "key": "gear:check:12849",
+          "util": 39.414699035989
+        },
+        {
+          "key": "gear:place:13664:10738",
+          "util": 32.22860366419701
+        },
+        {
+          "key": "deposit:6535:food",
+          "util": 20.090648339813747
+        },
+        {
+          "key": "bring:7164:wood",
+          "util": 16.72079797062812
+        }
+      ],
+      "gear": [
+        {
+          "key": "gear:place:13664:10738",
+          "util": 32.22860366419701
+        },
+        {
+          "key": "gear:check:12849",
+          "util": 39.414699035989
+        }
+      ]
+    },
+    {
+      "tick": 34680,
+      "person": 924,
+      "inv": {
+        "basket": 1,
+        "axe": 1,
+        "seeds": 4,
+        "wood": 1,
+        "berries": 2,
+        "grain": 1,
+        "fish": 1,
+        "trap": 1
+      },
+      "hh": 921,
+      "dangers": [],
+      "tools": [
+        {
+          "ent": "tool",
+          "id": 13664,
+          "kind": "trap",
+          "tier": 0,
+          "wear": 0,
+          "ownerHh": 921,
+          "holder": 924,
+          "loan": null,
+          "madeTick": 34514,
+          "maker": 924
+        }
+      ],
+      "offers": [
+        {
+          "key": "gear:check:12849",
+          "util": 38.594362916471816
+        },
+        {
+          "key": "gear:place:13664:10738",
+          "util": 35
+        },
+        {
+          "key": "gather:893",
+          "util": 21.61904741393465
+        },
+        {
+          "key": "gather:744",
+          "util": 21.03274810640075
+        }
+      ],
+      "gear": [
+        {
+          "key": "gear:place:13664:10738",
+          "util": 35
+        },
+        {
+          "key": "gear:check:12849",
+          "util": 38.594362916471816
+        }
+      ]
+    }
+  ]
+}

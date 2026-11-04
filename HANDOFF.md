@@ -1,3 +1,85 @@
+# Owner-requested stop — current section complete; publishing to main
+
+Owner asked to stop after the current section, commit/push current work, merge
+it to main and report. Do not resume capability work without a new request.
+Rules133 trap-report repair is complete on codex/survival-trap-report133 at
+0ce4171, to merge with main216619d and this evidence checkpoint. All task source,
+tests, scripts, docs and survival evidence are being preserved for publication.
+Older unrelated untracked artifacts and retired branches are outside this
+survival-task publication unless the owner explicitly broadens that scope.
+
+Current section:4contracts;29/4affected tests plus20passive-gear tests;
+32reference/rules/save/inspector checks; final5/2including direct empty-body
+wording;6rendered checks; isolated typecheck/build pass. Ordinary133replay
+matches132after only specified log text/rules normalization and saves exactly.
+Immutable133 source86210bc6355cf48e0d5b5400eaa7b7527d2d1757ec0a967e424f5ee0687301d7
+retained. Final inspect-only delta is audited; no expectations rewritten.
+
+All follow-on simulations and unfinished132broad regression were stopped.
+owner-stop-20261104.json:75baseline,48pre131and40final132draws completed and
+validated; remainder partial/not started. Full132has no final test count or
+pass verdict. Known main typecheck/build errors are in unrelated review files.
+Ordinary132forest/river25 both pass exacttwins/save120/conservation (18/28alive).
+131meadow60 passes,23alive,7netfishmeals but no traps/births and all8bodymeatlost.
+The whole programme remains incomplete: preserved-meat meals, attributable
+trap meals, final-source lamb birth and full aggregate comparison are open.
+Forest25drawmeans121/131/132=5.56/8.32/5.68, an adverse reserve comparison.
+
+Authoritative details:docs/SURVIVAL_CAPABILITIES.md. Historical working notes
+below are superseded where they say continue or running.
+
+# Active continuation - main216619d (rules132);133 isolated repair
+
+Overall seven-family task NOT complete. Owner explicitly said continue this checkout.
+132 committed216619d. Main runtime must stay132 while full suite86942 runs.
+Docs/SURVIVAL_CAPABILITIES.md has uncommitted completed forest subset findings.
+Main tests/trap_catch_truth.test.ts is OUR untracked older3-test red version.
+
+Only active edits to runtime are in sibling living-world-trap-truth-fix, detached
+216619d, node_modules junction. Four changed source files: carcass.ts adds pure
+hasRecoverableParts; passive_gear.ts gates truthful lost-catch log at133;
+inspect.ts distinguishes empty remnants; rulesversion.ts current/support133.
+4 tests in that sibling cover lost/empty/fresh/historical and mid-check exact
+continuation. Green2=29tests/4files (gear.test.ts filter was nonexistent);
+separate passive_gear20tests PASS. Firstgreen12/3PASS. Isolated typecheck and
+build both EXIT0 (no unrelated untracked review files in that checkout).
+Rendered6checks pass at trap-catch-truth-rendered1 with success/failure images
+visually inspected. Vite5297 session31169. CUA tab1 variablecarcassSupplyTab.
+
+Do NOT modify src/scripts in living-world-trap-truth-fix while its ordinary
+133 replay runs session25004: scripts/trap_report_replay.ts, reference
+aggregate-nourishment132/forest-f2-n1, output trap-report133-replay.
+It normalizes only rules version and the two known trap-check log strings;
+all other final saved bytes must equal132. Saves120/conservation/sourceguard.
+After finish: capture immutable133, bring ONLY four source files plus new
+4-test file/browser2/replay script to main after132full completes. No commits
+in isolated sibling yet. Need final diffs/tests/ordinary proof/docs/commit.
+
+Original132trap food replay42686 DONE EXIT0: exact original25day save,
+save120/conservation. Body17987 caught50849, zero recovered meat/zero meals.
+Full source-attributed report trap-food132-replay/report.json retains failed
+chain. Do not claim trap food completion.
+
+Current jobs: full132 npmtest86942 still running; pre13175draw24591 at37/75;
+final13275draw4850 at32/75;131meadow60 observer84692 atday51;132fern60
+observer54076 (frozen living-world-nourishment-check1) juststarted to diagnose
+remaining final-source carcass/preservation/gear uptake. No frozen edits.
+132forest/river25 bothDONE18/28alive,500pure each,exacttwins/save120/conserve.
+Bothflowbalances near1e-10. River one mating at37848; mother1167 slaughtered
+41578 before birth,ram43664. No final-source birth yet. Final meat-preservation
+meals, attributable trap meals and lamb birth remain gaps.
+
+ALL25FOREST cohort draws complete in three conditions:121mean5.56 med5range0-15;
+131mean8.32 med8range0-18;132mean5.68 med5range2-18. ADVERSE reserve result,
+reported to user and in single capability doc. Not a reason to tune thresholds.
+River/meadow pending; full comparison script survival_compare.mjs still ours
+untracked and baseline selfcheck4PASS. No all-cohort benefit claim yet.
+
+Brain daily updated with132commit and pending limits; checksum
+b2ed52e0aec3ccbb9c29985c27cf01d6f69ab234d04f6dbb63a06d5279dc89cf.
+Archive END refresh only at actual final. No subagents/push/user confirmation.
+Use python -X utf8. Preserve all unrelated untracked evidence and tests.
+
 # Rules132 implementation checkpoint; overall task NOT complete
 
 Rules132 runtime/tests are ready for focused commit. Forest/river25 are now

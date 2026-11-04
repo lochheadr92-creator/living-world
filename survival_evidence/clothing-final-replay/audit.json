@@ -1,0 +1,20 @@
+[
+  {
+    "seed": "forest",
+    "sourceFiles": 264,
+    "sourceMatchesFinalTree": true,
+    "sameInitial": true,
+    "exactFinalMatchesObservedCheck6": true,
+    "conservation": true,
+    "continuation": true
+  },
+  {
+    "seed": "river",
+    "sourceFiles": 264,
+    "sourceMatchesFinalTree": true,
+    "sameInitial": true,
+    "exactFinalMatchesObservedCheck6": true,
+    "conservation": true,
+    "continuation": true
+  }
+]

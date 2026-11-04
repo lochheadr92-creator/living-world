@@ -1,0 +1,985 @@
+diff --git a/HANDOFF.md b/HANDOFF.md
+index 96bb9c8..7486349 100644
+--- a/HANDOFF.md
++++ b/HANDOFF.md
+@@ -1,5 +1,15 @@
+ # Survival continuation — 4 November 2026
+ 
++Latest working checkpoint: `main@b3392ef`; rules-124 clothing is uncommitted.
++Rules-123 hearth commit is `62100b9`. Clothing source/parameters and current
++verification are in `docs/SURVIVAL_CAPABILITIES.md`. Frozen clothing checks 1–3
++retain successive candidates; check3 includes actual child-delivery travel,
++failed-delivery memory and separate clothing/feeding receipt. Check3 forest and
++river are running; the broader suite runs on check2. Keep these sources frozen.
++Do not begin rules 125 until the clothing increment's ordinary-use evidence is
++assessed. The authorised programme still includes carcasses, traps/nets, one
++domestic species, reserves last, deferred material routes and final comparisons.
++
+ Current work is in `living-world-integrate`, main, base `61cb6e5`.
+ See [SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md) and the current
+ entry in [CLAUDE_AUTONOMY_HANDOFF.md](docs/CLAUDE_AUTONOMY_HANDOFF.md).
+@@ -7,7 +17,10 @@ Rules 122 preservation and 123 indoor hearths have bounded ordinary activation;
+ are authorised, with body reserves last. Full-command baseline failures are
+ retained and documented. Next is plant-fibre clothing/bedding; aggregate benefit
+ is unmeasured. Frozen rules-121 baseline cost cohorts are running under
+-`survival_evidence/aggregate-baseline/` (launcher PID 10548; verify live).
++`survival_evidence/aggregate-baseline/`. The original PowerShell launcher exited
++on a locked status-file write after starting 61 draws; its children completed.
++`scripts/survival_cohort.mjs` validates retained results and resumes the remaining
++14 with explicit exit sidecars; current progress is `cohort-status.json`.
+ 
+ # Codex integration checkpoint (2026-10-27)
+ 
+diff --git a/docs/CLAUDE_AUTONOMY_HANDOFF.md b/docs/CLAUDE_AUTONOMY_HANDOFF.md
+index e7267b0..e04e759 100644
+--- a/docs/CLAUDE_AUTONOMY_HANDOFF.md
++++ b/docs/CLAUDE_AUTONOMY_HANDOFF.md
+@@ -1,5 +1,19 @@
+ # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
+ 
++**Active clothing candidate, 4 November 2026:** `main@b3392ef`, uncommitted
++rules 124. Paid fibre/garment/blanket/bedroll, bounded actual insulation,
++wetness/wear/repair and child delivery are implemented. Thirteen focused clothing
++tests pass; clothing/proposal checks passed 32 tests in four files and
++clothing/estate custody passed 28 in three. Full typecheck/build retain the same
++two nullable review-test errors.
++Browser checks pass seven assertions with readable dry/wet protection and a
++real repair failure. Ordinary check1 is pre-batch-plan connection; check2 adds
++that connection; check3 adds the reviewed child-delivery corrections. Forest/
++river runs are retained under `survival_evidence/clothing-check*/`; check3 and
++the check2 full suite are running. Assess current-source ordinary activation,
++capture immutable 124, commit the completed increment, then continue streams
++4–7. Do not treat staged checks as ordinary uptake or aggregate benefit.
++
+ **Latest checkpoint, 4 November 2026:** rules 123 indoor hearths follow committed
+ preservation (`de35037`). Both frozen `hearth-check2` Normal arrivals-on 25-day
+ runs passed integrity checks and showed paid occupied heat (forest 48,228 ticks,
+diff --git a/docs/DEPENDENCY_CHAIN_PROGRAMME.md b/docs/DEPENDENCY_CHAIN_PROGRAMME.md
+index 1e6283c..9c7e944 100644
+--- a/docs/DEPENDENCY_CHAIN_PROGRAMME.md
++++ b/docs/DEPENDENCY_CHAIN_PROGRAMME.md
+@@ -7,8 +7,10 @@ heat, with both 25-day ordinary checks complete. Scope and remaining work for
+ all seven authorised streams are in [SURVIVAL_CAPABILITIES.md](SURVIVAL_CAPABILITIES.md).
+ Rules 122 has bounded ordinary fish-preservation use in forest and null use in
+ river; existing full-suite/typecheck failures remain reported. The revised owner
+-attachment authorises body reserves last. Clothing is next; aggregate survival
+-benefit remain pending. The historical branch notes below retain their original scope.
++attachment authorises body reserves last. Rules-124 fibre clothing is now an
++uncommitted candidate under ordinary verification (see the same capability
++document); carcasses, traps/nets, domestic animals and reserves remain pending.
++Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
+ 
+ **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are
+ recorded in [PAVEL_LIVED_LIFE.md](PAVEL_LIVED_LIFE.md). This branch starts at the committed rules-116
+diff --git a/docs/SURVIVAL_CAPABILITIES.md b/docs/SURVIVAL_CAPABILITIES.md
+index c6750d3..fceac3b 100644
+--- a/docs/SURVIVAL_CAPABILITIES.md
++++ b/docs/SURVIVAL_CAPABILITIES.md
+@@ -280,18 +280,72 @@ rerun; the other 31 are the previously reproduced review failures. No full-green
+ claim is made. Verdict: **TURN_INTEGRATION_VERIFIED** for the bounded hearth chain;
+ aggregate benefit and the remaining five families are unverified.
+ 
+-## 3. Clothing and bedding — pending
+-
+-Complete plant-fibre acquisition and actual finite protection first; hide branch
+-remains pending until stream 4 supplies and prepares hides.
+-Source audit found no existing fibre resource. The selected implementation route
+-is bast fibre processed from physically gathered wood at the existing timber
+-yard, followed by fibre equipment recipes there. This is an implementing-agent
+-design choice, not a new owner decision. Reuse the durable equipment registry for
+-identity, condition, holders and transfers; add explicit wetness and equipped/laid
+-state, bounded to one garment/blanket per person and actual bedding places. Do not
+-use cosmetic Look fields. Exposure instrumentation now records the child's actual
+-location, action, cover and household situation before selecting any care repair.
++## 3. Clothing and bedding — rules 124 candidate, verification in progress
++
++Source audit found no existing fibre resource. The implementing agent selected
++bast fibre extracted from physically gathered wood at the existing timber yard:
++one wood and 60 work yield three fibre bundles. A garment or blanket uses three
++fibre and 100 work; a personal bedroll uses four fibre and 100 work. All use the
++existing recipe, facility, batch-plan, travel, deposit and collection paths.
++These are agent parameter choices, not a new owner decision. Hide remains
++pending until stream 4, and wool until stream 6 if that species supplies it.
++
++The existing durable registry owns identity, wear, holder and transfers. Saved
++textile state adds wetness and whether the item is readied; no cosmetic Look
++field changes behaviour. One garment gives at most six degrees of insulation.
++One blanket and one personal bedroll give four each only while their actual
++holder sleeps. The bedroll is carried rolled and spread beneath that one sleeper;
++it is not a building-wide bonus. Spares confer no extra protection. Readying
++takes 20 work. Gear counts against ordinary carry/storage capacity (0.75 each
++garment/blanket, 1 bedroll; fibre 0.25 per bundle).
++
++Protection scales linearly with remaining condition; fully wet gear loses 80%
++of that protection. Exposed rain adds up to 0.0008 wetness per tick; shelter
++reduces it. Dry weather removes 0.0002 per tick, with actual indoor hearth heat
++adding 0.00003 per degree. Active use adds 0.002 wear per tick, a 50,000-tick
++maximum continuous life without repair. One unreserved fibre and 60 work repair
++35 wear, never beyond new condition. Transfer clears the readied slot; the
++receiver must ready it. Wear-out destroys and ledgers the actual item.
++
++Exposure traces showed outdoor travel, lean-to cover and cold carers; they did
++not establish a missing child-transport mechanism. A carer instead acts on a
++currently visible cold dependent without a garment, makes or collects a spare,
++and uses the existing physical give activity. That route has real travel,
++capacity and access checks and remembers failed deliveries. Clothing receipt
++does not count as feeding or prevent a subsequent meal. Children may ready their
++own item; this does not permit child workshop production or repair.
++
++Thirteen focused tests cover paid offered production/collection/use, child delivery,
++slots, wetting/drying, repair, wear-out, interrupted and saved work, full packs,
++competing retrieval, loss, strict saved state, and pure observation. A 46-test
++subsystem run passed before the last care refinements. Rules-122/123 immutable
++continuations pass; do not regenerate them. The full command typecheck/build
++each exited 2 only on the two retained nullable review tests. The full suite is
++running on frozen `clothing-check2`; logs are in
++`survival_evidence/resume-20261104/clothing-*`.
++
++Rendered `scripts/browser/clothing_check.mjs` has seven passing assertions.
++`survival_evidence/clothing-rendered/` retains the reports and inspected dry/wet
++gear screenshots. The visible inspector states actual protection, wetness and
++condition; a real no-fibre repair attempt supplies the failure state.
++
++Ordinary `clothing-check1` revealed sparse garment production and omitted
++textiles from the persistent batch-plan allowlist; the omission was separately
++reproduced by a failing test and corrected. Its runs are retained as pre-fix
++evidence. Its forest run completed 60,000 ticks with 500 pure-observer checks,
++exact twins/continuation and conservation: three garments made, two dressed,
++one repaired, 50,808 adult protection ticks, no blanket/bedroll, zero survivors.
++This is pre-fix evidence and does not establish final-candidate benefit.
++`clothing-check2` measures that correction. Latest care refinements
++require their own matched-source check before this increment is complete.
++Do not infer ordinary blanket/bedroll/child uptake or survival benefit yet.
++
++Additional final-candidate checks: clothing/proposal boundaries passed 32 tests
++in four files (14.20 s); clothing/estate custody passed 28 in three (4.97 s),
++including death, retained condition, exact saving and actual recovery. Full
++typecheck and build still exit 2 solely on the two retained nullable review-test
++errors. Logs: `clothing-project-validation.log`, `clothing-estate.log`,
++`clothing-typecheck5.log`, `clothing-build2.log` in the resume evidence directory.
+ 
+ ## 4. Carcass recovery — pending
+ 
+diff --git a/scripts/observers/survival.ts b/scripts/observers/survival.ts
+index fec60d9..72a10f4 100644
+--- a/scripts/observers/survival.ts
++++ b/scripts/observers/survival.ts
+@@ -1,4 +1,5 @@
+ import {PRESERVED_FOODS} from '../../src/sim/constants';
++import {clothingWarmth,TEXTILES} from '../../src/sim/clothing';
+ import {RECIPE_BY_ID} from '../../src/sim/recipes';
+ import {preservationSurplus} from '../../src/sim/production';
+ import {stageOf} from '../../src/sim/people';
+@@ -29,12 +30,15 @@ export function survivalObserver(w:World){
+       if(related(a))inc(`chain starts:${a.kind}`);
+       if(hearthRelated(a))inc(`hearth starts:${a.kind}`);
+       if(a.kind==='hunt')inc('hunting pursuits started');
++      if(a.data.textile)inc(`textile starts:${a.data.textile}`);
++      if(a.kind==='operate'&&/^(strip_fibre|weave_)/.test(String(a.data.recipe)))inc(`textile starts:${a.data.recipe}`);
+       if(a.kind==='operate'&&RECIPE_BY_ID[String(a.data.recipe)]?.preservation)inc(`starts:${a.data.recipe}`);
+       if(a.kind==='plan_site'&&a.data.type==='food_rack')inc('starts:rack layout');
+     },
+     onActivityEnd(p,a,outcome,detail){
+       previous?.onActivityEnd?.(p,a,outcome,detail);
+       if(related(a))inc(`chain ends:${a.kind}:${outcome}:${detail}`);
++      if(a.data.textile||a.kind==='operate'&&/^(strip_fibre|weave_)/.test(String(a.data.running??a.data.recipe)))inc(`textile ends:${a.data.textile??a.data.running??a.data.recipe}:${outcome}:${detail}`);
+       if(hearthRelated(a))inc(`hearth ends:${a.kind}:${outcome}:${detail}`);
+       if(a.kind==='hunt'){
+         inc(`hunting ends:${outcome}:${detail}`);
+@@ -46,6 +50,7 @@ export function survivalObserver(w:World){
+     },
+     onTransfer(info){
+       previous?.onTransfer?.(info);
++      if(info.item==='garment'&&info.reason==='given')inc('textile garments given',info.n);
+       if(PRESERVED_FOODS.includes(info.item as typeof PRESERVED_FOODS[number]))inc(`transfer:${info.item}:${info.reason}`,info.n);
+       if(info.item==='fish'&&info.to.startsWith('building:')&&w.byId.get(Number(info.to.split(':')[1]))?.ent==='building')inc('fish delivered to buildings',info.n);
+       if(info.to.startsWith('building:')&&w.buildings.some(b=>b.id===Number(info.to.split(':')[1])&&b.type==='food_rack'))inc(`delivered to rack:${info.item}`,info.n);
+@@ -56,6 +61,7 @@ export function survivalObserver(w:World){
+       inc('sampled personally visible deer',ctx.p.seen.filter(s=>s.ent==='animal'&&ctx.world.byId.get(s.id)?.ent==='animal'&&(ctx.world.byId.get(s.id) as {type?:string}).type==='deer').length);
+       inc('sampled eligible hunt offers',ctx.options.filter(o=>o.kind==='hunt').length);
+       for(const o of ctx.options)if(o.key.startsWith('hearth_'))inc(`sampled hearth offers:${o.kind}`);
++      for(const o of ctx.options)if(/fibre|garment|blanket|bedding|^dress:|^clothe_child:/.test(o.key)||/^Mend my (garment|blanket|bedding)$/.test(o.label))inc(`sampled textile offers:${o.kind}`);
+       const raw=preservationSurplus(ctx);
+       if(raw&&ctx.stage!=='child')inc(`sampled known surplus:${raw}`);
+       for(const o of ctx.options)if(o.key==='plan_site:food_rack')inc('sampled offers:rack layout');
+@@ -82,6 +88,9 @@ export function survivalObserver(w:World){
+     tick(){
+       for(const s of w.sites)if(s.improvement==='hearth')fittingSites.add(s.id);
+       for(const p of w.persons)if(p.alive){
++        const textileHeat=clothingWarmth(w,p);
++        if(textileHeat>0){inc(`textile protected ticks:${stageOf(w,p)}`);inc(`textile degree-ticks:${stageOf(w,p)}`,textileHeat);}
++        if(p.activity&&(p.activity.data.textile||/fibre|garment|blanket|bedding|insulation/.test(p.activity.goal+' '+p.activity.label)))inc(`textile person ticks:${p.activity.kind}:${p.activity.phase}`);
+         if(p.activity&&hearthRelated(p.activity))inc(`hearth person ticks:${p.activity.kind}:${p.activity.phase}`);
+         const b=p.indoors?w.byId.get(p.indoors):null;
+         if(b?.ent==='building'&&b.hearth&&b.hearth.heat>0){inc('hearth heated occupant ticks');inc('hearth occupant degree-ticks',b.hearth.heat);}
+@@ -108,6 +117,7 @@ export function survivalObserver(w:World){
+       }
+     },
+     report(){return {counts,decisions,chainDecisions,coldEpisodes,racks:w.buildings.filter(b=>b.type==='food_rack').length,
++      textiles:{made:Object.fromEntries(['fibre',...TEXTILES].map(k=>[k,w.ledger.created[k as keyof typeof w.ledger.created]??0])),remaining:w.tools.filter(t=>t.textile).length,repairFibre:w.ledger.reasons['-mending textiles']??0},
+       hearths:w.buildings.filter(b=>b.hearth).length,hearthFuelConsumed:w.ledger.reasons['-fuel for indoor hearth']??0,
+       made:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.created[k]??0])),
+       consumed:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.consumed[k]??0])),
+diff --git a/scripts/ready_step_observe.ts b/scripts/ready_step_observe.ts
+index 73095ce..258fbc8 100644
+--- a/scripts/ready_step_observe.ts
++++ b/scripts/ready_step_observe.ts
+@@ -14,9 +14,11 @@ import {describePerson} from '../src/sim/inspect';
+ import {TimeBudget} from './observers/time_budget';
+ import {gitProvenance,sourceManifest} from './observers/provenance';
+ import {survivalObserver} from './observers/survival';
+-const [seed,out,daysArg='5',budgetArg='170',input]=process.argv.slice(2).filter(a=>a!=='--'),days=Number(daysArg),budget=Number(budgetArg);
++import {clothingObserver} from './observers/clothing';
++const traceClothing=process.argv.includes('--clothing');
++const [seed,out,daysArg='5',budgetArg='170',input]=process.argv.slice(2).filter(a=>a!=='--'&&a!=='--clothing'),days=Number(daysArg),budget=Number(budgetArg);
+ if(!seed||!out||existsSync(out)||!Number.isInteger(days)||days<1||days>365||!Number.isFinite(budget)||budget<=0)throw new Error('Seed, fresh output, integer days 1..365 and positive seconds budget required');
+-const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/ready_step_observe.ts','scripts/observers/time_budget.ts','scripts/observers/survival.ts').sort();
++const hash=(s:string)=>createHash('sha256').update(s).digest('hex'),files=readdirSync('src',{recursive:true}).map(String).filter(f=>f.endsWith('.ts')).map(f=>'src/'+f).concat('scripts/ready_step_observe.ts','scripts/observers/time_budget.ts','scripts/observers/survival.ts','scripts/observers/clothing.ts').sort();
+ const manifest=()=>sourceManifest(files),source=manifest();
+ const inputRaw=input?readFileSync(input,'utf8'):undefined;
+ const w=inputRaw?deserializeWorld(inputRaw):createWorld(currentWorldSettings('normal',seed)),initial=serializeWorld(w),twin=deserializeWorld(initial),began=performance.now();
+@@ -30,13 +32,16 @@ if(input)for(const p of w.persons)for(const i of p.intentions)if(i.status==='act
+ const READY=/already at the/;
+ w.hooks={onActivityStart:(p,a)=>{if(a.kind==='operate'&&a.data.forPlan){count('start:project operate:'+String(a.data.recipe));story({event:'start',tick:w.tick,person:p.id,recipe:a.data.recipe,ready:READY.test(String(a.data.why??'')),goal:a.goal});}if(a.kind==='cart_haul')count('start:cart_haul');},onActivityEnd:(p,a,outcome,detail)=>{if(a.kind==='operate'&&a.data.forPlan){count('ending:project operate:'+outcome);story({event:'ending',tick:w.tick,person:p.id,recipe:a.data.recipe,outcome,detail});}}};
+ const survival=survivalObserver(w);
++const clothing=traceClothing?clothingObserver(w):null;
+ const time=new TimeBudget(),detach=time.attach(w);let stop='horizon';
+ while(w.tick<days*2400){
+  time.sampleTick(w);
+  survival.tick();
++ clothing?.tick();
+  if(w.tick%120===0){const before=serializeWorld(w);for(const p of w.persons){if(!p.alive)continue;samples++;
+   const ctx=generateOptions(w,p,true,true),ranked=rankOptions(ctx);
+   survival.sample(ctx,ranked);
++  clothing?.sample(ctx,ranked);
+   for(const i of p.intentions){if(i.status!=='active'||!i.project)continue;if(!plansSeen.has(i.id)){plansSeen.add(i.id);count('project plans adopted:'+i.makes);story({event:'plan',tick:w.tick,person:p.id,makes:i.makes,goal:i.goal});}
+    const step=nextProjectStep(ctx,i.project,i);count('sampled project step:'+step.phase);
+    if(step.phase==='operate'){const o=ctx.options.find(o=>o.key===`operate:${step.target}:${step.node.recipe}`);const ready=!!o&&o.parts.some(p=>READY.test(String(p[0])));count(o?ready?'sampled operate step offered prepared':'sampled operate step offered unprepared':'sampled operate step not offered');if(o&&ranked[0]?.key===o.key)count(ready?'sampled prepared step ranked first':'sampled unprepared step ranked first');}}
+@@ -49,5 +54,5 @@ for(let n=0;n<120;n++){stepWorld(twin);stepWorld(restored);}
+ if(serializeWorld(twin)!==serializeWorld(restored))throw new Error('Saved continuation changed');
+ if(JSON.stringify(source)!==JSON.stringify(manifest()))throw new Error('Source changed during observation');
+ count('carts at end',w.carts.length);
+-const report={...gitProvenance(),seed,input:input??null,inputHash:inputRaw?hash(inputRaw):null,from,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,survival:survival.report(),timeBudget:time.report(),serializedBytes:Buffer.byteLength(final),continuationEqual:true,conservation:conservationReport(w),limits:'Short ordinary occurrence screen, not aggregate benefit or mature Large performance. Repeated samples are not independent opportunities; a prepared step offered is not a cart or a useful trip.'};
++const report={...gitProvenance(),seed,input:input??null,inputHash:inputRaw?hash(inputRaw):null,from,settings:w.settings,source,initialHash:hash(initial),tick:w.tick,days,budget,stop,seconds:(performance.now()-began)/1000,population:w.persons.filter(p=>p.alive).length,deaths:w.deceased,samples,pureChecks,counts,stories,survival:survival.report(),clothing:clothing?.report(),timeBudget:time.report(),serializedBytes:Buffer.byteLength(final),continuationEqual:true,conservation:conservationReport(w),limits:'Short ordinary occurrence screen, not aggregate benefit or mature Large performance. Repeated samples are not independent opportunities; a prepared step offered is not a cart or a useful trip.'};
+ mkdirSync(out,{recursive:true});writeFileSync(out+'/report.json',JSON.stringify(report,null,2));writeFileSync(out+'/final.json',final);console.log(JSON.stringify({seed,tick:w.tick,stop,seconds:report.seconds,samples,pureChecks,counts,deaths:w.deceased,conserved:report.conservation.ok}));if(stop!=='horizon')process.exitCode=1;
+diff --git a/src/app/save.ts b/src/app/save.ts
+index cd5d820..784a84c 100644
+--- a/src/app/save.ts
++++ b/src/app/save.ts
+@@ -1,5 +1,6 @@
+ import {validateChildhood} from '../sim/childhood';
+ import {validatePreservation} from '../sim/preservation';
++import {validateClothing} from '../sim/clothing';
+ import {validateHearth} from '../sim/hearth';
+ import {validateCompany} from '../sim/companionship';
+ import {validateNightExperience} from '../sim/night_experience';
+@@ -296,6 +297,7 @@ export function deserializeWorld(json: string): World {
+   validateOffcuts(w);
+   validatePreservation(w);
+   validateHearth(w);
++  validateClothing(w);
+   validateMealLeftovers(w);
+   validateEstateCustody(w);
+   validateWorkHandovers(w);
+diff --git a/src/sim/act_build.ts b/src/sim/act_build.ts
+index bff570e..55fd5ae 100644
+--- a/src/sim/act_build.ts
++++ b/src/sim/act_build.ts
+@@ -1,3 +1,4 @@
++import {isTextile} from './clothing';
+ import {hasLivedLife} from './lived_life';
+ import {hearthInstallBlock,isHearthAction,hearthFuelBegin,hearthFuelWork} from './hearth';
+ import {hasPromiseTargets,observePromiseTarget,finishedSiteHere} from './promise_targets';
+@@ -227,6 +228,7 @@ registerHandler('craft', {
+   pose: () => 'craft',
+   begin(world, p, a) {
+     const tool = a.data.tool as ToolKind;
++    if(isTextile(tool))return 'textiles must be woven at a timber yard';
+     const r = TOOL_RECIPE[tool];
+     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'missing materials';
+     const b = world.byId.get(a.targetId);
+@@ -241,6 +243,7 @@ registerHandler('craft', {
+     if (a.progress % 12 === 6) addFx(world, 'hammer', p.x, p.y, 0);
+     if (a.progress < a.duration) return 'continue';
+     const tool = a.data.tool as ToolKind;
++    if(isTextile(tool))return 'fail:textiles must be woven at a timber yard';
+     const r = TOOL_RECIPE[tool];
+     if ((p.inv.wood ?? 0) < r.wood || (p.inv.stone ?? 0) < r.stone) return 'fail:the materials went missing';
+     if(a.data.projectCraft&&runsRulesVersion(world,69)){
+diff --git a/src/sim/act_production.ts b/src/sim/act_production.ts
+index 14d52e0..ec0d635 100644
+--- a/src/sim/act_production.ts
++++ b/src/sim/act_production.ts
+@@ -1,3 +1,4 @@
++import {textileBegin,textileWork} from './clothing';
+ import {pileAccessBlocker} from './pile_access';
+ import { faceToward, registerHandler, standSpotFor } from './activities';
+ import type { WorkResult } from './activities';
+@@ -130,6 +131,7 @@ registerHandler('tool_work', {
+   availability: 0.4,
+   pose: () => 'craft',
+   begin(world, p, a) {
++    if(a.data.textile)return textileBegin(world,p,a);
+     if (a.data.cartId) {
+       const c = world.byId.get(a.data.cartId as number);
+       if (!c || c.ent !== 'cart') return 'the cart is gone';
+@@ -151,6 +153,7 @@ registerHandler('tool_work', {
+     a.ty = p.y;
+   },
+   work(world, p, a): WorkResult {
++    if(a.data.textile)return textileWork(world,p,a);
+     a.progress++;
+     if (a.progress % 12 === 6) addFx(world, 'hammer', p.x, p.y, 0);
+     if (a.progress < a.duration) return 'continue';
+diff --git a/src/sim/batch_plan.ts b/src/sim/batch_plan.ts
+index ca42143..a6aa1c0 100644
+--- a/src/sim/batch_plan.ts
++++ b/src/sim/batch_plan.ts
+@@ -45,7 +45,7 @@ export const BATCH_MIN_BASE = 8;
+ /** how long a batch plan is given: two trips for the inputs, the work, a burn of up to 420 ticks and the collection do not fit in two days */
+ export const BATCH_PATIENCE = DAY * 3;
+ /** what a batch plan may be about: the workshop products the planner wants, plus the two things fired or built from them */
+-export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart',...PRESERVED_FOODS]);
++export const BATCH_ITEMS: ReadonlySet<string> = new Set(['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'jar', 'cart','fibre','garment','blanket','bedding',...PRESERVED_FOODS]);
+ 
+ let enabled = true;
+ export const batchPlansOn = (): boolean => enabled;
+diff --git a/src/sim/buildings.ts b/src/sim/buildings.ts
+index aa4c420..1bb5a06 100644
+--- a/src/sim/buildings.ts
++++ b/src/sim/buildings.ts
+@@ -127,7 +127,7 @@ export function makeHousePile(world: World, x: number, y: number, items: Items,
+     registerGeneric(world, target);
+   }
+   // equipment keeps its identity: its records move to the heap along with the counts
+-  if (fromHolder) for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
++  if (fromHolder) for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
+   return target;
+ }
+ 
+diff --git a/src/sim/constants.ts b/src/sim/constants.ts
+index 7d1cd53..13bcc32 100644
+--- a/src/sim/constants.ts
++++ b/src/sim/constants.ts
+@@ -16,8 +16,8 @@ export const MAP_H = 80;
+ 
+ // ── items ──
+ export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
+-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'];
+-export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour'];
++export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'];
++export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre'];
+ // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
+ export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
+ export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS];
+@@ -25,6 +25,7 @@ export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MAT
+ export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fish: 28, grain: 22, bread: 30, meat: 26, dried_fish:24, smoked_fish:28, dried_meat:22, smoked_meat:26 };
+ export const WATER_VALUE = 36;
+ export const WEIGHT: Record<ItemKind, number> = {
++  fibre:.25, garment:.75, blanket:.75, bedding:1,
+   dried_fish:1, smoked_fish:1, dried_meat:1, smoked_meat:1,
+   offcuts: 1,
+   meat: 1.5,
+@@ -65,6 +66,7 @@ export const GRANARY_SPOIL = 0.2;
+ export const GRANARY_TEND_EVERY = DAY * 3;
+ export const GRANARY_NEGLECT_MULT = 2.2;
+ export const ITEM_LABEL: Record<ItemKind, string> = {
++  fibre:'bast fibre', garment:'fibre garment', blanket:'fibre blanket', bedding:'fibre bedroll',
+   dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
+   offcuts: 'offcut fuel bundles',
+   meat: 'meat',
+@@ -340,6 +342,9 @@ export interface ToolDef {
+   blurb: string;
+ }
+ export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
++  garment:{label:'fibre garment',hand:null,wear:.002,blurb:'insulation while worn'},
++  blanket:{label:'fibre blanket',hand:null,wear:.002,blurb:'insulation while sleeping'},
++  bedding:{label:'fibre bedroll',hand:null,wear:.002,blurb:'insulation beneath its sleeping owner'},
+   axe: { label: 'axe', hand: { cost: { wood: 2, stone: 1 }, work: 90 }, wear: 0.036, blurb: 'felling trees (and hewing planks the hard way)' },
+   pick: { label: 'pickaxe', hand: { cost: { wood: 2, stone: 2 }, work: 100 }, wear: 0.044, blurb: 'breaking rock and digging clay and ore' },
+   hoe: { label: 'hoe', hand: { cost: { wood: 2, stone: 1 }, work: 80 }, wear: 0.028, blurb: 'breaking ground and tending crops' },
+diff --git a/src/sim/decision.ts b/src/sim/decision.ts
+index b258572..bb1a4e5 100644
+--- a/src/sim/decision.ts
++++ b/src/sim/decision.ts
+@@ -1,3 +1,4 @@
++import {runsRulesVersion} from './rulesversion';
+ import { relocationOptions } from './relocation';
+ import {applyRouteExperience} from './route_learning';
+ import { whileObserving } from './lifechanges';
+@@ -100,7 +101,7 @@ export function rankOptions(ctx: Ctx): Option[] {
+   // the same thing as being impossible, and dropping it here is what made a plan impossible to carry across several activities.
+   // Every hard filter below (children, the relief guard, critical needs, fleeing, cooldowns) still applies to it.
+   let opts = ctx.options.filter((o) => o.make && (o.util > 0 || intentFor(p, o) !== null));
+-  if (ctx.stage === 'child') opts = opts.filter((o) => !CHILD_FORBIDDEN.includes(o.kind) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm');
++  if (ctx.stage === 'child') opts = opts.filter((o) => (!CHILD_FORBIDDEN.includes(o.kind) || runsRulesVersion(ctx.world,124)&&o.key.startsWith('dress:')) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm');
+   // work that would strand someone away from water or food is not taken on (see relief.ts)
+   opts = applyReliefGuard(ctx, opts);
+   if (ctx.criticals.length) {
+@@ -201,7 +202,7 @@ function whyWander(ctx: Ctx, ranked: Option[], at: number): void {
+   else if (usable.length === 0) probeWander(who + 'unusable');
+   else if (ranked.length === 1) {
+     // usable options were all removed by rankOptions: a child's limits, then what the relief guard and a critical need leave
+-    const forChild = ctx.stage === 'child' ? usable.filter((o) => !CHILD_FORBIDDEN.includes(o.kind) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm') : usable;
++    const forChild = ctx.stage === 'child' ? usable.filter((o) => (!CHILD_FORBIDDEN.includes(o.kind) || runsRulesVersion(ctx.world,124)&&o.key.startsWith('dress:')) && o.tag !== 'site' && o.tag !== 'build' && o.tag !== 'farm') : usable;
+     probeWander(who + (forChild.length === 0 ? 'filtered:child-limits' : ctx.criticals.length ? 'filtered:critical-need' : 'filtered:relief-guard'));
+   } else probeWander(who + 'outscored:' + ranked[1].kind);
+   // what the options set aside said, once per decision (only collected for a free person's decision)
+diff --git a/src/sim/dialogue.ts b/src/sim/dialogue.ts
+index 48b7774..1e278ea 100644
+--- a/src/sim/dialogue.ts
++++ b/src/sim/dialogue.ts
+@@ -58,6 +58,7 @@ export function smallTalk(world: World, a: number, b: number, atFire: boolean, c
+ }
+ 
+ export const ITEM_PHRASE: Record<ItemKind, string> = {
++  fibre:'bast fibre',garment:'garment',blanket:'blanket',bedding:'bedroll',
+   dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
+   offcuts: 'offcut fuel',
+   meat: 'meat',
+diff --git a/src/sim/facilities.ts b/src/sim/facilities.ts
+index 96c1733..87779c6 100644
+--- a/src/sim/facilities.ts
++++ b/src/sim/facilities.ts
+@@ -1,3 +1,4 @@
++import {recipeAvailable} from './recipes';
+ import { recordWorkshopOutput } from './settlement_economy';
+ import {preservationStartBlocker,preservationCanAdvance,preservationReady} from './preservation';
+ import { recoveredOffcuts } from './offcuts';
+@@ -348,6 +349,7 @@ function depositOf(world: World, b: Building): Source | null {
+ 
+ /** Why this person cannot start this recipe here right now ('' if they can). The text is what the inspector shows. */
+ export function startBlocker(world: World, b: Building, p: Person, r: Recipe, trial = false): string {
++  if(!recipeAvailable(world,r))return 'this recipe is not available under these rules';
+   const accessibleFood=r.preservation?foodUnits(Object.fromEntries(Object.keys(b.store.items).map(k=>[k,usableUnits(world,b,p,k as ItemKind)]))):0;
+   const preservationBlock=preservationStartBlocker(world,p,r,accessibleFood);
+   if(preservationBlock)return preservationBlock;
+@@ -444,6 +446,7 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
+   const job = b.ops?.job;
+   if (!job) return 'nothing is being made';
+   const r = recipeOf(job);
++  if(!recipeAvailable(world,r))return 'this recipe is not available under these rules';
+   if (job.phase !== 'work') return job.phase === 'burn' ? r.preservation==='dry'?'it is drying; there is nothing to do but wait':'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
+   const technique = techniqueBlocker(world,p,r.id);
+   if(technique)return technique;
+@@ -460,6 +463,7 @@ export function workJob(world: World, b: Building, p: Person): 'continue' | 'wor
+   const job = ops?.job;
+   if (!ops || !job || job.phase !== 'work') return 'stopped';
+   const r = recipeOf(job);
++  if(!recipeAvailable(world,r))return 'stopped';
+   if(r.preservation){
+     if(!mayUse(world,p,b)){ops.lastBlocker='the rack is no longer theirs to use';return 'preservation_failed';}
+     if(!preservationCanAdvance(world,b))return 'preservation_failed';
+diff --git a/src/sim/habitation.ts b/src/sim/habitation.ts
+index 3206714..00d6abe 100644
+--- a/src/sim/habitation.ts
++++ b/src/sim/habitation.ts
+@@ -71,6 +71,7 @@ export function leaveHome(w: World, p: Person): string | null {
+ }
+ /** Only these ordinary activities may execute without leaving the interior. */
+ export function staysIndoors(w: World, p: Person, a: Activity): boolean {
++  if(runsRulesVersion(w,124)&&a.kind==='tool_work'&&a.data.textile)return true;
+   if((isStoredDrink(w,a)||isHearthAction(w,a))&&a.targetId===p.indoors)return true;
+   if (hasLocalGiving(w) && a.kind === 'give' && indoorHome(w, p)) {
+     const q = w.byId.get(a.targetId);
+diff --git a/src/sim/inspect_work.ts b/src/sim/inspect_work.ts
+index 541df7c..de36305 100644
+--- a/src/sim/inspect_work.ts
++++ b/src/sim/inspect_work.ts
+@@ -1,4 +1,5 @@
+ import {worldAge,worldDuration} from './time_text';
++import {textileProtection} from './clothing';
+ import {PRESERVATION_MAX_AGE,preservationWorkers} from './preservation';
+ import {runsRulesVersion} from './rulesversion';
+ import {describeDelay} from './promise_delays';
+@@ -8,7 +9,7 @@ import {recoveredOffcuts} from './offcuts';
+ import { BUILD_DEF, GRANARY_TEND_EVERY, SOURCE_ITEM, TOOL_DEFS } from './constants';
+ import { weightOf } from './economy';
+ import { opsOf, recipeOf, usableUnits } from './facilities';
+-import { RECIPES, recipesAt } from './recipes';
++import { RECIPES, recipesAt, recipeAvailable } from './recipes';
+ import type { Recipe } from './recipes';
+ import { toolsHeldBy } from './toolreg';
+ import { mealOf, previousMealOf } from './meals';
+@@ -178,7 +179,7 @@ export function describeFacility(world: World, b: Building): Section[] {
+   if (!ops) return [];
+   const sections: Section[] = [];
+   const def = BUILD_DEF[b.type];
+-  const recs = recipesAt(b.type);
++  const recs = recipesAt(b.type).filter(r=>recipeAvailable(world,r));
+   const recoverable=recs.filter(r=>recoveredOffcuts(world,r)>0);
+   if(recoverable.length)sections.push({title:'Recoverable timber fuel',notes:recoverable.map(r=>`${r.label}: ${recoveredOffcuts(world,r)} fuel bundle(s) from ${recoveredOffcuts(world,r)*0.5} wood units formerly discarded. Each bundle weighs 1 and fuels a fire half as long as a log. The rest remains waste. Collection takes a real trip and handling time; bundles use store space and belong to the batch client.`)});
+   sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} → ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} · ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s ${r.preservation==='dry'?'drying in fair weather':'burning'}` : ''}`] as [string, string]) });
+@@ -340,7 +341,7 @@ export function toolViews(world: World, p: Person): ToolView[] {
+   return toolsHeldBy(world, p.id).map((t) => ({
+     id: t.id,
+     kind: t.kind,
+-    label: `${t.tier === 1 ? 'iron ' : ''}${TOOL_DEFS[t.kind].label}`,
++    label: `${t.tier === 1 ? 'iron ' : ''}${TOOL_DEFS[t.kind].label}${t.textile ? ` — ${t.textile.equipped ? (t.kind==='garment'?'worn':'ready for sleep'):'packed'}, ${Math.round(t.textile.wet*100)}% wet, +${textileProtection(p,t).toFixed(1)} degrees now` : ''}`,
+     tier: t.tier,
+     wear: Math.round(t.wear),
+     loan: t.loan ? (t.loan.lender === 0 ? `taken from the shared rack, due back ${inFuture(world, t.loan.due)}` : `borrowed from ${nameOf(world, t.loan.lender)}, due back ${inFuture(world, t.loan.due)}`) : t.ownerHh !== p.hhId ? `belongs to the ${hhName(world, t.ownerHh)}` : null,
+diff --git a/src/sim/labels.ts b/src/sim/labels.ts
+index a58581b..af0cbb4 100644
+--- a/src/sim/labels.ts
++++ b/src/sim/labels.ts
+@@ -95,6 +95,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
+ };
+ 
+ export const ITEM_ICON: Record<ItemKind, string> = {
++  fibre:'fibre',garment:'garment',blanket:'blanket',bedding:'bedding',
+   dried_fish:'fish', smoked_fish:'fish', dried_meat:'meat', smoked_meat:'meat',
+   offcuts: 'wood',
+   meat: 'meat',
+diff --git a/src/sim/needs.ts b/src/sim/needs.ts
+index 13f20e6..40d2a75 100644
+--- a/src/sim/needs.ts
++++ b/src/sim/needs.ts
+@@ -1,3 +1,4 @@
++import {clothingWarmth} from './clothing';
+ import {hearthWarmth} from './hearth';
+ import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
+ import { nearLitFire } from './perception';
+@@ -99,7 +100,7 @@ export function updateNeeds(world: World, p: Person): void {
+   const sh = shelterAt(world, p.x, p.y, p);
+   const fire = indoorHome(world, p) ? 0 : fireWarmth(world, p.x, p.y);
+   const wet = w.rain * 3.6 * (1 - sh.cover);
+-  const eff = w.temp + 2 + sh.bonus + fire + hearthWarmth(world,p) - wet;
++  const eff = w.temp + 2 + sh.bonus + fire + hearthWarmth(world,p) + clothingWarmth(world,p) - wet;
+   const target = clamp(50 + (eff - 10) * 5, 0, 100);
+   n.warmth += (target - n.warmth) * 0.006;
+ 
+diff --git a/src/sim/options_survival.ts b/src/sim/options_survival.ts
+index 16c711f..cdeaa6e 100644
+--- a/src/sim/options_survival.ts
++++ b/src/sim/options_survival.ts
+@@ -1,3 +1,4 @@
++import {clothingOptions} from './clothing';
+ import {hasChildhood} from './childhood_rules';
+ import {hasLivedLife} from './lived_life';
+ import {SLEEP_RECOVER} from './constants';
+@@ -731,6 +732,7 @@ function optRest(ctx: Ctx): void {
+ }
+ 
+ export function survivalOptions(ctx: Ctx): void {
++  clothingOptions(ctx);
+   optFlee(ctx);
+   // Standing and facing it is the other answer to a wolf (defence.ts, rules version 4). It is offered here, beside
+   // fleeing, because it answers the same situation; which of the two a person takes is the ranking's business, and
+diff --git a/src/sim/options_work.ts b/src/sim/options_work.ts
+index 95d9338..5a0f64b 100644
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -385,7 +385,7 @@ export function setWorkshopTools(on: boolean): void { workshopTools = on; }
+ function workshopTool(ctx: Ctx): HandTool | null {
+   if (!workshopTools || ctx.world.settings.dynamics !== 'rich' || !runsRulesVersion(ctx.world, 57) || ctx.stage === 'child') return null;
+   const tool = ctx.toolWanted?.kind;
+-  return tool && tool !== 'jar' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
++  return tool && tool !== 'jar' && tool !== 'garment' && tool !== 'blanket' && tool !== 'bedding' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
+ }
+ 
+ export function wantedTool(ctx: Ctx): HandTool | null {
+diff --git a/src/sim/perception.ts b/src/sim/perception.ts
+index 243af8d..8d38432 100644
+--- a/src/sim/perception.ts
++++ b/src/sim/perception.ts
+@@ -38,7 +38,7 @@ export function senseRadius(world: World, p: Person): number {
+   return r;
+ }
+ 
+-const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat'];
++const CARRY_KEYS: ItemKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread', 'meat', 'seeds', 'water', 'wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'fibre', 'garment', 'blanket', 'bedding'];
+ 
+ function describeSeenPerson(world: World, e: Person): SeenEntity {
+   const carrying: ItemKind[] = [];
+diff --git a/src/sim/production.ts b/src/sim/production.ts
+index 7766b96..ab546c2 100644
+--- a/src/sim/production.ts
++++ b/src/sim/production.ts
+@@ -1,3 +1,5 @@
++import {recipeAvailable} from './recipes';
++import {hasClothing,isTextile,TEXTILES} from './clothing';
+ import {hasProjectAcquire} from './project_acquire';
+ import {hearthOptions,knownColdHearth} from './hearth';
+ import {hasPreservation} from './preservation';
+@@ -321,7 +323,7 @@ function perBatch(r: Recipe, item: ItemKind | 'cart' | 'tend'): number {
+  * or somewhere else (so that becomes the next thing to fetch). Nothing here is a guarantee: it is a plan from memory.
+  */
+ function planRecipe(ctx: Ctx, f: Fac, r: Recipe, item: ItemKind | 'cart' | 'tend', unmet: number, base: number, why: string, tag: string, depth: number, siteId = 0, toolRequired?: boolean, ready = ''): void {
+-  if(r.preservation&&!hasPreservation(ctx.world))return;
++  if(!recipeAvailable(ctx.world,r)||r.preservation&&!hasPreservation(ctx.world))return;
+   const { world, p } = ctx;
+   const b = f.b;
+   const technique = techniqueBlocker(world,p,r.id);
+@@ -583,13 +585,23 @@ function toolRequiredFor(ctx: Ctx, recipes: Recipe[]): boolean | undefined {
+ }
+ 
+ // ───────────────────────── what is wanted ─────────────────────────
+-const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread'];
++const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'fibre'];
+ const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0;
+ 
+ /** Demands this person is aware of: from building sites they know, repairs, their own tools, their household's table. */
+ export function demandsOf(ctx: Ctx): Demand[] {
+   const { world, p } = ctx;
+   const out: Demand[] = [];
++  if(hasClothing(world)){
++    const cold=p.needs.warmth<65||world.weather.temp<12;
++    for(const kind of TEXTILES){
++      const childNeeds=kind==='garment'&&ctx.seenPersons.some(s=>s.child&&s.cold&&!s.carrying.includes('garment')&&ctx.dependents.some(d=>d.id===s.id));
++      if(!cold&&!childNeeds)continue;
++      const target=1+(childNeeds?1:0),have=p.inv[kind]??0;
++      if(have<target)out.push({item:kind,qty:target,have,base:kind==='garment'?32:25,why:childNeeds?'insulation for me and the cold child':'personal insulation against the cold',tag:'craft'});
++    }
++    if(toolsHeldBy(world,p.id).some(t=>isTextile(t.kind)&&t.wear>=45)&&(p.inv.fibre??0)<1)out.push({item:'fibre',qty:1,have:0,base:28,why:'mend worn insulation',tag:'craft'});
++  }
+   if(hasPreservation(world)){
+     const raw=preservationSurplus(ctx);
+     // A finite food job belongs to the same planner as other workshop batches.
+@@ -632,7 +644,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
+   if (facilitiesOf(ctx, 'smithy').length) {
+     let worst: { kind: ToolKind; wear: number } | null = null;
+     for (const t of toolsHeldBy(world, p.id)) {
+-      if (t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
++      if (isTextile(t.kind) || t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
+       if (toolsHeldBy(world, p.id, t.kind).some((x) => x.tier === 1)) continue;
+       if (t.wear >= 18 && (!worst || t.wear > worst.wear)) worst = { kind: t.kind, wear: t.wear };
+     }
+@@ -709,7 +721,7 @@ function wantsCart(ctx: Ctx): boolean {
+ function optToolMaintenance(ctx: Ctx): void {
+   const { world, p } = ctx;
+   for (const t of toolsHeldBy(world, p.id)) {
+-    if (t.kind === 'jar' || t.wear < 52) continue;
++    if (isTextile(t.kind) || t.kind === 'jar' || t.wear < 52) continue;
+     const mat = unitsOf(p.inv.handles) > 0 ? 'handles' : unitsOf(p.inv.wood) > 0 ? 'wood' : null;
+     if (!mat) continue;
+     const sc = new Scorer().add(`my ${TOOL_DEFS[t.kind].label} is wearing out`, 9 + (t.wear - 52) * 0.55 + 6 * p.traits.diligence);
+@@ -989,11 +1001,13 @@ export function facilityWants(ctx: Ctx): FacilityWant[] {
+ 
+   if (!knowsEnough(ctx, 'timber_yard')) {
+     let s = 0;
++    const insulation=hasClothing(world)&&!p.inv.garment&&(p.needs.warmth<65||world.weather.temp<12);
++    if(insulation)s+=.6;
+     const planks = planksWanted(ctx);
+     if (planks > 0) s += 0.9;
+     if (wish > 0.5) s += 0.55;
+     if ((p.skills.carpentry > 1.05 || p.traits.curiosity > 0.6) && init > 0.5) s += 0.15;
+-    if (s >= 0.5) out.push({ type: 'timber_yard', signal: Math.min(1, s), why: planks > 0 ? 'planks are wanted and there is no yard to saw them' : 'the old hut is too small and too poor a roof: a yard would give us planks' });
++    if (s >= 0.5) out.push({ type: 'timber_yard', signal: Math.min(1, s), why: planks > 0 ? 'planks are wanted and there is no yard to saw them' : insulation?'the cold calls for fibre insulation and there is no yard to make it':'the old hut is too small and too poor a roof: a yard would give us planks' });
+   }
+   if (!knowsOfAny(ctx, 'quarry') && outcrops.length > 0) {
+     let s = 0;
+diff --git a/src/sim/project_compile.ts b/src/sim/project_compile.ts
+index 6fdc532..b83f79f 100644
+--- a/src/sim/project_compile.ts
++++ b/src/sim/project_compile.ts
+@@ -1,3 +1,4 @@
++import {recipeAvailable} from './recipes';
+ // Build a finite prerequisite tree from personal knowledge. Compilation creates no action, reservation or material.
+ import {TOOL_DEFS,TOOL_RECIPE,isHomeType} from './constants';
+ import {hasKnownResource} from './intent';
+@@ -50,6 +51,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
+   }
+   let failure='no personally known way to obtain '+item;
+   for(const r of recipesMaking(item)){
++   if(!recipeAvailable(world,r))continue;
+    if(tier===1&&r.toolOut?.tier!==1)continue;
+    if(techniqueBlocker(world,p,r.id)){failure=techniqueBlocker(world,p,r.id)!;continue;}
+    for(const fac of facilitiesOf(ctx,r.at).slice(0,PROJECT_LIMITS.alternatives)){
+@@ -62,7 +64,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
+      for(const k of Object.keys(recipeInputs(r)) as ItemKind[])node.dependencies.push(build(k,recipeInputs(r)[k]!,0,fac.b.id,depth+1,chain));
+      const perBatch=r.cartOut||r.toolOut?1:r.outputs[item as ItemKind]??r.fromDeposit?.n??1;
+      node.estimatedTicks=Math.ceil(quantity/perBatch)*(r.work+r.burn+node.dependencies.reduce((n,id)=>n+nodes[id-1].estimatedTicks,0));
+-     node.alternatives=recipesMaking(item).filter(other=>other.id!==r.id&&facilitiesOf(ctx,other.at).length>0&&!techniqueBlocker(world,p,other.id)).slice(0,PROJECT_LIMITS.alternatives).map(other=>other.id);
++     node.alternatives=recipesMaking(item).filter(other=>other.id!==r.id&&recipeAvailable(world,other)&&facilitiesOf(ctx,other.at).length>0&&!techniqueBlocker(world,p,other.id)).slice(0,PROJECT_LIMITS.alternatives).map(other=>other.id);
+      return node.id;
+     }catch(e){failure=e instanceof Error?e.message:String(e);nodes.splice(checkpoint);node.dependencies=[];}
+    }
+diff --git a/src/sim/proposals.ts b/src/sim/proposals.ts
+index f49b079..42600df 100644
+--- a/src/sim/proposals.ts
++++ b/src/sim/proposals.ts
+@@ -12,7 +12,7 @@ import {hasBatchPlans} from './batch_plan';
+ import {adoptProposedBatch} from './intent';
+ import type {Ctx} from './optutil';
+ import {facilitiesOf} from './production';
+-import {RECIPES} from './recipes';
++import {RECIPES,recipeAvailable} from './recipes';
+ import type {Intention,ItemKind} from './types';
+ export type ProposalResult={ok:true;plan:Intention;searched:number}|{ok:false;reason:string};
+ /** the goal as text, for notes and logs */
+@@ -42,6 +42,7 @@ export function proposableItems(ctx:Ctx):string[]{
+  if(!hasProjectPlans(ctx.world)||!hasBatchPlans(ctx.world)||ctx.stage==='child')return [];
+  const out=new Set<string>();
+  for(const r of RECIPES){
++  if(!recipeAvailable(ctx.world,r))continue;
+   if(!facilitiesOf(ctx,r.at).length)continue;
+   if(r.cartOut)out.add('cart');
+   if(r.toolOut)out.add(r.toolOut.kind);
+diff --git a/src/sim/recipes.ts b/src/sim/recipes.ts
+index 364e2da..4b4199f 100644
+--- a/src/sim/recipes.ts
++++ b/src/sim/recipes.ts
+@@ -1,3 +1,5 @@
++import {runsRulesVersion} from './rulesversion';
++import type {World} from './types';
+ import { CART_COST } from './constants';
+ import type { BuildingType, FacilityState, Items, ItemKind, SkillKey, ToolKind } from './types';
+ 
+@@ -11,6 +13,7 @@ import type { BuildingType, FacilityState, Items, ItemKind, SkillKey, ToolKind }
+  * the ledger.
+  */
+ export interface Recipe {
++  minRules?:number;
+   id: string;
+   label: string;
+   /** e.g. "Sawing planks" */
+@@ -51,7 +54,10 @@ export interface Recipe {
+ 
+ const none: Items = {};
+ 
++export const recipeAvailable=(w:World,r:Recipe):boolean=>!r.minRules||w.settings.dynamics==='rich'&&runsRulesVersion(w,r.minRules);
+ export const RECIPES: Recipe[] = [
++  {id:'strip_fibre',label:'bast fibre',doing:'Separating and twisting bast fibre',at:'timber_yard',inputs:{wood:1},fuel:{},work:60,burn:0,outputs:{fibre:3},waste:{},wasteWhy:'',skill:null,workers:1,serves:['fibre'],benefit:'Three fibre bundles separated from gathered wood.',minRules:124},
++  ...(['garment','blanket','bedding'] as const).map((kind):Recipe=>({id:`weave_${kind}`,label:`fibre ${kind}`,doing:`Weaving a ${kind}`,at:'timber_yard',inputs:{fibre:kind==='bedding'?4:3},fuel:{},work:100,burn:0,outputs:{},toolOut:{kind,tier:0},waste:{},wasteWhy:'',skill:null,workers:1,serves:[kind],benefit:'Paid personal insulation with finite wear and wetness.',minRules:124})),
+   ...(['fish', 'meat'] as const).flatMap(raw => (['dry','smoke'] as const).map((method):Recipe => ({
+     id:`${method}_${raw}`, label:`${method==='dry'?'dried':'smoked'} ${raw}`,
+     doing:`${method==='dry'?'Drying':'Smoking'} ${raw}`, at:'food_rack',
+@@ -318,6 +324,7 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
+     for (const k of Object.keys(r.outputs) as ItemKind[]) set.add(k);
+   }
+   if (type === 'timber_yard') {
++    set.add('garment');set.add('blanket');set.add('bedding');
+     set.add('wood');
+     set.add('planks');
+     set.add('handles');
+diff --git a/src/sim/rulesversion.ts b/src/sim/rulesversion.ts
+index 80d2987..c67b200 100644
+--- a/src/sim/rulesversion.ts
++++ b/src/sim/rulesversion.ts
+@@ -172,10 +172,11 @@ import type { Settings, World } from './types';
+ // Version 121: resumed gathering retains the outcome of already paid food acquisition (numbered 120 before integration).
+ // Version 122: bounded fish/meat drying and smoking through physical facility batches.
+ // Version 123: paid indoor hearth fittings, delivered fuel and finite heat for actual occupants.
+-export const CURRENT_RULES_VERSION = 123;
++// Version 124: paid fibre insulation, finite textile condition and personal sleeping gear.
++export const CURRENT_RULES_VERSION = 124;
+ 
+ /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
+-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123];
++export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124];
+ 
+ /**
+  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
+diff --git a/src/sim/social.ts b/src/sim/social.ts
+index fc60b8e..4f27b83 100644
+--- a/src/sim/social.ts
++++ b/src/sim/social.ts
+@@ -187,6 +187,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
+ 
+ export function valueOf(world: World, p: Person, item: ItemKind): number {
+   const base: Record<ItemKind, number> = {
++  fibre:1.2,garment:5,blanket:5,bedding:6,
+     dried_fish:2.6, smoked_fish:2.8, dried_meat:2.6, smoked_meat:2.8,
+     offcuts: 0.7,
+     berries: 1, fruit: 1.3, fish: 2, grain: 1.6, bread: 2.4, meat: 2.2, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,
+@@ -1954,7 +1955,7 @@ registerHandler('give', {
+       return `${t.name} was not where I expected`;
+     }
+     if ((t.cooldowns.pause ?? 0) > world.tick) return `${t.name} is already being attended to`;
+-    if ((t.cooldowns.fedUntil ?? 0) > world.tick) return `${t.name} has just been looked after`;
++    if (!(runsRulesVersion(world,124)&&a.data.textileDelivery) && (t.cooldowns.fedUntil ?? 0) > world.tick) return `${t.name} has just been looked after`;
+     a.duration = 14;
+     // the other person stops for a moment to receive (one giver at a time)
+     t.cooldowns.pause = world.tick + a.duration + 3;
+@@ -1996,7 +1997,7 @@ registerHandler('give', {
+       moved += m;
+     }
+     t.cooldowns.pause = 0;
+-    if (!hasLocalGiving(world) || moved > 0) t.cooldowns.fedUntil = world.tick + 120; // only actual receipt gives them time to eat
++    if ((!hasLocalGiving(world) || moved > 0)&&!(runsRulesVersion(world,124)&&a.data.textileDelivery)) t.cooldowns.fedUntil = world.tick + 120; // only actual food receipt gives them time to eat
+     if (moved <= 0) {
+       if (a.data.mode === 'care') noteCarePackFailure(world, p, t, want);
+       if (a.data.commitmentId) {
+@@ -2010,7 +2011,7 @@ registerHandler('give', {
+     }
+     a.cycle = moved;
+     // being handed food or water wakes a sleeper
+-    if (t.activity && t.activity.kind === 'sleep') endActivity(world, t, 'interrupted', 'woken to be fed');
++    if (t.activity && t.activity.kind === 'sleep') endActivity(world, t, 'interrupted', runsRulesVersion(world,124)&&a.data.textileDelivery?'woken to receive a garment':'woken to be fed');
+     const mode = (a.data.mode as string) ?? 'give';
+     onGift(world, p, t, got, mode);
+     bubble(world, p, mode==='care'&&runsRulesVersion(world,95)?`Here is ${itemsToText(got)}, ${t.name}.`:D.saying(mode === 'care' ? D.CARE_LINES : D.OFFER_LINES, p.id, t.id, world.tick >> 5, { n: t.name, what: Object.keys(got)[0] }), 'say', 56);
+@@ -2026,6 +2027,9 @@ registerHandler('give', {
+     }
+     return 'done';
+   },
++  onEnd(world,p,a,outcome,detail){
++    if(runsRulesVersion(world,124)&&a.data.textileDelivery&&outcome==='failed')noteFailure(world,p,a.targetId,detail);
++  },
+ });
+ 
+ void estimatedAmount;
+diff --git a/src/sim/toolreg.ts b/src/sim/toolreg.ts
+index d332592..6c3c6ba 100644
+--- a/src/sim/toolreg.ts
++++ b/src/sim/toolreg.ts
+@@ -52,13 +52,16 @@ export function retagTools(world: World, kind: ToolKind, n: number, fromId: numb
+     const t = toolById(world, prefer);
+     if (t && t.holder === fromId) {
+       t.holder = toId;
++      if(t.textile)t.textile.equipped=false;
+       moved++;
+     }
+   }
+-  for (const t of world.tools) {
++  const candidates=world.tools.slice().sort((a,b)=>Number(a.textile?.equipped??false)-Number(b.textile?.equipped??false));
++  for (const t of candidates) {
+     if (moved >= n) break;
+     if (t.holder === fromId && t.kind === kind && retaggable(world, t, toId)) {
+       t.holder = toId;
++      if(t.textile)t.textile.equipped=false;
+       moved++;
+     }
+   }
+@@ -66,7 +69,7 @@ export function retagTools(world: World, kind: ToolKind, n: number, fromId: numb
+ }
+ 
+ export function isToolItem(k: ItemKind): k is ToolKind {
+-  return k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'spear';
++  return k === 'axe' || k === 'pick' || k === 'hoe' || k === 'basket' || k === 'hammer' || k === 'saw' || k === 'jar' || k === 'spear' || k === 'garment' || k === 'blanket' || k === 'bedding';
+ }
+ 
+ /** The Items container physically holding things for an entity id, if it has one. */
+@@ -103,7 +106,7 @@ export function toolReport(world: World): { ok: boolean; problems: string[] } {
+     if (items && (items[kind as ItemKind] ?? 0) !== n) problems.push(`holder ${hid} has ${items[kind as ItemKind] ?? 0} ${kind} in its items but ${n} tool records`);
+   }
+   const check = (id: number, items: Items) => {
+-    for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear'] as ToolKind[]) {
++    for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'] as ToolKind[]) {
+       const have = items[k] ?? 0;
+       if (have > 0 && (counted[id + ':' + k] ?? 0) !== have) problems.push(`holder ${id} counts ${have} ${k} but has ${counted[id + ':' + k] ?? 0} tool records`);
+     }
+diff --git a/src/sim/tools.ts b/src/sim/tools.ts
+index c5928fc..4e823f7 100644
+--- a/src/sim/tools.ts
++++ b/src/sim/tools.ts
+@@ -109,6 +109,7 @@ export function mintTool(
+     madeTick: world.tick,
+     maker,
+   };
++  if(kind==='garment'||kind==='blanket'||kind==='bedding')t.textile={wet:0,equipped:false};
+   world.tools.push(t);
+   addItem(items, kind, 1);
+   if (ledger) ledgerCreate(world, kind, 1, reason);
+diff --git a/src/sim/types.ts b/src/sim/types.ts
+index 34e1e8d..0a9a143 100644
+--- a/src/sim/types.ts
++++ b/src/sim/types.ts
+@@ -9,9 +9,9 @@ export type TerrainType = (typeof T)[keyof typeof T];
+ // ───────────────────────────── items ─────────────────────────────
+ export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat';
+ /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
+-export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear';
++export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding';
+ /** Raw materials and the things made from them. */
+-export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour';
++export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre';
+ export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts';
+ export type Items = Partial<Record<ItemKind, number>>;
+ 
+@@ -905,6 +905,7 @@ export interface FacilityState {
+ 
+ // ───────────────────────────── tools and carts ─────────────────────────────
+ export interface Tool {
++  textile?: {wet:number;equipped:boolean};
+   ent: 'tool';
+   id: number;
+   kind: ToolKind;
+diff --git a/src/sim/world.ts b/src/sim/world.ts
+index f5547dd..0c332da 100644
+--- a/src/sim/world.ts
++++ b/src/sim/world.ts
+@@ -1,3 +1,4 @@
++import {clothingTick} from './clothing';
+ import { updateEcology } from './ecology';
+ import {hearthTick} from './hearth';
+ import {runsPreservation} from './preservation';
+@@ -92,6 +93,7 @@ export function stepWorld(world: World): void {
+   if (tick % 90 === 0) decayWear(world);
+   roadsTick(world);
+ 
++  clothingTick(world);
+   updateWildlife(world);
+   rebuildMobileGrid(world);
+ 
+@@ -353,6 +355,7 @@ export function hashWorld(world: World, trace?: (part: string) => void): string
+     }
+     push(`R${r4(aff)},${r4(fam)}|B${Object.keys(p.beliefs).length}`);
+   }
++  for(const t of world.tools)if(t.textile)push('Textile'+t.id+JSON.stringify(t.textile));
+   if (world.ecology) push('Ecology' + JSON.stringify(world.ecology));
+   if (world.waterBodies) push('WaterBudget' + JSON.stringify(world.waterBodies));
+   if (world.flood) push('Flood' + JSON.stringify(world.flood));
+diff --git a/src/ui/icons.ts b/src/ui/icons.ts
+index 3aa45b1..f10cb7e 100644
+--- a/src/ui/icons.ts
++++ b/src/ui/icons.ts
+@@ -6,6 +6,10 @@ import type { ItemKind, NeedKey } from '../sim/types';
+ const DARK = '#0e1822';
+ 
+ const ICONS = {
++  fibre: `<path d="M2 13Q8 10 7 2M6 14Q12 9 11 2M3 4l9 7M3 8l8 5" fill="none" stroke="currentColor" stroke-width="1.4"/>`,
++  garment: `<path d="M5 2 1 5l2 3 2-1v7h6V7l2 1 2-3-4-3Q8 5 5 2Z" fill="currentColor"/>`,
++  blanket: `<path d="M3 2h10v12H3Z" fill="currentColor"/><path d="M3 5h10M5 2v12" stroke="#fff" stroke-opacity=".5"/>`,
++  bedding: `<path d="M2 4h12v8H2Z" fill="currentColor"/><ellipse cx="4" cy="8" rx="2" ry="4" stroke="#fff" stroke-opacity=".5" fill="none"/>`,
+   offcuts: `<path d="M2 5l7-2 1 3-7 2ZM5 9l8-2 1 3-8 2ZM2 12l7-1 1 3-7 1Z" fill="currentColor" stroke="none"/><path d="M6 4l2 9" stroke="${DARK}" stroke-width="1.5"/>`,
+   // ───────── items ─────────
+   berries: `<g fill="currentColor" stroke="none"><circle cx="5.1" cy="10.7" r="3"/><circle cx="10.9" cy="10.7" r="3"/><circle cx="8" cy="6.7" r="3"/></g><path d="M8 3.7c.1-1 .7-1.8 1.9-2.3" stroke="#7fb069" stroke-width="1.5"/><path d="M4.1 9.8c.2-.6.6-.9 1.1-1.1M9.9 9.8c.2-.6.6-.9 1.1-1.1M7 5.8c.2-.5.5-.8.9-.9" stroke="#fff" stroke-opacity=".5" stroke-width="1"/>`,
+diff --git a/src/ui/person.ts b/src/ui/person.ts
+index 4f2ef78..b3cd249 100644
+--- a/src/ui/person.ts
++++ b/src/ui/person.ts
+@@ -202,6 +202,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
+   // the equipment they hold: one small icon each, worn ones paler with a thin bar beneath
+   const toolChips = h('div', { class: 'tool-chips' });
+   const toolsEmpty = h('span', { class: 'inv-empty' }, 'none');
++  const textileLines = h('div', {class:'p-home',style:'white-space:pre-line;line-height:1.5'});
+   const toolList = new KeyedList<ToolView, ToolComp>(
+     toolChips,
+     (t) => {
+@@ -228,6 +229,7 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
+     { class: 'inv' },
+     h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Carrying'), invChips, invEmpty, h('div', { class: 'carry', 'data-tip': 'How much they can carry. Heavy things like stone count for more.' }, carryBar.el, carryTxt)),
+     h('div', { class: 'inv-row' }, h('span', { class: 'cap' }, 'Tools'), toolChips, toolsEmpty),
++    textileLines,
+   );
+ 
+   // ───────── what are they up to? ─────────
+@@ -363,6 +365,9 @@ export function createPersonPanel(ctx: UICtx, hooks: PersonHooks): PersonPanel {
+     invList.sync(goods, (it) => it.kind);
+     setHidden(invEmpty, goods.length > 0);
+     toolList.sync(held, (t) => String(t.id));
++    const textiles=held.filter(t=>['garment','blanket','bedding'].includes(t.kind));
++    setText(textileLines,textiles.map(t=>`${t.label}; ${100-t.wear}% condition`).join('\n'));
++    setHidden(textileLines,textiles.length===0);
+     setHidden(toolsEmpty, held.length > 0);
+     carryBar.set(v.carry.cap > 0 ? v.carry.used / v.carry.cap : 0, v.carry.used >= v.carry.cap - 0.01 ? 'var(--warn)' : 'var(--accent)');
+     setText(carryTxt, `${round1(v.carry.used)} / ${v.carry.cap}`);
+diff --git a/tests/workshops.test.ts b/tests/workshops.test.ts
+index 315e1b8..e3ce9dc 100644
+--- a/tests/workshops.test.ts
++++ b/tests/workshops.test.ts
+@@ -76,8 +76,11 @@ describe('the recipe table is a closed, acyclic accounting', () => {
+     expect(TOOL_DEFS.hammer.hand).toBeTruthy();
+     // wood, stone, clay, ore and grain come out of the ground by hand; nothing in the first links of the chain is made by a workshop
+     for (const r of RECIPES.filter((x) => x.at === 'timber_yard' || x.at === 'quarry' || x.at === 'kiln')) {
+-      for (const k of Object.keys(r.inputs)) expect(['wood', 'clay', 'planks', 'handles']).toContain(k);
++      for (const k of Object.keys(r.inputs)) expect(['wood', 'clay', 'planks', 'handles', 'fibre']).toContain(k);
+     }
++    // Fibre is now another paid first-stage yard product, obtainable without equipment.
++    expect(RECIPE_BY_ID.strip_fibre.inputs).toEqual({wood:1});
++    expect(RECIPE_BY_ID.strip_fibre.tool).toBeUndefined();
+   });
+ 
+   it('bread is worth documenting: four loaves from what raw grain gives three, because the dough takes up water', () => {

@@ -1,0 +1,17 @@
+[
+  {
+    "ProcessId": 52080,
+    "ParentProcessId": 1256,
+    "CommandLine": "\"node\"   \"C:\\dev\\Claude Experiment\\living-world-integrate\\node_modules\\.bin\\\\..\\vitest\\vitest.mjs\" run --maxWorkers 2"
+  },
+  {
+    "ProcessId": 6304,
+    "ParentProcessId": 52080,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" --experimental-import-meta-resolve --require \"C:/dev/Claude Experiment/living-world-integrate/node_modules/vitest/suppress-warnings.cjs\" --conditions node --conditions development \"C:\\dev\\Claude Experiment\\living-world-integrate\\node_modules\\vitest\\dist\\workers\\forks.js\""
+  },
+  {
+    "ProcessId": 52784,
+    "ParentProcessId": 52080,
+    "CommandLine": "\"C:\\Program Files\\nodejs\\node.exe\" --experimental-import-meta-resolve --require \"C:/dev/Claude Experiment/living-world-integrate/node_modules/vitest/suppress-warnings.cjs\" --conditions node --conditions development \"C:\\dev\\Claude Experiment\\living-world-integrate\\node_modules\\vitest\\dist\\workers\\forks.js\""
+  }
+]

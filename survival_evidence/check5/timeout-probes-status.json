@@ -1,0 +1,5 @@
+{
+  "command": "vitest run tests/zz_review_h_retention.test.ts tests/zz_review_main_toolreport_saves.test.ts",
+  "finished": "2026-11-04T01:49:15.3731175+10:00",
+  "exitCode": 0
+}

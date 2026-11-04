@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Ordinary forest nourishment, day25</title></head><body>
+<div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+<div style="position:fixed;left:10px;top:60px;width:205px;font-size:12px;z-index:2000;color:white;background:#15251c;padding:10px"><strong>ORDINARY forest, day25</strong><p>Normal, arrivals on, no nudge. Yusuf has low immediate food satisfaction but paid nourishment remains. This is the unchanged saved world; no jobs or goods were assigned.</p><output id="proof"></output></div>
+<script type="module">
+import '/src/styles.css';import {Game} from '/src/app/game.ts';import {Renderer} from '/src/render/renderer.ts';import {mountUI} from '/src/ui/index.ts';import {project} from '/src/render/iso.ts';import {serializeWorld,deserializeWorld} from '/src/app/save.ts';import {conservationReport} from '/src/sim/economy.ts';
+const raw=await (await fetch('/survival_evidence/aggregate-nourishment132/forest-f4-n0/final.json')).text(),w=deserializeWorld(raw),p=w.persons.find(p=>p.id===920);if(!p?.alive)throw Error('Recorded Yusuf not alive');
+const g=new Game(w.settings);g.restoreWorld(w,w.settings);g.setPlaying(false);g.select(p.id);const pt=project(p.x,p.y);g.camera={x:pt.sx+20,y:pt.sy,zoom:2};const renderer=new Renderer(document.getElementById('world'),g),ui=mountUI(g,document.getElementById('ui'));ui.update(1);document.getElementById('proof').textContent=`Rules ${w.settings.rulesVersion}; tick ${w.tick}; exact saved state: ${serializeWorld(w)===raw}; conservation: ${conservationReport(w).ok}.`;
+function frame(){renderer.frame(.016);ui.update(.016);requestAnimationFrame(frame);}frame();
+</script></body></html>

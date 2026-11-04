@@ -1,0 +1,9 @@
+{
+  "source": "C:/dev/Claude Experiment/living-world-hearth-check2",
+  "compared": 269,
+  "different": [
+    "src/sim/hearth.ts",
+    "src/sim/rulesversion.ts"
+  ],
+  "note": "hearth.ts differs only in validation (cost key order and missing discriminator rejection); rulesversion.ts only adds a version comment. No normal-world decision or state mutation differs."
+}

@@ -1,0 +1,28 @@
+{
+  "evidence": "STAGED one physical deer, tool and two trees; real perception, offered placement, paid waiting/check/reset, butchery and eating.",
+  "checks": [
+    {
+      "name": "no unwitnessed site",
+      "ok": true
+    },
+    {
+      "name": "witnessed ground over nearest tree",
+      "ok": true
+    },
+    {
+      "name": "single deer to eaten meat",
+      "ok": true
+    },
+    {
+      "name": "finite remaining body visible",
+      "ok": true
+    },
+    {
+      "name": "pure conserved exact",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "currentExplanation": "set a trap near a deer sighting from 0 ticks ago",
+  "dom": "- generic \"The simulated world\"\n- 'button \"World menu. Current seed: trap-ground\"':\n  - generic: trap-ground\n- button \"Unfold the top bar\" [pressed]:\n- group \"World summary\":\n  - generic: 16:33\n  - generic: 1 person\n- toolbar \"Time controls\":\n  - button \"Play\":\n  - button \"Step forward one tick\":\n  - generic: 1×\n- status:\n  - generic: Paused\n- generic: ▾\n- region \"Happenings feed\":\n  - button \"Happenings\":\n    - generic: Happenings\n- button \"Hide the inspector\" [expanded]:\n- complementary \"Inspector\":\n  - heading \"Deer carcass\" [level=2]\n  - generic: Finite body; parts need butchery\n  - button \"Show on the map\":\n  - button \"Close inspector\":\n  - term: Animal origin\n  - definition: \"7\"\n  - term: Belongs to\n  - definition: Alder\n  - term: Decay deadline\n  - definition: 4615 ticks remaining\n  - term: Current worker\n  - definition: Nobody\n  - term: Paid work\n  - definition: \"meat: 0/120, hide: 0/120, fat: 0/120\"\n  - generic: Lying here\n  - img \"3 meat\":\n    - generic: ×3\n  - img \"1 raw hide\":\n    - generic: ×1\n  - img \"1 raw fat\":\n    - generic: ×1\n  - paragraph:\n    - generic: These parts are still inside the body. Each unit takes 120 work ticks and room in a nearby worker’s pack.\n  - paragraph:\n    - generic: \"Recovered: 1 meat. Lost: nothing.\"\n- group \"Map overlays\":\n  - button \"Perception overlay\":\n  - button \"Paths overlay\":\n  - button \"Intentions overlay\":\n  - button \"Knowledge overlay\":\n  - button \"Labels overlay\":\n- generic \"View\"\n- option \"Automatic\" [selected]\n- option \"Selected person only\"\n- option \"Hidden\"\n- option \"Normal\" [selected]\n- option \"Large\"\n- option \"Standard\" [selected]\n- option \"High\"\n- status\n- strong: STAGED trap-ground contract\n- paragraph: One staged deer, trap and two trees. Real perception, work, catch, butchery and meal.\n- button \"Check without a sighting\"\n- button \"Observe, set, check and eat\" [active]\n- status: \"Chosen ground: 5; nearer tree: 4; set a trap near a deer sighting from 0 ticks ago; live deer: 0; meat eaten: 1; conservation: true; pure: true; exact save: true\""
+}

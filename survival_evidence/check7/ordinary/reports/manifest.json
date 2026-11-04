@@ -1,0 +1,15 @@
+﻿{
+    "node":  "v24.19.0",
+    "source":  "C:\\dev\\Claude Experiment\\living-world-survival-check7",
+    "secondsBudgetPerRun":  1800,
+    "daysPerRun":  25,
+    "seeds":  [
+                  "forest",
+                  "river"
+              ],
+    "commit":  "61cb6e5139adbedfd52f463fc635a90d4172327b",
+    "note":  "Observers repeat each seed; they are not independent seeds. Source hashes are in each successful report.",
+    "checks":  [
+                   "production"
+               ]
+}

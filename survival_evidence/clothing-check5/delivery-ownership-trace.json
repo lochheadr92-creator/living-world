@@ -1,0 +1,1639 @@
+{
+  "seed": "forest",
+  "rules": 124,
+  "tick": 38000,
+  "hash": "3213bb5c04a170ef53470cb55156dfa250e3ce2c6f5267bfe686298ac8f344a9",
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "events": [
+    {
+      "event": "start",
+      "tick": 31282,
+      "actor": {
+        "id": 942,
+        "x": 45.4828091428848,
+        "y": 49.506880052620545,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 18.276000000000003,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "seeds": 1,
+          "grain": 2,
+          "garment": 1
+        },
+        "weight": 9,
+        "cap": 18,
+        "needs": {
+          "hunger": 81.69110922006818,
+          "thirst": 54.35999999999633,
+          "energy": 87.24400481912402,
+          "warmth": 60.56809339599214,
+          "safety": 83.93167048603702,
+          "social": 90.0709633664363
+        },
+        "activity": {
+          "kind": "give",
+          "label": "Bringing a garment to the child",
+          "phase": "travel"
+        }
+      },
+      "target": {
+        "id": 944,
+        "x": 43.60830840626448,
+        "y": 56.049370404181026,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 4,
+          "wood": 2
+        },
+        "weight": 5,
+        "cap": 5,
+        "needs": {
+          "hunger": 68.47307500000505,
+          "thirst": 96.6339999999994,
+          "energy": 92.96000000000078,
+          "warmth": 67.05279240924304,
+          "safety": 84.00000010797469,
+          "social": 85.6046991124164
+        },
+        "activity": {
+          "kind": "socialize",
+          "label": "A guessing game with Tessa",
+          "phase": "travel"
+        }
+      },
+      "activity": {
+        "id": 12224,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "travel",
+        "targetId": 944,
+        "targetType": "person",
+        "tx": 43.709274298109136,
+        "ty": 56.009191975163034,
+        "spotX": 43.709274298109136,
+        "spotY": 56.009191975163034,
+        "item": null,
+        "amount": 1,
+        "start": 31282,
+        "minCommit": 31302,
+        "expire": 31782,
+        "progress": 0,
+        "pprogress": 0,
+        "duration": 0,
+        "cycle": 0,
+        "path": [],
+        "pi": 0,
+        "pathTries": 0,
+        "stuck": 0,
+        "lastX": 45.4828091428848,
+        "lastY": 49.506880052620545,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:944",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      }
+    },
+    {
+      "event": "end",
+      "tick": 31339,
+      "actor": {
+        "id": 942,
+        "x": 43.709274298109136,
+        "y": 56.009191975163034,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 18.276000000000003,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "seeds": 1,
+          "grain": 2,
+          "garment": 1
+        },
+        "weight": 9,
+        "cap": 18,
+        "needs": {
+          "hunger": 79.98110922006812,
+          "thirst": 52.07999999999638,
+          "energy": 84.96400481912366,
+          "warmth": 63.18707262054398,
+          "safety": 83.9783979659641,
+          "social": 89.62587663336073
+        },
+        "activity": null
+      },
+      "target": {
+        "id": 944,
+        "x": 43.56601099044508,
+        "y": 56.066202263812976,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 4,
+          "wood": 2
+        },
+        "weight": 5,
+        "cap": 5,
+        "needs": {
+          "hunger": 67.0195750000054,
+          "thirst": 94.69599999999906,
+          "energy": 91.13600000000098,
+          "warmth": 67.76228755040889,
+          "safety": 84.0000000009316,
+          "social": 85.0274999730481
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "A guessing game with Tessa",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 12224,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "work",
+        "targetId": 944,
+        "targetType": "person",
+        "tx": 43.709274298109136,
+        "ty": 56.009191975163034,
+        "spotX": 43.709274298109136,
+        "spotY": 56.009191975163034,
+        "item": null,
+        "amount": 1,
+        "start": 31282,
+        "minCommit": 31302,
+        "expire": 31782,
+        "progress": 7,
+        "pprogress": 6,
+        "duration": 14,
+        "cycle": 0,
+        "path": [
+          43.709274298109136,
+          56.009191975163034
+        ],
+        "pi": 2,
+        "pathTries": 1,
+        "stuck": 0,
+        "lastX": 43.801154625395895,
+        "lastY": 55.67233107314937,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:944",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      },
+      "outcome": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "event": "start",
+      "tick": 32942,
+      "actor": {
+        "id": 942,
+        "x": 40.5,
+        "y": 56.5,
+        "indoors": 4685,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 18.984,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 3.1679999999998727,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": true
+            }
+          },
+          {
+            "ent": "tool",
+            "id": 12221,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31281,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "seeds": 1,
+          "grain": 1,
+          "garment": 2,
+          "berries": 2
+        },
+        "weight": 10.75,
+        "cap": 18,
+        "needs": {
+          "hunger": 80.6101092200697,
+          "thirst": 53.843999999994274,
+          "energy": 94.06100481911989,
+          "warmth": 99.99740895665883,
+          "safety": 93.9994308640141,
+          "social": 90.94717996403308
+        },
+        "activity": {
+          "kind": "give",
+          "label": "Bringing a garment to the child",
+          "phase": "work"
+        }
+      },
+      "target": {
+        "id": 945,
+        "x": 40.5,
+        "y": 56.5,
+        "indoors": 4685,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 3,
+          "wood": 1,
+          "berries": 2
+        },
+        "weight": 4.75,
+        "cap": 5,
+        "needs": {
+          "hunger": 63.4480272411682,
+          "thirst": 60.08739999999481,
+          "energy": 94.37840000000365,
+          "warmth": 87.34802154392192,
+          "safety": 93.97235927122902,
+          "social": 91.1682640535704
+        },
+        "activity": {
+          "kind": "rest",
+          "label": "Resting inside the hut",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 12856,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "work",
+        "targetId": 945,
+        "targetType": "person",
+        "tx": 40.5,
+        "ty": 56.5,
+        "spotX": 40.5,
+        "spotY": 56.5,
+        "item": null,
+        "amount": 1,
+        "start": 32942,
+        "minCommit": 32962,
+        "expire": 33442,
+        "progress": 0,
+        "pprogress": 0,
+        "duration": 0,
+        "cycle": 0,
+        "path": [],
+        "pi": 0,
+        "pathTries": 0,
+        "stuck": 0,
+        "lastX": 40.5,
+        "lastY": 56.5,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:945",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      }
+    },
+    {
+      "event": "end",
+      "tick": 32955,
+      "actor": {
+        "id": 942,
+        "x": 40.5,
+        "y": 56.5,
+        "indoors": 4685,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 18.984,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 3.19399999999987,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": true
+            }
+          },
+          {
+            "ent": "tool",
+            "id": 12221,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31281,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "seeds": 1,
+          "grain": 1,
+          "garment": 2,
+          "berries": 2
+        },
+        "weight": 10.75,
+        "cap": 18,
+        "needs": {
+          "hunger": 80.22010922006969,
+          "thirst": 53.323999999994285,
+          "energy": 93.5410048191198,
+          "warmth": 99.9976039400788,
+          "safety": 93.99956232168432,
+          "social": 90.8001689547353
+        },
+        "activity": null
+      },
+      "target": {
+        "id": 945,
+        "x": 40.5,
+        "y": 56.5,
+        "indoors": 4685,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 3,
+          "wood": 1,
+          "berries": 2
+        },
+        "weight": 4.75,
+        "cap": 5,
+        "needs": {
+          "hunger": 63.142027241168186,
+          "thirst": 59.67939999999482,
+          "energy": 94.05640000000369,
+          "warmth": 87.10888534507212,
+          "safety": 93.97830985787719,
+          "social": 91.02516543451634
+        },
+        "activity": {
+          "kind": "rest",
+          "label": "Resting inside the hut",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 12856,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "work",
+        "targetId": 945,
+        "targetType": "person",
+        "tx": 40.5,
+        "ty": 56.5,
+        "spotX": 40.5,
+        "spotY": 56.5,
+        "item": null,
+        "amount": 1,
+        "start": 32942,
+        "minCommit": 32962,
+        "expire": 33442,
+        "progress": 14,
+        "pprogress": 13,
+        "duration": 14,
+        "cycle": 0,
+        "path": [],
+        "pi": 0,
+        "pathTries": 0,
+        "stuck": 0,
+        "lastX": 40.5,
+        "lastY": 56.5,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:945",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      },
+      "outcome": "failed",
+      "detail": "they had no room to carry it"
+    },
+    {
+      "event": "start",
+      "tick": 33671,
+      "actor": {
+        "id": 942,
+        "x": 46.9743652496386,
+        "y": 57.52671457827822,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 18.984,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 4.625999999999713,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": true
+            }
+          },
+          {
+            "ent": "tool",
+            "id": 12221,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31281,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "seeds": 1,
+          "grain": 1,
+          "garment": 2,
+          "berries": 2
+        },
+        "weight": 10.75,
+        "cap": 18,
+        "needs": {
+          "hunger": 60.07510922006943,
+          "thirst": 81.78399999999755,
+          "energy": 90.38900481911641,
+          "warmth": 90.56760757106744,
+          "safety": 84.00889460827389,
+          "social": 81.56367219502522
+        },
+        "activity": {
+          "kind": "give",
+          "label": "Bringing a garment to the child",
+          "phase": "travel"
+        }
+      },
+      "target": {
+        "id": 945,
+        "x": 52.54021889171563,
+        "y": 63.63046239495743,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 3,
+          "wood": 1
+        },
+        "weight": 2.75,
+        "cap": 5,
+        "needs": {
+          "hunger": 68.62902724116789,
+          "thirst": 95.95399999999945,
+          "energy": 92.3840000000007,
+          "warmth": 69.34943541266676,
+          "safety": 84.00000007735231,
+          "social": 80.61794783095604
+        },
+        "activity": {
+          "kind": "gather",
+          "label": "Fishing",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 13091,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "travel",
+        "targetId": 945,
+        "targetType": "person",
+        "tx": 52.54021889171563,
+        "ty": 63.63046239495743,
+        "spotX": 52.54021889171563,
+        "spotY": 63.63046239495743,
+        "item": null,
+        "amount": 1,
+        "start": 33671,
+        "minCommit": 33691,
+        "expire": 34171,
+        "progress": 0,
+        "pprogress": 0,
+        "duration": 0,
+        "cycle": 0,
+        "path": [],
+        "pi": 0,
+        "pathTries": 0,
+        "stuck": 0,
+        "lastX": 46.9743652496386,
+        "lastY": 57.52671457827822,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:945",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      }
+    },
+    {
+      "event": "end",
+      "tick": 33730,
+      "actor": {
+        "id": 942,
+        "x": 51.82942513214677,
+        "y": 62.49302578653024,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 18.984,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 4.7439999999997,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": true
+            }
+          },
+          {
+            "ent": "tool",
+            "id": 12221,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31281,
+            "maker": 942,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "seeds": 1,
+          "grain": 1,
+          "garment": 2,
+          "berries": 2
+        },
+        "weight": 10.75,
+        "cap": 18,
+        "needs": {
+          "hunger": 58.30510922006936,
+          "thirst": 79.42399999999718,
+          "energy": 88.02900481911604,
+          "warmth": 93.28636945220029,
+          "safety": 84.0000649544096,
+          "social": 81.10296838359612
+        },
+        "activity": null
+      },
+      "target": {
+        "id": 945,
+        "x": 52.54021889171563,
+        "y": 63.63046239495743,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 3,
+          "wood": 1
+        },
+        "weight": 2.75,
+        "cap": 5,
+        "needs": {
+          "hunger": 66.74840224116792,
+          "thirst": 93.34619999999924,
+          "energy": 89.83520000000077,
+          "warmth": 70.17743370536469,
+          "safety": 84.00000000056488,
+          "social": 79.78487962060679
+        },
+        "activity": {
+          "kind": "gather",
+          "label": "Fishing",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 13091,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "travel",
+        "targetId": 945,
+        "targetType": "person",
+        "tx": 52.54021889171563,
+        "ty": 63.63046239495743,
+        "spotX": 51.87535695792454,
+        "spotY": 62.63148361190167,
+        "item": null,
+        "amount": 1,
+        "start": 33671,
+        "minCommit": 33691,
+        "expire": 34171,
+        "progress": 0,
+        "pprogress": 0,
+        "duration": 0,
+        "cycle": 0,
+        "path": [
+          51.5,
+          61.5,
+          51.87535695792454,
+          62.63148361190167
+        ],
+        "pi": 2,
+        "pathTries": 1,
+        "stuck": 0,
+        "lastX": 51.23530808423634,
+        "lastY": 61.1592948539394,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:945",
+          "why": "visible child without a garment in cold weather +48",
+          "beside": false
+        }
+      },
+      "outcome": "interrupted",
+      "detail": "something better came up"
+    },
+    {
+      "event": "start",
+      "tick": 35938,
+      "actor": {
+        "id": 935,
+        "x": 48.45173878374044,
+        "y": 46.418938149302264,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 12309,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 921,
+            "holder": 935,
+            "loan": {
+              "lender": 0,
+              "borrower": 935,
+              "due": 38337
+            },
+            "madeTick": 31438,
+            "maker": 924,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "seeds": 3,
+          "fruit": 3,
+          "wood": 3,
+          "garment": 1
+        },
+        "weight": 10.5,
+        "cap": 12,
+        "needs": {
+          "hunger": 55.08000000000096,
+          "thirst": 63.243999999996326,
+          "energy": 95.01022513300907,
+          "warmth": 65.96030712460913,
+          "safety": 83.14278726729033,
+          "social": 83.91142546849746
+        },
+        "activity": {
+          "kind": "give",
+          "label": "Bringing a garment to the child",
+          "phase": "travel"
+        }
+      },
+      "target": {
+        "id": 937,
+        "x": 49.062416849884684,
+        "y": 39.67961946399424,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 3,
+          "berries": 2,
+          "grain": 2
+        },
+        "weight": 4.75,
+        "cap": 5,
+        "needs": {
+          "hunger": 58.05267272798238,
+          "thirst": 96.32799999999935,
+          "energy": 85.99320013371418,
+          "warmth": 66.75531288468926,
+          "safety": 82.40035493757983,
+          "social": 99.76854814094764
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Talking with Cole",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 13900,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "travel",
+        "targetId": 937,
+        "targetType": "person",
+        "tx": 49.062416849884684,
+        "ty": 39.67961946399424,
+        "spotX": 49.062416849884684,
+        "spotY": 39.67961946399424,
+        "item": null,
+        "amount": 1,
+        "start": 35938,
+        "minCommit": 35958,
+        "expire": 36438,
+        "progress": 0,
+        "pprogress": 0,
+        "duration": 0,
+        "cycle": 0,
+        "path": [],
+        "pi": 0,
+        "pathTries": 0,
+        "stuck": 0,
+        "lastX": 48.45173878374044,
+        "lastY": 46.418938149302264,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:937",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      }
+    },
+    {
+      "event": "end",
+      "tick": 36012,
+      "actor": {
+        "id": 935,
+        "x": 49.008185162143306,
+        "y": 40.87839338932159,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 12309,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 921,
+            "holder": 935,
+            "loan": {
+              "lender": 0,
+              "borrower": 935,
+              "due": 38337
+            },
+            "madeTick": 31438,
+            "maker": 924,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "seeds": 3,
+          "fruit": 3,
+          "wood": 3,
+          "garment": 1
+        },
+        "weight": 10.5,
+        "cap": 12,
+        "needs": {
+          "hunger": 52.86000000000087,
+          "thirst": 60.28399999999639,
+          "energy": 92.05022513300861,
+          "warmth": 70.97107948406695,
+          "safety": 83.80777130637802,
+          "social": 83.3471333901863
+        },
+        "activity": null
+      },
+      "target": {
+        "id": 937,
+        "x": 49.062416849884684,
+        "y": 39.67961946399424,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 3,
+          "berries": 2,
+          "grain": 2
+        },
+        "weight": 4.75,
+        "cap": 5,
+        "needs": {
+          "hunger": 56.16567272798231,
+          "thirst": 93.8119999999989,
+          "energy": 83.62520013371444,
+          "warmth": 72.3398295285111,
+          "safety": 83.64128194918916,
+          "social": 99.15685394202356
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Family time with Cole",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 13900,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "work",
+        "targetId": 937,
+        "targetType": "person",
+        "tx": 49.062416849884684,
+        "ty": 39.67961946399424,
+        "spotX": 49.008185162143306,
+        "spotY": 40.87839338932159,
+        "item": null,
+        "amount": 1,
+        "start": 35938,
+        "minCommit": 35958,
+        "expire": 36438,
+        "progress": 14,
+        "pprogress": 13,
+        "duration": 14,
+        "cycle": 0,
+        "path": [
+          50.5,
+          41.5,
+          50.5,
+          40.5,
+          49.008185162143306,
+          40.87839338932159
+        ],
+        "pi": 6,
+        "pathTries": 1,
+        "stuck": 0,
+        "lastX": 50.5,
+        "lastY": 40.70250467714328,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:937",
+          "why": "visible child without a garment in cold weather +48",
+          "beside": false
+        }
+      },
+      "outcome": "failed",
+      "detail": "they had no room to carry it"
+    },
+    {
+      "event": "start",
+      "tick": 36013,
+      "actor": {
+        "id": 935,
+        "x": 49.008185162143306,
+        "y": 40.87839338932159,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 12309,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 921,
+            "holder": 935,
+            "loan": {
+              "lender": 0,
+              "borrower": 935,
+              "due": 38337
+            },
+            "madeTick": 31438,
+            "maker": 924,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "seeds": 3,
+          "fruit": 3,
+          "wood": 3,
+          "garment": 1
+        },
+        "weight": 10.5,
+        "cap": 12,
+        "needs": {
+          "hunger": 52.83000000000087,
+          "thirst": 60.24399999999639,
+          "energy": 92.0102251330086,
+          "warmth": 71.05819489148926,
+          "safety": 83.81161588025046,
+          "social": 83.33950782156047
+        },
+        "activity": {
+          "kind": "give",
+          "label": "Bringing a garment to the child",
+          "phase": "travel"
+        }
+      },
+      "target": {
+        "id": 936,
+        "x": 48.862399335273935,
+        "y": 42.22479867054787,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 2,
+          "wood": 1
+        },
+        "weight": 2.5,
+        "cap": 5,
+        "needs": {
+          "hunger": 80.04562500001802,
+          "thirst": 90.92199999999839,
+          "energy": 87.74400000000135,
+          "warmth": 72.33742768994439,
+          "safety": 83.79081051346338,
+          "social": 98.47543854053251
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Family time with Talia",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 13936,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "travel",
+        "targetId": 936,
+        "targetType": "person",
+        "tx": 48.862399335273935,
+        "ty": 42.22479867054787,
+        "spotX": 48.862399335273935,
+        "spotY": 42.22479867054787,
+        "item": null,
+        "amount": 1,
+        "start": 36013,
+        "minCommit": 36033,
+        "expire": 36513,
+        "progress": 0,
+        "pprogress": 0,
+        "duration": 0,
+        "cycle": 0,
+        "path": [],
+        "pi": 0,
+        "pathTries": 0,
+        "stuck": 0,
+        "lastX": 49.008185162143306,
+        "lastY": 40.87839338932159,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:936",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      }
+    },
+    {
+      "event": "end",
+      "tick": 36040,
+      "actor": {
+        "id": 935,
+        "x": 48.37814326151724,
+        "y": 41.12684782691699,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 12309,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 921,
+            "holder": 935,
+            "loan": {
+              "lender": 0,
+              "borrower": 935,
+              "due": 38337
+            },
+            "madeTick": 31438,
+            "maker": 924,
+            "textile": {
+              "wet": 0,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "seeds": 3,
+          "fruit": 3,
+          "wood": 3,
+          "garment": 1
+        },
+        "weight": 10.5,
+        "cap": 12,
+        "needs": {
+          "hunger": 52.02000000000084,
+          "thirst": 59.16399999999641,
+          "energy": 90.93022513300843,
+          "warmth": 73.4183388070484,
+          "safety": 83.89081868168871,
+          "social": 83.13361746866316
+        },
+        "activity": null
+      },
+      "target": {
+        "id": 936,
+        "x": 48.862399335273935,
+        "y": 42.22479867054787,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 2,
+          "wood": 1
+        },
+        "weight": 2.5,
+        "cap": 5,
+        "needs": {
+          "hunger": 79.35712500001819,
+          "thirst": 90.00399999999823,
+          "energy": 86.88000000000144,
+          "warmth": 74.49207697607049,
+          "safety": 83.87876056672245,
+          "social": 98.16594110139249
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Family time with Talia",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 13936,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "work",
+        "targetId": 936,
+        "targetType": "person",
+        "tx": 48.862399335273935,
+        "ty": 42.22479867054787,
+        "spotX": 48.37814326151724,
+        "spotY": 41.12684782691699,
+        "item": null,
+        "amount": 1,
+        "start": 36013,
+        "minCommit": 36033,
+        "expire": 36513,
+        "progress": 14,
+        "pprogress": 13,
+        "duration": 14,
+        "cycle": 0,
+        "path": [
+          48.37814326151724,
+          41.12684782691699
+        ],
+        "pi": 2,
+        "pathTries": 1,
+        "stuck": 0,
+        "lastX": 49.008185162143306,
+        "lastY": 40.87839338932159,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:936",
+          "why": "visible child without a garment in cold weather +48",
+          "beside": false
+        }
+      },
+      "outcome": "failed",
+      "detail": "they had no room to carry it"
+    },
+    {
+      "event": "start",
+      "tick": 37123,
+      "actor": {
+        "id": 942,
+        "x": 46.20055391391847,
+        "y": 46.497423563968816,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 21.71999999999999,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 11.53000000000052,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0.08239296000000014,
+              "equipped": true
+            }
+          },
+          {
+            "ent": "tool",
+            "id": 12221,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31281,
+            "maker": 942,
+            "textile": {
+              "wet": 0.08239296000000014,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "garment": 2,
+          "berries": 2
+        },
+        "weight": 9.5,
+        "cap": 18,
+        "needs": {
+          "hunger": 53.50760922006913,
+          "thirst": 50.04799999999506,
+          "energy": 37.863004819108845,
+          "warmth": 96.96867103855433,
+          "safety": 83.85823811665871,
+          "social": 99.99219146082324
+        },
+        "activity": {
+          "kind": "give",
+          "label": "Bringing a garment to the child",
+          "phase": "travel"
+        }
+      },
+      "target": {
+        "id": 944,
+        "x": 48.5483503057702,
+        "y": 48.374393915160006,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 4,
+          "wood": 2
+        },
+        "weight": 5,
+        "cap": 5,
+        "needs": {
+          "hunger": 48.03692500001117,
+          "thirst": 86.53599999999761,
+          "energy": 59.904000000004416,
+          "warmth": 70.4272989272499,
+          "safety": 83.89206031352828,
+          "social": 91.14926641046489
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Foraging practice with Theo",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 14489,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "travel",
+        "targetId": 944,
+        "targetType": "person",
+        "tx": 48.5483503057702,
+        "ty": 48.374393915160006,
+        "spotX": 48.5483503057702,
+        "spotY": 48.374393915160006,
+        "item": null,
+        "amount": 1,
+        "start": 37123,
+        "minCommit": 37143,
+        "expire": 37623,
+        "progress": 0,
+        "pprogress": 0,
+        "duration": 0,
+        "cycle": 0,
+        "path": [],
+        "pi": 0,
+        "pathTries": 0,
+        "stuck": 0,
+        "lastX": 46.20055391391847,
+        "lastY": 46.497423563968816,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:944",
+          "why": "visible child without a garment in cold weather +48"
+        }
+      }
+    },
+    {
+      "event": "end",
+      "tick": 37144,
+      "actor": {
+        "id": 942,
+        "x": 47.3983503057702,
+        "y": 46.3825354864558,
+        "stage": "adult",
+        "tools": [
+          {
+            "ent": "tool",
+            "id": 951,
+            "kind": "basket",
+            "tier": 0,
+            "wear": 21.71999999999999,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 0,
+            "maker": 0
+          },
+          {
+            "ent": "tool",
+            "id": 12112,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 11.572000000000534,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31112,
+            "maker": 942,
+            "textile": {
+              "wet": 0.09230496000000023,
+              "equipped": true
+            }
+          },
+          {
+            "ent": "tool",
+            "id": 12221,
+            "kind": "garment",
+            "tier": 0,
+            "wear": 0,
+            "ownerHh": 941,
+            "holder": 942,
+            "loan": null,
+            "madeTick": 31281,
+            "maker": 942,
+            "textile": {
+              "wet": 0.09230496000000023,
+              "equipped": false
+            }
+          }
+        ],
+        "inv": {
+          "basket": 1,
+          "wood": 1,
+          "stone": 1,
+          "garment": 2,
+          "berries": 2
+        },
+        "weight": 9.5,
+        "cap": 18,
+        "needs": {
+          "hunger": 52.877609220069104,
+          "thirst": 49.20799999999508,
+          "energy": 37.02300481910886,
+          "warmth": 95.09802725561607,
+          "safety": 83.90725146385854,
+          "social": 99.82821213811118
+        },
+        "activity": null
+      },
+      "target": {
+        "id": 944,
+        "x": 48.5483503057702,
+        "y": 48.374393915160006,
+        "stage": "child",
+        "tools": [],
+        "inv": {
+          "seeds": 4,
+          "wood": 2
+        },
+        "weight": 5,
+        "cap": 5,
+        "needs": {
+          "hunger": 47.50142500001115,
+          "thirst": 85.82199999999749,
+          "energy": 59.23200000000449,
+          "warmth": 67.98280586090102,
+          "safety": 83.92937983274587,
+          "social": 90.93661409596078
+        },
+        "activity": {
+          "kind": "converse",
+          "label": "Foraging practice with Theo",
+          "phase": "work"
+        }
+      },
+      "activity": {
+        "id": 14489,
+        "kind": "give",
+        "label": "Bringing a garment to the child",
+        "goal": "help the child keep warm",
+        "need": null,
+        "phase": "work",
+        "targetId": 944,
+        "targetType": "person",
+        "tx": 48.5483503057702,
+        "ty": 48.374393915160006,
+        "spotX": 47.3983503057702,
+        "spotY": 46.3825354864558,
+        "item": null,
+        "amount": 1,
+        "start": 37123,
+        "minCommit": 37143,
+        "expire": 37623,
+        "progress": 14,
+        "pprogress": 13,
+        "duration": 14,
+        "cycle": 0,
+        "path": [
+          47.3983503057702,
+          46.3825354864558
+        ],
+        "pi": 2,
+        "pathTries": 1,
+        "stuck": 0,
+        "lastX": 46.20055391391847,
+        "lastY": 46.497423563968816,
+        "claims": [],
+        "utility": 48,
+        "blocked": "",
+        "data": {
+          "items": {
+            "garment": 1
+          },
+          "textileDelivery": true,
+          "optKey": "clothe_child:944",
+          "why": "visible child without a garment in cold weather +48",
+          "beside": true
+        }
+      },
+      "outcome": "failed",
+      "detail": "they had no room to carry it"
+    }
+  ]
+}

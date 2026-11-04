@@ -1,0 +1,6 @@
+{
+    "exitCode":  1,
+    "command":  "npm test -- --maxWorkers=8",
+    "finished":  "2026-11-04T12:43:46.7848864+10:00",
+    "source":  "C:\\dev\\Claude Experiment\\living-world-hearth-check1"
+}

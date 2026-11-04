@@ -1,0 +1,28 @@
+{
+  "limits": "Initial trace stored intention arrays and yard belief objects by reference. Do not interpret those fields as historical snapshots. Corrected future runner deep-clones samples. Inventory, needs, coordinates, option rows and fresh compiler results were copied independently and remain usable.",
+  "samples": 128,
+  "withAtLeastThreeWool": 109,
+  "woolDeliveryRows": 78,
+  "largestDeliveryUtility": 24.530275885563277,
+  "productionEvents": [
+    {
+      "tick": 29579,
+      "person": 1142,
+      "kind": "operate",
+      "goal": "supplies for known sheep care",
+      "recipe": "strip_fibre",
+      "outcome": "success",
+      "detail": "done"
+    },
+    {
+      "tick": 29761,
+      "person": 1142,
+      "kind": "operate",
+      "goal": "for my household\u2019s hall",
+      "recipe": "hew_planks",
+      "outcome": "success",
+      "detail": "done"
+    }
+  ],
+  "finding": "Wool delivery options and feasible wool recipes existed; no wool workshop action completed. This trace does not establish a missing production connection or justify a utility increase."
+}

@@ -1,0 +1,757 @@
+{
+    "source":  "C:/dev/Claude Experiment/living-world-survival-baseline-metrics",
+    "rules":  121,
+    "profile":  "normal",
+    "arrivals":  true,
+    "horizon":  25,
+    "draws":  [
+                  {
+                      "name":  "forest-control",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  0
+                  },
+                  {
+                      "name":  "forest-f4-n1",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "forest-f4-n2",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "forest-f4-n3",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "forest-f4-n4",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "forest-f4-n5",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  5
+                  },
+                  {
+                      "name":  "forest-f4-n6",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  6
+                  },
+                  {
+                      "name":  "forest-f4-n7",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  7
+                  },
+                  {
+                      "name":  "forest-f4-n8",
+                      "seed":  "forest",
+                      "fork":  4,
+                      "nudge":  8
+                  },
+                  {
+                      "name":  "forest-f2-n1",
+                      "seed":  "forest",
+                      "fork":  2,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "forest-f2-n2",
+                      "seed":  "forest",
+                      "fork":  2,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "forest-f2-n3",
+                      "seed":  "forest",
+                      "fork":  2,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "forest-f2-n4",
+                      "seed":  "forest",
+                      "fork":  2,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "forest-f3-n1",
+                      "seed":  "forest",
+                      "fork":  3,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "forest-f3-n2",
+                      "seed":  "forest",
+                      "fork":  3,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "forest-f3-n3",
+                      "seed":  "forest",
+                      "fork":  3,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "forest-f3-n4",
+                      "seed":  "forest",
+                      "fork":  3,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "forest-f5-n1",
+                      "seed":  "forest",
+                      "fork":  5,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "forest-f5-n2",
+                      "seed":  "forest",
+                      "fork":  5,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "forest-f5-n3",
+                      "seed":  "forest",
+                      "fork":  5,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "forest-f5-n4",
+                      "seed":  "forest",
+                      "fork":  5,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "forest-f6-n1",
+                      "seed":  "forest",
+                      "fork":  6,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "forest-f6-n2",
+                      "seed":  "forest",
+                      "fork":  6,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "forest-f6-n3",
+                      "seed":  "forest",
+                      "fork":  6,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "forest-f6-n4",
+                      "seed":  "forest",
+                      "fork":  6,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "river-f4-n0",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  0
+                  },
+                  {
+                      "name":  "river-f4-n1",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "river-f4-n2",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "river-f4-n3",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "river-f4-n4",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "river-f4-n5",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  5
+                  },
+                  {
+                      "name":  "river-f4-n6",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  6
+                  },
+                  {
+                      "name":  "river-f4-n7",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  7
+                  },
+                  {
+                      "name":  "river-f4-n8",
+                      "seed":  "river",
+                      "fork":  4,
+                      "nudge":  8
+                  },
+                  {
+                      "name":  "river-f2-n1",
+                      "seed":  "river",
+                      "fork":  2,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "river-f2-n2",
+                      "seed":  "river",
+                      "fork":  2,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "river-f2-n3",
+                      "seed":  "river",
+                      "fork":  2,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "river-f2-n4",
+                      "seed":  "river",
+                      "fork":  2,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "river-f3-n1",
+                      "seed":  "river",
+                      "fork":  3,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "river-f3-n2",
+                      "seed":  "river",
+                      "fork":  3,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "river-f3-n3",
+                      "seed":  "river",
+                      "fork":  3,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "river-f3-n4",
+                      "seed":  "river",
+                      "fork":  3,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "river-f5-n1",
+                      "seed":  "river",
+                      "fork":  5,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "river-f5-n2",
+                      "seed":  "river",
+                      "fork":  5,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "river-f5-n3",
+                      "seed":  "river",
+                      "fork":  5,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "river-f5-n4",
+                      "seed":  "river",
+                      "fork":  5,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "river-f6-n1",
+                      "seed":  "river",
+                      "fork":  6,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "river-f6-n2",
+                      "seed":  "river",
+                      "fork":  6,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "river-f6-n3",
+                      "seed":  "river",
+                      "fork":  6,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "river-f6-n4",
+                      "seed":  "river",
+                      "fork":  6,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "meadow-f4-n0",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  0
+                  },
+                  {
+                      "name":  "meadow-f4-n1",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "meadow-f4-n2",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "meadow-f4-n3",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "meadow-f4-n4",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "meadow-f4-n5",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  5
+                  },
+                  {
+                      "name":  "meadow-f4-n6",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  6
+                  },
+                  {
+                      "name":  "meadow-f4-n7",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  7
+                  },
+                  {
+                      "name":  "meadow-f4-n8",
+                      "seed":  "meadow",
+                      "fork":  4,
+                      "nudge":  8
+                  },
+                  {
+                      "name":  "meadow-f2-n1",
+                      "seed":  "meadow",
+                      "fork":  2,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "meadow-f2-n2",
+                      "seed":  "meadow",
+                      "fork":  2,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "meadow-f2-n3",
+                      "seed":  "meadow",
+                      "fork":  2,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "meadow-f2-n4",
+                      "seed":  "meadow",
+                      "fork":  2,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "meadow-f3-n1",
+                      "seed":  "meadow",
+                      "fork":  3,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "meadow-f3-n2",
+                      "seed":  "meadow",
+                      "fork":  3,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "meadow-f3-n3",
+                      "seed":  "meadow",
+                      "fork":  3,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "meadow-f3-n4",
+                      "seed":  "meadow",
+                      "fork":  3,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "meadow-f5-n1",
+                      "seed":  "meadow",
+                      "fork":  5,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "meadow-f5-n2",
+                      "seed":  "meadow",
+                      "fork":  5,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "meadow-f5-n3",
+                      "seed":  "meadow",
+                      "fork":  5,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "meadow-f5-n4",
+                      "seed":  "meadow",
+                      "fork":  5,
+                      "nudge":  4
+                  },
+                  {
+                      "name":  "meadow-f6-n1",
+                      "seed":  "meadow",
+                      "fork":  6,
+                      "nudge":  1
+                  },
+                  {
+                      "name":  "meadow-f6-n2",
+                      "seed":  "meadow",
+                      "fork":  6,
+                      "nudge":  2
+                  },
+                  {
+                      "name":  "meadow-f6-n3",
+                      "seed":  "meadow",
+                      "fork":  6,
+                      "nudge":  3
+                  },
+                  {
+                      "name":  "meadow-f6-n4",
+                      "seed":  "meadow",
+                      "fork":  6,
+                      "nudge":  4
+                  }
+              ],
+    "started":  61,
+    "active":  [
+                   {
+                       "name":  "river-f6-n4",
+                       "pid":  38708
+                   },
+                   {
+                       "name":  "meadow-f4-n0",
+                       "pid":  27860
+                   },
+                   {
+                       "name":  "meadow-f4-n1",
+                       "pid":  20988
+                   },
+                   {
+                       "name":  "meadow-f4-n2",
+                       "pid":  10432
+                   },
+                   {
+                       "name":  "meadow-f4-n3",
+                       "pid":  14152
+                   },
+                   {
+                       "name":  "meadow-f4-n4",
+                       "pid":  38460
+                   },
+                   {
+                       "name":  "meadow-f4-n5",
+                       "pid":  16468
+                   },
+                   {
+                       "name":  "meadow-f4-n6",
+                       "pid":  23784
+                   },
+                   {
+                       "name":  "meadow-f4-n7",
+                       "pid":  39592
+                   },
+                   {
+                       "name":  "meadow-f4-n8",
+                       "pid":  53044
+                   },
+                   {
+                       "name":  "meadow-f2-n1",
+                       "pid":  14472
+                   },
+                   {
+                       "name":  "meadow-f2-n2",
+                       "pid":  35588
+                   }
+               ],
+    "results":  [
+                    {
+                        "name":  "forest-control",
+                        "status":  "retained complete",
+                        "exitCode":  0
+                    },
+                    {
+                        "name":  "forest-f4-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f4-n7",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f2-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f4-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f4-n6",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f4-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f4-n8",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f4-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f2-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f4-n5",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f2-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f2-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f3-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f3-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f3-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f3-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f5-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f5-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f5-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f6-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f6-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f6-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f5-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "forest-f6-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f2-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n0",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n5",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n7",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f2-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n6",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f2-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f4-n8",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f2-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f3-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f5-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f5-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f3-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f5-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f3-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f3-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f6-n3",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f5-n4",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f6-n1",
+                        "status":  "finished",
+                        "exitCode":  null
+                    },
+                    {
+                        "name":  "river-f6-n2",
+                        "status":  "finished",
+                        "exitCode":  null
+                    }
+                ]
+}

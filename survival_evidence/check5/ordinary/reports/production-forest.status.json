@@ -1,0 +1,10 @@
+﻿{
+    "Run":  "production-forest",
+    "Complete":  true,
+    "ExitCode":  0,
+    "StopReason":  "horizon",
+    "DaysReached":  25,
+    "Alive":  3,
+    "Conserved":  true,
+    "Failure":  ""
+}

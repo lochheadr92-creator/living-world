@@ -1,0 +1,4 @@
+{
+  "status": "interrupted before completion",
+  "reason": "Fresh observer review found event data and remembered stock objects were retained by reference rather than copied at sampling time. No runtime defect inferred. Corrected observer copies snapshots; rerun uses preservation-uptake132-river2."
+}

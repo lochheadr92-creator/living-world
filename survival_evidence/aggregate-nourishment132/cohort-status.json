@@ -1,0 +1,880 @@
+{
+  "source": "C:\\dev\\Claude Experiment\\living-world-nourishment-check1",
+  "rules": 132,
+  "days": 25,
+  "arrivals": true,
+  "draws": [
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 0,
+      "name": "forest-f4-n0"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 1,
+      "name": "forest-f4-n1"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 2,
+      "name": "forest-f4-n2"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 3,
+      "name": "forest-f4-n3"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 4,
+      "name": "forest-f4-n4"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 5,
+      "name": "forest-f4-n5"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 6,
+      "name": "forest-f4-n6"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 7,
+      "name": "forest-f4-n7"
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 8,
+      "name": "forest-f4-n8"
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 1,
+      "name": "forest-f2-n1"
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 2,
+      "name": "forest-f2-n2"
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 3,
+      "name": "forest-f2-n3"
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 4,
+      "name": "forest-f2-n4"
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 1,
+      "name": "forest-f3-n1"
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 2,
+      "name": "forest-f3-n2"
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 3,
+      "name": "forest-f3-n3"
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 4,
+      "name": "forest-f3-n4"
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 1,
+      "name": "forest-f5-n1"
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 2,
+      "name": "forest-f5-n2"
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 3,
+      "name": "forest-f5-n3"
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 4,
+      "name": "forest-f5-n4"
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 1,
+      "name": "forest-f6-n1"
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 2,
+      "name": "forest-f6-n2"
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 3,
+      "name": "forest-f6-n3"
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 4,
+      "name": "forest-f6-n4"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 0,
+      "name": "river-f4-n0"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 1,
+      "name": "river-f4-n1"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 2,
+      "name": "river-f4-n2"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 3,
+      "name": "river-f4-n3"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 4,
+      "name": "river-f4-n4"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 5,
+      "name": "river-f4-n5"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 6,
+      "name": "river-f4-n6"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 7,
+      "name": "river-f4-n7"
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 8,
+      "name": "river-f4-n8"
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 1,
+      "name": "river-f2-n1"
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 2,
+      "name": "river-f2-n2"
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 3,
+      "name": "river-f2-n3"
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 4,
+      "name": "river-f2-n4"
+    },
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 1,
+      "name": "river-f3-n1"
+    },
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 2,
+      "name": "river-f3-n2"
+    },
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 3,
+      "name": "river-f3-n3"
+    },
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 4,
+      "name": "river-f3-n4"
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 1,
+      "name": "river-f5-n1"
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 2,
+      "name": "river-f5-n2"
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 3,
+      "name": "river-f5-n3"
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 4,
+      "name": "river-f5-n4"
+    },
+    {
+      "seed": "river",
+      "fork": 6,
+      "nudge": 1,
+      "name": "river-f6-n1"
+    },
+    {
+      "seed": "river",
+      "fork": 6,
+      "nudge": 2,
+      "name": "river-f6-n2"
+    },
+    {
+      "seed": "river",
+      "fork": 6,
+      "nudge": 3,
+      "name": "river-f6-n3"
+    },
+    {
+      "seed": "river",
+      "fork": 6,
+      "nudge": 4,
+      "name": "river-f6-n4"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 0,
+      "name": "meadow-f4-n0"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 1,
+      "name": "meadow-f4-n1"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 2,
+      "name": "meadow-f4-n2"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 3,
+      "name": "meadow-f4-n3"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 4,
+      "name": "meadow-f4-n4"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 5,
+      "name": "meadow-f4-n5"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 6,
+      "name": "meadow-f4-n6"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 7,
+      "name": "meadow-f4-n7"
+    },
+    {
+      "seed": "meadow",
+      "fork": 4,
+      "nudge": 8,
+      "name": "meadow-f4-n8"
+    },
+    {
+      "seed": "meadow",
+      "fork": 2,
+      "nudge": 1,
+      "name": "meadow-f2-n1"
+    },
+    {
+      "seed": "meadow",
+      "fork": 2,
+      "nudge": 2,
+      "name": "meadow-f2-n2"
+    },
+    {
+      "seed": "meadow",
+      "fork": 2,
+      "nudge": 3,
+      "name": "meadow-f2-n3"
+    },
+    {
+      "seed": "meadow",
+      "fork": 2,
+      "nudge": 4,
+      "name": "meadow-f2-n4"
+    },
+    {
+      "seed": "meadow",
+      "fork": 3,
+      "nudge": 1,
+      "name": "meadow-f3-n1"
+    },
+    {
+      "seed": "meadow",
+      "fork": 3,
+      "nudge": 2,
+      "name": "meadow-f3-n2"
+    },
+    {
+      "seed": "meadow",
+      "fork": 3,
+      "nudge": 3,
+      "name": "meadow-f3-n3"
+    },
+    {
+      "seed": "meadow",
+      "fork": 3,
+      "nudge": 4,
+      "name": "meadow-f3-n4"
+    },
+    {
+      "seed": "meadow",
+      "fork": 5,
+      "nudge": 1,
+      "name": "meadow-f5-n1"
+    },
+    {
+      "seed": "meadow",
+      "fork": 5,
+      "nudge": 2,
+      "name": "meadow-f5-n2"
+    },
+    {
+      "seed": "meadow",
+      "fork": 5,
+      "nudge": 3,
+      "name": "meadow-f5-n3"
+    },
+    {
+      "seed": "meadow",
+      "fork": 5,
+      "nudge": 4,
+      "name": "meadow-f5-n4"
+    },
+    {
+      "seed": "meadow",
+      "fork": 6,
+      "nudge": 1,
+      "name": "meadow-f6-n1"
+    },
+    {
+      "seed": "meadow",
+      "fork": 6,
+      "nudge": 2,
+      "name": "meadow-f6-n2"
+    },
+    {
+      "seed": "meadow",
+      "fork": 6,
+      "nudge": 3,
+      "name": "meadow-f6-n3"
+    },
+    {
+      "seed": "meadow",
+      "fork": 6,
+      "nudge": 4,
+      "name": "meadow-f6-n4"
+    }
+  ],
+  "started": 48,
+  "active": [
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 3,
+      "name": "river-f3-n3",
+      "pid": 8956
+    },
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 4,
+      "name": "river-f3-n4",
+      "pid": 53936
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 1,
+      "name": "river-f5-n1",
+      "pid": 22768
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 2,
+      "name": "river-f5-n2",
+      "pid": 35252
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 3,
+      "name": "river-f5-n3",
+      "pid": 49496
+    },
+    {
+      "seed": "river",
+      "fork": 5,
+      "nudge": 4,
+      "name": "river-f5-n4",
+      "pid": 24256
+    },
+    {
+      "seed": "river",
+      "fork": 6,
+      "nudge": 1,
+      "name": "river-f6-n1",
+      "pid": 43508
+    },
+    {
+      "seed": "river",
+      "fork": 6,
+      "nudge": 2,
+      "name": "river-f6-n2",
+      "pid": 45036
+    }
+  ],
+  "results": [
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 5,
+      "name": "forest-f4-n5",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 4,
+      "name": "forest-f4-n4",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 1,
+      "name": "forest-f4-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 3,
+      "name": "forest-f4-n3",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 6,
+      "name": "forest-f4-n6",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 2,
+      "name": "forest-f4-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 7,
+      "name": "forest-f4-n7",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 0,
+      "name": "forest-f4-n0",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 4,
+      "nudge": 8,
+      "name": "forest-f4-n8",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 2,
+      "name": "forest-f3-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 1,
+      "name": "forest-f2-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 1,
+      "name": "forest-f3-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 2,
+      "name": "forest-f2-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 3,
+      "name": "forest-f2-n3",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 2,
+      "nudge": 4,
+      "name": "forest-f2-n4",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 3,
+      "name": "forest-f3-n3",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 2,
+      "name": "forest-f5-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 3,
+      "nudge": 4,
+      "name": "forest-f3-n4",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 2,
+      "name": "forest-f6-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 4,
+      "name": "forest-f5-n4",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 1,
+      "name": "forest-f5-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 5,
+      "nudge": 3,
+      "name": "forest-f5-n3",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 1,
+      "name": "forest-f6-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 3,
+      "name": "forest-f6-n3",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "forest",
+      "fork": 6,
+      "nudge": 4,
+      "name": "forest-f6-n4",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 2,
+      "name": "river-f4-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 0,
+      "name": "river-f4-n0",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 4,
+      "name": "river-f4-n4",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 3,
+      "name": "river-f4-n3",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 6,
+      "name": "river-f4-n6",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 1,
+      "name": "river-f4-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 5,
+      "name": "river-f4-n5",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 7,
+      "name": "river-f4-n7",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 4,
+      "nudge": 8,
+      "name": "river-f4-n8",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 2,
+      "name": "river-f3-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 3,
+      "name": "river-f2-n3",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 2,
+      "name": "river-f2-n2",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 4,
+      "name": "river-f2-n4",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 3,
+      "nudge": 1,
+      "name": "river-f3-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    },
+    {
+      "seed": "river",
+      "fork": 2,
+      "nudge": 1,
+      "name": "river-f2-n1",
+      "status": "completed",
+      "exitCode": 0,
+      "signal": null
+    }
+  ],
+  "statusFailures": 0
+}

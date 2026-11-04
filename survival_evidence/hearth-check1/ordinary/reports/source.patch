@@ -1,0 +1,461 @@
+﻿diff --git a/scripts/lab/lab.ts b/scripts/lab/lab.ts
+index 640f24a..8df882f 100644
+--- a/scripts/lab/lab.ts
++++ b/scripts/lab/lab.ts
+@@ -34,6 +34,7 @@ import {mealLeftoversOn,setMealLeftovers} from '../../src/sim/meal_leftovers';
+ import {floodAccessEnabled,setFloodAccess} from '../../src/sim/flood';
+ import {offcutsOn,setOffcuts} from '../../src/sim/offcuts';
+ import {preservationOn,setPreservation} from '../../src/sim/preservation';
++import {hearthOn,setHearth} from '../../src/sim/hearth';
+ import { waterBudgetEnabled, setWaterBudget } from '../../src/sim/hydrology';
+ import { ecologyEnabled, setEcology } from '../../src/sim/ecology';
+ import {buildPromiseSettlementOn,setBuildPromiseSettlement} from '../../src/sim/promise_knowledge';
+@@ -406,6 +407,7 @@ export function parseIntervention(specIn: string): Intervention {
+   if(kind==='rich-no-meal-leftovers')return {spec:label,summary:'retain historical automatic table return; remove owned leftover recovery',install(){const was=mealLeftoversOn();setMealLeftovers(false);return ()=>setMealLeftovers(was);}};
+   if(kind==='rich-no-offcuts')return {spec:label,summary:'remove newly recoverable timber fuel and its use; retain the original waste sink',install(){const was=offcutsOn();setOffcuts(false);return ()=>setOffcuts(was);}};
+   if(kind==='rich-no-preservation')return {spec:label,summary:'disable preservation decisions and new batches; keep food properties and existing paid contents',install(){const was=preservationOn();setPreservation(false);return ()=>setPreservation(was);}};
++  if(kind==='rich-no-hearth')return {spec:label,summary:'disable new hearth decisions; keep installed heat and paid construction',install(){const was=hearthOn();setHearth(false);return ()=>setHearth(was);}};
+   if(kind==='rich-no-water-budget')return {spec:label,summary:'remove finite natural supply, weather accounting and personal dry-water responses',install(){const was=waterBudgetEnabled();setWaterBudget(false);return ()=>setWaterBudget(was);}};
+   if(kind==='rich-no-ecology')return {spec:label,summary:'remove persistent productive condition, observation and field rest',install(){const was=ecologyEnabled();setEcology(false);return ()=>setEcology(was);}};
+   if(kind==='rich-no-promise-delays')return {spec:label,summary:'remove active-promise delay explanations and one bounded deadline negotiation',install(){const was=promiseDelaysOn();setPromiseDelays(false);return ()=>setPromiseDelays(was);}};
+diff --git a/scripts/observers/survival.ts b/scripts/observers/survival.ts
+index f517a25..501ecb6 100644
+--- a/scripts/observers/survival.ts
++++ b/scripts/observers/survival.ts
+@@ -21,12 +21,14 @@ export function survivalObserver(w:World){
+     onActivityStart(p,a){
+       previous?.onActivityStart?.(p,a);
+       if(related(a))inc(`chain starts:${a.kind}`);
++      if(a.data.improvement==='hearth'||a.data.hearth===true)inc(`hearth starts:${a.kind}`);
+       if(a.kind==='operate'&&RECIPE_BY_ID[String(a.data.recipe)]?.preservation)inc(`starts:${a.data.recipe}`);
+       if(a.kind==='plan_site'&&a.data.type==='food_rack')inc('starts:rack layout');
+     },
+     onActivityEnd(p,a,outcome,detail){
+       previous?.onActivityEnd?.(p,a,outcome,detail);
+       if(related(a))inc(`chain ends:${a.kind}:${outcome}:${detail}`);
++      if(a.data.improvement==='hearth'||a.data.hearth===true)inc(`hearth ends:${a.kind}:${outcome}:${detail}`);
+       if(a.kind==='operate'&&RECIPE_BY_ID[String(a.data.running??a.data.recipe)]?.preservation)inc(`ends:${outcome}:${detail}`);
+       if(a.kind==='plan_site'&&a.data.type==='food_rack')inc(`rack layout ends:${outcome}:${detail}`);
+     },
+@@ -39,6 +41,7 @@ export function survivalObserver(w:World){
+   };
+   return {
+     sample(ctx:Ctx,ranked:Option[]=[]){
++      for(const o of ctx.options)if(o.key.startsWith('hearth_'))inc(`sampled hearth offers:${o.kind}`);
+       const raw=preservationSurplus(ctx);
+       if(raw&&ctx.stage!=='child')inc(`sampled known surplus:${raw}`);
+       for(const o of ctx.options)if(o.key==='plan_site:food_rack')inc('sampled offers:rack layout');
+@@ -63,6 +66,11 @@ export function survivalObserver(w:World){
+       }
+     },
+     tick(){
++      for(const p of w.persons)if(p.alive){
++        if(p.activity?.data.hearth)inc(`hearth person ticks:${p.activity.phase}`);
++        const b=p.indoors?w.byId.get(p.indoors):null;
++        if(b?.ent==='building'&&b.hearth&&b.hearth.heat>0){inc('hearth heated occupant ticks');inc('hearth occupant degree-ticks',b.hearth.heat);}
++      }
+       for(const p of w.persons)if(p.alive&&p.activity&&related(p.activity))inc(`chain person ticks:${p.activity.kind}:${p.activity.phase}`);
+       for(const b of w.buildings){
+         const j=b.ops?.job;
+@@ -75,6 +83,7 @@ export function survivalObserver(w:World){
+       }
+     },
+     report(){return {counts,decisions,chainDecisions,racks:w.buildings.filter(b=>b.type==='food_rack').length,
++      hearths:w.buildings.filter(b=>b.hearth).length,hearthFuelConsumed:w.ledger.reasons['-fuel for indoor hearth']??0,
+       made:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.created[k]??0])),
+       consumed:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.consumed[k]??0])),
+       spoiled:Object.fromEntries(PRESERVED_FOODS.map(k=>[k,w.ledger.spoiled[k]??0])),
+diff --git a/src/app/save.ts b/src/app/save.ts
+index fdea448..cd5d820 100644
+--- a/src/app/save.ts
++++ b/src/app/save.ts
+@@ -1,5 +1,6 @@
+ import {validateChildhood} from '../sim/childhood';
+ import {validatePreservation} from '../sim/preservation';
++import {validateHearth} from '../sim/hearth';
+ import {validateCompany} from '../sim/companionship';
+ import {validateNightExperience} from '../sim/night_experience';
+ import { validateEcology } from '../sim/ecology';
+@@ -294,6 +295,7 @@ export function deserializeWorld(json: string): World {
+   validateFlood(w);
+   validateOffcuts(w);
+   validatePreservation(w);
++  validateHearth(w);
+   validateMealLeftovers(w);
+   validateEstateCustody(w);
+   validateWorkHandovers(w);
+diff --git a/src/sim/act_build.ts b/src/sim/act_build.ts
+index 5df8ac6..bff570e 100644
+--- a/src/sim/act_build.ts
++++ b/src/sim/act_build.ts
+@@ -1,4 +1,5 @@
+ import {hasLivedLife} from './lived_life';
++import {hearthInstallBlock,isHearthAction,hearthFuelBegin,hearthFuelWork} from './hearth';
+ import {hasPromiseTargets,observePromiseTarget,finishedSiteHere} from './promise_targets';
+ import {hasPromiseKnowledge} from './promise_knowledge';
+ import {homeLayoutConflict} from './home_replacement';
+@@ -96,6 +97,10 @@ registerHandler('build', {
+       return a.cycle > 0 ? 'done' : 'fail:the site is gone';
+     }
+     if (!mayWorkProject(world, p, site.id)) return 'fail:participation withdrawn';
++    if(site.improvement==='hearth'){
++      const block=hearthInstallBlock(world,p,site.upgradeOf??0);
++      if(block)return `fail:${block}`;
++    }
+     faceToward(p, a.tx, a.ty);
+     const cap = site.workTotal * Math.min(1, 0.06 + allowedFraction(site));
+     if (site.work >= cap - 1e-9) {
+@@ -131,7 +136,7 @@ registerHandler('build', {
+       // everyone who put work into it finished it together (rich only: where a builder may take on an apprentice)
+       const crew = world.persons.filter((q) => q.alive && (q === p || q.commitments.some((c) => c.siteId === site.id && (c.contrib ?? 0) > 0)));
+       onSharedWork(world, crew, 'build');
+-      addLog(world, p, 'work', `Finished building the ${buildingLabel(b.type)}.`);
++      addLog(world, p, 'work', site.improvement==='hearth'?`Finished fitting a hearth in the ${buildingLabel(b.type)}.`:`Finished building the ${buildingLabel(b.type)}.`);
+       observe(world, p, b);
+       observePromiseTarget(world,p,site.id,site.x+site.w/2,site.y+site.h/2,'completed here');
+       delBelief(p, site.id);
+@@ -342,6 +347,9 @@ registerHandler('plan_site', {
+     const sx = a.data.sx as number;
+     const sy = a.data.sy as number;
+     const up = (a.data.upgradeOf as number) ?? 0;
++    if(a.data.improvement==='hearth'){
++      const block=hearthInstallBlock(world,p,up);if(block)return block;
++    }
+     if (!up) for (let yy = sy; yy < sy + d.h; yy++) for (let xx = sx; xx < sx + d.w; xx++) if (!isFreeLand(world, xx, yy)) return 'the spot is no longer free';
+     // someone may have started a project while this person was walking over
+     const why = siteConflict(world, type, a.data.hh as number, up, (a.data.depositId as number) ?? 0, { x: sx + d.w / 2, y: sy + d.h / 2 });
+@@ -375,13 +383,16 @@ registerHandler('plan_site', {
+       return 'fail:the footprint would obstruct access';
+     }
+     if (hasLayoutClaims(world)) { delete a.data.layoutWaitSince; a.blocked = ''; }
+-    const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined });
++    if(a.data.improvement==='hearth'){
++      const block=hearthInstallBlock(world,p,up);if(block)return `fail:${block}`;
++    }
++    const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined,...(a.data.improvement==='hearth'?{improvement:'hearth' as const}:{}) });
+     proposeProject(world, p, site, a.goal);
+     observe(world, p, site);
+     const hh = householdOf(world, p);
+-    const verb = up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';
++    const verb = site.improvement==='hearth'?'marked out an indoor hearth for the':up ? `marked out the rebuilding of their ${buildingLabel((world.byId.get(up) as Building).type)} as a` : 'marked out a';
+     addEvent(world, 'build', `${p.name} ${verb} ${buildingLabel(type)}${hh ? ` for the ${hh.name} household` : ''}.`.replace('a a ', 'a '), [p.id], sx, sy);
+-    addLog(world, p, 'work', up ? `Marked out the ${buildingLabel(type)} that will replace our home.` : `Marked out a spot for a ${buildingLabel(type)}.`);
++    addLog(world, p, 'work', site.improvement==='hearth'?'Marked out an indoor hearth for our home.':up ? `Marked out the ${buildingLabel(type)} that will replace our home.` : `Marked out a spot for a ${buildingLabel(type)}.`);
+     addFx(world, 'built', site.x + site.w / 2, site.y + site.h / 2, 0);
+     a.targetId = site.id;
+     return 'done';
+@@ -393,6 +404,7 @@ registerHandler('fuel_fire', {
+   availability: 0.5,
+   pose: () => 'store',
+   begin(world, p, a) {
++    if(isHearthAction(world,a))return hearthFuelBegin(world,p,a);
+     const f = world.byId.get(a.targetId);
+     if (!f || f.ent !== 'building' || f.type !== 'fire') {
+       observePromiseTarget(world,p,a.targetId,a.tx,a.ty);
+@@ -413,6 +425,7 @@ registerHandler('fuel_fire', {
+     observe(world, p, f);
+   },
+   work(world, p, a): WorkResult {
++    if(isHearthAction(world,a))return hearthFuelWork(world,p,a);
+     const f = world.byId.get(a.targetId);
+     if (!f || f.ent !== 'building') {observePromiseTarget(world,p,a.targetId,a.tx,a.ty);return 'fail:the fire is gone';}
+     faceToward(p, a.tx, a.ty);
+@@ -433,6 +446,10 @@ registerHandler('fuel_fire', {
+     return 'continue';
+   },
+   onEnd(world, p, a) {
++    if(isHearthAction(world,a)){
++      if(a.cycle>0)addLog(world,p,'work',`Fed the indoor hearth with ${a.cycle} ${fuelItem(world,a)}.`);
++      return;
++    }
+     const f = world.byId.get(a.targetId);
+     if (a.cycle > 0 && f && f.ent === 'building') {
+       addLog(world, p, 'work', fuelItem(world,a)==='offcuts'?`Fed the fire with ${a.cycle} recovered offcut fuel bundle${a.cycle>1?'s':''}.`:`Fed the fire with ${a.cycle} log${a.cycle > 1 ? 's' : ''}.`);
+diff --git a/src/sim/activities.ts b/src/sim/activities.ts
+index 2a3f519..c1f6298 100644
+--- a/src/sim/activities.ts
++++ b/src/sim/activities.ts
+@@ -387,7 +387,7 @@ function beginWork(world: World, p: Person, a: Activity): void {
+   if (home) {
+     const refused = enterHome(world, p, home);
+     if (refused) { endActivity(world, p, 'failed', refused); return; }
+-    a.label = (a.kind === 'sleep' ? 'Sleeping' : a.kind === 'flee' ? 'Taking refuge' : a.kind === 'drink' ? 'Drinking stored water' : 'Resting') + ' inside the ' + home.type;
++    a.label = (a.kind === 'sleep' ? 'Sleeping' : a.kind === 'flee' ? 'Taking refuge' : a.kind === 'drink' ? 'Drinking stored water' : a.kind==='fuel_fire'?'Tending the hearth':'Resting') + ' inside the ' + home.type;
+   }
+   a.phase = 'work';
+   a.progress = 0;
+diff --git a/src/sim/buildings.ts b/src/sim/buildings.ts
+index c4dfdcf..c4dcc26 100644
+--- a/src/sim/buildings.ts
++++ b/src/sim/buildings.ts
+@@ -1,4 +1,5 @@
+ import { constructionAftermath } from './achievement';
++import {HEARTH_COST,HEARTH_WORK,hearthInstallBlock} from './hearth';
+ import {losePreservationRack} from './preservation';
+ import { preservesAccess, allSitesNeedAccess } from './construction_access';
+ import { finishProject, hasTownships } from './townships';
+@@ -56,10 +57,15 @@ export function createSite(
+   y: number,
+   hhId: number,
+   creatorId: number,
+-  opts: { upgradeOf?: number; depositId?: number } = {},
++  opts: { upgradeOf?: number; depositId?: number; improvement?: 'hearth' } = {},
+ ): Site {
+   const d = BUILD_DEF[type];
+-  const required: Items = { ...d.cost };
++  if(opts.improvement){
++    const p=world.byId.get(creatorId);
++    const block=p?.ent==='person'?hearthInstallBlock(world,p,opts.upgradeOf??0):'missing builder';
++    if(block)throw Error(block);
++  }
++  const required: Items = opts.improvement==='hearth'?{...HEARTH_COST}:{ ...d.cost };
+   const s: Site = {
+     ent: 'site',
+     id: newId(world),
+@@ -74,7 +80,7 @@ export function createSite(
+     delivered: {},
+     used: {},
+     work: 0,
+-    workTotal: d.work,
++    workTotal: opts.improvement==='hearth'?HEARTH_WORK:d.work,
+     createdTick: world.tick,
+     lastWorkTick: world.tick,
+     maxWorkers: d.workers,
+@@ -82,6 +88,7 @@ export function createSite(
+     variant: Math.floor(hashUnit(x, y, 91) * 4),
+     contrib: {},
+   };
++  if(opts.improvement)s.improvement=opts.improvement;
+   if (opts.upgradeOf) s.upgradeOf = opts.upgradeOf;
+   if (opts.depositId) s.depositId = opts.depositId;
+   registerSite(world, s);
+@@ -184,6 +191,12 @@ export function completeSite(world: World, site: Site, builder: Person | null):
+     const old = world.byId.get(site.upgradeOf);
+     if (old && old.ent === 'building') {
+       const was = buildingLabel(old.type);
++      if(site.improvement==='hearth'){
++        old.hearth={fuel:0,heat:0};delete old.upgrading;
++        for(const k in site.delivered)addItem(old.store.items,k as keyof Items,site.delivered[k as keyof Items]??0);
++        addEvent(world,'build',`${who} fitted a hearth in the ${label}.`,builder?[builder.id]:[],old.x,old.y);
++        return old;
++      }
+       old.type = site.type;
+       delete old.upgrading;
+       old.condition = 100;
+diff --git a/src/sim/habitation.ts b/src/sim/habitation.ts
+index ce74e65..3206714 100644
+--- a/src/sim/habitation.ts
++++ b/src/sim/habitation.ts
+@@ -2,6 +2,7 @@
+ // Person.indoors is authoritative. Building.inside is a legacy unused field;
+ // occupant lists are derived from people, never another saved source of truth.
+ import {isStoredDrink} from './stored_water_access';
++import {isHearthAction} from './hearth';
+ import { floodMovementBlocked, observeFlood, observeFloodDoor } from './flood';
+ import { isSolidHome } from './constants';
+ import { isWalkable } from './registry';
+@@ -70,7 +71,7 @@ export function leaveHome(w: World, p: Person): string | null {
+ }
+ /** Only these ordinary activities may execute without leaving the interior. */
+ export function staysIndoors(w: World, p: Person, a: Activity): boolean {
+-  if(isStoredDrink(w,a)&&a.targetId===p.indoors)return true;
++  if((isStoredDrink(w,a)||isHearthAction(w,a))&&a.targetId===p.indoors)return true;
+   if (hasLocalGiving(w) && a.kind === 'give' && indoorHome(w, p)) {
+     const q = w.byId.get(a.targetId);
+     if (q?.ent === 'person' && q.alive && q.indoors === p.indoors) return true;
+@@ -88,7 +89,7 @@ export function prepareIndoorActivity(w: World, p: Person, a: Activity): string
+ }
+ /** Reset travelling activity after a valid exit; its route must start at the door. */
+ export function interiorTarget(w: World, a: Activity): Building | null {
+-  if (!hasHabitation(w) || (a.kind !== 'sleep' && a.kind !== 'rest' && !(a.kind === 'flee' && a.data.homeRefuge === true) && !isStoredDrink(w,a))) return null;
++  if (!hasHabitation(w) || (a.kind !== 'sleep' && a.kind !== 'rest' && !(a.kind === 'flee' && a.data.homeRefuge === true) && !isStoredDrink(w,a)&&!isHearthAction(w,a))) return null;
+   const b = w.byId.get(a.targetId);
+   return b?.ent === 'building' && isSolidHome(b.type) ? b : null;
+ }
+diff --git a/src/sim/inspect.ts b/src/sim/inspect.ts
+index a3da312..3fadb47 100644
+--- a/src/sim/inspect.ts
++++ b/src/sim/inspect.ts
+@@ -252,7 +252,7 @@ export function describeEntityName(world: World, e: Entity): string {
+     case 'building':
+       return BUILD_DEF[e.type].label[0].toUpperCase() + BUILD_DEF[e.type].label.slice(1);
+     case 'site':
+-      return `${BUILD_DEF[e.type].label[0].toUpperCase()}${BUILD_DEF[e.type].label.slice(1)} (under construction)`;
++      return e.improvement==='hearth'?'Indoor hearth (under construction)':`${BUILD_DEF[e.type].label[0].toUpperCase()}${BUILD_DEF[e.type].label.slice(1)} (under construction)`;
+     case 'plot':
+       return 'Field plot';
+     case 'pile':
+@@ -760,6 +760,11 @@ export function describeEntity(world: World, id: number): EntityView | null {
+         rows.push(['State', b.fuel > 0 ? 'burning' : 'out']);
+       }
+       if (b.store.cap > 0) rows.push(['Storage', `${Math.round(weightOf(b.store.items))}/${b.store.cap} used`]);
++      if(b.hearth){
++        rows.push(['Indoor hearth',b.hearth.fuel>0?'burning':b.hearth.heat>0?'fuel exhausted; residual heat is cooling':'cold; needs fuel']);
++        rows.push(['Room heat',`+${b.hearth.heat.toFixed(1)} degrees for occupants only`]);
++        rows.push(['Hearth fuel',`${b.hearth.fuel.toFixed(0)} ticks of paid fuel remaining`]);
++      }
+       if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push(['Built by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
+       const notes: string[] = [];
+       if (isHomeType(b.type)) {
+@@ -776,7 +781,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
+         }
+         notes.push(BUILD_DEF[b.type].blurb);
+       }
+-      if (b.upgrading) notes.push('Being rebuilt as a house: still lived in while the work goes on.');
++      if (b.upgrading) notes.push(world.sites.find(s=>s.id===b.upgrading)?.improvement==='hearth'?'An indoor hearth is being fitted; the home remains occupied.':'Being rebuilt as a house: still lived in while the work goes on.');
+       return { kind: 'building', ...base, title: describeEntityName(world, e), subtitle: `Built ${agoText(world, b.builtTick)}`, rows, bars, items: itemList(b.store.items), notes, position: { x: b.x + b.w / 2, y: b.y + b.h / 2 }, sections };
+     }
+     case 'site': {
+diff --git a/src/sim/knowledge.ts b/src/sim/knowledge.ts
+index d2e0abe..651335c 100644
+--- a/src/sim/knowledge.ts
++++ b/src/sim/knowledge.ts
+@@ -44,6 +44,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief |
+       b.hh = e.hhId;
+       b.cond = e.condition;
+       b.fuel = e.fuel;
++      if(e.hearth)b.hearth={fuel:null,heat:null,seen:tick};
+       b.items = cloneItems(e.store.items);
+       if (e.ops) b.ops = facilitySnapshot(world, e);
+       const racked = toolsHeldBy(world, e.id);
+@@ -166,6 +167,10 @@ export function observe(world: World, p: Person, e: Entity): boolean {
+   if (hasLocalDeath(world) && e.ent==='grave' && e.death && !p.indoors && p.pose!=='sleep' && Math.hypot(p.x-e.x,p.y-e.y)<=10) deathStory(world,p,e.death,'grave');
+   const b = snapshotEntity(world, e, world.tick);
+   if (!b) return false;
++  if(e.ent==='building'&&e.hearth){
++    if(p.indoors===e.id)b.hearth={...e.hearth,seen:world.tick};
++    else if(p.beliefs[e.id]?.hearth)b.hearth={...p.beliefs[e.id].hearth!};
++  }
+   b.origin = p.id;
+   b.hops = 0;
+   if(e.ent==='source')correctSourceExperience(world,p,e.id,e.amount);
+diff --git a/src/sim/needs.ts b/src/sim/needs.ts
+index b3167b4..13f20e6 100644
+--- a/src/sim/needs.ts
++++ b/src/sim/needs.ts
+@@ -1,3 +1,4 @@
++import {hearthWarmth} from './hearth';
+ import { DRIVE_BANDS, ENERGY_RATE, HUNGER_RATE, REST_RECOVER, SLEEP_RECOVER, SOCIAL_RATE, THIRST_RATE } from './constants';
+ import { nearLitFire } from './perception';
+ import { stageOf } from './people';
+@@ -98,7 +99,7 @@ export function updateNeeds(world: World, p: Person): void {
+   const sh = shelterAt(world, p.x, p.y, p);
+   const fire = indoorHome(world, p) ? 0 : fireWarmth(world, p.x, p.y);
+   const wet = w.rain * 3.6 * (1 - sh.cover);
+-  const eff = w.temp + 2 + sh.bonus + fire - wet;
++  const eff = w.temp + 2 + sh.bonus + fire + hearthWarmth(world,p) - wet;
+   const target = clamp(50 + (eff - 10) * 5, 0, 100);
+   n.warmth += (target - n.warmth) * 0.006;
+ 
+diff --git a/src/sim/options_work.ts b/src/sim/options_work.ts
+index 1e4d757..95d9338 100644
+--- a/src/sim/options_work.ts
++++ b/src/sim/options_work.ts
+@@ -1,3 +1,4 @@
++import {knownColdHearth} from './hearth';
+ import {hasLivedLife} from './lived_life';
+ import {hasChildhood} from './childhood_rules';
+ import {reservedFor} from './reserved_goods';
+@@ -317,6 +318,7 @@ export function relevantSites(ctx: Ctx): { b: Belief; rel: ReturnType<typeof sit
+ export function materialNeeds(ctx: Ctx): MatNeed[] {
+   const { p, world } = ctx;
+   const needs: MatNeed[] = [];
++  for(const b of beliefsByKind(p,['building']))if(knownColdHearth(ctx,b)&&fuelAvailable(world,p,'offcuts')<1)needs.push({item:'wood',n:2,base:34,why:'to fuel our cold home hearth',tag:'fire'});
+   for (const { b, rel } of relevantSites(ctx)) {
+     for (const k in b.need ?? {}) {
+       let n = unitsOf(b.need?.[k as ItemKind]);
+diff --git a/src/sim/production.ts b/src/sim/production.ts
+index 21f7b04..7766b96 100644
+--- a/src/sim/production.ts
++++ b/src/sim/production.ts
+@@ -1,4 +1,5 @@
+ import {hasProjectAcquire} from './project_acquire';
++import {hearthOptions,knownColdHearth} from './hearth';
+ import {hasPreservation} from './preservation';
+ import {PRESERVED_FOODS} from './constants';
+ import {hasMealLeftovers,mayTakeKnownPile} from './meal_leftovers';
+@@ -1229,6 +1230,9 @@ export function productionOptions(ctx: Ctx): void {
+   if (ctx.drives.hunger > 30 || ctx.drives.thirst > 30 || ctx.drives.energy > 45) return;
+   if (p.health < 45) return;
+   preservationOptions(ctx);
++  hearthOptions(ctx);
++  if(beliefsByKind(p,['building']).some(b=>knownColdHearth(ctx,b))&&fuelAvailable(world,p,'wood')<1&&fuelAvailable(world,p,'offcuts')<1&&hasOffcuts(world))
++    collectOptions(ctx,'offcuts',2,34,'reuse known offcuts to heat our home','fire',null);
+   if(hasMealLeftovers(world)){
+     // Only personally seen/heard household holdings; no lookup of a remote meal table.
+     const known=beliefsByKind(p,['pile']).filter(b=>b.hh===p.hhId&&foodUnits(b.items??{})>0).sort((a,b)=>eta(ctx,a.x,a.y)-eta(ctx,b.x,b.y));
+diff --git a/src/sim/rulesversion.ts b/src/sim/rulesversion.ts
+index 2ebce68..5253f37 100644
+--- a/src/sim/rulesversion.ts
++++ b/src/sim/rulesversion.ts
+@@ -171,10 +171,10 @@ import type { Settings, World } from './types';
+ // Version 120: childhood time, small-pack food returns and portable routine measurements (TALIA_LIVED_CHILDHOOD.md; numbered 119 before integration).
+ // Version 121: resumed gathering retains the outcome of already paid food acquisition (numbered 120 before integration).
+ // Version 122: bounded fish/meat drying and smoking through physical facility batches.
+-export const CURRENT_RULES_VERSION = 122;
++export const CURRENT_RULES_VERSION = 123;
+ 
+ /** Every version this build can actually run. A save naming anything else is refused rather than quietly reinterpreted. */
+-export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122];
++export const SUPPORTED_RULES_VERSIONS: readonly number[] = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123];
+ 
+ /**
+  * The rules-version number of the unintegrated experimental mood-ranking candidate. Not supported here.
+diff --git a/src/sim/types.ts b/src/sim/types.ts
+index c6f36d6..34e1e8d 100644
+--- a/src/sim/types.ts
++++ b/src/sim/types.ts
+@@ -105,6 +105,8 @@ export interface Belief {
+   state?: string;
+   progress?: number;
+   fuel?: number;
++  /** Visible fitting, with thermal state only when actually observed indoors. */
++  hearth?: {fuel:number|null;heat:number|null;seen:number};
+   /** what a facility looked like when last seen: running recipe, progress, stock waiting for pickup */
+   ops?: FacilitySnapshot;
+   /** equipment on a rack / in a store when last seen */
+@@ -826,6 +828,8 @@ export interface Building {
+   hhId: number;
+   store: Store;
+   fuel: number;
++  /** Paid home fitting; absent means no installed hearth. */
++  hearth?: {fuel:number;heat:number};
+   builtTick: number;
+   doorX: number;
+   doorY: number;
+@@ -959,6 +963,7 @@ export interface Site {
+   variant: number;
+   /** a home being improved in place: the building that stands here */
+   upgradeOf?: number;
++  improvement?: 'hearth';
+   /** a quarry site is laid out beside this deposit */
+   depositId?: number;
+   /** household id -> value contributed (1 per unit of material, 1 per 25 work ticks): decides who holds title when it is finished */
+diff --git a/src/sim/world.ts b/src/sim/world.ts
+index 881e723..f5547dd 100644
+--- a/src/sim/world.ts
++++ b/src/sim/world.ts
+@@ -1,4 +1,5 @@
+ import { updateEcology } from './ecology';
++import {hearthTick} from './hearth';
+ import {runsPreservation} from './preservation';
+ import {PRESERVED_FOODS} from './constants';
+ import { updateFlood } from './flood';
+@@ -189,6 +190,7 @@ function updateBuildings(world: World): void {
+       }
+       continue;
+     }
++    hearthTick(world,b);
+     b.condition -= DECAY_PER_TICK[b.type] * stormy;
+     if (b.condition <= 0) {
+       for (const p of world.persons) if (p.activity && p.activity.targetId === b.id) abortActivity(world, p, 'the building collapsed');
+@@ -360,6 +362,9 @@ export function hashWorld(world: World, trace?: (part: string) => void): string
+   for (const p of world.persons) for (const b of Object.values(p.beliefs)) if (b.ecology !== undefined || b.fallowUntil !== undefined) push('EcologyMemory' + p.id + ':' + b.id + ':' + b.seen + ':' + b.ecology + ':' + b.fallowUntil);
+   for (const s of world.sources) push(`S${s.id}:${s.amount},${r4(s.growth)},${s.reserved}`);
+   for (const b of world.buildings) push(`B${b.id}:${b.type},${r4(b.condition)},${r4(b.fuel)},${JSON.stringify(b.store.items)}`);
++  for(const b of world.buildings)if(b.hearth)push('Hearth'+b.id+JSON.stringify(b.hearth));
++  for(const s of world.sites)if(s.improvement)push('Fitting'+s.id+':'+s.improvement+':'+s.upgradeOf);
++  for(const p of world.persons)for(const b of Object.values(p.beliefs))if(b.hearth)push('HearthMemory'+p.id+':'+b.id+JSON.stringify(b.hearth));
+   for (const s of world.sites) push(`C${s.id}:${r4(s.work)},${JSON.stringify(s.delivered)},${JSON.stringify(s.used)}`);
+   for (const pl of world.plots) push(`L${pl.id}:${pl.state},${r4(pl.progress)},${pl.stock},${pl.seedStock}`);
+   for (const pile of world.piles) {push(`I${pile.id}:${JSON.stringify(pile.items)}`);if(pile.mealFood)push(`MealFood:${pile.id}:${JSON.stringify(pile.mealFood)}`);if(pile.estate)push(`Estate:${pile.id}:${JSON.stringify(pile.estate)}`);}

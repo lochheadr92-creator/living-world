@@ -1,0 +1,6 @@
+{
+    "exitCode":  1,
+    "command":  "npm test -- --maxWorkers=8",
+    "finished":  "2026-11-04T02:33:53.3240168+10:00",
+    "source":  "C:\\dev\\Claude Experiment\\living-world-survival-check11"
+}

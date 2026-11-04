@@ -1,0 +1,37 @@
+{
+  "evidence": "STAGED equipment and stock; selected offered activities and physical handlers. Ordinary activation is measured separately.",
+  "checks": [
+    {
+      "name": "paid batch shows real contents and work",
+      "ok": true,
+      "detail": "Drying and smoking rackBuilt 12 world min agoBuilding progressMaterials suppliedWorking nowSmoking fish18%When the work is done it burns for about 36s with nobody needed.Will make×2At workAdaMade here so farCan make heredried fishsmoked fishdried meatsmoked meatOwnerRowan householdStorage8/30 usedCondition100%In the storeWhat it is forDrying fish2 fish → 2 dried_fish · 6s of work + 72s drying in fair weatherSmoking fish2 fish, 1 wood → 2 smoked_fish · 6s of work + 36s burningDrying meat2 meat → 2 dried_meat · 6s of work + 72s drying in fair weatherSmoking meat2 meat, 1 wood → 2 smoked_meat · 6s of work + 36s burningAn open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.Who may use itBelongs to the Rowan household. Others may use it if one of the household counts them a friend; what they make is theirs.Under wayMakingsmoked fishOrdered byAdaForkeep spare food for later mealsStagebeing workedWorking nowAdaTime before unfinished food spoils1 world day 23 h 53 minWorked on by: Ada 1s.Inside the batch: 2 fish, 1 wood.Stock×4×18/30 of the store used.OutputBatches finished0Hands that have worked hereAda1s of work"
+    },
+    {
+      "name": "smoking made two paid stored portions",
+      "ok": true,
+      "detail": {
+        "stock": {
+          "fish": 4,
+          "wood": 1,
+          "smoked_fish": 2
+        },
+        "conserved": true,
+        "text": "Drying and smoking rackBuilt 4 world h 20 min agoBuilding progressMaterials suppliedWorking nowIdleLast used just now.Will makeNobody at workMade here so far×2Can make heredried fishsmoked fishdried meatsmoked meatOwnerRowan householdStorage10/30 usedCondition100%In the storeWhat it is forDrying fish2 fish → 2 dried_fish · 6s of work + 72s drying in fair weatherSmoking fish2 fish, 1 wood → 2 smoked_fish · 6s of work + 36s burningDrying meat2 meat → 2 dried_meat · 6s of work + 72s drying in fair weatherSmoking meat2 meat, 1 wood → 2 smoked_meat · 6s of work + 36s burningAn open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.Who may use itBelongs to the Rowan household. Others may use it if one of the household counts them a friend; what they make is theirs.Idle — what is stopping itDrying meat: needs 2 more meat brought in.Smoking meat: needs 2 more meat brought in.For the observer: 1 wood: in a store 0 tiles away; gathered, not made; 0 people know a source of it; 4 meat: nowhere in the world; gathered, not made; 0 people know a source of it.Stock×4×1×210/30 of the store used.2 smoked_fish set aside for Ada (keep spare food for later meals), held in 1 world day 12 h.OutputBatches finished1Made so far2 smoked_fishUsed so far1 wood, 2 fishHands that have worked hereAda7s of work"
+      }
+    },
+    {
+      "name": "rain failure state explains the physical pause",
+      "ok": true,
+      "detail": "Drying and smoking rackBuilt 41 world min agoBuilding progressMaterials suppliedWorking nowDrying fish (paused)0%rain pauses drying About 72s of dry weather remains. Nobody has to stand there.Will make×2At workAdaMade here so farCan make heredried fishsmoked fishdried meatsmoked meatOwnerRowan householdStorage10/30 usedCondition100%In the storeWhat it is forDrying fish2 fish → 2 dried_fish · 6s of work + 72s drying in fair weatherSmoking fish2 fish, 1 wood → 2 smoked_fish · 6s of work + 36s burningDrying meat2 meat → 2 dried_meat · 6s of work + 72s drying in fair weatherSmoking meat2 meat, 1 wood → 2 smoked_meat · 6s of work + 36s burningAn open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.Who may use itBelongs to the Rowan household. Others may use it if one of the household counts them a friend; what they make is theirs.Under wayMakingdried fishOrdered byAdaForkeep spare food for later mealsStagedrying: 7 world h 12 min of suitable conditions leftWorking nowAdaTime before unfinished food spoils1 world day 23 h 24 minrain pauses dryingWorked on by: Ada 6s.Inside the batch: 2 fish.Stock×4×210/30 of the store used.OutputBatches finished0Hands that have worked hereAda6s of work"
+    },
+    {
+      "name": "render and inspection preserve full saved state",
+      "ok": true
+    },
+    {
+      "name": "no browser exceptions",
+      "ok": true,
+      "detail": []
+    }
+  ]
+}

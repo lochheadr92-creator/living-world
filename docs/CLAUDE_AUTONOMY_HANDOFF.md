@@ -1,5 +1,10 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Owner stop,4 November2026:** current trap-report section (rules133) complete;
+publication/merge requested. The whole survival assignment remains incomplete.
+Follow-on runs stopped; baseline75,pre13148,final13240completed draws retained.
+No full-cohort benefit claim. See SURVIVAL_CAPABILITIES.md and root HANDOFF.md.
+
 **Rules132 implementation checkpoint:** paid finite nourishment connects actual
 consumption to bounded shortage protection and paid health recovery. Newborns,
 arrivals and missing old fields gain no free reserves.29new contracts and
