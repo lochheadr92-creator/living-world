@@ -1,5 +1,7 @@
 # Branch integration and older-work preservation — 4 November 2026
 
+**Subsequent owner-authorized recovery completed:** the nineteen retained tips below were reviewed at feature level, selected missing capabilities adapted as rules 134-147, then integrated and pushed to main. All nineteen tips now have published annotated archive tags; ten local and seventeen remote refs were removed. See [RECOVERED_CAPABILITIES.md](RECOVERED_CAPABILITIES.md). The stop-checkpoint account below remains historical, not current branch status.
+
 Owner instruction: stop after the current survival section, commit/push outstanding work, include older work, and review every branch for merging. Capability development remains stopped at rules 133.
 
 ## Outcome

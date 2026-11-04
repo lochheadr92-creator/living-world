@@ -1,6 +1,6 @@
 # Recover useful retired-branch capabilities
 
-Owner authorization, 4 November 2026: implement and verify useful missing features first; delete the retired branches afterward. This supersedes the preceding cleanup-only stop for this recovery programme. It does not resume unrelated survival tuning. Starting main: f3be2ee2, rules 133. Implementation branch: feat/recovered-capabilities.
+Owner authorization, 4 November 2026: implement and verify useful missing features first; delete the retired branches afterward. This supersedes the preceding cleanup-only stop for this recovery programme. It does not resume unrelated survival tuning. Starting main: f3be2ee2, rules 133. Implementation branch: feat/recovered-capabilities (merged into main; temporary branch removed after delivery).
 
 ## Scope and order
 
@@ -200,3 +200,9 @@ Thirty-six failed assertions reproduce on untouched starting main `f3be2ee2` in 
 Final ten-day rules-147 arrivals-on screens match the reported rules-146 counts: forest 28 alive / 3 cellars / 2 rods / 3 cuttings / 50 peer receipts; river 29 alive / 2 wells / 3 cellars / 3 rods / 7 cuttings / 65 peer receipts. All daily conservation checks and final 240-tick exact twin continuations pass. Neither run activates a mine, separate mill, brewery, shared-workshop proposal, grave visit or completed coaching conversation. Their paid mechanisms have staged chain evidence; reliable ordinary uptake, aggregate benefit and mature-world viability are not established.
 
 The requested recovery is ready for main integration and subsequent archival branch cleanup. This does not resume the separate incomplete survival programme or authorize unrelated tuning.
+
+## Publication and branch cleanup
+
+Main was fast-forwarded and pushed to `f03a259381fadf0ba6fc485006c6178b1fc78a86` after final verification. Nineteen annotated archive tags were then published atomically and their peeled remote targets checked against the reviewed hashes. Ten local and seventeen remote retired refs were removed; none of the mapped refs remains. Two occupied worktrees (civilisation and winter-shelter) were detached at their original tips, and before/after file/index fingerprints match exactly. Their outstanding files also match the earlier published preservation archive. The full old histories, excluded alternatives and adverse findings remain recoverable through those tags and the older-work archive.
+
+`cleanup-result.json` records exact targets, preserved fingerprints and deleted names; `cleanup-execution.txt` retains command output. Later documentation/cleanup commits do not change the verified simulation. The temporary recovery branch is removed after its complete history is on main.

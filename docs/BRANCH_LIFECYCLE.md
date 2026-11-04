@@ -1,5 +1,9 @@
 # Branch lifecycle record — 2026-10-23
 
+## Selected recovery and archival cleanup — 2026-11-04
+
+After the owner's follow-on instruction to implement useful missing features before deletion, rules 134-147 were integrated and pushed to main (`f03a2593`). All nineteen reviewed tips were published as `archive/retired-20261104/<tip-prefix>` annotated tags and verified remotely. Ten local and seventeen remote retired refs were then removed. The civilisation and winter-shelter worktrees remain at their original commits, detached with byte/index fingerprints unchanged; their archived outstanding files were rechecked first. The older-work archive is retained. Full per-tip dispositions, measured limits and evidence: [RECOVERED_CAPABILITIES.md](RECOVERED_CAPABILITIES.md), `review_evidence/retired-recovery-20261104/refs.json` and `cleanup-result.json`. Older branch-status sections below are historical.
+
 ## All-branch review and preservation — 2026-11-04
 
 The owner requested stopping survival development, publishing older outstanding work,

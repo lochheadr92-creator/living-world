@@ -1,0 +1,111 @@
+git merge-base --is-ancestor HEAD main
+git push --atomic origin refs/tags/archive/retired-20261104/007b9d52 refs/tags/archive/retired-20261104/03dd8684 refs/tags/archive/retired-20261104/359bce91 refs/tags/archive/retired-20261104/3f6ec661 refs/tags/archive/retired-20261104/4b063dca refs/tags/archive/retired-20261104/500bb2f2 refs/tags/archive/retired-20261104/551b034e refs/tags/archive/retired-20261104/70214c6c refs/tags/archive/retired-20261104/9651cf0f refs/tags/archive/retired-20261104/9698236a refs/tags/archive/retired-20261104/b5428365 refs/tags/archive/retired-20261104/be786a80 refs/tags/archive/retired-20261104/c55926d4 refs/tags/archive/retired-20261104/d44695d3 refs/tags/archive/retired-20261104/d72e3666 refs/tags/archive/retired-20261104/df9acb9c refs/tags/archive/retired-20261104/f133938d refs/tags/archive/retired-20261104/f33cd0bf refs/tags/archive/retired-20261104/f82d42de
+To https://github.com/lochheadr92-creator/living-world.git
+ * [new tag]           archive/retired-20261104/007b9d52 -> archive/retired-20261104/007b9d52
+ * [new tag]           archive/retired-20261104/03dd8684 -> archive/retired-20261104/03dd8684
+ * [new tag]           archive/retired-20261104/359bce91 -> archive/retired-20261104/359bce91
+ * [new tag]           archive/retired-20261104/3f6ec661 -> archive/retired-20261104/3f6ec661
+ * [new tag]           archive/retired-20261104/4b063dca -> archive/retired-20261104/4b063dca
+ * [new tag]           archive/retired-20261104/500bb2f2 -> archive/retired-20261104/500bb2f2
+ * [new tag]           archive/retired-20261104/551b034e -> archive/retired-20261104/551b034e
+ * [new tag]           archive/retired-20261104/70214c6c -> archive/retired-20261104/70214c6c
+ * [new tag]           archive/retired-20261104/9651cf0f -> archive/retired-20261104/9651cf0f
+ * [new tag]           archive/retired-20261104/9698236a -> archive/retired-20261104/9698236a
+ * [new tag]           archive/retired-20261104/b5428365 -> archive/retired-20261104/b5428365
+ * [new tag]           archive/retired-20261104/be786a80 -> archive/retired-20261104/be786a80
+ * [new tag]           archive/retired-20261104/c55926d4 -> archive/retired-20261104/c55926d4
+ * [new tag]           archive/retired-20261104/d44695d3 -> archive/retired-20261104/d44695d3
+ * [new tag]           archive/retired-20261104/d72e3666 -> archive/retired-20261104/d72e3666
+ * [new tag]           archive/retired-20261104/df9acb9c -> archive/retired-20261104/df9acb9c
+ * [new tag]           archive/retired-20261104/f133938d -> archive/retired-20261104/f133938d
+ * [new tag]           archive/retired-20261104/f33cd0bf -> archive/retired-20261104/f33cd0bf
+ * [new tag]           archive/retired-20261104/f82d42de -> archive/retired-20261104/f82d42de
+git switch --detach 3f6ec66115320f4939f10158eefa2a990eb62918
+HEAD is now at 3f6ec661 Civilisation audit: capability matrix, causal map, roadmap, observer design, defect register
+M	.gitignore
+M	scripts/inhabit/devserver.ts
+M	vite.config.ts
+git switch --detach f33cd0bf4edce91bf06aec332325c6182022a771
+HEAD is now at f33cd0bf Add winter shelter preparation as rules 34
+git push --atomic origin :refs/heads/claude/leisure-rhythm-v27 :refs/heads/claude/wolf-defence-v3 :refs/heads/claude/mood-ranking :refs/heads/claude/tests-current-rules :refs/heads/claude/eager-carson-p8jy0f :refs/heads/claude/living-world-survival-legibility-xipvpo :refs/heads/claude/courier-promise :refs/heads/claude/record-2026-10-20 :refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20 :refs/heads/ccr-8527b59e-oatizp :refs/heads/claude/epic-franklin-469omp :refs/heads/claude/wonderful-mccarthy-xmbcng :refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20 :refs/heads/claude/adoring-hawking-fj66vw :refs/heads/claude/friendly-planck-ccpkxf :refs/heads/claude/winter-shelter-v34 :refs/heads/place-scar
+To https://github.com/lochheadr92-creator/living-world.git
+ - [deleted]           ccr-8527b59e-oatizp
+ - [deleted]           claude/adoring-hawking-fj66vw
+ - [deleted]           claude/courier-promise
+ - [deleted]           claude/eager-carson-p8jy0f
+ - [deleted]           claude/epic-franklin-469omp
+ - [deleted]           claude/friendly-planck-ccpkxf
+ - [deleted]           claude/leisure-rhythm-v27
+ - [deleted]           claude/living-world-survival-legibility-xipvpo
+ - [deleted]           claude/mood-ranking
+ - [deleted]           claude/record-2026-10-20
+ - [deleted]           claude/snapshot-wolf-defence-v3-2026-10-20
+ - [deleted]           claude/snapshot-wolf-habitation-integration-2026-10-20
+ - [deleted]           claude/tests-current-rules
+ - [deleted]           claude/winter-shelter-v34
+ - [deleted]           claude/wolf-defence-v3
+ - [deleted]           claude/wonderful-mccarthy-xmbcng
+ - [deleted]           place-scar
+git update-ref -d refs/heads/claude/epic-franklin-469omp 03dd8684a0275fa97a0c1808963437276901eee1
+git update-ref -d refs/heads/claude/wolf-defence-v3 359bce916481473a4c939bfd46dd21a362a74589
+git update-ref -d refs/heads/claude/civilisation-phase1 3f6ec66115320f4939f10158eefa2a990eb62918
+git update-ref -d refs/heads/claude/mood-ranking 4b063dca4d354684593e143886f2bbb152582c61
+git update-ref -d refs/heads/claude/record-2026-10-20 9698236af0d73c92465be9f9958f47ee6fc935c9
+git update-ref -d refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20 b542836587861b532da3e9b632988fcc6c94ab0e
+git update-ref -d refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20 d72e3666a1b9440438724196f6bd08706405672a
+git update-ref -d refs/heads/claude/friendly-planck-ccpkxf f133938dd8cbd91db71b2fdd9398f4c23967c603
+git update-ref -d refs/heads/claude/winter-shelter-v34 f33cd0bf4edce91bf06aec332325c6182022a771
+git update-ref -d refs/heads/place-scar f82d42def7c975ef3b8193de27b12823e15a3c62
+git fetch origin --prune
+{
+  "main": "f03a259381fadf0ba6fc485006c6178b1fc78a86",
+  "archiveTagsVerified": 19,
+  "detached": [
+    {
+      "worktree": "C:/dev/Claude Experiment/living-world-civ",
+      "head": "3f6ec66115320f4939f10158eefa2a990eb62918",
+      "branch": "refs/heads/claude/civilisation-phase1",
+      "before": "96c875a1abd6112aba270f4e9eb00721676834de8e84c8509f9bd9a912ef45a8",
+      "after": "96c875a1abd6112aba270f4e9eb00721676834de8e84c8509f9bd9a912ef45a8"
+    },
+    {
+      "worktree": "C:/dev/Claude Experiment/living-world-winter-shelter-v34",
+      "head": "f33cd0bf4edce91bf06aec332325c6182022a771",
+      "branch": "refs/heads/claude/winter-shelter-v34",
+      "before": "2ea08774b4744fed2f571f63044972b4c311e6b4cdcb7a4e5497ba0bd734df3b",
+      "after": "2ea08774b4744fed2f571f63044972b4c311e6b4cdcb7a4e5497ba0bd734df3b"
+    }
+  ],
+  "deletedRemote": [
+    "claude/leisure-rhythm-v27",
+    "claude/wolf-defence-v3",
+    "claude/mood-ranking",
+    "claude/tests-current-rules",
+    "claude/eager-carson-p8jy0f",
+    "claude/living-world-survival-legibility-xipvpo",
+    "claude/courier-promise",
+    "claude/record-2026-10-20",
+    "claude/snapshot-wolf-habitation-integration-2026-10-20",
+    "ccr-8527b59e-oatizp",
+    "claude/epic-franklin-469omp",
+    "claude/wonderful-mccarthy-xmbcng",
+    "claude/snapshot-wolf-defence-v3-2026-10-20",
+    "claude/adoring-hawking-fj66vw",
+    "claude/friendly-planck-ccpkxf",
+    "claude/winter-shelter-v34",
+    "place-scar"
+  ],
+  "deletedLocal": [
+    "refs/heads/claude/epic-franklin-469omp",
+    "refs/heads/claude/wolf-defence-v3",
+    "refs/heads/claude/civilisation-phase1",
+    "refs/heads/claude/mood-ranking",
+    "refs/heads/claude/record-2026-10-20",
+    "refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20",
+    "refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20",
+    "refs/heads/claude/friendly-planck-ccpkxf",
+    "refs/heads/claude/winter-shelter-v34",
+    "refs/heads/place-scar"
+  ],
+  "remainingReviewedRefs": []
+}

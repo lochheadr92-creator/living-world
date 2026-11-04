@@ -1,0 +1,52 @@
+{
+  "main": "f03a259381fadf0ba6fc485006c6178b1fc78a86",
+  "archiveTagsVerified": 19,
+  "detached": [
+    {
+      "worktree": "C:/dev/Claude Experiment/living-world-civ",
+      "head": "3f6ec66115320f4939f10158eefa2a990eb62918",
+      "branch": "refs/heads/claude/civilisation-phase1",
+      "before": "96c875a1abd6112aba270f4e9eb00721676834de8e84c8509f9bd9a912ef45a8",
+      "after": "96c875a1abd6112aba270f4e9eb00721676834de8e84c8509f9bd9a912ef45a8"
+    },
+    {
+      "worktree": "C:/dev/Claude Experiment/living-world-winter-shelter-v34",
+      "head": "f33cd0bf4edce91bf06aec332325c6182022a771",
+      "branch": "refs/heads/claude/winter-shelter-v34",
+      "before": "2ea08774b4744fed2f571f63044972b4c311e6b4cdcb7a4e5497ba0bd734df3b",
+      "after": "2ea08774b4744fed2f571f63044972b4c311e6b4cdcb7a4e5497ba0bd734df3b"
+    }
+  ],
+  "deletedRemote": [
+    "claude/leisure-rhythm-v27",
+    "claude/wolf-defence-v3",
+    "claude/mood-ranking",
+    "claude/tests-current-rules",
+    "claude/eager-carson-p8jy0f",
+    "claude/living-world-survival-legibility-xipvpo",
+    "claude/courier-promise",
+    "claude/record-2026-10-20",
+    "claude/snapshot-wolf-habitation-integration-2026-10-20",
+    "ccr-8527b59e-oatizp",
+    "claude/epic-franklin-469omp",
+    "claude/wonderful-mccarthy-xmbcng",
+    "claude/snapshot-wolf-defence-v3-2026-10-20",
+    "claude/adoring-hawking-fj66vw",
+    "claude/friendly-planck-ccpkxf",
+    "claude/winter-shelter-v34",
+    "place-scar"
+  ],
+  "deletedLocal": [
+    "refs/heads/claude/epic-franklin-469omp",
+    "refs/heads/claude/wolf-defence-v3",
+    "refs/heads/claude/civilisation-phase1",
+    "refs/heads/claude/mood-ranking",
+    "refs/heads/claude/record-2026-10-20",
+    "refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20",
+    "refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20",
+    "refs/heads/claude/friendly-planck-ccpkxf",
+    "refs/heads/claude/winter-shelter-v34",
+    "refs/heads/place-scar"
+  ],
+  "remainingReviewedRefs": []
+}

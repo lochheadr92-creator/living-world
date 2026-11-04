@@ -1,5 +1,7 @@
 # Living World: notes for Claude (read this first)
 
+**Current main (4 November 2026): rules 147.** The selected retired-branch recovery is integrated and pushed; all nineteen old tips are archived and their retired refs removed. See [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md) for mechanisms, staged/ordinary evidence, baseline-classified full-suite failures and uptake limits. The separate survival programme remains stopped/incomplete; do not resume unrelated tuning.
+
 **Before planning or editing:** read `WORKFLOW.md` and `PRODUCT_VISION.md`, including
 [Feature increments: new capability and stronger connections](PRODUCT_VISION.md#feature-increments-new-capability-and-stronger-connections).
 Owner decision, 1 November 2026: each feature increment must add one meaningful new
@@ -8,7 +10,7 @@ causal chain. Name both outcomes, complete the necessary connecting implementati
 repairs, and verify both. Dedicated repairs, compatibility, performance and documentation
 tasks stay focused; they do not require an added mechanic. This is no extra approval gate.
 
-**Current main (2 November 2026): rules 121** — Stage 3 repairs 117-118, then Pavel's lived life 119,
+**Historical main (2 November 2026): rules 121** — Stage 3 repairs 117-118, then Pavel's lived life 119,
 Talia's childhood 120 and resumed gathering credit 121 (numbered 117/119/120 on their branches); see
 [docs/PAVEL_TALIA_INTEGRATION.md](docs/PAVEL_TALIA_INTEGRATION.md).
 

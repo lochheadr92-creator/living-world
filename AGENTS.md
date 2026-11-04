@@ -1,12 +1,12 @@
 # Living World: notes for Codex (read this first)
 
-**Published main (4 November 2026): rules 133.** Survival capability development is stopped
+**Published main (4 November 2026): rules 147.** Survival capability development is stopped
 at the owner's request, with incomplete acceptance and adverse findings retained in
 [docs/SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md). Older-work preservation,
-all-branch review and the remaining historical tips are recorded in
+the earlier all-branch review and preservation are recorded in
 [docs/BRANCH_INTEGRATION_20261104.md](docs/BRANCH_INTEGRATION_20261104.md).
 
-**Recovery programme in progress:** the owner subsequently authorized implementing and verifying useful retired-branch features before deleting those branches. Rules 134 wells and rules 135 cellars have bounded verification on `feat/recovered-capabilities`; see [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md). This does not authorize unrelated survival tuning.
+**Recovery integrated and retired branches removed:** rules 134-147 recover the selected missing capabilities, with bounded verification and ordinary-uptake limits in [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md). All nineteen reviewed tips are published as annotated archive tags; ten local and seventeen remote retired refs were removed after integration. Existing full-suite failures are baseline-classified, not presented as a green suite. This does not resume unrelated survival tuning.
 
 **Historical integration checkpoint (2 November 2026): rules 121.** Stage 3 chain repairs are rules 117-118
 ([docs/STAGE3_CHAIN_FIXES.md](docs/STAGE3_CHAIN_FIXES.md)). Pavel's lived life

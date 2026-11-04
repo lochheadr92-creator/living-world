@@ -1,5 +1,7 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Current recovery checkpoint, 4 November 2026:** rules 147 is integrated and pushed to main; reviewed retired branch refs are removed after verified archival. Read [RECOVERED_CAPABILITIES.md](RECOVERED_CAPABILITIES.md) for the selected features, full verification/failure classification and ordinary activation limits. This completed recovery does not restart the separate stopped survival programme. Older checkpoints below are historical.
+
 **Owner stop,4 November2026:** current trap-report section (rules133) complete;
 publication/merge requested. The whole survival assignment remains incomplete.
 Follow-on runs stopped; baseline75,pre13148,final13240completed draws retained.
