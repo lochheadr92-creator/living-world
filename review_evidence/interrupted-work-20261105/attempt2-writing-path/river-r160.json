@@ -1,0 +1,1965 @@
+{
+ "seed": "river",
+ "rules": 160,
+ "days": 25,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 20,
+ "totalEnds": 13265,
+ "notSuccess": 6119,
+ "stats": {
+  "hungerGathers": 1400,
+  "outcomes": {
+   "success": 104,
+   "interrupted": 901,
+   "partial": 207,
+   "failed": 188
+  },
+  "sequences2plus": 251,
+  "seqsWith3plusSources": 150,
+  "seqsStartingHungerBelow25": 78,
+  "seqsEndingHungerBelow10": 93
+ },
+ "rv": {
+  "unsnapped": 9,
+  "n": 454,
+  "beats": 448,
+  "currentOptionGone": 287,
+  "currentPresent": 167,
+  "bestIsGather": 373,
+  "bestIsOtherHungerGather": 373,
+  "duringTravel": 419,
+  "duringWork": 35,
+  "nGatherMedian": 3,
+  "ageMedian": 110,
+  "bestByKind": {
+   "gather": 373,
+   "socialize": 26,
+   "warm": 4,
+   "sleep": 9,
+   "harvest": 3,
+   "rest": 7,
+   "wander": 1,
+   "eat": 1,
+   "drink": 6,
+   "eat_store": 15,
+   "visit": 2,
+   "give": 2,
+   "build": 1,
+   "fuel_fire": 1,
+   "operate": 1,
+   "tree_work": 1,
+   "attend": 1
+  },
+  "curRankHist": {
+   "0": 5,
+   "1": 5,
+   "2": 6,
+   "3": 75,
+   "4": 33,
+   "absent": 288,
+   "5+": 42
+  }
+ },
+ "revRows": [
+  {
+   "t": 4891,
+   "pid": 1138,
+   "hunger": 44,
+   "age": 217,
+   "target": "source:990",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 37.2,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 218
+   }
+  },
+  {
+   "t": 5095,
+   "pid": 1134,
+   "hunger": 44,
+   "age": 122,
+   "target": "source:934",
+   "rev": {
+    "curPresent": true,
+    "curRank": 1,
+    "curUtil": 19.4,
+    "curEff": 21,
+    "bestKey": "socialize:#:request:food",
+    "bestKind": "socialize",
+    "bestNeed": "hunger",
+    "bestUtil": 33.2,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 123
+   }
+  },
+  {
+   "t": 6751,
+   "pid": 1134,
+   "hunger": 32,
+   "age": 60,
+   "target": "source:1091",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 40.6,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 61
+   }
+  },
+  {
+   "t": 6889,
+   "pid": 1134,
+   "hunger": 28,
+   "age": 62,
+   "target": "source:989",
+   "rev": {
+    "curPresent": true,
+    "curRank": 4,
+    "curUtil": 28.9,
+    "curEff": 31.2,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 45.9,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 63
+   }
+  },
+  {
+   "t": 6996,
+   "pid": 1134,
+   "hunger": 25,
+   "age": 107,
+   "target": "source:948",
+   "rev": {
+    "curPresent": true,
+    "curRank": 2,
+    "curUtil": 29.3,
+    "curEff": 31.6,
+    "bestKey": "warm:#",
+    "bestKind": "warm",
+    "bestNeed": "warmth",
+    "bestUtil": 49.3,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 108
+   }
+  },
+  {
+   "t": 7234,
+   "pid": 1149,
+   "hunger": 47,
+   "age": 93,
+   "target": "source:946",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 22.3,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 94
+   }
+  },
+  {
+   "t": 7294,
+   "pid": 1149,
+   "hunger": 45,
+   "age": 60,
+   "target": "source:952",
+   "rev": {
+    "curPresent": true,
+    "curRank": 3,
+    "curUtil": 16.1,
+    "curEff": 17.4,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 28.1,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 61
+   }
+  },
+  {
+   "t": 7582,
+   "pid": 1132,
+   "hunger": 44,
+   "age": 114,
+   "target": "source:954",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 34.3,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 115
+   }
+  },
+  {
+   "t": 7889,
+   "pid": 1134,
+   "hunger": 26,
+   "age": 62,
+   "target": "source:1092",
+   "rev": {
+    "curPresent": true,
+    "curRank": 3,
+    "curUtil": 30.2,
+    "curEff": 32.7,
+    "bestKey": "socialize:#:request:food",
+    "bestKind": "socialize",
+    "bestNeed": "hunger",
+    "bestUtil": 52.6,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 63
+   }
+  },
+  {
+   "t": 8372,
+   "pid": 1135,
+   "hunger": 41,
+   "age": 96,
+   "target": "source:973",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "sleep:#",
+    "bestKind": "sleep",
+    "bestNeed": "energy",
+    "bestUtil": 41.1,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 97
+   }
+  },
+  {
+   "t": 9216,
+   "pid": 1135,
+   "hunger": 39,
+   "age": 101,
+   "target": "source:1092",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 38.2,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 102
+   }
+  },
+  {
+   "t": 9973,
+   "pid": 1120,
+   "hunger": 29,
+   "age": 110,
+   "target": "source:972",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 46.7,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 111
+   }
+  },
+  {
+   "t": 9982,
+   "pid": 1112,
+   "hunger": 41,
+   "age": 122,
+   "target": "source:972",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 30.3,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 123
+   }
+  },
+  {
+   "t": 10284,
+   "pid": 1106,
+   "hunger": 33,
+   "age": 110,
+   "target": "source:938",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 42.3,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 111
+   }
+  },
+  {
+   "t": 10301,
+   "pid": 1112,
+   "hunger": 31,
+   "age": 242,
+   "target": "source:1094",
+   "rev": {
+    "curPresent": true,
+    "curRank": 3,
+    "curUtil": 40.3,
+    "curEff": 43.6,
+    "bestKey": "harvest:#",
+    "bestKind": "harvest",
+    "bestNeed": "hunger",
+    "bestUtil": 66.7,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 243
+   }
+  },
+  {
+   "t": 10523,
+   "pid": 1116,
+   "hunger": 32,
+   "age": 106,
+   "target": "source:954",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "rest:here",
+    "bestKind": "rest",
+    "bestNeed": "energy",
+    "bestUtil": 45.2,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 107
+   }
+  },
+  {
+   "t": 10910,
+   "pid": 1116,
+   "hunger": 20,
+   "age": 114,
+   "target": "source:1091",
+   "rev": {
+    "curPresent": true,
+    "curRank": 2,
+    "curUtil": 38,
+    "curEff": 41,
+    "bestKey": "socialize:#:request:food",
+    "bestKind": "socialize",
+    "bestNeed": "hunger",
+    "bestUtil": 58.9,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 115
+   }
+  },
+  {
+   "t": 10938,
+   "pid": 1142,
+   "hunger": 35,
+   "age": 270,
+   "target": "source:1098",
+   "rev": {
+    "curPresent": true,
+    "curRank": 5,
+    "curUtil": 29.9,
+    "curEff": 32.3,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 48,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 271
+   }
+  },
+  {
+   "t": 11035,
+   "pid": 1116,
+   "hunger": 16,
+   "age": 105,
+   "target": "source:934",
+   "rev": {
+    "curPresent": true,
+    "curRank": 5,
+    "curUtil": 39.9,
+    "curEff": 43,
+    "bestKey": "sleep:#",
+    "bestKind": "sleep",
+    "bestNeed": "energy",
+    "bestUtil": 65.4,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 106
+   }
+  },
+  {
+   "t": 11248,
+   "pid": 1116,
+   "hunger": 11,
+   "age": 100,
+   "target": "source:943",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 58.8,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 101
+   }
+  },
+  {
+   "t": 11514,
+   "pid": 1116,
+   "hunger": 3,
+   "age": 266,
+   "target": "source:971",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 72.2,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 267
+   }
+  },
+  {
+   "t": 11518,
+   "pid": 1106,
+   "hunger": 28,
+   "age": 60,
+   "target": "source:949",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 46,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 61
+   }
+  },
+  {
+   "t": 11632,
+   "pid": 1128,
+   "hunger": 46,
+   "age": 106,
+   "target": "source:1091",
+   "rev": {
+    "curPresent": true,
+    "curRank": 6,
+    "curUtil": 17.5,
+    "curEff": 18.9,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 27.8,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 107
+   }
+  },
+  {
+   "t": 11803,
+   "pid": 1145,
+   "hunger": 62,
+   "age": 266,
+   "target": "source:975",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "wander",
+    "bestKind": "wander",
+    "bestNeed": null,
+    "bestUtil": 6,
+    "nGather": 0,
+    "phase": "work",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 267
+   }
+  },
+  {
+   "t": 11948,
+   "pid": 1113,
+   "hunger": 46,
+   "age": 60,
+   "target": "source:1092",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 17.8,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 61
+   }
+  },
+  {
+   "t": 11999,
+   "pid": 1142,
+   "hunger": 38,
+   "age": 106,
+   "target": "source:934",
+   "rev": {
+    "curPresent": true,
+    "curRank": 3,
+    "curUtil": 23.5,
+    "curEff": 25.4,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 36.5,
+    "nGather": 4,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 107
+   }
+  },
+  {
+   "t": 12050,
+   "pid": 1144,
+   "hunger": 40,
+   "age": 105,
+   "target": "source:954",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 32.6,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 106
+   }
+  },
+  {
+   "t": 12102,
+   "pid": 1132,
+   "hunger": 42,
+   "age": 117,
+   "target": "source:954",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 28.9,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 118
+   }
+  },
+  {
+   "t": 12176,
+   "pid": 1116,
+   "hunger": 9,
+   "age": 105,
+   "target": "source:1091",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 68.2,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 106
+   }
+  },
+  {
+   "t": 12236,
+   "pid": 1116,
+   "hunger": 7,
+   "age": 60,
+   "target": "source:989",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 72.4,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 61
+   }
+  },
+  {
+   "t": 12290,
+   "pid": 1145,
+   "hunger": 46,
+   "age": 98,
+   "target": "source:1094",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 24.9,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 99
+   }
+  },
+  {
+   "t": 12362,
+   "pid": 1144,
+   "hunger": 31,
+   "age": 105,
+   "target": "source:985",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 43.9,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 106
+   }
+  },
+  {
+   "t": 12446,
+   "pid": 1116,
+   "hunger": 1,
+   "age": 105,
+   "target": "source:952",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 72.5,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 106
+   }
+  },
+  {
+   "t": 12502,
+   "pid": 1142,
+   "hunger": 35,
+   "age": 123,
+   "target": "source:948",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 41.2,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 124
+   }
+  },
+  {
+   "t": 12504,
+   "pid": 1125,
+   "hunger": 43,
+   "age": 155,
+   "target": "source:971",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 27.5,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 156
+   }
+  },
+  {
+   "t": 12587,
+   "pid": 1144,
+   "hunger": 24,
+   "age": 225,
+   "target": "source:1096",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 58.9,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 226
+   }
+  },
+  {
+   "t": 12600,
+   "pid": 1125,
+   "hunger": 41,
+   "age": 96,
+   "target": "source:1098",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "socialize:#:request:food",
+    "bestKind": "socialize",
+    "bestNeed": "hunger",
+    "bestUtil": 34.7,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 97
+   }
+  },
+  {
+   "t": 12613,
+   "pid": 1134,
+   "hunger": 41,
+   "age": 227,
+   "target": "source:997",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "gather:#",
+    "bestKind": "gather",
+    "bestNeed": "hunger",
+    "bestUtil": 30,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 228
+   }
+  },
+  {
+   "t": 12916,
+   "pid": 1125,
+   "hunger": 31,
+   "age": 268,
+   "target": "source:1094",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "socialize:#:request:food",
+    "bestKind": "socialize",
+    "bestNeed": "hunger",
+    "bestUtil": 49.7,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 269
+   }
+  },
+  {
+   "t": 13037,
+   "pid": 1116,
+   "hunger": 3,
+   "age": 112,
+   "target": "source:1094",
+   "rev": {
+    "curPresent": false,
+    "curRank": -1,
+    "curUtil": 0,
+    "curEff": 0,
+    "bestKey": "socialize:#:request:food",
+    "bestKind": "socialize",
+    "bestNeed": "hunger",
+    "bestUtil": 73,
+    "nGather": 3,
+    "phase": "travel",
+    "committed": false,
+    "beats": true,
+    "ageAtReview": 113
+   }
+  }
+ ],
+ "topCensus": [
+  [
+   "gather | interrupted | something better came up",
+   736
+  ],
+  [
+   "rest:warmth | interrupted | something better came up",
+   485
+  ],
+  [
+   "gather:hunger | interrupted | something better came up",
+   463
+  ],
+  [
+   "gather:hunger | interrupted | food in my pack would ease my hunger sooner",
+   268
+  ],
+  [
+   "warm:warmth | interrupted | something better came up",
+   179
+  ],
+  [
+   "flee:safety | failed | no way to get there",
+   174
+  ],
+  [
+   "gather:hunger | failed | nothing left",
+   168
+  ],
+  [
+   "gather:hunger | partial | nothing left",
+   165
+  ],
+  [
+   "flee:safety | interrupted | something better came up",
+   160
+  ],
+  [
+   "gather | partial | nothing left",
+   151
+  ],
+  [
+   "gather | failed | nothing left",
+   140
+  ],
+  [
+   "sleep:energy | partial | too cold to sleep",
+   103
+  ],
+  [
+   "gather | partial | someone else is already taking it",
+   98
+  ],
+  [
+   "gather:hunger | interrupted | danger nearby",
+   82
+  ],
+  [
+   "gather | interrupted | danger nearby",
+   81
+  ],
+  [
+   "build | interrupted | something better came up",
+   78
+  ],
+  [
+   "wander | interrupted | something better came up",
+   72
+  ],
+  [
+   "deposit | interrupted | something better came up",
+   72
+  ],
+  [
+   "socialize | interrupted | something better came up",
+   70
+  ],
+  [
+   "rest:energy | interrupted | something better came up",
+   68
+  ],
+  [
+   "repair | interrupted | something better came up",
+   63
+  ],
+  [
+   "explore | interrupted | something better came up",
+   60
+  ],
+  [
+   "build | partial | no materials to work with (# stone)",
+   60
+  ],
+  [
+   "eat_store:hunger | failed | there is no food there",
+   60
+  ],
+  [
+   "fuel_fire | interrupted | something better came up",
+   58
+  ],
+  [
+   "socialize:social | interrupted | something better came up",
+   56
+  ],
+  [
+   "drink:thirst | interrupted | something better came up",
+   52
+  ],
+  [
+   "till | interrupted | something better came up",
+   49
+  ],
+  [
+   "socialize:hunger | interrupted | something better came up",
+   45
+  ],
+  [
+   "haul | interrupted | something better came up",
+   43
+  ],
+  [
+   "socialize:social | failed | they are inside a different space",
+   43
+  ],
+  [
+   "gather:hunger | partial | someone else is already taking it",
+   41
+  ],
+  [
+   "gather | failed | someone else is already taking it",
+   39
+  ],
+  [
+   "drink:thirst | interrupted | a more urgent need (hunger)",
+   39
+  ],
+  [
+   "craft | interrupted | something better came up",
+   38
+  ],
+  [
+   "gather:hunger | interrupted | a more urgent need (hunger)",
+   37
+  ],
+  [
+   "gather:hunger | interrupted | a more urgent need (warmth)",
+   30
+  ],
+  [
+   "sleep:energy | interrupted | a more urgent need (energy)",
+   27
+  ],
+  [
+   "drink:thirst | failed | the well is empty",
+   26
+  ],
+  [
+   "drink:thirst | failed | no water left",
+   25
+  ],
+  [
+   "rest:warmth | interrupted | a more urgent need (warmth)",
+   25
+  ],
+  [
+   "converse:social | interrupted | invitation declined: I have already had that time today; I want to do something else now",
+   24
+  ],
+  [
+   "converse | interrupted | invitation declined: I have already had that time today; I want to do something else now",
+   24
+  ],
+  [
+   "eat_store:hunger | interrupted | something better came up",
+   24
+  ],
+  [
+   "drink:thirst | interrupted | danger nearby",
+   22
+  ],
+  [
+   "sleep:energy | interrupted | danger nearby",
+   22
+  ],
+  [
+   "operate | interrupted | something better came up",
+   22
+  ],
+  [
+   "flee:safety | interrupted | a more urgent need (hunger)",
+   21
+  ],
+  [
+   "converse:social | interrupted | invitation declined: I cannot teach you more about foraging yet",
+   19
+  ],
+  [
+   "converse | interrupted | invitation declined: I cannot teach you more about foraging yet",
+   19
+  ],
+  [
+   "plan_site | interrupted | something better came up",
+   19
+  ],
+  [
+   "gather:hunger | failed | someone else is already taking it",
+   19
+  ],
+  [
+   "repair | partial | ran out of materials",
+   19
+  ],
+  [
+   "build | partial | no materials to work with (# wood, # stone)",
+   18
+  ],
+  [
+   "gather:hunger | interrupted | a more urgent need (energy)",
+   17
+  ],
+  [
+   "socialize:hunger | failed | they are inside a different space",
+   17
+  ],
+  [
+   "flee:safety | interrupted | a more urgent need (energy)",
+   16
+  ],
+  [
+   "rest:energy | interrupted | danger nearby",
+   15
+  ],
+  [
+   "sleep:energy | interrupted | a more urgent need (hunger)",
+   14
+  ],
+  [
+   "rest:energy | interrupted | a more urgent need (energy)",
+   14
+  ]
+ ],
+ "lostTop": [
+  {
+   "k": "rest:warmth | something better came up",
+   "n": 458,
+   "ticks": 130812,
+   "next": {
+    "drink:thirst": 113,
+    "gather": 72,
+    "eat:hunger": 52,
+    "sleep:energy": 35,
+    "none": 31
+   }
+  },
+  {
+   "k": "gather | something better came up",
+   "n": 385,
+   "ticks": 61521,
+   "next": {
+    "gather": 90,
+    "drink:thirst": 76,
+    "sleep:energy": 45,
+    "eat:hunger": 40,
+    "socialize": 23
+   }
+  },
+  {
+   "k": "gather:hunger | food in my pack would ease my hunger sooner",
+   "n": 241,
+   "ticks": 33282,
+   "next": {
+    "eat:hunger": 241
+   }
+  },
+  {
+   "k": "warm:warmth | something better came up",
+   "n": 154,
+   "ticks": 28279,
+   "next": {
+    "drink:thirst": 25,
+    "eat:hunger": 24,
+    "rest:warmth": 21,
+    "gather:hunger": 18,
+    "sleep:energy": 15
+   }
+  },
+  {
+   "k": "gather:hunger | something better came up",
+   "n": 74,
+   "ticks": 14830,
+   "next": {
+    "gather:hunger": 42,
+    "socialize:hunger": 4,
+    "sleep:energy": 4,
+    "eat_store:hunger": 4,
+    "drink:thirst": 3
+   }
+  },
+  {
+   "k": "build | something better came up",
+   "n": 59,
+   "ticks": 11802,
+   "next": {
+    "eat:hunger": 15,
+    "drink:thirst": 9,
+    "sleep:energy": 6,
+    "gather": 4,
+    "gather:hunger": 4
+   }
+  },
+  {
+   "k": "rest:energy | something better came up",
+   "n": 64,
+   "ticks": 8679,
+   "next": {
+    "sleep:energy": 25,
+    "gather": 11,
+    "drink:thirst": 10,
+    "socialize:social": 5,
+    "gather:hunger": 5
+   }
+  },
+  {
+   "k": "repair | something better came up",
+   "n": 48,
+   "ticks": 7797,
+   "next": {
+    "sleep:energy": 7,
+    "eat:hunger": 6,
+    "socialize:social": 5,
+    "drink:thirst": 4,
+    "deposit": 3
+   }
+  },
+  {
+   "k": "till | something better came up",
+   "n": 32,
+   "ticks": 5766,
+   "next": {
+    "till": 7,
+    "drink:thirst": 4,
+    "sleep:energy": 3,
+    "deposit": 3,
+    "gather": 2
+   }
+  },
+  {
+   "k": "sleep:energy | a more urgent need (hunger)",
+   "n": 13,
+   "ticks": 5675,
+   "next": {
+    "gather:hunger": 11,
+    "eat:hunger": 2
+   }
+  },
+  {
+   "k": "explore | something better came up",
+   "n": 18,
+   "ticks": 5144,
+   "next": {
+    "gather:hunger": 5,
+    "gather": 3,
+    "sleep:energy": 2,
+    "drink:thirst": 2,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "craft | something better came up",
+   "n": 26,
+   "ticks": 5019,
+   "next": {
+    "drink:thirst": 6,
+    "sleep:energy": 5,
+    "eat_store:hunger": 4,
+    "socialize:hunger": 3,
+    "rest:warmth": 2
+   }
+  },
+  {
+   "k": "drink:thirst | a more urgent need (hunger)",
+   "n": 21,
+   "ticks": 3795,
+   "next": {
+    "gather:hunger": 17,
+    "eat_store:hunger": 3,
+    "harvest:hunger": 1
+   }
+  },
+  {
+   "k": "rest:warmth | a more urgent need (warmth)",
+   "n": 14,
+   "ticks": 3684,
+   "next": {
+    "eat_store:hunger": 8,
+    "drink:thirst": 3,
+    "gather:hunger": 2,
+    "socialize:hunger": 1
+   }
+  },
+  {
+   "k": "sleep:energy | danger nearby",
+   "n": 9,
+   "ticks": 3216,
+   "next": {
+    "flee:safety": 9
+   }
+  },
+  {
+   "k": "flee:safety | something better came up",
+   "n": 28,
+   "ticks": 2681,
+   "next": {
+    "drink:thirst": 7,
+    "gather": 6,
+    "socialize:hunger": 2,
+    "socialize": 2,
+    "eat_store:hunger": 2
+   }
+  },
+  {
+   "k": "gather | danger nearby",
+   "n": 21,
+   "ticks": 2674,
+   "next": {
+    "flee:safety": 21
+   }
+  },
+  {
+   "k": "eat_store:hunger | something better came up",
+   "n": 9,
+   "ticks": 2583,
+   "next": {
+    "gather:hunger": 6,
+    "drink:thirst": 1,
+    "sleep:energy": 1,
+    "socialize:hunger": 1
+   }
+  },
+  {
+   "k": "sleep:energy | a more urgent need (energy)",
+   "n": 8,
+   "ticks": 2389,
+   "next": {
+    "gather:hunger": 3,
+    "drink:thirst": 2,
+    "rest:warmth": 2,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "gather:hunger | a more urgent need (warmth)",
+   "n": 11,
+   "ticks": 2265,
+   "next": {
+    "rest:warmth": 4,
+    "drink:thirst": 4,
+    "warm:warmth": 3
+   }
+  },
+  {
+   "k": "gather:hunger | a more urgent need (hunger)",
+   "n": 9,
+   "ticks": 2004,
+   "next": {
+    "drink:thirst": 9
+   }
+  },
+  {
+   "k": "gather:hunger | danger nearby",
+   "n": 12,
+   "ticks": 1923,
+   "next": {
+    "flee:safety": 12
+   }
+  },
+  {
+   "k": "sleep:energy | a more urgent need (thirst)",
+   "n": 3,
+   "ticks": 1895,
+   "next": {
+    "drink:thirst": 3
+   }
+  },
+  {
+   "k": "plan_site | something better came up",
+   "n": 8,
+   "ticks": 1779,
+   "next": {
+    "sleep:energy": 5,
+    "eat:hunger": 1,
+    "deposit": 1,
+    "tree_work": 1
+   }
+  },
+  {
+   "k": "operate | something better came up",
+   "n": 11,
+   "ticks": 1723,
+   "next": {
+    "withdraw": 3,
+    "drink:thirst": 2,
+    "explore": 2,
+    "build": 2,
+    "deposit": 1
+   }
+  },
+  {
+   "k": "rest:warmth | a more urgent need (hunger)",
+   "n": 7,
+   "ticks": 1719,
+   "next": {
+    "gather:hunger": 3,
+    "eat_store:hunger": 2,
+    "eat:hunger": 2
+   }
+  },
+  {
+   "k": "fuel_fire | something better came up",
+   "n": 15,
+   "ticks": 1681,
+   "next": {
+    "sleep:energy": 3,
+    "rest:warmth": 3,
+    "fuel_fire": 2,
+    "gather": 2,
+    "deposit": 1
+   }
+  },
+  {
+   "k": "drink:thirst | something better came up",
+   "n": 14,
+   "ticks": 1645,
+   "next": {
+    "eat:hunger": 4,
+    "gather": 2,
+    "socialize:social": 2,
+    "craft": 1,
+    "haul": 1
+   }
+  },
+  {
+   "k": "socialize:social | something better came up",
+   "n": 7,
+   "ticks": 1610,
+   "next": {
+    "gather": 3,
+    "deposit": 1,
+    "eat:hunger": 1,
+    "drink:thirst": 1,
+    "rest:warmth": 1
+   }
+  },
+  {
+   "k": "rest:energy | a more urgent need (energy)",
+   "n": 14,
+   "ticks": 1461,
+   "next": {
+    "gather:hunger": 7,
+    "drink:thirst": 3,
+    "eat:hunger": 2,
+    "eat_store:hunger": 1,
+    "none": 1
+   }
+  },
+  {
+   "k": "haul | something better came up",
+   "n": 8,
+   "ticks": 1348,
+   "next": {
+    "drink:thirst": 2,
+    "sleep:energy": 2,
+    "build": 1,
+    "gather:hunger": 1,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "gather:hunger | a more urgent need (energy)",
+   "n": 9,
+   "ticks": 1329,
+   "next": {
+    "rest:energy": 5,
+    "sleep:energy": 3,
+    "none": 1
+   }
+  },
+  {
+   "k": "plant | something better came up",
+   "n": 6,
+   "ticks": 1273,
+   "next": {
+    "sleep:energy": 2,
+    "socialize:hunger": 1,
+    "gather:hunger": 1,
+    "deposit": 1,
+    "drink:thirst": 1
+   }
+  },
+  {
+   "k": "rest:energy | danger nearby",
+   "n": 14,
+   "ticks": 1234,
+   "next": {
+    "flee:safety": 13,
+    "none": 1
+   }
+  },
+  {
+   "k": "drink:thirst | a more urgent need (energy)",
+   "n": 7,
+   "ticks": 1221,
+   "next": {
+    "gather:hunger": 3,
+    "eat:hunger": 3,
+    "rest:energy": 1
+   }
+  },
+  {
+   "k": "attend:social | something better came up",
+   "n": 6,
+   "ticks": 1187,
+   "next": {
+    "sleep:energy": 4,
+    "drink:thirst": 1,
+    "give": 1
+   }
+  },
+  {
+   "k": "deposit | something better came up",
+   "n": 7,
+   "ticks": 1131,
+   "next": {
+    "sleep:energy": 3,
+    "socialize:social": 2,
+    "give": 1,
+    "socialize": 1
+   }
+  },
+  {
+   "k": "socialize:hunger | something better came up",
+   "n": 5,
+   "ticks": 1106,
+   "next": {
+    "gather:hunger": 2,
+    "socialize:hunger": 2,
+    "eat_store:hunger": 1
+   }
+  },
+  {
+   "k": "tree_work | something better came up",
+   "n": 10,
+   "ticks": 984,
+   "next": {
+    "sleep:energy": 3,
+    "drink:thirst": 2,
+    "eat:hunger": 2,
+    "socialize": 1,
+    "gather": 1
+   }
+  },
+  {
+   "k": "socialize | something better came up",
+   "n": 4,
+   "ticks": 966,
+   "next": {
+    "deposit": 1,
+    "socialize": 1,
+    "gather": 1,
+    "gather:hunger": 1
+   }
+  }
+ ],
+ "longestSeqs": [
+  {
+   "pid": 1106,
+   "stage": "adult",
+   "start": 57305,
+   "gathers": 17,
+   "sources": 15,
+   "successes": 0,
+   "failures": 3,
+   "interrupted": 13,
+   "hungerStart": 9,
+   "hungerEnd": 0,
+   "ticks": 2144,
+   "rows": [
+    "57458 source:948 interrupted (153t) something better came up h9",
+    "57503 source:950 interrupted (45t) danger nearby h8",
+    "57613 source:1094 interrupted (62t) something better came up h4",
+    "57707 source:1096 failed (94t) nothing left h2",
+    "57817 source:987 interrupted (109t) something better came up h0",
+    "57939 source:982 interrupted (122t) something better came up h0",
+    "58042 source:995 interrupted (103t) something better came up h0",
+    "58236 source:972 interrupted (194t) something better came up h0",
+    "58350 source:934 interrupted (114t) something better came up h0",
+    "58471 source:943 interrupted (121t) something better came up h0",
+    "58569 source:945 failed (98t) nothing left h0",
+    "58680 source:1095 interrupted (110t) something better came up h0",
+    "58776 source:1097 interrupted (96t) something better came up h0",
+    "59008 source:1099 failed (232t) someone else is already taking it h0",
+    "59114 source:1095 interrupted (105t) something better came up h0",
+    "59208 source:1097 interrupted (94t) a more urgent need (hunger) h0",
+    "59449 source:968 partial (141t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 1132,
+   "stage": "adult",
+   "start": 51496,
+   "gathers": 16,
+   "sources": 16,
+   "successes": 0,
+   "failures": 0,
+   "interrupted": 16,
+   "hungerStart": 23,
+   "hungerEnd": 0,
+   "ticks": 3234,
+   "rows": [
+    "51641 source:950 interrupted (145t) danger nearby h23",
+    "51753 source:985 interrupted (57t) danger nearby h19",
+    "52030 source:955 interrupted (102t) something better came up h10",
+    "52224 source:974 interrupted (194t) danger nearby h4",
+    "52275 source:967 interrupted (5t) danger nearby h2",
+    "52331 source:976 interrupted (2t) danger nearby h0",
+    "52616 source:951 interrupted (169t) danger nearby h0",
+    "52797 source:984 interrupted (114t) a more urgent need (hunger) h0",
+    "53071 source:936 interrupted (91t) something better came up h0",
+    "53297 source:971 interrupted (101t) something better came up h0",
+    "53400 source:995 interrupted (103t) something better came up h0",
+    "53493 source:1101 interrupted (93t) something better came up h0",
+    "53670 source:1096 interrupted (177t) something better came up h0",
+    "54292 source:943 interrupted (197t) something better came up h0",
+    "54351 source:945 interrupted (59t) a more urgent need (hunger) h0",
+    "54730 source:940 interrupted (92t) died h0"
+   ]
+  },
+  {
+   "pid": 1149,
+   "stage": "adult",
+   "start": 55391,
+   "gathers": 16,
+   "sources": 16,
+   "successes": 0,
+   "failures": 6,
+   "interrupted": 9,
+   "hungerStart": 40,
+   "hungerEnd": 0,
+   "ticks": 1991,
+   "rows": [
+    "55452 source:946 interrupted (61t) something better came up h40",
+    "55534 source:950 failed (82t) nothing left h37",
+    "55536 source:985 interrupted (1t) danger nearby h37",
+    "55866 source:1094 interrupted (100t) something better came up h27",
+    "55965 source:987 interrupted (99t) something better came up h24",
+    "56248 source:980 interrupted (103t) something better came up h15",
+    "56560 source:994 partial (312t) nothing left h6",
+    "56618 source:1092 failed (57t) nothing left h4",
+    "56693 source:972 failed (74t) nothing left h2",
+    "56849 source:935 failed (155t) nothing left h0",
+    "56952 source:943 interrupted (102t) something better came up h0",
+    "56997 source:944 failed (45t) nothing left h0",
+    "57108 source:1093 interrupted (110t) something better came up h0",
+    "57210 source:1097 failed (102t) nothing left h0",
+    "57322 source:1099 interrupted (111t) something better came up h0",
+    "57382 source:979 interrupted (60t) a more urgent need (hunger) h0"
+   ]
+  },
+  {
+   "pid": 1128,
+   "stage": "adult",
+   "start": 57373,
+   "gathers": 16,
+   "sources": 13,
+   "successes": 0,
+   "failures": 3,
+   "interrupted": 12,
+   "hungerStart": 12,
+   "hungerEnd": 0,
+   "ticks": 2267,
+   "rows": [
+    "57432 source:942 failed (59t) nothing left h12",
+    "57600 source:1091 interrupted (167t) something better came up h7",
+    "57770 source:1098 interrupted (170t) a more urgent need (hunger) h2",
+    "57858 source:1101 interrupted (61t) something better came up h0",
+    "57959 source:982 interrupted (101t) something better came up h0",
+    "58065 source:1096 interrupted (106t) something better came up h0",
+    "58173 source:1094 failed (108t) nothing left h0",
+    "58275 source:946 failed (101t) nothing left h0",
+    "58385 source:985 interrupted (109t) something better came up h0",
+    "58496 source:983 interrupted (111t) something better came up h0",
+    "58543 source:954 interrupted (47t) danger nearby h0",
+    "58803 source:954 interrupted (206t) something better came up h0",
+    "58824 source:955 interrupted (21t) danger nearby h0",
+    "59062 source:975 interrupted (163t) a more urgent need (hunger) h0",
+    "59138 source:975 interrupted (49t) a more urgent need (hunger) h0",
+    "59640 source:1091 partial (113t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 1113,
+   "stage": "adult",
+   "start": 57460,
+   "gathers": 15,
+   "sources": 14,
+   "successes": 0,
+   "failures": 2,
+   "interrupted": 12,
+   "hungerStart": 44,
+   "hungerEnd": 0,
+   "ticks": 2109,
+   "rows": [
+    "57563 source:1098 interrupted (103t) something better came up h44",
+    "57673 source:1101 failed (110t) nothing left h41",
+    "57774 source:980 interrupted (100t) something better came up h38",
+    "57891 source:1096 interrupted (117t) something better came up h34",
+    "58007 source:946 interrupted (116t) something better came up h31",
+    "58086 source:952 interrupted (79t) danger nearby h28",
+    "58205 source:990 failed (77t) nothing left h24",
+    "58237 source:953 interrupted (31t) danger nearby h23",
+    "58408 source:954 interrupted (113t) something better came up h18",
+    "58504 source:955 interrupted (96t) something better came up h15",
+    "58563 source:1100 interrupted (59t) danger nearby h13",
+    "58884 source:975 interrupted (162t) a more urgent need (hunger) h3",
+    "58984 source:975 interrupted (47t) a more urgent need (hunger) h0",
+    "59480 source:937 interrupted (111t) something better came up h0",
+    "59569 source:943 partial (89t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 1144,
+   "stage": "adult",
+   "start": 57149,
+   "gathers": 14,
+   "sources": 13,
+   "successes": 0,
+   "failures": 1,
+   "interrupted": 12,
+   "hungerStart": 41,
+   "hungerEnd": 0,
+   "ticks": 1891,
+   "rows": [
+    "57271 source:954 interrupted (122t) something better came up h41",
+    "57343 source:955 failed (72t) someone else is already taking it h39",
+    "57524 source:951 interrupted (180t) danger nearby h34",
+    "57738 source:1094 interrupted (169t) something better came up h27",
+    "57846 source:988 interrupted (108t) something better came up h24",
+    "57951 source:980 interrupted (105t) something better came up h21",
+    "58157 source:994 interrupted (206t) something better came up h14",
+    "58218 source:1092 interrupted (61t) something better came up h13",
+    "58308 source:971 interrupted (90t) something better came up h10",
+    "58403 source:934 interrupted (95t) something better came up h7",
+    "58513 source:943 interrupted (110t) something better came up h4",
+    "58559 source:977 interrupted (46t) a more urgent need (hunger) h2",
+    "58825 source:940 interrupted (109t) something better came up h0",
+    "59040 source:951 partial (215t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 1142,
+   "stage": "adult",
+   "start": 13823,
+   "gathers": 12,
+   "sources": 12,
+   "successes": 0,
+   "failures": 5,
+   "interrupted": 7,
+   "hungerStart": 28,
+   "hungerEnd": 0,
+   "ticks": 1688,
+   "rows": [
+    "13942 source:954 interrupted (119t) something better came up h28",
+    "14015 source:955 failed (73t) nothing left h25",
+    "14238 source:950 interrupted (222t) something better came up h19",
+    "14339 source:1094 failed (101t) nothing left h16",
+    "14441 source:1101 interrupted (101t) something better came up h13",
+    "14579 source:1098 failed (138t) nothing left h9",
+    "14669 source:972 failed (89t) nothing left h6",
+    "14730 source:935 interrupted (60t) something better came up h4",
+    "14835 source:938 failed (57t) nothing left h1",
+    "14947 source:951 interrupted (111t) something better came up h0",
+    "15056 source:985 interrupted (109t) a more urgent need (hunger) h0",
+    "15511 source:988 interrupted (220t) food in my pack would ease my hunger sooner h0"
+   ]
+  },
+  {
+   "pid": 1137,
+   "stage": "adult",
+   "start": 52851,
+   "gathers": 12,
+   "sources": 12,
+   "successes": 0,
+   "failures": 2,
+   "interrupted": 9,
+   "hungerStart": 18,
+   "hungerEnd": 0,
+   "ticks": 1842,
+   "rows": [
+    "53071 source:1094 failed (220t) nothing left h18",
+    "53189 source:951 interrupted (117t) something better came up h15",
+    "53301 source:985 interrupted (112t) danger nearby h11",
+    "53509 source:984 interrupted (61t) danger nearby h5",
+    "53669 source:954 interrupted (102t) something better came up h0",
+    "53715 source:953 interrupted (46t) a more urgent need (hunger) h0",
+    "53818 source:975 interrupted (50t) a more urgent need (hunger) h0",
+    "54154 source:1092 interrupted (212t) something better came up h0",
+    "54216 source:1098 failed (62t) nothing left h0",
+    "54319 source:1101 interrupted (102t) something better came up h0",
+    "54419 source:987 interrupted (100t) something better came up h0",
+    "54693 source:980 partial (274t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 1140,
+   "stage": "child",
+   "start": 55458,
+   "gathers": 12,
+   "sources": 12,
+   "successes": 0,
+   "failures": 6,
+   "interrupted": 6,
+   "hungerStart": 26,
+   "hungerEnd": 0,
+   "ticks": 1570,
+   "rows": [
+    "55716 source:952 interrupted (258t) something better came up h26",
+    "55788 source:983 interrupted (1t) danger nearby h24",
+    "55929 source:1094 failed (84t) nothing left h20",
+    "56026 source:988 interrupted (96t) something better came up h17",
+    "56086 source:980 interrupted (60t) something better came up h16",
+    "56177 source:981 interrupted (91t) something better came up h13",
+    "56374 source:994 failed (197t) nothing left h8",
+    "56426 source:1092 failed (51t) nothing left h7",
+    "56588 source:934 failed (161t) nothing left h3",
+    "56662 source:943 failed (73t) nothing left h1",
+    "56694 source:944 failed (31t) nothing left h0",
+    "57028 source:1095 interrupted (333t) food in my pack would ease my hunger sooner h0"
+   ]
+  },
+  {
+   "pid": 1131,
+   "stage": "adult",
+   "start": 50403,
+   "gathers": 11,
+   "sources": 8,
+   "successes": 0,
+   "failures": 1,
+   "interrupted": 10,
+   "hungerStart": 45,
+   "hungerEnd": 0,
+   "ticks": 3466,
+   "rows": [
+    "50482 source:937 failed (79t) someone else is already taking it h45",
+    "50583 source:973 interrupted (100t) something better came up h42",
+    "50683 source:1098 interrupted (100t) something better came up h39",
+    "50731 source:1101 interrupted (48t) a more urgent need (warmth) h38",
+    "52113 source:1101 interrupted (358t) a more urgent need (hunger) h0",
+    "52778 source:943 interrupted (116t) a more urgent need (hunger) h0",
+    "53107 source:1091 interrupted (109t) something better came up h0",
+    "53379 source:1098 interrupted (150t) something better came up h0",
+    "53485 source:994 interrupted (106t) something better came up h0",
+    "53646 source:1101 interrupted (161t) something better came up h0",
+    "53869 source:1096 interrupted (223t) something better came up h0"
+   ]
+  },
+  {
+   "pid": 1150,
+   "stage": "adult",
+   "start": 55276,
+   "gathers": 11,
+   "sources": 9,
+   "successes": 0,
+   "failures": 5,
+   "interrupted": 6,
+   "hungerStart": 39,
+   "hungerEnd": 0,
+   "ticks": 1497,
+   "rows": [
+    "55356 source:937 failed (80t) nothing left h39",
+    "55454 source:972 failed (97t) nothing left h36",
+    "55547 source:995 failed (92t) nothing left h33",
+    "55622 source:1101 failed (74t) nothing left h31",
+    "55717 source:980 failed (94t) nothing left h28",
+    "55828 source:1096 interrupted (110t) something better came up h25",
+    "55992 source:985 interrupted (164t) something better came up h20",
+    "56074 source:984 interrupted (82t) danger nearby h17",
+    "56158 source:1100 interrupted (46t) danger nearby h15",
+    "56237 source:1100 interrupted (19t) danger nearby h12",
+    "56773 source:1100 interrupted (431t) a more urgent need (hunger) h0"
+   ]
+  },
+  {
+   "pid": 1145,
+   "stage": "adult",
+   "start": 56166,
+   "gathers": 11,
+   "sources": 11,
+   "successes": 0,
+   "failures": 5,
+   "interrupted": 5,
+   "hungerStart": 44,
+   "hungerEnd": 19,
+   "ticks": 912,
+   "rows": [
+    "56267 source:1094 interrupted (101t) something better came up h44",
+    "56363 source:1101 interrupted (96t) something better came up h41",
+    "56446 source:988 partial (83t) nothing left h38",
+    "56617 source:981 interrupted (170t) something better came up h33",
+    "56716 source:1098 interrupted (99t) something better came up h30",
+    "56746 source:994 failed (30t) nothing left h29",
+    "56788 source:1092 failed (41t) nothing left h28",
+    "56836 source:972 failed (47t) nothing left h27",
+    "56943 source:934 failed (106t) nothing left h24",
+    "57016 source:943 failed (72t) nothing left h21",
+    "57078 source:1097 interrupted (61t) food in my pack would ease my hunger sooner h19"
+   ]
+  }
+ ]
+}

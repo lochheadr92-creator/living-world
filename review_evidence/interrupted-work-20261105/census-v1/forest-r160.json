@@ -1,0 +1,1099 @@
+{
+ "seed": "forest",
+ "rules": 160,
+ "days": 25,
+ "exactTwin": true,
+ "conserved": true,
+ "alive": 12,
+ "totalEnds": 12737,
+ "notSuccess": 6543,
+ "stats": {
+  "hungerGathers": 1828,
+  "outcomes": {
+   "interrupted": 1071,
+   "success": 102,
+   "failed": 368,
+   "partial": 287
+  },
+  "sequences2plus": 360,
+  "seqsWith3plusSources": 215,
+  "seqsStartingHungerBelow25": 72,
+  "seqsEndingHungerBelow10": 87
+ },
+ "topCensus": [
+  [
+   "gather | interrupted | something better came up",
+   685
+  ],
+  [
+   "gather:hunger | interrupted | something better came up",
+   639
+  ],
+  [
+   "sleep:energy | partial | too cold to sleep",
+   577
+  ],
+  [
+   "gather:hunger | failed | nothing left",
+   342
+  ],
+  [
+   "rest:warmth | interrupted | something better came up",
+   328
+  ],
+  [
+   "gather:hunger | partial | nothing left",
+   249
+  ],
+  [
+   "gather:hunger | interrupted | food in my pack would ease my hunger sooner",
+   238
+  ],
+  [
+   "gather | failed | nothing left",
+   235
+  ],
+  [
+   "gather | partial | nothing left",
+   162
+  ],
+  [
+   "warm:warmth | interrupted | something better came up",
+   159
+  ],
+  [
+   "flee:safety | interrupted | something better came up",
+   138
+  ],
+  [
+   "rest:energy | interrupted | something better came up",
+   121
+  ],
+  [
+   "wander | interrupted | something better came up",
+   120
+  ],
+  [
+   "gather:hunger | interrupted | danger nearby",
+   100
+  ],
+  [
+   "socialize:hunger | interrupted | something better came up",
+   85
+  ],
+  [
+   "socialize:social | interrupted | something better came up",
+   77
+  ],
+  [
+   "drink:thirst | interrupted | something better came up",
+   75
+  ],
+  [
+   "gather | partial | someone else is already taking it",
+   71
+  ],
+  [
+   "repair | interrupted | something better came up",
+   71
+  ],
+  [
+   "deposit | interrupted | something better came up",
+   59
+  ],
+  [
+   "socialize | interrupted | something better came up",
+   50
+  ],
+  [
+   "gather | interrupted | danger nearby",
+   49
+  ],
+  [
+   "gather | failed | someone else is already taking it",
+   42
+  ],
+  [
+   "fuel_fire | interrupted | something better came up",
+   39
+  ],
+  [
+   "explore | interrupted | something better came up",
+   38
+  ],
+  [
+   "gather:hunger | partial | someone else is already taking it",
+   38
+  ],
+  [
+   "till | interrupted | something better came up",
+   36
+  ],
+  [
+   "drink:thirst | interrupted | a more urgent need (hunger)",
+   36
+  ],
+  [
+   "drink:thirst | failed | the well is empty",
+   33
+  ],
+  [
+   "gather:hunger | interrupted | a more urgent need (hunger)",
+   33
+  ],
+  [
+   "gather:hunger | interrupted | a more urgent need (warmth)",
+   31
+  ],
+  [
+   "build | interrupted | something better came up",
+   27
+  ],
+  [
+   "converse:social | interrupted | invitation declined: I have already had that time today; I want to do something else now",
+   25
+  ],
+  [
+   "converse | interrupted | invitation declined: I have already had that time today; I want to do something else now",
+   25
+  ],
+  [
+   "sleep:energy | interrupted | a more urgent need (energy)",
+   25
+  ],
+  [
+   "gather:hunger | failed | someone else is already taking it",
+   24
+  ],
+  [
+   "gather:hunger | interrupted | a more urgent need (energy)",
+   24
+  ],
+  [
+   "flee:safety | interrupted | a more urgent need (hunger)",
+   24
+  ],
+  [
+   "drink:thirst | interrupted | danger nearby",
+   22
+  ],
+  [
+   "rest:warmth | interrupted | a more urgent need (warmth)",
+   22
+  ],
+  [
+   "sleep:energy | interrupted | a more urgent need (hunger)",
+   22
+  ],
+  [
+   "rest:warmth | interrupted | a more urgent need (energy)",
+   21
+  ],
+  [
+   "drink:thirst | failed | no water left",
+   20
+  ],
+  [
+   "sleep:energy | interrupted | danger nearby",
+   20
+  ],
+  [
+   "craft | interrupted | something better came up",
+   19
+  ],
+  [
+   "flee:safety | interrupted | a more urgent need (warmth)",
+   19
+  ],
+  [
+   "gather | failed | it is gone",
+   18
+  ],
+  [
+   "haul | interrupted | something better came up",
+   18
+  ],
+  [
+   "rest:warmth | interrupted | danger nearby",
+   18
+  ],
+  [
+   "socialize:social | failed | Lena was too busy to stop",
+   17
+  ],
+  [
+   "relocate | interrupted | something better came up",
+   17
+  ],
+  [
+   "eat:hunger | interrupted | something better came up",
+   15
+  ],
+  [
+   "warm:warmth | partial | the fire went out",
+   15
+  ],
+  [
+   "eat_store:hunger | interrupted | something better came up",
+   14
+  ],
+  [
+   "drink:thirst | interrupted | a more urgent need (warmth)",
+   14
+  ],
+  [
+   "sleep:energy | interrupted | a more urgent need (warmth)",
+   14
+  ],
+  [
+   "rest:energy | interrupted | a more urgent need (energy)",
+   14
+  ],
+  [
+   "build | partial | no materials to work with (# wood, # stone)",
+   13
+  ],
+  [
+   "plan_site | interrupted | something better came up",
+   13
+  ],
+  [
+   "converse:social | interrupted | invitation declined: I cannot teach you more about foraging yet",
+   12
+  ]
+ ],
+ "lostTop": [
+  {
+   "k": "rest:warmth | something better came up",
+   "n": 304,
+   "ticks": 84952,
+   "next": {
+    "drink:thirst": 70,
+    "gather": 57,
+    "eat:hunger": 44,
+    "sleep:energy": 24,
+    "socialize:social": 18
+   }
+  },
+  {
+   "k": "gather | something better came up",
+   "n": 316,
+   "ticks": 47524,
+   "next": {
+    "gather": 92,
+    "drink:thirst": 53,
+    "eat:hunger": 36,
+    "sleep:energy": 33,
+    "socialize:social": 30
+   }
+  },
+  {
+   "k": "gather:hunger | food in my pack would ease my hunger sooner",
+   "n": 200,
+   "ticks": 28452,
+   "next": {
+    "eat:hunger": 200
+   }
+  },
+  {
+   "k": "gather:hunger | something better came up",
+   "n": 147,
+   "ticks": 27722,
+   "next": {
+    "gather:hunger": 81,
+    "drink:thirst": 12,
+    "rest:energy": 8,
+    "socialize:hunger": 8,
+    "sleep:energy": 5
+   }
+  },
+  {
+   "k": "warm:warmth | something better came up",
+   "n": 133,
+   "ticks": 25204,
+   "next": {
+    "drink:thirst": 26,
+    "gather:hunger": 22,
+    "eat:hunger": 19,
+    "rest:warmth": 13,
+    "give": 11
+   }
+  },
+  {
+   "k": "rest:energy | something better came up",
+   "n": 113,
+   "ticks": 15697,
+   "next": {
+    "sleep:energy": 43,
+    "drink:thirst": 14,
+    "gather:hunger": 11,
+    "gather": 9,
+    "eat:hunger": 8
+   }
+  },
+  {
+   "k": "sleep:energy | a more urgent need (hunger)",
+   "n": 22,
+   "ticks": 9164,
+   "next": {
+    "gather:hunger": 14,
+    "eat:hunger": 4,
+    "harvest:hunger": 3,
+    "eat_store:hunger": 1
+   }
+  },
+  {
+   "k": "repair | something better came up",
+   "n": 54,
+   "ticks": 8927,
+   "next": {
+    "gather": 12,
+    "socialize:hunger": 7,
+    "drink:thirst": 4,
+    "sleep:energy": 4,
+    "rest:energy": 3
+   }
+  },
+  {
+   "k": "explore | something better came up",
+   "n": 19,
+   "ticks": 5076,
+   "next": {
+    "sleep:energy": 5,
+    "drink:thirst": 4,
+    "gather": 3,
+    "gather:hunger": 2,
+    "fuel_fire": 1
+   }
+  },
+  {
+   "k": "build | something better came up",
+   "n": 24,
+   "ticks": 4372,
+   "next": {
+    "sleep:energy": 4,
+    "eat:hunger": 3,
+    "rest:energy": 3,
+    "drink:thirst": 3,
+    "gather": 2
+   }
+  },
+  {
+   "k": "till | something better came up",
+   "n": 19,
+   "ticks": 4220,
+   "next": {
+    "sleep:energy": 5,
+    "till": 3,
+    "drink:thirst": 2,
+    "explore": 2,
+    "eat_store:hunger": 1
+   }
+  },
+  {
+   "k": "flee:safety | something better came up",
+   "n": 32,
+   "ticks": 3844,
+   "next": {
+    "gather:hunger": 8,
+    "drink:thirst": 7,
+    "eat:hunger": 6,
+    "gather": 5,
+    "sleep:energy": 2
+   }
+  },
+  {
+   "k": "gather:hunger | danger nearby",
+   "n": 25,
+   "ticks": 3377,
+   "next": {
+    "flee:safety": 25
+   }
+  },
+  {
+   "k": "rest:warmth | a more urgent need (warmth)",
+   "n": 15,
+   "ticks": 3360,
+   "next": {
+    "drink:thirst": 7,
+    "gather:hunger": 5,
+    "eat:hunger": 2,
+    "socialize:hunger": 1
+   }
+  },
+  {
+   "k": "socialize:social | something better came up",
+   "n": 12,
+   "ticks": 2871,
+   "next": {
+    "socialize:social": 3,
+    "eat:hunger": 2,
+    "drink:thirst": 1,
+    "plan_site": 1,
+    "gather:hunger": 1
+   }
+  },
+  {
+   "k": "drink:thirst | something better came up",
+   "n": 17,
+   "ticks": 2816,
+   "next": {
+    "gather": 3,
+    "eat:hunger": 3,
+    "deposit": 3,
+    "socialize:social": 1,
+    "warm:warmth": 1
+   }
+  },
+  {
+   "k": "rest:warmth | a more urgent need (energy)",
+   "n": 15,
+   "ticks": 2764,
+   "next": {
+    "sleep:energy": 8,
+    "none": 6,
+    "rest:energy": 1
+   }
+  },
+  {
+   "k": "gather:hunger | a more urgent need (energy)",
+   "n": 19,
+   "ticks": 2763,
+   "next": {
+    "sleep:energy": 12,
+    "rest:energy": 6,
+    "rest:warmth": 1
+   }
+  },
+  {
+   "k": "craft | something better came up",
+   "n": 14,
+   "ticks": 2600,
+   "next": {
+    "socialize:hunger": 4,
+    "sleep:energy": 2,
+    "socialize:social": 2,
+    "drink:thirst": 2,
+    "converse:social": 1
+   }
+  },
+  {
+   "k": "drink:thirst | a more urgent need (hunger)",
+   "n": 19,
+   "ticks": 2546,
+   "next": {
+    "gather:hunger": 18,
+    "eat_store:hunger": 1
+   }
+  },
+  {
+   "k": "sleep:energy | danger nearby",
+   "n": 6,
+   "ticks": 2477,
+   "next": {
+    "flee:safety": 6
+   }
+  },
+  {
+   "k": "gather:hunger | a more urgent need (warmth)",
+   "n": 16,
+   "ticks": 2451,
+   "next": {
+    "warm:warmth": 5,
+    "none": 5,
+    "rest:warmth": 4,
+    "fuel_fire": 2
+   }
+  },
+  {
+   "k": "sleep:energy | woken to be fed",
+   "n": 4,
+   "ticks": 2347,
+   "next": {
+    "drink:thirst": 2,
+    "rest:warmth": 1,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "gather:hunger | a more urgent need (hunger)",
+   "n": 7,
+   "ticks": 1856,
+   "next": {
+    "drink:thirst": 7
+   }
+  },
+  {
+   "k": "wander | something better came up",
+   "n": 13,
+   "ticks": 1615,
+   "next": {
+    "sleep:energy": 4,
+    "rest:warmth": 2,
+    "gather": 2,
+    "craft": 1,
+    "socialize": 1
+   }
+  },
+  {
+   "k": "sleep:energy | a more urgent need (energy)",
+   "n": 6,
+   "ticks": 1600,
+   "next": {
+    "rest:warmth": 3,
+    "eat:hunger": 1,
+    "socialize:hunger": 1,
+    "gather:hunger": 1
+   }
+  },
+  {
+   "k": "relocate | something better came up",
+   "n": 6,
+   "ticks": 1432,
+   "next": {
+    "socialize:hunger": 2,
+    "sleep:energy": 1,
+    "till": 1,
+    "relocate": 1,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "rest:energy | a more urgent need (hunger)",
+   "n": 11,
+   "ticks": 1361,
+   "next": {
+    "gather:hunger": 9,
+    "eat_store:hunger": 1,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "haul | something better came up",
+   "n": 6,
+   "ticks": 1341,
+   "next": {
+    "sleep:energy": 2,
+    "socialize": 1,
+    "eat:hunger": 1,
+    "build": 1,
+    "socialize:social": 1
+   }
+  },
+  {
+   "k": "socialize:hunger | something better came up",
+   "n": 6,
+   "ticks": 1335,
+   "next": {
+    "gather:hunger": 4,
+    "drink:thirst": 1,
+    "rest:warmth": 1
+   }
+  },
+  {
+   "k": "rest:energy | a more urgent need (energy)",
+   "n": 14,
+   "ticks": 1242,
+   "next": {
+    "gather:hunger": 8,
+    "drink:thirst": 4,
+    "rest:warmth": 1,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "gather | danger nearby",
+   "n": 15,
+   "ticks": 1203,
+   "next": {
+    "flee:safety": 15
+   }
+  },
+  {
+   "k": "warm:warmth | a more urgent need (hunger)",
+   "n": 9,
+   "ticks": 1184,
+   "next": {
+    "gather:hunger": 6,
+    "harvest:hunger": 1,
+    "eat:hunger": 1,
+    "eat_store:hunger": 1
+   }
+  },
+  {
+   "k": "rest:warmth | danger nearby",
+   "n": 4,
+   "ticks": 1170,
+   "next": {
+    "flee:safety": 4
+   }
+  },
+  {
+   "k": "fuel_fire | something better came up",
+   "n": 11,
+   "ticks": 1074,
+   "next": {
+    "sleep:energy": 5,
+    "rest:warmth": 2,
+    "gather": 1,
+    "none": 1,
+    "drink:thirst": 1
+   }
+  },
+  {
+   "k": "explore | danger nearby",
+   "n": 5,
+   "ticks": 1043,
+   "next": {
+    "flee:safety": 5
+   }
+  },
+  {
+   "k": "deposit | something better came up",
+   "n": 6,
+   "ticks": 1018,
+   "next": {
+    "sleep:energy": 2,
+    "rest:energy": 1,
+    "wander": 1,
+    "socialize:hunger": 1,
+    "eat:hunger": 1
+   }
+  },
+  {
+   "k": "sleep:energy | a more urgent need (warmth)",
+   "n": 4,
+   "ticks": 911,
+   "next": {
+    "rest:warmth": 3,
+    "warm:warmth": 1
+   }
+  },
+  {
+   "k": "gather:hunger | died",
+   "n": 3,
+   "ticks": 828,
+   "next": {
+    "none": 3
+   }
+  },
+  {
+   "k": "rest:warmth | a more urgent need (hunger)",
+   "n": 2,
+   "ticks": 821,
+   "next": {
+    "eat_store:hunger": 1,
+    "eat:hunger": 1
+   }
+  }
+ ],
+ "longestSeqs": [
+  {
+   "pid": 935,
+   "stage": "adult",
+   "start": 52358,
+   "gathers": 23,
+   "sources": 20,
+   "successes": 0,
+   "failures": 3,
+   "interrupted": 20,
+   "hungerStart": 27,
+   "hungerEnd": 0,
+   "ticks": 3372,
+   "rows": [
+    "52514 source:886 failed (156t) nothing left h27",
+    "52992 source:741 interrupted (94t) something better came up h12",
+    "53053 source:719 interrupted (61t) something better came up h10",
+    "53164 source:891 interrupted (111t) something better came up h7",
+    "53267 source:892 interrupted (103t) something better came up h4",
+    "53386 source:778 interrupted (119t) something better came up h0",
+    "53488 source:764 interrupted (102t) something better came up h0",
+    "53603 source:723 interrupted (115t) something better came up h0",
+    "53722 source:893 interrupted (119t) something better came up h0",
+    "53821 source:888 interrupted (99t) something better came up h0",
+    "54140 source:745 interrupted (319t) something better came up h0",
+    "54201 source:743 interrupted (61t) something better came up h0",
+    "54279 source:753 failed (78t) nothing left h0",
+    "54387 source:747 interrupted (107t) something better came up h0",
+    "54496 source:746 interrupted (109t) a more urgent need (hunger) h0",
+    "54915 source:700 interrupted (362t) something better came up h0",
+    "55074 source:741 interrupted (159t) something better came up h0",
+    "55151 source:717 failed (77t) nothing left h0",
+    "55317 source:891 interrupted (165t) something better came up h0",
+    "55412 source:768 interrupted (95t) something better came up h0",
+    "55529 source:763 interrupted (117t) something better came up h0",
+    "55626 source:892 interrupted (97t) something better came up h0",
+    "55730 source:777 interrupted (104t) something better came up h0"
+   ]
+  },
+  {
+   "pid": 937,
+   "stage": "child",
+   "start": 52752,
+   "gathers": 23,
+   "sources": 20,
+   "successes": 0,
+   "failures": 6,
+   "interrupted": 17,
+   "hungerStart": 26,
+   "hungerEnd": 0,
+   "ticks": 3711,
+   "rows": [
+    "52814 source:702 interrupted (62t) something better came up h26",
+    "52916 source:741 interrupted (102t) something better came up h23",
+    "53025 source:767 interrupted (109t) something better came up h21",
+    "53087 source:771 interrupted (62t) something better came up h19",
+    "53147 source:891 interrupted (60t) something better came up h18",
+    "53208 source:892 interrupted (61t) something better came up h16",
+    "53315 source:776 interrupted (107t) something better came up h13",
+    "53614 source:722 interrupted (228t) something better came up h6",
+    "53694 source:761 failed (80t) nothing left h4",
+    "53798 source:893 interrupted (103t) something better came up h1",
+    "53884 source:772 failed (86t) nothing left h0",
+    "54225 source:745 interrupted (340t) something better came up h0",
+    "54310 source:743 failed (85t) nothing left h0",
+    "54370 source:747 failed (59t) nothing left h0",
+    "54413 source:746 failed (42t) nothing left h0",
+    "55050 source:773 failed (466t) nothing left h0",
+    "55209 source:765 interrupted (158t) a more urgent need (hunger) h0",
+    "55523 source:768 interrupted (209t) something better came up h0",
+    "55615 source:763 interrupted (92t) something better came up h0",
+    "55908 source:890 interrupted (293t) something better came up h0",
+    "56003 source:776 interrupted (95t) something better came up h0",
+    "56267 source:891 interrupted (264t) a more urgent need (hunger) h0",
+    "56463 source:891 interrupted (169t) food in my pack would ease my hunger sooner h0"
+   ]
+  },
+  {
+   "pid": 942,
+   "stage": "adult",
+   "start": 49217,
+   "gathers": 22,
+   "sources": 18,
+   "successes": 1,
+   "failures": 6,
+   "interrupted": 15,
+   "hungerStart": 39,
+   "hungerEnd": 0,
+   "ticks": 2901,
+   "rows": [
+    "49278 source:710 interrupted (61t) something better came up h39",
+    "49734 source:706 failed (28t) nothing left h31",
+    "49835 source:741 interrupted (100t) something better came up h28",
+    "49883 source:716 failed (48t) nothing left h27",
+    "49996 source:714 interrupted (112t) something better came up h24",
+    "50032 source:713 failed (36t) nothing left h22",
+    "50150 source:701 interrupted (117t) something better came up h19",
+    "50439 source:886 interrupted (117t) something better came up h10",
+    "50499 source:888 interrupted (60t) something better came up h8",
+    "50602 source:734 failed (103t) nothing left h5",
+    "50650 source:723 interrupted (47t) a more urgent need (hunger) h4",
+    "50721 source:723 interrupted (44t) a more urgent need (hunger) h2",
+    "50853 source:721 failed (106t) nothing left h0",
+    "50960 source:890 interrupted (106t) something better came up h0",
+    "51020 source:891 interrupted (60t) something better came up h0",
+    "51115 source:776 interrupted (95t) something better came up h0",
+    "51332 source:718 interrupted (217t) something better came up h0",
+    "51447 source:715 interrupted (115t) a more urgent need (hunger) h0",
+    "51809 source:702 interrupted (101t) something better came up h0",
+    "52026 source:715 interrupted (217t) something better came up h0",
+    "52084 source:713 failed (58t) nothing left h0",
+    "52118 source:715 success (33t) done h0"
+   ]
+  },
+  {
+   "pid": 916,
+   "stage": "child",
+   "start": 47725,
+   "gathers": 22,
+   "sources": 18,
+   "successes": 0,
+   "failures": 5,
+   "interrupted": 17,
+   "hungerStart": 22,
+   "hungerEnd": 0,
+   "ticks": 2516,
+   "rows": [
+    "47838 source:714 interrupted (113t) something better came up h22",
+    "47849 source:712 interrupted (11t) danger nearby h22",
+    "48018 source:740 failed (86t) nothing left h18",
+    "48218 source:757 interrupted (199t) danger nearby h13",
+    "48305 source:713 interrupted (27t) danger nearby h10",
+    "48353 source:757 interrupted (3t) danger nearby h8",
+    "48416 source:757 interrupted (1t) danger nearby h6",
+    "48479 source:891 interrupted (4t) danger nearby h4",
+    "48530 source:891 interrupted (3t) danger nearby h2",
+    "48596 source:891 interrupted (4t) danger nearby h0",
+    "48829 source:778 interrupted (114t) something better came up h0",
+    "48938 source:764 interrupted (109t) something better came up h0",
+    "48999 source:767 interrupted (61t) a more urgent need (hunger) h0",
+    "49059 source:721 interrupted (59t) a more urgent need (hunger) h0",
+    "49334 source:762 failed (73t) nothing left h0",
+    "49408 source:886 failed (73t) nothing left h0",
+    "49452 source:893 failed (43t) nothing left h0",
+    "49560 source:887 interrupted (107t) something better came up h0",
+    "49794 source:744 interrupted (234t) something better came up h0",
+    "49902 source:747 failed (108t) nothing left h0",
+    "50209 source:700 interrupted (306t) something better came up h0",
+    "50241 source:701 interrupted (32t) food in my pack would ease my hunger sooner h0"
+   ]
+  },
+  {
+   "pid": 902,
+   "stage": "elder",
+   "start": 51473,
+   "gathers": 21,
+   "sources": 20,
+   "successes": 1,
+   "failures": 6,
+   "interrupted": 14,
+   "hungerStart": 47,
+   "hungerEnd": 0,
+   "ticks": 4187,
+   "rows": [
+    "51589 source:743 success (116t) done h47",
+    "52791 source:703 failed (98t) nothing left h21",
+    "53012 source:702 interrupted (110t) something better came up h14",
+    "53118 source:741 interrupted (106t) something better came up h11",
+    "53180 source:714 interrupted (62t) something better came up h9",
+    "53277 source:711 failed (97t) nothing left h6",
+    "53623 source:889 interrupted (345t) something better came up h0",
+    "53729 source:771 interrupted (106t) a more urgent need (hunger) h0",
+    "54014 source:720 interrupted (163t) something better came up h0",
+    "54074 source:723 interrupted (60t) something better came up h0",
+    "54214 source:886 failed (140t) nothing left h0",
+    "54289 source:893 failed (74t) nothing left h0",
+    "54389 source:888 failed (99t) nothing left h0",
+    "54488 source:732 failed (98t) nothing left h0",
+    "54655 source:887 interrupted (166t) something better came up h0",
+    "54961 source:725 interrupted (306t) something better came up h0",
+    "55284 source:753 interrupted (323t) something better came up h0",
+    "55386 source:744 interrupted (102t) something better came up h0",
+    "55488 source:743 interrupted (102t) something better came up h0",
+    "55549 source:747 interrupted (61t) something better came up h0",
+    "55660 source:746 interrupted (111t) something better came up h0"
+   ]
+  },
+  {
+   "pid": 932,
+   "stage": "child",
+   "start": 52893,
+   "gathers": 21,
+   "sources": 21,
+   "successes": 0,
+   "failures": 11,
+   "interrupted": 9,
+   "hungerStart": 47,
+   "hungerEnd": 0,
+   "ticks": 2487,
+   "rows": [
+    "52958 source:758 failed (65t) nothing left h47",
+    "53021 source:707 interrupted (62t) something better came up h46",
+    "53129 source:771 failed (108t) nothing left h43",
+    "53203 source:764 interrupted (73t) danger nearby h41",
+    "53410 source:741 interrupted (103t) something better came up h35",
+    "53516 source:715 interrupted (106t) something better came up h32",
+    "53577 source:713 failed (61t) nothing left h31",
+    "53639 source:701 interrupted (61t) something better came up h29",
+    "53870 source:891 interrupted (231t) something better came up h23",
+    "53970 source:892 failed (100t) nothing left h21",
+    "54043 source:776 failed (72t) nothing left h19",
+    "54198 source:763 interrupted (116t) a more urgent need (warmth) h15",
+    "54465 source:886 failed (217t) nothing left h8",
+    "54487 source:731 interrupted (21t) danger nearby h7",
+    "54610 source:887 failed (109t) nothing left h4",
+    "54701 source:888 failed (90t) nothing left h2",
+    "54804 source:733 failed (102t) nothing left h0",
+    "54879 source:773 failed (74t) nothing left h0",
+    "55138 source:722 interrupted (258t) something better came up h0",
+    "55244 source:710 failed (106t) nothing left h0",
+    "55380 source:759 partial (135t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 940,
+   "stage": "adult",
+   "start": 52879,
+   "gathers": 18,
+   "sources": 16,
+   "successes": 0,
+   "failures": 3,
+   "interrupted": 14,
+   "hungerStart": 50,
+   "hungerEnd": 0,
+   "ticks": 2953,
+   "rows": [
+    "53019 source:893 partial (140t) nothing left h50",
+    "53366 source:772 interrupted (106t) something better came up h40",
+    "53468 source:752 interrupted (102t) something better came up h37",
+    "53896 source:745 interrupted (109t) something better came up h24",
+    "53958 source:742 interrupted (62t) something better came up h22",
+    "54019 source:746 interrupted (61t) something better came up h20",
+    "54136 source:755 interrupted (117t) something better came up h17",
+    "54196 source:724 interrupted (60t) a more urgent need (warmth) h15",
+    "54521 source:724 interrupted (270t) something better came up h5",
+    "54635 source:752 interrupted (114t) something better came up h2",
+    "54795 source:733 interrupted (160t) something better came up h0",
+    "54861 source:773 failed (66t) nothing left h0",
+    "55095 source:723 interrupted (233t) something better came up h0",
+    "55207 source:706 failed (112t) nothing left h0",
+    "55482 source:700 interrupted (117t) something better came up h0",
+    "55576 source:741 interrupted (94t) something better came up h0",
+    "55663 source:719 failed (87t) nothing left h0",
+    "55832 source:768 interrupted (168t) something better came up h0"
+   ]
+  },
+  {
+   "pid": 929,
+   "stage": "adult",
+   "start": 50554,
+   "gathers": 17,
+   "sources": 16,
+   "successes": 0,
+   "failures": 5,
+   "interrupted": 11,
+   "hungerStart": 18,
+   "hungerEnd": 0,
+   "ticks": 2440,
+   "rows": [
+    "50665 source:886 interrupted (111t) something better came up h18",
+    "50774 source:888 interrupted (109t) something better came up h15",
+    "50882 source:721 interrupted (108t) something better came up h12",
+    "50993 source:771 interrupted (111t) something better came up h9",
+    "51100 source:889 interrupted (107t) something better came up h5",
+    "51160 source:776 interrupted (60t) something better came up h4",
+    "51242 source:777 failed (82t) nothing left h1",
+    "51468 source:718 interrupted (225t) something better came up h0",
+    "51540 source:741 failed (72t) nothing left h0",
+    "51656 source:702 interrupted (115t) something better came up h0",
+    "51998 source:749 interrupted (342t) something better came up h0",
+    "52047 source:748 failed (49t) nothing left h0",
+    "52102 source:743 failed (54t) nothing left h0",
+    "52183 source:745 failed (80t) nothing left h0",
+    "52340 source:755 interrupted (156t) a more urgent need (hunger) h0",
+    "52830 source:887 interrupted (333t) something better came up h0",
+    "52994 source:888 partial (164t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 943,
+   "stage": "adult",
+   "start": 50165,
+   "gathers": 17,
+   "sources": 17,
+   "successes": 0,
+   "failures": 6,
+   "interrupted": 11,
+   "hungerStart": 39,
+   "hungerEnd": 0,
+   "ticks": 3158,
+   "rows": [
+    "50266 source:891 interrupted (101t) a more urgent need (warmth) h39",
+    "51099 source:767 failed (97t) nothing left h14",
+    "51243 source:776 interrupted (143t) something better came up h9",
+    "51507 source:718 interrupted (264t) something better came up h1",
+    "51567 source:739 interrupted (60t) something better came up h0",
+    "51726 source:715 interrupted (159t) something better came up h0",
+    "51828 source:702 failed (102t) nothing left h0",
+    "51998 source:704 interrupted (169t) something better came up h0",
+    "52092 source:761 failed (94t) nothing left h0",
+    "52201 source:893 interrupted (108t) something better came up h0",
+    "52290 source:887 failed (89t) nothing left h0",
+    "52393 source:888 interrupted (102t) something better came up h0",
+    "52449 source:731 failed (56t) nothing left h0",
+    "52508 source:775 failed (58t) nothing left h0",
+    "52670 source:752 interrupted (161t) a more urgent need (hunger) h0",
+    "53101 source:750 interrupted (170t) something better came up h0",
+    "53323 source:725 interrupted (222t) food in my pack would ease my hunger sooner h0"
+   ]
+  },
+  {
+   "pid": 899,
+   "stage": "elder",
+   "start": 47998,
+   "gathers": 15,
+   "sources": 14,
+   "successes": 0,
+   "failures": 0,
+   "interrupted": 14,
+   "hungerStart": 57,
+   "hungerEnd": 0,
+   "ticks": 2445,
+   "rows": [
+    "48144 source:720 partial (146t) nothing left h57",
+    "48556 source:700 interrupted (119t) something better came up h44",
+    "48617 source:740 interrupted (61t) something better came up h43",
+    "48727 source:739 interrupted (110t) something better came up h39",
+    "48947 source:768 interrupted (219t) something better came up h33",
+    "49058 source:763 interrupted (111t) something better came up h29",
+    "49090 source:709 interrupted (32t) danger nearby h28",
+    "49485 source:709 interrupted (245t) something better came up h16",
+    "49689 source:886 interrupted (101t) something better came up h10",
+    "49807 source:887 interrupted (118t) something better came up h6",
+    "49917 source:893 interrupted (110t) something better came up h3",
+    "50014 source:734 interrupted (97t) a more urgent need (hunger) h0",
+    "50116 source:731 interrupted (75t) danger nearby h0",
+    "50307 source:773 interrupted (117t) something better came up h0",
+    "50443 source:765 interrupted (136t) danger nearby h0"
+   ]
+  },
+  {
+   "pid": 911,
+   "stage": "adult",
+   "start": 53819,
+   "gathers": 14,
+   "sources": 13,
+   "successes": 0,
+   "failures": 6,
+   "interrupted": 7,
+   "hungerStart": 39,
+   "hungerEnd": 0,
+   "ticks": 2473,
+   "rows": [
+    "53909 source:764 failed (90t) nothing left h39",
+    "53967 source:770 failed (57t) nothing left h37",
+    "54053 source:721 failed (85t) nothing left h34",
+    "54189 source:886 failed (135t) nothing left h30",
+    "54862 source:719 interrupted (101t) something better came up h10",
+    "54907 source:718 failed (45t) nothing left h9",
+    "55017 source:715 interrupted (109t) something better came up h5",
+    "55076 source:714 failed (59t) nothing left h4",
+    "55389 source:891 interrupted (312t) something better came up h0",
+    "55487 source:890 interrupted (98t) something better came up h0",
+    "55586 source:778 interrupted (99t) something better came up h0",
+    "55804 source:722 interrupted (218t) a more urgent need (hunger) h0",
+    "56093 source:700 interrupted (106t) something better came up h0",
+    "56292 source:715 partial (199t) nothing left h0"
+   ]
+  },
+  {
+   "pid": 908,
+   "stage": "adult",
+   "start": 51330,
+   "gathers": 14,
+   "sources": 13,
+   "successes": 0,
+   "failures": 5,
+   "interrupted": 8,
+   "hungerStart": 39,
+   "hungerEnd": 0,
+   "ticks": 2566,
+   "rows": [
+    "51409 source:700 failed (79t) nothing left h39",
+    "51504 source:715 interrupted (94t) something better came up h36",
+    "51570 source:713 failed (66t) nothing left h34",
+    "52661 source:716 interrupted (123t) something better came up h10",
+    "52771 source:715 interrupted (110t) something better came up h6",
+    "52981 source:889 interrupted (210t) something better came up h0",
+    "53063 source:770 failed (82t) nothing left h0",
+    "53150 source:890 failed (86t) nothing left h0",
+    "53211 source:776 interrupted (60t) something better came up h0",
+    "53379 source:723 interrupted (168t) something better came up h0",
+    "53482 source:761 interrupted (103t) something better came up h0",
+    "53592 source:893 interrupted (110t) something better came up h0",
+    "53686 source:772 failed (94t) nothing left h0",
+    "53896 source:751 partial (209t) nothing left h0"
+   ]
+  }
+ ]
+}

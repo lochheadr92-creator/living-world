@@ -1,0 +1,16 @@
+{
+ "seed": "meadow",
+ "rules": 160,
+ "tick": 8034,
+ "person": 997,
+ "callsBefore": 127,
+ "activity": {
+  "kind": "gather",
+  "need": "hunger",
+  "key": "gather:816",
+  "phase": "travel"
+ },
+ "diffs": [
+  "world.world.persons.0.commitments.0.blockedAt: 7978 -> 8034"
+ ]
+}

@@ -1,0 +1,19 @@
+{
+  "ordinary": true,
+  "world": "Normal river, arrivals on, rules 161",
+  "found": {
+    "tick": 2840,
+    "reason": "Breaking stone: the place looked empty",
+    "hit": {
+      "id": 1116,
+      "name": "Milo",
+      "stage": "elder"
+    }
+  },
+  "checks": {
+    "ordinaryFoundEmpty": true,
+    "visibleInPanel": true,
+    "pure": true,
+    "noExceptions": true
+  }
+}

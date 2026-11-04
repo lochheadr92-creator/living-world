@@ -1,0 +1,17 @@
+{
+ "seed": "meadow",
+ "days": 25,
+ "samples": 1000,
+ "firstBehaviourDiffTick": null,
+ "identicalBehaviour": true,
+ "conserved160": true,
+ "conserved161": true,
+ "alive160": 35,
+ "alive161": 35,
+ "foundEmptyEndings": {
+  "gather": 207,
+  "gather:hunger": 333
+ },
+ "foundEmptyTotal": 540,
+ "gatherStillSomethingBetter": 881
+}

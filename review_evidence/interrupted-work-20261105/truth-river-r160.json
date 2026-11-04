@@ -1,0 +1,475 @@
+{
+ "seed": "river",
+ "rules": 160,
+ "impure": 0,
+ "rows": [
+  {
+   "tick": 51700,
+   "pid": 1132,
+   "name": "Petra",
+   "stage": "adult",
+   "x": 50,
+   "y": 39,
+   "needs": {
+    "hunger": 21,
+    "thirst": 65,
+    "energy": 69,
+    "warmth": 18,
+    "safety": 41,
+    "social": 41
+   },
+   "inv": {
+    "rod": 1,
+    "basket": 1,
+    "axe": 1,
+    "spear": 1,
+    "seeds": 3,
+    "wood": 5
+   },
+   "activity": "gather:hunger Picking fruit",
+   "household": {
+    "members": 2,
+    "aliveMembers": 2,
+    "homeFood": []
+   },
+   "nearestFoodStores": [
+    {
+     "id": 10414,
+     "type": "food_rack",
+     "d": 22.4,
+     "food": [
+      [
+       "dried_fish",
+       2
+      ]
+     ]
+    }
+   ],
+   "beliefsFoodSources": {
+    "count": 47,
+    "believedHasFood": 37,
+    "reallyHasFood": 20,
+    "nearest": [
+     {
+      "id": 993,
+      "kind": "wild_grain",
+      "d": 2,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 2,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 989,
+      "kind": "wild_grain",
+      "d": 2.9,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 2,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 948,
+      "kind": "berry_bush",
+      "d": 3.8,
+      "believed": 1,
+      "estimated": 1,
+      "seenAgo": 2,
+      "src": "seen",
+      "truth": 1
+     },
+     {
+      "id": 990,
+      "kind": "wild_grain",
+      "d": 3.8,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 2,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 992,
+      "kind": "wild_grain",
+      "d": 4.7,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 2,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 991,
+      "kind": "wild_grain",
+      "d": 6.4,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 140,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 947,
+      "kind": "berry_bush",
+      "d": 6.6,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 17,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 938,
+      "kind": "berry_bush",
+      "d": 6.8,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 143,
+      "src": "seen",
+      "truth": 0
+     }
+    ]
+   },
+   "truthSourcesWithFoodWithin60": {
+    "count": 57,
+    "known": 20,
+    "nearest": [
+     {
+      "id": 948,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 3.1,
+      "known": true,
+      "estimated": 1
+     },
+     {
+      "id": 940,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 8.3,
+      "known": true,
+      "estimated": 1
+     },
+     {
+      "id": 950,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 9.8,
+      "known": true,
+      "estimated": 1
+     },
+     {
+      "id": 949,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 10.8,
+      "known": true,
+      "estimated": 1
+     },
+     {
+      "id": 952,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 11.9,
+      "known": true,
+      "estimated": 0
+     },
+     {
+      "id": 951,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 12.8,
+      "known": true,
+      "estimated": 6
+     },
+     {
+      "id": 953,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 14.9,
+      "known": true,
+      "estimated": 2
+     },
+     {
+      "id": 1094,
+      "type": "fish_spot",
+      "amount": 2,
+      "d": 15.2,
+      "known": true,
+      "estimated": 5
+     }
+    ]
+   },
+   "top": [
+    {
+     "key": "gather:985",
+     "kind": "gather",
+     "need": "hunger",
+     "util": 49.6
+    },
+    {
+     "key": "gather:984",
+     "kind": "gather",
+     "need": "hunger",
+     "util": 47.2
+    },
+    {
+     "key": "gather:1094",
+     "kind": "gather",
+     "need": "hunger",
+     "util": 46.6
+    },
+    {
+     "key": "rest:home:9714",
+     "kind": "rest",
+     "need": "warmth",
+     "util": 60.1
+    },
+    {
+     "key": "sleep:9714",
+     "kind": "sleep",
+     "need": "energy",
+     "util": 44.9
+    },
+    {
+     "key": "sleep:1130",
+     "kind": "sleep",
+     "need": "energy",
+     "util": 35.6
+    },
+    {
+     "key": "rest:home:1130",
+     "kind": "rest",
+     "need": "warmth",
+     "util": 33.7
+    },
+    {
+     "key": "socialize:1138:warn",
+     "kind": "socialize",
+     "need": null,
+     "util": 20.6
+    }
+   ],
+   "blockedFood": [
+    "eat_store:1130: remembers it being empty",
+    "eat_store:9714: remembers it being empty",
+    "gather:938: believes it is empty",
+    "gather:939: believes it is empty",
+    "gather:946: believes it is empty",
+    "gather:947: believes it is empty",
+    "gather:950: failed there 59 ticks ago (a wolf came too close)",
+    "gather:952: believes it is empty"
+   ],
+   "criticals": []
+  },
+  {
+   "tick": 57500,
+   "pid": 1106,
+   "name": "Mira",
+   "stage": "adult",
+   "x": 57,
+   "y": 40,
+   "needs": {
+    "hunger": 8,
+    "thirst": 84,
+    "energy": 19,
+    "warmth": 44,
+    "safety": 21,
+    "social": 80
+   },
+   "inv": {
+    "seeds": 4,
+    "hoe": 1,
+    "basket": 1,
+    "wood": 1
+   },
+   "activity": "gather:hunger Picking berries",
+   "household": {
+    "members": 5,
+    "aliveMembers": 5,
+    "homeFood": []
+   },
+   "nearestFoodStores": [],
+   "beliefsFoodSources": {
+    "count": 53,
+    "believedHasFood": 40,
+    "reallyHasFood": 12,
+    "nearest": [
+     {
+      "id": 947,
+      "kind": "berry_bush",
+      "d": 0.9,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 1,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 950,
+      "kind": "berry_bush",
+      "d": 3.3,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 1,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 948,
+      "kind": "berry_bush",
+      "d": 3.8,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 1,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 946,
+      "kind": "berry_bush",
+      "d": 3.9,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 1,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 949,
+      "kind": "berry_bush",
+      "d": 4.3,
+      "believed": 1,
+      "estimated": 1,
+      "seenAgo": 1,
+      "src": "seen",
+      "truth": 1
+     },
+     {
+      "id": 952,
+      "kind": "berry_bush",
+      "d": 5.9,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 1,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 951,
+      "kind": "berry_bush",
+      "d": 6.5,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 1,
+      "src": "seen",
+      "truth": 0
+     },
+     {
+      "id": 993,
+      "kind": "wild_grain",
+      "d": 8.7,
+      "believed": 0,
+      "estimated": 0,
+      "seenAgo": 13,
+      "src": "seen",
+      "truth": 0
+     }
+    ]
+   },
+   "truthSourcesWithFoodWithin60": {
+    "count": 41,
+    "known": 12,
+    "nearest": [
+     {
+      "id": 949,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 3.9,
+      "known": true,
+      "estimated": 1
+     },
+     {
+      "id": 1091,
+      "type": "fish_spot",
+      "amount": 1,
+      "d": 14.9,
+      "known": true,
+      "estimated": 4
+     },
+     {
+      "id": 940,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 15.2,
+      "known": true,
+      "estimated": 1
+     },
+     {
+      "id": 953,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 20,
+      "known": true,
+      "estimated": 2
+     },
+     {
+      "id": 1100,
+      "type": "fish_spot",
+      "amount": 7,
+      "d": 27.4,
+      "known": false,
+      "estimated": null
+     },
+     {
+      "id": 1092,
+      "type": "fish_spot",
+      "amount": 1,
+      "d": 28.7,
+      "known": true,
+      "estimated": 6
+     },
+     {
+      "id": 937,
+      "type": "berry_bush",
+      "amount": 1,
+      "d": 29.3,
+      "known": true,
+      "estimated": 3
+     },
+     {
+      "id": 986,
+      "type": "fruit_tree",
+      "amount": 1,
+      "d": 29.5,
+      "known": true,
+      "estimated": 8
+     }
+    ]
+   },
+   "top": [
+    {
+     "key": "flee:0",
+     "kind": "flee",
+     "need": "safety",
+     "util": 123
+    }
+   ],
+   "blockedFood": [
+    "eat_store:1105: remembers it being empty",
+    "gather:938: believes it is empty",
+    "gather:939: believes it is empty",
+    "gather:952: believes it is empty",
+    "gather:948: believes it is empty",
+    "gather:946: believes it is empty",
+    "gather:947: believes it is empty",
+    "gather:950: believes it is empty"
+   ],
+   "criticals": [
+    "hunger"
+   ]
+  }
+ ]
+}

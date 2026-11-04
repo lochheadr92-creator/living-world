@@ -1,0 +1,17 @@
+{
+ "seed": "river",
+ "days": 25,
+ "samples": 1000,
+ "firstBehaviourDiffTick": null,
+ "identicalBehaviour": true,
+ "conserved160": true,
+ "conserved161": true,
+ "alive160": 20,
+ "alive161": 20,
+ "foundEmptyEndings": {
+  "gather": 162,
+  "gather:hunger": 279
+ },
+ "foundEmptyTotal": 441,
+ "gatherStillSomethingBetter": 758
+}
