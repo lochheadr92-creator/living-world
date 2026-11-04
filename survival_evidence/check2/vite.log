@@ -1,0 +1,9 @@
+1:28:39 am [vite] (client) Re-optimizing dependencies because vite config has changed
+
+  VITE v8.3.2  ready in 1596 ms
+
+  ➜  Local:   http://127.0.0.1:5294/
+  ➜  press h + enter to show help
+1:28:41 am [vite] (client) [optimizer] scanning dependencies...
+1:29:57 am [vite] (client) page reload src/ui/entity.ts
+1:29:57 am [vite] (client) page reload src/ui/tooltip.ts

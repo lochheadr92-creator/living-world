@@ -1,0 +1,43 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/hearth.test.ts (4 tests | 1 failed) 72ms
+   × only warms actual occupants and a damaged home loses residual heat faster 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/hearth.test.ts > only warms actual occupants and a damaged home loses residual heat faster
+Error: indoor location does not match home entrance
+ ❯ deserializeWorld src/app/save.ts:351:56
+    349|     if (!hasHabitation(w) || !p.alive || !b || !Number.isInteger(p.ind…
+    350|     const d = doorPoint(b);
+    351|     if (Math.hypot(p.x - d.x, p.y - d.y) > 0.35) throw new Error('indo…
+       |                                                        ^
+    352|   }
+    353|   return w;
+ ❯ tests/hearth.test.ts:55:14
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 4 passed (5)
+   Start at  12:33:58
+   Duration  5.52s (tests 62%, transform 33%, import 5%)
+
+  Transform  transforming modules took 2.24s · 33% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

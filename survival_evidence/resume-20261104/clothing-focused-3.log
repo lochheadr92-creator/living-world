@@ -1,0 +1,42 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/clothing.test.ts (7 tests | 1 failed) 118ms
+   × a carer delivers a spare to a visible cold child who can ready it, without surrendering the worn garment 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/clothing.test.ts > a carer delivers a spare to a visible cold child who can ready it, without surrendering the worn garment
+AssertionError: expected undefined to be defined
+ ❯ tests/clothing.test.ts:59:103
+     57|  const mine=mintTool(w,'garment',0,p.hhId,p.id,p.inv,p.id,'test');mine…
+     58|  const spare=mintTool(w,'garment',0,p.hhId,p.id,p.inv,p.id,'test');per…
+     59|  const o=generateOptions(w,p,true,true).options.find(o=>o.key===`cloth…
+       |                                                                                                       ^
+     60|  startActivity(w,p,o!.make!()!);finish(w,p);expect(mine.holder).toBe(p…
+     61|  const dress=generateOptions(w,child,true,true).options.find(o=>o.key=…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 33 passed (34)
+   Start at  12:51:07
+   Duration  2.25s (transform 84%, import 11%, tests 4%)
+
+  Transform  transforming modules took 3.45s · 84% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

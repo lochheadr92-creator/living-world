@@ -1,0 +1,40 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/livestock.test.ts (10 tests | 1 failed) 1413ms
+   × preserves interrupted acquisition exactly and denies a competing household 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/livestock.test.ts > preserves interrupted acquisition exactly and denies a competing household
+TypeError: Cannot read properties of undefined (reading 'id')
+ ❯ Object.addPerson src/sim/scenes.ts:77:112
+     75| function addPerson(world: World, rng: RNG, spec: PersonSpec): Person {
+     76|   const hh = spec.hh ? world.households.find((h) => h.id === spec.hh)!…
+     77|   const base = createPerson(world, rng, { name: spec.name, sex: spec.s…
+       |                                                                                                                ^
+     78|   base.traits = { generosity: 0.5, sociability: 0.5, caution: 0.5, dil…
+     79|   base.needs.hunger = spec.hunger ?? 80;
+ ❯ addPerson tests/helpers/kit.ts:30:18
+ ❯ tests/livestock.test.ts:22:587
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  1 failed | 11 passed (12)
+   Start at  14:36:12
+   Duration  6.36s (tests 73%, transform 24%, import 3%)
+

@@ -1,0 +1,45 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/livestock.test.ts (26 tests | 1 failed) 6715ms
+   × remembers only personally usable workshop wool and cannot borrow another observer's access 7ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/livestock.test.ts > remembers only personally usable workshop wool and cannot borrow another observer's access
+AssertionError: expected 3 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 3
+
+ ❯ tests/livestock.test.ts:170:59
+    168|  noteDeposit(w,yard,p,'wool',3);learn(w,p,yard);learn(w,q,yard);
+    169|  expect(knownTextileStock(w,p,p.beliefs[yard.id],'wool')).toBe(3);
+    170|  expect(knownTextileStock(w,q,q.beliefs[yard.id],'wool')).toBe(0);
+       |                                                           ^
+    171|  expect(knownTextileStock(w,q,p.beliefs[yard.id],'wool')).toBe(0);
+    172|  expect(demandsOf(generateOptions(w,p,true,true)).some(d=>d.item==='ga…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  1 failed | 50 passed (51)
+   Start at  15:01:26
+   Duration  8.32s (tests 75%, transform 21%, import 3%)
+

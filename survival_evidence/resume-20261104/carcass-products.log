@@ -1,0 +1,85 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/carcass.test.ts (8 tests | 1 failed) 99ms
+   × turns recovered hide and fibre into an owned, wearable garment after paid work 6ms
+ ❯ tests/v124_continuation.test.ts (1 test | 1 failed) 4145ms
+   × preserves recorded rules-124 ordinary and paid textile continuations 4145ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/carcass.test.ts > turns recovered hide and fibre into an owned, wearable garment after paid work
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/carcass.test.ts:54:104
+     52|  const body=makeCarcass(w,deer,p)!;cut(w,p,body.id,'hide');finish(w,p)…
+     53|  transfer(w,p.inv,yard.store.items,yard.store.cap,'hide',1,`person:${p…
+     54|  expect(generateOptions(w,p,true,true).options.some(o=>o.key===`operat…
+       |                                                                                                        ^
+     55|  expect(startJob(w,yard,p,RECIPE_BY_ID.sew_hide_garment,p.id,'insulati…
+     56|  for(let i=0;i<200&&yard.ops!.job;i++){w.tick++;workJob(w,yard,p);}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/v124_continuation.test.ts > preserves recorded rules-124 ordinary and paid textile continuations
+AssertionError: expected { ordinary: { …(3) }, …(6) } to deeply equal { ordinary: { …(3) }, …(6) }
+
+- Expected
++ Received
+
+@@ -15,13 +15,13 @@
+        "wet": 0.0893999999999996,
+      },
+      "wear": 0.6160000000000004,
+    },
+    "ordinary": {
+-     "continued": "97bb1b53a00b352dc928d7897b085e3555bed5b18ee38fccc06b2a7e6ff1deec",
+-     "saved": "d96c971a1f60a8ac3d398ebc7f3e1e41168aa9d5c26bbfd4873771723d07d5de",
+-     "uninterrupted": "97bb1b53a00b352dc928d7897b085e3555bed5b18ee38fccc06b2a7e6ff1deec",
++     "continued": "d4abd157ec800cf74d1d25dc60af98bbe942847dc621ab9e6022b1d4dc1551e1",
++     "saved": "3fd91e61182e368fef29d113372303c4e8dc2be4c000d0e1f09508ceb0b2b10e",
++     "uninterrupted": "d4abd157ec800cf74d1d25dc60af98bbe942847dc621ab9e6022b1d4dc1551e1",
+    },
+    "paidFibre": 3,
+    "paidWood": 1,
+    "weaving": {
+      "continued": "f7c0a296e9a0350866f9d0764990ddcde1fac2094b993e4d42d247562aeb64b2",
+
+ ❯ tests/v124_continuation.test.ts:5:96
+      3| import {v124Continuation} from './helpers/v124ref';
+      4| it('preserves recorded rules-124 ordinary and paid textile continuatio…
+      5|  const {source,...recorded}=expected;expect(source.rules).toBe(124);ex…
+       |                                                                                                ^
+      6| });
+      7|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  2 failed | 2 passed (4)
+      Tests  2 failed | 55 passed (57)
+   Start at  13:38:28
+   Duration  5.56s (tests 47%, transform 46%, import 7%)
+
+  Transform  transforming modules took 4.73s · 46% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

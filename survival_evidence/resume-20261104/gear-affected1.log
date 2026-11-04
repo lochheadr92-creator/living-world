@@ -1,0 +1,43 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/passive_gear.test.ts (12 tests | 1 failed) 565ms
+   × flood loss removes deployed equipment and leaves a valid conserved save 465ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/passive_gear.test.ts > flood loss removes deployed equipment and leaves a valid conserved save
+Error: invalid saved indoor location
+ ❯ deserializeWorld src/app/save.ts:355:84
+    353|     if (p.indoors === undefined) continue;
+    354|     const b = indoorHome(w, p);
+    355|     if (!hasHabitation(w) || !p.alive || !b || !Number.isInteger(p.ind…
+       |                                                                                    ^
+    356|     const d = doorPoint(b);
+    357|     if (Math.hypot(p.x - d.x, p.y - d.y) > 0.35) throw new Error('indo…
+ ❯ tests/passive_gear.test.ts:83:175
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 3 passed (4)
+      Tests  1 failed | 42 passed (43)
+   Start at  14:06:20
+   Duration  2.03s (transform 68%, tests 22%, import 10%)
+
+  Transform  transforming modules took 4.53s · 68% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

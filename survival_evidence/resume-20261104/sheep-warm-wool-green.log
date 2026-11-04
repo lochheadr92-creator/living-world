@@ -1,0 +1,61 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/livestock.test.ts (25 tests | 2 failed) 6939ms
+   × turns three recurring paid fleeces into delivered, owned and worn insulation 17ms
+   × uses a warm working opportunity for enough collected wool without demanding unfunded textiles 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/livestock.test.ts > turns three recurring paid fleeces into delivered, owned and worn insulation
+AssertionError: operate:5:weave_wool_garment: expected undefined to be defined
+ ❯ work tests/livestock.test.ts:19:173
+
+ ❯ tests/livestock.test.ts:68:71
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/livestock.test.ts > uses a warm working opportunity for enough collected wool without demanding unfunded textiles
+AssertionError: expected [] to deeply equal [ 'garment', 'blanket' ]
+
+- Expected
++ Received
+
+- [
+-   "garment",
+-   "blanket",
+- ]
++ []
+
+ ❯ tests/livestock.test.ts:160:64
+    158|  const wants=()=>demandsOf(generateOptions(w,p,true,true)).filter(d=>[…
+    159|  expect(wants()).toHaveLength(0);produce(w,p.inv,carryCap(w,p),'wool',…
+    160|  const before=serializeWorld(w);expect(wants().map(d=>d.item)).toEqual…
+       |                                                                ^
+    161|  consume(w,p.inv,'wool',1,'staged missing third fleece');expect(wants(…
+    162| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 4 passed (5)
+      Tests  2 failed | 72 passed (74)
+   Start at  15:00:27
+   Duration  8.61s (tests 64%, transform 32%, import 5%)
+
+  Transform  transforming modules took 6.43s · 32% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

@@ -1,0 +1,19 @@
+node:fs:1411
+  const result = binding.mkdir(
+                         ^
+
+Error: ENOENT: no such file or directory, mkdir 'C:\dev\Claude Experiment\living-world-integrate\survival_evidence\clothing-current-replay\river'
+    at mkdirSync (node:fs:1411:26)
+    at C:\dev\Claude Experiment\living-world-integrate\scripts\clothing_source_replay.ts:15:1
+    at ViteNodeRunner.runModule (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:369:4)
+    at ViteNodeRunner.directRequest (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:349:3)
+    at ViteNodeRunner.cachedRequest (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:182:11)
+    at ViteNodeRunner.executeFile (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/client-C7yCjfvf.mjs:157:10)
+    at CAC.run (file:///C:/dev/Claude%20Experiment/living-world-integrate/node_modules/vite-node/dist/cli.mjs:95:28) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'mkdir',
+  path: 'C:\\dev\\Claude Experiment\\living-world-integrate\\survival_evidence\\clothing-current-replay\\river'
+}
+
+Node.js v24.19.0

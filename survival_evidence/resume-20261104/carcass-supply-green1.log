@@ -1,0 +1,69 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/carcass_supply.test.ts (8 tests | 2 failed) 92ms
+   × does not plan with an unknown, foreign or old body 7ms
+   × keeps the predecessor planning path unchanged 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/carcass_supply.test.ts > does not plan with an unknown, foreign or old body
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/carcass_supply.test.ts:37:41
+     35| it('does not plan with an unknown, foreign or old body',()=>{
+     36|  const {w,p,body}=scene();const plan=()=>compileProject(generateOption…
+     37|  delBelief(p,body.id);expect(plan().ok).toBe(false);
+       |                                         ^
+     38|  body.carcass!.hhId=p.hhId+999;learn(w,p,body);expect(plan().ok).toBe(…
+     39|  body.carcass!.hhId=p.hhId;learn(w,p,body);w.tick+=4801;expect(plan().…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/carcass_supply.test.ts > keeps the predecessor planning path unchanged
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/carcass_supply.test.ts:43:95
+     41| it('keeps the predecessor planning path unchanged',()=>{
+     42|  const {w,p}=scene();w.settings.rulesVersion=129;
+     43|  expect(compileProject(generateOptions(w,p,true,true),{item:'garment',…
+       |                                                                                               ^
+     44| });
+     45| function work(w:ReturnType<typeof scene>['w'],p:ReturnType<typeof scen…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  2 failed | 7 passed (9)
+   Start at  15:11:22
+   Duration  8.31s (tests 70%, transform 26%, import 4%)
+
+  Transform  transforming modules took 2.56s · 26% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

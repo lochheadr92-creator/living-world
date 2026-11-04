@@ -1,0 +1,69 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/passive_gear.test.ts (17 tests | 2 failed) 661ms
+   × collects the household record rather than borrowing another household gear from a shared rack 7ms
+   × does not plan collection of unusable foreign gear and keeps storage ownership 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/passive_gear.test.ts > collects the household record rather than borrowing another household gear from a shared rack
+AssertionError: expected 6 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 6
+
+ ❯ tests/passive_gear.test.ts:113:22
+    111|  const fish=makeSource(w,'fish_spot',41,40,3);done(s);learn(w,p,yard);…
+    112|  const get=generateOptions(w,p,true,true).options.find(o=>o.key===`col…
+    113|  expect(mine.holder).toBe(p.id);expect(mine.loan).toBeNull();expect(ot…
+       |                      ^
+    114|  const place=generateOptions(w,p,true,true).options.find(o=>o.key===`g…
+    115| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/passive_gear.test.ts > does not plan collection of unusable foreign gear and keeps storage ownership
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/passive_gear.test.ts:121:91
+    119|  mintTool(w,'net',0,q.hhId,yard.id,yard.store.items,q.id,'fixture',fal…
+    120|  const fish=makeSource(w,'fish_spot',41,40,3);done(s);learn(w,p,yard);…
+    121|  expect(generateOptions(w,p,true,true).options.some(o=>o.key===`collec…
+       |                                                                                           ^
+    122|  startActivity(w,p,newActivity(w,p,{kind:'deposit',label:'Store trap',…
+    123|  expect(mine.ownerHh).toBe(p.hhId);expect(conservationReport(w).ok).to…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  2 failed | 19 passed (21)
+   Start at  14:10:31
+   Duration  6.13s (tests 58%, transform 36%, import 6%)
+
+  Transform  transforming modules took 3.51s · 36% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

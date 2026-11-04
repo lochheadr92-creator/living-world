@@ -1,0 +1,8 @@
+
+> living-world@1.0.0 typecheck
+> tsc --noEmit
+
+tests/nourishment.test.ts(28,303): error TS2322: Type '"sleep" | "idle"' is not assignable to type 'PoseKind'.
+  Type '"idle"' is not assignable to type 'PoseKind'.
+tests/zz_review_f_plank_diversion.test.ts(27,89): error TS18047: 'ben' is possibly 'null'.
+tests/zz_review_main_mature_large.test.ts(23,277): error TS18047: 'v' is possibly 'null'.

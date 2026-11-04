@@ -1,0 +1,1 @@
+{"normalizedFinalEqual":true,"checks":[{"tick":50537,"person":905,"outcome":"success","log":{"tick":50537,"text":"Checked the trap: empty.","kind":"work"}},{"tick":58812,"person":905,"outcome":"success","log":{"tick":58812,"text":"Checked the trap: no recoverable catch remains.","kind":"work"}}]}

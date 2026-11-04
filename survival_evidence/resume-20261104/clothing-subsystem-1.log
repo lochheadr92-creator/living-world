@@ -1,0 +1,43 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/workshops.test.ts (27 tests | 1 failed) 58ms
+   ❯ the recipe table is a closed, acyclic accounting (4)
+     × every chain can be started from nothing but hand tools: planks need no saw, and a saw needs no iron 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/workshops.test.ts > the recipe table is a closed, acyclic accounting > every chain can be started from nothing but hand tools: planks need no saw, and a saw needs no iron
+AssertionError: expected [ 'wood', 'clay', 'planks', 'handles' ] to include 'fibre'
+ ❯ tests/workshops.test.ts:79:92
+     77|     // wood, stone, clay, ore and grain come out of the ground by hand…
+     78|     for (const r of RECIPES.filter((x) => x.at === 'timber_yard' || x.…
+     79|       for (const k of Object.keys(r.inputs)) expect(['wood', 'clay', '…
+       |                                                                                            ^
+     80|     }
+     81|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 5 passed (6)
+      Tests  1 failed | 40 passed (41)
+   Start at  12:50:21
+   Duration  8.14s (transform 50%, tests 42%, import 8%)
+
+  Transform  transforming modules took 8.82s · 50% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

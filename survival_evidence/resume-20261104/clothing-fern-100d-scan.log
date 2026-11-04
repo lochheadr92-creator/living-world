@@ -1,0 +1,18 @@
+fern 27 {
+  made: { fibre: 153, garment: 25, blanket: 6, bedding: 2 },
+  remaining: 21,
+  repairFibre: 38
+} {
+  'protected ticks:garment:adult': 1450711,
+  'degree ticks:garment:adult': 3989379.2936594873,
+  'protected ticks:blanket:adult': 63121,
+  'degree ticks:blanket:adult': 176120.5042076987,
+  'protected ticks:garment:child': 66774,
+  'degree ticks:garment:child': 178793.1836396116,
+  'protected ticks:garment:youth': 95761,
+  'degree ticks:garment:youth': 267833.8980621869,
+  'protected ticks:bedding:adult': 16384,
+  'degree ticks:bedding:adult': 53152.19796120003,
+  'protected ticks:blanket:youth': 10584,
+  'degree ticks:blanket:youth': 32853.5893272683
+}

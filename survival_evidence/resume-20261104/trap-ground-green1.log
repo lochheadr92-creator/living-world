@@ -1,0 +1,77 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/v126_continuation.test.ts (1 test | 1 failed) 3984ms
+   × preserves recorded rules-126 ordinary and paid gear manufacture/placement/waiting continuations 3983ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/v126_continuation.test.ts > preserves recorded rules-126 ordinary and paid gear manufacture/placement/waiting continuations
+AssertionError: expected { ordinary: { …(3) }, …(6) } to deeply equal { ordinary: { …(3) }, …(6) }
+
+- Expected
++ Received
+
+@@ -37,13 +37,13 @@
+      "continued": "b86f28d6ef06c55d019f01a548ee6fbd9fb6dbafcd5341159f6512d44070eecf",
+      "saved": "ed3d17c9ea1a60acb0c708f0560a1d72dae681529758f4089378dc734fefc57d",
+      "uninterrupted": "b86f28d6ef06c55d019f01a548ee6fbd9fb6dbafcd5341159f6512d44070eecf",
+    },
+    "placing": {
+-     "continued": "007055c2790e3faf804b6fca4dba7447fee23585df6c9e7f66e7162ad449f325",
+-     "saved": "e8f6afce45bf2fcbd7f452ff3fcca0a5bd072de91b8abe55bc8a199430170099",
+-     "uninterrupted": "007055c2790e3faf804b6fca4dba7447fee23585df6c9e7f66e7162ad449f325",
++     "continued": "1e694707f5d24e76f393114b83292ab7ac8de5224ed37bd7bc4f29c6849204d7",
++     "saved": "dc9c4f1c1db2c8082744ef9e95770720d306f13d4740ffcaa121efdd6e69814d",
++     "uninterrupted": "1e694707f5d24e76f393114b83292ab7ac8de5224ed37bd7bc4f29c6849204d7",
+    },
+    "tool": {
+      "ent": "tool",
+      "holder": 11,
+      "id": 7,
+@@ -54,10 +54,10 @@
+      "ownerHh": 1,
+      "tier": 0,
+      "wear": 10,
+    },
+    "waiting": {
+-     "continued": "aa8e1d288d68fe23a33fe5e04d1241783629f2241568e8ba0f1266a9534ea491",
++     "continued": "42b835f561c692b7ae4b4ada6486ed12adfca2ac77b3ccfd04401e84929f1c7a",
+      "saved": "aaf7422132d755f2fbbb7e3e66ba59e440b0d86649d426752acd91168ab16e5d",
+-     "uninterrupted": "aa8e1d288d68fe23a33fe5e04d1241783629f2241568e8ba0f1266a9534ea491",
++     "uninterrupted": "42b835f561c692b7ae4b4ada6486ed12adfca2ac77b3ccfd04401e84929f1c7a",
+    },
+  }
+
+ ❯ tests/v126_continuation.test.ts:5:96
+      3| import {v126Continuation} from './helpers/v126ref';
+      4| it('preserves recorded rules-126 ordinary and paid gear manufacture/pl…
+      5|  const {source,...recorded}=expected;expect(source.rules).toBe(126);ex…
+       |                                                                                                ^
+      6| });
+      7|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  1 failed | 3 passed (4)
+   Start at  14:21:32
+   Duration  5.32s (tests 61%, transform 34%, import 5%)
+
+  Transform  transforming modules took 2.23s · 34% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

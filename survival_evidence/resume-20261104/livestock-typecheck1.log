@@ -1,0 +1,9 @@
+
+> living-world@1.0.0 typecheck
+> tsc --noEmit
+
+src/sim/dialogue.ts(60,14): error TS2741: Property 'wool' is missing in type '{ rendered_fat: string; hide: string; fat: string; net: string; trap: string; fibre: string; garment: string; blanket: string; bedding: string; dried_fish: string; smoked_fish: string; dried_meat: string; ... 27 more ...; spear: string; }' but required in type 'Record<ItemKind, string>'.
+src/sim/labels.ts(102,14): error TS2741: Property 'wool' is missing in type '{ rendered_fat: string; hide: string; fat: string; net: string; trap: string; fibre: string; garment: string; blanket: string; bedding: string; dried_fish: string; smoked_fish: string; dried_meat: string; ... 27 more ...; spear: string; }' but required in type 'Record<ItemKind, string>'.
+src/sim/social.ts(190,9): error TS2741: Property 'wool' is missing in type '{ rendered_fat: number; hide: number; fat: number; net: number; trap: number; fibre: number; garment: number; blanket: number; bedding: number; dried_fish: number; smoked_fish: number; dried_meat: number; ... 27 more ...; spear: number; }' but required in type 'Record<ItemKind, number>'.
+tests/zz_review_f_plank_diversion.test.ts(27,89): error TS18047: 'ben' is possibly 'null'.
+tests/zz_review_main_mature_large.test.ts(23,277): error TS18047: 'v' is possibly 'null'.

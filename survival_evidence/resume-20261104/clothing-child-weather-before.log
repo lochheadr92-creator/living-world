@@ -1,0 +1,45 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/clothing.test.ts (17 tests | 1 failed | 16 skipped) 23ms
+   × a carer can prepare a visible unclothed child for observed cold weather before the child is already chilled 22ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/clothing.test.ts > a carer can prepare a visible unclothed child for observed cold weather before the child is already chilled
+AssertionError: expected undefined to be 2 // Object.is equality
+
+- Expected:
+2
+
++ Received:
+undefined
+
+ ❯ tests/clothing.test.ts:169:85
+    167|  const s=fixture(),{w,p}=s,child=addPerson(s,'Child',41,40,{age:6,hh:p…
+    168|  child.needs.warmth=90;p.needs.warmth=90;w.weather.temp=5;mintTool(w,'…
+    169|  expect(demandsOf(generateOptions(w,p,true,true)).find(d=>d.item==='ga…
+       |                                                                                     ^
+    170|  mintTool(w,'garment',0,p.hhId,p.id,p.inv,p.id,'test');
+    171|  expect(generateOptions(w,p,true,true).options.some(o=>o.key===`clothe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 16 skipped (17)
+   Start at  13:16:06
+   Duration  1.97s (transform 88%, import 11%, tests 1%)
+

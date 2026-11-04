@@ -1,0 +1,9 @@
+Set-Content : The process cannot access the file 'C:\dev\Claude 
+Experiment\living-world-integrate\survival_evidence\aggregate-baseline\status.json' because it is being used by 
+another process.
+At C:\dev\Claude Experiment\living-world-integrate\survival_evidence\aggregate-baseline\launch.ps1:35 char:229
++ ... ults=$results}|ConvertTo-Json -Depth 6|Set-Content "$out/status.json"
++                                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Set-Content], IOException
+    + FullyQualifiedErrorId : System.IO.IOException,Microsoft.PowerShell.Commands.SetContentCommand
+ 

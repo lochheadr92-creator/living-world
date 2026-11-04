@@ -1,0 +1,85 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/trap_ground.test.ts (3 tests | 3 failed) 26ms
+   × uses a personally witnessed deer ground rather than the closest tree 19ms
+   × does not invent wildlife knowledge from an unobserved live deer 3ms
+   × keeps at most four dated deer sightings and does not grant this memory to old rules 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/trap_ground.test.ts > uses a personally witnessed deer ground rather than the closest tree
+AssertionError: expected 4 to be 5 // Object.is equality
+
+- Expected
++ Received
+
+- 5
++ 4
+
+ ❯ tests/trap_ground.test.ts:15:27
+     13|  const {w,p,near,ground,t}=scene(),deer=makeWolf(w,46.5,41.5,'deer');r…
+     14|  const option=generateOptions(w,p,true,true).options.find(o=>o.kind===…
+     15|  expect(option?.targetId).toBe(ground.id);expect(option?.targetId).not…
+       |                           ^
+     16|  deer.x=80;deer.y=70;rebuildMobileGrid(w);const saved=serializeWorld(w…
+     17|  expect(generateOptions(w,p,true,true).options.some(o=>o.key===`gear:p…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/trap_ground.test.ts > does not invent wildlife knowledge from an unobserved live deer
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/trap_ground.test.ts:22:181
+     20| it('does not invent wildlife knowledge from an unobserved live deer',(…
+     21|  const {w,p}=scene();makeWolf(w,80,70,'deer');rebuildMobileGrid(w);per…
+     22|  expect(Object.values(p.beliefs).some(b=>b.kind==='prey')).toBe(false)…
+       |                                                                                                                                                                                     ^
+     23| });
+     24| it('keeps at most four dated deer sightings and does not grant this me…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/trap_ground.test.ts > keeps at most four dated deer sightings and does not grant this memory to old rules
+AssertionError: expected [] to have a length of 4 but got +0
+
+- Expected
++ Received
+
+- 4
++ 0
+
+ ❯ tests/trap_ground.test.ts:26:62
+     24| it('keeps at most four dated deer sightings and does not grant this me…
+     25|  const {w,p}=scene();for(let n=0;n<8;n++){w.tick++;makeWolf(w,44+n*.1,…
+     26|  expect(Object.values(p.beliefs).filter(b=>b.kind==='prey')).toHaveLen…
+       |                                                              ^
+     27|  const old=scene();old.w.settings.rulesVersion=126;const deer=makeWolf…
+     28| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  14:21:14
+   Duration  1.51s (transform 87%, import 11%, tests 2%)
+

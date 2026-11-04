@@ -1,0 +1,38 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/livestock.test.ts (13 tests | 1 failed) 1494ms
+   × weaves recovered wool through paid workshop work, ownership, collection and dressing 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/livestock.test.ts > weaves recovered wool through paid workshop work, ownership, collection and dressing
+AssertionError: expected undefined to be defined
+ ❯ tests/livestock.test.ts:44:15
+     42|  expect(w.ledger.consumed.wool).toBe(3);expect(yard.store.items.garmen…
+     43|  learn(w,p,yard);const take=generateOptions(w,p,true,true).options.fin…
+     44|  expect(take).toBeDefined();startActivity(w,p,take!.make!()!);for(let …
+       |               ^
+     45|  const garment=w.tools.find(t=>t.kind==='garment'&&t.holder===p.id)!;e…
+     46|  work(w,p,`dress:${garment.id}`);expect(clothingWarmth(w,p)).toBe(6);e…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 6 passed (7)
+      Tests  1 failed | 79 passed (80)
+   Start at  14:38:02
+   Duration  6.79s (tests 73%, transform 20%, import 6%)
+

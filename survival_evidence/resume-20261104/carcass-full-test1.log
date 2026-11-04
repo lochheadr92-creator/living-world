@@ -1,0 +1,88 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/zz_review_g_stale_blocked.test.ts (1 test | 1 failed) 15ms
+   × a one-tick blocked doorway leaves "home exit is blocked" on the activity for the whole walk 14ms
+ ❯ tests/zz_review_b_undefined_keyorder.test.ts (1 test | 1 failed) 13ms
+   × REVIEW B: upgrading set, cleared with undefined, loaded, set again => text differs while state is equal 12ms
+ ❯ tests/zz_review_b_roundtrip.test.ts (3 tests | 3 failed) 161ms
+   ❯ REVIEW B: save/load round trip then continue, natural rules-115 world (3)
+     × river: byte-identical continuation after loading at 600/3000/6000 91ms
+     × meadow: byte-identical continuation after loading at 600/3000/6000 46ms
+     × forest: byte-identical continuation after loading at 600/3000/6000 23ms
+ ❯ tests/zz_review_f_acquire_double_count.test.ts (7 tests | 4 failed) 465ms
+   × DOCUMENTED DEFECT at HEAD: one stone short of the hammer, beside a known rock, she never fetches it in a day 204ms
+   × DOCUMENTED DEFECT at HEAD: with an ordinary pack (room for one stone a trip) she fetches the first stone and then stalls for a day and a half 118ms
+   × DOCUMENTED DEFECT at HEAD: even with room for both stones, the two-stone gather is interrupted after the first unit and never resumed 23ms
+   × CONTRACT (flip to `it` with the same correction): with room for both stones she makes the hammer within a day and a half 44ms
+stdout | tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation
+rules version of the staged product world: 125
+
+ ❯ tests/zz_review_a_tools.test.ts (4 tests | 3 failed) 882ms
+   ❯ review A: tool records and counts (4)
+     × defect: taking the rack saw while the yard worker has it on the bench strands the record on the building 180ms
+     × defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation 384ms
+     × the same strand happens through economy.transfer directly (the call the withdraw handler makes) 82ms
+stdout | tests/zz_review_a_flood_tools.test.ts > review A: flood and tool records > a flooded pile loses its axe count but keeps the axe record
+flood at tick 7 pile axe now 0 ledger spoiled axe + 1
+
+ ❯ tests/zz_review_a_flood_tools.test.ts (1 test | 1 failed) 1548ms
+   ❯ review A: flood and tool records (1)
+     × a flooded pile loses its axe count but keeps the axe record 1547ms
+ ❯ tests/zz_review_g_ledger_endings.test.ts (3 tests | 3 failed) 7972ms
+   × natural run: ledger entries whose activity was dropped without endActivity stay open ("ending not recorded"); real endings always close 6934ms
+   × unit: a suspended activity that expires is dropped by resumeSuspended with no ending anywhere (ledger open, lastResult and log untouched) 786ms
+   × the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it 251ms
+ ❯ tests/zz_review_g_feed_caps.test.ts (1 test | 1 failed) 19802ms
+   × feed/chronicle/log reach after two river days (immigration on, as the product world runs) 19802ms
+ ❯ tests/zz_review_main_site_fate.test.ts (1 test | 1 failed) 24407ms
+   ❯ REVIEW: fate of a promised site versus what the helper says (1)
+     × forest, 6,000 ticks: site #2280 events, buildings on its footprint, helper commitment text 24406ms
+ ❯ tests/zz_review_b_observer_purity.test.ts (1 test | 1 failed) 47603ms
+   × REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin 47602ms
+ ❯ tests/lab_provenance.test.ts (2 tests | 2 failed) 62120ms
+   × retains runner and measurement source, reports it, resumes only the same content, and refuses changed content 61179ms
+   × rejects a source change against the start snapshot 939ms
+ ❯ tests/zz_review_main_toolreport_saves.test.ts (2 tests | 1 failed) 143102ms
+   ❯ REVIEW: tool registry consistency in retained and fresh worlds (2)
+     × fresh current-rules worlds, 12,000 ticks, checked every 600 ticks 140164ms
+(node:34044) TimeoutOverflowWarning: 1099511627776 does not fit into a 32-bit signed integer.
+Timeout duration was set to 1.
+(Use `node --trace-warnings ...` to show where the warning was created)
+ ❯ tests/zz_review_b_validators.test.ts (7 tests | 7 failed) 281351ms
+   ❯ REVIEW B: validators against engine-produced rules-115 worlds (7)
+     × natural river, Normal, 8 days, save+load every 1200 ticks 97638ms
+     × natural meadow, Normal, 8 days, save+load every 1200 ticks 89004ms
+     × natural forest, Normal, 8 days, save+load every 1200 ticks 90975ms
+     × scene meal at rules 115, 3 days, save+load every 600 ticks 1153ms
+     × scene haul at rules 115, 3 days, save+load every 600 ticks 772ms
+     × scene care at rules 115, 3 days, save+load every 600 ticks 947ms
+     × scene workshop at rules 115, 3 days, save+load every 600 ticks 860ms
+ ❯ tests/lab_defaults.test.ts (3 tests | 3 failed) 30181ms
+   ❯ current lab defaults cannot silently reuse legacy results (2)
+     × rejects existing undefined rows before starting workers or touching outputs 10072ms
+     × rejects existing authored rows before starting workers or touching outputs 10063ms
+   × refuses to resume ordinary lab rows as a geology generation comparison 10044ms
+ ❯ tests/lab_report.test.ts (2 tests | 1 failed) 40066ms
+   × reports an unavailable contrast without inventing a result and keeps story output 20244ms
+ ❯ tests/zz_review_h_retention.test.ts (3 tests | 3 skipped) 10734ms
+ ❯ tests/zz_review_b_validators_harsh.test.ts (3 tests | 3 failed) 351176ms
+   ❯ REVIEW B: validators, harsher worlds (3)
+     × harsh river, Normal, 10 days, save+load every 1200 ticks 78324ms
+     × harsh forest, Normal, 10 days, save+load every 1200 ticks 77269ms
+     × meadow, Normal, 16 days through winter, save+load every 1200 ticks 195581ms
+ ❯ tests/carcass.test.ts (15 tests | 2 failed) 318ms
+   × a dated carcass observation never exposes loose food and stale remote knowledge does not refresh itself 19ms
+   × charges ordinary heavy-work needs and resumes an active mid-cut save without duplicate output 4ms

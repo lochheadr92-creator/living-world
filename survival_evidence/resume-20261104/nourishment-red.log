@@ -1,0 +1,67 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/nourishment.test.ts (3 tests | 3 failed) 29ms
+   × allocates one consumed portion once between immediate hunger and finite nourishment 14ms
+   × new people start with no nourishment despite an initially comfortable hunger meter 7ms
+   × does not recover health from unpaid satiety alone 6ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/nourishment.test.ts > allocates one consumed portion once between immediate hunger and finite nourishment
+AssertionError: expected 62 to be close to 59, received difference is 3, but expected 5e-11
+ ❯ tests/nourishment.test.ts:11:147
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/nourishment.test.ts > new people start with no nourishment despite an initially comfortable hunger meter
+AssertionError: expected undefined to be +0 // Object.is equality
+
+- Expected:
+0
+
++ Received:
+undefined
+
+ ❯ tests/nourishment.test.ts:12:169
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/nourishment.test.ts > does not recover health from unpaid satiety alone
+AssertionError: expected 50.03 to be 50 // Object.is equality
+
+- Expected
++ Received
+
+- 50
++ 50.03
+
+ ❯ tests/nourishment.test.ts:13:142
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  15:30:47
+   Duration  25.82s (transform 99%, import 1%)
+
+  Transform  transforming modules took 24.56s · 99% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

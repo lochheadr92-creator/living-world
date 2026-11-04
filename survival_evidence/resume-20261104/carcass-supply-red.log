@@ -1,0 +1,80 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/carcass_supply.test.ts (3 tests | 3 failed) 38ms
+   × can plan a hide garment from a personally known owned body and paid binding 26ms
+   × offers recovery of the needed hide for the garment route instead of requiring an already recovered hide 7ms
+   × recognises recoverable fat as a possible paid food route at a known rack 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/carcass_supply.test.ts > can plan a hide garment from a personally known owned body and paid binding
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/carcass_supply.test.ts:20:111
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/carcass_supply.test.ts > offers recovery of the needed hide for the garment route instead of requiring an already recovered hide
+AssertionError: expected 'use the finite body before it decays' to match /insulation|garment/
+
+- Expected:
+/insulation|garment/
+
++ Received:
+"use the finite body before it decays"
+
+ ❯ tests/carcass_supply.test.ts:25:42
+     23| it('offers recovery of the needed hide for the garment route instead o…
+     24|  const {w,p,body}=scene(),ctx=generateOptions(w,p,true,true),o=ctx.opt…
+     25|  expect(o).toBeDefined();expect(o!.goal).toMatch(/insulation|garment/);
+       |                                          ^
+     26| });
+     27| it('recognises recoverable fat as a possible paid food route at a know…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/carcass_supply.test.ts > recognises recoverable fat as a possible paid food route at a known rack
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/carcass_supply.test.ts:28:105
+     26| });
+     27| it('recognises recoverable fat as a possible paid food route at a know…
+     28|  const {w,p}=scene();expect(demandsOf(generateOptions(w,p,true,true)).…
+       |                                                                                                         ^
+     29| });
+     30|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed (3)
+   Start at  15:08:07
+   Duration  1.83s (transform 86%, import 11%, tests 2%)
+

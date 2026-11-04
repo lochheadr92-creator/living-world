@@ -1,0 +1,12 @@
+fern 29 {
+  made: { fibre: 42, garment: 10, blanket: 1, bedding: 0 },
+  remaining: 11,
+  repairFibre: 7
+} {
+  'protected ticks:garment:adult': 327475,
+  'degree ticks:garment:adult': 1017305.2213216138,
+  'protected ticks:blanket:adult': 13549,
+  'degree ticks:blanket:adult': 40665.06219642282,
+  'protected ticks:garment:child': 2362,
+  'degree ticks:garment:child': 6142.078397066624
+}

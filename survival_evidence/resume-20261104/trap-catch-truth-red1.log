@@ -1,0 +1,63 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/trap_catch_truth.test.ts (3 tests | 2 failed) 48ms
+   × reports a lost catch honestly after a paid check, without inventing a remaining body 28ms
+   × does not call an empty carcass awaiting cleanup recoverable in the inspector or check log 14ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/trap_catch_truth.test.ts > reports a lost catch honestly after a paid check, without inventing a remaining body
+AssertionError: expected '[{"tick":5072,"text":"Checked the tra…' to contain 'Checked the trap: no recoverable catc…'
+
+Expected: "Checked the trap: no recoverable catch remains."
+Received: "[{"tick":5072,"text":"Checked the trap: a body needs butchering.","kind":"work"}]"
+
+ ❯ tests/trap_catch_truth.test.ts:27:32
+     25|  const {w,p,pile,body,check}=scene();w.tick=body.since+CARCASS_LIFETIM…
+     26|  expect(w.byId.has(body.id)).toBe(false);check();
+     27|  expect(JSON.stringify(p.log)).toContain('Checked the trap: no recover…
+       |                                ^
+     28|  expect(pile.gear!.bodyId).toBe(body.id);expect(conservationReport(w).…
+     29|  expect(serializeWorld(deserializeWorld(serializeWorld(w)))).toBe(seri…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/trap_catch_truth.test.ts > does not call an empty carcass awaiting cleanup recoverable in the inspector or check log
+AssertionError: expected 'Body awaiting butchery' not to contain 'awaiting butchery'
+
+Expected: "awaiting butchery"
+Received: "Body awaiting butchery"
+
+ ❯ tests/trap_catch_truth.test.ts:34:28
+     32|  const {w,p,pile,body,check}=scene();w.tick=body.since+CARCASS_LIFETIM…
+     33|  const before=serializeWorld(w),view=describeEntity(w,pile.id)!;
+     34|  expect(view.subtitle).not.toContain('awaiting butchery');expect(JSON.…
+       |                            ^
+     35|  expect(serializeWorld(w)).toBe(before);check();expect(JSON.stringify(…
+     36|  expect(conservationReport(w).ok).toBe(true);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  15:52:53
+   Duration  3.77s (transform 90%, import 8%, tests 1%)
+
+  Transform  transforming modules took 3.20s · 90% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

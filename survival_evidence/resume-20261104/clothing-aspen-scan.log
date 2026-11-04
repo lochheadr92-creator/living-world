@@ -1,0 +1,12 @@
+aspen 32 {
+  made: { fibre: 36, garment: 10, blanket: 0, bedding: 0 },
+  remaining: 8,
+  repairFibre: 3
+} {
+  'protected ticks:garment:child': 86217,
+  'degree ticks:garment:child': 249081.04382609177,
+  'protected ticks:garment:adult': 270297,
+  'degree ticks:garment:adult': 707793.5338219719,
+  'protected ticks:garment:youth': 9142,
+  'degree ticks:garment:youth': 37508.04579356088
+}

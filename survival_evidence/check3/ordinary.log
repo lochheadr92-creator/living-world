@@ -1,0 +1,11 @@
+Started production-forest, PID 26240
+Started production-river, PID 46540
+Results: C:\dev\Claude Experiment\living-world-integrate\survival_evidence\check3\ordinary
+
+Run               Complete ExitCode StopReason DaysReached Alive Conserved Failure
+---               -------- -------- ---------- ----------- ----- --------- -------
+production-forest     True        0 horizon             25     3      True        
+production-river      True        0 horizon             25    16      True        
+
+
+BATCH FINISHED. Complete requires a captured zero exit code, full horizon and passing integrity checks.

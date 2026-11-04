@@ -1,0 +1,45 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/clothing.test.ts (9 tests | 1 failed) 123ms
+   × offers paid fibre and weaving at the actual workshop, collects the output and dresses 9ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/clothing.test.ts > offers paid fibre and weaving at the actual workshop, collects the output and dresses
+AssertionError: expected undefined to be 'garment' // Object.is equality
+
+- Expected:
+"garment"
+
++ Received:
+undefined
+
+ ❯ tests/clothing.test.ts:44:60
+     42|  const s=fixture(),{w,p}=s;p.needs.warmth=40;w.weather.temp=0;
+     43|  const yard=building(s,'timber_yard',42,42,p.hhId,{wood:2});snapshotIn…
+     44|  expect(batchWanted(generateOptions(w,p,true,true))?.item).toBe('garme…
+       |                                                            ^
+     45|  for(const recipe of ['strip_fibre','weave_garment']){
+     46|   const option=generateOptions(w,p,true,true).options.find(o=>o.kind==…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 8 passed (9)
+   Start at  12:53:24
+   Duration  2.29s (transform 83%, import 11%, tests 6%)
+

@@ -1,6 +1,8 @@
 node_modules
 dist
 *.log
+# Retained survival verification output is part of this task's evidence.
+!survival_evidence/**/*.log
 *.cpuprofile
 inhabit_out/
 

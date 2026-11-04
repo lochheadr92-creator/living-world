@@ -1,0 +1,8 @@
+
+> living-world@1.0.0 typecheck
+> tsc --noEmit
+
+tests/hearth.test.ts(112,54): error TS2345: Argument of type '{ kind: "fuel_fire"; targetId: number; here: true; data: { hearth: boolean; }; amount: number; utility: number; minCommit: number; maxTicks: number; }' is not assignable to parameter of type 'NewActivityOpts'.
+  Type '{ kind: "fuel_fire"; targetId: number; here: true; data: { hearth: boolean; }; amount: number; utility: number; minCommit: number; maxTicks: number; }' is missing the following properties from type 'NewActivityOpts': label, goal
+tests/zz_review_f_plank_diversion.test.ts(27,89): error TS18047: 'ben' is possibly 'null'.
+tests/zz_review_main_mature_large.test.ts(23,277): error TS18047: 'v' is possibly 'null'.

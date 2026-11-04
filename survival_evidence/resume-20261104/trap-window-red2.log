@@ -1,0 +1,71 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/trap_window.test.ts (6 tests | 3 failed) 60ms
+   × can catch a real deer encountered during the paid armed window, without waiting for one final instant 21ms
+   × keeps an early captured body and its single origin exact across save/load 5ms
+   × rejects premature resolution without the actual matching caught body 4ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/trap_window.test.ts > can catch a real deer encountered during the paid armed window, without waiting for one final instant
+AssertionError: expected [ { ent: 'animal', id: 5, …(24) } ] to not include { ent: 'animal', id: 5, …(24) }
+ ❯ tests/trap_window.test.ts:25:45
+     23|  // Explicitly document which deterministic fixture outcome this contr…
+     24|  expect(hashUnit(hashString(w.seed)^0x79ae,pile.id+pile.gear!.cycle,de…
+     25|  w.tick++;gearTick(w);expect(w.animals).not.toContain(deer);expect(pil…
+       |                                             ^
+     26| });
+     27| it('keeps an early captured body and its single origin exact across sa…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/trap_window.test.ts > keeps an early captured body and its single origin exact across save/load
+AssertionError: expected [] to have a length of 1 but got +0
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/trap_window.test.ts:28:83
+     26| });
+     27| it('keeps an early captured body and its single origin exact across sa…
+     28|  const {w,pile}=scene();w.tick++;gearTick(w);expect(w.piles.filter(b=>…
+       |                                                                                   ^
+     29|  const saved=serializeWorld(w),copy=deserializeWorld(saved);expect(ser…
+     30|  for(let n=0;n<700;n++){w.tick++;copy.tick++;gearTick(w);gearTick(copy…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/trap_window.test.ts > rejects premature resolution without the actual matching caught body
+AssertionError: expected null not to be null
+ ❯ tests/trap_window.test.ts:56:76
+     54| });
+     55| it('rejects premature resolution without the actual matching caught bo…
+     56|  const {w,pile}=scene();w.tick++;gearTick(w);expect(pile.gear!.bodyId)…
+       |                                                                            ^
+     57|  const id=pile.gear!.bodyId!;pile.gear!.bodyId=null;expect(()=>deseria…
+     58|  pile.gear!.bodyId=id;const body=w.piles.find(b=>b.id===id)!;body.carc…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 3 passed (6)
+   Start at  15:22:03
+   Duration  1.53s (transform 84%, import 11%, tests 4%)
+
