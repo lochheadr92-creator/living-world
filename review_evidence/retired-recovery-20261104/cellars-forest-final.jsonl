@@ -1,0 +1,50 @@
+{"event":"source","run":"final","hash":"61acc0e4eda73dd4acaba5c40c996e6112fda9c903d282662d9ab75dbd16e8a5"}
+{"event":"layout","tick":0,"person":915,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":0,"person":923,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":0,"person":924,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":65,"person":905,"outcome":"success","detail":"done"}
+{"event":"layout","tick":79,"person":908,"outcome":"success","detail":"done"}
+{"event":"layout","tick":79,"person":920,"outcome":"success","detail":"done"}
+{"event":"layout","tick":80,"person":914,"outcome":"success","detail":"done"}
+{"event":"layout","tick":94,"person":902,"outcome":"failed","detail":"too many projects under way already"}
+{"event":"layout","tick":96,"person":899,"outcome":"failed","detail":"too many projects under way already"}
+{"day":1,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":2,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":3,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":4,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":9719,"person":924,"outcome":"success","detail":"done"}
+{"day":5,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216],"started":[1042,1053,1055,1059,4272],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":6,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216],"started":[1042,1053,1055,1059,4272],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":7,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216,6119],"started":[1042,1053,1055,1059,4272],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":8,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216,6119,6925],"started":[1042,1053,1055,1059,4272],"deposits":5,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":9,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216,6119,6925,7667],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":6,"conservation":{"ok":true,"diffs":[]}}
+{"day":10,"seed":"forest","rules":135,"arrivals":true,"alive":26,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":11,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":12,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":13,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":31879,"person":928,"outcome":"success","detail":"done"}
+{"event":"layout","tick":32147,"person":939,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":32279,"person":939,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":32279,"person":940,"outcome":"interrupted","detail":"something better came up"}
+{"day":14,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,11310],"deposits":15,"mealTransfers":12,"conservation":{"ok":true,"diffs":[]}}
+{"day":15,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,11310],"deposits":24,"mealTransfers":14,"conservation":{"ok":true,"diffs":[]}}
+{"day":16,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,11310],"deposits":24,"mealTransfers":14,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":39285,"person":911,"outcome":"success","detail":"done"}
+{"day":17,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,11310,13045],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":41371,"person":939,"outcome":"interrupted","detail":"something better came up"}
+{"event":"layout","tick":41646,"person":939,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":41742,"person":940,"outcome":"failed","detail":"too many projects under way already"}
+{"event":"layout","tick":41907,"person":939,"outcome":"failed","detail":"too many projects under way already"}
+{"day":18,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,11310,13045],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":43617,"person":939,"outcome":"failed","detail":"too many projects under way already"}
+{"event":"layout","tick":43880,"person":939,"outcome":"failed","detail":"too many projects under way already"}
+{"event":"layout","tick":44260,"person":939,"outcome":"interrupted","detail":"something better came up"}
+{"day":19,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,11310,13045],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":46812,"person":939,"outcome":"success","detail":"done"}
+{"day":20,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738,14780],"started":[1042,1053,1055,1059,4272,11310,13045,14859],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":48798,"person":943,"outcome":"success","detail":"done"}
+{"day":21,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738,14780],"started":[1042,1053,1055,1059,4272,11310,13045,14859,15325],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"day":22,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738,14780],"started":[1042,1053,1055,1059,4272,11310,13045,14859,15325],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"day":23,"seed":"forest","rules":135,"arrivals":true,"alive":7,"built":[4216,6119,6925,7667,8738,14780],"started":[1042,1053,1055,1059,4272,11310,13045,14859,15325],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"day":24,"seed":"forest","rules":135,"arrivals":true,"alive":5,"built":[4216,6119,6925,7667,8738,14780],"started":[1042,1053,1055,1059,4272,11310,13045,14859,15325],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}
+{"day":25,"seed":"forest","rules":135,"arrivals":true,"alive":5,"built":[4216,6119,6925,7667,8738,14780],"started":[1042,1053,1055,1059,4272,11310,13045,14859,15325],"deposits":24,"mealTransfers":15,"conservation":{"ok":true,"diffs":[]}}

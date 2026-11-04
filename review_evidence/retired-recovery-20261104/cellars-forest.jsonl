@@ -1,0 +1,37 @@
+{"event":"layout","tick":0,"person":915,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":0,"person":923,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":0,"person":924,"outcome":"failed","detail":"another layout already reserves this footprint or its access gap"}
+{"event":"layout","tick":65,"person":905,"outcome":"success","detail":"done"}
+{"event":"layout","tick":79,"person":908,"outcome":"success","detail":"done"}
+{"event":"layout","tick":79,"person":920,"outcome":"success","detail":"done"}
+{"event":"layout","tick":80,"person":914,"outcome":"success","detail":"done"}
+{"event":"layout","tick":94,"person":902,"outcome":"failed","detail":"too many projects under way already"}
+{"event":"layout","tick":96,"person":899,"outcome":"failed","detail":"too many projects under way already"}
+{"day":1,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":2,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":3,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":4,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216],"started":[1042,1053,1055,1059],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":9719,"person":924,"outcome":"success","detail":"done"}
+{"day":5,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216],"started":[1042,1053,1055,1059,4272],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":6,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216],"started":[1042,1053,1055,1059,4272],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":7,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216,6119],"started":[1042,1053,1055,1059,4272],"deposits":0,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":8,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216,6119,6925],"started":[1042,1053,1055,1059,4272],"deposits":5,"mealTransfers":0,"conservation":{"ok":true,"diffs":[]}}
+{"day":9,"seed":"forest","rules":135,"arrivals":true,"alive":28,"built":[4216,6119,6925,7667],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":6,"conservation":{"ok":true,"diffs":[]}}
+{"day":10,"seed":"forest","rules":135,"arrivals":true,"alive":26,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":11,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":12,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":29436,"person":939,"outcome":"success","detail":"done"}
+{"day":13,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"event":"layout","tick":32327,"person":928,"outcome":"interrupted","detail":"something better came up"}
+{"day":14,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":15,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":16,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":17,"seed":"forest","rules":135,"arrivals":true,"alive":20,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":18,"seed":"forest","rules":135,"arrivals":true,"alive":19,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":19,"seed":"forest","rules":135,"arrivals":true,"alive":18,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":20,"seed":"forest","rules":135,"arrivals":true,"alive":18,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":21,"seed":"forest","rules":135,"arrivals":true,"alive":18,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":7,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":22,"seed":"forest","rules":135,"arrivals":true,"alive":18,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":15,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":23,"seed":"forest","rules":135,"arrivals":true,"alive":16,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":15,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":24,"seed":"forest","rules":135,"arrivals":true,"alive":15,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":15,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
+{"day":25,"seed":"forest","rules":135,"arrivals":true,"alive":14,"built":[4216,6119,6925,7667,8738,12272],"started":[1042,1053,1055,1059,4272,10768],"deposits":15,"mealTransfers":7,"conservation":{"ok":true,"diffs":[]}}
