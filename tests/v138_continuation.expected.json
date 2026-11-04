@@ -1,0 +1,16 @@
+{
+  "source": {
+    "head": "d6028d881e4022541c16aa0999feb185f87dbc8f",
+    "rules": 138,
+    "content": "c5c7e1f62095fb37853d0f4b1c3782281f1883fe0424eecfce7026f7fd8489f0",
+    "note": "Recorded before successor behavior; ordinary forest and separately staged in-flight mine/mill batches"
+  },
+  "ordinary": {
+    "saved": "a32eacfdec57c769e421501441f17a83dbcfa33520598d629b37460dc81ba98b",
+    "continued": "e592f5a429c6039a290fe883dfdd6915047f66fc3f2a31fdb3f62074d82e9694"
+  },
+  "staged": {
+    "saved": "a30ab8b7db1c977f377cfe5a22563e51a08d1ad581c504d8dcd6051cdb9a988c",
+    "continued": "5dfd21c175361279c5c93c496c40bfdedf16e73409399f45f2275c07324f1d15"
+  }
+}

@@ -309,13 +309,18 @@ export const RECIPES: Recipe[] = [
   },
 ];
 
+RECIPES.push(
+ {minRules:138,id:'mine_ore',label:'batch ore extraction',doing:'Working the ore mine',at:'mine',inputs:{},fuel:{},work:110,burn:0,outputs:{ore:3},waste:{},wasteWhy:'',fromDeposit:{item:'ore',n:3},skill:'stone',tool:{kind:'pick',required:true,speed:.5},workers:3,serves:['ore'],benefit:'Three existing ore from the connected finite vein; no ore is created.'},
+ {minRules:138,id:'mill_flour_separate',label:'ground flour',doing:'Turning the grain mill',at:'mill',inputs:{grain:6},fuel:{},work:210,burn:0,outputs:{flour:5},waste:{grain:1},wasteWhy:'bran and dust',skill:'bake',workers:2,serves:['flour'],benefit:'A separate grinding floor produces flour while the bakery remains available for bread.'},
+);
+
 export const RECIPE_BY_ID: Record<string, Recipe> = Object.fromEntries(RECIPES.map((r) => [r.id, r]));
 
 export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'food_rack'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'food_rack', 'mine', 'mill'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 
@@ -336,6 +341,7 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     set.add('saw');
     set.add('axe');
   }
+  if(type==='mine'){set.add('ore');set.add('pick');}
   if (type === 'quarry') {
     set.add('stone');
     set.add('pick');

@@ -389,3 +389,21 @@ export function smithySprite(cache: SpriteCache, variant: number): Sprite {
     line(ctx, p(0.28, 1.76, 0.6), p(0.5, 1.7, 0.6), '#7a5434', 1.8);
   });
 }
+
+/** Timbered mine entry and a separate hand-powered grinding floor. */
+export function recoveredWorkshopSprite(cache:SpriteCache,kind:'mine'|'mill'):Sprite{
+ return cache.get('recovered-'+kind,180,150,90,100,ctx=>{
+  const p=mk(2,2);groundShadow(ctx,60,30,.25,4);groundPatch(ctx,p,.05,1.95,.05,1.95,'#9b927d');
+  if(kind==='mine'){
+   box(ctx,p,.2,1.8,.15,1.4,0,45,boxTones('#777265','rgba(30,20,12,.5)'));
+   faceL(ctx,p,.45,1.55,1.42,0,32,'#211c18');
+   for(const x of [.38,1.58])post(ctx,p,x,1.45,0,37,.14,'#826044');
+   box(ctx,p,.3,1.7,1.4,1.55,32,38,boxTones('#9b7955','rgba(30,20,12,.5)'));
+  }else{
+   for(const x of [.1,1.9])post(ctx,p,x,.2,0,38,.1,'#836246');
+   const c=p(1,1,0);cylinder(ctx,c[0],c[1],29,16,'#b3ae98','#75705f','#d2c9ac');
+   const top=p(1,1,23);line(ctx,top,p(1.7,1,23),'#65492e',4);line(ctx,p(1.7,1,23),p(1.7,1,34),'#65492e',4);
+   box(ctx,p,.05,1.95,.1,.45,36,41,boxTones('#9b7955','rgba(30,20,12,.5)'));
+  }
+ });
+}

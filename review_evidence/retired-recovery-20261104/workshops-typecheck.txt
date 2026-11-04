@@ -1,0 +1,5 @@
+
+> living-world@1.0.0 typecheck
+> tsc --noEmit
+
+src/ui/entity.ts(48,7): error TS2739: Type '{ food_rack: "fish"; well: "water"; cellar: "bread"; lean_to: "home"; hut: "home"; house: "house"; storehouse: "cube"; fire: "flame"; timber_yard: "saw"; quarry: "pick"; kiln: "kiln"; smithy: "anvil"; granary: "granary"; bakery: "bread"; hall: "hall"; }' is missing the following properties from type 'Record<BuildingType, "info" | "fish" | "wood" | "stone" | "kiln" | "charcoal" | "berries" | "fruit" | "grain" | "bread" | "meat" | "axe" | "pick" | "hoe" | "basket" | ... 76 more ... | "cog">': mine, mill

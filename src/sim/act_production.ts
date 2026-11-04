@@ -34,10 +34,12 @@ function operatePose(a: Activity): PoseKind {
       return 'chop';
     case 'build_cart':
       return 'hammer';
+    case 'mine_ore':
     case 'quarry_stone':
       return 'mine';
     case 'smelt_iron':
       return 'forge';
+    case 'mill_flour_separate':
     case 'mill_flour':
     case 'bake_bread':
       return 'bake';
@@ -95,7 +97,7 @@ registerHandler('operate', {
       return `${a.cycle>0?'partial':'fail'}:${b.ops.lastBlocker||'the paid batch is no longer available'}`;
     faceToward(p, a.tx, a.ty);
     const res = workJob(world, b, p);
-    if(res==='preservation_failed')return `${a.cycle>0?'partial':'fail'}:${b.ops.lastBlocker}`;
+    if(res==='preservation_failed'||res==='workshop_blocked')return `${a.cycle>0?'partial':'fail'}:${b.ops.lastBlocker}`;
     if (res === 'missing_tool') {
       const kind = recipeOf(b.ops.job!).tool!.kind;
       const why = `needs a ${kind === 'pick' ? 'pickaxe' : kind}; the unfinished batch keeps its materials and progress`;

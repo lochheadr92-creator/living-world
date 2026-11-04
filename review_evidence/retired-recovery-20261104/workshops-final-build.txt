@@ -1,0 +1,5 @@
+
+> living-world@1.0.0 build
+> tsc --noEmit && vite build
+
+tests/v138_continuation.test.ts(2,22): error TS2307: Cannot find module './v138_continuation.expected.json' or its corresponding type declarations.

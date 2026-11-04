@@ -1,3 +1,4 @@
+import {mineDepositProblem} from './recovered_workshops';
 import {hasCellars,cellarAccepts} from './cellars';
 import {recipeAvailable} from './recipes';
 import { recordWorkshopOutput } from './settlement_economy';
@@ -378,9 +379,10 @@ export function startBlocker(world: World, b: Building, p: Person, r: Recipe, tr
     if (have < (need[k] ?? 0)) return `lacks ${(need[k] ?? 0) - have} ${k}`;
   }
   if (r.fromDeposit) {
+    const problem=mineDepositProblem(world,b);if(problem)return problem;
     const dep = depositOf(world, b);
-    if (!dep) return 'no stone outcrop to cut';
-    if (dep.amount - dep.reserved < r.fromDeposit.n) return 'the outcrop is worked out';
+    if (!dep) return b.type==='mine'?'no ore vein to mine':'no stone outcrop to cut';
+    if (dep.amount - dep.reserved < r.fromDeposit.n) return b.type==='mine'?'the vein is worked out':'the outcrop is worked out';
   }
   const out = outputWeight(r,world);
   if (out > 0 && storeFreeWeight(b) - (r.fromDeposit ? 0 : 0) < out - weightOfList(r.inputs) * 0) {
@@ -419,7 +421,7 @@ export function startJob(world: World, b: Building, p: Person, r: Recipe, client
     if (dep) {
       dep.amount -= r.fromDeposit.n;
       bump(held, r.fromDeposit.item, r.fromDeposit.n);
-      world.hooks?.onTransfer?.({ from: 'source:' + dep.id, to: 'building:' + b.id, item: r.fromDeposit.item, n: r.fromDeposit.n, reason: 'cut from the outcrop' });
+      world.hooks?.onTransfer?.({ from: 'source:' + dep.id, to: 'building:' + b.id, item: r.fromDeposit.item, n: r.fromDeposit.n, reason: b.type==='mine'?'extracted from the vein':'cut from the outcrop' });
     }
   }
   const job: Job = {
@@ -461,12 +463,16 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
 }
 
 /** One tick of work on the running batch. Returns whether it is still going. */
-export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' | 'missing_tool' | 'preservation_failed' {
+export function workJob(world: World, b: Building, p: Person): 'continue' | 'worked' | 'stopped' | 'missing_tool' | 'preservation_failed' | 'workshop_blocked' {
   const ops = b.ops;
   const job = ops?.job;
   if (!ops || !job || job.phase !== 'work') return 'stopped';
   const r = recipeOf(job);
   if(!recipeAvailable(world,r))return 'stopped';
+  if(b.type==='mine'||b.type==='mill'){
+    const dx=Math.max(b.x-p.x,0,p.x-(b.x+b.w)),dy=Math.max(b.y-p.y,0,p.y-(b.y+b.h));
+    if(!mayUse(world,p,b)||b.condition<12||Math.hypot(dx,dy)>1.5){ops.lastBlocker='the workshop is no longer accessible, standing or within reach';return 'workshop_blocked';}
+  }
   if(r.preservation){
     if(!mayUse(world,p,b)){ops.lastBlocker='the rack is no longer theirs to use';return 'preservation_failed';}
     if(!preservationCanAdvance(world,b))return 'preservation_failed';

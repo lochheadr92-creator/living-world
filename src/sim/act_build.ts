@@ -1,3 +1,4 @@
+import {workshopSiteProblem} from './recovered_workshops';
 import {cellarSiteConflict} from './cellars';
 import {wellSiteConflict} from './wells';
 import {isTextile} from './clothing';
@@ -311,6 +312,7 @@ export function openSitesNear(world: World, near?: Spot): number {
 
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
+  {const block=workshopSiteProblem(world,type,depositId,at?.x??NaN,at?.y??NaN);if(block)return block;}
   if(type==='cellar'){const why=cellarSiteConflict(world,hh);if(why)return why;}
   if(type==='well'){const why=wellSiteConflict(world,at?.x??NaN,at?.y??NaN);if(why)return why;}
   const housing=homeLayoutConflict(world,type,hh,upgradeOf);if(housing)return housing;
@@ -333,8 +335,8 @@ export function siteConflict(world: World, type: Building['type'], hh: number, u
     const near = (x: number, y: number): boolean => radius === Infinity || within(radius, at!.x, at!.y, x, y);
     let standing = 0;
     let started = 0;
-    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' || (b.ops?.depositId ?? 0) === depositId) && near(b.x + b.w / 2, b.y + b.h / 2)) standing++;
-    for (const s of world.sites) if (s.type === type && (type !== 'quarry' || (s.depositId ?? 0) === depositId) && near(s.x + s.w / 2, s.y + s.h / 2)) started++;
+    for (const b of world.buildings) if (b.type === type && (type !== 'quarry' && type !== 'mine' || (b.ops?.depositId ?? 0) === depositId) && near(b.x + b.w / 2, b.y + b.h / 2)) standing++;
+    for (const s of world.sites) if (s.type === type && (type !== 'quarry' && type !== 'mine' || (s.depositId ?? 0) === depositId) && near(s.x + s.w / 2, s.y + s.h / 2)) started++;
     if (standing + started >= allowed) return standing >= allowed ? `there is already a ${BUILD_DEF[type].label}` : `a ${BUILD_DEF[type].label} is already being built`;
     return null;
   }

@@ -1,3 +1,4 @@
+import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
 import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
 import {wellFetchOptions} from './wells';
@@ -561,7 +562,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   if (item !== 'cart' && item !== 'tend') {
     if (isRawMaterial(item)) {
       gatherMaterial(ctx, item, remaining, base * 0.92 * traitMods(p).work, why, tag);
-      if (item !== 'stone') return; // stone can also be cut at a quarry
+      if (item !== 'stone' && !(item==='ore'&&hasRecoveredWorkshops(ctx.world))) return; // stone can also be cut at a quarry
     }
     if (item === 'water') {
       waterLeaf(ctx, Math.ceil(remaining), base * 0.92, why, tag);
@@ -602,7 +603,7 @@ function toolRequiredFor(ctx: Ctx, recipes: Recipe[]): boolean | undefined {
 
 // ───────────────────────── what is wanted ─────────────────────────
 const PROCESSED: ItemKind[] = ['planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'bread', 'fibre'];
-const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0;
+const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && facilitiesOf(ctx, 'quarry').length > 0 || hasRecoveredWorkshops(ctx.world)&&item==='ore'&&facilitiesOf(ctx,'mine').length>0;
 
 /** Demands this person is aware of: from building sites they know, repairs, their own tools, their household's table. */
 export function demandsOf(ctx: Ctx): Demand[] {
@@ -1009,7 +1010,7 @@ export function upgradeWish(ctx: Ctx): number {
 
 export function facilityWants(ctx: Ctx): FacilityWant[] {
   const { p, world } = ctx;
-  const out: FacilityWant[] = [];
+  const out: FacilityWant[] = recoveredWorkshopWants(ctx);
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') + countBeliefsOfKind(p, 'outcrop') >= 1;
   if (!knowTrees || !knowRocks) return out;
@@ -1134,9 +1135,9 @@ function optPlanFacilities(ctx: Ctx): void {
         const camp = baseHub(world, p, ctx.home);
         let spot: { x: number; y: number } | null = null;
         let depositId = 0;
-        if (type === 'quarry') {
-          const dep = beliefsByKind(p, ['outcrop'])
-            .filter((b) => b.amount >= 10 && world.byId.get(b.id))
+        if (type === 'quarry'||type==='mine') {
+          const dep = beliefsByKind(p, [type==='mine'?'ore_vein':'outcrop'])
+            .filter((b) => b.amount >= (type==='mine'?6:10) && world.byId.get(b.id))
             .sort((a, c) => hyp(a.x - camp.x, a.y - camp.y) - hyp(c.x - camp.x, c.y - camp.y))[0];
           if (dep) {
             depositId = dep.id;

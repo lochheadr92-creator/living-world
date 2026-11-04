@@ -3,7 +3,7 @@
 import type { BuildingType } from '../sim/types';
 import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite, foodRackSprite, wellSprite, cellarSprite } from './bld_food';
 import { HOUSE, houseSprite } from './bld_home';
-import { KILN, SMITHY, kilnSprite, quarrySprite, smithySprite, timberYardBack, timberYardFront } from './bld_work';
+import { KILN, SMITHY, recoveredWorkshopSprite, kilnSprite, quarrySprite, smithySprite, timberYardBack, timberYardFront } from './bld_work';
 import { SpriteCache, classicBuildingSprite } from './sprites';
 import type { Sprite } from './sprites';
 
@@ -15,6 +15,7 @@ export type BuildKind = Exclude<BuildingType, 'fire'>;
  */
 export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: number): Sprite[] {
   switch (kind) {
+    case 'mine':case 'mill': return [recoveredWorkshopSprite(cache,kind)];
     case 'cellar': return [cellarSprite(cache)];
     case 'well': return [wellSprite(cache)];
     case 'food_rack': return [foodRackSprite(cache)];
@@ -67,6 +68,7 @@ export interface StructMeta {
 }
 
 const STRUCT_TABLE: Record<BuildKind, StructMeta> = {
+  mine:{plinth:0,wall:40,top:50,click:55},mill:{plinth:0,wall:35,top:43,click:50},
   cellar: {plinth:0,wall:16,top:25,click:30},
   well: {plinth:0,wall:15,top:35,click:42},
   food_rack: {plinth:0,wall:24,top:30,click:40},

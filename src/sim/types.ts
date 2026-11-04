@@ -819,6 +819,8 @@ export interface Source {
 }
 
 export type BuildingType =
+  | 'mine'
+  | 'mill'
   | 'lean_to'
   | 'hut'
   | 'house'
