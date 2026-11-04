@@ -72,6 +72,10 @@ export class BuildingPainter {
     } else if (slots) this.stock(ctx, b, slots, -1);
 
     this.wear(ctx, b, kind, x, y);
+    if(kind==='well'&&(b.store.items.water??0)>0){
+      const fill=Math.min(1,(b.store.items.water??0)/12);
+      ellipse(ctx,x,y-13,16*fill,5*fill,'#539baf');
+    }
     if(kind==='food_rack'){
       const job=b.ops?.job;
       const hanging=(job?.held.fish??0)+(job?.held.meat??0);

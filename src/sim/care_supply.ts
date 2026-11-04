@@ -1,3 +1,4 @@
+import {wellFetchOptions} from './wells';
 // Acquisition for an already personally known care need. Existing actions own all work and transfers.
 import {newActivity} from './activities';
 import {careFoodAvailable,careWaterAvailable} from './care_capacity';
@@ -43,7 +44,8 @@ export function careSupplyOptions(ctx:Ctx,q:Pick<Person,'id'|'name'>,hungry:bool
  if(ctx.options.some(o=>o.key.startsWith('care_supply:')))return;
  if(thirsty&&careWaterAvailable(world,p,q.id)<1){
   const n=amountNeeded(ctx,q.id,'water'),spot=rankWaterSpots(ctx,1)[0];
-  if(!n||!spot){addBlocked(ctx,'fetch_water',`Obtain water for ${q.name}`,q.id,!n?'no room for a spare portion while keeping my reserves and promises':'no personally known usable water source','care');return;}
+  if(n)wellFetchOptions(ctx,n+(p.inv.water??0),68*traitMods(p).give,`to obtain water for ${q.name}, last seen needing it at tick ${seen}`,'care',{to:q.id,seen});
+  if(!n||!spot){if(ctx.options.some(o=>o.key.startsWith('care_supply:')))return;addBlocked(ctx,'fetch_water',`Obtain water for ${q.name}`,q.id,!n?'no room for a spare portion while keeping my reserves and promises':'no personally known usable water source','care');return;}
   const sc=new Scorer().add(`${q.name} was thirsty at our last room contact`,54*traitMods(p).give).add('a household member needs practical care',14*traitMods(p).give).add('walking',-pen(spot.e));
   if(spot.dng)sc.add('wolf nearby',-30*spot.dng*traitMods(p).caution);
   if(spot.trouble)sc.add('was driven off near here',-16*spot.trouble);

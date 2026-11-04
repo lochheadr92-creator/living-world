@@ -1,3 +1,4 @@
+import {wellFetchOptions} from './wells';
 import {hasLivestock,livestockMaterials} from './livestock';
 import {hasCarcassSupply,isBodyPart,knownCarcassUnits,supplyFromCarcass} from './carcass_supply';
 import {reservedFor} from './reserved_goods';
@@ -253,6 +254,7 @@ function depositLeaf(ctx: Ctx, b: Belief, items: Items, util0: number, why: stri
 }
 
 function waterLeaf(ctx: Ctx, n: number, util0: number, why: string, tag: string): void {
+  wellFetchOptions(ctx,n,util0,why,tag);
   const { world, p } = ctx;
   if ((p.inv.water ?? 0) >= n) return;
   const spot = rankWaterSpots(ctx, 1)[0];

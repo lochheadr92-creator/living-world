@@ -829,6 +829,7 @@ export type BuildingType =
   | 'granary'
   | 'bakery'
   | 'food_rack'
+  | 'well'
   | 'hall';
 
 export interface Building {

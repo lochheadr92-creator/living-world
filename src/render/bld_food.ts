@@ -8,6 +8,18 @@ import type { Roof } from './bld_common';
 import { SpriteCache, ellipse, groundShadow, line, mk, plankLines, poly, shade } from './sprites';
 import type { Sprite } from './sprites';
 
+/** The dry shaft is static; the renderer adds only water actually held here. */
+export function wellSprite(cache:SpriteCache):Sprite {
+  return cache.get('well',160,130,80,88,ctx=>{
+    const p=mk(2,2);groundShadow(ctx,42,18,0.25,4);
+    cylinder(ctx,0,0,24,15,'#aaa394','#797669','#343432');
+    ellipse(ctx,0,-15,18,7,'#292b29');
+    for(const x of [0.35,1.65])line(ctx,p(x,1,0),p(x,1,39),'#795e40',4);
+    line(ctx,p(0.35,1,39),p(1.65,1,39),'#9a7951',5);
+    line(ctx,p(1,1,38),p(1,1,17),'#c7ad79',1.5);
+  });
+}
+
 /** Paid rack/pit structure only. Actual food and burning are drawn from state. */
 export function foodRackSprite(cache:SpriteCache):Sprite {
   return cache.get('food_rack',160,130,80,88,ctx=>{

@@ -1,3 +1,4 @@
+import {updateWells} from './wells';
 import {hasNourishment} from './nourishment';
 import {livestockTick} from './livestock';
 import {gearTick} from './passive_gear';
@@ -97,6 +98,7 @@ export function stepWorld(world: World): void {
   if (tick % 90 === 0) decayWear(world);
   roadsTick(world);
 
+  updateWells(world);
   clothingTick(world);
   carcassTick(world);
   gearTick(world);

@@ -1,0 +1,13 @@
+{
+  "source": {
+    "head": "1b7b7cad7e46df1ad731995db8fee63a3d215bbf",
+    "rules": 134,
+    "content": "c42c569e0b81c2085e525eaf562d84c0fddcaaabb5aa31f35f443f7e71609d99",
+    "note": "Recorded before successor behavior; ordinary autonomous completed-well continuation"
+  },
+  "wells": [
+    1626
+  ],
+  "saved": "945cd872f142222868e62c05d9cdbf15948c5f66598197af5c17162c7c39e4a5",
+  "continued": "6f9bb95f456db977dc7d05b0039e613af772611d4af41956de13ce8bd83bef3c"
+}

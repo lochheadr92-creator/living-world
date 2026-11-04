@@ -1,3 +1,4 @@
+import {wellOptions} from './wells';
 import {livestockOptions} from './livestock';
 import {gearOptions} from './passive_gear';
 import {carcassOptions} from './carcass';
@@ -383,6 +384,7 @@ function optEat(ctx: Ctx): void {
 
 // ───────────────────────── drinking ─────────────────────────
 function optDrink(ctx: Ctx): void {
+  wellOptions(ctx);
   const { world, p } = ctx;
   const dr = ctx.drives.thirst;
   if (dr <= 0) return;

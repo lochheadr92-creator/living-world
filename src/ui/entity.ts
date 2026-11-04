@@ -47,6 +47,7 @@ const SOURCE_ICON: Record<SourceType, IconName> = {
 
 const BUILDING_ICON: Record<BuildingType, IconName> = {
   food_rack: 'fish',
+  well: 'water',
   lean_to: 'home',
   hut: 'home',
   house: 'house',

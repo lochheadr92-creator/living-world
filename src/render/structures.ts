@@ -1,7 +1,7 @@
 // Every building drawing in one place: which sprite(s) a building type uses, and the measurements the rest of the renderer needs
 // (how tall each one stands for click targets, where its chimney is, the heights that construction stages are built to).
 import type { BuildingType } from '../sim/types';
-import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite, foodRackSprite } from './bld_food';
+import { GRANARY, BAKERY, HALL, bakerySprite, granaryBack, granaryFront, hallSprite, foodRackSprite, wellSprite } from './bld_food';
 import { HOUSE, houseSprite } from './bld_home';
 import { KILN, SMITHY, kilnSprite, quarrySprite, smithySprite, timberYardBack, timberYardFront } from './bld_work';
 import { SpriteCache, classicBuildingSprite } from './sprites';
@@ -15,6 +15,7 @@ export type BuildKind = Exclude<BuildingType, 'fire'>;
  */
 export function buildingLayers(cache: SpriteCache, kind: BuildKind, variant: number): Sprite[] {
   switch (kind) {
+    case 'well': return [wellSprite(cache)];
     case 'food_rack': return [foodRackSprite(cache)];
     case 'lean_to':
     case 'hut':
@@ -65,6 +66,7 @@ export interface StructMeta {
 }
 
 const STRUCT_TABLE: Record<BuildKind, StructMeta> = {
+  well: {plinth:0,wall:15,top:35,click:42},
   food_rack: {plinth:0,wall:24,top:30,click:40},
   lean_to: { plinth: 0, wall: 17, top: 41, click: 44 },
   hut: { plinth: 6, wall: 28, top: 57, click: 66, chimney: { x: 1.65, y: 0.85, z: 66 } },

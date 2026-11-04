@@ -297,6 +297,7 @@ export const BUILD_DEF: Record<BuildingType, BuildDef> = {
     label:'drying and smoking rack', sleepers:0, protect:0, role:'work',
     blurb:'An open drying rack and covered smoking pit. Spare fish or meat takes work and time to preserve. Rain stops drying; smoking requires wood.',
   }),
+  well: bd({w:2,h:2,cost:{wood:4,stone:8},work:260,cap:18,workers:2,label:'shallow well',sleepers:0,protect:0,role:'store',blurb:'A lined shaft draws slowly from a nearby finite water catchment. It may run dry; drawing and carrying still take work.'}),
 };
 
 /** every kind of building a household can live in */
@@ -325,10 +326,11 @@ export const DECAY_PER_TICK: Record<BuildingType, number> = {
   bakery: 0.0014,
   hall: 0.0012,
   food_rack: 0.0015,
+  well: 0.0012,
 };
 export const REPAIR_GAIN = 28;
 /** what a repair of this building prefers to use (the fallback is plain wood at a smaller gain) */
-export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks' };
+export const REPAIR_USES: Partial<Record<BuildingType, ItemKind>> = { well: 'stone', house: 'planks', granary: 'planks', hall: 'planks', kiln: 'bricks', smithy: 'bricks', bakery: 'bricks' };
 export const REPAIR_FALLBACK_GAIN = 18;
 /** a building site nobody has worked on or supplied for this long is given up (its materials are left on the ground) */
 export const SITE_PATIENCE = DAY * 4;

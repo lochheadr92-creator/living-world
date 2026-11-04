@@ -1,3 +1,4 @@
+import {wellBody,WELL_CAP} from './wells';
 import {hasNourishment,nourishmentCapacity,nourishmentOf} from './nourishment';
 import {hasRecoverableParts} from './carcass';
 import {worldAge} from './time_text';
@@ -757,7 +758,7 @@ export function describeEntity(world: World, id: number): EntityView | null {
     case 'building': {
       const b = e;
       const hh = world.households.find((h) => h.id === b.hhId);
-      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'storehouse' && b.type !== 'fire' && !b.ops ? 'nobody (empty)' : 'everyone']];
+      const rows: [string, string][] = [['Owner', hh ? `${hh.name} household` : b.hhId === 0 && b.type !== 'storehouse' && b.type !== 'fire' && b.type !== 'well' && !b.ops ? 'nobody (empty)' : 'everyone']];
       const bars: EntityView['bars'] = [];
       if (hasHabitation(world) && (b.type === 'hut' || b.type === 'house')) {
         const people = occupants(world, b);
@@ -777,6 +778,12 @@ export function describeEntity(world: World, id: number): EntityView | null {
       }
       if (b.builtBy && b.builtBy.length && b.built !== undefined) rows.push(['Built by', `${b.builtBy.map((id) => nameOf(world, id)).join(', ')} (${agoText(world, b.built)})`]);
       const notes: string[] = [];
+      if(b.type==='well'){
+        const body=wellBody(world,b.x+b.w/2,b.y+b.h/2);
+        rows.push(['Water',`${b.store.items.water??0}/${WELL_CAP} units`]);
+        rows.push(['Refill',b.condition<10?'needs repair':(b.store.items.water??0)>=WELL_CAP?'full; waiting for use':!body?'no connected catchment':body.amount<1?'catchment is dry':'drawing slowly from nearby water']);
+        notes.push(BUILD_DEF.well.blurb);
+      }
       if (isHomeType(b.type)) {
         const dwellers = hh ? membersOf(world, hh).map((m) => m.name) : [];
         if (dwellers.length) rows.push(['Household', dwellers.join(', ')]);

@@ -1,0 +1,24 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staged finite-well verification</title></head><body>
+<div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+<div style="position:fixed;top:60px;left:10px;width:210px;font-size:12px;z-index:2000;background:#15251c;padding:10px;color:white"><strong>STAGED finite well</strong><p>A paid well begins empty. Refill transfers existing water. Drinking and carrying use the real actions.</p><button id="fill">Allow finite refill</button><button id="drink">Drink at well</button><button id="carry">Carry two units</button><output id="result"></output></div>
+<script type="module">
+import '/src/styles.css';
+import {Game} from '/src/app/game.ts';import {Renderer} from '/src/render/renderer.ts';import {mountUI} from '/src/ui/index.ts';import {project} from '/src/render/iso.ts';
+import {stage,addPerson,site,done,learn} from '/tests/helpers/kit.ts';
+import {newActivity,startActivity,stepActivity} from '/src/sim/activities.ts';
+import {wellBody,updateWells,wellOptions,wellFetchOptions} from '/src/sim/wells.ts';import {makeCtx} from '/src/sim/optutil.ts';
+import {serializeWorld,deserializeWorld} from '/src/app/save.ts';import {conservationReport} from '/src/sim/economy.ts';
+const s=stage('visible-well'),w=s.w;w.settings={...w.settings,dynamics:'rich',rulesVersion:134};
+const p=addPerson(s,'Ada',40.5,25.5,{hunger:95,thirst:50,energy:95});
+const st=site(s,'well',40,23,0,p.id,{wood:4,stone:8});done(s);
+function finish(){for(let i=0;i<1000&&p.activity;i++){w.tick++;stepActivity(w,p);}if(p.activity)throw Error('Unfinished action');}
+startActivity(w,p,newActivity(w,p,{kind:'build',label:'Build a well',goal:'staged paid construction',targetId:st.id,targetType:'site',tx:41,ty:24,spotX:40.5,spotY:25.5,utility:50,maxTicks:1000}));finish();
+const b=w.buildings.find(b=>b.type==='well'),body=wellBody(w,41,24),initial=body.amount;
+const g=new Game(w.settings);g.restoreWorld(w,w.settings);g.setPlaying(false);g.select(b.id);const pt=project(41,24);g.camera={x:pt.sx+20,y:pt.sy,zoom:2.5};
+const renderer=new Renderer(document.getElementById('world'),g),ui=mountUI(g,document.getElementById('ui')),result=document.getElementById('result');
+function verify(){const before=serializeWorld(w);ui.update(1);result.textContent=` Materials used: ${JSON.stringify(st.used)}. Well: ${b.store.items.water??0}; basin loss: ${initial-body.amount}; carried: ${p.inv.water??0}; thirst: ${p.needs.thirst}; conserved: ${conservationReport(w).ok}; observer pure: ${before===serializeWorld(w)}; exact save: ${before===serializeWorld(deserializeWorld(before))}`;}
+document.getElementById('fill').onclick=()=>{for(let i=0;i<12;i++){w.tick+=((29-w.tick%50)+50)%50+(w.tick%50===29?50:0);updateWells(w);}learn(w,p,b);verify();};
+document.getElementById('drink').onclick=()=>{learn(w,p,b);const c=makeCtx(w,p,true);wellOptions(c);startActivity(w,p,c.options[0].make());finish();verify();};
+document.getElementById('carry').onclick=()=>{learn(w,p,b);const c=makeCtx(w,p,true);wellFetchOptions(c,2,60,'carry water','water');startActivity(w,p,c.options[0].make());finish();verify();};
+function frame(){renderer.frame(.016);ui.update(.016);requestAnimationFrame(frame);}frame();verify();
+</script></body></html>

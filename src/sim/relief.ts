@@ -1,3 +1,4 @@
+import {hasWells} from './wells';
 import { CRITICAL, DAY, HUNGER_RATE, SUNRISE, SUNSET, THIRST_RATE } from './constants';
 import { dayFraction } from './environment';
 import { foodUnits } from './economy';
@@ -40,6 +41,11 @@ export function waterRelief(ctx: Ctx): Relief | null {
     const fresh = world.tick - b.seen < FRESH;
     const cand: Relief = { need: 'thirst', confirmed: fresh, eta: e, what: fresh ? 'water in view' : 'water remembered from before' };
     if (!best || (cand.confirmed && !best.confirmed) || (cand.confirmed === best.confirmed && cand.eta < best.eta)) best = cand;
+  }
+  if(hasWells(world))for(const b of Object.values(p.beliefs)){
+    if(b.kind!=='building'||b.btype!=='well'||(b.hh!==0&&b.hh!==p.hhId)||(b.cond??0)<=0||(b.items?.water??0)<1)continue;
+    const cand:Relief={need:'thirst',confirmed:world.tick-b.seen<FRESH,eta:etaTo(ctx,b.x-.5,b.y+1.5),what:'water observed in a well'};
+    if(!best||(cand.confirmed&&!best.confirmed)||(cand.confirmed===best.confirmed&&cand.eta<best.eta))best=cand;
   }
   return best;
 }

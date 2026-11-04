@@ -1,3 +1,4 @@
+import {isWellAction,wellSource} from './wells';
 import {takeNutrition} from './nourishment';
 import {ownedGearRules,ownedGearAt} from './gear_stock';
 import {pileAccessBlocker} from './pile_access';
@@ -431,6 +432,11 @@ registerHandler('drink', {
   availability: 0.55,
   pose: () => 'drink',
   begin(world, p, a) {
+    if(isWellAction(a)){
+      const well=wellSource(world,p,a);if(!well)return 'the well is inaccessible';
+      observe(world,p,well);if((well.store.items.water??0)<1)return 'the well is empty';
+      a.duration=8;return;
+    }
     if(isStoredDrink(world,a)){
       const store=storedWaterSource(world,p,a);
       if(!store)return 'the household water store is inaccessible';
@@ -462,8 +468,9 @@ registerHandler('drink', {
     forgetUnreachableWater(world, p, a, outcome, detail);
   },
   work(world, p, a): WorkResult {
-    if (a.data.fromInv || isStoredDrink(world,a)) {
-      const store=isStoredDrink(world,a)?storedWaterSource(world,p,a):null;
+    if (a.data.fromInv || isStoredDrink(world,a) || isWellAction(a)) {
+      const store=isWellAction(a)?wellSource(world,p,a):isStoredDrink(world,a)?storedWaterSource(world,p,a):null;
+      if(isWellAction(a)&&!store)return 'fail:the well is inaccessible';
       if(isStoredDrink(world,a)&&!store)return 'fail:the household water store is inaccessible';
       const supply=store?store.store.items:p.inv;
       a.progress++;
@@ -502,6 +509,11 @@ registerHandler('fetch_water', {
   availability: 0.5,
   pose: () => 'drink',
   begin(world, p, a) {
+    if(isWellAction(a)){
+      const well=wellSource(world,p,a);if(!well)return 'the well is inaccessible';
+      observe(world,p,well);if((well.store.items.water??0)<1)return 'the well is empty';
+      a.duration=WORK.water;a.progress=0;return;
+    }
     if(hasWaterBudget(world)) {
       const blocked=beginNaturalWater(world,p,a);if(blocked)return blocked;
       a.duration=WORK.water;a.progress=0;return;
@@ -520,6 +532,18 @@ registerHandler('fetch_water', {
     forgetUnreachableWater(world, p, a, outcome, detail);
   },
   work(world, p, a): WorkResult {
+    if(isWellAction(a)){
+      const well=wellSource(world,p,a);if(!well)return a.cycle>0?'partial:the well is inaccessible':'fail:the well is inaccessible';
+      faceToward(p,well.x+well.w/2,well.y+well.h/2,3);
+      if(++a.progress<a.duration)return 'continue';
+      observe(world,p,well);
+      if((well.store.items.water??0)<1)return a.cycle>0?'partial:the well is empty':'fail:the well is empty';
+      const got=transfer(world,well.store.items,p.inv,carryCap(world,p),'water',1,'building:'+well.id,'person:'+p.id,'water drawn from well');
+      if(!got)return a.cycle>0?'partial:pack is full':'fail:pack is full';
+      if(a.data.careSupply)a.data.careAcquired=(a.data.careAcquired??0)+got;
+      observe(world,p,well);a.cycle++;a.progress=0;
+      return a.cycle>=a.amount?'done':'continue';
+    }
     const body=hasWaterBudget(world)?workingWater(world,p,a):undefined;
     if(hasWaterBudget(world)&&!body)return a.cycle>0?'partial:cannot reach that shore now':'fail:cannot reach that shore now';
     faceToward(p, a.data.wx, a.data.wy, 3);

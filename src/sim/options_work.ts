@@ -1,3 +1,4 @@
+import {wellDemand,hasWells,wellFetchOptions} from './wells';
 import {knownColdHearth} from './hearth';
 import {hasLivedLife} from './lived_life';
 import {hasChildhood} from './childhood_rules';
@@ -147,6 +148,7 @@ export function fireFuelWanted(world: Ctx['world']): number {
  */
 export function repairStake(ctx: Ctx, b: Belief): number {
   if (b.btype === 'storehouse' || b.hh === ctx.p.hhId) return 1;
+  if(hasWells(ctx.world)&&b.btype==='well'&&b.hh===0)return 0.5+0.5*ctx.p.traits.generosity;
   // having promised to mend it
   if (ctx.p.commitments.some((c) => c.status === 'active' && c.kind === 'work' && c.destKind === 'building' && c.destId === b.id)) return 1;
   // a common hall, granary or workshop belongs to everybody: those who use it keep it up
@@ -819,6 +821,8 @@ function optPlanBuild(ctx: Ctx): void {
       noteHousingBlock(ctx, 'hut', why);
     }
   }
+  const waterJourney=home&&knowTrees&&knowRocks?wellDemand(ctx,home.x,home.y):0;
+  if(waterJourney)tryPlan('well',waterJourney,'shorten the daily water journey from home');
   // shared storehouse, once the settlement has a few solid homes
   // (with scaled rules, "the settlement" is what lies within the settlement radius; with the ordinary rules it is the whole world)
   const sameSettlement = (x: number, y: number): boolean => within(rules.facilityRadius, anchor.x, anchor.y, x, y);
@@ -1324,6 +1328,7 @@ function optWaterRun(ctx: Ctx): void {
   const growing = world.plots.some((pl) => pl.hhId === p.hhId && pl.state === 'growing');
   const base = 7 + 28 * need + (growing ? 5 : 0);
   if (base < 11) return;
+  wellFetchOptions(ctx,need>0?3:2,base*traitMods(p).work*nightMult(ctx),need>0?'to bring water to the household':'to water the crops','water');
   const spot = rankWaterSpots(ctx, 1)[0];
   if (!spot) return;
   const b = spot.b;

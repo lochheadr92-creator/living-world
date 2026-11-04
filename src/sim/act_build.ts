@@ -1,3 +1,4 @@
+import {wellSiteConflict} from './wells';
 import {isTextile} from './clothing';
 import {hasLivedLife} from './lived_life';
 import {hearthInstallBlock,isHearthAction,hearthFuelBegin,hearthFuelWork} from './hearth';
@@ -309,6 +310,7 @@ export function openSitesNear(world: World, near?: Spot): number {
 
 /** The settlement is only so big: the rules that stop a duplicate or a pile-up of projects. Returns why not, or null. */
 export function siteConflict(world: World, type: Building['type'], hh: number, upgradeOf = 0, depositId = 0, at?: Spot): string | null {
+  if(type==='well'){const why=wellSiteConflict(world,at?.x??NaN,at?.y??NaN);if(why)return why;}
   const housing=homeLayoutConflict(world,type,hh,upgradeOf);if(housing)return housing;
   const rules = rulesOf(world);
   if (isFacilityType(type) || upgradeOf) {
@@ -389,7 +391,7 @@ registerHandler('plan_site', {
     if(a.data.improvement==='hearth'){
       const block=hearthInstallBlock(world,p,up);if(block)return `fail:${block}`;
     }
-    const site = createSite(world, type, sx, sy, a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined,...(a.data.improvement==='hearth'?{improvement:'hearth' as const}:{}) });
+    const site = createSite(world, type, sx, sy, type==='well'?0:a.data.hh as number, p.id, { upgradeOf: up || undefined, depositId: (a.data.depositId as number) || undefined,...(a.data.improvement==='hearth'?{improvement:'hearth' as const}:{}) });
     proposeProject(world, p, site, a.goal);
     observe(world, p, site);
     const hh = householdOf(world, p);
