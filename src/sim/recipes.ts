@@ -56,6 +56,7 @@ const none: Items = {};
 
 export const recipeAvailable=(w:World,r:Recipe):boolean=>!r.minRules||w.settings.dynamics==='rich'&&runsRulesVersion(w,r.minRules);
 export const RECIPES: Recipe[] = [
+  ...(['net','trap'] as const).map((kind):Recipe=>({id:'make_'+kind,label:kind,doing:'Making a '+kind,at:'timber_yard',inputs:{fibre:3,wood:kind==='net'?2:4},fuel:{},work:180,burn:0,outputs:{},toolOut:{kind,tier:0},waste:{},wasteWhy:'',skill:null,workers:1,serves:[kind],benefit:'Owned gear set and checked later for finite local food.',minRules:126})),
   {id:'sew_hide_garment',label:'hide garment',doing:'Scraping and sewing a hide garment',at:'timber_yard',inputs:{hide:1,fibre:1},fuel:{},work:160,burn:0,outputs:{},toolOut:{kind:'garment',tier:0,textileMaterial:'hide'},waste:{},wasteWhy:'',skill:null,workers:1,serves:['garment'],benefit:'A recovered hide sewn with fibre into personal insulation.',minRules:125},
   {id:'render_fat',label:'rendered fat',doing:'Rendering animal fat',at:'food_rack',inputs:{fat:1},fuel:{wood:1},work:60,burn:180,outputs:{rendered_fat:1},waste:{},wasteWhy:'',skill:null,workers:1,serves:['rendered_fat'],benefit:'One inedible raw fat portion becomes food after paid work and fuel.',preservation:'render',minRules:125},
   {id:'strip_fibre',label:'bast fibre',doing:'Separating and twisting bast fibre',at:'timber_yard',inputs:{wood:1},fuel:{},work:60,burn:0,outputs:{fibre:3},waste:{},wasteWhy:'',skill:null,workers:1,serves:['fibre'],benefit:'Three fibre bundles separated from gathered wood.',minRules:124},

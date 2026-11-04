@@ -16,7 +16,7 @@ export const MAP_H = 80;
 
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
-export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'];
+export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding', 'net', 'trap'];
 export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre', 'hide', 'fat'];
 // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
 export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
@@ -26,7 +26,7 @@ export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fis
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
   hide:1, fat:.5, rendered_fat:.5,
-  fibre:.25, garment:.75, blanket:.75, bedding:1,
+  fibre:.25, garment:.75, blanket:.75, bedding:1, net:1, trap:2,
   dried_fish:1, smoked_fish:1, dried_meat:1, smoked_meat:1,
   offcuts: 1,
   meat: 1.5,
@@ -68,7 +68,7 @@ export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
   hide:'raw hide', fat:'raw fat', rendered_fat:'rendered fat',
-  fibre:'bast fibre', garment:'fibre garment', blanket:'fibre blanket', bedding:'fibre bedroll',
+  net:'fishing net',trap:'deadfall trap',fibre:'bast fibre', garment:'fibre garment', blanket:'fibre blanket', bedding:'fibre bedroll',
   dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
   offcuts: 'offcut fuel bundles',
   meat: 'meat',
@@ -344,6 +344,8 @@ export interface ToolDef {
   blurb: string;
 }
 export const TOOL_DEFS: Record<ToolKind, ToolDef> = {
+  net:{label:'fishing net',hand:null,wear:0,blurb:'set at known fish water, then checked later'},
+  trap:{label:'deadfall trap',hand:null,wear:0,blurb:'set near woodland, then checked later'},
   garment:{label:'fibre garment',hand:null,wear:.002,blurb:'insulation while worn'},
   blanket:{label:'fibre blanket',hand:null,wear:.002,blurb:'insulation while sleeping'},
   bedding:{label:'fibre bedroll',hand:null,wear:.002,blurb:'insulation beneath its sleeping owner'},

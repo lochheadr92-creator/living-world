@@ -1,39 +1,33 @@
-# Survival continuation — 4 November 2026
+# Survival continuation — rules126 checkpoint, 4 November 2026
 
-Active integration: main, rules 125. Prior committed increments: preservation
-122 (`de35037`), hearth123 (`62100b9`), fibre clothing124 (`eb0feb1`). Current
-focused increment adds finite carcasses, paid partial butchery, hide garments
-and rendered fat. The core body-to-eaten-meat route is observed ordinarily;
-hide garments/rendered fat/preserved meat are complete through staged actual
-paths but ordinary uptake remains open. Do not call all seven families done.
+Net route is observed end-to-end; physical traps work in staged tests but their
+ordinary site choice is disconnected from deer sightings. Continue this family
+with that bounded connection under127 before animals and reserves. All seven
+families remain authorised; no renewed permission or premature completion.
 
-Immutable 122–125 continuations pass; never regenerate them. Final focused
-carcass/old-reference checks pass 19/19 plus the new125 reference and affected
-estate/leftover tests. Stable frozen broad check2: 2,549 passes, 31 failures,
-three expected failures, 421 passing/13 failing files; all failures match the
-predecessor. Later label/deposit guards have focused coverage. Full typecheck
-and build still fail on the two retained nullable review-test errors.
+126 immutable digest7387ea83e0806df4aea2bbfc5b7a72873ff9653747849aef5ec1c4879e366d34
+is recorded and passes. Never regenerate references122–126. Current source267
+files frozen in `living-world-gear-check4`; its forest/river25 replay equals the
+observed check3 saves. Focused46/4 and affected60/6 pass. Broad frozen check2
+passes2,566tests/423files with31failures exactly matching125,3expected failures;
+710.24s. It predates later stock and capacity fixes, covered by focused tests.
+Typecheck8/build4 retain only two known nullable review errors. Standalone Vite
+bundle passes. Browser current check2 passes7assertions, broken image inspected.
 
-Final-source check4 reproduces observed check3 forest/river25 saves exactly.
-Both Normal arrivals-on worlds record no kills (seven/27 alive). Fern60 records
-one body, one hide recovered, one meat recovered and eaten, one competing
-claim failure; unused parts and hide spoil. Exact twins/save/conservation/purity
-pass. Current-source fern60 replay and meadow/aspen100 activation scans remain
-running in frozen check4/check3. Inspect their reports before claiming results.
-All commands/logs are in `survival_evidence/resume-20261104/`; programme details
-and provenance limits remain in `docs/SURVIVAL_CAPABILITIES.md`.
+Ongoing frozen `living-world-gear-check3` fern60 observed run: session31481,
+`survival_evidence/gear-check3/fern-60d`; do not edit its source. Other126runs
+finished. At84k it had net meals, repairs and a placed trap, no reported body;
+read final results when done, and use a final-source fern replay if required.
+Forest diagnostic `gear-trap-attempt-trace` at36,845 found deer19.6–27.6tiles away.
+The preceding36k diagnostic plus this continuation uses current126source; it is
+not an every-tick twin run. Retain the original check1 zero-placement evidence.
 
-Fresh final124-source meadow0–60 completed in two same-source save segments,
-with 1,958 adult bedroll protection ticks. All fibre forms now have ordinary
-use evidence; later material connections remain open.
-
-Next: traps and nets through existing equipment, sources and activities, then
-one domestic species and paid reserves LAST. Revisit ordinary hide/fat/meat
-and wool connections as inputs become available. Complete all seven families
-and the final control+nudge comparisons. The 75 rules121 baseline draws are
-audited. Preserve unrelated evidence/review tests; never push the unrelated
-older unpublished commits. One behaviour stream at a time; no renewed approval
-needed for authorised work.
+Remaining: ordinary trap-to-body use, domestic species and wool, reserves LAST,
+ordinary hide/fat/preserved-meat links and final comparisons.125core ordinary
+meat and124allfibre forms proven; no broader maturity/benefit claim. All75baseline
+121draws audited. No push: older unrelated unpublished commits remain below
+focused work. Preserve unrelated review files/evidence. One programme matrix:
+`docs/SURVIVAL_CAPABILITIES.md`. End-of-turn prompt archive refresh still required.
 
 # Codex integration checkpoint (2026-10-27)
 

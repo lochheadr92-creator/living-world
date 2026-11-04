@@ -18,13 +18,13 @@ export const hasCarcasses=(w:World):boolean=>w.settings.dynamics==='rich'&&runsR
 
 /** The one origin of recoverable parts. It consumes an actual live animal,
  * never a historical id or a second call on an already removed body. */
-export function makeCarcass(w:World,animal:Animal,killer:Person):Pile|null{
+export function makeCarcass(w:World,animal:Animal,killer:Person|undefined,witness=true,ownerHh=killer?.hhId??0):Pile|null{
  if(!hasCarcasses(w)||animal.type!=='deer'||animal.health<=0||w.byId.get(animal.id)!==animal||!w.animals.includes(animal))return null;
  const initial={meat:4,hide:1,fat:1};
- const body:Pile={ent:'pile',id:newId(w),x:Math.floor(animal.x),y:Math.floor(animal.y),items:{},since:w.tick,note:'A deer body awaiting paid butchery',carcass:{animalId:animal.id,species:'deer',hhId:killer.hhId,initial:{...initial},remaining:{...initial},recovered:zero(),lost:zero(),work:zero(),claim:null,emptySince:null}};
+ const body:Pile={ent:'pile',id:newId(w),x:Math.floor(animal.x),y:Math.floor(animal.y),items:{},since:w.tick,note:'A deer body awaiting paid butchery',carcass:{animalId:animal.id,species:'deer',hhId:ownerHh,initial:{...initial},remaining:{...initial},recovered:zero(),lost:zero(),work:zero(),claim:null,emptySince:null}};
  removeAnimal(w,animal);registerGeneric(w,body);
  for(const part of PARTS)ledgerCreate(w,part,initial[part],'parts of a killed deer');
- observe(w,killer,body);
+ if(witness&&killer)observe(w,killer,body);
  return body;
 }
 function bodyFor(w:World,a:Activity):Pile|undefined{const e=w.byId.get(a.targetId);return e?.ent==='pile'&&e.carcass?e:undefined;}

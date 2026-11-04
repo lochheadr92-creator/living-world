@@ -460,15 +460,70 @@ work ticks. Boundary sampling is not an exact labour invoice. All three runs
 pass twins, final +120 continuation, daily conservation and sampled purity.
 
 The diagnostic `carcass-fern-first-body-trace` retains competing choices.
-Current-source fern replay and meadow/aspen 100-day activation scans continue
-in frozen checkouts. The scans check source stability, conservation and final
+Current-source fern60 replay is byte-exact. Aspen100 records one further body
+and one meat eaten, with other parts lost; meadow100 records no bodies. The scans check source stability, conservation and final
 continuation but lack decision samples/every-tick twins. Ordinary hide garment,
 rendered-fat and preserved-meat use remain explicit gaps, to revisit as the
 following input routes develop. No survival improvement is claimed.
 
-## 5. Traps and nets — pending
+## 5. Traps and nets — rules 126 core; trap-site connection open
 
-Two paid physical gear routes; no timer-created animals or rerolled catches.
+Rules126 adds made, carried, deployed and checked gear. Agent-selected costs:
+net three fibre/two wood, deadfall trap three fibre/four wood, each180 work at
+the timber yard. Placement80 work, wait600 ticks, check40, reset40. Each set
+wears10 condition; deployed repair60 work/one fibre restores40. Existing carried
+gear mending remains available through its paid equipment route. One deployment
+per kind per household. Nets transfer up to two unreserved fish from the actual
+source; traps attempt one actual nearby deer (range4, deterministic chance.55)
+and use the single carcass path. No added deer or changed hunting utility.
+Catches face existing ground spoilage and a1,200-tick expiry; gear abandoned
+48,000 ticks is lost and ledgered. The inspector exposes ownership, condition,
+waiting, catch, empty and broken state. Equipment/piles and existing activities,
+recipes/production/facilities own the route; no parallel inventory or scheduler.
+
+Fresh review repaired lost retrieval memory, household deployment limits,
+setter-death dependence, premature saved attempts, and full-pack gear loan,
+return and rack pickup. Initial ordinary runs showed made but unused gear:
+forest2net/1trap, river1net, no placements. A foreign borrowed net in the forest
+save exposed an ownership mismatch. Tests reproduced collection of a foreign
+record ahead of one's own and counting unusable foreign shelf stock. Personally
+observed `gearStock`, selecting the owned record on collection and retaining
+ownership when storing gear repaired that path. Evidence remains in
+`gear-check1/`, `gear-ownership-trace/` and the red/green logs.
+
+Current ordinary Normal arrivals-on forest/river25 observations are in
+`gear-check3/`; final source with the added loan capacity guard replays both
+byte-exactly (`gear-check4/replay-audit.json`). Both observed runs have exact
+unobserved twins, save+120 continuation, conservation and500 pure samples.
+Forest made2nets/1trap and placed all3:2fish caught, none collected, no trap body.
+River made3nets, placed2, caught8fish, collected2 and demonstrably ate both from
+net-origin-only packs. No repair occurred in those windows. Gear activity
+samples total forest3,239 travel/1,092 work, river3,056 travel/1,049 work ticks;
+check completions12/11 and reset completions9/10. Interruptions and one river
+check arriving during a newly reset window are retained. The sampled production
+ticks describe activities labelled for gear; resumed other batches can differ,
+so these are not an exact gear-manufacture invoice. Day25 populations3/25 are
+descriptions, not survival benefit claims. A longer fern60 run remains active.
+
+Focused current checks:20 gear contracts;46 passes in4files including clothing,
+physical transfers and predecessor125. Six affected knowledge/transmission/save/
+workshop/flood files pass60 tests. Frozen broad check2:423files/2,566tests pass,
+13files/31tests fail and3expected failures,710.24s; every failure name matches
+rules125 (`gear-failure-comparison.json`). Broad scope predates stock/loan fixes,
+which have the later focused/affected coverage. Full typecheck8/build4 still fail
+only the two preserved nullable review-test errors; standalone Vite bundle passes
+(with its existing large-chunk warning). Browser check2 passes7 assertions and
+its inspected broken-net image is `gear-rendered-check2/gear-failure-visible.png`.
+Immutable126 is recorded and passes, source digest
+`7387ea83e0806df4aea2bbfc5b7a72873ff9653747849aef5ec1c4879e366d34`.
+
+Trap ordinary use remains open. A same-trajectory forest diagnostic starting
+from the36k save found its next attempt at36,845 had all three deer19.6–27.6
+tiles from the selected tree (`gear-trap-attempt-trace/`). Choosing any nearby
+tree fails to connect placement to witnessed wildlife. Continue this family
+with a bounded dated deer-sighting-to-trap-site link under the next rules version;
+retain scarcity, catch chance and hunting behavior. Do not claim all seven
+families complete. Deferred ordinary hide/fat/preserved-meat use remains open.
 
 ## 6. Domestic animals — pending
 

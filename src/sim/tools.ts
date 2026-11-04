@@ -175,7 +175,7 @@ export function wearFor(world: World, p: Person, task: ToolTask, ticks: number):
 /** A tool leaves one person's hands for another's on loan. The caller records the promise to return it. */
 export function lendTool(world: World, t: Tool, from: Person, to: Person, due: number): boolean {
   if (t.holder !== from.id || t.loan) return false;
-  if(t.textile&&roomFor(to.inv,carryCap(world,to),t.kind)<1)return false;
+  if((t.textile||t.kind==='net'||t.kind==='trap')&&roomFor(to.inv,carryCap(world,to),t.kind)<1)return false;
   takeFrom(from.inv, t.kind, 1);
   addItem(to.inv, t.kind, 1);
   t.holder = to.id;
@@ -187,7 +187,7 @@ export function lendTool(world: World, t: Tool, from: Person, to: Person, due: n
 /** The borrower hands it back: it returns to the lender's hands and the loan is closed. */
 export function returnLoan(world: World, t: Tool, borrower: Person, lender: Person): boolean {
   if (t.holder !== borrower.id || !t.loan) return false;
-  if(t.textile&&roomFor(lender.inv,carryCap(world,lender),t.kind)<1)return false;
+  if((t.textile||t.kind==='net'||t.kind==='trap')&&roomFor(lender.inv,carryCap(world,lender),t.kind)<1)return false;
   takeFrom(borrower.inv, t.kind, 1);
   addItem(lender.inv, t.kind, 1);
   t.holder = lender.id;
@@ -199,7 +199,7 @@ export function returnLoan(world: World, t: Tool, borrower: Person, lender: Pers
 /** Take a tool from a rack (a shared store): the rack's loan has no lender, the borrower answers to everyone. */
 export function checkoutFromRack(world: World, t: Tool, rackItems: Items, to: Person): boolean {
   if (t.loan || t.holder === to.id || !(rackItems[t.kind] ?? 0)) return false;
-  if(t.textile&&roomFor(to.inv,carryCap(world,to),t.kind)<1)return false;
+  if((t.textile||t.kind==='net'||t.kind==='trap')&&roomFor(to.inv,carryCap(world,to),t.kind)<1)return false;
   const rack = world.byId.get(t.holder);
   if (!rack || rack.ent !== 'building') return false;
   takeFrom(rackItems, t.kind, 1);

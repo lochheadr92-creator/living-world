@@ -190,7 +190,7 @@ export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
   rendered_fat:4,
   hide:5, fat:3,
-  fibre:1.2,garment:5,blanket:5,bedding:6,
+  net:7,trap:8,fibre:1.2,garment:5,blanket:5,bedding:6,
     dried_fish:2.6, smoked_fish:2.8, dried_meat:2.6, smoked_meat:2.8,
     offcuts: 0.7,
     berries: 1, fruit: 1.3, fish: 2, grain: 1.6, bread: 2.4, meat: 2.2, water: 1, wood: 1.4, stone: 1.8, seeds: 2, clay: 1.5, ore: 2, planks: 2.6, handles: 2, bricks: 3, charcoal: 2.2, iron: 5,

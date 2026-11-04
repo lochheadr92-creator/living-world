@@ -6,6 +6,8 @@ import type { ItemKind, NeedKey } from '../sim/types';
 const DARK = '#0e1822';
 
 const ICONS = {
+  net: `<path d="M2 2h12v12H2ZM5 2v12M9 2v12M2 6h12M2 10h12" fill="none" stroke="currentColor"/>`,
+  trap: `<path d="M2 13h12M3 12 8 3l5 9M2 5l12-3" fill="none" stroke="currentColor" stroke-width="2"/>`,
   fibre: `<path d="M2 13Q8 10 7 2M6 14Q12 9 11 2M3 4l9 7M3 8l8 5" fill="none" stroke="currentColor" stroke-width="1.4"/>`,
   garment: `<path d="M5 2 1 5l2 3 2-1v7h6V7l2 1 2-3-4-3Q8 5 5 2Z" fill="currentColor"/>`,
   blanket: `<path d="M3 2h10v12H3Z" fill="currentColor"/><path d="M3 5h10M5 2v12" stroke="#fff" stroke-opacity=".5"/>`,

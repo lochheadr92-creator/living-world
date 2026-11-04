@@ -385,6 +385,12 @@ export class Scenery {
     ctx.beginPath();
     ctx.ellipse(x, y + 2, 14, 5.5, 0, 0, Math.PI * 2);
     ctx.fill();
+    if(p.gear){
+      ctx.strokeStyle=p.gear.state==='broken'?'#85564d':'#b8a779';ctx.lineWidth=2;
+      ctx.strokeRect(x-12,y-7,24,12);for(let n=-8;n<=8;n+=4){ctx.beginPath();ctx.moveTo(x+n,y-7);ctx.lineTo(x+n,y+5);ctx.stroke();}
+      if(p.gear.kind==='trap'){ctx.beginPath();ctx.moveTo(x-12,y-8);ctx.lineTo(x+10,y-16);ctx.lineTo(x+12,y-7);ctx.stroke();}
+      return;
+    }
     if(p.carcass){
       const full=p.carcass.emptySince===null;
       ellipse(ctx,x,y-2,12,5,full?'#83634a':'#aaa38b');

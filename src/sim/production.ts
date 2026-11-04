@@ -1,3 +1,5 @@
+import {knownGearStock} from './gear_stock';
+import {hasGear,knowsSetGear} from './passive_gear';
 import {hasCarcasses} from './carcass';
 import {recipeAvailable} from './recipes';
 import {knownTextileStock} from './textile_stock';
@@ -131,7 +133,7 @@ export function knowsEnough(ctx: Ctx, type: BuildingType): boolean {
   return n >= rules.facilityAllowance;
 }
 
-const stockAt = (ctx:Ctx,b: Belief, item: ItemKind): number => knownTextileStock(ctx.world,ctx.p,b,item);
+const stockAt = (ctx:Ctx,b: Belief, item: ItemKind): number => knownGearStock(ctx.world,ctx.p,b,item)??knownTextileStock(ctx.world,ctx.p,b,item);
 
 function belief(ctx: Ctx, id: number): Belief | undefined {
   return ctx.p.beliefs[id];
@@ -596,6 +598,11 @@ const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && f
 export function demandsOf(ctx: Ctx): Demand[] {
   const { world, p } = ctx;
   const out: Demand[] = [];
+  if(hasGear(world)&&ctx.stage!=='child')for(const kind of ['net','trap'] as const){
+    const known=Object.values(p.beliefs).some(b=>b.kind===(kind==='net'?'fish_spot':'tree'));
+    if(known&&!p.inv[kind]&&!knowsSetGear(ctx,kind))out.push({item:kind,qty:1,have:0,base:28,why:'set owned gear for later food',tag:'craft'});
+    if(Object.values(p.beliefs).some(b=>b.gear?.kind===kind&&b.gear.hhId===p.hhId&&b.gear.wear>=60)&&!p.inv.fibre)out.push({item:'fibre',qty:1,have:0,base:32,why:'mend owned gear',tag:'craft'});
+  }
   if(hasClothing(world)){
     const cold=p.needs.warmth<65||world.weather.temp<12;
     for(const kind of TEXTILES){
@@ -649,7 +656,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
   if (facilitiesOf(ctx, 'smithy').length) {
     let worst: { kind: ToolKind; wear: number } | null = null;
     for (const t of toolsHeldBy(world, p.id)) {
-      if (isTextile(t.kind) || t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
+      if (isTextile(t.kind) || t.kind === 'net' || t.kind === 'trap' || t.kind === 'basket' || t.kind === 'jar' || t.tier === 1) continue;
       if (toolsHeldBy(world, p.id, t.kind).some((x) => x.tier === 1)) continue;
       if (t.wear >= 18 && (!worst || t.wear > worst.wear)) worst = { kind: t.kind, wear: t.wear };
     }

@@ -1,5 +1,15 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Current survival checkpoint, rules126:** physical gear, finite catches and
+owned collection are implemented; river25 demonstrates two net fish eaten.
+Forest catches went unused and its trap was far from every deer at the traced
+attempt. Continue a bounded dated-sighting-to-trap-site link, then animals,
+reserves last and the remaining product links/comparisons. Reference126 captured;
+broad suite retains exactly31 baseline failures, later focused/affected checks
+pass, full typecheck/build retain two review errors. Full details and active
+fern run: `SURVIVAL_CAPABILITIES.md` and `HANDOFF.md`.
+
+
 **Current survival checkpoint, 4 November 2026:** rules125 adds finite carcasses
 and paid butchery with hide/fat processing. Ordinary fern60 shows recovered
 meat eaten, a recovered hide later lost, and a contested claim; the material

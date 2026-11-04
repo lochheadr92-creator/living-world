@@ -1,3 +1,4 @@
+import {ownedGearRules,ownedGearAt} from './gear_stock';
 import {pileAccessBlocker} from './pile_access';
 import {runsPreservation} from './preservation';
 import {saveSeedFromGrain} from './wild_seed';
@@ -565,6 +566,7 @@ registerHandler('deposit', {
       return 'the place is gone';
     }
     const e = world.byId.get(a.targetId)!;
+    if(e.ent==='pile'&&e.gear)return 'keep loose goods separate from deployed gear';
     if(e.ent==='pile'&&e.carcass)return 'keep loose goods separate from the body';
     if(e.ent==='pile'&&e.mealFood)return 'keep other goods separate from the leftover meal food';
     if(e.ent==='pile'&&e.estate)return 'keep new goods separate from these belongings';
@@ -586,6 +588,7 @@ registerHandler('deposit', {
     let moved = 0;
     let partial = false;
     const e = world.byId.get(a.targetId)!;
+    if(e.ent==='pile'&&e.gear)return 'fail:keep loose goods separate from deployed gear';
     if(e.ent==='pile'&&e.carcass)return 'fail:keep loose goods separate from the body';
     if(e.ent==='pile'&&e.mealFood)return 'fail:keep other goods separate from the leftover meal food';
     if(e.ent==='pile'&&e.estate)return 'fail:keep new goods separate from these belongings';
@@ -791,7 +794,9 @@ registerHandler('withdraw', {
       let n = want[k];
       if (e && e.ent === 'building') n = withdrawAllowance(world, e, p, k as ItemKind, n);
       if (n <= 0) continue;
-      const m = transfer(world, c.items, p.inv, carryCap(world, p), k as ItemKind, n, c.kind + ':' + a.targetId, 'person:' + p.id, 'withdraw');
+      const gear=ownedGearRules(world,k as ItemKind),record=gear?ownedGearAt(world,p,a.targetId,k as ItemKind)[0]:undefined;
+      if(gear&&!record)continue;
+      const m = transfer(world, c.items, p.inv, carryCap(world, p), k as ItemKind, gear?Math.min(n,1):n, c.kind + ':' + a.targetId, 'person:' + p.id, 'withdraw',record?.id);
       moved += m;
       if (m > 0 && e && e.ent === 'building') {
         noteWithdraw(world, e, p, k as ItemKind, m);
@@ -814,6 +819,7 @@ registerHandler('withdraw', {
 
 /** A tool left on a shared rack is no longer anyone's own: it becomes the settlement's, free to be borrowed and brought back. */
 function donateToRack(world: World, buildingId: number, p: Person, kind: ToolKind, n: number): void {
+  if(ownedGearRules(world,kind))return;
   let left = n;
   for (const t of world.tools) {
     if (left <= 0) break;

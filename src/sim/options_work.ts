@@ -385,7 +385,7 @@ export function setWorkshopTools(on: boolean): void { workshopTools = on; }
 function workshopTool(ctx: Ctx): HandTool | null {
   if (!workshopTools || ctx.world.settings.dynamics !== 'rich' || !runsRulesVersion(ctx.world, 57) || ctx.stage === 'child') return null;
   const tool = ctx.toolWanted?.kind;
-  return tool && tool !== 'jar' && tool !== 'garment' && tool !== 'blanket' && tool !== 'bedding' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
+  return tool && tool !== 'jar' && tool !== 'garment' && tool !== 'blanket' && tool !== 'bedding' && tool !== 'net' && tool !== 'trap' && !(ctx.p.inv[tool] ?? 0) ? tool : null;
 }
 
 export function wantedTool(ctx: Ctx): HandTool | null {

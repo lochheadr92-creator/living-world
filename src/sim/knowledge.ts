@@ -1,3 +1,4 @@
+import {ownedGearRules,ownedGearAt} from './gear_stock';
 import { biological, conditionAt, ecologicalSign, hasEcology, rememberedGrowth } from './ecology';
 import { deathStory, hasLocalDeath } from './death_knowledge';
 import { SOURCE_REGROW } from './constants';
@@ -82,6 +83,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
     case 'pile': {
       const b = blank(e.id, 'pile', e.x + 0.5, e.y + 0.5, tick);
       b.items = cloneItems(e.items);
+      if(e.gear){const g=e.gear,t=world.tools.find(t=>t.id===g.toolId);b.items={};b.hh=g.hhId;b.state='gear';b.gear={kind:g.kind,toolId:g.toolId,hhId:g.hhId,readyAt:g.readyAt,state:g.state,checked:g.checked,bodyId:g.bodyId,wear:t?.wear??100,catch:e.items.fish??0};}
       if(e.carcass){b.state='carcass';b.hh=e.carcass.hhId;b.carcassParts={...e.carcass.remaining};}
       if(e.mealFood)b.hh=e.mealFood.hhId;
       if(e.estate)b.hh=e.estate.hhId;
@@ -175,6 +177,9 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if(e.ent==='building'&&e.hearth){
     if(p.indoors===e.id)b.hearth={...e.hearth,seen:world.tick};
     else if(p.beliefs[e.id]?.hearth)b.hearth={...p.beliefs[e.id].hearth!};
+  }
+  if(ownedGearRules(world,'net')&&(e.ent==='building'||e.ent==='cart'||e.ent==='pile')&&!(e.ent==='pile'&&e.gear)){
+    b.gearStock={observer:p.id,items:Object.fromEntries((['net','trap'] as const).map(k=>[k,Math.min(ownedGearAt(world,p,e.id,k).length,e.ent==='building'?usableUnits(world,e,p,k):Infinity)]))};
   }
   b.origin = p.id;
   b.hops = 0;

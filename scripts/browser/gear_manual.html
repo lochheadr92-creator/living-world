@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staged gear verification</title></head><body>
+<div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+<div style="position:fixed;top:70px;left:10px;width:205px;z-index:2000;background:#15251c;padding:10px;color:white"><strong>STAGED net contract</strong><p>An owned worn net and three fish are staged. Placement, catches and collection use real work and finite stock.</p><button id="cut">Set and collect a net catch</button><button id="decay">Wear out the net and try to reset</button><output id="result"></output></div>
+<script type="module">
+import '/src/styles.css';
+import {Game} from '/src/app/game.ts';import {Renderer} from '/src/render/renderer.ts';import {mountUI} from '/src/ui/index.ts';import {project} from '/src/render/iso.ts';
+import {stage,addPerson,done,learn} from '/tests/helpers/kit.ts';import {makeSource} from '/src/sim/sources.ts';import {mintTool} from '/src/sim/tools.ts';import {gearTick} from '/src/sim/passive_gear.ts';
+import {generateOptions} from '/src/sim/decision.ts';import {startActivity,stepActivity,newActivity} from '/src/sim/activities.ts';
+import {serializeWorld,deserializeWorld} from '/src/app/save.ts';import {conservationReport} from '/src/sim/economy.ts';
+const s=stage('gear-rendered'),w=s.w;w.settings={...w.settings,dynamics:'rich',rulesVersion:126};
+const p=addPerson(s,'Ada',40.5,40.5,{hunger:65,thirst:90,energy:90}),fish=makeSource(w,'fish_spot',41,40,3),tool=mintTool(w,'net',0,p.hhId,p.id,p.inv,p.id,'staged fixture',false);tool.wear=80;done(s);learn(w,p,fish);let gear;
+const g=new Game(w.settings);g.restoreWorld(w,w.settings);g.setPlaying(false);g.select(p.id);
+const pt=project(41,40);g.camera={x:pt.sx+20,y:pt.sy,zoom:2};
+const renderer=new Renderer(document.getElementById('world'),g),ui=mountUI(g,document.getElementById('ui')),result=document.getElementById('result');
+function finish(){for(let i=0;i<700&&p.activity;i++){w.tick++;stepActivity(w,p);}if(p.activity)throw Error('Activity did not finish');}
+function offered(key){const o=generateOptions(w,p,true,true).options.find(o=>o.key===key);if(!o)throw Error('Missing '+key);startActivity(w,p,o.make());finish();}
+function check(){w.tick=gear.gear.readyAt;gearTick(w);learn(w,p,gear);offered(`gear:check:${gear.id}`);}
+function verify(){const before=serializeWorld(w);ui.update(1);result.textContent=` Carried fish: ${p.inv.fish??0}; source fish: ${fish.amount}; net catch: ${gear?.items.fish??0}; state: ${gear?.gear.state??'carried'}; result: ${p.lastResult?.detail??'no work yet'}; conservation: ${conservationReport(w).ok}; pure: ${before===serializeWorld(w)}; exact save: ${before===serializeWorld(deserializeWorld(before))}`;}
+document.getElementById('cut').onclick=()=>{offered(`gear:place:${tool.id}:${fish.id}`);gear=w.piles.find(b=>b.gear);check();g.select(gear.id);verify();};
+document.getElementById('decay').onclick=()=>{offered(`gear:reset:${gear.id}`);check();startActivity(w,p,newActivity(w,p,{kind:'gear_work',label:'Try to reset broken gear',goal:'fish later',here:true,targetId:gear.id,targetType:'pile',data:{op:'reset'}}));finish();g.select(gear.id);verify();};
+function frame(){renderer.frame(.016);ui.update(.016);requestAnimationFrame(frame);}frame();verify();
+</script></body></html>

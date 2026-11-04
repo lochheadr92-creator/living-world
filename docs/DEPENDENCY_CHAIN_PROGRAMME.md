@@ -12,7 +12,9 @@ bedroll sleeping use is now observed in a fresh final-source meadow run.
 Rules125 adds finite carcasses and paid butchery: ordinary recovered meat is
 eaten, while ordinary hide/fat processing remains open despite complete staged
 paths. The later hide/wool links remain in the same capability document.
-Traps/nets, domestic animals and reserves remain pending.
+Rules126 makes and deploys physical traps/nets; river25 proves net-caught fish eaten.
+The trap-site-to-witnessed-wildlife link and ordinary trap body remain open.
+Domestic animals and reserves remain pending.
 Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
 
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are

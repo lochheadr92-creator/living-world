@@ -9,7 +9,7 @@ export type TerrainType = (typeof T)[keyof typeof T];
 // ───────────────────────────── items ─────────────────────────────
 export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat' | 'dried_fish' | 'smoked_fish' | 'dried_meat' | 'smoked_meat' | 'rendered_fat';
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
-export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding';
+export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding' | 'net' | 'trap';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts';
@@ -80,6 +80,8 @@ export type BeliefKind =
 export interface Belief {
   /** Usable new textile goods personally checked at this belief's seen date. */
   textileStock?:{observer:number;items:Items};
+  /** Household-deployable equipment personally checked at this observation. */
+  gearStock?:{observer:number;items:Items};
   id: number;
   kind: BeliefKind;
   x: number;
@@ -106,6 +108,7 @@ export interface Belief {
   need?: Items;
   state?: string;
   /** Dated observation of parts still inside a carcass, not withdrawable goods. */
+  gear?:Pick<GearState,'kind'|'toolId'|'hhId'|'readyAt'|'state'|'checked'|'bodyId'> & {wear:number;catch:number};
   carcassParts?:Partial<Record<CarcassPart,number>>;
   progress?: number;
   fuel?: number;
@@ -226,6 +229,7 @@ export type ActivityKind =
   | 'attend'
   | 'hunt'
   | 'butcher'
+  | 'gear_work'
   | 'alone'
   | 'wander'
   | 'eat'
@@ -1006,7 +1010,9 @@ export interface Carcass {
   recovered:Record<CarcassPart,number>; lost:Record<CarcassPart,number>; work:Record<CarcassPart,number>;
   claim:{person:number;until:number}|null; emptySince:number|null;
 }
+export interface GearState {kind:'net'|'trap';toolId:number;owner:number;hhId:number;sourceId:number;setAt:number;readyAt:number;cycle:number;state:'armed'|'ready'|'broken';checked:boolean;catchTick:number|null;bodyId:number|null;lastTended:number}
 export interface Pile {
+  gear?:GearState;
   carcass?:Carcass;
   /** Rules 90: one physical leftover holding per meal; never merged with unrelated goods. */
   mealFood?: {mealId:number;hostId:number;hhId:number};
