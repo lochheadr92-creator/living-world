@@ -1,4 +1,5 @@
 import {hasLivestock,livestockMaterials} from './livestock';
+import {hasCarcassSupply,isBodyPart,knownCarcassUnits,supplyFromCarcass} from './carcass_supply';
 import {reservedFor} from './reserved_goods';
 import {knownGearStock} from './gear_stock';
 import {hasGear,knowsSetGear,knownTrapGround} from './passive_gear';
@@ -550,6 +551,9 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   if (item !== 'tend') remaining = unmet - collectOptions(ctx, item, unmet, base, why, tag, dest);
   // what is already standing on somebody's shelves counts: no one makes more of what is already there
   if (remaining <= 0) return;
+  if(item!=='cart'&&item!=='tend'&&hasCarcassSupply(ctx.world)&&isBodyPart(item)){
+    supplyFromCarcass(ctx,item,base*.92,why);return;
+  }
   if (item !== 'cart' && item !== 'tend') {
     if (isRawMaterial(item)) {
       gatherMaterial(ctx, item, remaining, base * 0.92 * traitMods(p).work, why, tag);
@@ -623,7 +627,7 @@ export function demandsOf(ctx: Ctx): Demand[] {
     }
     if(toolsHeldBy(world,p.id).some(t=>isTextile(t.kind)&&t.wear>=45)&&(p.inv.fibre??0)<1)out.push({item:'fibre',qty:1,have:0,base:28,why:'mend worn insulation',tag:'craft'});
   }
-  if(hasCarcasses(world)&&(p.inv.fat??0)>0)out.push({item:'rendered_fat',qty:1,have:p.inv.rendered_fat??0,base:30,why:'prepare recovered animal fat for food',tag:'food'});
+  if(hasCarcasses(world)&&((p.inv.fat??0)>0||hasCarcassSupply(world)&&knownCarcassUnits(ctx,'fat')>0&&facilitiesOf(ctx,'food_rack').length>0))out.push({item:'rendered_fat',qty:1,have:p.inv.rendered_fat??0,base:30,why:'prepare recovered animal fat for food',tag:'food'});
   if(hasPreservation(world)){
     const raw=preservationSurplus(ctx);
     // A finite food job belongs to the same planner as other workshop batches.
@@ -1222,6 +1226,7 @@ function optPlanUpgrade(ctx: Ctx): void {
 export function preservationSurplus(ctx:Ctx):'fish'|'meat'|null {
   const stocks=[ctx.p.inv,...beliefsByKind(ctx.p,['building']).filter(b=>
     ctx.world.tick-b.seen<=DAY && (b.hh===ctx.p.hhId||b.hh===0)).map(b=>b.items??{})];
+  if(hasCarcassSupply(ctx.world))stocks.push({meat:knownCarcassUnits(ctx,'meat')});
   const food=stocks.reduce((n,s)=>n+foodUnits(s),0);
   if(food<4)return null;
   for(const raw of ['fish','meat'] as const)if(stocks.reduce((n,s)=>n+(s[raw]??0),0)>=2)return raw;
@@ -1249,7 +1254,7 @@ function preservationOptions(ctx:Ctx):void {
       planRecipe(ctx,f,running,Object.keys(running.outputs)[0] as ItemKind,2,27,'finish preserving the paid batch','food',0);
       continue;
     }
-    if(hasCarcasses(ctx.world)&&waiting===0&&((ctx.p.inv.fat??0)+(f.b.items?.fat??0)>0))planRecipe(ctx,f,RECIPE_BY_ID.render_fat,'rendered_fat',1,30,'prepare recovered fat for food','food',0);
+    if(hasCarcasses(ctx.world)&&waiting===0&&((ctx.p.inv.fat??0)+(f.b.items?.fat??0)+knownCarcassUnits(ctx,'fat')>0))planRecipe(ctx,f,RECIPE_BY_ID.render_fat,'rendered_fat',1,30,'prepare recovered fat for food','food',0);
     const raw=preservationSurplus(ctx);
     if(!raw||waiting>0)continue;
     const method=ctx.world.weather.rain>0.1?'smoke':'dry';

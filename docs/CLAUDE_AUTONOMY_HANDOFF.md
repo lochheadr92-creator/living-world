@@ -1,13 +1,15 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
-**Current survival checkpoint, rules129:** finite kept sheep and paid wool
-clothing are connected. Final forest/river25:11/27alive, exacttwins/save120,
-conservation/500pure checks each. River made/wore two wool garments with36375
-protection ticks; forest's fleece went unused. New affected104tests pass;129
-immutable captured and passing. Full typecheck/build retain two baseline
-review errors; source5 broad run is still frozen/in progress. Next bounded
-work connects known carcass parts to production supply, then remaining trap
-use and reserves LAST. See `SURVIVAL_CAPABILITIES.md` and root `HANDOFF.md`.
+**Current survival checkpoint, rules130:** known body parts now feed existing
+paid recipe supply. Final forest/river25:11/27alive, exact twins/save120,
+conservation/500pure checks each; hide/fat/preserved-meat ordinary use remains
+null. A frozen fern60 extension is running. Focused75/6+88/8 and all nine
+122–130immutable references pass. Rendered8checks pass. Typecheck/build retain
+two baseline errors. Next: repair the documented missed encounter during an
+armed trap's600tick window, then finish deferred use and reserves LAST.
+The129source5 broad run finished427files/2604tests passing,14files/32tests
+failing:31baseline failures plus the subsequently fixed wool whitelist.
+See `SURVIVAL_CAPABILITIES.md` and root `HANDOFF.md`.
 
 **Current survival checkpoint, 4 November 2026:** rules125 adds finite carcasses
 and paid butchery with hide/fat processing. Ordinary fern60 shows recovered

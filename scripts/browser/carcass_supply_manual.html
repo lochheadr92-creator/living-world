@@ -1,0 +1,20 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staged carcass supply verification</title></head><body>
+<div id="app"><canvas id="world" aria-label="The simulated world"></canvas><div id="ui"></div></div>
+<div style="position:fixed;top:70px;left:10px;width:215px;z-index:2000;background:#15251c;padding:10px;color:white"><strong>STAGED body-to-clothing contract</strong><p>One dead deer, one binding fibre and an empty workshop. Offered work must recover, deliver, sew and wear the hide.</p><button id="make">Make and wear the hide garment</button><button id="decay">Let unused parts decay</button><output id="result"></output></div>
+<script type="module">
+import '/src/styles.css';
+import {Game} from '/src/app/game.ts';import {Renderer} from '/src/render/renderer.ts';import {mountUI} from '/src/ui/index.ts';import {project} from '/src/render/iso.ts';
+import {stage,addPerson,building,done,learn} from '/tests/helpers/kit.ts';import {makeWolf} from '/src/sim/wildlife.ts';import {makeCarcass,carcassTick,CARCASS_LIFETIME} from '/src/sim/carcass.ts';
+import {generateOptions} from '/src/sim/decision.ts';import {compileProject} from '/src/sim/project_compile.ts';import {startActivity,stepActivity,newActivity} from '/src/sim/activities.ts';
+import {serializeWorld,deserializeWorld} from '/src/app/save.ts';import {conservationReport} from '/src/sim/economy.ts';import {clothingWarmth} from '/src/sim/clothing.ts';
+const s=stage('carcass-supply-rendered'),w=s.w;w.settings={...w.settings,dynamics:'rich',rulesVersion:130};w.weather.temp=0;
+const p=addPerson(s,'Ada',40.5,40.5,{hunger:70,thirst:90,energy:90,inv:{fibre:1,berries:3}}),yard=building(s,'timber_yard',43,40,0),deer=makeWolf(w,41.5,40.5,'deer');done(s);const body=makeCarcass(w,deer,p);learn(w,p,yard,body);
+const g=new Game(w.settings);g.restoreWorld(w,w.settings);g.setPlaying(false);g.select(p.id);const pt=project(41,40);g.camera={x:pt.sx+20,y:pt.sy,zoom:2};
+const renderer=new Renderer(document.getElementById('world'),g),ui=mountUI(g,document.getElementById('ui')),result=document.getElementById('result');
+function finish(){for(let i=0;i<1200&&p.activity;i++){w.tick++;stepActivity(w,p);}if(p.activity)throw Error('Activity did not finish');}
+function work(key){const o=generateOptions(w,p,true,true).options.find(o=>o.key===key);if(!o)throw Error('Missing offered step '+key);startActivity(w,p,o.make());finish();if(p.lastResult?.outcome!=='success')throw Error(p.lastResult?.detail);}
+function verify(){const before=serializeWorld(w);ui.update(1);result.textContent=` Recovered hide: ${body.carcass.recovered.hide}; worn warmth: ${clothingWarmth(w,p)}; lost fat: ${body.carcass.lost.fat}; result: ${p.lastResult?.detail??'no work yet'}; conservation: ${conservationReport(w).ok}; pure: ${before===serializeWorld(w)}; exact save: ${before===serializeWorld(deserializeWorld(before))}`;}
+document.getElementById('make').onclick=()=>{const plan=compileProject(generateOptions(w,p,true,true),{item:'garment',quantity:1,tier:0});if(!plan.ok)throw Error(plan.reason);work(`butcher:${body.id}:hide`);const o=generateOptions(w,p,true,true).options.find(o=>o.kind==='deposit'&&o.targetId===yard.id&&o.goal.includes('hide'));if(!o)throw Error('No delivery');work(o.key);learn(w,p,yard);work(`operate:${yard.id}:sew_hide_garment`);learn(w,p,yard);work(`collect:${yard.id}:garment`);const t=w.tools.find(t=>t.holder===p.id&&t.kind==='garment');work(`dress:${t.id}`);g.select(p.id);verify();};
+document.getElementById('decay').onclick=()=>{w.tick=body.since+CARCASS_LIFETIME;carcassTick(w);startActivity(w,p,newActivity(w,p,{kind:'butcher',label:'Try the expired fat',goal:'recover fat',targetId:body.id,targetType:'pile',tx:41.5,ty:40.5,spotX:41.5,spotY:40.5,data:{part:'fat'}}));finish();g.select(body.id);verify();};
+function frame(){renderer.frame(.016);ui.update(.016);requestAnimationFrame(frame);}frame();verify();
+</script></body></html>

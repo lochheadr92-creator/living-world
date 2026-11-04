@@ -689,7 +689,9 @@ wool yet. The frozen5 river continuation reached day40 with17alive and2813
 actual wool-blanket protection ticks (10935.594degree-ticks). It passes exact
 twins, save+120continuation, conservation and300pure checks; six of eleven
 grown wool were used in a garment and blanket. This closes the earlier
-revision's basic ordinary wool-use route. Fresh meadow60 remains running.
+revision's basic ordinary wool-use route. Older source5 meadow60 completed23alive (1098.98s),1200pure checks, exacttwins/
+save120/conservation. Four fleece collected but none used; this predates the
+warm-interval connection.
 
 A separate observed connection remains worth correcting: source3's keeper
 had five wool, no garment, healthy needs and a known yard2.93tiles away at
@@ -726,8 +728,10 @@ matches all268current source files. Standalone Vite build passes; full
 review-test errors. Rendered check3 passes9checks; both visible screenshots
 inspected, including warm-period paid fleece-to-worn-garment and real neglect
 loss. The complete source1 broad run and current affected-delta results are
-retained above; source5's additional broad run continues frozen while the next
-behavior stream starts. It cannot certify changes after source5 by itself.
+retained above; source5's additional broad run completed:427files passed/14failed,2604tests
+passed/32failed/3expected failures,1023.88s, exit1. Its32failures comprise the
+31retained baseline failures and the pre-correction wool whitelist. The latter
+passes in current focused tests. This run does not certify later code by itself.
 
 Earlier candidate outcomes remain distinct: source1forest/river25=2/25alive,
 both sheep lost without care; source2=10/22alive without capture; source3=5/24.
@@ -739,7 +743,7 @@ connection or justification for higher utility was established. The trace's
 claims; future samples deep-clone them. These are candidate descriptions, not
 paired causal effects or evidence of accepted survival benefit.
 
-### Deferred carcass-input connection — diagnosed, next bounded change
+### Deferred carcass-input connection — rules130
 
 Frozen final129 forest trace (`survival_evidence/carcass-route129-forest`)
 recorded928person samples with a remembered body and10butchery endings.
@@ -750,10 +754,56 @@ items, but not a body's separately accounted recoverable parts. A known owned
 body plus binding and a usable yard cannot compile a hide garment; likewise
 fat does not motivate its existing rendering route until already carried.
 `carcass-supply-red.log` retains three failing contract cases for that gap.
-Planned connection: the existing supply step may offer paid butchery of fresh,
-personally known, accessible parts for an existing recipe goal. Retain normal
-travel/priority/capacity/arrival truth checks and all historical continuations.
-This is not evidence that higher hunting utility or more wildlife is needed.
+Rules130 adds `carcass_supply.ts`: the existing supply step can offer paid
+butchery of accessible parts personally seen within one day. The compiler's
+existing supply node recognises those finite inputs; no new scheduler,
+inventory, reservation or automatic transfer is introduced. Existing recipe
+priorities determine the offered recovery, with ordinary travel costs. The
+world rechecks ownership, capacity, decay and competition at the body.
+Known recoverable fat can motivate the existing rendering recipe at a known
+rack; known meat can motivate preservation, which still protects immediate
+food at actual batch start. Sheep butchery now says body, not deer.
+
+Checks:75tests/6files PASS (11new supply cases plus carcass, preservation,
+compiler, batch and129continuation), then88tests/8affected files PASS.
+The first negative new fixture wrongly ruled out the valid alternative fibre
+recipe; it now tests absence of the inaccessible hide route. Old129 remains
+byte-identical. Typecheck/build exit1 with only the two baseline nullable
+review errors; standalone Vite build passes. Rendered8checks pass after the
+harness scoped console errors to this run (the first attempt included an old
+sheep-page error). Authoritative visually inspected screenshots are
+`carcass-supply-rendered2/success-visible.png` and `failure-visible.png`;
+automatic screenshots caught earlier paint frames and are not proof of the
+final state. Ordinary forest/river25 runs use frozen
+`living-world-carcass-supply-check1`; final source2 adds the correctly displayed
+120tick butchery work cost and per-material protection counters. Final
+source2 forest/river25 runs both finish at the declared horizon. Immutable130 is captured after
+that correction and passes1/1; all nine immutable122–130continuations pass
+(`carcass-supply-references.log`,9tests/9files,exit0). Source digest:
+`1a87e46dd5571935f034373d7d8d16e8c4b9d37de8137839dc94f69b8cdecb7f`.
+No ordinary hide/fat/meat preservation completion is claimed yet.
+
+Final-source forest25 finishes with11alive,331.86seconds,500pure checks,
+exact twins/save120 and conservation. Four bodies create16meat/4hide/4fat;
+eight meat are eaten, eight lost, and all hide/fat lost. The matching
+`carcass-route130-forest` trace retains928samples and10butchery endings. Eight
+samples have changed ingredient offers; actual endings remain unchanged.
+Examples: at37440 the hide offer loses to sleep/social needs; at38400 it
+loses to hearth fuel work. No further missing connection is established by
+that trace. A frozen fern60 extension tests the seed that previously had an
+actual recovered hide; it is pending, not a claimed positive result.
+Final river25 finishes with27alive,451.47seconds,500pure checks, exact
+twins/save120 and conservation. Two bodies supply eight meat, three eaten
+and five lost; both hides and both fat are lost. Neither final25run makes
+preserved meat or rendered fat. Pre-cost-view source1 has the same aggregate
+body outcomes (328.63/453.96seconds); its reports remain separately retained.
+
+The separate frozen128 meadow60 trap trace found one real missed encounter:
+trap43683 was armed at130197; at130198 deer1292 was inside radius4 and passed
+its fixed cycle/deer hash, but only the final tick130797 was tested. This is
+concrete support for checking encounters during the existing waiting window
+without re-rolling or increasing wildlife. Repair follows rules130; not yet
+implemented (`trap-encounter128-meadow/report.json`).
 
 ## 7. Body reserves — authorised, pending streams 1–6
 
@@ -764,10 +814,14 @@ new worlds start at zero; a missing historical field supplies zero benefit.
 A paid portion first allocates its nutrition once: below hunger 40, immediate
 hunger has priority; otherwise 25% is offered to storage. Unused immediate
 capacity also goes to storage. Storage converts at 80% efficiency, capped at
-current life-stage capacity; unretained nutrition is lost, never duplicated.
+current life-stage capacity. Storage is offered only up to available capacity;
+its unused allocation remains available to immediate hunger. Any nutrition left
+after both capacities is lost, never duplicated. A portion begun below hunger
+40 gives its whole allocation to immediate hunger first (overflow may store).
 Hunger expenditure and decision pressure stay unchanged. Only expenditure
 below hunger zero can draw reserve, one nutrition unit per unit of deficit;
-starvation damage applies only to the uncovered fraction of that tick. Thirst,
+starvation damage applies only to the uncovered fraction of that tick's
+hunger deficit. With zero reserves, the existing starvation damage is unchanged. Thirst,
 exposure, injury and exhaustion keep their existing consequences.
 
 Reference bounds, Normal with hunger initially zero, no eating or healing,

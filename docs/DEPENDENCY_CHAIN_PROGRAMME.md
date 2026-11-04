@@ -19,6 +19,9 @@ Rules129 adds finite kept sheep, paid care/breeding/shearing/slaughter and wool
 clothing. Final river25 records two worn wool garments and36375protection ticks;
 forest25 has no wool use. Ordinary breeding in final source and remaining hide/
 fat/meat/trap food routes remain open; reserves are next after those connections.
+Rules130 connects personally known body parts to paid recipe supply. All
+nine122–130references pass; final forest/river25 remain null for hide/fat/meat
+processing. The concrete trap-window repair and bounded fern search follow.
 Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
 
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are

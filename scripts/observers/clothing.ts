@@ -15,6 +15,7 @@ export function clothingObserver(w:World){
    for(const t of w.tools){if(!t.textile)continue;const p=w.byId.get(t.holder);if(p?.ent!=='person'||!p.alive)continue;
     const heat=textileProtection(p,t);if(heat<=0)continue;
     inc(`protected ticks:${t.kind}:${stageOf(w,p)}`);inc(`degree ticks:${t.kind}:${stageOf(w,p)}`,heat);
+    inc(`material protection ticks:${t.textile.material??'fibre'}:${t.kind}`);inc(`material degree ticks:${t.textile.material??'fibre'}:${t.kind}`,heat);
    }
   },
   sample(ctx:Ctx,ranked:Option[]){

@@ -1,4 +1,6 @@
 import {recipeAvailable} from './recipes';
+import {isBodyPart,knownCarcassUnits} from './carcass_supply';
+import {CARCASS_WORK} from './carcass';
 import {knownTextileStock} from './textile_stock';
 // Build a finite prerequisite tree from personal knowledge. Compilation creates no action, reservation or material.
 import {TOOL_DEFS,TOOL_RECIPE,isHomeType} from './constants';
@@ -34,6 +36,7 @@ export function compileProject(ctx:Ctx,goal:ProjectGoal,ownPlan?:Pick<Intention,
   const shelf=destination?knownTextileStock(world,p,p.beliefs[destination],item as ItemKind):0;
   const held=item==='cart'?0:tier===1?toolsHeldBy(world,p.id,item as ToolKind).filter(t=>t.tier===1).length:Math.max(0,(p.inv[item]??0)-reservedFor(world,p,item)+(ownPlan?.wants[item]??0));
   if(shelf+held>=quantity)return node.id;
+  if(item!=='cart'&&isBodyPart(item)&&knownCarcassUnits(ctx,item)>=quantity-shelf-held){node.method='supply';node.estimatedTicks=CARCASS_WORK*(quantity-shelf-held);return node.id;}
   // Reuse remembered workshop output. Owned food reserves retain the ordinary supply planner's separate surplus gate.
   if(tier===0&&item!=='cart'&&!['berries','fruit','grain','fish','bread','meat','flour', 'dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'].includes(item)){
    const stored=Object.values(p.beliefs).some(b=>b.id!==destination&&b.kind==='building'&&knownTextileStock(world,p,b,item)>=quantity&&

@@ -80,7 +80,7 @@ export function carcassOptions(ctx:Ctx):void{
    if((b.carcassParts[part]??0)<1||weightOf(p.inv)+WEIGHT[part]>carryCap(w,p))continue;
    const need=part==='meat'?Math.max(0,ctx.drives.hunger)*.5+(ctx.food<2?24:6):part==='hide'?(p.inv.garment?5:24):ctx.food<2?18:4;
    const util=need-pen(travel)*.6;if(util<5)continue;
-   addOption(ctx,{kind:'butcher',key:`butcher:${b.id}:${part}`,label:`Recover ${part} from the deer`,goal:'use the finite body before it decays',need:part==='hide'?'warmth':'hunger',util,parts:[['known recoverable body part',need],['walking',-pen(travel)*.6]],eta:travel+CARCASS_WORK,targetId:b.id,tag:part==='hide'?'warmth':'food',yields:part,make:()=>newActivity(w,p,{kind:'butcher',label:`Recovering ${part}`,goal:'use the body before it decays',targetId:b.id,targetType:'pile',tx:b.x,ty:b.y,spotX:b.x,spotY:b.y,utility:util,minCommit:20,maxTicks:900,data:{part}})});
+   addOption(ctx,{kind:'butcher',key:`butcher:${b.id}:${part}`,label:`Recover ${part} from the ${runsRulesVersion(w,130)?'body':'deer'}`,goal:'use the finite body before it decays',need:part==='hide'?'warmth':'hunger',util,parts:[['known recoverable body part',need],['walking',-pen(travel)*.6]],eta:travel+CARCASS_WORK,targetId:b.id,tag:part==='hide'?'warmth':'food',yields:part,make:()=>newActivity(w,p,{kind:'butcher',label:`Recovering ${part}`,goal:'use the body before it decays',targetId:b.id,targetType:'pile',tx:b.x,ty:b.y,spotX:b.x,spotY:b.y,utility:util,minCommit:20,maxTicks:900,data:{part}})});
   }
  }
 }

@@ -1,58 +1,53 @@
-# Active survival continuation — rules129 checkpoint, next carcass supply
+# Active survival continuation — rules130, ready for focused commit
 
-Owner's entire seven-family programme remains in progress. No reapproval needed;
-user confirmed this shared checkout is free to continue. No subagents. Preserve
-unrelated untracked tests/evidence and six older unpublished commits; no push.
-Authoritative current implementation/evidence: docs/SURVIVAL_CAPABILITIES.md.
+Owner authorised this checkout and all seven capability families. Task NOT
+complete. Preserve unrelated evidence/tests; no push of older unrelated commits.
+130 known-body recipe supply passes75/6+88/8 focused, nine122–130references,
+eight rendered checks; typecheck/build retain two baseline nullable errors.
+Final-source2 forest/river25 DONE11/27alive; exact twins/save120/conservation,
+500pure checks each. No hide/fat/preserved-meat output. Detailed null findings
+and source hashes in docs/SURVIVAL_CAPABILITIES.md. Forest trace130 DONE:928
+samples,10butchery endings, eight changed offers but no changed endings.
 
-129 implements finite sheep founding pair, paid acquisition/containment/care,
-finite forage/water, fed gestation/fleece, paid shearing/slaughter and wool gear.
-Latest source6 also retains useful wool preparation through warm intervals,
-using personally observed usable workshop wool and existing priorities.
-Frozen source: ../living-world-sheep-check6 (268 src files). Main runtime matches.
-Final source6 forest/river25 complete11/27alive, exacttwins/save120/conserve
-and500pure checks. River10shears,6feedings,2repairs,2slaughters, two worn wool
-garments/36375protection ticks; forest no wool use. Full details in feature doc.
+Running only frozen130 fern60 extension: session63699, output
+survival_evidence/carcass-supply-check2/fern-60d, frozen
+../living-world-carcass-supply-check2. Do not modify frozen source.
+Next implement131 trap-window repair: actual128meadow encounter130198 was
+missed before final resolution130797. tests/trap_window.test.ts has6tests,
+3pass3expected-red under130 (trap-window-red2.log). Future staged page and
+checker scripts/browser/trap_window_* exist but unverified, exclude130commit.
+Immutable130 captured, source1a87e46dd5571935f034373d7d8d16e8c4b9d37de8137839dc94f69b8cdecb7f.
 
-Checks: 104tests/9files pass (source6 affected); 26 sheep contracts. Immutable
-129 captured before successors and test passes1/1 (reference129-write.log,
-reference129-test1.log). Old124/125/128 references pass. typecheck7/build3 exit2
-with only the two baseline untracked nullable test errors. Standalone Vite build
-passes (sheep-vite-final.log). Browser sheep-rendered-check3 ninePASS, both
-screenshots visually inspected: actual staged paid fleece-to-worn garment and
-neglect/body loss. Browser IABtab1/browser2, server5296 session81948.
+Remaining: ordinary hide/fat/preserved meat/trap-food completion; bounded131
+checks/rendering/25day runs. Reserves7 is LAST and already authorised. Chosen
+capacity/efficiency/expenditure/recovery bounds are recorded before code.
+Then immediate-predecessor75draw and final75draw cohorts and comparison with
+validated121baseline, final broad verification. No reserve runtime yet.
 
-Running sessions (all logs in survival_evidence/resume-20261104):
-- 9039: source5 meadow60, output sheep-check5/meadow-60d (old source; null wool use).
-- 96733: source5 full suite, livestock-full5.log, three workers; still pending.
-- 44444: frozen128 trap_encounter_trace meadow60, trap-encounter128-meadow.
-Do not edit source/scripts that each running command fingerprints.
+Finished129source5 broad:427filespass14fail;2604testspass32fail3expected,
+1023.88s exit1.32=31baseline+old wool whitelist; current focused covers fix.
+Frozen128 trap encounter trace done: trap43683 set130197, deer1292 inradius4
+at130198 with fixed hashPASS; missed because code checked only130797. One
+bounded131followup should check actual encounters during existing600tick window,
+never reroll; do after130capture/verification. Evidence trap-encounter128-meadow.
+129carcass trace928samples,13heldmeat (none>=2), noheldhide/fat, demonstrated
+missing production ingredient connection. Three red tests retained.
 
-Source5 earlier river40 continuation: 2813 wool blanket protection ticks,
-10935.594degree ticks; source4 river25 made unworn garment. Different candidates,
-not paired benefit. Source1 broad:425pass16fail files;2590pass35fail3expected;
-35=31baseline+2missingfaminefixtures+repairedleisure+updatedwoolwhitelist.
-Source5 includes exact famine fixture and corrected leisure, predates whitelist
-change. Current focused104 include new whitelist and latest warm-wool runtime.
+Next: finish130ordinary+reference+diff/commit/Brain. Then boundedtrap repair,
+ordinaryuse. Deferredhide/fat/preservedmeat/trapfood still need final-source
+use. Reserves7LAST, alreadyauthorised: chosen capacities/80%efficiency/bounds
+and paidrecovery recorded BEFORE implementation in SURVIVAL_CAPABILITIES.md.
+No reserve runtime yet. Need immediate-predecessor75draw and final75draw
+cohorts; baseline75 complete/validated. survival_compare.mjs selfcheckpassed.
 
-Next: complete129 focusedcommit/Brain checkpoint. Then demonstrated
-carcass production-supply gap (three red tests in uncommitted carcass_supply.test.ts;
-these belong to NEXT increment): compiler/supply cannot acquire ingredients from
-known carcasses, unlike opportunistic butchery; trace before repair. Also fix
-sheep butchery label ('from the deer') in that increment. Ordinary hide/fat/
-preserved-meat and trap-to-food remain open. Frozen128 meadow nudge1 100days
-found zero trap bodies; do not force a pass with wildlife/utility inflation.
+Uncommitted observational extras: survival_ensemble bodyremaining metric,
+survival_compare.mjs, trap_activation_scan.ts, trap_encounter_trace.ts,
+carcass_route_trace.ts. Own sheep_trace.ts trailing whitespace fixed after129
+commit. Include logical files only; no indiscriminate gitadd.
 
-Reserves7 LAST. Agent's pre-implementation capacity/efficiency/food-free bound
-and paid recovery choices now recorded in docs/SURVIVAL_CAPABILITIES.md; no
-reserve runtime yet. Need immediate-predecessor75draw and final75draw cohorts.
-Baseline75 complete/validated under aggregate-baseline/final-audit.json.
-New survival_compare.mjs validates/matches cohorts; self-comparison passed.
-
-Brain last checksum c5491f8e8a5835c9d05d1e41f8ae572765a868b4b394fc196c9df83dd44777ee
-for daily/2026-11-04-living-world-survival-implementation (after bedbb8e).
-Archive start refreshed2212; run refresh.mjs at eventual turn end. Historical
-checkpoints follow; they are not current status.
+Brain daily checksum f360e4ddbf45a47ddb2d455604e05ade87d58e609ebd8350967588c71b539445
+for daily/2026-11-04-living-world-survival-implementation. Archive start refreshed
+2212; run refresh.mjs at eventual turn end. Historical checkpoints below.
 
 # Active survival continuation — dirty rules128, main2fdf0ea
 
