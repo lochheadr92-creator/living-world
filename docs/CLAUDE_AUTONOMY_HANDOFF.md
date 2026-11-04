@@ -1,5 +1,7 @@
 # Autonomy programme handoff — 31 October 2026 (Claude session, second checkpoint)
 
+**Active instruction, 4 November 2026:** reconcile the roadmap and proceed sequentially. The ordered execution index at the top of [DEPENDENCY_CHAIN_PROGRAMME.md](DEPENDENCY_CHAIN_PROGRAMME.md) supersedes older next-step/stop wording. Project material allocation is first; compact save performance follows.
+
 **Current recovery checkpoint, 4 November 2026:** rules 147 is integrated and pushed to main; reviewed retired branch refs are removed after verified archival. Read [RECOVERED_CAPABILITIES.md](RECOVERED_CAPABILITIES.md) for the selected features, full verification/failure classification and ordinary activation limits. Post-publication test maintenance passes all 477 files (2,811 passed, zero unexpected failures, two documented expected failures); typecheck/build pass. The nine-seed 25-day all-on baseline and retained failed attempts are recorded there; simulation source remains unchanged. This completed recovery does not restart the separate stopped survival programme. Older checkpoints below are historical.
 
 **Owner stop,4 November2026:** current trap-report section (rules133) complete;

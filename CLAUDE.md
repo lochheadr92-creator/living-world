@@ -1,5 +1,7 @@
 # Living World: notes for Claude (read this first)
 
+**Active roadmap (4 November 2026):** the owner resumed sequential work after reconciliation. See the current ordered section of [docs/DEPENDENCY_CHAIN_PROGRAMME.md](docs/DEPENDENCY_CHAIN_PROGRAMME.md); start with project material allocation, then compact-save performance. Earlier stop checkpoints below remain historical, not the current instruction.
+
 **Current main (4 November 2026): rules 147.** The selected retired-branch recovery is integrated and pushed; all nineteen old tips are archived and their retired refs removed. See [docs/RECOVERED_CAPABILITIES.md](docs/RECOVERED_CAPABILITIES.md) for mechanisms, staged/ordinary evidence, the repaired full suite (477 files, 2,811 passed, two retained expected failures), all-on baseline and uptake limits. The separate survival programme remains stopped/incomplete; do not resume unrelated tuning.
 
 **Before planning or editing:** read `WORKFLOW.md` and `PRODUCT_VISION.md`, including

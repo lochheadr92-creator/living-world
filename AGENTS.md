@@ -1,5 +1,7 @@
 # Living World: notes for Codex (read this first)
 
+**Active roadmap (4 November 2026):** the owner resumed sequential work after reconciliation. See the current ordered section of [docs/DEPENDENCY_CHAIN_PROGRAMME.md](docs/DEPENDENCY_CHAIN_PROGRAMME.md); start with project material allocation, then compact-save performance. Earlier stop checkpoints below remain historical, not the current instruction.
+
 **Published main (4 November 2026): rules 147.** Survival capability development is stopped
 at the owner's request, with incomplete acceptance and adverse findings retained in
 [docs/SURVIVAL_CAPABILITIES.md](docs/SURVIVAL_CAPABILITIES.md). Older-work preservation,
