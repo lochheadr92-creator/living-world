@@ -62,7 +62,7 @@ import { validateTownships } from '../sim/townships';
 // always lives in localStorage.
 // The world is plain data (typed arrays, Maps, Sets and the RNG state are the only special cases).
 import { hashString, RNG } from '../sim/rng';
-import { validateRulesVersion, RULES_LINEAGE, validateSaveLineage, saveRulesGeneration } from '../sim/rulesversion';
+import { validateRulesVersion, runsRulesVersion, RULES_LINEAGE, validateSaveLineage, saveRulesGeneration } from '../sim/rulesversion';
 import { hasHabitation, indoorHome, doorPoint } from '../sim/habitation';
 import { gridInsert, makeGrid, rebuildMobileGrid } from '../sim/registry';
 import type { Settings, World } from '../sim/types';
@@ -421,6 +421,11 @@ export function deserializeWorld(json: string): World {
     w.byId.set(g.id, g);
     gridInsert(w.grid, g, g.x + 0.5, g.y + 0.5);
   }
+  // rules 160: a live world's static cells are in ascending id order (ids grow with registration), but the loops above fill them by
+  // kind, so a loaded world listed the same things in a different order. Perception walks these cells, so the first sight of two
+  // things in one cell created a person's belief-kind index keys in a different order than in the live world: values equal,
+  // exact text not (the 30-day Large River twin mismatch, review_evidence/load-order-20261105). Worlds below 160 keep the old order.
+  if (runsRulesVersion(w, 160)) for (const cell of w.grid.cells) cell.sort((a, b) => a.id - b.id);
   for (const c of w.carts) w.byId.set(c.id, c);
   rebuildMobileGrid(w);
   for (const p of w.persons) {
