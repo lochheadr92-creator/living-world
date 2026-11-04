@@ -1,0 +1,66 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+xx·····x····x
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 4 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/carried_cuttings.test.ts > living cuttings wither in packs and carts with accounted loss and exact continuation
+ReferenceError: runsRulesVersion is not defined
+ ❯ spoilGoods src/sim/world.ts:276:116
+
+ ❯ stepWorld src/sim/world.ts:128:26
+ ❯ tests/carried_cuttings.test.ts:9:208
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯
+
+ FAIL  tests/carried_cuttings.test.ts > preserves the predecessor carried-cutting behavior
+ReferenceError: runsRulesVersion is not defined
+ ❯ spoilGoods src/sim/world.ts:276:116
+
+ ❯ stepWorld src/sim/world.ts:128:26
+ ❯ tests/carried_cuttings.test.ts:11:115
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  tests/forestry.test.ts > continues a carried cutting and planting work exactly and rejects predecessor or malformed state
+ReferenceError: runsRulesVersion is not defined
+ ❯ spoilGoods src/sim/world.ts:276:116
+
+ ❯ stepWorld src/sim/world.ts:128:26
+ ❯ tests/forestry.test.ts:23:278
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  tests/v145_continuation.test.ts > preserves the recorded ordinary and staged rules-145 final account continuation
+ReferenceError: runsRulesVersion is not defined
+ ❯ spoilGoods src/sim/world.ts:276:116
+
+ ❯ stepWorld src/sim/world.ts:128:26
+ ❯ v145Continuation tests/helpers/v145ref.ts:10:25
+ ❯ tests/v145_continuation.test.ts:4:165
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  4 failed | 9 passed (13)
+   Start at  17:13:15
+   Duration  1.84s (transform 81%, import 12%, tests 7%)
+
+  Transform  transforming modules took 3.83s · 81% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

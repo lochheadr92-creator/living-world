@@ -1,3 +1,4 @@
+import {runsRulesVersion} from './rulesversion';
 import {hasBrewing} from './brewing';
 import {updateWells} from './wells';
 import {hasNourishment} from './nourishment';
@@ -273,10 +274,10 @@ function spoilGoods(world: World): void {
   // are untouched; an empty new-kind holding consumes no random draw.
   if(runsPreservation(world)){
     const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),...world.carts.map(c=>c.load)];
-    for(const items of holdings)for(const k of [...PRESERVED_FOODS,...(hasBrewing(world)?['beer'] as const:[]),...(hasCarcasses(world)?['hide','fat'] as const:[])]){
+    for(const items of holdings)for(const k of [...PRESERVED_FOODS,...(hasBrewing(world)?['beer'] as const:[]),...(runsRulesVersion(world,146)?['cutting'] as const:[]),...(hasCarcasses(world)?['hide','fat'] as const:[])]){
       const n=items[k]??0;let lost=0;
       for(let i=0;i<n;i++)if(world.rng.next()<rate*(PERISHABLE[k]??1)*spoilStore(world))lost++;
-      if(lost){items[k]=n-lost;if(!items[k])delete items[k];ledgerSpoil(world,k,lost,'carried preserved food spoiled');}
+      if(lost){items[k]=n-lost;if(!items[k])delete items[k];ledgerSpoil(world,k,lost,k==='cutting'?'carried living cutting withered':'carried preserved food spoiled');}
     }
   }
   for (const b of world.buildings) {
