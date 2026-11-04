@@ -6,7 +6,7 @@ import {correctSourceExperience} from './source_learning';
 import { checkAccount } from './checked_accounts';
 import { cloneItems } from './economy';
 import { facilitySnapshot,usableUnits } from './facilities';
-import {TEXTILE_GOODS} from './textile_stock';
+import {textileGoods} from './textile_stock';
 import { toolsHeldBy } from './toolreg';
 import { noteBeliefWrite } from './transmission';
 import { addLog } from './events';
@@ -93,6 +93,7 @@ export function snapshotEntity(world: World, e: Entity, tick: number): Belief | 
       return blank(e.id, 'grave', e.x + 0.5, e.y + 0.5, tick);
     }
     case 'animal': {
+      if(e.sheep){const s=e.sheep,b=blank(e.id,'livestock',e.x,e.y,tick);b.sheep={hhId:s.hhId,sex:s.sex,adult:s.growth>=19200,hungry:s.food<=22,thirsty:s.water<=1,wool:s.wool,tether:s.tether?.condition??0,pregnant:!!s.pregnancy,breedAfter:s.breedAfter};return b;}
       if(e.type==='deer'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,127)){const b=blank(e.id,'prey',e.x,e.y,tick);b.amount=1;b.max=1;return b;}
       const b = blank(e.id, 'danger', e.x, e.y, tick);
       b.amount = 1;
@@ -127,6 +128,7 @@ export function putBelief(p: Person, b: Belief): void {
     (p.bykind[b.kind] ??= []).push(b.id);
   }
   // Moving animals are remembered as four dated sightings, not a growing global herd map.
+  if(b.kind==='livestock'){const sightings=Object.values(p.beliefs).filter(x=>x.kind==='livestock').sort((a,b)=>b.seen-a.seen||b.id-a.id);for(const old of sightings.slice(12))delBelief(p,old.id);}
   if(b.kind==='prey'){const sightings=Object.values(p.beliefs).filter(x=>x.kind==='prey').sort((a,b)=>b.seen-a.seen||b.id-a.id);for(const old of sightings.slice(4))delBelief(p,old.id);}
 }
 
@@ -174,8 +176,8 @@ export function observe(world: World, p: Person, e: Entity): boolean {
   if (hasLocalDeath(world) && e.ent==='grave' && e.death && !p.indoors && p.pose!=='sleep' && Math.hypot(p.x-e.x,p.y-e.y)<=10) deathStory(world,p,e.death,'grave');
   const b = snapshotEntity(world, e, world.tick);
   if (!b) return false;
-  if(e.ent==='building'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,124)&&TEXTILE_GOODS.some(k=>(e.store.items[k]??0)>0)){
-    b.textileStock={observer:p.id,items:Object.fromEntries(TEXTILE_GOODS.map(k=>[k,usableUnits(world,e,p,k)]))};
+  if(e.ent==='building'&&world.settings.dynamics==='rich'&&runsRulesVersion(world,124)&&textileGoods(world).some(k=>(e.store.items[k]??0)>0)){
+    b.textileStock={observer:p.id,items:Object.fromEntries(textileGoods(world).map(k=>[k,usableUnits(world,e,p,k)]))};
   }
   if(e.ent==='building'&&e.hearth){
     if(p.indoors===e.id)b.hearth={...e.hearth,seen:world.tick};

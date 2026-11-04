@@ -12,7 +12,7 @@ import {hearthWarmth} from './hearth';
 import {addOption} from './optutil';
 import {recentFailure} from './knowledge';
 import type {Ctx} from './optutil';
-import {TEXTILE_GOODS} from './textile_stock';
+import {textileGoods} from './textile_stock';
 
 export const TEXTILES = ['garment','blanket','bedding'] as const;
 export type TextileKind = typeof TEXTILES[number];
@@ -95,13 +95,13 @@ export function clothingOptions(ctx:Ctx):void{
 }
 export function validateClothing(w:World):void{
  const slots=new Set<string>();
- const check=(items:Items|undefined)=>{for(const k of TEXTILE_GOODS)if(items?.[k]!==undefined&&(!hasClothing(w)||!Number.isSafeInteger(items[k])||items[k]!<0))throw Error('invalid textile goods');};
+ const check=(items:Items|undefined)=>{for(const k of textileGoods(w))if(items?.[k]!==undefined&&(!hasClothing(w)||!Number.isSafeInteger(items[k])||items[k]!<0))throw Error('invalid textile goods');};
  for(const p of w.persons)for(const b of Object.values(p.beliefs)){check(b.items);check(b.ops?.inputs);check(b.ops?.output);check(b.ops?.yields);}
  for(const s of w.sites){check(s.delivered);check(s.used);}for(const m of w.meals)check(m.table);
  check(w.ledger.initial);check(w.ledger.created);check(w.ledger.consumed);check(w.ledger.spoiled);
  for(const p of w.persons)for(const b of Object.values(p.beliefs))if(b.textileStock!==undefined){
   const s=b.textileStock;
-  if(!hasClothing(w)||b.kind!=='building'||!s||!Number.isSafeInteger(s.observer)||s.observer<=0||!s.items||Object.entries(s.items).some(([k,n])=>!(TEXTILE_GOODS as readonly string[]).includes(k)||!Number.isSafeInteger(n)||n<0||n>(b.items?.[k as keyof typeof b.items]??0)))throw new Error('invalid textile stock observation');
+  if(!hasClothing(w)||b.kind!=='building'||!s||!Number.isSafeInteger(s.observer)||s.observer<=0||!s.items||Object.entries(s.items).some(([k,n])=>!textileGoods(w).includes(k as keyof Items)||!Number.isSafeInteger(n)||n<0||n>(b.items?.[k as keyof typeof b.items]??0)))throw new Error('invalid textile stock observation');
  }
  for(const p of w.persons)for(const a of [p.activity,p.suspended]){
   if(!a)continue;
@@ -115,7 +115,7 @@ export function validateClothing(w:World):void{
   check(b.ops?.produced);check(b.ops?.consumed);check(b.ops?.wasted);check(b.ops?.job?.held);
   const j=b.ops?.job;if(!j||!/^(strip_fibre|weave_|sew_hide_)/.test(j.recipe))continue;
   const r=RECIPE_BY_ID[j.recipe];
-  if(!hasClothing(w)||!r||b.type!==r.at||!j.held||!j.workers||Array.isArray(j.workers)||
+  if(!hasClothing(w)||!r||(r.minRules!==undefined&&!runsRulesVersion(w,r.minRules))||b.type!==r.at||!j.held||!j.workers||Array.isArray(j.workers)||
    !Number.isSafeInteger(j.client)||j.client<0||!Number.isSafeInteger(j.destSite)||j.destSite<0||typeof j.purpose!=='string'||typeof j.blocked!=='string'||
    !Number.isSafeInteger(j.started)||j.started<0||j.started>w.tick||!Number.isSafeInteger(j.lastWork)||j.lastWork<j.started||j.lastWork>w.tick||
    !['work','ready'].includes(j.phase)||j.total!==r.work||j.burnLeft!==0||j.burnTotal!==0||!Number.isFinite(j.progress)||j.progress<0||
@@ -132,7 +132,7 @@ export function validateClothing(w:World):void{
  for(const t of w.tools){
   if(!isTextile(t.kind)){if(t.textile)throw new Error('textile state on non-textile');continue;}
   const s=t.textile;
-  if(s?.material!==undefined&&(s.material!=='hide'||!runsRulesVersion(w,125)||t.kind!=='garment'))throw Error('invalid textile material');
+  if(s?.material!==undefined&&!(s.material==='hide'&&runsRulesVersion(w,125)&&t.kind==='garment'||s.material==='wool'&&runsRulesVersion(w,129)&&isTextile(t.kind)))throw Error('invalid textile material');
   if(!hasClothing(w)||!s||!Number.isFinite(s.wet)||s.wet<0||s.wet>1||typeof s.equipped!=='boolean'||!Number.isFinite(t.wear)||t.wear<0||t.wear>=100||t.tier!==0||!containers.some(c=>c.id===t.holder))throw new Error('invalid textile state');
   if(s.equipped){const key=`${t.holder}:${t.kind}`;if(!w.persons.some(p=>p.id===t.holder&&p.alive)||slots.has(key))throw new Error('invalid textile slot');slots.add(key);}
  }

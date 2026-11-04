@@ -221,7 +221,7 @@ export function createMinimap(ctx: UICtx, slots: Slots): Part {
     }
     for (const a of world.animals) {
       const [x, y] = toMap(a.x, a.y);
-      g.fillStyle = a.type === 'deer' ? '#d9a066' : '#ff4d45';
+      g.fillStyle = a.type === 'sheep' ? '#eee6d1' : a.type === 'deer' ? '#d9a066' : '#ff4d45';
       g.beginPath();
       g.arc(x, y, 1.7, 0, Math.PI * 2);
       g.fill();

@@ -202,7 +202,7 @@ export function createHoverTip(ctx: UICtx): Part {
         act = personActivity(e);
       } else if (e?.ent === 'animal') {
         name = describeEntityName(game.world, e);
-        act = e.type === 'deer' ? (e.state === 'retreat' ? 'bolting' : 'grazing') : WOLF_STATE[e.state] ?? '';
+        act = e.type === 'sheep' ? (e.sheep?.tether?'tethered':'grazing') : e.type === 'deer' ? (e.state === 'retreat' ? 'bolting' : 'grazing') : WOLF_STATE[e.state] ?? '';
       } else if(e) {
         name = describeEntityName(game.world, e);
         act = thingStatus(game.world, e);

@@ -121,7 +121,7 @@ function wolfPath(world: World, a: Animal, tx: number, ty: number): number[] | n
 }
 
 /** Walk toward a point along an A* route (wolves must get through woodland like anyone else). */
-function moveWolf(world: World, a: Animal, tx: number, ty: number, speed: number): void {
+export function moveLocalAnimal(world: World, a: Animal, tx: number, ty: number, speed: number): void {
   const far = hyp(tx - a.x, ty - a.y);
   if (far < 1.2) {
     steer(world, a, tx, ty, speed);
@@ -273,7 +273,7 @@ function bite(world: World, a: Animal, t: Person): void {
 export function isThreat(world: World, s: { id: number; ent: string }): boolean {
   if (s.ent !== 'animal') return false;
   const a = world.byId.get(s.id);
-  return !a || a.ent !== 'animal' || a.type !== 'deer';
+  return !a || a.ent !== 'animal' || a.type !== 'deer' && a.type !== 'sheep';
 }
 
 /** an animal leaves the world (a deer brought down) */
@@ -344,7 +344,7 @@ function updateDeer(world: World, a: Animal): void {
       tx = a.denX;
       ty = a.denY;
     }
-    moveWolf(world, a, tx, ty, 0.2);
+    moveLocalAnimal(world, a, tx, ty, 0.2);
     if (world.tick >= a.until) {
       a.state = 'roam';
       a.denX = a.x;
@@ -354,7 +354,7 @@ function updateDeer(world: World, a: Animal): void {
     return;
   }
   if (world.tick >= a.until || hyp(a.wanderX - a.x, a.wanderY - a.y) < 0.6) newWanderNear(world, a, night ? 3 : 7);
-  moveWolf(world, a, a.wanderX, a.wanderY, 0.03);
+  moveLocalAnimal(world, a, a.wanderX, a.wanderY, 0.03);
 }
 
 function newWanderNear(world: World, a: Animal, r: number): void {
@@ -376,6 +376,7 @@ export function updateWildlife(world: World): void {
   deerTick(world);
   const night = world.light < 0.3;
   for (const a of world.animals) {
+    if (a.type === 'sheep') continue;
     if (a.type === 'deer') {
       updateDeer(world, a);
       continue;
@@ -403,7 +404,7 @@ export function updateWildlife(world: World): void {
     switch (a.state) {
       case 'roam': {
         if (world.tick >= a.until || hyp(a.wanderX - a.x, a.wanderY - a.y) < 0.6) newWander(world, a);
-        moveWolf(world, a, a.wanderX, a.wanderY, 0.045);
+        moveLocalAnimal(world, a, a.wanderX, a.wanderY, 0.045);
         if ((world.tick + a.id) % 8 === 0) {
           const prey = pickPrey(world, a, night);
           if (prey) {
@@ -432,7 +433,7 @@ export function updateWildlife(world: World): void {
           a.until = world.tick + 200;
           break;
         }
-        moveWolf(world, a, t.x, t.y, d < 6 ? 0.15 : 0.1);
+        moveLocalAnimal(world, a, t.x, t.y, d < 6 ? 0.15 : 0.1);
         if (d <= 1.2 && a.cooldown === 0 && facingCheck && facingCheck(world, a, t)) break; // squared up to it: it hesitates
         if (d <= 1.2 && a.cooldown === 0) {
           bite(world, a, t);
@@ -446,7 +447,7 @@ export function updateWildlife(world: World): void {
         break;
       }
       case 'retreat': {
-        moveWolf(world, a, a.denX, a.denY, 0.12);
+        moveLocalAnimal(world, a, a.denX, a.denY, 0.12);
         if (world.tick >= a.until && hyp(a.denX - a.x, a.denY - a.y) < 3) {
           a.state = 'roam';
           newWander(world, a);

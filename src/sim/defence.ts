@@ -154,7 +154,7 @@ function seenWolves(ctx: Ctx): { a: Animal; x: number; y: number }[] {
   for (const s of p.seen) {
     if (!isThreat(world, s)) continue;
     const a = world.byId.get(s.id);
-    if (!a || a.ent !== 'animal' || a.type === 'deer' || a.health <= 0) continue;
+    if (!a || a.ent !== 'animal' || a.type !== 'wolf' || a.health <= 0) continue;
     if (a.state === 'retreat') continue; // already going; there is nothing to drive off
     out.push({ a, x: s.x, y: s.y });
   }

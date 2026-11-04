@@ -17,7 +17,7 @@ export const MAP_H = 80;
 // ── items ──
 export const FOODS: FoodKind[] = ['berries', 'fruit', 'fish', 'grain', 'bread'];
 export const TOOLS: ToolKind[] = ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding', 'net', 'trap'];
-export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre', 'hide', 'fat'];
+export const MATERIALS: MaterialKind[] = ['wood', 'stone', 'clay', 'ore', 'planks', 'handles', 'bricks', 'charcoal', 'iron', 'flour', 'fibre', 'hide', 'fat', 'wool'];
 // Complete validation/accounting vocabulary. FOODS retains its historical decision order.
 export const PRESERVED_FOODS: FoodKind[] = ['dried_fish', 'smoked_fish', 'dried_meat', 'smoked_meat', 'rendered_fat'];
 export const ALL_ITEMS: ItemKind[] = [...FOODS, 'meat', 'seeds', 'water', ...MATERIALS, ...TOOLS, 'offcuts', ...PRESERVED_FOODS];
@@ -26,6 +26,7 @@ export const NUTRITION: Record<FoodKind, number> = { berries: 12, fruit: 16, fis
 export const WATER_VALUE = 36;
 export const WEIGHT: Record<ItemKind, number> = {
   hide:1, fat:.5, rendered_fat:.5,
+  wool: .25,
   fibre:.25, garment:.75, blanket:.75, bedding:1, net:1, trap:2,
   dried_fish:1, smoked_fish:1, dried_meat:1, smoked_meat:1,
   offcuts: 1,
@@ -67,7 +68,7 @@ export const GRANARY_SPOIL = 0.2;
 export const GRANARY_TEND_EVERY = DAY * 3;
 export const GRANARY_NEGLECT_MULT = 2.2;
 export const ITEM_LABEL: Record<ItemKind, string> = {
-  hide:'raw hide', fat:'raw fat', rendered_fat:'rendered fat',
+  wool:'wool', hide:'raw hide', fat:'raw fat', rendered_fat:'rendered fat',
   net:'fishing net',trap:'deadfall trap',fibre:'bast fibre', garment:'fibre garment', blanket:'fibre blanket', bedding:'fibre bedroll',
   dried_fish:'dried fish', smoked_fish:'smoked fish', dried_meat:'dried meat', smoked_meat:'smoked meat',
   offcuts: 'offcut fuel bundles',

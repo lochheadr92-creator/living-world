@@ -15,7 +15,10 @@ paths. The later hide/wool links remain in the same capability document.
 Rules126 makes and deploys physical traps/nets; river25 proves net-caught fish eaten.
 Rules127–128 connect dated deer grounds and retain selected trap journeys;
 ordinary trap-to-food completion remains under frozen measurement.
-Domestic animals and reserves remain pending.
+Rules129 adds finite kept sheep, paid care/breeding/shearing/slaughter and wool
+clothing. Final river25 records two worn wool garments and36375protection ticks;
+forest25 has no wool use. Ordinary breeding in final source and remaining hide/
+fat/meat/trap food routes remain open; reserves are next after those connections.
 Aggregate survival benefit remains unmeasured. The historical branch notes below retain their original scope.
 
 **Pavel branch increment (1 November 2026):** rules 117 implementation and evidence are

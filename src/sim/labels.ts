@@ -27,6 +27,7 @@ export const SOURCE_VERB: Record<SourceType, string> = {
 export const FOOD_VALUE: Record<string, number> = { berry_bush: 12, fruit_tree: 16, wild_grain: 22, fish_spot: 28 };
 
 export const BELIEF_NOUN: Record<BeliefKind, string> = {
+  livestock:'known sheep',
   prey:'dated deer sightings',
   flood: 'flood-affected ground',
   berry_bush: 'berry bush',
@@ -54,6 +55,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
   wander: 'wandering',
   attend: 'at a gathering',
   hunt: 'hunting',
+  animal_work:'animal keeping',
   gear_work: 'gear work',
   butcher: 'butchering',
   alone: 'taking some time alone',
@@ -98,7 +100,7 @@ export const ACTIVITY_NOUN: Record<ActivityKind, string> = {
 };
 
 export const ITEM_ICON: Record<ItemKind, string> = {
-  rendered_fat:'rendered fat',
+  wool:'wool', rendered_fat:'rendered fat',
   hide:'raw hide', fat:'raw fat',
   net:'net',trap:'trap',fibre:'fibre',garment:'garment',blanket:'blanket',bedding:'bedding',
   dried_fish:'fish', smoked_fish:'fish', dried_meat:'meat', smoked_meat:'meat',

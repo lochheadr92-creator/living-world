@@ -36,7 +36,7 @@ export interface Recipe {
   /** stone is cut out of an outcrop: moved from the deposit into the batch, so nothing is created */
   fromDeposit?: { item: ItemKind; n: number };
   /** the product is a piece of equipment, not a stack of goods */
-  toolOut?: { kind: ToolKind; tier: 0 | 1; textileMaterial?:'hide' };
+  toolOut?: { kind: ToolKind; tier: 0 | 1; textileMaterial?:'hide'|'wool' };
   /** the product is a handcart */
   cartOut?: boolean;
   skill: SkillKey | null;
@@ -56,6 +56,7 @@ const none: Items = {};
 
 export const recipeAvailable=(w:World,r:Recipe):boolean=>!r.minRules||w.settings.dynamics==='rich'&&runsRulesVersion(w,r.minRules);
 export const RECIPES: Recipe[] = [
+  ...(['garment','blanket','bedding'] as const).map((kind):Recipe=>({id:'weave_wool_'+kind,label:'wool '+kind,doing:'Weaving a wool '+kind,at:'timber_yard',inputs:{wool:kind==='bedding'?4:3},fuel:{},work:100,burn:0,outputs:{},toolOut:{kind,tier:0,textileMaterial:'wool'},waste:{},wasteWhy:'',skill:null,workers:1,serves:[kind],benefit:'Fed sheep wool becomes owned insulation with finite wear.',minRules:129})),
   ...(['net','trap'] as const).map((kind):Recipe=>({id:'make_'+kind,label:kind,doing:'Making a '+kind,at:'timber_yard',inputs:{fibre:3,wood:kind==='net'?2:4},fuel:{},work:180,burn:0,outputs:{},toolOut:{kind,tier:0},waste:{},wasteWhy:'',skill:null,workers:1,serves:[kind],benefit:'Owned gear set and checked later for finite local food.',minRules:126})),
   {id:'sew_hide_garment',label:'hide garment',doing:'Scraping and sewing a hide garment',at:'timber_yard',inputs:{hide:1,fibre:1},fuel:{},work:160,burn:0,outputs:{},toolOut:{kind:'garment',tier:0,textileMaterial:'hide'},waste:{},wasteWhy:'',skill:null,workers:1,serves:['garment'],benefit:'A recovered hide sewn with fibre into personal insulation.',minRules:125},
   {id:'render_fat',label:'rendered fat',doing:'Rendering animal fat',at:'food_rack',inputs:{fat:1},fuel:{wood:1},work:60,burn:180,outputs:{rendered_fat:1},waste:{},wasteWhy:'',skill:null,workers:1,serves:['rendered_fat'],benefit:'One inedible raw fat portion becomes food after paid work and fuel.',preservation:'render',minRules:125},

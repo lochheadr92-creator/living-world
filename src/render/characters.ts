@@ -827,7 +827,7 @@ export class CharacterRenderer {
   // ── wolves ──
   drawWolf(ctx: CanvasRenderingContext2D, a: Animal, alphaT: number, simT: number, selected: boolean): { headX: number; headY: number } {
     // the wolf's greys, or the deer's browns (rich worlds only have deer)
-    const P = a.type === 'deer' ? DEER_PALETTE : WOLF_PALETTE;
+    const P = a.type === 'sheep' ? SHEEP_PALETTE : a.type === 'deer' ? DEER_PALETTE : WOLF_PALETTE;
     const x = a.px + (a.x - a.px) * alphaT;
     const y = a.py + (a.y - a.py) * alphaT;
     const heading = a.pheading + angleDiff(a.pheading, a.heading) * alphaT;
@@ -850,6 +850,7 @@ export class CharacterRenderer {
     ctx.beginPath();
     ctx.ellipse(base[0], base[1] + 1, 15, 6.2, 0, 0, Math.PI * 2);
     ctx.fill();
+    if(a.sheep?.tether){const t=a.sheep.tether;ctx.strokeStyle='#74512e';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo((t.x-t.y)*32,(t.x+t.y)*16);ctx.lineTo(base[0],base[1]);ctx.stroke();ctx.fillStyle='#67442b';ctx.fillRect((t.x-t.y)*32-2,(t.x+t.y)*16-8,4,8);}
     if (selected) {
       ctx.strokeStyle = 'rgba(255,120,100,0.9)';
       ctx.lineWidth = 2;
@@ -902,7 +903,7 @@ export class CharacterRenderer {
         g.addColorStop(0, P.hi);
         g.addColorStop(1, P.lo);
         ctx.strokeStyle = g;
-        ctx.lineWidth = 10;
+        ctx.lineWidth = a.type==='sheep'?12+Math.min(3,(a.sheep?.wool??0)*2):10;
         ctx.beginPath();
         ctx.moveTo(rear[0], rear[1]);
         ctx.lineTo(front[0], front[1]);
@@ -985,6 +986,7 @@ export class CharacterRenderer {
 }
 
 const WOLF_PALETTE = { leg: '#4a4742', hi: '#9b978f', lo: '#6f6b65', neck: '#8b877f', snout: '#a7a39a', ear: '#6d6962', eye: '#e8c24a', eyeHot: '#ffd23a' };
+const SHEEP_PALETTE = {leg:'#554b40',hi:'#f2eddb',lo:'#bbb4a0',neck:'#d9d3bf',snout:'#5a5146',ear:'#8b806a',eye:'#24211e',eyeHot:'#24211e'};
 const DEER_PALETTE = { leg: '#6b5236', hi: '#c49a66', lo: '#8a6238', neck: '#a87a4e', snout: '#d2ac82', ear: '#9a6f45', eye: '#2b1d12', eyeHot: '#2b1d12' };
 
 // ───────────────────────── pieces ─────────────────────────

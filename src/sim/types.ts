@@ -11,7 +11,7 @@ export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat'
 /** Durable equipment. Each one is a `Tool` instance (identity, wear, owner); its presence is mirrored as a count in the holder's Items. */
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding' | 'net' | 'trap';
 /** Raw materials and the things made from them. */
-export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat';
+export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat' | 'wool';
 export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts';
 export type Items = Partial<Record<ItemKind, number>>;
 
@@ -75,10 +75,12 @@ export type BeliefKind =
   | 'ore_vein'
   | 'outcrop'
   | 'danger'
-  | 'prey';
+  | 'prey'
+  | 'livestock';
 
 /** What a person believes about one place/thing. Always a snapshot with a timestamp and an origin. */
 export interface Belief {
+  sheep?: import('./livestock').SheepMemory;
   /** Usable new textile goods personally checked at this belief's seen date. */
   textileStock?:{observer:number;items:Items};
   /** Household-deployable equipment personally checked at this observation. */
@@ -230,6 +232,7 @@ export type ActivityKind =
   | 'attend'
   | 'hunt'
   | 'butcher'
+  | 'animal_work'
   | 'gear_work'
   | 'alone'
   | 'wander'
@@ -915,7 +918,7 @@ export interface FacilityState {
 
 // ───────────────────────────── tools and carts ─────────────────────────────
 export interface Tool {
-  textile?: {wet:number;equipped:boolean;material?:'hide'};
+  textile?: {wet:number;equipped:boolean;material?:'hide'|'wool'};
   ent: 'tool';
   id: number;
   kind: ToolKind;
@@ -1006,7 +1009,7 @@ export interface Plot {
 
 export type CarcassPart = 'meat' | 'hide' | 'fat';
 export interface Carcass {
-  animalId:number; species:'deer'; hhId:number;
+  animalId:number; species:'deer'|'sheep'; hhId:number;
   initial:Record<CarcassPart,number>; remaining:Record<CarcassPart,number>;
   recovered:Record<CarcassPart,number>; lost:Record<CarcassPart,number>; work:Record<CarcassPart,number>;
   claim:{person:number;until:number}|null; emptySince:number|null;
@@ -1043,7 +1046,8 @@ export interface Animal {
   ent: 'animal';
   id: number;
   /** deer only in rich worlds (hunting.ts) */
-  type: 'wolf' | 'deer';
+  type: 'wolf' | 'deer' | 'sheep';
+  sheep?: import('./livestock').SheepState;
   x: number;
   y: number;
   px: number;

@@ -1,3 +1,4 @@
+import {validateLivestock} from '../sim/livestock';
 import {validateGear} from '../sim/passive_gear';
 import {validateChildhood} from '../sim/childhood';
 import {validatePreservation} from '../sim/preservation';
@@ -302,6 +303,7 @@ export function deserializeWorld(json: string): World {
   validateClothing(w);
   validateCarcasses(w);
   validateGear(w);
+  validateLivestock(w);
   validateMealLeftovers(w);
   validateEstateCustody(w);
   validateWorkHandovers(w);

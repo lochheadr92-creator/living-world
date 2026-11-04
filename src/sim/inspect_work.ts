@@ -182,7 +182,7 @@ export function describeFacility(world: World, b: Building): Section[] {
   const recs = recipesAt(b.type).filter(r=>recipeAvailable(world,r));
   const recoverable=recs.filter(r=>recoveredOffcuts(world,r)>0);
   if(recoverable.length)sections.push({title:'Recoverable timber fuel',notes:recoverable.map(r=>`${r.label}: ${recoveredOffcuts(world,r)} fuel bundle(s) from ${recoveredOffcuts(world,r)*0.5} wood units formerly discarded. Each bundle weighs 1 and fuels a fire half as long as a log. The rest remains waste. Collection takes a real trip and handling time; bundles use store space and belong to the batch client.`)});
-  sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} → ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${r.toolOut.textileMaterial==='hide'?'hide garment':TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} · ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s ${r.preservation==='dry'?'drying in fair weather':'burning'}` : ''}`] as [string, string]) });
+  sections.push({ title: 'What it is for', notes: [def.blurb], rows: recs.map((r) => [r.doing, `${itemsText({ ...r.inputs, ...r.fuel })} → ${itemsText({ ...r.outputs, ...(r.fromDeposit ? { [r.fromDeposit.item]: r.fromDeposit.n } : {}) }) || (r.cartOut ? 'a handcart' : r.toolOut ? `an ${r.toolOut.tier ? 'iron ' : ''}${r.toolOut.textileMaterial==='wool'?'wool '+r.toolOut.kind:r.toolOut.textileMaterial==='hide'?'hide garment':TOOL_DEFS[r.toolOut.kind].label}` : 'nothing')} · ${Math.round(r.work / 10)}s of work${r.burn ? ` + ${Math.round(r.burn / 10)}s ${r.preservation==='dry'?'drying in fair weather':'burning'}` : ''}`] as [string, string]) });
   sections.push({ title: 'Who may use it', notes: [accessText(world, b)] });
 
   const job = ops.job;
@@ -341,7 +341,7 @@ export function toolViews(world: World, p: Person): ToolView[] {
   return toolsHeldBy(world, p.id).map((t) => ({
     id: t.id,
     kind: t.kind,
-    label: `${t.tier === 1 ? 'iron ' : ''}${t.textile?.material==='hide'?'hide garment':TOOL_DEFS[t.kind].label}${t.textile ? ` — ${t.textile.equipped ? (t.kind==='garment'?'worn':'ready for sleep'):'packed'}, ${Math.round(t.textile.wet*100)}% wet, +${textileProtection(p,t).toFixed(1)} degrees now` : ''}`,
+    label: `${t.tier === 1 ? 'iron ' : ''}${t.textile?.material==='wool'?'wool '+t.kind:t.textile?.material==='hide'?'hide garment':TOOL_DEFS[t.kind].label}${t.textile ? ` — ${t.textile.equipped ? (t.kind==='garment'?'worn':'ready for sleep'):'packed'}, ${Math.round(t.textile.wet*100)}% wet, +${textileProtection(p,t).toFixed(1)} degrees now` : ''}`,
     tier: t.tier,
     wear: Math.round(t.wear),
     loan: t.loan ? (t.loan.lender === 0 ? `taken from the shared rack, due back ${inFuture(world, t.loan.due)}` : `borrowed from ${nameOf(world, t.loan.lender)}, due back ${inFuture(world, t.loan.due)}`) : t.ownerHh !== p.hhId ? `belongs to the ${hhName(world, t.ownerHh)}` : null,

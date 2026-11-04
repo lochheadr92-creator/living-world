@@ -1,3 +1,5 @@
+import {hasLivestock,livestockMaterials} from './livestock';
+import {reservedFor} from './reserved_goods';
 import {knownGearStock} from './gear_stock';
 import {hasGear,knowsSetGear,knownTrapGround} from './passive_gear';
 import {hasCarcasses} from './carcass';
@@ -598,6 +600,7 @@ const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && f
 export function demandsOf(ctx: Ctx): Demand[] {
   const { world, p } = ctx;
   const out: Demand[] = [];
+  for(const [item,qty] of Object.entries(livestockMaterials(ctx)))if((p.inv[item as ItemKind]??0)<qty!)out.push({item:item as ItemKind,qty:qty!,have:p.inv[item as ItemKind]??0,base:32,why:'supplies for known sheep care',tag:'animals'});
   if(hasGear(world)&&ctx.stage!=='child')for(const kind of ['net','trap'] as const){
     const known=kind==='trap'&&runsRulesVersion(world,127)?!!knownTrapGround(ctx):Object.values(p.beliefs).some(b=>b.kind===(kind==='net'?'fish_spot':'tree'));
     if(known&&!p.inv[kind]&&!knowsSetGear(ctx,kind))out.push({item:kind,qty:1,have:0,base:28,why:'set owned gear for later food',tag:'craft'});
@@ -605,11 +608,18 @@ export function demandsOf(ctx: Ctx): Demand[] {
   }
   if(hasClothing(world)){
     const cold=p.needs.warmth<65||world.weather.temp<12;
+    const woolYards=hasLivestock(world)?facilitiesOf(ctx,'timber_yard'):[];
+    const knownWool=Math.max(0,...woolYards.map(f=>knownTextileStock(world,p,f.b,'wool')));
     for(const kind of TEXTILES){
       const childNeeds=kind==='garment'&&ctx.seenPersons.some(s=>visibleChildNeedsGarment(ctx,s));
-      if(!cold&&!childNeeds)continue;
+      // Collected fleece has a use even during a warm working window. It does
+      // not request more animal products or spend another promise's material.
+      const readyWool=hasLivestock(world)&&(p.inv.wool??0)-reservedFor(world,p,'wool')+knownWool>=(kind==='bedding'?4:3);
+      const prepared=woolYards.some(f=>knownTextileStock(world,p,f.b,kind)>0);
+      const finishingWool=woolYards.some(f=>f.b.ops?.client===p.id&&f.b.ops.job==='weave_wool_'+kind);
+      if(!cold&&!childNeeds&&!readyWool&&!prepared&&!finishingWool)continue;
       const target=1+(childNeeds?1:0),have=p.inv[kind]??0;
-      if(have<target)out.push({item:kind,qty:target,have,base:kind==='garment'?32:25,why:childNeeds?'insulation for me and the child in cold weather':'personal insulation against the cold',tag:'craft'});
+      if(have<target)out.push({item:kind,qty:target,have,base:kind==='garment'?32:25,why:childNeeds?'insulation for me and the child in cold weather':prepared?'collect prepared personal insulation':readyWool||finishingWool?'use collected wool for personal insulation':'personal insulation against the cold',tag:'craft'});
     }
     if(toolsHeldBy(world,p.id).some(t=>isTextile(t.kind)&&t.wear>=45)&&(p.inv.fibre??0)<1)out.push({item:'fibre',qty:1,have:0,base:28,why:'mend worn insulation',tag:'craft'});
   }

@@ -1,3 +1,59 @@
+# Active survival continuation — rules129 checkpoint, next carcass supply
+
+Owner's entire seven-family programme remains in progress. No reapproval needed;
+user confirmed this shared checkout is free to continue. No subagents. Preserve
+unrelated untracked tests/evidence and six older unpublished commits; no push.
+Authoritative current implementation/evidence: docs/SURVIVAL_CAPABILITIES.md.
+
+129 implements finite sheep founding pair, paid acquisition/containment/care,
+finite forage/water, fed gestation/fleece, paid shearing/slaughter and wool gear.
+Latest source6 also retains useful wool preparation through warm intervals,
+using personally observed usable workshop wool and existing priorities.
+Frozen source: ../living-world-sheep-check6 (268 src files). Main runtime matches.
+Final source6 forest/river25 complete11/27alive, exacttwins/save120/conserve
+and500pure checks. River10shears,6feedings,2repairs,2slaughters, two worn wool
+garments/36375protection ticks; forest no wool use. Full details in feature doc.
+
+Checks: 104tests/9files pass (source6 affected); 26 sheep contracts. Immutable
+129 captured before successors and test passes1/1 (reference129-write.log,
+reference129-test1.log). Old124/125/128 references pass. typecheck7/build3 exit2
+with only the two baseline untracked nullable test errors. Standalone Vite build
+passes (sheep-vite-final.log). Browser sheep-rendered-check3 ninePASS, both
+screenshots visually inspected: actual staged paid fleece-to-worn garment and
+neglect/body loss. Browser IABtab1/browser2, server5296 session81948.
+
+Running sessions (all logs in survival_evidence/resume-20261104):
+- 9039: source5 meadow60, output sheep-check5/meadow-60d (old source; null wool use).
+- 96733: source5 full suite, livestock-full5.log, three workers; still pending.
+- 44444: frozen128 trap_encounter_trace meadow60, trap-encounter128-meadow.
+Do not edit source/scripts that each running command fingerprints.
+
+Source5 earlier river40 continuation: 2813 wool blanket protection ticks,
+10935.594degree ticks; source4 river25 made unworn garment. Different candidates,
+not paired benefit. Source1 broad:425pass16fail files;2590pass35fail3expected;
+35=31baseline+2missingfaminefixtures+repairedleisure+updatedwoolwhitelist.
+Source5 includes exact famine fixture and corrected leisure, predates whitelist
+change. Current focused104 include new whitelist and latest warm-wool runtime.
+
+Next: complete129 focusedcommit/Brain checkpoint. Then demonstrated
+carcass production-supply gap (three red tests in uncommitted carcass_supply.test.ts;
+these belong to NEXT increment): compiler/supply cannot acquire ingredients from
+known carcasses, unlike opportunistic butchery; trace before repair. Also fix
+sheep butchery label ('from the deer') in that increment. Ordinary hide/fat/
+preserved-meat and trap-to-food remain open. Frozen128 meadow nudge1 100days
+found zero trap bodies; do not force a pass with wildlife/utility inflation.
+
+Reserves7 LAST. Agent's pre-implementation capacity/efficiency/food-free bound
+and paid recovery choices now recorded in docs/SURVIVAL_CAPABILITIES.md; no
+reserve runtime yet. Need immediate-predecessor75draw and final75draw cohorts.
+Baseline75 complete/validated under aggregate-baseline/final-audit.json.
+New survival_compare.mjs validates/matches cohorts; self-comparison passed.
+
+Brain last checksum c5491f8e8a5835c9d05d1e41f8ae572765a868b4b394fc196c9df83dd44777ee
+for daily/2026-11-04-living-world-survival-implementation (after bedbb8e).
+Archive start refreshed2212; run refresh.mjs at eventual turn end. Historical
+checkpoints follow; they are not current status.
+
 # Active survival continuation — dirty rules128, main2fdf0ea
 
 Still implementing the owner's entire seven-family programme, not complete.

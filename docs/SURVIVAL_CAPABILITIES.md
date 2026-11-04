@@ -609,18 +609,181 @@ ordinary trap-to-food completion is still open. Its frozen measurements can
 continue while the next single behaviour stream is developed. No family-wide
 completion or survival benefit is claimed.
 
-## 6. Domestic animals — pending
+## 6. Domestic animals — rules129 implemented; bounded ordinary wool use
 
-Species decision awaits source inspection. Account for recurring output and all
-human food, water and labour diverted, including adverse outcomes.
+Implementing-agent choice: sheep, in rules129. This is a routine implementation
+choice, not a new owner decision. Two unowned adult founders are placed once in
+new natural worlds on reachable ground near existing forage and finite water;
+old saves and arrivals add none. They start with no stored food, water or wool.
+Wild sheep seek nearby existing berries, fruit, grain and shore water,
+retain one personally found water point, walk there and spend grazing/drinking time. Consumption uses the same source
+and water accounts. No deer count or hunting rule changes.
+
+Acquisition is120work,2wood,1fibre and1grain, at the animal's real position;
+the grain feeds it and a physical tether contains it within2tiles. Feed/water
+are30work per real carried unit. Food storage is44nutrition points (two grain
+portions), water2units; upkeep22nutrition/day,33when below0C, and1water/day.
+No food/water causes health loss, and a neglected tether wears out. One fibre
+and60work repair40condition; no remote refill or automatic replacement.
+
+Productive fed/watered time grows one wool per2days, capped at2unshorn wool;
+Growth is ledgered on the animal;80work transfers one into available pack
+space. Death loses any unshorn fleece once. Existing workshops turn wool into
+owned garments, blankets and bedding with existing wear/wetness/use rules.
+Breeding requires a physically nearby owned adult pair and100work, then4fed
+days of gestation within an8day deadline. A newborn has zero food/water/wool,
+requires8fed days to mature, and needs its own paid tether before keeping work. Four living
+sheep/household and12/world bound breeding. Slaughter is160work and removes one
+actual animal into the existing carcass path; immature animals yield only paid
+growth fractions. Neglect produces finite lost remains. Human feed, water,
+labour and forgone food are measured alongside output. Ordinary worn wool and
+final acceptance remain pending.
+
+Review findings so far: the first candidate stopped short of actual shore
+contact and both founders died unwatered by4000ticks in forest and river.
+Those frozen check1 runs are retained. A red ordinary forest test demonstrated
+the defect; the corrected sheep reach legal water, consume it, graze and grow
+fleece. The acquisition supply request also now includes its paid grain
+portion beyond the two meals protected by the action, with a matching red/green
+test. A newborn still receives supply demand for its paid tether at the four
+animal limit. Neither finding justified raising animal-work utility.
+
+Current focused coverage:51tests/2files pass in8.07s, including24sheep contracts
+and the workshop suite. Three successive paid fleeces become a delivered,
+woven, collected and worn garment without any initial wool. The workshop input
+whitelist now recognises that tested origin. Browser check2 passes9assertions,
+including actual wool delivery/weaving/dressing and neglect, conserved and
+exact-save in both cases. Typecheck6/build2 retain the two unrelated nullable
+review-test errors; standalone Vite bundle passed. Evidence:
+`survival_evidence/resume-20261104/`, `sheep-rendered-check2/`.
+
+The six-day source3 forest trace saw1,599/1,680 person-samples with sheep
+knowledge,474 animal/supply offers and66 ranked first. It saw539 samples
+with free wood and459 with grain, but none with fibre. Many grain/post trips
+therefore preceded any possible binding. The next revision requests binding
+fibre first, then acquisition posts/food; no utility increase. It also applies
+existing ecological harvest pressure when sheep graze. The candidate1 leisure
+regression now passes on this dependency order (frozen4 leisure5/5).
+
+Current sheep contracts pass, including120ticks of mid-pregnancy exact
+continuation, concurrent last-fleece collection, critical thirst interruption,
+dated-location failure and refusal of fractional/unpaid newborn maturity.
+Frozen4 affected93pass/1fail in78.40s: the one failure was the new test calling
+an activity factory before its purity assertion; that factory intentionally
+allocates an id. The assertion now brackets option generation alone, and the
+24-test result includes the corrected case. This did not require a runtime fix.
+Frozen1 broad regression finished:425files passed,16failed;2590tests passed,
+35failed,3expected failures,1091.78s. Failures comprise31baseline,2missing
+retained-famine-fixture cases, the repaired leisure case and the obsolete wool
+input whitelist. Frozen5 includes the checksum-matched famine fixture and
+latest runtime; its broad run remains pending. It predates the whitelist-only
+test correction, which the focused51-test result verifies.
+
+Source4 forest/river25 completed with8/28alive, exacttwins, final+120continuation,
+conservation and500pure observer samples each. Forest:2captures,2shears,
+1slaughter, another sheep lost to neglect;4bodies across sheep/deer supplied
+8meat meals, all hides/fat lost. River:2captures,11shears,5feedings,4tether
+repairs,1slaughter;11wool grown and3woven into a garment at tick51016. It
+remained on the workshop rack at day25, owned by Basil's household; no worn
+wool yet. The frozen5 river continuation reached day40 with17alive and2813
+actual wool-blanket protection ticks (10935.594degree-ticks). It passes exact
+twins, save+120continuation, conservation and300pure checks; six of eleven
+grown wool were used in a garment and blanket. This closes the earlier
+revision's basic ordinary wool-use route. Fresh meadow60 remains running.
+
+A separate observed connection remains worth correcting: source3's keeper
+had five wool, no garment, healthy needs and a known yard2.93tiles away at
+tick36480, yet warm-weather demand omitted the prepared wool route. The latest
+candidate retains the existing textile priority and permits enough unreserved
+held/personally usable stored wool to motivate work during a warm interval.
+Known unfinished wool work and usable finished yard textiles retain their
+next step through weaving and collection. Wool stock observations use the
+existing dated, observer-specific access record. No hidden stock lookup or
+automatic material transfer is added. A full three-fleece warm-weather chain
+and personal-stock refusal pass;74tests/5files and51tests/5files cover the
+change and old124/125/128 continuations. Frozen6 forest/river25 and affected
+regressions are underway; typecheck7/build3 retain only the two baseline errors.
+
+Final source6 forest/river25 completed with11/27alive (378.79/521.51s).
+Both pass500pure checks, exact observed/unobserved twins, exact save+120
+continuation and conservation. Forest:2captures,2shears,1slaughter, one sheep
+lost to neglect and no wool use;8meat portions eaten across sheep/deer bodies,
+all4hides/4fat lost. River:2captures,10shears,6feedings,2tether repairs,
+2slaughters. Six of10grown fleece became two worn wool garments, supplying
+36375protection ticks/129921.644degree-ticks. Human care occupied1368travel and
+1862work ticks. Sheep consumed44water through drinking,59grazed food portions,
+and8keeper grain portions including capture;4wood/2fibre paid for tethers,
+2more fibre for repairs. Three recovered meat portions eaten, five lost;
+both hides/fat lost. These are bounded activation/cost descriptions, not
+paired benefit. No ordinary breeding in this final25-day pair; paid breeding,
+newborn upkeep and caps have contract tests, and earlier source3 recorded a birth.
+
+Current affected regression:104tests/9files PASS66.78s. Immutable129 reference
+recorded before successor behavior, passes1/1 (8.15s); source digest
+`5973ba1ffc742f2f0b01083ff6d6c951fa366d70ab5b86355689fb36736b5f71`
+matches all268current source files. Standalone Vite build passes; full
+`npm run typecheck`/`npm run build` exit2 only for the two retained nullable
+review-test errors. Rendered check3 passes9checks; both visible screenshots
+inspected, including warm-period paid fleece-to-worn-garment and real neglect
+loss. The complete source1 broad run and current affected-delta results are
+retained above; source5's additional broad run continues frozen while the next
+behavior stream starts. It cannot certify changes after source5 by itself.
+
+Earlier candidate outcomes remain distinct: source1forest/river25=2/25alive,
+both sheep lost without care; source2=10/22alive without capture; source3=5/24.
+Source3river had2captures,9shears,2feedings,1mating/birth,1repair,2slaughters,
+but its keeper died with all9wool unused. Its diagnostic saw feasible recipes
+and78delivery rows across128samples,109with at least3wool. No missing recipe
+connection or justification for higher utility was established. The trace's
+`interpretation.json` excludes reference-held plans/yard objects from historical
+claims; future samples deep-clone them. These are candidate descriptions, not
+paired causal effects or evidence of accepted survival benefit.
+
+### Deferred carcass-input connection — diagnosed, next bounded change
+
+Frozen final129 forest trace (`survival_evidence/carcass-route129-forest`)
+recorded928person samples with a remembered body and10butchery endings.
+Only13samples held meat; none held hide/fat and none held two meat portions.
+The run therefore supplies no evidence of spare carried meat for preservation.
+The production compiler currently accepts gathered raw materials or stored
+items, but not a body's separately accounted recoverable parts. A known owned
+body plus binding and a usable yard cannot compile a hide garment; likewise
+fat does not motivate its existing rendering route until already carried.
+`carcass-supply-red.log` retains three failing contract cases for that gap.
+Planned connection: the existing supply step may offer paid butchery of fresh,
+personally known, accessible parts for an existing recipe goal. Retain normal
+travel/priority/capacity/arrival truth checks and all historical continuations.
+This is not evidence that higher hunting utility or more wildlife is needed.
 
 ## 7. Body reserves — authorised, pending streams 1–6
 
-Before implementation, record the chosen finite capacity, efficiency, expenditure
-and maximum added food-free tolerance under reference conditions. A meal pays
-immediate need and reserves once. Birth, arrival and old-save defaults confer no
-unpaid full reserve; thirst, exposure and injuries retain their consequences.
-Test feeding histories, paid recovery, the tolerance bound and exact persistence.
+Pre-implementation parameter choice (implementing agent, 4 November; no runtime
+change yet): nourishment uses the existing food nutrition unit. Capacity is 24
+for children, 36 for youths/adults and 30 for elders. All births, arrivals and
+new worlds start at zero; a missing historical field supplies zero benefit.
+A paid portion first allocates its nutrition once: below hunger 40, immediate
+hunger has priority; otherwise 25% is offered to storage. Unused immediate
+capacity also goes to storage. Storage converts at 80% efficiency, capped at
+current life-stage capacity; unretained nutrition is lost, never duplicated.
+Hunger expenditure and decision pressure stay unchanged. Only expenditure
+below hunger zero can draw reserve, one nutrition unit per unit of deficit;
+starvation damage applies only to the uncovered fraction of that tick. Thirst,
+exposure, injury and exhaustion keep their existing consequences.
+
+Reference bounds, Normal with hunger initially zero, no eating or healing,
+comfortable temperature/water/energy: a full adult reserve covers 1200 quiet
+awake ticks (0.5 day) or 2181.818 continuous-sleep ticks (0.9091 day). Children
+cover 941.176 awake or 1711.230 sleeping ticks; elders 1000 awake or 1818.182
+sleeping ticks. The last noninteger tick is only partly covered. Sleeping is
+the existing minimum expenditure; work/running/Harsh shorten the bound. These
+are added starvation-free nutrition intervals, not guarantees of survival.
+Positive health recovery keeps its existing safe-needs conditions and rates,
+but consumes one stored nutrition unit per health point actually restored,
+never charging for health above 100. Existing rest/sleep increases the rate;
+no new healing item or injury/illness redesign is introduced. Reserve capacity
+changes never create nutrition. Test actual paid meal routes, initialisation,
+different feeding histories, bounds, other harms and exact persistence. Rules
+number is allocated only after the remaining capability connections are frozen.
 
 ## Final measurement — pending
 

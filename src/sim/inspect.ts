@@ -246,7 +246,7 @@ export function describeEntityName(world: World, e: Entity): string {
     case 'person':
       return e.name;
     case 'animal':
-      return e.type === 'deer' ? 'Deer' : 'Wolf';
+      return e.type === 'sheep' ? 'Sheep' : e.type === 'deer' ? 'Deer' : 'Wolf';
     case 'source':
       return SOURCE_NOUN[e.type][0].toUpperCase() + SOURCE_NOUN[e.type].slice(1);
     case 'building':
@@ -256,7 +256,7 @@ export function describeEntityName(world: World, e: Entity): string {
     case 'plot':
       return 'Field plot';
     case 'pile':
-      return e.gear?'Deployed '+e.gear.kind:e.carcass?'Deer carcass':'Pile of goods';
+      return e.gear?'Deployed '+e.gear.kind:e.carcass?(e.carcass.species==='sheep'?'Sheep carcass':'Deer carcass'):'Pile of goods';
     case 'grave':
       return `Grave of ${e.name}`;
     case 'cart':
@@ -825,11 +825,12 @@ export function describeEntity(world: World, id: number): EntityView | null {
           rows:[['Belongs to',householdById(world,g.hhId)?.name??String(g.hhId)],['Condition',`${100-(t?.wear??100)}%`],['Check after',`${Math.max(0,g.readyAt-world.tick)} ticks`],['Catch',caught],['Catch decay',decay]],
           bars:[],items:itemList(e.items),notes:['Placement, checking, resetting and repair require work. This catch is fixed; checking does not try again.'],position:{x:e.x+.5,y:e.y+.5}};
       }
-      if(e.carcass){const c=e.carcass;return {kind:'pile',...base,title:'Deer carcass',subtitle:'Finite body; parts need butchery',rows:[['Animal origin',String(c.animalId)],['Belongs to',householdById(world,c.hhId)?.name??(c.hhId?`household #${c.hhId}`:'Shared')],['Decay deadline',`${Math.max(0,4800-(world.tick-e.since))} ticks remaining`],['Current worker',c.claim&&c.claim.until>world.tick?nameOf(world,c.claim.person):'Nobody'],['Paid work',Object.entries(c.work).map(([k,n])=>`${k}: ${n}/120`).join(', ')]],bars:[],items:itemList(c.remaining),notes:['These parts are still inside the body. Each unit takes 120 work ticks and room in a nearby worker’s pack.',`Recovered: ${itemsToText(c.recovered)}. Lost: ${itemsToText(c.lost)}.`],position:{x:e.x+.5,y:e.y+.5}};}
+      if(e.carcass){const c=e.carcass;return {kind:'pile',...base,title:c.species==='sheep'?'Sheep carcass':'Deer carcass',subtitle:'Finite body; parts need butchery',rows:[['Animal origin',String(c.animalId)],['Belongs to',householdById(world,c.hhId)?.name??(c.hhId?`household #${c.hhId}`:'Shared')],['Decay deadline',`${Math.max(0,4800-(world.tick-e.since))} ticks remaining`],['Current worker',c.claim&&c.claim.until>world.tick?nameOf(world,c.claim.person):'Nobody'],['Paid work',Object.entries(c.work).map(([k,n])=>`${k}: ${n}/120`).join(', ')]],bars:[],items:itemList(c.remaining),notes:['These parts are still inside the body. Each unit takes 120 work ticks and room in a nearby worker’s pack.',`Recovered: ${itemsToText(c.recovered)}. Lost: ${itemsToText(c.lost)}.`],position:{x:e.x+.5,y:e.y+.5}};}
       return { kind: 'pile', ...base, title: e.estate?'Belongings after a death':e.mealFood?'Leftover meal food':'Pile of goods', subtitle: e.note || 'Left lying about', rows: [['Lying here since', agoText(world, e.since)],...(e.mealFood?[["Belongs to",householdById(world,e.mealFood.hhId)?.name??`household #${e.mealFood.hhId}`] as [string,string]]:[]),...(e.estate?[["Belongs to",e.estate.hhId===0?'Shared property':householdById(world,e.estate.hhId)?.name??`household #${e.estate.hhId}`] as [string,string]]:[])], bars: [], items: itemList(e.items), notes: ['Perishable food slowly spoils out in the open.',...(e.mealFood?['Food remains at the gathering place. A household member must reach it and spend time collecting it, with room in their pack.']:[]),...(e.estate?['These goods remain here. Collection takes time and pack space; borrowed equipment remains with its existing owner. Knowing about a death does not reveal these belongings to distant people.']:[])], position: { x: e.x + 0.5, y: e.y + 0.5 } };
     case 'grave':
       return { kind: 'grave', ...base, title: `Grave of ${e.name}`, subtitle: `Died ${agoText(world, e.died)}, aged ${e.age}`, rows: [], bars: [], notes: [], position: { x: e.x + 0.5, y: e.y + 0.5 } };
     case 'animal':
+      if(e.sheep){const s=e.sheep;return {kind:'animal',...base,title:s.growth>=19200?'Sheep':'Lamb',subtitle:s.hhId?'Kept animal':'Unowned grazing animal',rows:[['Origin',s.origin==='founder'?'Founding wild flock':`Born to #${s.parents.join(' and #')}`],['Belongs to',s.hhId?householdById(world,s.hhId)?.name??`household #${s.hhId}`:'Nobody'],['Containment',s.tether?`Tethered at (${s.tether.x.toFixed(1)}, ${s.tether.y.toFixed(1)}); ${Math.round(s.tether.condition)}% condition`:'Untethered'],['Stored nourishment',`${s.food.toFixed(1)} / 44; ${world.weather.temp<0?33:22} used per day`],['Water',`${s.water.toFixed(2)} / 2; 1 used per day`],['Wool',`${s.wool} ready; ${Math.floor(s.woolWork/48)}% toward next fleece`],['Maturity',`${Math.floor(s.growth/192)}%`],['Breeding',s.pregnancy?`${Math.floor(s.pregnancy.work/96)}% fed gestation`:'Not pregnant']],bars:[{label:'Health',value:e.health,max:100,tone:e.health<40?'warn':'ok'}],notes:['Feeding, watering, capture, shearing and slaughter require a nearby keeper and paid work.','Grazing and drinking remove real local resources. Hungry, thirsty sheep deteriorate. Newborns need their own paid containment.'],position:{x:e.x,y:e.y}};}
       return {
         kind: 'animal',
         ...base,

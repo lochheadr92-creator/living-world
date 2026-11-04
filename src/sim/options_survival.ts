@@ -1,3 +1,4 @@
+import {livestockOptions} from './livestock';
 import {gearOptions} from './passive_gear';
 import {carcassOptions} from './carcass';
 import {clothingOptions} from './clothing';
@@ -743,6 +744,7 @@ export function survivalOptions(ctx: Ctx): void {
   optEat(ctx);
   huntOptions(ctx);
   carcassOptions(ctx);
+  livestockOptions(ctx);
   gearOptions(ctx);
   optDrink(ctx);
   optSleep(ctx);

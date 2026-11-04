@@ -160,6 +160,7 @@ export function perceive(world: World, p: Person): void {
       if (hyp(e.x - p.x, e.y - p.y) > r) return;
       p.seen.push(describeSeenAnimal(e));
       // a deer (rich worlds only) is seen but is no danger to remember
+      if(e.type==='sheep'){if(observe(world,p,e))fresh++;return;}
       if (e.type === 'deer') {if(world.settings.dynamics==='rich'&&runsRulesVersion(world,127)&&observe(world,p,e))fresh++;return;}
       const b = snapshotEntity(world, e, world.tick);
       if (b) {

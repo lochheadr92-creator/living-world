@@ -188,7 +188,7 @@ export function surplusOf(world: World, p: Person, item: ItemKind): number {
 
 export function valueOf(world: World, p: Person, item: ItemKind): number {
   const base: Record<ItemKind, number> = {
-  rendered_fat:4,
+  wool:2, rendered_fat:4,
   hide:5, fat:3,
   net:7,trap:8,fibre:1.2,garment:5,blanket:5,bedding:6,
     dried_fish:2.6, smoked_fish:2.8, dried_meat:2.6, smoked_meat:2.8,

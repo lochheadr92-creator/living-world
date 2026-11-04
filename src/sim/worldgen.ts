@@ -1,3 +1,4 @@
+import {seedSheep} from './livestock';
 import { depositRichness } from './geology';
 import { runsRulesVersion } from './rulesversion';
 import { foundMembership } from './townships';
@@ -575,6 +576,7 @@ export function generateNatural(settings: Settings): World {
   finalizeReachability(world, hubs);
   computeAccessCells(world);
   initializeWater(world);
+  seedSheep(world,terrainReach);
   seedKnowledge(world, gen);
   lookAround(world);
   snapshotInitial(world);

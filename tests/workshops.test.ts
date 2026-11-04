@@ -76,10 +76,14 @@ describe('the recipe table is a closed, acyclic accounting', () => {
     expect(TOOL_DEFS.hammer.hand).toBeTruthy();
     // wood, stone, clay, ore and grain come out of the ground by hand; nothing in the first links of the chain is made by a workshop
     for (const r of RECIPES.filter((x) => x.at === 'timber_yard' || x.at === 'quarry' || x.at === 'kiln')) {
-      for (const k of Object.keys(r.inputs)) expect(['wood', 'clay', 'planks', 'handles', 'fibre', 'hide']).toContain(k);
+      for (const k of Object.keys(r.inputs)) expect(['wood', 'clay', 'planks', 'handles', 'fibre', 'hide', 'wool']).toContain(k);
     }
     // Hide now comes from finite deer bodies via paid, tool-free butchery (carcass.test.ts).
     expect(RECIPE_BY_ID.sew_hide_garment.inputs).toEqual({hide:1,fibre:1});
+    // Paid animal care and shearing supply wool without advanced equipment.
+    // livestock.test.ts follows three actual fleeces through this entire chain.
+    expect(RECIPE_BY_ID.weave_wool_garment.inputs).toEqual({wool:3});
+    expect(RECIPE_BY_ID.weave_wool_garment.tool).toBeUndefined();
     // Fibre is now another paid first-stage yard product, obtainable without equipment.
     expect(RECIPE_BY_ID.strip_fibre.inputs).toEqual({wood:1});
     expect(RECIPE_BY_ID.strip_fibre.tool).toBeUndefined();

@@ -220,6 +220,7 @@ export function totalItems(world: World): Items {
   }
   for (const s of world.sites) add(s.delivered);
   for (const pile of world.piles) { add(pile.items); if(pile.carcass)add(pile.carcass.remaining); }
+  for (const a of world.animals) if(a.sheep?.wool) addItem(t,'wool',a.sheep.wool);
   for (const c of world.carts) add(c.load);
   for (const m of world.meals) if (m.status !== 'done' && m.status !== 'cancelled') add(m.table);
   for (const s of world.sources) if (s.amount > 0) addItem(t, s.item, s.amount);
