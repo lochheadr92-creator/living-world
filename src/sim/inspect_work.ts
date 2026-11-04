@@ -192,7 +192,7 @@ export function describeFacility(world: World, b: Building): Section[] {
       ['Making', r.label],
       ['Ordered by', job.client ? nameOf(world, job.client) : 'nobody in particular'],
       ['For', job.purpose || '—'],
-      ['Stage', job.phase === 'work' ? 'being worked' : job.phase === 'burn' ? r.preservation ? `${r.preservation==='dry'?'drying':'smoking'}: ${worldDuration(job.burnLeft)} of suitable conditions left` : `burning (done ${inFuture(world, world.tick + job.burnLeft)})` : 'finished, waiting for room in the store'],
+      ['Stage', job.phase === 'work' ? 'being worked' : job.phase === 'burn' ? r.passive ? `fermenting (ready ${inFuture(world, world.tick + job.burnLeft)})` : r.preservation ? `${r.preservation==='dry'?'drying':'smoking'}: ${worldDuration(job.burnLeft)} of suitable conditions left` : `burning (done ${inFuture(world, world.tick + job.burnLeft)})` : 'finished, waiting for room in the store'],
     ];
     const here = r.preservation?preservationWorkers(world,b).map(p=>p.name):Object.keys(ops.present).filter((k) => world.tick - ops.present[Number(k)] < 25).map((k) => nameOf(world, Number(k)));
     rows.push(['Working now', here.length ? here.join(', ') : 'nobody at the moment']);

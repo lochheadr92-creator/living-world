@@ -1,3 +1,4 @@
+import {hasBrewing} from './brewing';
 // Physical custody after a shared meal. Personal arrangements remain owned by meals.ts.
 import {runsRulesVersion} from './rulesversion';
 import {NUTRITION} from './constants';
@@ -30,7 +31,7 @@ export function validateMealLeftovers(w:World):void{
  const seen=new Set<number>();
  for(const pile of w.piles){const c=pile.mealFood;if(c===undefined)continue;
   if(!eligible||!c||!id(c.mealId)||!id(c.hostId)||!id(c.hhId)||seen.has(c.mealId))throw new Error('Invalid meal leftover ownership');
-  if(Object.entries(pile.items).some(([k,n])=>!NUTRITION[k as FoodKind]||!Number.isSafeInteger(n)||n<0))throw new Error('Invalid meal leftover food');
+  if(Object.entries(pile.items).some(([k,n])=>(!NUTRITION[k as FoodKind]&&!(hasBrewing(w)&&k==='beer'))||!Number.isSafeInteger(n)||n<0))throw new Error('Invalid meal leftover food');
   seen.add(c.mealId);
  }
 }

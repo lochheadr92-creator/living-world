@@ -1,3 +1,4 @@
+import {hasBrewing,layMealDrinks,sipMealDrink} from './brewing';
 import {takeNutrition} from './nourishment';
 import { supperWeight, supperContact, noteSupperPortion, finishSupperPractice } from './household_practices';
 import {hasMealLeftovers} from './meal_leftovers';
@@ -500,7 +501,7 @@ export function cancelMeal(world: World, m: Meal, why: string,actor?:Person): vo
 
 function returnTable(world: World, m: Meal): void {
   if(hasMealLeftovers(world)){
-    if(tableUnits(m)<=0)return;
+    if(tableUnits(m)<=0&&!(hasBrewing(world)&&(m.table.beer??0)>0))return;
     // The table is an outdoor holding at the gathering place, not the host's remote pack.
     // Preserve its owner and origin; collection uses ordinary travel and timed withdrawal.
     const hhId=m.tableOwnerHh;
@@ -641,6 +642,7 @@ function eatServing(world: World, m: Meal, p: Person): boolean {
   takeNutrition(world,p,NUTRITION[k]);
   p.lastAteTick = world.tick;
   noteSupperPortion(world,m,p);
+  sipMealDrink(world,p,m);
   addFx(world, 'eat', p.x, p.y, 0);
   return true;
 }
@@ -677,6 +679,7 @@ registerHandler('host_meal', {
         }
         if (left <= 0) break;
       }
+      layMealDrinks(world,p,m,need);
       m.servings = tableUnits(m);
       have = m.servings;
       if (have < need) {

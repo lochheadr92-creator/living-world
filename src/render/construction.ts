@@ -38,6 +38,7 @@ interface Spec {
 }
 
 const SPEC: Record<BuildingType, Spec> = {
+  brewery:{frame:'posts',gable:false,footing:'blocks',reveal:.3},
   mine:{frame:'posts',gable:false,footing:'none',reveal:.3},mill:{frame:'posts',gable:false,footing:'none',reveal:.3},
   cellar: {frame:'posts',gable:false,footing:'none',reveal:0.3},
   well: {frame:'posts',gable:false,footing:'none',reveal:0.3},

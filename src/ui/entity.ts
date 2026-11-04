@@ -49,7 +49,7 @@ const BUILDING_ICON: Record<BuildingType, IconName> = {
   food_rack: 'fish',
   well: 'water',
   cellar: 'bread',
-  mine:'pick',mill:'grain',
+  brewery:'water',mine:'pick',mill:'grain',
   lean_to: 'home',
   hut: 'home',
   house: 'house',
@@ -445,7 +445,7 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
         pctText = `${Math.round(frac * 100)}%`;
         barColor = 'var(--good)';
         if (!recentWorkers(world, b).length) notes.push('Nobody is working on it right now.');
-        if (r.burn > 0) notes.push(r.preservation === 'dry'
+        if (r.burn > 0) notes.push(r.passive ? `After preparation it needs about ${secondsText(r.burn)} to ferment.` : r.preservation === 'dry'
           ? `After preparation it needs about ${secondsText(r.burn)} of dry weather.`
           : `When the work is done it burns for about ${secondsText(r.burn)} with nobody needed.`);
       } else if (job.phase === 'burn') {
@@ -453,9 +453,9 @@ export function createEntityPanel(ctx: UICtx, hooks: { onClose(): void; onNaviga
         frac = job.burnTotal > 0 ? 1 - Math.max(0, job.burnLeft) / job.burnTotal : 1;
         pctText = `${Math.round(frac * 100)}%`;
         barColor = r.preservation === 'dry' ? 'var(--good)' : TONE.fire;
-        state = `${r.doing} (${job.blocked ? 'paused' : r.preservation === 'dry' ? 'drying' : 'burning'})`;
+        state = `${r.doing} (${job.blocked ? 'paused' : r.passive ? 'fermenting' : r.preservation === 'dry' ? 'drying' : 'burning'})`;
         if (job.blocked) notes.push(job.blocked+'.');
-        notes.push(r.preservation === 'dry'
+        notes.push(r.passive ? `The brew is fermenting; about ${secondsText(Math.max(0, job.burnLeft))} remains. No fire or worker is needed now.` : r.preservation === 'dry'
           ? `About ${secondsText(Math.max(0, job.burnLeft))} of dry weather remains. Nobody has to stand there.`
           : r.preservation && job.blocked ? `About ${secondsText(Math.max(0, job.burnLeft))} of processing remains after the blockage is resolved.`
           : `The fire is burning on its own; about ${secondsText(Math.max(0, job.burnLeft))} to go. Nobody has to stand there.`);

@@ -1,0 +1,16 @@
+{
+  "source": {
+    "head": "b2000e462d8d5e2d18593e022c3ec48d092cd986",
+    "rules": 139,
+    "content": "3efeab90e4257e41787ba1697c0d8a588ec05a37be023b986cfa4e29e9a452ee",
+    "note": "Recorded before successor behavior; ordinary forest and separately staged fermenting brew"
+  },
+  "ordinary": {
+    "saved": "6182c40cff120726eca9345a3abd9592267a7d36af5fc021c018fc44966917f2",
+    "continued": "c83602ceab0687a784ea1b5d4506855c129c6bc972baf60d8aef980e4b7febb0"
+  },
+  "staged": {
+    "saved": "fa9a2ae94512feed914f956c37f90c0ec6c0ad7a5db7c74780d8e94bd80291e9",
+    "continued": "248e29cd4e3e9fdd5ccfcc7f224b6007db75f7b6b7e21dd948ecd0b1cc07c608"
+  }
+}

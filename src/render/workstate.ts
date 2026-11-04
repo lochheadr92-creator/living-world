@@ -1,3 +1,4 @@
+import {RECIPE_BY_ID} from '../sim/recipes';
 // What a building is really doing right now, read from the simulation's own state (never invented):
 // a workshop is "working" when someone has put work into its running batch in the last moments, "burning" while the batch is in
 // its fire phase; a home is "occupied" when its household is nearby; a hall is "occupied" when a meal is under way or people are
@@ -30,7 +31,7 @@ export function workState(world: World, b: Building): WorkState {
       }
     }
   }
-  return { job: true, working, burning: job.phase === 'burn', recipe: job.recipe };
+  return { job: true, working, burning: job.phase === 'burn'&&!RECIPE_BY_ID[job.recipe]?.passive, recipe: job.recipe };
 }
 
 /** is the household of a home nearby (so the hearth is lit and the windows glow in the evening)? */

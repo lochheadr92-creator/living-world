@@ -12,7 +12,7 @@ export type FoodKind = 'berries' | 'fruit' | 'fish' | 'grain' | 'bread' | 'meat'
 export type ToolKind = 'axe' | 'pick' | 'hoe' | 'basket' | 'hammer' | 'saw' | 'jar' | 'spear' | 'garment' | 'blanket' | 'bedding' | 'net' | 'trap';
 /** Raw materials and the things made from them. */
 export type MaterialKind = 'wood' | 'stone' | 'clay' | 'ore' | 'planks' | 'handles' | 'bricks' | 'charcoal' | 'iron' | 'flour' | 'fibre' | 'hide' | 'fat' | 'wool';
-export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts' | 'cutting';
+export type ItemKind = FoodKind | ToolKind | MaterialKind | 'seeds' | 'water' | 'offcuts' | 'cutting' | 'beer';
 export type Items = Partial<Record<ItemKind, number>>;
 
 export interface Store {
@@ -820,6 +820,7 @@ export interface Source {
 
 export type BuildingType =
   | 'mine'
+  | 'brewery'
   | 'mill'
   | 'lean_to'
   | 'hut'
@@ -1224,6 +1225,8 @@ export interface Conversation {
 
 // ───────────────────────────── shared meals ─────────────────────────────
 export interface Meal {
+  /** Adults who actually consumed one drink at this table (rules 139). */
+  drinkers?: number[];
   heard?: Record<number,import('./meeting_knowledge').HeardMeeting>;
   replacesMealId?: number;
   replacementId?: number;

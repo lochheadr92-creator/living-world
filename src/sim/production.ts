@@ -1,3 +1,4 @@
+import {brewDemand,hasBrewing} from './brewing';
 import {hasRecoveredWorkshops,recoveredWorkshopWants} from './recovered_workshops';
 import {forestryOptions} from './forestry';
 import {communalStockOptions} from './communal_stock';
@@ -609,6 +610,7 @@ const quarryAware = (ctx: Ctx, item: ItemKind): boolean => item === 'stone' && f
 export function demandsOf(ctx: Ctx): Demand[] {
   const { world, p } = ctx;
   const out: Demand[] = [];
+  if(brewDemand(ctx))out.push({item:'beer',qty:2,have:p.inv.beer??0,base:24,why:'brew spare grain for an adult shared meal',tag:'meal'});
   for(const [item,qty] of Object.entries(livestockMaterials(ctx)))if((p.inv[item as ItemKind]??0)<qty!)out.push({item:item as ItemKind,qty:qty!,have:p.inv[item as ItemKind]??0,base:32,why:'supplies for known sheep care',tag:'animals'});
   if(hasGear(world)&&ctx.stage!=='child')for(const kind of ['net','trap'] as const){
     const known=kind==='trap'&&runsRulesVersion(world,127)?!!knownTrapGround(ctx):Object.values(p.beliefs).some(b=>b.kind===(kind==='net'?'fish_spot':'tree'));
@@ -1011,6 +1013,7 @@ export function upgradeWish(ctx: Ctx): number {
 export function facilityWants(ctx: Ctx): FacilityWant[] {
   const { p, world } = ctx;
   const out: FacilityWant[] = recoveredWorkshopWants(ctx);
+  if(brewDemand(ctx)&&!beliefsByKind(p,['building','site']).some(b=>b.btype==='brewery'))out.push({type:'brewery',signal:.8,why:'spare grain and a known hall could support brewing for shared meals'});
   const knowTrees = countBeliefsOfKind(p, 'tree') >= 3;
   const knowRocks = countBeliefsOfKind(p, 'rock') + countBeliefsOfKind(p, 'outcrop') >= 1;
   if (!knowTrees || !knowRocks) return out;

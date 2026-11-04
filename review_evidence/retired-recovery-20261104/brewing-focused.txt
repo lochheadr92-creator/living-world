@@ -1,0 +1,55 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ❯ tests/brewing.test.ts (6 tests | 2 failed) 86ms
+   × carries the finished drink to an agreed table and actually serves two adults with food 31ms
+   × keeps fermentation across exact save continuation and rejects old-rule and malformed beer saves 13ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/brewing.test.ts > carries the finished drink to an agreed table and actually serves two adults with food
+ReferenceError: runsRulesVersion is not defined
+ ❯ spoilGoods src/sim/world.ts:275:72
+    273|   if(runsPreservation(world)){
+    274|     const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),…
+    275|     for(const items of holdings)for(const k of [...PRESERVED_FOODS,...…
+       |                                                                        ^
+    276|       const n=items[k]??0;let lost=0;
+    277|       for(let i=0;i<n;i++)if(world.rng.next()<rate*(PERISHABLE[k]??1)*…
+ ❯ stepWorld src/sim/world.ts:127:26
+ ❯ tests/brewing.test.ts:22:351
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/brewing.test.ts > keeps fermentation across exact save continuation and rejects old-rule and malformed beer saves
+ReferenceError: runsRulesVersion is not defined
+ ❯ spoilGoods src/sim/world.ts:275:72
+    273|   if(runsPreservation(world)){
+    274|     const holdings=[...world.persons.filter(p=>p.alive).map(p=>p.inv),…
+    275|     for(const items of holdings)for(const k of [...PRESERVED_FOODS,...…
+       |                                                                        ^
+    276|       const n=items[k]??0;let lost=0;
+    277|       for(let i=0;i<n;i++)if(world.rng.next()<rate*(PERISHABLE[k]??1)*…
+ ❯ stepWorld src/sim/world.ts:127:26
+ ❯ tests/brewing.test.ts:29:257
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 4 passed (6)
+   Start at  16:50:44
+   Duration  1.85s (transform 84%, import 11%, tests 5%)
+

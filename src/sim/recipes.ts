@@ -13,6 +13,8 @@ import type { BuildingType, FacilityState, Items, ItemKind, SkillKey, ToolKind }
  * the ledger.
  */
 export interface Recipe {
+  /** Passive processing after preparation, without a continuously burning fire. */
+  passive?: 'ferment';
   minRules?:number;
   id: string;
   label: string;
@@ -310,6 +312,7 @@ export const RECIPES: Recipe[] = [
 ];
 
 RECIPES.push(
+ {minRules:139,id:'brew_beer',label:'beer',doing:'Brewing beer',at:'brewery',inputs:{grain:6,water:4},fuel:{wood:1},work:100,burn:2400,passive:'ferment',outputs:{beer:4},waste:{grain:2},wasteWhy:'spent mash',skill:'bake',workers:1,serves:['beer'],benefit:'Spare grain, water, fuel and fermentation time make drinks for adults at a real shared meal.'},
  {minRules:138,id:'mine_ore',label:'batch ore extraction',doing:'Working the ore mine',at:'mine',inputs:{},fuel:{},work:110,burn:0,outputs:{ore:3},waste:{},wasteWhy:'',fromDeposit:{item:'ore',n:3},skill:'stone',tool:{kind:'pick',required:true,speed:.5},workers:3,serves:['ore'],benefit:'Three existing ore from the connected finite vein; no ore is created.'},
  {minRules:138,id:'mill_flour_separate',label:'ground flour',doing:'Turning the grain mill',at:'mill',inputs:{grain:6},fuel:{},work:210,burn:0,outputs:{flour:5},waste:{grain:1},wasteWhy:'bran and dust',skill:'bake',workers:2,serves:['flour'],benefit:'A separate grinding floor produces flour while the bakery remains available for bread.'},
 );
@@ -320,7 +323,7 @@ export function recipesAt(type: BuildingType): Recipe[] {
   return RECIPES.filter((r) => r.at === type);
 }
 
-export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'food_rack', 'mine', 'mill'];
+export const FACILITY_TYPES: BuildingType[] = ['timber_yard', 'quarry', 'kiln', 'smithy', 'bakery', 'granary', 'food_rack', 'mine', 'mill', 'brewery'];
 /** workplaces whose buildings keep a FacilityState */
 export const isFacilityType = (t: BuildingType): boolean => FACILITY_TYPES.includes(t) || t === 'hall';
 
@@ -375,6 +378,7 @@ export function acceptedAt(type: BuildingType): ItemKind[] {
     set.add('seeds');
   }
   if (type === 'hall') {
+    set.add('beer');
     for(const k of ['dried_fish','smoked_fish','dried_meat','smoked_meat','rendered_fat'] as const)set.add(k);
     set.add('bread');
     set.add('fish');

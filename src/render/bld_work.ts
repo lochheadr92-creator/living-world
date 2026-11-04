@@ -391,10 +391,13 @@ export function smithySprite(cache: SpriteCache, variant: number): Sprite {
 }
 
 /** Timbered mine entry and a separate hand-powered grinding floor. */
-export function recoveredWorkshopSprite(cache:SpriteCache,kind:'mine'|'mill'):Sprite{
+export function recoveredWorkshopSprite(cache:SpriteCache,kind:'mine'|'mill'|'brewery'):Sprite{
  return cache.get('recovered-'+kind,180,150,90,100,ctx=>{
   const p=mk(2,2);groundShadow(ctx,60,30,.25,4);groundPatch(ctx,p,.05,1.95,.05,1.95,'#9b927d');
-  if(kind==='mine'){
+  if(kind==='brewery'){
+   for(const x of [.5,1.4]){const c=p(x,.6,0);cylinder(ctx,c[0],c[1],15,28,'#99724d','#62472f','#bc9362');line(ctx,[c[0]-14,c[1]-9],[c[0]+14,c[1]-9],'#49453d',3);}
+   const c=p(1,1.5,0);cylinder(ctx,c[0],c[1],18,12,'#77756e','#44433f','#a1a091');
+  }else if(kind==='mine'){
    box(ctx,p,.2,1.8,.15,1.4,0,45,boxTones('#777265','rgba(30,20,12,.5)'));
    faceL(ctx,p,.45,1.55,1.42,0,32,'#211c18');
    for(const x of [.38,1.58])post(ctx,p,x,1.45,0,37,.14,'#826044');

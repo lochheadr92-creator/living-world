@@ -452,7 +452,7 @@ export function joinBlocker(world: World, b: Building, p: Person): string {
   if (!job) return 'nothing is being made';
   const r = recipeOf(job);
   if(!recipeAvailable(world,r))return 'this recipe is not available under these rules';
-  if (job.phase !== 'work') return job.phase === 'burn' ? r.preservation==='dry'?'it is drying; there is nothing to do but wait':'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
+  if (job.phase !== 'work') return job.phase === 'burn' ? r.passive?'it is fermenting; there is nothing to do but wait':r.preservation==='dry'?'it is drying; there is nothing to do but wait':'it is burning; there is nothing to do but wait' : 'finished, waiting for room';
   const technique = techniqueBlocker(world,p,r.id);
   if(technique)return technique;
   if (!mayUse(world, p, b)) return 'not theirs to use';
@@ -469,7 +469,7 @@ export function workJob(world: World, b: Building, p: Person): 'continue' | 'wor
   if (!ops || !job || job.phase !== 'work') return 'stopped';
   const r = recipeOf(job);
   if(!recipeAvailable(world,r))return 'stopped';
-  if(b.type==='mine'||b.type==='mill'){
+  if(b.type==='mine'||b.type==='mill'||b.type==='brewery'){
     const dx=Math.max(b.x-p.x,0,p.x-(b.x+b.w)),dy=Math.max(b.y-p.y,0,p.y-(b.y+b.h));
     if(!mayUse(world,p,b)||b.condition<12||Math.hypot(dx,dy)>1.5){ops.lastBlocker='the workshop is no longer accessible, standing or within reach';return 'workshop_blocked';}
   }
@@ -513,7 +513,7 @@ function endWorkPhase(world: World, b: Building): void {
     }
     job.phase = 'burn';
     job.burnLeft = r.burn;
-    if(r.preservation!=='dry')addFx(world, 'smoke', b.x + b.w / 2, b.y + 0.3, b.id);
+    if(r.preservation!=='dry'&&!r.passive)addFx(world, 'smoke', b.x + b.w / 2, b.y + 0.3, b.id);
     return;
   }
   finishJob(world, b);
