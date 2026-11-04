@@ -1,10 +1,11 @@
+import {runsRulesVersion} from './rulesversion';
 import {knownWellSite} from './wells';
 import { constructionAftermath } from './achievement';
 import {HEARTH_COST,HEARTH_WORK,hearthInstallBlock} from './hearth';
 import {losePreservationRack} from './preservation';
 import { preservesAccess, allSitesNeedAccess } from './construction_access';
 import { finishProject, hasTownships, projectAt } from './townships';
-import { BUILD_DEF, isHomeType, isSolidHome } from './constants';
+import { TOOLS, BUILD_DEF, isHomeType, isSolidHome } from './constants';
 import { evacuateHome } from './habitation';
 import { addItem, addCapped, isEmptyItems, cloneItems } from './economy';
 import { addEvent, addFx } from './events';
@@ -128,7 +129,7 @@ export function makeHousePile(world: World, x: number, y: number, items: Items, 
     registerGeneric(world, target);
   }
   // equipment keeps its identity: its records move to the heap along with the counts
-  if (fromHolder) for (const k of ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
+  if (fromHolder) for (const k of world.settings.dynamics === 'rich' && runsRulesVersion(world,147) ? TOOLS : ['axe', 'pick', 'hoe', 'basket', 'hammer', 'saw', 'jar', 'spear', 'garment', 'blanket', 'bedding'] as const) if ((items[k] ?? 0) > 0) retagTools(world, k, items[k] ?? 0, fromHolder, target.id);
   return target;
 }
 
