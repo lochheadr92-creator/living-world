@@ -51,7 +51,7 @@ describe('varied spare time', () => {
     expect(hashWorld(c)).toBe(hashWorld(a));
   });
 
-  it('sends people to more than one kind of place', () => {
+  it('sends people to more than one kind of place', { timeout: 400000 }, () => {
     // One world was one trajectory: the pass rested on a single outing that later rules versions shifted (152: settlement
     // kept building; 154: different food trips). The same claim now holds over this file's three fixture worlds together.
     const keys = new Set<string>();
