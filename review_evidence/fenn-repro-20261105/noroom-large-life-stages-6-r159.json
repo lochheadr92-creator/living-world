@@ -1,0 +1,561 @@
+{
+ "seed": "life-stages-6",
+ "rules": 159,
+ "days": 30,
+ "conserved": true,
+ "alive": 140,
+ "count": {
+  "give(care):success": 238,
+  "give(care):failed": 43,
+  "give(care):interrupted": 36,
+  "give(promise):failed": 49,
+  "give(promise):success": 35,
+  "give(give):success": 1,
+  "give(return):success": 4
+ },
+ "noRoomFailures": 15,
+ "starvingRecipients": 0,
+ "diedWithin3000": 0,
+ "rows": [
+  {
+   "tick": 611,
+   "mode": "care",
+   "giver": {
+    "id": 4192,
+    "name": "Cole",
+    "stage": "adult",
+    "inv": {
+     "fruit": 2,
+     "water": 1,
+     "berries": 4
+    },
+    "weight": 7.5,
+    "cap": 12,
+    "hunger": 67
+   },
+   "to": {
+    "id": 4194,
+    "name": "Sven",
+    "stage": "child",
+    "inv": {
+     "berries": 4
+    },
+    "weight": 4,
+    "cap": 5,
+    "hunger": 54
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 763,
+   "mode": "care",
+   "giver": {
+    "id": 4138,
+    "name": "Hana",
+    "stage": "adult",
+    "inv": {
+     "grain": 2,
+     "water": 1,
+     "axe": 1,
+     "seeds": 1,
+     "wood": 3
+    },
+    "weight": 10.75,
+    "cap": 12,
+    "hunger": 63
+   },
+   "to": {
+    "id": 4140,
+    "name": "Uri",
+    "stage": "child",
+    "inv": {
+     "berries": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "hunger": 61
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 2496,
+   "mode": "promise",
+   "giver": {
+    "id": 4052,
+    "name": "Kai",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "fruit": 2,
+     "grain": 2,
+     "wood": 2
+    },
+    "weight": 9,
+    "cap": 12,
+    "hunger": 84
+   },
+   "to": {
+    "id": 4053,
+    "name": "Wren",
+    "stage": "child",
+    "inv": {
+     "seeds": 1,
+     "berries": 1,
+     "fruit": 3
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 83
+   },
+   "sameHh": true,
+   "items": {
+    "grain": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 2559,
+   "mode": "promise",
+   "giver": {
+    "id": 4054,
+    "name": "Jonas",
+    "stage": "child",
+    "inv": {
+     "seeds": 1,
+     "fruit": 1,
+     "water": 1
+    },
+    "weight": 2.75,
+    "cap": 5,
+    "hunger": 57
+   },
+   "to": {
+    "id": 4051,
+    "name": "Talia",
+    "stage": "adult",
+    "inv": {
+     "berries": 2,
+     "fruit": 5,
+     "grain": 2,
+     "seeds": 1,
+     "wood": 1
+    },
+    "weight": 11.25,
+    "cap": 12,
+    "hunger": 75
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 2887,
+   "mode": "promise",
+   "giver": {
+    "id": 4052,
+    "name": "Kai",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "fruit": 2,
+     "grain": 3,
+     "wood": 3
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 71
+   },
+   "to": {
+    "id": 4053,
+    "name": "Wren",
+    "stage": "child",
+    "inv": {
+     "seeds": 1,
+     "berries": 1,
+     "fruit": 3
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 73
+   },
+   "sameHh": true,
+   "items": {
+    "grain": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 3230,
+   "mode": "promise",
+   "giver": {
+    "id": 4052,
+    "name": "Kai",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "fruit": 2,
+     "grain": 3
+    },
+    "weight": 6,
+    "cap": 12,
+    "hunger": 61
+   },
+   "to": {
+    "id": 4053,
+    "name": "Wren",
+    "stage": "child",
+    "inv": {
+     "seeds": 1,
+     "berries": 1,
+     "fruit": 3
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 64
+   },
+   "sameHh": true,
+   "items": {
+    "grain": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 3415,
+   "mode": "promise",
+   "giver": {
+    "id": 4052,
+    "name": "Kai",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "fruit": 2,
+     "grain": 3
+    },
+    "weight": 6,
+    "cap": 12,
+    "hunger": 55
+   },
+   "to": {
+    "id": 4053,
+    "name": "Wren",
+    "stage": "child",
+    "inv": {
+     "seeds": 1,
+     "berries": 1,
+     "fruit": 3
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 60
+   },
+   "sameHh": true,
+   "items": {
+    "grain": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 4079,
+   "mode": "promise",
+   "giver": {
+    "id": 4052,
+    "name": "Kai",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "fruit": 2,
+     "grain": 3
+    },
+    "weight": 6,
+    "cap": 12,
+    "hunger": 43
+   },
+   "to": {
+    "id": 4053,
+    "name": "Wren",
+    "stage": "child",
+    "inv": {
+     "seeds": 1,
+     "berries": 1,
+     "fruit": 3
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 47
+   },
+   "sameHh": true,
+   "items": {
+    "grain": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 4221,
+   "mode": "promise",
+   "giver": {
+    "id": 4052,
+    "name": "Kai",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "fruit": 2,
+     "grain": 1
+    },
+    "weight": 4,
+    "cap": 12,
+    "hunger": 72
+   },
+   "to": {
+    "id": 4053,
+    "name": "Wren",
+    "stage": "child",
+    "inv": {
+     "seeds": 1,
+     "berries": 1,
+     "fruit": 3
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 44
+   },
+   "sameHh": true,
+   "items": {
+    "grain": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 4882,
+   "mode": "promise",
+   "giver": {
+    "id": 4090,
+    "name": "Ada",
+    "stage": "adult",
+    "inv": {
+     "wood": 1,
+     "berries": 4
+    },
+    "weight": 6,
+    "cap": 12,
+    "hunger": 42
+   },
+   "to": {
+    "id": 4091,
+    "name": "Leo",
+    "stage": "adult",
+    "inv": {
+     "fruit": 1,
+     "berries": 4,
+     "stone": 1,
+     "wood": 2
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 75
+   },
+   "sameHh": true,
+   "items": {
+    "wood": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 5380,
+   "mode": "promise",
+   "giver": {
+    "id": 4090,
+    "name": "Ada",
+    "stage": "adult",
+    "inv": {
+     "wood": 1,
+     "berries": 4
+    },
+    "weight": 6,
+    "cap": 12,
+    "hunger": 54
+   },
+   "to": {
+    "id": 4091,
+    "name": "Leo",
+    "stage": "adult",
+    "inv": {
+     "fruit": 1,
+     "berries": 4,
+     "stone": 1,
+     "wood": 2
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 59
+   },
+   "sameHh": true,
+   "items": {
+    "wood": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 35979,
+   "mode": "promise",
+   "giver": {
+    "id": 4073,
+    "name": "Petra",
+    "stage": "adult",
+    "inv": {
+     "seeds": 4,
+     "basket": 1,
+     "wood": 2,
+     "berries": 3,
+     "grain": 1,
+     "fruit": 1
+    },
+    "weight": 11,
+    "cap": 18,
+    "hunger": 77
+   },
+   "to": {
+    "id": 4191,
+    "name": "Kaia",
+    "stage": "adult",
+    "inv": {
+     "spear": 1,
+     "wood": 2,
+     "cutting": 1,
+     "grain": 2,
+     "seeds": 1,
+     "stone": 1
+    },
+    "weight": 11.25,
+    "cap": 12,
+    "hunger": 47
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 36282,
+   "mode": "promise",
+   "giver": {
+    "id": 4073,
+    "name": "Petra",
+    "stage": "adult",
+    "inv": {
+     "seeds": 4,
+     "basket": 1,
+     "wood": 2,
+     "berries": 3,
+     "grain": 1,
+     "fruit": 1
+    },
+    "weight": 11,
+    "cap": 18,
+    "hunger": 68
+   },
+   "to": {
+    "id": 4191,
+    "name": "Kaia",
+    "stage": "adult",
+    "inv": {
+     "spear": 1,
+     "wood": 2,
+     "cutting": 1,
+     "grain": 2,
+     "seeds": 1,
+     "stone": 1
+    },
+    "weight": 11.25,
+    "cap": 12,
+    "hunger": 54
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 57372,
+   "mode": "care",
+   "giver": {
+    "id": 4170,
+    "name": "Greta",
+    "stage": "adult",
+    "inv": {
+     "rod": 1,
+     "seeds": 2,
+     "fish": 1,
+     "water": 2
+    },
+    "weight": 6,
+    "cap": 12,
+    "hunger": 44
+   },
+   "to": {
+    "id": 4172,
+    "name": "Lars",
+    "stage": "child",
+    "inv": {
+     "seeds": 11,
+     "fruit": 2
+    },
+    "weight": 4.75,
+    "cap": 5,
+    "hunger": 58
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 68235,
+   "mode": "promise",
+   "giver": {
+    "id": 4090,
+    "name": "Ada",
+    "stage": "adult",
+    "inv": {
+     "seeds": 8,
+     "basket": 1,
+     "fruit": 2,
+     "berries": 3,
+     "wood": 1,
+     "grain": 1
+    },
+    "weight": 11,
+    "cap": 18,
+    "hunger": 49
+   },
+   "to": {
+    "id": 65250,
+    "name": "Arlo III",
+    "stage": "adult",
+    "inv": {
+     "wood": 6
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 50
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  }
+ ]
+}

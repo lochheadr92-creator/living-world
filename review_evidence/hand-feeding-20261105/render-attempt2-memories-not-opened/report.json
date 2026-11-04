@@ -1,0 +1,22 @@
+{
+  "ordinary": true,
+  "world": "Normal aspen, arrivals on, rules 159",
+  "found": {
+    "tick": 11597,
+    "reason": "Ivo fed me 1 berries by hand: my pack had no room for it.",
+    "hit": {
+      "id": 3093,
+      "name": "Fenn",
+      "stage": "adult"
+    }
+  },
+  "checks": {
+    "ordinaryFedByHand": true,
+    "visibleInPanel": false,
+    "pure": true,
+    "noExceptions": true
+  },
+  "panelLines": [
+    "Sleeping by the fire → interrupted: woken to be fed (1 world min ago)"
+  ]
+}

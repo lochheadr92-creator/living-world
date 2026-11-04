@@ -1,0 +1,144 @@
+{
+ "rules": 153,
+ "from": 54000,
+ "end": 56962,
+ "fennAlive": false,
+ "died": 56962,
+ "cause": "hunger",
+ "conserved": true,
+ "ev": [
+  {
+   "tick": 55018,
+   "who": "Ines",
+   "activity": "eat",
+   "label": "Eating",
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 55486,
+   "who": "Ines",
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "outcome": "failed",
+   "detail": "Fenn was not where I expected"
+  },
+  {
+   "tick": 55678,
+   "who": "Ines",
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "outcome": "failed",
+   "detail": "they had no room to carry it"
+  },
+  {
+   "tick": 56105,
+   "who": "Ines",
+   "activity": "eat",
+   "label": "Eating",
+   "outcome": "success",
+   "detail": "done"
+  }
+ ],
+ "track": [
+  {
+   "tick": 54300,
+   "hunger": 0,
+   "health": 80,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 54600,
+   "hunger": 0,
+   "health": 75,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 54900,
+   "hunger": 0,
+   "health": 65,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 55200,
+   "hunger": 0,
+   "health": 55,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 55500,
+   "hunger": 0,
+   "health": 47,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 55800,
+   "hunger": 0,
+   "health": 37,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 56100,
+   "hunger": 0,
+   "health": 28,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 56400,
+   "hunger": 0,
+   "health": 18,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 56700,
+   "hunger": 0,
+   "health": 8,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  }
+ ]
+}

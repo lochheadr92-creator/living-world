@@ -1,0 +1,303 @@
+{
+ "seed": "river",
+ "rules": 159,
+ "days": 30,
+ "conserved": true,
+ "alive": 91,
+ "count": {
+  "give(care):failed": 58,
+  "give(care):success": 232,
+  "give(care):interrupted": 46,
+  "give(promise):failed": 16,
+  "give(promise):success": 21,
+  "give(promise):interrupted": 1,
+  "give(return):success": 3,
+  "give(give):success": 2
+ },
+ "noRoomFailures": 8,
+ "starvingRecipients": 1,
+ "diedWithin3000": 0,
+ "rows": [
+  {
+   "tick": 637,
+   "mode": "care",
+   "giver": {
+    "id": 4255,
+    "name": "Jax",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "water": 1,
+     "fruit": 3,
+     "wood": 3
+    },
+    "weight": 11.5,
+    "cap": 12,
+    "hunger": 60
+   },
+   "to": {
+    "id": 4256,
+    "name": "Eli",
+    "stage": "child",
+    "inv": {
+     "fruit": 5
+    },
+    "weight": 5,
+    "cap": 5,
+    "hunger": 61
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 3483,
+   "mode": "promise",
+   "giver": {
+    "id": 4398,
+    "name": "Nell",
+    "stage": "child",
+    "inv": {
+     "berries": 3,
+     "water": 1
+    },
+    "weight": 4.5,
+    "cap": 5,
+    "hunger": 63
+   },
+   "to": {
+    "id": 4397,
+    "name": "Cole",
+    "stage": "adult",
+    "inv": {
+     "berries": 6,
+     "wood": 3
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 74
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 3797,
+   "mode": "promise",
+   "giver": {
+    "id": 4398,
+    "name": "Nell",
+    "stage": "child",
+    "inv": {
+     "berries": 3,
+     "water": 1
+    },
+    "weight": 4.5,
+    "cap": 5,
+    "hunger": 55
+   },
+   "to": {
+    "id": 4397,
+    "name": "Cole",
+    "stage": "adult",
+    "inv": {
+     "berries": 6,
+     "wood": 3
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 68
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 4314,
+   "mode": "promise",
+   "giver": {
+    "id": 4398,
+    "name": "Nell",
+    "stage": "child",
+    "inv": {
+     "berries": 3,
+     "water": 1
+    },
+    "weight": 4.5,
+    "cap": 5,
+    "hunger": 47
+   },
+   "to": {
+    "id": 4397,
+    "name": "Cole",
+    "stage": "adult",
+    "inv": {
+     "berries": 6,
+     "wood": 3
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 56
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 4862,
+   "mode": "promise",
+   "giver": {
+    "id": 4398,
+    "name": "Nell",
+    "stage": "child",
+    "inv": {
+     "berries": 2,
+     "water": 1,
+     "fish": 1
+    },
+    "weight": 5,
+    "cap": 5,
+    "hunger": 45
+   },
+   "to": {
+    "id": 4397,
+    "name": "Cole",
+    "stage": "adult",
+    "inv": {
+     "berries": 6,
+     "wood": 3
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 75
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 15647,
+   "mode": "promise",
+   "giver": {
+    "id": 4299,
+    "name": "Yan",
+    "stage": "adult",
+    "inv": {
+     "wood": 2,
+     "berries": 2
+    },
+    "weight": 6,
+    "cap": 12,
+    "hunger": 61
+   },
+   "to": {
+    "id": 4298,
+    "name": "Clara",
+    "stage": "adult",
+    "inv": {
+     "berries": 1,
+     "basket": 1,
+     "wood": 7,
+     "fish": 1
+    },
+    "weight": 17.5,
+    "cap": 18,
+    "hunger": 42
+   },
+   "sameHh": true,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 51419,
+   "mode": "promise",
+   "giver": {
+    "id": 4408,
+    "name": "Elin",
+    "stage": "adult",
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "rod": 1,
+     "seeds": 1,
+     "stone": 1,
+     "spear": 1,
+     "berries": 2
+    },
+    "weight": 9.75,
+    "cap": 18,
+    "hunger": 83
+   },
+   "to": {
+    "id": 4402,
+    "name": "Leo",
+    "stage": "adult",
+    "inv": {
+     "seeds": 1,
+     "spear": 1,
+     "planks": 1,
+     "stone": 2,
+     "berries": 2
+    },
+    "weight": 11.75,
+    "cap": 12,
+    "hunger": 21
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 68486,
+   "mode": "promise",
+   "giver": {
+    "id": 4337,
+    "name": "Viktor",
+    "stage": "adult",
+    "inv": {
+     "seeds": 4,
+     "wood": 3,
+     "berries": 2
+    },
+    "weight": 9,
+    "cap": 12,
+    "hunger": 49
+   },
+   "to": {
+    "id": 4336,
+    "name": "Ada",
+    "stage": "adult",
+    "inv": {
+     "axe": 1,
+     "seeds": 4,
+     "grain": 1,
+     "stone": 2,
+     "berries": 1,
+     "wood": 1
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 42
+   },
+   "sameHh": true,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  }
+ ]
+}

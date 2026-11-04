@@ -1,0 +1,173 @@
+{
+ "seed": "forest",
+ "rules": 159,
+ "days": 30,
+ "conserved": true,
+ "alive": 19,
+ "count": {
+  "give(care):failed": 39,
+  "give(care):success": 268,
+  "give(promise):success": 37,
+  "give(care):interrupted": 40,
+  "give(promise):failed": 24,
+  "give(return):success": 1
+ },
+ "noRoomFailures": 4,
+ "starvingRecipients": 1,
+ "diedWithin3000": 0,
+ "rows": [
+  {
+   "tick": 437,
+   "mode": "care",
+   "giver": {
+    "id": 4162,
+    "name": "Ivy",
+    "stage": "adult",
+    "inv": {
+     "grain": 2,
+     "water": 1,
+     "berries": 1,
+     "wood": 3
+    },
+    "weight": 10.5,
+    "cap": 12,
+    "hunger": 47
+   },
+   "to": {
+    "id": 4165,
+    "name": "Silas",
+    "stage": "child",
+    "inv": {
+     "berries": 2,
+     "fruit": 3
+    },
+    "weight": 5,
+    "cap": 5,
+    "hunger": 70
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 627,
+   "mode": "care",
+   "giver": {
+    "id": 4254,
+    "name": "Rhea",
+    "stage": "adult",
+    "inv": {
+     "grain": 3,
+     "water": 1,
+     "basket": 1,
+     "berries": 5
+    },
+    "weight": 10.5,
+    "cap": 18,
+    "hunger": 55
+   },
+   "to": {
+    "id": 4256,
+    "name": "Yara",
+    "stage": "child",
+    "inv": {
+     "berries": 4
+    },
+    "weight": 4,
+    "cap": 5,
+    "hunger": 70
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 43887,
+   "mode": "promise",
+   "giver": {
+    "id": 4163,
+    "name": "Wen",
+    "stage": "adult",
+    "inv": {
+     "rod": 1,
+     "stone": 1,
+     "basket": 1,
+     "seeds": 2,
+     "berries": 3,
+     "fish": 1,
+     "grain": 1
+    },
+    "weight": 11,
+    "cap": 18,
+    "hunger": 65
+   },
+   "to": {
+    "id": 4128,
+    "name": "Ana",
+    "stage": "adult",
+    "inv": {
+     "spear": 1,
+     "seeds": 3,
+     "wood": 4,
+     "cutting": 1,
+     "berries": 1
+    },
+    "weight": 11.75,
+    "cap": 12,
+    "hunger": 46
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 46107,
+   "mode": "promise",
+   "giver": {
+    "id": 4084,
+    "name": "Eli",
+    "stage": "adult",
+    "inv": {
+     "seeds": 12,
+     "basket": 1,
+     "rod": 1,
+     "stone": 1,
+     "wood": 2,
+     "fibre": 1,
+     "fruit": 2,
+     "grain": 1
+    },
+    "weight": 15.25,
+    "cap": 18,
+    "hunger": 67
+   },
+   "to": {
+    "id": 4177,
+    "name": "Wilma",
+    "stage": "adult",
+    "inv": {
+     "axe": 1,
+     "rod": 1,
+     "seeds": 3,
+     "garment": 1,
+     "wood": 3,
+     "grain": 2
+    },
+    "weight": 11.5,
+    "cap": 12,
+    "hunger": 29
+   },
+   "sameHh": false,
+   "items": {
+    "grain": 1
+   },
+   "died": null
+  }
+ ]
+}

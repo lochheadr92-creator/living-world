@@ -1,0 +1,419 @@
+{
+ "seed": "forest",
+ "rules": 158,
+ "days": 30,
+ "conserved": true,
+ "alive": 12,
+ "count": {
+  "give(care):failed": 51,
+  "give(care):success": 268,
+  "give(promise):success": 44,
+  "give(care):interrupted": 33,
+  "give(promise):failed": 33,
+  "give(promise):interrupted": 3
+ },
+ "noRoomFailures": 11,
+ "starvingRecipients": 1,
+ "diedWithin3000": 0,
+ "rows": [
+  {
+   "tick": 437,
+   "mode": "care",
+   "giver": {
+    "id": 4162,
+    "name": "Ivy",
+    "stage": "adult",
+    "inv": {
+     "grain": 2,
+     "water": 1,
+     "berries": 1,
+     "wood": 3
+    },
+    "weight": 10.5,
+    "cap": 12,
+    "hunger": 47
+   },
+   "to": {
+    "id": 4165,
+    "name": "Silas",
+    "stage": "child",
+    "inv": {
+     "berries": 2,
+     "fruit": 3
+    },
+    "weight": 5,
+    "cap": 5,
+    "hunger": 70
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 627,
+   "mode": "care",
+   "giver": {
+    "id": 4254,
+    "name": "Rhea",
+    "stage": "adult",
+    "inv": {
+     "grain": 3,
+     "water": 1,
+     "basket": 1,
+     "berries": 5
+    },
+    "weight": 10.5,
+    "cap": 18,
+    "hunger": 55
+   },
+   "to": {
+    "id": 4256,
+    "name": "Yara",
+    "stage": "child",
+    "inv": {
+     "berries": 4
+    },
+    "weight": 4,
+    "cap": 5,
+    "hunger": 70
+   },
+   "sameHh": true,
+   "items": {
+    "water": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 11735,
+   "mode": "promise",
+   "giver": {
+    "id": 4146,
+    "name": "Bea",
+    "stage": "adult",
+    "inv": {
+     "axe": 1,
+     "wood": 2,
+     "fish": 1,
+     "berries": 3
+    },
+    "weight": 9.5,
+    "cap": 12,
+    "hunger": 31
+   },
+   "to": {
+    "id": 4127,
+    "name": "Felix",
+    "stage": "adult",
+    "inv": {
+     "hoe": 1,
+     "pick": 1,
+     "wood": 5
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 38
+   },
+   "sameHh": false,
+   "items": {
+    "fish": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 12550,
+   "mode": "promise",
+   "giver": {
+    "id": 4146,
+    "name": "Bea",
+    "stage": "adult",
+    "inv": {
+     "axe": 1,
+     "wood": 2,
+     "fish": 1
+    },
+    "weight": 6.5,
+    "cap": 12,
+    "hunger": 69
+   },
+   "to": {
+    "id": 4127,
+    "name": "Felix",
+    "stage": "adult",
+    "inv": {
+     "hoe": 1,
+     "pick": 1,
+     "wood": 5
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 37
+   },
+   "sameHh": false,
+   "items": {
+    "fish": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 13013,
+   "mode": "promise",
+   "giver": {
+    "id": 4260,
+    "name": "Greta",
+    "stage": "adult",
+    "inv": {
+     "wood": 2,
+     "fish": 2
+    },
+    "weight": 7,
+    "cap": 12,
+    "hunger": 92
+   },
+   "to": {
+    "id": 4230,
+    "name": "Xavi",
+    "stage": "elder",
+    "inv": {
+     "wood": 3
+    },
+    "weight": 6,
+    "cap": 6,
+    "hunger": 21
+   },
+   "sameHh": false,
+   "items": {
+    "fish": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 28978,
+   "mode": "promise",
+   "giver": {
+    "id": 4147,
+    "name": "Emre",
+    "stage": "adult",
+    "inv": {
+     "basket": 1,
+     "wood": 5,
+     "seeds": 2,
+     "berries": 3,
+     "grain": 1,
+     "fruit": 2
+    },
+    "weight": 17.5,
+    "cap": 18,
+    "hunger": 45
+   },
+   "to": {
+    "id": 4146,
+    "name": "Bea",
+    "stage": "adult",
+    "inv": {
+     "axe": 1,
+     "wood": 1,
+     "stone": 2,
+     "berries": 3
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 59
+   },
+   "sameHh": true,
+   "items": {
+    "fruit": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 29639,
+   "mode": "promise",
+   "giver": {
+    "id": 4254,
+    "name": "Rhea",
+    "stage": "adult",
+    "inv": {
+     "basket": 1,
+     "rod": 1,
+     "seeds": 3,
+     "wood": 3,
+     "berries": 2
+    },
+    "weight": 10.75,
+    "cap": 18,
+    "hunger": 54
+   },
+   "to": {
+    "id": 4248,
+    "name": "Emre II",
+    "stage": "elder",
+    "inv": {
+     "axe": 1,
+     "wood": 2,
+     "seeds": 4
+    },
+    "weight": 6,
+    "cap": 6,
+    "hunger": 38
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 34250,
+   "mode": "promise",
+   "giver": {
+    "id": 4254,
+    "name": "Rhea",
+    "stage": "adult",
+    "inv": {
+     "basket": 1,
+     "rod": 1,
+     "seeds": 4,
+     "wood": 2,
+     "berries": 4
+    },
+    "weight": 11,
+    "cap": 18,
+    "hunger": 51
+   },
+   "to": {
+    "id": 4230,
+    "name": "Xavi",
+    "stage": "elder",
+    "inv": {
+     "wood": 3
+    },
+    "weight": 6,
+    "cap": 6,
+    "hunger": 40
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 2
+   },
+   "died": null
+  },
+  {
+   "tick": 41075,
+   "mode": "promise",
+   "giver": {
+    "id": 4254,
+    "name": "Rhea",
+    "stage": "adult",
+    "inv": {
+     "basket": 1,
+     "rod": 1,
+     "seeds": 4,
+     "wood": 1,
+     "berries": 1
+    },
+    "weight": 6,
+    "cap": 18,
+    "hunger": 83
+   },
+   "to": {
+    "id": 4248,
+    "name": "Emre II",
+    "stage": "elder",
+    "inv": {
+     "axe": 1,
+     "seeds": 6,
+     "wood": 1,
+     "berries": 1
+    },
+    "weight": 5.5,
+    "cap": 6,
+    "hunger": 54
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 47389,
+   "mode": "promise",
+   "giver": {
+    "id": 4242,
+    "name": "Ines",
+    "stage": "adult",
+    "inv": {
+     "seeds": 2,
+     "basket": 1,
+     "wood": 6,
+     "berries": 1,
+     "grain": 2
+    },
+    "weight": 16.5,
+    "cap": 18,
+    "hunger": 50
+   },
+   "to": {
+    "id": 4261,
+    "name": "Leo II",
+    "stage": "adult",
+    "inv": {
+     "cutting": 1,
+     "seeds": 2,
+     "wood": 4,
+     "berries": 1,
+     "grain": 2
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 45
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 1
+   },
+   "died": null
+  },
+  {
+   "tick": 47947,
+   "mode": "promise",
+   "giver": {
+    "id": 4242,
+    "name": "Ines",
+    "stage": "adult",
+    "inv": {
+     "seeds": 2,
+     "basket": 1,
+     "wood": 6,
+     "grain": 2,
+     "berries": 2
+    },
+    "weight": 17.5,
+    "cap": 18,
+    "hunger": 33
+   },
+   "to": {
+    "id": 4261,
+    "name": "Leo II",
+    "stage": "adult",
+    "inv": {
+     "cutting": 1,
+     "seeds": 2,
+     "wood": 4,
+     "berries": 1,
+     "grain": 2
+    },
+    "weight": 12,
+    "cap": 12,
+    "hunger": 35
+   },
+   "sameHh": false,
+   "items": {
+    "berries": 1
+   },
+   "died": null
+  }
+ ]
+}

@@ -1,0 +1,4714 @@
+{
+ "rules": 153,
+ "weights": {
+  "berries": 1,
+  "fruit": 1,
+  "fish": 1.5,
+  "grain": 1,
+  "bread": 1,
+  "wood": 2,
+  "stone": 3,
+  "seeds": 0.25,
+  "water": 1.5
+ },
+ "inesId": 4042,
+ "died": 56962,
+ "cause": "hunger",
+ "exactTwin": true,
+ "conserved": true,
+ "tick": 56962,
+ "events": [
+  {
+   "tick": 52231,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 3,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 52232,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "rest",
+   "label": "Sheltering at the hut",
+   "why": "a step toward “be fed, watered and under shelter before dark”: stay at my hut until it is light · cold +73 · walking −1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.49,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 79,
+    "thirst": 37,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Warm up at the fire: thinks the fire has gone out",
+    "Stay in shelter until it is light: something more pressing comes first",
+    "Picking fruit: believes it is empty",
+    "Gathering wild grain: believes it is empty",
+    "Gathering wild grain: believes it is empty",
+    "Gathering wild grain: believes it is empty"
+   ]
+  },
+  {
+   "tick": 52351,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 52352,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "rest",
+   "label": "Sheltering at the hut",
+   "why": "cold +82 · walking −1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.68,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 26,
+    "thirst": 49,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 52491,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 3,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 52492,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "rest",
+   "label": "Sheltering at the hut",
+   "why": "a step toward “be fed, watered and under shelter before dark”: stay at my hut until it is light · cold +78 · walking −1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.5,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 72,
+    "thirst": 27,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Warm up at the fire: thinks the fire has gone out",
+    "Stay in shelter until it is light: something more pressing comes first",
+    "Gathering wild grain: not enough estimated time for the trip and return: water margin",
+    "Picking berries: not enough estimated time for the trip and return: water margin",
+    "Picking berries: not enough estimated time for the trip and return: water margin",
+    "Bring fish to Fenn: would leave them too far from water for too long (only water remembered from before, which may not be there; thirst would fall to 21)"
+   ]
+  },
+  {
+   "tick": 52611,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 52612,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "rest",
+   "label": "Sheltering at the hut",
+   "why": "cold +75 · walking −1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.69,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 19,
+    "thirst": 40,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Gathering wild grain: believes it is empty",
+    "Gathering wild grain: believes it is empty"
+   ]
+  },
+  {
+   "tick": 52729,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "interrupted",
+   "detail": "a more urgent need (thirst)",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 3,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 52729,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "drink",
+   "label": "Drinking at the well",
+   "why": "thirsty +84 · walking −7 · remembered water in well +3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.51,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 65,
+    "thirst": 17,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 52823,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "interrupted",
+   "detail": "a more urgent need (hunger)",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 52823,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "why": "hungry +72 · remembered worn patch (observed at tick 50661) −4 · walking −3 · well-liked food +2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.7,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 14,
+    "thirst": 33,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 52834,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "drink",
+   "label": "Drinking at the well",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 3,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 52835,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "rest",
+   "label": "Sheltering at the hut",
+   "why": "cold +77 · walking −7",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.51,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 61,
+    "thirst": 100,
+    "x": 58.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 52889,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "outcome": "partial",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 52890,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "rest",
+   "label": "Sheltering at the hut",
+   "why": "cold +68 · walking −1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.7,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 34,
+    "thirst": 30,
+    "x": 71.6,
+    "y": 65.4
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Gathering wild grain: believes it is empty",
+    "Gathering wild grain: believes it is empty",
+    "Gathering wild grain: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53056,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 3,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53056,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Chat with Fenn",
+   "why": "wants company +62 · a friend +12 · close by +4 · one of my crew +3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.52,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 55,
+    "thirst": 91,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53056,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "socialize",
+   "label": "Chat with Fenn",
+   "outcome": "failed",
+   "detail": "they are inside a different space",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 3,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53057,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "fuel_fire",
+   "label": "Tending the indoor hearth",
+   "why": "our hearth fuel was last checked at tick 53054 +50 · walking −1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.52,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 55,
+    "thirst": 91,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53072,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "rest",
+   "label": "Resting inside the hut",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53072,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "drink",
+   "label": "Drinking at the well",
+   "why": "thirsty +78 · walking −13 · remembered water in well +3",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.71,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 29,
+    "thirst": 24,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53104,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "fuel_fire",
+   "label": "Tending the hearth inside the hut",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53105,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "fetch_water",
+   "label": "Drawing well water",
+   "why": "to obtain water for Fenn, last seen needing it at tick 53072 +39 · walking −6",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.52,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 53,
+    "thirst": 89,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53154,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "fetch_water",
+   "label": "Drawing well water",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53154,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "fuel_fire",
+   "label": "Feeding the fire",
+   "why": "cold +28 · the fire is getting low +25 · walking −5",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.52,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 52,
+    "thirst": 87,
+    "x": 62.5,
+    "y": 67.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53211,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "fuel_fire",
+   "label": "Feeding the fire",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53211,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Chat with Fenn",
+   "why": "wants company +66 · a friend +12 · walking −4 · one of my crew +3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.53,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 50,
+    "thirst": 85,
+    "x": 62.5,
+    "y": 60.7
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53275,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "socialize",
+   "label": "Chat with Fenn",
+   "outcome": "failed",
+   "detail": "Fenn had more pressing needs",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53276,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Chat with Oren",
+   "why": "wants company +67 · a friend +12 · one of my crew +3 · walking −2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.53,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 48,
+    "thirst": 82,
+    "x": 64.6,
+    "y": 54.4
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53295,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "drink",
+   "label": "Drinking at the well",
+   "outcome": "failed",
+   "detail": "the well is empty",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53296,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "why": "thirsty +82 · walking −4",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.72,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 23,
+    "thirst": 16,
+    "x": 62.5,
+    "y": 50.5
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking fruit: believes it is empty",
+    "Gathering wild grain: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53297,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "socialize",
+   "label": "Chat with Oren",
+   "outcome": "failed",
+   "detail": "Oren had more pressing needs",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53298,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Chat with Ada II",
+   "why": "wants company +67 · close by +3 · someone new +1 · walking −1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.53,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 47,
+    "thirst": 81,
+    "x": 62.5,
+    "y": 56.2
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53368,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Ada II",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53369,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "attend",
+   "label": "At the feast",
+   "why": "a feast +30 · out of the weather at the hall +16 · company +7 · walking −2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.53,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 45,
+    "thirst": 79,
+    "x": 62.7,
+    "y": 56.4
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53373,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53374,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +65 · walking −8 · well-liked food +1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.72,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 21,
+    "thirst": 100,
+    "x": 56.5,
+    "y": 49.5
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking fruit: believes it is empty",
+    "Gathering wild grain: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53477,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53477,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "why": "hungry +67 · walking −8 · well-liked food +2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.72,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 19,
+    "thirst": 96,
+    "x": 50.4,
+    "y": 57.4
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53557,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53558,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "warm",
+   "label": "Warming up by the fire",
+   "why": "cold +66 · walking −9 · company at the fire +2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.73,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 17,
+    "thirst": 94,
+    "x": 52.5,
+    "y": 65.5
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53572,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "attend",
+   "label": "At the feast",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53573,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "why": "a step toward “be fed, watered and under shelter before dark”: eat before the night · hungry +45 · walking −9 · well-liked food +2 · good at it +2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.54,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 39,
+    "thirst": 70,
+    "x": 66,
+    "y": 60.1
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking fruit: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53673,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53673,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "This estimate comes from my own completed gathering at this particular source. · hungry +51 · walking −7 · well-liked food +3 · good at it −2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.54,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 36,
+    "thirst": 66,
+    "x": 66.8,
+    "y": 47.2
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53698,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "warm",
+   "label": "Warming up by the fire",
+   "outcome": "interrupted",
+   "detail": "a more urgent need (hunger)",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53698,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "why": "hungry +73 · walking −14 · well-liked food +2 · has paid me poorly before (0.8×) −2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.73,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 13,
+    "thirst": 89,
+    "x": 62.6,
+    "y": 57.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53837,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "partial",
+   "detail": "nothing left",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 3
+   }
+  },
+  {
+   "tick": 53838,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "eat",
+   "label": "Eating",
+   "why": "a step toward “be fed, watered and under shelter before dark”: eat before the night · hungry +66 · food in pack +4",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.55,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 3
+    },
+    "weight": 10,
+    "cap": 18,
+    "hunger": 31,
+    "thirst": 59,
+    "x": 55.4,
+    "y": 49.6
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking fruit: believes it is empty",
+    "Picking fruit: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53847,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "eat",
+   "label": "Eating",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53848,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Chat with Faye II",
+   "why": "wants company +47 · walking −7 · someone new +1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.55,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 58,
+    "thirst": 59,
+    "x": 55.4,
+    "y": 49.6
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking fruit: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53867,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53867,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +77 · walking −6 · has paid me poorly before (0.8×) −2 · well-liked food +1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.74,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 9,
+    "thirst": 83,
+    "x": 54.5,
+    "y": 71.8
+   },
+   "setAside": []
+  },
+  {
+   "tick": 53933,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53934,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "why": "hungry +78 · walking −6 · has paid me poorly before (0.6×) −3 · well-liked food +2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.74,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 7,
+    "thirst": 81,
+    "x": 47.5,
+    "y": 71.6
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53950,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Faye II",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 53951,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "fuel_fire",
+   "label": "Tending the indoor hearth",
+   "why": "our hearth fuel was last checked at tick 53105 +51 · walking −11",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.55,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 55,
+    "thirst": 54,
+    "x": 59.1,
+    "y": 50.4
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking fruit: believes it is empty",
+    "Picking fruit: believes it is empty"
+   ]
+  },
+  {
+   "tick": 53992,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 53993,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "why": "hungry +80 · walking −5 · has paid me poorly before (0.6×) −3 · well-liked food +2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.74,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 5,
+    "thirst": 79,
+    "x": 45.5,
+    "y": 76.4
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 54006,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "fuel_fire",
+   "label": "Tending the indoor hearth",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 54006,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "warm",
+   "label": "Warming up by the fire",
+   "why": "cold +34 · walking −2 · company at the fire +2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.55,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 54,
+    "thirst": 52,
+    "x": 64.2,
+    "y": 55
+   },
+   "setAside": []
+  },
+  {
+   "tick": 54041,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "converse",
+   "label": "Talking with Rolf",
+   "why": "",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.55,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 53,
+    "thirst": 51,
+    "x": 63.4,
+    "y": 57.4
+   },
+   "setAside": []
+  },
+  {
+   "tick": 54042,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 54043,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +81 · walking −26 · has paid me poorly before (0.6×) −3 · remembered strained patch (observed at tick 51777) −1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.74,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 4,
+    "thirst": 77,
+    "x": 41.6,
+    "y": 78.5
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 54110,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Rolf",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 54111,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "warm",
+   "label": "Warming up by the fire",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 54111,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "sleep",
+   "label": "Sleeping by my hut",
+   "why": "tired +68 · walking −7",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.56,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 51,
+    "thirst": 48,
+    "x": 63.4,
+    "y": 57.4
+   },
+   "setAside": []
+  },
+  {
+   "tick": 54334,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 54334,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +85 · walking −8 · has paid me poorly before (0.6×) −3 · remembered strained patch (observed at tick 51603) −1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.75,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 67,
+    "x": 60.8,
+    "y": 95.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 54410,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 54411,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "hungry +85 · walking −11 · has paid me poorly before (0.4×) −4 · good at it −3",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.76,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 65,
+    "x": 66.5,
+    "y": 99.6
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 54551,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 54552,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "hungry +85 · walking −6 · has paid me poorly before (0.4×) −4 · good at it −3",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.76,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 60,
+    "x": 69.6,
+    "y": 89.4
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 54629,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 54630,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −10 · good at it −3 · well-liked food +3",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.76,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 57,
+    "x": 67.4,
+    "y": 83.6
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 54739,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 54739,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "hungry +85 · walking −10 · has paid me poorly before (0.4×) −4 · good at it −3",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.77,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 54,
+    "x": 72.5,
+    "y": 80.1
+   },
+   "setAside": []
+  },
+  {
+   "tick": 54817,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 54818,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "why": "hungry +84 · walking −25 · has paid me poorly before (0.5×) −5 · remembered worn patch (observed at tick 53118) −4",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.77,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 51,
+    "x": 76.6,
+    "y": 83.6
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 54854,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "sleep",
+   "label": "Sleeping inside the hut",
+   "outcome": "success",
+   "detail": "rested",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 54855,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "drink",
+   "label": "Drinking at the well",
+   "why": "a step toward “be fed, watered and under shelter before dark”: drink before the night · thirsty +73 · walking −7 · remembered water in well +3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.58,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 37,
+    "thirst": 29,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking fruit: believes it is empty"
+   ]
+  },
+  {
+   "tick": 54953,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "drink",
+   "label": "Drinking at the well",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2
+   }
+  },
+  {
+   "tick": 54954,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "why": "a step toward “be fed, watered and under shelter before dark”: eat before the night · This estimate comes from my own completed gathering at this particular sou",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.59,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 34,
+    "thirst": 97,
+    "x": 58.5,
+    "y": 67.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55008,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "outcome": "partial",
+   "detail": "nothing left",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 2,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55009,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "eat",
+   "label": "Eating",
+   "why": "a step toward “be fed, watered and under shelter before dark”: eat before the night · hungry +64 · food in pack +4",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.59,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2,
+     "fruit": 1
+    },
+    "weight": 9.5,
+    "cap": 18,
+    "hunger": 32,
+    "thirst": 94,
+    "x": 53.4,
+    "y": 66.4
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55016,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55016,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "This estimate comes from my own completed gathering at this particular source. · hungry +84 · walking −10 · remembered worn patch (observed at tick 53868) −4 · ",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.78,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 44,
+    "x": 71,
+    "y": 70.8
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55018,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "eat",
+   "label": "Eating",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55019,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "warm",
+   "label": "Warming up by the fire",
+   "why": "cold +71 · walking −8 · company at the fire +2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.59,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 60,
+    "thirst": 94,
+    "x": 53.4,
+    "y": 66.4
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55118,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55118,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +85 · walking −10 · has paid me poorly before (0.4×) −6 · well-liked food +1",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.78,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 41,
+    "x": 63.1,
+    "y": 70.9
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55136,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "converse",
+   "label": "Talking with Zora II",
+   "why": "",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.59,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 56,
+    "thirst": 89,
+    "x": 61.4,
+    "y": 57.4
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55205,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Zora II",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55231,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55231,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −12 · work estimate 0.3×; my visit ",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.78,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 37,
+    "x": 56.9,
+    "y": 75.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55251,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "warm",
+   "label": "Warming up by the fire",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55251,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "This estimate comes from my own completed gathering at this particular source. · plan up to 4 berries; estimated return 141 ticks · household is short of food +",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.6,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 53,
+    "thirst": 85,
+    "x": 61.4,
+    "y": 57.4
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55292,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55292,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "why": "hungry +84 · walking −9 · has paid me poorly before (0.3×) −6 · well-liked food +2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.79,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 35,
+    "x": 53.4,
+    "y": 72.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55356,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55356,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "why": "Fenn needs fruit +50 · family +8 · walking −4",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.6,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 50,
+    "thirst": 80,
+    "x": 52.1,
+    "y": 65.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55386,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "converse",
+   "label": "Talking with Abel",
+   "why": "",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.6,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 49,
+    "thirst": 79,
+    "x": 48.7,
+    "y": 68.3
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55404,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55404,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "why": "hungry +84 · walking −9 · has paid me poorly before (0.2×) −6 · well-liked food +2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.79,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 31,
+    "x": 47.5,
+    "y": 75
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55455,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Abel",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55486,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "outcome": "failed",
+   "detail": "Fenn was not where I expected",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55487,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Ask Fenn for food",
+   "why": "hungry +19 · they owe me a favour +5 · they came through before +4 · walking −3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.6,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 46,
+    "thirst": 75,
+    "x": 48.8,
+    "y": 72.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55512,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Gathering wild grain",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55512,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "why": "hungry +84 · walking −15 · has paid me poorly before (0.2×) −6 · remembered worn patch (observed at tick 54252) −4",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.79,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 27,
+    "x": 42.7,
+    "y": 81.1
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55540,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "socialize",
+   "label": "Ask Fenn for food",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55540,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "why": "hungry +35 · walking −9 · has paid me poorly before (0.6×) −3 · good at it +2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.61,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 44,
+    "thirst": 73,
+    "x": 45.6,
+    "y": 77.7
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55540,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "outcome": "failed",
+   "detail": "no way to get there",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55541,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Ask Fenn for food",
+   "why": "hungry +21 · they owe me a favour +5 · they came through before +4 · family +3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.61,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 44,
+    "thirst": 73,
+    "x": 45.6,
+    "y": 77.7
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55574,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55574,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Ask Ines for food",
+   "why": "hungry +72 · they are carrying some +4 · they came through before +4 · walking −2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.8,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 25,
+    "x": 45.7,
+    "y": 84
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55585,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "converse",
+   "label": "Talking with Ines",
+   "why": "",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.8,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 25,
+    "x": 45.4,
+    "y": 83.4
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55654,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Fenn",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55654,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Ines",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55655,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "why": "Fenn needs fruit +50 · family +8 · walking −1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.61,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 41,
+    "thirst": 68,
+    "x": 45.1,
+    "y": 82.6
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55655,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "socialize",
+   "label": "Ask Ines for food",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55655,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +85 · walking −25 · has paid me poorly before (0.2×) −6 · remembered strained patch (observed at tick 53580) −2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.8,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 22,
+    "x": 45.4,
+    "y": 83.4
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55678,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "outcome": "failed",
+   "detail": "they had no room to carry it",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55679,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "why": "hungry +43 · walking −9 · has paid me poorly before (0.5×) −5 · good at it +2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.61,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 40,
+    "thirst": 67,
+    "x": 44.8,
+    "y": 82.1
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55679,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking fruit",
+   "outcome": "failed",
+   "detail": "no way to get there",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55680,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "hungry +43 · walking −15 · has paid me poorly before (0.6×) −4 · well-liked food +3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.61,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 40,
+    "thirst": 67,
+    "x": 44.8,
+    "y": 82.1
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55768,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "a more urgent need (hunger)",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55768,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "why": "thirsty +80 · walking −8",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.8,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 19,
+    "x": 45.8,
+    "y": 77.3
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55816,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55816,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "This estimate comes from my own completed gathering at this particular source. · hungry +51 · walking −11 · well-liked food +3 · good at it −2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.62,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 36,
+    "thirst": 62,
+    "x": 59.7,
+    "y": 83.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55847,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "outcome": "interrupted",
+   "detail": "a more urgent need (hunger)",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55847,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "hungry +84 · walking −17 · has paid me poorly before (0.3×) −6 · remembered worn patch (observed at tick 54261) −4",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.81,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 16,
+    "x": 42.6,
+    "y": 81.2
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55909,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "interrupted",
+   "detail": "a more urgent need (hunger)",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55909,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "why": "thirsty +85 · walking −2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.81,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 14,
+    "x": 45.2,
+    "y": 84
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55911,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55911,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +54 · walking −7 · has paid me poorly before (0.4×) −6 · good at it +2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.62,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 33,
+    "thirst": 58,
+    "x": 69.5,
+    "y": 89.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 55955,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 55956,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +84 · walking −27 · has paid me poorly before (0.1×) −6 · remembered strained patch (observed at tick 54501) −2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.81,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 100,
+    "x": 45.5,
+    "y": 85.5
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56008,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "failed",
+   "detail": "nothing left",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 56009,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Ask Ivo for food",
+   "why": "a step toward “be fed, watered and under shelter before dark”: eat before the night · hungry +48 · they are carrying some +4 · walking −1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.62,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 30,
+    "thirst": 54,
+    "x": 68.4,
+    "y": 99.6
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56095,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "converse",
+   "label": "Talking with Ivo",
+   "outcome": "success",
+   "detail": "finished a conversation",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56096,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "eat",
+   "label": "Eating",
+   "why": "a step toward “be fed, watered and under shelter before dark”: eat before the night · hungry +70 · food in pack +4",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 9,
+    "cap": 18,
+    "hunger": 27,
+    "thirst": 51,
+    "x": 66.9,
+    "y": 101
+   },
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56105,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "eat",
+   "label": "Eating",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56106,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "why": "thirsty +36 · walking −6",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 55,
+    "thirst": 50,
+    "x": 66.9,
+    "y": 101
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56214,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 56214,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +85 · walking −10 · has paid me poorly before (0.1×) −6 · remembered worn patch (observed at tick 54447) −4",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.82,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 91,
+    "x": 58.9,
+    "y": 91.6
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56215,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "drink",
+   "label": "Drinking at the water",
+   "outcome": "success",
+   "detail": "done",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56216,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "attend",
+   "label": "At the feast",
+   "why": "a feast +30 · walking −12 · company +7",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 52,
+    "thirst": 100,
+    "x": 74.5,
+    "y": 96.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: failed there 208 ticks ago (nothing left)"
+   ]
+  },
+  {
+   "tick": 56216,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "attend",
+   "label": "At the feast",
+   "outcome": "failed",
+   "detail": "no way to get there",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56217,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "attend",
+   "label": "At the harvest feast",
+   "why": "a harvest feast +30 · walking −12 · company +7",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 52,
+    "thirst": 100,
+    "x": 74.5,
+    "y": 96.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: failed there 209 ticks ago (nothing left)"
+   ]
+  },
+  {
+   "tick": 56217,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "attend",
+   "label": "At the harvest feast",
+   "outcome": "failed",
+   "detail": "no way to get there",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56218,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "tree_work",
+   "label": "Taking a living tree cutting",
+   "why": "few remembered trees near home +23 · walking −1",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 52,
+    "thirst": 100,
+    "x": 74.5,
+    "y": 96.5
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: failed there 210 ticks ago (nothing left)"
+   ]
+  },
+  {
+   "tick": 56264,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "tree_work",
+   "label": "Taking a living tree cutting",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56264,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "socialize",
+   "label": "Ask Abel II for food",
+   "why": "hungry +19 · they are carrying some +4 · walking −3",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 50,
+    "thirst": 98,
+    "x": 74.6,
+    "y": 97.5
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56309,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 56309,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −12 · work estimate 0.1×; my visit ",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.82,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 88,
+    "x": 59.8,
+    "y": 96.6
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56312,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "socialize",
+   "label": "Ask Abel II for food",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56312,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "attend",
+   "label": "At the feast",
+   "why": "a feast +30 · walking −12 · company +7",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 49,
+    "thirst": 96,
+    "x": 69.6,
+    "y": 98
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56312,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "attend",
+   "label": "At the feast",
+   "outcome": "failed",
+   "detail": "no way to get there",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56313,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "attend",
+   "label": "At the harvest feast",
+   "why": "a harvest feast +30 · walking −12 · company +7",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 49,
+    "thirst": 96,
+    "x": 69.6,
+    "y": 98
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: failed there 305 ticks ago (nothing left)",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56313,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "attend",
+   "label": "At the harvest feast",
+   "outcome": "failed",
+   "detail": "no way to get there",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56314,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "explore",
+   "label": "Looking for timber",
+   "why": "curiosity +31 · walking −11 · daylight to spare +2",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 49,
+    "thirst": 96,
+    "x": 69.6,
+    "y": 98
+   },
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: failed there 306 ticks ago (nothing left)",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56411,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 56411,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "I personally found this source empty; later firsthand stock observation can correct that expectation. · hungry +85 · walking −19 · work estimate 0.3×; my visit ",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.83,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 84,
+    "x": 64.8,
+    "y": 98.8
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56476,
+   "who": "Ines",
+   "kind": "end",
+   "activity": "explore",
+   "label": "Looking for timber",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fruit": 1,
+    "berries": 1
+   }
+  },
+  {
+   "tick": 56476,
+   "who": "Ines",
+   "kind": "start",
+   "activity": "sleep",
+   "label": "Sleeping by my hut",
+   "why": "tired +67 · walking −25",
+   "me": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.64,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 44,
+    "thirst": 90,
+    "x": 77.5,
+    "y": 86.6
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56610,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 56610,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Fishing",
+   "why": "This estimate comes from my own completed gathering at this particular source. · hungry +85 · walking −19 · good at it −3 · well-liked food +3",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.83,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 78,
+    "x": 69,
+    "y": 90.6
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56902,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Fishing",
+   "outcome": "interrupted",
+   "detail": "something better came up",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  },
+  {
+   "tick": 56902,
+   "who": "Fenn",
+   "kind": "start",
+   "activity": "gather",
+   "label": "Picking berries",
+   "why": "hungry +85 · walking −8 · has paid me poorly before (0.1×) −6 · remembered strained patch (observed at tick 54930) −2",
+   "me": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.84,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 68,
+    "x": 69.8,
+    "y": 78.9
+   },
+   "setAside": []
+  },
+  {
+   "tick": 56961,
+   "who": "Fenn",
+   "kind": "end",
+   "activity": "gather",
+   "label": "Picking berries",
+   "outcome": "interrupted",
+   "detail": "died",
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   }
+  }
+ ],
+ "samples": [
+  {
+   "tick": 52200,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.68,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 29,
+    "thirst": 54,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.49,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 80,
+    "thirst": 39,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 8.3
+  },
+  {
+   "tick": 52500,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.69,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 22,
+    "thirst": 44,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.5,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 71,
+    "thirst": 27,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 8.3
+  },
+  {
+   "tick": 52800,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.7,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 14,
+    "thirst": 33,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.51,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 3,
+     "fish": 2
+    },
+    "weight": 12.5,
+    "cap": 18,
+    "hunger": 62,
+    "thirst": 15,
+    "x": 60,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 8.3
+  },
+  {
+   "tick": 53100,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.71,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 28,
+    "thirst": 23,
+    "x": 68.5,
+    "y": 65.3
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.52,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 2,
+     "fish": 2
+    },
+    "weight": 10.5,
+    "cap": 18,
+    "hunger": 53,
+    "thirst": 89,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 6.6
+  },
+  {
+   "tick": 53400,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.72,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 21,
+    "thirst": 99,
+    "x": 56.1,
+    "y": 52.3
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.53,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 44,
+    "thirst": 77,
+    "x": 65.2,
+    "y": 59.3
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 13.1
+  },
+  {
+   "tick": 53700,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.73,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 13,
+    "thirst": 89,
+    "x": 62.4,
+    "y": 57.5
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.54,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 35,
+    "thirst": 65,
+    "x": 63.2,
+    "y": 47.3
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 6.5
+  },
+  {
+   "tick": 54000,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.74,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 5,
+    "thirst": 79,
+    "x": 44.9,
+    "y": 76.7
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.55,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 54,
+    "thirst": 53,
+    "x": 63.9,
+    "y": 54.2
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 21.3
+  },
+  {
+   "tick": 54300,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.75,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 68,
+    "x": 57.3,
+    "y": 95.5
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.56,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 46,
+    "thirst": 42,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 31.8
+  },
+  {
+   "tick": 54600,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.76,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 58,
+    "x": 66.8,
+    "y": 85.8
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.57,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 41,
+    "thirst": 35,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 22.3
+  },
+  {
+   "tick": 54900,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.77,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 48,
+    "x": 74.8,
+    "y": 77.3
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.58,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 2
+    },
+    "weight": 8.5,
+    "cap": 18,
+    "hunger": 35,
+    "thirst": 27,
+    "x": 63.6,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 18.5
+  },
+  {
+   "tick": 55200,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.78,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 38,
+    "x": 59,
+    "y": 75
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.59,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 54,
+    "thirst": 87,
+    "x": 61.4,
+    "y": 57.4
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 11.4
+  },
+  {
+   "tick": 55500,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.79,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 28,
+    "x": 43.2,
+    "y": 80.5
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.6,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 45,
+    "thirst": 75,
+    "x": 47.5,
+    "y": 73
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 25
+  },
+  {
+   "tick": 55800,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.8,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 17,
+    "x": 44.5,
+    "y": 78.9
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.62,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1
+    },
+    "weight": 8,
+    "cap": 18,
+    "hunger": 36,
+    "thirst": 63,
+    "x": 58,
+    "y": 82.7
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 23
+  },
+  {
+   "tick": 56100,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.81,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 95,
+    "x": 53.4,
+    "y": 88.1
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.63,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fish": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 9,
+    "cap": 18,
+    "hunger": 27,
+    "thirst": 51,
+    "x": 66.9,
+    "y": 101
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 25.6
+  },
+  {
+   "tick": 56400,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.82,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 85,
+    "x": 64.3,
+    "y": 98.6
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.64,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 46,
+    "thirst": 93,
+    "x": 75.5,
+    "y": 91.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 34.7
+  },
+  {
+   "tick": 56700,
+   "fenn": {
+    "id": 4044,
+    "name": "Fenn",
+    "stage": "child",
+    "age": 8.84,
+    "inv": {
+     "wood": 2,
+     "seeds": 1
+    },
+    "weight": 4.25,
+    "cap": 5,
+    "hunger": 0,
+    "thirst": 75,
+    "x": 67.1,
+    "y": 86.8
+   },
+   "ines": {
+    "id": 4042,
+    "name": "Ines",
+    "stage": "adult",
+    "age": 36.65,
+    "inv": {
+     "basket": 1,
+     "hoe": 1,
+     "hammer": 1,
+     "seeds": 2,
+     "wood": 1,
+     "fruit": 1,
+     "berries": 1
+    },
+    "weight": 7.5,
+    "cap": 18,
+    "hunger": 38,
+    "thirst": 81,
+    "x": 69.5,
+    "y": 67.5
+   },
+   "homeItems": {
+    "seeds": 11
+   },
+   "homeId": 11376,
+   "homeDist": 23.3
+  }
+ ]
+}

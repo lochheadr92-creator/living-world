@@ -1,0 +1,487 @@
+{
+ "rules": 159,
+ "from": 54000,
+ "switchTick": 55650,
+ "end": 57458,
+ "fennAlive": false,
+ "died": 57458,
+ "cause": "hunger",
+ "conserved": true,
+ "ev": [
+  {
+   "tick": 55018,
+   "who": "Ines",
+   "id": 4042,
+   "activity": "eat",
+   "label": "Eating",
+   "outcome": "success",
+   "detail": "done"
+  },
+  {
+   "tick": 55486,
+   "who": "Ines",
+   "id": 4042,
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "outcome": "failed",
+   "detail": "Fenn was not where I expected",
+   "items": {
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 55678,
+   "who": "Ines",
+   "id": 4042,
+   "activity": "give",
+   "label": "Bringing fruit to Fenn",
+   "outcome": "success",
+   "detail": "done",
+   "items": {
+    "fruit": 1
+   }
+  },
+  {
+   "tick": 56375,
+   "who": "Ines",
+   "id": 4042,
+   "activity": "eat",
+   "label": "Eating",
+   "outcome": "success",
+   "detail": "done"
+  }
+ ],
+ "track": [
+  {
+   "tick": 54300,
+   "hunger": 0,
+   "health": 80,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 54600,
+   "hunger": 0,
+   "health": 75,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 54900,
+   "hunger": 0,
+   "health": 65,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 55200,
+   "hunger": 0,
+   "health": 55,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 55500,
+   "hunger": 0,
+   "health": 47,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 55800,
+   "hunger": 13,
+   "health": 41,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 56100,
+   "hunger": 5,
+   "health": 39,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 56400,
+   "hunger": 0,
+   "health": 34,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 56700,
+   "hunger": 0,
+   "health": 24,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 57000,
+   "hunger": 0,
+   "health": 15,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  },
+  {
+   "tick": 57300,
+   "hunger": 0,
+   "health": 5,
+   "inv": {
+    "wood": 2,
+    "seeds": 1
+   },
+   "load": 4.25,
+   "cap": 5
+  }
+ ],
+ "ines": [
+  {
+   "tick": 55655,
+   "label": "Bringing fruit to Fenn",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "fruit": 1
+   },
+   "hunger": 41,
+   "distToFenn": 0.8,
+   "fennHunger": 0,
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55679,
+   "label": "Picking fruit",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1
+   },
+   "hunger": 40,
+   "distToFenn": 0.7,
+   "fennHunger": 16,
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55680,
+   "label": "Fishing",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1
+   },
+   "hunger": 40,
+   "distToFenn": 0.7,
+   "fennHunger": 16,
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 55816,
+   "label": "Fishing",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1
+   },
+   "hunger": 36,
+   "distToFenn": 13,
+   "fennHunger": 12,
+   "setAside": []
+  },
+  {
+   "tick": 55911,
+   "label": "Picking berries",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1
+   },
+   "hunger": 33,
+   "distToFenn": 24.7,
+   "fennHunger": 10,
+   "setAside": []
+  },
+  {
+   "tick": 56006,
+   "label": "Ask Ivo for food",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1
+   },
+   "hunger": 30,
+   "distToFenn": 20.4,
+   "fennHunger": 8,
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56093,
+   "label": "Picking berries",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "berries": 1
+   },
+   "hunger": 28,
+   "distToFenn": 14,
+   "fennHunger": 5,
+   "setAside": [
+    "Eat carried food: saving the food for dependents",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56256,
+   "label": "Picking berries",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "berries": 1
+   },
+   "hunger": 23,
+   "distToFenn": 17.1,
+   "fennHunger": 1,
+   "setAside": []
+  },
+  {
+   "tick": 56356,
+   "label": "Eating",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1,
+    "fish": 1,
+    "berries": 1
+   },
+   "hunger": 20,
+   "distToFenn": 17.6,
+   "fennHunger": 0,
+   "setAside": []
+  },
+  {
+   "tick": 56376,
+   "label": "Drinking at the well",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "hunger": 59,
+   "distToFenn": 17,
+   "fennHunger": 0,
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 56533,
+   "label": "Sleeping by my lean-to",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "hunger": 54,
+   "distToFenn": 20.3,
+   "fennHunger": 0,
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 57256,
+   "label": "Gathering wild grain",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "hunger": 41,
+   "distToFenn": 10.4,
+   "fennHunger": 0,
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 57298,
+   "label": "Gathering wild grain",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "hunger": 40,
+   "distToFenn": 4.9,
+   "fennHunger": 0,
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 57329,
+   "label": "Sheltering at the hut",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "hunger": 39,
+   "distToFenn": 1,
+   "fennHunger": 0,
+   "setAside": [
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Eat from the stores: remembers it being empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty",
+    "Picking berries: believes it is empty"
+   ]
+  },
+  {
+   "tick": 57442,
+   "label": "Picking berries",
+   "inv": {
+    "basket": 1,
+    "hoe": 1,
+    "hammer": 1,
+    "seeds": 2,
+    "wood": 1
+   },
+   "hunger": 36,
+   "distToFenn": 7.7,
+   "fennHunger": 0,
+   "setAside": []
+  }
+ ]
+}
