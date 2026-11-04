@@ -1,3 +1,4 @@
+import {communalSpare,communalStockBlock,communalRoom} from './communal_stock';
 import {cellarAccess} from './cellars';
 import {isWellAction,wellSource} from './wells';
 import {takeNutrition} from './nourishment';
@@ -586,6 +587,7 @@ registerHandler('deposit', {
   availability: 0.45,
   pose: () => 'store',
   begin(world, p, a) {
+    {const block=communalStockBlock(world,p,a);if(block)return block;}
     {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return block;}
     const careBlocked = careStoreBlocker(world, p, a);
     if (careBlocked) return careBlocked;
@@ -606,6 +608,7 @@ registerHandler('deposit', {
     a.ty = door.y;
   },
   work(world, p, a): WorkResult {
+    {const block=communalStockBlock(world,p,a);if(block)return `fail:${block}`;}
     {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return `fail:${block}`;}
     const careBlocked = careStoreBlocker(world, p, a);
     if (careBlocked) return `fail:${careBlocked}`;
@@ -624,6 +627,10 @@ registerHandler('deposit', {
     if(e.ent==='pile'&&e.estate)return 'fail:keep new goods separate from these belongings';
     for (const k of Object.keys(want)) {
       let n = Math.min(want[k], p.inv[k as ItemKind] ?? 0);
+      if(a.data.communalStock){
+        n=Math.min(n,communalSpare(world,p,k as ItemKind),communalRoom(world,a.targetId,k as ItemKind));
+        if(n<=0){partial=true;continue;}
+      }
       if(a.data.projectSupply&&runsRulesVersion(world,69)){
         const plan=p.intentions.find(i=>i.id===a.data.projectSupply&&i.status==='active'&&i.project);
         if(!plan)return 'fail:the project was cancelled';

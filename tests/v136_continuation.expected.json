@@ -1,0 +1,16 @@
+{
+  "source": {
+    "head": "e41f00d218c568bbef1f9231271d6ac3dd026e71",
+    "rules": 136,
+    "content": "cfd4d58246bf05b36702ccbf328b7425b164db4936685bd6ba86ce470f88b0cf",
+    "note": "Recorded before successor behavior; ordinary world and staged in-flight communal deposit continuation"
+  },
+  "ordinary": {
+    "saved": "a8a273e34f584a5d8ffb24364b9507145a50e82506412afbf96881b3cdd65272",
+    "continued": "4ba3c00ddf1649a832fadcc51bacf9b13c0f94dbe14241099b9ccc57e7efe465"
+  },
+  "staged": {
+    "saved": "06392c726014b79206e2145e35b0354e4d2b5d5c36b20e748a96e6c70683cc09",
+    "continued": "b16a836e447264bbc7ba9d26acaa40a20ffefe6e9409654787a56ccde7ab999e"
+  }
+}
