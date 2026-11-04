@@ -1,0 +1,162 @@
+[
+  {
+    "sha": "007b9d52996a80b584459d2db40323b7280656c6",
+    "archiveTag": "archive/retired-20261104/007b9d52",
+    "originalRefs": [
+      "refs/remotes/origin/claude/leisure-rhythm-v27"
+    ],
+    "review": "Varied leisure is already adapted as rules 28 (docs/CIVILISATION_IMPLEMENTATION.md); old rules 27 conflicts with main night-wait generation. Do not overwrite v26 reference or rules meanings."
+  },
+  {
+    "sha": "03dd8684a0275fa97a0c1808963437276901eee1",
+    "archiveTag": "archive/retired-20261104/03dd8684",
+    "originalRefs": [
+      "refs/heads/claude/epic-franklin-469omp"
+    ],
+    "review": "Ancestor of remote epic-franklin tip c55926d4. Preserve under that complete history; no separate runtime merge."
+  },
+  {
+    "sha": "359bce916481473a4c939bfd46dd21a362a74589",
+    "archiveTag": "archive/retired-20261104/359bce91",
+    "originalRefs": [
+      "refs/heads/claude/wolf-defence-v3",
+      "refs/remotes/origin/claude/wolf-defence-v3"
+    ],
+    "review": "Retired wolf-defence generation 3 conflicts with main habitation generation 3. Current defence and immutable history must remain; docs/WOLF_DEFENCE.md and BRANCH_LIFECYCLE.md record adaptation."
+  },
+  {
+    "sha": "3f6ec66115320f4939f10158eefa2a990eb62918",
+    "archiveTag": "archive/retired-20261104/3f6ec661",
+    "originalRefs": [
+      "refs/heads/claude/civilisation-phase1"
+    ],
+    "review": "Store eating adapted at main generation 11 (docs/TABLE_EATING.md); observer-lifecycle contract already present. Historical table evidence stays on the published branch; conflicting v8 reference cannot replace main history."
+  },
+  {
+    "sha": "4b063dca4d354684593e143886f2bbb152582c61",
+    "archiveTag": "archive/retired-20261104/4b063dca",
+    "originalRefs": [
+      "refs/heads/claude/mood-ranking",
+      "refs/remotes/origin/claude/mood-ranking"
+    ],
+    "review": "Explicitly unmeasured old mood-ranking experiment. Changes utility ordering for rich worlds without current rules gating; importing it would change existing save continuations."
+  },
+  {
+    "sha": "500bb2f299e8eaa4c8eba538726c46d6670c5b17",
+    "archiveTag": "archive/retired-20261104/500bb2f2",
+    "originalRefs": [
+      "refs/remotes/origin/claude/tests-current-rules"
+    ],
+    "review": "Shared test-default migration, not a runtime feature. Changes 22 files, reserves entity id 1000000 to retain outcomes, pins old scenarios and adds weaker current-generation claims. Requires its own contract/fixture migration and broad validation; not imported into the stop checkpoint."
+  },
+  {
+    "sha": "551b034e39f8d02381a7d5a148aab8e67edfc486",
+    "archiveTag": "archive/retired-20261104/551b034e",
+    "originalRefs": [
+      "refs/remotes/origin/claude/eager-carson-p8jy0f"
+    ],
+    "review": "Old renderer experiment: terrain, shore foam, foliage, mouthfuls and small-window UI. Conflicts with current styles and lacks current rendered validation. Review did not establish every visual effect already exists; retain proposal rather than declare it delivered."
+  },
+  {
+    "sha": "70214c6c3a3bc0a2b84bd6df3c6ce0644309fd66",
+    "archiveTag": "archive/retired-20261104/70214c6c",
+    "originalRefs": [
+      "refs/remotes/origin/claude/living-world-survival-legibility-xipvpo"
+    ],
+    "review": "Unversioned old multi-feature line includes freshly shuffled actor order, grief, promise policies and observer changes. Several concepts have current implementations, but shuffled order would change deterministic RNG consumption and save history. No blanket feature-equivalence claim."
+  },
+  {
+    "sha": "9651cf0f3e74b380d10a13bdbcdb138368c23cac",
+    "archiveTag": "archive/retired-20261104/9651cf0f",
+    "originalRefs": [
+      "refs/remotes/origin/claude/courier-promise"
+    ],
+    "review": "Courier recovery explicitly recovered on main (docs/COURIER_RECOVERY.md); later table-eating reconciliation records the renumbered lineage. Keep original branch provenance."
+  },
+  {
+    "sha": "9698236af0d73c92465be9f9958f47ee6fc935c9",
+    "archiveTag": "archive/retired-20261104/9698236a",
+    "originalRefs": [
+      "refs/heads/claude/record-2026-10-20",
+      "refs/remotes/origin/claude/record-2026-10-20"
+    ],
+    "review": "Old AGENTS/CLAUDE/HANDOFF route and branch-status text superseded by current repository and WORKFLOW.md. Do not restore stale authority pointers."
+  },
+  {
+    "sha": "b542836587861b532da3e9b632988fcc6c94ab0e",
+    "archiveTag": "archive/retired-20261104/b5428365",
+    "originalRefs": [
+      "refs/heads/claude/snapshot-wolf-habitation-integration-2026-10-20",
+      "refs/remotes/origin/claude/snapshot-wolf-habitation-integration-2026-10-20"
+    ],
+    "review": "Frozen unfinished wolf/habitation generation-5 experiment, not an outstanding current product change. Conflicting version meanings and references retained with historical evidence."
+  },
+  {
+    "sha": "be786a80865ba2e0d721ea672f7985f7e2d46599",
+    "archiveTag": "archive/retired-20261104/be786a80",
+    "originalRefs": [
+      "refs/remotes/origin/ccr-8527b59e-oatizp"
+    ],
+    "review": "Old rules-59 required-tool and rules-60 kept-target line. Current optutil documents required-tool precedence; kept-target was diagnosed/adapted as rules 65 (docs/KEPT_TARGET.md). Unique historical tools and reports remain available on origin; do not replace generations 58/59 references or claim every old artifact integrated."
+  },
+  {
+    "sha": "c55926d4052992d088ab535f1057a3c1f2938f33",
+    "archiveTag": "archive/retired-20261104/c55926d4",
+    "originalRefs": [
+      "refs/remotes/origin/claude/epic-franklin-469omp"
+    ],
+    "review": "Old rich-only expansion bundle: well, cellar, forestry, mine, stockyard, mill, brewery, bed and smokehouse, plus mood/lab changes. Some survival concepts now exist through different physical/versioned mechanisms; multiple unique expansion modules remain absent. Whole-branch merge would bypass current save/rules contracts and is not accepted merely because parts overlap."
+  },
+  {
+    "sha": "d44695d3738ac1c1c0e3195ccf8530ed9ccfa7e3",
+    "archiveTag": "archive/retired-20261104/d44695d3",
+    "originalRefs": [
+      "refs/remotes/origin/claude/wonderful-mccarthy-xmbcng"
+    ],
+    "review": "Old ageing/fertility/life-pace, grief, council, teaching, reputation and leisure bundle. Several dedicated modules remain absent; changes are not gated for current historical saves. Preserve proposal, no blanket delivered claim."
+  },
+  {
+    "sha": "d72e3666a1b9440438724196f6bd08706405672a",
+    "archiveTag": "archive/retired-20261104/d72e3666",
+    "originalRefs": [
+      "refs/heads/claude/snapshot-wolf-defence-v3-2026-10-20",
+      "refs/remotes/origin/claude/snapshot-wolf-defence-v3-2026-10-20"
+    ],
+    "review": "Unfinished wolf-defence generation-3 snapshot; keep provenance, not a replacement for current versioned defence."
+  },
+  {
+    "sha": "df9acb9c0f5173555980d661384208477f4c313e",
+    "archiveTag": "archive/retired-20261104/df9acb9c",
+    "originalRefs": [
+      "refs/remotes/origin/claude/adoring-hawking-fj66vw"
+    ],
+    "review": "Old workshop claims, fishing-rod/smokehouse, well and spear experiment changes rich rules without current save-version contract. Current fish preservation and gear differ; absence of old tests is not proof current system has their semantics."
+  },
+  {
+    "sha": "f133938dd8cbd91db71b2fdd9398f4c23967c603",
+    "archiveTag": "archive/retired-20261104/f133938d",
+    "originalRefs": [
+      "refs/heads/claude/friendly-planck-ccpkxf",
+      "refs/remotes/origin/claude/friendly-planck-ccpkxf"
+    ],
+    "review": "Distinct place-memory/danger/grief model; current tree lacks places.ts and options_places.ts. It would add unversioned saved state and scoring effects. Requires a separately bounded current-generation adaptation."
+  },
+  {
+    "sha": "f33cd0bf4edce91bf06aec332325c6182022a771",
+    "archiveTag": "archive/retired-20261104/f33cd0bf",
+    "originalRefs": [
+      "refs/heads/claude/winter-shelter-v34",
+      "refs/remotes/origin/claude/winter-shelter-v34"
+    ],
+    "review": "Winter shelter was explicitly adapted from this tip at main rules 47 (docs/WINTER_SHELTER.md). Candidate rules 34 is main plan reconsideration. Only independent death_tally observer is considered separately."
+  },
+  {
+    "sha": "f82d42def7c975ef3b8193de27b12823e15a3c62",
+    "archiveTag": "archive/retired-20261104/f82d42de",
+    "originalRefs": [
+      "refs/heads/place-scar",
+      "refs/remotes/origin/place-scar"
+    ],
+    "review": "Distinct old recently-failed-place scoring penalty. It changes ranking without a current version boundary; no new continuation/reliability evidence. Preserve rather than silently enable."
+  }
+]
