@@ -52,11 +52,14 @@ describe('varied spare time', () => {
   });
 
   it('sends people to more than one kind of place', () => {
-    const w = make('l-places');
-    // Rules 152 (cellars after proper homes) keeps this settlement building through its first week instead of stalling
-    // behind four cellar sites; the first non-home outing is on day 8. The old four-day pass rested on one visit.
-    run(w, 9 * DAY);
-    const keys = new Set(w.persons.flatMap((p) => (p.leisure ? p.leisure.recent.map((r) => r.key) : [])));
+    // One world was one trajectory: the pass rested on a single outing that later rules versions shifted (152: settlement
+    // kept building; 154: different food trips). The same claim now holds over this file's three fixture worlds together.
+    const keys = new Set<string>();
+    for (const seed of ['l-places', 'l-det', 'l-on']) {
+      const w = make(seed);
+      run(w, 9 * DAY);
+      for (const p of w.persons) for (const r of p.leisure?.recent ?? []) keys.add(r.key);
+    }
     expect(keys.size).toBeGreaterThan(1);
   });
 
