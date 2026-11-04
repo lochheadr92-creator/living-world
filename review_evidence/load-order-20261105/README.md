@@ -36,16 +36,21 @@ sha256 in `A.large-files.sha256`.
   Both runs are deterministic, so a single run each is a complete answer for this world and this source.
 - **Not shown:** that this is the only cause of twin mismatches. The 30-day Large river run at rules 159 matched exactly without any fix,
   so a different trajectory does not always reach a state where the order matters. One world, one seed.
-- **Not changed:** the live simulation. Rules 160 (the same sort, gated by rules version, with a loaded world unsorted below 160) is on
-  branch `load-order` and unpublished; its live behaviour is unchanged by test (`live-unchanged.ts`, three ordinary worlds).
-  Whether to publish it is the owner's decision.
+- **Not changed:** the live simulation. Rules 160 (the same sort, gated by rules version, with a loaded world unsorted below 160) is published
+  on the owner's instruction; its live behaviour is unchanged by test (`live-unchanged.ts`, three ordinary worlds).
+
+## Mechanism not traced
+
+The original diagnosis (Brain priority findings) described the differing item as one person's by-kind memory index, equal in value and array order
+but different in object key order. This A/B shows the loaded grid order is sufficient for the mismatch and that sorting removes it; I did not trace how
+grid order reaches that index, so the path between them is unexplained.
 
 ## Mistake in the harness
 
 The watcher I wrote to wait for the runs looked for a day-21 line in B's log, but the driver stops at day 19, so it ran on after both
 runs had finished. It affected no result.
 
-## Rules 160 (branch `load-order`, unpublished)
+## Rules 160 (published, 5 November 2026)
 
 The repair the A/B points at: `src/app/save.ts` sorts each loaded grid cell by id when `runsRulesVersion(w, 160)`; below 160 a loaded
 world keeps its recorded order (so rules 159 and earlier replay exactly as before). Lab removal: none needed, the sort has no behaviour of its own.
