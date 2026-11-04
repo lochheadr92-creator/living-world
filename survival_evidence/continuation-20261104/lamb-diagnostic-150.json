@@ -1,0 +1,5596 @@
+{
+  "version": 150,
+  "staged": true,
+  "events": [
+    {
+      "tick": 0,
+      "kind": "animal_work",
+      "op": "acquire",
+      "target": 6,
+      "goal": "keep a sheep fed, watered and contained",
+      "inv": {
+        "grain": 5,
+        "wood": 4,
+        "fibre": 3,
+        "water": 2
+      }
+    },
+    {
+      "tick": 129,
+      "kind": "animal_work",
+      "op": "feed",
+      "target": 6,
+      "goal": "keep a sheep fed, watered and contained",
+      "inv": {
+        "grain": 4,
+        "wood": 2,
+        "fibre": 2,
+        "water": 2
+      }
+    },
+    {
+      "tick": 164,
+      "kind": "animal_work",
+      "op": "acquire",
+      "target": 5,
+      "goal": "keep a sheep fed, watered and contained",
+      "inv": {
+        "grain": 3,
+        "wood": 2,
+        "fibre": 2,
+        "water": 2
+      }
+    },
+    {
+      "tick": 293,
+      "kind": "gather",
+      "target": 8,
+      "goal": "to bring food home",
+      "inv": {
+        "grain": 2,
+        "fibre": 1,
+        "water": 2
+      }
+    },
+    {
+      "tick": 402,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 540,
+      "kind": "animal_work",
+      "op": "mate",
+      "target": 5,
+      "goal": "keep a sheep fed, watered and contained",
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 754,
+      "kind": "till",
+      "target": 0,
+      "goal": "to grow food near home",
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 856,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 982,
+      "kind": "drink",
+      "target": 0,
+      "goal": "to quench thirst (55/100)",
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 990,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (57/100)",
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 1010,
+      "kind": "till",
+      "target": 23,
+      "goal": "to ready the ground for seed",
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 1171,
+      "kind": "plant",
+      "target": 23,
+      "goal": "to grow a crop",
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 1193,
+      "kind": "wander",
+      "target": 0,
+      "goal": "nothing needs doing right now",
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 1250,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (42/100)",
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 1738,
+      "kind": "plan_site",
+      "target": 0,
+      "goal": "warm our cold home",
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 1764,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 2187,
+      "kind": "drink",
+      "target": 0,
+      "goal": "to quench thirst (49/100)",
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 2195,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "grain": 4,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2281,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "grain": 4,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2372,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "grain": 4,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2453,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (50/100)",
+      "inv": {
+        "grain": 4,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2483,
+      "kind": "gather",
+      "target": 8,
+      "goal": "to bring food home",
+      "inv": {
+        "grain": 1,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2544,
+      "kind": "animal_work",
+      "op": "feed",
+      "target": 6,
+      "goal": "keep a sheep fed, watered and contained",
+      "inv": {
+        "grain": 3,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2585,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2677,
+      "kind": "gather",
+      "target": 7,
+      "goal": "to bring food home",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2779,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "grain": 6,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2877,
+      "kind": "deposit",
+      "target": 4,
+      "goal": "to feed the household",
+      "inv": {
+        "grain": 6,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2911,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (50/100)",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 2985,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 3085,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 3329,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 3605,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 3695,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (40/100)",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4165,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4263,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (48/100)",
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4283,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4450,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (47/100)",
+      "inv": {
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4525,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4626,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4681,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 4856,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 5095,
+      "kind": "animal_work",
+      "op": "shear",
+      "target": 6,
+      "goal": "collect wool grown through feeding",
+      "inv": {
+        "fibre": 1
+      }
+    },
+    {
+      "tick": 5226,
+      "kind": "animal_work",
+      "op": "shear",
+      "target": 5,
+      "goal": "collect wool grown through feeding",
+      "inv": {
+        "fibre": 1,
+        "wool": 1
+      }
+    },
+    {
+      "tick": 5311,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5405,
+      "kind": "animal_work",
+      "op": "slaughter",
+      "target": 5,
+      "goal": "recover food from our sheep",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5587,
+      "kind": "animal_work",
+      "op": "slaughter",
+      "target": 5,
+      "goal": "recover food from our sheep",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5588,
+      "kind": "animal_work",
+      "op": "slaughter",
+      "target": 6,
+      "goal": "recover food from our sheep",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5749,
+      "kind": "animal_work",
+      "op": "slaughter",
+      "target": 6,
+      "goal": "recover food from our sheep",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5759,
+      "kind": "eat_store",
+      "target": 4,
+      "goal": "to ease hunger (31/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5804,
+      "kind": "drink",
+      "target": 1000070,
+      "goal": "to quench thirst (40/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5845,
+      "kind": "gather",
+      "target": 7,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      }
+    },
+    {
+      "tick": 5946,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (30/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      }
+    },
+    {
+      "tick": 6560,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      }
+    },
+    {
+      "tick": 7041,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      }
+    },
+    {
+      "tick": 7123,
+      "kind": "deposit",
+      "target": 4,
+      "goal": "to feed the household",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      }
+    },
+    {
+      "tick": 7132,
+      "kind": "butcher",
+      "target": 95,
+      "goal": "use the body before it decays",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 3
+      }
+    },
+    {
+      "tick": 7289,
+      "kind": "drink",
+      "target": 1000070,
+      "goal": "to quench thirst (48/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 3,
+        "hide": 1
+      }
+    },
+    {
+      "tick": 7323,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (49/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 3,
+        "hide": 1
+      }
+    },
+    {
+      "tick": 7343,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 1,
+        "hide": 1
+      }
+    },
+    {
+      "tick": 7450,
+      "kind": "gather",
+      "target": 8,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 1,
+        "hide": 1
+      }
+    },
+    {
+      "tick": 7552,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4,
+        "hide": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 7641,
+      "kind": "deposit",
+      "target": 4,
+      "goal": "to feed the household",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4,
+        "hide": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 7650,
+      "kind": "butcher",
+      "target": 90,
+      "goal": "use the body before it decays",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 7793,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 7898,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 8135,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 8398,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (35/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 8931,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (37/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 9010,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (45/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 9030,
+      "kind": "butcher",
+      "target": 95,
+      "goal": "use the body before it decays",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 9081,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (88/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 9188,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 9448,
+      "kind": "gather",
+      "target": 9,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 9558,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 5
+      }
+    },
+    {
+      "tick": 9665,
+      "kind": "deposit",
+      "target": 4,
+      "goal": "to feed the household",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 5
+      }
+    },
+    {
+      "tick": 9692,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 9855,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 10088,
+      "kind": "drink",
+      "target": 1000070,
+      "goal": "to quench thirst (55/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 10123,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (55/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 10143,
+      "kind": "butcher",
+      "target": 95,
+      "goal": "use the body before it decays",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 10273,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 1
+      }
+    },
+    {
+      "tick": 10369,
+      "kind": "butcher",
+      "target": 95,
+      "goal": "use the body before it decays",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 1
+      }
+    },
+    {
+      "tick": 10504,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2
+      }
+    },
+    {
+      "tick": 10600,
+      "kind": "tend",
+      "target": 23,
+      "goal": "to help the crop grow",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2
+      }
+    },
+    {
+      "tick": 10670,
+      "kind": "gather",
+      "target": 9,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2
+      }
+    },
+    {
+      "tick": 10768,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 10877,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (32/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 11441,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (39/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 11525,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (40/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 11545,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (90/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 11668,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 11881,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 11963,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 12135,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 12379,
+      "kind": "tend",
+      "target": 23,
+      "goal": "to help the crop grow",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 12424,
+      "kind": "deposit",
+      "target": 4,
+      "goal": "to feed the household",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      }
+    },
+    {
+      "tick": 12445,
+      "kind": "gather",
+      "target": 8,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 12503,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 12591,
+      "kind": "deposit",
+      "target": 4,
+      "goal": "to feed the household",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 12617,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (54/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 12692,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 12793,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (53/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 12823,
+      "kind": "gather",
+      "target": 7,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 12893,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 12989,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 13191,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 13347,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (35/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 13956,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 14234,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (45/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 14307,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 14408,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (56/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      }
+    },
+    {
+      "tick": 14428,
+      "kind": "gather",
+      "target": 8,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 14471,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 14635,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 14887,
+      "kind": "tend",
+      "target": 23,
+      "goal": "to help the crop grow",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 14954,
+      "kind": "fetch_water",
+      "target": 1000071,
+      "goal": "to water the crops",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 14999,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 15088,
+      "kind": "explore",
+      "target": 0,
+      "goal": "to find trees to fell",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 15261,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 15474,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (49/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 15530,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 15630,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (39/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 16180,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (51/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 16190,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 16651,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 16733,
+      "kind": "gather",
+      "target": 7,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 16777,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (54/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 16787,
+      "kind": "gather",
+      "target": 9,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 16869,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 5
+      }
+    },
+    {
+      "tick": 16975,
+      "kind": "drink",
+      "target": 1000071,
+      "goal": "to quench thirst (46/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 5
+      }
+    },
+    {
+      "tick": 17034,
+      "kind": "deposit",
+      "target": 4,
+      "goal": "to feed the household",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 5
+      }
+    },
+    {
+      "tick": 17064,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 17145,
+      "kind": "tend",
+      "target": 23,
+      "goal": "to help the crop grow",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 17216,
+      "kind": "fetch_water",
+      "target": 1000071,
+      "goal": "to water the crops",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 17265,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 17357,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (57/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 2
+      }
+    },
+    {
+      "tick": 17377,
+      "kind": "gather",
+      "target": 9,
+      "goal": "to bring food home",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1
+      }
+    },
+    {
+      "tick": 17429,
+      "kind": "fetch_water",
+      "target": 1000070,
+      "goal": "to water the crops",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1
+      }
+    },
+    {
+      "tick": 17476,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 17584,
+      "kind": "fetch_water",
+      "target": 1000070,
+      "goal": "to water the crops",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 17638,
+      "kind": "wander",
+      "target": 0,
+      "goal": "nothing needs doing right now",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 2
+      }
+    },
+    {
+      "tick": 17687,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 2
+      }
+    },
+    {
+      "tick": 17768,
+      "kind": "wander",
+      "target": 0,
+      "goal": "nothing needs doing right now",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 2
+      }
+    },
+    {
+      "tick": 17848,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 2
+      }
+    },
+    {
+      "tick": 17941,
+      "kind": "drink",
+      "target": 0,
+      "goal": "to quench thirst (59/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 2
+      }
+    },
+    {
+      "tick": 17949,
+      "kind": "sleep",
+      "target": 4,
+      "goal": "to recover energy (39/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 18453,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (52/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 1,
+        "berries": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 18463,
+      "kind": "rest",
+      "target": 4,
+      "goal": "waiting for the light",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 19075,
+      "kind": "gather",
+      "target": 8,
+      "goal": "to ease hunger (46/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 1,
+        "water": 1
+      }
+    },
+    {
+      "tick": 19128,
+      "kind": "eat",
+      "target": 0,
+      "goal": "to ease hunger (44/100)",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 2,
+        "water": 1,
+        "grain": 1
+      }
+    },
+    {
+      "tick": 19138,
+      "kind": "build",
+      "target": 37,
+      "goal": "to finish my household’s hut",
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 2,
+        "water": 1
+      }
+    }
+  ],
+  "samples": [
+    {
+      "tick": 0,
+      "inv": {
+        "grain": 5,
+        "wood": 4,
+        "fibre": 3,
+        "water": 2
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.5,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 0,
+            "food": 0,
+            "water": 0,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 0,
+            "tether": null,
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": null
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.5,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 0,
+            "food": 0,
+            "water": 0,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 0,
+            "tether": null,
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": null
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sheep:acquire:6",
+          "util": 33.585798816568044
+        },
+        {
+          "key": "sheep:acquire:5",
+          "util": 33.171597633136095
+        },
+        {
+          "key": "explore",
+          "util": 20.40272895638904
+        }
+      ],
+      "offers": [
+        "sheep:acquire:5",
+        "sheep:acquire:6"
+      ]
+    },
+    {
+      "tick": 240,
+      "inv": {
+        "grain": 3,
+        "wood": 2,
+        "fibre": 2,
+        "water": 2
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 0,
+            "food": 21.624166666666717,
+            "water": 1.9304166666666625,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 41,
+            "tether": null,
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 7,
+            "forageWork": 41,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 42.98250000000014,
+            "water": 1.9304166666666625,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 111,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 99.4450000000005
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sheep:acquire:5",
+          "util": 34
+        },
+        {
+          "key": "explore",
+          "util": 23.177371193795445
+        },
+        {
+          "key": "gather:7",
+          "util": 20.747812320147805
+        }
+      ],
+      "offers": [
+        "sheep:acquire:5"
+      ]
+    },
+    {
+      "tick": 480,
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 42.285833333333564,
+            "water": 1.8304166666666468,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 281,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 99.06500000000085
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 40.78250000000043,
+            "water": 1.8304166666666468,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 351,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 98.2450000000016
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sheep:mate:5",
+          "util": 22.640448042903504
+        },
+        {
+          "key": "explore",
+          "util": 20.145843233938145
+        },
+        {
+          "key": "till:new",
+          "util": 17.68
+        }
+      ],
+      "offers": [
+        "sheep:mate:5"
+      ]
+    },
+    {
+      "tick": 720,
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 40.08583333333386,
+            "water": 1.7304166666666312,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 521,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 97.86500000000194
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 38.58250000000073,
+            "water": 1.7304166666666312,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 591,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 97.04500000000269
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sheep:mate:5",
+          "util": 25.53397099235803
+        },
+        {
+          "key": "till:new",
+          "util": 17.68
+        },
+        {
+          "key": "deposit:4:food",
+          "util": 14.44943244717452
+        }
+      ],
+      "offers": [
+        "sheep:mate:5"
+      ]
+    },
+    {
+      "tick": 960,
+      "inv": {
+        "grain": 6,
+        "fibre": 1,
+        "water": 2,
+        "seeds": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 37.885833333334155,
+            "water": 1.6304166666666156,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 761,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 96.66500000000303
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 206
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 36.38250000000102,
+            "water": 1.6304166666666156,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 831,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 95.84500000000378
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "explore",
+          "util": 28.212604690663905
+        },
+        {
+          "key": "drink:inv",
+          "util": 27.197538461549737
+        },
+        {
+          "key": "drink:1000074",
+          "util": 18.527233086424097
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 1200,
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 35.68583333333445,
+            "water": 1.5304166666666,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1001,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 95.46500000000412
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 446
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 34.18250000000132,
+            "water": 1.5304166666666,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1071,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 94.64500000000487
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "wander",
+          "util": 6
+        },
+        {
+          "key": "tend:23",
+          "util": 4.02700548295191
+        },
+        {
+          "key": "deposit:4:food",
+          "util": 2.857531643992628
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 1440,
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 33.485833333334746,
+            "water": 1.4304166666665843,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1241,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 94.26500000000522
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 686
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 31.982500000001615,
+            "water": 1.4304166666665843,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1311,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 93.44500000000596
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 52.9198871866254
+        },
+        {
+          "key": "hearth_layout:4",
+          "util": 28.796887186624303
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 1680,
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 31.28583333333504,
+            "water": 1.3304166666665687,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1481,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 93.06500000000631
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 926
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 29.78250000000191,
+            "water": 1.3304166666665687,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1551,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 92.24500000000705
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 39.119840990483326
+        },
+        {
+          "key": "hearth_layout:4",
+          "util": 28.79684099048174
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 1920,
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 29.085833333335337,
+            "water": 1.230416666666553,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1721,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 91.8650000000074
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 1166
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 27.582500000002206,
+            "water": 1.230416666666553,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1791,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 91.04500000000814
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "drink:inv",
+          "util": 17.33021538463285
+        },
+        {
+          "key": "drink:1000071",
+          "util": 9.892751714794336
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 2160,
+      "inv": {
+        "grain": 4,
+        "fibre": 1,
+        "water": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 26.885833333335633,
+            "water": 1.1304166666665374,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 1961,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 90.66500000000849
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 1406
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 25.3825000000025,
+            "water": 1.1304166666665374,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2031,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 89.84500000000924
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "drink:inv",
+          "util": 39.92713846155545
+        },
+        {
+          "key": "drink:1000071",
+          "util": 31.60339077491215
+        },
+        {
+          "key": "drink:1000069",
+          "util": 28.9406243435918
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 2400,
+      "inv": {
+        "grain": 4,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 24.68583333333593,
+            "water": 1.0304166666665218,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2201,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 89.46500000000958
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 1646
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 23.182500000002797,
+            "water": 1.0304166666665218,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2271,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 88.64500000001033
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.88222662214625
+        },
+        {
+          "key": "eat:0",
+          "util": 26.64999999998996
+        },
+        {
+          "key": "explore",
+          "util": 23.482821059872894
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 2640,
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 14.980000000000011,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 22.485833333336224,
+            "water": 1.9304166666665135,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2441,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 88.26500000001067
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 1886
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 42.98250000000309,
+            "water": 1.9304166666665135,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2511,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 87.44500000001142
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.80358188485398
+        },
+        {
+          "key": "gather:7",
+          "util": 27.162119742008773
+        },
+        {
+          "key": "gather:8",
+          "util": 27.322436800902693
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 2880,
+      "inv": {
+        "grain": 6,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 42.28583333333652,
+            "water": 1.8304166666664978,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2681,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 87.06500000001176
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 2126
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 40.78250000000339,
+            "water": 1.8304166666664978,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2751,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 86.24500000001251
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "deposit:4:food",
+          "util": 17.693467273223114
+        },
+        {
+          "key": "drink:1000070",
+          "util": 29.611340103740076
+        },
+        {
+          "key": "drink:1000072",
+          "util": 27.467262568909884
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 3120,
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 40.085833333336815,
+            "water": 1.7304166666664822,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2921,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 85.86500000001286
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 2366
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 38.582500000003684,
+            "water": 1.7304166666664822,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 2991,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 85.0450000000136
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "explore",
+          "util": 23.05913855403918
+        },
+        {
+          "key": "tend:23",
+          "util": 15.979817594925722
+        },
+        {
+          "key": "gather:7",
+          "util": 13.698012962130315
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 3360,
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 37.88583333333711,
+            "water": 1.6304166666664666,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3161,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 84.66500000001395
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 2606
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 36.38250000000398,
+            "water": 1.6304166666664666,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3231,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 83.84500000001469
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 23.646775130124972
+        },
+        {
+          "key": "wander",
+          "util": 6
+        },
+        {
+          "key": "tend:23",
+          "util": 5.084780533738442
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 3600,
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 35.685833333337406,
+            "water": 1.530416666666451,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3401,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 83.46500000001504
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 2846
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 34.182500000004275,
+            "water": 1.530416666666451,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3471,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 82.64500000001578
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "sleep:4",
+          "util": 16.304312128840586
+        },
+        {
+          "key": "build:37",
+          "util": 8.227353209548877
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 3840,
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 33.4858333333377,
+            "water": 1.4304166666664353,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3641,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 82.26500000001613
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 3086
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 31.98250000000457,
+            "water": 1.4304166666664353,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3711,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 81.44500000001688
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 54.52336197045643
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "eat:0",
+          "util": 16.781153846141024
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 4080,
+      "inv": {
+        "grain": 2,
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 31.285833333337997,
+            "water": 1.3304166666664197,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3881,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 81.06500000001722
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 3326
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 29.782500000004866,
+            "water": 1.3304166666664197,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 3951,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 80.24500000001797
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 40.723155491224595
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "eat:0",
+          "util": 25.91961538460291
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 4320,
+      "inv": {
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 29.085833333338293,
+            "water": 1.230416666666404,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 4121,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 79.86500000001831
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 3566
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 27.58250000000516,
+            "water": 1.230416666666404,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 4191,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 79.04500000001906
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "drink:1000071",
+          "util": 27.752731269951475
+        },
+        {
+          "key": "drink:1000069",
+          "util": 25.39035715765069
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 4560,
+      "inv": {
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 26.88583333333859,
+            "water": 1.1304166666663884,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 4361,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 78.6650000000194
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 3806
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 25.382500000005457,
+            "water": 1.1304166666663884,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 4431,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 77.84500000002015
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 30
+        },
+        {
+          "key": "build:37",
+          "util": 8.334584308867782
+        },
+        {
+          "key": "wander",
+          "util": 6
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 4800,
+      "inv": {
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 24.685833333338884,
+            "water": 1.0304166666663728,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 4601,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 77.4650000000205
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 4046
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 23.182500000005753,
+            "water": 1.0304166666663728,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 4671,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 76.64500000002124
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 29.35980888579688
+        },
+        {
+          "key": "explore",
+          "util": 28.89829854356442
+        },
+        {
+          "key": "fetch_water",
+          "util": 9.514392858448536
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 5040,
+      "inv": {
+        "fibre": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 14.980000000000011,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 22.48583333333918,
+            "water": 1.9304166666663645,
+            "growth": 19200,
+            "wool": 1,
+            "woolWork": 41,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 76.26500000002159
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 4286
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 42.98250000000605,
+            "water": 1.9304166666663645,
+            "growth": 19200,
+            "wool": 1,
+            "woolWork": 111,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 75.44500000002233
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.569098052784845
+        },
+        {
+          "key": "sheep:shear:5",
+          "util": 35.77970051306308
+        },
+        {
+          "key": "sheep:shear:6",
+          "util": 36.09398271986696
+        }
+      ],
+      "offers": [
+        "sheep:shear:5",
+        "sheep:shear:6"
+      ]
+    },
+    {
+      "tick": 5280,
+      "inv": {
+        "fibre": 1,
+        "wool": 1
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 42.285833333339475,
+            "water": 1.8304166666663488,
+            "growth": 19200,
+            "wool": 1,
+            "woolWork": 281,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 75.06500000002268
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 4526
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 40.782500000006344,
+            "water": 1.8304166666663488,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 351,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 74.24500000002342
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sheep:shear:5",
+          "util": 37.61475314432616
+        },
+        {
+          "key": "build:37",
+          "util": 36.50850704829108
+        },
+        {
+          "key": "gather:7",
+          "util": 30.677816941790415
+        }
+      ],
+      "offers": [
+        "sheep:shear:5"
+      ]
+    },
+    {
+      "tick": 5520,
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      },
+      "sheep": [
+        {
+          "id": 5,
+          "x": 40.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "f",
+            "hhId": 1,
+            "food": 40.08583333333977,
+            "water": 1.7304166666663332,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 521,
+            "tether": {
+              "x": 40.5,
+              "y": 15.220000000000006,
+              "condition": 73.86500000002377
+            },
+            "pregnancy": {
+              "father": 6,
+              "started": 753,
+              "work": 4766
+            },
+            "breedAfter": 19953,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 40.5,
+              "y": 14.5
+            }
+          }
+        },
+        {
+          "id": 6,
+          "x": 41.5,
+          "y": 15.220000000000006,
+          "state": {
+            "origin": "founder",
+            "parents": [],
+            "born": 0,
+            "sex": "m",
+            "hhId": 1,
+            "food": 38.58250000000664,
+            "water": 1.7304166666663332,
+            "growth": 19200,
+            "wool": 0,
+            "woolWork": 591,
+            "tether": {
+              "x": 41.5,
+              "y": 14.980000000000011,
+              "condition": 73.04500000002452
+            },
+            "pregnancy": null,
+            "breedAfter": 0,
+            "forageTarget": 0,
+            "forageWork": 0,
+            "waterMemory": {
+              "x": 41.5,
+              "y": 14.5
+            }
+          }
+        }
+      ],
+      "best": [
+        {
+          "key": "sheep:slaughter:6",
+          "util": 60.062761151359105
+        },
+        {
+          "key": "sheep:slaughter:5",
+          "util": 60.38723076922783
+        },
+        {
+          "key": "gather:7",
+          "util": 48.07831191384272
+        }
+      ],
+      "offers": [
+        "sheep:slaughter:5",
+        "sheep:slaughter:6"
+      ]
+    },
+    {
+      "tick": 5760,
+      "inv": {
+        "fibre": 1,
+        "wool": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "eat_store:4",
+          "util": 60.04519670529668
+        },
+        {
+          "key": "gather:7",
+          "util": 60.073640285993704
+        },
+        {
+          "key": "gather:8",
+          "util": 59.34186487604261
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 6000,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 36.575096664896584
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "butcher:95:hide",
+          "util": 22.435817213148454
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 6240,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 54.22618449706026
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "butcher:95:hide",
+          "util": 22.435307335589314
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 6480,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 40.425937400356425
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "butcher:90:hide",
+          "util": 22.155594694741247
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 6720,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "butcher:95:hide",
+          "util": 22.434468640137386
+        },
+        {
+          "key": "butcher:90:hide",
+          "util": 22.155003598801578
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 6960,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 4
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "butcher:95:hide",
+          "util": 22.433972010744927
+        },
+        {
+          "key": "butcher:90:hide",
+          "util": 22.154418315449675
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 7200,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "drink:1000070",
+          "util": 28.831072894963132
+        },
+        {
+          "key": "drink:1000072",
+          "util": 24.70932965335847
+        },
+        {
+          "key": "eat:0",
+          "util": 23.660384615368038
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 7440,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 1,
+        "hide": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.525256111140685
+        },
+        {
+          "key": "gather:8",
+          "util": 27.379185825379768
+        },
+        {
+          "key": "gather:9",
+          "util": 26.374281177669232
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 7680,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 1,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "butcher:90:hide",
+          "util": 24
+        },
+        {
+          "key": "explore",
+          "util": 21.172031793156066
+        },
+        {
+          "key": "tend:23",
+          "util": 14.491448376351649
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 7920,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "explore",
+          "util": 21.709840849326923
+        },
+        {
+          "key": "tend:23",
+          "util": 16.2634063462179
+        },
+        {
+          "key": "fetch_water",
+          "util": 11.0125766593811
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 8160,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 24.460318405539056
+        },
+        {
+          "key": "wander",
+          "util": 6
+        },
+        {
+          "key": "tend:23",
+          "util": 7.508042924536955
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 8400,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 22.966213372814146
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "drink:1000071",
+          "util": 31.308658689774425
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 8640,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 52.57624748435321
+        },
+        {
+          "key": "drink:1000071",
+          "util": 44.90359397043194
+        },
+        {
+          "key": "drink:1000069",
+          "util": 42.36053581823228
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 8880,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "grain": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "drink:1000071",
+          "util": 56.32421700638813
+        },
+        {
+          "key": "drink:1000069",
+          "util": 53.78022971657597
+        },
+        {
+          "key": "sleep:4",
+          "util": 38.77582813883809
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 9120,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 39.729340567569885
+        },
+        {
+          "key": "shelter:4",
+          "util": 30
+        },
+        {
+          "key": "butcher:95:meat",
+          "util": 22.501692727494284
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 9360,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "butcher:95:meat",
+          "util": 22.501280823018202
+        },
+        {
+          "key": "butcher:90:meat",
+          "util": 22.233742511436414
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 9600,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 5
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.77787275877302
+        },
+        {
+          "key": "deposit:4:food",
+          "util": 16.502047921127136
+        },
+        {
+          "key": "explore",
+          "util": 22.004007410718962
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 9840,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 26.38568615730119
+        },
+        {
+          "key": "fetch_water",
+          "util": 10.305599168742765
+        },
+        {
+          "key": "wander",
+          "util": 6
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 10080,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.48823599478412
+        },
+        {
+          "key": "drink:1000070",
+          "util": 21.96455355533682
+        },
+        {
+          "key": "drink:1000072",
+          "util": 19.60506700450428
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 10320,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.508572579944996
+        },
+        {
+          "key": "butcher:90:meat",
+          "util": 23.019454939094672
+        },
+        {
+          "key": "butcher:95:meat",
+          "util": 23.352272207647665
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 10560,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 37.471238046676135
+        },
+        {
+          "key": "tend:23",
+          "util": 16.323542204145078
+        },
+        {
+          "key": "gather:9",
+          "util": 13.131933719441335
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 10800,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "sleep:4",
+          "util": 20.9307499425924
+        },
+        {
+          "key": "eat:0",
+          "util": 18.9746153845917
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 11040,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 58.823931398058576
+        },
+        {
+          "key": "drink:1000071",
+          "util": 34.553912037160664
+        },
+        {
+          "key": "eat:0",
+          "util": 32.46769230766914
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 11280,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "drink:1000071",
+          "util": 47.57822439969233
+        },
+        {
+          "key": "sleep:4",
+          "util": 45.023264966893414
+        },
+        {
+          "key": "drink:1000069",
+          "util": 44.859058017511884
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 11520,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "meat": 2,
+        "berries": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "eat:0",
+          "util": 53.20576923074684
+        },
+        {
+          "key": "eat_store:4",
+          "util": 42.60275323290339
+        },
+        {
+          "key": "gather:9",
+          "util": 36.517266976997384
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 11760,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "build:37",
+          "util": 8.300464540954975
+        },
+        {
+          "key": "wander",
+          "util": 6
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 12000,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "explore",
+          "util": 23.560938340710486
+        },
+        {
+          "key": "tend:23",
+          "util": 15.368897147032294
+        },
+        {
+          "key": "gather:9",
+          "util": 10.512023962441251
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 12240,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 3
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 44.66501988943565
+        },
+        {
+          "key": "tend:23",
+          "util": 13.070467907398632
+        },
+        {
+          "key": "gather:9",
+          "util": 9.455593403779094
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 12480,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.23150236460352
+        },
+        {
+          "key": "explore",
+          "util": 22.581686302455765
+        },
+        {
+          "key": "gather:7",
+          "util": 10.903821617126281
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 12720,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.851966941717436
+        },
+        {
+          "key": "explore",
+          "util": 20.967874846888805
+        },
+        {
+          "key": "eat:0",
+          "util": 19.394615384592672
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 12960,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.52557464335344
+        },
+        {
+          "key": "explore",
+          "util": 22.049619835005004
+        },
+        {
+          "key": "gather:9",
+          "util": 10.372675579016017
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 13200,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 7.186727944756047
+        },
+        {
+          "key": "wander",
+          "util": 6
+        },
+        {
+          "key": "fetch_water",
+          "util": 1.9708382653362577
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 13440,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 65.56109380826575
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "build:37",
+          "util": 10.949602102100151
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 13680,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 51.76054587196062
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "build:37",
+          "util": 10.949481556113073
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 13920,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 37.95973013683474
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "drink:1000071",
+          "util": 17.79035612036834
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 14160,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "drink:1000071",
+          "util": 38.19587223226252
+        },
+        {
+          "key": "drink:1000069",
+          "util": 35.74293544744887
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 14400,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.877007413792334
+        },
+        {
+          "key": "eat:0",
+          "util": 17.294615384585796
+        },
+        {
+          "key": "tend:23",
+          "util": 16.333437483966698
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 14640,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 35.873825427503284
+        },
+        {
+          "key": "fetch_water",
+          "util": 10.7603285761846
+        },
+        {
+          "key": "wander",
+          "util": 6
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 14880,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.563976584941415
+        },
+        {
+          "key": "tend:23",
+          "util": 16.135336251497442
+        },
+        {
+          "key": "fetch_water",
+          "util": 10.675913885403506
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 15120,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "gather:7",
+          "util": 10.987625814347785
+        },
+        {
+          "key": "fetch_water",
+          "util": 11.176437801610614
+        },
+        {
+          "key": "wander",
+          "util": 6
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 15360,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 45.45727473428908
+        },
+        {
+          "key": "drink:1000069",
+          "util": 21.463054313103907
+        },
+        {
+          "key": "drink:1000067",
+          "util": 18.710341683759264
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 15600,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "sleep:4",
+          "util": 12.32811327586229
+        },
+        {
+          "key": "build:37",
+          "util": 10.96329715420047
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 15840,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 55.425673738915506
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "eat:0",
+          "util": 16.158076923047187
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 16080,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "grain": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 41.624853860172756
+        },
+        {
+          "key": "eat:0",
+          "util": 25.29653846150907
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 16320,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "gather:7",
+          "util": 6.188439231678508
+        },
+        {
+          "key": "gather:8",
+          "util": 6.642884218257318
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 16560,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "gather:8",
+          "util": 7.369266048810142
+        },
+        {
+          "key": "gather:7",
+          "util": 6.914532123995389
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 16800,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "gather:9",
+          "util": 21.104184274694823
+        },
+        {
+          "key": "drink:1000070",
+          "util": 22.208063739929653
+        },
+        {
+          "key": "drink:1000068",
+          "util": 19.549925007405758
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 17040,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 5
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "deposit:4:food",
+          "util": 13.980632766605229
+        },
+        {
+          "key": "explore",
+          "util": 13.659676734381378
+        },
+        {
+          "key": "fetch_water",
+          "util": 11.985400508223941
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 17280,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 2,
+        "seeds": 1,
+        "berries": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.89637931046564
+        },
+        {
+          "key": "fetch_water",
+          "util": 11.059438319183723
+        },
+        {
+          "key": "eat:0",
+          "util": 9.534999999970186
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 17520,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.57612514667657
+        },
+        {
+          "key": "fetch_water",
+          "util": 10.692620887523248
+        },
+        {
+          "key": "wander",
+          "util": 6
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 17760,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 2
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "build:37",
+          "util": 49.51938104034585
+        },
+        {
+          "key": "wander",
+          "util": 6
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 18000,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "sleep:4",
+          "util": 8.116182359718376
+        },
+        {
+          "key": "eat:0",
+          "util": 8.666153846123114
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 18240,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "hide": 1,
+        "seeds": 1,
+        "berries": 1,
+        "water": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "sleep:4",
+          "util": 48.10623069436574
+        },
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "eat:0",
+          "util": 17.804615384585
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 18480,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 1,
+        "water": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "shelter:4",
+          "util": 22
+        },
+        {
+          "key": "gather:7",
+          "util": 5.39444844384826
+        },
+        {
+          "key": "gather:8",
+          "util": 5.938831907733528
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 18720,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 1,
+        "water": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "gather:8",
+          "util": 14.962821382346748
+        },
+        {
+          "key": "gather:7",
+          "util": 12.844573496974322
+        },
+        {
+          "key": "gather:9",
+          "util": 10.668350276528047
+        }
+      ],
+      "offers": []
+    },
+    {
+      "tick": 18960,
+      "inv": {
+        "fibre": 1,
+        "wool": 2,
+        "seeds": 1,
+        "water": 1
+      },
+      "sheep": [],
+      "best": [
+        {
+          "key": "gather:7",
+          "util": 28.76831466442649
+        },
+        {
+          "key": "gather:8",
+          "util": 29.192037507288994
+        },
+        {
+          "key": "gather:9",
+          "util": 26.591617168633594
+        }
+      ],
+      "offers": []
+    }
+  ],
+  "livestock": {
+    "counts": {
+      "founder": 2,
+      "unowned animal ticks": 422,
+      "unfed or unwatered ticks": 328,
+      "offered:acquire": 3,
+      "ranked first": 6,
+      "start:acquire": 2,
+      "care ticks:travel": 236,
+      "care ticks:work": 871,
+      "end:acquire:success": 2,
+      "ownership acquired": 2,
+      "owned animal ticks": 10914,
+      "start:feed": 2,
+      "end:feed:success": 2,
+      "offered:mate": 2,
+      "start:mate": 1,
+      "end:mate:success": 1,
+      "pregnancies": 1,
+      "wool grown": 2,
+      "offered:shear": 3,
+      "start:shear": 2,
+      "end:shear:success": 2,
+      "start:slaughter": 4,
+      "offered:slaughter": 2,
+      "end:slaughter:success": 2,
+      "living animals removed": 2,
+      "end:slaughter:failed": 2
+    },
+    "stories": [
+      {
+        "tick": 0,
+        "animal": 5,
+        "origin": "founder",
+        "parents": []
+      },
+      {
+        "tick": 0,
+        "animal": 6,
+        "origin": "founder",
+        "parents": []
+      },
+      {
+        "tick": 0,
+        "person": 2,
+        "animal": 6,
+        "start": "acquire"
+      },
+      {
+        "tick": 128,
+        "person": 2,
+        "animal": 6,
+        "op": "acquire",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 129,
+        "person": 2,
+        "animal": 6,
+        "start": "feed"
+      },
+      {
+        "tick": 163,
+        "person": 2,
+        "animal": 6,
+        "op": "feed",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 164,
+        "person": 2,
+        "animal": 5,
+        "start": "acquire"
+      },
+      {
+        "tick": 292,
+        "person": 2,
+        "animal": 5,
+        "op": "acquire",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 540,
+        "person": 2,
+        "animal": 5,
+        "start": "mate"
+      },
+      {
+        "tick": 753,
+        "person": 2,
+        "animal": 5,
+        "op": "mate",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 2544,
+        "person": 2,
+        "animal": 6,
+        "start": "feed"
+      },
+      {
+        "tick": 2584,
+        "person": 2,
+        "animal": 6,
+        "op": "feed",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 5095,
+        "person": 2,
+        "animal": 6,
+        "start": "shear"
+      },
+      {
+        "tick": 5225,
+        "person": 2,
+        "animal": 6,
+        "op": "shear",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 5226,
+        "person": 2,
+        "animal": 5,
+        "start": "shear"
+      },
+      {
+        "tick": 5310,
+        "person": 2,
+        "animal": 5,
+        "op": "shear",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 5405,
+        "person": 2,
+        "animal": 5,
+        "start": "slaughter"
+      },
+      {
+        "tick": 5586,
+        "person": 2,
+        "animal": 5,
+        "op": "slaughter",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 5587,
+        "person": 2,
+        "animal": 5,
+        "start": "slaughter"
+      },
+      {
+        "tick": 5587,
+        "person": 2,
+        "animal": 5,
+        "op": "slaughter",
+        "outcome": "failed",
+        "detail": "the sheep is gone"
+      },
+      {
+        "tick": 5588,
+        "person": 2,
+        "animal": 6,
+        "start": "slaughter"
+      },
+      {
+        "tick": 5748,
+        "person": 2,
+        "animal": 6,
+        "op": "slaughter",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 5749,
+        "person": 2,
+        "animal": 6,
+        "start": "slaughter"
+      },
+      {
+        "tick": 5758,
+        "person": 2,
+        "animal": 6,
+        "op": "slaughter",
+        "outcome": "failed",
+        "detail": "the sheep is gone"
+      }
+    ],
+    "woolCreated": 2,
+    "woolConsumed": 0,
+    "reasons": {
+      "-sheep drinking": 8,
+      "-sheep tether": 6,
+      "-feeding sheep": 4,
+      "-sheep grazing": 5,
+      "+wool grown by fed sheep": 2,
+      "+parts of a killed sheep": 12
+    },
+    "remaining": [],
+    "limits": "Samples are repeated opportunities. Founders are initial physical animals, not keeper acquisitions. Protection counts only equipped wool actually in use."
+  },
+  "conservation": {
+    "ok": true,
+    "diffs": []
+  },
+  "exactTwin": true
+}

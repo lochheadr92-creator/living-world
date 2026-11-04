@@ -1,0 +1,20 @@
+{
+  "excluded": [
+    "rulesLineage",
+    "world.settings.rulesVersion"
+  ],
+  "rows": [
+    {
+      "seed": "forest",
+      "rules148And149StateEqualIgnoringExplicitRulesLabels": true
+    },
+    {
+      "seed": "river",
+      "rules148And149StateEqualIgnoringExplicitRulesLabels": true
+    },
+    {
+      "seed": "meadow",
+      "rules148And149StateEqualIgnoringExplicitRulesLabels": true
+    }
+  ]
+}

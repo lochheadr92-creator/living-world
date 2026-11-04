@@ -1,0 +1,2406 @@
+[
+  {
+    "mode": "body",
+    "events": [
+      {
+        "tick": 0,
+        "kind": "flee",
+        "target": 5,
+        "goal": "to reach safety",
+        "data": {
+          "run": true,
+          "homeRefuge": true,
+          "optKey": "flee:0",
+          "why": "danger close +127",
+          "homeEntry": true,
+          "routeAttempt": {
+            "target": 5,
+            "x": 40.5,
+            "y": 40.5,
+            "gx": 39,
+            "gy": 37,
+            "kind": "flee",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 17,
+        "end": "flee",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 18,
+        "kind": "butcher",
+        "target": 7,
+        "goal": "prepare recovered fat for food (rendered fat)",
+        "data": {
+          "part": "fat",
+          "optKey": "butcher:7:fat",
+          "why": "a step toward “see 1 rendered_fat through at the food rack”: acquire fat for rendered_fat · needed for prepare recovered fat for food (rendered fat) +26 · walking −1",
+          "forPlan": 10,
+          "indoorHere": false,
+          "routeAttempt": {
+            "target": 7,
+            "x": 38.5,
+            "y": 38.5,
+            "gx": 41.5,
+            "gy": 40.5,
+            "kind": "butcher",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 168,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 169,
+        "kind": "deposit",
+        "target": 4,
+        "goal": "prepare recovered fat for food (rendered fat)",
+        "data": {
+          "items": {
+            "fat": 1
+          },
+          "destSite": 0,
+          "forPlan": 10,
+          "projectSupply": 10,
+          "optKey": "bring:4:fat",
+          "dailyRoutine": {
+            "key": "bring:4:fat",
+            "label": "Bring 1 raw fat to the food rack",
+            "kind": "deposit",
+            "target": 4,
+            "phase": 1,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 36.2238,
+            "energy": 91.194,
+            "warmth": 74.2124
+          },
+          "why": "a step toward “see 1 rendered_fat through at the food rack”: bring fat to the workshop for rendered_fat · to see 1 rendered_fat through at the food rack +28 · walking −1",
+          "routeAttempt": {
+            "target": 4,
+            "x": 41.5,
+            "y": 40.5,
+            "gx": 43,
+            "gy": 41,
+            "kind": "deposit",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 202,
+        "end": "deposit",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 203,
+        "kind": "operate",
+        "target": 4,
+        "goal": "prepare recovered fat for food",
+        "data": {
+          "recipe": "render_fat",
+          "client": 2,
+          "purpose": "prepare recovered fat for food",
+          "destSite": 0,
+          "forPlan": 10,
+          "optKey": "operate:4:render_fat",
+          "dailyRoutine": {
+            "key": "operate:4:render_fat",
+            "label": "Rendering animal fat",
+            "kind": "operate",
+            "target": 4,
+            "phase": 1,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 76.7343,
+            "energy": 89.834,
+            "warmth": 75.243
+          },
+          "why": "a step toward “see 1 rendered_fat through at the food rack”: work on rendered_fat for rendered_fat · to see 1 rendered_fat through at the food rack +27 · everything for it is already at the food rack +18 · walking −1",
+          "routeAttempt": {
+            "target": 4,
+            "x": 42.44101455849595,
+            "y": 42.548035538196565,
+            "gx": 43,
+            "gy": 41,
+            "kind": "operate",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 262,
+        "end": "operate",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 263,
+        "kind": "butcher",
+        "target": 7,
+        "goal": "use the body before it decays",
+        "data": {
+          "part": "hide",
+          "optKey": "butcher:7:hide",
+          "why": "known recoverable body part +24 · walking −1",
+          "routeAttempt": {
+            "target": 7,
+            "x": 42.44101455849595,
+            "y": 42.548035538196565,
+            "gx": 41.5,
+            "gy": 40.5,
+            "kind": "butcher",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 407,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 408,
+        "kind": "explore",
+        "target": 0,
+        "goal": "to look for food sources",
+        "data": {
+          "where": "the north-east country",
+          "optKey": "explore",
+          "why": "curiosity +27 · walking −9 · daylight to spare +2"
+        }
+      },
+      {
+        "tick": 632,
+        "end": "explore",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 633,
+        "kind": "withdraw",
+        "target": 4,
+        "goal": "bring preserved food back for meals",
+        "data": {
+          "items": {
+            "rendered_fat": 1
+          },
+          "optKey": "collect:4:rendered_fat",
+          "dailyRoutine": {
+            "key": "collect:4:rendered_fat",
+            "label": "Collect 1 rendered fat from the food rack",
+            "kind": "withdraw",
+            "target": 4,
+            "phase": 2,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 279.6655,
+            "energy": 70.968,
+            "warmth": 96.2401
+          },
+          "why": "bring preserved food back for meals +28 · walking −18",
+          "routeAttempt": {
+            "target": 4,
+            "x": 41.5,
+            "y": 16.5,
+            "gx": 43,
+            "gy": 41,
+            "kind": "withdraw",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 842,
+        "end": "withdraw",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 843,
+        "kind": "butcher",
+        "target": 7,
+        "goal": "keep spare food for later meals (dried meat)",
+        "data": {
+          "part": "meat",
+          "optKey": "butcher:7:meat",
+          "why": "needed for keep spare food for later meals (dried meat) +23 · walking −1",
+          "routeAttempt": {
+            "target": 7,
+            "x": 42.352733604889366,
+            "y": 39.46429749515373,
+            "gx": 41.5,
+            "gy": 40.5,
+            "kind": "butcher",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 1057,
+        "end": "butcher",
+        "outcome": "interrupted",
+        "detail": "something better came up"
+      },
+      {
+        "tick": 1057,
+        "kind": "drink",
+        "target": 0,
+        "goal": "to quench thirst (52/100)",
+        "data": {
+          "fromInv": true,
+          "optKey": "drink:inv",
+          "why": "thirsty +33 · water in pack +3"
+        }
+      },
+      {
+        "tick": 1072,
+        "end": "drink",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 1073,
+        "kind": "deposit",
+        "target": 4,
+        "goal": "keep spare food for later meals (dried meat)",
+        "data": {
+          "items": {
+            "meat": 1
+          },
+          "destSite": 0,
+          "optKey": "bring:4:meat",
+          "dailyRoutine": {
+            "key": "bring:4:meat",
+            "label": "Bring 1 meat to the food rack",
+            "kind": "deposit",
+            "target": 4,
+            "phase": 2,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 35.8687,
+            "energy": 50.596,
+            "warmth": 94.4766
+          },
+          "why": "keep spare food for later meals (dried meat) +25 · walking −1",
+          "routeAttempt": {
+            "target": 4,
+            "x": 41.5,
+            "y": 40.5,
+            "gx": 43,
+            "gy": 41,
+            "kind": "deposit",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 1106,
+        "end": "deposit",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 1107,
+        "kind": "eat",
+        "target": 0,
+        "goal": "to ease hunger (53/100)",
+        "data": {
+          "keep": 0,
+          "optKey": "eat:0",
+          "why": "hungry +20 · food in pack +4"
+        }
+      },
+      {
+        "tick": 1136,
+        "end": "eat",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 1137,
+        "kind": "butcher",
+        "target": 7,
+        "goal": "use the body before it decays",
+        "data": {
+          "part": "meat",
+          "optKey": "butcher:7:meat",
+          "why": "known recoverable body part +24 · walking −1",
+          "routeAttempt": {
+            "target": 7,
+            "x": 42.44101455849595,
+            "y": 42.548035538196565,
+            "gx": 41.5,
+            "gy": 40.5,
+            "kind": "butcher",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 1201,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 1202,
+        "kind": "deposit",
+        "target": 4,
+        "goal": "keep spare food for later meals (dried meat)",
+        "data": {
+          "items": {
+            "meat": 1
+          },
+          "destSite": 0,
+          "optKey": "bring:4:meat",
+          "dailyRoutine": {
+            "key": "bring:4:meat",
+            "label": "Bring 1 meat to the food rack",
+            "kind": "deposit",
+            "target": 4,
+            "phase": 3,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 36.1416,
+            "energy": 44.862,
+            "warmth": 87.0174
+          },
+          "why": "a step toward “put 4 units of food by for the household”: bring 1 meat to the food rack for the food reserve · keep spare food for later meals (dried meat) +25 · walking −1",
+          "forPlan": 22,
+          "routeAttempt": {
+            "target": 4,
+            "x": 41.5,
+            "y": 40.5,
+            "gx": 43,
+            "gy": 41,
+            "kind": "deposit",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 1235,
+        "end": "deposit",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 1236,
+        "kind": "sleep",
+        "target": 5,
+        "goal": "to recover energy (44/100)",
+        "data": {
+          "optKey": "sleep:5",
+          "why": "bedtime +62 · walking −5",
+          "homeEntry": true,
+          "routeAttempt": {
+            "target": 5,
+            "x": 42.44101455849595,
+            "y": 42.548035538196565,
+            "gx": 39,
+            "gy": 37,
+            "kind": "sleep",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 1743,
+        "end": "sleep",
+        "outcome": "success",
+        "detail": "rested"
+      },
+      {
+        "tick": 1744,
+        "kind": "plan_site",
+        "target": 0,
+        "goal": "warm our cold home",
+        "data": {
+          "type": "hut",
+          "sx": 38,
+          "sy": 36,
+          "hh": 1,
+          "upgradeOf": 5,
+          "improvement": "hearth",
+          "optKey": "hearth_layout:5",
+          "why": "building is my trade · our home needs indoor heat +30 · walking −1",
+          "layoutClaimed": true,
+          "indoorHere": false
+        }
+      },
+      {
+        "tick": 1769,
+        "end": "plan_site",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 1770,
+        "kind": "butcher",
+        "target": 7,
+        "goal": "use the body before it decays",
+        "data": {
+          "part": "meat",
+          "optKey": "butcher:7:meat",
+          "why": "known recoverable body part +24 · walking −1",
+          "routeAttempt": {
+            "target": 7,
+            "x": 38.5,
+            "y": 38.5,
+            "gx": 41.5,
+            "gy": 40.5,
+            "kind": "butcher",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 1919,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 1920,
+        "kind": "sleep",
+        "target": 5,
+        "goal": "to recover energy (85/100)",
+        "data": {
+          "optKey": "sleep:5",
+          "why": "bedtime +41 · walking −3",
+          "homeEntry": true,
+          "routeAttempt": {
+            "target": 5,
+            "x": 41.5,
+            "y": 40.5,
+            "gx": 39,
+            "gy": 37,
+            "kind": "sleep",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 2039,
+        "end": "sleep",
+        "outcome": "success",
+        "detail": "rested"
+      },
+      {
+        "tick": 2040,
+        "kind": "rest",
+        "target": 5,
+        "goal": "waiting for the light",
+        "data": {
+          "daylightAt": 2280,
+          "optKey": "shelter:5",
+          "why": "the night to get through +16 · cold out there +8 · my own place +6",
+          "homeEntry": true
+        }
+      },
+      {
+        "tick": 2248,
+        "end": "rest",
+        "outcome": "interrupted",
+        "detail": "something better came up"
+      },
+      {
+        "tick": 2248,
+        "kind": "build",
+        "target": 27,
+        "goal": "to finish my household’s hut",
+        "data": {
+          "optKey": "build:27",
+          "dailyRoutine": {
+            "key": "build:27",
+            "label": "Build the hut",
+            "kind": "build",
+            "target": 27,
+            "phase": 0,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 115.0783,
+            "energy": 100,
+            "warmth": 86.3033
+          },
+          "why": "building is my trade · building work to do +38 · good builder −2 · walking −1",
+          "indoorHere": false,
+          "routeAttempt": {
+            "target": 27,
+            "x": 38.5,
+            "y": 38.5,
+            "gx": 39,
+            "gy": 37,
+            "kind": "build",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 2342,
+        "end": "build",
+        "outcome": "partial",
+        "detail": "no materials to work with (1 wood, 2 stone)"
+      },
+      {
+        "tick": 2343,
+        "kind": "build",
+        "target": 27,
+        "goal": "to finish my household’s hut",
+        "data": {
+          "optKey": "build:27",
+          "dailyRoutine": {
+            "key": "build:27",
+            "label": "Build the hut",
+            "kind": "build",
+            "target": 27,
+            "phase": 1,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 116.3361,
+            "energy": 94.898,
+            "warmth": 72.3446
+          },
+          "why": "building is my trade · building work to do +38 · good builder −1 · walking −1",
+          "routeAttempt": {
+            "target": 27,
+            "x": 38.51384078504052,
+            "y": 38.64454070308712,
+            "gx": 39,
+            "gy": 37,
+            "kind": "build",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 2423,
+        "end": "build",
+        "outcome": "partial",
+        "detail": "no materials to work with (1 wood, 2 stone)"
+      },
+      {
+        "tick": 2424,
+        "kind": "butcher",
+        "target": 7,
+        "goal": "use the body before it decays",
+        "data": {
+          "part": "meat",
+          "optKey": "butcher:7:meat",
+          "why": "known recoverable body part +32 · walking −1",
+          "routeAttempt": {
+            "target": 7,
+            "x": 38.51384078504052,
+            "y": 38.64454070308712,
+            "gx": 41.5,
+            "gy": 40.5,
+            "kind": "butcher",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 2571,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 2572,
+        "kind": "eat",
+        "target": 0,
+        "goal": "to ease hunger (49/100)",
+        "data": {
+          "keep": 0,
+          "optKey": "eat:0",
+          "why": "hungry +29 · food in pack +4"
+        }
+      },
+      {
+        "tick": 2601,
+        "end": "eat",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 2602,
+        "kind": "drink",
+        "target": 1000070,
+        "goal": "to quench thirst (42/100)",
+        "data": {
+          "optKey": "drink:1000070",
+          "why": "thirsty +54 · walking −17",
+          "routeAttempt": {
+            "target": 1000070,
+            "x": 41.5,
+            "y": 40.5,
+            "gx": 41.5,
+            "gy": 13.5,
+            "kind": "drink",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 2828,
+        "end": "drink",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 2829,
+        "kind": "explore",
+        "target": 0,
+        "goal": "to find trees to fell",
+        "data": {
+          "where": "the north country",
+          "optKey": "explore",
+          "why": "curiosity +32 · walking −8 · daylight to spare +2"
+        }
+      },
+      {
+        "tick": 2965,
+        "end": "explore",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 2966,
+        "kind": "build",
+        "target": 27,
+        "goal": "to finish my household’s hut",
+        "data": {
+          "optKey": "build:27",
+          "dailyRoutine": {
+            "key": "build:27",
+            "label": "Build the hut",
+            "kind": "build",
+            "target": 27,
+            "phase": 2,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 293.0296,
+            "energy": 67.192,
+            "warmth": 94.0593
+          },
+          "why": "building is my trade · building work to do +38 · walking −13 · good builder −1",
+          "routeAttempt": {
+            "target": 27,
+            "x": 27.5,
+            "y": 19.5,
+            "gx": 39,
+            "gy": 37,
+            "kind": "build",
+            "cart": false
+          }
+        }
+      },
+      {
+        "tick": 3193,
+        "end": "build",
+        "outcome": "partial",
+        "detail": "no materials to work with (1 wood, 2 stone)"
+      },
+      {
+        "tick": 3194,
+        "kind": "wander",
+        "target": 0,
+        "goal": "nothing needs doing right now",
+        "data": {
+          "haunt": "home",
+          "optKey": "wander",
+          "dailyRoutine": {
+            "key": "wander",
+            "label": "Potter about near home",
+            "kind": "wander",
+            "target": 0,
+            "phase": 2,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 113.6455,
+            "energy": 56.952,
+            "warmth": 98.4936
+          },
+          "why": "nothing pressing +6 · spare time stays a fallback −3 · a change of scene +2 · a favourite spot +1"
+        }
+      },
+      {
+        "tick": 3243,
+        "end": "wander",
+        "outcome": "interrupted",
+        "detail": "something better came up"
+      },
+      {
+        "tick": 3243,
+        "kind": "explore",
+        "target": 0,
+        "goal": "to find trees to fell",
+        "data": {
+          "where": "the north country",
+          "optKey": "explore",
+          "why": "curiosity +32 · walking −8 · daylight to spare +2"
+        }
+      },
+      {
+        "tick": 3439,
+        "end": "explore",
+        "outcome": "success",
+        "detail": "done"
+      },
+      {
+        "tick": 3440,
+        "kind": "build",
+        "target": 27,
+        "goal": "to finish my household’s hut",
+        "data": {
+          "optKey": "build:27",
+          "dailyRoutine": {
+            "key": "build:27",
+            "label": "Build the hut",
+            "kind": "build",
+            "target": 27,
+            "phase": 2,
+            "context": {
+              "winter": false,
+              "household": 1,
+              "home": 5,
+              "injury": "well",
+              "family": "0:",
+              "contact": "0:",
+              "losses": "0:"
+            },
+            "eta": 302.4826,
+            "energy": 47.112,
+            "warmth": 95.8751
+          },
+          "why": "building is my trade · building work to do +38 · walking −14 · good builder −1",
+          "routeAttempt": {
+            "target": 27,
+            "x": 17.5,
+            "y": 32.5,
+            "gx": 39,
+            "gy": 37,
+            "kind": "build",
+            "cart": false
+          }
+        }
+      }
+    ],
+    "samples": [
+      {
+        "tick": 0,
+        "inv": {
+          "water": 2,
+          "berries": 3
+        },
+        "needs": {
+          "hunger": 90,
+          "thirst": 100,
+          "energy": 100,
+          "warmth": 78.21162510151044,
+          "safety": 85,
+          "social": 70
+        },
+        "rack": {
+          "items": {
+            "wood": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "flee:0",
+            "utility": 126.96000000000001,
+            "goal": "to get away from the wolf"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "butcher:7:fat",
+            "utility": 25.304992221261887,
+            "goal": "prepare recovered fat for food (rendered fat)"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 120,
+        "inv": {
+          "water": 2,
+          "berries": 3
+        },
+        "needs": {
+          "hunger": 85.72200000000034,
+          "thirst": 94.08799999999937,
+          "energy": 93.87999999999961,
+          "warmth": 73.5457391133732,
+          "safety": 83.1881177224921,
+          "social": 67.96000000000049
+        },
+        "rack": {
+          "items": {
+            "wood": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "butcher:7:fat",
+            "utility": 25.76,
+            "goal": "to see 1 rendered_fat through at the food rack"
+          },
+          {
+            "key": "butcher:7:hide",
+            "utility": 24,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 23.101200000000002,
+            "goal": "keep spare food for later meals (dried meat)"
+          },
+          {
+            "key": "explore",
+            "utility": 21.16284169100488,
+            "goal": "to look for food sources"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "butcher:7:fat",
+            "utility": 25.76,
+            "goal": "to see 1 rendered_fat through at the food rack"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 240,
+        "inv": {
+          "water": 2,
+          "berries": 3
+        },
+        "needs": {
+          "hunger": 81.75450000000053,
+          "thirst": 88.6999999999986,
+          "energy": 88.39399999999907,
+          "warmth": 76.71536667968672,
+          "safety": 83.92811767024551,
+          "social": 65.92000000000098
+        },
+        "rack": {
+          "items": {
+            "wood": 1
+          },
+          "cap": 30
+        },
+        "job": {
+          "recipe": "render_fat",
+          "client": 2,
+          "purpose": "prepare recovered fat for food",
+          "destSite": 0,
+          "phase": "work",
+          "started": 203,
+          "lastWork": 239,
+          "progress": 37,
+          "total": 60,
+          "burnLeft": 0,
+          "burnTotal": 180,
+          "held": {
+            "fat": 1,
+            "wood": 1
+          },
+          "workers": {
+            "2": 37
+          },
+          "blocked": ""
+        },
+        "ranked": [
+          {
+            "key": "operate:4:render_fat",
+            "utility": 43.98931709025726,
+            "goal": "to see 1 rendered_fat through at the food rack (get back to it)"
+          },
+          {
+            "key": "butcher:7:hide",
+            "utility": 23.18483824161036,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "explore",
+            "utility": 18.840079517168974,
+            "goal": "to look for food sources"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 5.184838241610363,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "operate:4:render_fat",
+            "utility": 43.98931709025726,
+            "goal": "to see 1 rendered_fat through at the food rack (get back to it)"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 360,
+        "inv": {
+          "water": 2,
+          "berries": 3
+        },
+        "needs": {
+          "hunger": 77.62200000000088,
+          "thirst": 83.04799999999781,
+          "energy": 82.59999999999862,
+          "warmth": 83.28779843843597,
+          "safety": 83.99363569143695,
+          "social": 63.88000000000142
+        },
+        "rack": {
+          "items": {
+            "wood": 1
+          },
+          "cap": 30
+        },
+        "job": {
+          "recipe": "render_fat",
+          "client": 2,
+          "purpose": "prepare recovered fat for food",
+          "destSite": 0,
+          "phase": "burn",
+          "started": 203,
+          "lastWork": 262,
+          "progress": 60,
+          "total": 60,
+          "burnLeft": 83,
+          "burnTotal": 180,
+          "held": {
+            "fat": 1
+          },
+          "workers": {
+            "2": 60
+          },
+          "blocked": ""
+        },
+        "ranked": [
+          {
+            "key": "butcher:7:hide",
+            "utility": 24,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "explore",
+            "utility": 20.50483475754609,
+            "goal": "to look for food sources"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 6,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": [
+          {
+            "kind": "operate",
+            "label": "Drying meat",
+            "goal": "",
+            "need": null,
+            "util": 0,
+            "parts": [],
+            "eta": 0,
+            "key": "operate:4",
+            "targetId": 4,
+            "blocked": "the food rack is busy with rendered fat",
+            "tag": "food"
+          }
+        ]
+      },
+      {
+        "tick": 480,
+        "inv": {
+          "water": 2,
+          "berries": 3,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 73.66200000000107,
+          "thirst": 77.67199999999704,
+          "energy": 77.12799999999807,
+          "warmth": 90.50116930377102,
+          "safety": 83.99943651765845,
+          "social": 61.840000000001055
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "rendered_fat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "explore",
+            "utility": 22.59963232267578,
+            "goal": "to look for food sources"
+          },
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 21.60230122877511,
+            "goal": "bring preserved food back for meals"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 21.60230122877511,
+            "goal": "bring preserved food back for meals"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 600,
+        "inv": {
+          "water": 2,
+          "berries": 3,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 70.06200000000094,
+          "thirst": 72.87199999999629,
+          "energy": 72.32799999999732,
+          "warmth": 95.38643891999543,
+          "safety": 83.99995011047211,
+          "social": 59.80000000000069
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "rendered_fat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "explore",
+            "utility": 22.427357298060123,
+            "goal": "to look for food sources"
+          },
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 11.719606844816713,
+            "goal": "bring preserved food back for meals"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 11.719606844816713,
+            "goal": "bring preserved food back for meals"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 720,
+        "inv": {
+          "water": 2,
+          "berries": 3,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 66.4620000000008,
+          "thirst": 68.07199999999554,
+          "energy": 67.52799999999657,
+          "warmth": 97.75920357782736,
+          "safety": 83.99999558288731,
+          "social": 57.76000000000033
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "rendered_fat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 17.433222626843502,
+            "goal": "bring preserved food back for meals"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 17.433222626843502,
+            "goal": "bring preserved food back for meals"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 840,
+        "inv": {
+          "water": 2,
+          "berries": 3,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 62.86200000000066,
+          "thirst": 63.271999999994925,
+          "energy": 62.727999999996044,
+          "warmth": 98.91165012914135,
+          "safety": 83.99999960891822,
+          "social": 55.71999999999997
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "rendered_fat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 26.788942134350684,
+            "goal": "bring preserved food back for meals"
+          },
+          {
+            "key": "drink:inv",
+            "utility": 9.421292307704253,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 5.504280288903823,
+            "goal": "use the finite body before it decays"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "collect:4:rendered_fat",
+            "utility": 26.788942134350684,
+            "goal": "bring preserved food back for meals"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 960,
+        "inv": {
+          "water": 2,
+          "berries": 3,
+          "hide": 1,
+          "rendered_fat": 1
+        },
+        "needs": {
+          "hunger": 58.5120000000005,
+          "thirst": 57.27199999999498,
+          "energy": 56.527999999995856,
+          "warmth": 98.33907620553096,
+          "safety": 83.99999996537443,
+          "social": 53.67999999999961
+        },
+        "rack": {
+          "items": {
+            "wood": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "butcher:7:meat",
+            "utility": 23.101200000000002,
+            "goal": "keep spare food for later meals (dried meat)"
+          },
+          {
+            "key": "drink:inv",
+            "utility": 23.544369230781044,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "eat:0",
+            "utility": 12.04923076922962,
+            "goal": "to ease hunger"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          },
+          {
+            "key": "drink:1000070",
+            "utility": 0.16651473781647397,
+            "goal": "to quench thirst"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 1080,
+        "inv": {
+          "berries": 3,
+          "hide": 1,
+          "rendered_fat": 1,
+          "meat": 1
+        },
+        "needs": {
+          "hunger": 54.177000000000334,
+          "thirst": 99.71999999999996,
+          "energy": 50.355999999995674,
+          "warmth": 94.1951157007838,
+          "safety": 83.99999999693433,
+          "social": 51.63999999999925
+        },
+        "rack": {
+          "items": {
+            "wood": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "bring:4:meat",
+            "utility": 23.757634415189372,
+            "goal": "keep spare food for later meals (dried meat)"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 22.80614964042975,
+            "goal": "keep spare food for later meals (dried meat)"
+          },
+          {
+            "key": "eat:0",
+            "utility": 22.053076923076155,
+            "goal": "to ease hunger"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "bring:4:meat",
+            "utility": 23.757634415189372,
+            "goal": "keep spare food for later meals (dried meat)"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 1200,
+        "inv": {
+          "berries": 1,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 86.28450000000046,
+          "thirst": 94.45199999999919,
+          "energy": 45.009999999995664,
+          "warmth": 87.220511118873,
+          "safety": 68.0594725893935,
+          "social": 49.599999999998886
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "butcher:7:meat",
+            "utility": 24,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 1320,
+        "inv": {
+          "berries": 1,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 83.11500000000059,
+          "thirst": 90.15599999999861,
+          "energy": 45.2969999999958,
+          "warmth": 84.33704934043986,
+          "safety": 79.62539438105506,
+          "social": 47.952699999998664
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "sleep:5",
+            "utility": 60.241399234910205,
+            "goal": "to recover energy"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 22.712837682974712,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "shelter:5",
+            "utility": 22,
+            "goal": "to let the night pass under shelter"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 1440,
+        "inv": {
+          "berries": 1,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 81.13500000000137,
+          "thirst": 87.2759999999985,
+          "energy": 59.09699999999604,
+          "warmth": 92.39253947439367,
+          "safety": 92.72730299722399,
+          "social": 47.34069999999881
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "sleep:5",
+            "utility": 53.341360203475496,
+            "goal": "to recover energy"
+          },
+          {
+            "key": "hearth_layout:5",
+            "utility": 28.88986020347351,
+            "goal": "warm our cold home"
+          },
+          {
+            "key": "shelter:5",
+            "utility": 22,
+            "goal": "to let the night pass under shelter"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 22.712792426009432,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 1560,
+        "inv": {
+          "berries": 1,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 79.15500000000215,
+          "thirst": 84.3959999999984,
+          "energy": 72.89699999999573,
+          "warmth": 95.52948823765429,
+          "safety": 93.88731811474949,
+          "social": 46.72869999999896
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "sleep:5",
+            "utility": 46.44128254135711,
+            "goal": "to recover energy"
+          },
+          {
+            "key": "hearth_layout:5",
+            "utility": 28.889782541354975,
+            "goal": "warm our cold home"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 22.712702376749412,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "shelter:5",
+            "utility": 22,
+            "goal": "to let the night pass under shelter"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 1680,
+        "inv": {
+          "berries": 1,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 77.17500000000292,
+          "thirst": 81.51599999999829,
+          "energy": 86.69699999999511,
+          "warmth": 93.45008997861945,
+          "safety": 93.99002338558515,
+          "social": 46.116699999999106
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "sleep:5",
+            "utility": 39.541243909829205,
+            "goal": "to recover energy"
+          },
+          {
+            "key": "hearth_layout:5",
+            "utility": 28.889743909826763,
+            "goal": "warm our cold home"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 22.712657583475753,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "shelter:5",
+            "utility": 22,
+            "goal": "to let the night pass under shelter"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 1800,
+        "inv": {
+          "berries": 1,
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 74.43900000000328,
+          "thirst": 77.73999999999788,
+          "energy": 91.81699999999444,
+          "warmth": 75.73456205700256,
+          "safety": 66.2853953633644,
+          "social": 44.838299999999016
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "butcher:7:meat",
+            "utility": 23.976735048922706,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "build:27",
+            "utility": 7.438386960059807,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 1920,
+        "inv": {
+          "berries": 1,
+          "hide": 1,
+          "meat": 1
+        },
+        "needs": {
+          "hunger": 69.94650000000395,
+          "thirst": 71.51199999999707,
+          "energy": 85.35099999999419,
+          "warmth": 54.54988788234952,
+          "safety": 66.00001288208601,
+          "social": 42.798299999998655
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "sleep:5",
+            "utility": 38.267178189950485,
+            "goal": "to recover energy"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 24,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "build:27",
+            "utility": 7.410056563433123,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          },
+          {
+            "key": "operate:4:dry_meat",
+            "utility": 5.514543353088346,
+            "goal": "keep spare food for later meals"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "operate:4:dry_meat",
+            "utility": 5.514543353088346,
+            "goal": "keep spare food for later meals"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 2040,
+        "inv": {
+          "berries": 1,
+          "hide": 1,
+          "meat": 1
+        },
+        "needs": {
+          "hunger": 67.53450000000448,
+          "thirst": 68.11999999999679,
+          "energy": 94.07288793035697,
+          "warmth": 65.61833519432494,
+          "safety": 89.26791345945036,
+          "social": 41.805499999998666
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 2
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "shelter:5",
+            "utility": 30,
+            "goal": "to let the night pass under shelter"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 22.68420948099181,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "operate:4:dry_meat",
+            "utility": 4.948985483518649,
+            "goal": "keep spare food for later meals"
+          },
+          {
+            "key": "build:27",
+            "utility": 7.833013367461533,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "operate:4:dry_meat",
+            "utility": 4.948985483518649,
+            "goal": "keep spare food for later meals"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 2160,
+        "inv": {
+          "berries": 1,
+          "hide": 1,
+          "meat": 1
+        },
+        "needs": {
+          "hunger": 63.93450000000435,
+          "thirst": 63.31999999999617,
+          "energy": 97.6028879303571,
+          "warmth": 78.6282559707321,
+          "safety": 93.58103112414459,
+          "social": 39.765499999998305
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "butcher:7:meat",
+            "utility": 22.684131573601952,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "shelter:5",
+            "utility": 22,
+            "goal": "to let the night pass under shelter"
+          },
+          {
+            "key": "operate:4:dry_meat",
+            "utility": 4.948937357121244,
+            "goal": "keep spare food for later meals"
+          },
+          {
+            "key": "build:27",
+            "utility": 7.832998585556076,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "operate:4:dry_meat",
+            "utility": 4.948937357121244,
+            "goal": "keep spare food for later meals"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 2280,
+        "inv": {
+          "berries": 1,
+          "hide": 1,
+          "meat": 1
+        },
+        "needs": {
+          "hunger": 60.1095000000042,
+          "thirst": 58.15999999999626,
+          "energy": 98.33999999999993,
+          "warmth": 80.34805641838452,
+          "safety": 84.74885638123375,
+          "social": 37.72549999999794
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "build:27",
+            "utility": 35.6271416195212,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "explore",
+            "utility": 26.8883119789226,
+            "goal": "to find trees to fell"
+          },
+          {
+            "key": "bring:4:meat",
+            "utility": 21.461476772129103,
+            "goal": "keep spare food for later meals (dried meat)"
+          },
+          {
+            "key": "butcher:7:meat",
+            "utility": 24.989396194151755,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "eat:0",
+            "utility": 8.362692307682607,
+            "goal": "to ease hunger"
+          }
+        ],
+        "preservation": [
+          {
+            "key": "bring:4:meat",
+            "utility": 21.461476772129103,
+            "goal": "keep spare food for later meals (dried meat)"
+          }
+        ],
+        "blocked": []
+      },
+      {
+        "tick": 2400,
+        "inv": {
+          "berries": 1,
+          "hide": 1,
+          "meat": 1
+        },
+        "needs": {
+          "hunger": 55.61700000000403,
+          "thirst": 51.93199999999631,
+          "energy": 91.87399999999968,
+          "warmth": 68.93986859927136,
+          "safety": 84.00003380164345,
+          "social": 35.68549999999758
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "butcher:7:meat",
+            "utility": 30.173695978548796,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "eat:0",
+            "utility": 18.729999999990692,
+            "goal": "to ease hunger"
+          },
+          {
+            "key": "drink:1000069",
+            "utility": 15.04494888281408,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "drink:1000071",
+            "utility": 14.42381704581042,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "eat_store:4",
+            "utility": 9.17490765213357,
+            "goal": "to ease hunger"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 2520,
+        "inv": {
+          "berries": 1,
+          "hide": 1,
+          "meat": 1
+        },
+        "needs": {
+          "hunger": 51.33450000000387,
+          "thirst": 46.03999999999637,
+          "energy": 85.79999999999932,
+          "warmth": 68.92637871530508,
+          "safety": 84.00000000152573,
+          "social": 33.64549999999722
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "butcher:7:meat",
+            "utility": 36.30634615384169,
+            "goal": "use the finite body before it decays"
+          },
+          {
+            "key": "eat:0",
+            "utility": 28.61269230768337,
+            "goal": "to ease hunger"
+          },
+          {
+            "key": "drink:1000070",
+            "utility": 27.398007463870425,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "drink:1000068",
+            "utility": 26.635577662833988,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "eat_store:4",
+            "utility": 20.604675448024008,
+            "goal": "to ease hunger"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 2640,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 95.34450000000372,
+          "thirst": 40.61599999999645,
+          "energy": 80.27199999999878,
+          "warmth": 74.47175354154518,
+          "safety": 84.00000000000009,
+          "social": 31.605499999996944
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "drink:1000068",
+            "utility": 42.28505387446877,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "drink:1000070",
+            "utility": 43.1882487645496,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 2760,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 91.74450000000358,
+          "thirst": 35.81599999999655,
+          "energy": 75.47199999999803,
+          "warmth": 82.19808049485519,
+          "safety": 84.00000000000009,
+          "social": 29.56549999999701
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "drink:1000070",
+            "utility": 58.67836831932409,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "drink:1000068",
+            "utility": 56.276537190729954,
+            "goal": "to quench thirst"
+          },
+          {
+            "key": "explore",
+            "utility": 28.522414316172643,
+            "goal": "to find trees to fell"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 2880,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 88.14450000000345,
+          "thirst": 97.95999999999968,
+          "energy": 70.67199999999728,
+          "warmth": 89.97189570647622,
+          "safety": 84.00000000000009,
+          "social": 27.525499999997074
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "build:27",
+            "utility": 23.189546854058083,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "explore",
+            "utility": 28.656392504670013,
+            "goal": "to find trees to fell"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 3000,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 84.54450000000331,
+          "thirst": 93.15999999999893,
+          "energy": 65.87199999999653,
+          "warmth": 95.12937190330211,
+          "safety": 84.00000000000009,
+          "social": 25.48549999999714
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "build:27",
+            "utility": 26.04561341839103,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 3120,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 80.89950000000321,
+          "thirst": 88.28799999999818,
+          "energy": 60.98799999999629,
+          "warmth": 97.63434669584926,
+          "safety": 84.00000000000009,
+          "social": 23.445499999997203
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "build:27",
+            "utility": 35.36830504614887,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 3240,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 76.74450000000358,
+          "thirst": 82.5999999999974,
+          "energy": 55.15199999999618,
+          "warmth": 98.85100741745539,
+          "safety": 84.00000000000009,
+          "social": 21.405499999997268
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "explore",
+            "utility": 26.490693693900404,
+            "goal": "to find trees to fell"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 3360,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 73.14450000000345,
+          "thirst": 77.79999999999664,
+          "energy": 50.35199999999628,
+          "warmth": 98.30962217446464,
+          "safety": 84.00000000000009,
+          "social": 19.365499999997333
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "build:27",
+            "utility": 27.997351825294462,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "explore",
+            "utility": 28.707346694023368,
+            "goal": "to find trees to fell"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      },
+      {
+        "tick": 3480,
+        "inv": {
+          "hide": 1
+        },
+        "needs": {
+          "hunger": 69.54450000000331,
+          "thirst": 72.9999999999959,
+          "energy": 45.55199999999638,
+          "warmth": 94.18080994297823,
+          "safety": 84.00000000000009,
+          "social": 17.325499999997398
+        },
+        "rack": {
+          "items": {
+            "wood": 1,
+            "meat": 1
+          },
+          "cap": 30
+        },
+        "job": null,
+        "ranked": [
+          {
+            "key": "build:27",
+            "utility": 25.895284071283076,
+            "goal": "to finish my household’s hut"
+          },
+          {
+            "key": "wander",
+            "utility": 6,
+            "goal": "nothing needs doing right now"
+          },
+          {
+            "key": "sleep:5",
+            "utility": -9.841466873247215,
+            "goal": "to recover energy"
+          },
+          {
+            "key": "rest:here",
+            "utility": 0.9304615384690509,
+            "goal": "to recover energy"
+          }
+        ],
+        "preservation": [],
+        "blocked": []
+      }
+    ],
+    "ledger": {
+      "initial": {
+        "water": 8002,
+        "berries": 3,
+        "wood": 2
+      },
+      "created": {
+        "meat": 4,
+        "hide": 1,
+        "fat": 1,
+        "rendered_fat": 1
+      },
+      "consumed": {
+        "wood": 1,
+        "fat": 1,
+        "water": 4,
+        "rendered_fat": 1,
+        "berries": 3,
+        "meat": 2
+      },
+      "spoiled": {
+        "water": 95,
+        "meat": 1
+      },
+      "reasons": {
+        "+parts of a killed deer": 6,
+        "xnatural water evaporation": 95,
+        "-burned as fuel": 1,
+        "-used in rendered fat": 1,
+        "+made rendered fat": 1,
+        "-drunk": 2,
+        "-eaten": 6,
+        "xstored food spoiled": 1,
+        "-drunk at natural water": 2
+      }
+    },
+    "conservation": {
+      "ok": true,
+      "diffs": []
+    }
+  }
+]

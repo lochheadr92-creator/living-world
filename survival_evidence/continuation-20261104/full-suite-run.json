@@ -1,0 +1,12 @@
+{
+    "sourceManifest":  "final-source-and-fixtures-manifest.json",
+    "changedSources":  [
+
+                       ],
+    "finished":  "2026-11-04T21:25:23.8541126+10:00",
+    "command":  "node node_modules/vitest/vitest.mjs run --maxWorkers=8 --reporter=verbose --reporter=json --outputFile.json=survival_evidence/continuation-20261104/full-suite.json",
+    "started":  "2026-11-04T21:17:24.5683314+10:00",
+    "host":  "THEWEAPON",
+    "exitCode":  0,
+    "head":  "5fe3f33005f1a7dc4bb40f0a4c5059bad3d70a38"
+}

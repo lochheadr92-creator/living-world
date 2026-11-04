@@ -1,0 +1,551 @@
+[
+  {
+    "version": 149,
+    "staged": true,
+    "autonomousAfterStart": true,
+    "meals": 2,
+    "body": {
+      "animalId": 8,
+      "species": "deer",
+      "hhId": 1,
+      "initial": {
+        "meat": 4,
+        "hide": 1,
+        "fat": 1
+      },
+      "remaining": {
+        "meat": 0,
+        "hide": 0,
+        "fat": 0
+      },
+      "recovered": {
+        "meat": 4,
+        "hide": 1,
+        "fat": 1
+      },
+      "lost": {
+        "meat": 0,
+        "hide": 0,
+        "fat": 0
+      },
+      "work": {
+        "meat": 0,
+        "hide": 0,
+        "fat": 0
+      },
+      "claim": null,
+      "emptySince": 2086
+    },
+    "gear": {
+      "kind": "trap",
+      "toolId": 5,
+      "owner": 2,
+      "hhId": 1,
+      "sourceId": 4,
+      "setAt": 80,
+      "readyAt": 680,
+      "cycle": 1,
+      "state": "ready",
+      "checked": true,
+      "catchTick": 81,
+      "bodyId": 9,
+      "lastTended": 121
+    },
+    "events": [
+      {
+        "tick": 121,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 121,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "failed",
+        "detail": "recover the previous body first",
+        "cycles": 0
+      },
+      {
+        "tick": 122,
+        "kind": "butcher",
+        "goal": "use the body before it decays",
+        "target": 9,
+        "amount": 0
+      },
+      {
+        "tick": 257,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 258,
+        "kind": "explore",
+        "goal": "to look for food sources",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 494,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 715,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "failed",
+        "detail": "recover the previous body first",
+        "cycles": 0
+      },
+      {
+        "tick": 716,
+        "kind": "butcher",
+        "goal": "use the body before it decays",
+        "target": 9,
+        "amount": 0
+      },
+      {
+        "tick": 851,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 852,
+        "kind": "eat",
+        "goal": "to ease hunger (56/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 882,
+        "kind": "butcher",
+        "goal": "use the body before it decays",
+        "target": 9,
+        "amount": 0
+      },
+      {
+        "tick": 1001,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 1002,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 1018,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "failed",
+        "detail": "recover the previous body first",
+        "cycles": 0
+      },
+      {
+        "tick": 1019,
+        "kind": "butcher",
+        "goal": "use the body before it decays",
+        "target": 9,
+        "amount": 0
+      },
+      {
+        "tick": 1154,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 1155,
+        "kind": "sleep",
+        "goal": "to recover energy (52/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 1668,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 1685,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "failed",
+        "detail": "recover the previous body first",
+        "cycles": 0
+      },
+      {
+        "tick": 1686,
+        "kind": "butcher",
+        "goal": "use the body before it decays",
+        "target": 9,
+        "amount": 0
+      },
+      {
+        "tick": 1822,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 1823,
+        "kind": "sleep",
+        "goal": "to recover energy (86/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 1930,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 1948,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "failed",
+        "detail": "recover the previous body first",
+        "cycles": 0
+      },
+      {
+        "tick": 1949,
+        "kind": "butcher",
+        "goal": "use the body before it decays",
+        "target": 9,
+        "amount": 0
+      },
+      {
+        "tick": 2086,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 2087,
+        "kind": "wander",
+        "goal": "nothing needs doing right now",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2124,
+        "kind": "eat",
+        "goal": "to ease hunger (60/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2144,
+        "kind": "wander",
+        "goal": "nothing needs doing right now",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2196,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 2248,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "interrupted",
+        "detail": "something better came up",
+        "cycles": 0
+      },
+      {
+        "tick": 2248,
+        "kind": "explore",
+        "goal": "to find water",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2471,
+        "kind": "drink",
+        "goal": "to quench thirst (7/100)",
+        "target": 1000073,
+        "amount": 0
+      }
+    ],
+    "ledger": {
+      "initial": {
+        "berries": 3,
+        "trap": 1,
+        "wood": 5,
+        "water": 8000
+      },
+      "created": {
+        "meat": 4,
+        "hide": 1,
+        "fat": 1
+      },
+      "consumed": {
+        "meat": 2,
+        "berries": 3
+      },
+      "spoiled": {
+        "water": 59
+      },
+      "reasons": {
+        "+parts of a killed deer": 6,
+        "xnatural water evaporation": 59,
+        "-eaten": 5
+      }
+    },
+    "exactTwin": true
+  },
+  {
+    "version": 150,
+    "staged": true,
+    "autonomousAfterStart": true,
+    "meals": 3,
+    "body": {
+      "animalId": 8,
+      "species": "deer",
+      "hhId": 1,
+      "initial": {
+        "meat": 4,
+        "hide": 1,
+        "fat": 1
+      },
+      "remaining": {
+        "meat": 0,
+        "hide": 0,
+        "fat": 0
+      },
+      "recovered": {
+        "meat": 4,
+        "hide": 1,
+        "fat": 1
+      },
+      "lost": {
+        "meat": 0,
+        "hide": 0,
+        "fat": 0
+      },
+      "work": {
+        "meat": 0,
+        "hide": 0,
+        "fat": 0
+      },
+      "claim": null,
+      "emptySince": 856
+    },
+    "gear": {
+      "kind": "trap",
+      "toolId": 5,
+      "owner": 2,
+      "hhId": 1,
+      "sourceId": 4,
+      "setAt": 2019,
+      "readyAt": 2619,
+      "cycle": 3,
+      "state": "armed",
+      "checked": false,
+      "catchTick": null,
+      "bodyId": null,
+      "lastTended": 2019
+    },
+    "events": [
+      {
+        "tick": 121,
+        "kind": "butcher",
+        "goal": "recover the checked trap catch before resetting",
+        "target": 9,
+        "amount": 4
+      },
+      {
+        "tick": 616,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 4
+      },
+      {
+        "tick": 617,
+        "kind": "butcher",
+        "goal": "recover the checked trap catch before resetting",
+        "target": 9,
+        "amount": 1
+      },
+      {
+        "tick": 736,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 737,
+        "kind": "butcher",
+        "goal": "recover the checked trap catch before resetting",
+        "target": 9,
+        "amount": 1
+      },
+      {
+        "tick": 856,
+        "end": "butcher",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 1
+      },
+      {
+        "tick": 857,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 914,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 0
+      },
+      {
+        "tick": 915,
+        "kind": "eat",
+        "goal": "to ease hunger (50/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 935,
+        "kind": "wander",
+        "goal": "nothing needs doing right now",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 987,
+        "kind": "explore",
+        "goal": "to find water",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 1151,
+        "kind": "sleep",
+        "goal": "to recover energy (48/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 1711,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 1979,
+        "end": "gear_work",
+        "op": "check",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 0
+      },
+      {
+        "tick": 1980,
+        "kind": "gear_work",
+        "goal": "use owned gear for food",
+        "target": 7,
+        "amount": 0
+      },
+      {
+        "tick": 2019,
+        "end": "gear_work",
+        "op": "reset",
+        "outcome": "success",
+        "detail": "done",
+        "cycles": 0
+      },
+      {
+        "tick": 2020,
+        "kind": "sleep",
+        "goal": "to recover energy (81/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2204,
+        "kind": "eat",
+        "goal": "to ease hunger (60/100)",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2224,
+        "kind": "wander",
+        "goal": "nothing needs doing right now",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2270,
+        "kind": "explore",
+        "goal": "to find water",
+        "target": 0,
+        "amount": 0
+      },
+      {
+        "tick": 2475,
+        "kind": "drink",
+        "goal": "to quench thirst (8/100)",
+        "target": 1000073,
+        "amount": 0
+      }
+    ],
+    "ledger": {
+      "initial": {
+        "berries": 3,
+        "trap": 1,
+        "wood": 5,
+        "water": 8000
+      },
+      "created": {
+        "meat": 4,
+        "hide": 1,
+        "fat": 1
+      },
+      "consumed": {
+        "meat": 3,
+        "berries": 1
+      },
+      "spoiled": {
+        "water": 59
+      },
+      "reasons": {
+        "+parts of a killed deer": 6,
+        "xnatural water evaporation": 59,
+        "-eaten": 4
+      }
+    },
+    "exactTwin": true
+  }
+]

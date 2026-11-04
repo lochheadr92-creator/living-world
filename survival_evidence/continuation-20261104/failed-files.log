@@ -1,0 +1,112 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-survival-work
+
+ ✓ tests/inhabitant_attribute.test.ts > attribution > reads content words and tolerates inflection 1ms
+ × tests/inhabitant_attribute.test.ts > attribution > on the recorded memory run: five decisions, two weak candidates and no strong one; the wood-chopping one rested on the observation 2ms
+   → ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json'
+ × tests/inhabitant_attribute.test.ts > attribution > on the six-day Tomas run: the notes named a target at 58 decisions and the choice was one of them at 6, the strong candidates 0ms
+   → ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\harsh6-tomas-gpt5\transcript.json'
+ × tests/inhabitant_attribute.test.ts > attribution > on the recorded no-memory run: nothing can be attributed to notes 0ms
+   → ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\baseline-pavel-gpt5\transcript.json'
+ ✓ tests/inhabitant_attribute.test.ts > attribution > on the goal keeper: every pursued choice is attributed to the goal, by its place reference 3745ms
+ × tests/inhabitant_attribute.test.ts > the counterfactual re-ask > puts the recorded observation to the model with and without notes, and reports where the choice moves 1ms
+   → ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json'
+ × tests/inhabitant_attribute.test.ts > the counterfactual re-ask > a model that ignores its notes shows no shift; --no-both runs one arm; a failed call is a null choice 0ms
+   → ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json'
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/inhabitant_attribute.test.ts > attribution > on the recorded memory run: five decisions, two weak candidates and no strong one; the wood-chopping one rested on the observation
+Error: ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json'
+ ❯ memoryRun tests/inhabitant_attribute.test.ts:15:48
+     13|
+     14| const DAY = 2400;
+     15| const memoryRun = (): Transcript => JSON.parse(readFileSync('experimen…
+       |                                                ^
+     16| const baselineRun = (): Transcript => JSON.parse(readFileSync('experim…
+     17| const tomasRun = (): Transcript => JSON.parse(readFileSync('experiment…
+ ❯ tests/inhabitant_attribute.test.ts:29:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/inhabitant_attribute.test.ts > attribution > on the six-day Tomas run: the notes named a target at 58 decisions and the choice was one of them at 6, the strong candidates
+Error: ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\harsh6-tomas-gpt5\transcript.json'
+ ❯ tomasRun tests/inhabitant_attribute.test.ts:17:47
+     15| const memoryRun = (): Transcript => JSON.parse(readFileSync('experimen…
+     16| const baselineRun = (): Transcript => JSON.parse(readFileSync('experim…
+     17| const tomasRun = (): Transcript => JSON.parse(readFileSync('experiment…
+       |                                               ^
+     18|
+     19| describe('attribution', () => {
+ ❯ tests/inhabitant_attribute.test.ts:61:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\dev\Claude Experiment\living-world-survival-work\experiments\harsh6-tomas-gpt5\transcript.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/inhabitant_attribute.test.ts > attribution > on the recorded no-memory run: nothing can be attributed to notes
+Error: ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\baseline-pavel-gpt5\transcript.json'
+ ❯ baselineRun tests/inhabitant_attribute.test.ts:16:50
+     14| const DAY = 2400;
+     15| const memoryRun = (): Transcript => JSON.parse(readFileSync('experimen…
+     16| const baselineRun = (): Transcript => JSON.parse(readFileSync('experim…
+       |                                                  ^
+     17| const tomasRun = (): Transcript => JSON.parse(readFileSync('experiment…
+     18|
+ ❯ tests/inhabitant_attribute.test.ts:74:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\dev\Claude Experiment\living-world-survival-work\experiments\baseline-pavel-gpt5\transcript.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/inhabitant_attribute.test.ts > the counterfactual re-ask > puts the recorded observation to the model with and without notes, and reports where the choice moves
+Error: ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json'
+ ❯ memoryRun tests/inhabitant_attribute.test.ts:15:48
+     13|
+     14| const DAY = 2400;
+     15| const memoryRun = (): Transcript => JSON.parse(readFileSync('experimen…
+       |                                                ^
+     16| const baselineRun = (): Transcript => JSON.parse(readFileSync('experim…
+     17| const tomasRun = (): Transcript => JSON.parse(readFileSync('experiment…
+ ❯ tests/inhabitant_attribute.test.ts:120:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/inhabitant_attribute.test.ts > the counterfactual re-ask > a model that ignores its notes shows no shift; --no-both runs one arm; a failed call is a null choice
+Error: ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json'
+ ❯ memoryRun tests/inhabitant_attribute.test.ts:15:48
+     13|
+     14| const DAY = 2400;
+     15| const memoryRun = (): Transcript => JSON.parse(readFileSync('experimen…
+       |                                                ^
+     16| const baselineRun = (): Transcript => JSON.parse(readFileSync('experim…
+     17| const tomasRun = (): Transcript => JSON.parse(readFileSync('experiment…
+ ❯ tests/inhabitant_attribute.test.ts:148:15
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\dev\Claude Experiment\living-world-survival-work\experiments\memory-pavel-gpt5\transcript.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  5 failed | 2 passed (7)
+   Start at  21:16:41
+   Duration  5.40s (tests 71%, transform 26%, import 3%)
+
+JSON report written to C:/dev/Claude Experiment/living-world-survival-work/survival_evidence/continuation-20261104/failed-files.json

@@ -1,0 +1,3 @@
+{"mode":"shelf","created":{"dried_meat":2},"consumed":{"meat":2,"berries":3,"water":3,"dried_meat":2},"actions":49,"conserved":true}
+{"mode":"body","created":{"meat":4,"hide":1,"fat":1,"rendered_fat":1},"consumed":{"wood":1,"fat":1,"berries":3,"water":3,"meat":3,"rendered_fat":1},"actions":51,"conserved":true}
+{"mode":"carried","created":{"dried_meat":2},"consumed":{"meat":2,"berries":3,"water":3,"dried_meat":2},"actions":53,"conserved":true}

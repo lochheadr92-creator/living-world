@@ -1,0 +1,12 @@
+8:55:41 pm [vite] (client) Re-optimizing dependencies because vite config has changed
+
+  VITE v8.3.2  ready in 382 ms
+
+  ➜  Local:   http://127.0.0.1:5301/
+  ➜  press h + enter to show help
+8:57:27 pm [vite] (client) page reload src/sim/carcass_supply.ts
+8:57:27 pm [vite] (client) page reload src/sim/passive_gear.ts
+8:57:27 pm [vite] (client) page reload src/sim/rulesversion.ts
+8:57:28 pm [vite] (client) page reload src/sim/rulesversion.ts
+9:00:33 pm [vite] (client) page reload src/sim/livestock.ts
+9:00:33 pm [vite] (client) page reload src/sim/rulesversion.ts

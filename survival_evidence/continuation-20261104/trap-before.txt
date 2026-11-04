@@ -1,0 +1,65 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-survival-work
+
+ ❯ tests/trap_recovery.test.ts (3 tests | 2 failed) 39ms
+   × turns a checked known catch into recovery instead of an impossible reset 26ms
+   × recovers finite trap meat, eats a real portion, and resets only after recovering the body 8ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/trap_recovery.test.ts > turns a checked known catch into recovery instead of an impossible reset
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/trap_recovery.test.ts:15:65
+     13| it('turns a checked known catch into recovery instead of an impossible…
+     14|  const s=trapRecoveryScene(150),before=serializeWorld(s.w),ctx=generat…
+     15|  expect(ctx.options.some(o=>o.key===`gear:reset:${s.gear.id}`)).toBe(f…
+       |                                                                 ^
+     16|  const recover=ctx.options.find(o=>o.key===`butcher:${s.body.id}:meat`…
+     17|  expect(recover.goal).toMatch(/trap/);expect(recover.make!()!.amount).…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/trap_recovery.test.ts > recovers finite trap meat, eats a real portion, and resets only after recovering the body
+AssertionError: expected 1 to be 4 // Object.is equality
+
+- Expected
++ Received
+
+- 4
++ 1
+
+ ❯ tests/trap_recovery.test.ts:20:93
+     18| });
+     19| it('recovers finite trap meat, eats a real portion, and resets only af…
+     20|  const s=trapRecoveryScene(150);perform(s,`butcher:${s.body.id}:meat`)…
+       |                                                                                             ^
+     21|  consume(s.w,s.p.inv,'berries',3,'staged previous meals');s.p.needs.hu…
+     22|  startActivity(s.w,s.p,newActivity(s.w,s.p,{kind:'eat',label:'Eat reco…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 1 passed (3)
+   Start at  20:57:14
+   Duration  1.92s (transform 86%, import 11%, tests 2%)
+

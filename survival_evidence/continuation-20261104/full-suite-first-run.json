@@ -1,0 +1,22 @@
+{
+  "started": "2026-11-04T21:01:43.8351982+10:00",
+  "exitCode": 1,
+  "finished": "2026-11-04T21:16:06.2758684+10:00",
+  "pid": 45080,
+  "command": "npx vitest run --maxWorkers=4 --reporter=verbose",
+  "sourceManifest": "final-source-manifest.json",
+  "changedSources": [],
+  "wrapperFailure": "Windows PowerShell 5.1 NativeCommandError on Vite native-config warning; intended redirected log empty",
+  "classification": "TEST_ENVIRONMENT_FAILURE",
+  "reproducedFailures": {
+    "tests/inhabitant_attribute.test.ts": {
+      "assertions": 5,
+      "cause": "three absent historical transcripts"
+    },
+    "tests/zz_review_e_famine_trace.test.ts": {
+      "assertions": 2,
+      "cause": "absent retained rules107 world"
+    }
+  },
+  "resolution": "Restore exact local/committed fixtures without changing tests; rerun full suite with direct native streams and JSON reporter"
+}

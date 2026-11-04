@@ -1,0 +1,215 @@
+[
+  {
+    "run": "before-forest",
+    "rules": 148,
+    "seed": "forest",
+    "population": 5,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 333.4341263,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 115102,
+      "unfed or unwatered ticks": 7749,
+      "wool grown": 4,
+      "living animals removed": 1
+    }
+  },
+  {
+    "run": "before-meadow",
+    "rules": 148,
+    "seed": "meadow",
+    "population": 21,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 390.9334075,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 111555,
+      "unfed or unwatered ticks": 8000,
+      "wool grown": 4,
+      "living animals removed": 2
+    }
+  },
+  {
+    "run": "before-river",
+    "rules": 148,
+    "seed": "river",
+    "population": 26,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 537.5956066000001,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 120000,
+      "unfed or unwatered ticks": 1033,
+      "wool grown": 4
+    }
+  },
+  {
+    "run": "after149-forest",
+    "rules": 149,
+    "seed": "forest",
+    "population": 5,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 361.5224018,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 115102,
+      "unfed or unwatered ticks": 7749,
+      "wool grown": 4,
+      "living animals removed": 1
+    }
+  },
+  {
+    "run": "after149-meadow",
+    "rules": 149,
+    "seed": "meadow",
+    "population": 21,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 415.10296270000003,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 111555,
+      "unfed or unwatered ticks": 8000,
+      "wool grown": 4,
+      "living animals removed": 2
+    }
+  },
+  {
+    "run": "after149-river",
+    "rules": 149,
+    "seed": "river",
+    "population": 26,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 578.7667045999999,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 120000,
+      "unfed or unwatered ticks": 1033,
+      "wool grown": 4
+    }
+  },
+  {
+    "run": "final151-forest",
+    "rules": 151,
+    "seed": "forest",
+    "population": 5,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 391.39552580000003,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 115102,
+      "unfed or unwatered ticks": 7749,
+      "wool grown": 4,
+      "living animals removed": 1
+    }
+  },
+  {
+    "run": "final151-meadow",
+    "rules": 151,
+    "seed": "meadow",
+    "population": 21,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 451.6212782,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 111555,
+      "unfed or unwatered ticks": 8000,
+      "wool grown": 4,
+      "living animals removed": 2
+    }
+  },
+  {
+    "run": "final151-river",
+    "rules": 151,
+    "seed": "river",
+    "population": 26,
+    "tick": 60000,
+    "pureChecks": 500,
+    "seconds": 590.0925889,
+    "preservedEaten": {
+      "dried_fish": 0,
+      "smoked_fish": 0,
+      "dried_meat": 0,
+      "smoked_meat": 0,
+      "rendered_fat": 0
+    },
+    "gear": {},
+    "sheep": {
+      "founder": 2,
+      "unowned animal ticks": 120000,
+      "unfed or unwatered ticks": 1033,
+      "wool grown": 4
+    }
+  }
+]

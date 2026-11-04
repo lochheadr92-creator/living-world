@@ -1,0 +1,17 @@
+{
+  "staged": true,
+  "checks": {
+    "visibleWait": false,
+    "pure": true,
+    "paidCollection": true,
+    "noExceptions": true
+  },
+  "before": {
+    "text": "Building progressMaterials suppliedWorking nowWill makeAt workMade here so farCan make hereContents",
+    "pure": true
+  },
+  "completed": {
+    "held": 2,
+    "conserved": true
+  }
+}

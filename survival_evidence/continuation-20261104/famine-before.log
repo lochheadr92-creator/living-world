@@ -1,0 +1,58 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-survival-work
+
+ × tests/zz_review_e_famine_trace.test.ts > traces one day of the retained rules-107 forest famine (diagnostic, writes a report) 3ms
+   → ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\autonomy_evidence\helper-receipt107-first-invalid\final.json'
+ × tests/zz_review_e_famine_trace.test.ts > CONTRAST (diagnostic intervention on world state, not a rules change): the same day with the lean season removed 0ms
+   → ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\autonomy_evidence\helper-receipt107-first-invalid\final.json'
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/zz_review_e_famine_trace.test.ts > traces one day of the retained rules-107 forest famine (diagnostic, writes a report)
+Error: ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\autonomy_evidence\helper-receipt107-first-invalid\final.json'
+ ❯ runDay tests/zz_review_e_famine_trace.test.ts:72:15
+     70|
+     71| function runDay(label: string, prepare: (w: World) => void) {
+     72|   const raw = readFileSync(SAVE, 'utf8');
+       |               ^
+     73|   const w = deserializeWorld(raw);
+     74|   prepare(w);
+ ❯ tests/zz_review_e_famine_trace.test.ts:222:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\dev\Claude Experiment\living-world-survival-work\autonomy_evidence\helper-receipt107-first-invalid\final.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  tests/zz_review_e_famine_trace.test.ts > CONTRAST (diagnostic intervention on world state, not a rules change): the same day with the lean season removed
+Error: ENOENT: no such file or directory, open 'C:\dev\Claude Experiment\living-world-survival-work\autonomy_evidence\helper-receipt107-first-invalid\final.json'
+ ❯ runDay tests/zz_review_e_famine_trace.test.ts:72:15
+     70|
+     71| function runDay(label: string, prepare: (w: World) => void) {
+     72|   const raw = readFileSync(SAVE, 'utf8');
+       |               ^
+     73|   const w = deserializeWorld(raw);
+     74|   prepare(w);
+ ❯ tests/zz_review_e_famine_trace.test.ts:226:3
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\dev\Claude Experiment\living-world-survival-work\autonomy_evidence\helper-receipt107-first-invalid\final.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  21:16:49
+   Duration  1.50s (transform 89%, import 11%)
+

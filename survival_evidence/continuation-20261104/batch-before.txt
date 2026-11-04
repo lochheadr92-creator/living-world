@@ -1,0 +1,82 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-survival-work
+
+ ❯ tests/carcass_batch.test.ts (4 tests | 3 failed) 54ms
+   × retains a recipe request for two portions and pays separately for each portion 22ms
+   × preserves the paid first portion and partial second portion through save/load 23ms
+   × rechecks ownership before recovering the next portion and reports partial work 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/carcass_batch.test.ts > retains a recipe request for two portions and pays separately for each portion
+AssertionError: expected +0 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 0
+
+ ❯ tests/carcass_batch.test.ts:19:61
+     17| function ticks(s:ReturnType<typeof fixture>,n:number){for(let i=0;i<n;…
+     18| it('retains a recipe request for two portions and pays separately for …
+     19|  const s=fixture(),o=offer(s),a=o.make!()!;expect(a.amount).toBe(2);st…
+       |                                                             ^
+     20|  ticks(s,125);expect(s.p.inv.meat).toBe(1);expect(s.p.activity?.kind).…
+     21|  ticks(s,130);expect(s.p.inv.meat).toBe(2);expect(s.body.carcass!.rema…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/carcass_batch.test.ts > preserves the paid first portion and partial second portion through save/load
+AssertionError: expected 1 to be 2 // Object.is equality
+
+- Expected
++ Received
+
+- 2
++ 1
+
+ ❯ tests/carcass_batch.test.ts:27:104
+     25|  const s=fixture();startActivity(s.w,s.p,offer(s).make!()!);ticks(s,15…
+     26|  const w=deserializeWorld(serializeWorld(s.w)),copy={w,p:w.persons[0],…
+     27|  ticks(s,110);ticks(copy,110);expect(serializeWorld(w)).toBe(serialize…
+       |                                                                                                        ^
+     28| });
+     29| it('rechecks ownership before recovering the next portion and reports …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/carcass_batch.test.ts > rechecks ownership before recovering the next portion and reports partial work
+AssertionError: expected 'success' to be 'partial' // Object.is equality
+
+Expected: "partial"
+Received: "success"
+
+ ❯ tests/carcass_batch.test.ts:31:63
+     29| it('rechecks ownership before recovering the next portion and reports …
+     30|  const s=fixture();startActivity(s.w,s.p,offer(s).make!()!);ticks(s,12…
+     31|  expect(s.p.inv.meat).toBe(1);expect(s.p.lastResult?.outcome).toBe('pa…
+       |                                                               ^
+     32| });
+     33| it('preserves single-portion butchery before rules 149',()=>{
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 1 passed (4)
+   Start at  20:54:10
+   Duration  1.75s (transform 85%, import 11%, tests 3%)
+

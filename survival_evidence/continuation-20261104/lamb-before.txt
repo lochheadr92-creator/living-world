@@ -1,0 +1,85 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-survival-work
+
+ ❯ tests/livestock_food_choice.test.ts (5 tests | 3 failed) 32ms
+   × uses a known faster food route before killing owned sheep, without observer mutation 20ms
+   × does not peek at distant real food or ownership to change remembered choices 3ms
+   × recovers a known existing body before slaughtering another animal 3ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/livestock_food_choice.test.ts > uses a known faster food route before killing owned sheep, without observer mutation
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/livestock_food_choice.test.ts:18:66
+     16| const slaughter=(s:ReturnType<typeof scene>)=>generateOptions(s.w,s.p,…
+     17| it('uses a known faster food route before killing owned sheep, without…
+     18|  const s=scene(),before=serializeWorld(s.w);expect(slaughter(s)).toBe(…
+       |                                                                  ^
+     19| });
+     20| it('keeps emergency slaughter when no alternative is known or the know…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  tests/livestock_food_choice.test.ts > does not peek at distant real food or ownership to change remembered choices
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/livestock_food_choice.test.ts:25:56
+     23| });
+     24| it('does not peek at distant real food or ownership to change remember…
+     25|  const s=scene();s.grain.amount=0;expect(slaughter(s)).toBe(false);
+       |                                                        ^
+     26|  learn(s.w,s.p,s.grain);expect(slaughter(s)).toBe(true);
+     27| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  tests/livestock_food_choice.test.ts > recovers a known existing body before slaughtering another animal
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ tests/livestock_food_choice.test.ts:30:82
+     28| it('recovers a known existing body before slaughtering another animal'…
+     29|  const s=scene();delBelief(s.p,s.grain.id);const other=makeSheep(s.w,4…
+     30|  const body=makeCarcass(s.w,other,s.p)!;learn(s.w,s.p,body);expect(sla…
+       |                                                                                  ^
+     31|  s.p.beliefs[body.id].hh=s.p.hhId+100;expect(slaughter(s)).toBe(true);
+     32| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 2 passed (5)
+   Start at  21:00:27
+   Duration  1.72s (transform 87%, import 11%, tests 2%)
+

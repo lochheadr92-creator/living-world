@@ -1,0 +1,711 @@
+{
+  "copiedFiles": [
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-batched.log",
+      "destination": "autonomy-batched.log",
+      "sha256": "C0C97E49E598B03C041A0B0F7313EBE19E82E0E0D38AC1D285A85CFA6A2B5D18"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-diagnostic-after.log",
+      "destination": "autonomy-diagnostic-after.log",
+      "sha256": "9FBC9E777E7FFE5804059AF0D6862BF8B62CD1FF0E108B82F8382482D68AF2B8"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-diagnostic.json",
+      "destination": "autonomy-diagnostic.json",
+      "sha256": "623F2115EE640CDD36EE71F602AB53D0EB4D9B85651119555882807E7AFB9ECD"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-diagnostic.ts",
+      "destination": "autonomy-diagnostic.ts",
+      "sha256": "B7B400477EB11B1AD8BF5E21E9A9BBA38BF21D4C45C6D91E897381D73DBD94A7"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-with-water-batched.log",
+      "destination": "autonomy-with-water-batched.log",
+      "sha256": "C627C2026D04C762EC5756C637853E1FA8B57A079449366095801C36121A17AA"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-with-water.json",
+      "destination": "autonomy-with-water.json",
+      "sha256": "9E582857FC995BE74AD0B585A12DA92F7FC167984172EE19D148AB0E2947E7DB"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-with-water.log",
+      "destination": "autonomy-with-water.log",
+      "sha256": "A75CE8D6BB866AC2E445DBBC5B1A47B981088BF0BEABB9BD6154BA7FC3D7B2E6"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\autonomy-with-water.ts",
+      "destination": "autonomy-with-water.ts",
+      "sha256": "8A79102D9A7E02019419EE105025A59BDB4DFE64C0FF28D71CA82928B3B4AE27"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\batch-after.txt",
+      "destination": "batch-after.txt",
+      "sha256": "E3ED3F2C1A4F8107E04149CDBA1CEFA04DAA54B2673708067A4ED3BE8F165D6C"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\batch-before.txt",
+      "destination": "batch-before.txt",
+      "sha256": "F8EDDF4121DE99597C5895C933DEC5F374DABA153FD7D6112B67CBB492CB4BA2"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build149-final.exit.txt",
+      "destination": "build149-final.exit.txt",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build149-final.log",
+      "destination": "build149-final.log",
+      "sha256": "A36CBD66BDD4AA2C0CFB741D8E8FC3DF4CFEF9BC81BF6047207941A09288CC69"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build149.exit.txt",
+      "destination": "build149.exit.txt",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build149.log",
+      "destination": "build149.log",
+      "sha256": "C82A790D0080272EDD2BBAD6F58A07A0C78F98178CC22A9A36B3A31B7E4DC3C7"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build150.exit.txt",
+      "destination": "build150.exit.txt",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build150.log",
+      "destination": "build150.log",
+      "sha256": "3A0248A75C819CB49D618F35DCE00C620CAB67FBF84388B9A35FBFA7F05A3826"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build151.exit.txt",
+      "destination": "build151.exit.txt",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\build151.log",
+      "destination": "build151.log",
+      "sha256": "E5AC27E1A3746CA1D26AE7E31EFA950FD67F9CDED82B48BA74EA75C794258883"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\collection-after.txt",
+      "destination": "collection-after.txt",
+      "sha256": "C906AF2B1496CFCBA7D2F26235BE95C4475541C5C611E67C9D334B6901AC91CC"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\collection-final-render.mjs",
+      "destination": "collection-final-render.mjs",
+      "sha256": "E385BB8303DD1E45C47EE78DA450328AD3821C5BE3886DB5D7A7110D33FF2C68"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\collection-regression.txt",
+      "destination": "collection-regression.txt",
+      "sha256": "8D0033CF485DFF8BEC21A9116281EDA90334C029367E7D58B40ED734998282D8"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\collection-render.mjs",
+      "destination": "collection-render.mjs",
+      "sha256": "A9BBD0A99F1E3F2DE5D867D49A1CBF8CE7CB76E89D9057762F5EC2F9F6D2E9F6"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\failed-files.exit.txt",
+      "destination": "failed-files.exit.txt",
+      "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\failed-files.json",
+      "destination": "failed-files.json",
+      "sha256": "A52DEF47FF7C5FDA6E9E65C69B590344B488D3C14CA02AE22ADAC3CC6787A1D7"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\failed-files.log",
+      "destination": "failed-files.log",
+      "sha256": "F2FAB3222F545D7033BE76B67D0FA48728DF47D018D0F96FB983E7AEB1693FCB"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\famine-before.log",
+      "destination": "famine-before.log",
+      "sha256": "5CF7ABBC92768725E486713A4F2D1BDB07C2548BD19D8E329A4BBC054BE00EA8"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\famine-restored.exit.txt",
+      "destination": "famine-restored.exit.txt",
+      "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\famine-restored.json",
+      "destination": "famine-restored.json",
+      "sha256": "6A729E6AFDE09867B1D6EDE4B345BB5BDAF5D290BADBCE68257A6383737DCBB3"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\famine-restored.log",
+      "destination": "famine-restored.log",
+      "sha256": "4F2DA9D130F3E4304BFE8456C3C10D17648F0417466C4124CE8354B968946355"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final-source-and-fixtures-manifest.json",
+      "destination": "final-source-and-fixtures-manifest.json",
+      "sha256": "425D55529D98F262129650294B6A7A72308F47316CC9C42E0F2E92E916C9DCC7"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final-source-manifest.json",
+      "destination": "final-source-manifest.json",
+      "sha256": "0E4CA87A6DE8218657DF33582CD4FE0A15EE2E24889326532CC0B8F22CD6F670"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final149-targeted.txt",
+      "destination": "final149-targeted.txt",
+      "sha256": "7B99EEBEF2DCE2418A123DE3A34F1E1AF54F1CB56E419936CA178D5259D74AE1"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-forest.stderr.log",
+      "destination": "final151-forest.stderr.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-forest.stdout.log",
+      "destination": "final151-forest.stdout.log",
+      "sha256": "444C27A2BAD49ADF92FDD3A9BEFF2A7887A8FFB8BB741732DB12C150B3588237"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-meadow.stderr.log",
+      "destination": "final151-meadow.stderr.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-meadow.stdout.log",
+      "destination": "final151-meadow.stdout.log",
+      "sha256": "FF8988A5D186BE7F7E6A9AFB4BA04729DEEDE9E718A8364F9E9D62FF8A95FC90"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-river.stderr.log",
+      "destination": "final151-river.stderr.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-river.stdout.log",
+      "destination": "final151-river.stdout.log",
+      "sha256": "A9935CFF499F9A8B3C41FBE2BA7C72394BB23F6A0F5A4B22F108CA6CFDB7494A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\finalize-docs.py",
+      "destination": "finalize-docs.py",
+      "sha256": "EF01D14A5536990849FEF26DF45F91507FFC0BC31BC22BC86DCCDBD04C3C66AA"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\fixtures-restored.exit.txt",
+      "destination": "fixtures-restored.exit.txt",
+      "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\fixtures-restored.json",
+      "destination": "fixtures-restored.json",
+      "sha256": "08E667002F4DC9DC9C35331617F8EFB796A7649CDEB12AF73A577DA4BE5DA7B3"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\fixtures-restored.log",
+      "destination": "fixtures-restored.log",
+      "sha256": "4977C33176C9E31A6ABDB9F93B46E85C4D9311B6831248226289579A2F620CBB"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\full-suite-first-cache.json",
+      "destination": "full-suite-first-cache.json",
+      "sha256": "A386FCB7730E87A3F918DE74129C6CE25385263AE540F5920D9B0B9342E61313"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\full-suite-first-run.json",
+      "destination": "full-suite-first-run.json",
+      "sha256": "EB1B10E2D8011E8872154BEBEB66E760C721705DE2F23713A7C59E59336B00E7"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\full-suite-run.json",
+      "destination": "full-suite-run.json",
+      "sha256": "D3EF8CAE24C69025D27C3682E587A395AC2D097229B37DD8F309F219376F674D"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\full-suite.json",
+      "destination": "full-suite.json",
+      "sha256": "03393FAA3724F4547EC06B0F8B670F590DA45ABE1881DB5854B227ACC5DAC82E"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\full-suite.log",
+      "destination": "full-suite.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\full-suite.stderr.log",
+      "destination": "full-suite.stderr.log",
+      "sha256": "84DF523B338F090100B5BEABFD46C69CBDEA07AC541B60E40BFAA5E36D153506"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\full-suite.stdout.log",
+      "destination": "full-suite.stdout.log",
+      "sha256": "DCC6E94A81E55DDC1C9D2DE116755F63FE0110F3924B89932A93131750BB2359"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\jobs151.json",
+      "destination": "jobs151.json",
+      "sha256": "327C27C4A531B48E986DD1688DA0F7BD7E9B7BB0794296E65528F40B23E03729"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-after.txt",
+      "destination": "lamb-after.txt",
+      "sha256": "44B6AC0495731424AAB980649ECF3E98A5EC7702505B31665C387286A1EF6E9B"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-before.txt",
+      "destination": "lamb-before.txt",
+      "sha256": "B59A843CA2ADB2AAE7A5EB23B750FA768F912E24FA2274AF804ABACBC0F41627"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-diagnostic-150.json",
+      "destination": "lamb-diagnostic-150.json",
+      "sha256": "668BEADB3C9DFF9EE04730A4EBB59B41161302310A16DA8298773F328F9ABE75"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-diagnostic-150.log",
+      "destination": "lamb-diagnostic-150.log",
+      "sha256": "D0D470F0996937F4ABAFA0F14B1753D6B0350C432D9409365491494A2D2E4EB3"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-diagnostic-151.json",
+      "destination": "lamb-diagnostic-151.json",
+      "sha256": "8DB701071CA982673720DDA7419AFF3CC5910EDA1AF02B825F667C038478F8CB"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-diagnostic-151.log",
+      "destination": "lamb-diagnostic-151.log",
+      "sha256": "6D563FA5136C5AAFD090C8F22F4E844B062A9B3CFFFFCEE7609F5105DB274E76"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-diagnostic.ts",
+      "destination": "lamb-diagnostic.ts",
+      "sha256": "FF3440B71E2208191A7522CC8C69DC852D33A893FFD78510461B460959C250CA"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-final.txt",
+      "destination": "lamb-final.txt",
+      "sha256": "13E26AFFBE6A8D4F73ACCF6A736F32E4CCFE50D3B30515CBAC7D822392F27105"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\lamb-render.mjs",
+      "destination": "lamb-render.mjs",
+      "sha256": "F377EF1BB105B3B694CD0FE224183301A446D6DEF03402DD60650D454B41645B"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\ordinary-summary.json",
+      "destination": "ordinary-summary.json",
+      "sha256": "DC9B2612ACAE0464BB52FC6323F3093C7CEC090DB95314D82B586FAD1A1EA887"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\ordinary-summary.partial.json",
+      "destination": "ordinary-summary.partial.json",
+      "sha256": "E8AC5E2CB2FF60C394F9D73308DA69BD047F5533D89C6A9F10BB788C18D394AC"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\preservation-final151.json",
+      "destination": "preservation-final151.json",
+      "sha256": "1F3FFD180471D0F87AF5B200CA4A9776BD9AE00D87C1D522A1968912B4DEEDE6"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\preservation-final151.log",
+      "destination": "preservation-final151.log",
+      "sha256": "C0C97E49E598B03C041A0B0F7313EBE19E82E0E0D38AC1D285A85CFA6A2B5D18"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\preservation-final151.ts",
+      "destination": "preservation-final151.ts",
+      "sha256": "919ED6AE0192E6A898371D13BA84DDBF5A64D5B6DAFBB703D7072BE9D75DFF2B"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\README.md",
+      "destination": "README.md",
+      "sha256": "372298FDCD81CCFF53A74713B33FDE854A4E2550B5B77F61E8039492179E4F87"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\regression149.txt",
+      "destination": "regression149.txt",
+      "sha256": "2240472DA6F8919928F7578C2245B957C28A4590397D29799BB9D2D1468FF341"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\restored-fixture.json",
+      "destination": "restored-fixture.json",
+      "sha256": "13DF6ABD4565FD84DB076F9381FB07E3A661FA884674B0410B1DB57CE023E913"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\rules148-149-state-comparison.json",
+      "destination": "rules148-149-state-comparison.json",
+      "sha256": "7AFC2553E4AD8B24B206F5A53EA863D983D1D174AA3984D84FA1321254E689AE"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\rules148-151-state-comparison.json",
+      "destination": "rules148-151-state-comparison.json",
+      "sha256": "BE4B451A9E56B678BC35C498F3B9F59F9347374F21EA68C8AA95A45398D74C71"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\run-full-direct.ps1",
+      "destination": "run-full-direct.ps1",
+      "sha256": "087231FC82E2BE5B5D7B28D56E2098024D0747E69D629B6C41A761246F02CD0B"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\run-full.ps1",
+      "destination": "run-full.ps1",
+      "sha256": "9F22205CFBCCD369FA9B9AB0A4D1E643660D00063122DC4885FB1BB734E5CB70"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-after.txt",
+      "destination": "trap-after.txt",
+      "sha256": "DD482D6AB3A7DB396768D8E90B3F395B33A1FCA07F2B0C197A92B1E6ED1B319A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-autonomy.json",
+      "destination": "trap-autonomy.json",
+      "sha256": "763ECFD19C8EE5E8394BB78760FCE0CD876F97FEF9E122198D98CFE8280D8126"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-autonomy.log",
+      "destination": "trap-autonomy.log",
+      "sha256": "7288BFA019252F73522686E2F0D1BB0AFA3AA1BE7291163503ADE7784A6B9FC1"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-autonomy.ts",
+      "destination": "trap-autonomy.ts",
+      "sha256": "1374B4A18059EA5294099AAE3B1ED22CA812B227C79D5D1554D830777861D75E"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-before.txt",
+      "destination": "trap-before.txt",
+      "sha256": "0AA22260296ACC9D80CA2528A40F521AB80DC4C3A9EAE175E6D11B11B4A380D6"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-final-render.mjs",
+      "destination": "trap-final-render.mjs",
+      "sha256": "7BF081CA9BD83FE9703A0887E0CCE7BC89BF99984C704ADE1883F6FAF033653D"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-final151.json",
+      "destination": "trap-final151.json",
+      "sha256": "C34DAE11A41EE39BCEEFB6334AAAE1C7080490D821E25C2D06F7CB97A7E17E63"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-final151.log",
+      "destination": "trap-final151.log",
+      "sha256": "CBEE5BA89FF720C3CAD4DCAD717370C7719380AEF2E4564178FA5F269370692A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-final151.ts",
+      "destination": "trap-final151.ts",
+      "sha256": "D8580B3739710757AEB6758026DECA53EE64C84194A40E9F1842C41A10269B88"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-regression.txt",
+      "destination": "trap-regression.txt",
+      "sha256": "C1CC2E2C47F769EB06F49AF2251016DF3EC597DB0D4EF71B7F2923FEA12AE7D3"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\trap-render.mjs",
+      "destination": "trap-render.mjs",
+      "sha256": "80CBC6E86C8CBFFA87D5FAF92FB4AF6EB4080E20E63343F82AC9B443F11718EB"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\v149-record.txt",
+      "destination": "v149-record.txt",
+      "sha256": "618DE399F05C7E70CE020E8E5CABF09718E5A96ADD779B65DB9D537635A87A1E"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\v150-record.txt",
+      "destination": "v150-record.txt",
+      "sha256": "79ECAC53D466E0F2A38216DAB2CFA512490320CCB0219B4A3BCB354FFBD197A3"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\v151-record.txt",
+      "destination": "v151-record.txt",
+      "sha256": "24969BB714AA2894F5A5E522C97DAF834BC8991ED35E59070FE5A3D64B9BC080"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\vite-final.err",
+      "destination": "vite-final.err",
+      "sha256": "A438A90C57A24FA953734D9968CECBA25DCD5A01D046AC438326642B28AFAD3A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\vite-final.log",
+      "destination": "vite-final.log",
+      "sha256": "41E04DB2290E387BACB6EA926A986CC9DFB4D00651A3C208199A4F37710E7E47"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\vite-final.pid",
+      "destination": "vite-final.pid",
+      "sha256": "913232429973561CD00181DC0D1BF26964AC3DC2B5F146115AE64A413BC8E47D"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\vite.err",
+      "destination": "vite.err",
+      "sha256": "E2A6BBD8CDEECCAFECD1B052AE0CC5E198C9E5ABD0275320E7563AC3A6D76AC9"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\vite.log",
+      "destination": "vite.log",
+      "sha256": "CB906FAD9758996D98DE575E637ECD931D8EF41985DF5D03CE7DAE6618B767DF"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\vitest-process-exit.json",
+      "destination": "vitest-process-exit.json",
+      "sha256": "15A7DD33705DDABD5EE529474201971C4E9721AC6ABCA12B6819EB10E893811B"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-forest\\final.json",
+      "destination": "final151-forest\\final.json",
+      "sha256": "87AC03703E5D887CDB29474073AFA75E6C80F6805D9E9B6865278B494A0FE731"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-forest\\progress.jsonl",
+      "destination": "final151-forest\\progress.jsonl",
+      "sha256": "7E641477CE69C28ADE81869442727B19998E7E30516A8464DE29C77B0FE973F2"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-forest\\report.json",
+      "destination": "final151-forest\\report.json",
+      "sha256": "E27A2108FEE27B3CDCCB00771DFB02412697B32B115DE81DAE1EAEBA1A8D157A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-meadow\\final.json",
+      "destination": "final151-meadow\\final.json",
+      "sha256": "15BD6BB418A06FD1952C0FA744C3E627E4471CA635A543550C7765656E90F9B3"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-meadow\\progress.jsonl",
+      "destination": "final151-meadow\\progress.jsonl",
+      "sha256": "5E888C3D763EAF5B794379FF4CBBEEE5D6E5F70472EEDC9C9EA69997E2AB88C7"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-meadow\\report.json",
+      "destination": "final151-meadow\\report.json",
+      "sha256": "AA25AC757988AF33701E6CA11EC54D5EF3F0CBA659BFDFF39CD349D5D1EC697E"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-river\\final.json",
+      "destination": "final151-river\\final.json",
+      "sha256": "C0712B8882D8AEDAC28AAEFCBC16BFA6071A3DB73C95F91413F720668B4A2384"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-river\\progress.jsonl",
+      "destination": "final151-river\\progress.jsonl",
+      "sha256": "9F5728714646275DFCCA801F0DDEB8FA1D5D016C9B02C6CD03F7F11ACC00C675"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\final151-river\\report.json",
+      "destination": "final151-river\\report.json",
+      "sha256": "E463269E0E3B790E15F2BE8696DB80AC39158F963D1A131A9703AF925C6E160A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render149\\collected.png",
+      "destination": "render149\\collected.png",
+      "sha256": "A4F6A60199BA6FD90AAEF7B1741DD9209189AB902C08A2FD8A6A63257DAA93E9"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render149\\report.json",
+      "destination": "render149\\report.json",
+      "sha256": "74B63AB4A94949EEFF6D863A361AC4AAF4B717992F7310C69021E1FB369D2469"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render149\\waiting.png",
+      "destination": "render149\\waiting.png",
+      "sha256": "7B1E762288E113A843D92D0D535AB0206102CD6FE3B941EE08EB76990933B784"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render149b\\collected.png",
+      "destination": "render149b\\collected.png",
+      "sha256": "A63AF1156408112FFBD2EB23FB4E58CB3B534F722CED12FCED475B3EC1E1073D"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render149b\\report.json",
+      "destination": "render149b\\report.json",
+      "sha256": "E30FE52CF7BECD19BBA099D6154D484B93C538658B67296F32867441F4AAF409"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render149b\\waiting.png",
+      "destination": "render149b\\waiting.png",
+      "sha256": "E582675EED88E6B6777C5467EC017433BFCE52723783802694194B8CEFEA0628"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render150\\after-meals.png",
+      "destination": "render150\\after-meals.png",
+      "sha256": "F68BE42D8421574BF94728C86809B4FE76FFC104DAD9F36C239BDE3927572059"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render150\\recovering.png",
+      "destination": "render150\\recovering.png",
+      "sha256": "D9DE1282E66C9E7C242E09CEC40782DD280EACF74AC1AC4B1232367ACD45C409"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render150\\report.json",
+      "destination": "render150\\report.json",
+      "sha256": "77827B1F0A9EBFDC250F84560796E21C3877B1A441FF25465FBF575642FF294A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151\\birth.png",
+      "destination": "render151\\birth.png",
+      "sha256": "64FD9CD5D2762B856F4A1B65F68693077102DEBEC06814181B444626AB755918"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151\\report.json",
+      "destination": "render151\\report.json",
+      "sha256": "5BEF4C20A9D133C4A93751858ED6427DE3602C964948E7D26093999E92F9AAC2"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation\\collected.png",
+      "destination": "render151-preservation\\collected.png",
+      "sha256": "B1B3F7F426E2E6190FF52AB10CB93729BEB8B6BFF44CB862B0428567FDDA7F8C"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation\\report.json",
+      "destination": "render151-preservation\\report.json",
+      "sha256": "09B6C44EAD95A6C947060F32DFC692A678EF9826CA643D55232BF147A269CA16"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation\\waiting.png",
+      "destination": "render151-preservation\\waiting.png",
+      "sha256": "EF592A48C7ABA96CFAA23ED93925EF2DE8738BD787F05D3C286522F9A3BB7417"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation-cold\\collected.png",
+      "destination": "render151-preservation-cold\\collected.png",
+      "sha256": "D96A83EA193992806D336917534AA9D6289848D02CB322DBCABA98809881415D"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation-cold\\report.json",
+      "destination": "render151-preservation-cold\\report.json",
+      "sha256": "552325166CE22313A62E52483EB897489F1FC177B60EC3DC673370ED9F598F36"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation-cold\\waiting.png",
+      "destination": "render151-preservation-cold\\waiting.png",
+      "sha256": "E582675EED88E6B6777C5467EC017433BFCE52723783802694194B8CEFEA0628"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation-registered\\collected.png",
+      "destination": "render151-preservation-registered\\collected.png",
+      "sha256": "B1B3F7F426E2E6190FF52AB10CB93729BEB8B6BFF44CB862B0428567FDDA7F8C"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation-registered\\report.json",
+      "destination": "render151-preservation-registered\\report.json",
+      "sha256": "09B6C44EAD95A6C947060F32DFC692A678EF9826CA643D55232BF147A269CA16"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-preservation-registered\\waiting.png",
+      "destination": "render151-preservation-registered\\waiting.png",
+      "sha256": "EF592A48C7ABA96CFAA23ED93925EF2DE8738BD787F05D3C286522F9A3BB7417"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-trap\\after-meals.png",
+      "destination": "render151-trap\\after-meals.png",
+      "sha256": "F68BE42D8421574BF94728C86809B4FE76FFC104DAD9F36C239BDE3927572059"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-trap\\recovering.png",
+      "destination": "render151-trap\\recovering.png",
+      "sha256": "D9DE1282E66C9E7C242E09CEC40782DD280EACF74AC1AC4B1232367ACD45C409"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival-work\\survival_evidence\\continuation-20261104\\render151-trap\\report.json",
+      "destination": "render151-trap\\report.json",
+      "sha256": "77827B1F0A9EBFDC250F84560796E21C3877B1A441FF25465FBF575642FF294A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-forest.stderr.log",
+      "destination": "after149-forest.stderr.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-forest.stdout.log",
+      "destination": "after149-forest.stdout.log",
+      "sha256": "04ED655660DAC98859263E972194D5329CB132734E9862DEAFDBB134517C90A9"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-meadow.stderr.log",
+      "destination": "after149-meadow.stderr.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-meadow.stdout.log",
+      "destination": "after149-meadow.stdout.log",
+      "sha256": "0C421398A638BE5A84AAEC475814A7A09976D184E599CECCC93DD1C8272BBA5A"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-river.stderr.log",
+      "destination": "after149-river.stderr.log",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-river.stdout.log",
+      "destination": "after149-river.stdout.log",
+      "sha256": "3497A6BA7236CBE838E41992FE1CAEFB2A73F63D01D5AE21C15BCCC143D8A447"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\jobs149.json",
+      "destination": "jobs149.json",
+      "sha256": "B3AEC41C64AC88D3CB2C5F393C90410FEFE9DE186F8458B7C5FAD3CEE100CEEE"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-forest\\final.json",
+      "destination": "after149-forest\\final.json",
+      "sha256": "5A8AB6E46533BDB64CF9FEEC127BA88277D5501D31CA10C3DF8BA97894D53775"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-forest\\progress.jsonl",
+      "destination": "after149-forest\\progress.jsonl",
+      "sha256": "7E641477CE69C28ADE81869442727B19998E7E30516A8464DE29C77B0FE973F2"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-forest\\report.json",
+      "destination": "after149-forest\\report.json",
+      "sha256": "71A0DF9CB059B357B3E63E1F99BD9BA45835657D564E99C0DCF664210DE5A92B"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-meadow\\final.json",
+      "destination": "after149-meadow\\final.json",
+      "sha256": "9204ADA63E2415F4CC2E435F2711B64D21353BD701B9CEB352F64B74D03B93A1"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-meadow\\progress.jsonl",
+      "destination": "after149-meadow\\progress.jsonl",
+      "sha256": "5E888C3D763EAF5B794379FF4CBBEEE5D6E5F70472EEDC9C9EA69997E2AB88C7"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-meadow\\report.json",
+      "destination": "after149-meadow\\report.json",
+      "sha256": "E48E4EA65DA571C4FB24A796CEF038B19065DA2E747E70A0F00F672ABC420A15"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-river\\final.json",
+      "destination": "after149-river\\final.json",
+      "sha256": "13A13583C1166ECE1373804AA43F30BBBFEA045312B8A754FCE85180BA9BEF28"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-river\\progress.jsonl",
+      "destination": "after149-river\\progress.jsonl",
+      "sha256": "9F5728714646275DFCCA801F0DDEB8FA1D5D016C9B02C6CD03F7F11ACC00C675"
+    },
+    {
+      "source": "C:\\dev\\Claude Experiment\\living-world-survival149\\survival_evidence\\continuation-20261104\\after149-river\\report.json",
+      "destination": "after149-river\\report.json",
+      "sha256": "FB6D7A6648147D0776301D2136694BBC833A73FA44B8DA557D0E1E5680DF4302"
+    }
+  ],
+  "renamedBaseline": [
+    {
+      "hash": "6146B71CF7BCE94B374AF956D559176364CC8B7B9A321A7F0B9C8045B9AD89CD",
+      "original": "autonomy-diagnostic.json",
+      "preservedAs": "baseline148-autonomy-diagnostic.json"
+    },
+    {
+      "hash": "1D6AA10CF3A580576B38750C760EF028847730192E962CF3088F1951B3CD04D3",
+      "original": "autonomy-with-water.json",
+      "preservedAs": "baseline148-autonomy-with-water.json"
+    }
+  ]
+}

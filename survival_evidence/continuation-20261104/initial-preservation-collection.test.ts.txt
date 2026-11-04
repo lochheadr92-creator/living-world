@@ -1,0 +1,43 @@
+import {expect,it} from 'vitest';
+import {preservationScene} from './helpers/preservation';
+import {startJob,workJob,facilityTick} from '../src/sim/facilities';
+import {RECIPE_BY_ID} from '../src/sim/recipes';
+import {snapshotInitial,conservationReport} from '../src/sim/economy';
+import {startActivity,newActivity,stepActivity} from '../src/sim/activities';
+import {serializeWorld,deserializeWorld} from '../src/app/save';
+
+function fixture(version=149){
+ const {w,p,b}=preservationScene();w.settings.rulesVersion=version;w.weather.rain=0;
+ b.store.items={meat:4};snapshotInitial(w);
+ expect(startJob(w,b,p,RECIPE_BY_ID.dry_meat,p.id,'preserve surplus meat')).toBeNull();
+ while(b.ops!.job!.phase==='work'){w.tick++;workJob(w,b,p);}
+ b.ops!.job!.burnLeft=40;
+ startActivity(w,p,newActivity(w,p,{kind:'withdraw',label:'Collect dried meat',goal:'bring preserved meat for meals',targetId:b.id,here:true,maxTicks:500,data:{items:{dried_meat:2}}}));
+ return {w,p,b};
+}
+function tick(s:ReturnType<typeof fixture>,count:number){for(let i=0;i<count;i++){s.w.tick++;stepActivity(s.w,s.p);facilityTick(s.w,s.b);}}
+it('waits at an owned finishing batch rather than falsely failing before its output exists',()=>{
+ const s=fixture();tick(s,30);
+ expect(s.p.activity?.kind).toBe('withdraw');expect(s.p.inv.dried_meat??0).toBe(0);
+ expect(s.p.activity?.blocked).toMatch(/preserv|drying/);
+ tick(s,80);expect(s.p.lastResult?.outcome).toBe('success');expect(s.p.inv.dried_meat).toBe(2);
+ expect(s.w.ledger.created.dried_meat).toBe(2);expect(conservationReport(s.w).ok).toBe(true);
+});
+it('keeps waiting state and paid batch identical through a save and continuation',()=>{
+ const s=fixture();tick(s,15);const w=deserializeWorld(serializeWorld(s.w));
+ const copy={w,p:w.persons.find(p=>p.id===s.p.id)!,b:w.buildings.find(b=>b.id===s.b.id)!};
+ tick(s,100);tick(copy,100);expect(serializeWorld(copy.w)).toBe(serializeWorld(s.w));
+});
+it('bounds a weather-delayed collection without inventing output or declaring the batch empty',()=>{
+ const s=fixture();s.w.weather.rain=1;tick(s,300);
+ expect(s.p.activity).toBeNull();expect(s.p.lastResult?.detail).toMatch(/still.*(drying|ready)|preserv/);
+ expect(s.p.inv.dried_meat??0).toBe(0);expect(s.b.ops!.job!.held.meat).toBe(2);expect(conservationReport(s.w).ok).toBe(true);
+});
+it('does not wait for another person\'s batch',()=>{
+ const s=fixture();s.b.ops!.job!.client=s.p.id+999;tick(s,30);
+ expect(s.p.activity).toBeNull();expect(s.p.lastResult?.outcome).toBe('failed');expect(s.p.inv.dried_meat??0).toBe(0);
+});
+it('preserves the rules-148 early-collection behavior',()=>{
+ const s=fixture(148);tick(s,30);expect(s.p.activity).toBeNull();expect(s.p.lastResult?.outcome).toBe('failed');
+ expect(s.p.lastResult?.detail).toBe('there was nothing to take');
+});
