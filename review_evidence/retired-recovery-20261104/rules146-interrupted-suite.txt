@@ -1,0 +1,156 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-integrate
+
+ ✓ tests/zz_review_main_toolreport_saves.test.ts > REVIEW: tool registry consistency in retained and fresh worlds > retained saves 1809ms
+ × tests/zz_review_main_site_fate.test.ts > REVIEW: fate of a promised site versus what the helper says > forest, 6,000 ticks: site #2280 events, buildings on its footprint, helper commitment text 12251ms
+   → expected null not to be null
+ × tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing undefined rows before starting workers or touching outputs 10032ms
+   → expected null to be 1 // Object.is equality
+ ✓ tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing authored rows before starting workers or touching outputs 9818ms
+ ✓ tests/lab_report.test.ts > pairs only matching seeds, preserves contrast direction, and skips unrecorded historical metrics 12124ms
+ ✓ tests/lab_report.test.ts > reports an unavailable contrast without inventing a result and keeps story output 11565ms
+ × tests/zz_review_g_feed_caps.test.ts > feed/chronicle/log reach after two river days (immigration on, as the product world runs) 10340ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\feed_caps.txt'
+ × tests/zz_review_g_ledger_endings.test.ts > natural run: ledger entries whose activity was dropped without endActivity stay open ("ending not recorded"); real endings always close 3184ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt'
+ × tests/zz_review_g_ledger_endings.test.ts > unit: a suspended activity that expires is dropped by resumeSuspended with no ending anywhere (ledger open, lastResult and log untouched) 534ms
+   → expected 'failed' to be undefined
+ × tests/zz_review_g_ledger_endings.test.ts > the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it 479ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt'
+stdout | tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > a running world still stores its people as columns (save format 4 packPersons)
+review H pack fallback; keys present on only some people: dailyRoutines:25/28 leisure:1/28 goal:19/28 crowd:26/28 skillExperience:9/28 socialMemory:12/28 hauling:8/28 heardDemand:5/28 injury:1/28 customers:3/28 relocationHardship:1/28
+
+stdout | tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > measures the uncapped per-person records (always passes; numbers for the review)
+review H day-1 uncapped records: {"persons":28,"bytes":1851242,"told":160,"cooldowns":548,"cooldownsExpired":318,"optCooldowns":41,"greetCooldowns":382,"failures":13,"failuresStaleTarget":1,"beliefs":3991,"staleBeliefs":128,"nextId":1927,"idsPerPersonDay":69}
+
+ ✓ tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > a running world still stores its people as columns (save format 4 packPersons) 12ms
+ ✓ tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > documented caps hold 8ms
+ ✓ tests/zz_review_h_retention.test.ts > review H: retention after one ordinary day > measures the uncapped per-person records (always passes; numbers for the review) 2ms
+ × tests/zz_review_b_observer_purity.test.ts > REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin 27577ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\observer_report.txt'
+ ✓ tests/zz_review_a_tools.test.ts > review A: tool records and counts > control: taking the rack saw while nobody is at the bench keeps records and counts together 124ms
+ ✓ tests/zz_review_f_acquire_double_count.test.ts > with no stone carried the project offers its own stone acquisition for the hammer (and the ordinary pack has room for one stone) 33ms
+ ✓ tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: with 1 of the 2 stone carried the step is still "acquire stone", yet nothing on offer yields stone 11ms
+stdout | tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation
+rules version of the staged product world: 146
+
+ × tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect: taking the rack saw while the yard worker has it on the bench strands the record on the building 74ms
+   → expected undefined to be 1 // Object.is equality
+ × tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation 201ms
+   → expected undefined to be 1 // Object.is equality
+ × tests/zz_review_a_tools.test.ts > review A: tool records and counts > the same strand happens through economy.transfer directly (the call the withdraw handler makes) 23ms
+   → expected +0 to be 1 // Object.is equality
+ × tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: one stone short of the hammer, beside a known rock, she never fetches it in a day 140ms
+   → expected [ …(2) ] to have a length of +0 but got 2
+ × tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: with an ordinary pack (room for one stone a trip) she fetches the first stone and then stalls for a day and a half 117ms
+   → expected 2 to be 1 // Object.is equality
+ × tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: even with room for both stones, the two-stone gather is interrupted after the first unit and never resumed 12ms
+   → expected 'success' to be 'interrupted' // Object.is equality
+ ✓ tests/zz_review_f_acquire_double_count.test.ts > CONTRACT (flip to `it` once projectOptions passes haveOverride 0 for the acquire supply): the remaining stone is offered by the project path 20ms
+ × tests/zz_review_f_acquire_double_count.test.ts > CONTRACT (flip to `it` with the same correction): with room for both stones she makes the hammer within a day and a half 10ms
+   → Expect test to fail
+stdout | tests/zz_review_a_flood_tools.test.ts > review A: flood and tool records > a flooded pile loses its axe count but keeps the axe record
+flood at tick 7 pile axe now 0 ledger spoiled axe + 1
+
+ × tests/zz_review_a_flood_tools.test.ts > review A: flood and tool records > a flooded pile loses its axe count but keeps the axe record 684ms
+   → expected false to be true // Object.is equality
+ × tests/lab_defaults.test.ts > refuses to resume ordinary lab rows as a geology generation comparison 10023ms
+   → expected null to be 1 // Object.is equality
+ × tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > river: byte-identical continuation after loading at 600/3000/6000 52ms
+   → expected 146 to be 115 // Object.is equality
+ × tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > meadow: byte-identical continuation after loading at 600/3000/6000 33ms
+   → expected 146 to be 115 // Object.is equality
+ × tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > forest: byte-identical continuation after loading at 600/3000/6000 25ms
+   → expected 146 to be 115 // Object.is equality
+ × tests/zz_review_g_stale_blocked.test.ts > a one-tick blocked doorway leaves "home exit is blocked" on the activity for the whole walk 15ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\stale_blocked.txt'
+ × tests/zz_review_b_undefined_keyorder.test.ts > REVIEW B: upgrading set, cleared with undefined, loaded, set again => text differs while state is equal 12ms
+   → expected false to be true // Object.is equality
+ ✓ tests/construction_finish.test.ts > known fully supplied unfinished work remains offered inside the last two percent 27ms
+ ✓ tests/construction_finish.test.ts > a rested autonomous builder actually finishes the remaining work across a save with no new material 34ms
+ ✓ tests/construction_finish.test.ts > rules 108 retain the frozen last-two-percent exclusion 4ms
+ ✓ tests/construction_finish.test.ts > isolated removal restores that same exclusion 4ms
+ ✓ tests/construction_finish.test.ts > the exact completed boundary stays closed, and partial material headroom is unchanged 3ms
+ ✓ tests/construction_finish.test.ts > a completed physical supply cannot override the person’s remembered shortfall 9ms
+ ✓ tests/construction_finish.test.ts > urgent thirst still prevents a near-complete construction offer 2ms
+ × tests/construction_finish.test.ts > the retained valid collapse fixture now completes its paid replacement and sleeps there across a save 157ms
+   → expected 0 to be greater than 0
+ ✓ tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > takes one on because the household can SEE it has next to nothing 21ms
+ ✓ tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > takes one on because WINTER is close, when nothing is visibly wrong 5ms
+ ✓ tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > takes one on because they themselves went hungry lately 7ms
+ ✓ tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > records which of the two cues it was, and never reads the lean season 4ms
+ ✓ tests/household_preparation.test.ts > 1. an eligible person forms a preparation, from evidence they actually have > is the household that is counted, not the person: more members, a bigger target, up to the cap 3ms
+ ✓ tests/household_preparation.test.ts > 2. ineligible situations form no preparation > a child does not 3ms
+ ✓ tests/household_preparation.test.ts > 2. ineligible situations form no preparation > somebody with no home of their own that they know of does not 3ms
+ ✓ tests/household_preparation.test.ts > 2. ineligible situations form no preparation > a household already at its target does not, in or out of the window 5ms
+ ✓ tests/household_preparation.test.ts > 2. ineligible situations form no preparation > a store that is nearly full enough does not: a shortfall of one is the ordinary stockpile option 2ms
+ ✓ tests/household_preparation.test.ts > 2. ineligible situations form no preparation > a home with no room left does not, however empty of food it is 2ms
+ ✓ tests/household_preparation.test.ts > 2. ineligible situations form no preparation > an authored world does not, at any version 3ms
+ ✓ tests/household_preparation.test.ts > 2. ineligible situations form no preparation > outside the window, with the store merely below target and nothing visibly wrong, nobody prepares 2ms
+ ✓ tests/household_preparation.test.ts > 3. the chosen action goes through ordinary validation and changes the food that is there > the reserve is for their OWN household, even with a fuller store next door 2ms
+ ✓ tests/household_preparation.test.ts > 3. the chosen action goes through ordinary validation and changes the food that is there > gathering is the step while the pack is light, and the engine offers it 3ms
+ ✓ tests/household_preparation.test.ts > 3. the chosen action goes through ordinary validation and changes the food that is there > once the pack is worth a trip the step is the ordinary deposit at their own home 3ms
+ ✓ tests/household_preparation.test.ts > 3. the chosen action goes through ordinary validation and changes the food that is there > a pack full of what no store will take is not a reason to walk home 2ms
+ ✓ tests/household_preparation.test.ts > 3. the chosen action goes through ordinary validation and changes the food that is there > carrying it out moves real food out of the pack and into the real store, and credits only what moved 11ms
+ ✓ tests/household_preparation.test.ts > 3. the chosen action goes through ordinary validation and changes the food that is there > the inspector shows the reason, the step and what has actually been put by 3ms
+ ✓ tests/household_preparation.test.ts > 4. a preparation is finished by food, not by a plan saying so > a store that reached the target by somebody else is not an achievement 2ms
+ ✓ tests/household_preparation.test.ts > 4. a preparation is finished by food, not by a plan saying so > a store that filled behind their back ends nothing until they have SEEN it 2ms
+ ✓ tests/household_preparation.test.ts > 4. a preparation is finished by food, not by a plan saying so > a target reached by their own hands is 6ms
+ ✓ tests/household_preparation.test.ts > 4. a preparation is finished by food, not by a plan saying so > having put some by is not having finished: the plan says how far it got 4ms
+ ✓ tests/leisure.test.ts > varied spare time > is on only for a rich world at version 28 or later 102ms
+ ✓ tests/household_preparation.test.ts > 5. a preparation is interrupted or ended safely, never stuck > a critical need sets it aside, with the reason on the record, and does not end it 3ms
+ ✓ tests/household_preparation.test.ts > 5. a preparation is interrupted or ended safely, never stuck > the home going ends it, rather than leaving a plan pointing at nothing 2ms
+ ✓ tests/household_preparation.test.ts > 5. a preparation is interrupted or ended safely, never stuck > a stale plan runs out and is not taken straight up again 2ms
+ ✓ tests/household_preparation.test.ts > 5. a preparation is interrupted or ended safely, never stuck > one preparation at a time, and it never counts the same store twice 3ms
+ ✓ tests/household_preparation.test.ts > 5. a preparation is interrupted or ended safely, never stuck > two members of a household converge on one store rather than each demanding a reserve of their own 2ms
+ ✓ tests/save_told.test.ts > beliefs passed on by word of mouth (default world) > carry no undefined fields, so a world and its reloaded copy serialise to the same bytes and carry on identically 13243ms
+ ✓ tests/leave_heaviest.test.ts > rules 33 is the current generation and names its own gate > is supported and current 80ms
+ ✓ tests/leave_heaviest.test.ts > heaviestLeftover reads only the person’s own pack, plans, promises and errand > picks the heaviest stack by weight and ignores food and tools 25ms
+ ✓ tests/leave_heaviest.test.ts > heaviestLeftover reads only the person’s own pack, plans, promises and errand > never leaves what an open need names 21ms
+ ✓ tests/leave_heaviest.test.ts > heaviestLeftover reads only the person’s own pack, plans, promises and errand > never leaves what a plan, a promise or an errand has spoken for 20ms
+ ✓ tests/leave_heaviest.test.ts > heaviestLeftover reads only the person’s own pack, plans, promises and errand > leaves only the kinds it documents 2ms
+ ✓ tests/leave_heaviest.test.ts > a real stall in an ordinary world > is hands too full for something short, and the leave is the heaviest unwanted stack at a place that takes it 135ms
+ ✓ tests/leave_heaviest.test.ts > a real stall in an ordinary world > moves exactly that many units out of the pack and into the place, through the ordinary ledgered deposit 280ms
+ ✓ tests/leave_heaviest.test.ts > a real stall in an ordinary world > is offered as an ordinary deposit option, and only to a rich world running 33 with the switch on 495ms
+ ✓ tests/leave_heaviest.test.ts > a real stall in an ordinary world > asking what they could do changes nothing 153ms
+ ✓ tests/leave_heaviest.test.ts > a real stall in an ordinary world > continues identically after a save and load in the middle of the trip 5959ms
+ ✓ tests/leave_heaviest.test.ts > a real stall in an ordinary world > loses nothing if the person dies on the way: what was not put down is still counted 335ms
+ ✓ tests/save_told.test.ts > beliefs passed on by word of mouth (default world) > a save written before the fix (told beliefs holding undefined keys) loads and replays exactly as the fixed world does 14041ms
+ ✓ tests/household_preparation.test.ts > 6. the new state is deterministic and survives a save > two runs of the same world are the same run 10859ms
+ ✓ tests/leisure.test.ts > varied spare time > changes nothing below version 28: the switch makes no difference to a version 27 world 5098ms
+ × tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh river, Normal, 10 days, save+load every 1200 ticks 37815ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt'
+ ✓ tests/leave_heaviest.test.ts > a real stall in an ordinary world > is interrupted without loss when the person turns to something else first 253ms
+ ✓ tests/zz_review_main_toolreport_saves.test.ts > REVIEW: tool registry consistency in retained and fresh worlds > fresh current-rules worlds, 12,000 ticks, checked every 600 ticks 78858ms
+ ✓ tests/leisure.test.ts > varied spare time > is deterministic, remembers where people spent spare time, and survives a save 26787ms
+ ✓ tests/household_preparation.test.ts > 6. the new state is deterministic and survives a save > a save in the middle of a preparation reads back and carries on identically 17206ms
+ ✓ tests/household_preparation.test.ts > 6. the new state is deterministic and survives a save > a live preparation is part of what the state hash says the world is 4ms
+ ✓ tests/save_told.test.ts > beliefs passed on by word of mouth (product world) > carry no undefined fields, so a world and its reloaded copy serialise to the same bytes and carry on identically 32845ms
+ ✓ tests/leave_heaviest.test.ts > below rules 33, and with the lab arm, nothing happens > a rules-32 world starts none in the span where rules 33 does 18694ms
+ ✓ tests/household_preparation.test.ts > 6. the new state is deterministic and survives a save > the observation counters change nothing: a run with them on is the same run 29473ms
+ ✓ tests/household_preparation.test.ts > 7. version-1 and unversioned worlds do not acquire this behaviour > a version-1 world forms no preparation, however short the household is 4ms
+ ✓ tests/household_preparation.test.ts > 7. version-1 and unversioned worlds do not acquire this behaviour > an unversioned rich world forms none 2ms
+ ✓ tests/household_preparation.test.ts > 7. version-1 and unversioned worlds do not acquire this behaviour > a whole version-1 run carries no preparation at all 7897ms
+ ✓ tests/zz_review_main_tool_capacity.test.ts > REVIEW: hand-tool plans whose inputs cannot fit the planner’s pack > ordinary Normal forest at current rules, 12,000 ticks 24874ms
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural river, Normal, 8 days, save+load every 1200 ticks 61476ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ ✓ tests/leave_heaviest.test.ts > below rules 33, and with the lab arm, nothing happens > a rules-33 world with the lab arm installed starts none, and the arm restores the switch 18472ms
+ ✓ tests/household_preparation.test.ts > 7. version-1 and unversioned worlds do not acquire this behaviour > a version-1 save keeps its version through a round trip and stays version 1 2915ms
+ ✓ tests/household_preparation.test.ts > 8. the lab off-switch removes this and only this > with it off, no preparation is taken on 5ms
+ ✓ tests/leisure.test.ts > varied spare time > sends people to more than one kind of place 19752ms
+ ✓ tests/leisure.test.ts > varied spare time > does not cost lives: nobody starves in a short run that did not already have deaths 30294ms
+ ✓ tests/save_told.test.ts > beliefs passed on by word of mouth (product world) > a save written before the fix (told beliefs holding undefined keys) loads and replays exactly as the fixed world does 34956ms
+ ✓ tests/leave_heaviest.test.ts > what the rule changes is behaviour, not bookkeeping > with the lab arm installed, rules 33 is byte-identical to the recorded rules-32 world apart from its stamp 16771ms
+ ✓ tests/leave_heaviest.test.ts > what the rule changes is behaviour, not bookkeeping > with it on, the same world differs: the recorded reference passes through the situation the rule acts on 18933ms

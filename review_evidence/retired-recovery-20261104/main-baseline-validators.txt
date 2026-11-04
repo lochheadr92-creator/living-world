@@ -1,0 +1,71 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-recovery-baseline
+
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural river, Normal, 8 days, save+load every 1200 ticks 58005ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural meadow, Normal, 8 days, save+load every 1200 ticks 43675ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural forest, Normal, 8 days, save+load every 1200 ticks 47450ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene meal at rules 115, 3 days, save+load every 600 ticks 536ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene haul at rules 115, 3 days, save+load every 600 ticks 285ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene care at rules 115, 3 days, save+load every 600 ticks 444ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ × tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene workshop at rules 115, 3 days, save+load every 600 ticks 556ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 7 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural river, Normal, 8 days, save+load every 1200 ticks
+ FAIL  tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural meadow, Normal, 8 days, save+load every 1200 ticks
+ FAIL  tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > natural forest, Normal, 8 days, save+load every 1200 ticks
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ ❯ tests/zz_review_b_validators.test.ts:35:7
+     33|       const w = createWorld(currentWorldSettings('normal', seed, { imm…
+     34|       const lines = soak(w, 8, 1200, `natural:${seed}`);
+     35|       appendFileSync(REPORT, lines.join('\n') + '\n');
+       |       ^
+     36|       expect(lines.filter((l) => l.includes('REJECTED') || l.includes(…
+     37|     }, 600_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/7]⎯
+
+ FAIL  tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene meal at rules 115, 3 days, save+load every 600 ticks
+ FAIL  tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene haul at rules 115, 3 days, save+load every 600 ticks
+ FAIL  tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene care at rules 115, 3 days, save+load every 600 ticks
+ FAIL  tests/zz_review_b_validators.test.ts > REVIEW B: validators against engine-produced rules-115 worlds > scene workshop at rules 115, 3 days, save+load every 600 ticks
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt'
+ ❯ tests/zz_review_b_validators.test.ts:43:7
+     41|       const w = createWorld({ ...currentWorldSettings('normal', 'scene…
+     42|       const lines = [`scene:${scene} rulesVersion=${w.settings.rulesVe…
+     43|       appendFileSync(REPORT, lines.join('\n') + '\n');
+       |       ^
+     44|       expect(lines.filter((l) => l.includes('REJECTED') || l.includes(…
+     45|     }, 600_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_report.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/7]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  7 failed (7)
+   Start at  17:19:27
+   Duration  152.96s (tests 99%, transform 1%)
+

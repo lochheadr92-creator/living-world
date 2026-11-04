@@ -1,0 +1,18 @@
+[
+  {
+    "worktree": "C:/dev/Claude Experiment/living-world-civ",
+    "manifest": "review_evidence\\branch-integration-20261104\\worktree-archive\\09-Claude Experiment-living-world-civ.json",
+    "workingEntries": 3,
+    "stagedEntries": 0,
+    "changedSinceArchive": [],
+    "uncovered": []
+  },
+  {
+    "worktree": "C:/dev/Claude Experiment/living-world-winter-shelter-v34",
+    "manifest": "review_evidence\\branch-integration-20261104\\worktree-archive\\70-Claude Experiment-living-world-winter-shelter-v34.json",
+    "workingEntries": 146,
+    "stagedEntries": 0,
+    "changedSinceArchive": [],
+    "uncovered": []
+  }
+]

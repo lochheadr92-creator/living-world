@@ -1,0 +1,143 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-recovery-baseline
+
+ ✓ tests/project_helpers.test.ts > uses personal trust when choosing between otherwise eligible project helpers 23ms
+ ✓ tests/project_helpers.test.ts > earns trust through an offered physical gift, without informing an absent neighbour or rewarding it twice 30ms
+ × tests/project_helpers.test.ts > keeps trust choice, observation and the ordinary request/craft execution across save and transcript replay 432ms
+   → expected false to be true // Object.is equality
+ ✓ tests/project_helpers.test.ts > preserves first-feasible choice in legacy rules and the isolated lab ablation, including restore 15ms
+ ✓ tests/project_helpers.test.ts > an interrupted offered gift grants no help credit 5ms
+ × tests/project_helpers.test.ts > the trusted helper can refuse goods reserved for another obligation 103ms
+   → expected undefined to be 'declined' // Object.is equality
+ ✓ tests/project_helpers.test.ts > stale sight of a trusted helper does not guarantee contact or a transfer 2ms
+ ✓ tests/project_helpers.test.ts > trust never creates sight, supplies, eligibility or relief from a known refusal 11ms
+ ✓ tests/project_helpers.test.ts > does not promote a project ask over urgent needs or duplicate a covered request 2ms
+ ✓ tests/project_helpers.test.ts > uses bounded drifting relationships, with no inflation from repeated option generation 26ms
+ ✓ tests/project_helpers.test.ts > preserves observation 11 wording and protocol mappings while explaining the new choice in 12 3ms
+ ✓ tests/home_replacement.test.ts > an unseen collapse does not teach a household member that another home is needed 37ms
+ ✓ tests/home_replacement.test.ts > actual local observation of the missing home opens the existing replacement layout 5ms
+ ✓ tests/home_replacement.test.ts > rules 107 and the isolated removal retain the former live-home decision 4ms
+ ✓ tests/home_replacement.test.ts > a personally told home is enough to withhold replacement; its remembered location is retained 2ms
+ ✓ tests/home_replacement.test.ts > unknown physical housing does not suppress a personal offer but rejects its actual duplicate layout without teaching a location 4ms
+ ✓ tests/home_replacement.test.ts > the completion boundary rejects a home allocated while this layout was under way 27ms
+ ✓ tests/home_replacement.test.ts > a lean-to still permits a paid hut and explicit in-place upgrades retain their existing checks 3ms
+ × tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation 79ms
+   → expected false to be true // Object.is equality
+ ✓ tests/fatal_injury.test.ts > a fatal bite is death, not a wound that passive recovery undoes > reaches zero health during the tick and dies through the ordinary death path 10ms
+ × tests/fatal_injury.test.ts > a fatal bite is death, not a wound that passive recovery undoes > still lets a surviving bite take ordinary recovery 19ms
+   → expected +0 to be close to 0.009, received difference is 0.009, but expected 0.000005
+ ✓ tests/fatal_injury.test.ts > death from a fatal injury happens once > later ticks and a save/load continuation do not resurrect the person or repeat the death 20ms
+ ✓ tests/fatal_injury.test.ts > the ordinary death path still clears activity, claims and occupancy > does so when zero health is settled by a world tick, without a wolf biting indoors 4ms
+ ✓ tests/fatal_injury.test.ts > rules version 4 keeps the old order > a fatal bite with favourable needs is still undone by passive recovery 3ms
+ × tests/fatal_injury.test.ts > the lab can turn the correction off and nothing else > reproduces the old order on the fatal bite, and leaves a nonfatal bite unchanged 9ms
+   → expected false to be true // Object.is equality
+ ✓ tests/fatal_injury.test.ts > an experimental version-5 save is refused > is not loaded as version 4 or as the fatal-injury rules 5ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/fatal_injury.test.ts > a fatal bite is death, not a wound that passive recovery undoes > still lets a surviving bite take ordinary recovery
+AssertionError: expected +0 to be close to 0.009, received difference is 0.009, but expected 0.000005
+ ❯ tests/fatal_injury.test.ts:89:45
+     87|     expect(p.health).toBeLessThan(40);
+     88|     expect(p.health).toBeGreaterThan(40 - 15);
+     89|     expect(p.health - Math.floor(p.health)).toBeCloseTo(0.009, 5);
+       |                                             ^
+     90|   });
+     91| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯
+
+ FAIL  tests/fatal_injury.test.ts > the lab can turn the correction off and nothing else > reproduces the old order on the fatal bite, and leaves a nonfatal bite unchanged
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/fatal_injury.test.ts:207:25
+    205|
+    206|     const fatal = runBite(undefined, 1, false);
+    207|     expect(fatal.alive).toBe(true);
+       |                         ^
+    208|     expect(fatal.health).toBeCloseTo(0.009, 5);
+    209|     expect(fatal.world.events.some((e) => e.text.includes('A wolf bit …
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯
+
+ FAIL  tests/home_replacement.test.ts > an observed lost home starts real gathering, hauling and paid construction with exact saved continuation
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/home_replacement.test.ts:72:72
+     70|  expect(starts).toEqual(expect.arrayContaining(['plan_site','gather','…
+     71|  expect(f.w.ledger.consumed.wood).toBeGreaterThan(0);
+     72|  expect(f.w.sites.some(s=>s.hhId===f.hh.id&&s.work>0&&s.used.wood!>0))…
+       |                                                                        ^
+     73|  delete f.w.hooks;const saved=serializeWorld(f.w),twin=deserializeWorl…
+     74|  for(let n=0;n<1200;n++){stepWorld(f.w);stepWorld(twin);}
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯
+
+ FAIL  tests/project_helpers.test.ts > keeps trust choice, observation and the ordinary request/craft execution across save and transcript replay
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/project_helpers.test.ts:59:125
+     57|   const result = await runLive(deserializeWorld(start), f.ada.id, mode…
+     58|   const p = result.world.persons.find(p => p.id === f.ada.id)!;
+     59|   expect(observations.some(o => o?.options.some(a => a.label === 'Ask …
+       |                                                                                                                             ^
+     60|   const r = result.world.requests.find(r => r.from === f.ada.id && r.t…
+     61|   expect(r?.status).toBe('fulfilled'); expect(r?.delivered).toBe(1);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯
+
+ FAIL  tests/project_helpers.test.ts > the trusted helper can refuse goods reserved for another obligation
+AssertionError: expected undefined to be 'declined' // Object.is equality
+
+- Expected:
+"declined"
+
++ Received:
+undefined
+
+ ❯ tests/project_helpers.test.ts:116:23
+    114|   const result = await runLive(f.w, f.ada.id, model, { until: f.w.tick…
+    115|   const ask = result.world.requests.find(q => q.from === f.ada.id && q…
+    116|   expect(ask?.status).toBe('declined'); expect(ask?.note).toBe('commit…
+       |                       ^
+    117|   expect(ask?.delivered ?? 0).toBe(0);
+    118|   expect(result.world.persons.find(p => p.id === f.cora.id)!.inv.stone…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  5 failed | 21 passed (26)
+   Start at  17:27:00
+   Duration  3.10s (transform 52%, tests 31%, import 16%)
+

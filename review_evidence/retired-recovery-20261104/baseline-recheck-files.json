@@ -1,0 +1,15 @@
+[
+  "tests/construction_finish.test.ts",
+  "tests/lab_defaults.test.ts",
+  "tests/zz_review_a_flood_tools.test.ts",
+  "tests/zz_review_a_tools.test.ts",
+  "tests/zz_review_b_observer_purity.test.ts",
+  "tests/zz_review_b_roundtrip.test.ts",
+  "tests/zz_review_b_undefined_keyorder.test.ts",
+  "tests/zz_review_b_validators_harsh.test.ts",
+  "tests/zz_review_f_acquire_double_count.test.ts",
+  "tests/zz_review_g_feed_caps.test.ts",
+  "tests/zz_review_g_ledger_endings.test.ts",
+  "tests/zz_review_g_stale_blocked.test.ts",
+  "tests/zz_review_main_site_fate.test.ts"
+]

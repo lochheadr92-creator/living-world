@@ -1,0 +1,386 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-recovery-baseline
+
+ ✓ tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing undefined rows before starting workers or touching outputs 7163ms
+ ✓ tests/lab_defaults.test.ts > current lab defaults cannot silently reuse legacy results > rejects existing authored rows before starting workers or touching outputs 6095ms
+ × tests/zz_review_main_site_fate.test.ts > REVIEW: fate of a promised site versus what the helper says > forest, 6,000 ticks: site #2280 events, buildings on its footprint, helper commitment text 13963ms
+   → expected null not to be null
+ ✓ tests/lab_defaults.test.ts > refuses to resume ordinary lab rows as a geology generation comparison 6818ms
+ × tests/zz_review_g_ledger_endings.test.ts > natural run: ledger entries whose activity was dropped without endActivity stay open ("ending not recorded"); real endings always close 3644ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt'
+ × tests/zz_review_g_ledger_endings.test.ts > unit: a suspended activity that expires is dropped by resumeSuspended with no ending anywhere (ledger open, lastResult and log untouched) 452ms
+   → expected 'failed' to be undefined
+ × tests/zz_review_g_ledger_endings.test.ts > the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it 117ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt'
+stdout | tests/zz_review_a_flood_tools.test.ts > review A: flood and tool records > a flooded pile loses its axe count but keeps the axe record
+flood at tick 7 pile axe now 0 ledger spoiled axe + 1
+
+ × tests/zz_review_a_flood_tools.test.ts > review A: flood and tool records > a flooded pile loses its axe count but keeps the axe record 553ms
+   → expected false to be true // Object.is equality
+ ✓ tests/zz_review_a_tools.test.ts > review A: tool records and counts > control: taking the rack saw while nobody is at the bench keeps records and counts together 106ms
+stdout | tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation
+rules version of the staged product world: 133
+
+ × tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect: taking the rack saw while the yard worker has it on the bench strands the record on the building 72ms
+   → expected undefined to be 1 // Object.is equality
+ × tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation 154ms
+   → expected undefined to be 1 // Object.is equality
+ × tests/zz_review_a_tools.test.ts > review A: tool records and counts > the same strand happens through economy.transfer directly (the call the withdraw handler makes) 24ms
+   → expected +0 to be 1 // Object.is equality
+ ✓ tests/zz_review_f_acquire_double_count.test.ts > with no stone carried the project offers its own stone acquisition for the hammer (and the ordinary pack has room for one stone) 29ms
+ ✓ tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: with 1 of the 2 stone carried the step is still "acquire stone", yet nothing on offer yields stone 12ms
+ × tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: one stone short of the hammer, beside a known rock, she never fetches it in a day 100ms
+   → expected [ { tick: 2258, amount: 1, …(3) } ] to have a length of +0 but got 1
+ × tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: with an ordinary pack (room for one stone a trip) she fetches the first stone and then stalls for a day and a half 63ms
+   → expected 1 to be +0 // Object.is equality
+ × tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: even with room for both stones, the two-stone gather is interrupted after the first unit and never resumed 11ms
+   → expected 'success' to be 'interrupted' // Object.is equality
+ ✓ tests/zz_review_f_acquire_double_count.test.ts > CONTRACT (flip to `it` once projectOptions passes haveOverride 0 for the acquire supply): the remaining stone is offered by the project path 7ms
+ × tests/zz_review_f_acquire_double_count.test.ts > CONTRACT (flip to `it` with the same correction): with room for both stones she makes the hammer within a day and a half 11ms
+   → Expect test to fail
+ × tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > river: byte-identical continuation after loading at 600/3000/6000 48ms
+   → expected 133 to be 115 // Object.is equality
+ × tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > meadow: byte-identical continuation after loading at 600/3000/6000 29ms
+   → expected 133 to be 115 // Object.is equality
+ × tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > forest: byte-identical continuation after loading at 600/3000/6000 20ms
+   → expected 133 to be 115 // Object.is equality
+ ✓ tests/construction_finish.test.ts > known fully supplied unfinished work remains offered inside the last two percent 24ms
+ ✓ tests/construction_finish.test.ts > a rested autonomous builder actually finishes the remaining work across a save with no new material 35ms
+ ✓ tests/construction_finish.test.ts > rules 108 retain the frozen last-two-percent exclusion 6ms
+ ✓ tests/construction_finish.test.ts > isolated removal restores that same exclusion 4ms
+ ✓ tests/construction_finish.test.ts > the exact completed boundary stays closed, and partial material headroom is unchanged 3ms
+ ✓ tests/construction_finish.test.ts > a completed physical supply cannot override the person’s remembered shortfall 11ms
+ ✓ tests/construction_finish.test.ts > urgent thirst still prevents a near-complete construction offer 3ms
+ × tests/construction_finish.test.ts > the retained valid collapse fixture now completes its paid replacement and sleeps there across a save 128ms
+   → expected 0 to be greater than 0
+ × tests/zz_review_g_stale_blocked.test.ts > a one-tick blocked doorway leaves "home exit is blocked" on the activity for the whole walk 16ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\stale_blocked.txt'
+ × tests/zz_review_b_undefined_keyorder.test.ts > REVIEW B: upgrading set, cleared with undefined, loaded, set again => text differs while state is equal 11ms
+   → expected false to be true // Object.is equality
+ × tests/zz_review_g_feed_caps.test.ts > feed/chronicle/log reach after two river days (immigration on, as the product world runs) 12069ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\feed_caps.txt'
+ × tests/zz_review_b_observer_purity.test.ts > REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin 29010ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\observer_report.txt'
+ × tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh river, Normal, 10 days, save+load every 1200 ticks 36612ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt'
+ × tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh forest, Normal, 10 days, save+load every 1200 ticks 26650ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt'
+ × tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > meadow, Normal, 16 days through winter, save+load every 1200 ticks 103632ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt'
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 23 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/construction_finish.test.ts > the retained valid collapse fixture now completes its paid replacement and sleeps there across a save
+AssertionError: expected 0 to be greater than 0
+ ❯ tests/construction_finish.test.ts:57:96
+     55|  delete f.w.hooks;const twin=deserializeWorld(serializeWorld(f.w));
+     56|  for(let n=0;n<1000&&!(f.p.activity?.kind==='sleep'&&f.p.activity.phas…
+     57|  expect(f.p.activity?.targetId).toBe(f.hh.homeId);expect(shelterAt(f.w…
+       |                                                                                                ^
+     58|  const energy=f.p.needs.energy;for(let n=0;n<30;n++){stepWorld(f.w);st…
+     59|  expect(serializeWorld(f.w)).toBe(serializeWorld(twin));expect(conserv…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/23]⎯
+
+ FAIL  tests/zz_review_a_flood_tools.test.ts > review A: flood and tool records > a flooded pile loses its axe count but keeps the axe record
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/zz_review_a_flood_tools.test.ts:47:35
+     45|     expect(conservationReport(w).ok).toBe(true);
+     46|     // ...but the registry still carries a record nobody holds
+     47|     expect(w.tools.includes(axe)).toBe(true);
+       |                                   ^
+     48|     const rep = toolReport(w);
+     49|     console.log('toolReport after flood:', rep.problems);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/23]⎯
+
+ FAIL  tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect: taking the rack saw while the yard worker has it on the bench strands the record on the building
+AssertionError: expected undefined to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+undefined
+
+ ❯ tests/zz_review_a_tools.test.ts:83:27
+     81|     run(w, 30, () => { if (saw.holder === yard.id) benchTool(w, worker…
+     82|     // the count moved by the real withdraw handler (act_resource.ts w…
+     83|     expect(taker.inv.saw).toBe(1);
+       |                           ^
+     84|     expect(yard.store.items.saw ?? 0).toBe(0);
+     85|     // ...but the record did not (toolreg.ts:50 skips a bench-loaned t…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/23]⎯
+
+ FAIL  tests/zz_review_a_tools.test.ts > review A: tool records and counts > defect, product world (rich, current rules): the same withdraw strands the record and later breaks conservation
+AssertionError: expected undefined to be 1 // Object.is equality
+
+- Expected:
+1
+
++ Received:
+undefined
+
+ ❯ tests/zz_review_a_tools.test.ts:114:27
+    112|     withdrawSaw(w, taker, yard.id);
+    113|     run(w, 30, () => { if (saw.holder === yard.id) benchTool(w, worker…
+    114|     expect(taker.inv.saw).toBe(1);
+       |                           ^
+    115|     expect(saw.holder).toBe(yard.id);
+    116|     expect(toolReport(w).ok).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/23]⎯
+
+ FAIL  tests/zz_review_a_tools.test.ts > review A: tool records and counts > the same strand happens through economy.transfer directly (the call the withdraw handler makes)
+AssertionError: expected +0 to be 1 // Object.is equality
+
+- Expected
++ Received
+
+- 1
++ 0
+
+ ❯ tests/zz_review_a_tools.test.ts:129:19
+    127|     benchTool(w, worker, yard.id, 'saw');
+    128|     const moved = transfer(w, yard.store.items, taker.inv, carryCap(w,…
+    129|     expect(moved).toBe(1);
+       |                   ^
+    130|     expect(saw.holder).toBe(yard.id);
+    131|     expect(toolReport(w).ok).toBe(false);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/23]⎯
+
+ FAIL  tests/zz_review_b_observer_purity.test.ts > REVIEW B: every inspector/history view on every entity every 100 ticks leaves the world as its twin
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\observer_report.txt'
+ ❯ tests/zz_review_b_observer_purity.test.ts:52:3
+     50|     if (a !== b) { lines.push(`tick ${looked.tick}: looked-at world DR…
+     51|   }
+     52|   appendFileSync(REPORT, `looks=${looks}\n` + (lines.length ? lines.jo…
+       |   ^
+     53|   expect(lines, lines.join('\n')).toEqual([]);
+     54| }, 600_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\observer_report.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/23]⎯
+
+ FAIL  tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > river: byte-identical continuation after loading at 600/3000/6000
+ FAIL  tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > meadow: byte-identical continuation after loading at 600/3000/6000
+ FAIL  tests/zz_review_b_roundtrip.test.ts > REVIEW B: save/load round trip then continue, natural rules-115 world > forest: byte-identical continuation after loading at 600/3000/6000
+AssertionError: expected 133 to be 115 // Object.is equality
+
+- Expected
++ Received
+
+- 115
++ 133
+
+ ❯ tests/zz_review_b_roundtrip.test.ts:105:39
+    103|     it(`${seed}: byte-identical continuation after loading at ${CHECKP…
+    104|       const w = createWorld(currentWorldSettings('normal', seed, { imm…
+    105|       expect(w.settings.rulesVersion).toBe(115);
+       |                                       ^
+    106|       const report: string[] = [];
+    107|       let t = 0;
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/23]⎯
+
+ FAIL  tests/zz_review_b_undefined_keyorder.test.ts > REVIEW B: upgrading set, cleared with undefined, loaded, set again => text differs while state is equal
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ tests/zz_review_b_undefined_keyorder.test.ts:24:30
+     22|   expect(hut.upgrading).toBe(first.id);
+     23|   completeSite(w, first, p);
+     24|   expect('upgrading' in hut).toBe(true);
+       |                              ^
+     25|   expect(hut.upgrading).toBeUndefined();
+     26|   const keysBefore = Object.keys(hut);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/23]⎯
+
+ FAIL  tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh river, Normal, 10 days, save+load every 1200 ticks
+ FAIL  tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > harsh forest, Normal, 10 days, save+load every 1200 ticks
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt'
+ ❯ tests/zz_review_b_validators_harsh.test.ts:35:7
+     33|       const w = createWorld(currentWorldSettings('normal', seed, { imm…
+     34|       const lines = soak(w, 10, 1200, `harsh:${seed}`);
+     35|       appendFileSync(REPORT, lines.join('\n') + '\n');
+       |       ^
+     36|       expect(lines.filter((l) => l.includes('REJECTED') || l.includes(…
+     37|     }, 600_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/23]⎯
+
+ FAIL  tests/zz_review_b_validators_harsh.test.ts > REVIEW B: validators, harsher worlds > meadow, Normal, 16 days through winter, save+load every 1200 ticks
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt'
+ ❯ tests/zz_review_b_validators_harsh.test.ts:42:5
+     40|     const w = createWorld(currentWorldSettings('normal', 'meadow', { i…
+     41|     const lines = soak(w, 16, 1200, 'winter:meadow');
+     42|     appendFileSync(REPORT, lines.join('\n') + '\n');
+       |     ^
+     43|     expect(lines.filter((l) => l.includes('REJECTED') || l.includes('d…
+     44|   }, 600_000);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_b\validators_harsh_report.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/23]⎯
+
+ FAIL  tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: one stone short of the hammer, beside a known rock, she never fetches it in a day
+AssertionError: expected [ { tick: 2258, amount: 1, …(3) } ] to have a length of +0 but got 1
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/zz_review_f_acquire_double_count.test.ts:72:60
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/23]⎯
+
+ FAIL  tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: with an ordinary pack (room for one stone a trip) she fetches the first stone and then stalls for a day and a half
+AssertionError: expected 1 to be +0 // Object.is equality
+
+- Expected
++ Received
+
+- 0
++ 1
+
+ ❯ tests/zz_review_f_acquire_double_count.test.ts:77:26
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/23]⎯
+
+ FAIL  tests/zz_review_f_acquire_double_count.test.ts > DOCUMENTED DEFECT at HEAD: even with room for both stones, the two-stone gather is interrupted after the first unit and never resumed
+AssertionError: expected 'success' to be 'interrupted' // Object.is equality
+
+Expected: "interrupted"
+Received: "success"
+
+ ❯ tests/zz_review_f_acquire_double_count.test.ts:84:103
+     82|  expect(invRoom(w,p,'stone')+ (p.inv.stone??0)).toBeGreaterThanOrEqual…
+     83|  const first=trace.rockGathers[0];
+     84|  expect(first,JSON.stringify(trace)).toBeDefined();expect(first.amount…
+       |                                                                                                       ^
+     85|  expect(trace.rockGathers.length,JSON.stringify(trace)).toBe(1);
+     86|  expect(p.inv.hammer??0).toBe(0);expect(conservationReport(w).ok).toBe…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[13/23]⎯
+
+ FAIL  tests/zz_review_f_acquire_double_count.test.ts > CONTRACT (flip to `it` with the same correction): with room for both stones she makes the hammer within a day and a half
+Error: Expect test to fail
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/23]⎯
+
+ FAIL  tests/zz_review_g_feed_caps.test.ts > feed/chronicle/log reach after two river days (immigration on, as the product world runs)
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\feed_caps.txt'
+ ❯ tests/zz_review_g_feed_caps.test.ts:36:3
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\feed_caps.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[15/23]⎯
+
+ FAIL  tests/zz_review_g_ledger_endings.test.ts > natural run: ledger entries whose activity was dropped without endActivity stay open ("ending not recorded"); real endings always close
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt'
+ ❯ tests/zz_review_g_ledger_endings.test.ts:81:3
+     79|   report.push(...examples.map((e) => '  example: ' + e));
+     80|   report.push(`feed: ${w.events.length} events kept; oldest is ${w.tic…
+     81|   writeFileSync(OUT, report.join('\n'));
+       |   ^
+     82|   expect(orphanEndedNotClosed, 'an activity that really ended must clo…
+     83|   expect(orphanNoStart, 'ledger entries must name activities that were…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[16/23]⎯
+
+ FAIL  tests/zz_review_g_ledger_endings.test.ts > unit: a suspended activity that expires is dropped by resumeSuspended with no ending anywhere (ledger open, lastResult and log untouched)
+AssertionError: expected 'failed' to be undefined
+
+- Expected:
+undefined
+
++ Received:
+"failed"
+
+ ❯ tests/zz_review_g_ledger_endings.test.ts:104:25
+    102|   expect(p.suspended).toBeNull();
+    103|   expect(p.activity).toBeNull();
+    104|   expect(entry.outcome).toBeUndefined();
+       |                         ^
+    105|   expect(JSON.stringify(p.lastResult)).toBe(resultBefore);
+    106|   expect(p.log.length).toBe(logBefore);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[17/23]⎯
+
+ FAIL  tests/zz_review_g_ledger_endings.test.ts > the listener in a conversation is shown "Weighed up: <reasons of an unrelated earlier decision>" as why they chose it
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt'
+ ❯ tests/zz_review_g_ledger_endings.test.ts:133:3
+    131|   }
+    132|   report.push(`converse listener why-misattribution: ${found} cases in…
+    133|   writeFileSync(OUT, report.join('\n'));
+       |   ^
+    134|   expect(found).toBeGreaterThan(0);
+    135| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\ledger_endings.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[18/23]⎯
+
+ FAIL  tests/zz_review_g_stale_blocked.test.ts > a one-tick blocked doorway leaves "home exit is blocked" on the activity for the whole walk
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\stale_blocked.txt'
+ ❯ tests/zz_review_g_stale_blocked.test.ts:54:3
+     52|     }
+     53|   }
+     54|   writeFileSync(OUT, lines.join('\n'));
+       |   ^
+     55|   expect(walkedTicks).toBeGreaterThan(5);
+     56|   // the stale text: still "blocked" while moving freely outdoors
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\stale_blocked.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[19/23]⎯
+
+ FAIL  tests/zz_review_main_site_fate.test.ts > REVIEW: fate of a promised site versus what the helper says > forest, 6,000 ticks: site #2280 events, buildings on its footprint, helper commitment text
+AssertionError: expected null not to be null
+ ❯ tests/zz_review_main_site_fate.test.ts:27:22
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[20/23]⎯
+
+
+ Test Files  12 failed | 1 passed (13)
+      Tests  23 failed | 13 passed | 1 expected fail (37)
+   Start at  17:15:58
+   Duration  168.78s (tests 97%, transform 2%, import 1%)
+

@@ -1,0 +1,38 @@
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - import "./scripts/inhabit/devserver" without a file extension (vite.config.ts:2:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/devserver.ts:6:29). Add the file extension
+  - import "./anthropic" without a file extension (scripts/inhabit/devserver.ts:72:33). Add the file extension
+  - import "./openai" without a file extension (scripts/inhabit/devserver.ts:73:33). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:5:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:4:37). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/openai.ts:6:34). Add the file extension
+  - import "../../src/agent/model" without a file extension (scripts/inhabit/anthropic.ts:5:34). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/anthropic.ts:6:30). Add the file extension
+  - import "./transient" without a file extension (scripts/inhabit/openai.ts:7:30). Add the file extension
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.0.3 C:/dev/Claude Experiment/living-world-recovery-baseline
+
+ × tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical 162748ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\purity_sweep.txt'
+ × tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > meadow: all entry points every 4 tick(s) for 2000 ticks, serialized state + RNG unchanged, twin continuation identical 82650ms
+   → ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\purity_sweep.txt'
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > river: all entry points every 1 tick(s) for 1000 ticks, serialized state + RNG unchanged, twin continuation identical
+ FAIL  tests/zz_review_g_observer_purity.test.ts > REVIEW G: observation leaves the world exactly as it was, every tick > meadow: all entry points every 4 tick(s) for 2000 ticks, serialized state + RNG unchanged, twin continuation identical
+Error: ENOENT: no such file or directory, open 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\purity_sweep.txt'
+ ❯ tests/zz_review_g_observer_purity.test.ts:165:7
+
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -4058, code: 'ENOENT', syscall: 'open', path: 'C:\Users\RJLoc\AppData\Local\Temp\claude\C--dev-Claude-Experiment\3c06e039-d739-4179-9940-8bfc089f1edb\scratchpad\review\agent_g\purity_sweep.txt' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  17:21:57
+   Duration  247.83s (tests 99%, transform 1%)
+
