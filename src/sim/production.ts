@@ -558,7 +558,7 @@ function supply(ctx: Ctx, item: ItemKind | 'cart' | 'tend', qty: number, base: n
   // what is already standing on somebody's shelves counts: no one makes more of what is already there
   if (remaining <= 0) return;
   if(item!=='cart'&&item!=='tend'&&hasCarcassSupply(ctx.world)&&isBodyPart(item)){
-    supplyFromCarcass(ctx,item,base*.92,why);return;
+    supplyFromCarcass(ctx,item,base*.92,why,remaining);return;
   }
   if (item !== 'cart' && item !== 'tend') {
     if (isRawMaterial(item)) {

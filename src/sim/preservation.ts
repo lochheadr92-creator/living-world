@@ -10,11 +10,21 @@ import type {Ctx, Option} from './optutil';
 
 export const PRESERVATION_FROM_VERSION=122;
 export const PRESERVATION_MAX_AGE=DAY*2;
+export const PRESERVATION_COLLECTION_WAIT=240;
 let enabled=true;
 export const preservationOn=()=>enabled;
 export function setPreservation(on:boolean):void {enabled=on;}
 export const runsPreservation=(w:World)=>w.settings.dynamics==='rich'&&runsRulesVersion(w,PRESERVATION_FROM_VERSION);
 export const hasPreservation=(w:World)=>enabled&&runsPreservation(w);
+
+/** At the rack, a paid batch still processing is not an empty store. No work or output is advanced here. */
+export function preservationCollectionReason(w:World,p:Person,b:Building|undefined,want:Items):string {
+  if(!runsPreservation(w)||!runsRulesVersion(w,149)||b?.type!=='food_rack')return '';
+  const job=b.ops?.job,r=job&&RECIPE_BY_ID[job.recipe];
+  if(!job||job.client!==p.id||job.phase!=='burn'||!r?.preservation||w.tick-job.started>=PRESERVATION_MAX_AGE)return '';
+  if(!Object.entries(want).some(([k,n])=>n!>0&&(r.outputs[k as ItemKind]??0)>0))return '';
+  return r.preservation==='dry'&&w.weather.rain>0.1?'rain is delaying my preserved food':'my preserved food is still processing';
+}
 
 /** Use the existing reserve plan; do not reserve food away from immediate meals. */
 export function stockPreservationOption(ctx:Ctx):Option|undefined {
@@ -85,7 +95,10 @@ export function validatePreservation(w:World):void {
   const check=(items:Items|undefined)=>{
     for(const k of PRESERVED_FOODS)if(items?.[k]!==undefined&&(!eligible||(k==='rendered_fat'&&!runsRulesVersion(w,125))||!Number.isSafeInteger(items[k])||items[k]!<0))throw new Error('Invalid preserved food inventory');
   };
-  for(const p of w.persons){check(p.inv);for(const b of Object.values(p.beliefs)){check(b.items);check(b.ops?.inputs);check(b.ops?.output);check(b.ops?.yields);}}
+  for(const p of w.persons){check(p.inv);for(const b of Object.values(p.beliefs)){check(b.items);check(b.ops?.inputs);check(b.ops?.output);check(b.ops?.yields);}
+    for(const a of [p.activity,p.suspended])if(a?.data.preservationWait!==undefined&&
+      (!eligible||!runsRulesVersion(w,149)||a.kind!=='withdraw'||!Number.isSafeInteger(a.data.preservationWait)||a.data.preservationWait<0||a.data.preservationWait>PRESERVATION_COLLECTION_WAIT))throw Error('Invalid preservation collection wait');
+  }
   for(const b of w.buildings){
     check(b.store.items);check(b.ops?.produced);check(b.ops?.consumed);check(b.ops?.job?.held);
     if(b.type==='food_rack'&&(!eligible||!b.ops||!Object.hasOwn(b.ops,'job')||

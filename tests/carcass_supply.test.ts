@@ -57,7 +57,8 @@ it('uses offered butchery, delivery, sewing, collection and dressing for one fin
 });
 for(const [part,recipe,output,units] of [['fat','render_fat','rendered_fat',1],['meat','dry_meat','dried_meat',2]] as const)it(`takes known body ${part} through paid ${recipe} to an actual meal`,()=>{
  const {w,p,body,rack}=scene();w.weather.rain=0;
- for(let n=0;n<units;n++)work(w,p,`butcher:${body.id}:${part}`);
+ for(let n=0;n<units&&(p.inv[part]??0)<units;n++)work(w,p,`butcher:${body.id}:${part}`);
+ expect(p.inv[part]).toBe(units);
  const delivery=generateOptions(w,p,true,true).options.find(o=>o.kind==='deposit'&&o.targetId===rack.id);
  expect(delivery).toBeDefined();work(w,p,delivery!.key);learn(w,p,rack);work(w,p,`operate:${rack.id}:${recipe}`);
  for(let n=0;n<1000&&rack.ops?.job;n++){w.tick++;facilityTick(w,rack);}expect(rack.store.items[output]).toBe(units);

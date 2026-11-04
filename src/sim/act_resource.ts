@@ -5,7 +5,7 @@ import {isWellAction,wellSource} from './wells';
 import {takeNutrition} from './nourishment';
 import {ownedGearRules,ownedGearAt} from './gear_stock';
 import {pileAccessBlocker} from './pile_access';
-import {runsPreservation} from './preservation';
+import {runsPreservation,preservationCollectionReason,PRESERVATION_COLLECTION_WAIT} from './preservation';
 import {saveSeedFromGrain} from './wild_seed';
 import { harvestPressure } from './ecology';
 import { hasFloodAccess } from './flood';
@@ -818,6 +818,16 @@ registerHandler('withdraw', {
   work(world, p, a): WorkResult {
     {const block=cellarAccess(world,p,world.byId.get(a.targetId));if(block)return `fail:${block}`;}
     const blocked = relocationPackingBlocker(world,p,a); if (blocked) return `fail:${blocked}`;
+    const waitingAt=world.byId.get(a.targetId),waitingBuilding=waitingAt?.ent==='building'?waitingAt:undefined;
+    const requested=(a.data.items??{}) as Items;
+    const waiting=preservationCollectionReason(world,p,waitingBuilding,requested);
+    if(waiting&&waitingBuilding&&!Object.entries(requested).some(([k,n])=>
+      (waitingBuilding.store.items[k as ItemKind]??0)>0&&withdrawAllowance(world,waitingBuilding,p,k as ItemKind,n!)>0&&invRoom(world,p,k as ItemKind)>0)){
+      if((a.data.preservationWait??0)>=PRESERVATION_COLLECTION_WAIT)return `fail:${waiting}; leave and try later`;
+      a.data.preservationWait=(a.data.preservationWait??0)+1;a.blocked=waiting;
+      return 'continue';
+    }
+    if(a.data.preservationWait!==undefined)a.blocked='';
     faceToward(p, a.tx, a.ty);
     a.progress++;
     if (a.progress < a.duration) return 'continue';

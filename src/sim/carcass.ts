@@ -15,6 +15,7 @@ export const CARCASS_LIFETIME=4800;
 const PARTS:CarcassPart[]=['meat','hide','fat'];
 const zero=()=>({meat:0,hide:0,fat:0});
 export const hasCarcasses=(w:World):boolean=>w.settings.dynamics==='rich'&&runsRulesVersion(w,125);
+export const hasCarcassBatches=(w:World):boolean=>hasCarcasses(w)&&runsRulesVersion(w,149);
 /** Current recovery truth; retained origin records are not remaining products. */
 export const hasRecoverableParts=(w:World,b:Pile):boolean=>!!b.carcass&&w.tick-b.since<CARCASS_LIFETIME&&PARTS.some(k=>b.carcass!.remaining[k]>0);
 
@@ -47,13 +48,21 @@ registerHandler('butcher',{
  availability:.25,pose:()=> 'craft',
  begin(w,p,a){const why=problem(w,p,a);if(why)return why;const c=bodyFor(w,a)!.carcass!;c.claim={person:p.id,until:w.tick+2};a.duration=CARCASS_WORK;a.progress=c.work[a.data.part as CarcassPart];},
  work(w,p,a){
-  const why=problem(w,p,a);if(why)return `fail:${why}`;
+  const why=problem(w,p,a);if(why)return `${hasCarcassBatches(w)&&a.cycle>0?'partial':'fail'}:${why}`;
   const b=bodyFor(w,a)!,c=b.carcass!,part=a.data.part as CarcassPart;
   c.claim={person:p.id,until:w.tick+2};c.work[part]++;a.progress=c.work[part];
   if(c.work[part]<CARCASS_WORK)return 'continue';
   c.work[part]=0;c.remaining[part]--;c.recovered[part]++;addItem(p.inv,part,1);
   if(PARTS.every(k=>c.remaining[k]===0))c.emptySince=w.tick;
-  observe(w,p,b);return 'done';
+  observe(w,p,b);
+  if(hasCarcassBatches(w)){
+   a.cycle++;
+   if(a.cycle<Math.max(1,a.amount)){
+    const blocked=problem(w,p,a);if(blocked)return `partial:${blocked}`;
+    a.progress=0;a.label=`Recovering ${part} (${a.cycle}/${a.amount} recovered)`;return 'continue';
+   }
+  }
+  return 'done';
  },
  onEnd(w,p,a,outcome,detail){
   const b=bodyFor(w,a);if(b?.carcass?.claim?.person===p.id)b.carcass.claim=null;
@@ -107,5 +116,5 @@ export function validateCarcasses(w:World):void{
   if(empty?(c.emptySince===null||!integer(c.emptySince)||c.emptySince<b.since||c.emptySince>w.tick):c.emptySince!==null)bad();
   if(c.claim!==null&&(!c.claim||!integer(c.claim.person)||!w.persons.some(p=>p.id===c.claim!.person)||!integer(c.claim.until)||c.claim.until>w.tick+2))bad();
  }
- for(const p of w.persons)for(const a of [p.activity,p.suspended])if(a?.kind==='butcher'&&(!hasCarcasses(w)||a.targetType!=='pile'||!PARTS.includes(a.data.part)||(a.phase==='work'&&(a.duration!==CARCASS_WORK||!integer(a.progress)||a.progress>=CARCASS_WORK))))throw Error('invalid carcass work');
+ for(const p of w.persons)for(const a of [p.activity,p.suspended])if(a?.kind==='butcher'&&(!hasCarcasses(w)||a.targetType!=='pile'||!PARTS.includes(a.data.part)||(a.phase==='work'&&(a.duration!==CARCASS_WORK||!integer(a.progress)||a.progress>=CARCASS_WORK))||(hasCarcassBatches(w)&&(!integer(a.amount)||a.amount>4||!integer(a.cycle)||a.cycle>4))))throw Error('invalid carcass work');
 }
